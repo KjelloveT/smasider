@@ -1,0 +1,17 @@
+{
+  "routes": [
+    {
+      "route": "/gangespill/*",
+      "serve": "/gangespill/index.html"
+    },
+    {
+      "route": "/fotocollage/*", 
+      "serve": "/fotocollage/fotocollage.html"
+    }
+  ],
+  "responseOverrides": {
+    "404": {
+      "serve": "/index.html"
+    }
+  }
+}
