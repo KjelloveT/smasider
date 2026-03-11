@@ -322,6 +322,7 @@
                 <p class="category-description">Morsame og lærerike spel som trenar ulike ferdigheiter</p>
                 <ul class="category-items">
                     <li>🦫 Capybara Gangespel - Øv på ganetabellar</li>
+                    <li>⚽ Mattespel - Løys oppgåver og vinn fotballkort</li>
                     <li>🧮 Fleire spel kjem snart...</li>
                 </ul>
             </div>
@@ -397,9 +398,26 @@
 
         function navigateToCategory(category) {
             if (category === 'spill') {
-                window.location.href = 'gangespill/index.html';
+                // Show submenu or navigate to first game
+                showGamesMenu();
             } else if (category === 'verktøy') {
                 window.location.href = 'fotocollage/fotocollage.html';
+            }
+        }
+
+        function showGamesMenu() {
+            // For now, create a simple selection
+            const games = [
+                { name: 'Capybara Gangespel', url: 'gangespill/index.html' },
+                { name: 'Mattespel (Fotballkort)', url: 'mattespill/index.html' }
+            ];
+            
+            const choice = confirm('Vel eit spel:\n\n1. Capybara Gangespel (OK)\n2. Mattespel - Fotballkort (Avbryt)');
+            
+            if (choice) {
+                window.location.href = games[0].url;
+            } else {
+                window.location.href = games[1].url;
             }
         }
 

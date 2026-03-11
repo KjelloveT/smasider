@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mattespel - Vinn Fotballkort!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .main-layout {
+            display: flex;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            height: calc(100vh - 40px);
+        }
+
+        .game-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .cards-sidebar {
+            width: 350px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+
+        .cards-sidebar h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        .collected-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .mini-card {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: slideIn 0.5s;
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateX(50px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0);
+            }
+        }
+
+        .mini-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            object-fit: cover;
+            background: white;
+            padding: 3px;
+        }
+
+        .mini-card-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .mini-card-name {
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 3px;
+        }
+
+        .mini-card-team {
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .settings-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .settings-group {
+            margin-bottom: 20px;
+        }
+
+        .settings-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .settings-group label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .level-buttons, .operation-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .option-btn.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .progress-container {
+            background: #f0f0f0;
+            border-radius: 10px;
+            height: 30px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .question-container {
+            margin: 30px 0;
+        }
+
+        .question {
+            font-size: 3em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .answer-input {
+            font-size: 2em;
+            padding: 15px;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .feedback {
+            margin-top: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            min-height: 40px;
+        }
+
+        .correct {
+            color: #28a745;
+        }
+
+        .incorrect {
+            color: #dc3545;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .celebration {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 40px 20px;
+            font-size: 1.1em;
+        }
+
+        .empty-state-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            
+            .cards-sidebar {
+                width: 100%;
+                max-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-layout">
+        <div class="game-area">
+            <div class="container">
+                <div id="setupContainer">
+                    <h1>⚽ Mattespel ⚽</h1>
+                    <p class="subtitle">Vel nivå og rekneoperasjonar!</p>
+                    
+                    <div class="settings-container">
+                        <div class="settings-group">
+                            <label>Nivå:</label>
+                            <div class="level-buttons">
+                                <button class="option-btn selected" onclick="selectLevel('lett')" data-level="lett">Lett</button>
+                                <button class="option-btn" onclick="selectLevel('middels')" data-level="middels">Middels</button>
+                                <button class="option-btn" onclick="selectLevel('vanskeleg')" data-level="vanskeleg">Vanskeleg</button>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <label>Rekneoperasjonar:</label>
+                            <div class="operation-buttons">
+                                <button class="option-btn selected" onclick="toggleOperation('+')" data-op="+">Pluss (+)</button>
+                                <button class="option-btn selected" onclick="toggleOperation('-')" data-op="-">Minus (−)</button>
+                                <button class="option-btn selected" onclick="toggleOperation('*')" data-op="*">Gange (×)</button>
+                                <button class="option-btn" onclick="toggleOperation('/')" data-op="/">Dele (÷)</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn" onclick="startGame()">Start spelet!</button>
+                </div>
+
+                <div id="gameContainer" class="hidden">
+                    <h1>⚽ Mattespel ⚽</h1>
+                    <p class="subtitle">Løys 10 oppgåver og vinn fotballkort!</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar">0/10</div>
+                    </div>
+
+                    <div class="question-container">
+                        <div class="question" id="question"></div>
+                        <input type="number" id="answerInput" class="answer-input" placeholder="?">
+                        <br>
+                        <button class="btn" id="submitBtn" onclick="checkAnswer()">Sjekk svar</button>
+                    </div>
+
+                    <div class="feedback" id="feedback"></div>
+                </div>
+
+                <div id="completionContainer" class="hidden">
+                    <div class="celebration">🎉 Gratulerer! 🎉</div>
+                    <h2>Du klarte alle 10 oppgåvene!</h2>
+                    <p class="subtitle">Sjå fotballkorta dine til høgre! 👉</p>
+                    <button class="btn" onclick="restartGame()" style="margin-top: 20px;">Spel igjen</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cards-sidebar">
+            <h2>🏆 Dine Fotballkort</h2>
+            <div id="collectedCards" class="collected-cards">
+                <div class="empty-state">
+                    <div class="empty-state-icon">⚽</div>
+                    <p>Løys oppgåver for å samle fotballkort!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = {};
+        let correctAnswers = 0;
+        const totalQuestions = 10;
+        let selectedLevel = 'lett';
+        let selectedOperations = ['+', '-', '*'];
+        let collectedPlayers = [];
+
+        function selectLevel(level) {
+            selectedLevel = level;
+            document.querySelectorAll('[data-level]').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.querySelector(`[data-level="${level}"]`).classList.add('selected');
+        }
+
+        function toggleOperation(op) {
+            const btn = document.querySelector(`[data-op="${op}"]`);
+            if (btn.classList.contains('selected')) {
+                btn.classList.remove('selected');
+                selectedOperations = selectedOperations.filter(o => o !== op);
+            } else {
+                btn.classList.add('selected');
+                selectedOperations.push(op);
+            }
+            
+            if (selectedOperations.length === 0) {
+                btn.classList.add('selected');
+                selectedOperations.push(op);
+            }
+        }
+
+        function startGame() {
+            document.getElementById('setupContainer').classList.add('hidden');
+            document.getElementById('gameContainer').classList.remove('hidden');
+            generateQuestion();
+        }
+
+        function generateQuestion() {
+            if (selectedOperations.length === 0) {
+                selectedOperations = ['+'];
+            }
+            
+            const operation = selectedOperations[Math.floor(Math.random() * selectedOperations.length)];
+            let num1, num2, answer;
+            
+            const ranges = {
+                'lett': { add: 20, sub: 20, mult: 10, div: 10 },
+                'middels': { add: 50, sub: 50, mult: 12, div: 12 },
+                'vanskeleg': { add: 100, sub: 100, mult: 20, div: 20 }
+            };
+            
+            const range = ranges[selectedLevel];
+            
+            switch(operation) {
+                case '+':
+                    num1 = Math.floor(Math.random() * range.add) + 1;
+                    num2 = Math.floor(Math.random() * range.add) + 1;
+                    answer = num1 + num2;
+                    break;
+                case '-':
+                    num1 = Math.floor(Math.random() * range.sub) + range.sub/2;
+                    num2 = Math.floor(Math.random() * num1);
+                    answer = num1 - num2;
+                    break;
+                case '*':
+                    num1 = Math.floor(Math.random() * range.mult) + 1;
+                    num2 = Math.floor(Math.random() * range.mult) + 1;
+                    answer = num1 * num2;
+                    break;
+                case '/':
+                    num2 = Math.floor(Math.random() * range.div) + 1;
+                    answer = Math.floor(Math.random() * range.div) + 1;
+                    num1 = num2 * answer;
+                    break;
+            }
+            
+            const opSymbol = operation === '*' ? '×' : operation === '/' ? '÷' : operation;
+            currentQuestion = {
+                text: `${num1} ${opSymbol} ${num2}`,
+                answer: answer
+            };
+            
+            document.getElementById('question').textContent = currentQuestion.text + ' = ?';
+            document.getElementById('answerInput').value = '';
+            document.getElementById('answerInput').focus();
+        }
+
+        function updateProgress() {
+            const percentage = (correctAnswers / totalQuestions) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = `${correctAnswers}/${totalQuestions}`;
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById('answerInput').value);
+            const feedback = document.getElementById('feedback');
+            
+            if (isNaN(userAnswer)) {
+                feedback.textContent = 'Skriv inn eit tal!';
+                feedback.className = 'feedback incorrect';
+                return;
+            }
+            
+            if (userAnswer === currentQuestion.answer) {
+                correctAnswers++;
+                feedback.textContent = '✓ Rett!';
+                feedback.className = 'feedback correct';
+                updateProgress();
+                
+                fetchFootballCard();
+                
+                if (correctAnswers >= totalQuestions) {
+                    setTimeout(showCompletion, 1000);
+                } else {
+                    setTimeout(() => {
+                        feedback.textContent = '';
+                        generateQuestion();
+                    }, 1000);
+                }
+            } else {
+                feedback.textContent = '✗ Feil, prøv igjen!';
+                feedback.className = 'feedback incorrect';
+            }
+        }
+
+        function showCompletion() {
+            document.getElementById('gameContainer').classList.add('hidden');
+            document.getElementById('completionContainer').classList.remove('hidden');
+        }
+
+        async function fetchFootballCard() {
+            try {
+                const topPlayers = [
+                    'Lionel Messi', 'Cristiano Ronaldo', 'Neymar', 'Kylian Mbappe',
+                    'Erling Haaland', 'Kevin De Bruyne', 'Mohamed Salah', 'Robert Lewandowski',
+                    'Luka Modric', 'Karim Benzema', 'Harry Kane', 'Vinicius Junior',
+                    'Sadio Mane', 'Virgil van Dijk', 'Thibaut Courtois', 'Bruno Fernandes'
+                ];
+                
+                const randomPlayer = topPlayers[Math.floor(Math.random() * topPlayers.length)];
+                const playerResponse = await fetch(`https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${encodeURIComponent(randomPlayer)}`);
+                const playerData = await playerResponse.json();
+                
+                if (playerData.player && playerData.player.length > 0) {
+                    addPlayerCard(playerData.player[0]);
+                }
+            } catch (error) {
+                console.error('Feil ved henting av fotballkort:', error);
+            }
+        }
+
+        function addPlayerCard(player) {
+            collectedPlayers.push(player);
+            
+            const cardsContainer = document.getElementById('collectedCards');
+            
+            if (collectedPlayers.length === 1) {
+                cardsContainer.innerHTML = '';
+            }
+            
+            const playerImage = player.strThumb || player.strCutout || 'https://via.placeholder.com/60x60?text=⚽';
+            const team = player.strTeam || 'Ukjent lag';
+            
+            const miniCard = document.createElement('div');
+            miniCard.className = 'mini-card';
+            miniCard.innerHTML = `
+                <img src="${playerImage}" alt="${player.strPlayer}" onerror="this.src='https://via.placeholder.com/60x60?text=⚽'">
+                <div class="mini-card-info">
+                    <div class="mini-card-name">${player.strPlayer}</div>
+                    <div class="mini-card-team">⚽ ${team}</div>
+                </div>
+            `;
+            
+            cardsContainer.appendChild(miniCard);
+        }
+
+        function restartGame() {
+            correctAnswers = 0;
+            collectedPlayers = [];
+            updateProgress();
+            document.getElementById('completionContainer').classList.add('hidden');
+            document.getElementById('setupContainer').classList.remove('hidden');
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('collectedCards').innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">⚽</div>
+                    <p>Løys oppgåver for å samle fotballkort!</p>
+                </div>
+            `;
+        }
+
+        document.getElementById('answerInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        updateProgress();
+    </script>
+</body>
+</html>
