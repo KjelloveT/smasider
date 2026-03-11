@@ -8,10 +8,5 @@
       "route": "/fotocollage/*", 
       "serve": "/fotocollage/fotocollage.html"
     }
-  ],
-  "responseOverrides": {
-    "404": {
-      "serve": "/index.html"
-    }
-  }
+  ]
 }
