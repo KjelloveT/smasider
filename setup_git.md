@@ -42,3 +42,7 @@ git push
 - Bytt ut "BRUKARNAVN" med ditt GitHub-brukarnamn
 - Bytt ut "REPO-NAMN" med namnet på GitHub-repoet ditt
 - Du må laga repoet på GitHub først (på github.com → "New repository")
+
+## Azure Deploy
+- Endringar blir automatisk deploya til Azure Static Web Apps
+- URL: https://white-beach-0993e0e10.6.azurestaticapps.net/
