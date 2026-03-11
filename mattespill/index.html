@@ -605,7 +605,11 @@
                     cardsContainer.innerHTML = '';
                 }
                 
-                const playerImage = player.strThumb || player.strCutout || 'https://via.placeholder.com/60x60?text=⚽';
+                // Force HTTPS for all images to prevent mixed content SSL errors
+                let playerImage = player.strThumb || player.strCutout || 'https://via.placeholder.com/60x60?text=⚽';
+                if (playerImage && playerImage.startsWith('http://')) {
+                    playerImage = playerImage.replace('http://', 'https://');
+                }
                 const team = player.strTeam || 'Ukjent lag';
                 
                 const miniCard = document.createElement('div');
@@ -632,7 +636,11 @@
             cardsContainer.innerHTML = '';
             
             collectedPlayers.forEach(player => {
-                const playerImage = player.strThumb || player.strCutout || 'https://via.placeholder.com/60x60?text=⚽';
+                // Force HTTPS for all images to prevent mixed content SSL errors
+                let playerImage = player.strThumb || player.strCutout || 'https://via.placeholder.com/60x60?text=⚽';
+                if (playerImage && playerImage.startsWith('http://')) {
+                    playerImage = playerImage.replace('http://', 'https://');
+                }
                 const team = player.strTeam || 'Ukjent lag';
                 
                 const miniCard = document.createElement('div');
