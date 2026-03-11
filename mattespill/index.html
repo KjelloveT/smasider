@@ -370,6 +370,8 @@
         let selectedLevel = 'lett';
         let selectedOperations = ['+', '-', '*'];
         let collectedPlayers = [];
+        let allPlayers = [];
+        let usedPlayerIndices = [];
 
         function selectLevel(level) {
             selectedLevel = level;
@@ -474,10 +476,11 @@
                 feedback.className = 'feedback correct';
                 updateProgress();
                 
-                fetchFootballCard();
-                
                 if (correctAnswers >= totalQuestions) {
-                    setTimeout(showCompletion, 1000);
+                    setTimeout(() => {
+                        fetchFootballCard();
+                        showCompletion();
+                    }, 1000);
                 } else {
                     setTimeout(() => {
                         feedback.textContent = '';
@@ -497,53 +500,179 @@
 
         async function fetchFootballCard() {
             try {
+                // Hent spillere kun første gang eller hvis listen er tom
+                if (allPlayers.length === 0) {
+                    await fetchAllPlayers();
+                }
+                
+                // Finn en tilfeldig spiller som ikke er brukt før
+                let availableIndices = allPlayers.map((_, index) => index)
+                    .filter(index => !usedPlayerIndices.includes(index));
+                
+                // Hvis alle spillere er brukt, start på nytt
+                if (availableIndices.length === 0) {
+                    usedPlayerIndices = [];
+                    availableIndices = allPlayers.map((_, index) => index);
+                }
+                
+                const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+                const player = allPlayers[randomIndex];
+                
+                if (player) {
+                    addPlayerCard(player, randomIndex);
+                }
+            } catch (error) {
+                console.error('Feil ved henting av fotballkort:', error);
+                // Fallback til lokale spillere hvis API feiler
+                useFallbackPlayer();
+            }
+        }
+        
+        async function fetchAllPlayers() {
+            try {
                 const topPlayers = [
                     'Lionel Messi', 'Cristiano Ronaldo', 'Neymar', 'Kylian Mbappe',
                     'Erling Haaland', 'Kevin De Bruyne', 'Mohamed Salah', 'Robert Lewandowski',
                     'Luka Modric', 'Karim Benzema', 'Harry Kane', 'Vinicius Junior',
-                    'Sadio Mane', 'Virgil van Dijk', 'Thibaut Courtois', 'Bruno Fernandes'
+                    'Sadio Mane', 'Virgil van Dijk', 'Thibaut Courtois', 'Bruno Fernandes',
+                    'Jude Bellingham', 'Rodri', 'Alphonso Davies', 'Joshua Kimmich',
+                    'Marquinhos', 'Ederson', 'Alisson Becker', 'Casemiro', 'Frenkie de Jong',
+                    'Pedri', 'Gavi', 'Jamal Musiala', 'Eduardo Camavinga', 'Aurélien Tchouaméni'
                 ];
                 
-                const randomPlayer = topPlayers[Math.floor(Math.random() * topPlayers.length)];
-                const playerResponse = await fetch(`https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${encodeURIComponent(randomPlayer)}`);
-                const playerData = await playerResponse.json();
+                // Hent alle spillere i parallell for å spare tid
+                const playerPromises = topPlayers.map(async (playerName) => {
+                    try {
+                        const response = await fetch(`https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${encodeURIComponent(playerName)}`);
+                        const data = await response.json();
+                        return data.player && data.player.length > 0 ? data.player[0] : null;
+                    } catch (error) {
+                        console.warn(`Kunne ikke hente ${playerName}:`, error);
+                        return null;
+                    }
+                });
                 
-                if (playerData.player && playerData.player.length > 0) {
-                    addPlayerCard(playerData.player[0]);
-                }
+                const playerResults = await Promise.all(playerPromises);
+                allPlayers = playerResults.filter(player => player !== null);
+                
+                console.log(`Henta ${allPlayers.length} fotballspillere`);
             } catch (error) {
-                console.error('Feil ved henting av fotballkort:', error);
+                console.error('Feil ved henting av alle spillere:', error);
+                throw error;
             }
         }
+        
+        function useFallbackPlayer() {
+            const fallbackPlayers = [
+                { strPlayer: 'Lionel Messi', strTeam: 'Inter Miami', strThumb: null },
+                { strPlayer: 'Cristiano Ronaldo', strTeam: 'Al Nassr', strThumb: null },
+                { strPlayer: 'Erling Haaland', strTeam: 'Manchester City', strThumb: null }
+            ];
+            
+            const randomPlayer = fallbackPlayers[Math.floor(Math.random() * fallbackPlayers.length)];
+            const randomIndex = Math.floor(Math.random() * 1000); // Unik indeks
+            addPlayerCard(randomPlayer, randomIndex);
+        }
 
-        function addPlayerCard(player) {
-            collectedPlayers.push(player);
-            
-            const cardsContainer = document.getElementById('collectedCards');
-            
-            if (collectedPlayers.length === 1) {
-                cardsContainer.innerHTML = '';
+        function addPlayerCard(player, playerIndex) {
+            // Sjekk om spilleren allerede er samlet
+            if (collectedPlayers.length >= 11) {
+                // Bytt ut en tilfeldig eksisterende spiller
+                const randomReplaceIndex = Math.floor(Math.random() * collectedPlayers.length);
+                const oldPlayerIndex = usedPlayerIndices[randomReplaceIndex];
+                
+                // Fjern gammel spiller
+                collectedPlayers.splice(randomReplaceIndex, 1);
+                usedPlayerIndices.splice(randomReplaceIndex, 1);
+                
+                // Legg til ny spiller
+                collectedPlayers.push(player);
+                usedPlayerIndices.push(playerIndex);
+                
+                // Oppdater visning
+                updateCardsDisplay();
+                
+                // Vis melding om bytte
+                showSwapMessage(player.strPlayer);
+            } else {
+                // Legg til ny spiller
+                collectedPlayers.push(player);
+                usedPlayerIndices.push(playerIndex);
+                
+                const cardsContainer = document.getElementById('collectedCards');
+                
+                if (collectedPlayers.length === 1) {
+                    cardsContainer.innerHTML = '';
+                }
+                
+                const playerImage = player.strThumb || player.strCutout || 'https://via.placeholder.com/60x60?text=⚽';
+                const team = player.strTeam || 'Ukjent lag';
+                
+                const miniCard = document.createElement('div');
+                miniCard.className = 'mini-card';
+                miniCard.innerHTML = `
+                    <img src="${playerImage}" alt="${player.strPlayer}" onerror="this.src='https://via.placeholder.com/60x60?text=⚽'">
+                    <div class="mini-card-info">
+                        <div class="mini-card-name">${player.strPlayer}</div>
+                        <div class="mini-card-team">⚽ ${team}</div>
+                    </div>
+                `;
+                
+                cardsContainer.appendChild(miniCard);
+                
+                // Sjekk om laget er komplett
+                if (collectedPlayers.length === 11) {
+                    showTeamComplete();
+                }
             }
+        }
+        
+        function updateCardsDisplay() {
+            const cardsContainer = document.getElementById('collectedCards');
+            cardsContainer.innerHTML = '';
             
-            const playerImage = player.strThumb || player.strCutout || 'https://via.placeholder.com/60x60?text=⚽';
-            const team = player.strTeam || 'Ukjent lag';
+            collectedPlayers.forEach(player => {
+                const playerImage = player.strThumb || player.strCutout || 'https://via.placeholder.com/60x60?text=⚽';
+                const team = player.strTeam || 'Ukjent lag';
+                
+                const miniCard = document.createElement('div');
+                miniCard.className = 'mini-card';
+                miniCard.innerHTML = `
+                    <img src="${playerImage}" alt="${player.strPlayer}" onerror="this.src='https://via.placeholder.com/60x60?text=⚽'">
+                    <div class="mini-card-info">
+                        <div class="mini-card-name">${player.strPlayer}</div>
+                        <div class="mini-card-team">⚽ ${team}</div>
+                    </div>
+                `;
+                
+                cardsContainer.appendChild(miniCard);
+            });
+        }
+        
+        function showSwapMessage(playerName) {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = `🔄 Bytta ut ein spiller med ${playerName}!`;
+            feedback.className = 'feedback correct';
             
-            const miniCard = document.createElement('div');
-            miniCard.className = 'mini-card';
-            miniCard.innerHTML = `
-                <img src="${playerImage}" alt="${player.strPlayer}" onerror="this.src='https://via.placeholder.com/60x60?text=⚽'">
-                <div class="mini-card-info">
-                    <div class="mini-card-name">${player.strPlayer}</div>
-                    <div class="mini-card-team">⚽ ${team}</div>
-                </div>
-            `;
+            setTimeout(() => {
+                feedback.textContent = '';
+            }, 3000);
+        }
+        
+        function showTeamComplete() {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = '🎉 GRATULERER! Du har eit fullt lag! 🎉';
+            feedback.className = 'feedback correct';
             
-            cardsContainer.appendChild(miniCard);
+            setTimeout(() => {
+                feedback.textContent = '';
+            }, 5000);
         }
 
         function restartGame() {
             correctAnswers = 0;
             collectedPlayers = [];
+            usedPlayerIndices = [];
             updateProgress();
             document.getElementById('completionContainer').classList.add('hidden');
             document.getElementById('setupContainer').classList.remove('hidden');
