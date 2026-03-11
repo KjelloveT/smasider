@@ -7,6 +7,35 @@
     {
       "route": "/fotocollage/*", 
       "serve": "/fotocollage/fotocollage.html"
+    },
+    {
+      "route": "/mattespill/*",
+      "serve": "/mattespill/index.html"
+    },
+    {
+      "route": "/fotocolours/*",
+      "serve": "/fotocolours/index.html"
+    },
+    {
+      "route": "/.github/workflows/fotocoloours/*",
+      "serve": "/.github/workflows/fotocoloours/index.html"
     }
-  ]
+  ],
+  "globalHeaders": {
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "mimeTypes": {
+    ".html": "text/html",
+    ".css": "text/css",
+    ".js": "application/javascript",
+    ".json": "application/json",
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".gif": "image/gif",
+    ".svg": "image/svg+xml",
+    ".ico": "image/x-icon"
+  }
 }
