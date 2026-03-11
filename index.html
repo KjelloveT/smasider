@@ -333,6 +333,7 @@
                 <p class="category-description">Praktiske verktøy for kreativitet og læring</p>
                 <ul class="category-items">
                     <li>📸 Fotocollage - Lag vakre bilete-collager</li>
+                    <li>🎨 Fotocolours - Rediger bilete med fargetonetilpasning</li>
                     <li>🎨 Fleire verktøy kjem snart...</li>
                 </ul>
             </div>
@@ -401,7 +402,7 @@
                 // Show submenu or navigate to first game
                 showGamesMenu();
             } else if (category === 'verktøy') {
-                window.location.href = 'fotocollage/fotocollage.html';
+                showToolsMenu();
             }
         }
 
@@ -418,6 +419,22 @@
                 window.location.href = games[0].url;
             } else {
                 window.location.href = games[1].url;
+            }
+        }
+
+        function showToolsMenu() {
+            // For now, create a simple selection
+            const tools = [
+                { name: 'Fotocollage', url: 'fotocollage/fotocollage.html' },
+                { name: 'Fotocolours (Bilde-editor)', url: 'fotocolours/index.html' }
+            ];
+            
+            const choice = confirm('Vel eit verktøy:\n\n1. Fotocollage (OK)\n2. Fotocolours - Bilde-editor (Avbryt)');
+            
+            if (choice) {
+                window.location.href = tools[0].url;
+            } else {
+                window.location.href = tools[1].url;
             }
         }
 
