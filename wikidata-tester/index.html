@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wikidata Query Tester</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .query-section {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-execute {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-execute:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-save {
+            background: #10b981;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-save:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-save:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-clear {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-clear:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .examples {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 8px;
+        }
+
+        .examples h3 {
+            margin-bottom: 10px;
+            color: #374151;
+        }
+
+        .example-btn {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 15px;
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .example-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+
+        .status.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #3b82f6;
+        }
+
+        .results-section {
+            margin-top: 30px;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .results-header h2 {
+            color: #333;
+        }
+
+        .result-count {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: #f9fafb;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+            border-bottom: 2px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            color: #4b5563;
+        }
+
+        tr:hover {
+            background: #f9fafb;
+        }
+
+        .result-image {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .result-image:hover {
+            transform: scale(1.05);
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            cursor: pointer;
+        }
+
+        .image-modal img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+        }
+
+        .spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .saved-queries {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .saved-queries h3 {
+            margin-bottom: 15px;
+            color: #374151;
+        }
+
+        .saved-query-item {
+            padding: 10px;
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 4px solid #10b981;
+            font-size: 14px;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 Wikidata Query Tester</h1>
+            <p class="subtitle">Test SPARQL-spørringer og lagre vellykkede resultater</p>
+        </header>
+
+        <div class="content">
+            <div class="examples">
+                <h3>📚 Eksempelspørringer:</h3>
+                <button class="example-btn" onclick="loadExample('countries')">Land i Europa (med flagg)</button>
+                <button class="example-btn" onclick="loadExample('cities')">Norske byer</button>
+                <button class="example-btn" onclick="loadExample('scientists')">Kjente forskere (med bilde)</button>
+                <button class="example-btn" onclick="loadExample('planets')">Planeter</button>
+                <button class="example-btn" onclick="loadExample('animals')">Dyr (med bilde)</button>
+            </div>
+
+            <div class="query-section">
+                <label for="sparqlQuery">SPARQL-spørring:</label>
+                <textarea id="sparqlQuery" placeholder="Skriv inn din SPARQL-spørring her..."></textarea>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-execute" onclick="executeQuery()">▶ Kjør spørring</button>
+                <button class="btn-save" id="saveBtn" onclick="saveQuery()" disabled>💾 Lagre til CSV</button>
+                <button class="btn-clear" onclick="clearResults()">🗑️ Tøm resultater</button>
+            </div>
+
+            <div id="status" class="status"></div>
+
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <div class="results-header">
+                    <h2>Resultater</h2>
+                    <span class="result-count" id="resultCount"></span>
+                </div>
+                <div class="table-container">
+                    <table id="resultsTable">
+                        <thead id="tableHead"></thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="saved-queries">
+                <h3>💾 Lagrede spørringer</h3>
+                <div id="savedQueriesList">
+                    <p style="color: #6b7280; font-size: 14px;">Ingen lagrede spørringer ennå. Kjør en spørring og trykk "Lagre til CSV".</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentResults = null;
+        let currentQuery = null;
+        const savedQueries = [];
+
+        const examples = {
+            countries: `SELECT ?country ?countryLabel ?population ?flag WHERE {
+  ?country wdt:P31 wd:Q6256;
+           wdt:P30 wd:Q46;
+           wdt:P1082 ?population.
+  OPTIONAL { ?country wdt:P41 ?flag. }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
+}
+LIMIT 20`,
+            cities: `SELECT ?city ?cityLabel ?population WHERE {
+  ?city wdt:P31 wd:Q515;
+        wdt:P17 wd:Q20;
+        wdt:P1082 ?population.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
+}
+ORDER BY DESC(?population)
+LIMIT 15`,
+            scientists: `SELECT ?scientist ?scientistLabel ?birthDate ?image WHERE {
+  ?scientist wdt:P31 wd:Q5;
+             wdt:P106 wd:Q901;
+             wdt:P569 ?birthDate.
+  OPTIONAL { ?scientist wdt:P18 ?image. }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
+}
+LIMIT 20`,
+            planets: `SELECT ?planet ?planetLabel ?mass WHERE {
+  ?planet wdt:P31 wd:Q634;
+          wdt:P2067 ?mass.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
+}
+ORDER BY ?mass`,
+            animals: `SELECT ?animal ?animalLabel ?image WHERE {
+  ?animal wdt:P31 wd:Q16521;
+          wdt:P18 ?image.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
+}
+LIMIT 20`
+        };
+
+        function loadExample(type) {
+            document.getElementById('sparqlQuery').value = examples[type];
+            showStatus('Eksempel lastet! Trykk "Kjør spørring" for å teste.', 'info');
+        }
+
+        async function executeQuery() {
+            const query = document.getElementById('sparqlQuery').value.trim();
+            
+            if (!query) {
+                showStatus('Vennligst skriv inn en SPARQL-spørring.', 'error');
+                return;
+            }
+
+            currentQuery = query;
+            showLoading();
+            
+            const url = 'https://query.wikidata.org/sparql';
+            const fullUrl = `${url}?query=${encodeURIComponent(query)}&format=json`;
+
+            try {
+                const response = await fetch(fullUrl, {
+                    headers: {
+                        'Accept': 'application/sparql-results+json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                currentResults = data;
+                displayResults(data);
+                showStatus(`✅ Spørring vellykket! Fant ${data.results.bindings.length} resultater.`, 'success');
+                document.getElementById('saveBtn').disabled = false;
+            } catch (error) {
+                showStatus(`❌ Feil ved kjøring av spørring: ${error.message}`, 'error');
+                document.getElementById('resultsSection').style.display = 'none';
+                document.getElementById('saveBtn').disabled = true;
+            }
+        }
+
+        function showLoading() {
+            const resultsSection = document.getElementById('resultsSection');
+            resultsSection.style.display = 'block';
+            resultsSection.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Henter data fra Wikidata...</p>
+                </div>
+            `;
+        }
+
+        function displayResults(data) {
+            const resultsSection = document.getElementById('resultsSection');
+            resultsSection.style.display = 'block';
+            resultsSection.innerHTML = `
+                <div class="results-header">
+                    <h2>Resultater</h2>
+                    <span class="result-count" id="resultCount">${data.results.bindings.length} rader</span>
+                </div>
+                <div class="table-container">
+                    <table id="resultsTable">
+                        <thead id="tableHead"></thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            `;
+
+            if (data.results.bindings.length === 0) {
+                document.getElementById('tableBody').innerHTML = '<tr><td colspan="100" style="text-align: center; padding: 40px; color: #6b7280;">Ingen resultater funnet.</td></tr>';
+                return;
+            }
+
+            const variables = data.head.vars;
+            const tableHead = document.getElementById('tableHead');
+            const tableBody = document.getElementById('tableBody');
+
+            const headerRow = document.createElement('tr');
+            variables.forEach(variable => {
+                const th = document.createElement('th');
+                th.textContent = variable;
+                headerRow.appendChild(th);
+            });
+            tableHead.appendChild(headerRow);
+
+            data.results.bindings.forEach(binding => {
+                const row = document.createElement('tr');
+                variables.forEach(variable => {
+                    const td = document.createElement('td');
+                    if (binding[variable]) {
+                        const value = binding[variable].value;
+                        if (isImageUrl(value)) {
+                            const img = document.createElement('img');
+                            img.src = value;
+                            img.className = 'result-image';
+                            img.alt = variable;
+                            img.onclick = () => showImageModal(value);
+                            td.appendChild(img);
+                        } else if (binding[variable].type === 'uri') {
+                            const link = document.createElement('a');
+                            link.href = value;
+                            link.target = '_blank';
+                            link.textContent = value.split('/').pop();
+                            link.style.color = '#667eea';
+                            td.appendChild(link);
+                        } else {
+                            td.textContent = value;
+                        }
+                    } else {
+                        td.textContent = '-';
+                    }
+                    row.appendChild(td);
+                });
+                tableBody.appendChild(row);
+            });
+        }
+
+        function saveQuery() {
+            if (!currentResults || !currentQuery) {
+                showStatus('Ingen resultater å lagre.', 'error');
+                return;
+            }
+
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            const queryPreview = currentQuery.substring(0, 50).replace(/\n/g, ' ') + '...';
+            
+            savedQueries.push({
+                query: currentQuery,
+                results: currentResults,
+                timestamp: new Date().toLocaleString('no-NO'),
+                preview: queryPreview
+            });
+
+            updateSavedQueriesList();
+            downloadCSV(currentResults, `wikidata-query-${timestamp}.csv`);
+            showStatus('✅ Spørring lagret og CSV lastet ned!', 'success');
+        }
+
+        function downloadCSV(data, filename) {
+            const variables = data.head.vars;
+            const bindings = data.results.bindings;
+
+            let csv = variables.join(',') + '\n';
+
+            bindings.forEach(binding => {
+                const row = variables.map(variable => {
+                    if (binding[variable]) {
+                        let value = binding[variable].value;
+                        value = value.replace(/"/g, '""');
+                        return `"${value}"`;
+                    }
+                    return '""';
+                });
+                csv += row.join(',') + '\n';
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function updateSavedQueriesList() {
+            const listDiv = document.getElementById('savedQueriesList');
+            
+            if (savedQueries.length === 0) {
+                listDiv.innerHTML = '<p style="color: #6b7280; font-size: 14px;">Ingen lagrede spørringer ennå.</p>';
+                return;
+            }
+
+            listDiv.innerHTML = savedQueries.map((item, index) => `
+                <div class="saved-query-item">
+                    <strong>${item.timestamp}</strong> - ${item.results.results.bindings.length} resultater
+                    <br>
+                    <small style="color: #6b7280;">${item.preview}</small>
+                </div>
+            `).reverse().join('');
+        }
+
+        function clearResults() {
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('saveBtn').disabled = true;
+            currentResults = null;
+            currentQuery = null;
+            showStatus('Resultater tømt.', 'info');
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function isImageUrl(url) {
+            if (typeof url !== 'string') return false;
+            const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp', '.bmp'];
+            const lowerUrl = url.toLowerCase();
+            return imageExtensions.some(ext => lowerUrl.includes(ext)) || 
+                   lowerUrl.includes('commons.wikimedia.org');
+        }
+
+        function showImageModal(imageUrl) {
+            let modal = document.getElementById('imageModal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'imageModal';
+                modal.className = 'image-modal';
+                modal.onclick = () => modal.style.display = 'none';
+                document.body.appendChild(modal);
+            }
+            
+            modal.innerHTML = `<img src="${imageUrl}" alt="Full size image">`;
+            modal.style.display = 'block';
+        }
+
+        loadExample('countries');
+    </script>
+</body>
+</html>

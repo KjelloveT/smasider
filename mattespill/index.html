@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mattespel - Vinn Fotballkort!</title>
+    <title>Mattespel - Vinn Pokémonkort!</title>
     <style>
         * {
             margin: 0;
@@ -327,7 +327,7 @@
 
                 <div id="gameContainer" class="hidden">
                     <h1>⚽ Mattespel ⚽</h1>
-                    <p class="subtitle">Løys 10 oppgåver og vinn fotballkort!</p>
+                    <p class="subtitle">Løys 10 oppgåver og vinn Pokémonkort!</p>
                     
                     <div class="progress-container">
                         <div class="progress-bar" id="progressBar">0/10</div>
@@ -346,18 +346,18 @@
                 <div id="completionContainer" class="hidden">
                     <div class="celebration">🎉 Gratulerer! 🎉</div>
                     <h2>Du klarte alle 10 oppgåvene!</h2>
-                    <p class="subtitle">Sjå fotballkorta dine til høgre! 👉</p>
+                    <p class="subtitle">Sjå Pokémonkorta dine til høgre! 👉</p>
                     <button class="btn" onclick="restartGame()" style="margin-top: 20px;">Spel igjen</button>
                 </div>
             </div>
         </div>
 
         <div class="cards-sidebar">
-            <h2>🏆 Dine Fotballkort</h2>
+            <h2>🏆 Dine Pokémonkort</h2>
             <div id="collectedCards" class="collected-cards">
                 <div class="empty-state">
-                    <div class="empty-state-icon">⚽</div>
-                    <p>Løys oppgåver for å samle fotballkort!</p>
+                    <div class="empty-state-icon">⚡</div>
+                    <p>Løys oppgåver for å samle Pokémonkort!</p>
                 </div>
             </div>
         </div>
@@ -515,60 +515,124 @@
                     availableIndices = allPlayers.map((_, index) => index);
                 }
                 
-                const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
-                const player = allPlayers[randomIndex];
+                // Use crypto API for better randomness and find vehicle with image
+                let attempts = 0;
+                let player = null;
+                let randomIndex = null;
+                
+                while (attempts < 5 && !player) {
+                    randomIndex = availableIndices[Math.floor(crypto.getRandomValues(new Uint32Array(1))[0] / 0xFFFFFFFF * availableIndices.length)];
+                    const candidate = allPlayers[randomIndex];
+                    
+                    console.log(`Forsøk ${attempts + 1}: Sjekker ${candidate.strPlayer} - har bilde: ${!!candidate.strThumb}`);
+                    
+                    // Prioriter Pokémon med bilder, men aksepter uten bilder etter 3 forsøk
+                    if (candidate.strThumb || attempts >= 3) {
+                        player = candidate;
+                        console.log(`Valgt Pokémon: ${player.strPlayer} (bilde: ${!!player.strThumb})`);
+                    } else {
+                        // Fjern denne indeksen fra tilgjengelige og prøv igjen
+                        availableIndices = availableIndices.filter(idx => idx !== randomIndex);
+                        console.log(`Fjernet Pokémon uten bilde, gjenstående: ${availableIndices.length}`);
+                    }
+                    
+                    attempts++;
+                }
                 
                 if (player) {
                     addPlayerCard(player, randomIndex);
+                } else {
+                    console.warn('Kunne ikkje finne Pokémon med bilde etter 5 forsøk, bruker fallback');
+                    useFallbackPlayer();
                 }
             } catch (error) {
-                console.error('Feil ved henting av fotballkort:', error);
-                // Fallback til lokale spillere hvis API feiler
+                console.error('Feil ved henting av Pokémonkort:', error);
+                // Fallback til lokale Pokémon hvis API feiler
                 useFallbackPlayer();
             }
         }
         
         async function fetchAllPlayers() {
             try {
-                const topPlayers = [
-                    'Lionel Messi', 'Cristiano Ronaldo', 'Neymar', 'Kylian Mbappe',
-                    'Erling Haaland', 'Kevin De Bruyne', 'Mohamed Salah', 'Robert Lewandowski',
-                    'Luka Modric', 'Karim Benzema', 'Harry Kane', 'Vinicius Junior',
-                    'Sadio Mane', 'Virgil van Dijk', 'Thibaut Courtois', 'Bruno Fernandes',
-                    'Jude Bellingham', 'Rodri', 'Alphonso Davies', 'Joshua Kimmich',
-                    'Marquinhos', 'Ederson', 'Alisson Becker', 'Casemiro', 'Frenkie de Jong',
-                    'Pedri', 'Gavi', 'Jamal Musiala', 'Eduardo Camavinga', 'Aurélien Tchouaméni'
-                ];
+                console.log('Henter Pokémon frå Wikidata...');
                 
-                // Hent alle spillere i parallell for å spare tid
-                const playerPromises = topPlayers.map(async (playerName) => {
-                    try {
-                        const response = await fetch(`https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${encodeURIComponent(playerName)}`);
-                        const data = await response.json();
-                        return data.player && data.player.length > 0 ? data.player[0] : null;
-                    } catch (error) {
-                        console.warn(`Kunne ikke hente ${playerName}:`, error);
-                        return null;
+                // SPARQL query for Pokemon med bilder
+                const sparqlQuery = `
+                    SELECT ?pokemon ?pokemonLabel ?image WHERE {
+                      ?pokemon rdfs:label ?pokemonLabel.
+                      FILTER(LANG(?pokemonLabel) = "en")
+                      FILTER(CONTAINS(LCASE(?pokemonLabel), "pokemon"))
+                      OPTIONAL { ?pokemon wdt:P18 ?image. }
                     }
+                    LIMIT 30
+                `;
+                
+                const response = await fetch('https://query.wikidata.org/sparql', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/sparql-query',
+                        'Accept': 'application/sparql-results+json'
+                    },
+                    body: sparqlQuery
                 });
                 
-                const playerResults = await Promise.all(playerPromises);
-                allPlayers = playerResults.filter(player => player !== null);
+                const data = await response.json();
                 
-                console.log(`Henta ${allPlayers.length} fotballspillere`);
+                // Konverter til vårt format
+                const rawPokemon = data.results.bindings.map(binding => ({
+                    strPlayer: binding.pokemonLabel?.value || 'Ukjent Pokémon',
+                    strTeam: 'Pokémon', // Standard type for alle
+                    strThumb: binding.image?.value || null,
+                    strCutout: binding.image?.value || null,
+                    hasImage: !!binding.image?.value
+                }));
+                
+                // Prioriter Pokémon med bilder
+                const pokemonWithImages = rawPokemon.filter(p => p.hasImage);
+                const pokemonWithoutImages = rawPokemon.filter(p => !p.hasImage);
+                
+                // Kombiner for god variasjon
+                allPlayers = [
+                    ...pokemonWithImages.slice(0, 15),  // Maks 15 med bilder
+                    ...pokemonWithoutImages.slice(0, 5) // Maks 5 uten bilder
+                ];
+                
+                // Shuffle for randomness
+                allPlayers.sort(() => Math.random() - 0.5);
+                
+                console.log(`Henta ${allPlayers.length} Pokémon (${pokemonWithImages.length} med bilder, ${pokemonWithoutImages.length} uten bilder):`, allPlayers.map(p => ({
+                    name: p.strPlayer,
+                    hasImage: p.hasImage
+                })));
+                
+                // Hvis vi fikk få Pokémon, legg til fallback
+                if (allPlayers.length < 5) {
+                    console.warn('Få Pokémon henta frå Wikidata, legger til fallback Pokémon');
+                    allPlayers.push(...getFallbackPlayers());
+                }
+                
             } catch (error) {
-                console.error('Feil ved henting av alle spillere:', error);
-                throw error;
+                console.error('Feil ved henting av Pokémon frå Wikidata:', error);
+                // Bruk fallback Pokémon hvis alt feiler
+                allPlayers = getFallbackPlayers();
             }
         }
         
-        function useFallbackPlayer() {
-            const fallbackPlayers = [
-                { strPlayer: 'Lionel Messi', strTeam: 'Inter Miami', strThumb: null },
-                { strPlayer: 'Cristiano Ronaldo', strTeam: 'Al Nassr', strThumb: null },
-                { strPlayer: 'Erling Haaland', strTeam: 'Manchester City', strThumb: null }
+        function getFallbackPlayers() {
+            return [
+                { strPlayer: 'Pikachu', strTeam: 'Elektrisk', strThumb: null },
+                { strPlayer: 'Charizard', strTeam: 'Ild/Flyvende', strThumb: null },
+                { strPlayer: 'Bulbasaur', strTeam: 'Gress/Gift', strThumb: null },
+                { strPlayer: 'Squirtle', strTeam: 'Vann', strThumb: null },
+                { strPlayer: 'Eevee', strTeam: 'Normal', strThumb: null },
+                { strPlayer: 'Snorlax', strTeam: 'Normal', strThumb: null },
+                { strPlayer: 'Mewtwo', strTeam: 'Psyisk', strThumb: null },
+                { strPlayer: 'Gengar', strTeam: 'Spøkelse/Gift', strThumb: null }
             ];
-            
+        }
+        
+        function useFallbackPlayer() {
+            const fallbackPlayers = getFallbackPlayers();
             const randomPlayer = fallbackPlayers[Math.floor(Math.random() * fallbackPlayers.length)];
             const randomIndex = Math.floor(Math.random() * 1000); // Unik indeks
             addPlayerCard(randomPlayer, randomIndex);
@@ -606,19 +670,19 @@
                 }
                 
                 // Force HTTPS for all images to prevent mixed content SSL errors
-                let playerImage = player.strThumb || player.strCutout || 'https://via.placeholder.com/60x60?text=⚽';
+                let playerImage = player.strThumb || player.strCutout || 'https://via.placeholder.com/60x60?text=⚡';
                 if (playerImage && playerImage.startsWith('http://')) {
                     playerImage = playerImage.replace('http://', 'https://');
                 }
-                const team = player.strTeam || 'Ukjent lag';
+                const type = player.strTeam || 'Ukjent type';
                 
                 const miniCard = document.createElement('div');
                 miniCard.className = 'mini-card';
                 miniCard.innerHTML = `
-                    <img src="${playerImage}" alt="${player.strPlayer}" onerror="this.src='https://via.placeholder.com/60x60?text=⚽'">
+                    <img src="${playerImage}" alt="${player.strPlayer}" onerror="this.src='https://via.placeholder.com/60x60?text=⚡'">
                     <div class="mini-card-info">
                         <div class="mini-card-name">${player.strPlayer}</div>
-                        <div class="mini-card-team">⚽ ${team}</div>
+                        <div class="mini-card-team">⚡ ${type}</div>
                     </div>
                 `;
                 
@@ -637,19 +701,19 @@
             
             collectedPlayers.forEach(player => {
                 // Force HTTPS for all images to prevent mixed content SSL errors
-                let playerImage = player.strThumb || player.strCutout || 'https://via.placeholder.com/60x60?text=⚽';
+                let playerImage = player.strThumb || player.strCutout || 'https://via.placeholder.com/60x60?text=⚡';
                 if (playerImage && playerImage.startsWith('http://')) {
                     playerImage = playerImage.replace('http://', 'https://');
                 }
-                const team = player.strTeam || 'Ukjent lag';
+                const type = player.strTeam || 'Ukjent type';
                 
                 const miniCard = document.createElement('div');
                 miniCard.className = 'mini-card';
                 miniCard.innerHTML = `
-                    <img src="${playerImage}" alt="${player.strPlayer}" onerror="this.src='https://via.placeholder.com/60x60?text=⚽'">
+                    <img src="${playerImage}" alt="${player.strPlayer}" onerror="this.src='https://via.placeholder.com/60x60?text=⚡'">
                     <div class="mini-card-info">
                         <div class="mini-card-name">${player.strPlayer}</div>
-                        <div class="mini-card-team">⚽ ${team}</div>
+                        <div class="mini-card-team">⚡ ${type}</div>
                     </div>
                 `;
                 
@@ -659,7 +723,7 @@
         
         function showSwapMessage(playerName) {
             const feedback = document.getElementById('feedback');
-            feedback.textContent = `🔄 Bytta ut ein spiller med ${playerName}!`;
+            feedback.textContent = `🔄 Bytta ut ein Pokémon med ${playerName}!`;
             feedback.className = 'feedback correct';
             
             setTimeout(() => {
@@ -669,7 +733,7 @@
         
         function showTeamComplete() {
             const feedback = document.getElementById('feedback');
-            feedback.textContent = '🎉 GRATULERER! Du har eit fullt lag! 🎉';
+            feedback.textContent = '🎉 GRATULERER! Du har ein full Pokémon-samling! 🎉';
             feedback.className = 'feedback correct';
             
             setTimeout(() => {
@@ -684,15 +748,15 @@
             document.getElementById('setupContainer').classList.remove('hidden');
             document.getElementById('feedback').textContent = '';
             
-            // BEVAR samla fotballkort - ikke tøm collectedPlayers eller usedPlayerIndices
+            // BEVAR samla Pokémonkort - ikke tøm collectedPlayers eller usedPlayerIndices
             // Vis eksisterande kort hvis vi har samla nokon
             if (collectedPlayers.length > 0) {
                 updateCardsDisplay();
             } else {
                 document.getElementById('collectedCards').innerHTML = `
                     <div class="empty-state">
-                        <div class="empty-state-icon">⚽</div>
-                        <p>Løys oppgåver for å samle fotballkort!</p>
+                        <div class="empty-state-icon">⚡</div>
+                        <p>Løys oppgåver for å samle Pokémonkort!</p>
                     </div>
                 `;
             }
