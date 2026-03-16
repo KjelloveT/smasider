@@ -456,25 +456,25 @@
         </header>
 
         <section class="categories">
-            <div class="category-card" onclick="navigateToCategory('spill')">
+            <div class="category-card">
                 <span class="category-icon">🎮</span>
                 <h2 class="category-title">Spel</h2>
                 <p class="category-description">Morsame og lærerike spel som trenar ulike ferdigheiter</p>
                 <ul class="category-items">
-                    <li>🦫 Capybara Gangespel - Øv på ganetabellar</li>
-                    <li>⚽ Mattespel - Løys oppgåver og vinn fotballkort</li>
-                    <li>🏃 RunDash - Løpespel med matteoppgåver og dobbelhoppe</li>
+                    <li><a href="gangespill/index.html" style="color: inherit; text-decoration: none;">🦫 Capybara Gangespel - Øv på ganetabellar</a></li>
+                    <li><a href="mattespill/index.html" style="color: inherit; text-decoration: none;">⚽ Mattespel - Løys oppgåver og vinn fotballkort</a></li>
+                    <li><a href="rundash/index.html" style="color: inherit; text-decoration: none;">🏃 RunDash - Løpespel med matteoppgåver og dobbelhoppe</a></li>
                     <li>🧮 Fleire spel kjem snart...</li>
                 </ul>
             </div>
 
-            <div class="category-card" onclick="navigateToCategory('verktøy')">
+            <div class="category-card">
                 <span class="category-icon">🛠️</span>
                 <h2 class="category-title">Verktøy</h2>
                 <p class="category-description">Praktiske verktøy for kreativitet og læring</p>
                 <ul class="category-items">
-                    <li>📸 Fotocollage - Lag vakre bilete-collager</li>
-                    <li>🎨 Fotocolours - Rediger bilete med fargetonetilpasning</li>
+                    <li><a href="fotocollage/fotocollage.html" style="color: inherit; text-decoration: none;">📸 Fotocollage - Lag vakre bilete-collager</a></li>
+                    <li><a href="fotocolours/index.html" style="color: inherit; text-decoration: none;">🎨 Fotocolours - Rediger bilete med fargetonetilpasning</a></li>
                     <li>🎨 Fleire verktøy kjem snart...</li>
                 </ul>
             </div>
@@ -535,85 +535,6 @@
                 backButton.classList.remove('show');
             } else {
                 backButton.classList.add('show');
-            }
-        }
-
-        function navigateToCategory(category) {
-            if (category === 'spill') {
-                showMenu('spill');
-            } else if (category === 'verktøy') {
-                showMenu('verktøy');
-            }
-        }
-
-        function showMenu(type) {
-            const modal = document.createElement('div');
-            modal.className = 'menu-modal';
-            modal.innerHTML = `
-                <div class="menu-content">
-                    <h3>Velg ${type === 'spill' ? 'eitt spel' : 'eitt verktøy'}</h3>
-                    <div class="menu-items">
-                        ${type === 'spill' ? `
-                            <button class="menu-item" onclick="navigateToApp('gangespill/index.html')">
-                                <span class="menu-icon">🦫</span>
-                                <div class="menu-text">
-                                    <div class="menu-title">Capybara Gangespel</div>
-                                    <div class="menu-desc">Øv på ganetabellar</div>
-                                </div>
-                            </button>
-                            <button class="menu-item" onclick="navigateToApp('mattespill/index.html')">
-                                <span class="menu-icon">⚽</span>
-                                <div class="menu-text">
-                                    <div class="menu-title">Mattespel</div>
-                                    <div class="menu-desc">Løys oppgåver og vinn fotballkort</div>
-                                </div>
-                            </button>
-                            <button class="menu-item" onclick="navigateToApp('rundash/index.html')">
-                                <span class="menu-icon">🏃</span>
-                                <div class="menu-text">
-                                    <div class="menu-title">RunDash</div>
-                                    <div class="menu-desc">Løpespel med matteoppgåver og dobbelhoppe</div>
-                                </div>
-                            </button>
-                        ` : `
-                            <button class="menu-item" onclick="navigateToApp('fotocollage/fotocollage.html')">
-                                <span class="menu-icon">📸</span>
-                                <div class="menu-text">
-                                    <div class="menu-title">Fotocollage</div>
-                                    <div class="menu-desc">Lag vakre bilete-collager</div>
-                                </div>
-                            </button>
-                            <button class="menu-item" onclick="navigateToApp('fotocolours/index.html')">
-                                <span class="menu-icon">🎨</span>
-                                <div class="menu-text">
-                                    <div class="menu-title">Fotocolours</div>
-                                    <div class="menu-desc">Rediger bilete med fargetonetilpasning</div>
-                                </div>
-                            </button>
-                        `}
-                    </div>
-                    <button class="menu-close" onclick="closeMenu()">✕</button>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-            
-            // Close modal when clicking outside
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    closeMenu();
-                }
-            });
-        }
-
-        function navigateToApp(url) {
-            window.location.href = url;
-        }
-
-        function closeMenu() {
-            const modal = document.querySelector('.menu-modal');
-            if (modal) {
-                modal.remove();
             }
         }
 
