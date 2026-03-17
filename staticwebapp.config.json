@@ -19,6 +19,10 @@
     {
       "route": "/fotocolours/*",
       "serve": "/fotocolours/index.html"
+    },
+    {
+      "route": "/rundash/*",
+      "serve": "/rundash/index.html"
     }
   ]
 }
