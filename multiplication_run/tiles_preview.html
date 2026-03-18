@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brown Tiles Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #2c2222;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+        .tile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tile-item {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .tile-image {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 10px;
+            background: #444;
+            border: 1px solid #666;
+        }
+        .tile-name {
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        .tile-coords {
+            font-size: 10px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <h1>Brown Tiles Preview</h1>
+    <div class="tile-grid" id="tileGrid"></div>
+
+    <script>
+        const tiles = [
+            {name: "tileBrown_01.png", x: 325, y: 65},
+            {name: "tileBrown_02.png", x: 325, y: 0},
+            {name: "tileBrown_03.png", x: 260, y: 931},
+            {name: "tileBrown_04.png", x: 260, y: 866},
+            {name: "tileBrown_05.png", x: 260, y: 812},
+            {name: "tileBrown_06.png", x: 260, y: 758},
+            {name: "tileBrown_07.png", x: 260, y: 704},
+            {name: "tileBrown_08.png", x: 260, y: 650},
+            {name: "tileBrown_09.png", x: 260, y: 585},
+            {name: "tileBrown_10.png", x: 260, y: 520},
+            {name: "tileBrown_11.png", x: 260, y: 455},
+            {name: "tileBrown_12.png", x: 260, y: 390},
+            {name: "tileBrown_13.png", x: 260, y: 325},
+            {name: "tileBrown_14.png", x: 260, y: 260},
+            {name: "tileBrown_15.png", x: 260, y: 195},
+            {name: "tileBrown_16.png", x: 260, y: 130},
+            {name: "tileBrown_17.png", x: 260, y: 65},
+            {name: "tileBrown_18.png", x: 260, y: 0},
+            {name: "tileBrown_19.png", x: 195, y: 947},
+            {name: "tileBrown_20.png", x: 195, y: 882},
+            {name: "tileBrown_21.png", x: 195, y: 817},
+            {name: "tileBrown_22.png", x: 195, y: 752},
+            {name: "tileBrown_23.png", x: 195, y: 687},
+            {name: "tileBrown_24.png", x: 195, y: 622}
+        ];
+
+        const grid = document.getElementById('tileGrid');
+        const img = new Image();
+        img.src = 'resources/Spritesheet/spritesheet_tiles.png';
+        
+        img.onload = function() {
+            tiles.forEach(tile => {
+                const item = document.createElement('div');
+                item.className = 'tile-item';
+                
+                const canvas = document.createElement('canvas');
+                canvas.className = 'tile-image';
+                canvas.width = 64;
+                canvas.height = 64;
+                
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, tile.x, tile.y, 64, 64, 0, 0, 64, 64);
+                
+                const name = document.createElement('div');
+                name.className = 'tile-name';
+                name.textContent = tile.name.replace('.png', '');
+                
+                const coords = document.createElement('div');
+                coords.className = 'tile-coords';
+                coords.textContent = `x:${tile.x} y:${tile.y}`;
+                
+                item.appendChild(canvas);
+                item.appendChild(name);
+                item.appendChild(coords);
+                grid.appendChild(item);
+            });
+        };
+    </script>
+</body>
+</html>

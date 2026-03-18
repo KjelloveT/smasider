@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rettslause Raud</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            touch-action: none; /* Forhindrer zoom og scroll på mobil */
+        }
+
+        body {
+            font-family: 'Calibri', 'Inter', sans-serif;
+            background: #87CEEB url('resources/background.png') no-repeat center center;
+            background-size: cover;
+            color: #fff;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        canvas {
+            display: none; /* Skjult i starten for å vise bakgrunnen */
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background-color: #a0d8ef;
+        }
+
+        /* UI Overlay */
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* La klikk gå gjennom til canvas der det ikke er knapper */
+        }
+
+        /* Startskjerm / Meny */
+        #start-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(20, 20, 20, 0.85); /* Mørkegrå nesten svart obsidian */
+            backdrop-filter: blur(10px); /* Glassmorphism */
+            padding: 40px 30px;
+            border-radius: 32px; /* Samme radius som en rund karakter */
+            border: 2px solid rgba(255, 60, 0, 0.6);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 20px rgba(255, 60, 0, 0.5), inset 0 0 15px rgba(255, 100, 0, 0.2); /* Neon/ild glød */
+            text-align: center;
+            pointer-events: auto;
+            width: 90%;
+            max-width: 500px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: none;
+            color: #e2e8f0;
+        }
+
+        h1 {
+            color: #ff5722;
+            margin-bottom: 25px;
+            font-size: 3.5rem;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(255, 87, 34, 0.8), 0 0 20px rgba(255, 87, 34, 0.4);
+            letter-spacing: 2px;
+        }
+
+        .settings-group {
+            margin-bottom: 20px;
+            text-align: left;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .settings-group h3 {
+            margin-bottom: 12px;
+            color: #fca311;
+            font-size: 1.5rem;
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .toggle-group-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .toggle-group-row .option-btn {
+            flex: 1;
+            padding: 10px 0;
+            font-size: 1.2rem;
+            min-width: 40px;
+        }
+
+        .option-btn {
+            background: #4a4a4a;
+            color: #e2e8f0;
+            border: 2px solid #333;
+            padding: 10px 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Calibri', 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.2s;
+            text-align: center;
+            user-select: none;
+        }
+
+        .option-btn.active {
+            background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+            color: white;
+            border: 2px solid rgba(255, 60, 0, 0.6);
+            box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .option-btn:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        button.start-btn {
+            background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.8rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Bangers', cursive;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.5), 0 0 20px rgba(255, 152, 0, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        button.start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 87, 34, 0.7), 0 0 30px rgba(255, 152, 0, 0.6);
+        }
+
+        /* Home Button */
+        #home-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(5px);
+            color: white;
+            text-decoration: none;
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 87, 34, 0.6);
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.4);
+            z-index: 100;
+            pointer-events: auto;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #home-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 87, 34, 0.8);
+        }
+
+        /* In-game UI */
+        #hud {
+            display: none;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            flex-direction: row;
+            gap: 30px;
+            padding: 15px 40px;
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 87, 34, 0.6);
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8), inset 0 0 15px rgba(255, 87, 34, 0.2);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            z-index: 10;
+            align-items: center;
+        }
+        
+        #lives-display, #score-display {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        #math-problem-container {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 20px 50px;
+            border-radius: 20px;
+            border: 3px solid rgba(255, 152, 0, 0.8);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(255, 152, 0, 0.6), inset 0 0 20px rgba(255, 152, 0, 0.3);
+            text-align: center;
+            display: none;
+            animation: slideDownPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            z-index: 10;
+        }
+
+        @keyframes slideDownPop {
+            0% { transform: translate(-50%, -150px) scale(0.5); opacity: 0; }
+            50% { transform: translate(-50%, 20px) scale(1.1); opacity: 1; }
+            75% { transform: translate(-50%, -10px) scale(0.95); opacity: 1; }
+            100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
+        }
+
+        #math-problem {
+            font-family: 'Bangers', cursive;
+            font-size: 5rem;
+            color: #ffffff;
+            text-shadow: 3px 3px 0px #ff5722, -1px -1px 0 #ff9800, 1px -1px 0 #ff9800, -1px 1px 0 #ff9800, 1px 1px 0 #ff9800;
+            letter-spacing: 2px;
+            margin: 0;
+            line-height: 1;
+        }
+
+        #point-loss-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            font-weight: bold;
+            color: red;
+            text-shadow: 2px 2px 0px white;
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+            pointer-events: none;
+        }
+
+        /* Touch Controls */
+        #touch-controls {
+            display: none;
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            pointer-events: none;
+        }
+
+        .touch-btn {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: white;
+            pointer-events: auto;
+            user-select: none;
+        }
+
+        .touch-btn:active {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        #btn-left { left: 20px; bottom: 20px; }
+        #btn-right { left: 120px; bottom: 20px; }
+        #btn-duck { right: 120px; bottom: 20px; }
+        #btn-jump { right: 20px; bottom: 20px; }
+
+        @media (max-width: 1024px) {
+            #touch-controls {
+                display: block; /* Vises på nettbrett og mobil */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<a href="../index.html" id="home-btn">🏠</a>
+
+<div id="game-container">
+    <canvas id="gameCanvas" width="1280" height="720"></canvas>
+    
+    <div id="ui-layer">
+        <div id="hud" style="display: none;">
+            <div id="lives-display">❤️❤️❤️</div>
+            <div id="score-display">Poeng: 0</div>
+            <div id="powerup-display"></div>
+        </div>
+
+        <div id="math-problem-container">
+            <div id="math-problem"></div>
+        </div>
+        <div id="point-loss-indicator">-100!</div>
+
+        <div id="start-screen">
+            <h1>Rettslause Raud</h1>
+            
+            <div class="settings-group">
+                <h3>Vanskegrad</h3>
+                <div class="toggle-group-row" id="difficulty-group">
+                    <div class="option-btn" data-val="1">1</div>
+                    <div class="option-btn" data-val="2">2</div>
+                    <div class="option-btn active" data-val="3">3</div>
+                    <div class="option-btn" data-val="4">4</div>
+                    <div class="option-btn" data-val="5">5</div>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <h3>Reknearter</h3>
+                <div class="toggle-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" id="operators-group">
+                    <div class="option-btn active" data-op="add">➕ Addisjon</div>
+                    <div class="option-btn active" data-op="sub">➖ Subtraksjon</div>
+                    <div class="option-btn active" data-op="mul">✖️ Multiplikasjon</div>
+                    <div class="option-btn active" data-op="div">➗ Divisjon</div>
+                </div>
+            </div>
+
+            <button class="start-btn" onclick="startGame()">Start Spelet!</button>
+        </div>
+
+        <div id="game-over-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); flex-direction: column; justify-content: center; align-items: center; z-index: 50; pointer-events: auto;">
+            <h1 style="color: #ff5722; font-family: 'Orbitron', sans-serif; font-size: 64px; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255,87,34,0.5);">SPELET ER SLUTT</h1>
+            <h2 style="color: white; font-family: 'Bangers', sans-serif; font-size: 48px; margin-bottom: 40px;">Poeng: <span id="final-score" style="color: #4ade80;">0</span></h2>
+            <button class="start-btn" onclick="document.getElementById('game-over-screen').style.display='none'; startGame()">Prøv Igjen</button>
+        </div>
+
+        <div id="touch-controls">
+            <div class="touch-btn" id="btn-left">◀</div>
+            <div class="touch-btn" id="btn-right">▶</div>
+            <div class="touch-btn" id="btn-duck">▼</div>
+            <div class="touch-btn" id="btn-jump">▲</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Button selection logic
+    document.querySelectorAll('#difficulty-group .option-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('#difficulty-group .option-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+        });
+    });
+
+    document.querySelectorAll('#operators-group .option-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.target.classList.toggle('active');
+        });
+    });
+
+    // Delay showing the start screen
+    window.onload = () => {
+        setTimeout(() => {
+            const startScreen = document.getElementById('start-screen');
+            startScreen.style.display = 'block';
+            // slight delay to allow display:block to apply before changing opacity
+            setTimeout(() => {
+                startScreen.style.opacity = '1';
+            }, 50);
+        }, 1500); // 1.5 seconds delay
+    };
+</script>
+<script src="game.js"></script>
+</body>
+</html>
