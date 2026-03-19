@@ -6,7 +6,7 @@
     <title>Rettslause Raud</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@700;900&family=Lilita+One&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,8 +17,7 @@
 
         body {
             font-family: 'Calibri', 'Inter', sans-serif;
-            background: #87CEEB url('resources/background.png') no-repeat center center;
-            background-size: cover;
+            background: #87CEEB;
             color: #fff;
             overflow: hidden;
             width: 100vw;
@@ -30,7 +29,8 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            background: #2a2a2a; /* Fallback if background image fails */
+            background: #87CEEB url('resources/background.png') no-repeat center center; /* Fallback if background image fails */
+            background-size: cover;
         }
 
         canvas {
@@ -38,6 +38,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover; /* Keeps aspect ratio while covering screen */
+            object-position: bottom; /* Keep the ground visible, crop the top sky instead of both */
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             background-color: #a0d8ef;
         }
@@ -209,6 +210,7 @@
             text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
             z-index: 100;
             pointer-events: none;
+            flex-direction: row-reverse; /* Reverses the flex container to put score left, lives right */
         }
 
         #lives-display, #score-display {
@@ -240,11 +242,11 @@
         }
 
         #math-problem {
-            font-family: 'Bangers', cursive;
+            font-family: 'Lilita One', sans-serif;
             font-size: 5rem;
             color: #ffffff;
             text-shadow: 3px 3px 0px #ff5722, -1px -1px 0 #ff9800, 1px -1px 0 #ff9800, -1px 1px 0 #ff9800, 1px 1px 0 #ff9800;
-            letter-spacing: 2px;
+            letter-spacing: 5px; /* Give some extra space between numbers to avoid blending */
             margin: 0;
             line-height: 1;
         }
