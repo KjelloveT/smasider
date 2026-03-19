@@ -934,15 +934,59 @@ window.addEventListener('keydown', e => {
     keys[e.key] = true;
     
     // Handle jumping on keypress to allow double jump
-    if (e.key === 'ArrowUp') {
-        if (!player.jumping || player.jumpsLeft > 0) {
+    if ((e.key === 'ArrowUp' || e.key === ' ') && player.jumpsLeft > 0) {
+        player.velocityY = -15;
+        player.jumping = true;
+        player.jumpsLeft--;
+        keys['ArrowUp'] = false; // Prevent holding jump
+        keys[' '] = false;
+    }
+});
+
+window.addEventListener('keyup', e => {
+    keys[e.key] = false;
+});
+
+// Touch controls handling
+function setupTouchControls() {
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
+    const btnJump = document.getElementById('btn-jump');
+    const btnDuck = document.getElementById('btn-duck');
+    
+    if(!btnLeft) return;
+
+    // Prevent default touch behaviors like scrolling
+    const preventDefault = (e) => e.preventDefault();
+    
+    // Left button
+    btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); keys['ArrowLeft'] = true; }, {passive: false});
+    btnLeft.addEventListener('touchend', (e) => { e.preventDefault(); keys['ArrowLeft'] = false; }, {passive: false});
+    btnLeft.addEventListener('touchcancel', (e) => { e.preventDefault(); keys['ArrowLeft'] = false; }, {passive: false});
+
+    // Right button
+    btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); keys['ArrowRight'] = true; }, {passive: false});
+    btnRight.addEventListener('touchend', (e) => { e.preventDefault(); keys['ArrowRight'] = false; }, {passive: false});
+    btnRight.addEventListener('touchcancel', (e) => { e.preventDefault(); keys['ArrowRight'] = false; }, {passive: false});
+
+    // Duck button
+    btnDuck.addEventListener('touchstart', (e) => { e.preventDefault(); keys['ArrowDown'] = true; }, {passive: false});
+    btnDuck.addEventListener('touchend', (e) => { e.preventDefault(); keys['ArrowDown'] = false; }, {passive: false});
+    btnDuck.addEventListener('touchcancel', (e) => { e.preventDefault(); keys['ArrowDown'] = false; }, {passive: false});
+
+    // Jump button
+    btnJump.addEventListener('touchstart', (e) => {
+        e.preventDefault(); 
+        if (player.jumpsLeft > 0) {
             player.velocityY = -15;
             player.jumping = true;
             player.jumpsLeft--;
         }
-    }
-});
-window.addEventListener('keyup', e => keys[e.key] = false);
+    }, {passive: false});
+}
+
+// Call setup once DOM is ready
+document.addEventListener('DOMContentLoaded', setupTouchControls);
 
 function gameLoop() {
     update();

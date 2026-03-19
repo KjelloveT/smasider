@@ -306,6 +306,39 @@
             #touch-controls {
                 display: block; /* Vises på nettbrett og mobil */
             }
+            #hud {
+                bottom: 120px; /* Flytt HUD opp over touch-knappene */
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+            #score-display {
+                font-size: 1.5rem;
+            }
+            #lives-display {
+                font-size: 1.2rem;
+            }
+            #math-problem {
+                font-size: 3rem; /* Mindre mattespørsmål på mobil */
+            }
+        }
+        
+        @media (max-width: 600px) {
+            #math-problem {
+                font-size: 2.5rem; /* Enda mindre på små mobiler */
+            }
+            .touch-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            #btn-left { left: 10px; bottom: 10px; }
+            #btn-right { left: 80px; bottom: 10px; }
+            #btn-duck { right: 80px; bottom: 10px; }
+            #btn-jump { right: 10px; bottom: 10px; }
+            #hud {
+                bottom: 80px;
+            }
         }
     </style>
 </head>
