@@ -27,15 +27,17 @@
 
         #game-container {
             position: relative;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: #2a2a2a; /* Fallback if background image fails */
         }
 
         canvas {
             display: none; /* Skjult i starten for å vise bakgrunnen */
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover; /* Keeps aspect ratio while covering screen */
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             background-color: #a0d8ef;
         }
@@ -196,47 +198,41 @@
         #hud {
             display: none;
             position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: auto;
-            flex-direction: row;
-            gap: 30px;
-            padding: 15px 40px;
-            background: rgba(20, 20, 20, 0.85);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 87, 34, 0.6);
-            border-radius: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.8), inset 0 0 15px rgba(255, 87, 34, 0.2);
-            color: white;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 24px;
-            z-index: 10;
-            align-items: center;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            z-index: 100;
+            pointer-events: none;
         }
-        
+
         #lives-display, #score-display {
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         #math-problem-container {
             position: absolute;
-            top: 40px;
+            top: 80px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(20, 20, 20, 0.85);
-            backdrop-filter: blur(10px);
-            padding: 20px 50px;
-            border-radius: 20px;
-            border: 3px solid rgba(255, 152, 0, 0.8);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(255, 152, 0, 0.6), inset 0 0 20px rgba(255, 152, 0, 0.3);
-            text-align: center;
             display: none;
-            animation: slideDownPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            z-index: 10;
+            z-index: 100;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 30px;
+            border-radius: 20px;
+            border: 3px solid #4ade80;
+            box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+            animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
         }
 
-        @keyframes slideDownPop {
+        @keyframes bounceIn {
             0% { transform: translate(-50%, -150px) scale(0.5); opacity: 0; }
             50% { transform: translate(-50%, 20px) scale(1.1); opacity: 1; }
             75% { transform: translate(-50%, -10px) scale(0.95); opacity: 1; }
@@ -308,10 +304,8 @@
                 display: block; /* Vises på nettbrett og mobil */
             }
             #hud {
-                bottom: 120px; /* Flytt HUD opp over touch-knappene */
-                flex-direction: column;
-                align-items: center;
-                gap: 5px;
+                top: 10px; /* Flytt HUD opp */
+                flex-direction: row;
             }
             #score-display {
                 font-size: 1.5rem;
@@ -321,6 +315,10 @@
             }
             #math-problem {
                 font-size: 3rem; /* Mindre mattespørsmål på mobil */
+            }
+            #math-problem-container {
+                top: 60px;
+                padding: 5px 20px;
             }
         }
         
@@ -342,6 +340,9 @@
             #math-problem {
                 font-size: 2.5rem; /* Enda mindre på små mobiler */
             }
+            #math-problem-container {
+                top: 50px;
+            }
             .touch-btn {
                 width: 60px;
                 height: 60px;
@@ -351,13 +352,62 @@
             #btn-right { left: 80px; bottom: 10px; }
             #btn-duck { right: 80px; bottom: 10px; }
             #btn-jump { right: 10px; bottom: 10px; }
-            #hud {
-                bottom: 80px;
+        }
+
+        /* Portrait Warning Overlay */
+        #portrait-warning {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            color: white;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: 'Bangers', cursive;
+        }
+
+        #portrait-warning svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            fill: #fca311;
+            animation: rotatePhone 2s infinite ease-in-out;
+        }
+
+        @keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(-90deg); }
+        }
+
+        #portrait-warning h2 {
+            font-size: 2rem;
+            margin: 0 20px;
+            letter-spacing: 2px;
+        }
+
+        @media (orientation: portrait) and (max-width: 900px) {
+            #portrait-warning {
+                display: flex;
             }
         }
     </style>
 </head>
 <body>
+
+<!-- Portrait warning layer -->
+<div id="portrait-warning">
+    <svg viewBox="0 0 24 24">
+        <path d="M16 1H8C6.34 1 5 2.34 5 4v16c0 1.66 1.34 3 3 3h8c1.66 0 3-1.34 3-3V4c0-1.66-1.34-3-3-3zm-4 21c-.83 0-1.5-.67-1.5-1.5S11.17 19 12 19s1.5.67 1.5 1.5S12.83 22 12 22zm5.25-4H6.75V4h10.5v14z"/>
+    </svg>
+    <h2>Vennligst roter skjermen din!</h2>
+</div>
 
 <a href="../index.html" id="home-btn">🏠</a>
 

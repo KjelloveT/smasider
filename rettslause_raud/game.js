@@ -1,9 +1,15 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
+// Fixed internal resolution for consistent gameplay speed across all devices
+const GAME_WIDTH = 1280;
+const GAME_HEIGHT = 720;
+canvas.width = GAME_WIDTH;
+canvas.height = GAME_HEIGHT;
+
 function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // We let CSS handle the visual scaling of the canvas to fit the screen
+    // The internal resolution remains 1280x720 so logic and speed stays consistent
 }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
