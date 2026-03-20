@@ -43,6 +43,14 @@
             background-color: #a0d8ef;
         }
 
+        /* Sikre at canvas behandler riktig hastighet på mobil */
+        @media (max-width: 1024px) {
+            canvas {
+                image-rendering: crisp-edges;
+                image-rendering: pixelated;
+            }
+        }
+
         /* UI Overlay */
         #ui-layer {
             position: absolute;
@@ -378,41 +386,77 @@
         /* Ekstra justeringar for små horisontale skjermar */
         @media (max-height: 500px) and (orientation: landscape) and (max-width: 900px) {
             #start-screen {
-                padding: 10px;
-                max-height: 80vh;
-                overflow-y: auto;
+                padding: 8px;
+                max-height: 75vh;
+                overflow-y: auto; /* Sikre scroll */
+                -webkit-overflow-scrolling: touch; /* bedre scroll på iOS */
             }
             #start-screen h1 {
-                font-size: clamp(1.5rem, 4vw, 2rem);
-                margin-bottom: 10px;
+                font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+                margin-bottom: 8px;
             }
             .settings-group {
-                margin-bottom: 8px;
-                padding: 8px;
+                margin-bottom: 6px;
+                padding: 6px;
             }
             .settings-group h3 {
-                font-size: 0.9rem;
-                margin-bottom: 6px;
+                font-size: 0.8rem;
+                margin-bottom: 4px;
             }
             .option-btn {
-                font-size: 0.8rem;
-                padding: 6px 8px;
+                font-size: 0.75rem;
+                padding: 5px 6px;
             }
             .toggle-group-row .option-btn {
-                font-size: 0.9rem;
-                padding: 6px 0;
+                font-size: 0.8rem;
+                padding: 5px 0;
+                min-width: 30px;
             }
             button.start-btn {
-                font-size: 1.2rem;
-                padding: 10px 25px;
-                margin-top: 8px;
+                font-size: 1rem;
+                padding: 8px 20px;
+                margin-top: 6px;
             }
             #home-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 1.5rem;
-                top: 10px;
-                left: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                top: 8px;
+                left: 8px;
+            }
+        }
+
+        /* Enda mindre for ekstra små skjermar */
+        @media (max-height: 400px) and (orientation: landscape) and (max-width: 768px) {
+            #start-screen {
+                padding: 5px;
+                max-height: 70vh;
+            }
+            #start-screen h1 {
+                font-size: clamp(1rem, 3vw, 1.5rem);
+                margin-bottom: 5px;
+            }
+            .settings-group {
+                margin-bottom: 4px;
+                padding: 4px;
+            }
+            .settings-group h3 {
+                font-size: 0.7rem;
+                margin-bottom: 3px;
+            }
+            .option-btn {
+                font-size: 0.65rem;
+                padding: 4px 5px;
+            }
+            .toggle-group-row .option-btn {
+                font-size: 0.7rem;
+                padding: 4px 0;
+                min-width: 25px;
+            }
+            button.start-btn {
+                font-size: 0.9rem;
+                padding: 6px 15px;
+                margin-top: 4px;
             }
         }
 
