@@ -248,10 +248,10 @@ function generatePlatformChunk(isStart = false) {
             });
         }
         
-        // Generate Flying Islands (6 vertical layers)
-        for (let layer = 1; layer <= 6; layer++) {
+        // Generate Flying Islands (4 vertical layers to leave room at the top)
+        for (let layer = 1; layer <= 4; layer++) {
             let currentY = heightLevel - (layer * 110) + (Math.random() * 30 - 15);
-            if (currentY < 50) continue; // Keep below top edge
+            if (currentY < 100) continue; // Keep well below top edge
             
             let islandX = pX + Math.random() * 200;
             
@@ -284,8 +284,8 @@ function generatePlatformChunk(isStart = false) {
                         };
                         platforms.push(island);
                         
-                        // Spawn enemy on island
-                        let islandSpawnChance = 0.375 * enemySpawnMultiplier;
+                        // Spawn enemy on island (Avoid spawning enemies on the highest layer 4 to keep it safe)
+                        let islandSpawnChance = (layer < 4) ? (0.375 * enemySpawnMultiplier) : 0;
                         if (Math.random() < islandSpawnChance) { 
                             const eType = Math.random() > 0.4 ? 'patroller' : (Math.random() > 0.5 ? 'spike' : 'jumper');
                             obstacles.push({
@@ -301,8 +301,8 @@ function generatePlatformChunk(isStart = false) {
                             });
                         }
                         
-                        // Spawn powerup or coin on island
-                        if (Math.random() < 0.05) { // Very low chance
+                        // Spawn powerup or coin on island (Avoid on layer 4)
+                        if (layer < 4 && Math.random() < 0.05) { // Very low chance
                             let type = 'coin';
                             if (Math.random() < 0.2 && frameCount - lastHeartSpawn > 3600) {
                                 type = 'heart';
