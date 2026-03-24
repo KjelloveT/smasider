@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Kludre Klodrian – Matespel</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif;touch-action:none;display:flex;align-items:center;justify-content:center;width:100vw;height:100vh}
+#gameCanvas{display:block}
+.screen{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center}
+#menuScreen{background:url('resources/background.png') center/cover no-repeat}
+#statsScreen{background:rgba(0,10,25,0.96);display:none}
+.card{background:rgba(0,20,60,0.88);backdrop-filter:blur(12px);border:2px solid rgba(100,200,255,0.4);border-radius:20px;padding:24px 28px;max-width:400px;width:92%;color:#fff;text-align:center}
+.card h1{font-size:clamp(1.4rem,4vw,2rem);color:#7ef7ff;text-shadow:0 0 20px rgba(100,200,255,.7);margin-bottom:2px}
+.card .sub{font-size:.85rem;color:#aaddff;margin-bottom:18px}
+.slbl{font-size:.72rem;color:#7ef7ff;text-transform:uppercase;letter-spacing:1.5px;margin:10px 0 6px;text-align:left}
+.dgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:6px}
+.dbtn{background:rgba(100,200,255,.08);border:2px solid rgba(100,200,255,.25);border-radius:8px;color:#cce8ff;padding:8px 4px;cursor:pointer;font-size:.8rem;line-height:1.3;transition:all .15s}
+.dbtn.active{background:rgba(100,200,255,.28);border-color:#7ef7ff;color:#7ef7ff;font-weight:700}
+.dbtn:hover{background:rgba(100,200,255,.18)}
+.ogrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:6px}
+.obtn{background:rgba(255,200,80,.08);border:2px solid rgba(255,200,80,.25);border-radius:8px;color:#ffe8aa;padding:10px;cursor:pointer;font-size:1.25rem;font-weight:700;transition:all .15s}
+.obtn.active{background:rgba(255,200,80,.28);border-color:#ffdd55;color:#ffdd55}
+.obtn:hover{background:rgba(255,200,80,.18)}
+.sbtn{width:100%;background:linear-gradient(135deg,#0099ff,#0044cc);border:none;border-radius:12px;color:#fff;font-size:1.05rem;font-weight:700;padding:13px;cursor:pointer;margin-top:14px;letter-spacing:2px;text-transform:uppercase;transition:all .18s;box-shadow:0 4px 16px rgba(0,100,255,.4)}
+.sbtn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,100,255,.5)}
+.scard{background:rgba(0,25,70,.92);border:2px solid rgba(100,200,255,.4);border-radius:20px;padding:26px 28px;max-width:420px;width:92%;color:#fff;text-align:center}
+.scard h2{font-size:clamp(1.2rem,3.5vw,1.7rem);color:#7ef7ff;margin-bottom:4px}
+.bscore{font-size:clamp(2.5rem,8vw,3.5rem);font-weight:800;color:#ffdd55;line-height:1;margin:6px 0 12px}
+.hsbadge{background:linear-gradient(135deg,#ff9900,#ff5500);border-radius:20px;padding:4px 14px;font-size:.82rem;font-weight:700;display:inline-block;margin-bottom:10px}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 16px;text-align:left}
+.sbox{background:rgba(100,200,255,.07);border:1px solid rgba(100,200,255,.15);border-radius:8px;padding:8px 12px}
+.sbox .lbl{font-size:.7rem;color:#88bbdd}
+.sbox .val{font-size:1.25rem;font-weight:700}
+.sbtns{display:flex;gap:10px}
+.sbtns button{flex:1;padding:12px;border-radius:10px;border:none;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .18s}
+#btnPlayAgain{background:linear-gradient(135deg,#0099ff,#0044cc);color:#fff}
+#btnDownload{background:rgba(100,200,255,.12);border:2px solid rgba(100,200,255,.3)!important;color:#7ef7ff}
+#dpad{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:10px;z-index:9}
+.dpbtn{width:60px;height:60px;background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.28);border-radius:50%;color:#fff;font-size:1.6rem;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none}
+#rotateMsg{position:fixed;inset:0;z-index:100;background:#000d1e;color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;font-size:1.1rem}
+#rotateMsg .ri{font-size:4rem;margin-bottom:14px;animation:spin90 2s ease-in-out infinite}
+@keyframes spin90{0%,40%{transform:rotate(0)}60%,100%{transform:rotate(90deg)}}
+</style>
+</head>
+<body>
+<div id="rotateMsg" class="screen"><div class="ri">📱</div><p>Snu eininga di til <strong>liggjande</strong> format for å spele</p></div>
+<div id="menuScreen" class="screen">
+  <div class="card">
+    <h1>🐡 Kludre Klodrian</h1>
+    <p class="sub">Matespel med pufferfisk</p>
+    <div class="slbl">Vanskelegheitsgrad</div>
+    <div class="dgrid">
+      <button class="dbtn" data-d="1">1<br><small>2.kl</small></button>
+      <button class="dbtn active" data-d="2">2<br><small>4.kl</small></button>
+      <button class="dbtn" data-d="3">3<br><small>6.kl</small></button>
+      <button class="dbtn" data-d="4">4<br><small>8.kl</small></button>
+      <button class="dbtn" data-d="5">5<br><small>10.kl</small></button>
+    </div>
+    <div class="slbl">Reknearter</div>
+    <div class="ogrid">
+      <button class="obtn active" data-op="+">+</button>
+      <button class="obtn active" data-op="−">−</button>
+      <button class="obtn" data-op="×">×</button>
+      <button class="obtn" data-op="÷">÷</button>
+    </div>
+    <button class="sbtn" id="btnStart">Start spel 🌊</button>
+  </div>
+</div>
+<div id="statsScreen" class="screen">
+  <div class="scard" id="statsCard">
+    <h2>🏆 Spelet er ferdig!</h2>
+    <div id="hsBadge" class="hsbadge" style="display:none">⭐ Ny rekord!</div>
+    <div class="bscore" id="sScore">0</div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Riktige svar</div><div class="val" id="sCorrect">0</div></div>
+      <div class="sbox"><div class="lbl">Feil svar</div><div class="val" id="sWrong">0</div></div>
+      <div class="sbox"><div class="lbl">Riktigheit</div><div class="val" id="sAcc">–</div></div>
+      <div class="sbox"><div class="lbl">Beste kombo</div><div class="val" id="sCombo">0</div></div>
+      <div class="sbox"><div class="lbl">Raskaste svar</div><div class="val" id="sFastest">–</div></div>
+      <div class="sbox"><div class="lbl">Rekord</div><div class="val" id="sHS">0</div></div>
+    </div>
+    <div class="sbtns">
+      <button id="btnPlayAgain">🔄 Spel igjen</button>
+      <button id="btnDownload">📷 Last ned</button>
+    </div>
+  </div>
+</div>
+<canvas id="gameCanvas"></canvas>
+<div id="dpad"><div class="dpbtn" id="dUp">▲</div><div class="dpbtn" id="dDown">▼</div></div>
+<script>
+// ── CONSTANTS ──────────────────────────────────────────────
+const W=800,H=450,HUD_H=72,FLOOR_H=52,LANE_COUNT=4;
+const LANE_AREA_TOP=HUD_H,LANE_AREA_H=H-HUD_H-FLOOR_H,LANE_H=LANE_AREA_H/LANE_COUNT;
+const PLAYER_X=110,FISH_SZ=62,GATE_W=82,GATE_H=60,GAME_SECS=90;
+const SPEEDS=[0,80,100,120,140,160];
+const SCORE_OK=500,SCORE_WRONG=-350,SCORE_HIT=-200,COMBO3=300,COMBO6=600;
+function laneY(l){return LANE_AREA_TOP+(l+0.5)*LANE_H;}
+
+// ── SPRITE LOOKUP ──────────────────────────────────────────
+// [sx, sy] within spritesheet-double.png (all 128x128 frames)
+const SS={
+  fish_brown:[1024,1280],fish_brown_outline:[1024,1152],
+  fish_blue:[1152,256],fish_green:[1024,1024],fish_orange:[896,1280],
+  fish_pink:[896,768],fish_red:[896,256],
+  fish_blue_skeleton:[1152,0],fish_green_skeleton:[1024,768],
+  fish_orange_skeleton:[896,1024],fish_pink_skeleton:[896,512],fish_red_skeleton:[896,0],
+  terrain_sand_top_a:[128,384],terrain_sand_top_b:[128,128],terrain_sand_top_c:[0,1408],
+  terrain_sand_top_d:[0,1152],terrain_sand_top_e:[0,896],terrain_sand_top_f:[0,640],
+  seaweed_green_a:[512,1408],seaweed_green_b:[512,1152],seaweed_green_c:[512,896],
+  seaweed_pink_a:[384,1408],seaweed_pink_b:[384,1152],seaweed_orange_a:[512,384],
+  rock_a:[640,896],rock_b:[640,640],
+  bubble_a:[1152,640],bubble_b:[1152,512],bubble_c:[1152,384],
+  bg_seaweed_a:[1280,384],bg_seaweed_b:[1280,256],bg_seaweed_c:[1280,128],bg_rock_a:[640,256],
+};
+// [sx, sy, sw, sh] within spritesheet_particles.png
+const SP={
+  pB1:[230,224,224,222],pB2:[456,448,223,222],pB3:[681,0,192,183],
+  pW1:[230,0,224,222],pW2:[456,224,223,222],pW3:[678,857,192,183],
+  pY1:[452,672,224,222],pY2:[456,0,223,222],pY3:[678,672,192,183],
+};
+const SP_KEYS=Object.keys(SP);
+const SKEL_SPS=['fish_blue_skeleton','fish_green_skeleton','fish_orange_skeleton','fish_pink_skeleton','fish_red_skeleton'];
+const DECO_SPS=['fish_blue','fish_green','fish_orange','fish_pink','fish_red'];
+const SWEED_SPS=['seaweed_green_a','seaweed_green_b','seaweed_green_c','seaweed_pink_a','seaweed_pink_b','seaweed_orange_a'];
+const ROCK_SPS=['rock_a','rock_b'];
+const SAND_SPS=['terrain_sand_top_a','terrain_sand_top_b','terrain_sand_top_c','terrain_sand_top_d','terrain_sand_top_e','terrain_sand_top_f'];
+
+// ── IMAGES ─────────────────────────────────────────────────
+const ssImg=new Image(),spImg=new Image();
+let _loaded=0;
+ssImg.onload=spImg.onload=()=>{if(++_loaded>=2)initReady();};
+ssImg.onerror=spImg.onerror=()=>{if(++_loaded>=2)initReady();};
+ssImg.src='resources/spritesheet-double.png';
+spImg.src='resources/spritesheet_particles.png';
+
+function drawSS(cx,name,dx,dy,dw,dh,flip=false){
+  const d=SS[name];if(!d)return;
+  cx.save();if(flip){cx.translate(dx+dw,dy);cx.scale(-1,1);dx=0;dy=0;}
+  cx.drawImage(ssImg,d[0],d[1],128,128,dx,dy,dw,dh);cx.restore();
+}
+function drawSP(cx,name,dx,dy,dw,dh,a=1){
+  const d=SP[name];if(!d)return;
+  cx.save();cx.globalAlpha=a;cx.drawImage(spImg,d[0],d[1],d[2],d[3],dx,dy,dw,dh);cx.restore();
+}
+
+// ── CANVAS ─────────────────────────────────────────────────
+const canvas=document.getElementById('gameCanvas');
+const ctx=canvas.getContext('2d');
+canvas.width=W;canvas.height=H;
+
+function resize(){
+  const sc=Math.min(window.innerWidth/W,window.innerHeight/H);
+  canvas.style.width=(W*sc)+'px';canvas.style.height=(H*sc)+'px';
+  const touch=navigator.maxTouchPoints>0,portrait=window.innerWidth<window.innerHeight;
+  document.getElementById('rotateMsg').style.display=(touch&&portrait&&window.innerWidth<700)?'flex':'none';
+  const dp=document.getElementById('dpad');
+  dp.style.display=(touch&&G.state==='playing'&&!portrait)?'flex':'none';
+}
+window.addEventListener('resize',resize);
+window.addEventListener('orientationchange',()=>setTimeout(resize,200));
+
+// ── HELPERS ────────────────────────────────────────────────
+function rI(lo,hi){return Math.floor(Math.random()*(hi-lo+1))+lo;}
+function rPick(a){return a[Math.floor(Math.random()*a.length)];}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=rI(0,i);[a[i],a[j]]=[a[j],a[i]];}return a;}
+function rrect(cx,x,y,w,h,r){
+  cx.beginPath();cx.moveTo(x+r,y);cx.lineTo(x+w-r,y);cx.arcTo(x+w,y,x+w,y+r,r);
+  cx.lineTo(x+w,y+h-r);cx.arcTo(x+w,y+h,x+w-r,y+h,r);
+  cx.lineTo(x+r,y+h);cx.arcTo(x,y+h,x,y+h-r,r);
+  cx.lineTo(x,y+r);cx.arcTo(x,y,x+r,y,r);cx.closePath();
+}
+
+// ── MATH GENERATOR ─────────────────────────────────────────
+function genQ(diff,ops){
+  const op=rPick(ops);
+  let a,b,ans,q;
+  if(op==='+'){
+    const mx=[0,10,30,100,300,1000][diff];
+    b=rI(1,Math.max(1,Math.floor(mx*0.5)));a=rI(1,Math.max(1,mx-b));ans=a+b;q=`${a} + ${b}`;
+  }else if(op==='−'){
+    const mx=[0,10,30,100,300,1000][diff];
+    if(diff<=3){a=rI(1,mx);b=rI(0,a);ans=a-b;q=`${a} − ${b}`;}
+    else{a=rI(0,mx);b=rI(0,Math.floor(mx*0.5));ans=a-b;q=`${a} − ${b}`;}
+  }else if(op==='×'){
+    const mA=[0,4,6,10,12,20][diff],mB=[0,3,5,10,10,12][diff];
+    a=rI(2,mA);b=rI(2,mB);ans=a*b;q=`${a} × ${b}`;
+  }else{
+    const mQ=[0,5,8,10,12,20][diff],mD=[0,3,5,8,10,12][diff];
+    b=rI(2,mD);ans=rI(2,mQ);a=b*ans;q=`${a} ÷ ${b}`;
+  }
+  const spread=Math.max(4,Math.ceil(Math.abs(ans)*0.2+2));
+  const pool=new Set([ans]);
+  let t=0;
+  while(pool.size<4&&t++<300){const d=ans+rI(-spread,spread);if(d!==ans)pool.add(d);}
+  let fb=Math.abs(ans)+7;
+  while(pool.size<4){if(fb!==ans)pool.add(fb);fb++;}
+  return{q,ans,choices:shuffle([...pool])};
+}
+
+// ── GAME STATE ─────────────────────────────────────────────
+const G={
+  state:'menu',diff:2,ops:['+','−'],
+  score:0,timeLeft:GAME_SECS,correct:0,wrong:0,
+  combo:0,bestCombo:0,fastestMs:Infinity,qStartMs:0,
+  hs:+localStorage.getItem('kkHS')||0,
+  lane:1,targetLane:1,pY:0,
+  pFrame:0,pFrameT:0,pState:'swim',pStateT:0,pScale:1,
+  curQ:null,answered:false,nextQT:0,
+  gates:[],skels:[],particles:[],bubbles:[],decoFish:[],
+  floats:[],scrollX:0,decoT:0,lastTs:0,
+};
+
+// ── INPUT ──────────────────────────────────────────────────
+document.addEventListener('keydown',e=>{
+  if(G.state!=='playing')return;
+  if(e.key==='ArrowUp'||e.key==='w'||e.key==='W'){e.preventDefault();moveLane(-1);}
+  if(e.key==='ArrowDown'||e.key==='s'||e.key==='S'){e.preventDefault();moveLane(1);}
+});
+let _ty=null;
+canvas.addEventListener('touchstart',e=>{_ty=e.touches[0].clientY;},{passive:true});
+canvas.addEventListener('touchend',e=>{
+  if(_ty===null||G.state!=='playing')return;
+  const dy=e.changedTouches[0].clientY-_ty;
+  if(Math.abs(dy)>22)moveLane(dy>0?1:-1);
+  _ty=null;
+},{passive:true});
+document.getElementById('dUp').addEventListener('touchstart',e=>{e.preventDefault();moveLane(-1);},{passive:false});
+document.getElementById('dDown').addEventListener('touchstart',e=>{e.preventDefault();moveLane(1);},{passive:false});
+document.getElementById('dUp').addEventListener('mousedown',()=>moveLane(-1));
+document.getElementById('dDown').addEventListener('mousedown',()=>moveLane(1));
+function moveLane(d){const n=G.targetLane+d;if(n>=0&&n<LANE_COUNT)G.targetLane=n;}
+
+// ── SPAWN ──────────────────────────────────────────────────
+function spawnGates(){
+  const newG=G.curQ.choices.map((val,i)=>({x:W+60,lane:i,val,isCorrect:val===G.curQ.ans,lit:false,resolved:false}));
+  G.gates=[...newG,...G.gates.filter(g=>g.resolved)];
+  const newS=[];
+  for(let i=0;i<LANE_COUNT;i++){
+    if(newG[i].isCorrect)continue;
+    newS.push({x:W+rI(140,300),lane:i,speed:rI(85,135),sprite:rPick(SKEL_SPS),alive:true,resolved:false});
+  }
+  G.skels=[...newS,...G.skels.filter(sf=>sf.resolved)];
+  G.answered=false;
+  G.qStartMs=performance.now();
+}
+
+function spawnParticles(x,y){
+  for(let i=0;i<8;i++){
+    const ang=(Math.PI*2*i/8)+Math.random()*0.4,spd=rI(70,170);
+    G.particles.push({x,y,vx:Math.cos(ang)*spd,vy:Math.sin(ang)*spd-25,life:1,sz:rI(34,54),key:rPick(SP_KEYS)});
+  }
+}
+function spawnBubble(x,y){
+  G.bubbles.push({x:x+rI(-8,8),y,vy:-rI(28,70),life:1,sz:rI(8,18),key:rPick(['bubble_a','bubble_b','bubble_c'])});
+}
+function spawnDeco(init=false){
+  G.decoFish.push({x:init?rI(0,W):W+rI(0,120),y:rI(HUD_H+22,H-FLOOR_H-22),speed:rI(35,75),sprite:rPick(DECO_SPS),sz:rI(28,44)});
+}
+function addFloat(x,y,txt,col){G.floats.push({x,y,txt,col,life:1});}
+
+// ── START GAME ─────────────────────────────────────────────
+function startGame(){
+  const d=G.diff,ops=G.ops;
+  G.state='playing';G.score=0;G.timeLeft=GAME_SECS;
+  G.correct=0;G.wrong=0;G.combo=0;G.bestCombo=0;
+  G.fastestMs=Infinity;G.qStartMs=performance.now();
+  G.lane=1;G.targetLane=1;G.pY=laneY(1);
+  G.pFrame=0;G.pFrameT=0;G.pState='swim';G.pStateT=0;G.pScale=1;
+  G.curQ=null;G.answered=false;G.nextQT=0;
+  G.gates=[];G.skels=[];G.particles=[];G.bubbles=[];G.decoFish=[];
+  G.floats=[];G.scrollX=0;G.decoT=0;
+  G.diff=d;G.ops=ops;
+  G.hs=+localStorage.getItem('kkHS')||0;
+  for(let i=0;i<3;i++)spawnDeco(true);
+  G.curQ=genQ(G.diff,G.ops);
+  spawnGates();
+  document.getElementById('menuScreen').style.display='none';
+  document.getElementById('statsScreen').style.display='none';
+  resize();
+  G.lastTs=performance.now();
+  requestAnimationFrame(loop);
+}
+
+// ── TRIGGER ANSWER ─────────────────────────────────────────
+function triggerAnswer(gate){
+  const ms=performance.now()-G.qStartMs;
+  for(const g of G.gates){g.lit=true;g.resolved=true;}
+  for(const sf of G.skels)sf.resolved=true;
+  if(gate.isCorrect){
+    G.score+=SCORE_OK;G.correct++;G.combo++;
+    if(G.combo>G.bestCombo)G.bestCombo=G.combo;
+    if(ms<G.fastestMs)G.fastestMs=ms;
+    let bon=0;
+    if(G.combo%6===0)bon=COMBO6;
+    else if(G.combo%3===0)bon=COMBO3;
+    if(bon){G.score+=bon;addFloat(PLAYER_X+20,G.pY-62,`Kombo! +${bon}`,'#ffcc00');}
+    G.pState='celebrate';G.pStateT=0.55;
+    spawnParticles(PLAYER_X+FISH_SZ/2,G.pY);
+    addFloat(PLAYER_X-10,G.pY-42,`+${SCORE_OK}`,'#44ff88');
+  }else{
+    G.score+=SCORE_WRONG;if(G.score<-9999)G.score=-9999;
+    G.wrong++;G.combo=0;
+    G.pState='inflate';G.pStateT=0.7;
+    addFloat(PLAYER_X-10,G.pY-42,`${SCORE_WRONG}`,'#ff4422');
+  }
+  G.answered=true;G.nextQT=1.3;
+}
+
+// ── UPDATE ─────────────────────────────────────────────────
+function update(dt){
+  G.timeLeft-=dt;
+  if(G.timeLeft<=0){G.timeLeft=0;endGame();return;}
+  G.scrollX+=SPEEDS[G.diff]*dt;
+  // Player lerp to target lane
+  const tY=laneY(G.targetLane);
+  G.pY+=(tY-G.pY)*Math.min(1,dt*13);
+  // Player animation
+  G.pFrameT+=dt;if(G.pFrameT>0.12){G.pFrameT=0;G.pFrame=1-G.pFrame;}
+  if(G.pState!=='swim'){
+    G.pStateT-=dt;
+    if(G.pState==='inflate'){
+      const p=1-(G.pStateT/0.7);
+      G.pScale=p<0.5?1+p*0.85:1.42-(p-0.5)*0.85;
+    }
+    if(G.pStateT<=0){G.pState='swim';G.pScale=1;}
+  }
+  // Move gates
+  const spd=SPEEDS[G.diff];
+  for(const g of G.gates)g.x-=spd*dt;
+  // Check answer trigger: only on non-resolved gates (new gates are at indices 0-3)
+  if(!G.answered&&G.gates.length&&!G.gates[0].resolved){
+    const gcx=G.gates[0].x+GATE_W/2;
+    if(gcx<PLAYER_X+FISH_SZ/2){triggerAnswer(G.gates[G.targetLane]);}
+  }
+  // Spawn next question after delay (no force-clear — old entities scroll off naturally)
+  if(G.answered){
+    G.nextQT-=dt;
+    if(G.nextQT<=0){
+      G.curQ=genQ(G.diff,G.ops);
+      spawnGates();
+    }
+  }
+  G.gates=G.gates.filter(g=>g.x+GATE_W>-30);
+  // Skeleton fish
+  for(const sf of G.skels){
+    if(!sf.alive)continue;
+    sf.x-=sf.speed*dt;
+    // Collision (only before answering)
+    if(!G.answered&&!sf.resolved&&sf.lane===G.targetLane&&Math.abs(sf.x+30-(PLAYER_X+FISH_SZ/2))<30){
+      sf.alive=false;
+      G.score+=SCORE_HIT;if(G.score<-9999)G.score=-9999;
+      G.pState='inflate';G.pStateT=0.45;
+      addFloat(PLAYER_X-20,G.pY-38,`${SCORE_HIT}`,'#ff4422');
+    }
+  }
+  G.skels=G.skels.filter(sf=>sf.x+70>-10);
+  // Particles
+  for(const p of G.particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=95*dt;p.life-=dt*1.25;}
+  G.particles=G.particles.filter(p=>p.life>0);
+  // Bubbles
+  for(const b of G.bubbles){b.y+=b.vy*dt;b.life-=dt*0.9;}
+  G.bubbles=G.bubbles.filter(b=>b.life>0);
+  if(Math.random()<dt*2)spawnBubble(PLAYER_X+FISH_SZ*0.65,G.pY-FISH_SZ*0.1);
+  // Deco fish
+  G.decoT-=dt;
+  if(G.decoT<=0&&G.decoFish.length<4){spawnDeco();G.decoT=rI(4,9);}
+  for(const f of G.decoFish)f.x-=f.speed*dt;
+  G.decoFish=G.decoFish.filter(f=>f.x+f.sz>-10);
+  // Floating texts
+  for(const ft of G.floats){ft.y-=52*dt;ft.life-=dt*1.5;}
+  G.floats=G.floats.filter(ft=>ft.life>0);
+}
+
+// ── RENDER ─────────────────────────────────────────────────
+function render(){
+  ctx.clearRect(0,0,W,H);
+  drawBg();drawFloor();drawDecoFish();drawBubbles();
+  drawGates();drawSkels();drawPlayer();drawParticles();
+  drawFloats();drawHUD();
+}
+
+function drawBg(){
+  const g=ctx.createLinearGradient(0,HUD_H,0,H-FLOOR_H);
+  g.addColorStop(0,'#001830');g.addColorStop(1,'#003060');
+  ctx.fillStyle=g;ctx.fillRect(0,HUD_H,W,H-HUD_H-FLOOR_H);
+  // Lane dividers
+  ctx.save();ctx.strokeStyle='rgba(100,180,255,0.07)';ctx.lineWidth=1;ctx.setLineDash([6,14]);
+  for(let i=1;i<LANE_COUNT;i++){
+    const ly=LANE_AREA_TOP+i*LANE_H;
+    ctx.beginPath();ctx.moveTo(0,ly);ctx.lineTo(W,ly);ctx.stroke();
+  }
+  ctx.setLineDash([]);ctx.restore();
+  // BG parallax seaweed
+  const bOff=(G.scrollX*0.22)%220;
+  for(let x=-bOff;x<W+128;x+=220){
+    drawSS(ctx,'bg_seaweed_a',x,H-FLOOR_H-68,38,68);
+    drawSS(ctx,'bg_seaweed_b',x+95,H-FLOOR_H-52,32,52);
+    if(x+160<W)drawSS(ctx,'bg_rock_a',x+160,H-FLOOR_H-24,30,24);
+  }
+}
+
+function drawFloor(){
+  ctx.fillStyle='#b89050';ctx.fillRect(0,H-FLOOR_H,W,FLOOR_H);
+  // Scrolling sand top
+  const tw=64,off=Math.floor(G.scrollX)%tw,si=Math.floor(G.scrollX/tw);
+  for(let i=-1;i<Math.ceil(W/tw)+1;i++){
+    drawSS(ctx,SAND_SPS[(si+i+SAND_SPS.length*99)%SAND_SPS.length],(i*tw)-off,H-FLOOR_H-10,tw,26);
+  }
+  // Seaweed & rocks (medium parallax) — stable tile indices
+  const sOff=(G.scrollX*0.68)%250;
+  const sBase=Math.floor(G.scrollX*0.68/250);
+  const nST=Math.ceil(W/250)+2;
+  for(let i=-1;i<nST;i++){
+    const x=i*250-sOff;
+    if(x+250<0||x>W+50)continue;
+    const idx=((sBase+i)%SWEED_SPS.length+SWEED_SPS.length)%SWEED_SPS.length;
+    const ridx=((sBase+i+1)%ROCK_SPS.length+ROCK_SPS.length)%ROCK_SPS.length;
+    drawSS(ctx,SWEED_SPS[idx],x+8,H-FLOOR_H-36,28,44);
+    if(x+135<W)drawSS(ctx,ROCK_SPS[ridx],x+135,H-FLOOR_H-20,26,24);
+  }
+}
+
+function drawDecoFish(){
+  for(const f of G.decoFish){
+    ctx.save();ctx.globalAlpha=0.5;
+    drawSS(ctx,f.sprite,f.x,f.y-f.sz/2,f.sz,f.sz,true);
+    ctx.restore();
+  }
+}
+
+function drawBubbles(){
+  for(const b of G.bubbles){
+    ctx.save();ctx.globalAlpha=b.life*0.65;
+    drawSS(ctx,b.key,b.x-b.sz/2,b.y-b.sz/2,b.sz,b.sz);ctx.restore();
+  }
+}
+
+function drawSkels(){
+  for(const sf of G.skels){
+    if(!sf.alive)continue;
+    ctx.save();ctx.shadowColor='#ff2200';ctx.shadowBlur=12;
+    drawSS(ctx,sf.sprite,sf.x,laneY(sf.lane)-FISH_SZ*0.5,FISH_SZ,FISH_SZ,true);
+    ctx.restore();
+  }
+}
+
+function drawGates(){
+  for(const g of G.gates){
+    const gy=laneY(g.lane)-GATE_H/2;
+    ctx.save();
+    if(g.resolved)ctx.globalAlpha=g.isCorrect?0.7:0.35;
+    if(g.lit){
+      ctx.fillStyle=g.isCorrect?'rgba(0,200,80,0.88)':'rgba(200,30,10,0.82)';
+      ctx.shadowColor=g.isCorrect?'#00ff88':'#ff4400';ctx.shadowBlur=18;
+    }else{
+      ctx.fillStyle='rgba(8,55,155,0.82)';
+    }
+    rrect(ctx,g.x,gy,GATE_W,GATE_H,10);ctx.fill();
+    ctx.strokeStyle=g.lit?(g.isCorrect?'#00ff88':'#ff5533'):'rgba(120,200,255,0.55)';
+    ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle='#fff';ctx.font='bold 22px "Segoe UI",system-ui,sans-serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.shadowColor='rgba(0,0,0,0.8)';ctx.shadowBlur=4;
+    ctx.fillText(String(g.val),g.x+GATE_W/2,laneY(g.lane));
+    ctx.restore();
+  }
+}
+
+function drawPlayer(){
+  const cx=PLAYER_X,cy=G.pY,half=FISH_SZ/2;
+  ctx.save();
+  ctx.shadowColor=G.pState==='inflate'?'#ff5500':G.pState==='celebrate'?'#ffdd00':'#00aaff';
+  ctx.shadowBlur=18;
+  if(G.pScale!==1){ctx.translate(cx,cy);ctx.scale(G.pScale,G.pScale);ctx.translate(-cx,-cy);}
+  if(G.pState==='celebrate'){
+    const pulse=1+Math.sin(G.pStateT*28)*0.07;
+    ctx.translate(cx,cy);ctx.scale(pulse,pulse);ctx.translate(-cx,-cy);
+  }
+  if(G.pState==='inflate')ctx.filter='hue-rotate(320deg) saturate(200%) brightness(115%)';
+  drawSS(ctx,G.pFrame===0?'fish_brown':'fish_brown_outline',cx-half,cy-half,FISH_SZ,FISH_SZ);
+  ctx.restore();
+}
+
+function drawParticles(){
+  for(const p of G.particles)drawSP(ctx,p.key,p.x-p.sz/2,p.y-p.sz/2,p.sz,p.sz,p.life);
+}
+
+function drawFloats(){
+  for(const ft of G.floats){
+    ctx.save();ctx.globalAlpha=ft.life;ctx.fillStyle=ft.col||'#fff';
+    ctx.font='bold 22px "Segoe UI",system-ui,sans-serif';ctx.textAlign='center';
+    ctx.shadowColor='rgba(0,0,0,0.9)';ctx.shadowBlur=5;
+    ctx.fillText(ft.txt,ft.x+40,ft.y);ctx.restore();
+  }
+}
+
+function drawHUD(){
+  ctx.fillStyle='rgba(0,8,24,0.93)';ctx.fillRect(0,0,W,HUD_H);
+  ctx.strokeStyle='rgba(80,160,255,0.2)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(0,HUD_H);ctx.lineTo(W,HUD_H);ctx.stroke();
+  // Home button (top-left)
+  ctx.save();
+  ctx.fillStyle='rgba(40,100,220,0.5)';ctx.strokeStyle='rgba(120,200,255,0.5)';ctx.lineWidth=1.5;
+  rrect(ctx,8,6,62,28,6);ctx.fill();ctx.stroke();
+  ctx.fillStyle='#aaddff';ctx.font='bold 12px "Segoe UI",system-ui,sans-serif';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('⌂ Heim',39,20);ctx.restore();
+  // Score
+  ctx.fillStyle='#ffdd55';ctx.font='bold 21px "Segoe UI",system-ui,sans-serif';
+  ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText(G.score,78,7);
+  // Combo
+  if(G.combo>=3){ctx.fillStyle='#ff9900';ctx.font='bold 13px "Segoe UI",system-ui,sans-serif';ctx.fillText('🔥 ×'+G.combo,78,32);}
+  // Question box
+  if(G.curQ){
+    const qStr=G.curQ.q+' = ?';
+    ctx.font='bold 22px "Segoe UI",system-ui,sans-serif';ctx.textAlign='center';
+    const tw=ctx.measureText(qStr).width;
+    ctx.save();
+    ctx.fillStyle='rgba(0,55,155,0.78)';ctx.strokeStyle='rgba(120,200,255,0.85)';ctx.lineWidth=2;
+    rrect(ctx,W/2-tw/2-18,7,tw+36,46,8);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#fff';ctx.shadowColor='rgba(0,100,255,0.6)';ctx.shadowBlur=8;
+    ctx.textBaseline='middle';ctx.fillText(qStr,W/2,30);ctx.restore();
+  }
+  drawProgressBar();
+}
+
+function drawProgressBar(){
+  const bx=14,by=HUD_H-15,bw=W-36,bh=8;
+  const prog=Math.max(0,1-(G.timeLeft/GAME_SECS));
+  ctx.fillStyle='rgba(255,255,255,0.1)';rrect(ctx,bx,by,bw,bh,4);ctx.fill();
+  const fw=Math.max(10,bw*prog);
+  const fg=ctx.createLinearGradient(bx,0,bx+bw,0);
+  fg.addColorStop(0,'#0077ff');fg.addColorStop(1,'#00ffcc');
+  ctx.fillStyle=fg;rrect(ctx,bx,by,fw,bh,4);ctx.fill();
+  // Fish marker
+  drawSS(ctx,'fish_brown',bx+fw-16,by-10,26,26);
+  // Star
+  ctx.fillStyle='#ffdd44';ctx.font='13px serif';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('⭐',bx+bw+11,by+bh/2);
+}
+
+// ── GAME LOOP ──────────────────────────────────────────────
+function loop(ts){
+  if(G.state!=='playing')return;
+  const dt=Math.min(0.05,(ts-G.lastTs)/1000);G.lastTs=ts;
+  update(dt);render();
+  requestAnimationFrame(loop);
+}
+
+// ── END GAME ──────────────────────────────────────────────
+function endGame(){
+  G.state='gameover';
+  const nr=G.score>G.hs;
+  if(nr){G.hs=G.score;localStorage.setItem('kkHS',G.score);}
+  document.getElementById('sScore').textContent=G.score;
+  document.getElementById('sCorrect').textContent=G.correct;
+  document.getElementById('sWrong').textContent=G.wrong;
+  const tot=G.correct+G.wrong;
+  document.getElementById('sAcc').textContent=tot>0?Math.round(G.correct/tot*100)+'%':'–';
+  document.getElementById('sCombo').textContent=G.bestCombo;
+  document.getElementById('sFastest').textContent=G.fastestMs<Infinity?(G.fastestMs/1000).toFixed(1)+'s':'–';
+  document.getElementById('sHS').textContent=G.hs;
+  document.getElementById('hsBadge').style.display=nr?'block':'none';
+  document.getElementById('statsScreen').style.display='flex';
+  document.getElementById('dpad').style.display='none';
+}
+
+// ── MENU HANDLERS ─────────────────────────────────────────
+document.querySelectorAll('.dbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.dbtn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');G.diff=+b.dataset.d;
+}));
+document.querySelectorAll('.obtn').forEach(b=>b.addEventListener('click',()=>{
+  b.classList.toggle('active');
+  const act=[...document.querySelectorAll('.obtn.active')].map(x=>x.dataset.op);
+  G.ops=act.length?act:['+'];
+  if(!act.length)document.querySelector('.obtn[data-op="+"]').classList.add('active');
+}));
+function goHome(){
+  G.state='menu';
+  document.getElementById('menuScreen').style.display='flex';
+  document.getElementById('statsScreen').style.display='none';
+  document.getElementById('dpad').style.display='none';
+}
+canvas.addEventListener('click',e=>{
+  if(G.state!=='playing')return;
+  const r=canvas.getBoundingClientRect();
+  const cx=(e.clientX-r.left)/r.width*W;
+  const cy=(e.clientY-r.top)/r.height*H;
+  if(cx>=8&&cx<=70&&cy>=6&&cy<=34)goHome();
+});
+document.getElementById('btnStart').addEventListener('click',startGame);
+document.getElementById('btnPlayAgain').addEventListener('click',()=>{
+  document.getElementById('statsScreen').style.display='none';
+  document.getElementById('menuScreen').style.display='flex';
+  G.state='menu';
+});
+document.getElementById('btnDownload').addEventListener('click',()=>{
+  const el=document.getElementById('statsCard');
+  if(window.html2canvas){
+    html2canvas(el,{scale:2,backgroundColor:'#001228'}).then(c=>{
+      const a=document.createElement('a');a.download='kludre-klodrian.png';a.href=c.toDataURL();a.click();
+    });
+  }else{
+    const a=document.createElement('a');a.download='kludre-klodrian.png';a.href=canvas.toDataURL();a.click();
+  }
+});
+
+// ── BOOT ──────────────────────────────────────────────────
+function initReady(){resize();}
+resize();
+ctx.fillStyle='#001428';ctx.fillRect(0,0,W,H);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
