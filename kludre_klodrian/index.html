@@ -6,9 +6,11 @@
 <title>Kludre Klodrian – Matespel</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif;touch-action:none;display:flex;align-items:center;justify-content:center;width:100vw;height:100vh}
-#gameCanvas{display:block}
-.screen{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center}
+body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif;touch-action:none;display:flex;align-items:center;justify-content:center}
+#gameWrapper{position:relative;width:100%;max-width:1200px;height:675px;background:#000;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3);overflow:hidden;display:flex;align-items:center;justify-content:center}
+@media(max-width:768px){#gameWrapper{height:450px;border-radius:0}}
+#gameCanvas{display:block;image-rendering:pixelated}
+.screen{position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center}
 #menuScreen{background:url('resources/background.png') center/cover no-repeat}
 #statsScreen{background:rgba(0,10,25,0.96);display:none}
 .card{background:rgba(0,20,60,0.88);backdrop-filter:blur(12px);border:2px solid rgba(100,200,255,0.4);border-radius:20px;padding:24px 28px;max-width:400px;width:92%;color:#fff;text-align:center}
@@ -37,7 +39,7 @@ body{background:#000;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif
 .sbtns button{flex:1;padding:12px;border-radius:10px;border:none;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .18s}
 #btnPlayAgain{background:linear-gradient(135deg,#0099ff,#0044cc);color:#fff}
 #btnDownload{background:rgba(100,200,255,.12);border:2px solid rgba(100,200,255,.3)!important;color:#7ef7ff}
-#dpad{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:10px;z-index:9}
+#dpad{position:absolute;right:14px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:10px;z-index:9}
 .dpbtn{width:60px;height:60px;background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.28);border-radius:50%;color:#fff;font-size:1.6rem;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none}
 #rotateMsg{position:fixed;inset:0;z-index:100;background:#000d1e;color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;font-size:1.1rem}
 #rotateMsg .ri{font-size:4rem;margin-bottom:14px;animation:spin90 2s ease-in-out infinite}
@@ -46,6 +48,7 @@ body{background:#000;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif
 </head>
 <body>
 <div id="rotateMsg" class="screen"><div class="ri">📱</div><p>Snu eininga di til <strong>liggjande</strong> format for å spele</p></div>
+<div id="gameWrapper">
 <div id="menuScreen" class="screen">
   <div class="card">
     <h1>🐡 Kludre Klodrian</h1>
@@ -89,6 +92,7 @@ body{background:#000;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif
 </div>
 <canvas id="gameCanvas"></canvas>
 <div id="dpad"><div class="dpbtn" id="dUp">▲</div><div class="dpbtn" id="dDown">▼</div></div>
+</div>
 <script>
 // ── CONSTANTS ──────────────────────────────────────────────
 const W=800,H=450,HUD_H=72,FLOOR_H=52,LANE_COUNT=4;
@@ -151,7 +155,8 @@ const ctx=canvas.getContext('2d');
 canvas.width=W;canvas.height=H;
 
 function resize(){
-  const sc=Math.min(window.innerWidth/W,window.innerHeight/H);
+  const wr=document.getElementById('gameWrapper');
+  const sc=Math.min(wr.clientWidth/W,wr.clientHeight/H);
   canvas.style.width=(W*sc)+'px';canvas.style.height=(H*sc)+'px';
   const touch=navigator.maxTouchPoints>0,portrait=window.innerWidth<window.innerHeight;
   document.getElementById('rotateMsg').style.display=(touch&&portrait&&window.innerWidth<700)?'flex':'none';
@@ -599,14 +604,7 @@ document.getElementById('btnPlayAgain').addEventListener('click',()=>{
   G.state='menu';
 });
 document.getElementById('btnDownload').addEventListener('click',()=>{
-  const el=document.getElementById('statsCard');
-  if(window.html2canvas){
-    html2canvas(el,{scale:2,backgroundColor:'#001228'}).then(c=>{
-      const a=document.createElement('a');a.download='kludre-klodrian.png';a.href=c.toDataURL();a.click();
-    });
-  }else{
-    const a=document.createElement('a');a.download='kludre-klodrian.png';a.href=canvas.toDataURL();a.click();
-  }
+  const a=document.createElement('a');a.download='kludre-klodrian.png';a.href=canvas.toDataURL();a.click();
 });
 
 // ── BOOT ──────────────────────────────────────────────────
@@ -614,6 +612,5 @@ function initReady(){resize();}
 resize();
 ctx.fillStyle='#001428';ctx.fillRect(0,0,W,H);
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>

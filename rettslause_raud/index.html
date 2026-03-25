@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Rettslause Raud</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@700;900&family=Lilita+One&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,30 +14,35 @@
 
         body {
             font-family: 'Calibri', 'Inter', sans-serif;
-            background: #87CEEB;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
+            min-height: 100vh;
             overflow: hidden;
-            width: 100vw;
-            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #game-container {
             position: relative;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            max-width: 1200px;
+            height: 675px;
             overflow: hidden;
-            background: #87CEEB url('resources/background.png') no-repeat center center; /* Fallback if background image fails */
+            background: #87CEEB url('resources/background.png') no-repeat center center;
             background-size: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        @media (max-width: 768px) {
+            #game-container { height: 400px; border-radius: 0; }
         }
 
         canvas {
-            display: none; /* Skjult i starten for å vise bakgrunnen */
+            display: none;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Keeps aspect ratio while covering screen */
-            object-position: bottom; /* Keep the ground visible, crop the top sky instead of both */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            background-color: #a0d8ef;
+            image-rendering: pixelated;
         }
 
         /* Sikre at canvas behandler riktig hastighet på mobil */
@@ -85,7 +87,7 @@
         }
 
         #start-screen h1 {
-            font-family: 'Bangers', cursive;
+            font-family: 'Impact', 'Arial Black', sans-serif;
             color: #ffffff;
             font-size: clamp(3rem, 8vw, 4rem);
             margin-bottom: 30px;
@@ -106,7 +108,7 @@
             margin-bottom: 12px;
             color: #fca311;
             font-size: 1.5rem;
-            font-family: 'Bangers', cursive;
+            font-family: 'Impact', 'Arial Black', sans-serif;
             letter-spacing: 2px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
@@ -161,7 +163,7 @@
             border-radius: 30px;
             cursor: pointer;
             font-weight: bold;
-            font-family: 'Bangers', cursive;
+            font-family: 'Impact', 'Arial Black', sans-serif;
             transition: transform 0.2s, box-shadow 0.2s;
             margin-top: 15px;
             box-shadow: 0 5px 15px rgba(255, 87, 34, 0.5), 0 0 20px rgba(255, 152, 0, 0.4);
@@ -213,7 +215,7 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            font-family: 'Bangers', cursive;
+            font-family: 'Impact', 'Arial Black', sans-serif;
             font-size: 2rem;
             text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
             z-index: 100;
@@ -250,8 +252,8 @@
         }
 
         #math-problem {
-            font-family: 'Lilita One', sans-serif;
-            font-size: 5rem;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 2rem;
             color: #ffffff;
             text-shadow: 3px 3px 0px #ff5722, -1px -1px 0 #ff9800, 1px -1px 0 #ff9800, -1px 1px 0 #ff9800, 1px 1px 0 #ff9800;
             letter-spacing: 5px; /* Give some extra space between numbers to avoid blending */
@@ -324,7 +326,7 @@
                 font-size: 1.2rem;
             }
             #math-problem {
-                font-size: 3rem; /* Mindre mattespørsmål på mobil */
+                font-size: 1.2rem; /* Mindre mattespørsmål på mobil */
             }
             #math-problem-container {
                 top: 60px;
@@ -367,7 +369,7 @@
                 margin-top: 10px;
             }
             #math-problem {
-                font-size: 2.5rem; /* Enda mindre på små mobiler */
+                font-size: 1rem; /* Enda mindre på små mobiler */
             }
             #math-problem-container {
                 top: 50px;
@@ -475,7 +477,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            font-family: 'Bangers', cursive;
+            font-family: 'Impact', 'Arial Black', sans-serif;
         }
 
         #portrait-warning svg {
@@ -515,9 +517,8 @@
     <h2>Vennligst roter skjermen din!</h2>
 </div>
 
-<a href="../index.html" id="home-btn">🏠</a>
-
 <div id="game-container">
+    <a href="../index.html" id="home-btn">🏠</a>
     <canvas id="gameCanvas" width="1280" height="720"></canvas>
     
     <div id="ui-layer">
@@ -560,8 +561,8 @@
         </div>
 
         <div id="game-over-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); flex-direction: column; justify-content: center; align-items: center; z-index: 50; pointer-events: auto;">
-            <h1 style="color: #ff5722; font-family: 'Orbitron', sans-serif; font-size: 64px; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255,87,34,0.5);">SPELET ER SLUTT</h1>
-            <h2 style="color: white; font-family: 'Bangers', sans-serif; font-size: 48px; margin-bottom: 40px;">Poeng: <span id="final-score" style="color: #4ade80;">0</span></h2>
+            <h1 style="color: #ff5722; font-family: 'Impact', 'Arial Black', sans-serif; font-size: 64px; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255,87,34,0.5);">SPELET ER SLUTT</h1>
+            <h2 style="color: white; font-family: 'Impact', 'Arial Black', sans-serif; font-size: 48px; margin-bottom: 40px;">Poeng: <span id="final-score" style="color: #4ade80;">0</span></h2>
             <button class="start-btn" onclick="document.getElementById('game-over-screen').style.display='none'; startGame()">Prøv Igjen</button>
         </div>
 
