@@ -28,6 +28,12 @@ let frameCount = 0;
 let lastHeartSpawn = -9999;
 let lastShieldSpawn = -9999;
 
+// Delta time for consistent speed across devices
+let lastTime = 0;
+let deltaTime = 0;
+const TARGET_FPS = 60;
+const FRAME_TIME = 1000 / TARGET_FPS;
+
 // Entities
 let player = {
     x: 200,
@@ -538,7 +544,7 @@ function losePoints(amount = 100, makeInvincible = true) {
 // Update Functions
 function update() {
     frameCount++;
-    backgroundOffset -= gameSpeed * 0.5;
+    backgroundOffset -= gameSpeed * 0.5 * deltaTime;
     if (backgroundOffset < -canvas.width) backgroundOffset = 0;
     
     // Player physics
@@ -546,13 +552,13 @@ function update() {
     else if (keys.ArrowRight) player.velocityX = player.speed;
     else player.velocityX *= 0.8;
     
-    player.velocityY += 0.8; // gravity
-    player.x += player.velocityX;
-    player.y += player.velocityY;
+    player.velocityY += 0.8 * deltaTime; // gravity
+    player.x += player.velocityX * deltaTime;
+    player.y += player.velocityY * deltaTime;
     
     // Update platforms - move them left
     platforms.forEach(p => {
-        p.x -= gameSpeed;
+        p.x -= gameSpeed * deltaTime;
     });
 
     // Platform collision
@@ -581,17 +587,17 @@ function update() {
 
     // Update obstacles
     obstacles.forEach(obs => {
-        obs.x -= gameSpeed; // Moving with the world
-        obs.minX -= gameSpeed; // Update patrol boundaries
-        obs.maxX -= gameSpeed;
+        obs.x -= gameSpeed * deltaTime; // Moving with the world
+        obs.minX -= gameSpeed * deltaTime; // Update patrol boundaries
+        obs.maxX -= gameSpeed * deltaTime;
         
         if (obs.type === 'patroller') {
-            obs.x += obs.vx;
+            obs.x += obs.vx * deltaTime;
             if (obs.x <= obs.minX || obs.x >= obs.maxX) obs.vx *= -1;
         } else if (obs.type === 'ghost' || obs.type === 'seeker') {
-            obs.y += Math.sin(frameCount * 0.05) * 2;
+            obs.y += Math.sin(frameCount * 0.05) * 2 * deltaTime;
             if (obs.type === 'seeker' && Math.abs(player.x - obs.x) < 200) {
-                obs.x += (player.x - obs.x) * 0.02;
+                obs.x += (player.x - obs.x) * 0.02 * deltaTime;
             }
         }
         
@@ -617,7 +623,7 @@ function update() {
     
     // Update powerups
     powerups = powerups.filter(p => {
-        p.x -= gameSpeed; // Move with world
+        p.x -= gameSpeed * deltaTime; // Move with world
         p.floatY = Math.sin(frameCount * 0.05 + p.floatTimer) * 5;
         
         // Shrunk player hitbox
@@ -647,8 +653,8 @@ function update() {
     // Update math options
     let anyOptionOffscreen = false;
     mathOptions = mathOptions.filter(opt => {
-        opt.x -= gameSpeed;
-        if (opt.rotation) opt.rotation += 0.1;
+        opt.x -= gameSpeed * deltaTime;
+        if (opt.rotation) opt.rotation += 0.1 * deltaTime;
         
         // Shrunk player hitbox
         const pLeft = player.x + 15;
@@ -704,27 +710,27 @@ function update() {
     // Update visual effects
     visualEffects = visualEffects.filter(v => v.life > 0);
     visualEffects.forEach(v => {
-        v.y += v.vy;
-        v.life--;
+        v.y += v.vy * deltaTime;
+        v.life -= deltaTime;
     });
     
     // Update timers
-    if (player.invincibleTimer > 0) player.invincibleTimer--;
-    if (player.hitTimer > 0) player.hitTimer--;
+    if (player.invincibleTimer > 0) player.invincibleTimer -= deltaTime;
+    if (player.hitTimer > 0) player.hitTimer -= deltaTime;
     
     if (!currentMathProblem && mathSpawnTimer === 0) {
         mathSpawnTimer = 180; // Start timer if no problem
     }
     
     if (mathSpawnTimer > 0) {
-        mathSpawnTimer--;
-        if (mathSpawnTimer === 0 && !currentMathProblem) {
+        mathSpawnTimer -= deltaTime;
+        if (mathSpawnTimer <= 0 && !currentMathProblem) {
             generateMathProblem();
         }
     }
     
     // Move next platform generation point with the world
-    nextPlatformX -= gameSpeed;
+    nextPlatformX -= gameSpeed * deltaTime;
     
     // Generate new platforms
     while (nextPlatformX < canvas.width + 1000) {
@@ -855,7 +861,7 @@ function draw() {
     } else if (player.ducking) {
         playerSprite = spriteData.players.duck;
     } else { // Always animate walking if on ground, since the world is moving
-        player.animTimer++;
+        player.animTimer += deltaTime;
         if (player.animTimer > 8) {
             player.animTimer = 0;
             player.animFrame = (player.animFrame + 1) % 2;
@@ -994,7 +1000,17 @@ function setupTouchControls() {
 // Call setup once DOM is ready
 document.addEventListener('DOMContentLoaded', setupTouchControls);
 
-function gameLoop() {
+function gameLoop(currentTime) {
+    // Calculate delta time for consistent speed
+    if (lastTime === 0) {
+        lastTime = currentTime;
+    }
+    deltaTime = (currentTime - lastTime) / FRAME_TIME;
+    lastTime = currentTime;
+    
+    // Cap delta time to prevent huge jumps
+    deltaTime = Math.min(deltaTime, 2);
+    
     update();
     draw();
     if (gameRunning) {
