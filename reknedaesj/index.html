@@ -123,6 +123,23 @@
             pointer-events: none;
             z-index: 99;
         }
+        .score-popup {
+            position: absolute;
+            pointer-events: none;
+            z-index: 30;
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffd700;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.55);
+            transform: translateX(-50%);
+            animation: scoreFloat 0.9s ease-out forwards;
+            white-space: nowrap;
+        }
+        @keyframes scoreFloat {
+            0%   { opacity: 1; transform: translateX(-50%) translateY(0) scale(1.1); }
+            20%  { opacity: 1; transform: translateX(-50%) translateY(-10px) scale(1); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-55px) scale(0.85); }
+        }
         .screen-home-link {
             margin-top: 14px;
             background: none;
@@ -794,7 +811,7 @@
                 <div class="stats-btns">
                     <button class="btn stat-btn" id="btnPlayAgain" onclick="restartGame()">🔄 Spel igjen</button>
                     <button class="btn stat-btn" id="btnHomeMenu" style="background:rgba(255,255,255,0.18);" onclick="backToStart()">🏠 Hovudmeny</button>
-                    <button class="btn stat-btn" style="background:rgba(255,255,255,0.12);" onclick="downloadStats()">📷 Last ned bilete av toppscore</button>
+                    <button class="btn stat-btn" style="background:rgba(255,255,255,0.12);" onclick="downloadStats()">📷 Last ned bilete av min score</button>
                     <button class="screen-home-link" style="margin-top:0;" onclick="goHome()">🏠 Alle spel</button>
                 </div>
             </div>

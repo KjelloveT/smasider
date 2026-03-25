@@ -1021,7 +1021,9 @@ function updateCollectibles() {
             player.x + player.width > collectibles[i].x &&
             player.y < collectibles[i].y + collectibles[i].height &&
             player.y + player.height > collectibles[i].y) {
-            score += collectibles[i].points * pointMultiplier;
+            const pts = collectibles[i].points * pointMultiplier;
+            showScorePopup(collectibles[i].x + collectibles[i].width / 2, collectibles[i].y, pts);
+            score += pts;
             playSound('collect');
             collectibles.splice(i, 1);
         }
@@ -1102,6 +1104,19 @@ function updateUI() {
     } else {
         multiplierText.classList.remove('active');
     }
+}
+
+function showScorePopup(canvasX, canvasY, points) {
+    const container = document.getElementById('gameContainer');
+    const sx = container.clientWidth / canvas.width;
+    const sy = container.clientHeight / canvas.height;
+    const el = document.createElement('div');
+    el.className = 'score-popup';
+    el.textContent = '+' + points;
+    el.style.left = (canvasX * sx) + 'px';
+    el.style.top  = (canvasY * sy) + 'px';
+    container.appendChild(el);
+    setTimeout(() => el.remove(), 950);
 }
 
 function drawSprite(img, spriteInfo, x, y, width, height) {
