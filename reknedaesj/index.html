@@ -374,8 +374,17 @@
             padding: 5px 16px; border-radius: 20px; margin-bottom: 12px;
             animation: pulse 0.8s infinite;
         }
-        .stats-btns { display: flex; gap: 8px; flex-wrap: nowrap; justify-content: center; align-items: center; }
-        .stat-btn { padding: 9px 14px; font-size: 13px; white-space: nowrap; }
+        .stats-btns { display: flex; gap: 6px; flex-wrap: nowrap; justify-content: center; align-items: center; }
+        .stat-btn { padding: 4px 9px; font-size: 11px; white-space: nowrap; }
+        .stats-char-sprite {
+            width: 36px; height: 36px;
+            background-image: url('resources/Spritesheets/spritesheet-characters-default.png');
+            background-repeat: no-repeat;
+            background-size: 231px auto;
+            background-position: -181px 0px;
+            image-rendering: pixelated;
+            flex-shrink: 0;
+        }
         .kbd-focus { outline: 3px solid #ffd700 !important; outline-offset: 3px; }
 
         .screen-title {
@@ -797,7 +806,10 @@
 
         <div id="statsScreen" class="hide">
             <div class="stats-card" id="statsCard">
-                <div style="font-size:13px; color:rgba(255,255,255,0.55); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px;">🏃 Reknedæsj</div>
+                <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:6px;">
+                    <div class="stats-char-sprite"></div>
+                    <span style="font-size:28px; font-weight:800; color:white;">Reknedæsj</span>
+                </div>
                 <div class="stats-title">🏆 Spel over!</div>
                 <div id="hsBadge" class="hs-badge" style="display:none">⭐ Ny rekord!</div>
                 <div class="stats-main-score"><span id="statScore">0</span></div>
