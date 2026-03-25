@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reknedæsj - Løpespel med Matte</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #gameContainer {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 600px;
+            background: #87CEEB;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+        }
+
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .ui-panel {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+        }
+
+        .score {
+            font-size: 24px;
+            color: #667eea;
+        }
+
+        .multiplier {
+            font-size: 18px;
+            color: #764ba2;
+            margin-top: 5px;
+        }
+
+        .multiplier.active {
+            color: #ff6b6b;
+            animation: pulse 0.5s infinite;
+        }
+
+        .jump-indicator {
+            font-size: 14px;
+            color: #2d3748;
+            margin-top: 5px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        #mathModal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            right: auto;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 24px 24px 24px 68px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            display: none;
+            z-index: 100;
+            pointer-events: all;
+            width: 560px;
+            max-width: calc(100% - 24px);
+            overflow: visible;
+        }
+
+        #mathModal.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translate(-50%, -44%); }
+            to   { opacity: 1; transform: translate(-50%, -50%); }
+        }
+        /* Floating countdown over canvas, shown after modal closes */
+        #floatingCountdown {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 99;
+        }
+        .screen-home-link {
+            margin-top: 14px;
+            background: none;
+            border: 1px solid rgba(255,255,255,0.35);
+            color: rgba(255,255,255,0.75);
+            font-size: 13px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .screen-home-link:hover { background: rgba(255,255,255,0.12); color: white; }
+
+        .math-question {
+            font-size: 28px;
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .math-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .math-option {
+            padding: 20px 25px;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: 3px solid transparent;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: all;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .math-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .math-option.selected {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        .math-option.correct {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            animation: correctPulse 0.6s ease;
+        }
+
+        .math-option.incorrect {
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* character-selector defined later with spritesheet */
+
+        @keyframes characterJump {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.1); }
+        }
+
+        .reward-display {
+            text-align: center;
+            font-size: 18px;
+            color: #667eea;
+            font-weight: 700;
+            margin-top: 15px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .reward-icon {
+            font-size: 36px;
+            margin-bottom: 5px;
+            animation: bounce 1s infinite;
+        }
+
+        .reward-text {
+            font-size: 16px;
+            color: #4a5568;
+            margin-top: 5px;
+        }
+
+        .celebration {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 72px;
+            font-weight: 800;
+            color: #ffd700;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            z-index: 200;
+            animation: celebrate 1s ease forwards;
+        }
+
+        @keyframes celebrate {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 150;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: particle 1s ease forwards;
+        }
+
+        @keyframes particle {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--x), var(--y)) scale(0);
+            }
+        }
+
+        #startScreen, #settingsScreen, #statsScreen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            padding: 20px;
+        }
+        #startScreen {
+            background: url('resources/background.png.png') center/cover no-repeat;
+        }
+        #settingsScreen, #statsScreen {
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('resources/background.png.png') center/cover no-repeat;
+        }
+        #startScreen.hide, #settingsScreen.hide, #statsScreen.hide { display: none; }
+
+        /* Start screen fade-in wrapper */
+        .start-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 44px;
+            background: rgba(0, 0, 0, 0.56);
+            border-radius: 22px;
+            opacity: 0;
+            transition: opacity 1.3s ease;
+        }
+        .start-content.visible { opacity: 1; }
+
+        /* Stats screen */
+        .stats-card {
+            background: rgba(20, 10, 40, 0.82);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 22px;
+            padding: 28px 36px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+            color: white;
+        }
+        .stats-title { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+        .stats-main-score {
+            font-size: 52px; font-weight: 900; color: #ffd700;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.5); line-height: 1.1;
+        }
+        .stats-distance { font-size: 15px; color: rgba(255,255,255,0.72); margin: 4px 0 14px; }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 10px; margin-bottom: 16px;
+        }
+        .stat-box { background: rgba(255,255,255,0.09); border-radius: 12px; padding: 10px 12px; }
+        .stat-lbl {
+            font-size: 11px; color: rgba(255,255,255,0.62);
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px;
+        }
+        .stat-val { font-size: 26px; font-weight: 800; }
+        .hs-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700, #ff8800);
+            color: #1a1a1a; font-weight: 800; font-size: 14px;
+            padding: 5px 16px; border-radius: 20px; margin-bottom: 12px;
+            animation: pulse 0.8s infinite;
+        }
+        .stats-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+        .stat-btn { padding: 11px 20px; font-size: 15px; }
+        .kbd-focus { outline: 3px solid #ffd700 !important; outline-offset: 3px; }
+
+        .screen-title {
+            font-size: 48px;
+            color: white;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .screen-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 25px;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        /* back-button replaced by .back-button-hud in HUD */
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            pointer-events: all;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        }
+
+        .final-score {
+            font-size: 36px;
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .controls {
+            margin-top: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .privacy-note {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .settings-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .settings-section h3 {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .difficulty-options, .math-options-select {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .option-btn {
+            padding: 12px 15px;
+            font-size: 16px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .option-btn.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.5);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            #gameContainer {
+                height: 400px;
+                border-radius: 0;
+            }
+            .screen-title { font-size: 32px; }
+            .screen-subtitle { font-size: 14px; }
+            .settings-section { padding: 12px; }
+        }
+
+        /* Portrait warning */
+        #portraitWarning {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #1a1a2e;
+            color: white;
+            z-index: 9999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+            text-align: center;
+            gap: 20px;
+        }
+        #portraitWarning .rotate-icon {
+            font-size: 80px;
+            animation: rotateHint 1.5s ease-in-out infinite;
+        }
+        @keyframes rotateHint {
+            0%,100% { transform: rotate(0deg); }
+            50% { transform: rotate(90deg); }
+        }
+        #portraitWarning p { font-size: 20px; max-width: 280px; }
+        @media (orientation: portrait) {
+            #portraitWarning { display: flex; }
+        }
+
+        /* Settings side-by-side */
+        .settings-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            width: 100%;
+            max-width: 860px;
+            flex-wrap: wrap;
+        }
+        .settings-row .settings-section {
+            flex: 1;
+            min-width: 220px;
+            margin: 0;
+        }
+
+        /* Compact settings title */
+        .settings-screen-title {
+            font-size: 32px;
+            color: white;
+            font-weight: 800;
+            margin-bottom: 12px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Modal two-column */
+        .modal-body {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        #mathOptions {
+            flex: 1;
+        }
+        .reward-panel {
+            width: 130px;
+            min-width: 130px;
+            background: linear-gradient(135deg, #667eea11 0%, #764ba222 100%);
+            border: 2px solid #667eea44;
+            border-radius: 14px;
+            padding: 14px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+        }
+        .reward-panel .reward-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #667eea;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        /* Modal countdown overlay */
+        .modal-countdown {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 20;
+            border-radius: 20px;
+        }
+        .countdown-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            font-weight: 900;
+            color: white;
+            box-shadow: 0 0 50px rgba(102, 126, 234, 0.7);
+            animation: countdownPop 0.58s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes countdownPop {
+            0%   { transform: scale(2.0); opacity: 0; }
+            25%  { transform: scale(1.0); opacity: 1; }
+            70%  { transform: scale(0.95); opacity: 1; }
+            100% { transform: scale(0.1); opacity: 0; }
+        }
+
+        /* HUD home button */
+        .back-button-hud {
+            background: rgba(255,255,255,0.95);
+            color: #667eea;
+            border: none;
+            border-radius: 12px;
+            width: 46px;
+            height: 46px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            pointer-events: all;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+        .back-button-hud:hover { transform: scale(1.08); }
+
+        /* character selector - spritesheet */
+        .character-selector {
+            position: absolute;
+            left: -52px;
+            width: 44px;
+            height: 44px;
+            transition: top 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+            z-index: 10;
+            background-image: url('resources/Spritesheets/spritesheet-characters-default.png');
+            background-repeat: no-repeat;
+            background-size: 282px auto;
+            background-position: 0px -40px;
+            image-rendering: pixelated;
+            animation: walkCycle 0.5s steps(1) infinite;
+        }
+        .character-selector.jumping {
+            animation: walkCycle 0.5s steps(1) infinite, characterJump 0.4s ease;
+        }
+        @keyframes walkCycle {
+            0%  { background-position: 0px -40px; }
+            50% { background-position: -40px -40px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="portraitWarning">
+        <div class="rotate-icon">📱</div>
+        <p>Vend eininga til liggjande modus for å spela</p>
+    </div>
+
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="ui">
+            <div style="display:flex; align-items:flex-start; gap:8px;">
+                <button class="back-button-hud" id="hudHomeBtn" onclick="goHome()">🏠</button>
+                <div class="ui-panel">
+                    <div class="multiplier" id="multiplierText">×1</div>
+                    <div class="jump-indicator" id="jumpIndicator">Hopp: 2/2</div>
+                </div>
+            </div>
+            <div class="ui-panel">
+                <div style="font-size: 16px; color: #2d3748;">Avstand: <span id="distanceValue">0</span>m</div>
+                <div class="score" style="margin-top:4px;">Poeng: <span id="scoreValue">0</span></div>
+                <div style="font-size: 12px; color: #718096; margin-top: 3px;">Vanskegrad: <span id="difficultyDisplay">2. klasse</span></div>
+            </div>
+        </div>
+
+        <div id="mathModal">
+            <div class="math-question" id="mathQuestion"></div>
+            <div class="modal-body">
+                <div class="math-options" id="mathOptions">
+                    <div class="character-selector" id="characterSelector"></div>
+                </div>
+                <div class="reward-panel">
+                    <div class="reward-label">Premie</div>
+                    <div class="reward-display" id="rewardDisplay">
+                        <div class="reward-icon" id="rewardIcon"></div>
+                        <div class="reward-text" id="rewardText"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="particles" id="particles"></div>
+        </div>
+        <div id="floatingCountdown"></div>
+
+        <div id="startScreen">
+            <div class="start-content" id="startContent">
+                <div class="screen-title">🏃 Reknedæsj</div>
+                <div class="screen-subtitle">
+                    Løp framover, hopp over farar, og løys matteoppgåver for å få bonuspoeng!
+                </div>
+                <button class="btn" id="btnStart" onclick="showSettings()">▶ Start Spel</button>
+                <div class="controls">
+                    <strong>Kontroller:</strong><br>
+                    PIL OPP / MELLOMROM – Hopp (dobbelhoppe)<br>
+                    HALD INNE – Gli<br>
+                    PIL OPP/NED – Vel svar i matte<br>
+                    ENTER – Svar / Start spel
+                </div>
+                <button class="screen-home-link" onclick="goHome()">🏠 Tilbake til alle spel</button>
+            </div>
+            <div class="privacy-note">
+                🔒 Alt skjer lokalt i nettlesaren din. Ingen data blir lagra eller sende ut.
+            </div>
+        </div>
+
+        <div id="settingsScreen" class="hide">
+            <div class="settings-screen-title">⚙️ Reknedæsj – Innstillingar</div>
+
+            <div class="settings-row">
+                <div class="settings-section">
+                    <h3>Vel vanskegrad</h3>
+                    <div class="difficulty-options">
+                        <button class="option-btn selected" onclick="selectDifficulty('grade2')">2. klasse</button>
+                        <button class="option-btn" onclick="selectDifficulty('grade4')">4-5. klasse</button>
+                        <button class="option-btn" onclick="selectDifficulty('grade6')">6-7. klasse</button>
+                        <button class="option-btn" onclick="selectDifficulty('grade8')">8-9. klasse</button>
+                        <button class="option-btn" onclick="selectDifficulty('grade10')">10. klasse</button>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Vel regnearter</h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mathAdd" checked onchange="updateMathTypes()">
+                            <label for="mathAdd">Addisjon (+)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mathSubtract" checked onchange="updateMathTypes()">
+                            <label for="mathSubtract">Subtraksjon (−)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mathMultiply" onchange="updateMathTypes()">
+                            <label for="mathMultiply">Multiplikasjon (×)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mathDivide" onchange="updateMathTypes()">
+                            <label for="mathDivide">Divisjon (÷)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; justify-content:center;">
+                <button class="btn" onclick="startGameFromSettings()">Start spel!</button>
+                <button class="btn" style="background: rgba(255,255,255,0.2);" onclick="backToStart()">Tilbake</button>
+                <button class="screen-home-link" onclick="goHome()">🏠 Alle spel</button>
+            </div>
+        </div>
+
+        <div id="statsScreen" class="hide">
+            <div class="stats-card" id="statsCard">
+                <div style="font-size:13px; color:rgba(255,255,255,0.55); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px;">🏃 Reknedæsj</div>
+                <div class="stats-title">🏆 Spel over!</div>
+                <div id="hsBadge" class="hs-badge" style="display:none">⭐ Ny rekord!</div>
+                <div class="stats-main-score"><span id="statScore">0</span></div>
+                <div class="stats-distance">📏 <span id="statDistance">0</span> m</div>
+                <div class="stats-grid">
+                    <div class="stat-box"><div class="stat-lbl">Riktige svar</div><div class="stat-val" id="statCorrect">0</div></div>
+                    <div class="stat-box"><div class="stat-lbl">Feil svar</div><div class="stat-val" id="statWrong">0</div></div>
+                    <div class="stat-box"><div class="stat-lbl">Riktigheit</div><div class="stat-val" id="statAccuracy">–</div></div>
+                    <div class="stat-box"><div class="stat-lbl">Rekord</div><div class="stat-val" id="statHS">0</div></div>
+                </div>
+                <div class="stats-btns">
+                    <button class="btn stat-btn" id="btnPlayAgain" onclick="restartGame()">🔄 Spel igjen</button>
+                    <button class="btn stat-btn" id="btnHomeMenu" style="background:rgba(255,255,255,0.18);" onclick="backToStart()">🏠 Hovudmeny</button>
+                    <button class="btn stat-btn" style="background:rgba(255,255,255,0.12);" onclick="downloadStats()">📷 Last ned bilete av toppscore</button>
+                    <button class="screen-home-link" style="margin-top:0;" onclick="goHome()">🏠 Alle spel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
