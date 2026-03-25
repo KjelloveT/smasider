@@ -472,21 +472,89 @@ function updateStatsFocus() {
 }
 
 function downloadStats() {
-    if (!window.html2canvas) return;
-    const el = document.getElementById('statsCard');
-    const tmp = document.createElement('div');
-    tmp.style.cssText = 'position:fixed;top:-9999px;left:-9999px;background:#14082a;border-radius:22px;';
-    tmp.appendChild(el.cloneNode(true));
-    document.body.appendChild(tmp);
-    html2canvas(tmp.firstChild, { scale: 2, backgroundColor: '#14082a', logging: false }).then(c => {
+    const W = 560, H = 400, R = 2;
+    const cv = document.createElement('canvas');
+    cv.width = W * R; cv.height = H * R;
+    const cx = cv.getContext('2d');
+    cx.scale(R, R);
+
+    // roundRect polyfill
+    const rr = (x, y, w, h, r) => {
+        cx.beginPath();
+        cx.moveTo(x + r, y);
+        cx.lineTo(x + w - r, y); cx.quadraticCurveTo(x + w, y, x + w, y + r);
+        cx.lineTo(x + w, y + h - r); cx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        cx.lineTo(x + r, y + h); cx.quadraticCurveTo(x, y + h, x, y + h - r);
+        cx.lineTo(x, y + r); cx.quadraticCurveTo(x, y, x + r, y);
+        cx.closePath();
+    };
+
+    // Background
+    cx.fillStyle = '#1a0a30';
+    rr(0, 0, W, H, 22); cx.fill();
+
+    cx.textAlign = 'center';
+    let y = 44;
+
+    // Brand
+    cx.fillStyle = 'rgba(255,255,255,0.55)';
+    cx.font = '600 13px sans-serif';
+    cx.fillText('🏃  REKNEDÆSJ', W / 2, y); y += 38;
+
+    // Title
+    cx.fillStyle = 'white';
+    cx.font = 'bold 26px sans-serif';
+    cx.fillText('🏆 Spel over!', W / 2, y); y += 32;
+
+    // HS badge
+    if (document.getElementById('hsBadge').style.display !== 'none') {
+        cx.fillStyle = '#ff8800';
+        cx.font = 'bold 14px sans-serif';
+        cx.fillText('⭐ Ny rekord!', W / 2, y); y += 26;
+    }
+
+    // Score
+    cx.fillStyle = '#ffd700';
+    cx.font = 'bold 62px sans-serif';
+    y += 54; cx.fillText(document.getElementById('statScore').textContent, W / 2, y); y += 16;
+
+    // Distance
+    cx.fillStyle = 'rgba(255,255,255,0.7)';
+    cx.font = '15px sans-serif';
+    y += 14; cx.fillText('📏 ' + document.getElementById('statDistance').textContent + ' m', W / 2, y); y += 22;
+
+    // Stats grid
+    const cells = [
+        { lbl: 'RIKTIGE SVAR', id: 'statCorrect' },
+        { lbl: 'FEIL SVAR',    id: 'statWrong' },
+        { lbl: 'RIKTIGHEIT',   id: 'statAccuracy' },
+        { lbl: 'REKORD',       id: 'statHS' }
+    ];
+    const pad = 16, cols = 2;
+    const cw = (W - pad * (cols + 1)) / cols, ch = 72;
+    y += 10;
+    cells.forEach((s, i) => {
+        const col = i % cols, row = Math.floor(i / cols);
+        const cx_ = pad + col * (cw + pad);
+        const cy_ = y + row * (ch + 10);
+        cx.fillStyle = 'rgba(255,255,255,0.09)';
+        rr(cx_, cy_, cw, ch, 12); cx.fill();
+        cx.fillStyle = 'rgba(255,255,255,0.6)';
+        cx.font = '11px sans-serif';
+        cx.fillText(s.lbl, cx_ + cw / 2, cy_ + 22);
+        cx.fillStyle = 'white';
+        cx.font = 'bold 28px sans-serif';
+        cx.fillText(document.getElementById(s.id).textContent, cx_ + cw / 2, cy_ + 56);
+    });
+
+    cv.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.download = 'reknedaesj-score.png';
-        a.href = c.toDataURL('image/png');
-        document.body.appendChild(a);
-        a.click();
+        a.href = url; a.download = 'reknedaesj-score.png';
+        document.body.appendChild(a); a.click();
         document.body.removeChild(a);
-        document.body.removeChild(tmp);
-    }).catch(() => document.body.removeChild(tmp));
+        setTimeout(() => URL.revokeObjectURL(url), 200);
+    }, 'image/png');
 }
 
 function fmt(n) {
