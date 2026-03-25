@@ -472,15 +472,21 @@ function updateStatsFocus() {
 }
 
 function downloadStats() {
+    if (!window.html2canvas) return;
     const el = document.getElementById('statsCard');
-    if (window.html2canvas) {
-        html2canvas(el, { scale: 2, backgroundColor: '#14082a' }).then(c => {
-            const a = document.createElement('a');
-            a.download = 'reknedaesj-score.png';
-            a.href = c.toDataURL();
-            a.click();
-        });
-    }
+    const tmp = document.createElement('div');
+    tmp.style.cssText = 'position:fixed;top:-9999px;left:-9999px;background:#14082a;border-radius:22px;';
+    tmp.appendChild(el.cloneNode(true));
+    document.body.appendChild(tmp);
+    html2canvas(tmp.firstChild, { scale: 2, backgroundColor: '#14082a', logging: false }).then(c => {
+        const a = document.createElement('a');
+        a.download = 'reknedaesj-score.png';
+        a.href = c.toDataURL('image/png');
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        document.body.removeChild(tmp);
+    }).catch(() => document.body.removeChild(tmp));
 }
 
 function fmt(n) {
