@@ -254,7 +254,8 @@ const S = {
 const RL={vanleg:'Vanleg',sjeldgjevt:'Sjeldgjævt',segngjeten:'Segngjeten',gudebore:'Gudebore'};
 const RO=['vanleg','sjeldgjevt','segngjeten','gudebore'];
 const RW=[65,25,7,3];
-const QPC=5, SK='heimsank_samling';
+const QPC=5;
+function getStorageKey(){return `heimsank_samling_${S.selCat?.id||'default'}`;}
 let DS=null; // drag state: {type:'coll'|'pending', idx:number}
 
 // ═══ INIT ═══
@@ -287,7 +288,7 @@ async function startGame(){
   document.getElementById('setupScreen').classList.add('hidden');
   const gs=document.getElementById('gameScreen'); gs.classList.remove('hidden'); gs.style.display='flex';
   document.getElementById('gameSub').textContent=`${S.selCat.icon} ${S.selCat.label} – Svar rett ${QPC} gonger og vinn eit kort!`;
-  S.correct=0; S.paused=false; updateProg(); renderColl(); nextQ();
+  S.correct=0; S.paused=false; loadStorage(); updateProg(); renderColl(); nextQ();
 }
 
 function goSetup(){
@@ -488,13 +489,13 @@ function mkCard(card,sz){
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 // ═══ STORAGE ═══
-function saveStorage(){try{localStorage.setItem(SK,JSON.stringify(S.collection.slice(0,5)));}catch{}}
-function loadStorage(){try{const r=localStorage.getItem(SK);if(r)S.collection=JSON.parse(r).slice(0,5);}catch{S.collection=[];}}
+function saveStorage(){try{localStorage.setItem(getStorageKey(),JSON.stringify(S.collection.slice(0,5)));}catch{}}
+function loadStorage(){try{const r=localStorage.getItem(getStorageKey());if(r)S.collection=JSON.parse(r).slice(0,5);else S.collection=[];}catch{S.collection=[];}}
 
 // ═══ CLEAR ALL ═══
 function confirmClearAll(){
   if(S.collection.length===0)return;
-  if(confirm('Er du sikker på at du vil tømme heile samlinga? Alle kort vert fjerna.')){
+  if(confirm('Er du sikker på at du vil tømme samlinga for '+S.selCat.label+'? Alle kort vert fjerna.')){
     S.collection=[];
     S.pending=null;
     saveStorage();
