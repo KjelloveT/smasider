@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="no">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            touch-action: none; /* Forhindrer zoom og scroll pÃ¥ mobil */
+            touch-action: none; /* Forhindrer zoom og scroll på mobil */
         }
 
         body {
@@ -45,7 +45,7 @@
             image-rendering: pixelated;
         }
 
-        /* Sikre at canvas behandler riktig hastighet pÃ¥ mobil */
+        /* Sikre at canvas behandler riktig hastighet på mobil */
         @media (max-width: 1024px) {
             canvas {
                 image-rendering: crisp-edges;
@@ -60,7 +60,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* La klikk gÃ¥ gjennom til canvas der det ikke er knapper */
+            pointer-events: none; /* La klikk gå gjennom til canvas der det ikke er knapper */
         }
 
         /* Startskjerm / Meny */
@@ -313,7 +313,7 @@
 
         @media (max-width: 1024px) {
             #touch-controls {
-                display: block; /* Vises pÃ¥ nettbrett og mobil */
+                display: block; /* Vises på nettbrett og mobil */
             }
             #hud {
                 top: 10px; /* Flytt HUD opp */
@@ -326,7 +326,7 @@
                 font-size: 1.2rem;
             }
             #math-problem {
-                font-size: 1.2rem; /* Mindre mattespÃ¸rsmÃ¥l pÃ¥ mobil */
+                font-size: 1.2rem; /* Mindre mattespørsmål på mobil */
             }
             #math-problem-container {
                 top: 60px;
@@ -369,7 +369,7 @@
                 margin-top: 10px;
             }
             #math-problem {
-                font-size: 1rem; /* Enda mindre pÃ¥ smÃ¥ mobiler */
+                font-size: 1rem; /* Enda mindre på små mobiler */
             }
             #math-problem-container {
                 top: 50px;
@@ -385,13 +385,13 @@
             #btn-jump { right: 10px; bottom: 10px; }
         }
 
-        /* Ekstra justeringar for smÃ¥ horisontale skjermar */
+        /* Ekstra justeringar for små horisontale skjermar */
         @media (max-height: 500px) and (orientation: landscape) and (max-width: 900px) {
             #start-screen {
                 padding: 8px;
                 max-height: 75vh;
                 overflow-y: auto; /* Sikre scroll */
-                -webkit-overflow-scrolling: touch; /* bedre scroll pÃ¥ iOS */
+                -webkit-overflow-scrolling: touch; /* bedre scroll på iOS */
             }
             #start-screen h1 {
                 font-size: clamp(1.2rem, 3.5vw, 1.8rem);
@@ -428,7 +428,7 @@
             }
         }
 
-        /* Enda mindre for ekstra smÃ¥ skjermar */
+        /* Enda mindre for ekstra små skjermar */
         @media (max-height: 400px) and (orientation: landscape) and (max-width: 768px) {
             #start-screen {
                 padding: 5px;
@@ -518,12 +518,12 @@
 </div>
 
 <div id="game-container">
-    <a href="../index.html" id="home-btn">ðŸ </a>
+    <a href="../index.html" id="home-btn">🏠</a>
     <canvas id="gameCanvas" width="1280" height="720"></canvas>
     
     <div id="ui-layer">
         <div id="hud" style="display: none;">
-            <div id="lives-display">â¤ï¸â¤ï¸â¤ï¸</div>
+            <div id="lives-display">❤️❤️❤️</div>
             <div id="score-display">Poeng: 0</div>
             <div id="powerup-display"></div>
         </div>
@@ -550,10 +550,10 @@
             <div class="settings-group">
                 <h3>Reknearter</h3>
                 <div class="toggle-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" id="operators-group">
-                    <div class="option-btn active" data-op="add">âž• Addisjon</div>
-                    <div class="option-btn active" data-op="sub">âž– Subtraksjon</div>
-                    <div class="option-btn active" data-op="mul">âœ–ï¸ Multiplikasjon</div>
-                    <div class="option-btn active" data-op="div">âž— Divisjon</div>
+                    <div class="option-btn active" data-op="add">➕ Addisjon</div>
+                    <div class="option-btn active" data-op="sub">➖ Subtraksjon</div>
+                    <div class="option-btn active" data-op="mul">✖️ Multiplikasjon</div>
+                    <div class="option-btn active" data-op="div">➗ Divisjon</div>
                 </div>
             </div>
 
@@ -563,14 +563,14 @@
         <div id="game-over-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); flex-direction: column; justify-content: center; align-items: center; z-index: 50; pointer-events: auto;">
             <h1 style="color: #ff5722; font-family: 'Impact', 'Arial Black', sans-serif; font-size: 64px; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255,87,34,0.5);">SPELET ER SLUTT</h1>
             <h2 style="color: white; font-family: 'Impact', 'Arial Black', sans-serif; font-size: 48px; margin-bottom: 40px;">Poeng: <span id="final-score" style="color: #4ade80;">0</span></h2>
-            <button class="start-btn" onclick="document.getElementById('game-over-screen').style.display='none'; startGame()">PrÃ¸v Igjen</button>
+            <button class="start-btn" onclick="document.getElementById('game-over-screen').style.display='none'; startGame()">Prøv Igjen</button>
         </div>
 
         <div id="touch-controls">
-            <div class="touch-btn" id="btn-left">â—€</div>
-            <div class="touch-btn" id="btn-right">â–¶</div>
-            <div class="touch-btn" id="btn-duck">â–¼</div>
-            <div class="touch-btn" id="btn-jump">â–²</div>
+            <div class="touch-btn" id="btn-left">◀</div>
+            <div class="touch-btn" id="btn-right">▶</div>
+            <div class="touch-btn" id="btn-duck">▼</div>
+            <div class="touch-btn" id="btn-jump">▲</div>
         </div>
     </div>
 </div>
