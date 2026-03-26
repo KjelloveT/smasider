@@ -328,11 +328,15 @@
         <div class="content">
             <div class="examples">
                 <h3>📚 Eksempelspørringer:</h3>
-                <button class="example-btn" onclick="loadExample('countries')">Land i Europa (med flagg)</button>
+                <button class="example-btn" onclick="loadExample('countries')">Alle land i verda (med flagg)</button>
                 <button class="example-btn" onclick="loadExample('cities')">Norske byer</button>
+                <button class="example-btn" onclick="loadExample('skandByer')">Skandinaviske byer</button>
                 <button class="example-btn" onclick="loadExample('scientists')">Kjente forskere (med bilde)</button>
                 <button class="example-btn" onclick="loadExample('planets')">Planeter</button>
                 <button class="example-btn" onclick="loadExample('animals')">Dyr (med bilde)</button>
+                <button class="example-btn" onclick="loadExample('carModels')">Bilmodellar (med bilde)</button>
+                <button class="example-btn" onclick="loadExample('clPlayers')">Champions League-spelarar</button>
+                <button class="example-btn" onclick="loadExample('aircraft')">Flytypar (med passasjertall)</button>
             </div>
 
             <div class="query-section">
@@ -376,14 +380,18 @@
         const savedQueries = [];
 
         const examples = {
-            countries: `SELECT ?country ?countryLabel ?population ?flag WHERE {
+            countries: `SELECT ?country ?countryLabel ?population ?flag ?article WHERE {
   ?country wdt:P31 wd:Q6256;
-           wdt:P30 wd:Q46;
-           wdt:P1082 ?population.
+         wdt:P1082 ?population.
   OPTIONAL { ?country wdt:P41 ?flag. }
+  OPTIONAL {
+    ?article schema:about ?country ;
+             schema:isPartOf <https://no.wikipedia.org/> .
+  }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
 }
-LIMIT 20`,
+ORDER BY DESC(?population)
+LIMIT 250`,
             cities: `SELECT ?city ?cityLabel ?population WHERE {
   ?city wdt:P31 wd:Q515;
         wdt:P17 wd:Q20;
@@ -392,11 +400,29 @@ LIMIT 20`,
 }
 ORDER BY DESC(?population)
 LIMIT 15`,
-            scientists: `SELECT ?scientist ?scientistLabel ?birthDate ?image WHERE {
+            skandByer: `SELECT ?city ?cityLabel ?countryLabel ?population ?image ?article WHERE {
+  ?city wdt:P31 wd:Q515;
+        wdt:P17 ?country.
+  VALUES ?country { wd:Q20 wd:Q34 wd:Q35 wd:Q189 wd:Q33 }
+  OPTIONAL { ?city wdt:P1082 ?population. }
+  OPTIONAL { ?city wdt:P18 ?image. }
+  OPTIONAL {
+    ?article schema:about ?city ;
+             schema:isPartOf <https://no.wikipedia.org/> .
+  }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "no,sv,da,en". }
+}
+ORDER BY DESC(?population)
+LIMIT 100`,
+            scientists: `SELECT ?scientist ?scientistLabel ?birthDate ?image ?article WHERE {
   ?scientist wdt:P31 wd:Q5;
              wdt:P106 wd:Q901;
              wdt:P569 ?birthDate.
   OPTIONAL { ?scientist wdt:P18 ?image. }
+  OPTIONAL {
+    ?article schema:about ?scientist ;
+             schema:isPartOf <https://no.wikipedia.org/> .
+  }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
 }
 LIMIT 20`,
@@ -411,7 +437,37 @@ ORDER BY ?mass`,
           wdt:P18 ?image.
   SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
 }
-LIMIT 20`
+LIMIT 20`,
+            carModels: `SELECT ?car ?carLabel ?image ?manufacturer ?manufacturerLabel WHERE {
+  ?car wdt:P31 wd:Q3231690;
+       wdt:P18 ?image;
+       wdt:P176 ?manufacturer.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
+}
+ORDER BY ?manufacturerLabel ?carLabel
+LIMIT 100`,
+            clPlayers: `SELECT ?player ?playerLabel ?image ?team ?teamLabel WHERE {
+  ?player wdt:P54 ?team.
+  FILTER(?teamLabel IN ("Real Madrid", "Manchester City", "Bayern Munich", "Paris Saint-Germain", "Liverpool", "Barcelona", "Arsenal", "Inter Milan", "Borussia Dortmund", "Atletico Madrid"))
+  ?team rdfs:label ?teamLabel@en.
+  OPTIONAL { ?player wdt:P18 ?image. }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
+}
+ORDER BY ?teamLabel ?playerLabel
+LIMIT 200`,
+            aircraft: `SELECT ?aircraft ?aircraftLabel ?passengers ?image ?article WHERE {
+  ?aircraft wdt:P31 ?type.
+  VALUES ?type { wd:Q15056999 wd:Q11436 wd:Q15056997 wd:Q197474 }
+  ?aircraft wdt:P18 ?image.
+  OPTIONAL { ?aircraft wdt:P1082 ?passengers. }
+  OPTIONAL {
+    ?article schema:about ?aircraft ;
+             schema:isPartOf <https://no.wikipedia.org/> .
+  }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
+}
+ORDER BY DESC(?passengers)
+LIMIT 100`
         };
 
         function loadExample(type) {
@@ -506,6 +562,7 @@ LIMIT 20`
                     const td = document.createElement('td');
                     if (binding[variable]) {
                         const value = binding[variable].value;
+                        const datatype = binding[variable].datatype || '';
                         if (isImageUrl(value)) {
                             const img = document.createElement('img');
                             img.src = value;
@@ -513,11 +570,18 @@ LIMIT 20`
                             img.alt = variable;
                             img.onclick = () => showImageModal(value);
                             td.appendChild(img);
+                        } else if (datatype.endsWith('#dateTime') || datatype.endsWith('#date') || variable.toLowerCase().includes('date')) {
+                            const yearMatch = /^(-?\d+)/.exec(value);
+                            td.textContent = yearMatch ? yearMatch[1] : value;
                         } else if (binding[variable].type === 'uri') {
                             const link = document.createElement('a');
                             link.href = value;
                             link.target = '_blank';
-                            link.textContent = value.split('/').pop();
+                            if (value.includes('wikipedia.org/wiki/')) {
+                                link.textContent = decodeURIComponent(value.split('/wiki/')[1].replace(/_/g, ' '));
+                            } else {
+                                link.textContent = value.split('/').pop();
+                            }
                             link.style.color = '#667eea';
                             td.appendChild(link);
                         } else {

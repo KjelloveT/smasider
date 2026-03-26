@@ -476,7 +476,7 @@ function mkCard(card,sz){
   img.onerror=function(){this.parentNode.innerHTML=`<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:2.5rem;opacity:.2">🔬</div>`;};
   iw.appendChild(img); el.appendChild(iw);
   const ft=document.createElement('div'); ft.className='card-footer';
-  const yr=document.createElement('span'); yr.textContent=`${card.statLabel} ${card.stat}`; ft.appendChild(yr);
+  const yr=document.createElement('span'); yr.textContent=card.stat ? `${card.statLabel} ${card.stat}` : card.statLabel || ''; ft.appendChild(yr);
   if(card.article){
     const a=document.createElement('a'); a.href=card.article; a.target='_blank'; a.rel='noopener';
     a.className='les-om-link'; a.textContent='Les om →';

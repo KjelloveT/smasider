@@ -40,5 +40,19 @@
     "statField": "population",
     "statType": "number",
     "statLabel": "👥"
+  },
+  {
+    "id": "fly",
+    "label": "Flytypar",
+    "icon": "✈️",
+    "csv": "fly.csv",
+    "rarity": "rarity-fly.json",
+    "idField": "aircraft",
+    "nameField": "aircraftLabel",
+    "imageField": "image",
+    "articleField": "article",
+    "statField": "passengers",
+    "statType": "number",
+    "statLabel": "👥"
   }
 ]
