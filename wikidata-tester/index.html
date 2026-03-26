@@ -337,6 +337,7 @@
                 <button class="example-btn" onclick="loadExample('carModels')">Bilmodellar (med bilde)</button>
                 <button class="example-btn" onclick="loadExample('clPlayers')">Champions League-spelarar</button>
                 <button class="example-btn" onclick="loadExample('aircraft')">Flytypar (med passasjertall)</button>
+                <button class="example-btn" onclick="loadExample('norwegianPaintings')">Norsk kunst 1800-talet</button>
             </div>
 
             <div class="query-section">
@@ -467,6 +468,26 @@ LIMIT 200`,
   SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
 }
 ORDER BY DESC(?passengers)
+LIMIT 100`,
+            norwegianPaintings: `SELECT ?painting ?paintingLabel ?artist ?artistLabel ?year ?image ?article ?artistArticle WHERE {
+  ?painting wdt:P31 wd:Q3305213;
+           wdt:P170 ?artist;
+           wdt:P18 ?image;
+           wdt:P571 ?inception.
+  ?artist wdt:P27 wd:Q20.
+  FILTER(YEAR(?inception) >= 1800 && YEAR(?inception) <= 1899)
+  OPTIONAL { ?painting wdt:P571 ?year. }
+  OPTIONAL {
+    ?article schema:about ?painting ;
+             schema:isPartOf <https://no.wikipedia.org/> .
+  }
+  OPTIONAL {
+    ?artistArticle schema:about ?artist ;
+                  schema:isPartOf <https://no.wikipedia.org/> .
+  }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
+}
+ORDER BY ?year ?paintingLabel
 LIMIT 100`
         };
 

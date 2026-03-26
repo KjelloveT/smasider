@@ -54,5 +54,19 @@
     "statField": "passengers",
     "statType": "number",
     "statLabel": "👥"
+  },
+  {
+    "id": "kunst",
+    "label": "Norsk kunst 1800-talet",
+    "icon": "🎨",
+    "csv": "kunst.csv",
+    "rarity": "rarity-kunst.json",
+    "idField": "painting",
+    "nameField": "paintingLabel",
+    "imageField": "image",
+    "articleField": "artistArticle",
+    "statField": "artistLabel",
+    "statType": "text",
+    "statLabel": "🎨"
   }
 ]
