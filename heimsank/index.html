@@ -205,7 +205,7 @@ body{font-family:'Arial Black','Arial Bold',Arial,system-ui,sans-serif;backgroun
     <div class="coll-bar">
       <div class="coll-main">
         <div class="coll-box">
-          <div class="coll-box-label">🏆 Samling (<span id="collCount">0</span>/5)</div>
+          <div class="coll-box-label">🏆 Samling (<span id="collCount">0</span>/5) <button class="btn-outline" id="clearAllBtn" onclick="confirmClearAll()" style="margin-left:10px;padding:4px 8px;font-size:.65rem">Tøm alle</button></div>
           <div class="coll-cards-row" id="collRow">
             <div class="empty-coll">Svar rett 5 gonger for å vinna eit kort!</div>
           </div>
@@ -490,6 +490,18 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 // ═══ STORAGE ═══
 function saveStorage(){try{localStorage.setItem(SK,JSON.stringify(S.collection.slice(0,5)));}catch{}}
 function loadStorage(){try{const r=localStorage.getItem(SK);if(r)S.collection=JSON.parse(r).slice(0,5);}catch{S.collection=[];}}
+
+// ═══ CLEAR ALL ═══
+function confirmClearAll(){
+  if(S.collection.length===0)return;
+  if(confirm('Er du sikker på at du vil tømme heile samlinga? Alle kort vert fjerna.')){
+    S.collection=[];
+    S.pending=null;
+    saveStorage();
+    renderColl();
+    resumeIfDone();
+  }
+}
 
 init();
 </script>
