@@ -1,5 +1,4 @@
-<<<<<<< C:/Users/88kjebjo/_projects/rettslause_raud/index.html
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="no">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            touch-action: none; /* Forhindrer zoom og scroll på mobil */
+            touch-action: none; /* Forhindrer zoom og scroll pÃ¥ mobil */
         }
 
         body {
@@ -46,7 +45,7 @@
             image-rendering: pixelated;
         }
 
-        /* Sikre at canvas behandler riktig hastighet på mobil */
+        /* Sikre at canvas behandler riktig hastighet pÃ¥ mobil */
         @media (max-width: 1024px) {
             canvas {
                 image-rendering: crisp-edges;
@@ -61,7 +60,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* La klikk gå gjennom til canvas der det ikke er knapper */
+            pointer-events: none; /* La klikk gÃ¥ gjennom til canvas der det ikke er knapper */
         }
 
         /* Startskjerm / Meny */
@@ -314,7 +313,7 @@
 
         @media (max-width: 1024px) {
             #touch-controls {
-                display: block; /* Vises på nettbrett og mobil */
+                display: block; /* Vises pÃ¥ nettbrett og mobil */
             }
             #hud {
                 top: 10px; /* Flytt HUD opp */
@@ -327,7 +326,7 @@
                 font-size: 1.2rem;
             }
             #math-problem {
-                font-size: 1.2rem; /* Mindre mattespørsmål på mobil */
+                font-size: 1.2rem; /* Mindre mattespÃ¸rsmÃ¥l pÃ¥ mobil */
             }
             #math-problem-container {
                 top: 60px;
@@ -370,7 +369,7 @@
                 margin-top: 10px;
             }
             #math-problem {
-                font-size: 1rem; /* Enda mindre på små mobiler */
+                font-size: 1rem; /* Enda mindre pÃ¥ smÃ¥ mobiler */
             }
             #math-problem-container {
                 top: 50px;
@@ -386,13 +385,13 @@
             #btn-jump { right: 10px; bottom: 10px; }
         }
 
-        /* Ekstra justeringar for små horisontale skjermar */
+        /* Ekstra justeringar for smÃ¥ horisontale skjermar */
         @media (max-height: 500px) and (orientation: landscape) and (max-width: 900px) {
             #start-screen {
                 padding: 8px;
                 max-height: 75vh;
                 overflow-y: auto; /* Sikre scroll */
-                -webkit-overflow-scrolling: touch; /* bedre scroll på iOS */
+                -webkit-overflow-scrolling: touch; /* bedre scroll pÃ¥ iOS */
             }
             #start-screen h1 {
                 font-size: clamp(1.2rem, 3.5vw, 1.8rem);
@@ -429,7 +428,7 @@
             }
         }
 
-        /* Enda mindre for ekstra små skjermar */
+        /* Enda mindre for ekstra smÃ¥ skjermar */
         @media (max-height: 400px) and (orientation: landscape) and (max-width: 768px) {
             #start-screen {
                 padding: 5px;
@@ -519,12 +518,12 @@
 </div>
 
 <div id="game-container">
-    <a href="../index.html" id="home-btn">🏠</a>
+    <a href="../index.html" id="home-btn">ðŸ </a>
     <canvas id="gameCanvas" width="1280" height="720"></canvas>
     
     <div id="ui-layer">
         <div id="hud" style="display: none;">
-            <div id="lives-display">❤️❤️❤️</div>
+            <div id="lives-display">â¤ï¸â¤ï¸â¤ï¸</div>
             <div id="score-display">Poeng: 0</div>
             <div id="powerup-display"></div>
         </div>
@@ -551,10 +550,10 @@
             <div class="settings-group">
                 <h3>Reknearter</h3>
                 <div class="toggle-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" id="operators-group">
-                    <div class="option-btn active" data-op="add">➕ Addisjon</div>
-                    <div class="option-btn active" data-op="sub">➖ Subtraksjon</div>
-                    <div class="option-btn active" data-op="mul">✖️ Multiplikasjon</div>
-                    <div class="option-btn active" data-op="div">➗ Divisjon</div>
+                    <div class="option-btn active" data-op="add">âž• Addisjon</div>
+                    <div class="option-btn active" data-op="sub">âž– Subtraksjon</div>
+                    <div class="option-btn active" data-op="mul">âœ–ï¸ Multiplikasjon</div>
+                    <div class="option-btn active" data-op="div">âž— Divisjon</div>
                 </div>
             </div>
 
@@ -564,14 +563,14 @@
         <div id="game-over-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); flex-direction: column; justify-content: center; align-items: center; z-index: 50; pointer-events: auto;">
             <h1 style="color: #ff5722; font-family: 'Impact', 'Arial Black', sans-serif; font-size: 64px; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255,87,34,0.5);">SPELET ER SLUTT</h1>
             <h2 style="color: white; font-family: 'Impact', 'Arial Black', sans-serif; font-size: 48px; margin-bottom: 40px;">Poeng: <span id="final-score" style="color: #4ade80;">0</span></h2>
-            <button class="start-btn" onclick="document.getElementById('game-over-screen').style.display='none'; startGame()">Prøv Igjen</button>
+            <button class="start-btn" onclick="document.getElementById('game-over-screen').style.display='none'; startGame()">PrÃ¸v Igjen</button>
         </div>
 
         <div id="touch-controls">
-            <div class="touch-btn" id="btn-left">◀</div>
-            <div class="touch-btn" id="btn-right">▶</div>
-            <div class="touch-btn" id="btn-duck">▼</div>
-            <div class="touch-btn" id="btn-jump">▲</div>
+            <div class="touch-btn" id="btn-left">â—€</div>
+            <div class="touch-btn" id="btn-right">â–¶</div>
+            <div class="touch-btn" id="btn-duck">â–¼</div>
+            <div class="touch-btn" id="btn-jump">â–²</div>
         </div>
     </div>
 </div>
@@ -606,608 +605,3 @@
 <script src="game.js"></script>
 </body>
 </html>
-=======
-<!DOCTYPE html>
-<html lang="no">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Rettslause Raud</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            touch-action: none; /* Forhindrer zoom og scroll på mobil */
-        }
-
-        body {
-            font-family: 'Impact', 'Arial Black', sans-serif;
-            background: #87CEEB;
-            color: #fff;
-            overflow: hidden;
-            width: 100vw;
-            height: 100vh;
-        }
-
-        #game-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            background: #87CEEB url('resources/background.png') no-repeat center center; /* Fallback if background image fails */
-            background-size: cover;
-        }
-
-        canvas {
-            display: none; /* Skjult i starten for å vise bakgrunnen */
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Keeps aspect ratio while covering screen */
-            object-position: bottom; /* Keep the ground visible, crop the top sky instead of both */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            background-color: #a0d8ef;
-        }
-
-        /* Sikre at canvas behandler riktig hastighet på mobil */
-        @media (max-width: 1024px) {
-            canvas {
-                image-rendering: crisp-edges;
-                image-rendering: pixelated;
-            }
-        }
-
-        /* UI Overlay */
-        #ui-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* La klikk gå gjennom til canvas der det ikke er knapper */
-        }
-
-        /* Startskjerm / Meny */
-        #start-screen {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(30, 20, 20, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            border: 4px solid #fca311;
-            box-shadow: 0 0 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(252, 163, 17, 0.2);
-            z-index: 1000;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            pointer-events: auto;
-        }
-
-        #start-screen h1 {
-            font-family: 'Impact', 'Arial Black', sans-serif;
-            color: #ffffff;
-            font-size: clamp(3rem, 8vw, 4rem);
-            margin-bottom: 30px;
-            text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-            letter-spacing: 2px;
-        }
-
-        .settings-group {
-            margin-bottom: 20px;
-            text-align: left;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .settings-group h3 {
-            margin-bottom: 12px;
-            color: #fca311;
-            font-size: 1.5rem;
-            font-family: 'Impact', 'Arial Black', sans-serif;
-            letter-spacing: 2px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-        }
-
-        .toggle-group-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .toggle-group-row .option-btn {
-            flex: 1;
-            padding: 10px 0;
-            font-size: 1.2rem;
-            min-width: 40px;
-        }
-
-        .option-btn {
-            background: #4a4a4a;
-            color: #e2e8f0;
-            border: 2px solid #333;
-            padding: 10px 15px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-family: 'Arial', sans-serif;
-            font-size: 1.1rem;
-            font-weight: bold;
-            transition: all 0.2s;
-            text-align: center;
-            user-select: none;
-        }
-
-        .option-btn.active {
-            background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
-            color: white;
-            border: 2px solid rgba(255, 60, 0, 0.6);
-            box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .option-btn:hover {
-            transform: scale(1.02);
-            filter: brightness(1.1);
-        }
-
-        button.start-btn {
-            background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.8rem;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            font-family: 'Impact', 'Arial Black', sans-serif;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 15px;
-            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.5), 0 0 20px rgba(255, 152, 0, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        }
-
-        button.start-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(255, 87, 34, 0.7), 0 0 30px rgba(255, 152, 0, 0.6);
-        }
-
-        /* Home Button */
-        #home-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(5px);
-            color: white;
-            text-decoration: none;
-            font-size: 2rem;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 87, 34, 0.6);
-            box-shadow: 0 0 15px rgba(255, 87, 34, 0.4);
-            z-index: 100;
-            pointer-events: auto;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        #home-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(255, 87, 34, 0.8);
-        }
-
-        /* In-game UI */
-        #hud {
-            display: none;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            font-family: 'Impact', 'Arial Black', sans-serif;
-            font-size: 2rem;
-            text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-            z-index: 100;
-            pointer-events: none;
-            flex-direction: row-reverse; /* Reverses the flex container to put score left, lives right */
-        }
-
-        #lives-display, #score-display {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        #math-problem-container {
-            position: absolute;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: none;
-            z-index: 100;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px 30px;
-            border-radius: 20px;
-            border: 3px solid #4ade80;
-            box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
-            animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            pointer-events: none;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: translate(-50%, -150px) scale(0.5); opacity: 0; }
-            50% { transform: translate(-50%, 20px) scale(1.1); opacity: 1; }
-            75% { transform: translate(-50%, -10px) scale(0.95); opacity: 1; }
-            100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
-        }
-
-        #math-problem {
-            font-family: 'Impact', 'Arial Black', sans-serif;
-            font-size: 5rem;
-            color: #ffffff;
-            text-shadow: 3px 3px 0px #ff5722, -1px -1px 0 #ff9800, 1px -1px 0 #ff9800, -1px 1px 0 #ff9800, 1px 1px 0 #ff9800;
-            letter-spacing: 5px; /* Give some extra space between numbers to avoid blending */
-            margin: 0;
-            line-height: 1;
-        }
-
-        #point-loss-indicator {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
-            font-weight: bold;
-            color: red;
-            text-shadow: 2px 2px 0px white;
-            opacity: 0;
-            transition: opacity 0.5s, transform 0.5s;
-            pointer-events: none;
-        }
-
-        /* Touch Controls */
-        #touch-controls {
-            display: none;
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            width: 100%;
-            height: 120px;
-            pointer-events: none;
-        }
-
-        .touch-btn {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.3);
-            border: 3px solid rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            color: white;
-            pointer-events: auto;
-            user-select: none;
-        }
-
-        .touch-btn:active {
-            background: rgba(255, 255, 255, 0.6);
-        }
-
-        #btn-left { left: 20px; bottom: 20px; }
-        #btn-right { left: 120px; bottom: 20px; }
-        #btn-duck { right: 120px; bottom: 20px; }
-        #btn-jump { right: 20px; bottom: 20px; }
-
-        @media (max-width: 1024px) {
-            #touch-controls {
-                display: block; /* Vises på nettbrett og mobil */
-            }
-            #hud {
-                top: 10px; /* Flytt HUD opp */
-                flex-direction: row;
-            }
-            #score-display {
-                font-size: 1.5rem;
-            }
-            #lives-display {
-                font-size: 1.2rem;
-            }
-            #math-problem {
-                font-size: 3rem; /* Mindre mattespørsmål på mobil */
-            }
-            #math-problem-container {
-                top: 60px;
-                padding: 5px 20px;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            #start-screen {
-                padding: 15px;
-                width: 95%;
-                max-height: 85vh;
-            }
-            #start-screen h1 {
-                font-size: clamp(2rem, 6vw, 2.5rem);
-                margin-bottom: 15px;
-            }
-            .settings-group {
-                margin-bottom: 12px;
-                padding: 10px;
-            }
-            .settings-group h3 {
-                font-size: 1rem;
-                margin-bottom: 8px;
-            }
-            .option-btn {
-                font-size: 0.9rem;
-                padding: 8px 10px;
-            }
-            .toggle-group-row .option-btn {
-                font-size: 1rem;
-                padding: 8px 0;
-            }
-            #operators-group {
-                grid-template-columns: 1fr !important;
-            }
-            button.start-btn {
-                font-size: 1.4rem;
-                padding: 12px 30px;
-                margin-top: 10px;
-            }
-            #math-problem {
-                font-size: 2.5rem; /* Enda mindre på små mobiler */
-            }
-            #math-problem-container {
-                top: 50px;
-            }
-            .touch-btn {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-            }
-            #btn-left { left: 10px; bottom: 10px; }
-            #btn-right { left: 80px; bottom: 10px; }
-            #btn-duck { right: 80px; bottom: 10px; }
-            #btn-jump { right: 10px; bottom: 10px; }
-        }
-
-        /* Ekstra justeringar for små horisontale skjermar */
-        @media (max-height: 500px) and (orientation: landscape) and (max-width: 900px) {
-            #start-screen {
-                padding: 8px;
-                max-height: 75vh;
-                overflow-y: auto; /* Sikre scroll */
-                -webkit-overflow-scrolling: touch; /* bedre scroll på iOS */
-            }
-            #start-screen h1 {
-                font-size: clamp(1.2rem, 3.5vw, 1.8rem);
-                margin-bottom: 8px;
-            }
-            .settings-group {
-                margin-bottom: 6px;
-                padding: 6px;
-            }
-            .settings-group h3 {
-                font-size: 0.8rem;
-                margin-bottom: 4px;
-            }
-            .option-btn {
-                font-size: 0.75rem;
-                padding: 5px 6px;
-            }
-            .toggle-group-row .option-btn {
-                font-size: 0.8rem;
-                padding: 5px 0;
-                min-width: 30px;
-            }
-            button.start-btn {
-                font-size: 1rem;
-                padding: 8px 20px;
-                margin-top: 6px;
-            }
-            #home-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-                top: 8px;
-                left: 8px;
-            }
-        }
-
-        /* Enda mindre for ekstra små skjermar */
-        @media (max-height: 400px) and (orientation: landscape) and (max-width: 768px) {
-            #start-screen {
-                padding: 5px;
-                max-height: 70vh;
-            }
-            #start-screen h1 {
-                font-size: clamp(1rem, 3vw, 1.5rem);
-                margin-bottom: 5px;
-            }
-            .settings-group {
-                margin-bottom: 4px;
-                padding: 4px;
-            }
-            .settings-group h3 {
-                font-size: 0.7rem;
-                margin-bottom: 3px;
-            }
-            .option-btn {
-                font-size: 0.65rem;
-                padding: 4px 5px;
-            }
-            .toggle-group-row .option-btn {
-                font-size: 0.7rem;
-                padding: 4px 0;
-                min-width: 25px;
-            }
-            button.start-btn {
-                font-size: 0.9rem;
-                padding: 6px 15px;
-                margin-top: 4px;
-            }
-        }
-
-        /* Portrait Warning Overlay */
-        #portrait-warning {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 9999;
-            color: white;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-family: 'Impact', 'Arial Black', sans-serif;
-        }
-
-        #portrait-warning svg {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 20px;
-            fill: #fca311;
-            animation: rotatePhone 2s infinite ease-in-out;
-        }
-
-        @keyframes rotatePhone {
-            0% { transform: rotate(0deg); }
-            50% { transform: rotate(-90deg); }
-            100% { transform: rotate(-90deg); }
-        }
-
-        #portrait-warning h2 {
-            font-size: 2rem;
-            margin: 0 20px;
-            letter-spacing: 2px;
-        }
-
-        @media (orientation: portrait) and (max-width: 900px) {
-            #portrait-warning {
-                display: flex;
-            }
-        }
-    </style>
-</head>
-<body>
-
-<!-- Portrait warning layer -->
-<div id="portrait-warning">
-    <svg viewBox="0 0 24 24">
-        <path d="M16 1H8C6.34 1 5 2.34 5 4v16c0 1.66 1.34 3 3 3h8c1.66 0 3-1.34 3-3V4c0-1.66-1.34-3-3-3zm-4 21c-.83 0-1.5-.67-1.5-1.5S11.17 19 12 19s1.5.67 1.5 1.5S12.83 22 12 22zm5.25-4H6.75V4h10.5v14z"/>
-    </svg>
-    <h2>Vennligst roter skjermen din!</h2>
-</div>
-
-<a href="../index.html" id="home-btn">🏠</a>
-
-<div id="game-container">
-    <canvas id="gameCanvas" width="1280" height="720"></canvas>
-    
-    <div id="ui-layer">
-        <div id="hud" style="display: none;">
-            <div id="lives-display">❤️❤️❤️</div>
-            <div id="score-display">Poeng: 0</div>
-            <div id="powerup-display"></div>
-        </div>
-
-        <div id="math-problem-container">
-            <div id="math-problem"></div>
-        </div>
-        <div id="point-loss-indicator">-100!</div>
-
-        <div id="start-screen">
-            <h1>Rettslause Raud</h1>
-            
-            <div class="settings-group">
-                <h3>Vanskegrad</h3>
-                <div class="toggle-group-row" id="difficulty-group">
-                    <div class="option-btn" data-val="1">1</div>
-                    <div class="option-btn" data-val="2">2</div>
-                    <div class="option-btn active" data-val="3">3</div>
-                    <div class="option-btn" data-val="4">4</div>
-                    <div class="option-btn" data-val="5">5</div>
-                </div>
-            </div>
-
-            <div class="settings-group">
-                <h3>Reknearter</h3>
-                <div class="toggle-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" id="operators-group">
-                    <div class="option-btn active" data-op="add">➕ Addisjon</div>
-                    <div class="option-btn active" data-op="sub">➖ Subtraksjon</div>
-                    <div class="option-btn active" data-op="mul">✖️ Multiplikasjon</div>
-                    <div class="option-btn active" data-op="div">➗ Divisjon</div>
-                </div>
-            </div>
-
-            <button class="start-btn" onclick="startGame()">Start Spelet!</button>
-        </div>
-
-        <div id="game-over-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); flex-direction: column; justify-content: center; align-items: center; z-index: 50; pointer-events: auto;">
-            <h1 style="color: #ff5722; font-family: 'Impact', 'Arial Black', sans-serif; font-size: 64px; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255,87,34,0.5);">SPELET ER SLUTT</h1>
-            <h2 style="color: white; font-family: 'Impact', 'Arial Black', sans-serif; font-size: 48px; margin-bottom: 40px;">Poeng: <span id="final-score" style="color: #4ade80;">0</span></h2>
-            <button class="start-btn" onclick="document.getElementById('game-over-screen').style.display='none'; startGame()">Prøv Igjen</button>
-        </div>
-
-        <div id="touch-controls">
-            <div class="touch-btn" id="btn-left">◀</div>
-            <div class="touch-btn" id="btn-right">▶</div>
-            <div class="touch-btn" id="btn-duck">▼</div>
-            <div class="touch-btn" id="btn-jump">▲</div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Button selection logic
-    document.querySelectorAll('#difficulty-group .option-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            document.querySelectorAll('#difficulty-group .option-btn').forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
-        });
-    });
-
-    document.querySelectorAll('#operators-group .option-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.target.classList.toggle('active');
-        });
-    });
-
-    // Delay showing the start screen
-    window.onload = () => {
-        setTimeout(() => {
-            const startScreen = document.getElementById('start-screen');
-            startScreen.style.display = 'block';
-            // slight delay to allow display:block to apply before changing opacity
-            setTimeout(() => {
-                startScreen.style.opacity = '1';
-            }, 50);
-        }, 1500); // 1.5 seconds delay
-    };
-</script>
-<script src="game.js"></script>
-</body>
-</html>
->>>>>>> C:/Users/88kjebjo/.windsurf/worktrees/_projects/_projects-757c0c7e/rettslause_raud/index.html
