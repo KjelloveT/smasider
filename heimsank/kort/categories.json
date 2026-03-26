@@ -16,7 +16,7 @@
   {
     "id": "byer",
     "label": "Skandinaviske byer",
-    "icon": "\ud83c\udfd9\ufe0f",
+    "icon": "🏘️",
     "csv": "byer_skandinavia.csv",
     "rarity": "rarity-byer.json",
     "idField": "city",
@@ -25,6 +25,20 @@
     "articleField": "article",
     "statField": "population",
     "statType": "number",
-    "statLabel": "\ud83d\udc65"
+    "statLabel": "👥"
+  },
+  {
+    "id": "land",
+    "label": "Land",
+    "icon": "🌍",
+    "csv": "land.csv",
+    "rarity": "rarity-land.json",
+    "idField": "country",
+    "nameField": "countryLabel",
+    "imageField": "flag",
+    "articleField": "article",
+    "statField": "population",
+    "statType": "number",
+    "statLabel": "👥"
   }
 ]
