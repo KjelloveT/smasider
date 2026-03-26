@@ -7,6 +7,8 @@ $mimeTypes = @{
   '.html' = 'text/html; charset=utf-8'
   '.js'   = 'application/javascript'
   '.css'  = 'text/css'
+  '.json' = 'application/json; charset=utf-8'
+  '.csv'  = 'text/csv; charset=utf-8'
   '.png'  = 'image/png'
   '.xml'  = 'application/xml'
   '.ico'  = 'image/x-icon'

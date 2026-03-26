@@ -1,0 +1,9 @@
+[
+  {
+    "id": "forskere",
+    "label": "Forskarar",
+    "icon": "🔬",
+    "csv": "forskere.csv",
+    "rarity": "rarity-forskere.json"
+  }
+]
