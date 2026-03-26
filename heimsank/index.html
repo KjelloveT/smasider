@@ -299,9 +299,16 @@ function goSetup(){
 // ═══ LOAD CARDS ═══
 async function loadCards(cat){
   const [csv,rar]=await Promise.all([fetch(`./kort/${cat.csv}`).then(r=>r.text()),fetch(`./kort/${cat.rarity}`).then(r=>r.json())]);
-  S.cards=parseCSV(csv).filter(r=>r.image&&r.image.trim()).map(r=>{
-    const id=r.scientist.replace('http://www.wikidata.org/entity/','');
-    return{id,name:r.scientistLabel||id,year:r.birthDate?r.birthDate.slice(0,4):'?',img:r.image.replace(/^http:/,'https:'),article:r.article||'',rarity:rar[id]||'vanleg',catId:cat.id,catLabel:cat.label,catIcon:cat.icon};
+  const idF=cat.idField||'scientist', nameF=cat.nameField||'scientistLabel';
+  const imgF=cat.imageField||'image', artF=cat.articleField||'article';
+  const statF=cat.statField||'birthDate', statT=cat.statType||'year', statLbl=cat.statLabel||'\uD83D\uDCC5';
+  S.cards=parseCSV(csv).filter(r=>r[imgF]&&r[imgF].trim()).map(r=>{
+    const id=r[idF].replace('http://www.wikidata.org/entity/','');
+    let stat='?';
+    if(statT==='year'){stat=r[statF]?r[statF].slice(0,4):'?';}
+    else if(statT==='number'){const n=parseInt(r[statF],10);stat=isNaN(n)?'?':n.toLocaleString('nb-NO');}
+    else{stat=r[statF]||'?';}
+    return{id,name:r[nameF]||id,stat,statLabel:statLbl,img:r[imgF].replace(/^http:/,'https:'),article:r[artF]||'',rarity:rar[id]||'vanleg',catId:cat.id,catLabel:cat.label,catIcon:cat.icon};
   });
   S.idx={}; S.groups={vanleg:[],sjeldgjevt:[],segngjeten:[],gudebore:[]};
   S.cards.forEach(c=>{S.idx[c.id]=c;(S.groups[c.rarity]||S.groups.vanleg).push(c);});
@@ -468,7 +475,7 @@ function mkCard(card,sz){
   img.onerror=function(){this.parentNode.innerHTML=`<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:2.5rem;opacity:.2">🔬</div>`;};
   iw.appendChild(img); el.appendChild(iw);
   const ft=document.createElement('div'); ft.className='card-footer';
-  const yr=document.createElement('span'); yr.textContent=`📅 ${card.year}`; ft.appendChild(yr);
+  const yr=document.createElement('span'); yr.textContent=`${card.statLabel} ${card.stat}`; ft.appendChild(yr);
   if(card.article){
     const a=document.createElement('a'); a.href=card.article; a.target='_blank'; a.rel='noopener';
     a.className='les-om-link'; a.textContent='Les om →';

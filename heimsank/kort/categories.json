@@ -4,6 +4,27 @@
     "label": "Forskarar",
     "icon": "🔬",
     "csv": "forskere.csv",
-    "rarity": "rarity-forskere.json"
+    "rarity": "rarity-forskere.json",
+    "idField": "scientist",
+    "nameField": "scientistLabel",
+    "imageField": "image",
+    "articleField": "article",
+    "statField": "birthDate",
+    "statType": "year",
+    "statLabel": "\ud83d\udcc5"
+  },
+  {
+    "id": "byer",
+    "label": "Skandinaviske byer",
+    "icon": "\ud83c\udfd9\ufe0f",
+    "csv": "byer_skandinavia.csv",
+    "rarity": "rarity-byer.json",
+    "idField": "city",
+    "nameField": "cityLabel",
+    "imageField": "image",
+    "articleField": "article",
+    "statField": "population",
+    "statType": "number",
+    "statLabel": "\ud83d\udc65"
   }
 ]
