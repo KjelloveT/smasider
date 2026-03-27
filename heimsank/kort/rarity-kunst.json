@@ -1,1930 +1,484 @@
-﻿[
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q97098744"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424762"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q53314787"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55421211"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57921980"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20428378"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q20355423"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21993927"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424038"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55428783"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55412398"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55421948"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q114121275"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21993527"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q53759255"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q78637988"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55416103"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q53701446"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q76153977"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q114289719"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q43220351"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55425085"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57885820"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55423407"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q21986820"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56676207"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q22082909"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q119790493"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55421653"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q113625537"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55416535"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20469780"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20470232"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q110473132"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q111646269"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56867474"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q56365095"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q114316384"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55412446"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55422602"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q20440984"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21981562"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q82455655"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q138509240"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q24574638"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q56816513"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q119722243"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424863"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55425685"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55421541"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424845"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55425691"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424852"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55425109"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q26492673"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56755558"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55423194"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q24704472"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55416895"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55423000"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55421985"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55421903"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q53700557"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422769"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21994178"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q114414887"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55427852"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q50813077"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q53763999"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q77523042"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56751444"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q25231127"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56867406"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56706880"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q57239133"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q65440224"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55421583"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q61089980"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q57312688"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57816384"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q70693468"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q20196542"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q114416625"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q4198385"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q24704649"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424848"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422066"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q103820549"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55425976"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q24702426"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q24705776"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20538181"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q53322160"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q24763826"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424801"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q111640786"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57271336"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q21978706"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q55410324"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q103824007"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q19829721"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56663050"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55417232"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q18599585"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q118358896"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q111802457"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q22031880"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q127869459"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q22075925"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20427399"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q47346253"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q20354576"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q30063155"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q126870831"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q53447057"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q97096972"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55410348"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q55410352"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422103"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422122"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56701959"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q55412388"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55423409"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56676234"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422233"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q118358924"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55410328"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55412434"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422260"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55420951"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q55416643"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55416568"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q97011025"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q114131582"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q30064887"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q114309420"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q112072965"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57923582"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q100524234"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q114289267"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q77381162"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q109517344"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q114257290"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q114289351"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q120799932"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q19829713"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56702103"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55425776"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55421320"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21979619"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56702812"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56706843"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q127107853"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q114259593"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q114244136"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q114245269"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q81646605"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q96938632"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q77299292"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q116693256"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q114289635"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q114615290"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q22071525"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21980567"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q97018725"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q135225375"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q22031266"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57271897"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56676162"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q21985461"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55411820"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q113625480"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q55423543"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q20267429"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20441171"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21976378"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55423511"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q130387268"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q64850367"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55422979"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56692380"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20380315"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55429935"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55414958"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q111267428"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q18923687"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q112195079"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q65991212"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55423777"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q126870336"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56856617"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q19913180"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q24703210"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q125096450"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q19905395"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q30063624"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55423943"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55423946"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q131586760"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q56816069"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q53523853"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q62027644"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20380552"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20277004"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q114415976"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q114124994"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q78873461"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q116485657"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q111603091"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q57269748"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q20891816"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q55424137"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q55424146"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q58035257"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q53453136"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q25201550"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q22083644"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q25074470"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q18599560"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q18599588"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q136522699"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q56676426"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20354166"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q20270420"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q53366755"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20539533"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q95674273"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q103200054"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55425141"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q24703815"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20267815"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q106368150"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q20354193"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q65660801"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55423855"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55410440"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55410445"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56676501"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q24764150"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55412422"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55412407"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q60993171"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55416529"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q128202940"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q72195112"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55421650"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q55425027"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55417014"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q60999356"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424964"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55413464"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q65555875"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55416638"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q96742577"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56435325"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q65662871"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q70699215"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55411647"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q70707789"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55423869"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q55422380"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55414114"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q65548978"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55416850"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q84262726"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424414"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q112206251"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55423292"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q53858099"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55413440"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q53700534"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q22081088"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21977501"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q18599587"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q20355356"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q103036181"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q103045001"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q103049313"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q103062146"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q103069427"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q103431833"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q104525483"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q104530675"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q108940193"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q116594155"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q116688837"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q131585294"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q131585297"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q131586578"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q131586581"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q131586583"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q138711385"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q24575111"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q24575432"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q24662712"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q24716632"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q28008302"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q58452418"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q58452580"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q58454269"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q58454435"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q61606729"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q61606867"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q61680180"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q63500520"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q63634785"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q72151344"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q75374822"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q99719008"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q22071381"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q116615825"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q103820504"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q120914234"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57238739"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q57919245"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422128"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q113625762"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q22077467"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56831317"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55425104"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q81421739"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q134055003"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56676148"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57869718"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q25198723"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q56701888"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q53324655"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21974413"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20354452"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q25035764"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q114246253"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q61043274"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57339064"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q111266958"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56692418"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57881567"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20441154"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55420711"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20355318"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q6856683"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q24705864"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q25000689"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q22044007"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q22053849"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q59106734"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q61701802"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422994"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56676392"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q53526050"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55425080"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q18686620"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q55425699"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q21995253"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q116200252"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20278279"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q18599586"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55425182"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20539249"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55411811"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55421547"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55420612"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55420574"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55423075"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55410768"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55425156"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q22079926"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q55425441"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424281"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424284"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q50820796"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q66197738"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q120912915"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q43303645"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55425292"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55425286"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20268579"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55421613"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q55423157"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q25017330"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q22000800"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q24764748"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422677"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20278262"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55412377"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55411805"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56664222"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21993829"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55421530"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55421545"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57324021"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57874634"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55425726"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21995364"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55422915"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q56676218"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q20550715"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q20536709"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q53449326"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56660332"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q20492817"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55421317"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q119040305"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q56816599"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q113625978"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q24978314"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21996237"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q21973892"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q21973918"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q21980525"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q119625800"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55425398"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q118353134"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q27044188"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q57910000"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q22029515"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q55425364"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21994841"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56660284"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55425354"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57936912"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q53767855"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q53760859"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q55412458"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20185615"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q21974242"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57283951"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q77570423"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55425703"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q97119320"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q56677277"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56807402"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55423568"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422251"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q22021972"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q120892675"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422155"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q56676473"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422208"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55421323"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55425631"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q56751550"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424008"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20440840"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21996490"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q22008510"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57883349"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q55421719"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q20433325"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56676113"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q20439265"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422235"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422239"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56810945"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55423433"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57279789"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q56676448"
-    },
-    {
-        "rarity":  "segngjeten",
-        "painting":  "http://www.wikidata.org/entity/Q55425070"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55415873"
-    },
-    {
-        "rarity":  "gudebore",
-        "painting":  "http://www.wikidata.org/entity/Q110990725"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55422135"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q62027527"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q126869826"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q24764432"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q25160361"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q111646270"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q131585301"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57927244"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q55425650"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q21993380"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q118352207"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q57286890"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q24702446"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56706760"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q108114605"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q56701841"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q55424703"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q116180643"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q21980572"
-    },
-    {
-        "rarity":  "sjeldgjevt",
-        "painting":  "http://www.wikidata.org/entity/Q118353107"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q20278289"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q53328954"
-    },
-    {
-        "rarity":  "vanleg",
-        "painting":  "http://www.wikidata.org/entity/Q79116125"
-    }
-]
+﻿{
+    "Q106368150":  "vanleg",
+    "Q126869826":  "vanleg",
+    "Q57910000":  "sjeldgjevt",
+    "Q57869718":  "vanleg",
+    "Q55416643":  "gudebore",
+    "Q118358924":  "vanleg",
+    "Q60993171":  "vanleg",
+    "Q116180643":  "sjeldgjevt",
+    "Q128202940":  "vanleg",
+    "Q18599587":  "segngjeten",
+    "Q70699215":  "vanleg",
+    "Q57283951":  "vanleg",
+    "Q55414958":  "vanleg",
+    "Q22071525":  "sjeldgjevt",
+    "Q24716632":  "vanleg",
+    "Q22071381":  "vanleg",
+    "Q66197738":  "vanleg",
+    "Q57885820":  "vanleg",
+    "Q55421613":  "vanleg",
+    "Q21978706":  "sjeldgjevt",
+    "Q53366755":  "vanleg",
+    "Q55413464":  "vanleg",
+    "Q103824007":  "vanleg",
+    "Q55425703":  "vanleg",
+    "Q96742577":  "vanleg",
+    "Q72151344":  "vanleg",
+    "Q57312688":  "sjeldgjevt",
+    "Q24703210":  "sjeldgjevt",
+    "Q21977501":  "vanleg",
+    "Q55421903":  "vanleg",
+    "Q55420951":  "vanleg",
+    "Q21976378":  "vanleg",
+    "Q111267428":  "segngjeten",
+    "Q55425085":  "vanleg",
+    "Q55414114":  "sjeldgjevt",
+    "Q4198385":  "vanleg",
+    "Q18599586":  "segngjeten",
+    "Q113625762":  "vanleg",
+    "Q55422066":  "vanleg",
+    "Q114309420":  "sjeldgjevt",
+    "Q20469780":  "vanleg",
+    "Q55424281":  "vanleg",
+    "Q53858099":  "vanleg",
+    "Q55425726":  "sjeldgjevt",
+    "Q114615290":  "vanleg",
+    "Q55412446":  "vanleg",
+    "Q77523042":  "sjeldgjevt",
+    "Q55420711":  "vanleg",
+    "Q112072965":  "sjeldgjevt",
+    "Q20439265":  "gudebore",
+    "Q55422103":  "vanleg",
+    "Q103036181":  "vanleg",
+    "Q56701959":  "vanleg",
+    "Q55425286":  "sjeldgjevt",
+    "Q82455655":  "vanleg",
+    "Q77299292":  "vanleg",
+    "Q20428378":  "vanleg",
+    "Q55421985":  "vanleg",
+    "Q55422122":  "vanleg",
+    "Q111640786":  "sjeldgjevt",
+    "Q118352207":  "sjeldgjevt",
+    "Q114289351":  "sjeldgjevt",
+    "Q53700534":  "sjeldgjevt",
+    "Q57286890":  "vanleg",
+    "Q57816384":  "vanleg",
+    "Q56676392":  "vanleg",
+    "Q56816599":  "segngjeten",
+    "Q96938632":  "sjeldgjevt",
+    "Q20538181":  "vanleg",
+    "Q120799932":  "vanleg",
+    "Q55425650":  "sjeldgjevt",
+    "Q21995253":  "segngjeten",
+    "Q55416895":  "sjeldgjevt",
+    "Q114244136":  "gudebore",
+    "Q79116125":  "vanleg",
+    "Q135225375":  "vanleg",
+    "Q56867406":  "vanleg",
+    "Q55423194":  "vanleg",
+    "Q18923687":  "segngjeten",
+    "Q126870831":  "sjeldgjevt",
+    "Q20355423":  "sjeldgjevt",
+    "Q70707789":  "sjeldgjevt",
+    "Q81646605":  "vanleg",
+    "Q55413440":  "sjeldgjevt",
+    "Q136522699":  "vanleg",
+    "Q55421650":  "sjeldgjevt",
+    "Q20354166":  "vanleg",
+    "Q21973918":  "segngjeten",
+    "Q55416103":  "vanleg",
+    "Q114289635":  "vanleg",
+    "Q24764748":  "vanleg",
+    "Q55423409":  "vanleg",
+    "Q55428783":  "sjeldgjevt",
+    "Q21996237":  "vanleg",
+    "Q55411647":  "vanleg",
+    "Q114131582":  "vanleg",
+    "Q56706843":  "vanleg",
+    "Q55424852":  "vanleg",
+    "Q55425070":  "segngjeten",
+    "Q25000689":  "segngjeten",
+    "Q43220351":  "vanleg",
+    "Q97096972":  "vanleg",
+    "Q56807402":  "vanleg",
+    "Q56435325":  "vanleg",
+    "Q20470232":  "vanleg",
+    "Q55425027":  "gudebore",
+    "Q21994178":  "vanleg",
+    "Q62027644":  "vanleg",
+    "Q57921980":  "vanleg",
+    "Q58035257":  "vanleg",
+    "Q20427399":  "vanleg",
+    "Q20278289":  "vanleg",
+    "Q65991212":  "vanleg",
+    "Q116485657":  "vanleg",
+    "Q114316384":  "vanleg",
+    "Q114414887":  "sjeldgjevt",
+    "Q65555875":  "segngjeten",
+    "Q56676218":  "sjeldgjevt",
+    "Q138711385":  "sjeldgjevt",
+    "Q19905395":  "vanleg",
+    "Q20440840":  "vanleg",
+    "Q55425182":  "sjeldgjevt",
+    "Q21973892":  "sjeldgjevt",
+    "Q56751444":  "vanleg",
+    "Q55410440":  "vanleg",
+    "Q20536709":  "sjeldgjevt",
+    "Q57239133":  "sjeldgjevt",
+    "Q63500520":  "sjeldgjevt",
+    "Q103200054":  "vanleg",
+    "Q22079926":  "vanleg",
+    "Q55425441":  "segngjeten",
+    "Q22021972":  "gudebore",
+    "Q55424038":  "vanleg",
+    "Q119040305":  "sjeldgjevt",
+    "Q56676234":  "vanleg",
+    "Q55421320":  "vanleg",
+    "Q24978314":  "sjeldgjevt",
+    "Q65548978":  "sjeldgjevt",
+    "Q131586581":  "vanleg",
+    "Q18599585":  "vanleg",
+    "Q63634785":  "vanleg",
+    "Q55425691":  "vanleg",
+    "Q55421530":  "vanleg",
+    "Q55410352":  "gudebore",
+    "Q103820549":  "vanleg",
+    "Q55425685":  "vanleg",
+    "Q43303645":  "vanleg",
+    "Q55425631":  "vanleg",
+    "Q53760859":  "segngjeten",
+    "Q56660332":  "vanleg",
+    "Q24574638":  "vanleg",
+    "Q104530675":  "vanleg",
+    "Q130387268":  "vanleg",
+    "Q21985461":  "segngjeten",
+    "Q22077467":  "sjeldgjevt",
+    "Q21993829":  "vanleg",
+    "Q55423511":  "vanleg",
+    "Q20185615":  "vanleg",
+    "Q55422915":  "sjeldgjevt",
+    "Q24704649":  "vanleg",
+    "Q21995364":  "vanleg",
+    "Q56663050":  "vanleg",
+    "Q18686620":  "vanleg",
+    "Q125096450":  "sjeldgjevt",
+    "Q20354452":  "vanleg",
+    "Q24704472":  "vanleg",
+    "Q55424801":  "vanleg",
+    "Q72195112":  "sjeldgjevt",
+    "Q114124994":  "vanleg",
+    "Q22083644":  "vanleg",
+    "Q70693468":  "segngjeten",
+    "Q56755558":  "vanleg",
+    "Q56856617":  "vanleg",
+    "Q61701802":  "sjeldgjevt",
+    "Q53767855":  "vanleg",
+    "Q53523853":  "sjeldgjevt",
+    "Q58452580":  "vanleg",
+    "Q55416850":  "vanleg",
+    "Q53759255":  "vanleg",
+    "Q55421547":  "sjeldgjevt",
+    "Q127869459":  "vanleg",
+    "Q111802457":  "sjeldgjevt",
+    "Q24703815":  "sjeldgjevt",
+    "Q55421948":  "vanleg",
+    "Q20268579":  "vanleg",
+    "Q114259593":  "segngjeten",
+    "Q56867474":  "vanleg",
+    "Q24705776":  "vanleg",
+    "Q25017330":  "sjeldgjevt",
+    "Q53763999":  "vanleg",
+    "Q57874634":  "vanleg",
+    "Q131586760":  "vanleg",
+    "Q55420574":  "vanleg",
+    "Q55424863":  "vanleg",
+    "Q20539249":  "vanleg",
+    "Q131586578":  "sjeldgjevt",
+    "Q113625480":  "vanleg",
+    "Q55422135":  "vanleg",
+    "Q56676501":  "vanleg",
+    "Q20278279":  "vanleg",
+    "Q55423433":  "vanleg",
+    "Q20278262":  "vanleg",
+    "Q120914234":  "vanleg",
+    "Q21996490":  "vanleg",
+    "Q114245269":  "sjeldgjevt",
+    "Q97018725":  "vanleg",
+    "Q111646270":  "vanleg",
+    "Q126870336":  "vanleg",
+    "Q99719008":  "sjeldgjevt",
+    "Q56676448":  "sjeldgjevt",
+    "Q104525483":  "vanleg",
+    "Q81421739":  "gudebore",
+    "Q55423777":  "vanleg",
+    "Q55410768":  "vanleg",
+    "Q55424284":  "vanleg",
+    "Q24575111":  "vanleg",
+    "Q24764432":  "sjeldgjevt",
+    "Q77381162":  "sjeldgjevt",
+    "Q55422239":  "vanleg",
+    "Q55410348":  "vanleg",
+    "Q19913180":  "segngjeten",
+    "Q22029515":  "vanleg",
+    "Q55422602":  "sjeldgjevt",
+    "Q24702446":  "sjeldgjevt",
+    "Q55427852":  "vanleg",
+    "Q56810945":  "vanleg",
+    "Q97098744":  "sjeldgjevt",
+    "Q103049313":  "sjeldgjevt",
+    "Q118353134":  "gudebore",
+    "Q65662871":  "segngjeten",
+    "Q120892675":  "vanleg",
+    "Q50820796":  "vanleg",
+    "Q78637988":  "vanleg",
+    "Q118358896":  "vanleg",
+    "Q55422251":  "vanleg",
+    "Q55425156":  "sjeldgjevt",
+    "Q55429935":  "vanleg",
+    "Q58452418":  "vanleg",
+    "Q76153977":  "sjeldgjevt",
+    "Q55423543":  "segngjeten",
+    "Q55424414":  "vanleg",
+    "Q55422380":  "segngjeten",
+    "Q57881567":  "vanleg",
+    "Q55422208":  "vanleg",
+    "Q20355318":  "vanleg",
+    "Q56676148":  "vanleg",
+    "Q55421541":  "sjeldgjevt",
+    "Q55411805":  "vanleg",
+    "Q53447057":  "sjeldgjevt",
+    "Q21993927":  "vanleg",
+    "Q113625978":  "sjeldgjevt",
+    "Q20891816":  "sjeldgjevt",
+    "Q24763826":  "segngjeten",
+    "Q55424137":  "segngjeten",
+    "Q53449326":  "vanleg",
+    "Q55411820":  "vanleg",
+    "Q116594155":  "vanleg",
+    "Q116693256":  "vanleg",
+    "Q21979619":  "vanleg",
+    "Q55424146":  "segngjeten",
+    "Q27044188":  "sjeldgjevt",
+    "Q111266958":  "sjeldgjevt",
+    "Q25035764":  "sjeldgjevt",
+    "Q61606729":  "vanleg",
+    "Q114257290":  "segngjeten",
+    "Q22081088":  "gudebore",
+    "Q108940193":  "vanleg",
+    "Q103062146":  "vanleg",
+    "Q56706880":  "vanleg",
+    "Q55422769":  "vanleg",
+    "Q114289267":  "sjeldgjevt",
+    "Q28008302":  "vanleg",
+    "Q75374822":  "vanleg",
+    "Q55416535":  "sjeldgjevt",
+    "Q56677277":  "gudebore",
+    "Q116200252":  "vanleg",
+    "Q20267815":  "vanleg",
+    "Q22053849":  "vanleg",
+    "Q53314787":  "vanleg",
+    "Q84262726":  "vanleg",
+    "Q103069427":  "sjeldgjevt",
+    "Q55423568":  "sjeldgjevt",
+    "Q57279789":  "vanleg",
+    "Q55423943":  "vanleg",
+    "Q55421545":  "vanleg",
+    "Q55425976":  "vanleg",
+    "Q21993380":  "sjeldgjevt",
+    "Q57269748":  "sjeldgjevt",
+    "Q24764150":  "vanleg",
+    "Q21993527":  "vanleg",
+    "Q57238739":  "vanleg",
+    "Q55410445":  "vanleg",
+    "Q56676473":  "sjeldgjevt",
+    "Q18599588":  "vanleg",
+    "Q55416568":  "vanleg",
+    "Q25231127":  "vanleg",
+    "Q55424703":  "vanleg",
+    "Q109517344":  "vanleg",
+    "Q56702103":  "vanleg",
+    "Q55421323":  "vanleg",
+    "Q56676426":  "sjeldgjevt",
+    "Q18599560":  "vanleg",
+    "Q6856683":  "vanleg",
+    "Q21994841":  "vanleg",
+    "Q19829713":  "vanleg",
+    "Q56660284":  "vanleg",
+    "Q53700557":  "vanleg",
+    "Q118353107":  "sjeldgjevt",
+    "Q20440984":  "sjeldgjevt",
+    "Q22000800":  "sjeldgjevt",
+    "Q61043274":  "gudebore",
+    "Q61680180":  "vanleg",
+    "Q24662712":  "vanleg",
+    "Q55423407":  "sjeldgjevt",
+    "Q55423075":  "vanleg",
+    "Q56816513":  "sjeldgjevt",
+    "Q55412434":  "vanleg",
+    "Q20267429":  "sjeldgjevt",
+    "Q55421211":  "vanleg",
+    "Q55412398":  "vanleg",
+    "Q20433325":  "sjeldgjevt",
+    "Q116615825":  "vanleg",
+    "Q119790493":  "sjeldgjevt",
+    "Q55420612":  "vanleg",
+    "Q21980572":  "vanleg",
+    "Q95674273":  "sjeldgjevt",
+    "Q22031880":  "vanleg",
+    "Q65660801":  "vanleg",
+    "Q55423855":  "vanleg",
+    "Q55410324":  "segngjeten",
+    "Q20355356":  "sjeldgjevt",
+    "Q59106734":  "vanleg",
+    "Q131585301":  "sjeldgjevt",
+    "Q20441154":  "vanleg",
+    "Q19829721":  "sjeldgjevt",
+    "Q24705864":  "vanleg",
+    "Q20441171":  "vanleg",
+    "Q55423157":  "segngjeten",
+    "Q57271897":  "vanleg",
+    "Q120912915":  "vanleg",
+    "Q55422235":  "vanleg",
+    "Q61089980":  "vanleg",
+    "Q57324021":  "vanleg",
+    "Q114289719":  "vanleg",
+    "Q103045001":  "vanleg",
+    "Q55425080":  "sjeldgjevt",
+    "Q21974242":  "sjeldgjevt",
+    "Q65440224":  "vanleg",
+    "Q55411811":  "vanleg",
+    "Q22008510":  "vanleg",
+    "Q110473132":  "vanleg",
+    "Q112195079":  "sjeldgjevt",
+    "Q55422260":  "vanleg",
+    "Q25074470":  "vanleg",
+    "Q55423869":  "vanleg",
+    "Q56702812":  "vanleg",
+    "Q55424762":  "vanleg",
+    "Q56676162":  "vanleg",
+    "Q103820504":  "vanleg",
+    "Q22075925":  "vanleg",
+    "Q55422994":  "vanleg",
+    "Q55423946":  "sjeldgjevt",
+    "Q134055003":  "sjeldgjevt",
+    "Q55425109":  "vanleg",
+    "Q55425776":  "vanleg",
+    "Q57339064":  "vanleg",
+    "Q55421317":  "sjeldgjevt",
+    "Q61606867":  "segngjeten",
+    "Q55416638":  "vanleg",
+    "Q55425104":  "sjeldgjevt",
+    "Q55424845":  "vanleg",
+    "Q55425364":  "segngjeten",
+    "Q78873461":  "vanleg",
+    "Q20492817":  "sjeldgjevt",
+    "Q21980567":  "vanleg",
+    "Q55425292":  "vanleg",
+    "Q114416625":  "vanleg",
+    "Q55425699":  "segngjeten",
+    "Q111603091":  "sjeldgjevt",
+    "Q55425398":  "sjeldgjevt",
+    "Q22082909":  "vanleg",
+    "Q55423000":  "vanleg",
+    "Q55417232":  "vanleg",
+    "Q56692418":  "vanleg",
+    "Q20539533":  "vanleg",
+    "Q21974413":  "vanleg",
+    "Q55412407":  "sjeldgjevt",
+    "Q60999356":  "sjeldgjevt",
+    "Q111646269":  "vanleg",
+    "Q55422155":  "vanleg",
+    "Q131586583":  "vanleg",
+    "Q57883349":  "vanleg",
+    "Q22044007":  "vanleg",
+    "Q55422979":  "sjeldgjevt",
+    "Q55417014":  "vanleg",
+    "Q114415976":  "sjeldgjevt",
+    "Q131585297":  "vanleg",
+    "Q55416529":  "vanleg",
+    "Q114246253":  "vanleg",
+    "Q56676207":  "vanleg",
+    "Q55422233":  "vanleg",
+    "Q112206251":  "vanleg",
+    "Q138509240":  "vanleg",
+    "Q55424848":  "vanleg",
+    "Q56676113":  "vanleg",
+    "Q119625800":  "vanleg",
+    "Q30063155":  "sjeldgjevt",
+    "Q58454269":  "vanleg",
+    "Q110990725":  "gudebore",
+    "Q24702426":  "sjeldgjevt",
+    "Q26492673":  "vanleg",
+    "Q113625537":  "sjeldgjevt",
+    "Q53322160":  "vanleg",
+    "Q30063624":  "vanleg",
+    "Q108114605":  "vanleg",
+    "Q97119320":  "vanleg",
+    "Q20550715":  "sjeldgjevt",
+    "Q127107853":  "vanleg",
+    "Q57271336":  "vanleg",
+    "Q116688837":  "vanleg",
+    "Q21980525":  "sjeldgjevt",
+    "Q55421583":  "vanleg",
+    "Q131585294":  "vanleg",
+    "Q64850367":  "segngjeten",
+    "Q55425354":  "sjeldgjevt",
+    "Q22031266":  "sjeldgjevt",
+    "Q20354193":  "segngjeten",
+    "Q57927244":  "vanleg",
+    "Q56701841":  "vanleg",
+    "Q20270420":  "sjeldgjevt",
+    "Q55424008":  "vanleg",
+    "Q56706760":  "vanleg",
+    "Q100524234":  "vanleg",
+    "Q57919245":  "sjeldgjevt",
+    "Q21986820":  "sjeldgjevt",
+    "Q55421719":  "gudebore",
+    "Q56701888":  "sjeldgjevt",
+    "Q30064887":  "vanleg",
+    "Q20354576":  "gudebore",
+    "Q53453136":  "sjeldgjevt",
+    "Q97011025":  "vanleg",
+    "Q56751550":  "sjeldgjevt",
+    "Q20380552":  "vanleg",
+    "Q56831317":  "vanleg",
+    "Q103431833":  "vanleg",
+    "Q53328954":  "vanleg",
+    "Q114121275":  "vanleg",
+    "Q25198723":  "vanleg",
+    "Q55412388":  "segngjeten",
+    "Q25201550":  "gudebore",
+    "Q55415873":  "sjeldgjevt",
+    "Q55425141":  "vanleg",
+    "Q55410328":  "vanleg",
+    "Q20277004":  "vanleg",
+    "Q55412377":  "sjeldgjevt",
+    "Q55421653":  "vanleg",
+    "Q21981562":  "vanleg",
+    "Q119722243":  "vanleg",
+    "Q77570423":  "sjeldgjevt",
+    "Q56692380":  "vanleg",
+    "Q53526050":  "vanleg",
+    "Q53324655":  "sjeldgjevt",
+    "Q55423292":  "sjeldgjevt",
+    "Q24575432":  "gudebore",
+    "Q25160361":  "sjeldgjevt",
+    "Q56365095":  "sjeldgjevt",
+    "Q56664222":  "vanleg",
+    "Q58454435":  "vanleg",
+    "Q47346253":  "vanleg",
+    "Q56816069":  "sjeldgjevt",
+    "Q50813077":  "vanleg",
+    "Q55424964":  "vanleg",
+    "Q57923582":  "vanleg",
+    "Q57936912":  "vanleg",
+    "Q20380315":  "vanleg",
+    "Q55422128":  "vanleg",
+    "Q20196542":  "segngjeten",
+    "Q55422677":  "vanleg",
+    "Q53701446":  "vanleg",
+    "Q55412422":  "vanleg",
+    "Q55412458":  "segngjeten",
+    "Q62027527":  "vanleg"
+}

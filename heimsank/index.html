@@ -376,8 +376,9 @@ function goSetup(){
 
 // ═══ LOAD CARDS ═══
 async function loadCards(cat){
-  const [csv,rarArr]=await Promise.all([fetch(`./kort/${cat.csv}`).then(r=>r.text()),fetch(`./kort/${cat.rarity}`).then(r=>r.json())]);
-  const rar={}; rarArr.forEach(r=>{const key=r[Object.keys(r).find(k=>k!=='rarity')];if(key)rar[key.replace('http://www.wikidata.org/entity/','')]=r.rarity;});
+  const [csv,rar]=await Promise.all([fetch(`./kort/${cat.csv}`).then(r=>r.text()),fetch(`./kort/${cat.rarity}`).then(r=>r.json())]);
+  // NOTE: All rarity files use object format: { "Q123": "vanleg", "Q456": "sjeldgjevt", ... }
+  // To convert array format to object: run fix_rarity.ps1
   const idF=cat.idField||'scientist', nameF=cat.nameField||'scientistLabel';
   const imgF=cat.imageField||'image', artF=cat.articleField||'article';
   const statF=cat.statField||'birthDate', statT=cat.statType||'year', statLbl=cat.statLabel||'📅';
