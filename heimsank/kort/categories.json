@@ -68,5 +68,19 @@
     "statField": "artistLabel",
     "statType": "text",
     "statLabel": "🎨"
+  },
+  {
+    "id": "hest",
+    "label": "Hesterasar",
+    "icon": "🐴",
+    "csv": "hest.csv",
+    "rarity": "rarity-hest.json",
+    "idField": "breed",
+    "nameField": "breedLabel",
+    "imageField": "image",
+    "articleField": "article",
+    "statField": "originLabel",
+    "statType": "text",
+    "statLabel": "🌍"
   }
 ]

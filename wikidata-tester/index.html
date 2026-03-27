@@ -338,6 +338,7 @@
                 <button class="example-btn" onclick="loadExample('clPlayers')">Champions League-spelarar</button>
                 <button class="example-btn" onclick="loadExample('aircraft')">Flytypar (med passasjertall)</button>
                 <button class="example-btn" onclick="loadExample('norwegianPaintings')">Norsk kunst 1800-talet</button>
+                <button class="example-btn" onclick="loadExample('horseBreeds')">Hesteraser</button>
             </div>
 
             <div class="query-section">
@@ -488,7 +489,20 @@ LIMIT 100`,
   SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
 }
 ORDER BY ?year ?paintingLabel
-LIMIT 100`
+LIMIT 100`,
+            horseBreeds: `SELECT ?breed ?breedLabel ?origin ?originLabel ?height ?image ?article WHERE {
+  ?breed wdt:P31/wdt:P279* wd:Q1160573;
+         wdt:P18 ?image.
+  OPTIONAL { ?breed wdt:P495 ?origin. }
+  OPTIONAL { ?breed wdt:P2048 ?height. }
+  OPTIONAL {
+    ?article schema:about ?breed ;
+             schema:isPartOf <https://no.wikipedia.org/> .
+  }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "no,en". }
+}
+ORDER BY ?breedLabel
+LIMIT 150`
         };
 
         function loadExample(type) {
