@@ -376,10 +376,11 @@ function goSetup(){
 
 // ═══ LOAD CARDS ═══
 async function loadCards(cat){
-  const [csv,rar]=await Promise.all([fetch(`./kort/${cat.csv}`).then(r=>r.text()),fetch(`./kort/${cat.rarity}`).then(r=>r.json())]);
+  const [csv,rarArr]=await Promise.all([fetch(`./kort/${cat.csv}`).then(r=>r.text()),fetch(`./kort/${cat.rarity}`).then(r=>r.json())]);
+  const rar={}; rarArr.forEach(r=>{const key=r[Object.keys(r).find(k=>k!=='rarity')];if(key)rar[key.replace('http://www.wikidata.org/entity/','')]=r.rarity;});
   const idF=cat.idField||'scientist', nameF=cat.nameField||'scientistLabel';
   const imgF=cat.imageField||'image', artF=cat.articleField||'article';
-  const statF=cat.statField||'birthDate', statT=cat.statType||'year', statLbl=cat.statLabel||'\uD83D\uDCC5';
+  const statF=cat.statField||'birthDate', statT=cat.statType||'year', statLbl=cat.statLabel||'📅';
   S.cards=parseCSV(csv).filter(r=>r[imgF]&&r[imgF].trim()).map(r=>{
     const id=r[idF].replace('http://www.wikidata.org/entity/','');
     let stat='?';
