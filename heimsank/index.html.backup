@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heimsank</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Arial Black','Arial Bold',Arial,system-ui,sans-serif;background:#FDFD96;min-height:100vh;color:#000}
+.hidden{display:none!important}
+
+/* Page layout: column, collection bar fixed at bottom */
+.page{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.app-header{background:#fff;border-bottom:3px solid #000;padding:13px 24px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.app-title{font-size:clamp(1.2rem,3vw,1.8rem);font-weight:900;text-transform:uppercase;letter-spacing:-1px}
+.stripe{height:8px;background:repeating-linear-gradient(-45deg,#000 0,#000 4px,#FDFD96 4px,#FDFD96 12px);flex-shrink:0}
+.game-wrapper{flex:1;overflow-y:auto;display:flex;align-items:center;justify-content:center;padding:20px}
+
+/* Panels */
+.panel{background:#fff;border:3px solid #000;box-shadow:6px 6px 0 #000;padding:28px;width:100%;max-width:540px}
+.panel-title{font-size:clamp(1.5rem,3.5vw,2rem);font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin-bottom:22px}
+
+/* Setup */
+.settings-group{margin-bottom:18px}
+.settings-label{font-size:.78rem;font-weight:900;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:block}
+.btn-group{display:flex;flex-wrap:wrap;gap:8px}
+.cats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:18px}
+.cat-card{background:#fff;border:3px solid #000;box-shadow:4px 4px 0 #000;padding:14px 10px;text-align:center;cursor:pointer;transition:transform .1s,box-shadow .1s}
+.cat-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #000}
+.cat-card.selected{background:#BAFCA2}
+.cat-icon{font-size:1.8rem;display:block;margin-bottom:5px}
+.cat-name{font-size:.72rem;font-weight:900;text-transform:uppercase}
+
+/* Buttons */
+.opt-btn{background:#fff;border:2px solid #000;box-shadow:3px 3px 0 #000;padding:7px 12px;font-family:inherit;font-size:.75rem;font-weight:900;text-transform:uppercase;cursor:pointer;transition:transform .1s,box-shadow .1s}
+.opt-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #000}
+.opt-btn.selected{background:#000;color:#FDFD96;box-shadow:3px 3px 0 #555}
+.btn-primary{background:#000;color:#FDFD96;border:3px solid #000;box-shadow:5px 5px 0 #555;padding:12px 26px;font-family:inherit;font-size:.88rem;font-weight:900;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;transition:transform .1s,box-shadow .1s}
+.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #555}
+.btn-primary:active{transform:translate(2px,2px);box-shadow:3px 3px 0 #555}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.btn-outline{background:#fff;color:#000;border:2px solid #000;box-shadow:3px 3px 0 #000;padding:8px 14px;font-family:inherit;font-size:.75rem;font-weight:900;text-transform:uppercase;cursor:pointer;transition:transform .1s,box-shadow .1s}
+.btn-outline:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #000}
+
+/* Progress */
+.progress-wrap{background:#eee;border:3px solid #000;height:28px;margin-bottom:18px;position:relative;overflow:hidden}
+.progress-fill{background:#000;height:100%;width:0%;transition:width .4s ease}
+.progress-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;pointer-events:none;color:#FDFD96;mix-blend-mode:difference;filter:invert(1)}
+
+/* Question */
+.question-box{background:#fff;border-bottom:3px solid #000;box-shadow:0 4px 0 #000;padding:12px 20px;text-align:center;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;min-height:80px;height:80px}
+.q-box{font-size:clamp(1.2rem,4vw,1.8rem);font-weight:900;text-align:center;margin:0;letter-spacing:-1px;line-height:1;white-space:nowrap}
+.answer-row{display:flex;gap:8px;justify-content:center;align-items:center;margin:0;flex-wrap:wrap}
+.answer-input{font-family:'Arial Black',Arial,sans-serif;font-size:1.4rem;font-weight:900;border:2px solid #000;box-shadow:3px 3px 0 #000;padding:6px 8px;width:80px;text-align:center;background:#fff;color:#000}
+.answer-input:focus{outline:none;box-shadow:4px 4px 0 #000}
+.feedback{font-size:.75rem;font-weight:900;text-align:center;min-height:20px;text-transform:uppercase;letter-spacing:.2px;position:absolute;bottom:2px;right:20px}
+.feedback.correct{color:#0a7a0a}
+.feedback.incorrect{color:#c00}
+
+/* Collectible cards — shared */
+.collect-card{border:3px solid #000;overflow:hidden;position:relative;user-select:none}
+.collect-card.vanleg{background:#fff;box-shadow:4px 4px 0 #000}
+.collect-card.sjeldgjevt{background:#87CEEB;box-shadow:4px 4px 0 #1a5276;border-color:#1a5276}
+.collect-card.segngjeten{background:#C4A1FF;box-shadow:4px 4px 0 #4a235a;border-color:#4a235a}
+.collect-card.gudebore{background:#FFDB58;box-shadow:4px 4px 0 #7d6608;border-color:#b8860b;animation:glow 2.5s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:4px 4px 0 #7d6608}50%{box-shadow:4px 4px 0 #f0c000,0 0 18px rgba(255,200,0,.5)}}
+.collect-card.segngjeten::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0,transparent 8px,rgba(255,255,255,.12) 8px,rgba(255,255,255,.12) 12px);pointer-events:none;z-index:1}
+.collect-card.gudebore::after{content:'✨';position:absolute;top:4px;right:5px;font-size:.75rem;z-index:2}
+.card-header{padding:7px 10px 6px;border-bottom:2px solid rgba(0,0,0,.35);position:relative;z-index:2}
+.card-name{font-size:.74rem;font-weight:900;text-transform:uppercase;letter-spacing:-.2px;line-height:1.2;display:block;margin-bottom:4px}
+.rarity-badge{font-size:.52rem;font-weight:900;text-transform:uppercase;border:2px solid #000;padding:2px 6px;white-space:nowrap;display:inline-block}
+.collect-card.vanleg .rarity-badge{background:#ddd}
+.collect-card.sjeldgjevt .rarity-badge{background:#5dade2;color:#fff;border-color:#1a5276}
+.collect-card.segngjeten .rarity-badge{background:#8e44ad;color:#fff;border-color:#4a235a}
+.collect-card.gudebore .rarity-badge{background:#f39c12;border-color:#b8860b}
+.card-img-wrap{overflow:hidden;position:relative;z-index:0;border-bottom:2px solid rgba(0,0,0,.25)}
+.collect-card.vanleg .card-img-wrap{background:#f0f0f0}
+.collect-card.sjeldgjevt .card-img-wrap{background:#87CEEB}
+.collect-card.segngjeten .card-img-wrap{background:#C4A1FF}
+.collect-card.gudebore .card-img-wrap{background:#FFDB58}
+.card-img-wrap img{object-fit:cover;display:block;width:100%;height:100%}
+.card-footer{padding:6px 10px;font-size:.65rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
+.les-om-link{color:#000;font-weight:900;font-size:.6rem;text-decoration:none;border-bottom:2px solid #000;text-transform:uppercase;letter-spacing:.3px;line-height:1}
+.les-om-link:hover{opacity:.6}
+
+/* Buttons */
+.opt-btn{background:#fff;border:2px solid #000;box-shadow:3px 3px 0 #000;padding:7px 12px;font-family:inherit;font-size:.75rem;font-weight:900;text-transform:uppercase;cursor:pointer;transition:transform .1s,box-shadow .1s}
+.opt-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #000}
+.opt-btn.selected{background:#000;color:#FDFD96;box-shadow:3px 3px 0 #555}
+.btn-primary{background:#000;color:#FDFD96;border:3px solid #000;box-shadow:5px 5px 0 #555;padding:12px 26px;font-family:inherit;font-size:.88rem;font-weight:900;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;transition:transform .1s,box-shadow .1s}
+.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #555}
+.btn-primary:active{transform:translate(2px,2px);box-shadow:3px 3px 0 #555}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.btn-outline{background:#fff;color:#000;border:2px solid #000;box-shadow:3px 3px 0 #000;padding:8px 14px;font-family:inherit;font-size:.75rem;font-weight:900;text-transform:uppercase;cursor:pointer;transition:transform .1s,box-shadow .1s}
+.btn-outline:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #000}
+
+/* Progress */
+.progress-wrap{background:#eee;border:3px solid #000;height:28px;margin-bottom:18px;position:relative;overflow:hidden}
+.progress-fill{background:#000;height:100%;width:0%;transition:width .4s ease}
+.progress-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;pointer-events:none;color:#FDFD96;mix-blend-mode:difference;filter:invert(1)}
+
+/* Question */
+.question-box{background:#fff;border-bottom:3px solid #000;box-shadow:0 4px 0 #000;padding:12px 20px;text-align:center;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;min-height:80px;height:80px}
+.q-box{font-size:clamp(1.2rem,4vw,1.8rem);font-weight:900;text-align:center;margin:0;letter-spacing:-1px;line-height:1;white-space:nowrap}
+.answer-row{display:flex;gap:8px;justify-content:center;align-items:center;margin:0;flex-wrap:wrap}
+.answer-input{font-family:'Arial Black',Arial,sans-serif;font-size:1.4rem;font-weight:900;border:2px solid #000;box-shadow:3px 3px 0 #000;padding:6px 8px;width:80px;text-align:center;background:#fff;color:#000}
+.answer-input:focus{outline:none;box-shadow:4px 4px 0 #000}
+.feedback{font-size:.75rem;font-weight:900;text-align:center;min-height:20px;text-transform:uppercase;letter-spacing:.2px;position:absolute;bottom:2px;right:20px}
+.feedback.correct{color:#0a7a0a}
+.feedback.incorrect{color:#c00}
+
+/* Collectible cards — shared */
+.collect-card{border:3px solid #000;overflow:hidden;position:relative;user-select:none}
+.collect-card.vanleg{background:#fff;box-shadow:4px 4px 0 #000}
+.collect-card.sjeldgjevt{background:#87CEEB;box-shadow:4px 4px 0 #1a5276;border-color:#1a5276}
+.collect-card.segngjeten{background:#C4A1FF;box-shadow:4px 4px 0 #4a235a;border-color:#4a235a}
+.collect-card.gudebore{background:#FFDB58;box-shadow:4px 4px 0 #7d6608;border-color:#b8860b;animation:glow 2.5s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:4px 4px 0 #7d6608}50%{box-shadow:4px 4px 0 #f0c000,0 0 18px rgba(255,200,0,.5)}}
+.collect-card.segngjeten::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0,transparent 8px,rgba(255,255,255,.12) 8px,rgba(255,255,255,.12) 12px);pointer-events:none;z-index:1}
+.collect-card.gudebore::after{content:'✨';position:absolute;top:4px;right:5px;font-size:.75rem;z-index:2}
+.card-header{padding:7px 10px 6px;border-bottom:2px solid rgba(0,0,0,.35);position:relative;z-index:2}
+.card-name{font-size:.74rem;font-weight:900;text-transform:uppercase;letter-spacing:-.2px;line-height:1.2;display:block;margin-bottom:4px}
+.rarity-badge{font-size:.52rem;font-weight:900;text-transform:uppercase;border:2px solid #000;padding:2px 6px;white-space:nowrap;display:inline-block}
+.collect-card.vanleg .rarity-badge{background:#ddd}
+.collect-card.sjeldgjevt .rarity-badge{background:#5dade2;color:#fff;border-color:#1a5276}
+.collect-card.segngjeten .rarity-badge{background:#8e44ad;color:#fff;border-color:#4a235a}
+.collect-card.gudebore .rarity-badge{background:#f39c12;border-color:#b8860b}
+.card-img-wrap{overflow:hidden;position:relative;z-index:0;border-bottom:2px solid rgba(0,0,0,.25)}
+.collect-card.vanleg .card-img-wrap{background:#f0f0f0}
+.collect-card.sjeldgjevt .card-img-wrap{background:#87CEEB}
+.collect-card.segngjeten .card-img-wrap{background:#C4A1FF}
+.collect-card.gudebore .card-img-wrap{background:#FFDB58}
+.card-img-wrap img{object-fit:cover;display:block;width:100%;height:100%}
+.card-footer{padding:6px 10px;font-size:.65rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
+.les-om-link{color:#000;font-weight:900;font-size:.6rem;text-decoration:none;border-bottom:2px solid #000;text-transform:uppercase;letter-spacing:.3px;line-height:1}
+.les-om-link:hover{opacity:.6}
+
+/* Bar card (collection bar) */
+.bar-card{width:200px;height:280px;cursor:grab;transition:opacity .15s,transform .15s}
+.bar-card:active{cursor:grabbing}
+.bar-card .card-name{font-size:.78rem}
+.bar-card .card-img-wrap{height:160px}
+.bar-card .card-footer{font-size:.68rem}
+
+/* Full card (reveal modal) */
+.full-card{width:200px;display:flex;flex-direction:column}
+.full-card .card-name{font-size:.78rem}
+.full-card .card-img-wrap{flex:1}
+.full-card .card-footer{font-size:.7rem}
+
+/* Test card */
+.test-card{width:200px;height:280px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;transform-style:preserve-3d;cursor:pointer;perspective:1000px}
+.test-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #000}
+.test-card .card-img-wrap{flex:1;height:160px;position:relative;overflow:hidden}
+.test-card .card-footer{flex-direction:column;gap:4px;text-align:left}
+
+/* Angular Holofoil effect - mouse-based reveal with rarity tints */
+.test-card.has-foil .card-img-wrap::after{content:'';position:absolute;inset:0;background-image:url('./angular.png');background-position:center;background-size:cover;z-index:5;pointer-events:none;mix-blend-mode:screen;opacity:0;-webkit-mask-image:radial-gradient(circle 150px at var(--mouse-x, 50%) var(--mouse-y, 50%), black, transparent);mask-image:radial-gradient(circle 150px at var(--mouse-x, 50%) var(--mouse-y, 50%), black, transparent)}
+.test-card.has-foil:hover .card-img-wrap::after{opacity:0.7}
+
+/* Rarity-based color tints for foil effect */
+.test-card.has-foil.gudebore .card-img-wrap::after{filter:sepia(0.6) saturate(1.5) hue-rotate(10deg) brightness(1.1)}
+.test-card.has-foil.segngjeten .card-img-wrap::after{filter:sepia(0.4) saturate(1.3) hue-rotate(250deg) brightness(1.05)}
+.test-card.has-foil.sjeldgjevt .card-img-wrap::after{filter:sepia(0.3) saturate(1.2) hue-rotate(180deg) brightness(1.0)}
+.test-card.has-foil.vanleg .card-img-wrap::after{filter:brightness(0.95) saturate(0.8)}
+
+/* Foil test cards - dynamic backgrounds */
+.test-card.foil-test-card .card-img-wrap::after{content:'';position:absolute;inset:0;background-position:center;background-size:cover;z-index:5;pointer-events:none;mix-blend-mode:screen;opacity:0;-webkit-mask-image:radial-gradient(circle 150px at var(--mouse-x, 50%) var(--mouse-y, 50%), black, transparent);mask-image:radial-gradient(circle 150px at var(--mouse-x, 50%) var(--mouse-y, 50%), black, transparent)}
+.test-card.foil-test-card:hover .card-img-wrap::after{opacity:0.8}
+.test-card.foil-test-card[data-foil-effect="cosmos-bottom.png"] .card-img-wrap::after{background-image:url('./cosmos-bottom.png')}
+.test-card.foil-test-card[data-foil-effect="galaxy-source.png"] .card-img-wrap::after{background-image:url('./galaxy-source.png')}
+.test-card.foil-test-card[data-foil-effect="ancient.png"] .card-img-wrap::after{background-image:url('./ancient.png')}
+.test-card.foil-test-card[data-foil-effect="angular.png"] .card-img-wrap::after{background-image:url('./angular.png')}
+.test-card.foil-test-card[data-foil-effect="crossover.png"] .card-img-wrap::after{background-image:url('./crossover.png')}
+.test-card.foil-test-card[data-foil-effect="geometric.png"] .card-img-wrap::after{background-image:url('./geometric.png')}
+.test-card.foil-test-card[data-foil-effect="glitter.png"] .card-img-wrap::after{background-image:url('./glitter.png')}
+.test-card.foil-test-card[data-foil-effect="illusion.png"] .card-img-wrap::after{background-image:url('./illusion.png')}
+.test-card.foil-test-card[data-foil-effect="metal.png"] .card-img-wrap::after{background-image:url('./metal.png')}
+.test-card.foil-test-card[data-foil-effect="stylish.png"] .card-img-wrap::after{background-image:url('./stylish.png')}
+.test-card.foil-test-card[data-foil-effect="wave.png"] .card-img-wrap::after{background-image:url('./wave.png')}
+.modal-card-img-wrap::after{content:'';position:absolute;inset:0;background-image:url('./angular.png');background-position:center;background-size:cover;z-index:5;pointer-events:none;mix-blend-mode:screen;opacity:0;-webkit-mask-image:radial-gradient(circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), black, transparent);mask-image:radial-gradient(circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), black, transparent)}
+.modal-card-img-wrap:hover::after{opacity:0.7}
+
+/* Rarity-based color tints for modal foil effect */
+.modal-card.gudebore .modal-card-img-wrap::after{filter:sepia(0.6) saturate(1.5) hue-rotate(10deg) brightness(1.1)}
+.modal-card.segngjeten .modal-card-img-wrap::after{filter:sepia(0.4) saturate(1.3) hue-rotate(250deg) brightness(1.05)}
+.modal-card.sjeldgjevt .modal-card-img-wrap::after{filter:sepia(0.3) saturate(1.2) hue-rotate(180deg) brightness(1.0)}
+.modal-card.vanleg .modal-card-img-wrap::after{filter:brightness(0.95) saturate(0.8)}
+
+/* Galaxy overlay for each rarity */
+.test-card.gudebore .card-img-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(26,26,46,0.4), rgba(22,33,62,0.4), rgba(15,52,96,0.4), rgba(83,52,131,0.4), rgba(199,65,119,0.4), rgba(243,156,18,0.4));mix-blend-mode:overlay;pointer-events:none;z-index:2}
+.test-card.segngjeten .card-img-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(74,35,90,0.3), rgba(142,68,173,0.3), rgba(195,57,211,0.3), rgba(215,189,226,0.3), rgba(244,208,63,0.3), rgba(243,156,18,0.3));mix-blend-mode:overlay;pointer-events:none;z-index:2}
+.test-card.sjeldgjevt .card-img-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(26,82,118,0.2), rgba(40,116,166,0.2), rgba(93,173,226,0.2), rgba(133,193,233,0.2), rgba(174,214,241,0.2), rgba(214,234,248,0.2));mix-blend-mode:overlay;pointer-events:none;z-index:2}
+.test-card.vanleg .card-img-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(0,0,0,0.05), rgba(52,73,94,0.05), rgba(127,140,141,0.05), rgba(189,195,199,0.05), rgba(236,240,241,0.05), rgba(255,255,255,0.05));mix-blend-mode:overlay;pointer-events:none;z-index:2}
+
+/* 3D Tilt effect */
+.test-card-tilt{transition:transform 0.3s ease-out;transform-style:preserve-3d;transform:perspective(1000px)}
+.test-card-tilt:hover{transform:perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) translateZ(20px) scale(1.05)}
+
+/* Card modal */
+.card-modal{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;visibility:hidden;transition:opacity 0.4s,visibility 0.4s;perspective:2000px}
+.card-modal.active{opacity:1;visibility:visible}
+.card-modal.closing{animation:modalFadeOut 0.4s ease-out forwards}
+@keyframes modalFadeOut{to{opacity:0}}
+.modal-card-container{position:relative;width:90vw;max-width:400px;height:90vh;max-height:700px;margin:0 100px;transform-style:preserve-3d}
+.modal-card-container.slide-in{animation:modalSlideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards}
+.modal-card-container.slide-out{animation:modalSlideOut 0.5s ease-in forwards}
+.modal-card-container.slide-out-left{animation:modalSlideOutLeft 0.5s ease-in forwards}
+.modal-card-container.slide-out-right{animation:modalSlideOutRight 0.5s ease-in forwards}
+.modal-card-container.slide-in-left{animation:modalSlideInLeft 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards}
+.modal-card-container.slide-in-right{animation:modalSlideInRight 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards}
+@keyframes modalSlideIn{from{transform:scale(0.3) rotateY(180deg);opacity:0}to{transform:scale(1) rotateY(0deg);opacity:1}}
+@keyframes modalSlideOut{to{transform:scale(0.3) rotateY(-180deg);opacity:0}}
+@keyframes modalSlideOutLeft{to{transform:translateX(-150vw) rotateY(-180deg) scale(0.5);opacity:0}}
+@keyframes modalSlideOutRight{to{transform:translateX(150vw) rotateY(180deg) scale(0.5);opacity:0}}
+@keyframes modalSlideInLeft{from{transform:translateX(-150vw) rotateY(-180deg) scale(0.5);opacity:0}to{transform:translateX(0) rotateY(0deg) scale(1);opacity:1}}
+@keyframes modalSlideInRight{from{transform:translateX(150vw) rotateY(180deg) scale(0.5);opacity:0}to{transform:translateX(0) rotateY(0deg) scale(1);opacity:1}}
+.modal-card{width:100%;height:100%;border-radius:16px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,0.7);transform-style:preserve-3d;border:3px solid #000}
+.modal-card-content{width:100%;height:100%;display:flex;flex-direction:column}
+.modal-card-content.vanleg{background:#fff}
+.modal-card-content.sjeldgjevt{background:#87CEEB}
+.modal-card-content.segngjeten{background:#C4A1FF}
+.modal-card-content.gudebore{background:#FFDB58}
+.modal-card-header{padding:20px;border-bottom:2px solid rgba(0,0,0,0.2);text-align:center}
+.modal-card-name{font-size:1.8rem;font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin-bottom:8px}
+.modal-rarity-badge{font-size:0.9rem;font-weight:900;text-transform:uppercase;border:3px solid #000;padding:6px 12px;border-radius:6px;display:inline-block}
+.modal-card-img-wrap{flex:1;position:relative;overflow:hidden}
+.modal-card-img{width:100%;height:100%;object-fit:cover}
+.modal-card-footer{padding:20px;display:flex;flex-direction:column;gap:12px}
+.modal-card-stat{font-size:1.1rem;font-weight:700}
+.modal-card-category{font-size:0.9rem;font-weight:900;text-transform:uppercase;opacity:0.7}
+.modal-close{position:absolute;top:10px;right:10px;width:40px;height:40px;background:#fff;border:3px solid #000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;cursor:pointer;z-index:10;transition:transform 0.2s}
+.modal-close:hover{transform:scale(1.1)}
+
+/* Card navigation */
+.card-nav{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;background:#fff;border:3px solid #000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;cursor:pointer;z-index:10;transition:transform 0.2s,opacity 0.2s}
+.card-nav:hover{transform:translateY(-50%) scale(1.1)}
+.card-nav.prev{left:-80px}
+.card-nav.next{right:-80px}
+.card-nav.disabled{opacity:0.3;cursor:not-allowed}
+.card-nav.disabled:hover{transform:translateY(-50%) scale(1)}
+
+/* Drag states */
+.bar-card.dragging{opacity:.35;transform:scale(.97)}
+.bar-card.drag-over{outline:4px dashed #000;outline-offset:2px;transform:scale(1.03)}
+.bar-card.pending-card{animation:pendingPulse 1.5s ease-in-out infinite}
+@keyframes pendingPulse{0%,100%{box-shadow:4px 4px 0 #000,0 0 0 rgba(0,0,0,0)}50%{box-shadow:4px 4px 0 #000,0 0 12px rgba(0,0,0,.4)}}
+
+/* Drag instruction message */
+.drag-instruction{background:#FFE566;border:3px solid #000;box-shadow:5px 5px 0 #000;padding:16px 20px;border-radius:8px;display:flex;align-items:center;gap:16px;animation:slideInBounce 0.6s ease-out;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);z-index:10;max-width:320px}
+.drag-instruction.hidden{display:none}
+.drag-instruction-icon{font-size:2.2rem;animation:dragHint 2s ease-in-out infinite}
+.drag-instruction-text{flex:1}
+.drag-instruction-title{font-weight:900;font-size:1rem;margin-bottom:4px;color:#000}
+.drag-instruction-desc{font-size:0.8rem;color:#333;line-height:1.4}
+@keyframes slideInBounce{0%{transform:translate(-50%, -70%);opacity:0}60%{transform:translate(-50%, -45%);opacity:1}100%{transform:translate(-50%, -50%);opacity:1}}
+@keyframes dragHint{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px) rotate(-5deg)}75%{transform:translateX(5px) rotate(5deg)}}
+
+/* ═══ COLLECTION BAR ═══ */
+.coll-bar{flex-shrink:0;background:#FDFD96;border-top:3px solid #000;padding:16px;display:flex;justify-content:center}
+.coll-main{display:flex;align-items:center;gap:16px;max-width:1400px;width:100%}
+.coll-box{background:#fff;border:3px solid #000;box-shadow:5px 5px 0 #000;padding:14px 16px;flex:1;min-width:0}
+#pendingBox{flex:0 0 auto}
+.coll-box-label{font-size:.78rem;font-weight:900;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #000}
+.coll-cards-row{display:grid;gap:12px;padding-bottom:4px;min-height:auto;grid-template-columns:repeat(5,1fr)}
+@media(max-width:860px){.coll-cards-row{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.coll-cards-row{grid-template-columns:repeat(1,1fr)}}
+
+/* Trash zone */
+.trash-zone{flex-shrink:0;width:64px;align-self:stretch;border:3px solid #000;box-shadow:4px 4px 0 #000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:default;transition:background .15s,box-shadow .15s;background:#f5f5f5;min-height:80px}
+.trash-zone.drag-over{background:#ff4444;box-shadow:4px 4px 0 #800;border-color:#800}
+.trash-zone-icon{font-size:1.6rem;pointer-events:none}
+.trash-zone-label{font-size:.52rem;font-weight:900;text-transform:uppercase;pointer-events:none;text-align:center}
+.empty-coll{font-size:.72rem;font-weight:700;text-transform:uppercase;color:#888;border:2px dashed #ccc;padding:14px 20px;white-space:nowrap;align-self:center}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px}
+.modal-box{background:#FDFD96;border:4px solid #000;box-shadow:8px 8px 0 #000;padding:26px;max-width:320px;width:100%;text-align:center}
+.modal-title{font-size:1.3rem;font-weight:900;text-transform:uppercase;letter-spacing:-.5px;margin-bottom:6px}
+.modal-sub{font-size:.82rem;font-weight:700;margin-bottom:16px;color:#444}
+
+/* Flip */
+.flip-scene{width:200px;height:272px;perspective:900px;margin:0 auto 16px}
+.flip-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .85s cubic-bezier(.4,0,.2,1)}
+.flip-card.flipped{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flip-back{background:#111;border:3px solid #000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.flip-back-logo{font-size:3rem}
+.flip-back-title{color:#FDFD96;font-size:.9rem;font-weight:900;text-transform:uppercase;letter-spacing:3px}
+.flip-front{transform:rotateY(180deg);display:flex}
+.flip-front .full-card{width:100%;height:100%;flex:1}
+
+.loading-msg{font-size:.9rem;font-weight:900;text-transform:uppercase;text-align:center;padding:36px 20px;color:#555}
+
+@media(max-width:600px){.bar-card{width:160px;height:240px}.bar-card .card-img-wrap{height:130px}.game-wrapper{padding:14px}.panel{padding:18px}}
+@media(max-width:860px){.coll-main{flex-wrap:wrap}.coll-box{min-width:200px}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="app-header">
+    <span style="font-size:1.7rem;line-height:1">🃏</span>
+    <h1 class="app-title">Heimsank</h1>
+    <span style="margin-left:auto;font-size:.6rem;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;opacity:.4">Samlekortspel</span>
+    <button class="btn-outline" id="menuBtn" onclick="goSetup()" style="display:none">Meny</button>
+  </header>
+  <div class="stripe"></div>
+
+  <!-- SETUP -->
+  <div id="setupScreen" class="game-wrapper">
+    <div class="panel">
+      <div id="setupLoading" class="loading-msg">Lastar kategoriar…</div>
+      <div id="setupContent" class="hidden">
+        <h2 class="panel-title">Nytt spel</h2>
+        <div class="settings-group">
+          <span class="settings-label">Vel kortsamling:</span>
+          <div class="cats-grid" id="catsGrid"></div>
+        </div>
+        <div class="settings-group">
+          <span class="settings-label">Nivå:</span>
+          <div class="btn-group">
+            <button class="opt-btn selected" onclick="selLevel('lett')" data-level="lett">Lett</button>
+            <button class="opt-btn" onclick="selLevel('middels')" data-level="middels">Middels</button>
+            <button class="opt-btn" onclick="selLevel('vanskeleg')" data-level="vanskeleg">Vanskeleg</button>
+          </div>
+        </div>
+        <div class="settings-group">
+          <span class="settings-label">Rekneoperasjonar:</span>
+          <div class="btn-group">
+            <button class="opt-btn selected" onclick="togOp('+')" data-op="+">Pluss +</button>
+            <button class="opt-btn selected" onclick="togOp('-')" data-op="-">Minus −</button>
+            <button class="opt-btn selected" onclick="togOp('*')" data-op="*">Gange ×</button>
+            <button class="opt-btn" onclick="togOp('/')" data-op="/">Dele ÷</button>
+          </div>
+        </div>
+        <button class="btn-primary" id="startBtn" onclick="startGame()" disabled>Start spelet →</button>
+        <button class="btn-outline" onclick="openCardTest()" style="margin-top:12px">🎨 Test kortdesign</button>
+        <button class="btn-outline" onclick="openFoilTest()" style="margin-top:12px">✨ Test foil-effektar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME -->
+  <div id="gameScreen" class="hidden" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
+    <div class="game-wrapper">
+      <div class="panel">
+        <div class="settings-label" id="gameSub" style="margin-bottom:5px;color:#555"></div>
+        <div class="progress-wrap">
+          <div class="progress-fill" id="progFill"></div>
+          <div class="progress-label" id="progLabel">0 / 5</div>
+        </div>
+        <div class="question-box" id="questionBox">
+          <div class="drag-instruction hidden" id="dragInstruction">
+            <div class="drag-instruction-icon">👆</div>
+            <div class="drag-instruction-text">
+              <div class="drag-instruction-title">Dra og slepp kortet!</div>
+              <div class="drag-instruction-desc">Dra det nye kortet til samlinga for å erstatte eit gammelt kort, eller slepp det i søppelkassen for å kaste det.</div>
+            </div>
+          </div>
+          <div class="q-box" id="qBox"></div>
+          <div class="answer-row">
+            <input type="number" id="ansInput" class="answer-input" placeholder="?" autocomplete="off">
+            <button class="btn-primary" id="checkBtn" onclick="checkAnswer()">Sjekk ✓</button>
+          </div>
+          <div class="feedback" id="feedback"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLLECTION BAR -->
+    <div class="coll-bar">
+      <div class="coll-main">
+        <div class="coll-box">
+          <div class="coll-box-label">🏆 Samling (<span id="collCount">0</span>/5) <button class="btn-outline" id="clearAllBtn" onclick="confirmClearAll()" style="margin-left:10px;padding:4px 8px;font-size:.65rem">Tøm alle</button></div>
+          <div class="coll-cards-row" id="collRow"></div>
+        </div>
+        <div class="trash-zone" id="trashZone">
+          <div class="trash-zone-icon">🗑️</div>
+          <div class="trash-zone-label">Slepp<br>her</div>
+        </div>
+        <div class="coll-box hidden" id="pendingBox">
+          <div class="coll-box-label">✨ Nytt kort</div>
+          <div id="pendingSlot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVEAL MODAL -->
+<div class="modal-overlay hidden" id="revealModal">
+  <div class="modal-box">
+    <div class="modal-title">Du vann eit kort!</div>
+    <div class="modal-sub" id="revealSub">Snur kortet…</div>
+    <div class="flip-scene">
+      <div class="flip-card" id="flipCard">
+        <div class="flip-face flip-back">
+          <div class="flip-back-logo">🃏</div>
+          <div class="flip-back-title">Heimsank</div>
+        </div>
+        <div class="flip-face flip-front" id="flipFront"></div>
+      </div>
+    </div>
+    <button class="btn-primary hidden" id="revealBtn" onclick="afterReveal()">Hald fram →</button>
+  </div>
+</div>
+
+<script>
+// ═══ STATE ═══
+const S = {
+  cats:[], selCat:null, level:'lett', ops:['+','-','*'],
+  cards:[], groups:{vanleg:[],sjeldgjevt:[],segngjeten:[],gudebore:[]}, idx:{},
+  correct:0, q:null,
+  collection:[],   // [{catId, cardId}]
+  pending:null,    // card object when waiting for drop decision
+  paused:false
+};
+const RL={vanleg:'Vanleg',sjeldgjevt:'Sjeldgjævt',segngjeten:'Segngjeten',gudebore:'Gudebore'};
+const RO=['vanleg','sjeldgjevt','segngjeten','gudebore'];
+const RW=[65,25,7,3];
+const QPC=5;
+function getStorageKey(){return `heimsank_samling_${S.selCat?.id||'default'}`;}
+let DS=null; // drag state: {type:'coll'|'pending', idx:number}
+
+// ═══ INIT ═══
+async function init(){
+  loadStorage();
+  initTrash();
+  try{
+    S.cats=await fetch('./kort/categories.json').then(r=>r.json());
+    const g=document.getElementById('catsGrid'); g.innerHTML='';
+    S.cats.forEach(c=>{
+      const el=document.createElement('div'); el.className='cat-card';
+      el.innerHTML=`<span class="cat-icon">${c.icon}</span><span class="cat-name">${c.label}</span>`;
+      el.onclick=()=>{S.selCat=c;document.querySelectorAll('.cat-card').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');document.getElementById('startBtn').disabled=false};
+      g.appendChild(el);
+    });
+    document.getElementById('setupLoading').classList.add('hidden');
+    document.getElementById('setupContent').classList.remove('hidden');
+  }catch(e){document.getElementById('setupLoading').textContent='Feil: køyr serve.ps1 fyrst.';}
+}
+
+function selLevel(l){S.level=l;document.querySelectorAll('[data-level]').forEach(b=>b.classList.remove('selected'));document.querySelector(`[data-level="${l}"]`).classList.add('selected');}
+function togOp(op){const b=document.querySelector(`[data-op="${op}"]`),i=S.ops.indexOf(op);if(i>=0){if(S.ops.length===1)return;S.ops.splice(i,1);b.classList.remove('selected');}else{S.ops.push(op);b.classList.add('selected');}}
+
+// ═══ GAME START ═══
+async function startGame(){
+  const btn=document.getElementById('startBtn');
+  btn.disabled=true; btn.textContent='Lastar…';
+  try{await loadCards(S.selCat);}
+  catch(e){alert('Feil ved lasting. Køyr serve.ps1 fyrst.');btn.disabled=false;btn.textContent='Start spelet →';return;}
+  document.getElementById('setupScreen').classList.add('hidden');
+  const gs=document.getElementById('gameScreen'); gs.classList.remove('hidden'); gs.style.display='flex';
+  document.getElementById('menuBtn').style.display='block';
+  document.getElementById('gameSub').textContent=`${S.selCat.icon} ${S.selCat.label} – Svar rett ${QPC} gonger og vinn eit kort!`;
+  S.correct=0; S.paused=false; loadStorage(); updateProg(); renderColl(); nextQ();
+}
+
+function goSetup(){
+  // Prevent going to setup if there's a pending card
+  if(S.pending){
+    alert('Du må plassere det nye kortet før du kan bytte kategori!');
+    return;
+  }
+  const gs=document.getElementById('gameScreen'); gs.classList.add('hidden'); gs.style.display='';
+  document.getElementById('setupScreen').classList.remove('hidden');
+  document.getElementById('menuBtn').style.display='none';
+  const btn=document.getElementById('startBtn'); btn.disabled=false; btn.textContent='Start spelet →';
+}
+
+// ═══ LOAD CARDS ═══
+async function loadCards(cat){
+  const [csv,rar]=await Promise.all([fetch(`./kort/${cat.csv}`).then(r=>r.text()),fetch(`./kort/${cat.rarity}`).then(r=>r.json())]);
+  // NOTE: All rarity files use object format: { "Q123": "vanleg", "Q456": "sjeldgjevt", ... }
+  // To convert array format to object: run fix_rarity.ps1
+  const idF=cat.idField||'scientist', nameF=cat.nameField||'scientistLabel';
+  const imgF=cat.imageField||'image', artF=cat.articleField||'article';
+  const statF=cat.statField||'birthDate', statT=cat.statType||'year', statLbl=cat.statLabel||'📅';
+  S.cards=parseCSV(csv).filter(r=>r[imgF]&&r[imgF].trim()).map(r=>{
+    const id=r[idF].replace('http://www.wikidata.org/entity/','');
+    let stat='?';
+    if(statT==='year'){stat=r[statF]?r[statF].slice(0,4):'?';}
+    else if(statT==='number'){const n=parseInt(r[statF],10);stat=isNaN(n)?'?':n.toLocaleString('nb-NO');}
+    else{stat=r[statF]||'?';}
+    return{id,name:r[nameF]||id,stat,statLabel:statLbl,img:r[imgF].replace(/^http:/,'https:'),article:r[artF]||'',rarity:rar[id]||'vanleg',catId:cat.id,catLabel:cat.label,catIcon:cat.icon};
+  });
+  S.idx={}; S.groups={vanleg:[],sjeldgjevt:[],segngjeten:[],gudebore:[]};
+  S.cards.forEach(c=>{S.idx[c.id]=c;(S.groups[c.rarity]||S.groups.vanleg).push(c);});
+}
+
+function parseCSV(t){const lines=t.trim().split('\n'),hdr=parseLine(lines[0]);return lines.slice(1).map(l=>{const v=parseLine(l),o={};hdr.forEach((h,i)=>o[h]=v[i]??'');return o;});}
+function parseLine(l){const f=[];let c='',q=false;for(let i=0;i<l.length;i++){const ch=l[i];if(ch==='"'){if(q&&l[i+1]==='"'){c+='"';i++;}else q=!q;}else if(ch===','&&!q){f.push(c);c='';}else c+=ch;}f.push(c);return f;}
+
+// ═══ QUESTIONS ═══
+function nextQ(){
+  if(S.paused)return;
+  const op=S.ops[Math.floor(Math.random()*S.ops.length)];
+  const r={lett:[20,20,10,10],middels:[50,50,12,12],vanskeleg:[100,100,20,20]}[S.level];
+  let n1,n2,ans;
+  if(op==='+'){n1=ri(r[0]);n2=ri(r[0]);ans=n1+n2;}
+  else if(op==='-'){n1=ri(r[1])+Math.ceil(r[1]/2);n2=ri(n1-1)+1;ans=n1-n2;}
+  else if(op==='*'){n1=ri(r[2])+1;n2=ri(r[2])+1;ans=n1*n2;}
+  else{n2=ri(r[3])+1;ans=ri(r[3])+1;n1=n2*ans;}
+  S.q={ans,txt:`${n1} ${{'+':'+','-':'−','*':'×','/':'÷'}[op]} ${n2}`};
+  document.getElementById('qBox').textContent=S.q.txt+' = ?';
+  const inp=document.getElementById('ansInput'); inp.value=''; inp.disabled=false; inp.focus();
+  document.getElementById('checkBtn').disabled=false;
+  setFb('','');
+}
+function ri(m){return Math.floor(Math.random()*m)+1;}
+
+function checkAnswer(){
+  if(S.paused)return;
+  const v=parseInt(document.getElementById('ansInput').value,10);
+  if(isNaN(v)){setFb('Skriv inn eit tal!','incorrect');return;}
+  if(v===S.q.ans){
+    S.correct++; setFb('✓ Rett!','correct'); updateProg();
+    document.getElementById('ansInput').disabled=true;
+    document.getElementById('checkBtn').disabled=true;
+    if(S.correct>=QPC) setTimeout(triggerCard,800); else setTimeout(nextQ,700);
+  }else{
+    setFb(`✗ Feil – svaret er ${S.q.ans}`,'incorrect'); setTimeout(nextQ,1400);
+  }
+}
+function setFb(m,c){const el=document.getElementById('feedback');el.textContent=m;el.className='feedback'+(c?' '+c:'');}
+function updateProg(){const p=(S.correct/QPC)*100;document.getElementById('progFill').style.width=p+'%';document.getElementById('progLabel').textContent=`${S.correct} / ${QPC}`;}
+document.getElementById('ansInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkAnswer();});
+
+// ═══ CARD DRAW ═══
+function drawCard(){
+  const roll=Math.floor(Math.random()*100);let cum=0,rar='vanleg';
+  for(let i=0;i<RO.length;i++){cum+=RW[i];if(roll<cum){rar=RO[i];break;}}
+  for(let i=RO.indexOf(rar);i>=0;i--){const t=S.groups[RO[i]];if(t&&t.length)return t[Math.floor(Math.random()*t.length)];}
+  return S.cards[0]||null;
+}
+
+function triggerCard(){
+  const card=drawCard(); if(!card)return; S.pending=card;
+  const fr=document.getElementById('flipFront'); fr.innerHTML=''; fr.appendChild(mkCard(card,'full'));
+  const fc=document.getElementById('flipCard'); fc.classList.remove('flipped');
+  document.getElementById('revealBtn').classList.add('hidden');
+  document.getElementById('revealSub').textContent='Snur kortet…';
+  document.getElementById('revealModal').classList.remove('hidden');
+  setTimeout(()=>{
+    fc.classList.add('flipped');
+    document.getElementById('revealSub').textContent=`${RL[card.rarity]} – ${card.name}`;
+    setTimeout(()=>document.getElementById('revealBtn').classList.remove('hidden'),700);
+  },1100);
+}
+
+function afterReveal(){
+  document.getElementById('revealModal').classList.add('hidden');
+  S.correct=0; updateProg();
+  if(S.collection.length<5){
+    // Map operations to display symbols
+    const operations = S.ops && S.ops.length > 0 ? S.ops.map(op => op === '+' ? '+' : op === '-' ? '-' : op === '*' ? '×' : op === '/' ? '÷' : op) : ['+', '-'];
+    const difficulty = S.level ? (S.level === 'lett' ? 'Lett' : S.level === 'middels' ? 'Middels' : 'Vanskeleg') : 'Middels';
+    
+    S.collection.push({
+      catId:S.pending.catId,
+      cardId:S.pending.id,
+      difficulty:difficulty,
+      operations:operations,
+      earnedAt:Date.now()
+    });
+    S.pending=null; saveStorage(); renderColl(); nextQ();
+  }else{
+    // Pause game, show pending card in bar
+    S.paused=true;
+    document.getElementById('ansInput').disabled=true;
+    document.getElementById('checkBtn').disabled=true;
+    document.getElementById('pendingBox').classList.remove('hidden');
+    renderColl();
+    // Show drag instruction in question area
+    setTimeout(()=>{
+      document.getElementById('dragInstruction').classList.remove('hidden');
+    }, 300);
+  }
+}
+
+// ═══ DRAG AND DROP ═══
+function resumeIfDone(){
+  if(!S.pending){
+    S.paused=false;
+    document.getElementById('pendingBox').classList.add('hidden');
+    document.getElementById('dragInstruction').classList.add('hidden');
+    nextQ();
+  }
+}
+
+function setupDraggable(el,type,idx){
+  el.draggable=true;
+  el.addEventListener('dragstart',e=>{
+    DS={type,idx}; el.classList.add('dragging');
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain',idx);
+  });
+  el.addEventListener('dragend',()=>el.classList.remove('dragging'));
+}
+
+function setupDropTarget(el,onDrop){
+  el.addEventListener('dragover',e=>{if(DS){e.preventDefault();el.classList.add('drag-over');}});
+  el.addEventListener('dragleave',()=>el.classList.remove('drag-over'));
+  el.addEventListener('drop',e=>{e.preventDefault();el.classList.remove('drag-over');if(DS)onDrop(DS);DS=null;});
+}
+
+// ═══ COLLECTION RENDERING ═══
+function renderColl(){
+  const row=document.getElementById('collRow');
+  document.getElementById('collCount').textContent=S.collection.length;
+  row.innerHTML='';
+
+  if(S.collection.length===0){
+    row.innerHTML='<div class="empty-coll">Svar rett 5 gonger for å vinna eit kort!</div>';
+  }else{
+    S.collection.forEach((entry,idx)=>{
+      const card=S.idx[entry.cardId]; if(!card)return;
+      const el=mkCard(card,'bar',entry);
+      setupDraggable(el,'coll',idx);
+      setupDropTarget(el,ds=>{
+        if(ds.type==='coll'&&ds.idx!==idx){
+          const a=S.collection[ds.idx];S.collection[ds.idx]=S.collection[idx];S.collection[idx]=a;
+          saveStorage(); renderColl();
+        }else if(ds.type==='pending'){
+          const operations = S.ops && S.ops.length > 0 ? S.ops.map(op => op === '+' ? '+' : op === '-' ? '-' : op === '*' ? '×' : op === '/' ? '÷' : op) : ['+', '-'];
+          const difficulty = S.level ? (S.level === 'lett' ? 'Lett' : S.level === 'middels' ? 'Middels' : 'Vanskeleg') : 'Middels';
+          
+          S.collection[idx]={
+            catId:S.pending.catId,
+            cardId:S.pending.id,
+            difficulty:difficulty,
+            operations:operations,
+            earnedAt:Date.now()
+          };
+          S.pending=null; saveStorage(); renderColl(); resumeIfDone();
+        }
+      });
+      row.appendChild(el);
+    });
+  }
+
+  const slot=document.getElementById('pendingSlot'); slot.innerHTML='';
+  if(S.pending){
+    // Create temporary entry for pending card
+    const tempEntry = {
+      catId:S.pending.catId,
+      cardId:S.pending.id,
+      difficulty:S.difficulty,
+      operations:S.ops.filter(op => S[op]).map(op => op === '+' ? '+' : op === '-' ? '-' : op === '*' ? '×' : '÷'),
+      earnedAt:Date.now()
+    };
+    const el=mkCard(S.pending,'bar',tempEntry);
+    el.classList.add('pending-card');
+    setupDraggable(el,'pending',0);
+    slot.appendChild(el);
+  }
+}
+
+function initTrash(){
+  const trash=document.getElementById('trashZone');
+  setupDropTarget(trash,ds=>{
+    if(ds.type==='coll'){
+      S.collection.splice(ds.idx,1);
+      if(S.pending&&S.collection.length<5){
+      const operations = S.ops && S.ops.length > 0 ? S.ops.map(op => op === '+' ? '+' : op === '-' ? '-' : op === '*' ? '×' : op === '/' ? '÷' : op) : ['+', '-'];
+      const difficulty = S.level ? (S.level === 'lett' ? 'Lett' : S.level === 'middels' ? 'Middels' : 'Vanskeleg') : 'Middels';
+      
+      S.collection.push({
+        catId:S.pending.catId,
+        cardId:S.pending.id,
+        difficulty:difficulty,
+        operations:operations,
+        earnedAt:Date.now()
+      });
+      S.pending=null;
+    }
+      saveStorage(); renderColl(); resumeIfDone();
+    }else if(ds.type==='pending'){
+      S.pending=null; renderColl(); resumeIfDone();
+    }
+  });
+}
+
+// ═══ BUILD CARD ═══
+function mkCard(card,sz,entry=null){
+  const el=document.createElement('div');
+  const isTest=sz==='test';
+  el.className=`collect-card ${card.rarity} ${isTest?'test-card':sz==='bar'?'bar-card':sz==='full'?'full-card':''}`;
+  const hdr=document.createElement('div'); hdr.className='card-header';
+  hdr.innerHTML=`<span class="card-name">${esc(card.name)}</span><span class="rarity-badge">${RL[card.rarity]}</span>`;
+  el.appendChild(hdr);
+  const iw=document.createElement('div'); iw.className='card-img-wrap';
+  const img=document.createElement('img'); img.alt=card.name; img.src=card.img; img.loading='lazy';
+  img.onerror=function(){this.parentNode.innerHTML=`<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:2.5rem;opacity:.2">${card.catIcon||'🔬'}</div>`;};
+  iw.appendChild(img); el.appendChild(iw);
+  const ft=document.createElement('div'); ft.className='card-footer';
+  const yr=document.createElement('span'); yr.textContent=card.stat ? `${card.statLabel} ${card.stat}` : card.statLabel || ''; ft.appendChild(yr);
+  
+  // Add difficulty and operations for bar cards with entry data
+  if(sz==='bar' && entry){
+    const diffInfo=document.createElement('div');
+    diffInfo.style.cssText='font-size:0.55rem;font-weight:900;text-transform:uppercase;margin-top:2px;opacity:0.7';
+    
+    if(entry.difficulty && entry.operations && entry.operations.length > 0){
+      // New format with difficulty and operations
+      diffInfo.textContent=`${entry.difficulty} ${entry.operations.join(' ')}`;
+    } else {
+      // Old format or missing data - show default info
+      diffInfo.textContent='Middels + -';
+      // Debug: log the entry data
+      console.log('Old/invalid entry data:', entry);
+    }
+    ft.appendChild(diffInfo);
+  }
+  
+  if(card.article){
+    const a=document.createElement('a'); a.href=card.article; a.target='_blank'; a.rel='noopener';
+    a.className='les-om-link'; a.textContent='Les om →';
+    a.addEventListener('mousedown',e=>e.stopPropagation());
+    a.addEventListener('dragstart',e=>e.stopPropagation());
+    ft.appendChild(a);
+  }
+  // Add category info for test cards
+  if(isTest){
+    const catInfo=document.createElement('div'); 
+    catInfo.style.cssText='font-size:0.6rem;font-weight:900;text-transform:uppercase;margin-top:2px;opacity:0.7';
+    catInfo.textContent=`${card.catIcon} ${card.catLabel}`;
+    ft.appendChild(catInfo);
+  }
+  el.appendChild(ft); return el;
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+// ═══ STORAGE ═══
+function saveStorage(){try{localStorage.setItem(getStorageKey(),JSON.stringify(S.collection.slice(0,5)));}catch{}}
+function loadStorage(){try{const r=localStorage.getItem(getStorageKey());if(r)S.collection=JSON.parse(r).slice(0,5);else S.collection=[];}catch{S.collection=[];}}
+
+// ═══ CLEAR ALL ═══
+function confirmClearAll(){
+  if(S.collection.length===0)return;
+  if(confirm('Er du sikker på at du vil tømme samlinga for '+S.selCat.label+'? Alle kort vert fjerna.')){
+    S.collection=[];
+    S.pending=null;
+    saveStorage();
+    renderColl();
+    resumeIfDone();
+  }
+}
+
+// ═══ CARD TEST ═══
+let currentTestCards = [];
+let currentModalIndex = 0;
+
+async function openFoilTest(){
+  document.getElementById('setupScreen').classList.add('hidden');
+  document.getElementById('cardTestScreen').classList.remove('hidden');
+  
+  const grid=document.getElementById('cardTestGrid');
+  grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#555">Lastar foil-effektar…</div>';
+  
+  // Define all foil effects
+  const foilEffects = [
+    {name: 'Cosmos', image: 'cosmos-bottom.png'},
+    {name: 'Galaxy', image: 'galaxy-source.png'},
+    {name: 'Ancient', image: 'ancient.png'},
+    {name: 'Angular', image: 'angular.png'},
+    {name: 'Crossover', image: 'crossover.png'},
+    {name: 'Geometric', image: 'geometric.png'},
+    {name: 'Glitter', image: 'glitter.png'},
+    {name: 'Illusion', image: 'illusion.png'},
+    {name: 'Metal', image: 'metal.png'},
+    {name: 'Stylish', image: 'stylish.png'},
+    {name: 'Wave', image: 'wave.png'}
+  ];
+  
+  // Find a gudebore card
+  fetch('./kort/categories.json')
+    .then(r=>r.json())
+    .then(cats=>{
+      const cat = cats[0]; // Use first category
+      return Promise.all([
+        fetch(`./kort/${cat.csv}`).then(r=>r.text()),
+        fetch(`./kort/${cat.rarity}`).then(r=>r.json()),
+        Promise.resolve(cat)
+      ]);
+    })
+    .then(([csv,rarityMap,cat])=>{
+      const lines=csv.trim().split('\n');
+      const allCards=[];
+      const gudeborneCards=[];
+      
+      // Simple CSV parser that handles quoted values
+      function parseCSVLine(line) {
+        const result = [];
+        let current = '';
+        let inQuotes = false;
+        
+        for (let i = 0; i < line.length; i++) {
+          const char = line[i];
+          if (char === '"') {
+            inQuotes = !inQuotes;
+          } else if (char === ',' && !inQuotes) {
+            result.push(current);
+            current = '';
+          } else {
+            current += char;
+          }
+        }
+        result.push(current);
+        return result;
+      }
+      
+      for(let i=1;i<lines.length;i++){
+        const vals=parseCSVLine(lines[i]);
+        const id=vals[0];
+        const rarity=rarityMap[id]||'vanleg';
+        const card = {
+          id,name:vals[1],stat:vals[2],img:vals[3],article:vals[4],
+          rarity,catId:cat.id,catLabel:cat.label,catIcon:cat.icon,
+          statLabel:cat.statLabel||''
+        };
+        allCards.push(card);
+        if(rarity==='gudebore'){
+          gudeborneCards.push(card);
+        }
+      }
+      
+      // Use first gudebore card, or fallback to any card
+      const cards = gudeborneCards.length > 0 ? gudeborneCards : allCards.slice(0, 1);
+      
+      if(cards.length>0){
+        const baseCard = cards[0];
+        grid.innerHTML='';
+        
+        foilEffects.forEach((foil,index)=>{
+          const cardEl=mkCard(baseCard,'test');
+          cardEl.classList.add('test-card-tilt');
+          cardEl.classList.add('foil-test-card');
+          cardEl.dataset.foilEffect = foil.image;
+          
+          // Add foil effect label
+          const label=document.createElement('div');
+          label.style.cssText='position:absolute;top:4px;left:4px;background:rgba(0,0,0,0.8);color:#fff;padding:4px 8px;font-size:0.65rem;font-weight:900;border-radius:4px;z-index:10';
+          label.textContent=foil.name;
+          cardEl.appendChild(label);
+          
+          // Add 3D tilt effect
+          cardEl.addEventListener('mousemove',(e)=>{
+            const rect=cardEl.getBoundingClientRect();
+            const x=e.clientX-rect.left;
+            const y=e.clientY-rect.top;
+            const centerX=rect.width/2;
+            const centerY=rect.height/2;
+            const rotateX=((y-centerY)/centerY)*-15;
+            const rotateY=((x-centerX)/centerX)*15;
+            cardEl.style.setProperty('--rotate-x',`${rotateX}deg`);
+            cardEl.style.setProperty('--rotate-y',`${rotateY}deg`);
+            
+            // Update foil mask position
+            const imgWrap=cardEl.querySelector('.card-img-wrap');
+            if(imgWrap){
+              const imgRect=imgWrap.getBoundingClientRect();
+              const mouseX=((e.clientX-imgRect.left)/imgRect.width)*100;
+              const mouseY=((e.clientY-imgRect.top)/imgRect.height)*100;
+              imgWrap.style.setProperty('--mouse-x',`${mouseX}%`);
+              imgWrap.style.setProperty('--mouse-y',`${mouseY}%`);
+            }
+          });
+          
+          cardEl.addEventListener('mouseleave',()=>{
+            cardEl.style.setProperty('--rotate-x','0deg');
+            cardEl.style.setProperty('--rotate-y','0deg');
+          });
+          
+          grid.appendChild(cardEl);
+        });
+      }else{
+        grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:red">Fann ingen gudebore-kort</div>';
+      }
+    })
+    .catch(e=>{
+      grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:40px;color:red">Feil: ${e.message}</div>`;
+    });
+}
+
+async function openCardTest(){
+  document.getElementById('setupScreen').classList.add('hidden');
+  document.getElementById('cardTestScreen').classList.remove('hidden');
+  
+  const grid=document.getElementById('cardTestGrid');
+  grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#555">Lastar kort…</div>';
+  
+  try{
+    // Load all categories
+    const cats=await fetch('./kort/categories.json').then(r=>r.json());
+    const testCards=[];
+    
+    // Get 1 card from each rarity per category
+    for(const cat of cats){
+      const [csv,rar]=await Promise.all([
+        fetch(`./kort/${cat.csv}`).then(r=>r.text()),
+        fetch(`./kort/${cat.rarity}`).then(r=>r.json())
+      ]);
+      
+      const idF=cat.idField||'scientist', nameF=cat.nameField||'scientistLabel';
+      const imgF=cat.imageField||'image', artF=cat.articleField||'article';
+      const statF=cat.statField||'birthDate', statT=cat.statType||'year', statLbl=cat.statLabel||'📅';
+      
+      const cards=parseCSV(csv).filter(r=>r[imgF]&&r[imgF].trim()).map(r=>{
+        const id=r[idF].replace('http://www.wikidata.org/entity/','');
+        let stat='?';
+        if(statT==='year'){stat=r[statF]?r[statF].slice(0,4):'?';}
+        else if(statT==='number'){const n=parseInt(r[statF],10);stat=isNaN(n)?'?':n.toLocaleString('nb-NO');}
+        else{stat=r[statF]||'?';}
+        return{id,name:r[nameF]||id,stat,statLabel:statLbl,img:r[imgF].replace(/^http:/,'https:'),article:r[artF]||'',rarity:rar[id]||'vanleg',catId:cat.id,catLabel:cat.label,catIcon:cat.icon};
+      });
+      
+      // Find 1 card from each rarity
+      const rarities=['vanleg','sjeldgjevt','segngjeten','gudebore'];
+      for(const rarity of rarities){
+        const card=cards.find(c=>c.rarity===rarity);
+        if(card) testCards.push(card);
+      }
+    }
+    
+    currentTestCards = testCards;
+    
+    // Render cards with tilt effect
+    grid.innerHTML='';
+    testCards.forEach((card, index) => {
+      const cardEl=mkCard(card,'test');
+      cardEl.classList.add('test-card-tilt');
+      
+      // Add foil effect only to first 4 cards (first row)
+      const hasFoilEffect = index < 4;
+      if (hasFoilEffect) {
+        cardEl.classList.add('has-foil');
+      }
+      
+      // Add 3D tilt effect and foil mouse tracking
+      cardEl.addEventListener('mousemove', (e) => {
+        const rect = cardEl.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -15;
+        const rotateY = ((x - centerX) / centerX) * 15;
+        
+        cardEl.style.setProperty('--rotate-x', `${rotateX}deg`);
+        cardEl.style.setProperty('--rotate-y', `${rotateY}deg`);
+        
+        // Update foil mask position for cards with foil effect
+        if (hasFoilEffect) {
+          const imgWrap = cardEl.querySelector('.card-img-wrap');
+          if (imgWrap) {
+            const imgRect = imgWrap.getBoundingClientRect();
+            const mouseX = ((e.clientX - imgRect.left) / imgRect.width) * 100;
+            const mouseY = ((e.clientY - imgRect.top) / imgRect.height) * 100;
+            imgWrap.style.setProperty('--mouse-x', `${mouseX}%`);
+            imgWrap.style.setProperty('--mouse-y', `${mouseY}%`);
+          }
+        }
+      });
+      
+      cardEl.addEventListener('mouseleave', () => {
+        cardEl.style.setProperty('--rotate-x', '0deg');
+        cardEl.style.setProperty('--rotate-y', '0deg');
+      });
+      
+      // Add click handler
+      cardEl.addEventListener('click', () => {
+        openCardModal(index);
+      });
+      
+      grid.appendChild(cardEl);
+    });
+    
+  }catch(e){
+    grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:40px;color:red">Feil: ${e.message}</div>`;
+  }
+}
+
+function openCardModal(index, direction = 0) {
+  currentModalIndex = index;
+  const modal = document.getElementById('cardModal');
+  const modalCard = document.getElementById('modalCard');
+  const container = document.querySelector('.modal-card-container');
+  
+  const card = currentTestCards[index];
+  if (!card) return;
+  
+  // Function to update card content
+  const updateCardContent = () => {
+    const cardContent = document.createElement('div');
+    cardContent.className = `modal-card-content collect-card ${card.rarity}`;
+    
+    cardContent.innerHTML = `
+      <div class="modal-card-header">
+        <div class="modal-card-name">${esc(card.name)}</div>
+        <span class="modal-rarity-badge">${RL[card.rarity]}</span>
+      </div>
+      <div class="modal-card-img-wrap">
+        <img class="modal-card-img" src="${card.img}" alt="${card.name}">
+      </div>
+      <div class="modal-card-footer">
+        <div class="modal-card-stat">${card.stat ? `${card.statLabel} ${card.stat}` : card.statLabel || ''}</div>
+        <div class="modal-card-category">${card.catIcon} ${card.catLabel}</div>
+        ${card.article ? `<a href="${card.article}" target="_blank" class="les-om-link" style="font-size:0.9rem">Les om →</a>` : ''}
+      </div>
+    `;
+    
+    const img = cardContent.querySelector('.modal-card-img');
+    img.onerror = function() {
+      this.parentNode.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:4rem;opacity:.2">${card.catIcon || '🔬'}</div>`;
+    };
+    
+    modalCard.innerHTML = '';
+    modalCard.appendChild(cardContent);
+    
+    // Add cosmos mouse tracking for modal card
+    const imgWrap = modalCard.querySelector('.modal-card-img-wrap');
+    if (imgWrap) {
+      imgWrap.addEventListener('mousemove', (e) => {
+        const rect = imgWrap.getBoundingClientRect();
+        const mouseX = ((e.clientX - rect.left) / rect.width) * 100;
+        const mouseY = ((e.clientY - rect.top) / rect.height) * 100;
+        imgWrap.style.setProperty('--mouse-x', `${mouseX}%`);
+        imgWrap.style.setProperty('--mouse-y', `${mouseY}%`);
+      });
+    }
+  };
+  
+  // Remove all animation classes
+  container.classList.remove('slide-in', 'slide-out', 'slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
+  
+  // Force reflow to restart animation
+  void container.offsetWidth;
+  
+  // Add appropriate animation class
+  if (direction === 0) {
+    // Initial open
+    updateCardContent();
+    container.classList.add('slide-in');
+  } else if (direction > 0) {
+    // Next card - slide out right, then slide in from left
+    container.classList.add('slide-out-right');
+    setTimeout(() => {
+      updateCardContent();
+      container.classList.remove('slide-out-right');
+      void container.offsetWidth;
+      container.classList.add('slide-in-left');
+    }, 500);
+  } else {
+    // Previous card - slide out left, then slide in from right
+    container.classList.add('slide-out-left');
+    setTimeout(() => {
+      updateCardContent();
+      container.classList.remove('slide-out-left');
+      void container.offsetWidth;
+      container.classList.add('slide-in-right');
+    }, 500);
+  }
+  
+  modal.classList.add('active');
+  modal.classList.remove('closing');
+  // Add rarity class to modal card for holofoil effect
+  document.querySelector('.modal-card').className = `modal-card ${card.rarity}`;
+  updateNavigationButtons();
+}
+
+function closeCardModal() {
+  const modal = document.getElementById('cardModal');
+  const container = document.querySelector('.modal-card-container');
+  
+  // Add closing animations
+  modal.classList.add('closing');
+  container.classList.remove('slide-in', 'slide-out', 'slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
+  void container.offsetWidth;
+  container.classList.add('slide-out');
+  
+  // Remove active class after animation
+  setTimeout(() => {
+    modal.classList.remove('active', 'closing');
+    container.classList.remove('slide-out');
+  }, 500);
+}
+
+function navigateCard(direction) {
+  const newIndex = currentModalIndex + direction;
+  if (newIndex >= 0 && newIndex < currentTestCards.length) {
+    openCardModal(newIndex, direction);
+  }
+}
+
+function updateNavigationButtons() {
+  const prevBtn = document.querySelector('.card-nav.prev');
+  const nextBtn = document.querySelector('.card-nav.next');
+  
+  prevBtn.classList.toggle('disabled', currentModalIndex === 0);
+  nextBtn.classList.toggle('disabled', currentModalIndex === currentTestCards.length - 1);
+}
+
+function closeCardTest(){
+  document.getElementById('cardTestScreen').classList.add('hidden');
+}
+
+init();
+</script>
+<!-- CARD TEST SCREEN -->
+  <div id="cardTestScreen" class="hidden" style="position:fixed;inset:0;background:#FDFD96;z-index:1000;overflow-y:auto;padding:20px">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="background:#fff;border:3px solid #000;box-shadow:6px 6px 0 #000;padding:20px;margin-bottom:20px">
+        <h2 style="font-size:1.5rem;font-weight:900;margin-bottom:10px">🎨 Kortdesign-test</h2>
+        <p style="font-size:0.9rem;margin-bottom:15px">Viser 1 kort frå kvar rarity-kategori (4 kort per rad)</p>
+        <button class="btn-outline" onclick="closeCardTest()">← Tilbake</button>
+      </div>
+      <div id="cardTestGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px"></div>
+    </div>
+  </div>
+
+  <!-- CARD MODAL -->
+  <div id="cardModal" class="card-modal">
+    <div class="modal-card-container">
+      <button class="modal-close" onclick="closeCardModal()">×</button>
+      <button class="card-nav prev" onclick="navigateCard(-1)">‹</button>
+      <button class="card-nav next" onclick="navigateCard(1)">›</button>
+      <div class="modal-card" id="modalCard"></div>
+    </div>
+  </div>
+
+</body>
+</html>
