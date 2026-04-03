@@ -18,7 +18,7 @@ function esc(s) {
  * @returns {Array<Object>} Array of parsed objects
  */
 function parseCSV(t) {
-  const lines = t.trim().split('\n');
+  const lines = t.trim().split(/\r?\n/);
   const hdr = parseLine(lines[0]);
   return lines.slice(1).map(l => {
     const v = parseLine(l);

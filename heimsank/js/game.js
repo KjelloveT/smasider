@@ -24,6 +24,8 @@ async function init() {
     });
     document.getElementById('setupLoading').classList.add('hidden');
     document.getElementById('setupContent').classList.remove('hidden');
+    // Start showcase fan display
+    initShowcase();
   } catch (e) {
     document.getElementById('setupLoading').textContent = 'Feil: køyr serve.ps1 fyrst.';
   }
@@ -71,6 +73,7 @@ async function startGame() {
     btn.textContent = 'Start spelet →';
     return;
   }
+  stopShowcase();
   document.getElementById('setupScreen').classList.add('hidden');
   const gs = document.getElementById('gameScreen');
   gs.classList.remove('hidden');

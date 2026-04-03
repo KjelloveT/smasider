@@ -25,7 +25,10 @@ function openCardModal(index, direction = 0) {
     cardContent.innerHTML = `
       <div class="modal-card-header">
         <div class="modal-card-name">${esc(card.name)}${entry.foil ? ' ✨' : ''}</div>
-        <span class="modal-rarity-badge">${RL[card.rarity]}</span>
+        <div class="card-header-meta">
+          <span class="modal-rarity-badge">${RL[card.rarity]}</span>
+          ${entry.difficulty ? `<span class="diff-badge">${entry.difficulty} ${entry.operations ? entry.operations.join(' ') : ''}${entry.foil ? ' ✨' : ''}</span>` : ''}
+        </div>
       </div>
       <div class="modal-card-img-wrap">
         <img class="modal-card-img" src="${card.img}" alt="${card.name}">
@@ -33,7 +36,6 @@ function openCardModal(index, direction = 0) {
       <div class="modal-card-footer">
         <div class="modal-card-stat">${card.stat ? `${card.statLabel} ${card.stat}` : card.statLabel || ''}</div>
         <div class="modal-card-category">${card.catIcon} ${card.catLabel}</div>
-        ${entry.difficulty ? `<div style="font-size:0.85rem;font-weight:900;margin-top:4px;padding:4px 8px;background:#f0f0f0;border:2px solid #000;display:inline-block">${entry.difficulty} ${entry.operations ? entry.operations.join(' ') : ''}${entry.foil ? ' ✨' : ''}</div>` : ''}
         ${card.article ? `<a href="${card.article}" target="_blank" class="les-om-link" style="font-size:0.9rem;margin-top:8px;display:inline-block">Les om →</a>` : ''}
       </div>
     `;

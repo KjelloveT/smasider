@@ -61,24 +61,52 @@ function triggerCard() {
   document.getElementById('ansInput').disabled = true;
   document.getElementById('checkBtn').disabled = true;
 
+  // Build entry data for reveal card (matches final bar cards)
+  const operations = S.ops && S.ops.length > 0
+    ? S.ops.map(op => op === '+' ? '+' : op === '-' ? '-' : op === '*' ? '×' : op === '/' ? '÷' : op)
+    : ['+', '-'];
+  const difficulty = S.level
+    ? (S.level === 'lett' ? 'Lett' : S.level === 'middels' ? 'Middels' : 'Vanskeleg')
+    : 'Middels';
+
   // Show reveal modal
   const modal = document.getElementById('revealModal');
   const fc = document.getElementById('flipCard');
   const fb = document.querySelector('.flip-back-logo');
 
+  // Clear old card content to prevent glitch
+  document.querySelector('.flip-front').innerHTML = '';
+  fc.classList.remove('flipped', 'rare-reveal');
+
   fb.textContent = S.selCat.icon;
-  fc.classList.remove('flipped');
   document.getElementById('revealBtn').classList.add('hidden');
-  document.getElementById('revealSub').textContent = hasFoil ? '✨ Sjeldant foil-kort! ✨' : 'Nytt kort! Velg ein kategori...';
+  document.getElementById('revealSub').textContent = '';
   modal.classList.remove('hidden');
+
+  // Determine if rare (segngjeten or gudebore) for spectacular animation
+  const isRare = card.rarity === 'segngjeten' || card.rarity === 'gudebore';
+  const flipDelay = isRare ? 1800 : 1100;
+
+  // Add shake for rare cards before flip
+  if (isRare) {
+    fc.classList.add('rare-reveal');
+  }
 
   // Wait then flip
   setTimeout(() => {
     S.pending = card;
-    S.pendingFoil = hasFoil; // Store foil status temporarily
+    S.pendingFoil = hasFoil;
 
-    // Create card preview
-    const cardPreview = mkCard(card, 'full');
+    // Create card preview with full entry data
+    const revealEntry = {
+      catId: card.catId,
+      cardId: card.id,
+      difficulty: difficulty,
+      operations: operations,
+      foil: hasFoil,
+      earnedAt: Date.now()
+    };
+    const cardPreview = mkCard(card, 'full', revealEntry);
     const flipFront = document.querySelector('.flip-front');
     flipFront.innerHTML = '';
     flipFront.appendChild(cardPreview);
@@ -86,7 +114,7 @@ function triggerCard() {
     fc.classList.add('flipped');
     document.getElementById('revealSub').textContent = `${RL[card.rarity]}${hasFoil ? ' ✨' : ''} – ${card.name}`;
     setTimeout(() => document.getElementById('revealBtn').classList.remove('hidden'), 700);
-  }, 1100);
+  }, flipDelay);
 }
 
 /**
@@ -207,12 +235,8 @@ window.goSetup = goSetup;
 window.checkAnswer = checkAnswer;
 window.afterReveal = afterReveal;
 window.confirmClearAll = confirmClearAll;
-window.openCardTest = openCardTest;
-window.openFoilTest = openFoilTest;
-window.closeCardTest = closeCardTest;
 window.closeCardModal = closeCardModal;
 window.navigateCard = navigateCard;
-window.navigateTestCard = navigateTestCard;
 window.discardPending = discardPending;
 
 // Initialize when DOM is ready

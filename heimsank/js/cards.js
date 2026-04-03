@@ -17,10 +17,15 @@ function mkCard(card, sz, entry = null) {
   
   el.className = `collect-card ${card.rarity} ${isTest ? 'test-card' : isBar ? 'bar-card tilt' : sz === 'full' ? 'full-card' : ''} ${hasFoil ? 'has-foil' : ''}`;
 
-  // Header with name and rarity badge
+  // Header with name, rarity badge, and difficulty/operations
   const hdr = document.createElement('div');
   hdr.className = 'card-header';
-  hdr.innerHTML = `<span class="card-name">${esc(card.name)}</span><span class="rarity-badge">${RL[card.rarity]}</span>`;
+  let hdrHtml = `<span class="card-name">${esc(card.name)}</span><div class="card-header-meta"><span class="rarity-badge">${RL[card.rarity]}</span>`;
+  if (entry && entry.difficulty) {
+    hdrHtml += `<span class="diff-badge">${entry.difficulty} ${entry.operations ? entry.operations.join(' ') : ''}${hasFoil ? ' ✨' : ''}</span>`;
+  }
+  hdrHtml += `</div>`;
+  hdr.innerHTML = hdrHtml;
   el.appendChild(hdr);
 
   // Image wrapper
@@ -72,21 +77,6 @@ function mkCard(card, sz, entry = null) {
   const yr = document.createElement('span');
   yr.textContent = card.stat ? `${card.statLabel} ${card.stat}` : card.statLabel || '';
   ft.appendChild(yr);
-
-  // Add difficulty and operations for bar cards with entry data
-  if (isBar && entry) {
-    const diffInfo = document.createElement('div');
-    diffInfo.style.cssText = 'font-size:0.55rem;font-weight:900;text-transform:uppercase;margin-top:2px;opacity:0.7';
-
-    if (entry.difficulty && entry.operations && entry.operations.length > 0) {
-      // New format with difficulty and operations
-      diffInfo.textContent = `${entry.difficulty} ${entry.operations.join(' ')}${hasFoil ? ' ✨' : ''}`;
-    } else {
-      // Old format or missing data - show default info
-      diffInfo.textContent = 'Middels + -' + (hasFoil ? ' ✨' : '');
-    }
-    ft.appendChild(diffInfo);
-  }
 
   // Article link
   if (card.article) {

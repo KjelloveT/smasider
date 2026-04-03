@@ -4,8 +4,8 @@
 const S = {
   cats: [],           // Available categories
   selCat: null,      // Selected category
-  level: 'lett',     // Difficulty level
-  ops: ['+', '-', '*'], // Active operations
+  level: 'middels',  // Difficulty level
+  ops: ['*', '/'],     // Active operations
   cards: [],         // All cards for current category
   groups: {          // Cards grouped by rarity
     vanleg: [],
