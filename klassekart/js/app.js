@@ -1,0 +1,590 @@
+/* ══════════════════════════════════════
+   APP.JS — Main application logic
+   ══════════════════════════════════════ */
+
+const App = (() => {
+    let students = [];
+    let swapMode = false;
+    let swapFirst = null;
+    let selectedLayout = null;
+
+    function init() {
+        Grid.init();
+        injectIcons();
+        bindToolbar();
+        bindModals();
+        bindSidebar();
+        bindElementTools();
+    }
+
+    /* Inject SVG icons into all [data-icon] placeholders */
+    function injectIcons() {
+        document.querySelectorAll('[data-icon]').forEach(el => {
+            const name = el.dataset.icon;
+            const size = el.classList.contains('mh-icon') ? 20
+                       : el.classList.contains('sh-icon') ? 16
+                       : el.closest('.element-tools, .tool-btn') ? 14
+                       : el.closest('.tb-btn, .sb-btn') ? 16
+                       : 18;
+            el.appendChild(Icons.create(name, size));
+        });
+        /* Logo */
+        const logo = document.getElementById('logo-icon');
+        if (logo) logo.appendChild(Icons.create('armchair', 26));
+    }
+
+    /* ════════════════════════════════
+       STUDENT LIST
+       ════════════════════════════════ */
+
+    function getStudentList() {
+        return [...students];
+    }
+
+    function setStudentList(list) {
+        students = [...list];
+    }
+
+    function refreshStudentPanel() {
+        const container = document.getElementById('student-list');
+        container.innerHTML = '';
+
+        if (students.length === 0) {
+            container.innerHTML = '<p class="placeholder-text">Ingen elevar lagt til enno.</p>';
+            return;
+        }
+
+        const placedIds = new Set(Grid.getDesks().map(d => d.dataset.studentId));
+
+        students.forEach(s => {
+            const chip = document.createElement('div');
+            chip.className = 'student-chip';
+            if (placedIds.has(s.id)) chip.classList.add('placed');
+            chip.dataset.studentId = s.id;
+            chip.draggable = !placedIds.has(s.id);
+
+            const dot = document.createElement('span');
+            dot.className = 'chip-color';
+            dot.style.background = s.color || '#ffffff';
+
+            const name = document.createElement('span');
+            name.className = 'chip-name';
+            name.textContent = s.name;
+
+            chip.appendChild(dot);
+            chip.appendChild(name);
+
+            chip.addEventListener('dragstart', (e) => {
+                if (chip.classList.contains('placed')) { e.preventDefault(); return; }
+                e.dataTransfer.setData('text/plain', JSON.stringify({ type: 'student', id: s.id, name: s.name, color: s.color }));
+                chip.classList.add('drag-ghost');
+            });
+            chip.addEventListener('dragend', () => chip.classList.remove('drag-ghost'));
+
+            container.appendChild(chip);
+        });
+    }
+
+    /* ════════════════════════════════
+       TOOLBAR BINDINGS
+       ════════════════════════════════ */
+
+    function bindToolbar() {
+        document.getElementById('btn-layout').addEventListener('click', () => openModal('modal-layout'));
+        document.getElementById('btn-shuffle').addEventListener('click', shuffleStudents);
+        document.getElementById('btn-swap').addEventListener('click', toggleSwapMode);
+        document.getElementById('btn-file').addEventListener('click', openFileModal);
+        document.getElementById('btn-export-png').addEventListener('click', () => Export.toPNG());
+        document.getElementById('btn-grid-toggle').addEventListener('click', toggleGrid);
+        document.getElementById('btn-clear').addEventListener('click', clearAll);
+
+        document.getElementById('btn-export-json').addEventListener('click', () => Storage.exportJSON());
+        document.getElementById('btn-import-json').addEventListener('click', () => document.getElementById('import-file').click());
+
+        document.getElementById('import-file').addEventListener('change', (e) => {
+            if (e.target.files[0]) {
+                Storage.importJSON(e.target.files[0]).then(() => {
+                    e.target.value = '';
+                    refreshLoadList();
+                }).catch(err => alert('Kunne ikkje importere fila: ' + err.message));
+            }
+        });
+    }
+
+    function toggleGrid() {
+        document.getElementById('canvas').classList.toggle('show-grid');
+    }
+
+    function clearAll() {
+        if (!confirm('Er du sikker på at du vil tøme alt?')) return;
+        Grid.clearCanvas();
+        students = [];
+        refreshStudentPanel();
+    }
+
+    /* ════════════════════════════════
+       SHUFFLE (random placement)
+       ════════════════════════════════ */
+
+    function shuffleStudents() {
+        const desks = Grid.getDesks();
+        if (desks.length === 0) {
+            alert('Ingen pultar på kartet. Vel eit oppsett først!');
+            return;
+        }
+
+        const locked = desks.filter(d => d.dataset.locked === '1');
+        const unlocked = desks.filter(d => d.dataset.locked !== '1');
+        const lockedPositions = locked.map(d => ({
+            x: parseInt(d.style.left),
+            y: parseInt(d.style.top)
+        }));
+
+        const unlockedNames = unlocked.map(d => ({
+            name: d.dataset.studentName,
+            id: d.dataset.studentId,
+            color: d.dataset.color
+        }));
+
+        for (let i = unlockedNames.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [unlockedNames[i], unlockedNames[j]] = [unlockedNames[j], unlockedNames[i]];
+        }
+
+        unlocked.forEach((d, i) => {
+            const info = unlockedNames[i];
+            d.dataset.studentName = info.name;
+            d.dataset.studentId = info.id;
+            d.dataset.color = info.color;
+            d.querySelector('.desk-name').textContent = info.name;
+            if (info.color && info.color !== '#ffffff') {
+                d.style.background = info.color;
+            } else {
+                d.style.background = '#FDFD96';
+            }
+        });
+
+        refreshStudentPanel();
+    }
+
+    /* ════════════════════════════════
+       SWAP MODE
+       ════════════════════════════════ */
+
+    function toggleSwapMode() {
+        swapMode = !swapMode;
+        swapFirst = null;
+        document.getElementById('btn-swap').classList.toggle('active', swapMode);
+        Grid.getCanvas().style.cursor = swapMode ? 'crosshair' : '';
+
+        if (swapMode) {
+            Grid.getCanvas().addEventListener('click', onSwapClick);
+        } else {
+            Grid.getCanvas().removeEventListener('click', onSwapClick);
+        }
+    }
+
+    function exitSwapMode() {
+        if (swapMode) toggleSwapMode();
+    }
+
+    function onSwapClick(e) {
+        const desk = e.target.closest('.desk');
+        if (!desk) return;
+
+        if (!swapFirst) {
+            swapFirst = desk;
+            desk.style.outline = '3px solid #FF6B6B';
+        } else {
+            const a = swapFirst;
+            const b = desk;
+            a.style.outline = '';
+
+            const aName = a.dataset.studentName;
+            const aId = a.dataset.studentId;
+            const aColor = a.dataset.color;
+            a.dataset.studentName = b.dataset.studentName;
+            a.dataset.studentId = b.dataset.studentId;
+            a.dataset.color = b.dataset.color;
+            a.querySelector('.desk-name').textContent = b.dataset.studentName;
+
+            b.dataset.studentName = aName;
+            b.dataset.studentId = aId;
+            b.dataset.color = aColor;
+            b.querySelector('.desk-name').textContent = aName;
+
+            if (a.dataset.color !== '#ffffff') a.style.background = a.dataset.color;
+            else a.style.background = '#FDFD96';
+            if (b.dataset.color !== '#ffffff') b.style.background = b.dataset.color;
+            else b.style.background = '#FDFD96';
+
+            swapFirst = null;
+            refreshStudentPanel();
+        }
+    }
+
+    /* ════════════════════════════════
+       MODALS
+       ════════════════════════════════ */
+
+    function openModal(id) {
+        document.getElementById(id).classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.add('hidden');
+    }
+
+    function bindModals() {
+        document.querySelectorAll('[data-close]').forEach(btn => {
+            btn.addEventListener('click', () => closeModal(btn.dataset.close));
+        });
+
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) overlay.classList.add('hidden');
+            });
+        });
+
+        document.getElementById('btn-students-ok').addEventListener('click', addStudents);
+        bindLayoutModal();
+        bindFileModal();
+    }
+
+    /* ── Add students modal ── */
+    function addStudents() {
+        const input = document.getElementById('student-input');
+        const names = input.value.split('\n').map(n => n.trim()).filter(n => n.length > 0);
+        if (names.length === 0) return;
+
+        names.forEach(name => {
+            if (!students.find(s => s.name === name)) {
+                students.push({
+                    id: crypto.randomUUID(),
+                    name,
+                    color: '#ffffff'
+                });
+            }
+        });
+
+        input.value = '';
+        closeModal('modal-students');
+        refreshStudentPanel();
+    }
+
+    /* ── Layout modal ── */
+    function bindLayoutModal() {
+        const cards = document.querySelectorAll('.layout-card');
+        const groupCfg = document.getElementById('layout-group-size');
+        const applyBtn = document.getElementById('btn-apply-layout');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                cards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                selectedLayout = card.dataset.layout;
+
+                if (selectedLayout === 'groups') {
+                    groupCfg.classList.remove('hidden');
+                } else {
+                    groupCfg.classList.add('hidden');
+                    applyLayout(selectedLayout);
+                    closeModal('modal-layout');
+                }
+            });
+        });
+
+        applyBtn.addEventListener('click', () => {
+            const perGroup = parseInt(document.getElementById('group-size-select').value);
+            applyLayout('groups', perGroup);
+            closeModal('modal-layout');
+        });
+    }
+
+    function applyLayout(type, perGroup) {
+        if (students.length === 0) {
+            alert('Legg til elevar først!');
+            return;
+        }
+
+        Grid.clearDesks();
+        const { w, h } = Grid.getCanvasSize();
+        const positions = Layouts.generate(type, students.length, w, h, perGroup);
+
+        students.forEach((s, i) => {
+            if (i < positions.length) {
+                const desk = Grid.createDesk(s.name, positions[i].x, positions[i].y, s.color, false, s.id);
+                if (positions[i].rotation) {
+                    desk.dataset.rotation = String(positions[i].rotation);
+                    desk.classList.add('rot-' + positions[i].rotation);
+                }
+            }
+        });
+
+        refreshStudentPanel();
+    }
+
+    /* ── File modal (combined save/load/export/import) ── */
+    function bindFileModal() {
+        document.getElementById('btn-save-ok').addEventListener('click', () => {
+            const name = document.getElementById('save-name').value.trim();
+            if (!name) { alert('Skriv inn eit namn for oppsettet.'); return; }
+            const data = Storage.captureState();
+            Storage.saveSetup(name, data);
+            document.getElementById('save-name').value = '';
+            refreshLoadList();
+        });
+    }
+
+    function openFileModal() {
+        refreshLoadList();
+        openModal('modal-file');
+    }
+
+    function refreshLoadList() {
+        const list = document.getElementById('load-list');
+        const setups = Storage.getAll();
+
+        if (setups.length === 0) {
+            list.innerHTML = '<p class="placeholder-text">Ingen lagra oppsett.</p>';
+        } else {
+            list.innerHTML = '';
+            setups.forEach(s => {
+                const item = document.createElement('div');
+                item.className = 'load-item';
+
+                const nameEl = document.createElement('span');
+                nameEl.className = 'load-item-name';
+                nameEl.textContent = s.name;
+
+                const actions = document.createElement('div');
+                actions.className = 'load-item-actions';
+
+                const loadBtn = document.createElement('button');
+                loadBtn.className = 'load-btn';
+                loadBtn.innerHTML = Icons.html('folder-open', 14) + ' Hent';
+                loadBtn.addEventListener('click', () => {
+                    Storage.restoreState(s.data);
+                    closeModal('modal-file');
+                });
+
+                const delBtn = document.createElement('button');
+                delBtn.className = 'del-btn';
+                delBtn.innerHTML = Icons.html('trash-2', 14);
+                delBtn.addEventListener('click', () => {
+                    if (confirm('Slette "' + s.name + '"?')) {
+                        Storage.deleteSetup(s.id);
+                        refreshLoadList();
+                    }
+                });
+
+                actions.appendChild(loadBtn);
+                actions.appendChild(delBtn);
+                item.appendChild(nameEl);
+                item.appendChild(actions);
+                list.appendChild(item);
+            });
+        }
+    }
+
+    /* ════════════════════════════════
+       SIDEBAR — Drop on canvas
+       ════════════════════════════════ */
+
+    function bindSidebar() {
+        const canvas = Grid.getCanvas();
+
+        canvas.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
+        });
+
+        canvas.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const canvasRect = Grid.getCanvasRect();
+            const x = e.clientX - canvasRect.left;
+            const y = e.clientY - canvasRect.top;
+
+            const raw = e.dataTransfer.getData('text/plain');
+
+            try {
+                const data = JSON.parse(raw);
+                if (data.type === 'student') {
+                    const existing = Grid.getDesks().find(d => d.dataset.studentId === data.id);
+                    if (existing) return;
+                    Grid.createDesk(data.name, x - 40, y - 20, data.color, false, data.id);
+                    refreshStudentPanel();
+                } else if (data.type === 'furniture') {
+                    Grid.createFurniture(data.furnitureType, x - 40, y - 20, 0);
+                }
+            } catch {
+                /* ignore */
+            }
+        });
+
+        document.querySelectorAll('.furniture-item').forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                const type = item.dataset.type;
+                e.dataTransfer.setData('text/plain', JSON.stringify({ type: 'furniture', furnitureType: type }));
+                item.classList.add('drag-ghost');
+            });
+            item.addEventListener('dragend', () => item.classList.remove('drag-ghost'));
+        });
+
+        document.getElementById('btn-add-students').addEventListener('click', () => openModal('modal-students'));
+    }
+
+    /* ════════════════════════════════
+       LEFT-CLICK SYMBOL TOOLS
+       ════════════════════════════════ */
+
+    let contextTarget = null;
+
+    function getElementTools() {
+        let tools = document.getElementById('element-tools');
+        if (tools) return tools;
+
+        tools = document.createElement('div');
+        tools.id = 'element-tools';
+        tools.className = 'element-tools hidden';
+        tools.innerHTML = [
+            '<button class="tool-btn" data-action="rotate" title="Roter"></button>',
+            '<button class="tool-btn" data-action="color" title="Farge"></button>',
+            '<button class="tool-btn" data-action="lock" title="Lås"></button>',
+            '<button class="tool-btn" data-action="remove" title="Fjern"></button>'
+        ].join('');
+
+        document.body.appendChild(tools);
+
+        tools.querySelector('[data-action="rotate"]').appendChild(Icons.create('rotate-cw', 14));
+        tools.querySelector('[data-action="color"]').appendChild(Icons.create('palette', 14));
+        tools.querySelector('[data-action="lock"]').appendChild(Icons.create('lock', 14));
+        tools.querySelector('[data-action="remove"]').appendChild(Icons.create('trash-2', 14));
+
+        return tools;
+    }
+
+    function showElementTools(el) {
+        if (!el) return;
+        contextTarget = el;
+        const tools = getElementTools();
+        const rect = el.getBoundingClientRect();
+        const canvasRect = Grid.getCanvasRect();
+        const isDesk = el.classList.contains('desk');
+
+        const lockBtn = tools.querySelector('[data-action="lock"]');
+        const colorBtn = tools.querySelector('[data-action="color"]');
+
+        lockBtn.classList.toggle('hidden', !isDesk);
+        colorBtn.classList.toggle('hidden', !isDesk);
+
+        tools.style.left = (Math.max(canvasRect.left + 8, rect.right - 8)) + 'px';
+        tools.style.top = (Math.max(canvasRect.top + 8, rect.top - 8)) + 'px';
+        tools.classList.remove('hidden');
+    }
+
+    function hideElementTools() {
+        const tools = document.getElementById('element-tools');
+        if (tools) tools.classList.add('hidden');
+    }
+
+    function bindElementTools() {
+        const picker = document.getElementById('color-picker');
+        const tools = getElementTools();
+
+        tools.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-action]');
+            if (!btn || !contextTarget) return;
+
+            const action = btn.dataset.action;
+            if (action === 'rotate') {
+                let rot = parseInt(contextTarget.dataset.rotation) || 0;
+                rot = (rot + 90) % 360;
+                contextTarget.dataset.rotation = String(rot);
+                contextTarget.className = contextTarget.className.replace(/rot-\d+/g, '');
+                if (rot) contextTarget.classList.add('rot-' + rot);
+                if (contextTarget.classList.contains('furniture')) {
+                    Grid.updateFurnLayout(contextTarget);
+                }
+            }
+
+            if (action === 'lock' && contextTarget.classList.contains('desk')) {
+                const isLocked = contextTarget.dataset.locked === '1';
+                contextTarget.dataset.locked = isLocked ? '0' : '1';
+                contextTarget.classList.toggle('locked', !isLocked);
+
+                const lockIcon = contextTarget.querySelector('.lock-icon');
+                if (!isLocked && !lockIcon) {
+                    const icon = document.createElement('span');
+                    icon.className = 'lock-icon';
+                    icon.appendChild(Icons.create('lock', 12));
+                    contextTarget.appendChild(icon);
+                }
+                if (isLocked && lockIcon) lockIcon.remove();
+            }
+
+            if (action === 'color' && contextTarget.classList.contains('desk')) {
+                const tr = btn.getBoundingClientRect();
+                picker.style.left = tr.left + 'px';
+                picker.style.top = (tr.bottom + 6) + 'px';
+                picker.classList.remove('hidden');
+            }
+
+            if (action === 'remove') {
+                removeElement(contextTarget);
+                hideElementTools();
+                contextTarget = null;
+                return;
+            }
+
+            if (contextTarget) showElementTools(contextTarget);
+        });
+
+        picker.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (contextTarget && contextTarget.classList.contains('desk')) {
+                    const color = btn.dataset.color;
+                    contextTarget.dataset.color = color;
+                    contextTarget.style.background = color === '#ffffff' ? '#FDFD96' : color;
+
+                    const sid = contextTarget.dataset.studentId;
+                    const student = students.find(s => s.id === sid);
+                    if (student) student.color = color;
+                    refreshStudentPanel();
+                }
+                picker.classList.add('hidden');
+                if (contextTarget) showElementTools(contextTarget);
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!tools.contains(e.target) && !e.target.closest('.desk, .furniture')) {
+                hideElementTools();
+            }
+            if (!picker.contains(e.target) && !e.target.closest('[data-action="color"]')) {
+                picker.classList.add('hidden');
+            }
+        });
+    }
+
+    function removeElement(el) {
+        if (el.classList.contains('desk')) {
+            const sid = el.dataset.studentId;
+            /* Student remains in list, just unplaced */
+        }
+        el.remove();
+        Grid.deselectAll();
+        refreshStudentPanel();
+    }
+
+    /* ════════════════════════════════
+       INIT
+       ════════════════════════════════ */
+
+    document.addEventListener('DOMContentLoaded', init);
+
+    return {
+        showElementTools, hideElementTools, removeElement, exitSwapMode,
+        getStudentList, setStudentList, refreshStudentPanel
+    };
+})();

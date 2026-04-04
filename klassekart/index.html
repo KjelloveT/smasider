@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klassekart — Personvernvenleg klasseromplanleggar</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ── TOOLBAR ── -->
+    <div id="toolbar">
+        <div class="toolbar-left">
+            <span class="toolbar-logo" id="logo-icon"></span>
+            <h1 class="toolbar-title">Klassekart</h1>
+        </div>
+        <div class="toolbar-center">
+            <button id="btn-file" class="tb-btn c-blue" title="Lagring og eksport"><span class="tb-icon" data-icon="save"></span> Fil</button>
+            <button id="btn-layout" class="tb-btn c-green" title="Vel møbleringsmal"><span class="tb-icon" data-icon="layout-grid"></span> Oppsett</button>
+            <button id="btn-shuffle" class="tb-btn c-orange" title="Plasser elevar tilfeldig"><span class="tb-icon" data-icon="shuffle"></span> Bland</button>
+            <button id="btn-swap" class="tb-btn c-purple" title="Klikk to elevar for å byte plass"><span class="tb-icon" data-icon="arrow-left-right"></span> Byt</button>
+            <button id="btn-export-png" class="tb-btn c-peach" title="Last ned som bilete"><span class="tb-icon" data-icon="printer"></span> Skriv ut</button>
+        </div>
+        <div class="toolbar-right">
+            <button id="btn-grid-toggle" class="tb-btn tb-small" title="Vis/skjul rutenett"><span class="tb-icon" data-icon="grid-3x3"></span></button>
+            <button id="btn-clear" class="tb-btn tb-small c-red" title="Tøm alt"><span class="tb-icon" data-icon="trash-2"></span></button>
+        </div>
+    </div>
+
+    <!-- ── MAIN LAYOUT ── -->
+    <div id="main">
+        <!-- ── SIDEBAR ── -->
+        <div id="sidebar">
+            <!-- Elevliste -->
+            <div class="sidebar-section">
+                <div class="sidebar-header">
+                    <h2><span class="sh-icon" data-icon="users"></span> Elevar</h2>
+                    <button id="btn-add-students" class="sb-btn" title="Legg til elevar"><span class="tb-icon" data-icon="user-plus"></span> Legg til</button>
+                </div>
+                <div id="student-list" class="item-list">
+                    <p class="placeholder-text">Ingen elevar lagt til enno.</p>
+                </div>
+            </div>
+
+            <!-- Møblar -->
+            <div class="sidebar-section">
+                <div class="sidebar-header">
+                    <h2><span class="sh-icon" data-icon="armchair"></span> Møblar</h2>
+                </div>
+                <div id="furniture-palette" class="item-list furniture-grid">
+                    <div class="furniture-item" data-type="kateter" draggable="true">
+                        <span class="fi-icon" data-icon="monitor"></span>
+                        <span class="fi-label">Kateter</span>
+                    </div>
+                    <div class="furniture-item" data-type="tavle" draggable="true">
+                        <span class="fi-icon" data-icon="presentation"></span>
+                        <span class="fi-label">Tavle</span>
+                    </div>
+                    <div class="furniture-item" data-type="dor" draggable="true">
+                        <span class="fi-icon" data-icon="door-open"></span>
+                        <span class="fi-label">Dør</span>
+                    </div>
+                    <div class="furniture-item" data-type="vindu" draggable="true">
+                        <span class="fi-icon" data-icon="grid-2x2"></span>
+                        <span class="fi-label">Vindu</span>
+                    </div>
+                    <div class="furniture-item" data-type="hylle" draggable="true">
+                        <span class="fi-icon" data-icon="library"></span>
+                        <span class="fi-label">Hylle</span>
+                    </div>
+                    <div class="furniture-item" data-type="tekst" draggable="true">
+                        <span class="fi-icon" data-icon="type"></span>
+                        <span class="fi-label">Tekst</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── CANVAS ── -->
+        <div id="canvas-wrap">
+            <div id="canvas" class="show-grid">
+            </div>
+        </div>
+    </div>
+
+    <!-- ── MODAL: Legg til elevar ── -->
+    <div id="modal-students" class="modal-overlay hidden">
+        <div class="modal neo-box">
+            <div class="modal-header">
+                <h2><span class="mh-icon" data-icon="user-plus"></span> Legg til elevar</h2>
+                <button class="modal-close" data-close="modal-students"><span data-icon="x"></span></button>
+            </div>
+            <div class="modal-body">
+                <p>Skriv eitt elevnamn per linje:</p>
+                <textarea id="student-input" rows="12" placeholder="Ola Nordmann&#10;Kari Hansen&#10;Per Olsen&#10;..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-students-ok" class="tb-btn c-green">Legg til</button>
+                <button class="tb-btn" data-close="modal-students">Avbryt</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── MODAL: Vel oppsett / møbleringsmal ── -->
+    <div id="modal-layout" class="modal-overlay hidden">
+        <div class="modal neo-box modal-wide">
+            <div class="modal-header">
+                <h2><span class="mh-icon" data-icon="layout-grid"></span> Vel møbleringsmal</h2>
+                <button class="modal-close" data-close="modal-layout"><span data-icon="x"></span></button>
+            </div>
+            <div class="modal-body">
+                <div class="layout-options">
+                    <button class="layout-card" data-layout="rows">
+                        <span class="lc-preview">
+                            <span class="lp-row"><span class="lp-d"></span><span class="lp-d"></span><span class="lp-d"></span></span>
+                            <span class="lp-row"><span class="lp-d"></span><span class="lp-d"></span><span class="lp-d"></span></span>
+                            <span class="lp-row"><span class="lp-d"></span><span class="lp-d"></span><span class="lp-d"></span></span>
+                        </span>
+                        <span class="lc-label">Rekkjer</span>
+                    </button>
+                    <button class="layout-card" data-layout="pairs">
+                        <span class="lc-preview">
+                            <span class="lp-row"><span class="lp-pair"></span><span class="lp-pair"></span></span>
+                            <span class="lp-row"><span class="lp-pair"></span><span class="lp-pair"></span></span>
+                            <span class="lp-row"><span class="lp-pair"></span><span class="lp-pair"></span></span>
+                        </span>
+                        <span class="lc-label">Par (2 og 2)</span>
+                    </button>
+                    <button class="layout-card" data-layout="groups">
+                        <span class="lc-preview">
+                            <span class="lp-row"><span class="lp-group"></span><span class="lp-group"></span></span>
+                            <span class="lp-row"><span class="lp-group"></span><span class="lp-group"></span></span>
+                        </span>
+                        <span class="lc-label">Grupper</span>
+                    </button>
+                    <button class="layout-card" data-layout="horseshoe">
+                        <span class="lc-preview lp-horseshoe">
+                            <span class="lp-d hs-top"></span><span class="lp-d hs-top"></span><span class="lp-d hs-top"></span>
+                            <span class="lp-d hs-left"></span>
+                            <span class="lp-d hs-left"></span>
+                            <span class="lp-d hs-right"></span>
+                            <span class="lp-d hs-right"></span>
+                        </span>
+                        <span class="lc-label">Hestesko</span>
+                    </button>
+                    <button class="layout-card" data-layout="longtable">
+                        <span class="lc-preview">
+                            <span class="lp-row"><span class="lp-long"></span></span>
+                            <span class="lp-row"><span class="lp-long"></span></span>
+                        </span>
+                        <span class="lc-label">Langbord</span>
+                    </button>
+                    <button class="layout-card" data-layout="wall">
+                        <span class="lc-preview lp-wall">
+                            <span class="lp-d"></span><span class="lp-d"></span><span class="lp-d"></span>
+                            <span class="lp-d"></span><span class="lp-d"></span><span class="lp-d"></span>
+                        </span>
+                        <span class="lc-label">Veggretta</span>
+                    </button>
+                </div>
+                <div id="layout-group-size" class="layout-group-cfg hidden">
+                    <label>Elevar per gruppe:
+                        <select id="group-size-select">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4" selected>4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </label>
+                    <button id="btn-apply-layout" class="tb-btn c-green">Bruk oppsett</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── MODAL: Fil / Lagring ── -->
+    <div id="modal-file" class="modal-overlay hidden">
+        <div class="modal neo-box modal-wide">
+            <div class="modal-header">
+                <h2><span class="mh-icon" data-icon="save"></span> Lagring og eksport</h2>
+                <button class="modal-close" data-close="modal-file"><span data-icon="x"></span></button>
+            </div>
+            <div class="modal-body">
+                <!-- Lagre i nettlesar -->
+                <div class="file-section">
+                    <h3 class="file-section-title"><span data-icon="hard-drive-download"></span> Lagre i nettlesaren</h3>
+                    <p class="file-section-desc">Oppsettet blir lagra lokalt i denne nettlesaren. Du må bruke <strong>same PC og same nettlesar</strong> for å hente det opp att. Sletting av nettlesardata vil fjerne lagra oppsett.</p>
+                    <div class="file-section-actions">
+                        <div class="file-save-row">
+                            <input id="save-name" type="text" placeholder="Namn på oppsettet, t.d. 7A Vanleg" class="neo-input">
+                            <button id="btn-save-ok" class="tb-btn c-green"><span data-icon="save"></span> Lagre</button>
+                        </div>
+                    </div>
+                    <div id="load-list" class="load-list"></div>
+                </div>
+
+                <hr class="file-divider">
+
+                <!-- Eksporter / Importer fil -->
+                <div class="file-section">
+                    <h3 class="file-section-title"><span data-icon="file-down"></span> Eksporter / Importer fil</h3>
+                    <p class="file-section-desc">Eksporter oppsettet som ei <strong>.json-fil</strong> som du kan ta med deg. Nyttig for å flytte oppsett mellom maskiner, eller for å ha ein sikkerheitskopi. Fila inneheld elevnamn og plasseringar.</p>
+                    <div class="file-section-actions">
+                        <button id="btn-export-json" class="tb-btn c-teal"><span data-icon="upload"></span> Eksporter til fil</button>
+                        <button id="btn-import-json" class="tb-btn c-teal"><span data-icon="download"></span> Importer frå fil</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── COLOR PICKER ── -->
+    <div id="color-picker" class="color-picker hidden">
+        <button data-color="#ffffff" style="background:#ffffff"></button>
+        <button data-color="#BAFCA2" style="background:#BAFCA2"></button>
+        <button data-color="#87CEEB" style="background:#87CEEB"></button>
+        <button data-color="#FFA07A" style="background:#FFA07A"></button>
+        <button data-color="#FFB2EF" style="background:#FFB2EF"></button>
+        <button data-color="#FFDB58" style="background:#FFDB58"></button>
+        <button data-color="#C4A1FF" style="background:#C4A1FF"></button>
+        <button data-color="#A7DBD8" style="background:#A7DBD8"></button>
+        <button data-color="#F8D6B3" style="background:#F8D6B3"></button>
+    </div>
+
+    <!-- Hidden file input for JSON import -->
+    <input type="file" id="import-file" accept=".json" class="hidden">
+
+    <script src="js/icons.js"></script>
+    <script src="js/grid.js"></script>
+    <script src="js/layouts.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/export.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
