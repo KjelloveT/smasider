@@ -14,7 +14,7 @@
             <h1 class="toolbar-title">Klassekart</h1>
         </div>
         <div class="toolbar-center">
-            <button id="btn-file" class="tb-btn c-blue" title="Lagring og eksport"><span class="tb-icon" data-icon="save"></span> Fil</button>
+            <button id="btn-file" class="tb-btn c-blue" title="Lagre og hente oppsett"><span class="tb-icon" data-icon="save"></span> Lagre / hente</button>
             <button id="btn-layout" class="tb-btn c-green" title="Vel møbleringsmal"><span class="tb-icon" data-icon="layout-grid"></span> Oppsett</button>
             <button id="btn-shuffle" class="tb-btn c-orange" title="Plasser elevar tilfeldig"><span class="tb-icon" data-icon="shuffle"></span> Bland</button>
             <button id="btn-swap" class="tb-btn c-purple" title="Klikk to elevar for å byte plass"><span class="tb-icon" data-icon="arrow-left-right"></span> Byt</button>
@@ -176,28 +176,26 @@
     <!-- ── MODAL: Fil / Lagring ── -->
     <div id="modal-file" class="modal-overlay hidden">
         <div class="modal neo-box modal-wide">
-            <div class="modal-header">
+            <div class="modal-header file-modal-header">
                 <h2><span class="mh-icon" data-icon="save"></span> Lagring og eksport</h2>
                 <button class="modal-close" data-close="modal-file"><span data-icon="x"></span></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body file-modal-body">
                 <!-- Lagre i nettlesar -->
-                <div class="file-section">
+                <div class="file-section file-section-green">
                     <h3 class="file-section-title"><span data-icon="hard-drive-download"></span> Lagre i nettlesaren</h3>
                     <p class="file-section-desc">Oppsettet blir lagra lokalt i denne nettlesaren. Du må bruke <strong>same PC og same nettlesar</strong> for å hente det opp att. Sletting av nettlesardata vil fjerne lagra oppsett.</p>
                     <div class="file-section-actions">
                         <div class="file-save-row">
                             <input id="save-name" type="text" placeholder="Namn på oppsettet, t.d. 7A Vanleg" class="neo-input">
-                            <button id="btn-save-ok" class="tb-btn c-green"><span data-icon="save"></span> Lagre</button>
+                            <button id="btn-save-ok" class="tb-btn c-teal"><span data-icon="save"></span> Lagre</button>
                         </div>
                     </div>
                     <div id="load-list" class="load-list"></div>
                 </div>
 
-                <hr class="file-divider">
-
                 <!-- Eksporter / Importer fil -->
-                <div class="file-section">
+                <div class="file-section file-section-pink">
                     <h3 class="file-section-title"><span data-icon="file-down"></span> Eksporter / Importer fil</h3>
                     <p class="file-section-desc">Eksporter oppsettet som ei <strong>.json-fil</strong> som du kan ta med deg. Nyttig for å flytte oppsett mellom maskiner, eller for å ha ein sikkerheitskopi. Fila inneheld elevnamn og plasseringar.</p>
                     <div class="file-section-actions">

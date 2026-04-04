@@ -336,12 +336,10 @@ body {
 /* ── DESK (on canvas) ── */
 .desk {
     position: absolute;
+    width: 80px;
+    height: 40px;
     background: #FDFD96;
     border: 2px solid #000;
-    box-shadow: 2px 2px 0 #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: grab;
     user-select: none;
     z-index: 10;
@@ -359,8 +357,8 @@ body {
     content: '';
     position: absolute;
     bottom: -5px;
-    left: 4px;
-    right: 4px;
+    left: 8px;
+    right: 8px;
     height: 4px;
     background: #8B6914;
     border: 1px solid #000;
@@ -518,10 +516,6 @@ body {
 .desk.rot-90  > .desk-name { transform: rotate(-90deg); }
 .desk.rot-180 > .desk-name { transform: rotate(-180deg); }
 .desk.rot-270 > .desk-name { transform: rotate(-270deg); }
-.desk.rot-90::after { bottom: auto; top: 4px; left: -5px; right: auto; width: 4px; height: calc(100% - 8px); }
-.desk.rot-180::after { bottom: auto; top: -5px; }
-.desk.rot-270::after { bottom: auto; top: 4px; right: -5px; left: auto; width: 4px; height: calc(100% - 8px); }
-/* Chair marker rotates with the desk — stays at bottom edge of desk box */
 
 /* ── DRAG GHOST ── */
 .drag-ghost {
@@ -766,31 +760,42 @@ textarea:focus, .neo-input:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #fff;
-    border: 2px solid #000;
-    box-shadow: 2px 2px 0 #000;
-    padding: 8px 12px;
+    gap: 8px;
+    padding: 6px 0;
 }
 
 .load-item-name {
     font-weight: 700;
     font-size: 0.85rem;
+    flex: 1;
 }
 
 .load-item-actions {
     display: flex;
-    gap: 4px;
+    gap: 6px;
 }
 
 .load-item-actions button {
     background: #fff;
     border: 2px solid #000;
-    padding: 3px 8px;
-    font-size: 0.7rem;
+    box-shadow: 2px 2px 0 #000;
+    padding: 6px 12px;
+    font-size: 0.75rem;
     font-weight: 900;
     cursor: pointer;
     font-family: inherit;
-    transition: background 0.1s;
+    transition: transform 0.08s, box-shadow 0.08s;
+    text-transform: uppercase;
+}
+
+.load-item-actions button:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 #000;
+}
+
+.load-item-actions button:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 #000;
 }
 
 .load-item-actions .load-btn:hover { background: #BAFCA2; }
@@ -864,8 +869,30 @@ textarea:focus, .neo-input:focus {
 }
 
 /* ── FILE MODAL ── */
+.file-modal-header {
+    background: #FDFD96;
+}
+
+.file-modal-body {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
 .file-section {
-    margin-bottom: 8px;
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    padding: 16px;
+    background: #fff;
+}
+
+.file-section-green {
+    background: #BAFCA2;
+}
+
+.file-section-pink {
+    background: #FFB2EF;
 }
 
 .file-section-title {
@@ -873,7 +900,7 @@ textarea:focus, .neo-input:focus {
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.3px;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 6px;
