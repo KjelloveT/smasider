@@ -36,7 +36,7 @@ function mkCard(card, sz, entry = null) {
   img.src = card.img;
   img.loading = 'lazy';
   img.onerror = function () {
-    this.parentNode.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:2.5rem;opacity:.2">${card.catIcon || '🔬'}</div>`;
+    this.parentNode.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#f5f5f5"><img src="Logo - no text.png" alt="Heimsank" style="height:40%;width:auto;opacity:0.3"></div>`;
   };
   iw.appendChild(img);
   el.appendChild(iw);

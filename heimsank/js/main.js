@@ -78,7 +78,7 @@ function triggerCard() {
   document.querySelector('.flip-front').innerHTML = '';
   fc.classList.remove('flipped', 'rare-reveal');
 
-  fb.textContent = S.selCat.icon;
+  fb.innerHTML = '<img src="Logo - no text.png" alt="Heimsank" style="height:100% !important;width:auto !important;object-fit:contain !important;font-size:unset !important">';
   document.getElementById('revealBtn').classList.add('hidden');
   document.getElementById('revealSub').textContent = '';
   modal.classList.remove('hidden');

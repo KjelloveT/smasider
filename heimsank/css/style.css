@@ -62,7 +62,7 @@ h1,h2,h3,.panel-title,.showcase-title,.card-name,.fan-card-name,.modal-card-name
 .collect-card.segngjeten::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0,transparent 8px,rgba(255,255,255,.12) 8px,rgba(255,255,255,.12) 12px);pointer-events:none;z-index:1}
 .collect-card.gudebore::after{content:'✨';position:absolute;top:4px;right:5px;font-size:.75rem;z-index:2}
 .card-header{padding:7px 10px 6px;border-bottom:2px solid rgba(0,0,0,.35);position:relative;z-index:2}
-.card-name{font-size:1rem;font-weight:900;letter-spacing:-.2px;line-height:1.2;display:block;margin-bottom:4px}
+.card-name{font-size:1.2rem;font-weight:900;letter-spacing:-.2px;line-height:1.2;display:block;margin-bottom:4px}
 .card-header-meta{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
 .rarity-badge{font-size:.52rem;font-weight:900;text-transform:uppercase;border:2px solid #000;padding:2px 6px;white-space:nowrap;display:inline-block}
 .diff-badge{font-size:.48rem;font-weight:900;text-transform:uppercase;border:2px solid rgba(0,0,0,.4);padding:2px 5px;white-space:nowrap;display:inline-block;opacity:.7}
@@ -225,7 +225,8 @@ h1,h2,h3,.panel-title,.showcase-title,.card-name,.fan-card-name,.modal-card-name
 .flip-card.flipped{transform:rotateY(180deg)}
 .flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .flip-back{background:#111;border:3px solid #000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
-.flip-back-logo{font-size:3rem}
+.flip-back-logo{font-size:3rem;height:70%;display:flex;align-items:center;justify-content:center}
+.flip-back-logo img{font-size:unset}
 .flip-back-title{color:#FDFD96;font-size:.9rem;font-weight:900;text-transform:uppercase;letter-spacing:3px}
 .flip-front{transform:rotateY(180deg);display:flex;width:100%;height:100%}
 .flip-front .full-card{width:100%;height:100%;box-shadow:none}
@@ -243,7 +244,11 @@ h1,h2,h3,.panel-title,.showcase-title,.card-name,.fan-card-name,.modal-card-name
 
 /* Showcase hero */
 .showcase-hero{padding:30px 20px 10px;display:flex;justify-content:center}
-.showcase-inner{max-width:700px;width:100%;display:flex;gap:30px;align-items:center}
+.showcase-inner{max-width:700px;width:100%;display:grid;grid-template-columns:1fr 260px;gap:30px;align-items:center}
+@media (max-width: 768px) {
+  .showcase-inner{grid-template-columns:1fr;gap:20px}
+  .showcase-fan-area{margin:0 auto}
+}
 .showcase-info{flex:1;min-width:220px}
 .showcase-title{font-size:clamp(1.3rem,3vw,1.8rem);font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin-bottom:10px;line-height:1.1}
 .showcase-desc{font-size:.82rem;font-weight:700;line-height:1.5;margin-bottom:16px;color:#333}
@@ -262,7 +267,7 @@ h1,h2,h3,.panel-title,.showcase-title,.card-name,.fan-card-name,.modal-card-name
 .fan-placeholder{font-size:4rem;opacity:.15;display:flex;align-items:center;justify-content:center;width:100%;height:100%}
 .fan-card{position:absolute;left:50%;bottom:10px;width:130px;height:182px;transform-origin:50% 100%;transition:transform .5s cubic-bezier(.34,1.56,.64,1),opacity .4s,box-shadow .4s;cursor:default;border:3px solid #000;overflow:hidden;display:flex;flex-direction:column}
 .fan-card .fan-card-header{padding:5px 7px 4px;border-bottom:2px solid rgba(0,0,0,.35);position:relative;z-index:2}
-.fan-card .fan-card-name{font-size:.58rem;font-weight:900;letter-spacing:-.2px;line-height:1.1;display:block;margin-bottom:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.fan-card .fan-card-name{font-size:.7rem;font-weight:900;letter-spacing:-.2px;line-height:1.1;display:block;margin-bottom:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .fan-card .fan-rarity-badge{font-size:.38rem;font-weight:900;text-transform:uppercase;border:1.5px solid #000;padding:1px 4px;display:inline-block}
 .fan-card .fan-card-img{flex:1;overflow:hidden;position:relative;border-bottom:2px solid rgba(0,0,0,.25)}
 .fan-card .fan-card-img img{width:100%;height:100%;object-fit:cover;display:block}
@@ -295,4 +300,39 @@ h1,h2,h3,.panel-title,.showcase-title,.card-name,.fan-card-name,.modal-card-name
 
 /* Media queries */
 @media(max-width:860px){.coll-cards-row{grid-template-columns:repeat(2,1fr)}.coll-main{flex-wrap:wrap}.coll-box{min-width:200px}}
-@media(max-width:600px){.game-wrapper{padding:14px}.panel{padding:18px}.question-box{min-height:100px;height:100px}.coll-cards-row{grid-template-columns:1fr}.showcase-inner{flex-direction:column;text-align:center}.showcase-fan-area{flex:0 0 auto}.rarity-row{justify-content:center}}
+/* Collection Viewer - Neo-Brutalist Style (Softer Colors) */
+.collection-modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;overflow:auto;padding:20px}
+.collection-viewer{position:relative;background:#4ECDC4;border:4px solid #000;box-shadow:8px 8px 0 #000;max-width:1200px;width:100%;min-height:80vh;padding:30px;margin:20px auto}
+.collection-content{background:#fff;border:3px solid #000;padding:25px;min-height:60vh}
+.collection-header{text-align:center;margin-bottom:25px;padding:15px;background:#C44569;border:3px solid #000;box-shadow:4px 4px 0 #000}
+.collection-title{font-family:'Garamond','Georgia',serif;font-size:2.5rem;font-weight:900;color:#fff;text-shadow:3px 3px 0 #000;letter-spacing:-1px;margin:0}
+.collection-subtitle{font-size:.85rem;color:#fff;font-weight:900;text-transform:uppercase;letter-spacing:3px;margin-top:5px;text-shadow:2px 2px 0 #000}
+.collection-close{position:absolute;top:10px;right:10px;width:48px;height:48px;background:#C44569;border:3px solid #000;box-shadow:3px 3px 0 #000;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:#fff;cursor:pointer;z-index:10;transition:transform 0.15s}
+.collection-close:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #000}
+.collection-close:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
+.collection-categories{display:flex;flex-direction:column;gap:25px}
+.collection-cat-row{display:flex;flex-direction:column;gap:12px}
+.collection-cat-header{display:flex;align-items:center;gap:12px;padding:10px 15px;background:#786FA6;border:3px solid #000;box-shadow:3px 3px 0 #000}
+.collection-cat-icon{font-size:1.5rem}
+.collection-cat-title{font-family:'Garamond','Georgia',serif;font-size:1.4rem;font-weight:900;color:#fff;text-shadow:2px 2px 0 #000;margin:0}
+.collection-cat-count{background:#fff;border:2px solid #000;padding:4px 10px;font-size:.7rem;font-weight:900}
+.collection-cards-row{display:flex;flex-wrap:wrap;gap:12px;padding:15px;background:#FF9F43;border:3px solid #000;box-shadow:3px 3px 0 #000}
+.collection-empty{text-align:center;padding:60px 20px;background:#F8B500;border:3px solid #000;box-shadow:4px 4px 0 #000}
+.collection-empty-icon{font-size:4rem;margin-bottom:20px}
+.collection-empty-text{color:#000;font-size:1.1rem;font-weight:900}
+.collection-card-mini{flex:0 0 140px;width:140px;height:196px;border:3px solid #000;overflow:hidden;display:flex;flex-direction:column;background:#fff;box-shadow:3px 3px 0 rgba(0,0,0,0.3);transition:transform 0.15s;cursor:default}
+.collection-card-mini:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 rgba(0,0,0,0.3)}
+.collection-card-mini .mini-header{padding:5px 7px 3px;border-bottom:2px solid rgba(0,0,0,0.35);background:#fff}
+.collection-card-mini .mini-name{font-size:0.7rem;font-weight:900;line-height:1.2;display:block;margin-bottom:2px;font-family:'Garamond','Georgia',serif;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.collection-card-mini .mini-rarity{font-size:0.4rem;font-weight:900;text-transform:uppercase;border:1.5px solid #000;padding:1px 3px;display:inline-block;background:#fff}
+.collection-card-mini .mini-img{flex:1;overflow:hidden;position:relative;min-height:0}
+.collection-card-mini .mini-img img{width:100%;height:100%;object-fit:cover;display:block}
+.collection-card-mini .mini-footer{padding:4px 7px;font-size:0.5rem;font-weight:700;background:rgba(0,0,0,0.08);border-top:2px solid rgba(0,0,0,0.2)}
+.collection-card-mini.vanleg{background:#fff}
+.collection-card-mini.sjeldgjevt{background:#4ECDC4}
+.collection-card-mini.segngjeten{background:#A29BFE}
+.collection-card-mini.gudebore{background:#F8B500}
+.collection-card-mini.sjeldgjevt .mini-rarity{background:#4ECDC4}
+.collection-card-mini.segngjeten .mini-rarity{background:#A29BFE}
+.collection-card-mini.gudebore .mini-rarity{background:#F8B500}
+
