@@ -291,6 +291,96 @@
             color: #000;
         }
 
+        /* ── ACCORDION ── */
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 16px 0 24px;
+        }
+
+        .accordion-item {
+            background: #fff;
+            border: 3px solid #000;
+            box-shadow: 3px 3px 0 #000;
+        }
+
+        .accordion-header {
+            padding: 14px 20px;
+            font-size: 1rem;
+            font-weight: 900;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s;
+        }
+
+        .accordion-header::-webkit-details-marker { display: none; }
+
+        .accordion-header::after {
+            content: '▸';
+            margin-left: auto;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+
+        details[open] > .accordion-header::after {
+            transform: rotate(90deg);
+        }
+
+        .accordion-header:hover {
+            background: #f0f0f0;
+        }
+
+        .accordion-body {
+            padding: 16px 20px 20px;
+            border-top: 2px solid #000;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .accordion-note {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: #F0F8FF;
+            border: 2px solid #ccc;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 4px;
+            font-size: 0.85rem;
+        }
+
+        .data-table th {
+            background: #FDFD96;
+            border: 2px solid #000;
+            padding: 8px 12px;
+            text-align: left;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table td {
+            border: 2px solid #000;
+            padding: 8px 12px;
+            vertical-align: top;
+        }
+
+        .data-table code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            font-size: 0.8rem;
+            border: 1px solid #ccc;
+        }
+
         /* ── FOOTER ── */
         footer {
             text-align: center;
@@ -397,6 +487,13 @@
                 <span class="card-btn">Opne →</span>
             </a>
 
+            <a href="klassekart/index.html" class="card c-teal">
+                <span class="card-icon">🪑</span>
+                <h2 class="card-title">Klassekart</h2>
+                <p class="card-desc">Planlegg klasserommet med drag-and-drop. Møbleringsmalar, tilfeldig plassering og utskrift.</p>
+                <span class="card-btn">Opne →</span>
+            </a>
+
             <div class="card c-sage disabled">
                 <span class="card-icon">FV</span>
                 <h2 class="card-title">Fleire verktøy</h2>
@@ -413,30 +510,137 @@
                 <h2 class="privacy-htitle">Personvern og datasikkerheit</h2>
             </div>
             <div class="privacy-body">
-                <p>Vi tek personvern på alvor! Alle verktøya på denne sida er laga for å verna dine data og ditt personvern.</p>
+                <p>Vi tek personvern på alvor! Alle spel og verktøy på denne sida er laga for å verna dine data og ditt personvern.</p>
 
-                <h3>Dine data er 100% trygge</h3>
+                <h3>Dine data er trygge</h3>
                 <ul>
-                    <li><strong>Alt skjer lokalt:</strong> Alle verktøy køyrer berre i nettlesaren din på din eining. Ingen data blir sende til nokon tenar.</li>
-                    <li><strong>Ingen lagring:</strong> Dine filer og data blir ikkje lagra noko stad. Når du lukkar nettlesaren, er alt borte.</li>
-                    <li><strong>Ingen internettilknyting nødvendig:</strong> Etter at sida er lasta, kan du bruke alle verktøya heilt offline.</li>
+                    <li><strong>Alt køyrer lokalt:</strong> All spel- og verktøylogikk køyrer i nettlesaren din. Ingen brukardata blir sende til nokon tenar.</li>
                     <li><strong>Ingen cookies eller sporing:</strong> Vi bruker ingen cookies, analytics eller sporingsverktøy.</li>
-                    <li><strong>Open kjeldekode:</strong> All kode er synleg i HTML-filene. Du kan inspisere henne sjølv.</li>
+                    <li><strong>Open kjeldekode:</strong> All kode er synleg og kan inspiserast av kven som helst.</li>
+                    <li><strong>Ingen innlogging:</strong> Alt er gratis og krev ingen brukarregistrering.</li>
                 </ul>
 
                 <div class="privacy-highlight">
-                    💡 <strong>Konklusjon:</strong> Dine data forlèt aldri din eining. Du har full kontroll over dine data.
+                    💡 <strong>Kort oppsummert:</strong> Vi bruker ingen cookies, ingen sporing og ingen ekstern analyse. Nokre spel lagrar avgrensa data lokalt i nettlesaren din (sjå detaljar under). Denne informasjonen forlèt aldri eininga di.
+                </div>
+
+                <h3>Kva data lagrast?</h3>
+                <p>Nokre spel bruker nettlesaren sin <strong>localStorage</strong> for å hugse framgang. Det er viktig å skilje mellom <strong>cookies</strong> og <strong>localStorage</strong>:</p>
+                <table class="data-table" style="margin:16px 0">
+                    <tr><th></th><th>Cookies</th><th>localStorage</th></tr>
+                    <tr>
+                        <td><strong>Blir sendt til server?</strong></td>
+                        <td>Ja — cookies blir automatisk sende med kvar førespurnad til nettsida sin server</td>
+                        <td>Nei — localStorage-data forlèt aldri nettlesaren din</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kan brukast til sporing?</strong></td>
+                        <td>Ja — cookies er den vanlegaste metoden for sporing og reklame på nett</td>
+                        <td>Nei — dataen er berre tilgjengeleg for nettsida på di eining</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Brukast på denne sida?</strong></td>
+                        <td>❌ Nei, vi bruker <strong>ingen cookies</strong></td>
+                        <td>✅ Ja, berre for å hugse toppscore og kortsamlingar lokalt</td>
+                    </tr>
+                </table>
+                <p>localStorage-data ligg berre på di eining, og ingen andre kan sjå den. Du kan slette den når som helst via nettlesarinnstillingane. Trykk på kvart spel/verktøy under for å sjå nøyaktig kva som blir lagra.</p>
+
+                <div class="accordion">
+                    <details class="accordion-item">
+                        <summary class="accordion-header">🎮 Kludre Klodrian</summary>
+                        <div class="accordion-body">
+                            <table class="data-table">
+                                <tr><th>Kva</th><th>Korleis</th><th>Kvifor</th></tr>
+                                <tr>
+                                    <td>Toppscore (eitt tal)</td>
+                                    <td>localStorage, nøkkel <code>kkHS</code></td>
+                                    <td>For å vise personleg rekord mellom speløkter</td>
+                                </tr>
+                            </table>
+                            <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline etter at sida er lasta.</p>
+                        </div>
+                    </details>
+
+                    <details class="accordion-item">
+                        <summary class="accordion-header">🃏 Heimsank</summary>
+                        <div class="accordion-body">
+                            <table class="data-table">
+                                <tr><th>Kva</th><th>Korleis</th><th>Kvifor</th></tr>
+                                <tr>
+                                    <td>Kortsamling per kategori (kort-ID, vanskegrad, regneart, tidspunkt)</td>
+                                    <td>localStorage, nøkkel <code>heimsank_samling_[kategori]</code></td>
+                                    <td>For å ta vare på samlinga di mellom speløkter</td>
+                                </tr>
+                            </table>
+                            <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Kortbilete blir lasta frå <strong>Wikimedia Commons</strong> (upload.wikimedia.org) kvar gong du spelar. Dette betyr at Wikimedia sine tenarar kan sjå IP-adressa di i sine loggar. Ingen personleg informasjon utover IP-adresse blir delt.</p>
+                        </div>
+                    </details>
+
+                    <details class="accordion-item">
+                        <summary class="accordion-header">🏃 Reknedæsj</summary>
+                        <div class="accordion-body">
+                            <table class="data-table">
+                                <tr><th>Kva</th><th>Korleis</th><th>Kvifor</th></tr>
+                                <tr>
+                                    <td>Toppscore (eitt tal)</td>
+                                    <td>localStorage, nøkkel <code>rdHS</code></td>
+                                    <td>For å vise personleg rekord mellom speløkter</td>
+                                </tr>
+                            </table>
+                            <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline etter at sida er lasta.</p>
+                        </div>
+                    </details>
+
+                    <details class="accordion-item">
+                        <summary class="accordion-header">👾 Rettslause Raud</summary>
+                        <div class="accordion-body">
+                            <p><strong>Ingen data blir lagra.</strong> Spelet bruker ikkje localStorage eller nokon annan form for lagring.</p>
+                            <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline etter at sida er lasta.</p>
+                        </div>
+                    </details>
+
+                    <details class="accordion-item">
+                        <summary class="accordion-header">🖼️ BiletFlett</summary>
+                        <div class="accordion-body">
+                            <p><strong>Ingen data blir lagra.</strong> Bilete du lastar opp blir berre lese inn i nettlesaren sitt minne via FileReader API. Når du lukkar sida, er alt borte.</p>
+                            <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta.</p>
+                        </div>
+                    </details>
+
+                    <details class="accordion-item">
+                        <summary class="accordion-header">🎨 Reinskore bilete</summary>
+                        <div class="accordion-body">
+                            <p><strong>Ingen data blir lagra.</strong> Bilete du lastar opp blir berre behandla i nettlesaren sitt minne. Ingenting blir lagra når du lukkar sida.</p>
+                            <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta.</p>
+                        </div>
+                    </details>
+
+                    <details class="accordion-item">
+                        <summary class="accordion-header">🪑 Klassekart</summary>
+                        <div class="accordion-body">
+                            <table class="data-table">
+                                <tr><th>Kva</th><th>Korleis</th><th>Kvifor</th></tr>
+                                <tr>
+                                    <td>Klasseoppsett (elevnamn, plassering, romlayout)</td>
+                                    <td>localStorage, nøkkel <code>klassekart_oppsett</code></td>
+                                    <td>For å lagre og hente klasseoppsett mellom økter</td>
+                                </tr>
+                            </table>
+                            <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta. Elevnamn lagrast kun lokalt i nettlesaren — aldri på nokon server. Du kan også eksportere/importere oppsett som JSON-fil for å flytte mellom maskiner.</p>
+                        </div>
+                    </details>
                 </div>
 
                 <h3>Korleis det fungerer teknisk</h3>
-                <p>Applikasjonane brukar moderne webteknologi som HTML5, CSS3 og JavaScript for å køyra direkte i nettlesaren din. Når du lastar opp filer (som bilete i fotocollage), blir dei lese inn i nettlesaren sitt minne med hjelp av FileReader API. Alle operasjonar blir utførte lokalt med JavaScript, og ingen informasjon blir sende ut frå nettlesaren.</p>
+                <p>Applikasjonane brukar moderne webteknologi (HTML5, CSS3, JavaScript) og køyrer direkte i nettlesaren din. Når du lastar opp filer (t.d. bilete i BiletFlett), blir dei lese inn i minnet med FileReader API. Alle operasjonar skjer lokalt — ingen informasjon blir send til våre tenarar.</p>
 
                 <h3>Bruk i skolen</h3>
                 <p>Desse verktøya er særskilt eigna for bruk i grunnskulen fordi:</p>
                 <ul>
                     <li>Dei er GDPR-kompatible og følgjer norske personvernlover</li>
-                    <li>Ingen elevdata blir lagra eller delt</li>
-                    <li>Dei fungerer på skolen sitt nettverk utan ekstern tilgang</li>
+                    <li>Ingen elevdata blir lagra på tenarar eller delt med tredjepartar</li>
+                    <li>Dei fleste fungerer på skolen sitt nettverk utan ekstern tilgang (unntak: Heimsank treng internett for kortbilete)</li>
                     <li>Dei er gratis og krevjer ingen innlogging</li>
                 </ul>
             </div>
