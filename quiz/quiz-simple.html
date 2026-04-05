@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kviss - Enkel Live Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, system-ui, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border: 3px solid #000;
+            box-shadow: 3px 3px 0 #000;
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .mode-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .mode-card {
+            background: #f8f8f8;
+            border: 2px solid #000;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .mode-card:hover {
+            background: #f0f0f0;
+        }
+
+        .mode-card.selected {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .mode-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .mode-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .mode-desc {
+            font-size: 0.9rem;
+        }
+
+        .setup-area {
+            display: none;
+        }
+
+        .setup-area.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #000;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            background: #f0f8ff;
+        }
+
+        .btn {
+            width: 100%;
+            background: #4CAF50;
+            color: white;
+            border: 2px solid #000;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .btn:hover {
+            background: #45a049;
+        }
+
+        .btn:active {
+            transform: translate(1px, 1px);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn.secondary {
+            background: white;
+            color: black;
+        }
+
+        .btn.secondary:hover {
+            background: #f0f0f0;
+        }
+
+        .quiz-area {
+            display: none;
+        }
+
+        .quiz-area.active {
+            display: block;
+        }
+
+        .status-bar {
+            background: #F0F8FF;
+            border: 2px solid #000;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .status-item {
+            font-weight: 700;
+            margin: 5px 0;
+        }
+
+        .status-item.connected {
+            color: #2E7D32;
+        }
+
+        .status-item.waiting {
+            color: #F57C00;
+        }
+
+        .room-info {
+            background: #FDFD96;
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .room-code {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin: 10px 0;
+        }
+
+        .players-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 15px 0;
+        }
+
+        .player-item {
+            background: #f8f8f8;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .player-name {
+            font-weight: 700;
+        }
+
+        .player-score {
+            background: #FDFD96;
+            padding: 3px 8px;
+            border: 1px solid #000;
+            font-weight: 700;
+        }
+
+        .question-display {
+            background: #FDFD96;
+            border: 2px solid #000;
+            padding: 20px;
+            margin: 15px 0;
+            display: none;
+        }
+
+        .question-display.active {
+            display: block;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .timer {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #d32f2f;
+        }
+
+        .timer.warning {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .answer-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .answer-btn {
+            background: white;
+            border: 2px solid #000;
+            padding: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.1s;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .answer-btn:hover:not(:disabled) {
+            background: #f0f0f0;
+        }
+
+        .answer-btn:active:not(:disabled) {
+            transform: translate(1px, 1px);
+        }
+
+        .answer-btn:disabled {
+            background: #f5f5f5;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .answer-btn.correct {
+            background: #90EE90;
+        }
+
+        .answer-btn.incorrect {
+            background: #FFB6C1;
+        }
+
+        .answer-btn.selected {
+            background: #87CEEB;
+        }
+
+        .waiting-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .waiting-message h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .results-display {
+            background: #F0F8FF;
+            border: 2px solid #000;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .results-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border: 1px solid #000;
+        }
+
+        .result-item.winner {
+            background: #FDFD96;
+            font-weight: 700;
+        }
+
+        .rank {
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .player-name-result {
+            flex: 1;
+        }
+
+        .player-score-result {
+            font-weight: 700;
+            background: #FDFD96;
+            padding: 3px 8px;
+            border: 1px solid #000;
+        }
+
+        .quiz-controls {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: 2px solid #000;
+            padding: 10px 15px;
+            font-weight: 700;
+            box-shadow: 2px 2px 0 #000;
+        }
+
+        .connection-status.connected {
+            background: #90EE90;
+        }
+
+        .connection-status.disconnected {
+            background: #FFB6C1;
+        }
+
+        @media (max-width: 768px) {
+            .mode-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            .answer-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Kviss</h1>
+            <p class="subtitle">Enkel live quiz - kun nettlesar påkrevd</p>
+        </header>
+
+        <div class="connection-status disconnected" id="connection-status">
+            Tilkobla: Nei
+        </div>
+
+        <section class="mode-selector" id="mode-selector">
+            <div class="mode-card" data-mode="host">
+                <div class="mode-icon">🎮</div>
+                <div class="mode-title">Lærar</div>
+                <div class="mode-desc">Start quiz og kontroller spørsmål</div>
+            </div>
+            
+            <div class="mode-card" data-mode="player">
+                <div class="mode-icon">👥</div>
+                <div class="mode-title">Elev</div>
+                <div class="mode-desc">Delta i quiz med rom-kode</div>
+            </div>
+        </section>
+
+        <section class="setup-area" id="host-setup">
+            <h2>🎮 Start Quiz</h2>
+            
+            <div class="form-group">
+                <label for="host-name">Ditt namn (lærar):</label>
+                <input type="text" id="host-name" placeholder="Skriv inn namnet ditt">
+            </div>
+            
+            <button class="btn" id="create-quiz">Opprett Quiz</button>
+        </section>
+
+        <section class="setup-area" id="player-setup">
+            <h2>👥 Delta i Quiz</h2>
+            
+            <div class="form-group">
+                <label for="room-code-input">Rom-kode:</label>
+                <input type="text" id="room-code-input" placeholder="Skriv inn 6-bokstavs kode" maxlength="6">
+            </div>
+            
+            <div class="form-group">
+                <label for="player-name-input">Ditt namn:</label>
+                <input type="text" id="player-name-input" placeholder="Kva heiter du?">
+            </div>
+            
+            <button class="btn" id="join-quiz">Delta i Quiz</button>
+        </section>
+
+        <section class="quiz-area" id="host-quiz">
+            <div class="status-bar">
+                <div class="status-item" id="host-status">Quiz aktiv</div>
+                <div class="status-item" id="players-count">Spelarar: 0</div>
+            </div>
+
+            <div class="room-info">
+                <div><strong>Rom-kode:</strong></div>
+                <div class="room-code" id="room-code-display">----</div>
+                <div style="font-size: 0.9rem; margin-top: 10px;">
+                    Elevar går til same side og vel "Elev"<br>
+                    Skriv inn koden over for å delta
+                </div>
+            </div>
+
+            <div class="players-list" id="players-list">
+                <div style="text-align: center; color: #666; padding: 20px;">
+                    Ingen spelarar tilkobla ennå
+                </div>
+            </div>
+
+            <div class="quiz-controls">
+                <button class="btn primary" id="start-quiz">Start Quiz</button>
+                <button class="btn" id="next-question" disabled>Neste Spørsmål</button>
+                <button class="btn" id="stop-quiz" disabled>Stopp Quiz</button>
+            </div>
+
+            <div class="question-display" id="host-question-display">
+                <div class="question-header">
+                    <div class="question-number" id="host-question-number">Spørsmål 1/5</div>
+                    <div class="timer" id="host-timer">30</div>
+                </div>
+                
+                <div class="question-text" id="host-question-text">
+                    Spørsmål vises her
+                </div>
+                
+                <div class="answer-options" id="host-answer-options">
+                    <!-- Alternativer fylles dynamisk -->
+                </div>
+            </div>
+
+            <div class="results-display" id="host-results" style="display: none;">
+                <div class="results-title">🏆 Resultater</div>
+                <div id="host-results-list">
+                    <!-- Resultater fylles dynamisk -->
+                </div>
+            </div>
+        </section>
+
+        <section class="quiz-area" id="player-quiz">
+            <div class="status-bar">
+                <div class="status-item waiting" id="player-status">Ventar på quiz...</div>
+                <div class="status-item" id="player-score">Poeng: 0</div>
+            </div>
+
+            <div class="waiting-message" id="player-waiting">
+                <h3>⏳ Ventar på Quiz</h3>
+                <p>Læraren startar quiz snart...</p>
+            </div>
+
+            <div class="question-display" id="player-question-display">
+                <div class="question-header">
+                    <div class="question-number" id="player-question-number">Spørsmål 1/5</div>
+                    <div class="timer" id="player-timer">30</div>
+                </div>
+                
+                <div class="question-text" id="player-question-text">
+                    Spørsmål vil vises her
+                </div>
+                
+                <div class="answer-options" id="player-answer-options">
+                    <!-- Svaralternativer fylles dynamisk -->
+                </div>
+            </div>
+
+            <div class="results-display" id="player-results" style="display: none;">
+                <div class="results-title">🏆 Resultater</div>
+                <div id="player-results-list">
+                    <!-- Resultater fylles dynamisk -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Enkel quiz med BroadcastChannel API
+        class SimpleQuiz {
+            constructor() {
+                this.mode = null;
+                this.roomCode = '';
+                this.playerName = '';
+                this.playerId = '';
+                this.isHost = false;
+                this.connected = false;
+                this.channel = null;
+                this.players = new Map();
+                this.questions = this.getSampleQuestions();
+                this.currentQuestionIndex = 0;
+                this.currentQuestion = null;
+                this.score = 0;
+                this.hasAnswered = false;
+                this.timerInterval = null;
+                
+                this.initializeElements();
+                this.setupEventListeners();
+            }
+
+            getSampleQuestions() {
+                return [
+                    {
+                        question: "Hva er hovedstaden i Norge?",
+                        options: ["Oslo", "Bergen", "Trondheim", "Stavanger"],
+                        correct: 0,
+                        timeLimit: 20
+                    },
+                    {
+                        question: "Hva er 2 + 2?",
+                        options: ["3", "4", "5", "6"],
+                        correct: 1,
+                        timeLimit: 15
+                    },
+                    {
+                        question: "Hvilket år startet andre verdenskrig?",
+                        options: ["1938", "1939", "1940", "1941"],
+                        correct: 1,
+                        timeLimit: 25
+                    },
+                    {
+                        question: "Hva er største planeten i solsystemet?",
+                        options: ["Mars", "Jupiter", "Saturn", "Neptun"],
+                        correct: 1,
+                        timeLimit: 20
+                    },
+                    {
+                        question: "Hvor mange kontinenter finnes det?",
+                        options: ["5", "6", "7", "8"],
+                        correct: 2,
+                        timeLimit: 15
+                    }
+                ];
+            }
+
+            initializeElements() {
+                this.elements = {
+                    modeSelector: document.getElementById('mode-selector'),
+                    hostSetup: document.getElementById('host-setup'),
+                    playerSetup: document.getElementById('player-setup'),
+                    hostQuiz: document.getElementById('host-quiz'),
+                    playerQuiz: document.getElementById('player-quiz'),
+                    connectionStatus: document.getElementById('connection-status'),
+                    
+                    // Host elements
+                    hostName: document.getElementById('host-name'),
+                    createQuiz: document.getElementById('create-quiz'),
+                    roomCodeDisplay: document.getElementById('room-code-display'),
+                    playersList: document.getElementById('players-list'),
+                    playersCount: document.getElementById('players-count'),
+                    startQuiz: document.getElementById('start-quiz'),
+                    nextQuestion: document.getElementById('next-question'),
+                    stopQuiz: document.getElementById('stop-quiz'),
+                    hostQuestionDisplay: document.getElementById('host-question-display'),
+                    hostQuestionNumber: document.getElementById('host-question-number'),
+                    hostQuestionText: document.getElementById('host-question-text'),
+                    hostAnswerOptions: document.getElementById('host-answer-options'),
+                    hostTimer: document.getElementById('host-timer'),
+                    hostResults: document.getElementById('host-results'),
+                    hostResultsList: document.getElementById('host-results-list'),
+                    
+                    // Player elements
+                    roomCodeInput: document.getElementById('room-code-input'),
+                    playerNameInput: document.getElementById('player-name-input'),
+                    joinQuiz: document.getElementById('join-quiz'),
+                    playerStatus: document.getElementById('player-status'),
+                    playerScore: document.getElementById('player-score'),
+                    playerWaiting: document.getElementById('player-waiting'),
+                    playerQuestionDisplay: document.getElementById('player-question-display'),
+                    playerQuestionNumber: document.getElementById('player-question-number'),
+                    playerQuestionText: document.getElementById('player-question-text'),
+                    playerAnswerOptions: document.getElementById('player-answer-options'),
+                    playerTimer: document.getElementById('player-timer'),
+                    playerResults: document.getElementById('player-results'),
+                    playerResultsList: document.getElementById('player-results-list')
+                };
+            }
+
+            setupEventListeners() {
+                // Mode selection
+                document.querySelectorAll('.mode-card').forEach(card => {
+                    card.addEventListener('click', () => this.selectMode(card.dataset.mode));
+                });
+                
+                // Host events
+                this.elements.createQuiz.addEventListener('click', () => this.createQuiz());
+                this.elements.startQuiz.addEventListener('click', () => this.startQuiz());
+                this.elements.nextQuestion.addEventListener('click', () => this.nextQuestion());
+                this.elements.stopQuiz.addEventListener('click', () => this.stopQuiz());
+                
+                // Player events
+                this.elements.joinQuiz.addEventListener('click', () => this.joinQuiz());
+                
+                // Auto-uppercase room code
+                this.elements.roomCodeInput.addEventListener('input', (e) => {
+                    e.target.value = e.target.value.toUpperCase();
+                });
+            }
+
+            selectMode(mode) {
+                this.mode = mode;
+                this.isHost = mode === 'host';
+                
+                // Update UI
+                document.querySelectorAll('.mode-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+                document.querySelector(`[data-mode="${mode}"]`).classList.add('selected');
+                
+                // Show setup area
+                this.elements.modeSelector.style.display = 'none';
+                if (mode === 'host') {
+                    this.elements.hostSetup.classList.add('active');
+                } else {
+                    this.elements.playerSetup.classList.add('active');
+                }
+            }
+
+            createQuiz() {
+                const hostName = this.elements.hostName.value.trim();
+                if (!hostName) {
+                    alert('Skriv inn namnet ditt');
+                    return;
+                }
+                
+                this.playerName = hostName;
+                this.roomCode = this.generateRoomCode();
+                this.playerId = 'host-' + Math.random().toString(36).substr(2, 9);
+                
+                // Create BroadcastChannel
+                this.channel = new BroadcastChannel(`quiz-${this.roomCode}`);
+                this.setupChannelListeners();
+                
+                // Update UI
+                this.elements.hostSetup.classList.remove('active');
+                this.elements.hostQuiz.classList.add('active');
+                this.elements.roomCodeDisplay.textContent = this.roomCode;
+                
+                this.connected = true;
+                this.updateConnectionStatus();
+                
+                console.log(`Quiz created: ${this.roomCode} by ${hostName}`);
+            }
+
+            joinQuiz() {
+                const roomCode = this.elements.roomCodeInput.value.trim();
+                const playerName = this.elements.playerNameInput.value.trim();
+                
+                if (!roomCode || roomCode.length !== 6) {
+                    alert('Skriv inn ein gyldig rom-kode (6 bokstavar)');
+                    return;
+                }
+                
+                if (!playerName) {
+                    alert('Skriv inn namnet ditt');
+                    return;
+                }
+                
+                this.roomCode = roomCode;
+                this.playerName = playerName;
+                this.playerId = 'player-' + Math.random().toString(36).substr(2, 9);
+                
+                // Join BroadcastChannel
+                this.channel = new BroadcastChannel(`quiz-${this.roomCode}`);
+                this.setupChannelListeners();
+                
+                // Send join message
+                this.sendMessage({
+                    type: 'join',
+                    playerId: this.playerId,
+                    playerName: playerName
+                });
+                
+                // Update UI
+                this.elements.playerSetup.classList.remove('active');
+                this.elements.playerQuiz.classList.add('active');
+                
+                this.connected = true;
+                this.updateConnectionStatus();
+                
+                console.log(`Joined quiz: ${roomCode} as ${playerName}`);
+            }
+
+            setupChannelListeners() {
+                this.channel.onmessage = (event) => {
+                    const data = event.data;
+                    
+                    if (this.isHost) {
+                        this.handleHostMessage(data);
+                    } else {
+                        this.handlePlayerMessage(data);
+                    }
+                };
+            }
+
+            handleHostMessage(data) {
+                switch (data.type) {
+                    case 'join':
+                        this.handlePlayerJoin(data);
+                        break;
+                    case 'answer':
+                        this.handleAnswer(data);
+                        break;
+                }
+            }
+
+            handlePlayerMessage(data) {
+                switch (data.type) {
+                    case 'question':
+                        this.handleQuestion(data);
+                        break;
+                    case 'results':
+                        this.handleResults(data);
+                        break;
+                    case 'quiz-end':
+                        this.handleQuizEnd(data);
+                        break;
+                    case 'join-confirmed':
+                        this.elements.playerStatus.textContent = 'Tilkobla!';
+                        this.elements.playerStatus.classList.remove('waiting');
+                        break;
+                }
+            }
+
+            handlePlayerJoin(data) {
+                const player = {
+                    id: data.playerId,
+                    name: data.playerName,
+                    score: 0,
+                    answers: []
+                };
+                
+                this.players.set(player.id, player);
+                this.updatePlayersList();
+                
+                // Confirm to player
+                this.sendMessage({
+                    type: 'join-confirmed',
+                    roomCode: this.roomCode
+                });
+                
+                console.log(`Player joined: ${player.name}`);
+            }
+
+            handleAnswer(data) {
+                const player = this.players.get(data.playerId);
+                if (!player) return;
+                
+                const isCorrect = data.answer === this.currentQuestion.correct;
+                let points = 0;
+                
+                if (isCorrect) {
+                    const maxPoints = 1000;
+                    const timeBonus = Math.max(0, (this.currentQuestion.timeLimit - data.responseTime / 1000) / this.currentQuestion.timeLimit) * 500;
+                    points = Math.round(maxPoints + timeBonus);
+                }
+                
+                player.score += points;
+                player.answers.push({
+                    questionIndex: this.currentQuestionIndex - 1,
+                    answer: data.answer,
+                    correct: isCorrect,
+                    points: points
+                });
+                
+                console.log(`Answer from ${player.name}: ${data.answer} (${isCorrect ? 'correct' : 'wrong'}, ${points} points)`);
+            }
+
+            handleQuestion(data) {
+                this.currentQuestion = data;
+                this.hasAnswered = false;
+                
+                // Show question
+                this.elements.playerWaiting.style.display = 'none';
+                this.elements.playerQuestionDisplay.style.display = 'block';
+                this.elements.playerResults.style.display = 'none';
+                
+                this.elements.playerQuestionNumber.textContent = `Spørsmål ${data.questionNumber}/${data.totalQuestions}`;
+                this.elements.playerQuestionText.textContent = data.question;
+                
+                // Show options
+                this.elements.playerAnswerOptions.innerHTML = '';
+                data.options.forEach((option, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'answer-btn';
+                    button.textContent = `${String.fromCharCode(65 + index)}) ${option}`;
+                    button.addEventListener('click', () => this.submitAnswer(index));
+                    this.elements.playerAnswerOptions.appendChild(button);
+                });
+                
+                // Start timer
+                this.startTimer(data.timeLimit, this.elements.playerTimer);
+                
+                this.elements.playerStatus.textContent = 'Spørsmål aktivt...';
+                this.elements.playerStatus.classList.remove('waiting');
+            }
+
+            handleResults(data) {
+                // Show correct answer
+                const buttons = this.elements.playerAnswerOptions.querySelectorAll('.answer-btn');
+                buttons.forEach((btn, index) => {
+                    if (index === data.correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn.classList.contains('selected') && index !== data.correctAnswer) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+                
+                // Update score
+                const myResult = data.results.find(r => r.id === this.playerId);
+                if (myResult) {
+                    this.score = myResult.score;
+                    this.elements.playerScore.textContent = `Poeng: ${this.score}`;
+                }
+            }
+
+            handleQuizEnd(data) {
+                clearInterval(this.timerInterval);
+                
+                // Show final results
+                this.elements.playerWaiting.style.display = 'none';
+                this.elements.playerQuestionDisplay.style.display = 'none';
+                this.elements.playerResults.style.display = 'block';
+                
+                this.elements.playerStatus.textContent = 'Quiz ferdig!';
+                this.elements.playerStatus.classList.remove('waiting');
+                
+                // Show leaderboard
+                this.elements.playerResultsList.innerHTML = '';
+                data.results.forEach((result, index) => {
+                    const resultDiv = document.createElement('div');
+                    resultDiv.className = 'result-item';
+                    if (index === 0) {
+                        resultDiv.classList.add('winner');
+                    }
+                    
+                    resultDiv.innerHTML = `
+                        <div>
+                            <span class="rank">${index + 1}.</span>
+                            <span class="player-name-result">${result.name}</span>
+                        </div>
+                        <span class="player-score-result">${result.score}</span>
+                    `;
+                    
+                    this.elements.playerResultsList.appendChild(resultDiv);
+                });
+            }
+
+            startQuiz() {
+                this.currentQuestionIndex = 0;
+                
+                // Reset players
+                this.players.forEach(player => {
+                    player.score = 0;
+                    player.answers = [];
+                });
+                
+                this.elements.startQuiz.disabled = true;
+                this.elements.nextQuestion.disabled = false;
+                this.elements.stopQuiz.disabled = false;
+                
+                this.nextQuestion();
+            }
+
+            nextQuestion() {
+                if (this.currentQuestionIndex >= this.questions.length) {
+                    this.endQuiz();
+                    return;
+                }
+                
+                const question = this.questions[this.currentQuestionIndex];
+                this.currentQuestion = question;
+                
+                // Show question for host
+                this.elements.hostQuestionDisplay.classList.add('active');
+                this.elements.hostQuestionNumber.textContent = `Spørsmål ${this.currentQuestionIndex + 1}/${this.questions.length}`;
+                this.elements.hostQuestionText.textContent = question.question;
+                
+                // Show options for host
+                this.elements.hostAnswerOptions.innerHTML = '';
+                question.options.forEach((option, index) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'answer-btn';
+                    optionDiv.textContent = `${String.fromCharCode(65 + index)}) ${option}`;
+                    if (index === question.correct) {
+                        optionDiv.style.background = '#90EE90';
+                    }
+                    this.elements.hostAnswerOptions.appendChild(optionDiv);
+                });
+                
+                // Start timer
+                this.startTimer(question.timeLimit, this.elements.hostTimer);
+                
+                // Send question to players
+                this.sendMessage({
+                    type: 'question',
+                    question: question.question,
+                    options: question.options,
+                    timeLimit: question.timeLimit,
+                    questionNumber: this.currentQuestionIndex + 1,
+                    totalQuestions: this.questions.length
+                });
+                
+                this.currentQuestionIndex++;
+                
+                // End question after time limit
+                setTimeout(() => {
+                    this.endQuestion();
+                }, question.timeLimit * 1000);
+            }
+
+            endQuestion() {
+                clearInterval(this.timerInterval);
+                
+                // Calculate and send results
+                const results = Array.from(this.players.values())
+                    .map(player => ({
+                        id: player.id,
+                        name: player.name,
+                        score: player.score
+                    }))
+                    .sort((a, b) => b.score - a.score);
+                
+                this.sendMessage({
+                    type: 'results',
+                    results: results,
+                    correctAnswer: this.currentQuestion.correct
+                });
+                
+                this.updateLeaderboard();
+                
+                // Auto next question after 3 seconds
+                setTimeout(() => {
+                    this.elements.hostQuestionDisplay.classList.remove('active');
+                    if (this.currentQuestionIndex < this.questions.length) {
+                        this.nextQuestion();
+                    } else {
+                        this.endQuiz();
+                    }
+                }, 3000);
+            }
+
+            stopQuiz() {
+                this.endQuiz();
+            }
+
+            endQuiz() {
+                clearInterval(this.timerInterval);
+                
+                this.elements.startQuiz.disabled = false;
+                this.elements.nextQuestion.disabled = true;
+                this.elements.stopQuiz.disabled = true;
+                this.elements.hostQuestionDisplay.classList.remove('active');
+                
+                // Send final results
+                const finalResults = Array.from(this.players.values())
+                    .map(player => ({
+                        id: player.id,
+                        name: player.name,
+                        score: player.score
+                    }))
+                    .sort((a, b) => b.score - a.score);
+                
+                this.sendMessage({
+                    type: 'quiz-end',
+                    results: finalResults
+                });
+                
+                this.showFinalResults(finalResults);
+            }
+
+            submitAnswer(answerIndex) {
+                if (this.hasAnswered) return;
+                
+                this.hasAnswered = true;
+                clearInterval(this.timerInterval);
+                
+                // Mark selected answer
+                const buttons = this.elements.playerAnswerOptions.querySelectorAll('.answer-btn');
+                buttons.forEach((btn, index) => {
+                    btn.disabled = true;
+                    if (index === answerIndex) {
+                        btn.classList.add('selected');
+                    }
+                });
+                
+                // Send answer to host
+                this.sendMessage({
+                    type: 'answer',
+                    playerId: this.playerId,
+                    answer: answerIndex,
+                    responseTime: 0 // Simplified for demo
+                });
+            }
+
+            startTimer(timeLimit, timerElement) {
+                let timeLeft = timeLimit;
+                timerElement.textContent = timeLeft;
+                timerElement.classList.remove('warning');
+                
+                if (this.timerInterval) {
+                    clearInterval(this.timerInterval);
+                }
+                
+                this.timerInterval = setInterval(() => {
+                    timeLeft--;
+                    timerElement.textContent = timeLeft;
+                    
+                    if (timeLeft <= 5) {
+                        timerElement.classList.add('warning');
+                    }
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(this.timerInterval);
+                    }
+                }, 1000);
+            }
+
+            sendMessage(data) {
+                if (this.channel) {
+                    this.channel.postMessage(data);
+                }
+            }
+
+            updatePlayersList() {
+                if (this.players.size === 0) {
+                    this.elements.playersList.innerHTML = `
+                        <div style="text-align: center; color: #666; padding: 20px;">
+                            Ingen spelarar tilkobla ennå
+                        </div>
+                    `;
+                    return;
+                }
+                
+                this.elements.playersList.innerHTML = '';
+                this.players.forEach(player => {
+                    const playerDiv = document.createElement('div');
+                    playerDiv.className = 'player-item';
+                    playerDiv.innerHTML = `
+                        <span class="player-name">${player.name}</span>
+                        <span class="player-score">${player.score}</span>
+                    `;
+                    this.elements.playersList.appendChild(playerDiv);
+                });
+                
+                this.elements.playersCount.textContent = `Spelarar: ${this.players.size}`;
+            }
+
+            updateLeaderboard() {
+                const sortedPlayers = Array.from(this.players.values())
+                    .sort((a, b) => b.score - a.score);
+                
+                this.elements.hostResultsList.innerHTML = '';
+                sortedPlayers.forEach((player, index) => {
+                    const resultDiv = document.createElement('div');
+                    resultDiv.className = 'result-item';
+                    if (index === 0) {
+                        resultDiv.classList.add('winner');
+                    }
+                    
+                    resultDiv.innerHTML = `
+                        <div>
+                            <span class="rank">${index + 1}.</span>
+                            <span class="player-name-result">${player.name}</span>
+                        </div>
+                        <span class="player-score-result">${player.score}</span>
+                    `;
+                    
+                    this.elements.hostResultsList.appendChild(resultDiv);
+                });
+                
+                this.elements.hostResults.style.display = 'block';
+            }
+
+            showFinalResults(results) {
+                this.elements.hostResults.style.display = 'block';
+                this.updateLeaderboard();
+                
+                if (results.length > 0) {
+                    const winner = results[0];
+                    setTimeout(() => {
+                        alert(`🏆 Quiz ferdig!\n\nVinnar: ${winner.name}\nPoeng: ${winner.score}`);
+                    }, 1000);
+                }
+            }
+
+            updateConnectionStatus() {
+                if (this.connected) {
+                    this.elements.connectionStatus.textContent = 'Tilkobla: Ja';
+                    this.elements.connectionStatus.classList.remove('disconnected');
+                    this.elements.connectionStatus.classList.add('connected');
+                } else {
+                    this.elements.connectionStatus.textContent = 'Tilkobla: Nei';
+                    this.elements.connectionStatus.classList.remove('connected');
+                    this.elements.connectionStatus.classList.add('disconnected');
+                }
+            }
+
+            generateRoomCode() {
+                return Math.random().toString(36).substr(2, 6).toUpperCase();
+            }
+        }
+
+        // Initialiser når siden lastes
+        document.addEventListener('DOMContentLoaded', () => {
+            new SimpleQuiz();
+        });
+    </script>
+</body>
+</html>

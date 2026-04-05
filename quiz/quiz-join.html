@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kviss - Delta i Live Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, system-ui, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border: 3px solid #000;
+            box-shadow: 3px 3px 0 #000;
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .join-form {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #000;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            background: #f0f8ff;
+        }
+
+        .btn {
+            width: 100%;
+            background: #4CAF50;
+            color: white;
+            border: 2px solid #000;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .btn:hover {
+            background: #45a049;
+        }
+
+        .btn:active {
+            transform: translate(1px, 1px);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .quiz-area {
+            display: none;
+        }
+
+        .quiz-area.active {
+            display: block;
+        }
+
+        .status-bar {
+            background: #F0F8FF;
+            border: 2px solid #000;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .status-item {
+            font-weight: 700;
+            margin: 5px 0;
+        }
+
+        .status-item.connected {
+            color: #2E7D32;
+        }
+
+        .status-item.waiting {
+            color: #F57C00;
+        }
+
+        .question-display {
+            background: #FDFD96;
+            border: 2px solid #000;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .timer {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #d32f2f;
+        }
+
+        .timer.warning {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .answer-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .answer-btn {
+            background: white;
+            border: 2px solid #000;
+            padding: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.1s;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .answer-btn:hover:not(:disabled) {
+            background: #f0f0f0;
+        }
+
+        .answer-btn:active:not(:disabled) {
+            transform: translate(1px, 1px);
+        }
+
+        .answer-btn:disabled {
+            background: #f5f5f5;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .answer-btn.correct {
+            background: #90EE90;
+        }
+
+        .answer-btn.incorrect {
+            background: #FFB6C1;
+        }
+
+        .answer-btn.selected {
+            background: #87CEEB;
+        }
+
+        .waiting-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .waiting-message h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .results-display {
+            background: #F0F8FF;
+            border: 2px solid #000;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .results-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border: 1px solid #000;
+        }
+
+        .result-item.winner {
+            background: #FDFD96;
+            font-weight: 700;
+        }
+
+        .rank {
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .player-name {
+            flex: 1;
+        }
+
+        .player-score {
+            font-weight: 700;
+            background: #FDFD96;
+            padding: 3px 8px;
+            border: 1px solid #000;
+        }
+
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: 2px solid #000;
+            padding: 10px 15px;
+            font-weight: 700;
+            box-shadow: 2px 2px 0 #000;
+        }
+
+        .connection-status.connected {
+            background: #90EE90;
+        }
+
+        .connection-status.disconnected {
+            background: #FFB6C1;
+        }
+
+        .player-info {
+            background: #f8f8f8;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .player-name-display {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .room-code-display {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Kviss</h1>
+            <p class="subtitle">Delta i live quiz</p>
+        </header>
+
+        <div class="connection-status disconnected" id="connection-status">
+            Tilkobla: Nei
+        </div>
+
+        <section class="join-form" id="join-form">
+            <div class="form-group">
+                <label for="room-code">Rom-kode:</label>
+                <input type="text" id="room-code" placeholder="Skriv inn 6-bokstavs kode" maxlength="6">
+            </div>
+            
+            <div class="form-group">
+                <label for="player-name">Ditt namn:</label>
+                <input type="text" id="player-name" placeholder="Kva heiter du?">
+            </div>
+            
+            <button class="btn" id="join-btn">Delta i kviss</button>
+        </section>
+
+        <section class="quiz-area" id="quiz-area">
+            <div class="player-info">
+                <div class="player-name-display" id="player-name-display">----</div>
+                <div class="room-code-display">Rom: <span id="room-code-display">----</span></div>
+            </div>
+
+            <div class="status-bar">
+                <div class="status-item waiting" id="quiz-status">Ventar på at kviss startar...</div>
+                <div class="status-item" id="score-display">Poeng: 0</div>
+            </div>
+
+            <div class="waiting-message" id="waiting-message">
+                <h3>⏳ Ventar på kviss</h3>
+                <p>Læraren startar kviss snart...</p>
+            </div>
+
+            <div class="question-display" id="question-display" style="display: none;">
+                <div class="question-header">
+                    <div class="question-number" id="question-number">Spørsmål 1/5</div>
+                    <div class="timer" id="timer">30</div>
+                </div>
+                
+                <div class="question-text" id="question-text">
+                    Spørsmål vil vises her
+                </div>
+                
+                <div class="answer-options" id="answer-options">
+                    <!-- Svaralternativer fylles dynamisk -->
+                </div>
+            </div>
+
+            <div class="results-display" id="results-display" style="display: none;">
+                <div class="results-title">🏆 Resultater</div>
+                <div id="results-list">
+                    <!-- Resultater fylles dynamisk -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Quiz klient for elev
+        class QuizClient {
+            constructor() {
+                this.roomCode = '';
+                this.playerName = '';
+                this.playerId = '';
+                this.score = 0;
+                this.connected = false;
+                this.currentQuestion = null;
+                this.hasAnswered = false;
+                this.questionStartTime = null;
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.setupStorageListeners();
+            }
+
+            initializeElements() {
+                this.elements = {
+                    joinForm: document.getElementById('join-form'),
+                    quizArea: document.getElementById('quiz-area'),
+                    connectionStatus: document.getElementById('connection-status'),
+                    roomCodeInput: document.getElementById('room-code'),
+                    playerNameInput: document.getElementById('player-name'),
+                    joinBtn: document.getElementById('join-btn'),
+                    playerNameDisplay: document.getElementById('player-name-display'),
+                    roomCodeDisplay: document.getElementById('room-code-display'),
+                    quizStatus: document.getElementById('quiz-status'),
+                    scoreDisplay: document.getElementById('score-display'),
+                    waitingMessage: document.getElementById('waiting-message'),
+                    questionDisplay: document.getElementById('question-display'),
+                    questionNumber: document.getElementById('question-number'),
+                    questionText: document.getElementById('question-text'),
+                    answerOptions: document.getElementById('answer-options'),
+                    timer: document.getElementById('timer'),
+                    resultsDisplay: document.getElementById('results-display'),
+                    resultsList: document.getElementById('results-list')
+                };
+            }
+
+            setupEventListeners() {
+                this.elements.joinBtn.addEventListener('click', () => this.joinQuiz());
+                
+                // Enter-tast for å joine
+                this.elements.roomCodeInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.elements.playerNameInput.focus();
+                    }
+                });
+                
+                this.elements.playerNameInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.joinQuiz();
+                    }
+                });
+                
+                // Auto-uppercase room code
+                this.elements.roomCodeInput.addEventListener('input', (e) => {
+                    e.target.value = e.target.value.toUpperCase();
+                });
+            }
+
+            setupStorageListeners() {
+                // Lytt etter meldinger fra host (demo med localStorage)
+                window.addEventListener('storage', (e) => {
+                    if (e.key === 'quiz-question' && e.newValue) {
+                        const data = JSON.parse(e.newValue);
+                        this.handleQuestion(data);
+                    } else if (e.key === 'quiz-results' && e.newValue) {
+                        const data = JSON.parse(e.newValue);
+                        this.handleResults(data);
+                    } else if (e.key === 'quiz-end' && e.newValue) {
+                        const data = JSON.parse(e.newValue);
+                        this.handleQuizEnd(data);
+                    }
+                });
+            }
+
+            joinQuiz() {
+                const roomCode = this.elements.roomCodeInput.value.trim();
+                const playerName = this.elements.playerNameInput.value.trim();
+                
+                if (!roomCode || roomCode.length !== 6) {
+                    alert('Skriv inn ein gyldig rom-kode (6 bokstavar)');
+                    return;
+                }
+                
+                if (!playerName || playerName.length < 1) {
+                    alert('Skriv inn namnet ditt');
+                    return;
+                }
+                
+                this.roomCode = roomCode;
+                this.playerName = playerName;
+                this.playerId = 'player-' + Math.random().toString(36).substr(2, 9);
+                
+                // Simuler tilkobling til host
+                this.simulateConnection();
+                
+                // Oppdater UI
+                this.elements.joinForm.style.display = 'none';
+                this.elements.quizArea.classList.add('active');
+                this.elements.playerNameDisplay.textContent = this.playerName;
+                this.elements.roomCodeDisplay.textContent = this.roomCode;
+                
+                // Send join-melding til host
+                this.sendJoinMessage();
+            }
+
+            simulateConnection() {
+                // Simuler WebSocket tilkobling
+                this.connected = true;
+                
+                this.elements.connectionStatus.textContent = 'Tilkobla: Ja';
+                this.elements.connectionStatus.classList.remove('disconnected');
+                this.elements.connectionStatus.classList.add('connected');
+                
+                console.log(`Connected to quiz room: ${this.roomCode}`);
+                console.log(`Player: ${this.playerName} (${this.playerId})`);
+            }
+
+            sendJoinMessage() {
+                const message = {
+                    roomCode: this.roomCode,
+                    playerId: this.playerId,
+                    playerName: this.playerName
+                };
+                
+                // I ekte implementasjon: send via WebSocket
+                console.log('Sending join message:', message);
+                
+                // For demo: bruk localStorage
+                localStorage.setItem('quiz-join', JSON.stringify(message));
+                localStorage.removeItem('quiz-join');
+            }
+
+            handleQuestion(data) {
+                if (!this.connected) return;
+                
+                this.currentQuestion = data;
+                this.hasAnswered = false;
+                this.questionStartTime = Date.now();
+                
+                // Vis spørsmål
+                this.elements.waitingMessage.style.display = 'none';
+                this.elements.questionDisplay.style.display = 'block';
+                this.elements.resultsDisplay.style.display = 'none';
+                
+                this.elements.questionNumber.textContent = `Spørsmål ${data.questionNumber}/${data.totalQuestions}`;
+                this.elements.questionText.textContent = data.question;
+                
+                // Vis svaralternativer
+                this.elements.answerOptions.innerHTML = '';
+                data.options.forEach((option, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'answer-btn';
+                    button.textContent = `${String.fromCharCode(65 + index)}) ${option}`;
+                    button.addEventListener('click', () => this.submitAnswer(index));
+                    this.elements.answerOptions.appendChild(button);
+                });
+                
+                // Start timer
+                this.startTimer(data.timeLimit);
+                
+                this.elements.quizStatus.textContent = 'Spørsmål aktivt...';
+                this.elements.quizStatus.classList.remove('waiting');
+                
+                console.log('Received question:', data);
+            }
+
+            startTimer(timeLimit) {
+                let timeLeft = timeLimit;
+                this.elements.timer.textContent = timeLeft;
+                this.elements.timer.classList.remove('warning');
+                
+                if (this.timerInterval) {
+                    clearInterval(this.timerInterval);
+                }
+                
+                this.timerInterval = setInterval(() => {
+                    timeLeft--;
+                    this.elements.timer.textContent = timeLeft;
+                    
+                    if (timeLeft <= 5) {
+                        this.elements.timer.classList.add('warning');
+                    }
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(this.timerInterval);
+                        this.disableAnswerButtons();
+                    }
+                }, 1000);
+            }
+
+            submitAnswer(answerIndex) {
+                if (this.hasAnswered) return;
+                
+                this.hasAnswered = true;
+                clearInterval(this.timerInterval);
+                
+                // Marker valgt svar
+                const buttons = this.elements.answerOptions.querySelectorAll('.answer-btn');
+                buttons.forEach((btn, index) => {
+                    btn.disabled = true;
+                    if (index === answerIndex) {
+                        btn.classList.add('selected');
+                    }
+                });
+                
+                // Send svar til host
+                const responseTime = Date.now() - this.questionStartTime;
+                const answerData = {
+                    playerId: this.playerId,
+                    playerName: this.playerName,
+                    answer: answerIndex,
+                    responseTime: responseTime
+                };
+                
+                this.sendAnswer(answerData);
+                
+                console.log('Answer submitted:', answerData);
+            }
+
+            sendAnswer(answerData) {
+                // I ekte implementasjon: send via WebSocket
+                console.log('Sending answer:', answerData);
+                
+                // For demo: bruk localStorage
+                localStorage.setItem('quiz-answer', JSON.stringify(answerData));
+                localStorage.removeItem('quiz-answer');
+            }
+
+            disableAnswerButtons() {
+                const buttons = this.elements.answerOptions.querySelectorAll('.answer-btn');
+                buttons.forEach(btn => {
+                    btn.disabled = true;
+                });
+            }
+
+            handleResults(data) {
+                // Vis korrekt svar
+                const buttons = this.elements.answerOptions.querySelectorAll('.answer-btn');
+                buttons.forEach((btn, index) => {
+                    if (index === data.correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn.classList.contains('selected') && index !== data.correctAnswer) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+                
+                // Oppdater score
+                const myResult = data.results.find(r => r.id === this.playerId);
+                if (myResult) {
+                    this.score = myResult.score;
+                    this.elements.scoreDisplay.textContent = `Poeng: ${this.score}`;
+                }
+                
+                console.log('Received results:', data);
+            }
+
+            handleQuizEnd(data) {
+                clearInterval(this.timerInterval);
+                
+                // Vis final resultater
+                this.elements.waitingMessage.style.display = 'none';
+                this.elements.questionDisplay.style.display = 'none';
+                this.elements.resultsDisplay.style.display = 'block';
+                
+                this.elements.quizStatus.textContent = 'Kviss ferdig!';
+                this.elements.quizStatus.classList.remove('waiting');
+                
+                // Vis leaderboard
+                this.elements.resultsList.innerHTML = '';
+                data.results.forEach((result, index) => {
+                    const resultDiv = document.createElement('div');
+                    resultDiv.className = 'result-item';
+                    if (index === 0) {
+                        resultDiv.classList.add('winner');
+                    }
+                    
+                    resultDiv.innerHTML = `
+                        <div>
+                            <span class="rank">${index + 1}.</span>
+                            <span class="player-name">${result.name}</span>
+                        </div>
+                        <span class="player-score">${result.score}</span>
+                    `;
+                    
+                    this.elements.resultsList.appendChild(resultDiv);
+                });
+                
+                console.log('Quiz ended:', data);
+            }
+        }
+
+        // Initialiser quiz klient når siden lastes
+        document.addEventListener('DOMContentLoaded', () => {
+            new QuizClient();
+        });
+    </script>
+</body>
+</html>

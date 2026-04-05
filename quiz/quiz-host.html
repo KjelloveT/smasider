@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kviss Host - Live Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, system-ui, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            border: 3px solid #000;
+            box-shadow: 3px 3px 0 #000;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .status-bar {
+            display: flex;
+            gap: 20px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .status-item {
+            background: #FDFD96;
+            border: 2px solid #000;
+            padding: 10px 15px;
+            font-weight: 700;
+        }
+
+        .status-item.connected {
+            background: #90EE90;
+        }
+
+        .status-item.disconnected {
+            background: #FFB6C1;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .control-panel, .players-panel {
+            background: white;
+            border: 3px solid #000;
+            box-shadow: 3px 3px 0 #000;
+            padding: 20px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #000;
+        }
+
+        .room-info {
+            background: #F0F8FF;
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .room-code {
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: center;
+            letter-spacing: 3px;
+            margin: 10px 0;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            border: 2px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .players-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .player-item {
+            background: #f8f8f8;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .player-name {
+            font-weight: 700;
+        }
+
+        .player-score {
+            background: #FDFD96;
+            padding: 3px 8px;
+            border: 1px solid #000;
+            font-weight: 700;
+        }
+
+        .quiz-controls {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: white;
+            border: 2px solid #000;
+            padding: 12px 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .btn:hover {
+            background: #f0f0f0;
+        }
+
+        .btn:active {
+            transform: translate(1px, 1px);
+        }
+
+        .btn.primary {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn.primary:hover {
+            background: #45a049;
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .question-display {
+            background: #F0F8FF;
+            border: 2px solid #000;
+            padding: 20px;
+            margin: 15px 0;
+            display: none;
+        }
+
+        .question-display.active {
+            display: block;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .question-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .option {
+            background: white;
+            border: 2px solid #000;
+            padding: 10px;
+            font-weight: 700;
+        }
+
+        .timer {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .timer.warning {
+            color: #ff6b6b;
+        }
+
+        .sample-questions {
+            background: #f8f8f8;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .sample-question {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .server-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: 2px solid #000;
+            padding: 10px 15px;
+            font-weight: 700;
+            box-shadow: 2px 2px 0 #000;
+        }
+
+        .server-status.online {
+            background: #90EE90;
+        }
+
+        .server-status.offline {
+            background: #FFB6C1;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .question-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Kviss Host</h1>
+            <p>Live quiz for klasserommet - fullt personvern</p>
+            
+            <div class="status-bar">
+                <div class="status-item disconnected" id="server-status">
+                    Server: Offline
+                </div>
+                <div class="status-item" id="players-count">
+                    Spelarar: 0
+                </div>
+                <div class="status-item" id="quiz-status">
+                    Status: Ventar
+                </div>
+            </div>
+        </header>
+
+        <div class="server-status offline" id="floating-status">
+            Server: Offline
+        </div>
+
+        <main class="main-content">
+            <section class="control-panel">
+                <h2 class="section-title">🎮 Kontrollpanel</h2>
+                
+                <div class="room-info">
+                    <div><strong>Rom-kode:</strong></div>
+                    <div class="room-code" id="room-code">----</div>
+                    <div class="qr-code" id="qr-code">
+                        QR-kode<br>kommer
+                    </div>
+                    <div style="text-align: center; font-size: 0.9rem;">
+                        Elevar går til: <strong>quiz-join.html</strong><br>
+                        og skriv inn koden over
+                    </div>
+                </div>
+
+                <div class="quiz-controls">
+                    <button class="btn primary" id="start-server">Start Server</button>
+                    <button class="btn" id="start-quiz" disabled>Start Kviss</button>
+                    <button class="btn" id="next-question" disabled>Neste Spørsmål</button>
+                    <button class="btn" id="stop-quiz" disabled>Stopp Kviss</button>
+                </div>
+
+                <div class="question-display" id="question-display">
+                    <div class="timer" id="timer">30</div>
+                    <div class="question-text" id="question-text">Spørsmål vises her</div>
+                    <div class="question-options" id="question-options">
+                        <!-- Alternativer fylles dynamisk -->
+                    </div>
+                </div>
+
+                <div class="sample-questions">
+                    <h3 style="margin-bottom: 10px;">📝 Eksempelspørsmål:</h3>
+                    <div class="sample-question">
+                        <strong>Hva er hovedstaden i Norge?</strong><br>
+                        A) Oslo B) Bergen C) Trondheim D) Stavanger
+                    </div>
+                    <div class="sample-question">
+                        <strong>Hva er 2 + 2?</strong><br>
+                        A) 3 B) 4 C) 5 D) 6
+                    </div>
+                    <div class="sample-question">
+                        <strong>Hvilket år startet andre verdenskrig?</strong><br>
+                        A) 1938 B) 1939 C) 1940 D) 1941
+                    </div>
+                </div>
+            </section>
+
+            <section class="players-panel">
+                <h2 class="section-title">👥 Spelarar</h2>
+                
+                <div class="players-list" id="players-list">
+                    <div style="text-align: center; color: #666; padding: 20px;">
+                        Ingen spelarar tilkobla ennå
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <h3 style="margin-bottom: 10px;">🏆 Resultater:</h3>
+                    <div id="leaderboard">
+                        <div style="text-align: center; color: #666; padding: 20px;">
+                            Ingen resultater ennå
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // WebSocket server og quiz logikk
+        class QuizHost {
+            constructor() {
+                this.roomCode = this.generateRoomCode();
+                this.players = new Map();
+                this.questions = this.getSampleQuestions();
+                this.currentQuestionIndex = 0;
+                this.isQuizActive = false;
+                this.server = null;
+                this.port = 8082;
+                this.timerInterval = null;
+                this.questionStartTime = null;
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.updateRoomDisplay();
+            }
+
+            generateRoomCode() {
+                return Math.random().toString(36).substr(2, 6).toUpperCase();
+            }
+
+            getSampleQuestions() {
+                return [
+                    {
+                        question: "Hva er hovedstaden i Norge?",
+                        options: ["Oslo", "Bergen", "Trondheim", "Stavanger"],
+                        correct: 0,
+                        timeLimit: 20
+                    },
+                    {
+                        question: "Hva er 2 + 2?",
+                        options: ["3", "4", "5", "6"],
+                        correct: 1,
+                        timeLimit: 15
+                    },
+                    {
+                        question: "Hvilket år startet andre verdenskrig?",
+                        options: ["1938", "1939", "1940", "1941"],
+                        correct: 1,
+                        timeLimit: 25
+                    },
+                    {
+                        question: "Hva er største planeten i solsystemet?",
+                        options: ["Mars", "Jupiter", "Saturn", "Neptun"],
+                        correct: 1,
+                        timeLimit: 20
+                    },
+                    {
+                        question: "Hvor mange kontinenter finnes det?",
+                        options: ["5", "6", "7", "8"],
+                        correct: 2,
+                        timeLimit: 15
+                    }
+                ];
+            }
+
+            initializeElements() {
+                this.elements = {
+                    serverStatus: document.getElementById('server-status'),
+                    floatingStatus: document.getElementById('floating-status'),
+                    playersCount: document.getElementById('players-count'),
+                    quizStatus: document.getElementById('quiz-status'),
+                    roomCode: document.getElementById('room-code'),
+                    qrCode: document.getElementById('qr-code'),
+                    startServer: document.getElementById('start-server'),
+                    startQuiz: document.getElementById('start-quiz'),
+                    nextQuestion: document.getElementById('next-question'),
+                    stopQuiz: document.getElementById('stop-quiz'),
+                    questionDisplay: document.getElementById('question-display'),
+                    questionText: document.getElementById('question-text'),
+                    questionOptions: document.getElementById('question-options'),
+                    timer: document.getElementById('timer'),
+                    playersList: document.getElementById('players-list'),
+                    leaderboard: document.getElementById('leaderboard')
+                };
+            }
+
+            setupEventListeners() {
+                this.elements.startServer.addEventListener('click', () => this.startServer());
+                this.elements.startQuiz.addEventListener('click', () => this.startQuiz());
+                this.elements.nextQuestion.addEventListener('click', () => this.nextQuestion());
+                this.elements.stopQuiz.addEventListener('click', () => this.stopQuiz());
+            }
+
+            updateRoomDisplay() {
+                this.elements.roomCode.textContent = this.roomCode;
+                this.elements.qrCode.innerHTML = `
+                    QR-kode:<br>
+                    <strong>${this.roomCode}</strong><br>
+                    <small>quiz-join.html</small>
+                `;
+            }
+
+            async startServer() {
+                try {
+                    // Simuler WebSocket server (i ekte implementasjon ville dette vært Node.js)
+                    this.simulateWebSocketServer();
+                    
+                    this.elements.serverStatus.textContent = 'Server: Online';
+                    this.elements.serverStatus.classList.remove('disconnected');
+                    this.elements.serverStatus.classList.add('connected');
+                    
+                    this.elements.floatingStatus.textContent = 'Server: Online';
+                    this.elements.floatingStatus.classList.remove('offline');
+                    this.elements.floatingStatus.classList.add('online');
+                    
+                    this.elements.startServer.textContent = 'Server Kjører';
+                    this.elements.startServer.disabled = true;
+                    this.elements.startQuiz.disabled = false;
+                    
+                    this.elements.quizStatus.textContent = 'Status: Server Kjører';
+                    
+                    console.log(`Quiz server started on port ${this.port}`);
+                    console.log(`Room code: ${this.roomCode}`);
+                    
+                } catch (error) {
+                    console.error('Failed to start server:', error);
+                    alert('Kunne ikke starte server. Sjekk konsollen for detaljer.');
+                }
+            }
+
+            simulateWebSocketServer() {
+                // Dette simulerer WebSocket server for demo
+                // I ekte implementasjon ville dette vært en ekte WebSocket server
+                console.log('WebSocket server simulation started');
+                
+                // Simuler at elever kan koble til
+                window.addEventListener('storage', (e) => {
+                    if (e.key === 'quiz-join' && e.newValue) {
+                        const data = JSON.parse(e.newValue);
+                        if (data.roomCode === this.roomCode) {
+                            this.handlePlayerJoin(data);
+                        }
+                    }
+                });
+            }
+
+            handlePlayerJoin(data) {
+                const player = {
+                    id: data.playerId,
+                    name: data.playerName,
+                    score: 0,
+                    answers: []
+                };
+                
+                this.players.set(player.id, player);
+                this.updatePlayersList();
+                this.updatePlayersCount();
+                
+                console.log(`Player joined: ${player.name} (${player.id})`);
+            }
+
+            startQuiz() {
+                this.isQuizActive = true;
+                this.currentQuestionIndex = 0;
+                
+                // Reset alle spelarar
+                this.players.forEach(player => {
+                    player.score = 0;
+                    player.answers = [];
+                });
+                
+                this.elements.startQuiz.disabled = true;
+                this.elements.nextQuestion.disabled = false;
+                this.elements.stopQuiz.disabled = false;
+                
+                this.elements.quizStatus.textContent = 'Status: Kviss Aktiv';
+                
+                this.nextQuestion();
+            }
+
+            nextQuestion() {
+                if (this.currentQuestionIndex >= this.questions.length) {
+                    this.endQuiz();
+                    return;
+                }
+                
+                const question = this.questions[this.currentQuestionIndex];
+                this.currentQuestion = question;
+                this.questionStartTime = Date.now();
+                
+                // Vis spørsmål
+                this.elements.questionDisplay.classList.add('active');
+                this.elements.questionText.textContent = question.question;
+                
+                // Vis alternativer
+                this.elements.questionOptions.innerHTML = '';
+                question.options.forEach((option, index) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option';
+                    optionDiv.textContent = `${String.fromCharCode(65 + index)}) ${option}`;
+                    this.elements.questionOptions.appendChild(optionDiv);
+                });
+                
+                // Start timer
+                this.startTimer(question.timeLimit);
+                
+                // Send spørsmål til alle spelarar
+                this.broadcastQuestion(question);
+                
+                this.currentQuestionIndex++;
+            }
+
+            startTimer(timeLimit) {
+                let timeLeft = timeLimit;
+                this.elements.timer.textContent = timeLeft;
+                this.elements.timer.classList.remove('warning');
+                
+                if (this.timerInterval) {
+                    clearInterval(this.timerInterval);
+                }
+                
+                this.timerInterval = setInterval(() => {
+                    timeLeft--;
+                    this.elements.timer.textContent = timeLeft;
+                    
+                    if (timeLeft <= 5) {
+                        this.elements.timer.classList.add('warning');
+                    }
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(this.timerInterval);
+                        this.endQuestion();
+                    }
+                }, 1000);
+            }
+
+            endQuestion() {
+                clearInterval(this.timerInterval);
+                
+                // Vis korrekt svar
+                const options = this.elements.questionOptions.querySelectorAll('.option');
+                options.forEach((option, index) => {
+                    if (index === this.currentQuestion.correct) {
+                        option.style.background = '#90EE90';
+                    }
+                });
+                
+                // Oppdater leaderboard
+                this.updateLeaderboard();
+                
+                // Send resultater
+                this.broadcastResults();
+                
+                // Gå til neste spørsmål etter 3 sekunder
+                setTimeout(() => {
+                    this.elements.questionDisplay.classList.remove('active');
+                    this.elements.nextQuestion.click();
+                }, 3000);
+            }
+
+            stopQuiz() {
+                this.isQuizActive = false;
+                clearInterval(this.timerInterval);
+                
+                this.elements.startQuiz.disabled = false;
+                this.elements.nextQuestion.disabled = true;
+                this.elements.stopQuiz.disabled = true;
+                this.elements.questionDisplay.classList.remove('active');
+                
+                this.elements.quizStatus.textContent = 'Status: Kviss Stoppa';
+                
+                this.broadcastQuizEnd();
+                this.showFinalResults();
+            }
+
+            endQuiz() {
+                this.stopQuiz();
+            }
+
+            handleAnswer(data) {
+                const player = this.players.get(data.playerId);
+                if (!player) return;
+                
+                const responseTime = Date.now() - this.questionStartTime;
+                const isCorrect = data.answer === this.currentQuestion.correct;
+                
+                let points = 0;
+                if (isCorrect) {
+                    // Poeng basert på svar-tid
+                    const maxPoints = 1000;
+                    const timeUsed = responseTime / 1000;
+                    const timeAvailable = this.currentQuestion.timeLimit;
+                    const timeBonus = Math.max(0, (timeAvailable - timeUsed) / timeAvailable) * 500;
+                    points = Math.round(maxPoints + timeBonus);
+                }
+                
+                player.score += points;
+                player.answers.push({
+                    questionIndex: this.currentQuestionIndex - 1,
+                    answer: data.answer,
+                    correct: isCorrect,
+                    responseTime: responseTime,
+                    points: points
+                });
+                
+                console.log(`Answer from ${player.name}: ${data.answer} (${isCorrect ? 'correct' : 'wrong'}, ${points} points)`);
+            }
+
+            broadcastQuestion(question) {
+                const message = {
+                    type: 'question',
+                    question: question.question,
+                    options: question.options,
+                    timeLimit: question.timeLimit,
+                    questionNumber: this.currentQuestionIndex + 1,
+                    totalQuestions: this.questions.length
+                };
+                
+                // I ekte implementasjon: send til alle WebSocket klienter
+                console.log('Broadcasting question:', message);
+                
+                // For demo: bruk localStorage
+                localStorage.setItem('quiz-question', JSON.stringify(message));
+                localStorage.removeItem('quiz-question');
+            }
+
+            broadcastResults() {
+                const results = Array.from(this.players.values())
+                    .map(player => ({
+                        id: player.id,
+                        name: player.name,
+                        score: player.score
+                    }))
+                    .sort((a, b) => b.score - a.score);
+                
+                const message = {
+                    type: 'results',
+                    results: results,
+                    correctAnswer: this.currentQuestion.correct
+                };
+                
+                console.log('Broadcasting results:', message);
+                
+                // For demo: bruk localStorage
+                localStorage.setItem('quiz-results', JSON.stringify(message));
+                localStorage.removeItem('quiz-results');
+            }
+
+            broadcastQuizEnd() {
+                const finalResults = Array.from(this.players.values())
+                    .map(player => ({
+                        id: player.id,
+                        name: player.name,
+                        score: player.score
+                    }))
+                    .sort((a, b) => b.score - a.score);
+                
+                const message = {
+                    type: 'quiz-end',
+                    results: finalResults
+                };
+                
+                console.log('Broadcasting quiz end:', message);
+                
+                // For demo: bruk localStorage
+                localStorage.setItem('quiz-end', JSON.stringify(message));
+                localStorage.removeItem('quiz-end');
+            }
+
+            updatePlayersList() {
+                if (this.players.size === 0) {
+                    this.elements.playersList.innerHTML = `
+                        <div style="text-align: center; color: #666; padding: 20px;">
+                            Ingen spelarar tilkobla ennå
+                        </div>
+                    `;
+                    return;
+                }
+                
+                this.elements.playersList.innerHTML = '';
+                this.players.forEach(player => {
+                    const playerDiv = document.createElement('div');
+                    playerDiv.className = 'player-item';
+                    playerDiv.innerHTML = `
+                        <span class="player-name">${player.name}</span>
+                        <span class="player-score">${player.score}</span>
+                    `;
+                    this.elements.playersList.appendChild(playerDiv);
+                });
+            }
+
+            updateLeaderboard() {
+                const sortedPlayers = Array.from(this.players.values())
+                    .sort((a, b) => b.score - a.score);
+                
+                if (sortedPlayers.length === 0) {
+                    this.elements.leaderboard.innerHTML = `
+                        <div style="text-align: center; color: #666; padding: 20px;">
+                            Ingen resultater ennå
+                        </div>
+                    `;
+                    return;
+                }
+                
+                this.elements.leaderboard.innerHTML = '';
+                sortedPlayers.forEach((player, index) => {
+                    const playerDiv = document.createElement('div');
+                    playerDiv.className = 'player-item';
+                    playerDiv.innerHTML = `
+                        <span class="player-name">${index + 1}. ${player.name}</span>
+                        <span class="player-score">${player.score}</span>
+                    `;
+                    this.elements.leaderboard.appendChild(playerDiv);
+                });
+            }
+
+            updatePlayersCount() {
+                this.elements.playersCount.textContent = `Spelarar: ${this.players.size}`;
+            }
+
+            showFinalResults() {
+                const sortedPlayers = Array.from(this.players.values())
+                    .sort((a, b) => b.score - a.score);
+                
+                if (sortedPlayers.length === 0) return;
+                
+                const winner = sortedPlayers[0];
+                alert(`🏆 Kviss ferdig!\n\nVinnar: ${winner.name}\nPoeng: ${winner.score}`);
+            }
+        }
+
+        // Initialiser quiz host når siden lastes
+        document.addEventListener('DOMContentLoaded', () => {
+            new QuizHost();
+        });
+    </script>
+</body>
+</html>
