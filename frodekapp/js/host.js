@@ -31,7 +31,7 @@ class HostGame {
         const quizId = params.get('quiz');
         if (quizId) {
             try {
-                this.quiz = await QuizEngine.loadQuiz(`quizzes/${quizId}.json`);
+                this.quiz = await QuizEngine.loadQuizById(quizId, 'quizzes');
                 UI.setText('selected-quiz-title', this.quiz.title);
                 UI.setText('selected-quiz-count', `${this.quiz.questions.length} spørsmål`);
                 UI.toggle('selected-quiz-info', true);

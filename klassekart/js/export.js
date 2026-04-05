@@ -7,18 +7,21 @@ const Export = (() => {
 
     function toPNG() {
         const source = document.getElementById('canvas');
-        const rect = source.getBoundingClientRect();
         const w = source.offsetWidth;
         const h = source.offsetHeight;
+        const padding = 20;
 
         const c = document.createElement('canvas');
-        c.width = w * 2;
-        c.height = h * 2;
+        c.width = (w + padding * 2) * 2;
+        c.height = (h + padding * 2) * 2;
         const ctx = c.getContext('2d');
         ctx.scale(2, 2);
 
+        // Fill background
         ctx.fillStyle = '#fff';
-        ctx.fillRect(0, 0, w, h);
+        ctx.fillRect(0, 0, w + padding * 2, h + padding * 2);
+
+        ctx.translate(padding, padding);
 
         if (source.classList.contains('show-grid')) {
             ctx.strokeStyle = '#eee';
@@ -118,10 +121,10 @@ const Export = (() => {
 
             /* Chair marker — brown bar at bottom */
             ctx.fillStyle = '#8B6914';
-            ctx.fillRect(x + 4, y + h + 1, w - 8, 4);
+            ctx.fillRect(x + 8, y + h + 1, w - 16, 4);
             ctx.strokeStyle = '#000';
             ctx.lineWidth = 1;
-            ctx.strokeRect(x + 4, y + h + 1, w - 8, 4);
+            ctx.strokeRect(x + 8, y + h + 1, w - 16, 4);
 
             if (el.dataset.locked === '1') {
                 ctx.fillStyle = '#000';

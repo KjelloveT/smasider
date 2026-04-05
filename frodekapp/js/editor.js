@@ -21,24 +21,40 @@ class QuizEditor {
     init() {
         // Knappar
         document.getElementById('btn-add-question').addEventListener('click', () => this.addQuestion());
-        document.getElementById('btn-preview').addEventListener('click', () => this.showPreview());
-        document.getElementById('btn-download').addEventListener('click', () => this.downloadQuiz());
+        document.getElementById('btn-preview').addEventListener('click', () => this.preview());
+        document.getElementById('btn-download').addEventListener('click', () => this.downloadJSON());
+        document.getElementById('btn-save-local').addEventListener('click', () => this.saveToLocalLibrary());
         document.getElementById('btn-save-draft').addEventListener('click', () => this.saveDraft());
         document.getElementById('btn-load-draft').addEventListener('click', () => this.loadDraft());
-        document.getElementById('btn-close-preview').addEventListener('click', () => this.closePreview());
-
-        // Last opp JSON
         document.getElementById('upload-json').addEventListener('change', (e) => this.uploadJSON(e));
 
-        // Last utkast frå localStorage om det finst
-        this.tryLoadAutoDraft();
+        // Event delegation for spørsmål-knappar
+        document.getElementById('questions-list').addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
 
-        // Start med eitt tomt spørsmål
-        if (this.quiz.questions.length === 0) {
-            this.addQuestion();
-        }
+            const index = parseInt(btn.dataset.index);
+            const target = parseInt(btn.dataset.target);
 
+            if (btn.classList.contains('btn-move-up') || btn.classList.contains('btn-move-down')) {
+                this.syncFromForm();
+                this.moveQuestion(index, target);
+            } else if (btn.classList.contains('btn-duplicate')) {
+                this.syncFromForm();
+                this.duplicateQuestion(index);
+            } else if (btn.classList.contains('btn-remove')) {
+                this.syncFromForm();
+                this.removeQuestion(index);
+            }
+        });
+
+        // Auto-save draft kvart 30 sekund
+        setInterval(() => this.saveDraft(true), 30000);
+
+        // Start med tom quiz
+        this.quiz = this.emptyQuiz();
         this.render();
+        this.tryLoadAutoDraft();
     }
 
     addQuestion() {
@@ -141,10 +157,10 @@ class QuizEditor {
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;cursor:grab;">
                     <span style="font-weight:900;font-size:1rem;">⠿ Spørsmål ${i + 1}</span>
                     <div style="display:flex;gap:6px;">
-                        <button class="btn btn-small" title="Flytt opp" onclick="editor.syncFromForm();editor.moveQuestion(${i},${i - 1})">▲</button>
-                        <button class="btn btn-small" title="Flytt ned" onclick="editor.syncFromForm();editor.moveQuestion(${i},${i + 1})">▼</button>
-                        <button class="btn btn-small btn-purple" title="Dupliser" onclick="editor.syncFromForm();editor.duplicateQuestion(${i})">⧉</button>
-                        <button class="btn btn-small btn-danger" title="Slett" onclick="editor.syncFromForm();editor.removeQuestion(${i})">✕</button>
+                        <button class="btn btn-small btn-move-up" data-index="${i}" data-target="${i - 1}" title="Flytt opp">▲</button>
+                        <button class="btn btn-small btn-move-down" data-index="${i}" data-target="${i + 1}" title="Flytt ned">▼</button>
+                        <button class="btn btn-small btn-purple btn-duplicate" data-index="${i}" title="Dupliser">⧉</button>
+                        <button class="btn btn-small btn-danger btn-remove" data-index="${i}" title="Slett">✕</button>
                     </div>
                 </div>
 
@@ -297,6 +313,28 @@ class QuizEditor {
         document.getElementById('quiz-tags').value = (this.quiz.tags || []).join(', ');
     }
 
+    saveToLocalLibrary() {
+        this.syncFromForm();
+        const validation = QuizEngine.validateQuiz(this.quiz);
+        if (!validation.valid) {
+            UI.toast('Kan ikkje lagre: ' + validation.errors[0], 'error');
+            return;
+        }
+
+        // Lagre til localStorage med unik ID
+        const localId = 'local_' + Date.now();
+        const localQuizzes = JSON.parse(localStorage.getItem('frodekapp_local_quizzes') || '{}');
+        localQuizzes[localId] = {
+            ...this.quiz,
+            id: localId,
+            local: true,
+            savedAt: new Date().toISOString()
+        };
+        localStorage.setItem('frodekapp_local_quizzes', JSON.stringify(localQuizzes));
+
+        UI.toast('Quiz lagra til lokalt bibliotek!', 'success');
+    }
+
     uploadJSON(e) {
         const file = e.target.files[0];
         if (!file) return;
@@ -321,8 +359,3 @@ class QuizEditor {
         reader.readAsText(file);
     }
 }
-
-let editor;
-document.addEventListener('DOMContentLoaded', () => {
-    editor = new QuizEditor();
-});

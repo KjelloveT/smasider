@@ -150,8 +150,9 @@ const Grid = (() => {
     }
 
     function onCanvasMouseUp() {
-        if (resizeEl) {
+        if (isResizing && resizeEl) {
             App.showElementTools(resizeEl);
+            Storage.pushHistory();
         }
         resizeEl = null;
         isResizing = false;
@@ -162,6 +163,9 @@ const Grid = (() => {
             if (dragEl.classList.contains('desk')) dragEl.style.zIndex = 10;
             if (dragEl.classList.contains('furniture')) dragEl.style.zIndex = 5;
             App.showElementTools(dragEl);
+            if (movedDuringDrag) {
+                Storage.pushHistory();
+            }
         }
         dragEl = null;
         isDragging = false;
@@ -192,6 +196,8 @@ const Grid = (() => {
 
     /* ── Keyboard ── */
     function onKeyDown(e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+
         if (e.key === 'Delete' && selectedEl) {
             App.removeElement(selectedEl);
             selectedEl = null;
@@ -273,6 +279,13 @@ const Grid = (() => {
         lbl.textContent = labelText || FURN_LABELS[type] || type;
         if (type === 'tekst') {
             lbl.contentEditable = true;
+            let oldText = lbl.textContent;
+            lbl.addEventListener('focus', () => { oldText = lbl.textContent; });
+            lbl.addEventListener('blur', () => {
+                if (lbl.textContent !== oldText) {
+                    Storage.pushHistory();
+                }
+            });
         }
         inner.appendChild(lbl);
 

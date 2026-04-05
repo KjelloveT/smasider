@@ -84,6 +84,7 @@
         <!-- Verktøylinje -->
         <div class="nb-card mt-24" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
             <button class="btn btn-primary" id="btn-download">⬇ Last ned JSON</button>
+            <button class="btn btn-purple" id="btn-save-local">📚 Lagre til bibliotek</button>
             <button class="btn btn-blue" id="btn-preview">👁 Førehandsvising</button>
             <button class="btn btn-yellow" id="btn-save-draft">💾 Lagre utkast</button>
             <button class="btn" id="btn-load-draft">📂 Last utkast</button>
@@ -107,10 +108,22 @@
     <script src="js/ui.js"></script>
     <script src="js/editor.js"></script>
     <script>
-        // Bind ekstra "legg til"-knapp nederst
-        document.getElementById('btn-add-question-bottom').addEventListener('click', () => {
-            editor.syncFromForm();
-            editor.addQuestion();
+        // Bind ekstra knappar etter at editor er initialisert
+        let editor;
+        document.addEventListener('DOMContentLoaded', () => {
+            editor = new QuizEditor();
+            window.editor = editor; // Gjør global for onclick i HTML
+            
+            // Bind ekstra "legg til"-knapp nederst
+            document.getElementById('btn-add-question-bottom').addEventListener('click', () => {
+                editor.syncFromForm();
+                editor.addQuestion();
+            });
+
+            // Bind lukk preview
+            document.getElementById('btn-close-preview').addEventListener('click', () => {
+                document.getElementById('preview-overlay').classList.add('hidden');
+            });
         });
     </script>
 </body>

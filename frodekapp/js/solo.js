@@ -80,7 +80,7 @@ class SoloGame {
 
     async loadQuizById(quizId) {
         try {
-            this.quiz = await QuizEngine.loadQuiz(`quizzes/${quizId}.json`);
+            this.quiz = await QuizEngine.loadQuizById(quizId, 'quizzes');
             this.showReadyScreen();
         } catch (e) {
             UI.toast('Kunne ikkje laste quiz: ' + e.message, 'error');

@@ -14,6 +14,9 @@
             <h1 class="toolbar-title">Klassekart</h1>
         </div>
         <div class="toolbar-center">
+            <button id="btn-undo" class="tb-btn tb-small" title="Angre (Ctrl+Z)"><span class="tb-icon" data-icon="undo"></span></button>
+            <button id="btn-redo" class="tb-btn tb-small" title="Gjer om (Ctrl+Y)"><span class="tb-icon" data-icon="redo"></span></button>
+            <div class="tb-divider"></div>
             <button id="btn-file" class="tb-btn c-blue" title="Lagre og hente oppsett"><span class="tb-icon" data-icon="save"></span> Lagre / hente</button>
             <button id="btn-layout" class="tb-btn c-green" title="Vel møbleringsmal"><span class="tb-icon" data-icon="layout-grid"></span> Oppsett</button>
             <button id="btn-shuffle" class="tb-btn c-orange" title="Plasser elevar tilfeldig"><span class="tb-icon" data-icon="shuffle"></span> Bland</button>
@@ -77,6 +80,12 @@
 
         <!-- ── CANVAS ── -->
         <div id="canvas-wrap">
+            <div id="tabs-bar">
+                <div id="tabs-list">
+                    <!-- Tabs injected here -->
+                </div>
+                <button id="btn-new-tab" class="tab-btn-add" title="Nytt klasseoppsett">+</button>
+            </div>
             <div id="canvas" class="show-grid">
             </div>
         </div>
@@ -156,6 +165,13 @@
                         </span>
                         <span class="lc-label">Veggretta</span>
                     </button>
+                    <button class="layout-card" data-layout="circle">
+                        <span class="lc-preview lp-circle">
+                            <span class="lp-d c1"></span><span class="lp-d c2"></span><span class="lp-d c3"></span>
+                            <span class="lp-d c4"></span><span class="lp-d c5"></span><span class="lp-d c6"></span>
+                        </span>
+                        <span class="lc-label">Sirkel</span>
+                    </button>
                 </div>
                 <div id="layout-group-size" class="layout-group-cfg hidden">
                     <label>Elevar per gruppe:
@@ -223,10 +239,12 @@
     <!-- Hidden file input for JSON import -->
     <input type="file" id="import-file" accept=".json" class="hidden">
 
+    <!-- ── SCRIPTS ── -->
     <script src="js/icons.js"></script>
     <script src="js/grid.js"></script>
     <script src="js/layouts.js"></script>
     <script src="js/storage.js"></script>
+    <script src="js/tabs.js"></script>
     <script src="js/export.js"></script>
     <script src="js/app.js"></script>
 </body>

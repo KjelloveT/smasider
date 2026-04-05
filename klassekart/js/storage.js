@@ -33,8 +33,59 @@ const Storage = (() => {
         return getAll().find(s => s.id === id) || null;
     }
 
+    /* ── History (Undo/Redo) ── */
+    const history = [];
+    const redoStack = [];
+    const MAX_HISTORY = 20;
+
+    function pushHistory() {
+        const state = captureState(true);
+        // Only push if different from last state
+        if (history.length > 0) {
+            const last = JSON.stringify(history[history.length - 1]);
+            if (last === JSON.stringify(state)) return;
+        }
+        
+        history.push(state);
+        if (history.length > MAX_HISTORY) history.shift();
+        redoStack.length = 0; // Clear redo on new action
+        updateHistoryButtons();
+    }
+
+    function undo() {
+        if (history.length <= 1) return;
+        const current = history.pop();
+        redoStack.push(current);
+        const previous = history[history.length - 1];
+        restoreGlobalState(previous);
+        updateHistoryButtons();
+    }
+
+    function redo() {
+        if (redoStack.length === 0) return;
+        const next = redoStack.pop();
+        history.push(next);
+        restoreGlobalState(next);
+        updateHistoryButtons();
+    }
+
+    function restoreGlobalState(state) {
+        if (state.tabs && typeof Tabs !== 'undefined') {
+            Tabs.setAllTabs(state.tabs, true); // true = skip push history
+        } else {
+            restoreState(state, true); // true = skip push history
+        }
+    }
+
+    function updateHistoryButtons() {
+        const btnUndo = document.getElementById('btn-undo');
+        const btnRedo = document.getElementById('btn-redo');
+        if (btnUndo) btnUndo.disabled = history.length <= 1;
+        if (btnRedo) btnRedo.disabled = redoStack.length === 0;
+    }
+
     /* ── Snapshot current state ── */
-    function captureState() {
+    function captureState(includeTabs = false) {
         const desks = Grid.getDesks().map(d => ({
             id: d.dataset.studentId,
             name: d.dataset.studentName,
@@ -61,12 +112,18 @@ const Storage = (() => {
         });
 
         const students = App.getStudentList();
+        
+        const state = { students, desks, furniture };
+        
+        if (includeTabs && typeof Tabs !== 'undefined') {
+            state.tabs = Tabs.getAllTabs();
+        }
 
-        return { students, desks, furniture };
+        return state;
     }
 
     /* ── Restore state ── */
-    function restoreState(data) {
+    function restoreState(data, isUndoRedo = false) {
         Grid.clearCanvas();
         App.setStudentList(data.students || []);
 
@@ -85,11 +142,15 @@ const Storage = (() => {
         });
 
         App.refreshStudentPanel();
+        
+        if (!isUndoRedo) {
+            pushHistory();
+        }
     }
 
     /* ── JSON file export ── */
     function exportJSON() {
-        const state = captureState();
+        const state = captureState(true);
         const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -106,7 +167,11 @@ const Storage = (() => {
             reader.onload = (e) => {
                 try {
                     const data = JSON.parse(e.target.result);
-                    restoreState(data);
+                    if (data.tabs && typeof Tabs !== 'undefined') {
+                        Tabs.setAllTabs(data.tabs);
+                    } else {
+                        restoreState(data);
+                    }
                     resolve(data);
                 } catch (err) {
                     reject(err);
@@ -119,6 +184,7 @@ const Storage = (() => {
 
     return {
         getAll, saveSetup, deleteSetup, loadSetup,
-        captureState, restoreState, exportJSON, importJSON
+        captureState, restoreState, restoreGlobalState, exportJSON, importJSON,
+        pushHistory, undo, redo
     };
 })();

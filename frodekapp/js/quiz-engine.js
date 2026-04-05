@@ -74,15 +74,57 @@ const QuizEngine = {
     },
 
     /**
-     * Last quiz-manifestet
+     * Last quiz-manifestet med lokale quiz-ar
      * @param {string} baseUrl - Base-URL til quizzes-mappa
-     * @returns {Promise<Array>} Liste av quiz-metadata
+     * @returns {Promise<Array>} Liste av quiz-metadata (inkludert lokale)
      */
     async loadManifest(baseUrl) {
+        // Last fjern quiz-ar
         const url = baseUrl.endsWith('/') ? baseUrl + 'index.json' : baseUrl + '/index.json';
         const res = await fetch(url);
         if (!res.ok) throw new Error(`Kunne ikkje laste quiz-liste: ${res.status}`);
-        return res.json();
+        const remote = await res.json();
+
+        // Last lokale quiz-ar
+        const localQuizzes = JSON.parse(localStorage.getItem('frodekapp_local_quizzes') || '{}');
+        const local = Object.values(localQuizzes).map(q => ({
+            id: q.id,
+            title: q.title,
+            description: q.description,
+            author: q.author || 'Lokal',
+            questionCount: q.questions.length,
+            color: '#8B5CF6', // Lilla for lokale quiz-ar
+            local: true,
+            savedAt: q.savedAt
+        }));
+
+        return [...remote, ...local];
+    },
+
+    /**
+     * Last ein quiz (fjern eller lokal)
+     * @param {string} id - Quiz ID eller 'local_XXXX'
+     * @returns {Promise<Object>} Quiz-objekt
+     */
+    async loadQuizById(id, baseUrl) {
+        if (id.startsWith('local_')) {
+            const localQuizzes = JSON.parse(localStorage.getItem('frodekapp_local_quizzes') || '{}');
+            const quiz = localQuizzes[id];
+            if (!quiz) throw new Error('Lokal quiz ikkje funne');
+            return quiz;
+        } else {
+            return this.loadQuiz(`${baseUrl}/${id}.json`);
+        }
+    },
+
+    /**
+     * Slett ein lokal quiz
+     * @param {string} id - 'local_XXXX'
+     */
+    deleteLocalQuiz(id) {
+        const localQuizzes = JSON.parse(localStorage.getItem('frodekapp_local_quizzes') || '{}');
+        delete localQuizzes[id];
+        localStorage.setItem('frodekapp_local_quizzes', JSON.stringify(localQuizzes));
     },
 
     /**

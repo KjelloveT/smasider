@@ -99,6 +99,22 @@ body {
     font-family: inherit;
 }
 
+.tb-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    filter: grayscale(1);
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.tb-divider {
+    width: 2px;
+    height: 24px;
+    background: #000;
+    margin: 0 10px;
+    opacity: 0.2;
+}
+
 .tb-btn:hover {
     transform: translate(-1px, -1px);
     box-shadow: 4px 4px 0 #000;
@@ -305,12 +321,145 @@ body {
     letter-spacing: 0.3px;
 }
 
+/* ── TABS BAR ── */
+#tabs-bar {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    height: 40px;
+    width: 1200px;
+    z-index: 5;
+    position: relative;
+    padding-left: 10px;
+}
+
+#tabs-list {
+    display: flex;
+    gap: 5px;
+    height: 100%;
+    align-items: flex-end;
+}
+
+.tab-item {
+    background: #E0E0E0;
+    border: 3px solid #000;
+    border-bottom: none;
+    padding: 6px 15px;
+    font-size: 0.85rem;
+    font-weight: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.1s;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: -3px;
+    min-width: 120px;
+    justify-content: space-between;
+    box-shadow: 4px 0 0 rgba(0,0,0,0.05);
+}
+
+.tab-item:hover {
+    background: #eee;
+    transform: translateY(-2px);
+}
+
+.tab-item.active {
+    background: #fff;
+    padding-bottom: 9px;
+    margin-bottom: -3px;
+    z-index: 10;
+    transform: none;
+}
+
+.tab-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+}
+
+.tab-close {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+    transition: all 0.1s;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+}
+
+.tab-close:hover {
+    opacity: 1;
+    background: #FF6B6B;
+    color: #fff;
+}
+
+.tab-btn-add {
+    background: #BAFCA2;
+    border: 3px solid #000;
+    border-bottom: none;
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+    font-weight: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.1s;
+    margin-bottom: -3px;
+}
+
+.tab-btn-add:hover {
+    background: #A3E08F;
+    transform: translateY(-2px);
+}
+
+/* ── SWAP TOAST ── */
+.swap-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFDB58;
+    padding: 12px 24px;
+    font-size: 0.9rem;
+    font-weight: 900;
+    z-index: 1000;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0 #000;
+}
+
+.swap-toast.hidden {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+}
+
+.desk.swap-target {
+    outline: 4px solid #FF6B6B !important;
+    outline-offset: 2px;
+    animation: tab-pulse 1s infinite;
+}
+
+@keyframes tab-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
 /* ── CANVAS ── */
 #canvas-wrap {
     flex: 1;
     overflow: auto;
     background: #E8E8E8;
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     padding: 20px;
@@ -521,6 +670,28 @@ body {
 .drag-ghost {
     opacity: 0.6;
 }
+
+/* Circle preview */
+.lp-circle {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.lp-circle .lp-d {
+    position: absolute;
+    width: 12px;
+    height: 6px;
+    left: 50%;
+    top: 50%;
+}
+
+.lp-circle .c1 { transform: translate(-50%, -50%) rotate(0deg) translateY(-18px); }
+.lp-circle .c2 { transform: translate(-50%, -50%) rotate(60deg) translateY(-18px); }
+.lp-circle .c3 { transform: translate(-50%, -50%) rotate(120deg) translateY(-18px); }
+.lp-circle .c4 { transform: translate(-50%, -50%) rotate(180deg) translateY(-18px); }
+.lp-circle .c5 { transform: translate(-50%, -50%) rotate(240deg) translateY(-18px); }
+.lp-circle .c6 { transform: translate(-50%, -50%) rotate(300deg) translateY(-18px); }
 
 /* ── MODALS ── */
 .modal-overlay {

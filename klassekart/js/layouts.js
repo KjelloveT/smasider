@@ -104,7 +104,8 @@ const Layouts = (() => {
         for (let i = 0; i < topSlots && positions.length < n; i++) {
             positions.push({
                 x: topStartX + i * (DESK_W + GAP),
-                y: MARGIN
+                y: MARGIN,
+                rotation: 0
             });
         }
 
@@ -112,14 +113,16 @@ const Layouts = (() => {
         for (let i = 0; i < leftSlots && positions.length < n; i++) {
             positions.push({
                 x: topStartX - CELL,
-                y: MARGIN + DESK_H + GAP + i * (DESK_H + GAP)
+                y: MARGIN + DESK_H + GAP + i * (DESK_H + GAP),
+                rotation: 90
             });
         }
 
         for (let i = 0; i < rightSlots && positions.length < n; i++) {
             positions.push({
                 x: topEndX - DESK_W + CELL,
-                y: MARGIN + DESK_H + GAP + i * (DESK_H + GAP)
+                y: MARGIN + DESK_H + GAP + i * (DESK_H + GAP),
+                rotation: 270
             });
         }
 

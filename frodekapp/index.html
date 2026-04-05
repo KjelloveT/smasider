@@ -56,6 +56,12 @@
 
     <script src="js/quiz-engine.js"></script>
     <script>
+        async function deleteLocalQuiz(id) {
+            if (!confirm('Er du sikker på at du vil slette denne lokale quiz-en?')) return;
+            QuizEngine.deleteLocalQuiz(id);
+            location.reload(); // Last quiz-liste på nytt
+        }
+
         (async function() {
             const grid = document.getElementById('quiz-grid');
             try {
@@ -75,16 +81,21 @@
                         `<span class="tag tag-subject">${t}</span>`
                     ).join('');
 
+                    const localBadge = q.local ? '<span class="tag tag-local">📚 Lokal</span>' : '';
+                    const deleteBtn = q.local ? `<button class="btn btn-small btn-danger" onclick="deleteLocalQuiz('${q.id}')" style="text-decoration:none;">🗑️ Slett</button>` : '';
+
                     card.innerHTML = `
                         <div class="quiz-card-title">${q.title}</div>
                         <div class="quiz-card-desc">${q.description}</div>
                         <div class="quiz-card-meta">
                             <span class="tag tag-count">${q.questionCount} spørsmål</span>
+                            ${localBadge}
                             ${tags}
                         </div>
                         <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
                             <a href="solo.html?quiz=${q.id}" class="btn btn-small btn-yellow" style="text-decoration:none;">🎯 Øv</a>
                             <a href="host.html?quiz=${q.id}" class="btn btn-small btn-primary" style="text-decoration:none;">🎮 Start live</a>
+                            ${deleteBtn}
                         </div>
                     `;
                     grid.appendChild(card);

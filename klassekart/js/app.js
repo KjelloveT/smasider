@@ -15,6 +15,28 @@ const App = (() => {
         bindModals();
         bindSidebar();
         bindElementTools();
+        bindKeyboard();
+        
+        // Initialize tabs after other modules
+        Tabs.init();
+        
+        Storage.pushHistory(); // Initial state
+    }
+
+    function bindKeyboard() {
+        window.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key.toLowerCase() === 'z') {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    Storage.redo();
+                } else {
+                    Storage.undo();
+                }
+            } else if (e.ctrlKey && e.key.toLowerCase() === 'y') {
+                e.preventDefault();
+                Storage.redo();
+            }
+        });
     }
 
     /* Inject SVG icons into all [data-icon] placeholders */
@@ -95,6 +117,8 @@ const App = (() => {
         document.getElementById('btn-swap').addEventListener('click', toggleSwapMode);
         document.getElementById('btn-file').addEventListener('click', openFileModal);
         document.getElementById('btn-export-png').addEventListener('click', () => Export.toPNG());
+        document.getElementById('btn-undo').addEventListener('click', () => Storage.undo());
+        document.getElementById('btn-redo').addEventListener('click', () => Storage.redo());
         document.getElementById('btn-grid-toggle').addEventListener('click', toggleGrid);
         document.getElementById('btn-clear').addEventListener('click', clearAll);
 
@@ -120,6 +144,7 @@ const App = (() => {
         Grid.clearCanvas();
         students = [];
         refreshStudentPanel();
+        Storage.pushHistory();
     }
 
     /* ════════════════════════════════
@@ -165,6 +190,7 @@ const App = (() => {
         });
 
         refreshStudentPanel();
+        Storage.pushHistory();
     }
 
     /* ════════════════════════════════
@@ -177,10 +203,22 @@ const App = (() => {
         document.getElementById('btn-swap').classList.toggle('active', swapMode);
         Grid.getCanvas().style.cursor = swapMode ? 'crosshair' : '';
 
+        // Show/hide instruction toast
+        let toast = document.getElementById('swap-toast');
         if (swapMode) {
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'swap-toast';
+                toast.className = 'neo-box swap-toast';
+                toast.textContent = 'Klikk på den første eleven du vil byte...';
+                document.body.appendChild(toast);
+            }
+            toast.classList.remove('hidden');
             Grid.getCanvas().addEventListener('click', onSwapClick);
         } else {
+            if (toast) toast.classList.add('hidden');
             Grid.getCanvas().removeEventListener('click', onSwapClick);
+            Grid.getDesks().forEach(d => d.classList.remove('swap-target'));
         }
     }
 
@@ -192,17 +230,27 @@ const App = (() => {
         const desk = e.target.closest('.desk');
         if (!desk) return;
 
+        const toast = document.getElementById('swap-toast');
+
         if (!swapFirst) {
             swapFirst = desk;
-            desk.style.outline = '3px solid #FF6B6B';
+            desk.classList.add('swap-target');
+            if (toast) toast.textContent = 'Klikk på eleven som skal byte plass med ' + desk.dataset.studentName + '...';
         } else {
+            if (desk === swapFirst) {
+                swapFirst.classList.remove('swap-target');
+                swapFirst = null;
+                if (toast) toast.textContent = 'Klikk på den første eleven du vil byte...';
+                return;
+            }
+
             const a = swapFirst;
             const b = desk;
-            a.style.outline = '';
-
+            
             const aName = a.dataset.studentName;
             const aId = a.dataset.studentId;
             const aColor = a.dataset.color;
+            
             a.dataset.studentName = b.dataset.studentName;
             a.dataset.studentId = b.dataset.studentId;
             a.dataset.color = b.dataset.color;
@@ -218,8 +266,18 @@ const App = (() => {
             if (b.dataset.color !== '#ffffff') b.style.background = b.dataset.color;
             else b.style.background = '#FDFD96';
 
-            swapFirst = null;
+            // Visual feedback: brief pulse
+            a.style.transform = 'scale(1.1)';
+            b.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                a.style.transform = '';
+                b.style.transform = '';
+            }, 200);
+
+            a.classList.remove('swap-target');
+            toggleSwapMode(); // Exit swap mode after one swap
             refreshStudentPanel();
+            Storage.pushHistory();
         }
     }
 
@@ -270,6 +328,7 @@ const App = (() => {
         input.value = '';
         closeModal('modal-students');
         refreshStudentPanel();
+        Storage.pushHistory();
     }
 
     /* ── Layout modal ── */
@@ -322,6 +381,7 @@ const App = (() => {
         });
 
         refreshStudentPanel();
+        Storage.pushHistory();
     }
 
     /* ── File modal (combined save/load/export/import) ── */
@@ -329,7 +389,7 @@ const App = (() => {
         document.getElementById('btn-save-ok').addEventListener('click', () => {
             const name = document.getElementById('save-name').value.trim();
             if (!name) { alert('Skriv inn eit namn for oppsettet.'); return; }
-            const data = Storage.captureState();
+            const data = Storage.captureState(true); // Include tabs when saving to list
             Storage.saveSetup(name, data);
             document.getElementById('save-name').value = '';
             refreshLoadList();
@@ -364,7 +424,11 @@ const App = (() => {
                 loadBtn.className = 'load-btn';
                 loadBtn.innerHTML = Icons.html('folder-open', 14) + ' Hent';
                 loadBtn.addEventListener('click', () => {
-                    Storage.restoreState(s.data);
+                    if (s.data.tabs && typeof Tabs !== 'undefined') {
+                        Tabs.setAllTabs(s.data.tabs);
+                    } else {
+                        Storage.restoreState(s.data);
+                    }
                     closeModal('modal-file');
                 });
 
@@ -414,8 +478,10 @@ const App = (() => {
                     if (existing) return;
                     Grid.createDesk(data.name, x - 40, y - 20, data.color, false, data.id);
                     refreshStudentPanel();
+                    Storage.pushHistory();
                 } else if (data.type === 'furniture') {
                     Grid.createFurniture(data.furnitureType, x - 40, y - 20, 0);
+                    Storage.pushHistory();
                 }
             } catch {
                 /* ignore */
@@ -506,6 +572,7 @@ const App = (() => {
                 if (contextTarget.classList.contains('furniture')) {
                     Grid.updateFurnLayout(contextTarget);
                 }
+                Storage.pushHistory();
             }
 
             if (action === 'lock' && contextTarget.classList.contains('desk')) {
@@ -521,6 +588,7 @@ const App = (() => {
                     contextTarget.appendChild(icon);
                 }
                 if (isLocked && lockIcon) lockIcon.remove();
+                Storage.pushHistory();
             }
 
             if (action === 'color' && contextTarget.classList.contains('desk')) {
@@ -551,6 +619,7 @@ const App = (() => {
                     const student = students.find(s => s.id === sid);
                     if (student) student.color = color;
                     refreshStudentPanel();
+                    Storage.pushHistory();
                 }
                 picker.classList.add('hidden');
                 if (contextTarget) showElementTools(contextTarget);
@@ -575,6 +644,7 @@ const App = (() => {
         el.remove();
         Grid.deselectAll();
         refreshStudentPanel();
+        Storage.pushHistory();
     }
 
     /* ════════════════════════════════
