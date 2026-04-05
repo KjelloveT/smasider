@@ -54,17 +54,16 @@ const Export = (() => {
             const ew = el.offsetWidth;
             const eh = el.offsetHeight;
 
-            const rot = parseInt(el.dataset.rotation) || 0;
+            const rot = (parseInt(el.dataset.rotation) || 0) % 360;
+            
+            ctx.save();
+            ctx.translate(x + ew / 2, y + eh / 2);
             if (rot) {
-                ctx.save();
-                ctx.translate(x + ew / 2, y + eh / 2);
                 ctx.rotate(rot * Math.PI / 180);
-                ctx.translate(-ew / 2, -eh / 2);
-                drawBox(ctx, 0, 0, ew, eh, el);
-                ctx.restore();
-            } else {
-                drawBox(ctx, x, y, ew, eh, el);
             }
+            // Draw box with (0,0) as center
+            drawBox(ctx, -ew / 2, -eh / 2, ew, eh, el, rot);
+            ctx.restore();
         });
 
         ctx.strokeStyle = '#000';
@@ -78,7 +77,7 @@ const Export = (() => {
         a.click();
     }
 
-    function drawBox(ctx, x, y, w, h, el) {
+    function drawBox(ctx, x, y, w, h, el, rotation = 0) {
         const bg = getComputedStyle(el).backgroundColor || '#fff';
         ctx.fillStyle = bg;
         ctx.fillRect(x, y, w, h);
@@ -91,20 +90,16 @@ const Export = (() => {
         ctx.strokeRect(x, y, w, h);
         ctx.setLineDash([]);
 
-        ctx.shadowColor = 'rgba(0,0,0,0.15)';
-        ctx.shadowOffsetX = 2;
-        ctx.shadowOffsetY = 2;
-        ctx.shadowBlur = 0;
-        ctx.fillStyle = bg;
-        ctx.fillRect(x, y, w, h);
-        ctx.shadowColor = 'transparent';
-
-        ctx.strokeStyle = '#000';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(x, y, w, h);
-
         if (el.classList.contains('desk')) {
             const name = el.dataset.studentName || '';
+            ctx.save();
+            // Counter-rotate text so it stays horizontal
+            if (rotation) {
+                ctx.translate(x + w / 2, y + h / 2);
+                ctx.rotate(-rotation * Math.PI / 180);
+                ctx.translate(-(x + w / 2), -(y + h / 2));
+            }
+            
             ctx.fillStyle = '#000';
             ctx.font = 'bold 11px Arial, sans-serif';
             ctx.textAlign = 'center';
@@ -118,13 +113,18 @@ const Export = (() => {
                 displayName += '…';
             }
             ctx.fillText(displayName, x + w / 2, y + h / 2);
+            ctx.restore();
 
-            /* Chair marker — brown bar at bottom */
-            ctx.fillStyle = '#8B6914';
-            ctx.fillRect(x + 8, y + h + 1, w - 16, 4);
+            /* Chair marker — now using CSS style (pseudo-element style) */
+            ctx.fillStyle = '#8B4513';
+            const chairH = 6;
+            const chairPad = w * 0.15; // 15% from each side
+            // In CSS: bottom: -12px, height: 6px. Desk border is 3px.
+            // Visually the chair starts 9px below the desk box.
+            ctx.fillRect(x + chairPad, y + h + 6, w - (chairPad * 2), chairH);
             ctx.strokeStyle = '#000';
-            ctx.lineWidth = 1;
-            ctx.strokeRect(x + 8, y + h + 1, w - 16, 4);
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x + chairPad, y + h + 6, w - (chairPad * 2), chairH);
 
             if (el.dataset.locked === '1') {
                 ctx.fillStyle = '#000';
@@ -137,6 +137,14 @@ const Export = (() => {
 
         if (el.classList.contains('furniture')) {
             const lbl = el.querySelector('.furn-label');
+            ctx.save();
+            // Counter-rotate text for furniture too
+            if (rotation) {
+                ctx.translate(x + w / 2, y + h / 2);
+                ctx.rotate(-rotation * Math.PI / 180);
+                ctx.translate(-(x + w / 2), -(y + h / 2));
+            }
+            
             ctx.fillStyle = '#000';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
@@ -146,6 +154,7 @@ const Export = (() => {
                 ctx.font = 'bold ' + fontSize + 'px Arial, sans-serif';
                 ctx.fillText(lbl.textContent, x + w / 2, y + h / 2);
             }
+            ctx.restore();
         }
     }
 

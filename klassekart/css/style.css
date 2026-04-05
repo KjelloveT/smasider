@@ -482,70 +482,81 @@ body {
     background-size: 40px 40px;
 }
 
-/* ── DESK (on canvas) ── */
+/* ── DESKS (on canvas) ── */
 .desk {
     position: absolute;
-    width: 80px;
-    height: 40px;
     background: #FDFD96;
-    border: 2px solid #000;
+    border: 3px solid #000;
     cursor: grab;
     user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s;
+    transform-origin: center center;
     z-index: 10;
-    transition: box-shadow 0.1s;
-    font-family: Arial, sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-align: center;
-    overflow: visible;
-    padding: 2px;
 }
 
-/* Chair marker — brown stripe at bottom */
+/* Chair marker — brown stripe. 
+   Positioned relative to the desk. 
+   Placed just outside the desk border to avoid name collision. */
 .desk::after {
     content: '';
     position: absolute;
-    bottom: -5px;
-    left: 8px;
-    right: 8px;
-    height: 4px;
-    background: #8B6914;
-    border: 1px solid #000;
-    border-radius: 1px;
+    bottom: -14px;
+    left: 15%;
+    right: 15%;
+    height: 6px;
+    background: #8B4513;
+    border: 2px solid #000;
+    z-index: 1;
     pointer-events: none;
 }
 
 .desk.selected {
-    outline: 3px solid #4A90D9;
-    outline-offset: 1px;
+    outline: 4px solid #4A90D9;
+    outline-offset: 2px;
     z-index: 20;
 }
 
 .desk .desk-name {
+    font-size: 0.75rem;
+    font-weight: 900;
     pointer-events: none;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100%;
     text-align: center;
-    line-height: 1.2;
+    padding: 4px;
+    width: 100%;
+    line-height: 1.1;
+    word-wrap: break-word;
+    display: block;
 }
 
 .desk .lock-icon {
     position: absolute;
-    top: 1px;
+    top: 2px;
     right: 2px;
-    pointer-events: none;
-}
-
-.desk .lock-icon .icon {
-    width: 12px;
-    height: 12px;
+    background: #fff;
+    border: 1.5px solid #000;
+    border-radius: 3px;
+    display: flex;
+    padding: 1px;
+    box-shadow: 1px 1px 0 #000;
+    z-index: 5;
 }
 
 .desk.locked {
     border-style: dashed;
 }
+
+/* Desk rotations */
+.desk.rot-90  { transform: rotate(90deg); }
+.desk.rot-180 { transform: rotate(180deg); }
+.desk.rot-270 { transform: rotate(270deg); }
+
+/* Counter-rotate desk name to keep it horizontal */
+.desk.rot-90  > .desk-name { transform: rotate(-90deg); }
+.desk.rot-180 > .desk-name { transform: rotate(-180deg); }
+.desk.rot-270 > .desk-name { transform: rotate(-270deg); }
 
 /* ── FURNITURE (on canvas) ── */
 .furniture {
@@ -652,19 +663,6 @@ body {
 .furniture.rot-90  { transform: rotate(90deg); }
 .furniture.rot-180 { transform: rotate(180deg); }
 .furniture.rot-270 { transform: rotate(270deg); }
-
-/* Counter-rotate inner content so icon+text stay upright */
-.furniture.rot-90  > .furn-inner { transform: rotate(-90deg); }
-.furniture.rot-180 > .furn-inner { transform: rotate(-180deg); }
-.furniture.rot-270 > .furn-inner { transform: rotate(-270deg); }
-
-/* Also apply to desks if rotated */
-.desk.rot-90  { transform: rotate(90deg); }
-.desk.rot-180 { transform: rotate(180deg); }
-.desk.rot-270 { transform: rotate(270deg); }
-.desk.rot-90  > .desk-name { transform: rotate(-90deg); }
-.desk.rot-180 > .desk-name { transform: rotate(-180deg); }
-.desk.rot-270 > .desk-name { transform: rotate(-270deg); }
 
 /* ── DRAG GHOST ── */
 .drag-ghost {

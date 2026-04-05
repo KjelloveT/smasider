@@ -372,11 +372,7 @@ const App = (() => {
 
         students.forEach((s, i) => {
             if (i < positions.length) {
-                const desk = Grid.createDesk(s.name, positions[i].x, positions[i].y, s.color, false, s.id);
-                if (positions[i].rotation) {
-                    desk.dataset.rotation = String(positions[i].rotation);
-                    desk.classList.add('rot-' + positions[i].rotation);
-                }
+                Grid.createDesk(s.name, positions[i].x, positions[i].y, s.color, false, s.id, positions[i].rotation);
             }
         });
 
@@ -565,14 +561,28 @@ const App = (() => {
             const action = btn.dataset.action;
             if (action === 'rotate') {
                 let rot = parseInt(contextTarget.dataset.rotation) || 0;
+                const oldRot = rot;
                 rot = (rot + 90) % 360;
                 contextTarget.dataset.rotation = String(rot);
                 contextTarget.className = contextTarget.className.replace(/rot-\d+/g, '');
                 if (rot) contextTarget.classList.add('rot-' + rot);
+                
+                // Adjust position if rotating to/from vertical to stay on grid
+                if ((oldRot % 180) !== (rot % 180)) {
+                    const x = parseInt(contextTarget.style.left);
+                    const y = parseInt(contextTarget.style.top);
+                    const w = contextTarget.offsetWidth;
+                    const h = contextTarget.offsetHeight;
+                    const snapped = Grid.snapPos(x, y, rot, w, h);
+                    contextTarget.style.left = snapped.x + 'px';
+                    contextTarget.style.top = snapped.y + 'px';
+                }
+
                 if (contextTarget.classList.contains('furniture')) {
                     Grid.updateFurnLayout(contextTarget);
                 }
                 Storage.pushHistory();
+                showElementTools(contextTarget); // Reposition tools
             }
 
             if (action === 'lock' && contextTarget.classList.contains('desk')) {

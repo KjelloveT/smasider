@@ -35,6 +35,21 @@ const Grid = (() => {
         return Math.round(val / CELL) * CELL;
     }
 
+    function snapPos(x, y, rot, w, h) {
+        const isRot = (rot === 90 || rot === 270);
+        if (isRot) {
+            // For rotated elements, we want the visual bounding box to snap to grid.
+            // Visual Left = x + (w-h)/2
+            // Visual Top = y + (h-w)/2
+            const offset = (w - h) / 2;
+            return {
+                x: Math.round((x + offset) / CELL) * CELL - offset,
+                y: Math.round((y - offset) / CELL) * CELL + offset
+            };
+        }
+        return { x: snap(x), y: snap(y) };
+    }
+
     function clamp(val, min, max) {
         return Math.max(min, Math.min(max, val));
     }
@@ -136,8 +151,12 @@ const Grid = (() => {
         let x = dragStartLeft + dx;
         let y = dragStartTop + dy;
 
-        x = snap(x);
-        y = snap(y);
+        const rot = (parseInt(dragEl.dataset.rotation) || 0) % 360;
+        const w = dragEl.offsetWidth;
+        const h = dragEl.offsetHeight;
+        const snapped = snapPos(x, y, rot, w, h);
+        x = snapped.x;
+        y = snapped.y;
 
         const bounds = getElementBoundsForClamp(dragEl);
         x = clamp(x, bounds.minLeft, bounds.maxLeft);
@@ -209,18 +228,24 @@ const Grid = (() => {
     }
 
     /* ── Create desk ── */
-    function createDesk(name, x, y, color, locked, id) {
+    function createDesk(name, x, y, color, locked, id, rotation) {
         const d = document.createElement('div');
         d.className = 'desk';
         d.dataset.studentId = id || crypto.randomUUID();
         d.dataset.studentName = name;
         d.dataset.locked = locked ? '1' : '0';
         d.dataset.color = color || '#ffffff';
-        d.dataset.rotation = '0';
-        d.style.left = snap(x) + 'px';
-        d.style.top = snap(y) + 'px';
+        const rot = rotation || 0;
+        d.dataset.rotation = rot;
+        
+        const snapped = snapPos(x, y, rot % 360, 80, 40);
+        d.style.left = snapped.x + 'px';
+        d.style.top = snapped.y + 'px';
         d.style.width = '80px';
         d.style.height = '40px';
+        
+        if (rot) d.classList.add('rot-' + rot);
+        
         if (color && color !== '#ffffff') {
             d.style.background = color;
         }
@@ -257,13 +282,20 @@ const Grid = (() => {
         const f = document.createElement('div');
         f.className = 'furniture';
         f.dataset.type = type;
-        f.dataset.rotation = rotation || 0;
-        f.style.left = snap(x) + 'px';
-        f.style.top = snap(y) + 'px';
+        const rot = rotation || 0;
+        f.dataset.rotation = rot;
+        
+        // Initial sizes from CSS or provided
+        const initialW = w || 120; // Default fallback
+        const initialH = h || 40;
+        
+        const snapped = snapPos(x, y, rot % 360, initialW, initialH);
+        f.style.left = snapped.x + 'px';
+        f.style.top = snapped.y + 'px';
         if (w) f.style.width = w + 'px';
         if (h) f.style.height = h + 'px';
 
-        if (rotation) f.classList.add('rot-' + rotation);
+        if (rot) f.classList.add('rot-' + rot);
 
         /* Inner wrapper — counter-rotated to keep content upright */
         const inner = document.createElement('div');
@@ -363,7 +395,7 @@ const Grid = (() => {
     }
 
     return {
-        init, snap, clamp, selectElement, deselectAll, getSelected,
+        init, snap, snapPos, clamp, selectElement, deselectAll, getSelected,
         createDesk, createFurniture, updateFurnLayout,
         getDesks, getFurniture,
         clearCanvas, clearDesks, getCanvasSize, getCell, getCanvas,

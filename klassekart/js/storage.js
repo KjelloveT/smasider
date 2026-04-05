@@ -132,12 +132,12 @@ const Storage = (() => {
         });
 
         (data.desks || []).forEach(d => {
-            const el = Grid.createDesk(d.name, d.x, d.y, d.color, d.locked, d.id);
-            if (d.w) el.style.width = d.w + 'px';
-            if (d.h) el.style.height = d.h + 'px';
-            if (d.rotation) {
-                el.dataset.rotation = d.rotation;
-                el.classList.add('rot-' + d.rotation);
+            Grid.createDesk(d.name, d.x, d.y, d.color, d.locked, d.id, d.rotation);
+            // Size is handled by CSS/defaults, but we can set it if stored
+            const el = Grid.getDesks().find(el => el.dataset.studentId === d.id);
+            if (el) {
+                if (d.w) el.style.width = d.w + 'px';
+                if (d.h) el.style.height = d.h + 'px';
             }
         });
 

@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordsmia - Norsk ordspel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Ekstra stiler for nye funksjoner */
+        .mode-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 24px 0;
+        }
+        
+        .mode-btn {
+            min-width: 140px;
+            text-align: center;
+        }
+        
+        .mode-btn.selected {
+            background: var(--accent-green);
+        }
+        
+        .letter-controls {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+        
+        .letter-btn {
+            font-size: 1.2rem;
+            padding: 16px 32px;
+        }
+        
+        .letter-btn.vowel {
+            background: var(--accent-pink);
+        }
+        
+        .letter-btn.consonant {
+            background: var(--accent-blue);
+        }
+        
+        .letter-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .undo-btn {
+            background: var(--accent-orange);
+        }
+        
+        .classroom-input {
+            width: 100%;
+            min-height: 150px;
+            font-family: inherit;
+            font-size: 1.1rem;
+            padding: 16px;
+            border: 3px solid var(--border);
+            box-shadow: var(--shadow);
+            resize: vertical;
+        }
+        
+        .word-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 16px 0;
+        }
+        
+        .word-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            box-shadow: 3px 3px 0 var(--border);
+        }
+        
+        .word-item.valid {
+            background: var(--accent-green);
+        }
+        
+        .word-item.invalid {
+            background: var(--accent-pink);
+        }
+        
+        .word-item .word-text {
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+        
+        .word-item .word-info {
+            font-size: 0.85rem;
+            color: #333;
+        }
+        
+        .count-display {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin: 16px 0;
+            padding: 12px;
+            background: var(--accent-yellow);
+            border: 3px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        
+        .classroom-controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        #timer-manual {
+            font-size: clamp(4rem, 10vw, 7rem);
+            font-weight: 900;
+            display: inline-block;
+            padding: 12px 32px;
+            min-width: 220px;
+            text-align: center;
+            background: var(--accent-teal);
+            border: 4px solid var(--border);
+            box-shadow: 8px 8px 0 var(--border);
+            line-height: 1;
+        }
+
+        #timer-manual.warning {
+            background: var(--accent-orange);
+        }
+
+        #timer-manual.danger {
+            background: var(--accent-pink);
+            animation: pulse 1s infinite;
+        }
+
+        #timer-classroom {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            display: inline-block;
+            padding: 10px 26px;
+            min-width: 180px;
+            text-align: center;
+            background: var(--accent-yellow);
+            border: 4px solid var(--border);
+            box-shadow: 7px 7px 0 var(--border);
+            line-height: 1;
+        }
+
+        #timer-classroom.warning {
+            background: var(--accent-orange);
+        }
+
+        #timer-classroom.danger {
+            background: var(--accent-pink);
+            animation: pulse 1s infinite;
+        }
+
+        .classroom-timer-controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .classroom-time-select {
+            border: 3px solid var(--border);
+            box-shadow: var(--shadow);
+            padding: 8px 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            background: var(--card-bg);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔤 Ordsmia</h1>
+            <p class="subtitle">Dann det lengste ordet du kan frå ni bokstavar!</p>
+        </header>
+
+        <!-- Meny-skjerm -->
+        <div id="screen-menu" class="screen active">
+            <h2>Vel spelemodus</h2>
+            <div class="mode-selector">
+                <button class="btn mode-btn selected" data-mode="quick">⚡ Rask start</button>
+                <button class="btn mode-btn" data-mode="manual">🎮 Vel sjølv</button>
+                <button class="btn mode-btn" data-mode="classroom">🏫 Klasserom</button>
+            </div>
+            
+            <div id="time-section">
+                <h3>Vel tidsbegrensing</h3>
+                <div class="time-selector">
+                    <button class="btn btn-time" data-time="30">30s</button>
+                    <button class="btn btn-time" data-time="45">45s</button>
+                    <button class="btn btn-time selected" data-time="60">60s</button>
+                    <button class="btn btn-time" data-time="90">90s</button>
+                    <button class="btn btn-time" data-time="120">120s</button>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin: 32px 0;">
+                <button id="startBtn" class="btn" style="font-size: 1.3rem; padding: 16px 40px;">START SPEL</button>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span id="stat-highscore" class="stat-value">0</span>
+                    <span class="stat-label">Toppscore</span>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 32px;">Dine beste ord</h3>
+            <div id="history-list" class="history-list">
+                <p style="text-align:center;color:#666">Ingen ord lagra ennå</p>
+            </div>
+        </div>
+
+        <!-- Spel-skjerm (Rask start) -->
+        <div id="screen-game" class="screen">
+            <div class="timer-container">
+                <div id="timer">30</div>
+            </div>
+            
+            <div id="letters-container" class="letters-container">
+                <!-- Bokstavar genereres her -->
+            </div>
+            
+            <div class="word-input">
+                <input type="text" id="wordInput" placeholder="SKRIV ORD" maxlength="9" autocomplete="off">
+                <button id="submitBtn" class="btn">SJEKK</button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 16px;">
+                <button id="giveUpBtn" class="btn" style="background: #FFB2EF;">GJE OPP</button>
+            </div>
+        </div>
+
+        <!-- Spel-skjerm (Vel sjølv) -->
+        <div id="screen-manual" class="screen">
+            <div class="timer-container">
+                <div id="timer-manual">30</div>
+            </div>
+            
+            <div class="count-display">
+                Bokstavar: <span id="letter-count">0</span>/9
+            </div>
+            
+            <div id="letters-container-manual" class="letters-container">
+                <!-- Bokstavar genereres her -->
+            </div>
+            
+            <div class="letter-controls">
+                <button id="btnVowel" class="btn letter-btn vowel" disabled>VOKAL</button>
+                <button id="btnConsonant" class="btn letter-btn consonant" disabled>KONSONANT</button>
+                <button id="btnUndo" class="btn letter-btn undo-btn" disabled>↩️ ANGRE</button>
+            </div>
+            
+            <div class="word-input">
+                <input type="text" id="wordInputManual" placeholder="SKRIV ORD" maxlength="9" autocomplete="off">
+                <button id="submitBtnManual" class="btn">SJEKK</button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 16px;">
+                <button id="startTimerBtn" class="btn" style="background: var(--accent-green);">START TID ⏱️</button>
+                <button id="giveUpBtnManual" class="btn" style="background: #FFB2EF;">GJE OPP</button>
+            </div>
+        </div>
+
+        <!-- Klasserom-skjerm -->
+        <div id="screen-classroom" class="screen">
+            <h2>Klasseromsmodus</h2>
+            <p style="text-align: left; margin-bottom: 16px; font-size: 0.92rem;">Vis bokstavane på tavla. Elevene skriv ord på papir.</p>
+
+            <div class="timer-container">
+                <div id="timer-classroom">60</div>
+            </div>
+
+            <div class="classroom-timer-controls">
+                <label for="classroom-time"><strong>Tid:</strong></label>
+                <select id="classroom-time" class="classroom-time-select">
+                    <option value="30">30s</option>
+                    <option value="45">45s</option>
+                    <option value="60" selected>60s</option>
+                    <option value="90">90s</option>
+                    <option value="120">120s</option>
+                </select>
+                <button id="startClassTimerBtn" class="btn" style="background: var(--accent-green);">START NEDTELLING</button>
+                <button id="stopClassTimerBtn" class="btn" style="background: var(--accent-pink);">STOPP</button>
+                <button id="resetClassTimerBtn" class="btn" style="background: var(--accent-orange);">NULLSTILL TID</button>
+            </div>
+            
+            <div class="count-display">
+                Bokstavar: <span id="letter-count-class">0</span>/9
+            </div>
+            
+            <div id="letters-container-class" class="letters-container">
+                <!-- Bokstavar genereres her -->
+            </div>
+            
+            <div class="letter-controls">
+                <button id="btnVowelClass" class="btn letter-btn vowel">VOKAL</button>
+                <button id="btnConsonantClass" class="btn letter-btn consonant">KONSONANT</button>
+                <button id="btnUndoClass" class="btn letter-btn undo-btn">↩️ ANGRE</button>
+                <button id="btnClearClass" class="btn letter-btn" style="background: #FFB2EF;">🗑️ TØM</button>
+            </div>
+            
+            <div style="margin-top: 32px; border-top: 3px solid #000; padding-top: 24px;">
+                <h3>Sjekk elevane sine ord</h3>
+                <p style="margin-bottom: 12px;">Skriv inn alle ord, ein per linje:</p>
+                <textarea id="classroomWords" class="classroom-input" placeholder="ord1&#10;ord2&#10;ord3&#10;..."></textarea>
+                
+                <div class="classroom-controls">
+                    <button id="checkWordsBtn" class="btn" style="font-size: 1.1rem; padding: 12px 24px;">SJEKK ORD</button>
+                    <button id="resetClassBtn" class="btn" style="background: var(--accent-orange);">NY RUNDE</button>
+                </div>
+                
+                <div id="classroom-results" style="margin-top: 24px;">
+                    <!-- Resultater vises her -->
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 24px;">
+                <button id="backToMenuBtn" class="btn">← TILBAKE TIL MENY</button>
+            </div>
+        </div>
+
+        <!-- Resultat-skjerm -->
+        <div id="screen-result" class="screen">
+            <h2>Runden er ferdig!</h2>
+            
+            <div id="result-content">
+                <p>Ditt ord:</p>
+                <div id="your-word" class="your-word">-</div>
+                <div id="your-score" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 16px;">-</div>
+            </div>
+            
+            <div class="result-section">
+                <div class="result-title">Dei 10 lengste orda som var mogelege:</div>
+                <div id="possible-words" class="possible-words">
+                    <!-- Fylles ut av JS -->
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 24px;">
+                <button id="playAgainBtn" class="btn" style="font-size: 1.2rem; padding: 14px 32px;">SPEL IGJEN</button>
+            </div>
+        </div>
+
+        <!-- Lastar -->
+        <div id="loading" class="loading" style="display: none;">
+            Lastar ordliste
+        </div>
+
+        <footer>
+            <p>🔒 Personvernvenleg — Inga sporing, kun localStorage | <a href="../index.html">← Tilbake til oversikta</a></p>
+        </footer>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/ui.js"></script>
+    <script>
+        // Hovedlogikk
+        let selectedTime = 60;
+        let currentMode = 'quick';
+        let currentLetters = [];
+        let playerWord = '';
+        let timerStarted = false;
+        let classroomTimerInterval = null;
+        
+        const VOWELS = ['a', 'e', 'i', 'o', 'u', 'æ', 'ø', 'å'];
+        
+        // Initialiser
+        document.addEventListener('DOMContentLoaded', async () => {
+            UI.init();
+            UI.showHistory();
+            UI.updateStats();
+            
+            // Last ordliste
+            document.getElementById('loading').style.display = 'block';
+            const loaded = await Game.loadWordList();
+            document.getElementById('loading').style.display = 'none';
+            
+            if (!loaded) {
+                alert('Kunne ikkje laste ordliste. Sjekk at fila norsk_ordliste.json finst.');
+            }
+        });
+        
+        // Modusveljar
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                currentMode = btn.dataset.mode;
+                
+                // Vis/skjul tidsveljar for klasseromsmodus
+                const timeSection = document.getElementById('time-section');
+                if (currentMode === 'classroom') {
+                    timeSection.style.display = 'none';
+                } else {
+                    timeSection.style.display = 'block';
+                }
+            });
+        });
+        
+        // Tidsveljar
+        document.querySelectorAll('.btn-time').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.btn-time').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedTime = parseInt(btn.dataset.time);
+
+                const classSelect = document.getElementById('classroom-time');
+                if (classSelect) {
+                    classSelect.value = String(selectedTime);
+                    updateClassroomTimerVisual(selectedTime);
+                }
+            });
+        });
+        
+        // Start knapp
+        document.getElementById('startBtn').addEventListener('click', () => {
+            if (Game.getWordListSize() === 0) {
+                alert('Ordlista er ikkje lasta enno. Vent litt og prøv igjen.');
+                return;
+            }
+            
+            if (currentMode === 'classroom') {
+                startClassroomMode();
+            } else if (currentMode === 'manual') {
+                startManualMode();
+            } else {
+                startQuickMode();
+            }
+        });
+        
+        // === RASK START MODUS ===
+        function startQuickMode() {
+            currentLetters = Game.generateLetters(4);
+            playerWord = '';
+            timerStarted = true;
+            
+            UI.showScreen('game');
+            UI.showLetters(currentLetters);
+            UI.clearInput();
+            UI.setInputEnabled(true);
+            UI.updateTimer(selectedTime);
+            document.getElementById('wordInput').focus();
+            
+            Game.setOnTimeUpdate((time) => UI.updateTimer(time));
+            Game.setOnGameEnd(() => endGame('game'));
+            Game.startTimer(selectedTime);
+        }
+        
+        // === MANUELL MODUS ===
+        function startManualMode() {
+            Game.resetLetters();
+            currentLetters = Game.getCurrentLetters();
+            playerWord = '';
+            timerStarted = false;
+            updateManualUI();
+            
+            UI.showScreen('manual');
+            UI.showLetters([]);
+            document.getElementById('wordInputManual').value = '';
+            document.getElementById('wordInputManual').disabled = true;
+            document.getElementById('submitBtnManual').disabled = true;
+            
+            // Oppdater timer-visning uten å starte
+            document.getElementById('timer-manual').textContent = selectedTime;
+            document.getElementById('timer-manual').classList.remove('warning', 'danger');
+        }
+        
+        // Manuell bokstavkontroller
+        document.getElementById('btnVowel').addEventListener('click', () => {
+            if (currentLetters.length < 9) {
+                Game.addLetter('vowel'); // Legger til i currentLetters internt
+                updateManualUI();
+            }
+        });
+        
+        document.getElementById('btnConsonant').addEventListener('click', () => {
+            if (currentLetters.length < 9) {
+                Game.addLetter('consonant'); // Legger til i currentLetters internt
+                updateManualUI();
+            }
+        });
+        
+        document.getElementById('btnUndo').addEventListener('click', () => {
+            if (currentLetters.length > 0) {
+                Game.removeLastLetter();
+                currentLetters = Game.getCurrentLetters();
+                updateManualUI();
+            }
+        });
+        
+        document.getElementById('startTimerBtn').addEventListener('click', () => {
+            if (currentLetters.length < 9) {
+                alert('Du må velje alle 9 bokstavane først!');
+                return;
+            }
+            if (timerStarted) return;
+            
+            timerStarted = true;
+            document.getElementById('btnVowel').disabled = true;
+            document.getElementById('btnConsonant').disabled = true;
+            document.getElementById('btnUndo').disabled = true;
+            document.getElementById('startTimerBtn').style.display = 'none';
+            document.getElementById('wordInputManual').disabled = false;
+            document.getElementById('submitBtnManual').disabled = false;
+            document.getElementById('wordInputManual').focus();
+            
+            Game.setOnTimeUpdate((time) => {
+                const timerEl = document.getElementById('timer-manual');
+                timerEl.textContent = time;
+                timerEl.classList.remove('warning', 'danger');
+                if (time <= 10) timerEl.classList.add('danger');
+                else if (time <= 20) timerEl.classList.add('warning');
+            });
+            Game.setOnGameEnd(() => endGame('manual'));
+            Game.startTimer(selectedTime);
+        });
+        
+        document.getElementById('submitBtnManual').addEventListener('click', () => {
+            const word = document.getElementById('wordInputManual').value.trim();
+            if (!word) return;
+            
+            playerWord = word;
+            const result = Game.validateWord(word);
+            
+            if (!result.valid) {
+                alert(result.reason);
+                return;
+            }
+            
+            endGame('manual');
+        });
+        
+        document.getElementById('giveUpBtnManual').addEventListener('click', () => {
+            endGame('manual');
+        });
+        
+        document.getElementById('wordInputManual').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('submitBtnManual').click();
+            }
+        });
+        
+        function updateManualUI() {
+            currentLetters = Game.getCurrentLetters();
+            const count = currentLetters.length;
+            document.getElementById('letter-count').textContent = count;
+
+            const container = document.getElementById('letters-container-manual');
+            container.innerHTML = '';
+            currentLetters.forEach(letter => {
+                const tile = document.createElement('div');
+                tile.className = 'letter-tile';
+                tile.textContent = letter.toUpperCase();
+                tile.dataset.letter = letter;
+                container.appendChild(tile);
+            });
+            
+            // Oppdater knappestatus
+            document.getElementById('btnVowel').disabled = count >= 9 || timerStarted;
+            document.getElementById('btnConsonant').disabled = count >= 9 || timerStarted;
+            document.getElementById('btnUndo').disabled = count === 0 || timerStarted;
+            
+            // Vis/skjul start timer knapp
+            const startBtn = document.getElementById('startTimerBtn');
+            if (count === 9 && !timerStarted) {
+                startBtn.style.display = 'inline-block';
+            } else if (timerStarted) {
+                startBtn.style.display = 'none';
+            }
+        }
+        
+        // === KLASSEROMSMODUS ===
+        function startClassroomMode() {
+            Game.resetLetters();
+            currentLetters = Game.getCurrentLetters();
+            stopClassroomCountdown();
+            const classSelect = document.getElementById('classroom-time');
+            if (classSelect) {
+                classSelect.value = String(selectedTime);
+            }
+            updateClassroomTimerVisual(selectedTime);
+            UI.showScreen('classroom');
+            updateClassroomUI();
+        }
+
+        function updateClassroomTimerVisual(seconds) {
+            const timerEl = document.getElementById('timer-classroom');
+            if (!timerEl) return;
+            timerEl.textContent = seconds;
+            timerEl.classList.remove('warning', 'danger');
+            if (seconds <= 10) timerEl.classList.add('danger');
+            else if (seconds <= 20) timerEl.classList.add('warning');
+        }
+
+        function stopClassroomCountdown() {
+            if (classroomTimerInterval) {
+                clearInterval(classroomTimerInterval);
+                classroomTimerInterval = null;
+            }
+        }
+
+        document.getElementById('classroom-time').addEventListener('change', (e) => {
+            selectedTime = parseInt(e.target.value);
+            updateClassroomTimerVisual(selectedTime);
+        });
+
+        document.getElementById('startClassTimerBtn').addEventListener('click', () => {
+            if (classroomTimerInterval) return;
+
+            const timerEl = document.getElementById('timer-classroom');
+            let timeLeft = parseInt(timerEl.textContent, 10);
+            if (Number.isNaN(timeLeft) || timeLeft <= 0) {
+                timeLeft = parseInt(document.getElementById('classroom-time').value, 10) || selectedTime;
+                updateClassroomTimerVisual(timeLeft);
+            }
+
+            classroomTimerInterval = setInterval(() => {
+                timeLeft--;
+                updateClassroomTimerVisual(timeLeft);
+                if (timeLeft <= 0) {
+                    stopClassroomCountdown();
+                }
+            }, 1000);
+        });
+
+        document.getElementById('stopClassTimerBtn').addEventListener('click', () => {
+            stopClassroomCountdown();
+        });
+
+        document.getElementById('resetClassTimerBtn').addEventListener('click', () => {
+            stopClassroomCountdown();
+            const resetTo = parseInt(document.getElementById('classroom-time').value, 10) || selectedTime;
+            updateClassroomTimerVisual(resetTo);
+        });
+        
+        document.getElementById('btnVowelClass').addEventListener('click', () => {
+            if (currentLetters.length < 9) {
+                Game.addLetter('vowel');
+                updateClassroomUI();
+            }
+        });
+        
+        document.getElementById('btnConsonantClass').addEventListener('click', () => {
+            if (currentLetters.length < 9) {
+                Game.addLetter('consonant');
+                updateClassroomUI();
+            }
+        });
+        
+        document.getElementById('btnUndoClass').addEventListener('click', () => {
+            if (currentLetters.length > 0) {
+                Game.removeLastLetter();
+                currentLetters = Game.getCurrentLetters();
+                updateClassroomUI();
+            }
+        });
+        
+        document.getElementById('btnClearClass').addEventListener('click', () => {
+            Game.resetLetters();
+            currentLetters = Game.getCurrentLetters();
+            document.getElementById('classroomWords').value = '';
+            document.getElementById('classroom-results').innerHTML = '';
+            updateClassroomUI();
+        });
+        
+        document.getElementById('checkWordsBtn').addEventListener('click', () => {
+            const text = document.getElementById('classroomWords').value.trim();
+            if (!text) {
+                alert('Ingen ord å sjekke!');
+                return;
+            }
+            
+            const words = text.split('\n').map(w => w.trim()).filter(w => w);
+            const results = Game.validateMultipleWords(words);
+            
+            displayClassroomResults(results);
+        });
+        
+        document.getElementById('resetClassBtn').addEventListener('click', () => {
+            Game.resetLetters();
+            currentLetters = Game.getCurrentLetters();
+            document.getElementById('classroomWords').value = '';
+            document.getElementById('classroom-results').innerHTML = '';
+            updateClassroomUI();
+        });
+        
+        document.getElementById('backToMenuBtn').addEventListener('click', () => {
+            stopClassroomCountdown();
+            UI.showScreen('menu');
+        });
+        
+        function updateClassroomUI() {
+            currentLetters = Game.getCurrentLetters();
+            const count = currentLetters.length;
+            document.getElementById('letter-count-class').textContent = count;
+            
+            // Oppdater bokstavvisning
+            const container = document.getElementById('letters-container-class');
+            container.innerHTML = '';
+            currentLetters.forEach(letter => {
+                const tile = document.createElement('div');
+                tile.className = 'letter-tile';
+                tile.textContent = letter.toUpperCase();
+                tile.style.background = VOWELS.includes(letter) ? 'var(--accent-pink)' : 'var(--accent-blue)';
+                container.appendChild(tile);
+            });
+            
+            // Oppdater knappestatus
+            document.getElementById('btnVowelClass').disabled = count >= 9;
+            document.getElementById('btnConsonantClass').disabled = count >= 9;
+            document.getElementById('btnUndoClass').disabled = count === 0;
+        }
+        
+        function displayClassroomResults(results) {
+            const container = document.getElementById('classroom-results');
+            container.innerHTML = '';
+            
+            if (results.length === 0) {
+                container.innerHTML = '<p style="text-align:center;">Ingen ord å vise</p>';
+                return;
+            }
+            
+            // Lag oversikt
+            const validCount = results.filter(r => r.valid).length;
+            const longestValid = results.filter(r => r.valid)[0];
+            
+            const summary = document.createElement('div');
+            summary.className = 'result-section';
+            summary.innerHTML = `
+                <div class="result-title">Oppsummering</div>
+                <p><strong>${validCount}</strong> av <strong>${results.length}</strong> ord er gyldige</p>
+                ${longestValid ? `<p style="margin-top:8px;">Lengste gyldige ord: <strong>${longestValid.word.toUpperCase()}</strong> (${longestValid.length} bokstaver)</p>` : ''}
+            `;
+            container.appendChild(summary);
+            
+            // Lag ordliste
+            const listDiv = document.createElement('div');
+            listDiv.className = 'word-list';
+            
+            results.forEach(result => {
+                const div = document.createElement('div');
+                div.className = 'word-item ' + (result.valid ? 'valid' : 'invalid');
+                div.innerHTML = `
+                    <span class="word-text">${result.word.toUpperCase()}</span>
+                    <span class="word-info">
+                        ${result.valid 
+                            ? `✓ ${result.length} bokst., ${result.score} poeng` 
+                            : `✗ ${result.reason || 'Ugyldig'}`
+                        }
+                    </span>
+                `;
+                listDiv.appendChild(div);
+            });
+            
+            container.appendChild(listDiv);
+            
+            // Vis også mulige ord
+            const possibleWords = Game.findLongestPossibleWords(10);
+            const possibleDiv = document.createElement('div');
+            possibleDiv.className = 'result-section';
+            possibleDiv.innerHTML = `
+                <div class="result-title">Dei 10 lengste orda som var mogelege:</div>
+                <div class="possible-words">
+                    ${possibleWords.map(w => `<span class="possible-word">${w.toUpperCase()} (${w.length})</span>`).join('')}
+                </div>
+            `;
+            container.appendChild(possibleDiv);
+        }
+        
+        // === FELLES FUNKSJONER ===
+        document.getElementById('submitBtn').addEventListener('click', () => {
+            const word = UI.getInputValue().trim();
+            if (!word) return;
+            
+            playerWord = word;
+            const result = Game.validateWord(word);
+            
+            if (!result.valid) {
+                UI.markInvalid();
+                return;
+            }
+            
+            endGame('game');
+        });
+        
+        document.getElementById('giveUpBtn').addEventListener('click', () => {
+            endGame('game');
+        });
+        
+        document.getElementById('playAgainBtn').addEventListener('click', () => {
+            UI.showScreen('menu');
+        });
+        
+        // Enter-tast i input
+        document.getElementById('wordInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') document.getElementById('submitBtn').click();
+        });
+        
+        // Oppdater bokstavmarkering ved tasting
+        document.getElementById('wordInput').addEventListener('input', (e) => {
+            UI.clearLetterMarks();
+            UI.markUsedLetters(e.target.value);
+        });
+        
+        function endGame(mode) {
+            Game.stopGame();
+            
+            let word, inputEl;
+            if (mode === 'game') {
+                inputEl = document.getElementById('wordInput');
+                UI.setInputEnabled(false);
+            } else if (mode === 'manual') {
+                inputEl = document.getElementById('wordInputManual');
+            }
+            
+            word = playerWord || (inputEl ? inputEl.value.trim() : '');
+            
+            const result = Game.validateWord(word);
+            const score = result.valid ? result.score : 0;
+            
+            // Lagre (kun i quick/manual modus)
+            if (result.valid && mode !== 'classroom') {
+                Storage.saveHighScore(score);
+                Storage.saveToHistory(word, Game.getCurrentLetters(), score);
+            }
+            
+            // Finn lengste mogelege ord
+            const possibleWords = Game.findLongestPossibleWords(10);
+            
+            // Vis resultat
+            UI.showResult(word, result.valid, score, possibleWords);
+            UI.showScreen('result');
+        }
+    </script>
+</body>
+</html>

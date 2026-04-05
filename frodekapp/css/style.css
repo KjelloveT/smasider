@@ -193,9 +193,9 @@ h1, h2, h3 {
 }
 
 .btn-primary { background: #4CAF50; color: #fff; }
-.tag-subject { background: #3498DB; color: #fff; }
+.tag-subject { background: #2C3E50; color: #fff; }
 .tag-count   { background: #FDFD96; color: #000; }
-.tag-local   { background: #8B5CF6; color: #fff; }
+.tag-local   { background: #2C3E50; color: #fff; }
 .btn-yellow  { background: #FFDB58; }
 .btn-purple  { background: #C4A1FF; }
 .btn-small {
@@ -520,7 +520,7 @@ select.form-input {
 
 .tag-count   { background: #FDFD96; }
 .tag-time    { background: #87CEEB; }
-.tag-subject { background: #BAFCA2; }
+.tag-subject { background: #2C3E50; }
 
 /* ── HOST SCREEN (dark theme) ── */
 .host-question-display {
