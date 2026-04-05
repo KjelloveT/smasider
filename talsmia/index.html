@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talsmia - Countdown med tal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔢 Talsmia</h1>
+            <p class="subtitle">Countdown med tal: kom nærast måltalet med + − × ÷</p>
+        </header>
+
+        <div id="screen-menu" class="screen active">
+            <h2>Vel spelemodus</h2>
+            <div class="mode-selector">
+                <button class="btn mode-btn selected" data-mode="quick">⚡ Rask start</button>
+                <button class="btn mode-btn" data-mode="manual">🎮 Vel sjølv</button>
+                <button class="btn mode-btn" data-mode="classroom">🏫 Klasserom</button>
+            </div>
+
+            <div id="time-section">
+                <h3>Vel tidsbegrensing</h3>
+                <div class="time-selector">
+                    <button class="btn btn-time" data-time="30">30s</button>
+                    <button class="btn btn-time" data-time="45">45s</button>
+                    <button class="btn btn-time selected" data-time="60">60s</button>
+                    <button class="btn btn-time" data-time="90">90s</button>
+                    <button class="btn btn-time" data-time="120">120s</button>
+                    <button class="btn btn-time" data-time="inf">Ubegrensa</button>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin: 26px 0;">
+                <button id="startBtn" class="btn" style="font-size:1.2rem; padding:16px 34px;">START SPEL</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span id="stat-highscore" class="stat-value">0</span>
+                    <span class="stat-label">Toppscore</span>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 30px;">Dine beste rundar</h3>
+            <div id="history-list" class="history-list">
+                <p style="text-align:center;color:#666">Ingen rundar lagra ennå</p>
+            </div>
+        </div>
+
+        <div id="screen-game" class="screen">
+            <div class="timer-container">
+                <div id="timer">60</div>
+            </div>
+
+            <div class="target-box">
+                <div class="target-label">MÅL</div>
+                <div id="target-game" class="target-value">---</div>
+            </div>
+
+            <div id="numbers-container-game" class="numbers-container"></div>
+
+            <div class="expr-input">
+                <input type="text" id="exprInput" placeholder="Døme: (100+8)*7" autocomplete="off">
+                <button id="submitBtn" class="btn">SJEKK</button>
+            </div>
+
+            <div style="text-align:center; margin-top: 14px;">
+                <button id="giveUpBtn" class="btn" style="background: var(--accent-pink);">GJE OPP</button>
+            </div>
+        </div>
+
+        <div id="screen-manual" class="screen">
+            <div class="timer-container">
+                <div id="timer-manual">60</div>
+            </div>
+
+            <div class="target-box">
+                <div class="target-label">MÅL</div>
+                <div id="target-manual" class="target-value">---</div>
+            </div>
+
+            <div class="count-display">Tal: <span id="number-count">0</span>/6</div>
+            <div id="numbers-container-manual" class="numbers-container"></div>
+
+            <div class="number-controls">
+                <button id="btnLarge" class="btn" style="background:var(--accent-blue)">STORT TAL</button>
+                <button id="btnSmall" class="btn" style="background:var(--accent-green)">SMÅTT TAL</button>
+                <button id="btnUndo" class="btn" style="background:var(--accent-orange)">↩️ ANGRE</button>
+            </div>
+
+            <div class="expr-input">
+                <input type="text" id="exprInputManual" placeholder="Døme: (75-8)*3" autocomplete="off">
+                <button id="submitBtnManual" class="btn">SJEKK</button>
+            </div>
+
+            <div style="text-align:center; margin-top: 14px;">
+                <button id="startTimerBtn" class="btn" style="background: var(--accent-green);">START TID ⏱️</button>
+                <button id="giveUpBtnManual" class="btn" style="background: var(--accent-pink);">GJE OPP</button>
+            </div>
+        </div>
+
+        <div id="screen-classroom" class="screen">
+            <h2>Klasseromsmodus</h2>
+            <p style="text-align:left; margin-bottom:14px; font-size:0.92rem;">Trekk tal på tavla. Elevane skriv eigne uttrykk.</p>
+
+            <div class="timer-container">
+                <div id="timer-classroom">60</div>
+            </div>
+
+            <div class="classroom-timer-controls">
+                <label for="classroom-time"><strong>Tid:</strong></label>
+                <select id="classroom-time" class="btn" style="padding:8px 12px;">
+                    <option value="30">30s</option>
+                    <option value="45">45s</option>
+                    <option value="60" selected>60s</option>
+                    <option value="90">90s</option>
+                    <option value="120">120s</option>
+                    <option value="inf">Ubegrensa</option>
+                </select>
+                <button id="startClassTimerBtn" class="btn" style="background: var(--accent-green);">START NEDTELLING</button>
+                <button id="stopClassTimerBtn" class="btn" style="background: var(--accent-pink);">STOPP</button>
+                <button id="resetClassTimerBtn" class="btn" style="background: var(--accent-orange);">NULLSTILL TID</button>
+            </div>
+
+            <div class="target-box hidden-target" id="target-box-class">
+                <div class="target-label">MÅL</div>
+                <div id="target-class" class="target-value">---</div>
+            </div>
+
+            <div class="count-display">Tal: <span id="number-count-class">0</span>/6</div>
+            <div id="numbers-container-class" class="numbers-container"></div>
+
+            <div class="number-controls">
+                <button id="btnLargeClass" class="btn" style="background:var(--accent-blue)">STORT TAL</button>
+                <button id="btnSmallClass" class="btn" style="background:var(--accent-green)">SMÅTT TAL</button>
+                <button id="btnUndoClass" class="btn" style="background:var(--accent-orange)">↩️ ANGRE</button>
+                <button id="btnClearClass" class="btn" style="background:var(--accent-pink)">🗑️ TØM</button>
+            </div>
+
+            <div style="margin-top: 30px; border-top: 3px solid #000; padding-top: 20px;">
+                <h3>Sjekk elevane sine uttrykk</h3>
+                <p style="margin-bottom: 10px;">Skriv inn eitt uttrykk per linje:</p>
+                <textarea id="classroomExpr" class="classroom-input" placeholder="(100-8)*7&#10;(75+25)*6"></textarea>
+
+                <div class="classroom-controls">
+                    <button id="checkExprBtn" class="btn" style="font-size: 1.05rem; padding: 12px 24px;">SJEKK UTTRYKK</button>
+                    <button id="resetClassBtn" class="btn" style="background: var(--accent-orange);">NY RUNDE</button>
+                </div>
+
+                <div id="classroom-results" style="margin-top: 20px;"></div>
+
+                <div style="margin-top: 14px;">
+                    <button id="toggleClassSolutionsBtn" class="btn">VIS LØYSINGSFORSLAG</button>
+                </div>
+                <div id="class-solver-wrap" style="display:none; margin-top: 14px;">
+                    <div class="result-section">
+                        <div class="result-title">Moglege løysingar på oppgåva</div>
+                        <div id="class-solver-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 24px;">
+                <button id="backToMenuBtn" class="btn">← TILBAKE TIL MENY</button>
+            </div>
+        </div>
+
+        <div id="screen-result" class="screen">
+            <h2>Runden er ferdig!</h2>
+
+            <div id="result-content" class="result-hero">
+                <div class="result-metrics">
+                    <div class="metric-card metric-target">
+                        <div class="metric-label">Mål</div>
+                        <div id="result-target" class="metric-value">-</div>
+                    </div>
+                    <div class="metric-card metric-value-box">
+                        <div class="metric-label">Din verdi</div>
+                        <div id="result-value" class="metric-value">-</div>
+                    </div>
+                    <div class="metric-card metric-diff">
+                        <div class="metric-label">Avvik</div>
+                        <div id="result-diff" class="metric-value">-</div>
+                    </div>
+                    <div class="metric-card metric-points">
+                        <div class="metric-label">Poeng</div>
+                        <div id="result-points" class="metric-value">-</div>
+                    </div>
+                </div>
+
+                <div class="expression-box">
+                    <div class="expression-label">Ditt uttrykk</div>
+                    <div id="your-expression" class="your-expression">-</div>
+                </div>
+
+                <div id="your-score" class="result-note">-</div>
+            </div>
+
+            <div style="margin-top: 12px; margin-bottom: 12px;">
+                <button id="toggleSolutionsBtn" class="btn">VIS LØYSINGSFORSLAG</button>
+            </div>
+
+            <div id="result-solver-wrap" style="display:none;">
+                <div class="result-section">
+                    <div id="solver-headline" class="result-title">Moglege løysingar</div>
+                    <div id="possible-solutions"></div>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:24px;">
+                <button id="playAgainBtn" class="btn" style="font-size:1.2rem; padding:14px 32px;">SPEL IGJEN</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>🔒 Personvernvenleg — Inga sporing, kun localStorage | <a href="../index.html">← Tilbake til oversikta</a></p>
+        </footer>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/ui.js"></script>
+    <script>
+        let selectedTime = 60;
+        let currentMode = 'quick';
+        let currentNumbers = [];
+        let currentTarget = 0;
+        let playerExpression = '';
+        let timerStarted = false;
+        let classroomTimerInterval = null;
+        let lastSolver = null;
+        let lastClassSolver = null;
+
+        function parseTimeValue(value) {
+            return value === 'inf' ? Infinity : parseInt(value, 10);
+        }
+
+        function formatTimeValue(seconds) {
+            return Number.isFinite(seconds) ? String(seconds) : '∞';
+        }
+
+        function revealClassroomTarget(show) {
+            const targetBox = document.getElementById('target-box-class');
+            if (!targetBox) return;
+            targetBox.classList.toggle('hidden-target', !show);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            UI.init();
+            UI.showHistory();
+            UI.updateStats();
+            wireEvents();
+        });
+
+        function wireEvents() {
+            document.querySelectorAll('.mode-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.mode-btn').forEach((b) => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    currentMode = btn.dataset.mode;
+                    const timeSection = document.getElementById('time-section');
+                    timeSection.style.display = currentMode === 'classroom' ? 'none' : 'block';
+                });
+            });
+
+            document.querySelectorAll('.btn-time').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.btn-time').forEach((b) => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    selectedTime = parseTimeValue(btn.dataset.time);
+                    document.getElementById('classroom-time').value = btn.dataset.time;
+                    updateClassroomTimerVisual(selectedTime);
+                });
+            });
+
+            document.getElementById('startBtn').addEventListener('click', () => {
+                if (currentMode === 'classroom') startClassroomMode();
+                else if (currentMode === 'manual') startManualMode();
+                else startQuickMode();
+            });
+
+            document.getElementById('submitBtn').addEventListener('click', () => {
+                playerExpression = document.getElementById('exprInput').value.trim();
+                endGame('game');
+            });
+            document.getElementById('giveUpBtn').addEventListener('click', () => {
+                playerExpression = '';
+                endGame('game');
+            });
+
+            document.getElementById('btnLarge').addEventListener('click', () => {
+                Game.addNumber('large');
+                updateManualUI();
+            });
+            document.getElementById('btnSmall').addEventListener('click', () => {
+                Game.addNumber('small');
+                updateManualUI();
+            });
+            document.getElementById('btnUndo').addEventListener('click', () => {
+                Game.removeLastNumber();
+                updateManualUI();
+            });
+
+            document.getElementById('startTimerBtn').addEventListener('click', () => {
+                if (timerStarted || currentNumbers.length !== 6) return;
+                timerStarted = true;
+                Game.setOnTimeUpdate((s) => updateModeTimer('timer-manual', s));
+                Game.setOnGameEnd(() => endGame('manual'));
+                Game.startTimer(selectedTime);
+            });
+
+            document.getElementById('submitBtnManual').addEventListener('click', () => {
+                playerExpression = document.getElementById('exprInputManual').value.trim();
+                endGame('manual');
+            });
+            document.getElementById('giveUpBtnManual').addEventListener('click', () => {
+                playerExpression = '';
+                endGame('manual');
+            });
+
+            document.getElementById('classroom-time').addEventListener('change', (e) => {
+                selectedTime = parseTimeValue(e.target.value);
+                updateClassroomTimerVisual(selectedTime);
+            });
+
+            document.getElementById('startClassTimerBtn').addEventListener('click', startClassroomCountdown);
+            document.getElementById('stopClassTimerBtn').addEventListener('click', stopClassroomCountdown);
+            document.getElementById('resetClassTimerBtn').addEventListener('click', () => {
+                stopClassroomCountdown();
+                updateClassroomTimerVisual(selectedTime);
+            });
+
+            document.getElementById('btnLargeClass').addEventListener('click', () => {
+                Game.addNumber('large');
+                updateClassroomUI();
+            });
+            document.getElementById('btnSmallClass').addEventListener('click', () => {
+                Game.addNumber('small');
+                updateClassroomUI();
+            });
+            document.getElementById('btnUndoClass').addEventListener('click', () => {
+                Game.removeLastNumber();
+                updateClassroomUI();
+            });
+            document.getElementById('btnClearClass').addEventListener('click', () => {
+                Game.resetNumbers();
+                currentTarget = Game.generateTarget();
+                updateClassroomUI();
+            });
+
+            document.getElementById('checkExprBtn').addEventListener('click', checkClassroomExpressions);
+            document.getElementById('resetClassBtn').addEventListener('click', startClassroomMode);
+
+            document.getElementById('toggleSolutionsBtn').addEventListener('click', () => {
+                const wrap = document.getElementById('result-solver-wrap');
+                const btn = document.getElementById('toggleSolutionsBtn');
+                const opening = wrap.style.display === 'none';
+                wrap.style.display = opening ? 'block' : 'none';
+                btn.textContent = opening ? 'SKJUL LØYSINGSFORSLAG' : 'VIS LØYSINGSFORSLAG';
+            });
+
+            document.getElementById('toggleClassSolutionsBtn').addEventListener('click', () => {
+                const wrap = document.getElementById('class-solver-wrap');
+                const btn = document.getElementById('toggleClassSolutionsBtn');
+                const opening = wrap.style.display === 'none';
+                wrap.style.display = opening ? 'block' : 'none';
+                btn.textContent = opening ? 'SKJUL LØYSINGSFORSLAG' : 'VIS LØYSINGSFORSLAG';
+            });
+
+            document.getElementById('backToMenuBtn').addEventListener('click', () => {
+                stopClassroomCountdown();
+                UI.showScreen('menu');
+            });
+
+            document.getElementById('playAgainBtn').addEventListener('click', () => {
+                playerExpression = '';
+                UI.showHistory();
+                UI.updateStats();
+                UI.showScreen('menu');
+            });
+        }
+
+        function startQuickMode() {
+            const round = Game.generateRound(2);
+            currentNumbers = round.numbers;
+            currentTarget = round.target;
+            playerExpression = '';
+
+            UI.setTarget('target-game', currentTarget);
+            UI.showNumbers('numbers-container-game', currentNumbers);
+            document.getElementById('exprInput').value = '';
+
+            Game.setOnTimeUpdate(UI.updateTimer);
+            Game.setOnGameEnd(() => endGame('game'));
+            Game.startTimer(selectedTime);
+
+            UI.showScreen('game');
+        }
+
+        function startManualMode() {
+            Game.resetNumbers();
+            currentTarget = Game.generateTarget();
+            currentNumbers = Game.getCurrentNumbers();
+            playerExpression = '';
+            timerStarted = false;
+            Game.stopGame();
+
+            updateModeTimer('timer-manual', selectedTime);
+            UI.setTarget('target-manual', currentTarget);
+            document.getElementById('exprInputManual').value = '';
+            updateManualUI();
+            UI.showScreen('manual');
+        }
+
+        function updateManualUI() {
+            currentNumbers = Game.getCurrentNumbers();
+            UI.showNumbers('numbers-container-manual', currentNumbers);
+            document.getElementById('number-count').textContent = String(currentNumbers.length);
+
+            const canAdd = currentNumbers.length < 6;
+            document.getElementById('btnLarge').disabled = !canAdd;
+            document.getElementById('btnSmall').disabled = !canAdd;
+            document.getElementById('btnUndo').disabled = currentNumbers.length === 0;
+            document.getElementById('startTimerBtn').disabled = currentNumbers.length !== 6 || timerStarted;
+        }
+
+        function startClassroomMode() {
+            stopClassroomCountdown();
+            Game.resetNumbers();
+            currentTarget = Game.generateTarget();
+            updateClassroomTimerVisual(selectedTime);
+            revealClassroomTarget(false);
+            document.getElementById('classroomExpr').value = '';
+            document.getElementById('classroom-results').innerHTML = '';
+            document.getElementById('class-solver-list').innerHTML = '';
+            document.getElementById('class-solver-wrap').style.display = 'none';
+            document.getElementById('toggleClassSolutionsBtn').textContent = 'VIS LØYSINGSFORSLAG';
+            lastClassSolver = null;
+            updateClassroomUI();
+            UI.showScreen('classroom');
+        }
+
+        function updateClassroomUI() {
+            currentNumbers = Game.getCurrentNumbers();
+            UI.setTarget('target-class', currentTarget);
+            UI.showNumbers('numbers-container-class', currentNumbers);
+            document.getElementById('number-count-class').textContent = String(currentNumbers.length);
+
+            const canAdd = currentNumbers.length < 6;
+            document.getElementById('btnLargeClass').disabled = !canAdd;
+            document.getElementById('btnSmallClass').disabled = !canAdd;
+            document.getElementById('btnUndoClass').disabled = currentNumbers.length === 0;
+        }
+
+        function updateModeTimer(timerId, seconds) {
+            const timerEl = document.getElementById(timerId);
+            timerEl.textContent = formatTimeValue(seconds);
+            timerEl.classList.remove('warning', 'danger');
+            if (!Number.isFinite(seconds)) return;
+            if (seconds <= 10) timerEl.classList.add('danger');
+            else if (seconds <= 20) timerEl.classList.add('warning');
+        }
+
+        function updateClassroomTimerVisual(seconds) {
+            updateModeTimer('timer-classroom', seconds);
+        }
+
+        function startClassroomCountdown() {
+            if (classroomTimerInterval) return;
+
+            revealClassroomTarget(true);
+
+            if (!Number.isFinite(selectedTime)) {
+                updateClassroomTimerVisual(Infinity);
+                return;
+            }
+
+            let timeLeft = parseInt(document.getElementById('timer-classroom').textContent, 10);
+            if (Number.isNaN(timeLeft) || timeLeft <= 0) timeLeft = selectedTime;
+
+            classroomTimerInterval = setInterval(() => {
+                timeLeft -= 1;
+                updateClassroomTimerVisual(timeLeft);
+                if (timeLeft <= 0) {
+                    stopClassroomCountdown();
+                }
+            }, 1000);
+        }
+
+        function stopClassroomCountdown() {
+            if (classroomTimerInterval) {
+                clearInterval(classroomTimerInterval);
+                classroomTimerInterval = null;
+            }
+        }
+
+        function checkClassroomExpressions() {
+            const text = document.getElementById('classroomExpr').value;
+            const lines = text.split('\n').map((line) => line.trim()).filter(Boolean);
+
+            if (currentNumbers.length !== 6) {
+                alert('Trekk seks tal først.');
+                return;
+            }
+
+            const results = Game.validateMultipleExpressions(lines, currentTarget);
+            const solver = Game.solveRound(currentTarget, 10);
+            lastClassSolver = solver;
+            UI.showSolverInContainer('class-solver-list', solver);
+
+            document.getElementById('class-solver-wrap').style.display = 'none';
+            document.getElementById('toggleClassSolutionsBtn').textContent = 'VIS LØYSINGSFORSLAG';
+
+            const container = document.getElementById('classroom-results');
+            container.innerHTML = '';
+
+            if (results.length === 0) {
+                container.innerHTML = '<p>Ingen uttrykk å sjekke.</p>';
+                return;
+            }
+
+            results.forEach((r) => {
+                const item = document.createElement('div');
+                item.className = 'solution-item';
+                if (r.valid) {
+                    item.textContent = `${r.expression} = ${r.value} (avvik ${r.diff}, ${r.score}p)`;
+                } else {
+                    item.textContent = `${r.expression} → ugyldig (${r.reason})`;
+                }
+                container.appendChild(item);
+            });
+        }
+
+        function endGame(mode) {
+            stopClassroomCountdown();
+            Game.stopGame();
+
+            let inputEl = null;
+            if (mode === 'game') inputEl = document.getElementById('exprInput');
+            if (mode === 'manual') inputEl = document.getElementById('exprInputManual');
+
+            const expression = playerExpression || (inputEl ? inputEl.value.trim() : '');
+            const validation = Game.validateExpression(expression, currentTarget);
+            const solver = Game.solveRound(currentTarget, 10);
+            lastSolver = solver;
+
+            if (validation.valid && mode !== 'classroom') {
+                Storage.saveHighScore(validation.score);
+                Storage.saveToHistory({
+                    expression,
+                    value: validation.value,
+                    diff: validation.diff,
+                    score: validation.score,
+                    target: currentTarget,
+                    numbers: [...currentNumbers]
+                });
+            }
+
+            UI.showResult({
+                expression,
+                valid: validation.valid,
+                value: validation.value,
+                diff: validation.diff,
+                score: validation.score,
+                target: currentTarget,
+                solver
+            });
+
+            document.getElementById('result-solver-wrap').style.display = 'none';
+            document.getElementById('toggleSolutionsBtn').textContent = 'VIS LØYSINGSFORSLAG';
+
+            UI.showScreen('result');
+        }
+    </script>
+</body>
+</html>

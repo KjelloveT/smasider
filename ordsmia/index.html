@@ -348,11 +348,17 @@
                 <div id="your-word" class="your-word">-</div>
                 <div id="your-score" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 16px;">-</div>
             </div>
-            
-            <div class="result-section">
-                <div class="result-title">Dei 10 lengste orda som var mogelege:</div>
-                <div id="possible-words" class="possible-words">
-                    <!-- Fylles ut av JS -->
+
+            <div style="text-align:center; margin-bottom: 12px;">
+                <button id="toggleOrdsmiaSolutionsBtn" class="btn">VIS LØYSINGAR</button>
+            </div>
+
+            <div id="ordsmia-solutions-wrap" style="display:none;">
+                <div class="result-section">
+                    <div class="result-title">Dei 10 lengste orda som var mogelege:</div>
+                    <div id="possible-words" class="possible-words">
+                        <!-- Fylles ut av JS -->
+                    </div>
                 </div>
             </div>
             
@@ -775,8 +781,16 @@
             
             container.appendChild(listDiv);
             
-            // Vis også mulige ord
+            // Vis også mulige ord (manuell vis/skjul)
             const possibleWords = Game.findLongestPossibleWords(10);
+            const toggleBtn = document.createElement('button');
+            toggleBtn.className = 'btn';
+            toggleBtn.style.marginTop = '16px';
+            toggleBtn.textContent = 'VIS MOGLEGE LØYSINGAR';
+            container.appendChild(toggleBtn);
+
+            const possibleWrap = document.createElement('div');
+            possibleWrap.style.display = 'none';
             const possibleDiv = document.createElement('div');
             possibleDiv.className = 'result-section';
             possibleDiv.innerHTML = `
@@ -785,7 +799,15 @@
                     ${possibleWords.map(w => `<span class="possible-word">${w.toUpperCase()} (${w.length})</span>`).join('')}
                 </div>
             `;
-            container.appendChild(possibleDiv);
+
+            possibleWrap.appendChild(possibleDiv);
+            container.appendChild(possibleWrap);
+
+            toggleBtn.addEventListener('click', () => {
+                const opening = possibleWrap.style.display === 'none';
+                possibleWrap.style.display = opening ? 'block' : 'none';
+                toggleBtn.textContent = opening ? 'SKJUL MOGLEGE LØYSINGAR' : 'VIS MOGLEGE LØYSINGAR';
+            });
         }
         
         // === FELLES FUNKSJONER ===
@@ -809,7 +831,17 @@
         });
         
         document.getElementById('playAgainBtn').addEventListener('click', () => {
+            document.getElementById('ordsmia-solutions-wrap').style.display = 'none';
+            document.getElementById('toggleOrdsmiaSolutionsBtn').textContent = 'VIS LØYSINGAR';
             UI.showScreen('menu');
+        });
+
+        document.getElementById('toggleOrdsmiaSolutionsBtn').addEventListener('click', () => {
+            const wrap = document.getElementById('ordsmia-solutions-wrap');
+            const btn = document.getElementById('toggleOrdsmiaSolutionsBtn');
+            const opening = wrap.style.display === 'none';
+            wrap.style.display = opening ? 'block' : 'none';
+            btn.textContent = opening ? 'SKJUL LØYSINGAR' : 'VIS LØYSINGAR';
         });
         
         // Enter-tast i input
@@ -850,6 +882,8 @@
             
             // Vis resultat
             UI.showResult(word, result.valid, score, possibleWords);
+            document.getElementById('ordsmia-solutions-wrap').style.display = 'none';
+            document.getElementById('toggleOrdsmiaSolutionsBtn').textContent = 'VIS LØYSINGAR';
             UI.showScreen('result');
         }
     </script>
