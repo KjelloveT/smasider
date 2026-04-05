@@ -474,33 +474,33 @@
         <div class="section-label">Kviss</div>
         <div class="cards-grid">
 
-            <a href="quiz/quiz-host.html" class="card c-purple">
-                <span class="card-icon">�</span>
-                <h2 class="card-title">Kviss Host</h2>
-                <p class="card-desc">Start live quiz for klasserommet. Fullt personvern og fungerer på lokalt nettverk.</p>
-                <span class="card-btn">Start kviss →</span>
+            <a href="frodekapp/index.html" class="card c-purple">
+                <span class="card-icon">🧠</span>
+                <h2 class="card-title">Frødekapp</h2>
+                <p class="card-desc">Kahoot-aktig quiz for klasserommet! Live fleirspelar, soloøving og quiz-editor — alt på nynorsk.</p>
+                <span class="card-btn">Opne →</span>
             </a>
 
-            <a href="quiz/quiz-simple.html" class="card c-green">
-                <span class="card-icon">🎯</span>
-                <h2 class="card-title">Kviss (Enkel)</h2>
-                <p class="card-desc">Kun nettlesar påkrevd. Elevar kan koble til frå separate enheter på same WiFi.</p>
+            <a href="frodekapp/host.html" class="card c-green">
+                <span class="card-icon">🎮</span>
+                <h2 class="card-title">Start Live-Quiz</h2>
+                <p class="card-desc">Start ein quiz og del romkoden med elevane. Spel på tvers av einingar i sanntid.</p>
                 <span class="card-btn">Start no →</span>
             </a>
 
-            <a href="quiz/quiz-join.html" class="card c-teal">
+            <a href="frodekapp/play.html" class="card c-teal">
                 <span class="card-icon">👥</span>
-                <h2 class="card-title">Delta i Kviss</h2>
-                <p class="card-desc">Bli med i live quiz. Skriv inn rom-kode og delta med eigen enhet.</p>
-                <span class="card-btn">Delta nå →</span>
+                <h2 class="card-title">Delta i Quiz</h2>
+                <p class="card-desc">Bli med i ein live-quiz. Skriv inn romkode og delta med eigen enhet.</p>
+                <span class="card-btn">Delta no →</span>
             </a>
 
-            <div class="card c-sage disabled">
+            <a href="frodekapp/editor.html" class="card c-sage">
                 <span class="card-icon">📝</span>
-                <h2 class="card-title">Quiz Editor</h2>
-                <p class="card-desc">Lag dine egne quiz og spørsmål. Kommer snart!</p>
-                <span class="coming-tag">Kjem snart</span>
-            </div>
+                <h2 class="card-title">Quiz-editor</h2>
+                <p class="card-desc">Lag dine eigne quiz-ar med visuell editor. Last ned og del med andre!</p>
+                <span class="card-btn">Lag quiz →</span>
+            </a>
 
         </div>
 
@@ -549,13 +549,13 @@
                 <h3>Dine data er trygge</h3>
                 <ul>
                     <li><strong>Alt køyrer lokalt:</strong> All spel- og verktøylogikk køyrer i nettlesaren din. Ingen brukardata blir sende til nokon tenar.</li>
-                    <li><strong>Ingen cookies eller sporing:</strong> Vi bruker ingen cookies, analytics eller sporingsverktøy.</li>
+                    <li><strong>Ingen cookies eller sporing:</strong> Vi brukar ingen cookies, analytics eller sporingsverktøy.</li>
                     <li><strong>Open kjeldekode:</strong> All kode er synleg og kan inspiserast av kven som helst.</li>
                     <li><strong>Ingen innlogging:</strong> Alt er gratis og krevjer ingen brukarregistrering.</li>
                 </ul>
 
                 <div class="privacy-highlight">
-                    💡 <strong>Kort oppsummert:</strong> Vi bruker ingen cookies, ingen sporing og ingen ekstern analyse. Nokre spel lagrar avgrensa data lokalt i nettlesaren din (sjå detaljar under). Denne informasjonen forlèt aldri eininga di.
+                    💡 <strong>Kort oppsummert:</strong> Vi brukar ingen cookies, ingen sporing og ingen ekstern analyse. Nokre spel lagrar avgrensa data lokalt i nettlesaren din (sjå detaljar under). Denne informasjonen forlèt aldri eininga di.
                 </div>
 
                 <div class="accordion">
@@ -577,7 +577,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Brukast på denne sida?</strong></td>
-                                    <td>❌ Nei, vi bruker <strong>ingen cookies</strong></td>
+                                    <td>❌ Nei, vi brukar <strong>ingen cookies</strong></td>
                                     <td>✅ Ja, berre for å hugse toppscore og kortsamlingar lokalt</td>
                                 </tr>
                             </table>
@@ -617,6 +617,20 @@
                             <p><strong>Ingen data blir lagra.</strong> Spelet bruker ikkje localStorage eller nokon annan form for lagring.</p>
                             <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline etter at sida er lasta.</p>
 
+                            <h4 style="margin-top:24px;margin-bottom:12px;">🧠 Frødekapp (Kviss)</h4>
+                            <table class="data-table">
+                                <tr><th>Kva</th><th>Kvifor</th></tr>
+                                <tr>
+                                    <td>Quiz-editor-utkast (spørsmål, alternativ)</td>
+                                    <td>For å lagre utkast til quiz-ar du jobbar med</td>
+                                </tr>
+                                <tr>
+                                    <td>Sist brukte kallenamn</td>
+                                    <td>For å sleppe å skrive namn kvar gong (valfritt)</td>
+                                </tr>
+                            </table>
+                            <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Live-quiz brukar <strong>PeerJS</strong> for direkte kommunikasjon mellom nettlesarar (WebRTC). PeerJS sin signalserver (0.peerjs.com) ser berre IP-adresser i ~2 sekund under tilkopling — aldri quiz-innhald, namn eller svar. All quiz-data går direkte mellom nettlesarane (P2P, kryptert).</p>
+
                             <h4 style="margin-top:24px;margin-bottom:12px;">🖼️ BiletFlett</h4>
                             <p><strong>Ingen data blir lagra.</strong> Bilete du lastar opp blir berre lese inn i nettlesaren sitt minne via FileReader API. Når du lukkar sida, er alt borte.</p>
                             <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta.</p>
@@ -624,16 +638,6 @@
                             <h4 style="margin-top:24px;margin-bottom:12px;">🎨 Reinskore bilete</h4>
                             <p><strong>Ingen data blir lagra.</strong> Bilete du lastar opp blir berre behandla i nettlesaren sitt minne. Ingenting blir lagra når du lukkar sida.</p>
                             <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta.</p>
-
-                            <h4 style="margin-top:24px;margin-bottom:12px;">🎯 Kviss</h4>
-                            <table class="data-table">
-                                <tr><th>Kva</th><th>Kvifor</th></tr>
-                                <tr>
-                                    <td>Quiz-resultater (namn, poeng, svar-tid)</td>
-                                    <td>For å vise live leaderboard og quiz-statistikk</td>
-                                </tr>
-                            </table>
-                            <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Kviss fungerer heilt offline på lokalt nettverk. All data forlèt aldri klasserommet.</p>
 
                             <h4 style="margin-top:24px;margin-bottom:12px;">🪑 Klassekart</h4>
                             <table class="data-table">
@@ -656,7 +660,7 @@
                 <ul>
                     <li>Dei er GDPR-kompatible og følgjer norske personvernlover</li>
                     <li>Ingen elevdata blir lagra på tenarar eller delt med tredjepartar</li>
-                    <li>Dei fleste fungerer på skolen sitt nettverk utan ekstern tilgang (unntak: Heimsank treng internett for kortbilete)</li>
+                    <li>Dei fleste fungerer på skolen sitt nettverk utan ekstern tilgang (unntak: Heimsank treng internett for kortbilete, Frødekapp brukar PeerJS signalserver for live-quiz)</li>
                     <li>Dei er gratis og krevjer ingen innlogging</li>
                 </ul>
             </div>

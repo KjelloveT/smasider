@@ -1,0 +1,70 @@
+{
+  "id": "gangetabell",
+  "title": "Gangetabellen",
+  "description": "Øv på gangetabellen frå 2 til 10 — kor rask er du?",
+  "author": "Frødekapp",
+  "created": "2025-04-05",
+  "tags": ["matte", "ganging", "3.-5. trinn"],
+  "questions": [
+    {
+      "question": "Kva er 7 × 8?",
+      "options": ["54", "56", "58", "64"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "question": "Kva er 6 × 9?",
+      "options": ["45", "48", "54", "56"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "question": "Kva er 8 × 4?",
+      "options": ["28", "32", "36", "40"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "question": "Kva er 9 × 9?",
+      "options": ["72", "81", "89", "90"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "question": "Kva er 3 × 7?",
+      "options": ["18", "21", "24", "27"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "question": "Kva er 5 × 6?",
+      "options": ["25", "28", "30", "35"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "question": "Kva er 8 × 7?",
+      "options": ["48", "54", "56", "63"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "question": "Kva er 4 × 9?",
+      "options": ["32", "36", "40", "45"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "question": "Kva er 6 × 6?",
+      "options": ["30", "32", "36", "42"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "question": "Kva er 7 × 5?",
+      "options": ["30", "35", "40", "42"],
+      "correct": 1,
+      "timeLimit": 10
+    }
+  ]
+}

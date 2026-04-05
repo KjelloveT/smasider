@@ -1,0 +1,70 @@
+{
+  "id": "norsk-geografi",
+  "title": "Norsk geografi",
+  "description": "Test kunnskapen din om Noregs geografi — fjordar, fjell, byar og meir!",
+  "author": "Frødekapp",
+  "created": "2025-04-05",
+  "tags": ["geografi", "noreg", "5.-7. trinn"],
+  "questions": [
+    {
+      "question": "Kva er hovudstaden i Noreg?",
+      "options": ["Oslo", "Bergen", "Trondheim", "Stavanger"],
+      "correct": 0,
+      "timeLimit": 15
+    },
+    {
+      "question": "Kva er det lengste fjorden i Noreg?",
+      "options": ["Hardangerfjorden", "Sognefjorden", "Trondheimsfjorden", "Oslofjorden"],
+      "correct": 1,
+      "timeLimit": 20
+    },
+    {
+      "question": "Kva fylke ligg Tromsø i?",
+      "options": ["Nordland", "Troms og Finnmark", "Møre og Romsdal", "Trøndelag"],
+      "correct": 1,
+      "timeLimit": 15
+    },
+    {
+      "question": "Kva heiter det høgaste fjellet i Noreg?",
+      "options": ["Snøhetta", "Galdhøpiggen", "Glittertind", "Store Skagastølstind"],
+      "correct": 1,
+      "timeLimit": 20
+    },
+    {
+      "question": "Kva by er kjend som «Sørlandets hovudstad»?",
+      "options": ["Arendal", "Grimstad", "Kristiansand", "Mandal"],
+      "correct": 2,
+      "timeLimit": 20
+    },
+    {
+      "question": "Kva elv er den lengste i Noreg?",
+      "options": ["Drammenselva", "Glomma", "Numedalslågen", "Altaelva"],
+      "correct": 1,
+      "timeLimit": 20
+    },
+    {
+      "question": "Kor mange innbyggjarar har Noreg omtrent?",
+      "options": ["3,5 millionar", "4,5 millionar", "5,5 millionar", "6,5 millionar"],
+      "correct": 2,
+      "timeLimit": 20
+    },
+    {
+      "question": "Kva landsdel ligg Bergen i?",
+      "options": ["Austlandet", "Vestlandet", "Sørlandet", "Nord-Noreg"],
+      "correct": 1,
+      "timeLimit": 15
+    },
+    {
+      "question": "Kva øygruppe tilhøyrer Noreg og ligg langt nord i Arktis?",
+      "options": ["Lofoten", "Vesterålen", "Svalbard", "Jan Mayen"],
+      "correct": 2,
+      "timeLimit": 20
+    },
+    {
+      "question": "Kva heiter den kjende preikestolen som ligg i Rogaland?",
+      "options": ["Trolltunga", "Preikestolen", "Kjeragbolten", "Besseggen"],
+      "correct": 1,
+      "timeLimit": 15
+    }
+  ]
+}

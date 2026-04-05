@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frødekapp — Kunnskapsspel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+
+        <header class="page-header">
+            <div class="header-badge">🔒 Personvern</div>
+            <div class="header-inner">
+                <span class="header-icon">🧠</span>
+                <div>
+                    <h1>Frødekapp</h1>
+                    <p class="subtitle">Kunnskapsspel for klasserommet — quiz på nynorsk</p>
+                </div>
+            </div>
+            <div class="header-stripe"></div>
+        </header>
+
+        <!-- Handlingsknappane -->
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px;">
+            <a href="host.html" class="btn btn-primary btn-large">🎮 Start live-quiz</a>
+            <a href="play.html" class="btn btn-blue btn-large">👥 Delta i quiz</a>
+            <a href="solo.html" class="btn btn-yellow btn-large">🎯 Øv åleine</a>
+            <a href="editor.html" class="btn btn-purple btn-large">📝 Lag ny quiz</a>
+        </div>
+
+        <!-- Quiz-bibliotek -->
+        <div class="section-label">📚 Quiz-bibliotek</div>
+        <div class="quiz-grid" id="quiz-grid">
+            <div class="text-body text-center" style="padding:40px;grid-column:1/-1;">
+                Lastar quiz-ar...
+            </div>
+        </div>
+
+        <!-- Info -->
+        <div class="nb-card mt-32">
+            <h2 style="font-size:1.2rem;margin-bottom:12px;">📖 Korleis fungerer Frødekapp?</h2>
+            <div class="text-body">
+                <p><strong>Live-quiz (som Kahoot):</strong> Læraren startar ein quiz og får ein romkode. Elevane skriv inn koden på sin eigen enhet og svarar på spørsmål i sanntid. Alt fungerer direkte i nettlesaren — ingen installasjon krevd.</p>
+                <p style="margin-top:12px;"><strong>Soloøving:</strong> Elevane kan øve på kva som helst quiz heilt på eiga hand, med poeng og tidtaking.</p>
+                <p style="margin-top:12px;"><strong>Lag din eigen quiz:</strong> Bruk quiz-editoren til å lage eigne quiz-ar. Last ned som JSON-fil og del med andre!</p>
+                <p style="margin-top:12px;"><strong>Personvern:</strong> All kommunikasjon mellom nettlesarane går direkte (P2P). Ingen quiz-data passerer nokon server. Berre IP-adresser er synlege for signaltenesta under tilkopling.</p>
+            </div>
+        </div>
+
+        <footer style="text-align:center;font-family:Arial,sans-serif;font-size:0.85rem;font-weight:700;padding-top:32px;">
+            <a href="../index.html" style="color:#000;">← Tilbake til Læringsverktøy</a>
+        </footer>
+
+    </div>
+
+    <script src="js/quiz-engine.js"></script>
+    <script>
+        (async function() {
+            const grid = document.getElementById('quiz-grid');
+            try {
+                const manifest = await QuizEngine.loadManifest('quizzes');
+                if (manifest.length === 0) {
+                    grid.innerHTML = '<div class="text-body text-center" style="padding:40px;grid-column:1/-1;">Ingen quiz-ar tilgjengelege enno.</div>';
+                    return;
+                }
+                grid.innerHTML = '';
+                manifest.forEach(q => {
+                    const card = document.createElement('div');
+                    card.className = 'quiz-card';
+                    card.style.borderLeftWidth = '6px';
+                    card.style.borderLeftColor = q.color || '#000';
+
+                    const tags = (q.tags || []).map(t =>
+                        `<span class="tag tag-subject">${t}</span>`
+                    ).join('');
+
+                    card.innerHTML = `
+                        <div class="quiz-card-title">${q.title}</div>
+                        <div class="quiz-card-desc">${q.description}</div>
+                        <div class="quiz-card-meta">
+                            <span class="tag tag-count">${q.questionCount} spørsmål</span>
+                            ${tags}
+                        </div>
+                        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+                            <a href="solo.html?quiz=${q.id}" class="btn btn-small btn-yellow" style="text-decoration:none;">🎯 Øv</a>
+                            <a href="host.html?quiz=${q.id}" class="btn btn-small btn-primary" style="text-decoration:none;">🎮 Start live</a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            } catch (e) {
+                grid.innerHTML = `<div class="text-body text-center" style="padding:40px;grid-column:1/-1;color:#E74C3C;">Feil ved lasting av quiz-ar: ${e.message}</div>`;
+            }
+        })();
+    </script>
+</body>
+</html>

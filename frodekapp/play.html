@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frødekapp — Delta i Quiz</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="play-body">
+    <div class="container-narrow">
+
+        <!-- SKJERM: Bli med -->
+        <div class="screen active" id="screen-join">
+            <div class="nb-card" style="margin-top:40px;">
+                <div class="text-center mb-24">
+                    <div style="font-size:3rem;">🧠</div>
+                    <h1 style="font-size:2rem;">Frødekapp</h1>
+                    <p class="text-body">Delta i live-quiz</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Romkode</label>
+                    <input type="text" class="form-input" id="input-room-code" placeholder="T.d. AB12" maxlength="6" style="text-align:center;font-size:1.5rem;letter-spacing:4px;text-transform:uppercase;">
+                </div>
+
+                <div class="form-group">
+                    <label>Ditt namn</label>
+                    <input type="text" class="form-input" id="input-player-name" placeholder="Kva heiter du?" maxlength="20">
+                </div>
+
+                <button class="btn btn-primary btn-large" id="btn-join" style="width:100%;">🚀 Bli med</button>
+
+                <div class="mt-16 text-center">
+                    <a href="index.html" class="btn btn-small">← Tilbake</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SKJERM: Koplar til -->
+        <div class="screen" id="screen-connecting">
+            <div class="nb-card text-center" style="margin-top:80px;">
+                <div class="lobby-dots mb-16">
+                    <div class="lobby-dot"></div>
+                    <div class="lobby-dot"></div>
+                    <div class="lobby-dot"></div>
+                </div>
+                <p class="text-body" style="font-weight:700;" id="connecting-status">Koplar til...</p>
+            </div>
+        </div>
+
+        <!-- SKJERM: Lobby (ventar på start) -->
+        <div class="screen" id="screen-lobby">
+            <div class="nb-card text-center" style="margin-top:60px;">
+                <div style="font-size:2.5rem;margin-bottom:8px;">✅</div>
+                <h2 style="font-size:1.5rem;margin-bottom:4px;" id="lobby-name">—</h2>
+                <p class="text-body mb-8">Du er med i rom <strong id="lobby-room">—</strong></p>
+                <p class="text-body mb-16" id="lobby-player-count">—</p>
+
+                <div class="lobby-screen">
+                    <h3 style="font-size:1.2rem;">⏳ Ventar på at quizen startar</h3>
+                    <div class="lobby-dots mt-16">
+                        <div class="lobby-dot"></div>
+                        <div class="lobby-dot"></div>
+                        <div class="lobby-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SKJERM: Spørsmål -->
+        <div class="screen" id="screen-question">
+            <div class="flex justify-between items-center mb-8" style="flex-wrap:wrap;gap:8px;">
+                <span class="status-badge waiting" id="play-q-number">Spørsmål 1 / 10</span>
+                <span class="status-badge" style="background:#FDFD96;" id="play-score">0 poeng</span>
+            </div>
+
+            <div class="nb-card mb-16">
+                <div class="timer-display mb-8" id="play-timer">20</div>
+                <div style="font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;line-height:1.3;text-align:center;" id="play-q-text">—</div>
+            </div>
+
+            <div id="play-answers"></div>
+
+            <div class="hidden text-center mt-16" id="play-feedback">
+                <div style="font-weight:900;font-size:1.1rem;" id="play-feedback-text"></div>
+            </div>
+
+            <div class="hidden mt-16" id="play-reveal-section">
+                <div class="text-center mb-8" style="font-weight:900;font-size:1.1rem;" id="play-your-rank">—</div>
+                <div id="play-mini-leaderboard"></div>
+            </div>
+        </div>
+
+        <!-- SKJERM: Slutt -->
+        <div class="screen" id="screen-end">
+            <div class="text-center" style="margin-top:40px;">
+                <h1 style="font-size:2rem;margin-bottom:16px;">🏆 Quiz ferdig!</h1>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
+                    <div class="nb-card text-center">
+                        <div style="font-size:2.5rem;font-weight:900;" id="end-your-score">0</div>
+                        <div class="text-body" style="font-size:0.85rem;">POENG</div>
+                    </div>
+                    <div class="nb-card text-center">
+                        <div style="font-size:2.5rem;font-weight:900;" id="end-your-rank">—</div>
+                        <div class="text-body" style="font-size:0.85rem;">PLASSERING</div>
+                    </div>
+                </div>
+
+                <div id="end-podium" class="mb-24"></div>
+
+                <div class="section-label">📋 Alle resultat</div>
+                <div class="nb-card" id="end-leaderboard"></div>
+
+                <div class="mt-24">
+                    <button class="btn btn-primary btn-large" id="btn-play-again" style="width:100%;">🔄 Spel igjen</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="lib/peerjs.min.js"></script>
+    <script src="js/quiz-engine.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/peer-player.js"></script>
+    <script src="js/player.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "norsk-geografi",
+    "file": "norsk-geografi.json",
+    "title": "Norsk geografi",
+    "description": "Test kunnskapen din om Noregs geografi — fjordar, fjell, byar og meir!",
+    "author": "Frødekapp",
+    "tags": ["geografi", "noreg", "5.-7. trinn"],
+    "questionCount": 10,
+    "color": "#87CEEB"
+  },
+  {
+    "id": "gangetabell",
+    "file": "gangetabell.json",
+    "title": "Gangetabellen",
+    "description": "Øv på gangetabellen frå 2 til 10 — kor rask er du?",
+    "author": "Frødekapp",
+    "tags": ["matte", "ganging", "3.-5. trinn"],
+    "questionCount": 10,
+    "color": "#BAFCA2"
+  },
+  {
+    "id": "naturfag-kroppen",
+    "file": "naturfag-kroppen.json",
+    "title": "Kroppen vår",
+    "description": "Lær om mennesekroppen — organ, bein og korleis kroppen fungerer.",
+    "author": "Frødekapp",
+    "tags": ["naturfag", "kroppen", "5.-7. trinn"],
+    "questionCount": 8,
+    "color": "#FFB2EF"
+  }
+]

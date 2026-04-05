@@ -1,0 +1,58 @@
+{
+  "id": "naturfag-kroppen",
+  "title": "Kroppen vår",
+  "description": "Lær om mennesekroppen — organ, bein og korleis kroppen fungerer.",
+  "author": "Frødekapp",
+  "created": "2025-04-05",
+  "tags": ["naturfag", "kroppen", "5.-7. trinn"],
+  "questions": [
+    {
+      "question": "Kva organ pumpar blod rundt i kroppen?",
+      "options": ["Lungene", "Hjartet", "Levra", "Nyrene"],
+      "correct": 1,
+      "timeLimit": 15
+    },
+    {
+      "question": "Kor mange bein har eit vakse menneske?",
+      "options": ["106", "156", "206", "256"],
+      "correct": 2,
+      "timeLimit": 15
+    },
+    {
+      "question": "Kva heiter den største muskelen i kroppen?",
+      "options": ["Biceps", "Setemuskelen", "Lårmuskelen", "Magamuskelen"],
+      "correct": 1,
+      "timeLimit": 20
+    },
+    {
+      "question": "Kva gjer dei kvite blodcellene?",
+      "options": ["Fraktar oksygen", "Kjempar mot sjukdom", "Stoppar blødingar", "Bryt ned mat"],
+      "correct": 1,
+      "timeLimit": 20
+    },
+    {
+      "question": "Kva organ reinsar blodet i kroppen?",
+      "options": ["Hjartet", "Lungene", "Nyrene", "Magen"],
+      "correct": 2,
+      "timeLimit": 15
+    },
+    {
+      "question": "Kva del av kroppen kontrollerer tankar og rørsle?",
+      "options": ["Hjartet", "Hjernen", "Ryggmergen", "Levra"],
+      "correct": 1,
+      "timeLimit": 15
+    },
+    {
+      "question": "Kor mange tenner har eit vakse menneske vanlegvis?",
+      "options": ["20", "28", "32", "36"],
+      "correct": 2,
+      "timeLimit": 15
+    },
+    {
+      "question": "Kva heiter det raude fargestoffet i blodet?",
+      "options": ["Melanin", "Keratin", "Hemoglobin", "Insulin"],
+      "correct": 2,
+      "timeLimit": 20
+    }
+  ]
+}
