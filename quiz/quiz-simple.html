@@ -551,7 +551,6 @@
                 this.playerId = '';
                 this.isHost = false;
                 this.connected = false;
-                this.channel = null;
                 this.players = new Map();
                 this.questions = this.getSampleQuestions();
                 this.currentQuestionIndex = 0;
@@ -559,6 +558,7 @@
                 this.score = 0;
                 this.hasAnswered = false;
                 this.timerInterval = null;
+                this.pollingInterval = null;
                 
                 this.initializeElements();
                 this.setupEventListeners();
@@ -693,9 +693,8 @@
                 this.roomCode = this.generateRoomCode();
                 this.playerId = 'host-' + Math.random().toString(36).substr(2, 9);
                 
-                // Create BroadcastChannel
-                this.channel = new BroadcastChannel(`quiz-${this.roomCode}`);
-                this.setupChannelListeners();
+                // Initialize localStorage communication
+                this.initializeLocalStorage();
                 
                 // Update UI
                 this.elements.hostSetup.classList.remove('active');
@@ -726,9 +725,8 @@
                 this.playerName = playerName;
                 this.playerId = 'player-' + Math.random().toString(36).substr(2, 9);
                 
-                // Join BroadcastChannel
-                this.channel = new BroadcastChannel(`quiz-${this.roomCode}`);
-                this.setupChannelListeners();
+                // Initialize localStorage communication
+                this.initializeLocalStorage();
                 
                 // Send join message
                 this.sendMessage({
@@ -747,16 +745,43 @@
                 console.log(`Joined quiz: ${roomCode} as ${playerName}`);
             }
 
-            setupChannelListeners() {
-                this.channel.onmessage = (event) => {
-                    const data = event.data;
-                    
-                    if (this.isHost) {
-                        this.handleHostMessage(data);
-                    } else {
-                        this.handlePlayerMessage(data);
+            initializeLocalStorage() {
+                // Start polling for messages
+                this.pollingInterval = setInterval(() => {
+                    this.checkMessages();
+                }, 500);
+                
+                // Listen for storage events (for same-tab communication)
+                window.addEventListener('storage', (e) => {
+                    if (e.key === `quiz-${this.roomCode}-message` && e.newValue) {
+                        this.handleMessage(JSON.parse(e.newValue));
+                        // Clear the message
+                        localStorage.removeItem(`quiz-${this.roomCode}-message`);
                     }
-                };
+                });
+            }
+
+            checkMessages() {
+                const messageKey = `quiz-${this.roomCode}-message`;
+                const message = localStorage.getItem(messageKey);
+                
+                if (message) {
+                    try {
+                        const data = JSON.parse(message);
+                        this.handleMessage(data);
+                        localStorage.removeItem(messageKey);
+                    } catch (error) {
+                        console.error('Error parsing message:', error);
+                    }
+                }
+            }
+
+            handleMessage(data) {
+                if (this.isHost) {
+                    this.handleHostMessage(data);
+                } else {
+                    this.handlePlayerMessage(data);
+                }
             }
 
             handleHostMessage(data) {
@@ -1083,9 +1108,11 @@
             }
 
             sendMessage(data) {
-                if (this.channel) {
-                    this.channel.postMessage(data);
-                }
+                const messageKey = `quiz-${this.roomCode}-message`;
+                localStorage.setItem(messageKey, JSON.stringify(data));
+                
+                // Trigger storage event for same-tab communication
+                localStorage.removeItem(messageKey);
             }
 
             updatePlayersList() {
