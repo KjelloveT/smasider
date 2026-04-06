@@ -415,42 +415,52 @@
             .cards-grid { grid-template-columns: 1fr; }
         }
     </style>
+    <script>
+        // Lucide SVG icons (local, no CDN)
+        const Icons = {
+            'lock': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+            'shield': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3 8-8 8s-8-3-8-8V6l8-3 8 3z"/></svg>',
+            'lightbulb': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.9 1.5-2.5l1-1a2 2 0 0 0 0-3l-1-1a4.5 4.5 0 0 1-1.5-3.5A5 5 0 0 0 12 4a5 5 0 0 0-5 5 4.5 4.5 0 0 1-1.5 3.5l-1 1a2 2 0 0 0 0 3l1 1c.8.6 1.3 1.5 1.5 2.5"/><line x1="9" x2="15" y1="18" y2="18"/></svg>',
+            'bar-chart': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg>',
+            'globe': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg>'
+        };
+    </script>
 </head>
 <body>
     <div class="container">
 
         <header>
-            <div class="header-badge">🔒 Personvernvenleg</div>
+            <div class="header-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Personvernvenleg</div>
             <div class="header-inner">
-                <span class="header-emoji">🎓</span>
+                <img src="_resources/vyrdepil.png" alt="Vyrdepil" style="height:60px;width:auto;margin-right:16px">
                 <div>
-                    <h1>Læringsverktøy</h1>
-                    <p class="subtitle">Spel og verktøy laga for grunnskolen — med personvern i fokus</p>
+                    <h1>Vyrdepil</h1>
+                    <p class="subtitle">Vyrdepil (arbeidstittel) - Spel og verktøy laga for grunnskolen — med personvern i fokus</p>
                 </div>
             </div>
             <div class="header-stripe"></div>
+        </header>
 
             <div class="section-label">Spel</div>
             <div class="cards-grid">
-
                 <a href="kludre_klodrian/index.html" class="card c-green">
-                    <span class="card-icon">KK</span>
+                    <img src="_resources/kludre klodrian.png" alt="Kludre Klodrian" style="height:180px;width:auto;margin:0 auto 12px;display:block">
                     <h2 class="card-title">Kludre Klodrian</h2>
                     <p class="card-desc">Mattespel med pufferfisk. Svar på reknestykke og styr fisken gjennom riktige port!</p>
                     <span class="card-btn">Spel no →</span>
                 </a>
 
                 <a href="ordsmia/index.html" class="card c-yellow">
-                    <span class="card-icon">🔤</span>
+                    <img src="_resources/ordsmia.png" alt="Ordsmia" style="height:180px;width:auto;margin:0 auto 12px;display:block">
                     <h2 class="card-title">Ordsmia</h2>
-                    <p class="card-desc">Smid ord frå ni bokstavar i fleire spelmodusar – også for klasserom.</p>
+                    <p class="card-desc">Smi ord frå ni bokstavar i fleire spelmodusar – også for klasserom.</p>
                     <span class="card-btn">Spel no →</span>
                 </a>
 
                 <a href="talsmia/index.html" class="card c-teal">
-                    <span class="card-icon">🔢</span>
+                    <img src="_resources/talsmia.png" alt="Talsmia" style="height:180px;width:auto;margin:0 auto 12px;display:block">
                     <h2 class="card-title">Talsmia</h2>
-                    <p class="card-desc">Klassisk Countdown med tal: vel store/små tal og kom nærast målet.</p>
+                    <p class="card-desc">Klassisk talspel med: vel store/små tal og kom nærast målet.</p>
                     <span class="card-btn">Spel no →</span>
                 </a>
 
@@ -462,14 +472,14 @@
                 </a>
 
                 <a href="reknedaesj/index.html" class="card c-orange">
-                    <span class="card-icon">RD</span>
+                    <img src="_resources/reknedæsj.png" alt="Reknedæsj" style="height:180px;width:auto;margin:0 auto 12px;display:block">
                     <h2 class="card-title">Reknedæsj</h2>
                     <p class="card-desc">Løpespel med matteoppgåver og dobbelhoppe. Kor langt kjem du?</p>
                     <span class="card-btn">Spel no →</span>
                 </a>
 
                 <a href="rettslause_raud/index.html" class="card c-pink">
-                    <span class="card-icon">RR</span>
+                    <img src="_resources/rettslause raud.png" alt="Rettslause Raud" style="height:180px;width:auto;margin:0 auto 12px;display:block">
                     <h2 class="card-title">Rettslause Raud</h2>
                     <p class="card-desc">Naviger gjennom aliens på ein lavaplanet og løys mattestykker.</p>
                     <span class="card-btn">Spel no →</span>
@@ -487,7 +497,7 @@
             <div class="cards-grid">
 
                 <a href="frodekapp/index.html" class="card c-purple">
-                    <span class="card-icon">🧠</span>
+                    <img src="_resources/frødekapp.png" alt="Frødekapp" style="height:180px;width:auto;margin:0 auto 12px;display:block">
                     <h2 class="card-title">Frødekapp</h2>
                     <p class="card-desc">Kviss for klasserommet! Live fleirspelar, soloøving og quiz-editor.</p>
                     <span class="card-btn">Opne →</span>
@@ -499,21 +509,21 @@
             <div class="cards-grid">
 
                 <a href="fotocollage/fotocollage.html" class="card c-peach">
-                    <span class="card-icon">BF</span>
+                    <img src="_resources/biletflett.png" alt="BiletFlett" style="height:180px;width:auto;margin:0 auto 12px;display:block">
                     <h2 class="card-title">BiletFlett</h2>
                     <p class="card-desc">Lag vakre bilete-collagar direkte i nettlesaren. Ingen opplasting til server.</p>
                     <span class="card-btn">Opne →</span>
                 </a>
 
                 <a href="fotocolours/index.html" class="card c-purple">
-                    <span class="card-icon">🎨</span>
+                    <img src="_resources/reinskore bilete.png" alt="Reinskore bilete" style="height:180px;width:auto;margin:0 auto 12px;display:block">
                     <h2 class="card-title">Reinskore bilete</h2>
                     <p class="card-desc">Reduser bilete til reine monotone fargar.</p>
                     <span class="card-btn">Opne →</span>
                 </a>
 
                 <a href="klassekart/index.html" class="card c-teal">
-                    <span class="card-icon">🪑</span>
+                    <img src="_resources/klassekart.png" alt="Klassekart" style="height:180px;width:auto;margin:0 auto 12px;display:block">
                     <h2 class="card-title">Klassekart</h2>
                     <p class="card-desc">Planlegg klasserommet med drag-and-drop. Møbleringsmalar, tilfeldig plassering og utskrift.</p>
                     <span class="card-btn">Opne →</span>
@@ -528,10 +538,10 @@
 
             </div>
 
-            <div class="section-label privacy">🔒 Personvern</div>
+            <div class="section-label privacy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Personvern</div>
             <div class="privacy-block">
                 <div class="privacy-header">
-                    <span class="privacy-hicon">🛡️</span>
+                    <span class="privacy-hicon"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3 8-8 8s-8-3-8-8V6l8-3 8 3z"/></svg></span>
                     <h2 class="privacy-htitle">Personvern og datasikkerheit</h2>
                 </div>
                 <div class="privacy-body">
@@ -546,12 +556,12 @@
                     </ul>
 
                     <div class="privacy-highlight">
-                        💡 <strong>Kort oppsummert:</strong> Vi brukar ingen cookies, ingen sporing og ingen ekstern analyse. Nokre spel lagrar avgrensa data lokalt i nettlesaren din (sjå detaljar under). Denne informasjonen forlèt aldri eininga di.
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.9 1.5-2.5l1-1a2 2 0 0 0 0-3l-1-1a4.5 4.5 0 0 1-1.5-3.5A5 5 0 0 0 12 4a5 5 0 0 0-5 5 4.5 4.5 0 0 1-1.5 3.5l-1 1a2 2 0 0 0 0 3l1 1c.8.6 1.3 1.5 1.5 2.5"/><line x1="9" x2="15" y1="18" y2="18"/></svg> <strong>Kort oppsummert:</strong> Vi brukar ingen cookies, ingen sporing og ingen ekstern analyse. Nokre spel lagrar avgrensa data lokalt i nettlesaren din (sjå detaljar under). Denne informasjonen forlèt aldri eininga di.
                     </div>
 
                     <div class="accordion">
                         <details class="accordion-item">
-                            <summary class="accordion-header">📊 Kva data lagrast?</summary>
+                            <summary class="accordion-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg> Kva data lagrast?</summary>
                             <div class="accordion-body">
                                 <p>Nokre spel bruker nettlesaren sin <strong>localStorage</strong> for å hugse framgang. Det er viktig å skilje mellom <strong>cookies</strong> og <strong>localStorage</strong>:</p>
                                 <table class="data-table" style="margin:16px 0">
@@ -574,7 +584,7 @@
                                 </table>
                                 <p>localStorage-data ligg berre på di eining, og ingen andre kan sjå den. Du kan slette den når som helst via nettlesarinnstillingane.</p>
 
-                                <h4 style="margin-top:24px;margin-bottom:12px;">🎮 Kludre Klodrian</h4>
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/kludre klodrian.png" alt="Kludre Klodrian" style="height:20px;width:auto;margin-right:4px"> Kludre Klodrian</h4>
                                 <table class="data-table">
                                     <tr><th>Kva</th><th>Kvifor</th></tr>
                                     <tr>
@@ -582,9 +592,9 @@
                                         <td>For å vise personleg rekord mellom speløkter</td>
                                     </tr>
                                 </table>
-                                <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline etter at sida er lasta.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline etter at sida er lasta.</p>
 
-                                <h4 style="margin-top:24px;margin-bottom:12px;">🔤 Ordsmia</h4>
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/ordsmia.png" alt="Ordsmia" style="height:20px;width:auto;margin-right:4px"> Ordsmia</h4>
                                 <table class="data-table">
                                     <tr><th>Kva</th><th>Kvifor</th></tr>
                                     <tr>
@@ -596,9 +606,9 @@
                                         <td>For å vise tidlegare gode ord du har funne</td>
                                     </tr>
                                 </table>
-                                <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Ordsmia brukar lokal ordliste og køyrer heilt i nettlesaren etter at sida er lasta.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Ordsmia brukar lokal ordliste og køyrer heilt i nettlesaren etter at sida er lasta.</p>
 
-                                <h4 style="margin-top:24px;margin-bottom:12px;">🔢 Talsmia</h4>
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/talsmia.png" alt="Talsmia" style="height:20px;width:auto;margin-right:4px"> Talsmia</h4>
                                 <table class="data-table">
                                     <tr><th>Kva</th><th>Kvifor</th></tr>
                                     <tr>
@@ -610,7 +620,7 @@
                                         <td>For å vise tidlegare uttrykk, avvik frå mål og poeng</td>
                                     </tr>
                                 </table>
-                                <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Talsmia køyrer heilt i nettlesaren og sender ikkje speldata ut.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Talsmia køyrer heilt i nettlesaren og sender ikkje speldata ut.</p>
 
                                 <h4 style="margin-top:24px;margin-bottom:12px;"><img src="heimsank/Logo - no text.png" alt="Heimsank" style="height:20px;width:auto;margin-right:4px"> Heimsank</h4>
                                 <table class="data-table">
@@ -620,9 +630,9 @@
                                         <td>For å ta vare på samlinga di mellom speløkter</td>
                                     </tr>
                                 </table>
-                                <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Kortbilete blir lasta frå <strong>Wikimedia Commons</strong> (upload.wikimedia.org) kvar gong du spelar. Det betyr at Wikimedia sine tenarar kan sjå IP-adressa di i sine loggar. Ingen personleg informasjon utover IP-adresse blir delt.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Kortbilete blir lasta frå <strong>Wikimedia Commons</strong> (upload.wikimedia.org) kvar gong du spelar. Det betyr at Wikimedia sine tenarar kan sjå IP-adressa di i sine loggar. Ingen personleg informasjon utover IP-adresse blir delt.</p>
 
-                                <h4 style="margin-top:24px;margin-bottom:12px;">🏃 Reknedæsj</h4>
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/reknedæsj.png" alt="Reknedæsj" style="height:20px;width:auto;margin-right:4px"> Reknedæsj</h4>
                                 <table class="data-table">
                                     <tr><th>Kva</th><th>Kvifor</th></tr>
                                     <tr>
@@ -630,13 +640,13 @@
                                         <td>For å vise personleg rekord mellom speløkter</td>
                                     </tr>
                                 </table>
-                                <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline etter at sida er lasta.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline etter at sida er lasta.</p>
 
-                                <h4 style="margin-top:24px;margin-bottom:12px;">👾 Rettslause Raud</h4>
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/rettslause raud.png" alt="Rettslause Raud" style="height:20px;width:auto;margin-right:4px"> Rettslause Raud</h4>
                                 <p><strong>Ingen data blir lagra.</strong> Spelet bruker ikkje localStorage eller nokon annan form for lagring.</p>
-                                <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline etter at sida er lasta.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline etter at sida er lasta.</p>
 
-                                <h4 style="margin-top:24px;margin-bottom:12px;">🧠 Frødekapp (Kviss)</h4>
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/frødekapp.png" alt="Frødekapp" style="height:20px;width:auto;margin-right:4px"> Frødekapp (Kviss)</h4>
                                 <table class="data-table">
                                     <tr><th>Kva</th><th>Kvifor</th></tr>
                                     <tr>
@@ -648,17 +658,17 @@
                                         <td>For å sleppe å skrive namn kvar gong (valfritt)</td>
                                     </tr>
                                 </table>
-                                <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Live-quiz brukar <strong>PeerJS</strong> for direkte kommunikasjon mellom nettlesarar (WebRTC). PeerJS sin signalserver (0.peerjs.com) ser berre IP-adresser i ~2 sekund under tilkopling — aldri quiz-innhald, namn eller svar. All quiz-data går direkte mellom nettlesarane (P2P, kryptert).</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Live-quiz brukar <strong>PeerJS</strong> for direkte kommunikasjon mellom nettlesarar (WebRTC). PeerJS sin signalserver (0.peerjs.com) ser berre IP-adresser i ~2 sekund under tilkopling — aldri quiz-innhald, namn eller svar. All quiz-data går direkte mellom nettlesarane (P2P, kryptert).</p>
 
-                                <h4 style="margin-top:24px;margin-bottom:12px;">🖼️ BiletFlett</h4>
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/biletflett.png" alt="BiletFlett" style="height:20px;width:auto;margin-right:4px"> BiletFlett</h4>
                                 <p><strong>Ingen data blir lagra.</strong> Bilete du lastar opp blir berre lese inn i nettlesaren sitt minne via FileReader API. Når du lukkar sida, er alt borte.</p>
-                                <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta.</p>
 
-                                <h4 style="margin-top:24px;margin-bottom:12px;">🎨 Reinskore bilete</h4>
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/reinskore bilete.png" alt="Reinskore bilete" style="height:20px;width:auto;margin-right:4px"> Reinskore bilete</h4>
                                 <p><strong>Ingen data blir lagra.</strong> Bilete du lastar opp blir berre behandla i nettlesaren sitt minne. Ingenting blir lagra når du lukkar sida.</p>
-                                <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta.</p>
 
-                                <h4 style="margin-top:24px;margin-bottom:12px;">🪑 Klassekart</h4>
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/klassekart.png" alt="Klassekart" style="height:20px;width:auto;margin-right:4px"> Klassekart</h4>
                                 <table class="data-table">
                                     <tr><th>Kva</th><th>Kvifor</th></tr>
                                     <tr>
@@ -666,7 +676,7 @@
                                         <td>For å lagre og hente klasseoppsett mellom økter</td>
                                     </tr>
                                 </table>
-                                <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta. Elevnamn lagrast kun lokalt i nettlesaren — aldri på nokon server. Du kan også eksportere/importere oppsett som JSON-fil for å flytte mellom maskiner.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta. Elevnamn lagrast kun lokalt i nettlesaren — aldri på nokon server. Du kan også eksportere/importere oppsett som JSON-fil for å flytte mellom maskiner.</p>
                             </div>
                         </details>
                     </div>
