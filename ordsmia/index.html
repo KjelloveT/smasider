@@ -193,6 +193,27 @@
             <p class="subtitle">Dann det lengste ordet du kan frå ni bokstavar!</p>
         </header>
 
+        <div class="help-bar">
+            <button id="openHelpBtn" class="btn">Korleis spele ordsmia</button>
+        </div>
+
+        <div id="helpModal" class="help-modal" aria-hidden="true">
+            <div class="help-modal-content" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+                <h3 id="helpTitle">Korleis spele Ordsmia</h3>
+                <p>Du får ni bokstavar og skal finne det lengste gyldige norske ordet du kan lage.</p>
+                <ul>
+                    <li>Bruk berre bokstavane du har fått.</li>
+                    <li>Kvar bokstav kan brukast maks så mange gongar som han finst i settet.</li>
+                    <li>Lengre ord gir fleire poeng.</li>
+                    <li>I manuell modus vel du sjølv vokalar og konsonantar før du startar tida.</li>
+                    <li>I klasseromsmodus kan du sjekke fleire elevsvar samtidig.</li>
+                </ul>
+                <div class="help-modal-actions">
+                    <button id="closeHelpBtn" class="btn">Lukk</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Meny-skjerm -->
         <div id="screen-menu" class="screen active">
             <h2>Vel spelemodus</h2>
@@ -396,6 +417,7 @@
             UI.init();
             UI.showHistory();
             UI.updateStats();
+            initHelpModal();
             
             // Last ordliste
             document.getElementById('loading').style.display = 'block';
@@ -406,6 +428,32 @@
                 alert('Kunne ikkje laste ordliste. Sjekk at fila norsk_ordliste.json finst.');
             }
         });
+
+        function initHelpModal() {
+            const modal = document.getElementById('helpModal');
+            const openBtn = document.getElementById('openHelpBtn');
+            const closeBtn = document.getElementById('closeHelpBtn');
+            if (!modal || !openBtn || !closeBtn) return;
+
+            const closeModal = () => {
+                modal.classList.remove('show');
+                modal.setAttribute('aria-hidden', 'true');
+            };
+
+            openBtn.addEventListener('click', () => {
+                modal.classList.add('show');
+                modal.setAttribute('aria-hidden', 'false');
+            });
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
+        }
         
         // Modusveljar
         document.querySelectorAll('.mode-btn').forEach(btn => {

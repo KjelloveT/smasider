@@ -406,12 +406,16 @@
         @media (max-width: 520px) {
             .header-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
             .header-badge { top: -14px; right: 16px; font-size: 0.72rem; padding: 4px 12px; }
-            .cards-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-            .card { padding: 16px; }
+            body { padding: 16px 10px 28px; }
+            .cards-grid { grid-template-columns: 1fr; gap: 12px; }
+            .card { padding: 16px; width: 100%; }
+            .section-label { display: flex; width: 100%; justify-content: center; }
+            .header-badge { position: static; margin-bottom: 10px; }
             .card-icon { font-size: 2.2rem; }
         }
 
         @media (max-width: 360px) {
+            .container { width: 100%; }
             .cards-grid { grid-template-columns: 1fr; }
         }
     </style>

@@ -13,6 +13,27 @@
             <p class="subtitle">Countdown med tal: kom nærast måltalet med + − × ÷</p>
         </header>
 
+        <div class="help-bar">
+            <button id="openHelpBtn" class="btn">Korleis spele talsmia</button>
+        </div>
+
+        <div id="helpModal" class="help-modal" aria-hidden="true">
+            <div class="help-modal-content" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+                <h3 id="helpTitle">Korleis spele Talsmia</h3>
+                <p>Du får seks tal og eitt måltal. Målet er å lage eit reknestykke som kjem nærast mogleg målet.</p>
+                <ul>
+                    <li>Du kan bruke tala du har fått med operasjonane +, −, × og ÷.</li>
+                    <li>Kvart tal kan brukast maks éin gong per uttrykk.</li>
+                    <li>Du treng ikkje bruke alle tala om du finn ei betre løysing med færre.</li>
+                    <li>Jo mindre avvik frå måltalet, jo fleire poeng.</li>
+                    <li>I manuell modus vel du sjølv store og små tal før du startar tida.</li>
+                </ul>
+                <div class="help-modal-actions">
+                    <button id="closeHelpBtn" class="btn">Lukk</button>
+                </div>
+            </div>
+        </div>
+
         <div id="screen-menu" class="screen active">
             <h2>Vel spelemodus</h2>
             <div class="mode-selector">
@@ -252,8 +273,35 @@
             UI.init();
             UI.showHistory();
             UI.updateStats();
+            initHelpModal();
             wireEvents();
         });
+
+        function initHelpModal() {
+            const modal = document.getElementById('helpModal');
+            const openBtn = document.getElementById('openHelpBtn');
+            const closeBtn = document.getElementById('closeHelpBtn');
+            if (!modal || !openBtn || !closeBtn) return;
+
+            const closeModal = () => {
+                modal.classList.remove('show');
+                modal.setAttribute('aria-hidden', 'true');
+            };
+
+            openBtn.addEventListener('click', () => {
+                modal.classList.add('show');
+                modal.setAttribute('aria-hidden', 'false');
+            });
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
+        }
 
         function wireEvents() {
             document.querySelectorAll('.mode-btn').forEach((btn) => {

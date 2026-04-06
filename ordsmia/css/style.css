@@ -334,6 +334,51 @@ h1 {
     animation: dots 1.5s infinite;
 }
 
+.help-bar {
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+.help-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 999;
+}
+
+.help-modal.show {
+    display: flex;
+}
+
+.help-modal-content {
+    width: min(720px, 100%);
+    max-height: 85vh;
+    overflow: auto;
+    background: var(--card-bg);
+    border: 3px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 20px;
+}
+
+.help-modal-content h3 {
+    margin-bottom: 10px;
+}
+
+.help-modal-content ul {
+    margin: 10px 0 14px 20px;
+    font-family: Arial, system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+.help-modal-actions {
+    text-align: right;
+    margin-top: 12px;
+}
+
 @keyframes dots {
     0%, 20% { content: '.'; }
     40% { content: '..'; }
@@ -342,10 +387,26 @@ h1 {
 
 /* Responsive */
 @media (max-width: 600px) {
+    .screen {
+        padding: 16px;
+    }
+
+    .letters-container {
+        flex-wrap: nowrap;
+        gap: 3px;
+    }
+
     .letter-tile {
-        width: 55px;
-        height: 55px;
-        font-size: 1.5rem;
+        width: clamp(22px, 6.8vw, 30px);
+        height: clamp(32px, 8.8vw, 40px);
+        font-size: clamp(0.95rem, 3.6vw, 1.1rem);
+        box-shadow: 3px 3px 0 var(--border);
+    }
+
+    #letters-container-class .letter-tile {
+        width: clamp(22px, 6.9vw, 32px);
+        height: clamp(34px, 9vw, 42px);
+        font-size: clamp(0.95rem, 3.8vw, 1.15rem);
     }
     
     #wordInput {
