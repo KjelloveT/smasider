@@ -105,217 +105,41 @@ class Frodebrett {
     // ===== SAMPLE QUIZZES =====
     
     loadSampleQuizzes() {
-        const sampleQuizzes = [
-            {
-                id: 'sample_norsk',
-                title: 'Norsk geografi',
-                categories: [
-                    {
-                        name: 'Byar',
-                        questions: [
-                            {points: 100, question: 'Hovudstaden i Norge?', answer: 'Oslo'},
-                            {points: 200, question: 'Byen ved Sognefjorden?', answer: 'Sogndal'},
-                            {points: 300, question: 'Byen ved Hardangerfjorden?', answer: 'Odda'},
-                            {points: 400, question: 'Nordlegaste byen i Norge?', answer: 'Hammerfest'},
-                            {points: 500, question: 'Byen kjent for oljeindustrien?', answer: 'Stavanger'},
-                            {points: 1000, question: 'Byen med "rosene"', answer: 'Bergen'}
-                        ]
-                    },
-                    {
-                        name: 'Fjell',
-                        questions: [
-                            {points: 100, question: 'Høgaste fjellet i Norge?', answer: 'Galdhøpiggen'},
-                            {points: 200, question: 'Fjellet ved Stavanger?', answer: 'Kjerag'},
-                            {points: 300, question: 'Fjellet med "prekestolen"?', answer: 'Preikestolen'},
-                            {points: 400, question: 'Fjellkjede i Vestlandet?', answer: 'Jotunheimen'},
-                            {points: 500, question: 'Fjell på Nordland?', answer: 'Tysfjordfjellet'},
-                            {points: 1000, question: 'Fjell med "trolltunga"?', answer: 'Trolltunga'}
-                        ]
-                    },
-                    {
-                        name: 'Elvar',
-                        questions: [
-                            {points: 100, question: 'Lengste elva i Norge?', answer: 'Glomma'},
-                            {points: 200, question: 'Elva gjennom Oslo?', answer: 'Akerselva'},
-                            {points: 300, question: 'Elva i Trondheim?', answer: 'Nidelva'},
-                            {points: 400, question: 'Elva med fossefall?', answer: 'Vøringsfossen'},
-                            {points: 500, question: 'Elva på Vestlandet?', answer: 'Sogneelva'},
-                            {points: 1000, question: 'Elva i "dalføret"?', answer: 'Daleelva'}
-                        ]
-                    },
-                    {
-                        name: 'Innsjøar',
-                        questions: [
-                            {points: 100, question: 'Største innsjøen i Norge?', answer: 'Mjøsa'},
-                            {points: 200, question: 'Innsjø ved Gjøvik?', answer: 'Mjøsa'},
-                            {points: 300, question: 'Innsjø på Østlandet?', answer: 'Randsfjorden'},
-                            {points: 400, question: 'Innsjø i Telemark?', answer: 'Norsjø'},
-                            {points: 500, question: 'Innsjø på Sørlandet?', answer: 'Røssvatnet'},
-                            {points: 1000, question: 'Innsjø med "tyin"?', answer: 'Tyin'}
-                        ]
-                    },
-                    {
-                        name: 'Fylke',
-                        questions: [
-                            {points: 100, question: 'Fylket med Oslo?', answer: 'Oslo'},
-                            {points: 200, question: 'Fylket i nord?', answer: 'Troms og Finnmark'},
-                            {points: 300, question: 'Fylket på Vestlandet?', answer: 'Vestland'},
-                            {points: 400, question: 'Fylket med "trøndelag"?', answer: 'Trøndelag'},
-                            {points: 500, question: 'Fylket på Sørlandet?', answer: 'Agder'},
-                            {points: 1000, question: 'Fylket med "innlandet"?', answer: 'Innlandet'}
-                        ]
-                    }
-                ],
-                final: {
-                    category: 'Norsk geografi',
-                    hint: 'Denne byen er hovudstad i eit nordisk land',
-                    question: 'Kva by er hovudstad i Noreg?',
-                    answer: 'Oslo'
-                },
-                created: new Date().toISOString()
-            },
-            {
-                id: 'sample_matte',
-                title: 'Matte 5. trinn',
-                categories: [
-                    {
-                        name: 'Pluss',
-                        questions: [
-                            {points: 100, question: '7 + 5?', answer: '12'},
-                            {points: 200, question: '15 + 28?', answer: '43'},
-                            {points: 300, question: '123 + 456?', answer: '579'},
-                            {points: 400, question: '789 + 123?', answer: '912'},
-                            {points: 500, question: '1000 + 500?', answer: '1500'},
-                            {points: 1000, question: '2345 + 6789?', answer: '9134'}
-                        ]
-                    },
-                    {
-                        name: 'Minus',
-                        questions: [
-                            {points: 100, question: '15 - 7?', answer: '8'},
-                            {points: 200, question: '100 - 37?', answer: '63'},
-                            {points: 300, question: '500 - 123?', answer: '377'},
-                            {points: 400, question: '1000 - 456?', answer: '544'},
-                            {points: 500, question: '2000 - 789?', answer: '1211'},
-                            {points: 1000, question: '5000 - 2345?', answer: '2655'}
-                        ]
-                    },
-                    {
-                        name: 'Gonger',
-                        questions: [
-                            {points: 100, question: '7 × 8?', answer: '56'},
-                            {points: 200, question: '12 × 5?', answer: '60'},
-                            {points: 300, question: '15 × 12?', answer: '180'},
-                            {points: 400, question: '25 × 16?', answer: '400'},
-                            {points: 500, question: '32 × 25?', answer: '800'},
-                            {points: 1000, question: '45 × 37?', answer: '1665'}
-                        ]
-                    },
-                    {
-                        name: 'Dele',
-                        questions: [
-                            {points: 100, question: '48 ÷ 6?', answer: '8'},
-                            {points: 200, question: '100 ÷ 4?', answer: '25'},
-                            {points: 300, question: '144 ÷ 12?', answer: '12'},
-                            {points: 400, question: '200 ÷ 25?', answer: '8'},
-                            {points: 500, question: '360 ÷ 18?', answer: '20'},
-                            {points: 1000, question: '1000 ÷ 125?', answer: '8'}
-                        ]
-                    },
-                    {
-                        name: 'Blanding',
-                        questions: [
-                            {points: 100, question: '5 × 7 + 3?', answer: '38'},
-                            {points: 200, question: '100 - 25 × 2?', answer: '50'},
-                            {points: 300, question: '12 × 11 + 10?', answer: '142'},
-                            {points: 400, question: '200 ÷ 4 + 15?', answer: '65'},
-                            {points: 500, question: '15 × 15 - 50?', answer: '175'},
-                            {points: 1000, question: '100 × 10 ÷ 20?', answer: '50'}
-                        ]
-                    }
-                ],
-                final: {
-                    category: 'Matte 5. trinn',
-                    hint: 'Dette talet er resultat av 12 × 12',
-                    question: 'Kva er 12 gonger 12?',
-                    answer: '144'
-                },
-                created: new Date().toISOString()
-            },
-            {
-                id: 'sample_naturfag',
-                title: 'Naturfag',
-                categories: [
-                    {
-                        name: 'Dyr',
-                        questions: [
-                            {points: 100, question: 'Nasjonal fuglen til Norge?', answer: 'Fossekall'},
-                            {points: 200, question: 'Største landdyret i Norge?', answer: 'Elg'},
-                            {points: 300, question: 'Dyr som lever i havet?', answer: 'Hval'},
-                            {points: 400, question: 'Rovdyr i norske skogar?', answer: 'Ulv'},
-                            {points: 500, question: 'Dyr med "rever"?', answer: 'Rev'},
-                            {points: 1000, question: 'Dyr som overvintrar?', answer: 'Bjørn'}
-                        ]
-                    },
-                    {
-                        name: 'Planter',
-                        questions: [
-                            {points: 100, question: 'Nasjonal blomen til Norge?', answer: 'Heimbra'},
-                            {points: 200, question: 'Tre som gir kongler?', answer: 'Furu'},
-                            {points: 300, question: 'Plante med "rose"?', answer: 'Rose'},
-                            {points: 400, question: 'Tre som fellar lauv?', answer: 'Lauvtre'},
-                            {points: 500, question: 'Plante i fjellet?', answer: 'Fjellblomst'},
-                            {points: 1000, question: 'Tre med "bjørk"?', answer: 'Bjørk'}
-                        ]
-                    },
-                    {
-                        name: 'Vær',
-                        questions: [
-                            {points: 100, question: 'Når det regner is?', answer: 'Hagl'},
-                            {points: 200, question: 'Lyn og torden?', answer: 'Tordenvær'},
-                            {points: 300, question: 'Mykje snø på kort tid?', answer: 'Snøstorm'},
-                            {points: 400, question: 'Sterk vind?', answer: 'Storm'},
-                            {points: 500, question: 'Vår med sol?', answer: 'Vårvær'},
-                            {points: 1000, question: 'Varme i lufta?', answer: 'Hete'}
-                        ]
-                    },
-                    {
-                        name: 'Jord',
-                        questions: [
-                            {points: 100, question: 'Jord under grass?', answer: 'Jordsmonn'},
-                            {points: 200, question: 'Berg i fjellet?', answer: 'Fjell'},
-                            {points: 300, question: 'Jord med sand?', answer: 'Sandjord'},
-                            {points: 400, question: 'Leire i jord?', answer: 'Leirjord'},
-                            {points: 500, question: 'Jord i skog?', answer: 'Skogjord'},
-                            {points: 1000, question: 'Jord på myr?', answer: 'Myrjord'}
-                        ]
-                    },
-                    {
-                        name: 'Hav',
-                        questions: [
-                            {points: 100, question: 'Stort hav ved Norge?', answer: 'Atlanterhavet'},
-                            {points: 200, question: 'Hav i nord?', answer: 'Nordishavet'},
-                            {points: 300, question: 'Hav med saltvatn?', answer: 'Saltvatn'},
-                            {points: 400, question: 'Djupt hav?', answer: 'Djuphav'},
-                            {points: 500, question: 'Hav med fisk?', answer: 'Fiskehav'},
-                            {points: 1000, question: 'Hav ved kyst?', answer: 'Kysthav'}
-                        ]
-                    }
-                ],
-                final: {
-                    category: 'Naturfag',
-                    hint: 'Dette er syklusen vatnet går gjennom naturen',
-                    question: 'Kva heiter vatnsyklusen?',
-                    answer: 'Vatnsyklusen'
-                },
-                created: new Date().toISOString()
-            }
-        ];
-        
-        const existingQuizzes = Storage.getQuizzes();
-        if (existingQuizzes.length === 0) {
-            sampleQuizzes.forEach(quiz => Storage.saveQuiz(quiz));
+        const legacyTitles = ['Norsk geografi', 'Matte 5. trinn', 'Naturfag'];
+        const defaultTitles = ['Blanda drops', 'Småtrinn'];
+
+        // Remove old built-in quizzes if they exist
+        Storage.getQuizzes()
+            .filter(quiz => legacyTitles.includes(quiz.title))
+            .forEach(quiz => Storage.deleteQuiz(quiz.id));
+
+        const existingTitles = new Set(Storage.getQuizzes().map(quiz => quiz.title));
+        const missingDefaults = defaultTitles.filter(title => !existingTitles.has(title));
+        if (missingDefaults.length === 0) {
+            return;
         }
+
+        Promise.all([
+            fetch('json/frodebrett_Blanda_drops.json').then(res => res.json()),
+            fetch('json/frodebrett_Småtrinn.json').then(res => res.json())
+        ])
+            .then(files => {
+                files.forEach(fileData => {
+                    if (!fileData || !fileData.quiz) return;
+                    const quiz = fileData.quiz;
+                    const currentTitles = new Set(Storage.getQuizzes().map(q => q.title));
+                    if (!currentTitles.has(quiz.title)) {
+                        Storage.saveQuiz(quiz);
+                    }
+                });
+
+                if (this.currentScreen === 'game') {
+                    this.loadQuizList();
+                }
+            })
+            .catch(err => {
+                console.error('Klarte ikkje laste standardfrøder:', err);
+            });
     }
     
     // ===== QUIZ SELECTION =====
