@@ -1208,9 +1208,9 @@ class Frodebrett {
         
         const finalToggle = document.getElementById('final-round-toggle').checked;
         if (finalToggle) {
-            const fc = document.getElementById('final-category').value.trim();
-            const fq = document.getElementById('final-question').value.trim();
-            const fa = document.getElementById('final-answer').value.trim();
+            const fc = document.getElementById('editor-final-category').value.trim();
+            const fq = document.getElementById('editor-final-question').value.trim();
+            const fa = document.getElementById('editor-final-answer').value.trim();
             if (!fc) errors.push('Finalerunde: Kategori manglar.');
             if (!fq) errors.push('Finalerunde: Spørsmål manglar.');
             if (!fa) errors.push('Finalerunde: Svar manglar.');
@@ -1269,10 +1269,10 @@ class Frodebrett {
     }
     
     extractFinalFromForm() {
-        const category = document.getElementById('final-category').value.trim();
-        const hint = document.getElementById('final-clue').value.trim();
-        const question = document.getElementById('final-question').value.trim();
-        const answer = document.getElementById('final-answer').value.trim();
+        const category = document.getElementById('editor-final-category').value.trim();
+        const hint = document.getElementById('editor-final-clue').value.trim();
+        const question = document.getElementById('editor-final-question').value.trim();
+        const answer = document.getElementById('editor-final-answer').value.trim();
         
         if (category && question && answer) {
             return { category, hint, question, answer };
@@ -1346,10 +1346,10 @@ class Frodebrett {
     
     clearEditor() {
         document.getElementById('quiz-title').value = '';
-        document.getElementById('final-category').value = '';
-        document.getElementById('final-clue').value = '';
-        document.getElementById('final-question').value = '';
-        document.getElementById('final-answer').value = '';
+        document.getElementById('editor-final-category').value = '';
+        document.getElementById('editor-final-clue').value = '';
+        document.getElementById('editor-final-question').value = '';
+        document.getElementById('editor-final-answer').value = '';
         document.getElementById('final-round-toggle').checked = false;
         document.getElementById('final-round-fields').classList.add('hidden');
         this.editingQuizId = null;
@@ -1393,10 +1393,10 @@ class Frodebrett {
         if (quiz.final) {
             document.getElementById('final-round-toggle').checked = true;
             document.getElementById('final-round-fields').classList.remove('hidden');
-            document.getElementById('final-category').value = quiz.final.category;
-            document.getElementById('final-clue').value = quiz.final.hint || '';
-            document.getElementById('final-question').value = quiz.final.question;
-            document.getElementById('final-answer').value = quiz.final.answer;
+            document.getElementById('editor-final-category').value = quiz.final.category;
+            document.getElementById('editor-final-clue').value = quiz.final.hint || '';
+            document.getElementById('editor-final-question').value = quiz.final.question;
+            document.getElementById('editor-final-answer').value = quiz.final.answer;
         } else {
             document.getElementById('final-round-toggle').checked = false;
             document.getElementById('final-round-fields').classList.add('hidden');
