@@ -1,0 +1,192 @@
+{
+  "frodebrett": true,
+  "version": 1,
+  "quiz": {
+    "id": "quiz_1775591268761_cdzw99bu8",
+    "title": "Småtrinn",
+    "categories": [
+      {
+        "name": "Hund og katt",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kor mange bein har 2 hundar til saman?",
+            "answer": "4"
+          },
+          {
+            "points": 200,
+            "question": "Kor mange liv seier man at katter har?",
+            "answer": "9"
+          },
+          {
+            "points": 300,
+            "question": "Kor mange hundeår er det i eit menneskeår?",
+            "answer": "7"
+          },
+          {
+            "points": 400,
+            "question": "Kor lenge sover ein katt til vanleg kvar dag?",
+            "answer": "14 til 18 timer"
+          },
+          {
+            "points": 500,
+            "question": "Kva heiter verdas største hunderase?",
+            "answer": "Great Dane eller Grand Danois"
+          },
+          {
+            "points": 1000,
+            "question": "Kva heiter hunden til kronprinsfamilien?",
+            "answer": "Milly Kakao"
+          }
+        ]
+      },
+      {
+        "name": "Noreg",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva heiter Noregs nasjonalsong?",
+            "answer": "Ja, vi elsker"
+          },
+          {
+            "points": 200,
+            "question": "Kva år vart Noreg grunnlagt?",
+            "answer": "1814"
+          },
+          {
+            "points": 300,
+            "question": "Kva slags to skriftspråk har vi i Noreg?",
+            "answer": "Nynorsk og bokmål"
+          },
+          {
+            "points": 400,
+            "question": "I kva fylke finn vi Bergen?",
+            "answer": "Vestland"
+          },
+          {
+            "points": 500,
+            "question": "Kva år vart Noreg med i andre verdskrig?",
+            "answer": "1940"
+          },
+          {
+            "points": 1000,
+            "question": "Kva er Noregs nasjonalfugl?",
+            "answer": "Fossekallen"
+          }
+        ]
+      },
+      {
+        "name": "Eidet skule",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kor mange trinn er det på Eidet skule?",
+            "answer": "10"
+          },
+          {
+            "points": 200,
+            "question": "Kor mange klasse er det på Eidet skule?",
+            "answer": "20"
+          },
+          {
+            "points": 300,
+            "question": "Kva år åpna Eidet skule?",
+            "answer": "2025"
+          },
+          {
+            "points": 400,
+            "question": "Kven er rektor på Eidet skule?",
+            "answer": "Ole Andre Lukkedal"
+          },
+          {
+            "points": 500,
+            "question": "Kva heiter gymsalen som ligg ved sidan av Eidet skule?",
+            "answer": "Eidet kulturhall"
+          },
+          {
+            "points": 1000,
+            "question": "Kor mange born er det på Eidet skule?",
+            "answer": "Omlag 400"
+          }
+        ]
+      },
+      {
+        "name": "+",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva er 2 + 2?",
+            "answer": "4"
+          },
+          {
+            "points": 200,
+            "question": "Kva er 4 + 4?",
+            "answer": "8"
+          },
+          {
+            "points": 300,
+            "question": "Kva er 8 + 8?",
+            "answer": "16"
+          },
+          {
+            "points": 400,
+            "question": "Kva er 16 + 16?",
+            "answer": "32"
+          },
+          {
+            "points": 500,
+            "question": "Kva er 32 + 32?",
+            "answer": "64"
+          },
+          {
+            "points": 1000,
+            "question": "Kva er 64 + 64?",
+            "answer": "128"
+          }
+        ]
+      },
+      {
+        "name": "English",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva er \"chair\" på norsk?",
+            "answer": "Stol"
+          },
+          {
+            "points": 200,
+            "question": "Kva er \"orange\" på norsk?",
+            "answer": "Appelsin"
+          },
+          {
+            "points": 300,
+            "question": "Kva er \"pillow\" på norsk?",
+            "answer": "Pute"
+          },
+          {
+            "points": 400,
+            "question": "Kva er \"silverware\" på norsk?",
+            "answer": "Bestikk"
+          },
+          {
+            "points": 500,
+            "question": "Kva er \"capybara\" på norsk?",
+            "answer": "Flodsvin"
+          },
+          {
+            "points": 1000,
+            "question": "Kva er \"sloth\" på norsk?",
+            "answer": "Dovendyr"
+          }
+        ]
+      }
+    ],
+    "final": {
+      "category": "Kinofilm",
+      "hint": "Ein film frå i år",
+      "question": "Kva heitar den nyaste filmen om den italienske rørleggaren Mario?",
+      "answer": "The Super Mario Galaxy Movie"
+    },
+    "created": "2026-04-07T19:58:32.791Z"
+  }
+}

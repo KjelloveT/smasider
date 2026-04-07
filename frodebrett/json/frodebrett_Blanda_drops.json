@@ -1,0 +1,192 @@
+{
+  "frodebrett": true,
+  "version": 1,
+  "quiz": {
+    "id": "quiz_1775584820677_kcjoxdpit",
+    "title": "Blanda drops",
+    "categories": [
+      {
+        "name": "Algebra og dårlig",
+        "questions": [
+          {
+            "points": 100,
+            "question": "3x * 2 = ?",
+            "answer": "6x"
+          },
+          {
+            "points": 200,
+            "question": "−(3b + 2) = ?",
+            "answer": "3b - 2"
+          },
+          {
+            "points": 300,
+            "question": "4x * 3y = ?",
+            "answer": "12xy"
+          },
+          {
+            "points": 400,
+            "question": "2a ⋅ b ⋅ 3c = ?",
+            "answer": "6abc"
+          },
+          {
+            "points": 500,
+            "question": "3(2a−3b)= ?",
+            "answer": "6a - 9b"
+          },
+          {
+            "points": 1000,
+            "question": "−2(a−2b)−(3b−a)= ?",
+            "answer": "- a + b"
+          }
+        ]
+      },
+      {
+        "name": "Capybara",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Capybara kjem frå kva verdsdel?",
+            "answer": "Sør-Amerika"
+          },
+          {
+            "points": 200,
+            "question": "Kva slags dyrefamilie høyrer Capybara til?",
+            "answer": "Marsvin"
+          },
+          {
+            "points": 300,
+            "question": "Kva et Capybara helst til frokost, lunsj og middag.",
+            "answer": "Gress og grønne planter"
+          },
+          {
+            "points": 400,
+            "question": "Kor stor kan ein Capybara bli?",
+            "answer": "80 kg"
+          },
+          {
+            "points": 500,
+            "question": "Kva heiter Capybara (Flodsvin) på tysk?",
+            "answer": "Wasserschwein (Vann-svin)"
+          },
+          {
+            "points": 1000,
+            "question": "Kva er det latinske navnet for Capybara?",
+            "answer": "Hydrochoerus hydrochaeris"
+          }
+        ]
+      },
+      {
+        "name": "Eidet skule",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kor mange trinn er det på Eidet skule?",
+            "answer": "10"
+          },
+          {
+            "points": 200,
+            "question": "Kor mange klasser er det på Eidet skule?",
+            "answer": "20"
+          },
+          {
+            "points": 300,
+            "question": "Kva heiter rektor på Eidet skule?",
+            "answer": "Ole Andre Lukkedal"
+          },
+          {
+            "points": 400,
+            "question": "Kva måned og år åpna Eidet skule?",
+            "answer": "August 2025"
+          },
+          {
+            "points": 500,
+            "question": "Kva slags postnummer ligger Eidet skule i?",
+            "answer": "6265"
+          },
+          {
+            "points": 1000,
+            "question": "Kva er på taket av Eidet skule?",
+            "answer": "Solcellepanel"
+          }
+        ]
+      },
+      {
+        "name": "Haram",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Si ei av nabokommunene til Haram",
+            "answer": "Ålesund eller Vestnes"
+          },
+          {
+            "points": 200,
+            "question": "Kva heiter største bygda i Haram?",
+            "answer": "Brattvåg"
+          },
+          {
+            "points": 300,
+            "question": "Kva heiter vegen med bru og tunell som blant anna går til Haramsøy, Lepsøy og Harøya?",
+            "answer": "Nordøyvegen"
+          },
+          {
+            "points": 400,
+            "question": "Kva heiter ordføraren i Haram",
+            "answer": "Vebjørn Krogsæter"
+          },
+          {
+            "points": 500,
+            "question": "Kva er det symbol av på våpenskjoldet til Haram?",
+            "answer": "Bølge"
+          },
+          {
+            "points": 1000,
+            "question": "Kva heiter kommunedirektøren i Haram?",
+            "answer": "Anders Nordvald Hammer"
+          }
+        ]
+      },
+      {
+        "name": "Gaming",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva heiter spelet der Steve graver i bakken?",
+            "answer": "Minecraft"
+          },
+          {
+            "points": 200,
+            "question": "Ein rørleggar på motorsykkel kjøyrer om kapp med blant andre ei prinsesse, ein dinosaur og ein sopp?",
+            "answer": "Mario Kart"
+          },
+          {
+            "points": 300,
+            "question": "Kva herter spelet der ein matematisk figur bevegar seg frå venstre til høgre?",
+            "answer": "Geometrydash"
+          },
+          {
+            "points": 400,
+            "question": "Bevege ein båt + eske = dette populære spelet",
+            "answer": "Roblox"
+          },
+          {
+            "points": 500,
+            "question": "Kva heiter verdas mestselgande spel?",
+            "answer": "GTA 5"
+          },
+          {
+            "points": 1000,
+            "question": "Kva brukar ein for å betale for ting i Zelda-spela?",
+            "answer": "Rupees"
+          }
+        ]
+      }
+    ],
+    "final": {
+      "category": "Matrett",
+      "hint": "Ikkje svin, okse, sau eller kylling",
+      "question": "Kva heiter sushi-retten der man får servert tynne skiver av rå fisk, men utan ris?",
+      "answer": "Sashimi"
+    },
+    "created": "2026-04-07T19:32:44.450Z"
+  }
+}
