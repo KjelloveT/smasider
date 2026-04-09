@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frødesams - Storskjerm</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background-color: #87CEEB;
+        }
+        .display-mode .answer-text.hidden-content {
+            color: transparent;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="display-mode">
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-inner">
+                <div>
+                    <h1>Frødesams</h1>
+                </div>
+            </div>
+            <div class="header-stripe"></div>
+        </header>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <!-- Game Board -->
+            <div id="game-board">
+                <!-- Score Board -->
+                <div id="score-board" class="neo-box mb-16">
+                    <div class="section-label">Poengtavle</div>
+                    <div id="teams-score" class="teams-score">
+                        <!-- Team-poeng blir vist her -->
+                    </div>
+                </div>
+
+                <!-- Question Display -->
+                <div id="question-display" class="hidden neo-box">
+                    <div class="flex justify-between items-center" style="gap:12px;flex-wrap:wrap;">
+                        <div class="current-team" id="current-team-display">Team 1 sin tur</div>
+                        <div class="current-team" id="question-progress" style="background:#87CEEB;">1 av 1</div>
+                    </div>
+                    <div class="question-text" id="question-text"></div>
+                    
+                    <!-- Answer Board -->
+                    <div id="answer-board" class="answer-board">
+                        <!-- Svaralternativer blir generert her -->
+                    </div>
+                </div>
+
+
+                <!-- Winner Modal -->
+                <div id="winner-modal" class="modal hidden">
+                    <div class="modal-content neo-box">
+                        <div class="modal-header">
+                            <h3 style="margin:0;">🏆 Vinnar!</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div id="winner-content">
+                                <!-- Winner info -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/sync.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

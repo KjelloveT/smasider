@@ -422,13 +422,15 @@ class Frodebrett {
                     // First, revert any previous adjustment for this team
                     const currentBtn = btnsDiv.querySelector('.modal-pts-red, .modal-pts-gray, .modal-pts-green');
                     if (currentBtn) {
-                        const currentValue = parseInt(currentBtn.textContent.replace(/[+\-\u2212]/g, '')) || 0;
+                        const currentValue = currentBtn.dataset.appliedValue ? parseInt(currentBtn.dataset.appliedValue) : 0;
                         this.adjustTeamScore(team.id, -currentValue);
                         currentBtn.classList.remove('modal-pts-red', 'modal-pts-gray', 'modal-pts-green');
+                        delete currentBtn.dataset.appliedValue;
                     }
                     
                     // Apply new adjustment
                     this.adjustTeamScore(team.id, values[i]);
+                    btn.dataset.appliedValue = values[i];
                     if (btn.dataset.type === 'minus') btn.classList.add('modal-pts-red');
                     else if (btn.dataset.type === 'zero') btn.classList.add('modal-pts-gray');
                     else btn.classList.add('modal-pts-green');
@@ -603,11 +605,18 @@ class Frodebrett {
             
             allBtns.forEach((btn, i) => {
                 btn.addEventListener('click', () => {
+                    // First, revert any previous adjustment for this team
+                    const currentBtn = btnsDiv.querySelector('.modal-pts-red, .modal-pts-gray, .modal-pts-green');
+                    if (currentBtn) {
+                        const currentValue = currentBtn.dataset.appliedValue ? parseInt(currentBtn.dataset.appliedValue) : 0;
+                        this.adjustTeamScore(team.id, -currentValue);
+                        currentBtn.classList.remove('modal-pts-red', 'modal-pts-gray', 'modal-pts-green');
+                        delete currentBtn.dataset.appliedValue;
+                    }
+
+                    // Apply new adjustment
                     this.adjustTeamScore(team.id, values[i]);
-                    allBtns.forEach(b => {
-                        b.classList.add('modal-pts-locked');
-                        b.style.pointerEvents = 'none';
-                    });
+                    btn.dataset.appliedValue = values[i];
                     if (btn.dataset.type === 'minus') btn.classList.add('modal-pts-red');
                     else if (btn.dataset.type === 'zero') btn.classList.add('modal-pts-gray');
                     else btn.classList.add('modal-pts-green');

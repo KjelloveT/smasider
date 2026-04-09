@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frødesams - Kviss for klasserommet</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-inner">
+                <div>
+                    <h1>Frødesams</h1>
+                </div>
+            </div>
+            <div class="header-stripe"></div>
+        </header>
+
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <a href="#" class="nav-logo" onclick="location.reload(); return false;">
+                <img src="../_resources/frødesams.png" alt="Frødesams" style="height:32px;width:auto;">
+            </a>
+            <button class="btn btn-blue" id="btn-editor">Ny Frødesams</button>
+            <button class="btn btn-yellow" id="btn-saved">Lagra Frødesamsar</button>
+            <button class="btn btn-purple" id="btn-controller">Start Frødesams</button>
+        </nav>
+
+        <!-- Instructions -->
+        <div id="instructions" class="neo-box mb-24">
+            <h3 style="margin-top:0;">Korleis spele Frødesams</h3>
+            <p>Frødesams er ein kviss for klasserommet der lag konkurrar om å gjette dei mest populære svara.</p>
+            <ul style="margin:16px 0;padding-left:20px;">
+                <li><strong>To skjermar:</strong> Trykk "Start Frødesams" på denne skjermen, og klikk "Åpne storskjerm" for å vise svara på ein annan skjerm. Da kan du som styrer kvissen se dei riktige svara, samstundes som spelarane får se riktige svar etter kvart som dei svarar rett</li>
+                <li><strong>Team:</strong> Sett opp 2-4 lag med namn.</li>
+                <li><strong>Vel Frødesams:</strong> Vel ein quiz frå lista og klikk "Start".</li>
+                <li><strong>Vis svar:</strong> Kvissmeister klikkar på svaret frå sin skjerm, og det visast på storskjermen.</li>
+                <li><strong>Poeng:</strong> Lag får poeng for kvar riktig gjetning. 1 feil = bytt lag (nytt lag visast automatisk)</li>
+            </ul>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen hidden">
+            <!-- Open Display Button -->
+            <div class="neo-box mb-24">
+                <button class="btn btn-purple" id="btn-open-display">Åpne storskjerm</button>
+            </div>
+
+            <!-- Team Setup -->
+            <div id="team-setup" class="neo-box mb-24">
+                <div class="section-label">Team (2-4)</div>
+                <div id="teams-container">
+                    <div class="team-input">
+                        <input type="text" class="form-input team-name" placeholder="Team 1" maxlength="20">
+                        <button class="btn btn-small btn-danger btn-remove-team" style="display:none;">×</button>
+                    </div>
+                    <div class="team-input">
+                        <input type="text" class="form-input team-name" placeholder="Team 2" maxlength="20">
+                        <button class="btn btn-small btn-danger btn-remove-team" style="display:none;">×</button>
+                    </div>
+                </div>
+                <div class="mt-16">
+                    <button class="btn btn-small" id="btn-add-team">+ Legg til team</button>
+                </div>
+            </div>
+
+            <!-- Quiz Selection -->
+            <div id="quiz-selection" class="neo-box mb-24">
+                <div class="section-label">Vel Frødesams</div>
+                <div id="quiz-list" class="quiz-grid">
+                    <!-- Quizer blir lasta inn her -->
+                </div>
+            </div>
+
+            <!-- Game Board -->
+            <div id="game-board" class="hidden">
+                <!-- Score Board -->
+                <div id="score-board" class="neo-box mb-16">
+                    <div class="section-label">Poengtavle</div>
+                    <div id="teams-score" class="teams-score">
+                        <!-- Team-poeng blir vist her -->
+                    </div>
+                </div>
+
+                <!-- Question Display -->
+                <div id="question-display" class="hidden neo-box">
+                    <div class="flex justify-between items-center" style="gap:12px;flex-wrap:wrap;">
+                        <div class="current-team" id="current-team-display">Team 1 sin tur</div>
+                        <div class="current-team" id="question-progress" style="background:#87CEEB;">1 av 1</div>
+                    </div>
+                    <div class="question-text" id="question-text"></div>
+                    
+                    <!-- Answer Board -->
+                    <div id="answer-board" class="answer-board">
+                        <!-- Svaralternativer blir generert her -->
+                    </div>
+
+                    <div class="mt-16">
+                        <button class="btn btn-danger" id="btn-strike">✕ Feil svar (byt lag)</button>
+                    </div>
+
+                    <div id="point-award-controls" class="neo-box mt-16 hidden">
+                        <div class="section-label">Gje poeng til</div>
+                        <div id="point-buttons" class="point-buttons">
+                            <!-- Poengknappar -->
+                        </div>
+                    </div>
+
+                    <div class="question-controls mt-24">
+                        <button class="btn btn-blue" id="btn-next-question">Neste spørsmål</button>
+                        <button class="btn" id="btn-back-to-board">Tilbake til quizval</button>
+                    </div>
+                </div>
+
+                <!-- Game Controls -->
+                <div id="game-controls" class="neo-box mb-16 mt-24">
+                    <div class="flex gap-12">
+                        <button class="btn btn-yellow" id="btn-end-game">Avslutt spel</button>
+                    </div>
+                </div>
+
+                <!-- Winner Modal -->
+                <div id="winner-modal" class="modal hidden">
+                    <div class="modal-content neo-box">
+                        <div class="modal-header">
+                            <h3 style="margin:0;">🏆 Vinnar!</h3>
+                            <button class="btn btn-small btn-danger" id="btn-winner-close">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="winner-content">
+                                <!-- Winner info -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Editor Screen -->
+        <div id="editor-screen" class="screen hidden">
+            <div class="neo-box mb-24">
+                <div class="section-label">Ny quiz</div>
+                
+                <!-- Error messages -->
+                <div id="editor-errors" class="editor-errors hidden"></div>
+
+                <!-- Quiz Info -->
+                <div class="form-group">
+                    <label>Tittel</label>
+                    <input type="text" class="form-input" id="quiz-title" placeholder="T.d. Skoleliv">
+                </div>
+
+                <!-- Questions Section -->
+                <div id="questions-section">
+                    <div class="section-label" style="margin-bottom:8px;">Spørsmål</div>
+                    <div id="questions-container">
+                        <!-- Spørsmål blir generert her -->
+                    </div>
+                    <div class="mt-16">
+                        <button class="btn btn-small" id="btn-add-question">+ Legg til spørsmål</button>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="mt-24 flex gap-12">
+                    <button class="btn btn-primary" id="btn-save-quiz">Lagre quiz</button>
+                    <button class="btn" id="btn-clear">Tøm</button>
+                    <button class="btn btn-small" style="margin-left:auto;" onclick="game.showScreen('game')">Tilbake</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Saved Quizzes Screen -->
+        <div id="saved-screen" class="screen hidden">
+            <div class="neo-box mb-24">
+                <div class="section-label">Lagra quizer</div>
+                <div id="saved-quiz-list" class="quiz-grid">
+                    <!-- Lagrede quizer blir vist her -->
+                </div>
+            </div>
+
+            <!-- Export / Import -->
+            <div class="neo-box mb-24">
+                <div class="section-label">Eksport / Import</div>
+                <div class="file-grid">
+                    <div class="file-box file-export">
+                        <h3>Eksporter alle quizer</h3>
+                        <p>Last ned alle quizer som JSON-fil for backup.</p>
+                        <button class="btn btn-primary" id="btn-export">Eksporter</button>
+                    </div>
+                    <div class="file-box file-import">
+                        <h3>Importer quizer</h3>
+                        <p>Last opp en JSON-fil for å importere quizer.</p>
+                        <input type="file" id="import-file" accept=".json" style="margin-bottom:8px;">
+                        <button class="btn btn-primary" id="btn-import">Importer</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" onclick="game.showScreen('game')">Tilbake</button>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/sync.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
