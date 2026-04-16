@@ -670,6 +670,7 @@ function generateMathProblem() {
 let mathModalOpen = false;
 let selectedOption = 0;
 let mathOptions = [];
+let answerSubmitted = false;
 
 function showMathModal(rewardType) {
     gamePaused = true;
@@ -677,6 +678,7 @@ function showMathModal(rewardType) {
     mathRewardType = rewardType;
     currentMathProblem = generateMathProblem();
     selectedOption = 0;
+    answerSubmitted = false;
     
     document.getElementById('mathQuestion').textContent = currentMathProblem.question + ' = ?';
     
@@ -823,6 +825,9 @@ function createParticles() {
 }
 
 function checkAnswer(selectedAnswer) {
+    if (answerSubmitted) return;
+    answerSubmitted = true;
+    
     const normalized = parseFloat(String(selectedAnswer).replace(',', '.'));
     const correct = Math.abs(normalized - currentMathProblem.answer) < 0.001;
 

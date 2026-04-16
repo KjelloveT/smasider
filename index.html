@@ -488,12 +488,7 @@
                     <p class="card-desc">Naviger gjennom aliens på ein lavaplanet og løys mattestykker.</p>
                     <span class="card-btn">Spel no →</span>
                 </a>
-                <div class="card c-mint disabled">
-                    <span class="card-icon">FS</span>
-                    <h2 class="card-title">Fleire spel</h2>
-                    <p class="card-desc">Nye spel er under utvikling og kjem snart!</p>
-                    <span class="coming-tag">Kjem snart</span>
-                </div>
+                
 
             </div>
 
@@ -551,6 +546,13 @@
                     <img src="_resources/klassekart.png" alt="Klassekart" style="height:180px;width:auto;margin:0 auto 12px;display:block">
                     <h2 class="card-title">Klassekart</h2>
                     <p class="card-desc">Planlegg klasserommet med drag-and-drop. Møbleringsmalar, tilfeldig plassering og utskrift.</p>
+                    <span class="card-btn">Opne →</span>
+                </a>
+
+                <a href="bildebehandling/index.html" class="card c-mint">
+                    <span class="card-icon">🖼️</span>
+                    <h2 class="card-title">Bildebehandling</h2>
+                    <p class="card-desc">Resize, crop, rotasjon og watermark. Behandle mange bilder samtidig med ZIP-nedlasting.</p>
                     <span class="card-btn">Opne →</span>
                 </a>
 
@@ -702,6 +704,74 @@
                                     </tr>
                                 </table>
                                 <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta. Elevnamn lagrast kun lokalt i nettlesaren — aldri på nokon server. Du kan også eksportere/importere oppsett som JSON-fil for å flytte mellom maskiner.</p>
+
+                                <h4 style="margin-top:24px;margin-bottom:12px;">🖼️ Bildebehandling</h4>
+                                <p><strong>Ingen data blir lagra.</strong> Bilete du lastar opp blir berre lese inn i minnet med FileReader API og behandla med Canvas API. Når du lukkar sida, er alt borte.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> JSZip bibliotek blir lasta frå <strong>cdnjs.cloudflare.com</strong> (kun for ZIP-nedlasting). Ingen bilete eller data blir sendt til nokon server. Alt skjer lokalt i nettlesaren din.</p>
+
+                                <h4 style="margin-top:24px;margin-bottom:12px;">🚣 Kano 3D</h4>
+                                <table class="data-table">
+                                    <tr><th>Kva</th><th>Kvifor</th></tr>
+                                    <tr>
+                                        <td>Låste baner, highscore per bane, total poeng og distanse</td>
+                                        <td>For å hugse progresjon og rekordar mellom speløkter</td>
+                                    </tr>
+                                </table>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Three.js bibliotek blir lasta frå <strong>cdnjs.cloudflare.com</strong> for 3D-rendering. Ingen speldata eller quiz-svar blir sendt til nokon server. Alt køyrer lokalt i nettlesaren etter at sida er lasta.</p>
+
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/frødebrett.png" alt="Frødebrett" style="height:20px;width:auto;margin-right:4px"> Frødebrett</h4>
+                                <table class="data-table">
+                                    <tr><th>Kva</th><th>Kvifor</th></tr>
+                                    <tr>
+                                        <td>Quiz-ar (kategoriar, spørsmål, svar)</td>
+                                        <td>For å lagre og hente quiz-ar du lagar</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Team-innstillingar (namn, poeng)</td>
+                                        <td>For å hugge team mellom speløkter</td>
+                                    </tr>
+                                </table>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Spellet køyrer heilt lokalt på ein maskin (prosjektor/tavle). Ingen data blir delt med tenarar eller andre einingar.</p>
+
+                                <h4 style="margin-top:24px;margin-bottom:12px;">⚖️ Etikktesten</h4>
+                                <p><strong>Ingen data blir lagra.</strong> Testen brukar ikkje localStorage eller nokon annan form for lagring. Svarene dine blir berre vist i nettlesaren under testen og forsvinn når du lukkar sida.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Testen fungerer heilt offline etter at sida er lasta.</p>
+
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/frødekapp.png" alt="Frødekapp" style="height:20px;width:auto;margin-right:4px"> Frødekapp</h4>
+                                <table class="data-table">
+                                    <tr><th>Kva</th><th>Kvifor</th></tr>
+                                    <tr>
+                                        <td>Quiz-editor-utkast (spørsmål, alternativ)</td>
+                                        <td>For å lagre utkast til quiz-ar du jobbar med</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sist brukte kallenamn</td>
+                                        <td>For å sleppe å skrive namn kvar gong (valfritt)</td>
+                                    </tr>
+                                </table>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Live-quiz brukar <strong>PeerJS</strong> for direkte kommunikasjon mellom nettlesarar (WebRTC). PeerJS sin signalserver (0.peerjs.com) ser berre IP-adresser i ~2 sekund under tilkopling — aldri quiz-innhald, namn eller svar. All quiz-data går direkte mellom nettlesarane (P2P, kryptert).</p>
+
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/biletflett.png" alt="BiletFlett" style="height:20px;width:auto;margin-right:4px"> BiletFlett</h4>
+                                <p><strong>Ingen data blir lagra.</strong> Bilete du lastar opp blir berre lese inn i minnet med FileReader API. Når du lukkar sida, er alt borte.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta.</p>
+
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/reinskore bilete.png" alt="Reinskore bilete" style="height:20px;width:auto;margin-right:4px"> Reinskore bilete</h4>
+                                <p><strong>Ingen data blir lagra.</strong> Bilete du lastar opp blir berre behandla i nettlesaren sitt minne. Ingenting blir lagra når du lukkar sida.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta.</p>
+
+                                <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/klassekart.png" alt="Klassekart" style="height:20px;width:auto;margin-right:4px"> Klassekart</h4>
+                                <table class="data-table">
+                                    <tr><th>Kva</th><th>Kvifor</th></tr>
+                                    <tr>
+                                        <td>Klasseoppsett (elevnamn, plassering, romlayout)</td>
+                                        <td>For å lagre og hente klasseoppsett mellom økter</td>
+                                    </tr>
+                                </table>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline etter at sida er lasta. Elevnamn lagrast kun lokalt i nettlesaren — aldri på nokon server. Du kan også eksportere/importere oppsett som JSON-fil for å flytte mellom maskiner.</p>
+
+                                <h4 style="margin-top:24px;margin-bottom:12px;">🖼️ Bildebehandling</h4>
+                                <p><strong>Ingen data blir lagra.</strong> Bilete du lastar opp blir berre lese inn i minnet med FileReader API og behandla med Canvas API. Når du lukkar sida, er alt borte.</p>
+                                <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> JSZip bibliotek blir lasta frå <strong>cdnjs.cloudflare.com</strong> (kun for ZIP-nedlasting). Ingen bilete eller data blir sendt til nokon server. Alt skjer lokalt i nettlesaren din.</p>
 
                                 <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/frødebrett.png" alt="Frødebrett" style="height:20px;width:auto;margin-right:4px"> Frødebrett</h4>
                                 <table class="data-table">
