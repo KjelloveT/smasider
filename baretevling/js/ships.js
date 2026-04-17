@@ -176,10 +176,27 @@ const Ships = {
     // Render ship preview
     renderShipPreview(container, size) {
         container.innerHTML = '';
-        for (let i = 0; i < size; i++) {
-            const cell = document.createElement('div');
-            cell.className = 'ship-preview-cell';
-            container.appendChild(cell);
+        const parts = Board.shipImages[size];
+        if (parts) {
+            const wrapper = document.createElement('div');
+            wrapper.style.display = 'flex';
+            wrapper.style.gap = '2px';
+            wrapper.style.alignItems = 'center';
+            for (const part of parts) {
+                const img = document.createElement('img');
+                img.src = part.img;
+                img.alt = `Skip (${size})`;
+                img.style.maxHeight = '60px';
+                img.style.width = 'auto';
+                wrapper.appendChild(img);
+            }
+            container.appendChild(wrapper);
+        } else {
+            for (let i = 0; i < size; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'ship-preview-cell';
+                container.appendChild(cell);
+            }
         }
     }
 };

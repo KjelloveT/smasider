@@ -162,7 +162,8 @@ const Game = {
         // Render board
         const boardContainer = document.getElementById('placementBoard');
         const boardData = this.state.currentPlayer === 1 ? this.state.playerBoard : this.state.enemyBoard;
-        Board.renderBoard(boardContainer, boardData, this.state.boardSize);
+        const ships = this.state.currentPlayer === 1 ? this.state.playerShips : this.state.enemyShips;
+        Board.renderBoard(boardContainer, boardData, this.state.boardSize, { ships });
 
         // Update ship preview
         this.updateShipPreview();
@@ -225,18 +226,10 @@ const Game = {
 
         // Check if all ships are placed
         if (this.state.currentShipIndex >= ships.length) {
-            if (this.state.mode === 'local' && this.state.currentPlayer === 1) {
-                // Switch to player 2 placement
-                this.state.currentPlayer = 2;
-                this.state.currentShipIndex = 0;
-                this.state.enemyShips = Ships.generateShipList(this.state.shipConfig);
-                this.setupPlacementPhase();
-            } else {
-                // Enable start game button
-                document.getElementById('btnStartGame').disabled = false;
-                document.getElementById('btnPlaceShip').disabled = true;
-                document.getElementById('shipPreview').innerHTML = 'Alle skip plassert!';
-            }
+            // Enable start game button
+            document.getElementById('btnStartGame').disabled = false;
+            document.getElementById('btnPlaceShip').disabled = true;
+            document.getElementById('shipPreview').innerHTML = 'Alle skip plassert!';
         } else {
             this.updateShipPreview();
             this.setupPlacementPhase();
@@ -272,6 +265,15 @@ const Game = {
 
     startGame() {
         AI.reset();
+
+        // In AI mode, auto-place enemy ships
+        if (this.state.mode === 'ai') {
+            const placed = Ships.autoPlaceShips(this.state.enemyBoard, this.state.enemyShips, this.state.boardSize);
+            if (placed) {
+                this.state.enemyShips = placed;
+            }
+        }
+
         this.showScreen('game');
         
         // Show/hide buttons based on mode
@@ -301,7 +303,7 @@ const Game = {
         const attackBoardContainer = document.getElementById('attackBoard');
 
         // Show player's board with their ships and enemy attacks
-        Board.renderBoard(playerBoardContainer, this.state.playerBoard, this.state.boardSize);
+        Board.renderBoard(playerBoardContainer, this.state.playerBoard, this.state.boardSize, { ships: this.state.playerShips });
 
         // Show attack board (enemy's board without ships, just hits/misses)
         const attackBoardData = this.createAttackBoardData();

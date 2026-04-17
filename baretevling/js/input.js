@@ -118,16 +118,17 @@ const Input = {
             boardData,
             boardSize
         );
-        
+
         const boardContainer = document.getElementById('placementBoard');
-        
+
         if (validation.valid) {
             const validCells = validation.cells.map(([c, r]) => `${c},${r}`);
             Board.renderBoard(boardContainer, boardData, boardSize, {
-                previewCells: { valid: validCells }
+                previewCells: { valid: validCells },
+                ships
             });
         } else {
-            Board.renderBoard(boardContainer, boardData, boardSize);
+            Board.renderBoard(boardContainer, boardData, boardSize, { ships });
         }
     },
 

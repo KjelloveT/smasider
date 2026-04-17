@@ -355,6 +355,7 @@ details[open] > .accordion-header::after {
     background: #000;
     padding: 0;
     border: 1px solid #000;
+    position: relative;
 }
 
 .cell {
@@ -367,6 +368,15 @@ details[open] > .accordion-header::after {
     font-weight: 900;
     position: relative;
     border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.ship-image-spanning {
+    transition: opacity 0.2s;
+}
+
+.ship-image-spanning.hit {
+    opacity: 0.5;
 }
 
 .cell.header-col {
@@ -414,16 +424,28 @@ details[open] > .accordion-header::after {
     background: #ddd;
 }
 
-.cell.miss::after {
-    content: '×';
-    font-size: 1.2rem;
-    color: #666;
+.cell.hit {
+    background: #ddd;
 }
 
-.cell.hit::after {
-    content: '●';
-    font-size: 1.2rem;
-    color: #ff0000;
+.cell .hit-icon,
+.cell .miss-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    stroke-width: 3;
+    stroke: #000;
+    filter: drop-shadow(0 0 1px #000);
+}
+
+.cell .hit-icon {
+    stroke: #4ECDC4;
+}
+
+.cell .miss-icon {
+    stroke: #FFB2EF;
 }
 
 /* Placement Preview */
