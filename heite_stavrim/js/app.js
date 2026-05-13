@@ -72,6 +72,7 @@ class HeiteStavrimGame {
             teamScores: id('teamScoresDisplay'),
             // Answer
             writeAnswers: id('writeAnswersMode'),
+            individualAnswers: id('individualAnswersMode'),
             directPoints: id('directPointsMode'),
             backToGameBtn: id('backToGame'),
             submitBtn: id('submitAnswers'),
@@ -86,6 +87,12 @@ class HeiteStavrimGame {
             customSaveBtn: id('customSaveBtn'),
             customCancelBtn: id('customCancelBtn'),
             customCloseBtn: id('customModalClose')
+        };
+
+        // Individual mode state
+        this.individualMode = {
+            catIndex: 0,
+            letterIndex: 0
         };
     }
 
@@ -117,8 +124,12 @@ class HeiteStavrimGame {
         document.querySelectorAll('input[name="answerMode"]').forEach(r => {
             r.addEventListener('change', () => {
                 this.el.writeAnswers.style.display = r.value === 'write' ? '' : 'none';
+                this.el.individualAnswers.style.display = r.value === 'individual' ? '' : 'none';
                 this.el.directPoints.style.display = r.value === 'points' ? '' : 'none';
                 this.syncRadioStyles();
+                if (r.value === 'individual') {
+                    this.renderIndividualMode();
+                }
             });
         });
 
@@ -159,6 +170,7 @@ class HeiteStavrimGame {
                 if (this.round.answers[key]) {
                     this.round.answers[key].text = e.target.value;
                 }
+                this.checkDuplicates();
             }
         });
 
@@ -537,6 +549,122 @@ class HeiteStavrimGame {
         this.el.writeAnswers.style.display = '';
         this.el.directPoints.style.display = 'none';
         this.syncRadioStyles();
+
+        // Check for duplicates after rendering
+        this.checkDuplicates();
+
+        // Render individual mode as well
+        this.renderIndividualMode();
+    }
+
+    renderIndividualMode() {
+        const ci = this.individualMode.catIndex;
+        const li = this.individualMode.letterIndex;
+        const cat = this.round.categories[ci];
+        const letter = this.round.letters[li];
+
+        const totalCats = this.round.categories.length;
+        const totalLetters = this.round.letters.length;
+        const currentIndex = ci * totalLetters + li;
+        const totalItems = totalCats * totalLetters;
+
+        const teamRows = this.teams.map(t => {
+            const key = `${t.id}-${ci}-${li}`;
+            const answer = this.round.answers[key] || { text: '', status: null };
+            return `
+                <div class="individual-team-row" data-key="${key}" style="border-left-color:${t.color};">
+                    <span class="team-name">${this.escapeHtml(t.name)}</span>
+                    <input type="text" class="answer-input individual-input" data-key="${key}" 
+                           value="${this.escapeHtml(answer.text)}" placeholder="Svar...">
+                    <div class="answer-status">
+                        <button class="status-btn unique" data-key="${key}" data-status="unique" type="button">3p</button>
+                        <button class="status-btn duplicate" data-key="${key}" data-status="duplicate" type="button">1p</button>
+                        <button class="status-btn invalid" data-key="${key}" data-status="invalid" type="button">0p</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        this.el.individualAnswers.innerHTML = `
+            <div class="box2">
+                <div class="individual-header">
+                    <div class="individual-nav">
+                        <button class="btn nav-btn" id="navPrev" ${currentIndex === 0 ? 'disabled' : ''}>◀ Forrige</button>
+                        <div class="individual-info">
+                            <span class="letter-tag">${letter}</span>
+                            <span class="category-name">${this.escapeHtml(cat)}</span>
+                            <span class="progress">${currentIndex + 1} / ${totalItems}</span>
+                        </div>
+                        <button class="btn nav-btn" id="navNext" ${currentIndex === totalItems - 1 ? 'disabled' : ''}>Neste ▶</button>
+                    </div>
+                </div>
+                <div class="individual-teams">
+                    ${teamRows}
+                </div>
+            </div>
+        `;
+
+        // Attach navigation events
+        document.getElementById('navPrev').addEventListener('click', () => this.navigateIndividual(-1));
+        document.getElementById('navNext').addEventListener('click', () => this.navigateIndividual(1));
+
+        // Attach input events
+        this.el.individualAnswers.querySelectorAll('.individual-input').forEach(input => {
+            input.addEventListener('input', (e) => {
+                const key = e.target.dataset.key;
+                if (this.round.answers[key]) {
+                    this.round.answers[key].text = e.target.value;
+                } else {
+                    this.round.answers[key] = { text: e.target.value, status: null };
+                }
+                this.checkDuplicates();
+            });
+        });
+
+        // Attach status button events
+        this.el.individualAnswers.querySelectorAll('.status-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const key = e.target.dataset.key;
+                const status = e.target.dataset.status;
+                if (!this.round.answers[key]) return;
+
+                const current = this.round.answers[key].status;
+                const newStatus = current === status ? null : status;
+                this.round.answers[key].status = newStatus;
+
+                const row = e.target.closest('.individual-team-row');
+                row.querySelectorAll('.status-btn').forEach(b => b.classList.remove('active'));
+                if (newStatus) {
+                    row.querySelector(`.status-btn[data-status="${newStatus}"]`).classList.add('active');
+                }
+            });
+        });
+
+        // Set active status buttons
+        this.teams.forEach(t => {
+            const key = `${t.id}-${ci}-${li}`;
+            const answer = this.round.answers[key];
+            if (answer && answer.status) {
+                const row = this.el.individualAnswers.querySelector(`.individual-team-row[data-key="${key}"]`);
+                if (row) {
+                    row.querySelector(`.status-btn[data-status="${answer.status}"]`).classList.add('active');
+                }
+            }
+        });
+    }
+
+    navigateIndividual(direction) {
+        const totalCats = this.round.categories.length;
+        const totalLetters = this.round.letters.length;
+        const totalItems = totalCats * totalLetters;
+        let currentIndex = this.individualMode.catIndex * totalLetters + this.individualMode.letterIndex;
+        currentIndex += direction;
+
+        if (currentIndex < 0 || currentIndex >= totalItems) return;
+
+        this.individualMode.catIndex = Math.floor(currentIndex / totalLetters);
+        this.individualMode.letterIndex = currentIndex % totalLetters;
+        this.renderIndividualMode();
     }
 
     toggleAnswerStatus(btn) {
@@ -556,6 +684,56 @@ class HeiteStavrimGame {
         }
 
         this.updateRunningTotals();
+    }
+
+    checkDuplicates() {
+        // Only check if in write mode
+        if (this.el.writeAnswers.style.display === 'none') return;
+
+        // Group answers by category+letter (ci-li part of key)
+        const answerGroups = {};
+        Object.entries(this.round.answers).forEach(([key, answer]) => {
+            const parts = key.split('-');
+            const catLetterKey = `${parts[1]}-${parts[2]}`; // categoryIndex-letterIndex
+            const text = answer.text.trim().toLowerCase();
+            
+            if (text) {
+                if (!answerGroups[catLetterKey]) {
+                    answerGroups[catLetterKey] = [];
+                }
+                answerGroups[catLetterKey].push({ key, text });
+            }
+        });
+
+        // Remove all duplicate highlights first
+        this.el.writeAnswers.querySelectorAll('.answer-row').forEach(row => {
+            row.classList.remove('duplicate-highlight');
+            const input = row.querySelector('.answer-input');
+            if (input) input.classList.remove('duplicate-input');
+        });
+
+        // Add highlight to duplicates
+        Object.values(answerGroups).forEach(group => {
+            if (group.length > 1) {
+                // Find all unique texts
+                const textCounts = {};
+                group.forEach(item => {
+                    textCounts[item.text] = (textCounts[item.text] || 0) + 1;
+                });
+
+                // Highlight rows with duplicate texts
+                group.forEach(item => {
+                    if (textCounts[item.text] > 1) {
+                        const row = this.el.writeAnswers.querySelector(`.answer-row[data-key="${item.key}"]`);
+                        if (row) {
+                            row.classList.add('duplicate-highlight');
+                            const input = row.querySelector('.answer-input');
+                            if (input) input.classList.add('duplicate-input');
+                        }
+                    }
+                });
+            }
+        });
     }
 
     computeWriteModeScores() {
@@ -580,7 +758,7 @@ class HeiteStavrimGame {
     submitAnswers() {
         const mode = document.querySelector('input[name="answerMode"]:checked').value;
 
-        if (mode === 'write') {
+        if (mode === 'write' || mode === 'individual') {
             const totals = this.computeWriteModeScores();
             this.teams.forEach(t => {
                 this.round.roundScores[t.id] = totals[t.id];

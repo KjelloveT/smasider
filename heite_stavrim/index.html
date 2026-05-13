@@ -162,7 +162,11 @@
                     <div class="radio-row" data-group="answerMode">
                         <label class="radio-label">
                             <input type="radio" name="answerMode" value="write" checked>
-                            <span>Skriv inn svar (auto-poeng)</span>
+                            <span>Skriv inn svar (alle)</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="answerMode" value="individual">
+                            <span>Skriv inn svar (einskild)</span>
                         </label>
                         <label class="radio-label">
                             <input type="radio" name="answerMode" value="points">
@@ -173,6 +177,7 @@
                 </div>
 
                 <div id="writeAnswersMode"></div>
+                <div id="individualAnswersMode" style="display:none;"></div>
                 <div id="directPointsMode" style="display:none;"></div>
 
                 <div class="box2 setup-actions">

@@ -408,6 +408,95 @@
     border-color: #1a1a1a;
 }
 
+/* === DUPLICATE HIGHLIGHTING === */
+.answer-row.duplicate-highlight {
+    background: #fff9c4 !important;
+    border-left: 4px solid #fbbf24;
+}
+
+.answer-input.duplicate-input {
+    border-color: #fbbf24 !important;
+    box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.5);
+}
+
+/* === INDIVIDUAL MODE === */
+.individual-header {
+    margin-bottom: 16px;
+}
+
+.individual-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.individual-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.individual-info .letter-tag {
+    background: var(--accent);
+    color: var(--text-on-accent);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 1.2rem;
+}
+
+.individual-info .category-name {
+    color: var(--text);
+}
+
+.individual-info .progress {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.nav-btn {
+    padding: 8px 16px;
+}
+
+.nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.individual-teams {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.individual-team-row {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) minmax(140px, 2fr) auto;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 12px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-left-width: 6px;
+    box-shadow: 2px 2px 0 var(--shadow);
+}
+
+.individual-team-row .team-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.individual-team-row .answer-input {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-family: inherit;
+}
+
 /* === DIRECT POINTS === */
 .direct-points-grid {
     display: grid;
@@ -435,12 +524,13 @@
     display: flex;
     gap: 8px;
     align-items: center;
+    width: 100%;
 }
 
 .points-btn {
-    width: 44px;
-    height: 44px;
-    font-size: 1.8rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
     font-weight: 900;
     padding: 0;
     display: flex;
@@ -451,6 +541,7 @@
 
 .team-points-input input {
     flex: 1;
+    min-width: 0;
     padding: 8px 12px;
     font-size: 1.4rem;
     font-weight: 800;
