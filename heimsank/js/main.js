@@ -81,7 +81,7 @@ function triggerCard() {
   fb.innerHTML = '<img src="Logo - no text.png" alt="Heimsank" style="height:100% !important;width:auto !important;object-fit:contain !important;font-size:unset !important">';
   document.getElementById('revealBtn').classList.add('hidden');
   document.getElementById('revealSub').textContent = '';
-  modal.classList.remove('hidden');
+  modal.classList.add('open');
 
   // Determine if rare (segngjeten or gudebore) for spectacular animation
   const isRare = card.rarity === 'segngjeten' || card.rarity === 'gudebore';
@@ -112,7 +112,9 @@ function triggerCard() {
     flipFront.appendChild(cardPreview);
 
     fc.classList.add('flipped');
-    document.getElementById('revealSub').textContent = `${RL[card.rarity]}${hasFoil ? ' ✨' : ''} – ${card.name}`;
+    const subEl = document.getElementById('revealSub');
+    subEl.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:.95rem;font-weight:700;margin-bottom:16px;color:var(--text)';
+    subEl.innerHTML = `<span>${RL[card.rarity]}</span>${hasFoil ? ICON('sparkles', 14) : ''}<span>– ${esc(card.name)}</span>`;
     setTimeout(() => document.getElementById('revealBtn').classList.remove('hidden'), 700);
   }, flipDelay);
 }
@@ -121,7 +123,7 @@ function triggerCard() {
  * Handle after reveal (add to collection or show pending)
  */
 function afterReveal() {
-  document.getElementById('revealModal').classList.add('hidden');
+  document.getElementById('revealModal').classList.remove('open');
   S.correct = 0;
   updateProg();
 

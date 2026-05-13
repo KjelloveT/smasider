@@ -22,7 +22,7 @@ function mkCard(card, sz, entry = null) {
   hdr.className = 'card-header';
   let hdrHtml = `<span class="card-name">${esc(card.name)}</span><div class="card-header-meta"><span class="rarity-badge">${RL[card.rarity]}</span>`;
   if (entry && entry.difficulty) {
-    hdrHtml += `<span class="diff-badge">${entry.difficulty} ${entry.operations ? entry.operations.join(' ') : ''}${hasFoil ? ' ✨' : ''}</span>`;
+    hdrHtml += `<span class="diff-badge">${entry.difficulty} ${entry.operations ? entry.operations.join(' ') : ''}${hasFoil ? ' ' + ICON('sparkles', 10) : ''}</span>`;
   }
   hdrHtml += `</div>`;
   hdr.innerHTML = hdrHtml;
@@ -75,7 +75,9 @@ function mkCard(card, sz, entry = null) {
   const ft = document.createElement('div');
   ft.className = 'card-footer';
   const yr = document.createElement('span');
-  yr.textContent = card.stat ? `${card.statLabel} ${card.stat}` : card.statLabel || '';
+  yr.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
+  const labelIcon = card.statLabel ? CAT_ICON(card.statLabel, 12) : '';
+  yr.innerHTML = card.stat ? `${labelIcon}<span>${esc(String(card.stat))}</span>` : labelIcon;
   ft.appendChild(yr);
 
   // Article link
@@ -94,8 +96,8 @@ function mkCard(card, sz, entry = null) {
   // Add category info for test cards
   if (isTest) {
     const catInfo = document.createElement('div');
-    catInfo.style.cssText = 'font-size:0.6rem;font-weight:900;text-transform:uppercase;margin-top:2px;opacity:0.7';
-    catInfo.textContent = `${card.catIcon} ${card.catLabel}`;
+    catInfo.style.cssText = 'font-size:0.6rem;font-weight:900;text-transform:uppercase;margin-top:2px;opacity:0.7;display:inline-flex;align-items:center;gap:4px';
+    catInfo.innerHTML = `${CAT_ICON(card.catIcon, 12)}<span>${esc(card.catLabel || '')}</span>`;
     ft.appendChild(catInfo);
   }
 
@@ -104,7 +106,7 @@ function mkCard(card, sz, entry = null) {
   if (isBar && entry && S.pending && entry.cardId !== S.pending?.id) {
     const swapBtn = document.createElement('button');
     swapBtn.className = 'card-action-btn swap-btn';
-    swapBtn.innerHTML = '🔄';
+    swapBtn.innerHTML = ICON('swap', 18);
     swapBtn.title = 'Bytt med nytt kort';
     swapBtn.onclick = (e) => {
       e.stopPropagation();

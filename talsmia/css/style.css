@@ -4,41 +4,42 @@
     box-sizing: border-box;
 }
 
-:root {
-    --bg-color: #fdfd96;
-    --card-bg: #fff;
-    --border: #000;
-    --accent-green: #bafca2;
-    --accent-blue: #87ceeb;
-    --accent-pink: #ffb2ef;
-    --accent-yellow: #ffdb58;
-    --accent-orange: #ffa07a;
-    --accent-purple: #c4a1ff;
-    --accent-teal: #a7dbd8;
-    --shadow: 5px 5px 0 #000;
-    --shadow-hover: 8px 8px 0 #000;
+/* Map local Talsmia variable names to the neobrutalisme theme variables
+   (defined by [data-theme="candy"] / [data-theme="neon"] in neobrutalisme.css).
+   Uses body[data-theme] to override the theme-variable definitions. */
+body[data-theme] {
+    --bg-color: var(--bg);
+    --card-bg: var(--surface);
+    --accent-green: var(--accent4);
+    --accent-blue: var(--accent3);
+    --accent-pink: var(--accent);
+    --accent-yellow: var(--accent3);
+    --accent-orange: var(--accent5);
+    --accent-purple: var(--accent);
+    --accent-teal: var(--accent2);
+    /* talsmia-specific full-shadow vars (avoid clashing with neo --shadow colour) */
+    --ts-shadow: 6px 6px 0 var(--shadow);
+    --ts-shadow-hover: 10px 10px 0 var(--shadow);
+    --ts-shadow-accent: 6px 6px 0 var(--accent2);
 }
-
 body {
     font-family: 'Arial Black', 'Arial Bold', Arial, system-ui, sans-serif;
-    background-color: var(--bg-color);
+    background-color: var(--bg);
     min-height: 100vh;
-    padding: 24px;
-    color: var(--border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    color: var(--text);
 }
 
 .container {
     max-width: 1200px;
     width: 100%;
+    margin: 0 auto;
+    padding: 24px;
 }
 
 header {
     background: var(--card-bg);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--ts-shadow);
     padding: 24px 32px;
     margin-bottom: 32px;
     text-align: center;
@@ -62,7 +63,7 @@ h1 {
     display: none;
     background: var(--card-bg);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--ts-shadow);
     padding: 32px;
     margin-bottom: 24px;
 }
@@ -89,7 +90,7 @@ h1 {
 
 .btn:hover {
     transform: translate(-2px, -2px);
-    box-shadow: var(--shadow-hover);
+    box-shadow: var(--ts-shadow-hover);
 }
 
 .btn:active {
@@ -104,7 +105,9 @@ h1 {
 }
 
 .btn.selected {
-    background: var(--accent-green);
+    background: var(--accent-purple);
+    color: var(--text-on-accent);
+    box-shadow: var(--ts-shadow-accent);
 }
 
 .mode-selector,
@@ -137,9 +140,9 @@ h1 {
     font-weight: 900;
     display: inline-block;
     padding: 8px 24px;
-    background: var(--accent-teal);
+    background: var(--accent-blue);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--ts-shadow-accent);
 }
 
 .warning {
@@ -176,11 +179,12 @@ h1 {
     display: inline-block;
     background: var(--accent-purple);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--ts-shadow);
     font-size: 2.4rem;
     font-weight: 900;
     min-width: 140px;
     padding: 6px 12px;
+    color: #fff;
 }
 
 #target-class {
@@ -206,7 +210,7 @@ h1 {
     height: 82px;
     background: var(--accent-yellow);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--ts-shadow-accent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -234,7 +238,7 @@ h1 {
     font-weight: 900;
     padding: 12px 16px;
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--ts-shadow);
     width: min(760px, 95%);
 }
 
@@ -259,7 +263,7 @@ h1 {
 .stat-box {
     background: var(--card-bg);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--ts-shadow);
     padding: 16px;
     text-align: center;
 }
@@ -307,7 +311,7 @@ h1 {
 
 .result-hero {
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--ts-shadow);
     background: #fffef2;
     padding: 16px;
     margin-bottom: 18px;
@@ -322,7 +326,7 @@ h1 {
 
 .metric-card {
     border: 3px solid var(--border);
-    box-shadow: 3px 3px 0 var(--border);
+    box-shadow: 4px 4px 0 var(--border);
     padding: 10px 8px;
     text-align: center;
 }
@@ -347,7 +351,7 @@ h1 {
 
 .expression-box {
     border: 3px solid var(--border);
-    box-shadow: 3px 3px 0 var(--border);
+    box-shadow: 4px 4px 0 var(--border);
     background: var(--accent-yellow);
     padding: 10px 12px;
     margin-bottom: 10px;
@@ -362,7 +366,7 @@ h1 {
 
 .result-note {
     border: 3px solid var(--border);
-    box-shadow: 3px 3px 0 var(--border);
+    box-shadow: 4px 4px 0 var(--border);
     padding: 10px 12px;
     font-family: Arial, system-ui, sans-serif;
     font-size: 0.92rem;
@@ -468,7 +472,7 @@ h1 {
     overflow: auto;
     background: var(--card-bg);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--ts-shadow);
     padding: 20px;
 }
 

@@ -37,7 +37,7 @@ async function initShowcase() {
       const imgF = cat.imageField || 'image';
       const statF = cat.statField || 'birthDate';
       const statT = cat.statType || 'year';
-      const statLbl = cat.statLabel || '📅';
+      const statLbl = cat.statLabel || 'calendar';
 
       const allCards = parseCSV(csv)
         .filter(r => r[imgF] && r[imgF].trim())
@@ -124,8 +124,8 @@ function renderFan(data, instant) {
  */
 function buildFan(container, label, data) {
   container.innerHTML = '';
-  label.textContent = `${data.cat.icon} ${data.cat.label}`;
-  label.style.opacity = '1';
+  label.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;gap:6px;opacity:1';
+  label.innerHTML = `${CAT_ICON(data.cat.icon, 16)}<span>${data.cat.label}</span>`;
 
   data.picks.forEach((card, i) => {
     const el = document.createElement('div');
@@ -142,10 +142,16 @@ function buildFan(container, label, data) {
         <span class="fan-rarity-badge">${RL[card.rarity]}</span>
       </div>
       <div class="fan-card-img" style="background:${imgBg}">
-        <img src="${card.img}" alt="${card.name}" onerror="this.parentNode.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:1.5rem;opacity:.2\\'>${data.cat.icon}</div>'">
+        <img src="${card.img}" alt="${esc(card.name)}">
       </div>
-      <div class="fan-card-footer">${card.statLabel} ${card.stat}</div>
+      <div class="fan-card-footer">${CAT_ICON(card.statLabel, 10)}<span>${esc(String(card.stat))}</span></div>
     `;
+    const fanImg = el.querySelector('.fan-card-img img');
+    if (fanImg) {
+      fanImg.onerror = function () {
+        this.parentNode.innerHTML = `<div class="fan-card-img-fallback">${CAT_ICON(data.cat.icon, 28)}</div>`;
+      };
+    }
 
     // Stagger entrance animation
     el.classList.add('fan-enter');

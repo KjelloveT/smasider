@@ -1,0 +1,191 @@
+.menu-demo { background: var(--surface); border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow); margin-bottom: 8px; overflow: hidden; }
+
+/* M-1 Simple Header */
+.menu-1 .menu-bar { display: flex; align-items: center; padding: 12px 20px; gap: 20px; border-bottom: 3px solid var(--border); }
+.menu-1 .menu-logo { font-weight: 900; font-size: 18px; }
+.menu-1 .menu-links { display: flex; gap: 16px; }
+.menu-1 .menu-links a { text-decoration: none; color: var(--text); font-weight: 700; padding: 4px 8px; }
+.menu-1 .menu-links a:hover { background: var(--accent); color: #fff; }
+
+/* M-2 Accent Header */
+.menu-2 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--accent); border-bottom: 3px solid var(--border); }
+.menu-2 .menu-logo { font-weight: 900; font-size: 18px; color: #fff; }
+.menu-2 .menu-links { display: flex; gap: 4px; }
+.menu-2 .menu-links a { text-decoration: none; color: #fff; font-weight: 700; padding: 6px 14px; border: 2px solid #fff; }
+.menu-2 .menu-links a:hover { background: #fff; color: var(--accent); }
+
+/* M-3 Segmented */
+.menu-3 .menu-bar { display: flex; align-items: center; padding: 0; }
+.menu-3 .menu-logo { font-weight: 900; font-size: 18px; padding: 14px 20px; background: var(--accent); color: #fff; border-right: 3px solid var(--border); }
+.menu-3 .menu-links { display: flex; }
+.menu-3 .menu-links a { text-decoration: none; color: var(--text); font-weight: 700; padding: 14px 18px; border-right: 2px solid var(--border); }
+.menu-3 .menu-links a:hover { background: var(--accent3); }
+
+/* M-4 Centered Tabs */
+.menu-4 .menu-bar { display: flex; align-items: center; justify-content: center; padding: 12px 20px; }
+.menu-4 .menu-links { display: flex; }
+.menu-4 .menu-links a { text-decoration: none; color: var(--text); font-weight: 800; padding: 8px 20px; border: 2px solid var(--border); margin-left: -2px; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
+.menu-4 .menu-links a:first-child { margin-left: 0; }
+.menu-4 .menu-links a:hover { background: var(--accent); color: #fff; z-index: 1; }
+
+/* M-5 Underline Hover */
+.menu-5 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 6px solid var(--accent); }
+.menu-5 .menu-logo { font-weight: 900; font-size: 18px; }
+.menu-5 .menu-links { display: flex; gap: 20px; }
+.menu-5 .menu-links a { text-decoration: none; color: var(--text); font-weight: 700; position: relative; padding-bottom: 4px; }
+.menu-5 .menu-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 3px; background: var(--accent); transition: width 0.2s; }
+.menu-5 .menu-links a:hover::after { width: 100%; }
+
+/* M-6 Button Links */
+.menu-6 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: var(--accent2); border-bottom: 3px solid var(--border); }
+.menu-6 .menu-logo { font-weight: 900; font-size: 18px; color: #fff; }
+.menu-6 .menu-links { display: flex; gap: 8px; }
+.menu-6 .menu-links a { text-decoration: none; color: var(--text); font-weight: 700; padding: 6px 14px; background: var(--surface); border: 2px solid var(--border); box-shadow: 2px 2px 0 var(--shadow); }
+.menu-6 .menu-links a:hover { transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--shadow); }
+
+/* M-7 Playful Tilted */
+.menu-7 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; border-bottom: 3px solid var(--border); }
+.menu-7 .menu-logo { font-weight: 900; font-size: 18px; transform: rotate(-3deg); }
+.menu-7 .menu-links { display: flex; gap: 12px; }
+.menu-7 .menu-links a { text-decoration: none; color: #fff; font-weight: 700; padding: 6px 14px; background: var(--accent); border: 2px solid var(--border); transform: rotate(1deg); box-shadow: 3px 3px 0 var(--shadow); }
+.menu-7 .menu-links a:hover { transform: rotate(-1deg); }
+
+/* M-8 Classic Dropdown */
+.menu-8 .menu-bar { display: flex; align-items: center; padding: 12px 20px; gap: 20px; border-bottom: 3px solid var(--border); }
+.menu-8 .menu-logo { font-weight: 900; font-size: 18px; }
+.menu-8 .dropdown { position: relative; display: inline-block; }
+.menu-8 .dropdown-trigger { font-weight: 700; padding: 6px 14px; cursor: pointer; background: var(--surface); border: 2px solid var(--border); font-family: inherit; font-size: 14px; }
+.menu-8 .dropdown-content { display: none; position: absolute; top: 100%; left: 0; min-width: 180px; background: var(--surface); border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow); z-index: 10; }
+.menu-8 .dropdown:hover .dropdown-content { display: block; }
+.menu-8 .dropdown-content a { display: block; padding: 10px 16px; text-decoration: none; color: var(--text); font-weight: 600; border-bottom: 2px solid var(--border); }
+.menu-8 .dropdown-content a:last-child { border-bottom: none; }
+.menu-8 .dropdown-content a:hover { background: var(--accent); color: #fff; }
+
+/* M-9 Rounded Dropdown */
+.menu-9 .menu-bar { display: flex; align-items: center; padding: 12px 20px; gap: 20px; background: var(--accent); border-bottom: 3px solid var(--border); }
+.menu-9 .menu-logo { font-weight: 900; font-size: 18px; color: #fff; }
+.menu-9 .dropdown { position: relative; display: inline-block; }
+.menu-9 .dropdown-trigger { font-weight: 700; padding: 6px 14px; cursor: pointer; background: #fff; border: 2px solid var(--border); font-family: inherit; font-size: 14px; box-shadow: 3px 3px 0 rgba(0,0,0,0.3); }
+.menu-9 .dropdown-content { display: none; position: absolute; top: calc(100% + 4px); left: 0; min-width: 200px; background: var(--surface); border: 3px solid var(--border); box-shadow: 6px 6px 0 var(--shadow); z-index: 10; border-radius: 8px; overflow: hidden; }
+.menu-9 .dropdown:hover .dropdown-content { display: block; }
+.menu-9 .dropdown-content a { display: block; padding: 12px 16px; text-decoration: none; color: var(--text); font-weight: 600; }
+.menu-9 .dropdown-content a:hover { background: var(--accent3); }
+
+/* M-10 Dot Indicator */
+.menu-10 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 3px solid var(--border); }
+.menu-10 .menu-logo { font-weight: 900; font-size: 18px; }
+.menu-10 .dropdown { position: relative; display: inline-block; }
+.menu-10 .dropdown-trigger { font-weight: 700; padding: 8px 16px; cursor: pointer; background: var(--accent3); border: 3px solid var(--border); font-family: inherit; font-size: 14px; box-shadow: 3px 3px 0 var(--shadow); }
+.menu-10 .dropdown-content { display: none; position: absolute; top: calc(100% + 6px); right: 0; min-width: 220px; background: var(--surface); border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow); z-index: 10; }
+.menu-10 .dropdown:hover .dropdown-content { display: block; }
+.menu-10 .dropdown-content a { display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: var(--text); font-weight: 600; border-bottom: 2px solid var(--border); }
+.menu-10 .dropdown-content a:last-child { border-bottom: none; }
+.menu-10 .dropdown-content a:hover { background: var(--accent); color: #fff; }
+.menu-10 .dropdown-content .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+/* M-11 Colored Dropdown */
+.menu-11 .menu-bar { display: flex; align-items: center; padding: 12px 20px; gap: 20px; }
+.menu-11 .menu-logo { font-weight: 900; font-size: 18px; }
+.menu-11 .dropdown { position: relative; display: inline-block; }
+.menu-11 .dropdown-trigger { font-weight: 700; padding: 6px 14px; cursor: pointer; background: transparent; border: 2px dashed var(--border); font-family: inherit; font-size: 14px; }
+.menu-11 .dropdown-content { display: none; position: absolute; top: calc(100% + 2px); left: 0; min-width: 180px; background: var(--accent2); color: #fff; border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow); z-index: 10; }
+.menu-11 .dropdown:hover .dropdown-content { display: block; }
+.menu-11 .dropdown-content a { display: block; padding: 10px 16px; text-decoration: none; color: #fff; font-weight: 600; border-bottom: 2px solid rgba(255,255,255,0.3); }
+.menu-11 .dropdown-content a:last-child { border-bottom: none; }
+.menu-11 .dropdown-content a:hover { background: rgba(0,0,0,0.2); }
+
+/* M-12 Left Bar Dropdown */
+.menu-12 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 3px solid var(--border); }
+.menu-12 .menu-logo { font-weight: 900; font-size: 18px; }
+.menu-12 .dropdown { position: relative; display: inline-block; }
+.menu-12 .dropdown-trigger { font-weight: 700; padding: 8px 16px; cursor: pointer; background: var(--surface); border: 3px solid var(--border); font-family: inherit; font-size: 14px; border-left: 6px solid var(--accent); }
+.menu-12 .dropdown-content { display: none; position: absolute; top: 100%; right: 0; min-width: 200px; background: var(--surface); border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow); z-index: 10; }
+.menu-12 .dropdown:hover .dropdown-content { display: block; }
+.menu-12 .dropdown-content a { display: block; padding: 10px 16px; text-decoration: none; color: var(--text); font-weight: 600; border-left: 4px solid transparent; }
+.menu-12 .dropdown-content a:hover { border-left-color: var(--accent); background: var(--accent3); }
+
+/* M-13 Stacked Cards */
+.menu-13 .menu-bar { display: flex; align-items: center; padding: 12px 20px; gap: 12px; border-bottom: 3px solid var(--border); }
+.menu-13 .menu-logo { font-weight: 900; font-size: 18px; }
+.menu-13 .dropdown { position: relative; display: inline-block; }
+.menu-13 .dropdown-trigger { font-weight: 800; padding: 6px 14px; cursor: pointer; background: var(--accent); color: #fff; border: 3px solid var(--border); font-family: inherit; font-size: 13px; box-shadow: 3px 3px 0 var(--shadow); text-transform: uppercase; letter-spacing: 1px; }
+.menu-13 .dropdown-content { display: none; position: absolute; top: calc(100% + 4px); left: 0; min-width: 200px; z-index: 10; }
+.menu-13 .dropdown:hover .dropdown-content { display: block; }
+.menu-13 .dropdown-content a { display: block; padding: 10px 16px; text-decoration: none; color: #fff; font-weight: 700; background: var(--accent); border: 2px solid var(--border); margin-bottom: 4px; box-shadow: 3px 3px 0 var(--shadow); }
+.menu-13 .dropdown-content a:hover { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--shadow); }
+
+/* Hamburger icon base */
+.hamburger-icon { width: 36px; height: 36px; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; background: transparent; border: none; padding: 4px; }
+.hamburger-icon span { display: block; width: 24px; height: 3px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+
+/* M-14 Boxed Hamburger */
+.menu-14 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 3px solid var(--border); }
+.menu-14 .menu-logo { font-weight: 900; font-size: 18px; }
+.menu-14 .hamburger-icon { border: 3px solid var(--border); width: 42px; height: 42px; box-shadow: 3px 3px 0 var(--shadow); }
+.menu-14 .mobile-menu { display: none; padding: 0; }
+.menu-14 .mobile-menu.open { display: block; }
+.menu-14 .mobile-menu a { display: block; padding: 14px 20px; text-decoration: none; color: var(--text); font-weight: 700; border-bottom: 2px solid var(--border); }
+.menu-14 .mobile-menu a:hover { background: var(--accent); color: #fff; }
+
+/* M-15 Accent Hamburger */
+.menu-15 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--accent); border-bottom: 3px solid var(--border); }
+.menu-15 .menu-logo { font-weight: 900; font-size: 18px; color: #fff; }
+.menu-15 .hamburger-icon span { background: #fff; }
+.menu-15 .hamburger-icon { border: 2px solid #fff; width: 42px; height: 42px; border-radius: 8px; }
+.menu-15 .mobile-menu { display: none; padding: 0; background: var(--accent); }
+.menu-15 .mobile-menu.open { display: block; }
+.menu-15 .mobile-menu a { display: block; padding: 14px 20px; text-decoration: none; color: #fff; font-weight: 700; border-bottom: 2px solid rgba(255,255,255,0.3); }
+.menu-15 .mobile-menu a:hover { background: rgba(0,0,0,0.15); }
+
+/* M-16 Horizontal Expand */
+.menu-16 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; border-bottom: 3px solid var(--border); }
+.menu-16 .menu-logo { font-weight: 900; font-size: 18px; }
+.menu-16 .hamburger-icon { background: var(--accent3); border: 3px solid var(--border); width: 42px; height: 42px; box-shadow: 3px 3px 0 var(--shadow); }
+.menu-16 .mobile-menu { display: none; background: var(--accent3); border-top: 3px solid var(--border); }
+.menu-16 .mobile-menu.open { display: flex; }
+.menu-16 .mobile-menu a { flex: 1; display: block; padding: 14px; text-decoration: none; color: var(--text); font-weight: 700; text-align: center; border-right: 2px solid var(--border); }
+.menu-16 .mobile-menu a:last-child { border-right: none; }
+.menu-16 .mobile-menu a:hover { background: var(--accent); color: #fff; }
+
+/* M-17 Circle Button */
+.menu-17 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 3px solid var(--border); }
+.menu-17 .menu-logo { font-weight: 900; font-size: 18px; }
+.menu-17 .hamburger-icon { background: var(--accent5); border-radius: 50%; width: 42px; height: 42px; border: 3px solid var(--border); }
+.menu-17 .hamburger-icon span { background: #fff; width: 18px; }
+.menu-17 .mobile-menu { display: none; padding: 12px 20px; border-top: 3px solid var(--border); }
+.menu-17 .mobile-menu.open { display: flex; flex-wrap: wrap; gap: 8px; }
+.menu-17 .mobile-menu a { text-decoration: none; color: var(--text); font-weight: 700; padding: 8px 16px; border: 2px solid var(--border); box-shadow: 3px 3px 0 var(--shadow); background: var(--surface); }
+.menu-17 .mobile-menu a:hover { background: var(--accent); color: #fff; }
+
+/* M-18 Arrow Items */
+.menu-18 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--accent2); border-bottom: 3px solid var(--border); }
+.menu-18 .menu-logo { font-weight: 900; font-size: 18px; color: #fff; }
+.menu-18 .hamburger-icon span { background: #fff; height: 4px; width: 28px; }
+.menu-18 .hamburger-icon span:nth-child(2) { width: 20px; }
+.menu-18 .mobile-menu { display: none; padding: 0; }
+.menu-18 .mobile-menu.open { display: block; }
+.menu-18 .mobile-menu a { display: block; padding: 14px 20px 14px 36px; text-decoration: none; color: var(--text); font-weight: 700; border-bottom: 2px solid var(--border); position: relative; }
+.menu-18 .mobile-menu a::before { content: '▸'; position: absolute; left: 18px; color: var(--accent2); }
+.menu-18 .mobile-menu a:hover { background: var(--accent3); }
+
+/* M-19 Grid Expand */
+.menu-19 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 4px double var(--border); }
+.menu-19 .menu-logo { font-weight: 900; font-size: 18px; }
+.menu-19 .hamburger-icon { border: 3px solid var(--border); width: 42px; height: 42px; transform: rotate(3deg); }
+.menu-19 .mobile-menu { display: none; padding: 16px 20px; border-top: 3px solid var(--border); }
+.menu-19 .mobile-menu.open { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.menu-19 .mobile-menu a { text-decoration: none; color: var(--text); font-weight: 700; padding: 12px 16px; border: 2px solid var(--border); text-align: center; box-shadow: 3px 3px 0 var(--shadow); }
+.menu-19 .mobile-menu a:hover { background: var(--accent); color: #fff; }
+
+/* M-20 Stacked Colors */
+.menu-20 .menu-bar { display: flex; align-items: center; justify-content: space-between; padding: 0; }
+.menu-20 .menu-logo { font-weight: 900; font-size: 18px; padding: 14px 20px; background: var(--accent); color: #fff; border-right: 3px solid var(--border); }
+.menu-20 .hamburger-icon { margin-right: 12px; border: none; gap: 4px; }
+.menu-20 .hamburger-icon span { width: 28px; height: 4px; background: var(--text); }
+.menu-20 .hamburger-icon span:nth-child(2) { width: 22px; }
+.menu-20 .hamburger-icon span:nth-child(3) { width: 16px; }
+.menu-20 .mobile-menu { display: none; padding: 0; border-top: 3px solid var(--border); }
+.menu-20 .mobile-menu.open { display: block; }
+.menu-20 .mobile-menu a { display: block; padding: 14px 20px; text-decoration: none; color: #fff; font-weight: 800; background: var(--accent); border-bottom: 2px solid var(--border); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; }
+.menu-20 .mobile-menu a:nth-child(2n) { background: var(--accent2); }
+.menu-20 .mobile-menu a:hover { filter: brightness(1.1); }

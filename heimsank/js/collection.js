@@ -7,20 +7,19 @@ async function openCollectionViewer() {
   const modal = document.getElementById('collectionModal');
   const grid = document.getElementById('collectionGrid');
   
-  grid.innerHTML = '<div class="collection-empty"><div class="collection-empty-icon">⏳</div>Lastar samlingane…</div>';
-  modal.classList.remove('hidden');
+  grid.innerHTML = '<div class="collection-empty"><div class="collection-empty-icon">' + ICON('loader', 56) + '</div>Lastar samlingane…</div>';
+  modal.classList.add('open');
   
   try {
     // Load all categories
     const cats = await fetch('./kort/categories.json').then(r => r.json());
-    
+
+    // Pull stored collections from VyrdepilStorage
+    const stored = VyrdepilStorage.getAllCollections('heimsank');
+
     // Load collections and card data for each category
     const allCollections = await Promise.all(cats.map(async (cat) => {
-      const storageKey = `heimsank_samling_${cat.id}`;
-      const stored = localStorage.getItem(storageKey);
-      if (!stored) return { cat, entries: [], cards: [] };
-      
-      const entries = JSON.parse(stored);
+      const entries = Array.isArray(stored[cat.id]) ? stored[cat.id] : [];
       if (entries.length === 0) return { cat, entries: [], cards: [] };
       
       // Load card data for this category
@@ -34,7 +33,7 @@ async function openCollectionViewer() {
       const imgF = cat.imageField || 'image';
       const statF = cat.statField || 'birthDate';
       const statT = cat.statType || 'year';
-      const statLbl = cat.statLabel || '📅';
+      const statLbl = cat.statLabel || 'calendar';
       
       const allCards = parseCSV(csv)
         .filter(r => r[imgF] && r[imgF].trim())
@@ -88,7 +87,7 @@ async function openCollectionViewer() {
       const header = document.createElement('div');
       header.className = 'collection-cat-header';
       header.innerHTML = `
-        <span class="collection-cat-icon">${cat.icon}</span>
+        <span class="collection-cat-icon">${CAT_ICON(cat.icon, 22)}</span>
         <h3 class="collection-cat-title">${cat.label}</h3>
         <span class="collection-cat-count">${cards.length} kort</span>
       `;
@@ -113,11 +112,18 @@ async function openCollectionViewer() {
             <span class="mini-rarity">${RL[card.rarity]}</span>
           </div>
           <div class="mini-img" style="background:${imgBg}">
-            <img src="${card.img}" alt="${card.name}" loading="lazy" onerror="this.parentNode.innerHTML='<div style=display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:2rem;opacity:.2>${cat.icon}</div>'">
+            <img src="${card.img}" alt="${esc(card.name)}" loading="lazy">
           </div>
-          <div class="mini-footer">${card.statLabel} ${card.stat}</div>
+          <div class="mini-footer">${CAT_ICON(card.statLabel, 10)}<span>${esc(String(card.stat))}</span></div>
         `;
-        
+
+        const miniImg = cardEl.querySelector('.mini-img img');
+        if (miniImg) {
+          miniImg.onerror = function () {
+            this.parentNode.innerHTML = `<div class="mini-img-fallback">${CAT_ICON(cat.icon, 24)}</div>`;
+          };
+        }
+
         cardsRow.appendChild(cardEl);
       });
       
@@ -129,7 +135,7 @@ async function openCollectionViewer() {
     
   } catch (e) {
     console.error('Collection viewer error:', e);
-    grid.innerHTML = '<div class="collection-empty"><div class="collection-empty-icon">⚠️</div><div class="collection-empty-text">Feil ved lasting: ' + e.message + '<br>Prøv igjen seinare.</div></div>';
+    grid.innerHTML = '<div class="collection-empty"><div class="collection-empty-icon">' + ICON('alert', 56) + '</div><div class="collection-empty-text">Feil ved lasting: ' + e.message + '<br>Prøv igjen seinare.</div></div>';
   }
 }
 
@@ -137,7 +143,7 @@ async function openCollectionViewer() {
  * Close the collection viewer modal
  */
 function closeCollectionModal() {
-  document.getElementById('collectionModal').classList.add('hidden');
+  document.getElementById('collectionModal').classList.remove('open');
 }
 
 // Export functions for global access

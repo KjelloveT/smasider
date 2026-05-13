@@ -7,13 +7,10 @@ const Tabs = (() => {
     let activeTabId = null;
 
     function init() {
-        const savedTabs = localStorage.getItem('klassekart_tabs');
-        if (savedTabs) {
-            try {
-                tabs = JSON.parse(savedTabs);
-            } catch (e) {
-                tabs = [];
-            }
+        const savedState = VyrdepilStorage.getGameState('klassekart');
+        const savedTabs = savedState?.tabs || null;
+        if (savedTabs && Array.isArray(savedTabs)) {
+            tabs = savedTabs;
         }
 
         if (tabs.length === 0) {
@@ -156,7 +153,9 @@ const Tabs = (() => {
     }
 
     function persist() {
-        localStorage.setItem('klassekart_tabs', JSON.stringify(tabs));
+        const currentState = VyrdepilStorage.getGameState('klassekart') || {};
+        currentState.tabs = tabs;
+        VyrdepilStorage.setGameState('klassekart', currentState);
     }
 
     function getActiveTab() {

@@ -1,11 +1,14 @@
 // BåreTevling - Storage Management
-const STORAGE_KEY = 'baretevling_game';
+// Bruker det felles VyrdepilStorage-API-et for all lagring.
+VyrdepilStorage.migrateAll();
+
+const GAME_KEY = 'baretevling';
 
 const Storage = {
-    // Save game state to localStorage
+    // Save game state via VyrdepilStorage
     save(gameState) {
         try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(gameState));
+            VyrdepilStorage.setGameState(GAME_KEY, gameState);
             return true;
         } catch (e) {
             console.error('Failed to save game state:', e);
@@ -13,24 +16,20 @@ const Storage = {
         }
     },
 
-    // Load game state from localStorage
+    // Load game state via VyrdepilStorage
     load() {
         try {
-            const data = localStorage.getItem(STORAGE_KEY);
-            if (data) {
-                return JSON.parse(data);
-            }
-            return null;
+            return VyrdepilStorage.getGameState(GAME_KEY);
         } catch (e) {
             console.error('Failed to load game state:', e);
             return null;
         }
     },
 
-    // Clear game state from localStorage
+    // Clear saved game
     clear() {
         try {
-            localStorage.removeItem(STORAGE_KEY);
+            VyrdepilStorage.clearGameState(GAME_KEY);
             return true;
         } catch (e) {
             console.error('Failed to clear game state:', e);
@@ -40,6 +39,6 @@ const Storage = {
 
     // Check if a saved game exists
     hasSavedGame() {
-        return localStorage.getItem(STORAGE_KEY) !== null;
+        return VyrdepilStorage.hasGameState(GAME_KEY);
     }
 };

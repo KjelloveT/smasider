@@ -58,14 +58,6 @@ function parseLine(l) {
 }
 
 /**
- * Get localStorage key for current category
- * @returns {string} Storage key
- */
-function getStorageKey() {
-  return `heimsank_samling_${S.selCat?.id || 'default'}`;
-}
-
-/**
  * Random integer helper
  * @param {number} m - Maximum value (inclusive)
  * @returns {number} Random integer from 1 to m

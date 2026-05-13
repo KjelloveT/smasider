@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klassekart — Personvernvenleg klasseromplanleggar</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
+    <link rel="stylesheet" href="css/klassekart.css">
 </head>
-<body>
+<body data-light-theme="classic" data-dark-theme="midnight" data-theme="classic">
+    <neo-header></neo-header>
     <!-- ── TOOLBAR ── -->
     <div id="toolbar">
         <div class="toolbar-left">
@@ -240,6 +242,7 @@
     <input type="file" id="import-file" accept=".json" class="hidden">
 
     <!-- ── SCRIPTS ── -->
+    <script src="../js/vyrdepil-storage.js"></script>
     <script src="js/icons.js"></script>
     <script src="js/grid.js"></script>
     <script src="js/layouts.js"></script>
@@ -247,5 +250,7 @@
     <script src="js/tabs.js"></script>
     <script src="js/export.js"></script>
     <script src="js/app.js"></script>
+    <script src="../js/neobrutalisme.js"></script>
+    <script src="../js/neo-header.js"></script>
 </body>
 </html>

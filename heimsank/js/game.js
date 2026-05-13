@@ -13,7 +13,7 @@ async function init() {
     S.cats.forEach(c => {
       const el = document.createElement('div');
       el.className = 'cat-card';
-      el.innerHTML = `<span class="cat-icon">${c.icon}</span><span class="cat-name">${c.label}</span>`;
+      el.innerHTML = `<span class="cat-icon">${CAT_ICON(c.icon, 28)}</span><span class="cat-name">${c.label}</span>`;
       el.onclick = () => {
         S.selCat = c;
         document.querySelectorAll('.cat-card').forEach(x => x.classList.remove('selected'));
@@ -37,8 +37,8 @@ async function init() {
  */
 function selLevel(l) {
   S.level = l;
-  document.querySelectorAll('[data-level]').forEach(b => b.classList.remove('selected'));
-  document.querySelector(`[data-level="${l}"]`).classList.add('selected');
+  document.querySelectorAll('[data-level]').forEach(b => b.classList.remove('active'));
+  document.querySelector(`[data-level="${l}"]`).classList.add('active');
 }
 
 /**
@@ -51,10 +51,10 @@ function togOp(op) {
   if (i >= 0) {
     if (S.ops.length === 1) return; // Keep at least one operation
     S.ops.splice(i, 1);
-    b.classList.remove('selected');
+    b.classList.remove('active');
   } else {
     S.ops.push(op);
-    b.classList.add('selected');
+    b.classList.add('active');
   }
 }
 
@@ -77,9 +77,10 @@ async function startGame() {
   document.getElementById('setupScreen').classList.add('hidden');
   const gs = document.getElementById('gameScreen');
   gs.classList.remove('hidden');
-  gs.style.display = 'flex';
-  document.getElementById('menuBtn').style.display = 'block';
-  document.getElementById('gameSub').textContent = `${S.selCat.icon} ${S.selCat.label} – `;
+  document.getElementById('setupScreen').classList.add('hidden');
+  const sub = document.getElementById('gameSub');
+  sub.style.cssText = 'display:inline-flex;align-items:center;gap:6px;margin-bottom:5px;color:var(--muted)';
+  sub.innerHTML = `${CAT_ICON(S.selCat.icon, 14)}<span>${S.selCat.label} – </span>`;
   S.correct = 0;
   S.paused = false;
   loadStorage();
@@ -99,9 +100,7 @@ function goSetup() {
   }
   const gs = document.getElementById('gameScreen');
   gs.classList.add('hidden');
-  gs.style.display = '';
   document.getElementById('setupScreen').classList.remove('hidden');
-  document.getElementById('menuBtn').style.display = 'none';
   const btn = document.getElementById('startBtn');
   btn.disabled = false;
   btn.textContent = 'Start spelet →';
@@ -123,7 +122,7 @@ async function loadCards(cat) {
   const artF = cat.articleField || 'article';
   const statF = cat.statField || 'birthDate';
   const statT = cat.statType || 'year';
-  const statLbl = cat.statLabel || '📅';
+  const statLbl = cat.statLabel || 'calendar';
 
   S.cards = parseCSV(csv)
     .filter(r => r[imgF] && r[imgF].trim())

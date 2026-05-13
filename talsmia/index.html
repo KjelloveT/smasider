@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talsmia - Countdown med tal</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="../js/neo-header.js" defer></script>
+    <script src="../js/neobrutalisme.js"></script>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>🔢 Talsmia</h1>
-            <p class="subtitle">Countdown med tal: kom nærast måltalet med + − × ÷</p>
-        </header>
+<body data-light-theme="bubblegum" data-dark-theme="neon" data-theme="bubblegum">
+<neo-header></neo-header>
 
-        <div class="help-bar">
+<div class="page-wrapper talsmia-app">
+    <main class="main-content">
+    <div class="container">
+        
+        <div class="help-bar" style="margin-bottom: 24px;">
             <button id="openHelpBtn" class="btn">Korleis spele talsmia</button>
         </div>
 
@@ -23,10 +26,10 @@
                 <p>Du får seks tal og eitt måltal. Målet er å lage eit reknestykke som kjem nærast mogleg målet.</p>
                 <ul>
                     <li>Du kan bruke tala du har fått med operasjonane +, −, × og ÷.</li>
-                    <li>Kvart tal kan brukast maks éin gong per uttrykk.</li>
-                    <li>Du treng ikkje bruke alle tala om du finn ei betre løysing med færre.</li>
-                    <li>Jo mindre avvik frå måltalet, jo fleire poeng.</li>
-                    <li>I manuell modus vel du sjølv store og små tal før du startar tida.</li>
+                    <li>Kvart tal kan brukast maks éin gong.</li>
+                    <li>Du treng ikkje bruke alle tala.</li>
+                    <li>Mellomrekningar kan ikkje gi negative tal eller desimaltal.</li>
+                    <li>Jo nærare du kjem målet, di fleire poeng får du.</li>
                 </ul>
                 <div class="help-modal-actions">
                     <button id="closeHelpBtn" class="btn">Lukk</button>
@@ -35,11 +38,20 @@
         </div>
 
         <div id="screen-menu" class="screen active">
+            <!-- Game Hero Header -->
+            <div class="box2 hero-box" style="display: flex; align-items: center; gap: 24px; padding: 24px; margin-bottom: 24px; background: var(--accent); color: var(--text-on-accent);">
+                <img src="../_resources/talsmia.png" alt="Talsmia Logo" style="height: 120px; width: auto; object-fit: contain; filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.5));">
+                <div style="flex: 1;">
+                    <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; line-height: 1; text-shadow: 2px 2px 0 rgba(0,0,0,0.3);">Talsmia</h1>
+                    <p style="font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; margin: 0; opacity: 0.9;">Hovudrekning: kom nærast måltalet med rekneartane + − × ÷</p>
+                </div>
+            </div>
+
             <h2>Vel spelemodus</h2>
             <div class="mode-selector">
-                <button class="btn mode-btn selected" data-mode="quick">⚡ Rask start</button>
-                <button class="btn mode-btn" data-mode="manual">🎮 Vel sjølv</button>
-                <button class="btn mode-btn" data-mode="classroom">🏫 Klasserom</button>
+                <button class="btn mode-btn selected" data-mode="quick"><svg width="18" height="18" style="vertical-align: -3px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Rask start</button>
+                <button class="btn mode-btn" data-mode="manual"><svg width="18" height="18" style="vertical-align: -3px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="2"/></svg> Vel sjølv</button>
+                <button class="btn mode-btn" data-mode="classroom"><svg width="18" height="18" style="vertical-align: -3px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 22v-4a2 2 0 1 0-4 0v4"/><path d="m18 10 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7.382a1 1 0 0 1 .553-.894L6 10"/><path d="M18 5v17"/><path d="m4 6 7.106-3.553a2 2 0 0 1 1.788 0L20 6"/><path d="M6 5v17"/><circle cx="12" cy="9" r="2"/></svg> Klasserom</button>
             </div>
 
             <div id="time-section">
@@ -109,7 +121,7 @@
             <div class="number-controls">
                 <button id="btnLarge" class="btn" style="background:var(--accent-blue)">STORT TAL</button>
                 <button id="btnSmall" class="btn" style="background:var(--accent-green)">SMÅTT TAL</button>
-                <button id="btnUndo" class="btn" style="background:var(--accent-orange)">↩️ ANGRE</button>
+                <button id="btnUndo" class="btn" style="background:var(--accent-orange)"><svg width="18" height="18" style="vertical-align: -3px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/></svg> ANGRE</button>
             </div>
 
             <div class="expr-input">
@@ -118,7 +130,7 @@
             </div>
 
             <div style="text-align:center; margin-top: 14px;">
-                <button id="startTimerBtn" class="btn" style="background: var(--accent-green);">START TID ⏱️</button>
+                <button id="startTimerBtn" class="btn" style="background: var(--accent-green);">START TID <svg width="18" height="18" style="vertical-align: -3px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg></button>
                 <button id="giveUpBtnManual" class="btn" style="background: var(--accent-pink);">GJE OPP</button>
             </div>
         </div>
@@ -157,8 +169,8 @@
             <div class="number-controls">
                 <button id="btnLargeClass" class="btn" style="background:var(--accent-blue)">STORT TAL</button>
                 <button id="btnSmallClass" class="btn" style="background:var(--accent-green)">SMÅTT TAL</button>
-                <button id="btnUndoClass" class="btn" style="background:var(--accent-orange)">↩️ ANGRE</button>
-                <button id="btnClearClass" class="btn" style="background:var(--accent-pink)">🗑️ TØM</button>
+                <button id="btnUndoClass" class="btn" style="background:var(--accent-orange)"><svg width="18" height="18" style="vertical-align: -3px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/></svg> ANGRE</button>
+                <button id="btnClearClass" class="btn" style="background:var(--accent-pink)"><svg width="18" height="18" style="vertical-align: -3px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg> TØM</button>
             </div>
 
             <div style="margin-top: 30px; border-top: 3px solid #000; padding-top: 20px;">
@@ -237,10 +249,13 @@
         </div>
 
         <footer>
-            <p>🔒 Personvernvenleg — Inga sporing, kun localStorage | <a href="../index.html">← Tilbake til oversikta</a></p>
+            <p><svg width="14" height="14" style="vertical-align: -2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Personvernvenleg — Inga sporing, kun localStorage | <a href="../index.html">← Tilbake til oversikta</a></p>
         </footer>
     </div>
+    </main>
+</div>
 
+    <script src="../js/vyrdepil-storage.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/game.js"></script>
     <script src="js/ui.js"></script>

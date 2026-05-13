@@ -75,26 +75,15 @@ const Board = {
     // Render board to DOM
     renderBoard(container, boardData, size, options = {}) {
         container.innerHTML = '';
-
-        // Calculate cell size based on available space
-        const containerWidth = container.clientWidth || 400;
-        const maxCellSize = 50;
-        const minCellSize = 25;
         const headerSize = 30;
 
-        const availableWidth = containerWidth - headerSize;
-        const availableHeight = window.innerHeight * 0.5 - headerSize;
-
-        let cellSize = Math.min(
-            availableWidth / size,
-            availableHeight / size,
-            maxCellSize
-        );
-        cellSize = Math.max(cellSize, minCellSize);
-
-        // Set grid template
-        container.style.gridTemplateColumns = `${headerSize}px repeat(${size}, ${cellSize}px)`;
-        container.style.gridTemplateRows = `${headerSize}px repeat(${size}, ${cellSize}px)`;
+        // Set grid template using flexible CSS
+        container.style.gridTemplateColumns = `${headerSize}px repeat(${size}, minmax(18px, 1fr))`;
+        container.style.gridAutoRows = '1fr';
+        // Force the first row (headers) to match the header size
+        container.style.gridTemplateRows = `${headerSize}px repeat(${size}, minmax(18px, 1fr))`;
+        container.style.width = '100%';
+        container.style.margin = '0 auto';
 
         // Corner cell
         const corner = document.createElement('div');

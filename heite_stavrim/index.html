@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heite Stavrim — Kategorispel for klasserommet</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../js/neo-header.js" defer></script>
+</head>
+<body data-light-theme="sunny" data-dark-theme="cyberpunk" data-theme="sunny">
+    <neo-header></neo-header>
+
+    <div class="page-wrapper">
+        <main class="main-content">
+
+            <!-- Hero -->
+            <div class="box2 hero-box">
+                <img src="../_resources/heite_stavrim.png" alt="Heite Stavrim" class="hero-logo">
+                <div class="hero-text">
+                    <h1>Heite Stavrim</h1>
+                    <p>Kategorispel for klasserommet. Også kjent som "By og land" Vel bokstavar, kategoriar og kon­kur­rer med team!</p>
+                    <p>Målet er å finne unike ord med riktig forbokstav som passar til kategorien. Har du likt ord med eit anna lag får du færre poeng.</p>
+                </div>
+            </div>
+
+            <!-- ============== OPPSETT ============== -->
+            <section id="setup-section">
+                <div class="box2 setup-card">
+                    <div class="setup-grid">
+                        <div>
+                            <label class="form-label" for="categoryCount">Tal på kategoriar</label>
+                            <select id="categoryCount" class="form-select">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label" for="letterCount">Tal på bokstavar</label>
+                            <select id="letterCount" class="form-select">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label" for="timeLimit">Tid (sekund)</label>
+                            <input type="number" id="timeLimit" class="form-input" value="120" min="15" max="600" step="5">
+                        </div>
+                        <div>
+                            <label class="form-label" for="teamCount">Tal på team</label>
+                            <select id="teamCount" class="form-select">
+                                <option value="2" selected>2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h2 class="heading4">Bokstavar</h2>
+                    <div class="radio-row" data-group="letterSource">
+                        <label class="radio-label">
+                            <input type="radio" name="letterSource" value="random" checked>
+                            <span>Tilfeldige</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="letterSource" value="manual">
+                            <span>Skriv inn sjølv</span>
+                        </label>
+                    </div>
+                    <div id="manualLettersWrap" style="display:none; margin-top:12px;">
+                        <label class="form-label" for="manualLetters">Bokstavar (utan mellomrom)</label>
+                        <input type="text" id="manualLetters" class="form-input" placeholder="t.d. KMS" maxlength="6">
+                    </div>
+
+                    <h2 class="heading4">Kategoriar</h2>
+                    <div class="radio-row" data-group="categorySource">
+                        <label class="radio-label">
+                            <input type="radio" name="categorySource" value="random" checked>
+                            <span>Tilfeldige</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="categorySource" value="custom">
+                            <span>Mine eigne</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="categorySource" value="manual">
+                            <span>Skriv inn for denne runden</span>
+                        </label>
+                    </div>
+
+                    <div id="languageWrap" style="margin-top:12px;">
+                        <label class="form-label" for="categoryLanguage">Språk for tilfeldige kategoriar</label>
+                        <select id="categoryLanguage" class="form-select">
+                            <option value="nn" selected>Nynorsk</option>
+                            <option value="en">Engelsk</option>
+                        </select>
+                    </div>
+
+                    <div id="manualCatsWrap" style="display:none; margin-top:12px;">
+                        <label class="form-label" for="manualCategories">Eigne kategoriar (ein per linje)</label>
+                        <textarea id="manualCategories" class="form-input form-textarea" rows="4" placeholder="Dyr&#10;Land&#10;Mat"></textarea>
+                    </div>
+
+                    <div id="customCatsSelectWrap" style="display:none; margin-top:12px;">
+                        <label class="form-label" for="customCatsSelect">Vel kategoriar frå mine lagra</label> 
+                        <select id="customCatsSelect" class="form-select" multiple style="height: 120px;">
+                        </select>
+                        <p class="hint-text">Hald Ctrl (eller Cmd) nede for å velje fleire.</p>
+                        <p><button id="manageCustomBtn" class="btn">Handter mine kategoriar</button></p>
+                    </div>
+
+                    <h2 class="heading4">Team</h2>
+                    <div id="teamInputs" class="team-inputs"></div>
+
+                    <div class="setup-actions">
+                        
+                        <button id="startGame" class="btn btn-primary">Start runden</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============== SPEL ============== -->
+            <section id="game-section" style="display:none;">
+                <div class="box2">
+                    <div id="lettersDisplay" class="letters-container"></div>
+                </div>
+
+                <div class="box2">
+                    <div class="game-header">
+                        <h3 class="heading4 no-mt">Kategoriar</h3>
+                        <div id="timerDisplay" class="timer-pill">120</div>
+                    </div>
+                    <div id="categoriesDisplay" class="categories-grid"></div>
+                </div>
+
+                <div class="box2 game-controls">
+                    <button id="pauseTimer" class="btn">Pause</button>
+                    <button id="addTime" class="btn">+30 s</button>
+                    <button id="endRound" class="btn btn-danger">Avslutt runde</button>
+                </div>
+
+                <div class="box2">
+                    <h3 class="heading4 no-mt">Stilling</h3>
+                    <div id="teamScoresDisplay" class="team-scores-grid"></div>
+                </div>
+            </section>
+
+            <!-- ============== SVAR / POENG ============== -->
+            <section id="answer-section" style="display:none;">
+                <div class="box2">
+                    <h2 class="heading4 no-mt">Korleis vil du gje poeng?</h2>
+                    <div class="radio-row" data-group="answerMode">
+                        <label class="radio-label">
+                            <input type="radio" name="answerMode" value="write" checked>
+                            <span>Skriv inn svar (auto-poeng)</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="answerMode" value="points">
+                            <span>Berre skriv inn poeng</span>
+                        </label>
+                    </div>
+                    <p class="hint-text">Unike svar gjev <strong>3 poeng</strong>, like svar (delt mellom team) gjev <strong>1 poeng</strong>.</p>
+                </div>
+
+                <div id="writeAnswersMode"></div>
+                <div id="directPointsMode" style="display:none;"></div>
+
+                <div class="box2 setup-actions">
+                    <button id="backToGame" class="btn">Tilbake til spelet</button>
+                    <button id="submitAnswers" class="btn btn-primary">Lagre poeng</button>
+                </div>
+            </section>
+
+            <!-- ============== RESULTAT ============== -->
+            <section id="results-section" style="display:none;">
+                <div class="box2">
+                    <h2 class="heading4 no-mt">Resultat etter runden</h2>
+                    <div id="finalScores" class="results-grid"></div>
+                </div>
+
+                <div class="box2 setup-actions">
+                    <button id="newRound" class="btn btn-primary">Ny runde (same oppsett)</button>
+                    <button id="resetScores" class="btn">Nullstill stillinga</button>
+                    <button id="newGame" class="btn btn-danger">Avslutt og gå til oppsett</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal: Handter mine kategoriar -->
+    <div class="modal-overlay" id="customModal">
+        <div class="modal4">
+            <button class="btn modal-close" id="customModalClose" aria-label="Lukk">×</button>
+            <h2 class="heading4 no-mt">Mine kategoriar</h2>
+            <p class="hint-text">Skriv inn ein kategori per linje. Desse kan veljast under oppsettet.</p>
+            <textarea id="customCategoriesEditor" class="form-input form-textarea" rows="12" placeholder="Skriv ein kategori per linje..."></textarea>
+            <div class="setup-actions" style="margin-top:16px;">
+                <button class="btn" id="customCancelBtn">Avbryt</button>
+                <button class="btn btn-primary" id="customSaveBtn">Lagre</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/vyrdepil-storage.js"></script>
+    <script src="js/categories.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

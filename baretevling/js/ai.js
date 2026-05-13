@@ -1,22 +1,26 @@
-// BåreTevling - AI Algorithm for Single-Player Mode
+// BåreTevling - Algorithm for Single-Player Mode (datamaskinen)
 const AI = {
-    // Track AI state
+    // Track state
     state: {
         targetQueue: [], // Queue of cells to check around hits
         huntedShips: [], // Ships currently being hunted
-        randomMode: true
+        randomMode: true,
+        hitAxis: null,   // 'horizontal' | 'vertical' | null
+        hitCells: []     // Cells hit during current hunt sequence
     },
 
-    // Reset AI state
+    // Reset state
     reset() {
         this.state = {
             targetQueue: [],
             huntedShips: [],
-            randomMode: true
+            randomMode: true,
+            hitAxis: null,
+            hitCells: []
         };
     },
 
-    // Get AI's next attack coordinate
+    // Get next attack coordinate
     getNextAttack(playerBoard, boardSize) {
         // If we have targets in queue, use them
         if (this.state.targetQueue.length > 0) {
@@ -41,12 +45,12 @@ const AI = {
 
         if (unattacked.length === 0) return null;
 
-        // Prefer cells that could fit remaining ships
+        // Prefer cells that could fit remaining player ships
         const weighted = unattacked.map(cell => {
             let weight = 1;
             
             // Check if this cell is part of a potential ship placement
-            for (const ship of Game.state.enemyShips) {
+            for (const ship of Game.state.playerShips) {
                 if (this.couldFitShip(cell, ship.size, playerBoard, boardSize)) {
                     weight += ship.size;
                 }
@@ -83,12 +87,23 @@ const AI = {
         return false;
     },
 
-    // Process AI attack result
+    // Process attack result and update hunt state
     processAttackResult(coord, isHit, playerBoard, boardSize) {
         if (isHit) {
-            // Add adjacent cells to target queue
-            this.addAdjacentTargets(coord, playerBoard, boardSize);
+            this.state.hitCells.push(coord);
             this.state.randomMode = false;
+
+            if (this.state.hitCells.length >= 2) {
+                // Determine axis from first two hits
+                const c1 = this.state.hitCells[0];
+                const c2 = this.state.hitCells[1];
+                this.state.hitAxis = (c1.row === c2.row) ? 'horizontal' : 'vertical';
+                // Rebuild queue along detected axis only
+                this.rebuildAxisQueue(playerBoard, boardSize);
+            } else {
+                // First hit – add all four adjacent cells
+                this.addAdjacentTargets(coord, playerBoard, boardSize);
+            }
         } else {
             // If no more targets, switch to random mode
             if (this.state.targetQueue.length === 0) {
@@ -97,7 +112,39 @@ const AI = {
         }
     },
 
-    // Add adjacent cells to target queue
+    // Rebuild target queue along the locked axis (called after axis is determined)
+    rebuildAxisQueue(board, boardSize) {
+        this.state.targetQueue = [];
+        const cells = this.state.hitCells;
+
+        if (this.state.hitAxis === 'horizontal') {
+            const row = cells[0].row;
+            const cols = cells.map(c => c.col);
+            const minCol = Math.min(...cols);
+            const maxCol = Math.max(...cols);
+
+            if (minCol - 1 >= 0 && !board[row][minCol - 1].hit && !board[row][minCol - 1].miss) {
+                this.state.targetQueue.push({ col: minCol - 1, row });
+            }
+            if (maxCol + 1 < boardSize && !board[row][maxCol + 1].hit && !board[row][maxCol + 1].miss) {
+                this.state.targetQueue.push({ col: maxCol + 1, row });
+            }
+        } else {
+            const col = cells[0].col;
+            const rows = cells.map(c => c.row);
+            const minRow = Math.min(...rows);
+            const maxRow = Math.max(...rows);
+
+            if (minRow - 1 >= 0 && !board[minRow - 1][col].hit && !board[minRow - 1][col].miss) {
+                this.state.targetQueue.push({ col, row: minRow - 1 });
+            }
+            if (maxRow + 1 < boardSize && !board[maxRow + 1][col].hit && !board[maxRow + 1][col].miss) {
+                this.state.targetQueue.push({ col, row: maxRow + 1 });
+            }
+        }
+    },
+
+    // Add adjacent cells to target queue (used on first hit before axis is known)
     addAdjacentTargets(coord, board, boardSize) {
         const directions = [
             { col: 0, row: -1 }, // N
@@ -127,9 +174,13 @@ const AI = {
         }
     },
 
-    // Check if a ship is sunk and remove its cells from queue
+    // Check if a ship is sunk and clean up queue
     checkShipSunk(shipCells, board) {
         if (!Ships.isShipSunk(board, shipCells)) return;
+
+        // Reset hunt axis state for next ship
+        this.state.hitAxis = null;
+        this.state.hitCells = [];
 
         // Remove cells around this ship from target queue
         this.state.targetQueue = this.state.targetQueue.filter(target => {

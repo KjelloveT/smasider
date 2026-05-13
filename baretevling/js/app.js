@@ -266,14 +266,6 @@ const Game = {
     startGame() {
         AI.reset();
 
-        // In AI mode, auto-place enemy ships
-        if (this.state.mode === 'ai') {
-            const placed = Ships.autoPlaceShips(this.state.enemyBoard, this.state.enemyShips, this.state.boardSize);
-            if (placed) {
-                this.state.enemyShips = placed;
-            }
-        }
-
         this.showScreen('game');
         
         // Show/hide buttons based on mode
@@ -501,7 +493,7 @@ const Game = {
 
         // Alert player about AI attack
         const coordStr = Board.formatCoord(coord.col, coord.row);
-        alert(`AI angriper ${coordStr} - ${isHit ? 'TREFF!' : 'BOM'}`);
+        alert(`Datamaskinen angrip ${coordStr} – ${isHit ? 'TREFF!' : 'BOM'}`);
     },
 
     checkPlayerShipSunk(row, col) {
@@ -511,7 +503,7 @@ const Game = {
         const ship = this.state.playerShips.find(s => s.id === shipId);
         if (ship && Ships.isShipSunk(this.state.playerBoard, ship.cells)) {
             AI.checkShipSunk(ship.cells, this.state.playerBoard);
-            alert(`AI senka skipet ditt på ${ship.size} celler!`);
+            alert(`Datamaskinen senka skipet ditt på ${ship.size} celler!`);
         }
     },
 
@@ -536,7 +528,7 @@ const Game = {
 
         if (playerLost) {
             title.textContent = 'Du tapte!';
-            sub.textContent = 'AI senka alle skipa dine';
+            sub.textContent = 'Datamaskinen senka alle skipa dine';
         } else {
             title.textContent = 'Du vann!';
             sub.textContent = 'Gratulerer - du senka alle fiendens skip!';

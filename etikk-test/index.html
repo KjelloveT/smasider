@@ -1,995 +1,292 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="nn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etikktesten - Sjøltest</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial Black', 'Arial Bold', Arial, system-ui, sans-serif;
-            background-color: #FDFD96;
-            min-height: 100vh;
-            padding: 32px 24px 48px;
-            color: #000;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* ── HEADER ── */
-        header {
-            background: #fff;
-            border: 3px solid #000;
-            box-shadow: 7px 7px 0 #000;
-            padding: 32px 36px;
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .header-stripe {
-            height: 10px;
-            background: repeating-linear-gradient(
-                -45deg,
-                #000 0px,
-                #000 5px,
-                #FDFD96 5px,
-                #FDFD96 14px
-            );
-            margin: 20px -36px -32px;
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .header-emoji {
-            font-size: 4rem;
-            line-height: 1;
-            flex-shrink: 0;
-        }
-
-        h1 {
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            font-weight: 900;
-            color: #000;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            line-height: 1;
-        }
-
-        .subtitle {
-            font-family: Arial, system-ui, sans-serif;
-            font-size: 1rem;
-            color: #000;
-            margin-top: 8px;
-            font-weight: 600;
-        }
-
-        /* ── SCREENS ── */
-        .screen {
-            display: none;
-        }
-
-        .screen.active {
-            display: block;
-        }
-
-        /* ── INTRO SCREEN ── */
-        .intro-box {
-            background: #fff;
-            border: 3px solid #000;
-            box-shadow: 7px 7px 0 #000;
-            padding: 36px 40px;
-            margin-bottom: 24px;
-        }
-
-        .intro-title {
-            font-size: 1.8rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .intro-text {
-            font-family: Arial, system-ui, sans-serif;
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 16px;
-        }
-
-        .intro-text ul {
-            margin-left: 24px;
-            margin-bottom: 16px;
-        }
-
-        .intro-text li {
-            margin-bottom: 8px;
-        }
-
-        .highlight-box {
-            background: #FFDB58;
-            border: 3px solid #000;
-            box-shadow: 4px 4px 0 #000;
-            padding: 20px 24px;
-            margin: 24px 0;
-            font-weight: 700;
-        }
-
-        /* ── BUTTONS ── */
-        .btn {
-            display: inline-block;
-            background: #87CEEB;
-            color: #000;
-            border: 3px solid #000;
-            box-shadow: 5px 5px 0 #000;
-            padding: 14px 32px;
-            font-size: 1.1rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: transform 0.1s, box-shadow 0.1s;
-            margin-top: 16px;
-        }
-
-        .btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0 #000;
-        }
-
-        .btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 3px 3px 0 #000;
-        }
-
-        .btn-green { background: #BAFCA2; }
-        .btn-yellow { background: #FFDB58; }
-        .btn-red { background: #FFA07A; }
-
-        /* ── STORY SCREEN ── */
-        .story-box {
-            background: #fff;
-            border: 3px solid #000;
-            box-shadow: 7px 7px 0 #000;
-            padding: 36px 40px;
-            margin-bottom: 24px;
-        }
-
-        .story-number {
-            display: inline-block;
-            background: #FFDB58;
-            border: 3px solid #000;
-            box-shadow: 3px 3px 0 #000;
-            padding: 8px 16px;
-            font-size: 1.2rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-        }
-
-        .story-text {
-            font-family: Arial, system-ui, sans-serif;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 32px;
-        }
-
-        .question {
-            background: #F0F8FF;
-            border: 2px solid #000;
-            padding: 20px 24px;
-            margin-bottom: 20px;
-        }
-
-        .question-text {
-            font-family: Arial, system-ui, sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .answer-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .answer-btn {
-            flex: 1;
-            min-width: 120px;
-            padding: 12px 24px;
-            font-size: 1rem;
-            font-weight: 900;
-            border: 3px solid #000;
-            box-shadow: 4px 4px 0 #000;
-            cursor: pointer;
-            transition: transform 0.1s, box-shadow 0.1s;
-            text-transform: uppercase;
-        }
-
-        .answer-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0 #000;
-        }
-
-        .answer-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0 #000;
-        }
-
-        .answer-btn.yes { background: #BAFCA2; }
-        .answer-btn.no { background: #FFA07A; }
-        .answer-btn.selected {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0 #000;
-            opacity: 0.7;
-        }
-
-        /* ── PROGRESS BAR ── */
-        .progress-container {
-            background: #fff;
-            border: 3px solid #000;
-            box-shadow: 4px 4px 0 #000;
-            padding: 16px 20px;
-            margin-bottom: 24px;
-        }
-
-        .progress-bar {
-            height: 24px;
-            background: #f0f0f0;
-            border: 2px solid #000;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #BAFCA2;
-            transition: width 0.3s ease;
-        }
-
-        .progress-text {
-            font-family: Arial, system-ui, sans-serif;
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-top: 8px;
-        }
-
-        /* ── RESULTS SCREEN ── */
-        .results-box {
-            background: #fff;
-            border: 3px solid #000;
-            box-shadow: 7px 7px 0 #000;
-            padding: 36px 40px;
-            margin-bottom: 24px;
-        }
-
-        .results-title {
-            font-size: 1.8rem;
-            font-weight: 900;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-        }
-
-        .color-counts {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-        }
-
-        .color-box {
-            flex: 1;
-            min-width: 150px;
-            padding: 20px;
-            border: 3px solid #000;
-            box-shadow: 4px 4px 0 #000;
-            text-align: center;
-        }
-
-        .color-box.yellow { background: #FFDB58; }
-        .color-box.red { background: #FFA07A; }
-        .color-box.green { background: #BAFCA2; }
-
-        .color-count {
-            font-size: 2.5rem;
-            font-weight: 900;
-        }
-
-        .color-label {
-            font-family: Arial, system-ui, sans-serif;
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-top: 8px;
-        }
-
-        .analysis-box {
-            background: #F0F8FF;
-            border: 3px solid #000;
-            box-shadow: 5px 5px 0 #000;
-            padding: 28px 32px;
-            margin-bottom: 24px;
-        }
-
-        .analysis-title {
-            font-size: 1.4rem;
-            font-weight: 900;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-        }
-
-        .analysis-text {
-            font-family: Arial, system-ui, sans-serif;
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        .analysis-text p {
-            margin-bottom: 12px;
-        }
-
-        /* ── PRIVACY NOTICE ── */
-        .privacy-notice {
-            background: #DAF5F0;
-            border: 3px solid #000;
-            box-shadow: 5px 5px 0 #000;
-            padding: 24px 28px;
-            margin-top: 32px;
-            font-family: Arial, system-ui, sans-serif;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .privacy-notice strong {
-            font-weight: 700;
-        }
-
-        /* ── LANGUAGE SELECTION ── */
-        .lang-buttons {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-
-        .lang-btn {
-            flex: 1;
-            min-width: 140px;
-            padding: 16px 24px;
-            font-size: 1.2rem;
-            font-weight: 900;
-            border: 3px solid #000;
-            box-shadow: 5px 5px 0 #000;
-            cursor: pointer;
-            transition: transform 0.1s, box-shadow 0.1s;
-            text-transform: uppercase;
-        }
-
-        .lang-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0 #000;
-        }
-
-        .lang-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 3px 3px 0 #000;
-        }
-
-        .lang-btn.nn { background: #FFDB58; }
-        .lang-btn.nb { background: #87CEEB; }
-
-        /* ── RESPONSIVE ── */
-        @media (max-width: 768px) {
-            body { padding: 20px 16px 40px; }
-            header { padding: 24px 24px; }
-            .header-stripe { margin: 16px -24px -24px; }
-            .header-emoji { font-size: 3rem; }
-            .intro-box, .story-box, .results-box { padding: 24px 20px; }
-            .answer-buttons { flex-direction: column; }
-            .color-counts { flex-direction: column; }
-        }
-
-        @media (max-width: 520px) {
-            .header-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
-            body { padding: 16px 10px 28px; }
-            .intro-box, .story-box, .results-box { padding: 20px 16px; }
-        }
-    </style>
+    <title>Etikktesten</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
+    <link rel="stylesheet" href="etikk-test.css">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <div class="header-inner">
-                <div class="header-emoji">⚖️</div>
+<body data-light-theme="earth" data-dark-theme="cyberpunk" data-theme="earth">
+    <neo-header></neo-header>
+
+    <div class="page-wrapper">
+        <main class="main-content">
+            
+            <div class="box2 hero-box" style="padding: 24px; margin-bottom: 24px; background: var(--accent); color: var(--text-on-accent);">
+                <img src="../_resources/etikktesten.png" style="height: 120px; flex-shrink: 0; filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.5));" alt="Etikktesten logo">
                 <div>
-                    <h1>Etikktesten</h1>
-                    <p class="subtitle">Ein personleg og uhøgtidleg sjøltest med etiske dilemmaer</p>
+                    <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; margin-top: 0; line-height: 1; text-shadow: 2px 2px 0 rgba(0,0,0,0.3);">Etikktesten</h1>
+                    <p style="font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; margin: 0; opacity: 0.9;">Ein personleg og uhøgtidleg sjøltest med etiske dilemmaer</p>
                 </div>
             </div>
-            <div class="header-stripe"></div>
-        </header>
 
-        <!-- LANGUAGE SELECTION SCREEN -->
-        <div id="lang-screen" class="screen active">
-            <div class="intro-box">
-                <h2 class="intro-title">Vel språk / Velg språk</h2>
-                <div class="intro-text">
-                    <p></p>
-                </div>
-                <div class="lang-buttons">
-                    <button class="lang-btn nn" onclick="selectLanguage('nn')">Nynorsk</button>
-                    <button class="lang-btn nb" onclick="selectLanguage('nb')">Bokmål</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- INTRO SCREEN -->
-        <div id="intro-screen" class="screen">
-            <div class="intro-box">
-                <h2 class="intro-title" id="intro-title">Velkommen til etikktesten!</h2>
-                <div class="intro-text">
-                    <p id="intro-text">Dette er ein uhøgtidleg moro-test om etikk. Den kan seie noko om korleis du tenkjer om rett og galt her og no, men er ingen fasit.</p>
-
-                    <div class="highlight-box" id="goal-box">
+            <!-- INTRO SCREEN -->
+            <div id="intro-screen" class="screen active">
+                <div class="box1">
+                    <h2 class="heading2 no-mt">Velkomen til etikktesten!</h2>
+                    <p style="margin-bottom: 16px;">Dette er ein uhøgtidleg moro-test om etikk. Den kan seie noko om korleis du tenkjer om rett og galt her og no, men er ingen fasit.</p>
+                    
+                    <div class="box2" style="background: var(--accent4); color: #1a1a1a; margin-bottom: 16px;">
                         <strong>Målet med testen:</strong>
+                        <ul style="margin-left: 24px; margin-top: 8px;">
+                            <li>Gje innsikt i korleis ulike vinklingar til same handling kan gje vidt ulike svar på kva som er rett eller galt</li>
+                            <li>Bevisstgjere samanhengar i samband med dette</li>
+                            <li>Trening i å vurdere etiske dilemma sjølvstendig og i grupper</li>
+                            <li>Gje eit utgangspunkt for å ta opp forskjellen mellom pliktetikk, sinnelagsetikk og konsekvensetikk</li>
+                        </ul>
                     </div>
-                    <ul id="goal-list">
-                        <li>Gje innsikt i korleis ulike vinklingar til same handling kan gje vidt ulike svar på kva som er rett eller galt</li>
-                        <li>Bevisstgjere samanhengar i samband med dette</li>
-                        <li>Trening i å vurdere etiske dilemmaer sjølvstendig og i grupper</li>
-                        <li>Gje eit utgangspunkt for å ta opp forskjellen mellom pliktetikk, sinnelagsetikk og konsekvensetikk</li>
-                    </ul>
 
-                    <p id="howto-title"><strong>Slik gjer du:</strong></p>
-                    <ul id="howto-list">
+                    <h3 class="heading3">Slik gjer du:</h3>
+                    <ul style="margin-left: 24px; margin-bottom: 24px;">
                         <li>Du vil få 8 historier med tilhøyrande spørsmål</li>
-                        <li>For kvart spørsmål svarer du "ja" eller "nei"</li>
-                        <li>Ta sjølvstendige val – svare individuelt</li>
+                        <li>For kvart spørsmål svarar du "Ja" eller "Nei"</li>
+                        <li>Ta sjølvstendige val – svar individuelt</li>
                         <li>Det finst ingen fasit – i verda har vi ingen fasit på kva som er rett og galt</li>
                     </ul>
 
-                    <div class="highlight-box" id="highlight-box">
-                        På slutten vil du få ein analyse av korleis du i følgje denne testen tenkjer om rett og galt. Husk at dette berre er ein moro-test, ikkje ein nøyaktig vitskapleg test!
+                    <div class="box2" style="background: var(--surface); margin-bottom: 24px;">
+                        På slutten vil du få ein analyse av korleis du i følgje denne testen tenkjer om rett og galt. Hugs at dette berre er ein moro-test, ikkje ein nøyaktig vitskapleg test!
                     </div>
-                </div>
-                <button class="btn btn-green" id="start-btn" onclick="startTest()">Start testen →</button>
-            </div>
-        </div>
 
-        <!-- STORY SCREEN -->
-        <div id="story-screen" class="screen">
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                    <button class="btn" style="background: var(--accent); color: var(--text-on-accent);" onclick="startTest()">Start testen →</button>
                 </div>
-                <p id="progress-text" class="progress-text">Historie 1 av 8</p>
             </div>
 
-            <div id="story-container"></div>
-        </div>
-
-        <!-- RESULTS SCREEN -->
-        <div id="results-screen" class="screen">
-            <div class="results-box">
-                <h2 class="results-title">Dine resultat</h2>
-                
-                <div class="color-counts">
-                    <div class="color-box yellow">
-                        <div id="yellow-count" class="color-count">0</div>
-                        <div class="color-label">Gule svar<br><small>(Pliktetikk)</small></div>
+            <!-- STORY SCREEN -->
+            <div id="story-screen" class="screen">
+                <div class="box2" style="margin-bottom: 24px;">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
                     </div>
-                    <div class="color-box red">
-                        <div id="red-count" class="color-count">0</div>
-                        <div class="color-label">Røde svar<br><small>(Konsekvensetikk)</small></div>
-                    </div>
-                    <div class="color-box green">
-                        <div id="green-count" class="color-count">0</div>
-                        <div class="color-label">Grøne svar<br><small>(Sinnelagsetikk)</small></div>
-                    </div>
+                    <p id="progress-text" style="margin-top: 8px; font-weight: bold;">Historie 1 av 8</p>
                 </div>
 
-                <div id="analysis-container"></div>
-
-                <button class="btn btn-yellow" onclick="restartTest()">Ta testen på ny →</button>
+                <div id="story-container"></div>
             </div>
-        </div>
 
-        <!-- PRIVACY NOTICE -->
-        <div class="privacy-notice">
-            <strong>🔒 Personvern:</strong> Denne testen køyrer heilt lokalt i nettlesaren din. Ingen svar blir sende til nokon tenar. Vi lagrar ikkje noko data om deg. Du kan slette alle data ved å tømme nettlesaren sin localStorage.
-        </div>
+            <!-- RESULTS SCREEN -->
+            <div id="results-screen" class="screen">
+                <div class="box1">
+                    <h2 class="heading2 no-mt">Dine resultat</h2>
+                    
+                    <div class="color-counts">
+                        <div class="box2 color-box yellow">
+                            <div id="yellow-count" class="color-count">0</div>
+                            <div><strong>Gule svar</strong><br><small>(Pliktetikk)</small></div>
+                        </div>
+                        <div class="box2 color-box red">
+                            <div id="red-count" class="color-count">0</div>
+                            <div><strong>Raude svar</strong><br><small>(Konsekvensetikk)</small></div>
+                        </div>
+                        <div class="box2 color-box green">
+                            <div id="green-count" class="color-count">0</div>
+                            <div><strong>Grøne svar</strong><br><small>(Sinnelagsetikk)</small></div>
+                        </div>
+                    </div>
+
+                    <div id="analysis-container"></div>
+
+                    <button class="btn" style="background: var(--accent); color: var(--text-on-accent); margin-top: 24px;" onclick="restartTest()">Ta testen på ny →</button>
+                </div>
+            </div>
+
+            <!-- PRIVACY NOTICE -->
+            <div class="box4" style="margin-top: 32px;">
+                <div class="box-header" style="background: var(--accent); color: var(--text-on-accent);">
+                    <strong style="display: flex; align-items: center; gap: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        Personvern og datasikkerheit
+                    </strong>
+                </div>
+                <div class="box-body">
+                    Denne testen køyrer heilt lokalt i nettlesaren din. Ingen svar blir sende til nokon tenar. Vi lagrar ikkje noko data om deg.
+                </div>
+            </div>
+
+        </main>
     </div>
 
+    <script src="../js/neo-header.js"></script>
     <script>
-        // Language state
-        let currentLang = 'nn';
-
-        // Translation data
-        const translations = {
-            nn: {
-                title: "Etikktesten",
-                subtitle: "Ein personleg og uhøgtidleg sjøltest med etiske dilemmaer",
-                langTitle: "Vel språk / Velg språk",
-                langPrompt: "Choose your language / Vel ditt språk:",
-                welcomeTitle: "Velkommen til etikktesten!",
-                introText: "Dette er ein uhøgtidleg moro-test om etikk. Den kan seie noko om korleis du tenkjer om rett og galt her og no, men er ingen fasit.",
-                goalTitle: "Målet med testen:",
-                goal1: "Gje innsikt i korleis ulike vinklingar til same handling kan gje vidt ulike svar på kva som er rett eller galt",
-                goal2: "Bevisstgjere samanhengar i samband med dette",
-                goal3: "Trening i å vurdere etiske dilemmaer sjølvstendig og i grupper",
-                goal4: "Gje eit utgangspunkt for å ta opp forskjellen mellom pliktetikk, sinnelagsetikk og konsekvensetikk",
-                howToTitle: "Slik gjer du:",
-                howTo1: "Du vil få 8 historier med tilhøyrande spørsmål",
-                howTo2: "For kvart spørsmål svarer du \"ja\" eller \"nei\"",
-                howTo3: "Ta sjølvstendige val – svare individuelt",
-                howTo4: "Det finst ingen fasit – i verda har vi ingen fasit på kva som er rett og galt",
-                highlightBox: "På slutten vil du få ein analyse av korleis du i følgje denne testen tenkjer om rett og galt. Husk at dette berre er ein moro-test, ikkje ein nøyaktig vitskapleg test!",
-                startBtn: "Start testen →",
-                storyLabel: "Historie",
-                ofLabel: "av",
-                nextBtn: "Neste historie →",
-                resultsTitle: "Dine resultat",
-                yellowLabel: "Gule svar",
-                redLabel: "Røde svar",
-                greenLabel: "Grøne svar",
-                pliktetikk: "(Pliktetikk)",
-                konsekvensetikk: "(Konsekvensetikk)",
-                sinnelagsetikk: "(Sinnelagsetikk)",
-                restartBtn: "Ta testen på ny →",
-                privacy: "🔒 Personvern:",
-                privacyText: "Denne testen køyrer heilt lokalt i nettlesaren din. Ingen svar blir sende til nokon tenar. Vi lagrar ikkje noko data om deg. Du kan slette alle data ved å tømme nettlesaren sin localStorage.",
-                yes: "Ja",
-                no: "Nei"
-            },
-            nb: {
-                title: "Etikktesten",
-                subtitle: "En personlig og uhøytidelig selvtest med etiske dilemmaer",
-                langTitle: "Vel språk / Velg språk",
-                langPrompt: "Choose your language / Vel ditt språk:",
-                welcomeTitle: "Velkommen til etikktesten!",
-                introText: "Dette er en uhøytidelig moro-test om etikk. Den kan si noe om hvordan du tenker om rett og galt her og nå, men er ingen fasit.",
-                goalTitle: "Målet med testen:",
-                goal1: "Gi innsikt i hvordan ulike vinklinger til samme handling kan gi vidt ulike svar på hva som er rett eller galt",
-                goal2: "Bevisstgjøre sammenhenger i sammenheng med dette",
-                goal3: "Trening i å vurdere etiske dilemmaer selvstendig og i grupper",
-                goal4: "Gi et utgangspunkt for å ta opp forskjellen mellom pliktetikk, sinnelagsetikk og konsekvensetikk",
-                howToTitle: "Slik gjør du:",
-                howTo1: "Du vil få 8 historier med tilhørende spørsmål",
-                howTo2: "For hvert spørsmål svarer du \"ja\" eller \"nei\"",
-                howTo3: "Ta selvstendige valg – svar individuelt",
-                howTo4: "Det finnes ingen fasit – i verden har vi ingen fasit på hva som er rett og galt",
-                highlightBox: "På slutten vil du få en analyse av hvordan du i følge denne testen tenker om rett og galt. Husk at dette bare er en moro-test, ikke en nøyaktig vitenskapelig test!",
-                startBtn: "Start testen →",
-                storyLabel: "Historie",
-                ofLabel: "av",
-                nextBtn: "Neste historie →",
-                resultsTitle: "Dine resultater",
-                yellowLabel: "Gule svar",
-                redLabel: "Røde svar",
-                greenLabel: "Grønne svar",
-                pliktetikk: "(Pliktetikk)",
-                konsekvensetikk: "(Konsekvensetikk)",
-                sinnelagsetikk: "(Sinnelagsetikk)",
-                restartBtn: "Ta testen på ny →",
-                privacy: "🔒 Personvern:",
-                privacyText: "Denne testen kjører helt lokalt i nettleseren din. Ingen svar blir sendt til noen server. Vi lagrer ikke noe data om deg. Du kan slette alle data ved å tømme nettleserens localStorage.",
-                yes: "Ja",
-                no: "Nei"
-            }
-        };
-
-        // Test data with stories, questions, and color coding
-        // Color codes: yellow = pliktetikk (rules/laws), red = konsekvensetikk (consequences), green = sinnelagsetikk (intentions)
         const testData = [
             {
-                story: {
-                    nn: `Mikkel er sjukepleiar og oppdagar at ein liten, veldig sju gutt har smugla valpen sin med seg inn på rommet. Sjukehuset har strenge reglar mot husdyr på romma. Mikkel veit at gutten er døyande, og han tenkjer at det umogeleg kan skade nokon at gutten får ha valpen på rommet. Mikkel vel å halde valpen hemmeleg for sjefane sine.`,
-                    nb: `Mikkel er sykepleier og oppdager at en liten, veldig syk gutt har smuglet valpen sin med seg inn på rommet. Sykehuset har strenge regler mot husdyr på rommene. Mikkel vet at gutten er døende, og han tenker at det umulig kan skade noen at gutten får ha valpen på rommet. Mikkel vel å holde valpen hemmelig for sjefene sine.`
-                },
+                story: `Mikkel er sjukepleiar og oppdagar at ein liten, veldig sjuk gut har smugla valpen sin med seg inn på rommet. Sjukehuset har strenge reglar mot husdyr på romma. Mikkel veit at guten er døyande, og han tenkjer at det umogeleg kan skade nokon at guten får ha valpen på rommet. Mikkel vel å halde valpen hemmeleg for sjefane sine.`,
                 questions: [
                     {
-                        text: {
-                            nn: "Er det greit at Mikkel held valpen hemmeleg, sjølv om det er mot sjukehuset sine regler?",
-                            nb: "Er det greit at Mikkel holder valpen hemmelig, selv om det er mot sykehusets regler?"
-                        },
+                        text: "Er det greit at Mikkel held valpen hemmeleg, sjølv om det er mot sjukehuset sine reglar?",
                         answers: { "ja": "red", "nei": "yellow" }
                     },
                     {
-                        text: {
-                            nn: "Hvis Mikkel melder frå og valpen kastast ut, er det Mikkels skyld om den lille gutten blir lei seg?",
-                            nb: "Hvis Mikkel melder fra og valpen kastes ut, er det Mikkels skyld om den lille gutten blir lei seg?"
-                        },
+                        text: "Viss Mikkel melder frå og valpen blir kasta ut, er det Mikkel si skuld om den vesle guten blir lei seg?",
                         answers: { "ja": "red", "nei": "green" }
                     }
                 ]
             },
             {
-                story: {
-                    nn: `Bendik er nitten år gamal og i krig for å forsvare landet mot ein fiendtleg styrke som har kome for å ta Norge. Hans sersjant heiter Erik og har nettopp gjeve Bendik ordre om å bombe eit hus som ser ut som eit heilt vanleg hus. Bendik spør Erik om han er sikker på at det er gøymestad for fienden, og ikkje berre eit vanleg hus. Erik seier at han har gjort grundige undersøkingar og er sikker. Bendik gjer som han har fått beskjed om. Det viser seg at Erik tok feil, sjølv om han hadde undersøkt grundig. Det budde ein heilt vanleg familie i huset, og både foreldra og dei fire barna døydde i bombeangrepet.`,
-                    nb: `Bendik er nitten år gammel og i krig for å forsvare landet mot en fiendtlig styrke som har kommet for å ta Norge. Hans sersjant heter Erik og har nettopp gitt Bendik ordre om å bombe et hus som ser ut som et helt vanlig hus. Bendik spør Erik om han er sikker på at det er gjemmested for fienden, og ikke bare et vanlig hus. Erik sier at han har gjort grundige undersøkelser og er sikker. Bendik gjør som han har fått beskjed om. Det viser seg at Erik tok feil, selv om han hadde undersøkt grundig. Det bodde en helt vanlig familie i huset, og både foreldrene og de fire barna døde i bombeangrepet.`
-                },
+                story: `Bendik er nitten år gamal og i krig for å forsvare landet mot ein fiendtleg styrke som har kome for å ta Noreg. Sersjanten hans heiter Erik og har nettopp gjeve Bendik ordre om å bombe eit hus som ser ut som eit heilt vanleg hus. Bendik spør Erik om han er sikker på at det er gøymestad for fienden, og ikkje berre eit vanleg hus. Erik seier at han har gjort grundige undersøkingar og er sikker. Bendik gjer som han har fått beskjed om. Det viser seg at Erik tok feil, sjølv om han hadde undersøkt grundig. Det budde ein heilt vanleg familie i huset, og både foreldra og dei fire barna døydde i bombeåtaket.`,
                 questions: [
                     {
-                        text: {
-                            nn: "Burde Bendik late vere å bombe huset?",
-                            nb: "Burde Bendik la være å bombe huset?"
-                        },
+                        text: "Burde Bendik late vere å bombe huset?",
                         answers: { "ja": "red", "nei": "yellow" }
                     },
                     {
-                        text: {
-                            nn: "Synest du det er på sin plass at Erik kjendar dårleg samvittighet?",
-                            nb: "Synes du det er på sin plass at Erik kjenner dårlig samvittighet?"
-                        },
+                        text: "Synest du det er på sin plass at Erik kjenner dårleg samvit?",
                         answers: { "ja": "green", "nei": "yellow" }
                     }
                 ]
             },
             {
-                story: {
-                    nn: `Ein lege jobbar med ein pasient, Rolf, som er hardt skada etter å ha køyrd i eit tre fordi han køyrde for fort. Politiet fortel legen at Rolf har gøymd ei kvinne han har kidnappa. Kvinnen ligg truleg aleine og dør ein ukjend stad. Rolf og legen er aleine. Legen seier at hvis Rolf ikkje fortel kor kvinnen er, vil legen ikkje gi han medisinsk behandling og la han dø. Rolf blir svært redd og fortel. Kvinnen blir likevel ikkje funne, ho er ikkje der Rolf sa at ho var.`,
-                    nb: `En lege jobber med en pasient, Rolf, som er hardt skadet etter å ha kjørt i et tre fordi han kjørte for fort. Politiet forteller legen at Rolf har gjemt en kvinne han har kidnappet. Kvinnen ligger sannsynligvis alene og dør et ukjent sted. Rolf og legen er alene. Legen sier at hvis Rolf ikke forteller hvor kvinnen er, vil legen ikke gi ham medisinsk behandling og la ham dø. Rolf blir svært redd og forteller. Kvinnen blir likevel ikke funnet, hun er ikke der Rolf sa at hun var.`
-                },
+                story: `Ein lege jobbar med ein pasient, Rolf, som er hardt skadd etter å ha køyrt i eit tre fordi han køyrde for fort. Politiet fortel legen at Rolf har gøymt ei kvinne han har kidnappa. Kvinna ligg truleg aleine og døyr ein ukjend stad. Rolf og legen er aleine. Legen seier at viss Rolf ikkje fortel kvar kvinna er, vil legen ikkje gi han medisinsk behandling og la han døy. Rolf blir svært redd og fortel. Kvinna blir likevel ikkje funnen, ho er ikkje der Rolf sa at ho var.`,
                 questions: [
                     {
-                        text: {
-                            nn: "Synest du legen gjorde det einaste rette?",
-                            nb: "Synes du legen gjorde det eneste rette?"
-                        },
+                        text: "Synest du legen gjorde det einaste rette?",
                         answers: { "ja": "red", "nei": "yellow" }
                     },
                     {
-                        text: {
-                            nn: "Hvis nokon hadde høyrt det og det blei rettssak, ville du synest det var greit om legen måtte i fengsel?",
-                            nb: "Hvis noen hadde hørt det og det ble rettssak, ville du synes det var greit om legen måtte i fengsel?"
-                        },
+                        text: "Viss nokon hadde høyrt det og det blei rettssak, ville du synest det var greit om legen måtte i fengsel?",
                         answers: { "ja": "yellow", "nei": "red" }
                     },
                     {
-                        text: {
-                            nn: "Synest du det er greit å bryte til dømes menneskerettighetene hvis ein gjer det for å vere snill?",
-                            nb: "Synes du det er greit å bryte for eksempel menneskerettighetene hvis man gjør det for å være snill?"
-                        },
+                        text: "Synest du det er greit å bryte til dømes menneskerettane viss ein gjer det for å vere snill?",
                         answers: { "ja": "green", "nei": "yellow" }
                     },
                     {
-                        text: {
-                            nn: "Er det greit at ein bryter kva for helst regler hvis ein er heilt sikker på at konsekvensane vil bli betre for alle?",
-                            nb: "Er det greit at en bryter hva som helst regler hvis en er helt sikker på at konsekvensene vil bli bedre for alle?"
-                        },
+                        text: "Er det greit at ein bryt kva for helst reglar viss ein er heilt sikker på at konsekvensane vil bli betre for alle?",
                         answers: { "ja": "red", "nei": "yellow" }
                     }
                 ]
             },
             {
-                story: {
-                    nn: `Ein ung jente, Emma, ser ei gammal dame som har tapt vesken sin. Ho vil gjerne hjelpe og plukkar opp vesken og gjev ho til damen. Damen byrjar å gråte. I vesken har ho uerstattelige bilete av mannen sin, som er død. Ho gjev Emma tusen kroner som takk. Emma fortel det etterpå til ein venninne, som kallar henne grådig som tok imot pengar for noko det var ein sjølvsagheit å gjere, og som andre ikkje ville gjeve belønning for. Ho seier at Emma bør gje pengane til fattige. Emma får dårleg samvittighet og gjev pengane til fattige.`,
-                    nb: `En ung jente, Emma, ser en gammel dame som har mistet vesken sin. Hun vil gjerne hjelpe og plukker opp vesken og gir den til damen. Damen begynner å gråte. I vesken har hun uerstattelige bilder av mannen sin, som er død. Hun gir Emma tusen kroner som takk. Emma forteller det etterpå til en venninne, som kaller henne grådig som tok imot penger for noe det var en selvfølge å gjøre, og som andre ikke ville gitt belønning for. Hun sier at Emma bør gi pengene til fattige. Emma får dårlig samvittighet og gir pengene til fattige.`
-                },
+                story: `Ei ung jente, Emma, ser ei gammal dame som har mista veska si. Ho vil gjerne hjelpe og plukkar opp veska og gjev ho til dama. Dama byrjar å gråte. I veska har ho uerstattelege bilete av mannen sin, som er død. Ho gjev Emma tusen kroner som takk. Emma fortel det etterpå til ei venninne, som kallar henne grådig som tok imot pengar for noko det var ei sjølvfølgje å gjere, og som andre ikkje ville gjeve løn for. Ho seier at Emma bør gje pengane til fattige. Emma får dårleg samvit og gjev pengane til fattige.`,
                 questions: [
                     {
-                        text: {
-                            nn: "Synest du Emma fortente ein så stor belønning?",
-                            nb: "Synes du Emma fortjente en så stor belønning?"
-                        },
+                        text: "Synest du Emma fortente ei så stor løn?",
                         answers: { "ja": "red", "nei": "green" }
                     },
                     {
-                        text: {
-                            nn: "Synest du damen hadde vore gjerrig hvis ho ikkje gav Emma ein stor belønning?",
-                            nb: "Synes du damen hadde vært gjerrig hvis hun ikke ga Emma en stor belønning?"
-                        },
+                        text: "Synest du dama hadde vore gjerrig viss ho ikkje gav Emma ei stor løn?",
                         answers: { "ja": "red", "nei": "green" }
                     },
                     {
-                        text: {
-                            nn: "Synest du det er bra at Emma gjev pengane til fattige?",
-                            nb: "Synes du det er bra at Emma gir pengene til fattige?"
-                        },
+                        text: "Synest du det er bra at Emma gjev pengane til fattige?",
                         answers: { "ja": "green", "nei": "red" }
                     }
                 ]
             },
             {
-                story: {
-                    nn: `Ein tyv har brote seg inn i huset til ein høgtståande tilsett i ambassaden. Han stal noko han trur er ein koffert full av pengar. Når han er langt borte frå huset og veit at ingen ser han, opnar han spent kofferten, men der er det ei tidsinnstilt bombe som vil eksplodere om ein halvtime! Tyven slepp kofferten og løper så langt vekk han klarer, for å kome seg i tryggleik. Ingen blir drepne når bomben eksploderer.`,
-                    nb: `En tyv har brutt seg inn i huset til en høytstående ansatt i ambassaden. Han stjal noe han tror er en koffert full av penger. Når han er langt borte fra huset og vet at ingen ser ham, åpner han spent kofferten, men der er det en tidsinnstilt bombe som vil eksplodere om en halvtime! Tyven slipper kofferten og løper så langt vekk han klarer, for å komme seg i trygghet. Ingen blir drept når bomben eksploderer.`
-                },
+                story: `Ein tjuv har brote seg inn i huset til ein høgtståande tilsett i ambassaden. Han stal noko han trur er ein koffert full av pengar. Når han er langt borte frå huset og veit at ingen ser han, opnar han spent kofferten, men der er det ei tidsinnstilt bombe som vil eksplodere om ein halvtime! Tjuven slepper kofferten og spring så langt vekk han klarer, for å kome seg i tryggleik. Ingen blir drepne når bomba eksploderer.`,
                 questions: [
                     {
-                        text: {
-                            nn: "Vil du seie at tyven har gjort ein god gjerning?",
-                            nb: "Vil du si at tyven har gjort en god gjerning?"
-                        },
+                        text: "Vil du seie at tjuven har gjort ei god gjerning?",
                         answers: { "ja": "red", "nei": "green" }
                     },
                     {
-                        text: {
-                            nn: "Ville du synest det var greit hvis tyven fekk belønning (t.d. hvis politiet trudde han hadde meint å redde familien)?",
-                            nb: "Ville du synes det var greit hvis tyven fikk belønning (f.eks. hvis politiet trodde han hadde ment å redde familien)?"
-                        },
+                        text: "Ville du synest det var greit viss tjuven fekk løn (t.d. viss politiet trudde han hadde meint å redde familien)?",
                         answers: { "ja": "green", "nei": "yellow" }
                     },
                     {
-                        text: {
-                            nn: "Hvis du budde i huset som ville blitt ramma av eksplosjonen, ville du takka tyven for å ha redda livet ditt?",
-                            nb: "Hvis du bodde i huset som ville blitt rammet av eksplosjonen, ville du takket tyven for å ha reddet livet ditt?"
-                        },
+                        text: "Viss du budde i huset som ville blitt råka av eksplosjonen, ville du takka tjuven for å ha redda livet ditt?",
                         answers: { "ja": "red", "nei": "green" }
                     },
                     {
-                        text: {
-                            nn: "Hvis du budde i huset som ville blitt ramma av eksplosjonen, ville du ynskt å sjå tyven i fengsel?",
-                            nb: "Hvis du bodde i huset som ville blitt rammet av eksplosjonen, ville du ønsket å se tyven i fengsel?"
-                        },
+                        text: "Viss du budde i huset som ville blitt råka av eksplosjonen, ville du ynskt å sjå tjuven i fengsel?",
                         answers: { "ja": "yellow", "nei": "red" }
                     }
                 ]
             },
             {
-                story: {
-                    nn: `Alf er nittitre år gamal og svært sju. Han har berre dagar att å leve, og kvar time er ein pine for han. Kona hans, Elsa, har vore ved hans side i alle år, og dei elskar kvarandre høgt. Ho synest det er svært smertefullt å sjå Alf lide slik. Ho sit ved sengekanten og held han i handa, og saman pines dei time for time, minutt for minutt. Alf spør Elsa om ho kan gi han ein overdose av morfinen han har fått av legen, sånn at han kan dø og slippe desse ulidelege smertene.`,
-                    nb: `Alf er nittitre år gammel og svært syk. Han har bare dager igjen å leve, og hver time er en pine for ham. Kona hans, Elsa, har vært ved hans side i alle år, og de elsker hverandre høyt. Hun synes det er svært smertefullt å se Alf lide slik. Hun sit ved sengekanten og holder ham i hånden, og sammen pines de time for time, minutt for minutt. Alf spør Elsa om hun kan gi ham en overdose av morfinen han har fått av legen, sånn at han kan dø og slippe disse uutholdelige smertene.`
-                },
+                story: `Alf er nittitre år gamal og svært sjuk. Han har berre dagar att å leve, og kvar time er ei pine for han. Kona hans, Elsa, har vore ved hans side i alle år, og dei elskar kvarandre høgt. Ho synest det er svært smertefullt å sjå Alf lide slik. Ho sit ved sengekanten og held han i handa, og saman pinest dei time for time, minutt for minutt. Alf spør Elsa om ho kan gi han ein overdose av morfinen han har fått av legen, sånn at han kan døy og sleppe desse ulidelege smertene.`,
                 questions: [
                     {
-                        text: {
-                            nn: "Elsa vil berre hjelpe mannen sin, men aktiv dødshjelp er ikkje lov i Norge. Bør ho late vere å hjelpe Alf til å dø, sånn at ho ikkje bryter loven?",
-                            nb: "Elsa vil bare hjelpe mannen sin, men aktiv dødshjelp er ikke lov i Norge. Bør hun la være å hjelpe Alf til å dø, sånn at hun ikke bryter loven?"
-                        },
+                        text: "Elsa vil berre hjelpe mannen sin, men aktiv dødshjelp er ikkje lov i Noreg. Bør ho late vere å hjelpe Alf til å døy, sånn at ho ikkje bryt lova?",
                         answers: { "ja": "yellow", "nei": "red" }
                     },
                     {
-                        text: {
-                            nn: "Hvis Elsa tar livet av mannen sin, bør ho anklagast for drap?",
-                            nb: "Hvis Elsa tar livet av mannen sin, bør hun anklages for drap?"
-                        },
+                        text: "Viss Elsa tek livet av mannen sin, bør ho bli skulda for drap?",
                         answers: { "ja": "yellow", "nei": "green" }
                     }
                 ]
             },
             {
-                story: {
-                    nn: `Lisa Cecilie har vore bestevenninne med Karoline i nitten år. No ligg Karoline på sjukehus og har vondt og er deprimert. Lisa Cecilie har forferdeleg dårleg samvittighet, for ho har hatt sex med kjæresten til Karoline bak Karolines rygg fleire gonger. Karoline er ikkje lenger saman med denne kjæresten, men Lisa Cecilie har så dårleg samvittighet at ho ikkje får sove. Ein dag går ho på besøk til Karoline med ein ekstra stor blomebukett. Ho er ærleg og fortel Karoline om utroskapen. Det kjendest veldig deilt etterpå, sjølv om Karoline blei ennå meir lei seg av å høyre om det.`,
-                    nb: `Lisa Cecilie har vært bestevenninne med Karoline i nitten år. Nå ligger Karoline på sykehus og har vondt og er deprimert. Lisa Cecilie har forferdelig dårlig samvittighet, for hun har hatt sex med kjæresten til Karoline bak Karolines rygg flere ganger. Karoline er ikke lenger sammen med denne kjæresten, men Lisa Cecilie har så dårlig samvittighet at hun ikke får sove. En dag går hun på besøk til Karoline med en ekstra stor blomsterbukett. Hun er ærlig og forteller Karoline om utroskapen. Det kjentes veldig deilig etterpå, selv om Karoline ble enda mer lei seg av å høre om det.`
-                },
+                story: `Lisa Cecilie har vore bestevenninne med Karoline i nitten år. No ligg Karoline på sjukehus og har vondt og er deprimert. Lisa Cecilie har forferdeleg dårleg samvit, for ho har hatt sex med kjærasten til Karoline bak ryggen hennar fleire gonger. Karoline er ikkje lenger saman med denne kjærasten, men Lisa Cecilie har så dårleg samvit at ho ikkje får sove. Ein dag går ho på besøk til Karoline med ein ekstra stor blomebukett. Ho er ærleg og fortel Karoline om utruskapen. Det kjendest veldig deileg etterpå, sjølv om Karoline blei enno meir lei seg av å høyre om det.`,
                 questions: [
                     {
-                        text: {
-                            nn: "Gjer Lisa Cecilie ein god gjerning ved å vere ærleg?",
-                            nb: "Gjør Lisa Cecilie en god gjerning ved å være ærlig?"
-                        },
+                        text: "Gjer Lisa Cecilie ei god gjerning ved å vere ærleg?",
                         answers: { "ja": "green", "nei": "red" }
                     },
                     {
-                        text: {
-                            nn: "Hvis Karoline lå for å døy, ville det då vore rett av Lisa Cecilie å fortelje om utroskapen?",
-                            nb: "Hvis Karoline lå for å dø, ville det da vært rett av Lisa Cecilie å fortelle om utroskapen?"
-                        },
+                        text: "Viss Karoline låg for å døy, ville det då vore rett av Lisa Cecilie å fortelje om utruskapen?",
                         answers: { "ja": "green", "nei": "red" }
                     },
                     {
-                        text: {
-                            nn: "Hadde Lisa Cecilie vore snillare hvis ho hadde halde på løyndomen for at ikkje Karoline skulle bli lei seg?",
-                            nb: "Hadde Lisa Cecilie vært snillere hvis hun hadde holdt på hemmeligheten for at ikke Karoline skulle bli lei seg?"
-                        },
+                        text: "Hadde Lisa Cecilie vore snillare viss ho hadde halde på løyndomen for at ikkje Karoline skulle bli lei seg?",
                         answers: { "ja": "red", "nei": "green" }
                     }
                 ]
             },
             {
-                story: {
-                    nn: `Tom er ein seriemordar og seier sjølv at han vil drepe folk til han dør. Fordi han har ein god advokat, slepp Tom fri likevel. Politiet jobbar iherdig med å byggje ei ny sak mot han. Aksel er naboen til Tom. Han håpte Tom kom i fengsel, for dei kranglar konstant om eit stort lønnetre som skugger for utsikta. Aksel byrjar å planleggje korleis han kan ta livet av Tom.`,
-                    nb: `Tom er en seriemorder og sier selv at han vil drepe folk til han dør. Fordi han har en god advokat, slipper Tom fri likevel. Politiet jobber iherdig med å bygge en ny sak mot ham. Aksel er naboen til Tom. Han håpet Tom kom i fengsel, for de krangler konstant om et stort lønnetre som skygger for utsikten. Aksel begynner å planlegge hvordan han kan ta livet av Tom.`
-                },
+                story: `Tom er ein seriemordar og seier sjølv at han vil drepe folk til han døyr. Fordi han har ein god advokat, slepper Tom fri likevel. Politiet jobbar iherdig med å byggje ei ny sak mot han. Aksel er naboen til Tom. Han håpte Tom kom i fengsel, for dei kranglar konstant om eit stort lønnetre som skuggar for utsikta. Aksel byrjar å planleggje korleis han kan ta livet av Tom.`,
                 questions: [
                     {
-                        text: {
-                            nn: "Er det greit for deg hvis Tom blir drepen av Aksel?",
-                            nb: "Er det greit for deg hvis Tom blir drept av Aksel?"
-                        },
+                        text: "Er det greit for deg viss Tom blir drepen av Aksel?",
                         answers: { "ja": "red", "nei": "yellow" }
                     },
                     {
-                        text: {
-                            nn: "Tenk deg at Aksel drap Tom og du sat i ein jury som skulle dømme han. Hadde det vore betre dersom Aksel drap for å redde samfunnet frå ein morder enn for å bli kvitt ein brysom nabo?",
-                            nb: "Tenk deg at Aksel drepte Tom og du satt i en jury som skulle dømme ham. Hadde det vært bedre dersom Aksel drepte for å redde samfunnet fra en morder enn for å bli kvitt en brysom nabo?"
-                        },
+                        text: "Tenk deg at Aksel drap Tom og du sat i ein jury som skulle dømme han. Hadde det vore betre dersom Aksel drap for å redde samfunnet frå ein mordar enn for å bli kvitt ein brysam nabo?",
                         answers: { "ja": "green", "nei": "yellow" }
                     },
                     {
-                        text: {
-                            nn: "Hvis du såg Aksel fylgje etter Tom med ein kniv, ville du ringt politiet eller på andre måtar stoppa Aksel?",
-                            nb: "Hvis du såg Aksel følge etter Tom med en kniv, ville du ringt politiet eller på andre måter stoppet Aksel?"
-                        },
+                        text: "Viss du såg Aksel følgje etter Tom med ein kniv, ville du ringt politiet eller på andre måtar stoppa Aksel?",
                         answers: { "ja": "yellow", "nei": "red" }
                     },
                     {
-                        text: {
-                            nn: "Synest du det er ein god gjerning hvis ein person, t.d. naboen din, dreper folk han trur er farleg for andre mennesker?",
-                            nb: "Synes du det er en god gjerning hvis en person, f.eks. naboen din, dreper folk han tror er farlig for andre mennesker?"
-                        },
+                        text: "Synest du det er ei god gjerning viss ein person, t.d. naboen din, drep folk han trur er farlege for andre menneske?",
                         answers: { "ja": "red", "nei": "yellow" }
                     }
                 ]
             }
         ];
 
-        // Analysis texts
         const analyses = {
             yellow: {
                 title: "PLIKTETIKK",
-                text: {
-                    nn: `I svarene dine har du lagt mest vekt på at lover og regler vanlegvis er der av ein grunn, og at man i utgangspunktet bør følgje dei. Dette kalles pliktetikk. Du synest truleg ikkje at folk skal finne på sine eigne lover og regler. Dette betyr ikkje at du aldri kan synest det beste er å handle på tvers av lover, regler og retningslinjer. Men det betyr at du er veldig skeptisk til at folk sjølv skal bestemme sjølv når dei har lyst til å følgje eller bryte til dømes Norges lover.
-
-Ingen vil følgje berre éin type tankegang når dei tenkjer om rett og galt, alle vil veksle mellom å fokusere på konsekvensane av ein handling (røde svar), kva som er tanken bak (grøne svar) og lover, regler og prinsipp (gule svar). Kva du har fått mest av, seier berre kanskje noko om kva du legg litt meir vekt på.`,
-                    nb: `I svarene dine har du lagt mest vekt på at lover og regler vanligvis er der av en grunn, og at man i utgangspunktet bør følge dem. Dette kalles pliktetikk. Du synes sannsynligvis ikke at folk skal finne på sine egne lover og regler. Dette betyr ikke at du aldri kan synes det beste er å handle på tvers av lover, regler og retningslinjer. Men det betyr at du er veldig skeptisk til at folk selv skal bestemme selv når de har lyst til å følge eller bryte for eksempel Norges lover.
-
-Ingen vil følge bare én type tankegang når de tenker om rett og galt, alle vil veksle mellom å fokusere på konsekvensene av en handling (røde svar), hva som er tanken bak (grønne svar) og lover, regler og prinsipp (gule svar). Hva du har fått mest av, sier bare kanskje noe om hva du legger litt mer vekt på.`
-                }
+                text: "I svara dine har du lagt mest vekt på at lover og reglar vanlegvis er der av ein grunn, og at ein i utgangspunktet bør følgje dei. Dette kallast pliktetikk. Du synest truleg ikkje at folk skal finne på sine eigne lover og reglar. Dette betyr ikkje at du aldri kan synest det beste er å handle på tvers av lover og reglar. Men det betyr at du er veldig skeptisk til at folk skal bestemme sjølv når dei har lyst til å følgje eller bryte til dømes norske lover.\n\nIngen vil følgje berre éin type tankegang når dei tenkjer om rett og galt, alle vil veksle mellom å fokusere på konsekvensane av ei handling (raude svar), kva som er tanken bak (grøne svar) og lover, reglar og prinsipp (gule svar). Kva du har fått mest av, seier berre kanskje noko om kva du legg litt meir vekt på."
             },
             red: {
                 title: "KONSEKVENSETIKK",
-                text: {
-                    nn: `Du har lagt mest vekt på kva ein handling eller avgjerd faktisk vil innebere av konsekvensar, altså kva som vil skje. Dette kalles konsekvensetikk. Man kan tenke på det som "Hvis enden er god, er allting godt." Sjølv om noko kanskje startar som ein handling med grumsete motiv, tenkjer du at hvis det endar bra, var det tross alt ein god handling.
-
-Hvis testen har rett, er du også opptatt av kva som faktisk vil skje, når du skal finne ut kva du skal gjere i ein vanskelig situasjon. Kva skjer hvis du lyg no? Kven blir såra, kven kan bli skuffa over deg, kven kan eventuelt få det betre hvis du lyg denne eine gongen?
-
-Du avgjer ting ein del frå situasjon til situasjon, men du har truleg ikkje berre fått røde svar. Ingen vil følgje berre éin type tankegang når dei tenkjer om rett og galt, alle vil veksle mellom å fokusere på konsekvensane av ein handling (røde svar), kva som er tanken bak (grøne svar) og lover, regler og prinsipp (gule svar). Kva du har fått mest av, seier berre kanskje noko om kva du legg litt meir vekt på. Etter all sannsynlegheit ser du til dømes også poenget ved at man har lover og regler, og du vil truleg synest det er viktig å vite om ein person meiner å gjere noko galt, eller om det var eit uhell.`,
-                    nb: `Du har lagt mest vekt på hva en handling eller avgjerd faktisk vil innebære av konsekvenser, altså hva som vil skje. Dette kalles konsekvensetikk. Man kan tenke på det som "Hvis enden er god, er alt godt." Selv om noe kanskje starter som en handling med grumsete motiv, tenker du at hvis det ender bra, var det tross alt en god handling.
-
-Hvis testen har rett, er du også opptatt av hva som faktisk vil skje, når du skal finne ut hva du skal gjøre i en vanskelig situasjon. Hva skjer hvis du lyg nå? Hvem blir såret, hvem kan bli skuffet over deg, hvem kan eventuelt få det bedre hvis du lyg denne ene gangen?
-
-Du avgjør ting en del fra situasjon til situasjon, men du har sannsynligvis ikke bare fått røde svar. Ingen vil følge bare én type tankegang når de tenker om rett og galt, alle vil veksle mellom å fokusere på konsekvensene av en handling (røde svar), hva som er tanken bak (grønne svar) og lover, regler og prinsipp (gule svar). Hva du har fått mest av, sier bare kanskje noe om hva du legger litt mer vekt på. Etter all sannsynlighet ser du for eksempel også poenget ved at man har lover og regler, og du vil sannsynligvis synes det er viktig å vite om en person mener å gjøre noe galt, eller om det var et uhell.`
-                }
+                text: "Du har lagt mest vekt på kva ei handling faktisk vil innebere av konsekvensar, altså kva som vil skje. Dette kallast konsekvensetikk. Ein kan tenkje på det som «Viss enden er god, er allting godt.» Sjølv om noko kanskje startar som ei handling med grumsete motiv, tenkjer du at viss det endar bra, var det trass alt ei god handling.\n\nViss testen har rett, er du også oppteken av kva som faktisk vil skje når du skal finne ut kva du skal gjere i ein vanskeleg situasjon. Kva skjer viss du lyg no? Kven blir såra, kven kan få det betre?\n\nEtter all sannsynlegheit ser du til dømes også poenget ved at ein har lover og reglar, men frå situasjon til situasjon kviler du deg mest på konsekvensane."
             },
             green: {
                 title: "SINNELAGSETIKK",
-                text: {
-                    nn: `Du har lagt mest vekt på kva som ligg bak handlingane. Dette kalles sinnelagsetikk. "Det er tanken som tellet", seier man ofte i kvardagen, og da tenkjer man sinnelagsetisk.
-
-Sjølv om ein handling får fæle konsekvensar, er du villig til å tilgi hvis personen mente det godt. På same måte synest du truleg at ein som prøver å gjere noko galt, men som ved ein tilfeldighet endar med å gjere noko bra, ikkje har gjort ein god gjerning. Du bryr deg om kva folk mener og legg i det dei gjer. At man prøver å vere snill, er viktigare for deg enn at man har rekne ut kva som gir best konsekvensar.
-
-Men ingen vil følgje berre éin type tankegang når dei tenkjer om rett og galt, alle vil veksle mellom å fokusere på konsekvensane av ein handling (røde svar), kva som er tanken bak (grøne svar) og lover, regler og prinsipp (gule svar). Du har sikkert fått litt av alle fargar, og du synest nok konsekvensar og prinsipp (at man ikkje skifter regler heile tida) også har noko å seie for om ein handling er god.`,
-                    nb: `Du har lagt mest vekt på hva som ligger bak handlingene. Dette kalles sinnelagsetikk. "Det er tanken som teller", sier man ofte i hverdagen, og da tenker man sinnelagsetisk.
-
-Selv om en handling får fæle konsekvenser, er du villig til å tilgi hvis personen mente det godt. På samme måte synes du sannsynligvis at en som prøver å gjøre noe galt, men som ved en tilfeldighet ender med å gjøre noe bra, ikke har gjort en god gjerning. Du bryr deg om hva folk mener og legger i det de gjør. At man prøver å være snill, er viktigere for deg enn at man har regnet ut hva som gir best konsekvenser.
-
-Men ingen vil følge bare én type tankegang når de tenker om rett og galt, alle vil veksle mellom å fokusere på konsekvensene av en handling (røde svar), hva som er tanken bak (grønne svar) og lover, regler og prinsipp (gule svar). Du har sikkert fått litt av alle farger, og du synes nok konsekvenser og prinsipp (at man ikke skifter regler hele tiden) også har noe å si for om en handling er god.`
-                }
+                text: "Du har lagt mest vekt på kva som ligg bak handlingane. Dette kallast sinnelagsetikk. «Det er tanken som tel», seier ein ofte, og då tenkjer ein sinnelagsetisk.\n\nSjølv om ei handling får fæle konsekvensar, er du villig til å tilgi viss personen meinte det godt. På same måte synest du truleg at ein som prøver å gjere noko galt, men som ved ei tilfeldigheit endar med å gjere noko bra, ikkje har gjort ei god gjerning. Du bryr deg om kva folk meiner og legg i det dei gjer.\n\nDu har sikkert fått litt av alle fargar, og du synest nok konsekvensar og prinsipp (at ein ikkje skifter reglar heile tida) også har noko å seie for om ei handling er god."
             },
             yellow_green: {
                 title: "PLIKTETIKK + SINNELAGSETIKK",
-                text: {
-                    nn: `Du har i dine svar lagt like mye vekt på kva man meiner med det man gjer (sinnelagsetikk, dei grøne svarene), som på om viktige lover og regler er følgde, og på om det er ein viss prinsippfastheit i handlingsmønsteret (pliktetikk, dei gule svarene).
-
-Hvis ein person gjer noko av ren kjærleik, til dømes, er du truleg villig til å sjå litt mellom fingrene på at ein regel eller to blir broten. Samtidig ser du poenget i å vere prinsippfast, og at lover og regler er ein måte å gjere handlingar prinsippfaste på. Å vere prinsippfast betyr at man ikkje vinglar fram og tilbake på kva man synest er rett og galt.
-
-Du synest truleg ikkje det er greit å vere det man kallar hyklersk (= at man krev heilt andre ting av andre enn man gjer av seg sjølv, til dømes kjefter på alle som har på lue inne, samtidig som man alltid går med lue inne sjølv).
-
-Du har ikkje lagt så stor vekt på konsekvensane av handlingane, sjølv om du truleg også har nokre svar som legg vekt på korleis ting faktisk går (konsekvensetikk, dei røde svarene). Det at du tenkjer på prinsipp og at folk skal følgje lover og regler, er å tenkje på konsekvensane for samfunnet og verda generelt, men frå situasjon til situasjon hviler du deg ikkje så mye på konsekvensane.
-
-Truleg tenkjer du at det er for tilfeldig kva som styrer konsekvensane frå situasjon til situasjon, og at det er tryggare hvis man handlar etter etiske prinsipp (t.d. "du skal ikkje lyge", "du skal ikkje drepe", norske lover, trafikkreglane, etc.). Du tenkjer også, i følgje denne testen, at det er eit mål å handle med eit "rent sinn", altså at man gjer ting i beste meining, at man gjer ting for å vere snill, og ikkje for å vere slem.`,
-                    nb: `Du har i dine svar lagt like mye vekt på hva man mener med det man gjør (sinnelagsetikk, de grønne svarene), som på om viktige lover og regler er fulgt, og på om det er en viss prinsippfasthet i handlingsmønsteret (pliktetikk, de gule svarene).
-
-Hvis en person gjør noe av ren kjærlighet, for eksempel, er du sannsynligvis villig til å se litt mellom fingrene på at en regel eller to blir brutt. Samtidig ser du poenget i å være prinsippfast, og at lover og regler er en måte å gjøre handlinger prinsippfaste på. Å være prinsippfast betyr at man ikke vingler frem og tilbake på hva man synes er rett og galt.
-
-Du synes sannsynligvis ikke det er greit å være det man kaller hyklersk (= at man krever helt andre ting av andre enn man gjør av seg selv, for eksempel kjefter på alle som har på lue inne, samtidig som man alltid går med lue inne selv).
-
-Du har ikke lagt så stor vekt på konsekvensene av handlingene, selv om du sannsynligvis også har noen svar som legger vekt på hvordan ting faktisk går (konsekvensetikk, de røde svarene). Det at du tenker på prinsipp og at folk skal følge lover og regler, er å tenke på konsekvensene for samfunnet og verden generelt, men fra situasjon til situasjon hviler du deg ikke så mye på konsekvensene.
-
-Sannsynlig tenker du at det er for tilfeldig hva som styrer konsekvensene fra situasjon til situasjon, og at det er tryggere hvis man handler etter etiske prinsipp (f.eks. "du skal ikke lyge", "du skal ikke drepe", norske lover, trafikkreglene, etc.). Du tenker også, i følge denne testen, at det er et mål å handle med et "rent sinn", altså at man gjør ting i beste mening, at man gjør ting for å være snill, og ikke for å være slem.`
-                }
+                text: "Du har i svara dine lagt like mykje vekt på kva ein meiner med det ein gjer (sinnelagsetikk, dei grøne svara), som på om viktige lover og reglar er følgde (pliktetikk, dei gule svara).\n\nViss ein person gjer noko av ren kjærleik, er du truleg villig til å sjå litt mellom fingrane på at ein regel blir broten. Samtidig ser du poenget i å vere prinsippfast.\n\nDu tenkjer truleg at det er for tilfeldig kva som styrer konsekvensane frå situasjon til situasjon, og at det er tryggare viss ein handlar etter etiske prinsipp (t.d. norske lover). Samstundes er det eit mål å handle med eit «reint sinn»."
             },
             yellow_red: {
                 title: "KONSEKVENSETIKK + PLIKTETIKK",
-                text: {
-                    nn: `Du har i dine svar lagt like mye vekt på konsekvensane av ein handling, som på om lover og regler er følgde.
-
-Du tenkjer at lover og regler er der av ein grunn, og at det ikkje skal vere opp til folks "magefølelse" om dei skal følgje viktige lover eller ikkje. I tillegg ser du poenget med å vere litt konsekvent i sine handlingar og sin bedømming av andres handlingar. Til dømes synest du truleg ikkje det er spesielt bra mønster hvis same person både syng høgt når han sit på kino, og kastar popkorn på dei som hviskar på kinoen, fordi han synest dei oppfører seg uspiselig og forstyrrer andre. Dette kalles pliktetikk (dei gule svarene).
-
-Du legg også vekt på kva som faktisk vil skje hvis man gjennomfører ein handling. Hvis du lurer på kva du skal gjere, vil du blant anna leggje vekt på kva som vil vere konsekvensane for alle involverte. Du vil sjå an dette frå situasjon til situasjon. Dette kalles konsekvensetikk (dei røde svarene).
-
-Hvis ei jente, Amalie, spør venninna si, Eva, rett før ein eksamen "Helt ærleg, trur du kjem til å stryke?", og Eva eigentleg trur det, ville du kanskje tenkje at Eva bør lyge. Hvis Eva seier "Ja, faktisk, eg trur du kjem til å stryke. Men lykke til!", vil det nok ikkje gå så bra med Amalie på eksamen. Dette er å tenkje konsekvensetisk. Her kræsjar det litt med pliktetikken. Pliktetisk sett bør helst ikkje Eva lyge, for hvis det fyrst ikkje er greit å lyge, så er det ikkje greit å lyge. Konsekvensane av å vere inkonsekvent på sånt, kan til dømes vere at folk sluttar å stole på deg. Truleg er det desse to sidene ved saka du ville tenkje mest på hvis du var Eva. Du ville tenkje på at det beste for Amalie der og da, var å bli oppmuntra, sjølv om det ville innebere ein kvit løgn. Og du ville tenkje på at det å lyge når det passer seg blant anna kan føre til at folk ikkje lenger stoler på deg.`,
-                    nb: `Du har i dine svar lagt like mye vekt på konsekvensene av en handling, som på om lover og regler er fulgt.
-
-Du tenker at lover og regler er der av en grunn, og at det ikke skal være opp til folks "magefølelse" om de skal følge viktige lover eller ikke. I tillegg ser du poenget med å være litt konsekvent i sine handlinger og sin bedømming av andres handlinger. For eksempel synes du sannsynligvis ikke det er spesielt bra mønster hvis samme person både synger høyt når han sit på kino, og kaster popkorn på de som hvisker på kinoen, fordi han synes de oppfører seg uspiselig og forstyrrer andre. Dette kalles pliktetikk (de gule svarene).
-
-Du legger også vekt på hva som faktisk vil skje hvis man gjennomfører en handling. Hvis du lurer på hva du skal gjøre, vil du blant anna legge vekt på hva som vil være konsekvensene for alle involverte. Du vil se an dette fra situasjon til situasjon. Dette kalles konsekvensetikk (de røde svarene).
-
-Hvis en jente, Amalie, spør venninnen sin, Eva, rett før en eksamen "Helt ærlig, tror du kommer til å stryke?", og Eva egentlig tror det, ville du kanskje tenke at Eva bør lyge. Hvis Eva sier "Ja, faktisk, jeg tror du kommer til å stryke. Men lykke til!", vil det nok ikke gå så bra med Amalie på eksamen. Dette er å tenke konsekvensetisk. Her kræsjer det litt med pliktetikken. Pliktetisk sett bør helst ikke Eva lyge, for hvis det først ikke er greit å lyge, så er det ikke greit å lyge. Konsekvensene av å være inkonsekvent på sånt, kan for eksempel være at folk slutter å stole på deg. Sannsynlig er det disse to sidene ved saken du ville tenke mest på hvis du var Eva. Du ville tenke på at det beste for Amalie der og da, var å bli oppmuntret, selv om det ville innebære en hvit løgn. Og du ville tenke på at det å lyge når det passer seg blant anna kan føre til at folk ikke lenger stoler på deg.`
-                }
+                text: "Du har i svara dine lagt like mykje vekt på konsekvensane av ei handling, som på om lover og reglar er følgde.\n\nDu tenkjer at lover og reglar er der av ein grunn, og at det ikkje skal vere opp til folks «magekjensle» om dei skal følgje dei eller ikkje. I tillegg ser du poenget med å vere litt konsekvent. Dette er pliktetikk (dei gule svara).\n\nDu legg også vekt på kva som faktisk vil skje viss ein gjennomfører ei handling. Dette er konsekvensetikk (dei raude svara). Desse to sidene vil av og til krasje, men du vurderer begge nøye."
             },
             red_green: {
                 title: "KONSEKVENSETIKK + SINNELAGSETIKK",
-                text: {
-                    nn: `Du har lagt like mye vekt på personens intensjoner (= kva personen meinte med det han gjorde), som på korleis det heile ender (konsekvensane).
-
-Du ser ikkje bort frå konsekvensane av ein handling, men du tar også hensyn til kva personen har ment, til dømes om noko galt er gjort med vilje, eller om ein god gjerning eigentleg var ment god.
-
-Hvis ei jente, Silje, hjelper ein gutt, Kristoffer, med matteleksene, og han blir veldig glad og gjer det bra på tentamen, synest du truleg det er ein god gjerning. Men hvis du veit at Silje gjer det fordi ho vil at Kristoffer skal slå opp med kjæresten sin og bli saman med Silje i staden, og ikkje eigentleg for å hjelpe Kristoffer, vil du truleg synest det var ein litt mindre god gjerning.
-
-Det at man tenkjer på konsekvensane, kalles konsekvensetikk (dei røde svarene). Det at man tenkjer på tanken bak, kalles sinnelagsetikk (dei grøne svarene). Dine svar er altså ein kombinasjon av desse to.
-
-Du har lagt minst vekt på pliktetikk (dei gule svarene), tanken om at handlingar skal følgje prinsipp. Truleg tenkjer du at lover og regler vanlegvis er laga så absolutte at dei av og til med fordel kan bli brotne. Men du har truleg nokre gule svar også, og du synest sikkert det er greit at folk flest følgjer til dømes Norges lover.`,
-                    nb: `Du har lagt like mye vekt på personens intensjoner (= hva personen mente med det han gjorde), som på hvordan det hele ender (konsekvensene).
-
-Du ser ikke bort fra konsekvensene av en handling, men du tar også hensyn til hva personen har ment, for eksempel om noe galt er gjort med vilje, eller om en god gjerning egentlig var ment god.
-
-Hvis en jente, Silje, hjelper en gutt, Kristoffer, med mattelekser, og han blir veldig glad og gjør det bra på tentamen, synes du sannsynligvis det er en god gjerning. Men hvis du vet at Silje gjør det fordi hun vil at Kristoffer skal slå opp med kjæresten sin og bli sammen med Silje i steden, og ikke egentlig for å hjelpe Kristoffer, vil du sannsynligvis synes det var en litt mindre god gjerning.
-
-Det at man tenker på konsekvensene, kalles konsekvensetikk (de røde svarene). Det at man tenker på tanken bak, kalles sinnelagsetikk (de grønne svarene). Dine svar er altså en kombinasjon av disse to.
-
-Du har lagt minst vekt på pliktetikk (de gule svarene), tanken om at handlinger skal følge prinsipp. Sannsynlig tenker du at lover og regler vanligvis er laget så absolutte at de av og til med fordel kan bli brutt. Men du har sannsynligvis noen gule svar også, og du synes sikkert det er greit at folk flest følger for eksempel Norges lover.`
-                }
+                text: "Du har lagt like mykje vekt på intensjonane til personen (= kva personen meinte), som på korleis det heile endar (konsekvensane).\n\nDu ser ikkje bort frå konsekvensane av ei handling, men du tek også omsyn til kva personen har meint, til dømes om noko galt er gjort med vilje, eller om ei god gjerning eigentleg var meint god.\n\nDu har lagt minst vekt på pliktetikk (dei gule svara). Truleg tenkjer du at lover og reglar vanlegvis er laga så absolutte at dei av og til med fordel kan bli brotne."
             },
             equal: {
                 title: "BALANSERT",
-                text: {
-                    nn: `Du har fått like mange av alle tre fargane. Dette tyder at du balanserer mellom pliktetikk (fokus på lover og regler), konsekvensetikk (fokus på konsekvensar) og sinnelagsetikk (fokus på intensjonar).
-
-Dette er veldig vanleg – dei fleste menneske vil bruke alle tre tilnærmingar avhengig av situasjonen. Ingen av dei er "rettare" enn dei andre, og det kan vere ein styrke å kunne veksle mellom dei etter kva situasjonen krev.
-
-I verden i dag har vi ingen fasit på kva som er rett og galt, men det kan vere veldig greit å vere litt bevisst på korleis vi tenkjer rundt etikk.`,
-                    nb: `Du har fått like mange av alle tre fargene. Dette tyder at du balanserer mellom pliktetikk (fokus på lover og regler), konsekvensetikk (fokus på konsekvenser) og sinnelagsetikk (fokus på intensjoner).
-
-Dette er veldig vanlig – de fleste mennesker vil bruke alle tre tilnærminger avhengig av situasjonen. Ingen av dem er "riktigere" enn de andre, og det kan være en styrke å kunne veksle mellom dem etter hva situasjonen krever.
-
-I verden i dag har vi ingen fasit på hva som er rett og galt, men det kan være veldig greit å være litt bevisst på hvordan vi tenker rundt etikk.`
-                }
+                text: "Du har fått like mange av alle tre fargane. Dette tyder at du balanserer mellom pliktetikk (fokus på lover og reglar), konsekvensetikk (fokus på konsekvensar) og sinnelagsetikk (fokus på intensjonar).\n\nDette er veldig vanleg – dei fleste menneske vil bruke alle tre tilnærmingar avhengig av situasjonen. Ingen av dei er meir rett enn dei andre, og det kan vere ein styrke å kunne veksle mellom dei etter kva situasjonen krev."
             }
         };
 
-        // State
         let currentStoryIndex = 0;
-        let currentQuestionIndex = 0;
         let answers = { yellow: 0, red: 0, green: 0 };
         let userAnswers = [];
-
-        // Functions
-        function selectLanguage(lang) {
-            currentLang = lang;
-            updateUI();
-            document.getElementById('lang-screen').classList.remove('active');
-            document.getElementById('intro-screen').classList.add('active');
-        }
-
-        function t(key) {
-            return translations[currentLang][key];
-        }
-
-        function updateUI() {
-            const tr = translations[currentLang];
-            document.querySelector('h1').textContent = tr.title;
-            document.querySelector('.subtitle').textContent = tr.subtitle;
-            document.querySelector('#lang-screen .intro-title').textContent = tr.langTitle;
-            document.querySelector('#lang-screen .intro-text p').textContent = tr.langPrompt;
-            document.querySelector('#intro-title').textContent = tr.welcomeTitle;
-            document.querySelector('#intro-text').textContent = tr.introText;
-            document.querySelector('#goal-box').innerHTML = `<strong>${tr.goalTitle}</strong>`;
-            const goalList = document.querySelector('#goal-list');
-            goalList.innerHTML = `<li>${tr.goal1}</li><li>${tr.goal2}</li><li>${tr.goal3}</li><li>${tr.goal4}</li>`;
-            document.querySelector('#howto-title').innerHTML = `<strong>${tr.howToTitle}</strong>`;
-            const howtoList = document.querySelector('#howto-list');
-            howtoList.innerHTML = `<li>${tr.howTo1}</li><li>${tr.howTo2}</li><li>${tr.howTo3}</li><li>${tr.howTo4}</li>`;
-            document.querySelector('#highlight-box').textContent = tr.highlightBox;
-            document.querySelector('#start-btn').textContent = tr.startBtn;
-            document.querySelector('.privacy-notice').innerHTML = `<strong>${tr.privacy}</strong> ${tr.privacyText}`;
-        }
 
         function startTest() {
             document.getElementById('intro-screen').classList.remove('active');
             document.getElementById('story-screen').classList.add('active');
             currentStoryIndex = 0;
-            currentQuestionIndex = 0;
             answers = { yellow: 0, red: 0, green: 0 };
             userAnswers = [];
             showStory();
@@ -998,35 +295,36 @@ I verden i dag har vi ingen fasit på hva som er rett og galt, men det kan være
         function showStory() {
             const story = testData[currentStoryIndex];
             const container = document.getElementById('story-container');
-            const tr = translations[currentLang];
 
-            // Update progress
             const progress = ((currentStoryIndex) / testData.length) * 100;
             document.getElementById('progress-fill').style.width = progress + '%';
-            document.getElementById('progress-text').textContent = `${tr.storyLabel} ${currentStoryIndex + 1} ${tr.ofLabel} ${testData.length}`;
+            document.getElementById('progress-text').textContent = `Historie ${currentStoryIndex + 1} av ${testData.length}`;
 
             let html = `
-                <div class="story-box">
-                    <span class="story-number">${tr.storyLabel} ${currentStoryIndex + 1}</span>
-                    <p class="story-text">${story.story[currentLang]}</p>
+                <div class="box1">
+                    <span style="display: inline-block; background: var(--accent4); color: #1a1a1a; padding: 6px 14px; border: 2px solid var(--border); box-shadow: 3px 3px 0 var(--shadow); font-weight: 900; font-size: 0.95rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">
+                        Historie ${currentStoryIndex + 1}
+                    </span>
+                    <p style="margin-bottom: 24px; line-height: 1.8;">${story.story}</p>
             `;
 
             story.questions.forEach((q, qIndex) => {
                 const qId = `${currentStoryIndex}-${qIndex}`;
                 html += `
-                    <div class="question" id="question-${qId}">
-                        <p class="question-text">${String.fromCharCode(97 + qIndex)}. ${q.text[currentLang]}</p>
+                    <div class="box2" id="question-${qId}" style="background: var(--surface); margin-bottom: 24px;">
+                        <p style="font-weight: 600;">${String.fromCharCode(97 + qIndex)}. ${q.text}</p>
                         <div class="answer-buttons">
-                            <button class="answer-btn yes" onclick="selectAnswer('${qId}', 'ja', '${q.answers.ja}')">${tr.yes}</button>
-                            <button class="answer-btn no" onclick="selectAnswer('${qId}', 'nei', '${q.answers.nei}')">${tr.no}</button>
+                            <button class="btn answer-btn yes" onclick="selectAnswer('${qId}', 'ja', '${q.answers.ja}')">Ja</button>
+                            <button class="btn answer-btn no" onclick="selectAnswer('${qId}', 'nei', '${q.answers.nei}')">Nei</button>
                         </div>
                     </div>
                 `;
             });
 
             html += `
-                <button class="btn btn-green" id="next-btn" onclick="nextStory()" disabled>${tr.nextBtn}</button>
-            </div>`;
+                <button class="btn" id="next-btn" style="background: var(--accent); color: var(--text-on-accent);" onclick="nextStory()" disabled>Neste historie →</button>
+                </div>
+            `;
 
             container.innerHTML = html;
         }
@@ -1035,13 +333,11 @@ I verden i dag har vi ingen fasit på hva som er rett og galt, men det kan være
             const questionEl = document.getElementById('question-' + questionId);
             const buttons = questionEl.querySelectorAll('.answer-btn');
             
-            buttons.forEach(btn => btn.classList.remove('selected'));
-            event.target.classList.add('selected');
+            buttons.forEach(btn => btn.classList.remove('selected', 'active'));
+            event.target.classList.add('selected', 'active');
 
-            // Store answer
             const existingIndex = userAnswers.findIndex(a => a.questionId === questionId);
             if (existingIndex >= 0) {
-                // Remove old answer
                 answers[userAnswers[existingIndex].color]--;
                 userAnswers.splice(existingIndex, 1);
             }
@@ -1049,7 +345,6 @@ I verden i dag har vi ingen fasit på hva som er rett og galt, men det kan være
             userAnswers.push({ questionId, answer, color });
             answers[color]++;
 
-            // Check if all questions in current story are answered
             const story = testData[currentStoryIndex];
             const answeredInStory = userAnswers.filter(a => a.questionId.startsWith(currentStoryIndex + '-')).length;
             
@@ -1060,11 +355,9 @@ I verden i dag har vi ingen fasit på hva som er rett og galt, men det kan være
 
         function nextStory() {
             currentStoryIndex++;
-            
             if (currentStoryIndex >= testData.length) {
                 showResults();
             } else {
-                currentQuestionIndex = 0;
                 showStory();
             }
         }
@@ -1073,21 +366,10 @@ I verden i dag har vi ingen fasit på hva som er rett og galt, men det kan være
             document.getElementById('story-screen').classList.remove('active');
             document.getElementById('results-screen').classList.add('active');
 
-            const tr = translations[currentLang];
-
-            // Update counts
             document.getElementById('yellow-count').textContent = answers.yellow;
             document.getElementById('red-count').textContent = answers.red;
             document.getElementById('green-count').textContent = answers.green;
 
-            // Update labels
-            document.querySelector('.color-box.yellow .color-label').innerHTML = `${tr.yellowLabel}<br><small>${tr.pliktetikk}</small>`;
-            document.querySelector('.color-box.red .color-label').innerHTML = `${tr.redLabel}<br><small>${tr.konsekvensetikk}</small>`;
-            document.querySelector('.color-box.green .color-label').innerHTML = `${tr.greenLabel}<br><small>${tr.sinnelagsetikk}</small>`;
-            document.querySelector('.results-title').textContent = tr.resultsTitle;
-            document.querySelector('#results-screen .btn').textContent = tr.restartBtn;
-
-            // Determine analysis
             let analysis;
             const counts = [answers.yellow, answers.red, answers.green];
             const maxCount = Math.max(...counts);
@@ -1108,11 +390,12 @@ I verden i dag har vi ingen fasit på hva som er rett og galt, men det kan være
             }
 
             const analysisContainer = document.getElementById('analysis-container');
-            const analysisText = analysis.text[currentLang];
             analysisContainer.innerHTML = `
-                <div class="analysis-box">
-                    <h3 class="analysis-title">${analysis.title}</h3>
-                    <div class="analysis-text">${analysisText.split('\n\n').map(p => `<p>${p}</p>`).join('')}</div>
+                <div class="box3" style="background: var(--surface); margin-top: 24px;">
+                    <h3 class="heading3 no-mt">${analysis.title}</h3>
+                    <div style="line-height: 1.8;">
+                        ${analysis.text.split('\n\n').map(p => `<p style="margin-bottom: 12px;">${p}</p>`).join('')}
+                    </div>
                 </div>
             `;
         }

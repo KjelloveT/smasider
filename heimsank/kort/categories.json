@@ -2,7 +2,7 @@
   {
     "id": "forskere",
     "label": "Forskarar",
-    "icon": "🔬",
+    "icon": "microscope",
     "csv": "forskere.csv",
     "rarity": "rarity-forskere.json",
     "idField": "scientist",
@@ -11,12 +11,12 @@
     "articleField": "article",
     "statField": "birthDate",
     "statType": "year",
-    "statLabel": "\ud83d\udcc5"
+    "statLabel": "calendar"
   },
   {
     "id": "byer",
     "label": "Skandinaviske byer",
-    "icon": "🏘️",
+    "icon": "building",
     "csv": "byer_skandinavia.csv",
     "rarity": "rarity-byer.json",
     "idField": "city",
@@ -25,12 +25,12 @@
     "articleField": "article",
     "statField": "population",
     "statType": "number",
-    "statLabel": "👥"
+    "statLabel": "users"
   },
   {
     "id": "land",
     "label": "Land",
-    "icon": "🌍",
+    "icon": "globe",
     "csv": "land.csv",
     "rarity": "rarity-land.json",
     "idField": "country",
@@ -39,12 +39,12 @@
     "articleField": "article",
     "statField": "population",
     "statType": "number",
-    "statLabel": "👥"
+    "statLabel": "users"
   },
   {
     "id": "fly",
     "label": "Flytypar",
-    "icon": "✈️",
+    "icon": "plane",
     "csv": "fly.csv",
     "rarity": "rarity-fly.json",
     "idField": "aircraft",
@@ -53,12 +53,12 @@
     "articleField": "article",
     "statField": "passengers",
     "statType": "number",
-    "statLabel": "👥"
+    "statLabel": "users"
   },
   {
     "id": "kunst",
     "label": "Norsk kunst 1800-talet",
-    "icon": "🎨",
+    "icon": "palette",
     "csv": "kunst.csv",
     "rarity": "rarity-kunst.json",
     "idField": "painting",
@@ -67,12 +67,12 @@
     "articleField": "artistArticle",
     "statField": "artistLabel",
     "statType": "text",
-    "statLabel": "🎨"
+    "statLabel": "palette"
   },
   {
     "id": "hest",
     "label": "Hesterasar",
-    "icon": "🐴",
+    "icon": "rabbit",
     "csv": "hest.csv",
     "rarity": "rarity-hest.json",
     "idField": "breed",
@@ -81,6 +81,6 @@
     "articleField": "article",
     "statField": "originLabel",
     "statType": "text",
-    "statLabel": "🌍"
+    "statLabel": "globe"
   }
 ]

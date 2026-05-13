@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="no" data-theme="classic">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neobrutalisme – Komponent-mal</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ========================================
+   21 COLOR THEMES
+   ======================================== */
+[data-theme="classic"] {
+  --bg: #f0f4f8; --surface: #ffffff; --text: #1a1a1a; --accent: #2b2d42;
+  --accent2: #d90429; --accent3: #edf2f4; --accent4: #ffb703; --accent5: #8ecae6;
+  --border: #1a1a1a; --shadow: #1a1a1a; --muted: #888; --text-on-accent: #ffffff;
+}
+[data-theme="ocean"] {
+  --bg: #e0f2fe; --surface: #ffffff; --text: #0f172a; --accent: #0369a1;
+  --accent2: #0f766e; --accent3: #bae6fd; --accent4: #99f6e4; --accent5: #ddd6fe;
+  --border: #0f172a; --shadow: #0f172a; --muted: #64748b; --text-on-accent: #ffffff;
+}
+[data-theme="sunset"] {
+  --bg: #ffedd5; --surface: #ffffff; --text: #431407; --accent: #9a3412;
+  --accent2: #831843; --accent3: #fed7aa; --accent4: #fbcfe8; --accent5: #fde047;
+  --border: #431407; --shadow: #431407; --muted: #a16207; --text-on-accent: #ffffff;
+}
+[data-theme="forest"] {
+  --bg: #ecfdf5; --surface: #ffffff; --text: #064e3b; --accent: #065f46;
+  --accent2: #166534; --accent3: #a7f3d0; --accent4: #bbf7d0; --accent5: #d9f99d;
+  --border: #064e3b; --shadow: #064e3b; --muted: #059669; --text-on-accent: #ffffff;
+}
+[data-theme="candy"] {
+  --bg: #fdf2f8; --surface: #ffffff; --text: #831843; --accent: #9d174d;
+  --accent2: #86198f; --accent3: #fbcfe8; --accent4: #f9a8d4; --accent5: #fdf4ff;
+  --border: #831843; --shadow: #831843; --muted: #be185d; --text-on-accent: #ffffff;
+}
+[data-theme="retro"] {
+  --bg: #fef3c7; --surface: #ffffff; --text: #451a03; --accent: #7c2d12;
+  --accent2: #1e3a8a; --accent3: #fde047; --accent4: #93c5fd; --accent5: #fca5a5;
+  --border: #451a03; --shadow: #451a03; --muted: #b45309; --text-on-accent: #ffffff;
+}
+[data-theme="lavender"] {
+  --bg: #faf5ff; --surface: #ffffff; --text: #4a044e; --accent: #701a75;
+  --accent2: #312e81; --accent3: #e879f9; --accent4: #c4b5fd; --accent5: #f9a8d4;
+  --border: #4a044e; --shadow: #4a044e; --muted: #a21caf; --text-on-accent: #ffffff;
+}
+[data-theme="earth"] {
+  --bg: #e6e2dd; --surface: #f2efe9; --text: #362a24; --accent: #4a3b32;
+  --accent2: #3d4a3e; --accent3: #d6ceb8; --accent4: #c2caba; --accent5: #eabf9f;
+  --border: #362a24; --shadow: #362a24; --muted: #796652; --text-on-accent: #ffffff;
+}
+[data-theme="neon"] {
+  --bg: #050510; --surface: #111122; --text: #ffffff; --accent: #d946ef;
+  --accent2: #ef4444; --accent3: #00ffff; --accent4: #39ff14; --accent5: #ffff00;
+  --border: #ffffff; --shadow: #ffffff; --muted: #8888aa; --text-on-accent: #ffffff;
+}
+[data-theme="grayscale"] {
+  --bg: #e5e5e5; --surface: #ffffff; --text: #111111; --accent: #222222;
+  --accent2: #444444; --accent3: #dddddd; --accent4: #cccccc; --accent5: #bbbbbb;
+  --border: #111111; --shadow: #111111; --muted: #777777; --text-on-accent: #ffffff;
+}
+[data-theme="bubblegum"] {
+  --bg: #ffedd5; --surface: #ffffff; --text: #4a044e; --accent: #be185d;
+  --accent2: #0369a1; --accent3: #f9a8d4; --accent4: #7dd3fc; --accent5: #fde047;
+  --border: #4a044e; --shadow: #4a044e; --muted: #9d174d; --text-on-accent: #ffffff;
+}
+[data-theme="spring"] {
+  --bg: #f0fdf4; --surface: #ffffff; --text: #064e3b; --accent: #047857;
+  --accent2: #1d4ed8; --accent3: #a7f3d0; --accent4: #bfdbfe; --accent5: #fef08a;
+  --border: #064e3b; --shadow: #064e3b; --muted: #059669; --text-on-accent: #ffffff;
+}
+[data-theme="corporate"] {
+  --bg: #f1f5f9; --surface: #ffffff; --text: #0f172a; --accent: #1e293b;
+  --accent2: #0f766e; --accent3: #cbd5e1; --accent4: #ccfbf1; --accent5: #e2e8f0;
+  --border: #0f172a; --shadow: #0f172a; --muted: #475569; --text-on-accent: #ffffff;
+}
+[data-theme="nordic"] {
+  --bg: #e2e8f0; --surface: #f8fafc; --text: #1e293b; --accent: #334155;
+  --accent2: #b91c1c; --accent3: #cbd5e1; --accent4: #fecaca; --accent5: #e2e8f0;
+  --border: #1e293b; --shadow: #1e293b; --muted: #64748b; --text-on-accent: #ffffff;
+}
+[data-theme="sunny"] {
+  --bg: #fefce8; --surface: #ffffff; --text: #422006; --accent: #b45309;
+  --accent2: #15803d; --accent3: #fef08a; --accent4: #bbf7d0; --accent5: #fde047;
+  --border: #422006; --shadow: #422006; --muted: #854d0e; --text-on-accent: #ffffff;
+}
+[data-theme="midnight"] {
+  --bg: #0f172a; --surface: #1e293b; --text: #f8fafc; --accent: #3b82f6;
+  --accent2: #ec4899; --accent3: #93c5fd; --accent4: #c4b5fd; --accent5: #fcd34d;
+  --border: #cbd5e1; --shadow: #cbd5e1; --muted: #94a3b8; --text-on-accent: #ffffff;
+}
+[data-theme="dracula"] {
+  --bg: #282a36; --surface: #44475a; --text: #f8f8f2; --accent: #ff5555;
+  --accent2: #bd93f9; --accent3: #ffb86c; --accent4: #8be9fd; --accent5: #50fa7b;
+  --border: #f8f8f2; --shadow: #f8f8f2; --muted: #8be9fd; --text-on-accent: #ffffff;
+}
+[data-theme="cyberpunk"] {
+  --bg: #09090b; --surface: #18181b; --text: #f4f4f5; --accent: #f43f5e;
+  --accent2: #6366f1; --accent3: #f9a8d4; --accent4: #6ee7b7; --accent5: #fde047;
+  --border: #f4f4f5; --shadow: #f4f4f5; --muted: #a1a1aa; --text-on-accent: #ffffff;
+}
+[data-theme="hacker"] {
+  --bg: #022c22; --surface: #064e3b; --text: #ecfdf5; --accent: #10b981;
+  --accent2: #06b6d4; --accent3: #6ee7b7; --accent4: #86efac; --accent5: #d9f99d;
+  --border: #ecfdf5; --shadow: #ecfdf5; --muted: #34d399; --text-on-accent: #ffffff;
+}
+[data-theme="space"] {
+  --bg: #0f172a; --surface: #1e293b; --text: #f8fafc; --accent: #8b5cf6;
+  --accent2: #d946ef; --accent3: #c4b5fd; --accent4: #93c5fd; --accent5: #e0e7ff;
+  --border: #cbd5e1; --shadow: #cbd5e1; --muted: #94a3b8; --text-on-accent: #ffffff;
+}
+[data-theme="slate"] {
+  --bg: #1e293b; --surface: #334155; --text: #f8fafc; --accent: #ef4444;
+  --accent2: #0ea5e9; --accent3: #cbd5e1; --accent4: #94a3b8; --accent5: #e2e8f0;
+  --border: #f8fafc; --shadow: #f8fafc; --muted: #94a3b8; --text-on-accent: #ffffff;
+}
+:root { --text-on-accent: #ffffff; }
+
+/* ========================================
+   LAYOUT
+   ======================================== */
+.page-wrapper { padding-top: 0; }
+
+/* ========================================
+   HEADER & NAVIGATION (2026 Standard)
+   ======================================== */
+.site-header {
+  background: var(--accent2); border-bottom: 3px solid var(--border);
+  box-shadow: 0 4px 0 var(--shadow); position: relative; z-index: 1000;
+}
+.header-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px; gap: 16px;
+}
+.site-logo { font-weight: 900; font-size: clamp(18px, 4vw, 24px); color: #fff; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.site-logo span { font-size: clamp(24px, 5vw, 32px); }
+
+.header-actions { display: flex; align-items: center; gap: clamp(8px, 2vw, 16px); }
+
+/* Desktop nav */
+.desktop-nav { display: flex; gap: 12px; }
+.desktop-nav a {
+  text-decoration: none; color: var(--text); font-weight: 800; padding: 8px 16px;
+  background: var(--surface); border: 3px solid var(--border); font-size: 14px;
+  box-shadow: 3px 3px 0 var(--shadow); transition: all 0.15s ease;
+}
+.desktop-nav a:hover { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--shadow); background: var(--accent); color: var(--text-on-accent); }
+
+/* Theme Dropdown */
+.theme-dropdown { position: relative; }
+.theme-dropdown-btn {
+  padding: 8px 16px; border: 3px solid var(--border); font-weight: 800; font-size: 14px;
+  cursor: pointer; background: var(--surface); color: var(--text); font-family: inherit;
+  display: flex; align-items: center; gap: 8px; box-shadow: 3px 3px 0 var(--shadow); transition: all 0.15s ease;
+}
+.theme-dropdown-btn:hover, .theme-dropdown-menu.open ~ .theme-dropdown-btn { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--shadow); background: var(--accent); color: var(--text-on-accent); }
+.theme-dropdown-menu {
+  display: none; position: absolute; top: calc(100% + 16px); right: 0;
+  background: var(--surface); border: 3px solid var(--border); box-shadow: 6px 6px 0 var(--shadow);
+  width: clamp(280px, 90vw, 340px); max-height: 70vh; overflow-y: auto;
+}
+.theme-dropdown-menu.open { display: block; animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+@keyframes popIn {
+  0% { transform: scale(0.95) translateY(-10px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.theme-category {
+  background: var(--muted); color: var(--surface);
+  font-size: 11px; font-weight: 900; text-transform: uppercase; padding: 8px 16px;
+  border-bottom: 2px solid var(--border); letter-spacing: 1px;
+}
+.theme-category:not(:first-child) { border-top: 2px solid var(--border); }
+.theme-grid-wrapper { display: grid; grid-template-columns: 1fr 1fr; }
+.theme-dropdown-item {
+  display: block; width: 100%; padding: 12px 16px; font-weight: 700; font-size: 13px;
+  cursor: pointer; background: var(--surface); border: none; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border);
+  text-align: left; color: var(--text); font-family: inherit; transition: background 0.1s;
+}
+.theme-dropdown-item:nth-child(even) { border-right: none; }
+.theme-dropdown-item:last-child, .theme-dropdown-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+.theme-dropdown-item:hover, .theme-dropdown-item.active { background: var(--accent); color: var(--text-on-accent); }
+
+/* Hamburger Menu */
+.hamburger-btn {
+  display: none; width: 44px; height: 44px; cursor: pointer;
+  flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+  background: var(--surface); border: 3px solid var(--border); padding: 0;
+  box-shadow: 3px 3px 0 var(--shadow); transition: all 0.2s ease;
+}
+.hamburger-btn:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--shadow); background: var(--accent); }
+.hamburger-btn:hover span { background: var(--text-on-accent); }
+.hamburger-btn span { 
+  display: block; width: 22px; height: 3px; background: var(--text); border-radius: 2px; 
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: center;
+}
+.hamburger-btn.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger-btn.open span:nth-child(2) { opacity: 0; transform: scale(0); }
+.hamburger-btn.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* Mobile Nav Accordion */
+.mobile-nav-container {
+  display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--surface); border-top: 0px solid var(--border);
+}
+.mobile-nav-container.open { grid-template-rows: 1fr; border-top: 3px solid var(--border); box-shadow: 0 8px 0 var(--shadow); }
+.mobile-nav-inner { overflow: hidden; }
+.mobile-nav-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px; max-width: 1200px; margin: 0 auto;
+}
+.mobile-nav-grid a {
+  text-decoration: none; color: var(--text); font-weight: 800; padding: 12px 16px;
+  border: 3px solid var(--border); text-align: center;
+  background: var(--surface); box-shadow: 4px 4px 0 var(--shadow); transition: transform 0.1s, box-shadow 0.1s;
+}
+.mobile-nav-grid a:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--shadow); background: var(--accent); color: var(--text-on-accent); }
+
+@media (max-width: 48rem) {
+  .desktop-nav { display: none; }
+  .hamburger-btn { display: flex; }
+  .theme-dropdown-btn span { display: none; }
+}
+
+/* ========================================
+   FULL WIDTH BANNER
+   ======================================== */
+.banner-full {
+  background: var(--accent);
+  color: var(--text-on-accent);
+  border-bottom: 3px solid var(--border);
+  padding: clamp(32px, 5vw, 60px) 20px;
+  box-shadow: 0 8px 0 var(--shadow);
+  margin-bottom: clamp(40px, 5vw, 60px);
+}
+.banner-full-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.banner-full h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  margin-bottom: 16px;
+  line-height: 1.1;
+  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
+}
+.banner-full p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 700;
+  max-width: 600px;
+}
+
+/* Main content */
+main { max-width: 1200px; margin: 0 auto; padding: clamp(20px, 5vw, 40px) 20px; overflow-x: hidden; }
+section { margin-bottom: clamp(40px, 6vw, 60px); }
+
+/* ========================================
+   HEADINGS (4 types)
+   ======================================== */
+.heading1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900; color: var(--text); position: relative; display: inline-block; padding-bottom: 8px; margin-bottom: 20px; margin-right: 8px; line-height: 1.2; }
+.heading1::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60%; height: 4px; background: var(--accent); }
+.heading1-accent2::after { background: var(--accent2); }
+.heading1-accent3::after { background: var(--accent3); }
+.heading1-accent4::after { background: var(--accent4); }
+.heading1-accent5::after { background: var(--accent5); }
+
+.heading2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; color: var(--text-on-accent); background: var(--accent); display: inline-block; padding: 8px 20px; border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow); margin-bottom: 20px; margin-right: 8px; line-height: 1.2; }
+.heading2-accent2 { background: var(--accent2); }
+.heading2-accent3 { background: var(--accent3); color: #000000; }
+.heading2-accent4 { background: var(--accent4); color: #000000; }
+.heading2-accent5 { background: var(--accent5); color: #000000; }
+
+.heading3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 900; color: #ffffff; background: var(--accent); display: inline-block; padding: 8px 24px; border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow); transform: rotate(-2deg); margin-bottom: 20px; margin-right: 8px; line-height: 1.2; }
+.heading3-accent2 { background: var(--accent2); color: #ffffff; }
+.heading3-accent3 { background: var(--accent3); color: #000000; }
+.heading3-accent4 { background: var(--accent4); color: #000000; }
+.heading3-accent5 { background: var(--accent5); color: #000000; }
+
+.heading4 { font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 900; color: var(--accent); display: inline-block; padding: 0 8px; margin-bottom: 16px; margin-right: 8px; line-height: 1.3; }
+.heading4-accent2 { color: var(--accent2); }
+.heading4-accent3 { color: var(--accent3); }
+.heading4-accent4 { color: var(--accent4); }
+.heading4-accent5 { color: var(--accent5); }
+
+/* ========================================
+   BOXES (5 types)
+   ======================================== */
+.box1 { background: var(--surface); border: 3px solid var(--border); padding: 20px; box-shadow: 8px 8px 0 var(--accent); margin-bottom: 20px; }
+.box1-accent2 { box-shadow: 8px 8px 0 var(--accent2); }
+.box2 { background: var(--surface); border: 3px solid var(--border); padding: 20px; border-radius: 20px 0 20px 0; box-shadow: 5px 5px 0 var(--shadow); margin-bottom: 20px; }
+.box2-accent2 { box-shadow: 5px 5px 0 var(--accent2); }
+.box3 { background: var(--surface); border: 3px solid var(--border); padding: 28px 20px 20px; box-shadow: 5px 5px 0 var(--shadow); transform: rotate(-1deg); position: relative; margin-bottom: 28px; }
+.box3::before { content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%) rotate(-1deg); width: 80px; height: 24px; background: var(--accent); border: 2px solid var(--border); z-index: 1; }
+.box3-accent2::before { background: var(--accent2); }
+.box4 { background: var(--surface); border: 3px solid var(--border); padding: 0; overflow: hidden; box-shadow: 5px 5px 0 var(--shadow); margin-bottom: 20px; }
+.box4 .box-header { background: var(--accent); color: var(--text-on-accent); padding: 10px 16px; font-weight: 800; border-bottom: 3px solid var(--border); }
+.box4 .box-body { padding: 16px; }
+.box5 { background: var(--surface); border: 3px solid var(--border); padding: 0; overflow: hidden; box-shadow: 5px 5px 0 var(--shadow); margin-bottom: 20px; }
+.box5 .box-tabs { display: flex; border-bottom: 3px solid var(--border); }
+.box5 .box-tab { padding: 8px 16px; font-weight: 700; border-right: 2px solid var(--border); font-size: 12px; text-transform: uppercase; cursor: pointer; background: var(--surface); color: var(--text); font-family: inherit; }
+.box5 .box-tab:last-child { border-right: none; }
+.box5 .box-tab.active { background: var(--accent); color: var(--text-on-accent); }
+.box5 .box-body { padding: 12px 16px; }
+
+/* Numbered modifier (works inside any box) */
+.numbered { display: flex; gap: 16px; align-items: center; }
+.numbered .box-number { font-size: 2rem; font-weight: 900; color: var(--accent); line-height: 1; flex-shrink: 0; border-right: 3px solid var(--border); padding-right: 16px; }
+.numbered .box-title { font-weight: 800; margin-bottom: 2px; }
+
+/* Iconed modifier (works inside any box) */
+.iconed { display: flex; gap: 16px; align-items: center; }
+.iconed .box-icon { font-size: 2rem; line-height: 1; flex-shrink: 0; border-right: 3px solid var(--border); padding-right: 16px; color: var(--accent); }
+.iconed .box-title { font-weight: 800; margin-bottom: 2px; }
+
+/* ========================================
+   BUTTON (1 type)
+   ======================================== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: clamp(8px, 1.5vw, 10px);
+  padding: clamp(8px, 2vw, 12px) clamp(16px, 3vw, 20px);
+  background: var(--surface); color: var(--text); border: 3px solid var(--border);
+  font-weight: 800; font-size: clamp(1rem, 2vw, 1.1rem); cursor: pointer;
+  box-shadow: 4px 4px 0 var(--shadow); transition: all 0.1s ease;
+  text-decoration: none; font-family: inherit;
+}
+.btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--shadow); background: var(--accent); color: var(--text-on-accent); }
+.btn:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--shadow); }
+.btn.active { background: var(--accent); color: var(--text-on-accent); }
+
+/* ========================================
+   MODALS (5 types)
+   ======================================== */
+.modal-overlay {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7); z-index: 2000;
+  justify-content: center; align-items: center; padding: clamp(20px, 4vw, 24px);
+}
+.modal-overlay.open { display: flex; }
+
+/* Base for all modals */
+.modal1, .modal2, .modal3, .modal4, .modal5 {
+  width: 100%; max-height: 90vh; overflow-y: auto; position: relative;
+}
+.modal1, .modal2, .modal3 { max-width: 500px; }
+.modal4, .modal5 { max-width: 800px; /* Dobbel bredde */ }
+.modal1 { background: var(--surface); border: 3px solid var(--border); padding: clamp(20px, 4vw, 24px); box-shadow: 8px 8px 0 var(--accent); max-width: 480px; width: 100%; position: relative; }
+.modal1 .modal-close { position: absolute; top: 12px; right: 12px; }
+.modal2 { background: var(--surface); border: 3px solid var(--border); padding: clamp(28px, 5vw, 32px) clamp(20px, 4vw, 24px); box-shadow: 5px 5px 0 var(--shadow); transform: rotate(-1deg); position: relative; max-width: 480px; width: 100%; }
+.modal2::before { content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%) rotate(-1deg); width: 80px; height: 24px; background: var(--accent); border: 2px solid var(--border); z-index: 1; }
+.modal2 .modal-close { position: absolute; top: 12px; right: 12px; }
+.modal3 { background: var(--surface); border: 3px solid var(--border); padding: 0; overflow: hidden; box-shadow: 5px 5px 0 var(--shadow); max-width: 480px; width: 100%; }
+.modal3 .modal-header { background: var(--accent); color: var(--text-on-accent); padding: 14px 20px; font-weight: 800; border-bottom: 3px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.modal3 .modal-body { padding: 20px; }
+.modal3 .modal-footer { padding: 12px 20px; border-top: 3px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; }
+.modal4 { background: var(--surface); border: 3px solid var(--border); padding: 20px; border-radius: 20px 0 20px 0; box-shadow: 5px 5px 0 var(--shadow); max-width: 960px; width: 100%; position: relative; }
+.modal4 .modal-close { position: absolute; top: 12px; right: 12px; }
+.modal5 { background: var(--surface); border: 3px solid var(--border); padding: 0; overflow: hidden; box-shadow: 5px 5px 0 var(--shadow); max-width: 960px; width: 100%; }
+.modal5 .modal-tabs { display: flex; border-bottom: 3px solid var(--border); }
+.modal5 .modal-tab { padding: 8px 16px; font-weight: 700; border-right: 2px solid var(--border); font-size: 12px; text-transform: uppercase; cursor: pointer; background: var(--surface); color: var(--text); font-family: inherit; }
+.modal5 .modal-tab:last-child { border-right: none; }
+.modal5 .modal-tab.active { background: var(--accent); color: var(--text-on-accent); }
+.modal5 .modal-body { padding: 16px; }
+
+/* ========================================
+   GRID & UTILITIES
+   ======================================== */
+/* Auto-grid med minmax() for flytende layout uavhengig av media queries */
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 40vw, 300px), 1fr)); gap: clamp(16px, 3vw, 24px); }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 30vw, 280px), 1fr)); gap: clamp(12px, 2vw, 20px); }
+.flex-wrap { display: flex; flex-wrap: wrap; gap: 16px; }
+
+.text-center { text-align: center; }
+.mt-20 { margin-top: 20px; }
+.mb-20 { margin-bottom: 20px; }
+
+/* Hero */
+.hero {
+  background: var(--accent3); border: 3px solid var(--border);
+  box-shadow: 8px 8px 0 var(--shadow); padding: 60px 40px;
+  text-align: center; margin-bottom: 40px;
+}
+.hero-title { font-size: 3rem; font-weight: 900; margin-bottom: 16px; }
+.hero-subtitle { font-size: 1.25rem; max-width: 600px; margin: 0 auto 24px; }
+
+/* Card grid */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+
+/* Icon grid */
+.icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px; }
+.icon-item { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 8px; border: 2px solid var(--border); background: var(--surface); text-align: center; }
+.icon-item svg { width: 24px; height: 24px; stroke: var(--text); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.icon-item span { font-size: 10px; font-weight: 700; color: var(--muted); }
+
+/* Icon accordion */
+.icon-accordion { border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow); margin-bottom: 12px; }
+.icon-accordion-header {
+  padding: 12px 16px; font-weight: 800; cursor: pointer;
+  background: var(--surface); border-bottom: 2px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.icon-accordion-header:hover { background: var(--accent); color: var(--text-on-accent); }
+.icon-accordion-header .chevron { transition: transform 0.2s; }
+.icon-accordion-header.open .chevron { transform: rotate(180deg); }
+.icon-accordion-body {
+  display: none; padding: 16px; background: var(--surface);
+}
+.icon-accordion-body.open { display: block; }
+
+/* Color overview */
+.color-overview { margin-bottom: clamp(20px, 4vw, 30px); }
+.color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+.color-item { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 12px; border: 2px solid var(--border); background: var(--surface); text-align: center; }
+.color-swatch { width: 60px; height: 60px; border: 2px solid var(--border); box-shadow: 3px 3px 0 var(--shadow); }
+.color-name { font-size: 11px; font-weight: 700; color: var(--text); }
+.color-value { font-size: 9px; font-weight: 600; color: var(--muted); font-family: monospace; }
+
+/* Footer */
+.site-footer {
+  background: var(--surface); border-top: 3px solid var(--border);
+  padding: 30px 20px; text-align: center; margin-top: 60px;
+}
+.site-footer p { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="site-logo"><span>🎨</span> Neobrutalisme</a>
+    
+    <div class="header-actions">
+      <nav class="desktop-nav">
+        <a href="#overskrifter">Overskrifter</a>
+        <a href="#bokser">Bokser</a>
+        <a href="#knapper">Knapper</a>
+        <a href="#ikon">Ikon</a>
+        <a href="#modals">Modals</a>
+      </nav>
+
+      <div class="theme-dropdown">
+        <button class="theme-dropdown-btn" onclick="toggleThemeDropdown()">🎨 <span>Tema</span> ▾</button>
+        <div class="theme-dropdown-menu" id="themeMenu">
+          <div class="theme-category">Basis</div>
+          <div class="theme-grid-wrapper">
+            <button class="theme-dropdown-item active" onclick="setTheme('classic')">Classic</button>
+            <button class="theme-dropdown-item" onclick="setTheme('grayscale')">Grayscale</button>
+          </div>
+          
+          <div class="theme-category">Natur / Lys</div>
+          <div class="theme-grid-wrapper">
+            <button class="theme-dropdown-item" onclick="setTheme('ocean')">Ocean</button>
+            <button class="theme-dropdown-item" onclick="setTheme('sunset')">Sunset</button>
+            <button class="theme-dropdown-item" onclick="setTheme('forest')">Forest</button>
+            <button class="theme-dropdown-item" onclick="setTheme('earth')">Earth</button>
+            <button class="theme-dropdown-item" onclick="setTheme('spring')">Spring</button>
+            <button class="theme-dropdown-item" onclick="setTheme('sunny')">Sunny</button>
+          </div>
+          
+          <div class="theme-category">Leken / Fargerik</div>
+          <div class="theme-grid-wrapper">
+            <button class="theme-dropdown-item" onclick="setTheme('candy')">Candy</button>
+            <button class="theme-dropdown-item" onclick="setTheme('retro')">Retro</button>
+            <button class="theme-dropdown-item" onclick="setTheme('lavender')">Lavender</button>
+            <button class="theme-dropdown-item" onclick="setTheme('bubblegum')">Bubblegum</button>
+          </div>
+          
+          <div class="theme-category">Profesjonell</div>
+          <div class="theme-grid-wrapper">
+            <button class="theme-dropdown-item" onclick="setTheme('corporate')">Corporate</button>
+            <button class="theme-dropdown-item" onclick="setTheme('nordic')">Nordic</button>
+          </div>
+
+          <div class="theme-category">Mørk</div>
+          <div class="theme-grid-wrapper">
+            <button class="theme-dropdown-item" onclick="setTheme('midnight')">Midnight</button>
+            <button class="theme-dropdown-item" onclick="setTheme('neon')">Neon</button>
+            <button class="theme-dropdown-item" onclick="setTheme('dracula')">Dracula</button>
+            <button class="theme-dropdown-item" onclick="setTheme('cyberpunk')">Cyberpunk</button>
+            <button class="theme-dropdown-item" onclick="setTheme('hacker')">Hacker</button>
+            <button class="theme-dropdown-item" onclick="setTheme('space')">Space</button>
+            <button class="theme-dropdown-item" onclick="setTheme('slate')">Slate</button>
+          </div>
+        </div>
+      </div>
+      
+      <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  
+  <div class="mobile-nav-container" id="mobileNav">
+    <div class="mobile-nav-inner">
+      <div class="mobile-nav-grid">
+        <a href="#overskrifter" onclick="toggleMobileNav()">Overskrifter</a>
+        <a href="#bokser" onclick="toggleMobileNav()">Bokser</a>
+        <a href="#knapper" onclick="toggleMobileNav()">Knapper</a>
+        <a href="#ikon" onclick="toggleMobileNav()">Ikon</a>
+        <a href="#modals" onclick="toggleMobileNav()">Modals</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- NY FULL-BREDDE BANNER -->
+<div class="banner-full">
+  <div class="banner-full-inner">
+    <h1>Neobrutalisme Komponentar</h1>
+    <p>Ein leken, brutalistisk design-mal med sterke fargar, tydelege rammer og harde skuggar.</p>
+  </div>
+</div>
+
+<main>
+
+<!-- SECTION: Game Hero Header (Ny Standard) -->
+<section class="game-hero-header-demo">
+  <h2 class="heading1">Game Hero Header</h2>
+  <p class="mb-20">Ein spesiell <code>.box2</code> boks som blir nytta heilt øvst i alle minispel sine startskjermar. Den fungerer som ein hero, og forsvinn saman med menyen når spelet startar. Bruk <code>var(--accent)</code> og <code>var(--text-on-accent)</code>.</p>
+
+  <div class="box2 hero-box" style="display: flex; align-items: center; gap: 24px; padding: 24px; margin-bottom: 24px; background: var(--accent); color: var(--text-on-accent);">
+    <div style="width: 120px; height: 120px; background: var(--surface); border: 3px solid var(--border); box-shadow: 4px 4px 0 rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; color: var(--text);">
+      [LOGO]
+    </div>
+    <div style="flex: 1;">
+      <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; line-height: 1; text-shadow: 2px 2px 0 rgba(0,0,0,0.3);">Spel-tittel</h1>
+      <p style="font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; margin: 0; opacity: 0.9;">Kort og treffande skildring av kva spelet handlar om, plassert til høgre for logoen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR OVERVIEW -->
+<section class="color-overview">
+  <h2 class="heading1">Fargepalett</h2>
+  <p class="mb-20">CSS-variablar for det aktive temaet.</p>
+  <div class="color-grid" id="colorGrid"></div>
+</section>
+
+<!-- SECTION: Overskrifter -->
+<section id="overskrifter">
+  <h2 class="heading1">Overskrifter</h2>
+  <p class="mb-20">Fire overskrift-stilar med alle 5 aksent-fargene.</p>
+
+  <div class="box4 mt-20">
+    <div class="box-header">heading1</div>
+    <div class="box-body">
+      <h3 class="heading1">heading1 (accent)</h3>
+      <h3 class="heading1 heading1-accent2">heading1 (accent2)</h3>
+      <h3 class="heading1 heading1-accent3">heading1 (accent3)</h3>
+      <h3 class="heading1 heading1-accent4">heading1 (accent4)</h3>
+      <h3 class="heading1 heading1-accent5">heading1 (accent5)</h3>
+      <p class="mt-20">Stor overskrift med understrekning i accent-farge (60% bredde).</p>
+    </div>
+  </div>
+
+  <div class="box4 mt-20">
+    <div class="box-header">heading2</div>
+    <div class="box-body">
+      <h3 class="heading2">heading2 (accent)</h3>
+      <h3 class="heading2 heading2-accent2">heading2 (accent2)</h3>
+      <h3 class="heading2 heading2-accent3">heading2 (accent3)</h3>
+      <h3 class="heading2 heading2-accent4">heading2 (accent4)</h3>
+      <h3 class="heading2 heading2-accent5">heading2 (accent5)</h3>
+      <p class="mt-20">Overskrift med accent-bakgrunn, tykk border og shadow.</p>
+    </div>
+  </div>
+
+  <div class="box4 mt-20">
+    <div class="box-header">heading3</div>
+    <div class="box-body">
+      <h3 class="heading3">heading3 (accent)</h3>
+      <h3 class="heading3 heading3-accent2">heading3 (accent2)</h3>
+      <h3 class="heading3 heading3-accent3">heading3 (accent3)</h3>
+      <h3 class="heading3 heading3-accent4">heading3 (accent4)</h3>
+      <h3 class="heading3 heading3-accent5">heading3 (accent5)</h3>
+      <p class="mt-20">Overskrift med accent-bakgrunn, tykk border, shadow og rotasjon (-2deg).</p>
+    </div>
+  </div>
+
+  <div class="box4 mt-20">
+    <div class="box-header">heading4</div>
+    <div class="box-body">
+      <h3 class="heading4">heading4 (accent)</h3>
+      <h3 class="heading4 heading4-accent2">heading4 (accent2)</h3>
+      <h3 class="heading4 heading4-accent3">heading4 (accent3)</h3>
+      <h3 class="heading4 heading4-accent4">heading4 (accent4)</h3>
+      <h3 class="heading4 heading4-accent5">heading4 (accent5)</h3>
+      <p class="mt-20">Undertittel med farget tekst (accent som standard).</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: Bokser (5 typar + numbered modifier) -->
+<section id="bokser">
+  <h2 class="heading2">Bokser</h2>
+  <p class="mb-20">Fem bokstypar. Alle kan kombinerast med <strong>.numbered</strong> for nummerert innhald.</p>
+
+  <div class="grid-2 mt-20">
+    <div class="box1">
+      <h3 class="heading4">box1</h3>
+      <p>Standard boks med accent-farga shadow (8px).</p>
+    </div>
+    <div class="box2">
+      <h3 class="heading4">box2</h3>
+      <p>Boks med asymmetrisk border-radius (20px 0 20px 0).</p>
+    </div>
+  </div>
+
+  <div class="box3 mt-20">
+    <h3 class="heading4">box3</h3>
+    <p>Tilta boks (-1deg) med farget teipbit på toppen (accent-farge).</p>
+  </div>
+
+  <h3 class="heading4 mt-20">Accent2-eksempel</h3>
+  <p class="mb-20">Same bokser med <strong>.box-accent2</strong> for accent2-fargar:</p>
+
+  <div class="grid-2 mt-20">
+    <div class="box1 box1-accent2">
+      <h3 class="heading4">box1-accent2</h3>
+      <p>Shadow i accent2-farge.</p>
+    </div>
+    <div class="box2 box2-accent2">
+      <h3 class="heading4">box2-accent2</h3>
+      <p>Shadow i accent2-farge.</p>
+    </div>
+  </div>
+
+  <div class="box3 box3-accent2 mt-20">
+    <h3 class="heading4">box3-accent2</h3>
+    <p>Teipbit i accent2-farge.</p>
+  </div>
+
+  <div class="box4 mt-20">
+    <div class="box-header">box4</div>
+    <div class="box-body">
+      <p>Boks med farget header (accent-bakgrunn) og body-seksjon.</p>
+    </div>
+  </div>
+
+  <div class="box5 mt-20">
+    <div class="box-tabs">
+      <span class="box-tab active">box5</span>
+      <span class="box-tab">Fane 2</span>
+      <span class="box-tab">Fane 3</span>
+    </div>
+    <div class="box-body">
+      <p>Boks med fane-navigasjon og body. Aktiv fane har accent-bakgrunn.</p>
+    </div>
+  </div>
+
+  <h3 class="heading4 mt-20">Numbered modifier</h3>
+  <p class="mb-20">Legg til <strong>.numbered</strong> inne i ein boks for nummerert innhald:</p>
+
+  <div class="box1">
+    <div class="numbered">
+      <div class="box-number">01</div>
+      <div>
+        <div class="box-title">Numbered i box1</div>
+        <p>Stort nummer med accent-farge og border-separator. Fungerer i alle bokstypar.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box2">
+    <div class="numbered">
+      <div class="box-number">02</div>
+      <div>
+        <div class="box-title">Numbered i box2</div>
+        <p>Same nummererte stil, no inne i ein boks med avrunda hjørner.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box3">
+    <div class="numbered">
+      <div class="box-number">03</div>
+      <div>
+        <div class="box-title">Numbered i box3</div>
+        <p>Nummerert innhald i ein tilta boks med teipbit.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="heading4 mt-20">Iconed modifier</h3>
+  <p class="mb-20">Legg til <strong>.iconed</strong> inne i ein boks for ikon-innhald:</p>
+
+  <div class="box1">
+    <div class="iconed">
+      <div class="box-icon">★</div>
+      <div>
+        <div class="box-title">Iconed i box1</div>
+        <p>Ikon med accent-farge og border-separator. Fungerer i alle bokstypar.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box2">
+    <div class="iconed">
+      <div class="box-icon">❤</div>
+      <div>
+        <div class="box-title">Iconed i box2</div>
+        <p>Ikon inni ein boks med asymmetrisk border-radius.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box3">
+    <div class="iconed">
+      <div class="box-icon">✦</div>
+      <div>
+        <div class="box-title">Iconed i box3</div>
+        <p>Ikon i ein tilta boks med teipbit på toppen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: Knapp (1 type) -->
+<section id="knapper">
+  <h2 class="heading3">Knapp</h2>
+  <p class="mb-20">Ein knappevariant. Kvit bakgrunn, accent-farge når aktiv.</p>
+
+  <button class="btn">Standard knapp</button>
+  <button class="btn active" style="margin-left: 12px;">Aktiv knapp</button>
+
+  <div class="box4 mt-20">
+    <div class="box-header">Knapp-detaljar</div>
+    <div class="box-body">
+      <p>Bruk <strong>.btn</strong>-klassen. Hover-effekt løftar knappen opp (transform) og gir den accent-farge og redusert skugge.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: Responsivitet -->
+<section id="responsivitet">
+  <h2 class="heading2">Responsiv standard (2026)</h2>
+  <p class="mb-20">Denne malen brukar flytande typografi og "intrinsic design".</p>
+  
+  <div class="grid-3 mb-20">
+    <div class="box2">
+      <h4 class="heading4">Fluid Typography</h4>
+      <p>Overskrifter og tekst brukar <code>clamp()</code> og skalerer automatisk mellom desktop og mobil utan faste "breakpoints".</p>
+    </div>
+    <div class="box2">
+      <h4 class="heading4">Flex &amp; Grid</h4>
+      <p>Oppsett og knapperader brukar <code>flex-wrap: wrap;</code> og <code>minmax()</code> slik at innhald bryt linje når plassen blir for smal.</p>
+    </div>
+    <div class="box2">
+      <h4 class="heading4">Fluid Spacing</h4>
+      <p>Sidan rammer og skuggar er tjukke, brukar <code>padding</code> og <code>margin</code> òg <code>clamp()</code> for å knipe strammare på smale mobilar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: Ikon -->
+<section id="ikon">
+  <h2 class="heading2">Ikon</h2>
+  <p class="mb-20">Alle 1500+ Lucide-ikon er tilgjengelege. Bruk <code>&lt;i data-lucide="namn"&gt;&lt;/i&gt;</code>.</p>
+
+  <div class="box4 icon-accordion" id="iconAccordion">
+    <div class="icon-accordion-header" onclick="toggleAccordion(this)">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <i data-lucide="search"></i>
+        <span>Sjå alle tilgjengelege ikon</span>
+      </div>
+      <i data-lucide="chevron-down" class="chevron"></i>
+    </div>
+    <!-- Accordion body vil bli generert av JS for å støtte Lucide CDN dynamic load -->
+  </div>
+</section>
+
+<!-- SECTION: Modals (5 typar som bokser) -->
+<section id="modals">
+  <h2 class="heading2">Modals</h2>
+  <p class="mb-20">Fem modal-typar som speglar dei fem bokstypane. modal4 og modal5 er dobbelt så brede for større innhold. Klikk for å opne:</p>
+
+  <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+    <button class="btn" onclick="openModal('modal1')">modal1</button>
+    <button class="btn" onclick="openModal('modal2')">modal2</button>
+    <button class="btn" onclick="openModal('modal3')">modal3</button>
+    <button class="btn" onclick="openModal('modal4')">modal4</button>
+    <button class="btn" onclick="openModal('modal5')">modal5</button>
+  </div>
+
+  <div class="box4 mt-20">
+    <div class="box-header">Modal-oversikt</div>
+    <div class="box-body">
+      <p><strong>modal1:</strong> Accent shadow — same stil som box1.</p>
+      <p><strong>modal2:</strong> Tilta (-1deg) med teipbit — same stil som box3.</p>
+      <p><strong>modal3:</strong> Header + body + footer — same stil som box4.</p>
+      <p><strong>modal4:</strong> Avrunda hjørner — same stil som box2. Dobbel bredde.</p>
+      <p><strong>modal5:</strong> Fane-navigasjon + body — same stil som box5. Dobbel bredde.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: Ikon (Lucide) -->
+<section id="ikon">
+  <h2 class="heading1">Ikon</h2>
+  <p class="mb-20">Lucide-ikon (CDN for demo). <strong>⚠️ I produksjon skal alle ikon vere inline SVG, ikkje CDN.</strong></p>
+
+  <div id="iconAccordion"></div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>© 2024 Neobrutalisme-komponentar. Laga med 🎨 og neobrutalisme-design.</p>
+</footer>
+
+</div><!-- /page-wrapper -->
+
+<!-- MODAL 1 (box1-stil: accent shadow) -->
+<div class="modal-overlay" id="modal1" onclick="closeModalOutside(event, 'modal1')">
+  <div class="modal1" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal1')">✕</button>
+    <div class="modal-title">modal1</div>
+    <p>Same stil som box1: accent-farga shadow (8px). Enkel modal for meldingar.</p>
+    <div style="margin-top: 16px;"><button class="btn" onclick="closeModal('modal1')">Lukk</button></div>
+  </div>
+</div>
+
+<!-- MODAL 2 (box3-stil: tilta med teip) -->
+<div class="modal-overlay" id="modal2" onclick="closeModalOutside(event, 'modal2')">
+  <div class="modal2" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal2')">✕</button>
+    <div class="modal-title">modal2</div>
+    <p>Same stil som box3: tilta (-1deg) med farget teipbit midtstilt på toppen.</p>
+    <div style="margin-top: 16px;"><button class="btn" onclick="closeModal('modal2')">Lukk</button></div>
+  </div>
+</div>
+
+<!-- MODAL 3 (box4-stil: header + body + footer) -->
+<div class="modal-overlay" id="modal3" onclick="closeModalOutside(event, 'modal3')">
+  <div class="modal3" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <span>modal3</span>
+      <button class="modal-close" onclick="closeModal('modal3')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>Same stil som box4: farget header (accent-bakgrunn), body og footer med knapper.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('modal3')">Avbryt</button>
+      <button class="btn active">Stadfest</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 4 (box2-stil: avrunda hjørner, bred) -->
+<div class="modal-overlay" id="modal4" onclick="closeModalOutside(event, 'modal4')">
+  <div class="modal4" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal4')">✕</button>
+    <div class="modal-title">modal4</div>
+    <p>Same stil som box2: asymmetrisk border-radius (20px 0 20px 0). Mjukare uttrykk. Dobbel bredde for større innhold.</p>
+    <div style="margin-top: 16px;"><button class="btn" onclick="closeModal('modal4')">Lukk</button></div>
+  </div>
+</div>
+
+<!-- MODAL 5 (box5-stil: tabs + body, bred) -->
+<div class="modal-overlay" id="modal5" onclick="closeModalOutside(event, 'modal5')">
+  <div class="modal5" onclick="event.stopPropagation()">
+    <div class="modal-tabs">
+      <span class="modal-tab active">Info</span>
+      <span class="modal-tab">Detaljar</span>
+      <span class="modal-tab">
+        <button class="modal-close" onclick="closeModal('modal5')" style="font-size:12px;">✕</button>
+      </span>
+    </div>
+    <div class="modal-body">
+      <p>Same stil som box5: fane-navigasjon med body-seksjon. Aktiv fane har accent-bakgrunn. Dobbel bredde for større innhold.</p>
+      <div style="margin-top: 16px;"><button class="btn" onclick="closeModal('modal5')">Lukk</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Lucide Icons CDN (demo only - use inline SVG in production) -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+/* ========================================
+   LUCIDE ICONS (CDN - demo only)
+   ======================================== */
+// Icon categories for filtering (will be populated dynamically from Lucide)
+const ICON_CATEGORIES = {
+  navigasjon: [],
+  handlingar: [],
+  kommunikasjon: [],
+  media: [],
+  grensesnitt: []
+};
+
+// Predefined category mappings (icon name -> category)
+const ICON_CATEGORY_MAP = {
+  // Navigation
+  'home': 'navigasjon', 'search': 'navigasjon', 'menu': 'navigasjon', 'arrow-right': 'navigasjon',
+  'arrow-left': 'navigasjon', 'chevron-down': 'navigasjon', 'chevron-up': 'navigasjon',
+  'chevron-left': 'navigasjon', 'chevron-right': 'navigasjon', 'external-link': 'navigasjon',
+  'arrow-up': 'navigasjon', 'arrow-down': 'navigasjon', 'move': 'navigasjon', 'maximize': 'navigasjon',
+  'minimize': 'navigasjon', 'zoom-in': 'navigasjon', 'zoom-out': 'navigasjon', 'layout': 'navigasjon',
+  'sidebar': 'navigasjon', 'columns': 'navigasjon', 'panel-left': 'navigasjon', 'panel-right': 'navigasjon',
+  'panel-top': 'navigasjon', 'panel-bottom': 'navigasjon', 'compass': 'navigasjon', 'map': 'navigasjon',
+  'map-pin': 'navigasjon', 'navigation': 'navigasjon', 'locate': 'navigasjon', 'crosshair': 'navigasjon',
+  'target': 'navigasjon', 'corner-up-left': 'navigasjon', 'corner-up-right': 'navigasjon',
+  'corner-down-left': 'navigasjon', 'corner-down-right': 'navigasjon', 'circle': 'navigasjon',
+  'square': 'navigasjon', 'triangle': 'navigasjon', 'hexagon': 'navigasjon', 'pentagon': 'navigasjon',
+  // Actions
+  'plus': 'handlingar', 'check': 'handlingar', 'x': 'handlingar', 'edit': 'handlingar',
+  'trash': 'handlingar', 'copy': 'handlingar', 'download': 'handlingar', 'upload': 'handlingar',
+  'save': 'handlingar', 'undo': 'handlingar', 'redo': 'handlingar', 'refresh-cw': 'handlingar',
+  'rotate-ccw': 'handlingar', 'rotate-cw': 'handlingar', 'scissors': 'handlingar',
+  'clipboard': 'handlingar', 'file': 'handlingar', 'file-text': 'handlingar',
+  'folder': 'handlingar', 'folder-open': 'handlingar', 'archive': 'handlingar',
+  'package': 'handlingar', 'paperclip': 'handlingar', 'link': 'handlingar', 'unlink': 'handlingar',
+  'bookmark': 'handlingar', 'star': 'handlingar', 'heart': 'handlingar',
+  'thumbs-up': 'handlingar', 'thumbs-down': 'handlingar', 'flag': 'handlingar',
+  'git-branch': 'handlingar', 'git-commit': 'handlingar', 'git-merge': 'handlingar',
+  'git-pull-request': 'handlingar', 'git-fork': 'handlingar', 'layers': 'handlingar',
+  // Communication
+  'mail': 'kommunikasjon', 'message-circle': 'kommunikasjon', 'bell': 'kommunikasjon',
+  'send': 'kommunikasjon', 'phone': 'kommunikasjon', 'message-square': 'kommunikasjon',
+  'at-sign': 'kommunikasjon', 'share': 'kommunikasjon', 'share-2': 'kommunikasjon',
+  'rss': 'kommunikasjon', 'send-horizontal': 'kommunikasjon', 'message-square-diff': 'kommunikasjon',
+  'message-square-plus': 'kommunikasjon', 'message-square-quote': 'kommunikasjon',
+  'messages-square': 'kommunikasjon', 'phone-call': 'kommunikasjon',
+  'phone-incoming': 'kommunikasjon', 'phone-outgoing': 'kommunikasjon',
+  'voicemail': 'kommunikasjon', 'mail-check': 'kommunikasjon', 'mail-open': 'kommunikasjon',
+  'mail-plus': 'kommunikasjon', 'mail-x': 'kommunikasjon', 'bell-ring': 'kommunikasjon',
+  'bell-off': 'kommunikasjon', 'message-square-heart': 'kommunikasjon',
+  'message-square-text': 'kommunikasjon', 'message-text': 'kommunikasjon',
+  'message-square-code': 'kommunikasjon', 'share-network': 'kommunikasjon',
+  'message-square-reply': 'kommunikasjon', 'message-square-more': 'kommunikasjon',
+  'messages-square-more': 'kommunikasjon', 'message-square-x': 'kommunikasjon',
+  'message-square-check': 'kommunikasjon', 'phone-missed': 'kommunikasjon',
+  'phone-off': 'kommunikasjon', 'phone-paused': 'kommunikasjon',
+  'phone-incoming-call': 'kommunikasjon', 'phone-outgoing-call': 'kommunikasjon',
+  // Media
+  'image': 'media', 'play': 'media', 'music': 'media', 'camera': 'media',
+  'video': 'media', 'volume': 'media', 'volume-2': 'media', 'volume-x': 'media',
+  'mic': 'media', 'mic-off': 'media', 'film': 'media', 'radio': 'media',
+  'tv': 'media', 'monitor': 'media', 'speaker': 'media', 'headphones': 'media',
+  'pause': 'media', 'skip-back': 'media', 'skip-forward': 'media', 'rewind': 'media',
+  'fast-forward': 'media', 'play-circle': 'media', 'music-2': 'media', 'music-3': 'media',
+  'music-4': 'media', 'video-off': 'media', 'camera-off': 'media', 'mic-2': 'media',
+  'monitor-off': 'media', 'monitor-speaker': 'media', 'monitor-play': 'media',
+  'monitor-stop': 'media', 'monitor-up': 'media', 'monitor-x': 'media',
+  'speaker-high': 'media', 'speaker-low': 'media', 'speaker-x': 'media',
+  'headphones-off': 'media', 'headset': 'media', 'airplay': 'media', 'cast': 'media',
+  'clapperboard': 'media', 'disc': 'media', 'film-strip': 'media', 'frame': 'media',
+  'image-down': 'media', 'image-minus': 'media', 'image-off': 'media',
+  'image-plus': 'media', 'image-up': 'media', 'music-off': 'media',
+  'pause-circle': 'media', 'play-square': 'media', 'radio-receiver': 'media',
+  'scan': 'media', 'scan-line': 'media', 'tv-2': 'media', 'vibrate': 'media',
+  // UI
+  'settings': 'grensesnitt', 'user': 'grensesnitt', 'lock': 'grensesnitt',
+  'eye': 'grensesnitt', 'info': 'grensesnitt', 'alert-triangle': 'grensesnitt',
+  'help-circle': 'grensesnitt', 'more-horizontal': 'grensesnitt', 'more-vertical': 'grensesnitt',
+  'sliders': 'grensesnitt', 'toggle-left': 'grensesnitt', 'toggle-right': 'grensesnitt',
+  'check-circle': 'grensesnitt', 'x-circle': 'grensesnitt', 'alert-circle': 'grensesnitt',
+  'clock': 'grensesnitt', 'calendar': 'grensesnitt', 'moon': 'grensesnitt',
+  'sun': 'grensesnitt', 'log-out': 'grensesnitt', 'log-in': 'grensesnitt',
+  'user-plus': 'grensesnitt', 'user-minus': 'grensesnitt', 'users': 'grensesnitt',
+  'shield': 'grensesnitt', 'shield-check': 'grensesnitt', 'shield-alert': 'grensesnitt',
+  'shield-x': 'grensesnitt', 'shield-off': 'grensesnitt', 'lock-open': 'grensesnitt',
+  'eye-off': 'grensesnitt', 'eye-closed': 'grensesnitt', 'user-check': 'grensesnitt',
+  'user-cog': 'grensesnitt', 'user-x': 'grensesnitt', 'users-2': 'grensesnitt',
+  'users-3': 'grensesnitt', 'user-crown': 'grensesnitt', 'user-circle': 'grensesnitt',
+  'user-circle-2': 'grensesnitt', 'user-circle-check': 'grensesnitt',
+  'user-circle-x': 'grensesnitt', 'user-circle-minus': 'grensesnitt',
+  'user-circle-plus': 'grensesnitt', 'user-square': 'grensesnitt',
+  'user-square-2': 'grensesnitt', 'user-square-check': 'grensesnitt',
+  'user-square-x': 'grensesnitt', 'user-square-minus': 'grensesnitt',
+  'user-square-plus': 'grensesnitt', 'fingerprint': 'grensesnitt', 'hand': 'grensesnitt',
+  'hand-heart': 'grensesnitt', 'hand-helping': 'grensesnitt', 'hand-metal': 'grensesnitt',
+  'handshake': 'grensesnitt', 'activity': 'grensesnitt', 'activity-square': 'grensesnitt',
+  'alarm-clock': 'grensesnitt', 'anchor': 'grensesnitt', 'aperture': 'grensesnitt',
+  'armchair': 'grensesnitt', 'asterisk': 'grensesnitt', 'battery': 'grensesnitt',
+  'battery-charging': 'grensesnitt', 'battery-full': 'grensesnitt',
+  'battery-low': 'grensesnitt', 'battery-medium': 'grensesnitt',
+  'battery-warning': 'grensesnitt', 'book': 'grensesnitt', 'book-bookmark': 'grensesnitt',
+  'book-check': 'grensesnitt', 'book-copy': 'grensesnitt', 'book-edit': 'grensesnitt',
+  'book-heart': 'grensesnitt', 'book-lock': 'grensesnitt', 'book-minus': 'grensesnitt',
+  'book-open': 'grensesnitt', 'book-plus': 'grensesnitt', 'book-text': 'grensesnitt',
+  'book-x': 'grensesnitt', 'bookmark-check': 'grensesnitt', 'bookmark-minus': 'grensesnitt',
+  'bookmark-plus': 'grensesnitt', 'bookmark-x': 'grensesnitt', 'bot': 'grensesnitt',
+  'box': 'grensesnitt', 'brain': 'grensesnitt', 'briefcase': 'grensesnitt',
+  'building': 'grensesnitt', 'building-2': 'grensesnitt', 'calculator': 'grensesnitt',
+  'calendar-check': 'grensesnitt', 'calendar-clock': 'grensesnitt',
+  'calendar-days': 'grensesnitt', 'calendar-heart': 'grensesnitt',
+  'calendar-minus': 'grensesnitt', 'calendar-off': 'grensesnitt',
+  'calendar-plus': 'grensesnitt', 'calendar-range': 'grensesnitt',
+  'calendar-search': 'grensesnitt', 'calendar-x': 'grensesnitt', 'check': 'grensesnitt',
+  'check-circle-2': 'grensesnitt', 'check-square': 'grensesnitt', 'circle': 'grensesnitt',
+  'circle-dollar-sign': 'grensesnitt', 'circle-dot': 'grensesnitt',
+  'circle-slash': 'grensesnitt', 'circle-user': 'grensesnitt',
+  'circle-user-round': 'grensesnitt', 'clipboard': 'grensesnitt',
+  'clipboard-check': 'grensesnitt', 'clipboard-copy': 'grensesnitt',
+  'clipboard-edit': 'grensesnitt', 'clipboard-list': 'grensesnitt',
+  'clipboard-paste': 'grensesnitt', 'clipboard-x': 'grensesnitt', 'clock-1': 'grensesnitt',
+  'clock-10': 'grensesnitt', 'clock-11': 'grensesnitt', 'clock-12': 'grensesnitt',
+  'clock-2': 'grensesnitt', 'clock-3': 'grensesnitt', 'clock-4': 'grensesnitt',
+  'clock-5': 'grensesnitt', 'clock-6': 'grensesnitt', 'clock-7': 'grensesnitt',
+  'clock-8': 'grensesnitt', 'clock-9': 'grensesnitt', 'clone': 'grensesnitt',
+  'cloud': 'grensesnitt', 'cloud-cog': 'grensesnitt', 'cloud-drizzle': 'grensesnitt',
+  'cloud-fog': 'grensesnitt', 'cloud-hail': 'grensesnitt', 'cloud-lightning': 'grensesnitt',
+  'cloud-moon': 'grensesnitt', 'cloud-moon-rain': 'grensesnitt', 'cloud-off': 'grensesnitt',
+  'cloud-rain': 'grensesnitt', 'cloud-rain-wind': 'grensesnitt', 'cloud-snow': 'grensesnitt',
+  'cloud-sun': 'grensesnitt', 'cloud-sun-rain': 'grensesnitt', 'cloudy': 'grensesnitt',
+  'code': 'grensesnitt', 'code-2': 'grensesnitt', 'code-copyleft': 'grensesnitt',
+  'code-copyright': 'grensesnitt', 'cog': 'grensesnitt', 'coins': 'grensesnitt',
+  'combine': 'grensesnitt', 'command': 'grensesnitt', 'component': 'grensesnitt',
+  'computer': 'grensesnitt', 'contact': 'grensesnitt', 'container': 'grensesnitt',
+  'contrast': 'grensesnitt', 'copy': 'grensesnitt', 'copy-check': 'grensesnitt',
+  'copy-minus': 'grensesnitt', 'copy-plus': 'grensesnitt', 'copy-slash': 'grensesnitt',
+  'copy-x': 'grensesnitt', 'copyright': 'grensesnitt', 'cpu': 'grensesnitt',
+  'credit-card': 'grensesnitt', 'crop': 'grensesnitt', 'cross': 'grensesnitt',
+  'crown': 'grensesnitt', 'currency': 'grensesnitt', 'database': 'grensesnitt',
+  'database-backup': 'grensesnitt', 'database-zap': 'grensesnitt', 'delete': 'grensesnitt',
+  'diamond': 'grensesnitt', 'divide': 'grensesnitt', 'divide-circle': 'grensesnitt',
+  'divide-square': 'grensesnitt', 'dollar-sign': 'grensesnitt', 'download': 'grensesnitt',
+  'download-cloud': 'grensesnitt', 'droplet': 'grensesnitt', 'droplets': 'grensesnitt',
+  'edit': 'grensesnitt', 'edit-2': 'grensesnitt', 'edit-3': 'grensesnitt',
+  'equal': 'grensesnitt', 'equal-not': 'grensesnitt', 'eraser': 'grensesnitt',
+  'euro': 'grensesnitt', 'expand': 'grensesnitt', 'external-link': 'grensesnitt',
+  'file': 'grensesnitt', 'file-audio': 'grensesnitt', 'file-code': 'grensesnitt',
+  'file-csv': 'grensesnitt', 'file-diff': 'grensesnitt', 'file-digit': 'grensesnitt',
+  'file-down': 'grensesnitt', 'file-heart': 'grensesnitt', 'file-image': 'grensesnitt',
+  'file-input': 'grensesnitt', 'file-json': 'grensesnitt', 'file-lock': 'grensesnitt',
+  'file-lock-2': 'grensesnitt', 'file-minus': 'grensesnitt', 'file-minus-2': 'grensesnitt',
+  'file-output': 'grensesnitt', 'file-pen': 'grensesnitt', 'file-pen-line': 'grensesnitt',
+  'file-plus': 'grensesnitt', 'file-plus-2': 'grensesnitt', 'file-search': 'grensesnitt',
+  'file-spreadsheet': 'grensesnitt', 'file-stack': 'grensesnitt', 'file-symlink': 'grensesnitt',
+  'file-text': 'grensesnitt', 'file-up': 'grensesnitt', 'file-video': 'grensesnitt',
+  'file-x': 'grensesnitt', 'file-x-2': 'grensesnitt', 'files': 'grensesnitt',
+  'filter': 'grensesnitt', 'flag': 'grensesnitt', 'flag-off': 'grensesnitt',
+  'flag-triangle-left': 'grensesnitt', 'flag-triangle-right': 'grensesnitt',
+  'flame': 'grensesnitt', 'flame-kindling': 'grensesnitt', 'flashlight': 'grensesnitt',
+  'flashlight-off': 'grensesnitt', 'flask-conical': 'grensesnitt',
+  'flask-round': 'grensesnitt', 'flower': 'grensesnitt', 'flower-2': 'grensesnitt',
+  'flower-lotus': 'grensesnitt', 'flower-tulip': 'grensesnitt', 'focus': 'grensesnitt',
+  'folder': 'grensesnitt', 'folder-down': 'grensesnitt', 'folder-git-2': 'grensesnitt',
+  'folder-input': 'grensesnitt', 'folder-kanban': 'grensesnitt', 'folder-key': 'grensesnitt',
+  'folder-lock': 'grensesnitt', 'folder-minus': 'grensesnitt', 'folder-open': 'grensesnitt',
+  'folder-plus': 'grensesnitt', 'folder-root': 'grensesnitt', 'folder-symlink': 'grensesnitt',
+  'folder-tree': 'grensesnitt', 'folder-up': 'grensesnitt', 'folder-up-down': 'grensesnitt',
+  'folder-x': 'grensesnitt', 'form-input': 'grensesnitt', 'frame': 'grensesnitt',
+  'frown': 'grensesnitt', 'fuel': 'grensesnitt', 'fullscreen': 'grensesnitt',
+  'function-square': 'grensesnitt', 'gamepad': 'grensesnitt', 'gamepad-2': 'grensesnitt',
+  'gauge': 'grensesnitt', 'gavel': 'grensesnitt', 'gem': 'grensesnitt',
+  'ghost': 'grensesnitt', 'gift': 'grensesnitt', 'git-branch-plus': 'grensesnitt',
+  'git-commit-vertical': 'grensesnitt', 'git-pull-request-arrow': 'grensesnitt',
+  'git-pull-request-closed': 'grensesnitt', 'git-pull-request-create': 'grensesnitt',
+  'git-pull-request-draft': 'grensesnitt', 'glass': 'grensesnitt',
+  'glass-water': 'grensesnitt', 'glasses': 'grensesnitt', 'globe': 'grensesnitt',
+  'globe-2': 'grensesnitt', 'graduation-cap': 'grensesnitt', 'grid': 'grensesnitt',
+  'grip-horizontal': 'grensesnitt', 'grip-vertical': 'grensesnitt', 'hammer': 'grensesnitt',
+  'hand-platter': 'grensesnitt', 'hard-drive': 'grensesnitt', 'hard-hat': 'grensesnitt',
+  'hash': 'grensesnitt', 'haze': 'grensesnitt', 'heading': 'grensesnitt',
+  'heading-1': 'grensesnitt', 'heading-2': 'grensesnitt', 'heading-3': 'grensesnitt',
+  'heading-4': 'grensesnitt', 'heading-5': 'grensesnitt', 'heading-6': 'grensesnitt',
+  'headphones-off': 'grensesnitt', 'heart-crack': 'grensesnitt',
+  'heart-handshake': 'grensesnitt', 'heart-off': 'grensesnitt',
+  'heart-pulse': 'grensesnitt', 'hexagon': 'grensesnitt', 'highlighter': 'grensesnitt',
+  'history': 'grensesnitt', 'home-check': 'grensesnitt', 'home-minus': 'grensesnitt',
+  'home-plus': 'grensesnitt', 'home-x': 'grensesnitt', 'hop-off': 'grensesnitt',
+  'horizontal-rule': 'grensesnitt', 'hourglass': 'grensesnitt', 'import': 'grensesnitt',
+  'inbox': 'grensesnitt', 'indent': 'grensesnitt', 'indent-decrease': 'grensesnitt',
+  'indent-increase': 'grensesnitt', 'infinity': 'grensesnitt', 'inspect': 'grensesnitt',
+  'italic': 'grensesnitt', 'japanese-yen': 'grensesnitt', 'joystick': 'grensesnitt',
+  'key': 'grensesnitt', 'keyboard': 'grensesnitt', 'keyboard-music': 'grensesnitt',
+  'lamp': 'grensesnitt', 'lamp-ceiling': 'grensesnitt', 'lamp-desk': 'grensesnitt',
+  'lamp-floor': 'grensesnitt', 'lamp-wall-down': 'grensesnitt',
+  'lamp-wall-up': 'grensesnitt', 'land-plot': 'grensesnitt', 'landmark': 'grensesnitt',
+  'languages': 'grensesnitt', 'laptop': 'grensesnitt', 'laptop-2': 'grensesnitt',
+  'lasso': 'grensesnitt', 'lattice': 'grensesnitt', 'layout': 'grensesnitt',
+  'layout-dashboard': 'grensesnitt', 'layout-grid': 'grensesnitt',
+  'layout-list': 'grensesnitt', 'layout-template': 'grensesnitt',
+  'leaf': 'grensesnitt', 'library': 'grensesnitt', 'life-buoy': 'grensesnitt',
+  'lightbulb': 'grensesnitt', 'lightbulb-off': 'grensesnitt', 'link': 'grensesnitt',
+  'link-2': 'grensesnitt', 'link-2-off': 'grensesnitt', 'linkedin': 'grensesnitt',
+  'list': 'grensesnitt', 'list-checks': 'grensesnitt', 'list-collapse': 'grensesnitt',
+  'list-end': 'grensesnitt', 'list-filter': 'grensesnitt', 'list-music': 'grensesnitt',
+  'list-ordered': 'grensesnitt', 'list-plus': 'grensesnitt', 'list-restart': 'grensesnitt',
+  'list-start': 'grensesnitt', 'list-tree': 'grensesnitt', 'list-video': 'grensesnitt',
+  'list-x': 'grensesnitt', 'loader': 'grensesnitt', 'loader-2': 'grensesnitt',
+  'locate-fixed': 'grensesnitt', 'locate-off': 'grensesnitt', 'lock-keyhole': 'grensesnitt',
+  'lock-open': 'grensesnitt', 'lollipop': 'grensesnitt', 'luggage': 'grensesnitt',
+  'magnet': 'grensesnitt', 'mail-check': 'grensesnitt', 'mail-down': 'grensesnitt',
+  'mail-open': 'grensesnitt', 'mail-plus': 'grensesnitt', 'mail-question': 'grensesnitt',
+  'mail-remove': 'grensesnitt', 'mail-search': 'grensesnitt',
+  'mail-warning': 'grensesnitt', 'mail-x': 'grensesnitt', 'mailbox': 'grensesnitt',
+  'mails': 'grensesnitt', 'map-pin-off': 'grensesnitt', 'martini': 'grensesnitt',
+  'maximize-2': 'grensesnitt', 'medal': 'grensesnitt', 'megaphone': 'grensesnitt',
+  'megaphone-off': 'grensesnitt', 'meh': 'grensesnitt', 'merge': 'grensesnitt',
+  'message-circle-dashed': 'grensesnitt', 'message-circle-off': 'grensesnitt',
+  'message-square-dashed': 'grensesnitt', 'message-square-off': 'grensesnitt',
+  'mic-2': 'grensesnitt', 'microscope': 'grensesnitt', 'microwave': 'grensesnitt',
+  'milestone': 'grensesnitt', 'milk': 'grensesnitt', 'minimize-2': 'grensesnitt',
+  'minus': 'grensesnitt', 'minus-circle': 'grensesnitt', 'minus-square': 'grensesnitt',
+  'monitor-check': 'grensesnitt', 'monitor-dot': 'grensesnitt',
+  'monitor-down': 'grensesnitt', 'monitor-off': 'grensesnitt',
+  'monitor-pause': 'grensesnitt', 'monitor-play': 'grensesnitt',
+  'monitor-slash': 'grensesnitt', 'monitor-speaker': 'grensesnitt',
+  'monitor-stop': 'grensesnitt', 'monitor-up': 'grensesnitt',
+  'monitor-x': 'grensesnitt', 'moon-star': 'grensesnitt', 'mountain': 'grensesnitt',
+  'mountain-snow': 'grensesnitt', 'mouse': 'grensesnitt',
+  'mouse-pointer-2': 'grensesnitt', 'mouse-pointer-click': 'grensesnitt',
+  'mouse-pointer-off': 'grensesnitt', 'move-3d': 'grensesnitt',
+  'move-diagonal': 'grensesnitt', 'move-diagonal-2': 'grensesnitt',
+  'move-down': 'grensesnitt', 'move-down-left': 'grensesnitt',
+  'move-down-right': 'grensesnitt', 'move-horizontal': 'grensesnitt',
+  'move-left': 'grensesnitt', 'move-right': 'grensesnitt', 'move-up': 'grensesnitt',
+  'move-up-left': 'grensesnitt', 'move-up-right': 'grensesnitt',
+  'move-vertical': 'grensesnitt', 'music-2': 'grensesnitt', 'music-3': 'grensesnitt',
+  'music-4': 'grensesnitt', 'music-off': 'grensesnitt', 'navigation-2': 'grensesnitt',
+  'navigation-2-off': 'grensesnitt', 'navigation-off': 'grensesnitt',
+  'network': 'grensesnitt', 'newspaper': 'grensesnitt', 'nfc': 'grensesnitt',
+  'octagon': 'grensesnitt', 'option': 'grensesnitt', 'outdent': 'grensesnitt',
+  'package': 'grensesnitt', 'package-2': 'grensesnitt', 'package-check': 'grensesnitt',
+  'package-minus': 'grensesnitt', 'package-open': 'grensesnitt',
+  'package-plus': 'grensesnitt', 'package-search': 'grensesnitt',
+  'package-x': 'grensesnitt', 'paint-bucket': 'grensesnitt',
+  'paint-bucket-2': 'grensesnitt', 'paintbrush': 'grensesnitt',
+  'paintbrush-2': 'grensesnitt', 'palette': 'grensesnitt', 'palmtree': 'grensesnitt',
+  'panel-bottom-close': 'grensesnitt', 'panel-left-close': 'grensesnitt',
+  'panel-right-close': 'grensesnitt', 'panel-top-close': 'grensesnitt',
+  'parachute': 'grensesnitt', 'pause-circle': 'grensesnitt',
+  'pause-octagon': 'grensesnitt', 'pen': 'grensesnitt', 'pen-line': 'grensesnitt',
+  'pen-square': 'grensesnitt', 'pen-tool': 'grensesnitt', 'pencil': 'grensesnitt',
+  'percent': 'grensesnitt', 'person-standing': 'grensesnitt', 'phone-x': 'grensesnitt',
+  'pi': 'grensesnitt', 'pickaxe': 'grensesnitt', 'piggy-bank': 'grensesnitt',
+  'pilcrow': 'grensesnitt', 'pin': 'grensesnitt', 'pin-off': 'grensesnitt',
+  'pipette': 'grensesnitt', 'pizza': 'grensesnitt', 'plane': 'grensesnitt',
+  'plane-landing': 'grensesnitt', 'plane-takeoff': 'grensesnitt', 'planet': 'grensesnitt',
+  'plant': 'grensesnitt', 'play-circle': 'grensesnitt', 'play-square': 'grensesnitt',
+  'plug': 'grensesnitt', 'plug-2': 'grensesnitt', 'plug-2-off': 'grensesnitt',
+  'plug-zap': 'grensesnitt', 'plus-circle': 'grensesnitt', 'plus-octagon': 'grensesnitt',
+  'plus-square': 'grensesnitt', 'pocket': 'grensesnitt', 'pocket-knife': 'grensesnitt',
+  'podcast': 'grensesnitt', 'pointer': 'grensesnitt', 'pound-sterling': 'grensesnitt',
+  'power': 'grensesnitt', 'power-off': 'grensesnitt', 'presentation': 'grensesnitt',
+  'printer': 'grensesnitt', 'printer-check': 'grensesnitt', 'projector': 'grensesnitt',
+  'pulse': 'grensesnitt', 'puzzle': 'grensesnitt', 'qr-code': 'grensesnitt',
+  'quote': 'grensesnitt', 'rabbit': 'grensesnitt', 'radar': 'grensesnitt',
+  'radio-receiver': 'grensesnitt', 'radius': 'grensesnitt', 'rainbow': 'grensesnitt',
+  'range': 'grensesnitt', 'rat': 'grensesnitt', 'ratio': 'grensesnitt',
+  'read': 'grensesnitt', 'receipt': 'grensesnitt',
+  'rectangle-horizontal': 'grensesnitt', 'rectangle-vertical': 'grensesnitt',
+  'recycle': 'grensesnitt', 'redo-2': 'grensesnitt', 'refresh-ccw': 'grensesnitt',
+  'refresh-cw': 'grensesnitt', 'refrigerator': 'grensesnitt', 'regex': 'grensesnitt',
+  'remove-formatting': 'grensesnitt', 'repeat': 'grensesnitt', 'repeat-1': 'grensesnitt',
+  'repeat-2': 'grensesnitt', 'replace': 'grensesnitt', 'reply': 'grensesnitt',
+  'reply-all': 'grensesnitt', 'ribbon': 'grensesnitt', 'rocket': 'grensesnitt',
+  'rocking-chair': 'grensesnitt', 'roller-coaster': 'grensesnitt',
+  'rss': 'grensesnitt', 'ruler': 'grensesnitt', 'russian-ruble': 'grensesnitt',
+  'sack': 'grensesnitt', 'sack-dollar': 'grensesnitt', 'scale': 'grensesnitt',
+  'scale-3d': 'grensesnitt', 'scaling': 'grensesnitt', 'scan-face': 'grensesnitt',
+  'scan-line': 'grensesnitt', 'scan-text': 'grensesnitt', 'scissors-line-dashed': 'grensesnitt',
+  'school': 'grensesnitt', 'screen-share-off': 'grensesnitt', 'scroll': 'grensesnitt',
+  'search-check': 'grensesnitt', 'search-code': 'grensesnitt',
+  'search-slash': 'grensesnitt', 'search-x': 'grensesnitt', 'send-to-back': 'grensesnitt',
+  'separator-horizontal': 'grensesnitt', 'separator-vertical': 'grensesnitt',
+  'server': 'grensesnitt', 'server-cog': 'grensesnitt', 'server-crash': 'grensesnitt',
+  'server-off': 'grensesnitt', 'settings-2': 'grensesnitt', 'share-2-off': 'grensesnitt',
+  'share-3': 'grensesnitt', 'share-off': 'grensesnitt', 'sheet': 'grensesnitt',
+  'shell': 'grensesnitt', 'shield-ellipsis': 'grensesnitt',
+  'shield-question': 'grensesnitt', 'ship': 'grensesnitt', 'shirt': 'grensesnitt',
+  'shopping-bag': 'grensesnitt', 'shopping-cart': 'grensesnitt',
+  'shovel': 'grensesnitt', 'shower-head': 'grensesnitt', 'shrink': 'grensesnitt',
+  'shuffle': 'grensesnitt', 'sidebar-close': 'grensesnitt',
+  'sidebar-open': 'grensesnitt', 'sigma': 'grensesnitt', 'signal': 'grensesnitt',
+  'signal-high': 'grensesnitt', 'signal-low': 'grensesnitt',
+  'signal-medium': 'grensesnitt', 'signal-zero': 'grensesnitt', 'siren': 'grensesnitt',
+  'skull': 'grensesnitt', 'slack': 'grensesnitt', 'slash': 'grensesnitt',
+  'sliders-horizontal': 'grensesnitt', 'sliders-vertical': 'grensesnitt',
+  'smartphone': 'grensesnitt', 'smartphone-charging': 'grensesnitt',
+  'smartphone-nfc': 'grensesnitt', 'smile': 'grensesnitt', 'smile-plus': 'grensesnitt',
+  'snowflake': 'grensesnitt', 'sofa': 'grensesnitt', 'soup': 'grensesnitt',
+  'space': 'grensesnitt', 'speaker-high': 'grensesnitt', 'speaker-low': 'grensesnitt',
+  'speaker-x': 'grensesnitt', 'speech': 'grensesnitt', 'spell-check': 'grensesnitt',
+  'spider': 'grensesnitt', 'split': 'grensesnitt', 'split-square-horizontal': 'grensesnitt',
+  'split-square-vertical': 'grensesnitt', 'sprout': 'grensesnitt', 'square': 'grensesnitt',
+  'square-0': 'grensesnitt', 'square-1': 'grensesnitt', 'square-2': 'grensesnitt',
+  'square-3': 'grensesnitt', 'square-4': 'grensesnitt', 'square-5': 'grensesnitt',
+  'square-6': 'grensesnitt', 'square-7': 'grensesnitt', 'square-8': 'grensesnitt',
+  'square-9': 'grensesnitt', 'square-dashed': 'grensesnitt', 'square-dot': 'grensesnitt',
+  'square-slash': 'grensesnitt', 'square-stack': 'grensesnitt',
+  'squirrel': 'grensesnitt', 'stamp': 'grensesnitt', 'star-half': 'grensesnitt',
+  'star-off': 'grensesnitt', 'stars': 'grensesnitt', 'step-back': 'grensesnitt',
+  'step-forward': 'grensesnitt', 'stethoscope': 'grensesnitt', 'sticker': 'grensesnitt',
+  'sticky-note': 'grensesnitt', 'stop-circle': 'grensesnitt', 'store': 'grensesnitt',
+  'stretch-horizontal': 'grensesnitt', 'stretch-vertical': 'grensesnitt',
+  'strikethrough': 'grensesnitt', 'subscript': 'grensesnitt', 'subtitles': 'grensesnitt',
+  'sun-dim': 'grensesnitt', 'sun-medium': 'grensesnitt', 'sun-moon': 'grensesnitt',
+  'sun-snow': 'grensesnitt', 'sun-wind': 'grensesnitt', 'sunrise': 'grensesnitt',
+  'sunset': 'grensesnitt', 'superscript': 'grensesnitt', 'swatch-book': 'grensesnitt',
+  'switch-camera': 'grensesnitt', 'sword': 'grensesnitt', 'syringe': 'grensesnitt',
+  'table': 'grensesnitt', 'table-2': 'grensesnitt', 'tablet': 'grensesnitt',
+  'tag': 'grensesnitt', 'tags': 'grensesnitt', 'tent': 'grensesnitt',
+  'terminal': 'grensesnitt', 'terminal-square': 'grensesnitt',
+  'text-cursor': 'grensesnitt', 'text-cursor-input': 'grensesnitt',
+  'text-select': 'grensesnitt', 'thermometer': 'grensesnitt',
+  'thermometer-snowflake': 'grensesnitt', 'thermometer-sun': 'grensesnitt',
+  'thermometer-chevrons-down': 'grensesnitt',
+  'thermometer-chevrons-up': 'grensesnitt', 'thermometer-simple': 'grensesnitt',
+  'ticket': 'grensesnitt', 'timer': 'grensesnitt', 'timer-off': 'grensesnitt',
+  'timer-reset': 'grensesnitt', 'tornado': 'grensesnitt', 'tower-off': 'grensesnitt',
+  'toy-brick': 'grensesnitt', 'train-front': 'grensesnitt',
+  'train-front-tunnel': 'grensesnitt', 'trash-2': 'grensesnitt',
+  'trash-2-check': 'grensesnitt', 'trash-2-x': 'grensesnitt',
+  'trash-check': 'grensesnitt', 'tree-deciduous': 'grensesnitt',
+  'tree-pine': 'grensesnitt', 'trees': 'grensesnitt', 'trello': 'grensesnitt',
+  'trending-down': 'grensesnitt', 'trending-up': 'grensesnitt',
+  'triangle-alert': 'grensesnitt', 'truck': 'grensesnitt', 'turtle': 'grensesnitt',
+  'tv-2': 'grensesnitt', 'type': 'grensesnitt', 'umbrella': 'grensesnitt',
+  'umbrella-off': 'grensesnitt', 'underline': 'grensesnitt', 'undo-2': 'grensesnitt',
+  'unlink-2': 'grensesnitt', 'unlock': 'grensesnitt', 'unplug': 'grensesnitt',
+  'upload-cloud': 'grensesnitt', 'usb': 'grensesnitt', 'user-check': 'grensesnitt',
+  'user-cog': 'grensesnitt', 'user-crown': 'grensesnitt', 'user-minus': 'grensesnitt',
+  'user-plus': 'grensesnitt', 'user-x': 'grensesnitt', 'users-2': 'grensesnitt',
+  'users-3': 'grensesnitt', 'utensils': 'grensesnitt', 'utensils-crossed': 'grensesnitt',
+  'venetian-mask': 'grensesnitt', 'verified': 'grensesnitt', 'vibrate-off': 'grensesnitt',
+  'video-off': 'grensesnitt', 'view': 'grensesnitt', 'voicemail': 'grensesnitt',
+  'volume-1': 'grensesnitt', 'volume-2': 'grensesnitt', 'volume-x': 'grensesnitt',
+  'vote': 'grensesnitt', 'wallet': 'grensesnitt', 'wallet-cards': 'grensesnitt',
+  'wand': 'grensesnitt', 'wand-2': 'grensesnitt', 'watch': 'grensesnitt',
+  'water': 'grensesnitt', 'water-drop': 'grensesnitt', 'water-off': 'grensesnitt',
+  'waves': 'grensesnitt', 'webcam': 'grensesnitt', 'webhook': 'grensesnitt',
+  'wifi': 'grensesnitt', 'wifi-off': 'grensesnitt', 'wind': 'grensesnitt',
+  'wine': 'grensesnitt', 'wrap-text': 'grensesnitt', 'wrench': 'grensesnitt',
+  'x-octagon': 'grensesnitt', 'x-square': 'grensesnitt', 'y': 'grensesnitt',
+  'youtube': 'grensesnitt', 'zap': 'grensesnitt', 'zap-off': 'grensesnitt'
+};
+
+// Get all available Lucide icons from the global lucide object
+let allIcons = [];
+
+/* ========================================
+   FUNCTIONS
+   ======================================== */
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  document.querySelectorAll('.theme-dropdown-item').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === theme);
+  });
+  document.getElementById('themeMenu').classList.remove('open');
+  const dd = document.querySelector('.theme-dropdown');
+  if (dd) dd.classList.remove('open');
+}
+
+function toggleThemeDropdown() {
+  document.getElementById('themeMenu').classList.toggle('open');
+  const dd = document.querySelector('.theme-dropdown');
+  if (dd) dd.classList.toggle('open');
+}
+
+function toggleMobileNav() {
+  document.getElementById('mobileNav').classList.toggle('open');
+  const btn = document.getElementById('hamburgerBtn');
+  if(btn) btn.classList.toggle('open');
+}
+
+let scrollbarWidth = 0;
+
+function openModal(id) {
+  scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+  document.body.style.overflow = 'hidden';
+  if (scrollbarWidth > 0) {
+    document.body.style.paddingRight = scrollbarWidth + 'px';
+  }
+  document.getElementById(id).classList.add('open');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+  document.body.style.paddingRight = '';
+}
+
+function closeModalOutside(event, id) {
+  if (event.target.classList.contains('modal-overlay')) {
+    closeModal(id);
+  }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  const dd = document.querySelector('.theme-dropdown');
+  if (dd && !dd.contains(e.target)) {
+    document.getElementById('themeMenu').classList.remove('open');
+    dd.classList.remove('open');
+  }
+});
+
+// Icon accordion
+function buildAccordion() {
+  const container = document.getElementById('iconAccordion');
+  if (!container) return;
+
+  // Get all available icons from Lucide CDN
+  let allIconNames = [];
+  if (typeof lucide !== 'undefined' && lucide.icons) {
+    allIconNames = Object.keys(lucide.icons);
+  }
+
+  // Populate categories based on mapping
+  Object.keys(ICON_CATEGORIES).forEach(cat => ICON_CATEGORIES[cat] = []);
+  const uncategorized = [];
+
+  allIconNames.forEach(iconName => {
+    const category = ICON_CATEGORY_MAP[iconName];
+    if (category && ICON_CATEGORIES[category]) {
+      ICON_CATEGORIES[category].push(iconName);
+    } else {
+      uncategorized.push(iconName);
+    }
+  });
+
+  // Sort icons within each category
+  Object.keys(ICON_CATEGORIES).forEach(cat => ICON_CATEGORIES[cat].sort());
+  uncategorized.sort();
+
+  let html = '';
+  const categoryNames = {
+    all: 'Alle',
+    navigasjon: 'Navigasjon',
+    handlingar: 'Handlingar',
+    kommunikasjon: 'Kommunikasjon',
+    media: 'Media',
+    grensesnitt: 'Grensesnitt',
+    andre: 'Andre (ukategoriserte)'
+  };
+
+  // Build categories including "all" and "andre"
+  const allCategories = { all: null, ...ICON_CATEGORIES, andre: uncategorized };
+
+  Object.entries(allCategories).forEach(([key, icons], index) => {
+    const isOpen = index === 0 ? 'open' : '';
+    const bodyOpen = index === 0 ? 'open' : '';
+
+    let validIcons;
+    if (key === 'all') {
+      validIcons = allIconNames.sort();
+    } else {
+      validIcons = icons;
+    }
+
+    html += `
+      <div class="icon-accordion">
+        <div class="icon-accordion-header ${isOpen}" onclick="toggleAccordion(this)">
+          <span>${categoryNames[key]} (${validIcons.length})</span>
+          <i data-lucide="chevron-down" class="chevron"></i>
+        </div>
+        <div class="icon-accordion-body ${bodyOpen}">
+          <div class="icon-grid">
+            ${validIcons.map(name => `<div class="icon-item"><i data-lucide="${name}"></i><span>${name}</span></div>`).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  // Initialize Lucide icons
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
+}
+
+function toggleAccordion(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// Render accordion on load
+document.addEventListener('DOMContentLoaded', buildAccordion);
+
+// Color overview
+function buildColorOverview() {
+  const grid = document.getElementById('colorGrid');
+  if (!grid) return;
+
+  const colorVariables = [
+    { name: 'bg', label: 'Bakgrunn' },
+    { name: 'surface', label: 'Overflate' },
+    { name: 'text', label: 'Tekst' },
+    { name: 'text-on-accent', label: 'Tekst på aksent' },
+    { name: 'accent', label: 'Aksent' },
+    { name: 'accent2', label: 'Aksent 2' },
+    { name: 'accent3', label: 'Aksent 3' },
+    { name: 'accent4', label: 'Aksent 4' },
+    { name: 'accent5', label: 'Aksent 5' },
+    { name: 'border', label: 'Border' },
+    { name: 'shadow', label: 'Skygge' },
+    { name: 'muted', label: 'Dempet' }
+  ];
+
+  const root = document.documentElement;
+  const computed = getComputedStyle(root);
+
+  grid.innerHTML = colorVariables.map(({ name, label }) => {
+    const value = computed.getPropertyValue(`--${name}`).trim();
+    const isAccent = name.startsWith('accent');
+    let textColor = '';
+    let showText = '';
+    if (isAccent) {
+      showText = 'Aa';
+      if (name === 'accent' || name === 'accent2') {
+        textColor = 'color: #ffffff;';
+      } else {
+        textColor = 'color: #000000;';
+      }
+    }
+    return `
+      <div class="color-item">
+        <div class="color-swatch" style="background: var(--${name}); ${textColor} ${showText ? 'display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700;' : ''}">${showText}</div>
+        <span class="color-name">${label}</span>
+        <span class="color-value">${value}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+// Update color overview when theme changes
+const originalSetTheme = setTheme;
+setTheme = function(theme) {
+  originalSetTheme(theme);
+  buildColorOverview();
+};
+
+// Build color overview on load
+document.addEventListener('DOMContentLoaded', buildColorOverview);
+</script>
+</body>
+</html>

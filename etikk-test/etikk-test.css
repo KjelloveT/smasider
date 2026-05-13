@@ -1,0 +1,77 @@
+/* Etikktesten – Tilleggsstilar for etikk-test/index.html */
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* Hero-boks responsive-overrides (visuelle stiler ligg inline på elementet) */
+.hero-box {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+/* Svaralternativ-knappar */
+.answer-buttons {
+    display: flex;
+    gap: clamp(8px, 2vw, 16px);
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.answer-btn {
+    flex: 1;
+    min-width: 120px;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.answer-btn.selected {
+    box-shadow: 2px 2px 0 var(--shadow);
+    transform: translate(2px, 2px);
+    opacity: 0.8;
+    background: var(--accent2);
+    color: var(--text-on-accent);
+}
+
+/* Resultat-teljeboksar (faste bakgrunnsfargar – eksplisitt mørk tekst påkravd) */
+.color-counts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.color-box {
+    padding: 24px;
+    text-align: center;
+}
+
+.color-box.yellow { background: #FFDB58; color: #1a1a1a; }
+.color-box.red    { background: #FFA07A; color: #1a1a1a; }
+.color-box.green  { background: #BAFCA2; color: #1a1a1a; }
+
+.color-count {
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+/* Framdriftsindikator */
+.progress-bar {
+    height: 24px;
+    background: var(--surface);
+    border: 3px solid var(--border);
+    width: 100%;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+/* Responsivitet */
+@media (max-width: 48rem) {
+    .hero-box { flex-direction: column; text-align: center; }
+    .answer-buttons { flex-direction: column; }
+    .color-counts { grid-template-columns: 1fr; }
+}

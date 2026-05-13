@@ -4,225 +4,244 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BåreTevling – Slagskip med koordinatsystem</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="../js/neo-header.js" defer></script>
+    <script src="../js/neobrutalisme.js"></script>
 </head>
-<body>
-    <div class="page">
-        <header class="app-header">
-            <span class="header-icon">🚢</span>
-            <h1 class="app-title">BåreTevling</h1>
-        </header>
-        <div class="stripe"></div>
-
-        <!-- Main Menu Screen -->
-        <div id="menuScreen" class="screen">
-            <div class="panel">
-                <h2 class="panel-title">BåreTevling</h2>
-                <p class="panel-sub">Slagskip med koordinatsystem – lær deg å bruke A1, B2, osv!</p>
-
-                <!-- How to Play Accordion -->
-                <details class="accordion">
-                    <summary class="accordion-header">
-                        <span class="accordion-icon">📖</span>
-                        Hvordan spille
-                    </summary>
-                    <div class="accordion-body">
-                        <h3>To-spiller modus</h3>
-                        <ol>
-                            <li>Velg spillmodus: <strong>Lokal to-spiller</strong></li>
-                            <li>Spiller 1 plasserer sine skip ved å skrive koordinat (f.eks. A1) og velge himmelretning (N/S/Ø/V)</li>
-                            <li>Spiller 2 plasserer sine skip på samme måte</li>
-                            <li>Spillerne tar tur med å angripe ved å skrive koordinater</li>
-                            <li>Når du skriver "treff" eller "bom", markeres det på begge brett</li>
-                            <li>Først til å senke alle motstanderens skip vinner!</li>
-                        </ol>
-                        <h3>Singel-player mot AI</h3>
-                        <ol>
-                            <li>Velg spillmodus: <strong>Spele aleine</strong></li>
-                            <li>Plasser dine skip</li>
-                            <li>AI plasserer sine skip automatisk</li>
-                            <li>Angrip ved å skrive koordinater – AI svarer automatisk</li>
-                            <li>AI angriper tilbake med smart algoritme</li>
-                        </ol>
-                        <div class="tip-box">
-                            <strong>Tips:</strong> Når du skriver en bokstav (f.eks. A), blir kolonnen markert. Når du skriver A1, blir både kolonne A, rad 1 og celle A1 markert!
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+    <div class="page-wrapper bt-app">
+        <neo-header></neo-header>
+        
+        <main class="main-content">
+            <div class="container" style="width: 100%; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; padding: 0 16px;">
+            
+                <!-- Main Menu Screen -->
+                <div id="menuScreen" class="screen" style="width: 100%; flex-direction: column; align-items: center;">
+                    
+                    <!-- Game Hero Header -->
+                    <div class="box2 hero-box" style="display: flex; align-items: center; gap: 24px; padding: 24px; margin-bottom: 24px; width: 100%; max-width: 1000px; background: var(--accent); color: var(--text-on-accent);">
+                        <img src="../_resources/baretevling.png" alt="BåreTevling Logo" style="height: 120px; width: auto; object-fit: contain; filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.5));">
+                        <div style="flex: 1;">
+                            <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; line-height: 1; text-shadow: 2px 2px 0 rgba(0,0,0,0.3);">BåreTevling</h1>
+                            <p style="font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; margin: 0; opacity: 0.9;">Slagskip med koordinatsystem – lær deg å bruke A1, B2, osv!</p>
                         </div>
                     </div>
-                </details>
 
-                <div class="settings-group">
-                    <label class="settings-label">Spelmodus</label>
-                    <div class="btn-group">
-                        <button class="opt-btn selected" data-mode="local">👥 Lokal to-spiller</button>
-                        <button class="opt-btn" data-mode="ai">🤖 Spele aleine</button>
+                    <!-- How to Play Accordion (moved out of box1 for better visibility, like front page) -->
+                    <div style="width: 100%; max-width: 1000px;">
+                        <details class="accordion-box">
+                            <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 6px;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Korleis spele</summary>
+                            <div class="accordion-body">
+                                <h3>To-spelar modus</h3>
+                                <ol>
+                                    <li>Vel spelmodus: <strong>Lokal to-spelar</strong></li>
+                                    <li>Spelar 1 plasserer sine skip ved å skrive koordinat (f.eks. A1) og velje himmelretning (N/S/Ø/V)</li>
+                                    <li>Spelar 2 plasserer sine skip på same måte</li>
+                                    <li>Spelarane byter på å angripe ved å skrive koordinatar</li>
+                                    <li>Når du skriv "treff" eller "bom", markerast det på begge brett</li>
+                                    <li>Først til å søkke alle motstandaren sine skip vinn!</li>
+                                </ol>
+                                <h3>Mot datamaskinen</h3>
+                                <ol>
+                                    <li>Vel spelmodus: <strong>Mot datamaskinen</strong></li>
+                                    <li>Plasser dine skip</li>
+                                    <li>Datamaskinen plasserer sine skip automatisk</li>
+                                    <li>Angrip ved å skrive koordinatar – datamaskinen svarer automatisk</li>
+                                    <li>Datamaskinen angrip tilbake med ein smart algoritme</li>
+                                </ol>
+                                <div class="tip-box">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -3px; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>
+                                    <strong>Tips:</strong> Når du skriv ein bokstav (f.eks. A), blir kolonna markert. Når du skriv A1, blir både kolonne A, rad 1 og celle A1 markert!
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Settings Box -->
+                    <div class="box1" style="padding: 24px; width: 100%; max-width: 1000px;">
+
+                        <div class="settings-group">
+                            <label class="settings-label">Spelmodus</label>
+                            <div class="btn-group">
+                                <button class="opt-btn selected" data-mode="local"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Lokal to-spelar</button>
+                                <button class="opt-btn" data-mode="ai"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg> Mot datamaskinen</button>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <label class="settings-label">Brettstørrelse</label>
+                            <div class="btn-group">
+                                <button class="opt-btn" data-size="8">8×8</button>
+                                <button class="opt-btn" data-size="10">10×10</button>
+                                <button class="opt-btn selected" data-size="12">12×12</button>
+                                <button class="opt-btn" data-size="15">15×15</button>
+                                <button class="opt-btn" data-size="20">20×20</button>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <label class="settings-label">Skip-konfigurasjon</label>
+                            <div class="ship-config">
+                                <div class="ship-row">
+                                    <span class="ship-label">Stor (5):</span>
+                                    <input type="number" class="ship-input" data-size="5" value="1" min="0" max="5">
+                                </div>
+                                <div class="ship-row">
+                                    <span class="ship-label">Stor (4):</span>
+                                    <input type="number" class="ship-input" data-size="4" value="1" min="0" max="5">
+                                </div>
+                                <div class="ship-row">
+                                    <span class="ship-label">Middels (3):</span>
+                                    <input type="number" class="ship-input" data-size="3" value="2" min="0" max="5">
+                                </div>
+                                <div class="ship-row">
+                                    <span class="ship-label">Liten (2):</span>
+                                    <input type="number" class="ship-input" data-size="2" value="2" min="0" max="5">
+                                </div>
+                                <div class="ship-row">
+                                    <span class="ship-label">Minst (1):</span>
+                                    <input type="number" class="ship-input" data-size="1" value="1" min="0" max="5">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn" id="btnStart" style="margin-top: 12px;">Start nytt spel</button>
+                        <button class="btn" id="btnResume" style="display:none; margin-top: 12px; background: var(--surface);">Fortsett spel</button>
                     </div>
                 </div>
 
-                <div class="settings-group">
-                    <label class="settings-label">Brettstørrelse</label>
-                    <div class="btn-group">
-                        <button class="opt-btn" data-size="8">8×8</button>
-                        <button class="opt-btn" data-size="10">10×10</button>
-                        <button class="opt-btn selected" data-size="12">12×12</button>
-                        <button class="opt-btn" data-size="15">15×15</button>
-                        <button class="opt-btn" data-size="20">20×20</button>
+                <!-- Ship Placement Screen -->
+                <div id="placementScreen" class="screen hidden" style="width: 100%;">
+                    <div class="box1" style="padding: 24px;">
+                        <h2 class="heading2 text-center" id="placementTitle">Plasser skip</h2>
+                        <p class="panel-sub" id="placementSub">Spelar 1 plasserer sine skip</p>
+
+                        <div class="board-container" id="placementBoardContainer">
+                            <div class="board" id="placementBoard"></div>
+                        </div>
+
+                        <div class="placement-controls">
+                            <div class="input-group">
+                                <label class="settings-label">Startkoordinat</label>
+                                <input type="text" class="coord-input" id="placementCoord" placeholder="A1" maxlength="4" autocomplete="off">
+                                <div class="coord-feedback" id="placementFeedback"></div>
+                            </div>
+
+                            <div class="direction-group">
+                                <label class="settings-label">Himmelretning</label>
+                                <div class="btn-group">
+                                    <button class="dir-btn" data-dir="N"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg> Nord</button>
+                                    <button class="dir-btn" data-dir="S"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg> Sør</button>
+                                    <button class="dir-btn" data-dir="Ø"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Aust</button>
+                                    <button class="dir-btn" data-dir="V"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Vest</button>
+                                </div>
+                            </div>
+
+                            <div class="current-ship">
+                                <label class="settings-label">Neste skip</label>
+                                <div class="ship-preview" id="shipPreview"></div>
+                            </div>
+
+                            <button class="btn" id="btnPlaceShip" style="margin-top: 12px; margin-bottom: 8px;">Plasser skip</button>
+                            <button class="btn" id="btnStartGame" style="background: var(--bt-hit); color: #1a1a1a;" disabled>Start spel</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="settings-group">
-                    <label class="settings-label">Skip-konfigurasjon</label>
-                    <div class="ship-config">
-                        <div class="ship-row">
-                            <span class="ship-label">Stor (5):</span>
-                            <input type="number" class="ship-input" data-size="5" value="1" min="0" max="5">
+                <!-- Game Screen -->
+                <div id="gameScreen" class="screen hidden" style="width: 100%; flex-direction: column;">
+                    <div class="game-layout">
+                        <!-- Player Board -->
+                        <div class="board-section">
+                            <h3 class="board-title">Ditt brett</h3>
+                            <div class="board-container">
+                                <div class="board" id="playerBoard"></div>
+                            </div>
                         </div>
-                        <div class="ship-row">
-                            <span class="ship-label">Stor (4):</span>
-                            <input type="number" class="ship-input" data-size="4" value="1" min="0" max="5">
+
+                        <!-- Attack Board -->
+                        <div class="board-section">
+                            <h3 class="board-title">Motstandar sitt brett</h3>
+                            <div class="board-container">
+                                <div class="board" id="attackBoard"></div>
+                            </div>
                         </div>
-                        <div class="ship-row">
-                            <span class="ship-label">Middels (3):</span>
-                            <input type="number" class="ship-input" data-size="3" value="2" min="0" max="5">
+                    </div>
+
+                    <div class="attack-controls">
+                        <div class="board-toggle" id="boardToggle">
+                            <button class="toggle-btn selected" id="btnTogglePlayer" data-target="player">Ditt brett</button>
+                            <button class="toggle-btn" id="btnToggleAttack" data-target="attack">Motstandar sitt brett</button>
                         </div>
-                        <div class="ship-row">
-                            <span class="ship-label">Liten (2):</span>
-                            <input type="number" class="ship-input" data-size="2" value="2" min="0" max="5">
+
+                        <div class="input-group">
+                            <label class="settings-label" id="attackLabel">Koordinat på ditt brett</label>
+                            <input type="text" class="coord-input" id="attackCoord" placeholder="A1" maxlength="4" autocomplete="off">
+                            <div class="coord-feedback" id="attackFeedback"></div>
                         </div>
-                        <div class="ship-row">
-                            <span class="ship-label">Minst (1):</span>
-                            <input type="number" class="ship-input" data-size="1" value="1" min="0" max="5">
+
+                        <div class="result-buttons" id="hitMissButtons">
+                            <button class="result-btn hit-btn" id="btnHit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Treff</button>
+                            <button class="result-btn miss-btn" id="btnMiss"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Bom</button>
+                        </div>
+
+                        <div class="result-buttons hidden" id="shootButton">
+                            <button class="result-btn" id="btnShoot" style="background: var(--accent); color: var(--text-on-accent);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg> Skyt</button>
+                        </div>
+
+                        <div class="game-info">
+                            <div class="info-box">
+                                <span class="info-label">Dine skip:</span>
+                                <span class="info-value" id="playerShipsLeft">7</span>
+                            </div>
+                            <div class="info-box">
+                                <span class="info-label">Motstandar skip:</span>
+                                <span class="info-value" id="enemyShipsLeft">7</span>
+                            </div>
+                        </div>
+
+                        <button class="btn" id="btnBackToMenu" style="margin-top: 16px; background: var(--surface);">Tilbake til meny</button>
+                    </div>
+                </div>
+
+                <!-- Game Over Screen -->
+                <div id="gameOverScreen" class="screen hidden" style="width: 100%;">
+                    <div class="box1 text-center" style="padding: 32px; max-width: 600px; width: 100%;">
+                        <h2 class="heading2" id="gameOverTitle">Spelet er ferdig!</h2>
+                        <p class="panel-sub" id="gameOverSub" style="font-size: 1.2rem; font-weight: 700;">Du vann!</p>
+
+                        <div class="box-group" style="display: flex; gap: 12px; margin: 24px 0; justify-content: center;">
+                            <div class="box2" style="flex: 1; padding: 16px; background: var(--bt-hit); color: #1a1a1a;">
+                                <div class="stat-label">Treff</div>
+                                <div class="stat-value" id="statHits">0</div>
+                            </div>
+                            <div class="box2" style="flex: 1; padding: 16px; background: var(--bt-miss); color: #1a1a1a;">
+                                <div class="stat-label">Bom</div>
+                                <div class="stat-value" id="statMisses">0</div>
+                            </div>
+                            <div class="box2" style="flex: 1; padding: 16px; background: var(--bt-info); color: #1a1a1a;">
+                                <div class="stat-label">Nøyaktigheit</div>
+                                <div class="stat-value" id="statAccuracy">0%</div>
+                            </div>
+                        </div>
+
+                        <div class="btn-group" style="flex-direction: column;">
+                            <button class="btn" id="btnPlayAgain">Spel igjen</button>
+                            <button class="btn" id="btnMenu" style="background: var(--surface);">Tilbake til meny</button>
                         </div>
                     </div>
                 </div>
 
-                <button class="btn-primary" id="btnStart">Start nytt spel</button>
-                <button class="btn-outline" id="btnResume" style="display:none;">Fortsett spel</button>
             </div>
-        </div>
-
-        <!-- Ship Placement Screen -->
-        <div id="placementScreen" class="screen hidden">
-            <div class="panel">
-                <h2 class="panel-title" id="placementTitle">Plasser skip</h2>
-                <p class="panel-sub" id="placementSub">Spiller 1 plasserer sine skip</p>
-
-                <div class="board-container" id="placementBoardContainer">
-                    <div class="board" id="placementBoard"></div>
-                </div>
-
-                <div class="placement-controls">
-                    <div class="input-group">
-                        <label class="settings-label">Startkoordinat</label>
-                        <input type="text" class="coord-input" id="placementCoord" placeholder="A1" maxlength="4">
-                        <div class="coord-feedback" id="placementFeedback"></div>
-                    </div>
-
-                    <div class="direction-group">
-                        <label class="settings-label">Himmelretning</label>
-                        <div class="btn-group">
-                            <button class="dir-btn" data-dir="N">⬆️ Nord</button>
-                            <button class="dir-btn" data-dir="S">⬇️ Sør</button>
-                            <button class="dir-btn" data-dir="Ø">➡️ Aust</button>
-                            <button class="dir-btn" data-dir="V">⬅️ Vest</button>
-                        </div>
-                    </div>
-
-                    <div class="current-ship">
-                        <label class="settings-label">Neste skip</label>
-                        <div class="ship-preview" id="shipPreview"></div>
-                    </div>
-
-                    <button class="btn-primary" id="btnPlaceShip">Plasser skip</button>
-                    <button class="btn-primary" id="btnStartGame" disabled>Start spel</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Game Screen -->
-        <div id="gameScreen" class="screen hidden">
-            <div class="game-layout">
-                <!-- Player Board -->
-                <div class="board-section">
-                    <h3 class="board-title">Ditt brett</h3>
-                    <div class="board-container">
-                        <div class="board" id="playerBoard"></div>
-                    </div>
-                </div>
-
-                <!-- Attack Board -->
-                <div class="board-section">
-                    <h3 class="board-title">Motstandar sitt brett</h3>
-                    <div class="board-container">
-                        <div class="board" id="attackBoard"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="attack-controls">
-                <div class="board-toggle" id="boardToggle">
-                    <button class="toggle-btn selected" id="btnTogglePlayer" data-target="player">Ditt brett</button>
-                    <button class="toggle-btn" id="btnToggleAttack" data-target="attack">Motstandar sitt brett</button>
-                </div>
-
-                <div class="input-group">
-                    <label class="settings-label" id="attackLabel">Koordinat på ditt brett</label>
-                    <input type="text" class="coord-input" id="attackCoord" placeholder="A1" maxlength="4">
-                    <div class="coord-feedback" id="attackFeedback"></div>
-                </div>
-
-                <div class="result-buttons" id="hitMissButtons">
-                    <button class="result-btn hit-btn" id="btnHit">🎯 Treff</button>
-                    <button class="result-btn miss-btn" id="btnMiss">💥 Bom</button>
-                </div>
-
-                <div class="result-buttons hidden" id="shootButton">
-                    <button class="result-btn" id="btnShoot">🚀 Skyt</button>
-                </div>
-
-                <div class="game-info">
-                    <div class="info-box">
-                        <span class="info-label">Dine skip:</span>
-                        <span class="info-value" id="playerShipsLeft">7</span>
-                    </div>
-                    <div class="info-box">
-                        <span class="info-label">Motstanderens skip:</span>
-                        <span class="info-value" id="enemyShipsLeft">7</span>
-                    </div>
-                </div>
-
-                <button class="btn-outline" id="btnBackToMenu">Tilbake til meny</button>
-            </div>
-        </div>
-
-        <!-- Game Over Screen -->
-        <div id="gameOverScreen" class="screen hidden">
-            <div class="panel">
-                <h2 class="panel-title" id="gameOverTitle">Spelet er ferdig!</h2>
-                <p class="panel-sub" id="gameOverSub">Du vann!</p>
-
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-label">Treff</div>
-                        <div class="stat-value" id="statHits">0</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Bom</div>
-                        <div class="stat-value" id="statMisses">0</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Nøyaktighet</div>
-                        <div class="stat-value" id="statAccuracy">0%</div>
-                    </div>
-                </div>
-
-                <div class="btn-group">
-                    <button class="btn-primary" id="btnPlayAgain">Spel igjen</button>
-                    <button class="btn-outline" id="btnMenu">Tilbake til meny</button>
-                </div>
-            </div>
-        </div>
+        </main>
+        
+        <footer style="text-align: center; padding: 24px; font-size: 0.85rem; font-weight: 600; color: var(--text);">
+            <p><svg width="14" height="14" style="vertical-align: -2px; margin-right: 4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Personvernvenleg — Inga sporing, kun localStorage | <a href="../index.html" style="color: var(--text);">← Tilbake til oversikta</a></p>
+        </footer>
     </div>
 
+    <script src="../js/vyrdepil-storage.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/board.js"></script>
     <script src="js/ships.js"></script>

@@ -1,0 +1,71 @@
+.btn-base {
+  display: inline-block; padding: 10px 24px; font-weight: 800; font-size: 14px;
+  cursor: pointer; transition: all 0.12s; text-decoration: none; font-family: inherit;
+}
+.btn-1 { background: var(--accent); color: #fff; border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); }
+.btn-1:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--shadow); }
+.btn-1:active { transform: translate(4px,4px); box-shadow: none; }
+
+.btn-2 { background: var(--surface); color: var(--text); border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--accent); }
+.btn-2:hover { box-shadow: 6px 6px 0 var(--accent); transform: translate(-2px,-2px); }
+
+.btn-3 { background: var(--accent2); color: #fff; border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); border-radius: 50px; }
+.btn-3:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--shadow); }
+
+.btn-4 { background: var(--accent3); color: var(--text); border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); border-radius: 8px; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; }
+.btn-4:hover { transform: translateY(-3px); box-shadow: 4px 7px 0 var(--shadow); }
+
+.btn-5 { background: var(--surface); color: var(--text); border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); position: relative; overflow: hidden; }
+.btn-5::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--accent); transition: left 0.3s; z-index: 0; }
+.btn-5:hover::after { left: 0; }
+.btn-5 span { position: relative; z-index: 1; }
+.btn-5:hover span { color: #fff; }
+
+.btn-6 { background: var(--accent); color: #fff; border: 3px solid var(--border); box-shadow: 2px 2px 0 var(--shadow), 4px 4px 0 var(--accent2), 6px 6px 0 var(--shadow); }
+.btn-6:hover { transform: translate(3px,3px); box-shadow: 1px 1px 0 var(--shadow); }
+
+.btn-7 { background: var(--surface); color: var(--text); border: 3px dashed var(--border); box-shadow: 4px 4px 0 var(--shadow); }
+.btn-7:hover { background: var(--accent3); }
+
+.btn-8 { background: var(--accent5); color: #fff; border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); padding: 10px 32px; }
+.btn-8:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--shadow); }
+
+.btn-9 { background: var(--accent); color: #fff; border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); }
+.btn-9::before { content: '→'; margin-right: 8px; display: inline-block; transition: transform 0.2s; }
+.btn-9:hover::before { transform: translateX(4px); }
+
+.btn-10 { background: transparent; color: var(--text); border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); }
+.btn-10:hover { background: var(--accent); color: #fff; box-shadow: 6px 6px 0 var(--shadow); }
+
+.btn-11 { background: var(--accent); color: #fff; border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); border-radius: 0 12px 0 12px; }
+.btn-11:hover { border-radius: 12px 0 12px 0; }
+
+.btn-12 { background: var(--surface); color: var(--text); border: 4px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); font-size: 16px; border-left: 8px solid var(--accent); }
+.btn-12:hover { border-left-width: 16px; }
+
+.btn-13 { background: var(--accent2); color: #fff; border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); transform: rotate(-2deg); }
+.btn-13:hover { transform: rotate(0deg) scale(1.05); }
+
+.btn-14 { background: var(--accent); color: #fff; border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); position: relative; padding-right: 48px; }
+.btn-14::after { content: '⚡'; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; }
+
+.btn-15 { background: var(--surface); color: var(--text); border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); outline: 2px solid var(--accent); outline-offset: 4px; }
+.btn-15:hover { outline-offset: 2px; transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--shadow); }
+
+.btn-16 { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); }
+.btn-16:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--shadow); }
+
+.btn-17 { background: var(--surface); color: var(--text); border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); position: relative; }
+.btn-17::before { content: ''; position: absolute; inset: 4px; border: 1px dashed var(--accent); pointer-events: none; }
+
+.btn-18 { background: var(--accent3); color: var(--text); border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); font-size: 18px; padding: 14px 32px; }
+.btn-18:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--shadow); }
+
+.btn-19 { background: var(--accent); color: #fff; border: 0; padding: 13px 27px; box-shadow: 5px 5px 0 var(--border); }
+.btn-19:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--border); }
+
+.btn-20 { background: var(--surface); color: var(--text); border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); position: relative; overflow: hidden; }
+.btn-20::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(var(--accent), var(--accent2), var(--accent3), var(--accent)); animation: spin20 3s linear infinite; opacity: 0; transition: opacity 0.3s; }
+.btn-20:hover::before { opacity: 0.2; }
+.btn-20 span { position: relative; z-index: 1; }
+@keyframes spin20 { to { transform: rotate(360deg); } }

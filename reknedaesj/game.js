@@ -1,10 +1,13 @@
+// Migrate old localStorage keys to new structure
+VyrdepilStorage.migrateAll();
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 function resizeCanvas() {
-    const container = document.getElementById('gameContainer');
-    canvas.width = container.clientWidth;
-    canvas.height = container.clientHeight;
+    // Keep logical resolution constant to preserve physics
+    canvas.width = 1200;
+    canvas.height = 600;
 }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
@@ -16,7 +19,6 @@ let distance = 0;
 let correctAnswers = 0;
 let wrongAnswers = 0;
 let statsMenuFocus = 0;
-const RD_HS_KEY = 'rdHS';
 let basePointsPerFrame = 0.1;
 let pointMultiplier = 1;
 let multiplierEndTime = 0;
@@ -200,8 +202,29 @@ document.addEventListener('keydown', (e) => {
 });
 
 document.addEventListener('keyup', (e) => {
+    if (e.code === 'Space' || e.code === 'ArrowUp') {
+        keys.up = false;
+        player.gliding = false;
+    }
     keys[e.code] = false;
 });
+
+// Mobile/Touch controls on canvas
+canvas.addEventListener('touchstart', (e) => {
+    if (gameRunning && !gamePaused) {
+        e.preventDefault();
+        keys.Space = true;
+        jump();
+    }
+}, { passive: false });
+
+canvas.addEventListener('touchend', (e) => {
+    if (gameRunning && !gamePaused) {
+        e.preventDefault();
+        keys.Space = false;
+        player.gliding = false;
+    }
+}, { passive: false });
 
 function jump() {
     if (player.jumpsLeft > 0) {
@@ -445,10 +468,10 @@ function restartGame() {
 
 function gameOver() {
     gameRunning = false;
-    const prevHS = +localStorage.getItem(RD_HS_KEY) || 0;
+    const prevHS = VyrdepilStorage.getHighScore('reknedaesj');
     const finalScore = Math.floor(score);
     const isNew = finalScore > prevHS;
-    if (isNew) localStorage.setItem(RD_HS_KEY, finalScore);
+    VyrdepilStorage.saveHighScore('reknedaesj', finalScore);
 
     document.getElementById('statScore').textContent = finalScore;
     document.getElementById('statDistance').textContent = Math.floor(distance);

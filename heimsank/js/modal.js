@@ -24,25 +24,25 @@ function openCardModal(index, direction = 0) {
 
     cardContent.innerHTML = `
       <div class="modal-card-header">
-        <div class="modal-card-name">${esc(card.name)}${entry.foil ? ' ✨' : ''}</div>
+        <div class="modal-card-name">${esc(card.name)}${entry.foil ? ' ' + ICON('sparkles', 18) : ''}</div>
         <div class="card-header-meta">
           <span class="modal-rarity-badge">${RL[card.rarity]}</span>
-          ${entry.difficulty ? `<span class="diff-badge">${entry.difficulty} ${entry.operations ? entry.operations.join(' ') : ''}${entry.foil ? ' ✨' : ''}</span>` : ''}
+          ${entry.difficulty ? `<span class="diff-badge">${entry.difficulty} ${entry.operations ? entry.operations.join(' ') : ''}${entry.foil ? ' ' + ICON('sparkles', 12) : ''}</span>` : ''}
         </div>
       </div>
       <div class="modal-card-img-wrap">
         <img class="modal-card-img" src="${card.img}" alt="${card.name}">
       </div>
       <div class="modal-card-footer">
-        <div class="modal-card-stat">${card.stat ? `${card.statLabel} ${card.stat}` : card.statLabel || ''}</div>
-        <div class="modal-card-category">${card.catIcon} ${card.catLabel}</div>
+        <div class="modal-card-stat" style="display:inline-flex;align-items:center;gap:6px">${card.statLabel ? CAT_ICON(card.statLabel, 16) : ''}<span>${card.stat || ''}</span></div>
+        <div class="modal-card-category" style="display:inline-flex;align-items:center;gap:6px">${CAT_ICON(card.catIcon, 14)}<span>${card.catLabel || ''}</span></div>
         ${card.article ? `<a href="${card.article}" target="_blank" class="les-om-link" style="font-size:0.9rem;margin-top:8px;display:inline-block">Les om →</a>` : ''}
       </div>
     `;
 
     const img = cardContent.querySelector('.modal-card-img');
     img.onerror = function () {
-      this.parentNode.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:4rem;opacity:.2">${card.catIcon || '🔬'}</div>`;
+      this.parentNode.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;opacity:.25">${CAT_ICON(card.catIcon || 'microscope', 64)}</div>`;
     };
 
     modalCard.innerHTML = '';

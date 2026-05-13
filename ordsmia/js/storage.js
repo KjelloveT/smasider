@@ -1,35 +1,22 @@
 // Countdown - LocalStorage-håndtering
 // Lagrer toppscore og historikk lokalt
 
+// Migrate old localStorage keys to new structure
+VyrdepilStorage.migrateAll();
+
 const Storage = (function() {
-    const KEYS = {
-        highScore: 'countdown_hs',
-        history: 'countdown_history'
-    };
-    
-    // Hent toppscore
     function getHighScore() {
-        const val = localStorage.getItem(KEYS.highScore);
-        return val ? parseInt(val, 10) : 0;
+        return VyrdepilStorage.getHighScore('ordsmia');
     }
     
-    // Lagre toppscore hvis nytt er høyere
     function saveHighScore(score) {
-        const current = getHighScore();
-        if (score > current) {
-            localStorage.setItem(KEYS.highScore, score.toString());
-            return true;
-        }
-        return false;
+        return VyrdepilStorage.saveHighScore('ordsmia', score);
     }
     
-    // Hent historikk (topp 20 lengste ord)
     function getHistory() {
-        const val = localStorage.getItem(KEYS.history);
-        return val ? JSON.parse(val) : [];
+        return VyrdepilStorage.getHistory('ordsmia');
     }
     
-    // Lagre ord i historikk
     function saveToHistory(word, letters, score) {
         const history = getHistory();
         const entry = {
@@ -48,13 +35,11 @@ const Storage = (function() {
         history.sort((a, b) => b.word.length - a.word.length);
         if (history.length > 20) history.length = 20;
         
-        localStorage.setItem(KEYS.history, JSON.stringify(history));
+        VyrdepilStorage.setHistory('ordsmia', history);
     }
     
-    // Slett all data
     function clearAll() {
-        localStorage.removeItem(KEYS.highScore);
-        localStorage.removeItem(KEYS.history);
+        VyrdepilStorage.clearGame('ordsmia');
     }
     
     return {

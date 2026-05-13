@@ -1,16 +1,10 @@
-/* Countdown - Norsk ordspill */
-/* Neobrutalisme design */
+/* Ordsmia - Norsk ordspill */
+/* Neobrutalisme design - bruker globale Vyrdepil-temavariablar */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --bg-color: #FDFD96;
-    --card-bg: #fff;
-    --border: #000;
+/* Lokale aliaser for spesifikke aksent-fargar (uavhengige av temaet) */
+.container {
+    --bg-color: var(--bg);
+    --card-bg: var(--surface);
     --accent-green: #BAFCA2;
     --accent-blue: #87CEEB;
     --accent-pink: #FFB2EF;
@@ -18,31 +12,21 @@
     --accent-orange: #FFA07A;
     --accent-purple: #C4A1FF;
     --accent-teal: #A7DBD8;
-    --shadow: 5px 5px 0 #000;
-    --shadow-hover: 8px 8px 0 #000;
-}
-
-body {
-    font-family: 'Arial Black', 'Arial Bold', Arial, system-ui, sans-serif;
-    background-color: var(--bg-color);
-    min-height: 100vh;
-    padding: 24px;
-    color: var(--border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    --box-shadow-base: 5px 5px 0 var(--shadow);
+    --box-shadow-hover: 8px 8px 0 var(--shadow);
 }
 
 .container {
     max-width: 1200px;
     width: 100%;
+    margin: 0 auto;
 }
 
 /* Header */
 header {
     background: var(--card-bg);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--box-shadow-base);
     padding: 24px 32px;
     margin-bottom: 32px;
     text-align: center;
@@ -67,7 +51,7 @@ h1 {
     display: none;
     background: var(--card-bg);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--box-shadow-base);
     padding: 32px;
     margin-bottom: 24px;
 }
@@ -80,9 +64,9 @@ h1 {
 .btn {
     display: inline-block;
     background: var(--card-bg);
-    color: var(--border);
+    color: var(--text);
     border: 3px solid var(--border);
-    box-shadow: 4px 4px 0 var(--border);
+    box-shadow: 4px 4px 0 var(--shadow);
     padding: 12px 24px;
     font-size: 1rem;
     font-weight: 900;
@@ -93,9 +77,25 @@ h1 {
     font-family: inherit;
 }
 
+/* Knappar med faste lyse bakgrunnsfargar tvingar mørk tekst (uavhengig av tema) */
+.btn.selected,
+.btn[style*="--accent-green"],
+.btn[style*="--accent-yellow"],
+.btn[style*="--accent-orange"],
+.btn[style*="--accent-pink"],
+.btn[style*="#FFB2EF"],
+.btn[style*="#BAFCA2"],
+.btn[style*="#FFDB58"],
+.btn[style*="#FFA07A"],
+.letter-btn.vowel,
+.letter-btn.consonant,
+.letter-btn.undo-btn {
+    color: #1a1a1a;
+}
+
 .btn:hover {
     transform: translate(-2px, -2px);
-    box-shadow: var(--shadow-hover);
+    box-shadow: var(--box-shadow-hover);
 }
 
 .btn:active {
@@ -142,7 +142,7 @@ h1 {
     height: 70px;
     background: var(--accent-yellow);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--box-shadow-base);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -189,7 +189,7 @@ h1 {
     text-transform: uppercase;
     padding: 12px 20px;
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--box-shadow-base);
     width: 300px;
     text-align: center;
 }
@@ -212,7 +212,7 @@ h1 {
     padding: 8px 24px;
     background: var(--accent-teal);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--box-shadow-base);
 }
 
 #timer.warning {
@@ -285,7 +285,7 @@ h1 {
 .stat-box {
     background: var(--card-bg);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--box-shadow-base);
     padding: 16px;
     text-align: center;
 }
@@ -360,7 +360,7 @@ h1 {
     overflow: auto;
     background: var(--card-bg);
     border: 3px solid var(--border);
-    box-shadow: var(--shadow);
+    box-shadow: var(--box-shadow-base);
     padding: 20px;
 }
 

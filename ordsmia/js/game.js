@@ -53,6 +53,9 @@ const Game = (function() {
     async function loadWordList() {
         try {
             const response = await fetch('norsk_ordliste.json');
+            if (!response.ok) {
+                throw new Error('HTTP ' + response.status + ' ' + response.statusText);
+            }
             const data = await response.json();
             wordList = new Set(data.ord.map(w => w.toLowerCase()));
             // Sorter etter lengde (descending) for raskt oppslag av lengste ord
@@ -60,6 +63,7 @@ const Game = (function() {
             return true;
         } catch (err) {
             console.error('Kunne ikke laste ordliste:', err);
+            window._ordsmiaLoadError = err.message || String(err);
             return false;
         }
     }

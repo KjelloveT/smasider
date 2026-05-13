@@ -3,34 +3,30 @@
    ══════════════════════════════════════ */
 
 const Storage = (() => {
-    const KEY = 'klassekart_oppsett';
+    const GAME = 'klassekart';
+    const LIST_KEY = 'oppsett';
 
     function getAll() {
-        try {
-            return JSON.parse(localStorage.getItem(KEY)) || [];
-        } catch { return []; }
+        return VyrdepilStorage.getList(GAME, LIST_KEY);
     }
 
     function saveSetup(name, data) {
-        const all = getAll();
         const entry = {
             id: crypto.randomUUID(),
             name,
             date: new Date().toISOString(),
             data
         };
-        all.push(entry);
-        localStorage.setItem(KEY, JSON.stringify(all));
+        VyrdepilStorage.saveListItem(GAME, LIST_KEY, entry);
         return entry;
     }
 
     function deleteSetup(id) {
-        const all = getAll().filter(s => s.id !== id);
-        localStorage.setItem(KEY, JSON.stringify(all));
+        VyrdepilStorage.deleteListItem(GAME, LIST_KEY, id);
     }
 
     function loadSetup(id) {
-        return getAll().find(s => s.id === id) || null;
+        return VyrdepilStorage.getList(GAME, LIST_KEY).find(s => s.id === id) || null;
     }
 
     /* ── History (Undo/Redo) ── */
