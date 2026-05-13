@@ -435,13 +435,13 @@
         <div class="upload-zone" id="uploadZone">
             <div class="upload-icon">📁</div>
             <div class="upload-text">Dra og slipp bilder her</div>
-            <div class="upload-subtext">eller klikk for å velge filer</div>
+            <div class="upload-subtext">eller klikk for å vel filer</div>
             <input type="file" id="fileInput" multiple accept="image/*">
         </div>
 
         <!-- CONTROLS -->
         <div class="controls-section" id="controlsSection">
-            <div class="section-title">⚙️ Innstillinger</div>
+            <div class="section-title">⚙️ Innstillingar</div>
             <div class="controls-grid">
                 <!-- RESIZE -->
                 <div class="control-group">
@@ -459,11 +459,11 @@
                         <button class="btn" onclick="setResizePercent(75)">75%</button>
                         <button class="btn" onclick="setResizePercent(100)">100%</button>
                     </div>
-                    <input type="number" id="resizeWidth" placeholder="Bredde (px)">
-                    <input type="number" id="resizeHeight" placeholder="Høyde (px)">
+                    <input type="number" id="resizeWidth" placeholder="Breidde (px)">
+                    <input type="number" id="resizeHeight" placeholder="Høgde (px)">
                     <div class="checkbox-group">
                         <input type="checkbox" id="lockAspect" checked>
-                        <label for="lockAspect">Lås forhold</label>
+                        <label for="lockAspect">Lås tilhøve</label>
                     </div>
                 </div>
 
@@ -515,7 +515,7 @@
                         <button class="position-btn" data-pos="bottom-center">↓</button>
                         <button class="position-btn" data-pos="bottom-right">↘</button>
                     </div>
-                    <label style="font-family: Arial, sans-serif; font-size: 0.85rem; font-weight: 600;">Størrelse: <span id="fontSizeValue">24</span>px</label>
+                    <label style="font-family: Arial, sans-serif; font-size: 0.85rem; font-weight: 600;">Storleik: <span id="fontSizeValue">24</span>px</label>
                     <input type="range" id="fontSize" min="12" max="72" value="24" oninput="updateFontSize()">
                     <label style="font-family: Arial, sans-serif; font-size: 0.85rem; font-weight: 600;">Opacity: <span id="opacityValue">80</span>%</label>
                     <input type="range" id="opacity" min="10" max="100" value="80" oninput="updateOpacity()">
@@ -933,7 +933,7 @@
 
         function startCrop() {
             if (!selectedImage) {
-                alert('Velg et bilde først');
+                alert('Vel eit bilete først');
                 return;
             }
             

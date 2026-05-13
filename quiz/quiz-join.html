@@ -372,18 +372,18 @@
                 </div>
                 
                 <div class="question-text" id="question-text">
-                    Spørsmål vil vises her
+                    Spørsmål vil vert vist her
                 </div>
                 
                 <div class="answer-options" id="answer-options">
-                    <!-- Svaralternativer fylles dynamisk -->
+                    <!-- Svaralternativ fyllast dynamisk -->
                 </div>
             </div>
 
             <div class="results-display" id="results-display" style="display: none;">
-                <div class="results-title">🏆 Resultater</div>
+                <div class="results-title">🏆 Resultat</div>
                 <div id="results-list">
-                    <!-- Resultater fylles dynamisk -->
+                    <!-- Resultat fyllast dynamisk -->
                 </div>
             </div>
         </section>
@@ -541,7 +541,7 @@
                 this.elements.questionNumber.textContent = `Spørsmål ${data.questionNumber}/${data.totalQuestions}`;
                 this.elements.questionText.textContent = data.question;
                 
-                // Vis svaralternativer
+                // Vis svaralternativ
                 this.elements.answerOptions.innerHTML = '';
                 data.options.forEach((option, index) => {
                     const button = document.createElement('button');
@@ -653,7 +653,7 @@
             handleQuizEnd(data) {
                 clearInterval(this.timerInterval);
                 
-                // Vis final resultater
+                // Vis final resultat
                 this.elements.waitingMessage.style.display = 'none';
                 this.elements.questionDisplay.style.display = 'none';
                 this.elements.resultsDisplay.style.display = 'block';

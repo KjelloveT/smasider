@@ -15,7 +15,7 @@
   },
   {
     "id": "byer",
-    "label": "Skandinaviske byer",
+    "label": "Skandinaviske byar",
     "icon": "building",
     "csv": "byer_skandinavia.csv",
     "rarity": "rarity-byer.json",

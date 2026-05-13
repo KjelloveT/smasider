@@ -131,7 +131,7 @@ const Game = (function() {
         // Sørg for at vi har nok vokaler
         let vowelsInLetters = currentLetters.filter(l => VOWELS.includes(l)).length;
         
-        // Hvis for få vokaler, bytt ut noen konsonanter
+        // Hvis for få vokaler, bytt ut nokre konsonanter
         let attempts = 0;
         while (vowelsInLetters < 3 && attempts < 50) {
             const idx = Math.floor(Math.random() * 9);

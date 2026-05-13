@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="nn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fotocolours - Bildereditor</title>
+    <title>Fotocolours - Biletehandsamar</title>
     <style>
         * {
             margin: 0;
@@ -360,7 +360,7 @@
     <div class="container">
         <header>
             <h1>🎨 Fotocolours</h1>
-            <p class="subtitle">Rediger bilder med fargetonetilpasning - Alt kjører lokalt i nettleseren</p>
+            <p class="subtitle">Rediger bilete med fargetilpassing - Alt køyrer lokalt i nettlesaren</p>
             <div class="header-stripe"></div>
         </header>
 
@@ -369,14 +369,14 @@
                 <div class="file-input-wrapper">
                     <input type="file" id="imageInput" accept="image/*">
                     <button class="upload-btn" onclick="document.getElementById('imageInput').click()">
-                        📁 Last opp bilde
+                        📁 Last opp bilete
                     </button>
                 </div>
             </div>
 
             <div class="controls" id="controls">
                 <div class="control-group">
-                    <label>Antall farger (2-9):</label>
+                    <label>Tal på fargar (2-9):</label>
                     <div class="slider-container">
                         <input type="range" id="colorLevels" min="2" max="9" value="5" step="1">
                         <span class="value-display" id="colorLevelsValue">5</span>
@@ -403,9 +403,9 @@
                     <label>Verktøy:</label>
                     <div class="button-group">
                         <button class="btn" id="cropBtn">✂️ Beskjær</button>
-                        <button class="btn" id="rotateLeftBtn">↶ Roter venstre</button>
-                        <button class="btn" id="rotateRightBtn">↷ Roter høyre</button>
-                        <button class="btn" id="resetBtn">🔄 Tilbakestill</button>
+                        <button class="btn" id="rotateLeftBtn">↶ Roter mot venstre</button>
+                        <button class="btn" id="rotateRightBtn">↷ Roter mot høgre</button>
+                        <button class="btn" id="resetBtn">🔄 Nullstill</button>
                     </div>
                 </div>
             </div>
@@ -417,7 +417,7 @@
             </div>
 
             <div class="action-buttons" id="actionButtons" style="display: none;">
-                <button class="action-btn success-btn" id="downloadBtn">💾 Last ned bilde</button>
+                <button class="action-btn success-btn" id="downloadBtn">💾 Last ned bilete</button>
             </div>
         </div>
     </div>

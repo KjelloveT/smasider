@@ -47,7 +47,7 @@ async function initShowcase() {
           if (statT === 'year') stat = r[statF] ? r[statF].slice(0, 4) : '?';
           else if (statT === 'number') {
             const n = parseInt(r[statF], 10);
-            stat = isNaN(n) ? '?' : n.toLocaleString('nb-NO');
+            stat = isNaN(n) ? '?' : n.toLocaleString('nn-NO');
           } else stat = r[statF] || '?';
           return { id, name: r[nameF] || id, stat, statLabel: statLbl, img: r[imgF].replace(/^http:/, 'https:'), rarity: rar[id] || 'vanleg' };
         });

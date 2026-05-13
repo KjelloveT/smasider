@@ -82,7 +82,7 @@ const Game = {
 
     startNewGame() {
         if (Storage.hasSavedGame()) {
-            if (!confirm('Vil du slette forrige spel og starte eit nytt?')) {
+            if (!confirm('Vil du slette førre spel og starte eit nytt?')) {
                 return;
             }
         }
@@ -155,8 +155,8 @@ const Game = {
             title.textContent = 'Plasser skip';
             sub.textContent = 'Plasser dine skip før spelet startar';
         } else {
-            title.textContent = `Plasser skip - Spiller ${this.state.currentPlayer}`;
-            sub.textContent = `Spiller ${this.state.currentPlayer} plasserer sine skip`;
+            title.textContent = `Plasser skip - Spelar ${this.state.currentPlayer}`;
+            sub.textContent = `Spelar ${this.state.currentPlayer} plasserer sine skip`;
         }
 
         // Render board

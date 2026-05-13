@@ -236,7 +236,7 @@
             </div>
             
             <div id="time-section">
-                <h3>Vel tidsbegrensing</h3>
+                <h3>Vel tidsavgrensing</h3>
                 <div class="time-selector">
                     <button class="btn btn-time" data-time="30">30s</button>
                     <button class="btn btn-time" data-time="45">45s</button>
@@ -259,7 +259,7 @@
             
             <h3 style="margin-top: 32px;">Dine beste ord</h3>
             <div id="history-list" class="history-list">
-                <p style="text-align:center;color:#666">Ingen ord lagra ennå</p>
+                <p style="text-align:center;color:#666">Ingen ord lagra enno</p>
             </div>
         </div>
 
@@ -317,7 +317,7 @@
         <!-- Klasserom-skjerm -->
         <div id="screen-classroom" class="screen">
             <h2>Klasseromsmodus</h2>
-            <p style="text-align: left; margin-bottom: 16px; font-size: 0.92rem;">Vis bokstavane på tavla. Elevene skriv ord på papir.</p>
+            <p style="text-align: left; margin-bottom: 16px; font-size: 0.92rem;">Vis bokstavane på tavla. Elevane skriv ord på papir.</p>
 
             <div class="timer-container">
                 <div id="timer-classroom">60</div>
@@ -363,7 +363,7 @@
                 </div>
                 
                 <div id="classroom-results" style="margin-top: 24px;">
-                    <!-- Resultater vises her -->
+                    <!-- Resultat vert vist her -->
                 </div>
             </div>
             
@@ -820,7 +820,7 @@
             summary.innerHTML = `
                 <div class="result-title">Oppsummering</div>
                 <p><strong>${validCount}</strong> av <strong>${results.length}</strong> ord er gyldige</p>
-                ${longestValid ? `<p style="margin-top:8px;">Lengste gyldige ord: <strong>${longestValid.word.toUpperCase()}</strong> (${longestValid.length} bokstaver)</p>` : ''}
+                ${longestValid ? `<p style="margin-top:8px;">Lengste gyldige ord: <strong>${longestValid.word.toUpperCase()}</strong> (${longestValid.length} bokstavar)</p>` : ''}
             `;
             container.appendChild(summary);
             
@@ -874,7 +874,7 @@
             });
         }
         
-        // === FELLES FUNKSJONER ===
+        // === FELLES FUNKSJONAR ===
         document.getElementById('submitBtn').addEventListener('click', () => {
             const word = UI.getInputValue().trim();
             if (!word) return;

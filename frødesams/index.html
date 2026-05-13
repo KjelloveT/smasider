@@ -33,7 +33,7 @@
             <h3 style="margin-top:0;">Korleis spele Frødesams</h3>
             <p>Frødesams er ein kviss for klasserommet der lag konkurrar om å gjette dei mest populære svara.</p>
             <ul style="margin:16px 0;padding-left:20px;">
-                <li><strong>To skjermar:</strong> Trykk "Start Frødesams" på denne skjermen, og klikk "Åpne storskjerm" for å vise svara på ein annan skjerm. Da kan du som styrer kvissen se dei riktige svara, samstundes som spelarane får se riktige svar etter kvart som dei svarar rett</li>
+                <li><strong>To skjermar:</strong> Trykk "Start Frødesams" på denne skjermen, og klikk "Opne storskjerm" for å vise svara på ein annan skjerm. Då kan du som styrer kvissen sjå dei riktige svara, samstundes som spelarane får sjå riktige svar etter kvart som dei svarar rett</li>
                 <li><strong>Team:</strong> Sett opp 2-4 lag med namn.</li>
                 <li><strong>Vel Frødesams:</strong> Vel ein quiz frå lista og klikk "Start".</li>
                 <li><strong>Vis svar:</strong> Kvissmeister klikkar på svaret frå sin skjerm, og det visast på storskjermen.</li>
@@ -45,7 +45,7 @@
         <div id="game-screen" class="screen hidden">
             <!-- Open Display Button -->
             <div class="neo-box mb-24">
-                <button class="btn btn-purple" id="btn-open-display">Åpne storskjerm</button>
+                <button class="btn btn-purple" id="btn-open-display">Opne storskjerm</button>
             </div>
 
             <!-- Team Setup -->
@@ -149,7 +149,7 @@
                 <!-- Quiz Info -->
                 <div class="form-group">
                     <label>Tittel</label>
-                    <input type="text" class="form-input" id="quiz-title" placeholder="T.d. Skoleliv">
+                    <input type="text" class="form-input" id="quiz-title" placeholder="T.d. Skuleliv">
                 </div>
 
                 <!-- Questions Section -->
@@ -175,9 +175,9 @@
         <!-- Saved Quizzes Screen -->
         <div id="saved-screen" class="screen hidden">
             <div class="neo-box mb-24">
-                <div class="section-label">Lagra quizer</div>
+                <div class="section-label">Lagra kvissar</div>
                 <div id="saved-quiz-list" class="quiz-grid">
-                    <!-- Lagrede quizer blir vist her -->
+                    <!-- Lagra kvissar blir vist her -->
                 </div>
             </div>
 
@@ -186,13 +186,13 @@
                 <div class="section-label">Eksport / Import</div>
                 <div class="file-grid">
                     <div class="file-box file-export">
-                        <h3>Eksporter alle quizer</h3>
-                        <p>Last ned alle quizer som JSON-fil for backup.</p>
+                        <h3>Eksporter alle kvissar</h3>
+                        <p>Last ned alle kvissar som JSON-fil for backup.</p>
                         <button class="btn btn-primary" id="btn-export">Eksporter</button>
                     </div>
                     <div class="file-box file-import">
-                        <h3>Importer quizer</h3>
-                        <p>Last opp en JSON-fil for å importere quizer.</p>
+                        <h3>Importer kvissar</h3>
+                        <p>Last opp ei JSON-fil for å importere kvissar.</p>
                         <input type="file" id="import-file" accept=".json" style="margin-bottom:8px;">
                         <button class="btn btn-primary" id="btn-import">Importer</button>
                     </div>

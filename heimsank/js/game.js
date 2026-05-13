@@ -133,7 +133,7 @@ async function loadCards(cat) {
         stat = r[statF] ? r[statF].slice(0, 4) : '?';
       } else if (statT === 'number') {
         const n = parseInt(r[statF], 10);
-        stat = isNaN(n) ? '?' : n.toLocaleString('nb-NO');
+        stat = isNaN(n) ? '?' : n.toLocaleString('nn-NO');
       } else {
         stat = r[statF] || '?';
       }

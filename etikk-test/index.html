@@ -17,7 +17,7 @@
                 <img src="../_resources/etikktesten.png" style="height: 120px; flex-shrink: 0; filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.5));" alt="Etikktesten logo">
                 <div>
                     <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; margin-top: 0; line-height: 1; text-shadow: 2px 2px 0 rgba(0,0,0,0.3);">Etikktesten</h1>
-                    <p style="font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; margin: 0; opacity: 0.9;">Ein personleg og uhøgtidleg sjøltest med etiske dilemmaer</p>
+                    <p style="font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; margin: 0; opacity: 0.9;">Ein personleg og uhøgtidleg sjøltest med etiske dilemma</p>
                 </div>
             </div>
 
@@ -25,7 +25,7 @@
             <div id="intro-screen" class="screen active">
                 <div class="box1">
                     <h2 class="heading2 no-mt">Velkomen til etikktesten!</h2>
-                    <p style="margin-bottom: 16px;">Dette er ein uhøgtidleg moro-test om etikk. Den kan seie noko om korleis du tenkjer om rett og galt her og no, men er ingen fasit.</p>
+                    <p style="margin-bottom: 16px;">Dette er ein uhøgtidleg moro-test om etikk. Han kan seie noko om korleis du tenkjer om rett og galt her og no, men er ingen fasit.</p>
                     
                     <div class="box2" style="background: var(--accent4); color: #1a1a1a; margin-bottom: 16px;">
                         <strong>Målet med testen:</strong>
@@ -39,7 +39,7 @@
 
                     <h3 class="heading3">Slik gjer du:</h3>
                     <ul style="margin-left: 24px; margin-bottom: 24px;">
-                        <li>Du vil få 8 historier med tilhøyrande spørsmål</li>
+                        <li>Du vil få 8 forteljingar med tilhøyrande spørsmål</li>
                         <li>For kvart spørsmål svarar du "Ja" eller "Nei"</li>
                         <li>Ta sjølvstendige val – svar individuelt</li>
                         <li>Det finst ingen fasit – i verda har vi ingen fasit på kva som er rett og galt</li>
@@ -59,7 +59,7 @@
                     <div class="progress-bar">
                         <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
                     </div>
-                    <p id="progress-text" style="margin-top: 8px; font-weight: bold;">Historie 1 av 8</p>
+                    <p id="progress-text" style="margin-top: 8px; font-weight: bold;">Forteljing 1 av 8</p>
                 </div>
 
                 <div id="story-container"></div>
@@ -298,12 +298,12 @@
 
             const progress = ((currentStoryIndex) / testData.length) * 100;
             document.getElementById('progress-fill').style.width = progress + '%';
-            document.getElementById('progress-text').textContent = `Historie ${currentStoryIndex + 1} av ${testData.length}`;
+            document.getElementById('progress-text').textContent = `Forteljing ${currentStoryIndex + 1} av ${testData.length}`;
 
             let html = `
                 <div class="box1">
                     <span style="display: inline-block; background: var(--accent4); color: #1a1a1a; padding: 6px 14px; border: 2px solid var(--border); box-shadow: 3px 3px 0 var(--shadow); font-weight: 900; font-size: 0.95rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">
-                        Historie ${currentStoryIndex + 1}
+                        Forteljing ${currentStoryIndex + 1}
                     </span>
                     <p style="margin-bottom: 24px; line-height: 1.8;">${story.story}</p>
             `;

@@ -322,7 +322,7 @@
     <div class="container">
         <header>
             <h1>🔍 Wikidata Query Tester</h1>
-            <p class="subtitle">Test SPARQL-spørringer og lagre vellykkede resultater</p>
+            <p class="subtitle">Test SPARQL-spørringer og lagre vellykka resultat</p>
         </header>
 
         <div class="content">
@@ -349,14 +349,14 @@
             <div class="button-group">
                 <button class="btn-execute" onclick="executeQuery()">▶ Kjør spørring</button>
                 <button class="btn-save" id="saveBtn" onclick="saveQuery()" disabled>💾 Lagre til CSV</button>
-                <button class="btn-clear" onclick="clearResults()">🗑️ Tøm resultater</button>
+                <button class="btn-clear" onclick="clearResults()">🗑️ Tøm resultat</button>
             </div>
 
             <div id="status" class="status"></div>
 
             <div id="resultsSection" class="results-section" style="display: none;">
                 <div class="results-header">
-                    <h2>Resultater</h2>
+                    <h2>Resultat</h2>
                     <span class="result-count" id="resultCount"></span>
                 </div>
                 <div class="table-container">
@@ -368,9 +368,9 @@
             </div>
 
             <div class="saved-queries">
-                <h3>💾 Lagrede spørringer</h3>
+                <h3>💾 Lagra spørjingar</h3>
                 <div id="savedQueriesList">
-                    <p style="color: #6b7280; font-size: 14px;">Ingen lagrede spørringer ennå. Kjør en spørring og trykk "Lagre til CSV".</p>
+                    <p style="color: #6b7280; font-size: 14px;">Ingen lagra spørjingar enno. Kjør ei spøring og trykk "Lagre til CSV".</p>
                 </div>
             </div>
         </div>
@@ -538,7 +538,7 @@ LIMIT 150`
                 const data = await response.json();
                 currentResults = data;
                 displayResults(data);
-                showStatus(`✅ Spørring vellykket! Fant ${data.results.bindings.length} resultater.`, 'success');
+                showStatus(`✅ Spørring vellykka! Fant ${data.results.bindings.length} resultat.`, 'success');
                 document.getElementById('saveBtn').disabled = false;
             } catch (error) {
                 showStatus(`❌ Feil ved kjøring av spørring: ${error.message}`, 'error');
@@ -563,7 +563,7 @@ LIMIT 150`
             resultsSection.style.display = 'block';
             resultsSection.innerHTML = `
                 <div class="results-header">
-                    <h2>Resultater</h2>
+                    <h2>Resultat</h2>
                     <span class="result-count" id="resultCount">${data.results.bindings.length} rader</span>
                 </div>
                 <div class="table-container">
@@ -575,7 +575,7 @@ LIMIT 150`
             `;
 
             if (data.results.bindings.length === 0) {
-                document.getElementById('tableBody').innerHTML = '<tr><td colspan="100" style="text-align: center; padding: 40px; color: #6b7280;">Ingen resultater funnet.</td></tr>';
+                document.getElementById('tableBody').innerHTML = '<tr><td colspan="100" style="text-align: center; padding: 40px; color: #6b7280;">Ingen resultat funne.</td></tr>';
                 return;
             }
 
@@ -633,7 +633,7 @@ LIMIT 150`
 
         function saveQuery() {
             if (!currentResults || !currentQuery) {
-                showStatus('Ingen resultater å lagre.', 'error');
+                showStatus('Ingen resultat å lagra.', 'error');
                 return;
             }
 
@@ -685,13 +685,13 @@ LIMIT 150`
             const listDiv = document.getElementById('savedQueriesList');
             
             if (savedQueries.length === 0) {
-                listDiv.innerHTML = '<p style="color: #6b7280; font-size: 14px;">Ingen lagrede spørringer ennå.</p>';
+                listDiv.innerHTML = '<p style="color: #6b7280; font-size: 14px;">Ingen lagra spørjingar enno.</p>';
                 return;
             }
 
             listDiv.innerHTML = savedQueries.map((item, index) => `
                 <div class="saved-query-item">
-                    <strong>${item.timestamp}</strong> - ${item.results.results.bindings.length} resultater
+                    <strong>${item.timestamp}</strong> - ${item.results.results.bindings.length} resultat
                     <br>
                     <small style="color: #6b7280;">${item.preview}</small>
                 </div>
@@ -703,7 +703,7 @@ LIMIT 150`
             document.getElementById('saveBtn').disabled = true;
             currentResults = null;
             currentQuery = null;
-            showStatus('Resultater tømt.', 'info');
+            showStatus('Resultat tømt.', 'info');
         }
 
         function showStatus(message, type) {

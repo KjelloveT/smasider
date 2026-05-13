@@ -11,14 +11,14 @@ Personvern-venleg live quiz for klasserommet som fungerer på lokalt nettverk.
 - ✅ **Timer** for kvart spørsmål
 - ✅ **Poengsystem** basert på korrekthet og svar-tid
 
-## Hvordan bruke
+## Korleis bruke
 
 ### Metode 1: Demo med localStorage (enkel)
-1. Lærar åpner `quiz-host.html` i nettlesaren
+1. Lærar opnar `quiz-host.html` i nettlesaren
 2. Trykk "Start Server" (simulert)
-3. Elevar åpner `quiz-join.html` i **samme nettlesar** (nye tabs)
+3. Elevar opnar `quiz-join.html` i **same nettlesar** (nye flikar)
 4. Skriv inn rom-kode og namn
-5. Start quiz!
+5. Start kviss!
 
 ### Metode 2: Ekte WebSocket server (anbefalt)
 1. Installer Node.js: https://nodejs.org/
@@ -30,7 +30,7 @@ Personvern-venleg live quiz for klasserommet som fungerer på lokalt nettverk.
    ```
 3. Lærar går til: `http://localhost:8082/quiz-host.html`
 4. Elevar går til: `http://localhost:8082/quiz-join.html` (på sine enheter)
-5. Alle må være på **samme WiFi-nettverk**
+5. Alle må vere på **same WiFi-nettverk**
 
 ### Metode 3: Lokal nettverks-server
 1. Start server med `node server.js`
@@ -45,8 +45,8 @@ Personvern-venleg live quiz for klasserommet som fungerer på lokalt nettverk.
 - **Ingen data til skyen** - alt køyrer lokalt
 - **Ingen registrering** - berre rom-kode og namn
 - **Ingen sporing** - ingen cookies eller analytics
-- **Lokal lagring** - quiz-resultater lagrast berre i nettlesar
-- **GDPR-kompatibelt** - perfekt for skolebruk
+- **Lokal lagring** - kviss-resultat vert lagra berre i nettlesar
+- **GDPR-kompatibelt** - perfekt for skulebruk
 
 ## Teknisk
 
@@ -58,7 +58,7 @@ Lærar (Host) ←→ WebSocket Server ←→ Elevar (Clients)
 ### Dataflyt
 - **Spørsmål**: Host → Server → Alle elevar
 - **Svar**: Elev → Server → Host
-- **Resultater**: Host → Server → Alle elevar
+- **Resultat**: Host → Server → Alle elevar
 
 ### Lagret data
 ```javascript
@@ -77,12 +77,12 @@ localStorage.setItem('quiz-history', JSON.stringify({
 }));
 ```
 
-## Quiz-struktur
+## Kviss-struktur
 
 ### Eksempelspørsmål
 ```javascript
 {
-  question: "Hva er hovedstaden i Norge?",
+  question: "Kva er hovudstaden i Noreg?",
   options: ["Oslo", "Bergen", "Trondheim", "Stavanger"],
   correct: 0,
   timeLimit: 20
@@ -104,9 +104,9 @@ localStorage.setItem('quiz-history', JSON.stringify({
 ## Utvidelsar
 
 ### Kommende funksjoner
-- 📝 **Quiz Editor** - lag egne spørsmål
-- 🎨 **Temaer** - ulike visuelle stilar
-- 📊 **Statistikk** - detaljerte quiz-rapportar
+- 📝 **Kviss Editor** - lag eigne spørsmål
+- 🎨 **Tema** - ulike visuelle stilar
+- 📊 **Statistikk** - detaljerte kviss-rapportar
 - 🏆 **Lag-konkurranse** - team vs team
 - 📱 **Mobil-app** - native app for elevar
 
@@ -117,9 +117,9 @@ localStorage.setItem('quiz-history', JSON.stringify({
 
 ## Feilsøking
 
-### "Elevar kan ikke koble til"
-- Sjekk at alle er på samme WiFi-nettverk
-- Sjekk at brannmur tillater port 8082
+### "Elevar kan ikkje kople til"
+- Sjekk at alle er på same WiFi-nettverk
+- Sjekk at brannmur tillèt port 8082
 - Test med `http://localhost:8082` først
 
 ### "Server vil ikke starte"
@@ -147,4 +147,4 @@ For spørsmål eller problemer:
 
 ---
 
-**Laga for grunnskolen** - med personvern i fokus 🛡️
+**Laga for grunnskulen** - med personvern i fokus 🛡️

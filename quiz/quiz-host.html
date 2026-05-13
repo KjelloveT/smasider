@@ -305,9 +305,9 @@
 
                 <div class="question-display" id="question-display">
                     <div class="timer" id="timer">30</div>
-                    <div class="question-text" id="question-text">Spørsmål vises her</div>
+                    <div class="question-text" id="question-text">Spørsmål vert vist her</div>
                     <div class="question-options" id="question-options">
-                        <!-- Alternativer fylles dynamisk -->
+                        <!-- Alternativ fyllast dynamisk -->
                     </div>
                 </div>
 
@@ -338,10 +338,10 @@
                 </div>
 
                 <div style="margin-top: 20px;">
-                    <h3 style="margin-bottom: 10px;">🏆 Resultater:</h3>
+                    <h3 style="margin-bottom: 10px;">🏆 Resultat:</h3>
                     <div id="leaderboard">
                         <div style="text-align: center; color: #666; padding: 20px;">
-                            Ingen resultater ennå
+                            Ingen resultat enno
                         </div>
                     </div>
                 </div>
@@ -536,7 +536,7 @@
                 this.elements.questionDisplay.classList.add('active');
                 this.elements.questionText.textContent = question.question;
                 
-                // Vis alternativer
+                // Vis alternativ
                 this.elements.questionOptions.innerHTML = '';
                 question.options.forEach((option, index) => {
                     const optionDiv = document.createElement('div');
@@ -592,7 +592,7 @@
                 // Oppdater leaderboard
                 this.updateLeaderboard();
                 
-                // Send resultater
+                // Send resultat
                 this.broadcastResults();
                 
                 // Gå til neste spørsmål etter 3 sekunder
@@ -740,7 +740,7 @@
                 if (sortedPlayers.length === 0) {
                     this.elements.leaderboard.innerHTML = `
                         <div style="text-align: center; color: #666; padding: 20px;">
-                            Ingen resultater ennå
+                            Ingen resultat enno
                         </div>
                     `;
                     return;

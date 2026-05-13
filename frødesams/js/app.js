@@ -113,7 +113,7 @@ class Frødesams {
         addTeamBtn.addEventListener('click', () => {
             const currentTeams = teamsContainer.querySelectorAll('.team-input').length;
             if (currentTeams >= 4) {
-                alert('Maksimalt 4 team!');
+                alert('Maksimalt 4 lag!');
                 return;
             }
 
@@ -201,7 +201,7 @@ class Frødesams {
         const quizzes = Storage.getQuizzes();
         
         if (quizzes.length === 0) {
-            container.innerHTML = '<p style="padding:20px;">Ingen quizer tilgjengelege. Lag ein ny quiz i editoren.</p>';
+            container.innerHTML = '<p style="padding:20px;">Ingen kvissar tilgjengelege. Lag ein ny kviss i editoren.</p>';
             return;
         }
         
@@ -827,7 +827,7 @@ class Frødesams {
             try {
                 const data = JSON.parse(e.target.result);
                 if (Storage.importData(data)) {
-                    alert('Quizer importert!');
+                    alert('Kvissar importert!');
                     this.loadSavedQuizzes();
                 } else {
                     alert('Import feila!');
@@ -848,19 +848,19 @@ class Frødesams {
         
         const sampleQuizzes = [
             {
-                title: 'Skoleliv',
+                title: 'Skuleliv',
                 questions: [
                     {
-                        question: 'Hva er det første du tenker på når jeg sier "skole"?',
+                        question: 'Kva er det første du tenkjer på når eg seier "skule"?',
                         answers: [
-                            { text: 'Lærere', points: 45 },
+                            { text: 'Lærarar', points: 45 },
                             { text: 'Venner', points: 30 },
                             { text: 'Mat', points: 15 },
                             { text: 'Friminutt', points: 10 }
                         ]
                     },
                     {
-                        question: 'Hva er det morsomste med skolen?',
+                        question: 'Kva er det kjekkaste med skulen?',
                         answers: [
                             { text: 'Friminutt', points: 40 },
                             { text: 'Venner', points: 35 },
@@ -869,7 +869,7 @@ class Frødesams {
                         ]
                     },
                     {
-                        question: 'Hva glemmer du oftest å ta med til skolen?',
+                        question: 'Kva gløymer du oftast å ta med til skulen?',
                         answers: [
                             { text: 'Blyant', points: 35 },
                             { text: 'Bok', points: 30 },
@@ -883,7 +883,7 @@ class Frødesams {
                 title: 'Norsk natur',
                 questions: [
                     {
-                        question: 'Hva forbinder du med Norge?',
+                        question: 'Kva knyt du til Noreg?',
                         answers: [
                             { text: 'Fjell', points: 40 },
                             { text: 'Fisk', points: 30 },
@@ -892,7 +892,7 @@ class Frødesams {
                         ]
                     },
                     {
-                        question: 'Hvilken norsk by vil du besøke?',
+                        question: 'Kva for ein norsk by vil du besøkje?',
                         answers: [
                             { text: 'Oslo', points: 35 },
                             { text: 'Bergen', points: 30 },
@@ -901,10 +901,10 @@ class Frødesams {
                         ]
                     },
                     {
-                        question: 'Hva er det beste med norsk natur?',
+                        question: 'Kva er det beste med norsk natur?',
                         answers: [
                             { text: 'Fjell', points: 35 },
-                            { text: 'Fjorder', points: 30 },
+                            { text: 'Fjordar', points: 30 },
                             { text: 'Skog', points: 20 },
                             { text: 'Sjø', points: 15 }
                         ]
