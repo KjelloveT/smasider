@@ -248,7 +248,7 @@
 
 .category-item {
     background: var(--accent3);
-    color: #1a1a1a;
+    color: var(--text-on-accent);
     border: 3px solid var(--border);
     padding: 16px;
     font-weight: 800;
@@ -411,6 +411,7 @@
 /* === DUPLICATE HIGHLIGHTING === */
 .answer-row.duplicate-highlight {
     background: #fff9c4 !important;
+    color: #1a1a1a;
     border-left: 4px solid #fbbf24;
 }
 
@@ -452,7 +453,7 @@
 }
 
 .individual-info .progress {
-    color: #666;
+    color: var(--muted);
     font-size: 0.95rem;
 }
 
