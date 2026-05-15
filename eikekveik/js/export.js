@@ -65,31 +65,37 @@ Eikekveik.Export = (function () {
 
     function onBeforePrint() {
         const canvas = Eikekveik.el.canvas;
+        const edges = Eikekveik.el.edges;
         const nodes = canvas.querySelectorAll('.node');
         let maxX = 400, maxY = 300;
         nodes.forEach(n => {
             maxX = Math.max(maxX, (parseInt(n.style.left) || 0) + n.offsetWidth + 20);
             maxY = Math.max(maxY, (parseInt(n.style.top) || 0) + n.offsetHeight + 20);
         });
-        // A4 portrait usable area at 96dpi: ~680×990px
         const scale = Math.min(680 / maxX, 990 / maxY, 1);
         canvas.style.setProperty('--print-scale', scale);
         canvas.style.width = maxX + 'px';
         canvas.style.height = maxY + 'px';
         canvas.style.minHeight = maxY + 'px';
-        Eikekveik.el.edges.style.width = maxX + 'px';
-        Eikekveik.el.edges.style.height = maxY + 'px';
-        Eikekveik.Render.renderEdges();
+        edges.style.width = maxX + 'px';
+        edges.style.height = maxY + 'px';
+        edges.style.transform = `scale(${scale})`;
+        edges.style.transformOrigin = 'top left';
+        edges.setAttribute('viewBox', `0 0 ${maxX} ${maxY}`);
     }
 
     function onAfterPrint() {
         const canvas = Eikekveik.el.canvas;
+        const edges = Eikekveik.el.edges;
         canvas.style.removeProperty('--print-scale');
         canvas.style.removeProperty('width');
         canvas.style.removeProperty('height');
         canvas.style.removeProperty('min-height');
-        Eikekveik.el.edges.style.removeProperty('width');
-        Eikekveik.el.edges.style.removeProperty('height');
+        edges.style.removeProperty('width');
+        edges.style.removeProperty('height');
+        edges.style.removeProperty('transform');
+        edges.style.removeProperty('transform-origin');
+        edges.removeAttribute('viewBox');
         Eikekveik.Render.renderEdges();
     }
 
