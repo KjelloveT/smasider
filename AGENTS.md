@@ -46,7 +46,10 @@ Dette er den sentrale retningslinjen for koding, design og arkitektur for alle p
   - `.box4` (boks med header og innhald, krev inner-element `.box-header` og `.box-body`)
   - `.box5` (boks med tabs, krev `.box-tabs`, `.box-tab`, og `.box-body`)
 - **Knappar:** Bruk klassen `.btn`. Kan utvidast med `.active` eller hover-effektar handtert av stilarket.
-- **Kontrast på faste fargar (KRITISK):** Når du gjev eit element ein **fast** bakgrunnsfarge (t.d. `#BAFCA2`, `#FFDB58`, `var(--accent-green)` osv.), MÅ du òg eksplisitt setje ein mørk tekstfarge (t.d. `color: #1a1a1a` eller `color: var(--text-on-accent)`). Bruk **aldri** `color: var(--text)` eller `color: var(--border)` på element med fast bakgrunn, då desse vekslar mellom svart og kvitt avhengig av temaet og kan gje usynleg tekst i mørke tema.
+- **Kontrast på fargar (KRITISK):** Neobrutalisme-temaet har to tekst-på-bakgrunn-variablar med ulike formål:
+  - `--text-on-accent` = **kvit** (`#ffffff`) — bruk berre på **mørke** bakgrunnar: `--accent`, `--accent2`, og faste mørke fargar.
+  - `--text-on-light-accent` = **mørk** (`#1a1a1a`) — bruk på **lyse pastell-bakgrunnar**: `--accent3`, `--accent4`, `--accent5`, og faste lyse fargar som `#BAFCA2`, `#FFD166`, `#fef08a` osv.
+  - Bruk **aldri** `color: var(--text)` eller `color: var(--border)` på element med fast bakgrunn — desse vekslar mellom svart og kvitt avhengig av temaet og kan gje usynleg tekst.
 - **Modalar:** `.modal1` til `.modal5` i kombinasjon med ein `<div class="modal-overlay">`.
 - **Ikon:** Bruk inline SVG-ar frå Lucide Icons. Aldri bruk emoji.
 

@@ -248,7 +248,7 @@
 
 .category-item {
     background: var(--accent3);
-    color: var(--text-on-accent);
+    color: var(--text-on-light-accent);
     border: 3px solid var(--border);
     padding: 16px;
     font-weight: 800;
