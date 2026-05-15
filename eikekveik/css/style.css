@@ -311,21 +311,16 @@
     }
 
     .edges {
-        position: absolute;
+        opacity: 1 !important;
+    }
+
+    .edges path {
+        stroke: #1a1a1a;
     }
 
     .node {
         box-shadow: 2px 2px 0 #000;
         color-adjust: exact;
         print-color-adjust: exact;
-    }
-
-    .edges {
-        opacity: 1 !important;
-        z-index: -1;
-    }
-
-    .edges path {
-        stroke: #1a1a1a;
     }
 }
