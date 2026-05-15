@@ -308,10 +308,12 @@
         transform: scale(var(--print-scale, 1));
         transform-origin: top left;
         overflow: visible;
+        z-index: 2;
     }
 
     .edges {
         opacity: 1 !important;
+        z-index: 1;
     }
 
     .edges path {
