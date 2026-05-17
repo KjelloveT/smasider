@@ -211,9 +211,23 @@ function renderPendingCardMain() {
       earnedAt: Date.now()
     };
     const el = mkCard(S.pending, 'bar', entry);
-    // Make pending card draggable
     setupDraggable(el, 'pending', 0);
     slot.appendChild(el);
+
+    // Fill info banner fields
+    const nameEl = document.getElementById('pendingCardName');
+    const metaEl = document.getElementById('pendingCardMeta');
+    const rarLabelEl = document.getElementById('pendingRarityLabel');
+    const RL_MAP = { vanleg: 'Vanleg', sjeldgjevt: 'Sjeldgjævt', segngjeten: 'Segngjeten', gudebore: 'Gudebore' };
+    if (nameEl) nameEl.textContent = S.pending.name || '';
+    if (metaEl) metaEl.textContent = (S.pending.catLabel || '') + (S.pending.stat ? ' · ' + S.pending.stat : '');
+    if (rarLabelEl) rarLabelEl.textContent = RL_MAP[S.pending.rarity] || 'Nytt kort';
+
+    // Apply rarity class to pending area
+    const pendingEl = document.getElementById('pendingArea');
+    if (pendingEl) {
+      pendingEl.className = 'pending-area pending-' + (S.pending.rarity || 'vanleg');
+    }
   }
 }
 
@@ -229,6 +243,43 @@ function discardPending() {
   resumeIfDone();
 }
 
+/**
+ * Expand collection bar so user can drag pending card to swap
+ */
+function expandCollForSwap() {
+  const bar = document.getElementById('collBar');
+  const inner = document.getElementById('collBarInner');
+  const toggle = document.getElementById('collToggleRow');
+  if (bar && bar.classList.contains('collapsed')) {
+    bar.classList.remove('collapsed');
+    inner.classList.remove('hidden');
+    toggle.classList.add('hidden');
+  }
+  document.getElementById('dragInstruction').classList.remove('hidden');
+}
+
+/**
+ * Toggle collection bar expanded/collapsed
+ */
+function toggleCollBar() {
+  const bar = document.getElementById('collBar');
+  const inner = document.getElementById('collBarInner');
+  const toggle = document.getElementById('collToggleRow');
+  const chevron = document.getElementById('collChevron');
+  if (!bar || !inner || !toggle) return;
+  if (bar.classList.contains('collapsed')) {
+    bar.classList.remove('collapsed');
+    inner.classList.remove('hidden');
+    toggle.classList.add('hidden');
+    if (chevron) chevron.textContent = '▼';
+  } else {
+    bar.classList.add('collapsed');
+    inner.classList.add('hidden');
+    toggle.classList.remove('hidden');
+    if (chevron) chevron.textContent = '▲';
+  }
+}
+
 // Make functions available globally for onclick handlers
 window.selLevel = selLevel;
 window.togOp = togOp;
@@ -240,6 +291,8 @@ window.confirmClearAll = confirmClearAll;
 window.closeCardModal = closeCardModal;
 window.navigateCard = navigateCard;
 window.discardPending = discardPending;
+window.expandCollForSwap = expandCollForSwap;
+window.toggleCollBar = toggleCollBar;
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', init);
