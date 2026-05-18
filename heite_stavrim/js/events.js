@@ -42,6 +42,10 @@ HeiteStavrimGame.prototype.attachEvents = function () {
 
     // Buttons
     this.el.startBtn.addEventListener('click', () => this.startGame());
+    this.el.redrawLettersBtn.addEventListener('click', () => this.redrawLetters());
+    this.el.redrawCategoriesBtn.addEventListener('click', () => this.redrawCategories());
+    this.el.previewBackBtn.addEventListener('click', () => this.showSection('setup'));
+    this.el.previewStartBtn.addEventListener('click', () => this.startRound());
     this.el.pauseBtn.addEventListener('click', () => this.togglePause());
     this.el.addTimeBtn.addEventListener('click', () => this.addTime(30));
     this.el.endRoundBtn.addEventListener('click', () => this.endRound());

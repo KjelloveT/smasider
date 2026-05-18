@@ -30,7 +30,36 @@ HeiteStavrimGame.prototype.startGame = function () {
 
     this.saveCurrentSettings();
 
-    this.startRound();
+    this.showPreview();
+};
+
+HeiteStavrimGame.prototype.showPreview = function (opts) {
+    this.el.previewLetters.innerHTML = this.round.letters
+        .map(L => `<div class="letter-box">${L}</div>`).join('');
+    this.el.previewCategories.innerHTML = this.round.categories
+        .map(c => `<div class="category-item">${this.escapeHtml(c)}</div>`).join('');
+
+    // Skjul "trekk nye"-knappar når kjelda ikkje er tilfeldig
+    this.el.redrawLettersBtn.style.display =
+        this.config.letterSource === 'random' ? '' : 'none';
+    this.el.redrawCategoriesBtn.style.display =
+        this.config.categorySource === 'random' ? '' : 'none';
+
+    this.showSection('preview', opts);
+};
+
+HeiteStavrimGame.prototype.redrawLetters = function () {
+    const letters = this.generateLetters();
+    if (!letters) return;
+    this.round.letters = letters;
+    this.showPreview({ scroll: false });
+};
+
+HeiteStavrimGame.prototype.redrawCategories = function () {
+    const categories = this.generateCategories();
+    if (!categories) return;
+    this.round.categories = categories;
+    this.showPreview({ scroll: false });
 };
 
 HeiteStavrimGame.prototype.startRound = function () {

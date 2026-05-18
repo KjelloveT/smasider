@@ -5,6 +5,7 @@ HeiteStavrimGame.prototype.cacheElements = function () {
     this.el = {
         // Sections
         setup: id('setup-section'),
+        preview: id('preview-section'),
         game: id('game-section'),
         answer: id('answer-section'),
         results: id('results-section'),
@@ -24,6 +25,13 @@ HeiteStavrimGame.prototype.cacheElements = function () {
         teamInputs: id('teamInputs'),
         startBtn: id('startGame'),
         manageCustomBtn: id('manageCustomBtn'),
+        // Preview
+        previewLetters: id('previewLetters'),
+        previewCategories: id('previewCategories'),
+        redrawLettersBtn: id('redrawLetters'),
+        redrawCategoriesBtn: id('redrawCategories'),
+        previewBackBtn: id('previewBack'),
+        previewStartBtn: id('previewStart'),
         // Game
         lettersDisplay: id('lettersDisplay'),
         categoriesDisplay: id('categoriesDisplay'),
@@ -65,11 +73,14 @@ HeiteStavrimGame.prototype.syncRadioStyles = function () {
     });
 };
 
-HeiteStavrimGame.prototype.showSection = function (name) {
-    ['setup', 'game', 'answer', 'results'].forEach(s => {
+HeiteStavrimGame.prototype.showSection = function (name, opts) {
+    const scroll = !opts || opts.scroll !== false;
+    ['setup', 'preview', 'game', 'answer', 'results'].forEach(s => {
         this.el[s].style.display = s === name ? '' : 'none';
     });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (scroll) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 };
 
 HeiteStavrimGame.prototype.escapeHtml = function (str) {
