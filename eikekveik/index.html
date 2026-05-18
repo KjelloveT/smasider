@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eikekveik — Vyrdepil</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../js/neo-header.js" defer></script>
+</head>
+<body data-light-theme="sunny" data-dark-theme="cyberpunk" data-theme="sunny">
+    <neo-header></neo-header>
+
+    <div class="page-wrapper">
+        <main class="main-content">
+
+            <!-- Hero -->
+            <div class="box2 hero-box">
+                <img src="../_resources/eikekveik.png" alt="Eikekveik" class="hero-logo">
+                <div class="hero-text">
+                    <h1>Eikekveik</h1>
+                    <p>Lag idémyldring, kategorisering eller forforståing visuelt. Klikk + på ein node for å leggje til barn, dobbeltklikk for å redigere, dra fritt rundt.</p>
+                </div>
+            </div>
+
+            <!-- Verktøylinje -->
+            <div class="box2 toolbar">
+                <div class="toolbar-group">
+                    <button id="btn-new" class="btn" title="Nytt kart">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        Nytt
+                    </button>
+                    <button id="btn-undo" class="btn" title="Angre (Ctrl+Z)" aria-label="Angre">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></svg>
+                    </button>
+                    <button id="btn-redo" class="btn" title="Gjer om (Ctrl+Y)" aria-label="Gjer om">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 15-6.7L21 13"/></svg>
+                    </button>
+                </div>
+
+                <div class="toolbar-group">
+                    <button id="btn-save" class="btn btn-primary" title="Lagre som...">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                        Lagre
+                    </button>
+                    <button id="btn-open" class="btn" title="Opne lagra kart">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                        Opne
+                    </button>
+                </div>
+
+                <div class="toolbar-group">
+                    <button id="btn-export" class="btn" title="Eksporter til JSON-fil">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        Eksporter
+                    </button>
+                    <button id="btn-import" class="btn" title="Importer JSON-fil">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Importer
+                    </button>
+                    <button id="btn-print" class="btn" title="Skriv ut">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                        Skriv ut
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lerret -->
+            <div class="box2 canvas-wrapper">
+                <svg id="edges" class="edges" aria-hidden="true"></svg>
+                <div id="canvas" class="canvas"></div>
+                <div class="canvas-hint">
+                    <p>Dobbeltklikk på tom flate for å lage ein laus node. Trykk <kbd>+</kbd> på ein node for å leggje til eit barn. <kbd>Delete</kbd> fjernar valt node.</p>
+                </div>
+            </div>
+
+            <!-- Fargepalett (vises når ein node er valt) -->
+            <div id="color-palette" class="box2 color-palette" hidden>
+                <h2 class="heading4 no-mt">Farge på valt node</h2>
+                <div class="color-row" id="color-row"></div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Modal: Lagre som -->
+    <div class="modal-overlay" id="save-modal">
+        <div class="modal4">
+            <button class="btn modal-close" id="save-modal-close" aria-label="Lukk">×</button>
+            <h2 class="heading4 no-mt">Lagre Eikekveik-kart</h2>
+            <label class="form-label" for="save-name">Namn på kartet</label>
+            <input type="text" id="save-name" class="form-input" placeholder="t.d. Hausten 2026">
+            <div class="setup-actions" style="margin-top:16px;">
+                <button class="btn" id="save-cancel">Avbryt</button>
+                <button class="btn btn-primary" id="save-confirm">Lagre</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Opne -->
+    <div class="modal-overlay" id="open-modal">
+        <div class="modal4">
+            <button class="btn modal-close" id="open-modal-close" aria-label="Lukk">×</button>
+            <h2 class="heading4 no-mt">Opne lagra kart</h2>
+            <div id="saved-list" class="saved-list"></div>
+            <div class="setup-actions" style="margin-top:16px;">
+                <button class="btn" id="open-cancel">Avbryt</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skjult filinput for import -->
+    <input type="file" id="import-file" accept=".json" hidden>
+
+    <script src="../js/vyrdepil-storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/interaction.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/export.js"></script>
+</body>
+</html>

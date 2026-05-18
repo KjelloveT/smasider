@@ -190,11 +190,15 @@ function nextQ() {
     n1 = n2 * ans;
   }
 
-  S.q = {
-    ans,
-    txt: `${n1} ${{'+': '+', '-': '−', '*': '×', '/': '÷'}[op]} ${n2}`
-  };
-  document.getElementById('qBox').textContent = S.q.txt + ' = ?';
+  const sym = {'+': '+', '-': '−', '*': '×', '/': '÷'}[op];
+  S.q = { ans, n1, n2, sym, txt: `${n1} ${sym} ${n2}` };
+  const qBox = document.getElementById('qBox');
+  qBox.innerHTML =
+    `<span class="num">${n1}</span>` +
+    `<span class="op">${sym}</span>` +
+    `<span class="num">${n2}</span>` +
+    `<span class="eq">=</span>` +
+    `<span class="qmark">?</span>`;
   const inp = document.getElementById('ansInput');
   inp.value = '';
   inp.disabled = false;
@@ -215,7 +219,7 @@ function checkAnswer() {
   }
   if (v === S.q.ans) {
     S.correct++;
-    setFb('✓ Rett!', 'correct');
+    setFb('RETT!', 'correct');
     updateProg();
     document.getElementById('ansInput').disabled = true;
     document.getElementById('checkBtn').disabled = true;
@@ -225,7 +229,7 @@ function checkAnswer() {
       setTimeout(nextQ, 700);
     }
   } else {
-    setFb(`✗ Feil – svaret er ${S.q.ans}`, 'incorrect');
+    setFb(`Feil! (${S.q.ans})`, 'incorrect');
     setTimeout(nextQ, 1400);
   }
 }
@@ -238,7 +242,9 @@ function checkAnswer() {
 function setFb(m, c) {
   const el = document.getElementById('feedback');
   el.textContent = m;
-  el.className = 'feedback' + (c ? ' ' + c : '');
+  // Map legacy class names to feedback-stamp classes
+  const cls = c === 'correct' ? 'rett' : c === 'incorrect' ? 'feil' : '';
+  el.className = 'feedback-stamp' + (cls ? ' ' + cls + ' show' : '');
 }
 
 /**
@@ -248,6 +254,12 @@ function updateProg() {
   const p = (S.correct / QPC) * 100;
   document.getElementById('progFill').style.width = p + '%';
   document.getElementById('progLabel').textContent = `${S.correct} / ${QPC}`;
+  const pipsEl = document.getElementById('progPips');
+  if (pipsEl) {
+    pipsEl.innerHTML = Array.from({length: QPC}, (_, i) =>
+      `<span class="pip${i < S.correct ? ' lit' : ''}"></span>`
+    ).join('');
+  }
 }
 
 // Answer input enter key handler

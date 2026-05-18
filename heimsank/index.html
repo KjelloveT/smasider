@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="nn">
+<html lang="nn" data-direction="skulebok">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heimsank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@600;700&family=Bangers&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/neobrutalisme.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -17,60 +20,78 @@
   <!-- SETUP -->
   <div id="setupScreen">
 
-    <!-- HERO BOX with integrated showcase fan -->
-    <div class="box2 hero-box hero-box-compact">
-      <img src="Logo - no text.png" alt="Heimsank" class="hero-logo">
-      <div class="hero-text">
-        <h1>Heimsank</h1>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="dir-badge skulebok-badge-logo">
+        <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
+          <line x1="8" y1="18" x2="21" y2="18"/>
+          <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/>
+          <line x1="3" y1="18" x2="3.01" y2="18"/>
+        </svg>
+      </div>
+      <div class="hero-col">
+        <div class="hero-title-row">
+          <h1>Heimsank</h1>
+        </div>
         <p>Løys matteoppgåver og tjen samlekort frå ulike kategoriar. Nokre kort er sjeldnare enn andre — klarar du å finne dei alle?</p>
-        <div class="rarity-row">
-          <span class="rarity-chip vanleg">Vanleg</span>
-          <span class="rarity-chip sjeldgjevt">Sjeldgjævt</span>
-          <span class="rarity-chip segngjeten">Segngjeten</span>
-          <span class="rarity-chip gudebore">Gudebore</span>
+        <div class="rarity-chips">
+          <span class="r-chip vanleg">Vanleg</span>
+          <span class="r-chip sjeldgjevt">Sjeldgjævt</span>
+          <span class="r-chip segngjeten">Segngjeten</span>
+          <span class="r-chip gudebore">★ Gudebore</span>
         </div>
       </div>
-      <div class="hero-fan-area">
+
+      <div class="hero-col">
         <div class="fan-container" id="fanContainer">
           <div class="fan-placeholder"><span data-icon="layers" data-icon-size="72"></span></div>
         </div>
         <div class="fan-cat-label" id="fanCatLabel"></div>
       </div>
-    </div>
 
-    <!-- Top action row: view all collections -->
+      <div class="motif-clip">
+        <span class="motif a">÷</span>
+        <span class="motif b">×</span>
+      </div>
+    </section>
+
+    <!-- Top action row -->
     <div class="setup-actions">
       <button class="btn" onclick="openCollectionViewer()"><span data-icon="folder"></span> Sjå alle samlingane</button>
     </div>
 
-    <div class="box2">
+    <div class="nb-box">
       <div id="setupLoading" class="loading-msg">Lastar kategoriar…</div>
       <div id="setupContent" class="hidden">
-        <div class="settings-group">
-          <label class="settings-label">Kategori</label>
-          <div id="catsGrid" class="cats-grid"></div>
-        </div>
-        <div class="settings-group">
-          <label class="settings-label">Vanskegrad</label>
-          <div class="btn-group">
-            <button class="btn" data-level="lett" onclick="selLevel('lett')">Lett</button>
-            <button class="btn active" data-level="middels" onclick="selLevel('middels')">Middels</button>
-            <button class="btn" data-level="vanskeleg" onclick="selLevel('vanskeleg')">Vanskeleg</button>
+        <div class="settings-stack">
+          <div>
+            <label class="settings-label">Kategori</label>
+            <div id="catsGrid" class="cats-grid"></div>
           </div>
-        </div>
-        <div class="settings-group">
-          <label class="settings-label">Rekneartar</label>
-          <div class="btn-group">
-            <button class="btn" onclick="togOp('+')" data-op="+">Pluss +</button>
-            <button class="btn" onclick="togOp('-')" data-op="-">Minus −</button>
-            <button class="btn active" onclick="togOp('*')" data-op="*">Gange ×</button>
-            <button class="btn active" onclick="togOp('/')" data-op="/">Dele ÷</button>
+          <div>
+            <label class="settings-label">Vanskegrad</label>
+            <div class="btn-row">
+              <button class="btn" data-level="lett" onclick="selLevel('lett')">Lett</button>
+              <button class="btn active" data-level="middels" onclick="selLevel('middels')">Middels</button>
+              <button class="btn" data-level="vanskeleg" onclick="selLevel('vanskeleg')">Vanskeleg</button>
+            </div>
           </div>
+          <div>
+            <label class="settings-label">Rekneartar</label>
+            <div class="btn-row">
+              <button class="btn" onclick="togOp('+')" data-op="+">Pluss +</button>
+              <button class="btn" onclick="togOp('-')" data-op="-">Minus −</button>
+              <button class="btn active" onclick="togOp('*')" data-op="*">Gange ×</button>
+              <button class="btn active" onclick="togOp('/')" data-op="/">Dele ÷</button>
+            </div>
+          </div>
+          <button class="btn start-btn" id="startBtn" onclick="startGame()" disabled>Start spelet →</button>
         </div>
-        <button class="btn btn-start" id="startBtn" onclick="startGame()" disabled>Start spelet →</button>
       </div>
     </div>
-  </div>
+
+  </div><!-- /setupScreen -->
 
   <!-- GAME -->
   <div id="gameScreen" class="hidden">
@@ -79,54 +100,95 @@
       <button class="btn" onclick="openCollectionViewer()"><span data-icon="folder"></span> Samling</button>
     </div>
 
-    <div class="box1 question-section">
-      <div class="settings-label" id="gameSub"></div>
-      <div class="progress-wrap">
+    <div class="question-panel">
+      <div class="q-meta">
+        <span class="cat-pill" id="gameSub"></span>
+        <span id="gameDiff" class="q-meta-diff"></span>
+      </div>
+
+      <div class="progress-track" aria-label="Progressjon">
         <div class="progress-fill" id="progFill"></div>
+        <div class="progress-pips" id="progPips"></div>
         <div class="progress-label" id="progLabel">0 / 6</div>
       </div>
-      <div class="question-box" id="questionBox">
-        <div class="drag-instruction hidden" id="dragInstruction">
-          <div class="drag-instruction-icon"><span data-icon="pointer" data-icon-size="32"></span></div>
-          <div class="drag-instruction-text">
-            <div class="drag-instruction-title">Dra og slepp kortet!</div>
-            <div class="drag-instruction-desc">Dra det nye kortet til samlinga for å erstatte eit gamalt kort, eller slepp det i søppelkassa for å kaste det.</div>
-          </div>
+
+      <div class="drag-instruction hidden" id="dragInstruction">
+        <div class="drag-instruction-icon"><span data-icon="pointer" data-icon-size="32"></span></div>
+        <div class="drag-instruction-text">
+          <div class="drag-instruction-title">Dra og slepp kortet!</div>
+          <div class="drag-instruction-desc">Dra det nye kortet til samlinga for å erstatte eit gamalt kort, eller slepp det i søppelkassa for å kaste det.</div>
         </div>
-        <div class="q-box" id="qBox"></div>
-        <div class="answer-row">
-          <input type="number" id="ansInput" class="answer-input" placeholder="?" autocomplete="off">
-          <button class="btn" id="checkBtn" onclick="checkAnswer()">Sjekk <span data-icon="check"></span></button>
-        </div>
-        <div class="feedback" id="feedback"></div>
       </div>
+
+      <div class="q-row">
+        <div class="q-expr" id="qBox"></div>
+      </div>
+
+      <div class="answer-row">
+        <input type="number" id="ansInput" class="answer-input" placeholder="?" autocomplete="off">
+        <button class="btn check-btn" id="checkBtn" onclick="checkAnswer()">Sjekk <span data-icon="check"></span></button>
+      </div>
+
+      <div class="feedback-stamp" id="feedback"></div>
     </div>
 
-    <!-- PENDING CARD AREA (shown when collection is full) -->
+    <!-- PENDING CARD AREA (shown when collection is full and a card is earned) -->
     <div id="pendingArea" class="pending-area hidden">
-      <div class="pending-wrapper">
-        <div class="pending-label"><span data-icon="sparkles"></span> Nytt kort – velg eit å bytte med, eller kast det</div>
-        <div class="pending-card-container">
-          <div id="pendingSlotMain"></div>
-          <button class="btn trash-pending-btn" onclick="discardPending()"><span data-icon="trash"></span> Kast kortet</button>
-        </div>
+      <div class="pending-rarity-tag" id="pendingRarityTag">
+        <span data-icon="sparkles"></span>
+        <span id="pendingRarityLabel">Nytt kort</span>
+      </div>
+      <div class="pending-info">
+        <div class="pending-title">Du fann eit nytt kort!</div>
+        <div class="pending-name" id="pendingCardName"></div>
+        <div class="pending-meta" id="pendingCardMeta"></div>
+        <div id="pendingSlotMain" class="pending-card-slot"></div>
+      </div>
+      <div class="pending-actions">
+        <button class="btn pending-swap-btn" onclick="expandCollForSwap()"><span data-icon="arrowLeftRight"></span> Byte eit kort</button>
+        <button class="btn pending-trash-btn" onclick="discardPending()"><span data-icon="trash"></span> Kast</button>
       </div>
     </div>
 
-    <!-- COLLECTION BAR (sticky at bottom) -->
-    <div class="coll-bar">
-      <div class="coll-main">
+    <!-- COLLECTION BAR (sticky at bottom, collapsible) -->
+    <div class="coll-bar collapsed" id="collBar">
+      <!-- Toggle row (visible when collapsed) -->
+      <button class="coll-toggle-row" id="collToggleRow" onclick="toggleCollBar()">
+        <span class="coll-toggle-left">
+          <span data-icon="trophy"></span>
+          <strong>Samling</strong>
+          <span class="coll-count-pill"><span id="collCount">0</span>/6</span>
+          <span class="coll-mini-dots" id="collMiniDots"></span>
+        </span>
+        <span class="coll-toggle-right">
+          <span class="coll-toggle-hint">Vis kort</span>
+          <span class="coll-chevron" id="collChevron">▲</span>
+        </span>
+      </button>
+
+      <!-- Expanded content (hidden when collapsed) -->
+      <div class="coll-bar-inner hidden" id="collBarInner">
         <div class="coll-box">
-          <div class="coll-box-label"><span data-icon="trophy"></span> Samling (<span id="collCount">0</span>/6) <button class="btn coll-clear-btn" id="clearAllBtn" onclick="confirmClearAll()">Tøm alle</button></div>
-          <div class="coll-cards-row" id="collRow"></div>
+          <div class="coll-head">
+            <div class="left">
+              <span data-icon="trophy"></span>
+              <span>Samling (<span id="collCountInner">0</span>/6)</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <button class="btn coll-clear-btn" id="clearAllBtn" onclick="confirmClearAll()">Tøm alle</button>
+              <button class="coll-collapse-btn" onclick="toggleCollBar()">▼ Skjul</button>
+            </div>
+          </div>
+          <div class="coll-slots" id="collRow"></div>
         </div>
         <div class="trash-zone" id="trashZone">
-          <div class="trash-zone-icon"><span data-icon="trash" data-icon-size="28"></span></div>
-          <div class="trash-zone-label">Slepp<br>her</div>
+          <span data-icon="trash" data-icon-size="24"></span>
+          <span>Slepp<br>her</span>
         </div>
       </div>
     </div>
-  </div>
+
+  </div><!-- /gameScreen -->
 
 </main>
 </div>
@@ -137,7 +199,13 @@
     <div class="flip-scene">
       <div class="flip-card" id="flipCard">
         <div class="flip-face flip-back">
-          <div class="flip-back-logo"></div>
+          <div class="flip-back-logo">
+            <svg viewBox="0 0 24 24" width="60" height="60" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <line x1="4.22" y1="4.22" x2="19.78" y2="19.78"/>
+            </svg>
+            <div class="flip-back-title">HEIMSANK</div>
+          </div>
         </div>
         <div class="flip-front"></div>
       </div>

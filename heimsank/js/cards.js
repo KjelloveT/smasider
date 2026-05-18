@@ -146,6 +146,21 @@ function mkCard(card, sz, entry = null) {
 function renderColl() {
   const row = document.getElementById('collRow');
   document.getElementById('collCount').textContent = S.collection.length;
+  const inner = document.getElementById('collCountInner');
+  if (inner) inner.textContent = S.collection.length;
+
+  // Update mini dots in toggle row
+  const miniDots = document.getElementById('collMiniDots');
+  if (miniDots) {
+    const slots = 6;
+    const padded = [...S.collection.slice(-slots), ...Array(Math.max(0, slots - S.collection.length)).fill(null)];
+    miniDots.innerHTML = padded.map((entry, i) => {
+      if (!entry) return '<span class="mini-dot empty"></span>';
+      const card = S.idx && S.idx[entry.cardId];
+      const rarity = card ? card.rarity : 'vanleg';
+      return `<span class="mini-dot ${rarity}"></span>`;
+    }).join('');
+  }
   row.innerHTML = '';
 
   if (S.collection.length === 0) {

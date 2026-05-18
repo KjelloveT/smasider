@@ -145,6 +145,13 @@
                 <span class="card-btn">Opne →</span>
             </a>
 
+            <a href="eikekveik/index.html" class="card">
+                <span class="card-icon"><img src="_resources/eikekveik.png" alt="" width="48" height="48" style="object-fit:contain;"></span>
+                <h2 class="card-title">Eikekveik</h2>
+                <p class="card-desc">Enkel idémyldring og kategorisering. Drag nodar fritt, koplingar teiknast automatisk.</p>
+                <span class="card-btn">Opne →</span>
+            </a>
+
             <a href="bildebehandling/index.html" class="card">
                 <span class="card-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></span>
                 <h2 class="card-title">Handsam bilete</h2>
@@ -153,7 +160,7 @@
             </a>
 
             <div class="card disabled">
-                <span class="card-icon">FV</span>
+                <span class="card-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></svg></span>
                 <h2 class="card-title">Fleire verktøy</h2>
                 <p class="card-desc">Nye verktøy er under utvikling og kjem snart!</p>
                 <span class="coming-tag">Kjem snart</span>
@@ -318,16 +325,6 @@
                             <p><strong>Ingen data blir lagra.</strong> Bilete du lastar opp blir berre lese inn i minnet med FileReader API og behandla med Canvas API. Når du lukkar sida, er alt borte.</p>
                             <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> JSZip bibliotek blir lasta frå <strong>cdnjs.cloudflare.com</strong> (kun for ZIP-nedlasting). Ingen bilete eller data blir sendt til nokon server. Alt skjer lokalt i nettlesaren din.</p>
 
-                            <h4 style="margin-top:24px;margin-bottom:12px;"><svg width="20" height="20" style="margin-right: 4px; vertical-align: middle;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 10v4"/><path d="M12 2v3"/></svg> Kano 3D</h4>
-                            <table class="data-table">
-                                <tr><th>Kva</th><th>Kvifor</th></tr>
-                                <tr>
-                                    <td>Låste baner, highscore per bane, total poeng og distanse</td>
-                                    <td>For å hugse progresjon og rekordar mellom speløkter</td>
-                                </tr>
-                            </table>
-                            <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Three.js bibliotek blir lasta frå <strong>cdnjs.cloudflare.com</strong> for 3D-rendering. Ingen speldata eller quiz-svar blir sendt til nokon server. Alt køyrer lokalt i nettlesaren etter at sida er lasta.</p>
-
                             <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/frødebrett.png" alt="Frødebrett" style="height:20px;width:auto;margin-right:4px"> Frødebrett</h4>
                             <table class="data-table">
                                 <tr><th>Kva</th><th>Kvifor</th></tr>
@@ -355,6 +352,16 @@
                                 </tr>
                             </table>
                             <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Spelet køyrer heilt lokalt.</p>
+
+                            <h4 style="margin-top:24px;margin-bottom:12px;"><img src="_resources/eikekveik.png" alt="" width="20" height="20" style="vertical-align:-4px;margin-right:4px;object-fit:contain;"> Eikekveik</h4>
+                            <table class="data-table">
+                                <tr><th>Kva</th><th>Kvifor</th></tr>
+                                <tr>
+                                    <td>Auto-lagring av siste kart (nodar med tekst, plassering, farge og foreldre-id) og namngjevne lagra kart</td>
+                                    <td>For å ta vare på arbeidet ditt mellom økter og kunne hente fram fleire ulike kart</td>
+                                </tr>
+                            </table>
+                            <p class="accordion-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" x2="22" y1="12" y2="12"/></svg> <strong>Ekstern tilgang:</strong> Ingen. Verktøyet køyrer heilt lokalt.</p>
                     </div>
                 </details>
 
@@ -388,7 +395,7 @@
 </div>
 
 <footer class="site-footer">
-    <p>Laga med ❤️ for grunnskulen — open kjeldekode, ingen sporing</p>
+    <p><svg width="16" height="16" style="vertical-align:-2px;margin-right:4px;" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>Laga for grunnskulen — open kjeldekode, ingen sporing</p>
 </footer>
 
 <script src="js/vyrdepil-storage.js"></script>
