@@ -47,6 +47,7 @@ class NeoHeader extends HTMLElement {
                   <a href="${basePath}frødesams/index.html" class="tools-dropdown-item">Frødesams</a>
                   <a href="${basePath}etikk-test/index.html" class="tools-dropdown-item">Etikktesten</a>
                   <a href="${basePath}heite_stavrim/index.html" class="tools-dropdown-item">Heite Stavrim</a>
+                  <a href="${basePath}ordaklok/index.html" class="tools-dropdown-item">Ordaklok</a>
                 </div>
                 
                 <div class="tools-category">Verktøy</div>
@@ -83,6 +84,7 @@ class NeoHeader extends HTMLElement {
               <a href="${basePath}frodebrett/index.html">Frødebrett</a>
               <a href="${basePath}frødesams/index.html">Frødesams</a>
               <a href="${basePath}etikk-test/index.html">Etikktesten</a>
+              <a href="${basePath}ordaklok/index.html">Ordaklok</a>
               <a href="${basePath}heite_stavrim/index.html">Heite Stavrim</a>
               <a href="${basePath}fotocollage/fotocollage.html">BiletFlett</a>
               <a href="${basePath}fotocolours/index.html">Reinskore bilete</a>

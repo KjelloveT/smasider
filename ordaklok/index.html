@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordaklok — Gloseøving for klasserommet</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../js/neo-header.js" defer></script>
+</head>
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+<neo-header></neo-header>
+
+<div class="page-wrapper">
+    <main class="main-content">
+
+        <!-- Hero -->
+        <div class="box2 hero-box">
+            <img src="../_resources/ordaklok.png" alt="Ordaklok" class="hero-logo">
+            <div class="hero-text">
+                <h1>Ordaklok</h1>
+                <p>Øv gloser i fire modusar — skriv svar, multiple choice, flashcard eller matching. Lagra dine eigne lister, eksporter dei, eller del med ein lenkje.</p>
+            </div>
+        </div>
+
+        <!-- Topp-knappar -->
+        <div class="btn-row" style="margin-bottom: 8px;">
+            <a href="editor.html" class="btn btn-primary" id="newListBtn">
+                <span aria-hidden="true"></span> Ny liste
+            </a>
+            <button class="btn" id="importJsonBtn">Importer JSON</button>
+            <input type="file" id="importJsonFile" accept="application/json,.json" style="display:none;">
+            <button class="btn" id="loadSampleBtn">Last inn dømeliste</button>
+        </div>
+
+        <h2 class="heading2 no-mt">Mine gloselister</h2>
+        <div id="listsContainer" class="list-grid" aria-live="polite"></div>
+
+        <div class="box2" id="emptyHelp" style="display:none;">
+            <h3 class="heading4 no-mt">Kom i gang</h3>
+            <p>Du har ingen lister enno. Klikk <strong>Ny liste</strong> for å lage di eiga liste, eller <strong>Last inn dømeliste</strong> for å prøve verktøyet med éin gong.</p>
+            <p class="muted">Du kan òg <strong>Importere JSON</strong> dersom du har ei tidlegare eksportert liste.</p>
+        </div>
+
+    </main>
+</div>
+
+<footer class="site-footer">
+    <p>Ordaklok — del av Vyrdepil. All data lagrast lokalt i din nettlesar.</p>
+</footer>
+
+<!-- Modal: Importer frå delelenkje (vert vist når ?d=/?dz= er sett) -->
+<div class="modal-overlay" id="shareImportOverlay" role="dialog" aria-modal="true" aria-labelledby="shareImportTitle">
+    <div class="modal4">
+        <button class="modal-close-x" id="shareImportClose" aria-label="Lukk">×</button>
+        <h2 class="heading4 no-mt" id="shareImportTitle">Delt liste</h2>
+        <p>Nokon har delt ei gloseliste med deg. Vil du leggje til denne lista i biblioteket ditt?</p>
+        <div class="box1" id="shareImportPreview" style="margin: 16px 0;">
+            <p class="muted">Lastar inn…</p>
+        </div>
+        <div class="btn-row">
+            <button class="btn btn-primary" id="shareImportAccept">Lagre lista</button>
+            <button class="btn" id="shareImportCancel">Avbryt</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Del lenkje -->
+<div class="modal-overlay" id="shareLinkOverlay" role="dialog" aria-modal="true" aria-labelledby="shareLinkTitle">
+    <div class="modal4">
+        <button class="modal-close-x" id="shareLinkClose" aria-label="Lukk">×</button>
+        <h2 class="heading4 no-mt" id="shareLinkTitle">Del lista</h2>
+        <p>Kopier lenkja under og send den til andre. Den inneheld heile lista og fungerer offline.</p>
+        <textarea id="shareLinkInput" class="form-textarea" readonly rows="4"></textarea>
+        <div class="btn-row">
+            <button class="btn btn-primary" id="shareLinkCopy">Kopier lenkje</button>
+            <button class="btn" id="shareLinkOpen">Opne i ny fane</button>
+        </div>
+        <p class="muted" id="shareLinkInfo" style="margin-top:8px;"></p>
+    </div>
+</div>
+
+<script src="../js/vyrdepil-storage.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/state.js"></script>
+<script src="js/sample.js"></script>
+<script src="js/share.js"></script>
+<script src="js/leitner.js"></script>
+<script src="js/menu.js"></script>
+</body>
+</html>

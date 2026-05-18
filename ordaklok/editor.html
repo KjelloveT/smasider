@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordaklok — Liste-editor</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../js/neo-header.js" defer></script>
+</head>
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+<neo-header></neo-header>
+
+<div class="page-wrapper">
+    <main class="main-content">
+
+        <div class="btn-row">
+            <a href="index.html" class="btn">← Tilbake til biblioteket</a>
+            <span style="flex:1"></span>
+            <button class="btn" id="exportBtn">Eksporter JSON</button>
+            <button class="btn" id="shareBtn">Lag delelenkje</button>
+            <button class="btn btn-primary" id="saveBtn">Lagre</button>
+        </div>
+
+        <div class="box2">
+            <h2 class="heading4 no-mt" id="editorTitle">Ny liste</h2>
+
+            <div class="editor-grid">
+                <div>
+                    <label class="form-label" for="titleInput">Tittel</label>
+                    <input type="text" id="titleInput" class="form-input" placeholder="t.d. Engelsk grunnord" maxlength="200">
+                </div>
+                <div>
+                    <label class="form-label" for="descriptionInput">Beskriving (valfri)</label>
+                    <input type="text" id="descriptionInput" class="form-input" placeholder="Kort beskriving" maxlength="200">
+                </div>
+                <div>
+                    <label class="form-label" for="labelAInput">Etikett — side A</label>
+                    <input type="text" id="labelAInput" class="form-input" placeholder="t.d. Engelsk" maxlength="60">
+                </div>
+                <div>
+                    <label class="form-label" for="labelBInput">Etikett — side B</label>
+                    <input type="text" id="labelBInput" class="form-input" placeholder="t.d. Norsk" maxlength="60">
+                </div>
+            </div>
+        </div>
+
+        <div class="box2">
+            <div class="btn-row" style="margin-bottom: 12px;">
+                <h2 class="heading4 no-mt" style="margin: 0; flex: 1;">Ord-par</h2>
+                <button class="btn btn-small" id="addRowBtn">+ Legg til rad</button>
+                <button class="btn btn-small" id="bulkBtn">Lim inn fleire</button>
+            </div>
+
+            <div style="overflow-x:auto;">
+                <table class="pair-table" id="pairTable">
+                    <thead>
+                        <tr>
+                            <th style="width:40px;">#</th>
+                            <th id="thA">Side A</th>
+                            <th id="thB">Side B</th>
+                            <th>Alternative svar (kommaseparert)</th>
+                            <th style="width:50px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="pairTableBody"></tbody>
+                </table>
+            </div>
+
+            <p class="hint-text" style="margin-top:12px;">
+                Tips: Bruk <strong>Tab</strong> for å hoppe mellom felt. Trykk <strong>Enter</strong> i siste rad for å leggje til ein ny rad.
+                <strong>Alternative svar</strong> blir godtekne som riktige svar i «skriv svar»-modus.
+            </p>
+        </div>
+
+        <div class="btn-row">
+            <a href="index.html" class="btn">Tilbake</a>
+            <span style="flex:1"></span>
+            <button class="btn btn-danger" id="deleteBtn" style="display:none;">Slett liste</button>
+            <button class="btn btn-primary" id="saveBtn2">Lagre</button>
+        </div>
+
+    </main>
+</div>
+
+<footer class="site-footer">
+    <p>Ordaklok — del av Vyrdepil. All data lagrast lokalt i din nettlesar.</p>
+</footer>
+
+<!-- Modal: Lim inn fleire -->
+<div class="modal-overlay" id="bulkOverlay" role="dialog" aria-modal="true" aria-labelledby="bulkTitle">
+    <div class="modal4">
+        <button class="modal-close-x" id="bulkClose" aria-label="Lukk">×</button>
+        <h2 class="heading4 no-mt" id="bulkTitle">Lim inn fleire ord-par</h2>
+        <p>Skriv eller lim inn par på éin av desse formata, eitt per linje:</p>
+        <ul>
+            <li><code>house = hus</code></li>
+            <li><code>house - hus</code> eller <code>house — hus</code></li>
+            <li><code>house: hus</code></li>
+            <li><code>house&nbsp;&nbsp;&nbsp;&nbsp;hus</code> (TAB eller fleire mellomrom)</li>
+        </ul>
+        <textarea id="bulkInput" class="form-textarea" rows="10" placeholder="cat = katt
+dog = hund"></textarea>
+        <p class="hint-text">Eksisterande tomme rader blir erstatta. Linjer som ikkje kan tolkast blir hoppa over.</p>
+        <div class="btn-row">
+            <button class="btn" id="bulkCancel">Avbryt</button>
+            <button class="btn btn-primary" id="bulkApply">Legg til</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Del lenkje (gjenbrukar same struktur som index.html) -->
+<div class="modal-overlay" id="shareLinkOverlay" role="dialog" aria-modal="true" aria-labelledby="shareLinkTitle">
+    <div class="modal4">
+        <button class="modal-close-x" id="shareLinkClose" aria-label="Lukk">×</button>
+        <h2 class="heading4 no-mt" id="shareLinkTitle">Del lista</h2>
+        <p>Kopier lenkja og send til andre. Den inneheld heile lista og fungerer offline.</p>
+        <textarea id="shareLinkInput" class="form-textarea" readonly rows="4"></textarea>
+        <div class="btn-row">
+            <button class="btn btn-primary" id="shareLinkCopy">Kopier lenkje</button>
+            <button class="btn" id="shareLinkOpenBtn">Opne i ny fane</button>
+        </div>
+        <p class="muted" id="shareLinkInfo" style="margin-top:8px;"></p>
+    </div>
+</div>
+
+<script src="../js/vyrdepil-storage.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/state.js"></script>
+<script src="js/share.js"></script>
+<script src="js/editor.js"></script>
+</body>
+</html>

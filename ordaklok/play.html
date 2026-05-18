@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordaklok — Spel</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../js/neo-header.js" defer></script>
+</head>
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+<neo-header></neo-header>
+
+<div class="page-wrapper">
+    <main class="main-content">
+
+        <!-- Topp-knappar -->
+        <div class="btn-row" id="topBar">
+            <a href="index.html" class="btn">← Tilbake</a>
+            <span style="flex:1"></span>
+            <span id="topListInfo" class="muted"></span>
+        </div>
+
+        <!-- ========== OPPSETT-SKJERM ========== -->
+        <section id="setupScreen">
+            <div class="box2">
+                <h2 class="heading4 no-mt" id="setupListTitle">Vel oppsett</h2>
+                <p class="muted" id="setupListMeta"></p>
+
+                <h3 class="heading4">Modus</h3>
+                <div class="mode-grid" id="modeGrid"></div>
+
+                <h3 class="heading4">Retning</h3>
+                <div class="checkbox-row" role="radiogroup" id="directionRow"></div>
+
+                <h3 class="heading4">Tal på ord per økt</h3>
+                <div class="checkbox-row" role="radiogroup" id="countRow"></div>
+
+                <h3 class="heading4">Val</h3>
+                <div class="checkbox-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="optLeitner" checked>
+                        <span>Bruk Leitner (prioriter ord du strevar med)</span>
+                    </label>
+                    <label class="checkbox-label" id="peekWrap">
+                        <input type="checkbox" id="optPeek">
+                        <span>Tillat tjuvtitt på svar</span>
+                    </label>
+                    <label class="checkbox-label" id="boxesWrap">
+                        <input type="checkbox" id="optBoxes" checked>
+                        <span>Vis bokser for bokstavar</span>
+                    </label>
+                    <label class="checkbox-label" id="hilightWrap">
+                        <input type="checkbox" id="optHighlight">
+                        <span>Framhev aktuelle bokstavar</span>
+                    </label>
+                </div>
+
+                <div class="btn-row" style="margin-top:16px;">
+                    <button class="btn btn-primary" id="startBtn">Start ▶</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SPEL-SKJERM ========== -->
+        <section id="playScreen" style="display:none;">
+            <div class="play-hud">
+                <span class="pill score" id="hudScore">0 p</span>
+                <span class="pill correct" id="hudCorrect">0 ✓</span>
+                <span class="pill wrong" id="hudWrong">0 ✗</span>
+                <span class="pill combo" id="hudCombo" style="display:none;">×1</span>
+                <span class="pill" id="hudTimer">00:00</span>
+                <span class="pill" id="hudProgress">0/0</span>
+                <button class="btn btn-small btn-danger" id="quitBtn">Avbryt</button>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <div id="modeRoot"></div>
+        </section>
+
+        <!-- ========== RESULTAT-SKJERM ========== -->
+        <section id="resultsScreen" style="display:none;">
+            <div class="box2">
+                <h2 class="heading4 no-mt">Ferdig!</h2>
+                <div class="results-grid" id="resultStats"></div>
+
+                <h3 class="heading4">Gjennomgang</h3>
+                <div class="review-list" id="reviewList"></div>
+
+                <div class="btn-row" style="margin-top:16px;">
+                    <button class="btn btn-primary" id="playAgainBtn">Spel igjen</button>
+                    <button class="btn" id="changeSetupBtn">Endre oppsett</button>
+                    <a href="index.html" class="btn">Tilbake til biblioteket</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<footer class="site-footer">
+    <p>Ordaklok — del av Vyrdepil. All data lagrast lokalt i din nettlesar.</p>
+</footer>
+
+<script src="../js/vyrdepil-storage.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/state.js"></script>
+<script src="js/leitner.js"></script>
+<script src="js/modes/type.js"></script>
+<script src="js/modes/mc.js"></script>
+<script src="js/modes/flashcard.js"></script>
+<script src="js/modes/match.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
