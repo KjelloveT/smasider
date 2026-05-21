@@ -12,11 +12,21 @@
 
   function modeLabel(mode) {
     return ({
-      type: 'Skriv svar',
-      mc: 'Multiple choice',
-      flashcard: 'Flashcard',
-      match: 'Matching'
+      type: 'Skriv',
+      mc: 'Fleirval',
+      flashcard: 'Hugsekort',
+      match: 'Tevling'
     })[mode] || mode;
+  }
+
+  function makeStamp(text, color) {
+    const el = document.createElement('span');
+    el.className = 'bk-stamp bk-stamp-' + (color || 'gold');
+    el.style.setProperty('--stamp-rot', (Math.random() * 8 - 4).toFixed(1) + 'deg');
+    el.style.fontSize = '0.72rem';
+    el.style.padding = '4px 10px';
+    el.textContent = text;
+    return el;
   }
 
   function bestScoreSummary(listId) {
@@ -47,62 +57,77 @@
 
     for (const list of sorted) {
       const card = document.createElement('div');
-      card.className = 'box2 list-card';
+      card.className = 'bk-list-card';
+
+      // Liten stempel-badge øvre høgre om utvida
+      const stats = OrdaklokLeitner.masteryStats(Storage.getLeitner(list.id), list.pairs.length);
+      const best = bestScoreSummary(list.id);
+      if (stats.mastered > 0 || best) {
+        const stampWrap = document.createElement('div');
+        stampWrap.className = 'bk-list-card-stamp';
+        if (stats.mastered === stats.total && stats.total > 0) {
+          stampWrap.appendChild(makeStamp('MEISTRA', 'green'));
+        } else if (best) {
+          stampWrap.appendChild(makeStamp(best.best + 'p', 'gold'));
+        }
+        card.appendChild(stampWrap);
+      }
 
       const title = document.createElement('h3');
-      title.className = 'list-card-title';
+      title.className = 'bk-list-card-title';
       title.textContent = list.title;
       card.appendChild(title);
 
       const meta = document.createElement('div');
-      meta.className = 'list-card-meta';
-      meta.textContent = `${list.pairs.length} par · ${list.labelA} ↔ ${list.labelB}`;
+      meta.className = 'bk-list-card-meta';
+      meta.innerHTML = `<span><strong>${list.pairs.length}</strong> par</span><span>${escapeHtml(list.labelA)} ↔ ${escapeHtml(list.labelB)}</span>`;
       card.appendChild(meta);
 
-      // Mestrings-pille
-      const stats = OrdaklokLeitner.masteryStats(Storage.getLeitner(list.id), list.pairs.length);
-      if (stats.mastered > 0) {
-        const pill = document.createElement('span');
-        pill.className = 'mastery-pill';
-        pill.textContent = `${stats.mastered} av ${stats.total} meistra`;
-        card.appendChild(pill);
-      }
-
-      // Toppscore-pille
-      const best = bestScoreSummary(list.id);
-      if (best) {
-        const pill = document.createElement('span');
-        pill.className = 'best-pill';
-        pill.textContent = `Best: ${best.best} p (${modeLabel(best.mode)})`;
-        card.appendChild(pill);
+      if (stats.mastered > 0 && stats.mastered < stats.total) {
+        const progress = document.createElement('div');
+        progress.className = 'bk-list-card-meta';
+        progress.style.fontSize = '0.78rem';
+        progress.innerHTML = `<span><strong>${stats.mastered}</strong>/${stats.total} meistra</span>`;
+        if (best) {
+          progress.innerHTML += `<span>Best: ${best.best}p · ${escapeHtml(modeLabel(best.mode))}</span>`;
+        }
+        card.appendChild(progress);
+      } else if (best && stats.mastered === 0) {
+        const bestMeta = document.createElement('div');
+        bestMeta.className = 'bk-list-card-meta';
+        bestMeta.style.fontSize = '0.78rem';
+        bestMeta.innerHTML = `<span>Best: ${best.best}p · ${escapeHtml(modeLabel(best.mode))}</span>`;
+        card.appendChild(bestMeta);
       }
 
       if (list.description) {
         const desc = document.createElement('p');
-        desc.className = 'list-card-desc';
+        desc.className = 'bk-muted';
+        desc.style.fontSize = '0.85rem';
+        desc.style.fontStyle = 'italic';
         desc.textContent = list.description;
         card.appendChild(desc);
       }
 
       const actions = document.createElement('div');
-      actions.className = 'list-card-actions';
+      actions.className = 'bk-list-card-actions';
 
       const playBtn = document.createElement('a');
-      playBtn.className = 'btn btn-primary btn-small';
+      playBtn.className = 'bk-btn bk-btn-primary bk-btn-small';
       playBtn.href = 'play.html?list=' + encodeURIComponent(list.id);
       playBtn.innerHTML = ICONS.play + '<span> Spel</span>';
       actions.appendChild(playBtn);
 
       const editBtn = document.createElement('a');
-      editBtn.className = 'btn btn-small';
+      editBtn.className = 'bk-btn bk-btn-small';
       editBtn.href = 'editor.html?list=' + encodeURIComponent(list.id);
       editBtn.setAttribute('aria-label', 'Rediger ' + list.title);
-      editBtn.innerHTML = ICONS.edit + '<span> Rediger</span>';
+      editBtn.innerHTML = ICONS.edit;
       actions.appendChild(editBtn);
 
       const dupBtn = document.createElement('button');
       dupBtn.type = 'button';
-      dupBtn.className = 'btn btn-small';
+      dupBtn.className = 'bk-btn bk-btn-small';
       dupBtn.setAttribute('aria-label', 'Dupliser ' + list.title);
       dupBtn.innerHTML = ICONS.copy;
       dupBtn.addEventListener('click', () => {
@@ -113,7 +138,7 @@
 
       const exportBtn = document.createElement('button');
       exportBtn.type = 'button';
-      exportBtn.className = 'btn btn-small';
+      exportBtn.className = 'bk-btn bk-btn-small';
       exportBtn.setAttribute('aria-label', 'Eksporter ' + list.title);
       exportBtn.innerHTML = ICONS.download;
       exportBtn.addEventListener('click', () => exportList(list));
@@ -121,7 +146,7 @@
 
       const shareBtn = document.createElement('button');
       shareBtn.type = 'button';
-      shareBtn.className = 'btn btn-small';
+      shareBtn.className = 'bk-btn bk-btn-small';
       shareBtn.setAttribute('aria-label', 'Lag delelenkje for ' + list.title);
       shareBtn.innerHTML = ICONS.share;
       shareBtn.addEventListener('click', () => showShareLink(list));
@@ -129,7 +154,7 @@
 
       const delBtn = document.createElement('button');
       delBtn.type = 'button';
-      delBtn.className = 'btn btn-small btn-danger';
+      delBtn.className = 'bk-btn bk-btn-small bk-btn-danger';
       delBtn.setAttribute('aria-label', 'Slett ' + list.title);
       delBtn.innerHTML = ICONS.trash;
       delBtn.addEventListener('click', () => {
@@ -175,24 +200,57 @@
   }
 
   // ---- Share link modal ----
-  const shareLinkOverlay = document.getElementById('shareLinkOverlay');
-  const shareLinkInput = document.getElementById('shareLinkInput');
-  const shareLinkInfo = document.getElementById('shareLinkInfo');
-  const shareLinkClose = document.getElementById('shareLinkClose');
-  const shareLinkCopy = document.getElementById('shareLinkCopy');
-  const shareLinkOpen = document.getElementById('shareLinkOpen');
+  const shareLinkOverlay  = document.getElementById('shareLinkOverlay');
+  const shareLinkInput    = document.getElementById('shareLinkInput');
+  const shareLinkInfo     = document.getElementById('shareLinkInfo');
+  const shareLinkClose    = document.getElementById('shareLinkClose');
+  const shareLinkQR       = document.getElementById('shareLinkQR');
+  const shareLinkQRWarn   = document.getElementById('shareLinkQRWarn');
+  const shareLinkCopyQR   = document.getElementById('shareLinkCopyQR');
+  const shareLinkCopyURL  = document.getElementById('shareLinkCopyURL');
+  const shareLinkOpen     = document.getElementById('shareLinkOpen');
 
   let currentShareUrl = '';
+
+  function renderQR(url) {
+    try {
+      var qr = qrcode(0, 'L');
+      qr.addData(url);
+      qr.make();
+      var modules = qr.getModuleCount();
+      var maxSize = 220;
+      var scale = Math.max(1, Math.floor(maxSize / modules));
+      shareLinkQR.width  = modules * scale;
+      shareLinkQR.height = modules * scale;
+      var ctx = shareLinkQR.getContext('2d');
+      ctx.clearRect(0, 0, shareLinkQR.width, shareLinkQR.height);
+      for (var r = 0; r < modules; r++) {
+        for (var c = 0; c < modules; c++) {
+          ctx.fillStyle = qr.isDark(r, c) ? '#000000' : '#ffffff';
+          ctx.fillRect(c * scale, r * scale, scale, scale);
+        }
+      }
+      shareLinkQRWarn.style.display = url.length > 900 ? '' : 'none';
+    } catch (e) {
+      shareLinkQR.width = 0;
+      shareLinkQR.height = 0;
+    }
+  }
 
   async function showShareLink(list) {
     shareLinkInput.value = 'Lagar lenkje…';
     shareLinkInfo.textContent = '';
+    shareLinkQR.width = 0;
+    shareLinkQR.height = 0;
     shareLinkOverlay.classList.add('open');
     try {
       const url = await OrdaklokShare.buildShareUrl(list);
       currentShareUrl = url;
       shareLinkInput.value = url;
-      shareLinkInfo.textContent = `Lenkje-lengd: ${url.length} teikn. ${url.length > 8000 ? 'NB: Lange lenkjer kan ikkje fungere i alle e-postklientar.' : ''}`;
+      if (url.length > 8000) {
+        shareLinkInfo.textContent = 'NB: Lenkja er svært lang — ho kan ikkje fungere i alle e-postklientar.';
+      }
+      renderQR(url);
     } catch (e) {
       shareLinkInput.value = 'Klarte ikkje å lage lenkje: ' + e.message;
     }
@@ -206,17 +264,30 @@
   shareLinkOverlay.addEventListener('click', (e) => {
     if (e.target === shareLinkOverlay) closeShareLink();
   });
-  shareLinkCopy.addEventListener('click', async () => {
+
+  shareLinkCopyQR.addEventListener('click', async () => {
+    if (!shareLinkQR.width) return;
+    try {
+      const blob = await new Promise(res => shareLinkQR.toBlob(res, 'image/png'));
+      await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+      shareLinkInfo.textContent = 'QR-kode kopiert som bilete!';
+    } catch {
+      shareLinkInfo.textContent = 'Klarte ikkje å kopiere bilete — prøv høgreklikk på QR-koden.';
+    }
+  });
+
+  shareLinkCopyURL.addEventListener('click', async () => {
     if (!currentShareUrl) return;
     try {
       await navigator.clipboard.writeText(currentShareUrl);
-      shareLinkInfo.textContent = 'Kopiert til utklippstavla!';
+      shareLinkInfo.textContent = 'Lenkje kopiert!';
     } catch {
       shareLinkInput.select();
       document.execCommand('copy');
-      shareLinkInfo.textContent = 'Kopiert (med fallback).';
+      shareLinkInfo.textContent = 'Lenkje kopiert!';
     }
   });
+
   shareLinkOpen.addEventListener('click', () => {
     if (currentShareUrl) window.open(currentShareUrl, '_blank', 'noopener');
   });
@@ -274,14 +345,14 @@
       // Render preview
       shareImportPreview.innerHTML = '';
       const t = document.createElement('h3');
-      t.className = 'heading4 no-mt';
+      t.style.fontFamily = 'var(--bk-serif)';
+      t.style.margin = '0 0 6px';
       t.textContent = v.list.title;
       shareImportPreview.appendChild(t);
       const m = document.createElement('p');
-      m.className = 'muted';
+      m.className = 'bk-muted';
       m.textContent = `${v.list.pairs.length} par · ${v.list.labelA} ↔ ${v.list.labelB}`;
       shareImportPreview.appendChild(m);
-      // Vis dei første 5 para
       const preview = document.createElement('ul');
       preview.style.margin = '8px 0 0';
       preview.style.paddingLeft = '20px';
@@ -292,7 +363,7 @@
       });
       if (v.list.pairs.length > 5) {
         const li = document.createElement('li');
-        li.className = 'muted';
+        li.className = 'bk-muted';
         li.textContent = `…og ${v.list.pairs.length - 5} til`;
         preview.appendChild(li);
       }

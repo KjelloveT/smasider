@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flokkdeilar — Administrer</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../js/neo-header.js" defer></script>
+</head>
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+<neo-header></neo-header>
+
+<div class="page-wrapper">
+<main class="main-content">
+
+    <div class="btn-row" style="margin-bottom: 16px;">
+        <a class="btn" href="index.html" id="btnTilbake">
+            <span id="icon-back"></span> Tilbake
+        </a>
+    </div>
+
+    <h1 class="heading2 no-mt" id="adminTittel">Administrer liste</h1>
+
+    <!-- PIN-skjerm (synleg når lista er PIN-låst og ikkje ulåst enno) -->
+    <div id="pinScreen" class="box2" style="display:none">
+        <div class="pin-form">
+            <span id="icon-lock-big"></span>
+            <h2 class="heading4 no-mt">Skriv inn PIN for å opne utvida administrasjon</h2>
+            <input type="password" id="pinInput" class="pin-input" inputmode="numeric" maxlength="6"
+                   placeholder="••••" aria-label="PIN-kode">
+            <button class="btn btn-primary" id="btnPinSend">Opne</button>
+            <p class="pin-error" id="pinError"></p>
+            <p class="muted" style="font-size:0.85rem">
+                Trykk <em>Opne</em> med feil PIN tre gonger for å sjå alternativ.
+            </p>
+        </div>
+    </div>
+
+    <!-- Hovud-admin (alltid synleg for grunnleggande redigering) -->
+    <div id="adminMain" style="display:none">
+
+        <!-- Listenamn -->
+        <div class="box2" style="margin-bottom: 16px;">
+            <h2 class="heading4 no-mt">Listenamn</h2>
+            <div class="form-group">
+                <input type="text" id="inputListeNamn" class="form-input" placeholder="Namn på lista">
+            </div>
+            <button class="btn btn-primary" id="btnLagreNamn">
+                <span id="icon-check"></span> Lagre namn
+            </button>
+        </div>
+
+        <!-- Elevar -->
+        <div class="box2" style="margin-bottom: 16px;">
+            <h2 class="heading4 no-mt">Elevar</h2>
+            <div id="studentList"></div>
+            <div class="btn-row" style="margin-top: 12px;">
+                <button class="btn" id="btnLeggTilElev">
+                    <span id="icon-plus"></span> Legg til elev
+                </button>
+            </div>
+
+            <details style="margin-top:16px;">
+                <summary style="cursor:pointer; font-weight:600; font-size:0.9rem;">
+                    Lim inn fleire namn på ein gong
+                </summary>
+                <div style="margin-top: 8px;">
+                    <textarea id="bulkAdd" class="bulk-textarea" placeholder="Eitt namn per linje"></textarea>
+                    <button class="btn" id="btnBulkAdd" style="margin-top: 8px;">Legg til alle</button>
+                </div>
+            </details>
+
+            <div class="btn-row" style="margin-top: 16px;">
+                <button class="btn btn-primary" id="btnLagreElevar">
+                    <span id="icon-save"></span> Lagre elevliste
+                </button>
+            </div>
+        </div>
+
+        <!-- Eksport / Import -->
+        <div class="box2" style="margin-bottom: 16px;">
+            <h2 class="heading4 no-mt">Eksport og import</h2>
+            <div class="btn-row">
+                <button class="btn" id="btnExport">
+                    <span id="icon-download"></span> Eksporter JSON
+                </button>
+                <button class="btn" id="btnImport">
+                    <span id="icon-upload"></span> Importer JSON
+                </button>
+                <input type="file" id="importFile" accept="application/json,.json" style="display:none">
+            </div>
+        </div>
+
+        <!-- Aktiver utvida admin (synleg når lista ikkje har utvida admin) -->
+        <div id="activateExtendedSection" style="display:none">
+            <div class="box2" style="margin-bottom: 16px;">
+                <h2 class="heading4 no-mt">Utvida administrasjon</h2>
+                <p style="font-size:0.9rem; margin-bottom:12px;">
+                    Aktiver utvida administrasjon for å setje ja/kanskje/aldri-relasjonar mellom elevar.
+                    Du vel ein PIN-kode som krevst for å redigere relasjonane.
+                </p>
+                <button class="btn btn-primary" id="btnAktiverUtvidet">
+                    <span id="icon-shield"></span> Aktiver utvida administrasjon
+                </button>
+            </div>
+        </div>
+
+        <!-- Utvida admin (relasjonsgrid) — berre synleg etter PIN-validering eller utan PIN på utvida liste -->
+        <div id="extendedSection" style="display:none">
+            <div class="box2" style="margin-bottom: 16px;">
+                <h2 class="heading4 no-mt">Ja / Kanskje / Aldri</h2>
+                <p style="font-size:0.9rem; margin-bottom:12px;">
+                    Trykk på cella for å sykle mellom <strong>Ja</strong> (standard),
+                    <strong>Kanskje</strong> og <strong>Aldri</strong>.
+                    «Aldri»-par vil aldri hamne i same gruppe.
+                </p>
+                <div class="relation-grid-wrap" id="relationGrid"></div>
+            </div>
+
+            <div class="box2" style="margin-bottom: 16px; border-color: #d9534f;">
+                <h2 class="heading4 no-mt" style="color:#d9534f;">Farleg sone</h2>
+                <p style="font-size:0.9rem; margin-bottom: 12px;">
+                    Dette slettar alle ja/kanskje/aldri-relasjonar og PIN-koden, men beheld elevnamna.
+                </p>
+                <button class="btn btn-danger" id="btnFjernTillegg">Fjern tilleggsinfo</button>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+</div>
+
+<footer class="site-footer">
+    <p>Flokkdeilar — all data lagrast lokalt i din nettlesar.</p>
+</footer>
+
+<!-- Modal: Aktiver utvida admin med PIN -->
+<div class="modal-overlay" id="overlayAktiverPin" role="dialog" aria-modal="true" aria-labelledby="titleAktiverPin">
+    <div class="modal4">
+        <button class="modal-close-x" id="closeAktiverPin" aria-label="Lukk">×</button>
+        <h2 class="heading4 no-mt" id="titleAktiverPin">Aktiver utvida administrasjon</h2>
+        <p style="font-size:0.9rem; margin-bottom:12px;">Vel ein PIN-kode (4–6 siffer) for å beskytte relasjonane.</p>
+        <div class="form-group">
+            <label for="newPin1">PIN-kode</label>
+            <input type="password" id="newPin1" class="form-input pin-input" inputmode="numeric" maxlength="6" placeholder="••••">
+        </div>
+        <div class="form-group">
+            <label for="newPin2">Gjenta PIN</label>
+            <input type="password" id="newPin2" class="form-input pin-input" inputmode="numeric" maxlength="6" placeholder="••••">
+        </div>
+        <p id="newPinError" class="pin-error"></p>
+        <div class="btn-row">
+            <button class="btn btn-primary" id="btnBekreftAktiverPin">Aktiver</button>
+            <button class="btn" id="btnAvbrytAktiverPin">Avbryt</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Stadfest fjern tilleggsinfo -->
+<div class="modal-overlay" id="overlayFjern" role="dialog" aria-modal="true" aria-labelledby="titleFjern">
+    <div class="modal4">
+        <button class="modal-close-x" id="closeFjern" aria-label="Lukk">×</button>
+        <h2 class="heading4 no-mt" id="titleFjern">Fjern tilleggsinfo?</h2>
+        <p>Dette slettar alle relasjonar (ja/kanskje/aldri) og PIN-koden permanent. Elevnamna blir verande.</p>
+        <div class="btn-row">
+            <button class="btn btn-danger" id="btnFjernBekreft">Ja, fjern</button>
+            <button class="btn" id="btnFjernAvbryt">Avbryt</button>
+        </div>
+    </div>
+</div>
+
+<script src="../js/vyrdepil-storage.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/names.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/crypto.js"></script>
+<script src="js/ui-admin.js"></script>
+</body>
+</html>

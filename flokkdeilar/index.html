@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flokkdeilar — Tilfeldige elevgrupper</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../js/neo-header.js" defer></script>
+</head>
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+<neo-header></neo-header>
+
+<div class="page-wrapper">
+<main class="main-content">
+
+    <div class="box2 hero-box">
+        <img src="../_resources/flokkdeilar.png" alt="Flokkdeilar" class="hero-logo">
+        <div class="hero-text">
+            <h1>Flokkdeilar</h1>
+            <p>Del klassen inn i tilfeldige grupper — vis resultatet på storskjerm saman med elevane. Lagra klasselistene dine lokalt.</p>
+        </div>
+    </div>
+
+    <div class="btn-row">
+        <button class="btn btn-primary" id="btnNyListe">
+            <span id="icon-plus"></span> Ny klasseliste
+        </button>
+        <button class="btn" id="btnImportJson">
+            <span id="icon-upload"></span> Importer JSON
+        </button>
+        <input type="file" id="importJsonFile" accept="application/json,.json" style="display:none">
+        <button class="btn" id="btnImportKlassekart">
+            <span id="icon-users"></span> Hent frå Klassekart
+        </button>
+    </div>
+
+    <h2 class="heading2 no-mt">Mine klasselister</h2>
+    <div id="listGrid" class="list-grid" aria-live="polite"></div>
+    <div id="emptyHelp" class="empty-help" style="display:none">
+        <p>Ingen klasselister enno.</p>
+        <p>Klikk <strong>Ny klasseliste</strong> for å kome i gang.</p>
+    </div>
+
+</main>
+</div>
+
+<footer class="site-footer">
+    <p>Flokkdeilar — del av Vyrdepil. All data lagrast lokalt i din nettlesar.</p>
+</footer>
+
+<!-- Modal: Ny klasseliste -->
+<div class="modal-overlay" id="overlayNyListe" role="dialog" aria-modal="true" aria-labelledby="titleNyListe">
+    <div class="modal4">
+        <button class="modal-close-x" id="closeNyListe" aria-label="Lukk">×</button>
+        <h2 class="heading4 no-mt" id="titleNyListe">Ny klasseliste</h2>
+
+        <div class="form-group">
+            <label for="inputListeNamn">Namn på lista</label>
+            <input type="text" id="inputListeNamn" class="form-input" placeholder="t.d. 7B 2025/26" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="bulkStudents">Elevnamn (eitt per linje)</label>
+            <textarea id="bulkStudents" class="bulk-textarea" placeholder="Ada&#10;Bjørn&#10;Cecilie&#10;…"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label class="checkbox-label">
+                <input type="checkbox" id="checkExtended">
+                <span>Utvida administrasjon (ja/kanskje/aldri-relasjonar, krev PIN)</span>
+            </label>
+        </div>
+
+        <div id="pinFields" style="display:none">
+            <div class="form-group">
+                <label for="inputPin1">PIN-kode (4–6 siffer)</label>
+                <input type="password" id="inputPin1" class="form-input" inputmode="numeric" maxlength="6" placeholder="••••">
+            </div>
+            <div class="form-group">
+                <label for="inputPin2">Gjenta PIN</label>
+                <input type="password" id="inputPin2" class="form-input" inputmode="numeric" maxlength="6" placeholder="••••">
+            </div>
+            <p id="pinMatchError" class="pin-error"></p>
+        </div>
+
+        <div class="btn-row">
+            <button class="btn btn-primary" id="btnLagListe">Lag liste</button>
+            <button class="btn" id="btnAvbrytNy">Avbryt</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Hent frå Klassekart -->
+<div class="modal-overlay" id="overlayKlassekart" role="dialog" aria-modal="true" aria-labelledby="titleKlassekart">
+    <div class="modal4">
+        <button class="modal-close-x" id="closeKlassekart" aria-label="Lukk">×</button>
+        <h2 class="heading4 no-mt" id="titleKlassekart">Hent elevliste frå Klassekart</h2>
+        <p>Vel eit Klassekart-oppsett å kopiere elevnamna frå.</p>
+        <div id="klassekartLister" style="margin: 12px 0;"></div>
+        <p class="muted" id="kkEmptyMsg" style="display:none">Ingen lagra Klassekart-oppsett funne.</p>
+        <div class="btn-row">
+            <button class="btn" id="closeKlassekart2">Lukk</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Slett liste -->
+<div class="modal-overlay" id="overlaySlettListe" role="dialog" aria-modal="true" aria-labelledby="titleSlett">
+    <div class="modal4">
+        <button class="modal-close-x" id="closeSlettModal" aria-label="Lukk">×</button>
+        <h2 class="heading4 no-mt" id="titleSlett">Slett klasseliste?</h2>
+        <p>Er du sikker? Dette kan ikkje angrast.</p>
+        <div class="btn-row">
+            <button class="btn btn-danger" id="btnBekreftSlett">Slett</button>
+            <button class="btn" id="btnAvbrytSlett">Avbryt</button>
+        </div>
+    </div>
+</div>
+
+<script src="../js/vyrdepil-storage.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/names.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/crypto.js"></script>
+<script src="js/ui-index.js"></script>
+</body>
+</html>

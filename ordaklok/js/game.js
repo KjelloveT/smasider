@@ -20,25 +20,36 @@
     match: window.OrdaklokModeMatch
   };
 
+  // Boksekamp-terminologi (overstyr label/description/icon frå modus-modulane)
+  const MODE_META = {
+    type:      { num: '01', label: 'Skriv',     description: 'Tast inn svaret. Tjuvtitt om du står fast.',  icon: 'pencil' },
+    mc:        { num: '02', label: 'Fleirval',  description: 'Vel rett blant fire alternativ. Raskt og leikt.', icon: 'list-checks' },
+    flashcard: { num: '03', label: 'Hugsekort', description: 'Snu kortet og vurder sjølv. God for læring.', icon: 'layers' },
+    match:     { num: '04', label: 'Tevling',   description: 'Par opp orda mot klokka. Smell saman rette par.', icon: 'swords' }
+  };
+
   // ---- App-state ----
   const params = new URLSearchParams(location.search);
   const listId = params.get('list');
   let list = listId ? Storage.getList(listId) : null;
 
   if (!list) {
-    document.querySelector('main.main-content').innerHTML =
-      '<div class="box2"><h2 class="heading4 no-mt">Lista finst ikkje</h2>' +
+    document.querySelector('main.bk-main').innerHTML =
+      '<div class="bk-poster" style="text-align:center;">' +
+      '<h2 style="font-family:var(--bk-serif);color:var(--bk-red);">Lista finst ikkje</h2>' +
       '<p>Du kan kome tilbake til biblioteket og velje ei anna liste.</p>' +
-      '<a class="btn btn-primary" href="index.html">Tilbake til biblioteket</a></div>';
+      '<a class="bk-btn bk-btn-primary" href="index.html" style="margin-top:14px;">Til biblioteket</a></div>';
     return;
   }
   Storage.setLastList(list.id);
 
   document.getElementById('topListInfo').textContent = list.title;
-  document.getElementById('setupListTitle').textContent = list.title;
+  // Big serif setup title vert "labelA mot labelB"
+  document.getElementById('setupTitleA').textContent = (list.labelA || 'A').toUpperCase();
+  document.getElementById('setupTitleB').textContent = (list.labelB || 'B').toUpperCase();
   const stats = Leitner.masteryStats(Storage.getLeitner(list.id), list.pairs.length);
   document.getElementById('setupListMeta').textContent =
-    `${list.pairs.length} par · ${list.labelA} ↔ ${list.labelB} · ${stats.mastered} av ${stats.total} meistra`;
+    `«${list.title}» · ${list.pairs.length} par · ${stats.mastered} av ${stats.total} meistra`;
 
   // ---- Oppsett ----
   const setup = {
@@ -58,50 +69,67 @@
     for (const id of modeOrder) {
       const m = MODES[id];
       if (!m) continue;
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'mode-card' + (setup.mode === id ? ' selected' : '');
-      btn.dataset.mode = id;
-      btn.innerHTML =
-        `<span class="mode-card-title">${m.icon || ''} ${escapeHtml(m.label)}</span>` +
-        `<span class="mode-card-desc">${escapeHtml(m.description)}</span>`;
-      btn.addEventListener('click', () => {
+      const meta = MODE_META[id] || { num: '?', label: m.label, description: m.description, icon: 'star' };
+
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'bk-mode-card' + (setup.mode === id ? ' active' : '');
+      card.dataset.mode = id;
+
+      const num = document.createElement('span');
+      num.className = 'bk-mode-num';
+      num.textContent = meta.num;
+      card.appendChild(num);
+
+      const iconWrap = document.createElement('span');
+      iconWrap.className = 'bk-mode-icon';
+      iconWrap.appendChild(BKIcons.create(meta.icon, 36));
+      card.appendChild(iconWrap);
+
+      const title = document.createElement('span');
+      title.className = 'bk-mode-title';
+      title.textContent = meta.label;
+      card.appendChild(title);
+
+      const desc = document.createElement('span');
+      desc.className = 'bk-mode-desc';
+      desc.textContent = meta.description;
+      card.appendChild(desc);
+
+      const activeBadge = document.createElement('span');
+      activeBadge.className = 'bk-mode-active-badge';
+      activeBadge.appendChild(BKIcons.create('check', 14));
+      card.appendChild(activeBadge);
+
+      card.addEventListener('click', () => {
         setup.mode = id;
         renderModeGrid();
         updateOptionVisibility();
       });
-      grid.appendChild(btn);
+      grid.appendChild(card);
     }
   }
 
-  function renderRadioGroup(containerId, options, valueProp) {
+  function renderStampGroup(containerId, options, valueProp) {
     const wrap = document.getElementById(containerId);
     wrap.innerHTML = '';
     options.forEach(opt => {
-      const label = document.createElement('label');
-      label.className = 'checkbox-label';
-      const radio = document.createElement('input');
-      radio.type = 'radio';
-      radio.name = containerId;
-      radio.value = String(opt.value);
-      if (setup[valueProp] === opt.value) radio.checked = true;
-      radio.addEventListener('change', () => {
-        if (radio.checked) {
-          setup[valueProp] = isNaN(Number(opt.value)) ? opt.value : Number(opt.value);
-        }
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'bk-rule-stamp' + (setup[valueProp] === opt.value ? ' active' : '');
+      btn.textContent = opt.label;
+      btn.addEventListener('click', () => {
+        setup[valueProp] = opt.value;
+        renderStampGroup(containerId, options, valueProp);
       });
-      const span = document.createElement('span');
-      span.textContent = opt.label;
-      label.appendChild(radio);
-      label.appendChild(span);
-      wrap.appendChild(label);
+      wrap.appendChild(btn);
     });
   }
 
   function renderDirection() {
-    renderRadioGroup('directionRow', [
-      { value: 'AB', label: list.labelA + ' → ' + list.labelB },
-      { value: 'BA', label: list.labelB + ' → ' + list.labelA },
+    renderStampGroup('directionRow', [
+      { value: 'AB',  label: list.labelA + ' → ' + list.labelB },
+      { value: 'BA',  label: list.labelB + ' → ' + list.labelA },
       { value: 'mix', label: 'Blanda' }
     ], 'direction');
   }
@@ -114,15 +142,15 @@
         opts.push({ value: v, label: v === max ? `Alle (${max})` : String(v) });
       }
     }
-    renderRadioGroup('countRow', opts, 'count');
+    renderStampGroup('countRow', opts, 'count');
   }
 
   function updateOptionVisibility() {
     const isType = setup.mode === 'type';
-    document.getElementById('peekWrap').style.display = isType ? '' : 'none';
-    document.getElementById('boxesWrap').style.display = isType ? '' : 'none';
+    document.getElementById('peekWrap').style.display    = isType ? '' : 'none';
+    document.getElementById('boxesWrap').style.display   = isType ? '' : 'none';
     document.getElementById('hilightWrap').style.display = isType ? '' : 'none';
-    // Match-mode har ikkje meiningsfull retning eller Leitner
+    // Tevling har ikkje meiningsfull retning
     const dirRow = document.getElementById('directionRow');
     dirRow.style.opacity = setup.mode === 'match' ? '0.45' : '';
   }
@@ -252,20 +280,20 @@
   }
 
   function refreshHUD() {
-    document.getElementById('hudScore').textContent = session.score + ' p';
-    document.getElementById('hudCorrect').textContent = session.correct + ' ✓';
-    document.getElementById('hudWrong').textContent = session.wrong + ' ✗';
-    const comboEl = document.getElementById('hudCombo');
+    document.getElementById('hudScore').textContent   = session.score;
+    document.getElementById('hudCorrect').textContent = session.correct;
+    document.getElementById('hudWrong').textContent   = session.wrong;
+    const comboCell = document.getElementById('hudComboCell');
+    const comboEl   = document.getElementById('hudCombo');
     if (session.combo >= 2) {
-      comboEl.style.display = '';
+      if (comboCell) comboCell.style.display = '';
       comboEl.textContent = '×' + session.combo;
     } else {
-      comboEl.style.display = 'none';
+      if (comboCell) comboCell.style.display = 'none';
     }
     const total = session.queue.length;
     const done = session.results.length;
     document.getElementById('hudProgress').textContent = done + '/' + total;
-    document.getElementById('progressFill').style.width = (total > 0 ? (done / total * 100) : 0) + '%';
   }
 
   function startTimer() {
@@ -316,12 +344,13 @@
     stats.innerHTML = '';
     function addStat(label, value, highlight) {
       const d = document.createElement('div');
-      d.className = 'result-stat' + (highlight ? ' highlight' : '');
+      d.className = 'bk-paper';
+      d.style.cssText = 'text-align:center;padding:14px 10px;' + (highlight ? 'background:var(--bk-yel-soft);border-color:var(--bk-red);' : '');
       const l = document.createElement('div');
-      l.className = 'stat-label';
+      l.style.cssText = 'font-family:var(--bk-sans);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--bk-ink-soft);';
       l.textContent = label;
       const v = document.createElement('div');
-      v.className = 'stat-value';
+      v.style.cssText = 'font-family:var(--bk-serif);font-size:1.7rem;font-weight:800;color:' + (highlight ? 'var(--bk-red)' : 'var(--bk-ink)') + ';line-height:1.1;margin-top:4px;';
       v.textContent = value;
       d.appendChild(l); d.appendChild(v);
       stats.appendChild(d);
@@ -329,14 +358,13 @@
     if (session.mode !== 'flashcard') {
       addStat('Poeng', session.score, bestUpdated);
     }
-    addStat('Rette', session.correct + ' / ' + total);
-    if (session.mode !== 'flashcard') addStat('Feil', session.wrong);
+    addStat('Treff', session.correct + ' / ' + total);
+    if (session.mode !== 'flashcard') addStat('Bom', session.wrong);
     if (session.peeked > 0) addStat('Tjuvtitta', session.peeked);
     if (session.mode !== 'flashcard') addStat('Treffsikker', accuracy + ' %');
     if (session.bestCombo >= 3) addStat('Beste kombo', '×' + session.bestCombo);
     addStat('Tid', formatTime(totalTime));
 
-    // Toppscore-info
     if (session.mode !== 'flashcard') {
       const prev = Storage.getScore(list.id, session.mode);
       if (prev) {
@@ -344,23 +372,27 @@
       }
     }
 
-    // Mestrings-info
     const m = Leitner.masteryStats(Storage.getLeitner(list.id), list.pairs.length);
     addStat('Meistring', m.mastered + ' / ' + m.total);
 
-    // Gjennomgang
     const review = document.getElementById('reviewList');
     review.innerHTML = '';
     session.results.forEach(r => {
       const pair = list.pairs[r.idx];
       const div = document.createElement('div');
-      div.className = 'review-item ' + (!r.correct ? 'bad' : (r.peeked ? 'peek' : ''));
+      const bg = !r.correct ? 'var(--bk-pink-soft)' : (r.peeked ? 'var(--bk-yel-soft)' : 'transparent');
+      div.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 12px;margin-bottom:4px;background:' + bg + ';border-radius:6px;border:1px solid var(--bk-ink-soft);';
       const span = document.createElement('span');
-      span.className = 'rev-pair';
+      span.style.fontWeight = '600';
       span.textContent = pair.a + ' — ' + pair.b;
       div.appendChild(span);
       const tag = document.createElement('span');
-      tag.textContent = r.correct ? (r.peeked ? 'tjuvtitta' : 'rett') : 'feil';
+      tag.className = 'bk-stamp ' + (r.correct ? (r.peeked ? 'bk-stamp-gold' : 'bk-stamp-green') : 'bk-stamp-red');
+      tag.style.fontSize = '0.75rem';
+      tag.style.padding = '2px 8px';
+      tag.style.transform = 'none';
+      tag.style.boxShadow = 'none';
+      tag.textContent = r.correct ? (r.peeked ? 'TJUVTITTA' : 'TREFF') : 'BOM';
       div.appendChild(tag);
       review.appendChild(div);
     });
@@ -388,10 +420,9 @@
   document.getElementById('changeSetupBtn').addEventListener('click', () => {
     document.getElementById('resultsScreen').style.display = 'none';
     document.getElementById('setupScreen').style.display = '';
-    // Oppdater meistrings-tellar
     const stats2 = Leitner.masteryStats(Storage.getLeitner(list.id), list.pairs.length);
     document.getElementById('setupListMeta').textContent =
-      `${list.pairs.length} par · ${list.labelA} ↔ ${list.labelB} · ${stats2.mastered} av ${stats2.total} meistra`;
+      `«${list.title}» · ${list.pairs.length} par · ${stats2.mastered} av ${stats2.total} meistra`;
   });
 
 })();

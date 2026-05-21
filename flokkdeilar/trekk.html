@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flokkdeilar — Trekk grupper</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../js/neo-header.js" defer></script>
+</head>
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+<neo-header></neo-header>
+
+<div class="page-wrapper">
+<main class="main-content">
+
+    <div class="btn-row" style="margin-bottom: 16px;">
+        <a class="btn" href="index.html" id="btnTilbake">
+            <span id="icon-back"></span> Tilbake
+        </a>
+    </div>
+
+    <h1 class="heading2 no-mt" id="listeTittel">Trekk grupper</h1>
+
+    <!-- Oppsett -->
+    <div class="box2" id="setupBox">
+
+        <h2 class="heading4 no-mt">Vel deltakarar</h2>
+        <p style="font-size:0.9rem; margin-bottom:8px;">Klikk på ein elev for å markere vedkomande som fråverande.</p>
+        <div id="elevChips" class="elev-chips" aria-live="polite"></div>
+
+        <hr style="margin: 16px 0; border: none; border-top: 2px solid var(--border);">
+
+        <div class="trekk-setup">
+            <div class="trekk-field">
+                <label for="selectMode">Konfigurasjon</label>
+                <select id="selectMode" class="form-select">
+                    <option value="size">Vel gruppestorleik</option>
+                    <option value="groups">Vel tal grupper</option>
+                </select>
+            </div>
+            <div class="trekk-field">
+                <label for="inputValue" id="valueLabel">Storleik per gruppe</label>
+                <input type="number" id="inputValue" class="form-input" value="3" min="1" max="99" style="width: 80px;">
+            </div>
+            <div class="trekk-field">
+                <label for="selectCategory">Gruppenamn-kategori</label>
+                <select id="selectCategory" class="form-select"></select>
+            </div>
+        </div>
+
+        <p class="size-preview" id="sizePreview"></p>
+
+        <button class="btn btn-primary btn-trekk" id="btnTrekk">
+            <span id="icon-shuffle"></span> Trekk grupper!
+        </button>
+    </div>
+
+    <!-- Varsel om constraint-brot -->
+    <div class="warning-box" id="warningBox" style="display:none" role="alert">
+        <span id="icon-warning"></span>
+        <span id="warningText"></span>
+    </div>
+
+    <!-- Resultat -->
+    <div id="resultArea" style="display:none">
+        <div class="btn-row" style="margin: 16px 0 8px;">
+            <button class="btn btn-primary" id="btnNyttTrekk">
+                <span id="icon-refresh"></span> Trekk på nytt
+            </button>
+        </div>
+        <div id="groupsGrid" class="groups-grid" aria-live="polite"></div>
+    </div>
+
+</main>
+</div>
+
+<footer class="site-footer">
+    <p>Flokkdeilar — all data lagrast lokalt i din nettlesar.</p>
+</footer>
+
+<script src="../js/vyrdepil-storage.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/names.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/generator.js"></script>
+<script src="js/ui-trekk.js"></script>
+</body>
+</html>

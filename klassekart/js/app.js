@@ -133,6 +133,32 @@ const App = (() => {
                 }).catch(err => alert('Kunne ikkje importere fila: ' + err.message));
             }
         });
+
+        document.getElementById('btn-import-flokkdeilar').addEventListener('click', () => {
+            const container = document.getElementById('flokkdeilar-list');
+            container.innerHTML = '';
+            const raw = localStorage.getItem('VyrdepilStorage');
+            const data = raw ? JSON.parse(raw) : {};
+            const lister = data['flokkdeilar']?.['lister'] || [];
+            if (lister.length === 0) {
+                container.textContent = 'Ingen Flokkdeilar-lister funne.';
+                return;
+            }
+            lister.forEach(liste => {
+                const students = (liste.students || []).filter(s => s.name);
+                const btn = document.createElement('button');
+                btn.className = 'tb-btn';
+                btn.style.cssText = 'display:block;width:100%;margin-bottom:6px;text-align:left;';
+                btn.textContent = `${liste.name} (${students.length} elevar)`;
+                btn.addEventListener('click', () => {
+                    App.setStudentList(students.map(s => ({ name: s.name, id: s.id, color: '#ffffff' })));
+                    App.refreshStudentPanel();
+                    Storage.pushHistory();
+                    container.innerHTML = '<p style="color:green;font-weight:700;">✓ Elevliste henta!</p><p style="font-size:0.85rem;color:#555;margin-top:6px;">Merk: Lista er ikkje kopla til Flokkdeilar. Endringar i den eine appen oppdaterer ikkje den andre.</p>';
+                });
+                container.appendChild(btn);
+            });
+        });
     }
 
     function toggleGrid() {

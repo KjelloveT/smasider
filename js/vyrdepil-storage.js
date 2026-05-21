@@ -160,6 +160,25 @@ const VyrdepilStorage = (function() {
         setData(data);
     }
 
+    /* Erset heile lista for ein game+listKey */
+    function setList(game, listKey, arr) {
+        const data = getData();
+        if (!data[game]) data[game] = {};
+        data[game][listKey] = arr;
+        setData(data);
+    }
+
+    /* Oppdater eitt element i lista (finn på id) */
+    function updateListItem(game, listKey, id, changes) {
+        const data = getData();
+        if (!data[game]?.[listKey]) return null;
+        const idx = data[game][listKey].findIndex(item => item.id === id);
+        if (idx === -1) return null;
+        data[game][listKey][idx] = { ...data[game][listKey][idx], ...changes };
+        setData(data);
+        return data[game][listKey][idx];
+    }
+
     // Collection API (for card-collecting games like Heimsank)
     // Stored as: data[game].collections[catId] = [entry, entry, ...]
     function getCollection(game, catId) {
@@ -212,6 +231,8 @@ const VyrdepilStorage = (function() {
         hasGameState,
         saveListItem,
         getList,
+        setList,
+        updateListItem,
         deleteListItem,
         getCollection,
         setCollection,

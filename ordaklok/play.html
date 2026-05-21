@@ -5,91 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ordaklok — Spel</title>
     <link rel="stylesheet" href="../css/neobrutalisme.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/boksekamp.css">
     <script src="../js/neo-header.js" defer></script>
 </head>
 <body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+
 <neo-header></neo-header>
 
-<div class="page-wrapper">
-    <main class="main-content">
+<div class="bk-page">
+    <main class="bk-main">
 
-        <!-- Topp-knappar -->
-        <div class="btn-row" id="topBar">
-            <a href="index.html" class="btn">← Tilbake</a>
-            <span style="flex:1"></span>
-            <span id="topListInfo" class="muted"></span>
+        <!-- Topbar -->
+        <div class="bk-topbar">
+            <a href="index.html" class="bk-topbar-back">
+                <span data-icon="arrow-left"></span> Til biblioteket
+            </a>
+            <span class="bk-topbar-spacer"></span>
+            <span class="bk-topbar-meta" id="topListInfo"></span>
         </div>
 
         <!-- ========== OPPSETT-SKJERM ========== -->
         <section id="setupScreen">
-            <div class="box2">
-                <h2 class="heading4 no-mt" id="setupListTitle">Vel oppsett</h2>
-                <p class="muted" id="setupListMeta"></p>
+            <div class="bk-poster bk-sunburst bk-sun-calm bk-fade-in">
 
-                <h3 class="heading4">Modus</h3>
-                <div class="mode-grid" id="modeGrid"></div>
-
-                <h3 class="heading4">Retning</h3>
-                <div class="checkbox-row" role="radiogroup" id="directionRow"></div>
-
-                <h3 class="heading4">Tal på ord per økt</h3>
-                <div class="checkbox-row" role="radiogroup" id="countRow"></div>
-
-                <h3 class="heading4">Val</h3>
-                <div class="checkbox-row">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="optLeitner" checked>
-                        <span>Bruk Leitner (prioriter ord du strevar med)</span>
-                    </label>
-                    <label class="checkbox-label" id="peekWrap">
-                        <input type="checkbox" id="optPeek">
-                        <span>Tillat tjuvtitt på svar</span>
-                    </label>
-                    <label class="checkbox-label" id="boxesWrap">
-                        <input type="checkbox" id="optBoxes" checked>
-                        <span>Vis bokser for bokstavar</span>
-                    </label>
-                    <label class="checkbox-label" id="hilightWrap">
-                        <input type="checkbox" id="optHighlight">
-                        <span>Framhev aktuelle bokstavar</span>
-                    </label>
+                <div class="bk-setup-top">
+                    <h1 class="bk-setup-title" id="setupListTitle">
+                        <span id="setupTitleA">A</span>
+                        <em>mot</em>
+                        <span id="setupTitleB">B</span>
+                    </h1>
+                    <p class="bk-hero-tagline" id="setupListMeta" style="margin-top: 6px;"></p>
                 </div>
 
-                <div class="btn-row" style="margin-top:16px;">
-                    <button class="btn btn-primary" id="startBtn">Start ▶</button>
+                <div class="bk-setup-vyrde">
+                    <img src="../_resources/vyrdepil.png" class="bk-vyrde mood-wave" alt="Vyrde">
+                    <div class="bk-bubble bk-bubble-left" id="vyrdeBubble">Godt folk! Vel kampform under, juster reglane, og ring start når du er klar.</div>
+                </div>
+
+                <!-- Modus-kort -->
+                <div class="bk-mode-grid" id="modeGrid"></div>
+
+                <!-- Reglar-boksar -->
+                <div class="bk-rules-grid">
+                    <div class="bk-rules-box">
+                        <div class="bk-rules-box-title">RETNING</div>
+                        <div id="directionRow" class="bk-rules-content"></div>
+                    </div>
+
+                    <div class="bk-rules-box">
+                        <div class="bk-rules-box-title">ANTAL ORD</div>
+                        <div id="countRow" class="bk-rules-content"></div>
+                    </div>
+
+                    <div class="bk-rules-box">
+                        <div class="bk-rules-box-title">INNSTILLINGAR</div>
+                        <div class="bk-rules-content bk-rules-checks">
+                            <label class="bk-rule-check" id="leitnerWrap">
+                                <input type="checkbox" id="optLeitner" checked>
+                                <span>Prioriter ord du strevar med</span>
+                            </label>
+                            <label class="bk-rule-check" id="peekWrap">
+                                <input type="checkbox" id="optPeek">
+                                <span>Tillat tjuvtitt</span>
+                            </label>
+                            <label class="bk-rule-check" id="boxesWrap">
+                                <input type="checkbox" id="optBoxes" checked>
+                                <span>Vis bokser for bokstavar</span>
+                            </label>
+                            <label class="bk-rule-check" id="hilightWrap">
+                                <input type="checkbox" id="optHighlight">
+                                <span>Framhev aktuelle bokstavar</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Startknapp -->
+                <div class="bk-start-row">
+                    <button class="bk-bell-btn" id="startBtn">
+                        <span data-icon="bell"></span> START!
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- ========== SPEL-SKJERM ========== -->
+        <!-- ========== SPEL-SKJERM (vert pussa i seinare fase) ========== -->
         <section id="playScreen" style="display:none;">
-            <div class="play-hud">
-                <span class="pill score" id="hudScore">0 p</span>
-                <span class="pill correct" id="hudCorrect">0 ✓</span>
-                <span class="pill wrong" id="hudWrong">0 ✗</span>
-                <span class="pill combo" id="hudCombo" style="display:none;">×1</span>
-                <span class="pill" id="hudTimer">00:00</span>
-                <span class="pill" id="hudProgress">0/0</span>
-                <button class="btn btn-small btn-danger" id="quitBtn">Avbryt</button>
+            <div class="bk-scoreboard bk-sb-full" style="margin-bottom: 16px;">
+                <div class="bk-sb-cell"><span class="bk-sb-label">Poeng</span><span class="bk-sb-value" id="hudScore">0</span></div>
+                <div class="bk-sb-cell"><span class="bk-sb-label">Treff</span><span class="bk-sb-value bk-sb-treff" id="hudCorrect">0</span></div>
+                <div class="bk-sb-cell"><span class="bk-sb-label">Bom</span><span class="bk-sb-value bk-sb-bom" id="hudWrong">0</span></div>
+                <div class="bk-sb-cell" id="hudComboCell" style="display:none;"><span class="bk-sb-label">Kombo</span><span class="bk-sb-value" id="hudCombo">×1</span></div>
+                <div class="bk-sb-cell"><span class="bk-sb-label">Tid</span><span class="bk-sb-value" id="hudTimer">00:00</span></div>
+                <div class="bk-sb-cell"><span class="bk-sb-label">Runde</span><span class="bk-sb-value" id="hudProgress">0/0</span></div>
+                <span class="bk-sb-spacer"></span>
+                <button class="bk-sb-quit" id="quitBtn">Avbryt</button>
             </div>
-            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-            <div id="modeRoot"></div>
+            <div class="bk-paper">
+                <div id="modeRoot"></div>
+            </div>
         </section>
 
-        <!-- ========== RESULTAT-SKJERM ========== -->
+        <!-- ========== RESULTAT-SKJERM (vert pussa i seinare fase) ========== -->
         <section id="resultsScreen" style="display:none;">
-            <div class="box2">
-                <h2 class="heading4 no-mt">Ferdig!</h2>
-                <div class="results-grid" id="resultStats"></div>
+            <div class="bk-poster bk-sunburst bk-sun-full">
+                <div style="text-align:center; margin-bottom: 20px;">
+                    <span class="bk-stamp bk-stamp-xl bk-stamp-red" style="--stamp-rot: -3deg;">FERDIG!</span>
+                </div>
+                <div class="bk-list-grid" id="resultStats" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));"></div>
 
-                <h3 class="heading4">Gjennomgang</h3>
-                <div class="review-list" id="reviewList"></div>
+                <h3 style="font-family: var(--bk-serif); margin: 24px 0 12px;">Gjennomgang</h3>
+                <div id="reviewList" style="background: var(--bk-paper); border: 2px solid var(--bk-ink); border-radius: 8px; padding: 14px; max-height: 360px; overflow-y: auto;"></div>
 
-                <div class="btn-row" style="margin-top:16px;">
-                    <button class="btn btn-primary" id="playAgainBtn">Spel igjen</button>
-                    <button class="btn" id="changeSetupBtn">Endre oppsett</button>
-                    <a href="index.html" class="btn">Tilbake til biblioteket</a>
+                <div class="bk-btn-row" style="margin-top:20px; justify-content: center;">
+                    <button class="bk-btn bk-btn-primary" id="playAgainBtn">Spel igjen</button>
+                    <button class="bk-btn" id="changeSetupBtn">Endre oppsett</button>
+                    <a href="index.html" class="bk-btn bk-btn-ghost">Til biblioteket</a>
                 </div>
             </div>
         </section>
@@ -97,18 +128,29 @@
     </main>
 </div>
 
-<footer class="site-footer">
-    <p>Ordaklok — del av Vyrdepil. All data lagrast lokalt i din nettlesar.</p>
+<footer class="bk-footer">
+    Ordaklok — del av Vyrdepil. All data lagrast lokalt i din nettlesar.
 </footer>
 
 <script src="../js/vyrdepil-storage.js"></script>
+<script src="js/icons/lucide-set.js"></script>
+<script src="js/ui/bk-components.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/state.js"></script>
+<script src="js/text-fit.js"></script>
 <script src="js/leitner.js"></script>
 <script src="js/modes/type.js"></script>
 <script src="js/modes/mc.js"></script>
 <script src="js/modes/flashcard.js"></script>
 <script src="js/modes/match.js"></script>
 <script src="js/game.js"></script>
+<script src="js/vyrde-quotes.js"></script>
+
+<script>
+  document.querySelectorAll('[data-icon]').forEach(el => {
+    el.appendChild(BKIcons.create(el.dataset.icon, 18));
+  });
+</script>
+
 </body>
 </html>

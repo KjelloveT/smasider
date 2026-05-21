@@ -1,4 +1,6 @@
-/* Ordaklok — modus: flashcard (sjølv-vurdering) */
+/* Ordaklok — modus: Hugsekort (Boksekamp)
+ * Stort 3D-flip-kort, tre Leitner-knappar: Visste ikkje / Snautt / Lett
+ */
 (function (root) {
   'use strict';
 
@@ -10,15 +12,22 @@
     let questionStartedAt = 0;
     let flipped = false;
     let cardEl = null;
+    let leitnerRow = null;
+    let hintEl = null;
+    let vyrdeEl = null;
+    let bubbleEl = null;
+    let keyHandler = null;
 
     function render(host) {
       mountEl = document.createElement('div');
+      mountEl.className = 'bk-flashcard-area';
       host.appendChild(mountEl);
       next();
     }
 
     function next() {
       if (pos >= queue.length) {
+        cleanup();
         callbacks.onFinish && callbacks.onFinish();
         return;
       }
@@ -27,106 +36,147 @@
 
       const item = queue[pos];
       const pair = list.pairs[item.idx];
-      const promptText = State.getPrompt(pair, item.direction);
+      const promptText  = State.getPrompt(pair, item.direction);
       const promptLabel = State.getPromptLabel(list, item.direction);
-      const answerText = State.getAnswer(pair, item.direction);
+      const answerText  = State.getAnswer(pair, item.direction);
       const answerLabel = State.getAnswerLabel(list, item.direction);
 
       mountEl.innerHTML = '';
 
-      const wrap = document.createElement('div');
-      wrap.className = 'box2';
-      wrap.style.padding = '20px';
+      // Vyrde (skjult på mobil via CSS)
+      const vyrdeWrap = document.createElement('div');
+      vyrdeWrap.className = 'bk-flashcard-vyrde';
+      vyrdeEl = document.createElement('img');
+      vyrdeEl.src = '../_resources/vyrdepil.png';
+      vyrdeEl.alt = 'Vyrde';
+      vyrdeEl.className = 'bk-vyrde mood-think';
+      bubbleEl = document.createElement('div');
+      bubbleEl.className = 'bk-bubble bk-bubble-right';
+      bubbleEl.textContent = 'Hugsar du dette?';
+      vyrdeWrap.appendChild(bubbleEl);
+      vyrdeWrap.appendChild(vyrdeEl);
+      mountEl.appendChild(vyrdeWrap);
 
-      const card = document.createElement('div');
-      card.className = 'flashcard';
-      cardEl = card;
-      card.innerHTML =
-        '<div class="flashcard-inner">' +
-          '<div class="flashcard-face front">' +
-            '<div class="face-label">' + State.escapeHtml(promptLabel) + '</div>' +
-            '<div class="face-text"></div>' +
-          '</div>' +
-          '<div class="flashcard-face back">' +
-            '<div class="face-label">' + State.escapeHtml(answerLabel) + '</div>' +
-            '<div class="face-text"></div>' +
-          '</div>' +
-        '</div>';
-      card.querySelector('.flashcard-face.front .face-text').textContent = promptText;
-      card.querySelector('.flashcard-face.back .face-text').textContent = answerText;
-      card.style.cursor = 'pointer';
-      card.setAttribute('role', 'button');
-      card.setAttribute('aria-label', 'Snu kortet');
-      card.setAttribute('tabindex', '0');
-      card.addEventListener('click', flip);
-      card.addEventListener('keydown', (e) => {
+      // Flip-kort
+      cardEl = document.createElement('div');
+      cardEl.className = 'bk-flashcard';
+      cardEl.setAttribute('role', 'button');
+      cardEl.setAttribute('aria-label', 'Snu kortet');
+      cardEl.setAttribute('tabindex', '0');
+
+      const inner = document.createElement('div');
+      inner.className = 'bk-flashcard-inner';
+
+      // Framside
+      const front = document.createElement('div');
+      front.className = 'bk-flashcard-face front';
+      const frontBadge = document.createElement('div');
+      frontBadge.className = 'bk-flashcard-badge';
+      frontBadge.textContent = promptLabel;
+      const frontText = document.createElement('div');
+      frontText.className = 'bk-flashcard-text';
+      frontText.textContent = promptText;
+      OrdaklokText.applyLengthClass(frontText, promptText);
+      const frontHint = document.createElement('div');
+      frontHint.className = 'bk-flashcard-hint';
+      frontHint.textContent = 'Klikk for å snu';
+      front.appendChild(frontBadge);
+      front.appendChild(frontText);
+      front.appendChild(frontHint);
+
+      // Bakside
+      const back = document.createElement('div');
+      back.className = 'bk-flashcard-face back';
+      const backBadge = document.createElement('div');
+      backBadge.className = 'bk-flashcard-badge';
+      backBadge.textContent = answerLabel;
+      const backText = document.createElement('div');
+      backText.className = 'bk-flashcard-text';
+      backText.textContent = answerText;
+      OrdaklokText.applyLengthClass(backText, answerText);
+      const backSub = document.createElement('div');
+      backSub.className = 'bk-flashcard-sub';
+      backSub.textContent = promptLabel + ': ' + promptText;
+      back.appendChild(backBadge);
+      back.appendChild(backText);
+      back.appendChild(backSub);
+
+      inner.appendChild(front);
+      inner.appendChild(back);
+      cardEl.appendChild(inner);
+
+      cardEl.addEventListener('click', flip);
+      cardEl.addEventListener('keydown', (e) => {
         if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); }
       });
-      wrap.appendChild(card);
+      mountEl.appendChild(cardEl);
 
-      const flipHint = document.createElement('p');
-      flipHint.className = 'muted center';
-      flipHint.id = 'flipHint';
-      flipHint.style.marginTop = '12px';
-      flipHint.textContent = 'Klikk på kortet eller trykk mellomrom for å snu';
-      wrap.appendChild(flipHint);
-
-      const rate = document.createElement('div');
-      rate.className = 'self-rate-row';
-      rate.id = 'selfRate';
-      rate.style.display = 'none';
-      rate.innerHTML =
-        '<button class="self-rate-btn" data-rating="hard">Visste ikkje</button>' +
-        '<button class="self-rate-btn" data-rating="ok">Måtte tenkje</button>' +
-        '<button class="self-rate-btn" data-rating="easy">Kunne det</button>';
-      rate.addEventListener('click', (e) => {
+      // Leitner-knappar
+      leitnerRow = document.createElement('div');
+      leitnerRow.className = 'bk-leitner-row';
+      leitnerRow.innerHTML =
+        '<button type="button" class="bk-leitner-btn hard"   data-rating="hard">Visste ikkje <span class="bk-leitner-key">1</span></button>' +
+        '<button type="button" class="bk-leitner-btn snautt" data-rating="ok">Snautt <span class="bk-leitner-key">2</span></button>' +
+        '<button type="button" class="bk-leitner-btn easy"   data-rating="easy">Lett <span class="bk-leitner-key">3</span></button>';
+      leitnerRow.addEventListener('click', (e) => {
         const btn = e.target.closest('button[data-rating]');
         if (btn) submitRating(btn.dataset.rating);
       });
-      wrap.appendChild(rate);
+      mountEl.appendChild(leitnerRow);
 
-      mountEl.appendChild(wrap);
-
-      // Tastatur: 1=hard, 2=ok, 3=easy
-      const keyHandler = (e) => {
-        if (!flipped) return;
+      // Tastatur
+      if (keyHandler) document.removeEventListener('keydown', keyHandler);
+      keyHandler = (e) => {
+        if (!flipped) {
+          if (e.key === ' ' || e.key === 'Enter') {
+            // Ikkje "stjel" når kort har fokus — det er allereie handtert
+            if (document.activeElement !== cardEl) { e.preventDefault(); flip(); }
+          }
+          return;
+        }
         if (e.key === '1') submitRating('hard');
         else if (e.key === '2') submitRating('ok');
         else if (e.key === '3') submitRating('easy');
       };
       document.addEventListener('keydown', keyHandler);
-      mountEl._keyHandler = keyHandler;
     }
 
     function flip() {
       if (flipped) return;
       flipped = true;
       cardEl.classList.add('flipped');
-      document.getElementById('selfRate').style.display = '';
-      document.getElementById('flipHint').textContent = 'Korleis gjekk det?';
+      leitnerRow.classList.add('show');
+      if (vyrdeEl) {
+        vyrdeEl.classList.remove('mood-think');
+        vyrdeEl.classList.add('mood-cheer');
+      }
+      if (bubbleEl) bubbleEl.textContent = 'Korleis gjekk det?';
     }
 
     function submitRating(rating) {
       const item = queue[pos];
       const time = Date.now() - questionStartedAt;
-      // hard = feil, ok = rett (med litt strev), easy = rett
       const correct = rating !== 'hard';
       callbacks.onResult(item.idx, { correct, peeked: false, time, rating });
-      document.removeEventListener('keydown', mountEl._keyHandler);
       pos++;
       callbacks.onAdvance && callbacks.onAdvance();
       next();
     }
 
-    return { render, cleanup() {
-      if (mountEl && mountEl._keyHandler) document.removeEventListener('keydown', mountEl._keyHandler);
-    } };
+    function cleanup() {
+      if (keyHandler) {
+        document.removeEventListener('keydown', keyHandler);
+        keyHandler = null;
+      }
+    }
+
+    return { render, cleanup };
   }
 
   root.OrdaklokModeFlashcard = {
     id: 'flashcard',
-    label: 'Flashcard',
-    description: 'Vis spørsmål, snu kortet for svar, vurder sjølv. God for læring.',
+    label: 'Hugsekort',
+    description: 'Snu kortet og vurder sjølv. God for læring.',
     icon: OrdaklokState.ICONS.layers,
     supportsLeitner: true,
     mount(host, ctx) {

@@ -1,0 +1,601 @@
+/* ══════════════════════════════════════
+   STYLE.CSS — Flokkdeilar-spesifikk stil
+   Utvidar neobrutalisme.css
+   ══════════════════════════════════════ */
+
+/* ── Form-element ── */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 3px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-family: inherit;
+    box-shadow: 3px 3px 0 var(--shadow);
+    transition: box-shadow 0.1s, transform 0.1s;
+    box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--shadow);
+}
+
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible {
+    outline: 3px solid var(--accent2);
+    outline-offset: 2px;
+}
+
+/* ── Knapp-variantar ── */
+.btn-primary {
+    background: var(--accent);
+    color: var(--text-on-accent);
+}
+.btn-primary:hover {
+    background: var(--accent2);
+    color: var(--text-on-accent);
+}
+.btn-danger {
+    background: var(--accent2);
+    color: var(--text-on-accent);
+}
+.btn-icon {
+    padding: 8px;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin: 8px 0;
+}
+
+/* ── Checkbox-label ── */
+.checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 8px 14px;
+    border: 3px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: 3px 3px 0 var(--shadow);
+    user-select: none;
+    border-radius: 4px;
+}
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+/* ── Modal lukke-knapp ── */
+.modal-close-x {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 1.1rem;
+    box-shadow: 3px 3px 0 var(--shadow);
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-close-x:hover { background: var(--accent2); color: var(--text-on-accent); }
+.modal-close-x:focus-visible { outline: 3px solid var(--accent2); outline-offset: 2px; }
+
+/* ── Muted-tekst ── */
+.muted {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* ── Layout ── */
+.main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: clamp(16px, 4vw, 32px) clamp(16px, 4vw, 32px) clamp(40px, 6vw, 56px);
+}
+
+/* ── Klasselistegrid ── */
+.list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.list-card {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 3px 3px 0 var(--border);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.list-card:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--border);
+}
+
+.list-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.list-card-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex: 1;
+    word-break: break-word;
+}
+
+.list-card-meta {
+    font-size: 0.85rem;
+    color: var(--text);
+    opacity: 0.65;
+}
+
+.list-card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+}
+
+.badge-extended {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    background: var(--accent3);
+    color: var(--text-on-light-accent);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2px 8px;
+    font-weight: 600;
+}
+
+/* ── Trekk-skjerm ── */
+.trekk-setup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    margin-bottom: 24px;
+}
+
+.trekk-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 160px;
+}
+
+.trekk-field label {
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.size-preview {
+    font-size: 0.9rem;
+    color: var(--text);
+    opacity: 0.75;
+    font-style: italic;
+    margin-bottom: 8px;
+}
+
+/* Elevliste med avkryssing */
+.elev-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.elev-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.15s, background 0.15s;
+}
+
+.elev-chip.absent {
+    opacity: 0.4;
+    text-decoration: line-through;
+    background: var(--surface);
+}
+
+.elev-chip .chip-x {
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--text);
+    opacity: 0.5;
+}
+
+/* ── Gruppekort ── */
+.groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+}
+
+@media (min-width: 1200px) {
+    .groups-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+}
+
+.group-card {
+    border: 3px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 4px 4px 0 var(--border);
+    padding: 20px 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    transition: transform 0.15s;
+}
+
+.group-card.locked {
+    outline: 3px solid var(--accent2);
+    outline-offset: 2px;
+}
+
+.group-card-lock {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.15s;
+    background: none;
+    border: none;
+    padding: 4px;
+    border-radius: 6px;
+    color: var(--text);
+}
+
+.group-card-lock:hover,
+.group-card-lock:focus-visible {
+    opacity: 1;
+    background: rgba(0,0,0,0.08);
+    outline: 2px solid var(--accent);
+}
+
+.group-card-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.group-card-icon svg {
+    width: 56px;
+    height: 56px;
+    color: #1a1a1a;
+}
+
+.group-card-name {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 800;
+    text-align: center;
+    color: #1a1a1a;
+    word-break: break-word;
+}
+
+.group-card-members {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.group-card-members li {
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.3;
+}
+
+/* ── Animasjon ved trekk ── */
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.group-card.animate-in {
+    animation: slideInUp 0.35s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .group-card.animate-in {
+        animation: none;
+    }
+}
+
+/* ── Varsel ── */
+.warning-box {
+    background: #fff3cc;
+    border: 2px solid #e6a817;
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+}
+
+/* ── Admin-grid ── */
+.relation-grid-wrap {
+    overflow-x: auto;
+    margin-top: 16px;
+}
+
+.relation-table {
+    border-collapse: separate;
+    border-spacing: 3px;
+    min-width: max-content;
+}
+
+.relation-table th {
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    text-align: center;
+    max-width: 80px;
+    word-break: break-word;
+    vertical-align: bottom;
+}
+
+.relation-table th.row-header {
+    text-align: right;
+    max-width: 100px;
+}
+
+.relation-table td {
+    text-align: center;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.rel-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.rel-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 22px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text);
+    transition: background 0.1s, border-color 0.1s;
+    padding: 0;
+}
+
+.rel-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
+.rel-btn.active-ja     { background: #D4F1C0; border-color: #5cb85c; color: #1a1a1a; }
+.rel-btn.active-maybe  { background: #FFE5B4; border-color: #e6a817; color: #1a1a1a; }
+.rel-btn.active-never  { background: #FFD6E0; border-color: #d9534f; color: #1a1a1a; }
+
+/* Tri-state syklisk for compact view */
+.rel-cell-btn {
+    width: 44px;
+    height: 36px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 800;
+    transition: background 0.1s, border-color 0.1s;
+}
+
+.rel-cell-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.rel-cell-btn[data-val="ja"]    { background: #D4F1C0; border-color: #5cb85c; color: #1a1a1a; opacity: 0.4; }
+.rel-cell-btn[data-val="maybe"] { background: #FFE5B4; border-color: #e6a817; color: #1a1a1a; }
+.rel-cell-btn[data-val="never"] { background: #FFD6E0; border-color: #d9534f; color: #1a1a1a; }
+
+.relation-table td.diagonal { background: var(--border); opacity: 0.2; border-radius: 4px; }
+
+/* ── Elevliste i admin ── */
+.student-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.student-row:last-child { border-bottom: none; }
+
+.student-name-input {
+    flex: 1;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.95rem;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.student-name-input:focus {
+    outline: 2px solid var(--accent);
+    border-color: var(--accent);
+}
+
+/* ── PIN-skjerm ── */
+.pin-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 32px 16px;
+    text-align: center;
+}
+
+.pin-input {
+    font-size: 2rem;
+    letter-spacing: 0.4em;
+    text-align: center;
+    width: 160px;
+    border: 3px solid var(--border);
+    border-radius: 12px;
+    padding: 8px 16px;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.pin-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.pin-error {
+    color: #d9534f;
+    font-weight: 700;
+    font-size: 0.9rem;
+    min-height: 1.2em;
+}
+
+/* ── Synkroniseringsmelding ── */
+.sync-note {
+    background: #fff3cc;
+    border: 2px solid #e6a817;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+}
+
+/* ── Tomside-hjelp ── */
+.empty-help {
+    text-align: center;
+    padding: 40px 20px;
+    opacity: 0.75;
+}
+
+/* ── Bulk-innlim textarea ── */
+.bulk-textarea {
+    width: 100%;
+    min-height: 120px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    background: var(--surface);
+    color: var(--text);
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.bulk-textarea:focus {
+    outline: 2px solid var(--accent);
+    border-color: var(--accent);
+}
+
+/* ── Trekk-knapp ── */
+.btn-trekk {
+    font-size: 1.2rem;
+    padding: 14px 32px;
+    font-weight: 800;
+}
+
+/* ── Responsiv: storskjerm (projektortilpassing) ── */
+@media (min-width: 1400px) {
+    .group-card-name {
+        font-size: 1.8rem;
+    }
+    .group-card-members li {
+        font-size: 1.6rem;
+    }
+    .group-card-icon svg {
+        width: 72px;
+        height: 72px;
+    }
+}
+
+/* ── Responsiv: mobil ── */
+@media (max-width: 600px) {
+    .trekk-setup {
+        flex-direction: column;
+    }
+    .trekk-field {
+        min-width: 100%;
+    }
+    .groups-grid {
+        grid-template-columns: 1fr;
+    }
+}
