@@ -199,6 +199,38 @@
     return String(s || 'liste').replace(/[^a-zA-Z0-9æøåÆØÅ_\- ]/g, '').replace(/\s+/g, '_').slice(0, 60) || 'liste';
   }
 
+  function exportAllLists() {
+    const lists = Storage.getLists();
+    if (!lists.length) {
+      alert('Du har ingen lister å eksportere.');
+      return;
+    }
+    const out = {
+      app: 'ordaklok',
+      version: 1,
+      exported: new Date().toISOString(),
+      lists: lists.map(list => ({
+        id: list.id,
+        title: list.title,
+        labelA: list.labelA,
+        labelB: list.labelB,
+        description: list.description || '',
+        pairs: list.pairs,
+        created: list.created,
+        updated: list.updated
+      }))
+    };
+    const blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ordaklok_alle_lister_' + new Date().toISOString().slice(0, 10) + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
   // ---- Share link modal ----
   const shareLinkOverlay  = document.getElementById('shareLinkOverlay');
   const shareLinkInput    = document.getElementById('shareLinkInput');
@@ -384,6 +416,32 @@
     try {
       const text = await file.text();
       const obj = JSON.parse(text);
+
+      // Sjekk om det er "alle lister"-format (har 'lists' array)
+      if (obj.app === 'ordaklok' && Array.isArray(obj.lists)) {
+        // Importer alle lister
+        let imported = 0;
+        let skipped = 0;
+        for (const list of obj.lists) {
+          const v = OrdaklokState.validateList(list);
+          if (!v.ok) {
+            console.warn('Hoppar over ugyldig liste:', v.error);
+            skipped++;
+            continue;
+          }
+          const existing = Storage.getList(v.list.id);
+          if (existing) {
+            v.list.id = 'list_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+          }
+          Storage.saveList(v.list);
+          imported++;
+        }
+        renderList();
+        alert(`Import ferdig: ${imported} lister lagt til${skipped > 0 ? `, ${skipped} hoppa over` : ''}.`);
+        return;
+      }
+
+      // Ellers, prøv enkeltliste-format
       const v = OrdaklokState.validateList(obj);
       if (!v.ok) { alert('Klarte ikkje å importere: ' + v.error); return; }
       // Sjekk om id allereie finst
@@ -412,6 +470,9 @@
     Storage.saveList(sample);
     renderList();
   });
+
+  // ---- Eksporter alle lister ----
+  document.getElementById('exportAllBtn').addEventListener('click', exportAllLists);
 
   // Esc lukkar overlays
   document.addEventListener('keydown', (e) => {

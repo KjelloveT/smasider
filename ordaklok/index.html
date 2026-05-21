@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ordaklok — Gloseøving for klasserommet</title>
+    <title>Ordaklok — Omgrepsøving for klasserommet</title>
     <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/boksekamp.css">
     <script src="../js/neo-header.js" defer></script>
@@ -36,12 +36,15 @@
                 <button class="bk-btn bk-btn-ghost" id="loadSampleBtn">
                     <span data-icon="sparkles"></span> Last inn dømeliste
                 </button>
+                <button class="bk-btn bk-btn-ghost" id="exportAllBtn">
+                    <span data-icon="download"></span> Eksporter alle
+                </button>
             </div>
         </section>
 
         <!-- Hovudkamp-banner -->
         <div class="bk-hovudkamp-banner">
-            <span class="bk-stamp bk-stamp-ink" style="--stamp-rot: -1.5deg;">★ MINE GLOSELISTER ★</span>
+            <span class="bk-stamp bk-stamp-ink" style="--stamp-rot: -1.5deg;">★ MINE OMGREPSLISTER ★</span>
         </div>
 
         <!-- Liste-grid (menu.js fyller inn) -->
@@ -66,7 +69,7 @@
     <div class="bk-modal">
         <button class="bk-modal-close" id="shareImportClose" aria-label="Lukk">×</button>
         <h2 id="shareImportTitle">Delt liste</h2>
-        <p>Nokon har delt ei gloseliste med deg. Vil du leggje til denne lista i biblioteket ditt?</p>
+        <p>Nokon har delt ei omgrepsliste med deg. Vil du leggje til denne lista i biblioteket ditt?</p>
         <div class="bk-paper" id="shareImportPreview" style="margin: 16px 0;">
             <p class="bk-muted">Lastar inn…</p>
         </div>
