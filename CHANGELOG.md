@@ -6,6 +6,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ## [Ikkje publisert]
 
 ### Lagt til
+- **Tidvis** — nytt klokkespel for å øve på å lese tid.
+  - Tre representasjonar: analog urskive (SVG), digital (HH:MM) og tekst på nynorsk (t.d. «kvart på ti», «fem på halv ti»).
+  - Fire vanskegrader: heile & halve, kvart, fem & ti, alle minutt.
+  - Spelmodusar: «Les av» (fleirval), «Still visarane» (dra dei analoge visarane), «Para» (match tid på tvers av representasjonar) og «Snøggstart» (60 sek blanda).
+  - Modusveljar i starten med valbar retning (t.d. Analog→Tekst, Digital→Analog, Bland alt).
+  - Poeng med combo-bonus og tidsbonus, streak, XP/nivå-progresjon og åtte merke (m.a. Kvartkongen, Lynrask, Minuttmeister, Nattugle, Hundreklubben).
+  - Eige neobrutalistisk uttrykk under `.tv`-namespace (sanksjonert avvik), med eigne tokens og system-fontar. Synkar tema med den globale temaveljaren.
+  - All framgang (toppscore, nivå/XP, merke, lagra oppsett) lagra lokalt via `VyrdepilStorage`.
 - **Flokkdeilar** — nytt verktøy for tilfeldige elevgrupper.
   - Lag og lagra fleire klasselister lokalt.
   - Vel mellom «gruppestorleik» og «tal grupper»; storleiksvising viser t.d. «8 grupper med 3–4 elevar».
@@ -24,6 +32,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
   - Innebygd dømeliste (10 engelsk-norske ord) for rask oppstart.
 
 ### Endra
+- `js/neo-header.js`: lagt til Tidvis under «Spel» i dropdown-menyen og mobilnavigasjonen.
+- `index.html` (rota): lagt til kort for Tidvis under «Spel» og personverninfo om kva som blir lagra.
 - `js/neo-header.js`: lagt til Ordaklok i dropdown-menyen og mobilnavigasjonen.
 - `index.html` (rota): lagt til kort for Ordaklok og personverninfo om kva som blir lagra.
 - **Ordaklok**: tilfeldige replikkar frå Vyrde i oppsett-skjermen (100 setningar).
