@@ -61,11 +61,11 @@ class NeoHeader extends HTMLElement {
               </div>
             </div>
 
-            <button class="theme-toggle-btn" id="themeToggleBtn">
+            <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Skift mellom lys og mørkt tema">
               <span id="themeIcon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/><circle cx="12" cy="12" r="4"/></svg></span>
             </button>
             
-            <button class="hamburger-btn" id="hamburgerBtn">
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Vis meny">
               <span></span><span></span><span></span>
             </button>
           </div>

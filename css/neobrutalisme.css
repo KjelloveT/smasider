@@ -571,7 +571,7 @@ section { margin-bottom: clamp(40px, 6vw, 60px); }
   background: var(--surface); border-top: 3px solid var(--border);
   padding: 30px 20px; text-align: center; margin-top: 60px;
 }
-.site-footer p { color: var(--muted); }
+.site-footer p { color: var(--text); }
 
 /* Game / Tool Cards */
 .card {
@@ -597,7 +597,7 @@ section { margin-bottom: clamp(40px, 6vw, 60px); }
 }
 .card.disabled {
   cursor: default;
-  opacity: 0.6;
+  opacity: 0.85;
 }
 .card.disabled:hover {
   transform: none;
