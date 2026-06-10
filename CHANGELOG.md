@@ -6,6 +6,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ## [Ikkje publisert]
 
 ### Lagt til
+- **Ordskodde** — ny ordsky-generator.
+  - Lim inn ein tekst og få ei ordsky der dei mest brukte orda er størst (kvadratrot-skalering).
+  - Automatisk filtrering av høgfrekvente småord på nynorsk, bokmål og engelsk — kvart ord kan slåast av/på i ordlista etterpå.
+  - Tre former (sirkel, firkant, hjarte) og seks forhandsdefinerte tema (Klassisk, Nordlys, Krit, Solnedgang, Skrivemaskin, Godteri) som kan justerast fritt: skrifttype (systemfontar), fem ordfargar, bakgrunn, tal på ord og loddrette ord.
+  - Eigenutvikla utleggingsalgoritme i vanilla JS: arkimedisk spiral med kollisjonsgrid og formmasker. Seeded PRNG gjer at lagra skyer alltid blir teikna likt.
+  - Eksport som PNG (med eller utan bakgrunn), SVG og utskrift. Lagra namngjevne skyer med JSON-eksport/-import (`app: "ordskodde"`, `version: 1`) via `VyrdepilStorage`.
+  - Innebygd eksempeltekst: utdrag frå Wikipedia-artikkelen om taco på nynorsk (CC BY-SA 4.0, med kjeldetilvising).
 - **Tidvis** — nytt klokkespel for å øve på å lese tid.
   - Tre representasjonar: analog urskive (SVG), digital (HH:MM) og tekst på nynorsk (t.d. «kvart på ti», «fem på halv ti»).
   - Fire vanskegrader: heile & halve, kvart, fem & ti, alle minutt.
@@ -32,6 +39,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
   - Innebygd dømeliste (10 engelsk-norske ord) for rask oppstart.
 
 ### Endra
+- **Frødesams** — full migrering til neobrutalisme-designet og vyrdepil-reglane.
+  - Bytt eigen `css/style.css` og eigen `<header>` ut med `neobrutalisme.css`, `<neo-header>` og temastøtte (lyst/mørkt, alle 21 tema). `css/style.css` er no berre spel-spesifikke utvidingar (svar-brett, strike-display, display-modus) oppå designsystemet.
+  - Flytta lagring frå rå `localStorage`-nøklar til felles `VyrdepilStorage` under nøkkelen `frodesams`. Eksportformatet har no `app: "frodesams"` og `version: 1`.
+  - Splitta monolittisk kode i IIFE-modular: `state.js`, `storage.js`, `sync.js`, `game.js`, `editor.js`, `saved.js`, `app.js`, `display.js`.
+  - Slå saman `index.html` og `controller.html` — `index.html` er quiz-master, `display.html` er storskjerm. `controller.html` er fjerna.
+  - UX-forbetringar: tydelege stryk-merke (✕, raud farge), bekreft/angre-steg ved poenggjeving (UX2), flip-animasjon ved avsløring (UX3), tastaturnavigasjon (taltastar 1–9 for svar, mellomrom for neste) og «eksporter alle» med korrekt `app`/`version`-konvolutt.
+  - `index.html` (rota): lagt til personvern-accordion-innslag for Frødesams.
+- **Frødebrett** — full migrering til neobrutalisme-designet og vyrdepil-reglane.
+  - Bytt eige `css/style.css` (1163 liner) og eigen `<header>` ut med `neobrutalisme.css`, `<neo-header>` og temastøtte (lyst/mørkt, alle 21 tema). `css/style.css` er no berre spel-spesifikke utvidingar (jeopardy-grid, podium, daglegdobbel) oppå designsystemet.
+  - Flytta lagring frå rå `localStorage`-nøklar (`frodebrett_*`) til felles `VyrdepilStorage`. Eksportformatet har no `app: "frodebrett"` og `version: 1`.
+  - Splitta den monolittiske `app.js` (1253 liner) i IIFE-modular: `state.js`, `storage.js`, `board.js`, `editor.js`, `saved.js`, `app.js`.
+  - UX-forbetringar: tydeleg «Dagens dobbel!»-banner med animasjon, bekreft/angre-steg ved poenggjeving, tastaturnavigasjon (pilar, taltastar 1–6 for lag), «eksporter alle frøder» og synleg/klikkbart neste lag på tur.
+  - `index.html` (rota): oppdatert personvern-accordion for Frødebrett (lagring under `VyrdepilStorage`).
 - `js/neo-header.js`: lagt til Tidvis under «Spel» i dropdown-menyen og mobilnavigasjonen.
 - `index.html` (rota): lagt til kort for Tidvis under «Spel» og personverninfo om kva som blir lagra.
 - `js/neo-header.js`: lagt til Ordaklok i dropdown-menyen og mobilnavigasjonen.
@@ -40,5 +60,6 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - **Ordaklok — Tevling**: stipla skiljelinje mellom venstre og høgre side, Vyrde står i ein tydeleg sirkel i midten over chips-laget.
 
 ### Fiksa
+- **Frødebrett**: brukarinnhald (quiz-titlar, lagnamn) blir no rendra trygt med `textContent`/`createElement` i staden for `innerHTML` (XSS-vern, viktig for importerte `.json`-frøder). Lagt til `aria-label` på ikon-knappar, Escape lukkar alle modalar og `:focus-visible` frå designsystemet.
 - **Ordaklok — Tevling**: chips «blinka» tilbake til opphavleg posisjon ved rett match etter smash-animasjonen. Dei ligg no usynlege når dei først er smasha.
 - **Ordaklok — alle modus**: lange begrep og setningar (t.d. naturfag-definisjonar) sprengde boksane. Innført lengde-basert font-skalering og ordbryting i alle fire modus. I Skriv-modus byter vi automatisk til vanleg input når svaret inneheld mellomrom eller er over 20 teikn (bokstavboksar er framleis default for korte ord). Tevling-chips wrappar no til fleire liner i staden for å bli kutta.

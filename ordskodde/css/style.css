@@ -1,0 +1,232 @@
+/* Ordskodde — utvidar neobrutalisme.css.
+   Sjølve ordsky-lerretet er unnateke frå designsystemet; alle knappar og
+   panel følgjer det. */
+
+/* ---- Skjemaelement i neobrutalisme-stil ---- */
+.os-textarea {
+  width: 100%;
+  min-height: clamp(160px, 30vh, 280px);
+  padding: 12px;
+  border: 3px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: vertical;
+  box-shadow: 4px 4px 0 var(--shadow);
+}
+
+.os-select,
+.os-text-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 3px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.os-textarea:focus-visible,
+.os-select:focus-visible,
+.os-text-input:focus-visible,
+.os-swatch:focus-visible,
+.os-color-input:focus-visible,
+.os-range:focus-visible,
+.os-word-row input:focus-visible {
+  outline: 3px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+.os-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(8px, 1.5vw, 12px);
+  margin-top: 16px;
+}
+
+.os-icon-btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+}
+
+.os-muted { color: var(--muted); font-size: 0.9rem; }
+.os-warn { color: var(--accent2); font-weight: 700; margin-top: 10px; }
+
+.os-sample-note { margin-top: 10px; font-size: 0.9rem; color: var(--muted); }
+.os-sample-note a { color: inherit; font-weight: 700; }
+
+/* ---- Resultat-layout ---- */
+.os-result-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(280px, 1fr);
+  gap: clamp(16px, 2.5vw, 24px);
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .os-result-grid { grid-template-columns: 1fr; }
+}
+
+.os-cloud-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.os-cloud-title-row h2 { margin: 0; }
+
+/* ---- Lerret (unnateke frå designsystemet) ---- */
+.os-canvas-wrap {
+  border: 3px solid var(--border);
+  box-shadow: 4px 4px 0 var(--shadow);
+  line-height: 0;
+}
+.os-canvas-wrap canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/* Sjakkbrett bak lerretet når bakgrunnen er gjennomsiktig */
+.os-canvas-wrap.transparent {
+  background:
+    repeating-conic-gradient(#cccccc 0% 25%, #ffffff 0% 50%) 0 0 / 24px 24px;
+}
+
+/* ---- Innstillingspanel ---- */
+.os-setting { margin-bottom: 16px; }
+.os-setting:last-child { margin-bottom: 0; }
+.os-setting > label,
+.os-setting > .os-setting-label {
+  display: block;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.os-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
+  gap: 8px;
+}
+.os-swatch {
+  border: 3px solid var(--border);
+  padding: 8px 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  box-shadow: 3px 3px 0 var(--shadow);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.os-swatch:hover { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--shadow); }
+.os-swatch.active { outline: 3px solid var(--accent2); outline-offset: 2px; }
+.os-swatch-dots { display: flex; gap: 4px; }
+.os-swatch-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 0, 0, 0.35);
+}
+.os-swatch-name { font-size: 0.78rem; font-weight: 800; }
+
+.os-shape-row { display: flex; gap: 8px; }
+.os-shape-btn { width: 52px; height: 52px; padding: 0; font-size: 1.4rem; }
+
+.os-colors { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.os-color-input {
+  width: 44px;
+  height: 44px;
+  padding: 2px;
+  border: 3px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.os-range { width: 100%; accent-color: var(--accent2); }
+.os-range-row { display: flex; align-items: center; gap: 10px; }
+.os-range-value { font-weight: 800; min-width: 2.5em; text-align: right; }
+
+.os-check-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.os-check-row input { width: 20px; height: 20px; accent-color: var(--accent2); }
+
+/* ---- Ordliste ---- */
+.os-word-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.os-word-tools .btn { font-size: 0.85rem; padding: 6px 10px; }
+.os-word-search { position: relative; flex: 1 1 140px; }
+
+.os-word-list {
+  max-height: clamp(260px, 45vh, 480px);
+  overflow-y: auto;
+  border: 3px solid var(--border);
+  background: var(--surface);
+}
+.os-word-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-bottom: 2px solid var(--border);
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.os-word-row:last-child { border-bottom: none; }
+.os-word-row:hover { background: var(--bg); }
+.os-word-row input { width: 18px; height: 18px; flex-shrink: 0; accent-color: var(--accent2); }
+.os-word-row .os-word { flex: 1; font-weight: 700; min-width: 0; overflow-wrap: anywhere; }
+.os-word-row.disabled .os-word { color: var(--muted); text-decoration: line-through; }
+.os-word-count { font-weight: 800; color: var(--muted); }
+.os-stopword-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: 2px solid var(--border);
+  padding: 1px 5px;
+  background: var(--accent4);
+  color: var(--text-on-light-accent);
+  flex-shrink: 0;
+}
+
+/* ---- Lagra skyer ---- */
+.os-saved-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  border-bottom: 2px solid var(--border);
+}
+.os-saved-row:last-child { border-bottom: none; }
+.os-saved-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.os-saved-info strong { overflow-wrap: anywhere; }
+.os-saved-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.os-saved-actions .os-icon-btn { width: 40px; height: 40px; }
+.os-danger:hover { background: var(--accent2); }
+
+/* ---- Modal ---- */
+#saveOverlay .os-text-input { margin: 12px 0 16px; }
+
+/* ---- Utskrift ---- */
+#printArea { display: none; }
+@media print {
+  body * { visibility: hidden; }
+  neo-header { display: none; }
+  #printArea, #printArea * { visibility: visible; }
+  #printArea {
+    display: block;
+    position: fixed;
+    inset: 0;
+  }
+  #printArea img { width: 100%; height: auto; }
+}

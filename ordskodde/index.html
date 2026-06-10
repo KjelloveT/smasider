@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ordskodde — ordsky-generator for Vyrdepil</title>
+<link rel="stylesheet" href="../css/neobrutalisme.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="../js/neo-header.js" defer></script>
+</head>
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+
+<neo-header></neo-header>
+
+<div class="page-wrapper">
+<main class="main-content">
+
+  <!-- Hero -->
+  <div class="box2 hero-box">
+    <img src="../_resources/ordskodde.png" alt="Ordskodde" class="hero-logo">
+    <div class="hero-text">
+      <h1>Ordskodde</h1>
+      <p>Lim inn ein tekst og få ei ordsky av dei mest brukte orda. Vel form, fargar og skrifttype — og last ned eller skriv ut resultatet.</p>
+    </div>
+  </div>
+
+  <!-- Steg 1: tekst -->
+  <section class="box1" aria-labelledby="inputHeading">
+    <h2 class="heading3 no-mt" id="inputHeading">1. Lim inn tekst</h2>
+    <textarea id="sourceText" class="os-textarea" aria-label="Tekst som skal bli til ordsky" placeholder="Lim inn teksten her …"></textarea>
+    <p class="os-sample-note" id="sampleNote" hidden>
+      Eksempelteksten er eit utdrag frå <a href="https://nn.wikipedia.org/wiki/Taco" target="_blank" rel="noopener">Wikipedia-artikkelen om taco</a> (CC BY-SA 4.0).
+    </p>
+    <p class="os-warn" id="textWarn" hidden></p>
+    <div class="os-btn-row">
+      <button class="btn" id="makeCloudBtn" data-icon="sparkles">Lag ordskodde</button>
+      <button class="btn" id="clearTextBtn" data-icon="x">Tøm teksten</button>
+    </div>
+    <p class="os-muted" style="margin-top: 12px;">
+      Vanlege småord (som «det», «dei», «en» og «the» på nynorsk, bokmål og engelsk) blir filtrerte bort automatisk.
+      Du kan slå kvart ord av og på i ordlista etterpå. Merk at ord som finst på fleire språk (t.d. «men») òg blir filtrerte.
+    </p>
+  </section>
+
+  <!-- Steg 2: resultat -->
+  <section id="resultSection" hidden aria-labelledby="resultHeading">
+    <div class="os-cloud-title-row">
+      <h2 class="heading3 no-mt" id="resultHeading">2. Ordskya di</h2>
+      <span class="os-muted" id="cloudTitle">Utan namn</span>
+    </div>
+
+    <div class="os-result-grid">
+      <div>
+        <div class="os-canvas-wrap" id="canvasWrap">
+          <canvas id="cloudCanvas" width="1200" height="1200" aria-label="Førehandsvising av ordskya"></canvas>
+        </div>
+        <p class="os-muted" id="skipNote" hidden></p>
+        <div class="os-btn-row">
+          <button class="btn" id="saveBtn" data-icon="save">Lagre</button>
+          <button class="btn" id="pngBtn" data-icon="download">Last ned PNG</button>
+          <button class="btn" id="pngTransBtn" data-icon="image">PNG (gjennomsiktig)</button>
+          <button class="btn" id="svgBtn" data-icon="download">Last ned SVG</button>
+          <button class="btn" id="printBtn" data-icon="printer">Skriv ut</button>
+          <button class="btn" id="exportJsonBtn" data-icon="fileJson">Eksporter JSON</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="box4">
+          <div class="box-header">Utsjånad</div>
+          <div class="box-body">
+            <div class="os-setting">
+              <span class="os-setting-label" id="themeLabel">Tema</span>
+              <div class="os-swatches" id="themeSwatches" role="group" aria-labelledby="themeLabel"></div>
+            </div>
+            <div class="os-setting">
+              <span class="os-setting-label" id="shapeLabel">Form</span>
+              <div class="os-shape-row" id="shapeButtons" role="group" aria-labelledby="shapeLabel"></div>
+            </div>
+            <div class="os-setting">
+              <label for="fontSelect">Skrifttype</label>
+              <select id="fontSelect" class="os-select"></select>
+            </div>
+            <div class="os-setting">
+              <span class="os-setting-label" id="colorsLabel">Ordfargar</span>
+              <div class="os-colors" id="colorInputs" role="group" aria-labelledby="colorsLabel"></div>
+            </div>
+            <div class="os-setting">
+              <label for="bgColorInput">Bakgrunn</label>
+              <div class="os-colors">
+                <input type="color" id="bgColorInput" class="os-color-input" value="#faf6ee" aria-label="Bakgrunnsfarge">
+                <label class="os-check-row" for="bgTransparentCheck">
+                  <input type="checkbox" id="bgTransparentCheck"> Gjennomsiktig
+                </label>
+              </div>
+            </div>
+            <div class="os-setting">
+              <label for="maxWordsRange">Tal på ord</label>
+              <div class="os-range-row">
+                <input type="range" id="maxWordsRange" class="os-range" min="20" max="150" step="5" value="100">
+                <span class="os-range-value" id="maxWordsValue">100</span>
+              </div>
+            </div>
+            <div class="os-setting">
+              <label for="rotationSelect">Loddrette ord</label>
+              <select id="rotationSelect" class="os-select">
+                <option value="none">Ingen</option>
+                <option value="some" selected>Litt</option>
+                <option value="many">Mykje</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="box4">
+          <div class="box-header">Ordliste</div>
+          <div class="box-body">
+            <div class="os-word-tools">
+              <input type="search" id="wordSearch" class="os-text-input os-word-search" placeholder="Søk i orda …" aria-label="Søk i ordlista">
+              <button class="btn" id="resetWordsBtn">Nullstill utval</button>
+              <button class="btn" id="top50Btn">Berre dei 50 vanlegaste</button>
+            </div>
+            <div class="os-word-list" id="wordList" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lagra skyer -->
+  <section class="box4" aria-labelledby="savedHeading">
+    <div class="box-header" id="savedHeading">Lagra ordskyer</div>
+    <div class="box-body">
+      <div id="savedList"></div>
+      <p class="os-muted" id="savedEmpty">Ingen lagra ordskyer enno. Lag ei sky og trykk «Lagre», eller importer ei JSON-fil.</p>
+      <div class="os-btn-row">
+        <button class="btn" id="importBtn" data-icon="upload">Importer JSON</button>
+        <input type="file" id="importFile" accept="application/json,.json" hidden>
+      </div>
+    </div>
+  </section>
+
+  <p class="os-muted text-center" style="margin: 24px 0;">
+    Ordskodde — del av Vyrdepil. Tekstane og skyene dine blir berre lagra lokalt i din nettlesar.
+  </p>
+
+</main>
+</div>
+
+<!-- Modal: lagre / endre namn -->
+<div class="modal-overlay" id="saveOverlay" role="dialog" aria-modal="true" aria-labelledby="saveModalHeading">
+  <div class="modal2">
+    <button class="btn os-icon-btn modal-close" id="saveModalClose" aria-label="Lukk">
+      <span data-icon="x"></span>
+    </button>
+    <h2 id="saveModalHeading">Lagre ordskya</h2>
+    <label for="saveTitleInput">Namn på ordskya</label>
+    <input type="text" id="saveTitleInput" class="os-text-input" maxlength="80" placeholder="T.d. «Taco-teksten 5. klasse»">
+    <div class="os-btn-row">
+      <button class="btn" id="saveConfirmBtn" data-icon="check">Lagre</button>
+      <button class="btn" id="saveCancelBtn">Avbryt</button>
+    </div>
+  </div>
+</div>
+
+<!-- Utskriftsområde (synleg berre ved utskrift) -->
+<div id="printArea" aria-hidden="true">
+  <img id="printImg" alt="Ordskodde-ordsky">
+</div>
+
+<script src="../js/neobrutalisme.js"></script>
+<script src="../js/vyrdepil-storage.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/stopwords.js"></script>
+<script src="js/text.js"></script>
+<script src="js/themes.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/render.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/sample.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+<script>
+  // Injiser statiske ikon i data-icon-knappane
+  OrdskoddeIcons.inject(document);
+</script>
+
+</body>
+</html>
