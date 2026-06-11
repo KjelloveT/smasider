@@ -41,7 +41,7 @@ class NeoHeader extends HTMLElement {
                   <a href="${basePath}tidvis/index.html" class="tools-dropdown-item">Tidvis</a>
                 </div>
 
-                <div class="tools-category">Kviss</div>
+                <div class="tools-category">Klasserom</div>
                 <div class="tools-grid-wrapper">
                   <a href="${basePath}frodekapp/index.html" class="tools-dropdown-item">Frødekapp</a>
                   <a href="${basePath}frodebrett/index.html" class="tools-dropdown-item">Frødebrett</a>
@@ -49,13 +49,17 @@ class NeoHeader extends HTMLElement {
                   <a href="${basePath}etikk-test/index.html" class="tools-dropdown-item">Etikktesten</a>
                   <a href="${basePath}heite_stavrim/index.html" class="tools-dropdown-item">Heite Stavrim</a>
                   <a href="${basePath}ordaklok/index.html" class="tools-dropdown-item">Ordaklok</a>
+                  <a href="${basePath}dagsvegen/index.html" class="tools-dropdown-item">Dagsvegen</a>
                 </div>
-                
+
                 <div class="tools-category">Verktøy</div>
                 <div class="tools-grid-wrapper">
                   <a href="${basePath}fotocollage/fotocollage.html" class="tools-dropdown-item">BiletFlett</a>
                   <a href="${basePath}fotocolours/index.html" class="tools-dropdown-item">Reinskore bilete</a>
                   <a href="${basePath}klassekart/index.html" class="tools-dropdown-item">Klassekart</a>
+                  <a href="${basePath}flokkdeilar/index.html" class="tools-dropdown-item">Flokkdeilar</a>
+                  <a href="${basePath}eikekveik/index.html" class="tools-dropdown-item">Eikekveik</a>
+                  <a href="${basePath}ordskodde/index.html" class="tools-dropdown-item">Ordskodde</a>
                   <a href="${basePath}bildebehandling/index.html" class="tools-dropdown-item">Handsam bilete</a>
                 </div>
               </div>
@@ -88,9 +92,13 @@ class NeoHeader extends HTMLElement {
               <a href="${basePath}etikk-test/index.html">Etikktesten</a>
               <a href="${basePath}ordaklok/index.html">Ordaklok</a>
               <a href="${basePath}heite_stavrim/index.html">Heite Stavrim</a>
+              <a href="${basePath}dagsvegen/index.html">Dagsvegen</a>
               <a href="${basePath}fotocollage/fotocollage.html">BiletFlett</a>
               <a href="${basePath}fotocolours/index.html">Reinskore bilete</a>
               <a href="${basePath}klassekart/index.html">Klassekart</a>
+              <a href="${basePath}flokkdeilar/index.html">Flokkdeilar</a>
+              <a href="${basePath}eikekveik/index.html">Eikekveik</a>
+              <a href="${basePath}ordskodde/index.html">Ordskodde</a>
               <a href="${basePath}bildebehandling/index.html">Handsam bilete</a>
             </div>
           </div>
