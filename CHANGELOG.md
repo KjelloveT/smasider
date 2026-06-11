@@ -6,6 +6,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ## [Ikkje publisert]
 
 ### Lagt til
+- **Dagsvegen** — ny dagsplan-skjerm for klasserommet.
+  - Dagsplan med fag, friminutt og notat — tidsstyrt slik at aktiv økt blir utheva automatisk, med progresjonsstrek og stor datolinje («måndag 11. juni — veke 24»).
+  - Plan for timen: aktivitetar med varigheit, tidsline med no-markør og nedteljing til neste byte. +5/−5-knappar per aktivitet: meirtid blir henta frå fleksible buffer-aktivitetar slik at slutten står fast; rest blir vist som raud overtid inn i friminuttet. Diskret «X min att»-varsel før kvart byte.
+  - Forhandsdefinert fagliste med emoji (redigerbar) og eigenbygd emoji-veljar med ~150 kuraterte, skulerelevante emoji i seks kategoriar. (Dagsvegen har eksplisitt unntak frå emoji-forbodet — gjeld berre faginnhald, UI-et brukar Lucide.)
+  - Widgetar: nedteljar med fargeskifte grøn→gul→raud og blink ved null (ingen lyd), stoppeklokke med rundetider, trafikklys for arbeidsro, analog+digital hjørneklokke (gjenbrukar TidvisClock), ro-modus med pustesirkel og hjernepause-trekk (10 redigerbare aktivitetar).
+  - Touch-teiknelag over heile skjermen med fargeval, tre pennebreidder og viskelêr — flyktig, blir aldri lagra.
+  - Plasserbare tekstboksar i tre stilar: vanleg, huskelapp (post-it med handskrift-font) og bursdagsbanner.
+  - Vekemalar (éin per vekedag), namngjevne planar og JSON-eksport/-import (`app: "dagsvegen"`, `version: 1`) via `VyrdepilStorage`.
+  - Dev-parameter `?testTime=HH:MM` for å teste tidsstyringa.
 - **Ordskodde** — ny ordsky-generator.
   - Lim inn ein tekst og få ei ordsky der dei mest brukte orda er størst (kvadratrot-skalering).
   - Automatisk filtrering av høgfrekvente småord på nynorsk, bokmål og engelsk — kvart ord kan slåast av/på i ordlista etterpå.

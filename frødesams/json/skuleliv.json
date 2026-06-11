@@ -1,0 +1,32 @@
+{
+  "title": "Skuleliv",
+  "questions": [
+    {
+      "question": "Kva er det første du tenkjer på når eg seier «skule»?",
+      "answers": [
+        { "text": "Lærarar", "points": 45 },
+        { "text": "Vennar", "points": 30 },
+        { "text": "Mat", "points": 15 },
+        { "text": "Friminutt", "points": 10 }
+      ]
+    },
+    {
+      "question": "Kva er det morsomaste med skulen?",
+      "answers": [
+        { "text": "Friminutt", "points": 40 },
+        { "text": "Vennar", "points": 35 },
+        { "text": "Gym", "points": 15 },
+        { "text": "Kunst og handverk", "points": 10 }
+      ]
+    },
+    {
+      "question": "Kva gløymer du oftast å ta med til skulen?",
+      "answers": [
+        { "text": "Blyant", "points": 35 },
+        { "text": "Bok", "points": 30 },
+        { "text": "Matpakke", "points": 20 },
+        { "text": "Gymsko", "points": 15 }
+      ]
+    }
+  ]
+}

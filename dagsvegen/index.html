@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dagsvegen — Dagsplan for klasserommet</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-light-theme="classic" data-dark-theme="midnight" data-theme="classic">
+    <div class="page-wrapper">
+        <neo-header></neo-header>
+        <main class="main-content">
+
+            <!-- Hero (synleg i redigeringsmodus) -->
+            <div id="hero" class="box2 hero-box dv-hidden">
+                <img src="../_resources/dagsvegen.png" alt="Dagsvegen" class="hero-logo">
+                <div class="hero-text">
+                    <h1>Dagsvegen</h1>
+                    <p>Dagens plan på tavla — med fag, friminutt, nedteljing og plan for timen. Alt blir lagra lokalt i nettlesaren.</p>
+                </div>
+            </div>
+
+            <!-- Datolinje og verktøyrad -->
+            <div id="topbar">
+                <h1 id="date-text" class="dv-dateline"></h1>
+                <div id="toolbar" role="toolbar" aria-label="Verktøy">
+                    <button id="btn-edit" class="btn dv-tool-btn" aria-label="Rediger dagsplanen" title="Rediger"><span class="dv-tool-icon" data-icon="pencil"></span><span class="dv-tool-text">Rediger</span></button>
+                    <button id="btn-countdown" class="btn dv-tool-btn" aria-label="Vis nedteljar" title="Nedteljar"><span class="dv-tool-icon" data-icon="hourglass"></span><span class="dv-tool-text">Nedteljar</span></button>
+                    <button id="btn-stopwatch" class="btn dv-tool-btn" aria-label="Vis stoppeklokke" title="Stoppeklokke"><span class="dv-tool-icon" data-icon="timer"></span><span class="dv-tool-text">Stoppeklokke</span></button>
+                    <button id="btn-traffic" class="btn dv-tool-btn" aria-label="Vis trafikklys" title="Trafikklys"><span class="dv-tool-icon" data-icon="traffic-light"></span><span class="dv-tool-text">Trafikklys</span></button>
+                    <button id="btn-calm" class="btn dv-tool-btn" aria-label="Start ro-modus" title="Ro-modus"><span class="dv-tool-icon" data-icon="moon"></span><span class="dv-tool-text">Ro</span></button>
+                    <button id="btn-break" class="btn dv-tool-btn" aria-label="Trekk ein hjernepause" title="Hjernepause"><span class="dv-tool-icon" data-icon="zap"></span><span class="dv-tool-text">Hjernepause</span></button>
+                    <button id="btn-draw" class="btn dv-tool-btn" aria-label="Teiknemodus av/på" title="Teikne"><span class="dv-tool-icon" data-icon="brush"></span><span class="dv-tool-text">Teikne</span></button>
+                    <button id="btn-note" class="btn dv-tool-btn" aria-label="Legg til tekstboks" title="Tekstboks"><span class="dv-tool-icon" data-icon="sticky-note"></span><span class="dv-tool-text">Tekstboks</span></button>
+                    <a href="../flokkdeilar/index.html" class="btn dv-tool-btn" aria-label="Opne Flokkdeilar for gruppedeling" title="Flokkdeilar"><span class="dv-tool-icon" data-icon="users"></span><span class="dv-tool-text">Flokkdeilar</span></a>
+                    <button id="btn-settings" class="btn dv-tool-btn" aria-label="Opne innstillingar" title="Innstillingar"><span class="dv-tool-icon" data-icon="settings"></span></button>
+                    <button id="btn-fullscreen" class="btn dv-tool-btn" aria-label="Fullskjerm av/på" title="Fullskjerm"><span class="dv-tool-icon" data-icon="maximize"></span></button>
+                </div>
+            </div>
+
+            <!-- Tom tilstand -->
+            <div id="empty-state" class="box2 dv-empty dv-hidden">
+                <h2 class="no-mt">Ingen plan for i dag enno</h2>
+                <p>Lag dagens plan, eller hent ein lagra plan eller vekemal.</p>
+                <div class="dv-empty-actions">
+                    <button id="btn-empty-create" class="btn">Lag dagens plan</button>
+                    <button id="btn-empty-weekday" class="btn dv-hidden"></button>
+                    <button id="btn-empty-load" class="btn">Hent lagra plan</button>
+                </div>
+            </div>
+
+            <!-- Visningsmodus -->
+            <div id="display-view" class="dv-hidden">
+                <div id="day-col" aria-label="Dagsplan"></div>
+                <div id="lesson-panel" class="box4" aria-label="Aktiv økt"></div>
+            </div>
+
+            <!-- Redigeringsmodus -->
+            <div id="edit-view" class="dv-hidden">
+                <div id="weekday-row" class="dv-weekday-row"></div>
+                <div id="blocks-editor"></div>
+                <div class="dv-edit-actions">
+                    <button id="btn-add-block" class="btn">+ Økt</button>
+                    <button id="btn-add-break" class="btn">+ Pause</button>
+                    <button id="btn-open-files" class="btn">Lagre / hente</button>
+                    <button id="btn-open-subjects" class="btn">Fagliste</button>
+                    <button id="btn-done" class="btn active">Ferdig</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Flytande widgetar -->
+    <div id="clock-widget" class="dv-widget dv-clock-box" aria-label="Klokke"></div>
+    <div id="countdown-widget" class="box1 dv-widget dv-hidden" aria-label="Nedteljar"></div>
+    <div id="stopwatch-widget" class="box1 dv-widget dv-hidden" aria-label="Stoppeklokke"></div>
+    <div id="traffic-widget" class="box1 dv-widget dv-hidden" aria-label="Trafikklys"></div>
+
+    <!-- Tekstboksar -->
+    <div id="notes-layer"></div>
+
+    <!-- Teiknelag -->
+    <canvas id="draw-canvas" class="dv-hidden"></canvas>
+    <div id="draw-toolbar" class="box1 dv-hidden" role="toolbar" aria-label="Teikneverktøy"></div>
+
+    <!-- Ro-modus -->
+    <div id="calm-overlay" role="button" aria-label="Avslutt ro-modus">
+        <div class="dv-calm-circle" aria-hidden="true"></div>
+        <p class="dv-calm-text">Pust roleg</p>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <!-- Modal: lagre / hente -->
+    <div id="modal-files" class="modal-overlay">
+        <div class="modal3 dv-modal-wide">
+            <div class="modal-header">
+                <span>Lagre og hente planar</span>
+                <button class="dv-icon-btn dv-modal-x" data-close="modal-files" aria-label="Lukk">✕</button>
+            </div>
+            <div class="modal-body">
+                <h3 class="dv-modal-h">Lagre dagens plan</h3>
+                <p class="dv-modal-desc">Planen blir lagra lokalt i denne nettlesaren på denne maskina.</p>
+                <div class="dv-save-row">
+                    <input id="save-name" type="text" class="dv-input" placeholder="Namn, t.d. Prøvedag eller Turdag">
+                    <button id="btn-save-plan" class="btn dv-btn-small">Lagre</button>
+                </div>
+                <h3 class="dv-modal-h">Lagra planar</h3>
+                <div id="plans-list"></div>
+                <h3 class="dv-modal-h">Fil</h3>
+                <p class="dv-modal-desc">Eksporter alle planar, fag og hjernepausar som ei .json-fil — nyttig som tryggleikskopi eller for å flytte til ei anna maskin.</p>
+                <div class="dv-save-row">
+                    <button id="btn-export" class="btn dv-btn-small">Eksporter til fil</button>
+                    <button id="btn-import" class="btn dv-btn-small">Importer frå fil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: fagliste -->
+    <div id="modal-subjects" class="modal-overlay">
+        <div class="modal3">
+            <div class="modal-header">
+                <span>Fagliste</span>
+                <button class="dv-icon-btn dv-modal-x" data-close="modal-subjects" aria-label="Lukk">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="dv-modal-desc">Endre namn og emoji på faga, eller legg til eigne.</p>
+                <div id="subjects-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: hjernepause -->
+    <div id="modal-break" class="modal-overlay">
+        <div class="modal2 dv-break-modal">
+            <button class="dv-icon-btn dv-modal-x" data-close="modal-break" aria-label="Lukk">✕</button>
+            <h2 class="dv-break-title">Hjernepause!</h2>
+            <p id="break-text" class="dv-break-text"></p>
+            <button id="btn-break-new" class="btn">Trekk ein ny</button>
+        </div>
+    </div>
+
+    <!-- Modal: innstillingar -->
+    <div id="modal-settings" class="modal-overlay">
+        <div class="modal3">
+            <div class="modal-header">
+                <span>Innstillingar</span>
+                <button class="dv-icon-btn dv-modal-x" data-close="modal-settings" aria-label="Lukk">✕</button>
+            </div>
+            <div class="modal-body dv-settings-body">
+                <label class="dv-setting-row">Varsel før byte (minutt)
+                    <input id="set-warn" type="number" min="0" max="10" class="dv-input dv-dur-input">
+                </label>
+                <label class="dv-setting-row"><input id="set-autoclear" type="checkbox"> Tøm teikningar automatisk ved aktivitetsbyte</label>
+                <label class="dv-setting-row"><input id="set-showclock" type="checkbox"> Vis klokka i hjørnet</label>
+                <h3 class="dv-modal-h">Hjernepausar (ein per linje)</h3>
+                <textarea id="set-breaks" class="dv-input dv-breaks-edit" rows="8" aria-label="Hjernepause-aktivitetar"></textarea>
+                <button id="btn-settings-subjects" class="btn dv-btn-small">Rediger faglista</button>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="import-file" accept=".json" class="dv-hidden">
+
+    <!-- Skript -->
+    <script src="../js/vyrdepil-storage.js"></script>
+    <script src="../tidvis/js/clock.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/emoji.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/edit.js"></script>
+    <script src="js/widgets.js"></script>
+    <script src="js/notes.js"></script>
+    <script src="js/draw.js"></script>
+    <script src="js/app.js"></script>
+    <script src="../js/neobrutalisme.js"></script>
+    <script src="../js/neo-header.js"></script>
+    <script>
+        // set inn statiske Lucide-ikon i verktøyrada
+        document.querySelectorAll('.dv-tool-icon[data-icon]').forEach(span => {
+            span.appendChild(Icons.create(span.dataset.icon, 20));
+        });
+    </script>
+</body>
+</html>

@@ -1,92 +1,106 @@
-// Storage System for Frødesams
-// localStorage for quizzes
+/* Frødesams — lagring via VyrdepilStorage.
+ * Tilgjengeleg som window.FrodesamsStorage.
+ */
+(function (root) {
+  'use strict';
 
-const Storage = {
-    // Keys
-    QUIZZES_KEY: 'frødesams_quizzes',
-    
-    // Quiz Management
+  const GAME = 'frodesams';
+
+  function readState() {
+    const s = root.VyrdepilStorage.getGameState(GAME);
+    return Object.assign({ quizzes: [], teams: [] }, s || {});
+  }
+
+  function writeState(s) {
+    root.VyrdepilStorage.setGameState(GAME, s);
+  }
+
+  const Store = root.FrodesamsStorage = {
+
+    generateId() {
+      return 'id_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    },
+
+    // --- Kvissar ---
     getQuizzes() {
-        try {
-            const data = localStorage.getItem(this.QUIZZES_KEY);
-            return data ? JSON.parse(data) : [];
-        } catch (e) {
-            console.error('Error loading quizzes:', e);
-            return [];
-        }
+      return readState().quizzes || [];
     },
-    
-    saveQuiz(quiz) {
-        try {
-            const quizzes = this.getQuizzes();
-            const existingIndex = quizzes.findIndex(q => q.id === quiz.id);
-            
-            if (existingIndex >= 0) {
-                quizzes[existingIndex] = quiz;
-            } else {
-                quiz.id = this.generateId('quiz');
-                quiz.created = new Date().toISOString();
-                quizzes.push(quiz);
-            }
-            
-            localStorage.setItem(this.QUIZZES_KEY, JSON.stringify(quizzes));
-            return true;
-        } catch (e) {
-            console.error('Error saving quiz:', e);
-            return false;
-        }
-    },
-    
-    deleteQuiz(quizId) {
-        try {
-            const quizzes = this.getQuizzes();
-            const filtered = quizzes.filter(q => q.id !== quizId);
-            localStorage.setItem(this.QUIZZES_KEY, JSON.stringify(filtered));
-            return true;
-        } catch (e) {
-            console.error('Error deleting quiz:', e);
-            return false;
-        }
-    },
-    
-    // Utility
-    generateId(prefix = 'id') {
-        return prefix + '_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-    },
-    
-    // Export/Import for backup
-    exportData() {
-        return {
-            quizzes: this.getQuizzes(),
-            exported: new Date().toISOString()
-        };
-    },
-    
-    importData(data) {
-        try {
-            if (data.quizzes) {
-                localStorage.setItem(this.QUIZZES_KEY, JSON.stringify(data.quizzes));
-            }
-            return true;
-        } catch (e) {
-            console.error('Error importing data:', e);
-            return false;
-        }
-    },
-    
-    // Clear all data
-    clearAll() {
-        try {
-            localStorage.removeItem(this.QUIZZES_KEY);
-            return true;
-        } catch (e) {
-            console.error('Error clearing data:', e);
-            return false;
-        }
-    }
-};
 
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Storage;
-}
+    saveQuiz(quiz) {
+      const s = readState();
+      const quizzes = s.quizzes || [];
+      const idx = quizzes.findIndex(q => q.id === quiz.id);
+      if (idx >= 0) {
+        quizzes[idx] = quiz;
+      } else {
+        if (!quiz.id) quiz.id = Store.generateId();
+        if (!quiz.created) quiz.created = new Date().toISOString();
+        quizzes.push(quiz);
+      }
+      writeState(Object.assign({}, s, { quizzes }));
+      return true;
+    },
+
+    deleteQuiz(id) {
+      const s = readState();
+      writeState(Object.assign({}, s, {
+        quizzes: (s.quizzes || []).filter(q => q.id !== id)
+      }));
+    },
+
+    // --- Lag (siste lagnamn) ---
+    getTeams() {
+      return readState().teams || [];
+    },
+
+    saveTeams(teams) {
+      const s = readState();
+      writeState(Object.assign({}, s, { teams }));
+    },
+
+    // --- Eksport / Import ---
+    exportData() {
+      const { quizzes } = readState();
+      return {
+        app: 'frodesams',
+        version: 1,
+        quizzes: quizzes || [],
+        exported: new Date().toISOString()
+      };
+    },
+
+    importData(data) {
+      try {
+        let incoming = [];
+        if (Array.isArray(data.quizzes) && data.quizzes.length > 0) {
+          incoming = data.quizzes;
+        } else if (data.quiz && data.quiz.title) {
+          incoming = [data.quiz];
+        } else {
+          return 0;
+        }
+        const s = readState();
+        const existing = s.quizzes || [];
+        incoming.forEach(q => {
+          if (!q.id) q.id = Store.generateId();
+          const idx = existing.findIndex(e => e.id === q.id);
+          if (idx >= 0) existing[idx] = q;
+          else existing.push(q);
+        });
+        writeState(Object.assign({}, s, { quizzes: existing }));
+        return incoming.length;
+      } catch (e) {
+        return false;
+      }
+    },
+
+    clearAll() {
+      root.VyrdepilStorage.clearGame(GAME);
+    }
+  };
+
+  // Shortcut for game modules
+  root.FS = root.FS || {};
+  root.FS.Store = Store;
+
+})(window);

@@ -52,6 +52,7 @@ Dette er den sentrale retningslinjen for koding, design og arkitektur for alle p
   - Bruk **aldri** `color: var(--text)` eller `color: var(--border)` på element med fast bakgrunn — desse vekslar mellom svart og kvitt avhengig av temaet og kan gje usynleg tekst.
 - **Modalar:** `.modal1` til `.modal5` i kombinasjon med ein `<div class="modal-overlay">`.
 - **Ikon:** Bruk inline SVG-ar frå Lucide Icons. Aldri bruk emoji.
+  - **Unntak — Dagsvegen:** Dagsplan-verktøyet `dagsvegen/` har eksplisitt godkjent unntak: emoji brukast som visuell representasjon av fag og innhald (kuratert liste i `dagsvegen/js/emoji.js`, ingen flagg-emoji pga. manglande Windows-støtte). Unntaket gjeld berre faginnhald — UI-chrome (knappar, verktøyrad) brukar framleis Lucide.
 
 ### 3.3 Fargetema
 Designsystemet støttar fleire fargetema definerte i `css/neobrutalisme.css` under `[data-theme="..."]`-selektorane (autoritativ kjelde). Kvart spel skal setje eit standard lyst tema, eit mørkt tema og eit aktivt tema slik:

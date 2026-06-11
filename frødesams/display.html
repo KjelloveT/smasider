@@ -1,78 +1,65 @@
 <!DOCTYPE html>
 <html lang="nn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frødesams - Storskjerm</title>
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        body {
-            background-color: #87CEEB;
-        }
-        .display-mode .answer-text.hidden-content {
-            color: transparent;
-            font-style: italic;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frødesams — Storskjerm</title>
+<link rel="stylesheet" href="../css/neobrutalisme.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body class="display-mode">
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="header-inner">
-                <div>
-                    <h1>Frødesams</h1>
-                </div>
-            </div>
-            <div class="header-stripe"></div>
-        </header>
+<body class="display-mode" data-theme="classic">
 
-        <!-- Game Screen -->
-        <div id="game-screen" class="screen">
-            <!-- Game Board -->
-            <div id="game-board">
-                <!-- Score Board -->
-                <div id="score-board" class="neo-box mb-16">
-                    <div class="section-label">Poengtavle</div>
-                    <div id="teams-score" class="teams-score">
-                        <!-- Team-poeng blir vist her -->
-                    </div>
-                </div>
+<div class="display-wrapper">
 
-                <!-- Question Display -->
-                <div id="question-display" class="hidden neo-box">
-                    <div class="flex justify-between items-center" style="gap:12px;flex-wrap:wrap;">
-                        <div class="current-team" id="current-team-display">Team 1 sin tur</div>
-                        <div class="current-team" id="question-progress" style="background:#87CEEB;">1 av 1</div>
-                    </div>
-                    <div class="question-text" id="question-text"></div>
-                    
-                    <!-- Answer Board -->
-                    <div id="answer-board" class="answer-board">
-                        <!-- Svaralternativer blir generert her -->
-                    </div>
-                </div>
+  <!-- Topplinje med logo + lag-poeng -->
+  <header class="display-header">
+    <img src="../_resources/frødesams.png" alt="Frødesams" class="display-logo">
+    <div id="teams-score" class="teams-score display-score"></div>
+  </header>
 
+  <!-- Ventar på at kvissmeister skal starte -->
+  <div id="waiting-screen" class="display-waiting">
+    <div class="waiting-inner">
+      <img src="../_resources/frødesams.png" alt="Frødesams" class="waiting-logo">
+      <p class="waiting-text">Ventar på kvissmeister…</p>
+    </div>
+  </div>
 
-                <!-- Winner Modal -->
-                <div id="winner-modal" class="modal hidden">
-                    <div class="modal-content neo-box">
-                        <div class="modal-header">
-                            <h3 style="margin:0;">🏆 Vinnar!</h3>
-                        </div>
-                        <div class="modal-body">
-                            <div id="winner-content">
-                                <!-- Winner info -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- Spørsmålspanel (skjult til spel startar) -->
+  <div id="question-display" class="display-question hidden">
+
+    <div class="display-question-meta">
+      <div id="current-team-display" class="turn-indicator display-turn"></div>
+      <div id="question-progress" class="question-progress display-progress"></div>
+      <div id="strike-display" class="strike-display display-strikes" aria-label="Stryk" role="status"></div>
     </div>
 
-    <script src="js/storage.js"></script>
-    <script src="js/sync.js"></script>
-    <script src="js/app.js"></script>
+    <div id="question-text" class="question-text display-question-text"></div>
+
+    <div id="answer-board" class="answer-board display-answer-board" role="list" aria-label="Svaralternativ"></div>
+
+  </div><!-- /question-display -->
+
+</div><!-- /display-wrapper -->
+
+<!-- Vinnar-overlay -->
+<div id="winner-modal" class="modal-overlay display-winner" role="dialog" aria-modal="true" aria-labelledby="display-winner-title">
+  <div class="modal2 winner-modal-box display-winner-box">
+    <div class="winner-trophy" aria-hidden="true">🏆</div>
+    <h2 class="heading2" id="display-winner-title">Vinnar!</h2>
+    <div id="winner-name" class="winner-name"></div>
+    <div id="winner-score" class="winner-score"></div>
+    <div id="winner-standings" class="winner-standings"></div>
+  </div>
+</div>
+
+<!-- Skript: state + sync + display (ingen app.js / game.js) -->
+<script src="../js/neobrutalisme.js"></script>
+<script src="../js/vyrdepil-storage.js"></script>
+<script src="js/state.js?v=1"></script>
+<script src="js/storage.js?v=1"></script>
+<script src="js/sync.js?v=1"></script>
+<script src="js/display.js?v=1"></script>
+
 </body>
 </html>

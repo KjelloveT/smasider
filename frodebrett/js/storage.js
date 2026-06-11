@@ -1,133 +1,113 @@
-// Storage System for Frødebrett
-// Same localStorage approach as klassekart
+/* Frødebrett — lagringslag (wrapper rundt VyrdepilStorage)
+ * All state ligg under VyrdepilStorage.frodebrett.state = {
+ *   quizzes: [ {id, title, categories:[{name, questions:[{points,question,answer}]}], final, created} ],
+ *   teams:   [ {name} ]   // siste lagoppsett, valfritt
+ * }
+ */
+(function (root) {
+  'use strict';
 
-const Storage = {
-    // Keys
-    QUIZZES_KEY: 'frodebrett_quizzes',
-    TEAMS_KEY: 'frodebrett_teams',
-    
-    // Migrate old keys from frodetavla
-    migrate() {
-        const oldQ = localStorage.getItem('frodetavla_quizzes');
-        const oldT = localStorage.getItem('frodetavla_teams');
-        if (oldQ && !localStorage.getItem(this.QUIZZES_KEY)) {
-            localStorage.setItem(this.QUIZZES_KEY, oldQ);
-            localStorage.removeItem('frodetavla_quizzes');
-        }
-        if (oldT && !localStorage.getItem(this.TEAMS_KEY)) {
-            localStorage.setItem(this.TEAMS_KEY, oldT);
-            localStorage.removeItem('frodetavla_teams');
-        }
-    },
-    
-    // Quiz Management
-    getQuizzes() {
-        try {
-            const data = localStorage.getItem(this.QUIZZES_KEY);
-            return data ? JSON.parse(data) : [];
-        } catch (e) {
-            console.error('Error loading quizzes:', e);
-            return [];
-        }
-    },
-    
-    saveQuiz(quiz) {
-        try {
-            const quizzes = this.getQuizzes();
-            const existingIndex = quizzes.findIndex(q => q.id === quiz.id);
-            
-            if (existingIndex >= 0) {
-                quizzes[existingIndex] = quiz;
-            } else {
-                quiz.id = this.generateId('quiz');
-                quiz.created = new Date().toISOString();
-                quizzes.push(quiz);
-            }
-            
-            localStorage.setItem(this.QUIZZES_KEY, JSON.stringify(quizzes));
-            return true;
-        } catch (e) {
-            console.error('Error saving quiz:', e);
-            return false;
-        }
-    },
-    
-    deleteQuiz(quizId) {
-        try {
-            const quizzes = this.getQuizzes();
-            const filtered = quizzes.filter(q => q.id !== quizId);
-            localStorage.setItem(this.QUIZZES_KEY, JSON.stringify(filtered));
-            return true;
-        } catch (e) {
-            console.error('Error deleting quiz:', e);
-            return false;
-        }
-    },
-    
-    // Team Management
-    getTeams() {
-        try {
-            const data = localStorage.getItem(this.TEAMS_KEY);
-            return data ? JSON.parse(data) : [];
-        } catch (e) {
-            console.error('Error loading teams:', e);
-            return [];
-        }
-    },
-    
-    saveTeams(teams) {
-        try {
-            localStorage.setItem(this.TEAMS_KEY, JSON.stringify(teams));
-            return true;
-        } catch (e) {
-            console.error('Error saving teams:', e);
-            return false;
-        }
-    },
-    
-    // Utility
-    generateId(prefix = 'id') {
-        return prefix + '_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-    },
-    
-    // Export/Import for backup
-    exportData() {
-        return {
-            quizzes: this.getQuizzes(),
-            teams: this.getTeams(),
-            exported: new Date().toISOString()
-        };
-    },
-    
-    importData(data) {
-        try {
-            if (data.quizzes) {
-                localStorage.setItem(this.QUIZZES_KEY, JSON.stringify(data.quizzes));
-            }
-            if (data.teams) {
-                localStorage.setItem(this.TEAMS_KEY, JSON.stringify(data.teams));
-            }
-            return true;
-        } catch (e) {
-            console.error('Error importing data:', e);
-            return false;
-        }
-    },
-    
-    // Clear all data
-    clearAll() {
-        try {
-            localStorage.removeItem(this.QUIZZES_KEY);
-            localStorage.removeItem(this.TEAMS_KEY);
-            return true;
-        } catch (e) {
-            console.error('Error clearing data:', e);
-            return false;
-        }
+  const GAME = 'frodebrett';
+
+  function defaultState() {
+    return { quizzes: [], teams: [] };
+  }
+
+  function readState() {
+    const s = VyrdepilStorage.getGameState(GAME);
+    if (!s || typeof s !== 'object') return defaultState();
+    return {
+      quizzes: Array.isArray(s.quizzes) ? s.quizzes : [],
+      teams: Array.isArray(s.teams) ? s.teams : []
+    };
+  }
+
+  function writeState(state) {
+    VyrdepilStorage.setGameState(GAME, state);
+  }
+
+  function generateId(prefix) {
+    return (prefix || 'id') + '_' + Date.now() + '_' + Math.random().toString(36).slice(2, 11);
+  }
+
+  // ---- Frøde-CRUD ----
+
+  function getQuizzes() {
+    return readState().quizzes;
+  }
+
+  function saveQuiz(quiz) {
+    const state = readState();
+    const idx = state.quizzes.findIndex(q => q.id === quiz.id);
+    if (idx >= 0) {
+      state.quizzes[idx] = quiz;
+    } else {
+      if (!quiz.id) quiz.id = generateId('quiz');
+      if (!quiz.created) quiz.created = new Date().toISOString();
+      state.quizzes.push(quiz);
     }
-};
+    writeState(state);
+    return true;
+  }
 
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Storage;
-}
+  function deleteQuiz(quizId) {
+    const state = readState();
+    state.quizzes = state.quizzes.filter(q => q.id !== quizId);
+    writeState(state);
+    return true;
+  }
+
+  // ---- Lag (valfritt, siste oppsett) ----
+
+  function getTeams() {
+    return readState().teams;
+  }
+
+  function saveTeams(teams) {
+    const state = readState();
+    state.teams = teams;
+    writeState(state);
+    return true;
+  }
+
+  // ---- Eksport / import ----
+
+  function exportData() {
+    return {
+      app: 'frodebrett',
+      version: 1,
+      quizzes: getQuizzes(),
+      exported: new Date().toISOString()
+    };
+  }
+
+  function importData(data) {
+    if (data && Array.isArray(data.quizzes)) {
+      const state = readState();
+      state.quizzes = data.quizzes;
+      writeState(state);
+      return true;
+    }
+    return false;
+  }
+
+  function clearAll() {
+    VyrdepilStorage.clearGame(GAME);
+    return true;
+  }
+
+  root.FrodebrettStorage = {
+    GAME,
+    readState,
+    writeState,
+    generateId,
+    getQuizzes,
+    saveQuiz,
+    deleteQuiz,
+    getTeams,
+    saveTeams,
+    exportData,
+    importData,
+    clearAll
+  };
+})(window);

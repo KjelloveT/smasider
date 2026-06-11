@@ -1,314 +1,277 @@
 <!DOCTYPE html>
 <html lang="nn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frødebrett - Kviss for klasserommet</title>
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frødebrett — kviss for klasserommet</title>
+<link rel="stylesheet" href="../css/neobrutalisme.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="../js/neo-header.js" defer></script>
 </head>
-<body>
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="header-inner">
-                <img src="../_resources/frødebrett.png" alt="Frødebrett" style="height:56px;width:auto;">
-                <div>
-                    <h1>Frødebrett</h1>
-                </div>
-            </div>
-            <div class="header-stripe"></div>
-        </header>
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
 
-        <!-- Main Navigation -->
-        <nav class="main-nav">
-            <button class="btn btn-primary" id="btn-play">Start spel</button>
-            <button class="btn btn-blue" id="btn-editor">Ny Frøde</button>
-            <button class="btn btn-yellow" id="btn-saved">Lagra frøder</button>
-        </nav>
+<neo-header></neo-header>
 
-        <!-- Game Screen -->
-        <div id="game-screen" class="screen">
-            <!-- Team Setup -->
-            <div id="team-setup" class="neo-box mb-24">
-                <div class="section-label">Team (2-6)</div>
-                <div id="teams-container">
-                    <div class="team-input">
-                        <input type="text" class="form-input team-name" placeholder="Team 1" maxlength="20">
-                        <button class="btn btn-small btn-danger btn-remove-team" style="display:none;">×</button>
-                    </div>
-                    <div class="team-input">
-                        <input type="text" class="form-input team-name" placeholder="Team 2" maxlength="20">
-                        <button class="btn btn-small btn-danger btn-remove-team" style="display:none;">×</button>
-                    </div>
-                </div>
-                <div class="mt-16">
-                    <button class="btn btn-small" id="btn-add-team">+ Legg til team</button>
-                </div>
-            </div>
+<div class="page-wrapper">
+<main class="main-content">
 
-            <!-- Quiz Selection -->
-            <div id="quiz-selection" class="neo-box mb-24">
-                <div class="section-label">Vel frøde</div>
-                <div id="quiz-list" class="quiz-grid">
-                    <!-- Frøder blir lasta inn her -->
-                </div>
-            </div>
+  <!-- Hero + navigasjon -->
+  <section class="box2 hero-box fb-hero">
+    <img src="../_resources/frødebrett.png" alt="Frødebrett-logo" class="hero-logo">
+    <div class="hero-text">
+      <h1>Frødebrett</h1>
+      <p>Lag eit jeopardy-brett for klasserommet — kategoriar, poeng, daglegdobbel og finalerunde.</p>
+      <div class="fb-nav">
+        <button class="btn nav-btn" id="btn-play" data-screen="game">Spel</button>
+        <button class="btn nav-btn" id="btn-editor" data-screen="editor">Ny frøde</button>
+        <button class="btn nav-btn" id="btn-saved" data-screen="saved">Lagra frøder</button>
+      </div>
+    </div>
+  </section>
 
-            <!-- Game Board -->
-            <div id="game-board" class="hidden">
-                <!-- Score Board -->
-                <div id="score-board" class="neo-box mb-16">
-                    <div class="section-label">Poengtavle</div>
-                    <div id="teams-score" class="teams-score">
-                        <!-- Team-poeng blir vist her -->
-                    </div>
-                </div>
+  <!-- ===== SPELSKJERM ===== -->
+  <div id="game-screen" class="screen">
 
-                <!-- Jeopardy Grid -->
-                <div id="jeopardy-grid" class="jeopardy-grid">
-                    <!-- Brett blir generert her -->
-                </div>
-
-                <!-- Question Display -->
-                <div id="question-display" class="hidden neo-box">
-                    <div class="question-header">
-                        <div class="question-category"></div>
-                        <div class="question-points"></div>
-                    </div>
-                    <div class="question-text"></div>
-                    <div class="question-answer hidden">
-                        <div class="answer-label">Svar:</div>
-                        <div class="answer-text"></div>
-                    </div>
-                    <div class="question-controls">
-                        <button class="btn btn-blue" id="btn-reveal">Vis svar</button>
-                        <button class="btn btn-primary hidden" id="btn-award-points">Gje poeng</button>
-                        <button class="btn btn-yellow hidden" id="btn-final-round">Finalerunde</button>
-                        <button class="btn" id="btn-back">Tilbake til brett</button>
-                    </div>
-                </div>
-
-                <!-- Question Modal -->
-                <div id="question-modal" class="modal hidden">
-                    <div class="modal-content neo-box">
-                        <div class="modal-header">
-                            <div class="question-category"></div>
-                            <div class="question-points"></div>
-                            <button class="btn btn-small btn-danger" id="btn-close-modal">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="question-text"></div>
-                            <div class="question-answer hidden">
-                                <div class="answer-label">Svar:</div>
-                                <div class="answer-text"></div>
-                            </div>
-                        </div>
-                        <div id="modal-point-controls" class="hidden mb-16">
-                            <!-- Poengknappar per team blir generert her -->
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-blue" id="btn-reveal-modal">Vis svar</button>
-                            <button class="btn btn-yellow hidden" id="btn-final-modal">Gå til finalerunde</button>
-                            <button class="btn" id="btn-back-modal">Tilbake</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game Controls -->
-                <div id="game-controls" class="neo-box mb-16 mt-24">
-                    <div class="flex gap-12">
-                        <button class="btn btn-yellow" id="btn-end-game">Avslutt spel</button>
-                        <button class="btn btn-purple" id="btn-go-final">Gå til finalerunde</button>
-                    </div>
-                </div>
-
-                <!-- Final Round -->
-                <div id="final-round" class="hidden neo-box">
-                    <div class="section-label mb-16">Finalerunde</div>
-                    <div class="final-category mb-16">
-                        <h3>Kategori:</h3>
-                        <div id="final-category-display" class="final-category-display"></div>
-                    </div>
-                    <div id="final-betting" class="final-betting mb-16">
-                        <h4>Satse poeng:</h4>
-                        <div id="betting-controls" class="betting-controls">
-                            <!-- Satse-kontroll blir generert her -->
-                        </div>
-                    </div>
-                    <div class="final-clue mb-16">
-                        <h4>Hint:</h4>
-                        <div id="final-clue-display"></div>
-                    </div>
-                    <div id="final-question" class="hidden">
-                        <div class="final-question-text mb-16">
-                            <h4>Spørsmål:</h4>
-                            <div id="final-question-display"></div>
-                        </div>
-                        <div class="final-answer hidden mb-16">
-                            <h4>Svar:</h4>
-                            <div id="final-answer-display"></div>
-                        </div>
-                        <div id="final-point-controls" class="hidden mb-16">
-                            <!-- Finalerunde poengknappar per team -->
-                        </div>
-                        <div class="final-controls">
-                            <button class="btn btn-blue" id="btn-reveal-final">Vis svar</button>
-                            <button class="btn btn-primary hidden" id="btn-final-points">Fordel poeng</button>
-                            <button class="btn btn-yellow hidden" id="btn-end-game-final">Avslutt spel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Lagoppsett -->
+    <div id="team-setup" class="box1">
+      <h2 class="heading4 no-mt">Lag (2–6)</h2>
+      <div id="teams-container">
+        <div class="team-input">
+          <input type="text" class="form-input team-name" placeholder="Lag 1" maxlength="20">
+          <button class="btn btn-icon btn-remove-team" aria-label="Fjern lag" style="display:none;">×</button>
         </div>
-
-        <!-- Editor Screen -->
-        <div id="editor-screen" class="screen hidden">
-            <div class="neo-box mb-24">
-                <div class="section-label">Ny Frøde</div>
-                
-                <!-- Error messages -->
-                <div id="editor-errors" class="editor-errors hidden"></div>
-
-                <!-- Frøde Info -->
-                <div class="form-group">
-                    <label>Tittel</label>
-                    <input type="text" class="form-input" id="quiz-title" placeholder="T.d. Norsk geografi">
-                </div>
-
-                <!-- Category Tabs -->
-                <div id="categories-section">
-                    <div class="section-label" style="margin-bottom:8px;">Kategoriar (2–6)</div>
-                    <div class="editor-tab-bar">
-                        <div id="category-tabs" class="editor-tabs">
-                            <!-- Tabs generert av JS -->
-                        </div>
-                        <button class="btn btn-small" id="btn-add-category" title="Legg til kategori">+</button>
-                        <button class="btn btn-small btn-danger" id="btn-remove-category" title="Fjern denne kategorien">−</button>
-                    </div>
-                    <div id="category-tab-content" class="category-tab-content">
-                        <!-- Innhald for aktiv tab -->
-                    </div>
-                </div>
-
-                <!-- Final Round (optional) -->
-                <div class="mt-24">
-                    <label class="editor-checkbox-label">
-                        <input type="checkbox" id="final-round-toggle">
-                        <span>Inkluder finalerunde</span>
-                    </label>
-                    <div id="final-round-fields" class="hidden mt-16">
-                        <div class="form-group">
-                            <label>Finalkategori</label>
-                            <input type="text" class="form-input" id="editor-final-category" placeholder="T.d. Norsk geografi">
-                        </div>
-                        <div class="form-group">
-                            <label>Hint</label>
-                            <input type="text" class="form-input" id="editor-final-clue" placeholder="Kort hint om kategorien...">
-                        </div>
-                        <div class="form-group">
-                            <label>Finalspørsmål</label>
-                            <textarea class="form-input" id="editor-final-question" placeholder="Fullstendig spørsmål for finalen..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Finalesvar</label>
-                            <input type="text" class="form-input" id="editor-final-answer" placeholder="Korrekt svar...">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Controls -->
-                <div class="mt-24 flex gap-12">
-                    <button class="btn btn-primary" id="btn-save-quiz">Lagre frøde</button>
-                    <button class="btn btn-yellow" id="btn-preview">Førehandsvis</button>
-                    <button class="btn" id="btn-clear">Tøm</button>
-                    <button class="btn btn-small" style="margin-left:auto;" onclick="game.showScreen('game')">Tilbake</button>
-                </div>
-            </div>
-
-            <!-- Preview Modal -->
-            <div id="preview-modal" class="modal hidden">
-                <div class="modal-content neo-box" style="max-width:900px;width:95%;">
-                    <div class="modal-header">
-                        <h3 id="preview-title" style="margin:0;">Førehandsvisning</h3>
-                        <button class="btn btn-small btn-danger" id="btn-close-preview">×</button>
-                    </div>
-                    <div id="preview-board" class="preview-board"></div>
-                    <div id="preview-question" class="hidden neo-box mt-16">
-                        <div id="preview-question-text" style="font-size:1.2rem;font-weight:700;margin-bottom:8px;"></div>
-                        <div id="preview-answer-text" class="hidden" style="color:#4CAF50;font-weight:700;"></div>
-                        <div class="mt-12 flex gap-12">
-                            <button class="btn btn-small btn-blue" id="btn-preview-reveal">Vis svar</button>
-                            <button class="btn btn-small" id="btn-preview-back">Tilbake til brett</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="team-input">
+          <input type="text" class="form-input team-name" placeholder="Lag 2" maxlength="20">
+          <button class="btn btn-icon btn-remove-team" aria-label="Fjern lag" style="display:none;">×</button>
         </div>
-
-        <!-- Saved Quizzes Screen -->
-        <div id="saved-screen" class="screen hidden">
-            <div class="neo-box mb-16">
-                <div class="section-label mb-16">Lagra frøder</div>
-                <div id="saved-list">
-                    <!-- Lagra frøder blir vist her -->
-                </div>
-                <div class="mt-16 flex gap-12">
-                    <button class="btn btn-primary" onclick="game.showScreen('editor')">Lag ny frøde</button>
-                    <button class="btn btn-small" style="margin-left:auto;" onclick="game.showScreen('game')">Tilbake</button>
-                </div>
-            </div>
-
-            <!-- Eksporter / Importer -->
-            <div class="neo-box frodebrett-file-section">
-                <div class="section-label mb-16">Eksporter / Importer</div>
-                <div class="frodebrett-file-grid">
-                    <div class="frodebrett-file-box frodebrett-file-export">
-                        <h3>Eksporter</h3>
-                        <p>Last ned ein frøde som <strong>.json-fil</strong> du kan dele med andre.</p>
-                        <select id="export-quiz-select" class="form-input" style="margin-bottom:8px;">
-                            <option value="">Vel ein frøde...</option>
-                        </select>
-                        <button class="btn btn-small btn-primary" id="btn-export-quiz">Last ned .json</button>
-                    </div>
-                    <div class="frodebrett-file-box frodebrett-file-import">
-                        <h3>Importer</h3>
-                        <p>Last opp ei <strong>.json-fil</strong> frå ein annan for å legge til frøden.</p>
-                        <button class="btn btn-small btn-primary" id="btn-import-quiz">Vel fil...</button>
-                        <input type="file" id="import-quiz-file" accept=".json" class="hidden">
-                        <div id="import-status" class="hidden mt-12"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
+      <button class="btn btn-small" id="btn-add-team">+ Legg til lag</button>
     </div>
 
-    <!-- Winner Modal -->
-    <div id="winner-modal" class="modal hidden">
-        <div class="modal-content neo-box winner-modal-content">
-            <div class="winner-header">
-                <div class="winner-trophy"></div>
-                <h2 class="winner-title">Vinnar!</h2>
-            </div>
-            <div class="winner-body">
-                <div class="winner-team">
-                    <div class="winner-name"></div>
-                    <div class="winner-score"></div>
-                </div>
-                <div class="winner-podium">
-                    <div class="podium-2nd">2</div>
-                    <div class="podium-1st">1</div>
-                    <div class="podium-3rd">3</div>
-                </div>
-            </div>
-            <div class="winner-footer">
-                <button class="btn btn-primary" id="btn-winner-close">Lukk</button>
-            </div>
-        </div>
+    <!-- Frødeval -->
+    <div id="quiz-selection" class="box1">
+      <h2 class="heading4 no-mt">Vel frøde</h2>
+      <div id="quiz-list" class="quiz-grid"></div>
     </div>
 
-    <!-- Scripts -->
-    <script src="js/icons.js"></script>
-    <script src="js/storage.js"></script>
-    <script src="js/app.js"></script>
+    <!-- Spelbrett -->
+    <div id="game-board" class="hidden">
+      <div id="score-board" class="box1">
+        <h2 class="heading4 no-mt">Poengtavle</h2>
+        <p class="fb-muted fb-hint">Klikk eit lag for å setje det på tur.</p>
+        <div id="teams-score" class="teams-score"></div>
+        <div id="turn-indicator" class="turn-indicator"></div>
+      </div>
+
+      <div id="jeopardy-grid" class="jeopardy-grid"></div>
+
+      <div id="game-controls" class="fb-controls">
+        <button class="btn btn-accent2" id="btn-end-game">Avslutt spel</button>
+        <button class="btn btn-accent" id="btn-go-final">Gå til finalerunde</button>
+      </div>
+
+      <!-- Finalerunde -->
+      <div id="final-round" class="box1 hidden">
+        <h2 class="heading4 no-mt">Finalerunde</h2>
+        <div class="final-category">
+          <h3 class="heading4-accent2 no-mt">Kategori</h3>
+          <div id="final-category-display" class="final-category-display"></div>
+        </div>
+        <div id="final-betting" class="final-betting">
+          <h3 class="heading4-accent2">Satse poeng</h3>
+          <div id="betting-controls" class="betting-controls"></div>
+        </div>
+        <div class="final-clue">
+          <h3 class="heading4-accent2">Hint</h3>
+          <div id="final-clue-display"></div>
+        </div>
+        <div id="final-question" class="hidden">
+          <div class="final-question-text">
+            <h3 class="heading4-accent2">Spørsmål</h3>
+            <div id="final-question-display"></div>
+          </div>
+          <div id="final-answer" class="final-answer hidden">
+            <h3 class="heading4-accent2">Svar</h3>
+            <div id="final-answer-display"></div>
+          </div>
+          <div id="final-point-controls" class="point-controls hidden"></div>
+          <div class="fb-controls">
+            <button class="btn btn-accent" id="btn-reveal-final">Vis svar</button>
+            <button class="btn btn-accent" id="btn-final-points">Fordel poeng</button>
+            <button class="btn btn-accent" id="btn-confirm-final">Stadfest poeng</button>
+            <button class="btn btn-accent2" id="btn-end-game-final">Avslutt spel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EDITORSKJERM ===== -->
+  <div id="editor-screen" class="screen hidden">
+    <div class="box1">
+      <h2 class="heading4 no-mt">Ny frøde</h2>
+
+      <div id="editor-errors" class="editor-errors hidden"></div>
+
+      <div class="form-group">
+        <label for="quiz-title">Tittel</label>
+        <input type="text" class="form-input" id="quiz-title" placeholder="T.d. Norsk geografi">
+      </div>
+
+      <div id="categories-section">
+        <h3 class="heading4-accent2">Kategoriar (2–6)</h3>
+        <div class="editor-tab-bar">
+          <div id="category-tabs" class="box-tabs editor-tabs"></div>
+          <button class="btn btn-icon" id="btn-add-category" aria-label="Legg til kategori">+</button>
+          <button class="btn btn-icon btn-danger" id="btn-remove-category" aria-label="Fjern denne kategorien">−</button>
+        </div>
+        <div id="category-tab-content" class="category-tab-content"></div>
+      </div>
+
+      <div class="fb-final-toggle">
+        <label class="editor-checkbox-label">
+          <input type="checkbox" id="final-round-toggle">
+          <span>Inkluder finalerunde</span>
+        </label>
+        <div id="final-round-fields" class="hidden">
+          <div class="form-group">
+            <label for="editor-final-category">Finalkategori</label>
+            <input type="text" class="form-input" id="editor-final-category" placeholder="T.d. Norsk geografi">
+          </div>
+          <div class="form-group">
+            <label for="editor-final-clue">Hint</label>
+            <input type="text" class="form-input" id="editor-final-clue" placeholder="Kort hint om kategorien…">
+          </div>
+          <div class="form-group">
+            <label for="editor-final-question">Finalspørsmål</label>
+            <textarea class="form-input" id="editor-final-question" placeholder="Fullstendig spørsmål for finalen…"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="editor-final-answer">Finalesvar</label>
+            <input type="text" class="form-input" id="editor-final-answer" placeholder="Korrekt svar…">
+          </div>
+        </div>
+      </div>
+
+      <div class="fb-controls">
+        <button class="btn btn-accent" id="btn-save-quiz">Lagre frøde</button>
+        <button class="btn btn-accent4" id="btn-preview">Førehandsvis</button>
+        <button class="btn" id="btn-clear">Tøm</button>
+        <button class="btn btn-small fb-right" data-goto="game">Tilbake</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== LAGRA FRØDER ===== -->
+  <div id="saved-screen" class="screen hidden">
+    <div class="box1">
+      <h2 class="heading4 no-mt">Lagra frøder</h2>
+      <div id="saved-list"></div>
+      <div class="fb-controls">
+        <button class="btn btn-accent" data-goto="editor">Lag ny frøde</button>
+        <button class="btn btn-small fb-right" data-goto="game">Tilbake</button>
+      </div>
+    </div>
+
+    <div class="box1">
+      <h2 class="heading4 no-mt">Eksporter / importer</h2>
+      <div class="fb-file-grid">
+        <div class="fb-file-box">
+          <h3 class="heading4-accent2 no-mt">Eksporter</h3>
+          <p>Last ned ein frøde som <strong>.json-fil</strong> du kan dele med andre.</p>
+          <select id="export-quiz-select" class="form-input">
+            <option value="">Vel ein frøde…</option>
+          </select>
+          <div class="fb-file-actions">
+            <button class="btn btn-small btn-accent" id="btn-export-quiz">Last ned .json</button>
+            <button class="btn btn-small" id="btn-export-all">Eksporter alle</button>
+          </div>
+        </div>
+        <div class="fb-file-box">
+          <h3 class="heading4-accent2 no-mt">Importer</h3>
+          <p>Last opp ei <strong>.json-fil</strong> frå ein annan for å legge til frøden.</p>
+          <button class="btn btn-small btn-accent" id="btn-import-quiz">Vel fil…</button>
+          <input type="file" id="import-quiz-file" accept=".json" class="hidden">
+          <div id="import-status" class="import-status hidden"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<!-- ===== MODALAR ===== -->
+
+<!-- Spørsmål -->
+<div id="question-modal" class="modal-overlay">
+  <div class="modal3 question-modal">
+    <div class="modal-header">
+      <span id="question-category" class="question-category"></span>
+      <span id="question-points" class="question-points"></span>
+      <button class="btn btn-icon modal-close" id="btn-close-modal" aria-label="Lukk">×</button>
+    </div>
+    <div class="modal-body">
+      <div id="dd-banner" class="dd-banner hidden">★ DAGENS DOBBEL! · ×2 ★</div>
+      <div id="question-text" class="question-text"></div>
+      <div id="question-answer" class="question-answer hidden">
+        <div class="answer-label">Svar</div>
+        <div id="answer-text" class="answer-text"></div>
+      </div>
+      <div id="modal-point-controls" class="point-controls hidden"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-accent" id="btn-reveal-modal">Vis svar</button>
+      <button class="btn btn-accent" id="btn-confirm-award">Stadfest poeng</button>
+      <button class="btn btn-accent4 hidden" id="btn-final-modal">Gå til finalerunde</button>
+      <button class="btn" id="btn-back-modal">Tilbake</button>
+    </div>
+  </div>
+</div>
+
+<!-- Førehandsvising -->
+<div id="preview-modal" class="modal-overlay">
+  <div class="modal4 preview-modal">
+    <button class="btn btn-icon modal-close" id="btn-close-preview" aria-label="Lukk">×</button>
+    <h2 id="preview-title" class="heading4 no-mt">Førehandsvisning</h2>
+    <div id="preview-board" class="jeopardy-grid"></div>
+    <div id="preview-question" class="preview-question hidden">
+      <div id="preview-question-text" class="question-text"></div>
+      <div id="preview-answer-text" class="answer-text hidden"></div>
+      <div class="fb-controls">
+        <button class="btn btn-small btn-accent" id="btn-preview-reveal">Vis svar</button>
+        <button class="btn btn-small" id="btn-preview-back">Tilbake til brett</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Vinnar -->
+<div id="winner-modal" class="modal-overlay">
+  <div class="modal2 winner-modal">
+    <div class="winner-trophy">🏆</div>
+    <h2 class="winner-title">Vinnar!</h2>
+    <div id="winner-name" class="winner-name"></div>
+    <div id="winner-score" class="winner-score"></div>
+    <div class="winner-podium">
+      <div id="podium-2nd" class="podium-step podium-2nd"></div>
+      <div id="podium-1st" class="podium-step podium-1st"></div>
+      <div id="podium-3rd" class="podium-step podium-3rd"></div>
+    </div>
+    <button class="btn btn-accent" id="btn-winner-close">Lukk</button>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="../js/neobrutalisme.js"></script>
+<script src="../js/vyrdepil-storage.js"></script>
+<script src="js/icons.js?v=6"></script>
+<script src="js/storage.js?v=6"></script>
+<script src="js/state.js?v=6"></script>
+<script src="js/board.js?v=6"></script>
+<script src="js/editor.js?v=6"></script>
+<script src="js/saved.js?v=6"></script>
+<script src="js/app.js?v=6"></script>
+
 </body>
 </html>

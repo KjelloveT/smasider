@@ -1,210 +1,187 @@
 <!DOCTYPE html>
 <html lang="nn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frødesams - Kviss for klasserommet</title>
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frødesams — Familiekviss for klasserommet</title>
+<link rel="stylesheet" href="../css/neobrutalisme.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="../js/neo-header.js" defer></script>
 </head>
-<body>
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="header-inner">
-                <div>
-                    <h1>Frødesams</h1>
-                </div>
-            </div>
-            <div class="header-stripe"></div>
-        </header>
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
 
-        <!-- Main Navigation -->
-        <nav class="main-nav">
-            <a href="#" class="nav-logo" onclick="location.reload(); return false;">
-                <img src="../_resources/frødesams.png" alt="Frødesams" style="height:32px;width:auto;">
-            </a>
-            <button class="btn btn-blue" id="btn-editor">Ny Frødesams</button>
-            <button class="btn btn-yellow" id="btn-saved">Lagra Frødesamsar</button>
-            <button class="btn btn-purple" id="btn-controller">Start Frødesams</button>
-        </nav>
+<neo-header></neo-header>
 
-        <!-- Instructions -->
-        <div id="instructions" class="neo-box mb-24">
-            <h3 style="margin-top:0;">Korleis spele Frødesams</h3>
-            <p>Frødesams er ein kviss for klasserommet der lag konkurrar om å gjette dei mest populære svara.</p>
-            <ul style="margin:16px 0;padding-left:20px;">
-                <li><strong>To skjermar:</strong> Trykk "Start Frødesams" på denne skjermen, og klikk "Opne storskjerm" for å vise svara på ein annan skjerm. Då kan du som styrer kvissen sjå dei riktige svara, samstundes som spelarane får sjå riktige svar etter kvart som dei svarar rett</li>
-                <li><strong>Team:</strong> Sett opp 2-4 lag med namn.</li>
-                <li><strong>Vel Frødesams:</strong> Vel ein quiz frå lista og klikk "Start".</li>
-                <li><strong>Vis svar:</strong> Kvissmeister klikkar på svaret frå sin skjerm, og det visast på storskjermen.</li>
-                <li><strong>Poeng:</strong> Lag får poeng for kvar riktig gjetning. 1 feil = bytt lag (nytt lag visast automatisk)</li>
-            </ul>
-        </div>
+<div class="page-wrapper">
+<main class="main-content">
 
-        <!-- Game Screen -->
-        <div id="game-screen" class="screen hidden">
-            <!-- Open Display Button -->
-            <div class="neo-box mb-24">
-                <button class="btn btn-purple" id="btn-open-display">Opne storskjerm</button>
-            </div>
-
-            <!-- Team Setup -->
-            <div id="team-setup" class="neo-box mb-24">
-                <div class="section-label">Team (2-4)</div>
-                <div id="teams-container">
-                    <div class="team-input">
-                        <input type="text" class="form-input team-name" placeholder="Team 1" maxlength="20">
-                        <button class="btn btn-small btn-danger btn-remove-team" style="display:none;">×</button>
-                    </div>
-                    <div class="team-input">
-                        <input type="text" class="form-input team-name" placeholder="Team 2" maxlength="20">
-                        <button class="btn btn-small btn-danger btn-remove-team" style="display:none;">×</button>
-                    </div>
-                </div>
-                <div class="mt-16">
-                    <button class="btn btn-small" id="btn-add-team">+ Legg til team</button>
-                </div>
-            </div>
-
-            <!-- Quiz Selection -->
-            <div id="quiz-selection" class="neo-box mb-24">
-                <div class="section-label">Vel Frødesams</div>
-                <div id="quiz-list" class="quiz-grid">
-                    <!-- Quizer blir lasta inn her -->
-                </div>
-            </div>
-
-            <!-- Game Board -->
-            <div id="game-board" class="hidden">
-                <!-- Score Board -->
-                <div id="score-board" class="neo-box mb-16">
-                    <div class="section-label">Poengtavle</div>
-                    <div id="teams-score" class="teams-score">
-                        <!-- Team-poeng blir vist her -->
-                    </div>
-                </div>
-
-                <!-- Question Display -->
-                <div id="question-display" class="hidden neo-box">
-                    <div class="flex justify-between items-center" style="gap:12px;flex-wrap:wrap;">
-                        <div class="current-team" id="current-team-display">Team 1 sin tur</div>
-                        <div class="current-team" id="question-progress" style="background:#87CEEB;">1 av 1</div>
-                    </div>
-                    <div class="question-text" id="question-text"></div>
-                    
-                    <!-- Answer Board -->
-                    <div id="answer-board" class="answer-board">
-                        <!-- Svaralternativer blir generert her -->
-                    </div>
-
-                    <div class="mt-16">
-                        <button class="btn btn-danger" id="btn-strike">✕ Feil svar (byt lag)</button>
-                    </div>
-
-                    <div id="point-award-controls" class="neo-box mt-16 hidden">
-                        <div class="section-label">Gje poeng til</div>
-                        <div id="point-buttons" class="point-buttons">
-                            <!-- Poengknappar -->
-                        </div>
-                    </div>
-
-                    <div class="question-controls mt-24">
-                        <button class="btn btn-blue" id="btn-next-question">Neste spørsmål</button>
-                        <button class="btn" id="btn-back-to-board">Tilbake til quizval</button>
-                    </div>
-                </div>
-
-                <!-- Game Controls -->
-                <div id="game-controls" class="neo-box mb-16 mt-24">
-                    <div class="flex gap-12">
-                        <button class="btn btn-yellow" id="btn-end-game">Avslutt spel</button>
-                    </div>
-                </div>
-
-                <!-- Winner Modal -->
-                <div id="winner-modal" class="modal hidden">
-                    <div class="modal-content neo-box">
-                        <div class="modal-header">
-                            <h3 style="margin:0;">🏆 Vinnar!</h3>
-                            <button class="btn btn-small btn-danger" id="btn-winner-close">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div id="winner-content">
-                                <!-- Winner info -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Editor Screen -->
-        <div id="editor-screen" class="screen hidden">
-            <div class="neo-box mb-24">
-                <div class="section-label">Ny quiz</div>
-                
-                <!-- Error messages -->
-                <div id="editor-errors" class="editor-errors hidden"></div>
-
-                <!-- Quiz Info -->
-                <div class="form-group">
-                    <label>Tittel</label>
-                    <input type="text" class="form-input" id="quiz-title" placeholder="T.d. Skuleliv">
-                </div>
-
-                <!-- Questions Section -->
-                <div id="questions-section">
-                    <div class="section-label" style="margin-bottom:8px;">Spørsmål</div>
-                    <div id="questions-container">
-                        <!-- Spørsmål blir generert her -->
-                    </div>
-                    <div class="mt-16">
-                        <button class="btn btn-small" id="btn-add-question">+ Legg til spørsmål</button>
-                    </div>
-                </div>
-
-                <!-- Controls -->
-                <div class="mt-24 flex gap-12">
-                    <button class="btn btn-primary" id="btn-save-quiz">Lagre quiz</button>
-                    <button class="btn" id="btn-clear">Tøm</button>
-                    <button class="btn btn-small" style="margin-left:auto;" onclick="game.showScreen('game')">Tilbake</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Saved Quizzes Screen -->
-        <div id="saved-screen" class="screen hidden">
-            <div class="neo-box mb-24">
-                <div class="section-label">Lagra kvissar</div>
-                <div id="saved-quiz-list" class="quiz-grid">
-                    <!-- Lagra kvissar vert vist her -->
-                </div>
-            </div>
-
-            <!-- Export / Import -->
-            <div class="neo-box mb-24">
-                <div class="section-label">Eksport / Import</div>
-                <div class="file-grid">
-                    <div class="file-box file-export">
-                        <h3>Eksporter alle kvissar</h3>
-                        <p>Last ned alle kvissar som JSON-fil for backup.</p>
-                        <button class="btn btn-primary" id="btn-export">Eksporter</button>
-                    </div>
-                    <div class="file-box file-import">
-                        <h3>Importer kvissar</h3>
-                        <p>Last opp ei JSON-fil for å importere kvissar.</p>
-                        <input type="file" id="import-file" accept=".json" style="margin-bottom:8px;">
-                        <button class="btn btn-primary" id="btn-import">Importer</button>
-                    </div>
-                </div>
-            </div>
-
-            <button class="btn" onclick="game.showScreen('game')">Tilbake</button>
-        </div>
+  <!-- ===== HOVUDNAVIGASJON + INNHALD i box5-tabs (AGENTS.md §3.2) ===== -->
+  <div class="box5">
+    <div class="box-tabs">
+      <button class="box-tab nav-btn active" id="btn-play">Spel</button>
+      <button class="box-tab nav-btn" id="btn-editor">Ny frødesams</button>
+      <button class="box-tab nav-btn" id="btn-saved">Lagra</button>
     </div>
 
-    <script src="js/storage.js"></script>
-    <script src="js/sync.js"></script>
-    <script src="js/app.js"></script>
+    <div class="box-body fs-box-body">
+
+      <!-- ===== SPELSKJERM ===== -->
+      <div id="game-screen" class="screen">
+
+        <!-- Hero — vert skjult når spelet startar -->
+        <div id="hero-section" class="box2 hero-box">
+          <img src="../_resources/frødesams.png" alt="Frødesams" class="hero-logo">
+          <div class="hero-text">
+            <h1>Frødesams</h1>
+            <p>Gjet dei mest populære svara — lag mot lag!</p>
+            <p>Set opp 2–4 lag, vel ein frødesams og start. Klikk riktige svar for å avsløre dei på storskjermen. Eit feil svar = bytte av lag.</p>
+          </div>
+        </div>
+
+        <!-- Opne storskjerm -->
+        <div class="fs-display-bar">
+          <button class="btn btn-accent2" id="btn-open-display">⊞ Opne storskjerm</button>
+          <span class="fs-display-hint">Opna storskjermen i eit nytt vindauge for å vise svar til spelarane</span>
+        </div>
+
+        <!-- Lag-oppsett -->
+        <div id="team-setup" class="box1 fs-section">
+          <h2 class="heading4 no-mt">Lag (2–4)</h2>
+          <div id="teams-container">
+            <div class="team-input">
+              <input type="text" class="form-input team-name" placeholder="Lag 1" maxlength="20">
+              <button type="button" class="btn btn-icon btn-danger btn-remove-team" aria-label="Fjern lag" style="display:none;">×</button>
+            </div>
+            <div class="team-input">
+              <input type="text" class="form-input team-name" placeholder="Lag 2" maxlength="20">
+              <button type="button" class="btn btn-icon btn-danger btn-remove-team" aria-label="Fjern lag" style="display:none;">×</button>
+            </div>
+          </div>
+          <div class="mt-12">
+            <button type="button" class="btn btn-small" id="btn-add-team">+ Legg til lag</button>
+          </div>
+        </div>
+
+        <!-- Quizval -->
+        <div id="quiz-selection" class="box1 fs-section">
+          <h2 class="heading4 no-mt">Vel frødesams</h2>
+          <div id="quiz-list" class="quiz-grid"></div>
+        </div>
+
+        <!-- Spillbrett (skjult til spel startar) -->
+        <div id="game-board" class="hidden">
+
+          <!-- Poengtavle -->
+          <div class="box1 fs-section">
+            <div id="teams-score" class="teams-score"></div>
+          </div>
+
+          <!-- Spørsmålspanel -->
+          <div id="question-display" class="box1 fs-section hidden">
+            <div class="question-meta-row">
+              <div id="current-team-display" class="turn-indicator">Lag 1 svarar</div>
+              <div id="question-progress" class="question-progress">1 av 1</div>
+            </div>
+
+            <div id="question-text" class="question-text"></div>
+
+            <div id="strike-display" class="strike-display" aria-label="Stryk" role="status"></div>
+
+            <div id="answer-board" class="answer-board" role="list" aria-label="Svaralternativ"></div>
+
+            <!-- Angre-kontroll (UX2) -->
+            <div id="undo-controls" class="fs-undo-controls hidden">
+              <button type="button" class="btn btn-small" id="btn-undo-reveal" aria-label="Angre siste avsløring">↩ Angre</button>
+            </div>
+
+            <!-- Kontrollar nedst i spørsmålspanelet -->
+            <div class="question-footer mt-16">
+              <button type="button" class="btn btn-danger" id="btn-strike">✕ Feil svar (byt lag)</button>
+              <button type="button" class="btn btn-accent" id="btn-next-question">Neste spørsmål →</button>
+            </div>
+          </div>
+
+          <!-- Spelkontrollar — alltid synleg under spel (ikkje hidden!) -->
+          <div id="game-controls" class="fs-section">
+            <button type="button" class="btn btn-danger" id="btn-end-game">Avslutt og sjå vinnar</button>
+          </div>
+
+        </div><!-- /game-board -->
+      </div><!-- /game-screen -->
+
+      <!-- ===== EDITOR-SKJERM ===== -->
+      <div id="editor-screen" class="screen hidden">
+
+        <div id="editor-errors" class="editor-errors hidden" role="alert"></div>
+
+        <div class="form-group">
+          <label for="quiz-title">Tittel på frødesams</label>
+          <input type="text" class="form-input" id="quiz-title" placeholder="T.d. Skuleliv" maxlength="80">
+        </div>
+
+        <div id="questions-container"></div>
+
+        <div class="mt-16">
+          <button type="button" class="btn btn-small" id="btn-add-question">+ Legg til spørsmål</button>
+        </div>
+
+        <div class="mt-24 fs-editor-footer">
+          <button type="button" class="btn btn-accent" id="btn-save-quiz">Lagre frødesams</button>
+          <button type="button" class="btn" id="btn-clear">Tøm skjema</button>
+        </div>
+      </div><!-- /editor-screen -->
+
+      <!-- ===== LAGRA-SKJERM ===== -->
+      <div id="saved-screen" class="screen hidden">
+
+        <div id="saved-list"></div>
+
+        <div class="fs-import-export mt-24">
+          <div class="fs-ie-box">
+            <h3>Eksporter alle</h3>
+            <p>Last ned alle frødesamsar som JSON-fil.</p>
+            <button type="button" class="btn btn-small btn-accent" id="btn-export">↓ Eksporter alle</button>
+          </div>
+          <div class="fs-ie-box">
+            <h3>Importer</h3>
+            <p>Last opp ei JSON-fil frå Frødesams.</p>
+            <label for="import-file" class="btn btn-small" style="cursor:pointer;">↑ Vel fil</label>
+            <input type="file" id="import-file" accept=".json" class="sr-only">
+            <button type="button" class="btn btn-small" id="btn-import">Importer</button>
+          </div>
+        </div>
+        <div id="import-status" class="import-status hidden" role="status" aria-live="polite"></div>
+
+      </div><!-- /saved-screen -->
+
+    </div><!-- /box-body -->
+  </div><!-- /box5 -->
+
+</main>
+</div><!-- /page-wrapper -->
+
+<!-- ===== VINNAR-OVERLAY ===== -->
+<div id="winner-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="winner-modal-title">
+  <div class="modal2 winner-modal-box">
+    <div class="winner-trophy" aria-hidden="true">🏆</div>
+    <h2 id="winner-modal-title" class="heading2 no-mt">Vinnar!</h2>
+    <div id="winner-name" class="winner-name"></div>
+    <div id="winner-score" class="winner-score"></div>
+    <div id="winner-standings" class="winner-standings"></div>
+    <button type="button" class="btn btn-accent mt-16" id="btn-winner-close">Nytt spel</button>
+  </div>
+</div>
+
+<!-- ===== SKRIPT ===== -->
+<script src="../js/neobrutalisme.js"></script>
+<script src="../js/vyrdepil-storage.js"></script>
+<script src="js/state.js?v=2"></script>
+<script src="js/storage.js?v=2"></script>
+<script src="js/sync.js?v=2"></script>
+<script src="js/game.js?v=2"></script>
+<script src="js/editor.js?v=2"></script>
+<script src="js/saved.js?v=2"></script>
+<script src="js/app.js?v=2"></script>
+
 </body>
 </html>

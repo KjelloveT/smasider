@@ -1,82 +1,59 @@
-// BroadcastChannel Sync for Frødesams
-// Synkroniserer mellom storskjerm (index.html) og quiz-master (controller.html)
+/* Frødesams — BroadcastChannel-synkronisering mellom quiz-master og storskjerm.
+ * Tilgjengeleg som FS.Sync.
+ */
+(function (root) {
+  'use strict';
 
-class SyncManager {
-    constructor(channelName = 'frødesams-sync') {
-        this.channel = new BroadcastChannel(channelName);
-        this.isController = window.location.pathname.includes('controller.html');
-        this.listeners = new Map();
-        
-        this.init();
-    }
-    
-    init() {
-        this.channel.onmessage = (event) => {
-            const data = event.data;
-            this.handleMessage(data);
-        };
-    }
-    
-    handleMessage(data) {
-        const { type, payload } = data;
-        
-        if (this.listeners.has(type)) {
-            this.listeners.get(type).forEach(callback => callback(payload));
-        }
-    }
-    
-    on(type, callback) {
-        if (!this.listeners.has(type)) {
-            this.listeners.set(type, []);
-        }
-        this.listeners.get(type).push(callback);
-    }
-    
-    off(type, callback) {
-        if (this.listeners.has(type)) {
-            const callbacks = this.listeners.get(type);
-            const index = callbacks.indexOf(callback);
-            if (index > -1) {
-                callbacks.splice(index, 1);
-            }
-        }
-    }
-    
-    send(type, payload = {}) {
-        this.channel.postMessage({ type, payload });
-    }
-    
-    // Convenience methods for common actions
-    revealAnswer(answerIndex) {
-        this.send('reveal-answer', { answerIndex });
-    }
-    
-    strike() {
-        this.send('strike', {});
-    }
-    
-    nextQuestion() {
-        this.send('next-question', {});
-    }
-    
-    awardPoints(teamId, points) {
-        this.send('award-points', { teamId, points });
-    }
-    
-    endGame() {
-        this.send('end-game', {});
-    }
-    
-    startGame(quizId, teams) {
-        this.send('start-game', { quizId, teams });
-    }
-    
-    close() {
-        this.channel.close();
-    }
-}
+  const FS = root.FS || (root.FS = {});
 
-// Export for use in app.js
-if (typeof window !== 'undefined') {
-    window.SyncManager = SyncManager;
-}
+  const CHANNEL_NAME = 'frodesams-sync';
+  let channel;
+  try { channel = new BroadcastChannel(CHANNEL_NAME); } catch (e) { channel = null; }
+
+  const listeners = new Map();
+
+  if (channel) {
+    channel.onmessage = function (event) {
+      const { type, payload } = event.data || {};
+      if (!type) return;
+      const cbs = listeners.get(type);
+      if (cbs) cbs.forEach(cb => { try { cb(payload); } catch (e) {} });
+    };
+  }
+
+  FS.Sync = {
+    on(type, cb) {
+      if (!listeners.has(type)) listeners.set(type, []);
+      listeners.get(type).push(cb);
+    },
+
+    off(type, cb) {
+      const arr = listeners.get(type);
+      if (!arr) return;
+      const i = arr.indexOf(cb);
+      if (i > -1) arr.splice(i, 1);
+    },
+
+    send(type, payload) {
+      if (!channel) return;
+      channel.postMessage({ type, payload: payload || {} });
+    },
+
+    // Snarvegar for vanlege meldingstypar
+    startGame(quiz, teams)           { FS.Sync.send('start-game',      { quiz, teams }); },
+    showQuestion(data)               { FS.Sync.send('show-question',   data); },
+    revealAnswer(answerIdx, text, points) {
+      FS.Sync.send('reveal-answer', { answerIdx, text, points });
+    },
+    confirmReveal(answerIdx, teamIdx, points, scores) {
+      FS.Sync.send('confirm-reveal', { answerIdx, teamIdx, points, scores });
+    },
+    undoReveal(answerIdx)            { FS.Sync.send('undo-reveal',     { answerIdx }); },
+    strike(count, currentTeamIdx)   { FS.Sync.send('strike',          { count, currentTeamIdx }); },
+    nextQuestion(data)               { FS.Sync.send('next-question',   data); },
+    showWinner(teams, ranked)        { FS.Sync.send('show-winner',     { teams, ranked }); },
+    requestState()                   { FS.Sync.send('request-state',  {}); },
+    syncState(data)                  { FS.Sync.send('sync-state',     data); }
+  };
+
+})(window);

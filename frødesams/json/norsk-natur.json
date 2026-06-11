@@ -1,0 +1,32 @@
+{
+  "title": "Norsk natur",
+  "questions": [
+    {
+      "question": "Kva forbinder du med Noreg?",
+      "answers": [
+        { "text": "Fjell", "points": 40 },
+        { "text": "Fisk", "points": 30 },
+        { "text": "Snø", "points": 20 },
+        { "text": "Olje", "points": 10 }
+      ]
+    },
+    {
+      "question": "Kva er det beste med norsk natur?",
+      "answers": [
+        { "text": "Fjordar", "points": 38 },
+        { "text": "Fjell", "points": 32 },
+        { "text": "Skog", "points": 18 },
+        { "text": "Sjø og kyst", "points": 12 }
+      ]
+    },
+    {
+      "question": "Kva norsk dyr er mest kjent?",
+      "answers": [
+        { "text": "Elg", "points": 44 },
+        { "text": "Laks", "points": 26 },
+        { "text": "Lemming", "points": 18 },
+        { "text": "Bjørn", "points": 12 }
+      ]
+    }
+  ]
+}
