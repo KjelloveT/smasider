@@ -93,7 +93,12 @@ const Store = (() => {
             settings: { warnMinutes: 2, autoClearDrawing: false, showClock: true },
             today: null,
             notes: [],
-            trafficLight: 'green'
+            trafficLight: 'green',
+            panels: {
+                day: { on: true, x: null, y: null },
+                lesson: { on: true, x: null, y: null }
+            },
+            ui: { sidebarOpen: false, heroDismissed: false, emptyDismissed: false }
         };
     }
 
@@ -101,11 +106,17 @@ const Store = (() => {
         const saved = VyrdepilStorage.getGameState(GAME);
         const def = defaultState();
         if (!saved) return def;
+        const panels = saved.panels || {};
         return {
             settings: Object.assign(def.settings, saved.settings || {}),
             today: saved.today || null,
             notes: Array.isArray(saved.notes) ? saved.notes : [],
-            trafficLight: saved.trafficLight || 'green'
+            trafficLight: saved.trafficLight || 'green',
+            panels: {
+                day: Object.assign(def.panels.day, panels.day || {}),
+                lesson: Object.assign(def.panels.lesson, panels.lesson || {})
+            },
+            ui: Object.assign(def.ui, saved.ui || {})
         };
     }
 

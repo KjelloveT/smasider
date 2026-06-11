@@ -48,6 +48,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
   - Innebygd dømeliste (10 engelsk-norske ord) for rask oppstart.
 
 ### Endra
+- **Dagsvegen** — ombygd layout etter tilbakemeldingar frå klasserommet.
+  - Verktøyrada øvst er bytt ut med ein samanleggbar venstremeny (berre ikon samanlagd, ikon + namn utvida). Toppen har no berre datolinja, og sida nyttar heile skjermbreidda.
+  - Dagsplanen og «Plan for timen» er no to frittståande, flyttbare panel (som widgetane) som kan dragast dit ein vil og slåast av/på frå menyen — av gjev blank tavle. Posisjon og av/på blir hugsa.
+  - Hero-boksen kan lukkast med ✕ og held seg lukka. Ny rettleiing «Slik brukar du Dagsvegen» i menyen og i tom-tilstanden.
+  - Tekstboksane kan no skalerast i både breidde og høgde (eige handtak som òg verkar på touch), og tekststorleiken kan justerast med A−/A+. Alt blir lagra per boks.
+  - «Ingen plan for i dag enno»-boksen kan lukkast med ✕ — då står skjermen blank og kan fyllast fritt med teikning, tekstboksar og widgetar. Valet blir hugsa.
+  - Ny **Snøggøkt** i menyen: start éi enkel økt no utan å lage dagsplan — med fag, varigheit og same aktivitetsplan (fleksibel tid, +5/−5) som i dagsplanen. Står det noko anna på planen akkurat då, blir det avslutta og snøggøkta tek over.
 - **Frødesams** — full migrering til neobrutalisme-designet og vyrdepil-reglane.
   - Bytt eigen `css/style.css` og eigen `<header>` ut med `neobrutalisme.css`, `<neo-header>` og temastøtte (lyst/mørkt, alle 21 tema). `css/style.css` er no berre spel-spesifikke utvidingar (svar-brett, strike-display, display-modus) oppå designsystemet.
   - Flytta lagring frå rå `localStorage`-nøklar til felles `VyrdepilStorage` under nøkkelen `frodesams`. Eksportformatet har no `app: "frodesams"` og `version: 1`.
@@ -69,6 +76,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - **Ordaklok — Tevling**: stipla skiljelinje mellom venstre og høgre side, Vyrde står i ein tydeleg sirkel i midten over chips-laget.
 
 ### Fiksa
+- **Dagsvegen**: økter byter ikkje lenger plass medan ein framleis skriv i starttid-feltet — sorteringa skjer først når feltet mistar fokus. Varigheits-felt byggjer heller ikkje om skjemaet midt i skrivinga (minutt-summen blir oppdatert direkte).
 - **Frødebrett**: brukarinnhald (quiz-titlar, lagnamn) blir no rendra trygt med `textContent`/`createElement` i staden for `innerHTML` (XSS-vern, viktig for importerte `.json`-frøder). Lagt til `aria-label` på ikon-knappar, Escape lukkar alle modalar og `:focus-visible` frå designsystemet.
 - **Ordaklok — Tevling**: chips «blinka» tilbake til opphavleg posisjon ved rett match etter smash-animasjonen. Dei ligg no usynlege når dei først er smasha.
 - **Ordaklok — alle modus**: lange begrep og setningar (t.d. naturfag-definisjonar) sprengde boksane. Innført lengde-basert font-skalering og ordbryting i alle fire modus. I Skriv-modus byter vi automatisk til vanleg input når svaret inneheld mellomrom eller er over 20 teikn (bokstavboksar er framleis default for korte ord). Tevling-chips wrappar no til fleire liner i staden for å bli kutta.

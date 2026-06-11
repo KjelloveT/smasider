@@ -6,40 +6,105 @@
 
 .dv-hidden { display: none !important; }
 
-/* ---- topplinje ---- */
-#topbar {
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-    gap: clamp(8px, 2vw, 16px); margin-bottom: clamp(12px, 2vw, 20px);
+/* ---- full breidde + plass til venstremenyen ---- */
+.main-content { max-width: none; padding-left: 88px; padding-right: 20px; }
+#edit-view { max-width: 1200px; }
+@media (max-width: 700px) {
+    .main-content { padding-left: 70px; padding-right: 10px; }
 }
+
+/* ---- topplinje (berre datolinja) ---- */
+#topbar { margin-bottom: clamp(12px, 2vw, 20px); }
 .dv-dateline {
     font-size: clamp(1.3rem, 3.5vw, 2.2rem); font-weight: 900;
     color: var(--text); margin: 0; line-height: 1.2;
 }
 .dv-dateline::first-letter { text-transform: uppercase; }
-#toolbar { display: flex; flex-wrap: wrap; gap: 6px; }
-.dv-tool-btn {
-    padding: 8px 10px; font-size: 0.85rem; gap: 6px;
-    box-shadow: 3px 3px 0 var(--shadow);
+.dv-tool-icon { display: inline-flex; align-items: center; flex-shrink: 0; }
+
+/* ---- venstremeny ---- */
+#sidebar {
+    position: fixed; left: 10px; top: 86px; z-index: 800;
+    display: flex; flex-direction: column; gap: 2px;
+    width: 58px; padding: 6px;
+    background: var(--surface); border: 3px solid var(--border);
+    box-shadow: 5px 5px 0 var(--shadow);
+    max-height: calc(100vh - 100px); overflow-y: auto; overflow-x: hidden;
+    transition: width 0.15s ease;
 }
-.dv-tool-icon { display: inline-flex; align-items: center; }
-@media (max-width: 1100px) { .dv-tool-text { display: none; } }
+#sidebar.open { width: 215px; }
+.dv-side-btn {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; min-height: 42px; padding: 0;
+    justify-content: center;
+    background: transparent; border: none; cursor: pointer;
+    font-family: inherit; font-weight: 800; font-size: 0.9rem;
+    color: var(--text); text-decoration: none; white-space: nowrap;
+}
+#sidebar.open .dv-side-btn { justify-content: flex-start; padding: 0 10px; }
+.dv-side-btn:hover { background: var(--accent); color: var(--text-on-accent); }
+.dv-side-btn.active { background: var(--accent2); color: var(--text-on-accent); }
+#sidebar:not(.open) .dv-side-text { display: none; }
+.dv-side-sep { height: 2px; background: var(--border); margin: 3px 0; flex-shrink: 0; }
+@media (max-width: 700px) {
+    #sidebar { left: 6px; width: 52px; }
+}
+
+/* ---- hero med lukkeknapp ---- */
+#hero { position: relative; }
+.dv-hero-x { position: absolute; top: 10px; right: 10px; }
+
+/* ---- rettleiing ---- */
+.dv-help-list { margin: 0 0 14px 22px; padding: 0; }
+.dv-help-list li { margin-bottom: 12px; line-height: 1.5; }
+
+/* ---- snøggøkt ---- */
+.dv-quick-row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px;
+}
+.dv-quick-actions { display: flex; justify-content: flex-end; margin-top: 16px; }
 
 /* ---- tom tilstand ---- */
-.dv-empty { text-align: center; padding: clamp(24px, 5vw, 48px); }
+.dv-empty { position: relative; text-align: center; padding: clamp(24px, 5vw, 48px); max-width: 720px; }
+.dv-empty-x { position: absolute; top: 10px; right: 10px; }
 .dv-empty h2 { font-weight: 900; margin-bottom: 8px; }
 .dv-empty-actions {
     display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 20px;
 }
 
-/* ---- visningsmodus: hovudgrid ---- */
-#display-view {
-    display: grid; grid-template-columns: minmax(240px, 1fr) 2.5fr;
-    gap: clamp(12px, 2vw, 24px); align-items: start;
+/* ---- flyttbare panel: dagsplan og plan for timen ---- */
+.dv-panel {
+    position: fixed; z-index: 540;
+    display: flex; flex-direction: column;
+    max-height: calc(100vh - 170px);
 }
-@media (max-width: 700px) { #display-view { grid-template-columns: 1fr; } }
+.dv-panel-bar {
+    display: flex; align-items: center; gap: 8px; cursor: grab; flex-shrink: 0;
+    background: var(--surface); border: 3px solid var(--border);
+    box-shadow: 4px 4px 0 var(--shadow);
+    padding: 4px 10px; margin-bottom: 10px; color: var(--muted);
+}
+.dv-panel-bar:active { cursor: grabbing; }
+.dv-panel-title { font-weight: 900; font-size: 0.8rem; text-transform: uppercase; color: var(--text); }
+.dv-panel-bar .dv-icon-btn {
+    margin-left: auto; min-width: 28px; min-height: 28px;
+    border: none; background: transparent; color: var(--text);
+}
+.dv-panel-bar .dv-icon-btn:hover { background: var(--accent); color: var(--text-on-accent); }
+#day-panel { left: 88px; top: 150px; width: clamp(230px, 22vw, 340px); }
+#lesson-wrap { right: 20px; top: 150px; width: clamp(330px, 48vw, 820px); }
+#lesson-panel { overflow-y: auto; margin: 0; }
+@media (max-width: 700px) {
+    #day-panel { left: 64px; width: min(320px, calc(100vw - 76px)); }
+    #lesson-wrap { right: 8px; width: calc(100vw - 72px); top: 320px; }
+    .dv-panel { max-height: calc(100vh - 120px); }
+}
 
 /* ---- dagsplan-kolonna ---- */
-#day-col { display: flex; flex-direction: column; gap: 10px; }
+#day-col {
+    display: flex; flex-direction: column; gap: 10px;
+    overflow-y: auto; padding: 2px 8px 8px 2px; /* rom for skuggane */
+}
 .dv-day-row {
     position: relative; display: flex; align-items: center; gap: 12px;
     width: 100%; text-align: left; cursor: pointer; font-family: inherit;
@@ -362,23 +427,36 @@
 #notes-layer { position: fixed; inset: 0; pointer-events: none; z-index: 500; }
 .dv-note {
     position: absolute; pointer-events: auto; width: clamp(180px, 22vw, 280px);
+    display: flex; flex-direction: column; min-width: 150px; min-height: 96px;
 }
 .dv-note-bar {
-    display: flex; align-items: center; gap: 6px; cursor: grab;
+    display: flex; align-items: center; gap: 4px; cursor: grab; flex-shrink: 0;
     padding: 4px 6px; border-bottom: 2px solid var(--border);
 }
 .dv-note-bar:active { cursor: grabbing; }
-.dv-note-styles { display: inline-flex; gap: 4px; }
+.dv-note-styles { display: inline-flex; gap: 2px; }
 .dv-note-style-btn {
     min-width: 26px; min-height: 26px; cursor: pointer; font-weight: 900;
     background: transparent; border: 2px solid transparent; font-size: 0.85rem;
 }
 .dv-note-style-btn.active { border-color: var(--border); background: rgba(255, 255, 255, 0.4); }
+.dv-note-fs-btn {
+    min-width: 26px; min-height: 26px; cursor: pointer; font-weight: 900;
+    background: transparent; border: none; font-size: 0.8rem; color: inherit;
+    font-family: inherit;
+}
+.dv-note-fs-btn:hover { background: rgba(0, 0, 0, 0.12); }
 .dv-note-bar .dv-icon-btn { margin-left: auto; min-width: 26px; min-height: 26px; border: none; background: transparent; color: inherit; }
 .dv-note-text {
-    display: block; width: 100%; border: none; background: transparent;
+    display: block; width: 100%; flex: 1; border: none; background: transparent;
     font-family: inherit; font-weight: 700; font-size: 1rem; color: inherit;
-    padding: 8px 10px; resize: vertical; min-height: 60px;
+    padding: 8px 10px; resize: none; min-height: 40px;
+}
+.dv-note-resize {
+    position: absolute; right: 0; bottom: 0; width: 24px; height: 24px;
+    cursor: nwse-resize; touch-action: none;
+    display: flex; align-items: flex-end; justify-content: flex-end;
+    color: var(--muted); padding: 0 2px 2px 0;
 }
 .dv-note-text:focus { outline: none; }
 .dv-note-plain {

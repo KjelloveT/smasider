@@ -6,6 +6,7 @@
 
 const Edit = (() => {
     const $ = (id) => document.getElementById(id);
+    let lastSig = '';
 
     function plan() { return App.getTodayPlan(); }
 
@@ -13,6 +14,24 @@ const Edit = (() => {
         App.saveSession();
         Render.bump();
         if (structural) renderEditor();
+    }
+
+    /* Signatur for rekkjefølgje + overlapp-varsel. Tids- og varigheitsfelt
+       utset ombygging av editoren til feltet mistar fokus (blur), slik at
+       blokkene ikkje byter plass medan ein framleis skriv. */
+    function editorSig(p) {
+        const sorted = p.blocks.slice().sort((a, b) => State.blockStart(a) - State.blockStart(b));
+        let prevEnd = null;
+        return sorted.map(b => {
+            const overlap = prevEnd != null && State.blockStart(b) < prevEnd;
+            prevEnd = State.blockEnd(b);
+            return b.id + (overlap ? '!' : '');
+        }).join('|');
+    }
+
+    function maybeResort() {
+        const p = plan();
+        if (p && editorSig(p) !== lastSig) renderEditor();
     }
 
     /* ---- inngang ---- */
@@ -94,6 +113,7 @@ const Edit = (() => {
             prevEnd = State.blockEnd(block);
             wrap.appendChild(blockRow(block, i, p));
         });
+        lastSig = editorSig(p);
     }
 
     function blockRow(block, i, p) {
@@ -133,19 +153,24 @@ const Edit = (() => {
         typeSel.value = block.type;
         typeSel.addEventListener('change', () => { block.type = typeSel.value; changed(true); });
 
+        const sumRef = { fn: null }; // live-oppdatering av minutt-summen utan full ombygging
+
         const startInput = Dom.el('input', { class: 'dv-input', type: 'time', 'aria-label': 'Starttid' });
         startInput.value = block.start;
         startInput.addEventListener('change', () => {
-            if (State.parseHM(startInput.value) != null) { block.start = startInput.value; changed(true); }
+            if (State.parseHM(startInput.value) != null) { block.start = startInput.value; changed(false); }
         });
+        startInput.addEventListener('blur', maybeResort);
 
         const durInput = Dom.el('input', { class: 'dv-input dv-dur-input', type: 'number', min: '5', max: '480', step: '5',
             'aria-label': 'Varigheit i minutt' });
         durInput.value = block.duration;
         durInput.addEventListener('change', () => {
             block.duration = Math.max(5, parseInt(durInput.value, 10) || 45);
-            changed(true);
+            changed(false);
+            if (sumRef.fn) sumRef.fn();
         });
+        durInput.addEventListener('blur', maybeResort);
 
         const noteInput = Dom.el('input', { class: 'dv-input dv-note-input', type: 'text',
             'aria-label': 'Notat om innhaldet', placeholder: 'Kva skal de gjere? (valfritt)' });
@@ -168,7 +193,9 @@ const Edit = (() => {
         );
 
         if (block.type === 'lesson') {
-            row.appendChild(activitiesEditor(block));
+            const acts = activitiesEditor(block);
+            sumRef.fn = acts._updateSum;
+            row.appendChild(acts);
         }
         return row;
     }
@@ -184,21 +211,30 @@ const Edit = (() => {
         changed(true);
     }
 
-    /* ---- aktivitetar i ei økt ---- */
+    /* ---- aktivitetar i ei økt ----
+       onStructure: kva som skal teiknast om når lista endrar form
+       (standard: heile editoren — snøggøkt-modalen sender si eiga). */
 
-    function activitiesEditor(block) {
+    function activitiesEditor(block, onStructure) {
+        const rerender = onStructure || renderEditor;
+        const mutate = () => { changed(false); rerender(); };
         const wrap = Dom.el('div', { class: 'dv-acts-edit' });
-        const sum = State.actSum(block);
-        const over = State.overflowMin(block);
+
+        const sumEl = Dom.el('span', { class: 'dv-acts-sum' });
+        function updateSum() {
+            const sum = State.actSum(block);
+            const over = State.overflowMin(block);
+            sumEl.className = 'dv-acts-sum' + (over > 0 ? ' is-over' : '');
+            sumEl.textContent = block.activities.length
+                ? sum + ' av ' + block.duration + ' min' + (over > 0 ? ' (' + over + ' min over!)' : '')
+                : '';
+        }
+        updateSum();
+        wrap._updateSum = updateSum;
 
         const head = Dom.el('div', { class: 'dv-acts-head' },
             Dom.el('span', { class: 'dv-edit-label', text: 'Plan for timen' }),
-            Dom.el('span', {
-                class: 'dv-acts-sum' + (over > 0 ? ' is-over' : ''),
-                text: block.activities.length
-                    ? sum + ' av ' + block.duration + ' min' + (over > 0 ? ' (' + over + ' min over!)' : '')
-                    : ''
-            }));
+            sumEl);
         wrap.appendChild(head);
 
         block.activities.forEach((act, i) => {
@@ -210,7 +246,11 @@ const Edit = (() => {
             const dur = Dom.el('input', { class: 'dv-input dv-dur-input', type: 'number', min: '1', max: '240',
                 'aria-label': 'Minutt' });
             dur.value = act.duration;
-            dur.addEventListener('change', () => { act.duration = Math.max(1, parseInt(dur.value, 10) || 5); changed(true); });
+            dur.addEventListener('change', () => {
+                act.duration = Math.max(1, parseInt(dur.value, 10) || 5);
+                changed(false);
+                updateSum();
+            });
 
             const flexId = 'flex_' + act.id;
             const flex = Dom.el('input', { type: 'checkbox', id: flexId, class: 'dv-flex-check' });
@@ -223,21 +263,111 @@ const Edit = (() => {
                     flex, 'Fleksibel'),
                 Dom.el('span', { class: 'dv-row-actions' },
                     Dom.el('button', { class: 'dv-icon-btn', 'aria-label': 'Flytt aktiviteten opp', disabled: i === 0,
-                        onclick: () => { const t = block.activities[i - 1]; block.activities[i - 1] = act; block.activities[i] = t; changed(true); }
+                        onclick: () => { const t = block.activities[i - 1]; block.activities[i - 1] = act; block.activities[i] = t; mutate(); }
                     }, Icons.create('chevron-up', 16)),
                     Dom.el('button', { class: 'dv-icon-btn', 'aria-label': 'Flytt aktiviteten ned', disabled: i === block.activities.length - 1,
-                        onclick: () => { const t = block.activities[i + 1]; block.activities[i + 1] = act; block.activities[i] = t; changed(true); }
+                        onclick: () => { const t = block.activities[i + 1]; block.activities[i + 1] = act; block.activities[i] = t; mutate(); }
                     }, Icons.create('chevron-down', 16)),
                     Dom.el('button', { class: 'dv-icon-btn dv-danger', 'aria-label': 'Slett aktiviteten',
-                        onclick: () => { block.activities.splice(i, 1); changed(true); }
+                        onclick: () => { block.activities.splice(i, 1); mutate(); }
                     }, Icons.create('trash-2', 16)))));
         });
 
         wrap.appendChild(Dom.el('button', {
             class: 'btn dv-btn-small',
-            onclick: () => { block.activities.push(State.newActivity('', 10, block.activities.length > 0)); changed(true); }
+            onclick: () => { block.activities.push(State.newActivity('', 10, block.activities.length > 0)); mutate(); }
         }, Icons.create('plus', 16), 'Aktivitet'));
         return wrap;
+    }
+
+    /* ---- snøggøkt: éi økt no, utan dagsplan ---- */
+
+    let quickBlock = null;
+
+    function openQuickModal() {
+        const start = State.fmtHM(Math.floor(State.nowMinutes(Engine.now())));
+        quickBlock = State.newBlock({ title: '', emoji: '📖', type: 'lesson', start, duration: 45 });
+        renderQuickBody();
+        $('modal-quick').classList.add('open');
+    }
+
+    function renderQuickBody() {
+        const body = $('quick-body');
+        Dom.clear(body);
+        const block = quickBlock;
+        const subjects = Store.getSubjects();
+
+        const emojiBtn = Dom.el('button', {
+            class: 'dv-emoji-pick', 'aria-label': 'Vel emoji for økta', text: block.emoji,
+            onclick: () => EmojiPicker.open(e => { block.emoji = e; renderQuickBody(); })
+        });
+
+        const titleInput = Dom.el('input', { class: 'dv-input dv-title-input', type: 'text',
+            'aria-label': 'Namn på økta', placeholder: 'Namn på økta' });
+        titleInput.value = block.title;
+        titleInput.addEventListener('change', () => { block.title = titleInput.value.trim(); });
+
+        const subjectSel = Dom.el('select', { class: 'dv-input dv-subject-sel', 'aria-label': 'Vel fag' });
+        subjectSel.appendChild(Dom.el('option', { value: '', text: '— Vel fag —' }));
+        subjects.forEach(s => {
+            const opt = Dom.el('option', { value: s.id, text: s.emoji + ' ' + s.name });
+            if (s.id === block.subjectId) opt.selected = true;
+            subjectSel.appendChild(opt);
+        });
+        subjectSel.addEventListener('change', () => {
+            const s = subjects.find(x => x.id === subjectSel.value);
+            if (s) { block.subjectId = s.id; block.title = s.name; block.emoji = s.emoji; renderQuickBody(); }
+        });
+
+        const durInput = Dom.el('input', { class: 'dv-input dv-dur-input', type: 'number',
+            min: '5', max: '480', step: '5', 'aria-label': 'Varigheit i minutt' });
+        durInput.value = block.duration;
+        durInput.addEventListener('change', () => {
+            block.duration = Math.max(5, parseInt(durInput.value, 10) || 45);
+            const acts = body.querySelector('.dv-acts-edit');
+            if (acts && acts._updateSum) acts._updateSum();
+        });
+
+        body.appendChild(Dom.el('div', { class: 'dv-quick-row' },
+            emojiBtn, subjectSel, titleInput, durInput,
+            Dom.el('span', { class: 'dv-edit-label', text: 'min' })));
+        body.appendChild(activitiesEditor(block, renderQuickBody));
+        body.appendChild(Dom.el('div', { class: 'dv-quick-actions' },
+            Dom.el('button', { class: 'btn active', text: 'Start økta no', onclick: startQuickLesson })));
+    }
+
+    function startQuickLesson() {
+        const now = Engine.now();
+        const nm = State.nowMinutes(now);
+        if (!plan()) App.setTodayPlan(State.newPlan('I dag'), null);
+        const p = plan();
+
+        /* avslutt det som eventuelt er aktivt akkurat no, slik at snøggøkta tek over */
+        const status = State.computeStatus(p, now);
+        if (status.activeBlockIdx >= 0) {
+            const ab = p.blocks[status.activeBlockIdx];
+            const elapsed = Math.max(0, Math.floor(nm - State.blockStart(ab)));
+            ab.duration = Math.min(ab.duration, elapsed);
+            if (State.hasActivities(ab)) {
+                let left = elapsed;
+                ab.activities.forEach(a => {
+                    const take = Math.max(0, Math.min(a.duration, left));
+                    a.duration = take;
+                    left -= take;
+                });
+            }
+        }
+
+        quickBlock.title = quickBlock.title || 'Økt';
+        quickBlock.start = State.fmtHM(Math.floor(nm));
+        p.blocks.push(quickBlock);
+        State.sortBlocks(p);
+        App.saveSession();
+
+        $('modal-quick').classList.remove('open');
+        App.setPanel('lesson', true);
+        App.setMode('display');
+        App.toast('Økta er i gang.');
     }
 
     function addBlock(type) {
@@ -380,5 +510,5 @@ const Edit = (() => {
         });
     }
 
-    return { init, enter, renderEditor, openFilesModal };
+    return { init, enter, renderEditor, openFilesModal, openQuickModal };
 })();

@@ -10,10 +10,36 @@
 <body data-light-theme="classic" data-dark-theme="midnight" data-theme="classic">
     <div class="page-wrapper">
         <neo-header></neo-header>
+
+        <!-- Venstremeny -->
+        <nav id="sidebar" aria-label="Verktøymeny">
+            <button id="sidebar-toggle" class="dv-side-btn" aria-expanded="false" aria-label="Utvid eller minimer menyen" title="Meny"><span class="dv-tool-icon" data-icon="menu"></span><span class="dv-side-text">Meny</span></button>
+            <div class="dv-side-sep" aria-hidden="true"></div>
+            <button id="btn-edit" class="dv-side-btn" aria-label="Rediger dagsplanen" title="Rediger"><span class="dv-tool-icon" data-icon="pencil"></span><span class="dv-side-text">Rediger</span></button>
+            <button id="btn-quick" class="dv-side-btn" aria-label="Start ei enkel økt no, utan dagsplan" title="Snøggøkt"><span class="dv-tool-icon" data-icon="play"></span><span class="dv-side-text">Snøggøkt</span></button>
+            <div class="dv-side-sep" aria-hidden="true"></div>
+            <button id="btn-panel-day" class="dv-side-btn" aria-label="Vis eller skjul dagsplanen" title="Dagsplan av/på"><span class="dv-tool-icon" data-icon="calendar"></span><span class="dv-side-text">Dagsplan</span></button>
+            <button id="btn-panel-lesson" class="dv-side-btn" aria-label="Vis eller skjul plan for timen" title="Plan for timen av/på"><span class="dv-tool-icon" data-icon="clock"></span><span class="dv-side-text">Plan for timen</span></button>
+            <div class="dv-side-sep" aria-hidden="true"></div>
+            <button id="btn-countdown" class="dv-side-btn" aria-label="Vis nedteljar" title="Nedteljar"><span class="dv-tool-icon" data-icon="hourglass"></span><span class="dv-side-text">Nedteljar</span></button>
+            <button id="btn-stopwatch" class="dv-side-btn" aria-label="Vis stoppeklokke" title="Stoppeklokke"><span class="dv-tool-icon" data-icon="timer"></span><span class="dv-side-text">Stoppeklokke</span></button>
+            <button id="btn-traffic" class="dv-side-btn" aria-label="Vis trafikklys" title="Trafikklys"><span class="dv-tool-icon" data-icon="traffic-light"></span><span class="dv-side-text">Trafikklys</span></button>
+            <button id="btn-calm" class="dv-side-btn" aria-label="Start ro-modus" title="Ro-modus"><span class="dv-tool-icon" data-icon="moon"></span><span class="dv-side-text">Ro-modus</span></button>
+            <button id="btn-break" class="dv-side-btn" aria-label="Trekk ein hjernepause" title="Hjernepause"><span class="dv-tool-icon" data-icon="zap"></span><span class="dv-side-text">Hjernepause</span></button>
+            <button id="btn-draw" class="dv-side-btn" aria-label="Teiknemodus av/på" title="Teikne"><span class="dv-tool-icon" data-icon="brush"></span><span class="dv-side-text">Teikne</span></button>
+            <button id="btn-note" class="dv-side-btn" aria-label="Legg til tekstboks" title="Tekstboks"><span class="dv-tool-icon" data-icon="sticky-note"></span><span class="dv-side-text">Tekstboks</span></button>
+            <a href="../flokkdeilar/index.html" class="dv-side-btn" aria-label="Opne Flokkdeilar for gruppedeling" title="Flokkdeilar"><span class="dv-tool-icon" data-icon="users"></span><span class="dv-side-text">Flokkdeilar</span></a>
+            <div class="dv-side-sep" aria-hidden="true"></div>
+            <button id="btn-help" class="dv-side-btn" aria-label="Opne rettleiinga" title="Korleis fungerer det?"><span class="dv-tool-icon" data-icon="help-circle"></span><span class="dv-side-text">Rettleiing</span></button>
+            <button id="btn-settings" class="dv-side-btn" aria-label="Opne innstillingar" title="Innstillingar"><span class="dv-tool-icon" data-icon="settings"></span><span class="dv-side-text">Innstillingar</span></button>
+            <button id="btn-fullscreen" class="dv-side-btn" aria-label="Fullskjerm av/på" title="Fullskjerm"><span class="dv-tool-icon" data-icon="maximize"></span><span class="dv-side-text">Fullskjerm</span></button>
+        </nav>
+
         <main class="main-content">
 
-            <!-- Hero (synleg i redigeringsmodus) -->
+            <!-- Hero (synleg i redigeringsmodus, kan lukkast) -->
             <div id="hero" class="box2 hero-box dv-hidden">
+                <button id="btn-hero-close" class="dv-icon-btn dv-hero-x" aria-label="Lukk velkomstboksen">✕</button>
                 <img src="../_resources/dagsvegen.png" alt="Dagsvegen" class="hero-logo">
                 <div class="hero-text">
                     <h1>Dagsvegen</h1>
@@ -21,39 +47,23 @@
                 </div>
             </div>
 
-            <!-- Datolinje og verktøyrad -->
+            <!-- Datolinje -->
             <div id="topbar">
                 <h1 id="date-text" class="dv-dateline"></h1>
-                <div id="toolbar" role="toolbar" aria-label="Verktøy">
-                    <button id="btn-edit" class="btn dv-tool-btn" aria-label="Rediger dagsplanen" title="Rediger"><span class="dv-tool-icon" data-icon="pencil"></span><span class="dv-tool-text">Rediger</span></button>
-                    <button id="btn-countdown" class="btn dv-tool-btn" aria-label="Vis nedteljar" title="Nedteljar"><span class="dv-tool-icon" data-icon="hourglass"></span><span class="dv-tool-text">Nedteljar</span></button>
-                    <button id="btn-stopwatch" class="btn dv-tool-btn" aria-label="Vis stoppeklokke" title="Stoppeklokke"><span class="dv-tool-icon" data-icon="timer"></span><span class="dv-tool-text">Stoppeklokke</span></button>
-                    <button id="btn-traffic" class="btn dv-tool-btn" aria-label="Vis trafikklys" title="Trafikklys"><span class="dv-tool-icon" data-icon="traffic-light"></span><span class="dv-tool-text">Trafikklys</span></button>
-                    <button id="btn-calm" class="btn dv-tool-btn" aria-label="Start ro-modus" title="Ro-modus"><span class="dv-tool-icon" data-icon="moon"></span><span class="dv-tool-text">Ro</span></button>
-                    <button id="btn-break" class="btn dv-tool-btn" aria-label="Trekk ein hjernepause" title="Hjernepause"><span class="dv-tool-icon" data-icon="zap"></span><span class="dv-tool-text">Hjernepause</span></button>
-                    <button id="btn-draw" class="btn dv-tool-btn" aria-label="Teiknemodus av/på" title="Teikne"><span class="dv-tool-icon" data-icon="brush"></span><span class="dv-tool-text">Teikne</span></button>
-                    <button id="btn-note" class="btn dv-tool-btn" aria-label="Legg til tekstboks" title="Tekstboks"><span class="dv-tool-icon" data-icon="sticky-note"></span><span class="dv-tool-text">Tekstboks</span></button>
-                    <a href="../flokkdeilar/index.html" class="btn dv-tool-btn" aria-label="Opne Flokkdeilar for gruppedeling" title="Flokkdeilar"><span class="dv-tool-icon" data-icon="users"></span><span class="dv-tool-text">Flokkdeilar</span></a>
-                    <button id="btn-settings" class="btn dv-tool-btn" aria-label="Opne innstillingar" title="Innstillingar"><span class="dv-tool-icon" data-icon="settings"></span></button>
-                    <button id="btn-fullscreen" class="btn dv-tool-btn" aria-label="Fullskjerm av/på" title="Fullskjerm"><span class="dv-tool-icon" data-icon="maximize"></span></button>
-                </div>
             </div>
 
             <!-- Tom tilstand -->
             <div id="empty-state" class="box2 dv-empty dv-hidden">
+                <button id="btn-empty-close" class="dv-icon-btn dv-empty-x" aria-label="Lukk denne boksen og bruk blank skjerm">✕</button>
                 <h2 class="no-mt">Ingen plan for i dag enno</h2>
-                <p>Lag dagens plan, eller hent ein lagra plan eller vekemal.</p>
+                <p>Lag dagens plan, start berre ei økt — eller lukk denne boksen og bruk skjermen fritt.</p>
                 <div class="dv-empty-actions">
                     <button id="btn-empty-create" class="btn">Lag dagens plan</button>
+                    <button id="btn-empty-quick" class="btn">Start berre ei økt</button>
                     <button id="btn-empty-weekday" class="btn dv-hidden"></button>
                     <button id="btn-empty-load" class="btn">Hent lagra plan</button>
+                    <button id="btn-empty-help" class="btn">Korleis fungerer det?</button>
                 </div>
-            </div>
-
-            <!-- Visningsmodus -->
-            <div id="display-view" class="dv-hidden">
-                <div id="day-col" aria-label="Dagsplan"></div>
-                <div id="lesson-panel" class="box4" aria-label="Aktiv økt"></div>
             </div>
 
             <!-- Redigeringsmodus -->
@@ -70,6 +80,16 @@
             </div>
 
         </main>
+    </div>
+
+    <!-- Flyttbare panel: dagsplan og plan for timen -->
+    <div id="day-panel" class="dv-panel dv-hidden" role="region" aria-label="Dagsplan">
+        <div id="day-panel-bar" class="dv-panel-bar"></div>
+        <div id="day-col"></div>
+    </div>
+    <div id="lesson-wrap" class="dv-panel dv-panel-lesson dv-hidden" role="region" aria-label="Plan for timen">
+        <div id="lesson-panel-bar" class="dv-panel-bar"></div>
+        <div id="lesson-panel" class="box4"></div>
     </div>
 
     <!-- Flytande widgetar -->
@@ -141,6 +161,40 @@
             <h2 class="dv-break-title">Hjernepause!</h2>
             <p id="break-text" class="dv-break-text"></p>
             <button id="btn-break-new" class="btn">Trekk ein ny</button>
+        </div>
+    </div>
+
+    <!-- Modal: snøggøkt -->
+    <div id="modal-quick" class="modal-overlay">
+        <div class="modal3 dv-modal-wide">
+            <div class="modal-header">
+                <span>Snøggøkt — start no</span>
+                <button class="dv-icon-btn dv-modal-x" data-close="modal-quick" aria-label="Lukk">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="dv-modal-desc">Start ei enkel økt utan å lage heile dagsplanen. Økta startar no — står det noko anna på planen akkurat no, blir det avslutta.</p>
+                <div id="quick-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: rettleiing -->
+    <div id="modal-help" class="modal-overlay">
+        <div class="modal3 dv-modal-wide">
+            <div class="modal-header">
+                <span>Slik brukar du Dagsvegen</span>
+                <button class="dv-icon-btn dv-modal-x" data-close="modal-help" aria-label="Lukk">✕</button>
+            </div>
+            <div class="modal-body">
+                <ol class="dv-help-list">
+                    <li><strong>Lag dagen:</strong> Klikk <strong>Rediger</strong> i menyen til venstre, og legg til økter med «+ Økt» og «+ Pause». Vel fag, starttid og kor mange minutt økta varer.</li>
+                    <li><strong>Plan for timen:</strong> Inne i kvar økt kan du leggje til aktivitetar med minutt-tal. Merk gjerne éin som <strong>fleksibel</strong> — det er derifrå tida blir henta når noko anna treng meir tid.</li>
+                    <li><strong>Ferdig:</strong> Klikk «Ferdig». Dagsplanen følgjer klokka av seg sjølv og hevar fram det de held på med no.</li>
+                    <li><strong>I timen:</strong> Bruk <strong>+5/−5</strong> på ein aktivitet når noko tek lengre eller kortare tid enn planlagt. Slutten på økta står fast så lenge det finst fleksibel tid å hente.</li>
+                    <li><strong>Vekemal:</strong> Lagre dagen som vekemal (t.d. måndag) i redigeringa, så ligg han klar neste veke.</li>
+                </ol>
+                <p class="dv-modal-desc">Tips: Dagsplanen og «Plan for timen» er to bokser du kan dra dit du vil, og slå av i menyen om du vil ha blank tavle. Nedteljar, trafikklys, teikning og tekstboksar ligg òg i menyen til venstre.</p>
+            </div>
         </div>
     </div>
 

@@ -38,8 +38,8 @@ const Render = (() => {
 
         const plan = App.getTodayPlan();
         const hasPlan = !!(plan && plan.blocks && plan.blocks.length);
-        $('empty-state').classList.toggle('dv-hidden', hasPlan);
-        $('display-view').classList.toggle('dv-hidden', !hasPlan);
+        $('empty-state').classList.toggle('dv-hidden', hasPlan || App.session().ui.emptyDismissed);
+        App.applyPanels();
         if (!hasPlan) { lastKey = null; return; }
 
         const shownIdx = shownBlockIdx(plan, status);

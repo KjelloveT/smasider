@@ -49,6 +49,7 @@ const Notes = (() => {
             rows: '3'
         });
         ta.value = note.text;
+        if (note.fs) ta.style.fontSize = note.fs + 'rem';
         ta.addEventListener('input', () => { note.text = ta.value; scheduleSave(); });
 
         const styleBtns = Dom.el('span', { class: 'dv-note-styles' });
@@ -62,9 +63,22 @@ const Notes = (() => {
             }));
         });
 
+        /* tekststorleik opp/ned */
+        function bumpFont(delta) {
+            note.fs = Math.min(3, Math.max(0.7, (note.fs || 1) + delta));
+            ta.style.fontSize = note.fs + 'rem';
+            scheduleSave();
+        }
+        const fontBtns = Dom.el('span', { class: 'dv-note-styles' },
+            Dom.el('button', { class: 'dv-note-fs-btn', 'aria-label': 'Mindre tekst', title: 'Mindre tekst',
+                text: 'A−', onclick: () => bumpFont(-0.15) }),
+            Dom.el('button', { class: 'dv-note-fs-btn', 'aria-label': 'Større tekst', title: 'Større tekst',
+                text: 'A+', onclick: () => bumpFont(0.15) }));
+
         const bar = Dom.el('div', { class: 'dv-note-bar' },
             Icons.create('grip', 14),
             styleBtns,
+            fontBtns,
             Dom.el('button', { class: 'dv-icon-btn', 'aria-label': 'Slett tekstboksen',
                 onclick: () => {
                     const idx = notes().findIndex(n => n.id === note.id);
@@ -75,6 +89,32 @@ const Notes = (() => {
         const box = Dom.el('div', { class: 'dv-note dv-note-' + note.style }, bar, ta);
         box.style.left = note.x + '%';
         box.style.top = note.y + '%';
+        if (note.w) box.style.width = note.w + 'px';
+        if (note.h) box.style.height = note.h + 'px';
+
+        /* resize-handtak nedst til høgre (fungerer med peikar og touch) */
+        const grip = Dom.el('div', { class: 'dv-note-resize', 'aria-hidden': 'true' }, Icons.create('grip', 12));
+        grip.addEventListener('pointerdown', (ev) => {
+            ev.preventDefault();
+            ev.stopPropagation();
+            const startW = box.offsetWidth, startH = box.offsetHeight;
+            const sx = ev.clientX, sy = ev.clientY;
+            grip.setPointerCapture(ev.pointerId);
+            function move(e) {
+                note.w = Math.min(window.innerWidth * 0.9, Math.max(150, startW + e.clientX - sx));
+                note.h = Math.min(window.innerHeight * 0.85, Math.max(96, startH + e.clientY - sy));
+                box.style.width = note.w + 'px';
+                box.style.height = note.h + 'px';
+            }
+            function up() {
+                grip.removeEventListener('pointermove', move);
+                grip.removeEventListener('pointerup', up);
+                scheduleSave();
+            }
+            grip.addEventListener('pointermove', move);
+            grip.addEventListener('pointerup', up);
+        });
+        box.appendChild(grip);
 
         /* dra i topplinja */
         bar.style.touchAction = 'none';

@@ -8,7 +8,7 @@ const Widgets = (() => {
     const $ = (id) => document.getElementById(id);
 
     /* ---- felles: gjer ein widget dragbar via gripe-lina ---- */
-    function makeDraggable(box, handle) {
+    function makeDraggable(box, handle, onDrop) {
         handle.style.touchAction = 'none';
         handle.addEventListener('pointerdown', (ev) => {
             if (ev.target.closest('button')) return;
@@ -27,6 +27,10 @@ const Widgets = (() => {
             function up() {
                 handle.removeEventListener('pointermove', move);
                 handle.removeEventListener('pointerup', up);
+                if (onDrop) {
+                    const r = box.getBoundingClientRect();
+                    onDrop(r.left, r.top);
+                }
             }
             handle.addEventListener('pointermove', move);
             handle.addEventListener('pointerup', up);
@@ -256,5 +260,5 @@ const Widgets = (() => {
         $('btn-break-new').addEventListener('click', rollBrainBreak);
     }
 
-    return { init, toggle, openCalm, closeCalm, calmIsOpen, openBrainBreak, applyClockVisibility, applyTraffic };
+    return { init, toggle, openCalm, closeCalm, calmIsOpen, openBrainBreak, applyClockVisibility, applyTraffic, makeDraggable };
 })();
