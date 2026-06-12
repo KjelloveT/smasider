@@ -14,7 +14,21 @@
     "statLabel": "calendar"
   },
   {
-    "id": "byer",
+  "id": "matrett",
+  "label": "matrett",
+  "icon": "sparkles",
+  "csv": "matrett.csv",
+  "rarity": "rarity-matrett.json",
+  "idField": "item",
+  "nameField": "itemLabel",
+  "imageField": "image",
+  "articleField": "article",
+  "statField": "opphavslandLabel",
+  "statType": "text",
+  "statLabel": "globe"
+},
+  {
+    "id": "byar",
     "label": "Skandinaviske byar",
     "icon": "building",
     "csv": "byer_skandinavia.csv",
@@ -27,6 +41,20 @@
     "statType": "number",
     "statLabel": "users"
   },
+  {
+  "id": "grunnstoff",
+  "label": "Grunnstoff",
+  "icon": "sparkles",
+  "csv": "grunnstoff.csv",
+  "rarity": "rarity-grunnstoff.json",
+  "idField": "item",
+  "nameField": "itemLabel",
+  "imageField": "image",
+  "articleField": "article",
+  "statField": "kjemisk_symbol",
+  "statType": "text",
+  "statLabel": "globe"
+},
   {
     "id": "land",
     "label": "Land",
@@ -41,6 +69,20 @@
     "statType": "number",
     "statLabel": "users"
   },
+  {
+  "id": "videospill",
+  "label": "videospill",
+  "icon": "sparkles",
+  "csv": "videospill.csv",
+  "rarity": "rarity-videospill.json",
+  "idField": "item",
+  "nameField": "itemLabel",
+  "imageField": "image",
+  "articleField": "article",
+  "statField": "utgivelsesdato",
+  "statType": "year",
+  "statLabel": "calendar"
+},
   {
     "id": "fly",
     "label": "Flytypar",

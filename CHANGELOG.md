@@ -6,6 +6,17 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ## [Ikkje publisert]
 
 ### Lagt til
+- **Listesmia** (wikidata-tester) — bygd om frå rein SPARQL-tester til ein veivisar som finn kortlister til Heimsank utan at ein treng kunne SPARQL.
+  - Steg-for-steg: søk etter emne med vanlege ord (Wikidata-søke-API på norsk), snøggval-chips (hunderasar, fjell, vulkanar m.fl.), krav (må ha bilete / Wikipedia-artikkel), filter (t.d. avgrens til eit land) og val av ekstra kolonnar.
+  - Artikkel-lenkja vel beste tilgjengelege Wikipedia-utgåve: nynorsk → bokmål → engelsk.
+  - Verktøyet undersøkjer automatisk kva opplysningar som faktisk finst for det valde emnet (stikkprøve på 200 element) og føreslår dei som kolonnar og filter.
+  - Eksport tilpassa Heimsank: CSV, ferdig `categories.json`-utdrag (med rett statType/statField) og generert rarity-fil med justerbar prosentfordeling.
+  - Duplikatrader blir fjerna automatisk, og element utan namn (berre Q-kode) kan hoppast over.
+  - Talverdiar (areal, høgd, masse o.l.) blir henta som normaliserte SI-verdiar slik at sortering og samanlikning blir rett sjølv når Wikidata blandar einingar (km² mot m²).
+  - Vel ein eit statistikk-felt, blir sorteringa automatisk sett til det feltet — namnesortering på store emne gjev vilkårlege treff fordi Wikidata fyller inn namn først etter LIMIT (A–Å blir difor sortert lokalt).
+  - Den genererte SPARQL-spørjinga ligg open under «Avansert» og kan redigerast og køyrast direkte (gamal funksjonalitet er altså bevart).
+  - Hentar data frå Wikidata/Wikipedia (eksternt API) — godkjent unntak; ingen brukardata blir sende, og ingenting blir lagra lokalt.
+- **Heimsank** — tre nye kortkategoriar laga med Listesmia: matrettar, grunnstoff og videospel.
 - **Dagsvegen** — ny dagsplan-skjerm for klasserommet.
   - Dagsplan med fag, friminutt og notat — tidsstyrt slik at aktiv økt blir utheva automatisk, med progresjonsstrek og stor datolinje («måndag 11. juni — veke 24»).
   - Plan for timen: aktivitetar med varigheit, tidsline med no-markør og nedteljing til neste byte. +5/−5-knappar per aktivitet: meirtid blir henta frå fleksible buffer-aktivitetar slik at slutten står fast; rest blir vist som raud overtid inn i friminuttet. Diskret «X min att»-varsel før kvart byte.
