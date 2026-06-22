@@ -17,6 +17,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
   - Den genererte SPARQL-spørjinga ligg open under «Avansert» og kan redigerast og køyrast direkte (gamal funksjonalitet er altså bevart).
   - Hentar data frå Wikidata/Wikipedia (eksternt API) — godkjent unntak; ingen brukardata blir sende, og ingenting blir lagra lokalt.
 - **Heimsank** — tre nye kortkategoriar laga med Listesmia: matrettar, grunnstoff og videospel.
+- **Heimsank** — progresjonssystem og nye kategori-forsider.
+  - Kvar kategori i menyen blir no vist som eit lite samlekort (ramme + bilete, utan tekst) i staden for eit ikon. Forsida er eit fast, deterministisk døme-kort (det sjeldnaste tilgjengelege). Låste kategoriar viser ei kort-bakside med hengelås.
+  - **Poeng som valuta:** du tener poeng for kvart kort du vinn (meir for sjeldnare kort — vanleg 1 → gudebore 30, foil doblar). Berre **Land** er open frå start; dei andre kategoriane låsast opp éin etter éin ved å bruke poeng (fritt val, 20–230 poeng).
+  - **Merke (29 stk.)** i eit eige galleri: kort-milepælar (1, 25, 100, 1000 kort), sjeldsemd (segngjeten, gudebore, foil), rett-svar-stige (10/20/30/40/50/75/100/200/500), «Vrien»-stige for rette svar på middels/vanskeleg (100–500), opplåsing (Oppdagar, Heile verda) og fullt hus — både generelt og eitt per sjeldsemd (vanleg/sjeldgjevt/segngjeten/gudebore) og foil.
+  - Toast-varsel for tente poeng, nye merke og opplåste kategoriar.
+  - Eksisterande spelarar får eit eingongs retro-påslag av poeng for kort dei alt har samla, og kategoriar dei alt har kort i blir opna automatisk.
+  - Framgang (poeng, opne kategoriar, merke) lagrast lokalt via `VyrdepilStorage` — ingen data forlèt nettlesaren.
+  - Internt: delt `carddata.js` fjernar duplisert CSV-lasting (showcase, samling, spelstart og forsider deler no éin mellomlagra lastar).
 - **Dagsvegen** — ny dagsplan-skjerm for klasserommet.
   - Dagsplan med fag, friminutt og notat — tidsstyrt slik at aktiv økt blir utheva automatisk, med progresjonsstrek og stor datolinje («måndag 11. juni — veke 24»).
   - Plan for timen: aktivitetar med varigheit, tidsline med no-markør og nedteljing til neste byte. +5/−5-knappar per aktivitet: meirtid blir henta frå fleksible buffer-aktivitetar slik at slutten står fast; rest blir vist som raud overtid inn i friminuttet. Diskret «X min att»-varsel før kvart byte.

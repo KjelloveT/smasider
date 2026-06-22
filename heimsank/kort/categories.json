@@ -2,6 +2,7 @@
   {
     "id": "forskere",
     "label": "Forskarar",
+    "unlockCost": 35,
     "icon": "microscope",
     "csv": "forskere.csv",
     "rarity": "rarity-forskere.json",
@@ -15,7 +16,8 @@
   },
   {
   "id": "matrett",
-  "label": "matrett",
+  "label": "Matrettar",
+  "unlockCost": 55,
   "icon": "sparkles",
   "csv": "matrett.csv",
   "rarity": "rarity-matrett.json",
@@ -30,6 +32,7 @@
   {
     "id": "byar",
     "label": "Skandinaviske byar",
+    "unlockCost": 20,
     "icon": "building",
     "csv": "byer_skandinavia.csv",
     "rarity": "rarity-byer.json",
@@ -44,6 +47,7 @@
   {
   "id": "grunnstoff",
   "label": "Grunnstoff",
+  "unlockCost": 185,
   "icon": "sparkles",
   "csv": "grunnstoff.csv",
   "rarity": "rarity-grunnstoff.json",
@@ -58,6 +62,7 @@
   {
     "id": "land",
     "label": "Land",
+    "unlockCost": 0,
     "icon": "globe",
     "csv": "land.csv",
     "rarity": "rarity-land.json",
@@ -71,7 +76,8 @@
   },
   {
   "id": "videospill",
-  "label": "videospill",
+  "label": "Videospel",
+  "unlockCost": 230,
   "icon": "sparkles",
   "csv": "videospill.csv",
   "rarity": "rarity-videospill.json",
@@ -86,6 +92,7 @@
   {
     "id": "fly",
     "label": "Flytypar",
+    "unlockCost": 80,
     "icon": "plane",
     "csv": "fly.csv",
     "rarity": "rarity-fly.json",
@@ -100,6 +107,7 @@
   {
     "id": "kunst",
     "label": "Norsk kunst 1800-talet",
+    "unlockCost": 110,
     "icon": "palette",
     "csv": "kunst.csv",
     "rarity": "rarity-kunst.json",
@@ -114,6 +122,7 @@
   {
     "id": "hest",
     "label": "Hesterasar",
+    "unlockCost": 145,
     "icon": "rabbit",
     "csv": "hest.csv",
     "rarity": "rarity-hest.json",

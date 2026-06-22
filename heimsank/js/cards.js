@@ -197,6 +197,7 @@ function renderColl() {
           S.pendingEntry = null;
           saveStorage();
           renderColl();
+          ProgressionUI.evaluateAndAnnounce();
           resumeIfDone();
         }
       });

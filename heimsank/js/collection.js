@@ -21,40 +21,10 @@ async function openCollectionViewer() {
     const allCollections = await Promise.all(cats.map(async (cat) => {
       const entries = Array.isArray(stored[cat.id]) ? stored[cat.id] : [];
       if (entries.length === 0) return { cat, entries: [], cards: [] };
-      
-      // Load card data for this category
-      const [csv, rar] = await Promise.all([
-        fetch(`./kort/${cat.csv}`).then(r => r.text()),
-        fetch(`./kort/${cat.rarity}`).then(r => r.json())
-      ]);
-      
-      const idF = cat.idField || 'scientist';
-      const nameF = cat.nameField || 'scientistLabel';
-      const imgF = cat.imageField || 'image';
-      const statF = cat.statField || 'birthDate';
-      const statT = cat.statType || 'year';
-      const statLbl = cat.statLabel || 'calendar';
-      
-      const allCards = parseCSV(csv)
-        .filter(r => r[imgF] && r[imgF].trim())
-        .map(r => {
-          const id = r[idF].replace('http://www.wikidata.org/entity/', '');
-          let stat = '?';
-          if (statT === 'year') stat = r[statF] ? r[statF].slice(0, 4) : '?';
-          else if (statT === 'number') {
-            const n = parseInt(r[statF], 10);
-            stat = isNaN(n) ? '?' : n.toLocaleString('nn-NO');
-          } else stat = r[statF] || '?';
-          return { 
-            id, 
-            name: r[nameF] || id, 
-            stat, 
-            statLabel: statLbl, 
-            img: r[imgF].replace(/^http:/, 'https:'), 
-            rarity: rar[id] || 'vanleg' 
-          };
-        });
-      
+
+      // Load card data for this category (shared, cached loader)
+      const allCards = await CardData.loadCategoryCards(cat);
+
       // Match entries with card data
       const cards = entries.map(entry => {
         const card = allCards.find(c => c.id === entry.cardId);
@@ -68,7 +38,7 @@ async function openCollectionViewer() {
     const nonEmpty = allCollections.filter(c => c.cards.length > 0);
     
     if (nonEmpty.length === 0) {
-      grid.innerHTML = '<div class="collection-empty"><div class="collection-empty-icon">🃏</div><div class="collection-empty-text">Du har ingen kort i samlinga enno.<br>Spel og svar rett for å samle kort!</div></div>';
+      grid.innerHTML = '<div class="collection-empty"><div class="collection-empty-icon">' + ICON('layers', 56) + '</div><div class="collection-empty-text">Du har ingen kort i samlinga enno.<br>Spel og svar rett for å samle kort!</div></div>';
       return;
     }
     

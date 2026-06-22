@@ -58,7 +58,11 @@
 
     <!-- Top action row -->
     <div class="setup-actions">
+      <div class="points-pill" id="pointsDisplay" aria-live="polite" title="Poeng du kan bruke til å låse opp kategoriar">
+        <span data-icon="coins"></span> <strong id="pointsValue">0</strong> poeng
+      </div>
       <button class="btn" onclick="openCollectionViewer()"><span data-icon="folder"></span> Sjå alle samlingane</button>
+      <button class="btn" onclick="openBadgeGallery()"><span data-icon="trophy"></span> Merke</button>
     </div>
 
     <div class="nb-box">
@@ -225,6 +229,18 @@
   </div>
 </div>
 
+<!-- BADGE GALLERY MODAL -->
+<div id="badgeModal" class="modal-overlay">
+  <div class="modal4 badge-gallery">
+    <button class="modal-close" onclick="closeBadgeGallery()" aria-label="Lukk merke-galleriet">×</button>
+    <div class="collection-header">
+      <h2 class="collection-title">Merke</h2>
+      <p class="collection-subtitle">Oppnådde merke og kva som står att å klare</p>
+    </div>
+    <div class="badge-grid" id="badgeGrid"></div>
+  </div>
+</div>
+
 <!-- COLLECTION VIEWER MODAL (all categories) -->
 <div id="collectionModal" class="modal-overlay">
   <div class="modal4 collection-viewer">
@@ -239,6 +255,9 @@
   </div>
 </div>
 
+<!-- TOAST CONTAINER (poeng / merke / opplåsing) -->
+<div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
 <!-- JavaScript Modules -->
 <script src="../js/neo-header.js"></script>
 <script src="../js/neobrutalisme.js"></script>
@@ -246,6 +265,8 @@
 <script src="js/icons.js"></script>
 <script src="js/state.js"></script>
 <script src="js/utils.js"></script>
+<script src="js/carddata.js"></script>
+<script src="js/progression.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/cards.js"></script>
 <script src="js/dragdrop.js"></script>
@@ -253,6 +274,7 @@
 <script src="js/modal.js"></script>
 <script src="js/showcase.js"></script>
 <script src="js/collection.js"></script>
+<script src="js/progression-ui.js"></script>
 <script src="js/main.js"></script>
 
 </body>

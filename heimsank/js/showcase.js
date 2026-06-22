@@ -27,30 +27,7 @@ async function initShowcase() {
 
     // Load all categories in parallel
     const results = await Promise.all(cats.map(async (cat) => {
-      const [csv, rar] = await Promise.all([
-        fetch(`./kort/${cat.csv}`).then(r => r.text()),
-        fetch(`./kort/${cat.rarity}`).then(r => r.json())
-      ]);
-
-      const idF = cat.idField || 'scientist';
-      const nameF = cat.nameField || 'scientistLabel';
-      const imgF = cat.imageField || 'image';
-      const statF = cat.statField || 'birthDate';
-      const statT = cat.statType || 'year';
-      const statLbl = cat.statLabel || 'calendar';
-
-      const allCards = parseCSV(csv)
-        .filter(r => r[imgF] && r[imgF].trim())
-        .map(r => {
-          const id = r[idF].replace('http://www.wikidata.org/entity/', '');
-          let stat = '?';
-          if (statT === 'year') stat = r[statF] ? r[statF].slice(0, 4) : '?';
-          else if (statT === 'number') {
-            const n = parseInt(r[statF], 10);
-            stat = isNaN(n) ? '?' : n.toLocaleString('nn-NO');
-          } else stat = r[statF] || '?';
-          return { id, name: r[nameF] || id, stat, statLabel: statLbl, img: r[imgF].replace(/^http:/, 'https:'), rarity: rar[id] || 'vanleg' };
-        });
+      const allCards = await CardData.loadCategoryCards(cat);
 
       // Pick one card per rarity (prefer ones with images)
       const picks = [];

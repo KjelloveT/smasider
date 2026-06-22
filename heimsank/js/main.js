@@ -129,6 +129,17 @@ function afterReveal() {
 
   // Get foil status from pending
   const hasFoil = S.pendingFoil || false;
+
+  // Grant points + evaluate badges ONCE for winning this card.
+  // Currency only ever grows here, regardless of whether the card is later
+  // kept, swapped or discarded.
+  if (S.pending) {
+    const pts = ProgressionUI.awardCardPoints(S.pending, hasFoil);
+    ProgressionUI.toast(`Kortet gav ${pts} poeng!`, 'coins', 'good');
+    // Stat-baserte merke (kort tent, sjeldsemd, rett-svar) kan utløysast no.
+    ProgressionUI.evaluateAndAnnounce();
+  }
+
   delete S.pendingFoil;
 
   if (S.collection.length < 6) {
@@ -152,7 +163,9 @@ function afterReveal() {
     S.pendingFoil = null;
     saveStorage();
     renderColl();
-    
+    // Kolleksjons-baserte merke («fullt hus») når samlinga no kan vere full
+    ProgressionUI.evaluateAndAnnounce();
+
     // Reset game state and continue
     S.paused = false;
     document.getElementById('ansInput').disabled = false;

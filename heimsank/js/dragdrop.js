@@ -29,6 +29,7 @@ function initTrash() {
       }
       saveStorage();
       renderColl();
+      ProgressionUI.evaluateAndAnnounce();
       resumeIfDone();
     } else if (ds.type === 'pending') {
       // Discard pending card

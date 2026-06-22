@@ -6,22 +6,13 @@
 async function init() {
   loadStorage();
   initTrash();
+  Progression.load();
   try {
     S.cats = await fetch('./kort/categories.json').then(r => r.json());
-    const g = document.getElementById('catsGrid');
-    g.innerHTML = '';
-    S.cats.forEach(c => {
-      const el = document.createElement('div');
-      el.className = 'cat-card';
-      el.innerHTML = `<span class="cat-icon">${CAT_ICON(c.icon, 28)}</span><span class="cat-name">${c.label}</span>`;
-      el.onclick = () => {
-        S.selCat = c;
-        document.querySelectorAll('.cat-card').forEach(x => x.classList.remove('selected'));
-        el.classList.add('selected');
-        document.getElementById('startBtn').disabled = false;
-      };
-      g.appendChild(el);
-    });
+    ProgressionUI.renderPoints();
+    ProgressionUI.renderCovers(S.cats);
+    // Etterhandsam merke (t.d. for spelarar som alt hadde kort før systemet kom)
+    ProgressionUI.evaluateAndAnnounce();
     document.getElementById('setupLoading').classList.add('hidden');
     document.getElementById('setupContent').classList.remove('hidden');
     // Start showcase fan display
@@ -111,45 +102,7 @@ function goSetup() {
  * @param {Object} cat - Category object
  */
 async function loadCards(cat) {
-  const [csv, rar] = await Promise.all([
-    fetch(`./kort/${cat.csv}`).then(r => r.text()),
-    fetch(`./kort/${cat.rarity}`).then(r => r.json())
-  ]);
-
-  const idF = cat.idField || 'scientist';
-  const nameF = cat.nameField || 'scientistLabel';
-  const imgF = cat.imageField || 'image';
-  const artF = cat.articleField || 'article';
-  const statF = cat.statField || 'birthDate';
-  const statT = cat.statType || 'year';
-  const statLbl = cat.statLabel || 'calendar';
-
-  S.cards = parseCSV(csv)
-    .filter(r => r[imgF] && r[imgF].trim())
-    .map(r => {
-      const id = r[idF].replace('http://www.wikidata.org/entity/', '');
-      let stat = '?';
-      if (statT === 'year') {
-        stat = r[statF] ? r[statF].slice(0, 4) : '?';
-      } else if (statT === 'number') {
-        const n = parseInt(r[statF], 10);
-        stat = isNaN(n) ? '?' : n.toLocaleString('nn-NO');
-      } else {
-        stat = r[statF] || '?';
-      }
-      return {
-        id,
-        name: r[nameF] || id,
-        stat,
-        statLabel: statLbl,
-        img: r[imgF].replace(/^http:/, 'https:'),
-        article: r[artF] || '',
-        rarity: rar[id] || 'vanleg',
-        catId: cat.id,
-        catLabel: cat.label,
-        catIcon: cat.icon
-      };
-    });
+  S.cards = await CardData.loadCategoryCards(cat);
 
   S.idx = {};
   S.groups = { vanleg: [], sjeldgjevt: [], segngjeten: [], gudebore: [] };
@@ -219,6 +172,7 @@ function checkAnswer() {
   }
   if (v === S.q.ans) {
     S.correct++;
+    Progression.recordCorrect(S.level);
     setFb('RETT!', 'correct');
     updateProg();
     document.getElementById('ansInput').disabled = true;
