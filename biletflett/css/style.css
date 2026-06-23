@@ -1,0 +1,133 @@
+/* ══════════════════════════════════════
+   BILETFLETT — spel-spesifikk stil (utvidar neobrutalisme.css)
+   ══════════════════════════════════════ */
+
+.page-wrapper { padding-top: 0; }
+
+.main-content {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: clamp(16px, 3vw, 28px);
+}
+
+/* Hero */
+.bf-hero {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    justify-content: space-between; margin-bottom: 20px;
+}
+.bf-hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900; line-height: 1.1; }
+.bf-hero p { color: var(--muted); font-weight: 600; margin-top: 4px; }
+
+/* Verktøyrad */
+.toolbar {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    padding: 14px; margin-bottom: 18px;
+    background: var(--surface); border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow);
+}
+.toolbar .spacer { flex: 1 1 auto; }
+.format-group { display: flex; gap: 6px; }
+.format-group .btn { padding: 8px 12px; }
+
+/* Hovudlayout: galleri | scene | panel */
+.app-layout {
+    display: grid;
+    grid-template-columns: minmax(190px, 230px) minmax(0, 1fr) minmax(220px, 290px);
+    gap: clamp(14px, 2vw, 22px);
+    align-items: start;
+}
+@media (max-width: 1024px) {
+    .app-layout { grid-template-columns: 1fr; }
+    .gallery { max-height: none; }
+}
+
+/* Galleri */
+.gallery {
+    background: var(--surface); border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow);
+    padding: 14px; max-height: 78vh; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 8px;
+}
+.gallery-group-title {
+    font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
+    font-size: 0.8rem; color: var(--accent); margin: 8px 0 2px;
+    border-bottom: 3px solid var(--border); padding-bottom: 4px;
+}
+.tpl-card {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 8px; cursor: pointer; font-family: inherit;
+    background: var(--bg); border: 3px solid var(--border); box-shadow: 3px 3px 0 var(--shadow);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+.tpl-card:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--shadow); }
+.tpl-card.active { background: var(--accent4); box-shadow: 3px 3px 0 var(--accent); }
+.tpl-card canvas { width: auto; max-height: 120px; border: 2px solid var(--border); background: #fff; }
+.tpl-name { font-size: 0.82rem; font-weight: 800; color: var(--text); text-align: center; line-height: 1.1; }
+@media (max-width: 1024px) {
+    .gallery { flex-direction: row; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 16px; }
+    .gallery-group-title { display: none; }
+    .tpl-card { flex: 0 0 auto; width: 120px; }
+}
+
+/* Scene / lerret */
+.stage {
+    background: var(--surface); border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow);
+    padding: clamp(12px, 2vw, 22px); display: flex; justify-content: center; align-items: flex-start;
+    overflow: auto;
+}
+#collage-canvas {
+    max-width: 100%; height: auto; background: #fff;
+    border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow);
+    touch-action: none;
+}
+
+/* Panel */
+.panel {
+    background: var(--surface); border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow);
+    padding: 16px; display: flex; flex-direction: column; gap: 14px;
+}
+.panel h2 {
+    font-size: 1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 3px solid var(--border); padding-bottom: 6px;
+}
+.panel-hint { color: var(--muted); font-size: 0.9rem; }
+#text-fields { display: flex; flex-direction: column; gap: 12px; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field-label { font-weight: 800; font-size: 0.82rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.4px; }
+
+.neo-input {
+    width: 100%; padding: 9px 12px; font-family: inherit; font-size: 0.95rem; font-weight: 600;
+    background: var(--bg); color: var(--text); border: 3px solid var(--border); box-shadow: 2px 2px 0 var(--shadow);
+}
+.neo-input:focus { outline: none; box-shadow: 3px 3px 0 var(--accent); }
+
+.panel-tip {
+    font-size: 0.8rem; color: var(--muted); line-height: 1.5;
+    border-top: 3px dashed var(--border); padding-top: 10px;
+}
+
+/* Knappefargar (held seg på neobrutalisme .btn-basisen) */
+.btn.c-blue { background: #87CEEB; color: #1a1a1a; }
+.btn.c-green { background: #BAFCA2; color: #1a1a1a; }
+.btn.c-red { background: #FFA07A; color: #1a1a1a; }
+.btn .icon { vertical-align: -3px; }
+
+/* Beskjerings-modal */
+.crop-stage { display: flex; justify-content: center; margin: 14px 0; overflow: auto; }
+#crop-canvas { max-width: 100%; max-height: 56vh; cursor: crosshair; border: 3px solid var(--border); }
+.crop-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+/* Personvern-innhald */
+.privacy-body h3 { font-size: 1rem; font-weight: 900; margin: 16px 0 8px; }
+.privacy-body p, .privacy-body li { line-height: 1.6; }
+.privacy-body ul { margin: 0 0 12px 20px; }
+
+/* Tilgjenge */
+.btn:focus-visible, .tpl-card:focus-visible, .neo-input:focus-visible, .modal-close:focus-visible {
+    outline: 3px solid var(--accent2); outline-offset: 2px;
+}
+
+@media print {
+    neo-header, .toolbar, .gallery, .panel, .bf-hero { display: none !important; }
+    .stage { border: none; box-shadow: none; padding: 0; }
+    #collage-canvas { border: none; box-shadow: none; }
+    .app-layout { display: block; }
+}

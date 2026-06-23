@@ -13,6 +13,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
   - All emoji og ASCII-symbol bytt ut med inline Lucide-ikon; ikon-knappar har fått `aria-label`, modalar lukkast med Escape, og dynamiske felt har `aria-live`.
   - Eksporterte quiz-ar får `app`/`version`-felt på toppnivå (JSON-migreringsveg).
   - Internt: ny delt `quiz-runner.js` (eitt-spelar-motor brukt av soloøvinga), eige `storage.js`- og `icons.js`-lag, og DOM-bygd rendering utan `innerHTML` på brukartekst. Retta òg knappe-bindingar i editoren som var brotne.
+- **BiletFlett** — bygd heilt om frå den gamle `fotocollage/fotocollage.html`-monolitten til vyrdepil-standard.
+  - Flytta til `biletflett/` med `index.html`, `css/style.css` og IIFE-modular (`icons`, `templates`, `decor`, `collage`, `app`). Brukar `neobrutalisme.css`, global `<neo-header>` med temaveljar og `page-wrapper`/`main-content`-layout. Emoji bytt ut med inline Lucide-ikon.
+  - **Retta koordinat-feil:** treff-deteksjon (dra, zoom, skjering) skalerer no rett mellom lerretsoppløysing og vist storleik, så han fungerer òg på smale skjermar.
+  - Nytt data-drive mal-system: 8 reine standard-oppsett + **20 sprek tema-malar** (tur, dagsoppsummering, strand, fjell, gard, fleire bursdagsmalar, karneval, skulestart, skuleåret, klassen vår, tema-prosjekt, årstider og høgtider, minnebok) med **redigerbar tittel/bilettekst**.
+  - All pynt (konfetti, vimplar, ballongar, løv, snø, rammer m.m.) er teikna med Canvas 2D — ingen emoji og ingen eksterne bilete. Render i A4-oppløysing (~150 dpi) for skarp utskrift; eksport som PNG.
+  - Tilstandslaus (ingen `localStorage`); modalar lukkast med Escape og interaktive element har `:focus-visible` og `aria-label`.
 
 ### Lagt til
 - **Listesmia** (wikidata-tester) — bygd om frå rein SPARQL-tester til ein veivisar som finn kortlister til Heimsank utan at ein treng kunne SPARQL.

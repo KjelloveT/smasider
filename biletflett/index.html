@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiletFlett — lag biletcollagar lokalt i nettlesaren</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-light-theme="classic" data-dark-theme="midnight" data-theme="classic">
+    <neo-header></neo-header>
+
+    <div class="page-wrapper">
+        <main class="main-content">
+
+            <div class="bf-hero">
+                <div>
+                    <h1>BiletFlett</h1>
+                    <p>Lag vakre biletcollagar — alt skjer lokalt i nettlesaren din.</p>
+                </div>
+                <button class="btn" id="btn-privacy"><span class="icon-slot" data-icon="lock"></span> Personvern</button>
+            </div>
+
+            <div class="toolbar">
+                <button class="btn c-blue" id="btn-add"><span data-icon="image-plus"></span> Legg til bilete</button>
+                <div class="format-group" role="group" aria-label="Vel format">
+                    <button class="btn" data-format="portrait" aria-label="Ståande A4"><span data-icon="rectangle-vertical"></span></button>
+                    <button class="btn" data-format="landscape" aria-label="Liggjande A4"><span data-icon="rectangle-horizontal"></span></button>
+                    <button class="btn" data-format="square" aria-label="Kvadratisk"><span data-icon="square"></span></button>
+                </div>
+                <div class="spacer"></div>
+                <button class="btn c-green" id="btn-download"><span data-icon="download"></span> Last ned</button>
+                <button class="btn c-red" id="btn-clear"><span data-icon="trash-2"></span> Tøm</button>
+            </div>
+
+            <div class="app-layout">
+                <aside class="gallery" id="gallery" aria-label="Malar"></aside>
+
+                <section class="stage">
+                    <canvas id="collage-canvas" aria-label="Collage-lerret"></canvas>
+                </section>
+
+                <aside class="panel">
+                    <h2><span data-icon="type" data-icon-size="16"></span> Tekst</h2>
+                    <div id="text-fields"></div>
+                    <p class="panel-tip">Klikk eit tomt felt for å leggje til bilete der. Hald peikaren over eit bilete for å zoome, skjere eller fjerne. Dra for å flytte biletet i feltet.</p>
+                </aside>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Skjulte filinndata -->
+    <input type="file" id="file-input" accept="image/*" multiple hidden>
+    <input type="file" id="slot-input" accept="image/*" hidden>
+
+    <!-- Beskjerings-modal -->
+    <div class="modal-overlay" id="crop-modal">
+        <div class="modal3" role="dialog" aria-modal="true" aria-label="Skjer bilete">
+            <div class="modal-header">
+                <span>Skjer bilete</span>
+                <button class="modal-close" data-close="crop-modal" aria-label="Lukk"><span data-icon="x"></span></button>
+            </div>
+            <div class="modal-body">
+                <p>Dra for å markere det du vil ta vare på.</p>
+                <div class="crop-stage"><canvas id="crop-canvas"></canvas></div>
+                <div class="crop-actions">
+                    <button class="btn c-green" id="crop-apply"><span data-icon="check"></span> Bruk</button>
+                    <button class="btn" id="crop-cancel">Avbryt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personvern-modal -->
+    <div class="modal-overlay" id="privacy-modal">
+        <div class="modal3 privacy-body" role="dialog" aria-modal="true" aria-label="Personvern">
+            <div class="modal-header">
+                <span>Personvern og datatryggleik</span>
+                <button class="modal-close" data-close="privacy-modal" aria-label="Lukk"><span data-icon="x"></span></button>
+            </div>
+            <div class="modal-body">
+                <h3>Bileta dine er trygge</h3>
+                <p>BiletFlett er laga med personvern i fokus:</p>
+                <ul>
+                    <li><strong>Alt skjer lokalt:</strong> Bileta blir handsama berre i nettlesaren din. Ingenting blir sendt til nokon tenar.</li>
+                    <li><strong>Ingen lagring:</strong> Bileta blir ikkje lagra. Når du lukkar fana, er alt borte.</li>
+                    <li><strong>Ingen cookies eller sporing.</strong></li>
+                    <li><strong>Fungerer offline</strong> når sida først er lasta.</li>
+                </ul>
+                <p>Verktøyet brukar HTML5 Canvas og FileReader for å handsame bilete lokalt. Bileta forlèt aldri eininga di.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skript -->
+    <script src="js/icons.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/decor.js"></script>
+    <script src="js/collage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="../js/neobrutalisme.js"></script>
+    <script src="../js/neo-header.js"></script>
+</body>
+</html>

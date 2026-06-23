@@ -9,10 +9,6 @@
       "serve": "/gangespill/index.html"
     },
     {
-      "route": "/fotocollage/*", 
-      "serve": "/fotocollage/fotocollage.html"
-    },
-    {
       "route": "/mattespill/*",
       "serve": "/mattespill/index.html"
     },

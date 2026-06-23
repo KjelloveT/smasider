@@ -43,8 +43,8 @@
     { "id": "dagsvegen", "name": "Dagsvegen", "href": "dagsvegen/index.html", "cat": "klasserom", "btn": "Opne →", "img": "_resources/dagsvegen.png",
       "desc": ["Dagens plan på tavla — fag med emoji, plan for timen med nedteljing, trafikklys, teikning og ro-modus."] },
 
-    { "id": "fotocollage", "name": "BiletFlett", "href": "fotocollage/fotocollage.html", "cat": "verktoy", "btn": "Opne →", "img": "_resources/biletflett.png",
-      "desc": ["Lag vakre bilete-collagar direkte i nettlesaren. Ingen opplasting til server."] },
+    { "id": "biletflett", "name": "BiletFlett", "href": "biletflett/index.html", "cat": "verktoy", "btn": "Opne →", "img": "_resources/biletflett.png",
+      "desc": ["Lag vakre biletcollagar direkte i nettlesaren — standard oppsett og 20 sprek tema-malar for tur, bursdag og skule. Ingen opplasting til server."] },
     { "id": "fotocolours", "name": "Reinskore bilete", "href": "fotocolours/index.html", "cat": "verktoy", "btn": "Opne →", "img": "_resources/reinskore bilete.png",
       "desc": ["Reduser bilete til reine monotone fargar."] },
     { "id": "klassekart", "name": "Klassekart", "href": "klassekart/index.html", "cat": "verktoy", "btn": "Opne →", "img": "_resources/klassekart.png",
