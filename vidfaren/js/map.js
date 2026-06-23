@@ -57,21 +57,24 @@ const GeoMap = (function () {
     return svg;
   }
 
-  /** Pin-markør (dråpeform) i kart-koordinatar, konstant visuell storleik. */
+  /**
+   * Stadmarkør sentrert NØYAKTIG på punktet (x,y) — ring + prikk i same
+   * sentrum, så markøren aldri les som forskuva (t.d. for langt nord).
+   * Konstant visuell storleik (skalering skjer rundt sentrum i apply()).
+   */
   function makePin(x, y) {
     const grp = document.createElementNS(SVGNS, 'g');
     grp.setAttribute('class', 'map-pin');
-    // Skala pinnen til kartrommet (viewBox er ~1000 breitt).
-    grp.setAttribute('transform', `translate(${x} ${y}) scale(0.9)`);
-    const drop = document.createElementNS(SVGNS, 'path');
-    // Dråpe med spiss nedst i (0,0)
-    drop.setAttribute('d', 'M0 0 C-7 -10 -10 -14 -10 -20 a10 10 0 1 1 20 0 C10 -14 7 -10 0 0 Z');
-    drop.setAttribute('class', 'map-pin-body');
-    const dot = document.createElementNS(SVGNS, 'circle');
-    dot.setAttribute('cx', '0'); dot.setAttribute('cy', '-20'); dot.setAttribute('r', '4');
-    dot.setAttribute('class', 'map-pin-dot');
-    grp.appendChild(drop);
-    grp.appendChild(dot);
+    grp.setAttribute('transform', `translate(${x} ${y}) scale(1)`);
+    const circ = (r, cls) => {
+      const c = document.createElementNS(SVGNS, 'circle');
+      c.setAttribute('cx', '0'); c.setAttribute('cy', '0'); c.setAttribute('r', String(r));
+      c.setAttribute('class', cls);
+      return c;
+    };
+    grp.appendChild(circ(15, 'map-pin-halo'));
+    grp.appendChild(circ(9.5, 'map-pin-body'));
+    grp.appendChild(circ(3.8, 'map-pin-dot'));
     return grp;
   }
 
@@ -110,7 +113,7 @@ const GeoMap = (function () {
     function apply() {
       svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
       // Hald pinnen tilnærma konstant på skjermen uansett zoom.
-      if (pinEl) pinEl.setAttribute('transform', `translate(${pin.x} ${pin.y}) scale(${(0.9 * vb.w / W).toFixed(3)})`);
+      if (pinEl) pinEl.setAttribute('transform', `translate(${pin.x} ${pin.y}) scale(${(1.2 * vb.w / W).toFixed(3)})`);
     }
     function center() { return { x: vb.x + vb.w / 2, y: vb.y + vb.h / 2 }; }
 
