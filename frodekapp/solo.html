@@ -4,116 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frødekapp — Soloøving</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <div class="container-narrow">
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+    <div class="page-wrapper">
+        <neo-header></neo-header>
+        <main class="main-content">
+            <div class="fk-narrow">
 
-        <!-- SKJERM: Vel quiz -->
-        <div class="screen active" id="screen-picker">
-            <header class="page-header">
-                <div class="header-inner">
-                    <span class="header-icon">🎯</span>
-                    <div>
-                        <h1>Soloøving</h1>
-                        <p class="subtitle">Vel ein quiz og øv på eiga hand</p>
+                <!-- SKJERM: Vel quiz -->
+                <div class="screen active" id="screen-picker">
+                    <div class="box2 hero-box">
+                        <img src="../_resources/frødekapp.png" alt="Frødekapp" class="hero-logo">
+                        <div class="hero-text">
+                            <h1>Soloøving</h1>
+                            <p>Vel ein quiz og øv på eiga hand — med poeng, streak og tidtaking.</p>
+                        </div>
+                    </div>
+                    <div class="quiz-grid" id="picker-grid">
+                        <div class="fk-error">Lastar quiz-ar…</div>
                     </div>
                 </div>
-                <div class="header-stripe"></div>
-            </header>
-            <div class="quiz-grid" id="picker-grid">
-                <div class="text-body text-center" style="padding:40px;grid-column:1/-1;">Lastar quiz-ar...</div>
-            </div>
-            <div class="mt-24 text-center">
-                <a href="index.html" class="btn btn-small">← Tilbake</a>
-            </div>
-        </div>
 
-        <!-- SKJERM: Klar til start -->
-        <div class="screen" id="screen-ready">
-            <div class="nb-card text-center" style="margin-top:60px;">
-                <h1 style="font-size:1.8rem;margin-bottom:8px;" id="ready-title"></h1>
-                <p class="text-body mb-16" id="ready-desc"></p>
-                <div class="tag tag-count mb-24" style="display:inline-block;" id="ready-count"></div>
-                <div style="margin-bottom:16px;">
-                    <label class="text-body" style="display:block;margin-bottom:8px;font-weight:700;">Last opp eigen quiz (JSON):</label>
-                    <input type="file" id="solo-upload" accept=".json" style="font-family:Arial,sans-serif;font-size:0.9rem;">
+                <!-- SKJERM: Klar til start -->
+                <div class="screen" id="screen-ready">
+                    <div class="box1 text-center">
+                        <h1 class="heading2 no-mt" id="ready-title"></h1>
+                        <p class="mb-16" id="ready-desc"></p>
+                        <div class="tag tag-count mb-24" id="ready-count" style="display:inline-block;"></div>
+                        <div class="form-group">
+                            <label for="solo-upload">Last opp eigen quiz (JSON)</label>
+                            <input type="file" id="solo-upload" accept=".json">
+                        </div>
+                        <button class="btn full-width" id="btn-start-solo"><span data-icon="play" data-icon-size="20"></span> Start quiz</button>
+                    </div>
                 </div>
-                <button class="btn btn-primary btn-large" id="btn-start-solo" style="width:100%;">▶ Start quiz</button>
-                <div class="mt-16">
-                    <a href="index.html" class="btn btn-small">← Tilbake</a>
+
+                <!-- SKJERM: Spørsmål -->
+                <div class="screen" id="screen-question">
+                    <div class="fk-row between mb-16">
+                        <span class="status-badge waiting" id="q-number">Spørsmål 1 / 10</span>
+                        <span class="status-badge" id="q-score">0 poeng</span>
+                    </div>
+
+                    <div class="progress-bar mb-16">
+                        <div class="progress-fill" id="q-progress-fill" style="width:0%;"></div>
+                    </div>
+
+                    <div class="box1 text-center mb-16">
+                        <div class="timer-display mb-16" id="q-timer">20</div>
+                        <div style="font-size:clamp(1.2rem,3vw,1.6rem);font-weight:900;line-height:1.3;margin-bottom:8px;" id="q-text"></div>
+                        <div class="hidden fk-feedback bad" id="q-streak"></div>
+                    </div>
+
+                    <div id="q-answers"></div>
+
+                    <div class="hidden text-center mt-16 fk-feedback" id="q-feedback" aria-live="polite"></div>
                 </div>
-            </div>
-        </div>
 
-        <!-- SKJERM: Spørsmål -->
-        <div class="screen" id="screen-question">
-            <div class="flex justify-between items-center mb-16" style="flex-wrap:wrap;gap:8px;">
-                <span class="status-badge waiting" id="q-number">Spørsmål 1 / 10</span>
-                <span class="status-badge" style="background:#FDFD96;" id="q-score">0 poeng</span>
-            </div>
+                <!-- SKJERM: Resultat -->
+                <div class="screen" id="screen-results">
+                    <div class="box1 text-center mb-24">
+                        <h1 class="heading2 no-mt">Quiz ferdig!</h1>
+                        <p id="res-title"></p>
+                    </div>
 
-            <div class="progress-bar mb-16">
-                <div class="progress-fill" id="q-progress-fill" style="width:0%;"></div>
-            </div>
+                    <div class="stat-grid stat-grid-3">
+                        <div class="box1 stat-box"><div class="stat-num" id="res-score">0</div><div class="stat-label">Poeng</div></div>
+                        <div class="box1 stat-box"><div class="stat-num" id="res-correct">0/0</div><div class="stat-label">Rette</div></div>
+                        <div class="box1 stat-box"><div class="stat-num" id="res-accuracy">0%</div><div class="stat-label">Presisjon</div></div>
+                    </div>
 
-            <div class="nb-card mb-16">
-                <div class="timer-display mb-16" id="q-timer">20</div>
-                <div style="font-size:clamp(1.2rem,3vw,1.6rem);font-weight:900;line-height:1.3;text-align:center;margin-bottom:8px;" id="q-text"></div>
-                <div class="hidden text-center" id="q-streak" style="font-weight:900;font-size:1rem;color:#E74C3C;margin-bottom:8px;"></div>
-            </div>
+                    <div class="stat-grid stat-grid-2">
+                        <div class="box1 stat-box"><div class="stat-num" id="res-streak">0</div><div class="stat-label"><span data-icon="flame" data-icon-size="14"></span> Beste streak</div></div>
+                        <div class="box1 stat-box"><div class="stat-num" id="res-avgtime">0s</div><div class="stat-label"><span data-icon="clock" data-icon-size="14"></span> Snitt-tid</div></div>
+                    </div>
 
-            <div id="q-answers"></div>
+                    <h2 class="heading3">Spørsmåloversikt</h2>
+                    <div id="res-questions"></div>
 
-            <div class="hidden text-center mt-16" id="q-feedback" style="font-weight:900;font-size:1.1rem;"></div>
-        </div>
-
-        <!-- SKJERM: Resultat -->
-        <div class="screen" id="screen-results">
-            <div class="nb-card text-center mb-24">
-                <h1 style="font-size:1.6rem;margin-bottom:4px;">🏆 Quiz ferdig!</h1>
-                <p class="text-body" id="res-title"></p>
-            </div>
-
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
-                <div class="nb-card-sm text-center">
-                    <div style="font-size:2rem;font-weight:900;" id="res-score">0</div>
-                    <div class="text-body" style="font-size:0.8rem;">POENG</div>
+                    <div class="fk-row mt-24">
+                        <button class="btn" id="btn-retry"><span data-icon="refresh" data-icon-size="18"></span> Prøv igjen</button>
+                        <button class="btn" id="btn-back"><span data-icon="arrowLeft" data-icon-size="18"></span> Til bibliotek</button>
+                    </div>
                 </div>
-                <div class="nb-card-sm text-center">
-                    <div style="font-size:2rem;font-weight:900;" id="res-correct">0/0</div>
-                    <div class="text-body" style="font-size:0.8rem;">RETTE</div>
-                </div>
-                <div class="nb-card-sm text-center">
-                    <div style="font-size:2rem;font-weight:900;" id="res-accuracy">0%</div>
-                    <div class="text-body" style="font-size:0.8rem;">PRESISJON</div>
-                </div>
+
             </div>
-
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
-                <div class="nb-card-sm text-center">
-                    <div style="font-size:1.5rem;font-weight:900;" id="res-streak">0</div>
-                    <div class="text-body" style="font-size:0.8rem;">🔥 BESTE STREAK</div>
-                </div>
-                <div class="nb-card-sm text-center">
-                    <div style="font-size:1.5rem;font-weight:900;" id="res-avgtime">0s</div>
-                    <div class="text-body" style="font-size:0.8rem;">⏱ SNITT-TID</div>
-                </div>
-            </div>
-
-            <div class="section-label mb-16">📋 Spørsmåloversikt</div>
-            <div id="res-questions"></div>
-
-            <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
-                <button class="btn btn-primary" id="btn-retry">🔄 Prøv igjen</button>
-                <button class="btn" id="btn-back">← Tilbake til bibliotek</button>
-            </div>
-        </div>
-
+        </main>
     </div>
 
+    <script src="../js/vyrdepil-storage.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/storage.js"></script>
     <script src="js/quiz-engine.js"></script>
     <script src="js/ui.js"></script>
+    <script src="js/quiz-runner.js"></script>
     <script src="js/solo.js"></script>
+    <script src="../js/neobrutalisme.js"></script>
+    <script src="../js/neo-header.js"></script>
 </body>
 </html>

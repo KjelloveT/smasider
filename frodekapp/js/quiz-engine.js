@@ -10,8 +10,8 @@ const QuizEngine = {
         { count: 5, bonus: 500 },
         { count: 3, bonus: 200 }
     ],
-    ANSWER_ICONS: ['▲', '◆', '●', '■'],
-    ANSWER_COLORS: ['#E74C3C', '#3498DB', '#2ECC71', '#F1C40F'],
+    // Svar-form per indeks rendrast som Lucide-SVG (sjå icons.js ANSWER_ICON_NAMES).
+    // Fargane kjem frå tema-accentane via CSS-klassane under (sjå style.css).
     ANSWER_CLASSES: ['answer-a', 'answer-b', 'answer-c', 'answer-d'],
 
     /**
@@ -85,15 +85,13 @@ const QuizEngine = {
         if (!res.ok) throw new Error(`Kunne ikkje laste quiz-liste: ${res.status}`);
         const remote = await res.json();
 
-        // Last lokale quiz-ar
-        const localQuizzes = JSON.parse(localStorage.getItem('frodekapp_local_quizzes') || '{}');
-        const local = Object.values(localQuizzes).map(q => ({
+        // Last lokale quiz-ar via VyrdepilStorage
+        const local = FKStorage.getQuizzes().map(q => ({
             id: q.id,
             title: q.title,
             description: q.description,
             author: q.author || 'Lokal',
             questionCount: q.questions.length,
-            color: '#8B5CF6', // Lilla for lokale quiz-ar
             local: true,
             savedAt: q.savedAt
         }));
@@ -108,8 +106,7 @@ const QuizEngine = {
      */
     async loadQuizById(id, baseUrl) {
         if (id.startsWith('local_')) {
-            const localQuizzes = JSON.parse(localStorage.getItem('frodekapp_local_quizzes') || '{}');
-            const quiz = localQuizzes[id];
+            const quiz = FKStorage.getQuiz(id);
             if (!quiz) throw new Error('Lokal quiz ikkje funne');
             return quiz;
         } else {
@@ -122,9 +119,7 @@ const QuizEngine = {
      * @param {string} id - 'local_XXXX'
      */
     deleteLocalQuiz(id) {
-        const localQuizzes = JSON.parse(localStorage.getItem('frodekapp_local_quizzes') || '{}');
-        delete localQuizzes[id];
-        localStorage.setItem('frodekapp_local_quizzes', JSON.stringify(localQuizzes));
+        FKStorage.deleteQuiz(id);
     },
 
     /**

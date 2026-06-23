@@ -62,7 +62,12 @@
       // Liten stempel-badge øvre høgre om utvida
       const stats = OrdaklokLeitner.masteryStats(Storage.getLeitner(list.id), list.pairs.length);
       const best = bestScoreSummary(list.id);
-      if (stats.mastered > 0 || best) {
+      if (list.builtin) {
+        const stampWrap = document.createElement('div');
+        stampWrap.className = 'bk-list-card-stamp';
+        stampWrap.appendChild(makeStamp('STANDARD', 'blue'));
+        card.appendChild(stampWrap);
+      } else if (stats.mastered > 0 || best) {
         const stampWrap = document.createElement('div');
         stampWrap.className = 'bk-list-card-stamp';
         if (stats.mastered === stats.total && stats.total > 0) {
@@ -118,12 +123,14 @@
       playBtn.innerHTML = ICONS.play + '<span> Spel</span>';
       actions.appendChild(playBtn);
 
-      const editBtn = document.createElement('a');
-      editBtn.className = 'bk-btn bk-btn-small';
-      editBtn.href = 'editor.html?list=' + encodeURIComponent(list.id);
-      editBtn.setAttribute('aria-label', 'Rediger ' + list.title);
-      editBtn.innerHTML = ICONS.edit;
-      actions.appendChild(editBtn);
+      if (!list.builtin) {
+        const editBtn = document.createElement('a');
+        editBtn.className = 'bk-btn bk-btn-small';
+        editBtn.href = 'editor.html?list=' + encodeURIComponent(list.id);
+        editBtn.setAttribute('aria-label', 'Rediger ' + list.title);
+        editBtn.innerHTML = ICONS.edit;
+        actions.appendChild(editBtn);
+      }
 
       const dupBtn = document.createElement('button');
       dupBtn.type = 'button';
@@ -152,18 +159,20 @@
       shareBtn.addEventListener('click', () => showShareLink(list));
       actions.appendChild(shareBtn);
 
-      const delBtn = document.createElement('button');
-      delBtn.type = 'button';
-      delBtn.className = 'bk-btn bk-btn-small bk-btn-danger';
-      delBtn.setAttribute('aria-label', 'Slett ' + list.title);
-      delBtn.innerHTML = ICONS.trash;
-      delBtn.addEventListener('click', () => {
-        if (confirm(`Vil du slette lista «${list.title}»? Dette kan ikkje angrast.`)) {
-          Storage.deleteList(list.id);
-          renderList();
-        }
-      });
-      actions.appendChild(delBtn);
+      if (!list.builtin) {
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'bk-btn bk-btn-small bk-btn-danger';
+        delBtn.setAttribute('aria-label', 'Slett ' + list.title);
+        delBtn.innerHTML = ICONS.trash;
+        delBtn.addEventListener('click', () => {
+          if (confirm(`Vil du slette lista «${list.title}»? Dette kan ikkje angrast.`)) {
+            Storage.deleteList(list.id);
+            renderList();
+          }
+        });
+        actions.appendChild(delBtn);
+      }
 
       card.appendChild(actions);
       listsContainer.appendChild(card);

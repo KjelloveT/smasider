@@ -4,106 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frødekapp — Kunnskapsspel</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <div class="container">
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+    <div class="page-wrapper">
+        <neo-header></neo-header>
+        <main class="main-content">
 
-        <header class="page-header">
-            <div class="header-badge">🔒 Personvern</div>
-            <div class="header-inner">
-                <span class="header-icon">🧠</span>
-                <div>
+            <div class="box2 hero-box">
+                <img src="../_resources/frødekapp.png" alt="Frødekapp" class="hero-logo">
+                <div class="hero-text">
                     <h1>Frødekapp</h1>
-                    <p class="subtitle">Kunnskapsspel for klasserommet</p>
+                    <p>Kunnskapsspel for klasserommet — køyr live-quiz som i Kahoot, øv åleine eller lag dine eigne quiz-ar. Alt skjer i nettlesaren.</p>
                 </div>
             </div>
-            <div class="header-stripe"></div>
-        </header>
 
-        <!-- Handlingsknappane -->
-        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px;">
-            <a href="host.html" class="btn btn-primary btn-large">🎮 Start live-kviss</a>
-            <a href="play.html" class="btn btn-blue btn-large">👥 Delta i kviss</a>
-            <a href="solo.html" class="btn btn-yellow btn-large">🎯 Øv åleine</a>
-            <a href="editor.html" class="btn btn-purple btn-large">📝 Lag ny kviss</a>
-        </div>
-
-        <!-- Kviss-bibliotek -->
-        <div class="section-label">📚 Kviss-bibliotek</div>
-        <div class="quiz-grid" id="quiz-grid">
-            <div class="text-body text-center" style="padding:40px;grid-column:1/-1;">
-                Lastar kvissar...
+            <!-- Handlingsknappar -->
+            <div class="fk-actions">
+                <a href="host.html" class="btn"><span data-icon="play" data-icon-size="20"></span> Start live-quiz</a>
+                <a href="play.html" class="btn"><span data-icon="users" data-icon-size="20"></span> Delta i quiz</a>
+                <a href="solo.html" class="btn"><span data-icon="target" data-icon-size="20"></span> Øv åleine</a>
+                <a href="editor.html" class="btn"><span data-icon="edit" data-icon-size="20"></span> Lag ny quiz</a>
             </div>
-        </div>
 
-        <!-- Info -->
-        <div class="nb-card mt-32">
-            <h2 style="font-size:1.2rem;margin-bottom:12px;">📖 Korleis fungerer Frødekapp?</h2>
-            <div class="text-body">
-                <p><strong>Live-kviss (som Kahoot):</strong> Læraren startar ein kviss og får ein romkode. Elevane skriv inn koden på sin eigen enhet og svarar på spørsmål i sanntid. Alt fungerer direkte i nettlesaren — ingen installasjon krevd.</p>
-                <p style="margin-top:12px;"><strong>Soloøving:</strong> Elevane kan øve på kva som helst kviss heilt på eiga hand, med poeng og tidtaking.</p>
-                <p style="margin-top:12px;"><strong>Lag din eigen kviss:</strong> Bruk kviss-editoren til å lage eigne kvissar. Last ned som JSON-fil og del med andre!</p>
-                <p style="margin-top:12px;"><strong>Personvern:</strong> All kommunikasjon mellom nettlesarane går direkte (P2P). Ingen quiz-data passerer nokon server. Berre IP-adresser er synlege for signaltenesta under tilkopling.</p>
+            <!-- Quiz-bibliotek -->
+            <h2 class="heading2">Quiz-bibliotek</h2>
+            <div class="quiz-grid" id="quiz-grid">
+                <div class="fk-error">Lastar quiz-ar…</div>
             </div>
-        </div>
 
-        <footer style="text-align:center;font-family:Arial,sans-serif;font-size:0.85rem;font-weight:700;padding-top:32px;">
-            <a href="../index.html" style="color:#000;">← Tilbake til Læringsverktøy</a>
-        </footer>
+            <!-- Info -->
+            <div class="box1 mt-24">
+                <h2 class="heading3 no-mt">Korleis fungerer Frødekapp?</h2>
+                <p><strong>Live-quiz (som Kahoot):</strong> Læraren startar ein quiz og får ein romkode. Elevane skriv inn koden på si eiga eining og svarar i sanntid. Ingen installasjon.</p>
+                <p class="mt-8"><strong>Soloøving:</strong> Elevane øver på kva quiz som helst på eiga hand, med poeng og tidtaking.</p>
+                <p class="mt-8"><strong>Lag din eigen quiz:</strong> Bruk editoren til å lage eigne quiz-ar. Last ned som JSON-fil og del med andre.</p>
+                <p class="mt-8"><strong>Personvern:</strong> All kommunikasjon mellom nettlesarane går direkte (P2P). Ingen quiz-data passerer nokon tenar — berre IP-adresser er synlege for signaltenesta under tilkopling.</p>
+            </div>
 
+        </main>
     </div>
 
+    <script src="../js/vyrdepil-storage.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/storage.js"></script>
     <script src="js/quiz-engine.js"></script>
     <script>
-        async function deleteLocalQuiz(id) {
-            if (!confirm('Er du sikker på at du vil slette denne lokale kvissen?')) return;
-            QuizEngine.deleteLocalQuiz(id);
-            location.reload(); // Last kviss-liste på nytt
-        }
-
-        (async function() {
+        (async function () {
             const grid = document.getElementById('quiz-grid');
-            try {
-                const manifest = await QuizEngine.loadManifest('quizzes');
-                if (manifest.length === 0) {
-                    grid.innerHTML = '<div class="text-body text-center" style="padding:40px;grid-column:1/-1;">Ingen kvissar tilgjengelege enno.</div>';
-                    return;
-                }
-                grid.innerHTML = '';
-                manifest.forEach(q => {
-                    const card = document.createElement('div');
-                    card.className = 'quiz-card';
-                    card.style.borderLeftWidth = '6px';
-                    card.style.borderLeftColor = q.color || '#000';
 
-                    const tags = (q.tags || []).map(t =>
-                        `<span class="tag tag-subject">${t}</span>`
-                    ).join('');
-
-                    const localBadge = q.local ? '<span class="tag tag-local">📚 Lokal</span>' : '';
-                    const deleteBtn = q.local ? `<button class="btn btn-small btn-danger" onclick="deleteLocalQuiz('${q.id}')" style="text-decoration:none;">🗑️ Slett</button>` : '';
-
-                    card.innerHTML = `
-                        <div class="quiz-card-title">${q.title}</div>
-                        <div class="quiz-card-desc">${q.description}</div>
-                        <div class="quiz-card-meta">
-                            <span class="tag tag-count">${q.questionCount} spørsmål</span>
-                            ${localBadge}
-                            ${tags}
-                        </div>
-                        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
-                            <a href="solo.html?quiz=${q.id}" class="btn btn-small btn-yellow" style="text-decoration:none;">🎯 Øv</a>
-                            <a href="host.html?quiz=${q.id}" class="btn btn-small btn-primary" style="text-decoration:none;">🎮 Start live</a>
-                            ${deleteBtn}
-                        </div>
-                    `;
-                    grid.appendChild(card);
-                });
-            } catch (e) {
-                grid.innerHTML = `<div class="text-body text-center" style="padding:40px;grid-column:1/-1;color:#E74C3C;">Feil ved lasting av kvissar: ${e.message}</div>`;;
+            function deleteLocalQuiz(id, title) {
+                if (!confirm(`Slette den lokale quizen «${title}»?`)) return;
+                QuizEngine.deleteLocalQuiz(id);
+                load();
             }
+
+            function card(q) {
+                const el = document.createElement('div');
+                el.className = 'quiz-card' + (q.local ? ' is-local' : '');
+
+                const title = document.createElement('div');
+                title.className = 'quiz-card-title';
+                title.textContent = q.title;
+
+                const desc = document.createElement('div');
+                desc.className = 'quiz-card-desc';
+                desc.textContent = q.description || '';
+
+                const meta = document.createElement('div');
+                meta.className = 'quiz-card-meta';
+                const count = document.createElement('span');
+                count.className = 'tag tag-count';
+                count.textContent = `${q.questionCount} spørsmål`;
+                meta.appendChild(count);
+                (q.tags || []).forEach(t => {
+                    const tag = document.createElement('span');
+                    tag.className = 'tag tag-subject';
+                    tag.textContent = t;
+                    meta.appendChild(tag);
+                });
+                if (q.local) {
+                    const l = document.createElement('span');
+                    l.className = 'tag tag-local';
+                    l.textContent = 'Lokal';
+                    meta.appendChild(l);
+                }
+
+                const actions = document.createElement('div');
+                actions.className = 'fk-row mt-8';
+                const solo = document.createElement('a');
+                solo.className = 'btn btn-small';
+                solo.href = `solo.html?quiz=${q.id}`;
+                solo.innerHTML = ICON('target', 16) + ' Øv';
+                const live = document.createElement('a');
+                live.className = 'btn btn-small';
+                live.href = `host.html?quiz=${q.id}`;
+                live.innerHTML = ICON('play', 16) + ' Start live';
+                actions.append(solo, live);
+                if (q.local) {
+                    const del = document.createElement('button');
+                    del.className = 'btn btn-small btn-danger';
+                    del.setAttribute('aria-label', `Slett ${q.title}`);
+                    del.innerHTML = ICON('trash', 16) + ' Slett';
+                    del.addEventListener('click', () => deleteLocalQuiz(q.id, q.title));
+                    actions.appendChild(del);
+                }
+
+                el.append(title, desc, meta, actions);
+                return el;
+            }
+
+            async function load() {
+                grid.textContent = '';
+                try {
+                    const manifest = await QuizEngine.loadManifest('quizzes');
+                    if (manifest.length === 0) {
+                        const empty = document.createElement('div');
+                        empty.className = 'fk-error';
+                        empty.textContent = 'Ingen quiz-ar tilgjengelege enno.';
+                        grid.appendChild(empty);
+                        return;
+                    }
+                    manifest.forEach(q => grid.appendChild(card(q)));
+                } catch (e) {
+                    const err = document.createElement('div');
+                    err.className = 'fk-error';
+                    err.textContent = 'Feil ved lasting av quiz-ar: ' + e.message;
+                    grid.appendChild(err);
+                }
+            }
+
+            load();
         })();
     </script>
+    <script src="../js/neobrutalisme.js"></script>
+    <script src="../js/neo-header.js"></script>
 </body>
 </html>

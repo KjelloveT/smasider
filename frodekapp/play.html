@@ -3,127 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frødekapp — Delta i Quiz</title>
+    <title>Frødekapp — Delta i quiz</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="play-body">
-    <div class="container-narrow">
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+    <div class="page-wrapper">
+        <neo-header></neo-header>
+        <main class="main-content">
+            <div class="fk-narrow">
 
-        <!-- SKJERM: Bli med -->
-        <div class="screen active" id="screen-join">
-            <div class="nb-card" style="margin-top:40px;">
-                <div class="text-center mb-24">
-                    <div style="font-size:3rem;">🧠</div>
-                    <h1 style="font-size:2rem;">Frødekapp</h1>
-                    <p class="text-body">Delta i live-quiz</p>
-                </div>
-
-                <div class="form-group">
-                    <label>Romkode</label>
-                    <input type="text" class="form-input" id="input-room-code" placeholder="T.d. AB12" maxlength="6" style="text-align:center;font-size:1.5rem;letter-spacing:4px;text-transform:uppercase;">
-                </div>
-
-                <div class="form-group">
-                    <label>Ditt namn</label>
-                    <input type="text" class="form-input" id="input-player-name" placeholder="Kva heiter du?" maxlength="20">
-                </div>
-
-                <button class="btn btn-primary btn-large" id="btn-join" style="width:100%;">🚀 Bli med</button>
-
-                <div class="mt-16 text-center">
-                    <a href="index.html" class="btn btn-small">← Tilbake</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- SKJERM: Koplar til -->
-        <div class="screen" id="screen-connecting">
-            <div class="nb-card text-center" style="margin-top:80px;">
-                <div class="lobby-dots mb-16">
-                    <div class="lobby-dot"></div>
-                    <div class="lobby-dot"></div>
-                    <div class="lobby-dot"></div>
-                </div>
-                <p class="text-body" style="font-weight:700;" id="connecting-status">Koplar til...</p>
-            </div>
-        </div>
-
-        <!-- SKJERM: Lobby (ventar på start) -->
-        <div class="screen" id="screen-lobby">
-            <div class="nb-card text-center" style="margin-top:60px;">
-                <div style="font-size:2.5rem;margin-bottom:8px;">✅</div>
-                <h2 style="font-size:1.5rem;margin-bottom:4px;" id="lobby-name">—</h2>
-                <p class="text-body mb-8">Du er med i rom <strong id="lobby-room">—</strong></p>
-                <p class="text-body mb-16" id="lobby-player-count">—</p>
-
-                <div class="lobby-screen">
-                    <h3 style="font-size:1.2rem;">⏳ Ventar på at quizen startar</h3>
-                    <div class="lobby-dots mt-16">
-                        <div class="lobby-dot"></div>
-                        <div class="lobby-dot"></div>
-                        <div class="lobby-dot"></div>
+                <!-- SKJERM: Bli med -->
+                <div class="screen active" id="screen-join">
+                    <div class="box2 hero-box">
+                        <img src="../_resources/frødekapp.png" alt="Frødekapp" class="hero-logo">
+                        <div class="hero-text">
+                            <h1>Delta i quiz</h1>
+                            <p>Skriv inn romkoden frå tavla og namnet ditt.</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- SKJERM: Spørsmål -->
-        <div class="screen" id="screen-question">
-            <div class="flex justify-between items-center mb-8" style="flex-wrap:wrap;gap:8px;">
-                <span class="status-badge waiting" id="play-q-number">Spørsmål 1 / 10</span>
-                <span class="status-badge" style="background:#FDFD96;" id="play-score">0 poeng</span>
-            </div>
-
-            <div class="nb-card mb-16">
-                <div class="timer-display mb-8" id="play-timer">20</div>
-                <div style="font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;line-height:1.3;text-align:center;" id="play-q-text">—</div>
-            </div>
-
-            <div id="play-answers"></div>
-
-            <div class="hidden text-center mt-16" id="play-feedback">
-                <div style="font-weight:900;font-size:1.1rem;" id="play-feedback-text"></div>
-            </div>
-
-            <div class="hidden mt-16" id="play-reveal-section">
-                <div class="text-center mb-8" style="font-weight:900;font-size:1.1rem;" id="play-your-rank">—</div>
-                <div id="play-mini-leaderboard"></div>
-            </div>
-        </div>
-
-        <!-- SKJERM: Slutt -->
-        <div class="screen" id="screen-end">
-            <div class="text-center" style="margin-top:40px;">
-                <h1 style="font-size:2rem;margin-bottom:16px;">🏆 Quiz ferdig!</h1>
-
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
-                    <div class="nb-card text-center">
-                        <div style="font-size:2.5rem;font-weight:900;" id="end-your-score">0</div>
-                        <div class="text-body" style="font-size:0.85rem;">POENG</div>
-                    </div>
-                    <div class="nb-card text-center">
-                        <div style="font-size:2.5rem;font-weight:900;" id="end-your-rank">—</div>
-                        <div class="text-body" style="font-size:0.85rem;">PLASSERING</div>
+                    <div class="box1">
+                        <div class="form-group">
+                            <label for="input-room-code">Romkode</label>
+                            <input type="text" class="form-input room-input" id="input-room-code" placeholder="T.d. AB12" maxlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-player-name">Ditt namn</label>
+                            <input type="text" class="form-input" id="input-player-name" placeholder="Kva heiter du?" maxlength="20">
+                        </div>
+                        <button class="btn full-width" id="btn-join"><span data-icon="rocket" data-icon-size="20"></span> Bli med</button>
                     </div>
                 </div>
 
-                <div id="end-podium" class="mb-24"></div>
-
-                <div class="section-label">📋 Alle resultat</div>
-                <div class="nb-card" id="end-leaderboard"></div>
-
-                <div class="mt-24">
-                    <button class="btn btn-primary btn-large" id="btn-play-again" style="width:100%;">🔄 Spel igjen</button>
+                <!-- SKJERM: Koplar til -->
+                <div class="screen" id="screen-connecting">
+                    <div class="box1 text-center">
+                        <div class="lobby-dots mb-16">
+                            <div class="lobby-dot"></div><div class="lobby-dot"></div><div class="lobby-dot"></div>
+                        </div>
+                        <p style="font-weight:800;" id="connecting-status">Koplar til…</p>
+                    </div>
                 </div>
-            </div>
-        </div>
 
+                <!-- SKJERM: Lobby -->
+                <div class="screen" id="screen-lobby">
+                    <div class="box1 text-center">
+                        <span data-icon="check" data-icon-size="40"></span>
+                        <h2 class="heading3 no-mt" id="lobby-name">—</h2>
+                        <p class="mb-8">Du er med i rom <strong id="lobby-room">—</strong></p>
+                        <p class="mb-16" id="lobby-player-count" aria-live="polite">—</p>
+                        <div class="lobby-screen">
+                            <h3 class="heading4 no-mt">Ventar på at quizen startar</h3>
+                            <div class="lobby-dots">
+                                <div class="lobby-dot"></div><div class="lobby-dot"></div><div class="lobby-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SKJERM: Spørsmål -->
+                <div class="screen" id="screen-question">
+                    <div class="fk-row between mb-8">
+                        <span class="status-badge waiting" id="play-q-number">Spørsmål 1 / 10</span>
+                        <span class="status-badge" id="play-score" aria-live="polite">0 poeng</span>
+                    </div>
+
+                    <div class="box1 text-center mb-16">
+                        <div class="timer-display mb-8" id="play-timer">20</div>
+                        <div style="font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;line-height:1.3;" id="play-q-text">—</div>
+                    </div>
+
+                    <div id="play-answers"></div>
+
+                    <div class="hidden text-center mt-16" id="play-feedback" aria-live="polite">
+                        <div id="play-feedback-text"></div>
+                    </div>
+
+                    <div class="hidden mt-16" id="play-reveal-section">
+                        <div class="text-center mb-8" style="font-weight:900;font-size:1.1rem;" id="play-your-rank">—</div>
+                        <div id="play-mini-leaderboard"></div>
+                    </div>
+                </div>
+
+                <!-- SKJERM: Slutt -->
+                <div class="screen" id="screen-end">
+                    <div class="text-center fk-stack">
+                        <h1 class="heading1 no-mt">Quiz ferdig!</h1>
+                        <div class="stat-grid stat-grid-2">
+                            <div class="box1 stat-box">
+                                <div class="stat-num" id="end-your-score">0</div>
+                                <div class="stat-label">Poeng</div>
+                            </div>
+                            <div class="box1 stat-box">
+                                <div class="stat-num" id="end-your-rank">—</div>
+                                <div class="stat-label">Plassering</div>
+                            </div>
+                        </div>
+                        <div id="end-podium"></div>
+                        <h2 class="heading3">Alle resultat</h2>
+                        <div class="box1" id="end-leaderboard"></div>
+                        <button class="btn full-width" id="btn-play-again"><span data-icon="refresh" data-icon-size="20"></span> Spel igjen</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
     </div>
 
-    <script src="lib/peerjs.min.js"></script>
+    <script src="../js/vyrdepil-storage.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/storage.js"></script>
     <script src="js/quiz-engine.js"></script>
     <script src="js/ui.js"></script>
+    <script src="lib/peerjs.min.js"></script>
     <script src="js/peer-player.js"></script>
     <script src="js/player.js"></script>
+    <script src="../js/neobrutalisme.js"></script>
+    <script src="../js/neo-header.js"></script>
 </body>
 </html>

@@ -35,8 +35,8 @@ class PlayerGame {
             e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
         });
 
-        // Last siste namn frå localStorage
-        const savedName = localStorage.getItem('frodekapp_player_name');
+        // Last siste namn via VyrdepilStorage
+        const savedName = FKStorage.getPlayerName();
         if (savedName) {
             document.getElementById('input-player-name').value = savedName;
         }
@@ -63,7 +63,7 @@ class PlayerGame {
         }
 
         // Lagre namn
-        localStorage.setItem('frodekapp_player_name', this.playerName);
+        FKStorage.savePlayerName(this.playerName);
 
         // Vis koplar-til skjerm
         UI.showScreen('screen-connecting');
@@ -180,18 +180,23 @@ class PlayerGame {
 
         // Vis ventar-melding
         UI.toggle('play-feedback', true);
-        UI.setText('play-feedback-text', '⏳ Svar sendt — ventar på resultat...');
-        document.getElementById('play-feedback-text').style.color = '#3498DB';
+        this.setFeedback('hourglass', 'Svar sendt — ventar på resultat…', 'wait');
+    }
+
+    setFeedback(icon, text, kind) {
+        const el = document.getElementById('play-feedback-text');
+        el.className = 'fk-feedback ' + kind;
+        el.textContent = '';
+        el.appendChild(ICON_EL(icon, 20));
+        el.append(' ' + text);
     }
 
     showAnswerFeedback(data) {
         UI.toggle('play-feedback', true);
         if (data.isCorrect) {
-            UI.setText('play-feedback-text', `✅ Rett! +${data.points} poeng`);
-            document.getElementById('play-feedback-text').style.color = '#2ECC71';
+            this.setFeedback('check', `Rett! +${data.points} poeng`, 'ok');
         } else {
-            UI.setText('play-feedback-text', `❌ Feil — ventar på rett svar...`);
-            document.getElementById('play-feedback-text').style.color = '#E74C3C';
+            this.setFeedback('x', 'Feil — ventar på rett svar…', 'bad');
         }
     }
 
@@ -243,8 +248,7 @@ class PlayerGame {
 
         if (!this.hasAnswered) {
             UI.toggle('play-feedback', true);
-            UI.setText('play-feedback-text', '⏰ Tida er ute!');
-            document.getElementById('play-feedback-text').style.color = '#E74C3C';
+            this.setFeedback('hourglass', 'Tida er ute!', 'bad');
         }
     }
 }

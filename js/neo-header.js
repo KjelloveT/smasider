@@ -12,6 +12,7 @@ class NeoHeader extends HTMLElement {
     this.render();
     this.attachStyles();
     this.attachEventListeners();
+    this.buildMenu();
   }
 
   render() {
@@ -19,6 +20,7 @@ class NeoHeader extends HTMLElement {
     const scriptTag = document.querySelector('script[src*="neo-header.js"]');
     const src = scriptTag ? scriptTag.getAttribute('src') : '';
     const basePath = src.startsWith('../') ? '../' : '';
+    this.basePath = basePath;
 
     this.shadowRoot.innerHTML = `
       <header class="site-header">
@@ -28,41 +30,7 @@ class NeoHeader extends HTMLElement {
           <div class="header-actions">
             <div class="tools-dropdown">
               <button class="tools-dropdown-btn" id="toolsDropdownBtn"><svg width="18" height="18" style="vertical-align: -3px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> <span>Meny</span> ▾</button>
-              <div class="tools-dropdown-menu" id="toolsMenu">
-                <div class="tools-category">Spel</div>
-                <div class="tools-grid-wrapper">
-                  <a href="${basePath}kludre_klodrian/index.html" class="tools-dropdown-item">Kludre Klodrian</a>
-                  <a href="${basePath}ordsmia/index.html" class="tools-dropdown-item">Ordsmia</a>
-                  <a href="${basePath}talsmia/index.html" class="tools-dropdown-item">Talsmia</a>
-                  <a href="${basePath}heimsank/index.html" class="tools-dropdown-item">Heimsank</a>
-                  <a href="${basePath}reknedaesj/index.html" class="tools-dropdown-item">Reknedæsj</a>
-                  <a href="${basePath}rettslause_raud/index.html" class="tools-dropdown-item">Rettslause Raud</a>
-                  <a href="${basePath}baretevling/index.html" class="tools-dropdown-item">BåreTevling</a>
-                  <a href="${basePath}tidvis/index.html" class="tools-dropdown-item">Tidvis</a>
-                </div>
-
-                <div class="tools-category">Klasserom</div>
-                <div class="tools-grid-wrapper">
-                  <a href="${basePath}frodekapp/index.html" class="tools-dropdown-item">Frødekapp</a>
-                  <a href="${basePath}frodebrett/index.html" class="tools-dropdown-item">Frødebrett</a>
-                  <a href="${basePath}frødesams/index.html" class="tools-dropdown-item">Frødesams</a>
-                  <a href="${basePath}etikk-test/index.html" class="tools-dropdown-item">Etikktesten</a>
-                  <a href="${basePath}heite_stavrim/index.html" class="tools-dropdown-item">Heite Stavrim</a>
-                  <a href="${basePath}ordaklok/index.html" class="tools-dropdown-item">Ordaklok</a>
-                  <a href="${basePath}dagsvegen/index.html" class="tools-dropdown-item">Dagsvegen</a>
-                </div>
-
-                <div class="tools-category">Verktøy</div>
-                <div class="tools-grid-wrapper">
-                  <a href="${basePath}fotocollage/fotocollage.html" class="tools-dropdown-item">BiletFlett</a>
-                  <a href="${basePath}fotocolours/index.html" class="tools-dropdown-item">Reinskore bilete</a>
-                  <a href="${basePath}klassekart/index.html" class="tools-dropdown-item">Klassekart</a>
-                  <a href="${basePath}flokkdeilar/index.html" class="tools-dropdown-item">Flokkdeilar</a>
-                  <a href="${basePath}eikekveik/index.html" class="tools-dropdown-item">Eikekveik</a>
-                  <a href="${basePath}ordskodde/index.html" class="tools-dropdown-item">Ordskodde</a>
-                  <a href="${basePath}bildebehandling/index.html" class="tools-dropdown-item">Handsam bilete</a>
-                </div>
-              </div>
+              <div class="tools-dropdown-menu" id="toolsMenu"></div>
             </div>
 
             <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Skift mellom lys og mørkt tema">
@@ -77,34 +45,52 @@ class NeoHeader extends HTMLElement {
         
         <div class="mobile-nav-container" id="mobileNav">
           <div class="mobile-nav-inner">
-            <div class="mobile-nav-grid">
-              <a href="${basePath}ordsmia/index.html">Ordsmia</a>
-              <a href="${basePath}talsmia/index.html">Talsmia</a>
-              <a href="${basePath}heimsank/index.html">Heimsank</a>
-              <a href="${basePath}reknedaesj/index.html">Reknedæsj</a>
-              <a href="${basePath}kludre_klodrian/index.html">Kludre Klodrian</a>
-              <a href="${basePath}rettslause_raud/index.html">Rettslause Raud</a>
-              <a href="${basePath}baretevling/index.html">BåreTevling</a>
-              <a href="${basePath}tidvis/index.html">Tidvis</a>
-              <a href="${basePath}frodekapp/index.html">Frødekapp</a>
-              <a href="${basePath}frodebrett/index.html">Frødebrett</a>
-              <a href="${basePath}frødesams/index.html">Frødesams</a>
-              <a href="${basePath}etikk-test/index.html">Etikktesten</a>
-              <a href="${basePath}ordaklok/index.html">Ordaklok</a>
-              <a href="${basePath}heite_stavrim/index.html">Heite Stavrim</a>
-              <a href="${basePath}dagsvegen/index.html">Dagsvegen</a>
-              <a href="${basePath}fotocollage/fotocollage.html">BiletFlett</a>
-              <a href="${basePath}fotocolours/index.html">Reinskore bilete</a>
-              <a href="${basePath}klassekart/index.html">Klassekart</a>
-              <a href="${basePath}flokkdeilar/index.html">Flokkdeilar</a>
-              <a href="${basePath}eikekveik/index.html">Eikekveik</a>
-              <a href="${basePath}ordskodde/index.html">Ordskodde</a>
-              <a href="${basePath}bildebehandling/index.html">Handsam bilete</a>
-            </div>
+            <div class="mobile-nav-grid" id="mobileNavGrid"></div>
           </div>
         </div>
       </header>
     `;
+  }
+
+  buildMenu() {
+    const base = this.basePath || '';
+    const menu = this.shadowRoot.getElementById('toolsMenu');
+    const mobileGrid = this.shadowRoot.getElementById('mobileNavGrid');
+    fetch(base + 'json/apps.json')
+      .then(r => r.json())
+      .then(data => {
+        const cats = data.categories || [];
+        const apps = (data.apps || []).filter(a => !a.disabled && a.href);
+
+        // Dropdown (desktop): kategoriar som på framsida
+        let html = '';
+        cats.forEach(cat => {
+          const items = apps.filter(a => a.cat === cat.id);
+          if (!items.length) return;
+          html += `<div class="tools-category">${cat.menuLabel || cat.label}</div><div class="tools-grid-wrapper">`;
+          items.forEach(a => { html += `<a href="${base}${a.href}" class="tools-dropdown-item">${a.name}</a>`; });
+          html += `</div>`;
+        });
+        html += `<div class="tools-category">Meir</div><div class="tools-grid-wrapper">`
+          + `<a href="${base}index.html" class="tools-dropdown-item">Heim</a>`
+          + `<a href="${base}personvern.html" class="tools-dropdown-item">Personvern</a></div>`;
+        if (menu) menu.innerHTML = html;
+
+        // Mobilmeny: flat liste + personvern
+        if (mobileGrid) {
+          let m = '';
+          apps.forEach(a => { m += `<a href="${base}${a.href}">${a.name}</a>`; });
+          m += `<a href="${base}personvern.html">Personvern</a>`;
+          mobileGrid.innerHTML = m;
+          const hb = this.shadowRoot.getElementById('hamburgerBtn');
+          const mn = this.shadowRoot.getElementById('mobileNav');
+          mobileGrid.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+            if (hb) hb.classList.remove('open');
+            if (mn) mn.classList.remove('open');
+          }));
+        }
+      })
+      .catch(e => console.error('neo-header: klarte ikkje laste json/apps.json:', e));
   }
 
   attachStyles() {

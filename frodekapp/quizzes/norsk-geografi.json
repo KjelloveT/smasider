@@ -1,4 +1,6 @@
 {
+  "app": "frodekapp",
+  "version": 1,
   "id": "norsk-geografi",
   "title": "Norsk geografi",
   "description": "Test kunnskapen din om Noregs geografi — fjordar, fjell, byar og meir!",

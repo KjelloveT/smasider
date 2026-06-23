@@ -1,5 +1,6 @@
 /* ══════════════════════════════════════════════
    FRØDEKAPP — Delt UI-hjelpefunksjonar
+   Rendring med neobrutalisme-klassar og Lucide-ikon.
    ══════════════════════════════════════════════ */
 
 const UI = {
@@ -15,8 +16,6 @@ const UI = {
 
     /**
      * Sett tekst-innhald på eit element
-     * @param {string} id
-     * @param {string} text
      */
     setText(id, text) {
         const el = document.getElementById(id);
@@ -24,19 +23,7 @@ const UI = {
     },
 
     /**
-     * Sett HTML-innhald på eit element
-     * @param {string} id
-     * @param {string} html
-     */
-    setHTML(id, html) {
-        const el = document.getElementById(id);
-        if (el) el.innerHTML = html;
-    },
-
-    /**
      * Vis/gøym eit element
-     * @param {string} id
-     * @param {boolean} visible
      */
     toggle(id, visible) {
         const el = document.getElementById(id);
@@ -45,12 +32,26 @@ const UI = {
 
     /**
      * Aktiver/deaktiver ein knapp
-     * @param {string} id
-     * @param {boolean} enabled
      */
     enableBtn(id, enabled) {
         const el = document.getElementById(id);
         if (el) el.disabled = !enabled;
+    },
+
+    /**
+     * Sett svar-ikon (Lucide-form) + tekst på ein svarknapp-node.
+     * @param {HTMLElement} node
+     * @param {number} i - svar-indeks (0-3)
+     * @param {string} text
+     */
+    _fillAnswer(node, i, text) {
+        const icon = document.createElement('span');
+        icon.className = 'answer-icon';
+        icon.innerHTML = ICON(ANSWER_ICON_NAMES[i], 26);
+        const label = document.createElement('span');
+        label.className = 'answer-label';
+        label.textContent = text;
+        node.append(icon, label);
     },
 
     /**
@@ -66,7 +67,7 @@ const UI = {
         options.forEach((text, i) => {
             const btn = document.createElement('button');
             btn.className = `answer-btn ${QuizEngine.ANSWER_CLASSES[i]}`;
-            btn.innerHTML = `<span class="answer-icon">${QuizEngine.ANSWER_ICONS[i]}</span> ${this.escapeHTML(text)}`;
+            this._fillAnswer(btn, i, text);
             btn.addEventListener('click', () => onClick(i));
             grid.appendChild(btn);
         });
@@ -76,8 +77,6 @@ const UI = {
 
     /**
      * Lag svaralternativ for vert-visning (ikkje klikkbare)
-     * @param {string[]} options
-     * @returns {HTMLElement}
      */
     createAnswerGridDisplay(options) {
         const grid = document.createElement('div');
@@ -86,7 +85,7 @@ const UI = {
         options.forEach((text, i) => {
             const div = document.createElement('div');
             div.className = `answer-btn ${QuizEngine.ANSWER_CLASSES[i]}`;
-            div.innerHTML = `<span class="answer-icon">${QuizEngine.ANSWER_ICONS[i]}</span> ${this.escapeHTML(text)}`;
+            this._fillAnswer(div, i, text);
             grid.appendChild(div);
         });
 
@@ -95,9 +94,6 @@ const UI = {
 
     /**
      * Marker rett/feil svar i eit answer-grid
-     * @param {HTMLElement} grid
-     * @param {number} correctIndex
-     * @param {number|null} selectedIndex
      */
     revealAnswers(grid, correctIndex, selectedIndex) {
         const btns = grid.querySelectorAll('.answer-btn');
@@ -109,8 +105,7 @@ const UI = {
                 btn.classList.add('incorrect');
             }
             if (i === selectedIndex && i !== correctIndex) {
-                btn.style.outline = '4px solid #E74C3C';
-                btn.style.outlineOffset = '-4px';
+                btn.classList.add('selected-wrong');
             }
         });
     },
@@ -125,22 +120,29 @@ const UI = {
         const container = document.createElement('div');
         container.className = 'leaderboard';
 
-        const rows = leaderboard.slice(0, maxRows);
-        rows.forEach((p, i) => {
+        const rankClasses = ['gold', 'silver', 'bronze'];
+        leaderboard.slice(0, maxRows).forEach((p, i) => {
             const row = document.createElement('div');
             row.className = 'lb-row';
-            if (i === 0) row.classList.add('gold');
-            else if (i === 1) row.classList.add('silver');
-            else if (i === 2) row.classList.add('bronze');
+            if (i < 3) row.classList.add(rankClasses[i]);
 
-            const medals = ['🥇', '🥈', '🥉'];
-            const rankText = i < 3 ? medals[i] : `${p.rank}.`;
+            const rank = document.createElement('span');
+            rank.className = 'lb-rank';
+            if (i < 3) {
+                rank.innerHTML = ICON('medal', 24);
+            } else {
+                rank.textContent = `${p.rank}.`;
+            }
 
-            row.innerHTML = `
-                <span class="lb-rank">${rankText}</span>
-                <span class="lb-name">${this.escapeHTML(p.name)}</span>
-                <span class="lb-score">${p.score}</span>
-            `;
+            const name = document.createElement('span');
+            name.className = 'lb-name';
+            name.textContent = p.name;
+
+            const score = document.createElement('span');
+            score.className = 'lb-score';
+            score.textContent = p.score;
+
+            row.append(rank, name, score);
             container.appendChild(row);
         });
 
@@ -149,32 +151,37 @@ const UI = {
 
     /**
      * Bygg podium (topp 3)
-     * @param {Array} leaderboard
-     * @returns {HTMLElement}
      */
     createPodium(leaderboard) {
         const podium = document.createElement('div');
         podium.className = 'podium';
 
         const places = [
-            { index: 1, cls: 'second', medal: '🥈' },
-            { index: 0, cls: 'first',  medal: '🥇' },
-            { index: 2, cls: 'third',  medal: '🥉' }
+            { index: 1, cls: 'second' },
+            { index: 0, cls: 'first' },
+            { index: 2, cls: 'third' }
         ];
 
-        places.forEach(({ index, cls, medal }) => {
+        places.forEach(({ index, cls }) => {
             const p = leaderboard[index];
             const place = document.createElement('div');
             place.className = `podium-place ${cls}`;
 
+            const medal = document.createElement('div');
+            medal.className = 'podium-medal';
+            medal.innerHTML = ICON(index === 0 ? 'trophy' : 'medal', 36);
+            place.appendChild(medal);
+
+            const name = document.createElement('div');
+            name.className = 'podium-name';
+            name.textContent = p ? p.name : '—';
+            place.appendChild(name);
+
             if (p) {
-                place.innerHTML = `
-                    <div class="podium-medal">${medal}</div>
-                    <div class="podium-name">${this.escapeHTML(p.name)}</div>
-                    <div class="podium-score">${p.score} poeng</div>
-                `;
-            } else {
-                place.innerHTML = `<div class="podium-medal">${medal}</div><div class="podium-name">—</div>`;
+                const score = document.createElement('div');
+                score.className = 'podium-score';
+                score.textContent = `${p.score} poeng`;
+                place.appendChild(score);
             }
 
             podium.appendChild(place);
@@ -185,11 +192,7 @@ const UI = {
 
     /**
      * Start ein nedteljing og oppdater eit element
-     * @param {string} elementId
-     * @param {number} seconds
-     * @param {function} onTick - callback(remaining)
-     * @param {function} onDone - callback()
-     * @returns {{ stop: function }} kontrollobjekt
+     * @returns {{ stop: function, getRemaining: function }}
      */
     startTimer(elementId, seconds, onTick, onDone) {
         const el = document.getElementById(elementId);
@@ -216,77 +219,42 @@ const UI = {
         }, 1000);
 
         return {
-            stop() {
-                clearInterval(intervalId);
-            },
-            getRemaining() {
-                return remaining;
-            }
+            stop() { clearInterval(intervalId); },
+            getRemaining() { return remaining; }
         };
     },
 
     /**
-     * Generer ein enkel QR-kode som canvas (utan eksterne bibliotek)
-     * Forenkla: viser berre romkoden som stor tekst med instruksjonar
-     * @param {string} roomCode
-     * @param {string} url
-     * @returns {HTMLElement}
-     */
-    createRoomDisplay(roomCode, url) {
-        const box = document.createElement('div');
-        box.className = 'room-code-box';
-        box.innerHTML = `
-            <div style="font-weight:900;font-size:0.9rem;text-transform:uppercase;letter-spacing:1px;">Romkode</div>
-            <div class="room-code">${this.escapeHTML(roomCode)}</div>
-            <div class="text-body" style="font-size:0.9rem;margin-top:8px;">
-                Gå til <strong>${this.escapeHTML(url)}</strong><br>
-                og skriv inn koden over
-            </div>
-        `;
-        return box;
-    },
-
-    /**
-     * Vis ei kort melding (toast)
+     * Vis ei kort melding (toast). Tekst via textContent.
      * @param {string} text
-     * @param {string} [type='info'] - 'info', 'success', 'error'
+     * @param {string} [type='info'] - 'info' | 'success' | 'error'
      */
     toast(text, type = 'info') {
         const existing = document.getElementById('fk-toast');
         if (existing) existing.remove();
 
-        const colors = { info: '#3498DB', success: '#2ECC71', error: '#E74C3C' };
         const toast = document.createElement('div');
         toast.id = 'fk-toast';
-        toast.textContent = text;
-        Object.assign(toast.style, {
-            position: 'fixed',
-            bottom: '24px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: colors[type] || colors.info,
-            color: '#fff',
-            border: '3px solid #000',
-            boxShadow: '4px 4px 0 #000',
-            padding: '12px 28px',
-            fontFamily: "'Arial Black', Arial, sans-serif",
-            fontWeight: '900',
-            fontSize: '0.95rem',
-            zIndex: '9999',
-            transition: 'opacity 0.3s'
-        });
+        toast.className = `fk-toast ${type}`;
+        toast.setAttribute('role', 'status');
+        toast.setAttribute('aria-live', 'polite');
+
+        const icon = document.createElement('span');
+        icon.className = 'fk-toast-icon';
+        icon.innerHTML = ICON(type === 'success' ? 'check' : type === 'error' ? 'alert' : 'list', 18);
+        const label = document.createElement('span');
+        label.textContent = text;
+        toast.append(icon, label);
 
         document.body.appendChild(toast);
         setTimeout(() => {
-            toast.style.opacity = '0';
+            toast.classList.add('leaving');
             setTimeout(() => toast.remove(), 300);
         }, 2500);
     },
 
     /**
-     * Escape HTML for sikker rendering
-     * @param {string} str
-     * @returns {string}
+     * Escape HTML for sikker rendering (brukt der innerHTML er naudsynt)
      */
     escapeHTML(str) {
         if (!str) return '';
@@ -297,9 +265,6 @@ const UI = {
 
     /**
      * Lag ein spelar-chip
-     * @param {string} name
-     * @param {boolean} isHost
-     * @returns {HTMLElement}
      */
     createPlayerChip(name, isHost = false) {
         const chip = document.createElement('span');
@@ -309,25 +274,24 @@ const UI = {
     },
 
     /**
-     * Oppdater spelar-liste
-     * @param {string} containerId
-     * @param {Array} players - [{name, ...}]
+     * Oppdater spelar-liste (DOM-API, ingen innerHTML med data)
      */
     updatePlayerList(containerId, players) {
         const container = document.getElementById(containerId);
         if (!container) return;
-        container.innerHTML = '';
+        container.textContent = '';
 
         if (players.length === 0) {
-            container.innerHTML = '<div class="text-body text-center" style="padding:20px;color:#666;">Ingen spelarar tilkopla enno</div>';
+            const empty = document.createElement('div');
+            empty.className = 'fk-empty';
+            empty.textContent = 'Ingen spelarar tilkopla enno';
+            container.appendChild(empty);
             return;
         }
 
         const list = document.createElement('div');
         list.className = 'player-list';
-        players.forEach(p => {
-            list.appendChild(this.createPlayerChip(p.name));
-        });
+        players.forEach(p => list.appendChild(this.createPlayerChip(p.name)));
         container.appendChild(list);
     }
 };

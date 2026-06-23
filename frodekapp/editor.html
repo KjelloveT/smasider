@@ -4,127 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frødekapp — Quiz-editor</title>
+    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .question-item.drag-over {
-            border-color: #3498DB;
-            box-shadow: 0 0 0 3px #3498DB;
-        }
-        #preview-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 100;
-            overflow-y: auto;
-            padding: 40px 20px;
-        }
-        #preview-overlay .preview-inner {
-            max-width: 700px;
-            margin: 0 auto;
-            background: #fff;
-            border: 3px solid #000;
-            box-shadow: 7px 7px 0 #000;
-            padding: 30px;
-        }
-    </style>
 </head>
-<body>
-    <div class="container">
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+    <div class="page-wrapper">
+        <neo-header></neo-header>
+        <main class="main-content">
 
-        <header class="page-header">
-            <div class="header-inner">
-                <span class="header-icon">📝</span>
-                <div>
+            <div class="box2 hero-box">
+                <img src="../_resources/frødekapp.png" alt="Frødekapp" class="hero-logo">
+                <div class="hero-text">
                     <h1>Quiz-editor</h1>
-                    <p class="subtitle">Lag din eigen quiz — last ned og del med andre</p>
+                    <p>Lag din eigen quiz — last ned som fil, eller lagre i det lokale biblioteket.</p>
                 </div>
             </div>
-            <div class="header-stripe"></div>
-        </header>
 
-        <!-- Quiz-metadata -->
-        <div class="nb-card mb-24">
-            <div class="section-label mb-16">📋 Quiz-info</div>
-            <div class="form-group">
-                <label>Tittel</label>
-                <input type="text" class="form-input" id="quiz-title" placeholder="T.d. Norsk geografi">
-            </div>
-            <div class="form-group">
-                <label>Skildring</label>
-                <textarea class="form-input" id="quiz-desc" placeholder="Kort skildring av quizen..." rows="2"></textarea>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <!-- Quiz-metadata -->
+            <div class="box1">
+                <h2 class="heading3 no-mt">Quiz-info</h2>
                 <div class="form-group">
-                    <label>Forfattar</label>
-                    <input type="text" class="form-input" id="quiz-author" placeholder="Ditt namn">
+                    <label for="quiz-title">Tittel</label>
+                    <input type="text" class="form-input" id="quiz-title" placeholder="T.d. Norsk geografi">
                 </div>
                 <div class="form-group">
-                    <label>Taggar (kommaseparert)</label>
-                    <input type="text" class="form-input" id="quiz-tags" placeholder="t.d. geografi, noreg, 5. trinn">
+                    <label for="quiz-desc">Skildring</label>
+                    <textarea class="form-input" id="quiz-desc" placeholder="Kort skildring av quizen…" rows="2"></textarea>
+                </div>
+                <div class="q-footer">
+                    <div class="form-group">
+                        <label for="quiz-author">Forfattar</label>
+                        <input type="text" class="form-input" id="quiz-author" placeholder="Ditt namn">
+                    </div>
+                    <div class="form-group">
+                        <label for="quiz-tags">Taggar (kommaseparert)</label>
+                        <input type="text" class="form-input" id="quiz-tags" placeholder="t.d. geografi, noreg, 5. trinn">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="upload-json">Last opp eksisterande quiz (JSON)</label>
+                    <input type="file" id="upload-json" accept=".json">
                 </div>
             </div>
-            <div class="form-group">
-                <label>Last opp eksisterande quiz (JSON)</label>
-                <input type="file" id="upload-json" accept=".json" style="font-family:Arial,sans-serif;font-size:0.9rem;">
+
+            <!-- Spørsmål -->
+            <div class="fk-row between mt-24 mb-16">
+                <h2 class="heading3 no-mt">Spørsmål <span id="question-count">0</span></h2>
+                <button class="btn" id="btn-add-question"><span data-icon="plus" data-icon-size="18"></span> Legg til spørsmål</button>
             </div>
-        </div>
 
-        <!-- Spørsmål-liste -->
-        <div class="flex justify-between items-center mb-16" style="flex-wrap:wrap;gap:8px;">
-            <div class="section-label" style="margin-bottom:0;">❓ Spørsmål <span id="question-count">0</span></div>
-            <button class="btn btn-primary" id="btn-add-question">+ Legg til spørsmål</button>
-        </div>
+            <div id="questions-list"></div>
 
-        <div id="questions-list"></div>
+            <div class="mt-16">
+                <button class="btn full-width" id="btn-add-question-bottom"><span data-icon="plus" data-icon-size="18"></span> Legg til spørsmål</button>
+            </div>
 
-        <div class="mt-16">
-            <button class="btn btn-primary" id="btn-add-question-bottom" style="width:100%;">+ Legg til spørsmål</button>
-        </div>
+            <!-- Verktøylinje -->
+            <div class="box1 fk-row mt-24">
+                <button class="btn" id="btn-download"><span data-icon="download" data-icon-size="18"></span> Last ned JSON</button>
+                <button class="btn" id="btn-save-local"><span data-icon="library" data-icon-size="18"></span> Lagre til bibliotek</button>
+                <button class="btn" id="btn-preview"><span data-icon="eye" data-icon-size="18"></span> Førehandsvising</button>
+                <button class="btn" id="btn-save-draft"><span data-icon="save" data-icon-size="18"></span> Lagre utkast</button>
+                <button class="btn" id="btn-load-draft"><span data-icon="folderOpen" data-icon-size="18"></span> Last utkast</button>
+            </div>
 
-        <!-- Verktøylinje -->
-        <div class="nb-card mt-24" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-            <button class="btn btn-primary" id="btn-download">⬇ Last ned JSON</button>
-            <button class="btn btn-purple" id="btn-save-local">📚 Lagre til bibliotek</button>
-            <button class="btn btn-blue" id="btn-preview">👁 Førehandsvising</button>
-            <button class="btn btn-yellow" id="btn-save-draft">💾 Lagre utkast</button>
-            <button class="btn" id="btn-load-draft">📂 Last utkast</button>
-            <a href="index.html" class="btn btn-small" style="margin-left:auto;">← Tilbake</a>
-        </div>
-
+        </main>
     </div>
 
-    <!-- Førehandsvising overlay -->
-    <div class="hidden" id="preview-overlay">
+    <!-- Førehandsvising -->
+    <div id="preview-overlay" role="dialog" aria-modal="true" aria-label="Førehandsvising">
         <div class="preview-inner">
-            <div class="flex justify-between items-center mb-16">
-                <h2 style="font-size:1.3rem;">👁 Førehandsvising</h2>
-                <button class="btn btn-small btn-danger" id="btn-close-preview">✕ Lukk</button>
+            <div class="preview-head">
+                <h2 class="heading3 no-mt">Førehandsvising</h2>
+                <button class="btn btn-small btn-danger" id="btn-close-preview" aria-label="Lukk førehandsvising"><span data-icon="x" data-icon-size="16"></span> Lukk</button>
             </div>
             <div id="preview-content"></div>
         </div>
     </div>
 
+    <script src="../js/vyrdepil-storage.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/storage.js"></script>
     <script src="js/quiz-engine.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/editor.js"></script>
-    <script>
-        // Bind ekstra knappar etter at editor er initialisert
-        let editor;
-        document.addEventListener('DOMContentLoaded', () => {
-            editor = new QuizEditor();
-            window.editor = editor; // Gjør global for onclick i HTML
-            
-            // Bind ekstra "legg til"-knapp nederst
-            document.getElementById('btn-add-question-bottom').addEventListener('click', () => {
-                editor.syncFromForm();
-                editor.addQuestion();
-            });
-
-            // Bind lukk preview
-            document.getElementById('btn-close-preview').addEventListener('click', () => {
-                document.getElementById('preview-overlay').classList.add('hidden');
-            });
-        });
-    </script>
+    <script src="../js/neobrutalisme.js"></script>
+    <script src="../js/neo-header.js"></script>
 </body>
 </html>

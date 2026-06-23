@@ -1,19 +1,14 @@
 /* ══════════════════════════════════════════════
-   FRØDEKAPP — Solo-øving
-   Spel ein quiz åleine med poeng og tidtaking
+   FRØDEKAPP — Soloøving
+   Tynn visningsklasse oppå QuizRunner (delt motor).
    ══════════════════════════════════════════════ */
 
 class SoloGame {
     constructor() {
-        this.quiz = null;
-        this.currentIndex = 0;
-        this.score = 0;
-        this.streak = 0;
-        this.answers = [];
+        this.runner = null;
         this.timer = null;
         this.questionStartTime = 0;
-        this.selectedAnswer = null;
-
+        this.locked = false;
         this.init();
     }
 
@@ -28,11 +23,7 @@ class SoloGame {
                     const data = JSON.parse(ev.target.result);
                     const v = QuizEngine.validateQuiz(data);
                     if (!v.valid) { UI.toast('Ugyldig quiz: ' + v.errors[0], 'error'); return; }
-                    this.quiz = data;
-                    UI.setText('ready-title', data.title);
-                    UI.setText('ready-desc', data.description);
-                    UI.setText('ready-count', `${data.questions.length} spørsmål`);
-                    UI.showScreen('screen-ready');
+                    this.setQuiz(data);
                     UI.toast('Quiz lasta frå fil!', 'success');
                 } catch (err) {
                     UI.toast('Ugyldig JSON-fil', 'error');
@@ -41,10 +32,8 @@ class SoloGame {
             reader.readAsText(file);
         });
 
-        // Sjekk om quiz-ID er i URL
         const params = new URLSearchParams(window.location.search);
         const quizId = params.get('quiz');
-
         if (quizId) {
             await this.loadQuizById(quizId);
         } else {
@@ -55,76 +44,106 @@ class SoloGame {
     async showQuizPicker() {
         UI.showScreen('screen-picker');
         const grid = document.getElementById('picker-grid');
+        grid.textContent = '';
         try {
             const manifest = await QuizEngine.loadManifest('quizzes');
-            grid.innerHTML = '';
-            manifest.forEach(q => {
-                const card = document.createElement('div');
-                card.className = 'quiz-card';
-                card.style.borderLeftWidth = '6px';
-                card.style.borderLeftColor = q.color || '#000';
-                card.innerHTML = `
-                    <div class="quiz-card-title">${q.title}</div>
-                    <div class="quiz-card-desc">${q.description}</div>
-                    <div class="quiz-card-meta">
-                        <span class="tag tag-count">${q.questionCount} spørsmål</span>
-                    </div>
-                `;
-                card.addEventListener('click', () => this.loadQuizById(q.id));
-                grid.appendChild(card);
-            });
+            manifest.forEach(q => grid.appendChild(this.quizCard(q)));
         } catch (e) {
-            grid.innerHTML = `<div class="text-body text-center" style="padding:20px;color:#E74C3C;">Feil: ${e.message}</div>`;
+            this.showGridError(grid, e.message);
         }
+    }
+
+    quizCard(q) {
+        const card = document.createElement('div');
+        card.className = 'quiz-card' + (q.local ? ' is-local' : '');
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+
+        const title = document.createElement('div');
+        title.className = 'quiz-card-title';
+        title.textContent = q.title;
+
+        const desc = document.createElement('div');
+        desc.className = 'quiz-card-desc';
+        desc.textContent = q.description || '';
+
+        const meta = document.createElement('div');
+        meta.className = 'quiz-card-meta';
+        const count = document.createElement('span');
+        count.className = 'tag tag-count';
+        count.textContent = `${q.questionCount} spørsmål`;
+        meta.appendChild(count);
+        if (q.local) {
+            const local = document.createElement('span');
+            local.className = 'tag tag-local';
+            local.textContent = 'Lokal';
+            meta.appendChild(local);
+        }
+
+        card.append(title, desc, meta);
+        const open = () => this.loadQuizById(q.id);
+        card.addEventListener('click', open);
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+        });
+        return card;
+    }
+
+    showGridError(grid, msg) {
+        grid.textContent = '';
+        const err = document.createElement('div');
+        err.className = 'fk-error';
+        err.textContent = 'Feil: ' + msg;
+        grid.appendChild(err);
     }
 
     async loadQuizById(quizId) {
         try {
-            this.quiz = await QuizEngine.loadQuizById(quizId, 'quizzes');
-            this.showReadyScreen();
+            const quiz = await QuizEngine.loadQuizById(quizId, 'quizzes');
+            this.setQuiz(quiz);
         } catch (e) {
             UI.toast('Kunne ikkje laste quiz: ' + e.message, 'error');
             await this.showQuizPicker();
         }
     }
 
-    showReadyScreen() {
-        UI.showScreen('screen-ready');
-        UI.setText('ready-title', this.quiz.title);
-        UI.setText('ready-desc', this.quiz.description);
-        UI.setText('ready-count', `${this.quiz.questions.length} spørsmål`);
+    setQuiz(quiz) {
+        this.runner = new QuizRunner(quiz);
+        this.showReadyScreen();
+    }
 
+    showReadyScreen() {
+        const quiz = this.runner.quiz;
+        UI.showScreen('screen-ready');
+        UI.setText('ready-title', quiz.title);
+        UI.setText('ready-desc', quiz.description || '');
+        UI.setText('ready-count', `${quiz.questions.length} spørsmål`);
         document.getElementById('btn-start-solo').onclick = () => this.startGame();
     }
 
     startGame() {
-        this.currentIndex = 0;
-        this.score = 0;
-        this.streak = 0;
-        this.answers = [];
+        this.runner.reset();
         this.showQuestion();
     }
 
     showQuestion() {
-        if (this.currentIndex >= this.quiz.questions.length) {
-            this.showResults();
-            return;
-        }
+        if (this.runner.done) { this.showResults(); return; }
 
-        const q = this.quiz.questions[this.currentIndex];
-        const timeLimit = q.timeLimit || 20;
-        this.selectedAnswer = null;
+        const q = this.runner.current;
+        this.locked = false;
         this.questionStartTime = Date.now();
 
         UI.showScreen('screen-question');
-        UI.setText('q-number', `Spørsmål ${this.currentIndex + 1} / ${this.quiz.questions.length}`);
-        UI.setText('q-score', `${this.score} poeng`);
+        UI.setText('q-number', `Spørsmål ${this.runner.currentIndex + 1} / ${this.runner.total}`);
+        UI.setText('q-score', `${this.runner.score} poeng`);
         UI.setText('q-text', q.question);
 
         // Streak-visning
         const streakEl = document.getElementById('q-streak');
-        if (this.streak >= 2) {
-            streakEl.textContent = `🔥 ${this.streak} på rad!`;
+        if (this.runner.streak >= 2) {
+            streakEl.innerHTML = '';
+            streakEl.appendChild(ICON_EL('flame', 18));
+            streakEl.append(` ${this.runner.streak} på rad!`);
             streakEl.classList.remove('hidden');
         } else {
             streakEl.classList.add('hidden');
@@ -132,151 +151,116 @@ class SoloGame {
 
         // Svaralternativ
         const gridContainer = document.getElementById('q-answers');
-        gridContainer.innerHTML = '';
-        const grid = UI.createAnswerGrid(q.options, (i) => this.submitAnswer(i));
-        gridContainer.appendChild(grid);
+        gridContainer.textContent = '';
+        gridContainer.appendChild(UI.createAnswerGrid(q.options, (i) => this.submitAnswer(i)));
 
         // Framgangslinje
-        const pct = ((this.currentIndex) / this.quiz.questions.length) * 100;
+        const pct = (this.runner.currentIndex / this.runner.total) * 100;
         document.getElementById('q-progress-fill').style.width = pct + '%';
 
         // Timer
         if (this.timer) this.timer.stop();
-        this.timer = UI.startTimer('q-timer', timeLimit, null, () => {
-            this.timeUp();
-        });
+        this.timer = UI.startTimer('q-timer', this.runner.timeLimit(), null, () => this.timeUp());
     }
 
     submitAnswer(answerIndex) {
-        if (this.selectedAnswer !== null) return;
-        this.selectedAnswer = answerIndex;
-
+        if (this.locked) return;
+        this.locked = true;
         if (this.timer) this.timer.stop();
 
-        const q = this.quiz.questions[this.currentIndex];
         const timeUsed = Date.now() - this.questionStartTime;
-        const isCorrect = answerIndex === q.correct;
-        const timeLimit = q.timeLimit || 20;
+        const { isCorrect, result, correctIndex } = this.runner.answer(answerIndex, timeUsed);
 
-        const result = QuizEngine.calculateScore(isCorrect, timeUsed, timeLimit, this.streak);
-        this.score += result.points;
-        this.streak = result.newStreak;
-
-        this.answers.push({
-            questionIndex: this.currentIndex,
-            selected: answerIndex,
-            correct: q.correct,
-            isCorrect,
-            timeUsed,
-            points: result.points
-        });
-
-        // Vis rett/feil
         const grid = document.getElementById('q-answers').querySelector('.answer-grid');
-        UI.revealAnswers(grid, q.correct, answerIndex);
+        UI.revealAnswers(grid, correctIndex, answerIndex);
 
-        // Vis poeng-feedback
         const feedback = document.getElementById('q-feedback');
+        feedback.className = 'text-center mt-16 fk-feedback ' + (isCorrect ? 'ok' : 'bad');
+        feedback.textContent = '';
+        feedback.appendChild(ICON_EL(isCorrect ? 'check' : 'x', 20));
         if (isCorrect) {
-            let txt = `✅ Rett! +${result.points} poeng`;
-            if (result.streakBonus > 0) txt += ` (🔥 streak-bonus +${result.streakBonus})`;
-            feedback.textContent = txt;
-            feedback.style.color = '#2ECC71';
+            let txt = ` Rett! +${result.points} poeng`;
+            if (result.streakBonus > 0) txt += ` (streak-bonus +${result.streakBonus})`;
+            feedback.append(txt);
         } else {
-            feedback.textContent = `❌ Feil! Rett svar: ${q.options[q.correct]}`;
-            feedback.style.color = '#E74C3C';
+            feedback.append(` Feil! Rett svar: ${this.runner.current.options[correctIndex]}`);
         }
-        feedback.classList.remove('hidden');
 
-        UI.setText('q-score', `${this.score} poeng`);
-
-        setTimeout(() => {
-            feedback.classList.add('hidden');
-            this.currentIndex++;
-            this.showQuestion();
-        }, 2200);
+        UI.setText('q-score', `${this.runner.score} poeng`);
+        this.nextAfterDelay();
     }
 
     timeUp() {
-        if (this.selectedAnswer !== null) return;
+        if (this.locked) return;
+        this.locked = true;
 
-        const q = this.quiz.questions[this.currentIndex];
-        this.streak = 0;
+        const correctIndex = this.runner.current.correct;
+        const correctText = this.runner.current.options[correctIndex];
+        this.runner.timeout();
 
-        this.answers.push({
-            questionIndex: this.currentIndex,
-            selected: null,
-            correct: q.correct,
-            isCorrect: false,
-            timeUsed: (q.timeLimit || 20) * 1000,
-            points: 0
-        });
-
-        // Deaktiver knappar og vis rett svar
         const grid = document.getElementById('q-answers').querySelector('.answer-grid');
-        UI.revealAnswers(grid, q.correct, null);
+        UI.revealAnswers(grid, correctIndex, null);
 
         const feedback = document.getElementById('q-feedback');
-        feedback.textContent = `⏰ Tida er ute! Rett svar: ${q.options[q.correct]}`;
-        feedback.style.color = '#E74C3C';
-        feedback.classList.remove('hidden');
+        feedback.className = 'text-center mt-16 fk-feedback bad';
+        feedback.textContent = '';
+        feedback.appendChild(ICON_EL('hourglass', 20));
+        feedback.append(` Tida er ute! Rett svar: ${correctText}`);
 
+        this.nextAfterDelay();
+    }
+
+    nextAfterDelay() {
         setTimeout(() => {
-            feedback.classList.add('hidden');
-            this.currentIndex++;
+            document.getElementById('q-feedback').classList.add('hidden');
+            this.runner.advance();
             this.showQuestion();
         }, 2200);
     }
 
     showResults() {
         UI.showScreen('screen-results');
+        const s = this.runner.stats();
 
-        const correct = this.answers.filter(a => a.isCorrect).length;
-        const total = this.answers.length;
-        const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
-        const bestStreak = this.calcBestStreak();
-        const avgTime = total > 0 ? Math.round(this.answers.reduce((s, a) => s + a.timeUsed, 0) / total / 100) / 10 : 0;
+        UI.setText('res-title', this.runner.quiz.title);
+        UI.setText('res-score', s.score);
+        UI.setText('res-correct', `${s.correct} / ${s.total}`);
+        UI.setText('res-accuracy', `${s.accuracy}%`);
+        UI.setText('res-streak', s.bestStreak);
+        UI.setText('res-avgtime', `${s.avgTime}s`);
 
-        UI.setText('res-title', this.quiz.title);
-        UI.setText('res-score', this.score);
-        UI.setText('res-correct', `${correct} / ${total}`);
-        UI.setText('res-accuracy', `${accuracy}%`);
-        UI.setText('res-streak', bestStreak);
-        UI.setText('res-avgtime', `${avgTime}s`);
-
-        // Spørsmåloversikt
         const list = document.getElementById('res-questions');
-        list.innerHTML = '';
-        this.answers.forEach((a, i) => {
-            const q = this.quiz.questions[a.questionIndex];
+        list.textContent = '';
+        this.runner.answers.forEach((a, i) => {
+            const q = this.runner.quiz.questions[a.questionIndex];
             const row = document.createElement('div');
-            row.className = 'nb-card-sm mb-8';
-            row.style.borderLeftWidth = '4px';
-            row.style.borderLeftColor = a.isCorrect ? '#2ECC71' : '#E74C3C';
-            row.innerHTML = `
-                <div style="font-weight:700;margin-bottom:4px;">${i + 1}. ${UI.escapeHTML(q.question)}</div>
-                <div class="text-body" style="font-size:0.85rem;">
-                    ${a.isCorrect ? '✅ Rett' : a.selected === null ? '⏰ Ikkje svara' : `❌ Svara: ${UI.escapeHTML(q.options[a.selected])}`}
-                    ${!a.isCorrect ? ` — Rett: <strong>${UI.escapeHTML(q.options[a.correct])}</strong>` : ''}
-                    <span style="float:right;font-weight:700;">+${a.points}</span>
-                </div>
-            `;
+            row.className = 'res-row ' + (a.isCorrect ? 'ok' : 'bad');
+
+            const head = document.createElement('div');
+            head.className = 'res-row-q';
+            head.textContent = `${i + 1}. ${q.question}`;
+
+            const body = document.createElement('div');
+            body.className = 'res-row-a';
+            if (a.isCorrect) {
+                body.textContent = 'Rett';
+            } else if (a.selected === null) {
+                body.textContent = `Ikkje svara — rett: ${q.options[a.correct]}`;
+            } else {
+                body.textContent = `Svara: ${q.options[a.selected]} — rett: ${q.options[a.correct]}`;
+            }
+
+            const pts = document.createElement('span');
+            pts.className = 'res-row-pts';
+            pts.textContent = `+${a.points}`;
+            body.appendChild(pts);
+
+            row.append(head, body);
             list.appendChild(row);
         });
 
         document.getElementById('btn-retry').onclick = () => this.startGame();
-        document.getElementById('btn-back').onclick = () => {
-            window.location.href = 'index.html';
-        };
-    }
-
-    calcBestStreak() {
-        let best = 0, cur = 0;
-        this.answers.forEach(a => {
-            if (a.isCorrect) { cur++; best = Math.max(best, cur); }
-            else cur = 0;
-        });
-        return best;
+        document.getElementById('btn-back').onclick = () => { window.location.href = 'index.html'; };
     }
 }
 

@@ -5,6 +5,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
 ## [Ikkje publisert]
 
+### Endra
+- **Frødekapp** — oppgradert til vyrdepil-designsystemet, det siste verktøyet som stod att.
+  - Alle fem sidene (framside, vert, delta, solo, editor) brukar no `neobrutalisme.css`, global `<neo-header>` med temaveljar og standard `page-wrapper`/`main-content`-layout. Alle skjermane følgjer den same lys/mørk-tema-vekslaren.
+  - Kahoot-svarknappane er mappa til tema-accentane (skiftar med temaet) med rett tekstkontrast i staden for faste fargar.
+  - All lagring (lokalt quiz-bibliotek, editor-utkast, sist brukte kallenamn) går no via felles `VyrdepilStorage` i staden for direkte `localStorage`.
+  - All emoji og ASCII-symbol bytt ut med inline Lucide-ikon; ikon-knappar har fått `aria-label`, modalar lukkast med Escape, og dynamiske felt har `aria-live`.
+  - Eksporterte quiz-ar får `app`/`version`-felt på toppnivå (JSON-migreringsveg).
+  - Internt: ny delt `quiz-runner.js` (eitt-spelar-motor brukt av soloøvinga), eige `storage.js`- og `icons.js`-lag, og DOM-bygd rendering utan `innerHTML` på brukartekst. Retta òg knappe-bindingar i editoren som var brotne.
+
 ### Lagt til
 - **Listesmia** (wikidata-tester) — bygd om frå rein SPARQL-tester til ein veivisar som finn kortlister til Heimsank utan at ein treng kunne SPARQL.
   - Steg-for-steg: søk etter emne med vanlege ord (Wikidata-søke-API på norsk), snøggval-chips (hunderasar, fjell, vulkanar m.fl.), krav (må ha bilete / Wikipedia-artikkel), filter (t.d. avgrens til eit land) og val av ekstra kolonnar.

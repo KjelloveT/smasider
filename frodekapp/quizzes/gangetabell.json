@@ -1,4 +1,6 @@
 {
+  "app": "frodekapp",
+  "version": 1,
   "id": "gangetabell",
   "title": "Gangetabellen",
   "description": "Øv på gangetabellen frå 2 til 10 — kor rask er du?",

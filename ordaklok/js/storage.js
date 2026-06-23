@@ -33,12 +33,23 @@
 
   // ---- Liste-CRUD ----
 
+  // Innebygde standardlister (t.d. geografi frå Vidfaren) ligg på
+  // window.OrdaklokBuiltins og er alltid tilgjengelege. Lagra lister med
+  // same id vinn (om nokon dupliserer/endrar).
+  function builtinLists() {
+    return Array.isArray(window.OrdaklokBuiltins) ? window.OrdaklokBuiltins : [];
+  }
+
   function getLists() {
-    return readState().lists;
+    const stored = readState().lists;
+    const storedIds = new Set(stored.map(l => l.id));
+    const builtins = builtinLists().filter(b => !storedIds.has(b.id));
+    return builtins.concat(stored);
   }
 
   function getList(id) {
-    return readState().lists.find(l => l.id === id) || null;
+    return readState().lists.find(l => l.id === id)
+      || builtinLists().find(l => l.id === id) || null;
   }
 
   function newListObject(partial) {

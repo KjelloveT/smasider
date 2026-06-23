@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="nn" data-direction="skulebok">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vidfaren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@600;700&family=Bangers&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/neobrutalisme.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-light-theme="ocean" data-dark-theme="space" data-theme="ocean">
+
+<neo-header></neo-header>
+
+<div class="page-wrapper">
+<main class="main-content">
+
+  <!-- ══════════ OPPSETT ══════════ -->
+  <section id="setupScreen" class="screen active">
+    <div class="hero lk-hero">
+      <div class="lk-hero-icon"><img src="../_resources/vidfaren.png" alt="Vidfaren"></div>
+      <div class="hero-col">
+        <h1>Vidfaren</h1>
+        <p>Kjenn att land på hovudstad, høgaste fjell, største innsjø, omriss og plassering på verdskartet.</p>
+      </div>
+    </div>
+
+    <div class="lk-stats">
+      <div class="lk-stat"><span class="lk-stat-val" id="statHigh">0</span><span class="lk-stat-lbl">Beste runde</span></div>
+      <div class="lk-stat"><span class="lk-stat-val" id="statTotal">0</span><span class="lk-stat-lbl">Poeng totalt</span></div>
+      <button class="lk-stat lk-stat-btn" id="badgeBtn" type="button">
+        <span class="lk-stat-val"><span data-icon="trophy" data-icon-size="22"></span> <span id="badgeCountTop">0</span></span>
+        <span class="lk-stat-lbl">Merke</span>
+      </button>
+    </div>
+
+    <h2 class="heading2">Vel ein modus</h2>
+    <div class="lk-mode-grid" id="modeGrid"></div>
+
+    <h2 class="heading2">Vanskegrad</h2>
+    <div class="lk-level-row" id="levelRow"></div>
+
+    <button class="btn btn-primary lk-start" id="startBtn" type="button" disabled>
+      <span data-icon="play"></span> Start runden
+    </button>
+
+    <a class="lk-ordaklok-tip" href="../ordaklok/index.html">
+      <span class="lk-tip-ico" data-icon="book"></span>
+      <span>Vil du pugge hovudstader, fjell og innsjøar i ro og mak? Øv med <strong>Ordaklok</strong> — der ligg dei klare som standardøvingar.</span>
+      <span class="lk-tip-arrow" data-icon="arrowRight"></span>
+    </a>
+  </section>
+
+  <!-- ══════════ SPEL ══════════ -->
+  <section id="gameScreen" class="screen">
+    <div class="lk-gamebar">
+      <button class="btn lk-quit" id="quitBtn" type="button" title="Avbryt"><span data-icon="x"></span></button>
+      <div class="lk-progress"><span id="qProgress">1 / 10</span></div>
+      <div class="lk-streak" id="streakBox"><span data-icon="flame"></span> <span id="streakVal">0</span></div>
+      <div class="lk-score"><span id="scoreVal">0</span></div>
+    </div>
+
+    <div class="lk-timer"><div class="lk-timer-fill" id="timerFill"></div></div>
+
+    <div class="lk-question">
+      <p class="lk-q-blurb" id="qBlurb"></p>
+      <div class="lk-prompt" id="promptBox"></div>
+    </div>
+
+    <div class="lk-answers" id="answerGrid"></div>
+  </section>
+
+  <!-- ══════════ RESULTAT ══════════ -->
+  <section id="resultScreen" class="screen">
+    <div class="lk-result-card box1">
+      <div class="lk-result-medal" id="resultMedal"><span data-icon="trophy" data-icon-size="44"></span></div>
+      <h2 id="resultTitle">Runde ferdig!</h2>
+      <div class="lk-result-score"><span id="resScore">0</span> <small>poeng</small></div>
+      <p class="lk-record" id="resRecord" hidden><span data-icon="star"></span> Ny rekord!</p>
+      <div class="lk-result-grid">
+        <div><span class="lk-rg-val" id="resCorrect">0/10</span><span class="lk-rg-lbl">Rette</span></div>
+        <div><span class="lk-rg-val" id="resAccuracy">0%</span><span class="lk-rg-lbl">Treff</span></div>
+        <div><span class="lk-rg-val" id="resStreak">0</span><span class="lk-rg-lbl">Beste streak</span></div>
+      </div>
+      <div class="lk-result-actions">
+        <button class="btn btn-primary" id="againBtn" type="button"><span data-icon="refresh"></span> Spel igjen</button>
+        <button class="btn" id="menuBtn" type="button"><span data-icon="home"></span> Meny</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<!-- ══════════ MERKE-MODAL ══════════ -->
+<div id="badgeModal" class="modal-overlay">
+  <div class="modal-box lk-badge-modal">
+    <div class="lk-badge-head">
+      <h2><span data-icon="trophy"></span> Merke <span class="lk-badge-count" id="badgeCount">0 / 0</span></h2>
+      <button class="btn lk-modal-close" onclick="closeBadgeGallery()" type="button"><span data-icon="x"></span></button>
+    </div>
+    <div class="badge-grid" id="badgeGrid"></div>
+  </div>
+</div>
+
+<div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+<script src="../js/neo-header.js"></script>
+<script src="../js/neobrutalisme.js"></script>
+<script src="../js/vyrdepil-storage.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/map.js"></script>
+<script src="js/progression.js"></script>
+<script src="js/game.js"></script>
+<script src="js/progression-ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

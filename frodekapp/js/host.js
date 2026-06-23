@@ -46,38 +46,52 @@ class HostGame {
 
     async loadQuizList() {
         const grid = document.getElementById('host-quiz-grid');
+        grid.textContent = '';
         try {
             const manifest = await QuizEngine.loadManifest('quizzes');
-            grid.innerHTML = '';
             manifest.forEach(q => {
                 const card = document.createElement('div');
-                card.className = 'quiz-card';
-                card.style.borderLeftWidth = '4px';
-                card.style.borderLeftColor = q.color || '#000';
-                card.style.padding = '16px';
-                card.innerHTML = `
-                    <div class="quiz-card-title" style="font-size:1rem;">${q.title}</div>
-                    <div class="quiz-card-meta mt-8">
-                        <span class="tag tag-count">${q.questionCount} spm.</span>
-                    </div>
-                `;
-                card.addEventListener('click', async () => {
+                card.className = 'quiz-card quiz-card-compact' + (q.local ? ' is-local' : '');
+                card.tabIndex = 0;
+                card.setAttribute('role', 'button');
+
+                const title = document.createElement('div');
+                title.className = 'quiz-card-title';
+                title.textContent = q.title;
+
+                const meta = document.createElement('div');
+                meta.className = 'quiz-card-meta';
+                const count = document.createElement('span');
+                count.className = 'tag tag-count';
+                count.textContent = `${q.questionCount} spm.`;
+                meta.appendChild(count);
+
+                card.append(title, meta);
+
+                const select = async () => {
                     try {
-                        this.quiz = await QuizEngine.loadQuiz(`quizzes/${q.id}.json`);
+                        this.quiz = await QuizEngine.loadQuizById(q.id, 'quizzes');
                         UI.setText('selected-quiz-title', this.quiz.title);
                         UI.setText('selected-quiz-count', `${this.quiz.questions.length} spørsmål`);
                         UI.toggle('selected-quiz-info', true);
-                        document.querySelectorAll('#host-quiz-grid .quiz-card').forEach(c => c.style.outline = '');
-                        card.style.outline = '3px solid #4CAF50';
+                        document.querySelectorAll('#host-quiz-grid .quiz-card').forEach(c => c.classList.remove('selected'));
+                        card.classList.add('selected');
                         UI.toast('Quiz valt: ' + q.title, 'success');
                     } catch (e) {
                         UI.toast('Feil ved lasting: ' + e.message, 'error');
                     }
+                };
+                card.addEventListener('click', select);
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
                 });
                 grid.appendChild(card);
             });
         } catch (e) {
-            grid.innerHTML = `<div class="text-body" style="color:#E74C3C;">Feil: ${e.message}</div>`;
+            const err = document.createElement('div');
+            err.className = 'fk-error';
+            err.textContent = 'Feil: ' + e.message;
+            grid.appendChild(err);
         }
     }
 
@@ -292,8 +306,11 @@ class HostGame {
         });
 
         UI.enableBtn('btn-next-question', true);
-        document.getElementById('btn-next-question').textContent =
-            this.currentIndex + 1 >= this.quiz.questions.length ? '🏆 Vis resultat' : '▶ Neste spørsmål';
+        const nextBtn = document.getElementById('btn-next-question');
+        const last = this.currentIndex + 1 >= this.quiz.questions.length;
+        nextBtn.innerHTML = '';
+        nextBtn.appendChild(ICON_EL(last ? 'trophy' : 'arrowRight', 20));
+        nextBtn.append(last ? ' Vis resultat' : ' Neste spørsmål');
     }
 
     nextStep() {
