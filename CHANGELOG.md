@@ -6,6 +6,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ## [Ikkje publisert]
 
 ### Endra
+- **Fontar** — fjerna all bruk av Google Fonts. Heimsank og Vidfaren brukar no system-font-stablar (Arial Black/Impact, system-ui, Courier New m.m.) i staden for Archivo Black, Space Grotesk, Caveat, Bangers og DM Mono, slik at ingen fontfiler blir lasta frå eksterne tenarar. Google Fonts-rada er fjerna frå personvernsida, og `AGENTS.md` slår fast at vi aldri skal bruke eksterne font-bibliotek.
 - **Frødekapp** — oppgradert til vyrdepil-designsystemet, det siste verktøyet som stod att.
   - Alle fem sidene (framside, vert, delta, solo, editor) brukar no `neobrutalisme.css`, global `<neo-header>` med temaveljar og standard `page-wrapper`/`main-content`-layout. Alle skjermane følgjer den same lys/mørk-tema-vekslaren.
   - Kahoot-svarknappane er mappa til tema-accentane (skiftar med temaet) med rett tekstkontrast i staden for faste fargar.
@@ -19,6 +20,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
   - Nytt data-drive mal-system: 8 reine standard-oppsett + **20 sprek tema-malar** (tur, dagsoppsummering, strand, fjell, gard, fleire bursdagsmalar, karneval, skulestart, skuleåret, klassen vår, tema-prosjekt, årstider og høgtider, minnebok) med **redigerbar tittel/bilettekst**.
   - All pynt (konfetti, vimplar, ballongar, løv, snø, rammer m.m.) er teikna med Canvas 2D — ingen emoji og ingen eksterne bilete. Render i A4-oppløysing (~150 dpi) for skarp utskrift; eksport som PNG.
   - Tilstandslaus (ingen `localStorage`); modalar lukkast med Escape og interaktive element har `:focus-visible` og `aria-label`.
+
+### Fiksa
+- **Framsida** — kategori-titlane byggjast no trygt med `textContent` i staden for `innerHTML` (ikon-SVG i eige `<span>`), i tråd med resten av `home.js`.
+- **Heimsank** — tilt-/foil-effekten på samlekort og i kort-modalen er `requestAnimationFrame`-throttla, så hovring ikkje lenger gjev unødig layout-arbeid kvar mus-piksel.
+- **Handsam bilete** — viser no ein kort notis når filer som ikkje er bilete (eller som ikkje lét seg lese) blir hoppa over ved opplasting, i staden for å avvise dei utan tilbakemelding.
 
 ### Lagt til
 - **Listesmia** (wikidata-tester) — bygd om frå rein SPARQL-tester til ein veivisar som finn kortlister til Heimsank utan at ein treng kunne SPARQL.
