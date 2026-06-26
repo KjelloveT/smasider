@@ -56,7 +56,9 @@
     }
 
     async function addFiles(fileList) {
-        const files = Array.from(fileList).filter(f => f.type.startsWith('image/'));
+        const all = Array.from(fileList);
+        const files = all.filter(f => f.type.startsWith('image/'));
+        let skipped = all.length - files.length;   // ikkje-bilete-filer
         for (const file of files) {
             try {
                 const source = await Processor.loadImage(file);
@@ -67,11 +69,36 @@
                 });
             } catch (err) {
                 console.error('Klarte ikkje laste', file.name, err);
+                skipped++;   // fil som ikkje lét seg lese
             }
+        }
+        if (skipped > 0) {
+            notify(skipped === 1
+                ? '1 fil vart hoppa over (ikkje eit gyldig bilete).'
+                : `${skipped} filer vart hoppa over (ikkje gyldige bilete).`);
         }
         els.layout.hidden = items.length === 0;
         renderCards();
         scheduleProcess();
+    }
+
+    /* Liten, sjølvstendig notis (bildebehandling har ingen delt toast). */
+    let notifyEl = null, notifyTimer = null;
+    function notify(msg) {
+        if (!notifyEl) {
+            notifyEl = document.createElement('div');
+            notifyEl.setAttribute('role', 'status');
+            notifyEl.style.cssText =
+                'position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:3000;' +
+                'background:var(--accent2);color:var(--text-on-accent);border:3px solid var(--border);' +
+                'box-shadow:4px 4px 0 var(--shadow);padding:10px 16px;font-weight:800;font-size:0.9rem;' +
+                'max-width:90vw;opacity:0;transition:opacity 0.2s;';
+            document.body.appendChild(notifyEl);
+        }
+        notifyEl.textContent = msg;
+        requestAnimationFrame(() => { notifyEl.style.opacity = '1'; });
+        clearTimeout(notifyTimer);
+        notifyTimer = setTimeout(() => { notifyEl.style.opacity = '0'; }, 3500);
     }
 
     /* ──────────────── Verktøyrad ──────────────── */

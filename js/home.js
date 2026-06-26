@@ -60,7 +60,10 @@
         if (!apps.length) return;
         const h2 = document.createElement('h2');
         h2.className = 'heading2';
-        h2.innerHTML = svg(cat.icon, 28) + ' ' + cat.label;
+        const ic = document.createElement('span');
+        ic.innerHTML = svg(cat.icon, 28);
+        h2.appendChild(ic);
+        h2.appendChild(document.createTextNode(' ' + cat.label));
         host.appendChild(h2);
         const grid = document.createElement('div');
         grid.className = 'card-grid';

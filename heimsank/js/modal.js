@@ -48,15 +48,23 @@ function openCardModal(index, direction = 0) {
     modalCard.innerHTML = '';
     modalCard.appendChild(cardContent);
 
-    // Add cosmos mouse tracking for modal card
+    // Add cosmos mouse tracking for modal card (rAF-throttla: éin layout-les + stil-skriv per frame)
     const imgWrap = modalCard.querySelector('.modal-card-img-wrap');
     if (imgWrap) {
+      let lastX = 0, lastY = 0, ticking = false;
       imgWrap.addEventListener('mousemove', (e) => {
-        const rect = imgWrap.getBoundingClientRect();
-        const mouseX = ((e.clientX - rect.left) / rect.width) * 100;
-        const mouseY = ((e.clientY - rect.top) / rect.height) * 100;
-        imgWrap.style.setProperty('--mouse-x', `${mouseX}%`);
-        imgWrap.style.setProperty('--mouse-y', `${mouseY}%`);
+        lastX = e.clientX;
+        lastY = e.clientY;
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          ticking = false;
+          const rect = imgWrap.getBoundingClientRect();
+          const mouseX = ((lastX - rect.left) / rect.width) * 100;
+          const mouseY = ((lastY - rect.top) / rect.height) * 100;
+          imgWrap.style.setProperty('--mouse-x', `${mouseX}%`);
+          imgWrap.style.setProperty('--mouse-y', `${mouseY}%`);
+        });
       });
     }
   };

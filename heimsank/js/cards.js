@@ -43,28 +43,37 @@ function mkCard(card, sz, entry = null) {
 
   // Add 3D tilt and foil mouse tracking for bar cards
   if (isBar) {
+    // Throttle med requestAnimationFrame: les layout og skriv stil høgst éin gong per frame.
+    let lastX = 0, lastY = 0, ticking = false;
     el.addEventListener('mousemove', (e) => {
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -15;
-      const rotateY = ((x - centerX) / centerX) * 15;
-      
-      el.style.setProperty('--rotate-x', `${rotateX}deg`);
-      el.style.setProperty('--rotate-y', `${rotateY}deg`);
-      
-      // Update foil mask position for cards with foil effect
-      if (hasFoil) {
-        const imgRect = iw.getBoundingClientRect();
-        const mouseX = ((e.clientX - imgRect.left) / imgRect.width) * 100;
-        const mouseY = ((e.clientY - imgRect.top) / imgRect.height) * 100;
-        iw.style.setProperty('--mouse-x', `${mouseX}%`);
-        iw.style.setProperty('--mouse-y', `${mouseY}%`);
-      }
+      lastX = e.clientX;
+      lastY = e.clientY;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const rect = el.getBoundingClientRect();
+        const x = lastX - rect.left;
+        const y = lastY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -15;
+        const rotateY = ((x - centerX) / centerX) * 15;
+
+        el.style.setProperty('--rotate-x', `${rotateX}deg`);
+        el.style.setProperty('--rotate-y', `${rotateY}deg`);
+
+        // Update foil mask position for cards with foil effect
+        if (hasFoil) {
+          const imgRect = iw.getBoundingClientRect();
+          const mouseX = ((lastX - imgRect.left) / imgRect.width) * 100;
+          const mouseY = ((lastY - imgRect.top) / imgRect.height) * 100;
+          iw.style.setProperty('--mouse-x', `${mouseX}%`);
+          iw.style.setProperty('--mouse-y', `${mouseY}%`);
+        }
+      });
     });
-    
+
     el.addEventListener('mouseleave', () => {
       el.style.setProperty('--rotate-x', '0deg');
       el.style.setProperty('--rotate-y', '0deg');
