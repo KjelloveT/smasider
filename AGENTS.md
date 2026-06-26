@@ -115,6 +115,8 @@ Nye avhengnader (bibliotek, CDN-script, fontar, ikon-pakkar) krev **eksplisitt g
 - **Sjølv-hostast** i `_libs/` på rot (foretrekt for ekte offline-støtte), eller
 - **Dokumenterast** i personvernseksjonen på framsida med kjelde og kva data som kan synast (t.d. IP-adresse i CDN-loggar).
 
+**Hugs CSP-allowlista:** all ekstern ressurs (script, bilete, fontar, API/WebSocket) blir blokkert i produksjon om han ikkje står i `Content-Security-Policy` under `globalHeaders` i `staticwebapp.config.json`. Legg origin-en i rett direktiv (`script-src`, `img-src`, `connect-src` osv.). Vér særleg merksam på **redirect-kjeder**: Wikimedia-bilete går t.d. via `commons.wikimedia.org/wiki/Special:FilePath/…` som redirectar til `upload.wikimedia.org`, og **begge** origin-ane må stå i `img-src` fordi nettlesaren sjekkar CSP på kvart ledd. NB: ein `Content-Security-Policy-Report-Only`-header *rapporterer* berre brot — han *blokkerer* ikkje, så ei side kan sjå ut til å fungere i report-only og likevel knuse når CSP-en blir handheva. Test difor alltid mot den handheva headeren før du konkluderer.
+
 ### 5.7 Compliance-pass
 Ved endringar i denne fila (`AGENTS.md`) skal det gjerast eit kontroll-pass gjennom alle eksisterande spel og verktøy for å sikre at dei framleis følgjer reglane. Spel som ikkje gjer det skal merkast for oppgradering (t.d. i `CHANGELOG.md` eller som GitHub-issue).
 
