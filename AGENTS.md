@@ -111,7 +111,7 @@ Alle spel/verktøy følgjer same struktur:
 Felles ressursar (logoar, ikon, lyd) ligg i `_resources/` på rot, eller i spelets eiga mappe når dei er spel-spesifikke.
 
 ### 5.6 Eksterne avhengnader
-Nye avhengnader (bibliotek, CDN-script, fontar, ikon-pakkar) krev **eksplisitt godkjenning frå brukaren** før dei blir lagt til. Når dei er godkjende, skal dei anten:
+Nye avhengnader (bibliotek, CDN-script, fontar, ikon-pakkar) krev **eksplisitt godkjenning frå brukaren** før dei blir lagt til. **Vi skal aldri bruke eksterne font-bibliotek** — bruk alltid system-fontar med passande fallbackar. Når andre avhengnader er godkjende, skal dei anten:
 - **Sjølv-hostast** i `_libs/` på rot (foretrekt for ekte offline-støtte), eller
 - **Dokumenterast** i personvernseksjonen på framsida med kjelde og kva data som kan synast (t.d. IP-adresse i CDN-loggar).
 

@@ -4,11 +4,11 @@
 
 /* ── CSS VARIABLES ───────────────────────────────────────────────── */
 :root {
-  --font-display: 'Archivo Black', 'Helvetica Neue', sans-serif;
-  --font-body:    'Space Grotesk', system-ui, sans-serif;
-  --font-hand:    'Caveat', cursive;
-  --font-pop:     'Bangers', cursive;
-  --font-mono:    'DM Mono', ui-monospace, monospace;
+  --font-display: 'Arial Black', 'Impact', system-ui, sans-serif;
+  --font-body:    system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  --font-hand:    cursive, system-ui, sans-serif;
+  --font-pop:     'Comic Sans MS', cursive, system-ui, sans-serif;
+  --font-mono:    'Courier New', 'Monaco', ui-monospace, monospace;
 
   /* rarity (semantiske faste fargar) */
   --r-vanleg:          #f8f3e8;
