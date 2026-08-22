@@ -1,0 +1,443 @@
+/* Bolkestokk — arbeidsflata. Utvidar css/neobrutalisme.css.
+ *
+ * Dette ER ei arbeidsflate, så sida brukar .main-wide (AGENTS.md §3.1.1):
+ * paletten, blokkene og teikninga skal alle vere synlege samtidig, og kvar
+ * piksel breidd går til det. Tekstblokkene i leksjonspanelet held si eiga
+ * breiddegrense uansett, slik same paragraf krev.
+ */
+
+/* ---- flata -----------------------------------------------------------------
+ *
+ * Fire ting skal helst vere synlege samtidig: leksjonen, paletten, blokkene
+ * og teikninga. Fyrste utgåva la leksjonen som eit fullbreitt band over
+ * resten, og på ein stor skjerm skuva ein lang leksjonstekst då både
+ * arbeidsbenken og lerretet ned under skjermkanten — eleven måtte rulle for
+ * å sjå det han bygde. No er leksjonen ei spalte som alle dei andre.
+ *
+ * Paletten er breiare enn han var. «tilfeldig tal frå [1] til [6]» og
+ * «Set farge til [oransje]» er ikkje smale blokker, og på 210px braut dei
+ * over tre linjer kvar.
+ */
+
+.bs-flate {
+    display: grid;
+    grid-template-columns: var(--bs-palett) minmax(300px, 1fr) minmax(330px, 1fr);
+    gap: 14px;
+    align-items: start;
+
+    /* Veks med skjermen, men stoppar før paletten blir eit landskap. */
+    --bs-palett: clamp(260px, 19vw, 360px);
+}
+
+/* Med leksjon: han får ei eiga spalte når det er plass til fire. */
+@media (min-width: 1280px) {
+    .bs-flate:has(> .bs-leksjonspanel:not([hidden])) {
+        grid-template-columns: minmax(330px, 24%) var(--bs-palett) minmax(280px, 1fr) minmax(320px, 1fr);
+    }
+}
+
+/* Under 1280px er det ikkje plass til fire spalter. Leksjonen legg seg
+ * øvst i full breidd, men med eiga rulling og tak på høgda — elles er vi
+ * tilbake til at han skuvar arbeidsflata ut av synet. */
+@media (max-width: 1279px) {
+    .bs-leksjonspanel {
+        grid-column: 1 / -1;
+        max-height: 46vh;
+        overflow-y: auto;
+    }
+}
+
+/* Under 1100px har det ikkje plass til tre spalter heller. Då flyttar
+ * teikninga OPP over paletten og blir klistra til toppen.
+ *
+ * La han bli liggjande nedanfor, hamna han eit par skjermhøgder ned så snart
+ * leksjonen stod over — og då bygde eleven blindt. Teikninga er det han
+ * arbeider mot, så ho er det siste som skal ut av synet. */
+@media (max-width: 1100px) {
+    .bs-flate { grid-template-columns: var(--bs-palett) minmax(0, 1fr); }
+    .bs-leksjonspanel { order: -2; }
+    .bs-utflate {
+        order: -1;
+        grid-column: 1 / -1;
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        background: var(--bg);
+    }
+    .bs-lerretboks { max-height: 38vh; }
+}
+
+/* På telefon er alt under kvarandre. */
+@media (max-width: 700px) {
+    .bs-flate { grid-template-columns: 1fr; --bs-palett: 1fr; }
+    .bs-utflate { grid-column: auto; }
+    .bs-leksjonspanel { max-height: 40vh; }
+}
+
+/* ---- leksjonspanelet --------------------------------------------------------- */
+
+/* --bg og ikkje --surface: oppgåvekorta er .box4, som står på --surface.
+ * Same farge bak dei ville gjort at korta forsvann inn i panelet. */
+.bs-leksjonspanel {
+    min-width: 0;
+    padding: 16px 18px;
+    background: var(--bg);
+    color: var(--text);
+    border: 3px solid var(--border);
+    box-shadow: 4px 4px 0 var(--shadow);
+}
+
+/* Som eiga spalte følgjer han med når ein rullar i blokkene, og har si
+ * eiga rulling så ein lang leksjon ikkje gjer sida uendeleg høg. */
+@media (min-width: 1280px) {
+    .bs-leksjonspanel {
+        position: sticky;
+        top: 8px;
+        max-height: calc(100vh - 24px);
+        overflow-y: auto;
+    }
+}
+
+/* ---- paletten --------------------------------------------------------------- */
+
+.bs-palett {
+    position: sticky;
+    top: 8px;
+    max-height: calc(100vh - 24px);
+    overflow-y: auto;
+    padding: 12px 10px;
+    background: var(--surface);
+    border: 3px solid var(--border);
+    box-shadow: 4px 4px 0 var(--shadow);
+}
+
+@media (max-width: 700px) {
+    .bs-palett { position: static; max-height: none; }
+}
+
+/* ---- arbeidsbenken ------------------------------------------------------------ */
+
+.bs-benk { min-width: 0; }
+
+.bs-verktoyrad {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.bs-fart {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.bs-fart input { width: 108px; accent-color: var(--accent); }
+
+.bs-arbeid {
+    min-height: 340px;
+    max-height: calc(100vh - 120px);
+    overflow: auto;
+    padding: 14px;
+    background: var(--bg);
+    border: 3px solid var(--border);
+    box-shadow: 4px 4px 0 var(--shadow);
+}
+
+.bs-stabelboks { margin-bottom: 22px; }
+
+/* ---- teikninga ------------------------------------------------------------------ */
+
+.bs-utflate { min-width: 0; }
+
+.bs-lerretboks {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    max-height: 60vh;
+    background: var(--surface);
+}
+
+.bs-lerret { display: block; width: 100%; height: 100%; }
+
+.bs-pythonrute {
+    margin: 0;
+    padding: 12px 14px;
+    max-height: 52vh;
+    overflow: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    white-space: pre;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.bs-utskrift {
+    margin: 10px 0 0;
+    padding: 10px 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    box-shadow: 2px 2px 0 var(--shadow);
+}
+
+.bs-utskrift:empty { display: none; }
+
+.bs-feil {
+    margin: 10px 0 0;
+    padding: 10px 12px;
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.5;
+    background: var(--surface);
+    color: var(--text);
+    border: 3px solid var(--accent2);
+    box-shadow: 2px 2px 0 var(--shadow);
+}
+
+/* ---- statuslinje ------------------------------------------------------------------ */
+
+/* Statuslinja er role="status" og melder frå om køyringa. Ho må vere lesbar
+ * — difor --text, ikkje --muted (som fell til 3,2:1 i lyse tema). */
+.bs-status {
+    margin: 8px 0 0;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text);
+    min-height: 1.2em;
+}
+
+/* ---- hjelpetekst ------------------------------------------------------------------- */
+
+/* Forklarer korleis ein dreg og slettar blokker. Det er ikkje pynt for ein
+ * sjetteklassing som opnar verktøyet for fyrste gong. */
+.bs-hjelp {
+    max-width: 78ch;
+    margin: 18px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+}
+
+/* ---- steg for steg ------------------------------------------------------------ */
+
+.bs-stegrad {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    background: var(--surface);
+    color: var(--text);
+    border: 2px solid var(--border);
+    border-left: 8px solid var(--accent);
+    box-shadow: 2px 2px 0 var(--shadow);
+}
+
+.bs-btn-liten { font-size: 12px; padding: 6px 12px; }
+
+.bs-btn-steg,
+.bs-stegrad .btn { display: inline-flex; align-items: center; gap: 6px; }
+
+.bs-steginfo {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    color: var(--text);
+}
+
+/* Blokka som køyrer, gjenteken rett over teikninga. Aksentfargen ligg i
+ * kantstripa, ikkje under teksten (AGENTS.md §3.2). */
+.bs-stegblokk {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 9px;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background: var(--surface);
+    color: var(--text);
+    border: 2px solid var(--border);
+    border-left: 8px solid var(--accent2);
+    box-shadow: 2px 2px 0 var(--shadow);
+}
+
+.bs-stegblokk-merke {
+    font-size: 10.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    /* Ingen opacity her. Ho ville dempa kontrasten under det getComputedStyle
+     * rapporterer, og dermed under AA i dei svakaste temaa utan at ei måling
+     * fanga det. */
+    color: var(--text);
+}
+
+.bs-stegblokk-tekst {
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 700;
+}
+
+/* ---- variablar ----------------------------------------------------------------- */
+
+.bs-variablar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 10px;
+}
+
+.bs-variabel {
+    padding: 4px 10px;
+    font-size: 13px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--surface);
+    color: var(--text);
+    border: 2px solid var(--border);
+    border-left: 6px solid var(--accent5);
+    box-shadow: 2px 2px 0 var(--shadow);
+}
+
+/* ===========================================================================
+   NY UTSJÅNAD — sjå css/palett.css for fargeprofilen og grunngjevinga.
+   =========================================================================== */
+
+/* Arbeidsbenken har prikkeraster, som i mockupen. Det gjev flata eit golv
+ * å ligge på, og gjer at ei blokk som blir dregen har noko å bli dregen
+ * OVER i staden for å sveve i tomrom. */
+.bs-arbeid {
+    background-color: var(--surface);
+    background-image: radial-gradient(var(--bs-prikk) 2px, transparent 2px);
+    background-size: 28px 28px;
+    border-width: var(--bs-ramme);
+    box-shadow: none;
+    padding: 26px 22px;
+}
+
+.bs-palett {
+    background: var(--bs-palettflate);
+    border-width: var(--bs-ramme);
+    box-shadow: none;
+    padding: 16px 14px;
+}
+
+.bs-leksjonspanel {
+    background: var(--bs-palettflate);
+    border-width: var(--bs-ramme);
+    box-shadow: none;
+}
+
+/* Teikneflata er kvit. Figuren er elevens arbeid, og han skal ikkje ligge
+ * på ei tona flate som gjer fargane hans til noko anna enn dei er. */
+.bs-lerretboks { background: var(--bs-hvit); }
+
+.bs-verktoyrad { gap: 9px; }
+
+.bs-fart { color: var(--text); font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+.bs-fart input { accent-color: var(--bs-boks); }
+
+.bs-status { font-weight: 700; }
+
+.bs-pythonrute, .bs-utskrift { background: var(--bs-hvit); border-width: 3px; box-shadow: none; }
+.bs-feil { background: var(--bs-stopp); border: var(--bs-ramme) solid var(--border); box-shadow: none; }
+
+.bs-stegrad, .bs-stegblokk {
+    background: var(--bs-start);
+    border: var(--bs-ramme) solid var(--border);
+    border-left-width: var(--bs-ramme);
+    box-shadow: none;
+}
+.bs-stegblokk { background: var(--bs-gaa); }
+.bs-stegblokk-tekst { font-family: var(--bs-font); font-weight: 800; }
+
+.bs-variabel {
+    background: var(--bs-boks);
+    border: 3px solid var(--border);
+    border-left-width: 3px;
+    box-shadow: none;
+    font-family: var(--bs-font);
+    font-weight: 800;
+}
+
+/* Fanene over teikninga følgjer same profil: fylt farge, svart tekst. */
+body.bs-tema .box5 .box-tab { font-family: var(--bs-font); font-weight: 800; background: var(--bs-palettflate); color: var(--text); }
+body.bs-tema .box5 .box-tab.active { background: var(--bs-start); color: var(--text); }
+
+/* ---- leksjonen glir vekk medan programmet køyrer ---------------------------
+ *
+ * Spalta blir ikkje borte, ho glir. Eit panel som forsvinn momentant er eit
+ * panel eleven trur han har mist; eit som glir ut mot venstre er eit han veit
+ * kvar er — og knappen i verktøyraden hentar det att.
+ *
+ * Over 1280px er leksjonen ei eiga spalte, så det er spaltebreidda som skal
+ * animerast. Chrome kan animere grid-template-columns; skulle ein nettlesar
+ * ikkje kunne det, skjer det same, berre utan glidinga. */
+
+@media (min-width: 1280px) {
+    .bs-flate:has(> .bs-leksjonspanel:not([hidden])) {
+        transition: grid-template-columns .38s cubic-bezier(.4, 0, .2, 1);
+    }
+    .bs-flate.bs-leksjon-borte:has(> .bs-leksjonspanel:not([hidden])) {
+        grid-template-columns: 0 var(--bs-palett) minmax(280px, 1fr) minmax(320px, 1fr);
+    }
+    .bs-leksjonspanel {
+        transition: opacity .22s ease,
+                    transform .38s cubic-bezier(.4, 0, .2, 1),
+                    padding .38s cubic-bezier(.4, 0, .2, 1),
+                    border-width .38s cubic-bezier(.4, 0, .2, 1);
+    }
+    .bs-leksjon-borte > .bs-leksjonspanel {
+        opacity: 0;
+        transform: translateX(-24px);
+        padding-left: 0;
+        padding-right: 0;
+        border-left-width: 0;
+        border-right-width: 0;
+        pointer-events: none;
+    }
+}
+
+/* Under 1280px ligg leksjonen som eit band øvst, og då er det høgda som
+ * skal gje etter. */
+@media (max-width: 1279px) {
+    .bs-leksjonspanel {
+        transition: max-height .38s cubic-bezier(.4, 0, .2, 1),
+                    opacity .22s ease,
+                    padding .38s cubic-bezier(.4, 0, .2, 1),
+                    border-width .38s cubic-bezier(.4, 0, .2, 1),
+                    margin .38s cubic-bezier(.4, 0, .2, 1);
+    }
+    .bs-leksjon-borte > .bs-leksjonspanel {
+        max-height: 0;
+        opacity: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        border-top-width: 0;
+        border-bottom-width: 0;
+        pointer-events: none;
+    }
+}
+
+/* Panelet må klippe innhaldet sitt medan det krympar, elles stikk teksten
+ * ut av spalta på veg vekk. */
+.bs-leksjon-borte > .bs-leksjonspanel { overflow: hidden; }
+
+/* Knappen ber same fargen som leksjonspanelet er lagt på. */
+body.bs-tema #leksjonKnapp { background: var(--bs-mi); }
+
+@media (prefers-reduced-motion: reduce) {
+    .bs-flate,
+    .bs-leksjonspanel { transition: none; }
+}
