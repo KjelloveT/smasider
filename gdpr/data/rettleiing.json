@@ -11,7 +11,7 @@
       "kvifor": "Artikkel 30 krev det ikkje, men ein protokoll utan eit namn på kvar rad blir eit dokument ingen oppdaterer. Det irske datatilsynet peikar på at protokollen må vere eit levande dokument, og då må nokon vere ansvarleg for kvar linje.",
       "dome": ["HR-sjef", "Rektor", "Avdelingsleiar for teknisk drift"],
       "feil": ["Å skrive «leiinga» eller «alle» — då er det ingen som eig det."],
-      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Maintain a living document»", "url": "https://www.dataprotection.ie/" }
+      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Maintain a living document»", "url": "https://www.dataprotection.ie/en/dpc-guidance/records-of-processing-article-30-guidance" }
     },
 
     "funksjonsomraade": {
@@ -19,7 +19,7 @@
       "kvifor": "Å bryte protokollen ned etter funksjonsområde er det einaste rådet både Datatilsynet og det irske datatilsynet gjev om sjølve arbeidsmåten. Går du område for område, oppdagar du behandlingar du elles ville gløymt — og du ser kva område som manglar heilt.",
       "dome": ["Personal og løn", "Undervisning og elevoppfølging", "Marknad og kommunikasjon", "IT-drift"],
       "feil": ["Å hoppe over område som «ikkje behandlar personopplysningar» utan å sjekke. Det irske datatilsynet såg at dei beste protokollane hadde med alle område, òg dei tomme, nettopp for å vise at dei var vurderte."],
-      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Break down the RoPA with reference to the different functions»", "url": "https://www.dataprotection.ie/" }
+      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Break down the RoPA with reference to the different functions»", "url": "https://www.dataprotection.ie/en/dpc-guidance/records-of-processing-article-30-guidance" }
     },
 
     "kvaGjeld": {
@@ -263,7 +263,7 @@
       "kvifor": "Ikkje kravd av artikkel 30, og likevel eit av dei mest konkrete råda som finst. Det irske datatilsynet fann at verksemder brukte forkortingar som var sjølvsagde internt og uforståelege for tilsynet. Protokollen skal vere sjølvforklarande for ein utanforståande lesar.",
       "dome": ["P360 = Public 360, sak- og arkivsystemet", "GSI = Grunnskolens informasjonssystem", "BHT = bedriftshelsetenesta"],
       "feil": ["Å tru at forkortingane er allment kjende. Det er dei nesten aldri."],
-      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Don't maintain a RoPA that is not self-explanatory»", "url": "https://www.dataprotection.ie/" }
+      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Don't maintain a RoPA that is not self-explanatory»", "url": "https://www.dataprotection.ie/en/dpc-guidance/records-of-processing-article-30-guidance" }
     }
   }
 }
