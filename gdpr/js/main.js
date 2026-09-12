@@ -238,6 +238,9 @@
     GD.innhald.last().then(function (res) {
       GD.uiForside.teikn();
       GD.uiSkjema.teikn();
+      /* Vegvisaren blei teikna før lovteksten var lasta, og hadde då ingen
+         lenkjer å setje inn. */
+      GD.vegvisar.init('vegvisar');
       if (res.feil.length) {
         U().toast('Rettleiingsteksten kunne ikkje lastast. Du kan framleis fylle ut protokollen.',
           { kind: 'warn', ms: 7000 });

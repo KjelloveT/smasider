@@ -42,7 +42,7 @@
         "«Administrasjon» eller «drift» — det er ikkje eit formål, det er ein kategori.",
         "Å slå saman fleire formål i éi rad. Rekruttering og personalmappe har ulike slettefristar og ulikt behandlingsgrunnlag, og då blir raden feil for begge."
       ],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav b", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a30" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav b", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" }
     },
 
     "registrerte": {
@@ -53,7 +53,7 @@
         "«Personar» eller «brukarar» — det seier ingenting.",
         "Å skrive namn på einskildpersonar. Protokollen skal ha kategoriar, ikkje eit register."
       ],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav c", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a30" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav c", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" }
     },
 
     "opplysningar": {
@@ -70,7 +70,7 @@
         "«Kontaktopplysningar» utan å seie kva slag — er fødselsnummer med, er det ei heilt anna sak enn e-post.",
         "Å gløyme å merkje av at noko er ein særleg kategori etter artikkel 9. Fagforeiningsmedlemskap og helseopplysningar dukkar opp i personalmapper oftare enn folk trur."
       ],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav c; Irish DPC, RoPA-rettleiing 2023, «Don't cut corners with detail and granularity»", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a30" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav c; Irish DPC, RoPA-rettleiing 2023, «Don't cut corners with detail and granularity»", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" }
     },
 
     "kjelde": {
@@ -89,7 +89,7 @@
         "Å berre skrive «ingen» utan å ha tenkt gjennom rapporteringsplikter og leverandørar.",
         "Å gløyme at ein skyleverandør som lagrar opplysningane er ein mottakar."
       ],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav d", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a30" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav d", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" }
     },
 
     "grunnlag6": {
@@ -104,7 +104,7 @@
         "Å velje samtykke som standard. Samtykke må vere friviljug, og mellom arbeidsgjevar og tilsett er det sjeldan reelt friviljug.",
         "Å velje rettkomen interesse utan å ha gjort — og skrive ned — interesseavveginga."
       ],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 6", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-2#gdpr/a6" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 6", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_6" }
     },
 
     "grunnlagVising": {
@@ -116,7 +116,7 @@
         "Rettkomen interesse: å hindre tjuveri i lokala. Avveging gjort 12.03.2026, arkivert i sak 2026/114"
       ],
       "feil": ["«Lovpålagt» utan å seie kva lov. Det er ikkje ei tilvising, det er ein påstand."],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 6 nr. 3", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-2#gdpr/a6" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 6 nr. 3", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_6" }
     },
 
     "grunnlag910": {
@@ -130,7 +130,7 @@
         "Å ikkje merke av. Helseopplysningar dukkar opp i personalmapper via sjukemeldingar, og fagforeiningsmedlemskap via trekk på løn.",
         "Å tru at artikkel 9 er dekt av artikkel 6. Det trengst begge."
       ],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 9 og 10", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-2#gdpr/a9" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 9 og 10", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_9" }
     },
 
     "system": {
@@ -157,7 +157,7 @@
         "«Ved behov» eller «så lenge det er nødvendig». Det er ikkje ein frist, det er ei omskriving av spørsmålet.",
         "Å skrive ein frist utan å seie kva som startar han. «Tre år» — frå kva?"
       ],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav f; Irish DPC, RoPA-rettleiing 2023", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a30" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav f; Irish DPC, RoPA-rettleiing 2023", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" }
     },
 
     "sikringstiltak": {
@@ -173,7 +173,7 @@
         "Berre tekniske tiltak. Artikkel 32 krev organisatoriske òg — opplæring, rutinar, tilgangsstyring.",
         "Å vise til eit tryggingsdokument utan å seie noko her."
       ],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav g, jf. artikkel 32; Irish DPC, RoPA-rettleiing 2023", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a30" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav g, jf. artikkel 32; Irish DPC, RoPA-rettleiing 2023", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" }
     },
 
     "hoegRisiko": {
@@ -188,7 +188,7 @@
         "Å svare nei på alt utan å ha sett på Datatilsynet si liste over behandlingar som alltid krev DPIA.",
         "Å levere ein DPIA i staden for ein protokoll. Det irske datatilsynet fekk det i tilsynet sitt og slo fast at ein DPIA ikkje erstattar artikkel 30."
       ],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 35", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-4#gdpr/a35" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 35", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_35" }
     },
 
     "databehandlarar": {
@@ -199,7 +199,7 @@
         "Å gløyme dei små. Eit rekrutteringsverktøy, eit nyheitsbrevsystem og ein skytenest for filer er alle databehandlarar.",
         "Å føre opp ein leverandør utan å sjekke at avtalen finst."
       ],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 28", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a28" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 28", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_28" }
     },
 
     "fellesansvar": {
@@ -207,7 +207,7 @@
       "kvifor": "Artikkel 30 nr. 1 bokstav a nemner felles behandlingsansvarleg. Felles ansvar oppstår når to verksemder saman bestemmer formålet og midlane — ikkje når den eine berre utfører noko for den andre. Då krev artikkel 26 at de har ein avtale om kven som gjer kva.",
       "dome": ["Kommunen og fylkeskommunen i eit felles inntakssystem", "To verksemder som driv ei felles rekrutteringsside"],
       "feil": ["Å blande saman felles behandlingsansvar og databehandlar. Ein leverandør som følgjer instruksane dykkar er ein databehandlar, ikkje ein felles ansvarleg."],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 26 og artikkel 30 nr. 1 bokstav a", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a26" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 26 og artikkel 30 nr. 1 bokstav a", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_26" }
     },
 
     "tredjeland": {
@@ -218,7 +218,7 @@
         "Å svare nei fordi datasenteret ligg i EU, utan å sjekke kven som har tilgang derifrå.",
         "Å ikkje spørje leverandøren. Svaret står som regel i databehandlaravtalen."
       ],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav e og kapittel V", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a30" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav e og kapittel V", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" }
     },
 
     "garantiar": {
@@ -232,7 +232,7 @@
         "Privacy Shield. Ordninga vart kjend ugyldig av EU-domstolen i 2020 (Schrems II), og det irske datatilsynet nemner det spesifikt som eit døme på utdatert informasjon i protokollar.",
         "Å skrive «SCC» utan å seie kva versjon eller modul."
       ],
-      "kjelde": { "tekst": "Personvernforordninga kapittel V; Irish DPC, RoPA-rettleiing 2023", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-5#gdpr/a44" }
+      "kjelde": { "tekst": "Personvernforordninga kapittel V; Irish DPC, RoPA-rettleiing 2023", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_44" }
     }
   },
 
@@ -242,21 +242,21 @@
       "kvifor": "Artikkel 30 nr. 1 bokstav a. Den behandlingsansvarlege er den som bestemmer formålet med og midlane for behandlinga — som regel verksemda som juridisk person, ikkje ei avdeling.",
       "dome": ["Døme kommune", "Døme AS"],
       "feil": ["Å føre opp ei avdeling eller ein person. Ansvaret ligg hjå den juridiske eininga."],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav a, jf. artikkel 4 nr. 7", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a30" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav a, jf. artikkel 4 nr. 7", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" }
     },
     "ombodNamn": {
       "kort": "Personvernombodet, dersom de har eitt.",
       "kvifor": "Artikkel 30 nr. 1 bokstav a krev kontaktopplysningane til ombodet når det finst eitt. Artikkel 37 gjer ombod obligatorisk for offentlege organ og for verksemder som driv systematisk overvaking i stort omfang eller behandlar særlege kategoriar i stort omfang.",
       "dome": ["Kari Nordmann, personvernombod"],
       "feil": ["Å la feltet stå tomt fordi ein trur ombod er friviljug. For offentlege organ er det ikkje det."],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 37 og 38", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-4#gdpr/a37" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 37 og 38", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_37" }
     },
     "repNamn": {
       "kort": "Representanten i EØS, dersom verksemda er etablert utanfor EØS.",
       "kvifor": "Artikkel 27 krev at ei verksemd utanfor EØS som tilbyr varer eller tenester til folk i EØS, peikar ut ein representant her. Er de etablerte i Noreg, skal feltet stå tomt.",
       "dome": [],
       "feil": ["Å fylle det ut når det ikkje er aktuelt. Eit utfylt felt som ikkje gjeld er villeiande."],
-      "kjelde": { "tekst": "Personvernforordninga artikkel 27", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-1#gdpr/a27" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 27", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_27" }
     },
     "omgrep": {
       "kort": "Forkortingar og interne namn de brukar i protokollen, med forklaring.",

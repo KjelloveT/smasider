@@ -417,3 +417,192 @@
   .gd-ark-fot { margin-top: 14pt; font-size: 8pt; }
   .gd-ark th { width: 32%; }
 }
+
+/* ══════════════════════════════════════════════
+   TO SPALTER: SKRIVE TIL VENSTRE, FORKLARING TIL HØGRE
+
+   Rettleiinga låg først under feltet, bak eit trekkspel. Det er rett for eit
+   verktøy folk brukar ofte, og feil for eit opplæringsverktøy: den som treng
+   forklaringa er nettopp den som ikkje veit at han skal klikke etter henne.
+   ══════════════════════════════════════════════ */
+
+.gd-par {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 0 26px;
+  align-items: start;
+  padding-bottom: 22px;
+  margin-bottom: 22px;
+  border-bottom: 2px solid var(--border);
+}
+.gd-par:last-child { border-bottom: none; margin-bottom: 0; }
+
+.gd-par-skriv .gd-felt { margin-bottom: 0; }
+
+/* Forklaringsspalta er ei flate, ikkje eit kort: ho høyrer til feltet ved sida
+   av, og ei eiga ramme rundt ville gjort henne til eit sjølvstendig objekt. */
+.gd-forklaring {
+  background: var(--bg);
+  border-left: 4px solid var(--border);
+  padding: 14px 18px;
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+.gd-forklaring > *:first-child { margin-top: 0; }
+.gd-forklaring > *:last-child { margin-bottom: 0; }
+.gd-forklaring p { margin: 0 0 12px; }
+
+.gd-forklaring-kort { font-weight: 700; }
+
+.gd-forklaring-tittel {
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 16px 0 6px;
+}
+
+/* ──────────────── Lovsitatet ──────────────── */
+
+.gd-lov { margin-bottom: 16px; }
+
+.gd-sitat {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+
+/* Sitatet som ER kravet bak feltet, skil seg med ei tydelegare ramme. Dei
+   andre er artiklar feltet peikar vidare til. */
+.gd-sitat.er-krav { border-width: 3px; }
+
+.gd-sitat-topp {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  margin-bottom: 8px;
+}
+
+.gd-sitat-merke {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-basis: 100%;
+}
+
+.gd-sitat-tittel { font-size: 0.86rem; color: var(--muted); }
+
+/* Lovteksten er eit sitat og skal sjå ut som eitt: serif, litt mindre, og med
+   ei stille innrykking. */
+.gd-sitat-innleiing,
+.gd-sitat-punkt {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0 0 6px;
+}
+.gd-sitat-punkt { padding-left: 18px; text-indent: -18px; }
+.gd-sitat-bokstav { font-weight: 700; font-family: inherit; }
+
+.gd-sitat-meir > summary {
+  font-family: inherit;
+  font-size: 0.84rem;
+  cursor: pointer;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.gd-sitat-meir[open] > summary { margin-bottom: 8px; }
+
+.gd-lov-kjelde { font-size: 0.82rem; color: var(--muted); margin: 0; }
+
+/* ──────────────── Lovlenkjer ──────────────── */
+
+.gd-lovlenkje {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 2px;
+}
+.gd-lovlenkje:hover { text-decoration-thickness: 3px; }
+
+/* Merket bak etiketten er ei lenkje til lova. Det ser ut som eit merke og
+   oppfører seg som ei lenkje — understrekinga er difor teken bort her, og
+   understreket ville uansett kollidert med den runde ramma. */
+a.gd-krav-lenkje {
+  text-decoration: none;
+  cursor: pointer;
+}
+a.gd-krav-lenkje:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+.gd-lovrad { font-size: 0.86rem; margin: 6px 0 0; }
+
+/* ──────────────── Smal skjerm ────────────────
+   Spaltene fell under kvarandre, og forklaringa kjem FØRST — ho er det ein
+   les før ein svarar, ikkje etterpå. */
+
+@media (max-width: 900px) {
+  .gd-par {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  .gd-par-skriv { order: 2; }
+  .gd-forklaring { order: 1; }
+}
+
+@media print {
+  .gd-forklaring, .gd-lov { display: none !important; }
+}
+
+/* SKRIVESPALTA FØLGJER MED NEDOVER.
+
+   Forklaringa er lang med vilje — lovteksten, kvifor kravet finst, døme og
+   vanlege feil. Men då blir raden høgare enn skjermen, og feltet du skal fylle
+   ut forsvinn opp medan du les om det. Ein klebrig venstrespalte løyser det:
+   feltet står stille i synsfeltet heilt til forklaringa er lesen ferdig.
+
+   Berre på brei skjerm. I éi spalte ligg forklaringa over feltet, og då er det
+   ingenting å feste. */
+@media (min-width: 901px) {
+  .gd-par-skriv {
+    position: sticky;
+    top: 16px;
+    align-self: start;
+  }
+
+  /* `position: sticky` sluttar å verke så snart ein forfar lagar ein
+     rullecontainer. To gjer det her, begge frå designsystemet:
+
+       main          { overflow-x: hidden }   — held vassrett skrolling ute
+       .box5         { overflow: hidden }     — klipper dei runde hjørna
+
+     `overflow-x: hidden` impliserer `overflow-y: auto`, og DÅ er det ein
+     rullecontainer. `clip` klipper nøyaktig like godt, men lagar ingen slik
+     container — og bryt difor ikkje sticky. Skilnaden mellom dei to er heile
+     grunnen til at dette er trygt og ikkje eit triks.
+
+     Dette stilarket blir berre lasta på Protokollsmia, så overstyringa når
+     ingen andre sider. */
+  main.main-content { overflow-x: clip; }
+  .box5 { overflow: clip; }
+}
+
+/* Ordrett lovsitat i brødteksten — serif, kantstripe, og kjelde under. */
+.gd-sitat-stor {
+  margin: 18px 0;
+  padding: 14px 18px;
+  border-left: 5px solid var(--border);
+  background: var(--surface);
+}
+.gd-sitat-stor p {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  margin: 0 0 8px;
+}
+.gd-sitat-stor footer { font-size: 0.86rem; color: var(--muted); }

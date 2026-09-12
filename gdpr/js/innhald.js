@@ -25,7 +25,7 @@
 (function (root) {
   'use strict';
 
-  const lager = { rettleiing: null, reglar: null };
+  const lager = { rettleiing: null, reglar: null, lovtekst: null };
   const feil = [];
 
   /**
@@ -66,10 +66,15 @@
   function last() {
     return Promise.all([
       hent('rettleiing', 'gdpr-rettleiing'),
-      hent('reglar', 'gdpr-reglar')
+      hent('reglar', 'gdpr-reglar'),
+      hent('lovtekst', 'gdpr-lovtekst')
     ]).then(function (svar) {
       lager.rettleiing = svar[0];
       lager.reglar = svar[1];
+      lager.lovtekst = svar[2];
+      /* Lovmodulen held sitt eige lager, så oppslaga blir like raske frå
+         kvar som helst i verktøyet. */
+      if (svar[2] && root.GD.lov) GD.lov.settData(svar[2]);
       return { feil: feil.slice() };
     });
   }
