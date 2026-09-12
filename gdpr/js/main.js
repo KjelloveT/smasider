@@ -216,11 +216,25 @@
         Array.prototype.forEach.call(flater, function (fl) {
           fl.hidden = fl.dataset.flate !== maal;
         });
+        /* Tekstfelta på ei skjult fane har scrollHeight 0 og blei difor ikkje
+           målte då dei blei teikna. No er dei synlege. */
+        U().voksAlle(document.querySelector('[data-flate="' + maal + '"]'));
       });
     });
   }
 
   /* ──────────────── Oppstart ──────────────── */
+
+  /* Ei smalare rute gjev fleire linjer i same teksten, så høgdene må reknast
+     om att. Vi ventar til endringa har roa seg — ein dragen vindaugskant fyrer
+     hendinga titals gonger i sekundet. */
+  function bindStorleik() {
+    let t = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(function () { U().voksAlle(document); }, 150);
+    });
+  }
 
   function start() {
     pinnTema();
@@ -229,6 +243,7 @@
     GD.uiSkjema.init('skjema');
     bind();
     bindFaner();
+    bindStorleik();
     teiknBibliotek();
     GD.vegvisar.init('vegvisar');
 

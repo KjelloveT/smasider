@@ -50,6 +50,58 @@
     return btn;
   }
 
+  /* ──────────────── Tekstfelt som veks ────────────────
+
+     Eit textarea med fast høgd tvingar deg til å skrive i eit kikkhol: du ser
+     tre linjer av gongen av eit svar som kan vere ti. Her veks feltet med
+     innhaldet.
+
+     KORLEIS: `height: auto` fyrst, så `scrollHeight`. Utan nullstillinga måler
+     vi den høgda vi alt har sett, og feltet ville berre kunne vekse — aldri
+     krympe når nokon slettar ein paragraf.
+
+     BORDER-DELTA. Felta har `box-sizing: border-box` og 3 px ramme, men
+     `scrollHeight` tel ikkje ramma. Utan påslaget ville kvar måling bli seks
+     piksel for låg, og siste linja ville bli klipt. `offsetHeight - clientHeight`
+     gjev nøyaktig den ramma, uansett kva stilarket seier.
+
+     TAKET er der for det tilfellet nokon limer inn eit heilt dokument. Utan det
+     kunne feltet bli titusen piksel høgt, og knappane under uråd å nå. Over
+     taket får feltet si eiga rulling. */
+  const MAKS_VOKS = 0.5;   // av vindaugshøgda
+
+  function voks(ta) {
+    if (!ta || ta.tagName !== 'TEXTAREA') return;
+    /* Eit felt i ei skjult fane har scrollHeight 0, og då ville vi sett høgda
+       til ramma åleine. Lat det stå til fana blir synleg. */
+    if (!ta.offsetParent && ta.offsetHeight === 0) return;
+
+    const ramme = ta.offsetHeight - ta.clientHeight;
+    ta.style.height = 'auto';
+    const trengst = ta.scrollHeight + ramme;
+    const tak = Math.round(window.innerHeight * MAKS_VOKS);
+
+    if (trengst > tak) {
+      ta.style.height = tak + 'px';
+      ta.style.overflowY = 'auto';
+    } else {
+      ta.style.height = trengst + 'px';
+      ta.style.overflowY = 'hidden';
+    }
+  }
+
+  /**
+   * Måler alle tekstfelta under `rot` på nytt.
+   *
+   * Må kallast etter at felta står i DOM-en — eit textarea som ikkje er sett
+   * inn enno har `scrollHeight` 0 — og på nytt når ei skjult fane blir synleg,
+   * av same grunn.
+   */
+  function voksAlle(rot) {
+    const felt = (rot || document).querySelectorAll('textarea.gd-textarea');
+    Array.prototype.forEach.call(felt, voks);
+  }
+
   /**
    * Eit skjemafelt: etikett, inndata og plass til hjelpetekst under.
    * Returnerer både wrapperen og sjølve inndatafeltet, så den som kallar
@@ -84,7 +136,10 @@
 
     inn.id = id;
     inn.value = verdi == null ? '' : verdi;
-    inn.addEventListener('input', function () { onEndra(inn.value); });
+    inn.addEventListener('input', function () {
+      onEndra(inn.value);
+      voks(inn);
+    });
     inn.addEventListener('change', function () { onEndra(inn.value); });
     wrap.appendChild(inn);
 
@@ -104,6 +159,8 @@
     ordtal: ordtal,
     ikonknapp: ikonknapp,
     feltrad: feltrad,
+    voks: voks,
+    voksAlle: voksAlle,
 
     /* ---- Vidare til fellesmodulen ---- */
     el: Vy.el,
