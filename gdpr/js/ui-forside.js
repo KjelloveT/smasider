@@ -56,6 +56,7 @@
     vert.appendChild(endringsbolk());
 
     if (root.GD.uiRettleiing) GD.uiRettleiing.hekt(vert);
+    U().voksAlle(vert);
   }
 
   function feltFor(gruppeId, felt) {
