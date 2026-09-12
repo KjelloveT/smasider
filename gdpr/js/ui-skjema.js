@@ -84,6 +84,10 @@
 
       vert.appendChild(seksjon);
     });
+
+    /* Tekstfelta kan berre målast når dei står i DOM-en — eit textarea som
+       ikkje er sett inn har scrollHeight 0. Difor her, ikkje i feltrad(). */
+    U().voksAlle(vert);
   }
 
   /**

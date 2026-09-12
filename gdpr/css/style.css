@@ -58,9 +58,19 @@
   font-weight: 600;
 }
 
+/* Feltet veks med teksten — sjå voks() i js/util.js.
+
+   `resize: vertical` er teke bort: dreg du feltet til ei høgd for hand, ville
+   neste tasteslag overstyrt deg, og ein kontroll som ikkje held er verre enn
+   ingen kontroll.
+
+   `overflow-y: hidden` hindrar at ein rullefelt blinkar fram i det eine
+   bilete der innhaldet er høgare enn feltet. JS-en slår han på att dersom
+   teksten passerer taket. */
 .gd-textarea {
   min-height: 92px;
-  resize: vertical;
+  resize: none;
+  overflow-y: hidden;
   line-height: 1.5;
 }
 
