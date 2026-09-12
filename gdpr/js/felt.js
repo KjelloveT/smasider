@@ -63,22 +63,24 @@
       etikett: 'Kva gjeld behandlinga' },
 
     { id: 'formaal', kol: 'D', art30: 'b', type: 'lang', breidd: 46,
-      etikett: 'Formålet med behandlinga' },
+      etikett: 'Formålet med behandlinga', },
 
     { id: 'registrerte', kol: 'E', art30: 'c', type: 'lang', breidd: 34,
       etikett: 'Kategoriar av registrerte' },
 
     { id: 'opplysningar', kol: 'F', art30: 'c', type: 'lang', breidd: 40,
-      etikett: 'Kategoriar av personopplysningar' },
+      etikett: 'Kategoriar av personopplysningar',
+      meirLov: ['9.1'] },
 
     { id: 'kjelde', kol: 'G', art30: null, type: 'lang', breidd: 28,
       etikett: 'Kvar kjem opplysningane frå?' },
 
     { id: 'mottakarar', kol: 'H', art30: 'd', type: 'lang', breidd: 34,
-      etikett: 'Kategoriar av mottakarar' },
+      etikett: 'Kategoriar av mottakarar', },
 
     { id: 'grunnlag6', kol: 'I', art30: null, type: 'val', breidd: 30,
       etikett: 'Behandlingsgrunnlag etter artikkel 6',
+      meirLov: ['6.1'],
       val: [
         'Artikkel 6 nr. 1 bokstav a — samtykke',
         'Artikkel 6 nr. 1 bokstav b — avtale',
@@ -90,12 +92,14 @@
 
     { id: 'grunnlagVising', kol: 'J', art30: null, type: 'lang', breidd: 34,
       etikett: 'Kva rettsleg plikt, allmenn interesse eller rettkomen interesse?',
+      meirLov: ['6.3'],
       /* Berre relevant for bokstav c, e og f. Dei tre krev at du kan peike på
          noko konkret utanfor forordninga — ei lov, ei oppgåve, ei interesse. */
       visNaar: { felt: 'grunnlag6', inneheld: ['bokstav c', 'bokstav e', 'bokstav f'] } },
 
     { id: 'grunnlag910', kol: 'K', art30: null, type: 'val', breidd: 32,
       etikett: 'Behandlingsgrunnlag etter artikkel 9 eller 10',
+      meirLov: ['9.2', '10'],
       val: [
         'Ikkje aktuelt — ingen særlege kategoriar',
         'Artikkel 9 nr. 2 bokstav a — uttrykkeleg samtykke',
@@ -118,16 +122,20 @@
       etikett: 'Planlagde tidsfristar for sletting' },
 
     { id: 'sikringstiltak', kol: 'N', art30: 'g', type: 'lang', breidd: 52,
-      etikett: 'Tekniske og organisatoriske sikringstiltak' },
+      etikett: 'Tekniske og organisatoriske sikringstiltak',
+      meirLov: ['32.1'] },
 
     { id: 'hoegRisiko', kol: 'O', art30: null, type: 'jaNei', breidd: 22,
-      etikett: 'Kan behandlinga innebere høg personvernrisiko?' },
+      etikett: 'Kan behandlinga innebere høg personvernrisiko?',
+      meirLov: ['35.1'] },
 
     { id: 'databehandlarar', kol: 'P', art30: null, type: 'lang', breidd: 30,
-      etikett: 'Namn på databehandlarar' },
+      etikett: 'Namn på databehandlarar',
+      meirLov: ['28.3'] },
 
     { id: 'fellesansvar', kol: 'Q', art30: 'a', type: 'lang', breidd: 32,
-      etikett: 'Felles behandlingsansvarleg — namn og kontaktopplysningar' },
+      etikett: 'Felles behandlingsansvarleg — namn og kontaktopplysningar',
+      meirLov: ['26.1'] },
 
     { id: 'tredjeland', kol: 'R', art30: 'e', type: 'lang', breidd: 30,
       etikett: 'Tredjeland eller internasjonale organisasjonar opplysningane blir overførte til' },
@@ -196,6 +204,21 @@
     return kart[id] || null;
   }
 
+  /**
+   * Alle lovreferansane for eit felt, i rekkjefølgje: artikkel 30-kravet først
+   * (når feltet har eitt), så dei artiklane feltet peikar vidare til.
+   *
+   * Formatet er det `GD.lov` forstår: «30.1.b» = artikkel 30 nr. 1 bokstav b.
+   *
+   * @returns {string[]}
+   */
+  function lovrefar(felt) {
+    const ut = [];
+    if (felt && felt.art30) ut.push('30.1.' + felt.art30);
+    if (felt && felt.meirLov) felt.meirLov.forEach(function (r) { ut.push(r); });
+    return ut;
+  }
+
   /** Alle felt som er lovpålagde etter artikkel 30 nr. 1. */
   function obligatoriske() {
     return AKTIVITET.filter(function (f) { return !!f.art30; });
@@ -225,6 +248,7 @@
     FORSIDE: FORSIDE,
     FORSIDEGRUPPER: FORSIDEGRUPPER,
     get: get,
+    lovrefar: lovrefar,
     obligatoriske: obligatoriske,
     synleg: synleg,
     tomAktivitet: tomAktivitet

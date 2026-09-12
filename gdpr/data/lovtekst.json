@@ -1,0 +1,207 @@
+{
+ "app": "gdpr-lovtekst",
+ "version": 1,
+ "_note": "Ordrett lovtekst frå Lovdata, henta 2026-09-12. Teksten er den offisielle norske omsetjinga av personvernforordninga, og ho er på BOKMÅL. Sitat frå ei lov skal ikkje omsetjast — difor står han slik han står i lova, medan resten av grensesnittet er på nynorsk. Det er eit medvite val, ikkje ein glipp.",
+ "_bruk": "Ein referanse er \"30.1.b\" = artikkel 30, nummer 1, bokstav b. GD.lov.slaaOpp() i gdpr/js/lov.js løyser han opp til tekst, etikett og lenkje.",
+ "_kjelde": {
+  "namn": "Lovdata — Lov om behandling av personopplysninger (personopplysningsloven)",
+  "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38",
+  "henta": "2026-09-12"
+ },
+ "artiklar": {
+  "6": {
+   "tittel": "Behandlingens lovlighet",
+   "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_6",
+   "avsnitt": {
+    "1": "Behandlingen er bare lovlig dersom og i den grad minst ett av følgende vilkår er oppfylt:",
+    "2": "Medlemsstatene kan opprettholde eller innføre mer spesifikke bestemmelser for å tilpasse anvendelsen av reglene for behandling i denne forordning med henblikk på å sikre samsvar med nr. 1 bokstav c) og e) ved nærmere å fastsette mer spesifikke krav til behandlingen samt andre tiltak som har som mål å sikre en lovlig og rettferdig behandling, herunder i forbindelse med andre særlige behandlingssituasjoner som nevnt i kapittel IX.",
+    "3": "Grunnlaget for behandlingen nevnt i nr. 1 bokstav c) og e) skal fastsettes i",
+    "4": "Dersom behandlingen for et annet formål enn det som personopplysningene er blitt samlet inn for, ikke bygger på den registrertes samtykke eller på unionsretten eller medlemsstatenes nasjonale rett som utgjør et nødvendig og forholdsmessig tiltak i et demokratisk samfunn for å sikre oppnåelse av målene nevnt i artikkel 23 nr. 1, skal den behandlingsansvarlige for å avgjøre om behandlingen for et annet formål er forenlig med formålet som personopplysningene opprinnelig ble samlet inn for, blant annet ta hensyn til følgende:"
+   },
+   "bokstav": {
+    "1": {
+     "a": "den registrerte har samtykket til behandling av sine personopplysninger for ett eller flere spesifikke formål,",
+     "b": "behandlingen er nødvendig for å oppfylle en avtale som den registrerte er part i, eller for å gjennomføre tiltak på den registrertes anmodning før en avtaleinngåelse,",
+     "c": "behandlingen er nødvendig for å oppfylle en rettslig forpliktelse som påhviler den behandlingsansvarlige,",
+     "d": "behandlingen er nødvendig for å verne den registrertes eller en annen fysisk persons vitale interesser,",
+     "e": "behandlingen er nødvendig for å utføre en oppgave i allmennhetens interesse eller utøve offentlig myndighet som den behandlingsansvarlige er pålagt,",
+     "f": "behandlingen er nødvendig for formål knyttet til de berettigede interessene som forfølges av den behandlingsansvarlige eller en tredjepart, med mindre den registrertes interesser eller grunnleggende rettigheter og friheter går foran og krever vern av personopplysninger, særlig dersom den registrerte er et barn."
+    },
+    "3": {
+     "a": "unionsretten eller",
+     "b": "medlemsstatens nasjonale rett som den behandlingsansvarlige er underlagt."
+    },
+    "4": {
+     "a": "enhver forbindelse mellom formålene som personopplysningene er blitt samlet inn for, og formålene med den tiltenkte viderebehandlingen,",
+     "b": "i hvilken sammenheng personopplysningene er blitt samlet inn, særlig med hensyn til forholdet mellom de registrerte og den behandlingsansvarlige,",
+     "c": "personopplysningenes art, især om særlige kategorier av personopplysninger behandles, i henhold til artikkel 9, eller om personopplysninger om straffedommer og lovovertredelser behandles, i henhold til artikkel 10,",
+     "d": "de mulige konsekvensene av den tiltenkte viderebehandlingen for de registrerte,",
+     "e": "om det foreligger nødvendige garantier, som kan omfatte kryptering eller pseudonymisering."
+    }
+   }
+  },
+  "9": {
+   "tittel": "Behandling av særlige kategorier av personopplysninger",
+   "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_9",
+   "avsnitt": {
+    "1": "Behandling av personopplysninger om rasemessig eller etnisk opprinnelse, politisk oppfatning, religion, filosofisk overbevisning eller fagforeningsmedlemskap, samt behandling av genetiske opplysninger og biometriske opplysninger med det formål å entydig identifisere en fysisk person, helseopplysninger eller opplysninger om en fysisk persons seksuelle forhold eller seksuelle orientering, er forbudt.",
+    "2": "Nr. 1 får ikke anvendelse dersom et av følgende vilkår er oppfylt:",
+    "3": "Personopplysningene nevnt i nr. 1 kan behandles for formålene nevnt i nr. 2 bokstav h) dersom opplysningene behandles av en fagperson som har taushetsplikt i henhold til unionsretten eller medlemsstatenes nasjonale rett eller regler fastsatt av nasjonale vedkommende organer, eller under en slik persons ansvar, eller av en annen person som også har taushetsplikt i henhold til unionsretten eller medlemsstatenes nasjonale rett eller regler fastsatt av nasjonale vedkommende organer.",
+    "4": "Medlemsstatene kan opprettholde eller innføre ytterligere vilkår, herunder begrensninger, med hensyn til behandling av genetiske opplysninger, biometriske opplysninger eller helseopplysninger."
+   },
+   "bokstav": {
+    "2": {
+     "a": "Den registrerte har gitt uttrykkelig samtykke til behandling av slike personopplysninger for ett eller flere spesifikke formål, unntatt dersom det i unionsretten eller medlemsstatenes nasjonale rett er fastsatt at den registrerte ikke kan oppheve forbudet nevnt i nr. 1.",
+     "b": "Behandlingen er nødvendig for at den behandlingsansvarlige eller den registrerte skal kunne oppfylle sine forpliktelser og utøve sine særlige rettigheter på området arbeidsrett, trygderett og sosialrett i den grad dette er tillatt i henhold til unionsretten eller medlemsstatenes nasjonale rett, eller en tariffavtale i henhold til medlemsstatenes nasjonale rett som gir nødvendige garantier for den registrertes grunnleggende rettigheter og interesser.",
+     "c": "Behandlingen er nødvendig for å verne den registrertes eller en annen fysisk persons vitale interesser dersom den registrerte fysisk eller juridisk ikke er i stand til å gi samtykke.",
+     "d": "Behandlingen utføres av en stiftelse, sammenslutning eller et annet ideelt organ hvis mål er av politisk, religiøs eller fagforeningsmessig art, som ledd i organets berettigede aktiviteter og med nødvendige garantier, forutsatt at behandlingen bare gjelder organets medlemmer eller tidligere medlemmer eller personer som på grunn av organets mål har regelmessig kontakt med det, og at personopplysningene ikke utleveres til andre enn nevnte organ uten de registrertes samtykke.",
+     "e": "Behandlingen gjelder personopplysninger som det er åpenbart at den registrerte har offentliggjort.",
+     "f": "Behandlingen er nødvendig for å fastsette, gjøre gjeldende eller forsvare rettskrav eller når domstolene handler innenfor rammen av sin domsmyndighet.",
+     "g": "Behandlingen er nødvendig av hensyn til viktige allmenne interesser, på grunnlag av unionsretten eller medlemsstatenes nasjonale rett som skal stå i et rimelig forhold til det mål som søkes oppnådd, være forenlig med det grunnleggende innholdet i retten til vern av personopplysninger og sikre egnede og særlige tiltak for å verne den registrertes grunnleggende rettigheter og interesser.",
+     "h": "Behandlingen er nødvendig i forbindelse med forebyggende medisin eller arbeidsmedisin for å vurdere en arbeidstakers arbeidskapasitet, i forbindelse med medisinsk diagnostikk, yting av helse- eller sosialtjenester, behandling eller forvaltning av helse- eller sosialtjenester og -systemer på grunnlag av unionsretten eller medlemsstatenes nasjonale rett eller i henhold til en avtale med helsepersonell og med forbehold for vilkårene og garantiene nevnt i nr. 3.",
+     "i": "Behandlingen er nødvendig av allmenne folkehelsehensyn, f.eks. vern mot alvorlige grenseoverskridende helsetrusler eller for å sikre høye kvalitets- og sikkerhetsstandarder for helsetjenester og legemidler eller medisinsk utstyr, på grunnlag av unionsretten eller medlemsstatenes nasjonale rett der det fastsettes egnede og særlige tiltak for å verne den registrertes rettigheter og friheter, særlig taushetsplikt.",
+     "j": "Behandlingen er nødvendig for arkivformål i allmennhetens interesse, for formål knyttet til vitenskapelig eller historisk forskning eller for statistiske formål i samsvar med artikkel 89 nr. 1 på grunnlag av unionsretten eller medlemsstatenes nasjonale rett som skal stå i et rimelig forhold til det mål som søkes oppnådd, være forenlig med det grunnleggende innholdet i retten til vern av personopplysninger og sikre egnede og særlige tiltak for å verne den registrertes grunnleggende rettigheter og interesser."
+    }
+   }
+  },
+  "10": {
+   "tittel": "Behandling av personopplysninger om straffedommer og lovovertredelser",
+   "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_10",
+   "avsnitt": {
+    "0": "Behandling av personopplysninger om straffedommer og lovovertredelser eller tilknyttede sikkerhetstiltak på grunnlag av artikkel 6 nr. 1 skal bare utføres under en offentlig myndighets kontroll eller dersom behandlingen er tillatt i henhold til unionsretten eller medlemsstatenes nasjonale rett som sikrer nødvendige garantier for de registrertes rettigheter og friheter. Alle omfattende registre over straffedommer må bare føres under en offentlig myndighets kontroll."
+   },
+   "bokstav": {}
+  },
+  "26": {
+   "tittel": "Felles behandlingsansvarlige",
+   "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_26",
+   "avsnitt": {
+    "1": "Dersom to eller flere behandlingsansvarlige i fellesskap fastsetter formålene med og midlene for behandlingen, skal de være felles behandlingsansvarlige. De skal på en åpen måte fastsette sitt respektive ansvar for å overholde forpliktelsene i denne forordning, særlig med hensyn til utøvelse av den registrertes rettigheter og den plikt de har til å framlegge informasjonen nevnt i artikkel 13 og 14, ved hjelp av en ordning seg imellom, med mindre og i den grad de behandlingsansvarliges respektive ansvar er fastsatt i unionsretten eller medlemsstatenes nasjonale rett som de behandlingsansvarlige er underlagt. I ordningen kan det utpekes et kontaktpunkt for registrerte.",
+    "2": "Ordningen nevnt i nr. 1 skal på behørig måte gjenspeile de felles behandlingsansvarliges respektive roller og forhold til de registrerte. Det vesentligste innholdet i ordningen skal gjøres tilgjengelig for den registrerte.",
+    "3": "Uavhengig av vilkårene for ordningen nevnt i nr. 1 kan den registrerte utøve sine rettigheter i henhold til denne forordning med hensyn til og overfor hver av de behandlingsansvarlige."
+   },
+   "bokstav": {}
+  },
+  "27": {
+   "tittel": "Representanter for behandlingsansvarlige eller databehandlere som ikke er etablert i Unionen",
+   "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_27",
+   "avsnitt": {
+    "1": "Dersom artikkel 3 nr. 2 får anvendelse, skal den behandlingsansvarlige eller databehandleren skriftlig utpeke en representant i Unionen.",
+    "2": "Forpliktelsen fastsatt i nr. 1 i denne artikkel får ikke anvendelse på",
+    "3": "Representanten skal være etablert i en av medlemsstatene der de registrerte hvis personopplysninger behandles i forbindelse med tilbud av varer eller tjenester til dem eller hvis atferd monitoreres, befinner seg.",
+    "4": "Den behandlingsansvarlige eller databehandleren skal gi representanten fullmakt til å være den, i tillegg til eller istedenfor den behandlingsansvarlige eller databehandleren, som især tilsynsmyndigheter og registrerte kan henvende seg til ved spørsmål om behandlingen, med henblikk på å sikre overholdelse av denne forordning.",
+    "5": "Den behandlingsansvarliges eller databehandlerens utpeking av en representant skal ikke berøre eventuelle rettslige skritt mot den behandlingsansvarlige eller databehandleren selv."
+   },
+   "bokstav": {
+    "2": {
+     "a": "behandling som skjer leilighetsvis, som ikke omfatter behandling i stor skala av særlige kategorier av opplysninger som nevnt i artikkel 9 nr. 1, eller behandling av personopplysninger om straffedommer eller lovovertredelser som nevnt i artikkel 10, og som sannsynligvis ikke vil medføre en risiko for fysiske personers rettigheter og friheter, idet det tas hensyn til behandlingens art, omfang, formål og sammenhengen den utføres i, eller",
+     "b": "en offentlig myndighet eller et offentlig organ."
+    }
+   }
+  },
+  "28": {
+   "tittel": "Databehandler",
+   "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_28",
+   "avsnitt": {
+    "1": "Dersom en behandling skal utføres på vegne av en behandlingsansvarlig, skal den behandlingsansvarlige bare bruke databehandlere som gir tilstrekkelige garantier for at de vil gjennomføre egnede tekniske og organisatoriske tiltak som sikrer at behandlingen oppfyller kravene i denne forordning og vern av den registrertes rettigheter.",
+    "2": "Databehandleren skal ikke engasjere en annen databehandler uten at det på forhånd er innhentet særlig eller generell skriftlig tillatelse til dette fra den behandlingsansvarlige. Dersom det er innhentet en generell skriftlig tillatelse, skal databehandleren underrette den behandlingsansvarlige om eventuelle planer om å benytte andre databehandlere eller skifte ut databehandlere, og dermed gi den behandlingsansvarlige muligheten til å motsette seg slike endringer.",
+    "3": "Behandling utført av en databehandler skal være underlagt en avtale eller et annet rettslig dokument i henhold til unionsretten eller medlemsstatenes nasjonale rett som er bindende for databehandleren med hensyn til den behandlingsansvarlige, og der gjenstanden for og varigheten av behandlingen, behandlingens art og formål, typen personopplysninger og kategorier av registrerte samt den behandlingsansvarliges rettigheter og plikter er fastsatt. I nevnte avtale eller nevnte andre rettslige dokument skal det særlig angis at databehandleren",
+    "4": "Dersom en databehandler engasjerer en annen databehandler for å utføre spesifikke behandlingsaktiviteter på vegne av den behandlingsansvarlige, skal nevnte andre databehandler pålegges de samme forpliktelsene med hensyn til vern av personopplysninger som er fastsatt i avtalen eller i et annet rettslig dokument mellom den behandlingsansvarlige og databehandleren som nevnt i nr. 3, ved hjelp av en avtale eller et annet rettslig dokument i henhold til unionsretten eller medlemsstatenes nasjonale rett, der det særlig gis tilstrekkelige garantier for at det vil bli gjennomført tekniske og organisatoriske tiltak som sikrer at behandlingen oppfyller kravene i denne forordning. Dersom nevnte andre databehandler ikke oppfyller sine forpliktelser med hensyn til vern av personopplysninger, skal den opprinnelige databehandleren overfor den behandlingsansvarlige ha fullt ansvar for at nevnte andre databehandler oppfyller sine forpliktelser.",
+    "5": "En databehandlers overholdelse av godkjente atferdsnormer som nevnt i artikkel 40 eller en godkjent sertifiseringsmekanisme som nevnt i artikkel 42 kan brukes som en faktor for å påvise at det foreligger tilstrekkelige garantier som nevnt i nr. 1 og 4 i denne artikkel.",
+    "6": "Uten at det berører en individuell avtale mellom den behandlingsansvarlige og databehandleren, kan avtalen eller det andre rettslige dokumentet nevnt i nr. 3 og 4 i denne artikkel helt eller delvis bygge på standardavtalevilkårene nevnt i nr. 7 og 8 i denne artikkel, herunder når de inngår i en sertifisering som er gitt den behandlingsansvarlige eller databehandleren i henhold til artikkel 42 og 43.",
+    "7": "Kommisjonen kan fastsette standardavtalevilkår for tilfellene nevnt i nr. 3 og 4 i denne artikkel og i samsvar med undersøkelsesprosedyren nevnt i artikkel 93 nr. 2.",
+    "8": "En tilsynsmyndighet kan vedta standardavtalevilkår for tilfellene nevnt i nr. 3 og 4 i denne artikkel og i samsvar med konsistensmekanismen nevnt i artikkel 63.",
+    "9": "Avtalen eller det andre rettslige dokumentet nevnt i nr. 3 og 4 skal være skriftlig, herunder elektronisk.",
+    "10": "Dersom en databehandler overtrer bestemmelsene i denne forordning ved å fastsette formålene med og midlene for behandlingen, skal databehandleren anses for å være en behandlingsansvarlig med hensyn til nevnte behandling, uten at det berører artikkel 82, 83 og 84."
+   },
+   "bokstav": {
+    "3": {
+     "a": "behandler personopplysningene bare på dokumenterte instrukser fra den behandlingsansvarlige, herunder med hensyn til overføring av personopplysninger til en tredjestat eller en internasjonal organisasjon, med mindre det kreves i henhold til unionsretten eller medlemsstatenes nasjonale rett som databehandleren er underlagt; i så fall skal databehandleren underrette den behandlingsansvarlige om nevnte rettslige krav før behandlingen, men mindre denne rett av hensyn til viktige allmenne interesser forbyr en slik underretning,",
+     "b": "sikrer at personer som er autorisert til å behandle personopplysningene, har forpliktet seg til å behandle opplysningene konfidensielt eller er underlagt en egnet lovfestet taushetsplikt,",
+     "c": "treffer alle tiltak som er nødvendig i henhold til artikkel 32,",
+     "d": "overholder vilkårene nevnt i nr. 2 og 4 når det gjelder å engasjere en annen databehandler,",
+     "e": "idet det tas hensyn til behandlingens art og i den grad det er mulig, bistår, ved hjelp av egnede tekniske og organisatoriske tiltak, den behandlingsansvarlige med å oppfylle vedkommendes plikt til å svare på anmodninger som den registrerte inngir med henblikk på å utøve sine rettigheter fastsatt i kapittel III,",
+     "f": "bistår den behandlingsansvarlige med å sikre overholdelse av forpliktelsene i henhold til artikkel 32-36, idet det tas hensyn til behandlingens art og den informasjonen som er tilgjengelig for databehandleren,",
+     "g": "etter den behandlingsansvarliges valg, sletter eller tilbakeleverer alle personopplysninger til den behandlingsansvarlige etter at tjenestene knyttet til behandlingen er levert, og sletter eksisterende kopier, med mindre unionsretten eller medlemsstatenes nasjonale rett krever at personopplysningene lagres,",
+     "h": "gjør tilgjengelig for den behandlingsansvarlige all informasjon som er nødvendig for å påvise at forpliktelsene fastsatt i denne artikkel er oppfylt, samt muliggjør og bidrar til revisjoner, herunder inspeksjoner, som gjennomføres av den behandlingsansvarlige eller en annen revisor på fullmakt fra den behandlingsansvarlige."
+    }
+   }
+  },
+  "30": {
+   "tittel": "Protokoller over behandlingsaktiviteter",
+   "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30",
+   "avsnitt": {
+    "1": "Hver behandlingsansvarlig og, dersom det er relevant, den behandlingsansvarliges representant skal føre en protokoll over behandlingsaktiviteter som utføres under deres ansvar. Nevnte protokoll skal inneholde følgende informasjon:",
+    "2": "Hver databehandler og, dersom det er relevant, databehandlerens representant skal føre en protokoll over alle kategorier av behandlingsaktiviteter som er utført på vegne av en behandlingsansvarlig, og som skal inneholde:",
+    "3": "Protokollene nevnt i nr. 1 og 2 skal være skriftlige, herunder elektroniske.",
+    "4": "Den behandlingsansvarlige eller databehandleren og, dersom det er relevant, den behandlingsansvarliges eller databehandlerens representant skal på anmodning gjøre protokollen tilgjengelig for tilsynsmyndigheten.",
+    "5": "Forpliktelsene nevnt i nr. 1 og 2 gjelder ikke et foretak eller en organisasjon med færre enn 250 ansatte, med mindre behandlingen det/den utfører, sannsynligvis vil medføre en risiko for de registrertes rettigheter og friheter, behandlingen ikke skjer leilighetsvis eller omfatter særlige kategorier av opplysninger som nevnt i artikkel 9 nr. 1 eller personopplysninger om straffedommer og lovovertredelser nevnt i artikkel 10."
+   },
+   "bokstav": {
+    "1": {
+     "a": "navnet på og kontaktopplysningene til den behandlingsansvarlige og, dersom det er relevant, den felles behandlingsansvarlige, den behandlingsansvarliges representant og personvernombudet,",
+     "b": "formålene med behandlingen,",
+     "c": "en beskrivelse av kategoriene av registrerte og kategoriene av personopplysninger,",
+     "d": "kategoriene av mottakere som personopplysningene er blitt eller vil bli utlevert til, herunder mottakere i tredjestater eller internasjonale organisasjoner,",
+     "e": "dersom det er relevant, overføringer av personopplysninger til en tredjestat eller en internasjonal organisasjon, herunder identifikasjon av nevnte tredjestat eller internasjonale organisasjon og, ved overføringer nevnt i artikkel 49 nr. 1 annet ledd, dokumentasjon på nødvendige garantier,",
+     "f": "dersom det er mulig, de planlagte tidsfristene for sletting av de forskjellige kategoriene av opplysninger,",
+     "g": "dersom det er mulig, en generell beskrivelse av de tekniske og organisatoriske sikkerhetstiltakene nevnt i artikkel 32 nr. 1."
+    },
+    "2": {
+     "a": "navnet på og kontaktopplysningene til databehandleren eller databehandlerne og til hver behandlingsansvarlig som databehandleren opptrer på vegne av, samt, dersom det er relevant, den behandlingsansvarliges eller databehandlerens representant og personvernombudet,",
+     "b": "kategoriene av behandling utført på vegne av hver behandlingsansvarlig,",
+     "c": "dersom det er relevant, overføringer av personopplysninger til en tredjestat eller en internasjonal organisasjon, herunder identifikasjon av nevnte tredjestat eller internasjonale organisasjon og, ved overføringer nevnt i artikkel 49 nr. 1 annet ledd, dokumentasjon på nødvendige garantier,",
+     "d": "dersom det er mulig, en generell beskrivelse av de tekniske og organisatoriske sikkerhetstiltakene nevnt i artikkel 32 nr. 1."
+    }
+   }
+  },
+  "32": {
+   "tittel": "Sikkerhet ved behandlingen",
+   "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_32",
+   "avsnitt": {
+    "1": "Idet det tas hensyn til den tekniske utviklingen, gjennomføringskostnadene og behandlingens art, omfang, formål og sammenhengen den utføres i, samt risikoene av varierende sannsynlighets- og alvorlighetsgrad for fysiske personers rettigheter og friheter, skal den behandlingsansvarlige og databehandleren gjennomføre egnede tekniske og organisatoriske tiltak for å oppnå et sikkerhetsnivå som er egnet med hensyn til risikoen, herunder blant annet, alt etter hva som er egnet,",
+    "2": "Ved vurderingen av egnet sikkerhetsnivå skal det særlig tas hensyn til risikoene forbundet med behandlingen, særlig som følge av utilsiktet eller ulovlig tilintetgjøring, tap, endring eller ikke-autorisert utlevering av eller tilgang til personopplysninger som er overført, lagret eller på annen måte behandlet.",
+    "3": "Overholdelse av godkjente atferdsnormer som nevnt i artikkel 40 eller en godkjent sertifiseringsmekanisme som nevnt i artikkel 42 kan brukes som en faktor for å påvise at kravene i nr. 1 i denne artikkel er oppfylt.",
+    "4": "Den behandlingsansvarlige og databehandleren skal treffe tiltak for å sikre at enhver fysisk person som handler for den behandlingsansvarlige eller databehandleren, og som har tilgang til personopplysninger, behandler nevnte opplysninger bare etter instruks fra den behandlingsansvarlige, med mindre unionsretten eller medlemsstatenes nasjonale rett krever at vedkommende gjør dette."
+   },
+   "bokstav": {
+    "1": {
+     "a": "pseudonymisering og kryptering av personopplysninger,",
+     "b": "evne til å sikre vedvarende konfidensialitet, integritet, tilgjengelighet og robusthet i behandlingssystemene og -tjenestene,",
+     "c": "evne til å gjenopprette tilgjengeligheten og tilgangen til personopplysninger i rett tid dersom det oppstår en fysisk eller teknisk hendelse,",
+     "d": "en prosess for regelmessig testing, analysering og vurdering av hvor effektive behandlingens tekniske og organisatoriske sikkerhetstiltak er."
+    }
+   }
+  },
+  "35": {
+   "tittel": "Vurdering av personvernkonsekvenser",
+   "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_35",
+   "avsnitt": {
+    "1": "Dersom det er sannsynlig at en type behandling, særlig ved bruk av ny teknologi og idet det tas hensyn til behandlingens art, omfang, formål og sammenhengen den utføres i, vil medføre en høy risiko for fysiske personers rettigheter og friheter, skal den behandlingsansvarlige før behandlingen foreta en vurdering av hvilke konsekvenser den planlagte behandlingen vil ha for personopplysningsvernet. En vurdering kan omfatte flere lignende behandlingsaktiviteter som innebærer tilsvarende høye risikoer.",
+    "2": "Den behandlingsansvarlige skal rådføre seg med personvernombudet, dersom et personvernombud er utpekt, i forbindelse med utførelsen av en vurdering av personvernkonsekvenser.",
+    "3": "En vurdering av personvernkonsekvenser som nevnt i nr. 1 skal særlig være nødvendig i følgende tilfeller:",
+    "4": "Tilsynsmyndigheten skal utarbeide og offentliggjøre en liste over hvilke typer behandlingsaktiviteter som omfattes av kravet om vurdering av personvernkonsekvenser i henhold til nr. 1. Tilsynsmyndigheten skal oversende nevnte lister til Personvernrådet nevnt i artikkel 68.",
+    "5": "Tilsynsmyndigheten kan også utarbeide og offentliggjøre en liste over hvilke typer behandlingsaktiviteter det ikke kreves at det utføres en vurdering av personvernkonsekvenser for. Tilsynsmyndigheten skal oversende nevnte lister til Personvernrådet.",
+    "6": "Før listene nevnt i nr. 4 og 5 godkjennes, skal vedkommende tilsynsmyndighet anvende konsistensmekanismen nevnt i artikkel 63 dersom slike lister omfatter behandlingsaktiviteter som gjelder tilbud av varer eller tjenester til registrerte eller monitorering av deres atferd i flere medlemsstater, eller som i betydelig grad kan påvirke den frie utveksling av personopplysninger i Unionen.",
+    "7": "Vurderingen skal minst inneholde",
+    "8": "Det skal tas behørig hensyn til de berørte behandlingsansvarliges eller databehandleres overholdelse av godkjente atferdsnormer som nevnt i artikkel 40 ved vurderingen av konsekvensene av behandlingsaktivitetene som utføres av nevnte behandlingsansvarlige eller databehandlere, særlig med henblikk på en vurdering av personvernkonsekvenser.",
+    "9": "Dersom det er relevant, skal den behandlingsansvarlige innhente synspunkter på den planlagte behandlingen fra de registrerte eller deres representanter uten at det berører vernet av kommersielle eller allmenne interesser eller sikkerheten ved behandlingsaktivitetene.",
+    "10": "Dersom behandling i henhold til artikkel 6 nr. 1 bokstav c) eller e) har et rettslig grunnlag i unionsretten eller retten i medlemsstaten som den behandlingsansvarlige er underlagt, og nevnte rett regulerer den eller de aktuelle spesifikke behandlingsaktivitetene, og det allerede er utført en vurdering av personvernkonsekvenser som en del av en generell konsekvensvurdering i forbindelse med vedtakelse av nevnte rettslige grunnlag, får nr. 1-7 ikke anvendelse, med mindre medlemsstatene anser det nødvendig å utføre en slik vurdering før behandlingsaktivitetene.",
+    "11": "Ved behov skal den behandlingsansvarlige foreta en gjennomgåelse for å vurdere om behandlingen utføres i samsvar med vurderingen av personvernkonsekvenser, i det minste dersom risikoen som behandlingen medfører, endres."
+   },
+   "bokstav": {
+    "3": {
+     "a": "en systematisk og omfattende vurdering av personlige aspekter ved fysiske personer som er basert på automatisert behandling, herunder profilering, og som danner grunnlag for avgjørelser som har rettsvirkning for den fysiske personen eller på lignende måte i betydelig grad påvirker den fysiske personen,",
+     "b": "behandling i stor skala av særlige kategorier av opplysninger som nevnt i artikkel 9 nr. 1, eller av personopplysninger om straffedommer og lovovertredelser som nevnt i artikkel 10, eller",
+     "c": "en systematisk overvåking i stor skala av et offentlig tilgjengelig område."
+    },
+    "7": {
+     "a": "en systematisk beskrivelse av de planlagte behandlingsaktivitetene og formålene med behandlingen, herunder, dersom det er relevant, den berettigede interessen som forfølges av den behandlingsansvarlige,",
+     "b": "en vurdering av om behandlingsaktivitetene er nødvendige og står i et rimelig forhold til formålene,",
+     "c": "en vurdering av risikoene for de registrertes rettigheter og friheter som nevnt i nr. 1, og",
+     "d": "de planlagte tiltakene for å håndtere risikoene, herunder garantier, sikkerhetstiltak og mekanismer for å sikre vern av personopplysninger og for å påvise at denne forordning overholdes, idet det tas hensyn til de registrertes og andre berørte personers rettigheter og berettigede interesser."
+    }
+   }
+  }
+ }
+}

@@ -3,6 +3,15 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.47] — 2026-09-12
+
+### Endra
+- **Protokollsmia viser lovteksten ved sida av feltet.** Skjemaet under «Behandlingsaktivitetar» er delt i to spalter: feltet til venstre, forklaringa til høgre. Rettleiinga låg før under feltet, bak eit «Kvifor spør vi om dette?»-trekkspel — det er rett for eit verktøy folk brukar ofte, og feil for eit opplæringsverktøy, der den som treng forklaringa er nettopp den som ikkje veit at han skal klikke etter henne. Trekkspelet er borte, og alt står framme heile tida.
+  - **Ordrett lovtekst.** Ni artiklar er henta frå Lovdata — 6, 9, 10, 26, 27, 28, 30, 32 og 35. Kvart felt viser det artikkel 30-kravet som gjer feltet obligatorisk, pluss den artikkelen feltet peikar vidare til: sikringstiltak viser både artikkel 30 nr. 1 bokstav g og artikkel 32 nr. 1. Teksten står på bokmål fordi den offisielle norske omsetjinga er det, og eit lovsitat blir ikkje omsett — det blir sagt i grensesnittet så skiftet ikkje ser ut som ein glipp.
+  - **Kvar referanse er ei lenkje.** «Art. 30 nr. 1 b» bak etiketten opnar Lovdata, og det same gjer referansane i vegvisaren, kjeldelista og rettleiinga. Lovdata har ein eigen URL per artikkel som landar rett på teksten; dei gamle kapittel-URL-ane med fragment er bytte ut alle stader.
+  - **Skrivespalta følgjer med nedover.** Forklaringa er lang med vilje, og då blir raden høgare enn skjermen — feltet du skal fylle ut forsvinn opp medan du les om det. Feltet står no stille i synsfeltet til forklaringa er lesen.
+  - På smal skjerm fell spaltene under kvarandre med **forklaringa først**. Ho er det ein les før ein svarar.
+
 ## [1.46] — 2026-09-08
 
 ### Lagt til

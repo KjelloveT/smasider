@@ -15,7 +15,7 @@
       "tittel": "Eit felt artikkel 30 krev står tomt",
       "kvifor": "Artikkel 30 nr. 1 listar opp kva protokollen skal innehalde. Står feltet tomt, er protokollen ikkje komplett — og det er det første ein kontrollør ser etter.",
       "gjer": "Fyll ut feltet. Er svaret at det ikkje er aktuelt for denne behandlinga, skriv det — «Ingen mottakarar utanfor verksemda» er eit svar, eit tomt felt er det ikkje.",
-      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a30" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" }
     },
 
     {
@@ -37,7 +37,7 @@
       "tittel": "Sikringstiltaka er for vagt skildra",
       "kvifor": "Det irske datatilsynet fann nettopp denne formuleringa i tilsynet sitt i 2022, og slo fast at ho ikkje held. Artikkel 30 nr. 1 bokstav g ber om ei generell skildring — men ei skildring skal seie kva tiltaka er.",
       "gjer": "Namngje tiltaka. Til dømes: «Tofaktor på administratorkontoar, tilgang styrt etter rolle, kryptert lagring, logg som blir gjennomgått kvartalsvis, og opplæring i personvern for nytilsette.» Hugs at artikkel 32 krev organisatoriske tiltak i tillegg til dei tekniske.",
-      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023; personvernforordninga artikkel 32", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-2#gdpr/a32" }
+      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023; personvernforordninga artikkel 32", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_32" }
     },
 
     {
@@ -49,7 +49,7 @@
       "tittel": "Sikringstiltaka er skildra på under fem ord",
       "kvifor": "Artikkel 30 nr. 1 bokstav g viser til artikkel 32, som handlar om både tekniske og organisatoriske tiltak. Fire ord rekk sjeldan til begge delar.",
       "gjer": "Skriv kva som faktisk vernar opplysningane — kven som har tilgang, korleis tilgangen blir styrt, kva som er kryptert, og kva rutinar som gjeld.",
-      "kjelde": { "tekst": "Personvernforordninga artikkel 32", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-2#gdpr/a32" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 32", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_32" }
     },
 
     {
@@ -84,7 +84,7 @@
       "tittel": "Kategorien av registrerte er for vid",
       "kvifor": "Artikkel 30 nr. 1 bokstav c ber om ei skildring av kategoriane. «Personar» er ikkje ein kategori — det er alle.",
       "gjer": "Skriv kva grupper det gjeld: tilsette, søkjarar, elevar, føresette, kundar, besøkjande. Ulike grupper har ofte ulike slettefristar, og då bør dei uansett vere kvar si rad.",
-      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav c", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a30" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav c", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" }
     },
 
     {
@@ -95,7 +95,7 @@
       "tittel": "Slettefristen seier ikkje noko om tid",
       "kvifor": "Artikkel 30 nr. 1 bokstav f ber om planlagde tidsfristar. «Ved behov» og «så lenge det er nødvendig» er omskrivingar av spørsmålet, ikkje svar på det.",
       "gjer": "Skriv eit tidsrom og kva som startar det: «Fem år etter utgangen av rekneskapsåret», «seks månader etter at tilsetjinga er avslutta», «sju dagar». Ein frist utan startpunkt er halvvegs.",
-      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav f", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-1#gdpr/a30" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav f", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" }
     },
 
     {
@@ -121,7 +121,7 @@
       "tittel": "Overføringsgrunnlaget er ikkje gyldig lenger",
       "kvifor": "Safe Harbor fall i 2015 (Schrems I) og Privacy Shield i 2020 (Schrems II). Det irske datatilsynet nemner nettopp Privacy Shield som døme på utdatert informasjon som framleis stod i protokollar i 2022.",
       "gjer": "Bruk gjeldande grunnlag: EUs standard personvernvilkår (SCC, 2021/914) med modul og dato, EU–US Data Privacy Framework der leverandøren er sertifisert, eller ei anna ordning i kapittel V.",
-      "kjelde": { "tekst": "Personvernforordninga kapittel V; Irish DPC, RoPA-rettleiing 2023", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-5#gdpr/a44" }
+      "kjelde": { "tekst": "Personvernforordninga kapittel V; Irish DPC, RoPA-rettleiing 2023", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_44" }
     },
 
     {
@@ -133,7 +133,7 @@
       "tittel": "Overføring til tredjeland utan at garantiane er skildra",
       "kvifor": "Artikkel 30 nr. 1 bokstav e krev at protokollen dokumenterer garantiane når opplysningar blir overførte ut av EØS. Ei overføring utan grunnlag i kapittel V er ulovleg.",
       "gjer": "Skriv kva som gjer overføringa lovleg, og ver konkret: kva ordning, kva versjon, og når vurderinga vart gjord.",
-      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav e og kapittel V", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-5#gdpr/a44" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 30 nr. 1 bokstav e og kapittel V", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_44" }
     },
 
     {
@@ -183,7 +183,7 @@
       "tittel": "Høg risiko — då krev artikkel 35 ei vurdering av personvernkonsekvensar",
       "kvifor": "Svarar de ja her, utløyser artikkel 35 ei plikt til å gjere ein DPIA før behandlinga startar. Protokollen er den naturlege staden å oppdage kva behandlingar som treng ei slik vurdering.",
       "gjer": "Sjekk om det er gjort ein DPIA for denne behandlinga. Er han gjort, skriv gjerne kvar han ligg. Merk at ein DPIA ikkje erstattar protokollen — det irske datatilsynet fekk DPIA-ar i staden for protokoll i tilsynet sitt, og godtok det ikkje.",
-      "kjelde": { "tekst": "Personvernforordninga artikkel 35", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-4-4#gdpr/a35" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 35", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_35" }
     },
 
     {
@@ -195,7 +195,7 @@
       "tittel": "Samtykke som behandlingsgrunnlag — er det reelt friviljug?",
       "kvifor": "Samtykke må vere friviljug, spesifikt, informert og utvitydig, og kunne trekkjast tilbake like lett som det blei gjeve. Mellom arbeidsgjevar og tilsett er det sjeldan reelt friviljug, fordi partane ikkje er likestilte.",
       "gjer": "Gjeld behandlinga tilsette, sjå om eit anna grunnlag passar betre — avtale (bokstav b), rettsleg plikt (bokstav c) eller rettkomen interesse (bokstav f). Er samtykke likevel rett, må de kunne dokumentere det og la folk trekkje det tilbake.",
-      "kjelde": { "tekst": "Personvernforordninga artikkel 4 nr. 11 og artikkel 7; fortalepunkt 43", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/KAPITTEL_gdpr-2#gdpr/a7" }
+      "kjelde": { "tekst": "Personvernforordninga artikkel 4 nr. 11 og artikkel 7; fortalepunkt 43", "url": "https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_7" }
     }
 
   ]

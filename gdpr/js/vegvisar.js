@@ -35,24 +35,28 @@
   const SPORSMAAL = [
     { id: 'tilsette',
       tekst: 'Har verksemda 250 tilsette eller fleire?',
+      lovref: '30.5',
       hjelp: 'Terskelen står i artikkel 30 nr. 5.',
       jaGjevPlikt: true,
       jaGrunn: 'Verksemder med 250 tilsette eller fleire er omfatta av plikta uansett. Unntaket i artikkel 30 nr. 5 gjeld berre under denne terskelen.' },
 
     { id: 'jamleg',
       tekst: 'Behandlar de personopplysningar jamleg — ikkje berre no og då?',
+      lovref: '30.5',
       hjelp: 'Har de tilsette, behandlar de lønsopplysningar kvar månad. Har de kundar eller elevar, behandlar de opplysningar om dei heile tida.',
       jaGjevPlikt: true,
       jaGrunn: 'Behandlinga skjer ikkje leilegheitsvis. Det er eitt av dei tre vilkåra som set unntaket til side — og det som gjeld flest. Løn og personaladministrasjon er dei vanlegaste døma.' },
 
     { id: 'saerlege',
       tekst: 'Behandlar de helseopplysningar, fagforeiningsmedlemskap, religion, etnisitet, biometri, opplysningar om seksuelle forhold — eller opplysningar om straffedomar?',
+      lovref: '9.1',
       hjelp: 'Sjukemeldingar og trekk til fagforeining i lønssystemet tel. Det same gjer politiattestar.',
       jaGjevPlikt: true,
       jaGrunn: 'Behandlinga omfattar særlege kategoriar etter artikkel 9 eller opplysningar etter artikkel 10. Det er eitt av dei tre vilkåra som set unntaket til side.' },
 
     { id: 'risiko',
       tekst: 'Kan behandlinga innebere ein risiko for dei registrerte sine rettar og fridomar?',
+      lovref: '30.5',
       hjelp: 'Merk at det held med «ein risiko» her — ikkje «høg risiko», som er terskelen for DPIA etter artikkel 35. Overvaking, profilering og opplysningar om born er typiske døme.',
       jaGjevPlikt: true,
       jaGrunn: 'Behandlinga vil sannsynlegvis medføre ein risiko for dei registrerte. Det er eitt av dei tre vilkåra som set unntaket til side. Terskelen er «ein risiko», ikkje «høg risiko».' }
@@ -74,6 +78,14 @@
       const boks = u.el('div', 'gd-vegvisar-sporsmaal');
       boks.appendChild(u.el('p', 'gd-vegvisar-tekst', sp.tekst));
       if (sp.hjelp) boks.appendChild(u.el('p', 'gd-hjelp', sp.hjelp));
+
+      /* Lenkje til lova rett under spørsmålet. Det er heile poenget med
+         vegvisaren: du skal kunne sjå etter sjølv. */
+      if (sp.lovref && root.GD.lov && GD.lov.harData()) {
+        const p = u.el('p', 'gd-lovrad');
+        p.appendChild(GD.lov.lenkje(sp.lovref));
+        boks.appendChild(p);
+      }
 
       const rad = u.el('div', 'gd-knapperad');
       [['ja', 'Ja'], ['nei', 'Nei'], ['veit', 'Veit ikkje']].forEach(function (par) {

@@ -79,19 +79,30 @@
         const felt = GD.felt.get(id);
         if (!felt) return;
         if (!GD.felt.synleg(felt, a)) return;
-        seksjon.appendChild(feltrad(felt, a));
+        seksjon.appendChild(feltpar(felt, a));
       });
 
       vert.appendChild(seksjon);
     });
-
-    /* Rettleiinga blir hekta på etter at skjemaet er bygd. Trygt å kalle òg
-       når data/-filene ikkje er lasta — då gjer han ingenting. */
-    if (root.GD.uiRettleiing) GD.uiRettleiing.hekt(vert);
   }
 
-  function feltrad(felt, aktivitet) {
+  /**
+   * Eitt felt som to spalter: inndata til venstre, forklaring til høgre.
+   *
+   * KVIFOR TO SPALTER. Rettleiinga låg først under feltet, bak eit trekkspel.
+   * Det er rett for eit verktøy folk brukar ofte, og feil for eit
+   * opplæringsverktøy: den som treng forklaringa er nettopp den som ikkje veit
+   * at han skal klikke etter henne. Med to spalter står lovteksten og
+   * forklaringa ved sida av feltet medan ein skriv, og ein slepp å velje.
+   *
+   * På smal skjerm fell spaltene under kvarandre — med forklaringa FØRST,
+   * sidan ho er det ein les før ein svarar.
+   */
+  function feltpar(felt, aktivitet) {
     const u = U();
+    const par = u.el('div', 'gd-par');
+
+    const venstre = u.el('div', 'gd-par-skriv');
     const rad = u.feltrad(felt, aktivitet[felt.id], function (verdi) {
       GD.state.settFelt(aktivitet.id, felt.id, verdi);
       /* Eit felt som styrer om eit anna skal visast, må teikne skjemaet på
@@ -101,19 +112,31 @@
 
     const etikett = rad.rot.querySelector('.gd-etikett');
     if (felt.art30) {
-      etikett.appendChild(u.el('span', 'gd-krav gd-krav-maa', 'Art. 30 nr. 1 ' + felt.art30));
+      /* Merket er ei LENKJE til lova, ikkje berre ein tekst. Ein referanse
+         skal alltid vere eitt klikk frå kjelda si. */
+      const ref = '30.1.' + felt.art30;
+      if (root.GD.lov && GD.lov.harData()) {
+        const a = GD.lov.lenkje(ref, { kort: true });
+        a.className = 'gd-krav gd-krav-maa gd-krav-lenkje';
+        etikett.appendChild(a);
+      } else {
+        etikett.appendChild(u.el('span', 'gd-krav gd-krav-maa', GD.lov
+          ? GD.lov.etikett(ref, true) : 'Art. 30 nr. 1 ' + felt.art30));
+      }
     } else {
       etikett.appendChild(u.el('span', 'gd-krav gd-krav-kan', 'Tillegg'));
     }
+    venstre.appendChild(rad.rot);
 
-    /* Rettleiinga blir hekta på her av ui-rettleiing.js når ho er lasta.
-       Kroken står klar frå starten så innhaldet ikkje dyttar skjemaet nedover
-       når det kjem. */
-    rad.under.dataset.felt = felt.id;
+    const hoegre = root.GD.uiRettleiing
+      ? GD.uiRettleiing.spalte(felt)
+      : u.el('aside', 'gd-forklaring');
 
-    return rad.rot;
+    par.appendChild(venstre);
+    par.appendChild(hoegre);
+    return par;
   }
 
   root.GD = root.GD || {};
-  root.GD.uiSkjema = { init: init, teikn: teikn, BOLKAR: BOLKAR };
+  root.GD.uiSkjema = { init: init, teikn: teikn, feltpar: feltpar, BOLKAR: BOLKAR };
 })(window);

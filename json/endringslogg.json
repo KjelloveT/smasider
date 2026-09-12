@@ -2,6 +2,24 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.47",
+      "dato": "2026-09-12",
+      "samandrag": "Protokollsmia viser lovteksten ved sida av feltet du fyller ut.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Protokollsmia",
+          "merke": "eksperiment",
+          "tekst": "Skjemaet er delt i to: feltet til venstre, forklaringa og den ordrette lovteksten til høgre. Alt står framme heile tida i staden for bak eit trekkspel."
+        },
+        {
+          "t": "endra",
+          "kva": "Protokollsmia",
+          "tekst": "Kvar tilvising til ein artikkel er no ei lenkje rett til teksten på Lovdata."
+        }
+      ]
+    },
+    {
       "versjon": "1.46",
       "dato": "2026-09-08",
       "samandrag": "Eit nytt verktøy for å lage behandlingsprotokoll etter GDPR artikkel 30, med rettleiing til kvart felt.",
