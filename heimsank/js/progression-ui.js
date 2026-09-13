@@ -238,6 +238,30 @@ const ProgressionUI = (function () {
     }
   });
 
+  // ---- Synk med andre faner ----
+  // Heimsank kan vere open i fleire faner, eller kome att frå bfcache med
+  // gamle tal. Les poeng og opplåsingar på nytt når ei anna fane har skrive
+  // til lageret, eller når sida blir vist att, og teikn berre om noko er endra.
+  function syncFromStorage() {
+    const snapshot = () => JSON.stringify([
+      Progression.getPoints(),
+      (S.cats || []).map(c => Progression.isUnlocked(c.id))
+    ]);
+    const before = snapshot();
+    Progression.reload();
+    if (snapshot() === before) return;
+    renderPoints();
+    if (S.cats && S.cats.length) renderCovers(S.cats);
+  }
+
+  window.addEventListener('storage', e => {
+    // key er null når ei anna fane tømer heile localStorage
+    if (e.key === null || e.key === 'VyrdepilStorage') syncFromStorage();
+  });
+  window.addEventListener('pageshow', e => {
+    if (e.persisted) syncFromStorage();
+  });
+
   return {
     renderPoints, renderCovers, renderBadgeGallery,
     openBadgeGallery, closeBadgeGallery,
