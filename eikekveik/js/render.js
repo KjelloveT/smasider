@@ -1,55 +1,101 @@
-// Eikekveik — Render (nodar + SVG-kantar)
+// Eikekveik — Render (nodar, former, SVG-kantar og eigenskapspanelet)
 
 Eikekveik.Render = (function () {
     const SVG_NS = 'http://www.w3.org/2000/svg';
+    let resizeObserver = null;
 
-    function init() {}
+    function init() {
+        // Storleiken på ein node kjem frå innhaldet og kan endre seg utan at
+        // state gjer det: medan nokon skriv, når ein font blir lasta eller når
+        // ein node blir rot. Då må forma og linjene teiknast på nytt.
+        resizeObserver = new ResizeObserver(entries => {
+            for (const entry of entries) {
+                const el = entry.target;
+                const node = Eikekveik.State.findNode(parseInt(el.dataset.id, 10));
+                if (node && el.isConnected) drawShape(el, node);
+            }
+            renderEdges();
+        });
+        ensureEdgeLayer();
+        buildPanel();
+    }
+
+    function svgEl(tag, attrs) {
+        const node = document.createElementNS(SVG_NS, tag);
+        for (const [k, v] of Object.entries(attrs || {})) node.setAttribute(k, v);
+        return node;
+    }
 
     function renderAll() {
         renderNodes();
         renderEdges();
         updateUndoRedo();
-        renderColorPalette();
+        updatePanel();
     }
 
-    function renderNodes() {
-        const canvas = Eikekveik.el.canvas;
-        const existing = new Map();
-        canvas.querySelectorAll('.node').forEach(el => {
-            existing.set(parseInt(el.dataset.id, 10), el);
+    function nodeEls() {
+        const map = new Map();
+        Eikekveik.el.world.querySelectorAll('.node').forEach(el => {
+            map.set(parseInt(el.dataset.id, 10), el);
         });
+        return map;
+    }
 
-        const seen = new Set();
+    // ── Nodar ──
+
+    function renderNodes() {
+        const world = Eikekveik.el.world;
+        const existing = nodeEls();
         const nodes = Eikekveik.State.getNodes();
         const selectedId = Eikekveik.State.getSelectedId();
         const rootId = nodes.find(n => n.parentId == null)?.id;
+        const seen = new Set();
+        const drawn = [];
 
         for (const n of nodes) {
             seen.add(n.id);
             let el = existing.get(n.id);
             if (!el) {
                 el = createNodeEl(n);
-                canvas.appendChild(el);
-            } else {
-                updateNodeEl(el, n);
+                world.appendChild(el);
+                resizeObserver.observe(el);
             }
+            updateNodeEl(el, n);
             el.classList.toggle('selected', n.id === selectedId);
             el.classList.toggle('root', n.id === rootId);
+            drawn.push([el, n]);
         }
 
         for (const [id, el] of existing) {
-            if (!seen.has(id)) el.remove();
+            if (!seen.has(id)) {
+                resizeObserver.unobserve(el);
+                el.remove();
+            }
         }
+
+        // Formene blir teikna etter alle DOM-endringane, så layouten berre
+        // blir rekna ut éin gong.
+        for (const [el, n] of drawn) drawShape(el, n);
     }
 
     function createNodeEl(node) {
         const el = document.createElement('div');
         el.className = 'node';
         el.dataset.id = node.id;
-        el.style.left = node.x + 'px';
-        el.style.top = node.y + 'px';
-        el.style.background = node.color;
         el.tabIndex = 0;
+
+        const shape = svgEl('svg', { class: 'node-shape', 'aria-hidden': 'true' });
+        shape.append(
+            svgEl('path', { class: 'shape-shadow' }),
+            svgEl('path', { class: 'shape-fill' }),
+            svgEl('path', { class: 'shape-detail' })
+        );
+        el.appendChild(shape);
+
+        const icon = document.createElement('span');
+        icon.className = 'node-icon';
+        icon.hidden = true;
+        el.appendChild(icon);
 
         const text = document.createElement('span');
         text.className = 'node-text';
@@ -84,47 +130,128 @@ Eikekveik.Render = (function () {
     function updateNodeEl(el, node) {
         el.style.left = node.x + 'px';
         el.style.top = node.y + 'px';
-        el.style.background = node.color;
+        el.style.setProperty('--node-fill', node.color);
+        if (el.dataset.shape !== node.shape) el.dataset.shape = node.shape;
+
         const text = el.querySelector('.node-text');
         if (text && text.textContent !== node.text) {
             text.textContent = node.text;
         }
+
+        const iconKey = node.icon ? node.icon.type + ':' + node.icon.value : '';
+        if (el.dataset.icon !== iconKey) {
+            el.dataset.icon = iconKey;
+            fillIcon(el.querySelector('.node-icon'), node.icon, 24);
+        }
+    }
+
+    function fillIcon(target, icon, size) {
+        target.replaceChildren();
+        target.hidden = !icon;
+        if (!icon) return;
+        if (icon.type === 'emoji') {
+            target.textContent = icon.value;
+        } else {
+            // ICON() gjev fast SVG-markup frå vår eigen ikonmodul og set aldri
+            // namnet inn i markupen — eit ukjent namn gjev berre eit tomt ikon.
+            target.innerHTML = ICON(icon.value, size);
+        }
+    }
+
+    function drawShape(el, node) {
+        const w = el.offsetWidth;
+        const h = el.offsetHeight;
+        const key = `${node.shape}|${w}|${h}`;
+        if (el.dataset.shapeKey === key) return;
+        el.dataset.shapeKey = key;
+
+        const svg = el.querySelector('.node-shape');
+        svg.setAttribute('width', w);
+        svg.setAttribute('height', h);
+        svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+
+        const p = Eikekveik.Shapes.paths(node.shape, w, h);
+        svg.querySelector('.shape-shadow').setAttribute('d', p.outline);
+        svg.querySelector('.shape-fill').setAttribute('d', p.outline);
+        const detail = svg.querySelector('.shape-detail');
+        if (p.detail) detail.setAttribute('d', p.detail);
+        else detail.removeAttribute('d');
+    }
+
+    // ── Kantar ──
+
+    function ensureEdgeLayer() {
+        const svg = Eikekveik.el.edges;
+        if (svg.querySelector('.edge-layer')) return;
+        const defs = svgEl('defs');
+        const marker = svgEl('marker', {
+            id: 'ek-arrow', viewBox: '0 0 10 10', refX: '8', refY: '5',
+            markerWidth: '4', markerHeight: '4',
+            orient: 'auto-start-reverse', markerUnits: 'strokeWidth'
+        });
+        marker.appendChild(svgEl('path', { d: 'M0 0L10 5L0 10Z' }));
+        defs.appendChild(marker);
+        svg.append(defs, svgEl('g', { class: 'edge-layer' }));
+    }
+
+    // Linjene som SVG-stiar i verdskoordinatar. Både lerretet og
+    // PNG-eksporten brukar denne, så dei to kan ikkje bli ulike.
+    function edgePaths() {
+        const els = nodeEls();
+        const out = [];
+        for (const e of Eikekveik.State.getEdges()) {
+            const a = Eikekveik.State.findNode(e.fromId);
+            const b = Eikekveik.State.findNode(e.toId);
+            const aEl = els.get(e.fromId);
+            const bEl = els.get(e.toId);
+            if (!a || !b || !aEl || !bEl) continue;
+            out.push(edgePath(a, aEl.offsetWidth, aEl.offsetHeight, b, bEl.offsetWidth, bEl.offsetHeight));
+        }
+        return out;
+    }
+
+    function edgePath(a, aw, ah, b, bw, bh) {
+        const acx = a.x + aw / 2, acy = a.y + ah / 2;
+        const bcx = b.x + bw / 2, bcy = b.y + bh / 2;
+
+        // Linja går mellom dei to sidene som vender mot kvarandre, langs den
+        // aksen der det er mest luft mellom nodane. Eit flytskjema som går
+        // nedover får då linjer frå botn til topp, og pilspissen peikar rett.
+        const gapX = Math.abs(bcx - acx) - (aw + bw) / 2;
+        const gapY = Math.abs(bcy - acy) - (ah + bh) / 2;
+        const vertical = gapY > gapX;
+        const [sideA, sideB] = vertical
+            ? (bcy >= acy ? ['bottom', 'top'] : ['top', 'bottom'])
+            : (bcx >= acx ? ['right', 'left'] : ['left', 'right']);
+
+        const p = Eikekveik.Shapes.anchor(a.shape, aw, ah, sideA);
+        const q = Eikekveik.Shapes.anchor(b.shape, bw, bh, sideB);
+        const x1 = a.x + p.x, y1 = a.y + p.y;
+        const x2 = b.x + q.x, y2 = b.y + q.y;
+
+        if (vertical) {
+            const k = (y2 - y1) / 2;
+            return `M ${x1} ${y1} C ${x1} ${y1 + k}, ${x2} ${y2 - k}, ${x2} ${y2}`;
+        }
+        const k = (x2 - x1) / 2;
+        return `M ${x1} ${y1} C ${x1 + k} ${y1}, ${x2 - k} ${y2}, ${x2} ${y2}`;
     }
 
     function renderEdges() {
-        const svg = Eikekveik.el.edges;
-        const canvas = Eikekveik.el.canvas;
-        const rect = canvas.getBoundingClientRect();
-        svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
-
-        while (svg.firstChild) svg.removeChild(svg.firstChild);
-
-        const edges = Eikekveik.State.getEdges();
-        for (const e of edges) {
-            const from = Eikekveik.State.findNode(e.fromId);
-            const to = Eikekveik.State.findNode(e.toId);
-            if (!from || !to) continue;
-            const fromEl = canvas.querySelector(`.node[data-id="${from.id}"]`);
-            const toEl = canvas.querySelector(`.node[data-id="${to.id}"]`);
-            if (!fromEl || !toEl) continue;
-
-            const x1 = from.x + fromEl.offsetWidth / 2;
-            const y1 = from.y + fromEl.offsetHeight / 2;
-            const x2 = to.x + toEl.offsetWidth / 2;
-            const y2 = to.y + toEl.offsetHeight / 2;
-
-            const path = document.createElementNS(SVG_NS, 'path');
-            const dx = (x2 - x1) * 0.5;
-            const d = `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
-            path.setAttribute('d', d);
-            svg.appendChild(path);
+        const layer = Eikekveik.el.edges.querySelector('.edge-layer');
+        layer.replaceChildren();
+        const arrows = Eikekveik.State.getArrows();
+        for (const d of edgePaths()) {
+            const path = svgEl('path', { d });
+            if (arrows) path.setAttribute('marker-end', 'url(#ek-arrow)');
+            layer.appendChild(path);
         }
     }
 
     function updateNodePosition(id) {
         const node = Eikekveik.State.findNode(id);
         if (!node) return;
-        const el = Eikekveik.el.canvas.querySelector(`.node[data-id="${id}"]`);
+        const el = Eikekveik.el.world.querySelector(`.node[data-id="${id}"]`);
         if (el) {
             el.style.left = node.x + 'px';
             el.style.top = node.y + 'px';
@@ -137,9 +264,11 @@ Eikekveik.Render = (function () {
         Eikekveik.el.btnRedo.disabled = !Eikekveik.State.canRedo();
     }
 
-    function renderColorPalette() {
-        const row = Eikekveik.el.colorRow;
-        if (row.children.length) return;
+    // ── Eigenskapspanelet ──
+
+    function buildPanel() {
+        const el = Eikekveik.el;
+
         for (const c of Eikekveik.COLORS) {
             const btn = document.createElement('button');
             btn.className = 'color-swatch';
@@ -148,33 +277,52 @@ Eikekveik.Render = (function () {
             btn.style.background = c.value;
             btn.setAttribute('aria-label', 'Farge: ' + c.name);
             btn.title = c.name;
-            row.appendChild(btn);
+            el.colorRow.appendChild(btn);
+        }
+
+        const grids = { kart: el.shapeGridKart, flyt: el.shapeGridFlyt };
+        for (const [group, grid] of Object.entries(grids)) {
+            for (const s of Eikekveik.Shapes.inGroup(group)) {
+                const btn = document.createElement('button');
+                btn.className = 'shape-btn';
+                btn.type = 'button';
+                btn.dataset.shape = s.id;
+                btn.title = s.hint ? `${s.name}: ${s.hint}` : s.name;
+                btn.append(Eikekveik.Shapes.previewSvg(s.id), Vy.el('span', 'shape-name', s.name));
+                grid.appendChild(btn);
+            }
         }
     }
 
-    function showColorPalette(show) {
-        Eikekveik.el.colorPalette.hidden = !show;
-        if (show) updateActiveSwatch();
-    }
+    function updatePanel() {
+        const el = Eikekveik.el;
+        const id = Eikekveik.State.getSelectedId();
+        const node = id != null ? Eikekveik.State.findNode(id) : null;
 
-    function updateActiveSwatch() {
-        const selId = Eikekveik.State.getSelectedId();
-        const node = selId ? Eikekveik.State.findNode(selId) : null;
-        const row = Eikekveik.el.colorRow;
-        row.querySelectorAll('.color-swatch').forEach(btn => {
-            btn.classList.toggle('active', node && btn.dataset.color === node.color);
+        el.panelEmpty.hidden = !!node;
+        el.panelNode.hidden = !node;
+        el.arrowsToggle.checked = Eikekveik.State.getArrows();
+        if (!node) return;
+
+        el.colorRow.querySelectorAll('.color-swatch').forEach(btn => {
+            btn.setAttribute('aria-pressed', btn.dataset.color === node.color ? 'true' : 'false');
         });
-    }
+        el.shapePicker.querySelectorAll('.shape-btn').forEach(btn => {
+            btn.setAttribute('aria-pressed', btn.dataset.shape === node.shape ? 'true' : 'false');
+        });
 
-    function getCanvasPoint(clientX, clientY) {
-        const r = Eikekveik.el.canvas.getBoundingClientRect();
-        return { x: clientX - r.left, y: clientY - r.top };
+        const preview = el.iconPreview;
+        fillIcon(preview, node.icon, 28);
+        preview.hidden = false;
+        preview.classList.toggle('empty', !node.icon);
+        if (!node.icon) preview.textContent = 'Ikkje valt';
+
+        el.btnIcon.textContent = node.icon ? 'Byt ikon' : 'Vel ikon';
+        el.btnIconRemove.disabled = !node.icon;
     }
 
     return {
-        init, renderAll, renderNodes, renderEdges,
-        updateNodePosition, updateUndoRedo,
-        showColorPalette, updateActiveSwatch,
-        getCanvasPoint
+        init, renderAll, renderNodes, renderEdges, edgePaths,
+        updateNodePosition, updateUndoRedo, updatePanel
     };
 })();

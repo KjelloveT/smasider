@@ -4,7 +4,8 @@ Eikekveik.State = (function () {
     const HISTORY_LIMIT = 20;
 
     const state = {
-        nodes: [],          // [{ id, text, x, y, color, parentId }]
+        nodes: [],          // [{ id, text, x, y, color, parentId, shape, icon }]
+        arrows: false,      // piler på linjene, gjeld heile kartet
         selectedId: null,
         nextId: 1,
         history: [],
@@ -39,8 +40,35 @@ Eikekveik.State = (function () {
         state.selectedId = id;
     }
 
+    function getArrows() {
+        return state.arrows;
+    }
+
+    function setArrows(on) {
+        state.arrows = !!on;
+        pushHistory();
+    }
+
+    // Eit importert kart kan innehalde kva som helst, så kvar node blir
+    // bygd opp att felt for felt i staden for å bli kopiert rett inn.
+    function cleanNode(n) {
+        const color = typeof n.color === 'string' && /^#[0-9a-f]{3,8}$/i.test(n.color)
+            ? n.color : Eikekveik.DEFAULT_COLOR;
+        return {
+            id: Number(n.id),
+            text: String(n.text ?? ''),
+            x: Number(n.x) || 0,
+            y: Number(n.y) || 0,
+            color,
+            parentId: n.parentId == null ? null : Number(n.parentId),
+            shape: Eikekveik.Shapes.has(n.shape) ? n.shape : Eikekveik.DEFAULT_SHAPE,
+            icon: Eikekveik.Symbols.clean(n.icon)
+        };
+    }
+
     function reset() {
         state.nodes = [];
+        state.arrows = false;
         state.nextId = 1;
         state.selectedId = null;
         state.history = [];
@@ -64,14 +92,8 @@ Eikekveik.State = (function () {
 
     function load(snapshot) {
         if (!snapshot || !Array.isArray(snapshot.nodes)) return;
-        state.nodes = snapshot.nodes.map(n => ({
-            id: n.id,
-            text: String(n.text || ''),
-            x: Number(n.x) || 0,
-            y: Number(n.y) || 0,
-            color: n.color || Eikekveik.DEFAULT_COLOR,
-            parentId: n.parentId ?? null
-        }));
+        state.nodes = snapshot.nodes.map(cleanNode).filter(n => Number.isFinite(n.id));
+        state.arrows = !!snapshot.arrows;
         state.nextId = state.nodes.reduce((m, n) => Math.max(m, n.id), 0) + 1;
         state.selectedId = null;
         state.history = [];
@@ -81,7 +103,8 @@ Eikekveik.State = (function () {
 
     function snapshot() {
         return {
-            nodes: state.nodes.map(n => ({ ...n })),
+            nodes: state.nodes.map(n => ({ ...n, icon: n.icon ? { ...n.icon } : null })),
+            arrows: state.arrows,
             nextId: state.nextId
         };
     }
@@ -93,7 +116,9 @@ Eikekveik.State = (function () {
             x: props.x ?? 100,
             y: props.y ?? 100,
             color: props.color ?? Eikekveik.DEFAULT_COLOR,
-            parentId: props.parentId ?? null
+            parentId: props.parentId ?? null,
+            shape: props.shape ?? Eikekveik.DEFAULT_SHAPE,
+            icon: props.icon ?? null
         };
         state.nodes.push(node);
         if (!opts.skipHistory) pushHistory();
@@ -172,6 +197,7 @@ Eikekveik.State = (function () {
 
     function applySnapshot(snap) {
         state.nodes = snap.nodes.map(n => ({ ...n }));
+        state.arrows = !!snap.arrows;
         state.nextId = snap.nextId;
         if (!findNode(state.selectedId)) state.selectedId = null;
     }
@@ -179,7 +205,7 @@ Eikekveik.State = (function () {
     return {
         init, reset, load, snapshot,
         getNodes, getEdges, findNode, descendants,
-        getSelectedId, setSelected,
+        getSelectedId, setSelected, getArrows, setArrows,
         addNode, updateNode, deleteNode,
         undo, redo, canUndo, canRedo, pushHistory
     };

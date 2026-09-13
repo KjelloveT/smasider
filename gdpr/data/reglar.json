@@ -69,7 +69,7 @@
       "tittel": "Opplysningskategorien seier ikkje kva som faktisk blir samla inn",
       "kvifor": "Det irske datatilsynet peikar på svar som «personal information» og «responses to questions» og seier dei «unequivocally are not sufficient». Skilnaden mellom «kontaktopplysningar» og «namn, adresse, telefon, fødselsnummer» er skilnaden på ein protokoll som kan brukast og ein som ikkje kan det.",
       "gjer": "List opp kva de faktisk har. Til dømes: «Namn, fødselsnummer, adresse, telefon, kontonummer, skattekort, fråværsdagar.» Merk særskilt om noko er ein særleg kategori etter artikkel 9.",
-      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Don't cut corners with detail and granularity»", "url": "https://www.dataprotection.ie/" }
+      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Don't cut corners with detail and granularity»", "url": "https://www.dataprotection.ie/en/dpc-guidance/records-of-processing-article-30-guidance" }
     },
 
     {
@@ -106,7 +106,7 @@
       "tittel": "Svaret viser til eit dokument som ikkje ligg ved",
       "kvifor": "Det irske datatilsynet fann protokollar som viste til lagringsrutinar og interne dokument som ikkje var tilgjengelege for tilsynet, og slår fast at protokollen skal vere «a complete, self-contained document». Ein kontrollør kan ikkje klikke på ei lenkje til ein intern filserver.",
       "gjer": "Skriv innhaldet i protokollen i staden for å vise til det. Vil du behalde tilvisinga, skriv begge: «Fem år, jf. lagringsrutinen punkt 4.2.»",
-      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Don't maintain a RoPA that is not self-explanatory»; fortalepunkt 82", "url": "https://www.dataprotection.ie/" }
+      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Don't maintain a RoPA that is not self-explanatory»; fortalepunkt 82", "url": "https://www.dataprotection.ie/en/dpc-guidance/records-of-processing-article-30-guidance" }
     },
 
     {
@@ -147,7 +147,7 @@
       "tittel": "Forkorting som ikkje er forklart",
       "kvifor": "Det irske datatilsynet fann forkortingar som var sjølvsagde internt og uforståelege for tilsynet. Protokollen skal kunne lesast av nokon utanfrå utan å gjette.",
       "gjer": "Skriv forkortinga ut første gongen, eller før henne opp under «Forkortingar og omgrep» på forsida. Gjer du det siste, sluttar denne merknaden å kome.",
-      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Using acronyms that are undefined»", "url": "https://www.dataprotection.ie/" }
+      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Using acronyms that are undefined»", "url": "https://www.dataprotection.ie/en/dpc-guidance/records-of-processing-article-30-guidance" }
     },
 
     {
@@ -159,7 +159,7 @@
       "tittel": "Same sikringstiltak ordrett i mange aktivitetar",
       "kvifor": "Det er heilt greitt at fleire behandlingar har same tiltak — men når same setninga står ordrett i mange rader, er det oftare eit teikn på klipp og lim enn på ei reell vurdering. Ulike system har som regel ulik sikring.",
       "gjer": "Sjå over om tiltaka faktisk er dei same. Ligg opplysningane i ulike system, er tilgangsstyringa sjeldan identisk.",
-      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Use the RoPA as a tool to demonstrate compliance»", "url": "https://www.dataprotection.ie/" }
+      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023, «Use the RoPA as a tool to demonstrate compliance»", "url": "https://www.dataprotection.ie/en/dpc-guidance/records-of-processing-article-30-guidance" }
     },
 
     {
@@ -171,7 +171,7 @@
       "tittel": "Same slettefrist ordrett i mange aktivitetar",
       "kvifor": "Det irske datatilsynet peikar på at slettefristar som regel skil seg mellom kategoriar av opplysningar. Ein protokoll der alt har same frist er sjeldan rett.",
       "gjer": "Sjå over kvar frist for seg. Lønsbilag, søknadar frå dei som ikkje fekk stillinga, og personalmapper har ulike fristar i lov og praksis.",
-      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023", "url": "https://www.dataprotection.ie/" }
+      "kjelde": { "tekst": "Irish DPC, RoPA-rettleiing 2023", "url": "https://www.dataprotection.ie/en/dpc-guidance/records-of-processing-article-30-guidance" }
     },
 
     {
