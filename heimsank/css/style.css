@@ -917,6 +917,15 @@ body {
 .modal-card-footer { padding: 20px; display: flex; flex-direction: column; gap: 12px; color: #1a1a1a; }
 .modal-card-stat     { font-size: 1.1rem; font-weight: 700; }
 .modal-card-category { font-size: 0.9rem; font-weight: 900; text-transform: uppercase; opacity: 0.7; }
+.modal-card-credit {
+  display: flex; align-items: flex-start; gap: 6px;
+  font-size: 0.75rem; line-height: 1.4; opacity: 0.8;
+  overflow-wrap: anywhere;
+}
+.modal-card-credit-icon { display: inline-flex; flex-shrink: 0; margin-top: 1px; }
+.modal-card-credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.modal-card-credit a:hover { opacity: .6; }
+.modal-card-credit a:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 2px; }
 
 .modal-close {
   position: absolute; top: 10px; right: 10px;

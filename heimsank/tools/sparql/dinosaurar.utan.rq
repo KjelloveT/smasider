@@ -1,0 +1,19 @@
+# Fugleslekter (under Aves, Q5113) som blir trekte frå dinosaurar.rq.
+# Avgrensa til slekter med artikkel på nn/no, same som hovudspørjinga,
+# så resultatet held seg lite.
+
+PREFIX gas: <http://www.bigdata.com/rdf/gas#>
+
+SELECT DISTINCT ?item
+WHERE {
+  SERVICE gas:service {
+    gas:program gas:gasClass "com.bigdata.rdf.graph.analytics.BFS" ;
+                gas:in wd:Q5113 ;
+                gas:traversalDirection "Reverse" ;
+                gas:out ?item ;
+                gas:linkType wdt:P171 .
+  }
+  ?item wdt:P105 wd:Q34740 .
+  ?wiki schema:about ?item ; schema:isPartOf ?w .
+  FILTER(?w IN (<https://nn.wikipedia.org/>, <https://no.wikipedia.org/>))
+}

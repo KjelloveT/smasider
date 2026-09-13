@@ -3,19 +3,19 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
-## [1.48] — 2026-09-13
+## [1.49] — 2026-09-13
 
 ### Lagt til
-- **Eikekveik kan zoome og flytte kartet.** Knappar oppe til høgre på lerretet zoomar mellom 25 og 300 %, og «Vis heile kartet» finn att nodar som har hamna utanfor. <kbd>Ctrl</kbd> + hjul zoomar rundt peikaren, knip med to fingrar gjer det same på nettbrett, og ein dreg i tom flate for å flytte kartet. Hjulet åleine rullar framleis sida: lerretet dekkjer mesteparten av skjermen, og ei side som sluttar å rulle når peikaren står over det, er ei side ein ikkje kjem seg ut av. Zoomen rører aldri koordinatane i kartet, så eit kart laga før i dag ser likt ut ved 100 %.
-- **Former på nodane i Eikekveik.** Tre former for tankekart (avrunda boks, ellipse og sky) og elleve flytskjemasymbol etter ISO 5807: start/slutt, prosess, avgjerd, inn/ut-data, delprosess, dokument, database, førebuing, inntasting, venting og koplingspunkt. Kvart symbol har ei kort forklaring i verktøytipset, så verktøyet òg kan brukast til å lære kva symbola tyder. Formene blir rekna ut frå den faktiske storleiken til noden i staden for å strekkje eit bilete, så hjørne og strekar held seg like uansett kor lang teksten er.
-- **Piler på linjene** kan slåast på for heile kartet. Linjene festar seg no på kanten av forma og går mellom dei sidene som vender mot kvarandre, så eit flytskjema som går nedover får piler som peikar rett ned.
-- **Ikon og emoji på nodane.** Ein veljar med om lag hundre Lucide-ikon og hundre kuraterte emoji i fire kategoriar, med søk på nynorsk. Ein node kan ha berre ikon og ingen tekst. Emoji er eit medvite unntak frå AGENTS.md §3.2 på same vilkår som i Dagsvegen: berre i innhaldet, aldri i knappar, og ingen flagg-emoji.
-- **Last ned kartet som PNG.** Biletet blir teikna i nettlesaren i dobbel oppløysing og med kvit bakgrunn uansett tema, så det kan setjast rett inn i ein presentasjon. Linjeskifta blir henta frå lerretet i staden for å bli rekna ut på nytt, så teksten står i biletet der han står på skjermen. Ingen ny avhengnad.
+- **Tre nye kortkategoriar i Heimsank.** Dinosaurar (63 kort, med året slekta vart skildra), Hunderasar (330 kort, med opphavsland) og Troll og vette (33 vesen frå norsk folketru og norrøn mytologi). Dei kostar 45, 65 og 95 poeng å låse opp, billegare enn dei fleste kategoriane, fordi dei er meinte å fenge dei yngste elevane.
+  - **Troll og vette er ei handplukka liste.** Wikidata har ingen klasse som skil vesen i folketru frå gudar, englar og oljefelt med same namn — eit søk på «Troll» gir òg forskingsstasjonen i Antarktis. Kvar Q-id er difor kontrollert for seg.
+  - **Fuglane er haldne utanfor dinosaurane.** Taksonomisk er alle fuglar dinosaurar, og ei rett spørjing etter slekter under Dinosauria gir 776 treff der 712 er fuglar. Dei blir trekte frå med ei eiga spørjing, fordi same filteret inne i hovudspørjinga går ut på tid på Wikidata.
+- **Heimsank krediterer bileta.** Når du opnar eit kort, står opphavsperson og lisens nedst, med lenkje til lisensen og til fila på Wikimedia Commons. Dei fleste bileta er CC BY eller CC BY-SA, og begge lisensane krev at opphavspersonen blir namngjeven. Det gjorde vi ikkje før.
+  - **Lisensane blir bakte inn i CSV-ane når korta blir bygde,** ikkje henta medan ein spelar. CSP-en stoppar kall til Commons-API-et, og eit ekstra kall per kort ville sendt IP-adressa til eleven til Wikimedia éin gong til.
+- **`heimsank/tools/kortdata.mjs`** byggjer kortdata frå lagra SPARQL-spørjingar i `heimsank/tools/sparql/` og hentar lisensane frå Commons. Spørjingane til dei eldre kategoriane vart laga i Listesmia og aldri tekne vare på, så dei kan ikkje køyrast på nytt; dei nye kan.
+  - **Rarity blir fordelt med fast seed,** så same liste gir same fordeling kvar gong. Ei rarity-fil som finst frå før, blir aldri skriven over: samlingane til elevane er lagra per kort, og ei ny fordeling ville gjort om kort dei alt har fått.
 
 ### Endra
-- **Eikekveik brukar heile skjermbreidda** (§3.1.1), og farge, ikon og form er samla i eit panel ved sida av lerretet. Fargepaletten låg før under lerretet, og på ein vanleg skjerm måtte ein rulle ned for å nå han.
-- **Utskrifta frå Eikekveik viser heile kartet** uansett kvar ein har zooma seg inn, og set visninga tilbake etterpå.
-- Eksportfilene frå Eikekveik har `version: 2`. Filer med versjon 1 blir lesne som før. Ei fil frå ei nyare utgåve blir avvist med ei melding i staden for å bli lesen halvvegs.
+- **`lisens.html`** seier no at alle kortbileta i Heimsank kjem frå Wikimedia Commons, og kvar krediteringa står.
 
 ## [1.47] — 2026-09-12
 
