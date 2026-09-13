@@ -2,6 +2,38 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.48",
+      "dato": "2026-09-13",
+      "samandrag": "Eikekveik kan zoome, har fått flytskjemasymbol, ikon og emoji, og kan lagre kartet som bilete.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Eikekveik",
+          "tekst": "Zoom inn og ut med knappar, Ctrl + hjul eller to fingrar, og dra i tom flate for å flytte kartet."
+        },
+        {
+          "t": "nytt",
+          "kva": "Eikekveik",
+          "tekst": "Nodane kan ha ulike former: tre for tankekart og elleve flytskjemasymbol etter ISO 5807. Linjene kan få piler."
+        },
+        {
+          "t": "nytt",
+          "kva": "Eikekveik",
+          "tekst": "Set eit ikon eller ein emoji på ein node."
+        },
+        {
+          "t": "nytt",
+          "kva": "Eikekveik",
+          "tekst": "Last ned kartet som PNG-bilete."
+        },
+        {
+          "t": "endra",
+          "kva": "Eikekveik",
+          "tekst": "Verktøyet brukar heile skjermbreidda, og farge, ikon og form ligg i eit panel ved sida av lerretet."
+        }
+      ]
+    },
+    {
       "versjon": "1.47",
       "dato": "2026-09-12",
       "samandrag": "Protokollsmia viser lovteksten ved sida av feltet du fyller ut.",

@@ -1,11 +1,12 @@
-// Eikekveik — Interaction (drag, dobbeltklikk-redigering, slett, tastatur)
+// Eikekveik — Interaction (drag, redigering, slett, tastatur og eigenskapspanelet)
 
 Eikekveik.Interaction = (function () {
     let drag = null; // { id, offsetX, offsetY, moved }
     let editingId = null;
 
     function init() {
-        const canvas = Eikekveik.el.canvas;
+        const el = Eikekveik.el;
+        const canvas = el.canvas;
 
         canvas.addEventListener('pointerdown', onPointerDown);
         canvas.addEventListener('pointermove', onPointerMove);
@@ -17,33 +18,30 @@ Eikekveik.Interaction = (function () {
 
         document.addEventListener('keydown', onKeyDown);
 
-        Eikekveik.el.btnNew.addEventListener('click', onNew);
+        el.btnNew.addEventListener('click', onNew);
+        el.btnUndo.addEventListener('click', undo);
+        el.btnRedo.addEventListener('click', redo);
 
-        // Undo/redo: renderAll() MÅ kallast før afterChange() så DOM speglar ny state
-        Eikekveik.el.btnUndo.addEventListener('click', () => {
-            if (Eikekveik.State.undo()) {
-                Eikekveik.Render.renderAll();
-                afterChange();
-            }
-        });
-        Eikekveik.el.btnRedo.addEventListener('click', () => {
-            if (Eikekveik.State.redo()) {
-                Eikekveik.Render.renderAll();
-                afterChange();
-            }
-        });
+        el.colorRow.addEventListener('click', onColorPick);
+        el.shapePicker.addEventListener('click', onShapePick);
+        el.btnIcon.addEventListener('click', onIconPick);
+        el.btnIconRemove.addEventListener('click', () => updateSelected({ icon: null }));
+        el.arrowsToggle.addEventListener('change', onArrowsToggle);
+    }
 
-        Eikekveik.el.colorRow.addEventListener('click', onColorPick);
+    // Undo/redo: renderAll() MÅ kallast før afterChange() så DOM speglar ny state
+    function undo() {
+        if (Eikekveik.State.undo()) {
+            Eikekveik.Render.renderAll();
+            afterChange();
+        }
+    }
 
-        canvas.addEventListener('click', (e) => {
-            if (e.target === canvas) {
-                Eikekveik.State.setSelected(null);
-                Eikekveik.Render.renderAll();
-                Eikekveik.Render.showColorPalette(false);
-            }
-        });
-
-        window.addEventListener('resize', () => Eikekveik.Render.renderEdges());
+    function redo() {
+        if (Eikekveik.State.redo()) {
+            Eikekveik.Render.renderAll();
+            afterChange();
+        }
     }
 
     function findNodeEl(target) {
@@ -60,7 +58,7 @@ Eikekveik.Interaction = (function () {
         const node = Eikekveik.State.findNode(id);
         if (!node) return;
 
-        const pt = Eikekveik.Render.getCanvasPoint(e.clientX, e.clientY);
+        const pt = Eikekveik.View.toWorld(e.clientX, e.clientY);
         drag = {
             id,
             offsetX: pt.x - node.x,
@@ -73,28 +71,26 @@ Eikekveik.Interaction = (function () {
 
     function onPointerMove(e) {
         if (!drag) return;
-        const pt = Eikekveik.Render.getCanvasPoint(e.clientX, e.clientY);
-        const newX = Math.max(0, pt.x - drag.offsetX);
-        const newY = Math.max(0, pt.y - drag.offsetY);
         const node = Eikekveik.State.findNode(drag.id);
         if (!node) return;
-        if (!drag.moved && (Math.abs(newX - node.x) > 2 || Math.abs(newY - node.y) > 2)) {
-            drag.moved = true;
-        }
+        const pt = Eikekveik.View.toWorld(e.clientX, e.clientY);
+        const newX = pt.x - drag.offsetX;
+        const newY = pt.y - drag.offsetY;
+        if (!drag.moved && Math.hypot(newX - node.x, newY - node.y) <= 2) return;
+        drag.moved = true;
         node.x = newX;
         node.y = newY;
         Eikekveik.Render.updateNodePosition(drag.id);
     }
 
-    function onPointerUp(e) {
+    function onPointerUp() {
         if (!drag) return;
-        const nodeEl = Eikekveik.el.canvas.querySelector(`.node[data-id="${drag.id}"]`);
+        const nodeEl = Eikekveik.el.world.querySelector(`.node[data-id="${drag.id}"]`);
         if (nodeEl) nodeEl.classList.remove('dragging');
 
         if (!drag.moved) {
             Eikekveik.State.setSelected(drag.id);
             Eikekveik.Render.renderAll();
-            Eikekveik.Render.showColorPalette(true);
         } else {
             Eikekveik.State.pushHistory();
             afterChange();
@@ -110,7 +106,7 @@ Eikekveik.Interaction = (function () {
             return;
         }
         if (e.target === Eikekveik.el.canvas) {
-            const pt = Eikekveik.Render.getCanvasPoint(e.clientX, e.clientY);
+            const pt = Eikekveik.View.toWorld(e.clientX, e.clientY);
             const node = Eikekveik.State.addNode({
                 text: 'Ny node',
                 x: pt.x - 50,
@@ -120,13 +116,21 @@ Eikekveik.Interaction = (function () {
             });
             Eikekveik.State.setSelected(node.id);
             Eikekveik.Render.renderAll();
-            Eikekveik.Render.showColorPalette(true);
             afterChange();
             startEdit(node.id);
         }
     }
 
     function onCanvasClick(e) {
+        if (e.target === Eikekveik.el.canvas) {
+            if (Eikekveik.View.consumeClick()) return;
+            if (Eikekveik.State.getSelectedId() != null) {
+                Eikekveik.State.setSelected(null);
+                Eikekveik.Render.renderAll();
+            }
+            return;
+        }
+
         const btn = e.target.closest('.node-btn');
         if (!btn) return;
         const nodeEl = findNodeEl(btn);
@@ -149,18 +153,26 @@ Eikekveik.Interaction = (function () {
         const offset = 120 + (siblings.length % 4) * 30;
         const angle = (siblings.length * 0.6) - 0.6;
         const x = parent.x + Math.cos(angle) * offset + 40;
-        const y = parent.y + 80 + (siblings.length * 20);
+        // Under den faktiske høgda til forelderen: ei avgjerd eller ei sky er
+        // mykje høgare enn ein boks, og eit fast sprang ville lagt barnet oppå.
+        const parentEl = Eikekveik.el.world.querySelector(`.node[data-id="${parentId}"]`);
+        const parentHeight = parentEl ? parentEl.offsetHeight : 48;
+        const y = parent.y + parentHeight + 40 + (siblings.length * 20);
+
+        // I eit tankekart held greina fram i same form. Etter eit
+        // flytskjemasymbol kjem som regel eit vanleg steg, ikkje ei ny avgjerd.
+        const shape = Eikekveik.Shapes.get(parent.shape).group === 'flyt' ? 'process' : parent.shape;
 
         const child = Eikekveik.State.addNode({
             text: 'Ny node',
-            x: Math.max(10, x),
-            y: Math.max(10, y),
+            x,
+            y,
             color: parent.color,
+            shape,
             parentId
         });
         Eikekveik.State.setSelected(child.id);
         Eikekveik.Render.renderAll();
-        Eikekveik.Render.showColorPalette(true);
         afterChange();
         startEdit(child.id);
     }
@@ -174,12 +186,11 @@ Eikekveik.Interaction = (function () {
         Eikekveik.State.deleteNode(id);
         Eikekveik.State.setSelected(null);
         Eikekveik.Render.renderAll();
-        Eikekveik.Render.showColorPalette(false);
         afterChange();
     }
 
     function startEdit(id) {
-        const nodeEl = Eikekveik.el.canvas.querySelector(`.node[data-id="${id}"]`);
+        const nodeEl = Eikekveik.el.world.querySelector(`.node[data-id="${id}"]`);
         if (!nodeEl) return;
         const textEl = nodeEl.querySelector('.node-text');
         if (!textEl) return;
@@ -190,6 +201,7 @@ Eikekveik.Interaction = (function () {
         input.type = 'text';
         input.className = 'node-edit';
         input.value = node.text;
+        input.setAttribute('aria-label', 'Tekst på noden');
         textEl.style.display = 'none';
         nodeEl.insertBefore(input, textEl);
         input.focus();
@@ -201,7 +213,8 @@ Eikekveik.Interaction = (function () {
             const newText = save ? input.value.trim() : node.text;
             input.remove();
             textEl.style.display = '';
-            if (save && newText && newText !== node.text) {
+            // Tom tekst er greitt når noden har eit ikon — då er ikonet innhaldet.
+            if (save && newText !== node.text && (newText || node.icon)) {
                 Eikekveik.State.updateNode(id, { text: newText });
                 Eikekveik.Render.renderAll();
                 afterChange();
@@ -231,20 +244,18 @@ Eikekveik.Interaction = (function () {
 
         if (isField) return;
 
+        // Medan ein dialog står open, høyrer tastane til han. Elles ville
+        // Delete på ein knapp i ikonveljaren slette noden bak dialogen.
+        if (document.querySelector('.modal-overlay.open')) return;
+
         if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && !e.shiftKey) {
             e.preventDefault();
-            if (Eikekveik.State.undo()) {
-                Eikekveik.Render.renderAll();
-                afterChange();
-            }
+            undo();
             return;
         }
         if ((e.ctrlKey || e.metaKey) && (e.key.toLowerCase() === 'y' || (e.shiftKey && e.key.toLowerCase() === 'z'))) {
             e.preventDefault();
-            if (Eikekveik.State.redo()) {
-                Eikekveik.Render.renderAll();
-                afterChange();
-            }
+            redo();
             return;
         }
 
@@ -258,7 +269,7 @@ Eikekveik.Interaction = (function () {
 
         if (e.key === 'Enter' || e.key === 'F2') {
             const id = Eikekveik.State.getSelectedId();
-            if (id != null) {
+            if (id != null && t.tagName !== 'BUTTON') {
                 e.preventDefault();
                 startEdit(id);
             }
@@ -273,14 +284,45 @@ Eikekveik.Interaction = (function () {
         }
     }
 
+    // ── Eigenskapspanelet ──
+
+    function updateNodeProps(id, patch) {
+        const node = Eikekveik.State.findNode(id);
+        if (!node) return;
+        const same = Object.keys(patch).every(k => JSON.stringify(node[k]) === JSON.stringify(patch[k]));
+        if (same) return;
+        // Ein node utan tekst og utan ikon blir ein tom klatt ingen finn att.
+        if (patch.icon === null && !node.text) patch = { ...patch, text: 'Ny node' };
+        Eikekveik.State.updateNode(id, patch);
+        Eikekveik.Render.renderAll();
+        afterChange();
+    }
+
+    function updateSelected(patch) {
+        const id = Eikekveik.State.getSelectedId();
+        if (id != null) updateNodeProps(id, patch);
+    }
+
     function onColorPick(e) {
         const btn = e.target.closest('.color-swatch');
-        if (!btn) return;
+        if (btn) updateSelected({ color: btn.dataset.color });
+    }
+
+    function onShapePick(e) {
+        const btn = e.target.closest('.shape-btn');
+        if (btn) updateSelected({ shape: btn.dataset.shape });
+    }
+
+    function onIconPick() {
         const id = Eikekveik.State.getSelectedId();
-        if (id == null) return;
-        Eikekveik.State.updateNode(id, { color: btn.dataset.color });
-        Eikekveik.Render.renderAll();
-        Eikekveik.Render.updateActiveSwatch();
+        const node = id != null ? Eikekveik.State.findNode(id) : null;
+        if (!node) return;
+        Eikekveik.Picker.open(node.icon, icon => updateNodeProps(id, { icon }));
+    }
+
+    function onArrowsToggle(e) {
+        Eikekveik.State.setArrows(e.target.checked);
+        Eikekveik.Render.renderEdges();
         afterChange();
     }
 
@@ -290,15 +332,14 @@ Eikekveik.Interaction = (function () {
             const ok = confirm('Lage nytt Eikekveik-kart? Det noverande kartet blir borte (med mindre det er lagra).');
             if (!ok) return;
         }
+        Eikekveik.View.reset();
         Eikekveik.State.reset();
         Eikekveik.Render.renderAll();
-        Eikekveik.Render.showColorPalette(false);
         afterChange();
     }
 
     function afterChange() {
         Eikekveik.Render.updateUndoRedo();
-        Eikekveik.Render.updateActiveSwatch();
         if (Eikekveik.Storage && Eikekveik.Storage.autoSave) {
             Eikekveik.Storage.autoSave();
         }
