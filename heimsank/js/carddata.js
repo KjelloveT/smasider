@@ -12,8 +12,8 @@ const CardData = (function () {
 
   function _load(cat) {
     return Promise.all([
-      fetch(`./kort/${cat.csv}`).then(r => r.text()),
-      fetch(`./kort/${cat.rarity}`).then(r => r.json())
+      fetch(`./kort/${cat.csv}`).then(r => { if (!r.ok) throw new Error('Kortdata'); return r.text(); }),
+      fetch(`./kort/${cat.rarity}`).then(r => { if (!r.ok) throw new Error('Sjeldsemd'); return r.json(); })
     ]).then(([csv, rar]) => {
       const idF = cat.idField || 'scientist';
       const nameF = cat.nameField || 'scientistLabel';
@@ -58,7 +58,7 @@ const CardData = (function () {
    * @returns {Promise<Array>} cards
    */
   function loadCategoryCards(cat) {
-    if (!cache[cat.id]) cache[cat.id] = _load(cat);
+    if (!cache[cat.id]) cache[cat.id] = _load(cat).catch(error => { delete cache[cat.id]; throw error; });
     return cache[cat.id];
   }
 

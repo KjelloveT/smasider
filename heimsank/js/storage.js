@@ -35,12 +35,12 @@ function loadStorage() {
  * Clear all cards from current category's collection
  */
 function confirmClearAll() {
+  if (S.pending) return;
   if (S.collection.length === 0) return;
   if (confirm('Er du viss på at du vil tøme samlinga for ' + S.selCat.label + '? Alle kort vert fjerna.')) {
     S.collection = [];
     S.pending = null;
     VyrdepilStorage.clearCollection(HEIMSANK_GAME_KEY, S.selCat.id);
     renderColl();
-    resumeIfDone();
   }
 }

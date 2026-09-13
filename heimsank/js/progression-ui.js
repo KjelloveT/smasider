@@ -3,13 +3,6 @@
 
 const ProgressionUI = (function () {
 
-  function coverBg(rarity) {
-    return rarity === 'sjeldgjevt' ? '#87CEEB'
-      : rarity === 'segngjeten' ? '#C4A1FF'
-      : rarity === 'gudebore' ? '#FFDB58'
-      : '#f0f0f0';
-  }
-
   // ---- Poeng-display ----
   function renderPoints() {
     const el = document.getElementById('pointsValue');
@@ -54,115 +47,69 @@ const ProgressionUI = (function () {
       .catch(() => {});
   }
 
-  // ---- Kategori-val (opne kategoriar) ----
-  function selectCategory(cat, cardEl) {
+  // Kategoriomslag: native knappar, faste fargar og synleg status.
+  function selectCategory(cat) {
     S.selCat = cat;
-    document.querySelectorAll('#catsGrid .cat-card').forEach(x => x.classList.remove('selected'));
-    cardEl.classList.add('selected');
-    const start = document.getElementById('startBtn');
-    if (start) start.disabled = false;
+    document.getElementById('selectedCategory').textContent = cat.label;
+    document.getElementById('startBtn').disabled = false;
+    renderCovers(S.cats);
+    initShowcase(cat);
   }
-
-  // ---- Forsider ----
   function renderCovers(cats) {
     const grid = document.getElementById('catsGrid');
-    if (!grid) return;
-    grid.innerHTML = '';
-
+    grid.replaceChildren();
+    const stored = VyrdepilStorage.getAllCollections('heimsank') || {};
     cats.forEach(cat => {
       const unlocked = Progression.isUnlocked(cat.id);
-      const card = document.createElement('div');
-      card.className = 'cat-card' + (unlocked ? '' : ' locked');
-
-      const cover = document.createElement('div');
-      cover.className = 'cat-cover';
-      card.appendChild(cover);
-
-      const name = document.createElement('span');
-      name.className = 'cat-name';
-      name.textContent = cat.label;
-      card.appendChild(name);
-
+      const selected = S.selCat?.id === cat.id;
+      const card = Vy.el('article', 'hs-category');
+      HeimsankUI.category(card, cat.id);
+      card.dataset.selected = String(selected);
+      const visual = Vy.el('div', 'hs-category-visual');
+      visual.appendChild(HeimsankUI.icon(HeimsankUI.categoryIcon(cat.id), 38));
+      if (unlocked) CardData.loadCategoryCards(cat).then(cards => {
+        if (!card.isConnected) return;
+        const pick = CardData.pickCoverCard(cards);
+        if (!pick) return;
+        const img = document.createElement('img');
+        img.src = pick.img; img.alt = ''; img.loading = 'lazy';
+        img.addEventListener('error', () => img.remove(), { once: true });
+        visual.appendChild(img);
+      }).catch(() => {});
+      const body = Vy.el('div', 'hs-category-body');
+      body.appendChild(Vy.el('h3', '', cat.label));
+      const count = Array.isArray(stored[cat.id]) ? stored[cat.id].length : 0;
+      const cost = Progression.getCost(cat);
+      const need = Math.max(0, cost - Progression.getPoints());
+      body.appendChild(Vy.el('span', 'hs-category-status', unlocked
+        ? (selected ? '✓ Vald · ' : '') + count + ' av 6 kort'
+        : (need ? 'Du treng ' + need + ' poeng til' : 'Klar til å låsast opp')));
+      const button = Vy.el('button', 'hs-btn', unlocked ? (selected ? 'Vald' : 'Vel kategori') : 'Lås opp · ' + cost);
       if (unlocked) {
-        // Plassholdar medan kort-data lastar
-        cover.innerHTML = `<div class="cover-loading">${ICON('loader', 22)}</div>`;
-        CardData.loadCategoryCards(cat).then(cards => {
-          const pick = CardData.pickCoverCard(cards);
-          renderCoverCard(cover, pick, cat);
-        }).catch(() => {
-          cover.innerHTML = `<div class="cover-fallback">${CAT_ICON(cat.icon, 28)}</div>`;
+        button.setAttribute('aria-pressed', String(selected));
+        button.setAttribute('aria-label', 'Vel ' + cat.label);
+        button.addEventListener('click', () => {
+          selectCategory(cat);
+          grid.querySelector('[data-category="' + cat.id + '"] button')?.focus({ preventScroll: true });
         });
-
-        card.addEventListener('click', () => selectCategory(cat, card));
-        // Behald markering om denne alt er vald
-        if (S.selCat && S.selCat.id === cat.id) card.classList.add('selected');
       } else {
-        renderCoverBack(cover);
-        const cost = Progression.getCost(cat);
-        const btn = document.createElement('button');
-        const afford = Progression.canAfford(cat);
-        btn.className = 'cat-unlock-btn' + (afford ? ' affordable' : '');
-        btn.setAttribute('aria-label', `Lås opp ${cat.label} for ${cost} poeng`);
-        btn.innerHTML = `${ICON('lock', 13)}<span>Lås opp · ${cost}</span>`;
-        btn.addEventListener('click', (e) => handleUnlock(cat, e));
-        card.appendChild(btn);
+        button.prepend(HeimsankUI.icon('lock', 14));
+        button.setAttribute('aria-label', 'Lås opp ' + cat.label + ' for ' + cost + ' poeng');
+        button.addEventListener('click', () => handleUnlock(cat));
       }
-
-      grid.appendChild(card);
+      body.appendChild(button); card.append(visual, body); grid.appendChild(card);
     });
   }
-
-  function renderCoverCard(cover, pick, cat) {
-    cover.innerHTML = '';
-    if (!pick) {
-      cover.innerHTML = `<div class="cover-fallback">${CAT_ICON(cat.icon, 28)}</div>`;
-      return;
-    }
-    const mini = document.createElement('div');
-    mini.className = `cover-card ${pick.rarity}`;
-    const imgWrap = document.createElement('div');
-    imgWrap.className = 'cover-img';
-    imgWrap.style.background = coverBg(pick.rarity);
-    const img = document.createElement('img');
-    img.src = pick.img;
-    img.alt = '';
-    img.loading = 'lazy';
-    img.onerror = function () {
-      this.parentNode.innerHTML = `<div class="cover-fallback">${CAT_ICON(cat.icon, 28)}</div>`;
-    };
-    imgWrap.appendChild(img);
-    mini.appendChild(imgWrap);
-    cover.appendChild(mini);
-  }
-
-  function renderCoverBack(cover) {
-    cover.innerHTML = '';
-    const back = document.createElement('div');
-    back.className = 'cover-back';
-    const img = document.createElement('img');
-    img.src = 'Logo - no text.png';
-    img.alt = '';
-    back.appendChild(img);
-    cover.appendChild(back);
-    const lock = document.createElement('div');
-    lock.className = 'cover-lock';
-    lock.innerHTML = ICON('lock', 20);
-    cover.appendChild(lock);
-  }
-
-  // ---- Opplåsing ----
-  function handleUnlock(cat, ev) {
-    if (ev) ev.stopPropagation();
+  function handleUnlock(cat) {
     if (Progression.isUnlocked(cat.id)) return;
     if (!Progression.canAfford(cat)) {
-      const need = Progression.getCost(cat) - Progression.getPoints();
-      toast(`Du treng ${need} poeng til for ${cat.label}.`, 'lock', 'warn');
+      toast('Du treng ' + (Progression.getCost(cat) - Progression.getPoints()) + ' poeng til for ' + cat.label + '.', 'lock', 'warn');
       return;
     }
     Progression.unlock(cat);
-    renderPoints();
-    renderCovers(S.cats);
-    toast(`${cat.label} er låst opp!`, 'key', 'good');
+    renderPoints(); renderCovers(S.cats);
+    document.querySelector('[data-category="' + cat.id + '"] button')?.focus({ preventScroll: true });
+    toast(cat.label + ' er låst opp!', 'key', 'good');
     evaluateAndAnnounce();
   }
 
@@ -198,19 +145,20 @@ const ProgressionUI = (function () {
       if (!earned) {
         const lock = document.createElement('div');
         lock.className = 'bdg-lock';
-        lock.innerHTML = ICON('lock', 12);
+        lock.append(HeimsankUI.icon('lock', 12), Vy.el('span', '', 'Ikkje oppnådd'));
         cell.appendChild(lock);
       }
+      if (earned) cell.appendChild(Vy.el('div', 'bdg-lock', '✓ Oppnådd'));
       grid.appendChild(cell);
     });
   }
 
   function openBadgeGallery() {
     renderBadgeGallery();
-    document.getElementById('badgeModal').classList.add('open');
+    HeimsankUI.open('badgeModal', closeBadgeGallery);
   }
   function closeBadgeGallery() {
-    document.getElementById('badgeModal').classList.remove('open');
+    HeimsankUI.close('badgeModal');
   }
 
   /* Kort melding — sjå Vy.toast() i js/vyrdepil-util.js. Låg tidlegare her i
@@ -229,14 +177,6 @@ const ProgressionUI = (function () {
     renderPoints();
     return pts;
   }
-
-  // Escape lukkar merke-galleriet
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      const m = document.getElementById('badgeModal');
-      if (m && m.classList.contains('open')) closeBadgeGallery();
-    }
-  });
 
   return {
     renderPoints, renderCovers, renderBadgeGallery,

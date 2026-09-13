@@ -8,8 +8,9 @@ async function init() {
   initTrash();
   Progression.load();
   try {
-    S.cats = await fetch('./kort/categories.json').then(r => r.json());
+    S.cats = await fetch('./kort/categories.json').then(r => { if (!r.ok) throw new Error('Kategoriar'); return r.json(); });
     ProgressionUI.renderPoints();
+    document.getElementById('categoryCount').textContent = S.cats.length + ' kategoriar';
     ProgressionUI.renderCovers(S.cats);
     // Etterhandsam merke (t.d. for spelarar som alt hadde kort før systemet kom)
     ProgressionUI.evaluateAndAnnounce();
@@ -18,7 +19,7 @@ async function init() {
     // Start showcase fan display
     initShowcase();
   } catch (e) {
-    document.getElementById('setupLoading').textContent = 'Feil: køyr serve.ps1 fyrst.';
+    document.getElementById('setupLoading').textContent = 'Kategoriane kunne ikkje lastast. Last sida på nytt for å prøve igjen.';
   }
 }
 
@@ -28,8 +29,7 @@ async function init() {
  */
 function selLevel(l) {
   S.level = l;
-  document.querySelectorAll('[data-level]').forEach(b => b.classList.remove('active'));
-  document.querySelector(`[data-level="${l}"]`).classList.add('active');
+  document.querySelectorAll('[data-level]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.level === l)));
 }
 
 /**
@@ -42,10 +42,10 @@ function togOp(op) {
   if (i >= 0) {
     if (S.ops.length === 1) return; // Keep at least one operation
     S.ops.splice(i, 1);
-    b.classList.remove('active');
+    b.setAttribute('aria-pressed', 'false');
   } else {
     S.ops.push(op);
-    b.classList.add('active');
+    b.setAttribute('aria-pressed', 'true');
   }
 }
 
@@ -53,13 +53,17 @@ function togOp(op) {
  * Start the game
  */
 async function startGame() {
+  if (!S.selCat || S.phase !== 'setup') return;
+  S.phase = 'loading';
+  HeimsankUI.cancelTimers();
   const btn = document.getElementById('startBtn');
   btn.disabled = true;
   btn.textContent = 'Lastar…';
   try {
     await loadCards(S.selCat);
   } catch (e) {
-    alert('Feil ved lasting. Køyr serve.ps1 fyrst.');
+    S.phase = 'setup';
+    Vy.toast('Korta kunne ikkje lastast. Prøv igjen.', { kind: 'warn' });
     btn.disabled = false;
     btn.textContent = 'Start spelet →';
     return;
@@ -70,8 +74,10 @@ async function startGame() {
   gs.classList.remove('hidden');
   document.getElementById('setupScreen').classList.add('hidden');
   const sub = document.getElementById('gameSub');
-  sub.style.cssText = 'display:inline-flex;align-items:center;gap:6px;margin-bottom:5px;color:var(--muted)';
-  sub.innerHTML = `${CAT_ICON(S.selCat.icon, 14)}<span>${S.selCat.label} – </span>`;
+  sub.textContent = S.selCat.label;
+  HeimsankUI.category(sub, S.selCat.id);
+  document.getElementById('gameDiff').textContent = { lett: 'Lett', middels: 'Middels', vanskeleg: 'Vanskeleg' }[S.level];
+  setCollectionExpanded(false);
   S.correct = 0;
   S.paused = false;
   loadStorage();
@@ -89,6 +95,10 @@ function goSetup() {
     alert('Du må plassere det nye kortet før du kan bytte kategori!');
     return;
   }
+  HeimsankUI.cancelTimers();
+  S.phase = 'setup'; S.paused = true;
+  ProgressionUI.renderCovers(S.cats);
+  initShowcase(S.selCat);
   const gs = document.getElementById('gameScreen');
   gs.classList.add('hidden');
   document.getElementById('setupScreen').classList.remove('hidden');
@@ -103,6 +113,7 @@ function goSetup() {
  */
 async function loadCards(cat) {
   S.cards = await CardData.loadCategoryCards(cat);
+  if (!S.cards.length) throw new Error('Ingen kort');
 
   S.idx = {};
   S.groups = { vanleg: [], sjeldgjevt: [], segngjeten: [], gudebore: [] };
@@ -116,7 +127,8 @@ async function loadCards(cat) {
  * Generate next question
  */
 function nextQ() {
-  if (S.paused) return;
+  if (S.paused || S.phase === 'setup') return;
+  S.phase = 'question';
   const op = S.ops[Math.floor(Math.random() * S.ops.length)];
   const r = {
     lett: [20, 20, 10, 10],
@@ -155,7 +167,7 @@ function nextQ() {
   const inp = document.getElementById('ansInput');
   inp.value = '';
   inp.disabled = false;
-  inp.focus();
+  if (!Vy.anyModalOpen()) inp.focus({ preventScroll: true });
   document.getElementById('checkBtn').disabled = false;
   setFb('', '');
 }
@@ -164,27 +176,31 @@ function nextQ() {
  * Check user's answer
  */
 function checkAnswer() {
-  if (S.paused || !S.q) return;
-  const v = parseInt(document.getElementById('ansInput').value, 10);
-  if (isNaN(v)) {
+  if (S.paused || !S.q || S.phase !== 'question' || Vy.anyModalOpen()) return;
+  const raw = document.getElementById('ansInput').value;
+  const v = Number(raw);
+  if (!raw.trim() || !Number.isFinite(v)) {
     setFb('Skriv inn eit tal!', 'incorrect');
     return;
   }
+  S.phase = 'feedback';
+  document.getElementById('ansInput').disabled = true;
+  document.getElementById('checkBtn').disabled = true;
   if (v === S.q.ans) {
     S.correct++;
     Progression.recordCorrect(S.level);
-    setFb('RETT!', 'correct');
+    setFb('Rett!', 'correct');
     updateProg();
     document.getElementById('ansInput').disabled = true;
     document.getElementById('checkBtn').disabled = true;
     if (S.correct >= QPC) {
-      setTimeout(triggerCard, 800);
+      HeimsankUI.later(triggerCard, 800);
     } else {
-      setTimeout(nextQ, 700);
+      HeimsankUI.later(nextQ, 700);
     }
   } else {
-    setFb(`Feil! (${S.q.ans})`, 'incorrect');
-    setTimeout(nextQ, 1400);
+    setFb(`Svaret er ${S.q.ans}.`, 'incorrect');
+    HeimsankUI.later(nextQ, 1400);
   }
 }
 
@@ -195,28 +211,21 @@ function checkAnswer() {
  */
 function setFb(m, c) {
   const el = document.getElementById('feedback');
-  el.textContent = m;
-  // Map legacy class names to feedback-stamp classes
-  const cls = c === 'correct' ? 'rett' : c === 'incorrect' ? 'feil' : '';
-  el.className = 'feedback-stamp' + (cls ? ' ' + cls + ' show' : '');
+  el.replaceChildren();
+  el.dataset.kind = c;
+  if (m) el.append(HeimsankUI.icon(c === 'correct' ? 'check' : 'x', 18), Vy.el('span', '', m));
 }
 
 /**
  * Update progress bar
  */
 function updateProg() {
-  const p = (S.correct / QPC) * 100;
-  document.getElementById('progFill').style.width = p + '%';
-  document.getElementById('progLabel').textContent = `${S.correct} / ${QPC}`;
-  const pipsEl = document.getElementById('progPips');
-  if (pipsEl) {
-    pipsEl.innerHTML = Array.from({length: QPC}, (_, i) =>
-      `<span class="pip${i < S.correct ? ' lit' : ''}"></span>`
-    ).join('');
-  }
+  document.getElementById('progLabel').textContent = S.correct + ' av ' + QPC + ' rette';
+  const pips = document.getElementById('progPips');
+  pips.setAttribute('aria-valuenow', String(S.correct));
+  pips.replaceChildren(...Array.from({ length: QPC }, (_, i) => Vy.el('span', 'hs-pip' + (i < S.correct ? ' is-lit' : ''))));
 }
 
-// Answer input enter key handler
-document.getElementById('ansInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') checkAnswer();
+document.getElementById('answerForm').addEventListener('submit', event => {
+  event.preventDefault(); checkAnswer();
 });

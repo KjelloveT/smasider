@@ -2,6 +2,7 @@
 
 // Global state object
 const S = {
+  phase: 'setup',     // setup | loading | question | feedback | reveal | pending
   cats: [],           // Available categories
   selCat: null,      // Selected category
   level: 'middels',  // Difficulty level

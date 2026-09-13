@@ -3,6 +3,15 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.50] — 2026-09-13
+
+### Endra
+- **Heimsank har fått eit eige kortarkade-design.** Fargerike kategoriomslag, lyst lavendeltema og mørkt indigotema, roleg oppgåveflate og samling i seks kortplassar. Kortvifta følgjer kategorivalet. Korta brukar same vising i spelet, premieopninga og samlingsalbumet, med tydeleg sjeldsemd og foil. Det lokale designet er eit godkjent unntak frå neobrutalisme; felles toppmeny og lagra samlingar er vidareførte.
+
+### Fiksa
+- **Kortpremiar blir registrerte éin gong.** Raske gjentekne svar blir stoppa, og Escape i kortopninga fullfører premien utan å låse spelet. Byte med knapp og dra-og-slepp brukar same handling og bevarer foil, også når ein byter til eit nytt eksemplar av same kort.
+- **Kort og kategoriar kan brukast med tastatur og trykk.** Dialogar held på fokus og sender det tilbake ved lukking. Redusert rørsle slår av dekorative overgangar, og bilete som ikkje lastar får eit kategoriikon.
+
 ## [1.47] — 2026-09-12
 
 ### Endra

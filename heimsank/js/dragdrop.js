@@ -1,82 +1,36 @@
-// Heimsank - Drag and Drop Functions
-
-/**
- * Initialize trash zone drop target
- */
+// Musebasert dra-og-slepp er eit tillegg til dei synlege knappane.
 function initTrash() {
-  const trash = document.getElementById('trashZone');
-  setupDropTarget(trash, ds => {
-    if (ds.type === 'coll') {
-      // Remove from collection
-      S.collection.splice(ds.idx, 1);
-      // Add pending card if collection has room
-      if (S.pending && S.collection.length < 6) {
-        // Use pendingEntry if available (with foil status)
-        const entry = S.pendingEntry || {
-          catId: S.pending.catId,
-          cardId: S.pending.id,
-          difficulty: S.level ? (S.level === 'lett' ? 'Lett' : S.level === 'middels' ? 'Middels' : 'Vanskeleg') : 'Middels',
-          operations: S.ops && S.ops.length > 0
-            ? S.ops.map(op => op === '+' ? '+' : op === '-' ? '-' : op === '*' ? '×' : op === '/' ? '÷' : op)
-            : ['+', '-'],
-          foil: false,
-          earnedAt: Date.now()
-        };
-
-        S.collection.push(entry);
-        S.pending = null;
-        S.pendingEntry = null;
-      }
-      saveStorage();
-      renderColl();
-      ProgressionUI.evaluateAndAnnounce();
-      resumeIfDone();
-    } else if (ds.type === 'pending') {
-      // Discard pending card
-      S.pending = null;
-      S.pendingEntry = null; // Clear pending entry
-      renderColl();
-      resumeIfDone();
-    }
+  setupDropTarget(document.getElementById('trashZone'), source => {
+    if (source.type === 'pending') { discardPending(); return; }
+    if (source.type !== 'coll' || !S.collection[source.idx]) return;
+    S.collection.splice(source.idx, 1);
+    if (S.phase === 'pending' && S.pendingEntry) {
+      S.collection.push(S.pendingEntry); finishPending();
+    } else { saveStorage(); renderColl(); }
   });
 }
-
-/**
- * Make an element draggable
- * @param {HTMLElement} el - Element to make draggable
- * @param {string} type - 'coll' or 'pending'
- * @param {number} idx - Index in collection
- */
 function setupDraggable(el, type, idx) {
   el.draggable = true;
-  el.addEventListener('dragstart', e => {
+  el.addEventListener('dragstart', event => {
+    if (event.target.closest('button,a')) { event.preventDefault(); return; }
     DS = { type, idx };
     el.classList.add('dragging');
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/plain', idx);
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.setData('text/plain', String(idx));
   });
-  el.addEventListener('dragend', () => el.classList.remove('dragging'));
+  el.addEventListener('dragend', () => {
+    DS = null; el.classList.remove('dragging');
+    document.querySelectorAll('.drag-over').forEach(node => node.classList.remove('drag-over'));
+  });
 }
-
-/**
- * Setup drop target on an element
- * @param {HTMLElement} el - Element to setup as drop target
- * @param {Function} onDrop - Callback when item is dropped
- */
 function setupDropTarget(el, onDrop) {
-  el.addEventListener('dragover', e => {
-    if (DS) {
-      e.preventDefault();
-      el.classList.add('drag-over');
-    }
+  el.addEventListener('dragover', event => {
+    if (DS) { event.preventDefault(); el.classList.add('drag-over'); }
   });
   el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
-  el.addEventListener('drop', e => {
-    e.preventDefault();
-    el.classList.remove('drag-over');
-    if (DS) {
-      onDrop(DS);
-      DS = null;
-    }
+  el.addEventListener('drop', event => {
+    event.preventDefault(); el.classList.remove('drag-over');
+    const source = DS; DS = null;
+    if (source) onDrop(source);
   });
 }

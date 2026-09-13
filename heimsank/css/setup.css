@@ -1,0 +1,38 @@
+.hs-top,.hs-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.hs-top { justify-content:space-between; }
+.hs-brand { display:flex; align-items:center; gap:10px; color:var(--hs-text); font-size:1.6rem; font-weight:850; letter-spacing:-.07em; text-decoration:none; }
+.hs-brand-mark { width:35px; height:42px; object-fit:contain; transform:rotate(-8deg); }
+.hs-brand-dot { color:var(--hs-violet); margin-left:-9px; }
+.hs-points { display:inline-flex; align-items:center; gap:7px; padding:10px 14px; color:var(--hs-ink); background:#FFEBAC; border-radius:30px; font-size:.9rem; }
+.hs-hero { display:grid; grid-template-columns:1.15fr 1fr; gap:24px; align-items:center; padding:46px 12px 35px; }
+.hs-hero h1 { font-size:clamp(2.6rem,4.8vw,4.7rem); line-height:1.05; font-weight:850; letter-spacing:-.06em; }
+.hs-hero h1 span { color:var(--hs-violet); }
+.hs-hero p { max-width:44ch; color:var(--hs-muted); font-size:1rem; margin:20px 0; }
+.hs-rarities { display:flex; flex-wrap:wrap; gap:8px; }
+.hs-rarities span { color:var(--r-ink); background:var(--r-fill); border:1px solid var(--r-edge); border-radius:20px; padding:5px 10px; font-size:.7rem; font-weight:700; }
+.hs-showcase { position:relative; min-width:0; min-height:305px; display:flex; flex-direction:column; justify-content:center; align-items:center; isolation:isolate; }
+.hs-orbit { position:absolute; width:90%; height:90%; border-radius:50%; background:radial-gradient(ellipse,#A68AED44,transparent 70%); z-index:-1; }
+.hs-orbit::after { content:''; position:absolute; inset:14%; border:1px dashed #A68AED88; border-radius:50%; transform:rotate(-20deg); }
+.hs-motif { position:absolute; font-size:3.8rem; font-weight:800; color:#D46779; }
+.hs-motif-one { right:7%; top:3%; transform:rotate(15deg); }.hs-motif-two { left:6%; bottom:15%; color:var(--hs-violet); transform:rotate(-15deg); }
+.hs-fan { display:flex; align-items:center; justify-content:center; min-height:240px; width:100%; padding:10px 40px; }
+.hs-fan .hs-card { width:clamp(105px,12vw,157px); flex-shrink:0; margin:0 -23px; transform:rotate(-14deg) translateY(8px); box-shadow:0 15px 25px #25114730; }
+.hs-fan .hs-card:nth-child(2) { transform:translateY(-12px); z-index:2; }.hs-fan .hs-card:nth-child(3) { transform:rotate(14deg) translateY(8px); }
+.hs-showcase .hs-fan-label { font-size:.75rem; margin:6px 0 0; text-align:center; }
+.hs-setup { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:28px; align-items:start; }
+.hs-section-title { display:flex; justify-content:space-between; align-items:end; margin-bottom:20px; gap:10px; }.hs-section-title .hs-muted { font-size:.78rem; white-space:nowrap; }.hs-section-title .hs-eyebrow { margin-bottom:6px; }
+.hs-categories { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.hs-category { position:relative; display:flex; flex-direction:column; text-align:left; min-width:0; background:var(--hs-panel); border:2px solid transparent; border-radius:19px; box-shadow:var(--hs-shadow); overflow:hidden; }
+.hs-category[data-selected="true"] { border-color:var(--hs-violet); box-shadow:0 0 0 3px color-mix(in srgb,var(--hs-violet) 16%,transparent); }
+.hs-category-visual { height:96px; display:flex; justify-content:center; align-items:center; background:var(--cat-color); color:#24203D; position:relative; overflow:hidden; }
+.hs-category-visual::before,.hs-category-visual::after { content:''; position:absolute; width:110px; height:110px; border:20px solid #ffffff35; border-radius:50%; right:-25px; top:-35px; }.hs-category-visual::after { right:auto; left:-35px; top:40px; }
+.hs-category-visual>svg { width:38px; height:38px; z-index:1; }.hs-category-visual img { width:100%; height:100%; object-fit:cover; position:relative; z-index:1; }.hs-category[data-category="land"] img { object-fit:contain; padding:14px; }
+.hs-category-body { padding:12px; display:flex; flex:1; flex-direction:column; gap:8px; }.hs-category-body h3 { font-size:.92rem; letter-spacing:-.02em; line-height:1.3; }.hs-category-body .hs-btn { width:100%; padding:8px 6px; font-size:.76rem; margin-top:auto; }
+.hs-category-status { font-size:.73rem; color:var(--hs-muted); }.hs-category[data-selected="true"] .hs-category-status { color:var(--hs-violet); font-weight:700; }
+.hs-settings { padding:25px; position:sticky; top:20px; }.hs-settings h2 { margin-bottom:14px; }.hs-selected-category { border-radius:12px; background:var(--hs-soft); padding:12px; font-size:.9rem; font-weight:600; min-height:48px; }
+.hs-settings fieldset { border:0; padding:0; margin:24px 0; min-width:0; }.hs-settings legend { font-size:.82rem; font-weight:700; margin-bottom:10px; }.hs-levels { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; }.hs-levels .hs-btn { padding:10px 4px; font-size:.76rem; }
+.hs-operations { display:grid; grid-template-columns:1fr 1fr; gap:8px; }.hs-operations .hs-btn { justify-content:start; }.hs-operations b { font-size:1.35rem; width:20px; }
+.hs-settings-hint { display:flex; gap:8px; align-items:center; font-size:.8rem; color:var(--hs-muted); }.hs-start { width:100%; margin:10px 0 4px; }
+@media(max-width:1000px) { .hs-setup { grid-template-columns:minmax(0,1fr) 290px; gap:18px; }.hs-categories { grid-template-columns:repeat(2,minmax(0,1fr)); }.hs-settings { padding:20px; } }
+@media(max-width:760px) { .hs-hero { padding:30px 0; grid-template-columns:1fr; gap:10px; }.hs-hero-copy { text-align:center; }.hs-hero p { margin:18px auto; }.hs-rarities { justify-content:center; }.hs-showcase { min-height:225px; }.hs-fan { min-height:190px; }.hs-fan .hs-card { width:120px; }.hs-setup { grid-template-columns:1fr; }.hs-settings { position:static; }.hs-top { gap:20px; }.hs-actions { gap:7px; }.hs-actions .hs-btn { padding:9px 11px; font-size:.8rem; }.hs-points { font-size:.8rem; }.hs-categories { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:480px) { .hs-categories { grid-template-columns:repeat(2,minmax(0,1fr)); }.hs-section-title .hs-muted { display:none; }.hs-hero h1 { font-size:2.65rem; }.hs-top { justify-content:center; }.hs-actions { justify-content:center; }.hs-eyebrow { font-size:.65rem; }.hs-category-visual { height:84px; }.hs-fan { padding:10px 30px; } }

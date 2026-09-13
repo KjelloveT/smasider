@@ -1,121 +1,38 @@
-// Heimsank - Collection Viewer (All Categories)
-
-/**
- * Open the collection viewer modal showing all cards from all categories
- */
+// Samlingsalbum — same kortkomponent og detaljvising som i spelet.
+let albumRequest = 0;
 async function openCollectionViewer() {
-  const modal = document.getElementById('collectionModal');
+  const request = ++albumRequest;
   const grid = document.getElementById('collectionGrid');
-  
-  grid.innerHTML = '<div class="collection-empty"><div class="collection-empty-icon">' + ICON('loader', 56) + '</div>Lastar samlingane…</div>';
-  modal.classList.add('open');
-  
+  grid.replaceChildren(Vy.el('p', 'hs-empty', 'Lastar samlingane…'));
+  HeimsankUI.open('collectionModal', closeCollectionModal);
   try {
-    // Load all categories
-    const cats = await fetch('./kort/categories.json').then(r => r.json());
-
-    // Pull stored collections from VyrdepilStorage
-    const stored = VyrdepilStorage.getAllCollections('heimsank');
-
-    // Load collections and card data for each category
-    const allCollections = await Promise.all(cats.map(async (cat) => {
+    const stored = VyrdepilStorage.getAllCollections('heimsank') || {};
+    const collections = await Promise.all(S.cats.map(async cat => {
       const entries = Array.isArray(stored[cat.id]) ? stored[cat.id] : [];
-      if (entries.length === 0) return { cat, entries: [], cards: [] };
-
-      // Load card data for this category (shared, cached loader)
-      const allCards = await CardData.loadCategoryCards(cat);
-
-      // Match entries with card data
-      const cards = entries.map(entry => {
-        const card = allCards.find(c => c.id === entry.cardId);
-        return card ? { ...card, entry } : null;
-      }).filter(Boolean);
-      
-      return { cat, entries, cards };
+      if (!entries.length) return null;
+      const data = await CardData.loadCategoryCards(cat);
+      return { cat, items: entries.map(entry => ({ entry, card: data.find(card => card.id === entry.cardId) })).filter(item => item.card) };
     }));
-    
-    // Filter out empty collections
-    const nonEmpty = allCollections.filter(c => c.cards.length > 0);
-    
-    if (nonEmpty.length === 0) {
-      grid.innerHTML = '<div class="collection-empty"><div class="collection-empty-icon">' + ICON('layers', 56) + '</div><div class="collection-empty-text">Du har ingen kort i samlinga enno.<br>Spel og svar rett for å samle kort!</div></div>';
-      return;
-    }
-    
-    // Clear loading message before rendering
-    grid.innerHTML = '';
-    
-    // Render collections as horizontal rows by category
-    const container = document.createElement('div');
-    container.className = 'collection-categories';
-    
-    nonEmpty.forEach(({ cat, cards }) => {
-      const row = document.createElement('div');
-      row.className = 'collection-cat-row';
-      
-      // Category header with icon and count
-      const header = document.createElement('div');
-      header.className = 'collection-cat-header';
-      header.innerHTML = `
-        <span class="collection-cat-icon">${CAT_ICON(cat.icon, 22)}</span>
-        <h3 class="collection-cat-title">${cat.label}</h3>
-        <span class="collection-cat-count">${cards.length} kort</span>
-      `;
-      row.appendChild(header);
-      
-      // Horizontal scrolling card row
-      const cardsRow = document.createElement('div');
-      cardsRow.className = 'collection-cards-row';
-      
-      cards.forEach(card => {
-        const cardEl = document.createElement('div');
-        cardEl.className = `collection-card-mini ${card.rarity}`;
-        
-        const imgBg = card.rarity === 'sjeldgjevt' ? '#00F5D4'
-          : card.rarity === 'segngjeten' ? '#C4A1FF'
-          : card.rarity === 'gudebore' ? '#FFBE0B'
-          : '#f0f0f0';
-        
-        cardEl.innerHTML = `
-          <div class="mini-header">
-            <span class="mini-name">${esc(card.name)}</span>
-            <span class="mini-rarity">${RL[card.rarity]}</span>
-          </div>
-          <div class="mini-img" style="background:${imgBg}">
-            <img src="${card.img}" alt="${esc(card.name)}" loading="lazy">
-          </div>
-          <div class="mini-footer">${CAT_ICON(card.statLabel, 10)}<span>${esc(String(card.stat))}</span></div>
-        `;
-
-        const miniImg = cardEl.querySelector('.mini-img img');
-        if (miniImg) {
-          miniImg.onerror = function () {
-            this.parentNode.innerHTML = `<div class="mini-img-fallback">${CAT_ICON(cat.icon, 24)}</div>`;
-          };
-        }
-
-        cardsRow.appendChild(cardEl);
+    if (request !== albumRequest) return;
+    grid.replaceChildren();
+    collections.filter(group => group?.items.length).forEach(({ cat, items }) => {
+      const section = Vy.el('section', 'hs-album-section');
+      HeimsankUI.category(section, cat.id);
+      const header = Vy.el('div', 'hs-album-heading');
+      header.append(Vy.el('h3', '', cat.label), Vy.el('span', '', items.length + ' av 6 kort'));
+      const row = Vy.el('div', 'hs-album-cards');
+      items.forEach(({ card, entry }, index) => {
+        const el = HeimsankCards.render(card, entry);
+        const button = Vy.el('button', 'hs-card-open', 'Sjå kortet');
+        button.setAttribute('aria-label', 'Sjå ' + card.name);
+        button.addEventListener('click', () => openCardModal(index, items));
+        el.appendChild(button); row.appendChild(el);
       });
-      
-      row.appendChild(cardsRow);
-      container.appendChild(row);
+      section.append(header, row); grid.appendChild(section);
     });
-    
-    grid.appendChild(container);
-    
-  } catch (e) {
-    console.error('Collection viewer error:', e);
-    grid.innerHTML = '<div class="collection-empty"><div class="collection-empty-icon">' + ICON('alert', 56) + '</div><div class="collection-empty-text">Feil ved lasting: ' + e.message + '<br>Prøv igjen seinare.</div></div>';
+    if (!grid.childElementCount) grid.appendChild(Vy.el('p', 'hs-empty', 'Samlinga di byrjar med eitt kort. Svar rett seks gonger for å finne det!'));
+  } catch {
+    if (request === albumRequest) grid.replaceChildren(Vy.el('p', 'hs-empty', 'Samlingane kunne ikkje lastast. Lukk og prøv på nytt.'));
   }
 }
-
-/**
- * Close the collection viewer modal
- */
-function closeCollectionModal() {
-  document.getElementById('collectionModal').classList.remove('open');
-}
-
-// Export functions for global access
-window.openCollectionViewer = openCollectionViewer;
-window.closeCollectionModal = closeCollectionModal;
+function closeCollectionModal() { albumRequest++; HeimsankUI.close('collectionModal'); }

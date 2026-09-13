@@ -1,311 +1,67 @@
-// Heimsank - Main Initialization
-
-// Card draw functions (depends on game state)
-
-/**
- * Draw a random card based on rarity weights with 5% foil chance
- * @returns {Object} Selected card
- */
+// Kortpremie: pending vert oppretta før dialogen opnar; fasevernet gjev éi tildeling.
 function drawCard() {
-  const totalWeight = RW.reduce((a, b) => a + b, 0);
-  let random = Math.random() * totalWeight;
-  let selectedRarity = 'vanleg';
-
-  for (let i = 0; i < RO.length; i++) {
-    random -= RW[i];
-    if (random <= 0) {
-      selectedRarity = RO[i];
-      break;
-    }
-  }
-
-  const group = S.groups[selectedRarity];
-  if (!group || group.length === 0) {
-    // Fallback: try to find any card
-    for (const r of RO) {
-      if (S.groups[r] && S.groups[r].length > 0) {
-        return S.groups[r][Math.floor(Math.random() * S.groups[r].length)];
-      }
-    }
-    return null;
-  }
-
-  return group[Math.floor(Math.random() * group.length)];
+  let random = Math.random() * RW.reduce((a, b) => a + b, 0);
+  let rarity = RO[0];
+  for (let i = 0; i < RO.length; i++) { random -= RW[i]; if (random <= 0) { rarity = RO[i]; break; } }
+  const group = S.groups[rarity]?.length ? S.groups[rarity] : RO.map(r => S.groups[r]).find(g => g?.length);
+  return group?.[Math.floor(Math.random() * group.length)] || null;
 }
-
-/**
- * Check if a new card should have foil effect (5% chance)
- * @returns {boolean} True if foil
- */
-function shouldHaveFoil() {
-  return Math.random() < 0.05; // 5% chance
-}
-
-/**
- * Trigger card win sequence
- */
+function shouldHaveFoil() { return Math.random() < 0.05; }
 function triggerCard() {
+  if (S.phase !== 'feedback') return;
   const card = drawCard();
-  if (!card) {
-    alert('Ingen kort tilgjengeleg!');
-    S.correct = 0;
-    updateProg();
-    return;
-  }
-
-  // Determine if this card should have foil effect
-  const hasFoil = shouldHaveFoil();
-
-  // Pause game
-  S.paused = true;
-  document.getElementById('ansInput').disabled = true;
-  document.getElementById('checkBtn').disabled = true;
-
-  // Build entry data for reveal card (matches final bar cards)
-  const operations = S.ops && S.ops.length > 0
-    ? S.ops.map(op => op === '+' ? '+' : op === '-' ? '-' : op === '*' ? '×' : op === '/' ? '÷' : op)
-    : ['+', '-'];
-  const difficulty = S.level
-    ? (S.level === 'lett' ? 'Lett' : S.level === 'middels' ? 'Middels' : 'Vanskeleg')
-    : 'Middels';
-
-  // Show reveal modal
-  const modal = document.getElementById('revealModal');
-  const fc = document.getElementById('flipCard');
-  const fb = document.querySelector('.flip-back-logo');
-
-  // Clear old card content to prevent glitch
-  document.querySelector('.flip-front').innerHTML = '';
-  fc.classList.remove('flipped', 'rare-reveal');
-
-  fb.innerHTML = '<img src="Logo - no text.png" alt="Heimsank" style="height:100% !important;width:auto !important;object-fit:contain !important;font-size:unset !important">';
-  document.getElementById('revealBtn').classList.add('hidden');
-  document.getElementById('revealSub').textContent = '';
-  modal.classList.add('open');
-
-  // Determine if rare (segngjeten or gudebore) for spectacular animation
-  const isRare = card.rarity === 'segngjeten' || card.rarity === 'gudebore';
-  const flipDelay = isRare ? 1800 : 1100;
-
-  // Add shake for rare cards before flip
-  if (isRare) {
-    fc.classList.add('rare-reveal');
-  }
-
-  // Wait then flip
-  setTimeout(() => {
-    S.pending = card;
-    S.pendingFoil = hasFoil;
-
-    // Create card preview with full entry data
-    const revealEntry = {
-      catId: card.catId,
-      cardId: card.id,
-      difficulty: difficulty,
-      operations: operations,
-      foil: hasFoil,
-      earnedAt: Date.now()
-    };
-    const cardPreview = mkCard(card, 'full', revealEntry);
-    const flipFront = document.querySelector('.flip-front');
-    flipFront.innerHTML = '';
-    flipFront.appendChild(cardPreview);
-
-    fc.classList.add('flipped');
-    const subEl = document.getElementById('revealSub');
-    subEl.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:.95rem;font-weight:700;margin-bottom:16px;color:var(--text)';
-    subEl.innerHTML = `<span>${RL[card.rarity]}</span>${hasFoil ? ICON('sparkles', 14) : ''}<span>– ${esc(card.name)}</span>`;
-    setTimeout(() => document.getElementById('revealBtn').classList.remove('hidden'), 700);
-  }, flipDelay);
+  if (!card) { S.correct = 0; updateProg(); nextQ(); return; }
+  S.phase = 'reveal'; S.paused = true; S.pending = card;
+  S.pendingEntry = {
+    catId: card.catId, cardId: card.id,
+    difficulty: { lett: 'Lett', middels: 'Middels', vanskeleg: 'Vanskeleg' }[S.level],
+    operations: S.ops.map(op => ({ '*': '×', '/': '÷', '-': '−', '+': '+' })[op]),
+    foil: shouldHaveFoil(), earnedAt: Date.now()
+  };
+  const flip = document.getElementById('flipCard');
+  flip.className = 'hs-reveal-card';
+  document.getElementById('revealFront').replaceChildren(HeimsankCards.render(card, S.pendingEntry, 'reveal'));
+  document.getElementById('revealSub').textContent = 'Kva skjuler seg på den andre sida?';
+  document.getElementById('revealBtn').textContent = 'Vis kortet';
+  HeimsankUI.open('revealModal', settleReveal);
+  HeimsankUI.later(showRevealedCard, HeimsankUI.reducedMotion() ? 0 : 800);
 }
-
-/**
- * Handle after reveal (add to collection or show pending)
- */
+function showRevealedCard() {
+  if (S.phase !== 'reveal') return;
+  const flip = document.getElementById('flipCard');
+  flip.classList.add('is-revealed');
+  flip.classList.toggle('is-rare', ['segngjeten', 'gudebore'].includes(S.pending.rarity));
+  document.getElementById('revealSub').textContent = RL[S.pending.rarity] + (S.pendingEntry.foil ? ' · Foil' : '');
+  document.getElementById('revealBtn').textContent = 'Hald fram';
+}
 function afterReveal() {
-  document.getElementById('revealModal').classList.remove('open');
-  S.correct = 0;
-  updateProg();
-
-  // Get foil status from pending
-  const hasFoil = S.pendingFoil || false;
-
-  // Grant points + evaluate badges ONCE for winning this card.
-  // Currency only ever grows here, regardless of whether the card is later
-  // kept, swapped or discarded.
-  if (S.pending) {
-    const pts = ProgressionUI.awardCardPoints(S.pending, hasFoil);
-    ProgressionUI.toast(`Kortet gav ${pts} poeng!`, 'coins', 'good');
-    // Stat-baserte merke (kort tent, sjeldsemd, rett-svar) kan utløysast no.
-    ProgressionUI.evaluateAndAnnounce();
+  if (S.phase !== 'reveal' || !S.pending || !S.pendingEntry) return;
+  // Knappen kan snu kortet tidleg; Escape skal alltid fullføre overgangen.
+  const buttonClick = document.activeElement === document.getElementById('revealBtn');
+  if (buttonClick && !document.getElementById('flipCard').classList.contains('is-revealed') && !HeimsankUI.reducedMotion()) {
+    showRevealedCard(); return;
   }
-
-  delete S.pendingFoil;
-
+  settleReveal();
+}
+function settleReveal() {
+  if (S.phase !== 'reveal' || !S.pendingEntry) return;
+  HeimsankUI.cancelTimers();
+  S.phase = 'pending';
+  HeimsankUI.close('revealModal');
+  S.correct = 0; updateProg();
+  const points = ProgressionUI.awardCardPoints(S.pending, S.pendingEntry.foil);
+  ProgressionUI.toast('Kortet gav ' + points + ' poeng!', 'coins', 'good');
   if (S.collection.length < 6) {
-    // Add directly to collection
-    const operations = S.ops && S.ops.length > 0
-      ? S.ops.map(op => op === '+' ? '+' : op === '-' ? '-' : op === '*' ? '×' : op === '/' ? '÷' : op)
-      : ['+', '-'];
-    const difficulty = S.level
-      ? (S.level === 'lett' ? 'Lett' : S.level === 'middels' ? 'Middels' : 'Vanskeleg')
-      : 'Middels';
-
-    S.collection.push({
-      catId: S.pending.catId,
-      cardId: S.pending.id,
-      difficulty: difficulty,
-      operations: operations,
-      foil: hasFoil, // Save foil status
-      earnedAt: Date.now()
-    });
-    S.pending = null;
-    S.pendingFoil = null;
-    saveStorage();
-    renderColl();
-    // Kolleksjons-baserte merke («fullt hus») når samlinga no kan vere full
-    ProgressionUI.evaluateAndAnnounce();
-
-    // Reset game state and continue
-    S.paused = false;
-    document.getElementById('ansInput').disabled = false;
-    document.getElementById('checkBtn').disabled = false;
-    nextQ();
+    S.collection.push(S.pendingEntry);
+    finishPending();
   } else {
-    // Pause game, show pending card in main area
-    S.paused = true;
-    document.getElementById('ansInput').disabled = true;
-    document.getElementById('checkBtn').disabled = true;
-    
-    // Create pending entry with foil status
-    const operations = S.ops && S.ops.length > 0
-      ? S.ops.map(op => op === '+' ? '+' : op === '-' ? '-' : op === '*' ? '×' : op === '/' ? '÷' : op)
-      : ['+', '-'];
-    const difficulty = S.level
-      ? (S.level === 'lett' ? 'Lett' : S.level === 'middels' ? 'Middels' : 'Vanskeleg')
-      : 'Middels';
-    
-    S.pendingEntry = {
-      catId: S.pending.catId,
-      cardId: S.pending.id,
-      difficulty: difficulty,
-      operations: operations,
-      foil: hasFoil,
-      earnedAt: Date.now()
-    };
-    
-    // Show pending card in main area
-    renderPendingCardMain();
+    document.getElementById('pendingSlotMain').replaceChildren(HeimsankCards.render(S.pending, S.pendingEntry));
+    setupDraggable(document.querySelector('#pendingSlotMain .hs-card'), 'pending', 0);
+    document.getElementById('pendingCardName').textContent = S.pending.name;
+    document.getElementById('pendingRarityLabel').textContent = RL[S.pending.rarity];
     document.getElementById('pendingArea').classList.remove('hidden');
-    
-    // Update collection swap buttons
-    renderColl();
-
-    // Show drag instruction
-    setTimeout(() => {
-      document.getElementById('dragInstruction').classList.remove('hidden');
-    }, 500);
+    renderColl(); ProgressionUI.evaluateAndAnnounce();
+    document.getElementById('pendingSwap').focus();
   }
 }
-
-/**
- * Render pending card in main pending area
- */
-function renderPendingCardMain() {
-  const slot = document.getElementById('pendingSlotMain');
-  slot.innerHTML = '';
-  if (S.pending) {
-    const entry = S.pendingEntry || {
-      catId: S.pending.catId,
-      cardId: S.pending.id,
-      difficulty: S.difficulty,
-      operations: S.ops.filter(op => S[op]).map(op => op === '+' ? '+' : op === '-' ? '-' : op === '*' ? '×' : '÷'),
-      foil: false,
-      earnedAt: Date.now()
-    };
-    const el = mkCard(S.pending, 'bar', entry);
-    setupDraggable(el, 'pending', 0);
-    slot.appendChild(el);
-
-    // Fill info banner fields
-    const nameEl = document.getElementById('pendingCardName');
-    const metaEl = document.getElementById('pendingCardMeta');
-    const rarLabelEl = document.getElementById('pendingRarityLabel');
-    const RL_MAP = { vanleg: 'Vanleg', sjeldgjevt: 'Sjeldgjævt', segngjeten: 'Segngjeten', gudebore: 'Gudebore' };
-    if (nameEl) nameEl.textContent = S.pending.name || '';
-    if (metaEl) metaEl.textContent = (S.pending.catLabel || '') + (S.pending.stat ? ' · ' + S.pending.stat : '');
-    if (rarLabelEl) rarLabelEl.textContent = RL_MAP[S.pending.rarity] || 'Nytt kort';
-
-    // Apply rarity class to pending area
-    const pendingEl = document.getElementById('pendingArea');
-    if (pendingEl) {
-      pendingEl.className = 'pending-area pending-' + (S.pending.rarity || 'vanleg');
-    }
-  }
-}
-
-/**
- * Discard pending card
- */
-function discardPending() {
-  S.pending = null;
-  S.pendingEntry = null;
-  document.getElementById('pendingArea').classList.add('hidden');
-  document.getElementById('dragInstruction').classList.add('hidden');
-  renderColl();
-  resumeIfDone();
-}
-
-/**
- * Expand collection bar so user can drag pending card to swap
- */
-function expandCollForSwap() {
-  const bar = document.getElementById('collBar');
-  const inner = document.getElementById('collBarInner');
-  const toggle = document.getElementById('collToggleRow');
-  if (bar && bar.classList.contains('collapsed')) {
-    bar.classList.remove('collapsed');
-    inner.classList.remove('hidden');
-    toggle.classList.add('hidden');
-  }
-  document.getElementById('dragInstruction').classList.remove('hidden');
-}
-
-/**
- * Toggle collection bar expanded/collapsed
- */
-function toggleCollBar() {
-  const bar = document.getElementById('collBar');
-  const inner = document.getElementById('collBarInner');
-  const toggle = document.getElementById('collToggleRow');
-  const chevron = document.getElementById('collChevron');
-  if (!bar || !inner || !toggle) return;
-  if (bar.classList.contains('collapsed')) {
-    bar.classList.remove('collapsed');
-    inner.classList.remove('hidden');
-    toggle.classList.add('hidden');
-    if (chevron) chevron.textContent = '▼';
-  } else {
-    bar.classList.add('collapsed');
-    inner.classList.add('hidden');
-    toggle.classList.remove('hidden');
-    if (chevron) chevron.textContent = '▲';
-  }
-}
-
-// Make functions available globally for onclick handlers
-window.selLevel = selLevel;
-window.togOp = togOp;
-window.startGame = startGame;
-window.goSetup = goSetup;
-window.checkAnswer = checkAnswer;
-window.afterReveal = afterReveal;
-window.confirmClearAll = confirmClearAll;
-window.closeCardModal = closeCardModal;
-window.navigateCard = navigateCard;
-window.discardPending = discardPending;
-window.expandCollForSwap = expandCollForSwap;
-window.toggleCollBar = toggleCollBar;
-
-// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', init);

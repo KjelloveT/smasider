@@ -1,0 +1,22 @@
+[data-rarity="vanleg"] { --r-fill:#F4F1E9; --r-edge:#B5ADA0; --r-ink:#39342D; }
+[data-rarity="sjeldgjevt"] { --r-fill:#C3E7FF; --r-edge:#3683BE; --r-ink:#123E60; }
+[data-rarity="segngjeten"] { --r-fill:#E0CFFF; --r-edge:#8551CA; --r-ink:#452465; }
+[data-rarity="gudebore"] { --r-fill:#FFE6A0; --r-edge:#B68415; --r-ink:#5B3C00; }
+.hs-card { min-width:0; display:flex; flex-direction:column; background:var(--r-fill); color:var(--r-ink); border:2px solid var(--r-edge); border-radius:16px; padding:7px; box-shadow:0 5px 12px #17103c18; position:relative; overflow:hidden; }
+.hs-card-title { font-size:1rem; font-weight:800; line-height:1.2; padding:5px 4px; overflow-wrap:anywhere; }
+.hs-card-tags { display:flex; flex-wrap:wrap; gap:4px; padding:0 4px 7px; }
+.hs-card-tag { font-size:.65rem; padding:3px 6px; background:#FFFFFF90; border-radius:6px; font-weight:700; }
+.hs-card-image { position:relative; overflow:hidden; border-radius:9px; aspect-ratio:5/4; background:#ffffff50; display:grid; place-items:center; }
+.hs-card-image img { width:100%; height:100%; position:absolute; object-fit:cover; }.hs-card[data-category="land"] .hs-card-image img { object-fit:contain; padding:8px; }
+.hs-card-fact { display:flex; align-items:center; gap:5px; padding:10px 4px 5px; font-size:.75rem; overflow-wrap:anywhere; }
+.hs-card-meta { margin:8px 4px 3px; font-size:.8rem; }
+.hs-card-link { color:inherit; font-weight:700; padding:12px 4px; display:block; }
+.hs-card-credit { display:flex; flex-wrap:wrap; gap:8px; padding:12px 4px; font-size:.75rem; border-top:1px solid var(--r-edge); overflow-wrap:anywhere; }.hs-card-credit a { color:inherit; }
+.hs-card.hs-foil .hs-card-image::after { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(125deg,transparent 15%,#fff8 30%,#75e4ff66 40%,#ed8aff55 50%,#fff8 60%,transparent 75%); mix-blend-mode:soft-light; }
+.hs-card[data-variant="showcase"] .hs-card-title { font-size:.75rem; }.hs-card[data-variant="showcase"] .hs-card-tag { font-size:.55rem; }.hs-card[data-variant="showcase"] .hs-card-fact { font-size:.6rem; }
+.hs-card[data-variant="detail"] .hs-card-title { font-size:1.65rem; }.hs-card[data-variant="detail"] .hs-card-image { aspect-ratio:5/4; }.hs-card[data-variant="detail"] .hs-card-fact { font-size:1rem; }
+.hs-card-open { color:inherit; background:#ffffff88; border:0; border-radius:9px; padding:10px 4px; margin-top:auto; min-height:44px; font:700 .75rem 'Segoe UI',system-ui,sans-serif; cursor:pointer; }
+.hs-card-actions { display:flex; flex-wrap:wrap; gap:5px; margin-top:6px; }.hs-card-actions .hs-btn { flex:1; font-size:.7rem; padding:7px; }
+.hs-card-empty { border:2px dashed var(--hs-line); border-radius:16px; min-height:180px; display:grid; place-content:center; gap:10px; text-align:center; color:var(--hs-muted); font-size:.8rem; }
+.hs-card-empty svg { margin:auto; }.hs-card.dragging { opacity:.5; }.hs-card.drag-over { outline:4px solid var(--hs-violet); outline-offset:3px; }
+@media(hover:hover) and (prefers-reduced-motion:no-preference) { .hs-slots .hs-card:hover { transform:translateY(-4px); box-shadow:0 12px 22px #17103c25; }.hs-slots .hs-card { transition:transform .18s,box-shadow .18s; } }
