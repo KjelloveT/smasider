@@ -1,6 +1,7 @@
 // Eikekveik — Export (JSON eksport/import, print)
 
 Eikekveik.Export = (function () {
+    let viewBeforePrint = null;
 
     function init() {
         Eikekveik.el.btnExport.addEventListener('click', exportJSON);
@@ -13,22 +14,12 @@ Eikekveik.Export = (function () {
     }
 
     function exportJSON() {
-        const payload = {
+        Vy.downloadJson({
             app: 'eikekveik',
             version: Eikekveik.EXPORT_VERSION,
             exportedAt: new Date().toISOString(),
             data: Eikekveik.State.snapshot()
-        };
-        const json = JSON.stringify(payload, null, 2);
-        const blob = new Blob([json], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'eikekveik-' + isoStamp() + '.json';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        }, 'eikekveik-' + isoStamp() + '.json');
     }
 
     function onImportFile(e) {
@@ -43,6 +34,10 @@ Eikekveik.Export = (function () {
                     alert('Dette ser ikkje ut til å vere ei Eikekveik-fil.');
                     return;
                 }
+                if (Number(payload.version) > Eikekveik.EXPORT_VERSION) {
+                    alert('Fila er laga med ei nyare utgåve av Eikekveik. Last sida på nytt og prøv igjen.');
+                    return;
+                }
                 if (!payload.data || !Array.isArray(payload.data.nodes)) {
                     alert('Fila manglar nodar.');
                     return;
@@ -53,7 +48,7 @@ Eikekveik.Export = (function () {
                 }
                 Eikekveik.State.load(payload.data);
                 Eikekveik.Render.renderAll();
-                Eikekveik.Render.showColorPalette(false);
+                Eikekveik.View.showAll({ onlyIfNeeded: true });
                 Eikekveik.Storage.autoSave();
             } catch (err) {
                 console.error(err);
@@ -63,40 +58,33 @@ Eikekveik.Export = (function () {
         reader.readAsText(file);
     }
 
+    // Utskrifta viser heile kartet uansett kvar brukaren har zooma seg inn.
+    // Visninga blir sett tilbake etterpå.
     function onBeforePrint() {
+        const b = Eikekveik.View.contentBounds();
+        if (!b) return;
+        viewBeforePrint = Eikekveik.View.get();
+
+        // A4 ståande med 1,5 cm marg gjev om lag 680 × 990 CSS-pikslar.
+        const pad = 12;
+        const bw = b.maxX - b.minX + 2 * pad;
+        const bh = b.maxY - b.minY + 2 * pad;
+        const s = Math.min(680 / bw, 990 / bh, 1);
+
         const canvas = Eikekveik.el.canvas;
-        const edges = Eikekveik.el.edges;
-        const nodes = canvas.querySelectorAll('.node');
-        let maxX = 400, maxY = 300;
-        nodes.forEach(n => {
-            maxX = Math.max(maxX, (parseInt(n.style.left) || 0) + n.offsetWidth + 20);
-            maxY = Math.max(maxY, (parseInt(n.style.top) || 0) + n.offsetHeight + 20);
-        });
-        const scale = Math.min(680 / maxX, 990 / maxY, 1);
-        canvas.style.setProperty('--print-scale', scale);
-        canvas.style.width = maxX + 'px';
-        canvas.style.height = maxY + 'px';
-        canvas.style.minHeight = maxY + 'px';
-        edges.style.width = maxX + 'px';
-        edges.style.height = maxY + 'px';
-        edges.style.transform = `scale(${scale})`;
-        edges.style.transformOrigin = 'top left';
-        edges.setAttribute('viewBox', `0 0 ${maxX} ${maxY}`);
+        canvas.style.width = Math.ceil(bw * s) + 'px';
+        canvas.style.height = Math.ceil(bh * s) + 'px';
+        Eikekveik.View.set({ k: s, x: (pad - b.minX) * s, y: (pad - b.minY) * s });
     }
 
     function onAfterPrint() {
         const canvas = Eikekveik.el.canvas;
-        const edges = Eikekveik.el.edges;
-        canvas.style.removeProperty('--print-scale');
         canvas.style.removeProperty('width');
         canvas.style.removeProperty('height');
-        canvas.style.removeProperty('min-height');
-        edges.style.removeProperty('width');
-        edges.style.removeProperty('height');
-        edges.style.removeProperty('transform');
-        edges.style.removeProperty('transform-origin');
-        edges.removeAttribute('viewBox');
-        Eikekveik.Render.renderEdges();
+        if (viewBeforePrint) {
+            Eikekveik.View.set(viewBeforePrint);
+            viewBeforePrint = null;
+        }
     }
 
     function isoStamp() {
@@ -105,5 +93,5 @@ Eikekveik.Export = (function () {
         return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
     }
 
-    return { init, exportJSON };
+    return { init, exportJSON, isoStamp };
 })();

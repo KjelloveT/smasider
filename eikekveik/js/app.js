@@ -1,12 +1,14 @@
 // Eikekveik — namespace og oppstart
-// Modulane (state, render, interaction, storage, export) hektar seg på window.Eikekveik
-// via IIFE-mønsteret. Last-rekkjefølgje i index.html avgjer at app.js definerer namespace
-// før dei andre fyller på.
+// Modulane (state, shapes, view, render, interaction, picker, storage, export, png)
+// hektar seg på window.Eikekveik via IIFE-mønsteret. Last-rekkjefølgje i index.html
+// avgjer at app.js definerer namespace før dei andre fyller på.
 
 window.Eikekveik = window.Eikekveik || {};
 
 Eikekveik.GAME_KEY = 'eikekveik';
-Eikekveik.EXPORT_VERSION = 1;
+// 2: nodane har fått form og ikon, og kartet har fått piler. Filer med
+// versjon 1 manglar berre felta og blir lesne med standardverdiar.
+Eikekveik.EXPORT_VERSION = 2;
 
 Eikekveik.COLORS = [
     { name: 'gul',      value: '#FFD166' },
@@ -20,38 +22,62 @@ Eikekveik.COLORS = [
 ];
 
 Eikekveik.DEFAULT_COLOR = '#FFD166';
+Eikekveik.DEFAULT_SHAPE = 'rounded';
 
 document.addEventListener('DOMContentLoaded', () => {
+    const $ = id => document.getElementById(id);
     Eikekveik.el = {
-        canvas: document.getElementById('canvas'),
-        edges: document.getElementById('edges'),
-        colorPalette: document.getElementById('color-palette'),
-        colorRow: document.getElementById('color-row'),
-        btnNew: document.getElementById('btn-new'),
-        btnUndo: document.getElementById('btn-undo'),
-        btnRedo: document.getElementById('btn-redo'),
-        btnSave: document.getElementById('btn-save'),
-        btnOpen: document.getElementById('btn-open'),
-        btnExport: document.getElementById('btn-export'),
-        btnImport: document.getElementById('btn-import'),
-        btnPrint: document.getElementById('btn-print'),
-        importFile: document.getElementById('import-file'),
-        saveModal: document.getElementById('save-modal'),
-        saveModalClose: document.getElementById('save-modal-close'),
-        saveName: document.getElementById('save-name'),
-        saveConfirm: document.getElementById('save-confirm'),
-        saveCancel: document.getElementById('save-cancel'),
-        openModal: document.getElementById('open-modal'),
-        openModalClose: document.getElementById('open-modal-close'),
-        openCancel: document.getElementById('open-cancel'),
-        savedList: document.getElementById('saved-list')
+        canvas: $('canvas'),
+        world: $('world'),
+        edges: $('edges'),
+        zoomIn: $('zoom-in'),
+        zoomOut: $('zoom-out'),
+        zoomReset: $('zoom-reset'),
+        zoomFit: $('zoom-fit'),
+        panelEmpty: $('panel-empty'),
+        panelNode: $('panel-node'),
+        colorRow: $('color-row'),
+        shapePicker: $('shape-picker'),
+        shapeGridKart: $('shape-grid-kart'),
+        shapeGridFlyt: $('shape-grid-flyt'),
+        iconPreview: $('icon-preview'),
+        btnIcon: $('btn-icon'),
+        btnIconRemove: $('btn-icon-remove'),
+        arrowsToggle: $('arrows-toggle'),
+        btnNew: $('btn-new'),
+        btnUndo: $('btn-undo'),
+        btnRedo: $('btn-redo'),
+        btnSave: $('btn-save'),
+        btnOpen: $('btn-open'),
+        btnExport: $('btn-export'),
+        btnImport: $('btn-import'),
+        btnPng: $('btn-png'),
+        btnPrint: $('btn-print'),
+        importFile: $('import-file'),
+        saveModal: $('save-modal'),
+        saveModalClose: $('save-modal-close'),
+        saveName: $('save-name'),
+        saveConfirm: $('save-confirm'),
+        saveCancel: $('save-cancel'),
+        openModal: $('open-modal'),
+        openModalClose: $('open-modal-close'),
+        openCancel: $('open-cancel'),
+        savedList: $('saved-list'),
+        pickerModal: $('picker-modal'),
+        pickerClose: $('picker-close'),
+        pickerSearch: $('picker-search'),
+        pickerTabs: $('picker-tabs'),
+        pickerGrid: $('picker-grid')
     };
 
     Eikekveik.State.init();
+    Eikekveik.View.init();
     Eikekveik.Render.init();
     Eikekveik.Interaction.init();
+    Eikekveik.Picker.init();
     Eikekveik.Storage.init();
     Eikekveik.Export.init();
+    Eikekveik.Png.init();
 
     // Last forrige økt om finst, elles ny sentrum-node
     const saved = Eikekveik.Storage.loadAutoSave();
@@ -61,4 +87,5 @@ document.addEventListener('DOMContentLoaded', () => {
         Eikekveik.State.reset();
     }
     Eikekveik.Render.renderAll();
+    Eikekveik.View.showAll({ onlyIfNeeded: true });
 });

@@ -3,6 +3,20 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.48] — 2026-09-13
+
+### Lagt til
+- **Eikekveik kan zoome og flytte kartet.** Knappar oppe til høgre på lerretet zoomar mellom 25 og 300 %, og «Vis heile kartet» finn att nodar som har hamna utanfor. <kbd>Ctrl</kbd> + hjul zoomar rundt peikaren, knip med to fingrar gjer det same på nettbrett, og ein dreg i tom flate for å flytte kartet. Hjulet åleine rullar framleis sida: lerretet dekkjer mesteparten av skjermen, og ei side som sluttar å rulle når peikaren står over det, er ei side ein ikkje kjem seg ut av. Zoomen rører aldri koordinatane i kartet, så eit kart laga før i dag ser likt ut ved 100 %.
+- **Former på nodane i Eikekveik.** Tre former for tankekart (avrunda boks, ellipse og sky) og elleve flytskjemasymbol etter ISO 5807: start/slutt, prosess, avgjerd, inn/ut-data, delprosess, dokument, database, førebuing, inntasting, venting og koplingspunkt. Kvart symbol har ei kort forklaring i verktøytipset, så verktøyet òg kan brukast til å lære kva symbola tyder. Formene blir rekna ut frå den faktiske storleiken til noden i staden for å strekkje eit bilete, så hjørne og strekar held seg like uansett kor lang teksten er.
+- **Piler på linjene** kan slåast på for heile kartet. Linjene festar seg no på kanten av forma og går mellom dei sidene som vender mot kvarandre, så eit flytskjema som går nedover får piler som peikar rett ned.
+- **Ikon og emoji på nodane.** Ein veljar med om lag hundre Lucide-ikon og hundre kuraterte emoji i fire kategoriar, med søk på nynorsk. Ein node kan ha berre ikon og ingen tekst. Emoji er eit medvite unntak frå AGENTS.md §3.2 på same vilkår som i Dagsvegen: berre i innhaldet, aldri i knappar, og ingen flagg-emoji.
+- **Last ned kartet som PNG.** Biletet blir teikna i nettlesaren i dobbel oppløysing og med kvit bakgrunn uansett tema, så det kan setjast rett inn i ein presentasjon. Linjeskifta blir henta frå lerretet i staden for å bli rekna ut på nytt, så teksten står i biletet der han står på skjermen. Ingen ny avhengnad.
+
+### Endra
+- **Eikekveik brukar heile skjermbreidda** (§3.1.1), og farge, ikon og form er samla i eit panel ved sida av lerretet. Fargepaletten låg før under lerretet, og på ein vanleg skjerm måtte ein rulle ned for å nå han.
+- **Utskrifta frå Eikekveik viser heile kartet** uansett kvar ein har zooma seg inn, og set visninga tilbake etterpå.
+- Eksportfilene frå Eikekveik har `version: 2`. Filer med versjon 1 blir lesne som før. Ei fil frå ei nyare utgåve blir avvist med ei melding i staden for å bli lesen halvvegs.
+
 ## [1.47] — 2026-09-12
 
 ### Endra
