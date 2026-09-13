@@ -2,6 +2,28 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.49",
+      "dato": "2026-09-13",
+      "samandrag": "Heimsank har fått dinosaurar, hunderasar og troll og vette, og viser kven som har teke bileta.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Heimsank",
+          "tekst": "Tre nye kortkategoriar: Dinosaurar, Hunderasar og Troll og vette frå norsk folketru og norrøn mytologi."
+        },
+        {
+          "t": "nytt",
+          "kva": "Heimsank",
+          "tekst": "Når du opnar eit kort, står opphavsperson og lisens for biletet nedst, med lenkje til fila på Wikimedia Commons."
+        },
+        {
+          "t": "endra",
+          "kva": "Under panseret",
+          "tekst": "Kortdata blir bygde med eit skript som tek vare på spørjingane og hentar lisensane frå Commons."
+        }
+      ]
+    },
+    {
       "versjon": "1.47",
       "dato": "2026-09-12",
       "samandrag": "Protokollsmia viser lovteksten ved sida av feltet du fyller ut.",

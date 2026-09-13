@@ -1,0 +1,36 @@
+# Dinosaurslekter i Heimsank.
+# Køyr: node heimsank/tools/kortdata.mjs hent dinosaurar
+#
+# Alle slekter under Dinosauria (Q430) med bilete og artikkel på nynorsk- eller
+# bokmålswikipedia. Fuglane er òg dinosaurar i taksonomien og blir trekte frå
+# med dinosaurar.utan.rq. Ein FILTER NOT EXISTS med transitiv P171 her inne
+# tek for lang tid på WDQS, så dei to spørjingane går kvar for seg.
+#
+# Statistikk: året slekta vart skildra (P574 som kvalifikator på det
+# vitskaplege namnet, P225).
+
+PREFIX gas: <http://www.bigdata.com/rdf/gas#>
+
+SELECT ?item ?itemLabel (MIN(?img) AS ?image) (SAMPLE(?art) AS ?article) (MIN(?skildraAar) AS ?aar)
+WHERE {
+  SERVICE gas:service {
+    gas:program gas:gasClass "com.bigdata.rdf.graph.analytics.BFS" ;
+                gas:in wd:Q430 ;
+                gas:traversalDirection "Reverse" ;
+                gas:out ?item ;
+                gas:linkType wdt:P171 .
+  }
+  ?item wdt:P105 wd:Q34740 ;
+        wdt:P18 ?img .
+  ?wiki schema:about ?item ; schema:isPartOf ?w .
+  FILTER(?w IN (<https://nn.wikipedia.org/>, <https://no.wikipedia.org/>))
+  OPTIONAL { ?nn schema:about ?item ; schema:isPartOf <https://nn.wikipedia.org/> . }
+  OPTIONAL { ?nb schema:about ?item ; schema:isPartOf <https://no.wikipedia.org/> . }
+  BIND(COALESCE(?nn, ?nb) AS ?art)
+  OPTIONAL { ?item p:P225/pq:P574 ?skildra . BIND(YEAR(?skildra) AS ?skildraAar) }
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "nn,nb,en" .
+    ?item rdfs:label ?itemLabel .
+  }
+}
+GROUP BY ?item ?itemLabel

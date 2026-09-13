@@ -3,6 +3,51 @@
 let currentModalIndex = 0;
 
 /**
+ * Build the image credit line: author · licence · link to the Commons file page.
+ * Built from DOM nodes and textContent, never innerHTML: the text comes from
+ * Wikimedia Commons (AGENTS.md §5.3).
+ * @param {Object} card - card object from CardData
+ * @returns {HTMLElement|null} null when the card has nothing to credit
+ */
+function buildImageCredit(card) {
+  const link = (href, label) => {
+    const a = document.createElement('a');
+    a.href = href;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.textContent = label;
+    return a;
+  };
+
+  const parts = [];
+  if (card.imgAuthor) parts.push(card.imgAuthor);
+  if (card.imgLicense) {
+    parts.push(/^https:\/\//.test(card.imgLicenseUrl) ? link(card.imgLicenseUrl, card.imgLicense) : card.imgLicense);
+  }
+  const hasMeta = parts.length > 0;
+  if (card.imgPage) parts.push(link(card.imgPage, 'Wikimedia Commons'));
+  if (parts.length === 0) return null;
+
+  const credit = document.createElement('div');
+  credit.className = 'modal-card-credit';
+
+  const icon = document.createElement('span');
+  icon.className = 'modal-card-credit-icon';
+  icon.setAttribute('aria-hidden', 'true');
+  icon.innerHTML = ICON('camera', 14);
+
+  const text = document.createElement('span');
+  text.append(hasMeta ? 'Bilete: ' : 'Bilete frå ');
+  parts.forEach((part, i) => {
+    if (i > 0) text.append(' · ');
+    text.append(part);
+  });
+
+  credit.append(icon, text);
+  return credit;
+}
+
+/**
  * Open card modal for collection cards
  * @param {number} index - Index in collection
  * @param {number} direction - Animation direction: -1 (prev), 0 (open), 1 (next)
@@ -44,6 +89,9 @@ function openCardModal(index, direction = 0) {
     img.onerror = function () {
       this.parentNode.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;opacity:.25">${CAT_ICON(card.catIcon || 'microscope', 64)}</div>`;
     };
+
+    const credit = buildImageCredit(card);
+    if (credit) cardContent.querySelector('.modal-card-footer').appendChild(credit);
 
     modalCard.innerHTML = '';
     modalCard.appendChild(cardContent);

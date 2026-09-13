@@ -133,5 +133,50 @@
     "statField": "originLabel",
     "statType": "text",
     "statLabel": "globe"
+  },
+  {
+    "id": "dinosaurar",
+    "label": "Dinosaurar",
+    "unlockCost": 45,
+    "icon": "egg",
+    "csv": "dinosaurar.csv",
+    "rarity": "rarity-dinosaurar.json",
+    "idField": "item",
+    "nameField": "itemLabel",
+    "imageField": "image",
+    "articleField": "article",
+    "statField": "aar",
+    "statType": "year",
+    "statLabel": "calendar"
+  },
+  {
+    "id": "hunderasar",
+    "label": "Hunderasar",
+    "unlockCost": 65,
+    "icon": "footprints",
+    "csv": "hunderasar.csv",
+    "rarity": "rarity-hunderasar.json",
+    "idField": "item",
+    "nameField": "itemLabel",
+    "imageField": "image",
+    "articleField": "article",
+    "statField": "opphavslandLabel",
+    "statType": "text",
+    "statLabel": "globe"
+  },
+  {
+    "id": "vette",
+    "label": "Troll og vette",
+    "unlockCost": 95,
+    "icon": "treePine",
+    "csv": "vette.csv",
+    "rarity": "rarity-vette.json",
+    "idField": "item",
+    "nameField": "itemLabel",
+    "imageField": "image",
+    "articleField": "article",
+    "statField": "opphav",
+    "statType": "text",
+    "statLabel": "book"
   }
 ]
