@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.50",
+      "dato": "2026-09-13",
+      "samandrag": "Heimsank mistar ikkje lenger poeng når spelet er ope i fleire faner.",
+      "punkt": [
+        {
+          "t": "fiksa",
+          "kva": "Heimsank",
+          "tekst": "Ei side som hadde lege open i ei anna fane, viste for få poeng og kunne skrive over poeng eleven hadde tent i mellomtida. No blir poenga lesne på nytt før dei blir endra."
+        }
+      ]
+    },
+    {
       "versjon": "1.49",
       "dato": "2026-09-13",
       "samandrag": "Heimsank har fått dinosaurar, hunderasar og troll og vette, og viser kven som har teke bileta.",

@@ -3,6 +3,14 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.50] — 2026-09-13
+
+### Fiksa
+- **Heimsank mista poeng når spelet var ope i fleire faner.** Kvar side heldt sin eigen kopi av poenga i minnet og las aldri lageret på nytt. Ei side som hadde lege open ei stund — i ei anna fane, eller henta fram att med tilbakeknappen — viste difor færre poeng enn eleven hadde tent. Og gav ho eit kort eller låste opp ein kategori, skreiv ho det gamle talet tilbake, og poenga frå den andre fana forsvann for godt.
+  - **Poeng, rette svar, opplåsingar og merke blir lesne på nytt frå lageret** før dei blir endra. Rette svar blir lagra med ein gong i staden for ved neste kort, elles ville dei gått tapt ved neste gjenlesing.
+  - **Poengtalet og kategoriforsidene blir oppdaterte** når ei anna fane skriv til lageret, og når sida blir vist att frå tilbakeknappen.
+  - Poeng som alt er tapte, kjem ikkje att.
+
 ## [1.49] — 2026-09-13
 
 ### Lagt til
