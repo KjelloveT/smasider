@@ -5,11 +5,15 @@ const HeimsankCards = (function () {
     root.dataset.rarity = RO.includes(card.rarity) ? card.rarity : 'vanleg';
     root.dataset.category = card.catId;
     root.dataset.variant = variant;
-    root.appendChild(Vy.el('div', 'hs-card-title', card.name));
+    // Kortflata er identisk i alle visingar; knappar og kjelder høyrer utanfor.
+    const face = Vy.el('div', 'hs-card-face');
+    const title = Vy.el('div', 'hs-card-title', card.name);
+    title.dataset.length = card.name.length > 42 ? 'long' : card.name.length > 25 ? 'medium' : 'short';
+    face.appendChild(title);
     const tags = Vy.el('div', 'hs-card-tags');
     tags.appendChild(Vy.el('span', 'hs-card-tag', RL[root.dataset.rarity]));
     if (entry?.foil) tags.appendChild(Vy.el('span', 'hs-card-tag', 'Foil'));
-    root.appendChild(tags);
+    face.appendChild(tags);
     const picture = Vy.el('div', 'hs-card-image');
     // Fallback ligg under biletet og verkar òg medan det lastar.
     const fallback = HeimsankUI.icon(HeimsankUI.categoryIcon(card.catId), 40);
@@ -25,18 +29,29 @@ const HeimsankCards = (function () {
       picture.setAttribute('aria-label', 'Bilete ikkje tilgjengeleg: ' + card.name);
     }, { once: true });
     picture.appendChild(img);
-    root.appendChild(picture);
+    face.appendChild(picture);
     const fact = Vy.el('div', 'hs-card-fact');
     fact.append(HeimsankUI.icon(card.statLabel || 'globe', 14), Vy.el('span', '', card.stat || ''));
-    root.appendChild(fact);
-    if (variant === 'detail') {
-      root.appendChild(Vy.el('div', 'hs-card-meta', card.catLabel));
-      if (entry?.difficulty) root.appendChild(Vy.el('div', 'hs-card-meta',
-        entry.difficulty + ' · ' + (Array.isArray(entry.operations) ? entry.operations.join(' ') : '')));
+    face.appendChild(fact);
+    const category = Vy.el('div', 'hs-card-category');
+    category.append(HeimsankUI.icon(HeimsankUI.categoryIcon(card.catId), 16), Vy.el('span', '', card.catLabel));
+    face.appendChild(category);
+    const meta = Vy.el('div', 'hs-card-meta');
+    meta.appendChild(Vy.el('span', 'hs-card-level', entry?.difficulty || (entry ? 'Ukjend nivå' : 'Ikkje opptent')));
+    meta.appendChild(Vy.el('span', 'hs-card-operations', Array.isArray(entry?.operations) ? entry.operations.join(' ') : '—'));
+    face.appendChild(meta);
+    root.appendChild(face);
+    if (variant !== 'collection' && ['segngjeten', 'gudebore'].includes(root.dataset.rarity)) {
+      HeimsankFlames.attach(face, root.dataset.rarity);
+    }
+    return root;
+  }
+  function details(card) {
+    const extra = Vy.el('div', 'hs-card-details');
       if (card.article && /^https?:\/\//.test(card.article)) {
         const link = Vy.el('a', 'hs-card-link', 'Les om →');
         link.href = card.article; link.target = '_blank'; link.rel = 'noopener noreferrer';
-        root.appendChild(link);
+        extra.appendChild(link);
       }
       // Kreditering frå kortdata, bygd med DOM slik at namn er rein tekst.
       if (card.imgAuthor || card.imgLicense || card.imgPage) {
@@ -48,12 +63,11 @@ const HeimsankCards = (function () {
           if (part.tagName === 'A') { part.href = url; part.target = '_blank'; part.rel = 'noopener noreferrer'; }
           credit.appendChild(part);
         }
-        root.appendChild(credit);
+        extra.appendChild(credit);
       }
-    }
-    return root;
+    return extra;
   }
-  return { render };
+  return { render, details };
 })();
 function mkCard(card, size, entry = null) {
   return HeimsankCards.render(card, entry, size === 'full' ? 'reveal' : 'collection');

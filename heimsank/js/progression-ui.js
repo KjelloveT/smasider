@@ -67,18 +67,20 @@ const ProgressionUI = (function () {
       card.dataset.selected = String(selected);
       const visual = Vy.el('div', 'hs-category-visual');
       visual.appendChild(HeimsankUI.icon(HeimsankUI.categoryIcon(cat.id), 38));
-      if (unlocked) CardData.loadCategoryCards(cat).then(cards => {
+      const entries = Array.isArray(stored[cat.id]) ? stored[cat.id] : [];
+      if (entries.length) CardData.loadCategoryCards(cat).then(cards => {
         if (!card.isConnected) return;
-        const pick = CardData.pickCoverCard(cards);
+        const pick = cards.find(c => c.id === entries[0]?.cardId) || CardData.pickCoverCard(cards);
         if (!pick) return;
         const img = document.createElement('img');
         img.src = pick.img; img.alt = ''; img.loading = 'lazy';
+        img.addEventListener('load', () => visual.classList.add('has-image'), { once: true });
         img.addEventListener('error', () => img.remove(), { once: true });
         visual.appendChild(img);
       }).catch(() => {});
       const body = Vy.el('div', 'hs-category-body');
       body.appendChild(Vy.el('h3', '', cat.label));
-      const count = Array.isArray(stored[cat.id]) ? stored[cat.id].length : 0;
+      const count = entries.length;
       const cost = Progression.getCost(cat);
       const need = Math.max(0, cost - Progression.getPoints());
       body.appendChild(Vy.el('span', 'hs-category-status', unlocked

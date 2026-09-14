@@ -10,7 +10,8 @@ function openCardModal(index, cards = null) {
 }
 function renderCardDetail() {
   const item = detailCards[currentModalIndex];
-  document.getElementById('modalCard').replaceChildren(HeimsankCards.render(item.card, item.entry, 'detail'));
+  document.getElementById('modalCard').replaceChildren(
+    HeimsankCards.render(item.card, item.entry, 'detail'), HeimsankCards.details(item.card));
   document.getElementById('cardPrev').disabled = currentModalIndex === 0;
   document.getElementById('cardNext').disabled = currentModalIndex === detailCards.length - 1;
   document.getElementById('cardPosition').textContent = (currentModalIndex + 1) + ' av ' + detailCards.length;

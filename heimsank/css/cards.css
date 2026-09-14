@@ -1,22 +1,41 @@
 [data-rarity="vanleg"] { --r-fill:#F4F1E9; --r-edge:#B5ADA0; --r-ink:#39342D; }
 [data-rarity="sjeldgjevt"] { --r-fill:#C3E7FF; --r-edge:#3683BE; --r-ink:#123E60; }
-[data-rarity="segngjeten"] { --r-fill:#E0CFFF; --r-edge:#8551CA; --r-ink:#452465; }
-[data-rarity="gudebore"] { --r-fill:#FFE6A0; --r-edge:#B68415; --r-ink:#5B3C00; }
-.hs-card { min-width:0; display:flex; flex-direction:column; background:var(--r-fill); color:var(--r-ink); border:2px solid var(--r-edge); border-radius:16px; padding:7px; box-shadow:0 5px 12px #17103c18; position:relative; overflow:hidden; }
-.hs-card-title { font-size:1rem; font-weight:800; line-height:1.2; padding:5px 4px; overflow-wrap:anywhere; }
-.hs-card-tags { display:flex; flex-wrap:wrap; gap:4px; padding:0 4px 7px; }
-.hs-card-tag { font-size:.65rem; padding:3px 6px; background:#FFFFFF90; border-radius:6px; font-weight:700; }
-.hs-card-image { position:relative; overflow:hidden; border-radius:9px; aspect-ratio:5/4; background:#ffffff50; display:grid; place-items:center; }
-.hs-card-image img { width:100%; height:100%; position:absolute; object-fit:cover; }.hs-card[data-category="land"] .hs-card-image img { object-fit:contain; padding:8px; }
-.hs-card-fact { display:flex; align-items:center; gap:5px; padding:10px 4px 5px; font-size:.75rem; overflow-wrap:anywhere; }
-.hs-card-meta { margin:8px 4px 3px; font-size:.8rem; }
-.hs-card-link { color:inherit; font-weight:700; padding:12px 4px; display:block; }
-.hs-card-credit { display:flex; flex-wrap:wrap; gap:8px; padding:12px 4px; font-size:.75rem; border-top:1px solid var(--r-edge); overflow-wrap:anywhere; }.hs-card-credit a { color:inherit; }
+[data-rarity="segngjeten"] { --r-fill:#E0CFFF; --r-edge:#8551CA; --r-ink:#452465; --flame-glow:#A551E780; }
+[data-rarity="gudebore"] { --r-fill:#FFE6A0; --r-edge:#B68415; --r-ink:#5B3C00; --flame-glow:#F3A51D90; }
+/* 20 × 28 em er kortet si faste trykkflate. 1 em = 5 % av kortbreidda.
+   Ingen variant får flytte eller endre innhaldet; berre ytterbreidda varierer. */
+.hs-card { min-width:0; width:100%; position:relative; container-type:inline-size; color:var(--r-ink); text-align:left; }
+.hs-card-face { position:relative; isolation:isolate; width:100%; aspect-ratio:5/7; font-size:5cqw; line-height:1.2; border-radius:1em; background:var(--r-fill); box-shadow:inset 0 0 0 .12em var(--r-edge),0 .3em .8em #17103c25; }
+.hs-card-face>div { position:absolute; left:.85em; right:.85em; z-index:1; }
+.hs-card-face>.hs-card-title { top:.7em; height:2.15em; left:.68em; right:.68em; font-size:1.25em; font-weight:800; line-height:1.05; overflow-wrap:anywhere; display:flex; align-items:center; }
+.hs-card-title[data-length="medium"] { font-size:1em; top:.875em; height:2.6875em; left:1.0625em; right:1.0625em; }
+.hs-card-title[data-length="long"] { font-size:.8em; top:1.09375em; height:3.36em; left:1.328em; right:1.328em; }
+.hs-card-face>.hs-card-tags { top:3.75em; display:flex; gap:.3em; height:1.2em; align-items:center; }
+.hs-card-tag { font-size:.65em; padding:.3em .6em; background:#FFFFFFA8; border-radius:.4em; font-weight:750; white-space:nowrap; }
+.hs-card-face>.hs-card-image { top:5.6em; height:14em; border-radius:.6em; overflow:hidden; background:#ffffff50; display:grid; place-items:center; }
+.hs-card-image svg { width:3em; height:3em; }
+.hs-card-image>span,.hs-card-fact>span:first-child,.hs-card-category>span:first-child { display:flex; align-items:center; line-height:0; }
+.hs-card-image img { width:100%; height:100%; position:absolute; inset:0; object-fit:cover; }
+.hs-card[data-category="land"] .hs-card-image img { object-fit:contain; padding:.5em; }
+.hs-card-face>.hs-card-fact { top:20.3em; height:2.4em; display:flex; align-items:center; gap:.4em; }
+.hs-card-fact span { font-size:.8em; overflow-wrap:anywhere; line-height:1.15; }
+.hs-card-fact svg { width:1em; height:1em; }
+.hs-card-face>.hs-card-category { top:23em; display:flex; align-items:center; gap:.4em; height:1.4em; }
+.hs-card-category span { font-size:.65em; font-weight:650; }
+.hs-card-category svg { width:.9em; height:.9em; }
+.hs-card-face>.hs-card-meta { bottom:.85em; height:1.75em; display:flex; justify-content:space-between; align-items:center; gap:.4em; padding-top:.45em; border-top:.06em solid var(--r-edge); }
+.hs-card-level { font-size:.65em; font-weight:750; }
+.hs-card-operations { font-size:.85em; font-weight:800; letter-spacing:.08em; white-space:nowrap; }
 .hs-card.hs-foil .hs-card-image::after { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(125deg,transparent 15%,#fff8 30%,#75e4ff66 40%,#ed8aff55 50%,#fff8 60%,transparent 75%); mix-blend-mode:soft-light; }
-.hs-card[data-variant="showcase"] .hs-card-title { font-size:.75rem; }.hs-card[data-variant="showcase"] .hs-card-tag { font-size:.55rem; }.hs-card[data-variant="showcase"] .hs-card-fact { font-size:.6rem; }
-.hs-card[data-variant="detail"] .hs-card-title { font-size:1.65rem; }.hs-card[data-variant="detail"] .hs-card-image { aspect-ratio:5/4; }.hs-card[data-variant="detail"] .hs-card-fact { font-size:1rem; }
-.hs-card-open { color:inherit; background:#ffffff88; border:0; border-radius:9px; padding:10px 4px; margin-top:auto; min-height:44px; font:700 .75rem 'Segoe UI',system-ui,sans-serif; cursor:pointer; }
+.hs-card:is([data-rarity="segngjeten"],[data-rarity="gudebore"]) .hs-card-face { box-shadow:inset 0 0 0 .12em var(--r-edge),0 0 .8em var(--flame-glow); }
+.hs-card-flames { position:absolute; left:-10%; top:-13%; width:120%; height:120%; z-index:0; pointer-events:none; }
+/* Handlingar og kjelder er ikkje ein del av kortet si trykkflate. */
+.hs-card-open { display:block; width:100%; color:var(--hs-text); background:var(--hs-soft); border:1px solid var(--hs-line); border-radius:10px; padding:10px 4px; margin-top:12px; min-height:44px; font:700 .75rem 'Segoe UI',system-ui,sans-serif; cursor:pointer; }
 .hs-card-actions { display:flex; flex-wrap:wrap; gap:5px; margin-top:6px; }.hs-card-actions .hs-btn { flex:1; font-size:.7rem; padding:7px; }
+.hs-card-details { color:var(--hs-text); margin-top:18px; }
+.hs-card-link { color:inherit; font-weight:700; padding:12px 0; display:block; }
+.hs-card-credit { display:flex; flex-wrap:wrap; gap:8px; padding:12px 0; font-size:.75rem; border-top:1px solid var(--hs-line); overflow-wrap:anywhere; }.hs-card-credit a { color:inherit; }
 .hs-card-empty { border:2px dashed var(--hs-line); border-radius:16px; min-height:180px; display:grid; place-content:center; gap:10px; text-align:center; color:var(--hs-muted); font-size:.8rem; }
 .hs-card-empty svg { margin:auto; }.hs-card.dragging { opacity:.5; }.hs-card.drag-over { outline:4px solid var(--hs-violet); outline-offset:3px; }
-@media(hover:hover) and (prefers-reduced-motion:no-preference) { .hs-slots .hs-card:hover { transform:translateY(-4px); box-shadow:0 12px 22px #17103c25; }.hs-slots .hs-card { transition:transform .18s,box-shadow .18s; } }
+@media(hover:hover) and (prefers-reduced-motion:no-preference) { .hs-slots .hs-card:hover { transform:translateY(-4px); }.hs-slots .hs-card { transition:transform .18s; } }
+@media(prefers-reduced-motion:reduce) { .hs-card-flames { display:none; } }

@@ -25,6 +25,16 @@ https://icy-water-0487ac303-67.westeurope.2.azurestaticapps.net/heimsank/.
 - Ingen åtvaringar eller feil i nettlesarkonsollen under kontrollen.
 - Chrome-kontroll står att; PR #67 blir difor halden som utkast.
 
+## Kortvising og kategoriomslag
+
+- Same kort blir kontrollert i fire breidder på `tests/card-layout.html`. Testen
+  måler sideforhold og den relative plasseringa til tekst, bilete og symbol.
+- Kategoriar med opptente kort brukar det fyrste kortet i samlinga som eit
+  heildekkjande omslagsbilete. Utan eit opptent kort står kategoriikonet att.
+- Segngjetne og gudeborne kort har lokal WebGL-dekorasjon berre over toppen.
+  Samlingsrutenett brukar ei statisk glød for å unngå mange GPU-kontekstar.
+  `prefers-reduced-motion` slår av animasjonen.
+
 ## Samordning
 
 - Oppdatert med main etter PR #65, #66 og #68; redesignen brukar versjon 1.51.
