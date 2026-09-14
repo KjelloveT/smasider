@@ -59,7 +59,8 @@ const HeimsankFlames = (function () {
     alpha=max(alpha,glow)+spark;
     col+=core*vec3(.35,.18,.02)+spark*vec3(1.,.75,.3);
     // Rein toppkant utan «taggar» ned langs sidene.
-    float sideFade=smoothstep(-.20,.08,x)*smoothstep(-.20,.08,1.-x);
+    // Flammen sluttar mjukt eit stykke før kortkantane og dannar ei toppkrone.
+    float sideFade=smoothstep(.06,.19,x)*smoothstep(.06,.19,1.-x);
     alpha*=sideFade;
     if(y>edge+.012) alpha=0.;
     outColor=vec4(col*alpha,alpha);
