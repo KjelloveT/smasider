@@ -4,7 +4,8 @@ const HeimsankUI = (function () {
     land: ['#92DFD0', 'globe'], byar: ['#A9C8FA', 'building'],
     forskere: ['#C8B4F3', 'microscope'], matrett: ['#FFB8A8', 'sparkles'],
     grunnstoff: ['#BCE8BC', 'sparkles'], videospill: ['#F3B0D5', 'sparkles'],
-    fly: ['#ACE1F5', 'plane'], kunst: ['#F9D0AD', 'palette'], hest: ['#E7D3AB', 'rabbit']
+    fly: ['#ACE1F5', 'plane'], kunst: ['#F9D0AD', 'palette'], hest: ['#E7D3AB', 'rabbit'],
+    dinosaurar: ['#CEE4A2', 'egg'], hunderasar: ['#E7C3A3', 'footprints'], vette: ['#C1C5F2', 'treePine']
   };
   const timers = new Set();
   const dialogs = [];

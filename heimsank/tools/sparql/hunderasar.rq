@@ -1,0 +1,26 @@
+# Hunderasar i Heimsank.
+# Køyr: node heimsank/tools/kortdata.mjs hent hunderasar
+#
+# Krev bilete og artikkel på nynorsk- eller bokmålswikipedia.
+# Statistikk: opphavsland (P495). Nokre rasar har fleire, dei blir slegne saman.
+# Etikettane på nn/nb er iblant små bokstavar («schäfer»), så namnet får stor forbokstav.
+
+SELECT ?item ?itemLabel (MIN(?img) AS ?image) (SAMPLE(?art) AS ?article)
+       (GROUP_CONCAT(DISTINCT ?opphavLabel; separator=" / ") AS ?opphavslandLabel)
+WHERE {
+  ?item wdt:P31 wd:Q39367 ;
+        wdt:P18 ?img .
+  ?wiki schema:about ?item ; schema:isPartOf ?w .
+  FILTER(?w IN (<https://nn.wikipedia.org/>, <https://no.wikipedia.org/>))
+  OPTIONAL { ?nn schema:about ?item ; schema:isPartOf <https://nn.wikipedia.org/> . }
+  OPTIONAL { ?nb schema:about ?item ; schema:isPartOf <https://no.wikipedia.org/> . }
+  BIND(COALESCE(?nn, ?nb) AS ?art)
+  OPTIONAL { ?item wdt:P495 ?opphav . }
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "nn,nb,en" .
+    ?item rdfs:label ?rawLabel .
+    ?opphav rdfs:label ?opphavLabel .
+  }
+  BIND(CONCAT(UCASE(SUBSTR(?rawLabel, 1, 1)), SUBSTR(?rawLabel, 2)) AS ?itemLabel)
+}
+GROUP BY ?item ?itemLabel

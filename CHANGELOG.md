@@ -3,7 +3,7 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
-## [1.50] — 2026-09-13
+## [1.51] — 2026-09-14
 
 ### Endra
 - **Heimsank har fått eit eige kortarkade-design.** Fargerike kategoriomslag, lyst lavendeltema og mørkt indigotema, roleg oppgåveflate og samling i seks kortplassar. Kortvifta følgjer kategorivalet. Korta brukar same vising i spelet, premieopninga og samlingsalbumet, med tydeleg sjeldsemd og foil. Det lokale designet er eit godkjent unntak frå neobrutalisme; felles toppmeny og lagra samlingar er vidareførte.
@@ -11,6 +11,28 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ### Fiksa
 - **Kortpremiar blir registrerte éin gong.** Raske gjentekne svar blir stoppa, og Escape i kortopninga fullfører premien utan å låse spelet. Byte med knapp og dra-og-slepp brukar same handling og bevarer foil, også når ein byter til eit nytt eksemplar av same kort.
 - **Kort og kategoriar kan brukast med tastatur og trykk.** Dialogar held på fokus og sender det tilbake ved lukking. Redusert rørsle slår av dekorative overgangar, og bilete som ikkje lastar får eit kategoriikon.
+
+## [1.50] — 2026-09-13
+
+### Fiksa
+- **Heimsank mista poeng når spelet var ope i fleire faner.** Kvar side heldt sin eigen kopi av poenga i minnet og las aldri lageret på nytt. Ei side som hadde lege open ei stund — i ei anna fane, eller henta fram att med tilbakeknappen — viste difor færre poeng enn eleven hadde tent. Og gav ho eit kort eller låste opp ein kategori, skreiv ho det gamle talet tilbake, og poenga frå den andre fana forsvann for godt.
+  - **Poeng, rette svar, opplåsingar og merke blir lesne på nytt frå lageret** før dei blir endra. Rette svar blir lagra med ein gong i staden for ved neste kort, elles ville dei gått tapt ved neste gjenlesing.
+  - **Poengtalet og kategoriforsidene blir oppdaterte** når ei anna fane skriv til lageret, og når sida blir vist att frå tilbakeknappen.
+  - Poeng som alt er tapte, kjem ikkje att.
+
+## [1.49] — 2026-09-13
+
+### Lagt til
+- **Tre nye kortkategoriar i Heimsank.** Dinosaurar (63 kort, med året slekta vart skildra), Hunderasar (330 kort, med opphavsland) og Troll og vette (33 vesen frå norsk folketru og norrøn mytologi). Dei kostar 45, 65 og 95 poeng å låse opp, billegare enn dei fleste kategoriane, fordi dei er meinte å fenge dei yngste elevane.
+  - **Troll og vette er ei handplukka liste.** Wikidata har ingen klasse som skil vesen i folketru frå gudar, englar og oljefelt med same namn — eit søk på «Troll» gir òg forskingsstasjonen i Antarktis. Kvar Q-id er difor kontrollert for seg.
+  - **Fuglane er haldne utanfor dinosaurane.** Taksonomisk er alle fuglar dinosaurar, og ei rett spørjing etter slekter under Dinosauria gir 776 treff der 712 er fuglar. Dei blir trekte frå med ei eiga spørjing, fordi same filteret inne i hovudspørjinga går ut på tid på Wikidata.
+- **Heimsank krediterer bileta.** Når du opnar eit kort, står opphavsperson og lisens nedst, med lenkje til lisensen og til fila på Wikimedia Commons. Dei fleste bileta er CC BY eller CC BY-SA, og begge lisensane krev at opphavspersonen blir namngjeven. Det gjorde vi ikkje før.
+  - **Lisensane blir bakte inn i CSV-ane når korta blir bygde,** ikkje henta medan ein spelar. CSP-en stoppar kall til Commons-API-et, og eit ekstra kall per kort ville sendt IP-adressa til eleven til Wikimedia éin gong til.
+- **`heimsank/tools/kortdata.mjs`** byggjer kortdata frå lagra SPARQL-spørjingar i `heimsank/tools/sparql/` og hentar lisensane frå Commons. Spørjingane til dei eldre kategoriane vart laga i Listesmia og aldri tekne vare på, så dei kan ikkje køyrast på nytt; dei nye kan.
+  - **Rarity blir fordelt med fast seed,** så same liste gir same fordeling kvar gong. Ei rarity-fil som finst frå før, blir aldri skriven over: samlingane til elevane er lagra per kort, og ei ny fordeling ville gjort om kort dei alt har fått.
+
+### Endra
+- **`lisens.html`** seier no at alle kortbileta i Heimsank kjem frå Wikimedia Commons, og kvar krediteringa står.
 
 ## [1.47] — 2026-09-12
 

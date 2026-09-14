@@ -66,7 +66,7 @@ Eikekveik.Storage = (function () {
         if (!m) return false;
         Eikekveik.State.load(m.data);
         Eikekveik.Render.renderAll();
-        Eikekveik.Render.showColorPalette(false);
+        Eikekveik.View.showAll({ onlyIfNeeded: true });
         autoSave();
         return true;
     }

@@ -1,0 +1,58 @@
+# Troll og vette i Heimsank.
+# Køyr: node heimsank/tools/kortdata.mjs hent vette
+#
+# Handplukka liste. Vesen i folketru og mytologi har ingen felles klasse på
+# Wikidata som skil dei frå gudar, englar, oljefelt og band med same namn,
+# så Q-id-ane er slått opp og kontrollerte ein for ein.
+# Statistikk: opphav, sett her i lista.
+# Etikettane på nn/nb er ofte små bokstavar («troll»), så namnet får stor forbokstav.
+
+SELECT ?item ?itemLabel (MIN(?img) AS ?image) (SAMPLE(?art) AS ?article) (SAMPLE(?opphavTekst) AS ?opphav)
+WHERE {
+  VALUES (?item ?opphavTekst) {
+    (wd:Q12581    "Norsk folketru")    # troll
+    (wd:Q2328818  "Norsk folketru")    # hulder
+    (wd:Q1325848  "Norsk folketru")    # nisse
+    (wd:Q1255927  "Norsk folketru")    # draug
+    (wd:Q830493   "Norsk folketru")    # nøkk
+    (wd:Q11212034 "Norsk folketru")    # fossegrim
+    (wd:Q1262457  "Norsk folketru")    # mare
+    (wd:Q1805119  "Norsk folketru")    # vette
+    (wd:Q2457508  "Norsk folketru")    # underjordiske
+    (wd:Q379173   "Norsk folketru")    # sjøorm
+    (wd:Q193165   "Norsk folketru")    # kraken
+    (wd:Q182559   "Norsk folketru")    # havfrue
+    (wd:Q4995044  "Norsk folketru")    # havmann
+    (wd:Q9410     "Norsk folketru")    # varulv
+    (wd:Q174396   "Norrøn mytologi")   # alv
+    (wd:Q214045   "Norrøn mytologi")   # dverg
+    (wd:Q210053   "Norrøn mytologi")   # jotun
+    (wd:Q131087   "Norrøn mytologi")   # valkyrje
+    (wd:Q182560   "Norrøn mytologi")   # Fenrisulven
+    (wd:Q181227   "Norrøn mytologi")   # Midgardsormen
+    (wd:Q208010   "Norrøn mytologi")   # Sleipner
+    (wd:Q118494   "Norrøn mytologi")   # Ratatosk
+    (wd:Q214059   "Norrøn mytologi")   # Nidhogg
+    (wd:Q207041   "Norrøn mytologi")   # Hugin og Munin
+    (wd:Q213932   "Norrøn mytologi")   # Garm
+    (wd:Q215041   "Norrøn mytologi")   # Audhumbla
+    (wd:Q214081   "Norrøn mytologi")   # Yme
+    (wd:Q211700   "Norrøn mytologi")   # Surt
+    (wd:Q1125073  "Norrøn mytologi")   # Svadilfare
+    (wd:Q1200682  "Norrøn mytologi")   # Gullfakse
+    (wd:Q1047946  "Norrøn mytologi")   # Tanngrisne og Tanngnjost
+    (wd:Q1303861  "Norrøn mytologi")   # Eiktyrne
+    (wd:Q745315   "Norrøn mytologi")   # Fåvne
+    (wd:Q1803053  "Norrøn mytologi")   # Hafgufa
+  }
+  ?item wdt:P18 ?img .
+  OPTIONAL { ?nn schema:about ?item ; schema:isPartOf <https://nn.wikipedia.org/> . }
+  OPTIONAL { ?nb schema:about ?item ; schema:isPartOf <https://no.wikipedia.org/> . }
+  BIND(COALESCE(?nn, ?nb) AS ?art)
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "nn,nb,en" .
+    ?item rdfs:label ?rawLabel .
+  }
+  BIND(CONCAT(UCASE(SUBSTR(?rawLabel, 1, 1)), SUBSTR(?rawLabel, 2)) AS ?itemLabel)
+}
+GROUP BY ?item ?itemLabel

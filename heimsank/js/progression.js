@@ -114,6 +114,22 @@ const Progression = (function () {
   }
 
   /**
+   * Take a stored state into use, filling in anything an older or partial
+   * state is missing.
+   * @param {Object} stored - state read from VyrdepilStorage
+   * @returns {Object} state
+   */
+  function adopt(stored) {
+    state = stored;
+    // Defensiv utfylling om eldre/delvis state
+    if (!state.stats) state.stats = freshState().stats;
+    if (!Array.isArray(state.unlocked)) state.unlocked = [DEFAULT_UNLOCKED];
+    if (!Array.isArray(state.badges)) state.badges = [];
+    if (!state.unlocked.includes(DEFAULT_UNLOCKED)) state.unlocked.push(DEFAULT_UNLOCKED);
+    return state;
+  }
+
+  /**
    * Load progression state, running a one-time migration for existing players
    * (retro points + auto-unlock categories that already have collected cards).
    */
@@ -125,15 +141,7 @@ const Progression = (function () {
       console.error('Progression load failed:', e);
     }
 
-    if (stored && stored.version) {
-      state = stored;
-      // Defensiv utfylling om eldre/delvis state
-      if (!state.stats) state.stats = freshState().stats;
-      if (!Array.isArray(state.unlocked)) state.unlocked = [DEFAULT_UNLOCKED];
-      if (!Array.isArray(state.badges)) state.badges = [];
-      if (!state.unlocked.includes(DEFAULT_UNLOCKED)) state.unlocked.push(DEFAULT_UNLOCKED);
-      return state;
-    }
+    if (stored && stored.version) return adopt(stored);
 
     // Fyrste oppstart: bygg state og gjer eingongs-migrasjon frå samlingane.
     state = freshState();
@@ -173,6 +181,24 @@ const Progression = (function () {
     return state;
   }
 
+  /**
+   * Re-read state from storage before changing it. Heimsank can be open in
+   * several tabs, or come back from the back/forward cache, and every page
+   * keeps its own copy in memory. Changing that copy and saving it would write
+   * a stale, lower point total back and wipe out whatever another tab earned.
+   * Falls back to the copy in memory when storage can't be read.
+   * @returns {Object} state
+   */
+  function fresh() {
+    let stored = null;
+    try {
+      stored = VyrdepilStorage.getGameState(GAME_KEY);
+    } catch (e) {
+      return ensure();
+    }
+    return stored && stored.version ? adopt(stored) : ensure();
+  }
+
   // ---- Poeng / valuta ----
 
   function getPoints() { return ensure().points; }
@@ -185,7 +211,7 @@ const Progression = (function () {
    * @returns {number} points granted
    */
   function grantCard(rarity, foil) {
-    ensure();
+    fresh();
     let pts = POINTS[rarity] || POINTS.vanleg;
     if (foil) pts *= FOIL_MULTIPLIER;
     state.points += pts;
@@ -198,12 +224,14 @@ const Progression = (function () {
   }
 
   function recordCorrect(level) {
-    ensure();
+    fresh();
     state.stats.totalCorrect += 1;
     if (level === 'middels' || level === 'vanskeleg') {
       state.stats.correctMidHard = (state.stats.correctMidHard || 0) + 1;
     }
-    // Lagrast ved neste kort-vinst (grantCard) — held skrivingar nede.
+    // Lagrast med ein gong. Neste endring les tilstanden på nytt frå lageret,
+    // så eit svar som berre låg i minnet, ville gått tapt.
+    save();
   }
 
   // ---- Opplåsing ----
@@ -217,7 +245,7 @@ const Progression = (function () {
    * @returns {boolean} true if unlocked now
    */
   function unlock(cat) {
-    ensure();
+    fresh();
     if (!cat || isUnlocked(cat.id)) return false;
     const cost = getCost(cat);
     if (state.points < cost) return false;
@@ -236,7 +264,7 @@ const Progression = (function () {
    * @param {Object} ctx - { unlockedCount, fullCategories, totalCats }
    */
   function evaluate(ctx) {
-    ensure();
+    fresh();
     const context = ctx || {};
     if (context.unlockedCount == null) context.unlockedCount = state.unlocked.length;
     const earned = [];
@@ -256,6 +284,7 @@ const Progression = (function () {
     BADGES,
     POINTS,
     load, save,
+    reload: fresh,
     getPoints, getEarnedTotal,
     grantCard, recordCorrect,
     isUnlocked, getCost, canAfford, unlock,

@@ -11,11 +11,11 @@ spelreglar, prisar og VyrdepilStorage-format er vidareførte.
 - Visuell kontroll og speltest i den innebygde nettlesaren; Chrome-tilkopling
   er ikkje tilgjengeleg i denne arbeidsøkta.
 
-## Samordning før merge
+## Samordning
 
-- PR #65 brukar versjon 1.48 og PR #66 brukar 1.49. Denne endringa brukar 1.50.
-- PR #66 legg til kortkategoriar og biletkreditering. Behald desse endringane
-  ved samanslåing. Den nye kortkomponenten støttar dei valfrie felta
-  `imgAuthor`, `imgLicense`, `imgLicenseUrl` og `imgPage`.
-- Kategoritalet blir lese frå data; ukjende kategoriar får ein trygg standardfarge.
+- Oppdatert med main etter PR #65, #66 og #68; redesignen brukar versjon 1.51.
+- Alle tolv kategoriar og biletkreditering er bevarte. Den felles kortkomponenten
+  viser `imgAuthor`, `imgLicense`, `imgLicenseUrl` og `imgPage` i detaljvisinga.
+- Poengfiksen og synkronisering mellom faner frå PR #68 er bevarte.
+- Kategoritalet blir lese frå data; dei tre nye kategoriane har eigne fargar og ikon.
 - Endeleg Chrome-kontroll på Azure-preview må vere ferdig før merge.

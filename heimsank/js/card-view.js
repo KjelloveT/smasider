@@ -38,7 +38,7 @@ const HeimsankCards = (function () {
         link.href = card.article; link.target = '_blank'; link.rel = 'noopener noreferrer';
         root.appendChild(link);
       }
-      // Valfrie felt frå kategori- og krediteringsarbeidet i PR #66.
+      // Kreditering frå kortdata, bygd med DOM slik at namn er rein tekst.
       if (card.imgAuthor || card.imgLicense || card.imgPage) {
         const credit = Vy.el('div', 'hs-card-credit');
         if (card.imgAuthor) credit.appendChild(Vy.el('span', '', 'Bilete: ' + card.imgAuthor));

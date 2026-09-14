@@ -10,6 +10,13 @@ const CardData = (function () {
   // (showcase, forsider og spelstart deler same data).
   const cache = {};
 
+  const FILEPATH = /^https?:\/\/commons\.wikimedia\.org\/wiki\/Special:FilePath\//;
+
+  // Special:FilePath/<fil> -> filsida på Commons, der opphav og lisens står i sin heilskap
+  function commonsFilePage(url) {
+    return FILEPATH.test(url) ? url.replace(FILEPATH, 'https://commons.wikimedia.org/wiki/File:') : '';
+  }
+
   function _load(cat) {
     return Promise.all([
       fetch(`./kort/${cat.csv}`).then(r => { if (!r.ok) throw new Error('Kortdata'); return r.text(); }),
@@ -43,6 +50,11 @@ const CardData = (function () {
             statLabel: statLbl,
             img: r[imgF].replace(/^http:/, 'https:'),
             article: r[artF] || '',
+            // Kreditering, bakt inn av tools/kortdata.mjs
+            imgAuthor: r.imageAuthor || '',
+            imgLicense: r.imageLicense || '',
+            imgLicenseUrl: r.imageLicenseUrl || '',
+            imgPage: commonsFilePage(r[imgF]),
             rarity: rar[id] || 'vanleg',
             catId: cat.id,
             catLabel: cat.label,
