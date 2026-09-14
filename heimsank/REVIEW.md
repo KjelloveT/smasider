@@ -5,11 +5,25 @@ spelreglar, prisar og VyrdepilStorage-format er vidareførte.
 
 ## Lokal kontroll
 
-- `node --test heimsank/tests/flow.test.cjs`: fem målretta testar for dobbeltsvar,
-  premie via Escape, byte til same kort med foil, kasting og retur til meny.
+- `node --test heimsank/tests/flow.test.cjs`: seks målretta testar for dobbeltsvar,
+  premie via Escape, byte til same kort med foil, kasting, retur til meny og
+  lasting av alle tolv kategoriar med biletkreditering.
 - Alle JavaScript-filene blir syntakskontrollerte med `node --check`.
 - Visuell kontroll og speltest i den innebygde nettlesaren; Chrome-tilkopling
   er ikkje tilgjengeleg i denne arbeidsøkta.
+
+## Azure-preview
+
+Kontrollert 14. september 2026 i den innebygde nettlesaren på
+https://icy-water-0487ac303-67.westeurope.2.azurestaticapps.net/heimsank/.
+
+- Spelt 42 rette svar: sju premiar, full samling og byte via knapp fungerer.
+- Escape fullfører premien; kort og poeng er bevarte etter omlasting.
+- Album, kortdetaljar, biletkreditering og merke er kontrollerte.
+- Lyst og mørkt tema er visuelt kontrollerte på mobil. Ingen vassrett rulling
+  ved 360, 768, 1024 eller 1440 pikslar breidd.
+- Ingen åtvaringar eller feil i nettlesarkonsollen under kontrollen.
+- Chrome-kontroll står att; PR #67 blir difor halden som utkast.
 
 ## Samordning
 

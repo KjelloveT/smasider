@@ -102,3 +102,26 @@ test('Desimalsvar blir ikkje avrunda til eit rett heiltal', () => {
   assert.equal(f.counters.correct, 0);
   assert.equal(f.run('S.correct'), 5);
 });
+
+test('Alle tolv kategoriar lastar med kreditering og uendra kort-ID-ar', async () => {
+  const gameDir = path.join(__dirname, '..');
+  const context = vm.createContext({
+    console,
+    fetch: async url => {
+      const content = fs.readFileSync(path.join(gameDir, url), 'utf8').replace(/^\uFEFF/, '');
+      return { ok: true, text: async () => content, json: async () => JSON.parse(content) };
+    }
+  });
+  for (const file of ['utils.js', 'carddata.js']) {
+    vm.runInContext(fs.readFileSync(path.join(gameDir, 'js', file), 'utf8'), context);
+  }
+  const categories = JSON.parse(fs.readFileSync(path.join(gameDir, 'kort/categories.json'), 'utf8'));
+  assert.equal(categories.length, 12);
+  for (const cat of categories) {
+    context.category = cat;
+    const cards = await vm.runInContext('CardData.loadCategoryCards(category)', context);
+    assert.ok(cards.length > 0, cat.id);
+    assert.ok(cards.every(card => card.catId === cat.id && /^Q\d+$/.test(card.id)), cat.id);
+    assert.ok(cards.some(card => card.imgAuthor && card.imgLicense && card.imgPage), cat.id);
+  }
+});
