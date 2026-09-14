@@ -67,7 +67,21 @@ const HeimsankCards = (function () {
       }
     return extra;
   }
-  return { render, details };
+  function makeClickable(root, card, onOpen) {
+    const face = root.querySelector('.hs-card-face');
+    if (!face) return root;
+    face.classList.add('hs-card-clickable');
+    face.tabIndex = 0;
+    face.setAttribute('role', 'button');
+    face.setAttribute('aria-label', 'Sjå ' + card.name);
+    face.addEventListener('click', onOpen);
+    face.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault(); onOpen();
+    });
+    return root;
+  }
+  return { render, details, makeClickable };
 })();
 function mkCard(card, size, entry = null) {
   return HeimsankCards.render(card, entry, size === 'full' ? 'reveal' : 'collection');

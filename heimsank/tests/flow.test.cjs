@@ -26,7 +26,7 @@ function fixture() {
       reducedMotion: () => true, icon: makeNode, category() {},
       open: (_id, onClose) => { closeReveal = onClose; }, close() {}
     },
-    HeimsankCards: { render: makeNode },
+    HeimsankCards: { render: makeNode, makeClickable: root => root },
     ProgressionUI: { awardCardPoints: () => { counters.awards++; return 3; }, toast() {},
       evaluateAndAnnounce() {}, renderCovers() {} },
     Progression: { recordCorrect: () => counters.correct++ },

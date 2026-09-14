@@ -13,7 +13,8 @@ function renderColl() {
       row.appendChild(Vy.el('div', 'hs-card-empty', 'Kortdata manglar'));
       return;
     }
-    const el = HeimsankCards.render(card, entry);
+    const el = HeimsankCards.makeClickable(
+      HeimsankCards.render(card, entry), card, () => openCardModal(index));
     setupDraggable(el, 'coll', index);
     setupDropTarget(el, source => {
       if (source.type === 'pending') replacePending(index);
@@ -22,11 +23,6 @@ function renderColl() {
         saveStorage(); renderColl();
       }
     });
-    const open = Vy.el('button', 'hs-card-open', 'Sjå kortet');
-    open.type = 'button';
-    open.setAttribute('aria-label', 'Sjå ' + card.name);
-    open.addEventListener('click', () => openCardModal(index));
-    el.appendChild(open);
     if (S.pending && S.phase === 'pending') {
       const actions = Vy.el('div', 'hs-card-actions');
       const swap = Vy.el('button', 'hs-btn hs-primary', 'Byt dette');

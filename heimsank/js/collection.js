@@ -22,11 +22,9 @@ async function openCollectionViewer() {
       header.append(Vy.el('h3', '', cat.label), Vy.el('span', '', items.length + ' av 6 kort'));
       const row = Vy.el('div', 'hs-album-cards');
       items.forEach(({ card, entry }, index) => {
-        const el = HeimsankCards.render(card, entry);
-        const button = Vy.el('button', 'hs-card-open', 'Sjå kortet');
-        button.setAttribute('aria-label', 'Sjå ' + card.name);
-        button.addEventListener('click', () => openCardModal(index, items));
-        el.appendChild(button); row.appendChild(el);
+        const el = HeimsankCards.makeClickable(
+          HeimsankCards.render(card, entry), card, () => openCardModal(index, items));
+        row.appendChild(el);
       });
       section.append(header, row); grid.appendChild(section);
     });
