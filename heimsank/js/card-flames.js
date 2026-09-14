@@ -34,7 +34,8 @@ const HeimsankFlames = (function () {
     float y=1.-uv.y;
     float edge=.11;
     float d=edge-y;
-    float x=(uv.x-.083)/.834;
+    // Lerretet er 50 % breiare enn kortet, så gløden kan døy ut utan kutt.
+    float x=(uv.x-.1667)/.6666;
     vec2 flow=vec2(x*7.4, y*9.-time*.55);
     float broad=fbm(flow+vec2(fbm(flow*.55+time*.12),0.));
     float fine=fbm(flow*2.15+vec2(-time*.18,time*.1));
@@ -58,7 +59,8 @@ const HeimsankFlames = (function () {
     alpha=max(alpha,glow)+spark;
     col+=core*vec3(.35,.18,.02)+spark*vec3(1.,.75,.3);
     // Rein toppkant utan «taggar» ned langs sidene.
-    alpha*=smoothstep(-.01,.025,x)*smoothstep(-.01,.025,1.-x);
+    float sideFade=smoothstep(-.20,.08,x)*smoothstep(-.20,.08,1.-x);
+    alpha*=sideFade;
     if(y>edge+.012) alpha=0.;
     outColor=vec4(col*alpha,alpha);
   }`;
