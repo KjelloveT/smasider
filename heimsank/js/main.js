@@ -24,7 +24,6 @@ function triggerCard() {
   document.getElementById('revealSub').textContent = 'Kva skjuler seg på den andre sida?';
   document.getElementById('revealBtn').textContent = 'Vis kortet';
   HeimsankUI.open('revealModal', settleReveal);
-  HeimsankUI.later(showRevealedCard, HeimsankUI.reducedMotion() ? 0 : 800);
 }
 function showRevealedCard() {
   if (S.phase !== 'reveal') return;
@@ -36,9 +35,8 @@ function showRevealedCard() {
 }
 function afterReveal() {
   if (S.phase !== 'reveal' || !S.pending || !S.pendingEntry) return;
-  // Knappen kan snu kortet tidleg; Escape skal alltid fullføre overgangen.
-  const buttonClick = document.activeElement === document.getElementById('revealBtn');
-  if (buttonClick && !document.getElementById('flipCard').classList.contains('is-revealed') && !HeimsankUI.reducedMotion()) {
+  // Fyrste trykk snur kortet; Escape skal alltid fullføre overgangen.
+  if (!document.getElementById('flipCard').classList.contains('is-revealed')) {
     showRevealedCard(); return;
   }
   settleReveal();

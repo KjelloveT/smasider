@@ -7,12 +7,20 @@ const path = require('node:path');
 
 function fixture() {
   const nodes = new Map();
-  const makeNode = () => ({
-    textContent: '', value: '', disabled: false, dataset: {}, children: [],
-    classList: { add() {}, remove() {}, toggle() {}, contains() { return true; } },
-    append(...items) { this.children.push(...items); }, appendChild(item) { this.children.push(item); return item; },
-    replaceChildren(...items) { this.children = items; }, setAttribute() {}, addEventListener() {}, focus() {}
-  });
+  const makeNode = () => {
+    const classes = new Set();
+    return {
+      textContent: '', value: '', disabled: false, dataset: {}, children: [],
+      classList: {
+        add(...names) { names.forEach(name => classes.add(name)); },
+        remove(...names) { names.forEach(name => classes.delete(name)); },
+        toggle(name, force) { const add = force === undefined ? !classes.has(name) : force; add ? classes.add(name) : classes.delete(name); return add; },
+        contains(name) { return classes.has(name); }
+      },
+      append(...items) { this.children.push(...items); }, appendChild(item) { this.children.push(item); return item; },
+      replaceChildren(...items) { this.children = items; }, setAttribute() {}, addEventListener() {}, focus() {}
+    };
+  };
   const node = id => { if (!nodes.has(id)) nodes.set(id, makeNode()); return nodes.get(id); };
   const counters = { awards: 0, saved: 0, correct: 0 };
   const timers = [];
@@ -58,6 +66,16 @@ test('Eitt svar tel berre éin gong; Escape tildeler kort og poeng éin gong', (
   f.run('settleReveal(); afterReveal();');
   assert.equal(f.counters.awards, 1);
   assert.equal(f.run('S.collection.length'), 1);
+  assert.equal(f.run('S.phase'), 'question');
+});
+test('Kortbaksida ventar på fyrste trykk før kortet blir tildelt', () => {
+  const f = fixture();
+  f.run("S.phase='feedback'; triggerCard(); afterReveal();");
+  assert.equal(f.node('flipCard').classList.contains('is-revealed'), true);
+  assert.equal(f.counters.awards, 0);
+  assert.equal(f.run('S.phase'), 'reveal');
+  f.run('afterReveal();');
+  assert.equal(f.counters.awards, 1);
   assert.equal(f.run('S.phase'), 'question');
 });
 test('Full samling kan byte til same kort og bevarer foil og oppteningsdata', () => {

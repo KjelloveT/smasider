@@ -3,6 +3,15 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.52] — 2026-09-15
+
+### Lagt til
+- **Heimsank har fått ei eiga kortbakside og ein ny logo.** Den rosa delebrikka, jordkloden, oppdagingsbanene og stjernene bind no kortopninga, spelsida, framsida og toppmenyen saman. Bileta er lagra lokalt, komprimerte og fungerer utan nett.
+
+### Endra
+- **Heimsank kjennest meir som eit samlarspel.** Knappar, kategoriar, innstillingsfelt, oppgåveflata, samlinga, merke og dialogar har fått skeive papirformer, kraftigare indigorammer, fargestriper, planetprikkar og rosa, turkise og gylne detaljar frå kortbaksida. Sjølve rekneoppgåva er framleis roleg og lett å lese. Kortbaksida ventar til spelaren trykkjer «Vis kortet», før det same kortet blir snudd og vist fram. Samlinga ligg alltid synleg som ei låg korthylle med ekte minikort, utan accordion.
+- **Kategorioversikta viser vegen til neste opplåsing.** Opne kategoriar kjem fyrst, medan dei låste blir sorterte etter kor mange poeng som manglar. Prisen står i ei eiga myntbrikke, og den samla poengsummen har fått meir plass øvst.
+
 ## [1.51] — 2026-09-14
 
 ### Endra

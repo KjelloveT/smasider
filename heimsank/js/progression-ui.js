@@ -59,8 +59,17 @@ const ProgressionUI = (function () {
     const grid = document.getElementById('catsGrid');
     grid.replaceChildren();
     const stored = VyrdepilStorage.getAllCollections('heimsank') || {};
-    cats.forEach(cat => {
-      const unlocked = Progression.isUnlocked(cat.id);
+    const points = Progression.getPoints();
+    const orderedCats = cats.map((cat, index) => ({
+      cat, index,
+      unlocked: Progression.isUnlocked(cat.id),
+      need: Math.max(0, Progression.getCost(cat) - points)
+    })).sort((a, b) => {
+      if (a.unlocked !== b.unlocked) return a.unlocked ? -1 : 1;
+      if (!a.unlocked && a.need !== b.need) return a.need - b.need;
+      return a.index - b.index;
+    });
+    orderedCats.forEach(({ cat, unlocked }) => {
       const selected = S.selCat?.id === cat.id;
       const card = Vy.el('article', 'hs-category');
       HeimsankUI.category(card, cat.id);
@@ -86,7 +95,7 @@ const ProgressionUI = (function () {
       body.appendChild(Vy.el('span', 'hs-category-status', unlocked
         ? (selected ? '✓ Vald · ' : '') + count + ' av 6 kort'
         : (need ? 'Du treng ' + need + ' poeng til' : 'Klar til å låsast opp')));
-      const button = Vy.el('button', 'hs-btn', unlocked ? (selected ? 'Vald' : 'Vel kategori') : 'Lås opp · ' + cost);
+      const button = Vy.el('button', 'hs-btn', unlocked ? (selected ? 'Vald' : 'Vel kategori') : 'Lås opp');
       if (unlocked) {
         button.setAttribute('aria-pressed', String(selected));
         button.setAttribute('aria-label', 'Vel ' + cat.label);
@@ -96,6 +105,9 @@ const ProgressionUI = (function () {
         });
       } else {
         button.prepend(HeimsankUI.icon('lock', 14));
+        const price = Vy.el('span', 'hs-cost-bubble');
+        price.append(HeimsankUI.icon('coins', 13), document.createTextNode(String(cost)));
+        button.appendChild(price);
         button.setAttribute('aria-label', 'Lås opp ' + cat.label + ' for ' + cost + ' poeng');
         button.addEventListener('click', () => handleUnlock(cat));
       }
