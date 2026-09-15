@@ -3,6 +3,17 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.51] — 2026-09-14
+
+### Endra
+- **Heimsank har fått eit eige kortarkade-design.** Fargerike kategoriomslag, lyst lavendeltema og mørkt indigotema, roleg oppgåveflate og samling i seks kortplassar. Kortvifta følgjer kategorivalet. Korta brukar same vising i spelet, premieopninga og samlingsalbumet, med tydeleg sjeldsemd og foil. Det lokale designet er eit godkjent unntak frå neobrutalisme; felles toppmeny og lagra samlingar er vidareførte.
+- **Samlekorta har ei fast trykkflate.** Namn, bilete, fakta, sjeldsemd, foil, vanskegrad og rekneartar skalerer i lag i alle visingar. Knappar og kjeldelenkjer ligg utanfor kortet. Eit bilete frå samlinga fyller heile kategoriomslaget. Segngjetne og gudeborne kort har høvesvis lilla og gylne WebGL-flammar over toppkanten i dei store visingane, og ei lett glød i samlingsrutenettet. Effekten krev ingen nye avhengnader og blir slått av ved redusert rørsle.
+- **Sjølve kortet opnar detaljvisinga.** Den overflødige «Sjå kortet»-knappen er fjerna frå samlinga og albumet. Kortflata kan òg opnast med Enter eller mellomrom.
+
+### Fiksa
+- **Kortpremiar blir registrerte éin gong.** Raske gjentekne svar blir stoppa, og Escape i kortopninga fullfører premien utan å låse spelet. Byte med knapp og dra-og-slepp brukar same handling og bevarer foil, også når ein byter til eit nytt eksemplar av same kort.
+- **Kort og kategoriar kan brukast med tastatur og trykk.** Dialogar held på fokus og sender det tilbake ved lukking. Redusert rørsle slår av dekorative overgangar, og bilete som ikkje lastar får eit kategoriikon.
+
 ## [1.50] — 2026-09-13
 
 ### Fiksa

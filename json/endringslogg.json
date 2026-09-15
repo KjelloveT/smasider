@@ -2,6 +2,28 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.51",
+      "dato": "2026-09-14",
+      "samandrag": "Heimsank har fått eit fargerikt kortarkade-design.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Heimsank",
+          "tekst": "Bilete frå samlinga fyller kategoriomslaga. Korta har faste proporsjonar og alle oppteningsmerke i kvar vising, med lilla og gylne toppflammar på dei to sjeldnaste korttypane. Sjølve kortet opnar detaljvisinga."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Heimsank",
+          "tekst": "Kortpremiar blir registrerte éin gong. Byte med knapp og dra-og-slepp bevarer foil og fungerer òg med like kort."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Heimsank",
+          "tekst": "Tastaturbruk, fokus i dialogar, redusert rørsle og reservevising for manglande bilete."
+        }
+      ]
+    },
+    {
       "versjon": "1.50",
       "dato": "2026-09-13",
       "samandrag": "Heimsank mistar ikkje lenger poeng når spelet er ope i fleire faner.",

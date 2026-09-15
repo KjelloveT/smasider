@@ -1,231 +1,77 @@
-// Heimsank - Card Rendering Functions
-
-/**
- * Build a card element
- * @param {Object} card - Card data
- * @param {string} sz - Size: 'bar', 'full', 'test'
- * @param {Object} entry - Optional collection entry with difficulty/operations/foil
- * @returns {HTMLElement} Card element
- */
-function mkCard(card, sz, entry = null) {
-  const el = document.createElement('div');
-  const isTest = sz === 'test';
-  const isBar = sz === 'bar';
-  
-  // Check if card has foil effect
-  const hasFoil = entry && entry.foil === true;
-  
-  el.className = `collect-card ${card.rarity} ${isTest ? 'test-card' : isBar ? 'bar-card tilt' : sz === 'full' ? 'full-card' : ''} ${hasFoil ? 'has-foil' : ''}`;
-
-  // Header with name, rarity badge, and difficulty/operations
-  const hdr = document.createElement('div');
-  hdr.className = 'card-header';
-  let hdrHtml = `<span class="card-name">${esc(card.name)}</span><div class="card-header-meta"><span class="rarity-badge">${RL[card.rarity]}</span>`;
-  if (entry && entry.difficulty) {
-    hdrHtml += `<span class="diff-badge">${entry.difficulty} ${entry.operations ? entry.operations.join(' ') : ''}${hasFoil ? ' ' + ICON('sparkles', 10) : ''}</span>`;
-  }
-  hdrHtml += `</div>`;
-  hdr.innerHTML = hdrHtml;
-  el.appendChild(hdr);
-
-  // Image wrapper
-  const iw = document.createElement('div');
-  iw.className = 'card-img-wrap';
-  const img = document.createElement('img');
-  img.alt = card.name;
-  img.src = card.img;
-  img.loading = 'lazy';
-  img.onerror = function () {
-    this.parentNode.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#f5f5f5"><img src="Logo - no text.png" alt="Heimsank" style="height:40%;width:auto;opacity:0.3"></div>`;
-  };
-  iw.appendChild(img);
-  el.appendChild(iw);
-
-  // Add 3D tilt and foil mouse tracking for bar cards
-  if (isBar) {
-    // Throttle med requestAnimationFrame: les layout og skriv stil høgst éin gong per frame.
-    let lastX = 0, lastY = 0, ticking = false;
-    el.addEventListener('mousemove', (e) => {
-      lastX = e.clientX;
-      lastY = e.clientY;
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        ticking = false;
-        const rect = el.getBoundingClientRect();
-        const x = lastX - rect.left;
-        const y = lastY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -15;
-        const rotateY = ((x - centerX) / centerX) * 15;
-
-        el.style.setProperty('--rotate-x', `${rotateX}deg`);
-        el.style.setProperty('--rotate-y', `${rotateY}deg`);
-
-        // Update foil mask position for cards with foil effect
-        if (hasFoil) {
-          const imgRect = iw.getBoundingClientRect();
-          const mouseX = ((lastX - imgRect.left) / imgRect.width) * 100;
-          const mouseY = ((lastY - imgRect.top) / imgRect.height) * 100;
-          iw.style.setProperty('--mouse-x', `${mouseX}%`);
-          iw.style.setProperty('--mouse-y', `${mouseY}%`);
-        }
-      });
-    });
-
-    el.addEventListener('mouseleave', () => {
-      el.style.setProperty('--rotate-x', '0deg');
-      el.style.setProperty('--rotate-y', '0deg');
-    });
-  }
-
-  // Footer with stats and info
-  const ft = document.createElement('div');
-  ft.className = 'card-footer';
-  const yr = document.createElement('span');
-  yr.style.cssText = 'display:inline-flex;align-items:center;gap:4px';
-  const labelIcon = card.statLabel ? CAT_ICON(card.statLabel, 12) : '';
-  yr.innerHTML = card.stat ? `${labelIcon}<span>${esc(String(card.stat))}</span>` : labelIcon;
-  ft.appendChild(yr);
-
-  // Article link
-  if (card.article) {
-    const a = document.createElement('a');
-    a.href = card.article;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.className = 'les-om-link';
-    a.textContent = 'Les om →';
-    a.addEventListener('mousedown', e => e.stopPropagation());
-    a.addEventListener('dragstart', e => e.stopPropagation());
-    ft.appendChild(a);
-  }
-
-  // Add category info for test cards
-  if (isTest) {
-    const catInfo = document.createElement('div');
-    catInfo.style.cssText = 'font-size:0.6rem;font-weight:900;text-transform:uppercase;margin-top:2px;opacity:0.7;display:inline-flex;align-items:center;gap:4px';
-    catInfo.innerHTML = `${CAT_ICON(card.catIcon, 12)}<span>${esc(card.catLabel || '')}</span>`;
-    ft.appendChild(catInfo);
-  }
-
-  // Add swap button for collection cards when there's a pending card
-  // Only show on collection cards (not on the pending card itself)
-  if (isBar && entry && S.pending && entry.cardId !== S.pending?.id) {
-    const swapBtn = document.createElement('button');
-    swapBtn.className = 'card-action-btn swap-btn';
-    swapBtn.innerHTML = ICON('swap', 18);
-    swapBtn.title = 'Bytt med nytt kort';
-    swapBtn.onclick = (e) => {
-      e.stopPropagation();
-      // Replace this card with pending
-      const pendingEntry = S.pendingEntry || {
-        catId: S.pending.catId,
-        cardId: S.pending.id,
-        difficulty: S.level ? (S.level === 'lett' ? 'Lett' : S.level === 'middels' ? 'Middels' : 'Vanskeleg') : 'Middels',
-        operations: S.ops && S.ops.length > 0
-          ? S.ops.map(op => op === '+' ? '+' : op === '-' ? '-' : op === '*' ? '×' : op === '/' ? '÷' : op)
-          : ['+', '-'],
-        foil: false,
-        earnedAt: Date.now()
-      };
-      // Find index of this card in collection
-      const idx = S.collection.findIndex(e => e.cardId === entry.cardId && e.earnedAt === entry.earnedAt);
-      if (idx >= 0) {
-        S.collection[idx] = pendingEntry;
-        S.pending = null;
-        S.pendingEntry = null;
-        saveStorage();
-        renderColl();
-        document.getElementById('pendingArea').classList.add('hidden');
-        resumeIfDone();
-      }
-    };
-    ft.appendChild(swapBtn);
-  }
-
-  el.appendChild(ft);
-  return el;
-}
-
-/**
- * Render the collection grid
- */
+// Samlinga i den aktive kategorien. All kortplassering går gjennom same handling.
 function renderColl() {
   const row = document.getElementById('collRow');
   document.getElementById('collCount').textContent = S.collection.length;
-  const inner = document.getElementById('collCountInner');
-  if (inner) inner.textContent = S.collection.length;
-
-  // Update mini dots in toggle row
-  const miniDots = document.getElementById('collMiniDots');
-  if (miniDots) {
-    const slots = 6;
-    const padded = [...S.collection.slice(-slots), ...Array(Math.max(0, slots - S.collection.length)).fill(null)];
-    miniDots.innerHTML = padded.map((entry, i) => {
-      if (!entry) return '<span class="mini-dot empty"></span>';
-      const card = S.idx && S.idx[entry.cardId];
-      const rarity = card ? card.rarity : 'vanleg';
-      return `<span class="mini-dot ${rarity}"></span>`;
-    }).join('');
-  }
-  row.innerHTML = '';
-
-  if (S.collection.length === 0) {
-    row.innerHTML = '<div class="empty-coll">Svar rett 6 gonger for å vinna eit kort!</div>';
-  } else {
-    S.collection.forEach((entry, idx) => {
-      const card = S.idx[entry.cardId];
-      if (!card) return;
-      const el = mkCard(card, 'bar', entry);
-      setupDraggable(el, 'coll', idx);
-      setupDropTarget(el, ds => {
-        if (ds.type === 'coll' && ds.idx !== idx) {
-          // Swap positions
-          const a = S.collection[ds.idx];
-          S.collection[ds.idx] = S.collection[idx];
-          S.collection[idx] = a;
-          saveStorage();
-          renderColl();
-        } else if (ds.type === 'pending') {
-          // Replace with pending card - use pendingEntry if available
-          const pendingEntry = S.pendingEntry || {
-            catId: S.pending.catId,
-            cardId: S.pending.id,
-            difficulty: S.level ? (S.level === 'lett' ? 'Lett' : S.level === 'middels' ? 'Middels' : 'Vanskeleg') : 'Middels',
-            operations: S.ops && S.ops.length > 0
-              ? S.ops.map(op => op === '+' ? '+' : op === '-' ? '-' : op === '*' ? '×' : op === '/' ? '÷' : op)
-              : ['+', '-'],
-            foil: false,
-            earnedAt: Date.now()
-          };
-
-          S.collection[idx] = pendingEntry;
-          S.pending = null;
-          S.pendingEntry = null;
-          saveStorage();
-          renderColl();
-          ProgressionUI.evaluateAndAnnounce();
-          resumeIfDone();
-        }
-      });
-      row.appendChild(el);
+  const dots = document.getElementById('collMiniDots');
+  row.replaceChildren(); dots.replaceChildren();
+  S.collection.forEach((entry, index) => {
+    const card = S.idx[entry.cardId];
+    const dot = Vy.el('span', 'hs-mini-dot');
+    dot.dataset.rarity = card?.rarity || 'vanleg';
+    dots.appendChild(dot);
+    if (!card) {
+      row.appendChild(Vy.el('div', 'hs-card-empty', 'Kortdata manglar'));
+      return;
+    }
+    const el = HeimsankCards.makeClickable(
+      HeimsankCards.render(card, entry), card, () => openCardModal(index));
+    setupDraggable(el, 'coll', index);
+    setupDropTarget(el, source => {
+      if (source.type === 'pending') replacePending(index);
+      else if (source.type === 'coll' && source.idx !== index) {
+        [S.collection[index], S.collection[source.idx]] = [S.collection[source.idx], S.collection[index]];
+        saveStorage(); renderColl();
+      }
     });
+    if (S.pending && S.phase === 'pending') {
+      const actions = Vy.el('div', 'hs-card-actions');
+      const swap = Vy.el('button', 'hs-btn hs-primary', 'Byt dette');
+      swap.setAttribute('aria-label', 'Byt ut ' + card.name + ' med det nye kortet');
+      swap.addEventListener('click', () => replacePending(index));
+      actions.appendChild(swap); el.appendChild(actions);
+    }
+    row.appendChild(el);
+  });
+  for (let i = S.collection.length; i < 6; i++) {
+    dots.appendChild(Vy.el('span', 'hs-mini-dot'));
+    const empty = Vy.el('div', 'hs-card-empty');
+    empty.append(HeimsankUI.icon('layers', 26), Vy.el('span', '', 'Di neste oppdaging'));
+    row.appendChild(empty);
   }
+  document.getElementById('clearAllBtn').disabled = !S.collection.length || !!S.pending;
 }
-
-/**
- * Resume game if no pending card
- */
+function replacePending(index) {
+  if (S.phase !== 'pending' || !S.pendingEntry || !S.collection[index]) return;
+  S.collection[index] = S.pendingEntry;
+  finishPending();
+}
+function discardPending() {
+  if (S.phase !== 'pending') return;
+  finishPending();
+}
+function finishPending() {
+  S.pending = null; S.pendingEntry = null;
+  saveStorage(); renderColl();
+  ProgressionUI.evaluateAndAnnounce();
+  resumeIfDone();
+}
 function resumeIfDone() {
-  if (!S.pending) {
-    S.paused = false;
-    S.pendingEntry = null;
-    document.getElementById('ansInput').disabled = false;
-    document.getElementById('checkBtn').disabled = false;
-    document.getElementById('pendingArea').classList.add('hidden');
-    document.getElementById('dragInstruction').classList.add('hidden');
-    nextQ();
-  }
+  if (S.pending || S.phase === 'setup') return;
+  S.paused = false;
+  document.getElementById('pendingArea').classList.add('hidden');
+  document.getElementById('dragInstruction').classList.add('hidden');
+  nextQ();
+}
+function expandCollForSwap() {
+  setCollectionExpanded(true);
+  document.getElementById('dragInstruction').classList.remove('hidden');
+  document.querySelector('#collRow .hs-card-actions button')?.focus();
+}
+function setCollectionExpanded(expanded) {
+  document.getElementById('collBarInner').classList.toggle('hidden', !expanded);
+  document.getElementById('collToggleRow').setAttribute('aria-expanded', String(expanded));
+  document.getElementById('collToggleLabel').textContent = expanded ? 'Skjul kort' : 'Vis kort';
+}
+function toggleCollBar() {
+  setCollectionExpanded(document.getElementById('collBarInner').classList.contains('hidden'));
 }

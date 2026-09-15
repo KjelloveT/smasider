@@ -1,263 +1,35 @@
 <!DOCTYPE html>
-<html lang="nn" data-direction="skulebok">
+<html lang="nn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Heimsank</title>
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
-    <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heimsank — rekn, oppdag og saml</title><link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="../css/neobrutalisme.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/setup.css">
+<link rel="stylesheet" href="css/cards.css">
+<link rel="stylesheet" href="css/game.css">
+<link rel="stylesheet" href="css/dialogs.css">
 </head>
-<body data-light-theme="forest" data-dark-theme="space" data-theme="forest">
-
-<neo-header></neo-header>
-
-<div class="page-wrapper">
-<main class="main-content">
-
-  <!-- SETUP -->
-  <div id="setupScreen">
-
-    <!-- Hero -->
-    <section class="hero">
-      <div class="dir-badge skulebok-badge-logo">
-        <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
-          <line x1="8" y1="18" x2="21" y2="18"/>
-          <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/>
-          <line x1="3" y1="18" x2="3.01" y2="18"/>
-        </svg>
-      </div>
-      <div class="hero-col">
-        <div class="hero-title-row">
-          <h1>Heimsank</h1>
-        </div>
-        <p>Løys matteoppgåver og tjen samlekort frå ulike kategoriar. Nokre kort er sjeldnare enn andre — klarar du å finne dei alle?</p>
-        <div class="rarity-chips">
-          <span class="r-chip vanleg">Vanleg</span>
-          <span class="r-chip sjeldgjevt">Sjeldgjævt</span>
-          <span class="r-chip segngjeten">Segngjeten</span>
-          <span class="r-chip gudebore">★ Gudebore</span>
-        </div>
-      </div>
-
-      <div class="hero-col">
-        <div class="fan-container" id="fanContainer">
-          <div class="fan-placeholder"><span data-icon="layers" data-icon-size="72"></span></div>
-        </div>
-        <div class="fan-cat-label" id="fanCatLabel"></div>
-      </div>
-
-      <div class="motif-clip">
-        <span class="motif a">÷</span>
-        <span class="motif b">×</span>
-      </div>
-    </section>
-
-    <!-- Top action row -->
-    <div class="setup-actions">
-      <div class="points-pill" id="pointsDisplay" aria-live="polite" title="Poeng du kan bruke til å låse opp kategoriar">
-        <span data-icon="coins"></span> <strong id="pointsValue">0</strong> poeng
-      </div>
-      <button class="btn" onclick="openCollectionViewer()"><span data-icon="folder"></span> Sjå alle samlingane</button>
-      <button class="btn" onclick="openBadgeGallery()"><span data-icon="trophy"></span> Merke</button>
-    </div>
-
-    <div class="nb-box">
-      <div id="setupLoading" class="loading-msg">Lastar kategoriar…</div>
-      <div id="setupContent" class="hidden">
-        <div class="settings-stack">
-          <div>
-            <label class="settings-label">Kategori</label>
-            <div id="catsGrid" class="cats-grid"></div>
-          </div>
-          <div>
-            <label class="settings-label">Vanskegrad</label>
-            <div class="btn-row">
-              <button class="btn" data-level="lett" onclick="selLevel('lett')">Lett</button>
-              <button class="btn active" data-level="middels" onclick="selLevel('middels')">Middels</button>
-              <button class="btn" data-level="vanskeleg" onclick="selLevel('vanskeleg')">Vanskeleg</button>
-            </div>
-          </div>
-          <div>
-            <label class="settings-label">Rekneartar</label>
-            <div class="btn-row">
-              <button class="btn" onclick="togOp('+')" data-op="+">Pluss +</button>
-              <button class="btn" onclick="togOp('-')" data-op="-">Minus −</button>
-              <button class="btn active" onclick="togOp('*')" data-op="*">Gange ×</button>
-              <button class="btn active" onclick="togOp('/')" data-op="/">Dele ÷</button>
-            </div>
-          </div>
-          <button class="btn start-btn" id="startBtn" onclick="startGame()" disabled>Start spelet →</button>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /setupScreen -->
-
-  <!-- GAME -->
-  <div id="gameScreen" class="hidden">
-    <div class="game-toolbar">
-      <button class="btn" onclick="goSetup()"><span data-icon="arrowLeft"></span> Meny</button>
-      <button class="btn" onclick="openCollectionViewer()"><span data-icon="folder"></span> Samling</button>
-    </div>
-
-    <div class="question-panel">
-      <div class="q-meta">
-        <span class="cat-pill" id="gameSub"></span>
-        <span id="gameDiff" class="q-meta-diff"></span>
-      </div>
-
-      <div class="progress-track" aria-label="Progressjon">
-        <div class="progress-fill" id="progFill"></div>
-        <div class="progress-pips" id="progPips"></div>
-        <div class="progress-label" id="progLabel">0 / 6</div>
-      </div>
-
-      <div class="drag-instruction hidden" id="dragInstruction">
-        <div class="drag-instruction-icon"><span data-icon="pointer" data-icon-size="32"></span></div>
-        <div class="drag-instruction-text">
-          <div class="drag-instruction-title">Dra og slepp kortet!</div>
-          <div class="drag-instruction-desc">Dra det nye kortet til samlinga for å erstatte eit gamalt kort, eller slepp det i søppelkassa for å kaste det.</div>
-        </div>
-      </div>
-
-      <div class="q-row">
-        <div class="q-expr" id="qBox"></div>
-      </div>
-
-      <div class="answer-row">
-        <input type="number" id="ansInput" class="answer-input" placeholder="?" autocomplete="off">
-        <button class="btn check-btn" id="checkBtn" onclick="checkAnswer()">Sjekk <span data-icon="check"></span></button>
-      </div>
-
-      <div class="feedback-stamp" id="feedback"></div>
-    </div>
-
-    <!-- PENDING CARD AREA (shown when collection is full and a card is earned) -->
-    <div id="pendingArea" class="pending-area hidden">
-      <div class="pending-rarity-tag" id="pendingRarityTag">
-        <span data-icon="sparkles"></span>
-        <span id="pendingRarityLabel">Nytt kort</span>
-      </div>
-      <div class="pending-info">
-        <div class="pending-title">Du fann eit nytt kort!</div>
-        <div class="pending-name" id="pendingCardName"></div>
-        <div class="pending-meta" id="pendingCardMeta"></div>
-        <div id="pendingSlotMain" class="pending-card-slot"></div>
-      </div>
-      <div class="pending-actions">
-        <button class="btn pending-swap-btn" onclick="expandCollForSwap()"><span data-icon="arrowLeftRight"></span> Byte eit kort</button>
-        <button class="btn pending-trash-btn" onclick="discardPending()"><span data-icon="trash"></span> Kast</button>
-      </div>
-    </div>
-
-    <!-- COLLECTION BAR (sticky at bottom, collapsible) -->
-    <div class="coll-bar collapsed" id="collBar">
-      <!-- Toggle row (visible when collapsed) -->
-      <button class="coll-toggle-row" id="collToggleRow" onclick="toggleCollBar()">
-        <span class="coll-toggle-left">
-          <span data-icon="trophy"></span>
-          <strong>Samling</strong>
-          <span class="coll-count-pill"><span id="collCount">0</span>/6</span>
-          <span class="coll-mini-dots" id="collMiniDots"></span>
-        </span>
-        <span class="coll-toggle-right">
-          <span class="coll-toggle-hint">Vis kort</span>
-          <span class="coll-chevron" id="collChevron">▲</span>
-        </span>
-      </button>
-
-      <!-- Expanded content (hidden when collapsed) -->
-      <div class="coll-bar-inner hidden" id="collBarInner">
-        <div class="coll-box">
-          <div class="coll-head">
-            <div class="left">
-              <span data-icon="trophy"></span>
-              <span>Samling (<span id="collCountInner">0</span>/6)</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;">
-              <button class="btn coll-clear-btn" id="clearAllBtn" onclick="confirmClearAll()">Tøm alle</button>
-              <button class="coll-collapse-btn" onclick="toggleCollBar()">▼ Skjul</button>
-            </div>
-          </div>
-          <div class="coll-slots" id="collRow"></div>
-        </div>
-        <div class="trash-zone" id="trashZone">
-          <span data-icon="trash" data-icon-size="24"></span>
-          <span>Slepp<br>her</span>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /gameScreen -->
-
-</main>
-</div>
-
-<!-- REVEAL MODAL -->
-<div id="revealModal" class="modal-overlay">
-  <div class="modal2 reveal-modal">
-    <div class="flip-scene">
-      <div class="flip-card" id="flipCard">
-        <div class="flip-face flip-back">
-          <div class="flip-back-logo">
-            <svg viewBox="0 0 24 24" width="60" height="60" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="9"/>
-              <line x1="4.22" y1="4.22" x2="19.78" y2="19.78"/>
-            </svg>
-            <div class="flip-back-title">HEIMSANK</div>
-          </div>
-        </div>
-        <div class="flip-front"></div>
-      </div>
-    </div>
-    <div class="modal-sub" id="revealSub"></div>
-    <button class="btn hidden" id="revealBtn" onclick="afterReveal()">Fortsett →</button>
-  </div>
-</div>
-
-<!-- CARD MODAL (single card detail) -->
-<div id="cardModal" class="card-modal">
-  <div class="modal-card-container">
-    <button class="modal-close" onclick="closeCardModal()">×</button>
-    <button class="card-nav prev" onclick="navigateCard(-1)">‹</button>
-    <button class="card-nav next" onclick="navigateCard(1)">›</button>
-    <div class="modal-card" id="modalCard"></div>
-  </div>
-</div>
-
-<!-- BADGE GALLERY MODAL -->
-<div id="badgeModal" class="modal-overlay">
-  <div class="modal4 badge-gallery">
-    <button class="modal-close" onclick="closeBadgeGallery()" aria-label="Lukk merke-galleriet">×</button>
-    <div class="collection-header">
-      <h2 class="collection-title">Merke</h2>
-      <p class="collection-subtitle">Oppnådde merke og kva som står att å klare</p>
-    </div>
-    <div class="badge-grid" id="badgeGrid"></div>
-  </div>
-</div>
-
-<!-- COLLECTION VIEWER MODAL (all categories) -->
-<div id="collectionModal" class="modal-overlay">
-  <div class="modal4 collection-viewer">
-    <button class="modal-close" onclick="closeCollectionModal()">×</button>
-    <div class="collection-content" id="collectionContent">
-      <div class="collection-header">
-        <h2 class="collection-title">Min samling</h2>
-        <p class="collection-subtitle">Alle kort samla på tvers av kategoriar</p>
-      </div>
-      <div class="collection-grid" id="collectionGrid"></div>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST CONTAINER (poeng / merke / opplåsing) -->
-
-<!-- JavaScript Modules -->
+<body class="hs-app" data-light-theme="lavender" data-dark-theme="space" data-theme="lavender">
+<neo-header></neo-header><div class="page-wrapper"><main class="main-content hs-main">
+<div id="setupScreen">
+<header class="hs-top"><a class="hs-brand" href="./"><img class="hs-brand-mark" src="Logo%20-%20no%20text.png" alt="">Heimsank<span class="hs-brand-dot">.</span></a><nav class="hs-actions" aria-label="Dine samlingar"><span class="hs-points" aria-live="polite"><span data-icon="coins"></span><strong id="pointsValue">0</strong> poeng</span><button class="hs-btn" onclick="openCollectionViewer()"><span data-icon="folder"></span>Samlingane mine</button><button class="hs-btn" onclick="openBadgeGallery()"><span data-icon="award"></span>Merke</button></nav></header>
+<section class="hs-hero" aria-labelledby="heroTitle"><div class="hs-hero-copy"><span class="hs-eyebrow">Små reknestykke. Store oppdagingar.</span><h1 id="heroTitle">Rekn. Oppdag.<br><span>Saml heile verda.</span></h1><p>Seks rette svar, eitt nytt kort. Finn favorittane dine — og kanskje noko heilt sjeldsynt.</p><div class="hs-rarities" aria-label="Fire sjeldsemder"><span data-rarity="vanleg">Vanleg</span><span data-rarity="sjeldgjevt">Sjeldgjævt</span><span data-rarity="segngjeten">Segngjeten</span><span data-rarity="gudebore">Gudebore</span></div></div><div class="hs-showcase"><div class="hs-orbit" aria-hidden="true"></div><span class="hs-motif hs-motif-one" aria-hidden="true">×</span><span class="hs-motif hs-motif-two" aria-hidden="true">+</span><div id="fanContainer" class="hs-fan" aria-hidden="true"></div><p id="fanCatLabel" class="hs-fan-label">Ei verd av kort ventar på deg</p></div></section>
+<p id="setupLoading" class="hs-empty" role="status">Lastar kategoriar…</p>
+<div id="setupContent" class="hs-setup hidden"><section aria-labelledby="categoryTitle"><div class="hs-section-title"><div><span class="hs-eyebrow">Neste oppdaging</span><h2 id="categoryTitle">Kva vil du samle?</h2></div><span class="hs-muted" id="categoryCount"></span></div><div id="catsGrid" class="hs-categories"></div></section>
+<aside class="hs-settings hs-panel" aria-labelledby="settingsTitle"><span class="hs-eyebrow">Di neste runde</span><h2 id="settingsTitle">Gjer deg klar</h2><p id="selectedCategory" class="hs-selected-category">Vel ein kategori</p>
+<fieldset><legend>Vanskegrad</legend><div class="hs-levels"><button class="hs-btn" data-level="lett" aria-pressed="false" onclick="selLevel('lett')">Lett</button><button class="hs-btn" data-level="middels" aria-pressed="true" onclick="selLevel('middels')">Middels</button><button class="hs-btn" data-level="vanskeleg" aria-pressed="false" onclick="selLevel('vanskeleg')">Vanskeleg</button></div></fieldset>
+<fieldset><legend>Rekneartar</legend><div class="hs-operations"><button class="hs-btn" data-op="+" aria-pressed="false" onclick="togOp('+')"><b>+</b>Pluss</button><button class="hs-btn" data-op="-" aria-pressed="false" onclick="togOp('-')"><b>−</b>Minus</button><button class="hs-btn" data-op="*" aria-pressed="true" onclick="togOp('*')"><b>×</b>Gange</button><button class="hs-btn" data-op="/" aria-pressed="true" onclick="togOp('/')"><b>÷</b>Dele</button></div></fieldset>
+<p class="hs-settings-hint"><span data-icon="layers"></span>Seks rette svar gjev eit nytt kort.</p><button class="hs-btn hs-primary hs-start" id="startBtn" onclick="startGame()" disabled>Start spelet <span data-icon="arrowRight"></span></button></aside></div></div>
+<div id="gameScreen" class="hidden"><nav class="hs-game-toolbar" aria-label="Spelmeny"><button class="hs-btn" onclick="goSetup()"><span data-icon="arrowLeft"></span>Meny</button><span id="gameSub" class="hs-cat-pill"></span><button class="hs-btn" onclick="openCollectionViewer()"><span data-icon="folder"></span>Samling</button></nav>
+<section class="hs-question hs-panel" aria-label="Rekneoppgåve"><div class="hs-progress-heading"><span id="gameDiff"></span><span id="progLabel" aria-live="polite">0 av 6 rette</span></div><div class="hs-progress"><div id="progPips" class="hs-pips" role="progressbar" aria-label="Rette svar mot neste kort" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"></div><span class="hs-next-card" aria-hidden="true" data-icon="layers"></span></div><p class="hs-question-hint">Kva blir svaret?</p><div class="hs-expression" id="qBox"></div><form id="answerForm" class="hs-answer" novalidate><label class="hs-sr-only" for="ansInput">Svaret ditt</label><input type="number" inputmode="numeric" id="ansInput" class="hs-answer-input" placeholder="?" autocomplete="off"><button class="hs-btn hs-primary" id="checkBtn" type="submit">Sjekk svar <span data-icon="check"></span></button></form><div class="hs-feedback" id="feedback" role="status" aria-live="polite"></div></section>
+<section id="pendingArea" class="hs-pending hs-panel hidden" aria-labelledby="pendingTitle"><div id="pendingSlotMain" class="hs-pending-card"></div><div><span id="pendingRarityLabel" class="hs-eyebrow"></span><h2 id="pendingTitle">Samlinga er full</h2><p id="pendingCardName"></p><p class="hs-muted">Vel kva kort du vil ta vare på.</p><div class="hs-pending-actions"><button class="hs-btn hs-primary" id="pendingSwap" onclick="expandCollForSwap()">Byte eit kort</button><button class="hs-btn" onclick="discardPending()">Kast det nye kortet</button></div></div></section>
+<section id="collBar" class="hs-collection hs-panel"><button class="hs-coll-toggle" id="collToggleRow" aria-expanded="false" aria-controls="collBarInner" onclick="toggleCollBar()"><span><span data-icon="layers"></span>Samling · <span id="collCount">0</span> av 6 <span id="collMiniDots" class="hs-mini-dots" aria-hidden="true"></span></span><span id="collToggleLabel">Vis kort</span></button><div id="collBarInner" class="hidden"><p id="dragInstruction" class="hs-muted hidden">Trykk «Byt dette» på kortet du vil erstatte. Du kan òg dra det nye kortet hit.</p><div id="collRow" class="hs-slots"></div><div class="hs-collection-footer"><span id="trashZone" class="hs-trash"><span data-icon="trash"></span>Dra hit for å kaste</span><button class="hs-btn" id="clearAllBtn" onclick="confirmClearAll()">Tøm samlinga</button></div></div></section></div>
+<footer class="hs-footer">Heimsank<span>Rekn litt. Oppdag meir.</span></footer></main></div>
+<div id="revealModal" class="hs-overlay" role="dialog" aria-modal="true" aria-labelledby="revealTitle"><section class="hs-dialog hs-reveal"><h2 id="revealTitle">Du fann eit nytt kort!</h2><div id="flipCard" class="hs-reveal-card"><div class="hs-card-back"><img class="hs-back-logo" src="Logo%20-%20no%20text.png" alt=""><strong>HEIMSANK</strong><span>Ei ny oppdaging</span></div><div id="revealFront"></div></div><p id="revealSub" role="status"></p><button id="revealBtn" class="hs-btn hs-primary" onclick="afterReveal()">Hald fram</button></section></div>
+<div id="cardModal" class="hs-overlay" role="dialog" aria-modal="true" aria-label="Kortdetaljar"><section class="hs-dialog hs-detail"><button class="hs-btn hs-close" onclick="closeCardModal()" aria-label="Lukk kortdetaljar"><span data-icon="x"></span></button><div id="modalCard"></div><nav class="hs-card-navigation" aria-label="Bla mellom kort"><button class="hs-btn" id="cardPrev" onclick="navigateCard(-1)">Førre</button><span id="cardPosition"></span><button class="hs-btn" id="cardNext" onclick="navigateCard(1)">Neste</button></nav></section></div>
+<div id="badgeModal" class="hs-overlay" role="dialog" aria-modal="true" aria-labelledby="badgeTitle"><section class="hs-dialog hs-album"><button class="hs-btn hs-close" onclick="closeBadgeGallery()" aria-label="Lukk merke"><span data-icon="x"></span></button><span class="hs-eyebrow">Små og store bragder</span><h2 id="badgeTitle">Merka dine</h2><p class="hs-muted">Sjå kva du har klart, og kva som ventar.</p><div id="badgeGrid" class="hs-badge-grid"></div></section></div>
+<div id="collectionModal" class="hs-overlay" role="dialog" aria-modal="true" aria-labelledby="albumTitle"><section class="hs-dialog hs-album"><button class="hs-btn hs-close" onclick="closeCollectionModal()" aria-label="Lukk samlingane"><span data-icon="x"></span></button><span class="hs-eyebrow">Dine oppdagingar</span><h2 id="albumTitle">Samlingane mine</h2><p class="hs-muted">Favorittane dine, samla på ein stad.</p><div id="collectionGrid"></div></section></div>
 <script src="../js/neo-header.js"></script>
 <script src="../js/neobrutalisme.js"></script>
 <script src="../js/vyrdepil-storage.js"></script>
@@ -266,9 +38,12 @@
 <script src="js/icons.js"></script>
 <script src="js/state.js"></script>
 <script src="js/utils.js"></script>
+<script src="js/ui.js"></script>
 <script src="js/carddata.js"></script>
 <script src="js/progression.js"></script>
 <script src="js/storage.js"></script>
+<script src="js/card-flames.js"></script>
+<script src="js/card-view.js"></script>
 <script src="js/cards.js"></script>
 <script src="js/dragdrop.js"></script>
 <script src="js/game.js"></script>
@@ -277,6 +52,4 @@
 <script src="js/collection.js"></script>
 <script src="js/progression-ui.js"></script>
 <script src="js/main.js"></script>
-
-</body>
-</html>
+</body></html>
