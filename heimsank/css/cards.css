@@ -1,31 +1,44 @@
-[data-rarity="vanleg"] { --r-fill:#F4F1E9; --r-edge:#B5ADA0; --r-ink:#39342D; }
-[data-rarity="sjeldgjevt"] { --r-fill:#C3E7FF; --r-edge:#3683BE; --r-ink:#123E60; }
-[data-rarity="segngjeten"] { --r-fill:#E0CFFF; --r-edge:#8551CA; --r-ink:#452465; --flame-glow:#A551E780; }
-[data-rarity="gudebore"] { --r-fill:#FFE6A0; --r-edge:#B68415; --r-ink:#5B3C00; --flame-glow:#F3A51D90; }
+[data-rarity="vanleg"] { --r-fill:#F4EBDD; --r-edge:#9A7048; --r-ink:#382B21; --r-scrap:#DFC7A4; --r-scrap2:#E8D7BB; --r-route:#B98555; --r-star:#C89055; --r-mat:#F8F0E4; }
+[data-rarity="sjeldgjevt"] { --r-fill:#F7F0E5; --r-edge:#175DB4; --r-ink:#102E69; --r-scrap:#35C7D5; --r-scrap2:#F18CB8; --r-route:#F3B92D; --r-star:#F3B92D; --r-mat:#FFF8EC; }
+[data-rarity="segngjeten"] { --r-fill:#F8F0E8; --r-edge:#6548C6; --r-ink:#352060; --r-scrap:#824AC8; --r-scrap2:#E0569F; --r-route:#FF6DA8; --r-star:#F3B92D; --r-mat:#FFF7ED; --flame-glow:#A551E780; }
+[data-rarity="gudebore"] { --r-fill:#F8F0DF; --r-edge:#173C91; --r-ink:#2E230C; --r-scrap:#173C91; --r-scrap2:#F05B9A; --r-route:#D99B16; --r-star:#D99B16; --r-mat:#FFF8E8; --flame-glow:#F3A51D90; }
 /* 20 × 28 em er kortet si faste trykkflate. 1 em = 5 % av kortbreidda.
    Ingen variant får flytte eller endre innhaldet; berre ytterbreidda varierer. */
 .hs-card { min-width:0; width:100%; position:relative; container-type:inline-size; color:var(--r-ink); text-align:left; }
-.hs-card-face { position:relative; isolation:isolate; width:100%; aspect-ratio:5/7; font-size:5cqw; line-height:1.2; border-radius:1em; background:var(--r-fill); box-shadow:inset 0 0 0 .12em var(--r-edge),0 .3em .8em #17103c25; }
+.hs-card-face { position:relative; isolation:isolate; overflow:hidden; width:100%; aspect-ratio:5/7; font-size:5cqw; line-height:1.2; border-radius:1em; background:var(--r-fill); box-shadow:inset 0 0 0 .16em var(--r-edge),0 .3em .8em #17103c25; }
+.hs-card-face::before { content:''; position:absolute; inset:0; z-index:0; opacity:.88; background:radial-gradient(ellipse at 88% 5%,var(--r-scrap2) 0 17%,transparent 17.5%),linear-gradient(164deg,transparent 0 18%,var(--r-scrap) 18.5% 25%,transparent 25.5%),radial-gradient(ellipse at 82% 78%,color-mix(in srgb,var(--r-scrap) 72%,transparent) 0 20%,transparent 20.5%),repeating-linear-gradient(14deg,#ffffff12 0 .06em,transparent .06em .22em); }
+.hs-card-face::after { content:''; position:absolute; inset:.28em; z-index:0; pointer-events:none; border:.08em solid color-mix(in srgb,var(--r-edge) 75%,transparent); border-radius:.72em .9em .74em .86em; clip-path:polygon(0 1%,8% 0,16% 1%,25% 0,35% 1%,44% 0,55% 1%,66% 0,76% 1%,87% 0,100% 1%,99% 15%,100% 30%,99% 45%,100% 61%,99% 78%,100% 99%,88% 100%,77% 99%,65% 100%,52% 99%,39% 100%,27% 99%,13% 100%,1% 99%,0 83%,1% 67%,0 49%,1% 31%); }
 .hs-card-face>div { position:absolute; left:.85em; right:.85em; z-index:1; }
-.hs-card-face>.hs-card-title { top:.7em; height:2.15em; left:.68em; right:.68em; font-size:1.25em; font-weight:800; line-height:1.05; overflow-wrap:anywhere; display:flex; align-items:center; }
+.hs-card-face>.hs-card-decor { inset:0; z-index:0; pointer-events:none; }
+.hs-card-route { position:absolute; top:2.25em; right:1.2em; width:6.5em; height:3.3em; border:.16em dashed var(--r-route); border-left-color:transparent; border-bottom-color:transparent; border-radius:50%; transform:rotate(9deg); }
+.hs-card-star { position:absolute; width:.8em; height:.8em; background:var(--r-star); filter:drop-shadow(.08em .1em 0 #fff9); clip-path:polygon(50% 0,62% 37%,100% 50%,62% 63%,50% 100%,38% 63%,0 50%,38% 37%); }
+.hs-card-star-one { top:1em; right:1.25em; }.hs-card-star-two { top:18.3em; right:1.1em; transform:scale(.72); }.hs-card-star-three { display:none; top:2.7em; right:4.8em; transform:scale(.62); }
+.hs-card[data-rarity="vanleg"] .hs-card-star-two,.hs-card[data-rarity="vanleg"] .hs-card-route { opacity:.45; }
+.hs-card[data-rarity="segngjeten"] .hs-card-star-three,.hs-card[data-rarity="gudebore"] .hs-card-star-three { display:block; }
+.hs-card[data-rarity="gudebore"] .hs-card-face::after { border-color:#D99B16; box-shadow:inset 0 0 0 .08em #D99B1666; }
+.hs-card-face>.hs-card-title { top:.7em; height:2.15em; left:.68em; right:.68em; font-size:1.25em; font-weight:850; line-height:1.05; overflow-wrap:anywhere; display:flex; align-items:center; }
 .hs-card-title[data-length="medium"] { font-size:1em; top:.875em; height:2.6875em; left:1.0625em; right:1.0625em; }
 .hs-card-title[data-length="long"] { font-size:.8em; top:1.09375em; height:3.36em; left:1.328em; right:1.328em; }
 .hs-card-face>.hs-card-tags { top:3.75em; display:flex; gap:.3em; height:1.2em; align-items:center; }
-.hs-card-tag { font-size:.65em; padding:.3em .6em; background:#FFFFFFA8; border-radius:.4em; font-weight:750; white-space:nowrap; }
-.hs-card-face>.hs-card-image { top:5.6em; height:14em; border-radius:.6em; overflow:hidden; background:#ffffff50; display:grid; place-items:center; }
+.hs-card-tag { font-size:.65em; padding:.32em .68em; background:color-mix(in srgb,var(--r-scrap) 42%,var(--r-mat)); border-radius:.12em .42em .16em .36em; font-weight:800; white-space:nowrap; box-shadow:.08em .1em 0 #fff8; }
+.hs-card-face>.hs-card-image { top:5.45em; height:14.2em; padding:.55em; border-radius:.22em .55em .3em .48em; overflow:visible; background:var(--r-mat); box-shadow:-.35em .28em 0 color-mix(in srgb,var(--r-scrap) 82%,transparent),.18em .28em .38em #26194725; display:grid; place-items:center; clip-path:polygon(1% 2%,13% 0,26% 2%,39% 0,52% 1%,67% 0,82% 2%,99% 0,98% 16%,100% 31%,98% 48%,100% 66%,98% 83%,100% 99%,84% 98%,68% 100%,52% 98%,37% 100%,20% 98%,1% 100%,2% 81%,0 64%,2% 48%,0 30%); transition:top .2s,height .2s; }
+.hs-card-image[data-shape="wide"] { top:6.2em; height:11.4em; }
+.hs-card-image[data-shape="balanced"] { top:5.65em; height:13em; }
+.hs-card-image[data-shape="portrait"] { top:5.25em; height:14.8em; }
 .hs-card-image svg { width:3em; height:3em; }
 .hs-card-image>span,.hs-card-fact>span:first-child,.hs-card-category>span:first-child { display:flex; align-items:center; line-height:0; }
-.hs-card-image img { width:100%; height:100%; position:absolute; inset:0; object-fit:cover; }
-.hs-card[data-category="land"] .hs-card-image img { object-fit:contain; padding:.5em; }
-.hs-card-face>.hs-card-fact { top:20.3em; height:2.4em; display:flex; align-items:center; gap:.4em; }
+.hs-card-image img { width:calc(100% - 1.1em); height:calc(100% - 1.1em); position:absolute; inset:.55em; object-fit:contain; background:#ffffff70; }
+.hs-card-face>.hs-card-fact { top:20.45em; height:2.15em; display:flex; align-items:center; gap:.4em; }
 .hs-card-fact span { font-size:.8em; overflow-wrap:anywhere; line-height:1.15; }
 .hs-card-fact svg { width:1em; height:1em; }
-.hs-card-face>.hs-card-category { top:23em; display:flex; align-items:center; gap:.4em; height:1.4em; }
+.hs-card-face>.hs-card-category { top:22.65em; display:flex; align-items:center; gap:.4em; height:1.35em; }
 .hs-card-category span { font-size:.65em; font-weight:650; }
 .hs-card-category svg { width:.9em; height:.9em; }
-.hs-card-face>.hs-card-meta { bottom:.85em; height:1.75em; display:flex; justify-content:space-between; align-items:center; gap:.4em; padding-top:.45em; border-top:.06em solid var(--r-edge); }
+.hs-card-face>.hs-card-meta { bottom:.7em; height:2.25em; display:flex; justify-content:space-between; align-items:center; gap:.4em; padding-top:.5em; border-top:.08em solid var(--r-edge); }
+.hs-card-earned { position:absolute; left:0; right:3.7em; display:flex; align-items:center; gap:.5em; min-width:0; overflow:hidden; }
 .hs-card-level { font-size:.65em; font-weight:750; }
 .hs-card-operations { font-size:.85em; font-weight:800; letter-spacing:.08em; white-space:nowrap; }
+.hs-card-readmore { position:absolute; right:0; font-size:.65em; font-weight:850; white-space:nowrap; color:var(--r-ink); text-decoration:underline; text-decoration-color:var(--r-route); text-decoration-thickness:.12em; text-underline-offset:.2em; }
 .hs-card.hs-foil .hs-card-image::after { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(125deg,transparent 15%,#fff8 30%,#75e4ff66 40%,#ed8aff55 50%,#fff8 60%,transparent 75%); mix-blend-mode:soft-light; }
 .hs-card:is([data-rarity="segngjeten"],[data-rarity="gudebore"]) .hs-card-face { box-shadow:inset 0 0 0 .12em var(--r-edge),0 0 .8em var(--flame-glow); }
 .hs-card-flames { position:absolute; left:-25%; top:-13%; width:150%; height:120%; z-index:0; pointer-events:none; }

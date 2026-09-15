@@ -24,3 +24,17 @@
 .hs-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 .hs-app svg { flex-shrink:0; }
 @media(prefers-reduced-motion:reduce) { .hs-app *, .hs-app *::before,.hs-app *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+
+/* Samlaruniverset byggjer vidare på kortbaksida: indigo, baner og skeive papirformer. */
+.hs-app { --hs-indigo:#17185B; --hs-violet:#7548D8; --hs-pink:#FF8EC1; --hs-turquoise:#55DEC9; --hs-blue:#168DDF; --hs-yellow:#FFD447; --hs-ink:#19183A; --hs-shadow:0 7px 0 #17185b16,0 18px 40px #17103c10; }
+.hs-app[data-theme="lavender"] { --hs-bg:#F6F2FF; --hs-soft:#F0ECFA; }
+.hs-app .page-wrapper { background:radial-gradient(circle at 8% 5%,#ff8ec12c 0 4px,transparent 5px),radial-gradient(circle at 91% 13%,#ffd44750 0 5px,transparent 6px),linear-gradient(135deg,transparent 0 46%,#7548d80c 46% 47%,transparent 47% 100%); background-size:auto,auto,42px 42px; }
+.hs-panel { position:relative; border:2px solid color-mix(in srgb,var(--hs-indigo) 35%,var(--hs-line)); border-radius:26px 19px 28px 21px; box-shadow:var(--hs-shadow); }
+.hs-btn { border:2px solid color-mix(in srgb,var(--hs-indigo) 65%,var(--hs-line)); border-radius:18px 13px 17px 14px; box-shadow:0 3px 0 color-mix(in srgb,var(--hs-indigo) 40%,transparent); font-weight:700; }
+.hs-btn:hover:not(:disabled) { background:color-mix(in srgb,var(--hs-turquoise) 16%,var(--hs-panel)); transform:translateY(-2px) rotate(-.4deg); box-shadow:0 5px 0 color-mix(in srgb,var(--hs-indigo) 45%,transparent); }
+.hs-btn[aria-pressed="true"] { background:var(--hs-indigo); color:#fff; border-color:var(--hs-indigo); box-shadow:inset 0 -3px 0 #0d0e40,0 0 0 3px color-mix(in srgb,var(--hs-pink) 45%,transparent); }
+.hs-btn.hs-primary { background:var(--hs-yellow); color:var(--hs-ink); border-color:var(--hs-indigo); box-shadow:0 5px 0 var(--hs-indigo); font-weight:800; }
+.hs-btn.hs-primary:hover:not(:disabled) { background:#FFE277; box-shadow:0 7px 0 var(--hs-indigo); }
+.hs-app .hs-btn:focus-visible { outline:0; box-shadow:0 0 0 3px var(--hs-panel),0 0 0 6px var(--hs-violet),0 4px 0 var(--hs-indigo); }
+.hs-app .hs-btn.hs-primary:focus-visible { box-shadow:0 0 0 3px var(--hs-panel),0 0 0 6px var(--hs-violet),0 5px 0 var(--hs-indigo); }
+.hs-eyebrow { display:table; width:max-content; max-width:100%; padding:5px 11px; border:2px solid var(--hs-indigo); border-radius:9px 6px 9px 7px; background:var(--hs-pink); color:var(--hs-ink); box-shadow:2px 3px 0 var(--hs-indigo); font-size:.7rem; font-weight:850; letter-spacing:.08em; transform:rotate(-1deg); }

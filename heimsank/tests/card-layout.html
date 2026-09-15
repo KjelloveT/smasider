@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="nn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Heimsank — kontroll av kortproporsjonar</title>
-<link rel="stylesheet" href="../../css/neobrutalisme.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/cards.css">
+<link rel="stylesheet" href="../../css/neobrutalisme.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/cards.css?v=1.52">
 <style>
 main { padding:32px; } .samples { display:flex; flex-wrap:wrap; align-items:start; gap:32px; margin:40px 0; }
 .sample { width:var(--width); max-width:100%; } h1 { font-size:1.5rem; } .sample p { font-size:14px; } #result { white-space:pre-wrap; }
@@ -9,7 +9,7 @@ main { padding:32px; } .samples { display:flex; flex-wrap:wrap; align-items:star
 <main><h1>Same kort i fire storleikar</h1><p>Testdata, inga lagring. Alle felt og symbol skal skalere saman. Kjelder og knappar ligg utanfor kortflata.</p>
 <button class="hs-btn" id="theme">Skift lyst/mørkt</button><p id="result" role="status">Kontrollerer…</p><div id="samples"></div></main>
 <script src="../../js/vyrdepil-util.js"></script><script src="../../js/vyrdepil-icons.js"></script>
-<script src="../js/state.js"></script><script src="../js/ui.js"></script><script src="../js/card-flames.js"></script><script src="../js/card-view.js"></script>
+<script src="../js/state.js"></script><script src="../js/ui.js"></script><script src="../js/card-flames.js"></script><script src="../js/card-view.js?v=1.52"></script>
 <script>
 const host = document.getElementById('samples');
 const fixture = {name:'Danmark',catId:'land',catLabel:'Land',stat:'5 822 863',statLabel:'users',img:'https://upload.wikimedia.org/wikipedia/commons/9/9c/Flag_of_Denmark.svg'};
@@ -22,6 +22,14 @@ for (const rarity of RO) {
   }
   host.appendChild(row);
 }
+const portraitSvg = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900"><rect width="600" height="900" fill="#d8efff"/><circle cx="300" cy="280" r="145" fill="#f2c7a5"/><path d="M130 285Q155 75 300 75T470 285Q385 185 300 180T130 285" fill="#35285f"/><path d="M115 900V585Q115 455 300 455T485 585V900" fill="#386bbb"/><circle cx="250" cy="285" r="14"/><circle cx="350" cy="285" r="14"/><path d="M245 355Q300 395 355 355" fill="none" stroke="#7d314c" stroke-width="14" stroke-linecap="round"/></svg>');
+const portrait = {...fixture,name:'Ada Lovelace',catId:'forskarar',catLabel:'Forskarar',stat:'1815–1852',statLabel:'calendar',img:portraitSvg,rarity:'sjeldgjevt'};
+const portraitRow = Vy.el('section','samples');
+for (const [index,variant] of ['showcase','collection','reveal','detail'].entries()) {
+  const wrap = Vy.el('div','sample'); wrap.style.setProperty('--width',[120,180,270,340][index]+'px');
+  wrap.append(Vy.el('p','',variant+' · ståande bilete'),HeimsankCards.render(portrait,entry,variant)); portraitRow.appendChild(wrap);
+}
+host.appendChild(portraitRow);
 const long = {...fixture,name:'Eit uvanleg langt kortnamn som må få plass på den same faste kortflata',stat:'Eit lengre faktum som går over to linjer',rarity:'vanleg'};
 const wrap = Vy.el('div','sample'); wrap.style.setProperty('--width','270px'); wrap.appendChild(HeimsankCards.render(long,entry)); host.appendChild(wrap);
 function verify() {
@@ -30,7 +38,7 @@ function verify() {
     const faces=[...row.querySelectorAll('.hs-card-face')];
     const signature=face=>{
       const rect=face.getBoundingClientRect();
-      return [...face.querySelectorAll('div,span,svg,img')].flatMap(node=>{
+      return [...face.querySelectorAll('div,span,svg,img')].filter(node=>node.getClientRects().length).flatMap(node=>{
         const r=node.getBoundingClientRect();
         return [(r.x-rect.x)/rect.width,(r.y-rect.y)/rect.width,r.width/rect.width,r.height/rect.width];
       });
@@ -45,7 +53,7 @@ function verify() {
   }
   document.getElementById('result').textContent=failures.length?failures.join('\n'):'OK: Same proporsjonar, plassering, symbol og tekst i alle fire variantar og sjeldsemder.';
 }
-document.getElementById('theme').onclick=()=>{document.body.dataset.theme=document.body.dataset.theme==='lavender'?'space':'lavender';verify();};
+document.getElementById('theme').onclick=()=>{document.body.dataset.theme=document.body.dataset.theme==='lavender'?'space':'lavender';requestAnimationFrame(verify);};
 new ResizeObserver(verify).observe(host);
 document.fonts.ready.then(verify);
 </script></body></html>

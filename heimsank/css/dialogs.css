@@ -9,3 +9,13 @@
 .hs-album-section { margin-top:28px; }.hs-album-heading { display:flex; align-items:center; gap:10px; margin-bottom:15px; }.hs-album-heading::before { content:''; background:var(--cat-color); width:12px; height:28px; border-radius:5px; }.hs-album-heading h3 { font-size:1.15rem; }.hs-album-heading span { margin-left:auto; font-size:.8rem; color:var(--hs-muted); }.hs-album-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
 .hs-badge-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:24px; }.bdg { padding:20px 12px; border:1px solid var(--hs-line); border-radius:18px; text-align:center; background:var(--hs-soft); }.bdg-medal { width:64px; height:64px; display:grid; place-items:center; margin:0 auto 12px; color:#24203D; background:#D4C4F7; border-radius:50%; box-shadow:inset 0 0 0 5px #fff5; }.b-pink .bdg-medal { background:#FFC3D9; }.b-yellow .bdg-medal { background:#FFE297; }.b-teal .bdg-medal { background:#A0E8D9; }.b-blue .bdg-medal { background:#A8D5FF; }.bdg-name { font-size:.95rem; font-weight:750; }.bdg-hint { font-size:.8rem; line-height:1.5; color:var(--hs-muted); margin-top:8px; }.bdg.is-locked .bdg-medal { background:#CCC8D7; }.bdg-lock { display:inline-flex; gap:5px; align-items:center; margin-top:10px; font-size:.7rem; color:var(--hs-muted); }
 @media(max-width:540px) { .hs-overlay { padding:12px; }.hs-album-cards,.hs-badge-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }.hs-album { padding:20px 14px; }.hs-album-heading { flex-wrap:wrap; }.hs-reveal { padding:24px 18px; } }
+
+.hs-back-logo { display:none; }
+.hs-dialog { border:3px solid var(--hs-indigo); border-radius:28px 20px 30px 22px; box-shadow:0 8px 0 var(--hs-indigo),0 25px 80px #0005; }
+.hs-reveal>.hs-eyebrow { margin-inline:auto; }
+.hs-reveal-card { aspect-ratio:5/7; }
+.hs-card-back { display:block; overflow:hidden; border:0; border-radius:16px; background:var(--hs-indigo); filter:drop-shadow(0 8px 12px #17103c42); }
+.hs-card-back img { display:block; width:100%; height:100%; object-fit:cover; }
+.hs-card-back strong,.hs-card-back>span { display:none; }
+.bdg { border:2px solid var(--hs-indigo); border-radius:21px 15px 22px 16px; box-shadow:0 4px 0 color-mix(in srgb,var(--hs-indigo) 30%,transparent); }
+.bdg-medal { border:3px solid var(--hs-indigo); box-shadow:inset 0 0 0 5px #fff5,3px 3px 0 var(--hs-pink); }
