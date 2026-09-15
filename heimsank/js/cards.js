@@ -2,13 +2,9 @@
 function renderColl() {
   const row = document.getElementById('collRow');
   document.getElementById('collCount').textContent = S.collection.length;
-  const dots = document.getElementById('collMiniDots');
-  row.replaceChildren(); dots.replaceChildren();
+  row.replaceChildren();
   S.collection.forEach((entry, index) => {
     const card = S.idx[entry.cardId];
-    const dot = Vy.el('span', 'hs-mini-dot');
-    dot.dataset.rarity = card?.rarity || 'vanleg';
-    dots.appendChild(dot);
     if (!card) {
       row.appendChild(Vy.el('div', 'hs-card-empty', 'Kortdata manglar'));
       return;
@@ -33,7 +29,6 @@ function renderColl() {
     row.appendChild(el);
   });
   for (let i = S.collection.length; i < 6; i++) {
-    dots.appendChild(Vy.el('span', 'hs-mini-dot'));
     const empty = Vy.el('div', 'hs-card-empty');
     empty.append(HeimsankUI.icon('layers', 26), Vy.el('span', '', 'Di neste oppdaging'));
     row.appendChild(empty);
@@ -68,10 +63,8 @@ function expandCollForSwap() {
   document.querySelector('#collRow .hs-card-actions button')?.focus();
 }
 function setCollectionExpanded(expanded) {
-  document.getElementById('collBarInner').classList.toggle('hidden', !expanded);
-  document.getElementById('collToggleRow').setAttribute('aria-expanded', String(expanded));
-  document.getElementById('collToggleLabel').textContent = expanded ? 'Skjul kort' : 'Vis kort';
+  document.getElementById('collBarInner').classList.remove('hidden');
 }
 function toggleCollBar() {
-  setCollectionExpanded(document.getElementById('collBarInner').classList.contains('hidden'));
+  setCollectionExpanded(true);
 }

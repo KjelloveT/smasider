@@ -2,6 +2,28 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.52",
+      "dato": "2026-09-15",
+      "samandrag": "Heimsank har fått ei ny kortbakside, logo og eit meir leikent samlarunivers.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Heimsank",
+          "tekst": "Ei ny kortbakside med delebrikke, jordklode, oppdagingsbaner og stjerner blir òg brukt som logo på framsida og i toppmenyen."
+        },
+        {
+          "t": "endra",
+          "kva": "Heimsank",
+          "tekst": "Knappar, kategoriar, innstillingar, oppgåveflate, merke og dialogar har fått eit meir leikent formspråk frå kortbaksida. Samlinga er ei alltid synleg korthylle med minikort."
+        },
+        {
+          "t": "endra",
+          "kva": "Heimsank",
+          "tekst": "Kategoriar blir sorterte etter kor mange poeng som manglar til opplåsing. Prisane har eigne myntbrikker, og den samla poengsummen er tydelegare."
+        }
+      ]
+    },
+    {
       "versjon": "1.51",
       "dato": "2026-09-14",
       "samandrag": "Heimsank har fått eit fargerikt kortarkade-design.",
