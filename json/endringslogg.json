@@ -15,6 +15,11 @@
           "t": "endra",
           "kva": "Heimsank-korta",
           "tekst": "Videospel-kategorien og fire kort utan fungerande bilete er fjerna."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Heimsank-korta",
+          "tekst": "«Les om» opnar no artikkelen direkte, og blir skjult når kortet ikkje har ei gyldig lenkje."
         }
       ]
     },
