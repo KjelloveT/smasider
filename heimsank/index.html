@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../css/neobrutalisme.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/setup.css">
-<link rel="stylesheet" href="css/cards.css">
+<link rel="stylesheet" href="css/cards.css?v=1.52.2">
 <link rel="stylesheet" href="css/game.css">
 <link rel="stylesheet" href="css/dialogs.css">
 </head>
@@ -23,8 +23,8 @@
 <p class="hs-settings-hint"><span data-icon="layers"></span>Seks rette svar gjev eit nytt kort.</p><button class="hs-btn hs-primary hs-start" id="startBtn" onclick="startGame()" disabled>Start spelet <span data-icon="arrowRight"></span></button></aside></div></div>
 <div id="gameScreen" class="hidden"><nav class="hs-game-toolbar" aria-label="Spelmeny"><button class="hs-btn" onclick="goSetup()"><span data-icon="arrowLeft"></span>Meny</button><span id="gameSub" class="hs-cat-pill"></span><button class="hs-btn" onclick="openCollectionViewer()"><span data-icon="folder"></span>Samling</button></nav>
 <section class="hs-question hs-panel" aria-label="Rekneoppgåve"><div class="hs-progress-heading"><span id="gameDiff"></span><span id="progLabel" aria-live="polite">0 av 6 rette</span></div><div class="hs-progress"><div id="progPips" class="hs-pips" role="progressbar" aria-label="Rette svar mot neste kort" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"></div><span class="hs-next-card" aria-hidden="true" data-icon="layers"></span></div><p class="hs-question-hint">Kva blir svaret?</p><div class="hs-expression" id="qBox"></div><form id="answerForm" class="hs-answer" novalidate><label class="hs-sr-only" for="ansInput">Svaret ditt</label><input type="number" inputmode="numeric" id="ansInput" class="hs-answer-input" placeholder="?" autocomplete="off"><button class="hs-btn hs-primary" id="checkBtn" type="submit">Sjekk svar <span data-icon="check"></span></button></form><div class="hs-feedback" id="feedback" role="status" aria-live="polite"></div></section>
-<section id="pendingArea" class="hs-pending hs-panel hidden" aria-labelledby="pendingTitle"><div id="pendingSlotMain" class="hs-pending-card"></div><div><span id="pendingRarityLabel" class="hs-eyebrow"></span><h2 id="pendingTitle">Samlinga er full</h2><p id="pendingCardName"></p><p class="hs-muted">Vel kva kort du vil ta vare på.</p><div class="hs-pending-actions"><button class="hs-btn hs-primary" id="pendingSwap" onclick="expandCollForSwap()">Byte eit kort</button><button class="hs-btn" onclick="discardPending()">Kast det nye kortet</button></div></div></section>
-<section id="collBar" class="hs-collection hs-panel" aria-labelledby="collShelfTitle"><div class="hs-collection-head"><span id="collShelfTitle"><span data-icon="layers"></span>Samling · <strong id="collCount">0</strong> av 6</span><span class="hs-shelf-label">Korthylle</span></div><div id="collBarInner"><p id="dragInstruction" class="hs-muted hidden">Trykk «Byt dette» på kortet du vil erstatte. Du kan òg dra det nye kortet hit.</p><div id="collRow" class="hs-slots"></div><div class="hs-collection-footer"><span id="trashZone" class="hs-trash"><span data-icon="trash"></span>Dra hit for å kaste</span><button class="hs-btn" id="clearAllBtn" onclick="confirmClearAll()">Tøm samlinga</button></div></div></section></div>
+<section id="pendingArea" class="hs-pending hs-panel hidden" aria-labelledby="pendingTitle"><div id="pendingSlotMain" class="hs-pending-card"></div><div><span id="pendingRarityLabel" class="hs-eyebrow"></span><h2 id="pendingTitle">Nytt kort</h2><p id="pendingCardName"></p></div></section>
+<section id="collBar" class="hs-collection hs-panel" aria-labelledby="collShelfTitle"><div class="hs-collection-head"><span id="collShelfTitle"><span data-icon="layers"></span>Samling · <strong id="collCount">0</strong> unike kort</span><span class="hs-shelf-label">Korthylle</span></div><div id="collBarInner"><p id="dragInstruction" class="hs-muted hidden"></p><div id="collRow" class="hs-slots"></div><div class="hs-collection-footer"><span id="trashZone" class="hs-trash"><span data-icon="trash"></span>Dra hit for å fjerne</span><button class="hs-btn" id="clearAllBtn" onclick="confirmClearAll()">Tøm samlinga</button></div></div></section></div>
 <footer class="hs-footer">Heimsank<span>Rekn litt. Oppdag meir.</span></footer></main></div>
 <div id="revealModal" class="hs-overlay" role="dialog" aria-modal="true" aria-labelledby="revealTitle"><section class="hs-dialog hs-reveal"><span class="hs-eyebrow">Ei ny oppdaging</span><h2 id="revealTitle">Du fann eit nytt kort!</h2><div id="flipCard" class="hs-reveal-card"><div class="hs-card-back" aria-hidden="true"><img src="assets/kortbakside.png" alt=""></div><div id="revealFront"></div></div><p id="revealSub" role="status"></p><button id="revealBtn" class="hs-btn hs-primary" onclick="afterReveal()">Hald fram</button></section></div>
 <div id="cardModal" class="hs-overlay" role="dialog" aria-modal="true" aria-label="Kortdetaljar"><section class="hs-dialog hs-detail"><button class="hs-btn hs-close" onclick="closeCardModal()" aria-label="Lukk kortdetaljar"><span data-icon="x"></span></button><div id="modalCard"></div><nav class="hs-card-navigation" aria-label="Bla mellom kort"><button class="hs-btn" id="cardPrev" onclick="navigateCard(-1)">Førre</button><span id="cardPosition"></span><button class="hs-btn" id="cardNext" onclick="navigateCard(1)">Neste</button></nav></section></div>
@@ -39,17 +39,17 @@
 <script src="js/state.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/ui.js"></script>
-<script src="js/carddata.js"></script>
-<script src="js/progression.js"></script>
-<script src="js/storage.js"></script>
+<script src="js/carddata.js?v=1.53"></script>
+<script src="js/progression.js?v=1.53"></script>
+<script src="js/storage.js?v=1.53"></script>
 <script src="js/card-flames.js"></script>
-<script src="js/card-view.js"></script>
-<script src="js/cards.js"></script>
+<script src="js/card-view.js?v=1.52"></script>
+<script src="js/cards.js?v=1.53"></script>
 <script src="js/dragdrop.js"></script>
-<script src="js/game.js"></script>
+<script src="js/game.js?v=1.53"></script>
 <script src="js/modal.js"></script>
 <script src="js/showcase.js"></script>
-<script src="js/collection.js"></script>
-<script src="js/progression-ui.js"></script>
-<script src="js/main.js"></script>
+<script src="js/collection.js?v=1.53"></script>
+<script src="js/progression-ui.js?v=1.53"></script>
+<script src="js/main.js?v=1.53"></script>
 </body></html>

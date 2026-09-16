@@ -11,6 +11,16 @@ const CardData = (function () {
   const cache = {};
 
   const FILEPATH = /^https?:\/\/commons\.wikimedia\.org\/wiki\/Special:FilePath\//;
+  const CARD_ROOT = typeof document !== 'undefined' && document.currentScript
+    ? new URL('../kort/', document.currentScript.src).href
+    : './kort/';
+
+  function cardUrl(file) {
+    if (!CARD_ROOT.startsWith('http')) return CARD_ROOT + file;
+    const url = new URL(file, CARD_ROOT);
+    url.searchParams.set('v', '1.53');
+    return url.href;
+  }
 
   // Special:FilePath/<fil> -> filsida på Commons, der opphav og lisens står i sin heilskap
   function commonsFilePage(url) {
@@ -19,8 +29,8 @@ const CardData = (function () {
 
   function _load(cat) {
     return Promise.all([
-      fetch(`./kort/${cat.csv}`).then(r => { if (!r.ok) throw new Error('Kortdata'); return r.text(); }),
-      fetch(`./kort/${cat.rarity}`).then(r => { if (!r.ok) throw new Error('Sjeldsemd'); return r.json(); })
+      fetch(cardUrl(cat.csv)).then(r => { if (!r.ok) throw new Error('Kortdata'); return r.text(); }),
+      fetch(cardUrl(cat.rarity)).then(r => { if (!r.ok) throw new Error('Sjeldsemd'); return r.json(); })
     ]).then(([csv, rar]) => {
       const idF = cat.idField || 'scientist';
       const nameF = cat.nameField || 'scientistLabel';

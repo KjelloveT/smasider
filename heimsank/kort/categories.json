@@ -75,21 +75,6 @@
     "statLabel": "users"
   },
   {
-  "id": "videospill",
-  "label": "Videospel",
-  "unlockCost": 230,
-  "icon": "sparkles",
-  "csv": "videospill.csv",
-  "rarity": "rarity-videospill.json",
-  "idField": "item",
-  "nameField": "itemLabel",
-  "imageField": "image",
-  "articleField": "article",
-  "statField": "utgivelsesdato",
-  "statType": "year",
-  "statLabel": "calendar"
-},
-  {
     "id": "fly",
     "label": "Flytypar",
     "unlockCost": 80,
