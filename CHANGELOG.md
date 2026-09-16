@@ -3,6 +3,13 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.53] — 2026-09-16
+
+### Endra
+- **Heimsank-samlingane har ikkje lenger ei grense på seks kort.** Kvart nytt kort blir lagt rett i korthylla, og spelet trekkjer berre kort som ikkje alt finst i den valde samlinga. Eldre samlingar med dublettar blir rydda automatisk.
+- **Merka følgjer den nye samlarmodellen.** Dei gamle sekskortsmerka er erstatta med merke for unike kort, store kategorisamlingar, sjeldsemder, foil og komplette kategoriar.
+- **Videospel er fjerna som kategori.** Dei fire korta Emmanuel Swedenborg, Baked beans pizza, Lythronax og Valkyrjer er òg tekne ut fordi bileta ikkje kunne visast.
+
 ## [1.52] — 2026-09-15
 
 ### Lagt til
@@ -10,6 +17,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
 ### Endra
 - **Heimsank kjennest meir som eit samlarspel.** Knappar, kategoriar, innstillingsfelt, oppgåveflata, samlinga, merke og dialogar har fått skeive papirformer, kraftigare indigorammer, fargestriper, planetprikkar og rosa, turkise og gylne detaljar frå kortbaksida. Sjølve rekneoppgåva er framleis roleg og lett å lese. Kortbaksida ventar til spelaren trykkjer «Vis kortet», før det same kortet blir snudd og vist fram. Samlinga ligg alltid synleg som ei låg korthylle med ekte minikort, utan accordion.
+- **Kortframsidene har fått eit handlaga samlaralbum-uttrykk.** Rivne papirlag, måla rammer, reiseruter og stjerner aukar i farge og detalj etter sjeldsemd. Vanlege kort brukar lys beige i staden for den blå fargen til sjeldgjevne kort. Biletramma tilpassar seg breie, balanserte og ståande bilete, og viser heile motivet utan å kappe ansikt. Vanskegrad og rekneartar ligg samla nede til venstre, med «Les om» til høgre.
 - **Kategorioversikta viser vegen til neste opplåsing.** Opne kategoriar kjem fyrst, medan dei låste blir sorterte etter kor mange poeng som manglar. Prisen står i ei eiga myntbrikke, og den samla poengsummen har fått meir plass øvst.
 
 ## [1.51] — 2026-09-14

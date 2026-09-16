@@ -48,7 +48,8 @@ function fixture() {
     S.selCat = {id:'land', label:'Land'};
     S.phase = 'question'; S.paused = false;
     const testCard = {id:'Q1',catId:'land',rarity:'vanleg',name:'Test',stat:'42'};
-    S.idx = {Q1:testCard}; S.groups.vanleg = [testCard];
+    const secondCard = {id:'Q2',catId:'land',rarity:'vanleg',name:'Test 2',stat:'43'};
+    S.idx = {Q1:testCard,Q2:secondCard}; S.groups.vanleg = [testCard,secondCard];
     S.q = {ans:6}; S.correct = 5;
   `, context);
   return { context, node, counters, timers, close: () => closeReveal(),
@@ -78,30 +79,24 @@ test('Kortbaksida ventar på fyrste trykk før kortet blir tildelt', () => {
   assert.equal(f.counters.awards, 1);
   assert.equal(f.run('S.phase'), 'question');
 });
-test('Full samling kan byte til same kort og bevarer foil og oppteningsdata', () => {
+test('Samlinga kan vekse forbi seks kort utan å byte ut noko', () => {
   const f = fixture();
   f.run(`
-    S.collection = Array.from({length:6}, (_,i) => ({catId:'land',cardId:'Q1',foil:false,earnedAt:i}));
-    S.phase='feedback'; triggerCard();
-    S.pendingEntry.foil=true; S.pendingEntry.earnedAt=1234;
-    settleReveal(); replacePending(2);
+    S.collection = Array.from({length:6}, (_,i) => ({catId:'land',cardId:'Q'+(i+10),earnedAt:i}));
+    S.phase='feedback'; triggerCard(); settleReveal();
   `);
-  assert.equal(f.run('S.collection.length'), 6);
-  assert.equal(f.run('S.collection[2].foil'), true);
-  assert.equal(f.run('S.collection[2].earnedAt'), 1234);
+  assert.equal(f.run('S.collection.length'), 7);
   assert.equal(f.counters.awards, 1);
   assert.equal(f.run('S.phase'), 'question');
 });
-test('Kasting av nytt kort endrar ikkje dei seks eksisterande korta', () => {
+test('Eit kort som alt er i samlinga kan ikkje trekkjast på nytt', () => {
   const f = fixture();
   f.run(`
-    S.collection = Array.from({length:6}, (_,i) => ({catId:'land',cardId:'Q1',earnedAt:i}));
+    S.collection = [{catId:'land',cardId:'Q1',earnedAt:1}];
     S.phase='feedback'; triggerCard(); settleReveal(); discardPending();
   `);
-  assert.equal(f.run('S.collection.length'), 6);
-  assert.equal(f.run('S.collection[5].earnedAt'), 5);
-  assert.equal(f.run('S.pending'), null);
-  assert.equal(f.run('S.phase'), 'question');
+  assert.equal(f.run('S.collection.length'), 2);
+  assert.equal(f.run('S.collection[1].cardId'), 'Q2');
 });
 test('Retur til meny avbryt neste oppgåve og held opptente kort urørte', () => {
   const f = fixture();
@@ -121,7 +116,7 @@ test('Desimalsvar blir ikkje avrunda til eit rett heiltal', () => {
   assert.equal(f.run('S.correct'), 5);
 });
 
-test('Alle tolv kategoriar lastar med kreditering og uendra kort-ID-ar', async () => {
+test('Alle elleve kategoriar lastar med kreditering og uendra kort-ID-ar', async () => {
   const gameDir = path.join(__dirname, '..');
   const context = vm.createContext({
     console,
@@ -134,7 +129,8 @@ test('Alle tolv kategoriar lastar med kreditering og uendra kort-ID-ar', async (
     vm.runInContext(fs.readFileSync(path.join(gameDir, 'js', file), 'utf8'), context);
   }
   const categories = JSON.parse(fs.readFileSync(path.join(gameDir, 'kort/categories.json'), 'utf8'));
-  assert.equal(categories.length, 12);
+  assert.equal(categories.length, 11);
+  assert.ok(!categories.some(cat => cat.id === 'videospill'));
   for (const cat of categories) {
     context.category = cat;
     const cards = await vm.runInContext('CardData.loadCategoryCards(category)', context);

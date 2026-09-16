@@ -4,7 +4,7 @@
 
 const Progression = (function () {
   const GAME_KEY = 'heimsank';
-  const STATE_VERSION = 1;
+  const STATE_VERSION = 2;
 
   // Poeng per tent kort, etter sjeldsemd. Foil doblar.
   const POINTS = { vanleg: 1, sjeldgjevt: 4, segngjeten: 12, gudebore: 30 };
@@ -46,18 +46,20 @@ const Progression = (function () {
     // Opplåsing
     { id: 'oppdagar',    name: 'Oppdagar',     ico: 'key',      color: 'b-teal',   hint: 'Ha tre opne kategoriar' },
     { id: 'heile-verda', name: 'Heile verda',  ico: 'globe',    color: 'b-blue',   hint: 'Lås opp alle kategoriane' },
-    // Fullt hus
-    { id: 'fullhus',         name: 'Fullt hus',          ico: 'check',    color: 'b-yellow', hint: 'Fyll ein kategori (6 av 6)' },
-    { id: 'fullhus-vanleg',  name: 'Fullt hus — vanleg', ico: 'layers',   color: 'b-yellow', hint: 'Ein kategori med berre vanlege kort (6 av 6)' },
-    { id: 'fullhus-sjeld',   name: 'Fullt hus — sjeldgjevt', ico: 'layers', color: 'b-blue', hint: 'Ein kategori med berre sjeldgjevne kort (6 av 6)' },
-    { id: 'fullhus-segn',    name: 'Fullt hus — segngjeten', ico: 'layers', color: 'b-purple', hint: 'Ein kategori med berre segngjetne kort (6 av 6)' },
-    { id: 'fullhus-gude',    name: 'Fullt hus — gudebore',   ico: 'crown',  color: 'b-yellow', hint: 'Ein kategori med berre gudeborne kort (6 av 6)' },
-    { id: 'fullhus-foil',    name: 'Fullt hus — foil',       ico: 'sparkles', color: 'b-pink', hint: 'Ein kategori med berre foil-kort (6 av 6)' }
+    // Unike samlingar
+    { id: 'kategori10',      name: 'God start',           ico: 'layers',   color: 'b-teal',   hint: 'Samle 10 unike kort i éin kategori' },
+    { id: 'kategori25',      name: 'Full korthylle',      ico: 'layers',   color: 'b-yellow', hint: 'Samle 25 unike kort i éin kategori' },
+    { id: 'unik100',         name: 'Hundre unike',        ico: 'trophy',   color: 'b-purple', hint: 'Samle 100 ulike kort' },
+    { id: 'sjeldsamlar',     name: 'Sjeldsamlar',         ico: 'gem',      color: 'b-blue',   hint: 'Samle 10 sjeldgjevne kort' },
+    { id: 'segnsamlar',      name: 'Segnsamlar',          ico: 'sparkles', color: 'b-purple', hint: 'Samle 5 segngjetne kort' },
+    { id: 'gudesamlar',      name: 'Gudesamlar',          ico: 'crown',    color: 'b-yellow', hint: 'Samle 3 gudeborne kort' },
+    { id: 'foilsamlar',      name: 'Foilsamlar',          ico: 'sparkles', color: 'b-pink',   hint: 'Samle 10 unike foil-kort' },
+    { id: 'komplett',        name: 'Komplett samling',    ico: 'check',    color: 'b-yellow', hint: 'Finn kvart kort i ein kategori' }
   ];
 
-  // Vilkår per merke. ctx = { unlockedCount, fullCategories, totalCats, fullRarity, fullFoil }.
+  // Vilkår per merke. Samlingsmerka brukar no unike kort i lageret.
   const mh = (s) => s.stats.correctMidHard || 0;
-  const fr = (ctx, key) => !!(ctx.fullRarity && ctx.fullRarity[key]);
+  const rarityCount = (ctx, key) => ctx.rarityUnique?.[key] || 0;
   const PREDICATES = {
     fyrstekort:   (s) => s.stats.totalCardsEarned >= 1,
     samlar:       (s) => s.stats.totalCardsEarned >= 25,
@@ -82,12 +84,14 @@ const Progression = (function () {
     vrien500:     (s) => mh(s) >= 500,
     oppdagar:     (s, ctx) => ctx.unlockedCount >= 3,
     'heile-verda':(s, ctx) => ctx.totalCats > 0 && ctx.unlockedCount >= ctx.totalCats,
-    fullhus:      (s, ctx) => ctx.fullCategories >= 1,
-    'fullhus-vanleg': (s, ctx) => fr(ctx, 'vanleg'),
-    'fullhus-sjeld':  (s, ctx) => fr(ctx, 'sjeldgjevt'),
-    'fullhus-segn':   (s, ctx) => fr(ctx, 'segngjeten'),
-    'fullhus-gude':   (s, ctx) => fr(ctx, 'gudebore'),
-    'fullhus-foil':   (s, ctx) => !!ctx.fullFoil
+    kategori10:   (s, ctx) => (ctx.largestCategory || 0) >= 10,
+    kategori25:   (s, ctx) => (ctx.largestCategory || 0) >= 25,
+    unik100:      (s, ctx) => (ctx.totalUnique || 0) >= 100,
+    sjeldsamlar:  (s, ctx) => rarityCount(ctx, 'sjeldgjevt') >= 10,
+    segnsamlar:   (s, ctx) => rarityCount(ctx, 'segngjeten') >= 5,
+    gudesamlar:   (s, ctx) => rarityCount(ctx, 'gudebore') >= 3,
+    foilsamlar:   (s, ctx) => (ctx.foilUnique || 0) >= 10,
+    komplett:     (s, ctx) => (ctx.completedCategories || 0) >= 1
   };
 
   let state = null;
@@ -141,7 +145,17 @@ const Progression = (function () {
       console.error('Progression load failed:', e);
     }
 
-    if (stored && stored.version) return adopt(stored);
+    if (stored && stored.version) {
+      adopt(stored);
+      if (state.version < STATE_VERSION) {
+        state.version = STATE_VERSION;
+        state.unlocked = state.unlocked.filter(id => id !== 'videospill');
+        const retired = new Set(['fullhus', 'fullhus-vanleg', 'fullhus-sjeld', 'fullhus-segn', 'fullhus-gude', 'fullhus-foil']);
+        state.badges = state.badges.filter(id => !retired.has(id));
+        save();
+      }
+      return state;
+    }
 
     // Fyrste oppstart: bygg state og gjer eingongs-migrasjon frå samlingane.
     state = freshState();

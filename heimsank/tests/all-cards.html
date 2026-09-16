@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="nn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Heimsank — kontroll av alle kort</title>
+  <link rel="stylesheet" href="../../css/neobrutalisme.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/cards.css?v=1.52.2">
+  <style>
+    body { background:var(--hs-bg); color:var(--hs-text); }
+    main { width:min(100% - 32px,1500px); margin:auto; padding:32px 0 80px; }
+    .preview-head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:18px; margin-bottom:24px; }
+    .preview-head p { max-width:70ch; margin:.5rem 0 0; }
+    .preview-actions { display:flex; flex-wrap:wrap; gap:10px; }
+    .preview-nav { position:sticky; top:0; z-index:20; display:flex; gap:8px; overflow-x:auto; padding:12px 2px; background:color-mix(in srgb,var(--hs-bg) 92%,transparent); backdrop-filter:blur(10px); }
+    .preview-nav a { flex:0 0 auto; color:inherit; font-size:.82rem; font-weight:800; text-decoration:none; padding:8px 12px; border:2px solid var(--hs-line); border-radius:999px; background:var(--hs-surface); }
+    .preview-nav a:hover,.preview-nav a:focus-visible { border-color:var(--hs-violet); outline:none; }
+    .preview-category { scroll-margin-top:74px; padding:28px 0 38px; border-bottom:2px solid var(--hs-line); }
+    .preview-category-head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px; }
+    .preview-category h2 { margin:0; font-size:clamp(1.35rem,3vw,2rem); }
+    .preview-counts { display:flex; flex-wrap:wrap; gap:7px; }
+    .preview-count { padding:5px 9px; border:1.5px solid var(--hs-line); border-radius:999px; background:var(--hs-surface); font-size:.75rem; font-weight:800; }
+    .preview-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(155px,100%),1fr)); align-items:start; gap:24px 18px; }
+    .preview-card { min-width:0; }
+    .preview-card-id { margin:7px 2px 0; color:var(--hs-muted); font-size:.68rem; overflow-wrap:anywhere; }
+    .preview-status { padding:24px; border:2px dashed var(--hs-line); border-radius:18px; text-align:center; }
+    @media(max-width:520px) { main { width:min(100% - 20px,1500px); padding-top:20px; } .preview-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 12px; } }
+  </style>
+</head>
+<body class="hs-app" data-theme="lavender">
+  <main>
+    <header class="preview-head">
+      <div>
+        <h1>Alle kort i Heimsank</h1>
+        <p>Visuell kontroll av bilete, sjeldsemd, namn og faktalinjer. Korta er grupperte etter kategori og sorterte frå Gudebore til Vanleg.</p>
+      </div>
+      <div class="preview-actions">
+        <button class="hs-btn" id="themeBtn" type="button">Skift lyst/mørkt</button>
+        <a class="hs-btn" href="card-layout.html">Kontroller storleikar</a>
+      </div>
+    </header>
+    <nav class="preview-nav" id="categoryNav" aria-label="Hopp til kategori"></nav>
+    <p class="preview-status" id="status" role="status">Lastar alle korta …</p>
+    <div id="categories"></div>
+  </main>
+  <script src="../../js/vyrdepil-util.js"></script>
+  <script src="../../js/vyrdepil-icons.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/state.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/carddata.js?v=1.53"></script>
+  <script src="../js/card-flames.js"></script>
+  <script src="../js/card-view.js?v=1.52"></script>
+  <script>
+    const rarityOrder = ['gudebore','segngjeten','sjeldgjevt','vanleg'];
+    const sampleEntry = {difficulty:'Middels',operations:['×','÷'],foil:false};
+    const nav = document.getElementById('categoryNav');
+    const host = document.getElementById('categories');
+    const status = document.getElementById('status');
+
+    function countBadges(cards) {
+      const counts = Object.fromEntries(RO.map(rarity=>[rarity,0]));
+      cards.forEach(card=>counts[card.rarity]=(counts[card.rarity]||0)+1);
+      const wrap = Vy.el('div','preview-counts');
+      for (const rarity of rarityOrder) wrap.appendChild(Vy.el('span','preview-count',`${RL[rarity]}: ${counts[rarity]||0}`));
+      return wrap;
+    }
+
+    function renderCategory(cat,cards) {
+      const section = Vy.el('section','preview-category'); section.id='kategori-'+cat.id;
+      const head = Vy.el('header','preview-category-head');
+      head.append(Vy.el('h2','',`${cat.label} · ${cards.length} kort`),countBadges(cards));
+      const grid = Vy.el('div','preview-grid');
+      cards.sort((a,b)=>rarityOrder.indexOf(a.rarity)-rarityOrder.indexOf(b.rarity)||a.name.localeCompare(b.name,'nn'));
+      for (const card of cards) {
+        const item = Vy.el('div','preview-card');
+        item.append(HeimsankCards.render(card,sampleEntry,'collection'),Vy.el('p','preview-card-id',card.id));
+        grid.appendChild(item);
+      }
+      section.append(head,grid); host.appendChild(section);
+      const link = Vy.el('a','',cat.label); link.href='#'+section.id; nav.appendChild(link);
+    }
+
+    fetch('../kort/categories.json?v=1.53').then(response=>{
+      if(!response.ok) throw new Error('Kategoriar');
+      return response.json();
+    }).then(async categories=>{
+      const loaded = await Promise.all(categories.map(async cat=>({cat,cards:await CardData.loadCategoryCards(cat)})));
+      let total=0;
+      for(const item of loaded){total+=item.cards.length;renderCategory(item.cat,item.cards);}
+      status.textContent=`${total} kort i ${loaded.length} kategoriar. Alle bilete blir lasta etter kvart som du rullar.`;
+    }).catch(error=>{
+      console.error(error); status.textContent='Klarte ikkje å laste korta. Prøv å laste sida på nytt.';
+    });
+
+    document.getElementById('themeBtn').onclick=()=>{
+      document.body.dataset.theme=document.body.dataset.theme==='lavender'?'space':'lavender';
+    };
+  </script>
+</body>
+</html>

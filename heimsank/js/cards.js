@@ -28,9 +28,9 @@ function renderColl() {
     }
     row.appendChild(el);
   });
-  for (let i = S.collection.length; i < 6; i++) {
+  if (!S.collection.length) {
     const empty = Vy.el('div', 'hs-card-empty');
-    empty.append(HeimsankUI.icon('layers', 26), Vy.el('span', '', 'Di neste oppdaging'));
+    empty.append(HeimsankUI.icon('layers', 26), Vy.el('span', '', 'Di fyrste oppdaging ventar'));
     row.appendChild(empty);
   }
   document.getElementById('clearAllBtn').disabled = !S.collection.length || !!S.pending;
