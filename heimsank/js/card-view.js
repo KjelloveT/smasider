@@ -48,7 +48,16 @@ const HeimsankCards = (function () {
       Vy.el('span', 'hs-card-level', entry?.difficulty || (entry ? 'Ukjend nivå' : 'Ikkje opptent')),
       Vy.el('span', 'hs-card-operations', Array.isArray(entry?.operations) ? entry.operations.join(' ') : '—')
     );
-    meta.append(earned, Vy.el('span', 'hs-card-readmore', 'Les om'));
+    meta.appendChild(earned);
+    if (card.article && /^https?:\/\//.test(card.article)) {
+      const readMore = Vy.el('a', 'hs-card-readmore', 'Les om');
+      readMore.href = card.article;
+      readMore.target = '_blank';
+      readMore.rel = 'noopener noreferrer';
+      readMore.setAttribute('aria-label', 'Les om ' + card.name);
+      readMore.addEventListener('click', event => event.stopPropagation());
+      meta.appendChild(readMore);
+    }
     face.appendChild(meta);
     root.appendChild(face);
     if (variant !== 'collection' && ['segngjeten', 'gudebore'].includes(root.dataset.rarity)) {
@@ -84,8 +93,12 @@ const HeimsankCards = (function () {
     face.tabIndex = 0;
     face.setAttribute('role', 'button');
     face.setAttribute('aria-label', 'Sjå ' + card.name);
-    face.addEventListener('click', onOpen);
+    face.addEventListener('click', event => {
+      if (event.target.closest('a,button')) return;
+      onOpen();
+    });
     face.addEventListener('keydown', event => {
+      if (event.target.closest('a,button')) return;
       if (event.key !== 'Enter' && event.key !== ' ') return;
       event.preventDefault(); onOpen();
     });

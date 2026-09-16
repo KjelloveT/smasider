@@ -10,6 +10,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - **Merka følgjer den nye samlarmodellen.** Dei gamle sekskortsmerka er erstatta med merke for unike kort, store kategorisamlingar, sjeldsemder, foil og komplette kategoriar.
 - **Videospel er fjerna som kategori.** Dei fire korta Emmanuel Swedenborg, Baked beans pizza, Lythronax og Valkyrjer er òg tekne ut fordi bileta ikkje kunne visast.
 
+### Fiksa
+- **«Les om» på korta opnar no artikkelen.** Kort utan ei gyldig artikkellenkje viser ikkje teksten.
+
 ## [1.52] — 2026-09-15
 
 ### Lagt til
