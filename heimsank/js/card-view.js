@@ -20,15 +20,21 @@ const HeimsankCards = (function () {
     fallback.setAttribute('aria-hidden', 'true');
     picture.appendChild(fallback);
     const img = document.createElement('img');
-    img.src = card.img;
     img.alt = card.name;
     img.loading = variant === 'showcase' || variant === 'reveal' ? 'eager' : 'lazy';
+    const setImageShape = () => {
+      const ratio = img.naturalWidth && img.naturalHeight ? img.naturalWidth / img.naturalHeight : 1;
+      picture.dataset.shape = ratio > 1.35 ? 'wide' : ratio < .82 ? 'portrait' : 'balanced';
+    };
+    img.addEventListener('load', setImageShape, { once: true });
     img.addEventListener('error', () => {
       img.remove();
       picture.setAttribute('role', 'img');
       picture.setAttribute('aria-label', 'Bilete ikkje tilgjengeleg: ' + card.name);
     }, { once: true });
+    img.src = card.img;
     picture.appendChild(img);
+    if (img.complete && img.naturalWidth) setImageShape();
     face.appendChild(picture);
     const fact = Vy.el('div', 'hs-card-fact');
     fact.append(HeimsankUI.icon(card.statLabel || 'globe', 14), Vy.el('span', '', card.stat || ''));
@@ -37,8 +43,12 @@ const HeimsankCards = (function () {
     category.append(HeimsankUI.icon(HeimsankUI.categoryIcon(card.catId), 16), Vy.el('span', '', card.catLabel));
     face.appendChild(category);
     const meta = Vy.el('div', 'hs-card-meta');
-    meta.appendChild(Vy.el('span', 'hs-card-level', entry?.difficulty || (entry ? 'Ukjend nivå' : 'Ikkje opptent')));
-    meta.appendChild(Vy.el('span', 'hs-card-operations', Array.isArray(entry?.operations) ? entry.operations.join(' ') : '—'));
+    const earned = Vy.el('span', 'hs-card-earned');
+    earned.append(
+      Vy.el('span', 'hs-card-level', entry?.difficulty || (entry ? 'Ukjend nivå' : 'Ikkje opptent')),
+      Vy.el('span', 'hs-card-operations', Array.isArray(entry?.operations) ? entry.operations.join(' ') : '—')
+    );
+    meta.append(earned, Vy.el('span', 'hs-card-readmore', 'Les om'));
     face.appendChild(meta);
     root.appendChild(face);
     if (variant !== 'collection' && ['segngjeten', 'gudebore'].includes(root.dataset.rarity)) {

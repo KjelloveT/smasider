@@ -19,7 +19,7 @@ async function openCollectionViewer() {
       const section = Vy.el('section', 'hs-album-section');
       HeimsankUI.category(section, cat.id);
       const header = Vy.el('div', 'hs-album-heading');
-      header.append(Vy.el('h3', '', cat.label), Vy.el('span', '', items.length + ' av 6 kort'));
+      header.append(Vy.el('h3', '', cat.label), Vy.el('span', '', items.length + ' unike kort'));
       const row = Vy.el('div', 'hs-album-cards');
       items.forEach(({ card, entry }, index) => {
         const el = HeimsankCards.makeClickable(

@@ -10,34 +10,36 @@ const ProgressionUI = (function () {
   }
 
   // ---- Kontekst for merke-evaluering (kolleksjons-avhengig, async) ----
-  // Lastar kort-data berre for fulle samlingar (cacha) for å avgjere
-  // «fullt hus» av ein sjeldsemd / foil. Sjeldsemd ligg ikkje i lagra entry.
+  // Lastar kortdata for å telje unike kort og sjeldsemder i samlingane.
   async function computeCtx() {
     const cats = S.cats || [];
     const unlockedCount = cats.filter(c => Progression.isUnlocked(c.id)).length;
     let cols = {};
     try { cols = VyrdepilStorage.getAllCollections('heimsank') || {}; } catch (e) { /* best effort */ }
 
-    let fullCategories = 0;
-    const fullRarity = { vanleg: false, sjeldgjevt: false, segngjeten: false, gudebore: false };
-    let fullFoil = false;
+    let totalUnique = 0;
+    let largestCategory = 0;
+    let completedCategories = 0;
+    let foilUnique = 0;
+    const rarityUnique = { vanleg: 0, sjeldgjevt: 0, segngjeten: 0, gudebore: 0 };
 
     await Promise.all(cats.map(async cat => {
-      const entries = Array.isArray(cols[cat.id]) ? cols[cat.id] : [];
-      if (entries.length < 6) return;
-      fullCategories++;
-      if (entries.every(e => e.foil === true)) fullFoil = true;
+      const rawEntries = Array.isArray(cols[cat.id]) ? cols[cat.id] : [];
+      const seen = new Set();
+      const entries = rawEntries.filter(entry => entry?.cardId && !seen.has(entry.cardId) && seen.add(entry.cardId));
+      totalUnique += entries.length;
+      largestCategory = Math.max(largestCategory, entries.length);
+      foilUnique += entries.filter(entry => entry.foil === true).length;
       let cards;
       try { cards = await CardData.loadCategoryCards(cat); } catch (e) { return; }
       const byId = {};
       cards.forEach(c => { byId[c.id] = c; });
-      const rarities = entries.map(e => (byId[e.cardId] ? byId[e.cardId].rarity : null));
-      ['vanleg', 'sjeldgjevt', 'segngjeten', 'gudebore'].forEach(r => {
-        if (rarities.length === 6 && rarities.every(x => x === r)) fullRarity[r] = true;
-      });
+      const validEntries = entries.filter(entry => byId[entry.cardId]);
+      if (cards.length && validEntries.length === cards.length) completedCategories++;
+      validEntries.forEach(entry => rarityUnique[byId[entry.cardId].rarity]++);
     }));
 
-    return { unlockedCount, fullCategories, totalCats: cats.length, fullRarity, fullFoil };
+    return { unlockedCount, totalCats: cats.length, totalUnique, largestCategory, completedCategories, rarityUnique, foilUnique };
   }
 
   // Bygg kontekst, evaluer merke og vis toast for nye. Trygg å kalle ofte.
@@ -93,7 +95,7 @@ const ProgressionUI = (function () {
       const cost = Progression.getCost(cat);
       const need = Math.max(0, cost - Progression.getPoints());
       body.appendChild(Vy.el('span', 'hs-category-status', unlocked
-        ? (selected ? '✓ Vald · ' : '') + count + ' av 6 kort'
+        ? (selected ? '✓ Vald · ' : '') + count + (count === 1 ? ' kort' : ' kort')
         : (need ? 'Du treng ' + need + ' poeng til' : 'Klar til å låsast opp')));
       const button = Vy.el('button', 'hs-btn', unlocked ? (selected ? 'Vald' : 'Vel kategori') : 'Lås opp');
       if (unlocked) {

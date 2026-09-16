@@ -1,16 +1,29 @@
 // Kortpremie: pending vert oppretta før dialogen opnar; fasevernet gjev éi tildeling.
 function drawCard() {
-  let random = Math.random() * RW.reduce((a, b) => a + b, 0);
-  let rarity = RO[0];
-  for (let i = 0; i < RO.length; i++) { random -= RW[i]; if (random <= 0) { rarity = RO[i]; break; } }
-  const group = S.groups[rarity]?.length ? S.groups[rarity] : RO.map(r => S.groups[r]).find(g => g?.length);
-  return group?.[Math.floor(Math.random() * group.length)] || null;
+  const owned = new Set(S.collection.map(entry => entry.cardId));
+  const available = RO.map((rarity, index) => ({
+    rarity,
+    weight: RW[index],
+    cards: (S.groups[rarity] || []).filter(card => !owned.has(card.id))
+  })).filter(group => group.cards.length);
+  if (!available.length) return null;
+  let random = Math.random() * available.reduce((sum, group) => sum + group.weight, 0);
+  let picked = available[0];
+  for (const group of available) {
+    random -= group.weight;
+    if (random <= 0) { picked = group; break; }
+  }
+  return picked.cards[Math.floor(Math.random() * picked.cards.length)] || null;
 }
 function shouldHaveFoil() { return Math.random() < 0.05; }
 function triggerCard() {
   if (S.phase !== 'feedback') return;
   const card = drawCard();
-  if (!card) { S.correct = 0; updateProg(); nextQ(); return; }
+  if (!card) {
+    S.correct = 0; updateProg();
+    ProgressionUI.toast('Du har funne alle korta i denne kategorien!', 'trophy', 'good');
+    nextQ(); return;
+  }
   S.phase = 'reveal'; S.paused = true; S.pending = card;
   S.pendingEntry = {
     catId: card.catId, cardId: card.id,
@@ -49,17 +62,7 @@ function settleReveal() {
   S.correct = 0; updateProg();
   const points = ProgressionUI.awardCardPoints(S.pending, S.pendingEntry.foil);
   ProgressionUI.toast('Kortet gav ' + points + ' poeng!', 'coins', 'good');
-  if (S.collection.length < 6) {
-    S.collection.push(S.pendingEntry);
-    finishPending();
-  } else {
-    document.getElementById('pendingSlotMain').replaceChildren(HeimsankCards.render(S.pending, S.pendingEntry));
-    setupDraggable(document.querySelector('#pendingSlotMain .hs-card'), 'pending', 0);
-    document.getElementById('pendingCardName').textContent = S.pending.name;
-    document.getElementById('pendingRarityLabel').textContent = RL[S.pending.rarity];
-    document.getElementById('pendingArea').classList.remove('hidden');
-    renderColl(); ProgressionUI.evaluateAndAnnounce();
-    document.getElementById('pendingSwap').focus();
-  }
+  S.collection.push(S.pendingEntry);
+  finishPending();
 }
 document.addEventListener('DOMContentLoaded', init);

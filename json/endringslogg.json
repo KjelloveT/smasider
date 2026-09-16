@@ -2,6 +2,23 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.53",
+      "dato": "2026-09-16",
+      "samandrag": "Heimsank har fått uavgrensa samlingar utan dublettar.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Heimsank",
+          "tekst": "Samlinga har ikkje lenger ei grense på seks kort, og eit kort du alt eig kan ikkje trekkjast på nytt. Merka er tilpassa unike og komplette samlingar."
+        },
+        {
+          "t": "endra",
+          "kva": "Heimsank-korta",
+          "tekst": "Videospel-kategorien og fire kort utan fungerande bilete er fjerna."
+        }
+      ]
+    },
+    {
       "versjon": "1.52",
       "dato": "2026-09-15",
       "samandrag": "Heimsank har fått ei ny kortbakside, logo og eit meir leikent samlarunivers.",
@@ -15,6 +32,11 @@
           "t": "endra",
           "kva": "Heimsank",
           "tekst": "Knappar, kategoriar, innstillingar, oppgåveflate, merke og dialogar har fått eit meir leikent formspråk frå kortbaksida. Samlinga er ei alltid synleg korthylle med minikort."
+        },
+        {
+          "t": "endra",
+          "kva": "Heimsank-korta",
+          "tekst": "Kortframsidene har fått rivne papirlag, måla rammer, reiseruter og stjerner etter sjeldsemd. Bileta blir viste heile i ei ramme som tilpassar seg motivforma."
         },
         {
           "t": "endra",

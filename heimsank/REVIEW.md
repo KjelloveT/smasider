@@ -5,9 +5,9 @@ spelreglar, prisar og VyrdepilStorage-format er vidareførte.
 
 ## Lokal kontroll
 
-- `node --test heimsank/tests/flow.test.cjs`: seks målretta testar for dobbeltsvar,
-  premie via Escape, byte til same kort med foil, kasting, retur til meny og
-  lasting av alle tolv kategoriar med biletkreditering.
+- `node --test heimsank/tests/flow.test.cjs`: sju målretta testar for dobbeltsvar,
+  premie via Escape, uavgrensa samling utan dublettar, retur til meny og
+  lasting av alle elleve kategoriar med biletkreditering.
 - Alle JavaScript-filene blir syntakskontrollerte med `node --check`.
 - Visuell kontroll og speltest i den innebygde nettlesaren; Chrome-tilkopling
   er ikkje tilgjengeleg i denne arbeidsøkta.
@@ -27,8 +27,8 @@ https://icy-water-0487ac303-67.westeurope.2.azurestaticapps.net/heimsank/.
 
 ## Kortvising og kategoriomslag
 
-- Same kort blir kontrollert i fire breidder på `tests/card-layout.html`. Testen
-  måler sideforhold og den relative plasseringa til tekst, bilete og symbol.
+- Kortvisinga er visuelt kontrollert i spelet, premieopninga, samlinga og
+  detaljdialogen på mobil og stor skjerm.
 - Kategoriar med opptente kort brukar det fyrste kortet i samlinga som eit
   heildekkjande omslagsbilete. Utan eit opptent kort står kategoriikonet att.
 - Segngjetne og gudeborne kort har lokal WebGL-dekorasjon berre over toppen.
@@ -38,7 +38,7 @@ https://icy-water-0487ac303-67.westeurope.2.azurestaticapps.net/heimsank/.
 ## Samordning
 
 - Oppdatert med main etter PR #65, #66 og #68; redesignen brukar versjon 1.51.
-- Alle tolv kategoriar og biletkreditering er bevarte. Den felles kortkomponenten
+- Alle elleve kategoriar og biletkreditering er bevarte. Den felles kortkomponenten
   viser `imgAuthor`, `imgLicense`, `imgLicenseUrl` og `imgPage` i detaljvisinga.
 - Poengfiksen og synkronisering mellom faner frå PR #68 er bevarte.
 - Kategoritalet blir lese frå data; dei tre nye kategoriane har eigne fargar og ikon.
