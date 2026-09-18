@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.54] — 2026-09-18
+
+### Fiksa
+- **Duldord har fått ei meir skulevenleg fasitliste.** Fire ord som kunne verke upassande, er bytte ut med «gøyme», «vaken», «trøst» og «smile». Dagsrekkjefølgja er uendra.
+
 ## [1.53] — 2026-09-16
 
 ### Endra
