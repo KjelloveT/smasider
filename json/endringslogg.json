@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.54",
+      "dato": "2026-09-18",
+      "samandrag": "Duldord har fått ei meir skulevenleg fasitliste.",
+      "punkt": [
+        {
+          "t": "fiksa",
+          "kva": "Duldord",
+          "tekst": "Fire fasitord som kunne verke upassande, er bytte ut med «gøyme», «vaken», «trøst» og «smile», utan å endre dagsrekkjefølgja."
+        }
+      ]
+    },
+    {
       "versjon": "1.53",
       "dato": "2026-09-16",
       "samandrag": "Heimsank har fått uavgrensa samlingar utan dublettar.",
