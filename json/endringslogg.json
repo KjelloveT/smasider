@@ -13,6 +13,11 @@
         },
         {
           "t": "endra",
+          "kva": "Duldord-skilt",
+          "tekst": "Skarpare infoskilt, sentrert tekst på pilene og arkiv, statistikk og hjelp på infoskiltet."
+        },
+        {
+          "t": "endra",
           "kva": "Duldord-hjelp",
           "tekst": "Den korte forklaringa står på velkomstskiltet, og den utførlege hjelpa opnar seg når spelaren vel henne."
         }

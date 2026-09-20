@@ -150,46 +150,86 @@
   max-width: 1050px;
   margin: 0 auto;
 }
-.dd-topbar {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin: 0;
+.dd-play { grid-column: 1; grid-row: 1; min-width: 0; }
+.dd-board-stage { position: relative; padding-top: 85px; }
+.dd-day-signpost {
+  position: absolute;
+  z-index: 2;
+  isolation: isolate;
+  top: 0;
+  left: clamp(42px, 9%, 84px);
+  width: 220px;
+  height: 90px;
 }
-.dd-daylabel { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.dd-day-signpost::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 25px;
+  bottom: -6px;
+  left: 41px;
+  width: 14px;
+  border: 3px solid #142820;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #3b2515, #98663a 28%, #784b29 75%, #372212);
+}
+.dd-daynum-mount {
+  position: absolute;
+  z-index: 3;
+  isolation: isolate;
+  top: 68px;
+  right: 25px;
+}
 .dd-daynum {
   display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 7px 16px;
-  background: #8a5632;
-  color: #fff;
-  border: 3px solid var(--dd-frame);
-  border-radius: 7px;
-  box-shadow: 4px 4px 0 var(--dd-shadow);
-  font-family: 'Arial Black', system-ui, sans-serif;
-  font-size: clamp(.9rem, 1.5vw, 1.1rem);
-  font-weight: 900;
-}
-.dd-daynum-archive { background: #305b45; }
-.dd-daydate {
-  display: inline-flex;
+  position: relative;
+  z-index: 1;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  min-width: 146px;
-  padding: 7px 27px 7px 14px;
+  min-height: 42px;
+  padding: 6px 27px;
+  background: radial-gradient(circle at 11px 50%, #2e2118 0 2px, transparent 3px),
+              radial-gradient(circle at calc(100% - 11px) 50%, #2e2118 0 2px, transparent 3px),
+              linear-gradient(#fffdf5, #f9f1df);
+  color: #182b23;
+  border: 4px solid #142820;
+  border-radius: 4px;
+  font-family: 'Arial Black', system-ui, sans-serif;
+  font-size: clamp(.83rem, 1.3vw, 1rem);
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+}
+.dd-daynum-mount::before,
+.dd-daynum-mount::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -10px;
+  bottom: -10px;
+  width: 12px;
+  border: 3px solid #142820;
+  border-radius: 3px;
+  background: #79502d;
+}
+.dd-daynum-mount::before { left: 15px; }
+.dd-daynum-mount::after { right: 15px; }
+.dd-daydate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 51px;
+  /* Pileflata har rett spiss; 18px på høgre side sentrerer teksten på planken. */
+  padding: 0 18px 0 0;
   color: #fff9e9;
   background: url('../assets/informasjonspil.png') center / 100% 100% no-repeat;
   font-family: 'Arial Black', system-ui, sans-serif;
-  font-size: .86rem;
+  font-size: .98rem;
   font-weight: 900;
+  line-height: 1;
   white-space: nowrap;
 }
-.dd-actions { display: flex; gap: 8px; }
 .dd-action,
 .dd-page .dd-iconbtn {
   display: inline-flex;
@@ -202,18 +242,17 @@
   border-radius: 8px;
   background: var(--dd-paper);
   color: var(--dd-ink);
-  box-shadow: 3px 3px 0 var(--dd-shadow);
+  box-shadow: none;
   font: 800 .9rem 'Segoe UI', system-ui, sans-serif;
   cursor: pointer;
 }
 .dd-action:hover,
 .dd-page .dd-iconbtn:hover { background: var(--dd-gold); color: #182b23; }
 .dd-action:active,
-.dd-page .dd-iconbtn:active { transform: translate(3px, 3px); box-shadow: none; }
+.dd-page .dd-iconbtn:active { transform: scale(.97); }
 .dd-action svg,
 .dd-page .dd-iconbtn svg { width: 18px; height: 18px; flex: 0 0 auto; }
 
-.dd-play { grid-column: 1; min-width: 0; }
 .dd-message {
   min-height: 1.2em;
   color: var(--dd-ink);
@@ -224,7 +263,7 @@
   color: var(--dd-ink);
   border: 3px solid var(--dd-frame);
   border-radius: 8px;
-  box-shadow: 3px 3px 0 var(--dd-shadow);
+  box-shadow: none;
 }
 .dd-board-frame,
 .dd-keyboard-frame {
@@ -232,14 +271,13 @@
   background: var(--dd-paper);
   border: 5px solid var(--dd-frame);
   border-radius: 12px;
-  box-shadow: 7px 7px 0 var(--dd-shadow);
+  box-shadow: none;
 }
 .dd-board-frame {
   padding: clamp(12px, 1.4vw, 18px) 20px clamp(12px, 1.4vw, 18px) 72px;
 }
 .dd-board {
   --dd-size: min(58px, calc((100vw - 92px - 4 * var(--dd-gap)) / 5));
-  counter-reset: dd-step;
   position: relative;
   width: fit-content;
   margin: 0 auto;
@@ -255,24 +293,26 @@
   border: 2px solid #142820;
   border-radius: 3px;
 }
-.dd-row { position: relative; counter-increment: dd-step; }
-.dd-row::after {
+.dd-row { position: relative; }
+.dd-step-sign {
   position: absolute;
   top: 2px;
   height: calc(var(--dd-size) - 4px);
-}
-.dd-row::after {
-  content: counter(dd-step);
   right: calc(100% + 12px);
   width: 51px;
-  display: grid;
-  place-items: center;
-  padding-right: 8px;
   background: url('../assets/stegpil.png') center / 100% 100% no-repeat;
   color: #182b23;
   font-family: 'Arial Black', system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 900;
+}
+.dd-step-number {
+  position: absolute;
+  top: 50%;
+  /* Midten av den flate delen av biletpila, målt på 320–1024px skjerm. */
+  left: 44%;
+  transform: translate(-50%, -50%);
+  line-height: 1;
 }
 .dd-tile {
   background: var(--dd-paper-alt);
@@ -312,16 +352,18 @@
   background: var(--dd-paper);
   border: 2px solid var(--dd-frame);
   border-radius: 7px;
+  box-shadow: none;
   font-weight: 700;
 }
 
-/* Den faste informasjonstavla er nyttig på desktop og tek ikkje plass på mobil. */
-.dd-guide { grid-column: 2; grid-row: 2; }
+/* Tavla er skoren i topp, ein repeterbar midtdel og botn i same målestokk.
+   600 × 376 biletpikslar blir 300 × 188 CSS-pikslar utan skeiv skalering. */
+.dd-guide { grid-column: 2; grid-row: 1; }
 .dd-guide-board {
   position: relative;
   isolation: isolate;
-  min-height: 520px;
-  padding: 65px 52px 100px;
+  min-height: 580px;
+  padding: 70px 38px 92px;
   color: #182b23;
 }
 .dd-sign-art-vertical {
@@ -329,9 +371,9 @@
   flex-direction: column;
 }
 .dd-sign-art-vertical .dd-sign-top,
-.dd-sign-art-vertical .dd-sign-bottom { flex: 0 0 120px; }
+.dd-sign-art-vertical .dd-sign-bottom { flex: 0 0 188px; }
 .dd-sign-art-vertical .dd-sign-top { background: url('../assets/info-planke-topp.png') center / 100% 100% no-repeat; }
-.dd-sign-art-vertical .dd-sign-middle { flex: 1 1 auto; background: url('../assets/info-planke-midt.png') center / 100% auto no-repeat round; }
+.dd-sign-art-vertical .dd-sign-middle { flex: 1 1 auto; background: url('../assets/info-planke-midt.png') center top / 100% auto repeat-y; }
 .dd-sign-art-vertical .dd-sign-bottom { background: url('../assets/info-planke-botn.png') center / 100% 100% no-repeat; }
 .dd-guide-content { position: relative; z-index: 1; }
 .dd-guide h2 {
@@ -351,8 +393,28 @@
 .dd-guide .dd-guide-privacy {
   border-top: 2px solid #182b23;
   padding-top: 12px;
-  margin-bottom: 0;
+  margin-bottom: 18px;
   font-size: .8rem;
+}
+.dd-guide-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+}
+.dd-guide-actions [hidden] { display: none; }
+.dd-guide-actions #archiveBtn { grid-column: 1 / -1; }
+.dd-guide-actions .dd-iconbtn { grid-column: 1 / -1; justify-self: start; }
+.dd-page .dd-guide-actions .dd-action {
+  min-width: 0;
+  min-height: 42px;
+  padding: 7px 8px;
+  font-size: .8rem;
+  line-height: 1.15;
+}
+.dd-page .dd-guide-actions .dd-iconbtn {
+  width: 42px;
+  min-height: 42px;
+  padding: 6px;
 }
 
 /* Spelstatus, dialogar og arkiv skal sjå ut som same verda. */
@@ -364,7 +426,7 @@
   color: var(--dd-ink);
   border-color: var(--dd-frame);
   border-radius: 12px;
-  box-shadow: 7px 7px 0 var(--dd-shadow);
+  box-shadow: none;
 }
 .dd-page .modal3 .modal-header {
   background: var(--dd-rust);
@@ -379,7 +441,7 @@
 .dd-page .modal-body .btn:hover,
 .dd-page .modal-close:hover { background: var(--dd-gold); color: #182b23; }
 .dd-page .dd-stat,
-.dd-page .dd-archive-day { background: var(--dd-paper-alt); color: var(--dd-ink); border-color: var(--dd-frame); border-radius: 7px; }
+.dd-page .dd-archive-day { background: var(--dd-paper-alt); color: var(--dd-ink); border-color: var(--dd-frame); border-radius: 7px; box-shadow: none; }
 .dd-page .dd-archive-day.dd-archive-won { background: var(--dd-correct); color: #fff; }
 .dd-page .dd-archive-day.dd-archive-lost { background: var(--dd-present); color: #fff; }
 .dd-page .dd-archive-day.dd-archive-open { background: var(--dd-gold); color: #182b23; }
@@ -395,6 +457,8 @@
 }
 
 @media (min-width: 901px) {
+  .dd-guide:has(#archiveBtn:not([hidden])) .dd-guide-board { min-height: 625px; }
+  .dd-guide:has(#archiveBtn:not([hidden])):has(.dd-guide-actions .dd-iconbtn:not([hidden])) .dd-guide-board { min-height: 690px; }
   #hero.dd-welcome.dd-hero-gone {
     max-height: 88px;
     opacity: 1;
@@ -409,8 +473,38 @@
 
 @media (max-width: 900px) {
   .dd-layout { grid-template-columns: minmax(0, 1fr); max-width: 720px; }
-  .dd-topbar, .dd-play { grid-column: 1; }
-  .dd-guide { display: none; }
+  .dd-guide { position: relative; isolation: isolate; grid-column: 1; grid-row: 1; width: min(100%, 430px); margin: 0 auto; }
+  .dd-play { grid-column: 1; grid-row: 2; }
+  .dd-sign-art-vertical { display: none; }
+  .dd-guide-board {
+    z-index: 1;
+    min-height: 0;
+    padding: 16px 24px 18px;
+    background: radial-gradient(circle at 14px 12px, #33231a 0 2px, transparent 3px),
+                radial-gradient(circle at calc(100% - 14px) 12px, #33231a 0 2px, transparent 3px),
+                repeating-linear-gradient(0deg, #fffaf0 0 17px, #f9f2e2 18px, #fffaf0 20px);
+    border: 4px solid #142820;
+    border-radius: 5px;
+  }
+  .dd-guide::before,
+  .dd-guide::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: -11px;
+    bottom: -11px;
+    width: 15px;
+    background: #79502d;
+    border: 3px solid #142820;
+    border-radius: 3px;
+  }
+  .dd-guide::before { left: 20px; }
+  .dd-guide::after { right: 20px; }
+  .dd-guide-kicker,
+  .dd-guide-content > p,
+  .dd-guide-legend { display: none; }
+  .dd-guide h2 { margin: 0 0 12px; text-align: center; font-size: 1.15rem; }
+  .dd-guide-actions { max-width: 320px; margin: 0 auto; }
 }
 
 @media (max-width: 560px) {
@@ -423,17 +517,16 @@
   .dd-welcome-board p { font-size: .75rem; line-height: 1.25; }
   .dd-wordmark span { width: 20px; border-width: 2px; font-size: .7rem; }
   .dd-layout { gap: 10px; }
-  .dd-topbar { flex-wrap: nowrap; }
-  .dd-daylabel { flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; }
-  .dd-daynum { min-height: 36px; padding: 4px 9px; font-size: .8rem; }
-  .dd-daydate { min-width: 112px; min-height: 35px; padding: 4px 20px 4px 9px; font-size: .7rem; }
-  .dd-actions { gap: 5px; }
-  .dd-action-label { display: none; }
-  .dd-action, .dd-page .dd-iconbtn { width: 42px; min-height: 42px; padding: 6px; }
-  .dd-board-frame { padding: 12px 6px 12px 39px; border-width: 4px; }
+  .dd-board-stage { padding-top: 70px; }
+  .dd-day-signpost { left: 20px; width: 188px; height: 75px; }
+  .dd-day-signpost::before { left: 35px; }
+  .dd-daydate { width: 188px; height: 41px; padding-right: 15px; font-size: .82rem; }
+  .dd-daynum-mount { top: 56px; right: 10px; }
+  .dd-daynum { min-height: 36px; padding: 5px 22px; font-size: .8rem; }
+  .dd-board-frame { padding: 25px 6px 12px 39px; border-width: 4px; }
   .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
   .dd-board::before { left: -28px; width: 10px; }
-  .dd-row::after { right: calc(100% + 8px); width: 29px; font-size: .78rem; padding-right: 4px; }
+  .dd-step-sign { right: calc(100% + 8px); width: 29px; font-size: .78rem; }
   .dd-keyboard-frame { padding: 10px 6px; margin-top: 10px; border-width: 4px; }
   .dd-keyrow { gap: 3px; }
   .dd-key { min-width: 0; height: clamp(40px, 9vw, 48px); font-size: clamp(.72rem, 2.7vw, .9rem); border-width: 2px; }
@@ -445,7 +538,6 @@
 @media (max-width: 360px) {
   .dd-wordmark { display: none; }
   .dd-welcome-board p { font-size: .78rem; }
-  .dd-daydate { font-size: .68rem; }
   .dd-keyboard-frame { padding-inline: 4px; }
 }
 

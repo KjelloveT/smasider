@@ -7,6 +7,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
 ### Endra
 - **Duldord har fått ei ny turstidrakt.** Eit lokalt lagra skogsbilete, heile treplankar med spikrar over stolpane, treskilt som kan vekse i breidda og høgda, biletlaga piler for dag og steg, og mjukt avrunda spelruter og tastar gjer ordspelet til ein liten tur gjennom seks freistnader. Bokstavrutene og tastane er utan slagskugge. Utforminga tilpassar seg både mobil og brei skjerm, og spel, arkiv og statistikk fungerer som før.
+- **Skilta er skjerpa og omplasserte.** Infoskiltet brukar no biletdelar i rett proporsjon og høgare oppløysing. Dagens ord står på ei større pil med stolpe ned til spelebrettet, dagnummeret ligg på eit lite treskilt over ramma, og tala er sentrerte på stegpila. Arkiv, statistikk og hjelp ligg på infoskiltet. Dei vanlege boksane har ikkje lenger tjukk slagskugge.
 - **Hjelpa opnar seg når spelaren ber om henne.** Den korte forklaringa står no på velkomstskiltet, medan utførleg hjelp framleis finst på hjelpeknappen.
 
 ## [1.54] — 2026-09-18
