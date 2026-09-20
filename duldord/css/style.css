@@ -13,24 +13,6 @@
   --dd-gap: clamp(4px, 1.2vw, 8px);
 }
 
-/* ── Hero ────────────────────────────────────────────────────────────────── */
-/* Heroen står der når sida opnar, men vik unna med ein gong spelaren skriv,
-   så brett og tastatur får plass på ein mobilskjerm. */
-#hero {
-  transition: max-height .45s ease, opacity .3s ease, margin-bottom .45s ease,
-              padding .45s ease, border-width .45s ease;
-  max-height: 400px;
-  overflow: hidden;
-}
-#hero.dd-hero-gone {
-  max-height: 0;
-  opacity: 0;
-  margin-bottom: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  border-width: 0;
-}
-
 /* ── Topprad ─────────────────────────────────────────────────────────────── */
 .dd-topbar {
   display: flex;

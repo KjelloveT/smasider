@@ -20,7 +20,6 @@
     current: '',
     status: 'playing',
     busy: false,       // sann medan rutene snur
-    heroHidden: false,
     yearOver: false    // årgangen er brukt opp; då finst det ingen «i dag»
   };
 
@@ -50,12 +49,6 @@
   }
 
   // ── skjermbilete ─────────────────────────────────────────────────────────
-  function hideHero() {
-    if (state.heroHidden) return;
-    state.heroHidden = true;
-    el.hero.classList.add('dd-hero-gone');
-  }
-
   function updateHeader() {
     const isToday = !state.yearOver && state.dayIndex === state.todayIndex;
     el.dayNum.textContent = `Dag ${state.dayIndex + 1}`;
@@ -105,7 +98,6 @@
     repaint();
     say('');
 
-    if (state.guesses.length) hideHero();
 
     if (state.status === 'won') {
       say(`Du fann ordet på ${state.guesses.length}.`, true);
@@ -127,7 +119,6 @@
     }
     if (state.current.length >= S.WORD_LENGTH) return;
 
-    hideHero();
     state.current += key;
     Board.render(state.guesses, state.current, state.answer);
   }
@@ -195,7 +186,6 @@
   function showArchive() {
     Archive.render(el.archiveGrid, state.todayIndex, index => {
       closeModal(el.archiveOverlay);
-      hideHero();
       hideNotice();
       openDay(index);
     });
