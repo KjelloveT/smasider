@@ -3,6 +3,12 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.55] — 2026-09-20
+
+### Endra
+- **Duldord har fått ei ny turstidrakt.** Eit lokalt lagra skogsbilete, eit velkomstskilt, nummererte turskilt langs gjettebrettet og ei vegvisartavle gjer ordspelet til ein liten tur gjennom seks freistnader. Utforminga tilpassar seg både mobil og brei skjerm, og spel, arkiv og statistikk fungerer som før.
+- **Hjelpa opnar seg når spelaren ber om henne.** Den korte forklaringa står no på velkomstskiltet, medan utførleg hjelp framleis finst på hjelpeknappen.
+
 ## [1.54] — 2026-09-18
 
 ### Fiksa

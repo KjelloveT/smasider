@@ -1,0 +1,439 @@
+/* Duldord – turstiutgåva. Berre utsjånaden bur her; spel og lagring ligg i js/. */
+
+.dd-page {
+  --dd-paper: #fff9e9;
+  --dd-paper-alt: #fffdf5;
+  --dd-ink: #182b23;
+  --dd-frame: #142820;
+  --dd-shadow: #0b2018;
+  --dd-rust: #a83f2d;
+  --dd-gold: #e4ad58;
+  --dd-wood: #684327;
+  --dd-gap: clamp(4px, 0.8vw, 8px);
+  min-height: 100vh;
+  background: #24573b url('../assets/skogssti.jpg') center top / cover fixed no-repeat;
+  color: var(--dd-ink);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Dei sju mørke temaa får mørke papirflater. Skiltet i toppmenyen er alltid
+   skoggrønt, medan resten av sida følgjer temavalet. */
+.dd-page:is([data-theme="hacker"], [data-theme="dracula"], [data-theme="neon"],
+            [data-theme="cyberpunk"], [data-theme="midnight"], [data-theme="slate"],
+            [data-theme="space"]) {
+  --dd-paper: #203a30;
+  --dd-paper-alt: #29453a;
+  --dd-ink: #fff9e9;
+  --dd-frame: #fff9e9;
+  --dd-shadow: #071c14;
+  --dd-gold: #e4ad58;
+}
+
+.dd-page neo-header {
+  --accent: #a83f2d;
+  --accent2: #214c37;
+  --surface: #fff9e9;
+  --text: #182b23;
+  --border: #142820;
+  --shadow: #0b2018;
+  --text-on-accent: #ffffff;
+}
+
+.dd-page-wrapper { min-height: calc(100vh - 72px); }
+.dd-main {
+  max-width: 1440px;
+  padding: clamp(18px, 3vw, 32px) clamp(12px, 3vw, 32px) 48px;
+  overflow: visible;
+}
+
+/* Velkomstskiltet blir lite på desktop og forsvinn på mobil når spelet byrjar. */
+#hero.dd-welcome {
+  display: flex;
+  justify-content: center;
+  max-height: 185px;
+  margin: 0 auto clamp(12px, 1.8vw, 20px);
+  overflow: hidden;
+  transition: max-height .35s ease, opacity .25s ease, margin .35s ease;
+}
+#hero.dd-welcome.dd-hero-gone {
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+  border: 0;
+  padding: 0;
+}
+.dd-welcome-board {
+  position: relative;
+  width: min(100%, 740px);
+  margin: 12px 12px 10px;
+  padding: 10px clamp(18px, 3vw, 30px) 12px;
+  background: var(--dd-paper);
+  color: var(--dd-ink);
+  border: 5px solid var(--dd-frame);
+  box-shadow: 8px 8px 0 var(--dd-shadow);
+  text-align: center;
+}
+.dd-welcome-board::before {
+  content: '';
+  position: absolute;
+  top: -17px;
+  left: -12px;
+  width: calc(100% + 24px);
+  height: 14px;
+  background: var(--dd-wood);
+  border: 4px solid var(--dd-frame);
+  transform: skewX(-13deg);
+}
+.dd-welcome-kicker,
+.dd-guide-kicker {
+  display: inline-block;
+  color: var(--dd-rust);
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.dd-welcome-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2vw, 24px);
+  margin: 2px 0 4px;
+}
+.dd-welcome-heading h1 {
+  color: var(--dd-ink);
+  font-family: 'Arial Black', 'Segoe UI', system-ui, sans-serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -.055em;
+  line-height: 1.1;
+  margin: 0;
+}
+.dd-welcome-board p {
+  max-width: 60ch;
+  margin: 0 auto;
+  font-size: clamp(.88rem, 1.5vw, 1rem);
+  font-weight: 650;
+  line-height: 1.45;
+}
+.dd-wordmark { display: flex; gap: 2px; transform: rotate(-5deg); }
+.dd-wordmark span {
+  display: grid;
+  place-items: center;
+  width: clamp(24px, 3vw, 34px);
+  aspect-ratio: 1;
+  background: var(--dd-paper-alt);
+  border: 3px solid var(--dd-frame);
+  box-shadow: 2px 2px 0 var(--dd-shadow);
+  color: var(--dd-ink);
+  font-family: 'Arial Black', system-ui, sans-serif;
+  font-size: clamp(.8rem, 1.5vw, 1.1rem);
+}
+.dd-wordmark span:nth-child(2) { transform: translateY(-5px); }
+.dd-wordmark span:nth-child(3) { transform: translateY(3px); }
+
+/* Spelebrettet og vegvisartavla er to sjølvstendige flater på brei skjerm. */
+.dd-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 300px);
+  gap: clamp(12px, 1.5vw, 20px);
+  align-items: start;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+.dd-topbar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.dd-daylabel { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.dd-daynum {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 7px 16px;
+  background: var(--dd-rust);
+  color: #fff;
+  border: 3px solid var(--dd-frame);
+  box-shadow: 4px 4px 0 var(--dd-shadow);
+  font-family: 'Arial Black', system-ui, sans-serif;
+  font-size: clamp(.9rem, 1.5vw, 1.1rem);
+  font-weight: 900;
+}
+.dd-daynum-archive { background: #305b45; }
+.dd-daydate {
+  color: var(--dd-ink);
+  background: var(--dd-paper);
+  border: 3px solid var(--dd-frame);
+  box-shadow: 3px 3px 0 var(--dd-shadow);
+  padding: 7px 12px;
+  font-weight: 800;
+}
+.dd-actions { display: flex; gap: 8px; }
+.dd-action,
+.dd-page .dd-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 8px 13px;
+  border: 3px solid var(--dd-frame);
+  background: var(--dd-paper);
+  color: var(--dd-ink);
+  box-shadow: 3px 3px 0 var(--dd-shadow);
+  font: 800 .9rem 'Segoe UI', system-ui, sans-serif;
+  cursor: pointer;
+}
+.dd-action:hover,
+.dd-page .dd-iconbtn:hover { background: var(--dd-gold); color: #182b23; }
+.dd-action:active,
+.dd-page .dd-iconbtn:active { transform: translate(3px, 3px); box-shadow: none; }
+.dd-action svg,
+.dd-page .dd-iconbtn svg { width: 18px; height: 18px; flex: 0 0 auto; }
+
+.dd-play { grid-column: 1; min-width: 0; }
+.dd-message {
+  min-height: 1.2em;
+  color: var(--dd-ink);
+  margin: 0 0 8px;
+}
+.dd-message.dd-message-on {
+  background: var(--dd-paper);
+  color: var(--dd-ink);
+  border: 3px solid var(--dd-frame);
+  box-shadow: 3px 3px 0 var(--dd-shadow);
+}
+.dd-board-frame,
+.dd-keyboard-frame {
+  width: 100%;
+  background: var(--dd-paper);
+  border: 5px solid var(--dd-frame);
+  box-shadow: 7px 7px 0 var(--dd-shadow);
+}
+.dd-board-frame {
+  padding: clamp(12px, 1.4vw, 18px) 20px clamp(12px, 1.4vw, 18px) 72px;
+}
+.dd-board {
+  --dd-size: min(58px, calc((100vw - 92px - 4 * var(--dd-gap)) / 5));
+  counter-reset: dd-step;
+  width: fit-content;
+  margin: 0 auto;
+}
+.dd-row { position: relative; counter-increment: dd-step; }
+.dd-row::before,
+.dd-row::after {
+  position: absolute;
+  top: 6px;
+  height: calc(var(--dd-size) - 12px);
+  clip-path: polygon(0 0, 74% 0, 100% 50%, 74% 100%, 0 100%);
+}
+.dd-row::before {
+  content: '';
+  right: calc(100% + 14px);
+  width: 51px;
+  background: var(--dd-shadow);
+  transform: translate(4px, 4px);
+}
+.dd-row::after {
+  content: counter(dd-step);
+  right: calc(100% + 17px);
+  width: 47px;
+  display: grid;
+  place-items: center;
+  padding-right: 7px;
+  background: var(--dd-gold);
+  color: #182b23;
+  font-family: 'Arial Black', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+}
+.dd-tile {
+  background: var(--dd-paper-alt);
+  color: var(--dd-ink);
+  border-color: var(--dd-frame);
+  box-shadow: 2px 2px 0 var(--dd-shadow);
+  font-family: 'Arial Black', system-ui, sans-serif;
+}
+.dd-board .dd-tile { --dd-size: inherit; }
+.dd-tile.dd-filled { box-shadow: inset 0 0 0 3px var(--dd-rust), 2px 2px 0 var(--dd-shadow); }
+.dd-tile.dd-correct, .dd-key.dd-correct { background: var(--dd-correct); color: #fff; }
+.dd-tile.dd-present, .dd-key.dd-present { background: var(--dd-present); color: #fff; }
+.dd-tile.dd-absent, .dd-key.dd-absent { background: var(--dd-absent); color: #fff; }
+.dd-keyboard-frame { margin-top: 12px; padding: 12px; }
+.dd-keyrow { max-width: 620px; }
+.dd-key {
+  height: clamp(42px, 4vw, 50px);
+  max-width: 50px;
+  background: var(--dd-paper-alt);
+  color: var(--dd-ink);
+  border-color: var(--dd-frame);
+  box-shadow: 3px 3px 0 var(--dd-shadow);
+  font-family: 'Arial Black', system-ui, sans-serif;
+}
+.dd-key-wide { max-width: 92px; }
+.dd-key:hover { background: var(--dd-gold); color: #182b23; }
+.dd-key.dd-correct:hover, .dd-key.dd-present:hover, .dd-key.dd-absent:hover { color: #fff; }
+.dd-key[aria-label="Send inn gjettet"] { background: var(--dd-rust); color: #fff; }
+.dd-key[aria-label="Send inn gjettet"]:hover { background: #7f2d20; color: #fff; }
+.dd-footnote {
+  width: fit-content;
+  margin: 18px auto 0;
+  padding: 6px 12px;
+  color: var(--dd-ink);
+  background: var(--dd-paper);
+  border: 2px solid var(--dd-frame);
+  font-weight: 700;
+}
+
+/* Den faste informasjonstavla er nyttig på desktop og tek ikkje plass på mobil. */
+.dd-guide { grid-column: 2; grid-row: 2; }
+.dd-guide-board {
+  position: relative;
+  padding: 20px;
+  background: var(--dd-paper);
+  color: var(--dd-ink);
+  border: 10px solid var(--dd-wood);
+  outline: 4px solid var(--dd-frame);
+  box-shadow: 10px 10px 0 var(--dd-shadow);
+}
+.dd-guide-board::before,
+.dd-guide-board::after {
+  content: '';
+  position: absolute;
+  bottom: -41px;
+  width: 24px;
+  height: 35px;
+  background: var(--dd-wood);
+  border: 3px solid var(--dd-frame);
+  border-top: 0;
+}
+.dd-guide-board::before { left: 23px; }
+.dd-guide-board::after { right: 23px; }
+.dd-guide h2 {
+  margin: 6px 0 12px;
+  color: var(--dd-ink);
+  font-family: 'Arial Black', system-ui, sans-serif;
+  font-size: clamp(1.4rem, 2vw, 1.85rem);
+  line-height: 1.08;
+}
+.dd-guide p { margin: 0 0 14px; font-size: .92rem; line-height: 1.45; }
+.dd-guide-legend { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 8px; }
+.dd-guide-legend li { display: flex; align-items: center; gap: 8px; font-size: .85rem; font-weight: 750; }
+.dd-legend-swatch { width: 24px; height: 24px; flex: 0 0 auto; border: 2px solid var(--dd-frame); }
+.dd-legend-swatch.dd-correct { background: var(--dd-correct); }
+.dd-legend-swatch.dd-present { background: var(--dd-present); }
+.dd-legend-swatch.dd-absent { background: var(--dd-absent); }
+.dd-guide .dd-guide-privacy {
+  border-top: 2px solid var(--dd-frame);
+  padding-top: 12px;
+  margin-bottom: 0;
+  font-size: .8rem;
+}
+
+/* Spelstatus, dialogar og arkiv skal sjå ut som same verda. */
+.dd-page .modal-overlay { background: rgba(5, 23, 16, .76); }
+.dd-page .modal3,
+.dd-page .modal4,
+.dd-page .dd-notice {
+  background: var(--dd-paper);
+  color: var(--dd-ink);
+  border-color: var(--dd-frame);
+  box-shadow: 7px 7px 0 var(--dd-shadow);
+}
+.dd-page .modal3 .modal-header {
+  background: var(--dd-rust);
+  color: #fff;
+  border-color: var(--dd-frame);
+}
+.dd-page .modal3 .modal-body,
+.dd-page .modal4 > p { color: var(--dd-ink); }
+.dd-page .modal-body .btn,
+.dd-page .modal-close { background: var(--dd-paper-alt); color: var(--dd-ink); border-color: var(--dd-frame); }
+.dd-page .modal-body .btn:hover,
+.dd-page .modal-close:hover { background: var(--dd-gold); color: #182b23; }
+.dd-page .dd-stat,
+.dd-page .dd-archive-day { background: var(--dd-paper-alt); color: var(--dd-ink); border-color: var(--dd-frame); }
+.dd-page .dd-archive-day.dd-archive-won { background: var(--dd-correct); color: #fff; }
+.dd-page .dd-archive-day.dd-archive-lost { background: var(--dd-present); color: #fff; }
+.dd-page .dd-archive-day.dd-archive-open { background: var(--dd-gold); color: #182b23; }
+.dd-page .dd-muted,
+.dd-page .dd-stat-label { color: var(--dd-ink); opacity: .8; }
+.dd-page .dd-modal-title { color: #fff; background: var(--dd-rust); border-color: var(--dd-frame); }
+.dd-page .dd-disttitle { color: var(--dd-ink); }
+.dd-page .dd-help-row .dd-tile { box-shadow: none; }
+
+.dd-page :is(.dd-action, .dd-key, .dd-archive-day, .dd-iconbtn, .btn, a):focus-visible {
+  outline: 3px solid var(--dd-gold);
+  outline-offset: 4px;
+}
+
+@media (min-width: 901px) {
+  #hero.dd-welcome.dd-hero-gone {
+    max-height: 76px;
+    opacity: 1;
+    margin-bottom: 14px;
+  }
+  .dd-hero-gone .dd-welcome-board { padding-block: 5px; }
+  .dd-hero-gone .dd-welcome-kicker,
+  .dd-hero-gone .dd-welcome-board p { display: none; }
+  .dd-hero-gone .dd-welcome-heading h1 { font-size: 2rem; }
+  .dd-hero-gone .dd-wordmark span { width: 23px; font-size: .72rem; }
+}
+
+@media (max-width: 900px) {
+  .dd-layout { grid-template-columns: minmax(0, 1fr); max-width: 720px; }
+  .dd-topbar, .dd-play { grid-column: 1; }
+  .dd-guide { display: none; }
+}
+
+@media (max-width: 560px) {
+  .dd-page { background-attachment: scroll; background-position: center top; }
+  .dd-main { padding: 16px 12px 30px; }
+  #hero.dd-welcome { max-height: 160px; margin-bottom: 16px; }
+  .dd-welcome-board { margin: 10px 6px 6px; padding: 12px 13px; }
+  .dd-welcome-board::before { top: -14px; height: 10px; }
+  .dd-welcome-heading { gap: 6px; }
+  .dd-welcome-heading h1 { font-size: clamp(1.65rem, 7vw, 2.3rem); }
+  .dd-welcome-board p { font-size: .82rem; line-height: 1.32; }
+  .dd-wordmark span { width: 20px; border-width: 2px; font-size: .7rem; }
+  .dd-layout { gap: 10px; }
+  .dd-topbar { flex-wrap: nowrap; }
+  .dd-daylabel { flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; }
+  .dd-daynum { min-height: 36px; padding: 4px 9px; font-size: .8rem; }
+  .dd-daydate { padding: 4px 7px; font-size: .75rem; white-space: nowrap; }
+  .dd-actions { gap: 5px; }
+  .dd-action-label { display: none; }
+  .dd-action, .dd-page .dd-iconbtn { width: 42px; min-height: 42px; padding: 6px; }
+  .dd-board-frame { padding: 12px 6px 12px 39px; border-width: 4px; }
+  .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
+  .dd-row::before { right: calc(100% + 8px); width: 26px; }
+  .dd-row::after { right: calc(100% + 11px); width: 23px; font-size: .78rem; padding-right: 3px; }
+  .dd-keyboard-frame { padding: 10px 6px; margin-top: 10px; border-width: 4px; }
+  .dd-keyrow { gap: 3px; }
+  .dd-key { min-width: 0; height: clamp(40px, 9vw, 48px); font-size: clamp(.72rem, 2.7vw, .9rem); border-width: 2px; }
+  .dd-key-wide { font-size: .66rem; }
+  .dd-message { min-height: 1.5em; }
+  .dd-footnote { margin-top: 11px; font-size: .72rem; }
+}
+
+@media (max-width: 360px) {
+  .dd-wordmark { display: none; }
+  .dd-welcome-board p { font-size: .78rem; }
+  .dd-daydate { font-size: .68rem; }
+  .dd-keyboard-frame { padding-inline: 4px; }
+}
+
+@media (max-height: 720px) {
+  #hero.dd-welcome { max-height: 110px; }
+  .dd-welcome-board { padding-block: 9px; }
+  .dd-welcome-board p { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #hero.dd-welcome { transition: none; }
+}

@@ -105,12 +105,12 @@
     repaint();
     say('');
 
+    if (state.guesses.length) hideHero();
+
     if (state.status === 'won') {
       say(`Du fann ordet på ${state.guesses.length}.`, true);
     } else if (state.status === 'lost') {
       say(`Ordet var «${state.answer}».`, true);
-    } else if (state.guesses.length) {
-      hideHero();
     }
     el.shareWrap.hidden = state.status === 'playing';
   }
@@ -294,9 +294,6 @@
     }
 
     openDay(state.todayIndex);
-
-    // Fyrste gong: opne hjelpa av seg sjølv
-    if (!Object.keys(Store.allDays()).length) openModal(el.helpOverlay);
   }
 
   if (document.readyState === 'loading') {
