@@ -6,7 +6,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ## [1.55] — 2026-09-20
 
 ### Endra
-- **Duldord har fått ei ny turstidrakt.** Eit lokalt lagra skogsbilete, treskilt som kan vekse i breidda og høgda, nummererte turskilt og mjukt avrunda spelruter og tastar gjer ordspelet til ein liten tur gjennom seks freistnader. Utforminga tilpassar seg både mobil og brei skjerm, og spel, arkiv og statistikk fungerer som før.
+- **Duldord har fått ei ny turstidrakt.** Eit lokalt lagra skogsbilete, heile treplankar med spikrar over stolpane, treskilt som kan vekse i breidda og høgda, biletlaga piler for dag og steg, og mjukt avrunda spelruter og tastar gjer ordspelet til ein liten tur gjennom seks freistnader. Bokstavrutene og tastane er utan slagskugge. Utforminga tilpassar seg både mobil og brei skjerm, og spel, arkiv og statistikk fungerer som før.
 - **Hjelpa opnar seg når spelaren ber om henne.** Den korte forklaringa står no på velkomstskiltet, medan utførleg hjelp framleis finst på hjelpeknappen.
 
 ## [1.54] — 2026-09-18

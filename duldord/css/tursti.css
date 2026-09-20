@@ -88,9 +88,9 @@
   display: grid;
   grid-template-columns: calc(var(--dd-sign-height) * .843) minmax(0, 1fr) calc(var(--dd-sign-height) * .843);
 }
-.dd-sign-art-horizontal .dd-sign-left { background: url('../assets/topp-venstre.png') center / 100% 100% no-repeat; }
-.dd-sign-art-horizontal .dd-sign-middle { background: url('../assets/topp-midt.png') center / auto 100% round no-repeat; }
-.dd-sign-art-horizontal .dd-sign-right { background: url('../assets/topp-hogre.png') center / 100% 100% no-repeat; }
+.dd-sign-art-horizontal .dd-sign-left { background: url('../assets/planke-venstre.png') center / 100% 100% no-repeat; }
+.dd-sign-art-horizontal .dd-sign-middle { background: url('../assets/planke-midt.png') center / auto 100% round no-repeat; }
+.dd-sign-art-horizontal .dd-sign-right { background: url('../assets/planke-hogre.png') center / 100% 100% no-repeat; }
 .dd-welcome-content { position: relative; z-index: 1; padding: 4px 0; transform: translateY(-4px); }
 .dd-welcome-board::before { content: none; }
 .dd-welcome-kicker { display: none; }
@@ -176,13 +176,18 @@
 }
 .dd-daynum-archive { background: #305b45; }
 .dd-daydate {
-  color: var(--dd-ink);
-  background: var(--dd-paper);
-  border: 3px solid var(--dd-frame);
-  border-radius: 7px;
-  box-shadow: 3px 3px 0 var(--dd-shadow);
-  padding: 7px 12px;
-  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 146px;
+  padding: 7px 27px 7px 14px;
+  color: #fff9e9;
+  background: url('../assets/informasjonspil.png') center / 100% 100% no-repeat;
+  font-family: 'Arial Black', system-ui, sans-serif;
+  font-size: .86rem;
+  font-weight: 900;
+  white-space: nowrap;
 }
 .dd-actions { display: flex; gap: 8px; }
 .dd-action,
@@ -235,32 +240,35 @@
 .dd-board {
   --dd-size: min(58px, calc((100vw - 92px - 4 * var(--dd-gap)) / 5));
   counter-reset: dd-step;
+  position: relative;
   width: fit-content;
   margin: 0 auto;
 }
+.dd-board::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: -44px;
+  width: 13px;
+  background: linear-gradient(90deg, #382314, #8b6036 24%, #79502d 72%, #342115);
+  border: 2px solid #142820;
+  border-radius: 3px;
+}
 .dd-row { position: relative; counter-increment: dd-step; }
-.dd-row::before,
 .dd-row::after {
   position: absolute;
-  top: 6px;
-  height: calc(var(--dd-size) - 12px);
-  clip-path: polygon(0 0, 74% 0, 100% 50%, 74% 100%, 0 100%);
-}
-.dd-row::before {
-  content: '';
-  right: calc(100% + 14px);
-  width: 51px;
-  background: var(--dd-shadow);
-  transform: translate(4px, 4px);
+  top: 2px;
+  height: calc(var(--dd-size) - 4px);
 }
 .dd-row::after {
   content: counter(dd-step);
-  right: calc(100% + 17px);
-  width: 47px;
+  right: calc(100% + 12px);
+  width: 51px;
   display: grid;
   place-items: center;
-  padding-right: 7px;
-  background: var(--dd-gold);
+  padding-right: 8px;
+  background: url('../assets/stegpil.png') center / 100% 100% no-repeat;
   color: #182b23;
   font-family: 'Arial Black', system-ui, sans-serif;
   font-size: 1rem;
@@ -271,11 +279,11 @@
   color: var(--dd-ink);
   border-color: var(--dd-frame);
   border-radius: 5px;
-  box-shadow: 2px 2px 0 var(--dd-shadow);
+  box-shadow: none;
   font-family: 'Arial Black', system-ui, sans-serif;
 }
 .dd-board .dd-tile { --dd-size: inherit; }
-.dd-tile.dd-filled { box-shadow: inset 0 0 0 3px var(--dd-rust), 2px 2px 0 var(--dd-shadow); }
+.dd-tile.dd-filled { box-shadow: inset 0 0 0 3px var(--dd-rust); }
 .dd-tile.dd-correct, .dd-key.dd-correct { background: var(--dd-correct); color: #fff; }
 .dd-tile.dd-present, .dd-key.dd-present { background: var(--dd-present); color: #fff; }
 .dd-tile.dd-absent, .dd-key.dd-absent { background: var(--dd-absent); color: #fff; }
@@ -288,7 +296,7 @@
   color: var(--dd-ink);
   border-color: var(--dd-frame);
   border-radius: 6px;
-  box-shadow: 3px 3px 0 var(--dd-shadow);
+  box-shadow: none;
   font-family: 'Arial Black', system-ui, sans-serif;
 }
 .dd-key-wide { max-width: 92px; }
@@ -322,9 +330,9 @@
 }
 .dd-sign-art-vertical .dd-sign-top,
 .dd-sign-art-vertical .dd-sign-bottom { flex: 0 0 120px; }
-.dd-sign-art-vertical .dd-sign-top { background: url('../assets/info-topp.png') center / 100% 100% no-repeat; }
-.dd-sign-art-vertical .dd-sign-middle { flex: 1 1 auto; background: url('../assets/info-midt.png') center / 100% auto no-repeat round; }
-.dd-sign-art-vertical .dd-sign-bottom { background: url('../assets/info-botn.png') center / 100% 100% no-repeat; }
+.dd-sign-art-vertical .dd-sign-top { background: url('../assets/info-planke-topp.png') center / 100% 100% no-repeat; }
+.dd-sign-art-vertical .dd-sign-middle { flex: 1 1 auto; background: url('../assets/info-planke-midt.png') center / 100% auto no-repeat round; }
+.dd-sign-art-vertical .dd-sign-bottom { background: url('../assets/info-planke-botn.png') center / 100% 100% no-repeat; }
 .dd-guide-content { position: relative; z-index: 1; }
 .dd-guide h2 {
   margin: 6px 0 12px;
@@ -418,14 +426,14 @@
   .dd-topbar { flex-wrap: nowrap; }
   .dd-daylabel { flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; }
   .dd-daynum { min-height: 36px; padding: 4px 9px; font-size: .8rem; }
-  .dd-daydate { padding: 4px 7px; font-size: .75rem; white-space: nowrap; }
+  .dd-daydate { min-width: 112px; min-height: 35px; padding: 4px 20px 4px 9px; font-size: .7rem; }
   .dd-actions { gap: 5px; }
   .dd-action-label { display: none; }
   .dd-action, .dd-page .dd-iconbtn { width: 42px; min-height: 42px; padding: 6px; }
   .dd-board-frame { padding: 12px 6px 12px 39px; border-width: 4px; }
   .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
-  .dd-row::before { right: calc(100% + 8px); width: 26px; }
-  .dd-row::after { right: calc(100% + 11px); width: 23px; font-size: .78rem; padding-right: 3px; }
+  .dd-board::before { left: -28px; width: 10px; }
+  .dd-row::after { right: calc(100% + 8px); width: 29px; font-size: .78rem; padding-right: 4px; }
   .dd-keyboard-frame { padding: 10px 6px; margin-top: 10px; border-width: 4px; }
   .dd-keyrow { gap: 3px; }
   .dd-key { min-width: 0; height: clamp(40px, 9vw, 48px); font-size: clamp(.72rem, 2.7vw, .9rem); border-width: 2px; }
