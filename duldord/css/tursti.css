@@ -46,30 +46,18 @@
   overflow: visible;
 }
 
-/* Velkomstskiltet blir lite på desktop og forsvinn på mobil når spelet byrjar. */
+/* Den heile frontplanken er festa til brettet med to stolpar. */
 #hero.dd-welcome {
   display: flex;
   justify-content: center;
-  max-height: 210px;
-  margin: 0 auto clamp(12px, 1.8vw, 20px);
-  overflow: hidden;
-  transition: max-height .35s ease, opacity .25s ease, margin .35s ease;
-}
-#hero.dd-welcome.dd-hero-gone {
-  max-height: 0;
-  opacity: 0;
-  margin-bottom: 0;
-  border: 0;
-  padding: 0;
+  margin: 0 auto 10px;
 }
 .dd-welcome-board {
-  --dd-sign-height: 175px;
+  --dd-sign-height: clamp(260px, 32vw, 325px);
   position: relative;
-  isolation: isolate;
-  width: min(100%, 740px);
+  width: min(100%, 490px);
   height: var(--dd-sign-height);
-  margin: 0 12px;
-  padding: 0 clamp(28px, 5vw, 56px);
+  padding: 0 clamp(20px, 4vw, 42px);
   display: grid;
   place-items: center;
   background: transparent;
@@ -81,65 +69,54 @@
 .dd-sign-art {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
 }
 .dd-sign-art-horizontal {
   display: grid;
-  grid-template-columns: calc(var(--dd-sign-height) * .843) minmax(0, 1fr) calc(var(--dd-sign-height) * .843);
+  grid-template-columns: calc(var(--dd-sign-height) * .483) minmax(0, 1fr) calc(var(--dd-sign-height) * .483);
 }
-.dd-sign-art-horizontal .dd-sign-left { background: url('../assets/planke-venstre.png') center / 100% 100% no-repeat; }
-.dd-sign-art-horizontal .dd-sign-middle { background: url('../assets/planke-midt.png') center / auto 100% round no-repeat; }
-.dd-sign-art-horizontal .dd-sign-right { background: url('../assets/planke-hogre.png') center / 100% 100% no-repeat; }
-.dd-welcome-content { position: relative; z-index: 1; padding: 4px 0; transform: translateY(-4px); }
+.dd-sign-art-horizontal .dd-sign-left { background: url('../assets/planke-venstre.png?v=2') center / 100% auto no-repeat; }
+.dd-sign-art-horizontal .dd-sign-middle { background: url('../assets/planke-midt.png') center / auto 100% repeat-x; }
+.dd-sign-art-horizontal .dd-sign-right { background: url('../assets/planke-hogre.png?v=2') center / 100% auto no-repeat; }
+.dd-welcome-content { position: relative; z-index: 1; width: 100%; padding: 7px 0 2px; }
 .dd-welcome-board::before { content: none; }
-.dd-welcome-kicker { display: none; }
 .dd-welcome-heading {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(8px, 1.5vw, 18px);
-  margin: 0 0 3px;
+  gap: clamp(8px, 1.5vw, 14px);
+  margin: 0 0 7px;
 }
-.dd-guide-kicker {
-  display: inline-block;
-  color: var(--dd-rust);
-  font-size: .78rem;
-  font-weight: 900;
-  letter-spacing: .11em;
-  text-transform: uppercase;
-}
+.dd-tree-mark { width: clamp(30px, 6vw, 57px); height: auto; flex: 0 0 auto; }
 .dd-welcome-heading h1 {
   color: #182b23;
   font-family: 'Arial Black', 'Segoe UI', system-ui, sans-serif;
-  font-size: clamp(2rem, 3.5vw, 2.7rem);
+  font-size: clamp(1.35rem, 4vw, 2.65rem);
   font-weight: 900;
   letter-spacing: -.055em;
   line-height: 1.1;
   margin: 0;
 }
 .dd-welcome-board p {
-  max-width: 60ch;
   margin: 0 auto;
-  font-size: clamp(.82rem, 1.3vw, .94rem);
+  font-size: clamp(.65rem, 1.65vw, .95rem);
   font-weight: 650;
-  line-height: 1.45;
+  line-height: 1.2;
 }
-.dd-wordmark { display: flex; gap: 2px; transform: rotate(-5deg); }
-.dd-wordmark span {
-  display: grid;
-  place-items: center;
-  width: clamp(24px, 3vw, 34px);
-  aspect-ratio: 1;
-  background: var(--dd-paper-alt);
-  border: 3px solid var(--dd-frame);
-  box-shadow: 2px 2px 0 var(--dd-shadow);
-  color: var(--dd-ink);
-  font-family: 'Arial Black', system-ui, sans-serif;
-  font-size: clamp(.8rem, 1.5vw, 1.1rem);
+.dd-daynum, .dd-daynum.dd-daynum-archive { display: block; margin: 0 auto; padding: 6px 0 0; width: 78%; background: transparent; color: #182b23; border: 0; border-top: 1px solid #182b23; box-shadow: none; font-weight: 850; font-size: clamp(.68rem, 1.45vw, .88rem); line-height: 1.1; }
+.dd-header-post {
+  position: absolute;
+  z-index: -1;
+  top: 16%;
+  bottom: -20px;
+  width: 16px;
+  border: 3px solid #142820;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #3b2515, #98663a 30%, #784b29 75%, #372212);
 }
-.dd-wordmark span:nth-child(2) { transform: translateY(-5px); }
-.dd-wordmark span:nth-child(3) { transform: translateY(3px); }
+.dd-header-post-left { left: calc(12% - 8px); }
+.dd-header-post-right { right: calc(12% - 8px); }
 
 /* Spelebrettet og vegvisartavla er to sjølvstendige flater på brei skjerm. */
 .dd-layout {
@@ -151,84 +128,42 @@
   margin: 0 auto;
 }
 .dd-play { grid-column: 1; grid-row: 1; min-width: 0; }
-.dd-board-stage { position: relative; padding-top: 85px; }
+.dd-board-stage { position: relative; isolation: isolate; padding-top: 8px; }
 .dd-day-signpost {
   position: absolute;
   z-index: 2;
-  isolation: isolate;
-  top: 0;
-  left: clamp(42px, 9%, 84px);
-  width: 220px;
-  height: 90px;
+  top: 82%;
+  left: calc(100% - 143px);
+  width: 156px;
+  height: 88px;
 }
 .dd-day-signpost::before {
   content: '';
   position: absolute;
   z-index: -1;
-  top: 25px;
-  bottom: -6px;
-  left: 41px;
+  top: -17px;
+  bottom: -66px;
+  left: calc(50% - 7px);
   width: 14px;
   border: 3px solid #142820;
   border-radius: 3px;
   background: linear-gradient(90deg, #3b2515, #98663a 28%, #784b29 75%, #372212);
 }
-.dd-daynum-mount {
-  position: absolute;
-  z-index: 3;
-  isolation: isolate;
-  top: 68px;
-  right: 25px;
-}
-.dd-daynum {
-  display: inline-flex;
-  position: relative;
-  z-index: 1;
-  align-items: center;
-  justify-content: center;
-  min-height: 42px;
-  padding: 6px 27px;
-  background: radial-gradient(circle at 11px 50%, #2e2118 0 2px, transparent 3px),
-              radial-gradient(circle at calc(100% - 11px) 50%, #2e2118 0 2px, transparent 3px),
-              linear-gradient(#fffdf5, #f9f1df);
-  color: #182b23;
-  border: 4px solid #142820;
-  border-radius: 4px;
-  font-family: 'Arial Black', system-ui, sans-serif;
-  font-size: clamp(.83rem, 1.3vw, 1rem);
-  font-weight: 900;
-  line-height: 1;
-  white-space: nowrap;
-}
-.dd-daynum-mount::before,
-.dd-daynum-mount::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  top: -10px;
-  bottom: -10px;
-  width: 12px;
-  border: 3px solid #142820;
-  border-radius: 3px;
-  background: #79502d;
-}
-.dd-daynum-mount::before { left: 15px; }
-.dd-daynum-mount::after { right: 15px; }
 .dd-daydate {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 220px;
-  height: 51px;
-  /* Pileflata har rett spiss; 18px på høgre side sentrerer teksten på planken. */
-  padding: 0 18px 0 0;
+  width: 156px;
+  aspect-ratio: 512 / 109;
+  padding: 0 12px 0 0;
   color: #fff9e9;
-  background: url('../assets/informasjonspil.png') center / 100% 100% no-repeat;
+  background: url('../assets/informasjonspil.png?v=2') center / contain no-repeat;
   font-family: 'Arial Black', system-ui, sans-serif;
-  font-size: .98rem;
+  font-size: .78rem;
   font-weight: 900;
   line-height: 1;
   white-space: nowrap;
+  transform: rotate(3deg);
 }
 .dd-action,
 .dd-page .dd-iconbtn {
@@ -274,6 +209,8 @@
   box-shadow: none;
 }
 .dd-board-frame {
+  position: relative;
+  z-index: 1;
   padding: clamp(12px, 1.4vw, 18px) 20px clamp(12px, 1.4vw, 18px) 72px;
 }
 .dd-board {
@@ -296,11 +233,12 @@
 .dd-row { position: relative; }
 .dd-step-sign {
   position: absolute;
-  top: 2px;
-  height: calc(var(--dd-size) - 4px);
+  top: 50%;
+  transform: translateY(-50%);
+  height: 34px;
   right: calc(100% + 12px);
   width: 51px;
-  background: url('../assets/stegpil.png') center / 100% 100% no-repeat;
+  background: url('../assets/stegpil.png') center / contain no-repeat;
   color: #182b23;
   font-family: 'Arial Black', system-ui, sans-serif;
   font-size: 1rem;
@@ -372,9 +310,9 @@
 }
 .dd-sign-art-vertical .dd-sign-top,
 .dd-sign-art-vertical .dd-sign-bottom { flex: 0 0 188px; }
-.dd-sign-art-vertical .dd-sign-top { background: url('../assets/info-planke-topp.png') center / 100% 100% no-repeat; }
-.dd-sign-art-vertical .dd-sign-middle { flex: 1 1 auto; background: url('../assets/info-planke-midt.png') center top / 100% auto repeat-y; }
-.dd-sign-art-vertical .dd-sign-bottom { background: url('../assets/info-planke-botn.png') center / 100% 100% no-repeat; }
+.dd-sign-art-vertical .dd-sign-top { background: url('../assets/info-planke-topp.png?v=2') center / 100% 100% no-repeat; }
+.dd-sign-art-vertical .dd-sign-middle { flex: 1 1 auto; background: url('../assets/info-planke-midt.png?v=2') center top / 100% auto repeat-y; }
+.dd-sign-art-vertical .dd-sign-bottom { background: url('../assets/info-planke-botn.png?v=2') center / 100% 100% no-repeat; }
 .dd-guide-content { position: relative; z-index: 1; }
 .dd-guide h2 {
   margin: 6px 0 12px;
@@ -459,16 +397,6 @@
 @media (min-width: 901px) {
   .dd-guide:has(#archiveBtn:not([hidden])) .dd-guide-board { min-height: 625px; }
   .dd-guide:has(#archiveBtn:not([hidden])):has(.dd-guide-actions .dd-iconbtn:not([hidden])) .dd-guide-board { min-height: 690px; }
-  #hero.dd-welcome.dd-hero-gone {
-    max-height: 88px;
-    opacity: 1;
-    margin-bottom: 14px;
-  }
-  .dd-hero-gone .dd-welcome-board { --dd-sign-height: 82px; }
-  .dd-hero-gone .dd-welcome-kicker,
-  .dd-hero-gone .dd-welcome-board p { display: none; }
-  .dd-hero-gone .dd-welcome-heading h1 { font-size: 1.7rem; }
-  .dd-hero-gone .dd-wordmark span { width: 19px; font-size: .62rem; }
 }
 
 @media (max-width: 900px) {
@@ -483,7 +411,7 @@
     background: radial-gradient(circle at 14px 12px, #33231a 0 2px, transparent 3px),
                 radial-gradient(circle at calc(100% - 14px) 12px, #33231a 0 2px, transparent 3px),
                 repeating-linear-gradient(0deg, #fffaf0 0 17px, #f9f2e2 18px, #fffaf0 20px);
-    border: 4px solid #142820;
+    border: 2px solid #142820;
     border-radius: 5px;
   }
   .dd-guide::before,
@@ -500,7 +428,6 @@
   }
   .dd-guide::before { left: 20px; }
   .dd-guide::after { right: 20px; }
-  .dd-guide-kicker,
   .dd-guide-content > p,
   .dd-guide-legend { display: none; }
   .dd-guide h2 { margin: 0 0 12px; text-align: center; font-size: 1.15rem; }
@@ -510,23 +437,20 @@
 @media (max-width: 560px) {
   .dd-page { background-attachment: scroll; background-position: center top; }
   .dd-main { padding: 16px 12px 30px; }
-  #hero.dd-welcome { max-height: 160px; margin-bottom: 16px; }
-  .dd-welcome-board { --dd-sign-height: 145px; margin: 0 6px; padding: 0 30px; }
+  #hero.dd-welcome { margin-bottom: 8px; }
+  .dd-welcome-board { --dd-sign-height: clamp(175px, 62vw, 240px); padding: 0 18px; }
   .dd-welcome-heading { gap: 6px; }
-  .dd-welcome-heading h1 { font-size: clamp(1.55rem, 7vw, 2.1rem); }
-  .dd-welcome-board p { font-size: .75rem; line-height: 1.25; }
-  .dd-wordmark span { width: 20px; border-width: 2px; font-size: .7rem; }
+  .dd-welcome-heading h1 { font-size: clamp(1.45rem, 6vw, 2.1rem); }
+  .dd-welcome-board p { font-size: clamp(.58rem, 2.3vw, .75rem); }
   .dd-layout { gap: 10px; }
-  .dd-board-stage { padding-top: 70px; }
-  .dd-day-signpost { left: 20px; width: 188px; height: 75px; }
-  .dd-day-signpost::before { left: 35px; }
-  .dd-daydate { width: 188px; height: 41px; padding-right: 15px; font-size: .82rem; }
-  .dd-daynum-mount { top: 56px; right: 10px; }
-  .dd-daynum { min-height: 36px; padding: 5px 22px; font-size: .8rem; }
+  .dd-board-stage { padding-top: 5px; margin-top: -25px; }
+  .dd-day-signpost { left: calc(100% - 115px); top: 82%; width: 126px; height: 70px; }
+  .dd-day-signpost::before { bottom: -47px; }
+  .dd-daydate { width: 126px; padding-right: 10px; font-size: .68rem; }
   .dd-board-frame { padding: 25px 6px 12px 39px; border-width: 4px; }
   .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
   .dd-board::before { left: -28px; width: 10px; }
-  .dd-step-sign { right: calc(100% + 8px); width: 29px; font-size: .78rem; }
+  .dd-step-sign { right: calc(100% + 8px); width: 29px; height: 19px; font-size: .72rem; }
   .dd-keyboard-frame { padding: 10px 6px; margin-top: 10px; border-width: 4px; }
   .dd-keyrow { gap: 3px; }
   .dd-key { min-width: 0; height: clamp(40px, 9vw, 48px); font-size: clamp(.72rem, 2.7vw, .9rem); border-width: 2px; }
@@ -536,17 +460,6 @@
 }
 
 @media (max-width: 360px) {
-  .dd-wordmark { display: none; }
-  .dd-welcome-board p { font-size: .78rem; }
+  .dd-tree-mark { width: 26px; }
   .dd-keyboard-frame { padding-inline: 4px; }
-}
-
-@media (max-height: 720px) {
-  #hero.dd-welcome { max-height: 110px; }
-  .dd-welcome-board { --dd-sign-height: 105px; }
-  .dd-welcome-board p { display: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #hero.dd-welcome { transition: none; }
 }

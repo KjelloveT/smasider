@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="../css/neobrutalisme.css">
 <link rel="stylesheet" href="css/style.css?v=2">
-<link rel="stylesheet" href="css/tursti.css?v=6">
+<link rel="stylesheet" href="css/tursti.css?v=7">
 <script src="../js/neo-header.js" defer></script>
 </head>
 <body class="dd-page" data-light-theme="classic" data-dark-theme="space" data-theme="classic">
@@ -19,22 +19,6 @@
 <div class="page-wrapper dd-page-wrapper">
 <main class="main-content dd-main">
 
-  <!-- Skiltet blir lite på desktop og vik bort på mobil når spelet byrjar. -->
-  <section class="dd-welcome" id="hero" aria-labelledby="dd-title">
-    <div class="dd-welcome-board">
-      <div class="dd-sign-art dd-sign-art-horizontal" aria-hidden="true">
-        <span class="dd-sign-left"></span><span class="dd-sign-middle"></span><span class="dd-sign-right"></span>
-      </div>
-      <div class="dd-welcome-content">
-        <div class="dd-welcome-heading">
-          <span class="dd-wordmark" aria-hidden="true"><span>D</span><span>U</span><span>L</span><span>D</span></span>
-          <h1 id="dd-title">Duldord</h1>
-        </div>
-        <p>Fem bokstavar. Seks freistnader.</p>
-      </div>
-    </div>
-  </section>
-
   <div class="dd-layout">
     <aside class="dd-guide" aria-labelledby="dd-guide-title">
       <div class="dd-guide-board">
@@ -42,7 +26,6 @@
           <span class="dd-sign-top"></span><span class="dd-sign-middle"></span><span class="dd-sign-bottom"></span>
         </div>
         <div class="dd-guide-content">
-          <span class="dd-guide-kicker">På ordstien</span>
           <h2 id="dd-guide-title">Eitt ord. Seks steg.</h2>
           <p>Prøv eit nynorsk ord på fem bokstavar. Fargane viser vegen vidare:</p>
           <ul class="dd-guide-legend">
@@ -63,8 +46,23 @@
     <div class="dd-play">
       <p class="dd-message" id="message" role="status" aria-live="polite"></p>
       <div class="dd-board-stage">
-        <div class="dd-day-signpost"><span class="dd-daydate" id="dayDate"></span></div>
-        <span class="dd-daynum-mount"><span class="dd-daynum" id="dayNum"></span></span>
+        <section class="dd-welcome" id="hero" aria-labelledby="dd-title">
+          <div class="dd-welcome-board">
+            <span class="dd-header-post dd-header-post-left" aria-hidden="true"></span>
+            <span class="dd-header-post dd-header-post-right" aria-hidden="true"></span>
+            <div class="dd-sign-art dd-sign-art-horizontal" aria-hidden="true">
+              <span class="dd-sign-left"></span><span class="dd-sign-middle"></span><span class="dd-sign-right"></span>
+            </div>
+            <div class="dd-welcome-content">
+              <div class="dd-welcome-heading">
+                <svg class="dd-tree-mark" viewBox="0 0 70 68" aria-hidden="true"><path d="M29 2 4 47h13L8 60h46L45 47h15L36 2l-4 21z" fill="#184f35"/><path d="M46 12 29 44h9l-7 13h35l-8-13h8z" fill="#103e2c"/><path d="M26 58v8m20-9v9" stroke="#51351f" stroke-width="5"/></svg>
+                <div><h1 id="dd-title">DULDORD</h1><p>Eitt fembokstavsord kvar dag</p></div>
+              </div>
+              <span class="dd-daynum" id="dayNum"></span>
+            </div>
+            <div class="dd-day-signpost"><span class="dd-daydate" id="dayDate"></span></div>
+          </div>
+        </section>
         <div class="dd-board-frame">
           <div class="dd-board" id="board" role="group" aria-label="Gjettebrett"></div>
         </div>
