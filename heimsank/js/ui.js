@@ -6,7 +6,8 @@ const HeimsankUI = (function () {
     grunnstoff: ['#BCE8BC', 'sparkles'],
     fly: ['#ACE1F5', 'plane'], kunst: ['#F9D0AD', 'palette'], hest: ['#E7D3AB', 'rabbit'],
     dinosaurar: ['#CEE4A2', 'egg'], hunderasar: ['#E7C3A3', 'footprints'], vette: ['#C1C5F2', 'treePine'],
-    fotballspelarar: ['#B7E4C7', 'trophy']
+    fotballspelarar: ['#B7E4C7', 'trophy'],
+    sportsbilar: ['#F6BD60', 'bolt']
   };
   const timers = new Set();
   const dialogs = [];

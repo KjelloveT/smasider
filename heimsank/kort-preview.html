@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kortkontroll — Heimsank</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="../css/neobrutalisme.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/cards.css?v=1.56">
+<link rel="stylesheet" href="css/kort-preview.css?v=1.56">
+</head>
+<body class="hs-app" data-light-theme="lavender" data-dark-theme="space" data-theme="lavender">
+<neo-header></neo-header>
+<div class="page-wrapper">
+<main class="main-content main-wide hs-preview-main">
+  <header class="box2 hs-preview-header">
+    <div>
+      <p class="hs-eyebrow">Lokal kvalitetskontroll</p>
+      <h1>Kortkontroll for Heimsank</h1>
+      <p>Berre éin lokal kortkategori blir lesen om gongen. Korta kjem fram i små puljar, og bileta blir lasta når dei nærmar seg skjermen.</p>
+    </div>
+    <a class="btn" href="index.html">Attende til Heimsank</a>
+  </header>
+
+  <section class="box1 hs-preview-controls" aria-labelledby="previewControlsTitle">
+    <h2 id="previewControlsTitle" class="heading3 no-mt">Vel kortdata</h2>
+    <div class="hs-preview-fields">
+      <label>Kategori
+        <select id="previewCategory"></select>
+      </label>
+      <label>Søk i namna
+        <input id="previewSearch" type="search" placeholder="Til dømes Ferrari" autocomplete="off">
+      </label>
+    </div>
+    <p id="previewStatus" role="status" aria-live="polite">Lastar kategoriar…</p>
+  </section>
+
+  <section aria-label="Kort i vald kategori">
+    <div id="previewGrid" class="hs-preview-grid"></div>
+    <div class="hs-preview-more">
+      <button id="previewMore" class="btn" type="button" hidden>Vis fleire kort</button>
+    </div>
+  </section>
+</main>
+</div>
+
+<script src="../js/neo-header.js"></script>
+<script src="../js/neobrutalisme.js"></script>
+<script src="../js/vyrdepil-icons.js"></script>
+<script src="../js/vyrdepil-util.js"></script>
+<script src="js/state.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/ui.js?v=1.56"></script>
+<script src="js/carddata.js?v=1.56"></script>
+<script src="js/card-view.js?v=1.56"></script>
+<script src="js/kort-preview.js?v=1.56"></script>
+</body>
+</html>

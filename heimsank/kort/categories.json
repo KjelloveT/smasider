@@ -182,5 +182,25 @@
     "rankByPageviews": true,
     "pageviewDays": 60,
     "maxCards": 200
+  },
+  {
+    "id": "sportsbilar",
+    "label": "Sportsbilar",
+    "unlockCost": 90,
+    "icon": "bolt",
+    "csv": "sportsbilar.csv",
+    "rarity": "rarity-sportsbilar.json",
+    "idField": "item",
+    "nameField": "itemLabel",
+    "imageField": "image",
+    "articleField": "article",
+    "rankArticleField": "rankArticle",
+    "statField": "manufacturerLabel",
+    "statType": "text",
+    "statLabel": "building",
+    "rankByPageviews": true,
+    "featuredField": "iconic",
+    "pageviewDays": 60,
+    "maxCards": 200
   }
 ]

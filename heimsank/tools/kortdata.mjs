@@ -394,6 +394,14 @@ async function hent(id) {
       Number(b.sitelinks || 0) - Number(a.sitelinks || 0) ||
       a[cat.nameField].localeCompare(b[cat.nameField], 'nn')
     );
+    if (cat.featuredField) {
+      // Ei popularitetsliste åleine blir fort veldig dagsaktuell. Kategoriar
+      // kan merke eit avgrensa sett klassikarar som alltid skal vere med,
+      // før resten av plassane blir fylte etter sidevisningar.
+      const featured = liste.filter(row => /^(1|true)$/i.test(row[cat.featuredField] || ''));
+      const featuredIds = new Set(featured.map(row => row[cat.idField]));
+      liste = [...featured, ...liste.filter(row => !featuredIds.has(row[cat.idField]))];
+    }
     liste = liste.slice(0, cat.maxCards || liste.length);
   }
   liste.sort((a, b) => a[cat.nameField].localeCompare(b[cat.nameField], 'nn'));
@@ -402,6 +410,22 @@ async function hent(id) {
     const art = artikkeltittel(row[cat.articleField]);
     if (art) row[cat.nameField] = art.title.replace(/\s+\([^)]*\)$/, '');
   }
+  const nameCounts = new Map();
+  for (const row of liste) nameCounts.set(row[cat.nameField], (nameCounts.get(row[cat.nameField]) || 0) + 1);
+  for (const row of liste) {
+    const art = artikkeltittel(row[cat.articleField]);
+    if (!art) continue;
+    // Skil modellgenerasjonar som har same Wikidata-etikett, og rett svært
+    // korte etikettar som «Jensen» når artikkelen heiter «Jensen Interceptor».
+    const articleName = art.title.replace(/_/g, ' ');
+    const currentName = row[cat.nameField];
+    if (nameCounts.get(currentName) > 1 ||
+        (articleName.startsWith(currentName + ' ') && articleName.length > currentName.length + 2)) {
+      row[cat.nameField] = articleName;
+    }
+  }
+  // Namna kan ha blitt presiserte frå artikkeltittelen ovanfor.
+  liste.sort((a, b) => a[cat.nameField].localeCompare(b[cat.nameField], 'nn'));
 
   // Ta vare på lisensdata frå førre køyring der biletet er det same
   const sti = join(KORT_DIR, cat.csv);
