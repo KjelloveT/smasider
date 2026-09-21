@@ -59,6 +59,8 @@
     else if (daysAgo === 2) el.dayDate.textContent = 'Forgårsdagens ord';
     else el.dayDate.textContent = S.formatDate(S.dateForIndex(state.dayIndex));
     el.previousDayBtn.hidden = state.dayIndex <= 0;
+    const latestAvailableIndex = Math.min(state.todayIndex, S.wordCount() - 1);
+    el.nextDayBtn.hidden = state.dayIndex >= latestAvailableIndex;
 
     // Arkivet opnar seg fyrst når dagens ord er ferdigspelt. Er årgangen omme,
     // finst det ikkje noko dagens ord å vente på, og arkivet er alltid ope.
@@ -197,7 +199,7 @@
 
   // ── oppstart ─────────────────────────────────────────────────────────────
   function cacheElements() {
-    ['hero', 'dayNum', 'dayDate', 'previousDayBtn', 'message', 'board', 'keyboard', 'footnote',
+    ['hero', 'dayNum', 'dayDate', 'nextDayBtn', 'previousDayBtn', 'message', 'board', 'keyboard', 'footnote',
       'archiveBtn', 'statsBtn', 'helpBtn', 'shareBtn', 'shareLabel', 'shareWrap',
       'archiveGrid', 'helpOverlay', 'statsOverlay', 'archiveOverlay']
       .forEach(id => { el[id] = document.getElementById(id); });
@@ -266,6 +268,7 @@
     el.helpBtn.addEventListener('click', () => openModal(el.helpOverlay));
     el.statsBtn.addEventListener('click', showStats);
     el.archiveBtn.addEventListener('click', showArchive);
+    el.nextDayBtn.addEventListener('click', () => openDay(state.dayIndex + 1));
     el.previousDayBtn.addEventListener('click', () => openDay(state.dayIndex - 1));
     el.shareBtn.addEventListener('click', () => {
       const text = Stats.shareText(state.dayIndex + 1, state.guesses, state.answer, state.status);

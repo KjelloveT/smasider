@@ -112,9 +112,9 @@
   top: 10%;
   bottom: -20px;
   width: var(--dd-post-width);
-  background: url('../assets/stolpe-topp.png') center top / 100% auto no-repeat,
-              url('../assets/stolpe-botn.png') center bottom / 100% auto no-repeat,
-              url('../assets/stolpe-midt.png') center / 100% auto repeat-y;
+  background: url('../assets/stolpe-topp.png?v=2') center top / 100% auto no-repeat,
+              url('../assets/stolpe-botn.png?v=2') center bottom / 100% auto no-repeat,
+              url('../assets/stolpe-midt.png?v=2') center 150px / 100% auto repeat-y;
 }
 .dd-header-post-left { left: calc(var(--dd-sign-height) * .218 - var(--dd-post-width) / 2); }
 .dd-header-post-right { right: calc(var(--dd-sign-height) * .218 - var(--dd-post-width) / 2); }
@@ -140,12 +140,13 @@
   position: absolute;
   z-index: 2;
   top: 78%;
-  left: calc(var(--dd-sign-height) * .218 - 42px);
+  left: calc(var(--dd-sign-height) * .218);
   width: 205px;
   height: 72px;
-  transform: rotate(7deg);
+  transform: translateX(-50%) rotate(7deg);
 }
 .dd-daydate,
+.dd-next-signpost,
 .dd-previous-signpost {
   display: flex;
   position: relative;
@@ -164,6 +165,7 @@
   white-space: nowrap;
 }
 .dd-daydate::before,
+.dd-next-signpost::before,
 .dd-previous-signpost::before {
   content: '';
   position: absolute;
@@ -171,20 +173,33 @@
   z-index: -1;
   background: url('../assets/informasjonspil.png?v=2') center / contain no-repeat;
 }
+.dd-next-signpost,
 .dd-previous-signpost {
   position: absolute;
   z-index: 3;
   top: calc(8px + var(--dd-sign-height) + 2px);
-  right: -8px;
   width: 175px;
-  padding: 0 0 0 17px;
   font-size: .78rem;
   cursor: pointer;
 }
+.dd-next-signpost {
+  left: calc((100% - min(100%, 490px)) / 2 + var(--dd-sign-height) * .218);
+  padding: 0 17px 0 0;
+  transform: translateX(-50%);
+}
+.dd-previous-signpost {
+  right: calc((100% - min(100%, 490px)) / 2 + var(--dd-sign-height) * .218);
+  padding: 0 0 0 17px;
+  transform: translateX(50%);
+}
 .dd-previous-signpost::before { transform: scaleX(-1); }
+.dd-next-signpost[hidden],
 .dd-previous-signpost[hidden] { display: none; }
+.dd-next-signpost:hover,
 .dd-previous-signpost:hover { filter: brightness(1.1); }
-.dd-previous-signpost:active { transform: scale(.97); }
+.dd-next-signpost:active { transform: translateX(-50%) scale(.97); }
+.dd-previous-signpost:active { transform: translateX(50%) scale(.97); }
+.dd-next-signpost:focus-visible,
 .dd-previous-signpost:focus-visible {
   outline: 3px solid var(--dd-gold);
   outline-offset: 3px;
@@ -250,9 +265,9 @@
   bottom: 2px;
   left: -44px;
   width: 13px;
-  background: url('../assets/stolpe-topp.png') center top / 100% auto no-repeat,
-              url('../assets/stolpe-botn.png') center bottom / 100% auto no-repeat,
-              url('../assets/stolpe-midt.png') center / 100% auto repeat-y;
+  background: url('../assets/stolpe-topp.png?v=2') center top / 100% auto no-repeat,
+              url('../assets/stolpe-botn.png?v=2') center bottom / 100% auto no-repeat,
+              url('../assets/stolpe-midt.png?v=2') center 150px / 100% auto repeat-y;
 }
 .dd-row { position: relative; }
 .dd-step-sign {
@@ -469,9 +484,12 @@
   .dd-welcome-board p { font-size: clamp(.58rem, 2.3vw, .75rem); }
   .dd-layout { gap: 10px; }
   .dd-board-stage { padding-top: 5px; margin-top: -25px; }
-  .dd-day-signpost { left: calc(var(--dd-sign-height) * .218 - 31px); top: 74%; width: 158px; height: 58px; }
+  .dd-day-signpost { left: calc(var(--dd-sign-height) * .218); top: 74%; width: 158px; height: 58px; }
   .dd-daydate { padding-right: 12px; font-size: .68rem; }
-  .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) + 2px); right: -2px; width: 142px; padding-left: 12px; font-size: .64rem; }
+  .dd-next-signpost,
+  .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) + 2px); width: 142px; font-size: .64rem; }
+  .dd-next-signpost { padding-right: 12px; }
+  .dd-previous-signpost { padding-left: 12px; }
   .dd-board-frame { padding: 25px 6px 12px 39px; border-width: 4px; }
   .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
   .dd-board::before { left: -28px; width: 10px; }
