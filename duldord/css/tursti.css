@@ -63,7 +63,7 @@
 }
 .dd-welcome-board {
   position: relative;
-  width: min(100%, 490px);
+  width: min(100%, 540px);
   height: var(--dd-sign-height);
   padding: 0 clamp(20px, 4vw, 42px);
   display: grid;
@@ -81,13 +81,47 @@
   pointer-events: none;
 }
 .dd-sign-art-horizontal {
-  display: grid;
-  grid-template-columns: calc(var(--dd-sign-height) * .483) minmax(0, 1fr) calc(var(--dd-sign-height) * .483);
+  display: block;
+  inset: 18% 0 31%;
+  isolation: isolate;
+  background: #142820;
+  clip-path: polygon(2% 0, 98% 0, 100% 7%, 100% 93%, 98% 100%, 2% 100%, 0 93%, 0 7%);
 }
-.dd-sign-art-horizontal .dd-sign-left { background: url('../assets/planke-venstre.png?v=3') center / 100% auto no-repeat; }
-.dd-sign-art-horizontal .dd-sign-middle { background: url('../assets/planke-midt.png?v=3') center / auto 100% repeat-x; }
-.dd-sign-art-horizontal .dd-sign-right { background: url('../assets/planke-hogre.png?v=3') center / 100% auto no-repeat; }
-.dd-welcome-content { position: relative; z-index: 1; width: 100%; padding: 7px 0 2px; }
+.dd-sign-art-horizontal::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 4px;
+  background-color: var(--dd-wood-light);
+  background-image: var(--dd-wood-grain);
+  background-repeat: repeat;
+  background-size: var(--dd-wood-grain-size);
+  clip-path: polygon(2% 0, 98% 0, 100% 7%, 100% 93%, 98% 100%, 2% 100%, 0 93%, 0 7%);
+}
+.dd-sign-art-horizontal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at calc(var(--dd-sign-height) * .218) 18px, #1b130d 0 2.5px, #5d3a22 3px, #120c08 4px, transparent 4.5px),
+    radial-gradient(circle at calc(100% - var(--dd-sign-height) * .218) 18px, #1b130d 0 2.5px, #5d3a22 3px, #120c08 4px, transparent 4.5px),
+    radial-gradient(circle at calc(var(--dd-sign-height) * .218) calc(100% - 18px), #1b130d 0 2.5px, #5d3a22 3px, #120c08 4px, transparent 4.5px),
+    radial-gradient(circle at calc(100% - var(--dd-sign-height) * .218) calc(100% - 18px), #1b130d 0 2.5px, #5d3a22 3px, #120c08 4px, transparent 4.5px);
+}
+.dd-sign-art-horizontal > span { display: none; }
+.dd-welcome-content {
+  position: absolute;
+  z-index: 1;
+  top: 21%;
+  right: 8%;
+  bottom: 34%;
+  left: 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  padding: 0;
+}
 .dd-welcome-board::before { content: none; }
 .dd-welcome-heading {
   display: flex;
@@ -116,15 +150,15 @@
 .dd-header-post {
   position: absolute;
   z-index: -1;
-  top: 10%;
+  top: 7%;
   bottom: -20px;
   width: var(--dd-post-width);
   background-color: #79502d;
   background-image: var(--dd-wood-grain-vertical-strong);
   background-repeat: repeat;
   background-size: 192px 384px;
-  border: 3px solid #142820;
-  border-radius: 999px 999px 5px 5px;
+  border: 2px solid #142820;
+  border-radius: 999px 999px 4px 4px;
   box-shadow: inset 5px 0 0 rgba(255, 255, 255, .08), inset -5px 0 0 rgba(20, 40, 32, .18);
 }
 .dd-header-post::before,
@@ -145,7 +179,7 @@
 .dd-play { grid-column: 1; grid-row: 1; min-width: 0; }
 .dd-board-stage {
   --dd-sign-height: var(--dd-stage-sign-height);
-  --dd-post-width: clamp(26px, calc(var(--dd-sign-height) * .15), 46px);
+  --dd-post-width: clamp(22px, calc(var(--dd-sign-height) * .10), 34px);
   position: relative;
   isolation: isolate;
   padding-top: 8px;
@@ -546,8 +580,8 @@
 
 @media (max-width: 900px) {
   .dd-layout { grid-template-columns: minmax(0, 1fr); max-width: 720px; }
-  .dd-guide { position: relative; isolation: isolate; grid-column: 1; grid-row: 1; width: min(100%, 430px); margin: 0 auto; }
-  .dd-play { grid-column: 1; grid-row: 2; }
+  .dd-play { grid-column: 1; grid-row: 1; }
+  .dd-guide { position: relative; isolation: isolate; grid-column: 1; grid-row: 2; width: min(100%, 430px); margin: 26px auto 0; }
   .dd-sign-art-vertical { display: none; }
   .dd-guide-board {
     z-index: 1;
