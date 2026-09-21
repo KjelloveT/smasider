@@ -48,12 +48,15 @@
 
 /* Den heile frontplanken er festa til brettet med to stolpar. */
 #hero.dd-welcome {
+  position: relative;
+  z-index: 0;
   display: flex;
   justify-content: center;
   margin: 0 auto 10px;
 }
 .dd-welcome-board {
   --dd-sign-height: clamp(260px, 32vw, 325px);
+  --dd-post-width: clamp(26px, calc(var(--dd-sign-height) * .15), 46px);
   position: relative;
   width: min(100%, 490px);
   height: var(--dd-sign-height);
@@ -76,9 +79,9 @@
   display: grid;
   grid-template-columns: calc(var(--dd-sign-height) * .483) minmax(0, 1fr) calc(var(--dd-sign-height) * .483);
 }
-.dd-sign-art-horizontal .dd-sign-left { background: url('../assets/planke-venstre.png?v=2') center / 100% auto no-repeat; }
-.dd-sign-art-horizontal .dd-sign-middle { background: url('../assets/planke-midt.png') center / auto 100% repeat-x; }
-.dd-sign-art-horizontal .dd-sign-right { background: url('../assets/planke-hogre.png?v=2') center / 100% auto no-repeat; }
+.dd-sign-art-horizontal .dd-sign-left { background: url('../assets/planke-venstre.png?v=3') center / 100% auto no-repeat; }
+.dd-sign-art-horizontal .dd-sign-middle { background: url('../assets/planke-midt.png?v=3') center / auto 100% repeat-x; }
+.dd-sign-art-horizontal .dd-sign-right { background: url('../assets/planke-hogre.png?v=3') center / 100% auto no-repeat; }
 .dd-welcome-content { position: relative; z-index: 1; width: 100%; padding: 7px 0 2px; }
 .dd-welcome-board::before { content: none; }
 .dd-welcome-heading {
@@ -110,13 +113,13 @@
   z-index: -1;
   top: 16%;
   bottom: -20px;
-  width: 16px;
-  border: 3px solid #142820;
-  border-radius: 3px;
+  width: var(--dd-post-width);
+  border: 4px solid #142820;
+  border-radius: 5px;
   background: linear-gradient(90deg, #3b2515, #98663a 30%, #784b29 75%, #372212);
 }
-.dd-header-post-left { left: calc(12% - 8px); }
-.dd-header-post-right { right: calc(12% - 8px); }
+.dd-header-post-left { left: calc(var(--dd-sign-height) * .218 - var(--dd-post-width) / 2); }
+.dd-header-post-right { right: calc(var(--dd-sign-height) * .218 - var(--dd-post-width) / 2); }
 
 /* Spelebrettet og vegvisartavla er to sjølvstendige flater på brei skjerm. */
 .dd-layout {
@@ -133,21 +136,9 @@
   position: absolute;
   z-index: 2;
   top: 82%;
-  left: calc(100% - 143px);
+  left: calc(100% - var(--dd-sign-height) * .218 - 74px);
   width: 156px;
   height: 88px;
-}
-.dd-day-signpost::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  top: -17px;
-  bottom: -66px;
-  left: calc(50% - 7px);
-  width: 14px;
-  border: 3px solid #142820;
-  border-radius: 3px;
-  background: linear-gradient(90deg, #3b2515, #98663a 28%, #784b29 75%, #372212);
 }
 .dd-daydate {
   display: flex;
@@ -444,8 +435,7 @@
   .dd-welcome-board p { font-size: clamp(.58rem, 2.3vw, .75rem); }
   .dd-layout { gap: 10px; }
   .dd-board-stage { padding-top: 5px; margin-top: -25px; }
-  .dd-day-signpost { left: calc(100% - 115px); top: 82%; width: 126px; height: 70px; }
-  .dd-day-signpost::before { bottom: -47px; }
+  .dd-day-signpost { left: calc(100% - var(--dd-sign-height) * .218 - 58px); top: 82%; width: 126px; height: 70px; }
   .dd-daydate { width: 126px; padding-right: 10px; font-size: .68rem; }
   .dd-board-frame { padding: 25px 6px 12px 39px; border-width: 4px; }
   .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
