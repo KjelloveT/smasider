@@ -55,8 +55,6 @@
   margin: 0 auto 10px;
 }
 .dd-welcome-board {
-  --dd-sign-height: clamp(260px, 32vw, 325px);
-  --dd-post-width: clamp(26px, calc(var(--dd-sign-height) * .15), 46px);
   position: relative;
   width: min(100%, 490px);
   height: var(--dd-sign-height);
@@ -91,7 +89,7 @@
   gap: clamp(8px, 1.5vw, 14px);
   margin: 0 0 7px;
 }
-.dd-tree-mark { width: clamp(30px, 6vw, 57px); height: auto; flex: 0 0 auto; }
+.dd-hero-logo { width: clamp(38px, 6.4vw, 64px); height: auto; flex: 0 0 auto; }
 .dd-welcome-heading h1 {
   color: #182b23;
   font-family: 'Arial Black', 'Segoe UI', system-ui, sans-serif;
@@ -111,12 +109,12 @@
 .dd-header-post {
   position: absolute;
   z-index: -1;
-  top: 16%;
+  top: 10%;
   bottom: -20px;
   width: var(--dd-post-width);
-  border: 4px solid #142820;
-  border-radius: 5px;
-  background: linear-gradient(90deg, #3b2515, #98663a 30%, #784b29 75%, #372212);
+  background: url('../assets/stolpe-topp.png') center top / 100% auto no-repeat,
+              url('../assets/stolpe-botn.png') center bottom / 100% auto no-repeat,
+              url('../assets/stolpe-midt.png') center / 100% auto repeat-y;
 }
 .dd-header-post-left { left: calc(var(--dd-sign-height) * .218 - var(--dd-post-width) / 2); }
 .dd-header-post-right { right: calc(var(--dd-sign-height) * .218 - var(--dd-post-width) / 2); }
@@ -131,30 +129,65 @@
   margin: 0 auto;
 }
 .dd-play { grid-column: 1; grid-row: 1; min-width: 0; }
-.dd-board-stage { position: relative; isolation: isolate; padding-top: 8px; }
+.dd-board-stage {
+  --dd-sign-height: clamp(260px, 32vw, 325px);
+  --dd-post-width: clamp(26px, calc(var(--dd-sign-height) * .15), 46px);
+  position: relative;
+  isolation: isolate;
+  padding-top: 8px;
+}
 .dd-day-signpost {
   position: absolute;
   z-index: 2;
-  top: 82%;
-  left: calc(100% - var(--dd-sign-height) * .218 - 74px);
-  width: 156px;
-  height: 88px;
+  top: 78%;
+  left: calc(var(--dd-sign-height) * .218 - 42px);
+  width: 205px;
+  height: 72px;
+  transform: rotate(7deg);
 }
-.dd-daydate {
+.dd-daydate,
+.dd-previous-signpost {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
-  width: 156px;
+  width: 100%;
   aspect-ratio: 512 / 109;
-  padding: 0 12px 0 0;
+  padding: 0 17px 0 0;
   color: #fff9e9;
-  background: url('../assets/informasjonspil.png?v=2') center / contain no-repeat;
+  background: transparent;
+  border: 0;
   font-family: 'Arial Black', system-ui, sans-serif;
-  font-size: .78rem;
+  font-size: .86rem;
   font-weight: 900;
   line-height: 1;
   white-space: nowrap;
-  transform: rotate(3deg);
+}
+.dd-daydate::before,
+.dd-previous-signpost::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url('../assets/informasjonspil.png?v=2') center / contain no-repeat;
+}
+.dd-previous-signpost {
+  position: absolute;
+  z-index: 3;
+  top: calc(8px + var(--dd-sign-height) + 2px);
+  right: -8px;
+  width: 175px;
+  padding: 0 0 0 17px;
+  font-size: .78rem;
+  cursor: pointer;
+}
+.dd-previous-signpost::before { transform: scaleX(-1); }
+.dd-previous-signpost[hidden] { display: none; }
+.dd-previous-signpost:hover { filter: brightness(1.1); }
+.dd-previous-signpost:active { transform: scale(.97); }
+.dd-previous-signpost:focus-visible {
+  outline: 3px solid var(--dd-gold);
+  outline-offset: 3px;
 }
 .dd-action,
 .dd-page .dd-iconbtn {
@@ -217,9 +250,9 @@
   bottom: 2px;
   left: -44px;
   width: 13px;
-  background: linear-gradient(90deg, #382314, #8b6036 24%, #79502d 72%, #342115);
-  border: 2px solid #142820;
-  border-radius: 3px;
+  background: url('../assets/stolpe-topp.png') center top / 100% auto no-repeat,
+              url('../assets/stolpe-botn.png') center bottom / 100% auto no-repeat,
+              url('../assets/stolpe-midt.png') center / 100% auto repeat-y;
 }
 .dd-row { position: relative; }
 .dd-step-sign {
@@ -429,14 +462,16 @@
   .dd-page { background-attachment: scroll; background-position: center top; }
   .dd-main { padding: 16px 12px 30px; }
   #hero.dd-welcome { margin-bottom: 8px; }
-  .dd-welcome-board { --dd-sign-height: clamp(175px, 62vw, 240px); padding: 0 18px; }
+  .dd-board-stage { --dd-sign-height: clamp(175px, 62vw, 240px); }
+  .dd-welcome-board { padding: 0 18px; }
   .dd-welcome-heading { gap: 6px; }
   .dd-welcome-heading h1 { font-size: clamp(1.45rem, 6vw, 2.1rem); }
   .dd-welcome-board p { font-size: clamp(.58rem, 2.3vw, .75rem); }
   .dd-layout { gap: 10px; }
   .dd-board-stage { padding-top: 5px; margin-top: -25px; }
-  .dd-day-signpost { left: calc(100% - var(--dd-sign-height) * .218 - 58px); top: 82%; width: 126px; height: 70px; }
-  .dd-daydate { width: 126px; padding-right: 10px; font-size: .68rem; }
+  .dd-day-signpost { left: calc(var(--dd-sign-height) * .218 - 31px); top: 74%; width: 158px; height: 58px; }
+  .dd-daydate { padding-right: 12px; font-size: .68rem; }
+  .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) + 2px); right: -2px; width: 142px; padding-left: 12px; font-size: .64rem; }
   .dd-board-frame { padding: 25px 6px 12px 39px; border-width: 4px; }
   .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
   .dd-board::before { left: -28px; width: 10px; }
@@ -450,6 +485,6 @@
 }
 
 @media (max-width: 360px) {
-  .dd-tree-mark { width: 26px; }
+  .dd-hero-logo { width: 30px; }
   .dd-keyboard-frame { padding-inline: 4px; }
 }

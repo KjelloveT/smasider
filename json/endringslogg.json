@@ -18,6 +18,11 @@
         },
         {
           "t": "endra",
+          "kva": "Duldord-dagsskifte",
+          "tekst": "Biletgenererte trestolpar bind skilta saman. Dagsskiltet skildrar dagen med namn eller dato, «Tidlegare ord» går éin dag attende, og det opphavlege Duldord-ikonet er tilbake."
+        },
+        {
+          "t": "endra",
           "kva": "Duldord-hjelp",
           "tekst": "Den korte forklaringa står på velkomstskiltet, og den utførlege hjelpa opnar seg når spelaren vel henne."
         }

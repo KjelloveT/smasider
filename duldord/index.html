@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="../css/neobrutalisme.css">
 <link rel="stylesheet" href="css/style.css?v=3">
-<link rel="stylesheet" href="css/tursti.css?v=10">
+<link rel="stylesheet" href="css/tursti.css?v=11">
 <script src="../js/neo-header.js" defer></script>
 </head>
 <body class="dd-page" data-light-theme="classic" data-dark-theme="space" data-theme="classic">
@@ -55,7 +55,7 @@
             </div>
             <div class="dd-welcome-content">
               <div class="dd-welcome-heading">
-                <svg class="dd-tree-mark" viewBox="0 0 70 68" aria-hidden="true"><path d="M29 2 4 47h13L8 60h46L45 47h15L36 2l-4 21z" fill="#184f35"/><path d="M46 12 29 44h9l-7 13h35l-8-13h8z" fill="#103e2c"/><path d="M26 58v8m20-9v9" stroke="#51351f" stroke-width="5"/></svg>
+                <img class="dd-hero-logo" src="../_resources/duldord.png" alt="">
                 <div><h1 id="dd-title">DULDORD</h1><p>Eitt fembokstavsord kvar dag</p></div>
               </div>
               <span class="dd-daynum" id="dayNum"></span>
@@ -63,6 +63,7 @@
             <div class="dd-day-signpost"><span class="dd-daydate" id="dayDate"></span></div>
           </div>
         </section>
+        <button class="dd-previous-signpost" id="previousDayBtn" type="button" aria-label="Gå éin dag attende" hidden><span>Tidlegare ord</span></button>
         <div class="dd-board-frame">
           <div class="dd-board" id="board" role="group" aria-label="Gjettebrett"></div>
         </div>
@@ -136,7 +137,7 @@
 <script src="js/keyboard.js?v=1"></script>
 <script src="js/stats.js?v=1"></script>
 <script src="js/archive.js?v=1"></script>
-<script src="js/game.js?v=3"></script>
+<script src="js/game.js?v=4"></script>
 
 </body>
 </html>
