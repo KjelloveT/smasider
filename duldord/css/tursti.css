@@ -9,6 +9,12 @@
   --dd-rust: #a83f2d;
   --dd-gold: #e4ad58;
   --dd-wood: #684327;
+  --dd-wood-light: #f7eed8;
+  --dd-wood-red: #a83f2d;
+  --dd-wood-gold: #e4ad58;
+  --dd-wood-grain: url('../assets/treverk-monster-vassrett.png?v=1');
+  --dd-wood-grain-vertical: url('../assets/treverk-monster-loddrett.png?v=1');
+  --dd-wood-grain-size: 384px 192px;
   --dd-gap: clamp(4px, 0.8vw, 8px);
   min-height: 100vh;
   background: #24573b url('../assets/skogssti.jpg') center top / cover fixed no-repeat;
@@ -112,25 +118,16 @@
   top: 10%;
   bottom: -20px;
   width: var(--dd-post-width);
-  background: url('../assets/stolpe-topp.png?v=3') center top / 100% auto no-repeat,
-              url('../assets/stolpe-botn.png?v=3') center bottom / 100% auto no-repeat;
+  background-color: #79502d;
+  background-image: var(--dd-wood-grain-vertical);
+  background-repeat: repeat;
+  background-size: 192px 384px;
+  border: 3px solid #142820;
+  border-radius: 999px 999px 5px 5px;
+  box-shadow: inset 5px 0 0 rgba(255, 255, 255, .08), inset -5px 0 0 rgba(20, 40, 32, .18);
 }
 .dd-header-post::before,
-.dd-step-rail::before {
-  content: '';
-  position: absolute;
-  right: 0;
-  left: 0;
-  background: url('../assets/stolpe-midt.png?v=3') center top / 100% auto repeat-y;
-}
-.dd-header-post::before {
-  top: calc(var(--dd-post-width) * 1.5625);
-  bottom: calc(var(--dd-post-width) * .9375);
-}
-.dd-step-rail::before {
-  top: calc(var(--dd-rail-width) * 1.5625);
-  bottom: calc(var(--dd-rail-width) * .9375);
-}
+.dd-step-rail::before { content: none; }
 .dd-header-post-left { left: calc(var(--dd-sign-height) * .218 - var(--dd-post-width) / 2); }
 .dd-header-post-right { right: calc(var(--dd-sign-height) * .218 - var(--dd-post-width) / 2); }
 
@@ -166,6 +163,7 @@
 .dd-previous-signpost {
   display: flex;
   position: relative;
+  isolation: isolate;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -180,19 +178,48 @@
   line-height: 1;
   white-space: nowrap;
 }
+.dd-daydate > span,
+.dd-next-signpost > span,
+.dd-previous-signpost > span {
+  position: relative;
+  z-index: 1;
+}
+.dd-daydate::before,
+.dd-daydate::after,
+.dd-next-signpost::before,
+.dd-next-signpost::after,
+.dd-previous-signpost::before,
+.dd-previous-signpost::after {
+  content: '';
+  position: absolute;
+  z-index: -2;
+}
 .dd-daydate::before,
 .dd-next-signpost::before,
 .dd-previous-signpost::before {
-  content: '';
-  position: absolute;
   inset: 0;
-  z-index: -1;
-  background: url('../assets/informasjonspil.png?v=2') center / contain no-repeat;
+  background: #142820;
 }
-.dd-daydate { padding: 0 14px; color: #182b23; }
-.dd-daydate::before { background-image: url('../assets/informasjonsskilt-lyst.png?v=1'); }
+.dd-daydate::after,
+.dd-next-signpost::after,
+.dd-previous-signpost::after {
+  inset: 3px;
+  z-index: -1;
+  background-color: var(--dd-sign-color);
+  background-image: var(--dd-wood-grain);
+  background-repeat: repeat;
+  background-size: var(--dd-wood-grain-size);
+}
+.dd-daydate {
+  --dd-sign-color: var(--dd-wood-light);
+  padding: 0 14px;
+  color: #182b23;
+}
+.dd-daydate::before { border-radius: 3px; }
+.dd-daydate::after { border-radius: 1px; }
 .dd-next-signpost,
 .dd-previous-signpost {
+  --dd-sign-color: var(--dd-wood-red);
   position: absolute;
   z-index: 3;
   top: calc(8px + var(--dd-sign-height) - 20px);
@@ -201,6 +228,14 @@
   cursor: pointer;
   filter: drop-shadow(0 4px 0 #142820);
   transition: filter .12s ease, transform .12s ease;
+}
+.dd-next-signpost::before,
+.dd-next-signpost::after {
+  clip-path: polygon(0 0, 84% 0, 100% 50%, 84% 100%, 0 100%, 5% 50%);
+}
+.dd-previous-signpost::before,
+.dd-previous-signpost::after {
+  clip-path: polygon(16% 0, 100% 0, 95% 50%, 100% 100%, 16% 100%, 0 50%);
 }
 .dd-next-signpost {
   right: calc((100% - min(100%, 490px)) / 2 + var(--dd-sign-height) * .218);
@@ -212,7 +247,6 @@
   padding: 0 17px 0 0;
   transform: translateX(-50%);
 }
-.dd-previous-signpost::before { transform: scaleX(-1); }
 .dd-next-signpost[hidden],
 .dd-previous-signpost[hidden] { display: none; }
 .dd-next-signpost:hover,
@@ -285,28 +319,53 @@
   bottom: 2px;
   left: -44px;
   width: var(--dd-rail-width);
-  background: url('../assets/stolpe-topp.png?v=3') center top / 100% auto no-repeat,
-              url('../assets/stolpe-botn.png?v=3') center bottom / 100% auto no-repeat;
+  background-color: #79502d;
+  background-image: var(--dd-wood-grain-vertical);
+  background-repeat: repeat;
+  background-size: 192px 384px;
+  border: 2px solid #142820;
+  border-radius: 999px;
+  box-shadow: inset 3px 0 0 rgba(255, 255, 255, .08);
 }
 .dd-row { position: relative; }
 .dd-step-sign {
+  --dd-sign-color: var(--dd-wood-gold);
   position: absolute;
+  isolation: isolate;
   top: 50%;
   transform: translateY(-50%);
   height: 34px;
   right: calc(100% + 12px);
   width: 51px;
-  background: url('../assets/stegpil.png') center / contain no-repeat;
+  background: transparent;
   color: #182b23;
   font-family: 'Arial Black', system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 900;
 }
+.dd-step-sign::before,
+.dd-step-sign::after {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  clip-path: polygon(0 0, 76% 0, 100% 50%, 76% 100%, 0 100%, 7% 50%);
+}
+.dd-step-sign::before {
+  inset: 0;
+  background: #142820;
+}
+.dd-step-sign::after {
+  inset: 2px;
+  z-index: -1;
+  background-color: var(--dd-sign-color);
+  background-image: var(--dd-wood-grain);
+  background-repeat: repeat;
+  background-size: var(--dd-wood-grain-size);
+}
 .dd-step-number {
   position: absolute;
   top: 50%;
-  /* Midten av den flate delen av biletpila, målt på 320–1024px skjerm. */
-  left: 44%;
+  left: 42%;
   transform: translate(-50%, -50%);
   line-height: 1;
 }
@@ -354,23 +413,45 @@
 
 /* Tavla er skoren i topp, ein repeterbar midtdel og botn i same målestokk.
    600 × 376 biletpikslar blir 300 × 188 CSS-pikslar utan skeiv skalering. */
-.dd-guide { grid-column: 2; grid-row: 1; }
+.dd-guide {
+  position: relative;
+  isolation: isolate;
+  grid-column: 2;
+  grid-row: 1;
+}
+.dd-guide::before,
+.dd-guide::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: -28px;
+  bottom: -38px;
+  width: 34px;
+  background-color: #79502d;
+  background-image: var(--dd-wood-grain-vertical);
+  background-repeat: repeat;
+  background-size: 192px 384px;
+  border: 3px solid #142820;
+  border-radius: 999px 999px 5px 5px;
+  box-shadow: inset 5px 0 0 rgba(255, 255, 255, .08), inset -5px 0 0 rgba(20, 40, 32, .18);
+}
+.dd-guide::before { left: 18px; }
+.dd-guide::after { right: 18px; }
 .dd-guide-board {
   position: relative;
+  z-index: 1;
   isolation: isolate;
   min-height: 580px;
   padding: 70px 38px 92px;
   color: #182b23;
+  background-color: var(--dd-wood-light);
+  background-image: var(--dd-wood-grain);
+  background-repeat: repeat;
+  background-size: var(--dd-wood-grain-size);
+  border: 4px solid #142820;
+  border-radius: 8px;
 }
-.dd-sign-art-vertical {
-  display: flex;
-  flex-direction: column;
-}
-.dd-sign-art-vertical .dd-sign-top,
-.dd-sign-art-vertical .dd-sign-bottom { flex: 0 0 188px; }
-.dd-sign-art-vertical .dd-sign-top { background: url('../assets/info-planke-topp.png?v=2') center / 100% 100% no-repeat; }
-.dd-sign-art-vertical .dd-sign-middle { flex: 1 1 auto; background: url('../assets/info-planke-midt.png?v=2') center top / 100% auto repeat-y; }
-.dd-sign-art-vertical .dd-sign-bottom { background: url('../assets/info-planke-botn.png?v=2') center / 100% 100% no-repeat; }
+.dd-sign-art-vertical { display: none; }
 .dd-guide-content { position: relative; z-index: 1; }
 .dd-guide h2 {
   margin: 6px 0 12px;
@@ -481,7 +562,10 @@
     top: -11px;
     bottom: -11px;
     width: 15px;
-    background: #79502d;
+    background-color: #79502d;
+    background-image: var(--dd-wood-grain-vertical);
+    background-repeat: repeat;
+    background-size: 192px 384px;
     border: 3px solid #142820;
     border-radius: 3px;
   }
@@ -504,10 +588,10 @@
   .dd-welcome-board p { font-size: clamp(.58rem, 2.3vw, .75rem); }
   .dd-layout { gap: 10px; }
   .dd-board-stage { padding-top: 5px; margin-top: -25px; }
-  .dd-day-signpost { left: calc(var(--dd-sign-height) * .218); top: 68%; width: 158px; height: 58px; }
+  .dd-day-signpost { left: calc(var(--dd-sign-height) * .218); top: 68%; width: 132px; height: 58px; }
   .dd-daydate { padding-inline: 10px; font-size: .68rem; }
   .dd-next-signpost,
-  .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) - 16px); width: 142px; font-size: .64rem; }
+  .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) - 16px); width: 128px; font-size: .64rem; }
   .dd-next-signpost { padding-left: 12px; }
   .dd-previous-signpost { padding-right: 12px; }
   .dd-board-frame { padding: 25px 6px 12px 39px; border-width: 4px; }
