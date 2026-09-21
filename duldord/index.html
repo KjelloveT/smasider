@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="../css/neobrutalisme.css">
 <link rel="stylesheet" href="css/style.css?v=3">
-<link rel="stylesheet" href="css/tursti.css?v=12">
+<link rel="stylesheet" href="css/tursti.css?v=13">
 <script src="../js/neo-header.js" defer></script>
 </head>
 <body class="dd-page" data-light-theme="classic" data-dark-theme="space" data-theme="classic">
@@ -60,11 +60,11 @@
               </div>
               <span class="dd-daynum" id="dayNum"></span>
             </div>
-            <div class="dd-day-signpost"><span class="dd-daydate" id="dayDate"></span></div>
+            <div class="dd-day-signpost"><span class="dd-daydate" id="dayDate"><span class="dd-info-mark" aria-hidden="true">i</span><span id="dayDateLabel"></span></span></div>
           </div>
         </section>
-        <button class="dd-next-signpost" id="nextDayBtn" type="button" aria-label="Gå éin dag fram" hidden><span>Seinare ord</span></button>
-        <button class="dd-previous-signpost" id="previousDayBtn" type="button" aria-label="Gå éin dag attende" hidden><span>Tidlegare ord</span></button>
+        <button class="dd-next-signpost" id="nextDayBtn" type="button" aria-label="Gå éin dag fram" hidden><span class="dd-nav-arrow" aria-hidden="true">→</span><span>Seinare ord</span></button>
+        <button class="dd-previous-signpost" id="previousDayBtn" type="button" aria-label="Gå éin dag attende" hidden><span class="dd-nav-arrow" aria-hidden="true">←</span><span>Tidlegare ord</span></button>
         <div class="dd-board-frame">
           <div class="dd-board" id="board" role="group" aria-label="Gjettebrett"></div>
         </div>
@@ -134,11 +134,11 @@
 <script src="js/state.js?v=1"></script>
 <script src="js/storage.js?v=1"></script>
 <script src="js/dictionary.js?v=1"></script>
-<script src="js/board.js?v=2"></script>
+<script src="js/board.js?v=3"></script>
 <script src="js/keyboard.js?v=1"></script>
 <script src="js/stats.js?v=1"></script>
 <script src="js/archive.js?v=1"></script>
-<script src="js/game.js?v=5"></script>
+<script src="js/game.js?v=6"></script>
 
 </body>
 </html>

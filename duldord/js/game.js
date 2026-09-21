@@ -54,10 +54,10 @@
     const daysAgo = state.todayIndex - state.dayIndex;
     el.dayNum.textContent = `Dag ${state.dayIndex + 1}`;
     el.dayNum.classList.toggle('dd-daynum-archive', !isToday);
-    if (daysAgo === 0) el.dayDate.textContent = 'Dagens ord';
-    else if (daysAgo === 1) el.dayDate.textContent = 'Gårsdagens ord';
-    else if (daysAgo === 2) el.dayDate.textContent = 'Forgårsdagens ord';
-    else el.dayDate.textContent = S.formatDate(S.dateForIndex(state.dayIndex));
+    if (daysAgo === 0) el.dayDateLabel.textContent = 'Dagens ord';
+    else if (daysAgo === 1) el.dayDateLabel.textContent = 'Gårsdagens ord';
+    else if (daysAgo === 2) el.dayDateLabel.textContent = 'Forgårsdagens ord';
+    else el.dayDateLabel.textContent = S.formatDate(S.dateForIndex(state.dayIndex));
     el.previousDayBtn.hidden = state.dayIndex <= 0;
     const latestAvailableIndex = Math.min(state.todayIndex, S.wordCount() - 1);
     el.nextDayBtn.hidden = state.dayIndex >= latestAvailableIndex;
@@ -199,7 +199,7 @@
 
   // ── oppstart ─────────────────────────────────────────────────────────────
   function cacheElements() {
-    ['hero', 'dayNum', 'dayDate', 'nextDayBtn', 'previousDayBtn', 'message', 'board', 'keyboard', 'footnote',
+    ['hero', 'dayNum', 'dayDate', 'dayDateLabel', 'nextDayBtn', 'previousDayBtn', 'message', 'board', 'keyboard', 'footnote',
       'archiveBtn', 'statsBtn', 'helpBtn', 'shareBtn', 'shareLabel', 'shareWrap',
       'archiveGrid', 'helpOverlay', 'statsOverlay', 'archiveOverlay']
       .forEach(id => { el[id] = document.getElementById(id); });

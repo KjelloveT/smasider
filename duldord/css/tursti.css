@@ -112,9 +112,24 @@
   top: 10%;
   bottom: -20px;
   width: var(--dd-post-width);
-  background: url('../assets/stolpe-topp.png?v=2') center top / 100% auto no-repeat,
-              url('../assets/stolpe-botn.png?v=2') center bottom / 100% auto no-repeat,
-              url('../assets/stolpe-midt.png?v=2') center 150px / 100% auto repeat-y;
+  background: url('../assets/stolpe-topp.png?v=3') center top / 100% auto no-repeat,
+              url('../assets/stolpe-botn.png?v=3') center bottom / 100% auto no-repeat;
+}
+.dd-header-post::before,
+.dd-step-rail::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  background: url('../assets/stolpe-midt.png?v=3') center top / 100% auto repeat-y;
+}
+.dd-header-post::before {
+  top: calc(var(--dd-post-width) * 1.5625);
+  bottom: calc(var(--dd-post-width) * .9375);
+}
+.dd-step-rail::before {
+  top: calc(var(--dd-rail-width) * 1.5625);
+  bottom: calc(var(--dd-rail-width) * .9375);
 }
 .dd-header-post-left { left: calc(var(--dd-sign-height) * .218 - var(--dd-post-width) / 2); }
 .dd-header-post-right { right: calc(var(--dd-sign-height) * .218 - var(--dd-post-width) / 2); }
@@ -173,6 +188,19 @@
   z-index: -1;
   background: url('../assets/informasjonspil.png?v=2') center / contain no-repeat;
 }
+.dd-daydate { padding-left: 30px; }
+.dd-info-mark {
+  position: absolute;
+  left: 12px;
+  display: grid;
+  place-items: center;
+  width: 21px;
+  height: 21px;
+  border: 2px solid #fff9e9;
+  border-radius: 50%;
+  color: #fff9e9;
+  font: 900 .78rem/1 Georgia, serif;
+}
 .dd-next-signpost,
 .dd-previous-signpost {
   position: absolute;
@@ -181,6 +209,8 @@
   width: 175px;
   font-size: .78rem;
   cursor: pointer;
+  filter: drop-shadow(0 4px 0 #142820);
+  transition: filter .12s ease, transform .12s ease;
 }
 .dd-next-signpost {
   left: calc((100% - min(100%, 490px)) / 2 + var(--dd-sign-height) * .218);
@@ -193,10 +223,21 @@
   transform: translateX(50%);
 }
 .dd-previous-signpost::before { transform: scaleX(-1); }
+.dd-nav-arrow {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin: 0 5px;
+  border: 2px solid #fff9e9;
+  border-radius: 50%;
+  font: 900 1rem/1 system-ui, sans-serif;
+}
+.dd-next-signpost .dd-nav-arrow { order: 2; }
 .dd-next-signpost[hidden],
 .dd-previous-signpost[hidden] { display: none; }
 .dd-next-signpost:hover,
-.dd-previous-signpost:hover { filter: brightness(1.1); }
+.dd-previous-signpost:hover { filter: brightness(1.12) drop-shadow(0 5px 0 #142820); }
 .dd-next-signpost:active { transform: translateX(-50%) scale(.97); }
 .dd-previous-signpost:active { transform: translateX(50%) scale(.97); }
 .dd-next-signpost:focus-visible,
@@ -258,16 +299,15 @@
   width: fit-content;
   margin: 0 auto;
 }
-.dd-board::before {
-  content: '';
+.dd-step-rail {
+  --dd-rail-width: 13px;
   position: absolute;
   top: 2px;
   bottom: 2px;
   left: -44px;
-  width: 13px;
-  background: url('../assets/stolpe-topp.png?v=2') center top / 100% auto no-repeat,
-              url('../assets/stolpe-botn.png?v=2') center bottom / 100% auto no-repeat,
-              url('../assets/stolpe-midt.png?v=2') center 150px / 100% auto repeat-y;
+  width: var(--dd-rail-width);
+  background: url('../assets/stolpe-topp.png?v=3') center top / 100% auto no-repeat,
+              url('../assets/stolpe-botn.png?v=3') center bottom / 100% auto no-repeat;
 }
 .dd-row { position: relative; }
 .dd-step-sign {
@@ -485,14 +525,15 @@
   .dd-layout { gap: 10px; }
   .dd-board-stage { padding-top: 5px; margin-top: -25px; }
   .dd-day-signpost { left: calc(var(--dd-sign-height) * .218); top: 74%; width: 158px; height: 58px; }
-  .dd-daydate { padding-right: 12px; font-size: .68rem; }
+  .dd-daydate { padding-right: 8px; padding-left: 25px; font-size: .68rem; }
+  .dd-info-mark { left: 9px; width: 17px; height: 17px; font-size: .65rem; }
   .dd-next-signpost,
   .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) + 2px); width: 142px; font-size: .64rem; }
   .dd-next-signpost { padding-right: 12px; }
   .dd-previous-signpost { padding-left: 12px; }
   .dd-board-frame { padding: 25px 6px 12px 39px; border-width: 4px; }
   .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
-  .dd-board::before { left: -28px; width: 10px; }
+  .dd-step-rail { --dd-rail-width: 10px; left: -28px; }
   .dd-step-sign { right: calc(100% + 8px); width: 29px; height: 19px; font-size: .72rem; }
   .dd-keyboard-frame { padding: 10px 6px; margin-top: 10px; border-width: 4px; }
   .dd-keyrow { gap: 3px; }

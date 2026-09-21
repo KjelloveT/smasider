@@ -14,6 +14,11 @@
     boardEl.textContent = '';
     rows.length = 0;
 
+    const stepRail = document.createElement('span');
+    stepRail.className = 'dd-step-rail';
+    stepRail.setAttribute('aria-hidden', 'true');
+    boardEl.appendChild(stepRail);
+
     for (let r = 0; r < MAX_GUESSES; r++) {
       const row = document.createElement('div');
       row.className = 'dd-row';
