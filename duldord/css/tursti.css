@@ -136,6 +136,7 @@
 
 /* Spelebrettet og vegvisartavla er to sjølvstendige flater på brei skjerm. */
 .dd-layout {
+  --dd-stage-sign-height: clamp(260px, 32vw, 325px);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(250px, 300px);
   gap: clamp(12px, 1.5vw, 20px);
@@ -145,7 +146,7 @@
 }
 .dd-play { grid-column: 1; grid-row: 1; min-width: 0; }
 .dd-board-stage {
-  --dd-sign-height: clamp(260px, 32vw, 325px);
+  --dd-sign-height: var(--dd-stage-sign-height);
   --dd-post-width: clamp(26px, calc(var(--dd-sign-height) * .15), 46px);
   position: relative;
   isolation: isolate;
@@ -154,7 +155,7 @@
 .dd-day-signpost {
   position: absolute;
   z-index: 2;
-  top: 78%;
+  top: 72%;
   left: calc(var(--dd-sign-height) * .218);
   width: 205px;
   height: 72px;
@@ -188,24 +189,13 @@
   z-index: -1;
   background: url('../assets/informasjonspil.png?v=2') center / contain no-repeat;
 }
-.dd-daydate { padding-left: 30px; }
-.dd-info-mark {
-  position: absolute;
-  left: 12px;
-  display: grid;
-  place-items: center;
-  width: 21px;
-  height: 21px;
-  border: 2px solid #fff9e9;
-  border-radius: 50%;
-  color: #fff9e9;
-  font: 900 .78rem/1 Georgia, serif;
-}
+.dd-daydate { padding: 0 14px; color: #182b23; }
+.dd-daydate::before { background-image: url('../assets/informasjonsskilt-lyst.png?v=1'); }
 .dd-next-signpost,
 .dd-previous-signpost {
   position: absolute;
   z-index: 3;
-  top: calc(8px + var(--dd-sign-height) + 2px);
+  top: calc(8px + var(--dd-sign-height) - 20px);
   width: 175px;
   font-size: .78rem;
   cursor: pointer;
@@ -213,33 +203,22 @@
   transition: filter .12s ease, transform .12s ease;
 }
 .dd-next-signpost {
-  left: calc((100% - min(100%, 490px)) / 2 + var(--dd-sign-height) * .218);
-  padding: 0 17px 0 0;
-  transform: translateX(-50%);
-}
-.dd-previous-signpost {
   right: calc((100% - min(100%, 490px)) / 2 + var(--dd-sign-height) * .218);
   padding: 0 0 0 17px;
   transform: translateX(50%);
 }
-.dd-previous-signpost::before { transform: scaleX(-1); }
-.dd-nav-arrow {
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  margin: 0 5px;
-  border: 2px solid #fff9e9;
-  border-radius: 50%;
-  font: 900 1rem/1 system-ui, sans-serif;
+.dd-previous-signpost {
+  left: calc((100% - min(100%, 490px)) / 2 + var(--dd-sign-height) * .218);
+  padding: 0 17px 0 0;
+  transform: translateX(-50%);
 }
-.dd-next-signpost .dd-nav-arrow { order: 2; }
+.dd-previous-signpost::before { transform: scaleX(-1); }
 .dd-next-signpost[hidden],
 .dd-previous-signpost[hidden] { display: none; }
 .dd-next-signpost:hover,
 .dd-previous-signpost:hover { filter: brightness(1.12) drop-shadow(0 5px 0 #142820); }
-.dd-next-signpost:active { transform: translateX(-50%) scale(.97); }
-.dd-previous-signpost:active { transform: translateX(50%) scale(.97); }
+.dd-next-signpost:active { transform: translateX(50%) scale(.97); }
+.dd-previous-signpost:active { transform: translateX(-50%) scale(.97); }
 .dd-next-signpost:focus-visible,
 .dd-previous-signpost:focus-visible {
   outline: 3px solid var(--dd-gold);
@@ -474,6 +453,7 @@
 }
 
 @media (min-width: 901px) {
+  .dd-guide { margin-top: var(--dd-stage-sign-height); }
   .dd-guide:has(#archiveBtn:not([hidden])) .dd-guide-board { min-height: 625px; }
   .dd-guide:has(#archiveBtn:not([hidden])):has(.dd-guide-actions .dd-iconbtn:not([hidden])) .dd-guide-board { min-height: 690px; }
 }
@@ -524,13 +504,12 @@
   .dd-welcome-board p { font-size: clamp(.58rem, 2.3vw, .75rem); }
   .dd-layout { gap: 10px; }
   .dd-board-stage { padding-top: 5px; margin-top: -25px; }
-  .dd-day-signpost { left: calc(var(--dd-sign-height) * .218); top: 74%; width: 158px; height: 58px; }
-  .dd-daydate { padding-right: 8px; padding-left: 25px; font-size: .68rem; }
-  .dd-info-mark { left: 9px; width: 17px; height: 17px; font-size: .65rem; }
+  .dd-day-signpost { left: calc(var(--dd-sign-height) * .218); top: 68%; width: 158px; height: 58px; }
+  .dd-daydate { padding-inline: 10px; font-size: .68rem; }
   .dd-next-signpost,
-  .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) + 2px); width: 142px; font-size: .64rem; }
-  .dd-next-signpost { padding-right: 12px; }
-  .dd-previous-signpost { padding-left: 12px; }
+  .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) - 16px); width: 142px; font-size: .64rem; }
+  .dd-next-signpost { padding-left: 12px; }
+  .dd-previous-signpost { padding-right: 12px; }
   .dd-board-frame { padding: 25px 6px 12px 39px; border-width: 4px; }
   .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
   .dd-step-rail { --dd-rail-width: 10px; left: -28px; }
