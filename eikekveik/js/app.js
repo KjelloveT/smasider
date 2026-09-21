@@ -6,9 +6,9 @@
 window.Eikekveik = window.Eikekveik || {};
 
 Eikekveik.GAME_KEY = 'eikekveik';
-// 2: nodane har fått form og ikon, og kartet har fått piler. Filer med
-// versjon 1 manglar berre felta og blir lesne med standardverdiar.
-Eikekveik.EXPORT_VERSION = 2;
+// 3: kvar sambandline kan ha eiga pilretning. Versjon 2 hadde éin
+// pilinnstilling for heile kartet og blir migrert ved innlasting.
+Eikekveik.EXPORT_VERSION = 3;
 
 Eikekveik.COLORS = [
     { name: 'gul',      value: '#FFD166' },
@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
         zoomFit: $('zoom-fit'),
         panelEmpty: $('panel-empty'),
         panelNode: $('panel-node'),
+        panelEdge: $('panel-edge'),
+        edgeEndingRow: $('edge-ending-row'),
         colorRow: $('color-row'),
         shapePicker: $('shape-picker'),
         shapeGridKart: $('shape-grid-kart'),
@@ -43,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         iconPreview: $('icon-preview'),
         btnIcon: $('btn-icon'),
         btnIconRemove: $('btn-icon-remove'),
-        arrowsToggle: $('arrows-toggle'),
         btnNew: $('btn-new'),
         btnUndo: $('btn-undo'),
         btnRedo: $('btn-redo'),

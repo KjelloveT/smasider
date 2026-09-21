@@ -60,9 +60,10 @@ Eikekveik.Png = (function () {
             `<g transform="translate(${PAD - b.minX} ${PAD - b.minY})">`
         ];
 
-        const marker = Eikekveik.State.getArrows() ? ' marker-end="url(#a)"' : '';
-        for (const d of Eikekveik.Render.edgePaths()) {
-            parts.push(`<path d="${d}" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"${marker}/>`);
+        for (const edge of Eikekveik.Render.edgeItems()) {
+            const markerStart = edge.ending === 'start' || edge.ending === 'both' ? ' marker-start="url(#a)"' : '';
+            const markerEnd = edge.ending === 'end' || edge.ending === 'both' ? ' marker-end="url(#a)"' : '';
+            parts.push(`<path d="${edge.d}" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"${markerStart}${markerEnd}/>`);
         }
 
         const k = Eikekveik.View.get().k;

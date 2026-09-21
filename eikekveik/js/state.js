@@ -4,9 +4,9 @@ Eikekveik.State = (function () {
     const HISTORY_LIMIT = 20;
 
     const state = {
-        nodes: [],          // [{ id, text, x, y, color, parentId, shape, icon }]
-        arrows: false,      // piler på linjene, gjeld heile kartet
+        nodes: [],          // [{ id, text, x, y, color, parentId, shape, icon, lineEnding }]
         selectedId: null,
+        selectedEdgeId: null, // ID-en til barnet som eig den valde lina
         nextId: 1,
         history: [],
         historyIndex: -1
@@ -29,7 +29,7 @@ Eikekveik.State = (function () {
     function getEdges() {
         return state.nodes
             .filter(n => n.parentId != null)
-            .map(n => ({ fromId: n.parentId, toId: n.id }));
+            .map(n => ({ fromId: n.parentId, toId: n.id, ending: n.lineEnding }));
     }
 
     function getSelectedId() {
@@ -38,20 +38,26 @@ Eikekveik.State = (function () {
 
     function setSelected(id) {
         state.selectedId = id;
+        state.selectedEdgeId = null;
     }
 
-    function getArrows() {
-        return state.arrows;
+    function getSelectedEdgeId() {
+        return state.selectedEdgeId;
     }
 
-    function setArrows(on) {
-        state.arrows = !!on;
-        pushHistory();
+    function setSelectedEdge(id) {
+        const node = findNode(id);
+        state.selectedEdgeId = node && node.parentId != null ? id : null;
+        state.selectedId = null;
+    }
+
+    function cleanLineEnding(value, fallback = 'none') {
+        return ['none', 'start', 'end', 'both'].includes(value) ? value : fallback;
     }
 
     // Eit importert kart kan innehalde kva som helst, så kvar node blir
     // bygd opp att felt for felt i staden for å bli kopiert rett inn.
-    function cleanNode(n) {
+    function cleanNode(n, legacyLineEnding) {
         const color = typeof n.color === 'string' && /^#[0-9a-f]{3,8}$/i.test(n.color)
             ? n.color : Eikekveik.DEFAULT_COLOR;
         return {
@@ -62,15 +68,16 @@ Eikekveik.State = (function () {
             color,
             parentId: n.parentId == null ? null : Number(n.parentId),
             shape: Eikekveik.Shapes.has(n.shape) ? n.shape : Eikekveik.DEFAULT_SHAPE,
-            icon: Eikekveik.Symbols.clean(n.icon)
+            icon: Eikekveik.Symbols.clean(n.icon),
+            lineEnding: cleanLineEnding(n.lineEnding, legacyLineEnding)
         };
     }
 
     function reset() {
         state.nodes = [];
-        state.arrows = false;
         state.nextId = 1;
         state.selectedId = null;
+        state.selectedEdgeId = null;
         state.history = [];
         state.historyIndex = -1;
 
@@ -92,10 +99,11 @@ Eikekveik.State = (function () {
 
     function load(snapshot) {
         if (!snapshot || !Array.isArray(snapshot.nodes)) return;
-        state.nodes = snapshot.nodes.map(cleanNode).filter(n => Number.isFinite(n.id));
-        state.arrows = !!snapshot.arrows;
+        const legacyLineEnding = snapshot.arrows ? 'end' : 'none';
+        state.nodes = snapshot.nodes.map(n => cleanNode(n, legacyLineEnding)).filter(n => Number.isFinite(n.id));
         state.nextId = state.nodes.reduce((m, n) => Math.max(m, n.id), 0) + 1;
         state.selectedId = null;
+        state.selectedEdgeId = null;
         state.history = [];
         state.historyIndex = -1;
         pushHistory();
@@ -104,7 +112,6 @@ Eikekveik.State = (function () {
     function snapshot() {
         return {
             nodes: state.nodes.map(n => ({ ...n, icon: n.icon ? { ...n.icon } : null })),
-            arrows: state.arrows,
             nextId: state.nextId
         };
     }
@@ -118,7 +125,8 @@ Eikekveik.State = (function () {
             color: props.color ?? Eikekveik.DEFAULT_COLOR,
             parentId: props.parentId ?? null,
             shape: props.shape ?? Eikekveik.DEFAULT_SHAPE,
-            icon: props.icon ?? null
+            icon: props.icon ?? null,
+            lineEnding: cleanLineEnding(props.lineEnding)
         };
         state.nodes.push(node);
         if (!opts.skipHistory) pushHistory();
@@ -129,6 +137,14 @@ Eikekveik.State = (function () {
         const n = findNode(id);
         if (!n) return null;
         Object.assign(n, patch);
+        if (!opts.skipHistory) pushHistory();
+        return n;
+    }
+
+    function updateEdge(id, ending, opts = {}) {
+        const n = findNode(id);
+        if (!n || n.parentId == null) return null;
+        n.lineEnding = cleanLineEnding(ending);
         if (!opts.skipHistory) pushHistory();
         return n;
     }
@@ -151,6 +167,7 @@ Eikekveik.State = (function () {
 
         state.nodes = state.nodes.filter(n => !toRemove.has(n.id));
         if (toRemove.has(state.selectedId)) state.selectedId = null;
+        if (toRemove.has(state.selectedEdgeId)) state.selectedEdgeId = null;
         if (!opts.skipHistory) pushHistory();
         return [...toRemove];
     }
@@ -197,16 +214,17 @@ Eikekveik.State = (function () {
 
     function applySnapshot(snap) {
         state.nodes = snap.nodes.map(n => ({ ...n }));
-        state.arrows = !!snap.arrows;
         state.nextId = snap.nextId;
         if (!findNode(state.selectedId)) state.selectedId = null;
+        const edgeNode = findNode(state.selectedEdgeId);
+        if (!edgeNode || edgeNode.parentId == null) state.selectedEdgeId = null;
     }
 
     return {
         init, reset, load, snapshot,
         getNodes, getEdges, findNode, descendants,
-        getSelectedId, setSelected, getArrows, setArrows,
-        addNode, updateNode, deleteNode,
+        getSelectedId, setSelected, getSelectedEdgeId, setSelectedEdge,
+        addNode, updateNode, updateEdge, deleteNode,
         undo, redo, canUndo, canRedo, pushHistory
     };
 })();

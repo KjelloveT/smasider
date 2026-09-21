@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.55] — 2026-09-21
+
+### Lagt til
+- **Sambandslinene i Eikekveik kan få kvar si pilretning.** Klikk på ei line og vel vanleg strek, pil venstre, pil høgre eller piler i begge endar. Pilspissane får litt luft mot nodane, medan reine strekar framleis går heilt inn til kanten.
+
 ## [1.54] — 2026-09-18
 
 ### Fiksa

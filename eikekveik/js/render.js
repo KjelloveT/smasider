@@ -2,6 +2,7 @@
 
 Eikekveik.Render = (function () {
     const SVG_NS = 'http://www.w3.org/2000/svg';
+    const ARROW_GAP = 12;
     let resizeObserver = null;
 
     function init() {
@@ -196,7 +197,7 @@ Eikekveik.Render = (function () {
 
     // Linjene som SVG-stiar i verdskoordinatar. Både lerretet og
     // PNG-eksporten brukar denne, så dei to kan ikkje bli ulike.
-    function edgePaths() {
+    function edgeItems() {
         const els = nodeEls();
         const out = [];
         for (const e of Eikekveik.State.getEdges()) {
@@ -205,12 +206,21 @@ Eikekveik.Render = (function () {
             const aEl = els.get(e.fromId);
             const bEl = els.get(e.toId);
             if (!a || !b || !aEl || !bEl) continue;
-            out.push(edgePath(a, aEl.offsetWidth, aEl.offsetHeight, b, bEl.offsetWidth, bEl.offsetHeight));
+            out.push({
+                toId: e.toId,
+                ending: e.ending,
+                label: `Samband frå ${a.text || 'node'} til ${b.text || 'node'}`,
+                d: edgePath(a, aEl.offsetWidth, aEl.offsetHeight, b, bEl.offsetWidth, bEl.offsetHeight, e.ending)
+            });
         }
         return out;
     }
 
-    function edgePath(a, aw, ah, b, bw, bh) {
+    function edgePaths() {
+        return edgeItems().map(edge => edge.d);
+    }
+
+    function edgePath(a, aw, ah, b, bw, bh, ending) {
         const acx = a.x + aw / 2, acy = a.y + ah / 2;
         const bcx = b.x + bw / 2, bcy = b.y + bh / 2;
 
@@ -226,8 +236,24 @@ Eikekveik.Render = (function () {
 
         const p = Eikekveik.Shapes.anchor(a.shape, aw, ah, sideA);
         const q = Eikekveik.Shapes.anchor(b.shape, bw, bh, sideB);
-        const x1 = a.x + p.x, y1 = a.y + p.y;
-        const x2 = b.x + q.x, y2 = b.y + q.y;
+        let x1 = a.x + p.x, y1 = a.y + p.y;
+        let x2 = b.x + q.x, y2 = b.y + q.y;
+
+        // Pilspissen skal ikkje liggje heilt inntil forma. Berre enden som
+        // faktisk har pil blir flytt ut i mellomrommet; ein vanleg strek
+        // brukar ankerpunktet på omrisset og går difor heilt inn til boksen.
+        const vectors = {
+            top: { x: 0, y: -1 }, right: { x: 1, y: 0 },
+            bottom: { x: 0, y: 1 }, left: { x: -1, y: 0 }
+        };
+        if (ending === 'start' || ending === 'both') {
+            x1 += vectors[sideA].x * ARROW_GAP;
+            y1 += vectors[sideA].y * ARROW_GAP;
+        }
+        if (ending === 'end' || ending === 'both') {
+            x2 += vectors[sideB].x * ARROW_GAP;
+            y2 += vectors[sideB].y * ARROW_GAP;
+        }
 
         if (vertical) {
             const k = (y2 - y1) / 2;
@@ -240,11 +266,24 @@ Eikekveik.Render = (function () {
     function renderEdges() {
         const layer = Eikekveik.el.edges.querySelector('.edge-layer');
         layer.replaceChildren();
-        const arrows = Eikekveik.State.getArrows();
-        for (const d of edgePaths()) {
-            const path = svgEl('path', { d });
-            if (arrows) path.setAttribute('marker-end', 'url(#ek-arrow)');
-            layer.appendChild(path);
+        const selectedId = Eikekveik.State.getSelectedEdgeId();
+        for (const edge of edgeItems()) {
+            const group = svgEl('g', { class: 'edge' });
+            const hit = svgEl('path', {
+                class: 'edge-hit', d: edge.d, tabindex: '0', role: 'button',
+                'data-edge-id': edge.toId,
+                'aria-label': edge.label
+            });
+            const line = svgEl('path', { class: 'edge-line', d: edge.d });
+            if (edge.ending === 'start' || edge.ending === 'both') {
+                line.setAttribute('marker-start', 'url(#ek-arrow)');
+            }
+            if (edge.ending === 'end' || edge.ending === 'both') {
+                line.setAttribute('marker-end', 'url(#ek-arrow)');
+            }
+            line.classList.toggle('selected', edge.toId === selectedId);
+            group.append(hit, line);
+            layer.appendChild(group);
         }
     }
 
@@ -298,10 +337,17 @@ Eikekveik.Render = (function () {
         const el = Eikekveik.el;
         const id = Eikekveik.State.getSelectedId();
         const node = id != null ? Eikekveik.State.findNode(id) : null;
+        const edgeId = Eikekveik.State.getSelectedEdgeId();
+        const edgeNode = edgeId != null ? Eikekveik.State.findNode(edgeId) : null;
 
-        el.panelEmpty.hidden = !!node;
         el.panelNode.hidden = !node;
-        el.arrowsToggle.checked = Eikekveik.State.getArrows();
+        el.panelEdge.hidden = !edgeNode;
+        el.panelEmpty.hidden = !!node || !!edgeNode;
+        if (edgeNode) {
+            el.edgeEndingRow.querySelectorAll('.edge-ending-btn').forEach(btn => {
+                btn.setAttribute('aria-pressed', btn.dataset.ending === edgeNode.lineEnding ? 'true' : 'false');
+            });
+        }
         if (!node) return;
 
         el.colorRow.querySelectorAll('.color-swatch').forEach(btn => {
@@ -322,7 +368,7 @@ Eikekveik.Render = (function () {
     }
 
     return {
-        init, renderAll, renderNodes, renderEdges, edgePaths,
+        init, renderAll, renderNodes, renderEdges, edgeItems, edgePaths,
         updateNodePosition, updateUndoRedo, updatePanel
     };
 })();
