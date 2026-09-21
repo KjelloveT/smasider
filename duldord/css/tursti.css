@@ -9,11 +9,12 @@
   --dd-rust: #a83f2d;
   --dd-gold: #e4ad58;
   --dd-wood: #684327;
-  --dd-wood-light: #f7eed8;
+  --dd-wood-light: #f4e7c8;
   --dd-wood-red: #a83f2d;
   --dd-wood-gold: #e4ad58;
   --dd-wood-grain: url('../assets/treverk-monster-vassrett.png?v=1');
   --dd-wood-grain-vertical: url('../assets/treverk-monster-loddrett.png?v=1');
+  --dd-wood-grain-vertical-strong: url('../assets/treverk-monster-loddrett.png?v=1'), url('../assets/treverk-monster-loddrett.png?v=1'), url('../assets/treverk-monster-loddrett.png?v=1');
   --dd-wood-grain-size: 384px 192px;
   --dd-gap: clamp(4px, 0.8vw, 8px);
   min-height: 100vh;
@@ -119,7 +120,7 @@
   bottom: -20px;
   width: var(--dd-post-width);
   background-color: #79502d;
-  background-image: var(--dd-wood-grain-vertical);
+  background-image: var(--dd-wood-grain-vertical-strong);
   background-repeat: repeat;
   background-size: 192px 384px;
   border: 3px solid #142820;
@@ -152,11 +153,11 @@
 .dd-day-signpost {
   position: absolute;
   z-index: 2;
-  top: 72%;
+  top: 68%;
   left: calc(var(--dd-sign-height) * .218);
-  width: 205px;
-  height: 72px;
-  transform: translateX(-50%) rotate(7deg);
+  width: 190px;
+  height: 58px;
+  transform: translateX(-50%) rotate(3deg);
 }
 .dd-daydate,
 .dd-next-signpost,
@@ -212,11 +213,15 @@
 }
 .dd-daydate {
   --dd-sign-color: var(--dd-wood-light);
+  height: 48px;
+  aspect-ratio: auto;
   padding: 0 14px;
   color: #182b23;
 }
-.dd-daydate::before { border-radius: 3px; }
-.dd-daydate::after { border-radius: 1px; }
+.dd-daydate::before,
+.dd-daydate::after {
+  clip-path: polygon(3% 0, 97% 0, 100% 15%, 100% 85%, 97% 100%, 3% 100%, 0 85%, 0 15%);
+}
 .dd-next-signpost,
 .dd-previous-signpost {
   --dd-sign-color: var(--dd-wood-red);
@@ -320,7 +325,7 @@
   left: -44px;
   width: var(--dd-rail-width);
   background-color: #79502d;
-  background-image: var(--dd-wood-grain-vertical);
+  background-image: var(--dd-wood-grain-vertical-strong);
   background-repeat: repeat;
   background-size: 192px 384px;
   border: 2px solid #142820;
@@ -428,7 +433,7 @@
   bottom: -38px;
   width: 34px;
   background-color: #79502d;
-  background-image: var(--dd-wood-grain-vertical);
+  background-image: var(--dd-wood-grain-vertical-strong);
   background-repeat: repeat;
   background-size: 192px 384px;
   border: 3px solid #142820;
@@ -563,7 +568,7 @@
     bottom: -11px;
     width: 15px;
     background-color: #79502d;
-    background-image: var(--dd-wood-grain-vertical);
+    background-image: var(--dd-wood-grain-vertical-strong);
     background-repeat: repeat;
     background-size: 192px 384px;
     border: 3px solid #142820;
@@ -588,8 +593,8 @@
   .dd-welcome-board p { font-size: clamp(.58rem, 2.3vw, .75rem); }
   .dd-layout { gap: 10px; }
   .dd-board-stage { padding-top: 5px; margin-top: -25px; }
-  .dd-day-signpost { left: calc(var(--dd-sign-height) * .218); top: 68%; width: 132px; height: 58px; }
-  .dd-daydate { padding-inline: 10px; font-size: .68rem; }
+  .dd-day-signpost { left: calc(var(--dd-sign-height) * .218); top: 65%; width: 132px; height: 48px; }
+  .dd-daydate { height: 36px; padding-inline: 10px; font-size: .68rem; }
   .dd-next-signpost,
   .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) - 16px); width: 128px; font-size: .64rem; }
   .dd-next-signpost { padding-left: 12px; }
