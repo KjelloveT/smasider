@@ -77,7 +77,7 @@
                 <div class="box2 canvas-wrapper">
                     <div id="canvas" class="canvas">
                         <div id="world" class="world">
-                            <svg id="edges" class="edges" aria-hidden="true"></svg>
+                            <svg id="edges" class="edges" role="group" aria-label="Sambandsliner"></svg>
                         </div>
                     </div>
 
@@ -95,13 +95,13 @@
                     </div>
 
                     <div class="canvas-hint">
-                        <p>Dobbeltklikk på tom flate for ein ny node. Dra i tom flate for å flytte kartet, og zoom med <kbd>Ctrl</kbd> + hjul eller to fingrar.</p>
+                        <p>Dobbeltklikk på tom flate for ein ny node. Klikk på ei line for å velje strek eller piler. Dra i tom flate for å flytte kartet, og zoom med <kbd>Ctrl</kbd> + hjul eller to fingrar.</p>
                     </div>
                 </div>
 
                 <!-- Eigenskapar -->
                 <aside class="box2 props-panel" aria-label="Eigenskapar">
-                    <p id="panel-empty" class="panel-empty">Vel ein node for å endre farge, ikon og form.</p>
+                    <p id="panel-empty" class="panel-empty">Vel ein node eller ei line for å endre eigenskapane.</p>
 
                     <div id="panel-node" hidden>
                         <h2 class="heading4 no-mt">Farge</h2>
@@ -123,12 +123,15 @@
                         </div>
                     </div>
 
-                    <div class="panel-map">
-                        <h2 class="heading4 no-mt">Heile kartet</h2>
-                        <label class="toggle-row">
-                            <input type="checkbox" id="arrows-toggle">
-                            Piler på linjene
-                        </label>
+                    <div id="panel-edge" hidden>
+                        <h2 class="heading4 no-mt">Line</h2>
+                        <p class="panel-help">Vel om lina skal vere ein vanleg strek eller ha pil ved starten, slutten eller begge endar.</p>
+                        <div id="edge-ending-row" class="edge-ending-row" role="group" aria-label="Pilretning">
+                            <button type="button" class="edge-ending-btn" data-ending="none">Strek</button>
+                            <button type="button" class="edge-ending-btn" data-ending="start">Pil venstre</button>
+                            <button type="button" class="edge-ending-btn" data-ending="end">Pil høgre</button>
+                            <button type="button" class="edge-ending-btn" data-ending="both">Begge</button>
+                        </div>
                     </div>
                 </aside>
             </div>

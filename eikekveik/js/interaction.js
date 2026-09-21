@@ -26,7 +26,7 @@ Eikekveik.Interaction = (function () {
         el.shapePicker.addEventListener('click', onShapePick);
         el.btnIcon.addEventListener('click', onIconPick);
         el.btnIconRemove.addEventListener('click', () => updateSelected({ icon: null }));
-        el.arrowsToggle.addEventListener('change', onArrowsToggle);
+        el.edgeEndingRow.addEventListener('click', onEdgeEndingPick);
     }
 
     // Undo/redo: renderAll() MÅ kallast før afterChange() så DOM speglar ny state
@@ -122,9 +122,16 @@ Eikekveik.Interaction = (function () {
     }
 
     function onCanvasClick(e) {
+        const edge = e.target.closest ? e.target.closest('.edge-hit') : null;
+        if (edge) {
+            Eikekveik.State.setSelectedEdge(parseInt(edge.dataset.edgeId, 10));
+            Eikekveik.Render.renderAll();
+            return;
+        }
+
         if (e.target === Eikekveik.el.canvas) {
             if (Eikekveik.View.consumeClick()) return;
-            if (Eikekveik.State.getSelectedId() != null) {
+            if (Eikekveik.State.getSelectedId() != null || Eikekveik.State.getSelectedEdgeId() != null) {
                 Eikekveik.State.setSelected(null);
                 Eikekveik.Render.renderAll();
             }
@@ -236,6 +243,13 @@ Eikekveik.Interaction = (function () {
         const t = e.target;
         const isField = t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable;
 
+        if (t.classList && t.classList.contains('edge-hit') && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            Eikekveik.State.setSelectedEdge(parseInt(t.dataset.edgeId, 10));
+            Eikekveik.Render.renderAll();
+            return;
+        }
+
         if (e.key === 'Escape') {
             if (Eikekveik.Storage && Eikekveik.Storage.closeOpenModals) {
                 Eikekveik.Storage.closeOpenModals();
@@ -320,9 +334,14 @@ Eikekveik.Interaction = (function () {
         Eikekveik.Picker.open(node.icon, icon => updateNodeProps(id, { icon }));
     }
 
-    function onArrowsToggle(e) {
-        Eikekveik.State.setArrows(e.target.checked);
-        Eikekveik.Render.renderEdges();
+    function onEdgeEndingPick(e) {
+        const btn = e.target.closest('.edge-ending-btn');
+        const id = Eikekveik.State.getSelectedEdgeId();
+        if (!btn || id == null) return;
+        const node = Eikekveik.State.findNode(id);
+        if (!node || node.lineEnding === btn.dataset.ending) return;
+        Eikekveik.State.updateEdge(id, btn.dataset.ending);
+        Eikekveik.Render.renderAll();
         afterChange();
     }
 

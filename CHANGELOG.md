@@ -3,13 +3,18 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
-## [1.55] — 2026-09-20
+## [1.56] — 2026-09-21
 
 ### Endra
 - **Duldord har fått ei ny turstidrakt.** Eit lokalt lagra skogsbilete, heile treplankar med spikrar over stolpane, treskilt som kan vekse i breidda og høgda, biletlaga piler for dag og steg, og mjukt avrunda spelruter og tastar gjer ordspelet til ein liten tur gjennom seks freistnader. Bokstavrutene og tastane er utan slagskugge. Utforminga tilpassar seg både mobil og brei skjerm, og spel, arkiv og statistikk fungerer som før.
 - **Skilta er skjerpa og samla rundt spelebrettet.** Eit kortare og høgare hovudskilt står på to stolpar bak ramma, med dagnummeret på same planke. Dagens ord peikar svakt nedover på ei spikarfri trepil med stolpe bak ramma. Stegpilene held original proporsjon, og infoskiltet har tynnare omriss utan unødig overskrift. Arkiv, statistikk og hjelp ligg på infoskiltet. Dei vanlege boksane har ikkje lenger tjukk slagskugge.
 - **Dagsskifta har fått eigne vegvisarar.** Biletgenererte trestolpar går att både bak toppskiltet og langs talpilene, med gjennomsiktige hjørne og saumlaus ved mellom topp, midt og botn. Dagsskiltet står midt på venstre stolpe og viser dagens ord, gårsdagens ord, forgårsdagens ord eller dato. Eit info-merke skil dette skiltet frå dei opphøgde knappeskilta «Tidlegare ord» og «Seinare ord», som har retningspil og flyttar éin dag om gongen. Det opphavlege Duldord-ikonet er tilbake på toppskiltet.
 - **Hjelpa opnar seg når spelaren ber om henne.** Den korte forklaringa står no på velkomstskiltet, medan utførleg hjelp framleis finst på hjelpeknappen.
+
+## [1.55] — 2026-09-21
+
+### Lagt til
+- **Sambandslinene i Eikekveik kan få kvar si pilretning.** Klikk på ei line og vel vanleg strek, pil venstre, pil høgre eller piler i begge endar. Pilspissane får litt luft mot nodane, medan reine strekar framleis går heilt inn til kanten.
 
 ## [1.54] — 2026-09-18
 

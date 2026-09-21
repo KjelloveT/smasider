@@ -2,8 +2,8 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
-      "versjon": "1.55",
-      "dato": "2026-09-20",
+      "versjon": "1.56",
+      "dato": "2026-09-21",
       "samandrag": "Duldord har fått ei ny turstidrakt.",
       "punkt": [
         {
@@ -25,6 +25,18 @@
           "t": "endra",
           "kva": "Duldord-hjelp",
           "tekst": "Den korte forklaringa står på velkomstskiltet, og den utførlege hjelpa opnar seg når spelaren vel henne."
+        }
+      ]
+    },
+    {
+      "versjon": "1.55",
+      "dato": "2026-09-21",
+      "samandrag": "Eikekveik har fått individuelle piler på sambandslinene.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Eikekveik",
+          "tekst": "Kvar sambandline kan no vere ein vanleg strek eller ha pil ved venstre ende, høgre ende eller begge endar. Pilspissane får luft mot nodane."
         }
       ]
     },
