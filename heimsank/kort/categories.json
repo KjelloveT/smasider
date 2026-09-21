@@ -163,5 +163,24 @@
     "statField": "opphav",
     "statType": "text",
     "statLabel": "book"
+  },
+  {
+    "id": "fotballspelarar",
+    "label": "Fotballspelarar 2026",
+    "unlockCost": 75,
+    "icon": "trophy",
+    "csv": "fotballspelarar-2026.csv",
+    "rarity": "rarity-fotballspelarar-2026.json",
+    "idField": "item",
+    "nameField": "itemLabel",
+    "imageField": "image",
+    "articleField": "article",
+    "rankArticleField": "rankArticle",
+    "statField": "birthDate",
+    "statType": "year",
+    "statLabel": "calendar",
+    "rankByPageviews": true,
+    "pageviewDays": 60,
+    "maxCards": 200
   }
 ]

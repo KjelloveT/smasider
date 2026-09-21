@@ -91,6 +91,78 @@ async function sparql(query) {
   return { vars, rows };
 }
 
+// ── Aktualitetsrangering frå Wikipedia ─────────────────────────────
+// PageViewInfo kan hente 60 dagar for opptil 50 artiklar i same kall. Det
+// gjer det mogeleg å byggje faste årgangar av personkategoriar utan å gjere
+// «aktuell» til ein laus og handskriven eigenskap i Wikidata.
+function artikkeltittel(url) {
+  try {
+    const u = new URL(url);
+    if (!u.hostname.endsWith('.wikipedia.org') || !u.pathname.startsWith('/wiki/')) return null;
+    return {
+      api: `${u.origin}/w/api.php`,
+      title: decodeURIComponent(u.pathname.slice(6)).replace(/_/g, ' ')
+    };
+  } catch { return null; }
+}
+
+async function hentSidevisningar(rows, articleField, days) {
+  const grupper = new Map();
+  for (const row of rows) {
+    const art = artikkeltittel(row[articleField]);
+    row.pageviews = '0';
+    if (!art) continue;
+    if (!grupper.has(art.api)) grupper.set(art.api, []);
+    grupper.get(art.api).push({ row, title: art.title });
+  }
+
+  let ferdige = 0;
+  for (const [api, items] of grupper) {
+    for (let i = 0; i < items.length; i += 50) {
+      const bolk = items.slice(i, i + 50);
+      const alias = new Map();
+      const visningar = new Map();
+      let framhald = '';
+      do {
+        const params = {
+          action: 'query',
+          prop: 'pageviews',
+          pvipdays: String(days),
+          titles: bolk.map(x => x.title).join('|'),
+          redirects: '1',
+          format: 'json',
+          formatversion: '2',
+          maxlag: '5'
+        };
+        if (framhald) params.pvipcontinue = framhald;
+        const data = await hentJSON(api, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(params)
+        });
+        for (const n of data.query?.normalized || []) alias.set(n.from, n.to);
+        for (const r of data.query?.redirects || []) alias.set(r.from, r.to);
+        for (const page of data.query?.pages || []) {
+          if (!page.pageviews) continue;
+          visningar.set(page.title,
+            Object.values(page.pageviews).reduce((sum, n) => sum + (Number(n) || 0), 0));
+        }
+        framhald = data.continue?.pvipcontinue || '';
+      } while (framhald);
+
+      for (const item of bolk) {
+        let title = item.title;
+        for (let k = 0; k < 3 && alias.has(title); k++) title = alias.get(title);
+        item.row.pageviews = String(visningar.get(title) || 0);
+      }
+      ferdige += bolk.length;
+      process.stdout.write(`\r  ${ferdige}/${rows.length} artiklar`);
+      await sleep(250);
+    }
+  }
+  if (rows.length) process.stdout.write('\n');
+}
+
 // ── CSV ──────────────────────────────────────────────────────────────
 // Same reglar som parseCSV i js/utils.js. Den tolkar ikkje linjeskift inne
 // i hermeteikn, så skrivCSV byter dei ut med mellomrom.
@@ -312,7 +384,24 @@ async function hent(id) {
   for (const r of rows) {
     if (r[cat.imageField] && !utan.has(r[cat.idField]) && !perId.has(r[cat.idField])) perId.set(r[cat.idField], r);
   }
-  const liste = [...perId.values()].sort((a, b) => a[cat.nameField].localeCompare(b[cat.nameField], 'nn'));
+  let liste = [...perId.values()];
+  if (cat.rankByPageviews) {
+    const days = cat.pageviewDays || 60;
+    console.log(`${id}: rangerer ${liste.length} kandidatar etter ${days} dagar med Wikipedia-visningar`);
+    await hentSidevisningar(liste, cat.rankArticleField || cat.articleField, days);
+    liste.sort((a, b) =>
+      Number(b.pageviews) - Number(a.pageviews) ||
+      Number(b.sitelinks || 0) - Number(a.sitelinks || 0) ||
+      a[cat.nameField].localeCompare(b[cat.nameField], 'nn')
+    );
+    liste = liste.slice(0, cat.maxCards || liste.length);
+  }
+  liste.sort((a, b) => a[cat.nameField].localeCompare(b[cat.nameField], 'nn'));
+  for (const row of liste) {
+    if (row[cat.nameField] && !/^Q\d+$/.test(row[cat.nameField])) continue;
+    const art = artikkeltittel(row[cat.articleField]);
+    if (art) row[cat.nameField] = art.title.replace(/\s+\([^)]*\)$/, '');
+  }
 
   // Ta vare på lisensdata frå førre køyring der biletet er det same
   const sti = join(KORT_DIR, cat.csv);
@@ -323,7 +412,9 @@ async function hent(id) {
       if (g && g[cat.imageField] === r[cat.imageField]) for (const k of LISENS_KOLONNER) r[k] = g[k] || '';
     }
   }
-  await writeFile(sti, skrivCSV([...vars, ...LISENS_KOLONNER], liste), 'utf8');
+  const hdr = [...vars];
+  if (cat.rankByPageviews && !hdr.includes('pageviews')) hdr.push('pageviews');
+  await writeFile(sti, skrivCSV([...hdr, ...LISENS_KOLONNER], liste), 'utf8');
   console.log(`${id}: ${liste.length} kort skrivne til kort/${cat.csv}` + (utan.size ? ` (${utan.size} element trekte frå)` : ''));
 
   const qids = liste.map(r => r[cat.idField].replace('http://www.wikidata.org/entity/', ''));

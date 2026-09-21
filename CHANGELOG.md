@@ -3,6 +3,12 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.56] — 2026-09-21
+
+### Lagt til
+- **Heimsank har fått kortsamlinga «Fotballspelarar 2026».** Ho inneheld 200 aktuelle spelarar, valde frå dei mest lesne fotballspelarane på norsk Wikipedia gjennom ein fast 60-dagarsperiode. Korta har bilete, fødselsår, artikkellenkje og kreditering av biletlisensen.
+- **Kortlista kan byggjast opp att med same datagrunnlag.** Eit eige verktøy lagar ein fast kandidatliste frå sidevisningar og Wikidata, medan kortbyggjaren rangerer spelarane før han skriv CSV- og sjeldsemdsfilene.
+
 ## [1.55] — 2026-09-21
 
 ### Lagt til

@@ -2,6 +2,23 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.56",
+      "dato": "2026-09-21",
+      "samandrag": "Heimsank har fått 200 aktuelle fotballspelarar.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Heimsank",
+          "tekst": "Kortsamlinga «Fotballspelarar 2026» har 200 spelarar rangerte etter lesing på norsk Wikipedia, med bilete, fødselsår, artikkellenkje og biletkreditering."
+        },
+        {
+          "t": "nytt",
+          "kva": "Heimsank-kortdata",
+          "tekst": "Eit repeterbart byggjeverktøy lagar ei fast kandidatliste og rangerer korta frå eit avgrensa 60-dagars datagrunnlag."
+        }
+      ]
+    },
+    {
       "versjon": "1.55",
       "dato": "2026-09-21",
       "samandrag": "Eikekveik har fått individuelle piler på sambandslinene.",
