@@ -3,6 +3,14 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.56] — 2026-09-21
+
+### Lagt til
+- **Heimsank har fått kortsamlinga «Fotballspelarar 2026».** Ho inneheld 200 aktuelle spelarar, valde frå dei mest lesne fotballspelarane på norsk Wikipedia gjennom ein fast 60-dagarsperiode. Korta har bilete, fødselsår, artikkellenkje og kreditering av biletlisensen.
+- **Kortlista kan byggjast opp att med same datagrunnlag.** Eit eige verktøy lagar ein fast kandidatliste frå sidevisningar og Wikidata, medan kortbyggjaren rangerer spelarane før han skriv CSV- og sjeldsemdsfilene.
+- **Heimsank har fått 191 sportsbilar.** Popularitet frå norsk Wikipedia blir kombinert med 46 verna klassikarar, slik at samlinga spenner frå Blitzen Benz og Bentley 4½ Litre til nye modellar som Ferrari F80 og Lamborghini Revuelto. Feilklassifiserte sedanar, stasjonsvogner og pickup-ar er tekne ut.
+- **Ei lokal kortkontrollside viser éin kategori om gongen.** Korta blir viste i puljar på 24 med lazy-load på bileta, søk og mobiltilpassa rutenett, utan førespurnader til Wikidata frå nettlesaren.
+
 ## [1.55] — 2026-09-21
 
 ### Lagt til
