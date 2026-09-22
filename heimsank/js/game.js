@@ -8,7 +8,7 @@ async function init() {
   initTrash();
   Progression.load();
   try {
-    S.cats = await fetch('./kort/categories.json?v=1.53').then(r => { if (!r.ok) throw new Error('Kategoriar'); return r.json(); });
+    S.cats = await fetch('./kort/categories.json?v=1.56').then(r => { if (!r.ok) throw new Error('Kategoriar'); return r.json(); });
     ProgressionUI.renderPoints();
     document.getElementById('categoryCount').textContent = S.cats.length + ' kategoriar';
     ProgressionUI.renderCovers(S.cats);

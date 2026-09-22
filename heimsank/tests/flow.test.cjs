@@ -116,7 +116,7 @@ test('Desimalsvar blir ikkje avrunda til eit rett heiltal', () => {
   assert.equal(f.run('S.correct'), 5);
 });
 
-test('Alle elleve kategoriar lastar med kreditering og uendra kort-ID-ar', async () => {
+test('Alle tretten kategoriar lastar med kreditering og uendra kort-ID-ar', async () => {
   const gameDir = path.join(__dirname, '..');
   const context = vm.createContext({
     console,
@@ -129,7 +129,7 @@ test('Alle elleve kategoriar lastar med kreditering og uendra kort-ID-ar', async
     vm.runInContext(fs.readFileSync(path.join(gameDir, 'js', file), 'utf8'), context);
   }
   const categories = JSON.parse(fs.readFileSync(path.join(gameDir, 'kort/categories.json'), 'utf8'));
-  assert.equal(categories.length, 11);
+  assert.equal(categories.length, 13);
   assert.ok(!categories.some(cat => cat.id === 'videospill'));
   for (const cat of categories) {
     context.category = cat;

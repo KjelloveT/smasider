@@ -3,13 +3,21 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
-## [1.56] — 2026-09-21
+## [1.57] — 2026-09-22
 
 ### Endra
 - **Duldord har fått ei ny turstidrakt.** Eit lokalt lagra skogsbilete, heile treplankar med spikrar over stolpane, treskilt som kan vekse i breidda og høgda, biletlaga piler for dag og steg, og mjukt avrunda spelruter og tastar gjer ordspelet til ein liten tur gjennom seks freistnader. Bokstavrutene og tastane er utan slagskugge. Utforminga tilpassar seg både mobil og brei skjerm, og spel, arkiv og statistikk fungerer som før.
 - **Skilta er skjerpa og samla rundt spelebrettet.** Eit breiare hovudskilt med saumlaus treåre står på smalare stolpar bak ramma. Dei mindre spikrane er plasserte rett over stolpane, og dagnummeret ligg på same planke. Dagens ord står på eit lyst informasjonsskilt på venstre stolpe. Stegpilene held original proporsjon, og infoskiltet har tynnare omriss utan unødig overskrift. På mobil kjem infoskiltet etter spelebrettet og tastaturet. Arkiv, statistikk og hjelp ligg på infoskiltet. Dei vanlege boksane har ikkje lenger tjukk slagskugge.
 - **Dagsskifta har fått eigne vegvisarar.** Ei saumlaus og fargenøytral treåre blir brukt på stolpar, stegskilt, dagsskilt, knappeskilt og informasjonstavla utan strekte bilete eller synlege skøytar. CSS gjev same mønster lyst treverk, raud knappfarge og gyllen stegmerking i valfri storleik. Dagsskiltet viser dagens ord, gårsdagens ord, forgårsdagens ord eller dato. Dei raude, opphøgde knappeskilta står over spelebrettet: «Tidlegare ord» til venstre og «Seinare ord» til høgre. Informasjonstavla står på høgd med hovudboksen på brei skjerm. Det opphavlege Duldord-ikonet er tilbake på toppskiltet.
 - **Hjelpa opnar seg når spelaren ber om henne.** Den korte forklaringa står no på velkomstskiltet, medan utførleg hjelp framleis finst på hjelpeknappen.
+
+## [1.56] — 2026-09-21
+
+### Lagt til
+- **Heimsank har fått kortsamlinga «Fotballspelarar 2026».** Ho inneheld 200 aktuelle spelarar, valde frå dei mest lesne fotballspelarane på norsk Wikipedia gjennom ein fast 60-dagarsperiode. Korta har bilete, fødselsår, artikkellenkje og kreditering av biletlisensen.
+- **Kortlista kan byggjast opp att med same datagrunnlag.** Eit eige verktøy lagar ein fast kandidatliste frå sidevisningar og Wikidata, medan kortbyggjaren rangerer spelarane før han skriv CSV- og sjeldsemdsfilene.
+- **Heimsank har fått 191 sportsbilar.** Popularitet frå norsk Wikipedia blir kombinert med 46 verna klassikarar, slik at samlinga spenner frå Blitzen Benz og Bentley 4½ Litre til nye modellar som Ferrari F80 og Lamborghini Revuelto. Feilklassifiserte sedanar, stasjonsvogner og pickup-ar er tekne ut.
+- **Ei lokal kortkontrollside viser éin kategori om gongen.** Korta blir viste i puljar på 24 med lazy-load på bileta, søk og mobiltilpassa rutenett, utan førespurnader til Wikidata frå nettlesaren.
 
 ## [1.55] — 2026-09-21
 

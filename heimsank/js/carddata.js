@@ -18,7 +18,7 @@ const CardData = (function () {
   function cardUrl(file) {
     if (!CARD_ROOT.startsWith('http')) return CARD_ROOT + file;
     const url = new URL(file, CARD_ROOT);
-    url.searchParams.set('v', '1.53');
+    url.searchParams.set('v', '1.56');
     return url.href;
   }
 

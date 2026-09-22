@@ -1,0 +1,56 @@
+# Sportsbilar til Heimsank. Spørringa finn bilmodellar og modellseriar som
+# Wikidata klassifiserer som sportsbil, superbil, roadster, grand tourer eller
+# muskelbil. Muskelbilane gjev nokre sentrale amerikanske klassikarar utan å
+# opne for alle vanlege sedanar og familiebilar.
+# «iconic» blir brukt av kortdata.mjs for å halde av plass til klassikarar;
+# resten blir rangerte etter sidevisningar på norsk Wikipedia.
+
+SELECT ?item ?itemLabel (MIN(?img) AS ?image)
+       (SAMPLE(COALESCE(?nn, ?nb)) AS ?article)
+       (SAMPLE(?nb) AS ?rankArticle)
+       (SAMPLE(IF(BOUND(?manufacturer),
+                  IF(?manufacturer = wd:Q2308012, "Bugatti", ?manufacturerLabel),
+                  ?brandLabel)) AS ?manufacturerLabel)
+       (SAMPLE(?targetLabel) AS ?vehicleTypeLabel)
+       (MIN(?start) AS ?productionStart)
+       (MAX(?links) AS ?sitelinks)
+       (SAMPLE(?isIconic) AS ?iconic)
+WHERE {
+  VALUES ?modelClass { wd:Q3231690 wd:Q59773381 }
+  VALUES ?target { wd:Q274586 wd:Q815679 wd:Q828170 wd:Q744620 wd:Q1072763 }
+
+  ?item wdt:P31 ?modelClass ;
+        wdt:P279 ?target ;
+        wdt:P18 ?img ;
+        wikibase:sitelinks ?links .
+  OPTIONAL { ?item wdt:P176 ?manufacturer . }
+  OPTIONAL { ?item wdt:P1716 ?brand . }
+  OPTIONAL { ?item wdt:P580 ?start . }
+  OPTIONAL { ?nn schema:about ?item ; schema:isPartOf <https://nn.wikipedia.org/> . }
+  OPTIONAL { ?nb schema:about ?item ; schema:isPartOf <https://no.wikipedia.org/> . }
+  FILTER(BOUND(?nb))
+
+  # Eit avgrensa sett klassikarar frå ulike tiår skal ikkje falle ut berre
+  # fordi ei heilt ny modellnyheit får fleire visningar denne månaden.
+  BIND(IF(?item IN (
+    wd:Q219357, wd:Q463627, wd:Q370524, wd:Q56166, wd:Q647404,
+    wd:Q127110, wd:Q578057, wd:Q334040, wd:Q420564, wd:Q172610,
+    wd:Q1161691, wd:Q861634, wd:Q1125114, wd:Q1138262, wd:Q499109,
+    wd:Q1133834, wd:Q748454, wd:Q745023, wd:Q830375, wd:Q3141167,
+    wd:Q748126, wd:Q1093694, wd:Q741857, wd:Q1180394, wd:Q249303,
+    wd:Q863812, wd:Q1341985, wd:Q3069684, wd:Q850536, wd:Q596504,
+    wd:Q1324772, wd:Q750788, wd:Q796574, wd:Q1477201, wd:Q520673,
+    wd:Q848965, wd:Q1347004, wd:Q749871, wd:Q575937, wd:Q462223,
+    wd:Q748461, wd:Q931380, wd:Q796414, wd:Q482514, wd:Q463461,
+    wd:Q2453030
+  ), "1", "0") AS ?isIconic)
+
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "nn,nb,en" .
+    ?item rdfs:label ?itemLabel .
+    ?manufacturer rdfs:label ?manufacturerLabel .
+    ?brand rdfs:label ?brandLabel .
+    ?target rdfs:label ?targetLabel .
+  }
+}
+GROUP BY ?item ?itemLabel

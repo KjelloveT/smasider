@@ -1,0 +1,12 @@
+# Feilklassifiserte eller for vide treff som ikkje er sportsbilmodellar.
+SELECT ?item WHERE {
+  VALUES ?item {
+    wd:Q1463050   # Tesla Model S — sports-sedan
+    wd:Q568870    # Audi RS4 — sports-sedan/-stasjonsvogn
+    wd:Q730160    # Audi RS2 — sports-stasjonsvogn
+    wd:Q758789    # Audi S8 — sports-sedan
+    wd:Q1340926   # GMC Syclone — pickup
+    wd:Q750005    # Aston Martin Lagonda — luksussedan
+    wd:Q750017    # Aston Martin Rapide — sports-sedan
+  }
+}

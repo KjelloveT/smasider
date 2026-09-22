@@ -2,8 +2,8 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
-      "versjon": "1.56",
-      "dato": "2026-09-21",
+      "versjon": "1.57",
+      "dato": "2026-09-22",
       "samandrag": "Duldord har fått ei ny turstidrakt.",
       "punkt": [
         {
@@ -25,6 +25,28 @@
           "t": "endra",
           "kva": "Duldord-hjelp",
           "tekst": "Den korte forklaringa står på velkomstskiltet, og den utførlege hjelpa opnar seg når spelaren vel henne."
+        }
+      ]
+    },
+    {
+      "versjon": "1.56",
+      "dato": "2026-09-21",
+      "samandrag": "Heimsank har fått 200 aktuelle fotballspelarar og 191 sportsbilar.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Heimsank",
+          "tekst": "Kortsamlinga «Fotballspelarar 2026» har 200 spelarar rangerte etter lesing på norsk Wikipedia, med bilete, fødselsår, artikkellenkje og biletkreditering."
+        },
+        {
+          "t": "nytt",
+          "kva": "Heimsank-kortdata",
+          "tekst": "Eit repeterbart byggjeverktøy lagar ei fast kandidatliste og rangerer korta frå eit avgrensa 60-dagars datagrunnlag."
+        },
+        {
+          "t": "nytt",
+          "kva": "Heimsank",
+          "tekst": "Sportsbilar har 191 kort: populære nyare modellar og 46 verna klassikarar, med feilklassifiserte sedanar, stasjonsvogner og pickup-ar tekne ut."
         }
       ]
     },
