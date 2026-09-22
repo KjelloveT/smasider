@@ -1,625 +1,127 @@
-*,
-*::before,
-*::after { box-sizing: border-box; }
-
-.hero-sketch-page {
-  --lab-ink: #142820;
-  --lab-paper: #f4e7c8;
-  --lab-paper-light: #fff9e9;
-  --lab-post: #79502d;
-  --lab-accent: #a83f2d;
-  --lab-gold: #e4ad58;
-  --lab-grain: url('../assets/treverk-monster-vassrett.png?v=1');
-  --lab-grain-vertical: url('../assets/treverk-monster-loddrett.png?v=1');
-  min-height: 100vh;
-  color: var(--lab-ink);
-  background: #24573b url('../assets/skogssti.jpg') center top / cover fixed no-repeat;
-  font-family: 'Segoe UI', system-ui, sans-serif;
+:root {
+  --concept-cream: #fff8e7;
+  --concept-ink: #102c24;
+  --concept-rust: #b84b2d;
+  --concept-sky: #91d8ef;
 }
 
-.hero-sketch-page neo-header {
-  --accent: #a83f2d;
-  --accent2: #214c37;
-  --surface: #fff9e9;
-  --text: #182b23;
-  --border: #142820;
-  --shadow: #0b2018;
+* { box-sizing: border-box; }
+
+body.hero-concept-page {
+  margin: 0;
+  color: var(--concept-ink);
+  background:
+    linear-gradient(rgb(145 216 239 / 72%), rgb(32 91 67 / 35%)),
+    url("assets/duldord-bakgrunn.jpg") center top / cover fixed,
+    var(--concept-sky);
 }
 
-.hero-lab {
-  --brand-accent: #a83f2d;
-  --brand-deep: #214c37;
-  max-width: 1500px;
-  padding: clamp(20px, 4vw, 54px) clamp(12px, 3vw, 34px) 80px;
+.concept-lab {
+  width: min(1480px, calc(100% - 2rem));
+  margin-inline: auto;
+  padding-block: clamp(1rem, 3vw, 2.5rem) 5rem;
 }
 
-.lab-intro,
-.brand-switcher,
+.concept-intro,
 .concept-card {
-  border: 3px solid var(--lab-ink);
-  background: rgba(255, 249, 233, .96);
+  border: 3px solid var(--concept-ink);
+  background: var(--concept-cream);
+  box-shadow: 9px 9px 0 var(--concept-ink);
 }
 
-.lab-intro {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 28px;
-  max-width: 1180px;
-  margin: 0 auto 22px;
-  padding: clamp(22px, 4vw, 42px);
-  box-shadow: 8px 8px 0 var(--lab-ink);
+.concept-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+  padding: clamp(1.4rem, 4vw, 3.2rem);
+  margin-bottom: clamp(2rem, 5vw, 4.5rem);
 }
 
-.lab-kicker {
-  margin: 0 0 7px;
-  color: var(--brand-accent);
+.concept-kicker {
+  margin: 0 0 .7rem;
+  color: #9c421f;
   font-size: .78rem;
   font-weight: 900;
-  letter-spacing: .13em;
+  letter-spacing: .16em;
   text-transform: uppercase;
 }
 
-.lab-intro h1 {
-  margin: 0 0 10px;
-  font: 900 clamp(2rem, 5vw, 4.25rem)/.96 'Arial Black', 'Segoe UI', system-ui, sans-serif;
-  letter-spacing: -.05em;
+.concept-intro h1 {
+  max-width: 14ch;
+  margin: 0;
+  font-size: clamp(2.3rem, 6vw, 5.4rem);
+  line-height: .94;
+  letter-spacing: -.045em;
 }
 
-.lab-lead {
-  max-width: 74ch;
-  margin: 0;
-  font-weight: 650;
+.concept-intro p:not(.concept-kicker) {
+  max-width: 72ch;
+  margin: 1.25rem 0 0;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  line-height: 1.6;
 }
 
 .back-link {
-  flex: 0 0 auto;
-  padding: 11px 16px;
-  border: 3px solid var(--lab-ink);
-  background: var(--lab-paper-light);
-  color: var(--lab-ink);
-  box-shadow: 4px 4px 0 var(--lab-ink);
-  font-weight: 850;
+  display: inline-flex;
+  align-items: center;
+  min-height: 3.1rem;
+  padding: .75rem 1rem;
+  color: var(--concept-ink);
+  border: 3px solid var(--concept-ink);
+  background: var(--concept-cream);
+  box-shadow: 5px 5px 0 var(--concept-ink);
+  font-weight: 900;
   text-decoration: none;
 }
 
-.back-link:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--lab-ink); }
+.back-link:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--concept-ink); }
+.back-link:focus-visible,
+.concept-card a:focus-visible { outline: 4px solid #ffbf35; outline-offset: 5px; }
 
-.brand-switcher {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  max-width: 1180px;
-  margin: 0 auto 34px;
-  padding: 16px 18px;
-  border-radius: 14px;
-}
-
-.brand-switcher h2 { margin: 0 0 3px; font-size: 1rem; }
-.brand-switcher p { margin: 0; font-size: .85rem; }
-.brand-buttons { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 9px; }
-
-.brand-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 7px 13px;
-  border: 3px solid var(--lab-ink);
-  border-radius: 8px;
-  background: var(--lab-paper-light);
-  color: var(--lab-ink);
-  box-shadow: 3px 3px 0 var(--lab-ink);
-  font: 800 .86rem 'Segoe UI', system-ui, sans-serif;
-  cursor: pointer;
-}
-
-.brand-button img { width: 28px; height: 28px; object-fit: contain; }
-.brand-button:hover,
-.brand-button.active {
-  background: var(--brand-deep);
-  color: #fff9e9;
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 var(--lab-ink);
-}
-
-.brand-button:focus-visible,
-.back-link:focus-visible {
-  outline: 4px solid var(--lab-gold);
-  outline-offset: 3px;
-}
-
-.concept-grid {
+.concept-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: stretch;
-  gap: clamp(18px, 2.5vw, 32px);
-  max-width: 1440px;
-  margin: 0 auto;
+  gap: clamp(2.5rem, 6vw, 6rem);
 }
 
-.concept-card {
-  min-width: 0;
-  overflow: hidden;
-  box-shadow: 7px 7px 0 var(--lab-ink);
-}
+.concept-card { overflow: hidden; }
 
-.concept-card-wide { grid-column: 1 / -1; }
-.concept-header {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  min-height: 116px;
-  padding: 18px 20px;
-  border-bottom: 3px solid var(--lab-ink);
-  background: var(--lab-paper-light);
-}
-
-.concept-number {
-  flex: 0 0 auto;
-  color: var(--brand-accent);
-  font: 900 1.6rem/1 'Arial Black', system-ui, sans-serif;
-}
-
-.concept-header h2 {
-  margin: 0 0 5px;
-  font: 900 1.25rem/1 'Arial Black', system-ui, sans-serif;
-}
-
-.concept-header p { margin: 0; font-size: .83rem; line-height: 1.35; }
-.concept-stage {
+.concept-card header {
   display: grid;
-  min-height: 350px;
-  place-items: center;
-  overflow: hidden;
-  padding: 18px;
-  background:
-    linear-gradient(rgba(219, 244, 250, .13), rgba(11, 72, 46, .12)),
-    url('../assets/skogssti.jpg') center 39% / cover no-repeat;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+  padding: clamp(1rem, 2.5vw, 1.8rem);
+  border-bottom: 3px solid var(--concept-ink);
 }
 
-/* Same reusable HTML skeleton for every direction. */
-.vp-hero {
-  --board-light: #f4e7c8;
-  --board-ink: #142820;
-  --post-color: #79502d;
-  position: relative;
-  width: min(100%, 610px);
-  height: 292px;
-  color: var(--board-ink);
+.concept-card header > span {
+  color: var(--concept-rust);
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-weight: 950;
+  line-height: .9;
 }
 
-.vp-post {
-  position: absolute;
-  z-index: 0;
-  top: 18px;
-  bottom: 0;
-  width: 32px;
-  border: 3px solid var(--board-ink);
-  border-radius: 999px 999px 5px 5px;
-  background-color: var(--post-color);
-  background-image: var(--lab-grain-vertical), var(--lab-grain-vertical);
-  background-size: 192px 384px;
-  box-shadow: inset 6px 0 rgba(255,255,255,.09), inset -6px 0 rgba(20,40,32,.18);
-}
-
-.vp-post-left { left: 16%; }
-.vp-post-right { right: 16%; }
-
-.vp-board {
-  position: absolute;
-  z-index: 1;
-  display: grid;
-  align-items: center;
-  background-color: var(--board-light);
-  background-image: var(--lab-grain);
-  background-size: 384px 192px;
-}
-
-.vp-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.vp-copy h3 {
+.concept-card h2 {
   margin: 0;
-  font: 900 clamp(1.7rem, 4vw, 3rem)/.94 'Arial Black', 'Segoe UI', system-ui, sans-serif;
-  letter-spacing: -.055em;
-}
-.vp-copy p { margin: 6px 0 0; font-weight: 750; line-height: 1.12; }
-.vp-meta { font-weight: 900; }
-.vp-bolt {
-  position: absolute;
-  z-index: 3;
-  width: 8px;
-  height: 8px;
-  border: 2px solid #110b07;
-  border-radius: 50%;
-  background: #51331f;
-}
-.vp-bolt-tl { top: 16px; left: 16%; }
-.vp-bolt-tr { top: 16px; right: 16%; }
-.vp-bolt-bl { bottom: 16px; left: 16%; }
-.vp-bolt-br { right: 16%; bottom: 16px; }
-
-/* 01 — refined single gateway */
-.vp-hero--gateway .vp-board {
-  top: 52px;
-  right: 2%;
-  left: 2%;
-  min-height: 176px;
-  grid-template-columns: 88px minmax(0, 1fr) auto;
-  gap: 18px;
-  padding: 30px 42px 48px;
-  border: 5px solid var(--board-ink);
-  clip-path: polygon(2% 0, 98% 0, 100% 8%, 100% 92%, 98% 100%, 2% 100%, 0 92%, 0 8%);
-  filter: drop-shadow(0 7px 0 rgba(11,32,24,.78));
-}
-.vp-hero--gateway .vp-mark {
-  width: 78px;
-  height: 78px;
-  padding: 8px;
-  border-right: 3px solid var(--board-ink);
-}
-.vp-hero--gateway .vp-meta {
-  position: absolute;
-  right: 27%;
-  bottom: 12px;
-  left: 27%;
-  padding-top: 8px;
-  border-top: 2px solid var(--board-ink);
-  text-align: center;
-}
-.vp-hero--gateway .vp-accent {
-  position: absolute;
-  right: 42px;
-  bottom: -8px;
-  width: 76px;
-  min-width: 0;
-  height: 13px;
-  border: 3px solid var(--board-ink);
-  background: var(--brand-accent);
+  font-size: clamp(1.45rem, 3vw, 2.7rem);
+  line-height: 1;
 }
 
-/* 02 — modular stacked planks */
-.vp-hero--stack .vp-post-left { left: 22%; }
-.vp-hero--stack .vp-post-right { right: 22%; }
-.vp-hero--stack .vp-board {
-  top: 48px;
-  right: 5%;
-  left: 5%;
-  min-height: 178px;
-  grid-template-columns: 94px minmax(0, 1fr);
-  gap: 16px;
-  padding: 25px 34px 70px;
-  border: 4px solid var(--board-ink);
-  background-color: var(--brand-deep);
-  color: #fff9e9;
-  box-shadow: 8px 8px 0 rgba(11,32,24,.8);
-  transform: rotate(-.7deg);
-}
-.vp-hero--stack .vp-board::before,
-.vp-hero--stack .vp-board::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  border: 4px solid var(--board-ink);
-  background-image: var(--lab-grain);
-  background-size: 384px 192px;
-}
-.vp-hero--stack .vp-board::before {
-  top: -18px;
-  right: 34px;
-  width: 148px;
-  height: 34px;
-  background-color: var(--brand-accent);
-  transform: rotate(1.1deg);
-}
-.vp-hero--stack .vp-board::after {
-  right: -18px;
-  bottom: -24px;
-  left: -18px;
-  height: 56px;
-  background-color: var(--board-light);
-  transform: rotate(-.5deg);
-}
-.vp-hero--stack .vp-mark {
-  width: 88px;
-  height: 88px;
-  padding: 10px;
-  border: 4px solid var(--board-ink);
-  border-radius: 12px;
-  background: var(--lab-paper-light);
-}
-.vp-hero--stack .vp-copy { position: relative; z-index: 2; }
-.vp-hero--stack .vp-copy p { color: #fff9e9; opacity: .9; }
-.vp-hero--stack .vp-meta {
-  position: absolute;
-  z-index: 2;
-  bottom: -11px;
-  left: 50%;
-  color: var(--board-ink);
-  transform: translateX(-50%);
-}
-.vp-hero--stack .vp-accent {
-  position: absolute;
-  z-index: 2;
-  top: -27px;
-  right: 28px;
-  width: 82px;
-  height: 18px;
-  border: 3px solid var(--board-ink);
-  background: var(--brand-accent);
-  transform: rotate(2deg);
-}
-.vp-hero--stack .vp-bolt { display: none; }
-
-/* 03 — framed lodge plaque */
-.vp-hero--lodge .vp-post-left { left: 29%; }
-.vp-hero--lodge .vp-post-right { right: 29%; }
-.vp-hero--lodge .vp-board {
-  top: 48px;
-  right: 6%;
-  left: 6%;
-  min-height: 190px;
-  grid-template-columns: 112px minmax(0, 1fr);
-  gap: 22px;
-  padding: 28px 58px 28px 34px;
-  border: 13px solid #563820;
-  border-radius: 26px 5px 26px 5px;
-  outline: 4px solid var(--board-ink);
-  outline-offset: -4px;
-  box-shadow: 0 9px 0 rgba(11,32,24,.82);
-}
-.vp-hero--lodge .vp-board::before {
-  content: '';
-  position: absolute;
-  inset: 10px;
-  border: 2px solid rgba(20,40,32,.28);
-  border-radius: 12px 2px 12px 2px;
-  pointer-events: none;
-}
-.vp-hero--lodge .vp-mark {
-  width: 104px;
-  height: 104px;
-  padding: 15px;
-  border: 4px solid var(--board-ink);
-  border-radius: 50%;
-  background: var(--lab-paper-light);
-  box-shadow: 5px 5px 0 var(--brand-accent);
-}
-.vp-hero--lodge .vp-copy { min-width: 0; padding-bottom: 35px; }
-.vp-hero--lodge .vp-copy h3 { font-size: clamp(1.65rem, 3.5vw, 2.7rem); }
-.vp-hero--lodge .vp-meta {
-  position: absolute;
-  right: 42px;
-  bottom: 18px;
-  padding: 5px 12px;
-  border: 2px solid var(--board-ink);
-  border-radius: 999px;
-  background: var(--lab-paper-light);
-}
-.vp-hero--lodge .vp-accent {
-  position: absolute;
-  top: 0;
-  right: 22px;
-  bottom: 0;
-  width: 12px;
-  background: var(--brand-accent);
-}
-.vp-hero--lodge .vp-bolt { width: 7px; height: 7px; }
-
-/* 04 — directional wayfinder */
-.vp-hero--wayfinder .vp-post-left {
-  left: 30%;
-  width: 40px;
-}
-.vp-hero--wayfinder .vp-post-right { display: none; }
-.vp-hero--wayfinder .vp-board {
-  top: 56px;
-  right: 0;
-  left: 1%;
-  min-height: 164px;
-  grid-template-columns: 92px minmax(0, 1fr);
-  gap: 20px;
-  padding: 28px 104px 28px 38px;
-  border: 5px solid var(--board-ink);
-  background-color: var(--brand-accent);
-  color: #fff9e9;
-  clip-path: polygon(0 0, 84% 0, 100% 50%, 84% 100%, 0 100%, 3% 50%);
-  filter: drop-shadow(0 8px 0 rgba(11,32,24,.82));
-  transform: rotate(-1.4deg);
-}
-.vp-hero--wayfinder .vp-mark {
-  width: 86px;
-  height: 86px;
-  padding: 9px;
-  border: 4px solid var(--board-ink);
-  background: var(--lab-paper-light);
-  transform: rotate(3deg);
-}
-.vp-hero--wayfinder .vp-copy p { color: #fff9e9; }
-.vp-hero--wayfinder .vp-meta {
-  position: absolute;
-  right: 78px;
-  bottom: 13px;
-  padding-top: 7px;
-  border-top: 2px solid rgba(255,249,233,.8);
-}
-.vp-hero--wayfinder .vp-accent { display: none; }
-.vp-hero--wayfinder .vp-bolt { background: var(--lab-gold); }
-.vp-hero--wayfinder .vp-bolt-tr,
-.vp-hero--wayfinder .vp-bolt-br { right: 20%; }
-
-/* 05 — modern map marker */
-.vp-hero--map { width: min(100%, 780px); }
-.vp-hero--map .vp-post-left { left: 12%; }
-.vp-hero--map .vp-post-right { right: 12%; }
-.vp-hero--map .vp-board {
-  top: 46px;
-  right: 2%;
-  left: 2%;
-  min-height: 190px;
-  grid-template-columns: 124px minmax(0, 1fr) auto;
-  gap: 28px;
-  padding: 32px 44px 32px 58px;
-  border: 5px solid var(--board-ink);
-  border-radius: 20px 4px 20px 4px;
-  background-color: var(--board-light);
-  background-image:
-    repeating-radial-gradient(ellipse at 82% 45%, transparent 0 12px, rgba(20,40,32,.075) 13px 14px, transparent 15px 27px),
-    var(--lab-grain);
-  box-shadow: 10px 10px 0 var(--brand-deep);
-}
-.vp-hero--map .vp-board::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 22px;
-  border-right: 4px solid var(--board-ink);
-  border-radius: 14px 0 0 2px;
-  background: var(--brand-accent);
-}
-.vp-hero--map .vp-mark {
-  width: 112px;
-  height: 112px;
-  padding: 17px;
-  border: 4px solid var(--board-ink);
-  border-radius: 18px 3px 18px 3px;
-  background: var(--lab-paper-light);
-}
-.vp-hero--map .vp-copy h3 { font-size: clamp(2rem, 4vw, 3.35rem); }
-.vp-hero--map .vp-meta {
-  align-self: stretch;
-  display: grid;
-  min-width: 94px;
-  place-items: center;
-  padding: 12px;
-  border-left: 3px solid var(--board-ink);
-  text-align: center;
-}
-.vp-hero--map .vp-accent {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 15px;
-  height: 15px;
-  border: 3px solid var(--board-ink);
-  border-radius: 50%;
-  background: var(--brand-accent);
-}
-.vp-hero--map .vp-bolt { display: none; }
-
-
-/* Long app names use the same component without clipping or manual line breaks. */
-.hero-lab.is-long-title .vp-copy h3 { letter-spacing: -.07em; }
-.hero-lab.is-long-title .vp-hero--gateway .vp-copy h3 { font-size: clamp(1.7rem, 3vw, 2.25rem); }
-.hero-lab.is-long-title .vp-hero--stack .vp-copy h3 { font-size: clamp(1.7rem, 3vw, 2.25rem); }
-.hero-lab.is-long-title .vp-hero--lodge .vp-copy h3 { font-size: clamp(1.55rem, 2.7vw, 2.05rem); }
-.hero-lab.is-long-title .vp-hero--wayfinder .vp-copy h3 { font-size: clamp(1.65rem, 2.8vw, 2.2rem); }
-.hero-lab.is-long-title .vp-hero--map .vp-copy h3 { font-size: clamp(1.9rem, 3.2vw, 2.75rem); }
-
-@media (max-width: 1050px) {
-  .concept-grid { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
-  .concept-card-wide { grid-column: auto; }
+.concept-card p {
+  max-width: 72ch;
+  margin: .55rem 0 0;
+  line-height: 1.5;
 }
 
-@media (max-width: 680px) {
-  .hero-sketch-page { background-attachment: scroll; }
-  .hero-lab { padding-inline: 10px; }
-  .lab-intro,
-  .brand-switcher { align-items: stretch; flex-direction: column; }
-  .back-link { align-self: flex-start; }
-  .brand-buttons { justify-content: flex-start; }
-  .concept-header { min-height: 0; }
-  .concept-stage { min-height: 286px; padding: 10px; }
-  .vp-hero { height: 250px; }
-  .vp-post { width: 24px; }
-  .vp-copy h3 { font-size: clamp(1.35rem, 7vw, 2rem); }
-  .vp-copy p { font-size: .68rem; }
+.concept-card a { display: block; background: #87d5ee; }
+.concept-card img { display: block; width: 100%; height: auto; }
 
-  .vp-hero--gateway .vp-board {
-    top: 45px;
-    min-height: 148px;
-    grid-template-columns: 62px minmax(0, 1fr);
-    gap: 10px;
-    padding: 22px 22px 43px;
-  }
-  .vp-hero--gateway .vp-mark { width: 58px; height: 58px; padding: 5px; }
-  .vp-hero--gateway .vp-meta { right: 22%; bottom: 10px; left: 22%; font-size: .72rem; }
-  .vp-hero--gateway .vp-accent { right: 20px; width: 58px; min-width: 0; height: 10px; }
-
-  .vp-hero--stack .vp-board {
-    top: 45px;
-    min-height: 146px;
-    grid-template-columns: 62px minmax(0, 1fr);
-    gap: 10px;
-    padding: 22px 20px 60px;
-  }
-  .vp-hero--stack .vp-mark { width: 60px; height: 60px; padding: 5px; }
-  .vp-hero--stack .vp-copy h3 { font-size: 1.45rem; }
-  .vp-hero--stack .vp-meta { font-size: .72rem; }
-
-  .vp-hero--lodge .vp-board {
-    top: 42px;
-    right: 3%;
-    left: 3%;
-    min-height: 160px;
-    grid-template-columns: 68px minmax(0, 1fr);
-    gap: 12px;
-    padding: 24px 38px 26px 20px;
-    border-width: 9px;
-  }
-  .vp-hero--lodge .vp-mark { width: 66px; height: 66px; padding: 8px; }
-  .vp-hero--lodge .vp-copy h3 { font-size: 1.45rem; }
-  .vp-hero--lodge .vp-meta { right: 25px; bottom: 12px; font-size: .68rem; }
-  .vp-hero--lodge .vp-accent { right: 12px; width: 8px; }
-
-  .vp-hero--wayfinder .vp-board {
-    top: 48px;
-    min-height: 145px;
-    grid-template-columns: 62px minmax(0, 1fr);
-    gap: 10px;
-    padding: 24px 58px 28px 24px;
-  }
-  .vp-hero--wayfinder .vp-mark { width: 60px; height: 60px; padding: 5px; }
-  .vp-hero--wayfinder .vp-copy h3 { font-size: 1.35rem; }
-  .vp-hero--wayfinder .vp-meta { right: 50px; bottom: 10px; font-size: .68rem; }
-  .vp-hero--wayfinder .vp-accent { display: none; }
-
-  .vp-hero--map .vp-board {
-    top: 42px;
-    min-height: 164px;
-    grid-template-columns: 70px minmax(0, 1fr);
-    gap: 12px;
-    padding: 24px 22px 50px 36px;
-  }
-  .vp-hero--map .vp-mark { width: 68px; height: 68px; padding: 8px; border-radius: 12px 2px 12px 2px; }
-  .vp-hero--map .vp-copy h3 { font-size: 1.6rem; }
-  .vp-hero--map .vp-meta {
-    position: absolute;
-    right: 24px;
-    bottom: 12px;
-    left: 36px;
-    min-width: 0;
-    padding: 7px 0 0;
-    border-top: 2px solid var(--board-ink);
-    border-left: 0;
-    display: block;
-    text-align: right;
-    font-size: .7rem;
-  }
+@media (max-width: 720px) {
+  .concept-lab { width: min(100% - 1rem, 1480px); }
+  .concept-intro { grid-template-columns: 1fr; align-items: start; }
+  .back-link { justify-self: start; }
+  .concept-intro,
+  .concept-card { box-shadow: 5px 5px 0 var(--concept-ink); }
+  .concept-card header { grid-template-columns: 3rem minmax(0, 1fr); gap: .65rem; }
 }
-@media (max-width: 680px) {
-  .hero-lab.is-long-title .vp-hero--gateway .vp-copy h3,
-  .hero-lab.is-long-title .vp-hero--stack .vp-copy h3,
-  .hero-lab.is-long-title .vp-hero--wayfinder .vp-copy h3 { font-size: 1.15rem; }
-  .hero-lab.is-long-title .vp-hero--lodge .vp-copy h3 { font-size: 1.08rem; }
-  .hero-lab.is-long-title .vp-hero--map .vp-copy h3 { font-size: 1.3rem; }
-}
-
-@media (max-width: 390px) {
-  .brand-button { flex: 1 1 100%; justify-content: flex-start; }
-  .concept-stage { min-height: 270px; }
-  .vp-hero { transform: scale(.94); }
-}
-
