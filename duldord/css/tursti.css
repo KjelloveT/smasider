@@ -53,7 +53,7 @@
   overflow: visible;
 }
 
-/* Den heile frontplanken er festa til brettet med to stolpar. */
+/* Høgdekartet: ei bildegenerert skiltflate med ekte HTML-tekst oppå. */
 #hero.dd-welcome {
   position: relative;
   z-index: 0;
@@ -63,9 +63,9 @@
 }
 .dd-welcome-board {
   position: relative;
-  width: min(100%, 540px);
+  width: min(100%, 680px);
   height: var(--dd-sign-height);
-  padding: 0 clamp(20px, 4vw, 42px);
+  padding: 0;
   display: grid;
   place-items: center;
   background: transparent;
@@ -82,40 +82,19 @@
 }
 .dd-sign-art-horizontal {
   display: block;
-  inset: 18% 0 31%;
-  isolation: isolate;
-  background: #142820;
-  clip-path: polygon(2% 0, 98% 0, 100% 7%, 100% 93%, 98% 100%, 2% 100%, 0 93%, 0 7%);
-}
-.dd-sign-art-horizontal::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: 4px;
-  background-color: var(--dd-wood-light);
-  background-image: var(--dd-wood-grain);
-  background-repeat: repeat;
-  background-size: var(--dd-wood-grain-size);
-  clip-path: polygon(2% 0, 98% 0, 100% 7%, 100% 93%, 98% 100%, 2% 100%, 0 93%, 0 7%);
-}
-.dd-sign-art-horizontal::after {
-  content: '';
-  position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at calc(var(--dd-sign-height) * .218) 18px, #1b130d 0 2.5px, #5d3a22 3px, #120c08 4px, transparent 4.5px),
-    radial-gradient(circle at calc(100% - var(--dd-sign-height) * .218) 18px, #1b130d 0 2.5px, #5d3a22 3px, #120c08 4px, transparent 4.5px),
-    radial-gradient(circle at calc(var(--dd-sign-height) * .218) calc(100% - 18px), #1b130d 0 2.5px, #5d3a22 3px, #120c08 4px, transparent 4.5px),
-    radial-gradient(circle at calc(100% - var(--dd-sign-height) * .218) calc(100% - 18px), #1b130d 0 2.5px, #5d3a22 3px, #120c08 4px, transparent 4.5px);
+  background: url('../assets/hogdekart-hero/skiltflate.png?v=1') center / contain no-repeat;
 }
+.dd-sign-art-horizontal::before,
+.dd-sign-art-horizontal::after { content: none; }
 .dd-sign-art-horizontal > span { display: none; }
 .dd-welcome-content {
   position: absolute;
   z-index: 1;
-  top: 21%;
-  right: 8%;
-  bottom: 34%;
-  left: 8%;
+  top: 34%;
+  right: 11%;
+  bottom: 12%;
+  left: 11%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -127,14 +106,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(8px, 1.5vw, 14px);
-  margin: 0 0 7px;
+  gap: clamp(8px, 1.5vw, 16px);
+  margin: 0 0 6px;
 }
-.dd-hero-logo { width: clamp(38px, 6.4vw, 64px); height: auto; flex: 0 0 auto; }
+.dd-hero-logo { width: clamp(42px, 6.6vw, 70px); height: auto; flex: 0 0 auto; }
 .dd-welcome-heading h1 {
   color: #182b23;
   font-family: 'Arial Black', 'Segoe UI', system-ui, sans-serif;
-  font-size: clamp(1.35rem, 4vw, 2.65rem);
+  font-size: clamp(1.45rem, 4.2vw, 2.8rem);
   font-weight: 900;
   letter-spacing: -.055em;
   line-height: 1.1;
@@ -142,29 +121,26 @@
 }
 .dd-welcome-board p {
   margin: 0 auto;
-  font-size: clamp(.65rem, 1.65vw, .95rem);
+  font-size: clamp(.64rem, 1.55vw, .94rem);
   font-weight: 650;
   line-height: 1.2;
 }
-.dd-daynum, .dd-daynum.dd-daynum-archive { display: block; margin: 0 auto; padding: 6px 0 0; width: 78%; background: transparent; color: #182b23; border: 0; border-top: 1px solid #182b23; box-shadow: none; font-weight: 850; font-size: clamp(.68rem, 1.45vw, .88rem); line-height: 1.1; }
+.dd-daynum, .dd-daynum.dd-daynum-archive { display: block; margin: 0 auto; padding: 5px 0 0; width: 62%; background: transparent; color: #182b23; border: 0; border-top: 2px solid #182b23; box-shadow: none; font-weight: 850; font-size: clamp(.68rem, 1.45vw, .9rem); line-height: 1.1; }
 .dd-header-post {
   position: absolute;
   z-index: -1;
-  top: 7%;
-  bottom: -20px;
+  top: 1%;
+  bottom: -28px;
   width: var(--dd-post-width);
-  background-color: #79502d;
-  background-image: var(--dd-wood-grain-vertical-strong);
-  background-repeat: repeat;
-  background-size: 192px 384px;
-  border: 2px solid #142820;
-  border-radius: 999px 999px 4px 4px;
-  box-shadow: inset 5px 0 0 rgba(255, 255, 255, .08), inset -5px 0 0 rgba(20, 40, 32, .18);
+  background: url('../assets/hogdekart-hero/stolpe.png?v=1') center top / contain no-repeat;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 .dd-header-post::before,
 .dd-step-rail::before { content: none; }
-.dd-header-post-left { left: calc(var(--dd-sign-height) * .218 - var(--dd-post-width) / 2); }
-.dd-header-post-right { right: calc(var(--dd-sign-height) * .218 - var(--dd-post-width) / 2); }
+.dd-header-post-left { left: calc(15% - var(--dd-post-width) / 2); }
+.dd-header-post-right { right: calc(15% - var(--dd-post-width) / 2); }
 
 /* Spelebrettet og vegvisartavla er to sjølvstendige flater på brei skjerm. */
 .dd-layout {
@@ -179,7 +155,7 @@
 .dd-play { grid-column: 1; grid-row: 1; min-width: 0; }
 .dd-board-stage {
   --dd-sign-height: var(--dd-stage-sign-height);
-  --dd-post-width: clamp(22px, calc(var(--dd-sign-height) * .10), 34px);
+  --dd-post-width: clamp(28px, calc(var(--dd-sign-height) * .14), 46px);
   position: relative;
   isolation: isolate;
   padding-top: 8px;
@@ -187,8 +163,8 @@
 .dd-day-signpost {
   position: absolute;
   z-index: 2;
-  top: 68%;
-  left: calc(var(--dd-sign-height) * .218);
+  top: 71%;
+  left: 15%;
   width: 190px;
   height: 58px;
   transform: translateX(-50%) rotate(3deg);
@@ -621,13 +597,14 @@
   .dd-main { padding: 16px 12px 30px; }
   #hero.dd-welcome { margin-bottom: 8px; }
   .dd-board-stage { --dd-sign-height: clamp(175px, 62vw, 240px); }
-  .dd-welcome-board { padding: 0 18px; }
+  .dd-welcome-board { padding: 0; }
+  .dd-welcome-content { top: 32%; bottom: 17%; }
   .dd-welcome-heading { gap: 6px; }
-  .dd-welcome-heading h1 { font-size: clamp(1.45rem, 6vw, 2.1rem); }
+  .dd-welcome-heading h1 { font-size: clamp(1.35rem, 6vw, 2rem); }
   .dd-welcome-board p { font-size: clamp(.58rem, 2.3vw, .75rem); }
   .dd-layout { gap: 10px; }
   .dd-board-stage { padding-top: 5px; margin-top: -25px; }
-  .dd-day-signpost { left: calc(var(--dd-sign-height) * .218); top: 65%; width: 132px; height: 48px; }
+  .dd-day-signpost { left: 15%; top: 69%; width: 132px; height: 48px; }
   .dd-daydate { height: 36px; padding-inline: 10px; font-size: .68rem; }
   .dd-next-signpost,
   .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) - 16px); width: 128px; font-size: .64rem; }
