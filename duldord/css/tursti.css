@@ -84,6 +84,7 @@
   display: block;
   inset: 0;
   background: url('../assets/hogdekart-hero/skiltflate.png?v=1') center / contain no-repeat;
+  transform: translateY(-12px);
 }
 .dd-sign-art-horizontal::before,
 .dd-sign-art-horizontal::after { content: none; }
@@ -100,6 +101,7 @@
   justify-content: center;
   width: auto;
   padding: 0;
+  transform: translateY(-12px);
 }
 .dd-welcome-board::before { content: none; }
 .dd-welcome-heading {
@@ -163,7 +165,7 @@
 .dd-day-signpost {
   position: absolute;
   z-index: 2;
-  top: 71%;
+  top: calc(71% - 12px);
   left: 15%;
   width: 190px;
   height: 58px;
@@ -178,10 +180,12 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  aspect-ratio: 512 / 109;
-  padding: 0 17px 0 0;
   color: #fff9e9;
-  background: transparent;
+  background-position: center;
+  background-repeat: repeat-x;
+  background-origin: content-box;
+  background-clip: content-box;
+  background-size: auto 100%;
   border: 0;
   font-family: 'Arial Black', system-ui, sans-serif;
   font-size: .86rem;
@@ -203,65 +207,49 @@
 .dd-previous-signpost::after {
   content: '';
   position: absolute;
-  z-index: -2;
-}
-.dd-daydate::before,
-.dd-next-signpost::before,
-.dd-previous-signpost::before {
-  inset: 0;
-  background: #142820;
-}
-.dd-daydate::after,
-.dd-next-signpost::after,
-.dd-previous-signpost::after {
-  inset: 3px;
   z-index: -1;
-  background-color: var(--dd-sign-color);
-  background-image: var(--dd-wood-grain);
-  background-repeat: repeat;
-  background-size: var(--dd-wood-grain-size);
+  top: 0;
+  bottom: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 .dd-daydate {
-  --dd-sign-color: var(--dd-wood-light);
   height: 48px;
-  aspect-ratio: auto;
-  padding: 0 14px;
+  padding: 0 36px;
   color: #182b23;
+  background-image: url('../assets/skilt-endestykke/info-midten.png?v=1');
 }
-.dd-daydate::before,
-.dd-daydate::after {
-  clip-path: polygon(3% 0, 97% 0, 100% 15%, 100% 85%, 97% 100%, 3% 100%, 0 85%, 0 15%);
-}
+.dd-daydate::before { left: 0; width: 36px; background-image: url('../assets/skilt-endestykke/info-venstre.png?v=1'); }
+.dd-daydate::after { right: 0; width: 36px; background-image: url('../assets/skilt-endestykke/info-hogre.png?v=1'); }
 .dd-next-signpost,
 .dd-previous-signpost {
-  --dd-sign-color: var(--dd-wood-red);
   position: absolute;
   z-index: 3;
   top: calc(8px + var(--dd-sign-height) - 20px);
-  width: 175px;
+  width: 190px;
+  height: 42px;
+  background-image: url('../assets/skilt-endestykke/pil-raud-midten.png?v=1');
+  background-color: transparent;
   font-size: .78rem;
   cursor: pointer;
   filter: drop-shadow(0 4px 0 #142820);
   transition: filter .12s ease, transform .12s ease;
 }
-.dd-next-signpost::before,
-.dd-next-signpost::after {
-  clip-path: polygon(0 0, 84% 0, 100% 50%, 84% 100%, 0 100%, 5% 50%);
-}
-.dd-previous-signpost::before,
-.dd-previous-signpost::after {
-  clip-path: polygon(16% 0, 100% 0, 95% 50%, 100% 100%, 16% 100%, 0 50%);
-}
 .dd-next-signpost {
   right: calc((100% - min(100%, 490px)) / 2 + var(--dd-sign-height) * .218);
-  padding: 0 0 0 17px;
+  padding: 0 46px 0 18px;
   transform: translateX(50%);
 }
 .dd-previous-signpost {
   left: calc((100% - min(100%, 490px)) / 2 + var(--dd-sign-height) * .218);
-  padding: 0 17px 0 0;
+  padding: 0 18px 0 46px;
   transform: translateX(-50%);
 }
+.dd-next-signpost::before { left: 0; width: 18px; background-image: url('../assets/skilt-endestykke/pil-raud-bakende.png?v=1'); }
+.dd-next-signpost::after { right: 0; width: 46px; background-image: url('../assets/skilt-endestykke/pil-raud-spiss.png?v=1'); }
+.dd-previous-signpost::before { left: 0; width: 46px; background-image: url('../assets/skilt-endestykke/pil-raud-spiss.png?v=1'); transform: scaleX(-1); }
+.dd-previous-signpost::after { right: 0; width: 18px; background-image: url('../assets/skilt-endestykke/pil-raud-bakende.png?v=1'); transform: scaleX(-1); }
 .dd-next-signpost[hidden],
 .dd-previous-signpost[hidden] { display: none; }
 .dd-next-signpost:hover,
@@ -344,15 +332,20 @@
 }
 .dd-row { position: relative; }
 .dd-step-sign {
-  --dd-sign-color: var(--dd-wood-gold);
   position: absolute;
   isolation: isolate;
   top: 50%;
   transform: translateY(-50%);
   height: 34px;
   right: calc(100% + 12px);
-  width: 51px;
-  background: transparent;
+  width: 64px;
+  padding: 0 31px 0 14px;
+  background-image: url('../assets/skilt-endestykke/pil-gull-midten.png?v=1');
+  background-position: center;
+  background-repeat: repeat-x;
+  background-origin: content-box;
+  background-clip: content-box;
+  background-size: auto 100%;
   color: #182b23;
   font-family: 'Arial Black', system-ui, sans-serif;
   font-size: 1rem;
@@ -362,21 +355,15 @@
 .dd-step-sign::after {
   content: '';
   position: absolute;
-  z-index: -2;
-  clip-path: polygon(0 0, 76% 0, 100% 50%, 76% 100%, 0 100%, 7% 50%);
-}
-.dd-step-sign::before {
-  inset: 0;
-  background: #142820;
-}
-.dd-step-sign::after {
-  inset: 2px;
   z-index: -1;
-  background-color: var(--dd-sign-color);
-  background-image: var(--dd-wood-grain);
-  background-repeat: repeat;
-  background-size: var(--dd-wood-grain-size);
+  top: 0;
+  bottom: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
+.dd-step-sign::before { left: 0; width: 14px; background-image: url('../assets/skilt-endestykke/pil-gull-bakende.png?v=1'); }
+.dd-step-sign::after { right: 0; width: 31px; background-image: url('../assets/skilt-endestykke/pil-gull-spiss.png?v=1'); }
 .dd-step-number {
   position: absolute;
   top: 50%;
@@ -604,12 +591,18 @@
   .dd-welcome-board p { font-size: clamp(.58rem, 2.3vw, .75rem); }
   .dd-layout { gap: 10px; }
   .dd-board-stage { padding-top: 5px; margin-top: -25px; }
-  .dd-day-signpost { left: 15%; top: 69%; width: 132px; height: 48px; }
-  .dd-daydate { height: 36px; padding-inline: 10px; font-size: .68rem; }
+  .dd-day-signpost { left: 15%; top: calc(69% - 8px); width: 142px; height: 48px; }
+  .dd-daydate { height: 36px; padding-inline: 27px; font-size: .68rem; }
+  .dd-daydate::before,
+  .dd-daydate::after { width: 27px; }
   .dd-next-signpost,
-  .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) - 16px); width: 128px; font-size: .64rem; }
-  .dd-next-signpost { padding-left: 12px; }
-  .dd-previous-signpost { padding-right: 12px; }
+  .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) - 16px); width: 128px; height: 36px; font-size: .61rem; }
+  .dd-next-signpost { padding: 0 39px 0 15px; }
+  .dd-previous-signpost { padding: 0 15px 0 39px; }
+  .dd-next-signpost::before,
+  .dd-previous-signpost::after { width: 15px; }
+  .dd-next-signpost::after,
+  .dd-previous-signpost::before { width: 39px; }
   .dd-board-frame { padding: 25px 6px 12px 39px; border-width: 4px; }
   .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
   .dd-step-rail { --dd-rail-width: 10px; left: -28px; }
