@@ -2,6 +2,7 @@
 
 .dd-page {
   --dd-paper: #fff9e9;
+  --dd-sign-surface: #fff9e9;
   --dd-paper-alt: #fffdf5;
   --dd-ink: #182b23;
   --dd-frame: #142820;
@@ -9,11 +10,10 @@
   --dd-rust: #a83f2d;
   --dd-gold: #e4ad58;
   --dd-wood: #684327;
-  --dd-wood-light: #f4e7c8;
   --dd-wood-red: #a83f2d;
   --dd-wood-gold: #e4ad58;
-  --dd-action-red: #dc9279;
-  --dd-action-red-hover: #e8a891;
+  --dd-action-red: #efb29d;
+  --dd-action-red-hover: #f5c4b4;
   --dd-wood-grain: url('../assets/treverk-monster-vassrett.png?v=1');
   --dd-wood-grain-vertical: url('../assets/treverk-monster-loddrett.png?v=1');
   --dd-wood-grain-vertical-strong: url('../assets/treverk-monster-loddrett.png?v=1'), url('../assets/treverk-monster-loddrett.png?v=1'), url('../assets/treverk-monster-loddrett.png?v=1');
@@ -85,7 +85,7 @@
 .dd-sign-art-horizontal {
   display: block;
   inset: 0;
-  background: url('../assets/hogdekart-hero/skiltflate.png?v=1') center / contain no-repeat;
+  background: url('../assets/hogdekart-hero/skiltflate-v2.png?v=1') center / contain no-repeat;
   transform: translateY(-12px);
 }
 .dd-sign-art-horizontal::before,
@@ -218,11 +218,22 @@
   cursor: pointer;
   transition: background .12s ease, transform .12s ease, box-shadow .12s ease;
 }
+.dd-guide-navigation .dd-day-nav-btn {
+  min-height: 48px;
+  padding: 6px 8px;
+  background: var(--dd-action-red);
+  color: #182b23;
+  border: 3px solid #142820;
+  border-radius: 8px;
+  box-shadow: 0 3px 0 #142820;
+  font: 800 .72rem/1.05 'Segoe UI', system-ui, sans-serif;
+  text-align: center;
+  white-space: normal;
+}
+.dd-day-nav-btn span { display: block; }
 .dd-guide-navigation .dd-day-nav-btn:hover { background: var(--dd-action-red-hover); }
 .dd-guide-navigation .dd-day-nav-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #142820; }
 .dd-day-nav-btn:focus-visible { outline: 3px solid var(--dd-gold); outline-offset: 3px; }
-#previousDayBtn.dd-day-nav-btn::before { content: '←'; }
-#nextDayBtn.dd-day-nav-btn::after { content: '→'; }
 .dd-action,
 .dd-page .dd-iconbtn {
   display: inline-flex;
@@ -263,35 +274,15 @@
   position: relative;
   isolation: isolate;
   width: 100%;
-  background-color: var(--dd-paper);
-  background-image: url('../assets/skilttekstur/venstre.png?v=1'), url('../assets/skilttekstur/hogre.png?v=1');
-  background-position: left center, right center;
-  background-repeat: repeat-y, repeat-y;
-  background-size: 148px 111px, 148px 111px;
+  background-color: var(--dd-sign-surface);
+  background-image: url('../assets/hogdekart-rammeflate.png?v=1');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border: 5px solid var(--dd-frame);
   border-radius: 12px;
   box-shadow: none;
 }
-.dd-board-frame::before,
-.dd-board-frame::after,
-.dd-keyboard-frame::before,
-.dd-keyboard-frame::after {
-  content: '';
-  position: absolute;
-  z-index: 0;
-  top: -20px;
-  bottom: -20px;
-  width: 22px;
-  pointer-events: none;
-  background-image: url('../assets/hogdekart-post-topp.png?v=1'), url('../assets/hogdekart-post-midt.png?v=1'), url('../assets/hogdekart-post-botn.png?v=1');
-  background-position: center top, center center, center bottom;
-  background-repeat: no-repeat, repeat-y, no-repeat;
-  background-size: 100% 11px, 100% 44px, 100% 10px;
-}
-.dd-board-frame::before,
-.dd-keyboard-frame::before { left: 8px; }
-.dd-board-frame::after,
-.dd-keyboard-frame::after { right: 8px; }
 .dd-board-frame {
   padding: clamp(12px, 1.4vw, 18px) 20px clamp(12px, 1.4vw, 18px) 72px;
 }
@@ -361,8 +352,8 @@
   line-height: 1;
 }
 .dd-tile {
-  background: var(--dd-paper-alt);
-  color: var(--dd-ink);
+  background: var(--dd-sign-surface);
+  color: #182b23;
   border-color: var(--dd-frame);
   border-radius: 5px;
   box-shadow: none;
@@ -382,8 +373,8 @@
 .dd-key {
   height: clamp(42px, 4vw, 50px);
   max-width: 50px;
-  background: var(--dd-paper-alt);
-  color: var(--dd-ink);
+  background: var(--dd-sign-surface);
+  color: #182b23;
   border-color: var(--dd-frame);
   border-radius: 6px;
   box-shadow: none;
@@ -421,13 +412,13 @@
   content: '';
   position: absolute;
   z-index: 0;
-  top: -28px;
-  bottom: -38px;
+  top: -16px;
+  bottom: -16px;
   width: var(--dd-post-width);
-  background-image: url('../assets/hogdekart-post-topp.png?v=1'), url('../assets/hogdekart-post-midt.png?v=1'), url('../assets/hogdekart-post-botn.png?v=1');
-  background-position: center top, center center, center bottom;
-  background-repeat: no-repeat, repeat-y, no-repeat;
-  background-size: 100% calc(var(--dd-post-width) * .49), 100% calc(var(--dd-post-width) * 1.9), 100% calc(var(--dd-post-width) * .44);
+  background-image: url('../assets/hogdekart-post-topp.png?v=1'), url('../assets/hogdekart-post-botn.png?v=1');
+  background-position: center top, center bottom;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
 }
 .dd-guide::before { left: 18px; }
 .dd-guide::after { right: 18px; }
@@ -438,15 +429,30 @@
   min-height: 580px;
   padding: 128px 38px 118px;
   color: #182b23;
-  background-color: var(--dd-wood-light);
-  background-image: url('../assets/hogdekart-info-topp.png?v=1'), url('../assets/hogdekart-info-botn.png?v=1');
-  background-position: center top, center bottom;
-  background-repeat: no-repeat;
-  background-size: 100% auto, 100% auto;
+  background-color: var(--dd-sign-surface);
+  background-image: none;
   border: 4px solid #142820;
   border-radius: 8px;
 }
-.dd-sign-art-vertical { display: none; }
+.dd-guide-corners {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  pointer-events: none;
+}
+.dd-guide-corner {
+  position: absolute;
+  width: min(42%, 156px);
+  aspect-ratio: 1;
+  opacity: .62;
+  background: url('../assets/hogdekart-infokrok.png?v=1') left top / contain no-repeat;
+}
+.dd-guide-corner-top-left { top: 0; left: 0; }
+.dd-guide-corner-top-right { top: 0; right: 0; transform: scaleX(-1); }
+.dd-guide-corner-bottom-left { bottom: 0; left: 0; transform: scaleY(-1); }
+.dd-guide-corner-bottom-right { bottom: 0; right: 0; transform: scale(-1); }
 .dd-guide-content { position: relative; z-index: 1; }
 .dd-guide h2 {
   margin: 6px 0 12px;
@@ -543,22 +549,20 @@
     z-index: 1;
     min-height: 0;
     padding: 82px 24px 70px;
-    background-color: var(--dd-wood-light);
-    background-image: url('../assets/hogdekart-info-topp.png?v=1'), url('../assets/hogdekart-info-botn.png?v=1');
-    background-position: center top, center bottom;
-    background-repeat: no-repeat;
-    background-size: 100% 76px, 100% 66px;
+    background-color: var(--dd-sign-surface);
+    background-image: none;
     border: 3px solid #142820;
     border-radius: 8px;
   }
   .dd-guide::before,
   .dd-guide::after {
-    --dd-post-width: 16px;
-    top: -12px;
-    bottom: -12px;
+    --dd-post-width: 18px;
+    top: -10px;
+    bottom: -10px;
   }
   .dd-guide::before { left: 12px; }
   .dd-guide::after { right: 12px; }
+  .dd-guide-corner { width: min(43%, 138px); }
   .dd-guide-content > p:not(.dd-footnote),
   .dd-guide-legend { display: none; }
   .dd-guide h2 { margin: 0 0 12px; text-align: center; font-size: 1.15rem; }
@@ -581,14 +585,6 @@
   .dd-day-meta { width: 82%; gap: 5px; font-size: clamp(.62rem, 2.4vw, .8rem); }
   .dd-daydate { font-size: inherit; }
   .dd-board-frame { padding: 25px 6px 12px 39px; border-width: 4px; }
-  .dd-board-frame::before,
-  .dd-board-frame::after,
-  .dd-keyboard-frame::before,
-  .dd-keyboard-frame::after { top: -14px; bottom: -14px; width: 18px; background-size: 100% 9px, 100% 36px, 100% 8px; }
-  .dd-board-frame::before,
-  .dd-keyboard-frame::before { left: 5px; }
-  .dd-board-frame::after,
-  .dd-keyboard-frame::after { right: 5px; }
   .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
   .dd-step-rail { --dd-rail-width: 10px; left: -28px; }
   .dd-step-sign { right: calc(100% + 8px); width: 29px; height: 19px; font-size: .72rem; }
@@ -597,9 +593,9 @@
   .dd-key { min-width: 0; height: clamp(40px, 9vw, 48px); font-size: clamp(.72rem, 2.7vw, .9rem); border-width: 2px; }
   .dd-key-wide { font-size: .66rem; }
   .dd-message { min-height: 1.5em; }
-  .dd-guide-board { padding: 56px 18px 48px; background-size: 100% 48px, 100% 42px; }
+  .dd-guide-board { padding: 56px 18px 48px; }
   .dd-guide-navigation { max-width: 300px; }
-  .dd-day-nav-btn { font-size: .67rem; }
+  .dd-guide-navigation .dd-day-nav-btn { font-size: .67rem; }
   .dd-guide-actions { max-width: 300px; }
   .dd-footnote { font-size: .72rem; }
 }

@@ -4,12 +4,12 @@
     {
       "versjon": "1.58",
       "dato": "2026-09-23",
-      "samandrag": "Duldord samlar dagsinformasjonen i skilta.",
+      "samandrag": "Duldord samlar dagsinfo og får ei einskapleg skiltflate.",
       "punkt": [
         {
           "t": "endra",
           "kva": "Duldord",
-          "tekst": "Dagsnamn og dagnummer står på hovudskiltet, dagval og spelhjelp på informasjonsskiltet, og høgdekartdetaljar bind saman skilt, brett og tastatur."
+          "tekst": "Same lyse trefarge på skilta og spelrammene, eit stort kartmønster utan stolpar rundt brett og tastatur, og dagval med tydeleg raud knappestil på informasjonsskiltet."
         }
       ]
     },
