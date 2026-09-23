@@ -1,0 +1,610 @@
+/* Duldord – turstiutgåva. Berre utsjånaden bur her; spel og lagring ligg i js/. */
+
+.dd-page {
+  --dd-paper: #fff9e9;
+  --dd-sign-surface: #fff9e9;
+  --dd-paper-alt: #fffdf5;
+  --dd-ink: #182b23;
+  --dd-frame: #142820;
+  --dd-shadow: #0b2018;
+  --dd-rust: #a83f2d;
+  --dd-gold: #e4ad58;
+  --dd-wood: #684327;
+  --dd-wood-red: #a83f2d;
+  --dd-wood-gold: #e4ad58;
+  --dd-action-red: #efb29d;
+  --dd-action-red-hover: #f5c4b4;
+  --dd-gap: clamp(4px, 0.8vw, 8px);
+  min-height: 100vh;
+  background: #24573b url('../assets/skogssti.jpg') center top / cover fixed no-repeat;
+  color: var(--dd-ink);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Dei sju mørke temaa får mørke papirflater. Skiltet i toppmenyen er alltid
+   skoggrønt, medan resten av sida følgjer temavalet. */
+.dd-page:is([data-theme="hacker"], [data-theme="dracula"], [data-theme="neon"],
+            [data-theme="cyberpunk"], [data-theme="midnight"], [data-theme="slate"],
+            [data-theme="space"]) {
+  --dd-paper: #203a30;
+  --dd-paper-alt: #29453a;
+  --dd-ink: #fff9e9;
+  --dd-frame: #fff9e9;
+  --dd-shadow: #071c14;
+  --dd-gold: #e4ad58;
+}
+
+.dd-page neo-header {
+  --accent: #a83f2d;
+  --accent2: #214c37;
+  --surface: #fff9e9;
+  --text: #182b23;
+  --border: #142820;
+  --shadow: #0b2018;
+  --text-on-accent: #ffffff;
+}
+
+.dd-page-wrapper { min-height: calc(100vh - 72px); }
+.dd-main {
+  max-width: 1440px;
+  padding: clamp(18px, 3vw, 32px) clamp(12px, 3vw, 32px) 48px;
+  overflow: visible;
+}
+
+/* Høgdekartet: ei bildegenerert skiltflate med ekte HTML-tekst oppå. */
+#hero.dd-welcome {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 10px;
+}
+.dd-welcome-board {
+  position: relative;
+  width: min(100%, 680px);
+  height: var(--dd-sign-height);
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  color: #182b23;
+  border: 0;
+  box-shadow: none;
+  text-align: center;
+}
+.dd-sign-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.dd-sign-art-horizontal {
+  display: block;
+  inset: 0;
+  background: url('../assets/hogdekart-hero/skiltflate-v2.png?v=1') center / contain no-repeat;
+  transform: translateY(-12px);
+}
+.dd-sign-art-horizontal::before,
+.dd-sign-art-horizontal::after { content: none; }
+.dd-sign-art-horizontal > span { display: none; }
+.dd-welcome-content {
+  position: absolute;
+  z-index: 1;
+  top: 34%;
+  right: 11%;
+  bottom: 12%;
+  left: 11%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  padding: 0;
+  transform: translate(-10px, 0);
+}
+.dd-welcome-board::before { content: none; }
+.dd-welcome-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.5vw, 16px);
+  margin: 0 0 6px;
+}
+.dd-hero-logo { width: clamp(42px, 6.6vw, 70px); height: auto; flex: 0 0 auto; }
+.dd-welcome-heading h1 {
+  color: #182b23;
+  font-family: 'Arial Black', 'Segoe UI', system-ui, sans-serif;
+  font-size: clamp(1.45rem, 4.2vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: -.055em;
+  line-height: 1.1;
+  margin: 0;
+}
+.dd-welcome-board p {
+  margin: 0 auto;
+  font-size: clamp(.64rem, 1.55vw, .94rem);
+  font-weight: 650;
+  line-height: 1.2;
+}
+.dd-day-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  width: 68%;
+  margin: 0 auto;
+  padding-top: 5px;
+  border-top: 2px solid #182b23;
+  color: #182b23;
+  font-size: clamp(.68rem, 1.45vw, .9rem);
+  font-weight: 850;
+  line-height: 1.1;
+}
+.dd-daynum, .dd-daynum.dd-daynum-archive {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  background: transparent;
+  color: #182b23;
+  border: 0;
+  box-shadow: none;
+  font-weight: 850;
+  font-size: inherit;
+  line-height: 1.1;
+}
+.dd-day-separator { opacity: .55; }
+.dd-header-post {
+  position: absolute;
+  z-index: -1;
+  top: 1%;
+  bottom: -28px;
+  width: var(--dd-post-width);
+  background: url('../assets/hogdekart-hero/stolpe.png?v=1') center top / contain no-repeat;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.dd-header-post::before,
+.dd-step-rail::before { content: none; }
+.dd-header-post-left { left: calc(15% - var(--dd-post-width) / 2); }
+.dd-header-post-right { right: calc(15% - var(--dd-post-width) / 2); }
+
+/* Spelebrettet og vegvisartavla er to sjølvstendige flater på brei skjerm. */
+.dd-layout {
+  --dd-stage-sign-height: clamp(260px, 32vw, 325px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 300px);
+  gap: clamp(12px, 1.5vw, 20px);
+  align-items: start;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+.dd-play { grid-column: 1; grid-row: 1; min-width: 0; }
+.dd-board-stage {
+  --dd-sign-height: var(--dd-stage-sign-height);
+  --dd-post-width: clamp(28px, calc(var(--dd-sign-height) * .14), 46px);
+  position: relative;
+  isolation: isolate;
+  padding-top: 8px;
+}
+.dd-daydate { color: #182b23; }
+.dd-guide-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 0 10px;
+}
+.dd-guide-navigation:has(#previousDayBtn:not([hidden])):not(:has(#nextDayBtn:not([hidden]))) {
+  justify-content: flex-start;
+}
+.dd-guide-navigation [hidden] { display: none; }
+.dd-day-nav-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 40px;
+  padding: 6px 4px;
+  background: var(--dd-action-red);
+  color: #182b23;
+  border: 3px solid #142820;
+  border-radius: 8px;
+  box-shadow: 0 3px 0 #142820;
+  font: 800 .65rem/1.15 'Segoe UI', system-ui, sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .12s ease, transform .12s ease, box-shadow .12s ease;
+}
+.dd-guide-navigation .dd-day-nav-btn {
+  min-height: 48px;
+  padding: 6px 8px;
+  background: var(--dd-action-red);
+  color: #182b23;
+  border: 3px solid #142820;
+  border-radius: 8px;
+  box-shadow: 0 3px 0 #142820;
+  font: 800 .9rem/1.05 'Segoe UI', system-ui, sans-serif;
+  text-align: center;
+  white-space: normal;
+}
+.dd-day-nav-btn span { display: block; }
+.dd-guide-navigation .dd-day-nav-btn:hover { background: var(--dd-action-red-hover); }
+.dd-guide-navigation .dd-day-nav-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #142820; }
+.dd-day-nav-btn:focus-visible { outline: 3px solid var(--dd-gold); outline-offset: 3px; }
+.dd-action,
+.dd-page .dd-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 8px 13px;
+  border: 3px solid var(--dd-frame);
+  border-radius: 8px;
+  background: var(--dd-paper);
+  color: var(--dd-ink);
+  box-shadow: none;
+  font: 800 .9rem 'Segoe UI', system-ui, sans-serif;
+  cursor: pointer;
+}
+.dd-action:hover,
+.dd-page .dd-iconbtn:hover { background: var(--dd-gold); color: #182b23; }
+.dd-action:active,
+.dd-page .dd-iconbtn:active { transform: scale(.97); }
+.dd-action svg,
+.dd-page .dd-iconbtn svg { width: 18px; height: 18px; flex: 0 0 auto; }
+
+.dd-message {
+  min-height: 1.2em;
+  color: var(--dd-ink);
+  margin: 0 0 8px;
+}
+.dd-message.dd-message-on {
+  background: var(--dd-paper);
+  color: var(--dd-ink);
+  border: 3px solid var(--dd-frame);
+  border-radius: 8px;
+  box-shadow: none;
+}
+.dd-board-frame,
+.dd-keyboard-frame {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  background-color: var(--dd-sign-surface);
+  background-image: none;
+  border: 5px solid var(--dd-frame);
+  border-radius: 12px;
+  box-shadow: none;
+}
+.dd-board-frame::before,
+.dd-keyboard-frame::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: url('../assets/hogdekart-rammeflate.png?v=1') center / cover no-repeat;
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 7%, rgba(0, 0, 0, .08) 34%, rgba(0, 0, 0, .52) 68%, #000 100%);
+  mask-image: radial-gradient(ellipse at center, transparent 7%, rgba(0, 0, 0, .08) 34%, rgba(0, 0, 0, .52) 68%, #000 100%);
+}
+.dd-board-frame {
+  padding: clamp(12px, 1.4vw, 18px) 20px clamp(12px, 1.4vw, 18px) 72px;
+}
+.dd-board {
+  --dd-size: min(58px, calc((100vw - 92px - 4 * var(--dd-gap)) / 5));
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  margin: 0 auto;
+}
+.dd-step-rail {
+  --dd-rail-width: 24px;
+  position: absolute;
+  z-index: 0;
+  top: 2px;
+  bottom: 2px;
+  left: -50px;
+  width: var(--dd-rail-width);
+  background-color: #79502d;
+  background-image: url('../assets/stolpe-topp.png?v=1'), url('../assets/stolpe-midt.png?v=1'), url('../assets/stolpe-botn.png?v=1');
+  background-position: center top, center center, center bottom;
+  background-repeat: no-repeat, repeat-y, no-repeat;
+  background-size: 100% auto;
+}
+.dd-row { position: relative; }
+.dd-step-sign {
+  --dd-sign-shape: polygon(0 0, 76% 0, 100% 50%, 76% 100%, 0 100%);
+  position: absolute;
+  isolation: isolate;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 34px;
+  right: calc(100% + 12px);
+  width: 51px;
+  background: transparent;
+  color: #182b23;
+  font-family: 'Arial Black', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+}
+.dd-step-sign::before,
+.dd-step-sign::after {
+  content: '';
+  position: absolute;
+  clip-path: var(--dd-sign-shape);
+}
+.dd-step-sign::before {
+  z-index: -2;
+  inset: 0;
+  background: #142820;
+}
+.dd-step-sign::after {
+  z-index: -1;
+  inset: 2px;
+  background-color: var(--dd-wood-gold);
+  background-image: url('../assets/skilttekstur/venstre.png?v=1'), url('../assets/skilttekstur/hogre.png?v=1');
+  background-position: left center, right center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+.dd-step-number {
+  position: absolute;
+  top: 50%;
+  left: 42%;
+  transform: translate(-50%, -50%);
+  line-height: 1;
+}
+.dd-tile {
+  background: var(--dd-sign-surface);
+  color: #182b23;
+  border-color: var(--dd-frame);
+  border-radius: 5px;
+  box-shadow: none;
+  font-family: 'Arial Black', system-ui, sans-serif;
+}
+.dd-board .dd-tile { --dd-size: inherit; }
+.dd-tile.dd-filled { box-shadow: inset 0 0 0 3px var(--dd-rust); }
+.dd-tile.dd-correct { background: var(--dd-correct); color: #fff; }
+.dd-tile.dd-present { background: var(--dd-present); color: #fff; }
+.dd-tile.dd-absent { background: var(--dd-absent); color: #fff; }
+.dd-key.dd-correct { background: #a5d9a9; color: #182b23; }
+.dd-key.dd-present { background: #f0cf86; color: #182b23; }
+.dd-key.dd-absent { background: #c4cbd2; color: #182b23; }
+.dd-keyboard-frame { margin-top: 12px; padding: 12px; }
+.dd-keyboard { position: relative; z-index: 1; }
+.dd-keyrow { max-width: 620px; }
+.dd-key {
+  height: clamp(42px, 4vw, 50px);
+  max-width: 50px;
+  background: var(--dd-sign-surface);
+  color: #182b23;
+  border-color: var(--dd-frame);
+  border-radius: 6px;
+  box-shadow: none;
+  font-family: 'Arial Black', system-ui, sans-serif;
+}
+.dd-key-wide { max-width: 92px; }
+.dd-key:hover { background: var(--dd-gold); color: #182b23; }
+.dd-key.dd-correct:hover, .dd-key.dd-present:hover, .dd-key.dd-absent:hover { color: #182b23; }
+.dd-key[aria-label="Send inn gjettet"] { background: var(--dd-action-red); color: #182b23; }
+.dd-key[aria-label="Send inn gjettet"]:hover { background: var(--dd-action-red-hover); color: #182b23; }
+.dd-guide .dd-footnote {
+  width: fit-content;
+  margin: 0 0 12px;
+  padding: 0;
+  color: var(--dd-ink);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: .75rem;
+  font-weight: 750;
+}
+
+/* Informasjonsskiltet og stegrekka brukar same stolpedelar. Midtdelen kan
+   repeterast utan synleg skjøt når stolpen får ulik høgd. */
+.dd-guide {
+  position: relative;
+  isolation: isolate;
+  grid-column: 2;
+  grid-row: 1;
+}
+.dd-guide::before,
+.dd-guide::after {
+  --dd-post-width: 34px;
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: -38px;
+  bottom: -38px;
+  width: var(--dd-post-width);
+  background-image: url('../assets/stolpe-topp.png?v=1'), url('../assets/stolpe-midt.png?v=1'), url('../assets/stolpe-botn.png?v=1');
+  background-position: center top, center center, center bottom;
+  background-repeat: no-repeat, repeat-y, no-repeat;
+  background-size: 100% auto;
+}
+.dd-guide::before { left: 18px; }
+.dd-guide::after { right: 18px; }
+.dd-guide-board {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  min-height: 0;
+  padding: 50px 38px 44px;
+  color: #182b23;
+  background-color: var(--dd-sign-surface);
+  background-image: none;
+  border: 4px solid #142820;
+  border-radius: 8px;
+}
+.dd-guide-corners {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  pointer-events: none;
+}
+.dd-guide-corner {
+  position: absolute;
+  width: min(54%, 200px);
+  aspect-ratio: 1;
+  opacity: .78;
+  background: url('../assets/hogdekart-infokrok.png?v=1') left top / contain no-repeat;
+}
+.dd-guide-corner-top-left { top: 0; left: 0; }
+.dd-guide-corner-top-right { top: 0; right: 0; transform: scaleX(-1); }
+.dd-guide-corner-bottom-left { bottom: 0; left: 0; transform: scaleY(-1); }
+.dd-guide-corner-bottom-right { bottom: 0; right: 0; transform: scale(-1); }
+.dd-guide-content { position: relative; z-index: 1; }
+.dd-guide h2 {
+  margin: 6px 0 12px;
+  color: #182b23;
+  font-family: 'Arial Black', system-ui, sans-serif;
+  font-size: clamp(1.3rem, 1.7vw, 1.5rem);
+  line-height: 1.08;
+  white-space: normal;
+}
+.dd-guide p { margin: 0 0 14px; font-size: .86rem; line-height: 1.4; }
+.dd-guide-legend { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 8px; }
+.dd-guide-legend li { display: flex; align-items: center; gap: 8px; font-size: .78rem; font-weight: 750; }
+.dd-legend-swatch { width: 24px; height: 24px; flex: 0 0 auto; border: 2px solid var(--dd-frame); }
+.dd-legend-swatch.dd-correct { background: var(--dd-correct); }
+.dd-legend-swatch.dd-present { background: var(--dd-present); }
+.dd-legend-swatch.dd-absent { background: var(--dd-absent); }
+.dd-guide-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+}
+.dd-guide-actions [hidden] { display: none; }
+.dd-guide-actions #archiveBtn { grid-column: 1 / -1; }
+.dd-guide-actions .dd-iconbtn { grid-column: 1 / -1; justify-self: stretch; width: 100%; }
+.dd-page .dd-guide-actions .dd-action,
+.dd-page .dd-guide-actions .dd-iconbtn {
+  min-width: 0;
+  min-height: 42px;
+  padding: 7px 8px;
+  font-size: .8rem;
+  line-height: 1.15;
+  background: var(--dd-action-red);
+  color: #182b23;
+  border: 3px solid #142820;
+  border-radius: 8px;
+  box-shadow: 0 3px 0 #142820;
+}
+.dd-page .dd-guide-actions .dd-action:hover,
+.dd-page .dd-guide-actions .dd-iconbtn:hover {
+  background: var(--dd-action-red-hover);
+  color: #182b23;
+}
+
+/* Spelstatus, dialogar og arkiv skal sjå ut som same verda. */
+.dd-page .modal-overlay { background: rgba(5, 23, 16, .76); }
+.dd-page .modal3,
+.dd-page .modal4,
+.dd-page .dd-notice {
+  background: var(--dd-paper);
+  color: var(--dd-ink);
+  border-color: var(--dd-frame);
+  border-radius: 12px;
+  box-shadow: none;
+}
+.dd-page .modal3 .modal-header {
+  background: var(--dd-rust);
+  color: #fff;
+  border-color: var(--dd-frame);
+  border-radius: 7px 7px 0 0;
+}
+.dd-page .modal3 .modal-body,
+.dd-page .modal4 > p { color: var(--dd-ink); }
+.dd-page .modal-body .btn,
+.dd-page .modal-close { background: var(--dd-paper-alt); color: var(--dd-ink); border-color: var(--dd-frame); border-radius: 7px; }
+.dd-page .modal-body .btn:hover,
+.dd-page .modal-close:hover { background: var(--dd-gold); color: #182b23; }
+.dd-page .dd-stat,
+.dd-page .dd-archive-day { background: var(--dd-paper-alt); color: var(--dd-ink); border-color: var(--dd-frame); border-radius: 7px; box-shadow: none; }
+.dd-page .dd-archive-day.dd-archive-won { background: var(--dd-correct); color: #fff; }
+.dd-page .dd-archive-day.dd-archive-lost { background: var(--dd-present); color: #fff; }
+.dd-page .dd-archive-day.dd-archive-open { background: var(--dd-gold); color: #182b23; }
+.dd-page .dd-muted,
+.dd-page .dd-stat-label { color: var(--dd-ink); opacity: .8; }
+.dd-page .dd-modal-title { color: #fff; background: var(--dd-rust); border-color: var(--dd-frame); }
+.dd-page .dd-disttitle { color: var(--dd-ink); }
+.dd-page .dd-help-row .dd-tile { box-shadow: none; }
+
+.dd-page :is(.dd-action, .dd-key, .dd-archive-day, .dd-iconbtn, .btn, a):focus-visible {
+  outline: 3px solid var(--dd-gold);
+  outline-offset: 4px;
+}
+
+@media (min-width: 901px) {
+  .dd-guide { margin-top: var(--dd-stage-sign-height); }
+}
+
+@media (max-width: 900px) {
+  .dd-layout { grid-template-columns: minmax(0, 1fr); max-width: 720px; }
+  .dd-play { grid-column: 1; grid-row: 1; }
+  .dd-guide { position: relative; isolation: isolate; grid-column: 1; grid-row: 2; width: min(100%, 430px); margin: 26px auto 0; }
+  .dd-sign-art-vertical { display: none; }
+  .dd-guide-board {
+    z-index: 1;
+    min-height: 0;
+    padding: 40px 24px 36px;
+    background-color: var(--dd-sign-surface);
+    background-image: none;
+    border: 3px solid #142820;
+    border-radius: 8px;
+  }
+  .dd-guide::before,
+  .dd-guide::after {
+    --dd-post-width: 22px;
+    top: -30px;
+    bottom: -30px;
+  }
+  .dd-guide::before { left: 12px; }
+  .dd-guide::after { right: 12px; }
+  .dd-guide-corner { width: min(55%, 180px); }
+  .dd-guide-content > p:not(.dd-footnote),
+  .dd-guide-legend { display: none; }
+  .dd-guide h2 { margin: 0 0 12px; text-align: center; font-size: 1.15rem; }
+  .dd-guide-navigation { max-width: 320px; margin: 0 auto 10px; }
+  .dd-guide-actions { max-width: 320px; margin: 0 auto; }
+}
+
+@media (max-width: 560px) {
+  .dd-page { background-attachment: scroll; background-position: center top; }
+  .dd-main { padding: 16px 12px 30px; }
+  #hero.dd-welcome { margin-bottom: 8px; }
+  .dd-board-stage { --dd-sign-height: clamp(166px, calc(40.82vw + 14px), 205px); }
+  .dd-welcome-board { padding: 0; }
+  .dd-welcome-content { top: 32%; bottom: 17%; }
+  .dd-header-post { top: 10%; bottom: -8px; width: clamp(20px, 7vw, 24px); }
+  .dd-welcome-heading { gap: 6px; }
+  .dd-welcome-heading h1 { font-size: clamp(1.35rem, 6vw, 2rem); }
+  .dd-welcome-board p { font-size: clamp(.58rem, 2.3vw, .75rem); }
+  .dd-layout { gap: 10px; }
+  .dd-board-stage { padding-top: 5px; margin-top: -25px; }
+  .dd-day-meta { width: 82%; gap: 5px; font-size: clamp(.62rem, 2.4vw, .8rem); }
+  .dd-daydate { font-size: inherit; }
+  .dd-board-frame { padding: 25px 6px 12px 39px; border-width: 4px; }
+  .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
+  .dd-step-rail { --dd-rail-width: 18px; left: -32px; }
+  .dd-step-sign { right: calc(100% + 8px); width: 29px; height: 19px; font-size: .72rem; }
+  .dd-keyboard-frame { padding: 10px 6px; margin-top: 10px; border-width: 4px; }
+  .dd-keyrow { gap: 3px; }
+  .dd-key { min-width: 0; height: clamp(40px, 9vw, 48px); font-size: clamp(.72rem, 2.7vw, .9rem); border-width: 2px; }
+  .dd-key-wide { font-size: .66rem; }
+  .dd-message { min-height: 1.5em; }
+  .dd-guide-board { padding: 32px 18px 28px; }
+  .dd-guide-navigation { max-width: 300px; }
+  .dd-guide-navigation .dd-day-nav-btn { font-size: .82rem; }
+  .dd-guide-actions { max-width: 300px; }
+  .dd-footnote { font-size: .72rem; }
+}
+
+@media (max-width: 360px) {
+  .dd-hero-logo { width: 30px; }
+  .dd-keyboard-frame { padding-inline: 4px; }
+}

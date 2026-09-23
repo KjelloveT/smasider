@@ -14,9 +14,22 @@
     boardEl.textContent = '';
     rows.length = 0;
 
+    const stepRail = document.createElement('span');
+    stepRail.className = 'dd-step-rail';
+    stepRail.setAttribute('aria-hidden', 'true');
+    boardEl.appendChild(stepRail);
+
     for (let r = 0; r < MAX_GUESSES; r++) {
       const row = document.createElement('div');
       row.className = 'dd-row';
+      const stepSign = document.createElement('span');
+      stepSign.className = 'dd-step-sign';
+      stepSign.setAttribute('aria-hidden', 'true');
+      const stepNumber = document.createElement('span');
+      stepNumber.className = 'dd-step-number';
+      stepNumber.textContent = String(r + 1);
+      stepSign.appendChild(stepNumber);
+      row.appendChild(stepSign);
       const tiles = [];
       for (let c = 0; c < WORD_LENGTH; c++) {
         const tile = document.createElement('div');

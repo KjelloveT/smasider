@@ -1,0 +1,127 @@
+:root {
+  --concept-cream: #fff8e7;
+  --concept-ink: #102c24;
+  --concept-rust: #b84b2d;
+  --concept-sky: #91d8ef;
+}
+
+* { box-sizing: border-box; }
+
+body.hero-concept-page {
+  margin: 0;
+  color: var(--concept-ink);
+  background:
+    linear-gradient(rgb(145 216 239 / 72%), rgb(32 91 67 / 35%)),
+    url("assets/duldord-bakgrunn.jpg") center top / cover fixed,
+    var(--concept-sky);
+}
+
+.concept-lab {
+  width: min(1480px, calc(100% - 2rem));
+  margin-inline: auto;
+  padding-block: clamp(1rem, 3vw, 2.5rem) 5rem;
+}
+
+.concept-intro,
+.concept-card {
+  border: 3px solid var(--concept-ink);
+  background: var(--concept-cream);
+  box-shadow: 9px 9px 0 var(--concept-ink);
+}
+
+.concept-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+  padding: clamp(1.4rem, 4vw, 3.2rem);
+  margin-bottom: clamp(2rem, 5vw, 4.5rem);
+}
+
+.concept-kicker {
+  margin: 0 0 .7rem;
+  color: #9c421f;
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.concept-intro h1 {
+  max-width: 14ch;
+  margin: 0;
+  font-size: clamp(2.3rem, 6vw, 5.4rem);
+  line-height: .94;
+  letter-spacing: -.045em;
+}
+
+.concept-intro p:not(.concept-kicker) {
+  max-width: 72ch;
+  margin: 1.25rem 0 0;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  line-height: 1.6;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3.1rem;
+  padding: .75rem 1rem;
+  color: var(--concept-ink);
+  border: 3px solid var(--concept-ink);
+  background: var(--concept-cream);
+  box-shadow: 5px 5px 0 var(--concept-ink);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.back-link:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--concept-ink); }
+.back-link:focus-visible,
+.concept-card a:focus-visible { outline: 4px solid #ffbf35; outline-offset: 5px; }
+
+.concept-list {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 6rem);
+}
+
+.concept-card { overflow: hidden; }
+
+.concept-card header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+  padding: clamp(1rem, 2.5vw, 1.8rem);
+  border-bottom: 3px solid var(--concept-ink);
+}
+
+.concept-card header > span {
+  color: var(--concept-rust);
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-weight: 950;
+  line-height: .9;
+}
+
+.concept-card h2 {
+  margin: 0;
+  font-size: clamp(1.45rem, 3vw, 2.7rem);
+  line-height: 1;
+}
+
+.concept-card p {
+  max-width: 72ch;
+  margin: .55rem 0 0;
+  line-height: 1.5;
+}
+
+.concept-card a { display: block; background: #87d5ee; }
+.concept-card img { display: block; width: 100%; height: auto; }
+
+@media (max-width: 720px) {
+  .concept-lab { width: min(100% - 1rem, 1480px); }
+  .concept-intro { grid-template-columns: 1fr; align-items: start; }
+  .back-link { justify-self: start; }
+  .concept-intro,
+  .concept-card { box-shadow: 5px 5px 0 var(--concept-ink); }
+  .concept-card header { grid-template-columns: 3rem minmax(0, 1fr); gap: .65rem; }
+}

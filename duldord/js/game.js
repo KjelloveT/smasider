@@ -20,7 +20,6 @@
     current: '',
     status: 'playing',
     busy: false,       // sann medan rutene snur
-    heroHidden: false,
     yearOver: false    // årgangen er brukt opp; då finst det ingen «i dag»
   };
 
@@ -50,19 +49,18 @@
   }
 
   // ── skjermbilete ─────────────────────────────────────────────────────────
-  function hideHero() {
-    if (state.heroHidden) return;
-    state.heroHidden = true;
-    el.hero.classList.add('dd-hero-gone');
-  }
-
   function updateHeader() {
     const isToday = !state.yearOver && state.dayIndex === state.todayIndex;
+    const daysAgo = state.todayIndex - state.dayIndex;
     el.dayNum.textContent = `Dag ${state.dayIndex + 1}`;
     el.dayNum.classList.toggle('dd-daynum-archive', !isToday);
-    el.dayDate.textContent = isToday
-      ? 'Dagens ord'
-      : S.formatDate(S.dateForIndex(state.dayIndex));
+    if (daysAgo === 0) el.dayDateLabel.textContent = 'Dagens ord';
+    else if (daysAgo === 1) el.dayDateLabel.textContent = 'Gårsdagens ord';
+    else if (daysAgo === 2) el.dayDateLabel.textContent = 'Forgårsdagens ord';
+    else el.dayDateLabel.textContent = S.formatDate(S.dateForIndex(state.dayIndex));
+    el.previousDayBtn.hidden = state.dayIndex <= 0;
+    const latestAvailableIndex = Math.min(state.todayIndex, S.wordCount() - 1);
+    el.nextDayBtn.hidden = state.dayIndex >= latestAvailableIndex;
 
     // Arkivet opnar seg fyrst når dagens ord er ferdigspelt. Er årgangen omme,
     // finst det ikkje noko dagens ord å vente på, og arkivet er alltid ope.
@@ -105,12 +103,11 @@
     repaint();
     say('');
 
+
     if (state.status === 'won') {
       say(`Du fann ordet på ${state.guesses.length}.`, true);
     } else if (state.status === 'lost') {
       say(`Ordet var «${state.answer}».`, true);
-    } else if (state.guesses.length) {
-      hideHero();
     }
     el.shareWrap.hidden = state.status === 'playing';
   }
@@ -127,7 +124,6 @@
     }
     if (state.current.length >= S.WORD_LENGTH) return;
 
-    hideHero();
     state.current += key;
     Board.render(state.guesses, state.current, state.answer);
   }
@@ -195,7 +191,6 @@
   function showArchive() {
     Archive.render(el.archiveGrid, state.todayIndex, index => {
       closeModal(el.archiveOverlay);
-      hideHero();
       hideNotice();
       openDay(index);
     });
@@ -204,7 +199,7 @@
 
   // ── oppstart ─────────────────────────────────────────────────────────────
   function cacheElements() {
-    ['hero', 'dayNum', 'dayDate', 'message', 'board', 'keyboard', 'footnote',
+    ['hero', 'dayNum', 'dayDate', 'dayDateLabel', 'nextDayBtn', 'previousDayBtn', 'message', 'board', 'keyboard', 'footnote',
       'archiveBtn', 'statsBtn', 'helpBtn', 'shareBtn', 'shareLabel', 'shareWrap',
       'archiveGrid', 'helpOverlay', 'statsOverlay', 'archiveOverlay']
       .forEach(id => { el[id] = document.getElementById(id); });
@@ -243,8 +238,8 @@
     // han berre gjev meining når ein arkivdag er open.
     el.backBtn = document.createElement('button');
     el.backBtn.type = 'button';
-    el.backBtn.className = 'btn dd-iconbtn';
-    el.backBtn.innerHTML = ICON('home', 18);
+    el.backBtn.className = 'btn dd-action dd-iconbtn';
+    el.backBtn.innerHTML = `${ICON('home', 18)}<span>Til dagens ord</span>`;
     el.backBtn.setAttribute('aria-label', 'Attende til dagens ord');
     el.backBtn.title = 'Attende til dagens ord';
     el.backBtn.hidden = true;
@@ -273,6 +268,8 @@
     el.helpBtn.addEventListener('click', () => openModal(el.helpOverlay));
     el.statsBtn.addEventListener('click', showStats);
     el.archiveBtn.addEventListener('click', showArchive);
+    el.nextDayBtn.addEventListener('click', () => openDay(state.dayIndex + 1));
+    el.previousDayBtn.addEventListener('click', () => openDay(state.dayIndex - 1));
     el.shareBtn.addEventListener('click', () => {
       const text = Stats.shareText(state.dayIndex + 1, state.guesses, state.answer, state.status);
       Stats.copy(text)
@@ -294,9 +291,6 @@
     }
 
     openDay(state.todayIndex);
-
-    // Fyrste gong: opne hjelpa av seg sjølv
-    if (!Object.keys(Store.allDays()).length) openModal(el.helpOverlay);
   }
 
   if (document.readyState === 'loading') {

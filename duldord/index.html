@@ -8,44 +8,79 @@
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="../css/neobrutalisme.css">
-<link rel="stylesheet" href="css/style.css?v=1">
+<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/tursti.css?v=25">
 <script src="../js/neo-header.js" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+<body class="dd-page" data-light-theme="classic" data-dark-theme="space" data-theme="classic">
 
 <neo-header></neo-header>
 
-<div class="page-wrapper">
-<main class="main-content">
+<div class="page-wrapper dd-page-wrapper">
+<main class="main-content dd-main">
 
-  <!-- Hero. Gøymer seg når spelaren byrjar å skrive, så brett og tastatur får plass -->
-  <div class="box2 hero-box" id="hero">
-    <img src="../_resources/duldord.png" alt="Duldord" class="hero-logo">
-    <div class="hero-text">
-      <h1>Duldord</h1>
-      <p>Eitt dult ord på fem bokstavar kvar dag, og seks freistnader på å finne det. Grøn rute tyder rett bokstav på rett plass, gul tyder rett bokstav på feil plass.</p>
+  <div class="dd-layout">
+    <aside class="dd-guide" aria-labelledby="dd-guide-title">
+      <div class="dd-guide-board">
+        <div class="dd-guide-corners" aria-hidden="true">
+          <span class="dd-guide-corner dd-guide-corner-top-left"></span>
+          <span class="dd-guide-corner dd-guide-corner-top-right"></span>
+          <span class="dd-guide-corner dd-guide-corner-bottom-left"></span>
+          <span class="dd-guide-corner dd-guide-corner-bottom-right"></span>
+        </div>
+        <div class="dd-guide-content">
+          <h2 id="dd-guide-title">Eitt ord<br>Seks forsøk</h2>
+          <ul class="dd-guide-legend">
+            <li><span class="dd-legend-swatch dd-correct" aria-hidden="true"></span><span>Rett bokstav på rett plass</span></li>
+            <li><span class="dd-legend-swatch dd-present" aria-hidden="true"></span><span>Rett bokstav på feil plass</span></li>
+            <li><span class="dd-legend-swatch dd-absent" aria-hidden="true"></span><span>Bokstaven er ikkje med</span></li>
+          </ul>
+          <p class="dd-footnote" id="footnote"></p>
+          <div class="dd-guide-navigation" aria-label="Gå mellom ord">
+            <button class="dd-action dd-day-nav-btn" id="previousDayBtn" type="button" aria-label="Gå éin dag attende" hidden><span>Tidlegare<br>ord</span></button>
+            <button class="dd-action dd-day-nav-btn" id="nextDayBtn" type="button" aria-label="Gå éin dag fram" hidden><span>Seinare<br>ord</span></button>
+          </div>
+          <div class="dd-guide-actions">
+            <button class="dd-action dd-guide-action" id="archiveBtn" title="Prøv tidlegare dulde ord" hidden><span data-icon="calendar"></span><span>Prøv tidlegare dulde ord</span></button>
+            <button class="dd-action dd-guide-action" id="statsBtn" title="Statistikk"><span data-icon="award"></span><span>Statistikk</span></button>
+            <button class="dd-action dd-guide-action" id="helpBtn" title="Hjelp"><span data-icon="help"></span><span>Hjelp</span></button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="dd-play">
+      <p class="dd-message" id="message" role="status" aria-live="polite"></p>
+      <div class="dd-board-stage">
+        <section class="dd-welcome" id="hero" aria-labelledby="dd-title">
+          <div class="dd-welcome-board">
+            <span class="dd-header-post dd-header-post-left" aria-hidden="true"></span>
+            <span class="dd-header-post dd-header-post-right" aria-hidden="true"></span>
+            <div class="dd-sign-art dd-sign-art-horizontal" aria-hidden="true">
+              <span class="dd-sign-left"></span><span class="dd-sign-middle"></span><span class="dd-sign-right"></span>
+            </div>
+            <div class="dd-welcome-content">
+              <div class="dd-welcome-heading">
+                <img class="dd-hero-logo" src="../_resources/duldord.png" alt="">
+                <div><h1 id="dd-title">DULDORD</h1><p>Eitt fembokstavsord kvar dag</p></div>
+              </div>
+              <div class="dd-day-meta" aria-label="Dagsinformasjon">
+                <span class="dd-daydate" id="dayDate"><span id="dayDateLabel"></span></span>
+                <span class="dd-day-separator" aria-hidden="true">·</span>
+                <span class="dd-daynum" id="dayNum"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="dd-board-frame">
+          <div class="dd-board" id="board" role="group" aria-label="Gjettebrett"></div>
+        </div>
+      </div>
+      <div class="dd-keyboard-frame">
+        <div class="dd-keyboard" id="keyboard" role="group" aria-label="Tastatur"></div>
+      </div>
     </div>
   </div>
-
-  <div class="dd-topbar">
-    <div class="dd-daylabel">
-      <span class="dd-daynum" id="dayNum"></span>
-      <span class="dd-daydate" id="dayDate"></span>
-    </div>
-    <div class="dd-actions">
-      <button class="btn dd-iconbtn" id="archiveBtn" data-icon="calendar" aria-label="Opne arkivet" title="Arkiv" hidden></button>
-      <button class="btn dd-iconbtn" id="statsBtn" data-icon="award" aria-label="Vis statistikk" title="Statistikk"></button>
-      <button class="btn dd-iconbtn" id="helpBtn" data-icon="help" aria-label="Korleis spele" title="Korleis spele"></button>
-    </div>
-  </div>
-
-  <p class="dd-message" id="message" role="status" aria-live="polite"></p>
-
-  <div class="dd-board" id="board" role="group" aria-label="Gjettebrett"></div>
-
-  <div class="dd-keyboard" id="keyboard" role="group" aria-label="Tastatur"></div>
-
-  <p class="dd-footnote" id="footnote"></p>
 
 </main>
 </div>
@@ -105,11 +140,11 @@
 <script src="js/state.js?v=1"></script>
 <script src="js/storage.js?v=1"></script>
 <script src="js/dictionary.js?v=1"></script>
-<script src="js/board.js?v=1"></script>
+<script src="js/board.js?v=3"></script>
 <script src="js/keyboard.js?v=1"></script>
 <script src="js/stats.js?v=1"></script>
 <script src="js/archive.js?v=1"></script>
-<script src="js/game.js?v=1"></script>
+<script src="js/game.js?v=7"></script>
 
 </body>
 </html>
