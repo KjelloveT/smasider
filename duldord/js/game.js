@@ -238,8 +238,8 @@
     // han berre gjev meining når ein arkivdag er open.
     el.backBtn = document.createElement('button');
     el.backBtn.type = 'button';
-    el.backBtn.className = 'btn dd-iconbtn';
-    el.backBtn.innerHTML = ICON('home', 18);
+    el.backBtn.className = 'btn dd-action dd-iconbtn';
+    el.backBtn.innerHTML = `${ICON('home', 18)}<span>Til dagens ord</span>`;
     el.backBtn.setAttribute('aria-label', 'Attende til dagens ord');
     el.backBtn.title = 'Attende til dagens ord';
     el.backBtn.hidden = true;

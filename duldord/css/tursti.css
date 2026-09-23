@@ -12,6 +12,8 @@
   --dd-wood-light: #f4e7c8;
   --dd-wood-red: #a83f2d;
   --dd-wood-gold: #e4ad58;
+  --dd-action-red: #dc9279;
+  --dd-action-red-hover: #e8a891;
   --dd-wood-grain: url('../assets/treverk-monster-vassrett.png?v=1');
   --dd-wood-grain-vertical: url('../assets/treverk-monster-loddrett.png?v=1');
   --dd-wood-grain-vertical-strong: url('../assets/treverk-monster-loddrett.png?v=1'), url('../assets/treverk-monster-loddrett.png?v=1'), url('../assets/treverk-monster-loddrett.png?v=1');
@@ -127,7 +129,34 @@
   font-weight: 650;
   line-height: 1.2;
 }
-.dd-daynum, .dd-daynum.dd-daynum-archive { display: block; margin: 0 auto; padding: 5px 0 0; width: 62%; background: transparent; color: #182b23; border: 0; border-top: 2px solid #182b23; box-shadow: none; font-weight: 850; font-size: clamp(.68rem, 1.45vw, .9rem); line-height: 1.1; }
+.dd-day-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  width: 68%;
+  margin: 0 auto;
+  padding-top: 5px;
+  border-top: 2px solid #182b23;
+  color: #182b23;
+  font-size: clamp(.68rem, 1.45vw, .9rem);
+  font-weight: 850;
+  line-height: 1.1;
+}
+.dd-daynum, .dd-daynum.dd-daynum-archive {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  background: transparent;
+  color: #182b23;
+  border: 0;
+  box-shadow: none;
+  font-weight: 850;
+  font-size: inherit;
+  line-height: 1.1;
+}
+.dd-day-separator { opacity: .55; }
 .dd-header-post {
   position: absolute;
   z-index: -1;
@@ -162,110 +191,38 @@
   isolation: isolate;
   padding-top: 8px;
 }
-.dd-day-signpost {
-  position: absolute;
-  z-index: 2;
-  top: calc(71% - 12px);
-  left: 15%;
-  width: 190px;
-  height: 58px;
-  transform: translateX(-50%) rotate(3deg);
-}
-.dd-daydate,
-.dd-next-signpost,
-.dd-previous-signpost {
-  --dd-sign-shape: polygon(4% 0, 96% 0, 100% 16%, 100% 84%, 96% 100%, 4% 100%, 0 84%, 0 16%);
-  --dd-sign-color: var(--dd-wood-light);
+.dd-daydate { color: #182b23; }
+.dd-guide-navigation {
   display: flex;
-  position: relative;
-  isolation: isolate;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  color: #fff9e9;
-  background: transparent;
-  border: 0;
-  font-family: 'Arial Black', system-ui, sans-serif;
-  font-size: .86rem;
-  font-weight: 900;
-  line-height: 1;
-  white-space: nowrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 0 10px;
 }
-.dd-daydate > span,
-.dd-next-signpost > span,
-.dd-previous-signpost > span {
-  position: relative;
-  z-index: 1;
+.dd-guide-navigation:has(#previousDayBtn:not([hidden])):not(:has(#nextDayBtn:not([hidden]))) {
+  justify-content: flex-start;
 }
-.dd-daydate::before,
-.dd-daydate::after,
-.dd-next-signpost::before,
-.dd-next-signpost::after,
-.dd-previous-signpost::before,
-.dd-previous-signpost::after {
-  content: '';
-  position: absolute;
-  clip-path: var(--dd-sign-shape);
-}
-.dd-daydate::before,
-.dd-next-signpost::before,
-.dd-previous-signpost::before {
-  z-index: -2;
-  inset: 0;
-  background: #142820;
-}
-.dd-daydate::after,
-.dd-next-signpost::after,
-.dd-previous-signpost::after {
-  z-index: -1;
-  inset: 3px;
-  background-color: var(--dd-sign-color);
-  background-image: url('../assets/skilttekstur/venstre.png?v=1'), url('../assets/skilttekstur/hogre.png?v=1');
-  background-position: left center, right center;
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-}
-.dd-daydate {
-  height: 48px;
-  padding: 0 14px;
+.dd-guide-navigation [hidden] { display: none; }
+.dd-day-nav-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 40px;
+  padding: 6px 4px;
+  background: var(--dd-action-red);
   color: #182b23;
-}
-.dd-next-signpost,
-.dd-previous-signpost {
-  --dd-sign-color: var(--dd-wood-red);
-  position: absolute;
-  z-index: 3;
-  top: calc(8px + var(--dd-sign-height) - 20px);
-  width: 175px;
-  height: 42px;
-  font-size: .78rem;
+  border: 3px solid #142820;
+  border-radius: 8px;
+  box-shadow: 0 3px 0 #142820;
+  font: 800 .65rem/1.15 'Segoe UI', system-ui, sans-serif;
+  white-space: nowrap;
   cursor: pointer;
-  filter: drop-shadow(0 4px 0 #142820);
-  transition: filter .12s ease, transform .12s ease;
+  transition: background .12s ease, transform .12s ease, box-shadow .12s ease;
 }
-.dd-next-signpost {
-  --dd-sign-shape: polygon(0 0, 78% 0, 100% 50%, 78% 100%, 0 100%);
-  right: calc((100% - min(100%, 490px)) / 2 + var(--dd-sign-height) * .218);
-  padding: 0 17px 0 0;
-  transform: translateX(50%);
-}
-.dd-previous-signpost {
-  --dd-sign-shape: polygon(22% 0, 100% 0, 100% 100%, 22% 100%, 0 50%);
-  left: calc((100% - min(100%, 490px)) / 2 + var(--dd-sign-height) * .218);
-  padding: 0 0 0 17px;
-  transform: translateX(-50%);
-}
-.dd-next-signpost[hidden],
-.dd-previous-signpost[hidden] { display: none; }
-.dd-next-signpost:hover,
-.dd-previous-signpost:hover { filter: brightness(1.12) drop-shadow(0 5px 0 #142820); }
-.dd-next-signpost:active { transform: translateX(50%) scale(.97); }
-.dd-previous-signpost:active { transform: translateX(-50%) scale(.97); }
-.dd-next-signpost:focus-visible,
-.dd-previous-signpost:focus-visible {
-  outline: 3px solid var(--dd-gold);
-  outline-offset: 3px;
-}
+.dd-guide-navigation .dd-day-nav-btn:hover { background: var(--dd-action-red-hover); }
+.dd-guide-navigation .dd-day-nav-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #142820; }
+.dd-day-nav-btn:focus-visible { outline: 3px solid var(--dd-gold); outline-offset: 3px; }
+#previousDayBtn.dd-day-nav-btn::before { content: '←'; }
+#nextDayBtn.dd-day-nav-btn::after { content: '→'; }
 .dd-action,
 .dd-page .dd-iconbtn {
   display: inline-flex;
@@ -303,20 +260,45 @@
 }
 .dd-board-frame,
 .dd-keyboard-frame {
+  position: relative;
+  isolation: isolate;
   width: 100%;
-  background: var(--dd-paper);
+  background-color: var(--dd-paper);
+  background-image: url('../assets/skilttekstur/venstre.png?v=1'), url('../assets/skilttekstur/hogre.png?v=1');
+  background-position: left center, right center;
+  background-repeat: repeat-y, repeat-y;
+  background-size: 148px 111px, 148px 111px;
   border: 5px solid var(--dd-frame);
   border-radius: 12px;
   box-shadow: none;
 }
+.dd-board-frame::before,
+.dd-board-frame::after,
+.dd-keyboard-frame::before,
+.dd-keyboard-frame::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: -20px;
+  bottom: -20px;
+  width: 22px;
+  pointer-events: none;
+  background-image: url('../assets/hogdekart-post-topp.png?v=1'), url('../assets/hogdekart-post-midt.png?v=1'), url('../assets/hogdekart-post-botn.png?v=1');
+  background-position: center top, center center, center bottom;
+  background-repeat: no-repeat, repeat-y, no-repeat;
+  background-size: 100% 11px, 100% 44px, 100% 10px;
+}
+.dd-board-frame::before,
+.dd-keyboard-frame::before { left: 8px; }
+.dd-board-frame::after,
+.dd-keyboard-frame::after { right: 8px; }
 .dd-board-frame {
-  position: relative;
-  z-index: 1;
   padding: clamp(12px, 1.4vw, 18px) 20px clamp(12px, 1.4vw, 18px) 72px;
 }
 .dd-board {
   --dd-size: min(58px, calc((100vw - 92px - 4 * var(--dd-gap)) / 5));
   position: relative;
+  z-index: 1;
   width: fit-content;
   margin: 0 auto;
 }
@@ -388,10 +370,14 @@
 }
 .dd-board .dd-tile { --dd-size: inherit; }
 .dd-tile.dd-filled { box-shadow: inset 0 0 0 3px var(--dd-rust); }
-.dd-tile.dd-correct, .dd-key.dd-correct { background: var(--dd-correct); color: #fff; }
-.dd-tile.dd-present, .dd-key.dd-present { background: var(--dd-present); color: #fff; }
-.dd-tile.dd-absent, .dd-key.dd-absent { background: var(--dd-absent); color: #fff; }
+.dd-tile.dd-correct { background: var(--dd-correct); color: #fff; }
+.dd-tile.dd-present { background: var(--dd-present); color: #fff; }
+.dd-tile.dd-absent { background: var(--dd-absent); color: #fff; }
+.dd-key.dd-correct { background: #a5d9a9; color: #182b23; }
+.dd-key.dd-present { background: #f0cf86; color: #182b23; }
+.dd-key.dd-absent { background: #c4cbd2; color: #182b23; }
 .dd-keyboard-frame { margin-top: 12px; padding: 12px; }
+.dd-keyboard { position: relative; z-index: 1; }
 .dd-keyrow { max-width: 620px; }
 .dd-key {
   height: clamp(42px, 4vw, 50px);
@@ -405,19 +391,20 @@
 }
 .dd-key-wide { max-width: 92px; }
 .dd-key:hover { background: var(--dd-gold); color: #182b23; }
-.dd-key.dd-correct:hover, .dd-key.dd-present:hover, .dd-key.dd-absent:hover { color: #fff; }
-.dd-key[aria-label="Send inn gjettet"] { background: var(--dd-rust); color: #fff; }
-.dd-key[aria-label="Send inn gjettet"]:hover { background: #7f2d20; color: #fff; }
-.dd-footnote {
+.dd-key.dd-correct:hover, .dd-key.dd-present:hover, .dd-key.dd-absent:hover { color: #182b23; }
+.dd-key[aria-label="Send inn gjettet"] { background: var(--dd-action-red); color: #182b23; }
+.dd-key[aria-label="Send inn gjettet"]:hover { background: var(--dd-action-red-hover); color: #182b23; }
+.dd-guide .dd-footnote {
   width: fit-content;
-  margin: 18px auto 0;
-  padding: 6px 12px;
+  margin: 0 0 12px;
+  padding: 0;
   color: var(--dd-ink);
-  background: var(--dd-paper);
-  border: 2px solid var(--dd-frame);
-  border-radius: 7px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
   box-shadow: none;
-  font-weight: 700;
+  font-size: .75rem;
+  font-weight: 750;
 }
 
 /* Tavla er skoren i topp, ein repeterbar midtdel og botn i same målestokk.
@@ -430,19 +417,17 @@
 }
 .dd-guide::before,
 .dd-guide::after {
+  --dd-post-width: 34px;
   content: '';
   position: absolute;
   z-index: 0;
   top: -28px;
   bottom: -38px;
-  width: 34px;
-  background-color: #79502d;
-  background-image: var(--dd-wood-grain-vertical-strong);
-  background-repeat: repeat;
-  background-size: 192px 384px;
-  border: 3px solid #142820;
-  border-radius: 999px 999px 5px 5px;
-  box-shadow: inset 5px 0 0 rgba(255, 255, 255, .08), inset -5px 0 0 rgba(20, 40, 32, .18);
+  width: var(--dd-post-width);
+  background-image: url('../assets/hogdekart-post-topp.png?v=1'), url('../assets/hogdekart-post-midt.png?v=1'), url('../assets/hogdekart-post-botn.png?v=1');
+  background-position: center top, center center, center bottom;
+  background-repeat: no-repeat, repeat-y, no-repeat;
+  background-size: 100% calc(var(--dd-post-width) * .49), 100% calc(var(--dd-post-width) * 1.9), 100% calc(var(--dd-post-width) * .44);
 }
 .dd-guide::before { left: 18px; }
 .dd-guide::after { right: 18px; }
@@ -451,12 +436,13 @@
   z-index: 1;
   isolation: isolate;
   min-height: 580px;
-  padding: 70px 38px 92px;
+  padding: 128px 38px 118px;
   color: #182b23;
   background-color: var(--dd-wood-light);
-  background-image: var(--dd-wood-grain);
-  background-repeat: repeat;
-  background-size: var(--dd-wood-grain-size);
+  background-image: url('../assets/hogdekart-info-topp.png?v=1'), url('../assets/hogdekart-info-botn.png?v=1');
+  background-position: center top, center bottom;
+  background-repeat: no-repeat;
+  background-size: 100% auto, 100% auto;
   border: 4px solid #142820;
   border-radius: 8px;
 }
@@ -476,12 +462,6 @@
 .dd-legend-swatch.dd-correct { background: var(--dd-correct); }
 .dd-legend-swatch.dd-present { background: var(--dd-present); }
 .dd-legend-swatch.dd-absent { background: var(--dd-absent); }
-.dd-guide .dd-guide-privacy {
-  border-top: 2px solid #182b23;
-  padding-top: 12px;
-  margin-bottom: 18px;
-  font-size: .8rem;
-}
 .dd-guide-actions {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -489,18 +469,24 @@
 }
 .dd-guide-actions [hidden] { display: none; }
 .dd-guide-actions #archiveBtn { grid-column: 1 / -1; }
-.dd-guide-actions .dd-iconbtn { grid-column: 1 / -1; justify-self: start; }
-.dd-page .dd-guide-actions .dd-action {
+.dd-guide-actions .dd-iconbtn { grid-column: 1 / -1; justify-self: stretch; width: 100%; }
+.dd-page .dd-guide-actions .dd-action,
+.dd-page .dd-guide-actions .dd-iconbtn {
   min-width: 0;
   min-height: 42px;
   padding: 7px 8px;
   font-size: .8rem;
   line-height: 1.15;
+  background: var(--dd-action-red);
+  color: #182b23;
+  border: 3px solid #142820;
+  border-radius: 8px;
+  box-shadow: 0 3px 0 #142820;
 }
-.dd-page .dd-guide-actions .dd-iconbtn {
-  width: 42px;
-  min-height: 42px;
-  padding: 6px;
+.dd-page .dd-guide-actions .dd-action:hover,
+.dd-page .dd-guide-actions .dd-iconbtn:hover {
+  background: var(--dd-action-red-hover);
+  color: #182b23;
 }
 
 /* Spelstatus, dialogar og arkiv skal sjå ut som same verda. */
@@ -556,33 +542,27 @@
   .dd-guide-board {
     z-index: 1;
     min-height: 0;
-    padding: 16px 24px 18px;
-    background: radial-gradient(circle at 14px 12px, #33231a 0 2px, transparent 3px),
-                radial-gradient(circle at calc(100% - 14px) 12px, #33231a 0 2px, transparent 3px),
-                repeating-linear-gradient(0deg, #fffaf0 0 17px, #f9f2e2 18px, #fffaf0 20px);
-    border: 2px solid #142820;
-    border-radius: 5px;
+    padding: 82px 24px 70px;
+    background-color: var(--dd-wood-light);
+    background-image: url('../assets/hogdekart-info-topp.png?v=1'), url('../assets/hogdekart-info-botn.png?v=1');
+    background-position: center top, center bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 76px, 100% 66px;
+    border: 3px solid #142820;
+    border-radius: 8px;
   }
   .dd-guide::before,
   .dd-guide::after {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    top: -11px;
-    bottom: -11px;
-    width: 15px;
-    background-color: #79502d;
-    background-image: var(--dd-wood-grain-vertical-strong);
-    background-repeat: repeat;
-    background-size: 192px 384px;
-    border: 3px solid #142820;
-    border-radius: 3px;
+    --dd-post-width: 16px;
+    top: -12px;
+    bottom: -12px;
   }
-  .dd-guide::before { left: 20px; }
-  .dd-guide::after { right: 20px; }
-  .dd-guide-content > p,
+  .dd-guide::before { left: 12px; }
+  .dd-guide::after { right: 12px; }
+  .dd-guide-content > p:not(.dd-footnote),
   .dd-guide-legend { display: none; }
   .dd-guide h2 { margin: 0 0 12px; text-align: center; font-size: 1.15rem; }
+  .dd-guide-navigation { max-width: 320px; margin: 0 auto 10px; }
   .dd-guide-actions { max-width: 320px; margin: 0 auto; }
 }
 
@@ -598,13 +578,17 @@
   .dd-welcome-board p { font-size: clamp(.58rem, 2.3vw, .75rem); }
   .dd-layout { gap: 10px; }
   .dd-board-stage { padding-top: 5px; margin-top: -25px; }
-  .dd-day-signpost { left: 15%; top: calc(69% - 8px); width: 132px; height: 48px; }
-  .dd-daydate { height: 36px; padding-inline: 10px; font-size: .68rem; }
-  .dd-next-signpost,
-  .dd-previous-signpost { top: calc(5px + var(--dd-sign-height) - 16px); width: 128px; height: 36px; font-size: .61rem; }
-  .dd-next-signpost { padding: 0 12px 0 0; }
-  .dd-previous-signpost { padding: 0 0 0 12px; }
+  .dd-day-meta { width: 82%; gap: 5px; font-size: clamp(.62rem, 2.4vw, .8rem); }
+  .dd-daydate { font-size: inherit; }
   .dd-board-frame { padding: 25px 6px 12px 39px; border-width: 4px; }
+  .dd-board-frame::before,
+  .dd-board-frame::after,
+  .dd-keyboard-frame::before,
+  .dd-keyboard-frame::after { top: -14px; bottom: -14px; width: 18px; background-size: 100% 9px, 100% 36px, 100% 8px; }
+  .dd-board-frame::before,
+  .dd-keyboard-frame::before { left: 5px; }
+  .dd-board-frame::after,
+  .dd-keyboard-frame::after { right: 5px; }
   .dd-board { --dd-size: min(54px, calc((100vw - 105px - 4 * var(--dd-gap)) / 5)); }
   .dd-step-rail { --dd-rail-width: 10px; left: -28px; }
   .dd-step-sign { right: calc(100% + 8px); width: 29px; height: 19px; font-size: .72rem; }
@@ -613,7 +597,11 @@
   .dd-key { min-width: 0; height: clamp(40px, 9vw, 48px); font-size: clamp(.72rem, 2.7vw, .9rem); border-width: 2px; }
   .dd-key-wide { font-size: .66rem; }
   .dd-message { min-height: 1.5em; }
-  .dd-footnote { margin-top: 11px; font-size: .72rem; }
+  .dd-guide-board { padding: 56px 18px 48px; background-size: 100% 48px, 100% 42px; }
+  .dd-guide-navigation { max-width: 300px; }
+  .dd-day-nav-btn { font-size: .67rem; }
+  .dd-guide-actions { max-width: 300px; }
+  .dd-footnote { font-size: .72rem; }
 }
 
 @media (max-width: 360px) {

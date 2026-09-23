@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="../css/neobrutalisme.css">
 <link rel="stylesheet" href="css/style.css?v=3">
-<link rel="stylesheet" href="css/tursti.css?v=20">
+<link rel="stylesheet" href="css/tursti.css?v=21">
 <script src="../js/neo-header.js" defer></script>
 </head>
 <body class="dd-page" data-light-theme="classic" data-dark-theme="space" data-theme="classic">
@@ -26,14 +26,17 @@
           <span class="dd-sign-top"></span><span class="dd-sign-middle"></span><span class="dd-sign-bottom"></span>
         </div>
         <div class="dd-guide-content">
-          <h2 id="dd-guide-title">Eitt ord. Seks steg.</h2>
-          <p>Prøv eit nynorsk ord på fem bokstavar. Fargane viser vegen vidare:</p>
+          <h2 id="dd-guide-title">Eitt ord. Seks forsøk.</h2>
           <ul class="dd-guide-legend">
             <li><span class="dd-legend-swatch dd-correct" aria-hidden="true"></span><span>Rett bokstav på rett plass</span></li>
             <li><span class="dd-legend-swatch dd-present" aria-hidden="true"></span><span>Rett bokstav på feil plass</span></li>
             <li><span class="dd-legend-swatch dd-absent" aria-hidden="true"></span><span>Bokstaven er ikkje med</span></li>
           </ul>
-          <p class="dd-guide-privacy">Framgangen blir lagra berre i nettlesaren din.</p>
+          <p class="dd-footnote" id="footnote"></p>
+          <div class="dd-guide-navigation" aria-label="Gå mellom ord">
+            <button class="dd-action dd-day-nav-btn" id="previousDayBtn" type="button" aria-label="Gå éin dag attende" hidden><span>Tidlegare ord</span></button>
+            <button class="dd-action dd-day-nav-btn" id="nextDayBtn" type="button" aria-label="Gå éin dag fram" hidden><span>Seinare ord</span></button>
+          </div>
           <div class="dd-guide-actions">
             <button class="dd-action dd-guide-action" id="archiveBtn" title="Prøv tidlegare dulde ord" hidden><span data-icon="calendar"></span><span>Prøv tidlegare dulde ord</span></button>
             <button class="dd-action dd-guide-action" id="statsBtn" title="Statistikk"><span data-icon="award"></span><span>Statistikk</span></button>
@@ -58,13 +61,14 @@
                 <img class="dd-hero-logo" src="../_resources/duldord.png" alt="">
                 <div><h1 id="dd-title">DULDORD</h1><p>Eitt fembokstavsord kvar dag</p></div>
               </div>
-              <span class="dd-daynum" id="dayNum"></span>
+              <div class="dd-day-meta" aria-label="Dagsinformasjon">
+                <span class="dd-daydate" id="dayDate"><span id="dayDateLabel"></span></span>
+                <span class="dd-day-separator" aria-hidden="true">·</span>
+                <span class="dd-daynum" id="dayNum"></span>
+              </div>
             </div>
-            <div class="dd-day-signpost"><span class="dd-daydate" id="dayDate"><span id="dayDateLabel"></span></span></div>
           </div>
         </section>
-        <button class="dd-next-signpost" id="nextDayBtn" type="button" aria-label="Gå éin dag fram" hidden><span>Seinare ord</span></button>
-        <button class="dd-previous-signpost" id="previousDayBtn" type="button" aria-label="Gå éin dag attende" hidden><span>Tidlegare ord</span></button>
         <div class="dd-board-frame">
           <div class="dd-board" id="board" role="group" aria-label="Gjettebrett"></div>
         </div>
@@ -72,7 +76,6 @@
       <div class="dd-keyboard-frame">
         <div class="dd-keyboard" id="keyboard" role="group" aria-label="Tastatur"></div>
       </div>
-      <p class="dd-footnote" id="footnote"></p>
     </div>
   </div>
 
@@ -138,7 +141,7 @@
 <script src="js/keyboard.js?v=1"></script>
 <script src="js/stats.js?v=1"></script>
 <script src="js/archive.js?v=1"></script>
-<script src="js/game.js?v=6"></script>
+<script src="js/game.js?v=7"></script>
 
 </body>
 </html>

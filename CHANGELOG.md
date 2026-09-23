@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.58] — 2026-09-23
+
+### Endra
+- **Duldord samlar dagsinformasjonen i skilta.** Dagsnamn og dagnummer står under hovudskiltet, medan dagval, årgangsnotat, hjelp og statistikk ligg på informasjonsskiltet. Skiltet og stolpane har fått ei ny høgdekartdrakt, og brett og tastatur har fått same terrengdetaljar langs sidene. Dagknappane har lys raud bakgrunn, mørk tekst og tydelege hover- og trykktilstandar. På mobil kjem informasjonsskiltet under spelet.
+
 ## [1.57] — 2026-09-22
 
 ### Endra
