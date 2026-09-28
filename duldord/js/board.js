@@ -21,6 +21,7 @@
       for (let c = 0; c < WORD_LENGTH; c++) {
         const tile = document.createElement('div');
         tile.className = 'dd-tile';
+        tile.setAttribute('role', 'img');
         const inner = document.createElement('span');
         inner.className = 'dd-tile-face';
         tile.appendChild(inner);
@@ -34,6 +35,16 @@
 
   function setTile(tile, letter, state) {
     tile.querySelector('.dd-tile-face').textContent = letter || '';
+    if (!letter) {
+      tile.setAttribute('aria-label', 'Tom rute');
+    } else {
+      const descriptions = {
+        correct: 'rett bokstav på rett plass',
+        present: 'rett bokstav på feil plass',
+        absent: 'bokstaven er ikkje med'
+      };
+      tile.setAttribute('aria-label', `${letter.toUpperCase()}, ${descriptions[state] || 'ikkje sendt inn'}`);
+    }
     tile.classList.remove('dd-correct', 'dd-present', 'dd-absent', 'dd-filled');
     if (state) tile.classList.add(`dd-${state}`);
     else if (letter) tile.classList.add('dd-filled');

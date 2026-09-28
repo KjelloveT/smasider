@@ -26,7 +26,7 @@
       const day = days[String(i)];
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'dd-archive-day';
+      btn.className = 'vp-button dd-archive-day';
       if (day && day.status === 'won') btn.classList.add('dd-archive-won');
       else if (day && day.status === 'lost') btn.classList.add('dd-archive-lost');
       else if (day && day.status === 'playing') btn.classList.add('dd-archive-open');

@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.57",
+      "dato": "2026-09-28",
+      "samandrag": "Duldord har fått den nye felles Vyrdepil-stilen og tydelegare tilgang til dagsorda.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Duldord",
+          "tekst": "Duldord har fått felles toppmeny, Vyrde-maskot, app-logo, Sykkelsti-bakgrunn, trepanel og infoskilt. Datoen står stort på spelbrettet, og knappen for tidlegare ord viser fasiten og kan bla heilt tilbake til starten."
+        }
+      ]
+    },
+    {
       "versjon": "1.56",
       "dato": "2026-09-21",
       "samandrag": "Heimsank har fått 200 aktuelle fotballspelarar og 191 sportsbilar.",

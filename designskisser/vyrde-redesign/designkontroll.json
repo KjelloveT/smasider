@@ -1,0 +1,515 @@
+{
+  "date": "2026-09-28",
+  "reason": "Statisk kjeldegjennomgang av katalogførte appar og ukatalogførte inngangar. Duldord er fyrste pilot; resten blir migrerte puljevis.",
+  "method": "Static source inspection; not a functional browser or full privacy/security audit",
+  "scope": {
+    "catalogued": 31,
+    "visible": 28,
+    "hidden": 3
+  },
+  "home": {
+    "entry": "index.html",
+    "status": "awaiting-design-migration"
+  },
+  "sharedNavigation": {
+    "entry": "js/neo-header.js",
+    "status": "awaiting-design-migration"
+  },
+  "apps": [
+    {
+      "id": "duldord",
+      "entry": "duldord/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/vyrdepil-design.css?v=0.6",
+        "css/style.css?v=3"
+      ],
+      "newSharedCss": true,
+      "newDesignMarker": true,
+      "legacyHeader": false,
+      "backgroundId": "sykkelsti-sommar-kveld",
+      "status": "migrated-pilot"
+    },
+    {
+      "id": "vidfaren",
+      "entry": "vidfaren/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "fjorestein-sommar-natt",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "heimsank",
+      "entry": "heimsank/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css",
+        "css/setup.css",
+        "css/cards.css?v=1.52.2",
+        "css/game.css",
+        "css/dialogs.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "sykkelsti-vinter-kveld",
+      "status": "preserve-app-expression-migrate-navigation"
+    },
+    {
+      "id": "reknedaesj",
+      "entry": "reknedaesj/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "fjord-vinter-morgon",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "rettslause_raud",
+      "entry": "rettslause_raud/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": false,
+      "backgroundId": "hogfjell-vinter-dag",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "kludre_klodrian",
+      "entry": "kludre_klodrian/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "hogfjell-var-natt",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "baretevling",
+      "entry": "baretevling/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "hogfjell-vinter-morgon",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "frodebrett",
+      "entry": "frodebrett/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "vidde-haust-kveld",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "ordaklok",
+      "entry": "ordaklok/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "../css/vyrde.css",
+        "css/boksekamp.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "bygate-haust-kveld",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "tidvis",
+      "entry": "tidvis/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css?v=6"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "bypark-sommar-natt",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "heite_stavrim",
+      "entry": "heite_stavrim/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "myr-haust-morgon",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "ordsmia",
+      "entry": "ordsmia/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "fjorestein-sommar-kveld",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "talsmia",
+      "entry": "talsmia/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "vidde-sommar-kveld",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "etikk-test",
+      "entry": "etikk-test/index.html",
+      "hidden": true,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "etikk-test.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "fjord-sommar-morgon",
+      "status": "deferred-hidden"
+    },
+    {
+      "id": "frodekapp",
+      "entry": "frodekapp/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "myr-vinter-natt",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "bolkestokk",
+      "entry": "bolkestokk/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/landing.css?v=28"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "bypark-var-kveld",
+      "status": "preserve-app-expression-migrate-navigation"
+    },
+    {
+      "id": "ormritaren",
+      "entry": "ormritaren/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/landing.css?v=12"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "bygate-haust-natt",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "bildebehandling",
+      "entry": "bildebehandling/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "vidde-haust-morgon",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "biletflett",
+      "entry": "biletflett/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "vidde-var-kveld",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "lydskurd",
+      "entry": "lydskurd/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "sykkelsti-haust-kveld",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "ljodbanken",
+      "entry": "ljodbanken/index.html",
+      "hidden": true,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "bygate-var-morgon",
+      "status": "deferred-hidden"
+    },
+    {
+      "id": "rissverk",
+      "entry": "rissverk/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "klippe-sommar-dag",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "klassekart",
+      "entry": "klassekart/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/klassekart.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "vidde-vinter-natt",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "flokkdeilar",
+      "entry": "flokkdeilar/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "myr-var-kveld",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "eikekveik",
+      "entry": "eikekveik/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "bypark-vinter-natt",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "ordskodde",
+      "entry": "ordskodde/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "klippe-haust-dag",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "ordkryss",
+      "entry": "ordkryss/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "sykkelsti-haust-natt",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "leitekryss",
+      "entry": "leitekryss/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "fjord-vinter-natt",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "vitjingsruta",
+      "entry": "vitjingsruta/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "sykkelsti-var-natt",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "dagsvegen",
+      "entry": "dagsvegen/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "klippe-haust-natt",
+      "status": "awaiting-design-migration"
+    },
+    {
+      "id": "gdpr",
+      "entry": "gdpr/index.html",
+      "hidden": true,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/neobrutalisme.css",
+        "css/style.css"
+      ],
+      "newSharedCss": false,
+      "newDesignMarker": false,
+      "legacyHeader": true,
+      "backgroundId": "hogfjell-var-kveld",
+      "status": "deferred-hidden"
+    }
+  ],
+  "otherEntrances": [
+    {
+      "entry": "designsystem/index.html",
+      "status": "design-reference"
+    },
+    {
+      "entry": "fotocolours/index.html",
+      "status": "deferred-uncatalogued"
+    },
+    {
+      "entry": "frødesams/index.html",
+      "status": "deferred-uncatalogued"
+    },
+    {
+      "entry": "livslina/index.html",
+      "status": "deferred-uncatalogued"
+    },
+    {
+      "entry": "ljodstigen/index.html",
+      "status": "deferred-uncatalogued"
+    },
+    {
+      "entry": "neobrutalisme_test/index.html",
+      "status": "deferred-uncatalogued"
+    },
+    {
+      "entry": "wikidata-tester/index.html",
+      "status": "deferred-uncatalogued"
+    }
+  ]
+}

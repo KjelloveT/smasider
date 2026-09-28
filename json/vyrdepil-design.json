@@ -1,0 +1,1918 @@
+{
+  "version": 1,
+  "updated": "2026-09-28",
+  "appCatalog": "json/apps.json",
+  "policy": {
+    "allocation": "random-unused-on-creation",
+    "stableAcrossLoads": true,
+    "releaseRemovedAppsAutomatically": false
+  },
+  "logo": {
+    "style": "mala",
+    "name": "Måla flater",
+    "files": {
+      "duldord": "_resources/vyrdepil-design/logos/duldord-mala.png",
+      "klassekart": "_resources/vyrdepil-design/logos/klassekart-mala.png",
+      "rissverk": "_resources/vyrdepil-design/logos/rissverk-mala.png"
+    }
+  },
+  "scenes": [
+    {
+      "id": "hogfjell",
+      "name": "Høgfjell"
+    },
+    {
+      "id": "fjord",
+      "name": "Fjord"
+    },
+    {
+      "id": "fjorestein",
+      "name": "Fjørestein"
+    },
+    {
+      "id": "bypark",
+      "name": "Bypark"
+    },
+    {
+      "id": "vidde",
+      "name": "Vidde"
+    },
+    {
+      "id": "myr",
+      "name": "Myr"
+    },
+    {
+      "id": "klippe",
+      "name": "Klippe"
+    },
+    {
+      "id": "bygate",
+      "name": "Grøn bygate"
+    },
+    {
+      "id": "sykkelsti",
+      "name": "Sykkelsti"
+    }
+  ],
+  "seasons": [
+    {
+      "id": "var",
+      "name": "Vår"
+    },
+    {
+      "id": "sommar",
+      "name": "Sommar"
+    },
+    {
+      "id": "haust",
+      "name": "Haust"
+    },
+    {
+      "id": "vinter",
+      "name": "Vinter"
+    }
+  ],
+  "times": [
+    {
+      "id": "morgon",
+      "name": "Morgon"
+    },
+    {
+      "id": "dag",
+      "name": "Dag"
+    },
+    {
+      "id": "kveld",
+      "name": "Kveld"
+    },
+    {
+      "id": "natt",
+      "name": "Natt"
+    }
+  ],
+  "backgrounds": [
+    {
+      "id": "hogfjell-sommar-dag",
+      "scene": "hogfjell",
+      "season": "sommar",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-sommar-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-sommar-dag",
+      "scene": "fjord",
+      "season": "sommar",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-sommar-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "hogfjell-var-dag",
+      "scene": "hogfjell",
+      "season": "var",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-var-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "hogfjell-haust-dag",
+      "scene": "hogfjell",
+      "season": "haust",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-haust-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "hogfjell-vinter-dag",
+      "scene": "hogfjell",
+      "season": "vinter",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-vinter-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "rettslause_raud"
+    },
+    {
+      "id": "fjorestein-sommar-dag",
+      "scene": "fjorestein",
+      "season": "sommar",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-sommar-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-sommar-dag",
+      "scene": "bypark",
+      "season": "sommar",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-sommar-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-sommar-dag",
+      "scene": "vidde",
+      "season": "sommar",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-sommar-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-sommar-dag",
+      "scene": "myr",
+      "season": "sommar",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-sommar-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-sommar-dag",
+      "scene": "klippe",
+      "season": "sommar",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-sommar-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "rissverk"
+    },
+    {
+      "id": "bygate-sommar-dag",
+      "scene": "bygate",
+      "season": "sommar",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-sommar-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "sykkelsti-sommar-dag",
+      "scene": "sykkelsti",
+      "season": "sommar",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-sommar-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "hogfjell-var-natt",
+      "scene": "hogfjell",
+      "season": "var",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-var-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "kludre_klodrian"
+    },
+    {
+      "id": "fjorestein-var-dag",
+      "scene": "fjorestein",
+      "season": "var",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-var-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjorestein-sommar-morgon",
+      "scene": "fjorestein",
+      "season": "sommar",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-sommar-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "hogfjell-sommar-natt",
+      "scene": "hogfjell",
+      "season": "sommar",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-sommar-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjorestein-sommar-natt",
+      "scene": "fjorestein",
+      "season": "sommar",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-sommar-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "vidfaren"
+    },
+    {
+      "id": "fjorestein-haust-dag",
+      "scene": "fjorestein",
+      "season": "haust",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-haust-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjorestein-vinter-dag",
+      "scene": "fjorestein",
+      "season": "vinter",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-vinter-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-var-dag",
+      "scene": "bypark",
+      "season": "var",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-var-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "hogfjell-haust-natt",
+      "scene": "hogfjell",
+      "season": "haust",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-haust-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-sommar-morgon",
+      "scene": "bypark",
+      "season": "sommar",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-sommar-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-sommar-natt",
+      "scene": "bypark",
+      "season": "sommar",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-sommar-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "tidvis"
+    },
+    {
+      "id": "hogfjell-vinter-natt",
+      "scene": "hogfjell",
+      "season": "vinter",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-vinter-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-var-dag",
+      "scene": "fjord",
+      "season": "var",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-var-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-haust-dag",
+      "scene": "bypark",
+      "season": "haust",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-haust-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-haust-dag",
+      "scene": "fjord",
+      "season": "haust",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-haust-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-vinter-dag",
+      "scene": "bypark",
+      "season": "vinter",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-vinter-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-vinter-dag",
+      "scene": "fjord",
+      "season": "vinter",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-vinter-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-var-dag",
+      "scene": "vidde",
+      "season": "var",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-var-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-var-dag",
+      "scene": "myr",
+      "season": "var",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-var-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-sommar-morgon",
+      "scene": "myr",
+      "season": "sommar",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-sommar-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-sommar-natt",
+      "scene": "vidde",
+      "season": "sommar",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-sommar-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-sommar-natt",
+      "scene": "myr",
+      "season": "sommar",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-sommar-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-haust-dag",
+      "scene": "vidde",
+      "season": "haust",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-haust-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-haust-dag",
+      "scene": "myr",
+      "season": "haust",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-haust-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-sommar-kveld",
+      "scene": "myr",
+      "season": "sommar",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-sommar-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-vinter-dag",
+      "scene": "vidde",
+      "season": "vinter",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-vinter-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-sommar-morgon",
+      "scene": "klippe",
+      "season": "sommar",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-sommar-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-sommar-kveld",
+      "scene": "klippe",
+      "season": "sommar",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-sommar-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-vinter-dag",
+      "scene": "myr",
+      "season": "vinter",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-vinter-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-var-dag",
+      "scene": "klippe",
+      "season": "var",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-var-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-sommar-natt",
+      "scene": "klippe",
+      "season": "sommar",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-sommar-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-vinter-dag",
+      "scene": "klippe",
+      "season": "vinter",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-vinter-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-haust-dag",
+      "scene": "klippe",
+      "season": "haust",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-haust-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "ordskodde"
+    },
+    {
+      "id": "bygate-var-dag",
+      "scene": "bygate",
+      "season": "var",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-var-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-var-kveld",
+      "scene": "fjord",
+      "season": "var",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-var-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-var-morgon",
+      "scene": "bypark",
+      "season": "var",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-var-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bygate-sommar-morgon",
+      "scene": "bygate",
+      "season": "sommar",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-sommar-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-var-kveld",
+      "scene": "bypark",
+      "season": "var",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-var-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "bolkestokk"
+    },
+    {
+      "id": "fjord-var-morgon",
+      "scene": "fjord",
+      "season": "var",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-var-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bygate-sommar-natt",
+      "scene": "bygate",
+      "season": "sommar",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-sommar-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-var-natt",
+      "scene": "bypark",
+      "season": "var",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-var-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-var-natt",
+      "scene": "fjord",
+      "season": "var",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-var-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bygate-sommar-kveld",
+      "scene": "bygate",
+      "season": "sommar",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-sommar-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-haust-morgon",
+      "scene": "bypark",
+      "season": "haust",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-haust-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-sommar-morgon",
+      "scene": "fjord",
+      "season": "sommar",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-sommar-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "etikk-test"
+    },
+    {
+      "id": "bypark-haust-kveld",
+      "scene": "bypark",
+      "season": "haust",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-haust-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bygate-haust-dag",
+      "scene": "bygate",
+      "season": "haust",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-haust-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-sommar-kveld",
+      "scene": "fjord",
+      "season": "sommar",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-sommar-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-var-morgon",
+      "scene": "myr",
+      "season": "var",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-var-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-haust-natt",
+      "scene": "bypark",
+      "season": "haust",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-haust-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-sommar-natt",
+      "scene": "fjord",
+      "season": "sommar",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-sommar-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bygate-vinter-dag",
+      "scene": "bygate",
+      "season": "vinter",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-vinter-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-var-kveld",
+      "scene": "myr",
+      "season": "var",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-var-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "flokkdeilar"
+    },
+    {
+      "id": "bypark-vinter-morgon",
+      "scene": "bypark",
+      "season": "vinter",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-vinter-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-haust-morgon",
+      "scene": "fjord",
+      "season": "haust",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-haust-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "sykkelsti-var-dag",
+      "scene": "sykkelsti",
+      "season": "var",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-var-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-var-natt",
+      "scene": "myr",
+      "season": "var",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-var-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-vinter-kveld",
+      "scene": "bypark",
+      "season": "vinter",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-vinter-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-haust-kveld",
+      "scene": "fjord",
+      "season": "haust",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-haust-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-haust-morgon",
+      "scene": "myr",
+      "season": "haust",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-haust-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "heite_stavrim"
+    },
+    {
+      "id": "sykkelsti-sommar-morgon",
+      "scene": "sykkelsti",
+      "season": "sommar",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-sommar-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bypark-vinter-natt",
+      "scene": "bypark",
+      "season": "vinter",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-vinter-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "eikekveik"
+    },
+    {
+      "id": "fjord-haust-natt",
+      "scene": "fjord",
+      "season": "haust",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-haust-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-haust-kveld",
+      "scene": "myr",
+      "season": "haust",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-haust-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "sykkelsti-sommar-kveld",
+      "scene": "sykkelsti",
+      "season": "sommar",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-sommar-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "duldord"
+    },
+    {
+      "id": "fjord-vinter-morgon",
+      "scene": "fjord",
+      "season": "vinter",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-vinter-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "reknedaesj"
+    },
+    {
+      "id": "vidde-var-morgon",
+      "scene": "vidde",
+      "season": "var",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-var-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "sykkelsti-sommar-natt",
+      "scene": "sykkelsti",
+      "season": "sommar",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-sommar-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-haust-natt",
+      "scene": "myr",
+      "season": "haust",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-haust-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-vinter-kveld",
+      "scene": "fjord",
+      "season": "vinter",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-vinter-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-var-kveld",
+      "scene": "vidde",
+      "season": "var",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-var-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "biletflett"
+    },
+    {
+      "id": "myr-vinter-morgon",
+      "scene": "myr",
+      "season": "vinter",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-vinter-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "sykkelsti-haust-dag",
+      "scene": "sykkelsti",
+      "season": "haust",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-haust-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjord-vinter-natt",
+      "scene": "fjord",
+      "season": "vinter",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-vinter-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "leitekryss"
+    },
+    {
+      "id": "myr-vinter-kveld",
+      "scene": "myr",
+      "season": "vinter",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-vinter-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "sykkelsti-vinter-dag",
+      "scene": "sykkelsti",
+      "season": "vinter",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-vinter-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-haust-morgon",
+      "scene": "vidde",
+      "season": "haust",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-haust-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "bildebehandling"
+    },
+    {
+      "id": "fjorestein-var-kveld",
+      "scene": "fjorestein",
+      "season": "var",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-var-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "myr-vinter-natt",
+      "scene": "myr",
+      "season": "vinter",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-vinter-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "frodekapp"
+    },
+    {
+      "id": "vidde-var-natt",
+      "scene": "vidde",
+      "season": "var",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-var-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjorestein-var-morgon",
+      "scene": "fjorestein",
+      "season": "var",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-var-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-var-morgon",
+      "scene": "klippe",
+      "season": "var",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-var-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-haust-kveld",
+      "scene": "vidde",
+      "season": "haust",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-haust-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "frodebrett"
+    },
+    {
+      "id": "fjorestein-var-natt",
+      "scene": "fjorestein",
+      "season": "var",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-var-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-var-kveld",
+      "scene": "klippe",
+      "season": "var",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-var-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-haust-natt",
+      "scene": "vidde",
+      "season": "haust",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-haust-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjorestein-haust-morgon",
+      "scene": "fjorestein",
+      "season": "haust",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-haust-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-var-natt",
+      "scene": "klippe",
+      "season": "var",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-var-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-vinter-morgon",
+      "scene": "vidde",
+      "season": "vinter",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-vinter-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjorestein-haust-kveld",
+      "scene": "fjorestein",
+      "season": "haust",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-haust-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-haust-morgon",
+      "scene": "klippe",
+      "season": "haust",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-haust-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-vinter-kveld",
+      "scene": "vidde",
+      "season": "vinter",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-vinter-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjorestein-haust-natt",
+      "scene": "fjorestein",
+      "season": "haust",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-haust-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-haust-kveld",
+      "scene": "klippe",
+      "season": "haust",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-haust-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-vinter-natt",
+      "scene": "vidde",
+      "season": "vinter",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-vinter-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "klassekart"
+    },
+    {
+      "id": "klippe-vinter-kveld",
+      "scene": "klippe",
+      "season": "vinter",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-vinter-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-vinter-morgon",
+      "scene": "klippe",
+      "season": "vinter",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-vinter-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-vinter-natt",
+      "scene": "klippe",
+      "season": "vinter",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-vinter-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjorestein-vinter-morgon",
+      "scene": "fjorestein",
+      "season": "vinter",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-vinter-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjorestein-vinter-kveld",
+      "scene": "fjorestein",
+      "season": "vinter",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-vinter-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "klippe-haust-natt",
+      "scene": "klippe",
+      "season": "haust",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-haust-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "dagsvegen"
+    },
+    {
+      "id": "fjorestein-vinter-natt",
+      "scene": "fjorestein",
+      "season": "vinter",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-vinter-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bygate-var-morgon",
+      "scene": "bygate",
+      "season": "var",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-var-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "ljodbanken"
+    },
+    {
+      "id": "bygate-var-kveld",
+      "scene": "bygate",
+      "season": "var",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-var-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bygate-haust-morgon",
+      "scene": "bygate",
+      "season": "haust",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-haust-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bygate-var-natt",
+      "scene": "bygate",
+      "season": "var",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-var-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bygate-haust-kveld",
+      "scene": "bygate",
+      "season": "haust",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-haust-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "ordaklok"
+    },
+    {
+      "id": "bygate-haust-natt",
+      "scene": "bygate",
+      "season": "haust",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-haust-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "ormritaren"
+    },
+    {
+      "id": "bygate-vinter-morgon",
+      "scene": "bygate",
+      "season": "vinter",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-vinter-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bygate-vinter-kveld",
+      "scene": "bygate",
+      "season": "vinter",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-vinter-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "bygate-vinter-natt",
+      "scene": "bygate",
+      "season": "vinter",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-vinter-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "sykkelsti-var-morgon",
+      "scene": "sykkelsti",
+      "season": "var",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-var-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "sykkelsti-var-kveld",
+      "scene": "sykkelsti",
+      "season": "var",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-var-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "sykkelsti-var-natt",
+      "scene": "sykkelsti",
+      "season": "var",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-var-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "vitjingsruta"
+    },
+    {
+      "id": "sykkelsti-haust-morgon",
+      "scene": "sykkelsti",
+      "season": "haust",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-haust-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "sykkelsti-haust-kveld",
+      "scene": "sykkelsti",
+      "season": "haust",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-haust-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "lydskurd"
+    },
+    {
+      "id": "sykkelsti-haust-natt",
+      "scene": "sykkelsti",
+      "season": "haust",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-haust-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "ordkryss"
+    },
+    {
+      "id": "sykkelsti-vinter-morgon",
+      "scene": "sykkelsti",
+      "season": "vinter",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-vinter-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "hogfjell-haust-morgon",
+      "scene": "hogfjell",
+      "season": "haust",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-haust-morgon-v2.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "hogfjell-var-morgon",
+      "scene": "hogfjell",
+      "season": "var",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-var-morgon-v2.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "sykkelsti-vinter-kveld",
+      "scene": "sykkelsti",
+      "season": "vinter",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-vinter-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "heimsank"
+    },
+    {
+      "id": "hogfjell-var-kveld",
+      "scene": "hogfjell",
+      "season": "var",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-var-kveld-v2.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "gdpr"
+    },
+    {
+      "id": "sykkelsti-vinter-natt",
+      "scene": "sykkelsti",
+      "season": "vinter",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-vinter-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "hogfjell-sommar-morgon",
+      "scene": "hogfjell",
+      "season": "sommar",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-sommar-morgon-v2.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "hogfjell-sommar-kveld",
+      "scene": "hogfjell",
+      "season": "sommar",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-sommar-kveld-v2.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "hogfjell-haust-kveld",
+      "scene": "hogfjell",
+      "season": "haust",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-haust-kveld-v2.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "hogfjell-vinter-morgon",
+      "scene": "hogfjell",
+      "season": "vinter",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-vinter-morgon-v2.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "baretevling"
+    },
+    {
+      "id": "hogfjell-vinter-kveld",
+      "scene": "hogfjell",
+      "season": "vinter",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-vinter-kveld-v2.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "fjorestein-sommar-kveld",
+      "scene": "fjorestein",
+      "season": "sommar",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-sommar-kveld-v2.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "ordsmia"
+    },
+    {
+      "id": "bypark-sommar-kveld",
+      "scene": "bypark",
+      "season": "sommar",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-sommar-kveld-v2.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-sommar-morgon",
+      "scene": "vidde",
+      "season": "sommar",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-sommar-morgon-v2.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "vidde-sommar-kveld",
+      "scene": "vidde",
+      "season": "sommar",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-sommar-kveld-v2.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": "talsmia"
+    }
+  ],
+  "apps": {
+    "duldord": {
+      "backgroundId": "sykkelsti-sommar-kveld"
+    },
+    "vidfaren": {
+      "backgroundId": "fjorestein-sommar-natt"
+    },
+    "heimsank": {
+      "backgroundId": "sykkelsti-vinter-kveld"
+    },
+    "reknedaesj": {
+      "backgroundId": "fjord-vinter-morgon"
+    },
+    "rettslause_raud": {
+      "backgroundId": "hogfjell-vinter-dag"
+    },
+    "kludre_klodrian": {
+      "backgroundId": "hogfjell-var-natt"
+    },
+    "baretevling": {
+      "backgroundId": "hogfjell-vinter-morgon"
+    },
+    "frodebrett": {
+      "backgroundId": "vidde-haust-kveld"
+    },
+    "ordaklok": {
+      "backgroundId": "bygate-haust-kveld"
+    },
+    "tidvis": {
+      "backgroundId": "bypark-sommar-natt"
+    },
+    "heite_stavrim": {
+      "backgroundId": "myr-haust-morgon"
+    },
+    "ordsmia": {
+      "backgroundId": "fjorestein-sommar-kveld"
+    },
+    "talsmia": {
+      "backgroundId": "vidde-sommar-kveld"
+    },
+    "etikk-test": {
+      "backgroundId": "fjord-sommar-morgon"
+    },
+    "frodekapp": {
+      "backgroundId": "myr-vinter-natt"
+    },
+    "bolkestokk": {
+      "backgroundId": "bypark-var-kveld"
+    },
+    "ormritaren": {
+      "backgroundId": "bygate-haust-natt"
+    },
+    "bildebehandling": {
+      "backgroundId": "vidde-haust-morgon"
+    },
+    "biletflett": {
+      "backgroundId": "vidde-var-kveld"
+    },
+    "lydskurd": {
+      "backgroundId": "sykkelsti-haust-kveld"
+    },
+    "ljodbanken": {
+      "backgroundId": "bygate-var-morgon"
+    },
+    "rissverk": {
+      "backgroundId": "klippe-sommar-dag"
+    },
+    "klassekart": {
+      "backgroundId": "vidde-vinter-natt"
+    },
+    "flokkdeilar": {
+      "backgroundId": "myr-var-kveld"
+    },
+    "eikekveik": {
+      "backgroundId": "bypark-vinter-natt"
+    },
+    "ordskodde": {
+      "backgroundId": "klippe-haust-dag"
+    },
+    "ordkryss": {
+      "backgroundId": "sykkelsti-haust-natt"
+    },
+    "leitekryss": {
+      "backgroundId": "fjord-vinter-natt"
+    },
+    "vitjingsruta": {
+      "backgroundId": "sykkelsti-var-natt"
+    },
+    "dagsvegen": {
+      "backgroundId": "klippe-haust-natt"
+    },
+    "gdpr": {
+      "backgroundId": "hogfjell-var-kveld"
+    }
+  }
+}

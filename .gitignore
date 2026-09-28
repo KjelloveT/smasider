@@ -38,3 +38,5 @@ __pycache__/
 # ljodstigen/lyd/ blir commita — råklippa ligg lokalt så banken kan
 # byggjast på nytt utan å spele inn alt att.
 _kjelder/ljodstigen-lyd/
+/.codex-remote-attachments/
+/.worktrees/

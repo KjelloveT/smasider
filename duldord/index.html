@@ -1,115 +1,168 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Duldord — dagleg ordgåte på nynorsk</title>
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
-    <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="../css/neobrutalisme.css">
-<link rel="stylesheet" href="css/style.css?v=1">
-<script src="../js/neo-header.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Eitt nynorsk fembokstavsord kvar dag. Seks freistnader, med arkiv og statistikk.">
+  <title>Duldord — Vyrdepil</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
+  <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
+  <link rel="stylesheet" href="../css/vyrdepil-design.css?v=0.6">
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <script src="../js/vyrdepil-storage.js" defer></script>
+  <script src="../js/vyrdepil-icons.js" defer></script>
+  <script src="../js/vyrdepil-util.js" defer></script>
+  <script src="../js/vyrdepil-design.js" defer></script>
+  <script src="../js/vyrdepil-menu.js" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+<body class="vp-page" data-vp-design data-vp-app="duldord">
+  <a class="vp-skip" href="#main">Hopp til innhaldet</a>
 
-<neo-header></neo-header>
-
-<div class="page-wrapper">
-<main class="main-content">
-
-  <!-- Hero. Gøymer seg når spelaren byrjar å skrive, så brett og tastatur får plass -->
-  <div class="box2 hero-box" id="hero">
-    <img src="../_resources/duldord.png" alt="Duldord" class="hero-logo">
-    <div class="hero-text">
-      <h1>Duldord</h1>
-      <p>Eitt dult ord på fem bokstavar kvar dag, og seks freistnader på å finne det. Grøn rute tyder rett bokstav på rett plass, gul tyder rett bokstav på feil plass.</p>
+  <header class="vp-header vp-header--sky">
+    <div class="vp-shell vp-header-row">
+      <a class="vp-brand" href="../index.html" aria-label="Vyrdepil – framsida">
+        <img src="../_resources/vyrdepil-design/vyrde.png" width="48" height="46" alt="">
+        <span>Vyrdepil</span>
+      </a>
+      <button class="vp-button vp-menu-trigger dd-menu-trigger" id="menuBtn" type="button"
+        data-vp-menu="siteMenu" aria-haspopup="dialog" aria-expanded="false" aria-controls="siteMenu">
+        <span data-icon="menu" aria-hidden="true"></span>Meny
+      </button>
     </div>
-  </div>
+  </header>
 
-  <div class="dd-topbar">
-    <div class="dd-daylabel">
-      <span class="dd-daynum" id="dayNum"></span>
-      <span class="dd-daydate" id="dayDate"></span>
-    </div>
-    <div class="dd-actions">
-      <button class="btn dd-iconbtn" id="archiveBtn" data-icon="calendar" aria-label="Opne arkivet" title="Arkiv" hidden></button>
-      <button class="btn dd-iconbtn" id="statsBtn" data-icon="award" aria-label="Vis statistikk" title="Statistikk"></button>
-      <button class="btn dd-iconbtn" id="helpBtn" data-icon="help" aria-label="Korleis spele" title="Korleis spele"></button>
-    </div>
-  </div>
-
-  <p class="dd-message" id="message" role="status" aria-live="polite"></p>
-
-  <div class="dd-board" id="board" role="group" aria-label="Gjettebrett"></div>
-
-  <div class="dd-keyboard" id="keyboard" role="group" aria-label="Tastatur"></div>
-
-  <p class="dd-footnote" id="footnote"></p>
-
-</main>
-</div>
-
-<!-- Hjelp -->
-<div class="modal-overlay" id="helpOverlay">
-  <div class="modal3" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
-    <div class="modal-header">
-      <span id="helpTitle">Korleis spele</span>
-      <button class="btn dd-iconbtn" data-close data-icon="x" aria-label="Lukk"></button>
-    </div>
-    <div class="modal-body">
-      <p>Finn det dulde ordet på fem bokstavar. Du har seks freistnader. Kvart gjett må vere eit ord som finst.</p>
-      <p>Etter kvart gjett viser fargane kor nær du er:</p>
-      <div class="dd-help-row"><span class="dd-tile dd-correct">v</span><span>Bokstaven finst i ordet og står på rett plass.</span></div>
-      <div class="dd-help-row"><span class="dd-tile dd-present">a</span><span>Bokstaven finst i ordet, men står på feil plass.</span></div>
-      <div class="dd-help-row"><span class="dd-tile dd-absent">r</span><span>Bokstaven finst ikkje i ordet.</span></div>
-      <p>Eit nytt ord kjem kvar dag ved midnatt. Har du spelt ferdig dagens ord, opnar arkivet seg, og du kan prøve deg på dagane som har vore.</p>
-      <p class="dd-muted">Alt du gjer blir lagra berre i din eigen nettlesar. Ingenting blir sendt nokon stad.</p>
-      <p class="dd-muted dd-credit">Ordlista som avgjer kva som er eit gyldig gjett byggjer på <a href="https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-41/" target="_blank" rel="noopener">Norsk Ordbank – nynorsk 2012</a> frå Språkbanken ved Nasjonalbiblioteket, brukt under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Statistikk -->
-<div class="modal-overlay" id="statsOverlay">
-  <div class="modal3" role="dialog" aria-modal="true" aria-labelledby="statsTitle">
-    <div class="modal-header">
-      <span id="statsTitle">Statistikk</span>
-      <button class="btn dd-iconbtn" data-close data-icon="x" aria-label="Lukk"></button>
-    </div>
-    <div class="modal-body">
-      <div class="dd-statgrid" id="statGrid"></div>
-      <h3 class="heading4 dd-disttitle">Fordeling</h3>
-      <div class="dd-dist" id="statDist"></div>
-      <div class="dd-share" id="shareWrap" hidden>
-        <button class="btn" id="shareBtn"><span data-icon="copy"></span><span id="shareLabel">Kopier resultatet</span></button>
+  <main class="vp-shell" id="main">
+    <div class="vp-standard dd-standard">
+      <section class="vp-hero-stage" id="hero" aria-label="Duldord">
+        <div class="vp-hero">
+          <div class="vp-hero-content vp-hero-content--app">
+            <img class="vp-hero-logo" data-vp-app-logo src="../_resources/duldord.png"
+              width="384" height="384" alt="Illustrert Duldord-motiv">
+            <div class="vp-hero-copy">
+              <h1 class="vp-title">Duldord</h1>
+              <p>Eitt fembokstavsord kvar dag</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="vp-mascot-perch">
+        <img src="../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt="Stein-Vyrde held to vegvisarskilt">
       </div>
+
+      <section class="vp-panel vp-standard-main dd-game-panel" aria-labelledby="gameTitle">
+        <div class="vp-decor vp-decor--grain" aria-hidden="true"></div>
+        <div class="vp-content">
+          <p class="dd-kicker">Seks forsøk</p>
+          <h2 class="vp-heading dd-panel-title" id="gameTitle">Gjett dagens ord</h2>
+          <p class="dd-current-date"><time id="todayDate"></time></p>
+          <p class="dd-message" id="message" role="status" aria-live="polite"></p>
+          <div class="dd-board" id="board" role="group" aria-label="Gjettebrett"></div>
+          <div class="dd-keyboard" id="keyboard" role="group" aria-label="Tastatur"></div>
+          <p class="dd-footnote" id="footnote"></p>
+        </div>
+      </section>
+
+      <aside class="vp-sign vp-sign--grounded vp-standard-support" aria-label="Dagsinformasjon og hjelp">
+        <section class="vp-panel dd-support-panel">
+          <div class="vp-decor" data-vp-corners aria-hidden="true">
+            <i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i>
+          </div>
+          <div class="vp-content vp-stack dd-support-content">
+            <div>
+              <h2 class="vp-heading dd-day-title"><span id="dayDate">Dagens ord</span><span class="dd-daynum" id="dayNum"></span></h2>
+            </div>
+            <div class="vp-stack dd-actions" aria-label="Handlingar">
+              <button class="vp-button vp-button--tool vp-button--block" id="yesterdayBtn" type="button" hidden>
+                <span data-icon="calendar" aria-hidden="true"></span><span id="yesterdayLabel">Sjå kva det var i går</span>
+              </button>
+              <button class="vp-button vp-button--primary vp-button--block" id="archiveBtn" type="button" hidden>
+                <span data-icon="calendar" aria-hidden="true"></span>Tidlegare ord
+              </button>
+              <button class="vp-button vp-button--block" id="statsBtn" type="button">
+                <span data-icon="award" aria-hidden="true"></span>Statistikk
+              </button>
+              <button class="vp-button vp-button--tool vp-button--block" id="helpBtn" type="button">
+                <span data-icon="helpCircle" aria-hidden="true"></span>Hjelp
+              </button>
+            </div>
+            <details class="vp-accordion vp-support-section" data-vp-support>
+              <summary>Slik tolkar du rutene</summary>
+              <div class="vp-accordion-body">
+                <p class="vp-small">Du har seks forsøk. Etter kvart gjett viser rutene kva bokstav du har funne.</p>
+                <div class="dd-legend">
+                  <div class="dd-help-row"><span class="dd-tile dd-correct" aria-hidden="true">V</span><span>Rett bokstav på rett plass</span></div>
+                  <div class="dd-help-row"><span class="dd-tile dd-present" aria-hidden="true">A</span><span>Rett bokstav på feil plass</span></div>
+                  <div class="dd-help-row"><span class="dd-tile dd-absent" aria-hidden="true">R</span><span>Bokstaven er ikkje med</span></div>
+                </div>
+              </div>
+            </details>
+          </div>
+        </section>
+      </aside>
     </div>
-  </div>
-</div>
+  </main>
 
-<!-- Arkiv -->
-<div class="modal-overlay" id="archiveOverlay">
-  <div class="modal4" role="dialog" aria-modal="true" aria-labelledby="archiveTitle">
-    <button class="btn modal-close dd-iconbtn" data-close data-icon="x" aria-label="Lukk"></button>
-    <h2 class="heading3 no-mt dd-modal-title" id="archiveTitle">Arkiv</h2>
-    <p class="dd-muted dd-archive-intro">Alle dagar som har vore. Grøn tyder løyst, raud tyder at freistnadene tok slutt.</p>
+  <dialog class="vp-dialog dd-dialog" id="helpOverlay" aria-labelledby="helpTitle">
+    <div class="vp-dialog-head">
+      <h2 class="vp-heading" id="helpTitle">Korleis spele</h2>
+      <button class="vp-button vp-button--icon vp-button--quiet" type="button" data-close aria-label="Lukk hjelpa"><span data-icon="x" aria-hidden="true"></span></button>
+    </div>
+    <p>Finn det dulde ordet på fem bokstavar. Du har seks freistnader. Kvart gjett må vere eit ord som finst.</p>
+    <p>Etter kvart gjett viser fargane kor nær du er:</p>
+    <div class="dd-legend">
+      <div class="dd-help-row"><span class="dd-tile dd-correct" aria-hidden="true">V</span><span>Bokstaven finst i ordet og står på rett plass.</span></div>
+      <div class="dd-help-row"><span class="dd-tile dd-present" aria-hidden="true">A</span><span>Bokstaven finst i ordet, men står på feil plass.</span></div>
+      <div class="dd-help-row"><span class="dd-tile dd-absent" aria-hidden="true">R</span><span>Bokstaven finst ikkje i ordet.</span></div>
+    </div>
+    <p>Eit nytt ord kjem kvar dag ved midnatt. Har du spelt ferdig dagens ord, opnar arkivet seg, og du kan prøve deg på dagane som har vore.</p>
+    <p class="vp-small">Alt du gjer blir lagra berre i din eigen nettlesar. Ingenting blir sendt nokon stad.</p>
+    <p class="vp-small dd-credit">Ordlista som avgjer kva som er eit gyldig gjett byggjer på <a href="https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-41/" target="_blank" rel="noopener">Norsk Ordbank – nynorsk 2012</a> frå Språkbanken ved Nasjonalbiblioteket, brukt under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</p>
+  </dialog>
+
+  <dialog class="vp-dialog dd-dialog" id="statsOverlay" aria-labelledby="statsTitle">
+    <div class="vp-dialog-head">
+      <h2 class="vp-heading" id="statsTitle">Statistikk</h2>
+      <button class="vp-button vp-button--icon vp-button--quiet" type="button" data-close aria-label="Lukk statistikken"><span data-icon="x" aria-hidden="true"></span></button>
+    </div>
+    <div class="dd-statgrid" id="statGrid"></div>
+    <h3 class="vp-heading dd-disttitle">Fordeling</h3>
+    <div class="dd-dist" id="statDist"></div>
+    <div class="dd-share" id="shareWrap" hidden>
+      <button class="vp-button vp-button--primary" id="shareBtn" type="button"><span data-icon="copy" aria-hidden="true"></span><span id="shareLabel">Kopier resultatet</span></button>
+    </div>
+  </dialog>
+
+  <dialog class="vp-dialog dd-archive-dialog" id="archiveOverlay" aria-labelledby="archiveTitle">
+    <div class="vp-dialog-head">
+      <h2 class="vp-heading" id="archiveTitle">Tidlegare ord</h2>
+      <button class="vp-button vp-button--icon vp-button--quiet" type="button" data-close aria-label="Lukk arkivet"><span data-icon="x" aria-hidden="true"></span></button>
+    </div>
+    <p class="vp-prose dd-archive-intro">Alle dagar som har vore. Grøn tyder løyst, korall tyder at freistnadene tok slutt.</p>
     <div class="dd-archive" id="archiveGrid"></div>
-  </div>
-</div>
+  </dialog>
 
-<script src="../js/neobrutalisme.js"></script>
-<script src="../js/vyrdepil-storage.js"></script>
-<script src="../js/vyrdepil-icons.js"></script>
-<script src="data/ord.js?v=1"></script>
-<script src="js/state.js?v=1"></script>
-<script src="js/storage.js?v=1"></script>
-<script src="js/dictionary.js?v=1"></script>
-<script src="js/board.js?v=1"></script>
-<script src="js/keyboard.js?v=1"></script>
-<script src="js/stats.js?v=1"></script>
-<script src="js/archive.js?v=1"></script>
-<script src="js/game.js?v=1"></script>
+  <dialog class="vp-dialog vp-site-menu" id="siteMenu" aria-labelledby="siteMenuTitle">
+    <div class="vp-dialog-head">
+      <div class="vp-menu-heading"><img src="../_resources/vyrdepil-design/vyrde.png" width="112" height="107" alt=""><h2 class="vp-heading" id="siteMenuTitle">Vyrdepil</h2></div>
+      <form method="dialog"><button class="vp-button vp-button--icon vp-button--quiet" aria-label="Lukk menyen"><span data-icon="x" aria-hidden="true"></span></button></form>
+    </div>
+    <p>Spel, verktøy og skaparglede</p>
+    <label class="vp-field vp-menu-search"><span class="vp-label">Finn eit spel eller verktøy</span><input class="vp-input" id="menuSearch" type="search" placeholder="Søk etter namn eller innhald" aria-controls="menuApps"></label>
+    <div class="vp-actions vp-menu-filters" id="menuCategories" role="group" aria-label="Appkategori"></div>
+    <p class="vp-small vp-menu-count" id="menuCount" aria-live="polite">Lastar appoversikta …</p>
+    <nav id="menuApps" aria-label="Spel og verktøy"></nav>
+    <nav class="vp-actions vp-menu-more" aria-label="Meir om Vyrdepil"><a href="../index.html">Framsida</a><a href="../personvern.html">Personvern</a><a href="../lisens.html">Lisens</a></nav>
+  </dialog>
 
+  <script src="data/ord.js?v=1" defer></script>
+  <script src="js/state.js?v=2" defer></script>
+  <script src="js/storage.js?v=1" defer></script>
+  <script src="js/dictionary.js?v=1" defer></script>
+  <script src="js/board.js?v=2" defer></script>
+  <script src="js/keyboard.js?v=2" defer></script>
+  <script src="js/stats.js?v=2" defer></script>
+  <script src="js/archive.js?v=2" defer></script>
+  <script src="js/game.js?v=3" defer></script>
 </body>
 </html>

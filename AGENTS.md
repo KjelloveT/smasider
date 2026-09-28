@@ -15,87 +15,38 @@ Dette er den sentrale retningslinjen for koding, design og arkitektur for alle p
 - **Delingslenkjer skal bruke fragmentet (`#`), aldri spørjestrengen (`?`).** Legg eit verktøy data i lenkja — ei ordliste, eit oppsett, ein quiz — skal dei stå etter `#`. Ei spørjestreng blir **send til tenaren** og hamnar i tilgangsloggane hans, i `Referer`-headeren til kvar eksterne ressurs sida lastar, og i nettlesarhistorikka til alle som får lenkja. Fragmentet forlèt aldri nettlesaren. Ordaklok delte ordlister på `?d=` i lang tid medan framsida lova at «ingenting blir sendt til ein server» — skilnaden er eitt teikn, og han avgjer om lovnaden held. Skal gamle `?`-lenkjer framleis verke, les begge og rydd spørjestrengen med `history.replaceState` etterpå; sjå `ordaklok/js/share.js`.
 - I overgangen frå gammalt til nytt lagringssystem er det greitt om gamle toppscore blir sletta eller forsvinn. Vi treng ikkje leggje opp til at gammalt innhald i localStorage skal behaldast.
 
-## 3. Design og neobrutalisme
-- Vi brukar eit eigenutvikla neobrutalisme-designsystem (`css/neobrutalisme.css`). Alle nye grensesnitt må gjenbruke desse CSS-klassane framfor å skrive ny custom CSS. Lenk til denne fila som standard, og lag ei dedikert CSS-fil for kvar side/verktøy som overstyrer eller utvidar designsystemet.
-- Sjå **ALLTID** på `neobrutalisme_test/style-demo.html` for referanse på design-element og når dei skal brukast.
+## 3. Vyrdepil sitt skog-/turskiltdesign
 
-### 3.1 Responsivitet
-- **Alt MÅ vere responsivt:** Vyrdepil blir brukt på alt frå små smarttelefonar til nettbrett og store prosjektorskjermar i klasserommet. Bruk `clamp()`-funksjonar (allereie implementert i typografien), `vw`/`vh`, og auto-grids (`minmax()`) framfor faste pixel-storleikar. Gi varsel dersom element er vanskelege å tilpasse til fleire skjermstorleikar og spør om avklaring på korleis problem skal løysast.
+Brukaren har valt det nye fellesdesignet. **Nye appar, nytt felles UI og avtalte redesign skal følgje `DESIGN.md`, `designsystem/index.html` og `css/vyrdepil-design.css`.** Neobrutalisme er ikkje lenger standard for nye oppgåver. Eksisterande appar blir migrerte i eigne oppgåver; funksjonelle feilrettingar skal ikkje automatisk starte eit heilt redesign.
 
-### 3.1.1 Full skjermbreidd for redigeringsverktøy
-`<main>` har som standard `max-width: 1200px`. Det er rett for innhaldssider: lange tekstlinjer er tunge å lese, og auget mistar staden når det skal tilbake til venstre marg.
+### 3.1 Fast identitet
+- Les `DESIGN.md` før ei designoppgåve. Den eine felles CSS-fila inneheld alle grunnkomponentar; app-CSS skal berre ha appspesifikke funksjonelle tillegg.
+- All UI-tekst er svart (`#000000`) og står på lyse flater. Fast palett; ingen ny temaveljar. Ramme og skugge har same tone (`#142820`). Valte knappar har honningfyll og svart hake; fokus har ei innvendig varm brun markering.
+- Stein-Vyrde erstattar den gamle pila i ny felles navigasjon. **Måla flater** er vald applogostil; dei tre valde logoane er i `json/vyrdepil-design.json`. Dei andre logoane blir teikna i same familie ved migrering.
+- Gjenbruk skilt, stolper, ornament og landskap frå `_resources/vyrdepil-design/`. Katalogen viser gjeldande plassering og dimensjonar. Ikkje generer nye UI-ressursar som del av kvart appoppdrag.
+- Identitetsfargar og funksjonsfargar er ulike. Behald faglege spelbrett, teiknefargar, figurar og arbeidsflater der dei tener funksjonen; UI-etikettar står framleis på lyse flater.
+- Heimsank og Bolkestokk held på avtalte særuttrykk i appinnhaldet. Felles navigasjon kan migrerast. Dette er ikkje eit generelt unntak for appar med lokal CSS.
 
-**Men i eit redigeringsverktøy er arbeidsflata sjølve innhaldet.** Ei tidslinje, eit lerret eller ei biletflate blir berre betre av meir plass — brukaren har som regel opna programmet nettopp for å sjå meir om gongen. Der breidda gjev reell nytte, skal verktøyet difor bruke heile skjermen:
+### 3.2 Sideoppsett og komponentar
+- Standard: `vp-shell` og `vp-standard` med hero, rom for applogo, Vyrde ved sida, hovudboks og infoskilt. Støtte blir trekkspel på mobil; viktige startval og handlingar er synlege.
+- Utvida verktøy: `vp-shell--wide`, avgrensa `vp-app-intro` med stor logo inni til venstre og Vyrde utanfor til høgre; verktøyrad og arbeidsflate får heile breidda. Sidepanel foldast på mobil. Innhaldstekst held eiga lesegrense.
+- Canvas-spel: avgrensa intro som ovanfor, eiga `vp-game-frame`, korrekt sideforhold og synlege spelkontrollar. Behald spelmotoren og spelgrafikken.
+- Knappar: `vp-button` med rolle-, storleik- og tilstandsvariantar. Flater: `vp-panel` med fem familiar. Skjema: `vp-field`, `vp-input`, `vp-choice`. Trekkspel: `vp-accordion`. Dialog: `vp-dialog`. Sjå strukturane i DESIGN.md/katalogen.
+- Nye sider bruker `<body class="vp-page" data-vp-design data-vp-app="APP-ID">`, felles CSS og `js/vyrdepil-design.js` etter ikon-/hjelpemodulane. Ingen avhengnad av `catalogue.css` eller gamle neobrutalisme-klassar.
+- Ny navigasjon følgjer skyheaderen og appmenyen i katalogen, med kategoridata frå den eksisterande `json/apps.json`. Ikkje bruk den gamle temaveljaren i nye grensesnitt.
+- Alt skal vere responsivt på små telefonar, nettbrett og store skjermar. Bruk grid/flex, clamp og minmax. Test at det ikkje er vassrett overflyt, at tekst er lesbar og at dekor blir klipt i eigne lag.
+- UI-ikon er Lucide frå den felles ikonmodulen, ikkje emoji. Dei avtalte innhaldsunntaka gjeld framleis: Dagsvegen sine fagemoji og Eikekveik sine nodeemoji; ikkje bruk flagg eller samansette ZWJ-emoji. Desse unntaka gjeld ikkje knappar/verktøyrader.
 
-```html
-<main class="main-content main-wide">
-```
-
-`.main-wide` (definert i `css/neobrutalisme.css`) fjernar breiddegrensa og strammar inn sidemargane litt, så flata får mest mogleg plass òg på små skjermar.
-
-Retningslinjer:
-- **Bruk han** når flata er ei arbeidsflate: lydredigering (Lydskurd), teikning (Rissverk), biletbehandling, klassekart, tidslinjer og liknande.
-- **Bruk han ikkje** på vanlege innhaldssider, framsida, personvernsida, kviss-skjermar eller skjemabaserte verktøy. Der er 1200px rett.
-- **Hald tekstblokker lesbare uansett.** Sjølv om flata er brei, skal ingress, hjelpetekst og botntekst ha si eiga breiddegrense (t.d. `max-width: 78ch`). Ei tekstlinje på to tusen pikslar er ikkje betre enn ei på tusen — han er verre.
-- Sjekk framleis at det ikkje kjem vassrett skrolling på mobil. `.main-wide` gjer sidemargane mindre, ikkje større, så små skjermar tener òg på han.
-
-### 3.2 Oversikt over komponentar
-- **Layout:** Alle hovudsider skal pakkast inn i ein `<div class="page-wrapper">` og deretter `<main class="main-content">`. Redigeringsverktøy legg i tillegg til `.main-wide` — sjå §3.1.1.
-- **Global header:** Bruk `<neo-header></neo-header>` øvst på alle sider. Scriptet `js/neo-header.js` tek seg av rendring av den globale menyen med temavelgaren.
-- **Headings:** Bruk `.heading1` til `.heading4` for overskrifter. Fargane kan overstyrast med modifikatorar som `.heading1-accent2`. Legg til `.no-mt` for å fjerne top-margin viss overskrifta er det første elementet. (Hugs: Bruk aldri desse klassane inni ferdigfarga element som `.box2-accent` eller `.banner-full` — bruk rene `<h1>` osv. der.)
-- **Game hero-header:** Spel og minispel skal bruke ein hero-boks på menyskjermen sin slik at han forsvinn når spelet startar. Struktur:
-
-  ```html
-  <div class="box2 hero-box">
-    <img src="../_resources/<spel>.png" alt="<Spel>" class="hero-logo">
-    <div class="hero-text">
-      <h1>Spelnamn</h1>
-      <p>Kort beskriving.</p>
-    </div>
-  </div>
-  ```
-
-  `.box2.hero-box`-klassen handterer all stil (layout, padding, aksentbakgrunn, logo-storleik på 120px med drop-shadow) via `neobrutalisme.css`. Skriv ikkje inline-stilar her.
-
-- **Boksar / containers:**
-  - `.box1` (enkel, solid dropshadow)
-  - `.box2` (asymmetrisk border-radius, skugge)
-  - `.box3` (litt rotert design, med "teip"-effekt på toppen)
-  - `.box4` (boks med header og innhald, krev inner-element `.box-header` og `.box-body`)
-  - `.box5` (boks med tabs, krev `.box-tabs`, `.box-tab`, og `.box-body`)
-- **Knappar:** Bruk klassen `.btn`. Kan utvidast med `.active` eller hover-effektar handtert av stilarket.
-- **Kontrast på fargar (KRITISK):** Neobrutalisme-temaet har to tekst-på-bakgrunn-variablar med ulike formål:
-  - `--text-on-accent` = **kvit** (`#ffffff`) — bruk berre på **faste mørke fargar**. Sjå åtvaringa under før du brukar han på `--accent` eller `--accent2`.
-  - `--text-on-light-accent` = **mørk** (`#1a1a1a`) — bruk på **lyse pastell-bakgrunnar**: `--accent3`, `--accent4`, `--accent5`, og faste lyse fargar som `#BAFCA2`, `#FFD166`, `#fef08a` osv.
-  - Bruk **aldri** `color: var(--text)` eller `color: var(--border)` på element med **fast** bakgrunn — desse vekslar mellom svart og kvitt avhengig av temaet og kan gje usynleg tekst. (Mot `--surface` er `--text` derimot trygg — sjå neste punkt.)
-
-  **`--text-on-accent` held ikkje på `--accent`/`--accent2` i dei mørke temaa.** Regelen over vart skriven for dei lyse temaa, der `--accent` er ein mørk farge og kvit tekst ligg på 5–17:1. I dei sju mørke temaa — `hacker`, `dracula`, `neon`, `cyberpunk`, `midnight`, `slate`, `space` — er `--accent` og `--accent2` lyse neonfargar, og kvit tekst fell til **2,41–4,47:1**, altså under AA-kravet på 4,5:1.
-
-  Å definere ein eigen `--text-on-accent` per tema løyser det **ikkje**: `space` har `--accent: #8b5cf6`, ein mellomtone der kvit gir 4,23:1 og svart 4,11:1 — ingen tekstfarge klarer 4,5:1 mot han.
-
-  Difor: **fyll aldri ei flate med `--accent`/`--accent2` og legg tekst oppå.** Vel ein av desse i staden:
-  - **Inverter:** `background: var(--text); color: var(--surface);`. `--text` og `--surface` er motsetnader i kvart einaste tema, så dette gir 8,59:1 («dracula») til 18,88:1 («grayscale») i alle 21 — per konstruksjon, utan måling. Dette er det `.box4 .box-header` og `.box5 .box-tab.active` gjer.
-  - **Ber fargen ved sida av teksten:** la flata stå på `--surface` med `--text`, og legg aksentfargen i ei lita brikke med eiga ramme, ei kantstripe eller ein ramme­farge. Sjå `.orm-modulbrikke` i `ormritaren/css/landing.css`.
-
-  Aksentfyll er framleis greitt der det ikkje ligg tekst oppå (kantar, stripes, prikkar, ikon med `--border` rundt).
-
-  **Legg du til eit nytt tema:** dei to komponentane over treng ikkje målast på nytt. Alt anna som brukar `--text-on-accent` gjer det — mål mot den faktiske bakgrunnen og krev 4,5:1.
-- **Modalar:** `.modal1` til `.modal5` i kombinasjon med ein `<div class="modal-overlay">`.
-- **Ikon:** Bruk inline SVG-ar frå Lucide Icons. Aldri bruk emoji.
-  - **Unntak — Dagsvegen:** Dagsplan-verktøyet `dagsvegen/` har eksplisitt godkjent unntak: emoji brukast som visuell representasjon av fag og innhald (kuratert liste i `dagsvegen/js/emoji.js`, ingen flagg-emoji pga. manglande Windows-støtte). Unntaket gjeld berre faginnhald — UI-chrome (knappar, verktøyrad) brukar framleis Lucide.
-  - **Unntak — Eikekveik:** Tankekartverktøyet `eikekveik/` har eksplisitt godkjent unntak: brukaren kan setje ein emoji på ein node (kuratert liste i `eikekveik/js/symbols.js`, ingen flagg-emoji og ingen samansette ZWJ-emoji). Unntaket gjeld berre innhaldet i kartet — knappar, verktøylinje og panel brukar framleis Lucide.
-
-### 3.3 Fargetema
-Designsystemet støttar fleire fargetema definerte i `css/neobrutalisme.css` under `[data-theme="..."]`-selektorane (autoritativ kjelde). Kvart spel skal setje eit standard lyst tema, eit mørkt tema og eit aktivt tema slik:
-
-```html
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
-```
+### 3.3 Bakgrunnsreservasjonar
+- `json/vyrdepil-design.json` er den faste oversikta over alle bakgrunnar og kva app som eig kvart bilete. Éi app får eitt unikt bilete; bakgrunnen blir ikkje trekt på nytt ved sideinnlasting.
+- Når du lagar ei ny app: registrer henne i `json/apps.json`, køyr `node designsystem/manage-backgrounds.cjs assign <app-id>`, og deretter `check`. Verktøyet vel tilfeldig frå ledige bilete og bevarer gamle val. Ikkje lag ein ny appkatalog.
+- Full bank krev fleire ressursar, ikkje gjenbruk av eit reservert bilete. Sletta appar held reservasjonen til han blir frigjeven med eit medvite val.
+- Alle 31 katalogførte appar har reservasjonar (28 synlege og tre skjulte). Reservasjon er ikkje automatisk redesign av ei eksisterande app.
 
 ## 4. Arbeidsflyt for AI
 Når du lagar eller modifiserer kode i dette prosjektet:
 1. Sjekk at du ikkje bryt lagringsmønsteret for `localStorage` (bruk `VyrdepilStorage`).
-2. Implementer design med komponentar frå `neobrutalisme.css`.
+2. Implementer nye grensesnitt med komponentane i `css/vyrdepil-design.css` og instruksen i `DESIGN.md`; hald reine funksjonsfiksar innanfor det eksisterande appdesignet til migrering er avtalt.
 3. Sikre at layout er grid/flex og responsiv. Sjekk at det fungerer på mobil, små og mellomstore nettbrett, og store desktop-skjermar.
 4. Pass på at UI og statiske tekstar er skrivne på nynorsk.
 5. Oppdater personvern-lista på framsida viss lagringsbruken til eit spel endrar seg.
@@ -176,7 +127,7 @@ Alle spel/verktøy følgjer same struktur:
 <spelnamn>/
   index.html          # inngangsside
   css/
-    style.css         # spel-spesifikk stil (utvidar neobrutalisme.css)
+    style.css         # appspesifikke tillegg til det felles designsystemet
   js/
     <modul>.js        # ein eller fleire JS-modular
 ```
@@ -323,7 +274,7 @@ Notatet er det einaste stadet ein besøkjande ser at sida lever. Står det same 
 Verifiser i **Chrome** før merge til `main`. Sjekk:
 - Sida lastar utan konsollfeil
 - Hovudfunksjonalitet fungerer (start spel, lagre, navigere)
-- Lyst og mørkt tema viser lesbar tekst overalt
+- Nytt design: svart tekst på lyse UI-flater, uavhengig av dag-/nattbakgrunn. Ikkje-migrerte appar: kontroller framleis lyst og mørkt tema.
 - Responsivt på mobilbreidde (devtools)
 
 Sjekklista skal køyrast på **preview-URL-en** frå pull requesten (§6.4), ikkje berre på `localhost`. Det er berre der `staticwebapp.config.json` — rutar, tryggingsheadarar og CSP — faktisk er i spel.

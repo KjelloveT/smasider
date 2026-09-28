@@ -23,7 +23,7 @@
       row.forEach(key => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'dd-key';
+        btn.className = 'vp-button dd-key';
         if (key === 'ENTER' || key === 'BACK') btn.classList.add('dd-key-wide');
 
         if (key === 'BACK') {
@@ -54,7 +54,17 @@
       const btn = keyEls[letter];
       btn.classList.remove('dd-correct', 'dd-present', 'dd-absent');
       const state = states[letter];
-      if (state) btn.classList.add(`dd-${state}`);
+      if (state) {
+        btn.classList.add(`dd-${state}`);
+        const descriptions = {
+          correct: 'rett plass',
+          present: 'feil plass',
+          absent: 'ikkje med'
+        };
+        btn.setAttribute('aria-label', `Bokstaven ${letter}, ${descriptions[state]}`);
+      } else {
+        btn.setAttribute('aria-label', `Bokstaven ${letter}`);
+      }
     });
   }
 
@@ -62,7 +72,7 @@
     document.addEventListener('keydown', ev => {
       if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
       // Er ein modal open, skal tastane gå dit — ikkje til brettet
-      if (document.querySelector('.modal-overlay.open')) return;
+      if (document.querySelector('dialog[open]')) return;
 
       if (ev.key === 'Enter') { ev.preventDefault(); handler('ENTER'); return; }
       if (ev.key === 'Backspace') { ev.preventDefault(); handler('BACK'); return; }
