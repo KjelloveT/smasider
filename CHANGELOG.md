@@ -3,15 +3,23 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
-## [1.57] — 2026-09-28
+## [1.59] — 2026-09-29
+
+### Lagt til
+- **Vegamot er eit nytt ferdig verktøy for interaktive forteljingar.** Lag flytkart med steg, vegval og fleire sluttingar, legg til eigne bilete og prøv forteljinga i lesarmodus. Forteljingar og bilete blir lagra lokalt; forteljinga kan òg pakkast eller eksporterast til PowerPoint.
 
 ### Endra
-- **Duldord følgjer no den nye Vyrdepil-designretninga.** Spelet har fått felles toppmeny, Vyrde-maskot, app-logo, Sykkelsti-bakgrunn, trepanel og infoskilt. Datoen står tydeleg på spelbrettet, og knappen for tidlegare ord viser fasiten og kan bla heilt tilbake til starten. Spelreglane og bokstavstatusane er vidareførte.
+- **Dei synlege appane har fått ei felles visuell retning.** Nye Måla flater-logoar, skyheader, appmeny og faste norske landskapsbakgrunnar bind saman spela og verktøya. Heimsank og Bolkestokk beheld dei avtalte særuttrykka sine.
 
 ## [1.58] — 2026-09-29
 
 ### Fiksa
 - **Duldord røper ikkje tidlegare løysingsord når ein blar bakover.** Knappen opnar no ei spelbar dagsoppgåve, viser «i går» fyrst og deretter datoen ein går til. Ein kan bla heilt tilbake til starten.
+
+## [1.57] — 2026-09-28
+
+### Endra
+- **Duldord følgjer no den nye Vyrdepil-designretninga.** Spelet har fått felles toppmeny, Vyrde-maskot, app-logo, Sykkelsti-bakgrunn, trepanel og infoskilt. Datoen står tydeleg på spelbrettet, og knappen for tidlegare ord viser fasiten og kan bla heilt tilbake til starten. Spelreglane og bokstavstatusane er vidareførte.
 
 ## [1.56] — 2026-09-21
 

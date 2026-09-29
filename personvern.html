@@ -19,7 +19,7 @@
     <main class="main-content">
 
         <h1 class="heading1">Personvernerklæring</h1>
-        <p class="bk-muted" style="margin-top:-8px;">Sist oppdatert: 3. august 2026</p>
+        <p class="bk-muted" style="margin-top:-8px;">Sist oppdatert: 29. september 2026</p>
 
         <div class="box2">
             <div class="privacy-body">
@@ -100,7 +100,7 @@
 
         <h2 class="heading2">Lokal lagring i kvart spel og verktøy</h2>
         <div class="box2"><div class="privacy-body">
-            <p>Nokre spel bruker nettlesaren sin <strong>localStorage</strong> (under nøkkelen <code>VyrdepilStorage</code>) for å hugse framgang. Under finn du nøyaktig kva kvart einskild spel lagrar, og om det treng ekstern tilgang.</p>
+            <p>Nokre spel bruker <strong>localStorage</strong> (under nøkkelen <code>VyrdepilStorage</code>), og Vegamot lagrar òg biletfiler lokalt i <strong>IndexedDB</strong>. Under finn du kva kvart einskild spel lagrar, kvifor det blir lagra, og om det treng ekstern tilgang.</p>
 
             <details class="accordion-box">
                 <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg> Vis detaljar per spel og verktøy</summary>
@@ -109,6 +109,10 @@
                     <h4><img src="_resources/duldord.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Duldord</h4>
                     <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Gjetta ord og utfall per dag (dagnummer, orda du gjetta, og om dagen blei løyst)</td><td>For at du skal kunne halde fram på eit påbyrja ord, sjå att tidlegare dagar i arkivet, og for at rekkja og statistikken skal kunne reknast ut</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Både fasitorda og ordlista som avgjer kva som er gyldige gjett ligg lokalt, så spelet fungerer heilt offline etter at sida er lasta.</p>
+                    <h4>Vegamot</h4>
+                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Forteljinga di: tittel, steg, tekst, vegval og innstillingar</td><td>For at du skal kunne halde fram med å lage forteljinga og prøve henne i lesarmodus</td></tr><tr><td>Bilete du legg til i steg (lagra lokalt i IndexedDB, med filnamn og format)</td><td>For at illustrasjonane skal vere tilgjengelege i forteljinga og eksportane dine</td></tr><tr><td>Forteljingspakkar og PowerPoint-filer du lastar ned</td><td>For å ta vare på, dele eller vise forteljinga. Filene blir lasta ned til di eiga maskin</td></tr></table>
+                    <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Forteljingar og bilete blir lagra og handsama lokalt i nettlesaren. Ingenting blir lasta opp.</p>
+
 
                     <h4><img src="_resources/kludre klodrian.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Kludre Klodrian</h4>
                     <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Toppscore (eitt tal)</td><td>For å vise personleg rekord mellom speløkter</td></tr></table>
@@ -258,9 +262,9 @@
             </details>
 
             <details class="accordion-box" id="storageViewerAccordion">
-                <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg> Vis dine lagra data (VyrdepilStorage)</summary>
+                <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg> Vis dine lagra data og lokale filer</summary>
                 <div class="accordion-body">
-                    <p>Her ser du <strong>alt</strong> som er lagra lokalt i nettlesaren din under <code>VyrdepilStorage</code>. Dataen ligg berre på di eining og blir aldri sendt nokon stad.</p>
+                    <p>Her ser du data i <code>VyrdepilStorage</code> og ei oversikt over biletfiler i den lokale IndexedDB-lagringa. Filinnhaldet blir ikkje vist. Dataa ligg berre på di eining og blir aldri sende nokon stad.</p>
                     <div style="display:flex; gap:8px; margin: 12px 0; flex-wrap:wrap;">
                         <button id="refreshStorageBtn" class="btn">Oppfrisk</button>
                         <button id="clearStorageBtn" class="btn" style="background: var(--accent2); color: var(--text-on-accent);">Slett alt</button>
@@ -343,25 +347,34 @@
         const refreshBtn = document.getElementById('refreshStorageBtn');
         const clearBtn = document.getElementById('clearStorageBtn');
 
-        function render() {
+        async function render() {
+            output.textContent = 'Hentar lagra data …';
             const raw = localStorage.getItem('VyrdepilStorage');
-            if (!raw) {
-                output.textContent = '(Ingen data lagra enno. Spel eit spel for å sjå data dukke opp her.)';
+            let localData = {};
+            if (raw) {
+                try { localData = JSON.parse(raw); }
+                catch (e) { localData = raw; }
+            }
+            let assets = [];
+            let assetError = false;
+            try { assets = await VyrdepilStorage.getStoredAssetInfo(); }
+            catch (e) { assetError = true; }
+            if ((!raw || localData === '{}') && !assets.length && !assetError) {
+                output.textContent = '(Ingen data lagra enno. Bruk eit spel eller verktøy for å sjå data dukke opp her.)';
                 return;
             }
-            try {
-                output.textContent = JSON.stringify(JSON.parse(raw), null, 2);
-            } catch (e) {
-                output.textContent = raw;
-            }
+            const view = { VyrdepilStorage: localData, 'Lokale filer i IndexedDB': assets };
+            if (assetError) view['Lokale filer i IndexedDB'] = 'Klarte ikkje lese fillagringa i denne nettlesaren.';
+            output.textContent = JSON.stringify(view, null, 2);
         }
 
         if (accordion) accordion.addEventListener('toggle', () => { if (accordion.open) render(); });
         if (refreshBtn) refreshBtn.addEventListener('click', render);
         if (clearBtn) clearBtn.addEventListener('click', () => {
             if (confirm('Vil du verkeleg slette alle lagra data? Dette kan ikkje angrast.')) {
-                VyrdepilStorage.clearAll();
-                render();
+                VyrdepilStorage.clearAll().then(render).catch((error) => {
+                    output.textContent = `Kunne ikkje slette data: ${error.message}`;
+                });
             }
         });
     })();

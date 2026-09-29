@@ -425,6 +425,19 @@
         "Lag ein behandlingsprotokoll etter artikkel 30 i personvernforordninga, med forklaringar til kvart felt. Datatilsynet sin Excel-mal fortel deg kva som skal fyllast ut; her står det kvifor feltet finst, kva eit godt svar ser ut som, og kva eit tilsyn har hatt innvendingar mot.",
         "Ein vegvisar for unntaket i artikkel 30 nr. 5, ein kvalitetssjekk bygd på det irske datatilsynet sin gjennomgang av tretti verksemder, og eksport til rekneark, PDF og ei sjølvstendig HTML-fil."
       ]
+    },
+    {
+      "id": "vegamot",
+      "name": "Vegamot",
+      "href": "vegamot/index.html",
+      "cat": "verktoy",
+      "btn": "Opne verktøy →",
+      "img": "_resources/vyrdepil-design/logos/vegamot-mala.png",
+      "added": "2026-09-29",
+      "desc": [
+        "Lag interaktive forteljingar med steg, vegval og fleire sluttingar. Vel sjølv kva veg lesaren skal ta, eller bruk tilfeldige val og terningkast.",
+        "Teikn forteljinga som eit flytkart, legg eigne bilete til stega og prøv henne i lesarmodus. Forteljingar kan lagrast lokalt, delast som fil eller eksporterast til PowerPoint."
+      ]
     }
   ]
 }

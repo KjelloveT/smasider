@@ -2,6 +2,26 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.59",
+      "dato": "2026-09-29",
+      "samandrag": "Vegamot er nytt, og dei synlege appane deler no ei samla Vyrdepil-designretning.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Vegamot",
+          "merke": [
+            "verktoy"
+          ],
+          "tekst": "Nytt fullskjermsverktøy for å lage interaktive forteljingar med steg, vegval, eigne bilete og eksport til PowerPoint."
+        },
+        {
+          "t": "endra",
+          "kva": "Vyrdepil-design",
+          "tekst": "Synlege appar har fått nye Måla flater-logoar, felles navigasjon og faste norske bakgrunnar. Heimsank og Bolkestokk held på særuttrykka i appane."
+        }
+      ]
+    },
+    {
       "versjon": "1.58",
       "dato": "2026-09-29",
       "samandrag": "Tidlegare Duldord-oppgåver kan spelast utan å vise løysingsordet.",

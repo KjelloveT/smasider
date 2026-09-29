@@ -378,7 +378,8 @@ Godkjend av brukaren under planlegginga av Vitjingsruta.
 
 ZIP-pakking i nettlesaren. Brukt av **Bildebehandling** til å laste ned
 mange behandla bilete på ein gong, av **Vitjingsruta** til å laste ned
-eit heilt sett QR-kodar, og av **Protokollsmia** til å skrive .xlsx-filer.
+eit heilt sett QR-kodar, av **Protokollsmia** til å skrive .xlsx-filer, og av
+**Vegamot** til å pakke historiearkiv og PowerPoint-filer.
 
 Merk den tredje bruken: ei .xlsx-fil *er* ein ZIP med sju XML-filer, så
 Protokollsmia skriv OOXML sjølv (`gdpr/js/xlsx.js`) og brukar JSZip berre til

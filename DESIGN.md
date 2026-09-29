@@ -1,6 +1,6 @@
 # Vyrdepil — designinstruks
 
-Utgåve 0.5 · 28. september 2026. Brukarvald retning for nye appar og redesign.
+Utgåve 0.6 · 29. september 2026. Brukarvald retning for nye appar og redesign.
 
 ## Les fyrst
 
@@ -11,8 +11,8 @@ Utgåve 0.5 · 28. september 2026. Brukarvald retning for nye appar og redesign.
 
 ## Identitet og ressursar
 
-- **Måla flater** er vald logostil: breie måla fasettar, litt ujamn mørk kontur, naturlege materialfargar, avgrensa tekstur og få tydelege detaljar. Nye applogoar skal følgje Duldord-, Klassekart- og Rissverk-logoane i `_resources/vyrdepil-design/logos/`, saman med stein-Vyrde. Namn skal vere ekte HTML-tekst, ikkje generert tekst inni logoen.
-- Stein-Vyrde i `_resources/vyrdepil-design/vyrde.png` er maskotten i toppmeny, appmeny og ved hero. Logoane for dei tre prøveappane er valde; dei andre applogoane må framleis teiknast i same familie. Bruk eksisterande logo mellombels når den nye manglar.
+- **Måla flater** er vald logostil: breie måla fasettar, litt ujamn mørk kontur, naturlege materialfargar, avgrensa tekstur og få tydelege detaljar. Nye applogoar skal følgje den etablerte logofamilien i `_resources/vyrdepil-design/logos/`, saman med stein-Vyrde. Namn skal vere ekte HTML-tekst, ikkje generert tekst inni logoen.
+- Stein-Vyrde i `_resources/vyrdepil-design/vyrde.png` er maskotten i toppmeny, appmeny og ved hero. Alle synlege appar har no ei logo i stilen Måla flater. Skjulte appar blir utforma når dei blir tekne fram for migrering.
 - Ressursane i `_resources/vyrdepil-design/` er felles. Bruk dei eksisterande filene; ikkje generer eit nytt skilt, stolpebilete eller ornament for kvart oppdrag.
 - Bakgrunnar gjev variasjon. Knappar, skilt, skrift, ramme og UI-palett står fast uavhengig av landskap, årstid og lys.
 - Heimsank og Bolkestokk held på avtalte særuttrykk i appinnhaldet. Felles navigasjon og logofamilie kan migrerast. Dei reserverte landskapa skal ikkje overstyre appane sine funksjonelle spel-/arbeidsflater.

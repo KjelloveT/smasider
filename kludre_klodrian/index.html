@@ -28,7 +28,7 @@ body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);height:100vh;hei
 @media(max-width:768px){#gameWrapper{width:100%;width:min(100%,calc(100cqh * 16 / 9));max-width:100%;border-radius:0}}
 /* Låg, liggjande skjerm: gi spelflata all plassen som ramma elles brukar på luft. */
 @media(max-height:500px){.page-wrapper>.main-content{padding:6px 10px}}
-/* touch-action høyrer heime her, ikkje på <body>: der blokkerte han rulling i
+/* touch-action høyrer heime her, ikkje på <body data-vp-app="kludre_klodrian" data-vp-layout="canvas">: der blokkerte han rulling i
    meny- og statistikkskjermane, som må kunne rullast på ein låg mobilskjerm. */
 #gameCanvas{display:block;image-rendering:pixelated;touch-action:none}
 /* "safe center" sentrerer når det er plass, men fell tilbake til start når
@@ -70,8 +70,10 @@ body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);height:100vh;hei
 #rotateMsg .ri{font-size:4rem;margin-bottom:14px;animation:spin90 2s ease-in-out infinite}
 @keyframes spin90{0%,40%{transform:rotate(0)}60%,100%{transform:rotate(90deg)}}
 </style>
+    <link rel="stylesheet" href="../css/vyrdepil-design.css?v=0.6">
+    <link rel="stylesheet" href="../css/vyrdepil-migration.css?v=11">
 </head>
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+<body data-vp-app="kludre_klodrian" data-vp-layout="canvas" data-light-theme="classic" data-dark-theme="space" data-theme="classic">
 <neo-header></neo-header>
 
 <div class="page-wrapper">
@@ -655,5 +657,11 @@ ctx.fillStyle='#001428';ctx.fillRect(0,0,W,H);
 </script>
     </main>
 </div>
+
+<script src="../js/vyrdepil-icons.js"></script>
+<script src="../js/vyrdepil-util.js"></script>
+<script src="../js/vyrdepil-design.js"></script>
+<script src="../js/vyrdepil-app-shell.js?v=4"></script>
+<script src="../js/vyrdepil-menu.js"></script>
 </body>
 </html>

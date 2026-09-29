@@ -11,6 +11,9 @@
 
 const VyrdepilStorage = (function() {
     const ROOT_KEY = 'VyrdepilStorage';
+    const ASSET_DB = 'VyrdepilAssets';
+    const ASSET_STORE = 'assets';
+    let assetDbPromise = null;
     
     // Migration map: oldKey -> { game, newKey }
     const MIGRATIONS = {
@@ -32,6 +35,103 @@ const VyrdepilStorage = (function() {
     
     function setData(data) {
         localStorage.setItem(ROOT_KEY, JSON.stringify(data));
+    }
+
+    function openAssetDb() {
+        if (!window.indexedDB) return Promise.reject(new Error('Nettlesaren støttar ikkje lokal fillagring.'));
+        if (assetDbPromise) return assetDbPromise;
+        assetDbPromise = new Promise(function (resolve, reject) {
+            const request = indexedDB.open(ASSET_DB, 1);
+            request.onupgradeneeded = function () {
+                const db = request.result;
+                if (!db.objectStoreNames.contains(ASSET_STORE)) {
+                    const store = db.createObjectStore(ASSET_STORE, { keyPath: 'key' });
+                    store.createIndex('game', 'game', { unique: false });
+                }
+            };
+            request.onsuccess = function () { resolve(request.result); };
+            request.onerror = function () { reject(request.error || new Error('Klarte ikkje opne lokal fillagring.')); };
+            request.onblocked = function () { reject(new Error('Lokal fillagring er blokkert av ei anna fane.')); };
+        }).catch(function (error) {
+            assetDbPromise = null;
+            throw error;
+        });
+        return assetDbPromise;
+    }
+
+    function assetTransaction(mode, operation) {
+        return openAssetDb().then(function (db) {
+            return new Promise(function (resolve, reject) {
+                const transaction = db.transaction(ASSET_STORE, mode);
+                let result;
+                let request;
+                transaction.oncomplete = function () { resolve(result); };
+                transaction.onerror = function () { reject(transaction.error || new Error('Klarte ikkje lagre den lokale fila.')); };
+                transaction.onabort = function () { reject(transaction.error || new Error('Lagringa av den lokale fila blei avbroten.')); };
+                try {
+                    request = operation(transaction.objectStore(ASSET_STORE));
+                    if (request) {
+                        request.onsuccess = function () { result = request.result; };
+                        request.onerror = function () { reject(request.error || new Error('Klarte ikkje lese den lokale fila.')); };
+                    }
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    function saveGameAsset(game, assetId, asset) {
+        if (!asset || !(asset.blob instanceof Blob)) return Promise.reject(new Error('Fila manglar data for biletet.'));
+        const record = {
+            key: String(game) + ':' + String(assetId),
+            game: String(game),
+            assetId: String(assetId),
+            blob: asset.blob,
+            name: String(asset.name || ''),
+            type: String(asset.type || asset.blob.type || ''),
+            size: asset.blob.size,
+            width: Number(asset.width) || 0,
+            height: Number(asset.height) || 0
+        };
+        return assetTransaction('readwrite', function (store) { return store.put(record); });
+    }
+
+    function getGameAsset(game, assetId) {
+        return assetTransaction('readonly', function (store) {
+            return store.get(String(game) + ':' + String(assetId));
+        });
+    }
+
+    function deleteGameAsset(game, assetId) {
+        return assetTransaction('readwrite', function (store) {
+            return store.delete(String(game) + ':' + String(assetId));
+        });
+    }
+
+    function getStoredAssetInfo() {
+        return assetTransaction('readonly', function (store) { return store.getAll(); }).then(function (records) {
+            return (records || []).map(function (record) {
+                return { game: record.game, assetId: record.assetId, name: record.name, type: record.type, size: record.size };
+            });
+        });
+    }
+
+    function clearGameAssets(game) {
+        return assetTransaction('readwrite', function (store) {
+            const request = store.getAll();
+            request.addEventListener('success', function () {
+                request.result.forEach(function (record) {
+                    if (record.game === String(game)) store.delete(record.key);
+                });
+            });
+            return request;
+        });
+    }
+
+    function clearAllAssets() {
+        if (!window.indexedDB) return Promise.resolve();
+        return assetTransaction('readwrite', function (store) { return store.clear(); });
     }
     
     function migrateOldKey(oldKey) {
@@ -212,10 +312,12 @@ const VyrdepilStorage = (function() {
         const data = getData();
         delete data[game];
         setData(data);
+        clearGameAssets(game).catch(function () {});
     }
     
     function clearAll() {
         localStorage.removeItem(ROOT_KEY);
+        return clearAllAssets();
     }
     
     return {
@@ -238,6 +340,10 @@ const VyrdepilStorage = (function() {
         setCollection,
         getAllCollections,
         clearCollection,
+        saveGameAsset,
+        getGameAsset,
+        deleteGameAsset,
+        getStoredAssetInfo,
         clearGame,
         clearAll
     };
