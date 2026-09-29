@@ -19,7 +19,6 @@
     guesses: [],
     current: '',
     status: 'playing',
-    showingAnswer: false,
     busy: false,       // sann medan rutene snur
     heroHidden: false,
     yearOver: false    // årgangen er brukt opp; då finst det ingen «i dag»
@@ -61,7 +60,7 @@
   function updateHeader() {
     const isToday = !state.yearOver && state.dayIndex === state.todayIndex;
     const selectedDate = S.dateForIndex(state.dayIndex);
-    el.gameTitle.textContent = state.showingAnswer ? 'Fasitordet' : 'Gjett dagens ord';
+    el.gameTitle.textContent = isToday ? 'Gjett dagens ord' : 'Gjett ordet';
     el.dayNum.textContent = `Dag ${state.dayIndex + 1}`;
     el.dayNum.classList.toggle('dd-daynum-archive', !isToday);
     el.dayDate.textContent = isToday
@@ -69,8 +68,17 @@
       : S.formatDate(S.dateForIndex(state.dayIndex));
     el.todayDate.textContent = S.formatLongDate(selectedDate);
     el.todayDate.dateTime = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
-    el.yesterdayLabel.textContent = isToday ? 'Sjå kva det var i går' : 'Sjå kva det var dagen før';
-    el.yesterdayBtn.hidden = state.dayIndex <= 0;
+    const previousIndex = state.dayIndex - 1;
+    el.yesterdayBtn.hidden = previousIndex < 0 || previousIndex >= S.wordCount();
+    if (!el.yesterdayBtn.hidden) {
+      const previousLabel = isToday
+        ? 'i går'
+        : S.formatLongDate(S.dateForIndex(previousIndex)).replace(/ \d{4}$/, '').replace(/^./, ch => ch.toLocaleLowerCase('nn'));
+      el.yesterdayLabel.textContent = previousLabel;
+      const accessibleLabel = `Prøv ordet frå ${previousLabel}`;
+      el.yesterdayBtn.setAttribute('aria-label', accessibleLabel);
+      el.yesterdayBtn.title = accessibleLabel;
+    }
 
     // Arkivet opnar seg fyrst når dagens ord er ferdigspelt. Er årgangen omme,
     // finst det ikkje noko dagens ord å vente på, og arkivet er alltid ope.
@@ -86,9 +94,7 @@
 
   function updateFootnote() {
     const total = S.wordCount();
-    if (state.showingAnswer) {
-      el.footnote.textContent = `Ordet var «${state.answer}».`;
-    } else if (!state.yearOver && state.dayIndex === state.todayIndex) {
+    if (!state.yearOver && state.dayIndex === state.todayIndex) {
       el.footnote.textContent = `Dag ${state.dayIndex + 1} av ${total} i den fyrste årgangen.`;
     } else {
       el.footnote.textContent = 'Du speler ein tidlegare dag.';
@@ -96,10 +102,9 @@
   }
 
   function repaint() {
-    const visibleGuesses = state.showingAnswer ? [state.answer] : state.guesses;
-    Board.render(visibleGuesses, state.showingAnswer ? '' : state.current, state.answer);
-    Keyboard.paint(S.letterStates(visibleGuesses, state.answer));
-    el.keyboard.hidden = state.showingAnswer;
+    Board.render(state.guesses, state.current, state.answer);
+    Keyboard.paint(S.letterStates(state.guesses, state.answer));
+    el.keyboard.hidden = false;
     updateHeader();
     updateFootnote();
   }
@@ -111,7 +116,6 @@
     const saved = Store.getDay(index);
     state.guesses = saved ? saved.guesses.slice() : [];
     state.status = saved ? saved.status : 'playing';
-    state.showingAnswer = false;
     state.current = '';
     state.busy = false;
 
@@ -121,7 +125,7 @@
     if (state.status === 'won') {
       say(`Du fann ordet på ${state.guesses.length}.`, true);
     } else if (state.status === 'lost') {
-      say(`Ordet var «${state.answer}».`, true);
+      say(state.dayIndex === state.todayIndex ? `Ordet var «${state.answer}».` : 'Du brukte alle seks forsøka.', true);
     } else if (state.guesses.length) {
       hideHero();
     }
@@ -184,7 +188,7 @@
         Board.bounce(rowIndex);
         say(`Du fann ordet på ${state.guesses.length}.`, true);
       } else if (done) {
-        say(`Ordet var «${state.answer}».`, true);
+        say(state.dayIndex === state.todayIndex ? `Ordet var «${state.answer}».` : 'Du brukte alle seks forsøka.', true);
       }
 
       if (done) {
@@ -201,7 +205,7 @@
       ? { status: state.status, guesses: state.guesses.length }
       : null;
     Stats.render(state.todayIndex, last);
-    el.shareWrap.hidden = state.showingAnswer || state.status === 'playing';
+    el.shareWrap.hidden = state.status === 'playing';
     openModal(el.statsOverlay);
   }
 
@@ -213,23 +217,6 @@
       openDay(index);
     });
     openModal(el.archiveOverlay);
-  }
-
-  /** Vis eit tidlegare fasitord i brettet utan å starte eller lagre eit gjett. */
-  function showPastAnswer(index) {
-    if (index < 0 || index >= S.wordCount()) return;
-    state.dayIndex = index;
-    state.answer = S.wordForIndex(index);
-    state.guesses = [];
-    state.current = '';
-    state.status = 'revealed';
-    state.showingAnswer = true;
-    state.busy = false;
-    hideHero();
-    hideNotice();
-    repaint();
-    say('');
-    el.shareWrap.hidden = true;
   }
 
   // ── oppstart ─────────────────────────────────────────────────────────────
@@ -309,7 +296,11 @@
     el.statsBtn.addEventListener('click', showStats);
     el.archiveBtn.addEventListener('click', showArchive);
     el.yesterdayBtn.addEventListener('click', () => {
-      showPastAnswer(state.dayIndex - 1);
+      const previousIndex = state.dayIndex - 1;
+      if (previousIndex < 0 || previousIndex >= S.wordCount()) return;
+      hideHero();
+      hideNotice();
+      openDay(previousIndex);
     });
     el.shareBtn.addEventListener('click', () => {
       const text = Stats.shareText(state.dayIndex + 1, state.guesses, state.answer, state.status);

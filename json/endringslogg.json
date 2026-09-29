@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.58",
+      "dato": "2026-09-29",
+      "samandrag": "Tidlegare Duldord-oppgåver kan spelast utan å vise løysingsordet.",
+      "punkt": [
+        {
+          "t": "fiksa",
+          "kva": "Duldord",
+          "tekst": "Knappen opnar ei spelbar dagsoppgåve, viser «i går» fyrst og deretter datoen ein går til. Løysingsordet blir ikkje vist når ein blar gjennom tidlegare dagar, og ein kan gå heilt tilbake til starten."
+        }
+      ]
+    },
+    {
       "versjon": "1.57",
       "dato": "2026-09-28",
       "samandrag": "Duldord har fått den nye felles Vyrdepil-stilen og tydelegare tilgang til dagsorda.",

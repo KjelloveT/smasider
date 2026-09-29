@@ -8,6 +8,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ### Endra
 - **Duldord følgjer no den nye Vyrdepil-designretninga.** Spelet har fått felles toppmeny, Vyrde-maskot, app-logo, Sykkelsti-bakgrunn, trepanel og infoskilt. Datoen står tydeleg på spelbrettet, og knappen for tidlegare ord viser fasiten og kan bla heilt tilbake til starten. Spelreglane og bokstavstatusane er vidareførte.
 
+## [1.58] — 2026-09-29
+
+### Fiksa
+- **Duldord røper ikkje tidlegare løysingsord når ein blar bakover.** Knappen opnar no ei spelbar dagsoppgåve, viser «i går» fyrst og deretter datoen ein går til. Ein kan bla heilt tilbake til starten.
+
 ## [1.56] — 2026-09-21
 
 ### Lagt til
