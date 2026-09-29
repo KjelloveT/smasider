@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.60",
+      "dato": "2026-09-29",
+      "samandrag": "Framsida har fått den same Vyrdepil-designretninga som appane.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Framsida",
+          "tekst": "Skyheader, stein-Vyrde, fast byparklandskap og Måla flater-logoar frå den eksisterande appkatalogen."
+        }
+      ]
+    },
+    {
       "versjon": "1.59",
       "dato": "2026-09-29",
       "samandrag": "Vegamot er nytt, og dei synlege appane deler no ei samla Vyrdepil-designretning.",

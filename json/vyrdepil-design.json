@@ -7,6 +7,9 @@
     "stableAcrossLoads": true,
     "releaseRemovedAppsAutomatically": false
   },
+  "home": {
+    "backgroundId": "bypark-sommar-dag"
+  },
   "logo": {
     "style": "mala",
     "name": "Måla flater",

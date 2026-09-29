@@ -19,6 +19,9 @@ function validate(registry, manifest) {
       owners.add(background.assignedTo);
     }
   }
+  if (!registry.home?.backgroundId) throw new Error('Framsida manglar fast bakgrunn.');
+  const homeBackground = registry.backgrounds.find(item => item.id === registry.home.backgroundId);
+  if (!homeBackground || homeBackground.assignedTo) throw new Error(`Ugyldig reservasjon for framsida: ${registry.home.backgroundId}`);
   for (const [appId, assignment] of Object.entries(registry.apps)) {
     const background = registry.backgrounds.find(item => item.id === assignment.backgroundId);
     if (!background || background.assignedTo !== appId) throw new Error(`Ugyldig reservasjon: ${appId}`);
@@ -29,11 +32,12 @@ function validate(registry, manifest) {
   for (const file of Object.values(registry.logo.files)) {
     if (!fs.existsSync(path.join(root, file))) throw new Error(`Manglar logo: ${file}`);
   }
-  return { backgrounds: ids.size, assigned: owners.size, available: ids.size - owners.size, catalogued: appIds.size };
+  const homeReserved = 1;
+  return { backgrounds: ids.size, assigned: owners.size, homeReserved, available: ids.size - owners.size - homeReserved, catalogued: appIds.size };
 }
 function assign(registry, appIds) {
   const missing = appIds.filter(id => !registry.apps[id]);
-  const available = registry.backgrounds.filter(item => !item.assignedTo);
+  const available = registry.backgrounds.filter(item => !item.assignedTo && item.id !== registry.home?.backgroundId);
   if (missing.length > available.length) throw new Error('Ingen ledige bakgrunnar. Utvid banken før du legg til fleire appar.');
   for (const appId of missing) {
     const index = randomInt(available.length);
@@ -59,6 +63,7 @@ function main() {
       version: 1, updated: '2026-09-28',
       appCatalog: 'json/apps.json',
       policy: { allocation: 'random-unused-on-creation', stableAcrossLoads: true, releaseRemovedAppsAutomatically: false },
+      home: { backgroundId: 'bypark-sommar-dag' },
       logo: { style: 'mala', name: 'Måla flater', files: Object.fromEntries(bank.outputs.filter(item => item.kind === 'logo' && item.variant === 'mala').map(item => [item.subject, item.file])) },
       scenes: bank.scenes.map(({ id, name }) => ({ id, name })),
       seasons: bank.seasons, times: bank.times,

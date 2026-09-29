@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.60] — 2026-09-29
+
+### Endra
+- **Framsida følgjer no Vyrdepil si nye designretning.** Ho bruker skyheader, stein-Vyrde, fast byparklandskap og dei same Måla flater-logoane som appmenyen. Appane kjem framleis frå den eksisterande `json/apps.json`-katalogen.
+
 ## [1.59] — 2026-09-29
 
 ### Lagt til

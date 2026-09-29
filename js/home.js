@@ -31,15 +31,21 @@
     return null;
   }
 
-  function card(app) {
+  function card(app, logos) {
     const el = document.createElement(app.disabled ? 'div' : 'a');
-    el.className = 'card' + (app.disabled ? ' disabled' : '');
+    el.className = 'card vp-home-app' + (app.disabled ? ' disabled' : '');
     if (!app.disabled && app.href) el.href = app.href;
 
-    if (app.img) {
+    const logo = logos[app.id] || app.img;
+    if (logo) {
       const img = document.createElement('img');
-      img.src = app.img;
-      img.alt = app.name;
+      img.src = logo;
+      img.alt = '';
+      img.width = 160;
+      img.height = 160;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.className = 'vp-home-app-logo';
       el.appendChild(img);
     } else if (app.icon) {
       const span = document.createElement('span');
@@ -80,11 +86,17 @@
     return el;
   }
 
-  fetch('json/apps.json')
-    .then(r => r.json())
-    .then(data => {
+  Promise.all([
+    fetch('json/apps.json').then(response => {
+      if (!response.ok) throw new Error('Appkatalogen kunne ikkje lastast');
+      return response.json();
+    }),
+    window.VyrdepilDesign ? window.VyrdepilDesign.loadRegistry() : Promise.resolve({ logo: { files: {} } })
+  ])
+    .then(([data, registry]) => {
       const host = document.getElementById('appSections');
       if (!host) return;
+      const logos = registry && registry.logo && registry.logo.files || {};
       (data.categories || []).forEach(cat => {
         /* hidden = appen finst framleis, men skal berre nåast med direktelenkje. */
         const apps = (data.apps || []).filter(a => a.cat === cat.id && !a.hidden);
@@ -116,7 +128,7 @@
         body.className = 'accordion-body';
         const grid = document.createElement('div');
         grid.className = 'card-grid';
-        apps.forEach(a => grid.appendChild(card(a)));
+        apps.forEach(a => grid.appendChild(card(a, logos)));
         body.appendChild(grid);
         sec.appendChild(body);
 

@@ -19,14 +19,14 @@ Utgåve 0.6 · 29. september 2026. Brukarvald retning for nye appar og redesign.
 
 ## Fast bakgrunn per app
 
-Registeret har `backgrounds[]` med `id`, scene, årstid, tid, fil, originalmål og `assignedTo`, og `apps[appId].backgroundId`. Begge sidene av reservasjonen må samsvare. Éi app har eitt bilete; eit bilete kan berre vere reservert til éi app. Appane blir identifiserte med ID-en frå den eksisterande appkatalogen.
+Registeret har `backgrounds[]` med `id`, scene, årstid, tid, fil, originalmål og `assignedTo`, og `apps[appId].backgroundId`. Begge sidene av appreservasjonen må samsvare. Éi app har eitt bilete; eit bilete kan berre vere reservert til éi app. Appane blir identifiserte med ID-en frå den eksisterande appkatalogen. Framsida har ei eiga, fast reservasjon i `home.backgroundId`; det biletet blir halde utanfor tilfeldig tildeling til appar.
 
 **Duldord:** `sykkelsti-sommar-kveld`. Dei andre katalogførte appane er tilfeldig fordelte, inkludert tre skjulte appar som får reservasjonar til seinare arbeid. Fordelinga blir ikkje trekt på nytt ved oppdatering eller sideinnlasting.
 
 Når ei ny app blir oppretta:
 
 1. Registrer appen i `json/apps.json`, eventuelt med `hidden: true` medan ho blir utvikla.
-2. Køyr `node designsystem/manage-backgrounds.cjs assign <app-id>`. Dette vel tilfeldig frå dei ledige bileta og lagrar reservasjonen. Eit eksisterande val blir bevart.
+2. Køyr `node designsystem/manage-backgrounds.cjs assign <app-id>`. Dette vel tilfeldig frå dei ledige bileta og lagrar reservasjonen. Eit eksisterande val blir bevart, og framsidebiletet er halde av.
 3. Køyr `node designsystem/manage-backgrounds.cjs check`. `assign-new` fordeler alle nye, ufordelte katalogoppføringar på same måte.
 4. Er banken full, utvid han og registrer nye ressursar. Ikkje gjenbruk eit reservert bilete som stillteiande reserveval. Sletting av ei app frigjev ikkje biletet automatisk.
 

@@ -6,11 +6,13 @@
   const project = new URL('../', script.src);
   const body = document.body;
   const appId = body.dataset.vpApp;
-  if (!appId) return;
+  const isHome = body.dataset.vpHome === 'true';
+  if (!appId && !isHome) return;
 
   const protectedApps = new Set(['heimsank', 'bolkestokk']);
   const preserveDesign = protectedApps.has(appId);
-  body.classList.add('vp-migrated-page');
+  if (isHome) body.classList.add('vp-home-page');
+  else body.classList.add('vp-migrated-page');
   if (preserveDesign) body.setAttribute('data-vp-preserve', '');
   if (!preserveDesign) {
     body.classList.add('vp-page');
@@ -51,7 +53,8 @@
   const main = semanticMain || document.getElementById('main');
   if (main) {
     if (!main.id) main.id = 'main';
-    main.classList.add('vp-migrated-main');
+    if (isHome) main.classList.add('vp-home-main');
+    else main.classList.add('vp-migrated-main');
     if (body.dataset.vpLayout === 'expanded') main.classList.add('vp-migrated-main--wide');
     if (body.dataset.vpLayout === 'canvas') main.classList.add('vp-migrated-main--canvas');
     const skip = document.createElement('a');
@@ -59,6 +62,21 @@
     skip.href = '#' + main.id;
     skip.textContent = 'Hopp til innhaldet';
     body.insertBefore(skip, menu);
+  }
+
+  if (isHome) {
+    (async () => {
+      try {
+        const registry = global.VyrdepilDesign && await global.VyrdepilDesign.loadRegistry();
+        const backgroundId = registry && registry.home && registry.home.backgroundId;
+        const background = registry && registry.backgrounds.find(item => item.id === backgroundId);
+        if (background) body.style.setProperty('--vp-landscape', `url("${new URL(background.file, project).href}")`);
+      } catch (error) {
+        console.error('Klarte ikkje laste landskapet til framsida:', error);
+      }
+      if (global.VyrdepilIcons && global.VyrdepilIcons.hydrateIcons) global.VyrdepilIcons.hydrateIcons(document);
+    })();
+    return;
   }
 
   function isVisible(element) {

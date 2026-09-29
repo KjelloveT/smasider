@@ -4,41 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vyrdepil - Spel og Verktøy for skulen</title>
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
-    <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="css/neobrutalisme.css">
-    <link rel="stylesheet" href="css/vyrde.css">
-    <link rel="stylesheet" href="css/home.css">
-    <script src="js/vyrde.js" defer></script>
-    <script src="js/neo-header.js" defer></script>
-    <script src="js/home.js" defer></script>
-    <script src="js/neobrutalisme.js"></script>
+    <link rel="icon" type="image/png" href="/_resources/vyrdepil-design/vyrde.png" sizes="any">
+    <link rel="apple-touch-icon" href="/_resources/vyrdepil-design/vyrde.png">
+    <link rel="stylesheet" href="css/vyrdepil-design.css?v=0.6">
+    <link rel="stylesheet" href="css/vyrdepil-migration.css?v=1">
+    <link rel="stylesheet" href="css/vyrdepil-home.css?v=1">
+    <script src="js/vyrdepil-icons.js" defer></script>
+    <script src="js/vyrdepil-util.js" defer></script>
+    <script src="js/vyrdepil-design.js?v=0.6" defer></script>
+    <script src="js/home.js?v=2" defer></script>
+    <script src="js/vyrdepil-app-shell.js?v=5" defer></script>
+    <script src="js/vyrdepil-menu.js?v=1" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
-<neo-header></neo-header>
+<body class="vp-page" data-vp-design data-vp-home="true">
 
-<div class="page-wrapper">
-    <main class="main-content">
+    <main id="main" class="vp-shell vp-home-main">
 
-        <div class="box2 hero-box hero-box-home">
-            <span class="vyrde hero-logo" data-vyrde-cycle data-vyrde-alt="Vyrde, maskoten til Vyrdepil — ei pil med andlet"></span>
-            <div class="hero-text">
-                <h1>Vyrdepil</h1>
-                <p>Spel og verktøy laga for grunnskulen — med personvern i fokus. Ingen sporing, ingen ekstern lagring. Alt skjer på di eiga maskin.</p>
+        <section class="vp-panel vp-panel--plain vp-home-hero" aria-labelledby="homeTitle">
+            <div class="vp-home-hero-copy">
+                <p class="vp-home-kicker">Spel, verktøy og skaparglede</p>
+                <h1 id="homeTitle" class="vp-title">Vyrdepil</h1>
+                <p class="vp-prose">Spel og verktøy laga for grunnskulen, med personvern i fokus. Alt skjer på di eiga maskin.</p>
+                <a class="vp-button vp-button--primary" href="#appSections"><span data-icon="compass" aria-hidden="true"></span>Finn eit spel eller verktøy</a>
             </div>
-            <aside class="postit hero-postit" aria-label="Om denne versjonen">
-                <p class="postit-title">Versjon 1.59</p>
-                <p><strong>Vyrdepil har fått ei samla designretning.</strong> Dei synlege appane har fått nye måla logoar, felles navigasjon og faste norske landskap. Vegamot er no eit nytt verktøy for interaktive forteljingar. <a href="vegamot/index.html" class="postit-lenke">Opne Vegamot →</a></p>
-                <p><a href="endringar.html" class="postit-lenke">Sjå alle endringar →</a></p>
+            <img class="vp-home-mascot" src="_resources/vyrdepil-design/vyrde.png" width="192" height="192" alt="Stein-Vyrde, maskoten til Vyrdepil" fetchpriority="high">
+            <aside class="vp-panel vp-panel--wood vp-home-note" aria-label="Om denne versjonen">
+                <p class="vp-home-kicker">Versjon 1.60</p>
+                <p><strong>Framsida følgjer no den nye designretninga.</strong> Appane har fått måla logoar, felles navigasjon og faste norske landskap. Vegamot er eit nytt verktøy for interaktive forteljingar.</p>
+                <p><a href="vegamot/index.html">Opne Vegamot <span aria-hidden="true">→</span></a></p>
+                <p><a href="endringar.html">Sjå alle endringar <span aria-hidden="true">→</span></a></p>
             </aside>
-        </div>
+        </section>
 
         <!-- Spel, aktivitetar og verktøy byggjast frå json/apps.json av js/home.js -->
         <div id="appSections"></div>
 
-        <h2 class="heading2"><svg width="28" height="28" style="vertical-align: -5px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Personvern</h2>
-        <div class="box2">
+        <h2 class="vp-heading vp-home-section-heading"><span data-icon="shield" aria-hidden="true"></span> Personvern</h2>
+        <section class="vp-panel vp-panel--plain vp-home-policy">
             <div class="privacy-header">
                 <span class="privacy-hicon"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3 8-8 8s-8-3-8-8V6l8-3 8 3z"/></svg></span>
                 <h2 class="privacy-htitle">Personvern og datasikkerheit</h2>
@@ -89,11 +91,11 @@
                     </a>
                 </p>
             </div>
-        </div>
+        </section>
 
 
-        <h2 class="heading2"><svg width="28" height="28" style="vertical-align: -5px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.6 9.9a2.6 2.6 0 1 0 0 4.2"/><path d="M15.4 9.9a2.6 2.6 0 1 0 0 4.2"/></svg> Lisens</h2>
-        <div class="box2">
+        <h2 class="vp-heading vp-home-section-heading"><span data-icon="info" aria-hidden="true"></span> Lisens</h2>
+        <section class="vp-panel vp-panel--plain vp-home-policy">
             <div class="privacy-header">
                 <span class="privacy-hicon"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.6 9.9a2.6 2.6 0 1 0 0 4.2"/><path d="M15.4 9.9a2.6 2.6 0 1 0 0 4.2"/></svg></span>
                 <h2 class="privacy-htitle">Du har lov til å bruke alt saman</h2>
@@ -117,13 +119,12 @@
                     </a>
                 </p>
             </div>
-        </div>
+        </section>
 
 </main>
-</div>
 
-<footer class="site-footer">
-    <p><svg width="16" height="16" style="vertical-align:-2px;margin-right:4px;" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>Laga for grunnskulen — open kjeldekode, ingen sporing. Nettsida er it hobbyprosjekt og er laga og drifta av Kjellove Bjørge. Det er ingen garantiar for oppetid, og endringar kan forekomme utan forhåndsvarsel.</p>
+<footer class="vp-home-footer">
+    <p>Laga for grunnskulen — open kjeldekode, ingen sporing. Nettsida er eit hobbyprosjekt laga og drifta av Kjellove Bjørge. Det er ingen garantiar for oppetid, og endringar kan kome utan førehandsvarsel.</p>
     <p class="footer-links"><a href="endringar.html">Endringar</a> · <a href="personvern.html">Personvernerklæring</a> · <a href="lisens.html">Lisens</a></p>
 </footer>
 

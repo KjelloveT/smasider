@@ -1,0 +1,148 @@
+body.vp-home-page {
+  min-height: 100vh;
+  overflow-x: clip;
+  background: #d6e8f1 var(--vp-landscape) center top / cover fixed no-repeat;
+}
+
+.vp-home-main {
+  display: grid;
+  gap: clamp(18px, 2.5vw, 28px);
+  padding-block: clamp(18px, 3vw, 38px) 52px;
+}
+
+.vp-home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(120px, 16vw, 190px) minmax(220px, .78fr);
+  align-items: center;
+  gap: clamp(16px, 2.4vw, 30px);
+  min-height: 250px;
+  overflow: hidden;
+  background-color: var(--vp-wood);
+  background-image: url('../_resources/vyrdepil-design/wood-contours.png');
+  background-position: center;
+  background-size: max(100%, 1536px) auto;
+}
+
+.vp-home-hero-copy { min-width: 0; }
+.vp-home-kicker { margin-bottom: 8px; font-size: .8rem; font-weight: 850; letter-spacing: .06em; text-transform: uppercase; }
+.vp-home-hero .vp-title { margin-bottom: 12px; font-size: clamp(2.4rem, 6vw, 4rem); }
+.vp-home-hero-copy > p:not(.vp-home-kicker) { margin-bottom: 20px; }
+.vp-home-mascot { display: block; width: 100%; max-height: 200px; object-fit: contain; }
+.vp-home-note { padding: 20px; background-position: center; background-size: max(100%, 760px) auto; }
+.vp-home-note p:last-child { margin-bottom: 0; }
+.vp-home-note a { font-weight: 750; }
+
+#appSections { display: grid; gap: 18px; }
+#appSections[aria-busy="true"] { min-height: 120px; }
+.vp-home-main .section-accordion {
+  overflow: clip;
+  border: 4px solid var(--vp-frame);
+  border-radius: 10px;
+  background: var(--vp-wood);
+  color: var(--vp-ink);
+}
+.vp-home-main .section-accordion > summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 72px;
+  padding: 14px 20px;
+  background: var(--vp-wood);
+  cursor: pointer;
+  list-style: none;
+}
+.vp-home-main .section-accordion > summary::-webkit-details-marker { display: none; }
+.vp-home-main .section-accordion > summary::after { content: '+'; margin-left: 4px; font-size: 1.5rem; font-weight: 800; }
+.vp-home-main .section-accordion[open] > summary::after { content: '−'; }
+.vp-home-main .section-accordion > summary:hover,
+.vp-home-main .section-accordion > summary:focus-visible,
+.vp-home-main .section-accordion[open] > summary { background: var(--vp-honey); }
+.vp-home-main .section-accordion > summary:focus-visible { box-shadow: inset 0 -4px 0 var(--vp-focus); outline: none; }
+.vp-home-main .section-accordion-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 7px; background: var(--vp-honey); }
+.vp-home-main .section-accordion-icon svg { width: 25px; height: 25px; }
+.vp-home-main .section-accordion-title { flex: 1 1 auto; min-width: 0; margin: 0; font-size: clamp(1.2rem, 2.2vw, 1.6rem); }
+.vp-home-main .section-accordion-count { display: grid; place-items: center; min-width: 34px; height: 34px; padding-inline: 8px; border: 2px solid var(--vp-frame); border-radius: 999px; background: var(--vp-paper); font-weight: 800; }
+.vp-home-main .accordion-body { padding: 0 20px 22px; }
+.vp-home-main .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 172px), 1fr)); gap: 14px; }
+.vp-home-main .vp-home-app {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  justify-items: center;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  min-height: 206px;
+  padding: 14px 12px 12px;
+  border: 3px solid var(--vp-frame);
+  border-radius: 9px;
+  background: var(--vp-paper);
+  box-shadow: 0 3px 0 var(--vp-shadow);
+  color: var(--vp-ink);
+  text-align: center;
+  text-decoration: none;
+  transition: transform .14s ease, background-color .14s ease;
+}
+.vp-home-main .vp-home-app:hover { transform: translateY(-2px); background: var(--vp-honey); }
+.vp-home-main .vp-home-app:focus-visible { outline: none; background: var(--vp-honey); box-shadow: inset 0 -4px 0 var(--vp-focus), 0 3px 0 var(--vp-shadow); }
+.vp-home-app-logo { display: block; width: clamp(86px, 9vw, 118px); height: clamp(86px, 9vw, 118px); object-fit: contain; }
+.vp-home-main .card-title { align-self: end; margin: 0; font-size: 1rem; font-weight: 850; }
+.vp-home-main .card-desc { margin: 0; font-size: .85rem; }
+.vp-home-main .card-btn,
+.vp-home-main .coming-tag { display: inline-flex; align-items: center; justify-content: center; min-height: 30px; font-size: .85rem; font-weight: 750; }
+.vp-home-main .card-flag { position: absolute; top: 8px; right: 8px; padding: 3px 8px; border: 2px solid var(--vp-frame); border-radius: 999px; background: var(--vp-moss); font-size: .72rem; font-weight: 800; }
+.vp-home-main .card-flag-broken { background: var(--vp-blush); }
+.vp-home-main .vp-home-app.disabled { background: var(--vp-stone); box-shadow: none; }
+
+.vp-home-section-heading { display: flex; align-items: center; gap: 10px; margin: 8px 0 -10px; }
+.vp-home-section-heading [data-icon] { display: inline-flex; }
+.vp-home-policy { background-color: var(--vp-paper); }
+.vp-home-policy :is(h3, h4) { margin: 1.5em 0 .55em; font-size: 1.15rem; }
+.vp-home-policy p, .vp-home-policy li { line-height: 1.65; }
+.vp-home-policy ul { padding-inline-start: 1.35em; }
+.vp-home-policy .privacy-header { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+.vp-home-policy .privacy-hicon { display: grid; place-items: center; flex: 0 0 54px; width: 54px; height: 54px; border-radius: 8px; background: var(--vp-moss); }
+.vp-home-policy .privacy-hicon svg { width: 32px; height: 32px; }
+.vp-home-policy .privacy-htitle { margin: 0; font-size: clamp(1.2rem, 2.3vw, 1.6rem); }
+.vp-home-policy .privacy-highlight { margin-block: 20px; padding: 16px; border: 2px solid var(--vp-frame); border-radius: 8px; background: var(--vp-honey); }
+.vp-home-policy .ai-marks { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px; }
+.vp-home-policy .ai-mark { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 12px; border: 2px solid var(--vp-frame); border-radius: 8px; background: var(--vp-wood); }
+.vp-home-policy .ai-mark-icon { flex: 0 0 auto; }
+.vp-home-policy .ai-mark-text { display: grid; gap: 3px; }
+.vp-home-policy .ai-mark-text span { font-size: .9rem; }
+.vp-home-policy .accordion-box { margin-block: 12px; border: 2px solid var(--vp-frame); border-radius: 8px; background: var(--vp-wood); }
+.vp-home-policy .accordion-box > summary { padding: 14px; font-weight: 800; cursor: pointer; }
+.vp-home-policy .accordion-body { padding: 2px 14px 14px; }
+.vp-home-policy .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 10px 16px; border: 2px solid var(--vp-frame); border-radius: 8px; background: var(--vp-wood); box-shadow: 0 3px 0 var(--vp-shadow); color: #000; font-weight: 750; }
+.vp-home-policy .btn-primary { background: var(--vp-coral); }
+.vp-home-footer { width: min(100% - 32px, 1200px); margin: 0 auto 24px; padding: 20px; border: 3px solid var(--vp-frame); border-radius: 9px; background: var(--vp-wood); text-align: center; }
+.vp-home-footer p { margin: 0 0 8px; }
+.vp-home-footer .footer-links { margin: 0; font-weight: 750; }
+
+@media (max-width: 820px) {
+  .vp-home-hero { grid-template-columns: minmax(0, 1fr) 120px; }
+  .vp-home-note { grid-column: 1 / -1; }
+  .vp-home-main .card-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 148px), 1fr)); }
+}
+
+@media (max-width: 520px) {
+  .vp-home-main { width: calc(100% - 16px); gap: 14px; }
+  .vp-home-hero { grid-template-columns: minmax(0, 1fr) 74px; gap: 10px; padding: 16px; }
+  .vp-home-mascot { max-height: 110px; }
+  .vp-home-hero .vp-button { grid-column: 1 / -1; width: 100%; }
+  .vp-home-note { grid-column: 1 / -1; padding: 14px; }
+  .vp-home-main .section-accordion { border-width: 3px; }
+  .vp-home-main .section-accordion > summary { gap: 8px; min-height: 62px; padding: 10px; }
+  .vp-home-main .section-accordion-icon { width: 34px; height: 34px; }
+  .vp-home-main .accordion-body { padding: 0 10px 14px; }
+  .vp-home-main .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+  .vp-home-main .vp-home-app { min-height: 168px; padding: 10px 8px; }
+  .vp-home-app-logo { width: 78px; height: 78px; }
+  .vp-home-policy { padding: 16px; }
+  .vp-home-policy .privacy-header { align-items: flex-start; }
+  .vp-home-footer { width: calc(100% - 16px); padding: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vp-home-main .vp-home-app { transition: none; }
+}
