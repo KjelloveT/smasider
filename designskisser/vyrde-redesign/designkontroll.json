@@ -1,19 +1,23 @@
 {
-  "date": "2026-09-28",
-  "reason": "Statisk kjeldegjennomgang av katalogførte appar og ukatalogførte inngangar. Duldord er fyrste pilot; resten blir migrerte puljevis.",
-  "method": "Static source inspection; not a functional browser or full privacy/security audit",
+  "date": "2026-09-29",
+  "reason": "Redesignstatus etter at det felles Vyrdepil-designet, framsida, Duldord, Vegamot og alle synlege appflater vart lagde inn i same preview-PR.",
+  "method": "Static source inventory plus browser preview route smoke-check for all 29 visible apps. Checked shared header/menu, route load, registered logo/background, and layout marker. Not a full interaction, mobile, privacy, or accessibility audit.",
   "scope": {
-    "catalogued": 31,
-    "visible": 28,
+    "catalogued": 32,
+    "visible": 29,
     "hidden": 3
   },
   "home": {
     "entry": "index.html",
-    "status": "awaiting-design-migration"
+    "status": "redesigned-preview-smoke-tested",
+    "backgroundId": "bypark-sommar-dag"
   },
   "sharedNavigation": {
-    "entry": "js/neo-header.js",
-    "status": "awaiting-design-migration"
+    "entry": "js/vyrdepil-app-shell.js",
+    "status": "migrated-preview-smoke-tested",
+    "menu": "js/vyrdepil-menu.js",
+    "catalog": "json/apps.json",
+    "visibleAppLinks": 29
   },
   "apps": [
     {
@@ -26,10 +30,14 @@
         "css/style.css?v=3"
       ],
       "newSharedCss": true,
+      "runtimeAppShell": false,
       "newDesignMarker": true,
-      "legacyHeader": false,
+      "legacyHeaderMarkup": false,
+      "layout": "standard",
+      "migration": "native-new-design",
+      "logoFile": "_resources/vyrdepil-design/logos/duldord-mala.png",
       "backgroundId": "sykkelsti-sommar-kveld",
-      "status": "migrated-pilot"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "vidfaren",
@@ -38,13 +46,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "standard",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/vidfaren-mala.png",
       "backgroundId": "fjorestein-sommar-natt",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "heimsank",
@@ -57,13 +71,19 @@
         "css/setup.css",
         "css/cards.css?v=1.52.2",
         "css/game.css",
-        "css/dialogs.css"
+        "css/dialogs.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
       "newDesignMarker": false,
-      "legacyHeader": true,
+      "legacyHeaderMarkup": true,
+      "layout": "standard",
+      "migration": "navigation-only-preserved-content",
+      "logoFile": "_resources/vyrdepil-design/logos/heimsank-mala.png",
       "backgroundId": "sykkelsti-vinter-kveld",
-      "status": "preserve-app-expression-migrate-navigation"
+      "status": "navigation-migrated-content-preserved"
     },
     {
       "id": "reknedaesj",
@@ -71,25 +91,38 @@
       "hidden": false,
       "entryExists": true,
       "stylesheets": [
-        "../css/neobrutalisme.css"
+        "../css/neobrutalisme.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "canvas",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/reknedaesj-mala.png",
       "backgroundId": "fjord-vinter-morgon",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "rettslause_raud",
       "entry": "rettslause_raud/index.html",
       "hidden": false,
       "entryExists": true,
-      "stylesheets": [],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": false,
+      "stylesheets": [
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
+      ],
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": false,
+      "layout": "canvas",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/rettslause-raad-mala.png",
       "backgroundId": "hogfjell-vinter-dag",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "kludre_klodrian",
@@ -97,13 +130,19 @@
       "hidden": false,
       "entryExists": true,
       "stylesheets": [
-        "../css/neobrutalisme.css"
+        "../css/neobrutalisme.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "canvas",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/kludre-klodrian-mala.png",
       "backgroundId": "hogfjell-var-natt",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "baretevling",
@@ -112,13 +151,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "standard",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/baretevling-mala.png",
       "backgroundId": "hogfjell-vinter-morgon",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "frodebrett",
@@ -127,13 +172,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/frodebrett-mala.png",
       "backgroundId": "vidde-haust-kveld",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "ordaklok",
@@ -143,13 +194,19 @@
       "stylesheets": [
         "../css/neobrutalisme.css",
         "../css/vyrde.css",
-        "css/boksekamp.css"
+        "css/boksekamp.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/ordaklok-mala.png",
       "backgroundId": "bygate-haust-kveld",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "tidvis",
@@ -158,13 +215,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css?v=6"
+        "css/style.css?v=7",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/tidvis-mala.png",
       "backgroundId": "bypark-sommar-natt",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "heite_stavrim",
@@ -173,13 +236,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/heite-stavrim-mala.png",
       "backgroundId": "myr-haust-morgon",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "ordsmia",
@@ -188,13 +257,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/ordsmia-mala.png",
       "backgroundId": "fjorestein-sommar-kveld",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "talsmia",
@@ -203,13 +278,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/talsmia-mala.png",
       "backgroundId": "vidde-sommar-kveld",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "etikk-test",
@@ -221,8 +302,12 @@
         "etikk-test.css"
       ],
       "newSharedCss": false,
+      "runtimeAppShell": false,
       "newDesignMarker": false,
-      "legacyHeader": true,
+      "legacyHeaderMarkup": true,
+      "layout": "canvas-or-standard-from-existing-page",
+      "migration": "deferred-hidden",
+      "logoFile": null,
       "backgroundId": "fjord-sommar-morgon",
       "status": "deferred-hidden"
     },
@@ -233,13 +318,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/frodekapp-mala.png",
       "backgroundId": "myr-vinter-natt",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "bolkestokk",
@@ -248,13 +339,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/landing.css?v=28"
+        "css/landing.css?v=28",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
       "newDesignMarker": false,
-      "legacyHeader": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "navigation-only-preserved-content",
+      "logoFile": "_resources/vyrdepil-design/logos/bolkestokk-mala.png",
       "backgroundId": "bypark-var-kveld",
-      "status": "preserve-app-expression-migrate-navigation"
+      "status": "navigation-migrated-content-preserved"
     },
     {
       "id": "ormritaren",
@@ -263,13 +360,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/landing.css?v=12"
+        "css/landing.css?v=12",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/ormritaren-mala.png",
       "backgroundId": "bygate-haust-natt",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "bildebehandling",
@@ -278,13 +381,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/bildebehandling-mala.png",
       "backgroundId": "vidde-haust-morgon",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "biletflett",
@@ -293,13 +402,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/biletflett-mala.png",
       "backgroundId": "vidde-var-kveld",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "lydskurd",
@@ -308,13 +423,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/lydskurd-mala.png",
       "backgroundId": "sykkelsti-haust-kveld",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "ljodbanken",
@@ -326,8 +447,12 @@
         "css/style.css"
       ],
       "newSharedCss": false,
+      "runtimeAppShell": false,
       "newDesignMarker": false,
-      "legacyHeader": true,
+      "legacyHeaderMarkup": true,
+      "layout": "canvas-or-standard-from-existing-page",
+      "migration": "deferred-hidden",
+      "logoFile": null,
       "backgroundId": "bygate-var-morgon",
       "status": "deferred-hidden"
     },
@@ -338,13 +463,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/rissverk-mala.png",
       "backgroundId": "klippe-sommar-dag",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "klassekart",
@@ -353,13 +484,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/klassekart.css"
+        "css/klassekart.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/klassekart-mala.png",
       "backgroundId": "vidde-vinter-natt",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "flokkdeilar",
@@ -368,13 +505,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/flokkdeilar-mala.png",
       "backgroundId": "myr-var-kveld",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "eikekveik",
@@ -383,13 +526,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/eikekveik-mala.png",
       "backgroundId": "bypark-vinter-natt",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "ordskodde",
@@ -398,13 +547,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/ordskodde-mala.png",
       "backgroundId": "klippe-haust-dag",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "ordkryss",
@@ -413,13 +568,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/ordkryss-mala.png",
       "backgroundId": "sykkelsti-haust-natt",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "leitekryss",
@@ -428,13 +589,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/leitekryss-mala.png",
       "backgroundId": "fjord-vinter-natt",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "vitjingsruta",
@@ -443,13 +610,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/vitjingsruta-mala.png",
       "backgroundId": "sykkelsti-var-natt",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "dagsvegen",
@@ -458,13 +631,19 @@
       "entryExists": true,
       "stylesheets": [
         "../css/neobrutalisme.css",
-        "css/style.css"
+        "css/style.css",
+        "../css/vyrdepil-design.css?v=0.6",
+        "../css/vyrdepil-migration.css?v=11"
       ],
-      "newSharedCss": false,
-      "newDesignMarker": false,
-      "legacyHeader": true,
+      "newSharedCss": true,
+      "runtimeAppShell": true,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": true,
+      "layout": "expanded",
+      "migration": "shared-shell-with-preserved-app-functionality",
+      "logoFile": "_resources/vyrdepil-design/logos/dagsvegen-mala.png",
       "backgroundId": "klippe-haust-natt",
-      "status": "awaiting-design-migration"
+      "status": "migrated-preview-route-smoke-tested"
     },
     {
       "id": "gdpr",
@@ -476,10 +655,33 @@
         "css/style.css"
       ],
       "newSharedCss": false,
+      "runtimeAppShell": false,
       "newDesignMarker": false,
-      "legacyHeader": true,
+      "legacyHeaderMarkup": true,
+      "layout": "canvas-or-standard-from-existing-page",
+      "migration": "deferred-hidden",
+      "logoFile": null,
       "backgroundId": "hogfjell-var-kveld",
       "status": "deferred-hidden"
+    },
+    {
+      "id": "vegamot",
+      "entry": "vegamot/index.html",
+      "hidden": false,
+      "entryExists": true,
+      "stylesheets": [
+        "../css/vyrdepil-design.css?v=0.6",
+        "css/style.css?v=1"
+      ],
+      "newSharedCss": true,
+      "runtimeAppShell": false,
+      "newDesignMarker": true,
+      "legacyHeaderMarkup": false,
+      "layout": "expanded",
+      "migration": "native-new-design",
+      "logoFile": "_resources/vyrdepil-design/logos/vegamot-mala.png",
+      "backgroundId": "bypark-haust-kveld",
+      "status": "migrated-preview-route-smoke-tested"
     }
   ],
   "otherEntrances": [
