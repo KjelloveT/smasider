@@ -74,13 +74,14 @@ Hjørne: maks 160 px, 18 px ut frå kanten, opasitet 0,55. Fire ulike motiv per 
 
 Editorar, tabellar, små felt, spelkontrollar og tette lister har reine flater utan ornament/stolper. Gje dekor etter funksjon; ikkje pynt kvar undergruppe.
 
-## Tre sideoppsett
+## Sideoppsett
 
 | Oppsett | Bruk og struktur |
 |---|---|
 | Standard | `main.vp-shell` → `vp-standard`. `vp-hero-stage` og Vyrde over `vp-standard-main` og `vp-standard-support`; 1200 px totalbreidd og 700 px heroskilt. App-logo har eige felt i hero. Mobil: hero, hovudinnhald, støtteskilt; ekstra hjelp/val i trekkspel. Viktige startval og handlingar må vere synlege. |
 | Utvida verktøy | `main.vp-shell.vp-shell--wide`. Intro i `vp-app-intro` (maks 1100 px), stor logo til venstre inni `vp-app-intro-board`, Vyrde utanfor til høgre. `vp-toolbar` og `vp-editor` med arbeidsflate og valfrie sidepanel. Berre arbeidsflata/verktøyrada får full breidd; sidemenyar foldast på mobil. |
 | Canvas-spel | Same avgrensa `vp-app-intro`, med logo og Vyrde. `vp-game-frame`, `vp-game-stage`, canvas og HTML-status. Behald spelmotoren sitt sideforhold og eigne funksjonsfargar. Intro kan forsvinne under spel. Berøringskontrollar og viktige handlingar står synleg. |
+| Informasjonssider | `body.vp-site-page` med felles skyheader og appmeny. Bruk `main.vp-shell.vp-site-main.vp-policy-page`, lyse `vp-panel`-flater og `vp-policy-heading`-skilt med kotemønster i full storleik. Tabellar brukar `vp-data-table` og kan rulle vassrett på små skjermar. Behald juridisk tekst, handlingar og skript-ID-ar når utsjånaden blir endra. |
 
 ## Startstruktur for ei ny app
 
@@ -106,6 +107,8 @@ Editorar, tabellar, små felt, spelkontrollar og tette lister har reine flater u
 ```
 
 `data-vp-app` bruker app-ID-en i JSON og lastar den reserverte bakgrunnen automatisk. Ei applogo-`img` med `data-vp-app-logo` får den valde logoen dersom ho finst i registeret. CSS-ressursbaner er relative til CSS-fila; JS reknar filbaner frå si eiga plassering og fungerer òg på undersider. Ingen app skal lage si eiga kopi av paletten eller felleskomponentane. Utvid den felles fila når fleire appar treng same komponent.
+
+Sider som ikkje er appar, til dømes personvern og lisens, bruker `data-vp-site-page="true"` i staden for `data-vp-app`. Dei lastar same felles design-, ikon-, skal- og menymodular, men får det faste landskapet til framsida og får inga appreservasjon.
 
 ## Leveranse og kontroll
 

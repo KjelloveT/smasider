@@ -7,11 +7,13 @@
   const body = document.body;
   const appId = body.dataset.vpApp;
   const isHome = body.dataset.vpHome === 'true';
-  if (!appId && !isHome) return;
+  const isSitePage = body.dataset.vpSitePage === 'true';
+  if (!appId && !isHome && !isSitePage) return;
 
   const protectedApps = new Set(['heimsank']);
   const preserveDesign = protectedApps.has(appId) || body.hasAttribute('data-vp-preserve');
   if (isHome) body.classList.add('vp-home-page');
+  else if (isSitePage) body.classList.add('vp-site-page');
   else body.classList.add('vp-migrated-page');
   if (preserveDesign) body.setAttribute('data-vp-preserve', '');
   if (!preserveDesign) {
@@ -56,6 +58,7 @@
   if (main) {
     if (!main.id) main.id = 'main';
     if (isHome) main.classList.add('vp-home-main');
+    else if (isSitePage) main.classList.add('vp-site-main');
     else main.classList.add('vp-migrated-main');
     if (body.dataset.vpLayout === 'expanded') main.classList.add('vp-migrated-main--wide');
     if (body.dataset.vpLayout === 'canvas') main.classList.add('vp-migrated-main--canvas');
@@ -66,7 +69,7 @@
     body.insertBefore(skip, menu);
   }
 
-  if (isHome) {
+  if (isHome || isSitePage) {
     (async () => {
       try {
         const registry = global.VyrdepilDesign && await global.VyrdepilDesign.loadRegistry();

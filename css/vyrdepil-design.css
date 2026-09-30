@@ -356,3 +356,112 @@ textarea.vp-input { min-height: 110px; resize: vertical; }
 @media (forced-colors: active) {
   [data-vp-design] :is(button,input,select,textarea,summary,a):focus-visible { outline: 2px solid Highlight; outline-offset: 2px; }
 }
+
+/* Lov-, personvern- og andre infosider i den felles Vyrdepil-stilen. */
+.vp-site-page { min-height: 100vh; overflow-x: clip; }
+.vp-site-page .page-wrapper { display: contents; }
+.vp-site-main {
+  display: grid;
+  align-content: start;
+  gap: clamp(18px, 2.3vw, 28px);
+  padding-block: clamp(20px, 3vw, 40px) 64px;
+}
+.vp-policy-page { color: var(--vp-ink); }
+.vp-policy-title-card {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  margin-inline: auto;
+  padding: clamp(20px, 3vw, 34px);
+  box-shadow: 0 4px 0 var(--vp-shadow);
+}
+.vp-policy-title-card :is(h1,p) { margin: 0; }
+.vp-policy-title-card .vp-small { color: var(--vp-ink); }
+.vp-policy-panel {
+  width: 100%;
+  margin-inline: auto;
+  line-height: 1.65;
+}
+.vp-policy-panel > .privacy-body { max-width: none; }
+.vp-policy-panel :is(h3,h4) { margin-block: 1.5em .55em; }
+.vp-policy-panel h3 { font-size: clamp(1.08rem, 1.8vw, 1.25rem); }
+.vp-policy-panel h4 { font-size: 1.05rem; }
+.vp-policy-panel :is(p,ul,ol,blockquote,details,.vp-policy-marks) { max-width: 105ch; }
+.vp-policy-panel ul,.vp-policy-panel ol { padding-inline-start: 1.4em; }
+.vp-policy-heading {
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  max-width: 100%;
+  margin: 8px 0 -18px 16px;
+  padding: 10px 16px;
+  border: 2px solid var(--vp-frame);
+  border-radius: 8px;
+  background-color: var(--vp-wood);
+  background-image: url('../_resources/vyrdepil-design/wood-contours.png');
+  background-position: center;
+  background-size: max(100%,1536px) auto;
+  background-repeat: no-repeat;
+  background-clip: padding-box;
+  box-shadow: 0 3px 0 var(--vp-shadow);
+}
+.vp-policy-highlight {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-block: 18px;
+  padding: 14px 16px;
+  border: 2px solid var(--vp-frame);
+  border-radius: 8px;
+  background: var(--vp-honey);
+  color: var(--vp-ink);
+}
+.vp-policy-highlight > svg { flex: 0 0 20px; margin-top: 2px; }
+.vp-policy-marks { grid-template-columns: repeat(auto-fit,minmax(min(100%,220px),1fr)); gap: 12px; }
+.vp-policy-mark {
+  --vp-panel-fill: var(--vp-wood);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px;
+  border-width: 2px;
+}
+.vp-policy-mark :is(.info-mark-icon,.ai-mark-icon) { display: grid; place-items: center; flex: 0 0 auto; }
+.vp-policy-mark :is(.info-mark-text,.ai-mark-text) { display: grid; gap: 3px; min-width: 0; }
+.vp-policy-mark :is(.info-mark-text,.ai-mark-text) > span:last-child { font-size: .9rem; }
+.vp-data-table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 2px solid var(--vp-frame);
+  border-collapse: collapse;
+  background: var(--vp-paper);
+  color: var(--vp-ink);
+}
+.vp-data-table :is(th,td) { min-width: 140px; padding: 10px 12px; border: 1px solid var(--vp-frame); text-align: left; vertical-align: top; }
+.vp-data-table th { background: var(--vp-honey); font-weight: 800; }
+.vp-policy-page .vp-accordion { margin-block: 12px; background: var(--vp-wood); }
+.vp-policy-page .vp-accordion > summary { gap: 10px; min-height: 48px; padding: 12px 14px; font-weight: 800; }
+.vp-policy-page .vp-accordion-body { padding: 14px; }
+.vp-policy-page .vp-button { margin-block: 4px; }
+.vp-policy-page pre { max-width: 100%; border-radius: 8px; color: var(--vp-ink); }
+.vp-site-footer {
+  margin-bottom: 24px;
+  padding: 20px;
+  border: 3px solid var(--vp-frame);
+  border-radius: 10px;
+  background: var(--vp-wood);
+  text-align: center;
+}
+.vp-site-footer p { margin: 0 0 8px; }
+.vp-site-footer p:last-child { margin-bottom: 0; }
+.vp-site-footer .footer-links { font-weight: 750; }
+@media (max-width: 600px) {
+  .vp-site-main { padding-block: 18px 42px; }
+  .vp-policy-title-card { padding: 18px; }
+  .vp-policy-heading { margin-left: 8px; padding: 9px 12px; }
+  .vp-policy-panel { padding: 16px; }
+  .vp-site-footer { padding: 14px; }
+}

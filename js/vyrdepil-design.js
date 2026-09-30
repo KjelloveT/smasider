@@ -5,7 +5,7 @@
   const project = new URL('../', document.currentScript.src);
   let registryPromise;
   function loadRegistry() {
-    if (!registryPromise) registryPromise = fetch(new URL('json/vyrdepil-design.json', project)).then(response => {
+    if (!registryPromise) registryPromise = fetch(new URL('json/vyrdepil-design.json?v=2', project)).then(response => {
       if (!response.ok) throw new Error('Designregisteret kunne ikkje lastast');
       return response.json();
     }).catch(error => { registryPromise = null; throw error; });
@@ -106,7 +106,7 @@
   }
 
   function initMascots(root = document) {
-    const frameFiles = ['vyrde-01.png', 'vyrde-02.png', 'vyrde-03.png', 'vyrde-04.png'];
+    const frameFiles = ['vyrde-01.png', 'vyrde-02.png', 'vyrde-03.png?v=2', 'vyrde-04.png'];
     const frames = frameFiles.map(file => new URL('mascot/' + file, assets).href);
     let current = 0;
     const images = new Set();

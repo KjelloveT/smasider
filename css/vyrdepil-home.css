@@ -104,7 +104,12 @@ body.vp-home-page {
   padding: 10px 16px;
   border: 2px solid var(--vp-frame);
   border-radius: 8px;
-  background: var(--vp-wood) url('../_resources/vyrdepil-design/wood-contours.png') center / cover no-repeat;
+  background-color: var(--vp-wood);
+  background-image: url('../_resources/vyrdepil-design/wood-contours.png');
+  background-position: center;
+  background-size: max(100%,1536px) auto;
+  background-repeat: no-repeat;
+  background-clip: padding-box;
   box-shadow: 0 3px 0 var(--vp-shadow);
 }
 .vp-home-section-heading [data-icon] { display: inline-flex; }
@@ -116,6 +121,13 @@ body.vp-home-page {
   width: min(100%, 1160px);
   margin-inline: auto;
 }
+.vp-home-license {
+  display: grid;
+  gap: 0;
+  width: min(100%, 1160px);
+  margin-inline: auto;
+}
+.vp-home-license .vp-home-policy { width: 100%; }
 .vp-home-policy-copy { min-width: 0; }
 .vp-home-policy {
   width: min(100%, 930px);

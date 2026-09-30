@@ -8,40 +8,45 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="css/neobrutalisme.css">
-    <script src="js/neo-header.js" defer></script>
-    <script src="js/neobrutalisme.js"></script>
+    <link rel="stylesheet" href="css/vyrdepil-design.css?v=0.7">
+    <link rel="stylesheet" href="css/vyrdepil-migration.css?v=1">
+    <script src="js/vyrdepil-icons.js" defer></script>
+    <script src="js/vyrdepil-util.js" defer></script>
+    <script src="js/vyrdepil-design.js?v=0.8" defer></script>
+    <script src="js/vyrdepil-app-shell.js?v=7" defer></script>
+    <script src="js/vyrdepil-menu.js?v=2" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
-<neo-header></neo-header>
+<body class="vp-page" data-vp-design data-vp-site-page="true">
 
 <div class="page-wrapper">
-    <main class="main-content">
+    <main id="main" class="vp-shell vp-site-main vp-policy-page">
 
-        <h1 class="heading1">Personvernerklæring</h1>
-        <p class="bk-muted" style="margin-top:-8px;">Sist oppdatert: 29. september 2026</p>
+        <header class="vp-panel vp-panel--plain vp-policy-title-card">
+            <h1 class="vp-title">Personvernerklæring</h1>
+            <p class="vp-small">Sist oppdatert: 29. september 2026</p>
+        </header>
 
-        <div class="box2">
+        <div class="vp-panel vp-panel--plain vp-policy-panel">
             <div class="privacy-body">
                 <p>Denne personvernerklæringa gjeld for nettstaden <strong>Vyrdepil</strong> og alle spel og verktøy som ligg her. Kort sagt: tenestene er laga slik at <strong>persondata aldri blir samla inn på ein server</strong>. Alt køyrer i nettlesaren din, og den avgrensa informasjonen nokre spel lagrar, blir verande lokalt på eininga di.</p>
 
-                <div class="privacy-highlight">
+                <div class="vp-policy-highlight">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.9 1.5-2.5l1-1a2 2 0 0 0 0-3l-1-1a4.5 4.5 0 0 1-1.5-3.5A5 5 0 0 0 12 4a5 5 0 0 0-5 5 4.5 4.5 0 0 1-1.5 3.5l-1 1a2 2 0 0 0 0 3l1 1c.8.6 1.3 1.5 1.5 2.5"/><line x1="9" x2="15" y1="18" y2="18"/></svg> <strong>Kort oppsummert:</strong> Ingen cookies. Ingen sporing eller analyse. Inga innlogging. Ingen elevdata til server. Nokre få funksjonar hentar bilete eller koplar nettlesarar saman (sjå «Eksterne tenester»).
                 </div>
             </div>
         </div>
 
-        <h2 class="heading2">Behandlingsansvarleg og kontakt</h2>
-        <div class="box2"><div class="privacy-body">
+        <h2 class="vp-heading vp-policy-heading">Behandlingsansvarleg og kontakt</h2>
+        <div class="vp-panel vp-panel--plain vp-policy-panel"><div class="privacy-body">
             <p>Vyrdepil er eit hobbyprosjekt laga og drifta av meg, <strong>Kjellove Bjørge</strong>. Eg er utdanna lektor, og har jobba innan skule dei siste 10 åra. Eg har mastergrad i IKT-støtta læring og bachelorgrad i Media, IKT og design. Eg jobbar for tida som IKT-ansvarleg på ein 1–10-skule, og er rådgjevar i Haram kommune innan personvern. Har du spørsmål eller tilbakemeldingar, kan du ta kontakt på:</p>
             <p style="font-size:1.1rem;"><strong>E-post:</strong> <a id="kontaktEpost" data-u="kjellomail" data-d="gmail.com" href="#" rel="nofollow">[klikk for å vise e-postadressa]</a></p>
-            <p class="bk-muted" style="font-size:0.85rem;">E-postadressa er skjult i sidekoden for å unngå at robotar hentar henne automatisk. Klikk lenkja for å sjå og bruke henne.</p>
+            <p class="vp-small" style="font-size:0.85rem;">E-postadressa er skjult i sidekoden for å unngå at robotar hentar henne automatisk. Klikk lenkja for å sjå og bruke henne.</p>
         </div></div>
 
-        <h2 class="heading2">Kva vi samlar inn — og ikkje</h2>
-        <div class="box2"><div class="privacy-body">
+        <h2 class="vp-heading vp-policy-heading">Kva vi samlar inn — og ikkje</h2>
+        <div class="vp-panel vp-panel--plain vp-policy-panel"><div class="privacy-body">
             <p>Vyrdepil samlar <strong>ikkje</strong> inn personopplysningar på nokon server. Vi brukar ikkje informasjonskapslar (cookies), analyseverktøy eller sporing. Det er viktig å skilje mellom <strong>cookies</strong> og <strong>localStorage</strong>:</p>
-            <table class="data-table" style="margin:16px 0">
+            <table class="vp-data-table" style="margin:16px 0">
                 <tr><th></th><th>Cookies</th><th>localStorage</th></tr>
                 <tr>
                     <td><strong>Blir sendt til server?</strong></td>
@@ -62,8 +67,8 @@
             <p>localStorage-data ligg berre på di eining, og ingen andre kan sjå den. Du kan slette den når som helst (sjå «Lagringstid og sletting»).</p>
         </div></div>
 
-        <h2 class="heading2">Rettsleg grunnlag og formål</h2>
-        <div class="box2"><div class="privacy-body">
+        <h2 class="vp-heading vp-policy-heading">Rettsleg grunnlag og formål</h2>
+        <div class="vp-panel vp-panel--plain vp-policy-panel"><div class="privacy-body">
             <p>Sidan vi ikkje samlar inn eller behandlar personopplysningar på server, er det inga behandling som krev samtykke eller anna rettsleg grunnlag etter personvernforordninga (GDPR) frå vår side.</p>
             <ul>
                 <li><strong>Lokal lagring</strong> skjer berre for at du skal kunne ta vare på eiga framgang, eigne lister og innstillingar mellom økter. Dataen blir verande på eininga di.</li>
@@ -71,25 +76,25 @@
             </ul>
         </div></div>
 
-        <h2 class="heading2">Eksterne tenester</h2>
-        <div class="box2"><div class="privacy-body">
+        <h2 class="vp-heading vp-policy-heading">Eksterne tenester</h2>
+        <div class="vp-panel vp-panel--plain vp-policy-panel"><div class="privacy-body">
             <p>Dei fleste spel og verktøy fungerer heilt utan internett etter at sida er lasta. Nokre få funksjonar hentar likevel innhald frå eksterne tenester. Når nettlesaren din hentar noko frå ein ekstern server, ser den serveren teknisk sett <strong>IP-adressa di</strong> (som ved all bruk av nett). Ingen personleg informasjon utover dette blir delt.</p>
-            <table class="data-table" style="margin:16px 0">
+            <table class="vp-data-table" style="margin:16px 0">
                 <tr><th>Teneste</th><th>Brukt av</th><th>Kva som skjer</th></tr>
                 <tr><td><strong>Wikimedia Commons</strong><br>(upload.wikimedia.org og thumb.wikimedia.org)</td><td>Heimsank, Vidfaren</td><td>Hentar kort-, hovudstads- og flaggbilete. Wikimedia ser IP-adressa i loggane sine. Ingen speldata blir sendt.</td></tr>
                 <tr><td><strong>Vår eigen signalserver</strong><br>(Azure, Norway East)</td><td>Frødekapp (live-quiz)</td><td>Koplar nettlesarane saman i ~2 sekund. Ser berre IP — aldri quiz-innhald, namn eller svar. Sjølve spelet går direkte (P2P) mellom nettlesarane. Serveren er vår eigen, så i normal drift går ingenting til tredjepart. Svarar han ikkje, prøver appen den offentlege PeerJS-skya (1.peerjs.com) som naudløysing.</td></tr>
                 <tr><td><strong>Cloudflare cdnjs</strong><br>(cdnjs.cloudflare.com)</td><td>Handsam bilete</td><td>Lastar JSZip-biblioteket for ZIP-nedlasting. Ingen bilete eller data blir sendt.</td></tr>
             </table>
-            <p class="bk-muted" style="font-size:0.9rem;">Geografidataen i Vidfaren (hovudstader, fjell, innsjøar, kart) er bygd på førehand og ligg lokalt — det blir ikkje gjort oppslag mot Wikidata medan du spelar. Berre sjølve hovudstadsbileta blir henta frå Wikimedia.</p>
+            <p class="vp-small" style="font-size:0.9rem;">Geografidataen i Vidfaren (hovudstader, fjell, innsjøar, kart) er bygd på førehand og ligg lokalt — det blir ikkje gjort oppslag mot Wikidata medan du spelar. Berre sjølve hovudstadsbileta blir henta frå Wikimedia.</p>
         </div></div>
 
-        <h2 class="heading2">Hosting og serverloggar</h2>
-        <div class="box2"><div class="privacy-body">
+        <h2 class="vp-heading vp-policy-heading">Hosting og serverloggar</h2>
+        <div class="vp-panel vp-panel--plain vp-policy-panel"><div class="privacy-body">
             <p>Nettstaden blir levert frå <strong>Microsoft Azure</strong> i regionen <strong>Norway East</strong> — det vil seie at sidene blir hosta på tenarar i Noreg (innanfor EØS). Som for all bruk av nett mottek vevtenaren teknisk nødvendig informasjon for å levere sidene — typisk IP-adresse, tidspunkt, kva side som blir henta og nettlesartype. Dette er standard for alle nettstader og blir ikkje brukt av oss til å identifisere eller spore deg. Vi koplar ikkje slike tekniske loggar til noko du gjer i spela.</p>
         </div></div>
 
-        <h2 class="heading2">Born og personvern</h2>
-        <div class="box2"><div class="privacy-body">
+        <h2 class="vp-heading vp-policy-heading">Born og personvern</h2>
+        <div class="vp-panel vp-panel--plain vp-policy-panel"><div class="privacy-body">
             <p>Tenestene er laga for grunnskulen og er trygge å bruke med elevar:</p>
             <ul>
                 <li>Ingen elevdata blir lagra på server eller delt med tredjepart.</li>
@@ -98,48 +103,48 @@
             </ul>
         </div></div>
 
-        <h2 class="heading2">Lokal lagring i kvart spel og verktøy</h2>
-        <div class="box2"><div class="privacy-body">
+        <h2 class="vp-heading vp-policy-heading">Lokal lagring i kvart spel og verktøy</h2>
+        <div class="vp-panel vp-panel--plain vp-policy-panel"><div class="privacy-body">
             <p>Nokre spel bruker <strong>localStorage</strong> (under nøkkelen <code>VyrdepilStorage</code>), og Vegamot lagrar òg biletfiler lokalt i <strong>IndexedDB</strong>. Under finn du kva kvart einskild spel lagrar, kvifor det blir lagra, og om det treng ekstern tilgang.</p>
 
-            <details class="accordion-box">
+            <details class="vp-accordion">
                 <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg> Vis detaljar per spel og verktøy</summary>
-                <div class="accordion-body">
+                <div class="vp-accordion-body">
 
                     <h4><img src="_resources/duldord.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Duldord</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Gjetta ord og utfall per dag (dagnummer, orda du gjetta, og om dagen blei løyst)</td><td>For at du skal kunne halde fram på eit påbyrja ord, sjå att tidlegare dagar i arkivet, og for at rekkja og statistikken skal kunne reknast ut</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Gjetta ord og utfall per dag (dagnummer, orda du gjetta, og om dagen blei løyst)</td><td>For at du skal kunne halde fram på eit påbyrja ord, sjå att tidlegare dagar i arkivet, og for at rekkja og statistikken skal kunne reknast ut</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Både fasitorda og ordlista som avgjer kva som er gyldige gjett ligg lokalt, så spelet fungerer heilt offline etter at sida er lasta.</p>
                     <h4>Vegamot</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Forteljinga di: tittel, steg, tekst, vegval og innstillingar</td><td>For at du skal kunne halde fram med å lage forteljinga og prøve henne i lesarmodus</td></tr><tr><td>Bilete du legg til i steg (lagra lokalt i IndexedDB, med filnamn og format)</td><td>For at illustrasjonane skal vere tilgjengelege i forteljinga og eksportane dine</td></tr><tr><td>Forteljingspakkar og PowerPoint-filer du lastar ned</td><td>For å ta vare på, dele eller vise forteljinga. Filene blir lasta ned til di eiga maskin</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Forteljinga di: tittel, steg, tekst, vegval og innstillingar</td><td>For at du skal kunne halde fram med å lage forteljinga og prøve henne i lesarmodus</td></tr><tr><td>Bilete du legg til i steg (lagra lokalt i IndexedDB, med filnamn og format)</td><td>For at illustrasjonane skal vere tilgjengelege i forteljinga og eksportane dine</td></tr><tr><td>Forteljingspakkar og PowerPoint-filer du lastar ned</td><td>For å ta vare på, dele eller vise forteljinga. Filene blir lasta ned til di eiga maskin</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Forteljingar og bilete blir lagra og handsama lokalt i nettlesaren. Ingenting blir lasta opp.</p>
 
 
                     <h4><img src="_resources/kludre klodrian.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Kludre Klodrian</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Toppscore (eitt tal)</td><td>For å vise personleg rekord mellom speløkter</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Toppscore (eitt tal)</td><td>For å vise personleg rekord mellom speløkter</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline etter at sida er lasta.</p>
 
                     <h4><img src="_resources/ordsmia.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Ordsmia</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Toppscore (eitt tal)</td><td>For å vise personleg rekord mellom speløkter</td></tr><tr><td>Historikk over beste ord (inntil 20 ord)</td><td>For å vise tidlegare gode ord du har funne</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Toppscore (eitt tal)</td><td>For å vise personleg rekord mellom speløkter</td></tr><tr><td>Historikk over beste ord (inntil 20 ord)</td><td>For å vise tidlegare gode ord du har funne</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Ordsmia brukar ei lokal ordliste og køyrer heilt i nettlesaren. Lista byggjer på <a href="https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-41/" target="_blank" rel="noopener">Norsk Ordbank</a> frå Språkbanken ved Nasjonalbiblioteket (CC BY 4.0), og ligg i sin heilskap på denne sida — ingen oppslag går ut på nettet.</p>
 
                     <h4><img src="_resources/talsmia.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Talsmia</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Toppscore (eitt tal)</td><td>For å vise personleg rekord mellom speløkter</td></tr><tr><td>Historikk over beste rundar (inntil 20)</td><td>For å vise tidlegare uttrykk, avvik frå mål og poeng</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Toppscore (eitt tal)</td><td>For å vise personleg rekord mellom speløkter</td></tr><tr><td>Historikk over beste rundar (inntil 20)</td><td>For å vise tidlegare uttrykk, avvik frå mål og poeng</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Talsmia køyrer heilt i nettlesaren.</p>
 
                     <h4><img src="heimsank/Logo - no text.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Heimsank</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Kortsamling per kategori (kort-ID, vanskegrad, rekneart, tidspunkt)</td><td>For å ta vare på samlinga di mellom speløkter</td></tr><tr><td>Framgang (poeng, opne kategoriar, merke)</td><td>For å hugse kor langt du har kome og kva du har låst opp</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Kortsamling per kategori (kort-ID, vanskegrad, rekneart, tidspunkt)</td><td>For å ta vare på samlinga di mellom speløkter</td></tr><tr><td>Framgang (poeng, opne kategoriar, merke)</td><td>For å hugse kor langt du har kome og kva du har låst opp</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Kortbilete blir lasta frå <strong>Wikimedia Commons</strong> kvar gong du spelar. Wikimedia sine tenarar kan sjå IP-adressa di. Ingen personleg informasjon utover IP-adresse blir delt.</p>
 
                     <h4><img src="_resources/vidfaren.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Vidfaren</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Beste runde-skår (eitt tal)</td><td>For å vise personleg rekord</td></tr><tr><td>Framgang: samla poeng, oppnådde merke og statistikk</td><td>For å halde på framgang og merke mellom økter</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Beste runde-skår (eitt tal)</td><td>For å vise personleg rekord</td></tr><tr><td>Framgang: samla poeng, oppnådde merke og statistikk</td><td>For å halde på framgang og merke mellom økter</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Bilete av hovudstader og flagg blir lasta frå <strong>Wikimedia Commons</strong> medan du spelar hovudstad- og flagg-modus (IP-adressa er synleg for Wikimedia). Sjølve geografidataen ligg lokalt.</p>
 
                     <h4><img src="_resources/baretevling.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> BåreTevling</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Aktivt spel (koordinatar og skip)</td><td>For at du skal kunne ta pause og halde fram der du slapp</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Aktivt spel (koordinatar og skip)</td><td>For at du skal kunne ta pause og halde fram der du slapp</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline etter at sida er lasta.</p>
 
                     <h4><img src="_resources/reknedæsj.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Reknedæsj</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Toppscore (eitt tal)</td><td>For å vise personleg rekord mellom speløkter</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Toppscore (eitt tal)</td><td>For å vise personleg rekord mellom speløkter</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline.</p>
 
                     <h4><img src="_resources/rettslause raud.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Rettslause Raud</h4>
@@ -147,15 +152,15 @@
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet fungerer heilt offline.</p>
 
                     <h4><img src="_resources/frødekapp.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Frødekapp</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Lokalt quiz-bibliotek (quiz-ar du lagar)</td><td>For å ta vare på eigne quiz-ar mellom økter</td></tr><tr><td>Quiz-editor-utkast</td><td>For å lagre utkast du jobbar med</td></tr><tr><td>Sist brukte kallenamn</td><td>For å sleppe å skrive namn kvar gong (valfritt)</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Lokalt quiz-bibliotek (quiz-ar du lagar)</td><td>For å ta vare på eigne quiz-ar mellom økter</td></tr><tr><td>Quiz-editor-utkast</td><td>For å lagre utkast du jobbar med</td></tr><tr><td>Sist brukte kallenamn</td><td>For å sleppe å skrive namn kvar gong (valfritt)</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Live-quiz brukar <strong>WebRTC</strong> for direkte kommunikasjon mellom nettlesarar. For at maskinene skal finne kvarandre, går det først ei kort melding via ein <strong>signalserver vi driftar sjølve</strong> (Azure, Norway East). Han ser berre IP-adresser i ~2 sekund under tilkopling — aldri quiz-innhald, namn eller svar. All quiz-data går direkte mellom nettlesarane (P2P). Svarar vår eigen server ikkje, fell appen tilbake på den offentlege PeerJS-skya.</p>
 
                     <h4><img src="_resources/frødebrett.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Frødebrett</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Quiz-ar (kategoriar, spørsmål, svar, finalerunde)</td><td>For å lagre og hente frøder du lagar</td></tr><tr><td>Lag (siste lagnamn)</td><td>For å hugse lagoppsettet mellom speløkter</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Quiz-ar (kategoriar, spørsmål, svar, finalerunde)</td><td>For å lagre og hente frøder du lagar</td></tr><tr><td>Lag (siste lagnamn)</td><td>For å hugse lagoppsettet mellom speløkter</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Alt lagrast lokalt. Du kan eksportere/importere frøder som JSON-fil.</p>
 
                     <h4><img src="_resources/frødesams.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Frødesams</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Frødesamsar (spørsmål og svar med poeng)</td><td>For å lagre og hente frødesamsar du lagar</td></tr><tr><td>Lag (siste lagnamn)</td><td>For å hugse lagoppsettet mellom speløkter</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Frødesamsar (spørsmål og svar med poeng)</td><td>For å lagre og hente frødesamsar du lagar</td></tr><tr><td>Lag (siste lagnamn)</td><td>For å hugse lagoppsettet mellom speløkter</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Alt lagrast lokalt. Du kan eksportere/importere som JSON-fil.</p>
 
                     <h4><svg width="20" height="20" style="margin-right:4px;vertical-align:-4px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg> Etikktesten</h4>
@@ -163,19 +168,19 @@
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Testen fungerer heilt offline.</p>
 
                     <h4><img src="_resources/heite_stavrim.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Heite Stavrim</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Team-konfigurasjonar, eigne kategorilister, siste oppsett</td><td>For å lagre preferansar mellom speløkter</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Team-konfigurasjonar, eigne kategorilister, siste oppsett</td><td>For å lagre preferansar mellom speløkter</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet køyrer heilt lokalt.</p>
 
                     <h4><img src="_resources/ordaklok.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Ordaklok</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Eigne omgrepslister (titlar, ord-par, alternative svar)</td><td>For å hugse listene dine mellom økter</td></tr><tr><td>Toppscore per liste og modus</td><td>For personleg rekord og motivasjon</td></tr><tr><td>Leitner-progresjon (kva ord du meistrar)</td><td>For å prioritere ord du strevar med</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Eigne omgrepslister (titlar, ord-par, alternative svar)</td><td>For å hugse listene dine mellom økter</td></tr><tr><td>Toppscore per liste og modus</td><td>For personleg rekord og motivasjon</td></tr><tr><td>Leitner-progresjon (kva ord du meistrar)</td><td>For å prioritere ord du strevar med</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Køyrer heilt offline. Lister kan delast via URL — då er heile lista pakka inn i sjølve lenkja, ingen tenar er involvert.</p>
 
                     <h4><img src="_resources/eikekveik.png" alt="" width="20" height="20" style="vertical-align:-4px;margin-right:4px;object-fit:contain;"> Eikekveik</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Auto-lagra siste kart og namngjevne lagra kart (nodar, plassering, farge, koplingar)</td><td>For å ta vare på arbeidet ditt mellom økter</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Auto-lagra siste kart og namngjevne lagra kart (nodar, plassering, farge, koplingar)</td><td>For å ta vare på arbeidet ditt mellom økter</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Verktøyet køyrer heilt lokalt.</p>
 
                     <h4><img src="_resources/tidvis.png" alt="" style="height:20px;width:auto;vertical-align:-4px;margin-right:4px;"> Tidvis</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Toppscore (eitt tal)</td><td>For å vise personleg rekord</td></tr><tr><td>Framgang: nivå/XP, merke og statistikk</td><td>For å halde på framgang mellom økter</td></tr><tr><td>Lagra oppsett (modus, retning, vanskegrad, tal oppgåver)</td><td>For å hugse det du valde sist</td></tr><tr><td>Oppsett for arbeidsark (oppgåvetypar, mengd, storleik, tittel, instruksjonar, fasitval og seed)</td><td>For å hugse korleis du sette opp arbeidsarket sist</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Toppscore (eitt tal)</td><td>For å vise personleg rekord</td></tr><tr><td>Framgang: nivå/XP, merke og statistikk</td><td>For å halde på framgang mellom økter</td></tr><tr><td>Lagra oppsett (modus, retning, vanskegrad, tal oppgåver)</td><td>For å hugse det du valde sist</td></tr><tr><td>Oppsett for arbeidsark (oppgåvetypar, mengd, storleik, tittel, instruksjonar, fasitval og seed)</td><td>For å hugse korleis du sette opp arbeidsarket sist</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Spelet køyrer heilt offline. Elevnamn du hentar til eit arbeidsark blir <strong>ikkje</strong> lagra — dei er ein eingongskopi frå Flokkdeilar, Klassekart eller innliming, og forsvinn når du lukkar eksportvindauget.</p>
 
                     <h4><img src="_resources/biletflett.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> BiletFlett</h4>
@@ -183,11 +188,11 @@
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Verktøyet fungerer heilt offline.</p>
 
                     <h4><img src="_resources/klassekart.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Klassekart</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Lagra klasseoppsett (elevnamn, plassering, møblar)</td><td>For å lagre og hente namngjeve klasseoppsett</td></tr><tr><td>Flikar / aktive oppsett</td><td>For å gjenopprette opne flikar ved neste besøk</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Lagra klasseoppsett (elevnamn, plassering, møblar)</td><td>For å lagre og hente namngjeve klasseoppsett</td></tr><tr><td>Flikar / aktive oppsett</td><td>For å gjenopprette opne flikar ved neste besøk</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Elevnamn lagrast kun lokalt — aldri på nokon server. Du kan eksportere/importere oppsett som JSON-fil.</p>
 
                     <h4><img src="_resources/flokkdeilar.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Flokkdeilar</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Klasselister med elevnamn</td><td>For å gjenbruke same liste på tvers av økter</td></tr><tr><td>Valfrie relasjonar mellom elevar (berre med «Utvida administrasjon»)</td><td>For at trekninga skal ta omsyn til konfliktar eller preferansar</td></tr><tr><td>Hash av PIN-kode (om utvida admin er på) — aldri klartekst-PIN</td><td>For å beskytte redigeringa mot uvedkomande</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Klasselister med elevnamn</td><td>For å gjenbruke same liste på tvers av økter</td></tr><tr><td>Valfrie relasjonar mellom elevar (berre med «Utvida administrasjon»)</td><td>For at trekninga skal ta omsyn til konfliktar eller preferansar</td></tr><tr><td>Hash av PIN-kode (om utvida admin er på) — aldri klartekst-PIN</td><td>For å beskytte redigeringa mot uvedkomande</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Elevnamn og relasjonar lagrast berre lokalt og forlèt aldri eininga di.</p>
 
                     <h4><img src="_resources/bilethandsaming.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Handsam bilete</h4>
@@ -195,63 +200,63 @@
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. ZIP-biblioteket ligg sjølv-hosta hos oss i <code>_libs/</code>, så alt — også ZIP- og SVG-nedlasting — fungerer offline.</p>
 
                     <h4><svg width="20" height="20" style="vertical-align:-4px;margin-right:4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H6a4 4 0 1 1 .5-7.97A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 10Z"/></svg> Ordskodde</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Lagra ordskyer: innlimt tekst, ordval og innstillingar</td><td>For å opne og redigere skyene seinare utan å lime inn teksten på nytt</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Lagra ordskyer: innlimt tekst, ordval og innstillingar</td><td>For å opne og redigere skyene seinare utan å lime inn teksten på nytt</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Teksten du limer inn forlèt aldri nettlesaren.</p>
 
                     <h4><img src="_resources/dagsvegen.png" alt="" style="height:20px;width:auto;margin-right:4px;vertical-align:-4px"> Dagsvegen</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Dagsplanar og vekemalar (fag, tider, aktivitetar, notat)</td><td>For å hente fram planane att utan å byggje dei på nytt</td></tr><tr><td>Fagliste med emoji og hjernepause-aktivitetar</td><td>For å hugse tilpassingane læraren har gjort</td></tr><tr><td>Innstillingar, tekstboksar og dagens arbeidskopi</td><td>For at skjermen skal sjå lik ut etter omstart</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Dagsplanar og vekemalar (fag, tider, aktivitetar, notat)</td><td>For å hente fram planane att utan å byggje dei på nytt</td></tr><tr><td>Fagliste med emoji og hjernepause-aktivitetar</td><td>For å hugse tilpassingane læraren har gjort</td></tr><tr><td>Innstillingar, tekstboksar og dagens arbeidskopi</td><td>For at skjermen skal sjå lik ut etter omstart</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Tekst læraren skriv (t.d. elevnamn ved bursdag) lagrast lokalt på maskina — aldri sendt nokon stad. Teikningar blir aldri lagra.</p>
 
                     <h4><svg width="20" height="20" style="vertical-align:-4px;margin-right:4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2v20"/><circle cx="12" cy="12" r="10"/></svg> Livslina (under utvikling)</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Aktiv gjennomspeling (figur, val, økonomi, framgang)</td><td>For at du skal kunne halde fram der du slapp seinare</td></tr><tr><td>Fullførte gjennomspelingar (kortfatta sluttresultat og merke)</td><td>For å samanlikne ulike vegval og vise merke på tvers av løp</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Aktiv gjennomspeling (figur, val, økonomi, framgang)</td><td>For at du skal kunne halde fram der du slapp seinare</td></tr><tr><td>Fullførte gjennomspelingar (kortfatta sluttresultat og merke)</td><td>For å samanlikne ulike vegval og vise merke på tvers av løp</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Alle tal (SIFO, Lånekassen, Skatteetaten) ligg lagra lokalt i spelet. Eksport/import av lagringsfila skjer manuelt og lokalt.</p>
 
                     <h4><svg width="20" height="20" style="vertical-align:-4px;margin-right:4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12"/><path d="M6 12h12"/><path d="m4.9 4.9 14.2 14.2"/><circle cx="12" cy="12" r="10"/></svg> Ljodstigen (under utvikling)</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Ein eller fleire spelarprofilar, kvar med ein <strong>vald figur</strong> — ikkje eit namn</td><td>For at fleire born skal kunne dele same maskina utan å blande framgangen sin. Appen har med vilje inga namnerute: eleven vel ein figur frå ei fast liste, så det <strong>kan ikkje hamne eit elevnamn her</strong></td></tr><tr><td>Framgang per bokstav (kva boks bokstaven står i, kor mange rette og gale, og dato), oppnådde merke og dei siste 40 dagane med økter</td><td>For at den adaptive motoren skal vite kva eleven meistrar og kva som må øvast meir. <strong>Dette er ikkje ei vurdering</strong> — det ligg berre på denne eininga, følgjer ikkje eleven vidare, og kan ikkje hentast inn av læraren</td></tr><tr><td>Val for eininga: skrifttype, stemme og om alle modusar skal vere opne</td><td>For at oppsettet skal stå fast mellom økter. Desse ligg på maskina, ikkje på profilen — dei handlar om kven som brukar maskina, ikkje om kva eleven kan</td></tr><tr><td>Eigne baner læraren har laga til Bokstavjakta (rutenett og plasserte blokker)</td><td>For at ei bane skal kunne brukast om att seinare. Ingen tekst frå elevar inngår</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Ein eller fleire spelarprofilar, kvar med ein <strong>vald figur</strong> — ikkje eit namn</td><td>For at fleire born skal kunne dele same maskina utan å blande framgangen sin. Appen har med vilje inga namnerute: eleven vel ein figur frå ei fast liste, så det <strong>kan ikkje hamne eit elevnamn her</strong></td></tr><tr><td>Framgang per bokstav (kva boks bokstaven står i, kor mange rette og gale, og dato), oppnådde merke og dei siste 40 dagane med økter</td><td>For at den adaptive motoren skal vite kva eleven meistrar og kva som må øvast meir. <strong>Dette er ikkje ei vurdering</strong> — det ligg berre på denne eininga, følgjer ikkje eleven vidare, og kan ikkje hentast inn av læraren</td></tr><tr><td>Val for eininga: skrifttype, stemme og om alle modusar skal vere opne</td><td>For at oppsettet skal stå fast mellom økter. Desse ligg på maskina, ikkje på profilen — dei handlar om kven som brukar maskina, ikkje om kva eleven kan</td></tr><tr><td>Eigne baner læraren har laga til Bokstavjakta (rutenett og plasserte blokker)</td><td>For at ei bane skal kunne brukast om att seinare. Ingen tekst frå elevar inngår</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Alle lydar, bokstavdata og 3D-modellar ligg lokalt, så appen fungerer heilt offline etter at sida er lasta.</p>
                     <p class="accordion-note">🚧 <strong>Under utvikling:</strong> Ljodstigen er ikkje lagt ut på framsida enno, men sida er open for den som har lenkja. Ho står difor her, slik at oversikta er fullstendig for alle som kan opne henne.</p>
 
                     <h4><svg width="20" height="20" style="vertical-align:-4px;margin-right:4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg> Ordkryss</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Lagra kryssord: ord, forklaringar, tittel og oppsettet i rutenettet</td><td>For å opne og endre kryssordet seinare utan å skrive inn orda på nytt</td></tr><tr><td>Elevnamn du har henta til utskrift (kopi frå Flokkdeilar, Klassekart eller innliming)</td><td>For å skrive ut eitt ferdig namngjeve ark per elev</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Lagra kryssord: ord, forklaringar, tittel og oppsettet i rutenettet</td><td>For å opne og endre kryssordet seinare utan å skrive inn orda på nytt</td></tr><tr><td>Elevnamn du har henta til utskrift (kopi frå Flokkdeilar, Klassekart eller innliming)</td><td>For å skrive ut eitt ferdig namngjeve ark per elev</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Ord, forklaringar og elevnamn forlèt aldri nettlesaren. Namna er ein eingongskopi og blir ikkje synkroniserte med Flokkdeilar eller Klassekart.</p>
 
                     <h4><svg width="20" height="20" style="vertical-align:-4px;margin-right:4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Leitekryss</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Lagra leitekryss: orda, tittelen, vala for arket og sjølve bokstavrutenettet</td><td>For å opne og skrive ut leitekrysset seinare utan å lage det på nytt</td></tr><tr><td>Elevnamn du har henta til utskrift (kopi frå Flokkdeilar, Klassekart eller innliming)</td><td>For å skrive ut eitt ferdig namngjeve ark per elev</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Lagra leitekryss: orda, tittelen, vala for arket og sjølve bokstavrutenettet</td><td>For å opne og skrive ut leitekrysset seinare utan å lage det på nytt</td></tr><tr><td>Elevnamn du har henta til utskrift (kopi frå Flokkdeilar, Klassekart eller innliming)</td><td>For å skrive ut eitt ferdig namngjeve ark per elev</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Ord, rutenett og elevnamn forlèt aldri nettlesaren. Namna er ein eingongskopi og blir ikkje synkroniserte med Flokkdeilar eller Klassekart.</p>
 
                     <h4><svg width="20" height="20" style="vertical-align:-4px;margin-right:4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg> Lydskurd</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td><strong>Ingenting blir lagra.</strong> Lydskurd skriv verken til localStorage eller til noka anna lagring i nettlesaren.</td><td>Lydfiler er for store til å lagrast, og vi vil ikkje halde på lyden din lenger enn du sjølv arbeider med henne</td></tr><tr><td>Prosjektfila (<code>.lydskurd</code>) du eventuelt lagrar — klipp, spor, innstillingar og valfritt lyden sjølv</td><td>For at du skal kunne halde fram med redigeringa seinare. Fila blir lasta ned til di eiga maskin, ikkje lagra hos oss eller i nettlesaren</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td><strong>Ingenting blir lagra.</strong> Lydskurd skriv verken til localStorage eller til noka anna lagring i nettlesaren.</td><td>Lydfiler er for store til å lagrast, og vi vil ikkje halde på lyden din lenger enn du sjølv arbeider med henne</td></tr><tr><td>Prosjektfila (<code>.lydskurd</code>) du eventuelt lagrar — klipp, spor, innstillingar og valfritt lyden sjølv</td><td>For at du skal kunne halde fram med redigeringa seinare. Fila blir lasta ned til di eiga maskin, ikkje lagra hos oss eller i nettlesaren</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Lydfilene du hentar inn blir dekoda og haldne i minnet i nettlesaren så lenge fana er open, og blir aldri lasta opp nokon stad. Lukkar du eller lastar sida på nytt, er alt borte. Når du lagrar miksen som WAV eller MP3, blir fila laga i nettlesaren din og lasta rett ned til maskina di.</p>
                     <p class="accordion-note">🎤 <strong>Mikrofon:</strong> Lydskurd kan ta opp frå mikrofon. Nettlesaren spør om løyve først, og mikrofonen blir slått på først når du sjølv trykkjer «Slå på mikrofonen» — og av att med ein gong du lukkar opptaksvindauget. Opptaket går rett inn i minnet på maskina di og blir eit klipp på tidslinja; det blir aldri sendt nokon stad. Lydskurd og Ljodbanken er dei einaste verktøya på Vyrdepil som ber om mikrofontilgang, og nettstaden har ikkje tilgang til kamera, posisjon eller andre einingar.</p>
                     <p class="accordion-note">📦 <strong>Tredjepartskode:</strong> MP3-lagringa brukar <a href="https://github.com/zhuker/lamejs" rel="noopener noreferrer" target="_blank">lamejs</a> (LGPL-3.0), bygd på <a href="https://lame.sourceforge.net/" rel="noopener noreferrer" target="_blank">LAME</a>. Biblioteket ligg sjølv-hosta hos oss i <code>_libs/</code> og blir lasta frå vår eigen tenar — det gjer ingen kall ut på nettet, og lyden din blir enkoda lokalt i nettlesaren. Sjå <code>_libs/CREDITS.md</code> for versjon og sjekksum.</p>
 
                     <h4><img src="_resources/ljodbanken.png" alt="" style="height:20px;width:auto;vertical-align:-4px;margin-right:4px;"> Ljodbanken</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td><strong>Ingenting blir lagra.</strong> Ljodbanken skriv verken til localStorage eller til noka anna lagring i nettlesaren.</td><td>Eit opptak av stemma di er ei personopplysning. Den tryggaste lagringa er ingen lagring — opptaka ligg i minnet til fana, og er borte når du lukkar henne</td></tr><tr><td>Zip-fila og lydliste-fila du sjølv lastar ned — lydklippa, lista og rettleiingane</td><td>For at du skal kunne halde fram med innspelinga seinare, eller sende lista vidare. Filene blir lasta ned til di eiga maskin, ikkje lagra hos oss eller i nettlesaren</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td><strong>Ingenting blir lagra.</strong> Ljodbanken skriv verken til localStorage eller til noka anna lagring i nettlesaren.</td><td>Eit opptak av stemma di er ei personopplysning. Den tryggaste lagringa er ingen lagring — opptaka ligg i minnet til fana, og er borte når du lukkar henne</td></tr><tr><td>Zip-fila og lydliste-fila du sjølv lastar ned — lydklippa, lista og rettleiingane</td><td>For at du skal kunne halde fram med innspelinga seinare, eller sende lista vidare. Filene blir lasta ned til di eiga maskin, ikkje lagra hos oss eller i nettlesaren</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Opptaka blir haldne i minnet så lenge fana er open, og blir aldri lasta opp nokon stad. Zip-fila blir sett saman lokalt i nettlesaren.</p>
                     <p class="accordion-note">🎤 <strong>Mikrofon:</strong> Ljodbanken tek opp frå mikrofon. Nettlesaren spør om løyve først, og mikrofonen blir slått på når du trykkjer «Slå på mikrofonen». Han blir verande på mellom klippa — det er heile poenget med ei innspelingsliste — og blir slått av att når du trykkjer på knappen igjen, eller når du lukkar sida.</p>
                     <p class="accordion-note">📦 <strong>Tredjepartskode:</strong> MP3-lagringa brukar same sjølv-hosta <a href="https://github.com/zhuker/lamejs" rel="noopener noreferrer" target="_blank">lamejs</a> som Lydskurd. Zip-fila blir skriven av vår eigen kode, utan noko bibliotek.</p>
 
                     <h4><img src="_resources/rissverk.png" alt="" style="height:20px;width:auto;vertical-align:-4px;margin-right:4px;"> Rissverk</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Teikninga du arbeider med — formene, laga, fargane og storleiken på teikneflata</td><td>For at du skal finne att arbeidet ditt om du lukkar fana eller lastar sida på nytt ved eit uhell</td></tr><tr><td>Om du står i enkel eller avansert modus</td><td>For at verktøyraden skal sjå lik ut neste gong du opnar Rissverk</td></tr><tr><td>Om du har slått på namn på punkt og handtak</td><td>For at innstillinga skal stå slik du sette henne neste gong</td></tr><tr><td>Referansebilete du har henta inn — lagra som ein del av teikninga</td><td>For at kalkerarket ditt skal liggje der framleis når du kjem tilbake. Biletet blir aldri lasta opp, og det blir aldri med i SVG-en eller PNG-en du lagrar</td></tr><tr><td>Prosjektfila (<code>.rissverk</code>) du eventuelt lagrar — heile teikninga med lagnamn og innstillingar</td><td>For at du skal kunne halde fram med teikninga seinare. Fila blir lasta ned til di eiga maskin, ikkje lagra hos oss</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Teikninga du arbeider med — formene, laga, fargane og storleiken på teikneflata</td><td>For at du skal finne att arbeidet ditt om du lukkar fana eller lastar sida på nytt ved eit uhell</td></tr><tr><td>Om du står i enkel eller avansert modus</td><td>For at verktøyraden skal sjå lik ut neste gong du opnar Rissverk</td></tr><tr><td>Om du har slått på namn på punkt og handtak</td><td>For at innstillinga skal stå slik du sette henne neste gong</td></tr><tr><td>Referansebilete du har henta inn — lagra som ein del av teikninga</td><td>For at kalkerarket ditt skal liggje der framleis når du kjem tilbake. Biletet blir aldri lasta opp, og det blir aldri med i SVG-en eller PNG-en du lagrar</td></tr><tr><td>Prosjektfila (<code>.rissverk</code>) du eventuelt lagrar — heile teikninga med lagnamn og innstillingar</td><td>For at du skal kunne halde fram med teikninga seinare. Fila blir lasta ned til di eiga maskin, ikkje lagra hos oss</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Teikninga blir lagra lokalt i nettlesaren din og forlèt aldri maskina. Når du lagrar som SVG eller PNG, blir fila laga i nettlesaren og lasta rett ned til deg.</p>
                     <p class="accordion-note">📄 <strong>Filer du hentar inn:</strong> SVG-filer blir lesne trygt — vi les berre former og fargar, og køyrer aldri innhaldet. Skript, hendingshandterarar og lenkjer ut på nettet blir aldri sett på i det heile. Bilete du dreg inn som kalkerark blir liggjande lokalt i teikninga di og blir skalerte ned for å spare plass.</p>
                     <p class="accordion-note">💾 <strong>Plass:</strong> Nettlesaren har berre nokre få megabyte til rådvelde. Blir teikninga for stor, sluttar Rissverk å lagre ho automatisk og seier frå — då må du lagre henne som prosjektfil sjølv.</p>
 
                     <h4><img src="_resources/bolkestokk.png" alt="" style="height:20px;width:auto;vertical-align:-4px;margin-right:4px;"> Bolkestokk</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Blokkprogrammet du arbeider med no</td><td>For at du skal finne att det du bygde om du lukkar fana eller lastar sida på nytt ved eit uhell</td></tr><tr><td>Program du sjølv har gitt namn og teke vare på, med tidspunkt</td><td>For at du skal kunne hente fram att eit program du laga tidlegare. Det er berre du som ser dei — verken lærar eller vi har tilgang</td></tr><tr><td>Kva leksjonar du har vore gjennom, kor mange forsøk du har gjort, og datoen</td><td>For at du skal finne att staden din i modulen. <strong>Dette er ikkje ei vurdering.</strong> Framgangen ligg berre på di eiga maskin, følgjer deg ikkje mellom einingar, og kan ikkje hentast inn av læraren</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Blokkprogrammet du arbeider med no</td><td>For at du skal finne att det du bygde om du lukkar fana eller lastar sida på nytt ved eit uhell</td></tr><tr><td>Program du sjølv har gitt namn og teke vare på, med tidspunkt</td><td>For at du skal kunne hente fram att eit program du laga tidlegare. Det er berre du som ser dei — verken lærar eller vi har tilgang</td></tr><tr><td>Kva leksjonar du har vore gjennom, kor mange forsøk du har gjort, og datoen</td><td>For at du skal finne att staden din i modulen. <strong>Dette er ikkje ei vurdering.</strong> Framgangen ligg berre på di eiga maskin, følgjer deg ikkje mellom einingar, og kan ikkje hentast inn av læraren</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Blokkene dine blir aldri sende nokon stad. Heile verktøyet — både blokkeditoren, tolken som køyrer programmet og motoren som rettar oppgåvene — køyrer lokalt i nettlesaren din.</p>
                     <p class="accordion-note">🧩 <strong>Korleis programmet blir køyrt:</strong> Bolkestokk tolkar blokkene direkte. Det finst inga <code>eval</code>, og ingen programmeringsmotor blir lasta ned. Python-fana viser berre programmet ditt <em>skrive ut</em> som tekst — ho køyrer ingenting.</p>
                     <p class="accordion-note">📦 <strong>Tredjepartskode:</strong> Ingen. Verktøyet er skrive frå grunnen av i vanleg JavaScript, og brukar korkje Blockly, Scratch eller noko anna eksternt bibliotek.</p>
 
                     <h4><img src="_resources/ormritaren.png" alt="" style="height:20px;width:auto;vertical-align:-4px;margin-right:4px;"> Ormritaren</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Python-programma du lagrar, med filnamn og tidspunkt</td><td>For at du skal finne att koden din neste gong du opnar Ormritaren. Det er berre du som ser dei — verken lærar eller vi har tilgang</td></tr><tr><td>Kva fil som var open sist, og kor stor skrift du har valt i editoren</td><td>For at du skal kunne halde fram der du slutta, utan å stille inn på nytt</td></tr><tr><td>Kva leksjonar du har vore gjennom i opplæringsdelen, kor mange forsøk du har gjort, og datoen</td><td>For at du skal finne att staden din i kurset. <strong>Dette er ikkje ei vurdering.</strong> Framgangen ligg berre på di eiga maskin, følgjer deg ikkje mellom einingar, og kan ikkje hentast inn av læraren</td></tr><tr><td>Ein kladd av oppgåver ein lærar held på å redigere</td><td>Berre for lærarar, i eit eige redigeringsverktøy som ikkje er lenka til frå opplegget. Kladden ligg i læraren sin eigen nettlesar så arbeidet ikkje går tapt ved eit uhell, og blir ikkje send nokon stad</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Python-programma du lagrar, med filnamn og tidspunkt</td><td>For at du skal finne att koden din neste gong du opnar Ormritaren. Det er berre du som ser dei — verken lærar eller vi har tilgang</td></tr><tr><td>Kva fil som var open sist, og kor stor skrift du har valt i editoren</td><td>For at du skal kunne halde fram der du slutta, utan å stille inn på nytt</td></tr><tr><td>Kva leksjonar du har vore gjennom i opplæringsdelen, kor mange forsøk du har gjort, og datoen</td><td>For at du skal finne att staden din i kurset. <strong>Dette er ikkje ei vurdering.</strong> Framgangen ligg berre på di eiga maskin, følgjer deg ikkje mellom einingar, og kan ikkje hentast inn av læraren</td></tr><tr><td>Ein kladd av oppgåver ein lærar held på å redigere</td><td>Berre for lærarar, i eit eige redigeringsverktøy som ikkje er lenka til frå opplegget. Kladden ligg i læraren sin eigen nettlesar så arbeidet ikkje går tapt ved eit uhell, og blir ikkje send nokon stad</td></tr></table>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Koden du skriv blir aldri send nokon stad — han blir korkje kompilert, køyrd eller lagra på nokon tenar. Heile Python-motoren blir lasta ned til nettlesaren din første gongen du opnar verktøyet, og etter det køyrer alt lokalt på maskina di.</p>
                     <p class="accordion-note">🐍 <strong>Kva Python får lov til:</strong> Python køyrer inne i nettlesaren sin sandkasse (WebAssembly) og har ikkje tilgang til filene på maskina di. Filsystemet Python ser er oppdikta og ligg berre i minnet — det blir tømt kvar gong du lastar sida på nytt. Vi koplar det med vilje ikkje til varig lagring. Skal du ta vare på eit program, må du lagre det eller laste det ned sjølv.</p>
                     <p class="accordion-note">📦 <strong>Tredjepartskode:</strong> Python-motoren er <a href="https://pyodide.org/" rel="noopener noreferrer" target="_blank">Pyodide</a> (MPL-2.0), som er CPython kompilert til WebAssembly, og editoren er <a href="https://codemirror.net/5/" rel="noopener noreferrer" target="_blank">CodeMirror</a> (MIT). Begge ligg sjølv-hosta hos oss i <code>_libs/</code> og blir lasta frå vår eigen tenar — ingen av dei kontaktar noka tredjepart. Sjå <code>_libs/CREDITS.md</code> for versjonar og sjekksummar.</p>
                     <p class="accordion-note">📚 <strong>Bibliotek:</strong> Skriv eleven <code>import numpy</code> eller <code>import matplotlib</code>, blir biblioteket henta automatisk — men <strong>frå vår eigen tenar</strong>, aldri frå pakkearkivet PyPI. Vi har valt ut kva som er tilgjengeleg på førehand og lagt filene hjå oss. Det tyder at ingen tredjepart får sjå IP-adressa til eleven, at verktøyet verkar utan internett etter fyrste opning, og at ingen kan dra inn ein vilkårleg pakke frå nettet inn i skulenettlesaren. Skal eit nytt bibliotek inn, må vi leggje det til sjølve.</p>
 
                     <h4><img src="_resources/vitjingsruta.png" alt="" style="height:20px;width:auto;vertical-align:-4px;margin-right:4px;"> Vitjingsruta</h4>
-                    <table class="data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Oppsett du sjølv lagrar med namn — innhaldet i koden og heile designet</td><td>For å hente fram att ein kode du har laga før, utan å stille alt inn på nytt</td></tr><tr><td>Eigne stilar du lagrar — berre utsjånaden, utan innhald</td><td>For at alle kodane på ein skule skal kunne sjå like ut</td></tr><tr><td>Dei ti siste innhalda du har laga ein kode av</td><td>For at du slepp å skrive den same lange lenkja to gonger. Lista kan tømmast med ein knapp i verktøyet</td></tr><tr><td>Ein logo du har lasta opp, lagra som ein del av oppsettet</td><td>For at merket ditt skal liggje der framleis når du opnar oppsettet igjen. Fila blir aldri lasta opp nokon stad</td></tr></table>
+                    <table class="vp-data-table"><tr><th>Kva</th><th>Kvifor</th></tr><tr><td>Oppsett du sjølv lagrar med namn — innhaldet i koden og heile designet</td><td>For å hente fram att ein kode du har laga før, utan å stille alt inn på nytt</td></tr><tr><td>Eigne stilar du lagrar — berre utsjånaden, utan innhald</td><td>For at alle kodane på ein skule skal kunne sjå like ut</td></tr><tr><td>Dei ti siste innhalda du har laga ein kode av</td><td>For at du slepp å skrive den same lange lenkja to gonger. Lista kan tømmast med ein knapp i verktøyet</td></tr><tr><td>Ein logo du har lasta opp, lagra som ein del av oppsettet</td><td>For at merket ditt skal liggje der framleis når du opnar oppsettet igjen. Fila blir aldri lasta opp nokon stad</td></tr></table>
                     <p class="accordion-note">🔒 <strong>Merk at innhaldet blir lagra:</strong> Skriv du inn eit WiFi-passord eller eit kontaktkort og lagrar oppsettet, ligg det i nettlesaren på den maskina — som alt anna Vyrdepil lagrar, men verdt å vite. Lagrar du ikkje, blir ingenting teke vare på utover dei ti siste innhalda. Alt kan slettast i verktøyet eller i lagringsoversikta på framsida.</p>
                     <p class="accordion-note">🌐 <strong>Ekstern tilgang:</strong> Ingen. Ein QR-kode er rein matematikk, og heile rekninga skjer i nettlesaren din. Dette er den viktigaste skilnaden frå dei fleste QR-tenester på nettet: der blir innhaldet sendt til ein tenar, og mange lagar «dynamiske» kodar som går om ein vidaresendar eigaren kontrollerer — slik at han ser kvar gong nokon skannar koden din. Vitjingsruta lagar berre statiske kodar som peikar rett dit du seier.</p>
                     <p class="accordion-note">📄 <strong>Filer du hentar inn:</strong> Lastar du opp ein logo som SVG, blir fila lesen trygt — vi tek berre vare på former og fargar frå ei kvitliste, og skript, hendingshandterarar og lenkjer ut på nettet blir kasta før fila blir teken i bruk. Bilete blir skalerte ned til 512 px, fordi ein logo aldri blir vist større.</p>
@@ -261,31 +266,31 @@
                 </div>
             </details>
 
-            <details class="accordion-box" id="storageViewerAccordion">
+            <details class="vp-accordion" id="storageViewerAccordion">
                 <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg> Vis dine lagra data og lokale filer</summary>
-                <div class="accordion-body">
+                <div class="vp-accordion-body">
                     <p>Her ser du data i <code>VyrdepilStorage</code> og ei oversikt over biletfiler i den lokale IndexedDB-lagringa. Filinnhaldet blir ikkje vist. Dataa ligg berre på di eining og blir aldri sende nokon stad.</p>
                     <div style="display:flex; gap:8px; margin: 12px 0; flex-wrap:wrap;">
-                        <button id="refreshStorageBtn" class="btn">Oppfrisk</button>
-                        <button id="clearStorageBtn" class="btn" style="background: var(--accent2); color: var(--text-on-accent);">Slett alt</button>
+                        <button id="refreshStorageBtn" class="vp-button vp-button--quiet">Oppfrisk</button>
+                        <button id="clearStorageBtn" class="vp-button vp-button--danger">Slett alt</button>
                     </div>
-                    <pre id="storageViewerOutput" style="background: var(--bg); border: 3px solid var(--border); padding: 16px; overflow:auto; max-height: 400px; font-family: 'Courier New', monospace; font-size: 13px; white-space: pre-wrap; word-break: break-word;">(opnar når du klikkar på accordion)</pre>
+                    <pre id="storageViewerOutput" style="background: var(--vp-paper); border: 3px solid var(--vp-frame); padding: 16px; overflow:auto; max-height: 400px; font-family: 'Courier New', monospace; font-size: 13px; white-space: pre-wrap; word-break: break-word;">(opnar når du klikkar på accordion)</pre>
                 </div>
             </details>
         </div></div>
 
-        <h2 class="heading2">Bruk av kunstig intelligens (KI)</h2>
-        <div class="box2"><div class="privacy-body">
-            <div class="ai-marks">
-                <div class="ai-mark">
-                    <span class="ai-mark-icon"><svg width="34" height="34" viewBox="89.28 100.72 365.49 365.5" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EU sitt KI-symbol"><path fill="currentColor" fill-rule="evenodd" d="M272.03,100.72c100.92,0,182.74,81.82,182.74,182.75s-81.82,182.74-182.74,182.74-182.75-81.82-182.75-182.74,81.82-182.75,182.75-182.75"/><path fill="var(--bg)" d="M170.79,353.74c-1.08,0-2.05-.43-2.92-1.31-.88-.87-1.31-1.84-1.31-2.92,0-.67.07-1.27.2-1.81l47.34-129.32c.4-1.48,1.24-2.79,2.52-3.93,1.27-1.14,3.05-1.71,5.34-1.71h29.81c2.28,0,4.06.57,5.34,1.71,1.27,1.14,2.11,2.45,2.52,3.93l47.14,129.32c.27.54.4,1.14.4,1.81,0,1.08-.44,2.05-1.31,2.92s-1.91,1.31-3.12,1.31h-24.78c-2.01,0-3.52-.5-4.53-1.51-1.01-1.01-1.65-1.91-1.91-2.72l-7.86-20.55h-53.78l-7.65,20.55c-.27.81-.88,1.71-1.81,2.72-.94,1.01-2.55,1.51-4.83,1.51h-24.78ZM218.13,299.96h37.47l-18.93-53.18-18.53,53.18Z"/><path fill="var(--bg)" d="M328.11,353.74c-1.48,0-2.69-.47-3.63-1.41-.94-.94-1.41-2.15-1.41-3.63v-130.93c0-1.48.47-2.68,1.41-3.63s2.15-1.41,3.63-1.41h26.99c1.48,0,2.68.47,3.63,1.41.94.94,1.41,2.15,1.41,3.63v130.93c0,1.48-.47,2.69-1.41,3.63-.94.94-2.15,1.41-3.63,1.41h-26.99Z"/></svg></span>
+        <h2 class="vp-heading vp-policy-heading">Bruk av kunstig intelligens (KI)</h2>
+        <div class="vp-panel vp-panel--plain vp-policy-panel"><div class="privacy-body">
+            <div class="vp-grid vp-policy-marks">
+                <div class="vp-panel vp-panel--soft vp-policy-mark">
+                    <span class="ai-mark-icon"><svg width="34" height="34" viewBox="89.28 100.72 365.49 365.5" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EU sitt KI-symbol"><path fill="currentColor" fill-rule="evenodd" d="M272.03,100.72c100.92,0,182.74,81.82,182.74,182.75s-81.82,182.74-182.74,182.74-182.75-81.82-182.75-182.74,81.82-182.75,182.75-182.75"/><path fill="var(--vp-paper)" d="M170.79,353.74c-1.08,0-2.05-.43-2.92-1.31-.88-.87-1.31-1.84-1.31-2.92,0-.67.07-1.27.2-1.81l47.34-129.32c.4-1.48,1.24-2.79,2.52-3.93,1.27-1.14,3.05-1.71,5.34-1.71h29.81c2.28,0,4.06.57,5.34,1.71,1.27,1.14,2.11,2.45,2.52,3.93l47.14,129.32c.27.54.4,1.14.4,1.81,0,1.08-.44,2.05-1.31,2.92s-1.91,1.31-3.12,1.31h-24.78c-2.01,0-3.52-.5-4.53-1.51-1.01-1.01-1.65-1.91-1.91-2.72l-7.86-20.55h-53.78l-7.65,20.55c-.27.81-.88,1.71-1.81,2.72-.94,1.01-2.55,1.51-4.83,1.51h-24.78ZM218.13,299.96h37.47l-18.93-53.18-18.53,53.18Z"/><path fill="var(--vp-paper)" d="M328.11,353.74c-1.48,0-2.69-.47-3.63-1.41-.94-.94-1.41-2.15-1.41-3.63v-130.93c0-1.48.47-2.68,1.41-3.63s2.15-1.41,3.63-1.41h26.99c1.48,0,2.68.47,3.63,1.41.94.94,1.41,2.15,1.41,3.63v130.93c0,1.48-.47,2.69-1.41,3.63-.94.94-2.15,1.41-3.63,1.41h-26.99Z"/></svg></span>
                     <span class="ai-mark-text"><strong>Laga med KI</strong><span>KI-verktøy er brukte under utviklinga av koden</span></span>
                 </div>
-                <div class="ai-mark">
+                <div class="vp-panel vp-panel--soft vp-policy-mark">
                     <span class="ai-mark-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Menneskeleg kontroll"><circle cx="9" cy="7" r="3.2"/><path d="M2.8 20a6.2 6.2 0 0 1 12.4 0"/><path d="m15.5 12.5 2.2 2.2 4.1-4.4"/></svg></span>
                     <span class="ai-mark-text"><strong>Menneskeleg kontroll</strong><span>All kode er lesen og godkjend av eit menneske</span></span>
                 </div>
-                <div class="ai-mark">
+                <div class="vp-panel vp-panel--soft vp-policy-mark">
                     <span class="ai-mark-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Ingen KI i bruk"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M9.5 3.5v3M14.5 3.5v3M9.5 17.5v3M14.5 17.5v3M3.5 9.5h3M3.5 14.5h3M17.5 9.5h3M17.5 14.5h3"/><path d="m3.5 20.5 17-17"/></svg></span>
                     <span class="ai-mark-text"><strong>Ingen KI i tenestene</strong><span>Spela og verktøya brukar ikkje KI når du brukar dei</span></span>
                 </div>
@@ -295,13 +300,13 @@
             <p>Delar av koden på Vyrdepil er skrivne med hjelp frå KI-verktøy. Men <strong>ingenting blir publisert ukontrollert</strong>: all kode er lesen, kontrollert og handsama av eit menneske før han kjem ut på nettstaden. Fagleg innhald, ordlister, oppgåver og vurderingar er gjennomgåtte manuelt, og det er eit menneske — ikkje ein modell — som står ansvarleg for det du finn her.</p>
             <p>Like viktig er det som <em>ikkje</em> skjer: <strong>det er ingen KI i sjølve nettstaden</strong>. Spela og verktøya inneheld ingen KI-modellar og gjer ingen kall til KI-tenester. Ingenting du skriv, teiknar, lastar opp eller seier inn i mikrofonen blir sendt til ein KI — verken for å svare deg eller for å trene opp ein modell. KI-en er berre eit verktøy i utviklinga; når sida er laga, er han ute av biletet.</p>
 
-            <div class="privacy-highlight">
+            <div class="vp-policy-highlight">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.9 1.5-2.5l1-1a2 2 0 0 0 0-3l-1-1a4.5 4.5 0 0 1-1.5-3.5A5 5 0 0 0 12 4a5 5 0 0 0-5 5 4.5 4.5 0 0 1-1.5 3.5l-1 1a2 2 0 0 0 0 3l1 1c.8.6 1.3 1.5 1.5 2.5"/><line x1="9" x2="15" y1="18" y2="18"/></svg> <strong>Kort oppsummert:</strong> KI har hjelpt til med å byggje sida. Menneske har lese og godkjent alt. Ingen KI er i bruk medan du eller elevane brukar tenestene.
             </div>
         </div></div>
 
-        <h2 class="heading2">Lagringstid og sletting</h2>
-        <div class="box2"><div class="privacy-body">
+        <h2 class="vp-heading vp-policy-heading">Lagringstid og sletting</h2>
+        <div class="vp-panel vp-panel--plain vp-policy-panel"><div class="privacy-body">
             <p>Lokalt lagra data ligg i nettlesaren din heilt til du slettar den sjølv. Du har full kontroll:</p>
             <ul>
                 <li>Bruk <strong>«Slett alt»</strong> i datavisaren over for å fjerne all Vyrdepil-data med éin gong.</li>
@@ -310,20 +315,20 @@
             </ul>
         </div></div>
 
-        <h2 class="heading2">Dine rettar</h2>
-        <div class="box2"><div class="privacy-body">
+        <h2 class="vp-heading vp-policy-heading">Dine rettar</h2>
+        <div class="vp-panel vp-panel--plain vp-policy-panel"><div class="privacy-body">
             <p>Personvernforordninga (GDPR) gjev deg rettar som innsyn, retting, sletting og dataportabilitet. Sidan vi <strong>ikkje lagrar personopplysningar om deg på server</strong>, har vi ingenting å hente fram eller slette på dine vegner — all lokal data ligg på eininga di og er fullt ut under din kontroll. Har du likevel spørsmål om personvern, er du velkomen til å kontakte oss (sjå over).</p>
         </div></div>
 
-        <h2 class="heading2">Endringar i erklæringa</h2>
-        <div class="box2"><div class="privacy-body">
+        <h2 class="vp-heading vp-policy-heading">Endringar i erklæringa</h2>
+        <div class="vp-panel vp-panel--plain vp-policy-panel"><div class="privacy-body">
             <p>Erklæringa kan bli oppdatert om tenestene endrar seg. Datoen for siste oppdatering står øvst på sida. Vesentlege endringar vil bli synlege her.</p>
         </div></div>
 
     </main>
 </div>
 
-<footer class="site-footer">
+<footer class="vp-shell vp-site-footer">
     <p><svg width="16" height="16" style="vertical-align:-2px;margin-right:4px;" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>Laga for grunnskulen — open kjeldekode, ingen sporing. Laga og drifta av Kjellove Bjørge.</p>
     <p class="footer-links"><a href="index.html">Heim</a> · <a href="personvern.html">Personvernerklæring</a> · <a href="lisens.html">Lisens</a></p>
 </footer>

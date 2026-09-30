@@ -4,12 +4,27 @@
     {
       "versjon": "1.62",
       "dato": "2026-09-30",
-      "samandrag": "Fleire spel og verktøy har fått betre lesbarheit og felles toppmeny.",
+      "samandrag": "Framsida og informasjonssidene følgjer det nye Vyrdepil-designet.",
       "punkt": [
         {
           "t": "endra",
           "kva": "Logoar",
-          "tekst": "Duldord og Ordkryss har fått tilbake dei tidlegare logoane. Frødebrett får eit quizbrett i Jeopardy-stil, og Leitekryss viser eit ord som er ringa rundt."
+          "tekst": "Duldord og Ordkryss held på dei tidlegare logoane sine. Frødebrett får ei måla rutenettlogo med spørsmålsrute, Leitekryss viser eit ringa ord, og Heimsank bruker originalen sin."
+        },
+        {
+          "t": "endra",
+          "kva": "Personvern og lisens",
+          "tekst": "Begge informasjonssidene bruker fellesdesignet. Innhald og vilkår er bevarte, med lesbare panel og responsiv tabellvising."
+        },
+        {
+          "t": "endra",
+          "kva": "Framsida",
+          "tekst": "Personvern og lisens er venstrejusterte i ei samla innhaldsbreidd, og bakgrunnsmønsteret står i full storleik."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Vyrde",
+          "tekst": "Den tredje posen i spritesamlinga har no to hender, éi på kvart skilt."
         },
         {
           "t": "endra",
@@ -51,7 +66,7 @@
         {
           "t": "endra",
           "kva": "Applogoar og Vyrde",
-          "tekst": "Duldord og Ordkryss held på dei tidlegare logoane sine; Talsmia bruker tallogoen, Heimsank den nyaste logoen sin, og Vyrde skiftar positur og uttrykk kvart trettiande sekund."
+          "tekst": "Duldord og Ordkryss held på dei tidlegare logoane sine; Talsmia bruker tallogoen, Heimsank den originale logoen sin, og Vyrde skiftar positur og uttrykk kvart trettiande sekund."
         }
       ]
     },
