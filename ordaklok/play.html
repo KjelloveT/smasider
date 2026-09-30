@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="../css/vyrde.css">
     <link rel="stylesheet" href="css/boksekamp.css">
+    <link rel="stylesheet" href="../css/vyrdepil-design.css?v=0.6">
+    <link rel="stylesheet" href="../css/vyrdepil-migration.css?v=11">
     <script src="../js/vyrde.js" defer></script>
     <script src="../js/neo-header.js" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
+<body data-light-theme="classic" data-dark-theme="space" data-theme="classic" data-vp-app="ordaklok" data-vp-layout="expanded" data-vp-preserve data-vp-stone-mascot>
 
 <neo-header></neo-header>
 
@@ -43,7 +45,7 @@
                 </div>
 
                 <div class="bk-setup-vyrde">
-                    <span class="vyrde bk-vyrde" id="setupVyrde" data-vyrde="wave" data-vyrde-alt="Vyrde, maskoten"></span>
+                    <img class="bk-vyrde" id="setupVyrde" data-vp-mascot src="../_resources/vyrdepil-design/vyrde.png" alt="Vyrde, maskoten" width="192" height="184">
                     <div class="bk-bubble bk-bubble-left" id="vyrdeBubble">Godt folk! Vel kampform under, juster reglane, og ring start når du er klar.</div>
                 </div>
 
@@ -157,6 +159,12 @@
     el.appendChild(BKIcons.create(el.dataset.icon, 18));
   });
 </script>
+
+<script src="../js/vyrdepil-icons.js"></script>
+<script src="../js/vyrdepil-util.js"></script>
+<script src="../js/vyrdepil-design.js"></script>
+<script src="../js/vyrdepil-app-shell.js?v=6"></script>
+<script src="../js/vyrdepil-menu.js"></script>
 
 </body>
 </html>

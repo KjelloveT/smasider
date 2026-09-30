@@ -88,7 +88,10 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .jeopardy-grid {
   display: grid;
   grid-template-columns: repeat(var(--cols, 5), minmax(0, 1fr));
-  gap: 8px; margin-top: 18px;
+  gap: 8px; margin-top: 18px; padding: 8px;
+  border: 3px solid var(--vp-frame, #142820);
+  border-radius: 10px;
+  background: var(--vp-frame, #142820);
 }
 .jeopardy-category {
   display: flex; align-items: center; justify-content: center; text-align: center;
@@ -113,7 +116,13 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 }
 
 /* ===== Spørsmålsmodal ===== */
-.question-modal { max-width: 640px; }
+.question-modal {
+  max-width: 640px;
+  color: #000;
+  background: var(--vp-paper, #fffdf5);
+  border: 3px solid var(--vp-frame, #142820);
+  box-shadow: 0 4px 0 var(--vp-shadow, #142820);
+}
 .question-category { font-weight: 900; font-size: 1.1rem; }
 .question-points {
   margin-left: auto; margin-right: 10px; font-weight: 900;

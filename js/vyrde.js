@@ -49,6 +49,7 @@
   /** Set uttrykk på eit .vyrde-element. */
   function setMood(el, mood) {
     if (!el) return;
+    if (el.tagName === 'IMG' && el.hasAttribute('data-vp-mascot')) return;
     const frame = frameOf(mood);
     el.style.setProperty('--vyrde-col', frame % COLS);
     el.style.setProperty('--vyrde-row', Math.floor(frame / COLS));
@@ -71,6 +72,18 @@
   /** Byggjer eit ferdig maskot-element. */
   function create(opts) {
     opts = opts || {};
+    if (document.body && (document.body.hasAttribute('data-vp-design') || document.body.hasAttribute('data-vp-stone-mascot'))) {
+      const image = document.createElement('img');
+      image.className = (opts.className ? opts.className + ' ' : '') + 'vp-game-mascot';
+      image.dataset.vpMascot = '';
+      image.src = BASE + '_resources/vyrdepil-design/vyrde.png';
+      image.alt = opts.alt || 'Vyrde, maskoten til Vyrdepil';
+      image.decoding = 'async';
+      image.width = 192;
+      image.height = 184;
+      if (opts.size) image.style.width = typeof opts.size === 'number' ? opts.size + 'px' : opts.size;
+      return image;
+    }
     const el = document.createElement('span');
     el.className = 'vyrde' + (opts.className ? ' ' + opts.className : '');
     if (opts.alt) el.dataset.vyrdeAlt = opts.alt;

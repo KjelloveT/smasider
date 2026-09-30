@@ -7,7 +7,22 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
 ### Endra
 - **Framsida har fått eit tydelegare hero-skilt og infoskilt.** Appkorta har éi kort omtale og fire kolonnar på stor skjerm. Personvern og lisens har lesbare overskrifter, og Vyrde står ved personvernsteksten.
-- **Duldord, Talsmia og Ordkryss har nye logoar.** Heimsank viser den nye logoen sin. Vyrde skiftar positur og uttrykk kvart trettiande sekund i fellesnavigasjonen og på framsida.
+- **Logoane er kopla til rett verktøy.** Duldord og Ordkryss held på dei tidlegare logoane sine, Talsmia bruker tallogoen, og Heimsank viser den nye logoen sin. Vyrde skiftar positur og uttrykk kvart trettiande sekund i fellesnavigasjonen og på framsida.
+
+## [1.62] — 2026-09-30
+
+### Endra
+- **Frødebrett og Leitekryss har fått logoar som viser kva dei gjer.** Frødebrett viser eit quizbrett i Jeopardy-stil, medan Leitekryss viser eit ord som er ringa rundt. Duldord og Ordkryss bruker dei tidlegare logoane sine.
+- **Bolkestokk og Ormritaren bruker felles toppmeny i redigeringsflatene.** Menyside og navigasjon følgjer Vyrdepil; blokk- og kodearbeidsflatene fungerer vidare som før.
+- **Handsam bilete har tydelegare verktøykort.** Relaterte innstillingar er samla i eigne grupper med svart tekst på lyse flater.
+
+### Fiksa
+- **Lydskurd har lyse redigerings- og opptaksflater.** Bølgjeform, tidslinje og opptaksdialog er no lesbare.
+- **Tidvis viser éi digital klokke om gongen.** Den doble skuggevisinga er fjerna.
+- **Heite Stavrim har betre kontrast.** Bokstavar, tidtaking, kategoriar og lagpoeng står på lyse flater med svart tekst.
+- **Vidfaren viser att hovudstadsbileta, skil rett og gale svar, og har ein større kartpinne.**
+- **Frødebrett har tydelege skiljelinjer mellom rutene, og spørsmålsdialogen har ei lesbar bakgrunn.**
+- **Reknedæsj fyller skjermhøgda utan ei ekstra introflate.** Spelbrettet held sideforholdet og skalerer til visingsplassen.
 
 ## [1.60] — 2026-09-29
 

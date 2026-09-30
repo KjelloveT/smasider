@@ -285,6 +285,47 @@ select.neo-input { cursor: pointer; }
     .step, .btn, .tool > summary::after { transition: none; }
 }
 
+/* Verktøygruppene skal lesast som eigne, lyse kort. Den gamle temaveljaren
+   blir slått av på den nye sida, så gje dei opne overskriftene og etikettane
+   faste kontrastfargar frå Vyrdepil-paletten. */
+body[data-vp-app="bildebehandling"] {
+    --bg: var(--vp-wood, #fff9e9);
+    --surface: var(--vp-paper, #fffdf5);
+    --text: var(--vp-ink, #000);
+    --border: var(--vp-frame, #142820);
+    --shadow: var(--vp-frame, #142820);
+    --muted: #454a46;
+    --accent: var(--vp-honey, #f5dfaa);
+    --accent2: var(--vp-coral, #efb29d);
+    --accent3: var(--vp-moss, #d5e5c5);
+    --text-on-accent: #000;
+    --text-on-light-accent: #000;
+}
+
+body[data-vp-app="bildebehandling"] .tools { gap: 14px; }
+body[data-vp-app="bildebehandling"] .tool,
+body[data-vp-app="bildebehandling"] .tool-card {
+    color: #000;
+    background: var(--vp-paper, #fffdf5);
+    border: 2px solid var(--vp-frame, #142820);
+    border-radius: 8px;
+    box-shadow: none;
+}
+body[data-vp-app="bildebehandling"] .tool > summary {
+    min-height: 48px;
+    color: #000;
+    background: var(--vp-wood, #fff9e9);
+}
+body[data-vp-app="bildebehandling"] .tool[open] > summary {
+    color: #000;
+    background: var(--vp-honey, #f5dfaa);
+    border-bottom-color: var(--vp-frame, #142820);
+}
+body[data-vp-app="bildebehandling"] .tool-card h2,
+body[data-vp-app="bildebehandling"] .field-label { color: #142820; }
+body[data-vp-app="bildebehandling"] .tool-body { background: var(--vp-paper, #fffdf5); }
+body[data-vp-app="bildebehandling"] .tool > summary:focus-visible { outline: 3px solid var(--vp-focus, #8a5b25); outline-offset: -4px; }
+
 /* ──────────────── Smalare skjermar ──────────────── */
 @media (max-width: 1080px) {
     .work { grid-template-columns: 1fr; }

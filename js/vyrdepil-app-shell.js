@@ -9,8 +9,8 @@
   const isHome = body.dataset.vpHome === 'true';
   if (!appId && !isHome) return;
 
-  const protectedApps = new Set(['heimsank', 'bolkestokk']);
-  const preserveDesign = protectedApps.has(appId);
+  const protectedApps = new Set(['heimsank']);
+  const preserveDesign = protectedApps.has(appId) || body.hasAttribute('data-vp-preserve');
   if (isHome) body.classList.add('vp-home-page');
   else body.classList.add('vp-migrated-page');
   if (preserveDesign) body.setAttribute('data-vp-preserve', '');
@@ -94,7 +94,7 @@
     return hero || null;
   }
   function addAppIntro(app, logoPath) {
-    if (protectedApps.has(appId)) return;
+    if (preserveDesign || body.dataset.vpFullscreen === 'true') return;
     const root = main || document.body;
     const hero = findHero(root);
     const stage = document.createElement('div');

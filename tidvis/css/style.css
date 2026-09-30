@@ -434,7 +434,6 @@
   text-shadow: 0 0 14px rgba(56,224,138,.55);
   position: relative; font-variant-numeric: tabular-nums;
 }
-.tv .lcd__time .ghost { position:absolute; inset:0; color: var(--lcd-off); z-index:0; }
 .tv .lcd__time .val { position: relative; z-index: 1; }
 .tv .lcd__label { font-family: var(--mono); font-size:12px; letter-spacing:3px; color: rgba(56,224,138,.6); }
 

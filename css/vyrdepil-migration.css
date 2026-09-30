@@ -81,6 +81,15 @@ body.vp-migrated-page:not([data-vp-preserve]) :is(.active,.selected,[aria-presse
 body.vp-migrated-page:not([data-vp-preserve]) :is(button,.btn,a.btn,.tb-btn,.step,.option-btn,.nav-btn,.hs-btn,.lk-start,.lk-stat-btn,.bk-btn,.dv-icon-btn):disabled {
   color: #000; background-color: var(--vp-stone); box-shadow: none; cursor: not-allowed;
 }
+/* Vidfaren låser alle svar etter innlevering, men fargane viser framleis
+   kva som var rett og gale. Den generelle deaktivert-stilen må ikkje viske
+   ut denne spelstatusen. */
+body.vp-migrated-page[data-vp-app="vidfaren"]:not([data-vp-preserve]) #answerGrid .lk-ans.correct:disabled {
+  color: #08240f !important; background: #2ecc71 !important; box-shadow: 4px 4px 0 var(--vp-shadow) !important;
+}
+body.vp-migrated-page[data-vp-app="vidfaren"]:not([data-vp-preserve]) #answerGrid .lk-ans.wrong:disabled {
+  color: #fff !important; background: #c83228 !important; box-shadow: 4px 4px 0 var(--vp-shadow) !important;
+}
 body.vp-migrated-page:not([data-vp-preserve]) :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea) {
   max-width: 100%; color: #000; border: 2px solid var(--vp-frame); border-radius: 7px;
   background-color: var(--vp-paper); font: 400 1rem/1.45 var(--vp-font); color-scheme: light;
@@ -172,6 +181,25 @@ body.vp-migrated-page:not([data-vp-preserve])[data-vp-layout="canvas"] #game-con
 body.vp-migrated-page[data-vp-app="klassekart"] #toolbar {
   margin: 8px 8px 0; padding: 8px 12px; color: #000; background: var(--vp-wood) !important;
   border: 3px solid var(--vp-frame); border-radius: 9px; box-shadow: 0 3px 0 var(--vp-shadow);
+}
+/* Reknedæsj bruker heile vindauget til sjølve spelet. Den generelle canvas-
+   introen tek unødig høgd her, så denne ruta får fast skjermhøgd og skalerer
+   spelbrettet innanfor plassen som står att under den felles toppmenyen. */
+body.vp-migrated-page[data-vp-app="reknedaesj"][data-vp-fullscreen="true"] {
+  height: 100vh !important; height: 100dvh !important; min-height: 0 !important;
+  overflow: hidden !important;
+}
+body.vp-migrated-page[data-vp-app="reknedaesj"][data-vp-fullscreen="true"] > .vp-migrated-header { flex: 0 0 auto; }
+body.vp-migrated-page[data-vp-app="reknedaesj"][data-vp-fullscreen="true"] .page-wrapper {
+  flex: 1 1 0; min-height: 0; padding: 8px 12px; align-items: stretch;
+}
+body.vp-migrated-page[data-vp-app="reknedaesj"][data-vp-fullscreen="true"] .page-wrapper > .main-content.vp-migrated-main {
+  flex: 1 1 0; min-width: 0; min-height: 0; align-self: stretch; container-type: size;
+}
+body.vp-migrated-page[data-vp-app="reknedaesj"][data-vp-fullscreen="true"] #gameContainer {
+  width: min(100%, calc(90cqh * 2)) !important;
+  max-width: min(1600px, calc(90cqh * 2)) !important;
+  max-height: 100%; margin: auto;
 }
 body.vp-migrated-page[data-vp-app="klassekart"] #toolbar .toolbar-title { color: #000; }
 /* Startmenyen er del av Rettslause Raud, medan sjølve spelbana held på si eiga grafikk. */

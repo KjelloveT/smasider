@@ -192,6 +192,65 @@ a.orm-modulkort:hover { transform: translate(-2px, -2px); }
     border: 2px solid var(--border);
 }
 
+/* Landingssida er del av den nye Vyrdepil-identiteten. Ho brukar framleis
+   dei gamle modulklassane, så gje dei faste lysflatefargane og samla kort som
+   står tydeleg frå landskapet bak. */
+body[data-vp-app="ormritaren"] {
+    --bg: var(--vp-wood, #fff9e9);
+    --surface: var(--vp-paper, #fffdf5);
+    --text: var(--vp-ink, #000);
+    --border: var(--vp-frame, #142820);
+    --shadow: var(--vp-frame, #142820);
+    --muted: #454a46;
+    --accent: var(--vp-moss, #d5e5c5);
+    --accent2: var(--vp-coral, #efb29d);
+    --accent3: var(--vp-sky, #d6e8f1);
+    --accent4: var(--vp-honey, #f5dfaa);
+    --accent5: var(--vp-heather, #e5dcef);
+    --text-on-accent: #000;
+    --text-on-light-accent: #000;
+}
+
+body[data-vp-app="ormritaren"] .orm-modulgruppe,
+body[data-vp-app="ormritaren"] .orm-larartekst {
+    padding: clamp(16px, 2.2vw, 26px);
+    border: 3px solid var(--vp-frame, #142820);
+    border-radius: 10px;
+    background: var(--vp-wood, #fff9e9);
+    color: #000;
+}
+
+body[data-vp-app="ormritaren"] .orm-modulgruppe > h2 {
+    margin: 0 0 14px;
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--vp-frame, #142820);
+    background: var(--vp-honey, #f5dfaa);
+    color: #000;
+}
+
+body[data-vp-app="ormritaren"] .orm-gruppetekst { color: #000; }
+body[data-vp-app="ormritaren"] .orm-modulkort {
+    overflow: hidden;
+    border: 2px solid var(--vp-frame, #142820);
+    border-radius: 8px;
+    background: var(--vp-paper, #fffdf5);
+    color: #000;
+    box-shadow: none;
+}
+body[data-vp-app="ormritaren"] .orm-modulkort .orm-modultopp {
+    min-height: 54px;
+    padding: 10px 12px;
+    color: #000;
+    background: var(--vp-paper, #fffdf5);
+    border-bottom: 1px solid var(--vp-frame, #142820);
+}
+body[data-vp-app="ormritaren"] .orm-modulkropp { color: #000; background: var(--vp-paper, #fffdf5); }
+body[data-vp-app="ormritaren"] .orm-frikort-pil { color: #000; }
+body[data-vp-app="ormritaren"] .orm-leksjonslenkje { color: #000; }
+body[data-vp-app="ormritaren"] .orm-modulkjem,
+body[data-vp-app="ormritaren"] .orm-framgang-tal,
+body[data-vp-app="ormritaren"] .orm-leksjonsmerke { color: #303a33; }
+
 .orm-leksjonstittel { flex: 1; min-width: 0; }
 
 /* Ferdig: hake i aksentfargen, og tittelen dempa så det uferdige står fram. */

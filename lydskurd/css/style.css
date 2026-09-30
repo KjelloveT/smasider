@@ -642,3 +642,33 @@ kbd {
 
 @media (prefers-reduced-motion: reduce) {
 }
+
+/* Lydskurd brukar framleis dei funksjonelle flatene frå den opphavlege
+   lydeditoren. App-skallet fjernar den gamle temaveljaren, så bind dei
+   naudsynte variablane til den faste, lyse Vyrdepil-paletten. Dette gjev
+   både canvas-teikninga og opptaksdialogen ei synleg papirflate. */
+body[data-vp-app="lydskurd"] {
+  --bg: var(--vp-wood, #fff9e9);
+  --surface: var(--vp-paper, #fffdf5);
+  --text: var(--vp-ink, #000);
+  --border: var(--vp-frame, #142820);
+  --shadow: var(--vp-frame, #142820);
+  --muted: #454a46;
+  --accent: var(--vp-moss, #d5e5c5);
+  --accent2: var(--vp-coral, #efb29d);
+  --accent3: var(--vp-sky, #d6e8f1);
+  --accent4: var(--vp-honey, #f5dfaa);
+  --accent5: var(--vp-heather, #e5dcef);
+  --text-on-accent: #000;
+  --text-on-light-accent: #000;
+}
+
+body[data-vp-app="lydskurd"] :is(.ls-editor, .modal1, .modal2, .modal3, .modal4, .modal5) {
+  background-color: var(--vp-paper, #fffdf5);
+  color: var(--vp-ink, #000);
+}
+
+body[data-vp-app="lydskurd"] .ls-track-heads,
+body[data-vp-app="lydskurd"] .ls-track-head-spacer {
+  background-color: var(--vp-wood, #fff9e9);
+}

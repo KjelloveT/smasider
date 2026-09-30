@@ -16,6 +16,22 @@
     color: var(--text);
 }
 
+body[data-vp-app="bolkestokk"]:not([data-vp-preserve]) {
+    --bg: var(--vp-wood, #fff9e9);
+    --surface: var(--vp-paper, #fffdf5);
+    --text: var(--vp-ink, #000);
+    --border: var(--vp-frame, #142820);
+    --shadow: var(--vp-frame, #142820);
+    --muted: #454a46;
+    --accent: var(--vp-moss, #d5e5c5);
+    --accent2: var(--vp-coral, #efb29d);
+    --accent3: var(--vp-sky, #d6e8f1);
+    --accent4: var(--vp-honey, #f5dfaa);
+    --accent5: var(--vp-heather, #e5dcef);
+    --text-on-accent: #000;
+    --text-on-light-accent: #000;
+}
+
 /* ---- modulgrupper ----------------------------------------------------- */
 
 .bs-modulgruppe { margin-bottom: 32px; }

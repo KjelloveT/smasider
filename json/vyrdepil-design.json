@@ -14,7 +14,7 @@
     "style": "mala",
     "name": "Måla flater",
     "files": {
-      "duldord": "_resources/vyrdepil-design/logos/duldord-jeopardy.png",
+      "duldord": "_resources/vyrdepil-design/logos/duldord-mala.png",
       "klassekart": "_resources/vyrdepil-design/logos/klassekart-mala.png",
       "rissverk": "_resources/vyrdepil-design/logos/rissverk-mala.png",
       "vegamot": "_resources/vyrdepil-design/logos/vegamot-mala.png",
@@ -24,7 +24,7 @@
       "rettslause_raud": "_resources/vyrdepil-design/logos/rettslause-raad-mala.png",
       "kludre_klodrian": "_resources/vyrdepil-design/logos/kludre-klodrian-mala.png",
       "baretevling": "_resources/vyrdepil-design/logos/baretevling-mala.png",
-      "frodebrett": "_resources/vyrdepil-design/logos/frodebrett-mala.png",
+      "frodebrett": "_resources/vyrdepil-design/logos/frodebrett-quiz-board.png",
       "ordaklok": "_resources/vyrdepil-design/logos/ordaklok-mala.png",
       "tidvis": "_resources/vyrdepil-design/logos/tidvis-mala.png",
       "heite_stavrim": "_resources/vyrdepil-design/logos/heite-stavrim-mala.png",
@@ -39,8 +39,8 @@
       "flokkdeilar": "_resources/vyrdepil-design/logos/flokkdeilar-mala.png",
       "eikekveik": "_resources/vyrdepil-design/logos/eikekveik-mala.png",
       "ordskodde": "_resources/vyrdepil-design/logos/ordskodde-mala.png",
-      "ordkryss": "_resources/vyrdepil-design/logos/ordkryss-found-word.png",
-      "leitekryss": "_resources/vyrdepil-design/logos/leitekryss-mala.png",
+      "ordkryss": "_resources/vyrdepil-design/logos/ordkryss-mala.png",
+      "leitekryss": "_resources/vyrdepil-design/logos/leitekryss-circled-word.png",
       "vitjingsruta": "_resources/vyrdepil-design/logos/vitjingsruta-mala.png",
       "dagsvegen": "_resources/vyrdepil-design/logos/dagsvegen-mala.png"
     }

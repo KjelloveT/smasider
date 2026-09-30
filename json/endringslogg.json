@@ -2,6 +2,43 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.62",
+      "dato": "2026-09-30",
+      "samandrag": "Fleire spel og verktøy har fått betre lesbarheit og felles toppmeny.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Logoar",
+          "tekst": "Duldord og Ordkryss har fått tilbake dei tidlegare logoane. Frødebrett får eit quizbrett i Jeopardy-stil, og Leitekryss viser eit ord som er ringa rundt."
+        },
+        {
+          "t": "endra",
+          "kva": "Bolkestokk og Ormritaren",
+          "tekst": "Begge editorane bruker den felles Vyrdepil-toppmenyen. Arbeidsflatene er bevarte."
+        },
+        {
+          "t": "endra",
+          "kva": "Handsam bilete",
+          "tekst": "Verktøy og val er delte i tydelege kort med god kontrast."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Lydskurd, Tidvis og Heite Stavrim",
+          "tekst": "Lydeditor og opptaksdialog har lyse flater, Tidvis viser éi digital klokke, og Heite Stavrim har høg kontrast."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Vidfaren og Frødebrett",
+          "tekst": "Vidfaren viser att hovudstadsbileta, skil rett og gale svar, og har større kartpinne. Frødebrett har ruteinndeling og lesbar spørsmålsdialog."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Reknedæsj",
+          "tekst": "Spelruta fyller tilgjengeleg skjermhøgd utan ekstra introflate."
+        }
+      ]
+    },
+    {
       "versjon": "1.61",
       "dato": "2026-09-30",
       "samandrag": "Framsida har fått betre leseflyt og oppdaterte Vyrde- og applogoar.",
@@ -14,7 +51,7 @@
         {
           "t": "endra",
           "kva": "Applogoar og Vyrde",
-          "tekst": "Duldord, Talsmia og Ordkryss har nye logoar, Heimsank bruker den nyaste logoen sin, og Vyrde skiftar positur og uttrykk kvart trettiande sekund."
+          "tekst": "Duldord og Ordkryss held på dei tidlegare logoane sine; Talsmia bruker tallogoen, Heimsank den nyaste logoen sin, og Vyrde skiftar positur og uttrykk kvart trettiande sekund."
         }
       ]
     },
