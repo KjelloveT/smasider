@@ -364,6 +364,8 @@ textarea.vp-input { min-height: 110px; resize: vertical; }
   display: grid;
   align-content: start;
   gap: clamp(18px, 2.3vw, 28px);
+  width: min(100% - 32px, 960px);
+  margin-inline: auto;
   padding-block: clamp(20px, 3vw, 40px) 64px;
 }
 .vp-policy-page { color: var(--vp-ink); }
@@ -387,8 +389,10 @@ textarea.vp-input { min-height: 110px; resize: vertical; }
 .vp-policy-panel :is(h3,h4) { margin-block: 1.5em .55em; }
 .vp-policy-panel h3 { font-size: clamp(1.08rem, 1.8vw, 1.25rem); }
 .vp-policy-panel h4 { font-size: 1.05rem; }
-.vp-policy-panel :is(p,ul,ol,blockquote,details,.vp-policy-marks) { max-width: 105ch; }
+.vp-policy-panel :is(p,ul,ol,blockquote,details,.vp-policy-marks) { max-width: 78ch; }
 .vp-policy-panel ul,.vp-policy-panel ol { padding-inline-start: 1.4em; }
+.vp-policy-panel h4[data-vp-app-logo-id] { display: flex; align-items: center; gap: 9px; }
+.vp-policy-app-logo { flex: 0 0 auto; width: 32px; height: 32px; object-fit: contain; }
 .vp-policy-heading {
   position: relative;
   z-index: 1;
@@ -447,6 +451,8 @@ textarea.vp-input { min-height: 110px; resize: vertical; }
 .vp-policy-page .vp-button { margin-block: 4px; }
 .vp-policy-page pre { max-width: 100%; border-radius: 8px; color: var(--vp-ink); }
 .vp-site-footer {
+  width: min(100% - 32px, 960px);
+  margin-inline: auto;
   margin-bottom: 24px;
   padding: 20px;
   border: 3px solid var(--vp-frame);

@@ -135,35 +135,25 @@
         const apps = (data.apps || []).filter(a => a.cat === cat.id && !a.hidden);
         if (!apps.length) return;
 
-        const sec = document.createElement('details');
-        sec.className = 'accordion-box section-accordion';
-        /* accent2 er standardfargen på accordion-boksen — dei andre treng ein modifikator. */
-        if (cat.accent && cat.accent !== 'accent2') sec.classList.add('accordion-box-' + cat.accent);
-        sec.open = cat.open === true;
+        const sec = document.createElement('section');
+        sec.className = 'vp-home-category';
 
-        const sum = document.createElement('summary');
         const ic = document.createElement('span');
-        ic.className = 'section-accordion-icon';
+        ic.className = 'vp-home-category-icon';
+        ic.setAttribute('aria-hidden', 'true');
         ic.innerHTML = svg(cat.icon, 28).replace(' style="vertical-align:-5px;"', '');
-        sum.appendChild(ic);
         const h2 = document.createElement('h2');
-        h2.className = 'section-accordion-title';
+        h2.className = 'vp-heading vp-home-section-heading vp-home-category-heading';
         h2.textContent = cat.label;
-        sum.appendChild(h2);
-        const count = document.createElement('span');
-        count.className = 'section-accordion-count';
-        /* Kjem-snart-korta tel ikkje med i talet. */
-        count.textContent = apps.filter(a => !a.disabled).length;
-        sum.appendChild(count);
-        sec.appendChild(sum);
+        h2.id = 'home-category-' + cat.id;
+        h2.prepend(ic);
+        sec.setAttribute('aria-labelledby', h2.id);
+        sec.appendChild(h2);
 
-        const body = document.createElement('div');
-        body.className = 'accordion-body';
         const grid = document.createElement('div');
         grid.className = 'card-grid';
         apps.forEach(a => grid.appendChild(card(a, logos)));
-        body.appendChild(grid);
-        sec.appendChild(body);
+        sec.appendChild(grid);
 
         host.appendChild(sec);
       });

@@ -37,7 +37,7 @@
   function punktEl(p) {
     const type = TYPAR[p.t] || TYPAR.endra;
     const li = document.createElement('li');
-    li.className = type.klasse;
+    li.className = 'endr-punkt-item endr-punkt-item--' + p.t;
 
     const linje1 = document.createElement('div');
     linje1.className = 'endr-linje1';
@@ -61,24 +61,24 @@
 
   function versjonEl(v) {
     const boks = document.createElement('section');
-    boks.className = 'box2 endr-versjon';
+    boks.className = 'vp-panel vp-panel--plain endr-versjon';
 
     const hovud = document.createElement('div');
     hovud.className = 'endr-hovud';
 
     const nr = document.createElement('h2');
-    nr.className = 'endr-nr';
+    nr.className = 'vp-heading endr-nr';
     nr.textContent = 'Versjon ' + v.versjon;
     hovud.appendChild(nr);
 
     const dato = document.createElement('span');
-    dato.className = 'endr-dato';
+    dato.className = 'vp-small endr-dato';
     dato.textContent = datoTekst(v.dato);
     hovud.appendChild(dato);
 
     if (v.samandrag) {
       const s = document.createElement('p');
-      s.className = 'endr-samandrag';
+      s.className = 'vp-prose endr-samandrag';
       s.textContent = v.samandrag;
       hovud.appendChild(s);
     }

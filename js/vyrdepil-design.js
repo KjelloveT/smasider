@@ -11,6 +11,23 @@
     }).catch(error => { registryPromise = null; throw error; });
     return registryPromise;
   }
+  async function initRegisteredLogos(root = document) {
+    const registry = await loadRegistry();
+    root.querySelectorAll('[data-vp-app-logo-id]').forEach(heading => {
+      if (heading.querySelector(':scope > .vp-policy-app-logo')) return;
+      const path = registry.logo?.files?.[heading.dataset.vpAppLogoId];
+      if (!path) return;
+      const image = document.createElement('img');
+      image.className = 'vp-policy-app-logo';
+      image.src = new URL(path, project).href;
+      image.alt = '';
+      image.width = 32;
+      image.height = 32;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      heading.prepend(image);
+    });
+  }
   async function applyIdentity(appId, root = document.body) {
     const registry = await loadRegistry();
     const assignment = registry.apps[appId];
@@ -134,13 +151,14 @@
       });
     }, 30000);
   }
-  global.VyrdepilDesign = { decorate, initSupport, initSelections, initMenus, loadRegistry, applyIdentity };
+  global.VyrdepilDesign = { decorate, initSupport, initSelections, initMenus, loadRegistry, applyIdentity, initRegisteredLogos };
   document.addEventListener('DOMContentLoaded', () => {
     decorate();
     initSupport();
     initSelections();
     initMenus();
     initMascots();
+    if (document.querySelector('[data-vp-app-logo-id]')) initRegisteredLogos().catch(error => console.error(error.message));
     if (document.body.hasAttribute('data-vp-app')) applyIdentity(document.body.dataset.vpApp).catch(error => console.error(error.message));
   });
 })(window);

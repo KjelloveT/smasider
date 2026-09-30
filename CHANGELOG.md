@@ -3,6 +3,14 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.63] — 2026-09-30
+
+### Endra
+- **Framsida har fått fem fagkategoriar.** Alle verktøya er synlege samstundes: fire kort i breidda på stor skjerm, tre på nettbrett og fire på mobil. BåreTevling ligg under Geografi og natur.
+- **Vyrde følgjer med ved informasjonen nedst på framsida.** Personvern, lisens og sidefoten har same innhaldsbreidd, og maskotten held seg synleg på sida ved rulling.
+- **Endringsloggen og informasjonssidene har fått smalare lesebreidd.** Endringar følgjer no fellesdesignet, og personvernoversikta viser applogoane frå designregisteret.
+- **Framsida har fått eit fast infoskilt om det nye designet.** Skiltet inviterer til å melde frå om feil via e-post.
+
 ## [1.62] — 2026-09-30
 
 ### Endra
