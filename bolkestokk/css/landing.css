@@ -34,9 +34,16 @@ body[data-vp-app="bolkestokk"]:not([data-vp-preserve]) {
 
 /* ---- modulgrupper ----------------------------------------------------- */
 
-.bs-modulgruppe { margin: 0 0 30px; }
+.bs-modulgruppe {
+    margin: 0 0 30px;
+    padding: clamp(14px, 2vw, 24px);
+    border: 3px solid var(--vp-frame, #142820);
+    border-radius: 10px;
+    background: var(--vp-wood, #fff9e9);
+    color: #000;
+}
 
-body.vp-migrated-page[data-vp-app="bolkestokk"] #main.vp-migrated-main {
+body.vp-migrated-page[data-vp-app="bolkestokk"]:not([data-vp-preserve]) #main.vp-migrated-main {
     max-width: 1200px;
     margin-inline: auto;
     padding: 0 !important;
