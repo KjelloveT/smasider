@@ -406,9 +406,7 @@ textarea.vp-input { min-height: 110px; resize: vertical; }
   box-shadow: 0 3px 0 var(--vp-shadow);
 }
 .vp-policy-highlight {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
+  display: block;
   margin-block: 18px;
   padding: 14px 16px;
   border: 2px solid var(--vp-frame);
@@ -416,7 +414,7 @@ textarea.vp-input { min-height: 110px; resize: vertical; }
   background: var(--vp-honey);
   color: var(--vp-ink);
 }
-.vp-policy-highlight > svg { flex: 0 0 20px; margin-top: 2px; }
+.vp-policy-highlight > svg { display: inline-block; width: 20px; height: 20px; margin: 0 8px 0 0; vertical-align: -4px; }
 .vp-policy-marks { grid-template-columns: repeat(auto-fit,minmax(min(100%,220px),1fr)); gap: 12px; }
 .vp-policy-mark {
   --vp-panel-fill: var(--vp-wood);
