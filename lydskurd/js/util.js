@@ -92,8 +92,7 @@ LS.util = (function () {
   /* Kort melding nedst på skjermen — sjå Vy.toast() i js/vyrdepil-util.js.
      Handteringa låg tidlegare her, i ni ulike utgåver rundt i repoet. Ho er
      flytta til fellesmodulen så rettingar treffer alle verktøya, og fordi den
-     gamle stilen fylte flata med --accent og fall under AA-kravet i dei sju
-     mørke temaa (AGENTS.md §3.2). */
+     fast UI-palett gjev god kontrast på meldingsflata (AGENTS.md §3.2). */
   function toast(message) {
     return Vy.toast(message);
   }

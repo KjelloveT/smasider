@@ -304,10 +304,6 @@
       window.addEventListener('resize', refresh);
     }
 
-    // Temabyte endrar alle fargane på canvasen.
-    new MutationObserver(() => LS.render.schedule())
-      .observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
-
     refresh();
   }
 

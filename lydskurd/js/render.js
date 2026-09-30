@@ -449,7 +449,7 @@ LS.render = (function () {
     const h = bottom - top;
     const selected = LS.state.isSelected(clip.id);
 
-    // Hard skugge, ingen mjuking — neobrutalisme.
+    // Hard skugge utan mjuk kant, i tråd med den valde Vyrdepil-stilen.
     c.fillStyle = colors.shadow;
     c.fillRect(x + SHADOW, top + SHADOW, w, h);
 

@@ -1,4 +1,4 @@
-/* Ljodbanken — utvidar neobrutalisme.css.
+/* Ljodbanken — appspesifikke tillegg til fellesstilen.
    Alle klassar er prefiksa .lb- så dei ikkje kolliderer med designsystemet.
 
    Flata er ei lang liste med korte rader. Rada er sjølve arbeidsflata:
@@ -187,8 +187,8 @@ canvas:focus-visible {
   letter-spacing: 0.04em;
   color: var(--muted);
 }
-/* Åtvaringa ber fargen i ramma, ikkje i teksten. Liten tekst i aksentfarge
-   fell under kontrastkravet i fleire av dei mørke temaa. */
+/* Åtvaringa ber fargen i ramma, ikkje i teksten. Liten tekst held den faste
+   mørke tekstfargen på den lyse flata. */
 .lb-quiet {
   color: var(--text);
   border: 2px solid var(--accent2);

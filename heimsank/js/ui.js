@@ -33,7 +33,8 @@ const HeimsankUI = (function () {
   function syncDialogs() {
     const top = dialogs[dialogs.length - 1];
     document.querySelector('.page-wrapper').inert = !!top;
-    document.querySelector('neo-header').inert = !!top;
+    const header = document.querySelector('.vp-header');
+    if (header) header.inert = !!top;
     document.body.style.overflow = top ? 'hidden' : '';
     dialogs.forEach((item, index) => {
       item.el.inert = item !== top;

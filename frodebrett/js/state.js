@@ -34,7 +34,7 @@
   FB.show = (id) => { const e = FB.el(id); if (e) e.classList.remove('hidden'); };
   FB.hide = (id) => { const e = FB.el(id); if (e) e.classList.add('hidden'); };
 
-  // Modal-overlay (neobrutalisme: .modal-overlay.open -> display:flex)
+  // Modal-overlay blir vist når ho får klassa .open.
   FB.openOverlay = (id) => { const e = FB.el(id); if (e) e.classList.add('open'); };
   FB.closeOverlay = (id) => { const e = FB.el(id); if (e) e.classList.remove('open'); };
   FB.isOverlayOpen = (id) => { const e = FB.el(id); return !!e && e.classList.contains('open'); };

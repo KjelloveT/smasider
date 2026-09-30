@@ -259,11 +259,18 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.0">
+    <link rel="stylesheet" href="vyrdepil.css?v=1">
+    <script src="../js/vyrdepil-icons.js" defer></script>
+    <script src="../js/vyrdepil-util.js" defer></script>
+    <script src="../js/vyrdepil-design.js?v=0.9" defer></script>
+    <script src="../js/vyrdepil-app-shell.js?v=7" defer></script>
+    <script src="../js/vyrdepil-menu.js?v=2" defer></script>
 </head>
-<body>
+<body class="vp-page quiz-page" data-vp-site-page="true">
     <div class="container">
         <header>
-            <h1>🎯 Kviss Host</h1>
+            <h1><span data-icon="target" aria-hidden="true"></span> Kvissvert</h1>
             <p>Live quiz for klasserommet - fullt personvern</p>
             
             <div class="status-bar">
@@ -285,7 +292,7 @@
 
         <main class="main-content">
             <section class="control-panel">
-                <h2 class="section-title">🎮 Kontrollpanel</h2>
+                <h2 class="section-title"><span data-icon="list" aria-hidden="true"></span> Kontrollpanel</h2>
                 
                 <div class="room-info">
                     <div><strong>Rom-kode:</strong></div>
@@ -315,7 +322,7 @@
                 </div>
 
                 <div class="sample-questions">
-                    <h3 style="margin-bottom: 10px;">📝 Eksempelspørsmål:</h3>
+                    <h3 style="margin-bottom: 10px;"><span data-icon="fileJson" aria-hidden="true"></span> Døme på spørsmål:</h3>
                     <div class="sample-question">
                         <strong>Hva er hovedstaden i Norge?</strong><br>
                         A) Oslo B) Bergen C) Trondheim D) Stavanger
@@ -332,7 +339,7 @@
             </section>
 
             <section class="players-panel">
-                <h2 class="section-title">👥 Spelarar</h2>
+                <h2 class="section-title"><span data-icon="users" aria-hidden="true"></span> Spelarar</h2>
                 
                 <div class="players-list" id="players-list">
                     <div style="text-align: center; color: #666; padding: 20px;">
@@ -341,7 +348,7 @@
                 </div>
 
                 <div style="margin-top: 20px;">
-                    <h3 style="margin-bottom: 10px;">🏆 Resultat:</h3>
+                    <h3 style="margin-bottom: 10px;"><span data-icon="trophy" aria-hidden="true"></span> Resultat:</h3>
                     <div id="leaderboard">
                         <div style="text-align: center; color: #666; padding: 20px;">
                             Ingen resultat enno
@@ -772,7 +779,7 @@
                 if (sortedPlayers.length === 0) return;
                 
                 const winner = sortedPlayers[0];
-                alert(`🏆 Kviss ferdig!\n\nVinnar: ${winner.name}\nPoeng: ${winner.score}`);
+                alert(`Kviss ferdig!\n\nVinnar: ${winner.name}\nPoeng: ${winner.score}`);
             }
         }
 

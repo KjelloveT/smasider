@@ -312,14 +312,6 @@ LB.render = (function () {
     progressFill = document.getElementById('progressFill');
     progressLabel = document.getElementById('progressLabel');
 
-    /* Lydkurvene er teikna med fargane frå temaet. Byter brukaren tema,
-       står dei att i dei gamle fargane til noko anna endrar rada — så vi
-       gløymer kva vi teikna og teiknar alt om att. */
-    new MutationObserver(() => {
-      rows.forEach((row) => { row.signature = null; });
-      updateAll();
-      if (LB.util.isOpen(document.getElementById('trimOverlay'))) LB.trim.redraw();
-    }).observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
   }
 
   return { setup, build, updateAll, updateRow, setFilter, scrollTo };

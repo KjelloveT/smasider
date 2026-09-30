@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════
    FRØDEKAPP — Delt UI-hjelpefunksjonar
-   Rendring med neobrutalisme-klassar og Lucide-ikon.
+   Rendring med felles Vyrdepil-flater og Lucide-ikon.
    ══════════════════════════════════════════════ */
 
 const UI = {

@@ -191,7 +191,7 @@
 
   /* ──────────────── Fontveljar ──────────────── */
 
-  /* Ligg ved sida av temaveljaren i ånda: eit val som høyrer heime i ein
+  /* Ligg synleg ved sida av dei andre spelvala: eit val som høyrer heime i ein
      app for dei som strevar med lesing, ikkje gøymd i ei innstilling. */
   function wireFont() {
     const host = $('fontpick');

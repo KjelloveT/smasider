@@ -3,6 +3,15 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.66] — 2026-09-30
+
+### Endra
+- **Heile Vyrdepil-porteføljen bruker no det felles designsystemet.** Gamle globale temaark og den utdaterte designdemomappa er tekne ut. Livekviss og Listesmia har fått same palett og navigasjon; arbeidsflatene i Heimsank og Bolkestokk er bevarte.
+- **Utviklingsreglane er samla på nytt.** Gjeldande krav står i `AGENTS.md` og `DESIGN.md`; eldre redesignnotat er merkte som historiske.
+
+### Fiksa
+- **Dagsvegen er lettare å lese og bruke.** Klokka har lys flate i felles toppstripe, og verktøyskinna dekkjer ikkje lenger arbeidsområdet.
+
 ## [1.65] — 2026-09-30
 
 ### Endra

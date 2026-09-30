@@ -2,6 +2,23 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.66",
+      "dato": "2026-09-30",
+      "samandrag": "Alle sidene følgjer det felles designsystemet, og Dagsvegen har fått ei tydelegare arbeidsflate.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Designsystem",
+          "tekst": "Gamle globale temaark og utdaterte demoar er fjerna. Livekviss og Listesmia bruker no felles palett og navigasjon."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Dagsvegen",
+          "tekst": "Klokka er lys og lesbar i toppstripa, og verktøyskinna legg seg ikkje over arbeidsflata."
+        }
+      ]
+    },
+    {
       "versjon": "1.65",
       "dato": "2026-09-30",
       "samandrag": "Språk- og ordverktøya, Tidvis, Talsmia og Vitjingsruta har fått avgrensa innhaldsbreidd.",

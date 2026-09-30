@@ -1,4 +1,4 @@
-/* Ormritaren — landingssida. Utvidar css/neobrutalisme.css.
+/* Ormritaren — landingssida. Brukar felles Vyrdepil-palett og navigasjon.
  *
  * Dette er ei innhaldsside, ikkje ei arbeidsflate, så ho brukar ikkje
  * .main-wide (AGENTS.md §3.1.1).
@@ -56,7 +56,7 @@ a.orm-modulkort:hover { transform: translate(-2px, -2px); }
  *
  * Fyrste utgåve la aksentfargen som bakgrunn med --text-on-accent oppå, slik
  * §3.2 legg opp til. Måling over alle 21 tema viste at det held berre i dei
- * lyse: i mørke tema er --accent og --accent2 lyse neonfargar, og kvit tekst
+ * lyse: --accent og --accent2 er funksjonsfargar, og kvit tekst
  * på dei fall til 2,4–4,2:1 (verst i «hacker» og «dracula»).
  *
  * Difor ber ei stripe fargen i staden. Teksten står på --surface med --text og

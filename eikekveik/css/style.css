@@ -1,4 +1,4 @@
-/* Eikekveik — eige utvalde stilar (utvidar neobrutalisme.css) */
+/* Eikekveik — appspesifikke tillegg til fellesstilen */
 
 .toolbar {
     display: flex;
@@ -506,7 +506,7 @@
     box-shadow: 2px 2px 0 var(--border);
 }
 
-/* Invertert, ikkje aksentfylt — sjå AGENTS.md §3.2 om kontrast i dei mørke temaa. */
+/* Invertert valt tilstand med svart tekst og lys flate for tydeleg kontrast. */
 .shape-btn[aria-pressed="true"] {
     background: var(--text);
     color: var(--surface);
@@ -681,7 +681,7 @@
 }
 
 @media print {
-    neo-header,
+    .vp-header,
     .hero-box,
     .toolbar,
     .props-panel,

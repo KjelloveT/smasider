@@ -406,11 +406,18 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.0">
+    <link rel="stylesheet" href="vyrdepil.css?v=1">
+    <script src="../js/vyrdepil-icons.js" defer></script>
+    <script src="../js/vyrdepil-util.js" defer></script>
+    <script src="../js/vyrdepil-design.js?v=0.9" defer></script>
+    <script src="../js/vyrdepil-app-shell.js?v=7" defer></script>
+    <script src="../js/vyrdepil-menu.js?v=2" defer></script>
 </head>
-<body>
+<body class="vp-page quiz-page" data-vp-site-page="true">
     <div class="container">
         <header>
-            <h1>🎯 Kviss</h1>
+            <h1><span data-icon="target" aria-hidden="true"></span> Kviss</h1>
             <p class="subtitle">Enkel live quiz - kun nettlesar påkrevd</p>
         </header>
 
@@ -420,20 +427,20 @@
 
         <section class="mode-selector" id="mode-selector">
             <div class="mode-card" data-mode="host">
-                <div class="mode-icon">🎮</div>
+                <div class="mode-icon"><span data-icon="bookOpen" aria-hidden="true"></span></div>
                 <div class="mode-title">Lærar</div>
                 <div class="mode-desc">Start quiz og kontroller spørsmål</div>
             </div>
             
             <div class="mode-card" data-mode="player">
-                <div class="mode-icon">👥</div>
+                <div class="mode-icon"><span data-icon="users" aria-hidden="true"></span></div>
                 <div class="mode-title">Elev</div>
                 <div class="mode-desc">Delta i quiz med rom-kode</div>
             </div>
         </section>
 
         <section class="setup-area" id="host-setup">
-            <h2>🎮 Start Quiz</h2>
+            <h2><span data-icon="bookOpen" aria-hidden="true"></span> Start kviss</h2>
             
             <div class="form-group">
                 <label for="host-name">Ditt namn (lærar):</label>
@@ -444,7 +451,7 @@
         </section>
 
         <section class="setup-area" id="player-setup">
-            <h2>👥 Delta i Quiz</h2>
+            <h2><span data-icon="users" aria-hidden="true"></span> Delta i kviss</h2>
             
             <div class="form-group">
                 <label for="room-code-input">Rom-kode:</label>

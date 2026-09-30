@@ -4,10 +4,8 @@
     box-sizing: border-box;
 }
 
-/* Map local Talsmia variable names to the neobrutalisme theme variables
-   (defined by [data-theme="candy"] / [data-theme="neon"] in neobrutalisme.css).
-   Uses body[data-theme] to override the theme-variable definitions. */
-body[data-theme] {
+/* Map Talsmia's local names to the fixed Vyrdepil palette. */
+body[data-vp-design] {
     --bg-color: var(--bg);
     --card-bg: var(--surface);
     --accent-green: var(--accent4);

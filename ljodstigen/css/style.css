@@ -1,9 +1,7 @@
 /* ══════════════════════════════════════════════
-   LJODSTIGEN — utvidar css/neobrutalisme.css
+   LJODSTIGEN — appspesifikke tillegg til fellesstilen
 
-   KONTRAST (AGENTS.md §3.2): ingen flate her blir fylt med
-   var(--accent)/var(--accent2) med tekst oppå. I dei sju mørke temaa er
-   dei lyse neonfargar der kvit tekst fell under 4,5:1. Der vi treng
+   KONTRAST: UI-tekst står på lyse flater. Der vi treng
    farge bak tekst, brukar vi anten inverteringa
    (background: var(--text); color: var(--surface)) eller ein fast lys
    pastell med var(--text-on-light-accent).
@@ -511,7 +509,7 @@ body[data-font="lesefont"] .ljod-bed-letter {
 /* ──────────────── Utskrift ──────────────── */
 
 @media print {
-  neo-header, .ljod-hero, .ljod-alpha, .box-tabs, #printLaerar,
+  .vp-header, .ljod-hero, .ljod-alpha, .box-tabs, #printLaerar,
   .ljod-settings, #profiles, #modes, #stars, .ljod-playbar { display: none !important; }
   .box5, .box4 { border: none; box-shadow: none; }
   .ljod-table th { background: none; color: #000; }

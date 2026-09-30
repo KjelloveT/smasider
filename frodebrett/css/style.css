@@ -1,5 +1,5 @@
-/* Frødebrett — spel-spesifikke utvidingar oppå neobrutalisme.css.
-   Alle fargar kjem frå tema-variablane (--bg, --surface, --text, --accent…). */
+/* Frødebrett — spelspesifikke tillegg i den faste Vyrdepil-paletten.
+   Alle fargar kjem frå fellesvariablane (--bg, --surface, --text, --accent…). */
 
 .hidden { display: none !important; }
 
@@ -10,7 +10,7 @@
 .fb-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 .nav-btn { font-size: clamp(0.9rem, 2vw, 1rem); }
 
-/* ===== Knappe-variantar (neobrutalisme har berre .btn) ===== */
+/* ===== Spelspesifikke knappevariantar ===== */
 .btn-accent  { background: var(--accent);  color: var(--text-on-accent); }
 .btn-accent2 { background: var(--accent2); color: var(--text-on-accent); }
 .btn-accent4 { background: var(--accent4); color: #000; }
@@ -198,9 +198,7 @@ textarea.form-input { resize: vertical; min-height: 80px; }
   box-shadow: 3px 3px 0 var(--shadow);
 }
 .box-tabs.editor-tabs .box-tab:hover { background: var(--bg); }
-/* Invertert som .box5 .box-tab.active i neobrutalisme.css — kvit tekst på
- * --accent fall til 2,54:1 i «hacker» og under 4,5:1 i alle dei sju mørke
- * temaa. Sjå kommentaren ved .box4 .box-header for heile grunngjevinga. */
+/* Vald fane brukar ei lys flate og mørk tekst frå fellespaletten. */
 .box-tabs.editor-tabs .box-tab.active {
   background: var(--text);
   color: var(--surface);
@@ -272,12 +270,11 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .podium-3rd { height: 70px; background: #e0a463; }
 
 @media print {
-  neo-header, .fb-nav, .fb-controls, .game-controls, .btn-remove-team { display: none !important; }
+  .vp-header, .fb-nav, .fb-controls, .game-controls, .btn-remove-team { display: none !important; }
   .jeopardy-grid, .box1 { break-inside: avoid; }
 }
 
-/* Felles skal slår av temaveljaren; bind difor spelrutene til den lyse
-   Vyrdepil-paletten. Den mørke ramma skal vere skilje mellom lyse ruter,
+/* Bruk fast Vyrdepil-palett på spelrutene. Den mørke ramma skal vere skilje mellom lyse ruter,
    ikkje bakgrunn bak svarte tal. */
 body[data-vp-app="frodebrett"] {
   --bg: var(--vp-wood, #fff9e9);

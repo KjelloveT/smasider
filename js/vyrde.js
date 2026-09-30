@@ -35,7 +35,7 @@
   const LOGO_MOODS = ['wave', 'happy', 'think', 'surprised'];
   const CYCLE_MS = 30000;
 
-  /* Same knep som neo-header.js: finn rota ut frå stien til dette scriptet. */
+  /* Finn ressursrota frå stien til dette scriptet, også på undersider. */
   const scriptTag = document.querySelector('script[src*="vyrde.js"]');
   const scriptSrc = scriptTag ? scriptTag.getAttribute('src') : '';
   const BASE = scriptSrc.startsWith('../') ? '../' : '';

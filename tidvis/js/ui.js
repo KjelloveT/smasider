@@ -1,5 +1,5 @@
 /* ui.js — grensesnitt for Tidvis: meny/oppsett, spel-HUD, mikro-feedback,
-   resultat, merkegalleri og tema-synk mot den globale neo-header-temaet.
+   resultat og merkegalleri.
    Byggjer skjermane dynamisk inni .tv-rota (#tv-root). */
 (function () {
   'use strict';
@@ -99,7 +99,6 @@
       this.root.appendChild(this.elGame);
       this.root.appendChild(this.elResult);
 
-      this._themeSync();
       this.show('menu');
     },
 
@@ -114,22 +113,6 @@
       this.elMenu.hidden = name !== 'menu';
       this.elGame.hidden = name !== 'game';
       this.elResult.hidden = name !== 'result';
-    },
-
-    // ---------- TEMA ----------
-    _themeSync: function () {
-      const root = this.root;
-      function resolve() {
-        const body = document.body;
-        const cur = body.getAttribute('data-theme');
-        const dark = body.getAttribute('data-dark-theme') || 'space';
-        root.setAttribute('data-theme', cur === dark ? 'dark' : 'light');
-      }
-      resolve();
-      document.addEventListener('theme-changed', resolve);
-      window.addEventListener('theme-changed', resolve);
-      const obs = new MutationObserver(resolve);
-      obs.observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
     },
 
     // ---------- MENY / OPPSETT ----------

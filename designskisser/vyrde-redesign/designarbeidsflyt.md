@@ -1,3 +1,5 @@
+> **Historisk arbeidsplan:** Denne planen skildrar den tidlege, puljevise migreringa. Ho er ikkje lenger gjeldande. Følg `../../DESIGN.md` og `../../AGENTS.md`.
+
 # Metode for eit samla Vyrdepil-design
 
 Dato: 28. september 2026. Tilråding etter andre pass av appkartlegginga.

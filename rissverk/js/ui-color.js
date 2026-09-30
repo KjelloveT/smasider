@@ -3,7 +3,7 @@
 
    Nettlesaren sin eigen <input type="color"> er ikkje brukande her:
    han ser ulik ut på kvart operativsystem, han sprengjer
-   neobrutalisme-uttrykket, og han kan ikkje handtere gjennomsikt eller
+   Vyrdepil-paletten, og han kan ikkje handtere gjennomsikt eller
    «ingen farge» — to ting eit teikneprogram ikkje klarer seg utan.
 
    Veljaren arbeider i HSV. Det er ikkje fordi HSV er ein betre

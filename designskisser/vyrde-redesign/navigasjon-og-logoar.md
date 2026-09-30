@@ -1,3 +1,5 @@
+> **Historiske meny- og logonotat:** Nokre avgjerder er avløyste av den ferdige porteføljegjennomgangen. Bruk `../../DESIGN.md`, `../../AGENTS.md` og `../../json/vyrdepil-design.json` som gjeldande kjelder.
+
 # Meny og applogoar
 
 ## Den felles toppmenyen

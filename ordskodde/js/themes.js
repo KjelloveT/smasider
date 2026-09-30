@@ -1,6 +1,6 @@
 /* themes.js — forhandsdefinerte tema, skrifttypar og form-register for Ordskodde.
-   Sjølve ordskya er unnateke frå neobrutalisme-designsystemet (avklart i AGENTS-arbeidsflyten),
-   difor har temaa eigne fargar uavhengig av globalt fargetema. */
+   Fargevala gjeld ordskyinnhaldet, ikkje felles UI; dei er difor separate frå
+   paletten som blir brukt på knappar, navigasjon og panel. */
 (function (root) {
   'use strict';
 

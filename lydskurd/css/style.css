@@ -1,4 +1,4 @@
-/* Lydskurd — utvidar neobrutalisme.css.
+/* Lydskurd — appspesifikke tillegg til fellesstilen.
    Alle klassar er prefiksa .ls- så dei ikkje kolliderer med designsystemet.
 
    Tidslinja har element designsystemet ikkje kjenner frå før — spor-baner,
@@ -644,7 +644,7 @@ kbd {
 }
 
 /* Lydskurd brukar framleis dei funksjonelle flatene frå den opphavlege
-   lydeditoren. App-skallet fjernar den gamle temaveljaren, så bind dei
+   lydeditoren. Bind dei
    naudsynte variablane til den faste, lyse Vyrdepil-paletten. Dette gjev
    både canvas-teikninga og opptaksdialogen ei synleg papirflate. */
 body[data-vp-app="lydskurd"] {

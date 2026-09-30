@@ -1,8 +1,8 @@
-/* Ordskodde — utvidar neobrutalisme.css.
+/* Ordskodde — spelspesifikke tillegg til det felles designsystemet.
    Sjølve ordsky-lerretet er unnateke frå designsystemet; alle knappar og
    panel følgjer det. */
 
-/* ---- Skjemaelement i neobrutalisme-stil ---- */
+/* ---- Skjemaelement i felles Vyrdepil-stil ---- */
 .os-textarea {
   width: 100%;
   min-height: clamp(160px, 30vh, 280px);
@@ -221,7 +221,7 @@
 #printArea { display: none; }
 @media print {
   body * { visibility: hidden; }
-  neo-header { display: none; }
+  .vp-header { display: none; }
   #printArea, #printArea * { visibility: visible; }
   #printArea {
     display: block;

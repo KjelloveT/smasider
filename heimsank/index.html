@@ -3,17 +3,15 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heimsank — rekn, oppdag og saml</title><link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="../css/neobrutalisme.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/setup.css">
 <link rel="stylesheet" href="css/cards.css?v=1.52.2">
 <link rel="stylesheet" href="css/game.css">
 <link rel="stylesheet" href="css/dialogs.css">
-    <link rel="stylesheet" href="../css/vyrdepil-design.css?v=0.6">
-    <link rel="stylesheet" href="../css/vyrdepil-migration.css?v=11">
-</head>
-<body class="hs-app" data-light-theme="lavender" data-dark-theme="space" data-theme="lavender" data-vp-app="heimsank" data-vp-layout="standard" data-vp-preserve>
-<neo-header></neo-header><div class="page-wrapper"><main class="main-content hs-main">
+    <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.0">
+    </head>
+<body class="hs-app vp-page" data-vp-app="heimsank" data-vp-layout="standard" data-vp-preserve data-vp-design>
+<div class="page-wrapper"><main class="main-content hs-main">
 <div id="setupScreen">
 <header class="hs-top"><a class="hs-brand" href="./"><img class="hs-brand-mark" src="assets/heimsank-logo.png" alt="">Heimsank<span class="hs-brand-dot">.</span></a><nav class="hs-actions" aria-label="Dine samlingar"><span class="hs-points" aria-live="polite"><span data-icon="coins"></span><strong id="pointsValue">0</strong> poeng</span><button class="hs-btn" onclick="openCollectionViewer()"><span data-icon="folder"></span>Samlingane mine</button><button class="hs-btn" onclick="openBadgeGallery()"><span data-icon="award"></span>Merke</button></nav></header>
 <section class="hs-hero" aria-labelledby="heroTitle"><div class="hs-hero-copy"><span class="hs-eyebrow">Små reknestykke. Store oppdagingar.</span><h1 id="heroTitle">Rekn. Oppdag.<br><span>Saml heile verda.</span></h1><p>Seks rette svar, eitt nytt kort. Finn favorittane dine — og kanskje noko heilt sjeldsynt.</p><div class="hs-rarities" aria-label="Fire sjeldsemder"><span data-rarity="vanleg">Vanleg</span><span data-rarity="sjeldgjevt">Sjeldgjævt</span><span data-rarity="segngjeten">Segngjeten</span><span data-rarity="gudebore">Gudebore</span></div></div><div class="hs-showcase"><div class="hs-orbit" aria-hidden="true"></div><span class="hs-motif hs-motif-one" aria-hidden="true">×</span><span class="hs-motif hs-motif-two" aria-hidden="true">+</span><div id="fanContainer" class="hs-fan" aria-hidden="true"></div><p id="fanCatLabel" class="hs-fan-label">Ei verd av kort ventar på deg</p></div></section>
@@ -32,11 +30,9 @@
 <div id="cardModal" class="hs-overlay" role="dialog" aria-modal="true" aria-label="Kortdetaljar"><section class="hs-dialog hs-detail"><button class="hs-btn hs-close" onclick="closeCardModal()" aria-label="Lukk kortdetaljar"><span data-icon="x"></span></button><div id="modalCard"></div><nav class="hs-card-navigation" aria-label="Bla mellom kort"><button class="hs-btn" id="cardPrev" onclick="navigateCard(-1)">Førre</button><span id="cardPosition"></span><button class="hs-btn" id="cardNext" onclick="navigateCard(1)">Neste</button></nav></section></div>
 <div id="badgeModal" class="hs-overlay" role="dialog" aria-modal="true" aria-labelledby="badgeTitle"><section class="hs-dialog hs-album"><button class="hs-btn hs-close" onclick="closeBadgeGallery()" aria-label="Lukk merke"><span data-icon="x"></span></button><span class="hs-eyebrow">Små og store bragder</span><h2 id="badgeTitle">Merka dine</h2><p class="hs-muted">Sjå kva du har klart, og kva som ventar.</p><div id="badgeGrid" class="hs-badge-grid"></div></section></div>
 <div id="collectionModal" class="hs-overlay" role="dialog" aria-modal="true" aria-labelledby="albumTitle"><section class="hs-dialog hs-album"><button class="hs-btn hs-close" onclick="closeCollectionModal()" aria-label="Lukk samlingane"><span data-icon="x"></span></button><span class="hs-eyebrow">Dine oppdagingar</span><h2 id="albumTitle">Samlingane mine</h2><p class="hs-muted">Favorittane dine, samla på ein stad.</p><div id="collectionGrid"></div></section></div>
-<script src="../js/neo-header.js"></script>
-<script src="../js/neobrutalisme.js"></script>
 <script src="../js/vyrdepil-storage.js"></script>
-<script src="../js/vyrdepil-icons.js"></script>
-<script src="../js/vyrdepil-util.js"></script>
+
+
 <script src="js/icons.js"></script>
 <script src="js/state.js"></script>
 <script src="js/utils.js"></script>
@@ -55,7 +51,12 @@
 <script src="js/progression-ui.js?v=1.53"></script>
 <script src="js/main.js?v=1.53"></script>
 
-<script src="../js/vyrdepil-design.js"></script>
-<script src="../js/vyrdepil-app-shell.js?v=6"></script>
-<script src="../js/vyrdepil-menu.js"></script>
+
+
+
+  <script src="../js/vyrdepil-icons.js"></script>
+  <script src="../js/vyrdepil-util.js"></script>
+  <script src="../js/vyrdepil-design.js?v=0.9"></script>
+  <script src="../js/vyrdepil-app-shell.js?v=8"></script>
+  <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body></html>

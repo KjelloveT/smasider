@@ -1,9 +1,8 @@
 /* ============================================================
-   TIDVIS — neobrutalistisk designsystem (Vyrdepil)
+   TIDVIS — spelspesifikke komponentar for Vyrdepil
    Basert på Claude Design-handoff. System-fontar (ingen CDN).
-   Game-stilane lever under .tv-rota med eigne tokens — eit
-   sanksjonert avvik frå standard side-CSS. Toppmenyen (neo-header)
-   er uendra og ligg utanfor .tv.
+   Spelkomponentane held på eigne fagfargar. Felles toppmeny og
+   sideoppsett kjem frå det delte designsystemet.
    ============================================================ */
 
 /* ---- TOKENS ---- */
@@ -46,18 +45,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.tv[data-theme="dark"] {
-  --bg:        #211C16;
-  --bg-dots:   rgba(246,234,211,.07);
-  --surface:   #2D2720;
-  --surface-2: #38312733;
-  --ink:       #F6EAD3;
-  --muted:     #B6A88F;
-  --shadow:    #0B0907;
-  --lcd-bg:    #0C1512;
-}
-
-/* ---- ROT-CONTAINER (normal sideflyt under neo-header) ---- */
+/* ---- ROT-CONTAINER ---- */
 .tv {
   position: relative;
   width: 100%;
@@ -170,7 +158,7 @@
   box-shadow: var(--sh);
 }
 .tv .card--flat { box-shadow: var(--sh-sm); }
-/* nøytraliser global .card:hover/.active frå neobrutalisme.css — tv-kort er statiske */
+/* TV-korta er statiske; dei skal ikkje flytte seg ved peik. */
 .tv .card:hover, .tv .card:active { transform: none; box-shadow: var(--sh); }
 .tv .card--flat:hover, .tv .card--flat:active { transform: none; box-shadow: var(--sh-sm); }
 
@@ -233,7 +221,6 @@
   background: var(--surface-2);
 }
 .tv .tile.is-active .tile__ico { background: rgba(255,255,255,.6); }
-.tv[data-theme="dark"] .tile.is-active .tile__ico { background: rgba(255,255,255,.85); color:#1A1714; }
 .tv .tile__ico { color: var(--ink); }
 .tv .tile__ico svg { width: 28px; height: 28px; color: inherit; }
 .tv .tile__name { font-family: var(--serif); font-weight: 700; font-size: 20px; }
@@ -254,7 +241,6 @@
   border: var(--bw) solid var(--ink);
   display: flex; align-items: center; justify-content: center;
 }
-.tv[data-theme="dark"] .tile__check { background:#1A1714; color:var(--yellow); border-color:#1A1714; }
 .tv .tile__check svg { width: 18px; height: 18px; }
 
 /* segmented chips */
@@ -273,7 +259,6 @@
 .tv .chip:hover { transform: translate(-1px,-1px); }
 .tv .chip:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 .tv .chip.is-active { background: var(--ink); color: var(--bg); }
-.tv[data-theme="dark"] .chip.is-active { background:#1A1714; color:var(--yellow); }
 /* toggle-chips: check-ikon vert synleg ved is-active */
 .tv .chip--toggle svg { opacity: 0; transition: opacity .1s; flex-shrink: 0; }
 .tv .chip--toggle.is-active svg { opacity: 1; }
@@ -584,7 +569,7 @@
 
 /* ---- MENY-HEROBOX (hero + live-klokker) ---- */
 .tv-menu-herobox {
-  /* override neobrutalisme.css min-height + legg til eigen layout */
+  /* Set eiga høgd og layout for menykortet. */
   min-height: 0 !important;
   padding: clamp(24px, 4vw, 40px);
   display: flex;
@@ -1074,7 +1059,7 @@ body.vp-migrated-page #tv-root :is(button,input,select,textarea,[tabindex]):focu
 #printArea { display: none; }
 
 @media print {
-  neo-header,
+  .vp-header,
   .page-wrapper,
   .tv-fb-overlay,
   .tv-ex-overlay { display: none !important; }

@@ -1,3 +1,5 @@
+> **Historisk kartlegging:** Dette dokumentet kan innehalde gamle statusar og unntak. Gjeldande krav står i `../../DESIGN.md` og `../../AGENTS.md`.
+
 # Kartlegging av synlege appar og felles grensesnittmalar
 
 **Andre pass er ferdig:** Sjå [sortering app for app og komponentregister](app-kartlegging-pass2.md) og [tilrådd metode og arbeidsflyt](designarbeidsflyt.md). Denne fila dokumenterer første pass.

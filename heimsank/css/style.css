@@ -1,10 +1,9 @@
 /* Lokalt kortarkade-design; felles toppmeny er urørt. */
 .hs-app { --hs-bg:var(--bg); --hs-panel:var(--surface); --hs-text:var(--text); --hs-muted:var(--text); --hs-line:color-mix(in srgb,var(--text) 15%,transparent); --hs-soft:color-mix(in srgb,var(--surface) 90%,var(--text)); --hs-violet:#6743CB; --hs-yellow:#FFD65A; --hs-ink:#24203D; --hs-shadow:0 12px 35px #17103c0b; background:var(--hs-bg); color:var(--hs-text); font-family:'Segoe UI',system-ui,sans-serif; }
-.hs-app[data-theme="lavender"] { --hs-bg:#F3F0FF; --hs-panel:#fff; --hs-text:#24203D; --hs-muted:#625B78; --hs-soft:#F1EDF9; }
-.hs-app:is([data-theme="space"],[data-theme="hacker"],[data-theme="dracula"],[data-theme="neon"],[data-theme="cyberpunk"],[data-theme="midnight"],[data-theme="slate"]) { --hs-bg:#15132B; --hs-panel:#24213E; --hs-text:#F7F5FF; --hs-muted:#C3BDD7; --hs-soft:#302B4C; --hs-violet:#B7A0FF; --hs-shadow:0 12px 35px #0002; }
 .hs-app .hidden { display:none!important; }
 .hs-app *, .hs-app *::before, .hs-app *::after { box-sizing:border-box; }
 .hs-app .page-wrapper { background:transparent; }
+.hs-main h1,.hs-main h2,.hs-main h3,.hs-dialog h2,.hs-dialog h3 { color:inherit; font-family:inherit; letter-spacing:-.035em; margin:0; text-shadow:none; }
 .hs-app .hs-main { width:100%; max-width:1360px; margin:auto; padding:24px clamp(16px,3vw,40px); }
 .hs-main h1,.hs-main h2,.hs-main h3,.hs-dialog h2,.hs-dialog h3 { color:inherit; font-family:inherit; letter-spacing:-.035em; margin:0; text-shadow:none; }
 .hs-main h2,.hs-dialog h2 { font-size:clamp(1.4rem,2.5vw,1.85rem); line-height:1.2; }
@@ -27,7 +26,6 @@
 
 /* Samlaruniverset byggjer vidare på kortbaksida: indigo, baner og skeive papirformer. */
 .hs-app { --hs-indigo:#17185B; --hs-violet:#7548D8; --hs-pink:#FF8EC1; --hs-turquoise:#55DEC9; --hs-blue:#168DDF; --hs-yellow:#FFD447; --hs-ink:#19183A; --hs-shadow:0 7px 0 #17185b16,0 18px 40px #17103c10; }
-.hs-app[data-theme="lavender"] { --hs-bg:#F6F2FF; --hs-soft:#F0ECFA; }
 .hs-app .page-wrapper { background:radial-gradient(circle at 8% 5%,#ff8ec12c 0 4px,transparent 5px),radial-gradient(circle at 91% 13%,#ffd44750 0 5px,transparent 6px),linear-gradient(135deg,transparent 0 46%,#7548d80c 46% 47%,transparent 47% 100%); background-size:auto,auto,42px 42px; }
 .hs-panel { position:relative; border:2px solid color-mix(in srgb,var(--hs-indigo) 35%,var(--hs-line)); border-radius:26px 19px 28px 21px; box-shadow:var(--hs-shadow); }
 .hs-btn { border:2px solid color-mix(in srgb,var(--hs-indigo) 65%,var(--hs-line)); border-radius:18px 13px 17px 14px; box-shadow:0 3px 0 color-mix(in srgb,var(--hs-indigo) 40%,transparent); font-weight:700; }

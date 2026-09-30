@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════
-   DAGSVEGEN — stilark som utvidar ../css/neobrutalisme.css
+   DAGSVEGEN — appspesifikke tillegg til det felles designsystemet
    Faste fargar: raud overtid #d62828 (mørk → kvit tekst),
    huskelapp #fef08a (lys → mørk tekst). Følgjer kontrastreglane.
    ══════════════════════════════════════ */
@@ -351,7 +351,7 @@
 .dv-widget-bar .dv-icon-btn { margin-left: auto; min-width: 28px; min-height: 28px; border: none; background: transparent; color: var(--text); }
 .dv-widget-bar .dv-icon-btn:hover { background: var(--accent); color: var(--text-on-accent); }
 
-/* klokke: map tidvis-variablane til neobrutalisme-temaet */
+/* Klokke: fargane blir kopla til Dagsvegen-variablane i felles overgangsstil. */
 .dv-clock {
     --ink: var(--border);
     --teal: var(--accent2);
@@ -544,4 +544,131 @@
 button:focus-visible, a:focus-visible, input:focus-visible,
 select:focus-visible, textarea:focus-visible {
     outline: 3px solid var(--accent2); outline-offset: 2px;
+}
+
+/* Vyrdepil-grensesnitt: knyt den eldre arbeidsflata til den faste paletten. */
+body.vp-migrated-page[data-vp-app="dagsvegen"] {
+    --bg: var(--vp-paper);
+    --surface: var(--vp-paper);
+    --text: #000;
+    --border: var(--vp-frame);
+    --shadow: var(--vp-frame);
+    --accent: var(--vp-coral);
+    --accent2: var(--vp-moss);
+    --accent3: var(--vp-sky);
+    --accent4: var(--vp-honey);
+    --accent5: var(--vp-heather);
+    --muted: #405248;
+    --text-on-accent: #000;
+    --text-on-light-accent: #000;
+}
+
+body.vp-migrated-page[data-vp-app="dagsvegen"] .vp-migrated-header .vp-header-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    justify-content: initial;
+    align-items: center;
+    gap: 12px;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget.dv-widget {
+    position: static;
+    z-index: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    margin: 0;
+    padding: 4px 8px;
+    border: 2px solid var(--vp-frame);
+    border-radius: 8px;
+    background: var(--vp-paper);
+    box-shadow: 0 3px 0 var(--vp-shadow);
+    cursor: default;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget svg {
+    width: 56px;
+    height: 56px;
+    flex: 0 0 56px;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget .dv-clock-digital {
+    margin: 0;
+    padding: 2px 5px;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+    color: #000;
+    font-size: 1rem;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar {
+    left: 10px;
+    z-index: 30;
+    width: 64px;
+    padding: 6px;
+    border: 3px solid var(--vp-frame);
+    border-radius: 9px;
+    background: var(--vp-wood);
+    box-shadow: 0 3px 0 var(--vp-shadow);
+    overscroll-behavior: contain;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar.open {
+    width: min(236px, calc(100vw - 20px));
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar .dv-side-btn {
+    min-height: 44px;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    box-shadow: none;
+    color: #000;
+    text-decoration: none;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar.open .dv-side-btn {
+    justify-content: flex-start;
+    padding-inline: 10px;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar .dv-side-btn:hover,
+body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar .dv-side-btn:focus-visible {
+    background: var(--vp-sky);
+    color: #000;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar .dv-side-btn.active {
+    background: var(--vp-honey);
+    color: #000;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar .dv-side-sep {
+    height: 2px;
+    background: var(--vp-frame);
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] :is(main,#main).vp-migrated-main.main-content {
+    padding-left: 92px;
+    padding-right: clamp(14px, 2vw, 28px);
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"].dv-sidebar-open :is(main,#main).vp-migrated-main.main-content {
+    padding-left: 250px;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] .dv-overflow-warn,
+body.vp-migrated-page[data-vp-app="dagsvegen"] .dv-danger:hover {
+    color: #fff;
+}
+
+@media (max-width: 700px) {
+    body.vp-migrated-page[data-vp-app="dagsvegen"] .vp-migrated-header .vp-header-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget.dv-widget {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: center;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar {
+        left: 6px;
+        width: 56px;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] :is(main,#main).vp-migrated-main.main-content {
+        padding-left: 76px;
+        padding-right: 12px;
+    }
 }

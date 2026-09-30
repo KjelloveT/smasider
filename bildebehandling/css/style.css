@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════
-   HANDSAM BILETE — verktøy-spesifikk stil (utvidar neobrutalisme.css)
+   HANDSAM BILETE — verktøyspesifikke tillegg til det felles designsystemet
 
    Tre kolonnar: biletstrimmel | arbeidsflate | verktøypanel.
    På smale skjermar blir strimmelen ei vassrett rad og panelet fell under
@@ -285,8 +285,7 @@ select.neo-input { cursor: pointer; }
     .step, .btn, .tool > summary::after { transition: none; }
 }
 
-/* Verktøygruppene skal lesast som eigne, lyse kort. Den gamle temaveljaren
-   blir slått av på den nye sida, så gje dei opne overskriftene og etikettane
+/* Verktøygruppene skal lesast som eigne, lyse kort. Gje dei opne overskriftene og etikettane
    faste kontrastfargar frå Vyrdepil-paletten. */
 body[data-vp-app="bildebehandling"] {
     --bg: var(--vp-wood, #fff9e9);
@@ -341,7 +340,7 @@ body[data-vp-app="bildebehandling"] .tool > summary:focus-visible { outline: 3px
 }
 
 @media print {
-    neo-header, .tools, .strip, .steps, .selbar, .savebar, .hb-hero, .upload-zone,
+    .vp-header, .tools, .strip, .steps, .selbar, .savebar, .hb-hero, .upload-zone,
     .split, .tag, .crop-layer { display: none !important; }
     .work { display: block; }
     .viewer { box-shadow: none; border: none; }

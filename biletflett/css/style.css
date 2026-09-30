@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════
-   BILETFLETT — spel-spesifikk stil (utvidar neobrutalisme.css)
+   BILETFLETT — spelspesifikke tillegg til det felles designsystemet
    ══════════════════════════════════════ */
 
 .page-wrapper { padding-top: 0; }
@@ -104,7 +104,7 @@
     border-top: 3px dashed var(--border); padding-top: 10px;
 }
 
-/* Knappefargar (held seg på neobrutalisme .btn-basisen) */
+/* Knappefargar på den felles knappestrukturen */
 .btn.c-blue { background: #87CEEB; color: #1a1a1a; }
 .btn.c-green { background: #BAFCA2; color: #1a1a1a; }
 .btn.c-red { background: #FFA07A; color: #1a1a1a; }
@@ -126,7 +126,7 @@
 }
 
 @media print {
-    neo-header, .toolbar, .gallery, .panel, .bf-hero { display: none !important; }
+    .vp-header, .toolbar, .gallery, .panel, .bf-hero { display: none !important; }
     .stage { border: none; box-shadow: none; padding: 0; }
     #collage-canvas { border: none; box-shadow: none; }
     .app-layout { display: block; }

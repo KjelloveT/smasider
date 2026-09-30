@@ -124,13 +124,17 @@ const App = (() => {
     /* ---- venstremeny ---- */
 
     function positionSidebar() {
-        const header = document.querySelector('neo-header');
-        const bottom = header ? header.getBoundingClientRect().bottom : 70;
-        $('sidebar').style.top = Math.max(10, bottom + 10) + 'px';
+        const header = document.querySelector('.vp-migrated-header');
+        const bottom = header ? header.getBoundingClientRect().bottom : 80;
+        const top = Math.max(10, bottom + 12);
+        const sidebar = $('sidebar');
+        sidebar.style.top = top + 'px';
+        sidebar.style.maxHeight = Math.max(160, window.innerHeight - top - 16) + 'px';
     }
 
     function applySidebar() {
         $('sidebar').classList.toggle('open', !!session.ui.sidebarOpen);
+        document.body.classList.toggle('dv-sidebar-open', !!session.ui.sidebarOpen);
         $('sidebar-toggle').setAttribute('aria-expanded', String(!!session.ui.sidebarOpen));
     }
 
@@ -284,6 +288,7 @@ const App = (() => {
 
         Edit.init();
         Widgets.init();
+        Widgets.mountClockToHeader();
         Notes.init();
         Draw.init();
         initPanels();

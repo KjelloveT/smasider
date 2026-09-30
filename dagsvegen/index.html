@@ -7,18 +7,14 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="../css/vyrdepil-design.css?v=0.6">
-    <link rel="stylesheet" href="../css/vyrdepil-migration.css?v=11">
-</head>
-<body data-light-theme="classic" data-dark-theme="midnight" data-theme="classic" data-vp-app="dagsvegen" data-vp-layout="expanded">
+    <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.0">
+    </head>
+<body data-vp-app="dagsvegen" data-vp-layout="expanded">
     <div class="page-wrapper">
-        <neo-header></neo-header>
-
         <!-- Venstremeny -->
         <nav id="sidebar" aria-label="Verktøymeny">
-            <button id="sidebar-toggle" class="dv-side-btn" aria-expanded="false" aria-label="Utvid eller minimer menyen" title="Meny"><span class="dv-tool-icon" data-icon="menu"></span><span class="dv-side-text">Meny</span></button>
+            <button id="sidebar-toggle" class="dv-side-btn" aria-expanded="false" aria-label="Utvid eller minimer verktøymenyen" title="Verktøy"><span class="dv-tool-icon" data-icon="menu"></span><span class="dv-side-text">Verktøy</span></button>
             <div class="dv-side-sep" aria-hidden="true"></div>
             <button id="btn-edit" class="dv-side-btn" aria-label="Rediger dagsplanen" title="Rediger"><span class="dv-tool-icon" data-icon="pencil"></span><span class="dv-side-text">Rediger</span></button>
             <button id="btn-quick" class="dv-side-btn" aria-label="Start ei enkel økt no, utan dagsplan" title="Snøggøkt"><span class="dv-tool-icon" data-icon="play"></span><span class="dv-side-text">Snøggøkt</span></button>
@@ -98,7 +94,7 @@
     </div>
 
     <!-- Flytande widgetar -->
-    <div id="clock-widget" class="dv-widget dv-clock-box" aria-label="Klokke"></div>
+    <div id="clock-widget" class="dv-widget dv-clock-box" role="timer" aria-label="Klokke"></div>
     <div id="countdown-widget" class="box1 dv-widget dv-hidden" aria-label="Nedteljar"></div>
     <div id="stopwatch-widget" class="box1 dv-widget dv-hidden" aria-label="Stoppeklokke"></div>
     <div id="traffic-widget" class="box1 dv-widget dv-hidden" aria-label="Trafikklys"></div>
@@ -236,12 +232,10 @@
     <script src="js/engine.js"></script>
     <script src="js/render.js"></script>
     <script src="js/edit.js"></script>
-    <script src="js/widgets.js"></script>
+    <script src="js/widgets.js?v=2"></script>
     <script src="js/notes.js"></script>
     <script src="js/draw.js"></script>
-    <script src="js/app.js"></script>
-    <script src="../js/neobrutalisme.js"></script>
-    <script src="../js/neo-header.js"></script>
+    <script src="js/app.js?v=2"></script>
     <script>
         // set inn statiske Lucide-ikon i verktøyrada
         document.querySelectorAll('.dv-tool-icon[data-icon]').forEach(span => {

@@ -1,4 +1,4 @@
-/* Heite Stavrim — neobrutalisme-tilpasningar */
+/* Heite Stavrim — appspesifikke tilpassingar til fellesstilen */
 
 /* === LAYOUT === */
 .main-content {
@@ -658,9 +658,8 @@
     }
 }
 
-/* Den nye Vyrdepil-sida fjernar den gamle temaveljaren. Behald dei
-   funksjonelle spelkomponentane, men bind dei gamle fargevariablane til
-   den lyse Vyrdepil-paletten slik at bokstavar, tid og lagpoeng er tydelege. */
+/* Behald dei funksjonelle spelkomponentane, og bind UI-variablane til den
+   faste, lyse Vyrdepil-paletten slik at bokstavar, tid og lagpoeng er tydelege. */
 body[data-vp-app="heite_stavrim"] {
     --bg: var(--vp-wood, #fff9e9);
     --surface: var(--vp-paper, #fffdf5);

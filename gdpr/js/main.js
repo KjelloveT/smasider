@@ -8,28 +8,6 @@
 
   const U = function () { return GD.util; };
 
-  /* ──────────────── Tema ────────────────
-
-     Protokollsmia har berre ei lys utgåve. Men `applyStoredTheme()` i
-     js/neobrutalisme.js les eit lagra temaval frå localStorage og set det
-     globalt på <body> — så ein som har valt «dracula» på ei anna Vyrdepil-side
-     ville kome hit med mørke fargevariablar under eit stilark som berre er
-     tenkt for lyst. Resultatet er ikkje eit stygt tema; det er uleseleg tekst.
-
-     Vi pinnar difor temaet eksplisitt, og gjer det både med ein gong og etter
-     at DOM-en er lasta, sidan applyStoredTheme() køyrer på DOMContentLoaded og
-     elles ville vunne over oss.
-
-     Temaknappen i toppmenyen er skrudd av med `no-theme` på <neo-header>. Ein
-     knapp som ikkje gjer noko er verre enn ingen knapp. */
-  const TEMA = 'classic';
-
-  function pinnTema() {
-    document.body.setAttribute('data-theme', TEMA);
-    document.body.setAttribute('data-light-theme', TEMA);
-    document.body.setAttribute('data-dark-theme', TEMA);
-  }
-
   /* ──────────────── Biblioteket ──────────────── */
 
   function teiknBibliotek() {
@@ -237,7 +215,6 @@
   }
 
   function start() {
-    pinnTema();
     GD.uiForside.init('forside');
     GD.uiListe.init('aktivitetsliste');
     GD.uiSkjema.init('skjema');
@@ -267,7 +244,6 @@
     });
   }
 
-  pinnTema();
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', start);
   } else {

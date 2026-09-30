@@ -1,3 +1,5 @@
+> **Historisk kartlegging:** Dette dokumentet kan innehalde gamle statusar og unntak. Gjeldande krav står i `../../DESIGN.md` og `../../AGENTS.md`.
+
 # Appkartlegging — andre pass og sortering av element
 
 Dato: 28. september 2026.

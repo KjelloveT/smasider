@@ -107,7 +107,7 @@ const OrmUI = (function () {
     /* ---- input-modal --------------------------------------------------- */
 
     /* Modalen blir vist med klassa .open, ikkje med hidden-attributtet:
-     * .modal-overlay er display:none i neobrutalisme.css, og eit hidden-attributt
+     * .modal-overlay er display:none i felles CSS, og eit hidden-attributt
      * gjer ingenting mot ein eksplisitt display-regel. Set du berre hidden=false,
      * blir modalen ståande usynleg medan Python ventar i det uendelege. */
     function spor(ledetekst, svar, avbryt) {

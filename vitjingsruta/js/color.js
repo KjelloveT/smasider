@@ -3,7 +3,7 @@
 
    Porta frå rissverk/js/ui-color.js. Grunngjevinga der held her òg:
    nettlesaren sin eigen <input type="color"> ser ulik ut på kvart
-   operativsystem og bryt neobrutalisme-uttrykket fullstendig.
+   operativsystemet i staden for å bruke Vyrdepil-paletten.
 
    Veljaren arbeider i HSV fordi HSV lèt seg teikne som eit kvadrat og
    ei stripe. Ein RGB-veljar ville krevd tre skyvarar utan synleg

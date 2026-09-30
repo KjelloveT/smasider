@@ -1,6 +1,6 @@
 /* Bolkestokk — fargeprofil og typografi.
  *
- * EIT MEDVITE UNNTAK FRÅ §3.3
+ * AVTALT SÆRUTTRYKK FOR BLOKKARBEIDSFLATA
  *
  * Resten av Vyrdepil skiftar utsjånad med temavelgaren: 21 tema, og kvart
  * verktøy set eit lyst og eit mørkt. Bolkestokk gjer ikkje det. Verktøyet
@@ -15,11 +15,10 @@
  * gjort ein palett laga for tolvåringar til noko heilt anna.
  *
  * Vi overstyrer difor temavariablane i staden for å ignorere dei. Då får
- * dei delte komponentane frå neobrutalisme.css (.box4, .btn, .box5) rett
+ * dei delte komponentane (.box4, .btn, .box5) rett
  * utsjånad utan at kvar einaste av dei må teiknast på nytt her.
  *
- * `body.bs-tema` er (0,1,1) og vinn dermed over `[data-theme="…"]` som er
- * (0,1,0). Utan klassa på body ville temaet vunne.
+ * `body.bs-tema` avgrensar desse lokale fargeverdiane til arbeidsflata.
  *
  * Fargane er henta ordrett frå «Block Coding UI»-mockupen.
  */
@@ -120,7 +119,7 @@ body.bs-tema {
 
 /* ---- flat, ikkje opphøgd -------------------------------------------------
  * Designet har ingen skuggar. --shadow er alt gjennomsiktig, men nokre
- * komponentar i neobrutalisme.css set eigne skuggar med faste verdiar. */
+ * arbeidsflatekomponentar set eigne skuggar med faste verdiar. */
 body.bs-tema .box1,
 body.bs-tema .box2,
 body.bs-tema .box4,

@@ -276,7 +276,7 @@ window.Vy = (function () {
 
         /* Ingen klasse å setje for å gjere han synleg — meldinga ER synleg med
            ein gong ho står i dokumentet, og innfarten er ein animasjon oppå.
-           Sjå grunngjevinga ved `.vy-toast` i neobrutalisme.css: i ei fane
+           Sjå `.vy-toast` i vyrdepil-design.css: i ei fane
            nettlesaren strupar kjem korkje overgangar eller animasjonar i mål,
            og ei melding som treng animasjonen for å bli synleg blir aldri
            synleg i det heile. */

@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════
    FRØDEKAPP — Quiz
-   Utvidar ../css/neobrutalisme.css. Bruk var(--*) og
+   Bruk det felles designsystemet. Bruk var(--*) og
    clamp()/grid; ingen hardkoda fargar.
    ══════════════════════════════════════════════ */
 
@@ -309,7 +309,7 @@ select.form-input { cursor: pointer; }
 .q-footer .form-group { flex: 1; margin-bottom: 0; }
 .btn-danger:hover { background: var(--accent2); color: var(--text-on-accent); }
 
-/* Editor-førehandsvising (modal-overlay frå neobrutalisme) */
+/* Editor-førehandsvising (modal-overlay) */
 #preview-overlay {
     position: fixed; inset: 0; display: none;
     background: color-mix(in srgb, var(--border) 55%, transparent);

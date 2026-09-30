@@ -19,11 +19,7 @@
   if (!preserveDesign) {
     body.classList.add('vp-page');
     body.setAttribute('data-vp-design', '');
-    body.removeAttribute('data-theme');
-    body.removeAttribute('data-light-theme');
-    body.removeAttribute('data-dark-theme');
   }
-  document.querySelectorAll('neo-header').forEach(node => node.remove());
 
   const header = document.createElement('header');
   header.className = 'vp-header vp-header--sky vp-migrated-header';

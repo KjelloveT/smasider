@@ -1,21 +1,21 @@
 # Vyrdepil — designinstruks
 
-Utgåve 0.6 · 29. september 2026. Brukarvald retning for nye appar og redesign.
+Utgåve 1.0 · 30. september 2026. Brukarvald retning for heile Vyrdepil.
 
 ## Les fyrst
 
-1. Denne instruksen er den faste designreferansen.
+1. Denne instruksen er den faste designreferansen for alle publiserte appar og undersider, ikkje berre nye appar.
 2. Sjå dei faktiske komponentane i [designsystem/index.html](designsystem/index.html).
-3. Bruk **[css/vyrdepil-design.css](css/vyrdepil-design.css)**. Denne eine fila inneheld palett, typografi, knappar, flater, skjema, trekkspel, dialog, navigasjon og alle tre sideoppsetta. Ho krev ikkje neobrutalisme.css eller catalogue.css. Katalogstilen er berre for demonstrasjonane.
+3. Bruk **[css/vyrdepil-design.css](css/vyrdepil-design.css)**. Denne eine fila inneheld palett, typografi, knappar, flater, skjema, trekkspel, dialog, navigasjon, appoppsett og responsiv grunnstil. Ho krev ikkje gamle temaark. `designsystem/catalogue.css` er berre for demonstrasjonssida.
 4. **[json/vyrdepil-design.json](json/vyrdepil-design.json)** er kjelda til vald logostil, logofiler, alle 144 bakgrunnar og faste appreservasjonar. Appnamn, lenkjer, kategoriar og synlegheit kjem framleis berre frå `json/apps.json`.
 
 ## Identitet og ressursar
 
 - **Måla flater** er vald logostil: breie måla fasettar, litt ujamn mørk kontur, naturlege materialfargar, avgrensa tekstur og få tydelege detaljar. Nye applogoar skal følgje den etablerte logofamilien i `_resources/vyrdepil-design/logos/`, saman med stein-Vyrde. Namn skal vere ekte HTML-tekst, ikkje generert tekst inni logoen.
-- Stein-Vyrde i `_resources/vyrdepil-design/vyrde.png` er maskotten i toppmeny, appmeny og ved hero. Alle synlege appar har no ei logo i stilen Måla flater. Skjulte appar blir utforma når dei blir tekne fram for migrering.
+- Stein-Vyrde i `_resources/vyrdepil-design/vyrde.png` er maskotten i toppmeny, appmeny og ved hero. Alle katalogførte appar, også skjulte appar med direkte ruter, skal ha logo i stilen Måla flater. Logoavgjerdene som er stadfesta i gjennomgangen: Duldord og Ordkryss held på tidlegare logo; Heimsank held på originalen; Frødebrett får Jeopardy-liknande spørsmålsrute; Leitekryss får eit ringa ord.
 - Ressursane i `_resources/vyrdepil-design/` er felles. Bruk dei eksisterande filene; ikkje generer eit nytt skilt, stolpebilete eller ornament for kvart oppdrag.
 - Bakgrunnar gjev variasjon. Knappar, skilt, skrift, ramme og UI-palett står fast uavhengig av landskap, årstid og lys.
-- Heimsank og Bolkestokk held på avtalte særuttrykk i appinnhaldet. Felles navigasjon og logofamilie kan migrerast. Dei reserverte landskapa skal ikkje overstyre appane sine funksjonelle spel-/arbeidsflater.
+- Heimsank og Bolkestokk kan halde på avtalte særuttrykk i spelinnhaldet og arbeidsflatene. Toppmenyar, appmenyar, dialogar og generell UI følgjer dette designsystemet. Dei reserverte landskapa skal ikkje overstyre funksjonelle spel-/arbeidsflater.
 
 ## Fast bakgrunn per app
 
@@ -83,6 +83,8 @@ Editorar, tabellar, små felt, spelkontrollar og tette lister har reine flater u
 | Canvas-spel | Same avgrensa `vp-app-intro`, med logo og Vyrde. `vp-game-frame`, `vp-game-stage`, canvas og HTML-status. Behald spelmotoren sitt sideforhold og eigne funksjonsfargar. Intro kan forsvinne under spel. Berøringskontrollar og viktige handlingar står synleg. |
 | Informasjonssider | `body.vp-site-page` med felles skyheader og appmeny. Bruk `main.vp-shell.vp-site-main.vp-policy-page`, lyse `vp-panel`-flater og `vp-policy-heading`-skilt med kotemønster i full storleik. Hald hovudbreidda rundt 960 px og brødtekst på maks 78ch, sidan sidene ikkje har sidemeny. Tabellar brukar `vp-data-table` og kan rulle vassrett på små skjermar. Behald juridisk tekst, handlingar og skript-ID-ar når utsjånaden blir endra. |
 
+Framsida har fem opne faggrupper frå `json/apps.json`, ikkje trekkspel. Ho viser fire kort per rad på stor skjerm, tre på nettbrett og fire på mobil; mobilkort viser berre logo og namn. Kortrekkja startar med tydeleg luft under kvart kategoriskilt. Personvern, lisens og sidefot deler breidd og venstrelinje. Vyrde står ved sida av informasjonsinnhaldet og følgjer med ved rulling, men blir gøymd på mobil.
+
 ## Startstruktur for ei ny app
 
 ```html
@@ -110,12 +112,12 @@ Editorar, tabellar, små felt, spelkontrollar og tette lister har reine flater u
 
 Sider som ikkje er appar, til dømes personvern og lisens, bruker `data-vp-site-page="true"` i staden for `data-vp-app`. Dei lastar same felles design-, ikon-, skal- og menymodular, men får det faste landskapet til framsida og får inga appreservasjon.
 
-På migrerte appar som ikkje treng ei fullbreidd arbeidsflate, kan `body` bruke `data-vp-layout="medium"`. Overgangsstilen avgrensar då hovudinnhaldet til 1200 px. Bruk fullbreidd oppsett berre når sjølve arbeidsflata har nytte av det.
+Appar som ikkje treng ei fullbreidd arbeidsflate, bruker `data-vp-layout="medium"`; dette avgrensar hovudinnhaldet til 1200 px. Bruk fullbreidd oppsett berre når sjølve arbeidsflata har nytte av det. Språk- og ordverktøya, Tidvis, Talsmia og Vitjingsruta skal ha middels breidd.
 
 ## Leveranse og kontroll
 
-Nynorsk UI, Vanilla HTML/CSS/JS, felles lagrings-/ikon-/hjelpemodular og personvernreglane i AGENTS.md gjeld framleis. Test små mobilvisingar (320/437 px), nettbrett og brei skjerm, tastaturfokus, lange etikettar, klipping av dekor og hovudfunksjonen. For nye appar: kontroller reservasjonen og at ressursar lastar utan konsollfeil.
+Nynorsk UI, Vanilla HTML/CSS/JS, felles lagrings-/ikon-/hjelpemodular og personvernreglane i AGENTS.md gjeld framleis. Test små mobilvisingar (320/437 px), nettbrett og brei skjerm, tastaturfokus, lange etikettar, klipping av dekor og hovudfunksjonen. Kontroller alle lokale stylesheet- og skriptlenkjer på alle HTML-ruter før gamle fellesfiler blir sletta. Ingen side skal peike på `neobrutalisme.css`, `neobrutalisme.js`, `neo-header.js` eller `vyrdepil-migration.css`. Nye appar må ha gyldig reservasjon og laste alle ressursar utan konsollfeil.
 
 Originalar blir lagra lokalt i `_kjelder/`; bruk komprimerte eksportar frå ressursbanken. Logo: maks 384 px, 128 fargar og alfa. Landskap: JPEG, maks 1920 px og 500 kB. Ingen oppskalering for å late som ein original har høgare oppløysing.
 
-Dette grunnlaget er klart for nye oppgåver. Eksisterande appar blir migrerte i eigne oppgåver; [designkontrollen](designskisser/vyrde-redesign/designkontroll.json) viser status frå kjeldegjennomgangen. Han er ikkje ein funksjonell nettlesartest av heile porteføljen.
+Designsystemet gjeld heile porteføljen. [Designkontrollen](designskisser/vyrde-redesign/designkontroll.json) viser kjelderesultata og kva som er prøvd i nettlesaren; ein statisk kontroll er ikkje det same som full gjennomspeling av alle appar.
