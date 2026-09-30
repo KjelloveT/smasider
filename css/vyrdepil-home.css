@@ -170,6 +170,8 @@ body.vp-home-page {
 
 @media (max-width: 620px) {
   .vp-home-main { width: calc(100% - 16px); gap: 14px; }
+  .vp-home-note.vp-sign--grounded::before { left: -8px; }
+  .vp-home-note.vp-sign--grounded::after { right: -8px; }
   .vp-home-hero .vp-hero-content { inset: 39% 8% 13% 8%; gap: 7px; }
   .vp-home-hero .vp-hero-logo { width: clamp(52px, 15vw, 82px); height: clamp(58px, 17vw, 92px); }
   .vp-home-note > .vp-panel { padding: 14px; }
