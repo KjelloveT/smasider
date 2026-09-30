@@ -211,7 +211,19 @@ body[data-vp-app="ormritaren"] {
     --text-on-light-accent: #000;
 }
 
-body[data-vp-app="ormritaren"] .main-content { max-width: 1200px; margin-inline: auto; }
+body[data-vp-app="ormritaren"]:not([data-vp-preserve]) .page-wrapper {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+body[data-vp-app="ormritaren"]:not([data-vp-preserve]) .main-content {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
 body[data-vp-app="ormritaren"] .orm-modulgruppe { margin: 0 0 30px; }
 body[data-vp-app="ormritaren"] .orm-modulgruppe > h2 {
     width: fit-content;
