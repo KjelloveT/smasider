@@ -48,6 +48,8 @@
     '<nav id="menuApps" aria-label="Spel og verktøy"></nav>';
   body.insertBefore(menu, body.firstChild);
   body.insertBefore(header, body.firstChild);
+  header.querySelector('.vp-brand img').dataset.vpMascot = '';
+  menu.querySelector('.vp-menu-heading img').dataset.vpMascot = '';
 
   const semanticMain = document.querySelector('main');
   const main = semanticMain || document.getElementById('main');
@@ -139,6 +141,7 @@
     }
     const mascot = document.createElement('img');
     mascot.className = 'vp-app-intro-mascot vp-migrated-mascot';
+    mascot.dataset.vpMascot = '';
     mascot.src = new URL('_resources/vyrdepil-design/vyrde.png', project).href;
     mascot.alt = '';
     mascot.width = 192;

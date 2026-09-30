@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-29",
+  "updated": "2026-09-30",
   "appCatalog": "json/apps.json",
   "policy": {
     "allocation": "random-unused-on-creation",
@@ -14,12 +14,12 @@
     "style": "mala",
     "name": "Måla flater",
     "files": {
-      "duldord": "_resources/vyrdepil-design/logos/duldord-mala.png",
+      "duldord": "_resources/vyrdepil-design/logos/duldord-jeopardy.png",
       "klassekart": "_resources/vyrdepil-design/logos/klassekart-mala.png",
       "rissverk": "_resources/vyrdepil-design/logos/rissverk-mala.png",
       "vegamot": "_resources/vyrdepil-design/logos/vegamot-mala.png",
       "vidfaren": "_resources/vyrdepil-design/logos/vidfaren-mala.png",
-      "heimsank": "_resources/vyrdepil-design/logos/heimsank-mala.png",
+      "heimsank": "heimsank/assets/heimsank-logo.png",
       "reknedaesj": "_resources/vyrdepil-design/logos/reknedaesj-mala.png",
       "rettslause_raud": "_resources/vyrdepil-design/logos/rettslause-raad-mala.png",
       "kludre_klodrian": "_resources/vyrdepil-design/logos/kludre-klodrian-mala.png",
@@ -29,7 +29,7 @@
       "tidvis": "_resources/vyrdepil-design/logos/tidvis-mala.png",
       "heite_stavrim": "_resources/vyrdepil-design/logos/heite-stavrim-mala.png",
       "ordsmia": "_resources/vyrdepil-design/logos/ordsmia-mala.png",
-      "talsmia": "_resources/vyrdepil-design/logos/talsmia-mala.png",
+      "talsmia": "_resources/vyrdepil-design/logos/talsmia-number-forge.png",
       "frodekapp": "_resources/vyrdepil-design/logos/frodekapp-mala.png",
       "bolkestokk": "_resources/vyrdepil-design/logos/bolkestokk-mala.png",
       "ormritaren": "_resources/vyrdepil-design/logos/ormritaren-mala.png",
@@ -39,7 +39,7 @@
       "flokkdeilar": "_resources/vyrdepil-design/logos/flokkdeilar-mala.png",
       "eikekveik": "_resources/vyrdepil-design/logos/eikekveik-mala.png",
       "ordskodde": "_resources/vyrdepil-design/logos/ordskodde-mala.png",
-      "ordkryss": "_resources/vyrdepil-design/logos/ordkryss-mala.png",
+      "ordkryss": "_resources/vyrdepil-design/logos/ordkryss-found-word.png",
       "leitekryss": "_resources/vyrdepil-design/logos/leitekryss-mala.png",
       "vitjingsruta": "_resources/vyrdepil-design/logos/vitjingsruta-mala.png",
       "dagsvegen": "_resources/vyrdepil-design/logos/dagsvegen-mala.png"

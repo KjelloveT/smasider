@@ -8,6 +8,38 @@
   /* Kor lenge «Nytt»- og «Oppdatert»-merket heng ved før det fell av av seg sjølv. */
   const BADGE_DAYS = 45;
 
+  const HOME_SUMMARIES = Object.freeze({
+    duldord: 'Gjet eit nytt nynorsk fembokstavsord på seks forsøk kvar dag.',
+    vidfaren: 'Utforsk land med spørsmål om geografi, kart og kjenneteikn.',
+    heimsank: 'Løys matteoppgåver, vinn samlekort og bygg samlinga di.',
+    reknedaesj: 'Spring, hopp og rekn deg gjennom eit fartfylt mattespel.',
+    rettslause_raud: 'Hopp gjennom banar og bruk rekning for å kome vidare.',
+    kludre_klodrian: 'Sym gjennom havet og vel porten med rett svar.',
+    baretevling: 'Spel slagskip og øv på koordinatar og himmelretningar.',
+    frodebrett: 'Lag Jeopardy-brett med eigne kategoriar og poeng.',
+    ordaklok: 'Øv på gloser med fire ulike måtar å spele på.',
+    tidvis: 'Øv på analoge og digitale klokkeslett.',
+    heite_stavrim: 'Finn ord frå bokstavar og kategoriar i lagspel.',
+    ordsmia: 'Smi det lengste norske ordet du finn av ni bokstavar.',
+    talsmia: 'Bruk seks tal og rekneartar for å nå eit måltal.',
+    frodekapp: 'Lag quiz og spel solo medan tevlingstenesta blir sett opp att.',
+    bolkestokk: 'Dra kodeblokker på plass og la ei skilpadde teikne.',
+    ormritaren: 'Skriv og køyr Python i nettlesaren utan oppsett.',
+    bildebehandling: 'Skjer, roter og endre storleik på bilete lokalt.',
+    biletflett: 'Lag collagar ved å dra bilete inn i ferdige oppsett.',
+    lydskurd: 'Klipp, bland og lagre lydspor på ei tidslinje.',
+    rissverk: 'Teikn og set saman eigne logoar, ikon og diagram.',
+    klassekart: 'Møbler klasserommet og fordel elevar med drag og slepp.',
+    flokkdeilar: 'Trekk tilfeldige grupper og vis dei på storskjerm.',
+    eikekveik: 'Bygg idé- og flytkart med greiner og koplingar.',
+    ordskodde: 'Lag ei fargerik ordsky av ein tekst.',
+    ordkryss: 'Lag kryssord automatisk frå ord og forklaringar.',
+    leitekryss: 'Gøym ord i eit bokstavrutenett på skjerm eller ark.',
+    vitjingsruta: 'Lag og tilpass QR-kodar for lenkjer, nett og kontaktar.',
+    dagsvegen: 'Vis dagsplanen og tel ned pågåande undervisningsøkter.',
+    vegamot: 'Bygg interaktive forteljingar med vegval og fleire sluttingar.'
+  });
+
   function svg(inner, size) {
     return `<svg width="${size}" height="${size}" style="vertical-align:-5px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
   }
@@ -67,12 +99,13 @@
     h.textContent = app.name;
     el.appendChild(h);
 
-    (app.desc || []).forEach(d => {
+    const summary = HOME_SUMMARIES[app.id] || (app.desc || [])[0];
+    if (summary) {
       const p = document.createElement('p');
       p.className = 'card-desc';
-      p.textContent = d;
+      p.textContent = summary;
       el.appendChild(p);
-    });
+    }
 
     const tag = document.createElement('span');
     if (app.disabled) {

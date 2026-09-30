@@ -3,6 +3,12 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.61] — 2026-09-30
+
+### Endra
+- **Framsida har fått eit tydelegare hero-skilt og infoskilt.** Appkorta har éi kort omtale og fire kolonnar på stor skjerm. Personvern og lisens har lesbare overskrifter, og Vyrde står ved personvernsteksten.
+- **Duldord, Talsmia og Ordkryss har nye logoar.** Heimsank viser den nye logoen sin. Vyrde skiftar positur og uttrykk kvart trettiande sekund i fellesnavigasjonen og på framsida.
+
 ## [1.60] — 2026-09-29
 
 ### Endra

@@ -105,12 +105,42 @@
     });
   }
 
+  function initMascots(root = document) {
+    const frameFiles = ['vyrde-01.png', 'vyrde-02.png', 'vyrde-03.png', 'vyrde-04.png'];
+    const frames = frameFiles.map(file => new URL('mascot/' + file, assets).href);
+    let current = 0;
+    const images = new Set();
+    function setFrame(image) {
+      if (!image || image.tagName !== 'IMG' || !image.hasAttribute('data-vp-mascot')) return;
+      images.add(image);
+      image.src = frames[current];
+      image.dataset.vpMascotFrame = String(current);
+    }
+    function scan(node) {
+      if (!node || node.nodeType !== 1) return;
+      setFrame(node);
+      node.querySelectorAll('[data-vp-mascot]').forEach(setFrame);
+    }
+    scan(root.documentElement || root);
+    const observer = new MutationObserver(records => {
+      records.forEach(record => record.addedNodes.forEach(scan));
+    });
+    observer.observe(root.documentElement || root, { childList: true, subtree: true });
+    window.setInterval(() => {
+      current = (current + 1) % frames.length;
+      images.forEach(image => {
+        if (image.isConnected) setFrame(image);
+        else images.delete(image);
+      });
+    }, 30000);
+  }
   global.VyrdepilDesign = { decorate, initSupport, initSelections, initMenus, loadRegistry, applyIdentity };
   document.addEventListener('DOMContentLoaded', () => {
     decorate();
     initSupport();
     initSelections();
     initMenus();
+    initMascots();
     if (document.body.hasAttribute('data-vp-app')) applyIdentity(document.body.dataset.vpApp).catch(error => console.error(error.message));
   });
 })(window);
