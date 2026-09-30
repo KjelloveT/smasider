@@ -45,7 +45,8 @@
 
     if (p.kva) linje1.appendChild(brikke('endr-kva', p.kva));
 
-    (p.merke || []).forEach(navn => {
+    const merker = Array.isArray(p.merke) ? p.merke : (p.merke ? [p.merke] : []);
+    merker.forEach(navn => {
       const m = MERKE[navn];
       if (m) linje1.appendChild(brikke('endr-merke ' + m.klasse, m.merkelapp));
     });

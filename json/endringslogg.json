@@ -20,6 +20,11 @@
           "t": "endra",
           "kva": "Framside og Vyrde",
           "tekst": "Personvern, lisens og sidefot har same innhaldsbreidd. Vyrde står ved sida av innhaldet og blir med nedover når du rullar. Framsida har òg fått eit fast skilt om det nye designet og kvar du melder frå om feil."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Endringar",
+          "tekst": "Heile endringsloggen blir vist, også eldre punkt som har eitt eksperimentmerke."
         }
       ]
     },

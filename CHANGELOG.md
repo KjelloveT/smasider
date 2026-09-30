@@ -11,6 +11,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - **Endringsloggen og informasjonssidene har fått smalare lesebreidd.** Endringar følgjer no fellesdesignet, og personvernoversikta viser applogoane frå designregisteret.
 - **Framsida har fått eit fast infoskilt om det nye designet.** Skiltet inviterer til å melde frå om feil via e-post.
 
+### Fiksa
+- **Endringar viser heile loggen.** Eldre punkt med eitt eksperimentmerke blir no viste på same måte som punkt med fleire merke.
+
 ## [1.62] — 2026-09-30
 
 ### Endra
