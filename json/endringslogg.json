@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.64",
+      "dato": "2026-09-30",
+      "samandrag": "Det er meir luft mellom kategorioverskriftene og verktøyrutene på framsida.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Framsida",
+          "tekst": "Verktøyrutene har fått tydelegare avstand under kategoriskilta, også på mobil."
+        }
+      ]
+    },
+    {
       "versjon": "1.63",
       "dato": "2026-09-30",
       "samandrag": "Framsida har fått nye fagkategoriar, og Vyrde følgjer med nedover sida.",

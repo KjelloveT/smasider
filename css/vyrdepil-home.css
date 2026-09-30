@@ -32,7 +32,7 @@ body.vp-home-page {
 .vp-home-note a { font-weight: 750; }
 #appSections { display: grid; gap: 22px; }
 #appSections[aria-busy="true"] { min-height: 120px; }
-.vp-home-category { display: grid; gap: 16px; min-width: 0; }
+.vp-home-category { display: grid; gap: 24px; min-width: 0; }
 .vp-home-category-heading { margin: 0; gap: 10px; font-size: clamp(1.2rem, 2.2vw, 1.6rem); }
 .vp-home-category-icon { display: inline-flex; align-items: center; flex: 0 0 auto; }
 .vp-home-category-icon svg { width: 26px; height: 26px; }
@@ -153,7 +153,7 @@ body.vp-home-page {
   .vp-home-hero .vp-hero-logo { width: clamp(52px, 15vw, 82px); height: clamp(58px, 17vw, 92px); }
   .vp-home-note > .vp-panel { padding: 14px; }
   .vp-home-main .card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
-  .vp-home-category { gap: 12px; }
+  .vp-home-category { gap: 18px; }
   .vp-home-category-heading { padding: 8px 10px; font-size: 1.08rem; }
   .vp-home-category-icon svg { width: 22px; height: 22px; }
   .vp-home-main .vp-home-app { grid-template-rows: auto auto; align-content: start; gap: 5px; min-height: 112px; padding: 7px 3px 6px; border-width: 2px; }

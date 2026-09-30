@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.64] — 2026-09-30
+
+### Endra
+- **Framsida har meir luft under kategorioverskriftene.** Verktøyrutene startar tydelegare under skilta, også på mobil.
+
 ## [1.63] — 2026-09-30
 
 ### Endra
