@@ -3,6 +3,16 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.67] — 2026-09-30
+
+### Endra
+- **Ormritaren og Bolkestokk har fått same smalare menysidemal.** Kursa står i eigne boksar med luft og synleg bakgrunn mellom seg; arbeidsflatene er bevarte.
+- **Leitekryss har fått ny logo.** Ho viser eit ope 8 × 8-rutenett med eit vassrett og eit loddrett ringa ord.
+
+### Fiksa
+- **Modalar ligg attpå sida når dei blir opna.** Felles modalstil viser no Dagsvegen-, Ordkryss- og Rissverk-dialogane som ordentlege overlegg.
+- **Tidvis viser kva svar som er valde og om par er rette.** Felles knappestilar overstyrer ikkje lenger tilstandsfargane; digitale klokker har òg fått lysare og meir lesbare tal.
+
 ## [1.66] — 2026-09-30
 
 ### Endra

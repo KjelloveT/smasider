@@ -34,7 +34,20 @@ body[data-vp-app="bolkestokk"]:not([data-vp-preserve]) {
 
 /* ---- modulgrupper ----------------------------------------------------- */
 
-.bs-modulgruppe { margin-bottom: 32px; }
+.bs-modulgruppe { margin: 0 0 30px; }
+
+body[data-vp-app="bolkestokk"] .main-content { max-width: 1200px; margin-inline: auto; }
+body[data-vp-app="bolkestokk"] .page-wrapper { background: transparent; border: 0; box-shadow: none; }
+body[data-vp-app="bolkestokk"] .bs-modulgruppe > h2 {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 0 14px;
+    padding: 10px 14px;
+    border: 2px solid var(--vp-frame, #142820);
+    border-radius: 8px;
+    background: var(--vp-honey, #f5dfaa);
+    color: #000;
+}
 
 /* --muted fell til 4,30:1 i «sunset» — like under AA. Gruppeteksten er
  * ei innleiing ein lærar faktisk les, ikkje pynt. */
@@ -49,7 +62,7 @@ body[data-vp-app="bolkestokk"]:not([data-vp-preserve]) {
 .bs-modulrutenett {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-    gap: 16px;
+    gap: 18px;
     align-items: start;
 }
 

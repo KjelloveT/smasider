@@ -25,7 +25,7 @@
   --muted:     #6B6259;
   --shadow:    #1A1714;     /* hard skugge */
   --lcd-bg:    #14201C;
-  --lcd-on:    #38E08A;
+  --lcd-on:    #C9FFDD;
   --lcd-off:   rgba(56,224,138,.12);
 
   /* system-font-stakkar (erstattar Google Fonts) */
@@ -414,13 +414,13 @@
 }
 .tv .lcd__time {
   font-family: var(--mono); font-weight:700;
-  font-size: clamp(52px, 9vw, 92px); line-height:.95; letter-spacing: 3px;
+  font-size: clamp(52px, 9vw, 92px); line-height:1.08; letter-spacing: .06em;
   color: var(--lcd-on);
-  text-shadow: 0 0 14px rgba(56,224,138,.55);
+  text-shadow: none;
   position: relative; font-variant-numeric: tabular-nums;
 }
 .tv .lcd__time .val { position: relative; z-index: 1; }
-.tv .lcd__label { font-family: var(--mono); font-size:12px; letter-spacing:3px; color: rgba(56,224,138,.6); }
+.tv .lcd__label { font-family: var(--mono); font-size:12px; letter-spacing:3px; color: #A8D6B9; }
 
 /* ---- PARA / MATCH ---- */
 .tv-para { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 3vw, 30px); }

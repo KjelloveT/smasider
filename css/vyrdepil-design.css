@@ -1,4 +1,4 @@
-/* Vyrdepil v1.0 — felles komponentstil for alle sider. Bruk saman med DESIGN.md.
+/* Vyrdepil v1.1 — felles komponentstil for alle sider. Bruk saman med DESIGN.md.
    App-spesifikke stilark utvidar denne paletten utan kopiar av felles UI. */
 [data-vp-design] {
   --vp-ink: #000000;
@@ -261,6 +261,36 @@ textarea.vp-input { min-height: 110px; resize: vertical; }
 .vp-dialog::backdrop { background: rgb(11 32 24 / .65); }
 .vp-dialog-head { display: flex; align-items: start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
 .vp-dialog-head h2 { margin: 0; }
+/* Fallback for existing tools that still use the shared modal class hooks.
+   These retain the new palette and keep closed dialogs out of document flow. */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  align-items: center; justify-content: center;
+  padding: max(12px, env(safe-area-inset-top)) 16px max(12px, env(safe-area-inset-bottom));
+  overflow: auto; background: rgb(20 40 32 / .72); overscroll-behavior: contain;
+}
+.modal-overlay.open { display: flex; }
+.modal-overlay[hidden], .modal-overlay.hidden:not(.open) { display: none !important; }
+.modal1, .modal2, .modal3, .modal4, .modal5 {
+  box-sizing: border-box; position: relative; width: 100%; max-height: min(90vh, calc(100dvh - 32px));
+  overflow: auto; color: var(--vp-ink, #000); background: var(--vp-wood, #fff9e9);
+  border: 3px solid var(--vp-frame, #142820); border-radius: 10px;
+  box-shadow: 0 5px 0 var(--vp-shadow, #142820);
+}
+.modal1, .modal2, .modal3:not(.dv-modal-wide) { max-width: 560px; }
+.modal3.dv-modal-wide { max-width: 640px; }
+.modal4, .modal5 { max-width: 800px; }
+.modal1, .modal2, .modal4 { padding: clamp(16px, 3vw, 24px); }
+.modal2 { transform: none; }
+.modal3, .modal5 { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+.modal3 .modal-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  flex: 0 0 auto; padding: 12px 16px; color: var(--vp-ink, #000);
+  background: var(--vp-honey, #f5dfaa); border-bottom: 2px solid var(--vp-frame, #142820); font-weight: 800;
+}
+.modal3 .modal-body, .modal5 .modal-body { flex: 1 1 auto; min-height: 0; padding: 16px; overflow: auto; }
+.modal3 .modal-footer { display: flex; flex: 0 0 auto; justify-content: flex-end; gap: 8px; padding: 12px 16px; border-top: 2px solid var(--vp-frame, #142820); }
+.modal1 .modal-close, .modal2 .modal-close { position: absolute; top: 10px; right: 10px; }
 .vp-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px; background: var(--vp-wood); border: 3px solid var(--vp-frame); border-radius: 8px; }
 .vp-toolbar-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .vp-toolbar-group + .vp-toolbar-group { border-left: 2px solid var(--vp-frame); padding-left: 12px; }
@@ -558,7 +588,7 @@ body.vp-migrated-page:not([data-vp-preserve]) .vp-migrated-main :is(.box2,.box3,
 body.vp-migrated-page:not([data-vp-preserve]) .vp-migrated-main :is(.box1,.box2,.box3,.box4,.panel,.card,.modal4,.modal3,.settings-group,.settings-panel,.help-panel,.stat-card,.empty-help) :is(h1,h2,h3,h4,p,label,span,strong,small) {
   color: #000;
 }
-body.vp-migrated-page:not([data-vp-preserve]) :is(button,.btn,a.btn,.tb-btn,.step,.option-btn,.nav-btn,.hs-btn,.lk-start,.lk-stat-btn,.bk-btn,.dv-icon-btn) {
+:where(body.vp-migrated-page:not([data-vp-preserve])) :is(button,.btn,a.btn,.tb-btn,.step,.option-btn,.nav-btn,.hs-btn,.lk-start,.lk-stat-btn,.bk-btn,.dv-icon-btn) {
   color: #000; border: 2px solid var(--vp-frame); border-radius: 8px;
   background-color: var(--vp-paper); box-shadow: 0 3px 0 var(--vp-shadow);
   font-family: var(--vp-font); font-weight: 750; text-align: center;
@@ -568,10 +598,10 @@ body.vp-migrated-page:not([data-vp-preserve]) :is(.btn-primary,.btn-success,.btn
 }
 body.vp-migrated-page:not([data-vp-preserve]) :is(.btn-secondary,.btn-tool,.c-blue,.c-purple) { color: #000; background-color: var(--vp-sky); }
 body.vp-migrated-page:not([data-vp-preserve]) :is(.btn-danger,.btn-delete,.c-red) { color: #000; background-color: var(--vp-blush); }
-body.vp-migrated-page:not([data-vp-preserve]) :is(.active,.selected,[aria-pressed="true"],[aria-selected="true"]):is(button,.btn,a.btn,.tb-btn,.step,.option-btn,.nav-btn,.hs-btn,.bk-btn) {
+:where(body.vp-migrated-page:not([data-vp-preserve])) :is(.active,.selected,[aria-pressed="true"],[aria-selected="true"]):is(button,.btn,a.btn,.tb-btn,.step,.option-btn,.nav-btn,.hs-btn,.bk-btn) {
   color: #000; background-color: var(--vp-honey) !important; border-color: var(--vp-frame);
 }
-body.vp-migrated-page:not([data-vp-preserve]) :is(button,.btn,a.btn,.tb-btn,.step,.option-btn,.nav-btn,.hs-btn,.lk-start,.lk-stat-btn,.bk-btn,.dv-icon-btn):disabled {
+:where(body.vp-migrated-page:not([data-vp-preserve])) :is(button,.btn,a.btn,.tb-btn,.step,.option-btn,.nav-btn,.hs-btn,.lk-start,.lk-stat-btn,.bk-btn,.dv-icon-btn):disabled {
   color: #000; background-color: var(--vp-stone); box-shadow: none; cursor: not-allowed;
 }
 /* Vidfaren låser alle svar etter innlevering, men fargane viser framleis

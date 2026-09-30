@@ -211,20 +211,26 @@ body[data-vp-app="ormritaren"] {
     --text-on-light-accent: #000;
 }
 
-body[data-vp-app="ormritaren"] .orm-modulgruppe,
+body[data-vp-app="ormritaren"] .main-content { max-width: 1200px; margin-inline: auto; }
+body[data-vp-app="ormritaren"] .orm-modulgruppe { margin: 0 0 30px; }
+body[data-vp-app="ormritaren"] .orm-modulgruppe > h2 {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 0 14px;
+    padding: 10px 14px;
+    border: 2px solid var(--vp-frame, #142820);
+    border-radius: 8px;
+    border-bottom: 2px solid var(--vp-frame, #142820);
+    background: var(--vp-honey, #f5dfaa);
+    color: #000;
+}
+body[data-vp-app="ormritaren"] .orm-modulrutenett { gap: 18px; }
 body[data-vp-app="ormritaren"] .orm-larartekst {
+    max-width: min(100%, 74ch);
     padding: clamp(16px, 2.2vw, 26px);
     border: 3px solid var(--vp-frame, #142820);
     border-radius: 10px;
     background: var(--vp-wood, #fff9e9);
-    color: #000;
-}
-
-body[data-vp-app="ormritaren"] .orm-modulgruppe > h2 {
-    margin: 0 0 14px;
-    padding: 10px 14px;
-    border-bottom: 2px solid var(--vp-frame, #142820);
-    background: var(--vp-honey, #f5dfaa);
     color: #000;
 }
 

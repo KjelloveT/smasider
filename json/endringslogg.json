@@ -2,6 +2,33 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.67",
+      "dato": "2026-09-30",
+      "samandrag": "Modalane fungerer att, og Tidvis, Leitekryss, Ormritaren og Bolkestokk har fått justeringar.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Ormritaren og Bolkestokk",
+          "tekst": "Menysidene bruker same smalare oppsett med luft mellom kursboksane. Programmeringsflatene er bevarte."
+        },
+        {
+          "t": "endra",
+          "kva": "Leitekryss",
+          "tekst": "Logoen viser eit ope 8 × 8-rutenett med eit vassrett og eit loddrett ringa ord."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Modalar",
+          "tekst": "Dialogar i Dagsvegen, Ordkryss og Rissverk kjem no fram som overlegg i staden for å leggje seg nedst på sida."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Tidvis",
+          "tekst": "Valde og rette par får tydeleg tilbakemelding, og dei digitale klokkene er lettare å lese."
+        }
+      ]
+    },
+    {
       "versjon": "1.66",
       "dato": "2026-09-30",
       "samandrag": "Alle sidene følgjer det felles designsystemet, og Dagsvegen har fått ei tydelegare arbeidsflate.",

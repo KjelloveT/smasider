@@ -1,5 +1,83 @@
 /* Ormritaren — stilar for redigerings- og arbeidsflatene. */
 
+/* Den køyrbare arbeidsflata har eigne app-stilar. Gje henne dei grunnflatene
+   som tidlegare kom frå det globale temaarket, utan å dra inn temaveljar eller
+   den gamle nettstadsnavigasjonen att. */
+body[data-vp-app="ormritaren"][data-vp-preserve] .page-wrapper {
+    min-height: 100vh;
+    padding: 12px clamp(10px, 2vw, 24px) 48px;
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .main-content {
+    width: min(100%, 1320px);
+    max-width: 1320px;
+    margin-inline: auto;
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .box1,
+body[data-vp-app="ormritaren"][data-vp-preserve] .box2,
+body[data-vp-app="ormritaren"][data-vp-preserve] .box4 {
+    color: var(--vp-ink, #000);
+    background: var(--vp-wood, #fff9e9);
+    border: 3px solid var(--vp-frame, #142820);
+    border-radius: 10px;
+    box-shadow: 0 4px 0 var(--vp-shadow, #142820);
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .box1,
+body[data-vp-app="ormritaren"][data-vp-preserve] .box2 { padding: clamp(14px, 2vw, 22px); }
+body[data-vp-app="ormritaren"][data-vp-preserve] .box4 { overflow: hidden; }
+body[data-vp-app="ormritaren"][data-vp-preserve] .box-header {
+    padding: 10px 14px;
+    color: var(--vp-ink, #000);
+    background: var(--vp-honey, #f5dfaa);
+    border-bottom: 2px solid var(--vp-frame, #142820);
+    font-weight: 800;
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .box-body { padding: 14px; }
+body[data-vp-app="ormritaren"][data-vp-preserve] .hero-box {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 3vw, 32px);
+    margin: 8px 0 18px;
+    background: var(--vp-wood, #fff9e9) url("../../_resources/vyrdepil-design/wood-contours.png") center / cover;
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .hero-logo {
+    display: block;
+    width: clamp(76px, 11vw, 132px);
+    height: auto;
+    flex: 0 0 auto;
+    object-fit: contain;
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .hero-text h1 {
+    margin: 0 0 6px;
+    color: #000;
+    font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .hero-text p { margin: 0; max-width: 72ch; }
+body[data-vp-app="ormritaren"][data-vp-preserve] .btn,
+body[data-vp-app="ormritaren"][data-vp-preserve] .box-tab {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 12px;
+    color: #000;
+    background: var(--vp-wood, #fff9e9);
+    border: 2px solid var(--vp-frame, #142820);
+    border-radius: 7px;
+    box-shadow: 0 3px 0 var(--vp-shadow, #142820);
+    font: 750 .95rem/1.25 var(--vp-font, "Segoe UI", system-ui, sans-serif);
+    cursor: pointer;
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .box-tab[aria-selected="true"] { background: var(--vp-honey, #f5dfaa); }
+body[data-vp-app="ormritaren"][data-vp-preserve] .btn:disabled { background: var(--vp-stone, #e4e7e5); box-shadow: none; cursor: not-allowed; }
+body[data-vp-app="ormritaren"][data-vp-preserve] .heading4 { margin: 0 0 12px; color: #000; font-size: 1.2rem; font-weight: 850; }
+body[data-vp-app="ormritaren"][data-vp-preserve] .no-mt { margin-top: 0; }
+
+@media (max-width: 640px) {
+    body[data-vp-app="ormritaren"][data-vp-preserve] .hero-box { align-items: flex-start; }
+    body[data-vp-app="ormritaren"][data-vp-preserve] .hero-logo { width: 72px; }
+}
+
 /* ---- layout ---------------------------------------------------------- */
 
 .orm-flate { display: block; }
