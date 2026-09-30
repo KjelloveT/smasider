@@ -275,3 +275,22 @@ textarea.form-input { resize: vertical; min-height: 80px; }
   neo-header, .fb-nav, .fb-controls, .game-controls, .btn-remove-team { display: none !important; }
   .jeopardy-grid, .box1 { break-inside: avoid; }
 }
+
+/* Felles skal slår av temaveljaren; bind difor spelrutene til den lyse
+   Vyrdepil-paletten. Den mørke ramma skal vere skilje mellom lyse ruter,
+   ikkje bakgrunn bak svarte tal. */
+body[data-vp-app="frodebrett"] {
+  --bg: var(--vp-wood, #fff9e9);
+  --surface: var(--vp-paper, #fffdf5);
+  --text: var(--vp-ink, #000);
+  --border: var(--vp-frame, #142820);
+  --shadow: var(--vp-frame, #142820);
+  --muted: #454a46;
+  --accent: var(--vp-honey, #f5dfaa);
+  --accent2: var(--vp-coral, #efb29d);
+  --accent3: var(--vp-moss, #d5e5c5);
+  --accent4: var(--vp-sky, #d6e8f1);
+  --accent5: var(--vp-heather, #e5dcef);
+  --text-on-accent: #000;
+  --text-on-light-accent: #000;
+}

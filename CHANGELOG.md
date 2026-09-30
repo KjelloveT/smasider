@@ -21,7 +21,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - **Tidvis viser éi digital klokke om gongen.** Den doble skuggevisinga er fjerna.
 - **Heite Stavrim har betre kontrast.** Bokstavar, tidtaking, kategoriar og lagpoeng står på lyse flater med svart tekst.
 - **Vidfaren viser att hovudstadsbileta, skil rett og gale svar, og har ein større kartpinne.**
-- **Frødebrett har tydelege skiljelinjer mellom rutene, og spørsmålsdialogen har ei lesbar bakgrunn.**
+- **Frødebrett har lyse, tydelege talruter med skiljelinjer, og spørsmålsdialogen har ei lesbar bakgrunn.**
 - **Reknedæsj fyller skjermhøgda utan ei ekstra introflate.** Spelbrettet held sideforholdet og skalerer til visingsplassen.
 
 ## [1.60] — 2026-09-29
