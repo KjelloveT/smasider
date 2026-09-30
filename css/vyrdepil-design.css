@@ -1,4 +1,4 @@
-/* Vyrdepil v1.1 — felles komponentstil for alle sider. Bruk saman med DESIGN.md.
+/* Vyrdepil v1.2 — felles komponentstil for alle sider. Bruk saman med DESIGN.md.
    App-spesifikke stilark utvidar denne paletten utan kopiar av felles UI. */
 [data-vp-design] {
   --vp-ink: #000000;
@@ -588,6 +588,8 @@ body.vp-migrated-page:not([data-vp-preserve]) .vp-migrated-main :is(.box2,.box3,
 body.vp-migrated-page:not([data-vp-preserve]) .vp-migrated-main :is(.box1,.box2,.box3,.box4,.panel,.card,.modal4,.modal3,.settings-group,.settings-panel,.help-panel,.stat-card,.empty-help) :is(h1,h2,h3,h4,p,label,span,strong,small) {
   color: #000;
 }
+/* The shared text normalizer also reaches the digits inside Tidvis's LCD. */
+body.vp-migrated-page[data-vp-app="tidvis"] .tv .lcd__time .val { color: var(--lcd-on); }
 :where(body.vp-migrated-page:not([data-vp-preserve])) :is(button,.btn,a.btn,.tb-btn,.step,.option-btn,.nav-btn,.hs-btn,.lk-start,.lk-stat-btn,.bk-btn,.dv-icon-btn) {
   color: #000; border: 2px solid var(--vp-frame); border-radius: 8px;
   background-color: var(--vp-paper); box-shadow: 0 3px 0 var(--vp-shadow);
