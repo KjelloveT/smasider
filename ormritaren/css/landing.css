@@ -216,7 +216,7 @@ body[data-vp-app="ormritaren"]:not([data-vp-preserve]) .page-wrapper {
     border: 0;
     box-shadow: none;
 }
-body[data-vp-app="ormritaren"]:not([data-vp-preserve]) .main-content {
+body.vp-migrated-page[data-vp-app="ormritaren"]:not([data-vp-preserve]) .main-content.vp-migrated-main {
     max-width: 1200px;
     margin-inline: auto;
     padding: 0;

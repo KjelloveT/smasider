@@ -36,7 +36,7 @@ body[data-vp-app="bolkestokk"]:not([data-vp-preserve]) {
 
 .bs-modulgruppe { margin: 0 0 30px; }
 
-body[data-vp-app="bolkestokk"] .main-content {
+body.vp-migrated-page[data-vp-app="bolkestokk"] .main-content.vp-migrated-main {
     max-width: 1200px;
     margin-inline: auto;
     padding: 0;
