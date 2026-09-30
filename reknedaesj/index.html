@@ -515,6 +515,26 @@
             }
         }
 
+        /* Hald start- og innstillingsskjermene innanfor spelruta når ho er
+           låg. Spelebrettet skal ikkje få ein eigen rullekant på laptop eller
+           nettbrett i liggjande vising. */
+        @media (max-height: 820px) and (orientation: landscape) {
+            #startScreen, #settingsScreen, #statsScreen { padding: 10px; }
+            .start-content { padding: clamp(12px, 3vh, 24px) clamp(16px, 3vw, 36px); }
+            .screen-title { font-size: clamp(28px, 5vh, 40px); margin-bottom: clamp(6px, 1.4vh, 12px); }
+            .screen-subtitle { font-size: clamp(14px, 2vh, 17px); margin-bottom: clamp(12px, 2.2vh, 22px); }
+            #startScreen .btn { padding: clamp(9px, 1.8vh, 13px) clamp(22px, 3vw, 36px); font-size: clamp(16px, 2.5vh, 19px); }
+            #startScreen .controls { margin-top: clamp(6px, 1.2vh, 12px); font-size: clamp(12px, 1.7vh, 14px); line-height: 1.35; }
+            #settingsScreen .settings-screen-title { font-size: clamp(22px, 4vh, 30px); margin-bottom: 8px; }
+            #settingsScreen .settings-section { padding: 12px; margin: 8px 0; }
+            #settingsScreen .settings-section h3 { font-size: 17px; margin-bottom: 8px; }
+            #settingsScreen .difficulty-options, #settingsScreen .math-options-select { gap: 6px; margin-bottom: 8px; }
+            #settingsScreen .option-btn { padding: 8px 10px; font-size: 14px; }
+            .stats-card { padding: 16px 20px; }
+            .stats-grid { gap: 6px; margin-bottom: 10px; }
+            .stat-box { padding: 7px 8px; }
+        }
+
         .settings-section {
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
