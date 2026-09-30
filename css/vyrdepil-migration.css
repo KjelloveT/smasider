@@ -31,6 +31,9 @@ body.vp-migrated-page:not([data-vp-preserve]) :is(main,#main).vp-migrated-main {
 body.vp-migrated-page:not([data-vp-preserve]) :is(main,#main).vp-migrated-main--wide {
   width: calc(100% - 24px) !important; max-width: none !important;
 }
+body.vp-migrated-page:not([data-vp-preserve])[data-vp-layout="medium"] :is(main,#main).vp-migrated-main {
+  width: calc(100% - 8px) !important; max-width: 1200px !important;
+}
 body.vp-migrated-page:not([data-vp-preserve]) #toolbar { top: 82px; }
 body.vp-migrated-page:not([data-vp-preserve]) :is(h1,h2,h3,h4,h5,h6,p,label,legend,figcaption) { color: #000; }
 body.vp-migrated-page:not([data-vp-preserve]) :is(h1,h2,h3,h4) { font-family: var(--vp-heading-font); line-height: 1.15; }

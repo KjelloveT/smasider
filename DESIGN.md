@@ -110,6 +110,8 @@ Editorar, tabellar, små felt, spelkontrollar og tette lister har reine flater u
 
 Sider som ikkje er appar, til dømes personvern og lisens, bruker `data-vp-site-page="true"` i staden for `data-vp-app`. Dei lastar same felles design-, ikon-, skal- og menymodular, men får det faste landskapet til framsida og får inga appreservasjon.
 
+På migrerte appar som ikkje treng ei fullbreidd arbeidsflate, kan `body` bruke `data-vp-layout="medium"`. Overgangsstilen avgrensar då hovudinnhaldet til 1200 px. Bruk fullbreidd oppsett berre når sjølve arbeidsflata har nytte av det.
+
 ## Leveranse og kontroll
 
 Nynorsk UI, Vanilla HTML/CSS/JS, felles lagrings-/ikon-/hjelpemodular og personvernreglane i AGENTS.md gjeld framleis. Test små mobilvisingar (320/437 px), nettbrett og brei skjerm, tastaturfokus, lange etikettar, klipping av dekor og hovudfunksjonen. For nye appar: kontroller reservasjonen og at ressursar lastar utan konsollfeil.

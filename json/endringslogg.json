@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.65",
+      "dato": "2026-09-30",
+      "samandrag": "Språk- og ordverktøya, Tidvis, Talsmia og Vitjingsruta har fått avgrensa innhaldsbreidd.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Appbreidd",
+          "tekst": "Desse appene har no maksbreidd på 1200 px, så innhaldet ikkje strekkjer seg over heile skjermen."
+        }
+      ]
+    },
+    {
       "versjon": "1.64",
       "dato": "2026-09-30",
       "samandrag": "Det er meir luft mellom kategorioverskriftene og verktøyrutene på framsida.",

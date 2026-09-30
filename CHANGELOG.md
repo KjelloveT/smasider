@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.65] — 2026-09-30
+
+### Endra
+- **Språk- og ordverktøya, Tidvis, Talsmia og Vitjingsruta har avgrensa breidd.** Hovudinnhaldet er no opptil 1200 px breitt i staden for å strekkje seg over heile skjermen.
+
 ## [1.64] — 2026-09-30
 
 ### Endra
