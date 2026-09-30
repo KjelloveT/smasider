@@ -377,6 +377,7 @@ textarea.vp-input { min-height: 110px; resize: vertical; }
 }
 .vp-policy-title-card :is(h1,p) { margin: 0; }
 .vp-policy-title-card .vp-small { color: var(--vp-ink); }
+.vp-policy-title-card .vp-title { font-size: clamp(1.35rem,4vw,2.6rem); overflow-wrap: normal; word-break: normal; }
 .vp-policy-panel {
   width: 100%;
   margin-inline: auto;
