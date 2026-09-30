@@ -22,7 +22,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - **Heite Stavrim har betre kontrast.** Bokstavar, tidtaking, kategoriar og lagpoeng står på lyse flater med svart tekst.
 - **Vidfaren viser att hovudstadsbileta, skil rett og gale svar, og har ein større kartpinne.**
 - **Frødebrett har lyse, tydelege talruter med skiljelinjer, og spørsmålsdialogen har ei lesbar bakgrunn.**
-- **Reknedæsj fyller skjermhøgda utan ei ekstra introflate.** Spelbrettet held sideforholdet og skalerer til visingsplassen.
+- **Reknedæsj fyller skjermhøgda utan ei ekstra introflate.** Spelbrettet held sideforholdet og skalerer til visingsplassen; start- og innstillingsskjermene er komprimerte på låge liggjande skjermar.
 
 ## [1.60] — 2026-09-29
 
