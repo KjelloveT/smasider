@@ -39,10 +39,10 @@ body[data-vp-app="bolkestokk"]:not([data-vp-preserve]) {
 body.vp-migrated-page[data-vp-app="bolkestokk"] .main-content.vp-migrated-main {
     max-width: 1200px;
     margin-inline: auto;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
 }
 body[data-vp-app="bolkestokk"] .page-wrapper { background: transparent; border: 0; box-shadow: none; }
 body[data-vp-app="bolkestokk"] .bs-modulgruppe > h2 {

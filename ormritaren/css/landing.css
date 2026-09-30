@@ -219,10 +219,10 @@ body[data-vp-app="ormritaren"]:not([data-vp-preserve]) .page-wrapper {
 body.vp-migrated-page[data-vp-app="ormritaren"]:not([data-vp-preserve]) .main-content.vp-migrated-main {
     max-width: 1200px;
     margin-inline: auto;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
 }
 body[data-vp-app="ormritaren"] .orm-modulgruppe { margin: 0 0 30px; }
 body[data-vp-app="ormritaren"] .orm-modulgruppe > h2 {
