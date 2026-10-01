@@ -166,8 +166,8 @@
       const self = this;
       this.cfg = this._loadConfig();
 
-      const overlay = el('tv-fb-overlay tv-ex-overlay');
-      const panel = el('card tv-ex');
+      const overlay = el('tv-fb-overlay tv-ex-overlay vp-modal-backdrop');
+      const panel = el('card tv-ex vp-modal-panel');
 
       // topprad
       const head = el('tv-ex__head');
@@ -211,18 +211,14 @@
       overlay.appendChild(panel);
       this._overlay = overlay;
 
-      function onKey(e) { if (e.key === 'Escape') self.close(); }
-      this._onKey = onKey;
-      document.addEventListener('keydown', onKey);
-      overlay.addEventListener('click', function (e) { if (e.target === overlay) self.close(); });
-
       const root = (window.TidvisUI && TidvisUI.root) || document.body;
       root.appendChild(overlay);
+      Vy.openModal(overlay);
       this.refresh();
     },
 
     close: function () {
-      if (this._onKey) document.removeEventListener('keydown', this._onKey);
+      if (this._overlay) Vy.closeModal(this._overlay);
       if (this._overlay && this._overlay.parentNode) this._overlay.remove();
       this._overlay = null;
     },
@@ -494,11 +490,16 @@
 
     _openNames: function () {
       const self = this;
-      const overlay = el('tv-fb-overlay tv-ex-overlay');
-      const panel = el('card tv-ex-names');
+      const overlay = el('tv-fb-overlay tv-ex-overlay vp-modal-backdrop');
+      const panel = el('card tv-ex-names vp-modal-panel');
 
       const head = el('tv-ex__head');
-      head.appendChild(txt('h2', 'tv-ex__title', 'Hent elevnamn'));
+      const title = txt('h2', 'tv-ex__title', 'Hent elevnamn');
+      title.id = Vy.uuid('tv-names-title');
+      head.appendChild(title);
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-labelledby', title.id);
       panel.appendChild(head);
       panel.appendChild(txt('p', 'tv-ex-hint',
         'Namna blir kopierte éin gong til dette arket. Dei blir ikkje lagra, '
@@ -520,6 +521,7 @@
           const use = button('btn btn--blue btn--sm', 'Bruk', 'users');
           use.addEventListener('click', function () {
             self._applyNames(list.names, list.source + ': ' + list.label);
+            Vy.closeModal(overlay);
             overlay.remove();
           });
           row.appendChild(use);
@@ -539,17 +541,18 @@
         const names = cleanNames(area.value.split(/\r?\n/));
         if (!names.length) return;
         self._applyNames(names, 'Innliming');
+        Vy.closeModal(overlay);
         overlay.remove();
       });
       const cancel = button('btn btn--ghost btn--sm', 'Avbryt', 'x');
-      cancel.addEventListener('click', function () { overlay.remove(); });
+      cancel.addEventListener('click', function () { Vy.closeModal(overlay); overlay.remove(); });
       cta.appendChild(ok);
       cta.appendChild(cancel);
       panel.appendChild(cta);
 
       overlay.appendChild(panel);
-      overlay.addEventListener('click', function (e) { if (e.target === overlay) overlay.remove(); });
       (this._overlay || document.body).appendChild(overlay);
+      Vy.openModal(overlay);
     },
 
     /* ---- Oppdatering ---- */

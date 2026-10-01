@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.2">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
     </head>
 <body data-vp-app="ordkryss" data-vp-layout="medium">
 
@@ -150,8 +150,8 @@
 </div>
 
 <!-- Modal: lim inn liste -->
-<div class="modal-overlay" id="pasteOverlay" role="dialog" aria-modal="true" aria-labelledby="pasteHeading">
-  <div class="modal1">
+<div class="modal-overlay vp-modal-backdrop" id="pasteOverlay" role="dialog" aria-modal="true" aria-labelledby="pasteHeading">
+  <div class="modal1 vp-modal-panel">
     <button class="btn ok-icon-btn modal-close" id="pasteClose" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="pasteHeading">Lim inn liste</h2>
     <p class="ok-muted">Ei linje per ord. Skil ord og forklaring med semikolon, kolon, tabulator eller tankestrek:<br>
@@ -167,8 +167,8 @@
 </div>
 
 <!-- Modal: hent namn -->
-<div class="modal-overlay" id="namesOverlay" role="dialog" aria-modal="true" aria-labelledby="namesHeading">
-  <div class="modal1">
+<div class="modal-overlay vp-modal-backdrop" id="namesOverlay" role="dialog" aria-modal="true" aria-labelledby="namesHeading">
+  <div class="modal1 vp-modal-panel">
     <button class="btn ok-icon-btn modal-close" id="namesClose" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="namesHeading">Hent elevnamn</h2>
     <p class="ok-muted">Namna blir kopierte hit éin gong. Endrar du klasselista seinare, må du hente på nytt.</p>
@@ -183,8 +183,8 @@
 </div>
 
 <!-- Modal: lagre -->
-<div class="modal-overlay" id="saveOverlay" role="dialog" aria-modal="true" aria-labelledby="saveHeading">
-  <div class="modal2">
+<div class="modal-overlay vp-modal-backdrop" id="saveOverlay" role="dialog" aria-modal="true" aria-labelledby="saveHeading">
+  <div class="modal2 vp-modal-panel">
     <button class="btn ok-icon-btn modal-close" id="saveClose" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="saveHeading">Lagre kryssordet</h2>
     <label for="saveNameInput" class="ok-field-label">Namn i biblioteket</label>
@@ -201,7 +201,7 @@
 
 <script src="../js/vyrdepil-storage.js"></script>
 <script src="../js/vyrdepil-icons.js"></script>
-<script src="../js/vyrdepil-util.js"></script>
+<script src="../js/vyrdepil-util.js?v=1.2"></script>
 <script src="../js/vyrdepil-elevlister.js"></script>
 <script src="js/util.js"></script>
 <script src="js/state.js"></script>
@@ -215,7 +215,7 @@
 <script src="js/main.js"></script>
 
 
-<script src="../js/vyrdepil-design.js"></script>
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=6"></script>
 <script src="../js/vyrdepil-menu.js"></script>
 </body>

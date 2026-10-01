@@ -36,6 +36,8 @@ Brukaren har valt det nye fellesdesignet. **Alle offentlege appar, verktøysider
 - Navigasjonen følgjer skyheaderen og appmenyen i katalogen, med kategoridata frå `json/apps.json`. Ingen side skal laste `css/neobrutalisme.css`, `js/neobrutalisme.js`, `js/neo-header.js` eller `css/vyrdepil-migration.css`. Bruk `js/vyrdepil-app-shell.js` og `js/vyrdepil-menu.js` når sida ikkje har eit eige semantisk fellesheader-skjelett.
 - Alt skal vere responsivt på små telefonar, nettbrett og store skjermar. Bruk grid/flex, clamp og minmax. Test at det ikkje er vassrett overflyt, at tekst er lesbar og at dekor blir klipt i eigne lag.
 - UI-ikon er Lucide frå den felles ikonmodulen, ikkje emoji. Dei avtalte innhaldsunntaka gjeld framleis: Dagsvegen sine fagemoji og Eikekveik sine nodeemoji; ikkje bruk flagg eller samansette ZWJ-emoji. Desse unntaka gjeld ikkje knappar/verktøyrader.
+- Bruk `vp-button`, `vp-panel`, `vp-field`, `vp-accordion` og `vp-dialog` for felles UI. Gamle klassar som `.btn` kan framleis få kompatibilitetsstil frå fellesfila medan ei appside blir migrert, men dei skal ikkje få eigne kopiar av grunnfyll, ramme, skugge, typografi eller fokusstil i app-CSS. Flytt ein komponent til felles CSS når fleire appar treng han; app-CSS skal avgrensast til oppsett, geometri og faglege tilstandar.
+- Bruk `Vy.openModal()`, `Vy.closeModal()` og `Vy.bindOverlayClose()` for dialogåtferd. Lokal JS kan utføre ei nødvendig avbrytingshandling, men sjølve fokusfella, Escape, rullelåsen, fokusreturen og bakgrunnsklikket skal framleis handterast av fellesmodulen.
 - Framsida bruker dei fem kategoriane i `json/apps.json`: Språk og ord, Matematikk og programmering, Geografi og natur, Skaping og media, Klasseverktøy. Alle verktøy er synlege utan trekkspel: fire kort per rad på stor skjerm, tre på nettbrett og fire på mobil. Mobilkort viser berre logo og namn. BåreTevling høyrer til Geografi og natur.
 - Framsidekort, personvern, lisens og sidefot held same innhaldsbreidd og venstrelinje. Kategoriskilta har luft før korta. Vyrde står ved sida av informasjonsinnhaldet nedst og følgjer med ved rulling; han blir gøymd på mobil. Maskotten har to hender og skiftar pose/uttrykk kvart 30. sekund der ho er vist. Respekter `prefers-reduced-motion`.
 - Bruk middels breidd for Språk og ord-verktøya, Tidvis, Talsmia og Vitjingsruta når arbeidsflata ikkje treng meir plass. Fullbreidd er for arbeidsflater som faktisk tener på det, som Vegamot.
@@ -46,7 +48,7 @@ Brukaren har valt det nye fellesdesignet. **Alle offentlege appar, verktøysider
 - `json/vyrdepil-design.json` er den faste oversikta over alle bakgrunnar og kva app som eig kvart bilete. Éi app får eitt unikt bilete; bakgrunnen blir ikkje trekt på nytt ved sideinnlasting.
 - Når du lagar ei ny app: registrer henne i `json/apps.json`, køyr `node designsystem/manage-backgrounds.cjs assign <app-id>`, og deretter `check`. Verktøyet vel tilfeldig frå ledige bilete og bevarer gamle val. Ikkje lag ein ny appkatalog.
 - Full bank krev fleire ressursar, ikkje gjenbruk av eit reservert bilete. Sletta appar held reservasjonen til han blir frigjeven med eit medvite val.
-- Alle 31 katalogførte appar har reservasjonar (28 synlege og tre skjulte). Reservasjon er ikkje automatisk redesign av ei eksisterande app.
+- Alle appar i designregisteret har faste bakgrunnsreservasjonar, også appar som ikkje er synlege på framsida. Reservasjon er ikkje automatisk redesign av ei eksisterande app.
 
 ## 4. Arbeidsflyt for AI
 Når du lagar eller modifiserer kode i dette prosjektet:

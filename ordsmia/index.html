@@ -188,7 +188,7 @@
         }
 
     </style>
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.2">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
     </head>
 <body data-vp-app="ordsmia" data-vp-layout="medium">
 <div class="page-wrapper">
@@ -199,8 +199,8 @@
             <button id="openHelpBtn" class="btn">Korleis spele ordsmia</button>
         </div>
 
-        <div id="helpModal" class="help-modal" aria-hidden="true">
-            <div class="help-modal-content" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <div id="helpModal" class="help-modal vp-modal-backdrop" aria-hidden="true">
+            <div class="help-modal-content vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
                 <h3 id="helpTitle">Korleis spele Ordsmia</h3>
                 <p>Du får ni bokstavar og skal finne det lengste gyldige norske ordet du kan lage.</p>
                 <ul>
@@ -451,23 +451,14 @@
             if (!modal || !openBtn || !closeBtn) return;
 
             const closeModal = () => {
-                modal.classList.remove('show');
-                modal.setAttribute('aria-hidden', 'true');
+                Vy.closeModal(modal);
             };
 
             openBtn.addEventListener('click', () => {
-                modal.classList.add('show');
-                modal.setAttribute('aria-hidden', 'false');
+                Vy.openModal(modal);
             });
 
             closeBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeModal();
-            });
         }
         
         // Modusveljar
@@ -952,8 +943,8 @@
     </script>
 
 <script src="../js/vyrdepil-icons.js"></script>
-<script src="../js/vyrdepil-util.js"></script>
-<script src="../js/vyrdepil-design.js"></script>
+<script src="../js/vyrdepil-util.js?v=1.2"></script>
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=6"></script>
 <script src="../js/vyrdepil-menu.js"></script>
 </body>

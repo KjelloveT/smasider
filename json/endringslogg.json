@@ -2,6 +2,33 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.68",
+      "dato": "2026-10-01",
+      "samandrag": "Dialogar, knappar og flater er samla i felles UI-komponentar på tvers av appane.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Felles UI",
+          "tekst": "Knappar og generelle flater brukar felles CSS, medan appstilane tek vare på oppsett og speltilstandar."
+        },
+        {
+          "t": "endra",
+          "kva": "Dialogsjekk",
+          "tekst": "Ny automatisk kontroll finn gamle lokale dialog- og komponentstilar før dei blir ståande i appane."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Dialogar",
+          "tekst": "Dialogar får felles opning, lukking, Escape, fokusretur og bakgrunnsklikk, også når dei blir laga frå JavaScript."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Quiz og Reknedæsj",
+          "tekst": "Vanlege handlingar brukar felles knappestilar; svarfargane og speltilstandane er bevarte."
+        }
+      ]
+    },
+    {
       "versjon": "1.67",
       "dato": "2026-09-30",
       "samandrag": "Modalane fungerer att, og Tidvis, Leitekryss, Ormritaren og Bolkestokk har fått justeringar.",

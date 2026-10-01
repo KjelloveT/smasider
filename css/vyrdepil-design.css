@@ -1,4 +1,4 @@
-/* Vyrdepil v1.2 — felles komponentstil for alle sider. Bruk saman med DESIGN.md.
+/* Vyrdepil v1.4 — felles komponentstil for alle sider. Bruk saman med DESIGN.md.
    App-spesifikke stilark utvidar denne paletten utan kopiar av felles UI. */
 [data-vp-design] {
   --vp-ink: #000000;
@@ -55,6 +55,7 @@
 [data-vp-design] :is(h1,h2,h3,h4) { line-height: 1.15; overflow-wrap: anywhere; }
 .vp-title { font-family: var(--vp-heading-font); font-size: clamp(1.7rem, 3vw, 2.6rem); font-weight: 900; }
 .vp-heading { font-size: clamp(1.3rem, 2vw, 1.65rem); font-weight: 850; }
+.vp-heading--small { font-size: 1.1rem; }
 .vp-label { font-weight: 750; }
 .vp-small { font-size: .9rem; }
 .vp-prose { max-width: 78ch; }
@@ -117,6 +118,7 @@
 .vp-panel--inset { background: var(--vp-paper); border-width: 2px; padding: 16px; border-radius: 6px; }
 .vp-panel--compact { padding: 16px; border-width: 3px; }
 .vp-panel--raised { box-shadow: 0 5px 0 var(--vp-shadow); }
+.vp-panel-heading { margin-bottom: 0; padding-bottom: 8px; border-bottom: 2px solid var(--vp-frame); }
 .vp-content { position: relative; z-index: 1; }
 .vp-decor { position: absolute; z-index: 0; inset: 0; overflow: hidden; border-radius: 6px; pointer-events: none; }
 .vp-corner {
@@ -261,36 +263,62 @@ textarea.vp-input { min-height: 110px; resize: vertical; }
 .vp-dialog::backdrop { background: rgb(11 32 24 / .65); }
 .vp-dialog-head { display: flex; align-items: start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
 .vp-dialog-head h2 { margin: 0; }
-/* Fallback for existing tools that still use the shared modal class hooks.
-   These retain the new palette and keep closed dialogs out of document flow. */
-.modal-overlay {
-  display: none; position: fixed; inset: 0; z-index: 2000;
+/* Felles dialoggrunnlag. Appane kan styre innhaldet, men ikkje sjølve ramma. */
+.vp-modal-backdrop {
+  box-sizing: border-box; display: none; position: fixed; inset: 0; z-index: 2000;
   align-items: center; justify-content: center;
   padding: max(12px, env(safe-area-inset-top)) 16px max(12px, env(safe-area-inset-bottom));
-  overflow: auto; background: rgb(20 40 32 / .72); overscroll-behavior: contain;
+  overflow: auto; color: var(--vp-ink); background: rgb(20 40 32 / .72); overscroll-behavior: contain;
 }
-.modal-overlay.open { display: flex; }
-.modal-overlay[hidden], .modal-overlay.hidden:not(.open) { display: none !important; }
-.modal1, .modal2, .modal3, .modal4, .modal5 {
-  box-sizing: border-box; position: relative; width: 100%; max-height: min(90vh, calc(100dvh - 32px));
-  overflow: auto; color: var(--vp-ink, #000); background: var(--vp-wood, #fff9e9);
-  border: 3px solid var(--vp-frame, #142820); border-radius: 10px;
-  box-shadow: 0 5px 0 var(--vp-shadow, #142820);
+.vp-modal-backdrop.open, .vp-modal-backdrop.show {
+  display: flex;
 }
-.modal1, .modal2, .modal3:not(.dv-modal-wide) { max-width: 560px; }
-.modal3.dv-modal-wide { max-width: 640px; }
-.modal4, .modal5 { max-width: 800px; }
-.modal1, .modal2, .modal4 { padding: clamp(16px, 3vw, 24px); }
-.modal2 { transform: none; }
-.modal3, .modal5 { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
-.modal3 .modal-header {
+.vp-modal-backdrop[hidden], .vp-modal-backdrop.hidden:not(.open):not(.show) {
+  display: none !important;
+}
+.vp-modal-panel {
+  box-sizing: border-box; position: relative; width: min(720px, calc(100vw - 32px)); max-height: min(90vh, calc(100dvh - 32px));
+  overflow: auto; color: var(--vp-ink); background: var(--vp-wood);
+  border: 3px solid var(--vp-frame); border-radius: 10px;
+  box-shadow: 0 4px 0 var(--vp-shadow);
+}
+.vp-modal-panel--media { display: block; width: auto; max-width: min(90vw, 1200px); max-height: 90vh; padding: 0; object-fit: contain; }
+:is(.vp-modal-panel.modal1, .vp-modal-panel.modal2, .vp-modal-panel.modal3:not(.dv-modal-wide), .vp-modal-panel.bk-modal) { width: min(560px, calc(100vw - 32px)); }
+.vp-modal-panel.modal3.dv-modal-wide { width: min(640px, calc(100vw - 32px)); }
+:is(.vp-modal-panel.modal4, .vp-modal-panel.modal5) { width: min(800px, calc(100vw - 32px)); }
+.vp-modal-panel.hs-dialog { width: min(900px, calc(100vw - 32px)); padding: clamp(16px, 3vw, 28px); }
+.vp-modal-panel.hs-detail { width: min(410px, calc(100vw - 32px)); }
+.vp-modal-panel.hs-reveal { width: min(440px, calc(100vw - 32px)); }
+.vp-modal-panel.bk-modal { width: min(560px, calc(100vw - 32px)); padding: clamp(16px, 3vw, 24px); }
+.vp-modal-panel.tv-ex, .vp-modal-panel.tv-ex-names {
+  width: min(1180px, calc(100vw - 32px)); padding: clamp(16px, 2.4vw, 26px);
+}
+.vp-modal-panel.help-modal-content, .vp-modal-panel.preview-inner, .vp-modal-panel.modal-box { max-width: 720px; }
+.vp-modal-panel.modal { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+.vp-modal-panel.modal-wide { max-width: 880px; }
+.vp-modal-panel--structured { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+.vp-modal-panel--structured > .modal-header, .vp-modal-panel.modal3 .modal-header {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  flex: 0 0 auto; padding: 12px 16px; color: var(--vp-ink, #000);
-  background: var(--vp-honey, #f5dfaa); border-bottom: 2px solid var(--vp-frame, #142820); font-weight: 800;
+  flex: 0 0 auto; padding: 12px 16px; color: var(--vp-ink);
+  background: var(--vp-honey); border-bottom: 2px solid var(--vp-frame); font-weight: 800;
 }
-.modal3 .modal-body, .modal5 .modal-body { flex: 1 1 auto; min-height: 0; padding: 16px; overflow: auto; }
-.modal3 .modal-footer { display: flex; flex: 0 0 auto; justify-content: flex-end; gap: 8px; padding: 12px 16px; border-top: 2px solid var(--vp-frame, #142820); }
-.modal1 .modal-close, .modal2 .modal-close { position: absolute; top: 10px; right: 10px; }
+.vp-modal-panel--structured > .modal-body { flex: 1 1 auto; min-height: 0; padding: 16px; overflow: auto; }
+.vp-modal-panel--structured > .modal-footer { display: flex; flex: 0 0 auto; justify-content: flex-end; gap: 8px; padding: 12px 16px; border-top: 2px solid var(--vp-frame); }
+.vp-modal-panel :is(h1,h2,h3,h4) { color: var(--vp-ink); }
+.vp-modal-panel.help-modal-content { max-width: 720px; padding: 20px; }
+.vp-modal-panel.preview-inner { max-width: 720px; padding: clamp(16px, 3vw, 28px); }
+.vp-modal-panel.tv-ex, .vp-modal-panel.tv-ex-names { max-width: 1180px; padding: clamp(16px, 2.4vw, 26px); }
+.vp-modal-panel.modal-box { max-width: 720px; padding: clamp(16px, 3vw, 24px); }
+:is(.vp-modal-panel.modal1, .vp-modal-panel.modal2, .vp-modal-panel.modal4) { padding: clamp(16px, 3vw, 24px); }
+:is(.vp-modal-panel.modal3, .vp-modal-panel.modal5) { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+.vp-modal-panel.modal3 .modal-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  flex: 0 0 auto; padding: 12px 16px; color: var(--vp-ink);
+  background: var(--vp-honey); border-bottom: 2px solid var(--vp-frame); font-weight: 800;
+}
+.vp-modal-panel.modal3 .modal-body, .vp-modal-panel.modal5 .modal-body { flex: 1 1 auto; min-height: 0; padding: 16px; overflow: auto; }
+.vp-modal-panel.modal3 .modal-footer { display: flex; flex: 0 0 auto; justify-content: flex-end; gap: 8px; padding: 12px 16px; border-top: 2px solid var(--vp-frame); }
+.vp-modal-panel :is(.modal-close,.modal-close-x) { position: absolute; top: 10px; right: 10px; }
 .vp-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px; background: var(--vp-wood); border: 3px solid var(--vp-frame); border-radius: 8px; }
 .vp-toolbar-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .vp-toolbar-group + .vp-toolbar-group { border-left: 2px solid var(--vp-frame); padding-left: 12px; }
@@ -591,10 +619,15 @@ body.vp-migrated-page:not([data-vp-preserve]) .vp-migrated-main :is(.box1,.box2,
 /* The shared text normalizer also reaches the digits inside Tidvis's LCD. */
 body.vp-migrated-page[data-vp-app="tidvis"] .tv .lcd__time .val { color: var(--lcd-on); }
 :where(body.vp-migrated-page:not([data-vp-preserve])) :is(button,.btn,a.btn,.tb-btn,.step,.option-btn,.nav-btn,.hs-btn,.lk-start,.lk-stat-btn,.bk-btn,.dv-icon-btn) {
+  min-height: 48px; padding: 9px 16px; line-height: 1.25; font-size: 1rem;
   color: #000; border: 2px solid var(--vp-frame); border-radius: 8px;
   background-color: var(--vp-paper); box-shadow: 0 3px 0 var(--vp-shadow);
   font-family: var(--vp-font); font-weight: 750; text-align: center;
+  text-transform: none; letter-spacing: normal; cursor: pointer;
 }
+:where(body.vp-migrated-page:not([data-vp-preserve])) :is(button,.btn,a.btn,.tb-btn,.step,.option-btn,.nav-btn,.hs-btn,.lk-start,.lk-stat-btn,.bk-btn,.dv-icon-btn):hover:not(:disabled) { filter: brightness(1.04); }
+:where(body.vp-migrated-page:not([data-vp-preserve])) :is(button,.btn,a.btn,.tb-btn,.step,.option-btn,.nav-btn,.hs-btn,.lk-start,.lk-stat-btn,.bk-btn,.dv-icon-btn):active:not(:disabled) { transform: translateY(1px); }
+:where(body.vp-migrated-page:not([data-vp-preserve])) :is(button,.btn,a.btn,.tb-btn,.step,.option-btn,.nav-btn,.hs-btn,.lk-start,.lk-stat-btn,.bk-btn,.dv-icon-btn):focus-visible { box-shadow: inset 0 -4px 0 var(--vp-focus), 0 3px 0 var(--vp-shadow); }
 body.vp-migrated-page:not([data-vp-preserve]) :is(.btn-primary,.btn-success,.btn-confirm,.lk-start,.primary,.c-green,.c-orange) {
   color: #000; background-color: var(--vp-coral);
 }

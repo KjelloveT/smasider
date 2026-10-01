@@ -60,14 +60,7 @@
   }
 
   function downloadBlob(blob, filename) {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    Vy.downloadBlob(blob, filename);
   }
 
   /** PNG i 2× layoutstorleik. transparent=true droppar bakgrunnen. */
@@ -80,11 +73,7 @@
     }, 'image/png');
   }
 
-  function escapeXml(s) {
-    return String(s)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
-  }
+  const escapeXml = Vy.escapeHtml;
 
   /** SVG frå same utleggings-resultat. NB: andre fontmiljø kan gje litt andre
       metrikkar enn canvas-målinga — akseptabelt avvik i v1. */

@@ -180,7 +180,7 @@
     }
 
     const overlay = el('winner-modal');
-    if (overlay) overlay.classList.add('open');
+    if (overlay) Vy.openModal(overlay);
   }
 
   function onSyncState(data) {

@@ -24,7 +24,7 @@
     });
   });
   const dialog = document.getElementById('exampleDialog');
-  document.querySelectorAll('[data-open-dialog]').forEach(button => button.addEventListener('click', () => dialog.showModal()));
+  document.querySelectorAll('[data-open-dialog]').forEach(button => button.addEventListener('click', () => Vy.openModal(dialog)));
   document.getElementById('taskBtn').addEventListener('click', () => {
     const count = document.querySelectorAll('input[name="pack"]:checked').length;
     document.getElementById('taskResult').textContent = count ? `Du har valt ${count} ting. God tur!` : 'Vel noko å ta med fyrst.';

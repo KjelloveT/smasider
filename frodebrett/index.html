@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.2">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
     </head>
 <body data-vp-app="frodebrett" data-vp-layout="expanded">
 
@@ -204,8 +204,8 @@
 <!-- ===== MODALAR ===== -->
 
 <!-- Spørsmål -->
-<div id="question-modal" class="modal-overlay">
-  <div class="modal3 question-modal">
+<div id="question-modal" class="modal-overlay vp-modal-backdrop">
+  <div class="modal3 question-modal vp-modal-panel">
     <div class="modal-header">
       <span id="question-category" class="question-category"></span>
       <span id="question-points" class="question-points"></span>
@@ -230,8 +230,8 @@
 </div>
 
 <!-- Førehandsvising -->
-<div id="preview-modal" class="modal-overlay">
-  <div class="modal4 preview-modal">
+<div id="preview-modal" class="modal-overlay vp-modal-backdrop">
+  <div class="modal4 preview-modal vp-modal-panel">
     <button class="btn btn-icon modal-close" id="btn-close-preview" aria-label="Lukk">×</button>
     <h2 id="preview-title" class="heading4 no-mt">Førehandsvisning</h2>
     <div id="preview-board" class="jeopardy-grid"></div>
@@ -247,8 +247,8 @@
 </div>
 
 <!-- Vinnar -->
-<div id="winner-modal" class="modal-overlay">
-  <div class="modal2 winner-modal">
+<div id="winner-modal" class="modal-overlay vp-modal-backdrop">
+  <div class="modal2 winner-modal vp-modal-panel">
     <div class="winner-trophy">🏆</div>
     <h2 class="winner-title">Vinnar!</h2>
     <div id="winner-name" class="winner-name"></div>
@@ -273,8 +273,8 @@
 
 
 <script src="../js/vyrdepil-icons.js"></script>
-<script src="../js/vyrdepil-util.js"></script>
-<script src="../js/vyrdepil-design.js"></script>
+<script src="../js/vyrdepil-util.js?v=1.2"></script>
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=6"></script>
 <script src="../js/vyrdepil-menu.js"></script>
 </body>

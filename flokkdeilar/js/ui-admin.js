@@ -49,9 +49,7 @@
     }
 
     function escapeHtml(str) {
-        const d = document.createElement('div');
-        d.textContent = str;
-        return d.innerHTML;
+        return Vy.escapeHtml(str);
     }
 
     /* ── Init-visning ── */
@@ -119,15 +117,8 @@
     }
 
     /* ── Modalar ── */
-    function openModal(el) { el.classList.add('open'); }
-    function closeModal(el) { el.classList.remove('open'); }
-
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-            closeModal(overlayFjern);
-            closeModal(overlayAktiverPin);
-        }
-    });
+    function openModal(el) { Vy.openModal(el); }
+    function closeModal(el) { Vy.closeModal(el); }
 
     /* ── Aktiver utvida administrasjon ── */
     document.getElementById('btnAktiverUtvidet').addEventListener('click', () => {

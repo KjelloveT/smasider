@@ -10,9 +10,7 @@ Eikekveik.Storage = (function () {
         el.saveModalClose.addEventListener('click', closeSaveModal);
         el.saveCancel.addEventListener('click', closeSaveModal);
         el.saveConfirm.addEventListener('click', confirmSave);
-        el.saveModal.addEventListener('click', (e) => {
-            if (e.target === el.saveModal) closeSaveModal();
-        });
+        Vy.bindOverlayClose(el.saveModal);
         el.saveName.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') { e.preventDefault(); confirmSave(); }
         });
@@ -20,9 +18,7 @@ Eikekveik.Storage = (function () {
         el.btnOpen.addEventListener('click', openOpenModal);
         el.openModalClose.addEventListener('click', closeOpenModal);
         el.openCancel.addEventListener('click', closeOpenModal);
-        el.openModal.addEventListener('click', (e) => {
-            if (e.target === el.openModal) closeOpenModal();
-        });
+        Vy.bindOverlayClose(el.openModal);
     }
 
     // ── Auto-save av siste kart ──
@@ -74,11 +70,11 @@ Eikekveik.Storage = (function () {
     // ── Modalar ──
     function openSaveModal() {
         Eikekveik.el.saveName.value = '';
-        Eikekveik.el.saveModal.classList.add('open');
+        Vy.openModal(Eikekveik.el.saveModal);
         Eikekveik.el.saveName.focus();
     }
     function closeSaveModal() {
-        Eikekveik.el.saveModal.classList.remove('open');
+        Vy.closeModal(Eikekveik.el.saveModal);
     }
     function confirmSave() {
         const name = Eikekveik.el.saveName.value.trim();
@@ -97,10 +93,10 @@ Eikekveik.Storage = (function () {
 
     function openOpenModal() {
         renderSavedList();
-        Eikekveik.el.openModal.classList.add('open');
+        Vy.openModal(Eikekveik.el.openModal);
     }
     function closeOpenModal() {
-        Eikekveik.el.openModal.classList.remove('open');
+        Vy.closeModal(Eikekveik.el.openModal);
     }
 
     function renderSavedList() {

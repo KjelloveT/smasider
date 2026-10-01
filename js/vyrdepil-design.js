@@ -97,7 +97,7 @@
       if (!menu || menu.tagName !== 'DIALOG') return;
       dialogs.add(menu);
       trigger.addEventListener('click', () => {
-        menu.showModal();
+        global.Vy.openModal(menu);
         root.querySelectorAll('[data-vp-menu]').forEach(button => {
           if (button.dataset.vpMenu === menu.id) button.setAttribute('aria-expanded', 'true');
         });
@@ -107,7 +107,7 @@
       menu.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
           event.preventDefault();
-          menu.close();
+          global.Vy.closeModal(menu);
         }
       });
       menu.addEventListener('close', () => {
@@ -117,7 +117,7 @@
       });
       menu.addEventListener('click', event => {
         const link = event.target.closest('a[href]');
-        if (link && menu.contains(link)) menu.close();
+        if (link && menu.contains(link)) global.Vy.closeModal(menu);
       });
     });
   }

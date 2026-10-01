@@ -17,7 +17,6 @@
     FB.Editor.bind();
     FB.Saved.bind();
     App.bindKeyboard();
-    App.bindOverlayDismiss();
     App.loadSampleQuizzes();
     App.showScreen('game');
   };
@@ -90,21 +89,7 @@
         else if (k === 'n' && S.currentScreen === 'editor') { e.preventDefault(); FB.Editor.clear(); }
         return;
       }
-      // Escape lukkar opne modalar uansett skjerm
-      if (e.key === 'Escape') {
-        if (FB.isOverlayOpen('preview-modal')) { FB.closeOverlay('preview-modal'); return; }
-        if (FB.isOverlayOpen('winner-modal')) { FB.closeOverlay('winner-modal'); return; }
-      }
       if (S.currentScreen === 'game') FB.Board.handleGameKeyboard(e);
-    });
-  };
-
-  // Klikk på overlay-bakgrunn lukkar modalen
-  App.bindOverlayDismiss = function () {
-    document.querySelectorAll('.modal-overlay').forEach(ov => {
-      ov.addEventListener('click', (e) => {
-        if (e.target === ov) ov.classList.remove('open');
-      });
     });
   };
 

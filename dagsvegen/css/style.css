@@ -314,7 +314,6 @@
     box-shadow: 3px 3px 0 var(--shadow);
 }
 .dv-emoji-pick:hover { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--shadow); }
-.dv-emoji-modal { max-width: 560px; }
 .dv-emoji-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
 .dv-emoji-tab {
     font-family: inherit; font-weight: 800; font-size: 0.8rem; cursor: pointer;

@@ -164,7 +164,7 @@ const App = (() => {
         $('set-autoclear').checked = session.settings.autoClearDrawing;
         $('set-showclock').checked = session.settings.showClock;
         $('set-breaks').value = Store.getBreaks().map(b => b.text).join('\n');
-        $('modal-settings').classList.add('open');
+        Vy.openModal($('modal-settings'));
     }
 
     function wireSettings() {
@@ -186,7 +186,7 @@ const App = (() => {
             Store.setBreaks(lines.map(t => ({ id: State.uid('br'), text: t })));
         });
         $('btn-settings-subjects').addEventListener('click', () => {
-            $('modal-settings').classList.remove('open');
+            Vy.closeModal($('modal-settings'));
             document.getElementById('btn-open-subjects').click();
         });
     }
@@ -194,21 +194,14 @@ const App = (() => {
     /* ---- Escape og modal-lukking ---- */
 
     function wireModals() {
-        document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', (ev) => {
-                if (ev.target === overlay) overlay.classList.remove('open');
-            });
-        });
         document.querySelectorAll('[data-close]').forEach(btn => {
             btn.addEventListener('click', () => {
                 const overlay = document.getElementById(btn.dataset.close);
-                if (overlay) overlay.classList.remove('open');
+                if (overlay) Vy.closeModal(overlay);
             });
         });
         document.addEventListener('keydown', (ev) => {
             if (ev.key !== 'Escape') return;
-            const openModal = document.querySelector('.modal-overlay.open');
-            if (openModal) { openModal.classList.remove('open'); return; }
             if (Draw.isActive()) { Draw.setActive(false); syncDrawBtn(); return; }
             if (Widgets.calmIsOpen()) Widgets.closeCalm();
         });
@@ -222,7 +215,7 @@ const App = (() => {
             setMode('edit');
             Edit.openFilesModal();
         });
-        $('btn-empty-help').addEventListener('click', () => $('modal-help').classList.add('open'));
+        $('btn-empty-help').addEventListener('click', () => Vy.openModal($('modal-help')));
         $('btn-empty-quick').addEventListener('click', () => Edit.openQuickModal());
         $('btn-empty-close').addEventListener('click', () => {
             session.ui.emptyDismissed = true;
@@ -268,7 +261,7 @@ const App = (() => {
         $('btn-draw').addEventListener('click', () => { Draw.setActive(!Draw.isActive()); syncDrawBtn(); });
         $('btn-note').addEventListener('click', () => Notes.addNote());
         $('btn-settings').addEventListener('click', openSettings);
-        $('btn-help').addEventListener('click', () => $('modal-help').classList.add('open'));
+        $('btn-help').addEventListener('click', () => Vy.openModal($('modal-help')));
         $('btn-hero-close').addEventListener('click', () => {
             session.ui.heroDismissed = true;
             saveSession();

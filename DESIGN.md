@@ -1,13 +1,13 @@
 # Vyrdepil — designinstruks
 
-Utgåve 1.0 · 30. september 2026. Brukarvald retning for heile Vyrdepil.
+Utgåve 1.1 · 1. oktober 2026. Brukarvald retning for heile Vyrdepil.
 
 ## Les fyrst
 
 1. Denne instruksen er den faste designreferansen for alle publiserte appar og undersider, ikkje berre nye appar.
 2. Sjå dei faktiske komponentane i [designsystem/index.html](designsystem/index.html).
 3. Bruk **[css/vyrdepil-design.css](css/vyrdepil-design.css)**. Denne eine fila inneheld palett, typografi, knappar, flater, skjema, trekkspel, dialog, navigasjon, appoppsett og responsiv grunnstil. Ho krev ikkje gamle temaark. `designsystem/catalogue.css` er berre for demonstrasjonssida.
-4. **[json/vyrdepil-design.json](json/vyrdepil-design.json)** er kjelda til vald logostil, logofiler, alle 144 bakgrunnar og faste appreservasjonar. Appnamn, lenkjer, kategoriar og synlegheit kjem framleis berre frå `json/apps.json`.
+4. **[json/vyrdepil-design.json](json/vyrdepil-design.json)** er kjelda til vald logostil, logofiler, bakgrunnsbanken og faste appreservasjonar. Appnamn, lenkjer, kategoriar og synlegheit kjem framleis berre frå `json/apps.json`.
 
 ## Identitet og ressursar
 
@@ -21,7 +21,7 @@ Utgåve 1.0 · 30. september 2026. Brukarvald retning for heile Vyrdepil.
 
 Registeret har `backgrounds[]` med `id`, scene, årstid, tid, fil, originalmål og `assignedTo`, og `apps[appId].backgroundId`. Begge sidene av appreservasjonen må samsvare. Éi app har eitt bilete; eit bilete kan berre vere reservert til éi app. Appane blir identifiserte med ID-en frå den eksisterande appkatalogen. Framsida har ei eiga, fast reservasjon i `home.backgroundId`; det biletet blir halde utanfor tilfeldig tildeling til appar.
 
-**Duldord:** `sykkelsti-sommar-kveld`. Dei andre katalogførte appane er tilfeldig fordelte, inkludert tre skjulte appar som får reservasjonar til seinare arbeid. Fordelinga blir ikkje trekt på nytt ved oppdatering eller sideinnlasting.
+**Duldord:** `sykkelsti-sommar-kveld`. Dei andre katalogførte appane er tilfeldig fordelte. Skjulte appar får òg faste reservasjonar til seinare arbeid. Fordelinga blir ikkje trekt på nytt ved oppdatering eller sideinnlasting.
 
 Når ei ny app blir oppretta:
 
@@ -62,7 +62,7 @@ Knappetekst skal vere sentrert, både med og utan ikon. Bruk berre ikonnamn som 
 | Felt og val | `vp-field`, `vp-input`, `vp-help`, `vp-choice`, `vp-choices`. Bruk ekte label, input, select og fieldset. Feil med `aria-invalid`. |
 | Trekkspel | `details.vp-accordion` → `summary` og `.vp-accordion-body`. `data-vp-support` opnar støtte på brei skjerm og lèt henne foldast på mobil. |
 | Melding | `vp-notice` med `vp-notice-icon` og tekst. `--success`, `--warning`, `--error` for status. |
-| Dialog | `dialog.vp-dialog`, `vp-dialog-head`, tilgjengeleg namn og ein lukkehandling. Escape og fokusretur skal fungere. |
+| Dialog | Føretrekk `dialog.vp-dialog` med `vp-dialog-head`, tilgjengeleg namn og ei lukkehandling. Når ei eldre appflyt framleis treng eit overlegg, skal omslaget ha `vp-modal-backdrop` og innhaldsflata `vp-modal-panel`. Opning og lukking går gjennom `Vy.openModal()` og `Vy.closeModal()`; bruk `Vy.bindOverlayClose()` for klikk på bakgrunnen. Escape, fokusfelle, rullelås og fokusretur kjem frå den felles hjelparen. Berre dialogar som må køyre ei lokal avbrytingshandling før dei lukkar, kan ha `data-vp-modal-escape="local"`. App-CSS kan styre innhaldsbreidd og oppsett, men ikkje bakgrunn, ramme, skugge, tekstfarge eller fokusstil på dialogen. |
 | Toppmeny | `vp-header vp-header--sky`, `vp-shell vp-header-row`, `vp-brand`, `vp-menu-trigger`. Lyse kantete kremskyer og stein-Vyrde. |
 | Appmeny | `dialog.vp-dialog.vp-site-menu`, stor Vyrde, «Vyrdepil», søk og logoar etter kategoriane i apps.json. Same store kotemønster som hovudboksen. |
 
@@ -117,6 +117,8 @@ Appar som ikkje treng ei fullbreidd arbeidsflate, bruker `data-vp-layout="medium
 ## Leveranse og kontroll
 
 Nynorsk UI, Vanilla HTML/CSS/JS, felles lagrings-/ikon-/hjelpemodular og personvernreglane i AGENTS.md gjeld framleis. Test små mobilvisingar (320/437 px), nettbrett og brei skjerm, tastaturfokus, lange etikettar, klipping av dekor og hovudfunksjonen. Kontroller alle lokale stylesheet- og skriptlenkjer på alle HTML-ruter før gamle fellesfiler blir sletta. Ingen side skal peike på `neobrutalisme.css`, `neobrutalisme.js`, `neo-header.js` eller `vyrdepil-migration.css`. Nye appar må ha gyldig reservasjon og laste alle ressursar utan konsollfeil.
+
+Køyr `node designsystem/check-ui-system.cjs` ved modal- eller felles-UI-endringar. Kontrollen krev felles modalhook i markup, felles CSS for generelle knappar/boksar/dialogflater og `Vy`-hjelparane for modalåtferd. App-CSS skal halde seg til innhaldsstruktur, spelbrett og funksjonell geometri.
 
 Originalar blir lagra lokalt i `_kjelder/`; bruk komprimerte eksportar frå ressursbanken. Logo: maks 384 px, 128 fargar og alfa. Landskap: JPEG, maks 1920 px og 500 kB. Ingen oppskalering for å late som ein original har høgare oppløysing.
 

@@ -845,15 +845,8 @@ body.vp-migrated-page #tv-root :is(button,input,select,textarea,[tabindex]):focu
    slik at førehandsvisinga og papiret ser heilt likt ut i begge tema.
    ============================================================ */
 
-/* ---- EKSPORTDIALOGEN ---- */
-.tv-ex-overlay { position: fixed; z-index: 60; overflow: auto; padding: clamp(8px, 2vw, 24px); }
-.tv-ex {
-  background: var(--surface);
-  padding: clamp(16px, 2.4vw, 26px);
-  width: 100%; max-width: 1180px;
-  max-height: 94vh;
-  display: flex; flex-direction: column; gap: 12px;
-}
+/* ---- EKSPORTDIALOGEN: flate og ramme kjem frå vp-modal-panel. ---- */
+.tv-ex { display: flex; flex-direction: column; gap: 12px; }
 .tv-ex__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .tv-ex__title { font-family: var(--serif); font-size: clamp(24px, 3vw, 32px); margin: 0; }
 .tv-ex__lead { color: var(--muted); font-size: 14px; margin: 0; }
@@ -913,7 +906,6 @@ body.vp-migrated-page #tv-root :is(button,input,select,textarea,[tabindex]):focu
 }
 .tv-ex-source__text { display: flex; flex-direction: column; }
 .tv-ex-names {
-  background: var(--surface); padding: clamp(16px, 2.4vw, 26px);
   width: 100%; max-width: 620px; max-height: 92vh; overflow: auto;
   display: flex; flex-direction: column; gap: 10px;
 }

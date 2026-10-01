@@ -196,12 +196,7 @@ RV.util = (function () {
      js/vyrdepil-util.js. Vi peikar vidare dit i staden for å halde ein kopi. */
   const downloadBlob = Vy.downloadBlob;
 
-  function slug(text, fallback) {
-    const s = String(text || '').trim().toLowerCase()
-      .replace(/[æ]/g, 'ae').replace(/[ø]/g, 'oe').replace(/[å]/g, 'aa')
-      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    return s || fallback || 'rissverk';
-  }
+  const slug = (text, fallback) => Vy.slug(text, fallback || 'rissverk');
 
   function baseName(filename) {
     return String(filename || '').replace(/\.[^.]+$/, '') || 'Teikning';

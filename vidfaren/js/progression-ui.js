@@ -65,18 +65,11 @@ const ProgressionUI = (function () {
 
   function openBadgeGallery() {
     renderBadgeGallery();
-    document.getElementById('badgeModal').classList.add('open');
+    Vy.openModal(document.getElementById('badgeModal'));
   }
   function closeBadgeGallery() {
-    document.getElementById('badgeModal').classList.remove('open');
+    Vy.closeModal(document.getElementById('badgeModal'));
   }
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      const m = document.getElementById('badgeModal');
-      if (m && m.classList.contains('open')) closeBadgeGallery();
-    }
-  });
 
   return {
     toast, announceBadges, evaluateAndAnnounce,

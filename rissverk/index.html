@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.2">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
     </head>
 <body data-vp-app="rissverk" data-vp-layout="expanded">
 
@@ -155,8 +155,8 @@
 </div>
 
 <!-- ══════════ Modal: storleik på teikninga ══════════ -->
-<div class="modal-overlay" id="docOverlay">
-  <div class="modal1 rv-modal">
+<div class="modal-overlay vp-modal-backdrop" id="docOverlay">
+  <div class="modal1 rv-modal vp-modal-panel">
     <h2 class="heading3 no-mt">Storleik på teikninga</h2>
     <p class="rv-muted">Dette er flata som blir lagra når du eksporterer. Formene kan gå utanfor, men då blir dei skorne bort.</p>
 
@@ -194,8 +194,8 @@
 </div>
 
 <!-- ══════════ Modal: lagre bilete ══════════ -->
-<div class="modal-overlay" id="exportOverlay">
-  <div class="modal1 rv-modal">
+<div class="modal-overlay vp-modal-backdrop" id="exportOverlay">
+  <div class="modal1 rv-modal vp-modal-panel">
     <h2 class="heading3 no-mt">Lagre bilete</h2>
 
     <label class="rv-field">
@@ -225,8 +225,8 @@
 </div>
 
 <!-- ══════════ Modal: juster og fordel ══════════ -->
-<div class="modal-overlay" id="alignOverlay">
-  <div class="modal1 rv-modal">
+<div class="modal-overlay vp-modal-backdrop" id="alignOverlay">
+  <div class="modal1 rv-modal vp-modal-panel">
     <h2 class="heading3 no-mt">Juster og fordel</h2>
     <p class="rv-muted" id="alignNote">Vel to eller fleire former for å justere dei mot kvarandre.</p>
     <div class="rv-align-grid" id="alignGrid"></div>
@@ -237,8 +237,8 @@
 </div>
 
 <!-- ══════════ Modal: lær vektorteikning ══════════ -->
-<div class="modal-overlay" id="learnOverlay">
-  <div class="modal1 rv-modal rv-modal-wide">
+<div class="modal-overlay vp-modal-backdrop" id="learnOverlay">
+  <div class="modal1 rv-modal rv-modal-wide vp-modal-panel">
     <h2 class="heading3 no-mt">Kva er ei vektorteikning?</h2>
     <div class="rv-tips" id="learnBody"></div>
     <div class="rv-modal-actions">
@@ -248,8 +248,8 @@
 </div>
 
 <!-- ══════════ Modal: tips ══════════ -->
-<div class="modal-overlay" id="tipsOverlay">
-  <div class="modal1 rv-modal rv-modal-wide">
+<div class="modal-overlay vp-modal-backdrop" id="tipsOverlay">
+  <div class="modal1 rv-modal rv-modal-wide vp-modal-panel">
     <h2 class="heading3 no-mt">Tips til Rissverk</h2>
     <div class="rv-tips" id="tipsBody"></div>
     <div class="rv-modal-actions">
@@ -281,7 +281,7 @@
 
 <script src="../js/vyrdepil-storage.js"></script>
 <script src="../js/vyrdepil-icons.js"></script>
-<script src="../js/vyrdepil-util.js"></script>
+<script src="../js/vyrdepil-util.js?v=1.2"></script>
 
 <script src="js/util.js"></script>
 <script src="js/matrix.js"></script>
@@ -320,7 +320,7 @@
 <script src="js/main.js"></script>
 
 
-<script src="../js/vyrdepil-design.js"></script>
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=6"></script>
 <script src="../js/vyrdepil-menu.js"></script>
 </body>

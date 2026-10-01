@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.2">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
     </head>
 <body data-vp-app="lydskurd" data-vp-layout="expanded">
 
@@ -157,8 +157,8 @@
 </div>
 
 <!-- Modal: lagre lyd -->
-<div class="modal-overlay" id="exportOverlay" role="dialog" aria-modal="true" aria-labelledby="exportHeading">
-  <div class="modal1">
+<div class="modal-overlay vp-modal-backdrop" id="exportOverlay" role="dialog" aria-modal="true" aria-labelledby="exportHeading">
+  <div class="modal1 vp-modal-panel">
     <button class="btn ls-icon-btn modal-close" id="exportClose" type="button" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="exportHeading">Lagre lyd</h2>
     <p class="ls-muted">Heile tidslinja blir miksa ned til éi fil. Fila blir laga i nettlesaren din og lasta rett ned — ingenting blir sendt nokon stad.</p>
@@ -206,8 +206,8 @@
 </div>
 
 <!-- Modal: tips og teiknforklaring -->
-<div class="modal-overlay" id="tipsOverlay" role="dialog" aria-modal="true" aria-labelledby="tipsHeading">
-  <div class="modal1 ls-tips-modal">
+<div class="modal-overlay vp-modal-backdrop" id="tipsOverlay" role="dialog" aria-modal="true" aria-labelledby="tipsHeading">
+  <div class="modal1 ls-tips-modal vp-modal-panel">
     <button class="btn ls-icon-btn modal-close" id="tipsClose" type="button" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="tipsHeading">Tips</h2>
 
@@ -276,8 +276,8 @@
 </div>
 
 <!-- Modal: ta opp frå mikrofon -->
-<div class="modal-overlay" id="recordOverlay" role="dialog" aria-modal="true" aria-labelledby="recordHeading">
-  <div class="modal1">
+<div class="modal-overlay vp-modal-backdrop" id="recordOverlay" role="dialog" aria-modal="true" aria-labelledby="recordHeading">
+  <div class="modal1 vp-modal-panel">
     <button class="btn ls-icon-btn modal-close" id="recordClose" type="button" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="recordHeading">Ta opp frå mikrofon</h2>
     <p class="ls-muted">Lyden går rett frå mikrofonen inn i minnet på maskina di og blir eit klipp på tidslinja. Ingenting blir sendt nokon stad. Mikrofonen blir slått av att så snart du lukkar dette vindauget.</p>
@@ -320,8 +320,8 @@
 </div>
 
 <!-- Modal: lagre prosjekt -->
-<div class="modal-overlay" id="saveOverlay" role="dialog" aria-modal="true" aria-labelledby="saveHeading">
-  <div class="modal2">
+<div class="modal-overlay vp-modal-backdrop" id="saveOverlay" role="dialog" aria-modal="true" aria-labelledby="saveHeading">
+  <div class="modal2 vp-modal-panel">
     <button class="btn ls-icon-btn modal-close" id="saveClose" type="button" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="saveHeading">Lagre prosjektet</h2>
     <p class="ls-muted">Prosjektfila blir lasta ned til maskina di. Ingenting blir lagra i nettlesaren, så du må ta vare på fila sjølv.</p>
@@ -358,8 +358,8 @@
 </div>
 
 <!-- Modal: finn att manglande lydfiler -->
-<div class="modal-overlay" id="relinkOverlay" role="dialog" aria-modal="true" aria-labelledby="relinkHeading">
-  <div class="modal1">
+<div class="modal-overlay vp-modal-backdrop" id="relinkOverlay" role="dialog" aria-modal="true" aria-labelledby="relinkHeading">
+  <div class="modal1 vp-modal-panel">
     <button class="btn ls-icon-btn modal-close" id="relinkClose" type="button" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="relinkHeading">Finn att lydfilene</h2>
     <p class="ls-muted">Dette prosjektet blei lagra utan lyd i fila. Peik ut kvar lydfil, så kjem klippa på plass med same oppsett som før.</p>
@@ -373,7 +373,7 @@
 
 <script src="../_libs/lamejs.min.js"></script>
 <script src="../js/vyrdepil-icons.js"></script>
-<script src="../js/vyrdepil-util.js"></script>
+<script src="../js/vyrdepil-util.js?v=1.2"></script>
 <script src="js/util.js"></script>
 <script src="js/state.js"></script>
 <script src="js/peaks.js"></script>
@@ -393,7 +393,7 @@
 <script src="js/main.js"></script>
 
 
-<script src="../js/vyrdepil-design.js"></script>
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=6"></script>
 <script src="../js/vyrdepil-menu.js"></script>
 </body>

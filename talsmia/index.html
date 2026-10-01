@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
     <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.2">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
     </head>
 <body data-vp-app="talsmia" data-vp-layout="medium">
 <div class="page-wrapper talsmia-app">
@@ -19,8 +19,8 @@
             <button id="openHelpBtn" class="btn">Korleis spele talsmia</button>
         </div>
 
-        <div id="helpModal" class="help-modal" aria-hidden="true">
-            <div class="help-modal-content" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <div id="helpModal" class="help-modal vp-modal-backdrop" aria-hidden="true">
+            <div class="help-modal-content vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
                 <h3 id="helpTitle">Korleis spele Talsmia</h3>
                 <p>Du får seks tal og eitt måltal. Målet er å lage eit reknestykke som kjem nærast mogleg målet.</p>
                 <ul>
@@ -298,23 +298,14 @@
             if (!modal || !openBtn || !closeBtn) return;
 
             const closeModal = () => {
-                modal.classList.remove('show');
-                modal.setAttribute('aria-hidden', 'true');
+                Vy.closeModal(modal);
             };
 
             openBtn.addEventListener('click', () => {
-                modal.classList.add('show');
-                modal.setAttribute('aria-hidden', 'false');
+                Vy.openModal(modal);
             });
 
             closeBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeModal();
-            });
         }
 
         function wireEvents() {
@@ -639,8 +630,8 @@
     </script>
 
 <script src="../js/vyrdepil-icons.js"></script>
-<script src="../js/vyrdepil-util.js"></script>
-<script src="../js/vyrdepil-design.js"></script>
+<script src="../js/vyrdepil-util.js?v=1.2"></script>
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=6"></script>
 <script src="../js/vyrdepil-menu.js"></script>
 </body>

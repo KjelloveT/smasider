@@ -119,40 +119,6 @@
             background: #f0f8ff;
         }
 
-        .btn {
-            width: 100%;
-            background: #4CAF50;
-            color: white;
-            border: 2px solid #000;
-            padding: 15px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.1s;
-        }
-
-        .btn:hover {
-            background: #45a049;
-        }
-
-        .btn:active {
-            transform: translate(1px, 1px);
-        }
-
-        .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .btn.secondary {
-            background: white;
-            color: black;
-        }
-
-        .btn.secondary:hover {
-            background: #f0f0f0;
-        }
-
         .quiz-area {
             display: none;
         }
@@ -278,40 +244,9 @@
         }
 
         .answer-btn {
-            background: white;
-            border: 2px solid #000;
-            padding: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.1s;
+            width: 100%;
+            justify-content: flex-start;
             text-align: left;
-            font-size: 1rem;
-        }
-
-        .answer-btn:hover:not(:disabled) {
-            background: #f0f0f0;
-        }
-
-        .answer-btn:active:not(:disabled) {
-            transform: translate(1px, 1px);
-        }
-
-        .answer-btn:disabled {
-            background: #f5f5f5;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        .answer-btn.correct {
-            background: #90EE90;
-        }
-
-        .answer-btn.incorrect {
-            background: #FFB6C1;
-        }
-
-        .answer-btn.selected {
-            background: #87CEEB;
         }
 
         .waiting-message {
@@ -406,15 +341,15 @@
             }
         }
     </style>
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.2">
-    <link rel="stylesheet" href="vyrdepil.css?v=1">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+    <link rel="stylesheet" href="vyrdepil.css?v=2">
     <script src="../js/vyrdepil-icons.js" defer></script>
-    <script src="../js/vyrdepil-util.js" defer></script>
-    <script src="../js/vyrdepil-design.js?v=0.9" defer></script>
+    <script src="../js/vyrdepil-util.js?v=1.2" defer></script>
+    <script src="../js/vyrdepil-design.js?v=1.1" defer></script>
     <script src="../js/vyrdepil-app-shell.js?v=7" defer></script>
     <script src="../js/vyrdepil-menu.js?v=2" defer></script>
 </head>
-<body class="vp-page quiz-page" data-vp-site-page="true">
+<body class="vp-page quiz-page" data-vp-design data-vp-site-page="true">
     <div class="container">
         <header>
             <h1><span data-icon="target" aria-hidden="true"></span> Kviss</h1>
@@ -447,7 +382,7 @@
                 <input type="text" id="host-name" placeholder="Skriv inn namnet ditt">
             </div>
             
-            <button class="btn" id="create-quiz">Opprett Quiz</button>
+            <button class="vp-button vp-button--primary vp-button--block" id="create-quiz">Opprett kviss</button>
         </section>
 
         <section class="setup-area" id="player-setup">
@@ -463,7 +398,7 @@
                 <input type="text" id="player-name-input" placeholder="Kva heiter du?">
             </div>
             
-            <button class="btn" id="join-quiz">Delta i Quiz</button>
+            <button class="vp-button vp-button--primary vp-button--block" id="join-quiz">Delta i kviss</button>
         </section>
 
         <section class="quiz-area" id="host-quiz">
@@ -488,9 +423,9 @@
             </div>
 
             <div class="quiz-controls">
-                <button class="btn primary" id="start-quiz">Start Quiz</button>
-                <button class="btn" id="next-question" disabled>Neste Spørsmål</button>
-                <button class="btn" id="stop-quiz" disabled>Stopp Quiz</button>
+                <button class="vp-button vp-button--primary" id="start-quiz">Start kviss</button>
+                <button class="vp-button" id="next-question" disabled>Neste spørsmål</button>
+                <button class="vp-button vp-button--danger" id="stop-quiz" disabled>Stopp kviss</button>
             </div>
 
             <div class="question-display" id="host-question-display">
@@ -883,7 +818,7 @@
                 this.elements.playerAnswerOptions.innerHTML = '';
                 data.options.forEach((option, index) => {
                     const button = document.createElement('button');
-                    button.className = 'answer-btn';
+                    button.className = 'vp-button answer-btn';
                     button.textContent = `${String.fromCharCode(65 + index)}) ${option}`;
                     button.addEventListener('click', () => this.submitAnswer(index));
                     this.elements.playerAnswerOptions.appendChild(button);
@@ -981,7 +916,7 @@
                 this.elements.hostAnswerOptions.innerHTML = '';
                 question.options.forEach((option, index) => {
                     const optionDiv = document.createElement('div');
-                    optionDiv.className = 'answer-btn';
+                    optionDiv.className = 'vp-button answer-btn';
                     optionDiv.textContent = `${String.fromCharCode(65 + index)}) ${option}`;
                     if (index === question.correct) {
                         optionDiv.style.background = '#90EE90';

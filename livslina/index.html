@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.2">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
 </head>
 <body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-layout="expanded">
 
@@ -261,8 +261,8 @@
 </div>
 
 <!-- ══════════ Moped-modal ══════════ -->
-<div class="modal-overlay" id="mopedModal" aria-hidden="true">
-  <div class="modal1" role="dialog" aria-modal="true" aria-labelledby="mopedTitle">
+<div class="modal-overlay vp-modal-backdrop" id="mopedModal" aria-hidden="true">
+  <div class="modal1 vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mopedTitle">
     <button class="btn modal-close" data-close-modal="mopedModal" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="mopedTitle" class="heading3 no-mt">Kjøpe moped?</h2>
     <p>Seljaren har to variantar. Den eine er trimma til å gå fortare — det er ulovleg, og kan gje forelegg og tap av førarbevis om du blir teken.</p>
@@ -280,8 +280,8 @@
 </div>
 
 <!-- ══════════ 18-årsdag-modal ══════════ -->
-<div class="modal-overlay" id="birthdayModal" aria-hidden="true">
-  <div class="modal1" role="dialog" aria-modal="true" aria-labelledby="bdayTitle">
+<div class="modal-overlay vp-modal-backdrop" id="birthdayModal" aria-hidden="true">
+  <div class="modal1 vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="bdayTitle">
     <h2 id="bdayTitle" class="heading3 no-mt">🎉 Du har fylt 18!</h2>
     <p>No er du myndig. To ting endrar seg: du får høgare timeløn, og du kan spare i <strong>BSU</strong> (bustadsparing for ungdom) — betre rente enn vanleg sparekonto, og skattefrådrag når du tener nok til å betale skatt.</p>
     <p class="ll-note">Vil du gjere om sparinga di til BSU no? (Du kan uansett ta førarkort under «Ting du kan skaffe deg».)</p>
@@ -293,8 +293,8 @@
 </div>
 
 <!-- ══════════ Hendingskort-modal ══════════ -->
-<div class="modal-overlay modal-locked" id="eventModal" aria-hidden="true">
-  <div class="modal1 ll-event-modal" role="dialog" aria-modal="true" aria-labelledby="eventTitle">
+<div class="modal-overlay modal-locked vp-modal-backdrop" data-vp-modal-escape="local" id="eventModal" aria-hidden="true">
+  <div class="modal1 ll-event-modal vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="eventTitle">
     <div class="ll-event-vignette" id="eventVignette"></div>
     <h2 id="eventTitle" class="heading3 no-mt"></h2>
     <p id="eventText"></p>
@@ -303,8 +303,8 @@
 </div>
 
 <!-- ══════════ Info-modal ══════════ -->
-<div class="modal-overlay" id="infoModal" aria-hidden="true">
-  <div class="modal1" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
+<div class="modal-overlay vp-modal-backdrop" id="infoModal" aria-hidden="true">
+  <div class="modal1 vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
     <button class="btn modal-close" data-close-modal="infoModal" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="infoModalTitle" class="heading3 no-mt">Om tala i Livslina</h2>
     <div id="infoModalBody"></div>
@@ -333,8 +333,8 @@
 <script src="js/ui-report.js"></script>
 <script src="js/main.js"></script>
   <script src="../js/vyrdepil-icons.js"></script>
-  <script src="../js/vyrdepil-util.js"></script>
-  <script src="../js/vyrdepil-design.js?v=0.9"></script>
+  <script src="../js/vyrdepil-util.js?v=1.2"></script>
+  <script src="../js/vyrdepil-design.js?v=1.1"></script>
   <script src="../js/vyrdepil-app-shell.js?v=8"></script>
   <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>

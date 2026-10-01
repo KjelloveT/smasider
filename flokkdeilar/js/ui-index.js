@@ -36,24 +36,15 @@
 
     /* ── Hjelparar ── */
     function escapeHtml(str) {
-        const d = document.createElement('div');
-        d.textContent = str;
-        return d.innerHTML;
+        return Vy.escapeHtml(str);
     }
-
     function openModal(overlay) {
-        overlay.classList.add('open');
+        return Vy.openModal(overlay);
     }
 
     function closeModal(overlay) {
-        overlay.classList.remove('open');
+        Vy.closeModal(overlay);
     }
-
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-            [overlayNyListe, overlayKlassekart, overlaySlettListe].forEach(closeModal);
-        }
-    });
 
     /* ── Rendrer listegrid ── */
     function render() {

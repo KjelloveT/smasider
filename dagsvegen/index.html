@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
     <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.2">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
     </head>
 <body data-vp-app="dagsvegen" data-vp-layout="expanded">
     <div class="page-wrapper">
@@ -115,8 +115,8 @@
     <!-- Toast -->
 
     <!-- Modal: lagre / hente -->
-    <div id="modal-files" class="modal-overlay">
-        <div class="modal3 dv-modal-wide">
+    <div id="modal-files" class="modal-overlay vp-modal-backdrop">
+        <div class="modal3 dv-modal-wide vp-modal-panel">
             <div class="modal-header">
                 <span>Lagre og hente planar</span>
                 <button class="dv-icon-btn dv-modal-x" data-close="modal-files" aria-label="Lukk">✕</button>
@@ -141,8 +141,8 @@
     </div>
 
     <!-- Modal: fagliste -->
-    <div id="modal-subjects" class="modal-overlay">
-        <div class="modal3">
+    <div id="modal-subjects" class="modal-overlay vp-modal-backdrop">
+        <div class="modal3 vp-modal-panel">
             <div class="modal-header">
                 <span>Fagliste</span>
                 <button class="dv-icon-btn dv-modal-x" data-close="modal-subjects" aria-label="Lukk">✕</button>
@@ -155,8 +155,8 @@
     </div>
 
     <!-- Modal: hjernepause -->
-    <div id="modal-break" class="modal-overlay">
-        <div class="modal2 dv-break-modal">
+    <div id="modal-break" class="modal-overlay vp-modal-backdrop">
+        <div class="modal2 dv-break-modal vp-modal-panel">
             <button class="dv-icon-btn dv-modal-x" data-close="modal-break" aria-label="Lukk">✕</button>
             <h2 class="dv-break-title">Hjernepause!</h2>
             <p id="break-text" class="dv-break-text"></p>
@@ -165,8 +165,8 @@
     </div>
 
     <!-- Modal: snøggøkt -->
-    <div id="modal-quick" class="modal-overlay">
-        <div class="modal3 dv-modal-wide">
+    <div id="modal-quick" class="modal-overlay vp-modal-backdrop">
+        <div class="modal3 dv-modal-wide vp-modal-panel">
             <div class="modal-header">
                 <span>Snøggøkt — start no</span>
                 <button class="dv-icon-btn dv-modal-x" data-close="modal-quick" aria-label="Lukk">✕</button>
@@ -179,8 +179,8 @@
     </div>
 
     <!-- Modal: rettleiing -->
-    <div id="modal-help" class="modal-overlay">
-        <div class="modal3 dv-modal-wide">
+    <div id="modal-help" class="modal-overlay vp-modal-backdrop">
+        <div class="modal3 dv-modal-wide vp-modal-panel">
             <div class="modal-header">
                 <span>Slik brukar du Dagsvegen</span>
                 <button class="dv-icon-btn dv-modal-x" data-close="modal-help" aria-label="Lukk">✕</button>
@@ -199,8 +199,8 @@
     </div>
 
     <!-- Modal: innstillingar -->
-    <div id="modal-settings" class="modal-overlay">
-        <div class="modal3">
+    <div id="modal-settings" class="modal-overlay vp-modal-backdrop">
+        <div class="modal3 vp-modal-panel">
             <div class="modal-header">
                 <span>Innstillingar</span>
                 <button class="dv-icon-btn dv-modal-x" data-close="modal-settings" aria-label="Lukk">✕</button>
@@ -224,7 +224,7 @@
     <script src="../js/vyrdepil-storage.js"></script>
     <script src="../tidvis/js/clock.js"></script>
     <script src="../js/vyrdepil-icons.js"></script>
-    <script src="../js/vyrdepil-util.js"></script>
+    <script src="../js/vyrdepil-util.js?v=1.2"></script>
     <script src="js/icons.js"></script>
     <script src="js/emoji.js"></script>
     <script src="js/state.js"></script>
@@ -243,7 +243,7 @@
         });
     </script>
 
-<script src="../js/vyrdepil-design.js"></script>
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=6"></script>
 <script src="../js/vyrdepil-menu.js"></script>
 </body>

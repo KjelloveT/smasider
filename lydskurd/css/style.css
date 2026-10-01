@@ -594,7 +594,6 @@ kbd {
 @keyframes ls-rec-blink { 50% { opacity: 0.15; } }
 
 .btn.ls-rec-active { background: var(--accent2); color: var(--text-on-accent); }
-.ls-recording .modal1 { border-color: var(--accent2); }
 
 @media (prefers-reduced-motion: reduce) {
   .ls-rec-status.ls-rec-recording::before { animation: none; }
@@ -663,7 +662,7 @@ body[data-vp-app="lydskurd"] {
   --text-on-light-accent: #000;
 }
 
-body[data-vp-app="lydskurd"] :is(.ls-editor, .modal1, .modal2, .modal3, .modal4, .modal5) {
+body[data-vp-app="lydskurd"] .ls-editor {
   background-color: var(--vp-paper, #fffdf5);
   color: var(--vp-ink, #000);
 }

@@ -270,7 +270,6 @@ canvas:focus-visible {
 /* ---- Tips ---- */
 .lb-tips { margin: 0 0 8px; padding-left: 20px; }
 .lb-tips li { margin-bottom: 8px; max-width: 78ch; }
-.modal4 { max-height: 86vh; overflow-y: auto; }
 .modal-close { position: absolute; top: 12px; right: 12px; }
 
 /* ---- Mindre skjermar ---- */

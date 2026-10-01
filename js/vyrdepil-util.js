@@ -60,7 +60,7 @@ window.Vy = (function () {
         const s = String(text || '').trim().toLowerCase()
             .replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa')
             .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-        return s || fallback || 'vyrdepil';
+        return s || (fallback == null ? 'vyrdepil' : String(fallback));
     }
 
     /** Unik id, med fallback for eldre nettlesarar. */
@@ -177,54 +177,177 @@ window.Vy = (function () {
 
     /* ──────────────── Modalar ──────────────── */
 
-    /* Stabelen gjer at Escape lukkar den øvste modalen, ikkje alle på ein
-       gong. AGENTS.md §5.4 krev at ein modal kan lukkast med Escape; med
-       denne modulen får kvart verktøy det utan å skrive lyttaren sjølv. */
+    /* Dialogsystemet støttar både native <dialog class="vp-dialog"> og dei
+       eldre app-overlegga medan dei blir flytta over. Alle variantane får
+       same Escape-, fokus- og bakgrunnsklikk-handtering her. */
     const openStack = [];
+    const focusReturn = new WeakMap();
+    const nativeCloseBound = new WeakSet();
+    const FOCUSABLE_SELECTOR = [
+        'a[href]', 'area[href]', 'button:not([disabled])', 'input:not([disabled]):not([type="hidden"])',
+        'select:not([disabled])', 'textarea:not([disabled])', '[tabindex]:not([tabindex="-1"])'
+    ].join(',');
+    let previousBodyOverflow = null;
 
-    /** Opnar overlegget og set fokus i det første feltet som tek imot det. */
+    function updateModalScrollLock() {
+        if (!document.body) return;
+        if (openStack.length && previousBodyOverflow === null) {
+            previousBodyOverflow = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
+        } else if (!openStack.length && previousBodyOverflow !== null) {
+            document.body.style.overflow = previousBodyOverflow;
+            previousBodyOverflow = null;
+        }
+    }
+
+    function isNativeDialog(overlay) {
+        return !!overlay && overlay.tagName === 'DIALOG';
+    }
+
+    function isLegacyOpen(overlay) {
+        return !!overlay && (overlay.classList.contains('open') || overlay.classList.contains('show'));
+    }
+
+    function isVisibleModal(overlay) {
+        if (!overlay || !overlay.isConnected) return false;
+        if (isNativeDialog(overlay)) return overlay.open;
+        if (!isLegacyOpen(overlay)) return false;
+        const style = window.getComputedStyle(overlay);
+        return style.display !== 'none' && style.visibility !== 'hidden';
+    }
+
+    function modalRoot(overlay) {
+        return overlay.querySelector('[role="dialog"]') || overlay;
+    }
+
+    function focusables(overlay) {
+        const root = modalRoot(overlay);
+        return Array.from(root.querySelectorAll(FOCUSABLE_SELECTOR)).filter(node =>
+            !node.hidden && node.getAttribute('aria-hidden') !== 'true' &&
+            window.getComputedStyle(node).visibility !== 'hidden' &&
+            window.getComputedStyle(node).display !== 'none'
+        );
+    }
+
+    function registerModal(overlay, opener) {
+        if (!overlay || openStack.includes(overlay)) return;
+        if (opener && opener !== overlay && !overlay.contains(opener)) focusReturn.set(overlay, opener);
+        if (overlay.hasAttribute('aria-hidden') || overlay.hasAttribute('role')) overlay.setAttribute('aria-hidden', 'false');
+        openStack.push(overlay);
+        updateModalScrollLock();
+        if (isNativeDialog(overlay) && !nativeCloseBound.has(overlay)) {
+            nativeCloseBound.add(overlay);
+            overlay.addEventListener('close', function () { unregisterModal(overlay, true); });
+        }
+    }
+
+    function unregisterModal(overlay, restoreFocus) {
+        if (!overlay) return;
+        const index = openStack.indexOf(overlay);
+        if (index !== -1) openStack.splice(index, 1);
+        if (overlay.hasAttribute('aria-hidden') || overlay.hasAttribute('role')) overlay.setAttribute('aria-hidden', 'true');
+        updateModalScrollLock();
+        if (restoreFocus) {
+            const opener = focusReturn.get(overlay);
+            focusReturn.delete(overlay);
+            if (opener && opener.isConnected && typeof opener.focus === 'function') opener.focus({ preventScroll: true });
+        }
+    }
+
+    function topModal() {
+        for (let i = openStack.length - 1; i >= 0; i--) {
+            if (isVisibleModal(openStack[i])) return openStack[i];
+        }
+        return null;
+    }
+
+    function focusInto(overlay) {
+        const root = modalRoot(overlay);
+        const target = root.querySelector('[autofocus]') || focusables(overlay)[0] || root;
+        if (target === root && !root.hasAttribute('tabindex')) root.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+    }
+
+    /** Opnar ein felles dialogflate og flyttar fokus inn i henne. */
     function openModal(overlay) {
         if (!overlay) return;
-        overlay.classList.add('open');
-        if (openStack.indexOf(overlay) === -1) openStack.push(overlay);
-        const focusable = overlay.querySelector(
-            'input:not([disabled]), textarea:not([disabled]), select:not([disabled]), button:not([disabled])'
-        );
-        if (focusable) focusable.focus();
+        if (!focusReturn.has(overlay) && document.activeElement && !overlay.contains(document.activeElement)) {
+            focusReturn.set(overlay, document.activeElement);
+        }
+        if (isNativeDialog(overlay)) {
+            if (!overlay.open) overlay.showModal();
+        } else {
+            overlay.classList.remove('hidden');
+            overlay.removeAttribute('hidden');
+            overlay.classList.add('open');
+        }
+        registerModal(overlay, document.activeElement);
+        focusInto(overlay);
     }
 
-    /** Lukkar overlegget. */
+    /** Lukkar ein felles dialogflate og fører fokus tilbake til utløyseren. */
     function closeModal(overlay) {
         if (!overlay) return;
-        overlay.classList.remove('open');
-        const i = openStack.indexOf(overlay);
-        if (i !== -1) openStack.splice(i, 1);
+        if (isNativeDialog(overlay)) {
+            if (overlay.open) overlay.close();
+            else unregisterModal(overlay, true);
+            return;
+        }
+        overlay.classList.remove('open', 'show');
+        unregisterModal(overlay, true);
     }
 
-    document.addEventListener('keydown', function (e) {
-        if (e.key !== 'Escape' || !openStack.length) return;
-        closeModal(openStack[openStack.length - 1]);
-    });
+    document.addEventListener('click', function (event) {
+        const overlay = event.target;
+        if (overlay && overlay.classList && overlay.classList.contains('vp-modal-backdrop') &&
+            overlay.dataset.vpModalBackdropClose !== 'false' && isLegacyOpen(overlay)) {
+            closeModal(overlay);
+        }
+    }, true);
+
+    document.addEventListener('keydown', function (event) {
+        const overlay = topModal();
+        if (!overlay) return;
+        if (event.key === 'Escape' && !isNativeDialog(overlay)) {
+            if (overlay.getAttribute('data-vp-modal-escape') === 'local') return;
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            closeModal(overlay);
+            return;
+        }
+        if (event.key !== 'Tab' || isNativeDialog(overlay)) return;
+        const nodes = focusables(overlay);
+        if (!nodes.length) {
+            event.preventDefault();
+            focusInto(overlay);
+            return;
+        }
+        const first = nodes[0];
+        const last = nodes[nodes.length - 1];
+        if (event.shiftKey && (document.activeElement === first || !overlay.contains(document.activeElement))) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && (document.activeElement === last || !overlay.contains(document.activeElement))) {
+            event.preventDefault();
+            first.focus();
+        }
+    }, true);
 
     /** Står dette overlegget ope no? */
     function modalOpen(overlay) {
-        return !!overlay && overlay.classList.contains('open');
+        return isVisibleModal(overlay);
     }
 
-    /**
-     * Står det EIN modal open? Brukt av verktøy som må la tastatursnarvegar
-     * ligge medan ein dialog er framme — Rissverk slettar til dømes ei form
-     * med Delete, og det skal ikkje skje medan brukaren skriv i eit felt.
-     */
+    /** Står det minst éin dialog open? */
     function anyModalOpen() {
-        return openStack.length > 0;
+        return !!topModal();
     }
 
     /** Lukk modalen når ein klikkar på det mørke feltet utanfor. */
     function bindOverlayClose(overlay) {
-        if (!overlay) return;
-        overlay.addEventListener('click', function (e) {
-            if (e.target === overlay) closeModal(overlay);
+        if (!overlay || overlay.dataset.vpModalBackdropClose === 'false') return;
+        overlay.addEventListener('click', function (event) {
+            if (event.target === overlay) closeModal(overlay);
         });
     }
 

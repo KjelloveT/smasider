@@ -398,22 +398,7 @@ details.advanced textarea {
 
 /* Biletmodal */
 .image-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: rgba(0,0,0,0.9);
     cursor: pointer;
-}
-
-.image-modal img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 8px;
 }
 
 @media (max-width: 640px) {

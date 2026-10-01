@@ -153,14 +153,7 @@ VR.util = (function () {
 
   /* ──────────────── Tekst og filer ──────────────── */
 
-  function escapeXml(s) {
-    return String(s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&apos;');
-  }
+  const escapeXml = Vy.escapeHtml;
 
   function slug(text, fallback) {
     const s = String(text || '').trim().toLowerCase()

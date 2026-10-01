@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="css/cards.css?v=1.52.2">
 <link rel="stylesheet" href="css/game.css">
 <link rel="stylesheet" href="css/dialogs.css">
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.2">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
     </head>
 <body class="hs-app vp-page" data-vp-app="heimsank" data-vp-layout="standard" data-vp-preserve data-vp-design>
 <div class="page-wrapper"><main class="main-content hs-main">
@@ -26,10 +26,10 @@
 <section id="pendingArea" class="hs-pending hs-panel hidden" aria-labelledby="pendingTitle"><div id="pendingSlotMain" class="hs-pending-card"></div><div><span id="pendingRarityLabel" class="hs-eyebrow"></span><h2 id="pendingTitle">Nytt kort</h2><p id="pendingCardName"></p></div></section>
 <section id="collBar" class="hs-collection hs-panel" aria-labelledby="collShelfTitle"><div class="hs-collection-head"><span id="collShelfTitle"><span data-icon="layers"></span>Samling · <strong id="collCount">0</strong> unike kort</span><span class="hs-shelf-label">Korthylle</span></div><div id="collBarInner"><p id="dragInstruction" class="hs-muted hidden"></p><div id="collRow" class="hs-slots"></div><div class="hs-collection-footer"><span id="trashZone" class="hs-trash"><span data-icon="trash"></span>Dra hit for å fjerne</span><button class="hs-btn" id="clearAllBtn" onclick="confirmClearAll()">Tøm samlinga</button></div></div></section></div>
 <footer class="hs-footer">Heimsank<span>Rekn litt. Oppdag meir.</span></footer></main></div>
-<div id="revealModal" class="hs-overlay" role="dialog" aria-modal="true" aria-labelledby="revealTitle"><section class="hs-dialog hs-reveal"><span class="hs-eyebrow">Ei ny oppdaging</span><h2 id="revealTitle">Du fann eit nytt kort!</h2><div id="flipCard" class="hs-reveal-card"><div class="hs-card-back" aria-hidden="true"><img src="assets/kortbakside.png" alt=""></div><div id="revealFront"></div></div><p id="revealSub" role="status"></p><button id="revealBtn" class="hs-btn hs-primary" onclick="afterReveal()">Hald fram</button></section></div>
-<div id="cardModal" class="hs-overlay" role="dialog" aria-modal="true" aria-label="Kortdetaljar"><section class="hs-dialog hs-detail"><button class="hs-btn hs-close" onclick="closeCardModal()" aria-label="Lukk kortdetaljar"><span data-icon="x"></span></button><div id="modalCard"></div><nav class="hs-card-navigation" aria-label="Bla mellom kort"><button class="hs-btn" id="cardPrev" onclick="navigateCard(-1)">Førre</button><span id="cardPosition"></span><button class="hs-btn" id="cardNext" onclick="navigateCard(1)">Neste</button></nav></section></div>
-<div id="badgeModal" class="hs-overlay" role="dialog" aria-modal="true" aria-labelledby="badgeTitle"><section class="hs-dialog hs-album"><button class="hs-btn hs-close" onclick="closeBadgeGallery()" aria-label="Lukk merke"><span data-icon="x"></span></button><span class="hs-eyebrow">Små og store bragder</span><h2 id="badgeTitle">Merka dine</h2><p class="hs-muted">Sjå kva du har klart, og kva som ventar.</p><div id="badgeGrid" class="hs-badge-grid"></div></section></div>
-<div id="collectionModal" class="hs-overlay" role="dialog" aria-modal="true" aria-labelledby="albumTitle"><section class="hs-dialog hs-album"><button class="hs-btn hs-close" onclick="closeCollectionModal()" aria-label="Lukk samlingane"><span data-icon="x"></span></button><span class="hs-eyebrow">Dine oppdagingar</span><h2 id="albumTitle">Samlingane mine</h2><p class="hs-muted">Favorittane dine, samla på ein stad.</p><div id="collectionGrid"></div></section></div>
+<div id="revealModal" class="hs-overlay vp-modal-backdrop" data-vp-modal-escape="local" role="dialog" aria-modal="true" aria-labelledby="revealTitle"><section class="hs-dialog hs-reveal vp-modal-panel"><span class="hs-eyebrow">Ei ny oppdaging</span><h2 id="revealTitle">Du fann eit nytt kort!</h2><div id="flipCard" class="hs-reveal-card"><div class="hs-card-back" aria-hidden="true"><img src="assets/kortbakside.png" alt=""></div><div id="revealFront"></div></div><p id="revealSub" role="status"></p><button id="revealBtn" class="hs-btn hs-primary" onclick="afterReveal()">Hald fram</button></section></div>
+<div id="cardModal" class="hs-overlay vp-modal-backdrop" data-vp-modal-escape="local" role="dialog" aria-modal="true" aria-label="Kortdetaljar"><section class="hs-dialog hs-detail vp-modal-panel"><button class="hs-btn hs-close" onclick="closeCardModal()" aria-label="Lukk kortdetaljar"><span data-icon="x"></span></button><div id="modalCard"></div><nav class="hs-card-navigation" aria-label="Bla mellom kort"><button class="hs-btn" id="cardPrev" onclick="navigateCard(-1)">Førre</button><span id="cardPosition"></span><button class="hs-btn" id="cardNext" onclick="navigateCard(1)">Neste</button></nav></section></div>
+<div id="badgeModal" class="hs-overlay vp-modal-backdrop" data-vp-modal-escape="local" role="dialog" aria-modal="true" aria-labelledby="badgeTitle"><section class="hs-dialog hs-album vp-modal-panel"><button class="hs-btn hs-close" onclick="closeBadgeGallery()" aria-label="Lukk merke"><span data-icon="x"></span></button><span class="hs-eyebrow">Små og store bragder</span><h2 id="badgeTitle">Merka dine</h2><p class="hs-muted">Sjå kva du har klart, og kva som ventar.</p><div id="badgeGrid" class="hs-badge-grid"></div></section></div>
+<div id="collectionModal" class="hs-overlay vp-modal-backdrop" data-vp-modal-escape="local" role="dialog" aria-modal="true" aria-labelledby="albumTitle"><section class="hs-dialog hs-album vp-modal-panel"><button class="hs-btn hs-close" onclick="closeCollectionModal()" aria-label="Lukk samlingane"><span data-icon="x"></span></button><span class="hs-eyebrow">Dine oppdagingar</span><h2 id="albumTitle">Samlingane mine</h2><p class="hs-muted">Favorittane dine, samla på ein stad.</p><div id="collectionGrid"></div></section></div>
 <script src="../js/vyrdepil-storage.js"></script>
 
 
@@ -55,8 +55,8 @@
 
 
   <script src="../js/vyrdepil-icons.js"></script>
-  <script src="../js/vyrdepil-util.js"></script>
-  <script src="../js/vyrdepil-design.js?v=0.9"></script>
+  <script src="../js/vyrdepil-util.js?v=1.2"></script>
+  <script src="../js/vyrdepil-design.js?v=1.1"></script>
   <script src="../js/vyrdepil-app-shell.js?v=8"></script>
   <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body></html>

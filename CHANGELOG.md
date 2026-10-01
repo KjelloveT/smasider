@@ -3,6 +3,16 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.68] — 2026-10-01
+
+### Endra
+- **Felles UI er rydda på tvers av appane.** Vanlege knappar, flater og dialogar brukar no felles CSS; appstilane held seg til oppsett og speltilstandar.
+- **Utviklingskontrollen fangar opp gamle UI-mønster.** Ny kontroll går gjennom dialogar, generelle komponentstilar og modalopning på alle sidene.
+
+### Fiksa
+- **Dialogåtferda er samla.** Statiske og dynamiske modalar brukar same opning, lukking, Escape, fokus og bakgrunnsklikk.
+- **Quiz og Reknedæsj brukar felles knappestilar.** Svar- og speltilstandar er bevarte.
+
 ## [1.67] — 2026-09-30
 
 ### Endra

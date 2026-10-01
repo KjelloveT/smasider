@@ -303,11 +303,11 @@ class QuizEditor {
             });
         }
 
-        document.getElementById('preview-overlay').classList.add('open');
+        Vy.openModal(document.getElementById('preview-overlay'));
     }
 
     closePreview() {
-        document.getElementById('preview-overlay').classList.remove('open');
+        Vy.closeModal(document.getElementById('preview-overlay'));
     }
 
     /* ── Eksport / lagring ── */

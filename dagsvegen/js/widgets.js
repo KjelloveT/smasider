@@ -239,7 +239,7 @@ const Widgets = (() => {
     /* ════ Hjernepause ════ */
     function openBrainBreak() {
         rollBrainBreak();
-        $('modal-break').classList.add('open');
+        Vy.openModal($('modal-break'));
     }
 
     function rollBrainBreak() {

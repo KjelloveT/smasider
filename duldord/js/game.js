@@ -36,12 +36,10 @@
 
   // ── modalar ──────────────────────────────────────────────────────────────
   function openModal(dialog) {
-    if (!dialog.open) dialog.showModal();
-    const focusable = dialog.querySelector('button, [href], input, select, textarea');
-    if (focusable) focusable.focus();
+    Vy.openModal(dialog);
   }
   function closeModal(dialog) {
-    if (dialog.open) dialog.close();
+    Vy.closeModal(dialog);
   }
   function wireModal(dialog) {
     dialog.addEventListener('click', ev => {

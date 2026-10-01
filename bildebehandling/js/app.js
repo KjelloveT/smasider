@@ -956,14 +956,9 @@
 
     /* ──────────────── Modalar ──────────────── */
     function bindModals() {
-        $('btn-privacy').addEventListener('click', () => $('privacy-modal').classList.add('open'));
+        $('btn-privacy').addEventListener('click', () => Vy.openModal($('privacy-modal')));
         document.querySelectorAll('[data-close]').forEach(b =>
-            b.addEventListener('click', () => $(b.dataset.close).classList.remove('open')));
-        document.querySelectorAll('.modal-overlay').forEach(ov =>
-            ov.addEventListener('click', (e) => { if (e.target === ov) ov.classList.remove('open'); }));
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(ov => ov.classList.remove('open'));
-        });
+            b.addEventListener('click', () => Vy.closeModal($(b.dataset.close))));
     }
 
     /* ──────────────── Hjelparar ──────────────── */
@@ -1005,6 +1000,6 @@
         return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
     }
     function escapeHtml(s) {
-        return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        return Vy.escapeHtml(s);
     }
 })();

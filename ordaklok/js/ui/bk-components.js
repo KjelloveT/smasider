@@ -188,24 +188,17 @@
   }
 
   /* ── Modal-utility ──────────────────────────────────────── */
-  function openModal(el)  { if (el) el.classList.add('open'); }
-  function closeModal(el) { if (el) el.classList.remove('open'); }
+  function openModal(el)  { if (el) root.Vy.openModal(el); }
+  function closeModal(el) { if (el) root.Vy.closeModal(el); }
 
   function wireModal(overlayEl, opts) {
     opts = opts || {};
     if (!overlayEl) return;
-    overlayEl.addEventListener('click', e => {
-      if (e.target === overlayEl) closeModal(overlayEl);
-    });
+    root.Vy.bindOverlayClose(overlayEl);
     if (opts.closeBtnId) {
       const btn = document.getElementById(opts.closeBtnId);
       if (btn) btn.addEventListener('click', () => closeModal(overlayEl));
     }
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && overlayEl.classList.contains('open')) {
-        closeModal(overlayEl);
-      }
-    });
   }
 
   root.BKComponents = {

@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
 <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.2">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
 </head>
 <body class="vp-page" data-vp-design data-vp-app="ljodbanken">
 
@@ -92,8 +92,8 @@
 </div>
 
 <!-- Modal: skjer til -->
-<div class="modal-overlay" id="trimOverlay" role="dialog" aria-modal="true" aria-labelledby="trimTitle" data-onclose="stopAudio">
-  <div class="modal4">
+<div class="modal-overlay vp-modal-backdrop" id="trimOverlay" role="dialog" aria-modal="true" aria-labelledby="trimTitle" data-onclose="stopAudio">
+  <div class="modal4 vp-modal-panel">
     <button class="btn lb-icon-btn modal-close" id="trimClose" type="button" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="trimTitle">Skjer til</h2>
     <p class="lb-muted" id="trimHint"></p>
@@ -123,8 +123,8 @@
 </div>
 
 <!-- Modal: last ned zip -->
-<div class="modal-overlay" id="exportOverlay" role="dialog" aria-modal="true" aria-labelledby="exportHeading">
-  <div class="modal1">
+<div class="modal-overlay vp-modal-backdrop" id="exportOverlay" role="dialog" aria-modal="true" aria-labelledby="exportHeading">
+  <div class="modal1 vp-modal-panel">
     <button class="btn lb-icon-btn modal-close" id="exportClose" type="button" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="exportHeading">Last ned alle klippa</h2>
     <p class="lb-muted" id="exportInfo"></p>
@@ -171,8 +171,8 @@
 </div>
 
 <!-- Modal: lag eller endre lista -->
-<div class="modal-overlay" id="listOverlay" role="dialog" aria-modal="true" aria-labelledby="listEditHeading">
-  <div class="modal4 lb-list-modal">
+<div class="modal-overlay vp-modal-backdrop" id="listOverlay" role="dialog" aria-modal="true" aria-labelledby="listEditHeading">
+  <div class="modal4 lb-list-modal vp-modal-panel">
     <button class="btn lb-icon-btn modal-close" id="listEditClose" type="button" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="listEditHeading">Lydlista</h2>
     <p class="lb-muted">Ein bank blir ei mappe i zip-fila, og kvart klipp ei fil som heiter <code>id.mp3</code>. Skriv eitt klipp per linje: <code>id | tekst | merkelapp | instruks</code> — berre id og tekst må vere med.</p>
@@ -206,8 +206,8 @@
 </div>
 
 <!-- Modal: slik gjer du det -->
-<div class="modal-overlay" id="tipsOverlay" role="dialog" aria-modal="true" aria-labelledby="tipsHeading">
-  <div class="modal4">
+<div class="modal-overlay vp-modal-backdrop" id="tipsOverlay" role="dialog" aria-modal="true" aria-labelledby="tipsHeading">
+  <div class="modal4 vp-modal-panel">
     <button class="btn lb-icon-btn modal-close" id="tipsClose" type="button" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="tipsHeading">Slik gjer du det</h2>
 
@@ -258,8 +258,8 @@
 <script src="js/main.js"></script>
 
   <script src="../js/vyrdepil-icons.js"></script>
-  <script src="../js/vyrdepil-util.js"></script>
-  <script src="../js/vyrdepil-design.js?v=0.9"></script>
+  <script src="../js/vyrdepil-util.js?v=1.2"></script>
+  <script src="../js/vyrdepil-design.js?v=1.1"></script>
   <script src="../js/vyrdepil-app-shell.js?v=8"></script>
   <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>

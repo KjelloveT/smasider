@@ -143,37 +143,6 @@
             flex-wrap: wrap;
         }
 
-        .btn {
-            background: white;
-            border: 2px solid #000;
-            padding: 12px 20px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.1s;
-        }
-
-        .btn:hover {
-            background: #f0f0f0;
-        }
-
-        .btn:active {
-            transform: translate(1px, 1px);
-        }
-
-        .btn.primary {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .btn.primary:hover {
-            background: #45a049;
-        }
-
-        .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
         .question-display {
             background: #F0F8FF;
             border: 2px solid #000;
@@ -259,15 +228,15 @@
             }
         }
     </style>
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.2">
-    <link rel="stylesheet" href="vyrdepil.css?v=1">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+    <link rel="stylesheet" href="vyrdepil.css?v=2">
     <script src="../js/vyrdepil-icons.js" defer></script>
-    <script src="../js/vyrdepil-util.js" defer></script>
-    <script src="../js/vyrdepil-design.js?v=0.9" defer></script>
+    <script src="../js/vyrdepil-util.js?v=1.2" defer></script>
+    <script src="../js/vyrdepil-design.js?v=1.1" defer></script>
     <script src="../js/vyrdepil-app-shell.js?v=7" defer></script>
     <script src="../js/vyrdepil-menu.js?v=2" defer></script>
 </head>
-<body class="vp-page quiz-page" data-vp-site-page="true">
+<body class="vp-page quiz-page" data-vp-design data-vp-site-page="true">
     <div class="container">
         <header>
             <h1><span data-icon="target" aria-hidden="true"></span> Kvissvert</h1>
@@ -307,10 +276,10 @@
                 </div>
 
                 <div class="quiz-controls">
-                    <button class="btn primary" id="start-server">Start Server</button>
-                    <button class="btn" id="start-quiz" disabled>Start Kviss</button>
-                    <button class="btn" id="next-question" disabled>Neste Spørsmål</button>
-                    <button class="btn" id="stop-quiz" disabled>Stopp Kviss</button>
+                    <button class="vp-button vp-button--primary" id="start-server">Start server</button>
+                    <button class="vp-button" id="start-quiz" disabled>Start kviss</button>
+                    <button class="vp-button" id="next-question" disabled>Neste spørsmål</button>
+                    <button class="vp-button vp-button--danger" id="stop-quiz" disabled>Stopp kviss</button>
                 </div>
 
                 <div class="question-display" id="question-display">

@@ -9,11 +9,8 @@ window.LS = window.LS || {};
 LS.util = (function () {
   'use strict';
 
-  /** Unik id, med fallback for eldre nettlesarar. */
-  function uuid() {
-    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
-    return 'ls-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
-  }
+  /** Felles unik id med Lydskurd-prefiks i eldre nettlesarar. */
+  const uuid = () => Vy.uuid('ls');
 
   /** Lag eit element med klasse og tekst i eitt kall. */
   function el(tag, className, text) {
@@ -72,12 +69,7 @@ LS.util = (function () {
   const downloadBlob = Vy.downloadBlob;
 
   /** Trygt filnamn ut frå ein tittel. */
-  function slug(text, fallback) {
-    const s = String(text || '').trim().toLowerCase()
-      .replace(/[æ]/g, 'ae').replace(/[ø]/g, 'oe').replace(/[å]/g, 'aa')
-      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    return s || fallback || 'lydskurd';
-  }
+  const slug = (text, fallback) => Vy.slug(text, fallback || 'lydskurd');
 
   /** Filnamn utan ending — brukt som klippnamn ved import. */
   function baseName(filename) {

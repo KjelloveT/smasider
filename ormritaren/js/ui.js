@@ -106,10 +106,8 @@ const OrmUI = (function () {
 
     /* ---- input-modal --------------------------------------------------- */
 
-    /* Modalen blir vist med klassa .open, ikkje med hidden-attributtet:
-     * .modal-overlay er display:none i felles CSS, og eit hidden-attributt
-     * gjer ingenting mot ein eksplisitt display-regel. Set du berre hidden=false,
-     * blir modalen ståande usynleg medan Python ventar i det uendelege. */
+    /* Bruk den felles dialoghandteringa. Escape blir fanga lokalt nedanfor,
+     * fordi eit ventande input() må avbryte køyringa før dialogen kan lukkast. */
     function spor(ledetekst, svar, avbryt) {
         const overlay = document.getElementById('inputOverlay');
         const felt = document.getElementById('inputFelt');
@@ -121,13 +119,12 @@ const OrmUI = (function () {
             ? ledetekst
             : 'Programmet ventar på at du skriv noko:';
         felt.value = '';
-        overlay.classList.add('open');
-        felt.focus();
+        Vy.openModal(overlay);
 
         function lukk() {
             skjema.removeEventListener('submit', ferdig);
             document.removeEventListener('keydown', paaTast);
-            overlay.classList.remove('open');
+            Vy.closeModal(overlay);
         }
 
         function ferdig(e) {
