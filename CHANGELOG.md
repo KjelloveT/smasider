@@ -7,6 +7,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
 ### Fiksa
 - **Mobilframsida har betre avstand mellom skilta.** Hero, infoskilt og verktøykategoriar står med om lag 100 px luft, slik at stolpane ikkje overlappar innhaldet.
+- **Footeren står ved skjermbotnen på korte sider.** På lange sider følgjer han framleis innhaldet.
 
 ## [1.72] — 2026-10-02
 

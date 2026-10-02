@@ -51,6 +51,12 @@
 [data-vp-design], [data-vp-design] *, [data-vp-design] *::before,
 [data-vp-design] *::after { box-sizing: border-box; }
 .vp-page { margin: 0; background: #d6e8f1 var(--vp-landscape) center top / cover fixed no-repeat; }
+body[data-vp-site-footer] {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
 .vp-page[data-vp-home="true"] { --vp-landscape: url('../_resources/vyrdepil-design/backgrounds/skolegard-sommar-dag.jpg'); }
 [data-vp-design] :is(h1,h2,h3,h4,p) { margin-block: 0 1rem; }
 [data-vp-design] :is(h1,h2,h3,h4) { line-height: 1.15; overflow-wrap: anywhere; }
@@ -539,6 +545,7 @@ body.vp-site-page[data-vp-layout="expanded"] .vp-site-main {
   color: var(--vp-ink);
   text-align: center;
 }
+body[data-vp-site-footer] > .vp-site-footer { margin-top: auto; }
 .vp-site-footer p { margin: 0 0 8px; }
 .vp-site-footer p:last-child { margin-bottom: 0; }
 .vp-site-footer .footer-links { width: min(100%, 960px); margin-inline: auto; font-weight: 750; }

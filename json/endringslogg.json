@@ -4,12 +4,17 @@
     {
       "versjon": "1.73",
       "dato": "2026-10-02",
-      "samandrag": "Mobilframsida har fått betre avstand mellom skilta.",
+      "samandrag": "Mobilframsida har fått betre avstand mellom skilta, og footeren står ved skjermbotnen på korte sider.",
       "punkt": [
         {
           "t": "fiksa",
           "kva": "Framsida",
           "tekst": "Hero, infoskilt og verktøykategoriar står med om lag 100 px luft på mobil, slik at stolpane ikkje overlappar innhaldet."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Felles sidefot",
+          "tekst": "Footeren står ved skjermbotnen på korte sider og følgjer innhaldet på lange sider."
         }
       ]
     },

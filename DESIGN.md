@@ -87,7 +87,7 @@ Framsida har fem opne faggrupper frå `json/apps.json`, ikkje trekkspel. Ho vise
 
 ### Felles sidefot
 
-Alle sider brukar den delte sidefoten frå `js/vyrdepil-footer.js` og `css/vyrdepil-design.css`, med unntak av Canvas-spel (`data-vp-layout="canvas"`). På andre sider: set `data-vp-site-footer` på `<body>` og last skriptet. Sidefoten får full skjermbreidd, lys beige bakgrunn med 50 % opasitet og ei avgrensa tekstbreidd. Han brukar den same korte informasjonsteksten og dei same lenkjene som framsida. Dette gjeld òg infosider, skjulte verktøy og undersider. Canvas-spel skal korkje ha attributtet eller laste skriptet, slik at den globale sidefoten ikkje pressar spelet eller skaper ekstra rulling.
+Alle sider brukar den delte sidefoten frå `js/vyrdepil-footer.js` og `css/vyrdepil-design.css`, med unntak av Canvas-spel (`data-vp-layout="canvas"`). På andre sider: set `data-vp-site-footer` på `<body>` og last skriptet. Sidefoten får full skjermbreidd, lys beige bakgrunn med 50 % opasitet og ei avgrensa tekstbreidd. Han brukar den same korte informasjonsteksten og dei same lenkjene som framsida. På korte sider står footeren ved skjermbotnen; på lange sider følgjer han innhaldet. Dette gjeld òg infosider, skjulte verktøy og undersider. Canvas-spel skal korkje ha attributtet eller laste skriptet, slik at den globale sidefoten ikkje pressar spelet eller skaper ekstra rulling.
 
 ## Startstruktur for ei ny app
 
