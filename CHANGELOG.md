@@ -3,6 +3,125 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.72] — 2026-10-02
+
+### Endra
+- **Framsida skiftar bakgrunn etter årstid og tid på døgnet.** Eit sett på 16 skolegard-landskap er fast reservert, og valet bruker norsk tid frå tenaren.
+- **Vegamot avgrensar høgda på flytkartet.** Arbeidsflata følgjer no `min(78vh, 900px)` på store skjermar og `65vh` på mindre skjermar.
+
+## [1.71] — 2026-10-02
+
+### Endra
+- **Ljodstigen følgjer standardoppsettet.** Start- og profilsida brukar no felles hero, panel, valknappar og innstillingsskilt. Bokstavjakta og Bokstavropet har ikkje global sidefot.
+
+## [1.70] — 2026-10-02
+
+### Endra
+- **Felles sidefot er rulla ut på alle ikkje-Canvas-sider.** Informasjonssider, skjulte verktøy og undersider brukar same fullbreidde sidefot; gamle globale fotar er fjerna. Canvas-spel er unntatt for å halde spelruta fri for ekstra rulling.
+
+## [1.69] — 2026-10-02
+
+### Endra
+- **Framsida har fått ein felles sidefot med full breidd.** Den beige bakgrunnen er 50 % gjennomsiktig, og same JS- og CSS-komponent er klar for utrulling til andre sider.
+- **Utviklingsreglane er oppdaterte.** PR-en tek inn dei siste endringane i `AGENTS.md` og dokumenterer sidefoten som standard for nye appar.
+
+## [1.68] — 2026-10-01
+
+### Endra
+- **Felles UI er rydda på tvers av appane.** Vanlege knappar, flater og dialogar brukar no felles CSS; appstilane held seg til oppsett og speltilstandar.
+- **Utviklingskontrollen fangar opp gamle UI-mønster.** Ny kontroll går gjennom dialogar, generelle komponentstilar og modalopning på alle sidene.
+
+### Fiksa
+- **Dialogåtferda er samla.** Statiske og dynamiske modalar brukar same opning, lukking, Escape, fokus og bakgrunnsklikk.
+- **Quiz og Reknedæsj brukar felles knappestilar.** Svar- og speltilstandar er bevarte.
+
+## [1.67] — 2026-09-30
+
+### Endra
+- **Ormritaren og Bolkestokk har fått same smalare menysidemal.** Kursa står i eigne boksar med luft og synleg bakgrunn mellom seg; arbeidsflatene er bevarte.
+- **Leitekryss har fått ny logo.** Ho viser eit ope 8 × 8-rutenett med eit vassrett og eit loddrett ringa ord.
+
+### Fiksa
+- **Modalar ligg attpå sida når dei blir opna.** Felles modalstil viser no Dagsvegen-, Ordkryss- og Rissverk-dialogane som ordentlege overlegg.
+- **Tidvis viser kva svar som er valde og om par er rette.** Felles knappestilar overstyrer ikkje lenger tilstandsfargane; digitale klokker har òg fått lysare og meir lesbare tal.
+
+## [1.66] — 2026-09-30
+
+### Endra
+- **Heile Vyrdepil-porteføljen bruker no det felles designsystemet.** Gamle globale temaark og den utdaterte designdemomappa er tekne ut. Livekviss og Listesmia har fått same palett og navigasjon; arbeidsflatene i Heimsank og Bolkestokk er bevarte.
+- **Utviklingsreglane er samla på nytt.** Gjeldande krav står i `AGENTS.md` og `DESIGN.md`; eldre redesignnotat er merkte som historiske.
+
+### Fiksa
+- **Dagsvegen er lettare å lese og bruke.** Klokka har lys flate i felles toppstripe, og verktøyskinna dekkjer ikkje lenger arbeidsområdet.
+
+## [1.65] — 2026-09-30
+
+### Endra
+- **Språk- og ordverktøya, Tidvis, Talsmia og Vitjingsruta har avgrensa breidd.** Hovudinnhaldet er no opptil 1200 px breitt i staden for å strekkje seg over heile skjermen.
+
+## [1.64] — 2026-09-30
+
+### Endra
+- **Framsida har meir luft under kategorioverskriftene.** Verktøyrutene startar tydelegare under skilta, også på mobil.
+
+## [1.63] — 2026-09-30
+
+### Endra
+- **Framsida har fått fem fagkategoriar.** Alle verktøya er synlege samstundes: fire kort i breidda på stor skjerm, tre på nettbrett og fire på mobil. BåreTevling ligg under Geografi og natur.
+- **Vyrde følgjer med ved informasjonen nedst på framsida.** Personvern, lisens og sidefoten har same innhaldsbreidd, og maskotten held seg synleg på sida ved rulling.
+- **Endringsloggen og informasjonssidene har fått smalare lesebreidd.** Endringar følgjer no fellesdesignet, og personvernoversikta viser applogoane frå designregisteret.
+- **Framsida har fått eit fast infoskilt om det nye designet.** Skiltet inviterer til å melde frå om feil via e-post.
+
+### Fiksa
+- **Endringar viser heile loggen.** Eldre punkt med eitt eksperimentmerke blir no viste på same måte som punkt med fleire merke.
+
+## [1.62] — 2026-09-30
+
+### Endra
+- **Personvern- og lisenssidene følgjer no fellesdesignet.** Innhald og vilkår er bevarte, med tydelege panel, skiltoverskrifter og responsiv tabellvising.
+- **Framsideoverskriftene er venstrejusterte i ei samla innhaldsbreidd.** Koteksturen står i full storleik og blir klipt ved skiltkanten.
+- **Frødebrett og Leitekryss har fått logoar som viser kva dei gjer.** Frødebrett viser eit rutenett med ei spørsmålsrute, medan Leitekryss viser eit ord som er ringa rundt. Duldord og Ordkryss bruker dei tidlegare logoane sine, og Heimsank held på den originale logoen sin.
+- **Bolkestokk og Ormritaren bruker felles toppmeny i redigeringsflatene.** Menyside og navigasjon følgjer Vyrdepil; blokk- og kodearbeidsflatene fungerer vidare som før.
+- **Handsam bilete har tydelegare verktøykort.** Relaterte innstillingar er samla i eigne grupper med svart tekst på lyse flater.
+
+### Fiksa
+- **Lydskurd har lyse redigerings- og opptaksflater.** Bølgjeform, tidslinje og opptaksdialog er no lesbare.
+- **Tidvis viser éi digital klokke om gongen.** Den doble skuggevisinga er fjerna.
+- **Heite Stavrim har betre kontrast.** Bokstavar, tidtaking, kategoriar og lagpoeng står på lyse flater med svart tekst.
+- **Vidfaren viser att hovudstadsbileta, skil rett og gale svar, og har ein større kartpinne.**
+- **Frødebrett har lyse, tydelege talruter med skiljelinjer, og spørsmålsdialogen har ei lesbar bakgrunn.**
+- **Reknedæsj fyller skjermhøgda utan ei ekstra introflate.** Spelbrettet held sideforholdet og skalerer til visingsplassen; start- og innstillingsskjermene er komprimerte på låge liggjande skjermar.
+- **Vyrde-spriten har fått retta den tredje posen.** Maskoten har no to hender, éi på kvart skilt.
+
+## [1.61] — 2026-09-30
+
+### Endra
+- **Framsida har fått eit tydelegare hero-skilt og infoskilt.** Appkorta har éi kort omtale og fire kolonnar på stor skjerm. Personvern og lisens har lesbare overskrifter, og Vyrde står ved personvernsteksten.
+- **Logoane er kopla til rett verktøy.** Duldord og Ordkryss held på dei tidlegare logoane sine, Talsmia bruker tallogoen, og Heimsank bruker originalen sin. Vyrde skiftar positur og uttrykk kvart trettiande sekund i fellesnavigasjonen og på framsida.
+
+## [1.60] — 2026-09-29
+
+### Endra
+- **Framsida følgjer no Vyrdepil si nye designretning.** Ho bruker skyheader, stein-Vyrde, fast byparklandskap og dei same Måla flater-logoane som appmenyen. Appane kjem framleis frå den eksisterande `json/apps.json`-katalogen.
+
+## [1.59] — 2026-09-29
+
+### Lagt til
+- **Vegamot er eit nytt ferdig verktøy for interaktive forteljingar.** Lag flytkart med steg, vegval og fleire sluttingar, legg til eigne bilete og prøv forteljinga i lesarmodus. Forteljingar og bilete blir lagra lokalt; forteljinga kan òg pakkast eller eksporterast til PowerPoint.
+
+### Endra
+- **Dei synlege appane har fått ei felles visuell retning.** Nye Måla flater-logoar, skyheader, appmeny og faste norske landskapsbakgrunnar bind saman spela og verktøya. Heimsank og Bolkestokk beheld dei avtalte særuttrykka sine.
+
+## [1.58] — 2026-09-29
+
+### Fiksa
+- **Duldord røper ikkje tidlegare løysingsord når ein blar bakover.** Knappen opnar no ei spelbar dagsoppgåve, viser «i går» fyrst og deretter datoen ein går til. Ein kan bla heilt tilbake til starten.
+
+## [1.57] — 2026-09-28
+
+### Endra
+- **Duldord følgjer no den nye Vyrdepil-designretninga.** Spelet har fått felles toppmeny, Vyrde-maskot, app-logo, Sykkelsti-bakgrunn, trepanel og infoskilt. Datoen står tydeleg på spelbrettet, og knappen for tidlegare ord viser fasiten og kan bla heilt tilbake til starten. Spelreglane og bokstavstatusane er vidareførte.
+
 ## [1.56] — 2026-09-21
 
 ### Lagt til

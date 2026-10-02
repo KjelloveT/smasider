@@ -7,12 +7,11 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+      <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="midnight" data-theme="classic">
-    <neo-header></neo-header>
-
+<body data-vp-app="biletflett" data-vp-layout="expanded" data-vp-site-footer>
     <div class="page-wrapper">
         <main class="main-content">
 
@@ -43,8 +42,8 @@
                     <canvas id="collage-canvas" aria-label="Collage-lerret"></canvas>
                 </section>
 
-                <aside class="panel">
-                    <h2><span data-icon="type" data-icon-size="16"></span> Tekst</h2>
+                <aside class="vp-panel vp-panel--compact panel">
+                    <h2 class="vp-heading vp-heading--small vp-panel-heading"><span data-icon="type" data-icon-size="16"></span> Tekst</h2>
                     <div id="text-fields"></div>
                     <p class="panel-tip">Klikk eit tomt felt for å leggje til bilete der. Hald peikaren over eit bilete for å zoome, skjere eller fjerne. Dra for å flytte biletet i feltet.</p>
                 </aside>
@@ -58,8 +57,8 @@
     <input type="file" id="slot-input" accept="image/*" hidden>
 
     <!-- Beskjerings-modal -->
-    <div class="modal-overlay" id="crop-modal">
-        <div class="modal3" role="dialog" aria-modal="true" aria-label="Skjer bilete">
+    <div class="modal-overlay vp-modal-backdrop" id="crop-modal">
+        <div class="modal3 vp-modal-panel" role="dialog" aria-modal="true" aria-label="Skjer bilete">
             <div class="modal-header">
                 <span>Skjer bilete</span>
                 <button class="modal-close" data-close="crop-modal" aria-label="Lukk"><span data-icon="x"></span></button>
@@ -76,8 +75,8 @@
     </div>
 
     <!-- Personvern-modal -->
-    <div class="modal-overlay" id="privacy-modal">
-        <div class="modal3 privacy-body" role="dialog" aria-modal="true" aria-label="Personvern">
+    <div class="modal-overlay vp-modal-backdrop" id="privacy-modal">
+        <div class="modal3 privacy-body vp-modal-panel" role="dialog" aria-modal="true" aria-label="Personvern">
             <div class="modal-header">
                 <span>Personvern og datatryggleik</span>
                 <button class="modal-close" data-close="privacy-modal" aria-label="Lukk"><span data-icon="x"></span></button>
@@ -107,7 +106,9 @@
     <script src="js/decor.js"></script>
     <script src="js/collage.js"></script>
     <script src="js/app.js"></script>
-    <script src="../js/neobrutalisme.js"></script>
-    <script src="../js/neo-header.js"></script>
+    <script src="../js/vyrdepil-util.js?v=1.2"></script>
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
+<script src="../js/vyrdepil-app-shell.js?v=6"></script>
+<script src="../js/vyrdepil-menu.js"></script>
 </body>
 </html>

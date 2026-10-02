@@ -2,6 +2,306 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.72",
+      "dato": "2026-10-02",
+      "samandrag": "Framsida skiftar bakgrunn etter årstid og tid; Vegamot avgrensar høgda på arbeidsflata.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Framsida",
+          "tekst": "Eit sett på 16 skolegard-bakgrunnar gir rett landskap etter årstid og tid i norsk tid."
+        },
+        {
+          "t": "endra",
+          "kva": "Vegamot",
+          "tekst": "Flytkartet har ei makshøgd på 78 % av skjermen, avgrensa til 900 px, og 65 % på mindre skjermar."
+        }
+      ]
+    },
+    {
+      "versjon": "1.71",
+      "dato": "2026-10-02",
+      "samandrag": "Ljodstigen si startside følgjer standardoppsettet og Canvas-spela har ikkje global sidefot.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Ljodstigen",
+          "tekst": "Start- og profilsida brukar felles hero, panel, knappar og innstillingsskilt. Canvas-modusane har ikkje global sidefot."
+        }
+      ]
+    },
+    {
+      "versjon": "1.70",
+      "dato": "2026-10-02",
+      "samandrag": "Den felles sidefoten er rulla ut på alle sider utan Canvas-spel.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Felles sidefot",
+          "tekst": "Infosider, skjulte verktøy og undersider brukar same sidefot. Canvas-spel er unnateke."
+        }
+      ]
+    },
+    {
+      "versjon": "1.69",
+      "dato": "2026-10-02",
+      "samandrag": "Framsida har fått ein fullbreidd, halvtransparent sidefot som kan brukast på tvers av sidene.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Felles sidefot",
+          "tekst": "Framsida brukar no den delte beige sidefoten med 50 % opasitet. CSS- og JS-komponenten er dokumentert for nye appar og seinare utrulling."
+        }
+      ]
+    },
+    {
+      "versjon": "1.68",
+      "dato": "2026-10-01",
+      "samandrag": "Dialogar, knappar og flater er samla i felles UI-komponentar på tvers av appane.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Felles UI",
+          "tekst": "Knappar og generelle flater brukar felles CSS, medan appstilane tek vare på oppsett og speltilstandar."
+        },
+        {
+          "t": "endra",
+          "kva": "Dialogsjekk",
+          "tekst": "Ny automatisk kontroll finn gamle lokale dialog- og komponentstilar før dei blir ståande i appane."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Dialogar",
+          "tekst": "Dialogar får felles opning, lukking, Escape, fokusretur og bakgrunnsklikk, også når dei blir laga frå JavaScript."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Quiz og Reknedæsj",
+          "tekst": "Vanlege handlingar brukar felles knappestilar; svarfargane og speltilstandane er bevarte."
+        }
+      ]
+    },
+    {
+      "versjon": "1.67",
+      "dato": "2026-09-30",
+      "samandrag": "Modalane fungerer att, og Tidvis, Leitekryss, Ormritaren og Bolkestokk har fått justeringar.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Ormritaren og Bolkestokk",
+          "tekst": "Menysidene bruker same smalare oppsett med luft mellom kursboksane. Programmeringsflatene er bevarte."
+        },
+        {
+          "t": "endra",
+          "kva": "Leitekryss",
+          "tekst": "Logoen viser eit ope 8 × 8-rutenett med eit vassrett og eit loddrett ringa ord."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Modalar",
+          "tekst": "Dialogar i Dagsvegen, Ordkryss og Rissverk kjem no fram som overlegg i staden for å leggje seg nedst på sida."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Tidvis",
+          "tekst": "Valde og rette par får tydeleg tilbakemelding, og dei digitale klokkene er lettare å lese."
+        }
+      ]
+    },
+    {
+      "versjon": "1.66",
+      "dato": "2026-09-30",
+      "samandrag": "Alle sidene følgjer det felles designsystemet, og Dagsvegen har fått ei tydelegare arbeidsflate.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Designsystem",
+          "tekst": "Gamle globale temaark og utdaterte demoar er fjerna. Livekviss og Listesmia bruker no felles palett og navigasjon."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Dagsvegen",
+          "tekst": "Klokka er lys og lesbar i toppstripa, og verktøyskinna legg seg ikkje over arbeidsflata."
+        }
+      ]
+    },
+    {
+      "versjon": "1.65",
+      "dato": "2026-09-30",
+      "samandrag": "Språk- og ordverktøya, Tidvis, Talsmia og Vitjingsruta har fått avgrensa innhaldsbreidd.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Appbreidd",
+          "tekst": "Desse appene har no maksbreidd på 1200 px, så innhaldet ikkje strekkjer seg over heile skjermen."
+        }
+      ]
+    },
+    {
+      "versjon": "1.64",
+      "dato": "2026-09-30",
+      "samandrag": "Det er meir luft mellom kategorioverskriftene og verktøyrutene på framsida.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Framsida",
+          "tekst": "Verktøyrutene har fått tydelegare avstand under kategoriskilta, også på mobil."
+        }
+      ]
+    },
+    {
+      "versjon": "1.63",
+      "dato": "2026-09-30",
+      "samandrag": "Framsida har fått nye fagkategoriar, og Vyrde følgjer med nedover sida.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Framsida",
+          "tekst": "Alle spel og verktøy er samla i fem opne kategoriar. Kortrekkja viser fire kort på stor skjerm, tre på nettbrett og fire på mobil. BåreTevling ligg under Geografi og natur."
+        },
+        {
+          "t": "endra",
+          "kva": "Informasjonssider",
+          "tekst": "Endringar følgjer det nye fellesdesignet, informasjonssidene har smalare lesevidd, og personvernoversikta viser dei registrerte applogoane."
+        },
+        {
+          "t": "endra",
+          "kva": "Framside og Vyrde",
+          "tekst": "Personvern, lisens og sidefot har same innhaldsbreidd. Vyrde står ved sida av innhaldet og blir med nedover når du rullar. Framsida har òg fått eit fast skilt om det nye designet og kvar du melder frå om feil."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Endringar",
+          "tekst": "Heile endringsloggen blir vist, også eldre punkt som har eitt eksperimentmerke."
+        }
+      ]
+    },
+    {
+      "versjon": "1.62",
+      "dato": "2026-09-30",
+      "samandrag": "Framsida og informasjonssidene følgjer det nye Vyrdepil-designet.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Logoar",
+          "tekst": "Duldord og Ordkryss held på dei tidlegare logoane sine. Frødebrett får ei måla rutenettlogo med spørsmålsrute, Leitekryss viser eit ringa ord, og Heimsank bruker originalen sin."
+        },
+        {
+          "t": "endra",
+          "kva": "Personvern og lisens",
+          "tekst": "Begge informasjonssidene bruker fellesdesignet. Innhald og vilkår er bevarte, med lesbare panel og responsiv tabellvising."
+        },
+        {
+          "t": "endra",
+          "kva": "Framsida",
+          "tekst": "Personvern og lisens er venstrejusterte i ei samla innhaldsbreidd, og bakgrunnsmønsteret står i full storleik."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Vyrde",
+          "tekst": "Den tredje posen i spritesamlinga har no to hender, éi på kvart skilt."
+        },
+        {
+          "t": "endra",
+          "kva": "Bolkestokk og Ormritaren",
+          "tekst": "Begge editorane bruker den felles Vyrdepil-toppmenyen. Arbeidsflatene er bevarte."
+        },
+        {
+          "t": "endra",
+          "kva": "Handsam bilete",
+          "tekst": "Verktøy og val er delte i tydelege kort med god kontrast."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Lydskurd, Tidvis og Heite Stavrim",
+          "tekst": "Lydeditor og opptaksdialog har lyse flater, Tidvis viser éi digital klokke, og Heite Stavrim har høg kontrast."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Vidfaren og Frødebrett",
+          "tekst": "Vidfaren viser att hovudstadsbileta, skil rett og gale svar, og har større kartpinne. Frødebrett har tydelege talruter, skiljelinjer og lesbar spørsmålsdialog."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Reknedæsj",
+          "tekst": "Spelruta fyller tilgjengeleg skjermhøgd utan ekstra introflate, og start- og innstillingsskjermene er tilpassa låge liggjande skjermar."
+        }
+      ]
+    },
+    {
+      "versjon": "1.61",
+      "dato": "2026-09-30",
+      "samandrag": "Framsida har fått betre leseflyt og oppdaterte Vyrde- og applogoar.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Framsida",
+          "tekst": "Hero-skilt og infoskilt, éi kort omtale per app og fire appkort i breidda på stor skjerm. Personvern- og lisensoverskriftene har fått lyse skiltbakgrunnar."
+        },
+        {
+          "t": "endra",
+          "kva": "Applogoar og Vyrde",
+          "tekst": "Duldord og Ordkryss held på dei tidlegare logoane sine; Talsmia bruker tallogoen, Heimsank den originale logoen sin, og Vyrde skiftar positur og uttrykk kvart trettiande sekund."
+        }
+      ]
+    },
+    {
+      "versjon": "1.60",
+      "dato": "2026-09-29",
+      "samandrag": "Framsida har fått den same Vyrdepil-designretninga som appane.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Framsida",
+          "tekst": "Skyheader, stein-Vyrde, fast byparklandskap og Måla flater-logoar frå den eksisterande appkatalogen."
+        }
+      ]
+    },
+    {
+      "versjon": "1.59",
+      "dato": "2026-09-29",
+      "samandrag": "Vegamot er nytt, og dei synlege appane deler no ei samla Vyrdepil-designretning.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Vegamot",
+          "merke": [
+            "verktoy"
+          ],
+          "tekst": "Nytt fullskjermsverktøy for å lage interaktive forteljingar med steg, vegval, eigne bilete og eksport til PowerPoint."
+        },
+        {
+          "t": "endra",
+          "kva": "Vyrdepil-design",
+          "tekst": "Synlege appar har fått nye Måla flater-logoar, felles navigasjon og faste norske bakgrunnar. Heimsank og Bolkestokk held på særuttrykka i appane."
+        }
+      ]
+    },
+    {
+      "versjon": "1.58",
+      "dato": "2026-09-29",
+      "samandrag": "Tidlegare Duldord-oppgåver kan spelast utan å vise løysingsordet.",
+      "punkt": [
+        {
+          "t": "fiksa",
+          "kva": "Duldord",
+          "tekst": "Knappen opnar ei spelbar dagsoppgåve, viser «i går» fyrst og deretter datoen ein går til. Løysingsordet blir ikkje vist når ein blar gjennom tidlegare dagar, og ein kan gå heilt tilbake til starten."
+        }
+      ]
+    },
+    {
+      "versjon": "1.57",
+      "dato": "2026-09-28",
+      "samandrag": "Duldord har fått den nye felles Vyrdepil-stilen og tydelegare tilgang til dagsorda.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Duldord",
+          "tekst": "Duldord har fått felles toppmeny, Vyrde-maskot, app-logo, Sykkelsti-bakgrunn, trepanel og infoskilt. Datoen står stort på spelbrettet, og knappen for tidlegare ord viser fasiten og kan bla heilt tilbake til starten."
+        }
+      ]
+    },
+    {
       "versjon": "1.56",
       "dato": "2026-09-21",
       "samandrag": "Heimsank har fått 200 aktuelle fotballspelarar og 191 sportsbilar.",

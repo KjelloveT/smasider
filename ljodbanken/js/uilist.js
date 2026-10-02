@@ -117,11 +117,7 @@ LB.list = (function () {
 
   /* ──────────────── Redigering ──────────────── */
 
-  function slug(text) {
-    return String(text || '').trim().toLowerCase()
-      .replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa')
-      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-  }
+  const slug = text => Vy.slug(text, '');
 
   function draftFrom(list) {
     return {

@@ -26,8 +26,8 @@
   FS.show = id => { const e = FS.el(id); if (e) e.classList.remove('hidden'); };
   FS.hide = id => { const e = FS.el(id); if (e) e.classList.add('hidden'); };
 
-  FS.openOverlay  = id => { const e = FS.el(id); if (e) e.classList.add('open'); };
-  FS.closeOverlay = id => { const e = FS.el(id); if (e) e.classList.remove('open'); };
+  FS.openOverlay  = id => { const e = FS.el(id); if (e) Vy.openModal(e); };
+  FS.closeOverlay = id => { const e = FS.el(id); if (e) Vy.closeModal(e); };
 
   FS.escapeHtml = str => {
     if (str == null) return '';

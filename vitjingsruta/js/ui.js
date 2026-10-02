@@ -754,12 +754,6 @@
     });
     els.nameCancel.addEventListener('click', closeName);
     els.nameClose.addEventListener('click', closeName);
-    els.nameOverlay.addEventListener('click', (e) => {
-      if (e.target === els.nameOverlay) closeName();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && els.nameOverlay.classList.contains('open')) closeName();
-    });
 
     els.clearRecentBtn.addEventListener('click', () => {
       VR.storage.clearRecent();
@@ -769,13 +763,13 @@
 
   function openName(title) {
     $('nameTitle').textContent = title;
-    els.nameOverlay.classList.add('open');
+    Vy.openModal(els.nameOverlay);
     els.nameInput.focus();
     els.nameInput.select();
   }
 
   function closeName() {
-    els.nameOverlay.classList.remove('open');
+    Vy.closeModal(els.nameOverlay);
     pendingSave = null;
   }
 

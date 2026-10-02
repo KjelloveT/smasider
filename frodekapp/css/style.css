@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════
    FRØDEKAPP — Quiz
-   Utvidar ../css/neobrutalisme.css. Bruk var(--*) og
+   Bruk det felles designsystemet. Bruk var(--*) og
    clamp()/grid; ingen hardkoda fargar.
    ══════════════════════════════════════════════ */
 
@@ -309,19 +309,7 @@ select.form-input { cursor: pointer; }
 .q-footer .form-group { flex: 1; margin-bottom: 0; }
 .btn-danger:hover { background: var(--accent2); color: var(--text-on-accent); }
 
-/* Editor-førehandsvising (modal-overlay frå neobrutalisme) */
-#preview-overlay {
-    position: fixed; inset: 0; display: none;
-    background: color-mix(in srgb, var(--border) 55%, transparent);
-    z-index: 1000; overflow-y: auto; padding: clamp(20px, 5vw, 48px) 16px;
-}
-#preview-overlay.open { display: block; }
-#preview-overlay .preview-inner {
-    max-width: 720px; margin: 0 auto;
-    background: var(--surface); color: var(--text);
-    border: 3px solid var(--border); box-shadow: 8px 8px 0 var(--accent);
-    padding: clamp(20px, 4vw, 30px);
-}
+/* Førehandsvisinga bruker vp-modal-backdrop og vp-modal-panel frå felles CSS. */
 .preview-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
 .preview-errors { border-left: 6px solid var(--accent2); }
 .preview-q-text { font-weight: 900; margin-bottom: 8px; }

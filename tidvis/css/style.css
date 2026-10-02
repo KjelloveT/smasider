@@ -1,9 +1,8 @@
 /* ============================================================
-   TIDVIS — neobrutalistisk designsystem (Vyrdepil)
+   TIDVIS — spelspesifikke komponentar for Vyrdepil
    Basert på Claude Design-handoff. System-fontar (ingen CDN).
-   Game-stilane lever under .tv-rota med eigne tokens — eit
-   sanksjonert avvik frå standard side-CSS. Toppmenyen (neo-header)
-   er uendra og ligg utanfor .tv.
+   Spelkomponentane held på eigne fagfargar. Felles toppmeny og
+   sideoppsett kjem frå det delte designsystemet.
    ============================================================ */
 
 /* ---- TOKENS ---- */
@@ -26,7 +25,7 @@
   --muted:     #6B6259;
   --shadow:    #1A1714;     /* hard skugge */
   --lcd-bg:    #14201C;
-  --lcd-on:    #38E08A;
+  --lcd-on:    #C9FFDD;
   --lcd-off:   rgba(56,224,138,.12);
 
   /* system-font-stakkar (erstattar Google Fonts) */
@@ -46,18 +45,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.tv[data-theme="dark"] {
-  --bg:        #211C16;
-  --bg-dots:   rgba(246,234,211,.07);
-  --surface:   #2D2720;
-  --surface-2: #38312733;
-  --ink:       #F6EAD3;
-  --muted:     #B6A88F;
-  --shadow:    #0B0907;
-  --lcd-bg:    #0C1512;
-}
-
-/* ---- ROT-CONTAINER (normal sideflyt under neo-header) ---- */
+/* ---- ROT-CONTAINER ---- */
 .tv {
   position: relative;
   width: 100%;
@@ -170,7 +158,7 @@
   box-shadow: var(--sh);
 }
 .tv .card--flat { box-shadow: var(--sh-sm); }
-/* nøytraliser global .card:hover/.active frå neobrutalisme.css — tv-kort er statiske */
+/* TV-korta er statiske; dei skal ikkje flytte seg ved peik. */
 .tv .card:hover, .tv .card:active { transform: none; box-shadow: var(--sh); }
 .tv .card--flat:hover, .tv .card--flat:active { transform: none; box-shadow: var(--sh-sm); }
 
@@ -233,7 +221,6 @@
   background: var(--surface-2);
 }
 .tv .tile.is-active .tile__ico { background: rgba(255,255,255,.6); }
-.tv[data-theme="dark"] .tile.is-active .tile__ico { background: rgba(255,255,255,.85); color:#1A1714; }
 .tv .tile__ico { color: var(--ink); }
 .tv .tile__ico svg { width: 28px; height: 28px; color: inherit; }
 .tv .tile__name { font-family: var(--serif); font-weight: 700; font-size: 20px; }
@@ -254,7 +241,6 @@
   border: var(--bw) solid var(--ink);
   display: flex; align-items: center; justify-content: center;
 }
-.tv[data-theme="dark"] .tile__check { background:#1A1714; color:var(--yellow); border-color:#1A1714; }
 .tv .tile__check svg { width: 18px; height: 18px; }
 
 /* segmented chips */
@@ -273,7 +259,6 @@
 .tv .chip:hover { transform: translate(-1px,-1px); }
 .tv .chip:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 .tv .chip.is-active { background: var(--ink); color: var(--bg); }
-.tv[data-theme="dark"] .chip.is-active { background:#1A1714; color:var(--yellow); }
 /* toggle-chips: check-ikon vert synleg ved is-active */
 .tv .chip--toggle svg { opacity: 0; transition: opacity .1s; flex-shrink: 0; }
 .tv .chip--toggle.is-active svg { opacity: 1; }
@@ -429,14 +414,13 @@
 }
 .tv .lcd__time {
   font-family: var(--mono); font-weight:700;
-  font-size: clamp(52px, 9vw, 92px); line-height:.95; letter-spacing: 3px;
+  font-size: clamp(52px, 9vw, 92px); line-height:1.08; letter-spacing: .06em;
   color: var(--lcd-on);
-  text-shadow: 0 0 14px rgba(56,224,138,.55);
+  text-shadow: none;
   position: relative; font-variant-numeric: tabular-nums;
 }
-.tv .lcd__time .ghost { position:absolute; inset:0; color: var(--lcd-off); z-index:0; }
 .tv .lcd__time .val { position: relative; z-index: 1; }
-.tv .lcd__label { font-family: var(--mono); font-size:12px; letter-spacing:3px; color: rgba(56,224,138,.6); }
+.tv .lcd__label { font-family: var(--mono); font-size:12px; letter-spacing:3px; color: #A8D6B9; }
 
 /* ---- PARA / MATCH ---- */
 .tv-para { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 3vw, 30px); }
@@ -585,7 +569,7 @@
 
 /* ---- MENY-HEROBOX (hero + live-klokker) ---- */
 .tv-menu-herobox {
-  /* override neobrutalisme.css min-height + legg til eigen layout */
+  /* Set eiga høgd og layout for menykortet. */
   min-height: 0 !important;
   padding: clamp(24px, 4vw, 40px);
   display: flex;
@@ -605,6 +589,86 @@
   display: flex;
   flex-direction: column;
   gap: clamp(14px, 2vw, 22px);
+}
+
+/* Felles Vyrdepil-identitet utan å endre klokkegrafikken eller spelet. */
+body.vp-migrated-page #tv-root {
+  --bg: #fff9e9;
+  --bg-dots: transparent;
+  --surface: #fffdf5;
+  --surface-2: #fff9e9;
+  --ink: #142820;
+  --muted: #000;
+  --shadow: #142820;
+  --pink: #efb29d;
+  --yellow: #f5dfaa;
+  --teal: #d5e5c5;
+  --blue: #d6e8f1;
+  --purple: #e5dcef;
+  --green: #d5e5c5;
+  --red: #f4d1cc;
+  --r: 9px;
+  --r-sm: 7px;
+  --bw: 3px;
+  --sh: 0 3px 0 var(--shadow);
+  --sh-sm: 0 3px 0 var(--shadow);
+  --sh-lg: 0 3px 0 var(--shadow);
+  width: 100%;
+  padding: 0;
+  overflow: visible;
+  color: #000;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: var(--vp-font, system-ui, sans-serif);
+}
+body.vp-migrated-page #tv-root :is(h1,h2,h3,h4,.serif,.tv-logo) {
+  color: #000;
+  font-family: var(--vp-heading-font, system-ui, sans-serif);
+  letter-spacing: normal;
+}
+body.vp-migrated-page #tv-root .tv-menu-herobox {
+  padding: clamp(18px, 3vw, 30px);
+  border: 3px solid #142820;
+  border-radius: 10px;
+  background-color: #fff9e9;
+  background-image: url('../../_resources/vyrdepil-design/wood-contours.png');
+  background-position: center;
+  background-size: max(100%, 1536px) auto;
+  box-shadow: 0 3px 0 #142820;
+}
+body.vp-migrated-page #tv-root .tv-menu-herobox > .tv-game-title-row,
+body.vp-migrated-page #tv-root .tv-menu-herobox > .tv-lead {
+  display: none;
+}
+body.vp-migrated-page #tv-root .tv-section-head {
+  border-color: #142820;
+  font-family: var(--vp-heading-font, system-ui, sans-serif);
+  letter-spacing: normal;
+}
+body.vp-migrated-page #tv-root :is(.btn--blue,.btn--ink) { color: #000; }
+body.vp-migrated-page #tv-root .tile.is-active,
+body.vp-migrated-page #tv-root .tile.is-active:is(.t-teal,.t-yellow,.t-blue),
+body.vp-migrated-page #tv-root .chip.is-active {
+  color: #000;
+  background: #f5dfaa;
+  border-color: #142820;
+}
+body.vp-migrated-page #tv-root :is(.tile.is-active .tile__name,.tile.is-active .tile__desc,.tile.is-active .tile__name .tv-tile-accent) {
+  color: #000;
+}
+body.vp-migrated-page #tv-root :is(.btn,.iconbtn,.tile,.chip,.card) {
+  border-color: #142820;
+  border-radius: 8px;
+  box-shadow: 0 3px 0 #142820;
+  color: #000;
+  font-family: var(--vp-font, system-ui, sans-serif);
+}
+body.vp-migrated-page #tv-root :is(.btn,.iconbtn,.tile,.chip) { text-align: center; }
+body.vp-migrated-page #tv-root :is(button,input,select,textarea,[tabindex]):focus-visible {
+  outline: 3px solid #ad7440;
+  outline-offset: 2px;
 }
 
 /* section-head: større og tydeleg enn tidlegare label-strong */
@@ -781,15 +845,8 @@
    slik at førehandsvisinga og papiret ser heilt likt ut i begge tema.
    ============================================================ */
 
-/* ---- EKSPORTDIALOGEN ---- */
-.tv-ex-overlay { position: fixed; z-index: 60; overflow: auto; padding: clamp(8px, 2vw, 24px); }
-.tv-ex {
-  background: var(--surface);
-  padding: clamp(16px, 2.4vw, 26px);
-  width: 100%; max-width: 1180px;
-  max-height: 94vh;
-  display: flex; flex-direction: column; gap: 12px;
-}
+/* ---- EKSPORTDIALOGEN: flate og ramme kjem frå vp-modal-panel. ---- */
+.tv-ex { display: flex; flex-direction: column; gap: 12px; }
 .tv-ex__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .tv-ex__title { font-family: var(--serif); font-size: clamp(24px, 3vw, 32px); margin: 0; }
 .tv-ex__lead { color: var(--muted); font-size: 14px; margin: 0; }
@@ -849,7 +906,6 @@
 }
 .tv-ex-source__text { display: flex; flex-direction: column; }
 .tv-ex-names {
-  background: var(--surface); padding: clamp(16px, 2.4vw, 26px);
   width: 100%; max-width: 620px; max-height: 92vh; overflow: auto;
   display: flex; flex-direction: column; gap: 10px;
 }
@@ -995,7 +1051,7 @@
 #printArea { display: none; }
 
 @media print {
-  neo-header,
+  .vp-header,
   .page-wrapper,
   .tv-fb-overlay,
   .tv-ex-overlay { display: none !important; }

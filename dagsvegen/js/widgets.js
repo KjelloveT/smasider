@@ -56,17 +56,23 @@ const Widgets = (() => {
     function initClock() {
         const box = $('clock-widget');
         box.classList.add('dv-clock');
-        clockApi = TidvisClock.analog({ size: 110, draggable: false });
+        clockApi = TidvisClock.analog({ size: 64, draggable: false });
         clockDigital = Dom.el('div', { class: 'dv-clock-digital' });
         box.appendChild(clockApi.el);
         box.appendChild(clockDigital);
-        makeDraggable(box, box);
         Engine.onTick((now) => {
             clockApi.setTime(now.getHours() % 12 || 12, now.getMinutes());
             clockDigital.textContent = String(now.getHours()).padStart(2, '0') + ':'
                 + String(now.getMinutes()).padStart(2, '0');
         });
         applyClockVisibility();
+    }
+
+    function mountClockToHeader() {
+        const row = document.querySelector('.vp-migrated-header .vp-header-row');
+        const menu = row && row.querySelector('#vpMenuTrigger');
+        const clock = $('clock-widget');
+        if (row && menu && clock && clock.parentElement !== row) row.insertBefore(clock, menu);
     }
 
     function applyClockVisibility() {
@@ -233,7 +239,7 @@ const Widgets = (() => {
     /* ════ Hjernepause ════ */
     function openBrainBreak() {
         rollBrainBreak();
-        $('modal-break').classList.add('open');
+        Vy.openModal($('modal-break'));
     }
 
     function rollBrainBreak() {
@@ -260,5 +266,5 @@ const Widgets = (() => {
         $('btn-break-new').addEventListener('click', rollBrainBreak);
     }
 
-    return { init, toggle, openCalm, closeCalm, calmIsOpen, openBrainBreak, applyClockVisibility, applyTraffic, makeDraggable };
+    return { init, toggle, openCalm, closeCalm, calmIsOpen, openBrainBreak, applyClockVisibility, applyTraffic, makeDraggable, mountClockToHeader };
 })();

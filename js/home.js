@@ -8,6 +8,38 @@
   /* Kor lenge «Nytt»- og «Oppdatert»-merket heng ved før det fell av av seg sjølv. */
   const BADGE_DAYS = 45;
 
+  const HOME_SUMMARIES = Object.freeze({
+    duldord: 'Gjet eit nytt nynorsk fembokstavsord på seks forsøk kvar dag.',
+    vidfaren: 'Utforsk land med spørsmål om geografi, kart og kjenneteikn.',
+    heimsank: 'Løys matteoppgåver, vinn samlekort og bygg samlinga di.',
+    reknedaesj: 'Spring, hopp og rekn deg gjennom eit fartfylt mattespel.',
+    rettslause_raud: 'Hopp gjennom banar og bruk rekning for å kome vidare.',
+    kludre_klodrian: 'Sym gjennom havet og vel porten med rett svar.',
+    baretevling: 'Spel slagskip og øv på koordinatar og himmelretningar.',
+    frodebrett: 'Lag Jeopardy-brett med eigne kategoriar og poeng.',
+    ordaklok: 'Øv på gloser med fire ulike måtar å spele på.',
+    tidvis: 'Øv på analoge og digitale klokkeslett.',
+    heite_stavrim: 'Finn ord frå bokstavar og kategoriar i lagspel.',
+    ordsmia: 'Smi det lengste norske ordet du finn av ni bokstavar.',
+    talsmia: 'Bruk seks tal og rekneartar for å nå eit måltal.',
+    frodekapp: 'Lag quiz og spel solo medan tevlingstenesta blir sett opp att.',
+    bolkestokk: 'Dra kodeblokker på plass og la ei skilpadde teikne.',
+    ormritaren: 'Skriv og køyr Python i nettlesaren utan oppsett.',
+    bildebehandling: 'Skjer, roter og endre storleik på bilete lokalt.',
+    biletflett: 'Lag collagar ved å dra bilete inn i ferdige oppsett.',
+    lydskurd: 'Klipp, bland og lagre lydspor på ei tidslinje.',
+    rissverk: 'Teikn og set saman eigne logoar, ikon og diagram.',
+    klassekart: 'Møbler klasserommet og fordel elevar med drag og slepp.',
+    flokkdeilar: 'Trekk tilfeldige grupper og vis dei på storskjerm.',
+    eikekveik: 'Bygg idé- og flytkart med greiner og koplingar.',
+    ordskodde: 'Lag ei fargerik ordsky av ein tekst.',
+    ordkryss: 'Lag kryssord automatisk frå ord og forklaringar.',
+    leitekryss: 'Gøym ord i eit bokstavrutenett på skjerm eller ark.',
+    vitjingsruta: 'Lag og tilpass QR-kodar for lenkjer, nett og kontaktar.',
+    dagsvegen: 'Vis dagsplanen og tel ned pågåande undervisningsøkter.',
+    vegamot: 'Bygg interaktive forteljingar med vegval og fleire sluttingar.'
+  });
+
   function svg(inner, size) {
     return `<svg width="${size}" height="${size}" style="vertical-align:-5px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
   }
@@ -31,15 +63,21 @@
     return null;
   }
 
-  function card(app) {
+  function card(app, logos) {
     const el = document.createElement(app.disabled ? 'div' : 'a');
-    el.className = 'card' + (app.disabled ? ' disabled' : '');
+    el.className = 'card vp-home-app' + (app.disabled ? ' disabled' : '');
     if (!app.disabled && app.href) el.href = app.href;
 
-    if (app.img) {
+    const logo = logos[app.id] || app.img;
+    if (logo) {
       const img = document.createElement('img');
-      img.src = app.img;
-      img.alt = app.name;
+      img.src = logo;
+      img.alt = '';
+      img.width = 160;
+      img.height = 160;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.className = 'vp-home-app-logo';
       el.appendChild(img);
     } else if (app.icon) {
       const span = document.createElement('span');
@@ -61,12 +99,13 @@
     h.textContent = app.name;
     el.appendChild(h);
 
-    (app.desc || []).forEach(d => {
+    const summary = HOME_SUMMARIES[app.id] || (app.desc || [])[0];
+    if (summary) {
       const p = document.createElement('p');
       p.className = 'card-desc';
-      p.textContent = d;
+      p.textContent = summary;
       el.appendChild(p);
-    });
+    }
 
     const tag = document.createElement('span');
     if (app.disabled) {
@@ -80,45 +119,41 @@
     return el;
   }
 
-  fetch('json/apps.json')
-    .then(r => r.json())
-    .then(data => {
+  Promise.all([
+    fetch('json/apps.json').then(response => {
+      if (!response.ok) throw new Error('Appkatalogen kunne ikkje lastast');
+      return response.json();
+    }),
+    window.VyrdepilDesign ? window.VyrdepilDesign.loadRegistry() : Promise.resolve({ logo: { files: {} } })
+  ])
+    .then(([data, registry]) => {
       const host = document.getElementById('appSections');
       if (!host) return;
+      const logos = registry && registry.logo && registry.logo.files || {};
       (data.categories || []).forEach(cat => {
         /* hidden = appen finst framleis, men skal berre nåast med direktelenkje. */
         const apps = (data.apps || []).filter(a => a.cat === cat.id && !a.hidden);
         if (!apps.length) return;
 
-        const sec = document.createElement('details');
-        sec.className = 'accordion-box section-accordion';
-        /* accent2 er standardfargen på accordion-boksen — dei andre treng ein modifikator. */
-        if (cat.accent && cat.accent !== 'accent2') sec.classList.add('accordion-box-' + cat.accent);
-        sec.open = cat.open === true;
+        const sec = document.createElement('section');
+        sec.className = 'vp-home-category';
 
-        const sum = document.createElement('summary');
         const ic = document.createElement('span');
-        ic.className = 'section-accordion-icon';
+        ic.className = 'vp-home-category-icon';
+        ic.setAttribute('aria-hidden', 'true');
         ic.innerHTML = svg(cat.icon, 28).replace(' style="vertical-align:-5px;"', '');
-        sum.appendChild(ic);
         const h2 = document.createElement('h2');
-        h2.className = 'section-accordion-title';
+        h2.className = 'vp-heading vp-home-section-heading vp-home-category-heading';
         h2.textContent = cat.label;
-        sum.appendChild(h2);
-        const count = document.createElement('span');
-        count.className = 'section-accordion-count';
-        /* Kjem-snart-korta tel ikkje med i talet. */
-        count.textContent = apps.filter(a => !a.disabled).length;
-        sum.appendChild(count);
-        sec.appendChild(sum);
+        h2.id = 'home-category-' + cat.id;
+        h2.prepend(ic);
+        sec.setAttribute('aria-labelledby', h2.id);
+        sec.appendChild(h2);
 
-        const body = document.createElement('div');
-        body.className = 'accordion-body';
         const grid = document.createElement('div');
         grid.className = 'card-grid';
-        apps.forEach(a => grid.appendChild(card(a)));
-        body.appendChild(grid);
-        sec.appendChild(body);
+        apps.forEach(a => grid.appendChild(card(a, logos)));
+        sec.appendChild(grid);
 
         host.appendChild(sec);
       });

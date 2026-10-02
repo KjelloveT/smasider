@@ -221,19 +221,14 @@
     }
 
     /* ──────────────── Modalar ──────────────── */
-    function openOverlay(id) { document.getElementById(id).classList.add('open'); }
-    function closeOverlay(id) { document.getElementById(id).classList.remove('open'); }
+    function openOverlay(id) { Vy.openModal(document.getElementById(id)); }
+    function closeOverlay(id) { Vy.closeModal(document.getElementById(id)); }
 
     function bindModals() {
         document.getElementById('btn-privacy').addEventListener('click', () => openOverlay('privacy-modal'));
         document.querySelectorAll('[data-close]').forEach(btn => {
             btn.addEventListener('click', () => closeOverlay(btn.dataset.close));
         });
-        document.querySelectorAll('.modal-overlay').forEach(ov => {
-            ov.addEventListener('click', (e) => { if (e.target === ov) ov.classList.remove('open'); });
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(ov => ov.classList.remove('open'));
-        });
+        // Vy tek hand om Escape, fokusretur og klikk på modalbakgrunnen.
     }
 })();

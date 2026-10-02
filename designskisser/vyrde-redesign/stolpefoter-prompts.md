@@ -1,0 +1,18 @@
+# Stolpeføter — kjelder og promptar
+
+To prøver laga 28. september 2026 med det innebygde imagegen-verktøyet. Referansane var den eksisterande `post-bottom.png` og `hero-post.png` i `_resources/vyrdepil-design/`. Høgre variant brukte òg den nye venstre varianten som stilreferanse.
+
+| Variant | Original lokalt | Visingsfil |
+| --- | --- | --- |
+| Venstre | `_kjelder/vyrdepil-design/post-ground-left.png` | `_resources/vyrdepil-design/post-ground-left.png` |
+| Høgre | `_kjelder/vyrdepil-design/post-ground-right.png` | `_resources/vyrdepil-design/post-ground-right.png` |
+
+Visingsfilene er skalerte til 384 × 240 px og kvantiserte til 128 fargar med alfa. Dei bevarer gjennomsikt og er om lag 14 kB kvar. CSS tek omsyn til dei gjennomsiktige margane, slik at treskaftet held 24 px breidd og same senterlinje som toppen. Biletet held fram bak skiltet; 40 px under skiltet er synleg. Den gamle toppen og botnkappa er bevarte i ressursbanken.
+
+## Venstre — endeleg prompt
+
+Use case: precise-object-edit. Asset: LEFT bottom extension of an existing illustrated wooden sign post for Vyrdepil, on a genuinely transparent alpha background. Image 1 is the edit target: the cropped bottom wooden post; Image 2 is a style reference of the full approved post. Preserve the exact warm carved wooden shaft, front-facing perspective, grain, dark hand-painted outline and painterly faceted rendering. Change only the bottom ending: remove the dark green metal cap and make the wooden post sink firmly into the earth. Add two small angular grey Norwegian stones with subtle moss beside its foot: one low broad stone on the LEFT and a smaller upright pebble on the right, with a tiny restrained earthy contact seam. The shaft enters behind the stones and terminates at ground level, no visible floating end or pointed cap. Do not redesign the pole, use a different kind of wood, or add grass/landscape/background. Single object only, no text. The top of the wooden shaft is cut straight and flush with the top image edge, so it continues behind an HTML sign. Full bottom foot and both stones visible, no cropping of sides/bottom. Compact composition, wood width approximately 60% of total object HEIGHT; stones extend horizontally, overall object width approximately 1.6 times its height. Transparent empty side margins, no checkerboard painted into pixels, no opaque rectangle or cast shadow field. Produce high quality for later downscaling. This is variant LEFT, not a sprite sheet.
+
+## Høgre — endeleg prompt
+
+Use case: precise-object-edit. Asset: RIGHT bottom extension of the same Vyrdepil sign post. Image 1 is the style and composition reference, newly approved direction for a post planted into earth. Image 2 is the original wooden material reference. Create the companion RIGHT variant: identical front-facing wooden shaft, same shaft width relative to art height, same warm wood, painted grain, outline and light. Change the rocks at its foot to be visibly different shapes and arrangement: a smaller low triangular stone on the LEFT and a larger broad flatter grey stone on the RIGHT, both with restrained moss. These must be new stone shapes, not a horizontal mirror of image 1. The post sinks behind the stones into a tiny earthy contact seam; there is no green cap or exposed bottom end. Transparent alpha background, no landscape, grass, text or shadow rectangle. The top shaft is cropped flush at the TOP image edge; all rocks and ground contact fully visible at bottom. A single isolated production sprite with generous transparent sides. Keep artwork in the same painterly faceted style as the references. High quality for later scaling. No sprite sheet, only the RIGHT companion.

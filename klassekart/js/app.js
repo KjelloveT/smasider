@@ -318,22 +318,16 @@ const App = (() => {
        ════════════════════════════════ */
 
     function openModal(id) {
-        document.getElementById(id).classList.remove('hidden');
+        Vy.openModal(document.getElementById(id));
     }
 
     function closeModal(id) {
-        document.getElementById(id).classList.add('hidden');
+        Vy.closeModal(document.getElementById(id));
     }
 
     function bindModals() {
         document.querySelectorAll('[data-close]').forEach(btn => {
             btn.addEventListener('click', () => closeModal(btn.dataset.close));
-        });
-
-        document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay) overlay.classList.add('hidden');
-            });
         });
 
         document.getElementById('btn-students-ok').addEventListener('click', addStudents);

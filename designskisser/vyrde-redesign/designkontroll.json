@@ -1,0 +1,64 @@
+{
+  "date": "2026-09-30",
+  "scope": "Alle HTML-sider i repoet, utanfor .git, .worktrees, node_modules og _kjelder.",
+  "sourceOfTruth": {
+    "development": "AGENTS.md",
+    "design": "DESIGN.md",
+    "sharedStylesheet": "css/vyrdepil-design.css"
+  },
+  "staticAudit": {
+    "command": "node designsystem/check-stylesheets.cjs",
+    "htmlPages": 65,
+    "localStylesheetScriptImportAndUrlReferences": 1057,
+    "cssImportsAndUrlsChecked": true,
+    "sharedStylesheetOnEveryPage": true,
+    "designMarkerOnEveryPage": true,
+    "missingLocalAssets": 0,
+    "retiredDesignReferences": 0,
+    "result": "passed"
+  },
+  "automatedChecks": [
+    {
+      "command": "node --test --test-isolation=none heimsank/tests/flow.test.cjs",
+      "passed": 7,
+      "failed": 0
+    }
+  ],
+  "removedUnusedAssets": [
+    "css/home.css",
+    "css/neobrutalisme.css",
+    "js/neobrutalisme.js",
+    "js/neo-header.js",
+    "css/vyrdepil-migration.css",
+    "neobrutalisme_test/*.css and *.html",
+    "rettslause_raud/tiles_preview.html"
+  ],
+  "browserSmokeChecks": [
+    {
+      "route": "dagsvegen/",
+      "result": "Shared header, legible clock, and non-overlapping tool rail checked."
+    },
+    {
+      "route": "frodekapp/editor.html",
+      "result": "Shared header and quiz editor loaded."
+    },
+    {
+      "route": "heimsank/",
+      "result": "Shared navigation loaded while the distinct game surface remained intact."
+    },
+    {
+      "route": "bolkestokk/bygg.html",
+      "result": "Shared navigation loaded while the block workspace remained intact."
+    },
+    {
+      "route": "quiz/quiz-join.html",
+      "result": "Shared header, join form, and updated icon loaded."
+    },
+    {
+      "route": "wikidata-tester/",
+      "result": "Shared header and list-building controls loaded with the light shared palette."
+    }
+  ],
+  "retainedReferenceFile": "neobrutalisme_test/lucide_icons at main · lucide-icons_lucide.pdf",
+  "scopeLimit": "Statisk kjeldesjekk dekkjer alle sidene. Nettlesarprøvene er røykprøver av dei oppførte sidene, ikkje full gjennomspeling av alle funksjonar i alle appar."
+}

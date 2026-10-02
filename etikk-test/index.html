@@ -7,12 +7,11 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="etikk-test.css">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+  <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-light-theme="earth" data-dark-theme="cyberpunk" data-theme="earth">
-    <neo-header></neo-header>
-
+<body class="vp-page" data-vp-design data-vp-app="etikk-test" data-vp-site-footer>
     <div class="page-wrapper">
         <main class="main-content">
             
@@ -97,7 +96,7 @@
             <!-- PRIVACY NOTICE -->
             <div class="box4" style="margin-top: 32px;">
                 <!-- Inline-stilen her gjentok `background: var(--accent); color: var(--text-on-accent)`
-                     og ville overstyrt fiksen i neobrutalisme.css. .box4 .box-header
+                     og ville overstyrt fellesstilen for .box4 .box-header
                      gir same hovudet med lesbar kontrast i alle 21 tema. -->
                 <div class="box-header">
                     <strong style="display: flex; align-items: center; gap: 8px;">
@@ -113,7 +112,6 @@
         </main>
     </div>
 
-    <script src="../js/neo-header.js"></script>
     <script>
         const testData = [
             {
@@ -411,5 +409,10 @@
             document.getElementById('intro-screen').classList.add('active');
         }
     </script>
+  <script src="../js/vyrdepil-icons.js"></script>
+  <script src="../js/vyrdepil-util.js?v=1.2"></script>
+  <script src="../js/vyrdepil-design.js?v=1.1"></script>
+  <script src="../js/vyrdepil-app-shell.js?v=8"></script>
+  <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>
 </html>

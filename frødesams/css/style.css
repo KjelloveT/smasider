@@ -1,4 +1,4 @@
-/* Frødesams — spel-spesifikke stilar oppå neobrutalisme.css */
+/* Frødesams — spelspesifikke tillegg til fellesstilen */
 
 /* ===== Grunnleggande ===== */
 .hidden { display: none !important; }
@@ -40,7 +40,7 @@
   line-height: 1.4;
 }
 
-/* ===== Form (ikkje i neobrutalisme.css) ===== */
+/* ===== Appspesifikke skjemafelt ===== */
 .form-group { margin-bottom: 18px; }
 .form-group label {
   display: block;

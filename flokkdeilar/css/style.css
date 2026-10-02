@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════
    STYLE.CSS — Flokkdeilar-spesifikk stil
-   Utvidar neobrutalisme.css
+   Brukar felles Vyrdepil-palett og navigasjon
    ══════════════════════════════════════ */
 
 /* ── Form-element ── */
@@ -605,8 +605,8 @@
    Berre gruppekorta skal på papiret.
    ══════════════════════════════════════ */
 @media print {
-    neo-header,
-    .site-footer,
+    .vp-header,
+    .vp-site-footer,
     #setupBox,
     #warningBox,
     .btn-row,

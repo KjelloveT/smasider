@@ -8,132 +8,130 @@
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
     <link rel="preload" href="../_libs/andika/Andika-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="../css/vyrde.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="../js/vyrde.js" defer></script>
-    <script src="../js/neo-header.js" defer></script>
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+  <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
-
-<neo-header></neo-header>
-
-<div class="page-wrapper">
-<main class="main-content">
-
-    <!-- Hero. Ingen logo enno: plasshaldarane skal ikkje sjå ferdige ut. -->
-    <div class="box2 hero-box ljod-hero">
-        <div class="hero-text">
-            <h1>Ljodstigen</h1>
+<body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-layout="standard" data-vp-site-footer>
+<main id="main" class="vp-shell main-content">
+  <div class="vp-standard">
+    <section class="vp-hero-stage" aria-label="Ljodstigen">
+      <div class="vp-hero">
+        <div class="vp-hero-content vp-hero-content--app">
+          <img class="ljod-hero-mark" src="../_resources/vyrdepil-design/logos/ljodstigen-mala.png" width="384" height="384" alt="">
+          <div class="vp-hero-copy">
+            <h1 class="vp-title">Ljodstigen</h1>
             <p>Frå éin bokstavlyd til heile ord — i ditt eige tempo.</p>
+          </div>
         </div>
-        <span class="vyrde" data-vyrde="wave" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <div class="vp-mascot-perch">
+      <img data-vp-mascot src="../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt="">
     </div>
 
-    <div class="box1 ljod-alpha">
-        <p><strong>Dette er ei tidleg utgåve.</strong> All lyd er spelt inn, og alle
-        fire modusane verkar. Figurane er framleis enkle geometriske former — dei står
-        på plass til vi veit at spelet fungerer med elevar.</p>
+    <div class="vp-standard-main vp-standard-play">
+      <div class="vp-notice vp-notice--warning" role="status">
+        <span class="vp-notice-icon" data-icon="helpCircle" aria-hidden="true"></span>
+        <p><strong>Dette er ei tidleg utgåve.</strong> Alle fire modusane verkar. Figurane er enno enkle geometriske former, medan me prøver ut spelet med elevar.</p>
+      </div>
+
+      <section class="vp-panel vp-panel--plain" aria-labelledby="profile-title">
+        <div class="vp-content">
+          <h2 class="vp-panel-heading vp-heading" id="profile-title">Kven speler?</h2>
+          <p class="vp-help">Same nettbrett kan brukast av fleire. Vel figuren din — han hugsar kor langt du er komen.</p>
+          <div id="profiles" class="ljod-profiles"></div>
+        </div>
+      </section>
     </div>
 
-    <!-- Profilar -->
-    <section class="box4">
-        <div class="box-header"><h2>Kven speler?</h2></div>
-        <div class="box-body">
-            <p class="ljod-hint">Same nettbrett kan brukast av fleire. Vel figuren din —
-            han hugsar kor langt du er komen.</p>
-            <div id="profiles" class="ljod-profiles"></div>
+    <aside class="vp-sign vp-sign--grounded vp-standard-support" aria-label="Innstillingar">
+      <section class="vp-panel">
+        <div class="vp-decor" data-vp-corners aria-hidden="true">
+          <span class="vp-corner"></span><span class="vp-corner"></span>
+          <span class="vp-corner"></span><span class="vp-corner"></span>
         </div>
-    </section>
-
-    <!-- Spelarpanel -->
-    <section id="player" class="ljod-player" hidden>
-
-        <div class="box4">
-            <div class="box-header"><h2 id="playerName">Spelar</h2></div>
-            <div class="box-body">
-                <div id="stars"></div>
-                <h3 class="heading4">Kva vil du spele?</h3>
-                <div id="modes" class="ljod-modes"></div>
-
-                <!-- Bokstavjakta er ikkje ein ferdig modus enno, og skal
-                     ikkje stå i lista over dei fire som er det. Han ligg
-                     for seg sjølv, tydeleg merkt, så han kan prøvast på
-                     iPad utan at nokon trur han er ferdig. -->
-                <h3 class="heading4">Under arbeid</h3>
-                <div class="ljod-modes">
-                    <a href="jakta.html" class="ljod-mode ljod-mode-proeve">
-                        <span class="ljod-mode-title">Bokstavjakta</span>
-                        <span class="ljod-mode-blurb">Plattformspel der du jaktar bokstavar.
-                        Berre ei prøveflate enno — gå og hopp, sjå at det går jamt.</span>
-                        <span class="ljod-mode-flag ljod-flag-open">Prøveutgåve</span>
-                    </a>
-                </div>
-
-                <!-- Banene læraren har laga i Banelagar. Eigen seksjon,
-                     alltid open: dei er laga til denne eleven, og skal
-                     ikkje vente på ei opplåsing. Borte når det ikkje
-                     finst nokon. -->
-                <div data-laerarbaner hidden>
-                    <h3 class="heading4">Banene til læraren</h3>
-                    <div id="laerarbaner" class="ljod-modes"></div>
-                </div>
+        <div class="vp-content vp-stack">
+          <h2 class="vp-panel-heading vp-heading">Tilpass øvinga</h2>
+          <details class="vp-accordion vp-support-section" data-vp-support>
+            <summary>Skrift</summary>
+            <div class="vp-accordion-body">
+              <p class="vp-help">Vel skrift etter det som er lettast å lese.</p>
+              <div id="fontpick" class="vp-actions ljod-btn-row"></div>
             </div>
-        </div>
-
-        <div class="box5">
-            <div class="box-tabs" role="tablist">
-                <button class="box-tab active" data-tab="skog" role="tab" aria-selected="true">Skogen</button>
-                <button class="box-tab" data-tab="merke" role="tab" aria-selected="false">Merke</button>
-                <button class="box-tab" data-tab="laerar" role="tab" aria-selected="false">For læraren</button>
+          </details>
+          <details class="vp-accordion vp-support-section" data-vp-support data-voice-section>
+            <summary>Stemme</summary>
+            <div class="vp-accordion-body">
+              <p class="vp-help">Vel stemma som les bokstavlydane og orda.</p>
+              <div id="voicepick" class="vp-actions ljod-btn-row"></div>
             </div>
-            <div class="box-body">
-                <div data-pane="skog">
-                    <p class="ljod-hint">Kvar bokstav er eit tre. Di betre du kan han,
-                    di større veks det. Trea visnar aldri.</p>
-                    <div id="garden"></div>
-                </div>
-                <div data-pane="merke" hidden>
-                    <div id="badges"></div>
-                </div>
-                <div data-pane="laerar" hidden>
-                    <div id="laerar"></div>
-                    <div class="ljod-btn-row" style="justify-content:flex-start">
-                        <button class="btn" id="printLaerar" type="button">Skriv ut</button>
-                        <a class="btn" href="banelagar.html">Lag eigne baner</a>
-                    </div>
-                    <p class="ljod-hint">I <strong>Banelagar</strong> teiknar du eigne baner
-                    til Bokstavjakta. Du lagar terrenget; spelet vel bokstavane tilpassa kvar
-                    elev — eller du kan skrive inn kva de skal øve på denne veka.</p>
-                </div>
+          </details>
+          <details class="vp-accordion vp-support-section" data-vp-support>
+            <summary>Modusar</summary>
+            <div class="vp-accordion-body">
+              <p class="vp-help">Opne alle modusane for å prøve dei. Dette endrar ikkje framgangen til eleven.</p>
+              <div id="allmodes"></div>
             </div>
+          </details>
         </div>
+      </section>
+    </aside>
 
-    </section>
+    <section id="player" class="ljod-player vp-stack vp-standard-wide" hidden>
+      <section class="vp-panel vp-panel--plain" aria-labelledby="playerName">
+        <div class="vp-content vp-stack">
+          <h2 class="vp-heading" id="playerName">Spelar</h2>
+          <div id="stars"></div>
+          <h3 class="vp-panel-heading vp-heading">Kva vil du spele?</h3>
+          <div id="modes" class="ljod-modes"></div>
 
-    <!-- Innstillingar -->
-    <section class="box1 ljod-settings">
-        <h2 class="heading4 no-mt">Skrift</h2>
-        <p class="ljod-hint">Lesefonten skil tydeleg mellom store <span class="ljod-sample">I</span>
-        og små <span class="ljod-sample">l</span>. Systemfonten på mange maskiner gjer det ikkje.</p>
-        <div id="fontpick" class="ljod-btn-row"></div>
+          <h3 class="vp-heading vp-heading--small">Under arbeid</h3>
+          <div class="ljod-modes">
+            <a href="jakta.html" class="ljod-mode vp-panel vp-panel--plain ljod-mode-proeve">
+              <span class="ljod-mode-title">Bokstavjakta</span>
+              <span class="ljod-mode-blurb">Plattformspel der du jaktar bokstavar. Berre ei prøveflate enno — gå og hopp, sjå at det går jamt.</span>
+              <span class="ljod-mode-flag ljod-flag-open">Prøveutgåve</span>
+            </a>
+          </div>
 
-        <div data-voice-section>
-            <h2 class="heading4">Stemme</h2>
-            <p class="ljod-hint">Kven som les bokstavlydane og orda.</p>
-            <div id="voicepick" class="ljod-btn-row"></div>
+          <div data-laerarbaner hidden>
+            <h3 class="vp-heading vp-heading--small">Banene til læraren</h3>
+            <div id="laerarbaner" class="ljod-modes"></div>
+          </div>
         </div>
+      </section>
 
-        <h2 class="heading4">Modusar</h2>
-        <p class="ljod-hint">Normalt opnar modusane seg etter kvart som eleven meistrar
-        bokstavar. Her kan du opne alle med ein gong — nyttig når du vil prøve spelet,
-        eller la ein elev sjå kva som kjem. Progresjonen blir ikkje rørt.</p>
-        <div id="allmodes"></div>
+      <section class="vp-panel vp-panel--plain" aria-label="Skog, merke og læraroversikt">
+        <div class="vp-content vp-stack">
+          <div class="ljod-tabs" role="tablist" aria-label="Spelaroversikt">
+            <button class="vp-button vp-button--quiet vp-button--compact active" data-tab="skog" role="tab" aria-selected="true">Skogen</button>
+            <button class="vp-button vp-button--quiet vp-button--compact" data-tab="merke" role="tab" aria-selected="false">Merke</button>
+            <button class="vp-button vp-button--quiet vp-button--compact" data-tab="laerar" role="tab" aria-selected="false">For læraren</button>
+          </div>
+          <div data-pane="skog">
+            <p class="ljod-hint">Kvar bokstav er eit tre. Di betre du kan han, di større veks det. Trea visnar aldri.</p>
+            <div id="garden"></div>
+          </div>
+          <div data-pane="merke" hidden>
+            <div id="badges"></div>
+          </div>
+          <div data-pane="laerar" hidden class="vp-stack">
+            <div id="laerar"></div>
+            <div class="vp-actions">
+              <button class="vp-button" id="printLaerar" type="button">Skriv ut</button>
+              <a class="vp-button" href="banelagar.html">Lag eigne baner</a>
+            </div>
+            <p class="ljod-hint">I <strong>Banelagar</strong> teiknar du eigne baner til Bokstavjakta. Spelet vel bokstavane tilpassa kvar elev, eller du kan skrive inn kva de skal øve på denne veka.</p>
+          </div>
+        </div>
+      </section>
     </section>
-
+  </div>
 </main>
-</div>
-
 <script src="../js/vyrdepil-storage.js"></script>
 <script src="js/letters.js"></script>
 <script src="js/words.js"></script>
@@ -157,5 +155,10 @@
 <script src="js/laerarbaner.js"></script>
 <script src="js/meny.js"></script>
 
+  <script src="../js/vyrdepil-icons.js"></script>
+  <script src="../js/vyrdepil-util.js?v=1.2"></script>
+  <script src="../js/vyrdepil-design.js?v=1.1"></script>
+  <script src="../js/vyrdepil-app-shell.js?v=8"></script>
+  <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>
 </html>

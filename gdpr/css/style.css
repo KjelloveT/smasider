@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════
    PROTOKOLLSMIA — stil
 
-   Utvidar css/neobrutalisme.css. Designsystemet har ingen skjemastil, så
+   Appspesifikke skjemaelement kjem her; resten følgjer det felles designsystemet.
    inndatafelta er definerte her med `gd-`-prefiks — same mønster som
    leitekryss (`lk-`) og ordskodde (`os-`).
 
@@ -213,7 +213,7 @@
 #printArea { display: none; }
 
 @media print {
-  neo-header, .page-wrapper { display: none !important; }
+  .vp-header, .page-wrapper { display: none !important; }
   #printArea { display: block; }
 
   body { background: #ffffff; color: #1a1a1a; }
@@ -615,4 +615,4 @@ a.gd-krav-lenkje:hover { text-decoration: underline; text-underline-offset: 2px;
   line-height: 1.55;
   margin: 0 0 8px;
 }
-.gd-sitat-stor footer { font-size: 0.86rem; color: var(--muted); }
+.gd-sitat-stor .gd-citation { font-size: 0.86rem; color: var(--muted); }

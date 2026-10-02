@@ -72,9 +72,9 @@ const GeoMap = (function () {
       c.setAttribute('class', cls);
       return c;
     };
-    grp.appendChild(circ(15, 'map-pin-halo'));
-    grp.appendChild(circ(9.5, 'map-pin-body'));
-    grp.appendChild(circ(3.8, 'map-pin-dot'));
+    grp.appendChild(circ(18, 'map-pin-halo'));
+    grp.appendChild(circ(10.5, 'map-pin-body'));
+    grp.appendChild(circ(4.2, 'map-pin-dot'));
     return grp;
   }
 
@@ -113,7 +113,7 @@ const GeoMap = (function () {
     function apply() {
       svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
       // Hald pinnen tilnærma konstant på skjermen uansett zoom.
-      if (pinEl) pinEl.setAttribute('transform', `translate(${pin.x} ${pin.y}) scale(${(1.2 * vb.w / W).toFixed(3)})`);
+      if (pinEl) pinEl.setAttribute('transform', `translate(${pin.x} ${pin.y}) scale(${(2.4 * vb.w / W).toFixed(3)})`);
     }
     function center() { return { x: vb.x + vb.w / 2, y: vb.y + vb.h / 2 }; }
 

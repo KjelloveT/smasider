@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heimsank — rekn, oppdag og saml</title><link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="../css/neobrutalisme.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/setup.css">
 <link rel="stylesheet" href="css/cards.css?v=1.52.2">
 <link rel="stylesheet" href="css/game.css">
 <link rel="stylesheet" href="css/dialogs.css">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+      <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body class="hs-app" data-light-theme="lavender" data-dark-theme="space" data-theme="lavender">
-<neo-header></neo-header><div class="page-wrapper"><main class="main-content hs-main">
+<body class="hs-app vp-page" data-vp-app="heimsank" data-vp-layout="standard" data-vp-preserve data-vp-design data-vp-site-footer>
+<div class="page-wrapper"><main class="main-content hs-main">
 <div id="setupScreen">
 <header class="hs-top"><a class="hs-brand" href="./"><img class="hs-brand-mark" src="assets/heimsank-logo.png" alt="">Heimsank<span class="hs-brand-dot">.</span></a><nav class="hs-actions" aria-label="Dine samlingar"><span class="hs-points" aria-live="polite"><span data-icon="coins"></span><strong id="pointsValue">0</strong> poeng</span><button class="hs-btn" onclick="openCollectionViewer()"><span data-icon="folder"></span>Samlingane mine</button><button class="hs-btn" onclick="openBadgeGallery()"><span data-icon="award"></span>Merke</button></nav></header>
 <section class="hs-hero" aria-labelledby="heroTitle"><div class="hs-hero-copy"><span class="hs-eyebrow">Små reknestykke. Store oppdagingar.</span><h1 id="heroTitle">Rekn. Oppdag.<br><span>Saml heile verda.</span></h1><p>Seks rette svar, eitt nytt kort. Finn favorittane dine — og kanskje noko heilt sjeldsynt.</p><div class="hs-rarities" aria-label="Fire sjeldsemder"><span data-rarity="vanleg">Vanleg</span><span data-rarity="sjeldgjevt">Sjeldgjævt</span><span data-rarity="segngjeten">Segngjeten</span><span data-rarity="gudebore">Gudebore</span></div></div><div class="hs-showcase"><div class="hs-orbit" aria-hidden="true"></div><span class="hs-motif hs-motif-one" aria-hidden="true">×</span><span class="hs-motif hs-motif-two" aria-hidden="true">+</span><div id="fanContainer" class="hs-fan" aria-hidden="true"></div><p id="fanCatLabel" class="hs-fan-label">Ei verd av kort ventar på deg</p></div></section>
@@ -25,16 +26,14 @@
 <section class="hs-question hs-panel" aria-label="Rekneoppgåve"><div class="hs-progress-heading"><span id="gameDiff"></span><span id="progLabel" aria-live="polite">0 av 6 rette</span></div><div class="hs-progress"><div id="progPips" class="hs-pips" role="progressbar" aria-label="Rette svar mot neste kort" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"></div><span class="hs-next-card" aria-hidden="true" data-icon="layers"></span></div><p class="hs-question-hint">Kva blir svaret?</p><div class="hs-expression" id="qBox"></div><form id="answerForm" class="hs-answer" novalidate><label class="hs-sr-only" for="ansInput">Svaret ditt</label><input type="number" inputmode="numeric" id="ansInput" class="hs-answer-input" placeholder="?" autocomplete="off"><button class="hs-btn hs-primary" id="checkBtn" type="submit">Sjekk svar <span data-icon="check"></span></button></form><div class="hs-feedback" id="feedback" role="status" aria-live="polite"></div></section>
 <section id="pendingArea" class="hs-pending hs-panel hidden" aria-labelledby="pendingTitle"><div id="pendingSlotMain" class="hs-pending-card"></div><div><span id="pendingRarityLabel" class="hs-eyebrow"></span><h2 id="pendingTitle">Nytt kort</h2><p id="pendingCardName"></p></div></section>
 <section id="collBar" class="hs-collection hs-panel" aria-labelledby="collShelfTitle"><div class="hs-collection-head"><span id="collShelfTitle"><span data-icon="layers"></span>Samling · <strong id="collCount">0</strong> unike kort</span><span class="hs-shelf-label">Korthylle</span></div><div id="collBarInner"><p id="dragInstruction" class="hs-muted hidden"></p><div id="collRow" class="hs-slots"></div><div class="hs-collection-footer"><span id="trashZone" class="hs-trash"><span data-icon="trash"></span>Dra hit for å fjerne</span><button class="hs-btn" id="clearAllBtn" onclick="confirmClearAll()">Tøm samlinga</button></div></div></section></div>
-<footer class="hs-footer">Heimsank<span>Rekn litt. Oppdag meir.</span></footer></main></div>
-<div id="revealModal" class="hs-overlay" role="dialog" aria-modal="true" aria-labelledby="revealTitle"><section class="hs-dialog hs-reveal"><span class="hs-eyebrow">Ei ny oppdaging</span><h2 id="revealTitle">Du fann eit nytt kort!</h2><div id="flipCard" class="hs-reveal-card"><div class="hs-card-back" aria-hidden="true"><img src="assets/kortbakside.png" alt=""></div><div id="revealFront"></div></div><p id="revealSub" role="status"></p><button id="revealBtn" class="hs-btn hs-primary" onclick="afterReveal()">Hald fram</button></section></div>
-<div id="cardModal" class="hs-overlay" role="dialog" aria-modal="true" aria-label="Kortdetaljar"><section class="hs-dialog hs-detail"><button class="hs-btn hs-close" onclick="closeCardModal()" aria-label="Lukk kortdetaljar"><span data-icon="x"></span></button><div id="modalCard"></div><nav class="hs-card-navigation" aria-label="Bla mellom kort"><button class="hs-btn" id="cardPrev" onclick="navigateCard(-1)">Førre</button><span id="cardPosition"></span><button class="hs-btn" id="cardNext" onclick="navigateCard(1)">Neste</button></nav></section></div>
-<div id="badgeModal" class="hs-overlay" role="dialog" aria-modal="true" aria-labelledby="badgeTitle"><section class="hs-dialog hs-album"><button class="hs-btn hs-close" onclick="closeBadgeGallery()" aria-label="Lukk merke"><span data-icon="x"></span></button><span class="hs-eyebrow">Små og store bragder</span><h2 id="badgeTitle">Merka dine</h2><p class="hs-muted">Sjå kva du har klart, og kva som ventar.</p><div id="badgeGrid" class="hs-badge-grid"></div></section></div>
-<div id="collectionModal" class="hs-overlay" role="dialog" aria-modal="true" aria-labelledby="albumTitle"><section class="hs-dialog hs-album"><button class="hs-btn hs-close" onclick="closeCollectionModal()" aria-label="Lukk samlingane"><span data-icon="x"></span></button><span class="hs-eyebrow">Dine oppdagingar</span><h2 id="albumTitle">Samlingane mine</h2><p class="hs-muted">Favorittane dine, samla på ein stad.</p><div id="collectionGrid"></div></section></div>
-<script src="../js/neo-header.js"></script>
-<script src="../js/neobrutalisme.js"></script>
+</main></div>
+<div id="revealModal" class="hs-overlay vp-modal-backdrop" data-vp-modal-escape="local" role="dialog" aria-modal="true" aria-labelledby="revealTitle"><section class="hs-dialog hs-reveal vp-modal-panel"><span class="hs-eyebrow">Ei ny oppdaging</span><h2 id="revealTitle">Du fann eit nytt kort!</h2><div id="flipCard" class="hs-reveal-card"><div class="hs-card-back" aria-hidden="true"><img src="assets/kortbakside.png" alt=""></div><div id="revealFront"></div></div><p id="revealSub" role="status"></p><button id="revealBtn" class="hs-btn hs-primary" onclick="afterReveal()">Hald fram</button></section></div>
+<div id="cardModal" class="hs-overlay vp-modal-backdrop" data-vp-modal-escape="local" role="dialog" aria-modal="true" aria-label="Kortdetaljar"><section class="hs-dialog hs-detail vp-modal-panel"><button class="hs-btn hs-close" onclick="closeCardModal()" aria-label="Lukk kortdetaljar"><span data-icon="x"></span></button><div id="modalCard"></div><nav class="hs-card-navigation" aria-label="Bla mellom kort"><button class="hs-btn" id="cardPrev" onclick="navigateCard(-1)">Førre</button><span id="cardPosition"></span><button class="hs-btn" id="cardNext" onclick="navigateCard(1)">Neste</button></nav></section></div>
+<div id="badgeModal" class="hs-overlay vp-modal-backdrop" data-vp-modal-escape="local" role="dialog" aria-modal="true" aria-labelledby="badgeTitle"><section class="hs-dialog hs-album vp-modal-panel"><button class="hs-btn hs-close" onclick="closeBadgeGallery()" aria-label="Lukk merke"><span data-icon="x"></span></button><span class="hs-eyebrow">Små og store bragder</span><h2 id="badgeTitle">Merka dine</h2><p class="hs-muted">Sjå kva du har klart, og kva som ventar.</p><div id="badgeGrid" class="hs-badge-grid"></div></section></div>
+<div id="collectionModal" class="hs-overlay vp-modal-backdrop" data-vp-modal-escape="local" role="dialog" aria-modal="true" aria-labelledby="albumTitle"><section class="hs-dialog hs-album vp-modal-panel"><button class="hs-btn hs-close" onclick="closeCollectionModal()" aria-label="Lukk samlingane"><span data-icon="x"></span></button><span class="hs-eyebrow">Dine oppdagingar</span><h2 id="albumTitle">Samlingane mine</h2><p class="hs-muted">Favorittane dine, samla på ein stad.</p><div id="collectionGrid"></div></section></div>
 <script src="../js/vyrdepil-storage.js"></script>
-<script src="../js/vyrdepil-icons.js"></script>
-<script src="../js/vyrdepil-util.js"></script>
+
+
 <script src="js/icons.js"></script>
 <script src="js/state.js"></script>
 <script src="js/utils.js"></script>
@@ -52,4 +51,13 @@
 <script src="js/collection.js?v=1.53"></script>
 <script src="js/progression-ui.js?v=1.53"></script>
 <script src="js/main.js?v=1.53"></script>
+
+
+
+
+  <script src="../js/vyrdepil-icons.js"></script>
+  <script src="../js/vyrdepil-util.js?v=1.2"></script>
+  <script src="../js/vyrdepil-design.js?v=1.1"></script>
+  <script src="../js/vyrdepil-app-shell.js?v=8"></script>
+  <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body></html>

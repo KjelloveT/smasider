@@ -141,9 +141,7 @@ LK.print = (function () {
     };
   }
 
-  function escapeXml(text) {
-    return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
+  const escapeXml = Vy.escapeHtml;
 
   function buildSVG() {
     const g = geometry();

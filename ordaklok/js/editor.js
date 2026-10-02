@@ -238,15 +238,13 @@
   const bulkInput = document.getElementById('bulkInput');
   document.getElementById('bulkBtn').addEventListener('click', () => {
     bulkInput.value = '';
-    bulkOverlay.classList.add('open');
+    Vy.openModal(bulkOverlay);
     setTimeout(() => bulkInput.focus(), 50);
   });
-  function closeBulk() { bulkOverlay.classList.remove('open'); }
+  function closeBulk() { Vy.closeModal(bulkOverlay); }
   document.getElementById('bulkClose').addEventListener('click', closeBulk);
   document.getElementById('bulkCancel').addEventListener('click', closeBulk);
-  bulkOverlay.addEventListener('click', (e) => {
-    if (e.target === bulkOverlay) closeBulk();
-  });
+  Vy.bindOverlayClose(bulkOverlay);
   document.getElementById('bulkApply').addEventListener('click', () => {
     const text = bulkInput.value;
     const newPairs = parseBulk(text);
@@ -301,7 +299,7 @@
       alert('Legg til minst eitt par før du lagar delelenkje.');
       return;
     }
-    shareLinkOverlay.classList.add('open');
+    Vy.openModal(shareLinkOverlay);
     shareLinkInput.value = 'Lagar lenkje…';
     shareLinkInfo.textContent = '';
     try {
@@ -313,8 +311,8 @@
       shareLinkInput.value = 'Klarte ikkje å lage lenkje: ' + e.message;
     }
   });
-  document.getElementById('shareLinkClose').addEventListener('click', () => shareLinkOverlay.classList.remove('open'));
-  shareLinkOverlay.addEventListener('click', (e) => { if (e.target === shareLinkOverlay) shareLinkOverlay.classList.remove('open'); });
+  document.getElementById('shareLinkClose').addEventListener('click', () => Vy.closeModal(shareLinkOverlay));
+  Vy.bindOverlayClose(shareLinkOverlay);
   document.getElementById('shareLinkCopy').addEventListener('click', async () => {
     if (!currentShareUrl) return;
     try {
@@ -328,14 +326,6 @@
   });
   document.getElementById('shareLinkOpenBtn').addEventListener('click', () => {
     if (currentShareUrl) window.open(currentShareUrl, '_blank', 'noopener');
-  });
-
-  // Esc lukkar overlays
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (bulkOverlay.classList.contains('open')) closeBulk();
-      if (shareLinkOverlay.classList.contains('open')) shareLinkOverlay.classList.remove('open');
-    }
   });
 
   // Advar ved unsaved changes

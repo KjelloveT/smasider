@@ -303,7 +303,7 @@
     shareLinkInput.value = 'Lagar lenkje…';
     shareLinkInfo.textContent = '';
     resetQR(true);
-    shareLinkOverlay.classList.add('open');
+    Vy.openModal(shareLinkOverlay);
     try {
       const url = await OrdaklokShare.buildShareUrl(list);
       currentShareUrl = url;
@@ -318,13 +318,11 @@
   }
 
   function closeShareLink() {
-    shareLinkOverlay.classList.remove('open');
+    Vy.closeModal(shareLinkOverlay);
   }
 
   shareLinkClose.addEventListener('click', closeShareLink);
-  shareLinkOverlay.addEventListener('click', (e) => {
-    if (e.target === shareLinkOverlay) closeShareLink();
-  });
+  Vy.bindOverlayClose(shareLinkOverlay);
 
   shareLinkCopyQR.addEventListener('click', async () => {
     if (!shareLinkQR.width) return;
@@ -363,7 +361,7 @@
   let pendingImportList = null;
 
   function closeShareImport() {
-    shareImportOverlay.classList.remove('open');
+    Vy.closeModal(shareImportOverlay);
     // Fjern d/dz frå URL utan å reloade
     const url = new URL(location.href);
     url.searchParams.delete('d');
@@ -373,9 +371,7 @@
 
   shareImportClose.addEventListener('click', closeShareImport);
   shareImportCancel.addEventListener('click', closeShareImport);
-  shareImportOverlay.addEventListener('click', (e) => {
-    if (e.target === shareImportOverlay) closeShareImport();
-  });
+  Vy.bindOverlayClose(shareImportOverlay);
 
   shareImportAccept.addEventListener('click', () => {
     if (!pendingImportList) return;
@@ -399,7 +395,7 @@
       if (!v.ok) {
         shareImportPreview.textContent = 'Lenkja inneheld ikkje ei gyldig liste: ' + v.error;
         shareImportAccept.disabled = true;
-        shareImportOverlay.classList.add('open');
+        Vy.openModal(shareImportOverlay);
         return;
       }
       pendingImportList = v.list;
@@ -430,7 +426,7 @@
         preview.appendChild(li);
       }
       shareImportPreview.appendChild(preview);
-      shareImportOverlay.classList.add('open');
+      Vy.openModal(shareImportOverlay);
     } catch (e) {
       console.warn('Klarte ikkje å lese delelenkje:', e);
     }
@@ -503,14 +499,6 @@
 
   // ---- Eksporter alle lister ----
   document.getElementById('exportAllBtn').addEventListener('click', exportAllLists);
-
-  // Esc lukkar overlays
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (shareLinkOverlay.classList.contains('open')) closeShareLink();
-      if (shareImportOverlay.classList.contains('open')) closeShareImport();
-    }
-  });
 
   // Init
   renderList();

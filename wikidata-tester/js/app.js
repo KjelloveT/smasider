@@ -435,13 +435,18 @@
     function showImageModal(url) {
         let modal = $('imageModal');
         if (!modal) {
-            modal = el('div', { id: 'imageModal', className: 'image-modal' });
-            modal.addEventListener('click', () => { modal.style.display = 'none'; });
-            document.addEventListener('keydown', e => { if (e.key === 'Escape') modal.style.display = 'none'; });
+            modal = el('div', { id: 'imageModal', className: 'image-modal vp-modal-backdrop' });
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-modal', 'true');
+            modal.setAttribute('aria-label', 'Stort bilete');
             document.body.append(modal);
         }
-        modal.replaceChildren(el('img', { src: url.replace(/^http:/, 'https:'), alt: 'Stort bilete' }));
-        modal.style.display = 'block';
+        modal.replaceChildren(el('img', {
+            className: 'vp-modal-panel vp-modal-panel--media',
+            src: url.replace(/^http:/, 'https:'),
+            alt: 'Stort bilete'
+        }));
+        Vy.openModal(modal);
     }
 
     // ---------- Eksport ----------

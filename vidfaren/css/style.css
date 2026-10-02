@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════
-   LANDKJENNING — sidestil (utvidar neobrutalisme.css)
+   LANDKJENNING — appspesifikke tillegg til fellesstilen
    ══════════════════════════════════════════════ */
 
 .page-wrapper { max-width: 1000px; margin: 0 auto; padding: 0 16px 64px; }
@@ -125,9 +125,9 @@
 .lk-map-btn:active { transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--shadow); }
 .world-svg .wland { fill: var(--surface); stroke: var(--border); stroke-width: 0.4; }
 .world-svg .wland-hl { fill: var(--accent); }
-.map-pin-halo { fill: var(--accent2); opacity: 0.22; }
-.map-pin-body { fill: var(--accent2); stroke: var(--border); stroke-width: 1.4; }
-.map-pin-dot { fill: #fff; stroke: var(--border); stroke-width: 1; }
+.map-pin-halo { fill: #efb29d; opacity: 0.35; }
+.map-pin-body { fill: #efb29d; stroke: #142820; stroke-width: 2.8; }
+.map-pin-dot { fill: #142820; stroke: #fffdf5; stroke-width: 2; }
 /* Berre opasitet i innteljinga — ingen flytting, så markøren held seg på punktet. */
 .map-pin { animation: lk-pin-in .3s ease; }
 @keyframes lk-pin-in { from { opacity: 0; } to { opacity: 1; } }

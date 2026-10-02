@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════
-   RISSVERK — stil oppå neobrutalisme.css
+   RISSVERK — appspesifikke tillegg til fellesstilen
 
    Alle klassar har prefikset rv-. Fargane blir henta frå CSS-variablane
    i temaet, aldri skrivne som faste verdiar — med eitt unntak: sjølve
@@ -10,7 +10,7 @@
 
 /* ──────────────── Full breidd ──────────────── */
 
-/* Sjølve breidda kjem frå `.main-wide` i neobrutalisme.css (sjå
+/* Sjølve breidda kjem frå det felles appoppsettet (sjå
    AGENTS.md §3.1.1) — Rissverk er eit redigeringsverktøy, og
    teikneflata er sjølve innhaldet.
 

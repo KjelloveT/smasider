@@ -35,17 +35,15 @@
   }
 
   // ── modalar ──────────────────────────────────────────────────────────────
-  function openModal(overlay) {
-    overlay.classList.add('open');
-    const focusable = overlay.querySelector('button, [href], input, select, textarea');
-    if (focusable) focusable.focus();
+  function openModal(dialog) {
+    Vy.openModal(dialog);
   }
-  function closeModal(overlay) {
-    overlay.classList.remove('open');
+  function closeModal(dialog) {
+    Vy.closeModal(dialog);
   }
-  function wireModal(overlay) {
-    overlay.addEventListener('click', ev => {
-      if (ev.target === overlay || ev.target.closest('[data-close]')) closeModal(overlay);
+  function wireModal(dialog) {
+    dialog.addEventListener('click', ev => {
+      if (ev.target === dialog || ev.target.closest('[data-close]')) closeModal(dialog);
     });
   }
 
@@ -54,15 +52,31 @@
     if (state.heroHidden) return;
     state.heroHidden = true;
     el.hero.classList.add('dd-hero-gone');
+    el.hero.closest('.vp-standard').classList.add('dd-game-active');
   }
 
   function updateHeader() {
     const isToday = !state.yearOver && state.dayIndex === state.todayIndex;
+    const selectedDate = S.dateForIndex(state.dayIndex);
+    el.gameTitle.textContent = isToday ? 'Gjett dagens ord' : 'Gjett ordet';
     el.dayNum.textContent = `Dag ${state.dayIndex + 1}`;
     el.dayNum.classList.toggle('dd-daynum-archive', !isToday);
     el.dayDate.textContent = isToday
       ? 'Dagens ord'
       : S.formatDate(S.dateForIndex(state.dayIndex));
+    el.todayDate.textContent = S.formatLongDate(selectedDate);
+    el.todayDate.dateTime = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
+    const previousIndex = state.dayIndex - 1;
+    el.yesterdayBtn.hidden = previousIndex < 0 || previousIndex >= S.wordCount();
+    if (!el.yesterdayBtn.hidden) {
+      const previousLabel = isToday
+        ? 'i går'
+        : S.formatLongDate(S.dateForIndex(previousIndex)).replace(/ \d{4}$/, '').replace(/^./, ch => ch.toLocaleLowerCase('nn'));
+      el.yesterdayLabel.textContent = previousLabel;
+      const accessibleLabel = `Prøv ordet frå ${previousLabel}`;
+      el.yesterdayBtn.setAttribute('aria-label', accessibleLabel);
+      el.yesterdayBtn.title = accessibleLabel;
+    }
 
     // Arkivet opnar seg fyrst når dagens ord er ferdigspelt. Er årgangen omme,
     // finst det ikkje noko dagens ord å vente på, og arkivet er alltid ope.
@@ -88,6 +102,7 @@
   function repaint() {
     Board.render(state.guesses, state.current, state.answer);
     Keyboard.paint(S.letterStates(state.guesses, state.answer));
+    el.keyboard.hidden = false;
     updateHeader();
     updateFootnote();
   }
@@ -108,7 +123,7 @@
     if (state.status === 'won') {
       say(`Du fann ordet på ${state.guesses.length}.`, true);
     } else if (state.status === 'lost') {
-      say(`Ordet var «${state.answer}».`, true);
+      say(state.dayIndex === state.todayIndex ? `Ordet var «${state.answer}».` : 'Du brukte alle seks forsøka.', true);
     } else if (state.guesses.length) {
       hideHero();
     }
@@ -171,7 +186,7 @@
         Board.bounce(rowIndex);
         say(`Du fann ordet på ${state.guesses.length}.`, true);
       } else if (done) {
-        say(`Ordet var «${state.answer}».`, true);
+        say(state.dayIndex === state.todayIndex ? `Ordet var «${state.answer}».` : 'Du brukte alle seks forsøka.', true);
       }
 
       if (done) {
@@ -184,7 +199,7 @@
 
   // ── modal-innhald ────────────────────────────────────────────────────────
   function showStats() {
-    const last = state.status !== 'playing'
+    const last = state.status === 'won' || state.status === 'lost'
       ? { status: state.status, guesses: state.guesses.length }
       : null;
     Stats.render(state.todayIndex, last);
@@ -204,8 +219,8 @@
 
   // ── oppstart ─────────────────────────────────────────────────────────────
   function cacheElements() {
-    ['hero', 'dayNum', 'dayDate', 'message', 'board', 'keyboard', 'footnote',
-      'archiveBtn', 'statsBtn', 'helpBtn', 'shareBtn', 'shareLabel', 'shareWrap',
+    ['hero', 'gameTitle', 'dayNum', 'dayDate', 'todayDate', 'message', 'board', 'keyboard', 'footnote',
+      'yesterdayBtn', 'yesterdayLabel', 'archiveBtn', 'statsBtn', 'helpBtn', 'shareBtn', 'shareLabel', 'shareWrap',
       'archiveGrid', 'helpOverlay', 'statsOverlay', 'archiveOverlay']
       .forEach(id => { el[id] = document.getElementById(id); });
   }
@@ -217,13 +232,19 @@
     el.message.hidden = true;
     el.footnote.hidden = true;
     el.notice = document.createElement('div');
-    el.notice.className = 'box1 dd-notice';
+    el.notice.className = 'vp-notice vp-notice--warning dd-notice';
+    const icon = document.createElement('span');
+    icon.className = 'vp-notice-icon';
+    icon.innerHTML = ICON('alertTriangle', 22);
+    const content = document.createElement('div');
+    content.className = 'dd-notice-body';
     const h = document.createElement('h2');
-    h.className = 'heading3 no-mt';
+    h.className = 'vp-heading';
     h.textContent = title;
     const p = document.createElement('p');
     p.textContent = body;
-    el.notice.append(h, p);
+    content.append(h, p);
+    el.notice.append(icon, content);
     el.board.parentNode.insertBefore(el.notice, el.board);
   }
 
@@ -239,12 +260,16 @@
     cacheElements();
     hydrateIcons();
 
+    const now = new Date();
+    el.todayDate.textContent = S.formatLongDate(now);
+    el.todayDate.dateTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
     // Ein «attende til i dag»-knapp blir laga her framfor i HTML-en, av di
     // han berre gjev meining når ein arkivdag er open.
     el.backBtn = document.createElement('button');
     el.backBtn.type = 'button';
-    el.backBtn.className = 'btn dd-iconbtn';
-    el.backBtn.innerHTML = ICON('home', 18);
+    el.backBtn.className = 'vp-button vp-button--tool vp-button--block dd-side-action';
+    el.backBtn.innerHTML = `${ICON('home', 18)}<span>Til dagens ord</span>`;
     el.backBtn.setAttribute('aria-label', 'Attende til dagens ord');
     el.backBtn.title = 'Attende til dagens ord';
     el.backBtn.hidden = true;
@@ -252,11 +277,6 @@
     el.archiveBtn.parentNode.insertBefore(el.backBtn, el.archiveBtn);
 
     [el.helpOverlay, el.statsOverlay, el.archiveOverlay].forEach(wireModal);
-    document.addEventListener('keydown', ev => {
-      if (ev.key !== 'Escape') return;
-      document.querySelectorAll('.modal-overlay.open').forEach(closeModal);
-    });
-
     state.todayIndex = S.todayIndex();
 
     if (state.todayIndex < 0) {
@@ -273,6 +293,13 @@
     el.helpBtn.addEventListener('click', () => openModal(el.helpOverlay));
     el.statsBtn.addEventListener('click', showStats);
     el.archiveBtn.addEventListener('click', showArchive);
+    el.yesterdayBtn.addEventListener('click', () => {
+      const previousIndex = state.dayIndex - 1;
+      if (previousIndex < 0 || previousIndex >= S.wordCount()) return;
+      hideHero();
+      hideNotice();
+      openDay(previousIndex);
+    });
     el.shareBtn.addEventListener('click', () => {
       const text = Stats.shareText(state.dayIndex + 1, state.guesses, state.answer, state.status);
       Stats.copy(text)
@@ -286,6 +313,7 @@
       // bygd, så arkivet kan framleis opne kva som helst av dei gamle dagane.
       state.yearOver = true;
       state.todayIndex = S.wordCount();
+      state.dayIndex = state.todayIndex;
       showNotice('Årgangen er ferdig',
         `Alle ${S.wordCount()} orda i den fyrste årgangen er brukte. Ei ny liste kjem, ` +
         'og i mellomtida ligg heile året i arkivet.');

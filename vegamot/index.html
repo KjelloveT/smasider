@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="nn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lag interaktive forteljingar med fleire vegar, vegval og sluttingar.">
+  <meta name="theme-color" content="#d6e8f1">
+  <title>Vegamot — Vyrdepil</title>
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="../_resources/vyrde-ikon.png" sizes="384x384">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+  <link rel="stylesheet" href="css/style.css?v=1">
+  <script src="../js/vyrdepil-storage.js" defer></script>
+  <script src="../js/vyrdepil-icons.js" defer></script>
+  <script src="../js/vyrdepil-util.js?v=1.2" defer></script>
+  <script src="../js/vyrdepil-design.js?v=1.1" defer></script>
+  <script src="../js/vyrdepil-menu.js" defer></script>
+  <script src="../js/vyrdepil-footer.js?v=2" defer></script>
+</head>
+<body class="vp-page" data-vp-design data-vp-app="vegamot" data-vp-layout="expanded" data-vp-site-footer>
+  <a class="vp-skip" href="#main">Hopp til innhaldet</a>
+  <header class="vp-header vp-header--sky">
+    <div class="vp-shell vp-header-row">
+      <a class="vp-brand" href="../index.html" aria-label="Vyrdepil – framsida">
+        <img data-vp-mascot src="../_resources/vyrdepil-design/vyrde.png" width="48" height="46" alt="">
+        <span>Vyrdepil</span>
+      </a>
+      <button class="vp-button vp-menu-trigger" id="menuBtn" type="button" data-vp-menu="siteMenu" aria-haspopup="dialog" aria-expanded="false" aria-controls="siteMenu">
+        <span data-icon="menu" aria-hidden="true"></span>Meny
+      </button>
+    </div>
+  </header>
+
+  <main class="vp-shell vp-shell--wide" id="main">
+    <div id="authoring-view">
+      <div class="vp-app-intro">
+        <section class="vp-panel vp-panel--plain vp-app-intro-board" aria-labelledby="app-title">
+          <img class="vp-app-logo" data-vp-app-logo src="../_resources/vyrdepil-design/logos/vegamot-mala.png" width="384" height="384" alt="Måla kart med fleire stiar og vegvisarskilt">
+          <div class="vp-app-intro-copy">
+            <p class="vp-kicker">Forteljingar med fleire vegar</p>
+            <h1 class="vp-title" id="app-title">Vegamot</h1>
+            <p class="vp-prose">Bygg ei forteljing med vegval, ulike sluttingar og eigne illustrasjonar. Vel eit steg i kartet for å forme vegen vidare.</p>
+          </div>
+        </section>
+        <img class="vp-app-intro-mascot" data-vp-mascot src="../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt="Stein-Vyrde viser fleire vegar vidare">
+      </div>
+
+      <section class="story-toolbar vp-toolbar" aria-label="Forteljingsverktøy">
+        <label class="vp-field story-title-field" for="story-title">
+          <span class="vp-label">Tittel på historia</span>
+          <input class="vp-input" id="story-title" type="text" maxlength="120" autocomplete="off">
+        </label>
+        <label class="vp-choice story-setting" for="allow-reader-back">
+          <input id="allow-reader-back" type="checkbox">
+          <span>Lesaren kan gå tilbake</span>
+        </label>
+        <span id="save-status" class="vp-small" role="status" aria-live="polite">Lagra lokalt</span>
+        <div class="vp-actions story-actions">
+          <button class="vp-button vp-button--primary" id="open-reader" type="button"><span data-icon="bookOpen" aria-hidden="true"></span>Les historia</button>
+          <button class="vp-button" id="save-story-package" type="button"><span data-icon="download" aria-hidden="true"></span>Last ned forteljingspakke</button>
+          <button class="vp-button" id="load-story-package" type="button"><span data-icon="upload" aria-hidden="true"></span>Opne forteljingspakke</button>
+          <input id="story-package-file" type="file" accept=".vegamot,.forteljingskart,.zip,application/zip" hidden>
+          <button class="vp-button vp-button--tool" id="export-pptx" type="button"><span data-icon="presentation" aria-hidden="true"></span>Last ned PowerPoint</button>
+          <button class="vp-button vp-button--positive" id="add-node" type="button"><span data-icon="plus" aria-hidden="true"></span>Legg til steg</button>
+        </div>
+        <span id="export-status" class="vp-small toolbar-status" role="status" aria-live="polite"></span>
+        <span id="package-status" class="vp-small toolbar-status" role="status" aria-live="polite"></span>
+      </section>
+
+      <div class="workspace vp-editor" aria-label="Redigering">
+        <section class="map-panel vp-panel vp-panel--plain" aria-labelledby="map-heading">
+          <div class="panel-heading">
+            <div>
+              <h2 class="vp-heading" id="map-heading">Flytkart</h2>
+              <p>Historia går ovanfrå og ned. Vel eit steg for å endre det.</p>
+            </div>
+            <span id="node-count" class="count-label vp-small"></span>
+          </div>
+          <div id="graph-viewport" class="graph-viewport" role="region" aria-label="Flytkart over historia" tabindex="0">
+            <svg id="story-graph" xmlns="http://www.w3.org/2000/svg" aria-label="Steg og vegval"></svg>
+          </div>
+        </section>
+
+        <aside class="editor-panel vp-panel vp-panel--compact vp-editor-properties" aria-labelledby="editor-heading">
+          <details class="vp-accordion vp-support-section" data-vp-support open>
+            <summary id="editor-heading">Steg og vegval</summary>
+            <div class="vp-accordion-body"><div id="node-editor"></div></div>
+          </details>
+        </aside>
+      </div>
+
+      <section class="warnings-panel vp-panel vp-panel--plain" aria-labelledby="warnings-heading">
+        <h2 class="vp-heading" id="warnings-heading">Kontroll av historia</h2>
+        <p>Varsla hjelper deg å finne steg som ikkje ser ut til å føre vidare til ei avslutning.</p>
+        <div id="warning-list" aria-live="polite"></div>
+      </section>
+    </div>
+    <section id="reader-view" class="reader-view vp-panel vp-panel--plain" aria-live="polite" hidden></section>
+  </main>
+
+  <dialog class="vp-dialog vp-site-menu" id="siteMenu" aria-labelledby="siteMenuTitle">
+    <div class="vp-dialog-head">
+      <div class="vp-menu-heading"><img data-vp-mascot src="../_resources/vyrdepil-design/vyrde.png" width="144" height="138" alt=""><h2 class="vp-heading" id="siteMenuTitle">Vyrdepil</h2></div>
+      <form method="dialog"><button class="vp-button vp-button--icon vp-button--quiet" aria-label="Lukk menyen"><span data-icon="x" aria-hidden="true"></span></button></form>
+    </div>
+    <p>Spel, verktøy og skaparglede</p>
+    <label class="vp-field vp-menu-search"><span class="vp-label">Finn eit spel eller verktøy</span><input class="vp-input" id="menuSearch" type="search" placeholder="Søk etter namn eller innhald" aria-controls="menuApps"></label>
+    <div class="vp-actions vp-menu-filters" id="menuCategories" role="group" aria-label="Appkategori"></div>
+    <p class="vp-small vp-menu-count" id="menuCount" aria-live="polite">Lastar appoversikta …</p>
+    <nav id="menuApps" aria-label="Spel og verktøy"></nav>
+    <nav class="vp-actions vp-menu-more" aria-label="Meir om Vyrdepil"><a href="../index.html">Framsida</a><a href="../personvern.html">Personvern</a><a href="../lisens.html">Lisens</a></nav>
+  </dialog>
+
+  <script src="../_libs/jszip/jszip.min.js" defer></script>
+  <script src="js/model.js" defer></script>
+  <script src="js/validator.js" defer></script>
+  <script src="js/graph-layout.js" defer></script>
+  <script src="js/graph.js" defer></script>
+  <script src="js/routing-editor.js" defer></script>
+  <script src="js/step-image.js" defer></script>
+  <script src="js/player.js" defer></script>
+  <script src="js/pptx-package.js" defer></script>
+  <script src="js/story-package.js" defer></script>
+  <script src="js/package-controls.js" defer></script>
+  <script src="js/pptx-export.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

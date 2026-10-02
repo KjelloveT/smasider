@@ -7,13 +7,11 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="../js/neo-header.js" defer></script>
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+      <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-light-theme="sunny" data-dark-theme="cyberpunk" data-theme="sunny">
-    <neo-header></neo-header>
-
+<body data-vp-app="eikekveik" data-vp-layout="expanded" data-vp-site-footer>
     <div class="page-wrapper">
         <main class="main-content main-wide">
 
@@ -140,8 +138,8 @@
     </div>
 
     <!-- Modal: Lagre som -->
-    <div class="modal-overlay" id="save-modal">
-        <div class="modal4">
+    <div class="modal-overlay vp-modal-backdrop" id="save-modal">
+        <div class="modal4 vp-modal-panel">
             <button class="btn modal-close" id="save-modal-close" aria-label="Lukk">×</button>
             <h2 class="heading4 no-mt">Lagre Eikekveik-kart</h2>
             <label class="form-label" for="save-name">Namn på kartet</label>
@@ -154,8 +152,8 @@
     </div>
 
     <!-- Modal: Opne -->
-    <div class="modal-overlay" id="open-modal">
-        <div class="modal4">
+    <div class="modal-overlay vp-modal-backdrop" id="open-modal">
+        <div class="modal4 vp-modal-panel">
             <button class="btn modal-close" id="open-modal-close" aria-label="Lukk">×</button>
             <h2 class="heading4 no-mt">Opne lagra kart</h2>
             <div id="saved-list" class="saved-list"></div>
@@ -166,8 +164,8 @@
     </div>
 
     <!-- Modal: Vel ikon eller emoji -->
-    <div class="modal-overlay" id="picker-modal">
-        <div class="modal4 picker" role="dialog" aria-modal="true" aria-labelledby="picker-title">
+    <div class="modal-overlay vp-modal-backdrop" id="picker-modal">
+        <div class="modal4 picker vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="picker-title">
             <h2 class="heading4 no-mt" id="picker-title">Vel ikon eller emoji</h2>
             <input type="search" id="picker-search" class="picker-search" placeholder="Søk, til dømes «bok» eller «sol»" aria-label="Søk etter ikon eller emoji">
             <div class="box5 picker-box">
@@ -185,7 +183,7 @@
 
     <script src="../js/vyrdepil-storage.js"></script>
     <script src="../js/vyrdepil-icons.js"></script>
-    <script src="../js/vyrdepil-util.js"></script>
+    <script src="../js/vyrdepil-util.js?v=1.2"></script>
     <script src="js/app.js"></script>
     <script src="js/shapes.js"></script>
     <script src="js/symbols.js"></script>
@@ -197,5 +195,9 @@
     <script src="js/storage.js"></script>
     <script src="js/export.js"></script>
     <script src="js/png.js"></script>
+
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
+<script src="../js/vyrdepil-app-shell.js?v=6"></script>
+<script src="../js/vyrdepil-menu.js"></script>
 </body>
 </html>

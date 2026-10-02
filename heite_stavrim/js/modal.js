@@ -3,13 +3,13 @@
 HeiteStavrimGame.prototype.openCustomModal = function () {
     const list = HeiteStavrimStorage.getCustomCategories();
     this.el.customEditor.value = list.join('\n');
-    this.el.customModal.classList.add('open');
+    Vy.openModal(this.el.customModal);
     // Flytt fokus inn i modalen for tilgjenge
     this.el.customEditor.focus();
 };
 
 HeiteStavrimGame.prototype.closeCustomModal = function () {
-    this.el.customModal.classList.remove('open');
+    Vy.closeModal(this.el.customModal);
 };
 
 HeiteStavrimGame.prototype.saveCustomCategories = function () {
@@ -21,5 +21,5 @@ HeiteStavrimGame.prototype.saveCustomCategories = function () {
 };
 
 HeiteStavrimGame.prototype.isCustomModalOpen = function () {
-    return this.el.customModal.classList.contains('open');
+    return Vy.modalOpen(this.el.customModal);
 };

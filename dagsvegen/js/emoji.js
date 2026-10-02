@@ -93,14 +93,19 @@ const EmojiPicker = (() => {
             }));
         });
 
-        const modal = Dom.el('div', { class: 'modal3 dv-emoji-modal' },
+        const modal = Dom.el('div', {
+            class: 'modal3 dv-emoji-modal vp-modal-panel',
+            role: 'dialog',
+            'aria-modal': 'true',
+            'aria-label': 'Vel emoji'
+        },
             Dom.el('div', { class: 'modal-header' },
                 Dom.el('span', { text: 'Vel emoji' }),
                 Dom.el('button', { class: 'dv-icon-btn dv-modal-x', 'aria-label': 'Lukk', onclick: close }, Icons.create('x'))
             ),
             Dom.el('div', { class: 'modal-body' }, tabs, gridEl)
         );
-        overlay = Dom.el('div', { class: 'modal-overlay', onclick: (ev) => { if (ev.target === overlay) close(); } }, modal);
+        overlay = Dom.el('div', { class: 'modal-overlay vp-modal-backdrop' }, modal);
         document.body.appendChild(overlay);
         renderGrid();
     }
@@ -125,17 +130,17 @@ const EmojiPicker = (() => {
     function open(onSelect) {
         onSelectCb = onSelect;
         if (!overlay) build();
-        overlay.classList.add('open');
+        Vy.openModal(overlay);
         const first = gridEl.querySelector('.dv-emoji-btn');
         if (first) first.focus();
     }
 
     function close() {
-        if (overlay) overlay.classList.remove('open');
+        if (overlay) Vy.closeModal(overlay);
         onSelectCb = null;
     }
 
-    function isOpen() { return overlay && overlay.classList.contains('open'); }
+    function isOpen() { return Vy.modalOpen(overlay); }
 
     return { open, close, isOpen };
 })();

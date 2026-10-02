@@ -7,12 +7,11 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="../css/neobrutalisme.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+      <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-light-theme="ocean" data-dark-theme="space" data-theme="ocean">
-
-<neo-header></neo-header>
+<body data-vp-app="vidfaren" data-vp-layout="standard" data-vp-site-footer>
 
 <div class="page-wrapper">
 <main class="main-content">
@@ -95,8 +94,8 @@
 </div>
 
 <!-- ══════════ MERKE-MODAL ══════════ -->
-<div id="badgeModal" class="modal-overlay">
-  <div class="modal-box lk-badge-modal">
+<div id="badgeModal" class="modal-overlay vp-modal-backdrop">
+  <div class="modal-box lk-badge-modal vp-modal-panel">
     <div class="lk-badge-head">
       <h2><span data-icon="trophy"></span> Merke <span class="lk-badge-count" id="badgeCount">0 / 0</span></h2>
       <button class="btn lk-modal-close" onclick="closeBadgeGallery()" type="button"><span data-icon="x"></span></button>
@@ -106,16 +105,18 @@
 </div>
 
 
-<script src="../js/neo-header.js"></script>
-<script src="../js/neobrutalisme.js"></script>
 <script src="../js/vyrdepil-storage.js"></script>
 <script src="../js/vyrdepil-icons.js"></script>
-<script src="../js/vyrdepil-util.js"></script>
+<script src="../js/vyrdepil-util.js?v=1.2"></script>
 <script src="js/data.js"></script>
 <script src="js/map.js"></script>
 <script src="js/progression.js"></script>
 <script src="js/game.js"></script>
 <script src="js/progression-ui.js"></script>
 <script src="js/main.js"></script>
+
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
+<script src="../js/vyrdepil-app-shell.js?v=6"></script>
+<script src="../js/vyrdepil-menu.js"></script>
 </body>
 </html>

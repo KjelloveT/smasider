@@ -1,0 +1,116 @@
+/* Vegamot – arbeidsflate bygd på det felles Vyrdepil-designet. */
+:root { color-scheme: light; font-family: var(--vp-font); color: #000; font-synthesis: none; text-rendering: optimizeLegibility; }
+[hidden] { display: none !important; }
+.story-toolbar { align-items: end; margin: 0 0 16px; }
+.story-title-field { flex: 1 1 15rem; }
+.story-setting { min-height: 48px; align-self: end; }
+#save-status { white-space: nowrap; padding: 8px 10px; }
+.story-actions { flex: 1 1 100%; }
+.story-actions .vp-button { flex: 0 1 auto; }
+.toolbar-status { flex: 1 1 100%; min-height: 1.2em; }
+.toolbar-status:empty { display: none; }
+.workspace { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(300px, .8fr); gap: 16px; align-items: start; margin: 0 0 16px; }
+.map-panel, .editor-panel, .warnings-panel { min-width: 0; }
+.panel-heading { display: flex; justify-content: space-between; align-items: start; gap: 16px; padding-bottom: 14px; border-bottom: 2px solid var(--vp-frame); }
+.panel-heading h2, .warnings-panel h2 { margin-bottom: 4px; }
+.panel-heading p, .warnings-panel > p { margin: 0; }
+.count-label { flex: 0 0 auto; padding: 8px 10px; border-radius: 6px; background: var(--vp-honey); font-weight: 700; }
+.graph-viewport { min-height: 38rem; max-height: min(78vh, 900px); margin: 16px 0 0; overflow: auto; border: 2px solid var(--vp-frame); border-radius: 8px; background-color: #fffdf5; background-image: radial-gradient(#d9cfb2 1px, transparent 1px); background-size: 22px 22px; }
+#story-graph { display: block; margin-inline: auto; }
+.graph-edge { fill: none; stroke: #395447; stroke-width: 2.5; }
+.graph-edge.is-incomplete { stroke: #9a4b35; stroke-dasharray: 7 5; }
+.graph-edge.is-routed { stroke: #223e31; stroke-width: 2.8; }
+.arrow-head { fill: #223e31; }
+.missing-target { fill: #f5dfaa; stroke: #8a5b25; stroke-width: 2; }
+.graph-edge-label { fill: #000; font-size: 12px; text-anchor: middle; paint-order: stroke; stroke: #fffdf5; stroke-width: 5px; stroke-linejoin: round; }
+.graph-edge-label.is-routed-label { fill: #000; }
+.edge-crossing-gap { fill: #fffdf5; stroke: none; pointer-events: none; }
+.edge-crossing-bridge { fill: none; stroke: #223e31; stroke-width: 2.8; pointer-events: none; }
+.graph-node { cursor: pointer; }
+.graph-node rect { fill: #fff9e9; stroke: #142820; stroke-width: 2.5; rx: 8; }
+.graph-node:hover rect { fill: #f5dfaa; }
+.graph-node:focus-visible rect { stroke: #8a5b25; stroke-width: 4; }
+.graph-node.is-selected rect { fill: #f5dfaa; stroke: #142820; stroke-width: 3.5; }
+.graph-node.is-end rect { fill: #d5e5c5; }
+.graph-node.has-warning rect { fill: #f3d2cf; stroke: #8a5b25; stroke-dasharray: 7 4; }
+.graph-node-count { fill: #000; font-size: 11px; font-weight: 700; }
+.graph-node-title { fill: #000; font-size: 15px; font-weight: 750; }
+.graph-node-meta { fill: #000; font-size: 11px; font-weight: 650; }
+.graph-node-preview { fill: #000; font-size: 12px; }
+.orphan-label { fill: #000; font-size: 13px; font-weight: 750; }
+.editor-panel { padding: 0; }
+.editor-panel .vp-accordion { border: 0; }
+.editor-panel .vp-accordion > summary { padding: 16px; font-size: 1.15rem; }
+.editor-panel .vp-accordion-body { padding: 0 16px 16px; }
+#node-editor { min-width: 0; }
+.editor-empty { margin: 0; }
+.editor-form { display: grid; gap: 16px; }
+.editor-form h3 { margin: 0; }
+.editor-actions, .route-heading, .route-row, .node-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.editor-actions { flex-wrap: wrap; }
+.node-heading { align-items: flex-start; }
+.node-heading h3 { margin: 0; overflow-wrap: anywhere; }
+.route-settings, .step-image-editor { display: grid; gap: 12px; padding: 14px; border: 2px solid var(--vp-frame); border-radius: 8px; background: var(--vp-paper); }
+.route-settings h3, .step-image-editor h3, .route-heading h3 { margin: 0; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label, .route-row label { font-weight: 700; }
+.field textarea { min-height: 9rem; resize: vertical; }
+.helper-text, .image-status, .route-weight-outcome { margin: 0; font-size: .9rem; }
+.step-image-preview { display: block; max-width: 100%; max-height: 20rem; object-fit: contain; background: #fffdf5; border: 2px solid var(--vp-frame); border-radius: 6px; }
+.route-row { align-items: end; flex-wrap: wrap; padding: 12px; border: 2px solid var(--vp-frame); border-radius: 8px; background: #fff9e9; }
+.route-row .field { flex: 1 1 8rem; align-self: start; }
+.route-row .vp-button { flex: 0 0 auto; }
+.routes { display: grid; gap: 12px; }
+.route-heading { margin-bottom: 0; }
+.inline-message { margin: 0; padding: 10px; background: var(--vp-blush); border: 2px solid var(--vp-frame); border-radius: 6px; }
+.end-row { display: flex; align-items: flex-start; gap: 8px; }
+.end-row input { width: 1.2rem; height: 1.2rem; margin-top: .15rem; }
+.end-help { margin: -8px 0 0 1.75rem; font-size: .9rem; }
+.no-routes { margin: 0; }
+.danger-button { --vp-button-fill: var(--vp-blush); }
+.warning-jump { min-height: 40px; padding: 6px 10px; }
+#warning-list ul { margin: 12px 0 0; padding-left: 1.25rem; }
+#warning-list li { margin: 8px 0; }
+.no-warnings { margin: 10px 0 0; padding: 10px 12px; border-radius: 6px; background: var(--vp-moss); }
+.reader-view { max-width: 980px; margin: 24px auto; padding: clamp(20px, 4vw, 40px); }
+.reader-page { padding: 0; border: 0; background: transparent; }
+.reader-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 2px solid var(--vp-frame); }
+.reader-identity h1 { margin: 0; }
+.reader-kicker, .reader-position { margin: 0 0 4px; }
+.reader-header-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.reader-story-step { max-width: 72ch; margin: clamp(24px, 5vw, 56px) auto 16px; }
+.reader-step-title { margin: 4px 0 20px; font-size: clamp(1.5rem, 4vw, 2.4rem); }
+.reader-step-title:focus { outline: none; }
+.reader-text { min-height: 6rem; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: clamp(1.05rem, 2.5vw, 1.3rem); line-height: 1.8; }
+.reader-illustration { display: block; max-width: 100%; max-height: 65vh; margin: 0 auto 24px; object-fit: contain; }
+.reader-choice-area { margin-top: 32px; }
+.reader-choice-area h3, .reader-ending h3 { margin-bottom: 12px; }
+.reader-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 12px; }
+.reader-choice { min-height: 56px; text-align: center; }
+.reader-route-map { display: grid; gap: 5px; margin: 16px 0; padding-left: 1.5rem; }
+.reader-die-form { display: grid; grid-template-columns: minmax(8rem, 12rem) auto; align-items: end; gap: 10px; }
+.reader-die-form label { grid-column: 1 / -1; font-weight: 700; }
+.reader-die-form .reader-message { grid-column: 1 / -1; }
+.reader-ending { margin-top: 32px; padding: 16px; border: 2px solid var(--vp-frame); border-radius: 8px; background: var(--vp-moss); }
+.reader-ending p, .reader-message { margin: 6px 0 16px; }
+.reader-message { padding: 16px; border-left: 4px solid #8a5b25; border-radius: 5px; background: var(--vp-honey); }
+@media (max-width: 900px) {
+  .workspace { grid-template-columns: minmax(0,1fr); }
+  .graph-viewport { min-height: 30rem; max-height: 65vh; }
+}
+@media (max-width: 560px) {
+  .workspace { gap: 12px; }
+  .story-toolbar { align-items: stretch; }
+  .story-title-field { flex-basis: 100%; }
+  .story-setting { align-self: stretch; }
+  #save-status { white-space: normal; }
+  .story-actions { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .story-actions .vp-button { width: 100%; }
+  .panel-heading { align-items: stretch; flex-direction: column; }
+  .route-row { align-items: stretch; flex-direction: column; }
+  .route-row .field { flex: initial; align-self: stretch; }
+  .reader-header { flex-direction: column; }
+  .reader-header-actions { justify-content: flex-start; }
+  .reader-die-form { grid-template-columns: minmax(0,1fr); }
+  .reader-die-form label, .reader-die-form .reader-message { grid-column: auto; }
+}

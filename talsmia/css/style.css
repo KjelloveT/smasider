@@ -4,10 +4,8 @@
     box-sizing: border-box;
 }
 
-/* Map local Talsmia variable names to the neobrutalisme theme variables
-   (defined by [data-theme="candy"] / [data-theme="neon"] in neobrutalisme.css).
-   Uses body[data-theme] to override the theme-variable definitions. */
-body[data-theme] {
+/* Map Talsmia's local names to the fixed Vyrdepil palette. */
+body[data-vp-design] {
     --bg-color: var(--bg);
     --card-bg: var(--surface);
     --accent-green: var(--accent4);
@@ -70,38 +68,6 @@ h1 {
 
 .screen.active {
     display: block;
-}
-
-.btn {
-    display: inline-block;
-    background: var(--card-bg);
-    color: var(--border);
-    border: 3px solid var(--border);
-    box-shadow: 4px 4px 0 var(--border);
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.1s;
-    font-family: inherit;
-}
-
-.btn:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: var(--ts-shadow-hover);
-}
-
-.btn:active {
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 var(--border);
-}
-
-.btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
 }
 
 .btn.selected {
@@ -451,30 +417,7 @@ h1 {
     margin: 0 0 20px;
 }
 
-.help-modal {
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    background: rgba(0, 0, 0, 0.45);
-    z-index: 999;
-}
-
-.help-modal.show {
-    display: flex;
-}
-
-.help-modal-content {
-    width: min(720px, 100%);
-    max-height: 85vh;
-    overflow: auto;
-    background: var(--card-bg);
-    border: 3px solid var(--border);
-    box-shadow: var(--ts-shadow);
-    padding: 20px;
-}
+/* Hjelpedialogen bruker dei felles vp-modal-komponentane. */
 
 .help-modal-content h3 {
     margin-bottom: 10px;
@@ -489,17 +432,6 @@ h1 {
 .help-modal-actions {
     text-align: right;
     margin-top: 12px;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-footer a {
-    color: var(--border);
 }
 
 @media (max-width: 700px) {

@@ -7,16 +7,15 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+      <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="midnight" data-theme="classic">
+<body data-vp-app="dagsvegen" data-vp-layout="expanded" data-vp-site-footer>
     <div class="page-wrapper">
-        <neo-header></neo-header>
-
         <!-- Venstremeny -->
         <nav id="sidebar" aria-label="Verktøymeny">
-            <button id="sidebar-toggle" class="dv-side-btn" aria-expanded="false" aria-label="Utvid eller minimer menyen" title="Meny"><span class="dv-tool-icon" data-icon="menu"></span><span class="dv-side-text">Meny</span></button>
+            <button id="sidebar-toggle" class="dv-side-btn" aria-expanded="false" aria-label="Utvid eller minimer verktøymenyen" title="Verktøy"><span class="dv-tool-icon" data-icon="menu"></span><span class="dv-side-text">Verktøy</span></button>
             <div class="dv-side-sep" aria-hidden="true"></div>
             <button id="btn-edit" class="dv-side-btn" aria-label="Rediger dagsplanen" title="Rediger"><span class="dv-tool-icon" data-icon="pencil"></span><span class="dv-side-text">Rediger</span></button>
             <button id="btn-quick" class="dv-side-btn" aria-label="Start ei enkel økt no, utan dagsplan" title="Snøggøkt"><span class="dv-tool-icon" data-icon="play"></span><span class="dv-side-text">Snøggøkt</span></button>
@@ -96,7 +95,7 @@
     </div>
 
     <!-- Flytande widgetar -->
-    <div id="clock-widget" class="dv-widget dv-clock-box" aria-label="Klokke"></div>
+    <div id="clock-widget" class="dv-widget dv-clock-box" role="timer" aria-label="Klokke"></div>
     <div id="countdown-widget" class="box1 dv-widget dv-hidden" aria-label="Nedteljar"></div>
     <div id="stopwatch-widget" class="box1 dv-widget dv-hidden" aria-label="Stoppeklokke"></div>
     <div id="traffic-widget" class="box1 dv-widget dv-hidden" aria-label="Trafikklys"></div>
@@ -117,8 +116,8 @@
     <!-- Toast -->
 
     <!-- Modal: lagre / hente -->
-    <div id="modal-files" class="modal-overlay">
-        <div class="modal3 dv-modal-wide">
+    <div id="modal-files" class="modal-overlay vp-modal-backdrop">
+        <div class="modal3 dv-modal-wide vp-modal-panel">
             <div class="modal-header">
                 <span>Lagre og hente planar</span>
                 <button class="dv-icon-btn dv-modal-x" data-close="modal-files" aria-label="Lukk">✕</button>
@@ -143,8 +142,8 @@
     </div>
 
     <!-- Modal: fagliste -->
-    <div id="modal-subjects" class="modal-overlay">
-        <div class="modal3">
+    <div id="modal-subjects" class="modal-overlay vp-modal-backdrop">
+        <div class="modal3 vp-modal-panel">
             <div class="modal-header">
                 <span>Fagliste</span>
                 <button class="dv-icon-btn dv-modal-x" data-close="modal-subjects" aria-label="Lukk">✕</button>
@@ -157,8 +156,8 @@
     </div>
 
     <!-- Modal: hjernepause -->
-    <div id="modal-break" class="modal-overlay">
-        <div class="modal2 dv-break-modal">
+    <div id="modal-break" class="modal-overlay vp-modal-backdrop">
+        <div class="modal2 dv-break-modal vp-modal-panel">
             <button class="dv-icon-btn dv-modal-x" data-close="modal-break" aria-label="Lukk">✕</button>
             <h2 class="dv-break-title">Hjernepause!</h2>
             <p id="break-text" class="dv-break-text"></p>
@@ -167,8 +166,8 @@
     </div>
 
     <!-- Modal: snøggøkt -->
-    <div id="modal-quick" class="modal-overlay">
-        <div class="modal3 dv-modal-wide">
+    <div id="modal-quick" class="modal-overlay vp-modal-backdrop">
+        <div class="modal3 dv-modal-wide vp-modal-panel">
             <div class="modal-header">
                 <span>Snøggøkt — start no</span>
                 <button class="dv-icon-btn dv-modal-x" data-close="modal-quick" aria-label="Lukk">✕</button>
@@ -181,8 +180,8 @@
     </div>
 
     <!-- Modal: rettleiing -->
-    <div id="modal-help" class="modal-overlay">
-        <div class="modal3 dv-modal-wide">
+    <div id="modal-help" class="modal-overlay vp-modal-backdrop">
+        <div class="modal3 dv-modal-wide vp-modal-panel">
             <div class="modal-header">
                 <span>Slik brukar du Dagsvegen</span>
                 <button class="dv-icon-btn dv-modal-x" data-close="modal-help" aria-label="Lukk">✕</button>
@@ -201,8 +200,8 @@
     </div>
 
     <!-- Modal: innstillingar -->
-    <div id="modal-settings" class="modal-overlay">
-        <div class="modal3">
+    <div id="modal-settings" class="modal-overlay vp-modal-backdrop">
+        <div class="modal3 vp-modal-panel">
             <div class="modal-header">
                 <span>Innstillingar</span>
                 <button class="dv-icon-btn dv-modal-x" data-close="modal-settings" aria-label="Lukk">✕</button>
@@ -226,7 +225,7 @@
     <script src="../js/vyrdepil-storage.js"></script>
     <script src="../tidvis/js/clock.js"></script>
     <script src="../js/vyrdepil-icons.js"></script>
-    <script src="../js/vyrdepil-util.js"></script>
+    <script src="../js/vyrdepil-util.js?v=1.2"></script>
     <script src="js/icons.js"></script>
     <script src="js/emoji.js"></script>
     <script src="js/state.js"></script>
@@ -234,17 +233,19 @@
     <script src="js/engine.js"></script>
     <script src="js/render.js"></script>
     <script src="js/edit.js"></script>
-    <script src="js/widgets.js"></script>
+    <script src="js/widgets.js?v=2"></script>
     <script src="js/notes.js"></script>
     <script src="js/draw.js"></script>
-    <script src="js/app.js"></script>
-    <script src="../js/neobrutalisme.js"></script>
-    <script src="../js/neo-header.js"></script>
+    <script src="js/app.js?v=2"></script>
     <script>
         // set inn statiske Lucide-ikon i verktøyrada
         document.querySelectorAll('.dv-tool-icon[data-icon]').forEach(span => {
             span.appendChild(Icons.create(span.dataset.icon, 20));
         });
     </script>
+
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
+<script src="../js/vyrdepil-app-shell.js?v=6"></script>
+<script src="../js/vyrdepil-menu.js"></script>
 </body>
 </html>

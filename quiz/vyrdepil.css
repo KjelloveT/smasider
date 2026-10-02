@@ -1,0 +1,73 @@
+/* Livekviss: delte flater med tydelege statusfargar. */
+body.vp-page.quiz-page {
+  display: block !important;
+  min-height: 100vh;
+  padding: 0 !important;
+  background: var(--vp-sky) !important;
+  color: var(--vp-ink);
+  font-family: var(--vp-font);
+}
+
+body.vp-page.quiz-page .container {
+  width: min(1200px, calc(100% - 24px));
+  max-width: 1200px;
+  margin: 20px auto 32px;
+  padding: clamp(16px, 3vw, 28px);
+  color: var(--vp-ink);
+  background: var(--vp-paper);
+  border: 4px solid var(--vp-frame);
+  border-radius: var(--vp-radius);
+  box-shadow: none;
+}
+
+body.vp-page.quiz-page .container > header {
+  padding: clamp(16px, 3vw, 24px);
+  margin-bottom: 20px;
+  color: var(--vp-ink);
+  background: var(--vp-honey);
+  border: 2px solid var(--vp-frame);
+  border-radius: 8px;
+  text-align: left;
+}
+
+body.vp-page.quiz-page :is(h1,h2,h3,h4,p,label,small,strong) { color: var(--vp-ink); }
+body.vp-page.quiz-page .container :is(.control-panel,.players-panel,.panel,.question-card,.question-panel,.settings-panel,.players-list,.player-card,.scoreboard,.results,.result-card,.mode-card,.status-item,.answer-btn,.question-option,.question-display,.join-status,.leaderboard,[class*="-panel"],[class*="-card"]) {
+  color: var(--vp-ink);
+  background-color: var(--vp-wood);
+  border-color: var(--vp-frame);
+  box-shadow: none;
+}
+
+body.vp-page.quiz-page .container :is(.selected,[aria-pressed="true"]):is(button,.btn,.answer-btn,.mode-card) {
+  background: var(--vp-honey) !important;
+  color: var(--vp-ink) !important;
+}
+
+body.vp-page.quiz-page .container :is(.connected,.correct,.success) {
+  background-color: var(--vp-success);
+  color: var(--vp-ink);
+}
+
+body.vp-page.quiz-page .container :is(.disconnected,.incorrect,.error) {
+  background-color: var(--vp-error);
+  color: var(--vp-ink);
+}
+
+body.vp-page.quiz-page .container :is(input,select,textarea) {
+  max-width: 100%;
+  min-height: 44px;
+  color: var(--vp-ink);
+  background: var(--vp-paper);
+  border: 2px solid var(--vp-frame);
+  border-radius: 7px;
+  font: 400 1rem/1.4 var(--vp-font);
+}
+
+body.vp-page.quiz-page .container :is(button,input,select,textarea,a,[tabindex]):focus-visible {
+  outline: 3px solid var(--vp-focus);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  body.vp-page.quiz-page .container { width: calc(100% - 16px); margin: 12px auto 24px; padding: 14px; }
+}

@@ -1,5 +1,5 @@
-/* Frødebrett — spel-spesifikke utvidingar oppå neobrutalisme.css.
-   Alle fargar kjem frå tema-variablane (--bg, --surface, --text, --accent…). */
+/* Frødebrett — spelspesifikke tillegg i den faste Vyrdepil-paletten.
+   Alle fargar kjem frå fellesvariablane (--bg, --surface, --text, --accent…). */
 
 .hidden { display: none !important; }
 
@@ -10,7 +10,7 @@
 .fb-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 .nav-btn { font-size: clamp(0.9rem, 2vw, 1rem); }
 
-/* ===== Knappe-variantar (neobrutalisme har berre .btn) ===== */
+/* ===== Spelspesifikke knappevariantar ===== */
 .btn-accent  { background: var(--accent);  color: var(--text-on-accent); }
 .btn-accent2 { background: var(--accent2); color: var(--text-on-accent); }
 .btn-accent4 { background: var(--accent4); color: #000; }
@@ -88,7 +88,10 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .jeopardy-grid {
   display: grid;
   grid-template-columns: repeat(var(--cols, 5), minmax(0, 1fr));
-  gap: 8px; margin-top: 18px;
+  gap: 8px; margin-top: 18px; padding: 8px;
+  border: 3px solid var(--vp-frame, #142820);
+  border-radius: 10px;
+  background: var(--vp-frame, #142820);
 }
 .jeopardy-category {
   display: flex; align-items: center; justify-content: center; text-align: center;
@@ -113,7 +116,13 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 }
 
 /* ===== Spørsmålsmodal ===== */
-.question-modal { max-width: 640px; }
+.question-modal {
+  max-width: 640px;
+  color: #000;
+  background: var(--vp-paper, #fffdf5);
+  border: 3px solid var(--vp-frame, #142820);
+  box-shadow: 0 4px 0 var(--vp-shadow, #142820);
+}
 .question-category { font-weight: 900; font-size: 1.1rem; }
 .question-points {
   margin-left: auto; margin-right: 10px; font-weight: 900;
@@ -189,9 +198,7 @@ textarea.form-input { resize: vertical; min-height: 80px; }
   box-shadow: 3px 3px 0 var(--shadow);
 }
 .box-tabs.editor-tabs .box-tab:hover { background: var(--bg); }
-/* Invertert som .box5 .box-tab.active i neobrutalisme.css — kvit tekst på
- * --accent fall til 2,54:1 i «hacker» og under 4,5:1 i alle dei sju mørke
- * temaa. Sjå kommentaren ved .box4 .box-header for heile grunngjevinga. */
+/* Vald fane brukar ei lys flate og mørk tekst frå fellespaletten. */
 .box-tabs.editor-tabs .box-tab.active {
   background: var(--text);
   color: var(--surface);
@@ -263,6 +270,24 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .podium-3rd { height: 70px; background: #e0a463; }
 
 @media print {
-  neo-header, .fb-nav, .fb-controls, .game-controls, .btn-remove-team { display: none !important; }
+  .vp-header, .fb-nav, .fb-controls, .game-controls, .btn-remove-team { display: none !important; }
   .jeopardy-grid, .box1 { break-inside: avoid; }
+}
+
+/* Bruk fast Vyrdepil-palett på spelrutene. Den mørke ramma skal vere skilje mellom lyse ruter,
+   ikkje bakgrunn bak svarte tal. */
+body[data-vp-app="frodebrett"] {
+  --bg: var(--vp-wood, #fff9e9);
+  --surface: var(--vp-paper, #fffdf5);
+  --text: var(--vp-ink, #000);
+  --border: var(--vp-frame, #142820);
+  --shadow: var(--vp-frame, #142820);
+  --muted: #454a46;
+  --accent: var(--vp-honey, #f5dfaa);
+  --accent2: var(--vp-coral, #efb29d);
+  --accent3: var(--vp-moss, #d5e5c5);
+  --accent4: var(--vp-sky, #d6e8f1);
+  --accent5: var(--vp-heather, #e5dcef);
+  --text-on-accent: #000;
+  --text-on-light-accent: #000;
 }

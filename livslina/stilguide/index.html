@@ -7,12 +7,11 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="../../css/neobrutalisme.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../../css/vyrdepil-design.css?v=1.4">
+  <script src="../../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
-
-<neo-header></neo-header>
+<body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-layout="expanded" data-vp-site-footer>
 
 <div class="page-wrapper">
 <main class="main-content">
@@ -31,7 +30,7 @@
         <ol class="ll-rules">
           <li><strong>Kontur:</strong> All strek er i fast blekkfarge <code>#1a1a1a</code> med runde hjørne og endar (<code>stroke-linejoin/linecap: round</code>). Strekbreidda skal <em>sjå lik ut på skjermen</em> (~6&nbsp;px ved normal visning): 4 einingar ved viewBox-breidd 200–360, 5 ved 480. Mindre detaljar brukar ca. 70&nbsp;% av hovudstreken, fine detaljar ca. 50&nbsp;%.</li>
           <li><strong>Flater:</strong> Heilt flate fyllfargar. Aldri gradientar, blur eller teksturar.</li>
-          <li><strong>Plate:</strong> Kvar illustrasjon står på ei fast, lys «papirplate» (<code>#faf7f0</code>) med hard skugge. Plata sikrar at motivet er lesbart i både lyse og mørke tema — fargane <em>inne i</em> illustrasjonane følgjer aldri temaet.</li>
+          <li><strong>Plate:</strong> Kvar illustrasjon står på ei fast, lys «papirplate» (<code>#faf7f0</code>) med hard skugge. Plata sikrar at motivet er lesbart på alle bakgrunnar — fargane <em>inne i</em> illustrasjonane høyrer til spelinnhaldet.</li>
           <li><strong>Skugge:</strong> Hard og forskuva mot høgre og ned, i blekkfargen, slik at han ser lik ut på skjermen (~10&nbsp;px ved normal visning; 7 einingar ved viewBox 200–360, 9 ved 480). Ingen mjuke skuggar. Skuggen ligg berre på plata, ikkje på enkeltdelar.</li>
           <li><strong>Proporsjonar (figurar):</strong> Hovudet er om lag 1/3 av total høgd. Store prikk-auge, enkel boge-munn, ingen nase.</li>
           <li><strong>Strekfrie detaljar:</strong> Små fargeflekkar utan kontur er lov som rein dekor oppå ei konturert flate: kinnroser, rustflekkar, lyspunkt, skjerminnhald, knappar på tastatur. Aldri som sjølvstendige objekt.</li>
@@ -419,8 +418,12 @@
 </main>
 </div>
 
-<script src="../../js/neo-header.js"></script>
-<script src="../../js/vyrdepil-icons.js"></script>
+
 <script src="js/stilguide.js"></script>
+  <script src="../../js/vyrdepil-icons.js"></script>
+  <script src="../../js/vyrdepil-util.js?v=1.2"></script>
+  <script src="../../js/vyrdepil-design.js?v=1.1"></script>
+  <script src="../../js/vyrdepil-app-shell.js?v=8"></script>
+  <script src="../../js/vyrdepil-menu.js?v=3"></script>
 </body>
 </html>

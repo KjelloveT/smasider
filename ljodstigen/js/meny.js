@@ -28,7 +28,7 @@
   /* ──────────────── Profilar ──────────────── */
 
   function avatarButton(av, selected) {
-    const b = R().h('button', 'ljod-avatar' + (selected ? ' is-active' : ''));
+    const b = R().h('button', 'ljod-avatar vp-button vp-button--quiet' + (selected ? ' is-active' : ''));
     b.type = 'button';
     b.dataset.avatar = av.id;
     b.dataset.tone = av.tone;
@@ -47,19 +47,20 @@
     s.profiles.forEach(function (p) {
       const av = LjodState.avatarOf(p.avatar);
       const st = LjodAdaptive.stats(p.adaptive);
-      const card = R().h('div', 'ljod-profile' + (current && current.id === p.id ? ' is-active' : ''));
+      const card = R().h('div', 'ljod-profile vp-panel vp-panel--inset' + (current && current.id === p.id ? ' is-active' : ''));
       card.dataset.tone = av.tone;
 
-      const pick = R().h('button', 'ljod-profile-pick');
+      const pick = R().h('button', 'ljod-profile-pick vp-button vp-button--quiet vp-button--block');
       pick.type = 'button';
       pick.appendChild(LjodShapes.avatar(av.shape, 56));
       pick.appendChild(R().h('span', 'ljod-profile-name', av.name));
       pick.appendChild(R().h('span', 'ljod-profile-sum', st.planted + ' av ' + st.total + ' bokstavar'));
       pick.setAttribute('aria-label', 'Vel ' + av.name + ', ' + st.planted + ' av ' + st.total + ' bokstavar');
+      pick.setAttribute('aria-pressed', String(!!(current && current.id === p.id)));
       pick.addEventListener('click', function () { select(p.id); });
       card.appendChild(pick);
 
-      const del = R().h('button', 'ljod-profile-del');
+      const del = R().h('button', 'ljod-profile-del vp-button vp-button--danger vp-button--compact vp-button--block');
       del.type = 'button';
       del.textContent = 'Slett';
       del.setAttribute('aria-label', 'Slett ' + av.name);
@@ -78,7 +79,7 @@
     const taken = s.profiles.map(function (p) { return p.avatar; });
     const free = LjodState.AVATARS.filter(function (a) { return taken.indexOf(a.id) === -1; });
     if (free.length) {
-      const add = R().h('div', 'ljod-newprofile');
+      const add = R().h('div', 'ljod-newprofile vp-panel vp-panel--plain');
       add.appendChild(R().h('p', 'ljod-hint', 'Vel ein figur for å byrje:'));
       const row = R().h('div', 'ljod-avatar-row');
       free.forEach(function (av) {
@@ -92,6 +93,7 @@
       add.appendChild(row);
       host.appendChild(add);
     }
+    if (root.VyrdepilDesign) root.VyrdepilDesign.initSelections(host);
   }
 
   function select(id) {
@@ -126,7 +128,7 @@
       const def = window['LjodMode_' + m.id];
       const unlocked = open.indexOf(m.id) !== -1;
 
-      const card = R().h(unlocked ? 'a' : 'div', 'ljod-mode' + (unlocked ? '' : ' is-locked'));
+      const card = R().h(unlocked ? 'a' : 'div', 'ljod-mode vp-panel ' + (unlocked ? 'vp-panel--plain' : 'vp-panel--inset is-locked'));
       if (unlocked) {
         card.href = 'spel.html?p=' + encodeURIComponent(current.id) + '&m=' + encodeURIComponent(m.id);
       }
@@ -157,7 +159,7 @@
       if (unlocked && VARIANTAR[m.id]) {
         const boks = R().h('div', 'ljod-mode-par');
         boks.appendChild(card);
-        const alt = R().h('a', 'ljod-mode-variant', VARIANTAR[m.id].label);
+        const alt = R().h('a', 'ljod-mode-variant vp-button vp-button--quiet vp-button--compact', VARIANTAR[m.id].label);
         alt.href = VARIANTAR[m.id].href;
         alt.setAttribute('aria-label', VARIANTAR[m.id].aria);
         boks.appendChild(alt);
@@ -191,7 +193,7 @@
 
   /* ──────────────── Fontveljar ──────────────── */
 
-  /* Ligg ved sida av temaveljaren i ånda: eit val som høyrer heime i ein
+  /* Ligg synleg ved sida av dei andre spelvala: eit val som høyrer heime i ein
      app for dei som strevar med lesing, ikkje gøymd i ei innstilling. */
   function wireFont() {
     const host = $('fontpick');
@@ -200,19 +202,22 @@
     document.body.dataset.font = s.font;
 
     LjodState.FONTS.forEach(function (f) {
-      const b = R().h('button', 'btn ljod-fontbtn' + (s.font === f.id ? ' active' : ''));
+      const b = R().h('button', 'vp-button vp-button--compact ljod-fontbtn' + (s.font === f.id ? ' active' : ''));
       b.type = 'button';
+      b.setAttribute('aria-pressed', String(s.font === f.id));
       b.textContent = f.label;
       b.addEventListener('click', function () {
         const st = LjodState.read();
         st.font = f.id;
         LjodState.write(st);
         document.body.dataset.font = f.id;
-        Array.prototype.forEach.call(host.children, function (c) { c.classList.remove('active'); });
+        Array.prototype.forEach.call(host.children, function (c) { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
         b.classList.add('active');
+        b.setAttribute('aria-pressed', 'true');
       });
       host.appendChild(b);
     });
+    if (root.VyrdepilDesign) root.VyrdepilDesign.initSelections(host);
   }
 
   /* ──────────────── Faner ──────────────── */
@@ -250,19 +255,22 @@
       }
       const chosen = LjodState.read().voice || reg.default;
       reg.voices.forEach(function (v) {
-        const b = R().h('button', 'btn ljod-fontbtn' + (chosen === v.id ? ' active' : ''));
+        const b = R().h('button', 'vp-button vp-button--compact ljod-fontbtn' + (chosen === v.id ? ' active' : ''));
         b.type = 'button';
+        b.setAttribute('aria-pressed', String(chosen === v.id));
         b.textContent = v.name || v.id;
         if (v.note) b.title = v.note;
         b.addEventListener('click', function () {
           const st = LjodState.read();
           st.voice = v.id;
           LjodState.write(st);
-          Array.prototype.forEach.call(host.children, function (c) { c.classList.remove('active'); });
+          Array.prototype.forEach.call(host.children, function (c) { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
           b.classList.add('active');
+          b.setAttribute('aria-pressed', 'true');
         });
         host.appendChild(b);
       });
+      if (root.VyrdepilDesign) root.VyrdepilDesign.initSelections(host);
     });
   }
 
@@ -281,7 +289,7 @@
       LjodState.write(s);
       refresh();
     });
-    const lab = R().h('label', 'ljod-check');
+    const lab = R().h('label', 'ljod-check vp-choice');
     lab.htmlFor = 'allModesBox';
     lab.appendChild(box);
     lab.appendChild(R().h('span', null, 'Opne alle modusane'));

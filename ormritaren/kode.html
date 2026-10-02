@@ -7,13 +7,12 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="../css/neobrutalisme.css">
 <link rel="stylesheet" href="../_libs/codemirror/codemirror.css">
 <link rel="stylesheet" href="../_libs/codemirror/addon/hint/show-hint.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/leksjon.css">
-<script src="../js/neo-header.js" defer></script>
-<script src="../js/vyrdepil-icons.js" defer></script>
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+
 <script src="../js/vyrdepil-storage.js" defer></script>
 <script src="../_libs/codemirror/codemirror.js" defer></script>
 <script src="../_libs/codemirror/mode/python/python.js" defer></script>
@@ -36,10 +35,9 @@
 <script src="js/oppgaver.js" defer></script>
 <script src="js/leksjon.js" defer></script>
 <script src="js/app.js" defer></script>
+  <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-light-theme="forest" data-dark-theme="space" data-theme="forest">
-
-<neo-header></neo-header>
+<body class="vp-page" data-vp-app="ormritaren" data-vp-layout="expanded" data-vp-preserve data-vp-design data-vp-site-footer>
 
 <div class="page-wrapper">
 <main class="main-content main-wide">
@@ -251,8 +249,8 @@
 </div>
 
 <!-- Modal for input() -->
-<div class="modal-overlay" id="inputOverlay">
-  <div class="modal2" role="dialog" aria-modal="true" aria-labelledby="inputLedetekst">
+<div class="modal-overlay vp-modal-backdrop" id="inputOverlay" data-vp-modal-escape="local">
+  <div class="modal2 vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="inputLedetekst">
     <h3 class="no-mt" id="inputLedetekst">Programmet ventar på noko</h3>
     <form id="inputSkjema">
       <input type="text" id="inputFelt" class="orm-inputfelt" autocomplete="off" spellcheck="false">
@@ -261,5 +259,13 @@
   </div>
 </div>
 
+
+
+
+  <script src="../js/vyrdepil-icons.js"></script>
+  <script src="../js/vyrdepil-util.js?v=1.2"></script>
+  <script src="../js/vyrdepil-design.js?v=1.1"></script>
+  <script src="../js/vyrdepil-app-shell.js?v=8"></script>
+  <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>
 </html>

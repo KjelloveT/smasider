@@ -1,4 +1,4 @@
-/* Vitjingsruta — utvidar neobrutalisme.css.
+/* Vitjingsruta — appspesifikke tillegg til fellesstilen.
 
    Sjølve QR-koden er unnateken frå designsystemet: han skal bere dei
    fargane brukaren har valt, i alle tema. Alt rundt han følgjer temaet. */
@@ -379,7 +379,7 @@
 .vr-sheet-caption { font-weight: 800; font-size: 11pt; margin-top: 2mm; word-break: break-word; }
 
 @media print {
-  neo-header, .page-wrapper { display: none !important; }
+  .vp-header, .page-wrapper { display: none !important; }
 
   .vr-print { display: block; }
   .vr-print img { max-width: 150mm; max-height: 200mm; display: block; margin: 0 auto; }

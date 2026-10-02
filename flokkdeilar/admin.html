@@ -7,13 +7,11 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="../js/neo-header.js" defer></script>
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+  <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
-<neo-header></neo-header>
-
+<body class="vp-page" data-vp-design data-vp-app="flokkdeilar" data-vp-site-footer>
 <div class="page-wrapper">
 <main class="main-content">
 
@@ -135,13 +133,9 @@
 </main>
 </div>
 
-<footer class="site-footer">
-    <p>Flokkdeilar — all data lagrast lokalt i din nettlesar.</p>
-</footer>
-
 <!-- Modal: Aktiver utvida admin med PIN -->
-<div class="modal-overlay" id="overlayAktiverPin" role="dialog" aria-modal="true" aria-labelledby="titleAktiverPin">
-    <div class="modal4">
+<div class="modal-overlay vp-modal-backdrop" id="overlayAktiverPin" role="dialog" aria-modal="true" aria-labelledby="titleAktiverPin">
+    <div class="modal4 vp-modal-panel">
         <button class="modal-close-x" id="closeAktiverPin" aria-label="Lukk">×</button>
         <h2 class="heading4 no-mt" id="titleAktiverPin">Aktiver utvida administrasjon</h2>
         <p style="font-size:0.9rem; margin-bottom:12px;">Vel ein PIN-kode (4–6 siffer) for å beskytte relasjonane.</p>
@@ -162,8 +156,8 @@
 </div>
 
 <!-- Modal: Stadfest fjern tilleggsinfo -->
-<div class="modal-overlay" id="overlayFjern" role="dialog" aria-modal="true" aria-labelledby="titleFjern">
-    <div class="modal4">
+<div class="modal-overlay vp-modal-backdrop" id="overlayFjern" role="dialog" aria-modal="true" aria-labelledby="titleFjern">
+    <div class="modal4 vp-modal-panel">
         <button class="modal-close-x" id="closeFjern" aria-label="Lukk">×</button>
         <h2 class="heading4 no-mt" id="titleFjern">Fjern tilleggsinfo?</h2>
         <p>Dette slettar alle relasjonar (ja/kanskje/aldri) og PIN-koden permanent. Elevnamna blir verande.</p>
@@ -176,10 +170,15 @@
 
 <script src="../js/vyrdepil-storage.js"></script>
 <script src="../js/vyrdepil-icons.js"></script>
+<script src="../js/vyrdepil-util.js?v=1.2"></script>
+
 <script src="js/icons.js"></script>
 <script src="js/names.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/crypto.js"></script>
 <script src="js/ui-admin.js"></script>
+  <script src="../js/vyrdepil-design.js?v=1.1"></script>
+  <script src="../js/vyrdepil-app-shell.js?v=8"></script>
+  <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>
 </html>

@@ -21,19 +21,17 @@ LL.main = (function () {
   function openModal(id) {
     const overlay = document.getElementById(id);
     if (!overlay) return;
-    overlay.classList.add('open');
-    overlay.setAttribute('aria-hidden', 'false');
+    Vy.openModal(overlay);
   }
   function closeModal(id) {
     const overlay = document.getElementById(id);
     if (!overlay) return;
-    overlay.classList.remove('open');
-    overlay.setAttribute('aria-hidden', 'true');
+    Vy.closeModal(overlay);
   }
   function closeAllModals() {
     document.querySelectorAll('.modal-overlay.open').forEach(o => {
       if (o.classList.contains('modal-locked')) return; // t.d. hendingskort krev val
-      o.classList.remove('open'); o.setAttribute('aria-hidden', 'true');
+      Vy.closeModal(o);
     });
   }
 
@@ -58,14 +56,10 @@ LL.main = (function () {
     if (LL.uiReport && LL.uiReport.init) LL.uiReport.init();
     LL.uiSetup.renderStart();
 
-    // Modal-lukking: kryss-knappar, overlay-klikk, Escape
+    // Modal-lukking gjennom felles Vy-dialoghandtering.
     document.querySelectorAll('[data-close-modal]').forEach(b => {
       b.addEventListener('click', () => closeModal(b.getAttribute('data-close-modal')));
     });
-    document.querySelectorAll('.modal-overlay').forEach(o => {
-      o.addEventListener('click', e => { if (e.target === o) closeModal(o.id); });
-    });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllModals(); });
 
     LL.util.hydrate(document);
   }

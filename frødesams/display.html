@@ -7,10 +7,11 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="../css/neobrutalisme.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+  <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body class="display-mode" data-theme="classic">
+<body class="display-mode vp-page" data-vp-design data-vp-site-page="true" data-vp-layout="expanded" data-vp-site-footer>
 
 <div class="display-wrapper">
 
@@ -46,8 +47,8 @@
 </div><!-- /display-wrapper -->
 
 <!-- Vinnar-overlay -->
-<div id="winner-modal" class="modal-overlay display-winner" role="dialog" aria-modal="true" aria-labelledby="display-winner-title">
-  <div class="modal2 winner-modal-box display-winner-box">
+<div id="winner-modal" class="modal-overlay display-winner vp-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="display-winner-title">
+  <div class="modal2 winner-modal-box display-winner-box vp-modal-panel">
     <div class="winner-trophy" aria-hidden="true">🏆</div>
     <h2 class="heading2" id="display-winner-title">Vinnar!</h2>
     <div id="winner-name" class="winner-name"></div>
@@ -57,8 +58,8 @@
 </div>
 
 <!-- Skript: state + sync + display (ingen app.js / game.js) -->
-<script src="../js/neobrutalisme.js"></script>
 <script src="../js/vyrdepil-storage.js"></script>
+<script src="../js/vyrdepil-util.js?v=1.2"></script>
 <script src="js/state.js?v=1"></script>
 <script src="js/storage.js?v=1"></script>
 <script src="js/sync.js?v=1"></script>

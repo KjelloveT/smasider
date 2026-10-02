@@ -1,0 +1,65 @@
+/* Listesmia bruker Vyrdepil-paletten rundt den eksisterande søkeflata. */
+body.vp-page {
+  padding: 0;
+  background: var(--vp-sky);
+  color: var(--vp-ink);
+}
+
+body.vp-page .container {
+  width: min(960px, calc(100% - 24px));
+  max-width: 960px;
+  margin: 20px auto 36px;
+  background: var(--vp-paper);
+  border: 4px solid var(--vp-frame);
+  border-radius: var(--vp-radius);
+  box-shadow: none;
+  overflow: visible;
+}
+
+body.vp-page .container > header {
+  color: var(--vp-ink);
+  background: var(--vp-honey);
+  border-bottom: 2px solid var(--vp-frame);
+  text-align: left;
+}
+
+body.vp-page .container :is(h1,h2,h3,p,label,small,strong,.hint,.hint-text) { color: var(--vp-ink); }
+body.vp-page .step,
+body.vp-page .filter-card,
+body.vp-page .prop-card,
+body.vp-page .result-card {
+  color: var(--vp-ink);
+  background: var(--vp-wood);
+  border: 2px solid var(--vp-frame);
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+body.vp-page .step-num { color: var(--vp-ink); background: var(--vp-coral); }
+body.vp-page .container :is(button,.btn,.btn-mini) {
+  min-height: 44px;
+  color: var(--vp-ink);
+  background: var(--vp-paper);
+  border: 2px solid var(--vp-frame);
+  border-radius: 8px;
+  box-shadow: 0 3px 0 var(--vp-shadow);
+  font: 750 1rem/1.25 var(--vp-font);
+}
+body.vp-page .container :is(button,.btn,.btn-mini):hover:not(:disabled) { background: var(--vp-honey); }
+body.vp-page .container :is(input,select,textarea) {
+  max-width: 100%;
+  color: var(--vp-ink);
+  background: var(--vp-paper);
+  border: 2px solid var(--vp-frame);
+  border-radius: 7px;
+  font: 400 1rem/1.4 var(--vp-font);
+}
+body.vp-page .container :is(button,input,select,textarea,a,[tabindex]):focus-visible {
+  outline: 3px solid var(--vp-focus);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  body.vp-page .container { width: calc(100% - 16px); margin: 12px auto 24px; }
+  body.vp-page .content { padding: 14px; }
+}

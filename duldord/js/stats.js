@@ -21,7 +21,7 @@
       ['Beste rekkje', s.best]
     ].forEach(([label, value]) => {
       const cell = document.createElement('div');
-      cell.className = 'dd-stat';
+      cell.className = 'vp-panel vp-panel--inset dd-stat';
       const v = document.createElement('span');
       v.className = 'dd-stat-value';
       v.textContent = value;

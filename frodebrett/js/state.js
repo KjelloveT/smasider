@@ -34,17 +34,10 @@
   FB.show = (id) => { const e = FB.el(id); if (e) e.classList.remove('hidden'); };
   FB.hide = (id) => { const e = FB.el(id); if (e) e.classList.add('hidden'); };
 
-  // Modal-overlay (neobrutalisme: .modal-overlay.open -> display:flex)
-  FB.openOverlay = (id) => { const e = FB.el(id); if (e) e.classList.add('open'); };
-  FB.closeOverlay = (id) => { const e = FB.el(id); if (e) e.classList.remove('open'); };
-  FB.isOverlayOpen = (id) => { const e = FB.el(id); return !!e && e.classList.contains('open'); };
-
-  FB.escapeHtml = (str) => {
-    if (str == null) return '';
-    return String(str)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-  };
+  FB.openOverlay = (id) => { const e = FB.el(id); if (e) Vy.openModal(e); };
+  FB.closeOverlay = (id) => { const e = FB.el(id); if (e) Vy.closeModal(e); };
+  FB.isOverlayOpen = (id) => Vy.modalOpen(FB.el(id));
+  FB.escapeHtml = Vy.escapeHtml;
 
   // Svart eller kvit tekst som gjev best kontrast mot ein hex-bakgrunn (§3.2).
   FB.textOn = (hex) => {

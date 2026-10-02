@@ -1,4 +1,4 @@
-/* Bolkestokk — landingssida. Utvidar css/neobrutalisme.css.
+/* Bolkestokk — landingssida. Brukar felles Vyrdepil-palett og navigasjon.
  *
  * Dette er ei innhaldsside, ikkje ei arbeidsflate, så ho brukar ikkje
  * .main-wide (AGENTS.md §3.1.1).
@@ -7,7 +7,7 @@
 /* ---- fri programmering ------------------------------------------------
  * Same kortform som modulane under, så framsida har éin type boks. */
 
-/* --text og ikkje --accent: i dei mørke temaa er --accent ein lys neonfarge,
+/* --text og ikkje --accent: funksjonsfargar skal ikkje bere kvit UI-tekst,
  * og pila fall til 3,45:1 mot flata (AGENTS.md §3.2). */
 .bs-frikort-pil {
     margin: 0;
@@ -16,9 +16,52 @@
     color: var(--text);
 }
 
+body[data-vp-app="bolkestokk"]:not([data-vp-preserve]) {
+    --bg: var(--vp-wood, #fff9e9);
+    --surface: var(--vp-paper, #fffdf5);
+    --text: var(--vp-ink, #000);
+    --border: var(--vp-frame, #142820);
+    --shadow: var(--vp-frame, #142820);
+    --muted: #454a46;
+    --accent: var(--vp-moss, #d5e5c5);
+    --accent2: var(--vp-coral, #efb29d);
+    --accent3: var(--vp-sky, #d6e8f1);
+    --accent4: var(--vp-honey, #f5dfaa);
+    --accent5: var(--vp-heather, #e5dcef);
+    --text-on-accent: #000;
+    --text-on-light-accent: #000;
+}
+
 /* ---- modulgrupper ----------------------------------------------------- */
 
-.bs-modulgruppe { margin-bottom: 32px; }
+.bs-modulgruppe {
+    margin: 0 0 30px;
+    padding: clamp(14px, 2vw, 24px);
+    border: 3px solid var(--vp-frame, #142820);
+    border-radius: 10px;
+    background: var(--vp-wood, #fff9e9);
+    color: #000;
+}
+
+body.vp-migrated-page[data-vp-app="bolkestokk"]:not([data-vp-preserve]) #main.vp-migrated-main {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+body[data-vp-app="bolkestokk"] .page-wrapper { background: transparent; border: 0; box-shadow: none; }
+body[data-vp-app="bolkestokk"] .bs-modulgruppe > h2 {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 0 14px;
+    padding: 10px 14px;
+    border: 2px solid var(--vp-frame, #142820);
+    border-radius: 8px;
+    background: var(--vp-honey, #f5dfaa);
+    color: #000;
+}
 
 /* --muted fell til 4,30:1 i «sunset» — like under AA. Gruppeteksten er
  * ei innleiing ein lærar faktisk les, ikkje pynt. */
@@ -33,7 +76,7 @@
 .bs-modulrutenett {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-    gap: 16px;
+    gap: 18px;
     align-items: start;
 }
 
@@ -60,7 +103,7 @@ a.bs-modulkort:hover { transform: translate(-2px, -2px); }
  *
  * Fyrste utgåve la aksentfargen som bakgrunn med --text-on-accent oppå, slik
  * §3.2 legg opp til. Måling over alle 21 tema viste at det held berre i dei
- * lyse: i mørke tema er --accent og --accent2 lyse neonfargar, og kvit tekst
+ * lyse: --accent og --accent2 er funksjonsfargar, og kvit tekst
  * på dei fall til 2,4–4,2:1 (verst i «hacker» og «dracula»).
  *
  * Difor ber ei stripe fargen i staden. Teksten står på --surface med --text og

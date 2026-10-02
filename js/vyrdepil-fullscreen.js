@@ -114,8 +114,8 @@
    ein god del av høgda på ein liggjande mobil. */
 /* Eigne reglar per prefiks: eit ukjent selektor-ledd i ei felles liste ville
    fått heile regelen forkasta. */
-:fullscreen neo-header,:fullscreen .site-header{display:none}
-:-webkit-full-screen neo-header,:-webkit-full-screen .site-header{display:none}
+:fullscreen .vp-header{display:none}
+:-webkit-full-screen .vp-header{display:none}
 .vp-fs-top-right{top:calc(10px + env(safe-area-inset-top));right:calc(10px + env(safe-area-inset-right))}
 .vp-fs-top-left{top:calc(10px + env(safe-area-inset-top));left:calc(10px + env(safe-area-inset-left))}
 .vp-fs-bottom-right{bottom:calc(10px + env(safe-area-inset-bottom));right:calc(10px + env(safe-area-inset-right))}

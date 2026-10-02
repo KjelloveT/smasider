@@ -288,7 +288,7 @@ const Edit = (() => {
         const start = State.fmtHM(Math.floor(State.nowMinutes(Engine.now())));
         quickBlock = State.newBlock({ title: '', emoji: '📖', type: 'lesson', start, duration: 45 });
         renderQuickBody();
-        $('modal-quick').classList.add('open');
+        Vy.openModal($('modal-quick'));
     }
 
     function renderQuickBody() {
@@ -364,7 +364,7 @@ const Edit = (() => {
         State.sortBlocks(p);
         App.saveSession();
 
-        $('modal-quick').classList.remove('open');
+        Vy.closeModal($('modal-quick'));
         App.setPanel('lesson', true);
         App.setMode('display');
         App.toast('Økta er i gang.');
@@ -384,7 +384,7 @@ const Edit = (() => {
 
     function openFilesModal() {
         renderPlansList();
-        $('modal-files').classList.add('open');
+        Vy.openModal($('modal-files'));
         $('save-name').focus();
     }
 
@@ -407,7 +407,7 @@ const Edit = (() => {
                         copy.id = State.uid('p');
                         copy.weekday = null;
                         App.setTodayPlan(copy, p.id);
-                        $('modal-files').classList.remove('open');
+                        Vy.closeModal($('modal-files'));
                         renderEditor();
                     }
                 }),
@@ -458,7 +458,7 @@ const Edit = (() => {
 
     function openSubjectsModal() {
         renderSubjectsList();
-        $('modal-subjects').classList.add('open');
+        Vy.openModal($('modal-subjects'));
     }
 
     function renderSubjectsList() {

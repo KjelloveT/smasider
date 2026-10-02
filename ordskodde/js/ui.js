@@ -175,13 +175,10 @@
   // ---- Modal (Escape lukkar — AGENTS §5.4) ----
 
   function wireModal(overlay, closeBtn) {
-    function close() { overlay.classList.remove('open'); }
-    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+    function close() { Vy.closeModal(overlay); }
+    Vy.bindOverlayClose(overlay);
     if (closeBtn) closeBtn.addEventListener('click', close);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && overlay.classList.contains('open')) close();
-    });
-    return { open: () => overlay.classList.add('open'), close };
+    return { open: () => Vy.openModal(overlay), close };
   }
 
   root.OrdskoddeUI = {

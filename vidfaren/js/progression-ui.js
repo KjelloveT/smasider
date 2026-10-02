@@ -8,7 +8,7 @@ const ProgressionUI = (function () {
   /* Kort melding — sjå Vy.toast() i js/vyrdepil-util.js. Låg tidlegare her i
      eiga utgåve; flytta til fellesmodulen så rettingar treffer alle verktøya,
      og fordi den gamle stilen fylte flata med --accent og fall under
-     AA-kravet i dei sju mørke temaa (AGENTS.md §3.2). */
+     kontrastkravet for faste lyse flater (AGENTS.md §3.2). */
   function toast(msg, icon, kind) {
     return Vy.toast(msg, { icon: icon, kind: kind });
   }
@@ -65,18 +65,11 @@ const ProgressionUI = (function () {
 
   function openBadgeGallery() {
     renderBadgeGallery();
-    document.getElementById('badgeModal').classList.add('open');
+    Vy.openModal(document.getElementById('badgeModal'));
   }
   function closeBadgeGallery() {
-    document.getElementById('badgeModal').classList.remove('open');
+    Vy.closeModal(document.getElementById('badgeModal'));
   }
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      const m = document.getElementById('badgeModal');
-      if (m && m.classList.contains('open')) closeBadgeGallery();
-    }
-  });
 
   return {
     toast, announceBadges, evaluateAndAnnounce,

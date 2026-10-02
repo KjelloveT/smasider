@@ -7,13 +7,11 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="../js/neo-header.js" defer></script>
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+  <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
-<neo-header></neo-header>
-
+<body class="vp-page" data-vp-design data-vp-app="ordaklok" data-vp-site-footer>
 <div class="page-wrapper">
     <main class="main-content">
 
@@ -86,13 +84,9 @@
     </main>
 </div>
 
-<footer class="site-footer">
-    <p>Ordaklok — del av Vyrdepil. All data lagrast lokalt i din nettlesar.</p>
-</footer>
-
 <!-- Modal: Lim inn fleire -->
-<div class="modal-overlay" id="bulkOverlay" role="dialog" aria-modal="true" aria-labelledby="bulkTitle">
-    <div class="modal4">
+<div class="modal-overlay vp-modal-backdrop" id="bulkOverlay" role="dialog" aria-modal="true" aria-labelledby="bulkTitle">
+    <div class="modal4 vp-modal-panel">
         <button class="modal-close-x" id="bulkClose" aria-label="Lukk">×</button>
         <h2 class="heading4 no-mt" id="bulkTitle">Lim inn fleire ord-par</h2>
         <p>Skriv eller lim inn par på éin av desse formata, eitt per linje:</p>
@@ -113,8 +107,8 @@ dog = hund"></textarea>
 </div>
 
 <!-- Modal: Del lenkje (gjenbrukar same struktur som index.html) -->
-<div class="modal-overlay" id="shareLinkOverlay" role="dialog" aria-modal="true" aria-labelledby="shareLinkTitle">
-    <div class="modal4">
+<div class="modal-overlay vp-modal-backdrop" id="shareLinkOverlay" role="dialog" aria-modal="true" aria-labelledby="shareLinkTitle">
+    <div class="modal4 vp-modal-panel">
         <button class="modal-close-x" id="shareLinkClose" aria-label="Lukk">×</button>
         <h2 class="heading4 no-mt" id="shareLinkTitle">Del lista</h2>
         <p>Kopier lenkja og send til andre. Den inneheld heile lista og fungerer offline.</p>
@@ -133,5 +127,10 @@ dog = hund"></textarea>
 <script src="js/state.js"></script>
 <script src="js/share.js"></script>
 <script src="js/editor.js"></script>
+  <script src="../js/vyrdepil-icons.js"></script>
+  <script src="../js/vyrdepil-util.js?v=1.2"></script>
+  <script src="../js/vyrdepil-design.js?v=1.1"></script>
+  <script src="../js/vyrdepil-app-shell.js?v=8"></script>
+  <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>
 </html>

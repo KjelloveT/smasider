@@ -5,17 +5,7 @@
  * med ?modul= i adressa.
  */
 
-/* ---- eigne fargar for opplæringsdelen ---------------------------------
- *
- * Temaet gjev fem aksentar, og dei er brukte til andre ting frå før. Her
- * treng vi fire som skal vere lette å skilje frå kvarandre og frå resten:
- * kodeløype, skriv, les og rett feilen.
- *
- * Fargane er faste, ikkje henta frå temaet, nettopp fordi dei skal tyde det
- * same uansett kva tema eleven har valt. Til gjengjeld må dei settast for
- * hand i dei mørke temaa: dei mørke variantane under blir uleselege på ein
- * mørk flate, så der byter vi til lyse med mørk tekst.
- *
+/* ---- faste fargar for opplæringsdelen -------------------------------
  * Fargen står aldri åleine — kvar type har òg eit eige ikon og eit ord. */
 :root {
     --orm-loype-farge: #6d28d9;  --orm-loype-paa: #ffffff;  --orm-loype-skugge: #3b0f7a;
@@ -23,19 +13,6 @@
     --orm-les-farge:   #92400e;  --orm-les-paa:   #ffffff;  --orm-les-skugge:   #451a03;
     --orm-rett-farge:  #be123c;  --orm-rett-paa:  #ffffff;  --orm-rett-skugge:  #750b25;
     --orm-tint: 10%;
-}
-
-/* I dei mørke temaa er sjølve fargane lyse. Ein mørk skugge ville forsvunne
- * mot den mørke flata, så skuggen er her ein djupare, metta variant av same
- * kuløren — framleis tydeleg mørkare enn boksen, men lys nok til å synast. */
-[data-theme="space"], [data-theme="midnight"], [data-theme="dracula"],
-[data-theme="cyberpunk"], [data-theme="neon"], [data-theme="slate"],
-[data-theme="hacker"] {
-    --orm-loype-farge: #c4b5fd;  --orm-loype-paa: #1a1a1a;  --orm-loype-skugge: #7c3aed;
-    --orm-skriv-farge: #93c5fd;  --orm-skriv-paa: #1a1a1a;  --orm-skriv-skugge: #2563eb;
-    --orm-les-farge:   #fcd34d;  --orm-les-paa:   #1a1a1a;  --orm-les-skugge:   #b45309;
-    --orm-rett-farge:  #fda4af;  --orm-rett-paa:  #1a1a1a;  --orm-rett-skugge:  #e11d48;
-    --orm-tint: 16%;
 }
 
 .orm-leksjon { display: none; }
@@ -169,11 +146,9 @@
 /* Løypa har si eiga rute, så det er tydeleg at ho er noko anna enn både
  * læreteksten over og oppgåvene under.
  *
- * Bakgrunnen er --surface, ikkje ein tone av løype-fargen. Ein tone målte
- * 1,06:1 mot brødteksten i «space» og «midnight»: i mørke tema er
- * løype-fargen lys, og ein lys tone under lys tekst blir uleseleg. Den tjukke
- * ramma og den farga overskrifta ber identiteten i staden, og då er teksten
- * alltid på ei flate han er laga for. */
+ * Bakgrunnen er --surface, ikkje ein tone av løype-fargen. Den tjukke ramma
+ * og den farga overskrifta ber identiteten, medan teksten står på ei lys
+ * flate med god kontrast. */
 .orm-loype {
     margin-top: 24px;
     padding: 15px 17px;

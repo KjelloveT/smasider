@@ -7,15 +7,13 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="../css/vyrde.css">
     <link rel="stylesheet" href="css/boksekamp.css">
     <script src="../js/vyrde.js" defer></script>
-    <script src="../js/neo-header.js" defer></script>
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+      <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
-
-<neo-header></neo-header>
+<body data-vp-app="ordaklok" data-vp-layout="medium" data-vp-site-footer>
 
 <div class="bk-page">
     <main class="bk-main">
@@ -23,7 +21,7 @@
         <!-- Hero: poster med tittel + Vyrde -->
         <section class="bk-poster bk-sunburst bk-sun-calm bk-fade-in">
             <div class="bk-hero">
-                <img src="../_resources/ordaklok.png" alt="Ordaklok" class="bk-hero-logo">
+                <img src="../_resources/ordaklok.png" data-vp-app-logo alt="Ordaklok" class="bk-hero-logo">
                 <div>
                     <h1 class="bk-hero-title">ORDAKLOK</h1>
                     <p class="bk-hero-tagline">Hovudkamp mellom hovudet ditt og orda — fire kampformer, ein lagnad.</p>
@@ -65,14 +63,10 @@
     </main>
 </div>
 
-<footer class="bk-footer">
-    Ordaklok — del av Vyrdepil. All data lagrast lokalt i din nettlesar.
-</footer>
-
 <!-- Modal: Importer frå delelenkje (?d=/?dz=) -->
-<div class="bk-modal-overlay" id="shareImportOverlay" role="dialog" aria-modal="true" aria-labelledby="shareImportTitle">
-    <div class="bk-modal">
-        <button class="bk-modal-close" id="shareImportClose" aria-label="Lukk">×</button>
+<div class="bk-modal-overlay vp-modal-backdrop" id="shareImportOverlay" role="dialog" aria-modal="true" aria-labelledby="shareImportTitle">
+    <div class="bk-modal vp-modal-panel">
+        <button class="bk-modal-close vp-button vp-button--icon vp-button--quiet" id="shareImportClose" aria-label="Lukk">×</button>
         <h2 id="shareImportTitle">Delt liste</h2>
         <p>Nokon har delt ei omgrepsliste med deg. Vil du leggje til denne lista i biblioteket ditt?</p>
         <div class="bk-paper" id="shareImportPreview" style="margin: 16px 0;">
@@ -86,9 +80,9 @@
 </div>
 
 <!-- Modal: Del lenkje -->
-<div class="bk-modal-overlay" id="shareLinkOverlay" role="dialog" aria-modal="true" aria-labelledby="shareLinkTitle">
-    <div class="bk-modal">
-        <button class="bk-modal-close" id="shareLinkClose" aria-label="Lukk">×</button>
+<div class="bk-modal-overlay vp-modal-backdrop" id="shareLinkOverlay" role="dialog" aria-modal="true" aria-labelledby="shareLinkTitle">
+    <div class="bk-modal vp-modal-panel">
+        <button class="bk-modal-close vp-button vp-button--icon vp-button--quiet" id="shareLinkClose" aria-label="Lukk">×</button>
         <h2 id="shareLinkTitle">Del lista</h2>
         <p class="bk-muted" style="margin-bottom: 0;">Elevane skannar QR-koden med telefonen, eller du kopierer lenkja til t.d. ein vekeplan.</p>
 
@@ -150,5 +144,11 @@
   BKComponents.wireModal(document.getElementById('shareLinkOverlay'),    { closeBtnId: 'shareLinkClose' });
 </script>
 
+
+<script src="../js/vyrdepil-icons.js"></script>
+<script src="../js/vyrdepil-util.js?v=1.2"></script>
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
+<script src="../js/vyrdepil-app-shell.js?v=6"></script>
+<script src="../js/vyrdepil-menu.js"></script>
 </body>
 </html>

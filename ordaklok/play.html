@@ -7,15 +7,13 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="../css/vyrde.css">
     <link rel="stylesheet" href="css/boksekamp.css">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
     <script src="../js/vyrde.js" defer></script>
-    <script src="../js/neo-header.js" defer></script>
+  <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-light-theme="classic" data-dark-theme="space" data-theme="classic">
-
-<neo-header></neo-header>
+<body class="vp-page" data-vp-app="ordaklok" data-vp-layout="expanded" data-vp-preserve data-vp-stone-mascot data-vp-design data-vp-site-footer>
 
 <div class="bk-page">
     <main class="bk-main">
@@ -43,7 +41,7 @@
                 </div>
 
                 <div class="bk-setup-vyrde">
-                    <span class="vyrde bk-vyrde" id="setupVyrde" data-vyrde="wave" data-vyrde-alt="Vyrde, maskoten"></span>
+                    <img class="bk-vyrde" id="setupVyrde" data-vp-mascot src="../_resources/vyrdepil-design/vyrde.png" alt="Vyrde, maskoten" width="192" height="184">
                     <div class="bk-bubble bk-bubble-left" id="vyrdeBubble">Godt folk! Vel kampform under, juster reglane, og ring start når du er klar.</div>
                 </div>
 
@@ -133,10 +131,6 @@
     </main>
 </div>
 
-<footer class="bk-footer">
-    Ordaklok — del av Vyrdepil. All data lagrast lokalt i din nettlesar.
-</footer>
-
 <script src="../js/vyrdepil-storage.js"></script>
 <script src="js/icons/lucide-set.js"></script>
 <script src="js/ui/bk-components.js"></script>
@@ -158,5 +152,16 @@
   });
 </script>
 
+
+
+
+
+
+
+  <script src="../js/vyrdepil-icons.js"></script>
+  <script src="../js/vyrdepil-util.js?v=1.2"></script>
+  <script src="../js/vyrdepil-design.js?v=1.1"></script>
+  <script src="../js/vyrdepil-app-shell.js?v=8"></script>
+  <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>
 </html>

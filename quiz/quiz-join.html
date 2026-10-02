@@ -79,31 +79,6 @@
             background: #f0f8ff;
         }
 
-        .btn {
-            width: 100%;
-            background: #4CAF50;
-            color: white;
-            border: 2px solid #000;
-            padding: 15px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.1s;
-        }
-
-        .btn:hover {
-            background: #45a049;
-        }
-
-        .btn:active {
-            transform: translate(1px, 1px);
-        }
-
-        .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
         .quiz-area {
             display: none;
         }
@@ -182,40 +157,9 @@
         }
 
         .answer-btn {
-            background: white;
-            border: 2px solid #000;
-            padding: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.1s;
+            width: 100%;
+            justify-content: flex-start;
             text-align: left;
-            font-size: 1rem;
-        }
-
-        .answer-btn:hover:not(:disabled) {
-            background: #f0f0f0;
-        }
-
-        .answer-btn:active:not(:disabled) {
-            transform: translate(1px, 1px);
-        }
-
-        .answer-btn:disabled {
-            background: #f5f5f5;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        .answer-btn.correct {
-            background: #90EE90;
-        }
-
-        .answer-btn.incorrect {
-            background: #FFB6C1;
-        }
-
-        .answer-btn.selected {
-            background: #87CEEB;
         }
 
         .waiting-message {
@@ -326,11 +270,19 @@
             }
         }
     </style>
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+    <link rel="stylesheet" href="vyrdepil.css?v=2">
+    <script src="../js/vyrdepil-icons.js" defer></script>
+    <script src="../js/vyrdepil-util.js?v=1.2" defer></script>
+    <script src="../js/vyrdepil-design.js?v=1.1" defer></script>
+    <script src="../js/vyrdepil-app-shell.js?v=7" defer></script>
+    <script src="../js/vyrdepil-menu.js?v=2" defer></script>
+  <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body>
+<body class="vp-page quiz-page" data-vp-design data-vp-site-page="true" data-vp-site-footer>
     <div class="container">
         <header>
-            <h1>🎯 Kviss</h1>
+            <h1><span data-icon="target" aria-hidden="true"></span> Kviss</h1>
             <p class="subtitle">Delta i live quiz</p>
         </header>
 
@@ -349,7 +301,7 @@
                 <input type="text" id="player-name" placeholder="Kva heiter du?">
             </div>
             
-            <button class="btn" id="join-btn">Delta i kviss</button>
+            <button class="vp-button vp-button--primary vp-button--block" id="join-btn">Delta i kviss</button>
         </section>
 
         <section class="quiz-area" id="quiz-area">
@@ -384,7 +336,7 @@
             </div>
 
             <div class="results-display" id="results-display" style="display: none;">
-                <div class="results-title">🏆 Resultat</div>
+                <div class="results-title"><span data-icon="trophy" aria-hidden="true"></span> Resultat</div>
                 <div id="results-list">
                     <!-- Resultat fyllast dynamisk -->
                 </div>
@@ -548,7 +500,7 @@
                 this.elements.answerOptions.innerHTML = '';
                 data.options.forEach((option, index) => {
                     const button = document.createElement('button');
-                    button.className = 'answer-btn';
+                    button.className = 'vp-button answer-btn';
                     button.textContent = `${String.fromCharCode(65 + index)}) ${option}`;
                     button.addEventListener('click', () => this.submitAnswer(index));
                     this.elements.answerOptions.appendChild(button);

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 384" fill="none">
+  <defs>
+    <pattern id="grain" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(-32)">
+      <path d="M1 2h5M7 8h4" stroke="#8fb8c0" stroke-width="1.6" stroke-linecap="round" opacity=".34"/>
+    </pattern>
+    <clipPath id="board"><rect x="34" y="34" width="316" height="316" rx="17"/></clipPath>
+  </defs>
+  <rect x="34" y="34" width="316" height="316" rx="17" fill="#fff9e9" stroke="#142820" stroke-width="9"/>
+  <rect x="44" y="44" width="296" height="296" fill="url(#grain)" clip-path="url(#board)"/>
+  <path d="M81 44v296M118 44v296M155 44v296M192 44v296M229 44v296M266 44v296M303 44v296M44 81h296M44 118h296M44 155h296M44 192h296M44 229h296M44 266h296M44 303h296" stroke="#142820" stroke-width="5.5" stroke-linecap="round" opacity=".96"/>
+  <ellipse cx="192" cy="210" rx="157" ry="24" stroke="#142820" stroke-width="17"/>
+  <ellipse cx="192" cy="210" rx="157" ry="24" stroke="#e58d39" stroke-width="10"/>
+  <ellipse cx="210" cy="192" rx="24" ry="157" stroke="#142820" stroke-width="17"/>
+  <ellipse cx="210" cy="192" rx="24" ry="157" stroke="#3e87c9" stroke-width="10"/>
+  <path d="M40 63q2-18 22-19M321 341q17-1 20-20" stroke="#fffdf5" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+</svg>

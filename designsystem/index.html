@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="nn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Vyrdepil — designreferanse</title>
+  <link rel="icon" type="image/png" href="../_resources/vyrdepil-design/vyrde.png">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+  <link rel="stylesheet" href="catalogue.css">
+  <script src="../js/vyrdepil-icons.js" defer></script>
+  <script src="../js/vyrdepil-util.js?v=1.2" defer></script>
+  <script src="../js/vyrdepil-design.js?v=1.1" defer></script>
+  <script src="catalogue.js" defer></script>
+  <script src="../js/vyrdepil-menu.js" defer></script>
+  <script src="../js/vyrdepil-footer.js?v=2" defer></script>
+</head>
+<body class="vp-page" data-vp-design data-vp-site-footer>
+  <a class="catalogue-skip" href="#main">Hopp til innhaldet</a>
+  <header class="vp-header vp-header--sky">
+    <div class="vp-shell vp-header-row catalogue-header-row">
+      <a class="vp-brand" href="#main"><img data-vp-mascot src="../_resources/vyrdepil-design/vyrde.png" width="48" height="46" alt="">Vyrdepil</a>
+      <span class="catalogue-edition">Designreferanse · 0.5</span>
+      <button class="vp-button vp-menu-trigger" id="menuBtn" data-vp-menu="catalogueMenu" aria-haspopup="dialog" aria-expanded="false" aria-controls="catalogueMenu"><span data-icon="menu" aria-hidden="true"></span>Meny</button>
+    </div>
+  </header>
+  <main class="vp-shell catalogue-main" id="main">
+    <section class="vp-panel vp-panel--plain catalogue-intro">
+      <p class="catalogue-kicker">Spel, verktøy og skaparglede</p>
+      <h1 class="vp-title">Ei felles verd for Vyrdepil</h1>
+      <p>Lyst tre, svart tekst og samla mørke rammer. Same skilt og knappar på kvar sti — landskapet kan skifte.</p>
+      <nav class="vp-actions catalogue-nav" aria-label="Innhald i designreferansen">
+        <a href="#layouts">Sideoppsett</a><a href="#palette">Fargar</a><a href="#buttons">Knappar</a><a href="#surfaces">Flater</a><a href="#forms">Skjema og hjelp</a><a href="#identity">Meny og logoar</a>
+      </nav>
+      <div class="vp-actions catalogue-background-controls"><button class="vp-button vp-button--quiet vp-button--compact" id="backgroundBtn"><span data-icon="image" aria-hidden="true"></span>Byt landskap</button><span class="vp-small" id="backgroundLabel" aria-live="polite">Landskap: sommar, dag</span></div>
+    </section>
+
+    <section class="catalogue-section" id="layouts" aria-labelledby="layouts-title">
+      <div class="vp-panel vp-panel--plain catalogue-section-heading">
+        <p class="catalogue-kicker">01 · Komposisjon</p>
+        <h2 class="vp-heading" id="layouts-title">Tre oppsett, same identitet</h2>
+        <p>Vel eit oppsett. På smal skjerm blir støtteinformasjon eit trekkspel; viktige handlingar er framleis synlege.</p>
+        <div class="vp-actions" role="group" aria-label="Vis sideoppsett">
+          <button class="vp-button" data-layout="standard" aria-pressed="true" aria-controls="layout-standard">Standard</button>
+          <button class="vp-button" data-layout="expanded" aria-pressed="false" aria-controls="layout-expanded">Utvida verktøy</button>
+          <button class="vp-button" data-layout="canvas" aria-pressed="false" aria-controls="layout-canvas">Canvas-spel</button>
+        </div>
+      </div>
+
+      <div class="vp-layout-demo" id="layout-standard">
+        <div class="vp-standard">
+          <section class="vp-hero-stage" aria-label="Døme på heroskilt">
+            <div class="vp-hero"><div class="vp-hero-content vp-hero-content--app"><img class="vp-hero-logo" src="../_resources/vyrdepil-design/logos/duldord-jeopardy.png" width="384" height="384" alt="Duldord-logo"><div class="vp-hero-copy"><h3 class="vp-title">Duldord</h3><p>Eitt fembokstavsord kvar dag</p></div></div></div>
+          </section>
+          <div class="vp-mascot-perch"><img data-vp-mascot src="../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt="Stein-Vyrde held to vegvisarskilt"></div>
+          <section class="vp-panel vp-standard-main" aria-labelledby="task-title">
+            <div class="vp-decor vp-decor--grain" aria-hidden="true"></div>
+            <div class="vp-content">
+              <p class="catalogue-kicker">Hovudboks</p><h3 class="vp-heading" id="task-title">Kva tek du med på tur?</h3>
+              <p>Sjølve oppgåva får den største flata. Mønsteret er tydeleg i kantane og blir svakare mot midten.</p>
+              <fieldset class="vp-choices"><legend>Vel det du vil ha i sekken</legend><div class="vp-stack">
+                <label class="vp-choice"><input type="checkbox" name="pack" checked> Mat og drikke</label>
+                <label class="vp-choice"><input type="checkbox" name="pack"> Kart og kompass</label>
+                <label class="vp-choice"><input type="checkbox" name="pack"> Ei ekstra trøye</label>
+              </div></fieldset>
+              <div class="vp-actions catalogue-task-actions"><button class="vp-button vp-button--primary" id="taskBtn"><span data-icon="check"></span>Gjer deg klar</button></div>
+              <p class="vp-small catalogue-task-result" id="taskResult" aria-live="polite"></p>
+            </div>
+          </section>
+          <aside class="vp-sign vp-sign--grounded vp-standard-support" aria-label="Val og støtteinformasjon">
+            <div class="vp-panel">
+              <div class="vp-decor" data-vp-corners aria-hidden="true"><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i></div>
+              <div class="vp-content">
+                <p class="catalogue-kicker">Sideskilt</p><h3 class="vp-heading">Dagens tur<br>Dag 52</h3>
+                <div class="vp-stack"><button class="vp-button vp-button--primary vp-button--block" data-open-dialog>Vel ei ny oppgåve</button><button class="vp-button vp-button--block" data-open-dialog><span data-icon="helpCircle"></span>Få eit hint</button></div>
+                <details class="vp-accordion vp-support-section" data-vp-support><summary>Slik går du fram</summary><div class="vp-accordion-body"><p class="vp-small">Korte forklaringar står her. Du kan opne dei når du treng hjelp, utan å miste oppgåva av syne.</p></div></details>
+                <details class="vp-accordion vp-support-section" data-vp-support><summary>Val og innstillingar</summary><div class="vp-accordion-body"><label class="vp-field"><span class="vp-label">Lengd på økta</span><select class="vp-input" aria-label="Lengd på økta"><option>Kort tur</option><option>Lang tur</option></select></label></div></details>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="vp-layout-demo catalogue-wide-demo" id="layout-expanded" hidden>
+        <div class="vp-app-intro">
+          <section class="vp-panel vp-panel--plain vp-app-intro-board" aria-labelledby="expanded-title">
+            <img class="vp-app-logo" src="../_resources/vyrdepil-design/logos/klassekart-mala.png" width="384" height="384" alt="Klassekart-logo">
+            <div class="vp-app-intro-copy"><p class="catalogue-kicker">Døme: Klassekart</p><h3 class="vp-heading" id="expanded-title">Utvida arbeidsflate</h3><p>Låg verktøyrad og eigne panel. Lerretet får skjermbreidda, medan introen held seg samla.</p></div>
+          </section>
+          <img class="vp-app-intro-mascot" data-vp-mascot src="../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt="Stein-Vyrde held to vegvisarskilt">
+        </div>
+        <div class="vp-toolbar" aria-label="Verktøy for dømekartet">
+          <div class="vp-toolbar-group"><button class="vp-button vp-button--primary vp-button--compact" data-open-dialog><span data-icon="download"></span>Eksporter</button><button class="vp-button vp-button--compact" data-open-dialog>Opne kart</button></div>
+          <div class="vp-toolbar-group" role="group" aria-label="Aktivt verktøy"><button class="vp-button vp-button--tool vp-button--compact" data-tool="select" aria-pressed="true"><span data-icon="pointer"></span>Vel</button><button class="vp-button vp-button--tool vp-button--compact" data-tool="move" aria-pressed="false"><span data-icon="move"></span>Flytt</button></div>
+        </div>
+        <div class="vp-editor">
+          <aside class="vp-panel vp-panel--compact vp-panel--plain"><details class="vp-accordion vp-support-section" data-vp-support><summary>Element</summary><div class="vp-accordion-body"><div class="vp-stack"><button class="vp-button vp-button--compact" id="addDeskBtn"><span data-icon="plus"></span>Legg til pult</button><p class="vp-small">Vel innhald her. På mobil kan dette panelet foldast saman.</p></div></div></details></aside>
+          <div class="vp-workspace catalogue-map" aria-label="Døme på arbeidsflate"><span class="catalogue-desk">Ada</span><span class="catalogue-desk">Ivar</span><span class="catalogue-desk">Solveig</span><span class="catalogue-desk">Oskar</span></div>
+          <aside class="vp-panel vp-panel--compact vp-panel--plain vp-editor-properties"><details class="vp-accordion vp-support-section" data-vp-support><summary>Eigenskapar</summary><div class="vp-accordion-body"><label class="vp-field"><span class="vp-label">Namn på kartet</span><input class="vp-input" value="Klasserommet"></label><p class="vp-small catalogue-task-actions">Ingen hjørnepynt bak små felt eller verktøy.</p></div></details></aside>
+        </div>
+      </div>
+
+      <div class="vp-layout-demo" id="layout-canvas" hidden>
+        <div class="vp-app-intro">
+          <section class="vp-panel vp-panel--plain vp-app-intro-board" aria-labelledby="canvas-title">
+            <img class="vp-app-logo" src="../_resources/reknedæsj.png" width="384" height="376" alt="Reknedæsj-logo">
+            <div class="vp-app-intro-copy"><p class="catalogue-kicker">Døme: Reknedæsj</p><h3 class="vp-heading" id="canvas-title">Spelet har si eiga verd</h3><p>Felles ramme, val og resultat rundt ei spelspesifikk flate. Spelgrafikken får behalde funksjonsfargane sine.</p></div>
+          </section>
+          <img class="vp-app-intro-mascot" data-vp-mascot src="../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt="Stein-Vyrde held to vegvisarskilt">
+        </div>
+        <div class="vp-game-frame">
+          <div class="vp-game-stage"><canvas class="vp-game-screen" id="gamePreview" width="960" height="540" role="img" aria-label="Illustrert døme på ei spelrute med lyse himmelfargar, grøne åsar og steinar"></canvas><p class="vp-game-hud">Døme på spelrute</p></div>
+          <div class="vp-actions catalogue-game-actions"><button class="vp-button vp-button--primary" id="gameBtn"><span data-icon="play"></span>Prøv visinga</button><button class="vp-button" data-open-dialog><span data-icon="helpCircle"></span>Spelereglar</button><span id="gameState" aria-live="polite">Klar</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vp-panel vp-panel--plain catalogue-section" id="palette" aria-labelledby="palette-title">
+      <p class="catalogue-kicker">02 · Fargar og skrift</p><h2 class="vp-heading" id="palette-title">Svart tekst. Lyse flater.</h2>
+      <p>Trefarga er grunnflata. Dei andre lyse fargane gjev fleire val for handlingar og grupper. Ramme og skugge har same mørke tone.</p>
+      <div class="catalogue-swatches">
+        <div class="catalogue-swatch tone-wood"><strong>Lyst tre</strong><span>#FFF9E9</span></div>
+        <div class="catalogue-swatch tone-paper"><strong>Papir</strong><span>#FFFDF5</span></div>
+        <div class="catalogue-swatch tone-coral"><strong>Korall</strong><span>#EFB29D</span></div>
+        <div class="catalogue-swatch tone-moss"><strong>Mose</strong><span>#D5E5C5</span></div>
+        <div class="catalogue-swatch tone-sky"><strong>Himmel</strong><span>#D6E8F1</span></div>
+        <div class="catalogue-swatch tone-honey"><strong>Honning</strong><span>#F5DFAA</span></div>
+        <div class="catalogue-swatch tone-heather"><strong>Lyng</strong><span>#E5DCEF</span></div>
+        <div class="catalogue-swatch tone-stone"><strong>Stein</strong><span>#E4E7E5</span></div>
+      </div>
+      <div class="vp-grid catalogue-type-grid"><div><h3 class="vp-heading">Ei tydeleg overskrift</h3><p>Segoe UI i brødtekst og kontrollar. Arial Black i store titlar. Ingen eksterne fontar.</p></div><div class="catalogue-structural-colours"><span class="catalogue-frame-sample" aria-hidden="true"></span><p><strong>Samla mørk ramme og skugge</strong><br>Begge: #142820<br>Tekst: #000000</p></div></div>
+      <div class="vp-notice vp-notice--warning"><span class="vp-notice-icon" data-icon="lightbulb" data-icon-size="24" aria-hidden="true"></span><p><strong>Funksjon kjem først.</strong> Svarstatus, syntaks og brukarvalde fargar har eigne reglar. Tekstetikettar står på lyse flater; ei mørk teiknefarge blir vist i ei brikke ved sida av etiketten.</p></div>
+    </section>
+
+    <section class="vp-panel vp-panel--plain catalogue-section" id="buttons" aria-labelledby="buttons-title">
+      <p class="catalogue-kicker">03 · Handlingar</p><h2 class="vp-heading" id="buttons-title">Eitt knappesett med klare roller</h2>
+      <div class="vp-grid catalogue-buttons">
+        <div><p class="vp-label">Hovudhandling · korall</p><button class="vp-button vp-button--primary" data-open-dialog><span data-icon="play"></span>Start økta</button></div>
+        <div><p class="vp-label">Sekundær · tre</p><button class="vp-button" data-open-dialog>Attende</button></div>
+        <div><p class="vp-label">Verktøy · himmel</p><button class="vp-button vp-button--tool" data-open-dialog><span data-icon="upload"></span>Importer</button></div>
+        <div><p class="vp-label">Fullfør · mose</p><button class="vp-button vp-button--positive" data-open-dialog><span data-icon="check"></span>Bruk oppsettet</button></div>
+        <div><p class="vp-label">Slett · lys raud</p><button class="vp-button vp-button--danger" data-open-dialog><span data-icon="trash2"></span>Slett utkast</button></div>
+        <div><p class="vp-label">Låg vekt · utan skugge</p><button class="vp-button vp-button--quiet" data-open-dialog>Les rettleiinga</button></div>
+      </div>
+      <div class="catalogue-divider"></div>
+      <h3 class="vp-heading">Storleik og tilstand</h3>
+      <div class="vp-actions"><button class="vp-button vp-button--primary vp-button--large" data-open-dialog>Stor startknapp</button><button class="vp-button vp-button--tool vp-button--compact" data-open-dialog>Kompakt</button><button class="vp-button vp-button--icon" aria-label="Vis innstillingar" data-open-dialog><span data-icon="settings"></span></button><button class="vp-button" id="pressedBtn" aria-pressed="true"><span class="vp-button-label">Valt</span></button><button class="vp-button" disabled>Ikkje tilgjengeleg</button></div>
+      <div class="catalogue-long-button"><button class="vp-button vp-button--primary vp-button--block" data-open-dialog>Prøv ei tidlegare oppgåve frå samlinga</button><p class="vp-small">Lang tekst får fleire linjer og normal skriftstorleik.</p></div>
+    </section>
+
+    <section class="catalogue-section" id="surfaces" aria-labelledby="surfaces-title">
+      <div class="vp-panel vp-panel--plain catalogue-section-heading"><p class="catalogue-kicker">04 · Flater og dekor</p><h2 class="vp-heading" id="surfaces-title">Fem flater er nok til å starte</h2><p>Ramma bind dei saman. Dekor blir brukt etter kva flata skal gjere.</p></div>
+      <div class="vp-grid catalogue-surfaces">
+        <div class="vp-sign vp-sign--grounded"><article class="vp-panel"><div class="vp-decor" data-vp-corners aria-hidden="true"><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i></div><div class="vp-content"><h3 class="vp-heading">1. Infoskilt</h3><p>Fire ulike hjørne, trekte 18 px ut og klipte av ramma. Stolpene stikk 40 px ut, med grøn topp og kvar si steinfot i bakken.</p><p class="vp-small">Til val, hjelp og støtte.</p></div></article></div>
+        <article class="vp-panel"><div class="vp-decor vp-decor--grain" aria-hidden="true"></div><div class="vp-content"><h3 class="vp-heading">2. Hovudboks</h3><p>Lys trefarge. Store, rolege koter i original skala, med ein roleg midte.</p><p class="vp-small">Til oppgåver, speloppsett og resultat.</p></div></article>
+        <article class="vp-panel vp-panel--plain"><h3 class="vp-heading">3. Rein flate</h3><p>Papirfarge, same ramme og ingen ornament.</p><p class="vp-small">Til redigering, lange tekstar og tette lister.</p></article>
+        <article class="vp-panel vp-panel--soft tone-heather"><h3 class="vp-heading">4. Farga gruppe</h3><p>Ein lys tone og ei lettare ramme samlar innhald som høyrer saman.</p><p class="vp-small">Til innstillingsgrupper og små kort.</p></article>
+        <article class="vp-panel vp-panel--inset"><h3 class="vp-heading">5. Innfelt flate</h3><p>Diskré ramme og mindre luft. Ingen skugge eller stolper.</p><p class="vp-small">Til verktøyrader, skjema og eigenskapar.</p></article>
+        <article class="vp-panel vp-panel--plain vp-panel--raised"><h3 class="vp-heading">Valfri skugge</h3><p>Ein kort, loddrett skugge kan løfte eit klikkbart kort. Innhaldspanel står vanlegvis utan.</p><p class="vp-small">Ein variant av rein flate, ikkje ein sjette familie.</p></article>
+      </div>
+    </section>
+
+    <section class="vp-panel vp-panel--plain catalogue-section" id="forms" aria-labelledby="forms-title">
+      <p class="catalogue-kicker">05 · Innhald og støtte</p><h2 class="vp-heading" id="forms-title">Skjema, trekkspel og dialog</h2>
+      <div class="vp-grid">
+        <div class="vp-stack">
+          <div class="vp-field"><label for="listName">Namn på samlinga</label><input class="vp-input" id="listName" placeholder="Skriv eit namn"><p class="vp-help">Eit synleg namn gjer samlinga lett å finne att.</p></div>
+          <div class="vp-field"><label for="difficulty">Vanskegrad</label><select class="vp-input" id="difficulty"><option>Lett</option><option>Middels</option><option>Vanskeleg</option></select></div>
+          <fieldset class="vp-choices"><legend>Korleis vil du øve?</legend><div class="vp-actions"><label class="vp-choice"><input type="radio" name="practice" checked>Åleine</label><label class="vp-choice"><input type="radio" name="practice">Saman</label></div></fieldset>
+          <div class="vp-field"><label for="invalidName">Namn manglar — døme på feil</label><input class="vp-input" id="invalidName" aria-invalid="true" aria-describedby="nameError"><p class="vp-help" id="nameError"><span data-icon="alertTriangle"></span>Skriv eit namn før du held fram.</p></div>
+        </div>
+        <div class="vp-stack">
+          <details class="vp-accordion" open><summary>Slik brukar du samlinga</summary><div class="vp-accordion-body"><p>Trekkspel sparer plass på mobil og held lengre forklaringar tilgjengelege. Den same komponenten kan brukast på alle sidene.</p><p>Her er ekstra tekst for å vise at høgda følgjer innhaldet.</p></div></details>
+          <details class="vp-accordion vp-accordion--compact"><summary>Fleire innstillingar</summary><div class="vp-accordion-body"><label class="vp-field"><span class="vp-label">Oppgåver per økt</span><input class="vp-input" type="number" value="10" min="1" max="30"></label></div></details>
+          <div class="vp-notice vp-notice--success"><span class="vp-notice-icon" data-icon="check" data-icon-size="24" aria-hidden="true"></span><p><strong>Klart!</strong> Status har både ord og ikon.</p></div>
+          <div class="vp-notice vp-notice--error"><span class="vp-notice-icon" data-icon="alertTriangle" data-icon-size="24" aria-hidden="true"></span><p><strong>Fila kunne ikkje opnast.</strong> Prøv ei anna fil.</p></div>
+          <button class="vp-button" data-open-dialog>Opne dømedialog</button>
+        </div>
+      </div>
+    </section>
+    <section class="vp-panel vp-panel--plain catalogue-section" id="identity" aria-labelledby="identity-title">
+      <p class="catalogue-kicker">06 · Navigasjon og identitet</p><h2 class="vp-heading" id="identity-title">Ein felles meny og ein familie av logoar</h2>
+      <div class="vp-grid">
+        <div><h3 class="vp-heading">Skytopp og ein romsleg meny</h3><p>Ei lys himmelflate med enkle, kantete skyer frå same uttrykk som landskapa. Stein-Vyrde og namn til venstre; ein treknapp med hamburgersymbol og «Meny» til høgre.</p><button class="vp-button vp-menu-trigger" data-vp-menu="catalogueMenu" aria-haspopup="dialog" aria-expanded="false" aria-controls="catalogueMenu"><span data-icon="menu" aria-hidden="true"></span>Opne menyen</button><p class="vp-small catalogue-task-actions">Menyen les appnamn, lenkjer og kategoriar frå den eksisterande appkatalogen. Valde logoar blir viste der dei er klare.</p></div>
+        <div><h3 class="vp-heading">Illustrerte symbol med same handlag</h3><p>Store, enkle former, mørk kontur og få detaljar. Tre, stein, mose og dei lyse palettfargane bind logoane til Vyrde. Kvar app får sitt eige attkjennelege motiv; namnet står ved sida av biletet.</p><p><strong>Dei synlege appene har no kvar si logo i Måla flater-familien.</strong> Same materialkjensle, mørke kontur og lyse palett bind dei saman; motivet gjer kvar app lett å kjenne att.</p><p class="vp-small">Logoar for skjulte appar blir laga når dei blir tekne fram for migrering.</p></div>
+      </div>
+      <p class="catalogue-task-actions"><a href="../designskisser/vyrde-redesign/navigasjon-og-logoar.md">Les menyplanen og logobriefen</a></p>
+    </section>
+    <aside class="vp-panel vp-panel--plain catalogue-note"><p><strong>Arbeidsreferanse, ikkje ei eiga app.</strong> Denne sida viser dei felles grunnfilene som nye appar og migrerte appar skal bruke.</p><a href="../DESIGN.md">Les designinstruksen</a></aside>
+  </main>
+  <dialog class="vp-dialog vp-site-menu" id="catalogueMenu" aria-labelledby="siteMenuTitle">
+    <div class="vp-dialog-head"><div class="vp-menu-heading"><img data-vp-mascot src="../_resources/vyrdepil-design/vyrde.png" width="112" height="107" alt=""><h2 class="vp-heading" id="siteMenuTitle">Vyrdepil</h2></div><form method="dialog"><button class="vp-button vp-button--icon vp-button--quiet" aria-label="Lukk menyen"><span data-icon="x" aria-hidden="true"></span></button></form></div>
+    <p>Spel, verktøy og skaparglede</p>
+    <label class="vp-field vp-menu-search"><span class="vp-label">Finn eit spel eller verktøy</span><input class="vp-input" id="menuSearch" type="search" placeholder="Søk etter namn eller innhald" aria-controls="menuApps"></label>
+    <div class="vp-actions vp-menu-filters" id="menuCategories" role="group" aria-label="Appkategori"></div>
+    <p class="vp-small vp-menu-count" id="menuCount" aria-live="polite">Lastar appoversikta …</p>
+    <nav id="menuApps" aria-label="Spel og verktøy"></nav>
+    <nav class="vp-actions vp-menu-more" aria-label="Meir om Vyrdepil"><a href="../index.html">Framsida</a><a href="../personvern.html">Personvern</a><a href="../lisens.html">Lisens</a></nav>
+  </dialog>
+  <dialog class="vp-dialog" id="exampleDialog" aria-labelledby="dialogTitle">
+    <div class="vp-dialog-head"><h2 class="vp-heading" id="dialogTitle">Ein roleg dialog</h2><form method="dialog"><button class="vp-button vp-button--icon vp-button--quiet" aria-label="Lukk dialogen"><span data-icon="x"></span></button></form></div>
+    <p>Same trefarge, svart tekst og grøn ramme. Innhaldet bestemmer høgda, og lengre dialogar får si eiga rulling.</p>
+    <p>Dette er eit døme frå komponentkatalogen. Knappane viser uttrykket og opnar denne dialogen.</p>
+    <form method="dialog" class="vp-actions"><button class="vp-button vp-button--primary">Ferdig</button><button class="vp-button">Attende</button></form>
+  </dialog>
+</body>
+</html>

@@ -7,17 +7,15 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="../css/neobrutalisme.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="../js/neo-header.js" defer></script>
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+  <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
 <!-- Berre lyst tema. Alle tre attributta peikar på det same, og main.js pinnar
      det i tillegg ved oppstart — eit lagra mørkt tema frå ei anna Vyrdepil-side
      ville elles gjeve mørke fargevariablar under eit stilark som berre er
      tenkt for lyst. -->
-<body data-light-theme="classic" data-dark-theme="classic" data-theme="classic">
-
-<neo-header no-theme></neo-header>
+<body class="vp-page" data-vp-design data-vp-app="gdpr" data-vp-site-footer>
 
 <div class="page-wrapper">
 <main class="main-content">
@@ -62,8 +60,8 @@
                     kategorier av opplysninger som nevnt i artikkel 9 nr. 1 eller
                     personopplysninger om straffedommer og lovovertredelser nevnt i
                     artikkel 10.»</p>
-                    <footer><a class="gd-lovlenkje" href="https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" target="_blank" rel="noopener noreferrer">Personvernforordninga artikkel 30 nr. 5</a> — ordrett frå Lovdata. Legg merke til <strong>«eller»</strong>: dei tre vilkåra er
-                    alternative.</footer>
+                    <p class="gd-citation"><a class="gd-lovlenkje" href="https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_30" target="_blank" rel="noopener noreferrer">Personvernforordninga artikkel 30 nr. 5</a> — ordrett frå Lovdata. Legg merke til <strong>«eller»</strong>: dei tre vilkåra er
+                    alternative.</p>
                 </blockquote>
                 <p class="gd-hjelp">Dei tre vilkåra er <strong>alternative</strong> — eitt av
                 dei er nok. Artikkel 29-gruppa slo det fast i 2018, og EDPB har stadfesta det.
@@ -181,8 +179,8 @@
 </div>
 
 <!-- Overlegg: slett ein aktivitet -->
-<div class="modal-overlay" id="slettOverlegg" role="dialog" aria-modal="true" aria-labelledby="slettTittel">
-    <div class="modal1">
+<div class="modal-overlay vp-modal-backdrop" id="slettOverlegg" role="dialog" aria-modal="true" aria-labelledby="slettTittel">
+    <div class="modal1 vp-modal-panel">
         <button class="btn gd-ikonknapp modal-close" data-lukk aria-label="Lukk"><span data-icon="x"></span></button>
         <h2 id="slettTittel">Slette aktiviteten?</h2>
         <p id="slettTekst"></p>
@@ -194,8 +192,8 @@
 </div>
 
 <!-- Overlegg: slett alt -->
-<div class="modal-overlay" id="slettAltOverlegg" role="dialog" aria-modal="true" aria-labelledby="slettAltTittel">
-    <div class="modal1">
+<div class="modal-overlay vp-modal-backdrop" id="slettAltOverlegg" role="dialog" aria-modal="true" aria-labelledby="slettAltTittel">
+    <div class="modal1 vp-modal-panel">
         <button class="btn gd-ikonknapp modal-close" data-lukk aria-label="Lukk"><span data-icon="x"></span></button>
         <h2 id="slettAltTittel">Slette alt?</h2>
         <p>Dette fjernar alle protokollane Protokollsmia har lagra i denne nettlesaren,
@@ -208,8 +206,8 @@
 </div>
 
 <!-- Overlegg: avvis eit funn -->
-<div class="modal-overlay" id="avvisOverlegg" role="dialog" aria-modal="true" aria-labelledby="avvisTittel">
-    <div class="modal1">
+<div class="modal-overlay vp-modal-backdrop" id="avvisOverlegg" role="dialog" aria-modal="true" aria-labelledby="avvisTittel">
+    <div class="modal1 vp-modal-panel">
         <button class="btn gd-ikonknapp modal-close" data-lukk aria-label="Lukk"><span data-icon="x"></span></button>
         <h2 id="avvisTittel">Ikkje aktuelt her</h2>
         <p>Sjekken kan ta feil. Skriv kvifor dette funnet ikkje gjeld, så blir
@@ -229,10 +227,9 @@
 
 <div id="printArea" aria-hidden="true"></div>
 
-<script src="../js/neobrutalisme.js"></script>
 <script src="../js/vyrdepil-storage.js"></script>
-<script src="../js/vyrdepil-icons.js"></script>
-<script src="../js/vyrdepil-util.js"></script>
+
+
 <script src="js/util.js"></script>
 <script src="js/felt.js"></script>
 <script src="js/lov.js"></script>
@@ -252,5 +249,10 @@
 <script src="js/export-html.js"></script>
 <script src="js/main.js"></script>
 
+  <script src="../js/vyrdepil-icons.js"></script>
+  <script src="../js/vyrdepil-util.js?v=1.2"></script>
+  <script src="../js/vyrdepil-design.js?v=1.1"></script>
+  <script src="../js/vyrdepil-app-shell.js?v=8"></script>
+  <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>
 </html>

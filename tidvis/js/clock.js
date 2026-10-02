@@ -219,11 +219,9 @@
     const time = document.createElement('div');
     time.className = 'lcd__time';
     if (opts.size) time.style.fontSize = opts.size;
-    const ghost = document.createElement('span');
-    ghost.className = 'ghost'; ghost.setAttribute('aria-hidden', 'true'); ghost.textContent = '88:88';
     const val = document.createElement('span');
     val.className = 'val'; val.textContent = opts.time || '09:45';
-    time.appendChild(ghost); time.appendChild(val);
+    time.appendChild(val);
     const label = document.createElement('div');
     label.className = 'lcd__label'; label.textContent = opts.label || 'DIGITAL';
     wrap.appendChild(time); wrap.appendChild(label);

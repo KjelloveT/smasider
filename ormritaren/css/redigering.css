@@ -1,7 +1,7 @@
 /* Ormritaren — lærarverktøyet for å redigere oppgåver.
  *
  * Berre det som er særeige for denne sida. Boksar, knappar og fargar kjem
- * frå neobrutalisme.css og style.css.
+ * frå fellesdesignet og style.css.
  */
 
 .orm-redverktoy { flex-wrap: wrap; }
@@ -37,8 +37,8 @@
 /* Knappar som slettar noko.
  *
  * Dei hadde fyrst accent2 som bakgrunn, men ingen av tekstfargane i
- * systemet held 4,5:1 mot den fargen i alle 21 tema — det er same grunnen
- * til at Stopp-knappen i kode.html er så vidt lesbar i dei mørke temaa.
+ * systemet held 4,5:1 mot den fargen. Stopp-knappen i kode.html bruker difor
+ * ei lys flate med mørk tekst.
  * Difor held vi det vurderte paret frå .btn og markerer i staden med
  * kantfargen, som berre treng å skilje seg ut, ikkje å lesast. */
 .orm-btn-fare { border-color: var(--accent2); }

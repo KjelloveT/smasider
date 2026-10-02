@@ -131,14 +131,7 @@ OK.generator = (function () {
   /* ---- Eitt forsøk ---- */
 
   function shuffled(list, rnd) {
-    const arr = list.slice();
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(rnd() * (i + 1));
-      const tmp = arr[i];
-      arr[i] = arr[j];
-      arr[j] = tmp;
-    }
-    return arr;
+    return Vy.shuffle(list, rnd);
   }
 
   /** Lengste ord først, men med litt slump så forsøka blir ulike. */

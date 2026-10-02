@@ -249,12 +249,14 @@ function backToStart() {
     setHudHome(true);
 }
 
-function selectDifficulty(diff) {
+function selectDifficulty(diff, selectedButton) {
     difficulty = diff;
     document.querySelectorAll('.difficulty-options .option-btn').forEach(btn => {
         btn.classList.remove('selected');
+        btn.setAttribute('aria-pressed', 'false');
     });
-    event.target.classList.add('selected');
+    selectedButton?.classList.add('selected');
+    selectedButton?.setAttribute('aria-pressed', 'true');
 }
 
 function updateMathTypes() {
@@ -694,6 +696,27 @@ let mathModalOpen = false;
 let selectedOption = 0;
 let mathOptions = [];
 let answerSubmitted = false;
+let mathModalDismissBound = false;
+
+function dismissMathModal() {
+    const modal = document.getElementById('mathModal');
+    if (modal) Vy.closeModal(modal);
+    mathModalOpen = false;
+    gamePaused = false;
+}
+
+function bindMathModalDismiss() {
+    if (mathModalDismissBound) return;
+    const modal = document.getElementById('mathModal');
+    const closeButton = document.getElementById('mathModalClose');
+    closeButton.addEventListener('click', dismissMathModal);
+    modal.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') return;
+        event.preventDefault();
+        dismissMathModal();
+    });
+    mathModalDismissBound = true;
+}
 
 function showMathModal(rewardType) {
     gamePaused = true;
@@ -716,7 +739,7 @@ function showMathModal(rewardType) {
     mathOptions = [];
     currentMathProblem.options.forEach((option) => {
         const btn = document.createElement('button');
-        btn.className = 'math-option';
+        btn.className = 'vp-button math-option';
         btn.textContent = fmt(option);
         btn.onclick = () => {
             const idx = mathOptions.indexOf(btn);
@@ -734,7 +757,10 @@ function showMathModal(rewardType) {
     updateCharacterPosition();
     updateRewardDisplay(rewardType);
     
-    document.getElementById('mathModal').classList.add('show');
+    const modal = document.getElementById('mathModal');
+    bindMathModalDismiss();
+    if (modal.parentElement !== document.body) document.body.appendChild(modal);
+    Vy.openModal(modal);
 
     setTimeout(() => {
         mathOptions[0].classList.add('selected');
@@ -873,7 +899,7 @@ function checkAnswer(selectedAnswer) {
 
     // After feedback is visible, hide modal and show floating countdown
     setTimeout(() => {
-        document.getElementById('mathModal').classList.remove('show');
+        Vy.closeModal(document.getElementById('mathModal'));
 
         const floatEl = document.getElementById('floatingCountdown');
         const showCircle = (n) => {

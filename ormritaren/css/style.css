@@ -1,8 +1,82 @@
-/* Ormritaren — utvidar css/neobrutalisme.css.
- *
- * Merk: CodeMirror har sitt eige stilark med faste fargar. Dei må temast
- * mot CSS-variablane her, elles blir koden uleseleg i mørke tema.
- */
+/* Ormritaren — stilar for redigerings- og arbeidsflatene. */
+
+/* Den køyrbare arbeidsflata har eigne app-stilar. Gje henne dei grunnflatene
+   som tidlegare kom frå det globale temaarket, utan å dra inn temaveljar eller
+   den gamle nettstadsnavigasjonen att. */
+body[data-vp-app="ormritaren"][data-vp-preserve] .page-wrapper {
+    min-height: 100vh;
+    padding: 12px clamp(10px, 2vw, 24px) 48px;
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .main-content {
+    width: min(100%, 1320px);
+    max-width: 1320px;
+    margin-inline: auto;
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .box1,
+body[data-vp-app="ormritaren"][data-vp-preserve] .box2,
+body[data-vp-app="ormritaren"][data-vp-preserve] .box4 {
+    color: var(--vp-ink, #000);
+    background: var(--vp-wood, #fff9e9);
+    border: 3px solid var(--vp-frame, #142820);
+    border-radius: 10px;
+    box-shadow: 0 4px 0 var(--vp-shadow, #142820);
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .box1,
+body[data-vp-app="ormritaren"][data-vp-preserve] .box2 { padding: clamp(14px, 2vw, 22px); }
+body[data-vp-app="ormritaren"][data-vp-preserve] .box4 { overflow: hidden; }
+body[data-vp-app="ormritaren"][data-vp-preserve] .box-header {
+    padding: 10px 14px;
+    color: var(--vp-ink, #000);
+    background: var(--vp-honey, #f5dfaa);
+    border-bottom: 2px solid var(--vp-frame, #142820);
+    font-weight: 800;
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .box-body { padding: 14px; }
+body[data-vp-app="ormritaren"][data-vp-preserve] .hero-box {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 3vw, 32px);
+    margin: 8px 0 18px;
+    background: var(--vp-wood, #fff9e9) url("../../_resources/vyrdepil-design/wood-contours.png") center / cover;
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .hero-logo {
+    display: block;
+    width: clamp(76px, 11vw, 132px);
+    height: auto;
+    flex: 0 0 auto;
+    object-fit: contain;
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .hero-text h1 {
+    margin: 0 0 6px;
+    color: #000;
+    font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .hero-text p { margin: 0; max-width: 72ch; }
+body[data-vp-app="ormritaren"][data-vp-preserve] .btn,
+body[data-vp-app="ormritaren"][data-vp-preserve] .box-tab {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 12px;
+    color: #000;
+    background: var(--vp-wood, #fff9e9);
+    border: 2px solid var(--vp-frame, #142820);
+    border-radius: 7px;
+    box-shadow: 0 3px 0 var(--vp-shadow, #142820);
+    font: 750 .95rem/1.25 var(--vp-font, "Segoe UI", system-ui, sans-serif);
+    cursor: pointer;
+}
+body[data-vp-app="ormritaren"][data-vp-preserve] .box-tab[aria-selected="true"] { background: var(--vp-honey, #f5dfaa); }
+body[data-vp-app="ormritaren"][data-vp-preserve] .btn:disabled { background: var(--vp-stone, #e4e7e5); box-shadow: none; cursor: not-allowed; }
+body[data-vp-app="ormritaren"][data-vp-preserve] .heading4 { margin: 0 0 12px; color: #000; font-size: 1.2rem; font-weight: 850; }
+body[data-vp-app="ormritaren"][data-vp-preserve] .no-mt { margin-top: 0; }
+
+@media (max-width: 640px) {
+    body[data-vp-app="ormritaren"][data-vp-preserve] .hero-box { align-items: flex-start; }
+    body[data-vp-app="ormritaren"][data-vp-preserve] .hero-logo { width: 72px; }
+}
 
 /* ---- layout ---------------------------------------------------------- */
 
@@ -165,7 +239,7 @@
     font-weight: 800;
 }
 
-/* Syntaksfargar. Haldne mot --text/--accent slik at dei følgjer temaet. */
+/* Syntaksfargar med god kontrast på den faste lyse arbeidsflata. */
 .cm-s-default .cm-keyword    { color: var(--accent2); font-weight: 800; }
 .cm-s-default .cm-builtin    { color: var(--accent); font-weight: 700; }
 .cm-s-default .cm-def        { color: var(--accent); font-weight: 800; }
@@ -176,29 +250,6 @@
 .cm-s-default .cm-operator   { color: var(--text); }
 .cm-s-default .cm-meta       { color: var(--muted); }
 .cm-s-default .cm-error      { color: var(--accent2); }
-
-/* Strengar og tal treng eigne fargar i dei mørke temaa — dei faste over blir
- * for mørke og fell ned mot 2:1 mot bakgrunnen.
- *
- * Lista må haldast i takt med kva tema som faktisk er mørke i
- * neobrutalisme.css. Kjem det eit nytt mørkt tema, mål kontrasten før du
- * stolar på han: sett .cm-string mot .CodeMirror sin background og krev
- * minst 3:1. (Det var slik `slate` vart oppdaga — han låg på 1.93.) */
-[data-theme="space"] .cm-s-default .cm-string,
-[data-theme="midnight"] .cm-s-default .cm-string,
-[data-theme="dracula"] .cm-s-default .cm-string,
-[data-theme="cyberpunk"] .cm-s-default .cm-string,
-[data-theme="neon"] .cm-s-default .cm-string,
-[data-theme="slate"] .cm-s-default .cm-string,
-[data-theme="hacker"] .cm-s-default .cm-string { color: #7ee787; }
-
-[data-theme="space"] .cm-s-default .cm-number,
-[data-theme="midnight"] .cm-s-default .cm-number,
-[data-theme="dracula"] .cm-s-default .cm-number,
-[data-theme="cyberpunk"] .cm-s-default .cm-number,
-[data-theme="neon"] .cm-s-default .cm-number,
-[data-theme="slate"] .cm-s-default .cm-number,
-[data-theme="hacker"] .cm-s-default .cm-number { color: #ffd166; }
 
 .orm-feillinje { background: color-mix(in srgb, var(--accent2) 22%, transparent); }
 
@@ -229,10 +280,8 @@
 
 .CodeMirror-hint:last-child { border-bottom: none; }
 
-/* Vald rad blir invertert i staden for å bruke ein accent-farge. --accent er
- * ein lys neonfarge i fleire av dei mørke temaa, og kvit tekst på han falt til
- * 2,54:1 i «hacker». --text og --surface er derimot definerte som motsetnader
- * i kvart einaste tema, så inverteringa held kontrasten uansett. */
+/* Vald rad blir invertert i staden for å bruke ein funksjonsfarge som
+ * bakgrunn. --text og --surface gjev svart tekst på lys flate. */
 li.CodeMirror-hint-active {
     background: var(--text);
     color: var(--surface);
@@ -684,9 +733,8 @@ li.CodeMirror-hint-active .orm-hint-skildring { color: var(--surface); }
     color: var(--text);
 }
 
-/* Knappen ber teksten sin i --text på --surface, ikkje kvit på --accent2:
- * i dei mørke temaa er aksentfargen ein lys neonfarge, og kvit tekst fell
- * under AA. Sjå AGENTS.md §3.2. */
+/* Knappen bruker --text på --surface for å halde den faste, høge kontrasten
+ * i det lyse designsystemet. Sjå AGENTS.md §3.2. */
 .orm-diagnose-kopi {
     display: block;
     margin: 0 0 12px;
@@ -860,6 +908,6 @@ li.CodeMirror-hint-active .orm-hint-skildring { color: var(--surface); }
  * berre er der for å ramme inn sida stel plass her. */
 body[data-forhandsvis="1"] .hero-box,
 body[data-forhandsvis="1"] .orm-botntekst,
-body[data-forhandsvis="1"] neo-header { display: none; }
+body[data-forhandsvis="1"] .vp-header { display: none; }
 
 body[data-forhandsvis="1"] .page-wrapper { padding-top: 8px; }

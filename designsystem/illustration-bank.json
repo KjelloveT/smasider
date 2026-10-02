@@ -1,0 +1,2923 @@
+{
+  "version": 1,
+  "created": "2026-09-28",
+  "logoStyles": [
+    {
+      "id": "mala",
+      "name": "Måla flater",
+      "prompt": "Painterly faceted illustration in the exact visual world of the reference mascot: broad painted volume planes, gently irregular thick dark contour, warm natural materials, restrained grain, friendly and dimensional without photorealism."
+    }
+  ],
+  "logoMotifs": [
+    {
+      "id": "duldord",
+      "name": "Duldord",
+      "prompt": "Exactly FIVE blank square word-game tiles arranged in one compact slightly curved row, with one simple magnifying glass overlapping a corner. The five individual tiles must be clearly countable. No letters or markings on the tiles."
+    },
+    {
+      "id": "klassekart",
+      "name": "Klassekart",
+      "prompt": "A simple classroom seating layout viewed from above: exactly three large desks, each with a small chair shape, arranged on a compact room plan, plus one clear location pin. Recognizable classroom planning, no people, animals or text."
+    },
+    {
+      "id": "rissverk",
+      "name": "Rissverk",
+      "prompt": "One chunky drawing pen making a smooth curved line connecting two large circular vector anchor nodes. The pen, curve and two nodes are one compact balanced symbol for a drawing/vector editor. No letters or text."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "hogfjell",
+      "name": "Høgfjell",
+      "description": "A Norwegian high-mountain hiking trail with rugged rounded boulders, low alpine plants and layered dramatic distant peaks; no buildings."
+    },
+    {
+      "id": "fjord",
+      "name": "Fjord",
+      "description": "A Norwegian fjord seen from a quiet woodland walking path, steep mountains on both sides, tranquil water, a tiny distant red boathouse."
+    },
+    {
+      "id": "fjorestein",
+      "name": "Fjørestein",
+      "description": "A Norwegian coastal walking place with rounded shore stones, rock pools, seaweed and a calm sheltered blue sea, low coastal hills far away."
+    },
+    {
+      "id": "bypark",
+      "name": "Bypark",
+      "description": "A leafy Norwegian urban park with a winding gravel path, birch trees, lawn and one simple wooden bench, restrained distant Nordic houses."
+    },
+    {
+      "id": "vidde",
+      "name": "Vidde",
+      "description": "A wide Norwegian mountain plateau with a narrow hiking path, low birch scrub, heath plants and distant low rolling hills beneath a broad sky."
+    },
+    {
+      "id": "myr",
+      "name": "Myr",
+      "description": "A Norwegian bog boardwalk surrounded by peat pools, reeds, moss hummocks and sparse small pines, distant gentle mountains."
+    },
+    {
+      "id": "klippe",
+      "name": "Klippe",
+      "description": "A Norwegian seaside clifftop hiking trail with safe broad rocky foreground, heather, angular cliffs and a wide calm blue sea."
+    },
+    {
+      "id": "bygate",
+      "name": "Grøn bygate",
+      "description": "A quiet Norwegian street with colorful modest wooden houses, lush gardens and street trees, a pedestrian path, no people, cars or writing."
+    },
+    {
+      "id": "sykkelsti",
+      "name": "Sykkelsti",
+      "description": "A Norwegian cycle path curving through a leafy birch woodland near a river, simple wooden rail on one edge, distant gentle mountains, no bikes or people."
+    },
+    {
+      "id": "skolegard",
+      "name": "Skolegard",
+      "description": "A Norwegian schoolyard with a large rope-climbing frame at the left, swings and wooden balance equipment on a painted rubber play area, a dark school building at the right, and a wooded mountain ridge. Children in pink reflective vests play in morning, day and evening variations; the yard is empty at night."
+    }
+  ],
+  "seasons": [
+    {
+      "id": "var",
+      "name": "Vår"
+    },
+    {
+      "id": "sommar",
+      "name": "Sommar"
+    },
+    {
+      "id": "haust",
+      "name": "Haust"
+    },
+    {
+      "id": "vinter",
+      "name": "Vinter"
+    }
+  ],
+  "times": [
+    {
+      "id": "morgon",
+      "name": "Morgon"
+    },
+    {
+      "id": "dag",
+      "name": "Dag"
+    },
+    {
+      "id": "kveld",
+      "name": "Kveld"
+    },
+    {
+      "id": "natt",
+      "name": "Natt"
+    }
+  ],
+  "outputs": [
+    {
+      "key": "hogfjell-sommar-dag",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "sommar-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-sommar-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 284015
+    },
+    {
+      "key": "duldord-mala",
+      "kind": "logo",
+      "subject": "duldord",
+      "variant": "mala",
+      "file": "_resources/vyrdepil-design/logos/duldord-mala.png",
+      "original": "_kjelder/logoar/vyrdepil-trials/duldord-mala.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "exportSize": [
+        384,
+        384
+      ],
+      "bytes": 13588
+    },
+    {
+      "key": "fjord-sommar-dag",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "sommar-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-sommar-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 226801
+    },
+    {
+      "key": "klassekart-mala",
+      "kind": "logo",
+      "subject": "klassekart",
+      "variant": "mala",
+      "file": "_resources/vyrdepil-design/logos/klassekart-mala.png",
+      "original": "_kjelder/logoar/vyrdepil-trials/klassekart-mala.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "exportSize": [
+        384,
+        384
+      ],
+      "bytes": 20000
+    },
+    {
+      "key": "hogfjell-var-dag",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "var-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-var-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 289496
+    },
+    {
+      "key": "hogfjell-haust-dag",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "haust-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-haust-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 283480
+    },
+    {
+      "key": "hogfjell-vinter-dag",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "vinter-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-vinter-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 281386
+    },
+    {
+      "key": "fjorestein-sommar-dag",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "sommar-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-sommar-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 214723
+    },
+    {
+      "key": "bypark-sommar-dag",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "sommar-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-sommar-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 255418
+    },
+    {
+      "key": "vidde-sommar-dag",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "sommar-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-sommar-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 280725
+    },
+    {
+      "key": "rissverk-mala",
+      "kind": "logo",
+      "subject": "rissverk",
+      "variant": "mala",
+      "file": "_resources/vyrdepil-design/logos/rissverk-mala.png",
+      "original": "_kjelder/logoar/vyrdepil-trials/rissverk-mala.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "exportSize": [
+        384,
+        384
+      ],
+      "bytes": 14908
+    },
+    {
+      "key": "myr-sommar-dag",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "sommar-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-sommar-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 283941
+    },
+    {
+      "key": "klippe-sommar-dag",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "sommar-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-sommar-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 205214
+    },
+    {
+      "key": "bygate-sommar-dag",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "sommar-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-sommar-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 276580
+    },
+    {
+      "key": "sykkelsti-sommar-dag",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "sommar-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-sommar-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 273547
+    },
+    {
+      "key": "hogfjell-var-natt",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "var-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-var-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 266063
+    },
+    {
+      "key": "fjorestein-var-dag",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "var-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-var-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 243767
+    },
+    {
+      "key": "fjorestein-sommar-morgon",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "sommar-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-sommar-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-sommar-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 225730
+    },
+    {
+      "key": "hogfjell-sommar-natt",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "sommar-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-sommar-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 231828
+    },
+    {
+      "key": "fjorestein-sommar-natt",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "sommar-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-sommar-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 193690
+    },
+    {
+      "key": "fjorestein-haust-dag",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "haust-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-haust-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 227228
+    },
+    {
+      "key": "fjorestein-vinter-dag",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "vinter-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-vinter-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 247205
+    },
+    {
+      "key": "bypark-var-dag",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "var-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-var-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 321522
+    },
+    {
+      "key": "hogfjell-haust-natt",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "haust-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-haust-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 245979
+    },
+    {
+      "key": "bypark-sommar-morgon",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "sommar-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-sommar-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-sommar-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 265676
+    },
+    {
+      "key": "bypark-sommar-natt",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "sommar-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-sommar-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 219236
+    },
+    {
+      "key": "hogfjell-vinter-natt",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "vinter-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-vinter-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 297495
+    },
+    {
+      "key": "fjord-var-dag",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "var-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-var-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 302675
+    },
+    {
+      "key": "bypark-haust-dag",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "haust-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-haust-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 298377
+    },
+    {
+      "key": "fjord-haust-dag",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "haust-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-haust-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 256158
+    },
+    {
+      "key": "bypark-vinter-dag",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "vinter-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-vinter-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 303709
+    },
+    {
+      "key": "fjord-vinter-dag",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "vinter-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-vinter-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 318973
+    },
+    {
+      "key": "vidde-var-dag",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "var-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-var-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 309253
+    },
+    {
+      "key": "myr-var-dag",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "var-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-var-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 328996
+    },
+    {
+      "key": "myr-sommar-morgon",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "sommar-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-sommar-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-sommar-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 265286
+    },
+    {
+      "key": "vidde-sommar-natt",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "sommar-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-sommar-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 237245
+    },
+    {
+      "key": "myr-sommar-natt",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "sommar-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-sommar-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 227812
+    },
+    {
+      "key": "vidde-haust-dag",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "haust-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-haust-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 310540
+    },
+    {
+      "key": "myr-haust-dag",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "haust-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-haust-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 289764
+    },
+    {
+      "key": "myr-sommar-kveld",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "sommar-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-sommar-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-sommar-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 282611
+    },
+    {
+      "key": "vidde-vinter-dag",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "vinter-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-vinter-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 330781
+    },
+    {
+      "key": "klippe-sommar-morgon",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "sommar-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-sommar-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-sommar-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 199282
+    },
+    {
+      "key": "klippe-sommar-kveld",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "sommar-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-sommar-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-sommar-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 216985
+    },
+    {
+      "key": "myr-vinter-dag",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "vinter-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-vinter-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 278698
+    },
+    {
+      "key": "klippe-var-dag",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "var-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-var-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 250873
+    },
+    {
+      "key": "klippe-sommar-natt",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "sommar-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-sommar-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 171902
+    },
+    {
+      "key": "klippe-vinter-dag",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "vinter-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-vinter-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 268910
+    },
+    {
+      "key": "klippe-haust-dag",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "haust-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-haust-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 219154
+    },
+    {
+      "key": "bygate-var-dag",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "var-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-var-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 369245
+    },
+    {
+      "key": "fjord-var-kveld",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "var-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-var-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-var-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 308699
+    },
+    {
+      "key": "bypark-var-morgon",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "var-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-var-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-var-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 324774
+    },
+    {
+      "key": "bygate-sommar-morgon",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "sommar-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-sommar-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-sommar-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 284466
+    },
+    {
+      "key": "bypark-var-kveld",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "var-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-var-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-var-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 331910
+    },
+    {
+      "key": "fjord-var-morgon",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "var-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-var-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-var-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 297985
+    },
+    {
+      "key": "bygate-sommar-natt",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "sommar-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-sommar-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 226682
+    },
+    {
+      "key": "bypark-var-natt",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "var-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-var-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 273410
+    },
+    {
+      "key": "fjord-var-natt",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "var-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-var-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 241111
+    },
+    {
+      "key": "bygate-sommar-kveld",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "sommar-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-sommar-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-sommar-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 285626
+    },
+    {
+      "key": "bypark-haust-morgon",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "haust-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-haust-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-haust-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 283637
+    },
+    {
+      "key": "fjord-sommar-morgon",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "sommar-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-sommar-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-sommar-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 233718
+    },
+    {
+      "key": "bypark-haust-kveld",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "haust-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-haust-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-haust-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 284307
+    },
+    {
+      "key": "bygate-haust-dag",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "haust-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-haust-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 322708
+    },
+    {
+      "key": "fjord-sommar-kveld",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "sommar-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-sommar-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-sommar-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 242067
+    },
+    {
+      "key": "myr-var-morgon",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "var-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-var-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-var-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 308612
+    },
+    {
+      "key": "bypark-haust-natt",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "haust-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-haust-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 239922
+    },
+    {
+      "key": "fjord-sommar-natt",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "sommar-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-sommar-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 196784
+    },
+    {
+      "key": "bygate-vinter-dag",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "vinter-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-vinter-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 317543
+    },
+    {
+      "key": "myr-var-kveld",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "var-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-var-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-var-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 319434
+    },
+    {
+      "key": "bypark-vinter-morgon",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "vinter-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-vinter-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-vinter-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 306447
+    },
+    {
+      "key": "fjord-haust-morgon",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "haust-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-haust-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-haust-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 249621
+    },
+    {
+      "key": "sykkelsti-var-dag",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "var-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-var-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 334257
+    },
+    {
+      "key": "myr-var-natt",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "var-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-var-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 263352
+    },
+    {
+      "key": "bypark-vinter-kveld",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "vinter-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-vinter-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-vinter-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 304299
+    },
+    {
+      "key": "fjord-haust-kveld",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "haust-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-haust-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-haust-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 268859
+    },
+    {
+      "key": "myr-haust-morgon",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "haust-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-haust-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-haust-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 277793
+    },
+    {
+      "key": "sykkelsti-sommar-morgon",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "sommar-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-sommar-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-sommar-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 291059
+    },
+    {
+      "key": "bypark-vinter-natt",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "vinter-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-vinter-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 306826
+    },
+    {
+      "key": "fjord-haust-natt",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "haust-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-haust-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 221014
+    },
+    {
+      "key": "myr-haust-kveld",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "haust-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-haust-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-haust-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 295530
+    },
+    {
+      "key": "sykkelsti-sommar-kveld",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "sommar-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-sommar-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-sommar-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 276133
+    },
+    {
+      "key": "fjord-vinter-morgon",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "vinter-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-vinter-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-vinter-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 321579
+    },
+    {
+      "key": "vidde-var-morgon",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "var-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-var-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-var-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 300848
+    },
+    {
+      "key": "sykkelsti-sommar-natt",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "sommar-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-sommar-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 226910
+    },
+    {
+      "key": "myr-haust-natt",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "haust-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-haust-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 241555
+    },
+    {
+      "key": "fjord-vinter-kveld",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "vinter-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-vinter-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-vinter-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 313172
+    },
+    {
+      "key": "vidde-var-kveld",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "var-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-var-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-var-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 318725
+    },
+    {
+      "key": "myr-vinter-morgon",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "vinter-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-vinter-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-vinter-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 297370
+    },
+    {
+      "key": "sykkelsti-haust-dag",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "haust-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-haust-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 301615
+    },
+    {
+      "key": "fjord-vinter-natt",
+      "kind": "landscape",
+      "subject": "fjord",
+      "variant": "vinter-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjord-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjord-vinter-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 294860
+    },
+    {
+      "key": "myr-vinter-kveld",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "vinter-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-vinter-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-vinter-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 287451
+    },
+    {
+      "key": "sykkelsti-vinter-dag",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "vinter-dag",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-vinter-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 298597
+    },
+    {
+      "key": "vidde-haust-morgon",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "haust-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-haust-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-haust-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 295738
+    },
+    {
+      "key": "fjorestein-var-kveld",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "var-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-var-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-var-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 258008
+    },
+    {
+      "key": "myr-vinter-natt",
+      "kind": "landscape",
+      "subject": "myr",
+      "variant": "vinter-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/myr-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/myr-vinter-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 276403
+    },
+    {
+      "key": "vidde-var-natt",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "var-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-var-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 267007
+    },
+    {
+      "key": "fjorestein-var-morgon",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "var-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-var-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-var-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 239487
+    },
+    {
+      "key": "klippe-var-morgon",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "var-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-var-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-var-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 257762
+    },
+    {
+      "key": "vidde-haust-kveld",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "haust-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-haust-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-haust-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 299539
+    },
+    {
+      "key": "fjorestein-var-natt",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "var-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-var-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 220703
+    },
+    {
+      "key": "klippe-var-kveld",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "var-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-var-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-var-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 253448
+    },
+    {
+      "key": "vidde-haust-natt",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "haust-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-haust-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 254842
+    },
+    {
+      "key": "fjorestein-haust-morgon",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "haust-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-haust-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-haust-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 224090
+    },
+    {
+      "key": "klippe-var-natt",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "var-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-var-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 216580
+    },
+    {
+      "key": "vidde-vinter-morgon",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "vinter-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-vinter-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-vinter-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 333628
+    },
+    {
+      "key": "fjorestein-haust-kveld",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "haust-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-haust-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-haust-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 236564
+    },
+    {
+      "key": "klippe-haust-morgon",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "haust-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-haust-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-haust-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 214833
+    },
+    {
+      "key": "vidde-vinter-kveld",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "vinter-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-vinter-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-vinter-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 332869
+    },
+    {
+      "key": "fjorestein-haust-natt",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "haust-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-haust-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 214622
+    },
+    {
+      "key": "klippe-haust-kveld",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "haust-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-haust-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-haust-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 227090
+    },
+    {
+      "key": "vidde-vinter-natt",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "vinter-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-vinter-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 322281
+    },
+    {
+      "key": "klippe-vinter-kveld",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "vinter-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-vinter-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-vinter-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 269288
+    },
+    {
+      "key": "klippe-vinter-morgon",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "vinter-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-vinter-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-vinter-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 268412
+    },
+    {
+      "key": "klippe-vinter-natt",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "vinter-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-vinter-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 252754
+    },
+    {
+      "key": "fjorestein-vinter-morgon",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "vinter-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-vinter-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-vinter-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 256479
+    },
+    {
+      "key": "fjorestein-vinter-kveld",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "vinter-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-vinter-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-vinter-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 257559
+    },
+    {
+      "key": "klippe-haust-natt",
+      "kind": "landscape",
+      "subject": "klippe",
+      "variant": "haust-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/klippe-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/klippe-haust-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 195260
+    },
+    {
+      "key": "fjorestein-vinter-natt",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "vinter-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-vinter-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 249121
+    },
+    {
+      "key": "bygate-var-morgon",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "var-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-var-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-var-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 356745
+    },
+    {
+      "key": "bygate-var-kveld",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "var-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-var-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-var-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 367504
+    },
+    {
+      "key": "bygate-haust-morgon",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "haust-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-haust-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-haust-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 302197
+    },
+    {
+      "key": "bygate-var-natt",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "var-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-var-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 330156
+    },
+    {
+      "key": "bygate-haust-kveld",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "haust-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-haust-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-haust-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 313173
+    },
+    {
+      "key": "bygate-haust-natt",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "haust-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-haust-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 265659
+    },
+    {
+      "key": "bygate-vinter-morgon",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "vinter-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-vinter-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-vinter-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 329959
+    },
+    {
+      "key": "bygate-vinter-kveld",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "vinter-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-vinter-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-vinter-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 326428
+    },
+    {
+      "key": "bygate-vinter-natt",
+      "kind": "landscape",
+      "subject": "bygate",
+      "variant": "vinter-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/bygate-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bygate-vinter-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 286477
+    },
+    {
+      "key": "sykkelsti-var-morgon",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "var-morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-var-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-var-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 330244
+    },
+    {
+      "key": "sykkelsti-var-kveld",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "var-kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-var-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-var-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 336733
+    },
+    {
+      "key": "sykkelsti-var-natt",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "var-natt",
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-var-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 281193
+    },
+    {
+      "key": "sykkelsti-haust-morgon",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "haust-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-haust-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-haust-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 288832
+    },
+    {
+      "key": "sykkelsti-haust-kveld",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "haust-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-haust-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-haust-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 288161
+    },
+    {
+      "key": "sykkelsti-haust-natt",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "haust-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-haust-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 254103
+    },
+    {
+      "key": "sykkelsti-vinter-morgon",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "vinter-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-vinter-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-vinter-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 294194
+    },
+    {
+      "key": "hogfjell-haust-morgon",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "haust-morgon",
+      "edition": 2,
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-haust-morgon-v2.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-haust-morgon-v2.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 275987
+    },
+    {
+      "key": "hogfjell-var-morgon",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "var-morgon",
+      "edition": 2,
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-var-morgon-v2.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-var-morgon-v2.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 283043
+    },
+    {
+      "key": "sykkelsti-vinter-kveld",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "vinter-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-vinter-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-vinter-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 316393
+    },
+    {
+      "key": "hogfjell-var-kveld",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "var-kveld",
+      "edition": 2,
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-var-kveld-v2.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-var-kveld-v2.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 285313
+    },
+    {
+      "key": "sykkelsti-vinter-natt",
+      "kind": "landscape",
+      "subject": "sykkelsti",
+      "variant": "vinter-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/sykkelsti-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/sykkelsti-vinter-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 278659
+    },
+    {
+      "key": "hogfjell-sommar-morgon",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "sommar-morgon",
+      "edition": 2,
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-sommar-morgon-v2.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-sommar-morgon-v2.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 268595
+    },
+    {
+      "key": "hogfjell-sommar-kveld",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "sommar-kveld",
+      "edition": 2,
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-sommar-kveld-v2.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-sommar-kveld-v2.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 275460
+    },
+    {
+      "key": "hogfjell-haust-kveld",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "haust-kveld",
+      "edition": 2,
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-haust-kveld-v2.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-haust-kveld-v2.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 278133
+    },
+    {
+      "key": "hogfjell-vinter-morgon",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "vinter-morgon",
+      "edition": 2,
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-vinter-morgon-v2.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-vinter-morgon-v2.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 276468
+    },
+    {
+      "key": "hogfjell-vinter-kveld",
+      "kind": "landscape",
+      "subject": "hogfjell",
+      "variant": "vinter-kveld",
+      "edition": 2,
+      "file": "_resources/vyrdepil-design/backgrounds/hogfjell-vinter-kveld-v2.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/hogfjell-vinter-kveld-v2.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 282269
+    },
+    {
+      "key": "fjorestein-sommar-kveld",
+      "kind": "landscape",
+      "subject": "fjorestein",
+      "variant": "sommar-kveld",
+      "edition": 2,
+      "file": "_resources/vyrdepil-design/backgrounds/fjorestein-sommar-kveld-v2.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/fjorestein-sommar-kveld-v2.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 229576
+    },
+    {
+      "key": "bypark-sommar-kveld",
+      "kind": "landscape",
+      "subject": "bypark",
+      "variant": "sommar-kveld",
+      "edition": 2,
+      "file": "_resources/vyrdepil-design/backgrounds/bypark-sommar-kveld-v2.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/bypark-sommar-kveld-v2.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 258026
+    },
+    {
+      "key": "vidde-sommar-morgon",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "sommar-morgon",
+      "edition": 2,
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-sommar-morgon-v2.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-sommar-morgon-v2.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 274195
+    },
+    {
+      "key": "vidde-sommar-kveld",
+      "kind": "landscape",
+      "subject": "vidde",
+      "variant": "sommar-kveld",
+      "edition": 2,
+      "file": "_resources/vyrdepil-design/backgrounds/vidde-sommar-kveld-v2.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/vidde-sommar-kveld-v2.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 288579
+    },
+    {
+      "key": "skolegard-var-morgon",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "var-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-var-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-var-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 373604
+    },
+    {
+      "key": "skolegard-var-dag",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "var-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-var-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 382872
+    },
+    {
+      "key": "skolegard-var-kveld",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "var-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-var-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-var-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 384078
+    },
+    {
+      "key": "skolegard-var-natt",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "var-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-var-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 301011
+    },
+    {
+      "key": "skolegard-sommar-morgon",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "sommar-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-sommar-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-sommar-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 387240
+    },
+    {
+      "key": "skolegard-sommar-dag",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "sommar-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-sommar-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 414322
+    },
+    {
+      "key": "skolegard-sommar-kveld",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "sommar-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-sommar-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-sommar-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 428996
+    },
+    {
+      "key": "skolegard-sommar-natt",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "sommar-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-sommar-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 276263
+    },
+    {
+      "key": "skolegard-haust-morgon",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "haust-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-haust-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-haust-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 419577
+    },
+    {
+      "key": "skolegard-haust-dag",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "haust-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-haust-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 439202
+    },
+    {
+      "key": "skolegard-haust-kveld",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "haust-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-haust-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-haust-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 423767
+    },
+    {
+      "key": "skolegard-haust-natt",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "haust-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-haust-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 360204
+    },
+    {
+      "key": "skolegard-vinter-morgon",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "vinter-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-vinter-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-vinter-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 433956
+    },
+    {
+      "key": "skolegard-vinter-dag",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "vinter-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-vinter-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 431473
+    },
+    {
+      "key": "skolegard-vinter-kveld",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "vinter-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-vinter-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-vinter-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 432688
+    },
+    {
+      "key": "skolegard-vinter-natt",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "vinter-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-vinter-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 391070
+    }
+  ]
+}

@@ -8,6 +8,7 @@
 
   const MONTHS = ['januar', 'februar', 'mars', 'april', 'mai', 'juni',
     'juli', 'august', 'september', 'oktober', 'november', 'desember'];
+  const WEEKDAYS = ['Sundag', 'Måndag', 'Tysdag', 'Onsdag', 'Torsdag', 'Fredag', 'Laurdag'];
 
   /** Talet på ord i denne årgangen. */
   function wordCount() {
@@ -39,6 +40,11 @@
 
   function formatDate(date) {
     return `${date.getDate()}. ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+  }
+
+  /** Heildato med vekedag, for den synlege datoen på spelbrettet. */
+  function formatLongDate(date) {
+    return `${WEEKDAYS[date.getDay()]} ${formatDate(date)}`;
   }
 
   /**
@@ -104,7 +110,7 @@
 
   global.DuldordState = {
     ALPHABET, WORD_LENGTH, MAX_GUESSES,
-    wordCount, todayIndex, dateForIndex, formatDate,
+    wordCount, todayIndex, dateForIndex, formatDate, formatLongDate,
     wordForIndex, scoreGuess, letterStates, isLetter
   };
 })(window);
