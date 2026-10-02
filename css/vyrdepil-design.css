@@ -190,6 +190,7 @@
 .vp-standard .vp-mascot-perch { grid-column: 2; grid-row: 1; align-self: end; }
 .vp-standard .vp-standard-main { grid-column: 1; grid-row: 2; }
 .vp-standard .vp-standard-support { grid-column: 2; grid-row: 2; }
+.vp-standard .vp-standard-wide { grid-column: 1 / -1; grid-row: 3; min-width: 0; }
 
 /* Intro for verktøy og canvas-spel. Arbeidsflata kan vere breiare enn introen. */
 .vp-app-intro {
@@ -384,6 +385,9 @@ textarea.vp-input { min-height: 110px; resize: vertical; }
   .vp-standard { grid-template-columns: minmax(0,1fr); max-width: 700px; margin-inline: auto; }
   .vp-standard .vp-mascot-perch { display: none; }
   .vp-standard .vp-standard-support { grid-column: 1; grid-row: 3; margin-block: 40px; }
+  .vp-standard .vp-standard-wide { grid-column: 1; grid-row: 4; }
+  .vp-standard:has(> .vp-standard-wide:not([hidden])) .vp-standard-wide { grid-row: 3; }
+  .vp-standard:has(> .vp-standard-wide:not([hidden])) .vp-standard-support { grid-row: 4; }
   .vp-standard .vp-hero-stage { width: 100%; }
   .vp-standard .vp-hero .vp-title { font-size: clamp(1.45rem,6vw,2.7rem); }
   .vp-editor { grid-template-columns: minmax(0,1fr); }

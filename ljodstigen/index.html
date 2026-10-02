@@ -46,56 +46,6 @@
           <div id="profiles" class="ljod-profiles"></div>
         </div>
       </section>
-
-      <section id="player" class="ljod-player vp-stack" hidden>
-        <section class="vp-panel vp-panel--plain" aria-labelledby="playerName">
-          <div class="vp-content vp-stack">
-            <h2 class="vp-heading" id="playerName">Spelar</h2>
-            <div id="stars"></div>
-            <h3 class="vp-panel-heading vp-heading">Kva vil du spele?</h3>
-            <div id="modes" class="ljod-modes"></div>
-
-            <h3 class="vp-heading vp-heading--small">Under arbeid</h3>
-            <div class="ljod-modes">
-              <a href="jakta.html" class="ljod-mode vp-panel vp-panel--plain ljod-mode-proeve">
-                <span class="ljod-mode-title">Bokstavjakta</span>
-                <span class="ljod-mode-blurb">Plattformspel der du jaktar bokstavar. Berre ei prøveflate enno — gå og hopp, sjå at det går jamt.</span>
-                <span class="ljod-mode-flag ljod-flag-open">Prøveutgåve</span>
-              </a>
-            </div>
-
-            <div data-laerarbaner hidden>
-              <h3 class="vp-heading vp-heading--small">Banene til læraren</h3>
-              <div id="laerarbaner" class="ljod-modes"></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="vp-panel vp-panel--plain" aria-label="Skog, merke og læraroversikt">
-          <div class="vp-content vp-stack">
-            <div class="ljod-tabs" role="tablist" aria-label="Spelaroversikt">
-              <button class="vp-button vp-button--quiet vp-button--compact active" data-tab="skog" role="tab" aria-selected="true">Skogen</button>
-              <button class="vp-button vp-button--quiet vp-button--compact" data-tab="merke" role="tab" aria-selected="false">Merke</button>
-              <button class="vp-button vp-button--quiet vp-button--compact" data-tab="laerar" role="tab" aria-selected="false">For læraren</button>
-            </div>
-            <div data-pane="skog">
-              <p class="ljod-hint">Kvar bokstav er eit tre. Di betre du kan han, di større veks det. Trea visnar aldri.</p>
-              <div id="garden"></div>
-            </div>
-            <div data-pane="merke" hidden>
-              <div id="badges"></div>
-            </div>
-            <div data-pane="laerar" hidden class="vp-stack">
-              <div id="laerar"></div>
-              <div class="vp-actions">
-                <button class="vp-button" id="printLaerar" type="button">Skriv ut</button>
-                <a class="vp-button" href="banelagar.html">Lag eigne baner</a>
-              </div>
-              <p class="ljod-hint">I <strong>Banelagar</strong> teiknar du eigne baner til Bokstavjakta. Spelet vel bokstavane tilpassa kvar elev, eller du kan skrive inn kva de skal øve på denne veka.</p>
-            </div>
-          </div>
-        </section>
-      </section>
     </div>
 
     <aside class="vp-sign vp-sign--grounded vp-standard-support" aria-label="Innstillingar">
@@ -130,6 +80,56 @@
         </div>
       </section>
     </aside>
+
+    <section id="player" class="ljod-player vp-stack vp-standard-wide" hidden>
+      <section class="vp-panel vp-panel--plain" aria-labelledby="playerName">
+        <div class="vp-content vp-stack">
+          <h2 class="vp-heading" id="playerName">Spelar</h2>
+          <div id="stars"></div>
+          <h3 class="vp-panel-heading vp-heading">Kva vil du spele?</h3>
+          <div id="modes" class="ljod-modes"></div>
+
+          <h3 class="vp-heading vp-heading--small">Under arbeid</h3>
+          <div class="ljod-modes">
+            <a href="jakta.html" class="ljod-mode vp-panel vp-panel--plain ljod-mode-proeve">
+              <span class="ljod-mode-title">Bokstavjakta</span>
+              <span class="ljod-mode-blurb">Plattformspel der du jaktar bokstavar. Berre ei prøveflate enno — gå og hopp, sjå at det går jamt.</span>
+              <span class="ljod-mode-flag ljod-flag-open">Prøveutgåve</span>
+            </a>
+          </div>
+
+          <div data-laerarbaner hidden>
+            <h3 class="vp-heading vp-heading--small">Banene til læraren</h3>
+            <div id="laerarbaner" class="ljod-modes"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="vp-panel vp-panel--plain" aria-label="Skog, merke og læraroversikt">
+        <div class="vp-content vp-stack">
+          <div class="ljod-tabs" role="tablist" aria-label="Spelaroversikt">
+            <button class="vp-button vp-button--quiet vp-button--compact active" data-tab="skog" role="tab" aria-selected="true">Skogen</button>
+            <button class="vp-button vp-button--quiet vp-button--compact" data-tab="merke" role="tab" aria-selected="false">Merke</button>
+            <button class="vp-button vp-button--quiet vp-button--compact" data-tab="laerar" role="tab" aria-selected="false">For læraren</button>
+          </div>
+          <div data-pane="skog">
+            <p class="ljod-hint">Kvar bokstav er eit tre. Di betre du kan han, di større veks det. Trea visnar aldri.</p>
+            <div id="garden"></div>
+          </div>
+          <div data-pane="merke" hidden>
+            <div id="badges"></div>
+          </div>
+          <div data-pane="laerar" hidden class="vp-stack">
+            <div id="laerar"></div>
+            <div class="vp-actions">
+              <button class="vp-button" id="printLaerar" type="button">Skriv ut</button>
+              <a class="vp-button" href="banelagar.html">Lag eigne baner</a>
+            </div>
+            <p class="ljod-hint">I <strong>Banelagar</strong> teiknar du eigne baner til Bokstavjakta. Spelet vel bokstavane tilpassa kvar elev, eller du kan skrive inn kva de skal øve på denne veka.</p>
+          </div>
+        </div>
+      </section>
+    </section>
   </div>
 </main>
 <script src="../js/vyrdepil-storage.js"></script>
