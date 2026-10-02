@@ -9,7 +9,7 @@
         {
           "t": "fiksa",
           "kva": "Framsida",
-          "tekst": "Hero, infoskilt og verktøykategoriar står med om lag 60 px luft på mobil, slik at stolpane ikkje overlappar innhaldet."
+          "tekst": "Hero, infoskilt og verktøykategoriar står med om lag 100 px luft på mobil, slik at stolpane ikkje overlappar innhaldet."
         }
       ]
     },

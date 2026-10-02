@@ -142,8 +142,8 @@ body.vp-home-page {
 
 @media (max-width: 620px) {
   .vp-home-main { width: calc(100% - 16px); gap: 14px; }
-  .vp-home-hero-layout { gap: 60px; }
-  #appSections { margin-top: 46px; }
+  .vp-home-hero-layout { gap: 100px; }
+  #appSections { margin-top: 86px; } /* 86 + the parent grid gap of 14 px gives 100 px. */
   .vp-home-note.vp-sign--grounded::before { left: -8px; }
   .vp-home-note.vp-sign--grounded::after { right: -8px; }
   .vp-home-hero .vp-hero-content { inset: 39% 8% 13% 8%; gap: 7px; }
