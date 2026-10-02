@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.70",
+      "dato": "2026-10-02",
+      "samandrag": "Den felles sidefoten er rulla ut på alle sider utan Canvas-spel.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Felles sidefot",
+          "tekst": "Infosider, skjulte verktøy og undersider brukar same sidefot. Canvas-spel er unnateke."
+        }
+      ]
+    },
+    {
       "versjon": "1.69",
       "dato": "2026-10-02",
       "samandrag": "Framsida har fått ein fullbreidd, halvtransparent sidefot som kan brukast på tvers av sidene.",

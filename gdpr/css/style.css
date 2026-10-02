@@ -615,4 +615,4 @@ a.gd-krav-lenkje:hover { text-decoration: underline; text-underline-offset: 2px;
   line-height: 1.55;
   margin: 0 0 8px;
 }
-.gd-sitat-stor footer { font-size: 0.86rem; color: var(--muted); }
+.gd-sitat-stor .gd-citation { font-size: 0.86rem; color: var(--muted); }

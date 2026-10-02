@@ -34,7 +34,7 @@ Brukaren har valt det nye fellesdesignet. **Nye appar, nytt felles UI og avtalte
 - Knappar: `vp-button` med rolle-, storleik- og tilstandsvariantar. Flater: `vp-panel` med fem familiar. Skjema: `vp-field`, `vp-input`, `vp-choice`. Trekkspel: `vp-accordion`. Dialog: `vp-dialog`. Sjå strukturane i DESIGN.md/katalogen.
 - Bruk felles klassar for generelle knappar, panel, felt, trekkspel og dialogar. App-CSS skal halde seg til oppsett, geometri og faglege tilstandar, ikkje kopiere fyll, rammer, skuggar, typografi eller fokusstil.
 - Dialogar brukar `Vy.openModal()`, `Vy.closeModal()` og `Vy.bindOverlayClose()` for fokusfelle, Escape, rullelås, fokusretur og bakgrunnsklikk.
-- Nye appar aktiverer sidefoten med `data-vp-site-footer` og lastar `js/vyrdepil-footer.js`; den same modulen kan rullast ut til eksisterande sider når dei er klare.
+- Nye sider aktiverer sidefoten med `data-vp-site-footer` og lastar `js/vyrdepil-footer.js`. Canvas-spel (`data-vp-layout="canvas"`) er unntatt for å unngå ekstra rulling og kluss rundt spelruta.
 - Nye sider bruker `<body class="vp-page" data-vp-design data-vp-app="APP-ID" data-vp-site-footer>`, felles CSS og `js/vyrdepil-design.js` etter ikon-/hjelpemodulane. Ingen avhengnad av `catalogue.css` eller gamle neobrutalisme-klassar.
 - Ny navigasjon følgjer skyheaderen og appmenyen i katalogen, med kategoridata frå den eksisterande `json/apps.json`. Ikkje bruk den gamle temaveljaren i nye grensesnitt.
 - Alt skal vere responsivt på små telefonar, nettbrett og store skjermar. Bruk grid/flex, clamp og minmax. Test at det ikkje er vassrett overflyt, at tekst er lesbar og at dekor blir klipt i eigne lag.

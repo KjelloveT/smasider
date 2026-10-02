@@ -80,14 +80,14 @@ Editorar, tabellar, små felt, spelkontrollar og tette lister har reine flater u
 |---|---|
 | Standard | `main.vp-shell` → `vp-standard`. `vp-hero-stage` og Vyrde over `vp-standard-main` og `vp-standard-support`; 1200 px totalbreidd og 700 px heroskilt. App-logo har eige felt i hero. Mobil: hero, hovudinnhald, støtteskilt; ekstra hjelp/val i trekkspel. Viktige startval og handlingar må vere synlege. |
 | Utvida verktøy | `main.vp-shell.vp-shell--wide`. Intro i `vp-app-intro` (maks 1100 px), stor logo til venstre inni `vp-app-intro-board`, Vyrde utanfor til høgre. `vp-toolbar` og `vp-editor` med arbeidsflate og valfrie sidepanel. Berre arbeidsflata/verktøyrada får full breidd; sidemenyar foldast på mobil. |
-| Canvas-spel | Same avgrensa `vp-app-intro`, med logo og Vyrde. `vp-game-frame`, `vp-game-stage`, canvas og HTML-status. Behald spelmotoren sitt sideforhold og eigne funksjonsfargar. Intro kan forsvinne under spel. Berøringskontrollar og viktige handlingar står synleg. |
+| Canvas-spel | Same avgrensa `vp-app-intro`, med logo og Vyrde. `vp-game-frame`, `vp-game-stage`, canvas og HTML-status. Behald spelmotoren sitt sideforhold og eigne funksjonsfargar. Intro kan forsvinne under spel. Berøringskontrollar og viktige handlingar står synleg. **Canvas-spel skal ikkje ha den globale sidefoten**, sidan han kan presse spelruta og skape uønskt rulling. |
 | Informasjonssider | `body.vp-site-page` med felles skyheader og appmeny. Bruk `main.vp-shell.vp-site-main.vp-policy-page`, lyse `vp-panel`-flater og `vp-policy-heading`-skilt med kotemønster i full storleik. Hald hovudbreidda rundt 960 px og brødtekst på maks 78ch, sidan sidene ikkje har sidemeny. Tabellar brukar `vp-data-table` og kan rulle vassrett på små skjermar. Behald juridisk tekst, handlingar og skript-ID-ar når utsjånaden blir endra. |
 
 Framsida har fem opne faggrupper frå `json/apps.json`, ikkje trekkspel. Ho viser fire kort per rad på stor skjerm, tre på nettbrett og fire på mobil; mobilkort viser berre logo og namn. Kortrekkja startar med tydeleg luft under kvart kategoriskilt. Personvern og lisens deler breidd og venstrelinje. Sidefoten går over heile skjermbreidda, med lys beige bakgrunn på 50 % opasitet og innhald innanfor ei lesbar breidd. Vyrde står ved sida av informasjonsinnhaldet og følgjer med ved rulling, men blir gøymd på mobil.
 
 ### Felles sidefot
 
-Nye appar brukar den delte sidefoten frå `js/vyrdepil-footer.js` og `css/vyrdepil-design.css`. Set `data-vp-site-footer` på `<body>` og last skriptet. Sidefoten får full skjermbreidd, lys beige bakgrunn med 50 % opasitet og ei avgrensa tekstbreidd. Han brukar den same korte informasjonsteksten og dei same lenkjene som framsida. Eksisterande sider kan slå han på med same attributt og skript når dei blir rulla ut.
+Alle sider brukar den delte sidefoten frå `js/vyrdepil-footer.js` og `css/vyrdepil-design.css`, med unntak av Canvas-spel (`data-vp-layout="canvas"`). På andre sider: set `data-vp-site-footer` på `<body>` og last skriptet. Sidefoten får full skjermbreidd, lys beige bakgrunn med 50 % opasitet og ei avgrensa tekstbreidd. Han brukar den same korte informasjonsteksten og dei same lenkjene som framsida. Dette gjeld òg infosider, skjulte verktøy og undersider. Canvas-spel skal korkje ha attributtet eller laste skriptet, slik at den globale sidefoten ikkje pressar spelet eller skaper ekstra rulling.
 
 ## Startstruktur for ei ny app
 
@@ -111,7 +111,8 @@ Nye appar brukar den delte sidefoten frå `js/vyrdepil-footer.js` og `css/vyrdep
   <main class="vp-shell" id="main">
     <!-- Vel eitt av dei tre oppsetta ovanfor. -->
   </main>
-  <!-- Sidefoten blir sett inn etter hovudinnhaldet av vyrdepil-footer.js. -->
+  <!-- For Canvas-spel: fjern data-vp-site-footer og vyrdepil-footer.js. -->
+  <!-- Elles blir sidefoten sett inn etter hovudinnhaldet av vyrdepil-footer.js. -->
 </body>
 ```
 

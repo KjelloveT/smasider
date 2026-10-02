@@ -373,14 +373,3 @@ h1 {
     }
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-footer a {
-    color: var(--border);
-}

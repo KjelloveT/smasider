@@ -434,17 +434,6 @@ h1 {
     margin-top: 12px;
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-footer a {
-    color: var(--border);
-}
-
 @media (max-width: 700px) {
     .screen {
         padding: 16px;

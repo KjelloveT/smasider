@@ -527,43 +527,24 @@ body.vp-site-page[data-vp-layout="expanded"] .vp-site-main {
 .vp-policy-page .vp-button { margin-block: 4px; }
 .vp-policy-page pre { max-width: 100%; border-radius: 8px; color: var(--vp-ink); }
 .vp-site-footer {
-  width: min(100% - 32px, 960px);
-  margin-inline: auto;
-  margin-bottom: 24px;
-  padding: 20px;
-  border: 3px solid var(--vp-frame);
-  border-radius: 10px;
-  background: var(--vp-wood);
-  text-align: center;
-}
-.vp-site-footer p { margin: 0 0 8px; }
-.vp-site-footer p:last-child { margin-bottom: 0; }
-.vp-site-footer .footer-links { font-weight: 750; }
-.vp-site-footer--full {
   width: 100%;
-  max-width: none;
   margin: 0;
   padding: 20px 16px;
-  border: 0;
-  border-radius: 0;
   background: rgb(255 249 233 / 50%);
   color: var(--vp-ink);
   text-align: center;
 }
-.vp-site-footer--full.vp-shell { width: 100%; max-width: none; margin-inline: 0; }
-.vp-site-footer--full .vp-site-footer__inner,
-.vp-site-footer--full > p,
-.vp-site-footer--full > nav { width: min(100%, 960px); margin-inline: auto; }
-.vp-site-footer--full p { margin-block: 0 8px; }
-.vp-site-footer--full p:last-child { margin-bottom: 0; }
-.vp-site-footer--full .footer-links { margin-block: 0; font-weight: 750; }
+.vp-site-footer p { margin: 0 0 8px; }
+.vp-site-footer p:last-child { margin-bottom: 0; }
+.vp-site-footer .footer-links { width: min(100%, 960px); margin-inline: auto; font-weight: 750; }
+.vp-site-footer__inner { width: min(100%, 960px); margin-inline: auto; }
+.vp-site-footer--full { max-width: none; }
 @media (max-width: 600px) {
   .vp-site-main { padding-block: 18px 42px; }
   .vp-policy-title-card { padding: 18px; }
   .vp-policy-heading { margin-left: 8px; padding: 9px 12px; }
   .vp-policy-panel { padding: 16px; }
-  .vp-site-footer { padding: 14px; }
-  .vp-site-footer--full { padding: 14px 12px; }
+  .vp-site-footer { padding: 14px 12px; }
 }
 
 /* Felles oppsett og responsiv ramme for appene. */

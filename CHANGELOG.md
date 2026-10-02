@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.70] — 2026-10-02
+
+### Endra
+- **Felles sidefot er rulla ut på alle ikkje-Canvas-sider.** Informasjonssider, skjulte verktøy og undersider brukar same fullbreidde sidefot; gamle globale fotar er fjerna. Canvas-spel er unntatt for å halde spelruta fri for ekstra rulling.
+
 ## [1.69] — 2026-10-02
 
 ### Endra

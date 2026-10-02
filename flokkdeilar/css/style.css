@@ -606,7 +606,7 @@
    ══════════════════════════════════════ */
 @media print {
     .vp-header,
-    .site-footer,
+    .vp-site-footer,
     #setupBox,
     #warningBox,
     .btn-row,

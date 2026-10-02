@@ -19,7 +19,6 @@
 .hs-eyebrow { display:block; font-size:.73rem; font-weight:750; letter-spacing:.11em; text-transform:uppercase; color:var(--hs-muted); margin-bottom:10px; }
 .hs-muted { color:var(--hs-muted); }
 .hs-empty { text-align:center; padding:32px; color:var(--hs-muted); }
-.hs-footer { display:flex; justify-content:space-between; gap:20px; border-top:1px solid var(--hs-line); margin-top:42px; padding:22px 0 4px; color:var(--hs-muted); font-size:.85rem; }
 .hs-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 .hs-app svg { flex-shrink:0; }
 @media(prefers-reduced-motion:reduce) { .hs-app *, .hs-app *::before,.hs-app *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }

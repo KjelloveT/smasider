@@ -16,7 +16,10 @@
   function mountFooter() {
     const body = document.body;
     if (!body.hasAttribute('data-vp-site-footer')) return;
-    const previousFooter = body.querySelector('footer.vp-site-footer');
+    const previousFooter = Array.from(body.querySelectorAll('footer')).find(candidate =>
+      candidate.classList.contains('vp-site-footer') ||
+      !candidate.closest('main, blockquote, dialog, [role="dialog"]')
+    );
 
     const footer = document.createElement('footer');
     footer.className = 'vp-site-footer vp-site-footer--full';
@@ -45,15 +48,8 @@
     content.append(description, links);
     footer.append(content);
 
-    const main = document.querySelector('main');
-    const pageWrapper = main && main.closest('.page-wrapper');
-    if (previousFooter) {
-      previousFooter.replaceWith(footer);
-      return;
-    }
-    const anchor = pageWrapper || main;
-    if (anchor && anchor.parentElement) anchor.insertAdjacentElement('afterend', footer);
-    else body.append(footer);
+    if (previousFooter) previousFooter.remove();
+    body.append(footer);
   }
 
   if (document.readyState === 'loading') {

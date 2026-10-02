@@ -89,15 +89,6 @@ h1, h2, h3, h4 {
   padding: clamp(16px, 3vw, 32px);
 }
 
-.bk-footer {
-  text-align: center;
-  padding: 20px 16px;
-  color: var(--bk-ink-soft);
-  font-size: 0.85rem;
-  border-top: 2px solid var(--bk-ink);
-  background: var(--bk-paper);
-}
-
 /* ── 4. Header ─────────────────────────────────────────────── */
 .bk-header {
   background: var(--bk-ink);
