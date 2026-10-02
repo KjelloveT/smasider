@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.74] — 2026-10-02
+
+### Endra
+- **BåreTevling har fått nye skipsfigurar.** Vel mellom klassiske seilskip og moderne krigsskip før spelstart.
+
 ## [1.73] — 2026-10-02
 
 ### Fiksa

@@ -183,12 +183,13 @@ const Ships = {
             wrapper.style.gap = '2px';
             wrapper.style.alignItems = 'center';
             for (const part of parts) {
-                const img = document.createElement('img');
-                img.src = part.img;
-                img.alt = `Skip (${size})`;
-                img.style.maxHeight = '60px';
-                img.style.width = 'auto';
-                wrapper.appendChild(img);
+                const shipVisual = Board.createShipVisual(part);
+                shipVisual.removeAttribute('aria-hidden');
+                shipVisual.setAttribute('role', 'img');
+                shipVisual.setAttribute('aria-label', `Skip (${size})`);
+                shipVisual.style.maxHeight = '60px';
+                shipVisual.style.width = 'auto';
+                wrapper.appendChild(shipVisual);
             }
             container.appendChild(wrapper);
         } else {
