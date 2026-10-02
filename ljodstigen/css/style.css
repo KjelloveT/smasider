@@ -44,14 +44,23 @@ body[data-font="lesefont"] .ljod-bed-letter {
 
 /* ──────────────── Framside ──────────────── */
 
-.ljod-hero { align-items: center; }
-.ljod-hero .vyrde { width: 90px; height: 90px; flex: none; }
+.ljod-hero-mark {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: clamp(44px, 12vw, 84px);
+  aspect-ratio: 1;
+  border: 2px solid var(--vp-frame);
+  border-radius: 8px;
+  background: var(--vp-honey);
+}
+.ljod-hero-mark svg { width: 58%; height: 58%; }
 
 .ljod-alpha { margin-bottom: 20px; }
 .ljod-alpha p { max-width: 78ch; margin: 0; }
 
 .ljod-hint {
-  color: var(--muted);
+  color: var(--vp-ink);
   max-width: 78ch;
 }
 
@@ -66,57 +75,35 @@ body[data-font="lesefont"] .ljod-bed-letter {
 
 /* Profilar */
 .ljod-profiles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+  gap: 12px;
+  align-items: stretch;
 }
 
 .ljod-profile {
-  border: 3px solid var(--border);
-  border-radius: 10px;
-  background: var(--surface);
   display: flex;
   flex-direction: column;
-  min-width: 130px;
-}
-
-.ljod-profile.is-active {
-  box-shadow: 6px 6px 0 var(--border);
-  /* Aksenten ber ingen tekst — han ligg som kant. Sjå kontrastnota. */
-  border-color: var(--accent);
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .ljod-profile-pick {
+  width: 100%;
+  min-height: 132px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
   padding: 14px 12px 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text);
-  font-family: inherit;
 }
 
 .ljod-profile-name { font-weight: 800; font-size: 1.05rem; }
-.ljod-profile-sum  { font-size: 0.8rem; color: var(--muted); }
+.ljod-profile-sum  { font-size: 0.8rem; color: var(--vp-ink); }
 
-.ljod-profile-del {
-  border: none;
-  border-top: 2px solid var(--border);
-  background: none;
-  color: var(--muted);
-  font-family: inherit;
-  font-size: 0.75rem;
-  padding: 6px;
-  cursor: pointer;
-}
-.ljod-profile-del:hover { background: var(--ljod-wrong); color: var(--text-on-light-accent); }
-
-.ljod-newprofile { flex: 1 1 100%; margin-top: 6px; }
-.ljod-avatar-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.ljod-newprofile { grid-column: 1 / -1; display: grid; gap: 12px; margin-top: 0; }
+.ljod-avatar-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(92px, 100%), 1fr)); gap: 10px; }
 
 .ljod-avatar {
   display: flex;
@@ -124,14 +111,8 @@ body[data-font="lesefont"] .ljod-bed-letter {
   align-items: center;
   gap: 4px;
   padding: 10px;
-  border: 3px solid var(--border);
-  border-radius: 10px;
-  background: var(--surface);
-  color: var(--text);
-  cursor: pointer;
-  font-family: inherit;
 }
-.ljod-avatar:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--border); }
+.ljod-avatar:hover { transform: none; }
 .ljod-avatar-name { font-size: 0.75rem; font-weight: 700; }
 
 /* Modusar */
@@ -145,41 +126,36 @@ body[data-font="lesefont"] .ljod-bed-letter {
 .ljod-mode {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 16px;
-  border: 3px solid var(--border);
-  border-radius: 10px;
-  background: var(--surface);
-  color: var(--text);
+  gap: 8px;
+  min-width: 0;
+  min-height: 100%;
   text-decoration: none;
   position: relative;
 }
-.ljod-mode:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--border); }
-.ljod-mode.is-locked { opacity: 0.5; }
-.ljod-mode.is-locked:hover { transform: none; box-shadow: none; }
+.ljod-mode:hover { transform: none; }
+.ljod-mode.is-locked { opacity: 1; background: var(--vp-stone); border-style: dashed; }
+.ljod-mode.is-locked:hover { transform: none; }
 
 .ljod-mode-title { font-weight: 800; font-size: 1.15rem; }
-.ljod-mode-blurb { font-size: 0.85rem; color: var(--muted); }
+.ljod-mode-blurb { font-size: 0.9rem; color: var(--vp-ink); }
 .ljod-mode-flag {
   align-self: flex-start;
   margin-top: 6px;
-  font-size: 0.7rem;
-  font-weight: 800;
-  text-transform: uppercase;
   padding: 3px 8px;
-  border-radius: 4px;
-  /* Invertering: motsetnader i kvart einaste tema, så kontrasten held
-     per konstruksjon utan måling. */
-  background: var(--text);
-  color: var(--surface);
+  border: 2px solid var(--vp-frame);
+  border-radius: 6px;
+  background: var(--vp-honey);
+  color: var(--vp-ink);
+  font-size: 0.75rem;
+  font-weight: 750;
 }
 
 /* Merket på ein modus som er open fordi læraren opna alt, ikkje fordi
    eleven kom dit. Det skal ikkje sjå ut som noko han har fortent. */
 .ljod-mode-flag.ljod-flag-open {
-  background: var(--surface);
-  color: var(--text);
-  border: 2px solid var(--border);
+  background: var(--vp-paper);
+  color: var(--vp-ink);
+  border: 2px solid var(--vp-frame);
   font-weight: 700;
 }
 
@@ -441,7 +417,10 @@ body[data-font="lesefont"] .ljod-bed-letter {
   color: var(--accent);
 }
 
-.ljod-btn-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 18px; }
+.ljod-btn-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 12px; }
+.ljod-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.ljod-tabs [aria-selected="true"] { background: var(--vp-honey); color: var(--vp-ink); box-shadow: inset 0 -4px 0 var(--vp-focus); }
+.ljod-mode-par { min-width: 0; }
 
 /* ──────────────── Læraroversikt ──────────────── */
 
@@ -509,9 +488,9 @@ body[data-font="lesefont"] .ljod-bed-letter {
 /* ──────────────── Utskrift ──────────────── */
 
 @media print {
-  .vp-header, .ljod-hero, .ljod-alpha, .box-tabs, #printLaerar,
-  .ljod-settings, #profiles, #modes, #stars, .ljod-playbar { display: none !important; }
-  .box5, .box4 { border: none; box-shadow: none; }
+  .vp-header, .vp-hero-stage, .vp-notice, .ljod-tabs, #printLaerar,
+  .vp-standard-support, #profiles, #modes, #stars, .ljod-playbar { display: none !important; }
+  .vp-panel { border: 0; box-shadow: none; }
   .ljod-table th { background: none; color: #000; }
   .ljod-table tr.is-weak td { background: none; font-weight: 700; }
   body { background: #fff; color: #000; }
@@ -622,18 +601,7 @@ body[data-font="lesefont"] .ljod-bed-letter {
 }
 .ljod-mode-par .ljod-mode { margin: 0; }
 
-.ljod-mode-variant {
-  align-self: flex-start;
-  padding: 5px 12px 6px;
-  border: 2px dashed var(--border);
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--text);
-  text-decoration: none;
-}
-.ljod-mode-variant:hover { background: var(--surface); }
-.ljod-mode-variant:focus-visible { outline: 3px solid var(--accent2); outline-offset: 2px; }
+.ljod-mode-variant { align-self: flex-start; margin-top: 4px; }
 
 /* Styrespaken i skogen. Same form som på leirplassen, men mindre — han
    ligg oppå eit lerret som deler plass med resten av sida. */

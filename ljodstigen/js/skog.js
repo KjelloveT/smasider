@@ -97,7 +97,7 @@
      lagra. Ein elev som har ekte framgang skal ikkje trykkje på han. */
   function proveknapp(host, p) {
     const rad = R().h('div', 'ljod-skog3d-prov');
-    const knapp = R().h('button', 'btn', 'Tilfeldig vekst');
+    const knapp = R().h('button', 'vp-button vp-button--compact', 'Tilfeldig vekst');
     knapp.type = 'button';
     knapp.addEventListener('click', function () {
       const a = p.adaptive;

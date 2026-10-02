@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.71] — 2026-10-02
+
+### Endra
+- **Ljodstigen følgjer standardoppsettet.** Start- og profilsida brukar no felles hero, panel, valknappar og innstillingsskilt. Bokstavjakta og Bokstavropet har ikkje global sidefot.
+
 ## [1.70] — 2026-10-02
 
 ### Endra
