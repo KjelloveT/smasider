@@ -10,6 +10,13 @@
           "t": "endra",
           "kva": "BåreTevling",
           "tekst": "Vel mellom klassiske seilskip og moderne krigsskip. Skipbrikkene viser heile skipet over dei valde rutene."
+      "samandrag": "Vegamot har fått ei ryddigare redigeringsflate og eit meir oversiktleg flytkart.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Vegamot",
+          "merke": "eksperiment",
+          "tekst": "Redigeringa ligg til venstre. Flytkartet ligg i ei avgrensa rute til høgre, kan zoomast og flyttast, og held seg i ro medan historia blir redigert. Start- og sluttval ligg saman med innhaldet, og korta har luft mellom seg."
         }
       ]
     },

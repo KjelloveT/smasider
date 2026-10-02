@@ -5,6 +5,7 @@
     const Layout = window.Forteljingskart.GraphLayout;
     const NODE_WIDTH = Layout.nodeWidth;
     const NODE_HEIGHT = Layout.nodeHeight;
+    const cameras = new WeakMap();
 
     function element(name, attributes, text) {
         const node = document.createElementNS(SVG_NS, name);
@@ -52,12 +53,81 @@
         return lines;
     }
 
-    function render(svg, story, selectedId, warnings, onSelect) {
+    function copyViewBox(viewBox) {
+        return { x: viewBox.x, y: viewBox.y, width: viewBox.width, height: viewBox.height };
+    }
+
+    function viewBoxText(viewBox) {
+        return [viewBox.x, viewBox.y, viewBox.width, viewBox.height].join(' ');
+    }
+
+    function setCameraViewBox(svg, viewBox) {
+        const camera = cameras.get(svg);
+        if (!camera) return;
+        camera.viewBox = copyViewBox(viewBox);
+        svg.setAttribute('viewBox', viewBoxText(camera.viewBox));
+    }
+
+    function sameViewBox(first, second) {
+        const tolerance = 0.01;
+        return Math.abs(first.x - second.x) < tolerance &&
+            Math.abs(first.y - second.y) < tolerance &&
+            Math.abs(first.width - second.width) < tolerance &&
+            Math.abs(first.height - second.height) < tolerance;
+    }
+
+    function zoom(svg, factor) {
+        const camera = cameras.get(svg);
+        if (!camera || !Number.isFinite(factor) || factor <= 0) return;
+        const viewBox = camera.viewBox;
+        const width = Math.max(camera.fitViewBox.width / 8, Math.min(camera.fitViewBox.width * 3, viewBox.width * factor));
+        const height = viewBox.height * (width / viewBox.width);
+        const centerX = viewBox.x + viewBox.width / 2;
+        const centerY = viewBox.y + viewBox.height / 2;
+        setCameraViewBox(svg, {
+            x: centerX - width / 2,
+            y: centerY - height / 2,
+            width: width,
+            height: height
+        });
+    }
+
+    function fit(svg) {
+        const camera = cameras.get(svg);
+        if (camera) setCameraViewBox(svg, camera.fitViewBox);
+    }
+
+    function pan(svg, deltaX, deltaY) {
+        const camera = cameras.get(svg);
+        const matrix = svg.getScreenCTM();
+        if (!camera || !matrix || !matrix.a || !matrix.d) return;
+        setCameraViewBox(svg, {
+            x: camera.viewBox.x - deltaX / matrix.a,
+            y: camera.viewBox.y - deltaY / matrix.d,
+            width: camera.viewBox.width,
+            height: camera.viewBox.height
+        });
+    }
+
+    function render(svg, story, selectedId, warnings, onSelect, onConnect) {
         const layout = Layout.compute(story);
         const warningNodes = new Set(warnings.filter(function (warning) {
             return warning.nodeId;
         }).map(function (warning) { return warning.nodeId; }));
         const routeGroups = new Map();
+        let suppressNodeClick = false;
+        let suppressCanvasClick = false;
+        let dragState = null;
+        let panState = null;
+        let previewPath = null;
+        const fitViewBox = { x: 0, y: 0, width: layout.width, height: layout.height };
+        const previousCamera = cameras.get(svg);
+        const wasShowingAll = !previousCamera || sameViewBox(previousCamera.viewBox, previousCamera.fitViewBox);
+        const camera = {
+            fitViewBox: fitViewBox,
+            viewBox: wasShowingAll ? copyViewBox(fitViewBox) : copyViewBox(previousCamera.viewBox)
+        };
+        cameras.set(svg, camera);
         layout.routes.forEach(function (edge) {
             if (!routeGroups.has(edge.source.id)) routeGroups.set(edge.source.id, []);
             routeGroups.get(edge.source.id).push(edge);
@@ -66,7 +136,7 @@
         while (svg.firstChild) svg.removeChild(svg.firstChild);
         svg.setAttribute('width', layout.width);
         svg.setAttribute('height', layout.height);
-        svg.setAttribute('viewBox', '0 0 ' + layout.width + ' ' + layout.height);
+        svg.setAttribute('viewBox', viewBoxText(camera.viewBox));
         svg.appendChild(element('title', {}, 'Flytkart for ' + (story.title || 'forteljinga')));
         svg.appendChild(element('desc', {}, 'Historia går ovanfrå og ned. Tilbakekoplingar og hopp går rundt stega i eigne baner. Vel eit steg for å redigere det.'));
 
@@ -219,10 +289,11 @@
                 transform: 'translate(' + point.x + ' ' + point.y + ')',
                 role: 'button',
                 tabindex: '0',
+                'data-node-id': node.id,
                 'aria-label': (node.title || 'Utan tittel') + (isStart ? ', startsteg' : '') + (node.isEnd ? ', slutt' : '') +
                     (node.selectionMode === 'random' ? ', tilfeldig val' : node.selectionMode === 'dice' ? ', terningstyrte vegval' : '') +
                     (node.image ? ', har bilete' : '') +
-                    ', ' + node.routes.length + ' vegval',
+                    ', ' + node.routes.length + ' vegval. Dra til eit anna steg for å kople dei saman.',
                 'aria-pressed': node.id === selectedId ? 'true' : 'false'
             });
             group.appendChild(element('rect', { width: NODE_WIDTH, height: NODE_HEIGHT }));
@@ -254,7 +325,23 @@
                 });
             }
 
-            group.addEventListener('click', function () { onSelect(node.id); });
+            group.addEventListener('pointerdown', function (event) {
+                if (event.button !== 0 || dragState) return;
+                event.preventDefault();
+                dragState = {
+                    sourceId: node.id,
+                    pointerId: event.pointerId,
+                    startX: event.clientX,
+                    startY: event.clientY,
+                    moved: false,
+                    target: null
+                };
+                try { svg.setPointerCapture(event.pointerId); } catch (error) { /* Pointer capture is optional. */ }
+            });
+            group.addEventListener('click', function () {
+                if (suppressNodeClick) return;
+                onSelect(node.id);
+            });
             group.addEventListener('keydown', function (event) {
                 if (event.key !== 'Enter' && event.key !== ' ') return;
                 event.preventDefault();
@@ -262,8 +349,146 @@
             });
             svg.appendChild(group);
         });
+
+        function pointInGraph(clientX, clientY, inverseMatrix) {
+            const point = svg.createSVGPoint();
+            point.x = clientX;
+            point.y = clientY;
+            const matrix = inverseMatrix || svg.getScreenCTM();
+            return matrix ? point.matrixTransform(inverseMatrix ? matrix : matrix.inverse()) : { x: 0, y: 0 };
+        }
+
+        function nodeAtPoint(clientX, clientY) {
+            const hit = document.elementFromPoint(clientX, clientY);
+            const group = hit && hit.closest ? hit.closest('.graph-node') : null;
+            return group && svg.contains(group) ? group : null;
+        }
+
+        function clearConnectionPreview() {
+            svg.classList.remove('is-connecting');
+            svg.querySelectorAll('.graph-node.is-connection-target').forEach(function (node) {
+                node.classList.remove('is-connection-target');
+            });
+            if (previewPath) previewPath.remove();
+            previewPath = null;
+            if (dragState && dragState.target) dragState.target.classList.remove('is-connection-target');
+        }
+
+        svg.onpointerdown = function (event) {
+            if (event.button !== 0 || dragState || panState) return;
+            const hitNode = event.target.closest ? event.target.closest('.graph-node') : null;
+            if (hitNode && svg.contains(hitNode)) return;
+            const matrix = svg.getScreenCTM();
+            if (!matrix) return;
+            event.preventDefault();
+            panState = {
+                pointerId: event.pointerId,
+                startX: event.clientX,
+                startY: event.clientY,
+                startPoint: pointInGraph(event.clientX, event.clientY, matrix.inverse()),
+                inverseMatrix: matrix.inverse(),
+                startViewBox: copyViewBox(camera.viewBox),
+                moved: false
+            };
+            try { svg.setPointerCapture(event.pointerId); } catch (error) { /* Pointer capture is optional. */ }
+        };
+
+        svg.onclick = function (event) {
+            if (!suppressCanvasClick) return;
+            event.preventDefault();
+            event.stopPropagation();
+        };
+
+        svg.onpointermove = function (event) {
+            if (panState && event.pointerId === panState.pointerId) {
+                const distance = Math.hypot(event.clientX - panState.startX, event.clientY - panState.startY);
+                if (!panState.moved && distance < 5) return;
+                panState.moved = true;
+                svg.classList.add('is-panning');
+                const pointer = pointInGraph(event.clientX, event.clientY, panState.inverseMatrix);
+                setCameraViewBox(svg, {
+                    x: panState.startViewBox.x - (pointer.x - panState.startPoint.x),
+                    y: panState.startViewBox.y - (pointer.y - panState.startPoint.y),
+                    width: panState.startViewBox.width,
+                    height: panState.startViewBox.height
+                });
+                return;
+            }
+            if (!dragState || event.pointerId !== dragState.pointerId) return;
+            const distance = Math.hypot(event.clientX - dragState.startX, event.clientY - dragState.startY);
+            if (!dragState.moved && distance < 7) return;
+            dragState.moved = true;
+            svg.classList.add('is-connecting');
+
+            const target = nodeAtPoint(event.clientX, event.clientY);
+            if (dragState.target !== target) {
+                if (dragState.target) dragState.target.classList.remove('is-connection-target');
+                dragState.target = target;
+                if (target && target.dataset.nodeId !== dragState.sourceId) target.classList.add('is-connection-target');
+            }
+
+            if (!previewPath) {
+                previewPath = element('path', { class: 'graph-edge-preview', 'marker-end': 'url(#story-arrow)' });
+                svg.appendChild(previewPath);
+            }
+            const source = layout.positions.get(dragState.sourceId);
+            const pointer = pointInGraph(event.clientX, event.clientY);
+            const start = { x: source.x + NODE_WIDTH / 2, y: source.y + NODE_HEIGHT };
+            previewPath.setAttribute('d', Layout.linePath([start, pointer]));
+        };
+
+        svg.onpointerup = function (event) {
+            if (panState && event.pointerId === panState.pointerId) {
+                const finishedPan = panState;
+                panState = null;
+                svg.classList.remove('is-panning');
+                if (finishedPan.moved) {
+                    suppressNodeClick = true;
+                    window.setTimeout(function () { suppressNodeClick = false; }, 0);
+                    suppressCanvasClick = true;
+                    window.setTimeout(function () { suppressCanvasClick = false; }, 0);
+                }
+                try { svg.releasePointerCapture(event.pointerId); } catch (error) { /* Capture may already be released. */ }
+                return;
+            }
+            if (!dragState || event.pointerId !== dragState.pointerId) return;
+            const finished = dragState;
+            const target = nodeAtPoint(event.clientX, event.clientY);
+            dragState = null;
+            clearConnectionPreview();
+            suppressNodeClick = true;
+            window.setTimeout(function () { suppressNodeClick = false; }, 0);
+            try { svg.releasePointerCapture(event.pointerId); } catch (error) { /* Capture may already be released. */ }
+
+            if (finished.moved && target && target.dataset.nodeId !== finished.sourceId && onConnect) {
+                const connected = onConnect(finished.sourceId, target.dataset.nodeId);
+                if (!connected) {
+                    const sourceGroup = Array.from(svg.querySelectorAll('.graph-node')).find(function (item) {
+                        return item.dataset.nodeId === finished.sourceId;
+                    });
+                    if (sourceGroup) sourceGroup.focus();
+                }
+            } else {
+                onSelect(finished.sourceId);
+                const sourceGroup = Array.from(svg.querySelectorAll('.graph-node')).find(function (item) {
+                    return item.dataset.nodeId === finished.sourceId;
+                });
+                if (sourceGroup) sourceGroup.focus();
+            }
+        };
+
+        svg.onpointercancel = function () {
+            if (panState) {
+                panState = null;
+                svg.classList.remove('is-panning');
+            }
+            if (dragState) {
+                dragState = null;
+                clearConnectionPreview();
+            }
+        };
     }
 
     window.Forteljingskart = window.Forteljingskart || {};
-    window.Forteljingskart.Graph = { render: render };
+    window.Forteljingskart.Graph = { render: render, zoom: zoom, fit: fit, pan: pan };
 })();

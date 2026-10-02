@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
+    if (window.location.protocol === 'file:') document.body.removeAttribute('data-vp-app');
+
     const APP_ID = 'vegamot';
     const Model = window.Forteljingskart.Model;
     const Validator = window.Forteljingskart.Validator;
@@ -20,8 +22,18 @@
     const saveStatus = document.getElementById('save-status');
     const nodeCount = document.getElementById('node-count');
     const graph = document.getElementById('story-graph');
+    const graphViewport = document.getElementById('graph-viewport');
     const editor = document.getElementById('node-editor');
     const warningList = document.getElementById('warning-list');
+    const workspace = document.querySelector('.workspace');
+    const workspaceDialog = document.getElementById('workspace-dialog');
+    const workspaceDialogSlot = document.getElementById('workspace-dialog-slot');
+    const expandMapButton = document.getElementById('expand-map');
+    const zoomInButton = document.getElementById('zoom-in');
+    const zoomOutButton = document.getElementById('zoom-out');
+    const fitGraphButton = document.getElementById('fit-graph');
+    let workspacePlaceholder = null;
+    let expandedPagePosition = null;
     let story;
     let selectedId;
     let saveTimer = 0;
@@ -32,6 +44,22 @@
         if (className) node.className = className;
         if (text != null) node.textContent = text;
         return node;
+    }
+
+    function preserveScroll(action) {
+        const elements = new Set([
+            document.scrollingElement,
+            document.querySelector('.editor-panel'),
+            workspaceDialogSlot
+        ]);
+        const positions = Array.from(elements).filter(Boolean).map(function (element) {
+            return { element: element, left: element.scrollLeft, top: element.scrollTop };
+        });
+        action();
+        positions.forEach(function (position) {
+            if (position.element.scrollLeft !== position.left) position.element.scrollLeft = position.left;
+            if (position.element.scrollTop !== position.top) position.element.scrollTop = position.top;
+        });
     }
 
     function button(text, className, action) {
@@ -84,7 +112,7 @@
     function renderGraph() {
         const warnings = getWarnings();
         nodeCount.textContent = story.nodes.length + ' steg';
-        Graph.render(graph, story, selectedId, warnings, selectNode);
+        Graph.render(graph, story, selectedId, warnings, selectNode, connectNodes);
     }
 
     function scheduleWarnings() {
@@ -94,12 +122,118 @@
 
     function selectNode(nodeId) {
         if (!Model.findNode(story, nodeId)) return;
-        selectedId = nodeId;
-        renderEditor();
-        renderGraph();
+        preserveScroll(function () {
+            selectedId = nodeId;
+            renderEditor();
+            renderGraph();
+        });
     }
 
+    function connectNodes(sourceId, targetId) {
+        const source = Model.findNode(story, sourceId);
+        const target = Model.findNode(story, targetId);
+        if (!source || !target || source.id === target.id) return false;
+        if (source.selectionMode === 'dice' && source.routes.length >= 20) {
+            selectedId = source.id;
+            renderEditor('Terning kan berre ha opptil 20 vegval. Byt valmåte for å leggje til fleire.');
+            renderGraph();
+            return false;
+        }
+
+        const wasEnd = source.isEnd;
+        source.isEnd = false;
+        const route = Model.addRoute(source);
+        if (!route) {
+            source.isEnd = wasEnd;
+            selectedId = source.id;
+            renderEditor('Dette steget kunne ikkje koplast vidare. Prøv å velje målsteget i redigeringa.');
+            renderGraph();
+            return false;
+        }
+        route.label = 'Vegval';
+        route.targetId = target.id;
+        selectedId = source.id;
+        saveStory();
+        renderEverything();
+        const labelInput = editor.querySelector('#route-label-' + (source.routes.length - 1));
+        if (labelInput) {
+            labelInput.focus({ preventScroll: true });
+            labelInput.select();
+        }
+        return true;
+    }
+
+    function openExpandedWorkspace() {
+        if (workspaceDialog.open) return;
+        expandedPagePosition = {
+            left: document.scrollingElement.scrollLeft,
+            top: document.scrollingElement.scrollTop
+        };
+        preserveScroll(function () {
+            workspacePlaceholder = document.createComment('Vegamot arbeidsflate');
+            workspace.before(workspacePlaceholder);
+            workspace.classList.add('is-expanded');
+            workspaceDialogSlot.appendChild(workspace);
+            workspaceDialog.showModal();
+            expandMapButton.setAttribute('aria-expanded', 'true');
+            const closeButton = workspaceDialog.querySelector('[aria-label="Lukk utvida arbeidsflate"]');
+            if (closeButton) closeButton.focus({ preventScroll: true });
+        });
+    }
+
+    function restoreWorkspace() {
+        if (workspacePlaceholder) {
+            workspacePlaceholder.replaceWith(workspace);
+            workspacePlaceholder = null;
+        }
+        workspace.classList.remove('is-expanded');
+        expandMapButton.setAttribute('aria-expanded', 'false');
+    }
+
+    expandMapButton.addEventListener('click', openExpandedWorkspace);
+    zoomInButton.addEventListener('click', function () { Graph.zoom(graph, 0.8); });
+    zoomOutButton.addEventListener('click', function () { Graph.zoom(graph, 1.25); });
+    fitGraphButton.addEventListener('click', function () { Graph.fit(graph); });
+    graphViewport.addEventListener('keydown', function (event) {
+        if (event.target !== graphViewport) return;
+        const distance = 40;
+        const movement = {
+            ArrowLeft: [-distance, 0],
+            ArrowRight: [distance, 0],
+            ArrowUp: [0, -distance],
+            ArrowDown: [0, distance]
+        }[event.key];
+        if (event.key === 'Home') {
+            event.preventDefault();
+            Graph.fit(graph);
+        } else if (movement) {
+            event.preventDefault();
+            Graph.pan(graph, movement[0], movement[1]);
+        }
+    });
+    workspaceDialog.addEventListener('close', function () {
+        const pagePosition = expandedPagePosition;
+        expandedPagePosition = null;
+        preserveScroll(function () {
+            restoreWorkspace();
+        });
+        window.requestAnimationFrame(function () {
+            expandMapButton.focus({ preventScroll: true });
+            if (!pagePosition) return;
+            document.scrollingElement.scrollLeft = pagePosition.left;
+            document.scrollingElement.scrollTop = pagePosition.top;
+        });
+    });
+    graphViewport.addEventListener('click', function (event) {
+        if (workspaceDialog.open) return;
+        if (event.target === graph || event.target === graphViewport) openExpandedWorkspace();
+    });
+
     function renderWarnings() {
+        preserveScroll(renderWarningsContent);
+    }
+
+    function renderWarningsContent() {
         const warnings = getWarnings();
         while (warningList.firstChild) warningList.removeChild(warningList.firstChild);
 
@@ -125,11 +259,13 @@
     }
 
     function renderEverything() {
-        storyTitle.value = story.title;
-        allowReaderBack.checked = Boolean(story.settings && story.settings.allowBack);
-        renderEditor();
-        renderGraph();
-        renderWarnings();
+        preserveScroll(function () {
+            storyTitle.value = story.title;
+            allowReaderBack.checked = Boolean(story.settings && story.settings.allowBack);
+            renderEditor();
+            renderGraph();
+            renderWarnings();
+        });
     }
 
     function renderEditor(message) {
@@ -160,6 +296,46 @@
         heading.append(title, deleteButton);
         form.appendChild(heading);
 
+        const contentCard = el('section', 'editor-card');
+        contentCard.appendChild(el('h4', '', 'Innhald'));
+
+        const locationActions = el('div', 'editor-actions step-status-controls');
+        const startButton = button(
+            node.id === story.startNodeId ? 'Dette er startsteget' : 'Gjer til startsteg',
+            '',
+            function () {
+                story.startNodeId = node.id;
+                saveStory();
+                renderEverything();
+            }
+        );
+        startButton.disabled = node.id === story.startNodeId;
+        startButton.setAttribute('aria-pressed', node.id === story.startNodeId ? 'true' : 'false');
+        locationActions.appendChild(startButton);
+
+        const endRow = el('label', 'end-row vp-choice');
+        const endInput = document.createElement('input');
+        endInput.type = 'checkbox';
+        endInput.checked = node.isEnd;
+        endInput.addEventListener('change', function () {
+            const changed = Model.setEnd(node, endInput.checked);
+            if (!changed) {
+                message = 'Slett vegvala frå dette steget før du merker det som ei avslutning.';
+                renderEditor(message);
+                return;
+            }
+            saveStory();
+            renderEverything();
+        });
+        endRow.append(endInput, el('span', '', 'Dette er ei avslutning'));
+        locationActions.appendChild(endRow);
+        contentCard.appendChild(locationActions);
+        contentCard.appendChild(el('p', 'end-help', 'Eit sluttsteg har ingen vegval vidare.'));
+        if (story.nodes.length < 2) {
+            contentCard.appendChild(el('p', 'helper-text', 'Du må ha minst to steg for å slette eit steg.'));
+        }
+        if (message) contentCard.appendChild(el('p', 'inline-message', message));
+
         const titleInput = document.createElement('input');
         titleInput.type = 'text';
         titleInput.maxLength = 120;
@@ -172,7 +348,7 @@
             renderGraph();
             scheduleWarnings();
         });
-        form.appendChild(field('Namn på steget', titleInput, 'step-title'));
+        contentCard.appendChild(field('Namn på steget', titleInput, 'step-title'));
 
         const bodyInput = document.createElement('textarea');
         bodyInput.value = node.body;
@@ -182,9 +358,9 @@
             scheduleSave();
             renderGraph();
         });
-        form.appendChild(field('Forteljingstekst', bodyInput, 'step-body'));
+        contentCard.appendChild(field('Forteljingstekst', bodyInput, 'step-body'));
 
-        StepImage.render(form, node.image, {
+        StepImage.render(contentCard, node.image, {
             onMetadataChange: function () {
                 scheduleSave();
                 renderGraph();
@@ -232,42 +408,11 @@
             }
         });
 
-        const locationActions = el('div', 'editor-actions');
-        const startButton = button(
-            node.id === story.startNodeId ? 'Dette er startsteget' : 'Gjer til startsteg',
-            '',
-            function () {
-                story.startNodeId = node.id;
-                saveStory();
-                renderEverything();
-            }
-        );
-        startButton.disabled = node.id === story.startNodeId;
-        startButton.setAttribute('aria-pressed', node.id === story.startNodeId ? 'true' : 'false');
-        locationActions.appendChild(startButton);
-        form.appendChild(locationActions);
-
-        const endRow = el('label', 'end-row vp-choice');
-        const endInput = document.createElement('input');
-        endInput.type = 'checkbox';
-        endInput.checked = node.isEnd;
-        endInput.addEventListener('change', function () {
-            const changed = Model.setEnd(node, endInput.checked);
-            if (!changed) {
-                message = 'Slett vegvala frå dette steget før du merker det som ei avslutning.';
-                renderEditor(message);
-                return;
-            }
-            saveStory();
-            renderEverything();
-        });
-        endRow.append(endInput, el('span', '', 'Dette er ei avslutning'));
-        form.appendChild(endRow);
-        form.appendChild(el('p', 'end-help', 'Eit sluttsteg har ingen vegval vidare.'));
-
-        if (message) form.appendChild(el('p', 'inline-message', message));
-
-        RoutingEditor.render(form, node, story, { el: el, button: button, field: field }, {
+        const routesCard = el('section', 'editor-card');
+        if (node.isEnd) {
+            routesCard.appendChild(el('p', 'helper-text', 'Dette steget er ei avslutning. Fjern avkryssinga over for å leggje til vegval.'));
+        }
+        RoutingEditor.render(routesCard, node, story, { el: el, button: button, field: field }, {
             onValueChange: function () {
                 scheduleSave();
                 renderGraph();
@@ -278,7 +423,7 @@
                 renderEverything();
                 if (focusId) {
                     const control = editor.querySelector('#' + focusId);
-                    if (control) control.focus();
+                    if (control) control.focus({ preventScroll: true });
                 }
             },
             onRouteAdded: function () {
@@ -286,13 +431,10 @@
                 renderEverything();
                 const routeLabels = editor.querySelectorAll('.route-label');
                 const newLabel = routeLabels[routeLabels.length - 1];
-                if (newLabel) newLabel.focus();
+                if (newLabel) newLabel.focus({ preventScroll: true });
             }
         });
-
-        if (story.nodes.length < 2) {
-            form.appendChild(el('p', 'helper-text', 'Du må ha minst to steg for å slette eit steg.'));
-        }
+        form.append(contentCard, routesCard);
         editor.appendChild(form);
     }
 
@@ -350,7 +492,7 @@
         renderEverything();
         const input = editor.querySelector('#step-title');
         if (input) {
-            input.focus();
+            input.focus({ preventScroll: true });
             input.select();
         }
     });
@@ -359,9 +501,11 @@
         if (saveTimer) saveStory();
     });
 
+    let legacyStory = null;
     try {
         const stored = VyrdepilStorage.getGameState(APP_ID);
-        story = stored ? Model.normalizeStory(stored) : Model.createStory();
+        legacyStory = stored ? null : VyrdepilStorage.getGameState('forteljingskart');
+        story = stored || legacyStory ? Model.normalizeStory(stored || legacyStory) : Model.createStory();
     } catch (error) {
         story = Model.createStory();
         saveStatus.textContent = 'Kunne ikkje lese lokal lagring';
@@ -369,7 +513,21 @@
     }
     selectedId = story.startNodeId;
     renderEverything();
-    if (saveStatus.dataset.state !== 'error') {
+    if (legacyStory && saveStatus.dataset.state !== 'error') {
+        saveStatus.textContent = 'Flyttar den lagra forteljinga til Vegamot …';
+        const images = legacyStory.nodes.filter(function (node) { return node.image; });
+        Promise.all(images.map(function (node) {
+            return VyrdepilStorage.getGameAsset('forteljingskart', node.image.assetId).then(function (asset) {
+                if (!asset || !asset.blob) return false;
+                return VyrdepilStorage.saveGameAsset(APP_ID, node.image.assetId, asset).then(function () { return true; });
+            }).catch(function () { return false; });
+        })).then(function (results) {
+            const missingImages = results.filter(function (copied) { return !copied; }).length;
+            if (!saveStory()) return;
+            if (missingImages) saveStatus.textContent = 'Forteljinga er flytta. ' + missingImages + ' bilete kunne ikkje hentast frå den eldre lagringa.';
+            renderEditor();
+        });
+    } else if (saveStatus.dataset.state !== 'error') {
         saveStory();
     }
 })();
