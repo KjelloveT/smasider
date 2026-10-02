@@ -9,14 +9,22 @@
 .story-actions .vp-button { flex: 0 1 auto; }
 .toolbar-status { flex: 1 1 100%; min-height: 1.2em; }
 .toolbar-status:empty { display: none; }
-.workspace { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(300px, .8fr); gap: 16px; align-items: start; margin: 0 0 16px; }
+.workspace { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(17rem, .85fr); gap: 16px; align-items: start; margin: 0 0 16px; }
 .map-panel, .editor-panel, .warnings-panel { min-width: 0; }
+@media (min-width: 1001px) {
+  .map-panel { position: sticky; bottom: 0; }
+}
 .panel-heading { display: flex; justify-content: space-between; align-items: start; gap: 16px; padding-bottom: 14px; border-bottom: 2px solid var(--vp-frame); }
 .panel-heading h2, .warnings-panel h2 { margin-bottom: 4px; }
 .panel-heading p, .warnings-panel > p { margin: 0; }
+.map-actions { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 8px; }
+.map-help { margin: 10px 0 0; }
 .count-label { flex: 0 0 auto; padding: 8px 10px; border-radius: 6px; background: var(--vp-honey); font-weight: 700; }
-.graph-viewport { min-height: 38rem; max-height: min(78vh, 900px); margin: 16px 0 0; overflow: auto; border: 2px solid var(--vp-frame); border-radius: 8px; background-color: #fffdf5; background-image: radial-gradient(#d9cfb2 1px, transparent 1px); background-size: 22px 22px; }
-#story-graph { display: block; margin-inline: auto; }
+.graph-viewport { height: clamp(20rem, 42vh, 32rem); min-height: min(20rem, calc(100dvh - 16rem)); max-height: min(32rem, calc(100dvh - 16rem)); margin: 16px 0 0; overflow: hidden; border: 2px solid var(--vp-frame); border-radius: 8px; background-color: #fffdf5; background-image: radial-gradient(#d9cfb2 1px, transparent 1px); background-size: 22px 22px; touch-action: none; }
+#story-graph { display: block; width: 100%; height: 100%; margin-inline: auto; cursor: grab; touch-action: none; }
+#story-graph.is-panning { cursor: grabbing; }
+.map-zoom-controls { display: flex; align-items: center; gap: 6px; }
+.map-zoom-controls .vp-button--icon { width: 44px; min-height: 44px; padding-inline: 8px; }
 .graph-edge { fill: none; stroke: #395447; stroke-width: 2.5; }
 .graph-edge.is-incomplete { stroke: #9a4b35; stroke-dasharray: 7 5; }
 .graph-edge.is-routed { stroke: #223e31; stroke-width: 2.8; }
@@ -26,7 +34,10 @@
 .graph-edge-label.is-routed-label { fill: #000; }
 .edge-crossing-gap { fill: #fffdf5; stroke: none; pointer-events: none; }
 .edge-crossing-bridge { fill: none; stroke: #223e31; stroke-width: 2.8; pointer-events: none; }
-.graph-node { cursor: pointer; }
+.graph-edge-preview { fill: none; stroke: #8a5b25; stroke-width: 3; stroke-dasharray: 8 5; pointer-events: none; }
+.graph-node.is-connection-target rect { stroke: #8a5b25; stroke-width: 5; }
+.graph-node.is-connecting { cursor: crosshair; }
+.graph-node { cursor: pointer; touch-action: none; }
 .graph-node rect { fill: #fff9e9; stroke: #142820; stroke-width: 2.5; rx: 8; }
 .graph-node:hover rect { fill: #f5dfaa; }
 .graph-node:focus-visible rect { stroke: #8a5b25; stroke-width: 4; }
@@ -38,16 +49,19 @@
 .graph-node-meta { fill: #000; font-size: 11px; font-weight: 650; }
 .graph-node-preview { fill: #000; font-size: 12px; }
 .orphan-label { fill: #000; font-size: 13px; font-weight: 750; }
-.editor-panel { padding: 0; }
-.editor-panel .vp-accordion { border: 0; }
+.editor-panel { padding: 0; border: 0; background: transparent; box-shadow: none; }
+.editor-panel .vp-accordion { border: 0; background: transparent; }
 .editor-panel .vp-accordion > summary { padding: 16px; font-size: 1.15rem; }
 .editor-panel .vp-accordion-body { padding: 0 16px 16px; }
 #node-editor { min-width: 0; }
 .editor-empty { margin: 0; }
 .editor-form { display: grid; gap: 16px; }
 .editor-form h3 { margin: 0; }
+.editor-card { display: grid; gap: 12px; min-width: 0; padding: 16px; border: 2px solid var(--vp-frame); border-radius: 8px; background: var(--vp-paper); }
+.editor-card > h4 { margin: 0; font-size: 1rem; }
 .editor-actions, .route-heading, .route-row, .node-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .editor-actions { flex-wrap: wrap; }
+.step-status-controls { align-items: center; justify-content: flex-start; }
 .node-heading { align-items: flex-start; }
 .node-heading h3 { margin: 0; overflow-wrap: anywhere; }
 .route-settings, .step-image-editor { display: grid; gap: 12px; padding: 14px; border: 2px solid var(--vp-frame); border-radius: 8px; background: var(--vp-paper); }
@@ -57,9 +71,10 @@
 .field textarea { min-height: 9rem; resize: vertical; }
 .helper-text, .image-status, .route-weight-outcome { margin: 0; font-size: .9rem; }
 .step-image-preview { display: block; max-width: 100%; max-height: 20rem; object-fit: contain; background: #fffdf5; border: 2px solid var(--vp-frame); border-radius: 6px; }
-.route-row { align-items: end; flex-wrap: wrap; padding: 12px; border: 2px solid var(--vp-frame); border-radius: 8px; background: #fff9e9; }
+.route-row { align-items: start; flex-wrap: wrap; padding: 12px; border: 2px solid var(--vp-frame); border-radius: 8px; background: #fff9e9; }
 .route-row .field { flex: 1 1 8rem; align-self: start; }
-.route-row .vp-button { flex: 0 0 auto; }
+.route-row .field > label { min-height: 3em; }
+.route-row > .vp-button { flex: 0 0 auto; margin-top: calc(3em + 6px); }
 .routes { display: grid; gap: 12px; }
 .route-heading { margin-bottom: 0; }
 .inline-message { margin: 0; padding: 10px; background: var(--vp-blush); border: 2px solid var(--vp-frame); border-radius: 6px; }
@@ -94,9 +109,23 @@
 .reader-ending { margin-top: 32px; padding: 16px; border: 2px solid var(--vp-frame); border-radius: 8px; background: var(--vp-moss); }
 .reader-ending p, .reader-message { margin: 6px 0 16px; }
 .reader-message { padding: 16px; border-left: 4px solid #8a5b25; border-radius: 5px; background: var(--vp-honey); }
+.workspace-dialog { width: min(1700px, calc(100% - 24px)); height: min(1000px, calc(100dvh - 24px)); max-width: none; max-height: none; padding: clamp(14px, 2vw, 24px); overflow: hidden; }
+.workspace-dialog[open] { display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.workspace-dialog .vp-dialog-head { margin-bottom: 12px; }
+.workspace-dialog-slot { min-width: 0; min-height: 0; overflow: hidden; }
+.workspace.is-expanded { height: 100%; min-height: 0; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: stretch; }
+.workspace.is-expanded .editor-panel, .workspace.is-expanded .map-panel { min-height: 0; }
+.workspace.is-expanded .editor-panel { height: 100%; overflow: auto; }
+.workspace.is-expanded .map-panel { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+.workspace.is-expanded .graph-viewport { height: auto; min-height: 0; max-height: none; }
 @media (max-width: 900px) {
   .workspace { grid-template-columns: minmax(0,1fr); }
-  .graph-viewport { min-height: 30rem; max-height: 65vh; }
+  .graph-viewport { height: clamp(20rem, 50vh, 32rem); min-height: min(20rem, calc(100dvh - 14rem)); max-height: min(32rem, calc(100dvh - 14rem)); }
+  .workspace.is-expanded { height: auto; min-height: 0; grid-template-columns: minmax(0,1fr); }
+  .workspace-dialog-slot { overflow: auto; }
+  .workspace.is-expanded .editor-panel { height: auto; max-height: none; overflow: visible; }
+  .workspace.is-expanded .map-panel { height: auto; }
+  .workspace.is-expanded .graph-viewport { height: clamp(20rem, 50vh, 32rem); min-height: min(20rem, calc(100dvh - 14rem)); max-height: min(32rem, calc(100dvh - 14rem)); }
 }
 @media (max-width: 560px) {
   .workspace { gap: 12px; }
@@ -107,8 +136,13 @@
   .story-actions { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
   .story-actions .vp-button { width: 100%; }
   .panel-heading { align-items: stretch; flex-direction: column; }
+  .map-actions { justify-content: flex-start; }
+  .map-zoom-controls { flex-wrap: wrap; }
+  .workspace-dialog { width: calc(100% - 12px); height: calc(100dvh - 12px); padding: 12px; }
   .route-row { align-items: stretch; flex-direction: column; }
   .route-row .field { flex: initial; align-self: stretch; }
+  .route-row .field > label { min-height: 0; }
+  .route-row > .vp-button { margin-top: 0; }
   .reader-header { flex-direction: column; }
   .reader-header-actions { justify-content: flex-start; }
   .reader-die-form { grid-template-columns: minmax(0,1fr); }
