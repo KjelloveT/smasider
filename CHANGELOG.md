@@ -3,10 +3,16 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
-## [1.73] — 2026-10-02
+## [1.74] — 2026-10-02
 
 ### Endra
-- **Vegamot har fått ei betre redigeringsflate.** Redigeringa ligg til venstre, og kartet er ei avgrensa førehandsvising til høgre. Vel steg i kartet, legg til steg derfrå, eller dra mellom steg for å kople dei saman. Kartet viser heile historia som standard; zoom og dra flyttar utsnittet, som held seg i ro medan historia blir redigert.
+- **Vegamot har fått ei ryddigare arbeidsflate.** Redigeringa ligg til venstre, medan eit avgrensa flytkart ligg til høgre. Kartet kan zoomast og flyttast, held seg i ro medan ein redigerer, og følgjer med nedover sida. Start- og sluttval ligg saman med innhaldet, utan ekstra bakgrunnsrute eller dobbel overskrift for vegval.
+
+## [1.73] — 2026-10-02
+
+### Fiksa
+- **Mobilframsida har betre avstand mellom skilta.** Hero, infoskilt og verktøykategoriar står med om lag 100 px luft, slik at stolpane ikkje overlappar innhaldet.
+- **Footeren står ved skjermbotnen på korte sider.** På lange sider følgjer han framleis innhaldet.
 
 ## [1.72] — 2026-10-02
 

@@ -11,6 +11,9 @@
 .toolbar-status:empty { display: none; }
 .workspace { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(17rem, .85fr); gap: 16px; align-items: start; margin: 0 0 16px; }
 .map-panel, .editor-panel, .warnings-panel { min-width: 0; }
+@media (min-width: 1001px) {
+  .map-panel { position: sticky; bottom: 0; }
+}
 .panel-heading { display: flex; justify-content: space-between; align-items: start; gap: 16px; padding-bottom: 14px; border-bottom: 2px solid var(--vp-frame); }
 .panel-heading h2, .warnings-panel h2 { margin-bottom: 4px; }
 .panel-heading p, .warnings-panel > p { margin: 0; }
@@ -46,8 +49,8 @@
 .graph-node-meta { fill: #000; font-size: 11px; font-weight: 650; }
 .graph-node-preview { fill: #000; font-size: 12px; }
 .orphan-label { fill: #000; font-size: 13px; font-weight: 750; }
-.editor-panel { padding: 0; }
-.editor-panel .vp-accordion { border: 0; }
+.editor-panel { padding: 0; border: 0; background: transparent; box-shadow: none; }
+.editor-panel .vp-accordion { border: 0; background: transparent; }
 .editor-panel .vp-accordion > summary { padding: 16px; font-size: 1.15rem; }
 .editor-panel .vp-accordion-body { padding: 0 16px 16px; }
 #node-editor { min-width: 0; }
@@ -58,6 +61,7 @@
 .editor-card > h4 { margin: 0; font-size: 1rem; }
 .editor-actions, .route-heading, .route-row, .node-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .editor-actions { flex-wrap: wrap; }
+.step-status-controls { align-items: center; justify-content: flex-start; }
 .node-heading { align-items: flex-start; }
 .node-heading h3 { margin: 0; overflow-wrap: anywhere; }
 .route-settings, .step-image-editor { display: grid; gap: 12px; padding: 14px; border: 2px solid var(--vp-frame); border-radius: 8px; background: var(--vp-paper); }

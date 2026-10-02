@@ -299,6 +299,43 @@
         const contentCard = el('section', 'editor-card');
         contentCard.appendChild(el('h4', '', 'Innhald'));
 
+        const locationActions = el('div', 'editor-actions step-status-controls');
+        const startButton = button(
+            node.id === story.startNodeId ? 'Dette er startsteget' : 'Gjer til startsteg',
+            '',
+            function () {
+                story.startNodeId = node.id;
+                saveStory();
+                renderEverything();
+            }
+        );
+        startButton.disabled = node.id === story.startNodeId;
+        startButton.setAttribute('aria-pressed', node.id === story.startNodeId ? 'true' : 'false');
+        locationActions.appendChild(startButton);
+
+        const endRow = el('label', 'end-row vp-choice');
+        const endInput = document.createElement('input');
+        endInput.type = 'checkbox';
+        endInput.checked = node.isEnd;
+        endInput.addEventListener('change', function () {
+            const changed = Model.setEnd(node, endInput.checked);
+            if (!changed) {
+                message = 'Slett vegvala frå dette steget før du merker det som ei avslutning.';
+                renderEditor(message);
+                return;
+            }
+            saveStory();
+            renderEverything();
+        });
+        endRow.append(endInput, el('span', '', 'Dette er ei avslutning'));
+        locationActions.appendChild(endRow);
+        contentCard.appendChild(locationActions);
+        contentCard.appendChild(el('p', 'end-help', 'Eit sluttsteg har ingen vegval vidare.'));
+        if (story.nodes.length < 2) {
+            contentCard.appendChild(el('p', 'helper-text', 'Du må ha minst to steg for å slette eit steg.'));
+        }
+        if (message) contentCard.appendChild(el('p', 'inline-message', message));
+
         const titleInput = document.createElement('input');
         titleInput.type = 'text';
         titleInput.maxLength = 120;
@@ -371,48 +408,7 @@
             }
         });
 
-        const stepCard = el('section', 'editor-card');
-        stepCard.appendChild(el('h4', '', 'Start og slutt'));
-        const locationActions = el('div', 'editor-actions');
-        const startButton = button(
-            node.id === story.startNodeId ? 'Dette er startsteget' : 'Gjer til startsteg',
-            '',
-            function () {
-                story.startNodeId = node.id;
-                saveStory();
-                renderEverything();
-            }
-        );
-        startButton.disabled = node.id === story.startNodeId;
-        startButton.setAttribute('aria-pressed', node.id === story.startNodeId ? 'true' : 'false');
-        locationActions.appendChild(startButton);
-        stepCard.appendChild(locationActions);
-
-        const endRow = el('label', 'end-row vp-choice');
-        const endInput = document.createElement('input');
-        endInput.type = 'checkbox';
-        endInput.checked = node.isEnd;
-        endInput.addEventListener('change', function () {
-            const changed = Model.setEnd(node, endInput.checked);
-            if (!changed) {
-                message = 'Slett vegvala frå dette steget før du merker det som ei avslutning.';
-                renderEditor(message);
-                return;
-            }
-            saveStory();
-            renderEverything();
-        });
-        endRow.append(endInput, el('span', '', 'Dette er ei avslutning'));
-        stepCard.appendChild(endRow);
-        stepCard.appendChild(el('p', 'end-help', 'Eit sluttsteg har ingen vegval vidare.'));
-
-        if (story.nodes.length < 2) {
-            stepCard.appendChild(el('p', 'helper-text', 'Du må ha minst to steg for å slette eit steg.'));
-        }
-        if (message) stepCard.appendChild(el('p', 'inline-message', message));
-
         const routesCard = el('section', 'editor-card');
-        routesCard.appendChild(el('h4', '', 'Vegval'));
         if (node.isEnd) {
             routesCard.appendChild(el('p', 'helper-text', 'Dette steget er ei avslutning. Fjern avkryssinga over for å leggje til vegval.'));
         }
@@ -438,7 +434,7 @@
                 if (newLabel) newLabel.focus({ preventScroll: true });
             }
         });
-        form.append(contentCard, stepCard, routesCard);
+        form.append(contentCard, routesCard);
         editor.appendChild(form);
     }
 
