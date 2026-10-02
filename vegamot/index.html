@@ -61,32 +61,41 @@
           <button class="vp-button" id="load-story-package" type="button"><span data-icon="upload" aria-hidden="true"></span>Opne forteljingspakke</button>
           <input id="story-package-file" type="file" accept=".vegamot,.forteljingskart,.zip,application/zip" hidden>
           <button class="vp-button vp-button--tool" id="export-pptx" type="button"><span data-icon="presentation" aria-hidden="true"></span>Last ned PowerPoint</button>
-          <button class="vp-button vp-button--positive" id="add-node" type="button"><span data-icon="plus" aria-hidden="true"></span>Legg til steg</button>
         </div>
         <span id="export-status" class="vp-small toolbar-status" role="status" aria-live="polite"></span>
         <span id="package-status" class="vp-small toolbar-status" role="status" aria-live="polite"></span>
       </section>
 
       <div class="workspace vp-editor" aria-label="Redigering">
-        <section class="map-panel vp-panel vp-panel--plain" aria-labelledby="map-heading">
-          <div class="panel-heading">
-            <div>
-              <h2 class="vp-heading" id="map-heading">Flytkart</h2>
-              <p>Historia går ovanfrå og ned. Vel eit steg for å endre det.</p>
-            </div>
-            <span id="node-count" class="count-label vp-small"></span>
-          </div>
-          <div id="graph-viewport" class="graph-viewport" role="region" aria-label="Flytkart over historia" tabindex="0">
-            <svg id="story-graph" xmlns="http://www.w3.org/2000/svg" aria-label="Steg og vegval"></svg>
-          </div>
-        </section>
-
         <aside class="editor-panel vp-panel vp-panel--compact vp-editor-properties" aria-labelledby="editor-heading">
           <details class="vp-accordion vp-support-section" data-vp-support open>
             <summary id="editor-heading">Steg og vegval</summary>
             <div class="vp-accordion-body"><div id="node-editor"></div></div>
           </details>
         </aside>
+
+        <section class="map-panel vp-panel vp-panel--plain" aria-labelledby="map-heading">
+          <div class="panel-heading">
+            <div>
+              <h2 class="vp-heading" id="map-heading">Flytkart</h2>
+              <p>Førehandsvising. Klikk på eit steg for å redigere det, eller dra frå eit steg til eit anna for å kople dei saman.</p>
+            </div>
+            <div class="map-actions">
+              <span id="node-count" class="count-label vp-small"></span>
+              <button class="vp-button vp-button--positive vp-button--compact" id="add-node" type="button"><span data-icon="plus" aria-hidden="true"></span>Legg til steg</button>
+              <div class="map-zoom-controls" role="group" aria-label="Zoom og flytting av flytkartet">
+                <button class="vp-button vp-button--tool vp-button--icon vp-button--compact" id="zoom-out" type="button" aria-label="Zoom ut" title="Zoom ut"><span data-icon="zoomOut" aria-hidden="true"></span></button>
+                <button class="vp-button vp-button--tool vp-button--icon vp-button--compact" id="zoom-in" type="button" aria-label="Zoom inn" title="Zoom inn"><span data-icon="zoomIn" aria-hidden="true"></span></button>
+                <button class="vp-button vp-button--tool vp-button--icon vp-button--compact" id="fit-graph" type="button" aria-label="Vis heile kartet" title="Vis heile kartet"><span data-icon="maximize2" aria-hidden="true"></span></button>
+              </div>
+              <button class="vp-button vp-button--tool vp-button--compact" id="expand-map" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="workspace-dialog"><span data-icon="maximize" aria-hidden="true"></span>Utvid kartet</button>
+            </div>
+          </div>
+          <div id="graph-viewport" class="graph-viewport" role="region" aria-label="Førehandsvising av flytkartet. Heile kartet blir vist som standard. Bruk zoomknappane og dra i tomrommet for å flytte kartet. Klikk på eit steg for å redigere det, eller dra frå eit steg til eit anna for å kople dei saman." tabindex="0">
+            <svg id="story-graph" xmlns="http://www.w3.org/2000/svg" aria-label="Steg og vegval"></svg>
+          </div>
+          <p class="map-help vp-small">Heile kartet blir vist som standard. Bruk «Zoom inn» og «Zoom ut», eller dra i tomrommet for å flytte kartet. Klikk på eit steg for å redigere det, eller på tomrommet for å utvide arbeidsflata.</p>
+        </section>
       </div>
 
       <section class="warnings-panel vp-panel vp-panel--plain" aria-labelledby="warnings-heading">
@@ -97,6 +106,14 @@
     </div>
     <section id="reader-view" class="reader-view vp-panel vp-panel--plain" aria-live="polite" hidden></section>
   </main>
+
+  <dialog class="vp-dialog workspace-dialog" id="workspace-dialog" aria-labelledby="workspace-dialog-title">
+    <div class="vp-dialog-head">
+      <h2 class="vp-heading" id="workspace-dialog-title">Utvida arbeidsflate</h2>
+      <form method="dialog"><button class="vp-button vp-button--quiet vp-button--compact" aria-label="Lukk utvida arbeidsflate"><span data-icon="x" aria-hidden="true"></span>Lukk</button></form>
+    </div>
+    <div class="workspace-dialog-slot" id="workspace-dialog-slot"></div>
+  </dialog>
 
   <dialog class="vp-dialog vp-site-menu" id="siteMenu" aria-labelledby="siteMenuTitle">
     <div class="vp-dialog-head">

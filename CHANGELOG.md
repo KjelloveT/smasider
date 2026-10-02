@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.73] — 2026-10-02
+
+### Endra
+- **Vegamot har fått ei betre redigeringsflate.** Redigeringa ligg til venstre, og kartet er ei avgrensa førehandsvising til høgre. Vel steg i kartet, legg til steg derfrå, eller dra mellom steg for å kople dei saman. Kartet viser heile historia som standard; zoom og dra flyttar utsnittet, som held seg i ro medan historia blir redigert.
+
 ## [1.72] — 2026-10-02
 
 ### Endra
