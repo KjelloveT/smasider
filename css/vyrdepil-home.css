@@ -128,9 +128,6 @@ body.vp-home-page {
 .vp-home-policy .accordion-box { margin-block: 12px; border: 2px solid var(--vp-frame); border-radius: 8px; background: var(--vp-wood); }
 .vp-home-policy .accordion-box > summary { padding: 14px; font-weight: 800; cursor: pointer; }
 .vp-home-policy .accordion-body { padding: 2px 14px 14px; }
-.vp-home-footer { width: 100%; margin: 0; padding: 20px; border: 3px solid var(--vp-frame); border-radius: 9px; background: var(--vp-wood); text-align: center; }
-.vp-home-footer p { margin: 0 0 8px; }
-.vp-home-footer .footer-links { margin: 0; font-weight: 750; }
 
 @media (max-width: 1100px) {
   .vp-home-main .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -160,7 +157,6 @@ body.vp-home-page {
   .vp-home-main :is(.card-desc, .card-btn, .coming-tag, .card-flag) { display: none; }
   .vp-home-policy { padding: 16px; }
   .vp-home-policy .privacy-header { align-items: flex-start; }
-  .vp-home-footer { padding: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

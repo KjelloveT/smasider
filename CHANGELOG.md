@@ -3,6 +3,12 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.69] — 2026-10-02
+
+### Endra
+- **Framsida har fått ein felles sidefot med full breidd.** Den beige bakgrunnen er 50 % gjennomsiktig, og same JS- og CSS-komponent er klar for utrulling til andre sider.
+- **Utviklingsreglane er oppdaterte.** PR-en tek inn dei siste endringane i `AGENTS.md` og dokumenterer sidefoten som standard for nye appar.
+
 ## [1.68] — 2026-10-01
 
 ### Endra

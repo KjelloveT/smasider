@@ -6,63 +6,60 @@ Dette er den sentrale retningslinjen for koding, design og arkitektur for alle p
 - **Vanilla tech stack:** Heile prosjektet er bygd med HTML5, CSS3 og Vanilla JavaScript. Ikkje bruk rammeverk (React, Vue, etc.) med mindre brukaren spesifikt ber om eit unntak.
 - **Offline & lokal køyring:** All logikk skal køyre i nettlesaren. Ingen brukardata skal sendast til nokon tenar.
 - **Språk:** All brukarvendt tekst på nettsidene skal skrivast på **nynorsk**. Bruk gjerne eldre og konservative variantar av nynorsk-ord der det er mogeleg. Variablar og funksjonsnamn i kode skrivast på engelsk.
+- Målgruppe: Vyrdepil er ei samleside med spel og verktøy til grunnskulen, for både elevar og lærarar. Innhaldet skal passe for målgruppa. Ikkje lenk til nettstader som kan innehalde gambling, vald, misbruk eller vaksent materiale. Wikipedia-artiklar er tillatne.
 
 ## 2. Personvern (Privacy by Design)
 - **Ingen cookies:** Det skal ikkje settast eller brukast cookies for sporing eller anna.
 - **VyrdepilStorage:** Direkte bruk av `localStorage` er forbode inne i dei individuelle spela.
   - All lagring **må** gå gjennom det felles API-et definert i `js/vyrdepil-storage.js` (t.d. `VyrdepilStorage.saveHighScore()`, `VyrdepilStorage.saveToHistory()`, `VyrdepilStorage.getHighScore()`).
 - **Personvern-oversikta på framsida:** Dersom du legg til lagring for eit nytt spel eller verktøy, eller endrar eksisterande, MÅ du samtidig oppdatere informasjonen i trekkspel-menyen (accordion) under "Personvern og datasikkerheit" → "Kva data lagrast?" på `index.html`. Spelet må listast der med informasjon om "Kva" og "Kvifor" det blir lagra. Det er òg ei visning på framsida som let brukaren sjå all informasjon som er lagra i localStorage.
-- **Delingslenkjer skal bruke fragmentet (`#`), aldri spørjestrengen (`?`).** Legg eit verktøy data i lenkja — ei ordliste, eit oppsett, ein quiz — skal dei stå etter `#`. Ei spørjestreng blir **send til tenaren** og hamnar i tilgangsloggane hans, i `Referer`-headeren til kvar eksterne ressurs sida lastar, og i nettlesarhistorikka til alle som får lenkja. Fragmentet forlèt aldri nettlesaren. Ordaklok delte ordlister på `?d=` i lang tid medan framsida lova at «ingenting blir sendt til ein server» — skilnaden er eitt teikn, og han avgjer om lovnaden held. Skal gamle `?`-lenkjer framleis verke, les begge og rydd spørjestrengen med `history.replaceState` etterpå; sjå `ordaklok/js/share.js`.
-- I overgangen frå gammalt til nytt lagringssystem er det greitt om gamle toppscore blir sletta eller forsvinn. Vi treng ikkje leggje opp til at gammalt innhald i localStorage skal behaldast.
+- **Delingslenkjer skal bruke fragmentet (`#`), aldri spørjestrengen (`?`).** Legg eit verktøy data i lenkja — ei ordliste, eit oppsett, ein quiz — skal dei stå etter `#`. Ei spørjestreng blir **send til tenaren** og hamnar i tilgangsloggane hans, i `Referer`-headeren til kvar eksterne ressurs sida lastar, og i nettlesarhistorikka til alle som får lenkja. Fragmentet forlèt aldri nettlesaren.
 
 ## 3. Vyrdepil sitt skog-/turskiltdesign
 
-Brukaren har valt det nye fellesdesignet. **Alle offentlege appar, verktøysider, undersider og felles UI skal følgje `DESIGN.md`, `designsystem/index.html` og `css/vyrdepil-design.css`.** Det finst ikkje lenger ein parallell gammal temastandard. Behald spelmotor, arbeidsflate og fagleg grafikk når dei tener funksjonen, men bruk den felles lyse paletten, toppmenyen og komponentane rundt.
+Brukaren har valt det nye fellesdesignet. **Nye appar, nytt felles UI og avtalte redesign skal følgje `DESIGN.md`, `designsystem/index.html` og `css/vyrdepil-design.css`.** Neobrutalisme er ikkje lenger standard for nye oppgåver. Eksisterande appar blir migrerte i eigne oppgåver; funksjonelle feilrettingar skal ikkje automatisk starte eit heilt redesign.
 
 ### 3.1 Fast identitet
-- Les `DESIGN.md` før ei designoppgåve. `css/vyrdepil-design.css` er den einaste felles stilfila for appane. App-CSS skal innehalde appspesifikke funksjonelle tillegg, ikkje eigne kopiar av felles palett, navigasjon eller grunnkomponentar.
+- Les `DESIGN.md` før ei designoppgåve. Den eine felles CSS-fila inneheld alle grunnkomponentar; app-CSS skal berre ha appspesifikke funksjonelle tillegg.
 - All UI-tekst er svart (`#000000`) og står på lyse flater. Fast palett; ingen ny temaveljar. Ramme og skugge har same tone (`#142820`). Valte knappar har honningfyll og svart hake; fokus har ei innvendig varm brun markering.
-- Stein-Vyrde erstattar den gamle pila i felles navigasjon. **Måla flater** er vald applogostil. Alle logoar som blir viste på framsida og i appmenyen skal vere registrerte i `json/vyrdepil-design.json` og følgje same familie. Behald dei stadfesta vala: tidlegare logo for Duldord og Ordkryss, original logo for Heimsank, spørsmålsrute for Frødebrett og ringa ord for Leitekryss.
-- Gjenbruk skilt, stolper, ornament og landskap frå `_resources/vyrdepil-design/`. Katalogen viser gjeldande plassering og dimensjonar. Ikkje generer nye UI-ressursar som del av kvart appoppdrag.
+- Stein-Vyrde erstattar den gamle pila i ny felles navigasjon. **Måla flater** er vald applogostil; dei tre valde logoane er i `json/vyrdepil-design.json`. Dei andre logoane blir teikna i same familie ved migrering.
+- Gjenbruk skilt, stolper, ornament og landskap frå `_resources/vyrdepil-design/`. Katalogen viser gjeldande plassering og dimensjonar. Ikkje generer nye UI-ressursar som del av kvart appoppdrag med mindre dette er spesifikt etterspurt av brukar.
 - Identitetsfargar og funksjonsfargar er ulike. Behald faglege spelbrett, teiknefargar, figurar og arbeidsflater der dei tener funksjonen; UI-etikettar står framleis på lyse flater.
-- Heimsank og Bolkestokk kan halde på avtalte særuttrykk i sjølve spelet eller arbeidsflata. Toppmeny, sidemeny, dialogar, hjelpetekst og andre felles UI-delar følgjer alltid designsystemet. Eit innhaldsunntak er ikkje eit unntak frå felles navigasjon eller responsivitet.
+- Heimsank og Bolkestokk held på avtalte særuttrykk i appinnhaldet. Felles navigasjon kan migrerast. Dette er ikkje eit generelt unntak for appar med lokal CSS.
 
 ### 3.2 Sideoppsett og komponentar
 - Standard: `vp-shell` og `vp-standard` med hero, rom for applogo, Vyrde ved sida, hovudboks og infoskilt. Støtte blir trekkspel på mobil; viktige startval og handlingar er synlege.
 - Utvida verktøy: `vp-shell--wide`, avgrensa `vp-app-intro` med stor logo inni til venstre og Vyrde utanfor til høgre; verktøyrad og arbeidsflate får heile breidda. Sidepanel foldast på mobil. Innhaldstekst held eiga lesegrense.
 - Canvas-spel: avgrensa intro som ovanfor, eiga `vp-game-frame`, korrekt sideforhold og synlege spelkontrollar. Behald spelmotoren og spelgrafikken.
 - Knappar: `vp-button` med rolle-, storleik- og tilstandsvariantar. Flater: `vp-panel` med fem familiar. Skjema: `vp-field`, `vp-input`, `vp-choice`. Trekkspel: `vp-accordion`. Dialog: `vp-dialog`. Sjå strukturane i DESIGN.md/katalogen.
-- Alle sider lastar `css/vyrdepil-design.css` og har ein Vyrdepil-markør på `<body>`. Nye app-sider bruker `<body class="vp-page" data-vp-design data-vp-app="APP-ID">` og `js/vyrdepil-design.js` etter ikon-/hjelpemodulane. Ingen avhengnad av `catalogue.css` eller gamle klassar for felles UI.
-- Navigasjonen følgjer skyheaderen og appmenyen i katalogen, med kategoridata frå `json/apps.json`. Ingen side skal laste `css/neobrutalisme.css`, `js/neobrutalisme.js`, `js/neo-header.js` eller `css/vyrdepil-migration.css`. Bruk `js/vyrdepil-app-shell.js` og `js/vyrdepil-menu.js` når sida ikkje har eit eige semantisk fellesheader-skjelett.
+- Bruk felles klassar for generelle knappar, panel, felt, trekkspel og dialogar. App-CSS skal halde seg til oppsett, geometri og faglege tilstandar, ikkje kopiere fyll, rammer, skuggar, typografi eller fokusstil.
+- Dialogar brukar `Vy.openModal()`, `Vy.closeModal()` og `Vy.bindOverlayClose()` for fokusfelle, Escape, rullelås, fokusretur og bakgrunnsklikk.
+- Nye appar aktiverer sidefoten med `data-vp-site-footer` og lastar `js/vyrdepil-footer.js`; den same modulen kan rullast ut til eksisterande sider når dei er klare.
+- Nye sider bruker `<body class="vp-page" data-vp-design data-vp-app="APP-ID" data-vp-site-footer>`, felles CSS og `js/vyrdepil-design.js` etter ikon-/hjelpemodulane. Ingen avhengnad av `catalogue.css` eller gamle neobrutalisme-klassar.
+- Ny navigasjon følgjer skyheaderen og appmenyen i katalogen, med kategoridata frå den eksisterande `json/apps.json`. Ikkje bruk den gamle temaveljaren i nye grensesnitt.
 - Alt skal vere responsivt på små telefonar, nettbrett og store skjermar. Bruk grid/flex, clamp og minmax. Test at det ikkje er vassrett overflyt, at tekst er lesbar og at dekor blir klipt i eigne lag.
-- UI-ikon er Lucide frå den felles ikonmodulen, ikkje emoji. Dei avtalte innhaldsunntaka gjeld framleis: Dagsvegen sine fagemoji og Eikekveik sine nodeemoji; ikkje bruk flagg eller samansette ZWJ-emoji. Desse unntaka gjeld ikkje knappar/verktøyrader.
-- Bruk `vp-button`, `vp-panel`, `vp-field`, `vp-accordion` og `vp-dialog` for felles UI. Gamle klassar som `.btn` kan framleis få kompatibilitetsstil frå fellesfila medan ei appside blir migrert, men dei skal ikkje få eigne kopiar av grunnfyll, ramme, skugge, typografi eller fokusstil i app-CSS. Flytt ein komponent til felles CSS når fleire appar treng han; app-CSS skal avgrensast til oppsett, geometri og faglege tilstandar.
-- Bruk `Vy.openModal()`, `Vy.closeModal()` og `Vy.bindOverlayClose()` for dialogåtferd. Lokal JS kan utføre ei nødvendig avbrytingshandling, men sjølve fokusfella, Escape, rullelåsen, fokusreturen og bakgrunnsklikket skal framleis handterast av fellesmodulen.
-- Framsida bruker dei fem kategoriane i `json/apps.json`: Språk og ord, Matematikk og programmering, Geografi og natur, Skaping og media, Klasseverktøy. Alle verktøy er synlege utan trekkspel: fire kort per rad på stor skjerm, tre på nettbrett og fire på mobil. Mobilkort viser berre logo og namn. BåreTevling høyrer til Geografi og natur.
-- Framsidekort, personvern, lisens og sidefot held same innhaldsbreidd og venstrelinje. Kategoriskilta har luft før korta. Vyrde står ved sida av informasjonsinnhaldet nedst og følgjer med ved rulling; han blir gøymd på mobil. Maskotten har to hender og skiftar pose/uttrykk kvart 30. sekund der ho er vist. Respekter `prefers-reduced-motion`.
-- Bruk middels breidd for Språk og ord-verktøya, Tidvis, Talsmia og Vitjingsruta når arbeidsflata ikkje treng meir plass. Fullbreidd er for arbeidsflater som faktisk tener på det, som Vegamot.
-- Duldord-arkivet lèt brukaren spele tidlegare dagar, men må aldri vise løysingsordet før brukaren har løyst dagen.
-- Hald apptoppmenyen skild frå interne verktøymenyar. Dagsvegen si klokke skal vere lesbar i den felles toppstripa; verktøyskinna skal ikkje dekkje hovudflata.
+- UI-ikon er Lucide frå den felles ikonmodulen, ikkje nytt emoji. Dei avtalte innhaldsunntaka gjeld framleis: Dagsvegen sine fagemoji og Eikekveik sine nodeemoji; ikkje bruk flagg eller samansette ZWJ-emoji. Desse unntaka gjeld ikkje knappar/verktøyrader.
 
 ### 3.3 Bakgrunnsreservasjonar
 - `json/vyrdepil-design.json` er den faste oversikta over alle bakgrunnar og kva app som eig kvart bilete. Éi app får eitt unikt bilete; bakgrunnen blir ikkje trekt på nytt ved sideinnlasting.
 - Når du lagar ei ny app: registrer henne i `json/apps.json`, køyr `node designsystem/manage-backgrounds.cjs assign <app-id>`, og deretter `check`. Verktøyet vel tilfeldig frå ledige bilete og bevarer gamle val. Ikkje lag ein ny appkatalog.
 - Full bank krev fleire ressursar, ikkje gjenbruk av eit reservert bilete. Sletta appar held reservasjonen til han blir frigjeven med eit medvite val.
-- Alle appar i designregisteret har faste bakgrunnsreservasjonar, også appar som ikkje er synlege på framsida. Reservasjon er ikkje automatisk redesign av ei eksisterande app.
+- Alle 31 katalogførte appar har reservasjonar (28 synlege og tre skjulte). Reservasjon er ikkje automatisk redesign av ei eksisterande app.
 
 ## 4. Arbeidsflyt for AI
 Når du lagar eller modifiserer kode i dette prosjektet:
 1. Sjekk at du ikkje bryt lagringsmønsteret for `localStorage` (bruk `VyrdepilStorage`).
-2. Bruk komponentane i `css/vyrdepil-design.css` og instruksen i `DESIGN.md` for all ny og endra UI. Reine funksjonsfiksar treng ikkje endre spelbrett, spelgrafikk eller arbeidsflate som er avtalte innhaldsunntak.
+2. Implementer nye grensesnitt med komponentane i `css/vyrdepil-design.css` og instruksen i `DESIGN.md`; hald reine funksjonsfiksar innanfor det eksisterande appdesignet til migrering er avtalt.
 3. Sikre at layout er grid/flex og responsiv. Sjekk at det fungerer på mobil, små og mellomstore nettbrett, og store desktop-skjermar.
 4. Pass på at UI og statiske tekstar er skrivne på nynorsk.
 5. Oppdater personvern-lista på framsida viss lagringsbruken til eit spel endrar seg.
 6. Still spørsmål og få avklaring dersom det er tvil om korleis noko skal løysast.
+7. Ved visuelle endringar skal sida testast lokalt i nettlesar.
 
 ## 5. Kvalitet og kontroll
 
 ### 5.1 JS-arkitektur
-Spel og verktøy med meir enn **~400 linjer JavaScript** skal splittast i fleire filer etter ansvarsområde (t.d. `state`, `render`, `input`, `storage`, `game`). Bruk **IIFE-mønster** med eksponerte modular — sjå `heimsank/js/` og `klassekart/js/` som referansar. Ein monolittisk ES6-klasse er greitt for kompakte verktøy under denne grensa.
+Spel og verktøy med meir enn **~400 linjer JavaScript** skal splittast i fleire filer etter ansvarsområde (t.d. `state`, `render`, `input`, `storage`, `game`).  Bruk **IIFE-mønster** med eksponerte modular — sjå `heimsank/js/` og `klassekart/js/` som referansar. Ein monolittisk ES6-klasse er greitt for kompakte verktøy under denne grensa.
 
 ### 5.1.1 Fellesmodulane i `js/` — sjå her før du skriv ein hjelpar
 
@@ -74,7 +71,8 @@ Ligg det ein hjelpar i `js/`, skal verktøyet bruke han. Skriv ikkje din eigen.
 | `js/vyrdepil-icons.js` | `ICON(namn, storleik)` — Lucide-ikon som SVG. |
 | `js/vyrdepil-util.js` | `Vy.escapeHtml`, `Vy.el`, `Vy.shuffle`, `Vy.rng`, `Vy.newSeed`, `Vy.slug`, `Vy.uuid`, `Vy.downloadBlob`, `Vy.downloadJson`, `Vy.openModal` / `closeModal` / `bindOverlayClose` (med Escape, §5.4), `Vy.toast`. |
 | `js/vyrdepil-elevlister.js` | Elevnamn frå Flokkdeilar og Klassekart: `kjelder()`, `reinsk()`, `tel()`, og den ferdige veljardialogen `lagVeljar()`. |
-| `js/vyrdepil-app-shell.js` og `js/vyrdepil-menu.js` | Felles toppmeny, appmeny og grunnramme for sider som ikkje byggjer headeren direkte frå komponentane i `DESIGN.md`. |
+| `js/vyrdepil-app-shell.js` og `js/vyrdepil-menu.js` | Felles toppmeny, appmeny og grunnramme for Vyrdepil-sider. |
+| `js/vyrdepil-footer.js` | Felles sidefot når sida har `data-vp-site-footer`. |
 | `js/vyrdepil-fullscreen.js` | Fullskjerm i spel. |
 
 **Kvifor dette er ein regel og ikkje eit tips.** Same funksjonen skriven på nytt
@@ -82,9 +80,10 @@ i kvart verktøy er ikkje berre meir kode — det er fleire sjansar til å skriv
 han litt feil, og ein feil som blir retta éin stad medan dei andre lever
 vidare. Repoet hadde på det meste ni `toast()`, åtte `downloadBlob()`, ti
 `shuffle()` og fire `escapeHtml()`. Éin av dei fire escape-funksjonane rensa
-ikkje hermeteikn i det heile og var difor verdlaus inne i eit HTML-attributt.
-Fellesmodulen gjer feilrettingar og tilgjengelege standardar like for alle
-appar, og hindrar at kvar app får ein ulik lokal kopi.
+ikkje hermeteikn i det heile og var difor verdlaus inne i eit HTML-attributt,
+og alle ni toast-ane fylte flata med `--accent` og fall under AA-kravet i dei
+sju mørke temaa (§3.2). Ingen av delane hadde overlevd i ei felles fil, fordi
+ei felles fil blir lesen av fleire.
 
 Har verktøyet alt eit eige `util`-objekt, skal det **peike vidare** til
 fellesmodulen i staden for å halde ein kopi — sjå `leitekryss/js/util.js` og
@@ -241,7 +240,7 @@ gong nokon eksporterer han på nytt. Komprimer **før** første commit, ikkje
 etterpå.
 
 ### 5.8 Compliance-pass
-Ved endringar i denne fila (`AGENTS.md`) skal alle HTML-ruter og stil-/skriptpeikarar kontrollerast. Ingen rute skal peike på manglande filer eller den gamle temastakken. Appspesifikke avvik skal vere dokumenterte og avgrensa til sjølve arbeidsflata; manglar blir retta i same oppgåve når omfanget tillet det, elles blir dei konkret førte i endringsloggen.
+Ved endringar i denne fila (`AGENTS.md`) skal det gjerast eit kontroll-pass gjennom alle eksisterande spel og verktøy for å sikre at dei framleis følgjer reglane. Spel som ikkje gjer det skal merkast for oppgradering (t.d. i `CHANGELOG.md` eller som GitHub-issue). Ved modal- og felles UI-endringar skal `node designsystem/check-ui-system.cjs` køyrast for alle HTML-sider.
 
 ## 6. Workflow
 
@@ -268,7 +267,7 @@ Oppdater CHANGELOG når du legg til nye spel/verktøy, gjer brytande endringar e
 
 **Endringssida skal følgje CHANGELOG.** `json/endringslogg.json` er kortversjonen som `endringar.html` viser, og notatet på framsida lenkjer dit. Legg du ein ny versjon i `CHANGELOG.md`, skal du i **same pull request** leggje same versjonen i `json/endringslogg.json` med éi kort linje per punkt (`t` = `nytt`, `endra` eller `fiksa`). Ein endringslogg som veks medan sida står stille, er ein endringslogg ingen brukar les.
 
-**Notatet på framsida skal følgje CHANGELOG.** Gul-lappen i `index.html` (`aside.hero-postit`) har eit versjonsnummer, og det skal vere det same som øvste versjonen i `CHANGELOG.md`. Legg du til ein ny versjon i endringsloggen, skal du i same pull request setje versjonsnummeret i notatet til den nye versjonen.
+**Notatet på framsida skal ha med dei største endringane som er gjort siste tida (tillegg av spel, store endringar og liknande). Notatet på framsida skal også ha med nyaste frå CHANGELOG.** Gul-lappen i `index.html` (`aside.hero-postit`) har eit versjonsnummer, og det skal vere det same som øvste versjonen i `CHANGELOG.md`. Legg du til ein ny versjon i endringsloggen, skal du i same pull request setje versjonsnummeret i notatet til den nye versjonen. Merk henne med «Nyaste endring på Vyrdepil».
 
 **Berre nye spel og verktøy som ER PUBLISERTE PÅ FRAMSIDA skal stå i notatet.** Notatet er utstillingsvindauget, ikkje arbeidsloggen. Ei aktivitet som ligg i repoet men ikkje i `json/apps.json`, eller som står som prøveutgåve inne i eit anna verktøy, høyrer ikkje heime der — den besøkjande kan ikkje gå og sjå på henne, og då er punktet berre støy. Detaljar om noko som er under arbeid høyrer heime i `CHANGELOG.md` og på endringssida.
 
@@ -277,13 +276,13 @@ Er det ingenting nytt å vise fram, står notatet med versjonsnummeret og lenkja
 Notatet er det einaste stadet ein besøkjande ser at sida lever. Står det same versjonsnummeret der i mange veker medan endringsloggen veks, tyder det ikkje lenger noko.
 
 ### 6.3 Nettlesartesting
-Verifiser i **Chrome** før merge til `main`. Sjekk:
+Verifiser i **nettlesar** før merge til `main`. Sjekk:
 - Sida lastar utan konsollfeil
 - Hovudfunksjonalitet fungerer (start spel, lagre, navigere)
-- Alle sider: felles lys UI, svart tekst, ingen gammal temaveljar, ingen manglande lokale stilark eller skript. Kontroller at funksjonelle spel-/arbeidsflater framleis verkar.
+- Nytt design: svart tekst på lyse UI-flater. Utforminga skal vere ryddig, utan utilsikta overlapp eller feilplassering, og med naturleg leserekkjefølgje.
 - Responsivt på mobilbreidde (devtools)
 
-Sjekklista skal køyrast på **preview-URL-en** frå pull requesten (§6.4), ikkje berre på `localhost`. Det er berre der `staticwebapp.config.json` — rutar, tryggingsheadarar og CSP — faktisk er i spel.
+Sjekklista skal som hovurdregel køyrast lokalt. Ved behov skal ein òg køyre på **preview-URL-en** frå pull requesten (§6.4), ikkje berre på `localhost`. Det er berre der `staticwebapp.config.json` — rutar, tryggingsheadarar og CSP — faktisk er i spel.
 
 ### 6.4 Branch- og deploy-flyt
 Vyrdepil blir brukt i klasserom i skuletida. Ein utesta endring på `main` går rett i produksjon og kan velte ei undervisningsøkt. Difor:
@@ -296,9 +295,9 @@ Branch-namn: `feat/<app>-<kort-skildring>` eller `fix/<app>-<kort-skildring>`, t
 lokalt (serve.ps1)  →  branch + PR  →  Azure preview-URL  →  merge  →  produksjon
 ```
 
-1. **Lokalt:** `git checkout main; git pull; git checkout -b feat/…`, og køyr `serve.ps1` på `http://localhost:8081` medan du jobbar.
+1. **Lokalt:** `git checkout main; git pull; git checkout -b feat/…`, og køyr `serve.ps1` på `http://localhost:8081` medan du jobbar. Køyr sjekklista i §6.3 der, og opne URL-en på telefon eller nettbrett.
 2. **Opne PR:** `git push -u origin HEAD` og `gh pr create --fill`.
-3. **Preview:** Azure byggjer PR-en. URL-en står i loggen til deploy-jobben («Visit your site at: …») og har formatet `https://icy-water-0487ac303-<PR-nummer>.westeurope.2.azurestaticapps.net/`. Køyr sjekklista i §6.3 der, og opne URL-en på telefon eller nettbrett.
+3. **Preview:** Azure byggjer PR-en. URL-en står i loggen til deploy-jobben («Visit your site at: …») og har formatet `https://icy-water-0487ac303-<PR-nummer>.westeurope.2.azurestaticapps.net/`. Køyr sjekklista i §6.3 der ved større endringar, og opne URL-en på telefon eller nettbrett for å kontrollere at nettsida fungerer responsivt utan at utforminga blir broten.
 
    **For AI-assistenten:** Når du har oppretta ein PR, skal du **alltid** oppgje preview-URL-en i svaret til brukaren, saman med lenkja til PR-en — utan at brukaren treng å spørje. Vent til deploy-jobben er ferdig og hent URL-en frå loggen:
 

@@ -83,7 +83,11 @@ Editorar, tabellar, små felt, spelkontrollar og tette lister har reine flater u
 | Canvas-spel | Same avgrensa `vp-app-intro`, med logo og Vyrde. `vp-game-frame`, `vp-game-stage`, canvas og HTML-status. Behald spelmotoren sitt sideforhold og eigne funksjonsfargar. Intro kan forsvinne under spel. Berøringskontrollar og viktige handlingar står synleg. |
 | Informasjonssider | `body.vp-site-page` med felles skyheader og appmeny. Bruk `main.vp-shell.vp-site-main.vp-policy-page`, lyse `vp-panel`-flater og `vp-policy-heading`-skilt med kotemønster i full storleik. Hald hovudbreidda rundt 960 px og brødtekst på maks 78ch, sidan sidene ikkje har sidemeny. Tabellar brukar `vp-data-table` og kan rulle vassrett på små skjermar. Behald juridisk tekst, handlingar og skript-ID-ar når utsjånaden blir endra. |
 
-Framsida har fem opne faggrupper frå `json/apps.json`, ikkje trekkspel. Ho viser fire kort per rad på stor skjerm, tre på nettbrett og fire på mobil; mobilkort viser berre logo og namn. Kortrekkja startar med tydeleg luft under kvart kategoriskilt. Personvern, lisens og sidefot deler breidd og venstrelinje. Vyrde står ved sida av informasjonsinnhaldet og følgjer med ved rulling, men blir gøymd på mobil.
+Framsida har fem opne faggrupper frå `json/apps.json`, ikkje trekkspel. Ho viser fire kort per rad på stor skjerm, tre på nettbrett og fire på mobil; mobilkort viser berre logo og namn. Kortrekkja startar med tydeleg luft under kvart kategoriskilt. Personvern og lisens deler breidd og venstrelinje. Sidefoten går over heile skjermbreidda, med lys beige bakgrunn på 50 % opasitet og innhald innanfor ei lesbar breidd. Vyrde står ved sida av informasjonsinnhaldet og følgjer med ved rulling, men blir gøymd på mobil.
+
+### Felles sidefot
+
+Nye appar brukar den delte sidefoten frå `js/vyrdepil-footer.js` og `css/vyrdepil-design.css`. Set `data-vp-site-footer` på `<body>` og last skriptet. Sidefoten får full skjermbreidd, lys beige bakgrunn med 50 % opasitet og ei avgrensa tekstbreidd. Han brukar den same korte informasjonsteksten og dei same lenkjene som framsida. Eksisterande sider kan slå han på med same attributt og skript når dei blir rulla ut.
 
 ## Startstruktur for ei ny app
 
@@ -98,13 +102,16 @@ Framsida har fem opne faggrupper frå `json/apps.json`, ikkje trekkspel. Ho vise
 <script src="../js/vyrdepil-icons.js" defer></script>
 <script src="../js/vyrdepil-util.js" defer></script>
 <script src="../js/vyrdepil-design.js" defer></script>
+<script src="../js/vyrdepil-app-shell.js" defer></script>
+<script src="../js/vyrdepil-menu.js" defer></script>
+<script src="../js/vyrdepil-footer.js" defer></script>
 </head>
-<body class="vp-page" data-vp-design data-vp-app="APP-ID">
-  <a class="vp-skip" href="#main">Hopp til innhaldet</a>
-  <!-- Felles skyheader og appmeny: sjå katalogen. -->
+<body class="vp-page" data-vp-design data-vp-app="APP-ID" data-vp-site-footer>
+  <!-- Felles skal legg til hoppelenkje, skyheader og appmeny. -->
   <main class="vp-shell" id="main">
     <!-- Vel eitt av dei tre oppsetta ovanfor. -->
   </main>
+  <!-- Sidefoten blir sett inn etter hovudinnhaldet av vyrdepil-footer.js. -->
 </body>
 ```
 
