@@ -7,9 +7,6 @@
     "stableAcrossLoads": true,
     "releaseRemovedAppsAutomatically": false
   },
-  "home": {
-    "backgroundId": "bypark-sommar-dag"
-  },
   "logo": {
     "style": "mala",
     "name": "Måla flater",
@@ -82,6 +79,10 @@
     {
       "id": "sykkelsti",
       "name": "Sykkelsti"
+    },
+    {
+      "id": "skolegard",
+      "name": "Skolegard"
     }
   ],
   "seasons": [
@@ -1848,6 +1849,198 @@
         941
       ],
       "assignedTo": "talsmia"
+    },
+    {
+      "id": "skolegard-var-morgon",
+      "scene": "skolegard",
+      "season": "var",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-var-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-var-dag",
+      "scene": "skolegard",
+      "season": "var",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-var-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-var-kveld",
+      "scene": "skolegard",
+      "season": "var",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-var-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-var-natt",
+      "scene": "skolegard",
+      "season": "var",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-var-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-sommar-morgon",
+      "scene": "skolegard",
+      "season": "sommar",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-sommar-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-sommar-dag",
+      "scene": "skolegard",
+      "season": "sommar",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-sommar-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-sommar-kveld",
+      "scene": "skolegard",
+      "season": "sommar",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-sommar-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-sommar-natt",
+      "scene": "skolegard",
+      "season": "sommar",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-sommar-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-haust-morgon",
+      "scene": "skolegard",
+      "season": "haust",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-haust-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-haust-dag",
+      "scene": "skolegard",
+      "season": "haust",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-haust-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-haust-kveld",
+      "scene": "skolegard",
+      "season": "haust",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-haust-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-haust-natt",
+      "scene": "skolegard",
+      "season": "haust",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-haust-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-vinter-morgon",
+      "scene": "skolegard",
+      "season": "vinter",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-vinter-morgon.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-vinter-dag",
+      "scene": "skolegard",
+      "season": "vinter",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-vinter-dag.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-vinter-kveld",
+      "scene": "skolegard",
+      "season": "vinter",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-vinter-kveld.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "skolegard-vinter-natt",
+      "scene": "skolegard",
+      "season": "vinter",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-vinter-natt.jpg",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "assignedTo": null
     }
   ],
   "apps": {
@@ -1946,6 +2139,29 @@
     },
     "vegamot": {
       "backgroundId": "bypark-haust-kveld"
+    }
+  },
+  "siteBackgroundSets": {
+    "homepage": {
+      "scene": "skolegard",
+      "backgroundIds": [
+        "skolegard-var-morgon",
+        "skolegard-var-dag",
+        "skolegard-var-kveld",
+        "skolegard-var-natt",
+        "skolegard-sommar-morgon",
+        "skolegard-sommar-dag",
+        "skolegard-sommar-kveld",
+        "skolegard-sommar-natt",
+        "skolegard-haust-morgon",
+        "skolegard-haust-dag",
+        "skolegard-haust-kveld",
+        "skolegard-haust-natt",
+        "skolegard-vinter-morgon",
+        "skolegard-vinter-dag",
+        "skolegard-vinter-kveld",
+        "skolegard-vinter-natt"
+      ]
     }
   }
 }

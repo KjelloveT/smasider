@@ -3,6 +3,12 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.72] — 2026-10-02
+
+### Endra
+- **Framsida skiftar bakgrunn etter årstid og tid på døgnet.** Eit sett på 16 skolegard-landskap er fast reservert, og valet bruker norsk tid frå tenaren.
+- **Vegamot avgrensar høgda på flytkartet.** Arbeidsflata følgjer no `min(78vh, 900px)` på store skjermar og `65vh` på mindre skjermar.
+
 ## [1.71] — 2026-10-02
 
 ### Endra

@@ -43,8 +43,9 @@ Brukaren har valt det nye fellesdesignet. **Nye appar, nytt felles UI og avtalte
 ### 3.3 Bakgrunnsreservasjonar
 - `json/vyrdepil-design.json` er den faste oversikta over alle bakgrunnar og kva app som eig kvart bilete. Éi app får eitt unikt bilete; bakgrunnen blir ikkje trekt på nytt ved sideinnlasting.
 - Når du lagar ei ny app: registrer henne i `json/apps.json`, køyr `node designsystem/manage-backgrounds.cjs assign <app-id>`, og deretter `check`. Verktøyet vel tilfeldig frå ledige bilete og bevarer gamle val. Ikkje lag ein ny appkatalog.
+- Nettstaden kan reservere eit sett i `siteBackgroundSets` i designregisteret. Framsida har 16 skolegard-bakgrunnar og vel årstid og tid ut frå serverdatoen i `Europe/Oslo`; alle reserverte nettstadbilete er utelukka frå tilfeldig apptildeling.
 - Full bank krev fleire ressursar, ikkje gjenbruk av eit reservert bilete. Sletta appar held reservasjonen til han blir frigjeven med eit medvite val.
-- Alle 31 katalogførte appar har reservasjonar (28 synlege og tre skjulte). Reservasjon er ikkje automatisk redesign av ei eksisterande app.
+- Alle 32 katalogførte appar har reservasjonar (29 synlege og tre skjulte). Reservasjon er ikkje automatisk redesign av ei eksisterande app.
 
 ## 4. Arbeidsflyt for AI
 Når du lagar eller modifiserer kode i dette prosjektet:

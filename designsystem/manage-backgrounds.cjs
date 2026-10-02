@@ -9,6 +9,12 @@ function validate(registry, manifest) {
   const ids = new Set();
   const owners = new Set();
   const appIds = new Set(manifest.apps.map(app => app.id));
+  const siteReservedIds = new Set();
+  const homepageSet = registry.siteBackgroundSets?.homepage;
+  const requiredHomepageIds = registry.seasons.flatMap(season => registry.times.map(time => `skolegard-${season.id}-${time.id}`));
+  if (!homepageSet || homepageSet.scene !== 'skolegard' || homepageSet.backgroundIds.length !== requiredHomepageIds.length || requiredHomepageIds.some(id => !homepageSet.backgroundIds.includes(id))) {
+    throw new Error('Framsida må ha alle 16 skolegard-bakgrunnane.');
+  }
   for (const background of registry.backgrounds) {
     if (ids.has(background.id)) throw new Error(`Duplikat: ${background.id}`);
     ids.add(background.id);
@@ -19,9 +25,16 @@ function validate(registry, manifest) {
       owners.add(background.assignedTo);
     }
   }
-  if (!registry.home?.backgroundId) throw new Error('Framsida manglar fast bakgrunn.');
-  const homeBackground = registry.backgrounds.find(item => item.id === registry.home.backgroundId);
-  if (!homeBackground || homeBackground.assignedTo) throw new Error(`Ugyldig reservasjon for framsida: ${registry.home.backgroundId}`);
+  for (const [setId, set] of Object.entries(registry.siteBackgroundSets || {})) {
+    if (!set.scene || !Array.isArray(set.backgroundIds) || !set.backgroundIds.length) throw new Error(`Ugyldig bakgrunnssett for nettstaden: ${setId}`);
+    for (const backgroundId of set.backgroundIds) {
+      const background = registry.backgrounds.find(item => item.id === backgroundId);
+      if (!background || background.scene !== set.scene) throw new Error(`Ugyldig bakgrunn i nettstadsettet ${setId}: ${backgroundId}`);
+      if (siteReservedIds.has(backgroundId)) throw new Error(`Bakgrunnen er brukt i fleire nettstadsett: ${backgroundId}`);
+      if (background.assignedTo) throw new Error(`Nettstadbakgrunnen er òg tildelt ei app: ${backgroundId}`);
+      siteReservedIds.add(backgroundId);
+    }
+  }
   for (const [appId, assignment] of Object.entries(registry.apps)) {
     const background = registry.backgrounds.find(item => item.id === assignment.backgroundId);
     if (!background || background.assignedTo !== appId) throw new Error(`Ugyldig reservasjon: ${appId}`);
@@ -32,12 +45,12 @@ function validate(registry, manifest) {
   for (const file of Object.values(registry.logo.files)) {
     if (!fs.existsSync(path.join(root, file))) throw new Error(`Manglar logo: ${file}`);
   }
-  const homeReserved = 1;
-  return { backgrounds: ids.size, assigned: owners.size, homeReserved, available: ids.size - owners.size - homeReserved, catalogued: appIds.size };
+  return { backgrounds: ids.size, assigned: owners.size, siteReserved: siteReservedIds.size, available: ids.size - owners.size - siteReservedIds.size, catalogued: appIds.size };
 }
 function assign(registry, appIds) {
   const missing = appIds.filter(id => !registry.apps[id]);
-  const available = registry.backgrounds.filter(item => !item.assignedTo && item.id !== registry.home?.backgroundId);
+  const siteReservedIds = new Set(Object.values(registry.siteBackgroundSets || {}).flatMap(set => set.backgroundIds || []));
+  const available = registry.backgrounds.filter(item => !item.assignedTo && !siteReservedIds.has(item.id));
   if (missing.length > available.length) throw new Error('Ingen ledige bakgrunnar. Utvid banken før du legg til fleire appar.');
   for (const appId of missing) {
     const index = randomInt(available.length);
@@ -59,14 +72,15 @@ function main() {
   if (command === 'init') {
     if (fs.existsSync(registryPath)) throw new Error('Designregisteret finst alt. Bruk assign-new; eksisterande val skal stå fast.');
     const bank = read('designsystem/illustration-bank.json');
+    const homepageBackgroundIds = bank.outputs.filter(item => item.kind === 'landscape' && item.subject === 'skolegard').map(item => item.key);
+    if (homepageBackgroundIds.length !== 16) throw new Error('Illustrasjonsbanken må ha alle 16 skolegard-bakgrunnane før registeret blir laga.');
     registry = {
       version: 1, updated: '2026-09-28',
       appCatalog: 'json/apps.json',
       policy: { allocation: 'random-unused-on-creation', stableAcrossLoads: true, releaseRemovedAppsAutomatically: false },
-      home: { backgroundId: 'bypark-sommar-dag' },
       logo: { style: 'mala', name: 'Måla flater', files: Object.fromEntries(bank.outputs.filter(item => item.kind === 'logo' && item.variant === 'mala').map(item => [item.subject, item.file])) },
       scenes: bank.scenes.map(({ id, name }) => ({ id, name })),
-      seasons: bank.seasons, times: bank.times,
+      seasons: bank.seasons, times: bank.times, siteBackgroundSets: { homepage: { scene: 'skolegard', backgroundIds: homepageBackgroundIds } },
       backgrounds: bank.outputs.filter(item => item.kind === 'landscape').map(item => ({ id: item.key, scene: item.subject, season: item.variant.split('-')[0], time: item.variant.split('-')[1], file: item.file, sourceSize: item.sourceSize, assignedTo: null })),
       apps: {}
     };

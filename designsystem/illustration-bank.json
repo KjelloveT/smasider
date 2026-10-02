@@ -70,6 +70,11 @@
       "id": "sykkelsti",
       "name": "Sykkelsti",
       "description": "A Norwegian cycle path curving through a leafy birch woodland near a river, simple wooden rail on one edge, distant gentle mountains, no bikes or people."
+    },
+    {
+      "id": "skolegard",
+      "name": "Skolegard",
+      "description": "A Norwegian schoolyard with a large rope-climbing frame at the left, swings and wooden balance equipment on a painted rubber play area, a dark school building at the right, and a wooded mountain ridge. Children in pink reflective vests play in morning, day and evening variations; the yard is empty at night."
     }
   ],
   "seasons": [
@@ -2625,6 +2630,294 @@
         941
       ],
       "bytes": 288579
+    },
+    {
+      "key": "skolegard-var-morgon",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "var-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-var-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-var-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 373604
+    },
+    {
+      "key": "skolegard-var-dag",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "var-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-var-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 382872
+    },
+    {
+      "key": "skolegard-var-kveld",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "var-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-var-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-var-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 384078
+    },
+    {
+      "key": "skolegard-var-natt",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "var-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-var-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 301011
+    },
+    {
+      "key": "skolegard-sommar-morgon",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "sommar-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-sommar-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-sommar-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 387240
+    },
+    {
+      "key": "skolegard-sommar-dag",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "sommar-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-sommar-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 414322
+    },
+    {
+      "key": "skolegard-sommar-kveld",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "sommar-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-sommar-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-sommar-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 428996
+    },
+    {
+      "key": "skolegard-sommar-natt",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "sommar-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-sommar-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 276263
+    },
+    {
+      "key": "skolegard-haust-morgon",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "haust-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-haust-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-haust-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 419577
+    },
+    {
+      "key": "skolegard-haust-dag",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "haust-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-haust-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 439202
+    },
+    {
+      "key": "skolegard-haust-kveld",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "haust-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-haust-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-haust-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 423767
+    },
+    {
+      "key": "skolegard-haust-natt",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "haust-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-haust-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 360204
+    },
+    {
+      "key": "skolegard-vinter-morgon",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "vinter-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-vinter-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-vinter-morgon.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 433956
+    },
+    {
+      "key": "skolegard-vinter-dag",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "vinter-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-vinter-dag.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 431473
+    },
+    {
+      "key": "skolegard-vinter-kveld",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "vinter-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-vinter-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-vinter-kveld.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 432688
+    },
+    {
+      "key": "skolegard-vinter-natt",
+      "kind": "landscape",
+      "subject": "skolegard",
+      "variant": "vinter-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/skolegard-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/skolegard-vinter-natt.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 391070
     }
   ]
 }

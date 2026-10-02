@@ -22,12 +22,12 @@ node designsystem/manage-backgrounds.cjs assign <app-id>
 node designsystem/manage-backgrounds.cjs check
 ```
 
-Valet blir lagra i JSON, står fast ved sideinnlasting og blir ikkje trekt på nytt for eksisterande appar. Registeret listar ni scener, fire årstider og fire tider på døgnet.
+Valet blir lagra i JSON, står fast ved sideinnlasting og blir ikkje trekt på nytt for eksisterande appar. Registeret listar ti scener, fire årstider og fire tider på døgnet. Framsida reserverer eit sett på 16 skolegard-landskap og vel eitt ut frå årstid og tid i norsk tid.
 
 ## Grafikkfiler
 
 - `logos/` inneheld logoar i den valde «Måla flater»-stilen.
-- `backgrounds/` inneheld 144 JPEG-landskap, maks 1920 px og under 500 kB per bilete.
+- `backgrounds/` inneheld 160 JPEG-landskap, maks 1920 px og under 500 kB per bilete.
 - `corners/`, stolpe- og hero-filene inneheld godkjende skilt, ornament og stein-Vyrde.
 - Fulloppløyste originalar ligg lokalt under `_kjelder/` og blir ikkje publiserte.
 

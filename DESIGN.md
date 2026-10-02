@@ -1,6 +1,6 @@
 # Vyrdepil — designinstruks
 
-Utgåve 1.1 · 1. oktober 2026. Brukarvald retning for heile Vyrdepil.
+Utgåve 1.2 · 2. oktober 2026. Brukarvald retning for heile Vyrdepil.
 
 ## Les fyrst
 
@@ -17,16 +17,16 @@ Utgåve 1.1 · 1. oktober 2026. Brukarvald retning for heile Vyrdepil.
 - Bakgrunnar gjev variasjon. Knappar, skilt, skrift, ramme og UI-palett står fast uavhengig av landskap, årstid og lys.
 - Heimsank og Bolkestokk kan halde på avtalte særuttrykk i spelinnhaldet og arbeidsflatene. Toppmenyar, appmenyar, dialogar og generell UI følgjer dette designsystemet. Dei reserverte landskapa skal ikkje overstyre funksjonelle spel-/arbeidsflater.
 
-## Fast bakgrunn per app
+## Bakgrunnsreservasjonar
 
-Registeret har `backgrounds[]` med `id`, scene, årstid, tid, fil, originalmål og `assignedTo`, og `apps[appId].backgroundId`. Begge sidene av appreservasjonen må samsvare. Éi app har eitt bilete; eit bilete kan berre vere reservert til éi app. Appane blir identifiserte med ID-en frå den eksisterande appkatalogen. Framsida har ei eiga, fast reservasjon i `home.backgroundId`; det biletet blir halde utanfor tilfeldig tildeling til appar.
+Registeret har `backgrounds[]` med `id`, scene, årstid, tid, fil, originalmål og `assignedTo`, og `apps[appId].backgroundId`. Begge sidene av appreservasjonen må samsvare. Éi app har eitt bilete; eit bilete kan berre vere reservert til éi app. Appane blir identifiserte med ID-en frå den eksisterande appkatalogen. Nettstaden reserverer bakgrunnssett i `siteBackgroundSets`; desse bileta blir haldne utanfor tilfeldig tildeling til appar.
 
-**Duldord:** `sykkelsti-sommar-kveld`. Dei andre katalogførte appane er tilfeldig fordelte. Skjulte appar får òg faste reservasjonar til seinare arbeid. Fordelinga blir ikkje trekt på nytt ved oppdatering eller sideinnlasting.
+**Framsida:** `siteBackgroundSets.homepage` reserverer dei 16 skolegard-bileta, eitt for kvar kombinasjon av fire årstider og fire tider på døgnet. `js/home-background.js` les tenaren sitt `Date`-stempel, reknar ut norsk tid i `Europe/Oslo` og vel rett bilete. Valet endrar seg ved årstids- og tidsskifta, ikkje tilfeldig ved kvar sideinnlasting. **Duldord:** `sykkelsti-sommar-kveld`. Dei andre katalogførte appane er tilfeldig fordelte. Skjulte appar får òg faste reservasjonar til seinare arbeid. Appfordelinga blir ikkje trekt på nytt ved oppdatering eller sideinnlasting.
 
 Når ei ny app blir oppretta:
 
 1. Registrer appen i `json/apps.json`, eventuelt med `hidden: true` medan ho blir utvikla.
-2. Køyr `node designsystem/manage-backgrounds.cjs assign <app-id>`. Dette vel tilfeldig frå dei ledige bileta og lagrar reservasjonen. Eit eksisterande val blir bevart, og framsidebiletet er halde av.
+2. Køyr `node designsystem/manage-backgrounds.cjs assign <app-id>`. Dette vel tilfeldig frå dei ledige bileta og lagrar reservasjonen. Eit eksisterande val blir bevart, og alle bileta i nettstadsetta er haldne av.
 3. Køyr `node designsystem/manage-backgrounds.cjs check`. `assign-new` fordeler alle nye, ufordelte katalogoppføringar på same måte.
 4. Er banken full, utvid han og registrer nye ressursar. Ikkje gjenbruk eit reservert bilete som stillteiande reserveval. Sletting av ei app frigjev ikkje biletet automatisk.
 
@@ -118,7 +118,7 @@ Alle sider brukar den delte sidefoten frå `js/vyrdepil-footer.js` og `css/vyrde
 
 `data-vp-app` bruker app-ID-en i JSON og lastar den reserverte bakgrunnen automatisk. Ei applogo-`img` med `data-vp-app-logo` får den valde logoen dersom ho finst i registeret. CSS-ressursbaner er relative til CSS-fila; JS reknar filbaner frå si eiga plassering og fungerer òg på undersider. Ingen app skal lage si eiga kopi av paletten eller felleskomponentane. Utvid den felles fila når fleire appar treng same komponent.
 
-Sider som ikkje er appar, til dømes personvern og lisens, bruker `data-vp-site-page="true"` i staden for `data-vp-app`. Dei lastar same felles design-, ikon-, skal- og menymodular, men får det faste landskapet til framsida og får inga appreservasjon.
+Sider som ikkje er appar, til dømes personvern og lisens, bruker `data-vp-site-page="true"` i staden for `data-vp-app`. Dei lastar same felles design-, ikon-, skal- og menymodular, men får standardlandskapet til framsida og inga appreservasjon.
 
 Appar som ikkje treng ei fullbreidd arbeidsflate, bruker `data-vp-layout="medium"`; dette avgrensar hovudinnhaldet til 1200 px. Bruk fullbreidd oppsett berre når sjølve arbeidsflata har nytte av det. Språk- og ordverktøya, Tidvis, Talsmia og Vitjingsruta skal ha middels breidd.
 
