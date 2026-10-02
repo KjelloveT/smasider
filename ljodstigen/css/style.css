@@ -45,16 +45,12 @@ body[data-font="lesefont"] .ljod-bed-letter {
 /* ──────────────── Framside ──────────────── */
 
 .ljod-hero-mark {
-  display: grid;
-  place-items: center;
+  display: block;
   flex: 0 0 auto;
   width: clamp(44px, 12vw, 84px);
   aspect-ratio: 1;
-  border: 2px solid var(--vp-frame);
-  border-radius: 8px;
-  background: var(--vp-honey);
+  object-fit: contain;
 }
-.ljod-hero-mark svg { width: 58%; height: 58%; }
 
 .ljod-alpha { margin-bottom: 20px; }
 .ljod-alpha p { max-width: 78ch; margin: 0; }

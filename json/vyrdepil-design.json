@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-30",
+  "updated": "2026-10-02",
   "appCatalog": "json/apps.json",
   "policy": {
     "allocation": "random-unused-on-creation",
@@ -36,6 +36,7 @@
       "bildebehandling": "_resources/vyrdepil-design/logos/bildebehandling-mala.png",
       "biletflett": "_resources/vyrdepil-design/logos/biletflett-mala.png",
       "lydskurd": "_resources/vyrdepil-design/logos/lydskurd-mala.png",
+      "ljodstigen": "_resources/vyrdepil-design/logos/ljodstigen-mala.png",
       "flokkdeilar": "_resources/vyrdepil-design/logos/flokkdeilar-mala.png",
       "eikekveik": "_resources/vyrdepil-design/logos/eikekveik-mala.png",
       "ordskodde": "_resources/vyrdepil-design/logos/ordskodde-mala.png",
