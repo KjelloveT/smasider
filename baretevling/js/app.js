@@ -3,6 +3,7 @@ const Game = {
     state: {
         screen: 'menu',
         mode: 'local', // 'local' or 'ai'
+        shipStyle: 'classic',
         boardSize: 12,
         shipConfig: { 5: 1, 4: 1, 3: 2, 2: 2, 1: 1 },
         playerBoard: null,
@@ -40,6 +41,19 @@ const Game = {
                 document.querySelectorAll('[data-size]').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
                 this.state.boardSize = parseInt(btn.dataset.size);
+            });
+        });
+
+        // Ship illustration style buttons
+        document.querySelectorAll('[data-ship-style]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-ship-style]').forEach(option => {
+                    const selected = option === btn;
+                    option.classList.toggle('selected', selected);
+                    option.setAttribute('aria-pressed', String(selected));
+                });
+                this.state.shipStyle = btn.dataset.shipStyle;
+                Board.setShipStyle(this.state.shipStyle);
             });
         });
 
@@ -92,6 +106,8 @@ const Game = {
         // Reset state
         this.state.mode = document.querySelector('[data-mode].selected').dataset.mode;
         this.state.boardSize = parseInt(document.querySelector('[data-size].selected').dataset.size);
+        this.state.shipStyle = document.querySelector('[data-ship-style].selected')?.dataset.shipStyle || 'classic';
+        Board.setShipStyle(this.state.shipStyle);
         this.state.shipConfig = Ships.getShipConfig();
         this.state.playerBoard = Board.createEmptyBoard(this.state.boardSize);
         this.state.enemyBoard = Board.createEmptyBoard(this.state.boardSize);
@@ -126,6 +142,13 @@ const Game = {
         const savedState = Storage.load();
         if (savedState) {
             this.state = savedState;
+            this.state.shipStyle = this.state.shipStyle === 'modern' ? 'modern' : 'classic';
+            Board.setShipStyle(this.state.shipStyle);
+            document.querySelectorAll('[data-ship-style]').forEach(option => {
+                const selected = option.dataset.shipStyle === this.state.shipStyle;
+                option.classList.toggle('selected', selected);
+                option.setAttribute('aria-pressed', String(selected));
+            });
             
             if (this.state.screen === 'game') {
                 this.showScreen('game');
