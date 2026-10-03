@@ -41,6 +41,12 @@
     {
       "versjon": "1.74",
       "dato": "2026-10-02",
+      "samandrag": "BåreTevling har fått klassiske seilskip og moderne krigsskip som valbare spelbrikker.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "BåreTevling",
+          "tekst": "Vel mellom klassiske seilskip og moderne krigsskip. Skipbrikkene viser heile skipet over dei valde rutene."
       "samandrag": "Vegamot har fått ei ryddigare redigeringsflate og eit meir oversiktleg flytkart.",
       "punkt": [
         {

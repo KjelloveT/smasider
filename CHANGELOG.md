@@ -16,6 +16,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ## [1.74] — 2026-10-02
 
 ### Endra
+- **BåreTevling har fått nye skipsfigurar.** Vel mellom klassiske seilskip og moderne krigsskip før spelstart.
 - **Vegamot har fått ei ryddigare arbeidsflate.** Redigeringa ligg til venstre, medan eit avgrensa flytkart ligg til høgre. Kartet kan zoomast og flyttast, held seg i ro medan ein redigerer, og følgjer med nedover sida. Start- og sluttval ligg saman med innhaldet, utan ekstra bakgrunnsrute eller dobbel overskrift for vegval.
 
 ## [1.73] — 2026-10-02

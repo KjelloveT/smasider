@@ -1,13 +1,47 @@
 // BåreTevling - Board Rendering and Coordinate System
 const Board = {
-    // Ship image config based on size
-    // Each entry is an array of {img, cells} where cells = number of cells this part spans
-    shipImages: {
-        1: [{ img: 'resources/scooter.png', cells: 1 }],
-        2: [{ img: 'resources/sports_red.png', cells: 2 }],
-        3: [{ img: 'resources/towtruck.png', cells: 3 }],
-        4: [{ img: 'resources/trucktank.png', cells: 4 }],
-        5: [{ img: 'resources/trucktank_trailer.png', cells: 2 }, { img: 'resources/trucktank.png', cells: 3 }]
+    // The selected sprite sheet uses one complete, clipped ship per size.
+    shipStyle: 'classic',
+    shipImageSets: {
+        classic: {
+            1: [{ img: 'resources/ships/classic-ships.png', viewBox: '163 1 61 63', preserveAspectRatio: 'none', cells: 1 }],
+            2: [{ img: 'resources/ships/classic-ships.png', viewBox: '144 65 105 71', preserveAspectRatio: 'none', cells: 2 }],
+            3: [{ img: 'resources/ships/classic-ships.png', viewBox: '120 136 154 82', preserveAspectRatio: 'none', cells: 3 }],
+            4: [{ img: 'resources/ships/classic-ships.png', viewBox: '100 216 195 84', preserveAspectRatio: 'none', cells: 4 }],
+            5: [{ img: 'resources/ships/classic-ships.png', viewBox: '94 297 212 86', preserveAspectRatio: 'none', cells: 5 }]
+        },
+        modern: {
+            1: [{ img: 'resources/ships/modern-ships.png', viewBox: '50 17 118 44', preserveAspectRatio: 'xMidYMid meet', cells: 1 }],
+            2: [{ img: 'resources/ships/modern-ships.png', viewBox: '53 73 185 66', preserveAspectRatio: 'xMidYMid meet', cells: 2 }],
+            3: [{ img: 'resources/ships/modern-ships.png', viewBox: '48 147 249 73', preserveAspectRatio: 'xMidYMid meet', cells: 3 }],
+            4: [{ img: 'resources/ships/modern-ships.png', viewBox: '28 221 324 82', preserveAspectRatio: 'xMidYMid meet', cells: 4 }],
+            5: [{ img: 'resources/ships/modern-ships.png', viewBox: '6 302 374 75', preserveAspectRatio: 'xMidYMid meet', cells: 5 }]
+        }
+    },
+    get shipImages() {
+        return this.shipImageSets[this.shipStyle] || this.shipImageSets.classic;
+    },
+    setShipStyle(style) {
+        if (this.shipImageSets[style]) this.shipStyle = style;
+    },
+    createShipVisual(part) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const [, , width, height] = part.viewBox.split(/\s+/).map(Number);
+        svg.setAttribute('viewBox', part.viewBox);
+        svg.setAttribute('preserveAspectRatio', part.preserveAspectRatio || 'xMidYMid meet');
+        svg.setAttribute('width', width);
+        svg.setAttribute('height', height);
+        svg.setAttribute('aria-hidden', 'true');
+        svg.setAttribute('focusable', 'false');
+        svg.classList.add('ship-image-spanning');
+
+        const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+        image.setAttribute('href', part.img);
+        image.setAttribute('width', '384');
+        image.setAttribute('height', '384');
+        image.setAttribute('preserveAspectRatio', 'none');
+        svg.appendChild(image);
+        return svg;
     },
 
     // Convert column number to letter (0 -> A, 25 -> Z, 26 -> AA, etc.)
@@ -238,13 +272,10 @@ const Board = {
                 const spanW = x2 - x1;
                 const spanH = y2 - y1;
 
-                const shipImg = document.createElement('img');
-                shipImg.src = part.img;
-                shipImg.className = 'ship-image-spanning';
+                const shipImg = this.createShipVisual(part);
                 shipImg.style.position = 'absolute';
                 shipImg.style.pointerEvents = 'none';
                 shipImg.style.zIndex = '10';
-                shipImg.style.objectFit = 'contain';
 
                 if (isVertical) {
                     // Image is horizontal; rotate to fit vertical span
