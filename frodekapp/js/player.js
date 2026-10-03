@@ -12,7 +12,6 @@ class PlayerGame {
         this.score = 0;
         this.currentQuestion = null;
         this.hasAnswered = false;
-        this.questionStartTime = 0;
         this.timer = null;
         this.selectedAnswer = null;
 
@@ -131,7 +130,6 @@ class PlayerGame {
         this.currentQuestion = data;
         this.hasAnswered = false;
         this.selectedAnswer = null;
-        this.questionStartTime = Date.now();
 
         UI.showScreen('screen-question');
         UI.setText('play-q-number', `Spørsmål ${data.questionNumber} / ${data.totalQuestions}`);
@@ -161,8 +159,6 @@ class PlayerGame {
 
         if (this.timer) this.timer.stop();
 
-        const timeUsed = Date.now() - this.questionStartTime;
-
         // Marker valt svar
         const btns = document.getElementById('play-answers').querySelectorAll('.answer-btn');
         btns.forEach((btn, i) => {
@@ -174,7 +170,6 @@ class PlayerGame {
         this.peerPlayer.send({
             type: 'answer',
             answer: index,
-            time: timeUsed,
             questionIndex: this.currentQuestion.index
         });
 
