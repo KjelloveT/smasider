@@ -85,9 +85,20 @@ const Edit = (() => {
                 class: 'btn dv-btn-small',
                 onclick: () => {
                     const wd = parseInt(daySel.value, 10);
-                    Store.saveWeekdayPlan(plan(), wd);
-                    App.toast('Lagra som vekemal for ' + State.DAYS[wd % 7] + '.');
-                    renderWeekdayRow();
+                    const hadTemplate = !!Store.getWeekdayPlan(wd);
+                    try {
+                        Store.saveWeekdayPlan(plan(), wd);
+                        App.toast('Lagra som vekemal for ' + State.DAYS[wd % 7] + '.');
+                        renderWeekdayRow();
+                    } catch (error) {
+                        console.error('[Dagsvegen] Klarte ikkje lagre vekemalen:', error);
+                        Vy.toast(
+                            hadTemplate
+                                ? 'Klarte ikkje lagre vekemalen. Den tidlegare malen er bevart.'
+                                : 'Klarte ikkje lagre vekemalen. Prøv å frigje lagringsplass.',
+                            { icon: 'alertTriangle', kind: 'warn' }
+                        );
+                    }
                 }
             }, Icons.create('save', 16), 'Lagre som vekemal')));
     }

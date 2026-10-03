@@ -142,10 +142,13 @@ const UI = (function() {
         history.forEach(entry => {
             const div = document.createElement('div');
             div.className = 'history-item';
-            div.innerHTML = `
-                <span><strong>${entry.word.toUpperCase()}</strong> (${entry.letters.join('').toUpperCase()})</span>
-                <span>${entry.score}p</span>
-            `;
+            const word = document.createElement('span');
+            const wordText = document.createElement('strong');
+            wordText.textContent = String(entry.word || '').toUpperCase();
+            word.append(wordText, ` (${(Array.isArray(entry.letters) ? entry.letters : []).join('').toUpperCase()})`);
+            const score = document.createElement('span');
+            score.textContent = `${entry.score}p`;
+            div.append(word, score);
             list.appendChild(div);
         });
     }

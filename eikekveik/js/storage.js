@@ -46,10 +46,10 @@ Eikekveik.Storage = (function () {
             data: Eikekveik.State.snapshot()
         };
 
-        if (existingIdx >= 0) {
-            VyrdepilStorage.deleteListItem(Eikekveik.GAME_KEY, LIST_KEY, list[existingIdx].id);
-        }
-        VyrdepilStorage.saveListItem(Eikekveik.GAME_KEY, LIST_KEY, entry);
+        const updated = existingIdx >= 0
+            ? list.map((map, index) => index === existingIdx ? entry : map)
+            : [...list, entry];
+        VyrdepilStorage.setList(Eikekveik.GAME_KEY, LIST_KEY, updated);
     }
 
     function deleteMap(id) {
@@ -87,8 +87,18 @@ Eikekveik.Storage = (function () {
             const ok = confirm(`"${name}" finst allereie. Overskrive?`);
             if (!ok) return;
         }
-        saveMap(name);
-        closeSaveModal();
+        try {
+            saveMap(name);
+            closeSaveModal();
+        } catch (error) {
+            console.error('[Eikekveik] Klarte ikkje lagre kartet:', error);
+            Vy.toast(
+                existing
+                    ? 'Klarte ikkje lagre endringane. Det tidlegare kartet er bevart.'
+                    : 'Klarte ikkje lagre kartet. Prøv å frigje lagringsplass.',
+                { icon: 'alertTriangle', kind: 'warn' }
+            );
+        }
     }
 
     function openOpenModal() {

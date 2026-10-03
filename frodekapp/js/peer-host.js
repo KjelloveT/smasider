@@ -3,6 +3,9 @@
    Handterer romoppretting og P2P-tilkoplingar
    ══════════════════════════════════════════════ */
 
+const FK_MAX_PLAYER_NAME_LENGTH = 20;
+const FK_MAX_PEER_ID_LENGTH = 128;
+
 class PeerHost {
     /**
      * @param {string} roomCode
@@ -128,9 +131,27 @@ class PeerHost {
         });
 
         conn.on('data', (data) => {
+            if (!data || typeof data !== 'object' || Array.isArray(data) ||
+                typeof data.type !== 'string' || data.type.length < 1 || data.type.length > 32) return;
+
             if (data.type === 'join') {
-                const playerId = data.playerId || conn.peer;
-                this.connections.set(playerId, { conn, name: data.name });
+                // Ein etablert kanal får ikkje registrere seg på nytt eller endre namn.
+                if (this._findPlayerByConn(conn) !== null) return;
+
+                // Spelar-ID frå meldinga er berre klientdata. PeerJS-ID-en på sjølve
+                // kanalen er identiteten verten brukar og sender attende til klienten.
+                const playerId = conn.peer;
+                const name = typeof data.name === 'string' && data.name.length <= FK_MAX_PLAYER_NAME_LENGTH
+                    ? data.name.trim() : '';
+                if (typeof playerId !== 'string' || !playerId || playerId.length > FK_MAX_PEER_ID_LENGTH ||
+                    playerId === this.peerId || this.connections.has(playerId) ||
+                    !name || name.length > FK_MAX_PLAYER_NAME_LENGTH || /[\u0000-\u001f\u007f]/.test(name) ||
+                    (data.playerId !== undefined && (typeof data.playerId !== 'string' || data.playerId.length > 64))) {
+                    this._rejectConnection(conn);
+                    return;
+                }
+
+                this.connections.set(playerId, { conn, name });
 
                 // Send velkommen
                 conn.send({
@@ -142,17 +163,17 @@ class PeerHost {
                 // Varsle alle andre
                 this.broadcast({
                     type: 'player-joined',
-                    name: data.name,
+                    name: name,
                     count: this.connections.size
                 }, playerId);
 
                 if (this.callbacks.onPlayerJoin) {
-                    this.callbacks.onPlayerJoin({ id: playerId, name: data.name });
+                    this.callbacks.onPlayerJoin({ id: playerId, name: name });
                 }
             } else {
-                // Andre meldingar (t.d. svar)
+                // Ikkje lever svar eller andre handlingar før kanalen er registrert.
                 const playerId = this._findPlayerByConn(conn);
-                if (this.callbacks.onPlayerMessage) {
+                if (playerId !== null && this.callbacks.onPlayerMessage) {
                     this.callbacks.onPlayerMessage(playerId, data);
                 }
             }
@@ -179,6 +200,10 @@ class PeerHost {
         conn.on('error', (err) => {
             console.error('[PeerHost] Tilkoplingsfeil:', err);
         });
+    }
+
+    _rejectConnection(conn) {
+        try { conn.close(); } catch (e) { /* ignorer */ }
     }
 
     _findPlayerByConn(conn) {

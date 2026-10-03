@@ -84,7 +84,5 @@ HeiteStavrimGame.prototype.showSection = function (name, opts) {
 };
 
 HeiteStavrimGame.prototype.escapeHtml = function (str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
+    return Vy.escapeHtml(str);
 };
