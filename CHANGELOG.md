@@ -3,6 +3,15 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.75] — 2026-10-03
+
+### Fiksa
+- **Brukartekst blir vist trygt, og felles skript blir lasta i rett rekkjefølgje.** Dette rettar XSS-risiko i Ordsmia og startfeil i fem appar.
+- **Lagringsfeil tek ikkje lenger med seg arbeid.** Eikekveik og Dagsvegen held på innhaldet ved full lagring; felleslageret tek vare på rådata og viser tydeleg status.
+- **Import validerer innhaldet før det blir teke i bruk.** Klassekart og Rissverk avviser ugyldige filer, og Vegamot avgrensar utpakking av forteljingspakkar.
+- **Frødekapp vernar identiteten og poengsummen.** Vertstenesta bind spelaren til tilkoplinga og reknar svartida med si eiga klokke.
+- **Klassekart har ei brukande arbeidsflate på mobil.** Verktøylista står over rulleflata, utan vassrett overflyt på sjølve sida.
+
 ## [1.74] — 2026-10-02
 
 ### Endra

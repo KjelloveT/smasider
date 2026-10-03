@@ -2,6 +2,38 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.75",
+      "dato": "2026-10-03",
+      "samandrag": "Tryggare vising, lagring, import og poengberekning i spela og verktøya.",
+      "punkt": [
+        {
+          "t": "fiksa",
+          "kva": "Ordsmia og fellesmodular",
+          "tekst": "Brukartekst blir vist trygt, og felles skript blir lasta før appane som brukar dei."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Lagring",
+          "tekst": "Lagringsfeil held på arbeidet i Eikekveik og Dagsvegen; felleslageret tek vare på rådata og viser status."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Import",
+          "tekst": "Klassekart og Rissverk validerer filer før bruk, og Vegamot avgrensar utpakking av ZIP-pakkar."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Frødekapp",
+          "tekst": "Verten bind spelaren til tilkoplinga og reknar poeng etter si eiga klokke."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Klassekart",
+          "tekst": "Arbeidsflata legg verktøya over teiknebrettet på mobil og hindrar vassrett overflyt."
+        }
+      ]
+    },
+    {
       "versjon": "1.74",
       "dato": "2026-10-02",
       "samandrag": "Vegamot har fått ei ryddigare redigeringsflate og eit meir oversiktleg flytkart.",
