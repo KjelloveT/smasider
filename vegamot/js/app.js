@@ -28,6 +28,7 @@
     const workspace = document.querySelector('.workspace');
     const workspaceDialog = document.getElementById('workspace-dialog');
     const workspaceDialogSlot = document.getElementById('workspace-dialog-slot');
+    const closeWorkspaceButton = workspaceDialog.querySelector('[aria-label="Lukk utvida arbeidsflate"]');
     const expandMapButton = document.getElementById('expand-map');
     const zoomInButton = document.getElementById('zoom-in');
     const zoomOutButton = document.getElementById('zoom-out');
@@ -174,10 +175,9 @@
             workspace.before(workspacePlaceholder);
             workspace.classList.add('is-expanded');
             workspaceDialogSlot.appendChild(workspace);
-            workspaceDialog.showModal();
+            Vy.openModal(workspaceDialog);
             expandMapButton.setAttribute('aria-expanded', 'true');
-            const closeButton = workspaceDialog.querySelector('[aria-label="Lukk utvida arbeidsflate"]');
-            if (closeButton) closeButton.focus({ preventScroll: true });
+            if (closeWorkspaceButton) closeWorkspaceButton.focus({ preventScroll: true });
         });
     }
 
@@ -190,7 +190,30 @@
         expandMapButton.setAttribute('aria-expanded', 'false');
     }
 
+    function finishWorkspaceClose() {
+        const pagePosition = expandedPagePosition;
+        expandedPagePosition = null;
+        preserveScroll(restoreWorkspace);
+        window.requestAnimationFrame(function () {
+            expandMapButton.focus({ preventScroll: true });
+            if (!pagePosition) return;
+            document.scrollingElement.scrollLeft = pagePosition.left;
+            document.scrollingElement.scrollTop = pagePosition.top;
+        });
+    }
+
+    function closeExpandedWorkspace() {
+        if (!workspaceDialog.open) return;
+        finishWorkspaceClose();
+        Vy.closeModal(workspaceDialog);
+    }
+
     expandMapButton.addEventListener('click', openExpandedWorkspace);
+    if (closeWorkspaceButton) closeWorkspaceButton.addEventListener('click', closeExpandedWorkspace);
+    workspaceDialog.addEventListener('cancel', function (event) {
+        event.preventDefault();
+        closeExpandedWorkspace();
+    });
     zoomInButton.addEventListener('click', function () { Graph.zoom(graph, 0.8); });
     zoomOutButton.addEventListener('click', function () { Graph.zoom(graph, 1.25); });
     fitGraphButton.addEventListener('click', function () { Graph.fit(graph); });
@@ -211,19 +234,7 @@
             Graph.pan(graph, movement[0], movement[1]);
         }
     });
-    workspaceDialog.addEventListener('close', function () {
-        const pagePosition = expandedPagePosition;
-        expandedPagePosition = null;
-        preserveScroll(function () {
-            restoreWorkspace();
-        });
-        window.requestAnimationFrame(function () {
-            expandMapButton.focus({ preventScroll: true });
-            if (!pagePosition) return;
-            document.scrollingElement.scrollLeft = pagePosition.left;
-            document.scrollingElement.scrollTop = pagePosition.top;
-        });
-    });
+    workspaceDialog.addEventListener('close', finishWorkspaceClose);
     graphViewport.addEventListener('click', function (event) {
         if (workspaceDialog.open) return;
         if (event.target === graph || event.target === graphViewport) openExpandedWorkspace();

@@ -11,6 +11,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - **Import validerer innhaldet før det blir teke i bruk.** Klassekart og Rissverk avviser ugyldige filer, og Vegamot avgrensar utpakking av forteljingspakkar.
 - **Frødekapp vernar identiteten og poengsummen.** Vertstenesta bind spelaren til tilkoplinga og reknar svartida med si eiga klokke.
 - **Klassekart har ei brukande arbeidsflate på mobil.** Verktøylista står over rulleflata, utan vassrett overflyt på sjølve sida.
+- **Vegamot legg arbeidsflata tilbake når dialogen blir lukka.** Både Escape og lukkeknappen fører kartet attende til sida.
 
 ## [1.74] — 2026-10-02
 

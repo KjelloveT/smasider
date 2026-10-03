@@ -30,6 +30,11 @@
           "t": "fiksa",
           "kva": "Klassekart",
           "tekst": "Arbeidsflata legg verktøya over teiknebrettet på mobil og hindrar vassrett overflyt."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Vegamot",
+          "tekst": "Arbeidsflata kjem attende på sida når du lukkar utvidinga, også med Escape."
         }
       ]
     },
