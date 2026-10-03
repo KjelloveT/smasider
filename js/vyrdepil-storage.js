@@ -14,6 +14,12 @@ const VyrdepilStorage = (function() {
     const ASSET_DB = 'VyrdepilAssets';
     const ASSET_STORE = 'assets';
     let assetDbPromise = null;
+    let memoryMode = false;
+    let memoryData = null;
+    let storageReason = null;
+    let recoveryRaw = null;
+    let lastPersistedRaw = null;
+    let warningElement = null;
     
     // Migration map: oldKey -> { game, newKey }
     const MIGRATIONS = {
@@ -28,13 +34,183 @@ const VyrdepilStorage = (function() {
         'klassekart_tabs':    { game: 'klassekart', newKey: 'tabs',    isJson: true }
     };
     
-    function getData() {
-        const raw = localStorage.getItem(ROOT_KEY);
-        return raw ? JSON.parse(raw) : {};
+    function isRecord(value) {
+        if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+        const prototype = Object.getPrototypeOf(value);
+        return prototype === null || (Object.prototype.toString.call(value) === '[object Object]' && Object.getPrototypeOf(prototype) === null);
     }
-    
+
+    function copyRecord(value) {
+        const copy = Object.create(null);
+        Object.keys(value).forEach(function (key) { copy[key] = value[key]; });
+        return copy;
+    }
+
+    function validateRoot(value) {
+        if (!isRecord(value)) return false;
+        for (const game of Object.keys(value)) {
+            const record = value[game];
+            if (!isRecord(record)) return false;
+            if (record.highScore !== undefined && (!Number.isFinite(record.highScore) || record.highScore < 0)) return false;
+            if (record.history !== undefined && !Array.isArray(record.history)) return false;
+            if (record.collections !== undefined) {
+                if (!isRecord(record.collections)) return false;
+                if (Object.keys(record.collections).some(function (key) { return !Array.isArray(record.collections[key]); })) return false;
+            }
+        }
+        return true;
+    }
+
+    function normalizeRoot(value) {
+        const normalized = Object.create(null);
+        Object.keys(value).forEach(function (game) {
+            normalized[game] = copyRecord(value[game]);
+            if (normalized[game].collections) normalized[game].collections = copyRecord(normalized[game].collections);
+        });
+        return normalized;
+    }
+
+    function warningMessage(reason) {
+        if (reason === 'corrupt') return 'Lagringsdataa kunne ikkje lesast. Dei lagra rådataa er tekne vare på uendra. Endringar no blir berre haldne mellombels i denne fana.';
+        if (reason === 'invalid-data') return 'Lagringsdataa har eit ugyldig format. Dei lagra rådataa er tekne vare på uendra. Endringar no blir berre haldne mellombels i denne fana.';
+        if (reason === 'quota') return 'Nettlesaren har ikkje plass til meir lagring. Endringane no blir berre haldne mellombels i denne fana; tidlegare lagra data er tekne vare på.';
+        if (reason === 'serialization') return 'Dataa kunne ikkje gjerast klare for lagring. Endringane no blir berre haldne mellombels i denne fana.';
+        return 'Nettlesaren gav ikkje tilgang til lokal lagring. Endringane no blir berre haldne mellombels i denne fana.';
+    }
+
+    function downloadRecoveryRaw() {
+        if (recoveryRaw === null || typeof document === 'undefined') return;
+        const blob = new Blob([recoveryRaw], { type: 'text/plain;charset=utf-8' });
+        if (window.Vy && typeof window.Vy.downloadBlob === 'function') {
+            window.Vy.downloadBlob(blob, 'vyrdepil-lagringsdata-reserve.txt');
+            return;
+        }
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'vyrdepil-lagringsdata-reserve.txt';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    }
+
+    function renderStorageWarning() {
+        if (!memoryMode || typeof document === 'undefined') return;
+        const addWarning = function () {
+            if (!document.body || warningElement || !memoryMode) return;
+            const banner = document.createElement('aside');
+            banner.className = 'vp-storage-warning';
+            banner.setAttribute('role', 'alert');
+            banner.setAttribute('aria-live', 'assertive');
+
+            const text = document.createElement('p');
+            text.className = 'vp-storage-warning__text';
+            text.textContent = warningMessage(storageReason);
+            banner.appendChild(text);
+
+            const actions = document.createElement('div');
+            actions.className = 'vp-storage-warning__actions';
+            if (recoveryRaw !== null) {
+                const download = document.createElement('button');
+                download.type = 'button';
+                download.className = 'vp-button vp-button--compact vp-button--positive';
+                download.textContent = 'Last ned rådata';
+                download.addEventListener('click', downloadRecoveryRaw);
+                actions.appendChild(download);
+            }
+            const dismiss = document.createElement('button');
+            dismiss.type = 'button';
+            dismiss.className = 'vp-button vp-button--compact vp-button--quiet';
+            dismiss.textContent = 'Skjul varsel';
+            dismiss.addEventListener('click', function () { banner.remove(); warningElement = null; });
+            actions.appendChild(dismiss);
+            banner.appendChild(actions);
+            document.body.appendChild(banner);
+            warningElement = banner;
+        };
+        if (document.body) addWarning();
+        else document.addEventListener('DOMContentLoaded', addWarning, { once: true });
+    }
+
+    function switchToMemory(reason, raw, data) {
+        if (!memoryMode) {
+            memoryMode = true;
+            memoryData = data || Object.create(null);
+            recoveryRaw = raw === undefined ? lastPersistedRaw : raw;
+        }
+        storageReason = reason;
+        renderStorageWarning();
+    }
+
+    function getData() {
+        if (memoryMode) return memoryData;
+        let raw;
+        try {
+            raw = localStorage.getItem(ROOT_KEY);
+        } catch (error) {
+            switchToMemory('unavailable', lastPersistedRaw, Object.create(null));
+            return memoryData;
+        }
+        lastPersistedRaw = raw;
+        if (raw === null) return Object.create(null);
+
+        let parsed;
+        try {
+            parsed = JSON.parse(raw);
+        } catch (error) {
+            switchToMemory('corrupt', raw, Object.create(null));
+            return memoryData;
+        }
+        if (!validateRoot(parsed)) {
+            switchToMemory('invalid-data', raw, Object.create(null));
+            return memoryData;
+        }
+        return normalizeRoot(parsed);
+    }
+
     function setData(data) {
-        localStorage.setItem(ROOT_KEY, JSON.stringify(data));
+        if (memoryMode) {
+            memoryData = data;
+            return false;
+        }
+        if (!validateRoot(data)) {
+            switchToMemory('invalid-data', lastPersistedRaw, Object.create(null));
+            return false;
+        }
+        let serialized;
+        try {
+            serialized = JSON.stringify(data);
+        } catch (error) {
+            switchToMemory('serialization', lastPersistedRaw, data);
+            return false;
+        }
+        try {
+            localStorage.setItem(ROOT_KEY, serialized);
+            lastPersistedRaw = serialized;
+            return true;
+        } catch (error) {
+            const quota = error && (error.name === 'QuotaExceededError' || error.name === 'NS_ERROR_DOM_QUOTA_REACHED');
+            switchToMemory(quota ? 'quota' : 'unavailable', lastPersistedRaw, data);
+            return false;
+        }
+    }
+
+    function getStatus() {
+        return {
+            mode: memoryMode ? 'memory' : 'persistent',
+            reason: storageReason,
+            message: memoryMode ? warningMessage(storageReason) : 'Data blir lagra lokalt på denne eininga.',
+            rawAvailable: recoveryRaw !== null
+        };
+    }
+
+    function getAllData() {
+        return getData();
+    }
+
+    function getRecoveryRaw() {
+        return recoveryRaw;
     }
 
     function openAssetDb() {
@@ -137,8 +313,13 @@ const VyrdepilStorage = (function() {
     function migrateOldKey(oldKey) {
         const migration = MIGRATIONS[oldKey];
         if (!migration) return;
-        
-        const oldVal = localStorage.getItem(oldKey);
+        let oldVal;
+        try {
+            oldVal = localStorage.getItem(oldKey);
+        } catch (error) {
+            switchToMemory('unavailable', lastPersistedRaw, Object.create(null));
+            return;
+        }
         if (oldVal === null) return;
         
         const data = getData();
@@ -157,13 +338,17 @@ const VyrdepilStorage = (function() {
             data[migration.game][migration.newKey] = parseInt(oldVal, 10) || 0;
         }
         
-        setData(data);
-        localStorage.removeItem(oldKey);
+        if (setData(data)) {
+            try { localStorage.removeItem(oldKey); } catch (error) { /* Keep the legacy copy if removal is unavailable. */ }
+        }
     }
     
     function migrateAll() {
         for (const oldKey in MIGRATIONS) {
-            migrateOldKey(oldKey);
+            try { migrateOldKey(oldKey); } catch (error) {
+                switchToMemory('unavailable', lastPersistedRaw, memoryData || Object.create(null));
+                break;
+            }
         }
     }
     
@@ -200,6 +385,10 @@ const VyrdepilStorage = (function() {
         const data = getData();
         if (!data[game]) data[game] = {};
         if (!data[game].history) data[game].history = [];
+        if (!Array.isArray(data[game].history)) {
+            switchToMemory('invalid-data', lastPersistedRaw, data);
+            data[game].history = [];
+        }
         
         data[game].history.push({ ...entry, date: new Date().toISOString() });
         setData(data);
@@ -207,6 +396,7 @@ const VyrdepilStorage = (function() {
     
     // Replace the full history array (used by games that sort/cap before saving)
     function setHistory(game, historyArray) {
+        if (!Array.isArray(historyArray)) return false;
         const data = getData();
         if (!data[game]) data[game] = {};
         data[game].history = historyArray;
@@ -244,24 +434,39 @@ const VyrdepilStorage = (function() {
         const data = getData();
         if (!data[game]) data[game] = {};
         if (!data[game][listKey]) data[game][listKey] = [];
+        if (!Array.isArray(data[game][listKey])) {
+            switchToMemory('invalid-data', lastPersistedRaw, data);
+            data[game][listKey] = [];
+        }
         data[game][listKey].push(item);
         setData(data);
     }
 
     function getList(game, listKey) {
         const data = getData();
-        return data[game]?.[listKey] || [];
+        const list = data[game]?.[listKey];
+        if (list === undefined) return [];
+        if (Array.isArray(list)) return list;
+        switchToMemory('invalid-data', lastPersistedRaw, data);
+        data[game][listKey] = [];
+        return [];
     }
 
     function deleteListItem(game, listKey, id) {
         const data = getData();
         if (!data[game]?.[listKey]) return;
+        if (!Array.isArray(data[game][listKey])) {
+            switchToMemory('invalid-data', lastPersistedRaw, data);
+            data[game][listKey] = [];
+            return;
+        }
         data[game][listKey] = data[game][listKey].filter(item => item.id !== id);
         setData(data);
     }
 
     /* Erset heile lista for ein game+listKey */
     function setList(game, listKey, arr) {
+        if (!Array.isArray(arr)) return false;
         const data = getData();
         if (!data[game]) data[game] = {};
         data[game][listKey] = arr;
@@ -272,6 +477,11 @@ const VyrdepilStorage = (function() {
     function updateListItem(game, listKey, id, changes) {
         const data = getData();
         if (!data[game]?.[listKey]) return null;
+        if (!Array.isArray(data[game][listKey])) {
+            switchToMemory('invalid-data', lastPersistedRaw, data);
+            data[game][listKey] = [];
+            return null;
+        }
         const idx = data[game][listKey].findIndex(item => item.id === id);
         if (idx === -1) return null;
         data[game][listKey][idx] = { ...data[game][listKey][idx], ...changes };
@@ -283,10 +493,16 @@ const VyrdepilStorage = (function() {
     // Stored as: data[game].collections[catId] = [entry, entry, ...]
     function getCollection(game, catId) {
         const data = getData();
-        return data[game]?.collections?.[catId] || [];
+        const entries = data[game]?.collections?.[catId];
+        if (entries === undefined) return [];
+        if (Array.isArray(entries)) return entries;
+        switchToMemory('invalid-data', lastPersistedRaw, data);
+        data[game].collections[catId] = [];
+        return [];
     }
 
     function setCollection(game, catId, entries) {
+        if (!Array.isArray(entries)) return false;
         const data = getData();
         if (!data[game]) data[game] = {};
         if (!data[game].collections) data[game].collections = {};
@@ -316,7 +532,18 @@ const VyrdepilStorage = (function() {
     }
     
     function clearAll() {
-        localStorage.removeItem(ROOT_KEY);
+        try {
+            localStorage.removeItem(ROOT_KEY);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+        memoryMode = false;
+        memoryData = null;
+        storageReason = null;
+        recoveryRaw = null;
+        lastPersistedRaw = null;
+        if (warningElement) warningElement.remove();
+        warningElement = null;
         return clearAllAssets();
     }
     
@@ -340,6 +567,9 @@ const VyrdepilStorage = (function() {
         setCollection,
         getAllCollections,
         clearCollection,
+        getStatus,
+        getAllData,
+        getRecoveryRaw,
         saveGameAsset,
         getGameAsset,
         deleteGameAsset,

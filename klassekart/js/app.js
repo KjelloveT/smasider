@@ -143,9 +143,7 @@ const App = (() => {
         document.getElementById('btn-import-flokkdeilar').addEventListener('click', () => {
             const container = document.getElementById('flokkdeilar-list');
             container.innerHTML = '';
-            const raw = localStorage.getItem('VyrdepilStorage');
-            const data = raw ? JSON.parse(raw) : {};
-            const lister = data['flokkdeilar']?.['lister'] || [];
+            const lister = VyrdepilStorage.getList('flokkdeilar', 'lister');
             if (lister.length === 0) {
                 container.textContent = 'Ingen Flokkdeilar-lister funne.';
                 return;

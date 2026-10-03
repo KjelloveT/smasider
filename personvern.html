@@ -349,21 +349,21 @@
 
         async function render() {
             output.textContent = 'Hentar lagra data …';
-            const raw = localStorage.getItem('VyrdepilStorage');
-            let localData = {};
-            if (raw) {
-                try { localData = JSON.parse(raw); }
-                catch (e) { localData = raw; }
-            }
+            const localData = VyrdepilStorage.getAllData();
+            const status = VyrdepilStorage.getStatus();
             let assets = [];
             let assetError = false;
             try { assets = await VyrdepilStorage.getStoredAssetInfo(); }
             catch (e) { assetError = true; }
-            if ((!raw || localData === '{}') && !assets.length && !assetError) {
+            if (status.mode === 'persistent' && !Object.keys(localData).length && !assets.length && !assetError) {
                 output.textContent = '(Ingen data lagra enno. Bruk eit spel eller verktøy for å sjå data dukke opp her.)';
                 return;
             }
-            const view = { VyrdepilStorage: localData, 'Lokale filer i IndexedDB': assets };
+            const view = { Lagringsstatus: status.message, VyrdepilStorage: localData, 'Lokale filer i IndexedDB': assets };
+            const recoveryRaw = VyrdepilStorage.getRecoveryRaw();
+            if (status.mode === 'memory' && recoveryRaw !== null) {
+                view['Rådata som er tekne vare på uendra'] = recoveryRaw;
+            }
             if (assetError) view['Lokale filer i IndexedDB'] = 'Klarte ikkje lese fillagringa i denne nettlesaren.';
             output.textContent = JSON.stringify(view, null, 2);
         }

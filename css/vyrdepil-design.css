@@ -51,6 +51,18 @@
 [data-vp-design], [data-vp-design] *, [data-vp-design] *::before,
 [data-vp-design] *::after { box-sizing: border-box; }
 .vp-page { margin: 0; background: #d6e8f1 var(--vp-landscape) center top / cover fixed no-repeat; }
+.vp-storage-warning {
+  position: fixed; z-index: 10000; inset: auto 16px 16px; display: flex; align-items: center;
+  justify-content: space-between; gap: 16px; width: min(900px,calc(100% - 32px)); margin-inline: auto;
+  padding: 16px; color: #000; background: #fffdf5; border: 3px solid #142820; border-radius: 10px;
+  box-shadow: 0 5px 0 #142820; font: 600 1rem/1.45 'Segoe UI',system-ui,sans-serif;
+}
+.vp-storage-warning__text { flex: 1 1 420px; margin: 0; }
+.vp-storage-warning__actions { display: flex; flex: 0 0 auto; flex-wrap: wrap; gap: 8px; }
+@media (max-width: 640px) {
+  .vp-storage-warning { inset: auto 8px 8px; width: calc(100% - 16px); flex-direction: column; align-items: stretch; gap: 10px; }
+  .vp-storage-warning__actions { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); }
+}
 body[data-vp-site-footer] {
   display: flex;
   flex-direction: column;
