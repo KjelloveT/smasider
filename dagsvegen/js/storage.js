@@ -77,13 +77,16 @@ const Store = (() => {
 
     /* Lagre gjeldande plan som vekemal — erstattar eksisterande for same dag */
     function saveWeekdayPlan(plan, weekday) {
-        const old = getWeekdayPlan(weekday);
-        if (old) deletePlan(old.id);
+        const plans = getPlans();
+        const old = plans.find(item => item.weekday === weekday) || null;
         const copy = State.clonePlan(plan);
-        copy.id = State.uid('p');
+        copy.id = old ? old.id : State.uid('p');
         copy.weekday = weekday;
         copy.name = 'Vekemal ' + State.DAYS[weekday % 7];
-        VyrdepilStorage.saveListItem(GAME, 'plans', copy);
+        const updated = old
+            ? plans.map(item => item.id === old.id ? copy : item)
+            : [...plans, copy];
+        VyrdepilStorage.setList(GAME, 'plans', updated);
         return copy;
     }
 

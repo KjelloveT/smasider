@@ -705,10 +705,13 @@
                 this.players.forEach(player => {
                     const playerDiv = document.createElement('div');
                     playerDiv.className = 'player-item';
-                    playerDiv.innerHTML = `
-                        <span class="player-name">${player.name}</span>
-                        <span class="player-score">${player.score}</span>
-                    `;
+                    const name = document.createElement('span');
+                    name.className = 'player-name';
+                    name.textContent = String(player.name ?? '');
+                    const score = document.createElement('span');
+                    score.className = 'player-score';
+                    score.textContent = String(player.score ?? 0);
+                    playerDiv.append(name, score);
                     this.elements.playersList.appendChild(playerDiv);
                 });
             }
@@ -730,10 +733,13 @@
                 sortedPlayers.forEach((player, index) => {
                     const playerDiv = document.createElement('div');
                     playerDiv.className = 'player-item';
-                    playerDiv.innerHTML = `
-                        <span class="player-name">${index + 1}. ${player.name}</span>
-                        <span class="player-score">${player.score}</span>
-                    `;
+                    const name = document.createElement('span');
+                    name.className = 'player-name';
+                    name.textContent = `${index + 1}. ${String(player.name ?? '')}`;
+                    const score = document.createElement('span');
+                    score.className = 'player-score';
+                    score.textContent = String(player.score ?? 0);
+                    playerDiv.append(name, score);
                     this.elements.leaderboard.appendChild(playerDiv);
                 });
             }

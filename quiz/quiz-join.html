@@ -625,13 +625,18 @@
                         resultDiv.classList.add('winner');
                     }
                     
-                    resultDiv.innerHTML = `
-                        <div>
-                            <span class="rank">${index + 1}.</span>
-                            <span class="player-name">${result.name}</span>
-                        </div>
-                        <span class="player-score">${result.score}</span>
-                    `;
+                    const identity = document.createElement('div');
+                    const rank = document.createElement('span');
+                    rank.className = 'rank';
+                    rank.textContent = `${index + 1}.`;
+                    const name = document.createElement('span');
+                    name.className = 'player-name';
+                    name.textContent = String(result.name ?? '');
+                    identity.append(rank, name);
+                    const score = document.createElement('span');
+                    score.className = 'player-score';
+                    score.textContent = String(result.score ?? 0);
+                    resultDiv.append(identity, score);
                     
                     this.elements.resultsList.appendChild(resultDiv);
                 });

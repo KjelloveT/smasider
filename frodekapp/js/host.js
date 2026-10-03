@@ -13,6 +13,7 @@ class HostGame {
         this.currentIndex = 0;
         this.timer = null;
         this.questionStartTime = 0;
+        this.currentQuestionTimeLimit = 20;
         this.answeredThisRound = new Set();
 
         this.init();
@@ -192,9 +193,10 @@ class HostGame {
         }
 
         const q = this.quiz.questions[this.currentIndex];
-        const timeLimit = q.timeLimit || 20;
+        const timeLimit = this._questionTimeLimit(q);
+        this.currentQuestionTimeLimit = timeLimit;
         this.state = 'question';
-        this.questionStartTime = Date.now();
+        this.questionStartTime = this._now();
         this.answeredThisRound = new Set();
 
         UI.showScreen('screen-game');
@@ -233,20 +235,52 @@ class HostGame {
         UI.enableBtn('btn-next-question', false);
     }
 
+    _now() {
+        return typeof performance !== 'undefined' && typeof performance.now === 'function'
+            ? performance.now() : Date.now();
+    }
+
+    _questionTimeLimit(question) {
+        return question && Number.isFinite(question.timeLimit) && question.timeLimit > 0 && question.timeLimit <= 120
+            ? question.timeLimit : 20;
+    }
+
     handleAnswer(playerId, data) {
-        if (this.state !== 'question') return;
+        if (this.state !== 'question' || !data || typeof data !== 'object' || Array.isArray(data)) return;
         if (this.answeredThisRound.has(playerId)) return;
 
-        this.answeredThisRound.add(playerId);
-        const player = this.players.get(playerId);
-        if (!player) return;
+        const questions = this.quiz && this.quiz.questions;
+        if (!Array.isArray(questions) || !Number.isInteger(this.currentIndex) ||
+            this.currentIndex < 0 || this.currentIndex >= questions.length) return;
 
-        const q = this.quiz.questions[this.currentIndex];
-        const timeUsed = data.time || (Date.now() - this.questionStartTime);
+        const player = this.players.get(playerId);
+        if (!player || !Number.isSafeInteger(player.score) || player.score < 0 ||
+            !Number.isSafeInteger(player.streak) || player.streak < 0 ||
+            player.streak > questions.length || !Array.isArray(player.answers)) return;
+
+        const q = questions[this.currentIndex];
+        if (!q || !Array.isArray(q.options) || q.options.length < 2 || q.options.length > 4 ||
+            !Number.isInteger(q.correct) || q.correct < 0 || q.correct >= q.options.length ||
+            !Number.isInteger(data.questionIndex) || data.questionIndex !== this.currentIndex ||
+            !Number.isInteger(data.answer) || data.answer < 0 || data.answer >= q.options.length) return;
+
+        const timeLimit = this.currentQuestionTimeLimit;
+        const elapsed = this._now() - this.questionStartTime;
+        const timeLimitMs = timeLimit * 1000;
+        if (!Number.isFinite(timeLimit) || timeLimit <= 0 || timeLimit > 120 ||
+            !Number.isFinite(elapsed) || elapsed < 0 || elapsed > timeLimitMs) return;
+
+        this.answeredThisRound.add(playerId);
+        const timeUsed = Math.min(elapsed, timeLimitMs);
         const isCorrect = data.answer === q.correct;
-        const timeLimit = q.timeLimit || 20;
 
         const result = QuizEngine.calculateScore(isCorrect, timeUsed, timeLimit, player.streak);
+        if (!result || !Number.isFinite(result.points) || result.points < 0 || result.points > 2000 ||
+            !Number.isSafeInteger(result.points) || !Number.isSafeInteger(result.newStreak) || result.newStreak < 0 ||
+            !Number.isSafeInteger(player.score + result.points)) {
+            this.answeredThisRound.delete(playerId);
+            return;
+        }
         player.score += result.points;
         player.streak = result.newStreak;
         player.answers.push({
