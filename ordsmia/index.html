@@ -805,11 +805,27 @@
             
             const summary = document.createElement('div');
             summary.className = 'result-section';
-            summary.innerHTML = `
-                <div class="result-title">Oppsummering</div>
-                <p><strong>${validCount}</strong> av <strong>${results.length}</strong> ord er gyldige</p>
-                ${longestValid ? `<p style="margin-top:8px;">Lengste gyldige ord: <strong>${longestValid.word.toUpperCase()}</strong> (${longestValid.length} bokstavar)</p>` : ''}
-            `;
+            const summaryTitle = document.createElement('div');
+            summaryTitle.className = 'result-title';
+            summaryTitle.textContent = 'Oppsummering';
+            summary.appendChild(summaryTitle);
+
+            const summaryCount = document.createElement('p');
+            const validCountEl = document.createElement('strong');
+            validCountEl.textContent = String(validCount);
+            const totalCountEl = document.createElement('strong');
+            totalCountEl.textContent = String(results.length);
+            summaryCount.append(validCountEl, ' av ', totalCountEl, ' ord er gyldige');
+            summary.appendChild(summaryCount);
+
+            if (longestValid) {
+                const longestWord = document.createElement('p');
+                longestWord.style.marginTop = '8px';
+                const longestWordEl = document.createElement('strong');
+                longestWordEl.textContent = longestValid.word.toUpperCase();
+                longestWord.append('Lengste gyldige ord: ', longestWordEl, ` (${longestValid.length} bokstavar)`);
+                summary.appendChild(longestWord);
+            }
             container.appendChild(summary);
             
             // Lag ordliste
@@ -819,15 +835,15 @@
             results.forEach(result => {
                 const div = document.createElement('div');
                 div.className = 'word-item ' + (result.valid ? 'valid' : 'invalid');
-                div.innerHTML = `
-                    <span class="word-text">${result.word.toUpperCase()}</span>
-                    <span class="word-info">
-                        ${result.valid 
-                            ? `✓ ${result.length} bokst., ${result.score} poeng` 
-                            : `✗ ${result.reason || 'Ugyldig'}`
-                        }
-                    </span>
-                `;
+                const wordText = document.createElement('span');
+                wordText.className = 'word-text';
+                wordText.textContent = result.word.toUpperCase();
+                const wordInfo = document.createElement('span');
+                wordInfo.className = 'word-info';
+                wordInfo.textContent = result.valid
+                    ? `✓ ${result.length} bokst., ${result.score} poeng`
+                    : `✗ ${result.reason || 'Ugyldig'}`;
+                div.append(wordText, wordInfo);
                 listDiv.appendChild(div);
             });
             
@@ -845,12 +861,18 @@
             possibleWrap.style.display = 'none';
             const possibleDiv = document.createElement('div');
             possibleDiv.className = 'result-section';
-            possibleDiv.innerHTML = `
-                <div class="result-title">Dei 10 lengste orda som var mogelege:</div>
-                <div class="possible-words">
-                    ${possibleWords.map(w => `<span class="possible-word">${w.toUpperCase()} (${w.length})</span>`).join('')}
-                </div>
-            `;
+            const possibleTitle = document.createElement('div');
+            possibleTitle.className = 'result-title';
+            possibleTitle.textContent = 'Dei 10 lengste orda som var mogelege:';
+            const possibleList = document.createElement('div');
+            possibleList.className = 'possible-words';
+            possibleWords.forEach(word => {
+                const possibleWord = document.createElement('span');
+                possibleWord.className = 'possible-word';
+                possibleWord.textContent = `${word.toUpperCase()} (${word.length})`;
+                possibleList.appendChild(possibleWord);
+            });
+            possibleDiv.append(possibleTitle, possibleList);
 
             possibleWrap.appendChild(possibleDiv);
             container.appendChild(possibleWrap);
