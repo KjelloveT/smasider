@@ -474,6 +474,7 @@ body {
     position: relative;
     width: 1200px;
     height: 800px;
+    flex: 0 0 auto;
     background: #fff;
     border: 3px solid var(--border);
     box-shadow: 6px 6px 0 var(--shadow);
@@ -1141,4 +1142,109 @@ textarea:focus, .neo-input:focus {
 ::selection {
     background: #FDFD96;
     color: #1a1a1a;
+}
+
+/* On small screens, stack the palette above the horizontally scrollable plan. */
+@media (max-width: 760px) {
+    body.vp-migrated-page[data-vp-app="klassekart"] {
+        height: 100vh !important;
+        height: 100dvh !important;
+        overflow: hidden !important;
+    }
+
+    body.vp-migrated-page[data-vp-app="klassekart"] > .vp-migrated-header {
+        flex: 0 0 auto;
+    }
+
+    body.vp-migrated-page[data-vp-app="klassekart"] > .vp-migrated-intro,
+    body.vp-migrated-page[data-vp-app="klassekart"] > .vp-site-footer {
+        display: none !important;
+    }
+
+    body.vp-migrated-page[data-vp-app="klassekart"] #toolbar {
+        flex: 0 0 auto;
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 6px 8px;
+    }
+
+    #toolbar .toolbar-left {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    #toolbar .toolbar-center {
+        order: 2;
+        flex: 1 0 100%;
+        justify-content: flex-start;
+        gap: 4px;
+    }
+
+    #toolbar .toolbar-right {
+        margin-left: auto;
+    }
+
+    #toolbar .tb-btn {
+        min-height: 40px;
+        padding: 5px 8px;
+        font-size: 0.74rem;
+    }
+
+    #toolbar .tb-small {
+        min-width: 40px;
+        min-height: 40px;
+        padding: 4px;
+    }
+
+    body.vp-migrated-page[data-vp-app="klassekart"] :is(main, #main).vp-migrated-main {
+        flex: 1 1 0;
+        min-width: 0;
+        min-height: 0;
+        flex-direction: column;
+        overflow: hidden !important;
+    }
+
+    #sidebar {
+        width: 100%;
+        height: clamp(150px, 25vh, 210px);
+        flex: 0 0 clamp(150px, 25vh, 210px);
+        flex-direction: row;
+        overflow: hidden;
+        border-right: 0;
+        border-bottom: 3px solid var(--border);
+    }
+
+    .sidebar-section {
+        min-width: 0;
+        min-height: 0;
+        overflow-y: auto;
+        border-bottom: 0;
+    }
+
+    .sidebar-section:first-child {
+        flex: 1 1 58%;
+        border-right: 3px solid var(--border);
+    }
+
+    .sidebar-section:nth-child(2) {
+        flex: 1 1 42%;
+    }
+
+    .furniture-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #canvas-wrap {
+        flex: 1 1 0;
+        min-width: 0;
+        min-height: 0;
+        padding: 8px;
+        overscroll-behavior: contain;
+        touch-action: pan-x pan-y;
+    }
+
+    #tabs-bar {
+        flex: 0 0 40px;
+    }
+
 }
