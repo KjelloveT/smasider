@@ -14,8 +14,8 @@
   <script src="js/vyrdepil-app-shell.js?v=8" defer></script>
   <script src="js/vyrdepil-menu.js?v=3" defer></script>
   <script src="js/vyrdepil-footer.js?v=2" defer></script>
-  <script src="js/vyrdepil-bragd.js?v=2" defer></script>
-  <script src="js/bragd-page.js?v=1" defer></script>
+  <script src="js/vyrdepil-bragd.js?v=3" defer></script>
+  <script src="js/bragd-page.js?v=2" defer></script>
 </head>
 <body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-site-footer>
   <main id="main" class="vp-shell vp-site-main vp-stack vp-bragd-main">
@@ -23,15 +23,15 @@
       <div class="vp-content">
         <p class="vp-small">Samlinga di på Vyrdepil</p>
         <h1 class="vp-title" id="pageTitle">Bragdane dine</h1>
-        <p class="vp-prose">Her finn du bragdane du har oppnådd i Heimsank, Vidfaren, Tidvis, Bolkestokk og Ormritaren, og framgangen din i kvart spel.</p>
-        <p id="bragdCount" class="vp-small vp-bragd-count" role="status" aria-live="polite">Lastar bragdane dine …</p>
+        <p class="vp-prose">Her finn du alle bragdane i Heimsank, Vidfaren, Tidvis, Bolkestokk og Ormritaren. Dei du har oppnådd er markerte, og dei låste viser kva du kan sikte mot.</p>
+        <p id="bragdCount" class="vp-small vp-bragd-count" role="status" aria-live="polite">Lastar bragdlista …</p>
       </div>
     </section>
 
-    <section class="vp-panel vp-panel--plain" aria-labelledby="earnedTitle">
+    <section class="vp-panel vp-panel--plain" aria-labelledby="catalogueTitle">
       <div class="vp-content">
-        <h2 class="vp-heading" id="earnedTitle">Bragdane du har oppnådd</h2>
-        <p id="bragdEmpty" class="vp-prose" hidden>Du har ikkje oppnådd nokon bragder enno. Opne eit av spela og prøv deg fram!</p>
+        <h2 class="vp-heading" id="catalogueTitle">Alle bragdane</h2>
+        <p id="bragdEmpty" class="vp-prose" hidden>Du har ikkje oppnådd nokon bragder enno. Dei låste bragdane viser kva du kan sikte mot.</p>
         <div id="bragdGrid" aria-busy="true"></div>
       </div>
     </section>

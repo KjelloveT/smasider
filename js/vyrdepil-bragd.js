@@ -219,8 +219,8 @@
     host.removeAttribute('aria-busy');
   }
 
-  async function renderEarnedBadges(host) {
-    if (!host || !storageApi) return;
+  async function renderBadgeCatalogue(host) {
+    if (!host || !storageApi) return { earned: 0, total: 0 };
     await migrationPromise;
     const data = await loadCatalogue();
     const earnedByApp = storageApi.getBragdData().badges || {};
@@ -241,16 +241,17 @@
       host.appendChild(section);
     });
 
+    let earnedTotal = 0;
     let total = 0;
-    Object.keys(earnedByApp).sort().forEach(appId => {
+    Object.keys(data.catalogue.apps).sort().forEach(appId => {
       const app = data.apps[appId];
-      const definitions = data.catalogue.apps[appId] ? data.catalogue.apps[appId].badges : [];
-      const byId = new Map(definitions.map(definition => [definition.id, definition]));
-      Array.from(new Set(earnedByApp[appId] || [])).sort().forEach(badgeId => {
-        const definition = byId.get(badgeId);
-        if (!definition) return;
+      const definitions = data.catalogue.apps[appId].badges || [];
+      const earned = new Set(Array.isArray(earnedByApp[appId]) ? earnedByApp[appId] : []);
+      definitions.forEach(definition => {
+        const isEarned = earned.has(definition.id);
         const grid = familyHost.get(definition.family) || familyHost.get('saerbragd');
-        if (grid) grid.appendChild(makeBadgeCard(definition, appId, app, true));
+        if (grid) grid.appendChild(makeBadgeCard(definition, appId, app, isEarned));
+        if (isEarned) earnedTotal++;
         total++;
       });
     });
@@ -258,7 +259,8 @@
     host.querySelectorAll('.vp-bragd-family').forEach(section => {
       if (!section.querySelector('.vp-bragd-card')) section.remove();
     });
-    return total;
+    host.removeAttribute('aria-busy');
+    return { earned: earnedTotal, total };
   }
 
   const PROGRESS_FIELDS = {
@@ -387,7 +389,7 @@
     loadCatalogue,
     migrationPromise,
     renderGameBadges,
-    renderEarnedBadges,
+    renderBadgeCatalogue,
     renderProgress,
     recordBadges
   };
