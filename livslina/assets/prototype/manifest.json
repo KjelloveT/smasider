@@ -1,0 +1,486 @@
+{
+  "app": "livslina",
+  "version": 1,
+  "updated": "2026-10-04",
+  "status": "detaljert-8-bit-produktbibliotek-prototype",
+  "artStyle": "detaljert-8-bit",
+  "notes": "Den samansette romprøva brukar 126 detaljerte, gjennomsiktige 8-bit-sprites. Ressurspakka v5 har fem prisnivå for seng og 95 nye produktvariantar fordelt på 19 familiar. TV og PC-tårn er eigne varer festa til høvesvis benk og pult. Førebelse prisar er ikkje kopla til speløkonomien. V4 styrer berre geometri og feste; dette er ikkje endeleg godkjend spelgrafikk.",
+  "testAssetsStatus": "126-detailed-pixel-sprites-with-95-new-product-variants",
+  "calibrationProfile": "layout-profile-v4.json",
+  "calibratedRoomTest": {
+    "id": "room-style-test-v1",
+    "page": "layout-asset-test.html",
+    "renderer": "layout-room-model.js",
+    "status": "detailed-transparent-pixel-sprite-prototype",
+    "resources": "resources-v5/manifest.json",
+    "randomizeButton": true,
+    "appearanceAndSizeIndependent": true,
+    "assetCount": 126,
+    "bedPriceLadder": "resources-v5/bed-price-ladder.js",
+    "styleInstructions": "resources-v5/README.md",
+    "twoVisualVariants": [
+      "sofa",
+      "wall-picture-left",
+      "wall-picture-right",
+      "wall-shelf-left",
+      "wall-shelf-right"
+    ],
+    "attachments": [
+      "monitor-and-keyboard-in-desk-sprite",
+      "pc-tower-separate-attached-to-desk",
+      "tv-separate-attached-to-tv-bench",
+      "one-floor-item-in-bed-desk-gap",
+      "decor-attached-to-wall-or-desk"
+    ],
+    "newProductSpriteCount": 95,
+    "productFamilyCount": 19,
+    "decorCategoryCount": 10,
+    "itemCatalog": "resources-v5/item-catalog.js",
+    "defaultRoomPreview": "room/product-library-default.png",
+    "fivePriceTiers": [
+      "bed",
+      "tv-bench",
+      "tv",
+      "desk",
+      "chair",
+      "pc",
+      "hifi",
+      "plant",
+      "rug",
+      "nightstand",
+      "poster",
+      "mirror",
+      "pinboard",
+      "neon-sign",
+      "desk-lamp",
+      "alarm-clock",
+      "plush",
+      "collectibles",
+      "books",
+      "makeup-set"
+    ],
+    "priceData": "Illustrative prototype values, not retail prices and not connected to game economy.",
+    "decorPreview": "room/decor-room-tests.png",
+    "makeupSetAttachmentPreview": "room/makeup-set-attachment.png",
+    "hifiPlacementPreview": "room/hifi-placement-preview.png"
+  },
+  "characters": [
+    {
+      "id": "student-01",
+      "label": "Krøll, briller og romsleg gensar",
+      "file": "characters/student-01.png",
+      "width": 96,
+      "height": 128
+    },
+    {
+      "id": "student-02",
+      "label": "Hovudplagg og lag på lag",
+      "file": "characters/student-02.png",
+      "width": 96,
+      "height": 128
+    },
+    {
+      "id": "student-03",
+      "label": "Bølgjer, fregner og lilla",
+      "file": "characters/student-03.png",
+      "width": 96,
+      "height": 128
+    },
+    {
+      "id": "student-04-wheelchair",
+      "label": "Krøll, briller og rullestol",
+      "file": "characters/student-04-wheelchair.png",
+      "width": 96,
+      "height": 128
+    }
+  ],
+  "rooms": [
+    {
+      "id": "empty-hybel",
+      "label": "Tom hybel",
+      "file": "room/empty-hybel.png",
+      "width": 384,
+      "height": 256
+    },
+    {
+      "id": "room-neutral-v2",
+      "label": "Tom hybel med nøytralt dagsljos",
+      "file": "room/room-neutral-v2.png",
+      "width": 384,
+      "height": 256
+    }
+  ],
+  "layoutReferences": [
+    {
+      "id": "room-layout-03",
+      "label": "Seng, pult, TV og sofa · felles hjørneperspektiv",
+      "file": "room/layout-setup-03-v2.png",
+      "width": 384,
+      "height": 256,
+      "camera": "hybelhjorne-v2",
+      "prompt": "layout-setup-03-prompt.md"
+    },
+    {
+      "id": "room-layout-neutral-03",
+      "label": "Tidlegare romprøve · perspektivet er forkasta",
+      "file": "room/room-neutral-v2.png",
+      "width": 384,
+      "height": 256,
+      "camera": "hybelhjørne-nøytral-v3",
+      "prompt": "asset-test-v2-prompts.md"
+    },
+    {
+      "id": "room-layout-measured-04",
+      "label": "Målsett rommodell · kalibrering før spelkunst",
+      "file": "room/layout-measured-v4.svg",
+      "width": 480,
+      "height": 360,
+      "camera": "measured-dimetric-v4",
+      "prompt": "layout-standard-v4.md"
+    },
+    {
+      "id": "room-style-test-01",
+      "label": "Stilprøve · variant 1 av kvar møbelfamilie",
+      "file": "room/layout-style-test-01.png",
+      "width": 960,
+      "height": 720,
+      "camera": "measured-dimetric-v4",
+      "prompt": "layout-standard-v4.md"
+    },
+    {
+      "id": "room-style-test-02",
+      "label": "Stilprøve · variant 2 av kvar møbelfamilie",
+      "file": "room/layout-style-test-02.png",
+      "width": 960,
+      "height": 720,
+      "camera": "measured-dimetric-v4",
+      "prompt": "layout-standard-v4.md"
+    }
+  ],
+  "items": [
+    {
+      "id": "bed-simple",
+      "label": "Enkel seng",
+      "group": "Møblar",
+      "slot": "bed",
+      "file": "items/bed-simple.png",
+      "width": 192,
+      "height": 128
+    },
+    {
+      "id": "bed-upgraded",
+      "label": "God seng",
+      "group": "Møblar",
+      "slot": "bed",
+      "file": "items/bed-upgraded.png",
+      "width": 192,
+      "height": 128
+    },
+    {
+      "id": "desk-simple",
+      "label": "Skrivebord",
+      "group": "Møblar",
+      "slot": "desk",
+      "file": "items/desk-simple.png",
+      "width": 160,
+      "height": 112
+    },
+    {
+      "id": "desk-gaming",
+      "label": "Større skrivebord",
+      "group": "Møblar",
+      "slot": "desk",
+      "file": "items/desk-gaming.png",
+      "width": 192,
+      "height": 128
+    },
+    {
+      "id": "monitor",
+      "label": "Skjerm",
+      "group": "Teknologi",
+      "slot": "desk",
+      "file": "items/monitor.png",
+      "width": 136,
+      "height": 100
+    },
+    {
+      "id": "computer-tower",
+      "label": "Stasjonær datamaskin",
+      "group": "Teknologi",
+      "slot": "desk-floor",
+      "file": "items/computer-tower.png",
+      "width": 88,
+      "height": 112
+    },
+    {
+      "id": "game-controller",
+      "label": "Spelkontroll",
+      "group": "Teknologi",
+      "slot": "desk",
+      "file": "items/game-controller.png",
+      "width": 96,
+      "height": 72
+    },
+    {
+      "id": "headphones",
+      "label": "Hovudtelefonar",
+      "group": "Teknologi",
+      "slot": "desk",
+      "file": "items/headphones.png",
+      "width": 96,
+      "height": 100
+    },
+    {
+      "id": "desk-lamp",
+      "label": "Skrivebordslampe",
+      "group": "Lys og tekstil",
+      "slot": "desk",
+      "file": "items/desk-lamp.png",
+      "width": 80,
+      "height": 120
+    },
+    {
+      "id": "led-string",
+      "label": "Lyslenkje",
+      "group": "Lys og tekstil",
+      "slot": "wall",
+      "file": "items/led-string.png",
+      "width": 192,
+      "height": 72
+    },
+    {
+      "id": "rug",
+      "label": "Golvteppe",
+      "group": "Lys og tekstil",
+      "slot": "floor",
+      "file": "items/rug.png",
+      "width": 192,
+      "height": 112
+    },
+    {
+      "id": "bed-throw",
+      "label": "Sengeteppe",
+      "group": "Lys og tekstil",
+      "slot": "bed",
+      "file": "items/bed-throw.png",
+      "width": 160,
+      "height": 96
+    },
+    {
+      "id": "pillow",
+      "label": "Pyntepute",
+      "group": "Lys og tekstil",
+      "slot": "bed",
+      "file": "items/pillow.png",
+      "width": 72,
+      "height": 64
+    },
+    {
+      "id": "poster",
+      "label": "Nattplakat",
+      "group": "Vegg og oppbevaring",
+      "slot": "wall",
+      "file": "items/poster.png",
+      "width": 72,
+      "height": 112
+    },
+    {
+      "id": "photo-wall",
+      "label": "Biletevegg",
+      "group": "Vegg og oppbevaring",
+      "slot": "wall",
+      "file": "items/photo-wall.png",
+      "width": 128,
+      "height": 112
+    },
+    {
+      "id": "wall-shelf",
+      "label": "Vegghylle",
+      "group": "Vegg og oppbevaring",
+      "slot": "wall",
+      "file": "items/wall-shelf.png",
+      "width": 128,
+      "height": 64
+    },
+    {
+      "id": "book-stack",
+      "label": "Bøker",
+      "group": "Vegg og oppbevaring",
+      "slot": "shelf",
+      "file": "items/book-stack.png",
+      "width": 96,
+      "height": 80
+    },
+    {
+      "id": "plant",
+      "label": "Grøn plante",
+      "group": "Hobby og livsstil",
+      "slot": "floor",
+      "file": "items/plant.png",
+      "width": 88,
+      "height": 120
+    },
+    {
+      "id": "guitar",
+      "label": "Gitar",
+      "group": "Hobby og livsstil",
+      "slot": "hobby",
+      "file": "items/guitar.png",
+      "width": 96,
+      "height": 192
+    },
+    {
+      "id": "art-supplies",
+      "label": "Teiknesaker",
+      "group": "Hobby og livsstil",
+      "slot": "desk",
+      "file": "items/art-supplies.png",
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "training-equipment",
+      "label": "Treningsutstyr",
+      "group": "Hobby og livsstil",
+      "slot": "floor",
+      "file": "items/training-equipment.png",
+      "width": 160,
+      "height": 96
+    },
+    {
+      "id": "makeup-case",
+      "label": "Sminkeskrin",
+      "group": "Personleg pleie",
+      "slot": "personal-care",
+      "file": "items/makeup-case.png",
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "vanity-mirror",
+      "label": "Sminkespegel med hylle",
+      "group": "Personleg pleie",
+      "slot": "personal-care",
+      "file": "items/vanity-mirror.png",
+      "width": 128,
+      "height": 160
+    },
+    {
+      "id": "test-bed-01",
+      "label": "Prøveseng · eik og salvie",
+      "group": "Møbelprøve",
+      "slot": "bed",
+      "file": "items/test-bed-01.png",
+      "width": 144,
+      "height": 104
+    },
+    {
+      "id": "test-bed-02",
+      "label": "Prøveseng · polstra gavl",
+      "group": "Møbelprøve",
+      "slot": "bed",
+      "file": "items/test-bed-02.png",
+      "width": 144,
+      "height": 104
+    },
+    {
+      "id": "test-desk-01",
+      "label": "Prøvepult · kompakt",
+      "group": "Møbelprøve",
+      "slot": "desk",
+      "file": "items/test-desk-01.png",
+      "width": 160,
+      "height": 104
+    },
+    {
+      "id": "test-desk-02",
+      "label": "Prøvepult · brei spelpult",
+      "group": "Møbelprøve",
+      "slot": "desk",
+      "file": "items/test-desk-02.png",
+      "width": 160,
+      "height": 104
+    },
+    {
+      "id": "test-chair-01",
+      "label": "Prøvestol · tre og spiler",
+      "group": "Møbelprøve",
+      "slot": "chair",
+      "file": "items/test-chair-01.png",
+      "width": 80,
+      "height": 96
+    },
+    {
+      "id": "test-chair-02",
+      "label": "Prøvestol · justerbar",
+      "group": "Møbelprøve",
+      "slot": "chair",
+      "file": "items/test-chair-02.png",
+      "width": 80,
+      "height": 96
+    },
+    {
+      "id": "test-rug-01",
+      "label": "Prøveteppe · salvie og lyng",
+      "group": "Møbelprøve",
+      "slot": "floor",
+      "file": "items/test-rug-01.png",
+      "width": 160,
+      "height": 96
+    },
+    {
+      "id": "test-rug-02",
+      "label": "Prøveteppe · blå blom",
+      "group": "Møbelprøve",
+      "slot": "floor",
+      "file": "items/test-rug-02.png",
+      "width": 160,
+      "height": 96
+    },
+    {
+      "id": "test-sofa-01",
+      "label": "Prøvesofa · salvie",
+      "group": "Møbelprøve",
+      "slot": "sofa",
+      "file": "items/test-sofa-01.png",
+      "width": 144,
+      "height": 104
+    },
+    {
+      "id": "test-sofa-02",
+      "label": "Prøvesofa · korall",
+      "group": "Møbelprøve",
+      "slot": "sofa",
+      "file": "items/test-sofa-02.png",
+      "width": 144,
+      "height": 104
+    },
+    {
+      "id": "test-tv-bench-01",
+      "label": "Prøve-TV-benk · skapdører",
+      "group": "Møbelprøve",
+      "slot": "tv-bench",
+      "file": "items/test-tv-bench-01.png",
+      "width": 96,
+      "height": 64
+    },
+    {
+      "id": "test-tv-bench-02",
+      "label": "Prøve-TV-benk · open hylle",
+      "group": "Møbelprøve",
+      "slot": "tv-bench",
+      "file": "items/test-tv-bench-02.png",
+      "width": 96,
+      "height": 64
+    },
+    {
+      "id": "test-tv",
+      "label": "Prøve-TV",
+      "group": "Møbelprøve",
+      "slot": "tv-bench",
+      "file": "items/test-tv.png",
+      "width": 64,
+      "height": 64
+    }
+  ]
+}

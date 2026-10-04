@@ -1,0 +1,1416 @@
+{
+  "app": "livslina",
+  "version": 1,
+  "id": "measured-dimetric-v4",
+  "status": "measured-camera-with-five-price-tiers-and-95-new-product-sprites",
+  "camera": {
+    "width": 480,
+    "height": 360,
+    "originX": 220,
+    "originY": 136,
+    "scale": 0.52,
+    "axisX": 0.8660254037844386,
+    "axisY": 0.5
+  },
+  "roomCm": {
+    "width": 420,
+    "depth": 360,
+    "height": 240
+  },
+  "variantsCm": {
+    "bed": [
+      {
+        "w": 95,
+        "d": 200,
+        "h": 95
+      },
+      {
+        "w": 120,
+        "d": 200,
+        "h": 95
+      }
+    ],
+    "desk": [
+      {
+        "w": 120,
+        "d": 60,
+        "h": 75
+      },
+      {
+        "w": 150,
+        "d": 65,
+        "h": 75
+      }
+    ],
+    "chair": [
+      {
+        "w": 42,
+        "d": 42,
+        "h": 85
+      },
+      {
+        "w": 48,
+        "d": 48,
+        "h": 90
+      }
+    ],
+    "rug": [
+      {
+        "w": 260,
+        "d": 190,
+        "h": 1
+      },
+      {
+        "w": 280,
+        "d": 200,
+        "h": 1
+      }
+    ],
+    "sofa": [
+      {
+        "w": 82,
+        "d": 145,
+        "h": 80
+      },
+      {
+        "w": 90,
+        "d": 155,
+        "h": 80
+      }
+    ],
+    "tv-bench": [
+      {
+        "w": 45,
+        "d": 100,
+        "h": 45
+      },
+      {
+        "w": 45,
+        "d": 120,
+        "h": 50
+      }
+    ]
+  },
+  "bedPriceTiersCm": [
+    {
+      "id": "bed-tier-01",
+      "label": "Heimelaga seng",
+      "w": 95,
+      "d": 200,
+      "h": 78
+    },
+    {
+      "id": "bed-tier-02",
+      "label": "Brukt seng",
+      "w": 95,
+      "d": 200,
+      "h": 82
+    },
+    {
+      "id": "bed-tier-03",
+      "label": "Stødig kvardagseng",
+      "w": 95,
+      "d": 200,
+      "h": 86
+    },
+    {
+      "id": "bed-tier-04",
+      "label": "Polstra seng med oppbevaring",
+      "w": 95,
+      "d": 200,
+      "h": 94
+    },
+    {
+      "id": "bed-tier-05",
+      "label": "Luksusseng med hev- og senkefunksjon",
+      "w": 95,
+      "d": 200,
+      "h": 102
+    }
+  ],
+  "floorAccessoryTypesCm": {
+    "speaker": {
+      "w": 28,
+      "d": 30,
+      "h": 90,
+      "label": "Høgtalar"
+    },
+    "plant": {
+      "w": 40,
+      "d": 40,
+      "h": 110,
+      "label": "Plante"
+    },
+    "nightstand": {
+      "w": 45,
+      "d": 40,
+      "h": 55,
+      "label": "Nattbord"
+    }
+  },
+  "appearanceVariants": {
+    "bed": [
+      "eik-spiler-salvie",
+      "polstra-gavl-korall"
+    ],
+    "desk": [
+      "eik-skjerm",
+      "metall-speltarn"
+    ],
+    "chair": [
+      "tre-spiler",
+      "kontorstol-hjul"
+    ],
+    "rug": [
+      "lyngkant-blom",
+      "blaruter-midtmerke"
+    ],
+    "sofa": [
+      "salvie-tosetar",
+      "korall-tosetar"
+    ],
+    "tv-bench": [
+      "skapdor",
+      "open-hylle"
+    ],
+    "wall-picture": [
+      "sol-over-asar",
+      "nattby-stjerner"
+    ],
+    "wall-shelf": [
+      "boker-plante",
+      "fargar-oppbevaring"
+    ],
+    "speaker": [
+      "runde-element",
+      "vevd-front"
+    ],
+    "plant": [
+      "bladgreiner",
+      "breie-blad"
+    ],
+    "nightstand": [
+      "skuff",
+      "open-rom"
+    ]
+  },
+  "appearanceStatus": "detailed-transparent-png-sprite-composition-prototype",
+  "spritePackage": "resources-v5/manifest.json",
+  "visualStyleAuthority": "resources-v5/README.md",
+  "appearanceAndSizeIndependent": true,
+  "defaultPlacements": {
+    "bed": {
+      "variant": 0,
+      "w": 95,
+      "d": 200,
+      "h": 95,
+      "u": 32,
+      "v": 0
+    },
+    "desk": {
+      "variant": 0,
+      "w": 120,
+      "d": 60,
+      "h": 75,
+      "u": 290,
+      "v": 0
+    },
+    "chair": {
+      "variant": 0,
+      "w": 42,
+      "d": 42,
+      "h": 85,
+      "u": 329,
+      "v": 74
+    },
+    "rug": {
+      "variant": 0,
+      "w": 260,
+      "d": 190,
+      "h": 1,
+      "u": 120,
+      "v": 155
+    },
+    "sofa": {
+      "variant": 0,
+      "w": 82,
+      "d": 145,
+      "h": 80,
+      "u": 223,
+      "v": 177.5
+    },
+    "tv-bench": {
+      "variant": 0,
+      "w": 45,
+      "d": 100,
+      "h": 45,
+      "u": 0,
+      "v": 225
+    },
+    "floorItem": {
+      "kind": "plant",
+      "w": 40,
+      "d": 40,
+      "h": 110,
+      "label": "Plante",
+      "u": 188.5,
+      "v": 18
+    }
+  },
+  "defaultWallMounts": [
+    {
+      "id": "left-picture",
+      "kind": "picture",
+      "wall": "left",
+      "u": 0,
+      "v": 215,
+      "z": 158,
+      "w": 3,
+      "d": 55,
+      "h": 57
+    },
+    {
+      "id": "left-shelf",
+      "kind": "shelf",
+      "wall": "left",
+      "u": 0,
+      "v": 270,
+      "z": 130,
+      "w": 22,
+      "d": 80,
+      "h": 4
+    },
+    {
+      "id": "right-picture",
+      "kind": "picture",
+      "wall": "right",
+      "u": 185,
+      "v": 0,
+      "z": 140,
+      "w": 60,
+      "d": 3,
+      "h": 60
+    },
+    {
+      "id": "right-shelf",
+      "kind": "shelf",
+      "wall": "right",
+      "u": 300,
+      "v": 0,
+      "z": 145,
+      "w": 100,
+      "d": 22,
+      "h": 4
+    }
+  ],
+  "source": "layout-room-model.js",
+  "replaces": "layout-profile-neutral-v3.json",
+  "productPriceTiersCm": {
+    "tv-bench": [
+      {
+        "id": "tv-bench-tier-01",
+        "level": 1,
+        "label": "Pappkasser",
+        "provisionalPriceNok": 100,
+        "w": 45,
+        "d": 140,
+        "h": 34,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "tv-bench-tier-02",
+        "level": 2,
+        "label": "Brukt lågbenk",
+        "provisionalPriceNok": 600,
+        "w": 45,
+        "d": 140,
+        "h": 38,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "tv-bench-tier-03",
+        "level": 3,
+        "label": "Enkel medieseksjon",
+        "provisionalPriceNok": 2200,
+        "w": 45,
+        "d": 140,
+        "h": 42,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "tv-bench-tier-04",
+        "level": 4,
+        "label": "Solid oppbevaringsbenk",
+        "provisionalPriceNok": 6500,
+        "w": 45,
+        "d": 140,
+        "h": 47,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "tv-bench-tier-05",
+        "level": 5,
+        "label": "Luksusbenk med RGB",
+        "provisionalPriceNok": 16000,
+        "w": 48,
+        "d": 140,
+        "h": 52,
+        "mount": "floor-or-parent"
+      }
+    ],
+    "tv": [
+      {
+        "id": "tv-tier-01",
+        "level": 1,
+        "label": "Liten skjerm · nettbrettstorleik",
+        "provisionalPriceNok": 500,
+        "w": 6,
+        "d": 24,
+        "h": 18,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "tv-tier-02",
+        "level": 2,
+        "label": "Liten flatskjerm",
+        "provisionalPriceNok": 1800,
+        "w": 6,
+        "d": 42,
+        "h": 25,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "tv-tier-03",
+        "level": 3,
+        "label": "Mellomstor TV",
+        "provisionalPriceNok": 5000,
+        "w": 6,
+        "d": 60,
+        "h": 36,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "tv-tier-04",
+        "level": 4,
+        "label": "Stor storskjerm",
+        "provisionalPriceNok": 14000,
+        "w": 7,
+        "d": 90,
+        "h": 53,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "tv-tier-05",
+        "level": 5,
+        "label": "Maksimal rom-TV",
+        "provisionalPriceNok": 32000,
+        "w": 8,
+        "d": 130,
+        "h": 77,
+        "mount": "floor-or-parent"
+      }
+    ],
+    "chair": [
+      {
+        "id": "chair-tier-01",
+        "level": 1,
+        "label": "Arva kjøkenstol",
+        "provisionalPriceNok": 120,
+        "w": 42,
+        "d": 42,
+        "h": 78,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "chair-tier-02",
+        "level": 2,
+        "label": "Enkel trestol",
+        "provisionalPriceNok": 450,
+        "w": 43,
+        "d": 43,
+        "h": 84,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "chair-tier-03",
+        "level": 3,
+        "label": "Polstra kontorstol",
+        "provisionalPriceNok": 1800,
+        "w": 46,
+        "d": 46,
+        "h": 90,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "chair-tier-04",
+        "level": 4,
+        "label": "Ergonomisk stol",
+        "provisionalPriceNok": 6500,
+        "w": 48,
+        "d": 48,
+        "h": 96,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "chair-tier-05",
+        "level": 5,
+        "label": "Eksklusiv spelstol",
+        "provisionalPriceNok": 18000,
+        "w": 50,
+        "d": 50,
+        "h": 102,
+        "mount": "floor-or-parent"
+      }
+    ],
+    "desk": [
+      {
+        "id": "desk-tier-01",
+        "level": 1,
+        "label": "Heimelaga plankepult",
+        "provisionalPriceNok": 250,
+        "w": 110,
+        "d": 58,
+        "h": 72,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "desk-tier-02",
+        "level": 2,
+        "label": "Liten brukt pult",
+        "provisionalPriceNok": 700,
+        "w": 115,
+        "d": 60,
+        "h": 74,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "desk-tier-03",
+        "level": 3,
+        "label": "Stødig arbeidsbord",
+        "provisionalPriceNok": 2800,
+        "w": 120,
+        "d": 62,
+        "h": 75,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "desk-tier-04",
+        "level": 4,
+        "label": "Stor spelpult",
+        "provisionalPriceNok": 8500,
+        "w": 138,
+        "d": 66,
+        "h": 75,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "desk-tier-05",
+        "level": 5,
+        "label": "Eksklusiv hev-senk-pult",
+        "provisionalPriceNok": 24000,
+        "w": 150,
+        "d": 68,
+        "h": 75,
+        "mount": "floor-or-parent"
+      }
+    ],
+    "pc": [
+      {
+        "id": "pc-tier-01",
+        "level": 1,
+        "label": "Gamal kontor-PC",
+        "provisionalPriceNok": 180,
+        "w": 22,
+        "d": 24,
+        "h": 36,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "pc-tier-02",
+        "level": 2,
+        "label": "Enkel brukt PC",
+        "provisionalPriceNok": 1800,
+        "w": 22,
+        "d": 24,
+        "h": 39,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "pc-tier-03",
+        "level": 3,
+        "label": "God skule-PC",
+        "provisionalPriceNok": 6500,
+        "w": 23,
+        "d": 25,
+        "h": 43,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "pc-tier-04",
+        "level": 4,
+        "label": "Kraftig spel-PC",
+        "provisionalPriceNok": 18000,
+        "w": 24,
+        "d": 26,
+        "h": 48,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "pc-tier-05",
+        "level": 5,
+        "label": "Eksklusiv spel-PC med RGB",
+        "provisionalPriceNok": 42000,
+        "w": 25,
+        "d": 27,
+        "h": 52,
+        "mount": "floor-or-parent"
+      }
+    ],
+    "hifi": [
+      {
+        "id": "hifi-tier-01",
+        "level": 1,
+        "label": "Enkel brukt radio",
+        "provisionalPriceNok": 100,
+        "w": 30,
+        "d": 28,
+        "h": 42,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "hifi-tier-02",
+        "level": 2,
+        "label": "Kompakt stereo",
+        "provisionalPriceNok": 900,
+        "w": 34,
+        "d": 28,
+        "h": 50,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "hifi-tier-03",
+        "level": 3,
+        "label": "Stereo med to høgtalarar",
+        "provisionalPriceNok": 3800,
+        "w": 38,
+        "d": 30,
+        "h": 62,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "hifi-tier-04",
+        "level": 4,
+        "label": "Kraftig hifi",
+        "provisionalPriceNok": 12000,
+        "w": 42,
+        "d": 32,
+        "h": 78,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "hifi-tier-05",
+        "level": 5,
+        "label": "Luksuslyd med subwoofer",
+        "provisionalPriceNok": 30000,
+        "w": 46,
+        "d": 35,
+        "h": 92,
+        "mount": "floor-or-parent"
+      }
+    ],
+    "plant": [
+      {
+        "id": "plant-tier-01",
+        "level": 1,
+        "label": "Lita stikling",
+        "provisionalPriceNok": 40,
+        "w": 28,
+        "d": 28,
+        "h": 70,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "plant-tier-02",
+        "level": 2,
+        "label": "Grøn potteplante",
+        "provisionalPriceNok": 180,
+        "w": 34,
+        "d": 34,
+        "h": 88,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "plant-tier-03",
+        "level": 3,
+        "label": "Høg bladplante",
+        "provisionalPriceNok": 700,
+        "w": 40,
+        "d": 40,
+        "h": 110,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "plant-tier-04",
+        "level": 4,
+        "label": "Stor greinvaksar",
+        "provisionalPriceNok": 2400,
+        "w": 46,
+        "d": 46,
+        "h": 128,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "plant-tier-05",
+        "level": 5,
+        "label": "Eksotisk prydplante",
+        "provisionalPriceNok": 7800,
+        "w": 50,
+        "d": 50,
+        "h": 142,
+        "mount": "floor-or-parent"
+      }
+    ],
+    "rug": [
+      {
+        "id": "rug-tier-01",
+        "level": 1,
+        "label": "Brukt golvteppe",
+        "provisionalPriceNok": 100,
+        "w": 220,
+        "d": 150,
+        "h": 1,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "rug-tier-02",
+        "level": 2,
+        "label": "Enkelt lite teppe",
+        "provisionalPriceNok": 450,
+        "w": 240,
+        "d": 165,
+        "h": 1,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "rug-tier-03",
+        "level": 3,
+        "label": "Mjukt mønsterteppe",
+        "provisionalPriceNok": 2200,
+        "w": 260,
+        "d": 180,
+        "h": 1,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "rug-tier-04",
+        "level": 4,
+        "label": "Stort, tjukt teppe",
+        "provisionalPriceNok": 6800,
+        "w": 280,
+        "d": 195,
+        "h": 1,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "rug-tier-05",
+        "level": 5,
+        "label": "Luksusvevd teppe",
+        "provisionalPriceNok": 19000,
+        "w": 300,
+        "d": 210,
+        "h": 1,
+        "mount": "floor-or-parent"
+      }
+    ],
+    "nightstand": [
+      {
+        "id": "nightstand-tier-01",
+        "level": 1,
+        "label": "Opp-ned trekasse",
+        "provisionalPriceNok": 80,
+        "w": 38,
+        "d": 34,
+        "h": 42,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "nightstand-tier-02",
+        "level": 2,
+        "label": "Lite brukt nattbord",
+        "provisionalPriceNok": 350,
+        "w": 40,
+        "d": 36,
+        "h": 48,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "nightstand-tier-03",
+        "level": 3,
+        "label": "Nattbord med skuff",
+        "provisionalPriceNok": 1400,
+        "w": 43,
+        "d": 38,
+        "h": 52,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "nightstand-tier-04",
+        "level": 4,
+        "label": "Nattbord med hylle",
+        "provisionalPriceNok": 4200,
+        "w": 46,
+        "d": 40,
+        "h": 57,
+        "mount": "floor-or-parent"
+      },
+      {
+        "id": "nightstand-tier-05",
+        "level": 5,
+        "label": "Luksus nattbord med lys",
+        "provisionalPriceNok": 11000,
+        "w": 48,
+        "d": 42,
+        "h": 62,
+        "mount": "floor-or-parent"
+      }
+    ],
+    "poster": [
+      {
+        "id": "poster-tier-01",
+        "level": 1,
+        "label": "Enkel utskrift",
+        "provisionalPriceNok": 20,
+        "w": 72,
+        "d": 2,
+        "h": 38,
+        "mount": "wall"
+      },
+      {
+        "id": "poster-tier-02",
+        "level": 2,
+        "label": "Fargerik plakat",
+        "provisionalPriceNok": 80,
+        "w": 80,
+        "d": 2,
+        "h": 42,
+        "mount": "wall"
+      },
+      {
+        "id": "poster-tier-03",
+        "level": 3,
+        "label": "Innramma motiv",
+        "provisionalPriceNok": 300,
+        "w": 90,
+        "d": 2,
+        "h": 46,
+        "mount": "wall"
+      },
+      {
+        "id": "poster-tier-04",
+        "level": 4,
+        "label": "Samlarplakat",
+        "provisionalPriceNok": 1100,
+        "w": 100,
+        "d": 2,
+        "h": 52,
+        "mount": "wall"
+      },
+      {
+        "id": "poster-tier-05",
+        "level": 5,
+        "label": "Eksklusivt trykk",
+        "provisionalPriceNok": 4000,
+        "w": 110,
+        "d": 2,
+        "h": 56,
+        "mount": "wall"
+      }
+    ],
+    "mirror": [
+      {
+        "id": "mirror-tier-01",
+        "level": 1,
+        "label": "Liten brukt spegel",
+        "provisionalPriceNok": 80,
+        "w": 68,
+        "d": 2,
+        "h": 42,
+        "mount": "wall"
+      },
+      {
+        "id": "mirror-tier-02",
+        "level": 2,
+        "label": "Enkel veggspegel",
+        "provisionalPriceNok": 250,
+        "w": 76,
+        "d": 2,
+        "h": 46,
+        "mount": "wall"
+      },
+      {
+        "id": "mirror-tier-03",
+        "level": 3,
+        "label": "Spegel med treramme",
+        "provisionalPriceNok": 900,
+        "w": 88,
+        "d": 2,
+        "h": 50,
+        "mount": "wall"
+      },
+      {
+        "id": "mirror-tier-04",
+        "level": 4,
+        "label": "Stor fullspegel",
+        "provisionalPriceNok": 3200,
+        "w": 100,
+        "d": 2,
+        "h": 54,
+        "mount": "wall"
+      },
+      {
+        "id": "mirror-tier-05",
+        "level": 5,
+        "label": "Luksusspegel med lys",
+        "provisionalPriceNok": 9500,
+        "w": 110,
+        "d": 2,
+        "h": 56,
+        "mount": "wall"
+      }
+    ],
+    "pinboard": [
+      {
+        "id": "pinboard-tier-01",
+        "level": 1,
+        "label": "Papp og knappenåler",
+        "provisionalPriceNok": 30,
+        "w": 72,
+        "d": 2,
+        "h": 38,
+        "mount": "wall"
+      },
+      {
+        "id": "pinboard-tier-02",
+        "level": 2,
+        "label": "Korktavle",
+        "provisionalPriceNok": 150,
+        "w": 80,
+        "d": 2,
+        "h": 42,
+        "mount": "wall"
+      },
+      {
+        "id": "pinboard-tier-03",
+        "level": 3,
+        "label": "Tavle med ramme",
+        "provisionalPriceNok": 550,
+        "w": 90,
+        "d": 2,
+        "h": 46,
+        "mount": "wall"
+      },
+      {
+        "id": "pinboard-tier-04",
+        "level": 4,
+        "label": "Stoffkledd tavle",
+        "provisionalPriceNok": 1800,
+        "w": 100,
+        "d": 2,
+        "h": 52,
+        "mount": "wall"
+      },
+      {
+        "id": "pinboard-tier-05",
+        "level": 5,
+        "label": "Modulær minnevegg",
+        "provisionalPriceNok": 5200,
+        "w": 110,
+        "d": 2,
+        "h": 56,
+        "mount": "wall"
+      }
+    ],
+    "neon-sign": [
+      {
+        "id": "neon-sign-tier-01",
+        "level": 1,
+        "label": "Handmåla skilt",
+        "provisionalPriceNok": 60,
+        "w": 72,
+        "d": 2,
+        "h": 38,
+        "mount": "wall"
+      },
+      {
+        "id": "neon-sign-tier-02",
+        "level": 2,
+        "label": "Liten lyslenkje",
+        "provisionalPriceNok": 250,
+        "w": 80,
+        "d": 2,
+        "h": 42,
+        "mount": "wall"
+      },
+      {
+        "id": "neon-sign-tier-03",
+        "level": 3,
+        "label": "Enkelt LED-skilt",
+        "provisionalPriceNok": 900,
+        "w": 90,
+        "d": 2,
+        "h": 46,
+        "mount": "wall"
+      },
+      {
+        "id": "neon-sign-tier-04",
+        "level": 4,
+        "label": "Formskore lysskilt",
+        "provisionalPriceNok": 3200,
+        "w": 100,
+        "d": 2,
+        "h": 52,
+        "mount": "wall"
+      },
+      {
+        "id": "neon-sign-tier-05",
+        "level": 5,
+        "label": "Påkosta RGB-skilt",
+        "provisionalPriceNok": 9800,
+        "w": 110,
+        "d": 2,
+        "h": 56,
+        "mount": "wall"
+      }
+    ],
+    "desk-lamp": [
+      {
+        "id": "desk-lamp-tier-01",
+        "level": 1,
+        "label": "Klypelampe",
+        "provisionalPriceNok": 40,
+        "w": 22,
+        "d": 20,
+        "h": 32,
+        "mount": "desk"
+      },
+      {
+        "id": "desk-lamp-tier-02",
+        "level": 2,
+        "label": "Enkel bordlampe",
+        "provisionalPriceNok": 180,
+        "w": 24,
+        "d": 20,
+        "h": 38,
+        "mount": "desk"
+      },
+      {
+        "id": "desk-lamp-tier-03",
+        "level": 3,
+        "label": "Justerbar lampe",
+        "provisionalPriceNok": 650,
+        "w": 26,
+        "d": 22,
+        "h": 44,
+        "mount": "desk"
+      },
+      {
+        "id": "desk-lamp-tier-04",
+        "level": 4,
+        "label": "Arkitektlampe",
+        "provisionalPriceNok": 2200,
+        "w": 28,
+        "d": 23,
+        "h": 48,
+        "mount": "desk"
+      },
+      {
+        "id": "desk-lamp-tier-05",
+        "level": 5,
+        "label": "Påkosta arbeidslampe",
+        "provisionalPriceNok": 6200,
+        "w": 30,
+        "d": 24,
+        "h": 52,
+        "mount": "desk"
+      }
+    ],
+    "alarm-clock": [
+      {
+        "id": "alarm-clock-tier-01",
+        "level": 1,
+        "label": "Gamal analog klokke",
+        "provisionalPriceNok": 20,
+        "w": 22,
+        "d": 18,
+        "h": 19,
+        "mount": "desk"
+      },
+      {
+        "id": "alarm-clock-tier-02",
+        "level": 2,
+        "label": "Lita digital klokke",
+        "provisionalPriceNok": 120,
+        "w": 24,
+        "d": 19,
+        "h": 21,
+        "mount": "desk"
+      },
+      {
+        "id": "alarm-clock-tier-03",
+        "level": 3,
+        "label": "Moderne vekkjarklokke",
+        "provisionalPriceNok": 450,
+        "w": 26,
+        "d": 20,
+        "h": 23,
+        "mount": "desk"
+      },
+      {
+        "id": "alarm-clock-tier-04",
+        "level": 4,
+        "label": "Klokke med lys",
+        "provisionalPriceNok": 1600,
+        "w": 28,
+        "d": 21,
+        "h": 25,
+        "mount": "desk"
+      },
+      {
+        "id": "alarm-clock-tier-05",
+        "level": 5,
+        "label": "Luksus smartklokke",
+        "provisionalPriceNok": 4800,
+        "w": 30,
+        "d": 22,
+        "h": 27,
+        "mount": "desk"
+      }
+    ],
+    "plush": [
+      {
+        "id": "plush-tier-01",
+        "level": 1,
+        "label": "Arva kosedyr",
+        "provisionalPriceNok": 80,
+        "w": 23,
+        "d": 22,
+        "h": 25,
+        "mount": "desk"
+      },
+      {
+        "id": "plush-tier-02",
+        "level": 2,
+        "label": "Liten mjuk figur",
+        "provisionalPriceNok": 140,
+        "w": 25,
+        "d": 23,
+        "h": 29,
+        "mount": "desk"
+      },
+      {
+        "id": "plush-tier-03",
+        "level": 3,
+        "label": "Stor kosebamse",
+        "provisionalPriceNok": 650,
+        "w": 27,
+        "d": 24,
+        "h": 34,
+        "mount": "desk"
+      },
+      {
+        "id": "plush-tier-04",
+        "level": 4,
+        "label": "Samlarbamse",
+        "provisionalPriceNok": 2400,
+        "w": 29,
+        "d": 25,
+        "h": 39,
+        "mount": "desk"
+      },
+      {
+        "id": "plush-tier-05",
+        "level": 5,
+        "label": "Eksklusivt designkosedyr",
+        "provisionalPriceNok": 7200,
+        "w": 30,
+        "d": 26,
+        "h": 43,
+        "mount": "desk"
+      }
+    ],
+    "collectibles": [
+      {
+        "id": "collectibles-tier-01",
+        "level": 1,
+        "label": "Ein laus figur",
+        "provisionalPriceNok": 40,
+        "w": 24,
+        "d": 20,
+        "h": 25,
+        "mount": "desk"
+      },
+      {
+        "id": "collectibles-tier-02",
+        "level": 2,
+        "label": "To små figurar",
+        "provisionalPriceNok": 180,
+        "w": 26,
+        "d": 21,
+        "h": 29,
+        "mount": "desk"
+      },
+      {
+        "id": "collectibles-tier-03",
+        "level": 3,
+        "label": "Figur med sokkel",
+        "provisionalPriceNok": 900,
+        "w": 28,
+        "d": 22,
+        "h": 34,
+        "mount": "desk"
+      },
+      {
+        "id": "collectibles-tier-04",
+        "level": 4,
+        "label": "Detaljert samlarfigur",
+        "provisionalPriceNok": 3600,
+        "w": 30,
+        "d": 23,
+        "h": 40,
+        "mount": "desk"
+      },
+      {
+        "id": "collectibles-tier-05",
+        "level": 5,
+        "label": "Eksklusiv utstillingsfigur",
+        "provisionalPriceNok": 12000,
+        "w": 32,
+        "d": 24,
+        "h": 46,
+        "mount": "desk"
+      }
+    ],
+    "books": [
+      {
+        "id": "books-tier-01",
+        "level": 1,
+        "label": "Brukte blad",
+        "provisionalPriceNok": 50,
+        "w": 28,
+        "d": 22,
+        "h": 12,
+        "mount": "desk"
+      },
+      {
+        "id": "books-tier-02",
+        "level": 2,
+        "label": "Lita bokstabel",
+        "provisionalPriceNok": 90,
+        "w": 30,
+        "d": 23,
+        "h": 15,
+        "mount": "desk"
+      },
+      {
+        "id": "books-tier-03",
+        "level": 3,
+        "label": "Favorittserie",
+        "provisionalPriceNok": 450,
+        "w": 32,
+        "d": 24,
+        "h": 19,
+        "mount": "desk"
+      },
+      {
+        "id": "books-tier-04",
+        "level": 4,
+        "label": "Samlarutgåver",
+        "provisionalPriceNok": 1800,
+        "w": 34,
+        "d": 25,
+        "h": 23,
+        "mount": "desk"
+      },
+      {
+        "id": "books-tier-05",
+        "level": 5,
+        "label": "Eksklusiv bokbunke",
+        "provisionalPriceNok": 5500,
+        "w": 36,
+        "d": 26,
+        "h": 27,
+        "mount": "desk"
+      }
+    ],
+    "makeup-set": [
+      {
+        "id": "makeup-set-tier-01",
+        "level": 1,
+        "label": "Brukt toalettmappe",
+        "provisionalPriceNok": 80,
+        "w": 24,
+        "d": 18,
+        "h": 12,
+        "mount": "desk"
+      },
+      {
+        "id": "makeup-set-tier-02",
+        "level": 2,
+        "label": "Lita sminkepung",
+        "provisionalPriceNok": 350,
+        "w": 26,
+        "d": 19,
+        "h": 15,
+        "mount": "desk"
+      },
+      {
+        "id": "makeup-set-tier-03",
+        "level": 3,
+        "label": "Sminkeskrin med spegel",
+        "provisionalPriceNok": 1400,
+        "w": 28,
+        "d": 21,
+        "h": 19,
+        "mount": "desk"
+      },
+      {
+        "id": "makeup-set-tier-04",
+        "level": 4,
+        "label": "Påkosta sminkeskrin",
+        "provisionalPriceNok": 4800,
+        "w": 30,
+        "d": 23,
+        "h": 24,
+        "mount": "desk"
+      },
+      {
+        "id": "makeup-set-tier-05",
+        "level": 5,
+        "label": "Luksussett med lysspegel",
+        "provisionalPriceNok": 13000,
+        "w": 32,
+        "d": 24,
+        "h": 28,
+        "mount": "desk"
+      }
+    ]
+  },
+  "decorationCategories": [
+    {
+      "id": "poster",
+      "label": "Plakat",
+      "mount": "wall",
+      "levels": 5
+    },
+    {
+      "id": "mirror",
+      "label": "Spegel",
+      "mount": "wall",
+      "levels": 5
+    },
+    {
+      "id": "pinboard",
+      "label": "Oppslagstavle",
+      "mount": "wall",
+      "levels": 5
+    },
+    {
+      "id": "neon-sign",
+      "label": "Lysande veggskilt",
+      "mount": "wall",
+      "levels": 5
+    },
+    {
+      "id": "desk-lamp",
+      "label": "Skrivebordslampe",
+      "mount": "desk",
+      "levels": 5
+    },
+    {
+      "id": "alarm-clock",
+      "label": "Vekkjarklokke",
+      "mount": "desk",
+      "levels": 5
+    },
+    {
+      "id": "plush",
+      "label": "Kosedyr",
+      "mount": "desk",
+      "levels": 5
+    },
+    {
+      "id": "collectibles",
+      "label": "Samlefigurar",
+      "mount": "desk",
+      "levels": 5
+    },
+    {
+      "id": "books",
+      "label": "Bøker og teikneseriar",
+      "mount": "desk",
+      "levels": 5
+    },
+    {
+      "id": "makeup-set",
+      "label": "Sminkepakke",
+      "mount": "desk",
+      "levels": 5
+    }
+  ],
+  "attachments": {
+    "tv": {
+      "parent": "tv-bench",
+      "localPoint": "center of measured top plane",
+      "screenWidthsCm": [
+        24,
+        42,
+        60,
+        90,
+        130
+      ],
+      "movesWithParent": true
+    },
+    "pc": {
+      "parent": "desk",
+      "localPoint": "rear-right desktop slot",
+      "movesWithParent": true
+    },
+    "monitorAndKeyboard": {
+      "parent": "desk",
+      "renderedWithinDeskSprite": true
+    },
+    "deskDecor": {
+      "parent": "desk",
+      "localPoint": "front-left desktop slot"
+    },
+    "wallDecor": {
+      "parent": "right-wall",
+      "localPoint": "measured wall plane",
+      "replacesDefaultRightWallItemsInPreview": true
+    },
+    "floorObject": {
+      "choices": [
+        "hifi",
+        "plant",
+        "nightstand"
+      ],
+      "simultaneousCount": 1
+    }
+  },
+  "priceDataStatus": "Illustrative prototype prices only; not retail prices and not connected to game economy.",
+  "floorItemPlacementRules": {
+    "hifi": {
+      "u": "bed.u + bed.w + 40",
+      "v": 0,
+      "reason": "Keep both side speakers clear of the sofa overlap in the room projection."
+    },
+    "plant": {
+      "u": "bed.u + bed.w + 22",
+      "v": 125
+    },
+    "nightstand": {
+      "u": "bed.u + bed.w + 4",
+      "v": 14
+    }
+  }
+}
