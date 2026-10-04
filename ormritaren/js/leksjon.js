@@ -17,6 +17,27 @@ const OrmLeksjon = (function () {
     let vert = {};            // callbacks inn i app.js
     let loypesteg = 0;
 
+    const VYRDE_POSAR = {
+        glad: {
+            src: 'resources/vyrde-glad.png',
+            alt: 'Vyrde helsar med eit stort smil',
+            width: 380,
+            height: 384
+        },
+        tenkande: {
+            src: 'resources/vyrde-tenkande.png',
+            alt: 'Vyrde tenkjer med handa på haka'
+        },
+        byggjer: {
+            src: 'resources/vyrde-byggjer.png',
+            alt: 'Vyrde byggjer eit program av klossar'
+        },
+        oppgaver: {
+            src: 'resources/vyrde-oppgaver.png',
+            alt: 'Vyrde held ein blyant og eit oppgåveark'
+        }
+    };
+
     function init(verten) { vert = verten; }
 
     /* ---- lasting -------------------------------------------------------- */
@@ -50,16 +71,16 @@ const OrmLeksjon = (function () {
         const merk = (node, namn) => { node.dataset.bolk = namn; return node; };
 
         panel.appendChild(merk(topptekst(), 'om'));
-        panel.appendChild(merk(blokker(leksjon.tekst || []), 'tekst'));
+        if (leksjon.tekst?.length) {
+            panel.appendChild(merk(trekkspel('Kom og lær med meg', 'tekst', blokker(leksjon.tekst), VYRDE_POSAR.glad), 'tekst'));
+        }
 
         if (leksjon.doeme) panel.appendChild(merk(doeme(leksjon.doeme), 'doeme'));
         if (leksjon.loype) panel.appendChild(merk(loype(leksjon.loype), 'loype'));
         if (leksjon.oppgaver?.length) {
             panel.appendChild(merk(oppgaver(leksjon.oppgaver), 'oppgaver'));
         }
-        if (leksjon.oppsummering) panel.appendChild(merk(oppsummering(), 'om'));
-
-        panel.appendChild(navigasjon());
+        if (leksjon.oppsummering) panel.appendChild(avslutning());
         if (window.hydrateIcons) hydrateIcons(panel);
     }
 
@@ -144,40 +165,35 @@ const OrmLeksjon = (function () {
     /* ---- døme ----------------------------------------------------------- */
 
     function doeme(d) {
-        const seksjon = document.createElement('section');
-        seksjon.className = 'orm-leksjonsdel';
-
-        seksjon.appendChild(deltittel('Prøv sjølv', 'play'));
+        const innhald = document.createElement('div');
 
         const pre = document.createElement('pre');
         pre.className = 'orm-leskode';
         pre.textContent = d.kode;
-        seksjon.appendChild(pre);
+        innhald.appendChild(pre);
 
         if (d.oppmoding) {
             const p = document.createElement('p');
             p.className = 'orm-oppmoding';
             OrmTekst.set(p, d.oppmoding);
-            seksjon.appendChild(p);
+            innhald.appendChild(p);
         }
 
         const knapp = document.createElement('button');
         knapp.type = 'button';
-        knapp.className = 'btn orm-btn-liten';
+        knapp.className = 'vp-button btn orm-btn-liten';
         knapp.textContent = 'Hent dømet inn i editoren';
         knapp.addEventListener('click', () => vert.opneKode(d.kode));
-        seksjon.appendChild(knapp);
+        innhald.appendChild(knapp);
 
-        return seksjon;
+        return trekkspel('Prøv sjølv', 'doeme', innhald, VYRDE_POSAR.tenkande);
     }
 
     /* ---- kodeløype ------------------------------------------------------ */
 
     function loype(t) {
-        const seksjon = document.createElement('section');
-        seksjon.className = 'orm-leksjonsdel orm-loype';
-
-        seksjon.appendChild(deltittel(t.tittel || 'Bygg programmet steg for steg', 'footprints'));
+        const innhald = document.createElement('div');
+        innhald.className = 'orm-loype';
 
         /* Ein fast notis om kva ei løype er. Utan han er det ikkje opplagt at
          * stega heng saman til eitt program — mange trur kvart steg er ei ny,
@@ -189,22 +205,22 @@ const OrmLeksjon = (function () {
             'Kvart steg legg til nokre linjer — dei nye blir markerte i editoren — ' +
             'og du køyrer undervegs for å sjå kva som endra seg.' +
             (t.maal ? ` I denne løypa lagar du **${t.maal}**.` : ''));
-        seksjon.appendChild(notis);
+        innhald.appendChild(notis);
 
         const tekst = document.createElement('p');
         tekst.className = 'orm-loypetekst';
-        seksjon.appendChild(tekst);
+        innhald.appendChild(tekst);
 
         const proev = document.createElement('p');
         proev.className = 'orm-oppmoding';
-        seksjon.appendChild(proev);
+        innhald.appendChild(proev);
 
         const rad = document.createElement('div');
         rad.className = 'orm-loyperad';
 
         const foerre = document.createElement('button');
         foerre.type = 'button';
-        foerre.className = 'btn orm-btn-liten';
+        foerre.className = 'vp-button btn orm-btn-liten';
         foerre.textContent = 'Førre';
         rad.appendChild(foerre);
 
@@ -214,11 +230,11 @@ const OrmLeksjon = (function () {
 
         const neste = document.createElement('button');
         neste.type = 'button';
-        neste.className = 'btn orm-btn-liten orm-btn-neste';
+        neste.className = 'vp-button btn orm-btn-liten orm-btn-neste';
         neste.textContent = 'Neste steg';
         rad.appendChild(neste);
 
-        seksjon.appendChild(rad);
+        innhald.appendChild(rad);
 
         const vis = (n, skrivKode) => {
             loypesteg = Math.max(0, Math.min(n, t.steg.length - 1));
@@ -240,13 +256,13 @@ const OrmLeksjon = (function () {
 
         const start = document.createElement('button');
         start.type = 'button';
-        start.className = 'btn orm-btn-liten';
+        start.className = 'vp-button btn orm-btn-liten';
         start.textContent = 'Start løypa';
         start.addEventListener('click', () => vis(0, true));
         rad.insertBefore(start, foerre);
 
         vis(0, false);
-        return seksjon;
+        return trekkspel(t.tittel || 'Bygg programmet steg for steg', 'loype', innhald, VYRDE_POSAR.byggjer);
     }
 
     /** Kva linjer som er nye i dette steget, så editoren kan markere dei.
@@ -270,23 +286,52 @@ const OrmLeksjon = (function () {
     /* ---- oppgåver ------------------------------------------------------- */
 
     function oppgaver(liste) {
-        const seksjon = document.createElement('section');
-        seksjon.className = 'orm-leksjonsdel';
-        seksjon.appendChild(deltittel(liste.length === 1 ? 'Oppgåve' : 'Oppgåver'));
-        liste.forEach((o, i) => seksjon.appendChild(OrmOppgaver.kort(o, i + 1)));
-        return seksjon;
+        const innhald = document.createElement('div');
+        liste.forEach((o, i) => innhald.appendChild(OrmOppgaver.kort(o, i + 1)));
+        return trekkspel('Oppgåver', 'oppgaver', innhald, VYRDE_POSAR.oppgaver);
     }
 
     /* ---- oppsummering og navigasjon ------------------------------------- */
 
-    function oppsummering() {
+    function avslutning() {
         const seksjon = document.createElement('section');
-        seksjon.className = 'orm-leksjonsdel orm-oppsummering';
+        seksjon.className = 'orm-leksjon-avslutning';
+        seksjon.dataset.bolk = 'oppsummering';
         seksjon.appendChild(deltittel('Kort oppsummert'));
         const p = document.createElement('p');
         OrmTekst.set(p, leksjon.oppsummering);
         seksjon.appendChild(p);
+        seksjon.appendChild(navigasjon());
         return seksjon;
+    }
+
+    function trekkspel(tittel, namn, innhald, vyrdePose) {
+        const details = document.createElement('details');
+        details.className = 'vp-accordion orm-leksjon-accordion';
+        if (namn === 'tekst') details.open = true;
+
+        const summary = document.createElement('summary');
+        summary.className = 'orm-leksjon-summary';
+        const tekst = document.createElement('span');
+        tekst.textContent = tittel;
+        summary.appendChild(tekst);
+
+        if (vyrdePose) {
+            const vyrde = document.createElement('img');
+            vyrde.className = 'orm-accordion-vyrde';
+            vyrde.src = vyrdePose.src;
+            vyrde.width = vyrdePose.width || 384;
+            vyrde.height = vyrdePose.height || 368;
+            vyrde.alt = vyrdePose.alt;
+            vyrde.loading = 'lazy';
+            summary.appendChild(vyrde);
+        }
+
+        const body = document.createElement('div');
+        body.className = 'orm-accordion-body';
+        body.appendChild(innhald);
+        details.append(summary, body);
+        return details;
     }
 
     function navigasjon() {
@@ -298,7 +343,7 @@ const OrmLeksjon = (function () {
 
         const ferdig = document.createElement('button');
         ferdig.type = 'button';
-        ferdig.className = 'btn orm-btn-ferdig';
+        ferdig.className = 'vp-button btn orm-btn-ferdig';
         const alt = OrmFramgang.erFerdig(modul.id, leksjon.id);
         ferdig.textContent = alt ? 'Merkt som ferdig ✓' : 'Merk som ferdig';
         ferdig.disabled = alt;
@@ -317,7 +362,7 @@ const OrmLeksjon = (function () {
 
     function navlenkje(mot, tekst) {
         const a = document.createElement('a');
-        a.className = 'btn orm-btn-liten';
+        a.className = 'vp-button btn orm-btn-liten';
         a.href = `kode.html?modul=${encodeURIComponent(modul.id)}&leksjon=${encodeURIComponent(mot.id)}`;
         a.textContent = tekst;
         return a;

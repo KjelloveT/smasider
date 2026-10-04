@@ -79,7 +79,7 @@ const OrmOppgaver = (function () {
 
         const opne = document.createElement('button');
         opne.type = 'button';
-        opne.className = 'btn orm-btn-liten';
+        opne.className = 'vp-button btn orm-btn-liten';
         opne.textContent = oppgave.type === 'rett'
             ? 'Hent den øydelagde koden'
             : 'Hent startkoden';
@@ -88,7 +88,7 @@ const OrmOppgaver = (function () {
 
         const sjekk = document.createElement('button');
         sjekk.type = 'button';
-        sjekk.className = 'btn orm-btn-sjekk';
+        sjekk.className = 'vp-button btn orm-btn-sjekk';
         sjekk.textContent = 'Sjekk svaret';
         knappar.appendChild(sjekk);
 
@@ -208,7 +208,7 @@ const OrmOppgaver = (function () {
         knappar.className = 'orm-oppgaveknappar';
         const svarKnapp = document.createElement('button');
         svarKnapp.type = 'button';
-        svarKnapp.className = 'btn orm-btn-sjekk';
+        svarKnapp.className = 'vp-button btn orm-btn-sjekk';
         svarKnapp.textContent = 'Svar';
         knappar.appendChild(svarKnapp);
         kropp.appendChild(knappar);
@@ -248,7 +248,7 @@ const OrmOppgaver = (function () {
             // difor fyrst tilgjengeleg etter at eleven har svart.
             const proev = document.createElement('button');
             proev.type = 'button';
-            proev.className = 'btn orm-btn-liten';
+            proev.className = 'vp-button btn orm-btn-liten';
             proev.textContent = 'Køyr koden og sjå sjølv';
             proev.addEventListener('click', () => vert.opneKode(oppgave.kode, oppgave.id));
             svarboks.appendChild(proev);
@@ -274,7 +274,7 @@ const OrmOppgaver = (function () {
 
         const knapp = document.createElement('button');
         knapp.type = 'button';
-        knapp.className = 'btn orm-btn-liten orm-btn-hint';
+            knapp.className = 'vp-button btn orm-btn-liten orm-btn-hint';
         knapp.textContent = hint.length ? 'Vis eit hint' : 'Vis løysingsforslag';
         boks.appendChild(knapp);
 

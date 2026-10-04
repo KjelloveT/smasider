@@ -441,8 +441,13 @@ body[data-forhandsvis="1"] .orm-arbeid[data-modus="leksjon"] .orm-leksjon {
     grid-row: 1 / span 2;
     position: sticky;
     top: 4px;
-    /* Må ha ei høgdegrense, elles er panelet ikkje ein rulleboks i det heile
-     * og «følg det eg redigerer» har ingenting å flytte på. */
+    /* Rulleflata inni panelet må ha ei høgdegrense, elles har «følg det eg
+     * redigerer» ingenting å flytte på. */
+    max-height: calc(100vh - 16px);
+    overflow: visible;
+}
+
+body[data-forhandsvis="1"] .orm-arbeid[data-modus="leksjon"] .orm-leksjon-innhald {
     max-height: calc(100vh - 16px);
     overflow-y: auto;
 }
