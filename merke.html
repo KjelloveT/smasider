@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>Bragdane dine — Vyrdepil</title>
+  <link rel="icon" href="/_resources/vyrde-ikon.png" sizes="384x384">
+  <link rel="stylesheet" href="css/vyrdepil-design.css?v=1.6">
+  <script src="js/vyrdepil-icons.js" defer></script>
+  <script src="js/vyrdepil-storage.js?v=2" defer></script>
+  <script src="js/vyrdepil-util.js?v=1.2" defer></script>
+  <script src="js/vyrdepil-design.js?v=1.1" defer></script>
+  <script src="js/vyrdepil-app-shell.js?v=8" defer></script>
+  <script src="js/vyrdepil-menu.js?v=3" defer></script>
+  <script src="js/vyrdepil-footer.js?v=2" defer></script>
+  <script src="js/vyrdepil-bragd.js?v=2" defer></script>
+  <script src="js/bragd-page.js?v=1" defer></script>
+</head>
+<body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-site-footer>
+  <main id="main" class="vp-shell vp-site-main vp-stack vp-bragd-main">
+    <section class="vp-panel vp-panel--soft" aria-labelledby="pageTitle">
+      <div class="vp-content">
+        <p class="vp-small">Samlinga di på Vyrdepil</p>
+        <h1 class="vp-title" id="pageTitle">Bragdane dine</h1>
+        <p class="vp-prose">Her finn du bragdane du har oppnådd i Heimsank, Vidfaren, Tidvis, Bolkestokk og Ormritaren, og framgangen din i kvart spel.</p>
+        <p id="bragdCount" class="vp-small vp-bragd-count" role="status" aria-live="polite">Lastar bragdane dine …</p>
+      </div>
+    </section>
+
+    <section class="vp-panel vp-panel--plain" aria-labelledby="earnedTitle">
+      <div class="vp-content">
+        <h2 class="vp-heading" id="earnedTitle">Bragdane du har oppnådd</h2>
+        <p id="bragdEmpty" class="vp-prose" hidden>Du har ikkje oppnådd nokon bragder enno. Opne eit av spela og prøv deg fram!</p>
+        <div id="bragdGrid" aria-busy="true"></div>
+      </div>
+    </section>
+
+    <section class="vp-panel vp-panel--plain" aria-labelledby="progressTitle">
+      <div class="vp-content">
+        <h2 class="vp-heading" id="progressTitle">Framgangen din</h2>
+        <p class="vp-prose">Framgangen blir vist for kvart spel for seg. Ho blir lagra lokalt i denne nettlesaren.</p>
+        <div id="bragdProgress" class="vp-bragd-progress-grid" aria-busy="true"></div>
+      </div>
+    </section>
+
+    <aside class="vp-notice vp-notice--success" aria-label="Personvern">
+      <span class="vp-notice-icon" data-icon="shield" aria-hidden="true"></span>
+      <div><strong>Berre på denne eininga.</strong> Bragdene og framgangen blir ikkje sende nokon stad. På ei delt skulemaskin deler brukarane same samling. <a href="personvern.html">Les om lagra data</a>.</div>
+    </aside>
+  </main>
+</body>
+</html>

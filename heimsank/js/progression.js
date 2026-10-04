@@ -185,6 +185,13 @@ const Progression = (function () {
   function save() {
     try {
       VyrdepilStorage.setGameState(GAME_KEY, state);
+      VyrdepilStorage.updateBragdProgress(GAME_KEY, {
+        points: state.points,
+        earnedPoints: state.earnedTotal,
+        cardsCollected: state.stats.totalCardsEarned,
+        categoriesUnlocked: state.unlocked.length,
+        correctAnswers: state.stats.totalCorrect
+      });
     } catch (e) {
       console.error('Progression save failed:', e);
     }

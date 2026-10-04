@@ -131,42 +131,16 @@ const ProgressionUI = (function () {
 
   // ---- Merke ----
   function announceBadges(earned) {
-    (earned || []).forEach(b => toast(`Nytt merke: ${b.name}`, b.ico, 'badge'));
+    VyrdepilBragd.recordBadges('heimsank', earned || []);
+    (earned || []).forEach(b => toast(`Ny bragd: ${b.name}`, b.ico, 'badge'));
   }
 
   function renderBadgeGallery() {
     const grid = document.getElementById('badgeGrid');
     if (!grid) return;
-    grid.innerHTML = '';
-    Progression.BADGES.forEach(b => {
-      const earned = Progression.hasBadge(b.id);
-      const cell = document.createElement('div');
-      cell.className = `bdg ${b.color}` + (earned ? '' : ' is-locked');
-
-      const medal = document.createElement('div');
-      medal.className = 'bdg-medal';
-      medal.innerHTML = ICON(b.ico, 30);
-      cell.appendChild(medal);
-
-      const name = document.createElement('div');
-      name.className = 'bdg-name';
-      name.textContent = b.name;
-      cell.appendChild(name);
-
-      const hint = document.createElement('div');
-      hint.className = 'bdg-hint';
-      hint.textContent = b.hint;
-      cell.appendChild(hint);
-
-      if (!earned) {
-        const lock = document.createElement('div');
-        lock.className = 'bdg-lock';
-        lock.append(HeimsankUI.icon('lock', 12), Vy.el('span', '', 'Ikkje oppnådd'));
-        cell.appendChild(lock);
-      }
-      if (earned) cell.appendChild(Vy.el('div', 'bdg-lock', '✓ Oppnådd'));
-      grid.appendChild(cell);
-    });
+    grid.setAttribute('aria-busy', 'true');
+    const earned = Progression.BADGES.filter(b => Progression.hasBadge(b.id)).map(b => b.id);
+    VyrdepilBragd.renderGameBadges(grid, 'heimsank', earned).catch(() => grid.removeAttribute('aria-busy'));
   }
 
   function openBadgeGallery() {

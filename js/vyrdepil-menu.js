@@ -11,6 +11,15 @@
   const count = document.getElementById('menuCount');
   if (!search || !filters || !content || !count) return;
 
+  const moreLinks = document.createElement('nav');
+  moreLinks.className = 'vp-menu-more vp-actions';
+  moreLinks.setAttribute('aria-label', 'Meir om Vyrdepil');
+  const bragdLink = document.createElement('a');
+  bragdLink.href = new URL('merke.html', project).href;
+  bragdLink.textContent = 'Sjå alle bragdane dine';
+  moreLinks.append(bragdLink);
+  content.closest('dialog')?.append(moreLinks);
+
   const entries = [];
   const groups = [];
   let selectedCategory = 'all';

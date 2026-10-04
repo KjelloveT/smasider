@@ -795,3 +795,50 @@ body.vp-migrated-page[data-vp-app="rettslause_raud"] #start-screen .settings-gro
 body.vp-migrated-page:not([data-vp-preserve])[data-vp-layout="canvas"] .vp-fs-top-right {
   top: calc(92px + env(safe-area-inset-top)) !important;
 }
+
+/* Felles Bragd-vising */
+.vp-bragd-main { padding-block: 24px; }
+.vp-notice > :not(.vp-notice-icon) { min-width: 0; padding: 14px 16px; align-self: center; }
+.vp-bragd-count { margin-top: 16px; }
+.vp-bragd-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,180px),1fr)); gap: 12px; }
+.vp-bragd-family { margin-block: 24px; }
+.vp-bragd-family > h2 { margin-bottom: 12px; }
+.vp-bragd-card {
+  --bragd-family: var(--vp-honey);
+  display: flex; min-width: 0; min-height: 244px; flex-direction: column; align-items: center; gap: 10px;
+  padding: 16px 12px 12px; border: 3px solid var(--vp-frame); border-radius: 12px;
+  background: var(--vp-paper); text-align: center; box-shadow: 0 3px 0 var(--vp-shadow);
+}
+.vp-bragd-card[data-family="utforsking"] { --bragd-family: var(--vp-sky); }
+.vp-bragd-card[data-family="uthald"] { --bragd-family: var(--vp-moss); }
+.vp-bragd-card[data-family="meistring"] { --bragd-family: var(--vp-coral); }
+.vp-bragd-card[data-family="samling"] { --bragd-family: var(--vp-heather); }
+.vp-bragd-card[data-family="saerbragd"] { --bragd-family: var(--vp-stone); }
+.vp-bragd-emblem { display: grid; place-items: center; width: 72px; height: 72px; border: 3px solid var(--vp-frame); border-radius: 50%; background: var(--bragd-family); }
+.vp-bragd-emblem svg { width: 30px; height: 30px; stroke: #000; }
+.vp-bragd-name { margin: 2px 0 0; color: #000; font-size: 1.05rem; line-height: 1.2; overflow-wrap: anywhere; }
+.vp-bragd-hint { flex: 1 0 auto; margin: 0; color: #000; font-size: .9rem; line-height: 1.35; }
+.vp-bragd-source { display: flex; min-height: 32px; align-items: center; justify-content: center; gap: 7px; color: #000; font-size: .82rem; font-weight: 700; }
+.vp-bragd-source img { width: 28px; height: 28px; object-fit: contain; }
+.vp-bragd-status { padding: 2px 8px; border: 1px solid var(--vp-frame); border-radius: 999px; background: var(--bragd-family); color: #000; font-size: .78rem; font-weight: 750; }
+.vp-bragd-card--locked .vp-bragd-emblem { filter: grayscale(1); opacity: .65; }
+.vp-bragd-card--locked .vp-bragd-status { background: var(--vp-paper); border-style: dashed; }
+.vp-bragd-progress-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,250px),1fr)); gap: 16px; }
+.vp-bragd-progress-card { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.vp-bragd-progress-head { display: flex; width: 100%; align-items: center; gap: 12px; }
+.vp-bragd-progress-head img { width: 48px; height: 48px; flex: 0 0 auto; object-fit: contain; }
+.vp-bragd-progress-head h3 { margin: 0; }
+.vp-bragd-progress-list { display: grid; width: 100%; gap: 4px; margin: 0; }
+.vp-bragd-progress-list > div { display: flex; justify-content: space-between; gap: 12px; padding-block: 5px; border-bottom: 1px solid #89958f; }
+.vp-bragd-progress-list dt { font-weight: 650; }
+.vp-bragd-progress-list dd { margin: 0; text-align: right; font-weight: 800; }
+.vp-bragd-play-link { margin-top: auto; text-decoration: none; }
+.vp-bragd-library { display: grid; width: 100%; gap: 8px; }
+.vp-bragd-library-meter { height: 18px; overflow: hidden; border: 2px solid var(--vp-frame); border-radius: 999px; background: var(--vp-stone); }
+.vp-bragd-library-meter > span { display: block; height: 100%; background: var(--vp-moss); transition: width .25s ease; }
+.vp-bragd-library-text { margin: 0; font-weight: 750; }
+.vp-bragd-app-panel { display: grid; gap: 12px; }
+.vp-bragd-app-panel > :last-child { margin-bottom: 0; }
+.vp-bragd-app-panel summary { cursor: pointer; font-weight: 800; }
+.vp-bragd-app-panel .vp-bragd-grid { margin-top: 12px; }
+@media (max-width: 600px) { .vp-bragd-card { min-height: 232px; padding: 14px 10px 10px; } .vp-bragd-emblem { width: 66px; height: 66px; } }

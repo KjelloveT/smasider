@@ -9,10 +9,11 @@
 <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="css/landing.css?v=33">
 <script src="../js/vyrdepil-icons.js" defer></script>
-<script src="../js/vyrdepil-storage.js" defer></script>
-<script src="js/framgang.js?v=28" defer></script>
-<script src="js/landing.js?v=28" defer></script>
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+<script src="../js/vyrdepil-storage.js?v=2" defer></script>
+<script src="../js/vyrdepil-bragd.js?v=2" defer></script>
+<script src="js/framgang.js?v=29" defer></script>
+<script src="js/landing.js?v=29" defer></script>
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.6">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
 <body data-vp-app="bolkestokk" data-vp-layout="medium" data-vp-site-footer>
@@ -56,6 +57,17 @@
 
   <p class="bs-landing-lasting" id="lasteMelding">Hentar modulane …</p>
 
+  <section class="box1 vp-bragd-app-panel" aria-labelledby="bolkBragdTittel">
+    <h2 class="heading4 no-mt" id="bolkBragdTittel">Bragder og biblioteksframgang</h2>
+    <p id="bolkBibliotekstal" aria-live="polite">Lastar biblioteket …</p>
+    <div class="vp-bragd-library-meter" id="bolkBiblioteksspor" role="progressbar" aria-label="Framgang i Bolkestokk-biblioteket" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="bolkBiblioteksfyll" style="width:0%"></span></div>
+    <details>
+      <summary>Sjå bragdene i Bolkestokk</summary>
+      <div class="vp-bragd-grid" id="bolkBragder" aria-busy="true"></div>
+    </details>
+    <p><a href="../merke.html">Sjå alle bragdane dine på Vyrdepil</a></p>
+  </section>
+
   <section class="box1 bs-larartekst">
     <h2 class="heading4 no-mt">Til deg som er lærar</h2>
     <p>
@@ -95,6 +107,6 @@
 <script src="../js/vyrdepil-util.js?v=1.2"></script>
 <script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=6"></script>
-<script src="../js/vyrdepil-menu.js"></script>
+<script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>
 </html>

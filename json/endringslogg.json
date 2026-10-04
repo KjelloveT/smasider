@@ -2,6 +2,28 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.77",
+      "dato": "2026-10-04",
+      "samandrag": "Felles Bragd-samling, automatisk overføring av eldre framgang og prosentvising for Bolkestokk og Ormritaren.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Bragdane dine",
+          "tekst": "Sjå bragder frå Heimsank, Vidfaren, Tidvis, Bolkestokk og Ormritaren samla. Bibliotekframgangen i Bolkestokk og Ormritaren blir vist i prosent."
+        },
+        {
+          "t": "endra",
+          "kva": "Framgang og personvern",
+          "tekst": "Eldre bragder og leksjonsframgang blir kopierte til ei felles lokal samling ved neste relevante innlasting. Elevnamn og oppteningsdatoar blir ikkje lagra i samlinga. Ljodstigen held fram med eiga progresjonslagring, men brukar ordet Bragd."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Bragd-sida",
+          "tekst": "Sida har luft mellom boksene, betre innvendig avstand i varselboksen og den felles sidefoten."
+        }
+      ]
+    },
+    {
       "versjon": "1.76",
       "dato": "2026-10-04",
       "samandrag": "Ormritaren har fått ei ryddigare arbeidsflate, ny slange-logo og leksjonar i trekkspel.",

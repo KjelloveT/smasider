@@ -11,7 +11,7 @@
   const BADGES = [
     { id: 'fyrste',   name: 'Fyrste rett',     ico: 'star',   color: 'b-pink',
       hint: 'Svar rett éin gong' },
-    { id: 'streak10', name: 'Streak ×10',      ico: 'flame',  color: 'b-yellow',
+    { id: 'streak10', name: 'Ti på rad',       ico: 'flame',  color: 'b-yellow',
       hint: '10 rette på rad' },
     { id: 'halvtime', name: 'Halvtimemeister', ico: 'clock',  color: 'b-teal',
       hint: 'Feilfri runde på «Heile & halve»' },

@@ -44,6 +44,7 @@ const OrmLeksjon = (function () {
 
     async function last(modulId, leksjonId) {
         const katalog = await (await fetch('moduler/index.json')).json();
+        await OrmFramgang.setCatalogue(katalog.modular || []);
         const oppf = (katalog.modular || []).find(m => m.id === modulId);
         if (!oppf) throw new Error(`Fann ingen modul som heiter ${modulId}`);
         if (oppf.klar === false) throw new Error(`${oppf.tittel} er ikkje skriven enno.`);
