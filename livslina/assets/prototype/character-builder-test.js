@@ -7,7 +7,7 @@
   const groups = [...document.querySelectorAll(".choice-group")];
 
   function render() {
-    window.LivslinaCharacterArt.draw(context, selection);
+    if (!window.LivslinaCharacterArt.draw(context, selection)) return;
     const names = families.map((family) => window.LivslinaCharacterArt.labels[family][selection[family]]);
     summary.textContent = `Hud: ${names[0]} · andlet: ${names[1]} · hår: ${names[2]} · klede: ${names[3]}`;
     canvas.setAttribute("aria-label", `Karakter med ${names[0]} hud, ${names[1].toLowerCase()}, ${names[2].toLowerCase()} og ${names[3].toLowerCase()}`);
@@ -41,5 +41,9 @@
     render();
   });
 
+  window.addEventListener("livslina:character-art-ready", render, { once: true });
+  window.addEventListener("livslina:character-art-error", () => {
+    summary.textContent = "Figurressursane kunne ikkje lastast.";
+  }, { once: true });
   render();
 })();

@@ -9,7 +9,7 @@
   "updated": "2026-10-04",
   "status": "local-prototype",
   "artStyle": "detailed-8-bit-pixel-art",
-  "detailRevision": 3,
+  "detailRevision": 4,
   "logicalCanvas": {
     "width": 192,
     "height": 256,
@@ -21,42 +21,245 @@
     "width": 96,
     "height": 128,
     "fineDetailStep": 0.5,
-    "note": "Same pose and proportions; half-step details render as crisp single pixels on the doubled canvas."
+    "note": "The doubled 192 × 256 canvas composites detailed atlas sprites with shared centre and ground line."
   },
-  "layerOrder": ["skin-body", "clothes-and-garment-detail", "skin-hands", "face-and-face-detail", "hair-and-hair-detail"],
+  "layerOrder": [
+    "skin-body",
+    "clothes",
+    "hair",
+    "face-details"
+  ],
   "families": {
     "skin": [
-      { "id": "skin-01", "label": "Ljos varm" },
-      { "id": "skin-02", "label": "Ljos nøytral" },
-      { "id": "skin-03", "label": "Mellomvarm" },
-      { "id": "skin-04", "label": "Djup brun" },
-      { "id": "skin-05", "label": "Mørk brun" }
+      {
+        "id": "skin-01",
+        "label": "Ljos varm"
+      },
+      {
+        "id": "skin-02",
+        "label": "Ljos nøytral"
+      },
+      {
+        "id": "skin-03",
+        "label": "Mellomvarm"
+      },
+      {
+        "id": "skin-04",
+        "label": "Djup brun"
+      },
+      {
+        "id": "skin-05",
+        "label": "Mørk brun"
+      }
     ],
     "face": [
-      { "id": "face-01", "label": "Breitt smil" },
-      { "id": "face-02", "label": "Overraska" },
-      { "id": "face-03", "label": "Briller" },
-      { "id": "face-04", "label": "Blink og fregner" },
-      { "id": "face-05", "label": "Sjølvsikker" }
+      {
+        "id": "face-01",
+        "label": "Breitt smil"
+      },
+      {
+        "id": "face-02",
+        "label": "Overraska"
+      },
+      {
+        "id": "face-03",
+        "label": "Briller"
+      },
+      {
+        "id": "face-04",
+        "label": "Blink og fregner"
+      },
+      {
+        "id": "face-05",
+        "label": "Sjølvsikker"
+      }
     ],
     "hair": [
-      { "id": "hair-01", "label": "Kort krøllhår" },
-      { "id": "hair-02", "label": "Langt bølgjehår" },
-      { "id": "hair-03", "label": "Fletter" },
-      { "id": "hair-04", "label": "Rett lugg" },
-      { "id": "hair-05", "label": "Høg hestehale" }
+      {
+        "id": "hair-01",
+        "label": "Kort krøllhår"
+      },
+      {
+        "id": "hair-02",
+        "label": "Langt bølgjehår"
+      },
+      {
+        "id": "hair-03",
+        "label": "Fletter"
+      },
+      {
+        "id": "hair-04",
+        "label": "Rett lugg"
+      },
+      {
+        "id": "hair-05",
+        "label": "Høg hestehale"
+      }
     ],
     "clothes": [
-      { "id": "clothes-01", "label": "Blå hettegenser" },
-      { "id": "clothes-02", "label": "Rustraud jakke" },
-      { "id": "clothes-03", "label": "Lilla strikkegenser" },
-      { "id": "clothes-04", "label": "Grøn overall" },
-      { "id": "clothes-05", "label": "Turkis skjorte" }
+      {
+        "id": "clothes-01",
+        "label": "Blå hettegenser"
+      },
+      {
+        "id": "clothes-02",
+        "label": "Rustraud jakke"
+      },
+      {
+        "id": "clothes-03",
+        "label": "Lilla strikkegenser"
+      },
+      {
+        "id": "clothes-04",
+        "label": "Grøn overall"
+      },
+      {
+        "id": "clothes-05",
+        "label": "Turkis skjorte"
+      }
     ]
   },
   "choiceCountPerFamily": 5,
   "possibleCombinations": 625,
   "storesUserChoices": false,
   "networkRequests": false,
-  "gameEconomyConnected": false
+  "gameEconomyConnected": false,
+  "spriteAtlas": {
+    "file": "characters/character-builder-atlas-v4.png",
+    "width": 1215,
+    "height": 1295,
+    "sizeBytes": 208946,
+    "paletteColors": 128,
+    "sourceRects": {
+      "skin": [
+        [
+          46,
+          30,
+          169,
+          368
+        ],
+        [
+          283,
+          30,
+          171,
+          368
+        ],
+        [
+          522,
+          30,
+          171,
+          368
+        ],
+        [
+          760,
+          30,
+          170,
+          368
+        ],
+        [
+          999,
+          30,
+          169,
+          368
+        ]
+      ],
+      "face": [
+        [
+          36,
+          466,
+          195,
+          135
+        ],
+        [
+          276,
+          457,
+          187,
+          152
+        ],
+        [
+          506,
+          466,
+          203,
+          130
+        ],
+        [
+          752,
+          468,
+          187,
+          127
+        ],
+        [
+          984,
+          465,
+          195,
+          133
+        ]
+      ],
+      "hair": [
+        [
+          17,
+          644,
+          226,
+          266
+        ],
+        [
+          243,
+          632,
+          243,
+          278
+        ],
+        [
+          486,
+          648,
+          215,
+          262
+        ],
+        [
+          733,
+          643,
+          221,
+          267
+        ],
+        [
+          980,
+          625,
+          222,
+          281
+        ]
+      ],
+      "clothes": [
+        [
+          19,
+          900,
+          224,
+          361
+        ],
+        [
+          243,
+          900,
+          243,
+          361
+        ],
+        [
+          486,
+          900,
+          234,
+          361
+        ],
+        [
+          742,
+          900,
+          206,
+          381
+        ],
+        [
+          984,
+          900,
+          206,
+          395
+        ]
+      ]
+    },
+    "fitPolicy": "Uniform scale per sprite; nearest-neighbour canvas rendering; no per-axis stretching."
+  }
 }
