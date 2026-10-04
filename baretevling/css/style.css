@@ -12,11 +12,17 @@
 
 /* Start screen: let the hero stand on its own and give each choice a card. */
 body.vp-migrated-page[data-vp-app="baretevling"] .vp-migrated-intro {
-    margin-block: 16px 40px;
+    width: min(100%, 1000px);
+    grid-template-columns: minmax(0, 1fr);
+    margin-block: 16px 28px;
 }
 
 body.vp-migrated-page[data-vp-app="baretevling"] .vp-migrated-intro-board {
     padding: clamp(14px, 2vw, 26px);
+}
+
+body.vp-migrated-page[data-vp-app="baretevling"] .vp-migrated-intro--no-mascot {
+    grid-template-columns: minmax(0, 1fr);
 }
 
 body.vp-migrated-page[data-vp-app="baretevling"] .vp-migrated-hero--has-logo {
@@ -587,8 +593,60 @@ body.vp-migrated-page[data-vp-app="baretevling"] main#main.vp-migrated-main {
 .cell.preview-valid { background: var(--bt-hit); }
 .cell.preview-invalid { background: var(--bt-miss); }
 
-/* Placement Controls */
-.placement-controls { margin-top: 20px; }
+/* Placement board and its always-visible menu */
+#placementScreen { align-items: flex-start; }
+
+#placementScreen > .placement-card {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.placement-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 320px);
+    grid-template-areas: "board controls";
+    align-items: start;
+    gap: 20px;
+    width: 100%;
+}
+
+.placement-board-area { grid-area: board; min-width: 0; }
+
+#placementBoardContainer {
+    width: 100%;
+    max-width: min(100%, 66vh);
+    margin: 0 auto;
+}
+
+.placement-controls {
+    grid-area: controls;
+    position: sticky;
+    top: 16px;
+    min-width: 0;
+    margin: 0;
+}
+
+.placement-sidebar-title {
+    margin: 0 0 16px;
+    font-size: 1.15rem;
+}
+
+.placement-controls .btn {
+    display: block;
+    width: 100%;
+    margin: 0 0 10px;
+}
+
+.placement-controls .btn:last-child { margin-bottom: 0; }
+
+.placement-controls .input-group { margin-bottom: 16px; }
+
+.placement-controls .direction-group,
+.placement-controls .current-ship { margin-bottom: 16px; }
+
+.placement-controls .dir-btn { flex: 1 1 42%; justify-content: center; }
 
 .input-group { margin-bottom: 16px; }
 
@@ -784,6 +842,20 @@ body.vp-migrated-page[data-vp-app="baretevling"] main#main.vp-migrated-main {
     .bt-howto-step {
         padding: 12px;
     }
+
+    #placementScreen { padding: 10px; }
+
+    #placementScreen > .placement-card { padding: 16px; }
+
+    .placement-layout {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas: "controls" "board";
+        gap: 16px;
+    }
+
+    .placement-controls { position: static; }
+
+    #placementBoardContainer { max-width: min(100%, 66vh); }
 }
 
 @media (max-width: 520px) {

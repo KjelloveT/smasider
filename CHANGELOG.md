@@ -3,6 +3,12 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.80] — 2026-10-04
+
+### Endra
+- **BåreTevling viser plasseringsvala ved sida av brettet.** Menyen held seg synleg medan du plasserer figurane, og kjem over brettet på små skjermar.
+- **BåreTevling-introen er breiare og utan Vyrde.** Han står no på linje med vala under.
+
 ## [1.79] — 2026-10-04
 
 ### Lagt til

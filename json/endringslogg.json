@@ -2,6 +2,23 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.80",
+      "dato": "2026-10-04",
+      "samandrag": "Plasseringsvala i BåreTevling står ved sida av brettet, og introen er på linje med resten av vala.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "BåreTevling",
+          "tekst": "Plasseringsmenyen står ved sida av brettet og held seg synleg medan du plasserer figurane. På små skjermar kjem menyen over brettet."
+        },
+        {
+          "t": "endra",
+          "kva": "BåreTevling",
+          "tekst": "Introen er breiare, står på linje med vala under og viser ikkje lenger Vyrde."
+        }
+      ]
+    },
+    {
       "versjon": "1.79",
       "dato": "2026-10-04",
       "samandrag": "BåreTevling har fått fire figurtypar, ei meir levande startside og ein illustrert spelguide.",
