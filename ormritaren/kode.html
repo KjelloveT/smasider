@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/leksjon.css">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+<link rel="stylesheet" href="css/editor-design.css">
 
 <script src="../js/vyrdepil-storage.js" defer></script>
 <script src="../_libs/codemirror/codemirror.js" defer></script>
@@ -37,7 +38,7 @@
 <script src="js/app.js" defer></script>
   <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body class="vp-page" data-vp-app="ormritaren" data-vp-layout="expanded" data-vp-preserve data-vp-design data-vp-site-footer>
+<body class="vp-page" data-vp-app="ormritaren" data-vp-layout="expanded" data-vp-design data-vp-site-footer>
 
 <div class="page-wrapper">
 <main class="main-content main-wide">
@@ -58,14 +59,14 @@
 
   <!-- Verktøyrad: filnamn, filer og lagring -->
   <div class="box1 orm-toppverktoy">
-    <input type="text" id="filnamn" class="orm-filnamnfelt" aria-label="Filnamn" spellcheck="false">
+    <input type="text" id="filnamn" class="orm-filnamnfelt" aria-label="Filnamn" spellcheck="false" maxlength="50" size="50" autocomplete="off">
 
-    <button class="btn orm-btn-liten" id="lagreKnapp" type="button">
+    <button class="vp-button btn orm-btn-liten" id="lagreKnapp" type="button">
       <span data-icon="save"></span>Lagre
     </button>
 
     <div class="orm-filmeny">
-      <button class="btn orm-btn-liten" id="filerKnapp" type="button"
+      <button class="vp-button btn orm-btn-liten" id="filerKnapp" type="button"
               aria-expanded="false" aria-controls="filpanel">
         <span data-icon="folder"></span>Filene dine <span id="filTal" class="orm-filtal"></span>
       </button>
@@ -82,21 +83,21 @@
       </div>
     </div>
 
-    <button class="btn orm-btn-liten" id="nyKnapp" type="button">
+    <button class="vp-button btn orm-btn-liten" id="nyKnapp" type="button">
       <span data-icon="plus"></span>Ny
     </button>
-    <button class="btn orm-btn-liten" id="lastNedKnapp" type="button">
+    <button class="vp-button btn orm-btn-liten" id="lastNedKnapp" type="button">
       <span data-icon="download"></span>Last ned
     </button>
-    <label class="btn orm-btn-liten orm-btn-fil">
+    <label class="vp-button btn orm-btn-liten orm-btn-fil">
       <span data-icon="upload"></span>Hent inn
       <input type="file" id="lastOppFelt" accept=".py,text/x-python,text/plain" hidden>
     </label>
 
     <span class="orm-verktoy-spacer"></span>
 
-    <button class="btn orm-btn-liten orm-btn-ikon" id="skriftMindre" type="button" aria-label="Mindre skrift">A−</button>
-    <button class="btn orm-btn-liten orm-btn-ikon" id="skriftMeir" type="button" aria-label="Større skrift">A+</button>
+    <button class="vp-button btn orm-btn-liten orm-btn-ikon" id="skriftMindre" type="button" aria-label="Mindre skrift">A−</button>
+    <button class="vp-button btn orm-btn-liten orm-btn-ikon" id="skriftMeir" type="button" aria-label="Større skrift">A+</button>
   </div>
 
   <p class="orm-varsel orm-varsel-aatvaring" id="lagringsVarsel" hidden></p>
@@ -110,50 +111,60 @@
 
       <!-- Fanar (berre mobil) -->
       <div class="orm-fanerad" id="fanerad" role="tablist" aria-label="Vel visning">
-        <button class="box-tab" data-fane="leksjon" role="tab" aria-selected="false" type="button" id="leksjonFane" hidden>Leksjon</button>
-        <button class="box-tab active" data-fane="kode" role="tab" aria-selected="true" type="button">Kode</button>
-        <button class="box-tab" data-fane="ut" role="tab" aria-selected="false" type="button">Utskrift</button>
-        <button class="box-tab" data-fane="grafikk" role="tab" aria-selected="false" type="button" id="grafikkFane" hidden>Grafikk</button>
+        <button class="vp-button box-tab" data-fane="leksjon" role="tab" aria-selected="false" type="button" id="leksjonFane" hidden>Leksjon</button>
+        <button class="vp-button box-tab active" data-fane="kode" role="tab" aria-selected="true" type="button">Kode</button>
+        <button class="vp-button box-tab" data-fane="ut" role="tab" aria-selected="false" type="button">Utskrift</button>
+        <button class="vp-button box-tab" data-fane="grafikk" role="tab" aria-selected="false" type="button" id="grafikkFane" hidden>Grafikk</button>
       </div>
 
       <!-- Kode og grafikk i den breie kolonna, utskrift og bibliotek i den smale.
            I leksjonsmodus kjem leksjonspanelet til venstre for begge. -->
       <div class="orm-rad">
 
-        <aside class="box1 orm-leksjon" id="panelLeksjon" hidden></aside>
+        <aside class="orm-leksjon" id="panelLeksjon" hidden>
+          <div class="orm-leksjon-innhald" id="panelLeksjonInnhald" role="region" tabindex="0" aria-label="Leksjonsinnhald"></div>
+          <button class="vp-button vp-button--tool vp-button--icon orm-leksjon-rull-ned" id="leksjonRullNed" type="button" aria-label="Rull ned for meir leksjonsinnhald" title="Rull ned for meir leksjonsinnhald" hidden>
+            <span data-icon="chevronDown" aria-hidden="true"></span>
+          </button>
+        </aside>
 
         <div class="orm-kolonne orm-kolonne-brei">
 
           <section class="box4 orm-panel" id="panelKode" aria-labelledby="kodeTittel">
             <div class="box-header orm-panel-topp">
-              <span id="kodeTittel">Kode</span>
+              <h2 id="kodeTittel">Kode</h2>
+              <div class="orm-koyrerad" role="group" aria-label="Køyr programmet">
+                <button class="vp-button btn orm-btn-koyr" id="koyrKnapp" type="button">
+                  <span data-icon="play"></span>Køyr
+                </button>
+                <button class="vp-button btn orm-btn-stopp" id="stoppKnapp" type="button" disabled>
+                  <span data-icon="stop"></span>Stopp
+                </button>
+                <button class="vp-button btn orm-btn-liten orm-btn-steg" id="stegKnapp" type="button">
+                  <span data-icon="footprints"></span>Steg for steg
+                </button>
+              </div>
             </div>
             <div class="box-body orm-panel-kropp">
               <textarea id="kodefelt" aria-label="Kodefelt"></textarea>
               <div class="orm-symbolrad" id="symbolrad" role="toolbar" aria-label="Teikn som er vanskelege å nå på nettbrett"></div>
+              <div class="orm-editor-statusbar">
+                <div class="orm-editor-statusgroup">
+                  <span class="orm-status" id="status" role="status" aria-live="polite">Startar …</span>
+                  <span class="orm-pythonversjon" id="pythonVersjon"></span>
+                </div>
+                <span class="orm-snarveg">Ctrl + Enter</span>
+              </div>
             </div>
           </section>
 
-          <div class="orm-koyrerad">
-            <button class="btn orm-btn-koyr" id="koyrKnapp" type="button">
-              <span data-icon="play"></span>Køyr
-            </button>
-            <button class="btn orm-btn-stopp" id="stoppKnapp" type="button" disabled>
-              <span data-icon="stop"></span>Stopp
-            </button>
-            <button class="btn orm-btn-liten orm-btn-steg" id="stegKnapp" type="button">
-              <span data-icon="footprints"></span>Steg for steg
-            </button>
-            <span class="orm-status" id="status" role="status" aria-live="polite">Startar …</span>
-            <span class="orm-snarveg">Ctrl + Enter</span>
-          </div>
 
           <!-- Stegkontrollar. Kjem fram når stegvis køyring er i gang. -->
           <div class="orm-stegrad" id="stegrad" hidden>
-            <button class="btn orm-btn-liten orm-btn-neste" id="nesteLinjeKnapp" type="button">
+            <button class="vp-button btn orm-btn-liten orm-btn-neste" id="nesteLinjeKnapp" type="button">
               <span data-icon="chevR"></span>Neste linje
             </button>
-            <button class="btn orm-btn-liten" id="spelAvKnapp" type="button">
+            <button class="vp-button btn orm-btn-liten" id="spelAvKnapp" type="button">
               <span data-icon="play"></span>Spel av
             </button>
             <label class="orm-fartsval">
@@ -180,7 +191,7 @@
           <section class="box4 orm-panel" id="panelGrafikk" aria-labelledby="grafikkTittel" hidden>
             <div class="box-header orm-panel-topp">
               <span id="grafikkTittel">Grafikk</span>
-              <button class="btn orm-btn-liten" id="tomGrafikkKnapp" type="button">
+              <button class="vp-button btn orm-btn-liten" id="tomGrafikkKnapp" type="button">
                 <span data-icon="eraser"></span>Tøm
               </button>
             </div>
@@ -197,7 +208,7 @@
           <section class="box4 orm-panel" id="panelUt" aria-labelledby="utTittel">
             <div class="box-header orm-panel-topp">
               <span id="utTittel">Utskrift</span>
-              <button class="btn orm-btn-liten" id="tomKnapp" type="button">
+              <button class="vp-button btn orm-btn-liten" id="tomKnapp" type="button">
                 <span data-icon="eraser"></span>Tøm
               </button>
             </div>
@@ -237,13 +248,6 @@
 
     </div>
   </div>
-
-  <p class="orm-botntekst">
-    Python køyrer som WebAssembly i din eigen nettlesar gjennom
-    <a href="https://pyodide.org/" target="_blank" rel="noopener">Pyodide</a>.
-    Koden du skriv blir aldri send nokon stad. Sjå
-    <a href="../personvern.html">personvernerklæringa</a> for detaljar.
-  </p>
 
 </main>
 </div>

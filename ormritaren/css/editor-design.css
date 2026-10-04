@@ -1,0 +1,357 @@
+/* Ormritaren si breie arbeidsflate i Vyrdepil-designsystemet. */
+
+[data-vp-design][data-vp-app="ormritaren"] {
+  --bg: var(--vp-wood);
+  --surface: var(--vp-paper);
+  --text: var(--vp-ink);
+  --muted: #333333;
+  --accent: var(--vp-moss);
+  --accent2: var(--vp-blush);
+  --accent3: var(--vp-sky);
+  --accent4: var(--vp-honey);
+  --accent5: var(--vp-heather);
+  --border: var(--vp-frame);
+  --shadow: var(--vp-frame);
+  --text-on-accent: var(--vp-ink);
+  --text-on-light-accent: var(--vp-ink);
+}
+
+body.vp-page[data-vp-app="ormritaren"] {
+  background-color: var(--vp-sky);
+  color: var(--vp-ink);
+}
+
+.vp-header-row { justify-content: space-between; }
+body[data-vp-app="ormritaren"] .vp-migrated-main--wide { margin-bottom: 32px; }
+body[data-vp-app="ormritaren"] .vp-migrated-mascot { width: clamp(90px, 12vw, 150px); }
+
+.orm-toppverktoy {
+  align-items: center;
+  padding: 16px;
+  background: var(--vp-wood);
+  border: 3px solid var(--vp-frame);
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.orm-filnamnfelt {
+  flex: 0 1 50ch;
+  width: min(50ch, 100%);
+  min-width: min(100%, 20ch);
+  min-height: 48px;
+  padding: 9px 12px;
+  border: 2px solid var(--vp-frame);
+  border-radius: 6px;
+  background: var(--vp-paper);
+  color: var(--vp-ink);
+  font: 1rem/1.3 var(--vp-font);
+}
+
+.orm-filnamnfelt:focus-visible,
+.orm-inputfelt:focus-visible,
+.orm-diagnose-felt:focus-visible { box-shadow: inset 0 -4px 0 var(--vp-focus); outline: none; }
+
+.orm-toppverktoy .btn,
+.orm-koyrerad .btn,
+.orm-leksjon .btn,
+.orm-loyperad .btn,
+.orm-leksjonsnav .btn,
+.orm-oppgave .btn,
+#inputSkjema .btn {
+  min-height: 48px;
+  padding: 9px 14px;
+  border: 2px solid var(--vp-frame);
+  border-radius: 8px;
+  background: var(--vp-wood);
+  color: var(--vp-ink);
+  box-shadow: 0 3px 0 var(--vp-frame);
+  font: 750 1rem/1.25 var(--vp-font);
+  text-align: center;
+  white-space: normal;
+}
+
+.orm-toppverktoy .btn:hover:not(:disabled),
+.orm-leksjon .btn:hover:not(:disabled),
+.orm-oppgave .btn:hover:not(:disabled),
+#inputSkjema .btn:hover:not(:disabled) { background: var(--vp-honey); color: var(--vp-ink); }
+
+.orm-btn-liten { min-height: 44px !important; padding: 7px 11px !important; font-size: .9rem !important; }
+.orm-btn-koyr { background: var(--vp-moss) !important; }
+.orm-btn-stopp { background: var(--vp-blush) !important; }
+.orm-btn-steg { background: var(--vp-sky) !important; }
+.orm-btn-neste, .orm-btn-sjekk { background: var(--vp-coral) !important; }
+.orm-btn-ferdig { background: var(--vp-moss) !important; }
+.orm-btn-koyr:disabled, .orm-btn-stopp:disabled,
+.orm-btn-neste:disabled, .orm-btn-ferdig:disabled { background: var(--vp-stone) !important; color: var(--vp-ink); }
+
+.orm-rad {
+  grid-template-columns: minmax(0, min(1000px, 55vw)) minmax(360px, 1fr);
+  gap: clamp(16px, 2vw, 28px);
+  align-items: start;
+}
+
+.orm-kolonne-brei {
+  width: 100%;
+  max-width: 1000px;
+  min-width: 0;
+}
+
+.orm-kolonne-smal { min-width: 0; }
+
+.orm-panel {
+  overflow: hidden;
+  background: var(--vp-paper);
+  border: 3px solid var(--vp-frame);
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.orm-panel-topp {
+  min-height: 68px;
+  padding: 10px 14px;
+  background: var(--vp-wood) !important;
+  color: var(--vp-ink) !important;
+  border-bottom: 2px solid var(--vp-frame) !important;
+}
+
+.orm-panel-topp h2 {
+  margin: 0;
+  font-size: clamp(1.2rem, 1.6vw, 1.55rem);
+  font-weight: 850;
+}
+
+.orm-koyrerad { margin: 0; gap: 8px; }
+.orm-koyrerad .btn { min-height: 44px; padding: 7px 11px; font-size: .93rem; }
+.orm-koyrerad .icon { width: 18px; height: 18px; }
+
+.orm-panel-kropp { padding: 0 !important; }
+.CodeMirror {
+  height: clamp(360px, 58vh, 820px);
+  border-bottom: 0;
+  background: var(--vp-paper);
+  color: var(--vp-ink);
+}
+.CodeMirror-gutters { background: var(--vp-sky); border-right: 2px solid var(--vp-frame); }
+.CodeMirror-linenumber { color: #333; }
+.CodeMirror-cursor { border-left-color: var(--vp-ink); }
+.CodeMirror-selected, .CodeMirror-focused .CodeMirror-selected { background: #d6e8f1; }
+.CodeMirror-activeline-background { background: #f4f0e6; }
+.CodeMirror-hints { border-radius: 6px; box-shadow: 0 3px 0 var(--vp-frame); }
+
+.cm-s-default .cm-keyword { color: #6841a5; }
+.cm-s-default .cm-builtin, .cm-s-default .cm-def { color: #176347; }
+.cm-s-default .cm-string { color: #145c32; }
+.cm-s-default .cm-number { color: #874800; }
+.cm-s-default .cm-comment { color: #4d5551; }
+.cm-s-default .cm-error { color: #9c1b1b; }
+
+.orm-editor-statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 46px;
+  padding: 8px 12px;
+  background: var(--vp-wood);
+  border-top: 2px solid var(--vp-frame);
+}
+.orm-editor-statusgroup { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+.orm-status { color: var(--vp-ink); font-size: .92rem; font-weight: 750; }
+.orm-status[data-tilstand="klar"],
+.orm-status[data-tilstand="koyrer"],
+.orm-status[data-tilstand="feil"] { color: var(--vp-ink); }
+.orm-pythonversjon, .orm-snarveg { color: #333; font-size: .85rem; font-weight: 650; }
+.orm-snarveg { margin-left: 0; }
+
+.orm-leksjon {
+  display: none;
+  min-width: 0;
+  max-height: calc(100dvh - 28px);
+  overflow: visible;
+  position: sticky;
+  top: 12px;
+  align-self: start;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.orm-arbeid[data-modus="leksjon"] .orm-leksjon {
+  display: block;
+  overflow: visible;
+}
+.orm-leksjon-innhald {
+  display: grid;
+  align-content: start;
+  gap: 22px;
+  min-width: 0;
+  max-height: calc(100dvh - 28px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.orm-leksjon-innhald::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.orm-leksjon.orm-har-meir .orm-leksjon-innhald { padding-bottom: 64px; }
+.orm-leksjon-rull-ned {
+  position: absolute;
+  z-index: 2;
+  right: 12px;
+  bottom: 8px;
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  padding: 0;
+  border-radius: 50%;
+  animation: orm-leksjon-pil-ned 1.3s ease-in-out infinite;
+}
+@keyframes orm-leksjon-pil-ned {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orm-leksjon-rull-ned { animation: none; }
+}
+.orm-leksjonstopp {
+  padding: 18px;
+  background: var(--vp-paper);
+  border: 3px solid var(--vp-frame);
+  border-radius: 8px;
+}
+.orm-leksjonstopp .heading2 {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 8px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--vp-ink);
+  font-family: var(--vp-heading-font);
+  font-size: clamp(1.3rem, 2vw, 1.75rem);
+  overflow-wrap: anywhere;
+}
+.orm-leksjonssti { color: var(--vp-ink); font-size: .95rem; }
+.orm-leksjonsteljar { color: #333; }
+
+/* Kvar del får ei eiga lys flate frå den felles Vyrdepil-paletten. */
+.orm-leksjon-accordion[data-bolk="tekst"] { --orm-leksjon-flate: var(--vp-moss); }
+.orm-leksjon-accordion[data-bolk="doeme"] { --orm-leksjon-flate: var(--vp-sky); }
+.orm-leksjon-accordion[data-bolk="loype"] { --orm-leksjon-flate: var(--vp-coral); }
+.orm-leksjon-accordion[data-bolk="oppgaver"] { --orm-leksjon-flate: var(--vp-heather); }
+
+.orm-leksjon-accordion {
+  margin: 0;
+  overflow: hidden;
+  background: var(--orm-leksjon-flate, var(--vp-paper));
+  border: 3px solid var(--vp-frame);
+  border-radius: 8px;
+  box-shadow: 0 3px 0 var(--vp-frame);
+}
+.orm-leksjon-accordion > .orm-leksjon-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 84px;
+  gap: 14px;
+  padding: 10px 16px;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  background: var(--orm-leksjon-flate, var(--vp-wood));
+}
+.orm-leksjon-accordion > .orm-leksjon-summary:focus-visible { background: var(--vp-honey); }
+.orm-leksjon-summary > span:first-child { flex: 1 1 auto; }
+.orm-accordion-vyrde { display: block; flex: 0 0 auto; width: clamp(62px, 7vw, 92px); height: auto; object-fit: contain; }
+.orm-accordion-body { padding: 18px; }
+.orm-accordion-body > :first-child { margin-top: 0; }
+.orm-accordion-body > :last-child { margin-bottom: 0; }
+.orm-accordion-body .orm-leksjonstekst p,
+.orm-accordion-body .orm-leksjonsdel p { max-width: 78ch; }
+.orm-accordion-body .orm-loype { margin: 0; padding: 14px; background: var(--vp-paper); border: 2px solid var(--vp-frame); box-shadow: none; }
+.orm-deltittel { margin: 0 0 12px; color: var(--vp-ink); font-size: 1.25rem; }
+
+.orm-leksjon-avslutning {
+  padding: 18px;
+  background: var(--vp-wood);
+  border: 3px solid var(--vp-frame);
+  border-radius: 8px;
+}
+.orm-leksjon-avslutning > p { max-width: 78ch; line-height: 1.65; }
+.orm-leksjonsnav {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 2px solid var(--vp-frame);
+}
+
+.orm-oppgave {
+  margin-bottom: 14px;
+  background: var(--vp-paper);
+  border-radius: 7px;
+  box-shadow: none !important;
+}
+.orm-oppgave:last-child { margin-bottom: 0; }
+.orm-oppgave .orm-oppgavetopp { background: var(--vp-wood); color: var(--vp-ink); }
+.orm-oppgave .orm-oppgavekropp { color: var(--vp-ink); }
+
+.orm-varsel, .orm-diagnose, .orm-sjekkpanel, .orm-bibliotek,
+.orm-stegrad, .orm-steglinje, .orm-symbolrad {
+  color: var(--vp-ink);
+}
+.orm-botntekst { max-width: 78ch; color: #222; }
+.orm-botntekst a { color: var(--vp-ink); }
+.orm-filpanel { background: var(--vp-paper); border-radius: 8px; box-shadow: 0 3px 0 var(--vp-frame); }
+.orm-filnamn { color: var(--vp-ink); }
+.orm-filrad.aktiv .orm-filnamn, .orm-filrad.aktiv .orm-filslett { color: var(--vp-ink); }
+.orm-bibliotek { background: var(--vp-wood); border: 3px solid var(--vp-frame); border-radius: 8px; box-shadow: none; }
+.modal2 { transform: none; border-radius: 8px; box-shadow: 0 5px 0 var(--vp-frame); }
+.modal2::before { display: none; }
+
+body[data-forhandsvis="1"] .vp-migrated-header,
+body[data-forhandsvis="1"] .vp-migrated-intro { display: none; }
+
+@media (min-width: 1301px) {
+  .orm-arbeid[data-modus="leksjon"] .orm-rad {
+    grid-template-columns: minmax(320px, 1fr) minmax(0, 1000px) minmax(340px, 1fr);
+    gap: clamp(16px, 2vw, 28px);
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1300px) {
+  .orm-arbeid[data-modus="leksjon"] .orm-rad {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 16px;
+  }
+  .orm-arbeid[data-modus="leksjon"] .orm-kolonne-brei { max-width: 1000px; }
+}
+
+@media (max-width: 1100px) and (min-width: 701px) {
+  .orm-arbeid:not([data-modus="leksjon"]) .orm-rad { grid-template-columns: minmax(0, 1fr); }
+  .orm-arbeid:not([data-modus="leksjon"]) .orm-kolonne-brei { max-width: 1000px; }
+}
+
+@media (max-width: 700px) {
+  .orm-rad { grid-template-columns: minmax(0, 1fr); }
+  body[data-vp-app="ormritaren"] .vp-migrated-intro { margin-bottom: 16px; }
+  body[data-vp-app="ormritaren"] .vp-migrated-mascot { display: none; }
+  .orm-toppverktoy { padding: 12px; }
+  .orm-filnamnfelt { flex-basis: 100%; width: 100%; }
+  .orm-koyrerad { justify-content: flex-end; }
+  .orm-koyrerad .btn { min-height: 44px; }
+  .orm-leksjon { max-height: none; overflow: visible; position: static; }
+  .orm-arbeid[data-modus="leksjon"] .orm-leksjon { overflow: visible; }
+  .orm-leksjon-innhald { max-height: none; overflow: visible; padding: 0; gap: 16px; }
+  .orm-leksjon.orm-har-meir .orm-leksjon-innhald { padding-bottom: 0; }
+  .orm-leksjon-rull-ned { display: none; }
+  .orm-leksjon-accordion > .orm-leksjon-summary { min-height: 72px; padding: 8px 12px; }
+  .orm-accordion-body { padding: 14px; }
+  .orm-editor-statusbar { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .orm-snarveg { display: inline; }
+}
+
+@media (max-width: 420px) {
+  .orm-panel-topp { align-items: flex-start; }
+  .orm-koyrerad { justify-content: flex-start; }
+  .orm-koyrerad .btn { flex: 1 1 auto; }
+  .orm-accordion-vyrde { width: 58px; }
+}

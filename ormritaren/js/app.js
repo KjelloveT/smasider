@@ -19,13 +19,13 @@ for i in range(1, 6):
 
     function start() {
         [
-            'utskrift', 'status', 'tregVarsel', 'koyrKnapp', 'stoppKnapp', 'tomKnapp',
+            'utskrift', 'status', 'pythonVersjon', 'tregVarsel', 'koyrKnapp', 'stoppKnapp', 'tomKnapp',
             'filliste', 'nyKnapp', 'lagreKnapp', 'lastNedKnapp', 'lastOppFelt',
             'filnamn', 'symbolrad', 'kodefelt', 'skriftMindre', 'skriftMeir',
             'fanerad', 'arbeidsflate', 'isolasjonsVarsel', 'lagringsVarsel',
             'lerret', 'biletboks', 'tomGrafikkKnapp', 'bibliotekliste',
             'panelGrafikk', 'grafikkFane', 'filerKnapp', 'filpanel', 'filTal',
-            'panelLeksjon', 'leksjonFane', 'diagnosePanel',
+            'panelLeksjon', 'panelLeksjonInnhald', 'leksjonRullNed', 'leksjonFane', 'diagnosePanel',
             'stegKnapp', 'stegrad', 'nesteLinjeKnapp', 'spelAvKnapp', 'stegFart', 'stegInfo',
             'stegLinje', 'stegLinjeNr', 'stegLinjeKode'
         ].forEach(id => { el[id] = document.getElementById(id); });
@@ -43,6 +43,7 @@ for i in range(1, 6):
         if (window.hydrateIcons) hydrateIcons(document);
 
         koplKnappar();
+        koplLeksjonsrulling();
         // CodeMirror og canvas måler begge feil om dei blir viste att etter
         // display:none, så begge må få beskjed når fana byter.
         OrmUI.koplFanar(el.fanerad, el.arbeidsflate, (fane) => {
@@ -99,7 +100,8 @@ for i in range(1, 6):
             p.className = 'orm-varsel orm-varsel-aatvaring';
             p.textContent = String(feil.message || feil) +
                 ' Du kan framleis bruke arbeidsflata som fri programmering.';
-            el.panelLeksjon.appendChild(p);
+            el.panelLeksjonInnhald.appendChild(p);
+            oppdaterLeksjonsrullhint();
             gjenopprett();
             return;
         }
@@ -107,10 +109,11 @@ for i in range(1, 6):
         el.arbeidsflate.dataset.modus = 'leksjon';
         el.panelLeksjon.hidden = false;
         el.leksjonFane.hidden = false;
-        OrmLeksjon.teikn(el.panelLeksjon);
+        OrmLeksjon.teikn(el.panelLeksjonInnhald);
+        oppdaterLeksjonsrullhint();
 
         // Leksjonar treng ikkje fillista i vegen, men ho skal framleis finnast.
-        el.filnamn.value = OrmLeksjon.leksjon().tittel + '.py';
+        setFilnamn(OrmLeksjon.leksjon().tittel + '.py');
         OrmEditor.set(OrmLeksjon.leksjon().doeme?.kode || '# Skriv koden din her\n');
         ulagraEndringar = false;
         oppdaterLagreknapp();
@@ -155,7 +158,8 @@ for i in range(1, 6):
 
             if (m.type === 'ormritaren:leksjon') {
                 OrmLeksjon.settLeksjon(m.modul, m.indeks || 0);
-                OrmLeksjon.teikn(el.panelLeksjon);
+                OrmLeksjon.teikn(el.panelLeksjonInnhald);
+                oppdaterLeksjonsrullhint();
                 // Koden i editoren skal følgje dømet, men ikkje riste laus
                 // det læraren står og prøver ut.
                 if (m.settKode !== false) {
@@ -180,8 +184,10 @@ for i in range(1, 6):
 
     function rullTilBolk(namn) {
         if (!namn) return;
-        const maal = el.panelLeksjon.querySelector(`[data-bolk="${CSS.escape(namn)}"]`);
+        const boks = el.panelLeksjonInnhald;
+        const maal = boks.querySelector(`[data-bolk="${CSS.escape(namn)}"]`);
         if (!maal) return;
+        if (maal instanceof HTMLDetailsElement) maal.open = true;
 
         /* Vi flyttar rullinga i panelet for hand i staden for å bruke
          * scrollIntoView.
@@ -193,10 +199,32 @@ for i in range(1, 6):
          *
          * Direkte, ikkje mjukt: læraren hoppar mellom bolkar medan han skriv,
          * og ein animasjon på veg ville lege etter heile tida. */
-        const boks = el.panelLeksjon;
-        let av = 0;
-        for (let e = maal; e && e !== boks; e = e.offsetParent) av += e.offsetTop;
+        const av = maal.getBoundingClientRect().top - boks.getBoundingClientRect().top + boks.scrollTop;
         boks.scrollTop = Math.max(0, av - 8);
+        oppdaterLeksjonsrullhint();
+    }
+
+    function koplLeksjonsrulling() {
+        const boks = el.panelLeksjonInnhald;
+        el.leksjonRullNed.addEventListener('click', () => {
+            const roleg = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            boks.scrollBy({
+                top: Math.max(200, boks.clientHeight * 0.72),
+                behavior: roleg ? 'auto' : 'smooth'
+            });
+        });
+        boks.addEventListener('scroll', oppdaterLeksjonsrullhint, { passive: true });
+        boks.addEventListener('toggle', () => requestAnimationFrame(oppdaterLeksjonsrullhint), true);
+        window.addEventListener('resize', oppdaterLeksjonsrullhint);
+    }
+
+    function oppdaterLeksjonsrullhint() {
+        const boks = el.panelLeksjonInnhald;
+        const harMeir = boks.clientHeight > 0 &&
+            boks.scrollHeight > boks.clientHeight + 2 &&
+            boks.scrollTop + boks.clientHeight < boks.scrollHeight - 2;
+        el.leksjonRullNed.hidden = !harMeir;
+        el.panelLeksjon.classList.toggle('orm-har-meir', harMeir);
     }
 
     /** Legg kode i editoren. Spør fyrst om eleven har endra noko sjølv —
@@ -221,7 +249,8 @@ for i in range(1, 6):
         OrmRunner.init({
             onFramdrift: (steg) => OrmUI.status(steg, 'ventar'),
             onKlar: (versjon) => {
-                OrmUI.status(`Klar — Python ${versjon}`, 'klar');
+                OrmUI.status('Klar', 'klar');
+                el.pythonVersjon.textContent = versjon ? `· Python ${versjon}` : '';
                 el.koyrKnapp.disabled = false;
             },
             onOppstartsfeil: (melding) => {
@@ -390,7 +419,12 @@ for i in range(1, 6):
         el.lastNedKnapp.addEventListener('click', lastNed);
         el.lastOppFelt.addEventListener('change', lastOpp);
 
-        el.filnamn.addEventListener('input', () => { ulagraEndringar = true; oppdaterLagreknapp(); });
+        el.filnamn.addEventListener('input', () => {
+            const namn = el.filnamn.value.slice(0, 50);
+            if (namn !== el.filnamn.value) el.filnamn.value = namn;
+            ulagraEndringar = true;
+            oppdaterLagreknapp();
+        });
 
         let skrift = OrmLager.tilstand().skrift || 15;
         OrmEditor.setSkrift(skrift);
@@ -524,7 +558,7 @@ for i in range(1, 6):
         const fil = OrmLager.hent(id);
         if (!fil) return;
         aktivFilId = fil.id;
-        el.filnamn.value = fil.namn;
+        setFilnamn(fil.namn);
         OrmEditor.set(fil.kode);
         ulagraEndringar = false;
         oppdaterLagreknapp();
@@ -537,7 +571,7 @@ for i in range(1, 6):
     function nyFil() {
         if (ulagraEndringar && !confirm('Du har endringar som ikkje er lagra. Lage ei ny fil likevel?')) return;
         aktivFilId = null;
-        el.filnamn.value = 'nytt-program.py';
+        setFilnamn('nytt-program.py');
         OrmEditor.set('# Skriv koden din her\n');
         ulagraEndringar = false;
         oppdaterLagreknapp();
@@ -547,7 +581,7 @@ for i in range(1, 6):
     }
 
     function lagreFil() {
-        const namn = (el.filnamn.value || '').trim() || 'utan-namn.py';
+        const namn = ((el.filnamn.value || '').trim() || 'utan-namn.py').slice(0, 50);
         const svar = OrmLager.lagre({ id: aktivFilId, namn, kode: OrmEditor.hent() });
 
         if (!svar.ok) {
@@ -565,12 +599,12 @@ for i in range(1, 6):
     }
 
     function lastNed() {
-        const namn = (el.filnamn.value || 'program.py').trim();
+        const namn = ((el.filnamn.value || 'program.py').trim()).slice(0, 50);
         const blob = new Blob([OrmEditor.hent()], { type: 'text/x-python;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = namn.endsWith('.py') ? namn : namn + '.py';
+        a.download = namn.endsWith('.py') ? namn : namn.slice(0, 47) + '.py';
         a.click();
         URL.revokeObjectURL(url);
     }
@@ -581,7 +615,7 @@ for i in range(1, 6):
         const lesar = new FileReader();
         lesar.onload = () => {
             aktivFilId = null;
-            el.filnamn.value = fil.name;
+            setFilnamn(fil.name);
             OrmEditor.set(String(lesar.result));
             ulagraEndringar = true;
             oppdaterLagreknapp();
@@ -596,14 +630,18 @@ for i in range(1, 6):
         const fil = sist && OrmLager.hent(sist);
         if (fil) {
             aktivFilId = fil.id;
-            el.filnamn.value = fil.namn;
+            setFilnamn(fil.namn);
             OrmEditor.set(fil.kode);
             lastFiler();
         } else {
-            el.filnamn.value = 'fyrste-program.py';
+            setFilnamn('fyrste-program.py');
             OrmEditor.set(STARTKODE);
         }
         ulagraEndringar = false;
         oppdaterLagreknapp();
+    }
+
+    function setFilnamn(value) {
+        el.filnamn.value = String(value || '').slice(0, 50);
     }
 })();

@@ -31,7 +31,7 @@
     {
       "versjon": "1.76",
       "dato": "2026-10-04",
-      "samandrag": "BåreTevling har fire figurtypar med felles sprite-standard og rette proporsjonar.",
+      "samandrag": "BåreTevling har fire figurtypar, og Ormritaren har fått ei ryddigare arbeidsflate og ny logo.",
       "punkt": [
         {
           "t": "endra",
@@ -42,6 +42,21 @@
           "t": "fiksa",
           "kva": "BåreTevling",
           "tekst": "Figurane held rette proporsjonar, og spriteutsnitta har ikkje lenger med restar frå rada over."
+        },
+        {
+          "t": "endra",
+          "kva": "Ormritaren",
+          "tekst": "Kodefeltet kan vere opptil 1000 px breitt. Køyring ligg ved kodeoverskrifta, og leksjonsdelane har eigne fargar og Vyrde-positurar. Ei pil viser når sidemenyen har meir innhald, og filnamn kan vere opptil 50 teikn. Ormritaren har fått ny slange-logo."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Ormritaren",
+          "tekst": "Den ekstra Pyodide- og personvernteksten er fjerna frå botnen av sida; opplysningane står i den felles sidefoten."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Endringsloggen",
+          "tekst": "JSON-strukturen for 1.74-punkta om BåreTevling og Vegamot er reparert, slik at endringslista kan lesast."
         }
       ]
     },
@@ -85,7 +100,7 @@
     {
       "versjon": "1.74",
       "dato": "2026-10-02",
-      "samandrag": "BåreTevling har fått klassiske seglskip og moderne krigsskip, og Vegamot ei ryddigare arbeidsflate.",
+      "samandrag": "BåreTevling har fått nye seglskip og krigsskip, og Vegamot ei ryddigare redigeringsflate.",
       "punkt": [
         {
           "t": "endra",

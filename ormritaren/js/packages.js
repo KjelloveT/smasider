@@ -89,7 +89,7 @@ const OrmPakkar = (function () {
 
         const knapp = document.createElement('button');
         knapp.type = 'button';
-        knapp.className = 'btn orm-btn-liten';
+        knapp.className = 'vp-button btn orm-btn-liten';
         knapp.textContent = 'Sett inn døme';
         knapp.addEventListener('click', () => onSettInn?.(p.doeme));
         boks.appendChild(knapp);
