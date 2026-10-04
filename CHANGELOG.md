@@ -3,34 +3,45 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.79] — 2026-10-04
+
+### Lagt til
+- **BåreTevling har fått fire figurtypar.** Klassiske seglskip, moderne krigsskip, bilar og lastebilar eller fly; alle spritearka følgjer ein felles standard frå éi til fem ruter.
+- **Startsida har fått meir liv.** Ei ny skipsillustrasjon, førehandsvising av vald figurtype og ein illustrert spelguide gjer vala lettare å forstå.
+
+### Endra
+- **Speloppsettet står i eigne kort.** Talet på figurar blir vist med sprites, og tospelarinstruksen forklarar at begge einingane må ha same oppsett og at spelet ikkje synkroniserer dei automatisk.
+- **Valfelta er rydda opp.** Etikettane står inni korta, figuroppsettet brukar same panelstil som resten av Vyrdepil, og instruksen seier tydeleg at begge spelarane markerer sjølve.
+
+### Fiksa
+- **Spritefigurane held rette proporsjonar og reinskorne utsnitt.** Førehandsvisingane viser berre éi rad frå arket, utan restar frå andre figurar.
+- **Spelguiden har fått betre luft.** Ho brukar dei felles trekkspel- og stablestilane; den tronge avstanden kom frå lokale BåreTevling-reglar.
+- **Oppsettsida er rydda.** Den lause trekanten og dei to overflødige hjelpetekstane er fjerna.
+
+## [1.78] — 2026-10-04
+
+### Endra
+- **Bragd-sida viser heile katalogen.** Du kan sjå alle bragdene, kva spel dei høyrer til, og krava for å oppnå dei. Bragdene du har tent er markerte.
+
 ## [1.77] — 2026-10-04
 
 ### Lagt til
-### Lagt til
-- **BåreTevling har fått ei meir levande startside.** Ei ny skipsillustrasjon, førehandsvising av vald figurtype og ein illustrert spelguide gjer vala lettare å forstå.
 - **Bragdane dine har ei felles samlingsside.** Heimsank, Vidfaren og Tidvis samlar oppnådde bragder og spelspesifikk framgang; Bolkestokk og Ormritaren viser bragder og prosentvis framgang i biblioteka sine.
 - **Eldre framgang blir teken med automatisk.** Fyrste relevante sideinnlasting kopierer opptente bragder og framgang frå dei gamle speldataa utan å endre kjeldene. Samlinga ligg lokalt og lagrar ikkje elevnamn eller oppteningsdatoar.
 
 ### Endra
-- **Speloppsettet står i eigne kort.** Talet på figurar blir vist som sprites, og tospelarinstruksen forklarar at begge einingane må ha same oppsett og at spelet ikkje synkroniserer dei automatisk.
-- **Valfelta er rydda opp.** Etikettane står inni korta, figuroppsettet brukar same panelstil som resten av Vyrdepil, og instruksen seier tydeleg at begge spelarane markerer sjølve.
 - **Bragd er det felles ordet for achievement.** Ljodstigen held fram med sitt eige progresjonssystem, men brukar same ordbruk.
 - **Nye spel får ei felles rettleiing for bragder** i AGENTS.md, med krav om stabile ID-ar, felles lagring og rapportering ved faktiske endringar.
 
 ### Fiksa
-- **Førehandsvisingane viser berre éi rad frå spritearket.** Skip, bilar og fly får ikkje med utsnitt frå andre figurar.
-- **Spelguiden har fått betre luft.** Ho brukar dei felles trekkspel- og stablestilane; den tronge avstanden kom frå lokale BåreTevling-reglar.
-- **Oppsettsida er rydda.** Den lause trekanten og dei to overflødige hjelpetekstane er fjerna.
 - **Bragd-sida har betre luft og rett felles sidefot.** Varselboksar har òg fått meir plass rundt teksten.
 
 ## [1.76] — 2026-10-04
 
 ### Endra
-- **BåreTevling har fått fire figurtypar.** Vel mellom klassiske seglskip, moderne krigsskip, bilar og lastebilar eller fly. Alle spritearka følgjer same standard frå 1 til 5 ruter.
 - **Ormritaren har fått ei ryddigare arbeidsflate og ny slange-logo.** Kodefeltet kan vere opptil 1000 px breitt, køyring ligg ved kodeoverskrifta, og leksjonsdelane har eigne farga trekkspel med ulike Vyrde-positurar. Rullefeltet i sidemenyen er skjult og ei pil viser når meir innhald finst. Filnamn kan vere opptil 50 teikn.
 
 ### Fiksa
-- **Figurane held rette proporsjonar.** Spriteutsnitta er klipte reine, utan restar frå rada over.
 - **Teksten under Ormritaren er fjerna.** Opplysningane om Pyodide og personvern står alt i den felles sidefoten.
 - **Endringsloggen kan lesast att.** JSON-strukturen for 1.74-punkta om BåreTevling og Vegamot er reparert.
 

@@ -2,24 +2,24 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
-      "versjon": "1.77",
+      "versjon": "1.79",
       "dato": "2026-10-04",
-      "samandrag": "BåreTevling har fått ei illustrert startside og fire figurtypar, og Vyrdepil har fått ei felles samling for bragder.",
+      "samandrag": "BåreTevling har fått fire figurtypar, ei meir levande startside og ein illustrert spelguide.",
       "punkt": [
+        {
+          "t": "nytt",
+          "kva": "BåreTevling",
+          "tekst": "Vel mellom klassiske seglskip, moderne krigsskip, bilar og lastebilar eller fly. Alle spritearka følgjer ein felles standard frå éi til fem ruter."
+        },
         {
           "t": "nytt",
           "kva": "BåreTevling",
           "tekst": "Ny skipsillustrasjon, førehandsvising av figurtypane og ein illustrert spelguide gjer startsida lettare å forstå."
         },
         {
-          "t": "nytt",
-          "kva": "Bragdane dine",
-          "tekst": "Sjå bragder frå Heimsank, Vidfaren, Tidvis, Bolkestokk og Ormritaren samla. Bibliotekframgangen i Bolkestokk og Ormritaren blir vist i prosent."
-        },
-        {
           "t": "endra",
           "kva": "BåreTevling",
-          "tekst": "Speloppsettet står i eigne kort. Figurane blir viste bak talet, og instruksen forklarar korleis to spelarar kan bruke kvar si eining."
+          "tekst": "Speloppsettet står i eigne kort. Figurane blir viste ved sidan av tala, og instruksen forklarar korleis to spelarar bruker kvar si eining."
         },
         {
           "t": "endra",
@@ -27,24 +27,48 @@
           "tekst": "Valfelta har etikettar inni korta og figuroppsettet følgjer panelstilen i Vyrdepil. Begge spelarane må markere sjølve."
         },
         {
-          "t": "endra",
-          "kva": "Framgang og personvern",
-          "tekst": "Eldre bragder og leksjonsframgang blir kopierte til ei felles lokal samling ved neste relevante innlasting. Elevnamn og oppteningsdatoar blir ikkje lagra i samlinga. Ljodstigen held fram med eiga progresjonslagring, men brukar ordet Bragd."
+          "t": "fiksa",
+          "kva": "BåreTevling",
+          "tekst": "Figurane held rette proporsjonar, og spriteutsnitta viser berre rett rad frå arket."
         },
         {
           "t": "fiksa",
           "kva": "BåreTevling",
-          "tekst": "Førehandsvisingane viser berre éi rad frå spritearket, utan utsnitt frå andre figurar."
-        },
-        {
-          "t": "fiksa",
-          "kva": "BåreTevling",
-          "tekst": "Spelguiden har no jamn luft mellom illustrasjonane og tipsruta med dei felles trekkspel- og stablestilane."
+          "tekst": "Spelguiden har jamn luft mellom illustrasjonane og tipsruta med dei felles trekkspel- og stablestilane."
         },
         {
           "t": "fiksa",
           "kva": "BåreTevling",
           "tekst": "Den lause trekanten og hjelpetekstane som ikkje trongst, er fjerna frå oppsettsida."
+        }
+      ]
+    },
+    {
+      "versjon": "1.78",
+      "dato": "2026-10-04",
+      "samandrag": "Bragd-sida viser alle bragdene frå dei fem spela.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Bragdane dine",
+          "tekst": "Sjå heile bragdkatalogen samla. Bragder du ikkje har oppnådd viser krava for å få dei."
+        }
+      ]
+    },
+    {
+      "versjon": "1.77",
+      "dato": "2026-10-04",
+      "samandrag": "Felles Bragd-samling, automatisk overføring av eldre framgang og prosentvising for Bolkestokk og Ormritaren.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Bragdane dine",
+          "tekst": "Sjå bragder frå Heimsank, Vidfaren, Tidvis, Bolkestokk og Ormritaren samla. Bibliotekframgangen i Bolkestokk og Ormritaren blir vist i prosent."
+        },
+        {
+          "t": "endra",
+          "kva": "Framgang og personvern",
+          "tekst": "Eldre bragder og leksjonsframgang blir kopierte til ei felles lokal samling ved neste relevante innlasting. Elevnamn og oppteningsdatoar blir ikkje lagra i samlinga. Ljodstigen held fram med eiga progresjonslagring, men brukar ordet Bragd."
         },
         {
           "t": "fiksa",
@@ -56,18 +80,8 @@
     {
       "versjon": "1.76",
       "dato": "2026-10-04",
-      "samandrag": "BåreTevling har fire figurtypar, og Ormritaren har fått ei ryddigare arbeidsflate og ny logo.",
+      "samandrag": "Ormritaren har fått ei ryddigare arbeidsflate, ny slange-logo og leksjonar i trekkspel.",
       "punkt": [
-        {
-          "t": "endra",
-          "kva": "BåreTevling",
-          "tekst": "Vel mellom klassiske seglskip, moderne krigsskip, bilar og lastebilar eller fly. Alle spritearka følgjer same standard frå 1 til 5 ruter."
-        },
-        {
-          "t": "fiksa",
-          "kva": "BåreTevling",
-          "tekst": "Figurane held rette proporsjonar, og spriteutsnitta har ikkje lenger med restar frå rada over."
-        },
         {
           "t": "endra",
           "kva": "Ormritaren",
