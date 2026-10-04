@@ -3,6 +3,7 @@ const Board = {
     shipStyle: 'classic',
     spriteCellSize: 64,
     spriteAtlasSize: 320,
+    spriteClipSequence: 0,
     shipSpriteSheets: {
         classic: 'resources/ships/classic-ships.png',
         modern: 'resources/ships/modern-ships.png',
@@ -32,19 +33,40 @@ const Board = {
         const width = part.cells * this.spriteCellSize;
         const height = this.spriteCellSize;
         const y = (part.cells - 1) * this.spriteCellSize;
-        svg.setAttribute('viewBox', `0 ${y} ${width} ${height}`);
+        // Move the atlas inside a row-sized viewport so each sprite is clipped
+        // to its own 64px band, even when surrounding CSS changes SVG overflow.
+        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
         svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
         svg.setAttribute('width', width);
         svg.setAttribute('height', height);
+        svg.setAttribute('overflow', 'hidden');
+        svg.style.overflow = 'hidden';
         svg.setAttribute('aria-hidden', 'true');
         svg.setAttribute('focusable', 'false');
         svg.classList.add('ship-image-spanning');
 
+        const clipId = `bt-sprite-clip-${++this.spriteClipSequence}`;
+        const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        const clipPath = document.createElementNS('http://www.w3.org/2000/svg', 'clipPath');
+        clipPath.setAttribute('id', clipId);
+        clipPath.setAttribute('clipPathUnits', 'userSpaceOnUse');
+        const clipRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        clipRect.setAttribute('x', '0');
+        clipRect.setAttribute('y', '0');
+        clipRect.setAttribute('width', width);
+        clipRect.setAttribute('height', height);
+        clipPath.appendChild(clipRect);
+        defs.appendChild(clipPath);
+        svg.appendChild(defs);
+
         const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
         image.setAttribute('href', part.img);
+        image.setAttribute('x', '0');
+        image.setAttribute('y', -y);
         image.setAttribute('width', this.spriteAtlasSize);
         image.setAttribute('height', this.spriteAtlasSize);
         image.setAttribute('preserveAspectRatio', 'none');
+        image.setAttribute('clip-path', `url(#${clipId})`);
         svg.appendChild(image);
         return svg;
     },

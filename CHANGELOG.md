@@ -3,6 +3,18 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.77] — 2026-10-04
+
+### Lagt til
+- **BåreTevling har fått ei meir levande startside.** Ei ny skipsillustrasjon, førehandsvising av vald figurtype og ein illustrert spelguide gjer vala lettare å forstå.
+
+### Endra
+- **Speloppsettet står i eigne kort.** Talet på figurar blir vist som sprites, og tospelarinstruksen forklarar at begge einingane må ha same oppsett og at spelet ikkje synkroniserer dei automatisk.
+- **Valfelta er rydda opp.** Etikettane står inni korta, figuroppsettet brukar same panelstil som resten av Vyrdepil, og instruksen seier tydeleg at begge spelarane markerer sjølve.
+
+### Fiksa
+- **Førehandsvisingane viser berre éi rad frå spritearket.** Skip, bilar og fly får ikkje med utsnitt frå andre figurar.
+
 ## [1.76] — 2026-10-04
 
 ### Endra

@@ -71,8 +71,9 @@ const Ships = {
     getShipConfig() {
         const config = {};
         document.querySelectorAll('.ship-input').forEach(input => {
-            const size = parseInt(input.dataset.size);
-            const count = parseInt(input.value) || 0;
+            const size = Number.parseInt(input.dataset.shipSize, 10);
+            const rawCount = Number.parseInt(input.value, 10);
+            const count = Math.max(0, Math.min(5, Number.isFinite(rawCount) ? rawCount : 0));
             config[size] = count;
         });
         return config;

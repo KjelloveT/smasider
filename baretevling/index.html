@@ -7,117 +7,184 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
+    <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
     <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
 <body data-vp-app="baretevling" data-vp-layout="standard" data-vp-site-footer>
     <div class="page-wrapper bt-app">
         <main class="main-content">
-            <div class="container" style="width: 100%; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; padding: 0 16px;">
+            <div class="container bt-page-container">
             
                 <!-- Main Menu Screen -->
-                <div id="menuScreen" class="screen" style="width: 100%; flex-direction: column; align-items: center;">
+                <div id="menuScreen" class="screen bt-menu-screen">
                     
                     <!-- Game Hero Header -->
-                    <div class="box2 hero-box" style="display: flex; align-items: center; gap: 24px; padding: 24px; margin-bottom: 24px; width: 100%; max-width: 1000px; background: var(--accent); color: var(--text-on-accent);">
-                        <img src="../_resources/baretevling.png" alt="BåreTevling Logo" style="height: 120px; width: auto; object-fit: contain; filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.5));">
-                        <div style="flex: 1;">
-                            <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; line-height: 1; text-shadow: 2px 2px 0 rgba(0,0,0,0.3);">BåreTevling</h1>
-                            <p style="font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; margin: 0; opacity: 0.9;">Plasser figurar med koordinatar – lær deg å bruke A1, B2, osv!</p>
+                    <div class="box2 hero-box bt-hero-box">
+                        <img class="bt-hero-logo" src="../_resources/baretevling.png" alt="BåreTevling" width="120" height="120">
+                        <div class="bt-hero-copy">
+                            <h1>BåreTevling</h1>
+                            <p>Plasser flåten, finn koordinata og meld treff!</p>
+                            <p class="bt-hero-tagline">Kven finn alle figurane først?</p>
                         </div>
+                        <img class="bt-hero-ocean" src="resources/hero-ocean.png" alt="" aria-hidden="true" width="1200" height="533" decoding="async">
                     </div>
 
-                    <!-- How to Play Accordion (moved out of box1 for better visibility, like front page) -->
-                    <div style="width: 100%; max-width: 1000px;">
-                        <details class="accordion-box">
-                            <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 6px;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Korleis spele</summary>
-                            <div class="accordion-body">
-                                <h3>To-spelar modus</h3>
-                                <ol>
-                                    <li>Vel spelmodus: <strong>Lokal to-spelar</strong></li>
-                                    <li>Spelar 1 plasserer figurane sine ved å skrive koordinat (f.eks. A1) og velje himmelretning (N/S/Ø/V)</li>
-                                    <li>Spelar 2 plasserer figurane sine på same måte</li>
-                                    <li>Spelarane byter på å angripe ved å skrive koordinatar</li>
-                                    <li>Når du skriv "treff" eller "bom", markerast det på begge brett</li>
-                                    <li>Først til å treffa alle figurane til motstandaren vinn!</li>
-                                </ol>
-                                <h3>Mot datamaskinen</h3>
-                                <ol>
-                                    <li>Vel spelmodus: <strong>Mot datamaskinen</strong></li>
-                                    <li>Plasser figurane dine</li>
-                                    <li>Datamaskinen plasserer sine figurar automatisk</li>
-                                    <li>Angrip ved å skrive koordinatar – datamaskinen svarer automatisk</li>
-                                    <li>Datamaskinen angrip tilbake med ein smart algoritme</li>
-                                </ol>
-                                <div class="tip-box">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -3px; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>
-                                    <strong>Tips:</strong> Når du skriv ein bokstav (f.eks. A), blir kolonna markert. Når du skriv A1, blir både kolonne A, rad 1 og celle A1 markert!
+                    <div class="bt-start-content">
+                        <details class="vp-accordion bt-howto" id="howToPlay">
+                            <summary><span data-icon="book-open" aria-hidden="true"></span><span>Korleis spele</span></summary>
+                            <div class="bt-howto-body">
+                                <p class="bt-howto-intro">Slik brukar de koordinat og figurar for å finne flåten til motspelaren.</p>
+                                <div class="bt-howto-grid">
+                                    <section class="bt-howto-step">
+                                        <svg class="bt-howto-diagram" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+                                            <rect x="12" y="22" width="116" height="108" rx="12" fill="#D6E8F1" stroke="#142820" stroke-width="4"/>
+                                            <rect x="192" y="22" width="116" height="108" rx="12" fill="#D6E8F1" stroke="#142820" stroke-width="4"/>
+                                            <text x="70" y="45" text-anchor="middle" font-size="16" font-weight="800" fill="#000">Du</text>
+                                            <text x="250" y="45" text-anchor="middle" font-size="16" font-weight="800" fill="#000">Motspelaren</text>
+                                            <g fill="#FFFDF5" stroke="#142820" stroke-width="2">
+                                                <rect x="32" y="57" width="22" height="22"/><rect x="54" y="57" width="22" height="22"/><rect x="76" y="57" width="22" height="22"/>
+                                                <rect x="32" y="79" width="22" height="22"/><rect x="54" y="79" width="22" height="22"/><rect x="76" y="79" width="22" height="22"/>
+                                                <rect x="212" y="57" width="22" height="22"/><rect x="234" y="57" width="22" height="22"/><rect x="256" y="57" width="22" height="22"/>
+                                                <rect x="212" y="79" width="22" height="22"/><rect x="234" y="79" width="22" height="22"/><rect x="256" y="79" width="22" height="22"/>
+                                            </g>
+                                            <path d="M139 76h42m-10-10 10 10-10 10m10 8h-42m10-10-10 10 10 10" fill="none" stroke="#142820" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <circle cx="65" cy="90" r="10" fill="#F5DFAA" stroke="#142820" stroke-width="3"/>
+                                            <circle cx="245" cy="68" r="10" fill="#EFB29D" stroke="#142820" stroke-width="3"/>
+                                            <text x="160" y="137" text-anchor="middle" font-size="13" font-weight="800" fill="#000">Meld koordinatane</text>
+                                        </svg>
+                                        <h3>1. Vel same oppsett</h3>
+                                        <p>Spel på kvar dykkar PC eller iPad. Vel same figurtype, brettstorleik og tal på figurar av kvar lengd. Spelet synkroniserer ikkje einingane automatisk, så meld koordinat, treff og bom til kvarandre.</p>
+                                    </section>
+                                    <section class="bt-howto-step">
+                                        <svg class="bt-howto-diagram" viewBox="0 0 260 150" aria-hidden="true" focusable="false">
+                                            <rect x="38" y="39" width="192" height="96" fill="#FFFDF5" stroke="#142820" stroke-width="3"/>
+                                            <rect x="38" y="39" width="192" height="24" fill="#D6E8F1"/>
+                                            <rect x="38" y="39" width="32" height="96" fill="#D6E8F1"/>
+                                            <g stroke="#142820" stroke-width="2">
+                                                <path d="M70 39v96M102 39v96M134 39v96M166 39v96M198 39v96M38 63h192M38 87h192M38 111h192"/>
+                                            </g>
+                                            <rect x="102" y="87" width="64" height="24" fill="#F5DFAA" stroke="#142820" stroke-width="3"/>
+                                            <g fill="#000" font-size="13" font-weight="800" text-anchor="middle">
+                                                <text x="86" y="56">A</text><text x="118" y="56">B</text><text x="150" y="56">C</text><text x="182" y="56">D</text>
+                                                <text x="54" y="80">1</text><text x="54" y="104">2</text><text x="54" y="128">3</text>
+                                            </g>
+                                            <path d="M111 99h46" stroke="#142820" stroke-width="4" stroke-linecap="round"/>
+                                            <path d="m149 93 8 6-8 6" fill="none" stroke="#142820" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <text x="134" y="25" text-anchor="middle" font-size="14" font-weight="800" fill="#000">Start i B2 · retning Aust</text>
+                                        </svg>
+                                        <h3>2. Plasser figurane</h3>
+                                        <p>Skriv startkoordinatet, til dømes B2, og vel himmelretning. Aust går mot høgre; Nord går oppover brettet.</p>
+                                    </section>
+                                    <section class="bt-howto-step">
+                                        <svg class="bt-howto-diagram" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+                                            <rect x="12" y="28" width="112" height="104" rx="10" fill="#D6E8F1" stroke="#142820" stroke-width="4"/>
+                                            <rect x="196" y="28" width="112" height="104" rx="10" fill="#D6E8F1" stroke="#142820" stroke-width="4"/>
+                                            <text x="68" y="51" text-anchor="middle" font-size="14" font-weight="800" fill="#000">Ditt brett</text>
+                                            <text x="252" y="51" text-anchor="middle" font-size="14" font-weight="800" fill="#000">Motspelaren</text>
+                                            <g fill="#FFFDF5" stroke="#142820" stroke-width="2">
+                                                <rect x="32" y="62" width="22" height="22"/><rect x="54" y="62" width="22" height="22"/><rect x="76" y="62" width="22" height="22"/>
+                                                <rect x="32" y="84" width="22" height="22"/><rect x="54" y="84" width="22" height="22"/><rect x="76" y="84" width="22" height="22"/>
+                                                <rect x="32" y="106" width="22" height="22"/><rect x="54" y="106" width="22" height="22"/><rect x="76" y="106" width="22" height="22"/>
+                                                <rect x="216" y="62" width="22" height="22"/><rect x="238" y="62" width="22" height="22"/><rect x="260" y="62" width="22" height="22"/>
+                                                <rect x="216" y="84" width="22" height="22"/><rect x="238" y="84" width="22" height="22"/><rect x="260" y="84" width="22" height="22"/>
+                                                <rect x="216" y="106" width="22" height="22"/><rect x="238" y="106" width="22" height="22"/><rect x="260" y="106" width="22" height="22"/>
+                                            </g>
+                                            <circle cx="87" cy="117" r="9" fill="#EFB29D" stroke="#142820" stroke-width="3"/>
+                                            <path d="m265 109 12 16m0-16-12 16" stroke="#142820" stroke-width="4" stroke-linecap="round"/>
+                                            <path d="M130 78h52m-10-10 10 10-10 10" fill="none" stroke="#142820" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <h3>3. Meld koordinat</h3>
+                                        <p>Sei ruta du vil prøve, til dømes C3. Motspelaren melder treff eller bom, og begge markerer det same resultatet på sitt brett.</p>
+                                    </section>
                                 </div>
+                                <p class="bt-howto-tip"><strong>Tips:</strong> Skriv bokstaven først og talet etterpå. Når du skriv B3, blir kolonne B, rad 3 og ruta B3 markerte.</p>
                             </div>
                         </details>
-                    </div>
 
-                    <!-- Settings Box -->
-                    <div class="box1" style="padding: 24px; width: 100%; max-width: 1000px;">
-
-                        <div class="settings-group">
-                            <label class="settings-label">Spelmodus</label>
-                            <div class="btn-group">
-                                <button class="opt-btn selected" data-mode="local"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Lokal to-spelar</button>
-                                <button class="opt-btn" data-mode="ai"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg> Mot datamaskinen</button>
+                        <section class="bt-setup" aria-labelledby="setupTitle">
+                            <div class="bt-setup-heading">
+                                <h2 id="setupTitle"><span class="bt-setup-title-bubble">Vel speloppsett</span></h2>
+                                <p>Set saman ei flåte og gjer deg klar til å spele.</p>
                             </div>
-                        </div>
 
-                        <div class="settings-group">
-                            <label class="settings-label">Brettstorleik</label>
-                            <div class="btn-group">
-                                <button class="opt-btn" data-size="8">8×8</button>
-                                <button class="opt-btn" data-size="10">10×10</button>
-                                <button class="opt-btn selected" data-size="12">12×12</button>
-                                <button class="opt-btn" data-size="15">15×15</button>
-                                <button class="opt-btn" data-size="20">20×20</button>
+                            <div class="bt-settings-grid">
+                                <fieldset class="vp-panel vp-panel--plain bt-settings-card">
+                                    <legend class="bt-visually-hidden">Spelmodus</legend>
+                                    <p class="settings-label">Spelmodus</p>
+                                    <div class="btn-group" role="group" aria-label="Spelmodus">
+                                        <button type="button" class="opt-btn selected" data-mode="local" aria-pressed="true"><span data-icon="users" aria-hidden="true"></span> Lokal to-spelar</button>
+                                        <button type="button" class="opt-btn" data-mode="ai" aria-pressed="false"><span data-icon="monitor" aria-hidden="true"></span> Mot datamaskinen</button>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="vp-panel vp-panel--plain bt-settings-card">
+                                    <legend class="bt-visually-hidden">Brettstorleik</legend>
+                                    <p class="settings-label">Brettstorleik</p>
+                                    <div class="btn-group" role="group" aria-label="Brettstorleik">
+                                        <button type="button" class="opt-btn board-size-option" data-size="8" aria-pressed="false">8×8</button>
+                                        <button type="button" class="opt-btn board-size-option" data-size="10" aria-pressed="false">10×10</button>
+                                        <button type="button" class="opt-btn board-size-option selected" data-size="12" aria-pressed="true">12×12</button>
+                                        <button type="button" class="opt-btn board-size-option" data-size="15" aria-pressed="false">15×15</button>
+                                        <button type="button" class="opt-btn board-size-option" data-size="20" aria-pressed="false">20×20</button>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="vp-panel vp-panel--plain bt-settings-card bt-settings-card--wide">
+                                    <legend class="bt-visually-hidden">Figurtype</legend>
+                                    <p class="settings-label">Figurtype</p>
+                                    <div class="btn-group" role="group" aria-label="Vel figurtype">
+                                        <button type="button" class="opt-btn selected" data-ship-style="classic" aria-pressed="true">Klassiske seglskip</button>
+                                        <button type="button" class="opt-btn" data-ship-style="modern" aria-pressed="false">Moderne krigsskip</button>
+                                        <button type="button" class="opt-btn" data-ship-style="vehicles" aria-pressed="false">Bilar og lastebilar</button>
+                                        <button type="button" class="opt-btn" data-ship-style="aircraft" aria-pressed="false">Fly</button>
+                                    </div>
+                                    <p class="bt-piece-caption">Førehandsvising av figurane frå éi til fem ruter:</p>
+                                    <div class="bt-piece-showcase" id="piecePreview" role="group" aria-label="Førehandsvising av figurar med ulik lengd"></div>
+                                </fieldset>
+
+                                <fieldset class="vp-panel vp-panel--plain bt-settings-card bt-settings-card--wide bt-settings-card--fleet">
+                                    <legend class="bt-visually-hidden">Figuroppsett</legend>
+                                    <p class="settings-label">Figuroppsett</p>
+                                    <p class="bt-config-intro">Vel kor mange figurar av kvar lengd som skal vere med.</p>
+                                    <div class="bt-fleet-stack">
+                                        <div class="bt-config-list vp-panel vp-panel--soft vp-panel--compact">
+                                        <div class="ship-row">
+                                            <label class="ship-label" for="shipCount5">Stor (5 ruter)</label>
+                                            <input id="shipCount5" type="number" class="ship-input" data-ship-size="5" value="1" min="0" max="5" step="1" inputmode="numeric">
+                                            <div class="ship-row-preview" data-ship-preview="5" aria-hidden="true"></div>
+                                        </div>
+                                        <div class="ship-row">
+                                            <label class="ship-label" for="shipCount4">Stor (4 ruter)</label>
+                                            <input id="shipCount4" type="number" class="ship-input" data-ship-size="4" value="1" min="0" max="5" step="1" inputmode="numeric">
+                                            <div class="ship-row-preview" data-ship-preview="4" aria-hidden="true"></div>
+                                        </div>
+                                        <div class="ship-row">
+                                            <label class="ship-label" for="shipCount3">Middels (3 ruter)</label>
+                                            <input id="shipCount3" type="number" class="ship-input" data-ship-size="3" value="2" min="0" max="5" step="1" inputmode="numeric">
+                                            <div class="ship-row-preview" data-ship-preview="3" aria-hidden="true"></div>
+                                        </div>
+                                        <div class="ship-row">
+                                            <label class="ship-label" for="shipCount2">Liten (2 ruter)</label>
+                                            <input id="shipCount2" type="number" class="ship-input" data-ship-size="2" value="2" min="0" max="5" step="1" inputmode="numeric">
+                                            <div class="ship-row-preview" data-ship-preview="2" aria-hidden="true"></div>
+                                        </div>
+                                        <div class="ship-row">
+                                            <label class="ship-label" for="shipCount1">Minst (1 rute)</label>
+                                            <input id="shipCount1" type="number" class="ship-input" data-ship-size="1" value="1" min="0" max="5" step="1" inputmode="numeric">
+                                            <div class="ship-row-preview" data-ship-preview="1" aria-hidden="true"></div>
+                                        </div>
+                                        </div>
+                                        <p class="bt-device-note"><span data-icon="help-circle" aria-hidden="true"></span><span>Du og motspelar må ha kvar sin iPad eller PC. Begge to vel same brettstorleik og tal på figurar. Begge to må melde koordinat og treff/bom til kvarandre og markere sjølv.</span></p>
+                                    </div>
+                                </fieldset>
                             </div>
-                        </div>
 
-                        <div class="settings-group">
-                            <p class="settings-label" id="shipStyleLabel">Figurtype</p>
-                            <div class="btn-group" role="group" aria-labelledby="shipStyleLabel">
-                                <button type="button" class="opt-btn selected" data-ship-style="classic" aria-pressed="true">Klassiske seglskip</button>
-                                <button type="button" class="opt-btn" data-ship-style="modern" aria-pressed="false">Moderne krigsskip</button>
-                                <button type="button" class="opt-btn" data-ship-style="vehicles" aria-pressed="false">Bilar og lastebilar</button>
-                                <button type="button" class="opt-btn" data-ship-style="aircraft" aria-pressed="false">Fly</button>
+                            <div class="bt-start-actions">
+                                <button class="vp-button vp-button--primary vp-button--large" id="btnStart" type="button"><span data-icon="target" aria-hidden="true"></span> Start nytt spel</button>
+                                <button class="vp-button vp-button--quiet" id="btnResume" type="button" hidden><span data-icon="rotate-ccw" aria-hidden="true"></span> Fortsett spel</button>
                             </div>
-                        </div>
-
-                        <div class="settings-group">
-                            <label class="settings-label">Figuroppsett</label>
-                            <div class="ship-config">
-                                <div class="ship-row">
-                                    <span class="ship-label">Stor (5):</span>
-                                    <input type="number" class="ship-input" data-size="5" value="1" min="0" max="5">
-                                </div>
-                                <div class="ship-row">
-                                    <span class="ship-label">Stor (4):</span>
-                                    <input type="number" class="ship-input" data-size="4" value="1" min="0" max="5">
-                                </div>
-                                <div class="ship-row">
-                                    <span class="ship-label">Middels (3):</span>
-                                    <input type="number" class="ship-input" data-size="3" value="2" min="0" max="5">
-                                </div>
-                                <div class="ship-row">
-                                    <span class="ship-label">Liten (2):</span>
-                                    <input type="number" class="ship-input" data-size="2" value="2" min="0" max="5">
-                                </div>
-                                <div class="ship-row">
-                                    <span class="ship-label">Minst (1):</span>
-                                    <input type="number" class="ship-input" data-size="1" value="1" min="0" max="5">
-                                </div>
-                            </div>
-                        </div>
-
-                        <button class="btn" id="btnStart" style="margin-top: 12px;">Start nytt spel</button>
-                        <button class="btn" id="btnResume" style="display:none; margin-top: 12px; background: var(--surface);">Fortsett spel</button>
+                        </section>
                     </div>
                 </div>
 

@@ -2,6 +2,33 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.77",
+      "dato": "2026-10-04",
+      "samandrag": "BåreTevling har ei meir levande startside med illustrert spelguide og ryddigare speloppsett.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "BåreTevling",
+          "tekst": "Ny skipsillustrasjon, førehandsvising av figurtypane og ein illustrert spelguide gjer startsida lettare å forstå."
+        },
+        {
+          "t": "endra",
+          "kva": "BåreTevling",
+          "tekst": "Speloppsettet står i eigne kort. Figurane blir viste bak talet, og instruksen forklarar korleis to spelarar kan bruke kvar si eining."
+        },
+        {
+          "t": "endra",
+          "kva": "BåreTevling",
+          "tekst": "Valfelta har etikettar inni korta og figuroppsettet følgjer panelstilen i Vyrdepil. Begge spelarane må markere sjølve."
+        },
+        {
+          "t": "fiksa",
+          "kva": "BåreTevling",
+          "tekst": "Førehandsvisingane viser berre éi rad frå spritearket, utan utsnitt frå andre figurar."
+        }
+      ]
+    },
+    {
       "versjon": "1.76",
       "dato": "2026-10-04",
       "samandrag": "BåreTevling har fire figurtypar med felles sprite-standard og rette proporsjonar.",
