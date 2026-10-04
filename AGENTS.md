@@ -105,6 +105,14 @@ bruke, høyrer det heime lokalt. Er det noko det andre verktøyet nummer to kjem
 til å trenge — legg det i `js/vyrdepil-util.js` med ein gong. Grensa går på om
 funksjonen handlar om *domenet* til verktøyet eller om *plattforma*.
 
+### 5.1.2 Felles Bragd-system
+
+- Nye spel og andre sider som viser bragder skal bruke den felles katalogen `json/bragder.json`, visingsmodulen `js/vyrdepil-bragd.js` og lagrings-API-et i `js/vyrdepil-storage.js` (`recordBadge`, `updateBragdProgress`, `getBragdData`). Bruk same Bragd-komponent og visuell familie på tvers av spela; vis òg applogo og spelnamn.
+- Bruk stabile app-ID-ar og bragd-ID-ar. Spelet eig vilkåra og registrerer berre ei bragd når evaluatoren faktisk låser henne opp. Det rapporterer framgang når speltilstanden blir endra. Fellesmodulen skal ikkje evaluere spelvilkår, spørje etter framgang i bakgrunnen eller halde ei parallell samling.
+- All lagring skal gå gjennom `VyrdepilStorage`; ikkje skriv direkte til `localStorage`. Bragd-blokka skal ikkje innehalde elevnamn eller oppteningsdatoar. Ved overgang frå eldre speldata skal det lagast ei versjonert, idempotent migrering som les kjeldedata utan å endre dei.
+- Bruk «Bragd» konsekvent i brukarvendt tekst, med nynorsk bøying som «Ny bragd» og «Bragdane dine». Oppdater personverninformasjonen dersom lagringsinnhaldet eller føremålet endrar seg.
+- **Ljodstigen er ei eksisterande særordning:** det unike progresjonssystemet hennar blir verande separat, men brukarvendt achievement-tekst skal seie «Bragd». Nye unntak frå fellesløysinga krev ei medviten avgjerd.
+
 ### 5.2 JSON-eksport
 Alle eksporterte data-objekt (lagra spel, quizzar, oppsett, kortsamlingar) skal innehalde to felt på toppnivå:
 

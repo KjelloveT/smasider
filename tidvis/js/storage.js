@@ -59,6 +59,15 @@
   function setProgress(progress) {
     if (!hasStorage()) return;
     VyrdepilStorage.setGameState(GAME, progress);
+    VyrdepilStorage.updateBragdProgress(GAME, {
+      level: Math.floor((Number(progress.xp) || 0) / 200) + 1,
+      xp: Number(progress.xp) || 0,
+      xpIntoLevel: (Number(progress.xp) || 0) % 200,
+      correctAnswers: Number(progress.stats && progress.stats.totalCorrect) || 0,
+      gamesPlayed: Number(progress.stats && progress.stats.gamesPlayed) || 0,
+      bestStreak: Number(progress.stats && progress.stats.bestStreak) || 0,
+      levelCompletion: Array.isArray(progress.levelCompletion) ? progress.levelCompletion.slice(0, 4) : [0, 0, 0, 0]
+    });
   }
 
   function getHighScore() {

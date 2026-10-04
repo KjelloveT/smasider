@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.6">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
 <body data-vp-app="vidfaren" data-vp-layout="standard" data-vp-site-footer>
@@ -31,7 +31,7 @@
       <div class="lk-stat"><span class="lk-stat-val" id="statTotal">0</span><span class="lk-stat-lbl">Poeng totalt</span></div>
       <button class="lk-stat lk-stat-btn" id="badgeBtn" type="button">
         <span class="lk-stat-val"><span data-icon="trophy" data-icon-size="22"></span> <span id="badgeCountTop">0</span></span>
-        <span class="lk-stat-lbl">Merke</span>
+        <span class="lk-stat-lbl">Bragder</span>
       </button>
     </div>
 
@@ -93,30 +93,31 @@
 </main>
 </div>
 
-<!-- ══════════ MERKE-MODAL ══════════ -->
+<!-- ══════════ BRAGD-MODAL ══════════ -->
 <div id="badgeModal" class="modal-overlay vp-modal-backdrop">
   <div class="modal-box lk-badge-modal vp-modal-panel">
     <div class="lk-badge-head">
-      <h2><span data-icon="trophy"></span> Merke <span class="lk-badge-count" id="badgeCount">0 / 0</span></h2>
-      <button class="btn lk-modal-close" onclick="closeBadgeGallery()" type="button"><span data-icon="x"></span></button>
+          <h2><span data-icon="trophy"></span> Bragdane dine <span class="lk-badge-count" id="badgeCount">0 / 0</span></h2>
+      <button class="btn lk-modal-close" onclick="closeBadgeGallery()" type="button" aria-label="Lukk Bragd-samlinga"><span data-icon="x"></span></button>
     </div>
     <div class="badge-grid" id="badgeGrid"></div>
   </div>
 </div>
 
 
-<script src="../js/vyrdepil-storage.js"></script>
+<script src="../js/vyrdepil-storage.js?v=2"></script>
+<script src="../js/vyrdepil-bragd.js?v=2"></script>
 <script src="../js/vyrdepil-icons.js"></script>
 <script src="../js/vyrdepil-util.js?v=1.2"></script>
 <script src="js/data.js"></script>
 <script src="js/map.js"></script>
-<script src="js/progression.js"></script>
+<script src="js/progression.js?v=2"></script>
 <script src="js/game.js"></script>
-<script src="js/progression-ui.js"></script>
+<script src="js/progression-ui.js?v=2"></script>
 <script src="js/main.js"></script>
 
 <script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=6"></script>
-<script src="../js/vyrdepil-menu.js"></script>
+<script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>
 </html>

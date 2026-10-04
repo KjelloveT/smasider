@@ -3,6 +3,19 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.77] — 2026-10-04
+
+### Lagt til
+- **Bragdane dine har ei felles samlingsside.** Heimsank, Vidfaren og Tidvis samlar oppnådde bragder og spelspesifikk framgang; Bolkestokk og Ormritaren viser bragder og prosentvis framgang i biblioteka sine.
+- **Eldre framgang blir teken med automatisk.** Fyrste relevante sideinnlasting kopierer opptente bragder og framgang frå dei gamle speldataa utan å endre kjeldene. Samlinga ligg lokalt og lagrar ikkje elevnamn eller oppteningsdatoar.
+
+### Endra
+- **Bragd er det felles ordet for achievement.** Ljodstigen held fram med sitt eige progresjonssystem, men brukar same ordbruk.
+- **Nye spel får ei felles rettleiing for bragder** i AGENTS.md, med krav om stabile ID-ar, felles lagring og rapportering ved faktiske endringar.
+
+### Fiksa
+- **Bragd-sida har betre luft og rett felles sidefot.** Varselboksar har òg fått meir plass rundt teksten.
+
 ## [1.76] — 2026-10-04
 
 ### Endra

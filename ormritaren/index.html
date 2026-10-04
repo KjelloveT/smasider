@@ -9,10 +9,11 @@
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="css/landing.css?v=18">
 <script src="../js/vyrdepil-icons.js" defer></script>
-<script src="../js/vyrdepil-storage.js" defer></script>
-<script src="js/framgang.js" defer></script>
-<script src="js/landing.js" defer></script>
-<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+<script src="../js/vyrdepil-storage.js?v=2" defer></script>
+<script src="../js/vyrdepil-bragd.js?v=2" defer></script>
+<script src="js/framgang.js?v=1" defer></script>
+<script src="js/landing.js?v=1" defer></script>
+<link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.6">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
 <body data-vp-app="ormritaren" data-vp-layout="medium" data-vp-site-footer>
@@ -56,6 +57,17 @@
 
   <p class="orm-landing-lasting" id="lasteMelding">Hentar modulane …</p>
 
+  <section class="box1 vp-bragd-app-panel" aria-labelledby="ormBragdTittel">
+    <h2 class="heading4 no-mt" id="ormBragdTittel">Bragder og biblioteksframgang</h2>
+    <p id="ormBibliotekstal" aria-live="polite">Lastar biblioteket …</p>
+    <div class="vp-bragd-library-meter" id="ormBiblioteksspor" role="progressbar" aria-label="Framgang i Ormritaren-biblioteket" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="ormBiblioteksfyll" style="width:0%"></span></div>
+    <details>
+      <summary>Sjå bragdene i Ormritaren</summary>
+      <div class="vp-bragd-grid" id="ormBragder" aria-busy="true"></div>
+    </details>
+    <p><a href="../merke.html">Sjå alle bragdane dine på Vyrdepil</a></p>
+  </section>
+
   <section class="box1 orm-larartekst">
     <h2 class="heading4 no-mt">Til deg som er lærar</h2>
     <p>
@@ -92,6 +104,6 @@
 <script src="../js/vyrdepil-util.js?v=1.2"></script>
 <script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=6"></script>
-<script src="../js/vyrdepil-menu.js"></script>
+<script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>
 </html>
