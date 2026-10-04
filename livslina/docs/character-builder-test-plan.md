@@ -24,6 +24,8 @@ Samansetjing skjer på den same 96 × 128-flata i rekkja kropp/hud, klede, synle
 
 Fire uavhengige veljarar skal ha fem namngjevne alternativ kvar: hudtone, andlet, frisyre og antrekk. Det gjev 625 moglege kombinasjonar. «Tilfeldig figur» trekkjer eitt alternativ i kvar gruppe; «Start på nytt» vel fyrste alternativ i kvar gruppe. Valde namn skal visast som lesbar tekst.
 
+Andre detaljrunde gjer andleta til eit breitt smil, overrasking, briller, blunk med fregner og eit sjølvsikkert uttrykk. Antrekka er ein hettegenser, open jakke, mønstra strikkegenser, overall med T-skjorte og skjorte med krage. Snitt, uttrykk og små detaljar skal vere synlege ved vanleg vising, ikkje berre ved forstørring.
+
 ## Filstruktur
 
 - `assets/prototype/character-builder-test.html` — prøvesida.
@@ -36,6 +38,7 @@ Fire uavhengige veljarar skal ha fem namngjevne alternativ kvar: hudtone, andlet
 
 - Stadfest at kvart lag blir teikna innanfor den gjennomsiktige 96 × 128-flata.
 - Kontroller alle 20 variantane og fleire ytterkombinasjonar visuelt: lys/mørk hud, kort/langt/teksturert hår og alle antrekk.
+- Ansiktsvala skal skiljast med augeform, bryn og munn, ikkje berre små pyntedetaljar. Klesvala skal ha ulike snitt eller konstruksjonsdetaljar, ikkje berre ulik farge.
 - Test at veljarane berre endrar si eiga familie, tilfeldig-knappen endrar alle fire, og tilbakestilling gjev same startfigur.
 - Test tastaturfokus og smal mobilbreidd, og sjå etter hol, ujamn skalering, avklipt hår eller klede og vassrett overflyt.
 - Hald prøva utan lagring av brukarval, nettverkskall eller speleøkonomiske verdiar.

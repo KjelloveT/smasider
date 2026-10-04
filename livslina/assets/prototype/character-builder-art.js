@@ -18,9 +18,9 @@ window.LivslinaCharacterArt = (() => {
   ];
   const labels = {
     skin: ["Ljos varm", "Ljos nøytral", "Mellomvarm", "Djup brun", "Mørk brun"],
-    face: ["Lunt smil", "Nysgjerrig", "Med briller", "Fregner", "Sjølvsikkert"],
+    face: ["Breitt smil", "Overraska", "Briller", "Blink og fregner", "Sjølvsikker"],
     hair: ["Kort krøllhår", "Langt bølgjehår", "Fletter", "Rett lugg", "Høg hestehale"],
-    clothes: ["Blå hettegenser", "Rustraud jakke", "Lilla genser", "Grøn overall", "Turkis skjorte"]
+    clothes: ["Blå hettegenser", "Rustraud jakke", "Lilla strikkegenser", "Grøn overall", "Turkis skjorte"]
   };
 
   function rect(ctx, x, y, width, height, color) {
@@ -149,10 +149,70 @@ window.LivslinaCharacterArt = (() => {
     }
   }
 
+  function drawGarmentDetails(ctx, colors, style) {
+    if (style === 0) {
+      // Hood and pouch pocket give the blue top a strong hoodie silhouette.
+      rows(ctx, ink, [[41, 43, 14, 3], [39, 46, 18, 3], [39, 49, 3, 6], [54, 49, 3, 6]]);
+      rows(ctx, colors.shade, [[42, 45, 12, 2], [40, 48, 2, 4], [56, 48, 2, 4]]);
+      rows(ctx, colors.light, [[42, 46, 3, 1], [51, 46, 3, 1]]);
+      rows(ctx, colors.trim, [[44, 52, 1, 9], [51, 52, 1, 9], [44, 60, 2, 1], [50, 60, 2, 1]]);
+      rows(ctx, ink, [[39, 69, 18, 8]]);
+      rows(ctx, colors.main, [[41, 70, 14, 5]]);
+      rows(ctx, colors.light, [[42, 70, 4, 1], [51, 70, 3, 1]]);
+      rows(ctx, colors.shade, [[47, 72, 2, 3]]);
+      rows(ctx, colors.trim, [[29, 68, 7, 2], [60, 68, 7, 2]]);
+    } else if (style === 1) {
+      // Open jacket, contrasting shirt, lapels and two patch pockets.
+      rows(ctx, ink, [[44, 49, 2, 30], [50, 49, 2, 30]]);
+      rows(ctx, "#e9d8bc", [[46, 50, 4, 28]]);
+      rows(ctx, "#b9a98f", [[47, 52, 2, 25]]);
+      rows(ctx, colors.light, [[38, 47, 6, 3], [42, 50, 4, 3], [52, 50, 4, 3], [54, 47, 6, 3]]);
+      rows(ctx, colors.shade, [[39, 51, 4, 3], [53, 51, 4, 3]]);
+      rows(ctx, ink, [[35, 67, 9, 8], [52, 67, 9, 8]]);
+      rows(ctx, colors.main, [[36, 68, 7, 5], [53, 68, 7, 5]]);
+      rows(ctx, colors.trim, [[36, 68, 7, 1], [53, 68, 7, 1], [41, 55, 1, 1], [54, 55, 1, 1]]);
+      rows(ctx, ink, [[43, 55, 1, 2], [53, 63, 1, 2], [42, 75, 1, 2], [54, 75, 1, 2]]);
+    } else if (style === 2) {
+      // Ribbed collar, knit bands and a stepped diamond pattern.
+      rows(ctx, ink, [[41, 44, 14, 4], [43, 42, 10, 3]]);
+      rows(ctx, colors.shade, [[43, 44, 10, 2]]);
+      rows(ctx, colors.trim, [[44, 45, 8, 1], [29, 67, 7, 3], [60, 67, 7, 3], [35, 84, 27, 3]]);
+      rows(ctx, colors.light, [[46, 56, 4, 2], [44, 58, 8, 2], [42, 60, 12, 2], [44, 62, 8, 2], [46, 64, 4, 2]]);
+      rows(ctx, colors.shade, [[47, 58, 2, 2], [45, 60, 6, 2], [47, 62, 2, 2]]);
+      rows(ctx, colors.trim, [[35, 59, 5, 1], [56, 59, 5, 1], [38, 71, 3, 2], [55, 71, 3, 2]]);
+      rows(ctx, colors.light, [[30, 64, 5, 1], [63, 64, 5, 1]]);
+    } else if (style === 3) {
+      // Pale undershirt sleeves sit beneath a bib, straps and metal clips.
+      rows(ctx, "#e7dcc5", [[30, 51, 5, 13], [61, 51, 5, 13], [41, 47, 14, 5]]);
+      rows(ctx, "#b9aa8d", [[29, 63, 7, 3], [60, 63, 7, 3]]);
+      rows(ctx, ink, [[39, 47, 5, 14], [52, 47, 5, 14], [40, 56, 16, 19]]);
+      rows(ctx, colors.light, [[41, 49, 2, 9], [53, 49, 2, 9], [42, 58, 12, 14]]);
+      rows(ctx, colors.main, [[43, 59, 10, 10]]);
+      rows(ctx, colors.trim, [[40, 48, 4, 3], [52, 48, 4, 3], [38, 71, 2, 3], [56, 71, 2, 3]]);
+      rows(ctx, ink, [[44, 61, 8, 7]]);
+      rows(ctx, colors.shade, [[45, 62, 6, 4]]);
+      rows(ctx, colors.light, [[46, 63, 4, 1]]);
+      rows(ctx, colors.trim, [[44, 70, 1, 1], [51, 70, 1, 1]]);
+    } else {
+      // A visible collar, button placket and chest pocket distinguish the shirt.
+      rows(ctx, ink, [[39, 45, 9, 5], [48, 45, 9, 5]]);
+      rows(ctx, "#e8dfca", [[41, 46, 5, 3], [50, 46, 5, 3]]);
+      rows(ctx, colors.light, [[42, 47, 3, 2], [51, 47, 3, 2]]);
+      rows(ctx, ink, [[47, 50, 2, 28]]);
+      rows(ctx, colors.trim, [[47, 52, 2, 22]]);
+      rows(ctx, "#e8dfca", [[53, 61, 7, 8]]);
+      rows(ctx, ink, [[52, 60, 9, 1], [52, 61, 1, 9], [60, 61, 1, 9], [52, 69, 9, 1]]);
+      rows(ctx, colors.light, [[54, 62, 5, 5], [53, 61, 7, 1]]);
+      rows(ctx, colors.trim, [[55, 64, 1, 1], [48, 55, 1, 1], [48, 62, 1, 1], [48, 69, 1, 1]]);
+      rows(ctx, colors.shade, [[29, 64, 7, 3], [60, 64, 7, 3]]);
+    }
+  }
+
   function drawOutfit(ctx, index) {
     const colors = outfits[index];
     drawTrousers(ctx, colors, index);
     drawShirtShape(ctx, colors, index);
+    drawGarmentDetails(ctx, colors, index);
     drawShoes(ctx, colors, index);
     // Small fixed waist and seam details make every outfit readable at native size.
     rows(ctx, colors.trim, [[39, 88, 18, 1]]);
@@ -167,49 +227,67 @@ window.LivslinaCharacterArt = (() => {
   }
 
   function drawEye(ctx, x, y, size = 3, pupilOffset = 0) {
-    rect(ctx, x, y, size + 2, 2, ink);
-    rect(ctx, x + 1 + pupilOffset, y + 1, 2, 2, "#fff4d7");
-    rect(ctx, x + 2 + pupilOffset, y + 1, 1, 2, "#28232d");
+    rect(ctx, x, y, size + 2, 1, ink);
+    rect(ctx, x, y + 1, size + 2, 3, "#fff4d7");
+    rect(ctx, x + 1 + pupilOffset, y + 1, 2, 3, "#28232d");
+    rect(ctx, x + 1 + pupilOffset, y + 1, 1, 1, "#ffffff");
   }
 
   function drawFace(ctx, index) {
     if (index === 0) {
-      rows(ctx, shadeInk, [[39, 22, 6, 1], [51, 22, 6, 1]]);
-      drawEye(ctx, 40, 25, 3);
-      drawEye(ctx, 52, 25, 3);
-      rows(ctx, shadeInk, [[47, 28, 2, 3]]);
-      rows(ctx, ink, [[43, 33, 10, 2], [45, 35, 6, 1]]);
-      rows(ctx, "#f0a07e", [[46, 33, 4, 1]]);
+      // Broad grin, bright teeth and raised cheeks.
+      rows(ctx, ink, [[39, 21, 7, 2], [51, 21, 7, 2]]);
+      drawEye(ctx, 40, 24, 3);
+      drawEye(ctx, 52, 24, 3);
+      rows(ctx, shadeInk, [[47, 29, 2, 3]]);
+      rows(ctx, "#c97868", [[38, 31, 3, 2], [55, 31, 3, 2]]);
+      rows(ctx, ink, [[42, 33, 12, 4], [44, 37, 8, 1]]);
+      rows(ctx, "#fff0d2", [[44, 34, 8, 1], [45, 35, 6, 1]]);
+      rows(ctx, "#cf675d", [[46, 36, 4, 1]]);
     } else if (index === 1) {
-      rows(ctx, ink, [[39, 21, 7, 2], [52, 22, 6, 1]]);
-      drawEye(ctx, 40, 25, 3, 1);
-      drawEye(ctx, 52, 25, 3, 1);
-      rows(ctx, shadeInk, [[47, 28, 2, 4]]);
-      rows(ctx, ink, [[45, 34, 6, 2]]);
-      rows(ctx, "#fff0d2", [[46, 34, 4, 1]]);
+      // Raised brows, wide eyes and a clear round "O" mouth.
+      rows(ctx, shadeInk, [[39, 20, 7, 1], [52, 20, 7, 1]]);
+      rows(ctx, ink, [[40, 19, 5, 1], [53, 19, 5, 1]]);
+      rect(ctx, 40, 23, 6, 6, ink);
+      rect(ctx, 41, 24, 4, 4, "#fff4d7");
+      rect(ctx, 42, 25, 2, 3, "#28232d");
+      rect(ctx, 51, 23, 6, 6, ink);
+      rect(ctx, 52, 24, 4, 4, "#fff4d7");
+      rect(ctx, 53, 25, 2, 3, "#28232d");
+      rows(ctx, shadeInk, [[47, 29, 2, 3]]);
+      rows(ctx, ink, [[45, 33, 7, 5]]);
+      rows(ctx, "#a94f50", [[47, 35, 3, 2]]);
+      rows(ctx, "#f1c398", [[47, 33, 3, 1]]);
     } else if (index === 2) {
-      rows(ctx, shadeInk, [[39, 22, 7, 1], [51, 22, 7, 1]]);
+      // Thick round frames remain separate from the visible eyes.
+      rows(ctx, shadeInk, [[39, 21, 7, 1], [51, 21, 7, 1]]);
       drawEye(ctx, 40, 25, 3);
       drawEye(ctx, 52, 25, 3);
-      rows(ctx, ink, [[38, 24, 1, 7], [47, 24, 2, 2], [58, 24, 1, 7], [39, 24, 8, 1], [50, 24, 8, 1], [39, 30, 8, 1], [50, 30, 8, 1]]);
+      rows(ctx, ink, [
+        [39, 23, 7, 1], [38, 24, 1, 6], [39, 30, 7, 1], [45, 24, 1, 6],
+        [51, 23, 7, 1], [50, 24, 1, 6], [51, 30, 7, 1], [57, 24, 1, 6], [46, 26, 4, 1]
+      ]);
+      rows(ctx, "#8fb5b5", [[40, 24, 2, 1], [52, 24, 2, 1]]);
       rows(ctx, shadeInk, [[47, 28, 2, 3]]);
-      rows(ctx, ink, [[44, 34, 8, 1], [46, 35, 4, 1]]);
-      rows(ctx, "#fff4d7", [[39, 25, 2, 1], [50, 25, 2, 1]]);
+      rows(ctx, ink, [[45, 34, 6, 1], [46, 35, 4, 1]]);
     } else if (index === 3) {
-      rows(ctx, shadeInk, [[39, 22, 6, 1], [52, 22, 6, 1]]);
-      drawEye(ctx, 40, 25, 3);
-      drawEye(ctx, 52, 25, 3);
-      rows(ctx, shadeInk, [[47, 28, 2, 3]]);
-      rows(ctx, ink, [[44, 33, 8, 2]]);
-      rows(ctx, "#f0a07e", [[45, 33, 6, 1]]);
-      rows(ctx, "#8f4d45", [[39, 29, 1, 1], [42, 31, 1, 1], [55, 30, 1, 1], [58, 29, 1, 1], [41, 34, 1, 1], [56, 34, 1, 1]]);
+      // A wink and freckles make this expression distinct at native size.
+      rows(ctx, shadeInk, [[39, 21, 6, 1], [52, 21, 6, 1]]);
+      rows(ctx, ink, [[40, 25, 6, 2], [41, 26, 4, 1]]);
+      drawEye(ctx, 52, 24, 3);
+      rows(ctx, shadeInk, [[47, 29, 2, 3]]);
+      rows(ctx, ink, [[43, 34, 10, 2], [46, 36, 5, 1]]);
+      rows(ctx, "#fff0d2", [[45, 34, 6, 1]]);
+      rows(ctx, "#8f4d45", [[38, 29, 1, 1], [41, 31, 1, 1], [44, 30, 1, 1], [54, 29, 1, 1], [57, 31, 1, 1], [59, 29, 1, 1], [42, 34, 1, 1], [56, 34, 1, 1]]);
     } else {
-      rows(ctx, ink, [[39, 22, 7, 2], [52, 21, 7, 2]]);
-      rows(ctx, shadeInk, [[40, 24, 5, 1], [53, 24, 5, 1]]);
+      // One angled brow and a crooked smile read as self-assured.
+      rows(ctx, ink, [[39, 22, 7, 1], [52, 20, 7, 1]]);
+      rows(ctx, shadeInk, [[40, 23, 6, 1], [53, 22, 6, 1]]);
       drawEye(ctx, 40, 25, 3);
-      drawEye(ctx, 52, 25, 3);
-      rows(ctx, shadeInk, [[47, 28, 2, 4]]);
-      rows(ctx, ink, [[43, 34, 10, 1], [45, 35, 6, 1]]);
+      drawEye(ctx, 52, 24, 3);
+      rows(ctx, ink, [[48, 29, 2, 3]]);
+      rows(ctx, ink, [[43, 34, 8, 1], [49, 33, 4, 1]]);
+      rows(ctx, "#fff0d2", [[44, 34, 5, 1]]);
     }
   }
 

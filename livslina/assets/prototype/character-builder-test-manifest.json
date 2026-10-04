@@ -9,6 +9,7 @@
   "updated": "2026-10-04",
   "status": "local-prototype",
   "artStyle": "detailed-8-bit-pixel-art",
+  "detailRevision": 2,
   "logicalCanvas": {
     "width": 96,
     "height": 128,
@@ -26,11 +27,11 @@
       { "id": "skin-05", "label": "Mørk brun" }
     ],
     "face": [
-      { "id": "face-01", "label": "Lunt smil" },
-      { "id": "face-02", "label": "Nysgjerrig" },
-      { "id": "face-03", "label": "Med briller" },
-      { "id": "face-04", "label": "Fregner" },
-      { "id": "face-05", "label": "Sjølvsikkert" }
+      { "id": "face-01", "label": "Breitt smil" },
+      { "id": "face-02", "label": "Overraska" },
+      { "id": "face-03", "label": "Briller" },
+      { "id": "face-04", "label": "Blink og fregner" },
+      { "id": "face-05", "label": "Sjølvsikker" }
     ],
     "hair": [
       { "id": "hair-01", "label": "Kort krøllhår" },
@@ -42,7 +43,7 @@
     "clothes": [
       { "id": "clothes-01", "label": "Blå hettegenser" },
       { "id": "clothes-02", "label": "Rustraud jakke" },
-      { "id": "clothes-03", "label": "Lilla genser" },
+      { "id": "clothes-03", "label": "Lilla strikkegenser" },
       { "id": "clothes-04", "label": "Grøn overall" },
       { "id": "clothes-05", "label": "Turkis skjorte" }
     ]

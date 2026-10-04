@@ -72,6 +72,7 @@
     "resources": "character-builder-test-manifest.json",
     "status": "local-layered-pixel-art-prototype",
     "logicalCanvas": "96x128",
+    "detailRevision": 2,
     "layerOrder": ["skin-body", "clothes", "skin-hands", "face", "hair"],
     "choicesPerLayer": 5,
     "possibleCombinations": 625,
