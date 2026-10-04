@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="nn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3ecd8">
+  <title>Karakterbyggjar — Livslina</title>
+  <link rel="stylesheet" href="character-builder-test.css">
+</head>
+<body>
+  <main class="builder-shell">
+    <header class="page-heading">
+      <p class="eyebrow">Livslina · ressursprøve</p>
+      <h1>Karakterbyggjar</h1>
+      <p class="intro">Prøv ulike delar kvar for seg. Hår, andlet, hud og klede passar saman på same figur.</p>
+    </header>
+
+    <section class="builder" aria-label="Karakterbyggjar">
+      <figure class="preview-panel">
+        <div class="character-stage">
+          <canvas id="character" width="96" height="128" role="img" aria-label="Karakter med ljos varm hud, lunt smil, kort krøllhår og blå hettegenser"></canvas>
+        </div>
+        <figcaption id="selected-summary" aria-live="polite">Ljos varm hud · Lunt smil · Kort krøllhår · Blå hettegenser</figcaption>
+        <p class="canvas-note">Fast figurmål · 96 × 128 pikslar</p>
+      </figure>
+
+      <div class="controls-panel">
+        <div class="toolbar">
+          <button class="action-button action-button--primary" id="randomize" type="button">Tilfeldig figur</button>
+          <button class="action-button" id="reset" type="button">Start på nytt</button>
+        </div>
+
+        <fieldset class="choice-group" data-family="skin">
+          <legend><span class="step">1</span> Hudfarge</legend>
+          <div class="choices">
+            <button type="button" class="choice is-selected" data-option="0" aria-pressed="true"><span class="swatch swatch--skin-1"></span><span>Ljos varm</span></button>
+            <button type="button" class="choice" data-option="1" aria-pressed="false"><span class="swatch swatch--skin-2"></span><span>Ljos nøytral</span></button>
+            <button type="button" class="choice" data-option="2" aria-pressed="false"><span class="swatch swatch--skin-3"></span><span>Mellomvarm</span></button>
+            <button type="button" class="choice" data-option="3" aria-pressed="false"><span class="swatch swatch--skin-4"></span><span>Djup brun</span></button>
+            <button type="button" class="choice" data-option="4" aria-pressed="false"><span class="swatch swatch--skin-5"></span><span>Mørk brun</span></button>
+          </div>
+        </fieldset>
+
+        <fieldset class="choice-group" data-family="face">
+          <legend><span class="step">2</span> Andlet</legend>
+          <div class="choices">
+            <button type="button" class="choice is-selected" data-option="0" aria-pressed="true">Lunt smil</button>
+            <button type="button" class="choice" data-option="1" aria-pressed="false">Nysgjerrig</button>
+            <button type="button" class="choice" data-option="2" aria-pressed="false">Med briller</button>
+            <button type="button" class="choice" data-option="3" aria-pressed="false">Fregner</button>
+            <button type="button" class="choice" data-option="4" aria-pressed="false">Sjølvsikkert</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="choice-group" data-family="hair">
+          <legend><span class="step">3</span> Frisyre</legend>
+          <div class="choices">
+            <button type="button" class="choice is-selected" data-option="0" aria-pressed="true">Kort krøllhår</button>
+            <button type="button" class="choice" data-option="1" aria-pressed="false">Langt bølgjehår</button>
+            <button type="button" class="choice" data-option="2" aria-pressed="false">Fletter</button>
+            <button type="button" class="choice" data-option="3" aria-pressed="false">Rett lugg</button>
+            <button type="button" class="choice" data-option="4" aria-pressed="false">Høg hestehale</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="choice-group" data-family="clothes">
+          <legend><span class="step">4</span> Klede</legend>
+          <div class="choices">
+            <button type="button" class="choice is-selected" data-option="0" aria-pressed="true">Blå hettegenser</button>
+            <button type="button" class="choice" data-option="1" aria-pressed="false">Rustraud jakke</button>
+            <button type="button" class="choice" data-option="2" aria-pressed="false">Lilla genser</button>
+            <button type="button" class="choice" data-option="3" aria-pressed="false">Grøn overall</button>
+            <button type="button" class="choice" data-option="4" aria-pressed="false">Turkis skjorte</button>
+          </div>
+        </fieldset>
+
+        <p class="combination-note">Fem val i kvar gruppe gjev 625 moglege kombinasjonar.</p>
+      </div>
+    </section>
+    <footer><a href="layout-asset-test.html">Attende til romprøva</a></footer>
+  </main>
+  <script src="character-builder-art.js"></script>
+  <script src="character-builder-test.js"></script>
+</body>
+</html>

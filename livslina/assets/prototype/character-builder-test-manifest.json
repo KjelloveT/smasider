@@ -1,0 +1,55 @@
+{
+  "app": "livslina",
+  "version": 1,
+  "id": "character-builder-test-v1",
+  "label": "Lagdelt karakterbyggjarprøve",
+  "page": "character-builder-test.html",
+  "renderer": "character-builder-art.js",
+  "controller": "character-builder-test.js",
+  "updated": "2026-10-04",
+  "status": "local-prototype",
+  "artStyle": "detailed-8-bit-pixel-art",
+  "logicalCanvas": {
+    "width": 96,
+    "height": 128,
+    "transparent": true,
+    "scale": "pixelated",
+    "pose": "standing-front-neutral"
+  },
+  "layerOrder": ["skin-body", "clothes", "skin-hands", "face", "hair"],
+  "families": {
+    "skin": [
+      { "id": "skin-01", "label": "Ljos varm" },
+      { "id": "skin-02", "label": "Ljos nøytral" },
+      { "id": "skin-03", "label": "Mellomvarm" },
+      { "id": "skin-04", "label": "Djup brun" },
+      { "id": "skin-05", "label": "Mørk brun" }
+    ],
+    "face": [
+      { "id": "face-01", "label": "Lunt smil" },
+      { "id": "face-02", "label": "Nysgjerrig" },
+      { "id": "face-03", "label": "Med briller" },
+      { "id": "face-04", "label": "Fregner" },
+      { "id": "face-05", "label": "Sjølvsikkert" }
+    ],
+    "hair": [
+      { "id": "hair-01", "label": "Kort krøllhår" },
+      { "id": "hair-02", "label": "Langt bølgjehår" },
+      { "id": "hair-03", "label": "Fletter" },
+      { "id": "hair-04", "label": "Rett lugg" },
+      { "id": "hair-05", "label": "Høg hestehale" }
+    ],
+    "clothes": [
+      { "id": "clothes-01", "label": "Blå hettegenser" },
+      { "id": "clothes-02", "label": "Rustraud jakke" },
+      { "id": "clothes-03", "label": "Lilla genser" },
+      { "id": "clothes-04", "label": "Grøn overall" },
+      { "id": "clothes-05", "label": "Turkis skjorte" }
+    ]
+  },
+  "choiceCountPerFamily": 5,
+  "possibleCombinations": 625,
+  "storesUserChoices": false,
+  "networkRequests": false,
+  "gameEconomyConnected": false
+}
