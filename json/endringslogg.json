@@ -2,6 +2,28 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.76",
+      "dato": "2026-10-04",
+      "samandrag": "Ormritaren har fått ei ryddigare arbeidsflate, ny slange-logo og leksjonar i trekkspel.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Ormritaren",
+          "tekst": "Kodefeltet kan vere opptil 1000 px breitt. Køyring ligg ved kodeoverskrifta, og leksjonsdelane har eigne fargar og Vyrde-positurar. Ei pil viser når sidemenyen har meir innhald, og filnamn kan vere opptil 50 teikn. Ormritaren har fått ny slange-logo."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Ormritaren",
+          "tekst": "Den ekstra Pyodide- og personvernteksten er fjerna frå botnen av sida; opplysningane står i den felles sidefoten."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Endringsloggen",
+          "tekst": "JSON-strukturen for 1.74-punkta om BåreTevling og Vegamot er reparert, slik at endringslista kan lesast."
+        }
+      ]
+    },
+    {
       "versjon": "1.75",
       "dato": "2026-10-03",
       "samandrag": "Tryggare vising, lagring, import og poengberekning i spela og verktøya.",
@@ -41,14 +63,13 @@
     {
       "versjon": "1.74",
       "dato": "2026-10-02",
-      "samandrag": "BåreTevling har fått klassiske seilskip og moderne krigsskip som valbare spelbrikker.",
+      "samandrag": "BåreTevling har fått nye skipsbrikker, og Vegamot har fått ei ryddigare redigeringsflate.",
       "punkt": [
         {
           "t": "endra",
           "kva": "BåreTevling",
           "tekst": "Vel mellom klassiske seilskip og moderne krigsskip. Skipbrikkene viser heile skipet over dei valde rutene."
-      "samandrag": "Vegamot har fått ei ryddigare redigeringsflate og eit meir oversiktleg flytkart.",
-      "punkt": [
+        },
         {
           "t": "endra",
           "kva": "Vegamot",

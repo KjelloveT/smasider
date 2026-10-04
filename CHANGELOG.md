@@ -3,6 +3,15 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.76] — 2026-10-04
+
+### Endra
+- **Ormritaren har fått ei ryddigare arbeidsflate og ny slange-logo.** Kodefeltet kan vere opptil 1000 px breitt, køyring ligg ved kodeoverskrifta, og leksjonsdelane har eigne farga trekkspel med ulike Vyrde-positurar. Rullefeltet i sidemenyen er skjult og ei pil viser når meir innhald finst. Filnamn kan vere opptil 50 teikn.
+
+### Fiksa
+- **Teksten under Ormritaren er fjerna.** Opplysningane om Pyodide og personvern står alt i den felles sidefoten.
+- **Endringsloggen kan lesast att.** JSON-strukturen for 1.74-punkta om BåreTevling og Vegamot er reparert.
+
 ## [1.75] — 2026-10-03
 
 ### Fiksa

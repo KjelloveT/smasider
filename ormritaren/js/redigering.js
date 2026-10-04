@@ -179,17 +179,13 @@ const OrmRedigering = (function () {
     function rull_visinga(namn) {
         if (!visingKlar || !visingPaa || !namn) return;
         const dok = el.visingRamme.contentDocument;
-        const boks = dok && dok.getElementById('panelLeksjon');
+        const boks = dok && (dok.getElementById('panelLeksjonInnhald') || dok.getElementById('panelLeksjon'));
         if (!boks) return;
         const maal = boks.querySelector(`[data-bolk="${CSS.escape(namn)}"]`);
         if (!maal) return;
-        /* offsetTop, ikkje getBoundingClientRect: panelet er sticky, og då
-         * flyttar rect-en seg med rullinga i sida rundt, så same utrekninga
-         * gav ulikt svar frå gong til gong. offsetTop er avstanden inne i
-         * innhaldet og ligg i ro. (Panelet er posisjonert, så det er sjølv
-         * offsetParent for bolkane.) */
-        let av = 0;
-        for (let e = maal; e && e !== boks; e = e.offsetParent) av += e.offsetTop;
+        /* Mål avstanden relativt til den faktiske rulleflata. Då kan
+         * førehandsvisinga flytte seg inni ramma utan å rulle sjølve sida. */
+        const av = maal.getBoundingClientRect().top - boks.getBoundingClientRect().top + boks.scrollTop;
         boks.scrollTop = Math.max(0, av - 8);
     }
 
