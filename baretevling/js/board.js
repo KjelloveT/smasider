@@ -1,34 +1,39 @@
 // BåreTevling - Board Rendering and Coordinate System
 const Board = {
-    // The selected sprite sheet uses one complete, clipped ship per size.
     shipStyle: 'classic',
-    shipImageSets: {
-        classic: {
-            1: [{ img: 'resources/ships/classic-ships.png', viewBox: '163 1 61 63', preserveAspectRatio: 'none', cells: 1 }],
-            2: [{ img: 'resources/ships/classic-ships.png', viewBox: '144 65 105 71', preserveAspectRatio: 'none', cells: 2 }],
-            3: [{ img: 'resources/ships/classic-ships.png', viewBox: '120 136 154 82', preserveAspectRatio: 'none', cells: 3 }],
-            4: [{ img: 'resources/ships/classic-ships.png', viewBox: '100 216 195 84', preserveAspectRatio: 'none', cells: 4 }],
-            5: [{ img: 'resources/ships/classic-ships.png', viewBox: '94 297 212 86', preserveAspectRatio: 'none', cells: 5 }]
-        },
-        modern: {
-            1: [{ img: 'resources/ships/modern-ships.png', viewBox: '50 17 118 44', preserveAspectRatio: 'xMidYMid meet', cells: 1 }],
-            2: [{ img: 'resources/ships/modern-ships.png', viewBox: '53 73 185 66', preserveAspectRatio: 'xMidYMid meet', cells: 2 }],
-            3: [{ img: 'resources/ships/modern-ships.png', viewBox: '48 147 249 73', preserveAspectRatio: 'xMidYMid meet', cells: 3 }],
-            4: [{ img: 'resources/ships/modern-ships.png', viewBox: '28 221 324 82', preserveAspectRatio: 'xMidYMid meet', cells: 4 }],
-            5: [{ img: 'resources/ships/modern-ships.png', viewBox: '6 302 374 75', preserveAspectRatio: 'xMidYMid meet', cells: 5 }]
-        }
+    spriteCellSize: 64,
+    spriteAtlasSize: 320,
+    shipSpriteSheets: {
+        classic: 'resources/ships/classic-ships.png',
+        modern: 'resources/ships/modern-ships.png',
+        vehicles: 'resources/pieces/vehicles.png',
+        aircraft: 'resources/pieces/aircraft.png'
     },
+
+    // All sheets use five 64px rows: 1x1, 2x1, 3x1, 4x1, and 5x1 cells.
     get shipImages() {
-        return this.shipImageSets[this.shipStyle] || this.shipImageSets.classic;
+        const img = this.shipSpriteSheets[this.shipStyle] || this.shipSpriteSheets.classic;
+        const images = {};
+        for (let cells = 1; cells <= 5; cells++) {
+            images[cells] = [{ img, cells }];
+        }
+        return images;
     },
+
     setShipStyle(style) {
-        if (this.shipImageSets[style]) this.shipStyle = style;
+        this.shipStyle = Object.prototype.hasOwnProperty.call(this.shipSpriteSheets, style)
+            ? style
+            : 'classic';
+        return this.shipStyle;
     },
+
     createShipVisual(part) {
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        const [, , width, height] = part.viewBox.split(/\s+/).map(Number);
-        svg.setAttribute('viewBox', part.viewBox);
-        svg.setAttribute('preserveAspectRatio', part.preserveAspectRatio || 'xMidYMid meet');
+        const width = part.cells * this.spriteCellSize;
+        const height = this.spriteCellSize;
+        const y = (part.cells - 1) * this.spriteCellSize;
+        svg.setAttribute('viewBox', `0 ${y} ${width} ${height}`);
+        svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
         svg.setAttribute('width', width);
         svg.setAttribute('height', height);
         svg.setAttribute('aria-hidden', 'true');
@@ -37,8 +42,8 @@ const Board = {
 
         const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
         image.setAttribute('href', part.img);
-        image.setAttribute('width', '384');
-        image.setAttribute('height', '384');
+        image.setAttribute('width', this.spriteAtlasSize);
+        image.setAttribute('height', this.spriteAtlasSize);
         image.setAttribute('preserveAspectRatio', 'none');
         svg.appendChild(image);
         return svg;

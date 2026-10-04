@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BåreTevling – Slagskip med koordinatsystem</title>
+    <title>BåreTevling – Koordinatduell</title>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
@@ -24,7 +24,7 @@
                         <img src="../_resources/baretevling.png" alt="BåreTevling Logo" style="height: 120px; width: auto; object-fit: contain; filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.5));">
                         <div style="flex: 1;">
                             <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; line-height: 1; text-shadow: 2px 2px 0 rgba(0,0,0,0.3);">BåreTevling</h1>
-                            <p style="font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; margin: 0; opacity: 0.9;">Slagskip med koordinatsystem – lær deg å bruke A1, B2, osv!</p>
+                            <p style="font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; margin: 0; opacity: 0.9;">Plasser figurar med koordinatar – lær deg å bruke A1, B2, osv!</p>
                         </div>
                     </div>
 
@@ -36,17 +36,17 @@
                                 <h3>To-spelar modus</h3>
                                 <ol>
                                     <li>Vel spelmodus: <strong>Lokal to-spelar</strong></li>
-                                    <li>Spelar 1 plasserer sine skip ved å skrive koordinat (f.eks. A1) og velje himmelretning (N/S/Ø/V)</li>
-                                    <li>Spelar 2 plasserer sine skip på same måte</li>
+                                    <li>Spelar 1 plasserer figurane sine ved å skrive koordinat (f.eks. A1) og velje himmelretning (N/S/Ø/V)</li>
+                                    <li>Spelar 2 plasserer figurane sine på same måte</li>
                                     <li>Spelarane byter på å angripe ved å skrive koordinatar</li>
                                     <li>Når du skriv "treff" eller "bom", markerast det på begge brett</li>
-                                    <li>Først til å søkke alle motstandaren sine skip vinn!</li>
+                                    <li>Først til å treffa alle figurane til motstandaren vinn!</li>
                                 </ol>
                                 <h3>Mot datamaskinen</h3>
                                 <ol>
                                     <li>Vel spelmodus: <strong>Mot datamaskinen</strong></li>
-                                    <li>Plasser dine skip</li>
-                                    <li>Datamaskinen plasserer sine skip automatisk</li>
+                                    <li>Plasser figurane dine</li>
+                                    <li>Datamaskinen plasserer sine figurar automatisk</li>
                                     <li>Angrip ved å skrive koordinatar – datamaskinen svarer automatisk</li>
                                     <li>Datamaskinen angrip tilbake med ein smart algoritme</li>
                                 </ol>
@@ -81,15 +81,17 @@
                         </div>
 
                         <div class="settings-group">
-                            <p class="settings-label" id="shipStyleLabel">Skipslag</p>
+                            <p class="settings-label" id="shipStyleLabel">Figurtype</p>
                             <div class="btn-group" role="group" aria-labelledby="shipStyleLabel">
-                                <button type="button" class="opt-btn selected" data-ship-style="classic" aria-pressed="true">Klassiske seilskip</button>
+                                <button type="button" class="opt-btn selected" data-ship-style="classic" aria-pressed="true">Klassiske seglskip</button>
                                 <button type="button" class="opt-btn" data-ship-style="modern" aria-pressed="false">Moderne krigsskip</button>
+                                <button type="button" class="opt-btn" data-ship-style="vehicles" aria-pressed="false">Bilar og lastebilar</button>
+                                <button type="button" class="opt-btn" data-ship-style="aircraft" aria-pressed="false">Fly</button>
                             </div>
                         </div>
 
                         <div class="settings-group">
-                            <label class="settings-label">Skip-konfigurasjon</label>
+                            <label class="settings-label">Figuroppsett</label>
                             <div class="ship-config">
                                 <div class="ship-row">
                                     <span class="ship-label">Stor (5):</span>
@@ -122,8 +124,8 @@
                 <!-- Ship Placement Screen -->
                 <div id="placementScreen" class="screen hidden" style="width: 100%;">
                     <div class="box1" style="padding: 24px;">
-                        <h2 class="heading2 text-center" id="placementTitle">Plasser skip</h2>
-                        <p class="panel-sub" id="placementSub">Spelar 1 plasserer sine skip</p>
+                        <h2 class="heading2 text-center" id="placementTitle">Plasser figurar</h2>
+                        <p class="panel-sub" id="placementSub">Spelar 1 plasserer figurane sine</p>
 
                         <div class="board-container" id="placementBoardContainer">
                             <div class="board" id="placementBoard"></div>
@@ -147,11 +149,11 @@
                             </div>
 
                             <div class="current-ship">
-                                <label class="settings-label">Neste skip</label>
+                                <label class="settings-label">Neste figur</label>
                                 <div class="ship-preview" id="shipPreview"></div>
                             </div>
 
-                            <button class="btn" id="btnPlaceShip" style="margin-top: 12px; margin-bottom: 8px;">Plasser skip</button>
+                            <button class="btn" id="btnPlaceShip" style="margin-top: 12px; margin-bottom: 8px;">Plasser figur</button>
                             <button class="btn" id="btnStartGame" style="background: var(--bt-hit); color: #1a1a1a;" disabled>Start spel</button>
                         </div>
                     </div>
@@ -200,11 +202,11 @@
 
                         <div class="game-info">
                             <div class="info-box">
-                                <span class="info-label">Dine skip:</span>
+                                <span class="info-label">Dine figurar:</span>
                                 <span class="info-value" id="playerShipsLeft">7</span>
                             </div>
                             <div class="info-box">
-                                <span class="info-label">Motstandar skip:</span>
+                                <span class="info-label">Motstandaren sine figurar:</span>
                                 <span class="info-value" id="enemyShipsLeft">7</span>
                             </div>
                         </div>

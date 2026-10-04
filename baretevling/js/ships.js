@@ -162,12 +162,12 @@ const Ships = {
         const cells = this.getShipCells(startCoord, size, direction, boardSize);
         
         if (!cells) {
-            return { valid: false, message: 'Skipet går utanfor brettet' };
+            return { valid: false, message: 'Figuren går utanfor brettet' };
         }
         
         // Check for overlap
         if (!this.isValidPlacement(cells, boardData)) {
-            return { valid: false, message: 'Skipet overlappar med eit anna skip' };
+            return { valid: false, message: 'Figuren overlappar med ein annan figur' };
         }
         
         return { valid: true, cells };
@@ -186,7 +186,7 @@ const Ships = {
                 const shipVisual = Board.createShipVisual(part);
                 shipVisual.removeAttribute('aria-hidden');
                 shipVisual.setAttribute('role', 'img');
-                shipVisual.setAttribute('aria-label', `Skip (${size})`);
+                shipVisual.setAttribute('aria-label', `Figur (${size} ruter)`);
                 shipVisual.style.maxHeight = '60px';
                 shipVisual.style.width = 'auto';
                 wrapper.appendChild(shipVisual);

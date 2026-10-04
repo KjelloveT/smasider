@@ -3,6 +3,14 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.76] — 2026-10-04
+
+### Endra
+- **BåreTevling har fått fire figurtypar.** Vel mellom klassiske seglskip, moderne krigsskip, bilar og lastebilar eller fly. Alle spritearka følgjer same standard frå 1 til 5 ruter.
+
+### Fiksa
+- **Figurane held rette proporsjonar.** Spriteutsnitta er klipte reine, utan restar frå rada over.
+
 ## [1.75] — 2026-10-03
 
 ### Fiksa

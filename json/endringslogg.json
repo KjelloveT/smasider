@@ -2,6 +2,23 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.76",
+      "dato": "2026-10-04",
+      "samandrag": "BåreTevling har fire figurtypar med felles sprite-standard og rette proporsjonar.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "BåreTevling",
+          "tekst": "Vel mellom klassiske seglskip, moderne krigsskip, bilar og lastebilar eller fly. Alle spritearka følgjer same standard frå 1 til 5 ruter."
+        },
+        {
+          "t": "fiksa",
+          "kva": "BåreTevling",
+          "tekst": "Figurane held rette proporsjonar, og spriteutsnitta har ikkje lenger med restar frå rada over."
+        }
+      ]
+    },
+    {
       "versjon": "1.75",
       "dato": "2026-10-03",
       "samandrag": "Tryggare vising, lagring, import og poengberekning i spela og verktøya.",
@@ -41,14 +58,13 @@
     {
       "versjon": "1.74",
       "dato": "2026-10-02",
-      "samandrag": "BåreTevling har fått klassiske seilskip og moderne krigsskip som valbare spelbrikker.",
+      "samandrag": "BåreTevling har fått klassiske seglskip og moderne krigsskip, og Vegamot ei ryddigare arbeidsflate.",
       "punkt": [
         {
           "t": "endra",
           "kva": "BåreTevling",
-          "tekst": "Vel mellom klassiske seilskip og moderne krigsskip. Skipbrikkene viser heile skipet over dei valde rutene."
-      "samandrag": "Vegamot har fått ei ryddigare redigeringsflate og eit meir oversiktleg flytkart.",
-      "punkt": [
+          "tekst": "Vel mellom klassiske seglskip og moderne krigsskip. Skipbrikkene viser heile skipet over dei valde rutene."
+        },
         {
           "t": "endra",
           "kva": "Vegamot",
