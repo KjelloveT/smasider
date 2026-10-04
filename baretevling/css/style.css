@@ -12,7 +12,7 @@
 
 /* Start screen: let the hero stand on its own and give each choice a card. */
 body.vp-migrated-page[data-vp-app="baretevling"] .vp-migrated-intro {
-    width: min(100%, 1000px);
+    width: min(calc(100% - clamp(32px, 8vw, 72px)), 960px);
     grid-template-columns: minmax(0, 1fr);
     margin-block: 16px 28px;
 }
