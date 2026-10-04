@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.78] — 2026-10-04
+
+### Endra
+- **Bragd-sida viser heile katalogen.** Du kan sjå alle bragdene, kva spel dei høyrer til, og krava for å oppnå dei. Bragdene du har tent er markerte.
+
 ## [1.77] — 2026-10-04
 
 ### Lagt til

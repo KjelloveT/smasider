@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.78",
+      "dato": "2026-10-04",
+      "samandrag": "Bragd-sida viser alle bragdene frå dei fem spela.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Bragdane dine",
+          "tekst": "Sjå heile bragdkatalogen samla. Bragder du ikkje har oppnådd viser krava for å få dei."
+        }
+      ]
+    },
+    {
       "versjon": "1.77",
       "dato": "2026-10-04",
       "samandrag": "Felles Bragd-samling, automatisk overføring av eldre framgang og prosentvising for Bolkestokk og Ormritaren.",
