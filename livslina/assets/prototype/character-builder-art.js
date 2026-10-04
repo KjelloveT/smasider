@@ -1,4 +1,4 @@
-/* Pixel art for the Livslina character-layer test. Every part uses a 96 × 128 canvas. */
+/* Detailed pixel art for the Livslina character-layer test. Drawn on a 192 × 256 canvas from a shared 96 × 128 pose grid. */
 window.LivslinaCharacterArt = (() => {
   const ink = "#211d27";
   const shadeInk = "#403849";
@@ -216,6 +216,7 @@ window.LivslinaCharacterArt = (() => {
     drawShoes(ctx, colors, index);
     // Small fixed waist and seam details make every outfit readable at native size.
     rows(ctx, colors.trim, [[39, 88, 18, 1]]);
+    drawClothingFinish(ctx, index);
   }
 
   function drawHands(ctx, palette) {
@@ -226,19 +227,23 @@ window.LivslinaCharacterArt = (() => {
     rows(ctx, palette.deep, [[31, 85, 3, 1], [63, 85, 3, 1]]);
   }
 
-  function drawEye(ctx, x, y, size = 3, pupilOffset = 0) {
+  function drawEye(ctx, x, y, size = 3, pupilOffset = 0, iris = "#67452f") {
     rect(ctx, x, y, size + 2, 1, ink);
-    rect(ctx, x, y + 1, size + 2, 3, "#fff4d7");
-    rect(ctx, x + 1 + pupilOffset, y + 1, 2, 3, "#28232d");
+    rect(ctx, x, y + 1, size + 2, 4, "#fff4d7");
+    rect(ctx, x + 1 + pupilOffset, y + 1, 2, 3, iris);
+    rect(ctx, x + 2 + pupilOffset, y + 2, 1, 3, "#28232d");
     rect(ctx, x + 1 + pupilOffset, y + 1, 1, 1, "#ffffff");
+    rect(ctx, x + 1, y + 4, size + 2, .5, "#c98573");
   }
 
   function drawFace(ctx, index) {
+    const irises = ["#67452f", "#765033", "#4c443b", "#4b8057", "#416b9e"];
+    const iris = irises[index] || irises[0];
     if (index === 0) {
       // Broad grin, bright teeth and raised cheeks.
       rows(ctx, ink, [[39, 21, 7, 2], [51, 21, 7, 2]]);
-      drawEye(ctx, 40, 24, 3);
-      drawEye(ctx, 52, 24, 3);
+      drawEye(ctx, 40, 24, 3, 0, iris);
+      drawEye(ctx, 52, 24, 3, 0, iris);
       rows(ctx, shadeInk, [[47, 29, 2, 3]]);
       rows(ctx, "#c97868", [[38, 31, 3, 2], [55, 31, 3, 2]]);
       rows(ctx, ink, [[42, 33, 12, 4], [44, 37, 8, 1]]);
@@ -250,10 +255,12 @@ window.LivslinaCharacterArt = (() => {
       rows(ctx, ink, [[40, 19, 5, 1], [53, 19, 5, 1]]);
       rect(ctx, 40, 23, 6, 6, ink);
       rect(ctx, 41, 24, 4, 4, "#fff4d7");
-      rect(ctx, 42, 25, 2, 3, "#28232d");
+      rect(ctx, 42, 25, 2, 3, iris);
+      rect(ctx, 43, 26, 1, 2, "#28232d");
       rect(ctx, 51, 23, 6, 6, ink);
       rect(ctx, 52, 24, 4, 4, "#fff4d7");
-      rect(ctx, 53, 25, 2, 3, "#28232d");
+      rect(ctx, 53, 25, 2, 3, iris);
+      rect(ctx, 54, 26, 1, 2, "#28232d");
       rows(ctx, shadeInk, [[47, 29, 2, 3]]);
       rows(ctx, ink, [[45, 33, 7, 5]]);
       rows(ctx, "#a94f50", [[47, 35, 3, 2]]);
@@ -261,8 +268,8 @@ window.LivslinaCharacterArt = (() => {
     } else if (index === 2) {
       // Thick round frames remain separate from the visible eyes.
       rows(ctx, shadeInk, [[39, 21, 7, 1], [51, 21, 7, 1]]);
-      drawEye(ctx, 40, 25, 3);
-      drawEye(ctx, 52, 25, 3);
+      drawEye(ctx, 40, 25, 3, 0, iris);
+      drawEye(ctx, 52, 25, 3, 0, iris);
       rows(ctx, ink, [
         [39, 23, 7, 1], [38, 24, 1, 6], [39, 30, 7, 1], [45, 24, 1, 6],
         [51, 23, 7, 1], [50, 24, 1, 6], [51, 30, 7, 1], [57, 24, 1, 6], [46, 26, 4, 1]
@@ -274,7 +281,7 @@ window.LivslinaCharacterArt = (() => {
       // A wink and freckles make this expression distinct at native size.
       rows(ctx, shadeInk, [[39, 21, 6, 1], [52, 21, 6, 1]]);
       rows(ctx, ink, [[40, 25, 6, 2], [41, 26, 4, 1]]);
-      drawEye(ctx, 52, 24, 3);
+      drawEye(ctx, 52, 24, 3, 0, iris);
       rows(ctx, shadeInk, [[47, 29, 2, 3]]);
       rows(ctx, ink, [[43, 34, 10, 2], [46, 36, 5, 1]]);
       rows(ctx, "#fff0d2", [[45, 34, 6, 1]]);
@@ -283,12 +290,46 @@ window.LivslinaCharacterArt = (() => {
       // One angled brow and a crooked smile read as self-assured.
       rows(ctx, ink, [[39, 22, 7, 1], [52, 20, 7, 1]]);
       rows(ctx, shadeInk, [[40, 23, 6, 1], [53, 22, 6, 1]]);
-      drawEye(ctx, 40, 25, 3);
-      drawEye(ctx, 52, 24, 3);
+      drawEye(ctx, 40, 25, 3, 0, iris);
+      drawEye(ctx, 52, 24, 3, 0, iris);
       rows(ctx, ink, [[48, 29, 2, 3]]);
       rows(ctx, ink, [[43, 34, 8, 1], [49, 33, 4, 1]]);
       rows(ctx, "#fff0d2", [[44, 34, 5, 1]]);
     }
+  }
+
+  function drawFaceDetails(ctx, index, palette) {
+    // Tiny, sharp highlights read as eyes, skin and expression at phone size.
+    const cheek = palette.shade;
+    const glint = "#fff8e7";
+    if (index === 0) {
+      rows(ctx, palette.light, [[39, 32, 1, .5], [57, 32, 1, .5], [45, 34, 2, .5]]);
+      rows(ctx, cheek, [[40, 32.5, 1, .5], [56, 32.5, 1, .5]]);
+      rows(ctx, glint, [[41, 25, .5, .5], [53, 25, .5, .5]]);
+      rows(ctx, "#b75255", [[44, 37, 2, .5], [50, 37, 2, .5]]);
+    } else if (index === 1) {
+      rows(ctx, palette.light, [[47, 30, 1, 1], [48, 31, 1, 1]]);
+      rows(ctx, cheek, [[45, 35, 1, .5], [51, 35, 1, .5]]);
+      rows(ctx, glint, [[42, 25, .5, .5], [54, 25, .5, .5]]);
+      rows(ctx, ink, [[39, 18, 2, .5], [54, 18, 2, .5]]);
+    } else if (index === 2) {
+      rows(ctx, "#9bc7ca", [[40, 24, 1, 1], [52, 24, 1, 1]]);
+      rows(ctx, glint, [[41, 25, .5, .5], [53, 25, .5, .5]]);
+      rows(ctx, "#c6a66d", [[38, 23, .5, 7], [57.5, 23, .5, 7], [46, 26, 4, .5]]);
+      rows(ctx, cheek, [[47, 30, 1, 1]]);
+    } else if (index === 3) {
+      rows(ctx, cheek, [[38.5, 29, .5, .5], [40.5, 31, .5, .5], [55, 29.5, .5, .5], [57, 31, .5, .5]]);
+      rows(ctx, glint, [[54, 25, .5, .5]]);
+      rows(ctx, palette.light, [[44, 35, .5, .5], [50, 35, .5, .5]]);
+    } else {
+      rows(ctx, palette.light, [[40, 29, 1, .5], [55, 29, 1, .5]]);
+      rows(ctx, glint, [[41, 26, .5, .5], [53, 25, .5, .5]]);
+      rows(ctx, ink, [[42, 34, 2, .5], [50, 33, 2, .5]]);
+      rows(ctx, cheek, [[39, 32, 1, .5], [57, 31, 1, .5]]);
+    }
+    // A softly stepped nose bridge and nostril make the face read as more than eyes and mouth.
+    rows(ctx, palette.light, [[47.5, 28, .5, 1], [47, 29, .5, .5]]);
+    rows(ctx, palette.deep, [[48, 30, .5, .5]]);
   }
 
   function drawHairCap(ctx, colors) {
@@ -336,15 +377,82 @@ window.LivslinaCharacterArt = (() => {
     }
   }
 
+  function drawHairDetails(ctx, index) {
+    const colors = hairPalettes[index];
+    const fine = colors[2];
+    const shade = colors[0];
+    const strands = [
+      [[37, 13, .5, 2], [42, 10, .5, 2], [49, 9, .5, 2], [56, 13, .5, 2], [36, 22, .5, 3], [60, 22, .5, 3]],
+      [[36, 22, .5, 9], [39, 36, .5, 7], [59, 22, .5, 10], [56, 37, .5, 7], [38, 45, .5, 2], [57, 45, .5, 2]],
+      [[34, 27, .5, 6], [36, 33, .5, 6], [61, 27, .5, 6], [59, 34, .5, 6], [33, 45, .5, 3], [62, 45, .5, 3]],
+      [[36, 21, .5, 7], [42, 20, .5, 6], [49, 20, .5, 6], [56, 20, .5, 7], [37, 34, .5, 5], [57, 34, .5, 5]],
+      [[54, 4, .5, 3], [60, 9, .5, 3], [64, 14, .5, 3], [61, 19, .5, 3], [56, 23, .5, 2], [36, 21, .5, 8], [59, 21, .5, 8]]
+    ];
+    for (const [x, y, width, height] of strands[index] || strands[0]) {
+      rect(ctx, x, y, width, height, fine);
+    }
+    // Short shadow slivers give curls and braids a layered, tactile edge.
+    const shadowMarks = [
+      [[35, 15, .5, 1], [47, 12, .5, 1], [59, 17, .5, 1]],
+      [[37, 29, .5, 4], [58, 29, .5, 4], [40, 41, .5, 3], [55, 41, .5, 3]],
+      [[33, 38, .5, 3], [36, 44, .5, 3], [61, 38, .5, 3], [58, 44, .5, 3]],
+      [[39, 25, .5, 4], [46, 23, .5, 4], [53, 25, .5, 4]],
+      [[63, 15, .5, 3], [59, 21, .5, 3], [54, 25, .5, 2]]
+    ];
+    for (const [x, y, width, height] of shadowMarks[index] || shadowMarks[0]) {
+      rect(ctx, x, y, width, height, shade);
+    }
+  }
+
+  function drawClothingFinish(ctx, index) {
+    const colors = outfits[index];
+    const seam = colors.light;
+    const shade = colors.shade;
+    if (index === 0) {
+      // Top-stitching, pocket folds, eyelets and cord tips on the hoodie.
+      rows(ctx, seam, [[35, 76.5, 5, .5], [57, 76.5, 5, .5], [40, 78, 14, .5], [38, 55, .5, 10], [59.5, 55, .5, 10]]);
+      rows(ctx, colors.trim, [[43.5, 51, .5, .5], [51, 51, .5, .5], [44, 61, .5, .5], [51, 61, .5, .5], [43.5, 63, .5, .5], [51, 63, .5, .5]]);
+      rows(ctx, shade, [[43, 72, 1, .5], [54, 72, 1, .5], [41, 74, .5, .5], [56.5, 74, .5, .5]]);
+      rows(ctx, colors.trim, [[46, 72, 1, .5], [50, 72, 1, .5]]);
+    } else if (index === 1) {
+      // Jacket top-stitching, metal snaps, lapel edges and pocket seams.
+      rows(ctx, seam, [[34.5, 53, .5, 13], [61, 53, .5, 13], [36, 76, 7, .5], [53, 76, 7, .5], [42, 51, .5, 25], [53.5, 51, .5, 25]]);
+      rows(ctx, colors.trim, [[47.5, 56, .5, .5], [47.5, 64, .5, .5], [47.5, 72, .5, .5], [38, 70, .5, 1], [56, 70, .5, 1]]);
+      rows(ctx, shade, [[37, 66, 6, .5], [54, 66, 6, .5]]);
+    } else if (index === 2) {
+      // Fine knit ribs and alternate threads sit between the larger sweater diamonds.
+      rows(ctx, seam, [[35, 54, .5, 22], [59.5, 54, .5, 22], [37, 80, 22, .5], [40, 55, .5, 2], [55.5, 61, .5, 2], [43, 70, .5, 2]]);
+      rows(ctx, shade, [[36, 57, .5, 2], [58, 64, .5, 2], [41, 74, .5, 2], [53, 55, .5, 2]]);
+      rows(ctx, colors.trim, [[38, 83, .5, 1], [41, 83, .5, 1], [44, 83, .5, 1], [53, 83, .5, 1], [56, 83, .5, 1], [59, 83, .5, 1]]);
+    } else if (index === 3) {
+      // Bib seams, reinforced knees and tiny brass buckle centres.
+      rows(ctx, seam, [[40, 54, .5, 28], [56.5, 54, .5, 28], [41, 79, 15, .5], [38, 100, 8, .5], [51, 100, 8, .5]]);
+      rows(ctx, colors.trim, [[39, 49, 2, .5], [55, 49, 2, .5], [40, 52, .5, 1], [56, 52, .5, 1], [43, 61, 10, .5], [43, 66, 10, .5]]);
+      rows(ctx, shade, [[38, 96, .5, 4], [57.5, 96, .5, 4], [41, 77, .5, 3], [54.5, 77, .5, 3]]);
+    } else {
+      // Shirt placket, collar tips, button holes and a neatly edged chest pocket.
+      rows(ctx, seam, [[40, 52, .5, 23], [55.5, 52, .5, 23], [39, 66, 6, .5], [53, 66, 6, .5], [40, 48, 6, .5], [54, 48, 6, .5]]);
+      rows(ctx, colors.trim, [[47.5, 54, .5, .5], [47.5, 60, .5, .5], [47.5, 66, .5, .5], [47.5, 72, .5, .5]]);
+      rows(ctx, shade, [[47, 55, .5, 2], [48, 61, .5, 2], [47, 67, .5, 2], [41, 68, 5, .5], [54, 68, 5, .5]]);
+    }
+    // Shared cuff and trouser-fold highlights keep the same materials dimensional.
+    rows(ctx, seam, [[30, 67, 5, .5], [61, 67, 5, .5], [37, 96, .5, 7], [58, 96, .5, 7], [34, 113, 8, .5], [51, 113, 8, .5]]);
+    rows(ctx, shade, [[36, 105, .5, 3], [59.5, 105, .5, 3], [43, 115, 5, .5], [54, 115, 5, .5]]);
+  }
+
   function draw(ctx, selection) {
-    ctx.clearRect(0, 0, 96, 128);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.imageSmoothingEnabled = false;
+    ctx.scale(2, 2);
     const skinPalette = skin[selection.skin] || skin[0];
     drawBody(ctx, skinPalette);
     drawOutfit(ctx, selection.clothes);
     drawHands(ctx, skinPalette);
     drawFace(ctx, selection.face);
+    drawFaceDetails(ctx, selection.face, skinPalette);
     drawHair(ctx, selection.hair);
+    drawHairDetails(ctx, selection.hair);
   }
 
   return { labels, draw };

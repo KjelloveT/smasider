@@ -9,15 +9,21 @@
   "updated": "2026-10-04",
   "status": "local-prototype",
   "artStyle": "detailed-8-bit-pixel-art",
-  "detailRevision": 2,
+  "detailRevision": 3,
   "logicalCanvas": {
-    "width": 96,
-    "height": 128,
+    "width": 192,
+    "height": 256,
     "transparent": true,
     "scale": "pixelated",
     "pose": "standing-front-neutral"
   },
-  "layerOrder": ["skin-body", "clothes", "skin-hands", "face", "hair"],
+  "drawingGrid": {
+    "width": 96,
+    "height": 128,
+    "fineDetailStep": 0.5,
+    "note": "Same pose and proportions; half-step details render as crisp single pixels on the doubled canvas."
+  },
+  "layerOrder": ["skin-body", "clothes-and-garment-detail", "skin-hands", "face-and-face-detail", "hair-and-hair-detail"],
   "families": {
     "skin": [
       { "id": "skin-01", "label": "Ljos varm" },
