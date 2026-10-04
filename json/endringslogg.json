@@ -4,7 +4,7 @@
     {
       "versjon": "1.80",
       "dato": "2026-10-04",
-      "samandrag": "Plasseringsvala i BåreTevling står ved sida av brettet, og introen er på linje med resten av vala.",
+      "samandrag": "BåreTevling har fått kvadratiske brettceller og eit standard Vyrdepil-panel for plassering.",
       "punkt": [
         {
           "t": "endra",
@@ -15,6 +15,16 @@
           "t": "endra",
           "kva": "BåreTevling",
           "tekst": "Introen er breiare, står på linje med vala under og viser ikkje lenger Vyrde."
+        },
+        {
+          "t": "endra",
+          "kva": "BåreTevling",
+          "tekst": "Plasseringsvisinga brukar standardpanelet frå Vyrdepil med eit lett SVG-stripemønster."
+        },
+        {
+          "t": "fiksa",
+          "kva": "BåreTevling",
+          "tekst": "Bokstav- og talefelta er like store som spelecellene; alle rutene er kvadratiske."
         }
       ]
     },

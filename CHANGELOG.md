@@ -8,6 +8,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ### Endra
 - **BåreTevling viser plasseringsvala ved sida av brettet.** Menyen held seg synleg medan du plasserer figurane, og kjem over brettet på små skjermar.
 - **BåreTevling-introen er breiare og utan Vyrde.** Han står no på linje med vala under.
+- **Plasseringsvisinga brukar standardpanelet frå Vyrdepil.** Eit diskret SVG-stripemønster ligg bak innhaldet.
+
+### Fiksa
+- **Rutene på BåreTevling-brettet er no kvadratiske.** Bokstav- og talefelta er like store som spelecellene og dekkjer bakgrunnen heilt.
 
 ## [1.79] — 2026-10-04
 

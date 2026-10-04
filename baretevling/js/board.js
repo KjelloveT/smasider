@@ -136,14 +136,13 @@ const Board = {
     // Render board to DOM
     renderBoard(container, boardData, size, options = {}) {
         container.innerHTML = '';
-        const headerSize = 30;
+        const trackCount = size + 1;
 
-        // Set grid template using flexible CSS
-        container.style.gridTemplateColumns = `${headerSize}px repeat(${size}, minmax(18px, 1fr))`;
-        container.style.gridAutoRows = '1fr';
-        // Force the first row (headers) to match the header size
-        container.style.gridTemplateRows = `${headerSize}px repeat(${size}, minmax(18px, 1fr))`;
+        // Keep the coordinate headers and playing cells square and the same size.
+        container.style.gridTemplateColumns = `repeat(${trackCount}, minmax(0, 1fr))`;
+        container.style.gridTemplateRows = `repeat(${trackCount}, minmax(0, 1fr))`;
         container.style.width = '100%';
+        container.style.aspectRatio = '1';
         container.style.margin = '0 auto';
 
         // Corner cell

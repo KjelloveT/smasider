@@ -188,43 +188,46 @@
 
                 <!-- Ship Placement Screen -->
                 <div id="placementScreen" class="screen hidden" style="width: 100%;">
-                    <div class="box1 placement-card">
-                        <h2 class="heading2 text-center" id="placementTitle">Plasser figurar</h2>
-                        <p class="panel-sub" id="placementSub">Spelar 1 plasserer figurane sine</p>
+                    <div class="placement-card vp-panel vp-panel--plain vp-panel--raised">
+                        <div class="vp-decor vp-decor--stripes" aria-hidden="true"></div>
+                        <div class="vp-content">
+                            <h2 class="heading2 text-center" id="placementTitle">Plasser figurar</h2>
+                            <p class="panel-sub" id="placementSub">Spelar 1 plasserer figurane sine</p>
 
-                        <div class="placement-layout">
-                            <section class="placement-board-area" aria-label="Brett for figurplassering">
-                                <div class="board-container" id="placementBoardContainer">
-                                    <div class="board" id="placementBoard"></div>
-                                </div>
-                            </section>
-
-                            <aside class="placement-controls placement-sidebar vp-panel vp-panel--inset vp-panel--raised" aria-labelledby="placementControlsTitle">
-                                <h3 class="placement-sidebar-title" id="placementControlsTitle">Plasseringsmeny</h3>
-                                <div class="input-group">
-                                    <label class="settings-label" for="placementCoord">Startkoordinat</label>
-                                    <input type="text" class="coord-input" id="placementCoord" placeholder="A1" maxlength="4" autocomplete="off">
-                                    <div class="coord-feedback" id="placementFeedback"></div>
-                                </div>
-
-                                <div class="direction-group">
-                                    <label class="settings-label">Himmelretning</label>
-                                    <div class="btn-group">
-                                        <button class="dir-btn" data-dir="N"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg> Nord</button>
-                                        <button class="dir-btn" data-dir="S"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg> Sør</button>
-                                        <button class="dir-btn" data-dir="Ø"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Aust</button>
-                                        <button class="dir-btn" data-dir="V"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Vest</button>
+                            <div class="placement-layout">
+                                <section class="placement-board-area" aria-label="Brett for figurplassering">
+                                    <div class="board-container" id="placementBoardContainer">
+                                        <div class="board" id="placementBoard"></div>
                                     </div>
-                                </div>
+                                </section>
 
-                                <div class="current-ship">
-                                    <label class="settings-label">Neste figur</label>
-                                    <div class="ship-preview" id="shipPreview"></div>
-                                </div>
+                                <aside class="placement-controls placement-sidebar vp-panel vp-panel--inset vp-panel--raised" aria-labelledby="placementControlsTitle">
+                                    <h3 class="placement-sidebar-title" id="placementControlsTitle">Plasseringsmeny</h3>
+                                    <div class="input-group">
+                                        <label class="settings-label" for="placementCoord">Startkoordinat</label>
+                                        <input type="text" class="coord-input" id="placementCoord" placeholder="A1" maxlength="4" autocomplete="off">
+                                        <div class="coord-feedback" id="placementFeedback"></div>
+                                    </div>
 
-                                <button class="btn" id="btnPlaceShip">Plasser figur</button>
-                                <button class="btn" id="btnStartGame" style="background: var(--bt-hit); color: #1a1a1a;" disabled>Start spel</button>
-                            </aside>
+                                    <div class="direction-group">
+                                        <label class="settings-label">Himmelretning</label>
+                                        <div class="btn-group">
+                                            <button class="dir-btn" data-dir="N"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg> Nord</button>
+                                            <button class="dir-btn" data-dir="S"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg> Sør</button>
+                                            <button class="dir-btn" data-dir="Ø"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Aust</button>
+                                            <button class="dir-btn" data-dir="V"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Vest</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="current-ship">
+                                        <label class="settings-label">Neste figur</label>
+                                        <div class="ship-preview" id="shipPreview"></div>
+                                    </div>
+
+                                    <button class="btn" id="btnPlaceShip">Plasser figur</button>
+                                    <button class="btn" id="btnStartGame" style="background: var(--bt-hit); color: #1a1a1a;" disabled>Start spel</button>
+                                </aside>
+                            </div>
                         </div>
                     </div>
                 </div>
