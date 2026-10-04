@@ -146,7 +146,7 @@
       heroCard.appendChild(titleRow);
 
       heroCard.appendChild(txt('p', 'tv-lead',
-        'Tren på å lese klokka — analog, digital og tekst på nynorsk. Samle poeng, streak og merke.'));
+        'Tren på å lese klokka — analog, digital og tekst på nynorsk. Samle poeng, rekkjer og bragder.'));
 
       // Live-klokker (3 i rad)
       const liveClocks = el('tv-live-clocks');
@@ -182,7 +182,7 @@
       const heroCta = el('tv-menu-herobox__cta');
       const snoggBtn = button('btn btn--yellow btn--lg', 'Snøggstart', 'zap');
       snoggBtn.addEventListener('click', function () { self.startSnogg(); });
-      const badgeBtn = button('btn btn--ghost btn--lg', 'Sjå merke', 'trophy');
+      const badgeBtn = button('btn btn--ghost btn--lg', 'Sjå bragder', 'trophy');
       badgeBtn.addEventListener('click', function () { self.showBadges(); });
       const sheetBtn = button('btn btn--blue btn--lg', 'Lag arbeidsark', 'printer');
       sheetBtn.addEventListener('click', function () { TidvisExport.open(); });
@@ -526,7 +526,7 @@
       } else {
         // Normal spel: poeng, streak, og XP-nivå
         top.appendChild(this._stat('score', 'star', 's-yellow', 'Poeng'));
-        top.appendChild(this._stat('streak', 'flame', 's-pink', 'Streak'));
+        top.appendChild(this._stat('streak', 'flame', 's-pink', 'Rekkje'));
 
         // xp
         const xpwrap = el('xpwrap');
@@ -658,7 +658,7 @@
       const stats = el('tv-result-stats');
       stats.appendChild(this._resultStat('star', 's-yellow', String(s.score), 'Poeng'));
       stats.appendChild(this._resultStat('check', 's-teal', s.correctCount + ' / ' + s.answeredCount, 'Treff (' + sum.accuracy + '%)'));
-      stats.appendChild(this._resultStat('flame', 's-pink', String(s.bestStreak), 'Lengste streak'));
+      stats.appendChild(this._resultStat('flame', 's-pink', String(s.bestStreak), 'Lengste rekkje'));
       this.elResult.appendChild(stats);
 
       // midt: nytt merke / nivå-opp + rekord + xp
@@ -673,7 +673,7 @@
         medal.appendChild(TidvisIcons.el(b.ico, { size: 38 }));
         nb.appendChild(medal);
         const col = el('');
-        col.appendChild(txt('div', 'tv-eyebrow', 'NYTT MERKE'));
+        col.appendChild(txt('div', 'tv-eyebrow', 'NY BRAGD'));
         col.appendChild(txt('div', 'serif', b.name));
         if (sum.newBadges.length > 1) {
           col.appendChild(txt('div', 'label-strong', '+ ' + (sum.newBadges.length - 1) + ' til'));
@@ -716,7 +716,7 @@
       });
       const menu = button('btn btn--ghost btn--lg', 'Meny', 'home');
       menu.addEventListener('click', function () { self.show('menu'); });
-      const badges = button('btn btn--blue btn--lg', 'Sjå merke', 'trophy');
+      const badges = button('btn btn--blue btn--lg', 'Sjå bragder', 'trophy');
       badges.addEventListener('click', function () { self.showBadges(); });
       cta.appendChild(again); cta.appendChild(menu); cta.appendChild(badges);
       this.elResult.appendChild(cta);
@@ -766,7 +766,7 @@
       }
     },
 
-    // ---------- MERKEGALLERI ----------
+    // ---------- BRAGDGALLERI ----------
     showBadges: function () {
       const self = this;
       const prog = TidvisStorage.getProgress();
@@ -788,7 +788,7 @@
       const head = el('row');
       head.style.justifyContent = 'space-between';
       head.style.marginBottom = '16px';
-      const h = txt('h2', '', 'Merke');
+      const h = txt('h2', '', 'Bragdane dine');
       h.style.fontSize = '28px';
       head.appendChild(h);
       const count = el('pill');
@@ -797,22 +797,9 @@
       head.appendChild(count);
       panel.appendChild(head);
 
-      const grid = el('badges');
-      TidvisAchievements.BADGES.forEach(function (b) {
-        const isUnlocked = unlocked.indexOf(b.id) !== -1;
-        const bdg = el('bdg ' + b.color + (isUnlocked ? '' : ' is-locked'));
-        const medal = el('bdg__medal');
-        medal.appendChild(TidvisIcons.el(b.ico, { size: 38 }));
-        bdg.appendChild(medal);
-        bdg.appendChild(txt('div', 'bdg__name', b.name));
-        bdg.appendChild(txt('div', 'bdg__hint', b.hint));
-        if (!isUnlocked) {
-          const lock = el('bdg__lock');
-          lock.appendChild(TidvisIcons.el('lock', { size: 16 }));
-          bdg.appendChild(lock);
-        }
-        grid.appendChild(bdg);
-      });
+      const grid = el('vp-bragd-grid');
+      grid.setAttribute('aria-busy', 'true');
+      VyrdepilBragd.renderGameBadges(grid, 'tidvis', unlocked).catch(function () { grid.removeAttribute('aria-busy'); });
       panel.appendChild(grid);
 
       const close = button('btn btn--ink btn--lg btn--block', 'Lukk', 'x');

@@ -4,12 +4,17 @@
     {
       "versjon": "1.77",
       "dato": "2026-10-04",
-      "samandrag": "BåreTevling har ei meir levande startside med illustrert spelguide og ryddigare speloppsett.",
+      "samandrag": "BåreTevling har fått ei illustrert startside og fire figurtypar, og Vyrdepil har fått ei felles samling for bragder.",
       "punkt": [
         {
           "t": "nytt",
           "kva": "BåreTevling",
           "tekst": "Ny skipsillustrasjon, førehandsvising av figurtypane og ein illustrert spelguide gjer startsida lettare å forstå."
+        },
+        {
+          "t": "nytt",
+          "kva": "Bragdane dine",
+          "tekst": "Sjå bragder frå Heimsank, Vidfaren, Tidvis, Bolkestokk og Ormritaren samla. Bibliotekframgangen i Bolkestokk og Ormritaren blir vist i prosent."
         },
         {
           "t": "endra",
@@ -20,6 +25,11 @@
           "t": "endra",
           "kva": "BåreTevling",
           "tekst": "Valfelta har etikettar inni korta og figuroppsettet følgjer panelstilen i Vyrdepil. Begge spelarane må markere sjølve."
+        },
+        {
+          "t": "endra",
+          "kva": "Framgang og personvern",
+          "tekst": "Eldre bragder og leksjonsframgang blir kopierte til ei felles lokal samling ved neste relevante innlasting. Elevnamn og oppteningsdatoar blir ikkje lagra i samlinga. Ljodstigen held fram med eiga progresjonslagring, men brukar ordet Bragd."
         },
         {
           "t": "fiksa",
@@ -35,6 +45,11 @@
           "t": "fiksa",
           "kva": "BåreTevling",
           "tekst": "Den lause trekanten og hjelpetekstane som ikkje trongst, er fjerna frå oppsettsida."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Bragd-sida",
+          "tekst": "Sida har luft mellom boksene, betre innvendig avstand i varselboksen og den felles sidefoten."
         }
       ]
     },

@@ -11,6 +11,7 @@
 
 const VyrdepilStorage = (function() {
     const ROOT_KEY = 'VyrdepilStorage';
+    const BRAGD_VERSION = 1;
     const ASSET_DB = 'VyrdepilAssets';
     const ASSET_STORE = 'assets';
     let assetDbPromise = null;
@@ -194,6 +195,96 @@ const VyrdepilStorage = (function() {
             switchToMemory(quota ? 'quota' : 'unavailable', lastPersistedRaw, data);
             return false;
         }
+    }
+
+    function emptyBragdData() {
+        return { version: BRAGD_VERSION, migrationVersion: 0, badges: Object.create(null), progress: Object.create(null) };
+    }
+
+    function sanitizeBragdSnapshot(snapshot) {
+        if (!snapshot || typeof snapshot !== 'object' || Array.isArray(snapshot)) return null;
+        const safe = Object.create(null);
+        Object.keys(snapshot).sort().forEach(function (key) {
+            const value = snapshot[key];
+            if (typeof value === 'number' && Number.isFinite(value) && value >= 0) {
+                safe[key] = value;
+            } else if (Array.isArray(value) && value.every(item => typeof item === 'number' && Number.isFinite(item) && item >= 0)) {
+                safe[key] = value.slice();
+            }
+        });
+        return Object.keys(safe).length ? safe : null;
+    }
+
+    function normalizeBragdData(value) {
+        const result = emptyBragdData();
+        if (!value || typeof value !== 'object' || Array.isArray(value)) return result;
+        result.version = BRAGD_VERSION;
+        result.migrationVersion = Number.isInteger(value.migrationVersion) ? value.migrationVersion : 0;
+        Object.keys(value.badges || {}).sort().forEach(function (appId) {
+            const ids = value.badges[appId];
+            if (!validBragdId(appId) || !Array.isArray(ids)) return;
+            result.badges[appId] = Array.from(new Set(ids.filter(validBragdId))).sort();
+        });
+        Object.keys(value.progress || {}).sort().forEach(function (appId) {
+            const snapshot = sanitizeBragdSnapshot(value.progress[appId]);
+            if (validBragdId(appId) && snapshot) result.progress[appId] = snapshot;
+        });
+        return result;
+    }
+
+    function getBragdData() {
+        return normalizeBragdData(getData().bragd);
+    }
+
+    function validBragdId(value) {
+        return typeof value === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(value);
+    }
+
+    function recordBadge(appId, badgeId) {
+        if (!validBragdId(appId) || !validBragdId(badgeId)) return false;
+        const data = getData();
+        const bragd = normalizeBragdData(data.bragd);
+        if (!bragd.badges[appId]) bragd.badges[appId] = [];
+        if (bragd.badges[appId].includes(badgeId)) return false;
+        bragd.badges[appId].push(badgeId);
+        bragd.badges[appId].sort();
+        data.bragd = bragd;
+        setData(data);
+        return true;
+    }
+
+    function updateBragdProgress(appId, snapshot) {
+        if (!validBragdId(appId) || !snapshot || typeof snapshot !== 'object' || Array.isArray(snapshot)) return false;
+        const safeSnapshot = sanitizeBragdSnapshot(snapshot);
+        if (!safeSnapshot) return false;
+        const data = getData();
+        const bragd = normalizeBragdData(data.bragd);
+        bragd.progress[appId] = safeSnapshot;
+        data.bragd = bragd;
+        setData(data);
+        return true;
+    }
+
+    // Importer eldre speltilstand atomisk; trygg å køyre att om ei side blir avbroten.
+    function importBragdData(payload) {
+        if (!payload || !Number.isInteger(payload.version) || payload.version < 1) return false;
+        const data = getData();
+        const bragd = normalizeBragdData(data.bragd);
+        if (bragd.migrationVersion >= payload.version) return false;
+        Object.keys(payload.badges || {}).sort().forEach(function (appId) {
+            if (!validBragdId(appId) || !Array.isArray(payload.badges[appId])) return;
+            const merged = new Set(bragd.badges[appId] || []);
+            payload.badges[appId].forEach(id => { if (validBragdId(id)) merged.add(id); });
+            bragd.badges[appId] = Array.from(merged).sort();
+        });
+        Object.keys(payload.progress || {}).sort().forEach(function (appId) {
+            const snapshot = sanitizeBragdSnapshot(payload.progress[appId]);
+            if (validBragdId(appId) && !bragd.progress[appId] && snapshot) bragd.progress[appId] = snapshot;
+        });
+        bragd.migrationVersion = payload.version;
+        data.bragd = bragd;
+        setData(data);
+        return true;
     }
 
     function getStatus() {
@@ -527,6 +618,10 @@ const VyrdepilStorage = (function() {
     function clearGame(game) {
         const data = getData();
         delete data[game];
+        const bragd = normalizeBragdData(data.bragd);
+        delete bragd.badges[game];
+        delete bragd.progress[game];
+        data.bragd = bragd;
         setData(data);
         clearGameAssets(game).catch(function () {});
     }
@@ -567,6 +662,10 @@ const VyrdepilStorage = (function() {
         setCollection,
         getAllCollections,
         clearCollection,
+        recordBadge,
+        updateBragdProgress,
+        getBragdData,
+        importBragdData,
         getStatus,
         getAllData,
         getRecoveryRaw,

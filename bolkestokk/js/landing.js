@@ -19,6 +19,7 @@
             const svar = await fetch('moduler/index.json');
             if (!svar.ok) throw new Error('status ' + svar.status);
             katalog = await svar.json();
+            await BolkFramgang.setCatalogue(katalog.modular || []);
         } catch (feil) {
             melding.textContent =
                 'Klarte ikkje hente modulane. Du kan framleis byggje fritt.';
@@ -27,6 +28,12 @@
         }
 
         melding.remove();
+        visBiblioteksframgang();
+        const bragdGalleri = document.getElementById('bolkBragder');
+        if (bragdGalleri && window.VyrdepilBragd) {
+            const earned = VyrdepilStorage.getBragdData().badges.bolkestokk || [];
+            VyrdepilBragd.renderGameBadges(bragdGalleri, 'bolkestokk', earned);
+        }
         (katalog.grupper || []).forEach(gruppe => {
             const modular = (katalog.modular || []).filter(m => m.gruppe === gruppe.id);
             if (modular.length) boks.appendChild(teiknGruppe(gruppe, modular));
@@ -45,6 +52,17 @@
          * rette grepet eit `leksjonar`-felt i katalogen — ikkje å hente heile
          * modulen for å lese ut fem titlar. */
         hentLeksjonar((katalog.modular || []).filter(m => m.klar !== false));
+    }
+
+    function visBiblioteksframgang() {
+        const snapshot = BolkFramgang.biblioteksframgang();
+        const tekst = document.getElementById('bolkBibliotekstal');
+        const spor = document.getElementById('bolkBiblioteksspor');
+        const fyll = document.getElementById('bolkBiblioteksfyll');
+        if (!snapshot || !tekst || !spor || !fyll) return;
+        tekst.textContent = `${snapshot.libraryPercent}% av biblioteket · ${snapshot.completedLessons} av ${snapshot.totalLessons} leksjonar`;
+        spor.setAttribute('aria-valuenow', String(snapshot.libraryPercent));
+        fyll.style.width = snapshot.libraryPercent + '%';
     }
 
     async function hentLeksjonar(modular) {

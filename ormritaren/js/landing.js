@@ -16,6 +16,7 @@
             const svar = await fetch('moduler/index.json');
             if (!svar.ok) throw new Error('status ' + svar.status);
             katalog = await svar.json();
+            await OrmFramgang.setCatalogue(katalog.modular || []);
         } catch (feil) {
             melding.textContent =
                 'Klarte ikkje hente modulane. Du kan framleis bruke fri programmering.';
@@ -24,6 +25,12 @@
         }
 
         melding.remove();
+        visBiblioteksframgang();
+        const bragdGalleri = document.getElementById('ormBragder');
+        if (bragdGalleri && window.VyrdepilBragd) {
+            const earned = VyrdepilStorage.getBragdData().badges.ormritaren || [];
+            VyrdepilBragd.renderGameBadges(bragdGalleri, 'ormritaren', earned);
+        }
         (katalog.grupper || []).forEach(gruppe => {
             const modular = (katalog.modular || []).filter(m => m.gruppe === gruppe.id);
             if (modular.length) boks.appendChild(teiknGruppe(gruppe, modular));
@@ -35,6 +42,17 @@
         // nokre titals kilobyte kvar — og sida er allereie teikna, så dette
         // rører ikkje ved poenget med at landingssida skal opne fort.
         hentLeksjonar((katalog.modular || []).filter(m => m.klar !== false));
+    }
+
+    function visBiblioteksframgang() {
+        const snapshot = OrmFramgang.biblioteksframgang();
+        const tekst = document.getElementById('ormBibliotekstal');
+        const spor = document.getElementById('ormBiblioteksspor');
+        const fyll = document.getElementById('ormBiblioteksfyll');
+        if (!snapshot || !tekst || !spor || !fyll) return;
+        tekst.textContent = `${snapshot.libraryPercent}% av biblioteket · ${snapshot.completedLessons} av ${snapshot.totalLessons} leksjonar`;
+        spor.setAttribute('aria-valuenow', String(snapshot.libraryPercent));
+        fyll.style.width = snapshot.libraryPercent + '%';
     }
 
     async function hentLeksjonar(modular) {

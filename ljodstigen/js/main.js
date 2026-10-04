@@ -164,7 +164,7 @@
         cell.appendChild(R().h('span', 'ljod-badge-title', b.title));
         list.appendChild(cell);
       });
-      box.appendChild(R().h('p', 'ljod-prompt', wonBadges.length === 1 ? 'Nytt merke!' : 'Nye merke!'));
+      box.appendChild(R().h('p', 'ljod-prompt', wonBadges.length === 1 ? 'Ny bragd!' : 'Nye bragder!'));
       box.appendChild(list);
     }
 

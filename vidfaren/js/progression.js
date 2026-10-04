@@ -122,7 +122,16 @@ const Progression = (function () {
   }
 
   function save() {
-    try { VyrdepilStorage.setGameState(GAME_KEY, state); }
+    try {
+      VyrdepilStorage.setGameState(GAME_KEY, state);
+      VyrdepilStorage.updateBragdProgress(GAME_KEY, {
+        pointsEarned: state.earnedTotal,
+        correctAnswers: state.stats.totalCorrect,
+        roundsPlayed: state.stats.roundsPlayed,
+        bestStreak: state.stats.bestStreak,
+        perfectRounds: state.stats.perfectRounds
+      });
+    }
     catch (e) { console.error('Progression save feila:', e); }
   }
 
