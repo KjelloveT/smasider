@@ -14,6 +14,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
 ### Fiksa
 - **Førehandsvisingane viser berre éi rad frå spritearket.** Skip, bilar og fly får ikkje med utsnitt frå andre figurar.
+- **Spelguiden har fått betre luft.** Ho brukar dei felles trekkspel- og stablestilane; den tronge avstanden kom frå lokale BåreTevling-reglar.
+- **Oppsettsida er rydda.** Den lause trekanten og dei to overflødige hjelpetekstane er fjerna.
 
 ## [1.76] — 2026-10-04
 

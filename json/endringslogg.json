@@ -25,6 +25,16 @@
           "t": "fiksa",
           "kva": "BåreTevling",
           "tekst": "Førehandsvisingane viser berre éi rad frå spritearket, utan utsnitt frå andre figurar."
+        },
+        {
+          "t": "fiksa",
+          "kva": "BåreTevling",
+          "tekst": "Spelguiden har no jamn luft mellom illustrasjonane og tipsruta med dei felles trekkspel- og stablestilane."
+        },
+        {
+          "t": "fiksa",
+          "kva": "BåreTevling",
+          "tekst": "Den lause trekanten og hjelpetekstane som ikkje trongst, er fjerna frå oppsettsida."
         }
       ]
     },

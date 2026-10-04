@@ -109,11 +109,11 @@ body.vp-migrated-page[data-vp-app="baretevling"] main#main.vp-migrated-main {
     height: 22px;
 }
 
-.bt-howto-body {
-    padding: 12px 4px 4px;
+.bt-howto-intro {
+    margin: 0;
+    line-height: 1.5;
 }
 
-.bt-howto-intro,
 .bt-config-intro {
     margin: 0 0 14px;
     line-height: 1.5;
@@ -122,7 +122,7 @@ body.vp-migrated-page[data-vp-app="baretevling"] main#main.vp-migrated-main {
 .bt-howto-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-    gap: 12px;
+    gap: 16px;
 }
 
 .bt-howto-step {
@@ -152,7 +152,7 @@ body.vp-migrated-page[data-vp-app="baretevling"] main#main.vp-migrated-main {
 }
 
 .bt-howto-tip {
-    margin: 14px 0 0;
+    margin: 0;
     padding: 12px 14px;
     border: 2px solid var(--vp-frame, #142820);
     border-radius: 8px;
@@ -165,7 +165,7 @@ body.vp-migrated-page[data-vp-app="baretevling"] main#main.vp-migrated-main {
 }
 
 .bt-setup-heading h2 {
-    margin: 0 0 10px;
+    margin: 0;
     font-size: clamp(1.35rem, 2vw, 1.7rem);
 }
 
@@ -177,33 +177,6 @@ body.vp-migrated-page[data-vp-app="baretevling"] main#main.vp-migrated-main {
     border-radius: 16px;
     background: var(--vp-honey, #F5DFAA);
     box-shadow: 0 3px 0 var(--vp-shadow, #142820);
-}
-
-.bt-setup-title-bubble::before,
-.bt-setup-title-bubble::after {
-    content: "";
-    position: absolute;
-    left: 24px;
-    bottom: -10px;
-    width: 14px;
-    height: 14px;
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-}
-
-.bt-setup-title-bubble::before {
-    background: var(--vp-frame, #142820);
-}
-
-.bt-setup-title-bubble::after {
-    left: 26px;
-    bottom: -7px;
-    width: 10px;
-    height: 10px;
-    background: var(--vp-honey, #F5DFAA);
-}
-
-.bt-setup-heading p {
-    margin: 0;
 }
 
 .bt-settings-grid {
@@ -259,11 +232,6 @@ body.vp-migrated-page[data-vp-app="baretevling"] main#main.vp-migrated-main {
     min-height: 48px;
     font-size: 0.92rem;
     text-transform: none;
-}
-
-.bt-piece-caption {
-    margin: 16px 0 8px;
-    font-weight: 700;
 }
 
 .bt-piece-showcase {
