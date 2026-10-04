@@ -236,6 +236,7 @@ body.vp-migrated-page[data-vp-app="baretevling"] main#main.vp-migrated-main {
 
 .bt-piece-showcase {
     display: grid;
+    margin-top: 16px;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 8px;
 }

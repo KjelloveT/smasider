@@ -16,7 +16,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ### Fiksa
 - **Spritefigurane held rette proporsjonar og reinskorne utsnitt.** Førehandsvisingane viser berre éi rad frå arket, utan restar frå andre figurar.
 - **Spelguiden har fått betre luft.** Ho brukar dei felles trekkspel- og stablestilane; den tronge avstanden kom frå lokale BåreTevling-reglar.
-- **Oppsettsida er rydda.** Den lause trekanten og dei to overflødige hjelpetekstane er fjerna.
+- **Oppsettsida er rydda.** Den lause trekanten og hjelpetekstane som ikkje trongst, er fjerna; miniatyrane har luft under figurknappane.
 
 ## [1.78] — 2026-10-04
 
