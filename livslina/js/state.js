@@ -7,7 +7,60 @@ window.LL = window.LL || {};
 LL.state = (function () {
   'use strict';
 
-  const SAVE_VERSION = 2;
+  const SAVE_VERSION = 3;
+  const STARTER_ROOM = {
+    owned: ['bed-tier-01', 'desk-tier-01', 'chair-tier-01'],
+    equipped: {
+      bed: 'bed-tier-01', desk: 'desk-tier-01', chair: 'chair-tier-01',
+      sofa: null, rug: null, floorItem: null, decor: null
+    }
+  };
+  const ROOM_ITEM_SLOT = Object.create(null);
+  ['bed', 'desk', 'chair', 'rug', 'plant', 'poster', 'desk-lamp'].forEach(family => {
+    for (let tier = 1; tier <= 5; tier++) {
+      const slot = family === 'plant' ? 'floorItem' : ((family === 'poster' || family === 'desk-lamp') ? 'decor' : family);
+      ROOM_ITEM_SLOT[family + '-tier-' + String(tier).padStart(2, '0')] = slot;
+    }
+  });
+  ROOM_ITEM_SLOT['sofa-01'] = 'sofa';
+  ROOM_ITEM_SLOT['sofa-02'] = 'sofa';
+
+  function legacyCharacter(character) {
+    const old = character || {};
+    const skinMap = { '#f6d7b0': 0, '#e8b98a': 1, '#b07b4f': 2, '#7c4a2a': 3 };
+    const hairMap = { kort: 0, langt: 1, krollete: 6 };
+    const clothesMap = { tskjorte: 4, genser: 2, hettegenser: 0 };
+    return {
+      skin: Object.prototype.hasOwnProperty.call(skinMap, old.skin) ? skinMap[old.skin] : 1,
+      face: 0,
+      hair: hairMap[old.hair] ?? 0,
+      clothes: clothesMap[old.top] ?? 0
+    };
+  }
+
+  function normalizeRoom(room, oldPossessions) {
+    const source = room && typeof room === 'object' ? room : {};
+    const old = oldPossessions || {};
+    const fallback = JSON.parse(JSON.stringify(STARTER_ROOM));
+    if (!Array.isArray(source.owned) || !source.equipped) {
+      if (old.bed === 'seng') fallback.equipped.bed = 'bed-tier-02';
+      if (old.desk === 'gaming') fallback.equipped.desk = 'desk-tier-04';
+      if (old.hobby === 'plante') fallback.equipped.floorItem = 'plant-tier-01';
+      fallback.owned = Object.keys(ROOM_ITEM_SLOT).filter(id => Object.values(fallback.equipped).includes(id));
+      return fallback;
+    }
+    const owned = Array.from(new Set(STARTER_ROOM.owned.concat(source.owned.filter(id => ROOM_ITEM_SLOT[id]))));
+    const equipped = Object.assign({}, STARTER_ROOM.equipped);
+    Object.keys(equipped).forEach(slot => {
+      const id = source.equipped[slot];
+      if (id == null) {
+        if (slot === 'sofa' || slot === 'rug' || slot === 'floorItem' || slot === 'decor') equipped[slot] = null;
+      } else if (ROOM_ITEM_SLOT[id] === slot && owned.includes(id)) {
+        equipped[slot] = id;
+      }
+    });
+    return { owned, equipped };
+  }
 
   // ── Seedbasert RNG (mulberry32) — deterministisk gjeve seed ──
   let _rngState = 0;
@@ -54,13 +107,7 @@ LL.state = (function () {
       created: new Date().toISOString(),
       roundIndex: 0,
       finished: false,
-      character: {
-        skin: '#e8b98a',
-        hair: 'kort',
-        hairColor: '#26201c',
-        top: 'tskjorte',
-        topColor: '#e63946'
-      },
+      character: { skin: 1, face: 0, hair: 0, clothes: 0 },
       family: null,       // { id, label, ... } sett i wizard
       program: null,      // { id, name, ... } sett i wizard
       housing: 'heime',   // 'heime' | 'hybel'
@@ -74,14 +121,12 @@ LL.state = (function () {
         grades: 3.5
       },
       plan: null,          // gjeldande halvårsplan frå budsjettkortet
-      possessions: {       // koplar til diorama-slots
-        bed: 'madrass',
-        desk: 'enkel',
-        hobby: 'plante',
+      possessions: {
         moped: false,
         mopedTrimmed: false,
         phoneInsurance: false
       },
+      room: JSON.parse(JSON.stringify(STARTER_ROOM)),
       flags: {},           // once-hendingar, val-spor osb.
       ledger: [],          // { round, month, income, expense, saved, balance, wellbeing, networth }
       decisions: [],       // { round, id, label, delta, note } — vendepunkt
@@ -106,15 +151,34 @@ LL.state = (function () {
     return save;
   }
 
-  // Versjon 1 lagra sommaren før vårhalvåret. Behald aktiv speleframdrift,
-  // men flytt dei gamle rundenumra til den kronologiske rekkjefølgja.
+  // Versjon 1 lagra sommaren før vårhalvåret. Versjon 3 legg til den nye
+  // karakterforma og rominventaret utan å endre aktiv speleframdrift.
   function migrateSave(obj) {
     if (!obj || typeof obj !== 'object') return obj;
-    if (obj.version === 1) {
+    if (obj.version <= 1) {
       const oldToNew = [0, 2, 1, 3, 5, 4, 6, 7];
       if (Number.isInteger(obj.roundIndex) && obj.roundIndex >= 0 && obj.roundIndex < oldToNew.length) {
         obj.roundIndex = oldToNew[obj.roundIndex];
       }
+      obj.version = 2;
+    }
+    if (obj.version <= 2) {
+      obj.character = legacyCharacter(obj.character);
+      obj.room = normalizeRoom(null, obj.possessions);
+      obj.version = SAVE_VERSION;
+    } else {
+      obj.room = normalizeRoom(obj.room, obj.possessions);
+      if (!obj.character || typeof obj.character !== 'object') obj.character = { skin: 1, face: 0, hair: 0, clothes: 0 };
+      ['skin', 'face', 'hair', 'clothes'].forEach(key => {
+        const max = key === 'face' || key === 'hair' ? 19 : (key === 'clothes' ? 9 : 4);
+        const n = Number(obj.character[key]);
+        obj.character[key] = Number.isInteger(n) && n >= 0 && n <= max ? n : (key === 'skin' ? 1 : 0);
+      });
+    }
+    if (!obj.possessions || typeof obj.possessions !== 'object') {
+      obj.possessions = { moped: false, mopedTrimmed: false, phoneInsurance: false };
+    }
+    if (obj.version !== SAVE_VERSION) {
       obj.version = SAVE_VERSION;
     }
     return obj;

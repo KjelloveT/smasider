@@ -34,7 +34,7 @@ LL.uiSummer = (function () {
     row.textContent = '';
     opts.forEach(w => {
       const b = document.createElement('button');
-      b.type = 'button'; b.className = 'btn';
+      b.type = 'button'; b.className = 'vp-button vp-button--tool';
       b.textContent = w === 0 ? 'Fri heile sommaren' : w + ' veker jobb';
       b.setAttribute('aria-pressed', String(w === weeks));
       b.addEventListener('click', () => { weeks = w; renderOptions(); });

@@ -27,8 +27,10 @@ LL.uiPlayback = (function () {
   function renderShell() {
     const state = LL.state.get();
     document.getElementById('pbRound').textContent = ctx.round.label;
-    document.getElementById('pbFigure').innerHTML =
-      LL.artDoll.svg(state.character, { ariaLabel: 'Figuren din', withPlate: true });
+    document.getElementById('pbFigure').replaceChildren(LL.artCharacter.createCanvas(state.character, {
+      className: 'll-character-canvas ll-character-canvas--portrait',
+      label: 'Figuren din', width: 192, height: 288
+    }));
     document.getElementById('pbMonth').textContent = 'Gjer klar…';
     document.getElementById('pbBalance').textContent = LL.util.kr(state.stats.money);
     document.getElementById('pbLedger').textContent = '';

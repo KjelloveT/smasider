@@ -54,11 +54,14 @@ window.LivslinaCharacterArt = (() => {
       face: images.face[index("face")],
       hairFront: images.hairFront[index("hair")]
     };
+    const scaleX = ctx.canvas.width / model.assetWidth;
+    const scaleY = ctx.canvas.height / model.assetHeight;
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.setTransform(scaleX, 0, 0, scaleY, 0, 0);
     ctx.imageSmoothingEnabled = false;
     for (const name of model.layerOrder) {
-      if (visible[name === "hands" ? "body" : name]) ctx.drawImage(layers[name], 0, 0);
+      if (visible[name === "hands" ? "body" : name]) ctx.drawImage(layers[name], 0, 0, model.assetWidth, model.assetHeight);
     }
     if (options.anchors) overlay(ctx);
     return true;

@@ -32,8 +32,9 @@
   function screenOnU(u,v,z,d,h,fill){return polygon([[u,v,z],[u,v+d,z],[u,v+d,z+h],[u,v,z+h]],fill);}
   function legs(u,v,w,d,h,p){return box(u+3,v+3,0,6,6,h,p)+box(u+w-9,v+3,0,6,6,h,p)+box(u+3,v+d-9,0,6,6,h,p)+box(u+w-9,v+d-9,0,6,6,h,p);}
   function layout(selection){
-    const items={};
+    const items={},gameRoom=selection&&selection.gameRoomMode;
     Object.keys(variants).forEach(function(key){
+      if(gameRoom&&selection[key+"Present"]===false)return;
       const style=selection&&selection[key]==="02"?1:0;
       const sizeChoice=selection&&selection[key+"Size"]||selection&&selection[key];
       const size=sizeChoice==="02"?1:0;
@@ -47,23 +48,30 @@
       items.bed.sizeVariant=0;
       items.bed.h=bedTierHeights[requestedBedTier-1];
     }
-    ["desk","chair","rug","tv-bench"].forEach(function(key){items[key]=tierItem(key,selection&&selection[key]);});
+    ["desk","chair","rug","tv-bench"].forEach(function(key){
+      if(gameRoom&&selection[key+"Present"]===false)return;
+      items[key]=tierItem(key,selection&&selection[key]);
+    });
     Object.assign(items.bed,{u:32,v:0});
     Object.assign(items.desk,{u:410-items.desk.w,v:0});
     Object.assign(items.chair,{u:items.desk.u+items.desk.w/2-items.chair.w/2,v:items.desk.d+35-items.chair.d/2});
-    Object.assign(items.rug,{u:250-items.rug.w/2,v:250-items.rug.d/2});
-    Object.assign(items.sofa,{u:305-items.sofa.w,v:250-items.sofa.d/2});
-    Object.assign(items["tv-bench"],{u:0,v:275-items["tv-bench"].d/2});
-    items.tv=tierItem("tv",selection&&selection.tv);
-    items.tv.u=items["tv-bench"].u+items["tv-bench"].w/2-items.tv.w/2;
-    items.tv.v=items["tv-bench"].v+(items["tv-bench"].d-items.tv.d)/2;
-    items.tv.z=items["tv-bench"].h;
-    items.pc=tierItem("pc",selection&&selection.pc);
-    items.pc.u=items.desk.u+items.desk.w-items.pc.w-7;
-    items.pc.v=items.desk.v+7;
-    items.pc.z=items.desk.h;
+    if(items.rug)Object.assign(items.rug,{u:250-items.rug.w/2,v:250-items.rug.d/2});
+    if(items.sofa)Object.assign(items.sofa,{u:305-items.sofa.w,v:250-items.sofa.d/2});
+    if(items["tv-bench"])Object.assign(items["tv-bench"],{u:0,v:275-items["tv-bench"].d/2});
+    if(items["tv-bench"]&&(!gameRoom||selection.tvPresent!==false)){
+      items.tv=tierItem("tv",selection&&selection.tv);
+      items.tv.u=items["tv-bench"].u+items["tv-bench"].w/2-items.tv.w/2;
+      items.tv.v=items["tv-bench"].v+(items["tv-bench"].d-items.tv.d)/2;
+      items.tv.z=items["tv-bench"].h;
+    }
+    if(!gameRoom||selection.pcPresent!==false){
+      items.pc=tierItem("pc",selection&&selection.pc);
+      items.pc.u=items.desk.u+items.desk.w-items.pc.w-7;
+      items.pc.v=items.desk.v+7;
+      items.pc.z=items.desk.h;
+    }
     const floorKind=selection&&selection.floorItem||"plant";
-    if(["hifi","plant","nightstand"].indexOf(floorKind)>=0){
+    if(floorKind!=="none"&&["hifi","plant","nightstand"].indexOf(floorKind)>=0){
       const a=tierItem(floorKind,selection&&selection.floorVariant);
       a.kind=floorKind;
       if(floorKind==="nightstand"){a.u=items.bed.u+items.bed.w+4;a.v=14;}
@@ -507,11 +515,11 @@
       out+='<g data-wall-item="'+a.id+'">'+sprite(source,file,assetRoot,"asset-test__sprite--wall")+'</g>';
     });
     if(items.decor&&items.decor.mount==="wall")out+='<g data-furniture="decor">'+sprite(decorObject(items.decor),items.decor.kind+"-tier-0"+(items.decor.tier+1)+".png",assetRoot,"asset-test__sprite--wall")+'</g>';
-    out+='<g data-furniture="rug">'+sprite(rug(items.rug),"rug-tier-0"+(items.rug.tier+1)+".png",assetRoot,"asset-test__sprite--rug")+'</g>';
+    if(items.rug)out+='<g data-furniture="rug">'+sprite(rug(items.rug),"rug-tier-0"+(items.rug.tier+1)+".png",assetRoot,"asset-test__sprite--rug")+'</g>';
     const renderers={bed:bed,desk:desk,chair:chair,sofa:sofa,"tv-bench":bench,tv:function(a){return tieredFurniture(a,"tv");},pc:function(a){return tieredFurniture(a,"pc");}};
     if(items.floorItem)renderers.floorItem=function(a){return tieredFurniture(a,a.kind);};
     if(items.decor&&items.decor.mount!=="wall")renderers.decor=decorObject;
-    Object.keys(renderers).sort(function(a,b){
+    Object.keys(renderers).filter(function(k){return !!items[k];}).sort(function(a,b){
       if(a==="decor"&&b==="desk")return 1;
       if(b==="decor"&&a==="desk")return -1;
       const x=items[a],y=items[b];return (x.u+x.w/2+x.v+x.d/2)-(y.u+y.w/2+y.v+y.d/2);
@@ -533,10 +541,10 @@
     const wallItems=wallLayout(selection,items);
     if(items.decor&&items.decor.mount==="wall"&&(items.decor.u<0||items.decor.u+items.decor.w>room.width||items.decor.z+items.decor.h>room.height))errors.push("decor: outside wall");
     if(items.decor&&items.decor.mount==="desk"&&(items.decor.u<items.desk.u||items.decor.u+items.decor.w>items.desk.u+items.desk.w||items.decor.v<items.desk.v||items.decor.v+items.decor.d>items.desk.v+items.desk.d||items.decor.z<items.desk.h))errors.push("decor: outside desk surface");
-    if(items.tv.u<items["tv-bench"].u||items.tv.u+items.tv.w>items["tv-bench"].u+items["tv-bench"].w||items.tv.v<items["tv-bench"].v||items.tv.v+items.tv.d>items["tv-bench"].v+items["tv-bench"].d)errors.push("tv: does not fit the TV bench");
-    if(items.pc.u<items.desk.u||items.pc.u+items.pc.w>items.desk.u+items.desk.w||items.pc.v<items.desk.v||items.pc.v+items.pc.d>items.desk.v+items.desk.d||items.pc.z<items.desk.h)errors.push("pc: outside desk surface");
-    if(items["tv-bench"].h+items.tv.h>room.height)errors.push("tv: above room height");
-    if(items.pc.h+items.desk.h>room.height)errors.push("pc: above room height");
+    if(items.tv&&items["tv-bench"]&&(items.tv.u<items["tv-bench"].u||items.tv.u+items.tv.w>items["tv-bench"].u+items["tv-bench"].w||items.tv.v<items["tv-bench"].v||items.tv.v+items.tv.d>items["tv-bench"].v+items["tv-bench"].d))errors.push("tv: does not fit the TV bench");
+    if(items.pc&&(items.pc.u<items.desk.u||items.pc.u+items.pc.w>items.desk.u+items.desk.w||items.pc.v<items.desk.v||items.pc.v+items.pc.d>items.desk.v+items.desk.d||items.pc.z<items.desk.h))errors.push("pc: outside desk surface");
+    if(items.tv&&items["tv-bench"]&&items["tv-bench"].h+items.tv.h>room.height)errors.push("tv: above room height");
+    if(items.pc&&items.pc.h+items.desk.h>room.height)errors.push("pc: above room height");
     wallItems.forEach(function(a){
       if(a.u<0||a.v<0||a.u+a.w>room.width||a.v+a.d>room.depth||a.z<0||a.z+a.h>room.height)errors.push(a.id+": outside wall");
       if(a.wall==="left"&&a.v<190&&a.v+a.d>70&&a.z<195&&a.z+a.h>100)errors.push(a.id+": overlaps window");

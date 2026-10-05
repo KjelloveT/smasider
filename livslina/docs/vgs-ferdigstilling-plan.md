@@ -15,35 +15,34 @@ Spelet skal gjera tid og konsekvensar lette å forstå. Det skal vise korleis
 
 ## Arbeidsrekkjefølgje
 
-Avklart arbeidsrekkjefølgje: vi tek tidsprogresjon og casebibliotek fyrst.
-Karakterrunden og karakterbyggjar/rombutikk ventar til seinare.
+Avklart arbeidsrekkjefølgje: tidsprogresjon og casebibliotek kjem fyrst. Etter
+den avklaringa er karakterbyggjar, soverom og rombutikk tekne inn som neste
+arbeidspakke. Karakterressursprøva v5.2 er ferdig og kontrollert; ho skal no
+koplast til spelet.
 
-### Sett på vent: avslutt den pågåande karakterrunden
+### Ferdig: avslutt den pågåande karakterrunden
 
-- Registrer alle nye hår-, andlets- og klesvariantar i det autoritative
-  ressursmanifestet.
-- Kople variantane til prøvesida og kontroller at dei kan kombinerast med
-  same meisterfigur og faste festepunkt.
-- Godkjenn stilen og monteringa før ressursane blir kopla til sjølve spelet.
-- Fjern eldre heile karakterillustrasjonar og atlas frå ressursprøva. Den
-  lagdelte v5-banken blir den einaste aktive karakterressursprøva.
+- Ressursmanifestet har fem hudtonar, tjue andlet, tjue frisyrar og ti
+  antrekk på den same meisterfiguren.
+- Ressursprøva er kontrollert i nettlesar på mobil og stor skjerm, med
+  20 000 moglege kombinasjonar.
+- Den lagdelte v5-banken er kjelda som skal brukast av spelet.
 
-### Kjem seinare: bygg karakterbyggjar og rombutikk
+### Arbeid no: bygg karakterbyggjar, soverom og rombutikk
 
-- Bygg vidare på den lagdelte karakterprøva, slik at spelaren kan setje saman
-  hud, andlet, hår og klede. Grunnleggjande utsjånad skal ikkje krevje pengar.
-- Erstatt det enkle karaktervalet i oppstarten og `art-doll.js` med den nye
-  byggjaren. Fjern den gamle teiknaren når karakteren fungerer i oppstart,
-  heimskjerm, månadleg avspeling og sluttrapport.
+- Integrer dei 20 000 lagdelte karakterkombinasjonane i oppstart, heimeskjerm,
+  månadsavspeling og sluttrapport. Grunnleggjande utsjånad kostar ingenting.
+- Migrer eldre karakterfelt til stabile indeksar utan å nullstille framdrift.
 - Start rommet med den billegaste senga, arbeidsbordet og stolen.
-- La spelaren kjøpe møblar og romting seinare, med stabile ressurs-ID-ar i
-  speltilstanden. Prisane skal koma frå speldata, ikkje frå bilete eller
-  manifest.
+- Lat spelaren kjøpe og byte møblar og romting seinare. Bruk stabile
+  ressurs-ID-ar; spelprisane skal stå i eiga speldatafil.
 - Seng, arbeidsbord og sofa kan gje små, avgrensa utslag på energi. Andre
-  kjøp kan gje eit lite utslag på trivsel. Effekten skal vera synleg i tekst,
-  men aldri så stor at dyrare varer blir den eine rette løysinga.
-- La kjøp konkurrere med sparing og andre behov, slik at rommet blir ein del
+  kjøp kan gje eit lite utslag på trivsel. Vis effekten tydeleg, men hald
+  henne låg nok til at dyrare varer ikkje blir ei nødvendig løysing.
+- Lat kjøp konkurrere med sparing og andre behov, slik at rommet blir ein del
   av økonomivalet og ikkje ein eigen poengbutikk.
+- Utform heile spelet på nytt med Vyrdepil sitt felles designsystem, utan å
+  endre den avtalte pikselstilen i karakter- og romgrafikken.
 
 ### Arbeid no: gjer tidsprogresjonen tydeleg
 
@@ -108,9 +107,10 @@ ulike familieøkonomiar med respekt.
 
 Milepålen er klar når ein elev kan fullføre alle seks skulehalvåra og dei to
 sommarane, forstå kva tid som går, møte 4–5 caseavgjerder i kvart skulehalvår,
-utforske fleire økonomiske og trivselsmessige situasjonar, innreie eit rom frå
-eit nøkternt utgangspunkt og sjå konsekvensane av vala i sluttrapporten.
-Rapporten skal avslutte vidaregåande utan å krevje at fase 2 er bygd.
+utforske fleire økonomiske og trivselsmessige situasjonar, lage ein figur,
+innreie eit rom frå eit nøkternt utgangspunkt og sjå konsekvensane av vala i
+sluttrapporten. Rapporten skal avslutte vidaregåande utan å krevje at fase 2
+er bygd.
 
 Før ei lærartest skal flyten i tillegg kontrollerast i nettlesar på mobil og
 desktop, med fokus på leserekkjefølgje, tidsline, casevilkår, lagring,

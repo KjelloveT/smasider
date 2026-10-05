@@ -55,7 +55,7 @@ LL.uiReport = (function () {
 
   function deltaBox(label, val, isMoney, decimals) {
     const box = document.createElement('div');
-    box.className = 'll-stat';
+    box.className = 'vp-panel vp-panel--plain ll-stat';
     const l = document.createElement('div'); l.className = 'll-stat-lbl'; l.textContent = label;
     const v = document.createElement('div'); v.className = 'll-stat-val';
     const rounded = decimals ? val.toFixed(decimals) : Math.round(val);
@@ -105,7 +105,12 @@ LL.uiReport = (function () {
     grid.appendChild(bigStat('Trivsel', Math.round(s.stats.wellbeing) + '/100', false));
 
     // Figur + diorama
-    document.getElementById('finalDiorama').innerHTML = LL.artDiorama.svg(s);
+    LL.artRoom.render(document.getElementById('finalDiorama'), s.room, null, 'Rommet ditt ved avslutninga av vidaregåande');
+    const roomEnergy = s.ledger.reduce((sum, entry) => sum + (Number(entry.roomEnergy) || 0), 0);
+    const roomWellbeing = s.ledger.reduce((sum, entry) => sum + (Number(entry.roomWellbeing) || 0), 0);
+    document.getElementById('finalRoomEffect').textContent = roomEnergy || roomWellbeing
+      ? 'Romval gjennom perioden gav til saman +' + roomEnergy.toLocaleString('nn-NO', { maximumFractionDigits: 2 }) + ' energi og +' + roomWellbeing.toLocaleString('nn-NO', { maximumFractionDigits: 2 }) + ' trivsel over dei månadene du hadde utstyret.'
+      : 'Du heldt på startmøblane. Det er òg eit heilt greitt val når pengane har andre føremål.';
 
     // Kurver
     document.getElementById('finalChart').innerHTML = chartSVG(s.ledger);
@@ -139,7 +144,7 @@ LL.uiReport = (function () {
 
   function bigStat(label, val, neg, small) {
     const box = document.createElement('div');
-    box.className = 'll-stat';
+    box.className = 'vp-panel vp-panel--plain ll-stat';
     const l = document.createElement('div'); l.className = 'll-stat-lbl'; l.textContent = label;
     const v = document.createElement('div'); v.className = 'll-stat-val' + (neg ? ' neg' : '');
     if (small) v.style.fontSize = '1.05rem';
@@ -170,7 +175,7 @@ LL.uiReport = (function () {
     }
     top.forEach(d => {
       const div = document.createElement('div');
-      div.className = 'll-turning';
+      div.className = 'vp-panel vp-panel--plain ll-turning';
       const t = document.createElement('div');
       const h = document.createElement('strong'); h.textContent = d.label;
       const cf = document.createElement('p'); cf.className = 'll-note';
@@ -190,7 +195,7 @@ LL.uiReport = (function () {
     BADGES.forEach(b => {
       const earned = b.test(s);
       const card = document.createElement('div');
-      card.className = 'll-badge' + (earned ? ' earned' : '');
+      card.className = 'vp-panel vp-panel--plain ll-badge' + (earned ? ' earned' : '');
       card.innerHTML = '<span class="ll-badge-ico" data-icon="' + b.icon + '" data-icon-size="22"></span>';
       const t = document.createElement('div');
       const h = document.createElement('strong'); h.textContent = b.label;

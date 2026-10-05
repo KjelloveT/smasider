@@ -77,8 +77,11 @@ LL.sim = (function () {
     }
 
     // Stat-drift per månad
-    state.stats.wellbeing += b.wellbeingPerMonth;
-    state.stats.energy += b.energyPerMonth;
+    const roomEffect = LL.artRoom.effects(state.room);
+    const roomEnergy = roomEffect.energyPerMonth || 0;
+    const roomWellbeing = roomEffect.wellbeingPerMonth || 0;
+    state.stats.wellbeing += b.wellbeingPerMonth + roomWellbeing;
+    state.stats.energy += b.energyPerMonth + roomEnergy;
     if (state.stats.money < 0) { state.stats.wellbeing -= 2; state.wentNegative = true; } // pengestress
     clampStats(state);
     state.minWellbeing = Math.min(state.minWellbeing, state.stats.wellbeing);
@@ -90,6 +93,8 @@ LL.sim = (function () {
       income: b.incomeTotal,
       expense: b.expenseTotal,
       saved: saved,
+      roomEnergy: roomEnergy,
+      roomWellbeing: roomWellbeing,
       balance: state.stats.money,
       wellbeing: Math.round(state.stats.wellbeing),
       networth: Math.round(state.stats.money + state.stats.savings)

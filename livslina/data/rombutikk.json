@@ -1,0 +1,99 @@
+{
+  "app": "livslina",
+  "version": 1,
+  "categories": [
+    {
+      "id": "bed",
+      "label": "Seng",
+      "hint": "Ei betre seng kan gi litt meir energi kvar månad.",
+      "slot": "bed",
+      "products": [
+        { "id": "bed-tier-01", "family": "bed", "tier": 1, "price": 0, "energyPerMonth": 0 },
+        { "id": "bed-tier-02", "family": "bed", "tier": 2, "price": 600, "energyPerMonth": 0.12 },
+        { "id": "bed-tier-03", "family": "bed", "tier": 3, "price": 1700, "energyPerMonth": 0.24 },
+        { "id": "bed-tier-04", "family": "bed", "tier": 4, "price": 4200, "energyPerMonth": 0.36 },
+        { "id": "bed-tier-05", "family": "bed", "tier": 5, "price": 8500, "energyPerMonth": 0.48 }
+      ]
+    },
+    {
+      "id": "desk",
+      "label": "Arbeidsbord",
+      "hint": "Ein god arbeidsplass kan gi eit lite energiløft.",
+      "slot": "desk",
+      "products": [
+        { "id": "desk-tier-01", "family": "desk", "tier": 1, "price": 0, "energyPerMonth": 0 },
+        { "id": "desk-tier-02", "family": "desk", "tier": 2, "price": 500, "energyPerMonth": 0.05 },
+        { "id": "desk-tier-03", "family": "desk", "tier": 3, "price": 1400, "energyPerMonth": 0.1 },
+        { "id": "desk-tier-04", "family": "desk", "tier": 4, "price": 3500, "energyPerMonth": 0.15 },
+        { "id": "desk-tier-05", "family": "desk", "tier": 5, "price": 7200, "energyPerMonth": 0.2 }
+      ]
+    },
+    {
+      "id": "chair",
+      "label": "Stol",
+      "hint": "Stolen kan vere enkel eller meir påkosta; ho gir ikkje direkte poeng.",
+      "slot": "chair",
+      "products": [
+        { "id": "chair-tier-01", "family": "chair", "tier": 1, "price": 0 },
+        { "id": "chair-tier-02", "family": "chair", "tier": 2, "price": 250 },
+        { "id": "chair-tier-03", "family": "chair", "tier": 3, "price": 750 },
+        { "id": "chair-tier-04", "family": "chair", "tier": 4, "price": 1900 },
+        { "id": "chair-tier-05", "family": "chair", "tier": 5, "price": 3700 }
+      ]
+    },
+    {
+      "id": "sofa",
+      "label": "Sofa",
+      "hint": "Ei sofa kan gjere kvilepausane litt meir oppladande.",
+      "slot": "sofa",
+      "products": [
+        { "id": "sofa-01", "family": "sofa", "variant": 1, "price": 1600, "energyPerMonth": 0.1 },
+        { "id": "sofa-02", "family": "sofa", "variant": 2, "price": 4500, "energyPerMonth": 0.18 }
+      ]
+    },
+    {
+      "id": "rug",
+      "label": "Golvteppe",
+      "hint": "Pynt og mjuke detaljar kan gi eit lite trivselsløft.",
+      "slot": "rug",
+      "products": [
+        { "id": "rug-tier-01", "family": "rug", "tier": 1, "price": 180, "wellbeingPerMonth": 0.03 },
+        { "id": "rug-tier-02", "family": "rug", "tier": 2, "price": 500, "wellbeingPerMonth": 0.06 },
+        { "id": "rug-tier-03", "family": "rug", "tier": 3, "price": 1100, "wellbeingPerMonth": 0.09 },
+        { "id": "rug-tier-04", "family": "rug", "tier": 4, "price": 2200, "wellbeingPerMonth": 0.12 },
+        { "id": "rug-tier-05", "family": "rug", "tier": 5, "price": 4000, "wellbeingPerMonth": 0.15 }
+      ]
+    },
+    {
+      "id": "plant",
+      "label": "Plante",
+      "hint": "Ei grøn plante er eit lite val for eit trivelegare rom.",
+      "slot": "floorItem",
+      "products": [
+        { "id": "plant-tier-01", "family": "plant", "tier": 1, "price": 100, "wellbeingPerMonth": 0.03 },
+        { "id": "plant-tier-02", "family": "plant", "tier": 2, "price": 250, "wellbeingPerMonth": 0.06 },
+        { "id": "plant-tier-03", "family": "plant", "tier": 3, "price": 600, "wellbeingPerMonth": 0.09 },
+        { "id": "plant-tier-04", "family": "plant", "tier": 4, "price": 1200, "wellbeingPerMonth": 0.12 },
+        { "id": "plant-tier-05", "family": "plant", "tier": 5, "price": 2400, "wellbeingPerMonth": 0.15 }
+      ]
+    },
+    {
+      "id": "decor",
+      "label": "Pynt",
+      "hint": "Vel mellom noko på veggen og noko på arbeidsbordet. Berre eitt pynteslag kan stå framme om gongen.",
+      "slot": "decor",
+      "products": [
+        { "id": "poster-tier-01", "family": "poster", "tier": 1, "price": 120, "wellbeingPerMonth": 0.03 },
+        { "id": "poster-tier-02", "family": "poster", "tier": 2, "price": 280, "wellbeingPerMonth": 0.06 },
+        { "id": "poster-tier-03", "family": "poster", "tier": 3, "price": 650, "wellbeingPerMonth": 0.09 },
+        { "id": "poster-tier-04", "family": "poster", "tier": 4, "price": 1400, "wellbeingPerMonth": 0.12 },
+        { "id": "poster-tier-05", "family": "poster", "tier": 5, "price": 2800, "wellbeingPerMonth": 0.15 },
+        { "id": "desk-lamp-tier-01", "family": "desk-lamp", "tier": 1, "price": 160, "wellbeingPerMonth": 0.03 },
+        { "id": "desk-lamp-tier-02", "family": "desk-lamp", "tier": 2, "price": 380, "wellbeingPerMonth": 0.06 },
+        { "id": "desk-lamp-tier-03", "family": "desk-lamp", "tier": 3, "price": 850, "wellbeingPerMonth": 0.09 },
+        { "id": "desk-lamp-tier-04", "family": "desk-lamp", "tier": 4, "price": 1800, "wellbeingPerMonth": 0.12 },
+        { "id": "desk-lamp-tier-05", "family": "desk-lamp", "tier": 5, "price": 3500, "wellbeingPerMonth": 0.15 }
+      ]
+    }
+  ]
+}

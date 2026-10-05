@@ -39,7 +39,7 @@ LL.uiBudget = (function () {
     LL.economy.activities().forEach(a => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'btn';
+      b.className = 'vp-button vp-button--tool';
       b.textContent = a.label + ' (' + LL.util.kr(a.monthly) + ')';
       const on = draft.activities.includes(a.id);
       b.setAttribute('aria-pressed', String(on));
@@ -59,7 +59,7 @@ LL.uiBudget = (function () {
     opts.forEach(o => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'btn';
+      b.className = 'vp-button vp-button--tool';
       b.textContent = o.label;
       b.setAttribute('aria-pressed', String(o.val === current));
       b.addEventListener('click', () => {
