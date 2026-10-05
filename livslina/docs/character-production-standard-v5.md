@@ -6,6 +6,8 @@ Dato: 5. oktober 2026. Status: produksjonsplan og målt ressurskontrakt for v5.
 
 Delane vart klipte tett og skalerte kvar for seg. Eit hovud, ein frisyre og eit antrekk hadde dermed ikkje same anatomi eller faste koordinatar. Andletsarka inneheld hudflekker, antrekka inneheld hender, og grunnkroppen inneheld eit ekstra antrekk. Håret blandar delar framfor og bak kroppen. At alle rektangla fekk plass på lerretet, sa ingenting om samsvar mellom delane.
 
+Generatorinstruksane er samla i [produksjonsloggen](character-generation-v5-prompts.md).
+
 ## Fast meisterfigur
 
 Vi beheld den detaljerte pikselstilen: varme mørke konturar, tydelege fargeklynger, fleire skuggetonar, tekstur i stoff og hår og lett leselege uttrykk. Meisterfiguren står rett fram mot kameraet, utan perspektiv eller hovudrotasjon. Armane held same avslappa positur i alle variantar.
@@ -81,4 +83,4 @@ Prøva lagrar ingen brukarval, har ingen nye avhengnader og endrar ikkje speleø
 - Alle 625 samansetjingar vart renderte og gjennomgått visuelt i 25 lesbare kontaktark.
 - Dei 30 ferdige laga vart samanlikna med produksjonsrenderaren. Alle 625 ferdige bilete og fem lag-/festevisingar hadde identiske pikslar.
 - Banken er 1 126 217 byte før HTTP-komprimering. Største ressurs er 113 065 byte, godt under grensa på 500 kB.
-- Nettlesarkontrollen av mobilbreidder, val, tilfeldig figur, forstørring og lagvising blir dokumentert i PR-en.
+- Nettlesarkontrollen er bestått på PR-førehandsvisinga: alle 20 val, tilfeldig figur, tilbakestilling, tastatur, lagvising, festepunkt og 1×/2×. Mobilbreidder 320 og 437 og vanleg skrivebordsvising er kontrollerte utan vassrett sideoverflyt eller konsollfeil.

@@ -1029,6 +1029,29 @@
       "25 skin/clothes",
       "25 hair/clothes"
     ],
-    "browser": "pending-preview-check"
+    "browser": {
+      "status": "passed",
+      "date": "2026-10-05",
+      "testedCommit": "97449e614a5e9354721814d8a9cd3180c0156669",
+      "url": "https://icy-water-0487ac303-88.westeurope.2.azurestaticapps.net/livslina/assets/prototype/character-builder-test",
+      "mobileViewportWidths": [
+        320,
+        437
+      ],
+      "desktop": "default viewport, passed",
+      "horizontalPageOverflow": false,
+      "choicesChecked": 20,
+      "controls": [
+        "random",
+        "reset",
+        "Enter keyboard",
+        "layer visibility",
+        "anchor overlay",
+        "zoom 1×/2×"
+      ],
+      "consoleErrors": 0,
+      "consoleWarnings": 0
+    },
+    "visualComposites": 625
   }
 }
