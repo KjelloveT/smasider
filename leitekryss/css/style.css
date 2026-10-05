@@ -219,12 +219,22 @@ input[type="file"]:focus-visible {
 #printArea { display: none; }
 
 @media print {
+  @page { size: A4 portrait; margin: 12mm; }
 
-  body { background: #ffffff; color: #1a1a1a; }
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+  }
 
-  #printArea { display: block; }
+  body > :not(#printArea) { display: none !important; }
+
+  #printArea { display: block !important; width: 100%; margin: 0; padding: 0; }
 
   .lk-sheet {
+    box-sizing: border-box;
+    max-width: 100%;
     break-after: page;
     page-break-after: always;
     color: #1a1a1a;
@@ -265,5 +275,4 @@ input[type="file"]:focus-visible {
   .lk-sheet .lk-muted { color: #4a4a4a; }
   .lk-sheet-answer .lk-word-columns { columns: 2 auto; font-size: 10pt; }
 
-  @page { margin: 15mm; }
 }

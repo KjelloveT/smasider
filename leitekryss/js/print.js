@@ -15,11 +15,11 @@ LK.print = (function () {
 
   /* ---- Utskrift ---- */
 
-  /** Rutestorleik i punkt som gjer at rutenettet får plass på A4-breidda. */
-  function printCellSize(cols) {
-    const usableMm = 170;                       // A4 minus margar
-    const px = Math.floor((usableMm * 3.78) / cols);
-    return Math.max(12, Math.min(34, px));
+  /** Rutestorleik i CSS-piksel tilpassa både breidda og høgda på A4-arket. */
+  function printCellSize(cols, rows) {
+    const usableMm = 166;                       // A4-innhald med litt rom rundt rutenettet
+    const px = Math.floor((usableMm * 3.78) / Math.max(cols, rows));
+    return Math.max(14, Math.min(64, px));
   }
 
   /** Rutenettet for ein elev — eige oppsett når læraren har bede om det. */
@@ -67,7 +67,7 @@ LK.print = (function () {
 
     node.appendChild(LK.render.gridElement(grid, {
       showAnswers: !!options.answerKey,
-      cellSize: printCellSize(grid.cols),
+      cellSize: printCellSize(grid.cols, grid.rows),
       sheet: true
     }));
 

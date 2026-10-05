@@ -1068,5 +1068,5 @@ body.vp-migrated-page #tv-root :is(button,input,select,textarea,[tabindex]):focu
   }
   .tv-sheet:last-child { break-after: auto; page-break-after: auto; }
 
-  @page { size: A4; margin: 14mm; }
+  @page { size: A4 portrait; margin: 14mm; }
 }
