@@ -1,15 +1,15 @@
 {
   "app": "livslina",
   "version": 2,
-  "id": "character-builder-test-v5-3",
-  "label": "Karakterbyggjar med nye andlet og frisyrar",
+  "id": "character-builder-test-v5-4",
+  "label": "Karakterbyggjar med nye andlet, frisyrar og tretti klesstilar",
   "page": "character-builder-test.html",
   "renderer": "character-builder-art.js",
   "model": "character-builder-model.js",
   "controller": "character-builder-test.js",
   "updated": "2026-10-05",
   "status": "experimental-prototype",
-  "detailRevision": 8,
+  "detailRevision": 9,
   "artStyle": "detailed-pixel-art",
   "generationMode": "built-in-imagegen",
   "logicalCanvas": {
@@ -27,8 +27,8 @@
   "layerOrder": [
     "hairBack",
     "body",
-    "clothes",
     "hands",
+    "clothes",
     "face",
     "hairFront"
   ],
@@ -483,6 +483,106 @@
         "id": "clothes-10",
         "label": "Salviegrøn rugbyskorte",
         "option": 9
+      },
+      {
+        "id": "clothes-11",
+        "label": "Mosgrøn fleece og turbukse",
+        "option": 10
+      },
+      {
+        "id": "clothes-12",
+        "label": "Gul regnjakke og marineblå regnbukse",
+        "option": 11
+      },
+      {
+        "id": "clothes-13",
+        "label": "Blå treningsjakke med striper",
+        "option": 12
+      },
+      {
+        "id": "clothes-14",
+        "label": "Lilla cardigan og vide bukser",
+        "option": 13
+      },
+      {
+        "id": "clothes-15",
+        "label": "Collegejakke og mørk jeans",
+        "option": 14
+      },
+      {
+        "id": "clothes-16",
+        "label": "Skoggrøn arbeidsdress",
+        "option": 15
+      },
+      {
+        "id": "clothes-17",
+        "label": "Turkis genser og rustraudt skjørt",
+        "option": 16
+      },
+      {
+        "id": "clothes-18",
+        "label": "Lilla vest og sennepsgul bukse",
+        "option": 17
+      },
+      {
+        "id": "clothes-19",
+        "label": "Denimjakke og plommefarga bukse",
+        "option": 18
+      },
+      {
+        "id": "clothes-20",
+        "label": "Korallfarga vindjakke og joggebukse",
+        "option": 19
+      },
+      {
+        "id": "clothes-21",
+        "label": "Lilla kjole og turkise leggings",
+        "option": 20
+      },
+      {
+        "id": "clothes-22",
+        "label": "Rustraud kordskjorte og cargobukse",
+        "option": 21
+      },
+      {
+        "id": "clothes-23",
+        "label": "Koralrosa jakke og langt skjørt",
+        "option": 22
+      },
+      {
+        "id": "clothes-24",
+        "label": "Olivengrøn vest og turbukse",
+        "option": 23
+      },
+      {
+        "id": "clothes-25",
+        "label": "Lysblå skjorte og kamelfarga bukse",
+        "option": 24
+      },
+      {
+        "id": "clothes-26",
+        "label": "Raudrutete skjorte og svarte jeans",
+        "option": 25
+      },
+      {
+        "id": "clothes-27",
+        "label": "Sennepsgul kordjakke og mørk dressbukse",
+        "option": 26
+      },
+      {
+        "id": "clothes-28",
+        "label": "Petrolblå anorakk og olivenfarga turbukse",
+        "option": 27
+      },
+      {
+        "id": "clothes-29",
+        "label": "Stripete genser og vide culottebukse",
+        "option": 28
+      },
+      {
+        "id": "clothes-30",
+        "label": "Mørk turkis jakke og lys grå jeans",
+        "option": 29
       }
     ]
   },
@@ -568,8 +668,9 @@
         0,
         0
       ],
-      "bytes": 6667,
-      "status": "composite-validated"
+      "bytes": 17172,
+      "status": "extended-forearm-matched-to-skin-tone-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/skin-hands-01-source.png"
     },
     {
       "id": "skin-hands-02",
@@ -582,8 +683,9 @@
         0,
         0
       ],
-      "bytes": 6584,
-      "status": "composite-validated"
+      "bytes": 18170,
+      "status": "extended-forearm-matched-to-skin-tone-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/skin-hands-02-source.png"
     },
     {
       "id": "skin-hands-03",
@@ -596,8 +698,9 @@
         0,
         0
       ],
-      "bytes": 6526,
-      "status": "composite-validated"
+      "bytes": 15955,
+      "status": "extended-forearm-matched-to-skin-tone-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/skin-hands-03-source.png"
     },
     {
       "id": "skin-hands-04",
@@ -610,8 +713,9 @@
         0,
         0
       ],
-      "bytes": 6364,
-      "status": "composite-validated"
+      "bytes": 17700,
+      "status": "extended-forearm-matched-to-skin-tone-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/skin-hands-04-source.png"
     },
     {
       "id": "skin-hands-05",
@@ -624,8 +728,309 @@
         0,
         0
       ],
-      "bytes": 6255,
-      "status": "composite-validated"
+      "bytes": 14845,
+      "status": "extended-forearm-matched-to-skin-tone-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/skin-hands-05-source.png"
+    },
+    {
+      "id": "clothes-11",
+      "layer": "clothes",
+      "option": 10,
+      "file": "characters/v5/clothes-11.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 188537,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-11-source.png"
+    },
+    {
+      "id": "clothes-12",
+      "layer": "clothes",
+      "option": 11,
+      "file": "characters/v5/clothes-12.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 161027,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-12-source.png"
+    },
+    {
+      "id": "clothes-13",
+      "layer": "clothes",
+      "option": 12,
+      "file": "characters/v5/clothes-13.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 173262,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-13-source.png"
+    },
+    {
+      "id": "clothes-14",
+      "layer": "clothes",
+      "option": 13,
+      "file": "characters/v5/clothes-14.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 204026,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-14-source.png"
+    },
+    {
+      "id": "clothes-15",
+      "layer": "clothes",
+      "option": 14,
+      "file": "characters/v5/clothes-15.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 203103,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-15-source.png"
+    },
+    {
+      "id": "clothes-16",
+      "layer": "clothes",
+      "option": 15,
+      "file": "characters/v5/clothes-16.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 180171,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-16-source.png"
+    },
+    {
+      "id": "clothes-17",
+      "layer": "clothes",
+      "option": 16,
+      "file": "characters/v5/clothes-17.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 191515,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-17-source.png"
+    },
+    {
+      "id": "clothes-18",
+      "layer": "clothes",
+      "option": 17,
+      "file": "characters/v5/clothes-18.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 193046,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-18-source.png"
+    },
+    {
+      "id": "clothes-19",
+      "layer": "clothes",
+      "option": 18,
+      "file": "characters/v5/clothes-19.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 209769,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-19-source.png"
+    },
+    {
+      "id": "clothes-20",
+      "layer": "clothes",
+      "option": 19,
+      "file": "characters/v5/clothes-20.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 182597,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-20-source.png"
+    },
+    {
+      "id": "clothes-21",
+      "layer": "clothes",
+      "option": 20,
+      "file": "characters/v5/clothes-21.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 160851,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-21-source.png"
+    },
+    {
+      "id": "clothes-22",
+      "layer": "clothes",
+      "option": 21,
+      "file": "characters/v5/clothes-22.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 202945,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-22-source.png"
+    },
+    {
+      "id": "clothes-23",
+      "layer": "clothes",
+      "option": 22,
+      "file": "characters/v5/clothes-23.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 191548,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-23-source.png"
+    },
+    {
+      "id": "clothes-24",
+      "layer": "clothes",
+      "option": 23,
+      "file": "characters/v5/clothes-24.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 187687,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-24-source.png"
+    },
+    {
+      "id": "clothes-25",
+      "layer": "clothes",
+      "option": 24,
+      "file": "characters/v5/clothes-25.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 184716,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-25-source.png"
+    },
+    {
+      "id": "clothes-26",
+      "layer": "clothes",
+      "option": 25,
+      "file": "characters/v5/clothes-26.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 188804,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-26-source.png"
+    },
+    {
+      "id": "clothes-27",
+      "layer": "clothes",
+      "option": 26,
+      "file": "characters/v5/clothes-27.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 182700,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-27-source.png"
+    },
+    {
+      "id": "clothes-28",
+      "layer": "clothes",
+      "option": 27,
+      "file": "characters/v5/clothes-28.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 165212,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-28-source.png"
+    },
+    {
+      "id": "clothes-29",
+      "layer": "clothes",
+      "option": 28,
+      "file": "characters/v5/clothes-29.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 199808,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-29-source.png"
+    },
+    {
+      "id": "clothes-30",
+      "layer": "clothes",
+      "option": 29,
+      "file": "characters/v5/clothes-30.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 217317,
+      "status": "full-frame-template-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-30-source.png"
     },
     {
       "id": "face-01",
@@ -948,9 +1353,9 @@
         0,
         0
       ],
-      "bytes": 122610,
-      "status": "registered-layer-visual-reviewed",
-      "source": "../../_kjelder/character-v5.1/raw/clothes-08.png"
+      "bytes": 195232,
+      "status": "handless-layer-underarm-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/clothes-08-source.png"
     },
     {
       "id": "clothes-09",
@@ -1153,9 +1558,9 @@
         0,
         0
       ],
-      "bytes": 21177,
-      "status": "registered-layer-visual-reviewed",
-      "source": "../../_kjelder/character-v5.1/raw/hair-07.png"
+      "bytes": 30558,
+      "status": "compact-crown-aligned-and-composite-validated",
+      "source": "../../_kjelder/character-v5.4/raw/hair-front-07-source.png"
     },
     {
       "id": "hair-front-08",
@@ -1644,8 +2049,8 @@
       "source": "../../_kjelder/character-v5.2/raw/hair-20.png"
     }
   ],
-  "totalBytes": 1949202,
-  "combinations": 20000,
+  "totalBytes": 5851292,
+  "combinations": 60000,
   "sourceRegistrations": [
     {
       "id": "face-01",
@@ -2167,28 +2572,29 @@
     },
     {
       "id": "hair-07",
-      "source": "../../_kjelder/character-v5.1/raw/hair-07.png",
+      "source": "../../_kjelder/character-v5.4/raw/hair-front-07-source.png",
       "sourceSilhouette": [
-        270,
-        198,
-        750,
-        556
+        156,
+        103,
+        355,
+        238
       ],
       "registrationAnchors": [
-        "measured hair-crown top",
-        "measured left/right silhouette limits"
+        "scalp crown at y=84 in the final frame",
+        "centered to head and ear silhouette"
       ],
-      "scale": 0.9708333333333333,
+      "scale": 1,
       "translation": [
-        16.875,
-        -64.225
+        0,
+        -19
       ],
       "targetCrown": [
-        512,
-        128
+        256,
+        84
       ],
-      "targetWidth": 466,
-      "backLayer": "fully transparent; short style ends outside nape"
+      "targetWidth": 199,
+      "backLayer": "fully transparent; short style ends outside nape",
+      "review": "compact, dense curls; no transparent gap at scalp; ends above lower ear edge"
     },
     {
       "id": "hair-08",
@@ -2275,10 +2681,10 @@
         97
       ],
       "eyeSourceCentres": [
-        425.0,
-        596.0
+        425,
+        596
       ],
-      "eyeCenterY": 443.0,
+      "eyeCenterY": 443,
       "eyeTargetCentres": [
         [
           432,
@@ -2313,8 +2719,8 @@
         165
       ],
       "eyeSourceCentres": [
-        382.0,
-        652.0
+        382,
+        652
       ],
       "eyeCenterY": 527.5,
       "eyeTargetCentres": [
@@ -2352,7 +2758,7 @@
       ],
       "eyeSourceCentres": [
         353.5,
-        689.0
+        689
       ],
       "eyeCenterY": 702.5,
       "eyeTargetCentres": [
@@ -2468,7 +2874,7 @@
         378.5,
         644.5
       ],
-      "eyeCenterY": 522.0,
+      "eyeCenterY": 522,
       "eyeTargetCentres": [
         [
           432,
@@ -2503,10 +2909,10 @@
         167
       ],
       "eyeSourceCentres": [
-        372.0,
-        651.0
+        372,
+        651
       ],
-      "eyeCenterY": 585.0,
+      "eyeCenterY": 585,
       "eyeTargetCentres": [
         [
           432,
@@ -2541,10 +2947,10 @@
         146
       ],
       "eyeSourceCentres": [
-        387.0,
-        636.0
+        387,
+        636
       ],
-      "eyeCenterY": 545.0,
+      "eyeCenterY": 545,
       "eyeTargetCentres": [
         [
           432,
@@ -2579,7 +2985,7 @@
         236
       ],
       "eyeSourceCentres": [
-        373.0,
+        373,
         650.5
       ],
       "eyeCenterY": 643.5,
@@ -2617,10 +3023,10 @@
         204
       ],
       "eyeSourceCentres": [
-        369.0,
-        680.0
+        369,
+        680
       ],
-      "eyeCenterY": 801.0,
+      "eyeCenterY": 801,
       "eyeTargetCentres": [
         [
           432,
@@ -2813,7 +3219,7 @@
       "scale": 0.6666666666666666,
       "translation": [
         170.66666666666669,
-        -116.0
+        -116
       ],
       "targetCrown": [
         512,
@@ -2904,6 +3310,76 @@
       "bytes": 4255,
       "headWidth": 312,
       "earSpan": 408
+    },
+    {
+      "id": "skin-hands-01",
+      "source": "../../_kjelder/character-v5.4/raw/skin-hands-01-source.png",
+      "registrationAnchors": [
+        "wrist at x=126/386,y=494",
+        "hand bottom at y=544"
+      ],
+      "translationToHandBottom": [
+        0,
+        "aligned by alpha bounds to y=544"
+      ],
+      "skinToneMatch": "skin-body-01",
+      "forearmLayerOrder": "behind clothes"
+    },
+    {
+      "id": "skin-hands-02",
+      "source": "../../_kjelder/character-v5.4/raw/skin-hands-02-source.png",
+      "registrationAnchors": [
+        "wrist at x=126/386,y=494",
+        "hand bottom at y=544"
+      ],
+      "translationToHandBottom": [
+        0,
+        "aligned by alpha bounds to y=544"
+      ],
+      "skinToneMatch": "skin-body-02",
+      "forearmLayerOrder": "behind clothes"
+    },
+    {
+      "id": "skin-hands-03",
+      "source": "../../_kjelder/character-v5.4/raw/skin-hands-03-source.png",
+      "registrationAnchors": [
+        "wrist at x=126/386,y=494",
+        "hand bottom at y=544"
+      ],
+      "translationToHandBottom": [
+        0,
+        "aligned by alpha bounds to y=544"
+      ],
+      "skinToneMatch": "skin-body-03",
+      "forearmLayerOrder": "behind clothes"
+    },
+    {
+      "id": "skin-hands-04",
+      "source": "../../_kjelder/character-v5.4/raw/skin-hands-04-source.png",
+      "registrationAnchors": [
+        "wrist at x=126/386,y=494",
+        "hand bottom at y=544"
+      ],
+      "translationToHandBottom": [
+        0,
+        "aligned by alpha bounds to y=544"
+      ],
+      "skinToneMatch": "skin-body-04",
+      "forearmLayerOrder": "behind clothes"
+    },
+    {
+      "id": "skin-hands-05",
+      "source": "../../_kjelder/character-v5.4/raw/skin-hands-05-source.png",
+      "registrationAnchors": [
+        "wrist at x=126/386,y=494",
+        "hand bottom at y=544"
+      ],
+      "translationToHandBottom": [
+        0,
+        "aligned by alpha bounds to y=544"
+      ],
+      "skinToneMatch": "skin-body-05",
+      "forearmLayerOrder": "behind clothes"
     }
   ],
   "productionGuide": "../../docs/character-production-standard-v5.md",
@@ -3009,6 +3485,46 @@
         "faceHairPairs": 100,
         "allSpritesFullFrame": true,
         "compositeReview": "passed"
+      }
+    },
+    "expansionV5_4": {
+      "status": "visual-review-complete",
+      "addedClothingAssets": 20,
+      "updatedAssets": 7,
+      "totalCombinations": 60000,
+      "visualChecks": {
+        "newClothingVariants": 20,
+        "allAssetsFullFrame512x768": true,
+        "newClothesContainNoHeadOrHands": true,
+        "flanellLayerContainsNoSkinOrHands": true,
+        "handSkinMatchesAllFiveBodyTones": true,
+        "tightCurlyTopAlignedToScalp": true,
+        "groundLineAligned": true
+      },
+      "browser": {
+        "status": "passed",
+        "date": "2026-10-05",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "prototype": {
+          "assetsLoaded": 100,
+          "clothesChoices": 30,
+          "selectedHair": "Tett krølltopp",
+          "selectedFlannel": true,
+          "selectedLastNewClothingStyle": true,
+          "horizontalOverflow": false,
+          "consoleErrors": 0
+        },
+        "livslina": {
+          "clothesChoices": 30,
+          "selectedFlannel": true,
+          "selectedLastNewClothingStyle": true,
+          "pageWidth": 375,
+          "horizontalOverflow": false,
+          "consoleErrors": 0
+        }
       }
     }
   },

@@ -190,7 +190,7 @@ LL.state = (function () {
       obj.room = normalizeRoom(obj.room, obj.possessions);
       if (!obj.character || typeof obj.character !== 'object') obj.character = { skin: 1, face: 0, hair: 0, clothes: 0 };
       ['skin', 'face', 'hair', 'clothes'].forEach(key => {
-        const max = key === 'face' || key === 'hair' ? 19 : (key === 'clothes' ? 9 : 4);
+        const max = key === 'face' || key === 'hair' ? 19 : (key === 'clothes' ? 29 : 4);
         const n = Number(obj.character[key]);
         obj.character[key] = Number.isInteger(n) && n >= 0 && n <= max ? n : (key === 'skin' ? 1 : 0);
       });

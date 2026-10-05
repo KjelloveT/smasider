@@ -6,10 +6,10 @@ window.LivslinaCharacterArt = (() => {
     skin: ["Ljos varm", "Ljos nøytral", "Mellomvarm", "Djup brun", "Mørk brun"],
     face: ["Breitt smil", "Briller", "Overraska", "Blink og fregner", "Sjølvsikker", "Lattermild", "Søvnig", "Nysgjerrig", "Bekymra", "Konsentrert", "Roleg smil", "Lunt glis", "Sidemil", "Tenksam", "Konsentrert blikk", "Latter", "Varsamt uroleg", "Søvnig sideblikk", "Overraska", "Skeptisk smil"],
     hair: ["Kort krøllhår", "Langt bølgjehår", "Fletter", "Rett lugg", "Høg hestehale", "Rufsete quiff", "Tett krølltopp", "Sidesveipt pixie", "Kjevelang blåsvart bob", "Luftig blond kortklipp", "Låg fade med tette krøllar", "Brun sideskill", "Koparraud rufseklipp", "Lys kort quiff", "Svarte 360-bølgjer", "Korte tvinnar", "Mørk maskinklipp", "Blåsvart undercut med turkis lokk", "Tett krølltopp med fade", "Kort mørk framoverklipp"],
-    clothes: ["Blå hettegenser", "Rustraud jakke", "Lilla strikkegenser", "Grøn overall", "Turkis skjorte", "Burgunder varsityjakke", "Lilla cardigan og skjørt", "Rutete flanell og cargobukse", "Blått treningssett", "Salviegrøn rugbyskorte"]
+    clothes: ["Blå hettegenser", "Rustraud jakke", "Lilla strikkegenser", "Grøn overall", "Turkis skjorte", "Burgunder varsityjakke", "Lilla cardigan og skjørt", "Rutete flanell og cargobukse", "Blått treningssett", "Salviegrøn rugbyskorte", "Mosgrøn fleece og turbukse", "Gul regnjakke og marineblå regnbukse", "Blå treningsjakke med striper", "Lilla cardigan og vide bukser", "Collegejakke og mørk jeans", "Skoggrøn arbeidsdress", "Turkis genser og rustraudt skjørt", "Lilla vest og sennepsgul bukse", "Denimjakke og plommefarga bukse", "Korallfarga vindjakke og joggebukse", "Lilla kjole og turkise leggings", "Rustraud kordskjorte og cargobukse", "Koralrosa jakke og langt skjørt", "Olivengrøn vest og turbukse", "Lysblå skjorte og kamelfarga bukse", "Raudrutete skjorte og svarte jeans", "Sennepsgul kordjakke og mørk dressbukse", "Petrolblå anorakk og olivenfarga turbukse", "Stripete genser og vide culottebukse", "Mørk turkis jakke og lys grå jeans"]
   };
   const fileFamilies = { body: "skin-body", hands: "skin-hands", clothes: "clothes", face: "face", hairBack: "hair-back", hairFront: "hair-front" };
-  const counts = { body: 5, hands: 5, clothes: 10, face: 20, hairBack: 20, hairFront: 20 };
+  const counts = { body: 5, hands: 5, clothes: 30, face: 20, hairBack: 20, hairFront: 20 };
   const images = {};
   let ready = false;
   let loadError = "";

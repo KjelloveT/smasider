@@ -6,7 +6,7 @@ window.LivslinaCharacterModel = (() => {
   const skinRegions = {
     // Master clothing starts below this crop. Its alpha supplies the head outline.
     head: [[75, 32, 106, 104]],
-    hands: [[48, 244, 31, 30], [177, 244, 31, 30]]
+    hands: [[48, 212, 31, 62], [177, 212, 31, 62]]
   };
   // The bare neck ends at 149. Rows 150–153 contain the calibration shirt collar.
   const neckPolygon = [[114, 131], [142, 131], [142, 145], [138, 147], [133, 149], [122, 149], [116, 147], [114, 145]];
@@ -65,6 +65,6 @@ window.LivslinaCharacterModel = (() => {
     skinRampStops: [55, 110, 160, 210, 255],
     anchors, skinRegions, skinRamps, headBounds, earBounds, neckPolygon,
     faceProtectionPath, neckPath, registrations,
-    layerOrder: ["hairBack", "body", "clothes", "hands", "face", "hairFront"]
+    layerOrder: ["hairBack", "body", "hands", "clothes", "face", "hairFront"]
   };
 })();

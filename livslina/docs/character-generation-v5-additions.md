@@ -45,3 +45,37 @@ Alle klede blir lagde over meisterkroppen av den same produksjonsmasken. Ho fjer
 Kjeldefilene er separate bilete for variantane 06–10. Augegrupper blir målte til (432, 376) og (592, 376), nasa til (512, 432) og munnen til (512, 492) i guideoppløysinga. Hår blir sentrert etter meisterfiguren og registrert frå hårkruna; kropp og klesdelar held den frosne fullramma.
 
 Kjeldeteikningane blir haldne utanfor Git. Dei pakka modulane ligg i assets/prototype/characters/v5/. Manifestet assets/prototype/character-builder-test-manifest.json viser fil, lag, variant, storleik, feste og kontrollstatus.
+
+
+## Karakterbyggjaren v5.4 — klede og handledd
+
+Dato: 5. oktober 2026. Karakterprøva har fått tjue nye kleslag, frå tur- og regnklede til arbeidsdress, skjørt, kjole, collegejakke og meir formelle antrekk. Alle er pakkte som transparente PNG-lag på 512 × 768 med same midtlinje og golvfeste. Dei er registrerte til meisterfiguren sine skulder- og handleddsfeste; figuren sitt hovud og hender ligg ikkje i klesfilene.
+
+| ID | Variant | Teikneintensjon |
+|---|---|---|
+| clothes-11 | Mosgrøn fleece og turbukse | Mosgrøn glidelåsfleece, sandfarga turbukse og mørke tursko. |
+| clothes-12 | Gul regnjakke og marineblå regnbukse | Gul regnjakke, marineblå regnbukse og turkise støvlar. |
+| clothes-13 | Blå treningsjakke med striper | Kongeblå treningsjakke med lyse ermestriper og mørk joggebukse. |
+| clothes-14 | Lilla cardigan og vide bukser | Lilla cardigan, kremfarga skjorte og vide plommefarga bukser. |
+| clothes-15 | Collegejakke og mørk jeans | Marineblå collegejakke med lyse ermar og mørk jeans. |
+| clothes-16 | Skoggrøn arbeidsdress | Grøn arbeidsdress med brystlommer og kraftige tursko. |
+| clothes-17 | Turkis genser og rustraudt skjørt | Mønsterstrikka turkis genser, rustraudt skjørt og ugjennomsiktige strømpebukser. |
+| clothes-18 | Lilla vest og sennepsgul bukse | Mønstra lilla strikkevest, lys skjorte og sennepsgule bukser. |
+| clothes-19 | Denimjakke og plommefarga bukse | Lys denimjakke over gul skjorte, plommefarga bukser og brune boots. |
+| clothes-20 | Korallfarga vindjakke og joggebukse | Korallfarga vindjakke med mintgrøne felt og mørk joggebukse. |
+| clothes-21 | Lilla kjole og turkise leggings | Ribbestrikka kjole med belte, turkise leggings og støvlar. |
+| clothes-22 | Rustraud kordskjorte og cargobukse | Kordskjorte over grøn topp, mørk cargobukse og tursko. |
+| clothes-23 | Koralrosa jakke og langt skjørt | Rosa quiltjakke, marineblått plisséskjørt og ugjennomsiktige strømpebukser. |
+| clothes-24 | Olivengrøn vest og turbukse | Olivengrøn vattert vest over okergule ermar og grå turbukse. |
+| clothes-25 | Lysblå skjorte og kamelfarga bukse | Lys skjorte, grafittgrå strikkevest og kamelfarga bukser. |
+| clothes-26 | Raudrutete skjorte og svarte jeans | Rutete raud skjorte over svart trøye og svarte jeans. |
+| clothes-27 | Sennepsgul kordjakke og mørk dressbukse | Kordjakke over vinraud høg hals, mørk dressbukse og brune boots. |
+| clothes-28 | Petrolblå anorakk og olivenfarga turbukse | Anorakk med oransje glidelås, turbukse og tursko. |
+| clothes-29 | Stripete genser og vide culottebukser | Lilla stripete genser, culottebukser over ugjennomsiktige strømpebukser og korallraude sko. |
+| clothes-30 | Mørk turkis jakke og lys grå jeans | Mørk turkis jakke over gullgul skjorte, lys grå jeans og joggesko. |
+
+Klesressursane blir registrerte frå skulderlinja til grunnlinja og maskerte med meisterkroppen si alphaform, slik at hovud og hals skin gjennom der dei høyrer til. Alle nye erme sluttar ved handleddsfesta. Den tidlegare flanellressursen hadde lyse armar og hender teikna inn i kleslaget; dei er tekne bort. Hudtonelaga for underarmar og hender ligg no bak kleda, så erma dekkjer armane og berre rett hudtone kjem fram i det opne handleddsfeltet.
+
+Den tette krølltoppen er registrert på nytt: krunekanten startar ved hårfestet, silhuetten er smalare og avsluttar over nedre øyrekant.
+
+Råteikningane ligg lokalt i `_kjelder/character-v5.4/raw/`. Dei brukte ressursane ligg i `assets/prototype/characters/v5/`; nettlesaren flyttar eller skalerer ikkje laga.
