@@ -386,6 +386,6 @@
   .vr-print #printCaption { text-align: center; font-weight: 800; font-size: 14pt; margin-top: 4mm; }
   .vr-print img:not([src]) { display: none; }
 
-  @page { margin: 12mm; }
+  @page { size: A4 portrait; margin: 12mm; }
   body { background: #ffffff; }
 }
