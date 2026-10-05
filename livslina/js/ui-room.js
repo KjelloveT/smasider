@@ -96,7 +96,7 @@ LL.uiRoom = (function () {
     document.getElementById('roomSelectedDescription').textContent = meta.description;
     document.getElementById('roomSelectedPrice').textContent = isOwned ? (isEquipped ? 'På rommet' : 'Allereie kjøpt') : LL.util.kr(item.price);
     const action = document.getElementById('roomAction');
-    action.disabled = isEquipped || (!isOwned && current.stats.money < item.price);
+    action.disabled = isEquipped || (!isOwned && (current.creditRestriction || current.stats.money < item.price));
     action.textContent = isEquipped ? 'Allereie i bruk' : (isOwned ? 'Ta i bruk gratis' : ('Kjøp for ' + LL.util.kr(item.price)));
     action.setAttribute('aria-label', isEquipped ? meta.label + ' er allereie på rommet' :
       (isOwned ? 'Ta i bruk ' + meta.label + ' utan kostnad' : 'Kjøp ' + meta.label + ' for ' + LL.util.kr(item.price)));
@@ -104,7 +104,8 @@ LL.uiRoom = (function () {
     document.getElementById('roomCategoryHint').textContent = category.hint;
     document.getElementById('roomShopStatus').textContent = isEquipped ? 'Denne vara står på rommet no.' :
       (isOwned ? 'Du eig vara frå før. Det kostar ingenting å byte til henne.' :
-        (current.stats.money < item.price ? 'Du manglar ' + LL.util.kr(item.price - current.stats.money) + ' for å kjøpe denne vara.' : 'Kjøpet blir trekt frå brukskontoen din.'));
+        (current.creditRestriction ? 'Nye kjøp er sette på pause medan kontoen er under gjeldsgrensa.' :
+          (current.stats.money < item.price ? 'Du manglar ' + LL.util.kr(item.price - current.stats.money) + ' for å kjøpe denne vara.' : 'Kjøpet blir trekt frå brukskontoen din.')));
   }
 
   function render() {
@@ -122,8 +123,9 @@ LL.uiRoom = (function () {
     if (!item || current.room.equipped[category.slot] === item.id) return;
     const wasOwned = current.room.owned.includes(item.id);
     if (!wasOwned) {
-      if (current.stats.money < item.price) return;
+      if (current.creditRestriction || current.stats.money < item.price) return;
       current.stats.money -= item.price;
+      LL.state.recordBalance(current);
       current.room.owned.push(item.id);
     }
     current.room.equipped[category.slot] = item.id;

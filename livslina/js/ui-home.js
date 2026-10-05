@@ -98,16 +98,22 @@ LL.uiHome = (function () {
     const wrap = document.getElementById('homeTimeline');
     wrap.textContent = '';
     const rounds = LL.state.rounds();
-    const idx = LL.state.get().roundIndex;
+    const state = LL.state.get();
+    const idx = state.roundIndex;
     const current = rounds[idx];
     const finishedTerms = rounds.slice(0, idx).filter(r => r.kind === 'term').length;
+    const totalTerms = rounds.filter(r => r.kind === 'term').length;
+    const apprenticeRoute = state.program.type === 'yrkesfag' && state.trainingRoute === 'apprenticeship';
+    wrap.setAttribute('aria-label', apprenticeRoute
+      ? 'VG1 og VG2, fyrste læreår og sommarpausar'
+      : 'Dei seks skulehalvåra og dei to sommarane');
     const summary = document.getElementById('homeTimelineSummary');
     if (current && current.kind === 'summer') {
-      summary.textContent = current.label + ' · ' + finishedTerms + ' av 6 skulehalvår fullførte · ' + current.age + ' år';
+      summary.textContent = current.label + ' · ' + finishedTerms + ' av ' + totalTerms + ' halvår fullførte · ' + current.age + ' år';
     } else if (current) {
-      summary.textContent = current.label + ' · ' + current.months + ' månader · skulehalvår ' + (finishedTerms + 1) + ' av 6 · ' + current.age + ' år';
+      summary.textContent = current.label + ' · ' + current.months + ' månader · halvår ' + (finishedTerms + 1) + ' av ' + totalTerms + ' · ' + current.age + ' år';
     } else {
-      summary.textContent = 'Alle seks skulehalvåra og dei to sommarane er fullførte.';
+      summary.textContent = totalTerms + ' halvår og dei to sommarane er fullførte.';
     }
 
     rounds.forEach((r, i) => {
@@ -160,16 +166,19 @@ LL.uiHome = (function () {
       card.className = 'vp-panel vp-panel--plain ll-purchase';
       const info = document.createElement('div');
       const h = document.createElement('strong'); h.textContent = item.label;
-      const note = document.createElement('p'); note.className = 'll-note'; note.textContent = item.note || '';
+      const note = document.createElement('p'); note.className = 'll-note';
+      note.textContent = (item.note || '') + (s.creditRestriction ? ' Nye kjøp er sette på pause medan kontoen er under gjeldsgrensa.' : '');
       info.append(h, note);
       const btn = document.createElement('button');
       btn.type = 'button'; btn.className = 'vp-button vp-button--tool';
       btn.textContent = LL.util.kr(item.cost);
-      const affordable = s.stats.money >= item.cost;
+      const affordable = !s.creditRestriction && s.stats.money >= item.cost;
       btn.disabled = !affordable;
+      if (s.creditRestriction) btn.setAttribute('aria-label', item.label + ' — nye kjøp er sette på pause medan kontoen er under gjeldsgrensa');
       btn.addEventListener('click', () => {
         if (item.special === 'moped') { openMopedModal(s); return; }
         s.stats.money -= item.cost;
+        LL.state.recordBalance(s);
         item.buy();
         LL.storage.saveActive(s);
         LL.main.toast(item.label + ' kjøpt.');
@@ -185,17 +194,21 @@ LL.uiHome = (function () {
     const trimmed = bundle - 2000;
     document.getElementById('mopedBundle').textContent = LL.util.kr(bundle);
     document.getElementById('mopedTrimmed').textContent = LL.util.kr(trimmed);
+    const restriction = document.getElementById('mopedRestriction');
+    if (restriction) restriction.hidden = !s.creditRestriction;
     const legal = document.getElementById('mopedBuyLegal');
     const trim = document.getElementById('mopedBuyTrimmed');
-    legal.disabled = s.stats.money < bundle;
-    trim.disabled = s.stats.money < trimmed;
+    legal.disabled = s.creditRestriction || s.stats.money < bundle;
+    trim.disabled = s.creditRestriction || s.stats.money < trimmed;
     legal.onclick = () => { buyMoped(s, bundle, false); };
     trim.onclick = () => { buyMoped(s, trimmed, true); };
     LL.main.openModal('mopedModal');
   }
 
   function buyMoped(s, cost, trimmedVar) {
+    if (s.creditRestriction || s.stats.money < cost) return;
     s.stats.money -= cost;
+    LL.state.recordBalance(s);
     s.possessions.moped = true;
     if (trimmedVar) s.possessions.mopedTrimmed = true;
     if (trimmedVar) s.flags.mopedTrimmed = true;

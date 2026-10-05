@@ -2,6 +2,25 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.88",
+      "dato": "2026-10-05",
+      "samandrag": "Livslina får fleire hendingar, eit val mellom skule og læretid og ei sluttrapport som viser saldoen rett.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Den skjulte prøveutgåva har fleire ulike hendingar med isometriske pikselillustrasjonar. Yrkesfagelevar kan velje VG3 i skule eller fyrste læreår i bedrift, med lærlingløn etter KS-tariffen.",
+          "merke": "eksperiment"
+        },
+        {
+          "t": "fiksa",
+          "kva": "Livslina",
+          "tekst": "Sluttrapporten viser brukskonto, sparing og nettoformue kvar for seg og fangar opp om saldoen var i minus. Gjeldsvarsel og betalingsrestriksjonar blir utløyste ved låg saldo.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
       "versjon": "1.87",
       "dato": "2026-10-05",
       "samandrag": "Karakterprøva i Livslina har fått tjue nye klede, og hudlag og hår sit betre på figuren.",

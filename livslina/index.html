@@ -99,6 +99,7 @@
       <h2 class="heading3 no-mt">Vel utdanningsprogram</h2>
       <p>Alle 15 programma på vidaregåande. Linja formar utstyrsstipend, kvardag og kva du kan bli — men ingen av dei er «feil».</p>
       <div class="ll-line-grid" id="lineGrid"></div>
+      <div id="lineRoute" class="ll-line-route" hidden></div>
     </div>
 
     <!-- Steg 4: busituasjon -->
@@ -217,6 +218,7 @@
           <div class="ll-stat-val" id="budgetNet">0 kr/mnd</div>
         </div>
         <p class="ll-note" id="budgetSavingsLine"></p>
+        <p class="ll-note ll-debt-message" id="budgetDebtMessage" hidden></p>
         <p class="ll-note" id="budgetFrikort" hidden></p>
       </div>
     </div>
@@ -278,13 +280,14 @@
     <div class="vp-panel vp-panel--soft">
       <h2 class="heading2 no-mt"><span data-icon="sparkles"></span> Livslina di</h2>
       <p id="finalTimelineSummary">Tre år på vidaregåande er over. Slik gjekk det — og slik kunne det gått annleis.</p>
+      <p id="finalRunStatus" class="ll-note"></p>
       <div id="finalStats" class="ll-stats"></div>
       <div id="finalDiorama" class="ll-final-diorama"></div>
       <p id="finalRoomEffect" class="ll-note"></p>
     </div>
 
     <div class="vp-panel vp-panel--plain">
-      <h3 class="heading4 no-mt"><span data-icon="coins"></span> Formuen din gjennom tre år</h3>
+      <h3 class="heading4 no-mt"><span data-icon="coins"></span> Brukskontoen gjennom tre år</h3>
       <div id="finalChart"></div>
     </div>
 
@@ -333,6 +336,7 @@
     <button class="vp-button vp-button--icon modal-close" data-close-modal="mopedModal" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="mopedTitle" class="heading3 no-mt">Kjøpe moped?</h2>
     <p>Seljaren har to variantar. Den eine er trimma til å gå fortare — det er ulovleg, og kan gje forelegg og tap av førarbevis om du blir teken.</p>
+    <p id="mopedRestriction" class="ll-note ll-debt-message" hidden>Nye kjøp er sette på pause medan kontoen er under gjeldsgrensa.</p>
     <div class="ll-event-choices">
       <button class="vp-button vp-button--tool ll-event-choice" id="mopedBuyLegal" type="button">
         <span class="ll-event-choice-lbl">Kjøp lovleg moped — <span id="mopedBundle"></span></span>

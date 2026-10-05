@@ -74,7 +74,8 @@ LL.uiSetup = (function () {
     back.disabled = stepIndex === 0;
     const s = LL.state.get();
     let ready = true;
-    if (STEPS[stepIndex] === 'line') ready = !!s.program;
+    if (STEPS[stepIndex] === 'line') ready = !!s.program &&
+      (s.program.type !== 'yrkesfag' || s.trainingRoute === 'school' || s.trainingRoute === 'apprenticeship');
     if (STEPS[stepIndex] === 'housing') ready = !!s.housing;
     next.disabled = !ready;
     next.innerHTML = stepIndex === STEPS.length - 1
@@ -214,6 +215,10 @@ LL.uiSetup = (function () {
     card.appendChild(ul);
     // startkapital settast på konto med det same
     s.stats.money = f.startCapital;
+    s.lowestBalance = null;
+    s.wentNegative = false;
+    s.creditRestriction = false;
+    LL.state.recordBalance(s);
   }
 
   // ── Steg 3: linje ──
@@ -242,17 +247,73 @@ LL.uiSetup = (function () {
       card.addEventListener('click', () => selectLine(p, grid));
       grid.appendChild(card);
     });
+    renderTrainingRoute(chosen);
   }
 
   function selectLine(p, grid) {
     const s = LL.state.get();
+    const sameProgram = s.program && s.program.id === p.id;
     s.program = p;
+    s.trainingRoute = p.type === 'yrkesfag'
+      ? (sameProgram ? s.trainingRoute : null)
+      : 'school';
     pendingHybelRoll = true; // ny roll for hybel når vi går til steg 4
     grid.querySelectorAll('.ll-line-card').forEach(c => c.setAttribute('aria-pressed', 'false'));
     grid.querySelectorAll('.ll-line-card').forEach(c => {
       if (c.querySelector('h4').textContent === p.name) c.setAttribute('aria-pressed', 'true');
     });
+    renderTrainingRoute(p);
     updateNav();
+  }
+
+  function renderTrainingRoute(program) {
+    const panel = document.getElementById('lineRoute');
+    if (!panel) return;
+    panel.replaceChildren();
+    if (!program || program.type !== 'yrkesfag') {
+      panel.hidden = true;
+      return;
+    }
+    panel.hidden = false;
+    const heading = document.createElement('h3');
+    heading.className = 'heading4';
+    heading.textContent = 'Kva vil du gjere etter VG2?';
+    const intro = document.createElement('p');
+    intro.className = 'll-note';
+    intro.textContent = 'Vel mellom VG3 i skule og fyrste året som lærling. Spelet følgjer det fyrste læreåret; 2+2-løpet held fram med eitt læreår til før fagprøva.';
+    panel.append(heading, intro);
+
+    const choices = document.createElement('div');
+    choices.className = 'll-route-grid';
+    choices.appendChild(routeCard(
+      'school', 'VG3 i skule',
+      'Du held fram som elev og får ikkje lærlingløn i denne perioden.'
+    ));
+    choices.appendChild(routeCard(
+      'apprenticeship', 'Lærling i bedrift',
+      'Fyrste året etter VG2. Spelet brukar eit KS-basert lønsoverslag: 30 % om hausten og 40 % om våren.'
+    ));
+    panel.appendChild(choices);
+  }
+
+  function routeCard(id, title, description) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'vp-button vp-button--quiet ll-route-card';
+    button.setAttribute('aria-pressed', String(LL.state.get().trainingRoute === id));
+    const heading = document.createElement('strong');
+    heading.textContent = title;
+    const body = document.createElement('span');
+    body.textContent = description;
+    button.append(heading, body);
+    button.addEventListener('click', () => {
+      LL.state.get().trainingRoute = id;
+      document.querySelectorAll('.ll-route-card').forEach(card => {
+        card.setAttribute('aria-pressed', String(card === button));
+      });
+      updateNav();
+    });
+    return button;
   }
 
   // ── Steg 4: busituasjon ──

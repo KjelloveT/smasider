@@ -7,7 +7,7 @@ window.LL = window.LL || {};
 LL.state = (function () {
   'use strict';
 
-  const SAVE_VERSION = 5;
+  const SAVE_VERSION = 6;
   const LEGACY_SPENDING_CHOICES = {
     noysam: { eatingOutPerWeek: 0, socialEventsPerMonth: 0, clothingShoppingPerWeek: 0, inGamePurchasesPerWeek: 0 },
     sifo: { eatingOutPerWeek: 1, socialEventsPerMonth: 1, clothingShoppingPerWeek: 100, inGamePurchasesPerWeek: 50 },
@@ -88,7 +88,7 @@ LL.state = (function () {
 
   // ── Rundedefinisjon for fase 1 (6 halvår + 2 somrar) ──
   // kind: 'term' (skulehalvår) | 'summer' (sommar-mellomspel)
-  const ROUNDS = [
+  const SCHOOL_ROUNDS = [
     { id: 'vg1h', kind: 'term', schoolYear: 1, period: 'Haust', label: 'VG1 haust', short: 'VG1 · haust', age: 16, months: 6, equipmentGrant: true },
     { id: 'vg1v', kind: 'term', schoolYear: 1, period: 'Vår', label: 'VG1 vår', short: 'VG1 · vår', age: 17, months: 6, equipmentGrant: false },
     { id: 'sum1', kind: 'summer', schoolYear: 1, period: 'Sommar', label: 'Sommaren etter VG1', short: 'Sommar · VG1', age: 17 },
@@ -98,6 +98,11 @@ LL.state = (function () {
     { id: 'vg3h', kind: 'term', schoolYear: 3, period: 'Haust', label: 'VG3 haust', short: 'VG3 · haust', age: 18, months: 6, equipmentGrant: true },
     { id: 'vg3v', kind: 'term', schoolYear: 3, period: 'Vår', label: 'VG3 vår', short: 'VG3 · vår', age: 19, months: 6, equipmentGrant: false }
   ];
+
+  const APPRENTICE_ROUNDS = SCHOOL_ROUNDS.slice(0, 6).concat([
+    { id: 'laere1h', kind: 'term', schoolYear: 3, period: 'Haust', label: 'Fyrste læreår · haust', short: 'Læreår 1 · haust', age: 18, months: 6, apprenticeHalfYear: 1, apprenticeship: true, yearStart: true },
+    { id: 'laere1v', kind: 'term', schoolYear: 3, period: 'Vår', label: 'Fyrste læreår · vår', short: 'Læreår 1 · vår', age: 19, months: 6, apprenticeHalfYear: 2, apprenticeship: true }
+  ]);
 
   let save = null;
 
@@ -115,6 +120,7 @@ LL.state = (function () {
       character: { skin: 1, face: 0, hair: 0, clothes: 0 },
       family: null,       // { id, label, ... } sett i wizard
       program: null,      // { id, name, ... } sett i wizard
+      trainingRoute: null, // 'school' | 'apprenticeship' — valt for yrkesfag
       housing: 'heime',   // 'heime' | 'hybel'
       hybelAvailable: false,
       stats: {
@@ -143,6 +149,8 @@ LL.state = (function () {
       minEnergy: 70,
       noysamCount: 0,
       wentNegative: false,
+      lowestBalance: null,
+      creditRestriction: false,
       totalWage: 0
     };
     return save;
@@ -171,8 +179,8 @@ LL.state = (function () {
   }
 
   // Versjon 1 lagra sommaren før vårhalvåret. Versjon 3 la til ny karakterform
-  // og rominventar; versjon 4 tok vare på planvala; versjon 5 erstattar
-  // forbruksprofilen med konkrete forbruksvanar.
+  // og rominventar; versjon 4 tok vare på planvala; versjon 5 bytte til konkrete
+  // forbruksvanar; versjon 6 la til læreveg og saldo-/gjeldssporing.
   function migrateSave(obj) {
     if (!obj || typeof obj !== 'object') return obj;
     if (obj.version <= 1) {
@@ -198,6 +206,18 @@ LL.state = (function () {
     if (!obj.possessions || typeof obj.possessions !== 'object') {
       obj.possessions = { moped: false, mopedTrimmed: false, phoneInsurance: false };
     }
+    if (obj.trainingRoute !== 'apprenticeship' && obj.trainingRoute !== 'school') obj.trainingRoute = 'school';
+    if (!Array.isArray(obj.eventLog)) obj.eventLog = [];
+    if (!Array.isArray(obj.ledger)) obj.ledger = [];
+    const balanceHistory = [Number(obj.stats && obj.stats.money),
+      ...obj.ledger.map(entry => Number(entry.balance)),
+      ...obj.eventLog.map(entry => Number(entry.moneyAfter))];
+    if (typeof obj.lowestBalance === 'number' && Number.isFinite(obj.lowestBalance)) balanceHistory.push(obj.lowestBalance);
+    const knownBalances = balanceHistory.filter(Number.isFinite);
+    obj.lowestBalance = knownBalances.length ? Math.min(...knownBalances) : 0;
+    obj.wentNegative = Boolean(obj.wentNegative) || obj.lowestBalance < 0;
+    const cash = Number(obj.stats && obj.stats.money);
+    obj.creditRestriction = (Boolean(obj.creditRestriction) && cash <= -5000) || cash <= -10000;
     if (!obj.planPreferences || typeof obj.planPreferences !== 'object') {
       obj.planPreferences = obj.plan && typeof obj.plan === 'object'
         ? Object.assign({}, obj.plan, { activities: Array.isArray(obj.plan.activities) ? obj.plan.activities.slice() : [] })
@@ -205,6 +225,11 @@ LL.state = (function () {
     }
     obj.plan = migratePlan(obj.plan);
     obj.planPreferences = migratePlan(obj.planPreferences);
+    if (obj.creditRestriction && !obj.preDebtPlanPreferences) {
+      const previousPlan = obj.planPreferences || obj.plan;
+      if (previousPlan) obj.preDebtPlanPreferences = JSON.parse(JSON.stringify(previousPlan));
+    }
+    if (obj.creditRestriction && obj.plan) applyDebtPlan(obj.plan);
     if (obj.version !== SAVE_VERSION) {
       obj.version = SAVE_VERSION;
     }
@@ -213,9 +238,52 @@ LL.state = (function () {
 
   function get() { return save; }
   function stats() { return save.stats; }
-  function currentRound() { return ROUNDS[save.roundIndex]; }
-  function rounds() { return ROUNDS; }
-  function isLastRound() { return save.roundIndex >= ROUNDS.length - 1; }
+  function rounds() {
+    return save && save.program && save.program.type === 'yrkesfag' && save.trainingRoute === 'apprenticeship'
+      ? APPRENTICE_ROUNDS
+      : SCHOOL_ROUNDS;
+  }
+  function currentRound() { return rounds()[save.roundIndex]; }
+  function isLastRound() { return save.roundIndex >= rounds().length - 1; }
+
+  function recordBalance(state) {
+    const current = state || save;
+    if (!current || !current.stats) return;
+    const cash = Number(current.stats.money);
+    if (!Number.isFinite(current.lowestBalance)) current.lowestBalance = cash;
+    else current.lowestBalance = Math.min(current.lowestBalance, cash);
+    if (cash < 0) current.wentNegative = true;
+    // Gjeldsgrensa slår inn ved −10 000 kr og slepper først når saldoen kjem
+    // over −5 000 kr, så valet ikkje blinkar av og på frå månad til månad.
+    const restricted = current.creditRestriction
+      ? current.stats.money <= -5000
+      : current.stats.money <= -10000;
+    if (restricted && !current.creditRestriction && current.planPreferences) {
+      current.preDebtPlanPreferences = JSON.parse(JSON.stringify(current.planPreferences));
+    }
+    if (restricted && !current.creditRestriction && current.plan) applyDebtPlan(current.plan);
+    if (!restricted && current.creditRestriction && current.preDebtPlanPreferences) {
+      current.planPreferences = current.preDebtPlanPreferences;
+      delete current.preDebtPlanPreferences;
+    }
+    current.creditRestriction = restricted;
+  }
+
+  function applyDebtPlan(plan) {
+    plan.canteenVisitsPerWeek = 0;
+    plan.drinksPerWeek = 0;
+    plan.eatingOutPerWeek = 0;
+    plan.socialEventsPerMonth = 0;
+    plan.clothingShoppingPerWeek = 0;
+    plan.inGamePurchasesPerWeek = 0;
+    plan.seasonPass = false;
+    plan.savings = 0;
+    plan.activities = [];
+    const mobilePlans = window.LL && LL.data && LL.data.node('recurringSpending.mobilePlans');
+    if (Array.isArray(mobilePlans) && mobilePlans.length) {
+      plan.mobileDataPlan = mobilePlans.slice().sort((a, b) => a.pricePerMonth - b.pricePerMonth)[0].id;
+    }
+  }
 
   function age() {
     const r = currentRound();
@@ -233,9 +301,9 @@ LL.state = (function () {
 
   return {
     SAVE_VERSION,
-    ROUNDS,
+    ROUNDS: SCHOOL_ROUNDS,
     newGame, load, get,
-    stats, currentRound, rounds, isLastRound, age, isAdult,
+    stats, currentRound, rounds, isLastRound, age, isAdult, recordBalance,
     seedRng, rng, rngInt, rngPick,
     draw, drawInt, drawPick
   };

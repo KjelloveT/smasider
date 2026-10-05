@@ -18,11 +18,14 @@ LL.events = (function () {
     if (w.noMoped && state.possessions.moped) return false;
     if (w.housing && state.housing !== w.housing) return false;
     if (w.programType && (!state.program || state.program.type !== w.programType)) return false;
+    if (w.route && state.trainingRoute !== w.route) return false;
+    if (typeof w.moneyAtMost === 'number' && state.stats.money > w.moneyAtMost) return false;
     if (w.flag && !state.flags[w.flag]) return false;
     if (w.notFlag && state.flags[w.notFlag]) return false;
     if (typeof w.minAge === 'number' && state.age < w.minAge) return false;
     if (w.overFrikort && !state.flags.overFrikort) return false;
     if (ev.once && state.flags['ev_' + ev.id]) return false;
+    if (state.eventLog && state.eventLog.some(entry => entry.id === ev.id)) return false;
     return true;
   }
 
@@ -67,8 +70,11 @@ LL.events = (function () {
 
   // Kalla av ui-playback etter kvar månad. Viser hending om planlagt.
   function checkMonth(state, ctx, tick, resume) {
-    const list = ctx.eventSchedule && ctx.eventSchedule[tick];
-    if (!list || !list.length) { resume(); return; }
+    const scheduled = ctx.eventSchedule && ctx.eventSchedule[tick] || [];
+    const debtEvent = LL.data.getEvents().find(ev => ev.debtTrigger && eligible(ev, state));
+    if (debtEvent && !scheduled.includes(debtEvent) && typeof ctx.decisionTotal === 'number') ctx.decisionTotal++;
+    const list = debtEvent ? [debtEvent].concat(scheduled) : scheduled;
+    if (!list.length) { resume(); return; }
     pendingResume = { list: list.slice(), idx: 0, state, ctx, resume };
     showNext();
   }
@@ -83,7 +89,7 @@ LL.events = (function () {
   }
 
   function renderCard(ev, state, ctx) {
-    document.getElementById('eventVignette').innerHTML = LL.artVignette.svg(ev.art);
+    document.getElementById('eventVignette').replaceChildren(LL.artVignette.create(ev.art));
     const meta = document.getElementById('eventMeta');
     if (ev.choices && ev.choices.length > 1 && typeof ctx.decisionTotal === 'number') {
       ctx.decisionShown++;
@@ -123,7 +129,10 @@ LL.events = (function () {
     if (e.insuranceApplies && state.possessions.phoneInsurance) amt = 500;
     else if (e.costKey) amt = LL.data.value(e.costKey);
     else if (e.cost) amt = e.cost;
-    if (amt) return ' — ' + LL.util.kr(amt) + (e.costFromSavings ? ' frå sparinga' : '');
+    if (amt) {
+      const label = e.insuranceApplies && state.possessions.phoneInsurance ? ' forsikrings-eigendel' : '';
+      return ' — ' + LL.util.kr(amt) + label + (e.costFromSavings ? ' frå sparinga' : '');
+    }
     if (e.gain) return ' — +' + LL.util.kr(e.gain);
     if (e.gainKey) return ' — +' + LL.util.kr(LL.data.value(e.gainKey));
     if (e.gainToSavings) return ' — +' + LL.util.kr(e.gainToSavings) + ' på sparinga';
@@ -132,10 +141,11 @@ LL.events = (function () {
   }
 
   function choose(ev, ch, state, ctx) {
-    applyEffects(state, ch.effects || {}, ctx, ev);
+    const moneyDelta = applyEffects(state, ch.effects || {}, ctx, ev);
     if (ev.once) state.flags['ev_' + ev.id] = true;
-    state.eventLog.push({ round: ctx.round.id, id: ev.id, choice: ch.label });
-    ctx.eventLog.push({ id: ev.id, title: ev.title, choice: ch.label });
+    LL.state.recordBalance(state);
+    state.eventLog.push({ round: ctx.round.id, id: ev.id, choice: ch.label, moneyDelta, moneyAfter: state.stats.money, savingsAfter: state.stats.savings });
+    ctx.eventLog.push({ id: ev.id, title: ev.title, choice: ch.label, moneyDelta });
     LL.main.closeModal('eventModal');
     LL.storage.saveActive(state);
     pendingResume.idx++;
@@ -185,6 +195,7 @@ LL.events = (function () {
       const wage = e.wageHoursGain * LL.economy.hourlyWage(state);
       state.stats.money += wage; moneyDelta += wage;
       state._yearWage = (state._yearWage || 0) + wage;
+      state.totalWage = (state.totalWage || 0) + wage;
       ctx.wageThisTerm += wage;
       addCat(ctx.income, 'wage', wage);
     }
@@ -205,6 +216,8 @@ LL.events = (function () {
         delta: moneyDelta
       });
     }
+    LL.state.recordBalance(state);
+    return moneyDelta;
   }
 
   function trimChoice(ev, effects) {
@@ -220,11 +233,13 @@ LL.events = (function () {
     const pool = LL.data.getSummerEvents().filter(ev => {
       const w = ev.when || {};
       if (w.rounds && w.rounds.indexOf(round.id) === -1) return false;
+      if (w.route && state.trainingRoute !== w.route) return false;
       if (ev.once && state.flags['ev_' + ev.id]) return false;
+      if (state.eventLog && state.eventLog.some(entry => entry.id === ev.id)) return false;
       return true;
     });
     if (!pool.length) { onDone(); return false; }
-    pendingResume = { list: [pool[0]], idx: 0, state, ctx, resume: onDone };
+    pendingResume = { list: [weightedPick(pool)], idx: 0, state, ctx, resume: onDone };
     showNext();
     return true;
   }

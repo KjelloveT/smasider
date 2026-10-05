@@ -16,6 +16,12 @@ LL.uiBudget = (function () {
     document.getElementById('budgetRound').textContent = 'Planlegg ' + round.label.toLowerCase();
     draft = Object.assign(LL.economy.defaultPlan(), state.plan || state.planPreferences || {});
     draft.activities = (draft.activities || []).slice();
+    if (state.creditRestriction) applyDebtPlan();
+    const debtMessage = document.getElementById('budgetDebtMessage');
+    debtMessage.hidden = !state.creditRestriction;
+    debtMessage.textContent = state.creditRestriction
+      ? 'Gjeldsgrensa er nådd. Frie innkjøp, romkjøp, sesongpass, aktivitetar og fast sparing er sette på pause til saldoen kjem over −5 000 kr. Restriksjonane slår inn ved −10 000 kr.'
+      : '';
     renderControls();
     recompute();
     LL.main.showScreen('screen-budget');
@@ -23,28 +29,29 @@ LL.uiBudget = (function () {
   }
 
   function renderControls() {
+    const restricted = LL.state.get().creditRestriction;
     // Jobb
     btnGroup('budgetJob', LL.economy.jobOptions().map(o => ({ val: o.hours, label: o.label })),
       draft.jobHours, v => { draft.jobHours = v; recompute(); });
     btnGroup('budgetCanteen', LL.economy.canteenOptions(),
-      draft.canteenVisitsPerWeek, v => { draft.canteenVisitsPerWeek = v; recompute(); });
+      draft.canteenVisitsPerWeek, v => { draft.canteenVisitsPerWeek = v; recompute(); }, restricted);
     btnGroup('budgetDrinks', LL.economy.drinkOptions(),
-      draft.drinksPerWeek, v => { draft.drinksPerWeek = v; recompute(); });
+      draft.drinksPerWeek, v => { draft.drinksPerWeek = v; recompute(); }, restricted);
     btnGroup('budgetEatingOut', LL.economy.eatingOutOptions(),
-      draft.eatingOutPerWeek, v => { draft.eatingOutPerWeek = v; recompute(); });
+      draft.eatingOutPerWeek, v => { draft.eatingOutPerWeek = v; recompute(); }, restricted);
     btnGroup('budgetSocialEvents', LL.economy.socialEventOptions(),
-      draft.socialEventsPerMonth, v => { draft.socialEventsPerMonth = v; recompute(); });
+      draft.socialEventsPerMonth, v => { draft.socialEventsPerMonth = v; recompute(); }, restricted);
     btnGroup('budgetClothingShopping', LL.economy.weeklyBudgetOptions('clothingShopping'),
-      draft.clothingShoppingPerWeek, v => { draft.clothingShoppingPerWeek = v; recompute(); });
+      draft.clothingShoppingPerWeek, v => { draft.clothingShoppingPerWeek = v; recompute(); }, restricted);
     btnGroup('budgetInGamePurchases', LL.economy.weeklyBudgetOptions('inGamePurchases'),
-      draft.inGamePurchasesPerWeek, v => { draft.inGamePurchasesPerWeek = v; recompute(); });
+      draft.inGamePurchasesPerWeek, v => { draft.inGamePurchasesPerWeek = v; recompute(); }, restricted);
     btnGroup('budgetMobile', LL.economy.mobileDataOptions(),
-      draft.mobileDataPlan, v => { draft.mobileDataPlan = v; recompute(); });
+      draft.mobileDataPlan, v => { draft.mobileDataPlan = v; recompute(); }, restricted);
     btnGroup('budgetSeasonPass', LL.economy.seasonPassOptions(),
-      draft.seasonPass, v => { draft.seasonPass = v; recompute(); });
+      draft.seasonPass, v => { draft.seasonPass = v; recompute(); }, restricted);
     // Sparing
     btnGroup('budgetSavings', LL.economy.savingsOptions().map(v => ({ val: v, label: v === 0 ? 'Ingen' : LL.util.kr(v) + '/mnd' })),
-      draft.savings, v => { draft.savings = v; recompute(); });
+      draft.savings, v => { draft.savings = v; recompute(); }, restricted);
     // Aktivitetar (fleirval)
     const wrap = document.getElementById('budgetActivities');
     wrap.textContent = '';
@@ -55,6 +62,7 @@ LL.uiBudget = (function () {
       b.textContent = a.label + ' (' + LL.util.kr(a.monthly) + ')';
       const on = draft.activities.includes(a.id);
       b.setAttribute('aria-pressed', String(on));
+      b.disabled = restricted;
       b.addEventListener('click', () => {
         const i = draft.activities.indexOf(a.id);
         if (i === -1) draft.activities.push(a.id); else draft.activities.splice(i, 1);
@@ -65,7 +73,7 @@ LL.uiBudget = (function () {
     });
   }
 
-  function btnGroup(id, opts, current, onPick) {
+  function btnGroup(id, opts, current, onPick, disabled) {
     const row = document.getElementById(id);
     row.textContent = '';
     opts.forEach(o => {
@@ -73,6 +81,7 @@ LL.uiBudget = (function () {
       b.type = 'button';
       b.className = 'vp-button vp-button--tool';
       b.textContent = o.label;
+      b.disabled = Boolean(disabled);
       b.setAttribute('aria-pressed', String(o.val === current));
       b.addEventListener('click', () => {
         row.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
@@ -80,6 +89,21 @@ LL.uiBudget = (function () {
       });
       row.appendChild(b);
     });
+  }
+
+  function applyDebtPlan() {
+    const first = options => options.length ? options[0].val : null;
+    draft.canteenVisitsPerWeek = first(LL.economy.canteenOptions());
+    draft.drinksPerWeek = first(LL.economy.drinkOptions());
+    draft.eatingOutPerWeek = first(LL.economy.eatingOutOptions());
+    draft.socialEventsPerMonth = first(LL.economy.socialEventOptions());
+    draft.clothingShoppingPerWeek = first(LL.economy.weeklyBudgetOptions('clothingShopping'));
+    draft.inGamePurchasesPerWeek = first(LL.economy.weeklyBudgetOptions('inGamePurchases'));
+    draft.mobileDataPlan = LL.data.node('recurringSpending.mobilePlans')
+      .slice().sort((a, b) => a.pricePerMonth - b.pricePerMonth)[0].id;
+    draft.seasonPass = false;
+    draft.savings = 0;
+    draft.activities = [];
   }
 
   function recompute() {
@@ -106,7 +130,7 @@ LL.uiBudget = (function () {
       : 'Ingen fast sparing denne perioden.';
 
     // Frikort-projeksjon
-    const wageMonth = (b.income.wage || 0);
+    const wageMonth = b.wageTotal || 0;
     const yearWage = (state._yearWage || 0) + wageMonth * (LL.state.currentRound().months || 6);
     const limit = LL.data.value('tax.taxFreeCardLimit');
     const warn = document.getElementById('budgetFrikort');
@@ -134,7 +158,9 @@ LL.uiBudget = (function () {
   function confirm() {
     const state = LL.state.get();
     state.plan = Object.assign({}, draft, { activities: draft.activities.slice() });
-    state.planPreferences = Object.assign({}, state.plan, { activities: state.plan.activities.slice() });
+    if (!state.creditRestriction) {
+      state.planPreferences = Object.assign({}, state.plan, { activities: state.plan.activities.slice() });
+    }
     if (LL.economy.spendingStyle(draft) === 'noysam') state.noysamCount = (state.noysamCount || 0) + 1;
     // Hjørne-slot i dioramaet følgjer fritidsvalet
     if (draft.activities.includes('sport') || draft.activities.includes('gym')) state.possessions.hobby = 'trening';

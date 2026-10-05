@@ -11,7 +11,9 @@ LL.uiReport = (function () {
     const nextRound = LL.state.currentRound();
     document.getElementById('hyProgress').textContent = nextRound
       ? summary.round.label + ' er fullført. Neste periode er ' + nextRound.label + '.'
-      : 'Du har fullført alle seks skulehalvåra og dei to sommarane.';
+      : (summary.round.apprenticeship
+        ? 'Du har fullført VG1 og VG2, to somrar og det fyrste læreåret.'
+        : 'Du har fullført alle seks skulehalvåra og dei to sommarane.');
 
     // Inntekter / utgifter
     fillList('hyIncome', summary.income, false);
@@ -82,7 +84,7 @@ LL.uiReport = (function () {
   const BADGES = [
     { id: 'buffer', icon: 'gem', label: 'Bufferbyggjar', desc: 'Minst 20 000 kr spart', test: s => s.stats.savings >= 20000 },
     { id: 'frikort', icon: 'coins', label: 'Frikortmeister', desc: 'Tente pengar utan å gå over frikortgrensa', test: s => (s.totalWage || 0) >= 30000 && !s.flags.overFrikort },
-    { id: 'fagbrev', icon: 'award', label: 'Fagbrev-kurs', desc: 'Sikra ein god læreplass', test: s => s.program.type === 'yrkesfag' && s.flags.laereplassBra },
+    { id: 'fagbrev', icon: 'award', label: 'God start i læretida', desc: 'Møtte godt førebudd til læretida', test: s => s.program.type === 'yrkesfag' && s.trainingRoute === 'apprenticeship' && s.flags.laereplassBra },
     { id: 'studieklar', icon: 'book', label: 'Studieklar', desc: 'Studieførebuande med snitt 4+', test: s => s.program.type === 'studieforberedande' && s.stats.grades >= 4 },
     { id: 'balanse', icon: 'heart', label: 'Balansekunstnar', desc: 'Trivsel og energi aldri under 40', test: s => s.minWellbeing >= 40 && s.minEnergy >= 40 },
     { id: 'noysemd', icon: 'shield', label: 'Nøysemd', desc: 'Nøysame forbrukarval i minst 4 halvår', test: s => (s.noysamCount || 0) >= 4 },
@@ -93,13 +95,27 @@ LL.uiReport = (function () {
   function showFinal() {
     const s = LL.state.get();
     const networth = s.stats.money + s.stats.savings;
-    document.getElementById('finalTimelineSummary').textContent =
-      'Du har fullført seks skulehalvår og to sommarar frå starten av VG1 til slutten av VG3. Slik gjekk det — og slik kunne det gått annleis.';
+    const apprenticeRoute = s.program.type === 'yrkesfag' && s.trainingRoute === 'apprenticeship';
+    document.getElementById('finalTimelineSummary').textContent = apprenticeRoute
+      ? 'Du har fullført VG1 og VG2, og det fyrste læreåret med løn. Det vanlege 2+2-løpet held fram med eitt læreår til før fagprøva.'
+      : 'Du har fullført seks skulehalvår og to sommarar frå starten av VG1 til slutten av VG3. Slik gjekk det — og slik kunne det gått annleis.';
+
+    const lowestBalance = Number.isFinite(Number(s.lowestBalance))
+      ? Number(s.lowestBalance)
+      : Math.min(s.stats.money,
+        ...s.ledger.map(entry => Number(entry.balance)).filter(Number.isFinite),
+        ...s.eventLog.map(entry => Number(entry.moneyAfter)).filter(Number.isFinite));
+    const negativeStatus = document.getElementById('finalRunStatus');
+    negativeStatus.textContent = s.wentNegative || s.stats.money < 0
+      ? 'Brukskontoen var i minus i løpet av spelet.' + (lowestBalance < 0 ? ' Lågaste registrerte saldo var ' + LL.util.kr(lowestBalance) + '.' : '')
+      : 'Brukskontoen gjekk aldri i minus.';
 
     // Nøkkeltal
     const grid = document.getElementById('finalStats');
     grid.textContent = '';
-    grid.appendChild(bigStat('Formue til slutt', LL.util.kr(networth), networth < 0));
+    grid.appendChild(bigStat('Brukskonto', LL.util.kr(s.stats.money), s.stats.money < 0));
+    grid.appendChild(bigStat('Sparing', LL.util.kr(s.stats.savings), s.stats.savings < 0));
+    grid.appendChild(bigStat('Samla nettoformue', LL.util.kr(networth), networth < 0));
     grid.appendChild(bigStat('Utdanning', s.program.name, false, true));
     grid.appendChild(bigStat('Karaktersnitt', s.stats.grades.toFixed(1), false));
     grid.appendChild(bigStat('Trivsel', Math.round(s.stats.wellbeing) + '/100', false));
@@ -156,8 +172,11 @@ LL.uiReport = (function () {
   function pathForward(s) {
     const p = s.program;
     if (p.type === 'yrkesfag') {
-      if (s.flags.laereplassBra) return 'Du sikra ein god læreplass. Som lærling får du løn medan du jobbar mot fagbrev — vegen mot ' + p.careers[0].toLowerCase() + ' er godt i gang.';
-      return 'Du søkjer læreplass for å ta fagbrev. Karaktersnittet (' + s.stats.grades.toFixed(1) + ') og innsatsen din avgjer kor lett det blir.';
+      if (s.trainingRoute === 'apprenticeship') {
+        const start = s.flags.laereplassBra ? 'Du møtte godt førebudd til læretida.' : 'Du har byrja i lære og tent lærlingløn.';
+        return start + ' Eitt læreår står att før fagprøva og fagbrev som ' + p.careers[0].toLowerCase() + '.';
+      }
+      return 'Du valde VG3 i skule. Etterpå kan du søkje læreplass eller ta påbygg, alt etter kva som finst i faget ditt.';
     }
     if (s.stats.grades >= 4) return 'Med snittet ditt (' + s.stats.grades.toFixed(1) + ') står dei fleste studia opne. Neste livsfase blir studielån, deltidsjobb og eige husvære.';
     return 'Snittet ditt (' + s.stats.grades.toFixed(1) + ') avgrensar nokre studieval, men mange dører er framleis opne. Neste fase: studium eller arbeid.';
@@ -206,11 +225,11 @@ LL.uiReport = (function () {
     });
   }
 
-  // Enkel SVG-linjegraf: formue (networth) over tid
+  // Enkel SVG-linjegraf: saldo på brukskonto over tid
   function chartSVG(ledger) {
     if (!ledger || ledger.length < 2) return '<p class="ll-note">For lite data til graf.</p>';
     const W = 480, H = 200, padL = 44, padR = 12, padT = 14, padB = 26;
-    const vals = ledger.map(e => e.networth != null ? e.networth : e.balance);
+    const vals = ledger.map(e => Number(e.balance) || 0);
     let min = Math.min(0, ...vals), max = Math.max(...vals);
     if (max === min) max = min + 1;
     const n = vals.length;
@@ -223,14 +242,14 @@ LL.uiReport = (function () {
     // fyll under kurva
     const area = `M ${x(0)},${zeroY} ` + vals.map((v, i) => 'L ' + x(i).toFixed(1) + ',' + y(v).toFixed(1)).join(' ') + ` L ${x(n - 1)},${zeroY} Z`;
 
-    return `<svg class="ll-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Formuekurve gjennom vidaregåande">
+    return `<svg class="ll-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Saldoen på brukskontoen gjennom vidaregåande">
       <line x1="${padL}" y1="${zeroY}" x2="${W - padR}" y2="${zeroY}" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 3"/>
       <path d="${area}" fill="var(--accent5)" opacity="0.5"/>
       <polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
       <text x="${padL - 6}" y="${y(max)}" text-anchor="end" font-size="11" fill="var(--muted)" dominant-baseline="middle">${LL.util.num(max)}</text>
       <text x="${padL - 6}" y="${zeroY}" text-anchor="end" font-size="11" fill="var(--muted)" dominant-baseline="middle">0</text>
       <text x="${padL}" y="${H - 8}" font-size="11" fill="var(--muted)">VG1</text>
-      <text x="${W - padR}" y="${H - 8}" text-anchor="end" font-size="11" fill="var(--muted)">VG3</text>
+      <text x="${W - padR}" y="${H - 8}" text-anchor="end" font-size="11" fill="var(--muted)">Slutt</text>
     </svg>`;
   }
 
