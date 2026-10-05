@@ -1776,7 +1776,22 @@
         "generatedShortHairBackLayers": "fully transparent"
       },
       "browser": {
-        "status": "not-run"
+        "status": "passed",
+        "date": "2026-10-05",
+        "testedCommit": "fcc2a47",
+        "url": "https://icy-water-0487ac303-95.westeurope.2.azurestaticapps.net/livslina/assets/prototype/character-builder-test",
+        "assetsLoaded": 50,
+        "desktop": "passed",
+        "mobileViewportWidth": 390,
+        "mobileDocumentScrollWidth": 375,
+        "horizontalPageOverflow": false,
+        "controls": [
+          "new face, hair and clothing selections",
+          "random",
+          "reset"
+        ],
+        "consoleErrors": 0,
+        "consoleWarnings": 0
       }
     }
   },

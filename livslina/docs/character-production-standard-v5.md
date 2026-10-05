@@ -89,4 +89,5 @@ Prøva lagrar ingen brukarval, har ingen nye avhengnader og endrar ikkje speleø
 
 - Dei 20 nye lagfilene brukar same 512 × 768-ramme og er pakka under 500 kB kvar. Alle fem korte frisyrene har eit gjennomsiktig baklag.
 - Visuell kontroll omfattar kontaktark med alle fem nye frisyrar, andletsuttrykk og antrekk, med fullstendige kontaktark for 100 andlet/hår-par, 100 hår/klede-par og 50 hud/kledde-par.
-- Nettlesarkontroll for den utvida prøva skal førast i manifestet etter kontroll av lokal- eller PR-førehandsvisinga.
+- PR-førehandsvisinga lasta alle 50 ressurslag. Nye ansikt, hår og klede, tilfeldig figur og tilbakestilling er kontrollerte; nettlesaren hadde ingen konsollfeil eller -varsel.
+- Skrivebordsvisinga og mobilbreidda 390 px er kontrollerte. Dokumentsbreidda var 375 px på mobil, utan vassrett overflyt. Resultatet er ført i testmanifestet.
