@@ -281,11 +281,15 @@ Ein `CHANGELOG.md` på rot skal vedlikehaldast med eit fast format per versjon:
 - ...
 ```
 
-Oppdater CHANGELOG når du legg til nye spel/verktøy, gjer brytande endringar eller fiksar feil som påverkar brukaropplevinga.
+Oppdater CHANGELOG når nye spel/verktøy blir publiserte, ved brytande endringar og ved feilrettingar som påverkar brukaropplevinga. Loggen skal skildre endringar som faktisk er publiserte på produksjonssida, ikkje berre arbeid som er merga til `main`.
 
-**Endringssida skal følgje CHANGELOG.** `json/endringslogg.json` er kortversjonen som `endringar.html` viser, og notatet på framsida lenkjer dit. Legg du ein ny versjon i `CHANGELOG.md`, skal du i **same pull request** leggje same versjonen i `json/endringslogg.json` med éi kort linje per punkt (`t` = `nytt`, `endra` eller `fiksa`). Ein endringslogg som veks medan sida står stille, er ein endringslogg ingen brukar les.
+**Éin release-eigar oppdaterer versjonsfilene.** Kode-PR-ar skal ikkje endre `CHANGELOG.md`, `json/endringslogg.json` eller versjonsnotatet (`aside.hero-postit`) i `index.html`. Skriv ei kort føreslått changelog-linje i PR-skildringa, med type `nytt`, `endra` eller `fiksa`, slik at release-agenten kan vurdere henne. Berre éin utpeikt release-agent skal arbeide med dei tre filene om gongen.
 
-**Notatet på framsida skal ha med dei største endringane som er gjort siste tida (tillegg av spel, store endringar og liknande). Notatet på framsida skal også ha med nyaste frå CHANGELOG.** Gul-lappen i `index.html` (`aside.hero-postit`) har eit versjonsnummer, og det skal vere det same som øvste versjonen i `CHANGELOG.md`. Legg du til ein ny versjon i endringsloggen, skal du i same pull request setje versjonsnummeret i notatet til den nye versjonen. Merk henne med «Nyaste endring på Vyrdepil».
+Når ei bunke kode-PR-ar er merga og endringane er synlege i produksjon, eller brukaren ber om ei loggoppdatering, går éin release-agent gjennom alt publisert sidan førre versjonsføring. Dette kan gjerast med jamne mellomrom; det treng ikkje skje etter kvar kode-PR. Agenten samanliknar fersk `origin/main`, dei merga PR-ane og produksjonssida, kontrollerer kva som alt er loggført, fjernar duplikat og tek berre med brukarvendte endringar. Arbeidet blir samla i éin eigen release-PR. Om ingen kvalifiserande endringar er publiserte, skal ingen versjon lagast.
+
+**Endringssida skal følgje CHANGELOG.** `json/endringslogg.json` er kortversjonen som `endringar.html` viser, og notatet på framsida lenkjer dit. Release-PR-en skal leggje same versjon i `json/endringslogg.json` med éi kort linje per punkt (`t` = `nytt`, `endra` eller `fiksa`). Ein endringslogg som veks medan sida står stille, er ein endringslogg ingen brukar les.
+
+**Notatet på framsida skal ha med dei største endringane som er publiserte siste tida (tillegg av spel, store endringar og liknande), og skal vise nyaste versjon frå CHANGELOG.** Gul-lappen i `index.html` (`aside.hero-postit`) har eit versjonsnummer som skal vere det same som øvste versjonen i `CHANGELOG.md`. Release-PR-en skal oppdatere versjonsnummeret og merkje notatet med «Nyaste endring på Vyrdepil».
 
 **Berre nye spel og verktøy som ER PUBLISERTE PÅ FRAMSIDA skal stå i notatet.** Notatet er utstillingsvindauget, ikkje arbeidsloggen. Ei aktivitet som ligg i repoet men ikkje i `json/apps.json`, eller som står som prøveutgåve inne i eit anna verktøy, høyrer ikkje heime der — den besøkjande kan ikkje gå og sjå på henne, og då er punktet berre støy. Detaljar om noko som er under arbeid høyrer heime i `CHANGELOG.md` og på endringssida.
 
@@ -346,7 +350,7 @@ To fallgruver når du skal finne ut kva som faktisk manglar:
 gh pr list --state open
 ```
 
-CHANGELOG-oppdateringa (§6.2) høyrer heime i **same PR** som endringa ho skildrar.
+Versjonsfilene blir oppdaterte samla i ein eigen release-PR etter at dei aktuelle kodeendringane er publiserte, slik §6.2 skildrar. Kode-PR-ar skal ikkje vente på release-PR-en for å kunne mergast.
 
 **Vit dette om preview-miljøa:**
 - `localStorage` er per origin. Preview har eit anna domene enn produksjon, så du startar alltid med blanke ark. Det er bra for å teste førstegongsopplevinga, men det tyder at endringar i datastrukturen (`version`-feltet, §5.2) **ikkje** kan migreringstestast der — det må gjerast lokalt med kopiert `localStorage`.
