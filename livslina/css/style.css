@@ -49,8 +49,8 @@
 .ll-character-thumb { position: absolute; top: 0; left: 0; display: block; width: 100%; max-width: none; height: auto; image-rendering: pixelated; }
 .ll-character-thumb-frame--skin .ll-character-thumb { top: -30%; left: -70%; width: 240%; }
 .ll-character-thumb-frame--face .ll-character-thumb { top: -35%; left: -70%; width: 240%; }
-.ll-character-thumb-frame--hair .ll-character-thumb { top: -20%; left: -75%; width: 250%; }
-.ll-character-thumb-frame--clothes .ll-character-thumb { top: -80%; left: -40%; width: 180%; }
+.ll-character-thumb-frame--hair .ll-character-thumb { top: -35%; left: -70%; width: 240%; }
+.ll-character-thumb-frame--clothes .ll-character-thumb { top: -73.33%; left: -30%; width: 160%; }
 .ll-family-reveal { text-align: center; padding-block: 0.75rem; }
 .ll-family-card { display: inline-block; width: min(100%, 34rem); padding: 1.25rem; text-align: left; }
 .ll-family-card h3 { margin: 0 0 0.5rem; }
