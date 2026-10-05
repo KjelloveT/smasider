@@ -30,3 +30,7 @@ Andleta har berre bryn, auge og munn; den målte nasa blir delt mellom alle hudt
 ## Fast produksjonsdel
 
 Kvar ressurs er eit separat biletkall, ikkje eit atlas. Gjennomsiktig bakgrunn, rein pikselkant, varme mørke omriss, fleirtonige klynger og ingen glød. Hovud og ansikt skal ikkje teiknast inn i hårlaget. Andlet skal ikkje innehalde hud, hår eller nase; rendering deler den målte nasa. Hudform, feste, kameravinkel og kropp blir ikkje endra. Kort hår held seg over nakken, og baklaget er tomt. Kjeldefilene er bevarte i ignorert `_kjelder/`-katalog; alle målte kjeldeboksar, skalaer og festepunkt er dokumenterte i prøve-manifestet.
+
+## Korrigering v5.3 — tettare korte silhuettar
+
+Kontaktarket synte at v5.2 sine nye korte frisyrar var for vide og at nokre sidekrøllar gjekk nedanfor øyra. Målt hovudbreidd i kjeldeguiden er 312 px og ytre øyrebreidd 408 px. Ny registrering bruker 316 px breidd frå same sentrerte kronefeste (512, 128), med proporsjonal næraste-nabo-skalering. Dette reduserer breidda om lag 32 % frå førre eksport. Alle ti kombinasjonane er kontrollrenderte; hårsilhuetten held seg innanfor øyrebreidda og sluttar over nedre øyrekant.

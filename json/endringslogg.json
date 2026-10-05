@@ -2,6 +2,19 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.85",
+      "dato": "2026-10-05",
+      "samandrag": "Korte hårvariantar i Livslina sit no tettare til hovudforma.",
+      "punkt": [
+        {
+          "t": "fiksa",
+          "kva": "Livslina",
+          "tekst": "Dei ti nye korte frisyrene er skalerte etter hovudforma, held seg innanfor øyrebreidda og stoppar over nedre øyrekant.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
       "versjon": "1.84",
       "dato": "2026-10-05",
       "samandrag": "Karakterprøva i Livslina har fått ti nye andletsuttrykk og ti nye frisyrar med meir maskuline trekk.",

@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.85] — 2026-10-05
+
+### Fiksa
+- **Korte frisyrar i Livslina er gjorde mindre og tettare.** Håret held seg no innanfor øyrebreidda og går ikkje nedanfor øyra.
+
 ## [1.84] — 2026-10-05
 
 ### Endra
