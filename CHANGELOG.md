@@ -3,10 +3,35 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
-## [1.79] — 2026-10-05
+## [1.81] — 2026-10-05
 
 ### Fiksa
 - **Livslina sin karakterbyggjar brukar nye delar som passar saman.** Fem hudfargar, andlet, frisyrar og antrekk følgjer éin målt meisterfigur. Hud og hender samsvarar, hår har eigne fram- og baklag, og prøva har lagkontroll og festepunkt. Livslina er framleis ei prøveutgåve.
+
+## [1.80] — 2026-10-04
+
+### Endra
+- **BåreTevling viser plasseringsvala ved sida av brettet.** Menyen held seg synleg medan du plasserer figurane, og kjem over brettet på små skjermar.
+- **BåreTevling-introen er breiare og utan Vyrde.** Han står no på linje med vala under.
+- **Plasseringsvisinga brukar standardpanelet frå Vyrdepil.** Eit diskret SVG-stripemønster ligg bak innhaldet.
+
+### Fiksa
+- **Rutene på BåreTevling-brettet er no kvadratiske.** Bokstav- og talefelta er like store som spelecellene og dekkjer bakgrunnen heilt.
+
+## [1.79] — 2026-10-04
+
+### Lagt til
+- **BåreTevling har fått fire figurtypar.** Klassiske seglskip, moderne krigsskip, bilar og lastebilar eller fly; alle spritearka følgjer ein felles standard frå éi til fem ruter.
+- **Startsida har fått meir liv.** Ei ny skipsillustrasjon, førehandsvising av vald figurtype og ein illustrert spelguide gjer vala lettare å forstå.
+
+### Endra
+- **Speloppsettet står i eigne kort.** Talet på figurar blir vist med sprites, og tospelarinstruksen forklarar at begge einingane må ha same oppsett og at spelet ikkje synkroniserer dei automatisk.
+- **Valfelta er rydda opp.** Etikettane står inni korta, figuroppsettet brukar same panelstil som resten av Vyrdepil, og instruksen seier tydeleg at begge spelarane markerer sjølve.
+
+### Fiksa
+- **Spritefigurane held rette proporsjonar og reinskorne utsnitt.** Førehandsvisingane viser berre éi rad frå arket, utan restar frå andre figurar.
+- **Spelguiden har fått betre luft.** Ho brukar dei felles trekkspel- og stablestilane; den tronge avstanden kom frå lokale BåreTevling-reglar.
+- **Oppsettsida er rydda.** Den lause trekanten og hjelpetekstane som ikkje trongst, er fjerna; miniatyrane har luft under figurknappane.
 
 ## [1.78] — 2026-10-04
 

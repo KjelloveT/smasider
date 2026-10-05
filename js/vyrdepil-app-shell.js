@@ -98,6 +98,8 @@
     const hero = findHero(root);
     const stage = document.createElement('div');
     stage.className = 'vp-migrated-intro';
+    const hideMascot = body.dataset.vpHideMascot === 'true';
+    if (hideMascot) stage.classList.add('vp-migrated-intro--no-mascot');
     const board = document.createElement('section');
     board.className = 'vp-app-intro-board vp-panel vp-panel--plain vp-migrated-intro-board';
     if (hero) {
@@ -138,15 +140,18 @@
       copy.append(title, summary);
       board.append(logo, copy);
     }
-    const mascot = document.createElement('img');
-    mascot.className = 'vp-app-intro-mascot vp-migrated-mascot';
-    mascot.dataset.vpMascot = '';
-    mascot.src = new URL('_resources/vyrdepil-design/vyrde.png', project).href;
-    mascot.alt = '';
-    mascot.width = 192;
-    mascot.height = 192;
-    mascot.decoding = 'async';
-    stage.append(board, mascot);
+    stage.append(board);
+    if (!hideMascot) {
+      const mascot = document.createElement('img');
+      mascot.className = 'vp-app-intro-mascot vp-migrated-mascot';
+      mascot.dataset.vpMascot = '';
+      mascot.src = new URL('_resources/vyrdepil-design/vyrde.png', project).href;
+      mascot.alt = '';
+      mascot.width = 192;
+      mascot.height = 192;
+      mascot.decoding = 'async';
+      stage.append(mascot);
+    }
     if (semanticMain) semanticMain.insertBefore(stage, semanticMain.firstChild);
     else if (main) {
       const toolbar = main.parentElement && main.parentElement.querySelector('#toolbar');
