@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.82] — 2026-10-05
+
+### Lagt til
+- **Målgruppemerke på framsida.** Appkorta viser om eit spel eller verktøy passar for alle elevgrupper, småtrinn, mellomtrinn, ungdomstrinn eller lærarar.
+
 ## [1.81] — 2026-10-05
 
 ### Fiksa

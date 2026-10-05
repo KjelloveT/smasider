@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.82",
+      "dato": "2026-10-05",
+      "samandrag": "Appkorta viser målgruppene dei passar for.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Målgruppemerke",
+          "tekst": "Appkorta viser om eit spel eller verktøy passar for alle elevgrupper, småtrinn, mellomtrinn, ungdomstrinn eller lærarar."
+        }
+      ]
+    },
+    {
       "versjon": "1.81",
       "dato": "2026-10-05",
       "samandrag": "Utskriftsark i Vyrdepil følgjer no A4-formatet, og Livslina har fått nye karakterressursar.",

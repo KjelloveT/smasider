@@ -99,6 +99,22 @@
     h.textContent = app.name;
     el.appendChild(h);
 
+    const audience = Array.isArray(app.audience)
+      ? app.audience.filter(label => typeof label === 'string' && label.trim())
+      : [];
+    if (audience.length) {
+      const list = document.createElement('ul');
+      list.className = 'vp-home-audience';
+      list.setAttribute('aria-label', 'Passar for');
+      audience.forEach(label => {
+        const item = document.createElement('li');
+        item.className = 'vp-home-audience-badge';
+        item.textContent = label;
+        list.appendChild(item);
+      });
+      el.appendChild(list);
+    }
+
     const summary = HOME_SUMMARIES[app.id] || (app.desc || [])[0];
     if (summary) {
       const p = document.createElement('p');
