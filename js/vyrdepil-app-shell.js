@@ -20,6 +20,10 @@
     body.classList.add('vp-page');
     body.setAttribute('data-vp-design', '');
   }
+  global.VyrdepilAppShell = global.VyrdepilAppShell || {};
+  global.VyrdepilAppShell.setGameActive = function (active) {
+    body.toggleAttribute('data-vp-game-active', Boolean(active));
+  };
 
   const header = document.createElement('header');
   header.className = 'vp-header vp-header--sky vp-migrated-header';
@@ -152,7 +156,11 @@
       mascot.decoding = 'async';
       stage.append(mascot);
     }
-    if (semanticMain) semanticMain.insertBefore(stage, semanticMain.firstChild);
+    if (semanticMain) {
+      const description = semanticMain.querySelector('.vp-game-description');
+      if (description) semanticMain.insertBefore(description, semanticMain.firstChild);
+      semanticMain.insertBefore(stage, description ? description.nextSibling : semanticMain.firstChild);
+    }
     else if (main) {
       const toolbar = main.parentElement && main.parentElement.querySelector('#toolbar');
       const anchor = toolbar && toolbar.parentElement === main.parentElement ? toolbar : main;

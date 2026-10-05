@@ -3,6 +3,15 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.81] — 2026-10-05
+
+### Endra
+- **Felles hero får ein kompakt speltilstand.** Når spelet går, tek toppboks og maskot mindre plass; omtalen står i ei eiga kort linje over.
+- **Heite Stavrim brukar den delte speltilstanden.** Heroen blir kompakt gjennom spel, svar og resultat, og går attende til full storleik ved oppsettet.
+
+### Fiksa
+- **Kvite kortflater er fjerna frå Heite Stavrim.** Store panel og poengrader viser ikkje lenger kvite fyllflater; inndata og knappar held lyse flater.
+
 ## [1.80] — 2026-10-04
 
 ### Endra
