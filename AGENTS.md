@@ -253,6 +253,15 @@ Ved endringar i denne fila (`AGENTS.md`) skal det gjerast eit kontroll-pass gjen
 
 ## 6. Workflow
 
+### Før du startar ei oppgåve
+
+Før den fyrste kodeendringa skal AI-agenten stadfeste både kva kodegrunnlag han arbeider på, og kva utgåve brukaren faktisk møter:
+
+1. Les `git status --short --branch`, aktiv grein og `git rev-parse HEAD`. Sjå gjennom lokale endringar før du gjer noko med arbeidskopien. Ikkje forkast, stash, skriv over eller byt grein frå ei arbeidskopi med uavklarte endringar. Finn ut om dei høyrer til oppgåva; bruk ei eiga rein arbeidskopi dersom dei ikkje gjer det.
+2. Køyr `git fetch origin` før du stolar på lokale `origin/*`-referansar. For ei ny oppgåve skal grunnlaget vere siste `origin/main`; når du held fram med ei namngjeven grein eller PR, kontroller den aktuelle fjern-greina og bygg vidare på henne. Samanlikn commitane, ikkje berre greinnamna. Dersom `fetch` ikkje verkar, stadfest fjern-commit med `git ls-remote origin <grein>` eller GitHub. Ikkje start kodearbeid frå ei grein som kan vere utdatert; skaff ei oppdatert arbeidskopi fyrst.
+3. Opne produksjonssida på `https://icy-water-0487ac303.2.azurestaticapps.net/`. Samanlikn versjonsnummeret og siste endring på framsida med lokal `CHANGELOG.md` og `json/endringslogg.json`. Opne òg den aktuelle appen og sjå kva som faktisk er publisert. Ei publisert side kan liggje føre eller etter `origin/main`, så ikkje bruk den eine som prov på den andre. Når oppgåva gjeld ein PR eller ei førehandsvising, kontroller den tilhøyrande preview-URL-en òg.
+4. Dersom Git-grunnlaget eller den publiserte sida ikkje samsvarar med arbeidskopien, noter kva som er ulikt og vel rett grein/arbeidskopi før du endrar kode. Dersom produksjon ikkje kan opnast, sei frå om det og ikkje framstill den publiserte tilstanden som kontrollert.
+
 ### 6.1 Commit-meldingar
 Commit-meldingar skal skrivast på **nynorsk**. Eksempel:
 - `Fiks emoji i footer på framsida`
