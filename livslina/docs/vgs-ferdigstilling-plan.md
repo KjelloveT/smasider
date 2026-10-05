@@ -15,7 +15,10 @@ Spelet skal gjera tid og konsekvensar lette å forstå. Det skal vise korleis
 
 ## Arbeidsrekkjefølgje
 
-### 1. Avslutt den pågåande karakterrunden
+Avklart arbeidsrekkjefølgje: vi tek tidsprogresjon og casebibliotek fyrst.
+Karakterrunden og karakterbyggjar/rombutikk ventar til seinare.
+
+### Sett på vent: avslutt den pågåande karakterrunden
 
 - Registrer alle nye hår-, andlets- og klesvariantar i det autoritative
   ressursmanifestet.
@@ -25,7 +28,7 @@ Spelet skal gjera tid og konsekvensar lette å forstå. Det skal vise korleis
 - Fjern eldre heile karakterillustrasjonar og atlas frå ressursprøva. Den
   lagdelte v5-banken blir den einaste aktive karakterressursprøva.
 
-### 2. Bygg karakterbyggjar og rombutikk
+### Kjem seinare: bygg karakterbyggjar og rombutikk
 
 - Bygg vidare på den lagdelte karakterprøva, slik at spelaren kan setje saman
   hud, andlet, hår og klede. Grunnleggjande utsjånad skal ikkje krevje pengar.
@@ -42,10 +45,11 @@ Spelet skal gjera tid og konsekvensar lette å forstå. Det skal vise korleis
 - La kjøp konkurrere med sparing og andre behov, slik at rommet blir ein del
   av økonomivalet og ikkje ein eigen poengbutikk.
 
-### 3. Gjer tidsprogresjonen tydeleg
+### Arbeid no: gjer tidsprogresjonen tydeleg
 
-Vis VG1, VG2 og VG3 som ei samla tidsline med haust, vår og sommar. Ved kvar
-overgang skal spelaren kunne sjå:
+Vis VG1, VG2 og VG3 som ei samla tidsline i kronologisk rekkjefølgje: VG1
+haust, VG1 vår, sommaren etter VG1, VG2 haust, VG2 vår, sommaren etter VG2,
+VG3 haust og VG3 vår. Ved kvar overgang skal spelaren kunne sjå:
 
 - kva år og halvår som er aktive, og alderen til figuren
 - kor mange månader som går i neste spelsteg
@@ -57,11 +61,13 @@ og sluttrapport. Månadene kan framleis spelast av raskt, men merkinga må gjera
 det lett å skjøna at eit halvår har gått og kvifor økonomi eller energi endra
 seg.
 
-### 4. Utvid dilemma- og casebiblioteket
+### Arbeid no: utvid dilemma- og casebiblioteket
 
-Før nye kort blir skrivne, sorter dei 19 eksisterande hendingane etter
-halvår, økonomi, trivsel, vilkår og kva val dei gir. Fyll deretter hol i ei
-matrise for dei seks skulehalvåra og dei to sommarane.
+Før nye kort blir skrivne, sorter dei eksisterande hendingane etter halvår,
+økonomi, trivsel, vilkår og kva val dei gir. Fyll deretter hol i ei matrise
+for dei seks skulehalvåra og dei to sommarane. Kvar skulehalvårsrunde skal gje
+**4–5 caseavgjerder**, i tillegg til vala i halvårsbudsjettet. Somrane er eigne
+overgangar med val om arbeid og kvile.
 
 Mål for innhaldet:
 
@@ -101,10 +107,10 @@ ulike familieøkonomiar med respekt.
 ## Ferdigkriterium for VG1–VG3
 
 Milepålen er klar når ein elev kan fullføre alle seks skulehalvåra og dei to
-sommarane, forstå kva tid som går, møta fleire typar økonomiske og
-trivselsmessige val, innreia eit rom frå eit nøkternt utgangspunkt og sjå
-konsekvensane av vala i sluttrapporten. Rapporten skal avslutte vidaregåande
-utan å krevja at fase 2 er bygd.
+sommarane, forstå kva tid som går, møte 4–5 caseavgjerder i kvart skulehalvår,
+utforske fleire økonomiske og trivselsmessige situasjonar, innreie eit rom frå
+eit nøkternt utgangspunkt og sjå konsekvensane av vala i sluttrapporten.
+Rapporten skal avslutte vidaregåande utan å krevje at fase 2 er bygd.
 
 Før ei lærartest skal flyten i tillegg kontrollerast i nettlesar på mobil og
 desktop, med fokus på leserekkjefølgje, tidsline, casevilkår, lagring,

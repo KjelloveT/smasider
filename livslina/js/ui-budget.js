@@ -11,7 +11,10 @@ LL.uiBudget = (function () {
 
   function open() {
     const state = LL.state.get();
-    state.age = LL.state.currentRound().age;
+    const round = LL.state.currentRound();
+    state.age = round.age;
+    document.getElementById('budgetRound').textContent = 'Planlegg ' + round.label.toLowerCase();
+    document.getElementById('budgetTimeframe').textContent = 'Valet gjeld dei neste ' + round.months + ' månadene.';
     draft = state.plan ? Object.assign({}, state.plan) : LL.economy.defaultPlan();
     draft.activities = (draft.activities || []).slice();
     renderControls();

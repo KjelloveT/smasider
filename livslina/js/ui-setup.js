@@ -295,7 +295,11 @@ LL.uiSetup = (function () {
     const cont = document.getElementById('startContinue');
     if (cont) cont.addEventListener('click', () => {
       const saved = LL.storage.loadActive();
-      if (saved) { LL.state.load(saved); LL.main.enterHome(); }
+      if (saved) {
+        LL.state.load(saved);
+        LL.storage.saveActive(LL.state.get());
+        LL.main.enterHome();
+      }
     });
     document.getElementById('btnInfo').addEventListener('click', showInfo);
     const impBtn = document.getElementById('btnImport');
@@ -305,7 +309,7 @@ LL.uiSetup = (function () {
       impFile.addEventListener('change', () => {
         if (!impFile.files.length) return;
         LL.storage.importSave(impFile.files[0])
-          .then(obj => { LL.state.load(obj); LL.storage.saveActive(obj); LL.main.enterHome(); LL.main.toast('Livslinje importert.'); })
+          .then(obj => { LL.state.load(obj); LL.storage.saveActive(LL.state.get()); LL.main.enterHome(); LL.main.toast('Livslinje importert.'); })
           .catch(err => LL.main.toast(err.message));
         impFile.value = '';
       });

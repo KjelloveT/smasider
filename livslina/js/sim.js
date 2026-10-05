@@ -24,6 +24,7 @@ LL.sim = (function () {
       income: {},          // akkumulert per kategori
       expense: {},
       startMoney: state.stats.money,
+      startSavings: state.stats.savings,
       startWellbeing: state.stats.wellbeing,
       startEnergy: state.stats.energy,
       wageThisTerm: 0,
@@ -133,6 +134,7 @@ LL.sim = (function () {
       grant: ctx.grant,
       tax: ctx.tax,
       moneyChange: state.stats.money - ctx.startMoney,
+      savingsChange: state.stats.savings - ctx.startSavings,
       wellbeingChange: state.stats.wellbeing - ctx.startWellbeing,
       energyChange: state.stats.energy - ctx.startEnergy,
       gradeChange: dg,

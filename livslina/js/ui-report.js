@@ -8,6 +8,10 @@ LL.uiReport = (function () {
 
   function showHalfyear(summary) {
     document.getElementById('hyRound').textContent = summary.round.label + ' — oppgjer';
+    const nextRound = LL.state.currentRound();
+    document.getElementById('hyProgress').textContent = nextRound
+      ? summary.round.label + ' er fullført. Neste periode er ' + nextRound.label + '.'
+      : 'Du har fullført alle seks skulehalvåra og dei to sommarane.';
 
     // Inntekter / utgifter
     fillList('hyIncome', summary.income, false);
@@ -19,6 +23,7 @@ LL.uiReport = (function () {
     const grid = document.getElementById('hyStats');
     grid.textContent = '';
     grid.appendChild(deltaBox('Konto', summary.moneyChange, true));
+    grid.appendChild(deltaBox('Sparing', summary.savingsChange || 0, true));
     grid.appendChild(deltaBox('Trivsel', summary.wellbeingChange, false));
     grid.appendChild(deltaBox('Energi', summary.energyChange, false));
     grid.appendChild(deltaBox('Karakter', summary.gradeChange, false, 1));
@@ -88,6 +93,8 @@ LL.uiReport = (function () {
   function showFinal() {
     const s = LL.state.get();
     const networth = s.stats.money + s.stats.savings;
+    document.getElementById('finalTimelineSummary').textContent =
+      'Du har fullført seks skulehalvår og to sommarar frå starten av VG1 til slutten av VG3. Slik gjekk det — og slik kunne det gått annleis.';
 
     // Nøkkeltal
     const grid = document.getElementById('finalStats');

@@ -1,6 +1,6 @@
 /* Livslina — events.js
- * Hendingsmotor: filtrer kort på vilkår, planlegg 0–2 tilfeldige + alle styrte
- * (forced) kort per halvår, vis modal, bruk effektar.
+ * Hendingsmotor: filtrer kort på vilkår, planlegg 4–5 valkort + styrte
+ * særhendingar per skulehalvår, vis modal, bruk effektar.
  */
 window.LL = window.LL || {};
 
@@ -30,18 +30,20 @@ LL.events = (function () {
   function prepareTerm(state, ctx) {
     const pool = LL.data.getEvents().filter(ev => eligible(ev, state));
     const forced = pool.filter(ev => ev.forced);
-    const random = pool.filter(ev => !ev.forced);
+    const random = pool.filter(ev => !ev.forced && ev.choices && ev.choices.length > 1);
 
     const chosen = forced.slice();
-    // 0–2 tilfeldige kort
-    let target = LL.state.drawInt(0, 2);
+    // Fire–fem reelle valkort, i tillegg til særhendingar med berre eitt svar.
+    const forcedDecisions = forced.filter(ev => ev.choices && ev.choices.length > 1).length;
+    const target = Math.max(forcedDecisions, LL.state.drawInt(4, 5));
     const bag = random.slice();
-    while (target > 0 && bag.length) {
+    while (chosen.filter(ev => ev.choices && ev.choices.length > 1).length < target && bag.length) {
       const pick = weightedPick(bag);
       chosen.push(pick);
       bag.splice(bag.indexOf(pick), 1);
-      target--;
     }
+    ctx.decisionTotal = chosen.filter(ev => ev.choices && ev.choices.length > 1).length;
+    ctx.decisionShown = 0;
 
     // Fordel over månadene (tick 1..months)
     const months = ctx.round.months || 6;
@@ -82,6 +84,14 @@ LL.events = (function () {
 
   function renderCard(ev, state, ctx) {
     document.getElementById('eventVignette').innerHTML = LL.artVignette.svg(ev.art);
+    const meta = document.getElementById('eventMeta');
+    if (ev.choices && ev.choices.length > 1 && typeof ctx.decisionTotal === 'number') {
+      ctx.decisionShown++;
+      const focus = ev.focus || 'Økonomi og trivsel';
+      meta.textContent = 'Val ' + ctx.decisionShown + ' av ' + ctx.decisionTotal + ' i ' + ctx.round.label + ' · ' + focus;
+    } else {
+      meta.textContent = ev.focus ? 'Særhending · ' + ev.focus : 'Særhending i ' + ctx.round.label;
+    }
     document.getElementById('eventTitle').textContent = ev.title;
     document.getElementById('eventText').textContent = ev.text;
     const choices = document.getElementById('eventChoices');
@@ -113,9 +123,11 @@ LL.events = (function () {
     if (e.insuranceApplies && state.possessions.phoneInsurance) amt = 500;
     else if (e.costKey) amt = LL.data.value(e.costKey);
     else if (e.cost) amt = e.cost;
-    if (amt) return ' — ' + LL.util.kr(amt);
+    if (amt) return ' — ' + LL.util.kr(amt) + (e.costFromSavings ? ' frå sparinga' : '');
     if (e.gain) return ' — +' + LL.util.kr(e.gain);
     if (e.gainKey) return ' — +' + LL.util.kr(LL.data.value(e.gainKey));
+    if (e.gainToSavings) return ' — +' + LL.util.kr(e.gainToSavings) + ' på sparinga';
+    if (e.savingsToMoney) return ' — flytt opptil ' + LL.util.kr(e.savingsToMoney) + ' frå sparinga';
     return '';
   }
 
@@ -138,13 +150,35 @@ LL.events = (function () {
     if (e.insuranceApplies && state.possessions.phoneInsurance) cost = 500;
     else if (e.costKey) cost = LL.data.value(e.costKey);
     else if (e.cost) cost = e.cost;
-    if (cost) { state.stats.money -= cost; moneyDelta -= cost; addCat(ctx.expense, 'events', cost); }
+    if (cost) {
+      if (e.costFromSavings) {
+        const fromSavings = Math.min(state.stats.savings, cost);
+        state.stats.savings -= fromSavings;
+        state.stats.money -= cost - fromSavings;
+      } else {
+        state.stats.money -= cost;
+      }
+      moneyDelta -= cost;
+      addCat(ctx.expense, 'events', cost);
+    }
+
+    if (e.savingsToMoney) {
+      const transfer = Math.min(state.stats.savings, e.savingsToMoney);
+      state.stats.savings -= transfer;
+      state.stats.money += transfer;
+    }
 
     // Gevinst
     let gain = 0;
     if (e.gainKey) gain = LL.data.value(e.gainKey);
     else if (e.gain) gain = e.gain;
-    if (gain) { state.stats.money += gain; moneyDelta += gain; addCat(ctx.income, 'events', gain); }
+    else if (typeof e.gainToSavings === 'number') gain = e.gainToSavings;
+    if (gain) {
+      if (e.gainToSavings) state.stats.savings += gain;
+      else state.stats.money += gain;
+      moneyDelta += gain;
+      addCat(ctx.income, 'events', gain);
+    }
 
     // Lønstimar (ekstravakter)
     if (e.wageHoursGain) {

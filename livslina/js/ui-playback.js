@@ -47,6 +47,8 @@ LL.uiPlayback = (function () {
 
     const entry = LL.sim.stepMonth(state, ctx, monthIdx);
     document.getElementById('pbMonth').textContent = entry.month;
+    document.getElementById('pbMonthProgress').textContent =
+      'Månad ' + (monthIdx + 1) + ' av ' + (ctx.round.months || 6) + ' i ' + ctx.round.label + '.';
     animateBalance(entry.balance);
     addLedgerLine(entry.month, entry.income - entry.expense, (entry.income - entry.expense) < 0, true);
 

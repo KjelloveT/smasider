@@ -7,7 +7,7 @@ window.LL = window.LL || {};
 LL.state = (function () {
   'use strict';
 
-  const SAVE_VERSION = 1;
+  const SAVE_VERSION = 2;
 
   // ── Seedbasert RNG (mulberry32) — deterministisk gjeve seed ──
   let _rngState = 0;
@@ -31,14 +31,14 @@ LL.state = (function () {
   // ── Rundedefinisjon for fase 1 (6 halvår + 2 somrar) ──
   // kind: 'term' (skulehalvår) | 'summer' (sommar-mellomspel)
   const ROUNDS = [
-    { id: 'vg1h', kind: 'term', label: 'VG1 haust', short: 'VG1H', age: 16, months: 6, equipmentGrant: true },
-    { id: 'sum1', kind: 'summer', label: 'Sommaren etter VG1', short: 'S1', age: 16 },
-    { id: 'vg1v', kind: 'term', label: 'VG1 vår', short: 'VG1V', age: 17, months: 6, equipmentGrant: false },
-    { id: 'vg2h', kind: 'term', label: 'VG2 haust', short: 'VG2H', age: 17, months: 6, equipmentGrant: true },
-    { id: 'sum2', kind: 'summer', label: 'Sommaren etter VG2', short: 'S2', age: 18 },
-    { id: 'vg2v', kind: 'term', label: 'VG2 vår', short: 'VG2V', age: 18, months: 6, equipmentGrant: false },
-    { id: 'vg3h', kind: 'term', label: 'VG3 haust', short: 'VG3H', age: 18, months: 6, equipmentGrant: true },
-    { id: 'vg3v', kind: 'term', label: 'VG3 vår', short: 'VG3V', age: 19, months: 6, equipmentGrant: false }
+    { id: 'vg1h', kind: 'term', schoolYear: 1, period: 'Haust', label: 'VG1 haust', short: 'VG1 · haust', age: 16, months: 6, equipmentGrant: true },
+    { id: 'vg1v', kind: 'term', schoolYear: 1, period: 'Vår', label: 'VG1 vår', short: 'VG1 · vår', age: 17, months: 6, equipmentGrant: false },
+    { id: 'sum1', kind: 'summer', schoolYear: 1, period: 'Sommar', label: 'Sommaren etter VG1', short: 'Sommar · VG1', age: 17 },
+    { id: 'vg2h', kind: 'term', schoolYear: 2, period: 'Haust', label: 'VG2 haust', short: 'VG2 · haust', age: 17, months: 6, equipmentGrant: true },
+    { id: 'vg2v', kind: 'term', schoolYear: 2, period: 'Vår', label: 'VG2 vår', short: 'VG2 · vår', age: 18, months: 6, equipmentGrant: false },
+    { id: 'sum2', kind: 'summer', schoolYear: 2, period: 'Sommar', label: 'Sommaren etter VG2', short: 'Sommar · VG2', age: 18 },
+    { id: 'vg3h', kind: 'term', schoolYear: 3, period: 'Haust', label: 'VG3 haust', short: 'VG3 · haust', age: 18, months: 6, equipmentGrant: true },
+    { id: 'vg3v', kind: 'term', schoolYear: 3, period: 'Vår', label: 'VG3 vår', short: 'VG3 · vår', age: 19, months: 6, equipmentGrant: false }
   ];
 
   let save = null;
@@ -98,12 +98,26 @@ LL.state = (function () {
   }
 
   function load(obj) {
-    save = obj;
+    save = migrateSave(obj);
     seedRng((save.seed || 1) >>> 0);
     // Spol RNG fram forbi allereie brukte trekk, slik at framtidige trekk er stabile
     const draws = (save._rngDraws || 0);
     for (let i = 0; i < draws; i++) rng();
     return save;
+  }
+
+  // Versjon 1 lagra sommaren før vårhalvåret. Behald aktiv speleframdrift,
+  // men flytt dei gamle rundenumra til den kronologiske rekkjefølgja.
+  function migrateSave(obj) {
+    if (!obj || typeof obj !== 'object') return obj;
+    if (obj.version === 1) {
+      const oldToNew = [0, 2, 1, 3, 5, 4, 6, 7];
+      if (Number.isInteger(obj.roundIndex) && obj.roundIndex >= 0 && obj.roundIndex < oldToNew.length) {
+        obj.roundIndex = oldToNew[obj.roundIndex];
+      }
+      obj.version = SAVE_VERSION;
+    }
+    return obj;
   }
 
   function get() { return save; }

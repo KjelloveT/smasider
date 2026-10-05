@@ -30,9 +30,9 @@ LL.uiHome = (function () {
       s.program.name + ' · ' + (s.housing === 'hybel' ? 'bur på hybel' : 'bur heime');
     const btn = document.getElementById('btnPlan');
     if (r && r.kind === 'summer') {
-      btn.innerHTML = 'Sommaren <span data-icon="sun"></span>';
+      btn.innerHTML = 'Vel sommarval <span data-icon="sun"></span>';
     } else {
-      btn.innerHTML = 'Planlegg halvåret <span data-icon="arrowRight"></span>';
+      btn.innerHTML = 'Planlegg ' + (r ? r.label.toLowerCase() : 'halvåret') + ' <span data-icon="arrowRight"></span>';
     }
     LL.util.hydrate(btn);
   }
@@ -96,10 +96,25 @@ LL.uiHome = (function () {
     wrap.textContent = '';
     const rounds = LL.state.rounds();
     const idx = LL.state.get().roundIndex;
+    const current = rounds[idx];
+    const finishedTerms = rounds.slice(0, idx).filter(r => r.kind === 'term').length;
+    const summary = document.getElementById('homeTimelineSummary');
+    if (current && current.kind === 'summer') {
+      summary.textContent = current.label + ' · ' + finishedTerms + ' av 6 skulehalvår fullførte · ' + current.age + ' år';
+    } else if (current) {
+      summary.textContent = current.label + ' · ' + current.months + ' månader · skulehalvår ' + (finishedTerms + 1) + ' av 6 · ' + current.age + ' år';
+    } else {
+      summary.textContent = 'Alle seks skulehalvåra og dei to sommarane er fullførte.';
+    }
+
     rounds.forEach((r, i) => {
       const node = document.createElement('div');
       node.className = 'll-tl-node' + (r.kind === 'summer' ? ' summer' : '') +
         (i < idx ? ' done' : '') + (i === idx ? ' current' : '');
+      node.setAttribute('role', 'listitem');
+      const status = i < idx ? 'fullført' : (i === idx ? 'no' : 'seinare');
+      node.setAttribute('aria-label', r.label + (r.kind === 'term' ? ', seks månader' : '') + ', ' + status);
+      if (i === idx) node.setAttribute('aria-current', 'step');
       const dot = document.createElement('div');
       dot.className = 'll-tl-dot';
       dot.innerHTML = '<span data-icon="' + (r.kind === 'summer' ? 'sun' : 'book') + '" data-icon-size="16"></span>';
