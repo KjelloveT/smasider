@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.79] — 2026-10-05
+
+### Fiksa
+- **Livslina sin karakterbyggjar brukar nye delar som passar saman.** Fem hudfargar, andlet, frisyrar og antrekk følgjer éin målt meisterfigur. Hud og hender samsvarar, hår har eigne fram- og baklag, og prøva har lagkontroll og festepunkt. Livslina er framleis ei prøveutgåve.
+
 ## [1.78] — 2026-10-04
 
 ### Endra

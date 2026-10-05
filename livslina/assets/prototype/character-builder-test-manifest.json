@@ -1,265 +1,1034 @@
 {
   "app": "livslina",
-  "version": 1,
-  "id": "character-builder-test-v1",
-  "label": "Lagdelt karakterbyggjarprøve",
+  "version": 2,
+  "id": "character-builder-test-v5",
+  "label": "Karakterbyggjar med faste festepunkt",
   "page": "character-builder-test.html",
   "renderer": "character-builder-art.js",
+  "model": "character-builder-model.js",
   "controller": "character-builder-test.js",
-  "updated": "2026-10-04",
-  "status": "local-prototype",
-  "artStyle": "detailed-8-bit-pixel-art",
-  "detailRevision": 4,
+  "updated": "2026-10-05",
+  "status": "experimental-prototype",
+  "detailRevision": 5,
+  "artStyle": "detailed-pixel-art",
+  "generationMode": "built-in-imagegen",
   "logicalCanvas": {
-    "width": 192,
-    "height": 256,
+    "width": 256,
+    "height": 384,
     "transparent": true,
-    "scale": "pixelated",
-    "pose": "standing-front-neutral"
+    "pose": "standing-front-orthographic"
   },
-  "drawingGrid": {
-    "width": 96,
-    "height": 128,
-    "fineDetailStep": 0.5,
-    "note": "The doubled 192 × 256 canvas composites detailed atlas sprites with shared centre and ground line."
+  "assetFrame": {
+    "width": 512,
+    "height": 768,
+    "scale": 2,
+    "fullPadding": true
   },
   "layerOrder": [
-    "skin-body",
+    "hairBack",
+    "body",
     "clothes",
-    "hair",
-    "face-details"
+    "hands",
+    "face",
+    "hairFront"
   ],
+  "anchors": [
+    {
+      "id": "eye-left",
+      "label": "Auge",
+      "x": 108,
+      "y": 94
+    },
+    {
+      "id": "eye-right",
+      "label": "Auge",
+      "x": 148,
+      "y": 94
+    },
+    {
+      "id": "nose",
+      "label": "Nase",
+      "x": 128,
+      "y": 108
+    },
+    {
+      "id": "mouth",
+      "label": "Munn",
+      "x": 128,
+      "y": 123
+    },
+    {
+      "id": "neck",
+      "label": "Hals",
+      "x": 128,
+      "y": 143
+    },
+    {
+      "id": "shoulder-left",
+      "label": "Skulder",
+      "x": 78,
+      "y": 163
+    },
+    {
+      "id": "shoulder-right",
+      "label": "Skulder",
+      "x": 178,
+      "y": 163
+    },
+    {
+      "id": "wrist-left",
+      "label": "Handledd",
+      "x": 63,
+      "y": 247
+    },
+    {
+      "id": "wrist-right",
+      "label": "Handledd",
+      "x": 193,
+      "y": 247
+    },
+    {
+      "id": "hand-left",
+      "label": "Hand",
+      "x": 63,
+      "y": 258
+    },
+    {
+      "id": "hand-right",
+      "label": "Hand",
+      "x": 193,
+      "y": 258
+    },
+    {
+      "id": "shoe-left",
+      "label": "Sko",
+      "x": 106,
+      "y": 361
+    },
+    {
+      "id": "shoe-right",
+      "label": "Sko",
+      "x": 150,
+      "y": 361
+    }
+  ],
+  "neckPolygon": [
+    [
+      114,
+      131
+    ],
+    [
+      142,
+      131
+    ],
+    [
+      142,
+      145
+    ],
+    [
+      138,
+      147
+    ],
+    [
+      133,
+      149
+    ],
+    [
+      122,
+      149
+    ],
+    [
+      116,
+      147
+    ],
+    [
+      114,
+      145
+    ]
+  ],
+  "skinRamps": [
+    [
+      "#814c3c",
+      "#b77858",
+      "#dca17b",
+      "#f2c7a0",
+      "#ffe5c4"
+    ],
+    [
+      "#765045",
+      "#aa7860",
+      "#c99b82",
+      "#e3bfa3",
+      "#f5ddc1"
+    ],
+    [
+      "#58372d",
+      "#85523b",
+      "#ad7150",
+      "#ce9566",
+      "#e8b884"
+    ],
+    [
+      "#34251f",
+      "#57382b",
+      "#7a4b35",
+      "#9e6849",
+      "#bb895e"
+    ],
+    [
+      "#221b1a",
+      "#392822",
+      "#563b2e",
+      "#73503b",
+      "#926a49"
+    ]
+  ],
+  "skinRampStops": [
+    55,
+    110,
+    160,
+    210,
+    255
+  ],
+  "skinSource": "one-measured-master-with-shared-head-neck-hands",
+  "runtime": {
+    "origin": [
+      0,
+      0
+    ],
+    "automaticFit": false,
+    "pixelReads": false,
+    "storage": false,
+    "externalServices": false
+  },
   "families": {
     "skin": [
       {
         "id": "skin-01",
-        "label": "Ljos varm"
+        "label": "Ljos varm",
+        "option": 0
       },
       {
         "id": "skin-02",
-        "label": "Ljos nøytral"
+        "label": "Ljos nøytral",
+        "option": 1
       },
       {
         "id": "skin-03",
-        "label": "Mellomvarm"
+        "label": "Mellomvarm",
+        "option": 2
       },
       {
         "id": "skin-04",
-        "label": "Djup brun"
+        "label": "Djup brun",
+        "option": 3
       },
       {
         "id": "skin-05",
-        "label": "Mørk brun"
+        "label": "Mørk brun",
+        "option": 4
       }
     ],
     "face": [
       {
         "id": "face-01",
-        "label": "Breitt smil"
+        "label": "Breitt smil",
+        "option": 0
       },
       {
         "id": "face-02",
-        "label": "Overraska"
+        "label": "Briller",
+        "option": 1
       },
       {
         "id": "face-03",
-        "label": "Briller"
+        "label": "Overraska",
+        "option": 2
       },
       {
         "id": "face-04",
-        "label": "Blink og fregner"
+        "label": "Blink og fregner",
+        "option": 3
       },
       {
         "id": "face-05",
-        "label": "Sjølvsikker"
+        "label": "Sjølvsikker",
+        "option": 4
       }
     ],
     "hair": [
       {
         "id": "hair-01",
-        "label": "Kort krøllhår"
+        "label": "Kort krøllhår",
+        "option": 0
       },
       {
         "id": "hair-02",
-        "label": "Langt bølgjehår"
+        "label": "Langt bølgjehår",
+        "option": 1
       },
       {
         "id": "hair-03",
-        "label": "Fletter"
+        "label": "Fletter",
+        "option": 2
       },
       {
         "id": "hair-04",
-        "label": "Rett lugg"
+        "label": "Rett lugg",
+        "option": 3
       },
       {
         "id": "hair-05",
-        "label": "Høg hestehale"
+        "label": "Høg hestehale",
+        "option": 4
       }
     ],
     "clothes": [
       {
         "id": "clothes-01",
-        "label": "Blå hettegenser"
+        "label": "Blå hettegenser",
+        "option": 0
       },
       {
         "id": "clothes-02",
-        "label": "Rustraud jakke"
+        "label": "Rustraud jakke",
+        "option": 1
       },
       {
         "id": "clothes-03",
-        "label": "Lilla strikkegenser"
+        "label": "Lilla strikkegenser",
+        "option": 2
       },
       {
         "id": "clothes-04",
-        "label": "Grøn overall"
+        "label": "Grøn overall",
+        "option": 3
       },
       {
         "id": "clothes-05",
-        "label": "Turkis skjorte"
+        "label": "Turkis skjorte",
+        "option": 4
       }
     ]
   },
-  "choiceCountPerFamily": 5,
-  "possibleCombinations": 625,
-  "storesUserChoices": false,
-  "networkRequests": false,
-  "gameEconomyConnected": false,
-  "spriteAtlas": {
-    "file": "characters/character-builder-atlas-v4.png",
-    "width": 1215,
-    "height": 1295,
-    "sizeBytes": 208946,
-    "paletteColors": 128,
-    "sourceRects": {
-      "skin": [
-        [
-          46,
-          30,
-          169,
-          368
-        ],
-        [
-          283,
-          30,
-          171,
-          368
-        ],
-        [
-          522,
-          30,
-          171,
-          368
-        ],
-        [
-          760,
-          30,
-          170,
-          368
-        ],
-        [
-          999,
-          30,
-          169,
-          368
-        ]
+  "assets": [
+    {
+      "id": "skin-body-01",
+      "layer": "body",
+      "option": 0,
+      "file": "characters/v5/skin-body-01.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
       ],
-      "face": [
-        [
-          36,
-          466,
-          195,
-          135
+      "bytes": 13313,
+      "status": "composite-validated"
+    },
+    {
+      "id": "skin-body-02",
+      "layer": "body",
+      "option": 1,
+      "file": "characters/v5/skin-body-02.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 13161,
+      "status": "composite-validated"
+    },
+    {
+      "id": "skin-body-03",
+      "layer": "body",
+      "option": 2,
+      "file": "characters/v5/skin-body-03.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 13078,
+      "status": "composite-validated"
+    },
+    {
+      "id": "skin-body-04",
+      "layer": "body",
+      "option": 3,
+      "file": "characters/v5/skin-body-04.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 12909,
+      "status": "composite-validated"
+    },
+    {
+      "id": "skin-body-05",
+      "layer": "body",
+      "option": 4,
+      "file": "characters/v5/skin-body-05.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 12612,
+      "status": "composite-validated"
+    },
+    {
+      "id": "skin-hands-01",
+      "layer": "hands",
+      "option": 0,
+      "file": "characters/v5/skin-hands-01.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 6667,
+      "status": "composite-validated"
+    },
+    {
+      "id": "skin-hands-02",
+      "layer": "hands",
+      "option": 1,
+      "file": "characters/v5/skin-hands-02.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 6584,
+      "status": "composite-validated"
+    },
+    {
+      "id": "skin-hands-03",
+      "layer": "hands",
+      "option": 2,
+      "file": "characters/v5/skin-hands-03.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 6526,
+      "status": "composite-validated"
+    },
+    {
+      "id": "skin-hands-04",
+      "layer": "hands",
+      "option": 3,
+      "file": "characters/v5/skin-hands-04.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 6364,
+      "status": "composite-validated"
+    },
+    {
+      "id": "skin-hands-05",
+      "layer": "hands",
+      "option": 4,
+      "file": "characters/v5/skin-hands-05.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 6255,
+      "status": "composite-validated"
+    },
+    {
+      "id": "face-01",
+      "layer": "face",
+      "option": 0,
+      "file": "characters/v5/face-01.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 5029,
+      "status": "composite-validated"
+    },
+    {
+      "id": "face-02",
+      "layer": "face",
+      "option": 1,
+      "file": "characters/v5/face-02.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 4175,
+      "status": "composite-validated"
+    },
+    {
+      "id": "face-03",
+      "layer": "face",
+      "option": 2,
+      "file": "characters/v5/face-03.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 6011,
+      "status": "composite-validated"
+    },
+    {
+      "id": "face-04",
+      "layer": "face",
+      "option": 3,
+      "file": "characters/v5/face-04.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 3969,
+      "status": "composite-validated"
+    },
+    {
+      "id": "face-05",
+      "layer": "face",
+      "option": 4,
+      "file": "characters/v5/face-05.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 5295,
+      "status": "composite-validated"
+    },
+    {
+      "id": "clothes-01",
+      "layer": "clothes",
+      "option": 0,
+      "file": "characters/v5/clothes-01.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 85147,
+      "status": "composite-validated"
+    },
+    {
+      "id": "clothes-02",
+      "layer": "clothes",
+      "option": 1,
+      "file": "characters/v5/clothes-02.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 84189,
+      "status": "composite-validated"
+    },
+    {
+      "id": "clothes-03",
+      "layer": "clothes",
+      "option": 2,
+      "file": "characters/v5/clothes-03.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 113065,
+      "status": "composite-validated"
+    },
+    {
+      "id": "clothes-04",
+      "layer": "clothes",
+      "option": 3,
+      "file": "characters/v5/clothes-04.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 103697,
+      "status": "composite-validated"
+    },
+    {
+      "id": "clothes-05",
+      "layer": "clothes",
+      "option": 4,
+      "file": "characters/v5/clothes-05.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 97636,
+      "status": "composite-validated"
+    },
+    {
+      "id": "hair-back-01",
+      "layer": "hairBack",
+      "option": 0,
+      "file": "characters/v5/hair-back-01.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 19039,
+      "status": "composite-validated"
+    },
+    {
+      "id": "hair-back-02",
+      "layer": "hairBack",
+      "option": 1,
+      "file": "characters/v5/hair-back-02.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 81606,
+      "status": "composite-validated"
+    },
+    {
+      "id": "hair-back-03",
+      "layer": "hairBack",
+      "option": 2,
+      "file": "characters/v5/hair-back-03.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 48489,
+      "status": "composite-validated"
+    },
+    {
+      "id": "hair-back-04",
+      "layer": "hairBack",
+      "option": 3,
+      "file": "characters/v5/hair-back-04.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 25785,
+      "status": "composite-validated"
+    },
+    {
+      "id": "hair-back-05",
+      "layer": "hairBack",
+      "option": 4,
+      "file": "characters/v5/hair-back-05.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 87972,
+      "status": "composite-validated"
+    },
+    {
+      "id": "hair-front-01",
+      "layer": "hairFront",
+      "option": 0,
+      "file": "characters/v5/hair-front-01.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 19409,
+      "status": "composite-validated"
+    },
+    {
+      "id": "hair-front-02",
+      "layer": "hairFront",
+      "option": 1,
+      "file": "characters/v5/hair-front-02.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 78511,
+      "status": "composite-validated"
+    },
+    {
+      "id": "hair-front-03",
+      "layer": "hairFront",
+      "option": 2,
+      "file": "characters/v5/hair-front-03.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 47556,
+      "status": "composite-validated"
+    },
+    {
+      "id": "hair-front-04",
+      "layer": "hairFront",
+      "option": 3,
+      "file": "characters/v5/hair-front-04.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 25554,
+      "status": "composite-validated"
+    },
+    {
+      "id": "hair-front-05",
+      "layer": "hairFront",
+      "option": 4,
+      "file": "characters/v5/hair-front-05.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 86614,
+      "status": "composite-validated"
+    }
+  ],
+  "totalBytes": 1126217,
+  "combinations": 625,
+  "sourceRegistrations": [
+    {
+      "id": "face-01",
+      "source": "face-warm-smile-raw.png",
+      "eyes": {
+        "rect": [
+          349,
+          319,
+          326,
+          143
         ],
-        [
-          276,
-          457,
-          187,
-          152
+        "pivot": [
+          511.5,
+          422.25
         ],
-        [
-          506,
-          466,
-          203,
-          130
+        "target": [
+          512,
+          376
         ],
-        [
-          752,
-          468,
-          187,
+        "scale": 0.7476635514018691
+      },
+      "mouth": {
+        "rect": [
+          447,
+          516,
+          130,
+          43
+        ],
+        "pivot": [
+          512,
+          537.5
+        ],
+        "target": [
+          512,
+          492
+        ],
+        "scale": 0.75
+      },
+      "nose": "universal smile nose at (512,432)"
+    },
+    {
+      "id": "face-02",
+      "source": "face-dark-glasses-raw.png",
+      "eyes": {
+        "rect": [
+          344,
+          313,
+          334,
           127
         ],
-        [
-          984,
-          465,
-          195,
-          133
-        ]
+        "pivot": [
+          510,
+          399
+        ],
+        "target": [
+          512,
+          376
+        ],
+        "scale": 0.8556149732620321
+      },
+      "mouth": {
+        "rect": [
+          470,
+          483,
+          81,
+          17
+        ],
+        "pivot": [
+          510.5,
+          491.5
+        ],
+        "target": [
+          512,
+          492
+        ],
+        "scale": 0.75
+      },
+      "nose": "universal smile nose at (512,432)"
+    },
+    {
+      "id": "face-03",
+      "source": "face-surprised-raw.png",
+      "eyes": {
+        "rect": [
+          351,
+          387,
+          321,
+          182
+        ],
+        "pivot": [
+          511.5,
+          516.5
+        ],
+        "target": [
+          512,
+          376
+        ],
+        "scale": 0.7547169811320755
+      },
+      "mouth": {
+        "rect": [
+          477,
+          620,
+          70,
+          81
+        ],
+        "pivot": [
+          512,
+          660.5
+        ],
+        "target": [
+          512,
+          492
+        ],
+        "scale": 0.55
+      },
+      "nose": "universal smile nose at (512,432)",
+      "freckles": null
+    },
+    {
+      "id": "face-04",
+      "source": "face-wink-freckles-raw.png",
+      "eyes": {
+        "rect": [
+          325,
+          367,
+          376,
+          164
+        ],
+        "pivot": [
+          512.25,
+          487
+        ],
+        "target": [
+          512,
+          376
+        ],
+        "scale": 0.6680584551148225
+      },
+      "mouth": {
+        "rect": [
+          447,
+          614,
+          124,
+          34
+        ],
+        "pivot": [
+          509,
+          631
+        ],
+        "target": [
+          512,
+          492
+        ],
+        "scale": 0.75
+      },
+      "nose": "universal smile nose at (512,432)",
+      "freckles": {
+        "rects": [
+          [
+            365,
+            551,
+            54,
+            35
+          ],
+          [
+            605,
+            551,
+            54,
+            35
+          ]
+        ],
+        "registration": "Use same eyesAndBrows uniformScale and pairCentre translation; preserve positions relative to eye pair. Independent crops exclude nose atx491..517,y558..586."
+      }
+    },
+    {
+      "id": "face-05",
+      "source": "face-confident-grin-raw.png",
+      "eyes": {
+        "rect": [
+          328,
+          343,
+          370,
+          149
+        ],
+        "pivot": [
+          512.75,
+          448.5
+        ],
+        "target": [
+          512,
+          376
+        ],
+        "scale": 0.6823027718550106
+      },
+      "mouth": {
+        "rect": [
+          426,
+          567,
+          170,
+          61
+        ],
+        "pivot": [
+          511,
+          597.5
+        ],
+        "target": [
+          512,
+          492
+        ],
+        "scale": 0.75
+      },
+      "nose": "universal smile nose at (512,432)",
+      "freckles": null
+    },
+    {
+      "id": "hair-01",
+      "source": "hair-01-short-curls-raw.png",
+      "translation": [
+        0,
+        -28
       ],
-      "hair": [
-        [
-          17,
-          644,
-          226,
-          266
-        ],
-        [
-          243,
-          632,
-          243,
-          278
-        ],
-        [
-          486,
-          648,
-          215,
-          262
-        ],
-        [
-          733,
-          643,
-          221,
-          267
-        ],
-        [
-          980,
-          625,
-          222,
-          281
-        ]
+      "scale": 1,
+      "fitting": "measured crown32logical; no bbox fitting"
+    },
+    {
+      "id": "hair-02",
+      "source": "hair-02-copper-waves-raw.png",
+      "translation": [
+        0,
+        -24
       ],
-      "clothes": [
-        [
-          19,
-          900,
-          224,
-          361
+      "scale": 1,
+      "fitting": "measured crown32logical; no bbox fitting"
+    },
+    {
+      "id": "hair-04",
+      "source": "exec-333a810e-35bf-4130-a169-bd9d84b78574.png",
+      "anchors": {
+        "crown": [
+          512,
+          184
         ],
-        [
-          243,
-          900,
-          243,
-          361
+        "fringe": [
+          512,
+          518
         ],
-        [
-          486,
-          900,
-          234,
-          361
-        ],
-        [
-          742,
-          900,
-          206,
-          381
-        ],
-        [
-          984,
-          900,
-          206,
-          395
+        "targets": [
+          [
+            512,
+            128
+          ],
+          [
+            512,
+            332
+          ]
         ]
+      },
+      "scale": 0.6107784431137725,
+      "translation": [
+        199.28143712574848,
+        15.616766467065858
       ]
     },
-    "fitPolicy": "Uniform scale per sprite; nearest-neighbour canvas rendering; no per-axis stretching."
+    {
+      "id": "hair-03",
+      "source": "hair-03-dark-braids-raw.png",
+      "translation": [
+        0,
+        -23
+      ],
+      "scale": 1,
+      "fitting": "cap crown128raw; free pony/braid extent preserved"
+    },
+    {
+      "id": "hair-05",
+      "source": "hair-05-golden-ponytail-raw.png",
+      "translation": [
+        0,
+        -16
+      ],
+      "scale": 1,
+      "fitting": "cap crown128raw; free pony/braid extent preserved"
+    }
+  ],
+  "productionGuide": "../../docs/character-production-standard-v5.md",
+  "prompts": "../../docs/character-generation-v5-prompts.md",
+  "validation": {
+    "exactRendererComparisons": 625,
+    "visualPairChecks": [
+      "25 face/hair",
+      "25 skin/clothes",
+      "25 hair/clothes"
+    ],
+    "browser": "pending-preview-check"
   }
 }

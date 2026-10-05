@@ -1,77 +1,100 @@
-/* Detailed Livslina character sprites, composited from one aligned transparent atlas. */
+/* Prepackaged full-frame layers. No runtime pixel reads or asset fitting. */
 window.LivslinaCharacterArt = (() => {
+  const model = window.LivslinaCharacterModel;
+  const scriptURL = document.currentScript.src;
   const labels = {
     skin: ["Ljos varm", "Ljos nøytral", "Mellomvarm", "Djup brun", "Mørk brun"],
-    face: ["Breitt smil", "Overraska", "Briller", "Blink og fregner", "Sjølvsikker"],
+    face: ["Breitt smil", "Briller", "Overraska", "Blink og fregner", "Sjølvsikker"],
     hair: ["Kort krøllhår", "Langt bølgjehår", "Fletter", "Rett lugg", "Høg hestehale"],
     clothes: ["Blå hettegenser", "Rustraud jakke", "Lilla strikkegenser", "Grøn overall", "Turkis skjorte"]
   };
-
-  // Source rectangles are [x, y, width, height] within the 1215 × 1295 atlas.
-  const sprites = {
-    skin: [
-      [46, 30, 169, 368], [283, 30, 171, 368], [522, 30, 171, 368],
-      [760, 30, 170, 368], [999, 30, 169, 368]
-    ],
-    face: [
-      [36, 466, 195, 135], [276, 457, 187, 152], [506, 466, 203, 130],
-      [752, 468, 187, 127], [984, 465, 195, 133]
-    ],
-    hair: [
-      [17, 644, 226, 266], [243, 632, 243, 278], [486, 648, 215, 262],
-      [733, 643, 221, 267], [980, 625, 222, 281]
-    ],
-    clothes: [
-      [19, 900, 224, 361], [243, 900, 243, 361], [486, 900, 234, 361],
-      [742, 900, 206, 381], [984, 900, 206, 395]
-    ]
+  const fileFamilies = {
+    body: "skin-body", hands: "skin-hands", clothes: "clothes", face: "face",
+    hairBack: "hair-back", hairFront: "hair-front"
   };
-
-  const hairWidths = [120, 128, 120, 126, 138];
-  const canvasCenter = 96;
-  const atlas = new Image();
+  const images = {};
   let ready = false;
+  let loadError = "";
+  let loadedCount = 0;
 
-  atlas.addEventListener("load", () => {
-    ready = true;
-    window.dispatchEvent(new Event("livslina:character-art-ready"));
-  }, { once: true });
-
-  atlas.addEventListener("error", () => {
-    window.dispatchEvent(new Event("livslina:character-art-error"));
-  }, { once: true });
-
-  atlas.src = new URL("characters/character-builder-atlas-v4.png", document.currentScript.src).href;
-
-  function drawHeight(ctx, sprite, targetHeight, top) {
-    const [sx, sy, sourceWidth, sourceHeight] = sprite;
-    const scale = targetHeight / sourceHeight;
-    const width = sourceWidth * scale;
-    ctx.drawImage(atlas, sx, sy, sourceWidth, sourceHeight,
-      canvasCenter - width / 2, top, width, targetHeight);
+  function overlay(ctx) {
+    ctx.save();
+    ctx.scale(model.scale, model.scale);
+    ctx.lineWidth = .5;
+    ctx.strokeStyle = "#4b3424";
+    ctx.fillStyle = "#fff9e9";
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(model.centerX, 8); ctx.lineTo(model.centerX, 365);
+    ctx.moveTo(30, model.groundY); ctx.lineTo(226, model.groundY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.font = "6px sans-serif";
+    ctx.textAlign = "center";
+    for (const anchor of model.anchors) {
+      ctx.fillRect(anchor.x - 2, anchor.y - 2, 4, 4);
+      ctx.strokeRect(anchor.x - 2, anchor.y - 2, 4, 4);
+      const textWidth = ctx.measureText(anchor.label).width;
+      ctx.fillRect(anchor.x - textWidth / 2 - 1, anchor.y + 3, textWidth + 2, 7);
+      ctx.fillStyle = "#000";
+      ctx.fillText(anchor.label, anchor.x, anchor.y + 9);
+      ctx.fillStyle = "#fff9e9";
+    }
+    ctx.restore();
   }
 
-  function drawWidth(ctx, sprite, targetWidth, top) {
-    const [sx, sy, sourceWidth, sourceHeight] = sprite;
-    const height = sourceHeight * targetWidth / sourceWidth;
-    ctx.drawImage(atlas, sx, sy, sourceWidth, sourceHeight,
-      canvasCenter - targetWidth / 2, top, targetWidth, height);
-  }
-
-  function draw(ctx, selection) {
+  function draw(ctx, selection, options = {}) {
     if (!ready) return false;
-
+    const visible = { body: true, clothes: true, face: true, hairBack: true, hairFront: true, ...options.visible };
+    const index = (family) => Math.max(0, Math.min(4, Number(selection[family]) || 0));
+    const layers = {
+      hairBack: images.hairBack[index("hair")],
+      body: images.body[index("skin")],
+      clothes: images.clothes[index("clothes")],
+      hands: images.hands[index("skin")],
+      face: images.face[index("face")],
+      hairFront: images.hairFront[index("hair")]
+    };
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.imageSmoothingEnabled = false;
-
-    // Every layer keeps its own aspect ratio and shares the same 192 × 256 pose.
-    drawHeight(ctx, sprites.skin[selection.skin] || sprites.skin[0], 256, 0);
-    drawHeight(ctx, sprites.clothes[selection.clothes] || sprites.clothes[0], 174, 82);
-    drawWidth(ctx, sprites.hair[selection.hair] || sprites.hair[0], hairWidths[selection.hair] || hairWidths[0], 0);
-    drawWidth(ctx, sprites.face[selection.face] || sprites.face[0], 66, 25);
+    for (const name of model.layerOrder) {
+      if (visible[name === "hands" ? "body" : name]) ctx.drawImage(layers[name], 0, 0);
+    }
+    if (options.anchors) overlay(ctx);
     return true;
   }
 
-  return { labels, draw, get ready() { return ready; } };
+  const pending = [];
+  const total = Object.keys(fileFamilies).length * 5;
+  for (const [family, prefix] of Object.entries(fileFamilies)) {
+    images[family] = [];
+    for (let i = 0; i < 5; i++) pending.push(new Promise((resolve, reject) => {
+      const filename = `${prefix}-${String(i + 1).padStart(2, "0")}.png`;
+      const image = new Image();
+      image.addEventListener("load", () => {
+        if (image.naturalWidth !== model.assetWidth || image.naturalHeight !== model.assetHeight) {
+          reject(new Error(`${filename} har feil fullrammemål (${image.naturalWidth} × ${image.naturalHeight}).`));
+          return;
+        }
+        images[family][i] = image;
+        loadedCount++;
+        window.dispatchEvent(new CustomEvent("livslina:character-art-progress", { detail: { loaded: loadedCount, total } }));
+        resolve();
+      }, { once: true });
+      image.addEventListener("error", () => reject(new Error(`Kunne ikkje laste ${filename}.`)), { once: true });
+      image.src = new URL(`characters/v5/${filename}`, scriptURL).href;
+    }));
+  }
+  const whenReady = Promise.all(pending).then(() => {
+    ready = true;
+    window.dispatchEvent(new Event("livslina:character-art-ready"));
+    return true;
+  }).catch((error) => {
+    loadError = error.message;
+    window.dispatchEvent(new CustomEvent("livslina:character-art-error", { detail: { message: loadError } }));
+    return false;
+  });
+
+  return { labels, draw, whenReady, get ready() { return ready; }, get error() { return loadError; } };
 })();
