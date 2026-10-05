@@ -683,3 +683,11 @@ body[data-vp-app="heite_stavrim"] :is(.letter-box, .timer-pill, .category-item, 
 body[data-vp-app="heite_stavrim"] .timer-pill.paused {
     background: var(--vp-stone, #e4e7e5);
 }
+
+/* Fjern dei store papirkorta frå denne sida; inndata og knappar held lyse flater. */
+body.vp-migrated-page[data-vp-app="heite_stavrim"]:not([data-vp-preserve]) .vp-migrated-main :is(.box1,.box2,.box3,.box4,.panel,.card,.modal4,.modal3,.settings-group,.settings-panel,.help-panel,.stat-card,.empty-help) {
+    background-color: transparent;
+}
+body[data-vp-app="heite_stavrim"] :is(.team-score-box,.team-answers-section,.individual-team-row,.team-points-input,.result-item:not(.winner)) {
+    background-color: transparent;
+}

@@ -17,6 +17,9 @@
 .vp-standard-support .catalogue-kicker { margin-bottom: 8px; }
 .vp-support-section + .vp-support-section { margin-top: 20px; }
 .vp-standard-support .vp-stack { margin-bottom: 24px; }
+.catalogue-game-state-demo { margin-top: 24px; }
+.catalogue-game-state-demo > .vp-game-description { margin-top: 12px; }
+.catalogue-game-state-demo > .vp-hero-stage { margin-bottom: 28px; }
 .catalogue-wide-demo { width: calc(100vw - 40px); margin-left: calc((100% - 100vw + 40px)/2); }
 .vp-editor { margin-top: 16px; }
 .catalogue-map { position: relative; display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; padding: 40px; background: #fffdf5; }

@@ -78,6 +78,9 @@ HeiteStavrimGame.prototype.showSection = function (name, opts) {
     ['setup', 'preview', 'game', 'answer', 'results'].forEach(s => {
         this.el[s].style.display = s === name ? '' : 'none';
     });
+    if (window.VyrdepilAppShell) {
+        window.VyrdepilAppShell.setGameActive(['game', 'answer', 'results'].includes(name));
+    }
     if (scroll) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }

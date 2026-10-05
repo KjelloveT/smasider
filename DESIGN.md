@@ -56,6 +56,9 @@ Knappetekst skal vere sentrert, både med og utan ikon. Bruk berre ikonnamn som 
 | Del | Klassar og struktur |
 |---|---|
 | Handling | `vp-button`; `--primary` korall, `--tool` himmel, `--positive` mose, `--danger` lys raud, `--quiet` utan skugge. `--compact`, `--large`, `--icon`, `--block` styrer form/storleik. |
+| Spelomtale | `vp-game-description` står i ei eiga, kort linje over heroen. Hald teksten kort; han kan brytast på smale skjermar. |
+| Kompakt spelhero | Legg `vp-hero-stage--compact` på `vp-hero-stage` når sjølve spelet er i gang. Logo og namn står att; undertittelen blir gøymd. |
+| Migrert speltilstand | Eldre appflyter bruker `VyrdepilAppShell.setGameActive(true)` når spelet startar og `false` når brukaren går attende til oppsettet. |
 | Hovudboks | `vp-panel` med `vp-decor vp-decor--grain` og `vp-content`. Store koter i minst 1536 px biletbreidd, utsnitt i små boksar, opasitet 0,85 og roleg midte. |
 | Stripedekor | `vp-decor vp-decor--stripes` for eit lett, repeterande SVG-mønster med roleg midte. Legg laget bak innhaldet i `vp-content`. |
 | Infoskilt | `vp-sign vp-sign--grounded` utanpå `vp-panel`. Eige klipt `vp-decor` med fire `vp-corner` og `data-vp-corners`; innhald i `vp-content`. |
@@ -79,7 +82,7 @@ Editorar, tabellar, små felt, spelkontrollar og tette lister har reine flater u
 
 | Oppsett | Bruk og struktur |
 |---|---|
-| Standard | `main.vp-shell` → `vp-standard`. `vp-hero-stage` og Vyrde over `vp-standard-main` og `vp-standard-support`; 1200 px totalbreidd og 700 px heroskilt. App-logo har eige felt i hero. Mobil: hero, hovudinnhald, støtteskilt; ekstra hjelp/val i trekkspel. Viktige startval og handlingar må vere synlege. |
+| Standard | `main.vp-shell` → `vp-standard`. `vp-hero-stage` og Vyrde over `vp-standard-main` og `vp-standard-support`; 1200 px totalbreidd og 700 px heroskilt. App-logo har eige felt i hero. Under spelet blir heroen kompakt, medan `vp-game-description` står som eiga linje over. Mobil: hero, hovudinnhald, støtteskilt; ekstra hjelp/val i trekkspel. Viktige startval og handlingar må vere synlege. |
 | Utvida verktøy | `main.vp-shell.vp-shell--wide`. Intro i `vp-app-intro` (maks 1100 px), stor logo til venstre inni `vp-app-intro-board`, Vyrde utanfor til høgre. `vp-toolbar` og `vp-editor` med arbeidsflate og valfrie sidepanel. Berre arbeidsflata/verktøyrada får full breidd; sidemenyar foldast på mobil. |
 | Canvas-spel | Same avgrensa `vp-app-intro`, med logo og Vyrde. `vp-game-frame`, `vp-game-stage`, canvas og HTML-status. Behald spelmotoren sitt sideforhold og eigne funksjonsfargar. Intro kan forsvinne under spel. Berøringskontrollar og viktige handlingar står synleg. **Canvas-spel skal ikkje ha den globale sidefoten**, sidan han kan presse spelruta og skape uønskt rulling. |
 | Informasjonssider | `body.vp-site-page` med felles skyheader og appmeny. Bruk `main.vp-shell.vp-site-main.vp-policy-page`, lyse `vp-panel`-flater og `vp-policy-heading`-skilt med kotemønster i full storleik. Hald hovudbreidda rundt 960 px og brødtekst på maks 78ch, sidan sidene ikkje har sidemeny. Tabellar brukar `vp-data-table` og kan rulle vassrett på små skjermar. Behald juridisk tekst, handlingar og skript-ID-ar når utsjånaden blir endra. |

@@ -204,6 +204,17 @@ body[data-vp-site-footer] {
 .vp-hero-copy { min-width: 0; }
 .vp-hero .vp-title { margin: 0 0 4px; font-size: clamp(1.45rem,3.8vw,2.7rem); letter-spacing: -.045em; }
 .vp-hero p { margin: 0; font-size: clamp(.85rem,1.4vw,1rem); font-weight: 700; line-height: 1.25; }
+body[data-vp-design] .vp-game-description {
+  display: flex; align-items: center; justify-content: center; width: min(100%,1100px); min-height: 48px;
+  margin: 0 auto 10px; padding: 9px clamp(12px,2vw,20px); border: 3px solid var(--vp-frame);
+  border-radius: 8px; background: var(--vp-paper); color: var(--vp-ink); box-shadow: 0 3px 0 var(--vp-shadow);
+  font-weight: 750; line-height: 1.35; text-align: center;
+}
+.vp-hero-stage--compact { width: min(100%,480px); padding-top: 0; }
+.vp-hero-stage--compact::before, .vp-hero-stage--compact::after { top: 12%; bottom: -18px; }
+.vp-hero-stage--compact .vp-hero-logo { width: clamp(38px,9vw,68px); max-height: 72px; }
+.vp-hero-stage--compact .vp-hero .vp-title { margin: 0; font-size: clamp(1.2rem,2.5vw,1.8rem); }
+.vp-hero-stage--compact .vp-hero p { display: none; }
 .vp-standard { display: grid; grid-template-columns: minmax(0,1fr) minmax(260px,310px); gap: 24px; align-items: start; }
 .vp-standard-play { min-width: 0; display: grid; gap: 24px; }
 .vp-standard-side { min-width: 0; display: grid; gap: 24px; }
@@ -414,7 +425,9 @@ textarea.vp-input { min-height: 110px; resize: vertical; }
   .vp-standard:has(> .vp-standard-wide:not([hidden])) .vp-standard-wide { grid-row: 3; }
   .vp-standard:has(> .vp-standard-wide:not([hidden])) .vp-standard-support { grid-row: 4; }
   .vp-standard .vp-hero-stage { width: 100%; }
+  .vp-standard .vp-hero-stage--compact { width: min(100%,480px); }
   .vp-standard .vp-hero .vp-title { font-size: clamp(1.45rem,6vw,2.7rem); }
+  .vp-standard .vp-hero-stage--compact .vp-hero .vp-title { font-size: clamp(1.2rem,5vw,1.8rem); }
   .vp-editor { grid-template-columns: minmax(0,1fr); }
   .vp-editor-properties { grid-column: 1; }
   .vp-support-section { margin-top: 16px; }
@@ -848,3 +861,21 @@ body.vp-migrated-page:not([data-vp-preserve])[data-vp-layout="canvas"] .vp-fs-to
 .vp-bragd-app-panel summary { cursor: pointer; font-weight: 800; }
 .vp-bragd-app-panel .vp-bragd-grid { margin-top: 12px; }
 @media (max-width: 600px) { .vp-bragd-card { min-height: 232px; padding: 14px 10px 10px; } .vp-bragd-emblem { width: 66px; height: 66px; } }
+
+/* Speltilstand for felles introar. Spelomtalen står framleis som eiga linje over. */
+body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-intro {
+  grid-template-columns: minmax(0,1fr) clamp(56px,7vw,82px); gap: 10px; margin-block: 4px 12px;
+}
+body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-intro-board { min-height: 0; padding: 8px 12px; }
+body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-hero--has-logo { grid-template-columns: 56px minmax(0,1fr); gap: 12px; }
+body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-hero--has-logo > img.vp-migrated-logo { width: 56px; height: 56px; max-height: 56px; }
+body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-hero :is(h1,h2) { margin: 0; font-size: clamp(1.2rem,2.5vw,1.8rem); }
+body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-hero p { display: none; }
+body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-mascot { width: auto; max-width: 82px; max-height: 64px; justify-self: center; }
+@media (max-width: 430px) {
+  body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-intro { grid-template-columns: minmax(0,1fr) 54px; gap: 6px; }
+  body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-intro-board { padding: 8px; }
+  body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-hero--has-logo { grid-template-columns: 48px minmax(0,1fr); gap: 8px; }
+  body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-hero--has-logo > img.vp-migrated-logo { width: 48px; height: 48px; max-height: 48px; }
+  body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-mascot { max-width: 54px; max-height: 48px; }
+}
