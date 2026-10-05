@@ -20,7 +20,12 @@ LL.uiHome = (function () {
   }
 
   function renderDiorama(s) {
-    document.getElementById('homeDiorama').innerHTML = LL.artDiorama.svg(s);
+    LL.artRoom.render(document.getElementById('homeDiorama'), s.room, null, 'Rommet ditt');
+    const effects = LL.artRoom.effects(s.room);
+    const line = effects.energyPerMonth || effects.wellbeingPerMonth
+      ? 'Rommet gir kvar månad +' + Number(effects.energyPerMonth).toLocaleString('nn-NO', { maximumFractionDigits: 2 }) + ' energi og +' + Number(effects.wellbeingPerMonth).toLocaleString('nn-NO', { maximumFractionDigits: 2 }) + ' trivsel.'
+      : 'Eit enkelt utgangspunkt med dei billegaste grunnmøblane.';
+    document.getElementById('homeRoomEffects').textContent = line;
   }
 
   function renderHeader(s) {
@@ -30,17 +35,19 @@ LL.uiHome = (function () {
       s.program.name + ' · ' + (s.housing === 'hybel' ? 'bur på hybel' : 'bur heime');
     const btn = document.getElementById('btnPlan');
     if (r && r.kind === 'summer') {
-      btn.innerHTML = 'Sommaren <span data-icon="sun"></span>';
+      btn.innerHTML = 'Vel sommarval <span data-icon="sun"></span>';
     } else {
-      btn.innerHTML = 'Planlegg halvåret <span data-icon="arrowRight"></span>';
+      btn.innerHTML = 'Planlegg ' + (r ? r.label.toLowerCase() : 'halvåret') + ' <span data-icon="arrowRight"></span>';
     }
     LL.util.hydrate(btn);
   }
 
   function renderFigure(s) {
     const fig = document.getElementById('homeFigure');
-    // Diorama kjem i M5; for no viser vi figuren på plate.
-    fig.innerHTML = LL.artDoll.svg(s.character, { ariaLabel: 'Figuren din', withPlate: true });
+    fig.replaceChildren(LL.artCharacter.createCanvas(s.character, {
+      className: 'll-character-canvas ll-character-canvas--portrait',
+      label: 'Figuren din', width: 160, height: 240
+    }));
   }
 
   function renderStats(s) {
@@ -56,7 +63,7 @@ LL.uiHome = (function () {
 
   function statMoney(label, val, iconName) {
     const box = document.createElement('div');
-    box.className = 'll-stat';
+    box.className = 'vp-panel vp-panel--plain ll-stat';
     const l = document.createElement('div'); l.className = 'll-stat-lbl';
     l.innerHTML = '<span data-icon="' + iconName + '" data-icon-size="15"></span>' + label;
     const v = document.createElement('div'); v.className = 'll-stat-val';
@@ -68,7 +75,7 @@ LL.uiHome = (function () {
 
   function statPlain(label, val, iconName) {
     const box = document.createElement('div');
-    box.className = 'll-stat';
+    box.className = 'vp-panel vp-panel--plain ll-stat';
     const l = document.createElement('div'); l.className = 'll-stat-lbl';
     l.innerHTML = '<span data-icon="' + iconName + '" data-icon-size="15"></span>' + label;
     const v = document.createElement('div'); v.className = 'll-stat-val'; v.textContent = val;
@@ -78,7 +85,7 @@ LL.uiHome = (function () {
 
   function statMeter(label, val, iconName) {
     const box = document.createElement('div');
-    box.className = 'll-stat';
+    box.className = 'vp-panel vp-panel--plain ll-stat';
     const l = document.createElement('div'); l.className = 'll-stat-lbl';
     l.innerHTML = '<span data-icon="' + iconName + '" data-icon-size="15"></span>' + label;
     const v = document.createElement('div'); v.className = 'll-stat-val'; v.textContent = Math.round(val);
@@ -96,10 +103,25 @@ LL.uiHome = (function () {
     wrap.textContent = '';
     const rounds = LL.state.rounds();
     const idx = LL.state.get().roundIndex;
+    const current = rounds[idx];
+    const finishedTerms = rounds.slice(0, idx).filter(r => r.kind === 'term').length;
+    const summary = document.getElementById('homeTimelineSummary');
+    if (current && current.kind === 'summer') {
+      summary.textContent = current.label + ' · ' + finishedTerms + ' av 6 skulehalvår fullførte · ' + current.age + ' år';
+    } else if (current) {
+      summary.textContent = current.label + ' · ' + current.months + ' månader · skulehalvår ' + (finishedTerms + 1) + ' av 6 · ' + current.age + ' år';
+    } else {
+      summary.textContent = 'Alle seks skulehalvåra og dei to sommarane er fullførte.';
+    }
+
     rounds.forEach((r, i) => {
       const node = document.createElement('div');
       node.className = 'll-tl-node' + (r.kind === 'summer' ? ' summer' : '') +
         (i < idx ? ' done' : '') + (i === idx ? ' current' : '');
+      node.setAttribute('role', 'listitem');
+      const status = i < idx ? 'fullført' : (i === idx ? 'no' : 'seinare');
+      node.setAttribute('aria-label', r.label + (r.kind === 'term' ? ', seks månader' : '') + ', ' + status);
+      if (i === idx) node.setAttribute('aria-current', 'step');
       const dot = document.createElement('div');
       dot.className = 'll-tl-dot';
       dot.innerHTML = '<span data-icon="' + (r.kind === 'summer' ? 'sun' : 'book') + '" data-icon-size="16"></span>';
@@ -117,16 +139,6 @@ LL.uiHome = (function () {
     wrap.textContent = '';
     const items = [];
 
-    if (s.possessions.bed !== 'seng') {
-      const u = LL.data.node('upgrades.bed');
-      items.push({ label: u.label, cost: u.gameValue, note: u.note,
-        buy: () => { s.possessions.bed = 'seng'; s.stats.wellbeing = LL.util.clamp(s.stats.wellbeing + u.wellbeing, 0, 100); } });
-    }
-    if (s.possessions.desk !== 'gaming') {
-      const u = LL.data.node('upgrades.gamingDesk');
-      items.push({ label: u.label, cost: u.gameValue, note: u.note,
-        buy: () => { s.possessions.desk = 'gaming'; s.stats.wellbeing = LL.util.clamp(s.stats.wellbeing + u.wellbeing, 0, 100); } });
-    }
     if (!s.possessions.moped) {
       const bundle = LL.data.value('transport.usedMoped') + LL.data.value('transport.mopedLicenseCourse') + LL.data.value('transport.helmetAndGear');
       items.push({ label: 'Moped (med førarbevis og utstyr)', cost: bundle,
@@ -149,13 +161,13 @@ LL.uiHome = (function () {
 
     items.forEach(item => {
       const card = document.createElement('div');
-      card.className = 'll-purchase';
+      card.className = 'vp-panel vp-panel--plain ll-purchase';
       const info = document.createElement('div');
       const h = document.createElement('strong'); h.textContent = item.label;
       const note = document.createElement('p'); note.className = 'll-note'; note.textContent = item.note || '';
       info.append(h, note);
       const btn = document.createElement('button');
-      btn.type = 'button'; btn.className = 'btn';
+      btn.type = 'button'; btn.className = 'vp-button vp-button--tool';
       btn.textContent = LL.util.kr(item.cost);
       const affordable = s.stats.money >= item.cost;
       btn.disabled = !affordable;

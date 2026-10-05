@@ -48,7 +48,7 @@ LL.uiSetup = (function () {
     wrap.textContent = '';
     labels.forEach((lbl, i) => {
       const d = document.createElement('div');
-      d.className = 'll-wstep' + (i === stepIndex ? ' active' : (i < stepIndex ? ' done' : ''));
+      d.className = 'vp-panel vp-panel--plain ll-wstep' + (i === stepIndex ? ' active' : (i < stepIndex ? ' done' : ''));
       d.textContent = (i + 1) + '. ' + lbl;
       wrap.appendChild(d);
     });
@@ -95,57 +95,82 @@ LL.uiSetup = (function () {
     if (stepIndex > 0) { stepIndex--; renderStep(); }
   }
 
-  // ── Steg 1: karakter ──
-  function refreshDoll() {
+  // ── Steg 1: lagdelt karakterbyggjar ──
+  const CHARACTER_FAMILIES = {
+    skin: { label: 'Hudtone', tab: 'Hud' },
+    face: { label: 'Andletsuttrykk', tab: 'Andlet' },
+    hair: { label: 'Frisyre', tab: 'Hår' },
+    clothes: { label: 'Klede', tab: 'Klede' }
+  };
+  let activeCharacterFamily = 'skin';
+
+  function refreshCharacter(refreshOptions) {
     const stage = document.getElementById('dollStage');
-    stage.innerHTML = LL.artDoll.svg(LL.state.get().character, { ariaLabel: 'Figuren din' });
+    const character = LL.state.get().character;
+    stage.replaceChildren(LL.artCharacter.createCanvas(character, {
+      className: 'll-character-canvas ll-character-canvas--main',
+      label: 'Figuren din', width: 256, height: 384
+    }));
+    document.getElementById('characterSummary').textContent = LL.artCharacter.summary(character);
+    if (refreshOptions !== false) renderCharacterOptions();
   }
 
   function renderCharacter() {
-    refreshDoll();
-    const ch = LL.state.get().character;
-    swatchRow('skinRow', LL.artDoll.SKIN_TONES, ch.skin, v => { ch.skin = v; refreshDoll(); }, 'Hudtone');
-    swatchRow('hairRow', LL.artDoll.HAIR_COLORS, ch.hairColor, v => { ch.hairColor = v; refreshDoll(); }, 'Hårfarge');
-    swatchRow('topRow', LL.artDoll.TOP_COLORS, ch.topColor, v => { ch.topColor = v; refreshDoll(); }, 'Farge på overdel');
-    variantRow('hairStyleRow', LL.artDoll.HAIR_STYLES, ch.hair, v => { ch.hair = v; refreshDoll(); });
-    variantRow('topStyleRow', LL.artDoll.TOP_STYLES, ch.top, v => { ch.top = v; refreshDoll(); });
+    selectCharacterFamily(activeCharacterFamily);
+    refreshCharacter(false);
   }
 
-  function swatchRow(id, colors, current, onPick, label) {
-    const row = document.getElementById(id);
-    row.textContent = '';
-    colors.forEach((hex, i) => {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'll-swatch';
-      b.style.background = hex;
-      b.setAttribute('aria-label', label + ' ' + (i + 1));
-      b.setAttribute('aria-pressed', String(hex === current));
-      b.addEventListener('click', () => {
-        onPick(hex);
-        row.querySelectorAll('.ll-swatch').forEach(x => x.setAttribute('aria-pressed', 'false'));
-        b.setAttribute('aria-pressed', 'true');
+  function selectCharacterFamily(family) {
+    if (!CHARACTER_FAMILIES[family]) return;
+    activeCharacterFamily = family;
+    document.querySelectorAll('#characterTabs [data-family]').forEach(tab => {
+      const selected = tab.dataset.family === family;
+      tab.setAttribute('aria-selected', String(selected));
+      tab.classList.toggle('vp-button--selected', selected);
+      if (selected) document.getElementById('characterOptions').setAttribute('aria-labelledby', tab.id);
+    });
+    const info = CHARACTER_FAMILIES[family];
+    document.getElementById('characterFamilyLabel').textContent = 'Vel ' + info.label.toLowerCase();
+    const options = document.getElementById('characterOptions');
+    options.setAttribute('aria-label', 'Val for ' + info.label.toLowerCase());
+    renderCharacterOptions();
+  }
+
+  function renderCharacterOptions() {
+    const family = activeCharacterFamily;
+    const options = document.getElementById('characterOptions');
+    if (!options || !LL.artCharacter.ready()) return;
+    options.textContent = '';
+    const character = LL.state.get().character;
+    LL.artCharacter.labels[family].forEach((label, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'vp-button vp-button--quiet ll-character-option';
+      button.setAttribute('aria-pressed', String(Number(character[family]) === index));
+      button.setAttribute('aria-label', CHARACTER_FAMILIES[family].label + ': ' + label);
+      const previewCharacter = Object.assign({}, character, { [family]: index });
+      const thumb = LL.artCharacter.createCanvas(previewCharacter, {
+        className: 'll-character-thumb', label: '', width: 96, height: 144
       });
-      row.appendChild(b);
+      thumb.removeAttribute('role');
+      thumb.setAttribute('aria-hidden', 'true');
+      const text = document.createElement('span');
+      text.textContent = label;
+      button.append(thumb, text);
+      button.addEventListener('click', () => {
+        LL.state.get().character[family] = index;
+        refreshCharacter();
+      });
+      options.appendChild(button);
     });
   }
 
-  function variantRow(id, styles, current, onPick) {
-    const row = document.getElementById(id);
-    row.textContent = '';
-    styles.forEach(s => {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'btn';
-      b.textContent = s.label;
-      b.setAttribute('aria-pressed', String(s.id === current));
-      b.addEventListener('click', () => {
-        onPick(s.id);
-        row.querySelectorAll('.btn').forEach(x => x.setAttribute('aria-pressed', 'false'));
-        b.setAttribute('aria-pressed', 'true');
-      });
-      row.appendChild(b);
+  function randomCharacter() {
+    const character = LL.state.get().character;
+    Object.keys(CHARACTER_FAMILIES).forEach(family => {
+      character[family] = LL.state.drawInt(0, LL.artCharacter.labels[family].length - 1);
     });
+    refreshCharacter();
   }
 
   // ── Steg 2: familie (trekt) ──
@@ -199,7 +224,7 @@ LL.uiSetup = (function () {
     LL.data.getPrograms().forEach(p => {
       const card = document.createElement('button');
       card.type = 'button';
-      card.className = 'll-line-card';
+      card.className = 'vp-button vp-button--quiet ll-line-card';
       card.setAttribute('aria-pressed', String(chosen && chosen.id === p.id));
 
       const type = document.createElement('span');
@@ -267,7 +292,7 @@ LL.uiSetup = (function () {
   function housingCard(id, title, desc, current) {
     const c = document.createElement('button');
     c.type = 'button';
-    c.className = 'll-housing-card';
+    c.className = 'vp-button vp-button--quiet ll-housing-card';
     c.setAttribute('aria-pressed', String(id === current));
     const h = document.createElement('h4'); h.textContent = title;
     const p = document.createElement('p'); p.textContent = desc;
@@ -295,7 +320,11 @@ LL.uiSetup = (function () {
     const cont = document.getElementById('startContinue');
     if (cont) cont.addEventListener('click', () => {
       const saved = LL.storage.loadActive();
-      if (saved) { LL.state.load(saved); LL.main.enterHome(); }
+      if (saved) {
+        LL.state.load(saved);
+        LL.storage.saveActive(LL.state.get());
+        LL.main.enterHome();
+      }
     });
     document.getElementById('btnInfo').addEventListener('click', showInfo);
     const impBtn = document.getElementById('btnImport');
@@ -305,11 +334,15 @@ LL.uiSetup = (function () {
       impFile.addEventListener('change', () => {
         if (!impFile.files.length) return;
         LL.storage.importSave(impFile.files[0])
-          .then(obj => { LL.state.load(obj); LL.storage.saveActive(obj); LL.main.enterHome(); LL.main.toast('Livslinje importert.'); })
+          .then(obj => { LL.state.load(obj); LL.storage.saveActive(LL.state.get()); LL.main.enterHome(); LL.main.toast('Livslinje importert.'); })
           .catch(err => LL.main.toast(err.message));
         impFile.value = '';
       });
     }
+    document.querySelectorAll('#characterTabs [data-family]').forEach(tab => {
+      tab.addEventListener('click', () => selectCharacterFamily(tab.dataset.family));
+    });
+    document.getElementById('randomCharacter').addEventListener('click', randomCharacter);
     document.getElementById('wizNext').addEventListener('click', goNext);
     document.getElementById('wizBack').addEventListener('click', goBack);
     const reroll = document.getElementById('familyReroll');

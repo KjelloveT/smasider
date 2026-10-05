@@ -1,13 +1,14 @@
 {
   "app": "livslina",
   "version": 1,
-  "updated": "2026-07-05",
+  "updated": "2026-10-05",
   "_schema": {
-    "note": "Hendingskort for fase 1. Kvart kort: id, title, text, art (vignett-nøkkel), when (vilkår), weight, once, positive, forced, kind. Val: choices[] med label, effects og note.",
+    "note": "Hendingskort for fase 1. Kvart kort: id, title, text, art (vignett-nøkkel), focus, when (vilkår), weight, once, positive, forced, kind. Val: choices[] med label, effects og note.",
     "when": "moped(bool), noMoped(bool), housing('hybel'), programType('yrkesfag'|'studieforberedande'), flag(str), notFlag(str), minAge(int), overFrikort(bool)",
     "kind": "'term' (skulehalvår) eller 'summer' (sommar-mellomspel). Standard: term.",
-    "forced": "true = alltid vist når vilkåra er oppfylte (styrt kort). Utan forced: trekt tilfeldig etter weight.",
-    "effects": "cost/gain (direkte kr), costKey/gainKey (nøkkel i grunndata.json), wellbeing/energy/grades (delta), flags({k:v}), possessions({k:v}), wageHoursGain (timar × gjeldande timeløn), insuranceApplies(bool)"
+    "focus": "Kort merkelapp for økonomi, trivsel, overskot eller skulearbeid.",
+    "forced": "true = alltid vist når vilkåra er oppfylte (styrt særhending). Andre valkort blir trekte til spelaren har 4–5 avgjerder per skulehalvår.",
+    "effects": "cost/gain (direkte kr), costKey/gainKey (nøkkel i grunndata.json), costFromSavings, gainToSavings, savingsToMoney, wellbeing/energy/grades (delta), flags({k:v}), possessions({k:v}), wageHoursGain (timar × gjeldande timeløn), insuranceApplies(bool)"
   },
   "events": [
     {
@@ -15,6 +16,7 @@
       "title": "Uff då!",
       "text": "Mobilen glapp ut av lomma på veg av bussen. Skjermen ser ut som eit edderkoppnett.",
       "art": "phone",
+      "focus": "Økonomi og trivsel",
       "when": {},
       "weight": 3,
       "positive": false,
@@ -29,6 +31,7 @@
       "title": "Skjermforsikring?",
       "text": "I butikken spør dei om du vil ha skjermforsikring på mobilen. Nokre kroner i månaden mot uhell.",
       "art": "shield",
+      "focus": "Økonomi",
       "when": { "rounds": ["vg1h", "vg1v"], "notFlag": "phoneInsurance" },
       "weight": 2,
       "positive": true,
@@ -42,6 +45,7 @@
       "title": "Sykkelen er borte",
       "text": "Du kjem ut frå skulen og sykkelstativet er tomt. Låsen ligg klipt på bakken.",
       "art": "warning",
+      "focus": "Økonomi og trivsel",
       "when": { "noMoped": true },
       "weight": 2,
       "positive": false,
@@ -55,6 +59,7 @@
       "title": "Klassetur",
       "text": "Klassen skal på tur, og det er ein eigendel som må betalast innan fristen.",
       "art": "bus",
+      "focus": "Økonomi og trivsel",
       "when": { "rounds": ["vg1v", "vg2h"] },
       "weight": 2,
       "once": true,
@@ -69,6 +74,7 @@
       "title": "Kaffi i tastaturet",
       "text": "Ein kopp velta rett over PC-en midt i ei innlevering. Han slår seg ikkje på.",
       "art": "laptop",
+      "focus": "Økonomi og trivsel",
       "when": {},
       "weight": 2,
       "positive": false,
@@ -82,11 +88,13 @@
       "title": "Kontroll ved skulen",
       "text": "Politiet står med laser i 40-sona utanfor skulen. Du låg litt over.",
       "art": "warning",
+      "focus": "Økonomi",
       "when": { "moped": true },
       "weight": 2,
       "positive": false,
       "choices": [
-        { "label": "Betal forelegget", "effects": { "costKey": "events.speedingFineMoped", "wellbeing": -2 } }
+        { "label": "Betal frå brukskontoen", "effects": { "costKey": "events.speedingFineMoped", "wellbeing": -2 } },
+        { "label": "Bruk av sparepengane", "effects": { "costKey": "events.speedingFineMoped", "costFromSavings": true, "wellbeing": -2 } }
       ]
     },
     {
@@ -94,12 +102,14 @@
       "title": "Trimminga avslørt",
       "text": "Same kontrollen sjekkar mopeden på rulle. Han går altfor fort — og det er ulovleg.",
       "art": "warning",
+      "focus": "Økonomi og trivsel",
       "when": { "flag": "mopedTrimmed" },
       "weight": 3,
       "once": true,
       "positive": false,
       "choices": [
-        { "label": "Ta konsekvensen", "effects": { "costKey": "events.trimmedMopedFine", "wellbeing": -6, "flags": { "mistaForarbevis": true } }, "note": "Forelegg + mister førarbeviset i tre månader." }
+        { "label": "Betal frå brukskontoen", "effects": { "costKey": "events.trimmedMopedFine", "wellbeing": -6, "flags": { "mistaForarbevis": true } }, "note": "Forelegg + mister førarbeviset i tre månader." },
+        { "label": "Bruk av sparepengane", "effects": { "costKey": "events.trimmedMopedFine", "costFromSavings": true, "wellbeing": -6, "flags": { "mistaForarbevis": true } }, "note": "Forelegg + mister førarbeviset i tre månader. Sparebufferen blir mindre." }
       ]
     },
     {
@@ -107,6 +117,7 @@
       "title": "Julehjelp søkjast",
       "text": "Butikken treng ekstrahjelp i julestria. Vil du ta nokre vakter ved sida av skulen?",
       "art": "coins",
+      "focus": "Økonomi og overskot",
       "when": { "rounds": ["vg1h", "vg2h", "vg3h"] },
       "weight": 2,
       "positive": true,
@@ -120,6 +131,7 @@
       "title": "Alle skal på konsert",
       "text": "Heile gjengen skal på konsert i helga. Billettane er ikkje gratis.",
       "art": "star",
+      "focus": "Økonomi og trivsel",
       "when": {},
       "weight": 2,
       "positive": true,
@@ -133,11 +145,13 @@
       "title": "Pengegåve",
       "text": "Bestemor gav deg pengar til bursdagen med ei lapp: «Kjøp deg noko fint — eller spar!»",
       "art": "gift",
+      "focus": "Økonomi",
       "when": {},
       "weight": 2,
       "positive": true,
       "choices": [
-        { "label": "Takk så mykje!", "effects": { "gain": 1000, "wellbeing": 2 } }
+        { "label": "Bruk gåva på noko kjekt", "effects": { "gain": 1000, "wellbeing": 2 } },
+        { "label": "Set gåva på sparekontoen", "effects": { "gainToSavings": 1000 }, "note": "Du får litt meir buffer til seinare." }
       ]
     },
     {
@@ -145,12 +159,14 @@
       "title": "Skatteoppgjeret",
       "text": "Du fekk skattemelding i posten. Du har betalt litt for mykje skatt i fjor og får att pengar.",
       "art": "coins",
+      "focus": "Økonomi",
       "when": { "overFrikort": true },
       "weight": 2,
       "once": true,
       "positive": true,
       "choices": [
-        { "label": "Fint!", "effects": { "gain": 1800 }, "note": "Difor lønner det seg å sjekke skattekortet." }
+        { "label": "Bruk pengane på det du treng", "effects": { "gain": 1800 }, "note": "Difor lønner det seg å sjekke skattekortet." },
+        { "label": "Set pengane på sparekontoen", "effects": { "gainToSavings": 1800 }, "note": "Difor lønner det seg å sjekke skattekortet." }
       ]
     },
     {
@@ -158,13 +174,15 @@
       "title": "Depositum",
       "text": "Utleigaren krev tre månaders husleige i depositum før du får nøklane.",
       "art": "home",
+      "focus": "Økonomi",
       "when": { "housing": "hybel" },
       "weight": 5,
       "once": true,
       "forced": true,
       "positive": false,
       "choices": [
-        { "label": "Betal depositum", "effects": { "cost": 6000, "flags": { "depositumBetalt": true } }, "note": "Du får det att når du flyttar — men det er bunde no." }
+        { "label": "Betal frå brukskontoen", "effects": { "cost": 6000, "flags": { "depositumBetalt": true } }, "note": "Du får det att når du flyttar — men det er bunde no." },
+        { "label": "Bruk av sparebufferen", "effects": { "cost": 6000, "costFromSavings": true, "flags": { "depositumBetalt": true } }, "note": "Du får det att når du flyttar. Sparebufferen blir bunden i depositumet." }
       ]
     },
     {
@@ -172,12 +190,14 @@
       "title": "Søknadsfristen",
       "text": "Du oppdagar at du var seint ute med stipendsøknaden. Første utbetaling blir forseinka ein månad.",
       "art": "warning",
+      "focus": "Økonomi og trivsel",
       "when": { "housing": "hybel", "notFlag": "depositumBetalt" },
       "weight": 1,
       "once": true,
       "positive": false,
       "choices": [
-        { "label": "Å nei…", "effects": { "wellbeing": -3 }, "note": "Har du buffer, går det fint. Har du ikkje, blir det ein trong månad." }
+        { "label": "Stram inn og vent på utbetalinga", "effects": { "wellbeing": -3 }, "note": "Har du buffer, går det fint. Har du ikkje, blir det ein trong månad." },
+        { "label": "Flytt pengar frå sparekontoen", "effects": { "savingsToMoney": 3000 }, "note": "Du brukar av bufferen for å få meir på brukskontoen no." }
       ]
     },
     {
@@ -185,6 +205,7 @@
       "title": "Russebuss?",
       "text": "Gjengen planlegg russebuss allereie no. Skal du bli med på prosjektet? Det kostar mykje, men blir bygd opp over lang tid.",
       "art": "bus",
+      "focus": "Økonomi og trivsel",
       "when": { "rounds": ["vg2h"], "programType": "studieforberedande" },
       "weight": 5,
       "once": true,
@@ -201,13 +222,15 @@
       "title": "Bussen sprekk på budsjett",
       "text": "Russebussen kosta meir enn planlagt. Alle må ut med ein ekstra andel.",
       "art": "bus",
+      "focus": "Økonomi og trivsel",
       "when": { "flag": "russBuss", "rounds": ["vg3h"] },
       "weight": 5,
       "once": true,
       "forced": true,
       "positive": false,
       "choices": [
-        { "label": "Betal andelen", "effects": { "cost": 8000, "wellbeing": -2 }, "note": "Ei forplikting bind — det er ingen veg ut no." }
+        { "label": "Betal ekstrandelen", "effects": { "cost": 8000, "wellbeing": -2 }, "note": "Det held deg med i russebussprosjektet." },
+        { "label": "Trekk deg frå prosjektet", "effects": { "cost": 2500, "wellbeing": -7, "flags": { "russBuss": false, "russBussLeft": true } }, "note": "Du mistar pengar du alt har betalt inn, men slepp den nye ekstrandelen." }
       ]
     },
     {
@@ -215,6 +238,7 @@
       "title": "Intervju til læreplass",
       "text": "Du er kalla inn til intervju for ein læreplass. Slik sikrar du lærlingløn og fagbrev.",
       "art": "star",
+      "focus": "Trivsel og framtid",
       "when": { "programType": "yrkesfag", "rounds": ["vg3h"] },
       "weight": 5,
       "once": true,
@@ -230,6 +254,7 @@
       "title": "Trekt ut i munnleg",
       "text": "Du er trekt ut til munnleg eksamen. Kor mykje vil du satse på lesinga?",
       "art": "book",
+      "focus": "Trivsel og skulearbeid",
       "when": { "rounds": ["vg3v"] },
       "weight": 5,
       "once": true,
@@ -245,13 +270,183 @@
       "title": "Første tannlegerekning",
       "text": "Du fyller 19 og er ikkje lenger dekt av gratis tannhelse. Ein kontroll med eitt hòl må fiksast.",
       "art": "warning",
+      "focus": "Økonomi",
       "when": { "rounds": ["vg3v"], "minAge": 19 },
       "weight": 4,
       "once": true,
       "forced": true,
       "positive": false,
       "choices": [
-        { "label": "Betal rekninga", "effects": { "costKey": "events.dentistYoungAdult" }, "note": "Gratis-ordninga tek slutt — no må du betale sjølv." }
+        { "label": "Betal frå brukskontoen", "effects": { "costKey": "events.dentistYoungAdult" }, "note": "Gratis-ordninga tek slutt — no må du betale sjølv." },
+        { "label": "Betal frå sparepengane", "effects": { "costKey": "events.dentistYoungAdult", "costFromSavings": true }, "note": "Du slepp å ta like mykje frå pengane du brukar til vanleg." }
+      ]
+    },
+    {
+      "id": "skuleutstyr-vg1h",
+      "title": "Utstyr til skulestart",
+      "text": "Du manglar kalkulator og noko grunnleggjande skulemateriell. Skulen har ei låneordning, men eige utstyr er meir praktisk.",
+      "art": "book",
+      "focus": "Økonomi",
+      "when": { "rounds": ["vg1h"] },
+      "weight": 3,
+      "once": true,
+      "choices": [
+        { "label": "Kjøp brukt utstyr", "effects": { "costKey": "events.schoolMaterials" }, "note": "Utstyret er ditt, men det tek ein del av startkapitalen." },
+        { "label": "Lån det du treng", "effects": { "wellbeing": -1 }, "note": "Du sparar pengar, men må planleggje utlånet og levere utstyret tilbake." }
+      ]
+    },
+    {
+      "id": "klassekveld-vg1h",
+      "title": "Klassekveld",
+      "text": "Nokre i klassen vil møtast etter skuletid. Dei foreslår mat ute, men det går òg an å finne på noko billegare saman.",
+      "art": "star",
+      "focus": "Økonomi og trivsel",
+      "when": { "rounds": ["vg1h"] },
+      "weight": 2,
+      "once": true,
+      "choices": [
+        { "label": "Bli med og kjøp mat", "effects": { "costKey": "events.classMeal", "wellbeing": 5 } },
+        { "label": "Foreslå ein billegare møteplass", "effects": { "wellbeing": 3 }, "note": "De får vere saman utan at det kostar så mykje." }
+      ]
+    },
+    {
+      "id": "ekstravakt-vg1v",
+      "title": "Ekstra vakt før ferien",
+      "text": "Arbeidsgivaren spør om du kan ta ei ekstra helgevakt i ein travel periode på skulen.",
+      "art": "coins",
+      "focus": "Økonomi og overskot",
+      "when": { "rounds": ["vg1v"] },
+      "weight": 3,
+      "once": true,
+      "choices": [
+        { "label": "Ta vakta (16 timar)", "effects": { "wageHoursGain": 16, "energy": -6 } },
+        { "label": "Takk nei og hald av helga", "effects": { "wellbeing": 3, "energy": 2 }, "note": "Du får meir tid til skulearbeid og kvile." }
+      ]
+    },
+    {
+      "id": "fritidsaktivitet-vg1v",
+      "title": "Ein aktivitet etter skuletid",
+      "text": "Ein ven spør om du vil bli med på ein aktivitet gjennom resten av halvåret. Det kostar litt, men de får noko fast å sjå fram til.",
+      "art": "star",
+      "focus": "Økonomi og trivsel",
+      "when": { "rounds": ["vg1v"] },
+      "weight": 2,
+      "once": true,
+      "choices": [
+        { "label": "Meld deg på", "effects": { "costKey": "events.activityFee", "wellbeing": 6 } },
+        { "label": "Finn på noko gratis saman", "effects": { "wellbeing": 3 }, "note": "Du held på fellesskapet utan kontingenten." }
+      ]
+    },
+    {
+      "id": "arbeidsklede-vg2h",
+      "title": "Klede og utstyr til praksis",
+      "text": "Du får beskjed om å stille med bestemte arbeidsklede og litt eige utstyr. Noko kan lånast, men ikkje alt.",
+      "art": "book",
+      "focus": "Økonomi",
+      "when": { "rounds": ["vg2h"], "programType": "yrkesfag" },
+      "weight": 3,
+      "once": true,
+      "choices": [
+        { "label": "Kjøp brukt og tilpassa utstyr", "effects": { "costKey": "events.workGear" }, "note": "Du har eige utstyr når du treng det." },
+        { "label": "Lån det som finst på skulen", "effects": { "wellbeing": -1 }, "note": "Det kostar mindre, men du må dele og planleggje meir." }
+      ]
+    },
+    {
+      "id": "venepress-vg2h",
+      "title": "Alle skal vere med",
+      "text": "Venene dine planlegg ein kveld som kostar ein del. Du vil gjerne vere med, men har òg andre ting å spare til.",
+      "art": "star",
+      "focus": "Økonomi og trivsel",
+      "when": { "rounds": ["vg2h"] },
+      "weight": 3,
+      "once": true,
+      "choices": [
+        { "label": "Bli med på heile opplegget", "effects": { "costKey": "events.concertTicket", "wellbeing": 6 } },
+        { "label": "Bli med på den rimelege delen", "effects": { "costKey": "events.classMeal", "wellbeing": 4 }, "note": "Du får tid med venene og held att litt pengar." }
+      ]
+    },
+    {
+      "id": "hybelrekning-vg2v",
+      "title": "Rekning i ein travel månad",
+      "text": "Ein ekstra rekning kjem same veka som husleiga. Du kan betale frå brukskontoen eller bruke av bufferen du har spart opp.",
+      "art": "home",
+      "focus": "Økonomi",
+      "when": { "rounds": ["vg2v"], "housing": "hybel" },
+      "weight": 3,
+      "once": true,
+      "choices": [
+        { "label": "Betal frå brukskontoen", "effects": { "cost": 900 } },
+        { "label": "Bruk av sparepengane", "effects": { "cost": 900, "costFromSavings": true }, "note": "Du held brukskontoen meir stabil, men bufferen blir mindre." }
+      ]
+    },
+    {
+      "id": "jobbpress-vg2v",
+      "title": "Fleire vakter eller meir fritid?",
+      "text": "Du får tilbod om fleire vakter i ei periode med prøvar og andre avtalar.",
+      "art": "coins",
+      "focus": "Økonomi og overskot",
+      "when": { "rounds": ["vg2v"] },
+      "weight": 3,
+      "once": true,
+      "choices": [
+        { "label": "Ta vaktene (20 timar)", "effects": { "wageHoursGain": 20, "energy": -7 } },
+        { "label": "Hald på den vanlege arbeidsmengda", "effects": { "wellbeing": 3, "energy": 2 } }
+      ]
+    },
+    {
+      "id": "eksamensmateriell-vg3h",
+      "title": "Ekstra førebuingsmateriell",
+      "text": "Du finn ei samling med oppgåver som kan vere nyttig før eksamen. Læraren har òg tips til gratis ressursar.",
+      "art": "book",
+      "focus": "Økonomi og skulearbeid",
+      "when": { "rounds": ["vg3h"] },
+      "weight": 2,
+      "once": true,
+      "choices": [
+        { "label": "Kjøp oppgåvesamlinga", "effects": { "costKey": "events.studyMaterials", "grades": 0.1 } },
+        { "label": "Bruk ressursane frå skulen", "effects": { "wellbeing": 1 }, "note": "Du sparar pengar og lagar ein plan saman med læraren." }
+      ]
+    },
+    {
+      "id": "framtidsplan-vg3h",
+      "title": "Kva skjer etter vidaregåande?",
+      "text": "Ein ven vil at du skal bestemme deg med ein gong. Du kan bruke tid på å undersøkje moglegheitene, eller vente til du veit meir.",
+      "art": "star",
+      "focus": "Trivsel og framtid",
+      "when": { "rounds": ["vg3h"] },
+      "weight": 3,
+      "once": true,
+      "choices": [
+        { "label": "Set av tid til å undersøkje vala", "effects": { "energy": -2, "flags": { "framtidsplanStarta": true } }, "note": "Du får oversikt over studium, læreplass eller jobb." },
+        { "label": "Ta det steg for steg", "effects": { "wellbeing": 2 }, "note": "Du treng ikkje ha alle svara enno." }
+      ]
+    },
+    {
+      "id": "avslutningskveld-vg3v",
+      "title": "Avslutning med klassen",
+      "text": "Klassen vil markere at vidaregåande er over. Det finst både eit større opplegg og ein enklare kveld de kan lage saman.",
+      "art": "star",
+      "focus": "Økonomi og trivsel",
+      "when": { "rounds": ["vg3v"] },
+      "weight": 3,
+      "once": true,
+      "choices": [
+        { "label": "Bli med på det store opplegget", "effects": { "costKey": "events.concertTicket", "wellbeing": 7 } },
+        { "label": "Vel den enkle felleskvelden", "effects": { "costKey": "events.graduationShare", "wellbeing": 5 } }
+      ]
+    },
+    {
+      "id": "eksamensbalanse-vg3v",
+      "title": "Den siste innspurten",
+      "text": "Det er mykje å lese før eksamen, og venene dine spør om du kan hjelpe til med eit arrangement same helga.",
+      "art": "book",
+      "focus": "Trivsel og skulearbeid",
+      "when": { "rounds": ["vg3v"] },
+      "weight": 3,
+      "once": true,
+      "choices": [
+        { "label": "Bruk helga på førebuing", "effects": { "energy": -5, "grades": 0.1 } },
+        { "label": "Del tida mellom lesing og vener", "effects": { "wellbeing": 4, "grades": -0.05 } }
       ]
     }
   ],
@@ -269,6 +464,22 @@
       "choices": [
         { "label": "Ta vaktene (40 t)", "effects": { "wageHoursGain": 40, "energy": -10 } },
         { "label": "Nyt sommaren i staden", "effects": { "wellbeing": 4 } }
+      ]
+    },
+    {
+      "id": "sommarjobb-vg2",
+      "title": "Ein sommar med fleire moglegheiter",
+      "text": "Etter VG2 får du tilbod om arbeid i ein travel periode. Du kan tene meir, men det er òg siste lange ferie før avslutninga i VG3.",
+      "art": "coins",
+      "focus": "Økonomi og overskot",
+      "kind": "summer",
+      "when": { "rounds": ["sum2"] },
+      "weight": 3,
+      "once": true,
+      "positive": true,
+      "choices": [
+        { "label": "Ta nokre ekstra vakter (40 timar)", "effects": { "wageHoursGain": 40, "energy": -8 } },
+        { "label": "Ta fri og lad opp", "effects": { "wellbeing": 4, "energy": 6 } }
       ]
     }
   ]

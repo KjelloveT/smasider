@@ -11,11 +11,20 @@ LL.uiSummer = (function () {
 
   function open() {
     const s = LL.state.get();
-    s.age = LL.state.currentRound().age;
+    const round = LL.state.currentRound();
+    s.age = round.age;
     weeks = 3;
     renderOptions();
     LL.main.showScreen('screen-summer');
-    document.getElementById('summerRound').textContent = LL.state.currentRound().label;
+    document.getElementById('summerRound').textContent = round.label;
+    document.getElementById('summerContext').textContent =
+      'Skulefri etter skuleåret i VG' + round.schoolYear + '. Vel mellom sommarjobb og kvile.';
+    const completedTerms = LL.state.rounds().slice(0, LL.state.get().roundIndex)
+      .filter(item => item.kind === 'term').length;
+    const nextRound = LL.state.rounds()[LL.state.get().roundIndex + 1];
+    document.getElementById('summerProgress').textContent = nextRound
+      ? completedTerms + ' av 6 skulehalvår er fullførte. Etter sommaren kjem ' + nextRound.label + '.'
+      : 'Du er ved slutten av VG3.';
     LL.util.hydrate(document.getElementById('screen-summer'));
   }
 
@@ -25,7 +34,7 @@ LL.uiSummer = (function () {
     row.textContent = '';
     opts.forEach(w => {
       const b = document.createElement('button');
-      b.type = 'button'; b.className = 'btn';
+      b.type = 'button'; b.className = 'vp-button vp-button--tool';
       b.textContent = w === 0 ? 'Fri heile sommaren' : w + ' veker jobb';
       b.setAttribute('aria-pressed', String(w === weeks));
       b.addEventListener('click', () => { weeks = w; renderOptions(); });

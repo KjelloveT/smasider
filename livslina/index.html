@@ -3,51 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Livslina</title>
+<title>Livslina — val gjennom vidaregåande</title>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+<link rel="stylesheet" href="css/style.css">
   <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-layout="expanded" data-vp-site-footer>
+<body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-layout="medium" data-vp-site-footer>
 
 <div class="page-wrapper">
-<main class="main-content">
+<main class="vp-shell main-content" id="main">
+  <p class="vp-game-description">Eit spel om økonomi, skulekvardag og vala du tek gjennom vidaregåande.</p>
 
-  <p id="bootError" class="box1" hidden style="color:var(--accent2);font-weight:700;">
+  <p id="bootError" class="vp-panel vp-panel--plain ll-boot-error" role="alert" hidden>
     Klarte ikkje laste speldata. Sjekk at du opnar sida via ein tenar (ikkje som fil).
   </p>
+  <p id="bootStatus" class="vp-notice ll-boot-status" role="status" aria-live="polite">Lastar Livslina …</p>
 
   <!-- ══════════ START ══════════ -->
   <section id="screen-start" class="screen active">
-    <div class="box2 hero-box">
-      <div class="hero-text">
-        <h1>Livslina</h1>
-        <p>Eit økonomispel om vala du tek. Start etter ungdomsskulen, vel veg gjennom vidaregåande, og sjå kva vala gjer med økonomien, trivselen og framtida di. Realistiske norske tal — nøktern, men med glimt i auget.</p>
+    <div class="vp-hero-stage ll-start-hero">
+      <div class="vp-hero">
+        <div class="vp-hero-content">
+          <div class="vp-hero-copy">
+            <h1 class="vp-title">Livslina</h1>
+            <p>Start på VG1, ta val gjennom seks skulehalvår og to somrar, og sjå korleis økonomi, energi og trivsel heng saman. Det finst fleire gode måtar å leve vidaregåande på.</p>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="ll-start-actions">
-      <button class="btn btn-primary" id="btnNewGame" type="button">
+      <button class="vp-button vp-button--primary vp-button--large" id="btnNewGame" type="button" disabled>
         <span data-icon="play"></span> Ny livslinje
       </button>
-      <button class="btn" id="startContinue" type="button" hidden>
+      <button class="vp-button vp-button--tool" id="startContinue" type="button" hidden disabled>
         <span data-icon="rotateCcw"></span> Hald fram
       </button>
-      <button class="btn" id="btnImport" type="button">
+      <button class="vp-button vp-button--tool" id="btnImport" type="button" disabled>
         <span data-icon="fileUp"></span> Importer
       </button>
-      <button class="btn" id="btnInfo" type="button">
+      <button class="vp-button vp-button--quiet" id="btnInfo" type="button" disabled>
         <span data-icon="helpCircle"></span> Om tala
       </button>
       <input type="file" id="importFile" accept="application/json" hidden>
     </div>
 
-    <p class="ll-sources">
-      Fase 1 av fleire: vidaregåande (16–19 år). Fleire livsfasar kjem seinare.
-    </p>
+    <p class="ll-sources">Første del: vidaregåande frå 16 til 19 år.</p>
   </section>
 
   <!-- ══════════ OPPSTART (wizard) ══════════ -->
@@ -55,28 +59,36 @@
     <div id="wizardSteps" class="ll-wizard-steps"></div>
 
     <!-- Steg 1: karakter -->
-    <div id="wpanel-character" class="ll-wizard-panel box1">
+    <div id="wpanel-character" class="ll-wizard-panel vp-panel vp-panel--plain">
       <h2 class="heading3 no-mt">Lag figuren din</h2>
-      <div class="ll-doll-wrap">
-        <div class="ll-doll-stage" id="dollStage"></div>
-        <div>
-          <fieldset class="ll-ctrl"><legend>Hudtone</legend><div class="ll-swatch-row" id="skinRow" role="group"></div></fieldset>
-          <fieldset class="ll-ctrl"><legend>Frisyre</legend><div class="ll-btn-row" id="hairStyleRow" role="group"></div></fieldset>
-          <fieldset class="ll-ctrl"><legend>Hårfarge</legend><div class="ll-swatch-row" id="hairRow" role="group"></div></fieldset>
-          <fieldset class="ll-ctrl"><legend>Overdel</legend><div class="ll-btn-row" id="topStyleRow" role="group"></div></fieldset>
-          <fieldset class="ll-ctrl"><legend>Farge på overdel</legend><div class="ll-swatch-row" id="topRow" role="group"></div></fieldset>
+      <p>Set saman ein figur som liknar deg, eller prøv deg fram. Alle val er gratis.</p>
+      <div class="ll-character-builder">
+        <div class="ll-character-preview">
+          <div class="ll-doll-stage" id="dollStage"></div>
+          <p id="characterSummary" class="ll-note" aria-live="polite"></p>
+          <button class="vp-button vp-button--quiet" id="randomCharacter" type="button"><span data-icon="shuffle"></span> Trekk ein figur</button>
+        </div>
+        <div class="ll-character-picker">
+          <div class="ll-character-tabs" id="characterTabs" role="tablist" aria-label="Vel kva du vil endre">
+            <button class="vp-button vp-button--compact" id="character-tab-skin" type="button" role="tab" data-family="skin" aria-controls="characterOptions" aria-selected="true">Hud</button>
+            <button class="vp-button vp-button--compact" id="character-tab-face" type="button" role="tab" data-family="face" aria-controls="characterOptions" aria-selected="false">Andlet</button>
+            <button class="vp-button vp-button--compact" id="character-tab-hair" type="button" role="tab" data-family="hair" aria-controls="characterOptions" aria-selected="false">Hår</button>
+            <button class="vp-button vp-button--compact" id="character-tab-clothes" type="button" role="tab" data-family="clothes" aria-controls="characterOptions" aria-selected="false">Klede</button>
+          </div>
+          <p id="characterFamilyLabel" class="ll-note" aria-live="polite">Vel hudtone</p>
+          <div class="ll-character-options" id="characterOptions" role="tabpanel" aria-labelledby="character-tab-skin" aria-label="Val for hudtone"></div>
         </div>
       </div>
     </div>
 
     <!-- Steg 2: familie -->
-    <div id="wpanel-family" class="ll-wizard-panel box1">
+    <div id="wpanel-family" class="ll-wizard-panel vp-panel vp-panel--plain">
       <h2 class="heading3 no-mt">Familieøkonomien din</h2>
       <p>Kva slags heim du veks opp i, er ikkje noko du vel — det blir trekt. Det formar startpunktet, ikkje slutten.</p>
       <div class="ll-family-reveal">
-        <div class="ll-family-card" id="familyCard"></div>
+        <div class="vp-panel vp-panel--plain ll-family-card" id="familyCard"></div>
         <div>
-          <button class="btn ll-reroll" id="familyReroll" type="button">
+          <button class="vp-button vp-button--tool ll-reroll" id="familyReroll" type="button">
             <span data-icon="shuffle"></span> Trekk på nytt
           </button>
         </div>
@@ -84,63 +96,106 @@
     </div>
 
     <!-- Steg 3: linje -->
-    <div id="wpanel-line" class="ll-wizard-panel box1">
+    <div id="wpanel-line" class="ll-wizard-panel vp-panel vp-panel--plain">
       <h2 class="heading3 no-mt">Vel utdanningsprogram</h2>
       <p>Alle 15 programma på vidaregåande. Linja formar utstyrsstipend, kvardag og kva du kan bli — men ingen av dei er «feil».</p>
       <div class="ll-line-grid" id="lineGrid"></div>
     </div>
 
     <!-- Steg 4: busituasjon -->
-    <div id="wpanel-housing" class="ll-wizard-panel box1">
+    <div id="wpanel-housing" class="ll-wizard-panel vp-panel vp-panel--plain">
       <h2 class="heading3 no-mt">Kvar skal du bu?</h2>
       <div id="housingBody"></div>
     </div>
 
     <div class="ll-wizard-nav">
-      <button class="btn" id="wizBack" type="button"><span data-icon="arrowLeft"></span> Tilbake</button>
-      <button class="btn btn-primary" id="wizNext" type="button">Neste <span data-icon="arrowRight"></span></button>
+      <button class="vp-button vp-button--quiet" id="wizBack" type="button"><span data-icon="arrowLeft"></span> Tilbake</button>
+      <button class="vp-button vp-button--primary" id="wizNext" type="button">Neste <span data-icon="arrowRight"></span></button>
     </div>
   </section>
 
   <!-- ══════════ HEIMEN ══════════ -->
   <section id="screen-home" class="screen">
-    <div id="homeTimeline" class="ll-timeline"></div>
+    <section class="ll-timeline-section" aria-label="Framdrift gjennom vidaregåande">
+      <h3 class="heading4 no-mt">Tidslinja di</h3>
+      <p id="homeTimelineSummary" class="ll-timeline-summary ll-note"></p>
+      <div id="homeTimeline" class="ll-timeline" role="list" aria-label="Dei seks skulehalvåra og sommarpausane"></div>
+    </section>
 
-    <div class="box2">
+    <div class="vp-panel vp-panel--soft ll-home-overview">
       <div class="ll-home-grid">
         <div>
           <h2 class="heading3 no-mt" id="homeRoundLabel">VG1 haust</h2>
           <p id="homeProgram" class="ll-note"></p>
           <div id="homeStats" class="ll-stats"></div>
-          <button class="btn btn-primary" id="btnPlan" type="button">Planlegg halvåret <span data-icon="arrowRight"></span></button>
+          <button class="vp-button vp-button--primary" id="btnPlan" type="button">Planlegg halvåret <span data-icon="arrowRight"></span></button>
         </div>
         <div class="ll-home-figure" id="homeFigure"></div>
       </div>
     </div>
 
-    <div class="box1 ll-diorama-box">
-      <h3 class="heading4 no-mt"><span data-icon="home"></span> Rommet ditt</h3>
+    <div class="vp-panel vp-panel--plain ll-diorama-box">
+      <div class="ll-section-heading">
+        <div><p class="ll-eyebrow">Heimen din</p><h3 class="heading4 no-mt">Rommet ditt</h3></div>
+        <button class="vp-button vp-button--tool" id="btnRoomShop" type="button"><span data-icon="armchair"></span> Opne rombutikken</button>
+      </div>
       <div id="homeDiorama"></div>
+      <p id="homeRoomEffects" class="ll-note"></p>
     </div>
-
-    <div class="box1" id="homePurchasesBox">
-      <h3 class="heading4 no-mt"><span data-icon="coins"></span> Ting du kan skaffe deg</h3>
+    <div class="vp-panel vp-panel--plain" id="homePurchasesBox">
+      <h3 class="heading4 no-mt">Transport og førarkort</h3>
       <div id="homePurchases" class="ll-purchases"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ SOVEROM OG BUTIKK ══════════ -->
+  <section id="screen-room" class="screen" aria-labelledby="roomTitle">
+    <div class="ll-screen-heading">
+      <div><p class="ll-eyebrow">Rommet ditt</p><h2 class="heading2 no-mt" id="roomTitle">Soverom og butikk</h2></div>
+      <button class="vp-button vp-button--quiet" id="btnRoomBack" type="button"><span data-icon="arrowLeft"></span> Attende til heimen</button>
+    </div>
+    <div class="ll-room-layout">
+      <section class="vp-panel vp-panel--plain ll-room-stage-panel" aria-labelledby="roomSceneTitle">
+        <h3 class="heading4 no-mt" id="roomSceneTitle">Slik ser rommet ut</h3>
+        <div id="roomDiorama" class="ll-room-scene"></div>
+        <p id="roomEffects" class="ll-room-effects" aria-live="polite"></p>
+        <p class="vp-help">Vel ein ting i butikken for å sjå henne i rommet før du kjøper.</p>
+      </section>
+      <section class="vp-panel vp-panel--soft ll-room-shop" aria-labelledby="shopTitle">
+        <div class="ll-shop-heading">
+          <div><h3 class="heading3 no-mt" id="shopTitle">Rombutikken</h3><p class="ll-note">Saldo: <strong id="roomBalance">0 kr</strong></p><p class="vp-help">Spelprisar og små utslag gjeld berre i Livslina.</p></div>
+        </div>
+        <div class="ll-shop-categories" id="roomCategories" role="tablist" aria-label="Varekategoriar"></div>
+        <p class="ll-note" id="roomCategoryHint"></p>
+        <div class="ll-shop-products" id="roomProducts" role="tabpanel" aria-label="Varer i kategorien"></div>
+        <article class="vp-panel vp-panel--plain ll-selected-product" id="roomSelectedProduct">
+          <p class="ll-eyebrow">Vald vare</p>
+          <h4 id="roomSelectedName"></h4>
+          <p id="roomSelectedDescription" class="ll-note"></p>
+          <p id="roomSelectedEffect" class="ll-effect-line"></p>
+          <div class="ll-product-action-row">
+            <strong id="roomSelectedPrice"></strong>
+            <button class="vp-button vp-button--primary" id="roomAction" type="button"></button>
+          </div>
+        </article>
+        <p id="roomShopStatus" class="ll-note" role="status" aria-live="polite"></p>
+      </section>
     </div>
   </section>
 
   <!-- ══════════ BUDSJETTKORTET ══════════ -->
   <section id="screen-budget" class="screen">
-    <h2 class="heading3 no-mt">Planlegg halvåret</h2>
+    <h2 class="heading3 no-mt" id="budgetRound">Planlegg halvåret</h2>
+    <p id="budgetTimeframe" class="ll-note"></p>
     <div class="ll-budget-grid">
-      <div class="box1">
-        <fieldset class="ll-ctrl"><legend>Jobb ved sida av skulen</legend><div class="ll-btn-row" id="budgetJob" role="group"></div></fieldset>
-        <fieldset class="ll-ctrl"><legend>Forbruksprofil</legend><div class="ll-btn-row" id="budgetProfile" role="group"></div></fieldset>
-        <fieldset class="ll-ctrl"><legend>Fritidsaktivitetar</legend><div class="ll-btn-row" id="budgetActivities" role="group"></div></fieldset>
-        <fieldset class="ll-ctrl"><legend>Fast sparing</legend><div class="ll-btn-row" id="budgetSavings" role="group"></div></fieldset>
+      <div class="vp-panel vp-panel--plain">
+        <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skulen</legend><div class="ll-btn-row" id="budgetJob" role="group"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Forbruksprofil</legend><div class="ll-btn-row" id="budgetProfile" role="group"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Fritidsaktivitetar</legend><div class="ll-btn-row" id="budgetActivities" role="group"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Fast sparing</legend><div class="ll-btn-row" id="budgetSavings" role="group"></div></fieldset>
       </div>
 
-      <div class="box2">
+      <div class="vp-panel vp-panel--soft">
         <h3 class="heading4 no-mt">Månadsbudsjett</h3>
         <div class="ll-budget-cols">
           <div>
@@ -154,7 +209,7 @@
             <div class="ll-budget-row ll-budget-sum"><span>Sum ut</span><strong id="budgetExpenseTotal">0 kr</strong></div>
           </div>
         </div>
-        <div class="ll-stat" style="margin-top:0.75rem;">
+        <div class="vp-panel vp-panel--plain ll-stat ll-stat--net">
           <div class="ll-stat-lbl">Netto per månad</div>
           <div class="ll-stat-val" id="budgetNet">0 kr/mnd</div>
         </div>
@@ -164,18 +219,19 @@
     </div>
 
     <div class="ll-wizard-nav">
-      <button class="btn" id="budgetBack" type="button"><span data-icon="arrowLeft"></span> Tilbake</button>
-      <button class="btn btn-primary" id="budgetRun" type="button">Køyr halvåret <span data-icon="play"></span></button>
+      <button class="vp-button vp-button--quiet" id="budgetBack" type="button"><span data-icon="arrowLeft"></span> Tilbake</button>
+      <button class="vp-button vp-button--primary" id="budgetRun" type="button">Køyr halvåret <span data-icon="play"></span></button>
     </div>
   </section>
 
   <!-- ══════════ AVSPELING ══════════ -->
   <section id="screen-playback" class="screen">
-    <div class="box2">
+    <div class="vp-panel vp-panel--soft">
       <h2 class="heading3 no-mt" id="pbRound">Halvår</h2>
       <div class="ll-pb-grid">
         <div>
           <div class="ll-pb-month" id="pbMonth">—</div>
+          <p class="ll-note" id="pbMonthProgress"></p>
           <div class="ll-pb-balance-lbl ll-stat-lbl"><span data-icon="coins" data-icon-size="15"></span> Konto</div>
           <div class="ll-stat-val ll-pb-balance" id="pbBalance">0 kr</div>
           <div class="ll-pb-ledger" id="pbLedger"></div>
@@ -187,8 +243,9 @@
 
   <!-- ══════════ HALVÅRSOPPGJER ══════════ -->
   <section id="screen-halfyear" class="screen">
-    <div class="box2">
+    <div class="vp-panel vp-panel--soft">
       <h2 class="heading3 no-mt" id="hyRound">Oppgjer</h2>
+      <p id="hyProgress" class="ll-note"></p>
       <div id="hyStats" class="ll-stats"></div>
       <div class="ll-budget-cols">
         <div>
@@ -202,58 +259,60 @@
           <div class="ll-budget-row ll-budget-sum"><span>Sum</span><strong id="hyExpenseTotal">0 kr</strong></div>
         </div>
       </div>
-      <div class="box3 ll-factoid"><span data-icon="sparkles"></span> <span id="hyFactoid"></span></div>
+      <div class="vp-panel vp-panel--inset ll-factoid"><span data-icon="sparkles"></span> <span id="hyFactoid"></span></div>
       <div class="ll-center" style="margin-top:1rem;">
-        <button class="btn btn-primary" id="hyContinue" type="button">Hald fram <span data-icon="arrowRight"></span></button>
+        <button class="vp-button vp-button--primary" id="hyContinue" type="button">Hald fram <span data-icon="arrowRight"></span></button>
       </div>
     </div>
   </section>
 
   <!-- ══════════ SLUTTRAPPORT ══════════ -->
   <section id="screen-final" class="screen">
-    <div class="box2">
+    <div class="vp-panel vp-panel--soft">
       <h2 class="heading2 no-mt"><span data-icon="sparkles"></span> Livslina di</h2>
-      <p>Tre år på vidaregåande er over. Slik gjekk det — og slik kunne det gått annleis.</p>
+      <p id="finalTimelineSummary">Tre år på vidaregåande er over. Slik gjekk det — og slik kunne det gått annleis.</p>
       <div id="finalStats" class="ll-stats"></div>
       <div id="finalDiorama" class="ll-final-diorama"></div>
+      <p id="finalRoomEffect" class="ll-note"></p>
     </div>
 
-    <div class="box1">
+    <div class="vp-panel vp-panel--plain">
       <h3 class="heading4 no-mt"><span data-icon="coins"></span> Formuen din gjennom tre år</h3>
       <div id="finalChart"></div>
     </div>
 
-    <div class="box1">
+    <div class="vp-panel vp-panel--plain">
       <h3 class="heading4 no-mt"><span data-icon="target"></span> Vendepunkta dine</h3>
       <p class="ll-note">Dei vala som betydde mest for økonomien.</p>
       <div id="finalTurning"></div>
     </div>
 
-    <div class="box3 ll-factoid">
+    <div class="vp-panel vp-panel--inset ll-factoid">
       <span data-icon="compass"></span>
       <div><strong>Vegen vidare:</strong> <span id="finalPath"></span></div>
     </div>
 
-    <div class="box1">
+    <div class="vp-panel vp-panel--plain">
       <h3 class="heading4 no-mt"><span data-icon="award"></span> Merke</h3>
       <div id="finalBadges" class="ll-badges"></div>
     </div>
 
     <div class="ll-wizard-nav">
-      <button class="btn" id="finalExport" type="button"><span data-icon="download"></span> Eksporter</button>
-      <button class="btn btn-primary" id="finalAgain" type="button"><span data-icon="rotateCcw"></span> Prøv ein annan veg</button>
+      <button class="vp-button vp-button--tool" id="finalExport" type="button"><span data-icon="download"></span> Eksporter</button>
+      <button class="vp-button vp-button--primary" id="finalAgain" type="button"><span data-icon="rotateCcw"></span> Prøv ein annan veg</button>
     </div>
   </section>
 
   <!-- ══════════ SOMMAR-MELLOMSPEL ══════════ -->
   <section id="screen-summer" class="screen">
-    <div class="box2">
+    <div class="vp-panel vp-panel--soft">
       <h2 class="heading3 no-mt"><span data-icon="sun"></span> <span id="summerRound">Sommar</span></h2>
-      <p>Skulefri! Vil du jobbe og tene pengar, eller ta fri og lade batteria?</p>
-      <fieldset class="ll-ctrl"><legend>Sommarjobb</legend><div class="ll-btn-row" id="summerWeeks" role="group"></div></fieldset>
+      <p id="summerContext">Skulefri! Vil du jobbe og tene pengar, eller ta fri og lade batteria?</p>
+      <p id="summerProgress" class="ll-note"></p>
+      <fieldset class="vp-field ll-ctrl"><legend>Sommarjobb</legend><div class="ll-btn-row" id="summerWeeks" role="group"></div></fieldset>
       <p class="ll-note" id="summerPreview"></p>
       <div class="ll-center" style="margin-top:1rem;">
-        <button class="btn btn-primary" id="summerRun" type="button">Køyr sommaren <span data-icon="arrowRight"></span></button>
+        <button class="vp-button vp-button--primary" id="summerRun" type="button">Køyr sommaren <span data-icon="arrowRight"></span></button>
       </div>
     </div>
   </section>
@@ -263,16 +322,16 @@
 
 <!-- ══════════ Moped-modal ══════════ -->
 <div class="modal-overlay vp-modal-backdrop" id="mopedModal" aria-hidden="true">
-  <div class="modal1 vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mopedTitle">
-    <button class="btn modal-close" data-close-modal="mopedModal" aria-label="Lukk"><span data-icon="x"></span></button>
+  <div class="vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mopedTitle">
+    <button class="vp-button vp-button--icon modal-close" data-close-modal="mopedModal" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="mopedTitle" class="heading3 no-mt">Kjøpe moped?</h2>
     <p>Seljaren har to variantar. Den eine er trimma til å gå fortare — det er ulovleg, og kan gje forelegg og tap av førarbevis om du blir teken.</p>
     <div class="ll-event-choices">
-      <button class="btn ll-event-choice" id="mopedBuyLegal" type="button">
+      <button class="vp-button vp-button--tool ll-event-choice" id="mopedBuyLegal" type="button">
         <span class="ll-event-choice-lbl">Kjøp lovleg moped — <span id="mopedBundle"></span></span>
         <span class="ll-event-choice-note">Trygt og lovleg.</span>
       </button>
-      <button class="btn ll-event-choice" id="mopedBuyTrimmed" type="button">
+      <button class="vp-button vp-button--tool ll-event-choice" id="mopedBuyTrimmed" type="button">
         <span class="ll-event-choice-lbl">Kjøp trimma moped — <span id="mopedTrimmed"></span></span>
         <span class="ll-event-choice-note">Billegare, men ulovleg — og risikabelt.</span>
       </button>
@@ -282,21 +341,22 @@
 
 <!-- ══════════ 18-årsdag-modal ══════════ -->
 <div class="modal-overlay vp-modal-backdrop" id="birthdayModal" aria-hidden="true">
-  <div class="modal1 vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="bdayTitle">
+  <div class="vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="bdayTitle">
     <h2 id="bdayTitle" class="heading3 no-mt">🎉 Du har fylt 18!</h2>
     <p>No er du myndig. To ting endrar seg: du får høgare timeløn, og du kan spare i <strong>BSU</strong> (bustadsparing for ungdom) — betre rente enn vanleg sparekonto, og skattefrådrag når du tener nok til å betale skatt.</p>
     <p class="ll-note">Vil du gjere om sparinga di til BSU no? (Du kan uansett ta førarkort under «Ting du kan skaffe deg».)</p>
     <div class="ll-event-choices">
-      <button class="btn ll-event-choice" id="bsuYes" type="button"><span class="ll-event-choice-lbl">Ja, byt til BSU</span></button>
-      <button class="btn ll-event-choice" id="bsuNo" type="button"><span class="ll-event-choice-lbl">Nei, behald vanleg sparing</span></button>
+      <button class="vp-button vp-button--tool ll-event-choice" id="bsuYes" type="button"><span class="ll-event-choice-lbl">Ja, byt til BSU</span></button>
+      <button class="vp-button vp-button--tool ll-event-choice" id="bsuNo" type="button"><span class="ll-event-choice-lbl">Nei, behald vanleg sparing</span></button>
     </div>
   </div>
 </div>
 
 <!-- ══════════ Hendingskort-modal ══════════ -->
 <div class="modal-overlay modal-locked vp-modal-backdrop" data-vp-modal-escape="local" id="eventModal" aria-hidden="true">
-  <div class="modal1 ll-event-modal vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="eventTitle">
+  <div class="ll-event-modal vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="eventTitle">
     <div class="ll-event-vignette" id="eventVignette"></div>
+    <p class="ll-event-meta" id="eventMeta"></p>
     <h2 id="eventTitle" class="heading3 no-mt"></h2>
     <p id="eventText"></p>
     <div class="ll-event-choices" id="eventChoices"></div>
@@ -305,8 +365,8 @@
 
 <!-- ══════════ Info-modal ══════════ -->
 <div class="modal-overlay vp-modal-backdrop" id="infoModal" aria-hidden="true">
-  <div class="modal1 vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
-    <button class="btn modal-close" data-close-modal="infoModal" aria-label="Lukk"><span data-icon="x"></span></button>
+  <div class="vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
+    <button class="vp-button vp-button--icon modal-close" data-close-modal="infoModal" aria-label="Lukk"><span data-icon="x"></span></button>
     <h2 id="infoModalTitle" class="heading3 no-mt">Om tala i Livslina</h2>
     <div id="infoModalBody"></div>
   </div>
@@ -314,7 +374,17 @@
 
 
 <script src="../js/vyrdepil-storage.js"></script>
+<script src="../js/vyrdepil-icons.js"></script>
+<script src="../js/vyrdepil-util.js?v=1.2"></script>
+<script src="../js/vyrdepil-design.js?v=1.1"></script>
+<script src="../js/vyrdepil-app-shell.js?v=8"></script>
+<script src="../js/vyrdepil-menu.js?v=3"></script>
 
+<script src="assets/prototype/resources-v5/item-catalog.js"></script>
+<script src="assets/prototype/resources-v5/bed-price-ladder.js"></script>
+<script src="assets/prototype/layout-room-model.js"></script>
+<script src="assets/prototype/character-builder-model.js"></script>
+<script src="assets/prototype/character-builder-art.js"></script>
 
 <script src="js/util.js"></script>
 <script src="js/data.js"></script>
@@ -323,20 +393,16 @@
 <script src="js/economy.js"></script>
 <script src="js/events.js"></script>
 <script src="js/sim.js"></script>
-<script src="js/art-doll.js"></script>
+<script src="js/art-character.js"></script>
+<script src="js/art-room.js"></script>
 <script src="js/art-vignettes.js"></script>
-<script src="js/art-diorama.js"></script>
 <script src="js/ui-setup.js"></script>
 <script src="js/ui-home.js"></script>
+<script src="js/ui-room.js"></script>
 <script src="js/ui-budget.js"></script>
 <script src="js/ui-summer.js"></script>
 <script src="js/ui-playback.js"></script>
 <script src="js/ui-report.js"></script>
 <script src="js/main.js"></script>
-  <script src="../js/vyrdepil-icons.js"></script>
-  <script src="../js/vyrdepil-util.js?v=1.2"></script>
-  <script src="../js/vyrdepil-design.js?v=1.1"></script>
-  <script src="../js/vyrdepil-app-shell.js?v=8"></script>
-  <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body>
 </html>

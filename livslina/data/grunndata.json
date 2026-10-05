@@ -1,7 +1,7 @@
 {
   "app": "livslina",
   "version": 1,
-  "updated": "2026-07-05",
+  "updated": "2026-10-05",
   "currency": "NOK",
   "priceLevelNote": "SIFO-tal frå referansebudsjettet 2025 (prisar innhenta februar 2025). Lånekassen-satsar for skuleåret 2025–2026. Frikortgrense for inntektsåret 2026. Anslag ('estimate') er representative tal sette av redaksjonen og skal reviderast årleg saman med resten.",
   "sources": {
@@ -393,6 +393,48 @@
       "source": "estimate",
       "kind": "estimate",
       "gameValue": 1800
+    },
+    "schoolMaterials": {
+      "label": "Rekneutstyr og skulemateriell",
+      "unit": "krOneTime",
+      "source": "estimate",
+      "kind": "estimate",
+      "gameValue": 1200
+    },
+    "classMeal": {
+      "label": "Rimeleg klassekveld med mat",
+      "unit": "krOneTime",
+      "source": "estimate",
+      "kind": "estimate",
+      "gameValue": 350
+    },
+    "activityFee": {
+      "label": "Eigendel for fritidsaktivitet gjennom eit halvår",
+      "unit": "krOneTime",
+      "source": "estimate",
+      "kind": "estimate",
+      "gameValue": 800
+    },
+    "workGear": {
+      "label": "Arbeidsklede og eige verktøy til praksis",
+      "unit": "krOneTime",
+      "source": "estimate",
+      "kind": "estimate",
+      "gameValue": 1800
+    },
+    "studyMaterials": {
+      "label": "Ekstra læremiddel til eksamensførebuing",
+      "unit": "krOneTime",
+      "source": "estimate",
+      "kind": "estimate",
+      "gameValue": 700
+    },
+    "graduationShare": {
+      "label": "Lågkostnadsbidrag til felles avslutning",
+      "unit": "krOneTime",
+      "source": "estimate",
+      "kind": "estimate",
+      "gameValue": 900
     },
     "dentistYoungAdult": {
       "label": "Tannlege — gratis til og med 18 år, sterkt rabattert 19–24 (spelverdi for eigendel ved 19+)",
