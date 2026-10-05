@@ -109,9 +109,8 @@ LL.uiSetup = (function () {
     const character = LL.state.get().character;
     stage.replaceChildren(LL.artCharacter.createCanvas(character, {
       className: 'll-character-canvas ll-character-canvas--main',
-      label: 'Figuren din', width: 256, height: 384
+      label: LL.artCharacter.summary(character), width: 256, height: 384
     }));
-    document.getElementById('characterSummary').textContent = LL.artCharacter.summary(character);
     if (refreshOptions !== false) renderCharacterOptions();
   }
 
@@ -150,13 +149,14 @@ LL.uiSetup = (function () {
       button.setAttribute('aria-label', CHARACTER_FAMILIES[family].label + ': ' + label);
       const previewCharacter = Object.assign({}, character, { [family]: index });
       const thumb = LL.artCharacter.createCanvas(previewCharacter, {
-        className: 'll-character-thumb', label: '', width: 96, height: 144
+        className: 'll-character-thumb', label: '', width: 256, height: 384
       });
-      thumb.removeAttribute('role');
       thumb.setAttribute('aria-hidden', 'true');
-      const text = document.createElement('span');
-      text.textContent = label;
-      button.append(thumb, text);
+      const frame = document.createElement('span');
+      frame.className = 'll-character-thumb-frame ll-character-thumb-frame--' + family;
+      frame.setAttribute('aria-hidden', 'true');
+      frame.appendChild(thumb);
+      button.appendChild(frame);
       button.addEventListener('click', () => {
         LL.state.get().character[family] = index;
         refreshCharacter();

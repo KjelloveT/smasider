@@ -14,8 +14,9 @@ LL.uiBudget = (function () {
     const round = LL.state.currentRound();
     state.age = round.age;
     document.getElementById('budgetRound').textContent = 'Planlegg ' + round.label.toLowerCase();
-    document.getElementById('budgetTimeframe').textContent = 'Valet gjeld dei neste ' + round.months + ' månadene.';
-    draft = state.plan ? Object.assign({}, state.plan) : LL.economy.defaultPlan();
+    document.getElementById('budgetTimeframe').textContent = 'Valet gjeld dei neste ' + round.months + ' månadene.' +
+      (state.planPreferences ? ' Førre plan er førehandsfylt, og du kan endre vala.' : '');
+    draft = Object.assign(LL.economy.defaultPlan(), state.plan || state.planPreferences || {});
     draft.activities = (draft.activities || []).slice();
     renderControls();
     recompute();
@@ -30,6 +31,14 @@ LL.uiBudget = (function () {
     // Forbruksprofil
     btnGroup('budgetProfile', Object.keys(LL.economy.PROFILES).map(k => ({ val: k, label: LL.economy.PROFILES[k].label })),
       draft.profile, v => { draft.profile = v; recompute(); });
+    btnGroup('budgetCanteen', LL.economy.canteenOptions(),
+      draft.canteenVisitsPerWeek, v => { draft.canteenVisitsPerWeek = v; recompute(); });
+    btnGroup('budgetDrinks', LL.economy.drinkOptions(),
+      draft.drinksPerWeek, v => { draft.drinksPerWeek = v; recompute(); });
+    btnGroup('budgetMobile', LL.economy.mobileDataOptions(),
+      draft.mobileDataPlan, v => { draft.mobileDataPlan = v; recompute(); });
+    btnGroup('budgetSeasonPass', LL.economy.seasonPassOptions(),
+      draft.seasonPass, v => { draft.seasonPass = v; recompute(); });
     // Sparing
     btnGroup('budgetSavings', LL.economy.savingsOptions().map(v => ({ val: v, label: v === 0 ? 'Ingen' : LL.util.kr(v) + '/mnd' })),
       draft.savings, v => { draft.savings = v; recompute(); });
@@ -63,9 +72,8 @@ LL.uiBudget = (function () {
       b.textContent = o.label;
       b.setAttribute('aria-pressed', String(o.val === current));
       b.addEventListener('click', () => {
+        row.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
         onPick(o.val);
-        row.querySelectorAll('.btn').forEach(x => x.setAttribute('aria-pressed', 'false'));
-        b.setAttribute('aria-pressed', 'true');
       });
       row.appendChild(b);
     });
@@ -122,7 +130,8 @@ LL.uiBudget = (function () {
 
   function confirm() {
     const state = LL.state.get();
-    state.plan = draft;
+    state.plan = Object.assign({}, draft, { activities: draft.activities.slice() });
+    state.planPreferences = Object.assign({}, state.plan, { activities: state.plan.activities.slice() });
     if (draft.profile === 'noysam') state.noysamCount = (state.noysamCount || 0) + 1;
     // Hjørne-slot i dioramaet følgjer fritidsvalet
     if (draft.activities.includes('sport') || draft.activities.includes('gym')) state.possessions.hobby = 'trening';

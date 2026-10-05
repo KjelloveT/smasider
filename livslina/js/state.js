@@ -7,7 +7,7 @@ window.LL = window.LL || {};
 LL.state = (function () {
   'use strict';
 
-  const SAVE_VERSION = 3;
+  const SAVE_VERSION = 4;
   const STARTER_ROOM = {
     owned: ['bed-tier-01', 'desk-tier-01', 'chair-tier-01'],
     equipped: {
@@ -121,6 +121,7 @@ LL.state = (function () {
         grades: 3.5
       },
       plan: null,          // gjeldande halvårsplan frå budsjettkortet
+      planPreferences: null, // sist brukte plan, førehandsfylt neste halvår
       possessions: {
         moped: false,
         mopedTrimmed: false,
@@ -151,8 +152,8 @@ LL.state = (function () {
     return save;
   }
 
-  // Versjon 1 lagra sommaren før vårhalvåret. Versjon 3 legg til den nye
-  // karakterforma og rominventaret utan å endre aktiv speleframdrift.
+  // Versjon 1 lagra sommaren før vårhalvåret. Versjon 3 la til ny karakterform
+  // og rominventar; versjon 4 tek vare på planvala mellom halvår.
   function migrateSave(obj) {
     if (!obj || typeof obj !== 'object') return obj;
     if (obj.version <= 1) {
@@ -177,6 +178,11 @@ LL.state = (function () {
     }
     if (!obj.possessions || typeof obj.possessions !== 'object') {
       obj.possessions = { moped: false, mopedTrimmed: false, phoneInsurance: false };
+    }
+    if (!obj.planPreferences || typeof obj.planPreferences !== 'object') {
+      obj.planPreferences = obj.plan && typeof obj.plan === 'object'
+        ? Object.assign({}, obj.plan, { activities: Array.isArray(obj.plan.activities) ? obj.plan.activities.slice() : [] })
+        : null;
     }
     if (obj.version !== SAVE_VERSION) {
       obj.version = SAVE_VERSION;

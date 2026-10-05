@@ -22,10 +22,10 @@ LL.economy = (function () {
   // Fritidsaktivitetar (månadsutgift + trivsel/mnd)
   function activities() {
     return [
-      { id: 'gym', label: 'Treningssenter', monthly: LL.data.value('leisure.gymYouthPerMonth'), wellbeing: 1.2, energy: 0.4 },
-      { id: 'sport', label: 'Idrettslag', monthly: LL.data.value('leisure.sportsClubPerYear') / 12, wellbeing: 1.5, energy: 0.2 },
-      { id: 'kultur', label: 'Kulturskule/korps', monthly: LL.data.value('leisure.cultureSchoolPerYear') / 12, wellbeing: 1.5, energy: -0.1 },
-      { id: 'gaming', label: 'Gaming', monthly: LL.data.value('leisure.gamingPerMonth'), wellbeing: 1.0, energy: -0.3 }
+      { id: 'gym', label: 'Treningssenter', monthly: LL.data.value('leisure.gymYouthPerMonth'), wellbeing: 2.4, energy: 0.4 },
+      { id: 'sport', label: 'Idrettslag', monthly: LL.data.value('leisure.sportsClubPerYear') / 12, wellbeing: 3.0, energy: 0.5 },
+      { id: 'kultur', label: 'Kulturskule/korps', monthly: LL.data.value('leisure.cultureSchoolPerYear') / 12, wellbeing: 2.6, energy: 0.1 },
+      { id: 'gaming', label: 'Gaming', monthly: LL.data.value('leisure.gamingPerMonth'), wellbeing: 0.7, energy: -0.3 }
     ];
   }
 
@@ -39,6 +39,22 @@ LL.economy = (function () {
 
   function savingsOptions() { return [0, 250, 500, 1000]; }
 
+  function canteenOptions() {
+    return LL.data.node('recurringSpending.canteen.options').map(option => ({ val: option.visits, label: option.label }));
+  }
+  function drinkOptions() {
+    return LL.data.node('recurringSpending.drinks.options').map(option => ({ val: option.perWeek, label: option.label }));
+  }
+  function mobileDataOptions() {
+    return LL.data.node('recurringSpending.mobilePlans').map(option => ({ val: option.id, label: option.label }));
+  }
+  function seasonPassOptions() {
+    return [
+      { val: false, label: 'Nei, eg kjøper det ikkje' },
+      { val: true, label: 'Ja, eg kjøper sesongpass' }
+    ];
+  }
+
   function hourlyWage(state) {
     return state.age >= 18
       ? LL.data.value('work.hourlyWage18plus')
@@ -49,7 +65,11 @@ LL.economy = (function () {
   function ageVariant(age) { return age >= 18 ? 'gameValue18plus' : 'gameValue14_17'; }
 
   function defaultPlan() {
-    return { jobHours: 0, profile: 'sifo', activities: [], savings: 0 };
+    return {
+      jobHours: 0, profile: 'sifo', activities: [],
+      canteenVisitsPerWeek: 0, drinksPerWeek: 0,
+      mobileDataPlan: 'mobile-10gb', seasonPass: false, savings: 0
+    };
   }
 
   // Full månadsoppstilling gjeve state + plan. Returnerer breakdown-objekt.
@@ -82,7 +102,17 @@ LL.economy = (function () {
 
     // ── Utgifter ──
     // Felles for begge busituasjonar: mobil og transport.
-    expense.mobile = LL.data.value('monthlyCosts.mobileSubscription');
+    const optional = LL.data.node('recurringSpending');
+    const mobilePlan = optional.mobilePlans.find(option => option.id === plan.mobileDataPlan) ||
+      optional.mobilePlans.find(option => option.id === 'mobile-10gb') || optional.mobilePlans[0];
+    expense.mobile = mobilePlan.pricePerMonth;
+    const canteen = optional.canteen;
+    const drinks = optional.drinks;
+    const canteenCost = (Number(plan.canteenVisitsPerWeek) || 0) * canteen.pricePerVisit * WEEKS_PER_MONTH;
+    const drinkCost = (Number(plan.drinksPerWeek) || 0) * drinks.pricePerItem * WEEKS_PER_MONTH;
+    if (canteenCost > 0) expense.canteen = canteenCost;
+    if (drinkCost > 0) expense.drinks = drinkCost;
+    if (plan.seasonPass) expense.seasonPass = optional.seasonPass.pricePerSeason / optional.seasonPass.monthsPerSeason;
     if (state.possessions.moped) {
       expense.transport = LL.data.value('transport.mopedFuelPerMonth');
       expense.mopedInsurance = LL.data.value('transport.mopedInsurancePerYear') / 12;
@@ -171,7 +201,8 @@ LL.economy = (function () {
     allowance: 'Lommepengar', studyGrant: 'Inntektsavh. stipend', grant: 'Utstyrsstipend',
     tax: 'Skatt',
     clothing: 'Klede og sko', personalCare: 'Personleg pleie', playAndMedia: 'Fritid og medium',
-    mobile: 'Mobil', transport: 'Transport', mopedInsurance: 'Mopedforsikring',
+    mobile: 'Mobil og mobildata', canteen: 'Kjøp i skulekantina', drinks: 'Brus og energidrikk',
+    seasonPass: 'Sesongpass i spel', transport: 'Transport', mopedInsurance: 'Mopedforsikring',
     ownMoney: 'Eigne fritidspengar',
     phoneInsurance: 'Mobilforsikring', activities: 'Fritidsaktivitetar',
     rent: 'Husleige', food: 'Mat', household: 'Hushald', russBus: 'Russebuss',
@@ -181,7 +212,7 @@ LL.economy = (function () {
 
   return {
     PROFILES, WEEKS_PER_MONTH,
-    activities, jobOptions, savingsOptions, hourlyWage, defaultPlan,
+    activities, jobOptions, savingsOptions, canteenOptions, drinkOptions, mobileDataOptions, seasonPassOptions, hourlyWage, defaultPlan,
     monthlyBreakdown, taxOnWage, label, ageVariant, sum
   };
 })();

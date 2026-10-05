@@ -3,6 +3,17 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.86] — 2026-10-05
+
+### Endra
+- **Livslina har fått ei tydelegare tidsreise og eit meir konkret halvårsbudsjett.** Ein kalender viser månadene som går, hendingane får betre luft, og forbruksvala for kantine, drikke, mobildata og sesongpass blir førehandsfylte neste halvår.
+- **Sosial aktivitet og rørsle tel meir for trivselen.** Møblar og rompynt gjev eit langt mindre utslag.
+- **Karakterbyggjaren viser større utsnitt.** Hud, andlet, hår og klede har større førehandsvisingar utan synlege tekstetikettar; vala har framleis lesbare namn for skjermlesar.
+
+### Fiksa
+- **Halvårsplanen markerer berre eitt val per valgruppe.** Førre gule markering blir no fjerna når eit nytt val blir teke.
+- **Rombutikken viser ikkje lenger poengverknader.** Figursteget nemner heller ikkje at vala er gratis.
+
 ## [1.85] — 2026-10-05
 
 ### Fiksa
