@@ -3,6 +3,17 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.88] — 2026-10-05
+
+### Endra
+- **Livslina (skjult prøveutgåve) har fått fleire ulike hendingar gjennom VG1–VG3.** Hendingskorta brukar isometriske pikselillustrasjonar i same stil som rommet, og den same hendinga kjem ikkje att i eit spel.
+- **Yrkesfagelevar kan velje VG3 i skule eller fyrste læreår i bedrift.** Lærlingløn byggjer på KS-tariffen for 2026–2028, med 30 % og 40 % av tariffgrunnlaget i dei to halvåra.
+- **Gjeld får tydelegare følgjer.** Eit varsel kjem når saldoen går under −5 000 kr, og ved −10 000 kr blir unødvendige innkjøp, aktivitetar og sparing sette på pause.
+
+### Fiksa
+- **Sluttrapporten skil brukskonto, sparing og nettoformue.** Han viser òg om brukskontoen var i minus og den lågaste registrerte saldoen.
+- **Mobilpris og forsikring blir viste kvar for seg.** Mobilbyte har ei realistisk prisramme, medan 500 kr berre blir vist som eigenandel når forsikringa gjeld.
+
 ## [1.87] — 2026-10-05
 
 ### Lagt til

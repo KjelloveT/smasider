@@ -18,13 +18,14 @@ LL.uiSummer = (function () {
     LL.main.showScreen('screen-summer');
     document.getElementById('summerRound').textContent = round.label;
     document.getElementById('summerContext').textContent =
-      'Skulefri etter skuleåret i VG' + round.schoolYear + '. Vel mellom sommarjobb og kvile.';
+      'Sommarfri etter VG' + round.schoolYear + '. Vel mellom sommarjobb og kvile.';
     const completedTerms = LL.state.rounds().slice(0, LL.state.get().roundIndex)
       .filter(item => item.kind === 'term').length;
+    const totalTerms = LL.state.rounds().filter(item => item.kind === 'term').length;
     const nextRound = LL.state.rounds()[LL.state.get().roundIndex + 1];
     document.getElementById('summerProgress').textContent = nextRound
-      ? completedTerms + ' av 6 skulehalvår er fullførte. Etter sommaren kjem ' + nextRound.label + '.'
-      : 'Du er ved slutten av VG3.';
+      ? completedTerms + ' av ' + totalTerms + ' halvår er fullførte. Etter sommaren kjem ' + nextRound.label + '.'
+      : 'Du er ved slutten av VG3-perioden.';
     LL.util.hydrate(document.getElementById('screen-summer'));
   }
 
@@ -65,7 +66,9 @@ LL.uiSummer = (function () {
 
     if (wage > 0) {
       s.stats.money += wage;
+      LL.state.recordBalance(s);
       s._yearWage = prevWage + wage;
+      s.totalWage = (s.totalWage || 0) + wage;
       s.stats.energy = LL.util.clamp(s.stats.energy - (weeks >= 6 ? 12 : 6), 0, 100);
       ctx.income.wage = wage;
     } else {
@@ -83,6 +86,7 @@ LL.uiSummer = (function () {
     const tax = LL.economy.taxOnWage(prevWage, newWage);
     if (tax > 0) {
       s.stats.money -= tax;
+      LL.state.recordBalance(s);
       if ((s._yearWage || 0) > LL.data.value('tax.taxFreeCardLimit')) s.flags.overFrikort = true;
     }
 

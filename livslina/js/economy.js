@@ -119,6 +119,15 @@ LL.economy = (function () {
     // ── Inntekter ──
     const wage = plan.jobHours * WEEKS_PER_MONTH * hourlyWage(state);
     if (wage > 0) income.wage = wage;
+    const round = LL.state.currentRound();
+    const apprenticeModel = LL.data.node('work.apprenticePayPercentages');
+    const apprenticeRate = round && round.apprenticeship && apprenticeModel
+      ? apprenticeModel.values[round.apprenticeHalfYear - 1]
+      : 0;
+    const apprenticeWage = apprenticeRate
+      ? LL.data.value('work.apprenticeBaseAnnual') * apprenticeRate / 12
+      : 0;
+    if (apprenticeWage > 0) income.apprentice = apprenticeWage;
 
     if (hybel) {
       if (f.parentContributionHybelPerMonth) income.parents = f.parentContributionHybelPerMonth;
@@ -188,6 +197,7 @@ LL.economy = (function () {
 
     return {
       income, expense, incomeTotal, expenseTotal,
+      wageTotal: wage + apprenticeWage,
       net: incomeTotal - expenseTotal,
       savings: plan.savings || 0,
       wellbeingPerMonth: activityWellbeing(plan),
@@ -227,7 +237,7 @@ LL.economy = (function () {
 
   // Etikettar for kategori-nøklar (norsk)
   const LABELS = {
-    wage: 'Løn', parents: 'Foreldrebidrag', housingGrant: 'Bortebuarstipend',
+    wage: 'Løn frå deltidsjobb', apprentice: 'Lærlingløn', parents: 'Foreldrebidrag', housingGrant: 'Bortebuarstipend',
     allowance: 'Lommepengar', studyGrant: 'Inntektsavh. stipend', grant: 'Utstyrsstipend',
     tax: 'Skatt',
     clothing: 'Klede og sko', clothingShopping: 'Klesshopping', personalCare: 'Personleg pleie', playAndMedia: 'Fritid og medium',

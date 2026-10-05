@@ -68,9 +68,9 @@
       "equipmentGrantRate": "rate5",
       "hybelChance": 0.4,
       "phase2": "laereplass",
-      "phase2Note": "VG3 er læretid i bedrift med lærlingløn, fram mot fagbrev.",
+      "phase2Note": "Etter VG2 kan du velje VG3 i skule eller søkje læreplass. Tilboda varierer med fag og stad.",
       "careers": ["Tømrar", "Murar", "Anleggsmaskinførar", "Røyrleggjar"],
-      "blurb": "Bygg landet. Fagbrev-veg med læreplass og løn i VG3. Dyrt utstyr, men høgt utstyrsstipend."
+      "blurb": "Bygg landet. Etter VG2 kan du halde fram på skule eller søkje læreplass. Dyrt utstyr, men høgt utstyrsstipend."
     },
     {
       "id": "elektro",
@@ -79,9 +79,9 @@
       "equipmentGrantRate": "rate5",
       "hybelChance": 0.4,
       "phase2": "laereplass",
-      "phase2Note": "VG3 er læretid i bedrift med lærlingløn, fram mot fagbrev. Godt betalt fag.",
+      "phase2Note": "Etter VG2 kan du velje VG3 i skule eller søkje læreplass. Tilboda varierer med fag og stad.",
       "careers": ["Elektrikar", "Energimontør", "Automatikar", "Dataelektronikar"],
-      "blurb": "Straum, styring og data. Populær fagbrev-veg med god løn — og kamp om læreplassane."
+      "blurb": "Straum, styring og data. Etter VG2 kan du halde fram på skule eller søkje læreplass."
     },
     {
       "id": "teknologi-industri",
@@ -90,9 +90,9 @@
       "equipmentGrantRate": "rate5",
       "hybelChance": 0.5,
       "phase2": "laereplass",
-      "phase2Note": "VG3 er læretid i bedrift, ofte i industri eller på båt/plattform.",
+      "phase2Note": "Etter VG2 kan du velje VG3 i skule eller søkje læreplass. Tilboda varierer med fag og stad.",
       "careers": ["Industrimekanikar", "CNC-operatør", "Sveisar", "Prosessoperatør"],
-      "blurb": "Maskinar, produksjon og prosess. Fagbrev-veg med mange læreplassar i industrien."
+      "blurb": "Maskinar, produksjon og prosess. Etter VG2 kan du halde fram på skule eller søkje læreplass i industrien."
     },
     {
       "id": "helse-oppvekst",
@@ -101,9 +101,9 @@
       "equipmentGrantRate": "rate3",
       "hybelChance": 0.3,
       "phase2": "laereplass",
-      "phase2Note": "VG3 er læretid i helse-/oppvekstsektoren fram mot fagbrev.",
+      "phase2Note": "Etter VG2 kan du velje VG3 i skule eller søkje læreplass. Tilboda varierer med fag og stad.",
       "careers": ["Helsefagarbeidar", "Barne- og ungdomsarbeidar", "Ambulansearbeidar", "Tannhelsesekretær"],
-      "blurb": "Jobb med menneske. Trygg fagbrev-veg med mange læreplassar i kommunane."
+      "blurb": "Jobb med menneske. Etter VG2 kan du halde fram på skule eller søkje læreplass i kommunane."
     },
     {
       "id": "restaurant-mat",
@@ -113,9 +113,9 @@
       "rateEstimate": true,
       "hybelChance": 0.35,
       "phase2": "laereplass",
-      "phase2Note": "VG3 er læretid på kjøkken, bakeri eller i matindustri.",
+      "phase2Note": "Etter VG2 kan du velje VG3 i skule eller søkje læreplass. Tilboda varierer med fag og stad.",
       "careers": ["Kokk", "Konditor", "Servitør", "Slaktar"],
-      "blurb": "Lag mat folk hugsar. Fagbrev-veg med lange kveldar, men stor etterspurnad."
+      "blurb": "Lag mat folk hugsar. Etter VG2 kan du halde fram på skule eller søkje læreplass på kjøkken eller bakeri."
     },
     {
       "id": "naturbruk",
@@ -124,7 +124,7 @@
       "equipmentGrantRate": "rate5",
       "hybelChance": 0.7,
       "phase2": "laereplass",
-      "phase2Note": "VG3 kan vere læretid eller påbygg til studiekompetanse. Ofte internatskule.",
+      "phase2Note": "Vegen etter VG2 varierer med fag: VG3 i skule, læreplass eller påbygg. Ofte internatskule.",
       "careers": ["Agronom", "Fiskar", "Skogsoperatør", "Dyrepleiar"],
       "blurb": "Jord, skog, hav og dyr. Mange skular har internat — difor bur mange på hybel eller internat."
     },
@@ -136,9 +136,9 @@
       "rateEstimate": true,
       "hybelChance": 0.2,
       "phase2": "laereplass",
-      "phase2Note": "VG3 er læretid i butikk, resepsjon eller reiselivsbedrift.",
+      "phase2Note": "Etter VG2 kan du velje VG3 i skule eller søkje læreplass. Tilboda varierer med fag og stad.",
       "careers": ["Salsmedarbeidar", "Resepsjonist", "Reiselivsmedarbeidar", "Logistikkoperatør"],
-      "blurb": "Handel, service og turisme. Fagbrev-veg med læreplassar i heile landet."
+      "blurb": "Handel, service og turisme. Etter VG2 kan du halde fram på skule eller søkje læreplass."
     },
     {
       "id": "frisor-blomster-interior",
@@ -148,9 +148,9 @@
       "rateEstimate": true,
       "hybelChance": 0.25,
       "phase2": "laereplass",
-      "phase2Note": "VG3 er læretid i salong eller butikk fram mot fagbrev/sveinebrev.",
+      "phase2Note": "Etter VG2 kan du velje VG3 i skule eller søkje læreplass. Tilboda varierer med fag og stad.",
       "careers": ["Frisør", "Blomsterdekoratør", "Interiørkonsulent", "Eksponeringsdesignar"],
-      "blurb": "Kreative handverksfag med kundekontakt. Fagbrev-veg med ein del eige utstyr."
+      "blurb": "Kreative handverksfag med kundekontakt. Etter VG2 kan du halde fram på skule eller søkje læreplass."
     },
     {
       "id": "handverk-design",
@@ -160,9 +160,9 @@
       "rateEstimate": true,
       "hybelChance": 0.4,
       "phase2": "laereplass",
-      "phase2Note": "VG3 er læretid i eit av mange små handverksfag.",
+      "phase2Note": "Etter VG2 kan du velje VG3 i skule eller søkje læreplass. Tilboda varierer med fag og stad.",
       "careers": ["Gullsmed", "Møbelsnikkar", "Buntmakar", "Båtbyggjar"],
-      "blurb": "Dei små, spesialiserte handverksfaga. Fagbrev-veg — men læreplassane er få og spreidde."
+      "blurb": "Dei små, spesialiserte handverksfaga. Etter VG2 kan du halde fram på skule eller søkje læreplass."
     },
     {
       "id": "it-medieproduksjon",
@@ -172,9 +172,9 @@
       "rateEstimate": true,
       "hybelChance": 0.25,
       "phase2": "laereplass",
-      "phase2Note": "VG3 er læretid i IT-drift eller medieproduksjon fram mot fagbrev.",
+      "phase2Note": "Etter VG2 kan du velje VG3 i skule eller søkje læreplass. Tilboda varierer med fag og stad.",
       "careers": ["IT-driftsteknikar", "Utviklar", "Mediegrafikar", "Fotograf"],
-      "blurb": "Data, drift og medieproduksjon. Fagbrev-veg — eller påbygg vidare til studium."
+      "blurb": "Data, drift og medieproduksjon. Etter VG2 kan du halde fram på skule, søkje læreplass eller ta påbygg."
     }
   ]
 }

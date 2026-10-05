@@ -20,6 +20,11 @@
       "url": "https://www.skatteetaten.no/person/skatt/skattekort/frikort/",
       "year": 2026
     },
+    "ks2026": {
+      "name": "KS — Hovudtariffavtalen 2026–2028, lærlinglønn og garantilønn for fagarbeidar",
+      "url": "https://www.ks.no/globalassets/fagomrader/lonn-og-tariff/tariff-2024/hovedtariffavtalen-2026-2028---interaktiv-til-nettsiden.pdf",
+      "year": 2026
+    },
     "tariff2025": {
       "name": "Tariff-minstesatsar butikk/varehandel (YS/Butikkoverenskomsten), lønsoppgjeret 2025",
       "url": "https://ys.no/",
@@ -243,6 +248,21 @@
       "kind": "estimate",
       "gameValue": 165
     },
+    "apprenticeBaseAnnual": {
+      "label": "Årsløn for fagarbeidar utan ansiennitet — tariffgrunnlag for lærlinglønn",
+      "unit": "krPerYear",
+      "source": "ks2026",
+      "kind": "officialReference",
+      "gameValue": 475300,
+      "note": "KS-garantiløn per 1.5.2026. Brukt som eit representativt reknestykke, ikkje som ei felles lovfesta lærlingløn. Faktisk løn følgjer fag og tariffavtale."
+    },
+    "apprenticePayPercentages": {
+      "label": "Lærlingløn etter hovudmodellen, del av fagarbeidarløn per halvår",
+      "source": "ks2026",
+      "kind": "officialReference",
+      "values": [0.30, 0.40, 0.50, 0.80],
+      "note": "KS-avtalen fordeler løna over fire halvår. Denne VG1–VG3-utgåva av spelet viser fyrste læreåret: 30 % og 40 %."
+    },
     "saturdayJob": {
       "label": "Laurdagsjobb/deltidsjobb ved sida av skulen",
       "hoursPerWeekOptions": [0, 6, 12],
@@ -418,6 +438,34 @@
       "kind": "estimate",
       "gameValue": 4500
     },
+    "phoneReplacementNew": {
+      "label": "Ny mobiltelefon",
+      "unit": "krOneTime",
+      "source": "estimate",
+      "kind": "estimate",
+      "gameValue": 8500,
+      "note": "Representativ spelpris for ein ny mellomklassemobil. Forsikringsvalet viser eigendelen i staden for fullprisen."
+    },
+    "schoolCanteenGroup": { "label": "Felles lunsj etter skuletid", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 650 },
+    "winterJacket": { "label": "Vinterjakke", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 2400 },
+    "usedJacket": { "label": "Brukt vinterjakke", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 900 },
+    "energyDrinksTerm": { "label": "Brus og energidrikk gjennom ein periode", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 1500 },
+    "classParty": { "label": "Klassefest", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 1200 },
+    "summerTripWithFriends": { "label": "Dagstur med vener", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 3500 },
+    "gamingSeasonPass": { "label": "Sesongpass og spelvaluta", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 1399 },
+    "workBoots": { "label": "Arbeidssko og verneutstyr", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 2800 },
+    "usedWorkBoots": { "label": "Brukt eller lånt arbeidssko og utstyr", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 1000 },
+    "extraMobileData": { "label": "Ekstra mobildata for resten av halvåret", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 700 },
+    "weekendTrip": { "label": "Helgetur med vener", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 2800 },
+    "gamingHeadset": { "label": "Nytt gaming-headset", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 2200 },
+    "graduationOutfit": { "label": "Klede og utstyr til feiringa", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 4500 },
+    "apprenticeTools": { "label": "Verktøy og småutstyr før læretida", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 2500 },
+    "apprenticeCommuteGear": { "label": "Refleks, regnklede og lås til arbeidsvegen", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 1600 },
+    "apprenticeTeamDinner": { "label": "Middag med kollegaene", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 1250 },
+    "apprenticeStudyBook": { "label": "Ekstra øvingsbok til fagprøva", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 1200 },
+    "campusOpenDayTravel": { "label": "Reise til open dag eller utdanningsmesse", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 1800 },
+    "hybelElectricity": { "label": "Straumrekning på hybel", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 1500 },
+    "examDevice": { "label": "Reparasjon av skule-PC før eksamen", "unit": "krOneTime", "source": "estimate", "kind": "estimate", "gameValue": 2600 },
     "speedingFineMoped": {
       "label": "Forenkla forelegg, låg fartsoverskriding (minste sats 2025)",
       "unit": "krOneTime",

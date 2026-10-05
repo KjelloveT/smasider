@@ -4,11 +4,12 @@
   "updated": "2026-10-05",
   "_schema": {
     "note": "Hendingskort for fase 1. Kvart kort: id, title, text, art (vignett-nøkkel), focus, when (vilkår), weight, once, positive, forced, kind. Val: choices[] med label, effects og note.",
-    "when": "moped(bool), noMoped(bool), housing('hybel'), programType('yrkesfag'|'studieforberedande'), flag(str), notFlag(str), minAge(int), overFrikort(bool)",
+    "when": "moped(bool), noMoped(bool), housing('hybel'), programType('yrkesfag'|'studieforberedande'), route('school'|'apprenticeship'), moneyAtMost(int), flag(str), notFlag(str), minAge(int), overFrikort(bool)",
     "kind": "'term' (skulehalvår) eller 'summer' (sommar-mellomspel). Standard: term.",
     "focus": "Kort merkelapp for økonomi, trivsel, overskot eller skulearbeid.",
     "forced": "true = alltid vist når vilkåra er oppfylte (styrt særhending). Andre valkort blir trekte til spelaren har 4–5 avgjerder per skulehalvår.",
-    "effects": "cost/gain (direkte kr), costKey/gainKey (nøkkel i grunndata.json), costFromSavings, gainToSavings, savingsToMoney, wellbeing/energy/grades (delta), flags({k:v}), possessions({k:v}), wageHoursGain (timar × gjeldande timeløn), insuranceApplies(bool)"
+    "effects": "cost/gain (direkte kr), costKey/gainKey (nøkkel i grunndata.json), costFromSavings, gainToSavings, savingsToMoney, wellbeing/energy/grades (delta), flags({k:v}), possessions({k:v}), wageHoursGain (timar × gjeldande timeløn), insuranceApplies(bool)",
+    "debtTrigger": "true = sjekk om kortet skal visast straks saldoen går under moneyAtMost, også midt i eit halvår"
   },
   "events": [
     {
@@ -23,6 +24,7 @@
       "choices": [
         { "label": "Byt skjerm", "effects": { "costKey": "events.phoneScreenRepair", "insuranceApplies": true } },
         { "label": "Kjøp brukt mobil", "effects": { "costKey": "events.phoneReplacementUsed", "insuranceApplies": true } },
+        { "label": "Kjøp ny mellomklassemobil", "effects": { "costKey": "events.phoneReplacementNew", "insuranceApplies": true } },
         { "label": "Lev med sprekken", "effects": { "wellbeing": -8 }, "note": "Gratis, men irriterande heile året." }
       ]
     },
@@ -136,7 +138,7 @@
       "weight": 2,
       "positive": true,
       "choices": [
-        { "label": "Bli med", "effects": { "costKey": "events.concertTicket", "wellbeing": 6 } },
+        { "label": "Bli med", "effects": { "costKey": "leisure.concertTicket", "wellbeing": 6 } },
         { "label": "Stå over denne gongen", "effects": { "wellbeing": -4 } }
       ]
     },
@@ -235,11 +237,11 @@
     },
     {
       "id": "laereplass-intervju",
-      "title": "Intervju til læreplass",
-      "text": "Du er kalla inn til intervju for ein læreplass. Slik sikrar du lærlingløn og fagbrev.",
-      "art": "star",
+      "title": "Førebuing til læretida",
+      "text": "Du har valt læretid etter VG2. Ein verkstad inviterer deg innom før oppstart.",
+      "art": "apprentice",
       "focus": "Trivsel og framtid",
-      "when": { "programType": "yrkesfag", "rounds": ["vg3h"] },
+      "when": { "programType": "yrkesfag", "route": "apprenticeship", "rounds": ["vg2v"] },
       "weight": 5,
       "once": true,
       "forced": true,
@@ -361,7 +363,7 @@
       "weight": 3,
       "once": true,
       "choices": [
-        { "label": "Bli med på heile opplegget", "effects": { "costKey": "events.concertTicket", "wellbeing": 6 } },
+        { "label": "Bli med på heile opplegget", "effects": { "costKey": "leisure.concertTicket", "wellbeing": 6 } },
         { "label": "Bli med på den rimelege delen", "effects": { "costKey": "events.classMeal", "wellbeing": 4 }, "note": "Du får tid med venene og held att litt pengar." }
       ]
     },
@@ -431,7 +433,7 @@
       "weight": 3,
       "once": true,
       "choices": [
-        { "label": "Bli med på det store opplegget", "effects": { "costKey": "events.concertTicket", "wellbeing": 7 } },
+        { "label": "Bli med på det store opplegget", "effects": { "costKey": "leisure.concertTicket", "wellbeing": 7 } },
         { "label": "Vel den enkle felleskvelden", "effects": { "costKey": "events.graduationShare", "wellbeing": 5 } }
       ]
     },
@@ -447,6 +449,267 @@
       "choices": [
         { "label": "Bruk helga på førebuing", "effects": { "energy": -5, "grades": 0.1 } },
         { "label": "Del tida mellom lesing og vener", "effects": { "wellbeing": 4, "grades": -0.05 } }
+      ]
+    },
+    {
+      "id": "ny-mobil-vg1h",
+      "title": "Mobilen byrjar å svikte",
+      "text": "Batteriet varer knapt ein skuledag. Du kan kjøpe ny mobil, byte batteri eller halde ut litt til.",
+      "art": "phoneShop", "focus": "Økonomi", "when": { "rounds": ["vg1h", "vg2h"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp ny mellomklassemobil", "effects": { "costKey": "events.phoneReplacementNew" } },
+        { "label": "Vent og spar vidare", "effects": { "wellbeing": -2 } }
+      ]
+    },
+    {
+      "id": "kantinelunsj-vg1h",
+      "title": "Lunsj med klassen",
+      "text": "Klassekameratane vil ete saman etter skuletid. Det freistar å bli med, sjølv om det kostar meir enn matpakka.",
+      "art": "canteen", "focus": "Økonomi og trivsel", "when": { "rounds": ["vg1h"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp lunsj saman", "effects": { "costKey": "events.schoolCanteenGroup", "wellbeing": 4 } },
+        { "label": "Ta med matpakke og møt dei etterpå", "effects": { "wellbeing": 3 } }
+      ]
+    },
+    {
+      "id": "vinterjakke-vg1h",
+      "title": "Kaldt på veg til skulen",
+      "text": "Den gamle jakka held ikkje regn og vind ute. Du treng noko varmare før vinteren.",
+      "art": "clothes", "focus": "Økonomi", "when": { "rounds": ["vg1h"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp ei ny jakke", "effects": { "costKey": "events.winterJacket" } },
+        { "label": "Finn ei brukt jakke", "effects": { "costKey": "events.usedJacket" } },
+        { "label": "Lån ei jakke ei stund", "effects": { "wellbeing": -1 } }
+      ]
+    },
+    {
+      "id": "energidrikk-vg1v",
+      "title": "Tilbod på energidrikk",
+      "text": "Du kjøper ofte noko å drikke på veg heim. No kjem det eit tilbod på eit brett med energidrikk.",
+      "art": "drinks", "focus": "Økonomi og helse", "when": { "rounds": ["vg1v"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp eit brett", "effects": { "costKey": "events.energyDrinksTerm", "energy": -3 } },
+        { "label": "Ta med vatn heimanfrå", "effects": { "energy": 2 } }
+      ]
+    },
+    {
+      "id": "klassefest-vg1v",
+      "title": "Klassen planlegg fest",
+      "text": "De vil markere at fyrste året snart er over. Den eine planen er dyr; den andre er å møtast og lage mat saman.",
+      "art": "party", "focus": "Økonomi og trivsel", "when": { "rounds": ["vg1v"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Bli med på klassefesten", "effects": { "costKey": "events.classParty", "wellbeing": 6 } },
+        { "label": "Lag ein rimeleg kveld saman", "effects": { "costKey": "events.classMeal", "wellbeing": 4 } }
+      ]
+    },
+    {
+      "id": "speltur-vg2h",
+      "title": "Sesongpass og spelvaluta",
+      "text": "Favorittspelet har fått nytt sesongpass med ekstra innhald. Venene dine kjøper òg spelvaluta.",
+      "art": "gaming", "focus": "Økonomi", "when": { "rounds": ["vg2h"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp pass og spelvaluta", "effects": { "costKey": "events.gamingSeasonPass", "wellbeing": 3 } },
+        { "label": "Spel vidare med det du har", "effects": { "wellbeing": 1 } }
+      ]
+    },
+    {
+      "id": "arbeidssko-vg2h",
+      "title": "Sko til praksis",
+      "text": "Du skal ut i praksis og treng solide sko. Skulen kan låne deg eit par, men dei sit ikkje heilt godt.",
+      "art": "apprentice", "focus": "Økonomi og skulearbeid", "when": { "rounds": ["vg2h"], "programType": "yrkesfag" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp nye arbeidssko", "effects": { "costKey": "events.workBoots" } },
+        { "label": "Kjøp brukte eller lån eit par", "effects": { "costKey": "events.usedWorkBoots" } }
+      ]
+    },
+    {
+      "id": "konsertreise-vg2h",
+      "title": "Konsert i nabobyen",
+      "text": "Ein artist du likar kjem til nabobyen. Billett og reise kostar ein del, men fleire i venegjengen skal dit.",
+      "art": "party", "focus": "Økonomi og trivsel", "when": { "rounds": ["vg2h"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp billett og reis med dei andre", "effects": { "costKey": "leisure.concertTicket", "wellbeing": 6 } },
+        { "label": "Bli med på ein rimelegare kveld heime", "effects": { "costKey": "events.classMeal", "wellbeing": 3 } }
+      ]
+    },
+    {
+      "id": "kino-vg2h",
+      "title": "Kino etter skuletid",
+      "text": "Nokre i klassen vil sjå ein film saman. Billetten kostar litt, men de kan òg møtast gratis og finne på noko anna.",
+      "art": "party", "focus": "Økonomi og fellesskap", "when": { "rounds": ["vg2h"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Bli med på kino", "effects": { "costKey": "leisure.cinemaTicket", "wellbeing": 4 } },
+        { "label": "Foreslå ein gratis filmkveld heime", "effects": { "wellbeing": 3 } }
+      ]
+    },
+    {
+      "id": "mobildata-vg2v",
+      "title": "Datapakken er brukt opp",
+      "text": "Du har brukt opp mobildata før månaden er over. Du kan kjøpe ekstra eller bruke skulen sitt nett meir.",
+      "art": "mobileData", "focus": "Økonomi", "when": { "rounds": ["vg2v"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp ekstra data", "effects": { "costKey": "events.extraMobileData" } },
+        { "label": "Bruk trådlaust nett når det finst", "effects": { "wellbeing": -1 } }
+      ]
+    },
+    {
+      "id": "helgetur-vg2v",
+      "title": "Helgetur med venegjengen",
+      "text": "Venene dine har funne ei rimeleg overnatting og vil reise bort ei helg.",
+      "art": "party", "focus": "Økonomi og trivsel", "when": { "rounds": ["vg2v"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Bli med på turen", "effects": { "costKey": "events.weekendTrip", "wellbeing": 7 } },
+        { "label": "Møt dei på ein gratis aktivitet heime", "effects": { "wellbeing": 4 } }
+      ]
+    },
+    {
+      "id": "gaming-headset-vg2v",
+      "title": "Headsettet sluttar å verke",
+      "text": "Du høyrer berre lyd i den eine øyreklokka. Eit nytt headset freistar, men du kan òg vente.",
+      "art": "gaming", "focus": "Økonomi", "when": { "rounds": ["vg2v"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp eit nytt headset", "effects": { "costKey": "events.gamingHeadset" } },
+        { "label": "Bruk høgtalar eller vent på tilbod", "effects": { "wellbeing": -2 } }
+      ]
+    },
+    {
+      "id": "straumrekning-vg3h",
+      "title": "Uventa straumrekning",
+      "text": "Det kjem ei høgare straumrekning enn du venta. Du kan betale no eller bruke mindre straum ei stund.",
+      "art": "mobileData", "focus": "Økonomi og trivsel", "when": { "rounds": ["vg3h"], "housing": "hybel" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Betal rekninga", "effects": { "costKey": "events.hybelElectricity" } },
+        { "label": "Spar på oppvarminga", "effects": { "wellbeing": -3, "energy": -2 } }
+      ]
+    },
+    {
+      "id": "feiringsklede-vg3h",
+      "title": "Klede til feiringa",
+      "text": "Venene dine vil kjøpe nye klede og utstyr til feiringa ved slutten av vidaregåande.",
+      "art": "clothes", "focus": "Økonomi og trivsel", "when": { "rounds": ["vg3h"], "route": "school" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp nytt utstyr", "effects": { "costKey": "events.graduationOutfit", "wellbeing": 4 } },
+        { "label": "Bruk noko du har frå før", "effects": { "wellbeing": 2 } }
+      ]
+    },
+    {
+      "id": "ekstravakt-vg3h",
+      "title": "Ekstravakt før eksamensperioden",
+      "text": "Du får tilbod om ei ekstra helgevakt rett før ein travel periode. Pengane kjem godt med, men du treng òg tid til å førebu deg og kvile.",
+      "art": "coins", "focus": "Økonomi, energi og skulearbeid", "when": { "rounds": ["vg3h"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Ta vakta (10 timar)", "effects": { "wageHoursGain": 10, "energy": -4 } },
+        { "label": "Hald av helga til førebuing og kvile", "effects": { "energy": 4, "wellbeing": 2 } }
+      ]
+    },
+    {
+      "id": "laereutstyr-vg3h",
+      "title": "Førebu utstyr til læretida",
+      "text": "Du går gjennom lista frå lærebedrifta. Nokre småting treng du sjølv; anna kan kanskje lånast.",
+      "art": "apprentice", "focus": "Økonomi", "when": { "rounds": ["laere1h"], "route": "apprenticeship" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp verktøy og småutstyr", "effects": { "costKey": "events.apprenticeTools" } },
+        { "label": "Spør bedrifta kva dei held", "effects": { "energy": -1 } }
+      ]
+    },
+    {
+      "id": "laere-arbeidsmiljo-vg3h",
+      "title": "Fyrste veka i verkstaden",
+      "text": "Du lærer mykje, men tempoet er høgare enn på skulen. Ein erfaren kollega tilbyr å vise deg rutinane.",
+      "art": "apprentice", "focus": "Trivsel og arbeid", "when": { "rounds": ["laere1h"], "route": "apprenticeship" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Be om rettleiing", "effects": { "energy": -2, "grades": 0.1, "wellbeing": 3 } },
+        { "label": "Prøv å finne ut av det sjølv", "effects": { "energy": -4, "grades": -0.1 } }
+      ]
+    },
+    {
+      "id": "laere-lonnsslipp-vg3v",
+      "title": "Den fyrste lønsslippen",
+      "text": "Lønsslippen viser lærlingløn, skatt og eventuelle tillegg. Du kan setje deg inn i tala eller berre sjå på summen som kjem inn.",
+      "art": "debt", "focus": "Økonomi", "when": { "rounds": ["laere1v"], "route": "apprenticeship" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Gå gjennom løn og skatt", "effects": { "wellbeing": 2, "flags": { "forstarLonnsslipp": true } } },
+        { "label": "Bruk meir tid på fritida", "effects": { "wellbeing": 3, "energy": 2 } }
+      ]
+    },
+    {
+      "id": "laere-ekstraskift-vg3v",
+      "title": "Ekstra skift i læretida",
+      "text": "Arbeidsleiaren spør om du kan bli med på eit ekstra skift. Du tener meir, men er trøytt etter ei travel veke.",
+      "art": "apprentice", "focus": "Økonomi og overskot", "when": { "rounds": ["laere1v"], "route": "apprenticeship" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Ta skiftet (12 timar)", "effects": { "wageHoursGain": 12, "energy": -5 } },
+        { "label": "Hald på frikvelden", "effects": { "energy": 3, "wellbeing": 2 } }
+      ]
+    },
+    {
+      "id": "skulepc-eksamen-vg3v",
+      "title": "PC-en sviktar før eksamen",
+      "text": "PC-en stoppar når du skal førebu deg. Du kan reparere han eller låne ei maskin på skulen.",
+      "art": "laptop", "focus": "Økonomi og skulearbeid", "when": { "rounds": ["vg3v"], "route": "school" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Reparer PC-en", "effects": { "costKey": "events.examDevice" } },
+        { "label": "Lån ei maskin på skulen", "effects": { "energy": -2 } }
+      ]
+    },
+    {
+      "id": "opningsdag-vg3v",
+      "title": "Open dag etter vidaregåande",
+      "text": "Du vil undersøkje eit studium eller eit fag før du bestemmer deg. Open dag krev ei reise, men du kan òg finne informasjon digitalt og spørje rådgjevaren.",
+      "art": "bus", "focus": "Framtidsval og økonomi", "when": { "rounds": ["vg3v"], "route": "school" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Reis på open dag", "effects": { "costKey": "events.campusOpenDayTravel", "wellbeing": 3, "grades": 0.1 } },
+        { "label": "Undersøk tilboda digitalt", "effects": { "wellbeing": 1, "energy": -1 } }
+      ]
+    },
+    {
+      "id": "laere-arbeidsveg-vg3h",
+      "title": "Arbeidsvegen i ruskevêr",
+      "text": "Det regnar på veg til lærebedrifta. Du kan skaffe deg refleks, regnklede og ein god lås, eller bruke det du har og ta det rolegare på vegen.",
+      "art": "bike", "focus": "Økonomi og tryggleik", "when": { "rounds": ["laere1h"], "route": "apprenticeship" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp utstyr til sykkelen", "effects": { "costKey": "events.apprenticeCommuteGear", "wellbeing": 3 } },
+        { "label": "Bruk det du har og planlegg betre", "effects": { "energy": -1, "wellbeing": 1 } }
+      ]
+    },
+    {
+      "id": "laere-kollegamiddag-vg3h",
+      "title": "Middag med kollegaene",
+      "text": "Dei andre på arbeidsplassen spør om du vil vere med og ete etter jobb. Det kostar litt, men kan gjere det lettare å bli kjend.",
+      "art": "canteen", "focus": "Økonomi og trivsel", "when": { "rounds": ["laere1h"], "route": "apprenticeship" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Bli med på middag", "effects": { "costKey": "events.apprenticeTeamDinner", "wellbeing": 5 } },
+        { "label": "Foreslå ein gratis aktivitet ein annan dag", "effects": { "wellbeing": 3 } }
+      ]
+    },
+    {
+      "id": "laere-ovingsbok-vg3v",
+      "title": "Øving til fagprøva",
+      "text": "Du byrjar å tenkje på fagprøva neste år. Ei ekstra øvingsbok kan vere nyttig, men bedrifta har òg materiale du kan bruke.",
+      "art": "book", "focus": "Økonomi og fagleg meistring", "when": { "rounds": ["laere1v"], "route": "apprenticeship" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp ei øvingsbok", "effects": { "costKey": "events.apprenticeStudyBook", "grades": 0.2 } },
+        { "label": "Øv med materialet på arbeidsplassen", "effects": { "wellbeing": 2, "energy": -1 } }
+      ]
+    },
+    {
+      "id": "laere-helgetur-vg3v",
+      "title": "Helgetur med dei nye venene",
+      "text": "Du har blitt kjend med fleire gjennom læretida. Nokre planlegg ein helgetur, medan andre gjerne møtest til ein billegare kveld heime.",
+      "art": "party", "focus": "Økonomi og fellesskap", "when": { "rounds": ["laere1v"], "route": "apprenticeship" }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Bli med på helgetur", "effects": { "costKey": "events.weekendTrip", "wellbeing": 6 } },
+        { "label": "Inviter til ein roleg kveld heime", "effects": { "wellbeing": 4, "energy": 2 } }
+      ]
+    },
+    {
+      "id": "gjeldsvarsel",
+      "title": "Kontoen har gått mykje i minus",
+      "text": "Saldoen er under −5 000 kr. Fleire rekningar kjem framleis, så du må velje korleis du vil ta tak i gjelda.",
+      "art": "debt", "focus": "Økonomi og trivsel", "when": { "moneyAtMost": -5000 }, "weight": 1, "once": true, "forced": true, "debtTrigger": true,
+      "choices": [
+        { "label": "Lag ein nedbetalingsplan med ein vaksen du stolar på", "effects": { "flags": { "gjeldsplan": true }, "wellbeing": 2 } },
+        { "label": "Bruk 5 000 kr frå sparepengane", "effects": { "savingsToMoney": 5000, "wellbeing": -1 } }
       ]
     }
   ],
@@ -473,13 +736,51 @@
       "art": "coins",
       "focus": "Økonomi og overskot",
       "kind": "summer",
-      "when": { "rounds": ["sum2"] },
+      "when": { "rounds": ["sum2"], "route": "school" },
       "weight": 3,
       "once": true,
       "positive": true,
       "choices": [
         { "label": "Ta nokre ekstra vakter (40 timar)", "effects": { "wageHoursGain": 40, "energy": -8 } },
         { "label": "Ta fri og lad opp", "effects": { "wellbeing": 4, "energy": 6 } }
+      ]
+    },
+    {
+      "id": "sommarjobb-vg2-laere",
+      "title": "Ekstravakter før læretida",
+      "text": "Etter VG2 får du tilbod om nokre vakter før du byrjar i lære. Du kan tene litt ekstra, men du kan òg bruke sommaren til å kvile før oppstart.",
+      "art": "apprentice",
+      "focus": "Økonomi og overskot",
+      "kind": "summer",
+      "when": { "rounds": ["sum2"], "route": "apprenticeship" },
+      "weight": 3,
+      "once": true,
+      "positive": true,
+      "choices": [
+        { "label": "Ta nokre ekstra vakter (40 timar)", "effects": { "wageHoursGain": 40, "energy": -8 } },
+        { "label": "Ta fri og lad opp", "effects": { "wellbeing": 4, "energy": 6 } }
+      ]
+    },
+    {
+      "id": "sommar-med-venner-vg1",
+      "title": "Dagstur med venene",
+      "text": "Nokre frå klassen vil ta ein dagstur saman. De kan reise til ein aktivitet eller finne på noko gratis i nærleiken.",
+      "art": "sport", "focus": "Økonomi og trivsel", "kind": "summer",
+      "when": { "rounds": ["sum1"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Bli med på turen", "effects": { "costKey": "events.summerTripWithFriends", "wellbeing": 6 } },
+        { "label": "Lag ein gratis utedag", "effects": { "wellbeing": 4, "energy": 2 } }
+      ]
+    },
+    {
+      "id": "sommarfestival-vg2",
+      "title": "Festival i sommar",
+      "text": "Venene dine planlegg ein festivaldag med billett, mat og reise. Du kan òg møte dei på eit gratis arrangement heime.",
+      "art": "party", "focus": "Økonomi og trivsel", "kind": "summer",
+      "when": { "rounds": ["sum2"] }, "weight": 2, "once": true,
+      "choices": [
+        { "label": "Kjøp billett og reis", "effects": { "costKey": "events.weekendTrip", "wellbeing": 7 } },
+        { "label": "Vel eit gratis arrangement", "effects": { "wellbeing": 4 } }
       ]
     }
   ]

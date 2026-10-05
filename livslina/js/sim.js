@@ -41,7 +41,8 @@ LL.sim = (function () {
       addCat(ctx.income, 'grant', amt);
     }
     // Nytt skuleår → nullstill årsløn for frikort-berekning (haust)
-    if (round.equipmentGrant) state._yearWage = 0;
+    if (round.equipmentGrant || round.yearStart) state._yearWage = 0;
+    LL.state.recordBalance(state);
 
     return ctx;
   }
@@ -58,7 +59,7 @@ LL.sim = (function () {
     // Sparing: flytt frå konto til sparing (om det er dekning)
     let saved = 0;
     if (b.savings > 0) {
-      saved = b.savings;
+      saved = Math.min(b.savings, Math.max(0, state.stats.money));
       state.stats.money -= saved;
       state.stats.savings += saved;
     }
@@ -70,10 +71,10 @@ LL.sim = (function () {
     if (state.stats.savings > 0) state.stats.savings += state.stats.savings * (rate / 12);
 
     // Løn → årsakkumulator (for frikort/skatt) + totalsum for merke
-    if (b.income.wage) {
-      ctx.wageThisTerm += b.income.wage;
-      state._yearWage = (state._yearWage || 0) + b.income.wage;
-      state.totalWage = (state.totalWage || 0) + b.income.wage;
+    if (b.wageTotal) {
+      ctx.wageThisTerm += b.wageTotal;
+      state._yearWage = (state._yearWage || 0) + b.wageTotal;
+      state.totalWage = (state.totalWage || 0) + b.wageTotal;
     }
 
     // Stat-drift per månad
@@ -82,7 +83,8 @@ LL.sim = (function () {
     const roomWellbeing = roomEffect.wellbeingPerMonth || 0;
     state.stats.wellbeing += b.wellbeingPerMonth + roomWellbeing;
     state.stats.energy += b.energyPerMonth + roomEnergy;
-    if (state.stats.money < 0) { state.stats.wellbeing -= 2; state.wentNegative = true; } // pengestress
+    LL.state.recordBalance(state);
+    if (state.stats.money < 0) state.stats.wellbeing -= 2; // pengestress
     clampStats(state);
     state.minWellbeing = Math.min(state.minWellbeing, state.stats.wellbeing);
     state.minEnergy = Math.min(state.minEnergy, state.stats.energy);
@@ -115,6 +117,7 @@ LL.sim = (function () {
       state.stats.money -= tax;
       ctx.tax = tax;
       addCat(ctx.expense, 'tax', tax);
+      LL.state.recordBalance(state);
       // marker at spelaren tente over frikortet (for skatt-att-kortet)
       if ((state._yearWage || 0) > LL.data.value('tax.taxFreeCardLimit')) state.flags.overFrikort = true;
     }
