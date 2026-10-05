@@ -3,6 +3,12 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.81] — 2026-10-05
+
+### Fiksa
+- **Dagsvegen har fått ei samla arbeidsflate.** Verktøymeny og klasseromsverktøy dekkjer ikkje lenger planane; panel står i ei fast, responsiv rekkje, og tekstboksar får eigne rader på små skjermar.
+- **Redigeringa viser ikkje dobbelt velkomstskilt.** Rettleiinga speglar den nye verktøymenyen.
+
 ## [1.80] — 2026-10-04
 
 ### Endra

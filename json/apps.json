@@ -416,7 +416,7 @@
       "btn": "Opne →",
       "img": "_resources/dagsvegen.png",
       "desc": [
-        "Vis dagens plan på tavla: fag med emoji, friminutt og ei tydeleg markering av kva som skjer akkurat no. Startar du ei økt, tel Dagsvegen ned, og elevane ser sjølve kor lang tid som er att.",
+        "Dagsplan med fag, friminutt, nedteljing og aktivitetar for timen.",
         "På same skjerm har du trafikklys for arbeidsro, teiknefelt, tekstboksar og eit sett hjernepausar. Planar og fag blir lagra lokalt, og kan eksporterast som fil om du vil flytte dei til ei anna maskin."
       ]
     },

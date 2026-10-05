@@ -2,6 +2,23 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.81",
+      "dato": "2026-10-05",
+      "samandrag": "Dagsvegen har fått ei ryddigare og responsiv arbeidsflate.",
+      "punkt": [
+        {
+          "t": "fiksa",
+          "kva": "Dagsvegen",
+          "tekst": "Verktøymeny og klasseromsverktøy dekkjer ikkje lenger planane. Panel står i fast rekkjefølgje, og tekstboksar får eigne rader på små skjermar."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Dagsvegen",
+          "tekst": "Den doble velkomstplakaten i redigeringsvisinga er fjerna, og rettleiinga er oppdatert."
+        }
+      ]
+    },
+    {
       "versjon": "1.80",
       "dato": "2026-10-04",
       "samandrag": "BåreTevling har fått kvadratiske brettceller og eit standard Vyrdepil-panel for plassering.",
