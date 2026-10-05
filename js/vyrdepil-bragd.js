@@ -154,20 +154,48 @@
     return cataloguePromise;
   }
 
-  function iconMarkup(name, size) {
-    return typeof global.ICON === 'function' ? global.ICON(name, size) : '';
+  function makeBadgeEmblem(definition, app) {
+    const emblem = document.createElement('span');
+    emblem.className = 'vp-bragd-emblem';
+    emblem.dataset.family = definition.family || 'saerbragd';
+    emblem.dataset.tier = String(definition.tier || 1);
+    emblem.setAttribute('aria-hidden', 'true');
+
+    const motif = document.createElement('span');
+    motif.className = 'vp-bragd-motif';
+    emblem.appendChild(motif);
+
+    if (app && app.img) {
+      const logo = document.createElement('img');
+      logo.className = 'vp-bragd-game-logo';
+      logo.src = new URL(app.img, project).href;
+      logo.alt = '';
+      logo.width = 32;
+      logo.height = 32;
+      logo.loading = 'lazy';
+      logo.decoding = 'async';
+      emblem.appendChild(logo);
+    }
+    return emblem;
   }
 
-  function makeBadgeCard(definition, appId, app, earned) {
-    const card = document.createElement('article');
-    card.className = 'vp-bragd-card' + (earned ? '' : ' vp-bragd-card--locked');
+  function makeBadgeCard(definition, appId, app, earned, compact) {
+    const card = document.createElement(compact ? 'button' : 'article');
+    if (compact) card.type = 'button';
+    card.className = 'vp-bragd-card' + (compact ? ' vp-bragd-card--compact' : '') + (earned ? '' : ' vp-bragd-card--locked');
     card.dataset.family = definition.family || 'saerbragd';
+    card.dataset.bragdId = definition.id;
+    card.dataset.bragdName = definition.name;
+    card.dataset.bragdHint = definition.hint;
+    card.dataset.appId = appId;
+    card.dataset.appName = app ? app.name : appId;
+    card.dataset.appImg = app && app.img ? app.img : '';
+    card.dataset.earned = String(earned);
+    card.dataset.tier = String(definition.tier || 1);
+    card.setAttribute('aria-label', definition.name + '. ' + definition.hint + '. ' + (app ? app.name : appId) + '. ' + (earned ? 'Oppnådd.' : 'Ikkje oppnådd.') + ' Opne forklaringa.');
 
-    const emblem = document.createElement('div');
-    emblem.className = 'vp-bragd-emblem';
-    emblem.setAttribute('aria-hidden', 'true');
-    emblem.innerHTML = iconMarkup(definition.icon, 30);
-    card.appendChild(emblem);
+    card.appendChild(makeBadgeEmblem(definition, app));
+    if (compact) return card;
 
     const name = document.createElement('h3');
     name.className = 'vp-bragd-name';
@@ -214,7 +242,7 @@
     definitions.forEach(definition => {
       const isEarned = earned.has(definition.id);
       if (onlyEarned && !isEarned) return;
-      host.appendChild(makeBadgeCard(definition, appId, app, isEarned));
+      host.appendChild(makeBadgeCard(definition, appId, app, isEarned, false));
     });
     host.removeAttribute('aria-busy');
   }
@@ -250,7 +278,7 @@
       definitions.forEach(definition => {
         const isEarned = earned.has(definition.id);
         const grid = familyHost.get(definition.family) || familyHost.get('saerbragd');
-        if (grid) grid.appendChild(makeBadgeCard(definition, appId, app, isEarned));
+        if (grid) grid.appendChild(makeBadgeCard(definition, appId, app, isEarned, true));
         if (isEarned) earnedTotal++;
         total++;
       });

@@ -820,8 +820,9 @@ body.vp-migrated-page:not([data-vp-preserve])[data-vp-layout="canvas"] .vp-fs-to
 .vp-notice > :not(.vp-notice-icon) { min-width: 0; padding: 14px 16px; align-self: center; }
 .vp-bragd-count { margin-top: 16px; }
 .vp-bragd-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,180px),1fr)); gap: 12px; }
-.vp-bragd-family { margin-block: 24px; }
-.vp-bragd-family > h2 { margin-bottom: 12px; }
+.vp-bragd-main #bragdGrid .vp-bragd-grid { grid-template-columns: repeat(auto-fill,minmax(50px,1fr)); gap: 2px; }
+.vp-bragd-family { margin-block: 16px; }
+.vp-bragd-family > h2 { margin-bottom: 8px; }
 .vp-bragd-card {
   --bragd-family: var(--vp-honey);
   display: flex; min-width: 0; min-height: 244px; flex-direction: column; align-items: center; gap: 10px;
@@ -833,15 +834,40 @@ body.vp-migrated-page:not([data-vp-preserve])[data-vp-layout="canvas"] .vp-fs-to
 .vp-bragd-card[data-family="meistring"] { --bragd-family: var(--vp-coral); }
 .vp-bragd-card[data-family="samling"] { --bragd-family: var(--vp-heather); }
 .vp-bragd-card[data-family="saerbragd"] { --bragd-family: var(--vp-stone); }
-.vp-bragd-emblem { display: grid; place-items: center; width: 72px; height: 72px; border: 3px solid var(--vp-frame); border-radius: 50%; background: var(--bragd-family); }
-.vp-bragd-emblem svg { width: 30px; height: 30px; stroke: #000; }
+.vp-bragd-emblem { position: relative; display: block; flex: 0 0 auto; width: 78px; aspect-ratio: 1; background: center / contain no-repeat; }
+.vp-bragd-emblem[data-tier="1"] { background-image: url("../_resources/vyrdepil-design/bragder/frame-1.png"); }
+.vp-bragd-emblem[data-tier="2"] { background-image: url("../_resources/vyrdepil-design/bragder/frame-2.png"); }
+.vp-bragd-emblem[data-tier="3"] { background-image: url("../_resources/vyrdepil-design/bragder/frame-3.png"); }
+.vp-bragd-motif { position: absolute; top: 24%; left: 24%; width: 52%; height: 52%; background-image: url("../_resources/vyrdepil-design/bragder/families.png"); background-repeat: no-repeat; background-size: 300% 200%; }
+.vp-bragd-emblem[data-family="milepael"] .vp-bragd-motif { background-position: 0 0; }
+.vp-bragd-emblem[data-family="utforsking"] .vp-bragd-motif { background-position: 50% 0; }
+.vp-bragd-emblem[data-family="uthald"] .vp-bragd-motif { background-position: 100% 0; }
+.vp-bragd-emblem[data-family="meistring"] .vp-bragd-motif { background-position: 0 100%; }
+.vp-bragd-emblem[data-family="samling"] .vp-bragd-motif { background-position: 50% 100%; }
+.vp-bragd-emblem[data-family="saerbragd"] .vp-bragd-motif { background-position: 100% 100%; }
+.vp-bragd-game-logo { position: absolute; top: 77%; left: 50%; width: 15%; height: 15%; transform: translate(-50%,-50%); object-fit: contain; }
+.vp-bragd-card--compact { display: grid; min-height: 0; aspect-ratio: 1; place-items: center; padding: 2px; border: 0; border-radius: 50%; background: transparent; box-shadow: none; cursor: pointer; }
+.vp-bragd-card--compact .vp-bragd-emblem { width: 100%; }
+.vp-bragd-card--compact:hover .vp-bragd-emblem { transform: translateY(-2px) scale(1.04); }
+.vp-bragd-card--compact:focus-visible { outline: none; border-radius: 8px; box-shadow: inset 0 -4px 0 var(--vp-focus); }
+.vp-bragd-card--compact.vp-bragd-card--locked .vp-bragd-emblem { filter: saturate(.84) opacity(.86); }
+.vp-bragd-card--compact:not(.vp-bragd-card--locked) .vp-bragd-emblem { filter: drop-shadow(0 2px 0 rgb(20 40 32 / .28)); }
 .vp-bragd-name { margin: 2px 0 0; color: #000; font-size: 1.05rem; line-height: 1.2; overflow-wrap: anywhere; }
 .vp-bragd-hint { flex: 1 0 auto; margin: 0; color: #000; font-size: .9rem; line-height: 1.35; }
 .vp-bragd-source { display: flex; min-height: 32px; align-items: center; justify-content: center; gap: 7px; color: #000; font-size: .82rem; font-weight: 700; }
 .vp-bragd-source img { width: 28px; height: 28px; object-fit: contain; }
 .vp-bragd-status { padding: 2px 8px; border: 1px solid var(--vp-frame); border-radius: 999px; background: var(--bragd-family); color: #000; font-size: .78rem; font-weight: 750; }
-.vp-bragd-card--locked .vp-bragd-emblem { filter: grayscale(1); opacity: .65; }
 .vp-bragd-card--locked .vp-bragd-status { background: var(--vp-paper); border-style: dashed; }
+.vp-bragd-dialog { margin: auto; }
+.vp-bragd-dialog-content { display: grid; grid-template-columns: minmax(112px,170px) minmax(0,1fr); gap: 20px; align-items: center; }
+.vp-bragd-dialog-art { display: grid; place-items: center; }
+.vp-bragd-dialog-art .vp-bragd-emblem { width: min(40vw,170px); }
+.vp-bragd-dialog-copy { display: grid; gap: 12px; }
+.vp-bragd-dialog-hint { margin: 0; }
+.vp-bragd-dialog-source { display: flex; align-items: center; gap: 8px; font-weight: 750; }
+.vp-bragd-dialog-source img { width: 36px; height: 36px; object-fit: contain; }
+.vp-bragd-dialog-status { width: fit-content; margin: 0; padding: 3px 10px; border: 2px dashed var(--vp-frame); border-radius: 999px; background: var(--vp-paper); font-size: .9rem; font-weight: 750; }
+.vp-bragd-dialog-status--earned { border-style: solid; background: var(--vp-moss); }
 .vp-bragd-progress-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,250px),1fr)); gap: 16px; }
 .vp-bragd-progress-card { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
 .vp-bragd-progress-head { display: flex; width: 100%; align-items: center; gap: 12px; }
@@ -860,7 +886,14 @@ body.vp-migrated-page:not([data-vp-preserve])[data-vp-layout="canvas"] .vp-fs-to
 .vp-bragd-app-panel > :last-child { margin-bottom: 0; }
 .vp-bragd-app-panel summary { cursor: pointer; font-weight: 800; }
 .vp-bragd-app-panel .vp-bragd-grid { margin-top: 12px; }
-@media (max-width: 600px) { .vp-bragd-card { min-height: 232px; padding: 14px 10px 10px; } .vp-bragd-emblem { width: 66px; height: 66px; } }
+@media (max-width: 520px) {
+  .vp-bragd-main #bragdGrid .vp-bragd-grid { grid-template-columns: repeat(auto-fill,minmax(50px,1fr)); }
+  .vp-bragd-dialog { padding: 18px; }
+  .vp-bragd-dialog-content { grid-template-columns: 1fr; gap: 12px; text-align: center; }
+  .vp-bragd-dialog-art .vp-bragd-emblem { width: 144px; }
+  .vp-bragd-dialog-copy { justify-items: center; }
+  .vp-bragd-dialog-source { justify-content: center; }
+}
 
 /* Speltilstand for felles introar. Spelomtalen står framleis som eiga linje over. */
 body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-intro {

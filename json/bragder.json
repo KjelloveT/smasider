@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "families": [
     {
       "id": "milepael",
@@ -33,218 +33,218 @@
           "id": "fyrstekort",
           "name": "Fyrste kort",
           "hint": "Få ditt fyrste kort",
-          "icon": "star",
-          "family": "samling"
+          "family": "samling",
+          "tier": 1
         },
         {
           "id": "samlar",
           "name": "Samlar",
           "hint": "Få 25 kort til saman",
-          "icon": "layers",
-          "family": "samling"
+          "family": "samling",
+          "tier": 1
         },
         {
           "id": "storsamlar",
           "name": "Storsamlar",
           "hint": "Få 100 kort til saman",
-          "icon": "trophy",
-          "family": "samling"
+          "family": "samling",
+          "tier": 2
         },
         {
           "id": "tusensamlar",
           "name": "Tusensamlar",
           "hint": "Få 1000 kort til saman",
-          "icon": "trophy",
-          "family": "samling"
+          "family": "samling",
+          "tier": 3
         },
         {
           "id": "sjeldsynt",
           "name": "Sjeldsynt",
           "hint": "Få eit segngjeten-kort",
-          "icon": "gem",
-          "family": "samling"
+          "family": "samling",
+          "tier": 2
         },
         {
           "id": "gudebore",
           "name": "Gudebore",
           "hint": "Få eit gudebore-kort",
-          "icon": "crown",
-          "family": "samling"
+          "family": "samling",
+          "tier": 3
         },
         {
           "id": "glitrande",
           "name": "Glitrande",
           "hint": "Få eit foil-kort",
-          "icon": "sparkles",
-          "family": "samling"
+          "family": "samling",
+          "tier": 2
         },
         {
           "id": "rett10",
           "name": "10 rette",
           "hint": "Svar rett på 10 oppgåver",
-          "icon": "check",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 1
         },
         {
           "id": "rett20",
           "name": "20 rette",
           "hint": "Svar rett på 20 oppgåver",
-          "icon": "check",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 1
         },
         {
           "id": "rett30",
           "name": "30 rette",
           "hint": "Svar rett på 30 oppgåver",
-          "icon": "check",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 1
         },
         {
           "id": "rett40",
           "name": "40 rette",
           "hint": "Svar rett på 40 oppgåver",
-          "icon": "check",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 1
         },
         {
           "id": "rett50",
           "name": "50 rette",
           "hint": "Svar rett på 50 oppgåver",
-          "icon": "check",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 2
         },
         {
           "id": "rett75",
           "name": "75 rette",
           "hint": "Svar rett på 75 oppgåver",
-          "icon": "target",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 2
         },
         {
           "id": "reknemeister",
           "name": "Reknemeister",
           "hint": "Svar rett på 100 oppgåver",
-          "icon": "target",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 2
         },
         {
           "id": "rett200",
           "name": "200 rette",
           "hint": "Svar rett på 200 oppgåver",
-          "icon": "target",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 2
         },
         {
           "id": "reknegud",
           "name": "Reknegud",
           "hint": "Svar rett på 500 oppgåver",
-          "icon": "crown",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 3
         },
         {
           "id": "vrien100",
           "name": "Vrien 100",
           "hint": "Svar rett på 100 oppgåver på middels/vanskeleg",
-          "icon": "target",
-          "family": "meistring"
+          "family": "meistring",
+          "tier": 1
         },
         {
           "id": "vrien200",
           "name": "Vrien 200",
           "hint": "Svar rett på 200 oppgåver på middels/vanskeleg",
-          "icon": "target",
-          "family": "meistring"
+          "family": "meistring",
+          "tier": 1
         },
         {
           "id": "vrien300",
           "name": "Vrien 300",
           "hint": "Svar rett på 300 oppgåver på middels/vanskeleg",
-          "icon": "target",
-          "family": "meistring"
+          "family": "meistring",
+          "tier": 2
         },
         {
           "id": "vrien400",
           "name": "Vrien 400",
           "hint": "Svar rett på 400 oppgåver på middels/vanskeleg",
-          "icon": "crown",
-          "family": "meistring"
+          "family": "meistring",
+          "tier": 2
         },
         {
           "id": "vrien500",
           "name": "Vrien 500",
           "hint": "Svar rett på 500 oppgåver på middels/vanskeleg",
-          "icon": "crown",
-          "family": "meistring"
+          "family": "meistring",
+          "tier": 3
         },
         {
           "id": "oppdagar",
           "name": "Oppdagar",
           "hint": "Ha tre opne kategoriar",
-          "icon": "key",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 1
         },
         {
           "id": "heile-verda",
           "name": "Heile verda",
           "hint": "Lås opp alle kategoriane",
-          "icon": "globe",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 2
         },
         {
           "id": "kategori10",
           "name": "God start",
           "hint": "Samle 10 unike kort i éin kategori",
-          "icon": "layers",
-          "family": "samling"
+          "family": "samling",
+          "tier": 1
         },
         {
           "id": "kategori25",
           "name": "Full korthylle",
           "hint": "Samle 25 unike kort i éin kategori",
-          "icon": "layers",
-          "family": "samling"
+          "family": "samling",
+          "tier": 2
         },
         {
           "id": "unik100",
           "name": "Hundre unike",
           "hint": "Samle 100 ulike kort",
-          "icon": "trophy",
-          "family": "samling"
+          "family": "samling",
+          "tier": 2
         },
         {
           "id": "sjeldsamlar",
           "name": "Sjeldsamlar",
           "hint": "Samle 10 sjeldgjevne kort",
-          "icon": "gem",
-          "family": "samling"
+          "family": "samling",
+          "tier": 2
         },
         {
           "id": "segnsamlar",
           "name": "Segnsamlar",
           "hint": "Samle 5 segngjetne kort",
-          "icon": "sparkles",
-          "family": "samling"
+          "family": "samling",
+          "tier": 2
         },
         {
           "id": "gudesamlar",
           "name": "Gudesamlar",
           "hint": "Samle 3 gudeborne kort",
-          "icon": "crown",
-          "family": "samling"
+          "family": "samling",
+          "tier": 3
         },
         {
           "id": "foilsamlar",
           "name": "Foilsamlar",
           "hint": "Samle 10 unike foil-kort",
-          "icon": "sparkles",
-          "family": "samling"
+          "family": "samling",
+          "tier": 2
         },
         {
           "id": "komplett",
           "name": "Komplett samling",
           "hint": "Finn kvart kort i ein kategori",
-          "icon": "check",
-          "family": "samling"
+          "family": "samling",
+          "tier": 3
         }
       ]
     },
@@ -254,176 +254,176 @@
           "id": "rett10",
           "name": "10 rette",
           "hint": "Svar rett på 10 oppgåver",
-          "icon": "check",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 1
         },
         {
           "id": "rett50",
           "name": "50 rette",
           "hint": "Svar rett på 50 oppgåver",
-          "icon": "check",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 2
         },
         {
           "id": "rett100",
           "name": "100 rette",
           "hint": "Svar rett på 100 oppgåver",
-          "icon": "target",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 2
         },
         {
           "id": "rett250",
           "name": "250 rette",
           "hint": "Svar rett på 250 oppgåver",
-          "icon": "target",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 2
         },
         {
           "id": "rett500",
           "name": "500 rette",
           "hint": "Svar rett på 500 oppgåver",
-          "icon": "crown",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 3
         },
         {
           "id": "hovudstadmeister",
           "name": "Hovudstadmeister",
           "hint": "100 rette hovudstader",
-          "icon": "landmark",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 2
         },
         {
           "id": "fjellgeit",
           "name": "Fjellgeit",
           "hint": "50 rette fjell",
-          "icon": "mountain",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 2
         },
         {
           "id": "innsjokjennar",
           "name": "Innsjøkjennar",
           "hint": "50 rette innsjøar",
-          "icon": "waves",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 2
         },
         {
           "id": "silhuettsjaa",
           "name": "Silhuett-sjåar",
           "hint": "50 rette omriss",
-          "icon": "shapes",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 2
         },
         {
           "id": "kartlos",
           "name": "Kartlos",
           "hint": "50 rette på kartet",
-          "icon": "mapPin",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 2
         },
         {
           "id": "flaggkjennar",
           "name": "Flaggkjennar",
           "hint": "50 rette flagg",
-          "icon": "flag",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 2
         },
         {
           "id": "flaggmeister",
           "name": "Flaggmeister",
           "hint": "150 rette flagg",
-          "icon": "flag",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 3
         },
         {
           "id": "streak10",
           "name": "10 på rad",
           "hint": "Få 10 rette på rad",
-          "icon": "flame",
-          "family": "uthald"
+          "family": "uthald",
+          "tier": 1
         },
         {
           "id": "streak25",
           "name": "25 på rad",
           "hint": "Få 25 rette på rad",
-          "icon": "flame",
-          "family": "uthald"
+          "family": "uthald",
+          "tier": 2
         },
         {
           "id": "plettfri",
           "name": "Plettfri",
           "hint": "Fullfør ein runde utan feil",
-          "icon": "star",
-          "family": "meistring"
+          "family": "meistring",
+          "tier": 1
         },
         {
           "id": "plettfri10",
           "name": "Ti plettfrie",
           "hint": "Ti plettfrie rundar",
-          "icon": "medal",
-          "family": "meistring"
+          "family": "meistring",
+          "tier": 2
         },
         {
           "id": "vrien100",
           "name": "Vrien 100",
           "hint": "100 rette på middels/vanskeleg",
-          "icon": "zap",
-          "family": "meistring"
+          "family": "meistring",
+          "tier": 2
         },
         {
           "id": "vrien250",
           "name": "Vrien 250",
           "hint": "250 rette på middels/vanskeleg",
-          "icon": "zap",
-          "family": "meistring"
+          "family": "meistring",
+          "tier": 3
         },
         {
           "id": "europa",
           "name": "Europakjennar",
           "hint": "25 rette land i Europa",
-          "icon": "compass",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 2
         },
         {
           "id": "afrika",
           "name": "Afrikakjennar",
           "hint": "25 rette land i Afrika",
-          "icon": "compass",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 2
         },
         {
           "id": "asia",
           "name": "Asiakjennar",
           "hint": "25 rette land i Asia",
-          "icon": "compass",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 2
         },
         {
           "id": "amerika",
           "name": "Amerikakjennar",
           "hint": "25 rette land i Amerika",
-          "icon": "compass",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 2
         },
         {
           "id": "oseania",
           "name": "Oseaniakjennar",
           "hint": "15 rette land i Oseania",
-          "icon": "compass",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 2
         },
         {
           "id": "verdsborgar",
           "name": "Verdsborgar",
           "hint": "Kjenn alle verdsdelane",
-          "icon": "globe",
-          "family": "utforsking"
+          "family": "utforsking",
+          "tier": 3
         },
         {
           "id": "ihuga",
           "name": "Ihuga",
           "hint": "Spel 25 rundar",
-          "icon": "award",
-          "family": "uthald"
+          "family": "uthald",
+          "tier": 2
         }
       ]
     },
@@ -433,78 +433,150 @@
           "id": "fyrste",
           "name": "Fyrste rett",
           "hint": "Svar rett éin gong",
-          "icon": "star",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 1
         },
         {
           "id": "streak10",
           "name": "Ti på rad",
           "hint": "10 rette på rad",
-          "icon": "flame",
-          "family": "uthald"
+          "family": "uthald",
+          "tier": 2
         },
         {
           "id": "halvtime",
           "name": "Halvtimemeister",
           "hint": "Feilfri runde på «Heile & halve»",
-          "icon": "clock",
-          "family": "meistring"
+          "family": "meistring",
+          "tier": 2
         },
         {
           "id": "kvart",
           "name": "Kvartkongen",
           "hint": "Feilfri runde på «Kvart»",
-          "icon": "crown",
-          "family": "meistring"
+          "family": "meistring",
+          "tier": 2
         },
         {
           "id": "lynrask",
           "name": "Lynrask",
           "hint": "Svar rett på under 2,5 sekund",
-          "icon": "bolt",
-          "family": "saerbragd"
+          "family": "saerbragd",
+          "tier": 3
         },
         {
           "id": "minutt",
           "name": "Minuttmeister",
           "hint": "Klar nivå 4 utan feil",
-          "icon": "target",
-          "family": "meistring"
+          "family": "meistring",
+          "tier": 3
         },
         {
           "id": "nattugle",
           "name": "Nattugle",
           "hint": "Spel etter klokka 20",
-          "icon": "owl",
-          "family": "saerbragd"
+          "family": "saerbragd",
+          "tier": 2
         },
         {
           "id": "hundre",
           "name": "Hundreklubben",
           "hint": "100 rette totalt",
-          "icon": "medal",
-          "family": "milepael"
+          "family": "milepael",
+          "tier": 2
         }
       ]
     },
     "bolkestokk": {
       "badges": [
-        { "id": "fyrste-leksjon", "name": "Fyrste leksjon", "hint": "Gjer ferdig den fyrste leksjonen", "icon": "footprints", "family": "milepael" },
-        { "id": "ti-leksjonar", "name": "Ti leksjonar", "hint": "Gjer ferdig ti leksjonar", "icon": "check", "family": "milepael" },
-        { "id": "fyrste-modul", "name": "Ferdig med ein modul", "hint": "Gjer ferdig alle leksjonane i ein modul", "icon": "layers", "family": "utforsking" },
-        { "id": "25-leksjonar", "name": "25 leksjonar", "hint": "Gjer ferdig 25 leksjonar", "icon": "target", "family": "meistring" },
-        { "id": "halvvegs-bibliotek", "name": "Halvvegs i biblioteket", "hint": "Gjer ferdig minst halvparten av leksjonane i biblioteket", "icon": "map", "family": "milepael" },
-        { "id": "heile-biblioteket", "name": "Heile biblioteket", "hint": "Gjer ferdig alle leksjonane i biblioteket", "icon": "trophy", "family": "samling" }
+        {
+          "id": "fyrste-leksjon",
+          "name": "Fyrste leksjon",
+          "hint": "Gjer ferdig den fyrste leksjonen",
+          "family": "milepael",
+          "tier": 1
+        },
+        {
+          "id": "ti-leksjonar",
+          "name": "Ti leksjonar",
+          "hint": "Gjer ferdig ti leksjonar",
+          "family": "milepael",
+          "tier": 2
+        },
+        {
+          "id": "fyrste-modul",
+          "name": "Ferdig med ein modul",
+          "hint": "Gjer ferdig alle leksjonane i ein modul",
+          "family": "utforsking",
+          "tier": 2
+        },
+        {
+          "id": "25-leksjonar",
+          "name": "25 leksjonar",
+          "hint": "Gjer ferdig 25 leksjonar",
+          "family": "meistring",
+          "tier": 2
+        },
+        {
+          "id": "halvvegs-bibliotek",
+          "name": "Halvvegs i biblioteket",
+          "hint": "Gjer ferdig minst halvparten av leksjonane i biblioteket",
+          "family": "milepael",
+          "tier": 2
+        },
+        {
+          "id": "heile-biblioteket",
+          "name": "Heile biblioteket",
+          "hint": "Gjer ferdig alle leksjonane i biblioteket",
+          "family": "samling",
+          "tier": 3
+        }
       ]
     },
     "ormritaren": {
       "badges": [
-        { "id": "fyrste-leksjon", "name": "Fyrste leksjon", "hint": "Gjer ferdig den fyrste leksjonen", "icon": "footprints", "family": "milepael" },
-        { "id": "ti-leksjonar", "name": "Ti leksjonar", "hint": "Gjer ferdig ti leksjonar", "icon": "check", "family": "milepael" },
-        { "id": "fyrste-modul", "name": "Ferdig med ein modul", "hint": "Gjer ferdig alle leksjonane i ein modul", "icon": "layers", "family": "utforsking" },
-        { "id": "25-leksjonar", "name": "25 leksjonar", "hint": "Gjer ferdig 25 leksjonar", "icon": "target", "family": "meistring" },
-        { "id": "halvvegs-bibliotek", "name": "Halvvegs i biblioteket", "hint": "Gjer ferdig minst halvparten av leksjonane i biblioteket", "icon": "map", "family": "milepael" },
-        { "id": "heile-biblioteket", "name": "Heile biblioteket", "hint": "Gjer ferdig alle leksjonane i biblioteket", "icon": "trophy", "family": "samling" }
+        {
+          "id": "fyrste-leksjon",
+          "name": "Fyrste leksjon",
+          "hint": "Gjer ferdig den fyrste leksjonen",
+          "family": "milepael",
+          "tier": 1
+        },
+        {
+          "id": "ti-leksjonar",
+          "name": "Ti leksjonar",
+          "hint": "Gjer ferdig ti leksjonar",
+          "family": "milepael",
+          "tier": 2
+        },
+        {
+          "id": "fyrste-modul",
+          "name": "Ferdig med ein modul",
+          "hint": "Gjer ferdig alle leksjonane i ein modul",
+          "family": "utforsking",
+          "tier": 2
+        },
+        {
+          "id": "25-leksjonar",
+          "name": "25 leksjonar",
+          "hint": "Gjer ferdig 25 leksjonar",
+          "family": "meistring",
+          "tier": 2
+        },
+        {
+          "id": "halvvegs-bibliotek",
+          "name": "Halvvegs i biblioteket",
+          "hint": "Gjer ferdig minst halvparten av leksjonane i biblioteket",
+          "family": "milepael",
+          "tier": 2
+        },
+        {
+          "id": "heile-biblioteket",
+          "name": "Heile biblioteket",
+          "hint": "Gjer ferdig alle leksjonane i biblioteket",
+          "family": "samling",
+          "tier": 3
+        }
       ]
     }
   }

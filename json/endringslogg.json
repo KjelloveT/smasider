@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.85",
+      "dato": "2026-10-05",
+      "samandrag": "Bragdane har fått måla merke i tre nivå, og framsida har fått ein snarveg til bragdsamlinga.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Bragdane dine",
+          "tekst": "Den kompakte oversikta viser illustrerte merke utan tekst. Trykk på eit merke for å sjå kravet, spelet det høyrer til og om det er oppnådd. Framsida har fått ein knapp til bragdsamlinga."
+        }
+      ]
+    },
+    {
       "versjon": "1.84",
       "dato": "2026-10-05",
       "samandrag": "Karakterprøva i Livslina har fått ti nye andletsuttrykk og ti nye frisyrar med meir maskuline trekk.",

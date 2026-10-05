@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.85] — 2026-10-05
+
+### Endra
+- **Bragdane har fått måla merke i tre nivå.** Oversikta er kompakt med illustrerte ikon utan tekst; trykk på eit merke for å sjå kravet og spelet det høyrer til. Framsida har fått ein knapp til heile bragdsamlinga.
+
 ## [1.84] — 2026-10-05
 
 ### Endra
