@@ -5,7 +5,7 @@
     {
       "id": "bed",
       "label": "Seng",
-      "hint": "Ei betre seng kan gi litt meir energi kvar månad.",
+      "hint": "Vel mellom enkle og meir påkosta senger.",
       "slot": "bed",
       "products": [
         { "id": "bed-tier-01", "family": "bed", "tier": 1, "price": 0, "energyPerMonth": 0 },
@@ -18,7 +18,7 @@
     {
       "id": "desk",
       "label": "Arbeidsbord",
-      "hint": "Ein god arbeidsplass kan gi eit lite energiløft.",
+      "hint": "Vel eit arbeidsbord som passar rommet ditt.",
       "slot": "desk",
       "products": [
         { "id": "desk-tier-01", "family": "desk", "tier": 1, "price": 0, "energyPerMonth": 0 },
@@ -31,7 +31,7 @@
     {
       "id": "chair",
       "label": "Stol",
-      "hint": "Stolen kan vere enkel eller meir påkosta; ho gir ikkje direkte poeng.",
+      "hint": "Vel ein stol til arbeidsplassen din.",
       "slot": "chair",
       "products": [
         { "id": "chair-tier-01", "family": "chair", "tier": 1, "price": 0 },
@@ -44,7 +44,7 @@
     {
       "id": "sofa",
       "label": "Sofa",
-      "hint": "Ei sofa kan gjere kvilepausane litt meir oppladande.",
+      "hint": "Vel ei sofa som passar til rommet ditt.",
       "slot": "sofa",
       "products": [
         { "id": "sofa-01", "family": "sofa", "variant": 1, "price": 1600, "energyPerMonth": 0.1 },
@@ -54,7 +54,7 @@
     {
       "id": "rug",
       "label": "Golvteppe",
-      "hint": "Pynt og mjuke detaljar kan gi eit lite trivselsløft.",
+      "hint": "Vel eit golvteppe til rommet ditt.",
       "slot": "rug",
       "products": [
         { "id": "rug-tier-01", "family": "rug", "tier": 1, "price": 180, "wellbeingPerMonth": 0.03 },
@@ -67,7 +67,7 @@
     {
       "id": "plant",
       "label": "Plante",
-      "hint": "Ei grøn plante er eit lite val for eit trivelegare rom.",
+      "hint": "Legg til ei plante i rommet ditt.",
       "slot": "floorItem",
       "products": [
         { "id": "plant-tier-01", "family": "plant", "tier": 1, "price": 100, "wellbeingPerMonth": 0.03 },

@@ -21,11 +21,7 @@ LL.uiHome = (function () {
 
   function renderDiorama(s) {
     LL.artRoom.render(document.getElementById('homeDiorama'), s.room, null, 'Rommet ditt');
-    const effects = LL.artRoom.effects(s.room);
-    const line = effects.energyPerMonth || effects.wellbeingPerMonth
-      ? 'Rommet gir kvar månad +' + Number(effects.energyPerMonth).toLocaleString('nn-NO', { maximumFractionDigits: 2 }) + ' energi og +' + Number(effects.wellbeingPerMonth).toLocaleString('nn-NO', { maximumFractionDigits: 2 }) + ' trivsel.'
-      : 'Eit enkelt utgangspunkt med dei billegaste grunnmøblane.';
-    document.getElementById('homeRoomEffects').textContent = line;
+    document.getElementById('homeRoomEffects').textContent = 'Du kan innreie rommet vidare etter kvart som du får råd.';
   }
 
   function renderHeader(s) {

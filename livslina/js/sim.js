@@ -163,7 +163,7 @@ LL.sim = (function () {
   function factoid(state, ctx) {
     const facts = [];
     if (ctx.grant) facts.push('Utstyrsstipendet på ' + LL.util.kr(ctx.grant) + ' er gratis pengar alle elevar med ungdomsrett får — hugs å søkje.');
-    if (state.plan && state.plan.profile === 'noysam') facts.push('Nøysam profil sparar deg for tusenlappar i året — men trivselen kostar litt.');
+    if (state.plan && LL.economy.spendingStyle(state.plan) === 'noysam') facts.push('Låge utgifter til sjølvvalde kjøp gjev meir rom til andre mål når dei varer gjennom skuleåret.');
     if (state.plan && state.plan.savings > 0) facts.push('Faste sparetrekk veks med renters rente over tid.');
     if (ctx.tax > 0) facts.push('Du tente over frikortgrensa (' + LL.util.kr(LL.data.value('tax.taxFreeCardLimit')) + '), så no blir det trekt skatt.');
     if (state.housing === 'hybel') facts.push('På hybel ber du sjølv husleige, mat og faste rekningar — difor er bortebuarstipendet så viktig.');

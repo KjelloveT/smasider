@@ -1,5 +1,5 @@
 /* Livslina — ui-budget.js
- * Budsjettkortet: planlegg halvåret (jobb, forbruksprofil, aktivitetar, sparing)
+ * Budsjettkortet: planlegg halvåret (jobb, forbruksvanar, aktivitetar, sparing)
  * med live månadsoppstilling.
  */
 window.LL = window.LL || {};
@@ -14,8 +14,7 @@ LL.uiBudget = (function () {
     const round = LL.state.currentRound();
     state.age = round.age;
     document.getElementById('budgetRound').textContent = 'Planlegg ' + round.label.toLowerCase();
-    document.getElementById('budgetTimeframe').textContent = 'Valet gjeld dei neste ' + round.months + ' månadene.';
-    draft = state.plan ? Object.assign({}, state.plan) : LL.economy.defaultPlan();
+    draft = Object.assign(LL.economy.defaultPlan(), state.plan || state.planPreferences || {});
     draft.activities = (draft.activities || []).slice();
     renderControls();
     recompute();
@@ -27,9 +26,22 @@ LL.uiBudget = (function () {
     // Jobb
     btnGroup('budgetJob', LL.economy.jobOptions().map(o => ({ val: o.hours, label: o.label })),
       draft.jobHours, v => { draft.jobHours = v; recompute(); });
-    // Forbruksprofil
-    btnGroup('budgetProfile', Object.keys(LL.economy.PROFILES).map(k => ({ val: k, label: LL.economy.PROFILES[k].label })),
-      draft.profile, v => { draft.profile = v; recompute(); });
+    btnGroup('budgetCanteen', LL.economy.canteenOptions(),
+      draft.canteenVisitsPerWeek, v => { draft.canteenVisitsPerWeek = v; recompute(); });
+    btnGroup('budgetDrinks', LL.economy.drinkOptions(),
+      draft.drinksPerWeek, v => { draft.drinksPerWeek = v; recompute(); });
+    btnGroup('budgetEatingOut', LL.economy.eatingOutOptions(),
+      draft.eatingOutPerWeek, v => { draft.eatingOutPerWeek = v; recompute(); });
+    btnGroup('budgetSocialEvents', LL.economy.socialEventOptions(),
+      draft.socialEventsPerMonth, v => { draft.socialEventsPerMonth = v; recompute(); });
+    btnGroup('budgetClothingShopping', LL.economy.weeklyBudgetOptions('clothingShopping'),
+      draft.clothingShoppingPerWeek, v => { draft.clothingShoppingPerWeek = v; recompute(); });
+    btnGroup('budgetInGamePurchases', LL.economy.weeklyBudgetOptions('inGamePurchases'),
+      draft.inGamePurchasesPerWeek, v => { draft.inGamePurchasesPerWeek = v; recompute(); });
+    btnGroup('budgetMobile', LL.economy.mobileDataOptions(),
+      draft.mobileDataPlan, v => { draft.mobileDataPlan = v; recompute(); });
+    btnGroup('budgetSeasonPass', LL.economy.seasonPassOptions(),
+      draft.seasonPass, v => { draft.seasonPass = v; recompute(); });
     // Sparing
     btnGroup('budgetSavings', LL.economy.savingsOptions().map(v => ({ val: v, label: v === 0 ? 'Ingen' : LL.util.kr(v) + '/mnd' })),
       draft.savings, v => { draft.savings = v; recompute(); });
@@ -63,9 +75,8 @@ LL.uiBudget = (function () {
       b.textContent = o.label;
       b.setAttribute('aria-pressed', String(o.val === current));
       b.addEventListener('click', () => {
+        row.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
         onPick(o.val);
-        row.querySelectorAll('.btn').forEach(x => x.setAttribute('aria-pressed', 'false'));
-        b.setAttribute('aria-pressed', 'true');
       });
       row.appendChild(b);
     });
@@ -122,8 +133,9 @@ LL.uiBudget = (function () {
 
   function confirm() {
     const state = LL.state.get();
-    state.plan = draft;
-    if (draft.profile === 'noysam') state.noysamCount = (state.noysamCount || 0) + 1;
+    state.plan = Object.assign({}, draft, { activities: draft.activities.slice() });
+    state.planPreferences = Object.assign({}, state.plan, { activities: state.plan.activities.slice() });
+    if (LL.economy.spendingStyle(draft) === 'noysam') state.noysamCount = (state.noysamCount || 0) + 1;
     // Hjørne-slot i dioramaet følgjer fritidsvalet
     if (draft.activities.includes('sport') || draft.activities.includes('gym')) state.possessions.hobby = 'trening';
     else if (draft.activities.includes('kultur')) state.possessions.hobby = 'gitar';

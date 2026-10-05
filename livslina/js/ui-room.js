@@ -28,31 +28,11 @@ LL.uiRoom = (function () {
     return { label: option.label, description: option.description, family: item.family };
   }
 
-  function pointValue(value) {
-    return Number(value).toLocaleString('nn-NO', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
-  }
-
-  function effectText(item) {
-    const bits = [];
-    if (item.energyPerMonth) bits.push('+' + pointValue(item.energyPerMonth) + ' energi per månad');
-    if (item.wellbeingPerMonth) bits.push('+' + pointValue(item.wellbeingPerMonth) + ' trivsel per månad');
-    return bits.length ? bits.join(' · ') : 'Ingen direkte utslag på energi eller trivsel.';
-  }
-
-  function equippedLabel(room) {
-    const effect = LL.artRoom.effects(room);
-    if (!effect.energyPerMonth && !effect.wellbeingPerMonth) {
-      return 'Rommet gir ingen ekstra poeng per månad. Seng, arbeidsbord og sofa kan gi små utslag når du oppgraderer.';
-    }
-    return 'Utstyret gir kvar månad +' + pointValue(effect.energyPerMonth) + ' energi og +' + pointValue(effect.wellbeingPerMonth) + ' trivsel. Utslaga er medvite små.';
-  }
-
   function renderScene() {
     const room = state().room;
     const ok = LL.artRoom.render(document.getElementById('roomDiorama'), room, previewId, 'Soverommet ditt');
     LL.artRoom.render(document.getElementById('homeDiorama'), room, null, 'Rommet ditt');
-    document.getElementById('roomEffects').textContent = equippedLabel(room);
-    document.getElementById('homeRoomEffects').textContent = equippedLabel(room);
+    document.getElementById('homeRoomEffects').textContent = 'Du kan innreie rommet vidare etter kvart som du får råd.';
     if (!ok) document.getElementById('roomShopStatus').textContent = 'Klarte ikkje setje saman rommet. Kontroller at dei lokale romressursane er tilgjengelege.';
   }
 
@@ -114,7 +94,6 @@ LL.uiRoom = (function () {
     const isEquipped = current.room.equipped[category.slot] === item.id;
     document.getElementById('roomSelectedName').textContent = meta.label;
     document.getElementById('roomSelectedDescription').textContent = meta.description;
-    document.getElementById('roomSelectedEffect').textContent = effectText(item);
     document.getElementById('roomSelectedPrice').textContent = isOwned ? (isEquipped ? 'På rommet' : 'Allereie kjøpt') : LL.util.kr(item.price);
     const action = document.getElementById('roomAction');
     action.disabled = isEquipped || (!isOwned && current.stats.money < item.price);

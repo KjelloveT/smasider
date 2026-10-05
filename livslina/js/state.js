@@ -7,7 +7,12 @@ window.LL = window.LL || {};
 LL.state = (function () {
   'use strict';
 
-  const SAVE_VERSION = 3;
+  const SAVE_VERSION = 5;
+  const LEGACY_SPENDING_CHOICES = {
+    noysam: { eatingOutPerWeek: 0, socialEventsPerMonth: 0, clothingShoppingPerWeek: 0, inGamePurchasesPerWeek: 0 },
+    sifo: { eatingOutPerWeek: 1, socialEventsPerMonth: 1, clothingShoppingPerWeek: 100, inGamePurchasesPerWeek: 50 },
+    raus: { eatingOutPerWeek: 2, socialEventsPerMonth: 4, clothingShoppingPerWeek: 300, inGamePurchasesPerWeek: 200 }
+  };
   const STARTER_ROOM = {
     owned: ['bed-tier-01', 'desk-tier-01', 'chair-tier-01'],
     equipped: {
@@ -121,6 +126,7 @@ LL.state = (function () {
         grades: 3.5
       },
       plan: null,          // gjeldande halvårsplan frå budsjettkortet
+      planPreferences: null, // sist brukte plan, førehandsfylt neste halvår
       possessions: {
         moped: false,
         mopedTrimmed: false,
@@ -151,8 +157,22 @@ LL.state = (function () {
     return save;
   }
 
-  // Versjon 1 lagra sommaren før vårhalvåret. Versjon 3 legg til den nye
-  // karakterforma og rominventaret utan å endre aktiv speleframdrift.
+  function migratePlan(plan) {
+    if (!plan || typeof plan !== 'object') return plan;
+    const migrated = Object.assign({}, plan);
+    const spendingKeys = ['eatingOutPerWeek', 'socialEventsPerMonth', 'clothingShoppingPerWeek', 'inGamePurchasesPerWeek'];
+    const hasNewSpending = spendingKeys.some(key => Object.prototype.hasOwnProperty.call(migrated, key));
+    if (!hasNewSpending && LEGACY_SPENDING_CHOICES[migrated.profile]) {
+      Object.assign(migrated, LEGACY_SPENDING_CHOICES[migrated.profile]);
+    }
+    delete migrated.profile;
+    if (Array.isArray(migrated.activities)) migrated.activities = migrated.activities.slice();
+    return migrated;
+  }
+
+  // Versjon 1 lagra sommaren før vårhalvåret. Versjon 3 la til ny karakterform
+  // og rominventar; versjon 4 tok vare på planvala; versjon 5 erstattar
+  // forbruksprofilen med konkrete forbruksvanar.
   function migrateSave(obj) {
     if (!obj || typeof obj !== 'object') return obj;
     if (obj.version <= 1) {
@@ -178,6 +198,13 @@ LL.state = (function () {
     if (!obj.possessions || typeof obj.possessions !== 'object') {
       obj.possessions = { moped: false, mopedTrimmed: false, phoneInsurance: false };
     }
+    if (!obj.planPreferences || typeof obj.planPreferences !== 'object') {
+      obj.planPreferences = obj.plan && typeof obj.plan === 'object'
+        ? Object.assign({}, obj.plan, { activities: Array.isArray(obj.plan.activities) ? obj.plan.activities.slice() : [] })
+        : null;
+    }
+    obj.plan = migratePlan(obj.plan);
+    obj.planPreferences = migratePlan(obj.planPreferences);
     if (obj.version !== SAVE_VERSION) {
       obj.version = SAVE_VERSION;
     }
