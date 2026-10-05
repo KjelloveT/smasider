@@ -6,7 +6,7 @@
   <meta name="robots" content="index, follow">
   <title>Bragdane dine — Vyrdepil</title>
   <link rel="icon" href="/_resources/vyrde-ikon.png" sizes="384x384">
-  <link rel="stylesheet" href="css/vyrdepil-design.css?v=1.6">
+  <link rel="stylesheet" href="css/vyrdepil-design.css?v=1.7">
   <script src="js/vyrdepil-icons.js" defer></script>
   <script src="js/vyrdepil-storage.js?v=2" defer></script>
   <script src="js/vyrdepil-util.js?v=1.2" defer></script>
@@ -14,8 +14,8 @@
   <script src="js/vyrdepil-app-shell.js?v=8" defer></script>
   <script src="js/vyrdepil-menu.js?v=3" defer></script>
   <script src="js/vyrdepil-footer.js?v=2" defer></script>
-  <script src="js/vyrdepil-bragd.js?v=3" defer></script>
-  <script src="js/bragd-page.js?v=2" defer></script>
+  <script src="js/vyrdepil-bragd.js?v=4" defer></script>
+  <script src="js/bragd-page.js?v=3" defer></script>
 </head>
 <body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-site-footer>
   <main id="main" class="vp-shell vp-site-main vp-stack vp-bragd-main">
@@ -23,7 +23,7 @@
       <div class="vp-content">
         <p class="vp-small">Samlinga di på Vyrdepil</p>
         <h1 class="vp-title" id="pageTitle">Bragdane dine</h1>
-        <p class="vp-prose">Her finn du alle bragdane i Heimsank, Vidfaren, Tidvis, Bolkestokk og Ormritaren. Dei du har oppnådd er markerte, og dei låste viser kva du kan sikte mot.</p>
+        <p class="vp-prose">Her finn du alle bragdane i Heimsank, Vidfaren, Tidvis, Bolkestokk og Ormritaren. Dei du har oppnådd er markerte, og dei låste viser kva du kan sikte mot. Trykk på eit merke for å lese kravet.</p>
         <p id="bragdCount" class="vp-small vp-bragd-count" role="status" aria-live="polite">Lastar bragdlista …</p>
       </div>
     </section>
@@ -49,5 +49,19 @@
       <div><strong>Berre på denne eininga.</strong> Bragdene og framgangen blir ikkje sende nokon stad. På ei delt skulemaskin deler brukarane same samling. <a href="personvern.html">Les om lagra data</a>.</div>
     </aside>
   </main>
+  <dialog id="bragdDialog" class="vp-dialog vp-bragd-dialog" aria-labelledby="bragdDialogTitle">
+    <div class="vp-dialog-head">
+      <h2 id="bragdDialogTitle" class="vp-heading"></h2>
+      <button id="bragdDialogClose" class="vp-button vp-button--quiet vp-button--icon" type="button" aria-label="Lukk bragdvisinga" autofocus><span data-icon="x" aria-hidden="true"></span></button>
+    </div>
+    <div class="vp-bragd-dialog-content">
+      <div id="bragdDialogArt" class="vp-bragd-dialog-art" aria-hidden="true"></div>
+      <div class="vp-bragd-dialog-copy">
+        <p id="bragdDialogHint" class="vp-prose vp-bragd-dialog-hint"></p>
+        <div id="bragdDialogSource" class="vp-bragd-dialog-source"></div>
+        <p id="bragdDialogStatus" class="vp-bragd-dialog-status"></p>
+      </div>
+    </div>
+  </dialog>
 </body>
 </html>
