@@ -57,6 +57,7 @@ Knappetekst skal vere sentrert, både med og utan ikon. Bruk berre ikonnamn som 
 |---|---|
 | Handling | `vp-button`; `--primary` korall, `--tool` himmel, `--positive` mose, `--danger` lys raud, `--quiet` utan skugge. `--compact`, `--large`, `--icon`, `--block` styrer form/storleik. |
 | Hovudboks | `vp-panel` med `vp-decor vp-decor--grain` og `vp-content`. Store koter i minst 1536 px biletbreidd, utsnitt i små boksar, opasitet 0,85 og roleg midte. |
+| Stripedekor | `vp-decor vp-decor--stripes` for eit lett, repeterande SVG-mønster med roleg midte. Legg laget bak innhaldet i `vp-content`. |
 | Infoskilt | `vp-sign vp-sign--grounded` utanpå `vp-panel`. Eige klipt `vp-decor` med fire `vp-corner` og `data-vp-corners`; innhald i `vp-content`. |
 | Andre flater | `vp-panel--plain` papir, `--soft` lys fargegruppe, `--inset` lett innfelt flate, `--compact` tett panel, valfri `--raised` skugge. |
 | Felt og val | `vp-field`, `vp-input`, `vp-help`, `vp-choice`, `vp-choices`. Bruk ekte label, input, select og fieldset. Feil med `aria-invalid`. |

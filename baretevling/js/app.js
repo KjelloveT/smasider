@@ -21,6 +21,7 @@ const Game = {
 
     init() {
         this.setupMenu();
+        this.renderMenuPreviews();
         this.checkSavedGame();
         Input.init();
     },
@@ -29,16 +30,24 @@ const Game = {
         // Mode buttons
         document.querySelectorAll('[data-mode]').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('[data-mode]').forEach(b => b.classList.remove('selected'));
+                document.querySelectorAll('[data-mode]').forEach(option => {
+                    const selected = option === btn;
+                    option.classList.toggle('selected', selected);
+                    option.setAttribute('aria-pressed', String(selected));
+                });
                 btn.classList.add('selected');
                 this.state.mode = btn.dataset.mode;
             });
         });
 
         // Board size buttons
-        document.querySelectorAll('[data-size]').forEach(btn => {
+        document.querySelectorAll('.board-size-option').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('[data-size]').forEach(b => b.classList.remove('selected'));
+                document.querySelectorAll('.board-size-option').forEach(option => {
+                    const selected = option === btn;
+                    option.classList.toggle('selected', selected);
+                    option.setAttribute('aria-pressed', String(selected));
+                });
                 btn.classList.add('selected');
                 this.state.boardSize = parseInt(btn.dataset.size);
             });
@@ -54,6 +63,17 @@ const Game = {
                 });
                 this.state.shipStyle = btn.dataset.shipStyle;
                 Board.setShipStyle(this.state.shipStyle);
+                this.renderMenuPreviews();
+            });
+        });
+
+        document.querySelectorAll('.ship-input').forEach(input => {
+            input.addEventListener('input', () => {
+                const value = Number.parseInt(input.value, 10);
+                if (Number.isFinite(value)) {
+                    input.value = String(Math.max(0, Math.min(5, value)));
+                }
+                this.renderMenuPreviews();
             });
         });
 
@@ -88,9 +108,55 @@ const Game = {
         });
     },
 
+    renderMenuPreviews() {
+        const selectedStyle = document.querySelector('[data-ship-style].selected')?.dataset.shipStyle || 'classic';
+        const style = Board.setShipStyle(selectedStyle);
+        const imagePath = Board.shipSpriteSheets[style];
+        const showcase = document.getElementById('piecePreview');
+
+        if (showcase) {
+            showcase.replaceChildren();
+            for (let size = 1; size <= 5; size++) {
+                const sample = document.createElement('figure');
+                sample.className = 'bt-piece-sample';
+                const visual = Board.createShipVisual({ img: imagePath, cells: size });
+                visual.setAttribute('focusable', 'false');
+
+                const caption = document.createElement('figcaption');
+                caption.textContent = size === 1 ? '1 rute' : `${size} ruter`;
+                sample.append(visual, caption);
+                showcase.appendChild(sample);
+            }
+        }
+
+        document.querySelectorAll('[data-ship-preview]').forEach(preview => {
+            const size = Number.parseInt(preview.dataset.shipPreview, 10);
+            const input = document.querySelector(`.ship-input[data-ship-size="${size}"]`);
+            const rawCount = input ? Number.parseInt(input.value, 10) : 0;
+            const count = Math.max(0, Math.min(5, Number.isFinite(rawCount) ? rawCount : 0));
+            preview.replaceChildren();
+
+            if (count === 0) {
+                const empty = document.createElement('span');
+                empty.className = 'ship-row-preview-empty';
+                empty.textContent = 'Ingen figurar';
+                preview.appendChild(empty);
+                return;
+            }
+
+            for (let index = 0; index < count; index++) {
+                const visual = Board.createShipVisual({ img: imagePath, cells: size });
+                visual.setAttribute('focusable', 'false');
+                visual.style.width = `${size * 18}px`;
+                visual.style.height = '36px';
+                preview.appendChild(visual);
+            }
+        });
+    },
+
     checkSavedGame() {
         if (Storage.hasSavedGame()) {
-            document.getElementById('btnResume').style.display = 'block';
+            document.getElementById('btnResume').hidden = false;
         }
     },
 
@@ -105,9 +171,8 @@ const Game = {
 
         // Reset state
         this.state.mode = document.querySelector('[data-mode].selected').dataset.mode;
-        this.state.boardSize = parseInt(document.querySelector('[data-size].selected').dataset.size);
-        this.state.shipStyle = document.querySelector('[data-ship-style].selected')?.dataset.shipStyle || 'classic';
-        Board.setShipStyle(this.state.shipStyle);
+        this.state.boardSize = parseInt(document.querySelector('.board-size-option.selected').dataset.size);
+        this.state.shipStyle = Board.setShipStyle(document.querySelector('[data-ship-style].selected')?.dataset.shipStyle);
         this.state.shipConfig = Ships.getShipConfig();
         this.state.playerBoard = Board.createEmptyBoard(this.state.boardSize);
         this.state.enemyBoard = Board.createEmptyBoard(this.state.boardSize);
@@ -128,7 +193,7 @@ const Game = {
         // Auto-place enemy ships
         const enemyPlaced = Ships.autoPlaceShips(this.state.enemyBoard, this.state.enemyShips, this.state.boardSize);
         if (!enemyPlaced) {
-            alert('Klarte ikkje plassere fiendens skip. Prøv ein mindre brett eller færre skip.');
+            alert('Klarte ikkje plassere fiendens figurar. Prøv eit mindre brett eller færre figurar.');
             return;
         }
         this.state.enemyShips = enemyPlaced;
@@ -142,8 +207,7 @@ const Game = {
         const savedState = Storage.load();
         if (savedState) {
             this.state = savedState;
-            this.state.shipStyle = this.state.shipStyle === 'modern' ? 'modern' : 'classic';
-            Board.setShipStyle(this.state.shipStyle);
+            this.state.shipStyle = Board.setShipStyle(this.state.shipStyle);
             document.querySelectorAll('[data-ship-style]').forEach(option => {
                 const selected = option.dataset.shipStyle === this.state.shipStyle;
                 option.classList.toggle('selected', selected);
@@ -175,11 +239,11 @@ const Game = {
         const sub = document.getElementById('placementSub');
 
         if (this.state.mode === 'ai') {
-            title.textContent = 'Plasser skip';
-            sub.textContent = 'Plasser dine skip før spelet startar';
+            title.textContent = 'Plasser figurar';
+            sub.textContent = 'Plasser figurane dine før spelet startar';
         } else {
-            title.textContent = `Plasser skip - Spelar ${this.state.currentPlayer}`;
-            sub.textContent = `Spelar ${this.state.currentPlayer} plasserer sine skip`;
+            title.textContent = `Plasser figurar – spelar ${this.state.currentPlayer}`;
+            sub.textContent = `Spelar ${this.state.currentPlayer} plasserer figurane sine`;
         }
 
         // Render board
@@ -203,7 +267,7 @@ const Game = {
         if (currentShip) {
             Ships.renderShipPreview(preview, currentShip.size);
         } else {
-            preview.innerHTML = 'Alle skip plassert!';
+            preview.innerHTML = 'Alle figurane er plasserte!';
         }
     },
 
@@ -252,7 +316,7 @@ const Game = {
             // Enable start game button
             document.getElementById('btnStartGame').disabled = false;
             document.getElementById('btnPlaceShip').disabled = true;
-            document.getElementById('shipPreview').innerHTML = 'Alle skip plassert!';
+            document.getElementById('shipPreview').innerHTML = 'Alle figurane er plasserte!';
         } else {
             this.updateShipPreview();
             this.setupPlacementPhase();
@@ -282,7 +346,7 @@ const Game = {
                 this.startGame();
             }
         } else {
-            alert('Klarte ikkje plassere alle skipa. Prøv ein mindre brett eller færre skip.');
+            alert('Klarte ikkje plassere alle figurane. Prøv eit mindre brett eller færre figurar.');
         }
     },
 
@@ -479,7 +543,7 @@ const Game = {
 
         const ship = ships.find(s => s.id === shipId);
         if (ship && Ships.isShipSunk(this.state.enemyBoard, ship.cells)) {
-            alert(`Du senka eit skip på ${ship.size} celler!`);
+            alert(`Du fann ein figur på ${ship.size} ruter!`);
         }
     },
 
@@ -526,7 +590,7 @@ const Game = {
         const ship = this.state.playerShips.find(s => s.id === shipId);
         if (ship && Ships.isShipSunk(this.state.playerBoard, ship.cells)) {
             AI.checkShipSunk(ship.cells, this.state.playerBoard);
-            alert(`Datamaskinen senka skipet ditt på ${ship.size} celler!`);
+            alert(`Datamaskinen fann ein figur på ${ship.size} ruter!`);
         }
     },
 
@@ -551,10 +615,10 @@ const Game = {
 
         if (playerLost) {
             title.textContent = 'Du tapte!';
-            sub.textContent = 'Datamaskinen senka alle skipa dine';
+            sub.textContent = 'Datamaskinen fann alle figurane dine';
         } else {
             title.textContent = 'Du vann!';
-            sub.textContent = 'Gratulerer - du senka alle fiendens skip!';
+            sub.textContent = 'Gratulerer – du fann alle fiendens figurar!';
         }
 
         hits.textContent = this.state.hits;
