@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="nn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Livslina — prøve 03: felles romperspektiv</title>
+  <link rel="stylesheet" href="../../../css/vyrdepil-design.css">
+  <script src="../../../js/vyrdepil-icons.js" defer></script>
+  <script src="../../../js/vyrdepil-util.js" defer></script>
+  <script src="../../../js/vyrdepil-design.js" defer></script>
+  <script src="layout-prototype.js" defer></script>
+  <link rel="stylesheet" href="layout-prototype.css">
+</head>
+<body class="vp-page" data-vp-design>
+  <a class="vp-skip" href="#innhald">Hopp til romprøva</a>
+  <main class="vp-shell vp-shell--wide" id="innhald">
+    <header class="layout-intro">
+      <div class="vp-panel vp-panel--plain">
+        <p class="vp-small">Livslina · intern plasseringsprøve</p>
+        <h1 class="vp-title">Eitt rom, same perspektiv</h1>
+        <p class="vp-prose">Prøve 03 set seng i bakre høgre hjørne, pult på høgre side, TV til venstre for vindauget og ein liten sofa midt i rommet. Alle hovudmøbla deler éi fast kameraretning og same golvplan.</p>
+      </div>
+      <img class="layout-vyrde" src="../../../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt="Stein-Vyrde">
+    </header>
+
+    <div class="vp-toolbar" aria-label="Kontrollar for romprøva">
+      <div class="vp-toolbar-group">
+        <a class="vp-button vp-button--primary vp-button--compact" href="layout-asset-test.html">Testa mål og plassering</a>
+        <a class="vp-button vp-button--compact" href="#mounting-test">Gå til festeprøva</a>
+        <a class="vp-button vp-button--compact" href="layout-standard.md">Les plasseringsstandarden</a>
+        <a class="vp-button vp-button--compact" href="preview.html">Sjå alle ressursane</a>
+      </div>
+    </div>
+
+    <section class="vp-panel vp-panel--plain layout-plan" aria-labelledby="layout-plan-title">
+      <div class="vp-content">
+        <h2 class="vp-heading" id="layout-plan-title">Prøve 03 · ønskt romoppsett</h2>
+        <p class="vp-small">Dette er ei ny, samla romillustrasjon på 384 × 256 pikslar. Ho fungerer som perspektivreferanse for dei neste separate møbelspritane.</p>
+        <figure class="layout-scene-figure">
+          <img class="layout-scene-image" src="room/layout-setup-03-v2.png" width="384" height="256" alt="Eit pixelkunst-rom sett frå same hjørnevinkel: ei seng står i bakre høgre hjørne, skrivebordet står til høgre, ein liten TV står til venstre for vindauget, og ein sofa står midt på golvet vend mot TV-en.">
+          <figcaption>TV og vindauge ligg på same bakre veggplan. Sofaen vender mot TV-en; seng og pult står på same golvplan med fri gangline mellom.</figcaption>
+        </figure>
+        <div class="layout-scene-notes">
+          <article><h3 class="vp-subheading">TV · venstre for vindauget</h3><p>Står lågt mot veggen, med skjermen vend mot sofasona.</p></article>
+          <article><h3 class="vp-subheading">Sofa · midt i rommet</h3><p>Lita tosetar vend mot TV-en, med fri passasje rundt.</p></article>
+          <article><h3 class="vp-subheading">Seng · bakre høgre hjørne</h3><p>Hovudenden står mot høgre vegg; fotenden peikar inn mot rommet.</p></article>
+          <article><h3 class="vp-subheading">Pult · høgre side</h3><p>Står framfor sengeområdet med stolen vend inn mot rommet.</p></article>
+        </div>
+        <p class="vp-small layout-camera-note"><strong>Kameraprofil:</strong> eitt lett opphøgd hjørneperspektiv, loddrette veggar, felles lys frå øvre venstre og møbelpivotar på same golvhøgd. Den gamle festeprøva under held fram med å teste korleis tilbehøyr flyttar seg når seng og pult blir større.</p>
+      </div>
+    </section>
+
+    <div class="layout-grid" id="mounting-test">
+      <section class="vp-panel vp-panel--plain layout-scene-panel" aria-labelledby="scene-title">
+        <div class="vp-content">
+          <h2 class="vp-heading" id="scene-title">Festeprøve 02 · eldre plasskart</h2>
+          <p class="vp-small">Denne separate tekniske testen brukar det førre rommet. Ho viser korleis feste følgjer seng og pult når storleiken blir bytt; ho er ikkje det nye romoppsettet ovanfor.</p>
+          <button class="vp-button vp-button--compact" id="toggle-guides" type="button" aria-pressed="false">Vis feste-ID-ar</button>
+          <div class="layout-stage-wrap">
+            <div class="layout-stage" id="layout-stage" role="img" aria-label="Hybelrom med seng, skrivebord, skjerm, lampe, spelkontroll og datamaskin. Plasskartet kan vise møbelflater og feste.">
+              <img class="stage-room" src="room/empty-hybel.png" width="384" height="256" alt="">
+              <svg class="layout-map" id="layout-map" viewBox="0 0 384 256" preserveAspectRatio="none" aria-hidden="true">
+                <polygon class="guide-room-floor" points="0,171 164,139 384,146 384,256 0,256"></polygon>
+                <image id="sprite-desk" class="scene-sprite" href="items/desk-simple.png" x="25" y="122" width="160" height="112" preserveAspectRatio="none"></image>
+                <image id="sprite-tower" class="scene-sprite" href="items/computer-tower.png" x="185" y="170" width="44" height="56" preserveAspectRatio="none"></image>
+                <image id="sprite-monitor" class="scene-sprite" href="items/monitor.png" x="77" y="115" width="68" height="50" preserveAspectRatio="none"></image>
+                <image id="sprite-lamp" class="scene-sprite" href="items/desk-lamp.png" x="64" y="121" width="40" height="60" preserveAspectRatio="none"></image>
+                <image id="sprite-controller" class="scene-sprite" href="items/game-controller.png" x="120" y="149" width="28" height="21" preserveAspectRatio="none"></image>
+                <image id="sprite-bed" class="scene-sprite" href="items/bed-upgraded.png" x="192" y="128" width="192" height="128" preserveAspectRatio="none"></image>
+                <image id="sprite-pillow" class="scene-sprite" href="items/pillow.png" x="276" y="135" width="50" height="44" preserveAspectRatio="none"></image>
+                <image id="sprite-throw" class="scene-sprite" href="items/bed-throw.png" x="256" y="182" width="72" height="43" preserveAspectRatio="none"></image>
+                <polygon id="guide-bed-footprint" class="guide-footprint guide-bed"></polygon>
+                <polygon id="guide-desk-footprint" class="guide-footprint guide-desk"></polygon>
+                <g id="mount-details" class="mount-details">
+                <line id="guide-bed-axis" class="guide-axis"></line>
+                <text id="guide-bed-label" class="map-label"></text>
+                <text id="guide-desk-label" class="map-label"></text>
+                <circle id="guide-bed-pivot" class="guide-pivot"></circle>
+                <circle id="guide-desk-pivot" class="guide-pivot"></circle>
+                <circle id="guide-monitor-mount" class="guide-mount"></circle>
+                <circle id="guide-lamp-mount" class="guide-mount"></circle>
+                <circle id="guide-pillow-mount" class="guide-mount"></circle>
+                <circle id="guide-throw-mount" class="guide-mount"></circle>
+                <circle id="guide-controller-mount" class="guide-unchecked"></circle>
+                <rect id="guide-tower-mount" class="guide-unchecked"></rect>
+                <text id="label-bed-pivot" class="mount-label"></text>
+                <text id="label-desk-pivot" class="mount-label"></text>
+                <text id="label-monitor" class="mount-label"></text>
+                <text id="label-lamp" class="mount-label"></text>
+                <text id="label-pillow" class="mount-label"></text>
+                <text id="label-throw" class="mount-label"></text>
+                <text id="label-controller" class="mount-label"></text>
+                <text id="label-tower" class="mount-label"></text>
+                <line id="guide-controller-line" class="guide-uncertain-line"></line>
+                <line id="guide-tower-line" class="guide-uncertain-line"></line>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div class="layout-legend" aria-label="Forklaring">
+            <span><i class="legend-dot legend-sprite"></i> Møbelbilete</span>
+            <span><i class="legend-dot legend-pivot"></i> Pivot</span>
+            <span><i class="legend-dot legend-mount"></i> Feste</span>
+            <span><i class="legend-dash"></i> Reservert fotavtrykk</span>
+            <span><i class="legend-dot legend-unchecked"></i> Mål må avklarast</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="vp-panel vp-panel--plain layout-controls" aria-labelledby="controls-title">
+        <div class="vp-content">
+          <h2 class="vp-heading" id="controls-title">Byt variant</h2>
+
+          <div class="vp-field">
+            <label class="vp-label" for="bed-select">Seng</label>
+            <select class="vp-input" id="bed-select">
+              <option value="bed-simple">Enkel seng</option>
+              <option value="bed-upgraded" selected>God seng</option>
+            </select>
+            <p class="vp-small">Sengevariantane deler retning i scena. Den eine prøvefila blir spegelvend for å passe same kameraretning.</p>
+          </div>
+
+          <div class="vp-field">
+            <label class="vp-label" for="bed-footprint-select">Sengeplass</label>
+            <select class="vp-input" id="bed-footprint-select">
+              <option value="standard" selected>Vanleg fotavtrykk</option>
+              <option value="wide">Større fotavtrykk · plassprøve</option>
+            </select>
+            <p class="vp-small">Dette prøver større golvplass. Sjølve teikninga held same mål til ei sengesprite i den storleiken finst.</p>
+          </div>
+
+          <div class="vp-field">
+            <label class="vp-label" for="desk-select">Skrivebord</label>
+            <select class="vp-input" id="desk-select">
+              <option value="desk-simple" selected>Enkelt skrivebord</option>
+              <option value="desk-gaming">Større skrivebord</option>
+            </select>
+          <p class="vp-small">Skjerm, lampe og kontroll følgjer feste på pulten. Tårnet står på golvet ved sida og blir kontrollert mot sengeplassen.</p>
+          </div>
+
+          <section class="layout-readout" aria-labelledby="readout-title">
+            <h3 class="vp-subheading" id="readout-title">Plassering no</h3>
+            <dl>
+              <div><dt>Pultbreidd</dt><dd id="desk-width-readout">160 logiske pikslar</dd></div>
+              <div><dt>Lampefeste</dt><dd id="lamp-readout">–</dd></div>
+              <div><dt>Skjermfeste</dt><dd id="monitor-readout">–</dd></div>
+              <div><dt>Kontrollfeste</dt><dd id="controller-readout">–</dd></div>
+              <div><dt>Tårnfeste</dt><dd id="tower-readout">–</dd></div>
+              <div><dt>Sengeplass</dt><dd id="bed-footprint-readout">192 × 128</dd></div>
+            </dl>
+          </section>
+
+          <p class="layout-status" id="layout-status" role="status" aria-live="polite">Monteringskartet held romretning og feste faste. Kjeldeillustrasjonane må framleis målast og teiknast etter same standard.</p>
+          <p class="vp-small layout-note">Dette er ei monteringsprøve med ressursane som alt ligg i prøvepakken. Storleikar og feste kan framleis finjusterast før dei blir godkjende som endeleg spelkunst.</p>
+        </div>
+      </aside>
+    </div>
+
+    <section class="vp-panel vp-panel--plain layout-rules" aria-labelledby="rules-title">
+      <div class="vp-content">
+        <h2 class="vp-heading" id="rules-title">Reglane bak oppsettet</h2>
+        <div class="rule-grid">
+          <article><h3 class="vp-subheading">Same retning</h3><p class="vp-prose">Alle variantar i same møbelfamilie deler kamera, framkant og lysretning. Ei spegelvending er ei uttrykkeleg mellombels metadataavgjerd, ikkje tilfeldig manuell flytting.</p></article>
+          <article><h3 class="vp-subheading">Eitt feste, éin forelder</h3><p class="vp-prose">Skjerm og lampe høyrer til bordplata. Pute og pledd høyrer til senga. Når forelderen blir bytt, blir dei lokale festa rekna ut på nytt.</p></article>
+          <article><h3 class="vp-subheading">Fotavtrykk før kjøp</h3><p class="vp-prose">Større møblar reserverer fleire ruter. Spelet testar klaring mot vegg og andre møblar før kjøpet blir plassert, og forklarar kva som må flyttast.</p></article>
+        </div>
+        <p class="vp-small"><a href="layout-standard.md">Heile ressurs- og monteringsinstruksen</a></p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

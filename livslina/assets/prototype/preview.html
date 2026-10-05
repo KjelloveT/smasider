@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="nn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Livslina — ressursprøve 01</title>
+  <link rel="stylesheet" href="../../../css/vyrdepil-design.css">
+  <script src="../../../js/vyrdepil-icons.js" defer></script>
+  <script src="../../../js/vyrdepil-util.js" defer></script>
+  <script src="../../../js/vyrdepil-design.js" defer></script>
+  <style>
+    .preview-intro { display:grid; grid-template-columns:minmax(0,1fr) 88px; gap:16px; align-items:center; margin:20px auto; max-width:1100px; }
+    .preview-intro .vp-panel { padding:clamp(16px,3vw,28px); }
+    .preview-vyrde { width:88px; height:auto; }
+    .preview-main { display:grid; gap:20px; margin:18px auto 36px; }
+    .preview-panel { padding:clamp(12px,2vw,22px); }
+    .preview-note { max-width:78ch; }
+    .room-stage { position:relative; width:min(100%,768px); aspect-ratio:3 / 2; margin-inline:auto; overflow:hidden; border:3px solid #142820; background:#d6e8f1; }
+    .room-stage img { position:absolute; display:block; height:auto; image-rendering:pixelated; }
+    .room-bg { inset:0; width:100%; height:100% !important; object-fit:fill; }
+    .room-rug { z-index:1; left:24%; top:72%; width:36%; }
+    .room-plant { z-index:2; left:3%; top:46%; width:19%; }
+    .room-poster { z-index:2; left:73%; top:18%; width:18%; }
+    .room-led { z-index:2; left:48%; top:8%; width:46%; }
+    .room-shelf { z-index:2; left:56%; top:36%; width:25%; }
+    .room-books { z-index:3; left:62%; top:29%; width:15%; }
+    .room-desk { z-index:4; left:5%; top:54%; width:42%; }
+    .room-monitor { z-index:5; left:11%; top:44%; width:27%; }
+    .room-lamp { z-index:6; left:34%; top:42%; width:16%; }
+    .room-tower { z-index:4; left:40%; top:63%; width:18%; }
+    .room-bed { z-index:4; left:49%; top:51%; width:49%; }
+    .room-throw { z-index:5; left:59%; top:67%; width:38%; }
+    .room-pillow { z-index:6; left:77%; top:58%; width:15%; }
+    .room-guitar { z-index:3; left:79%; top:36%; width:17%; }
+    .preview-characters, .preview-items { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr)); gap:12px; }
+    .asset-card { min-width:0; padding:10px; border:2px solid #142820; border-radius:8px; background:#fffdf5; }
+    .asset-card figure { margin:0; display:grid; grid-template-rows:minmax(150px,1fr) auto; gap:8px; height:100%; }
+    .sprite-well { min-height:150px; display:grid; place-items:center; overflow:hidden; background-color:#f5f0e4; background-image:linear-gradient(45deg,#ddd7c8 25%,transparent 25%),linear-gradient(-45deg,#ddd7c8 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#ddd7c8 75%),linear-gradient(-45deg,transparent 75%,#ddd7c8 75%); background-size:18px 18px; background-position:0 0,0 9px,9px -9px,-9px 0; }
+    .sprite-well img { display:block; max-width:100%; max-height:230px; width:auto; height:auto; image-rendering:pixelated; object-fit:contain; }
+    .asset-card figcaption { color:#000; font-weight:700; line-height:1.25; }
+    .asset-id { display:block; margin-top:3px; font-size:.78rem; font-weight:500; overflow-wrap:anywhere; }
+    .preview-items { grid-template-columns:repeat(auto-fit,minmax(min(100%,175px),1fr)); }
+    .preview-items .sprite-well { min-height:190px; }
+    .preview-items .sprite-well img { max-height:200px; }
+    .preview-palette { display:flex; flex-wrap:wrap; gap:8px; margin:0; padding:0; list-style:none; }
+    .preview-palette li { display:flex; align-items:center; gap:6px; border:1px solid #142820; border-radius:6px; padding:4px 7px; background:#fffdf5; font-size:.82rem; }
+    .swatch { width:18px; height:18px; border:1px solid #142820; }
+    @media (max-width:560px) {
+      .preview-intro { grid-template-columns:minmax(0,1fr) 64px; gap:8px; }
+      .preview-vyrde { width:64px; }
+      .preview-characters { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .asset-card { padding:7px; }
+    }
+  </style>
+</head>
+<body class="vp-page" data-vp-design>
+  <a class="vp-skip" href="#innhald">Hopp til ressursane</a>
+  <main class="vp-shell vp-shell--wide" id="innhald">
+    <header class="preview-intro">
+      <div class="vp-panel vp-panel--plain">
+        <p class="vp-small">Livslina · intern kunstprøve</p>
+        <h1 class="vp-title">Ressursprøve 01</h1>
+        <p class="vp-prose">Første prøve på detaljert 8-bits pikselkunst: fire karakteruttrykk, eit tomt hybelrom og 23 ting som kan innreie det. Bileta er fristilte konseptressursar, ikkje kopla til speleval eller butikk enno.</p>
+      </div>
+      <img class="preview-vyrde" src="../../../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt="Stein-Vyrde">
+    </header>
+
+    <div class="vp-toolbar" aria-label="Innhald i prøvepakka">
+      <div class="vp-toolbar-group"><span class="vp-small">4 karakterprøver · 23 romting · éi romflate</span></div>
+      <div class="vp-toolbar-group"><a class="vp-button vp-button--compact" href="layout-prototype.html">Opne plasseringsprøve 02</a><a class="vp-button vp-button--compact" href="manifest.json">Opne ressurslista</a><a class="vp-button vp-button--compact" href="generation-notes.md">Sjå bildebrefen</a></div>
+    </div>
+
+    <div class="preview-main">
+      <section class="vp-panel vp-panel--plain preview-panel" aria-labelledby="rom-title">
+        <div class="vp-content">
+          <h2 class="vp-heading" id="rom-title">Eit mogleg romoppsett</h2>
+          <p class="vp-small preview-note">Dette er ei enkel plassering av lause ressursar oppå den tomme romflata. Ho prøver kameravinkel og storleik; festeplasseringane er førebelse.</p>
+          <div class="room-stage" role="img" aria-label="Hybelrom med seng, skrivebord, skjerm, lampe, bokhylle, teppe, plante, gitar og veggpynt">
+            <img class="room-bg" src="room/empty-hybel.png" alt="">
+            <img class="room-rug" src="items/rug.png" alt="">
+            <img class="room-plant" src="items/plant.png" alt="">
+            <img class="room-poster" src="items/poster.png" alt="">
+            <img class="room-led" src="items/led-string.png" alt="">
+            <img class="room-shelf" src="items/wall-shelf.png" alt="">
+            <img class="room-books" src="items/book-stack.png" alt="">
+            <img class="room-guitar" src="items/guitar.png" alt="">
+            <img class="room-desk" src="items/desk-simple.png" alt="">
+            <img class="room-monitor" src="items/monitor.png" alt="">
+            <img class="room-lamp" src="items/desk-lamp.png" alt="">
+            <img class="room-tower" src="items/computer-tower.png" alt="">
+            <img class="room-bed" src="items/bed-upgraded.png" alt="">
+            <img class="room-throw" src="items/bed-throw.png" alt="">
+            <img class="room-pillow" src="items/pillow.png" alt="">
+          </div>
+        </div>
+      </section>
+
+      <section class="vp-panel vp-panel--plain preview-panel" aria-labelledby="karakter-title">
+        <div class="vp-content">
+          <h2 class="vp-heading" id="karakter-title">Karakterprøver</h2>
+          <p class="vp-small preview-note">Desse er heile figurar som viser stil og variasjon. Dei er ikkje delte i hår-, hud- og kleslag enno.</p>
+          <div class="preview-characters">
+            <article class="asset-card"><figure><div class="sprite-well"><img src="characters/student-01.png" width="192" height="256" alt="Elev med kort krøll, runde briller, mosegrøn gensar og mørk bukse" loading="lazy"></div><figcaption>Krøll og briller<span class="asset-id">student-01</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="characters/student-02.png" width="192" height="256" alt="Elev med lyngfarga hovudplagg, korallfarga overskjorte og mørk bukse" loading="lazy"></div><figcaption>Hovudplagg og lag<span class="asset-id">student-02</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="characters/student-03.png" width="192" height="256" alt="Elev med bølgjehår, fregner og lilla gensar" loading="lazy"></div><figcaption>Bølgjer og fregner<span class="asset-id">student-03</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="characters/student-04-wheelchair.png" width="192" height="256" alt="Elev med kort krøll, briller og manuell rullestol" loading="lazy"></div><figcaption>Rullestol som del av figuren<span class="asset-id">student-04-wheelchair</span></figcaption></figure></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="vp-panel vp-panel--plain preview-panel" aria-labelledby="gjenstand-title">
+        <div class="vp-content">
+          <h2 class="vp-heading" id="gjenstand-title">Rom-inventar</h2>
+          <div class="preview-items">
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/bed-simple.png" width="384" height="256" alt="Enkel seng i lyst tre med mosegrønt teppe" loading="lazy"></div><figcaption>Enkel seng<span class="asset-id">bed-simple</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/bed-upgraded.png" width="384" height="256" alt="Betre seng med korallfarga sengeteppe" loading="lazy"></div><figcaption>God seng<span class="asset-id">bed-upgraded</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/desk-simple.png" width="320" height="224" alt="Enkelt skrivebord i tre" loading="lazy"></div><figcaption>Skrivebord<span class="asset-id">desk-simple</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/desk-gaming.png" width="384" height="256" alt="Større skrive- og spelbord" loading="lazy"></div><figcaption>Større skrivebord<span class="asset-id">desk-gaming</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/monitor.png" width="272" height="200" alt="Tynn skjerm med abstrakt blågrønt bilete" loading="lazy"></div><figcaption>Skjerm<span class="asset-id">monitor</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/computer-tower.png" width="176" height="224" alt="Stasjonær datamaskin i koksgrått og blågrønt" loading="lazy"></div><figcaption>Stasjonær datamaskin<span class="asset-id">computer-tower</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/game-controller.png" width="192" height="144" alt="Spelkontroll med mosegrøne og korallfarga knappar" loading="lazy"></div><figcaption>Spelkontroll<span class="asset-id">game-controller</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/headphones.png" width="192" height="200" alt="Hovudtelefonar med lyngfarga øyreputer" loading="lazy"></div><figcaption>Hovudtelefonar<span class="asset-id">headphones</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/desk-lamp.png" width="160" height="240" alt="Justerbar korallfarga skrivebordslampe" loading="lazy"></div><figcaption>Skrivebordslampe<span class="asset-id">desk-lamp</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/led-string.png" width="384" height="144" alt="Lyslenkje med små varme og blågrøne lys" loading="lazy"></div><figcaption>Lyslenkje<span class="asset-id">led-string</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/rug.png" width="384" height="224" alt="Golvteppe med lyngfarga kant og geometrisk mønster" loading="lazy"></div><figcaption>Golvteppe<span class="asset-id">rug</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/bed-throw.png" width="320" height="192" alt="Bretta korall- og kremfarga sengeteppe" loading="lazy"></div><figcaption>Sengeteppe<span class="asset-id">bed-throw</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/pillow.png" width="144" height="128" alt="Lyngfarga pyntepute med ei lita stjerne" loading="lazy"></div><figcaption>Pyntepute<span class="asset-id">pillow</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/poster.png" width="144" height="224" alt="Innramma nattmotiv med fjell og måne" loading="lazy"></div><figcaption>Nattplakat<span class="asset-id">poster</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/photo-wall.png" width="256" height="224" alt="Oppslagstavle med små abstrakte bilete og kort" loading="lazy"></div><figcaption>Biletevegg<span class="asset-id">photo-wall</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/wall-shelf.png" width="256" height="128" alt="Kort vegghylle i tre" loading="lazy"></div><figcaption>Vegghylle<span class="asset-id">wall-shelf</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/book-stack.png" width="192" height="160" alt="Tre fargerike bøker med blanke ryggar" loading="lazy"></div><figcaption>Bøker<span class="asset-id">book-stack</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/plant.png" width="176" height="240" alt="Grøn plante i korallfarga potte" loading="lazy"></div><figcaption>Grøn plante<span class="asset-id">plant</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/guitar.png" width="192" height="384" alt="Akustisk gitar i varmt tre og korall" loading="lazy"></div><figcaption>Gitar<span class="asset-id">guitar</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/art-supplies.png" width="320" height="256" alt="Skissebøker, fargeblyantar, målarpalett og pensel" loading="lazy"></div><figcaption>Teiknesaker<span class="asset-id">art-supplies</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/training-equipment.png" width="320" height="192" alt="Manualar og samanrulla treningsmatte" loading="lazy"></div><figcaption>Treningsutstyr<span class="asset-id">training-equipment</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/makeup-case.png" width="320" height="256" alt="Ope sminkeskrin med fargar og børstar" loading="lazy"></div><figcaption>Sminkeskrin<span class="asset-id">makeup-case</span></figcaption></figure></article>
+            <article class="asset-card"><figure><div class="sprite-well"><img src="items/vanity-mirror.png" width="256" height="320" alt="Lite sminkespegel med hylle, pudder og hårbørste" loading="lazy"></div><figcaption>Sminkespegel med hylle<span class="asset-id">vanity-mirror</span></figcaption></figure></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="vp-panel vp-panel--plain preview-panel" aria-labelledby="palette-title">
+        <div class="vp-content">
+          <h2 class="vp-heading" id="palette-title">Palettprøve</h2>
+          <ul class="preview-palette">
+            <li><span class="swatch" style="background:#211D27"></span>Kontur</li>
+            <li><span class="swatch" style="background:#403849"></span>Skugge</li>
+            <li><span class="swatch" style="background:#F5E7C8"></span>Lys</li>
+            <li><span class="swatch" style="background:#E98E73"></span>Korall</li>
+            <li><span class="swatch" style="background:#E7BD59"></span>Honning</li>
+            <li><span class="swatch" style="background:#78A47A"></span>Mose</li>
+            <li><span class="swatch" style="background:#70AFC2"></span>Himmel</li>
+            <li><span class="swatch" style="background:#AA8FBE"></span>Lyng</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

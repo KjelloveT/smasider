@@ -4,22 +4,13 @@
     {
       "versjon": "1.81",
       "dato": "2026-10-05",
-      "samandrag": "Heite Stavrim får ein kompakt spelhero og færre kvite kortflater.",
+      "samandrag": "Nye, samanhengande karakterressursar i Livslina si prøveutgåve.",
       "punkt": [
         {
-          "t": "endra",
-          "kva": "Felles spelhero",
-          "tekst": "Når spelet er i gang, blir hero og maskot mindre. Omtalen står i ei eiga, kort linje over."
-        },
-        {
-          "t": "endra",
-          "kva": "Heite Stavrim",
-          "tekst": "Den kompakte heroen gjeld gjennom spel, svar og resultat og går attende til full storleik ved oppsettet."
-        },
-        {
           "t": "fiksa",
-          "kva": "Heite Stavrim",
-          "tekst": "Store panel og poengrader har ikkje lenger kvite bakgrunnsflater. Inndata og knappar held lyse flater."
+          "kva": "Livslina",
+          "tekst": "Karakterbyggjaren har fem val i kvar gruppe, faste festepunkt, samsvarande hud og hender og kontroll av laga.",
+          "merke": "eksperiment"
         }
       ]
     },
