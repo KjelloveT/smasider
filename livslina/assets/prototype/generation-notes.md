@@ -1,19 +1,12 @@
-# Bildebrief — prøvepakke 01
+# Historisk bildebref — prøvepakke 01
 
-Alle bileta i prøvepakka vart laga med den innebygde bildegeneratoren i Codex. Ingen eksisterande Livslina-illustrasjonar vart brukte som visuell kjelde.
+Denne fila dokumenterer den tidlege romprøva. Dei heile karakterillustrasjonane
+frå same runde er tekne ut og er ikkje lenger del av ressursbiblioteket.
+Gjeldande karakterressursar og festepunkt står i v5-manifestet.
 
 ## Felles stilprompt for romressursar
 
-> Bruk detaljert 8-bits pikselkunst med tydelege, firkanta pikselklasar, mørk plomme-koksgrå kontur, avgrensa palett, tre skuggetrinn per materiale og lys frå øvre venstre. Bruk denne palettfamilien: `#211D27`, `#403849`, `#F5E7C8`, `#E98E73`, `#E7BD59`, `#78A47A`, `#70AFC2`, `#AA8FBE`. Ingen kantutjamning, mjuk gradient, sløring, varemerke, lesbar tekst eller vassmerke. Lag eitt heilt objekt per bilete, midtstilt med gjennomsiktig bakgrunn. Referansebiletet av den første figuren styrer berre pikselbehandling og palett; det tomme rommet styrer berre kameravinkel og lys.
-
-## Karaktermotiv
-
-- `student-01.png`: 16-årig elev med mellomdjup varm brun hud, kort tett krøll, runde briller, mosegrøn romsleg gensar og mørkeblå bukse.
-- `student-02.png`: 16-årig elev med lys hud, mørkt hår under eit lyngfarga hovudplagg, korallfarga overskjorte og mørk bukse.
-- `student-03.png`: 16-årig elev med mellomvarm hud, skulderlangt bølgjehår, fregner, lilla gensar og mørk bukse.
-- `student-04-wheelchair.png`: 16-årig elev med mellomdjup brun hud, kort krøll, briller, blågrøn jakke og manuell rullestol.
-
-Alle karakterpromptane bad om heil figur i avslappa, lett skråstilt frontstilling, ungdommelege proporsjonar, synlege hender, gjennomsiktig bakgrunn og ingen logoar eller tekst. Den første figuren etablerte pikseluttrykket; dei tre andre brukte henne som stilreferanse.
+> Den historiske romprøva brukte detaljert 8-bits pikselkunst med tydelege, firkanta pikselklasar, mørk plomme-koksgrå kontur, avgrensa palett, tre skuggetrinn per materiale og lys frå øvre venstre. Palettfamilien var `#211D27`, `#403849`, `#F5E7C8`, `#E98E73`, `#E7BD59`, `#78A47A`, `#70AFC2` og `#AA8FBE`. Rommotiva hadde gjennomsiktig bakgrunn, utan lesbar tekst eller varemerke. Denne gamle briefen er ikkje den gjeldande geometriske eller visuelle standarden.
 
 ## Rommotiv
 
