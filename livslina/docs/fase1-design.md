@@ -8,7 +8,7 @@
 Spelaren styrer ein 16-åring gjennom tre år på vidaregåande (VG1–VG3). Fasen skal
 lære bort, utan å preike:
 
-1. **Små faste val har stor sum over tid** (laurdagsjobb, forbruksprofil, sparing).
+1. **Små faste val har stor sum over tid** (laurdagsjobb, forbruksvanar, sparing).
 2. **Buffer avgjer korleis uhell kjenneste** — same hending, heilt ulik konsekvens med og utan sparepengar.
 3. **Forsikring og eigenrisiko** i miniformat (mobilforsikring vs. skjermbyte).
 4. **Trivsel og energi er òg valuta** — maksimal jobbing gjev pengar, men kostar karakterar og trivsel.
@@ -31,7 +31,7 @@ Fase 1 har **6 hovudrundar** (skulehalvår) med **sommar-mellomspel** mellom sku
 
 **Kvar hovudrunde har fire steg:**
 
-1. **Budsjettkortet** — spelaren ser planlagde inntekter/utgifter for halvåret og justerer dei faste vala (jobb, fritid, forbruksprofil, fast sparetrekk).
+1. **Budsjettkortet** — spelaren ser planlagde inntekter/utgifter for halvåret og justerer jobb, fritidsaktivitetar, forbruksvanar og fast sparetrekk.
 2. **Halvåret spelar seg av** — månad for månad tikkar over skjermen i rask animasjon; kontosaldoen oppdaterer seg.
 3. **Hendingar** — 0–2 hendingskort avbryt avspelinga og krev val (sjå kap. 7).
 4. **Halvårsoppgjeret** — oppsummering: saldo, sparing, trivsel, energi, karaktersnitt, og éi linje «visste du at»-fakta knytt til noko spelaren gjorde.
@@ -84,20 +84,18 @@ Noko må vike») som tvingar fram eit justeringsval — spelet skal aldri straff
 - Utstyrsstipend: eingongsutbetaling kvar haust (runde 1, 3, 5)
 
 **Faste utgifter (heimebuande)**
-- Klede (`monthlyCosts.clothing`), personleg pleie, leik og mediebruk, mobil — justert med forbruksprofil (sjå under)
+- Mobil og transport. Foreldra dekkjer nødvendige klede, personleg pleie, mat og dei faste medieutgiftene.
 - Kollektivkort (`monthlyCosts.publicTransportYouth`) — fell bort med moped
 - Valde fritidsaktivitetar (`leisure.*`)
+- Eigene val for kantine, drikke, mat ute, sosiale arrangement, klesshopping og kjøp inne i spel.
 
 **Faste utgifter (hybel, i tillegg)**
 - Husleige (`housing.hybelRent`), mat (`monthlyCosts.food`), hushaldsutgifter (`householdCostsSinglePerson`: dagligvarer + husholdningsartiklar + mediebruk/internett; møblar-posten er med frå månad 2)
 
-**Forbruksprofil** (vel per halvår, gjeld klede + leik/mediebruk):
-- Nøysam: 70 % av SIFO-sats, −2 trivsel/mnd
-- SIFO-nivå: 100 %
-- Raus: 140 %, +2 trivsel/mnd
-
-Poenget som skal fram i ettertanke-loggen: skilnaden mellom nøysam og raus er
-~1 100 kr/mnd — over tre år er det over 40 000 kr, men trivselen har òg ein pris.
+**Forbruksvanar** (vel per halvår): konkrete frekvens- og vekebudsjett for mat
+ute, sosiale arrangement, klesshopping og spelkjøp viser kva eigne val kostar.
+Det finst ingen eigen «nøysam» eller «raus» knapp. Nøysemdsmerket blir rekna
+ut frå dei valde utgiftene, medan trivsel kjem frå aktivitetar og hendingar.
 
 **Skatt:** summert årsinntekt under `tax.taxFreeCardLimit` → trekkfritt. Over → 25 %
 på overskytande (`tax.simplifiedRule`). Frikortet skal visast eksplisitt i UI når

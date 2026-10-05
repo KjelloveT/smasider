@@ -2,14 +2,34 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
-      "versjon": "1.85",
+      "versjon": "1.86",
       "dato": "2026-10-05",
-      "samandrag": "Bragdane har fått måla merke i tre nivå, og framsida har fått ein snarveg til bragdsamlinga.",
+      "samandrag": "Livslina får større karaktervisingar, konkrete forbruksval og ein kalender som viser tida gjennom halvåret.",
       "punkt": [
         {
           "t": "endra",
-          "kva": "Bragdane dine",
-          "tekst": "Den kompakte oversikta viser illustrerte merke utan tekst. Trykk på eit merke for å sjå kravet, spelet det høyrer til og om det er oppnådd. Framsida har fått ein knapp til bragdsamlinga."
+          "kva": "Livslina",
+          "tekst": "Karaktervala viser større utsnitt utan synlege tekstetikettar. Hårvala brukar same nærbilete som andletet, og kleda viser meir av overkroppen. Halvårsbudsjettet erstattar forbruksprofilen med val for mat ute, sosiale arrangement, klesshopping og kjøp inne i spel, i tillegg til kantine, drikke, mobildata og sesongpass. Vala blir hugsa til neste halvår, og ein animert kalender viser månadene og hendingane.",
+          "merke": "eksperiment"
+        },
+        {
+          "t": "fiksa",
+          "kva": "Livslina",
+          "tekst": "Valgrupper markerer berre det sist valde alternativet. Rombutikken viser ikkje poengverknader, og aktivitetar tel meir for trivsel enn møblar. Planleggingssteget viser ikkje lenger hjelpeteksten om at førre plan er fylt inn.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
+      "versjon": "1.85",
+      "dato": "2026-10-05",
+      "samandrag": "Korte hårvariantar i Livslina sit no tettare til hovudforma.",
+      "punkt": [
+        {
+          "t": "fiksa",
+          "kva": "Livslina",
+          "tekst": "Dei ti nye korte frisyrene er skalerte etter hovudforma, held seg innanfor øyrebreidda og stoppar over nedre øyrekant.",
+          "merke": "eksperiment"
         }
       ]
     },

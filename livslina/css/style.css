@@ -42,11 +42,15 @@
 .ll-character-picker { min-width: 0; }
 .ll-character-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.65rem; }
 .ll-character-tabs [aria-selected="true"] { background: var(--vp-honey); }
-.ll-character-options { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.5rem; }
-.ll-character-option { display: grid; grid-template-rows: 96px auto; justify-items: center; align-content: start; gap: 0.35rem; min-width: 0; min-height: 0; padding: 0.35rem; white-space: normal; line-height: 1.25; text-align: center; font-size: 0.78rem; }
+.ll-character-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+.ll-character-option { display: block; width: 100%; min-width: 0; min-height: 0; padding: 0.45rem; white-space: normal; }
 .ll-character-option[aria-pressed="true"] { background: var(--vp-honey); }
-.ll-character-thumb { width: 64px; height: 96px; object-fit: contain; image-rendering: pixelated; }
-.ll-character-option span { overflow-wrap: anywhere; }
+.ll-character-thumb-frame { position: relative; display: block; width: 100%; aspect-ratio: 1; overflow: hidden; border-radius: calc(var(--vp-radius) * 0.65); background: var(--vp-paper); image-rendering: pixelated; }
+.ll-character-thumb { position: absolute; top: 0; left: 0; display: block; width: 100%; max-width: none; height: auto; image-rendering: pixelated; }
+.ll-character-thumb-frame--skin .ll-character-thumb { top: -30%; left: -70%; width: 240%; }
+.ll-character-thumb-frame--face .ll-character-thumb { top: -35%; left: -70%; width: 240%; }
+.ll-character-thumb-frame--hair .ll-character-thumb { top: -35%; left: -70%; width: 240%; }
+.ll-character-thumb-frame--clothes .ll-character-thumb { top: -73.33%; left: -30%; width: 160%; }
 .ll-family-reveal { text-align: center; padding-block: 0.75rem; }
 .ll-family-card { display: inline-block; width: min(100%, 34rem); padding: 1.25rem; text-align: left; }
 .ll-family-card h3 { margin: 0 0 0.5rem; }
@@ -128,6 +132,19 @@
 .ll-stat--net { margin-top: 0.75rem; }
 .ll-pb-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(130px, 0.65fr); gap: 1rem; align-items: start; }
 .ll-pb-month { margin-bottom: 0.6rem; font-size: 1.55rem; font-weight: 800; }
+.ll-pb-calendar { margin-block: 1rem; padding: 0.85rem; border: 1px solid var(--vp-border); border-radius: var(--vp-radius); background: var(--vp-paper); }
+.ll-pb-calendar-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.35rem 0.75rem; margin-bottom: 0.65rem; }
+.ll-pb-calendar-heading span { font-size: 0.9rem; }
+.ll-pb-calendar-months { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; }
+.ll-calendar-month { min-width: 0; padding: 0.55rem; border: 1px solid var(--vp-border); border-radius: calc(var(--vp-radius) * 0.7); background: var(--vp-paper); transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease; }
+.ll-calendar-month.is-current { border-color: var(--vp-frame); background: var(--vp-honey); transform: translateY(-2px); }
+.ll-calendar-month.is-done { background: var(--vp-moss); }
+.ll-calendar-month.arriving { animation: ll-calendar-arrive 520ms ease-out; }
+@keyframes ll-calendar-arrive { from { opacity: 0.45; transform: translateY(7px) scale(0.97); } to { opacity: 1; transform: translateY(-2px) scale(1); } }
+.ll-calendar-month-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.2rem; margin-bottom: 0.35rem; font-size: 0.85rem; }
+.ll-calendar-month-head span { font-size: 0.65rem; font-weight: 700; }
+.ll-calendar-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; color: var(--vp-ink); font-size: 0.58rem; line-height: 1.4; text-align: center; }
+.ll-calendar-days span { border-radius: 2px; }
 .ll-pb-balance { font-size: 1.9rem; }
 .ll-pb-ledger { max-height: 220px; margin-top: 0.85rem; overflow: auto; padding: 0.5rem 0.75rem; border: 1px solid var(--vp-border); border-radius: var(--vp-radius); background: var(--vp-paper); }
 .ll-pb-line { display: flex; justify-content: space-between; gap: 0.5rem; padding: 0.35rem 0; border-bottom: 1px solid var(--vp-border); font-size: 0.9rem; }
@@ -141,11 +158,12 @@
 .ll-turning-delta { font-weight: 800; }
 .ll-badges { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 0.6rem; }
 .ll-badge.earned { background: var(--vp-moss); }
-.ll-event-modal { width: min(100%, 42rem); }
-.ll-event-vignette { max-width: 220px; margin: 0 auto 0.7rem; }
-.ll-event-meta { margin: 0 0 0.35rem; font-size: 0.82rem; font-weight: 700; }
-.ll-event-choices { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.85rem; }
-.ll-event-choice { display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; width: 100%; height: auto; padding: 0.65rem 0.85rem; white-space: normal; text-align: left; }
+.ll-event-modal { width: min(100%, 42rem); padding: clamp(1.25rem, 4vw, 2rem); }
+.ll-event-modal > * + * { margin-top: 1rem; }
+.ll-event-vignette { max-width: 220px; margin: 0 auto 1rem; }
+.ll-event-meta { margin: 0; font-size: 0.82rem; font-weight: 700; }
+.ll-event-choices { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.25rem; }
+.ll-event-choice { display: flex; flex-direction: column; align-items: flex-start; gap: 0.35rem; width: 100%; height: auto; padding: 0.9rem 1rem; white-space: normal; text-align: left; line-height: 1.5; }
 .ll-event-choice-lbl { font-weight: 800; }
 .ll-event-choice-note { font-size: 0.83rem; font-weight: 400; }
 .ll-purchases { display: grid; gap: 0.55rem; margin-top: 0.5rem; }
@@ -169,8 +187,9 @@
   .ll-character-preview .ll-character-canvas { grid-row: span 2; width: min(100%, 145px); }
   .ll-character-preview .ll-note { align-self: end; text-align: left; }
   .ll-character-preview .vp-button { justify-self: start; }
-  .ll-character-options { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ll-character-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .ll-home-grid, .ll-pb-grid { grid-template-columns: minmax(0, 1fr); }
+  .ll-pb-calendar-months { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ll-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ll-home-figure { max-width: 130px; }
   .ll-budget-cols { grid-template-columns: minmax(0, 1fr); }
@@ -188,4 +207,6 @@
 @media (prefers-reduced-motion: reduce) {
   .screen.active { animation: none; }
   .ll-meter-fill { transition: none; }
+  .ll-calendar-month { transition: none; }
+  .ll-calendar-month.arriving { animation: none; }
 }

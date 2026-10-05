@@ -69,7 +69,9 @@ LL.artRoom = (function () {
       const item = product(id);
       if (!item) return;
       result.energyPerMonth += Number(item.energyPerMonth) || 0;
-      result.wellbeingPerMonth += Number(item.wellbeingPerMonth) || 0;
+      // Romting kan gje eit lite løft, men tel langt mindre enn aktivitetar
+      // saman med andre eller fysisk rørsle.
+      result.wellbeingPerMonth += (Number(item.wellbeingPerMonth) || 0) * 0.15;
     });
     return result;
   }

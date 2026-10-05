@@ -81,14 +81,73 @@
       "kind": "official",
       "values": { "age6_19": 327, "age20_66": 985, "student20_29": 591 },
       "gameValue14_17": 327
-    },
-    "mobileSubscription": {
-      "label": "Mobilabonnement ungdom",
-      "unit": "krPerMonth",
-      "source": "estimate",
-      "kind": "estimate",
-      "gameValue": 300
     }
+  },
+
+  "recurringSpending": {
+    "source": "estimate",
+    "kind": "estimate",
+    "note": "Representative spelanslag frå 2026. Kantineprisar, mat ute, sosiale arrangement og abonnement varierer; tala er laga for å synleggjere korleis vanar påverkar budsjettet.",
+    "canteen": {
+      "pricePerVisit": 65,
+      "options": [
+        { "visits": 0, "label": "Aldri" },
+        { "visits": 1, "label": "1 gong i veka" },
+        { "visits": 3, "label": "3 gonger i veka" },
+        { "visits": 5, "label": "Kvar skuledag" }
+      ]
+    },
+    "drinks": {
+      "pricePerItem": 28,
+      "options": [
+        { "perWeek": 0, "label": "Ingen" },
+        { "perWeek": 1, "label": "1 i veka" },
+        { "perWeek": 3, "label": "3 i veka" },
+        { "perWeek": 5, "label": "5 i veka" }
+      ]
+    },
+    "eatingOut": {
+      "pricePerVisit": 165,
+      "options": [
+        { "visitsPerWeek": 0, "label": "Aldri" },
+        { "visitsPerWeek": 1, "label": "1 gong i veka" },
+        { "visitsPerWeek": 2, "label": "2 gonger i veka" },
+        { "visitsPerWeek": 4, "label": "4 gonger i veka" }
+      ]
+    },
+    "socialEvents": {
+      "pricePerEvent": 300,
+      "options": [
+        { "eventsPerMonth": 0, "label": "Sjeldan eller aldri" },
+        { "eventsPerMonth": 1, "label": "1 gong i månaden" },
+        { "eventsPerMonth": 2, "label": "2 gonger i månaden" },
+        { "eventsPerMonth": 4, "label": "Om lag 1 gong i veka" },
+        { "eventsPerMonth": 8, "label": "Om lag 2 gonger i veka" }
+      ]
+    },
+    "clothingShopping": {
+      "options": [
+        { "perWeek": 0, "label": "0 kr i veka" },
+        { "perWeek": 100, "label": "100 kr i veka" },
+        { "perWeek": 250, "label": "250 kr i veka" },
+        { "perWeek": 500, "label": "500 kr i veka" }
+      ]
+    },
+    "inGamePurchases": {
+      "options": [
+        { "perWeek": 0, "label": "0 kr i veka" },
+        { "perWeek": 50, "label": "50 kr i veka" },
+        { "perWeek": 200, "label": "200 kr i veka" },
+        { "perWeek": 500, "label": "500 kr i veka" }
+      ]
+    },
+    "mobilePlans": [
+      { "id": "mobile-2gb", "label": "Lite · 2 GB", "pricePerMonth": 199 },
+      { "id": "mobile-10gb", "label": "Mellom · 10 GB", "pricePerMonth": 299 },
+      { "id": "mobile-30gb", "label": "Mykje · 30 GB", "pricePerMonth": 399 },
+      { "id": "mobile-unlimited", "label": "Uavgrensa data", "pricePerMonth": 499 }
+    ],
+    "seasonPass": { "pricePerSeason": 150, "monthsPerSeason": 3 }
   },
 
   "householdCostsSinglePerson": {

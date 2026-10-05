@@ -139,7 +139,7 @@ LL.events = (function () {
     LL.main.closeModal('eventModal');
     LL.storage.saveActive(state);
     pendingResume.idx++;
-    setTimeout(showNext, 250);
+    setTimeout(showNext, 1500);
   }
 
   function applyEffects(state, e, ctx, ev) {

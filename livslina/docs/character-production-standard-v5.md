@@ -100,3 +100,8 @@ Ressursprøva har no tjue andletsuttrykk og tjue frisyrar, i tillegg til fem hud
 Meisterhovudet, naseplasseringa og ansiktsramma er felles. Denne runden varierer augebryn, auge og munn; ho endrar ikkje kjeveforma eller hovudstorleiken. Hårressursane held seg til same målte krone og fullramme. Dei nye korte frisyrene har tomt baklag, og frontlaget blir reinska mot ansiktsvernet før eksport. Ingen hudfarge er bakt inn i ansikts- eller hårlaga.
 
 Dei nye kjeldeteikningane ligg lokalt under `livslina/_kjelder/character-v5.2/raw/` og blir haldne utanfor Git. Målte registreringar og faktiske generasjonsinstruksar ligg i [utvidingsloggen](character-generation-v5-masculine-additions.md).
+
+
+## Korrigering v5.3 — korte frisyrar
+
+Gjennomgangen av v5.2 viste at dei nye korte hårlaga var registrerte med 466 pikslar breidd på ei 1024-pikslars kjelderamme. Det gjorde dei 49 % breiare enn den målte hovudforma. Alle ti korte frisyrane er no registrerte proporsjonalt til 316 pikslar breidd mot 312 pikslar hovudbreidd og 408 pikslar ytre øyrebreidd. Kronefestet er framleis (512, 128). Nærmaste pikselinterpolering bevarer pikselkantane; inga ikkje-proporsjonal strekkjing er brukt. Alle hårlag stoppar ovanfor nedre øyrekant og held øyra frie.

@@ -61,11 +61,10 @@
     <!-- Steg 1: karakter -->
     <div id="wpanel-character" class="ll-wizard-panel vp-panel vp-panel--plain">
       <h2 class="heading3 no-mt">Lag figuren din</h2>
-      <p>Set saman ein figur som liknar deg, eller prøv deg fram. Alle val er gratis.</p>
+      <p>Set saman ein figur som liknar deg, eller prøv deg fram.</p>
       <div class="ll-character-builder">
         <div class="ll-character-preview">
           <div class="ll-doll-stage" id="dollStage"></div>
-          <p id="characterSummary" class="ll-note" aria-live="polite"></p>
           <button class="vp-button vp-button--quiet" id="randomCharacter" type="button"><span data-icon="shuffle"></span> Trekk ein figur</button>
         </div>
         <div class="ll-character-picker">
@@ -158,12 +157,11 @@
       <section class="vp-panel vp-panel--plain ll-room-stage-panel" aria-labelledby="roomSceneTitle">
         <h3 class="heading4 no-mt" id="roomSceneTitle">Slik ser rommet ut</h3>
         <div id="roomDiorama" class="ll-room-scene"></div>
-        <p id="roomEffects" class="ll-room-effects" aria-live="polite"></p>
         <p class="vp-help">Vel ein ting i butikken for å sjå henne i rommet før du kjøper.</p>
       </section>
       <section class="vp-panel vp-panel--soft ll-room-shop" aria-labelledby="shopTitle">
         <div class="ll-shop-heading">
-          <div><h3 class="heading3 no-mt" id="shopTitle">Rombutikken</h3><p class="ll-note">Saldo: <strong id="roomBalance">0 kr</strong></p><p class="vp-help">Spelprisar og små utslag gjeld berre i Livslina.</p></div>
+          <div><h3 class="heading3 no-mt" id="shopTitle">Rombutikken</h3><p class="ll-note">Saldo: <strong id="roomBalance">0 kr</strong></p><p class="vp-help">Spelprisar gjeld berre i Livslina.</p></div>
         </div>
         <div class="ll-shop-categories" id="roomCategories" role="tablist" aria-label="Varekategoriar"></div>
         <p class="ll-note" id="roomCategoryHint"></p>
@@ -172,7 +170,6 @@
           <p class="ll-eyebrow">Vald vare</p>
           <h4 id="roomSelectedName"></h4>
           <p id="roomSelectedDescription" class="ll-note"></p>
-          <p id="roomSelectedEffect" class="ll-effect-line"></p>
           <div class="ll-product-action-row">
             <strong id="roomSelectedPrice"></strong>
             <button class="vp-button vp-button--primary" id="roomAction" type="button"></button>
@@ -186,12 +183,18 @@
   <!-- ══════════ BUDSJETTKORTET ══════════ -->
   <section id="screen-budget" class="screen">
     <h2 class="heading3 no-mt" id="budgetRound">Planlegg halvåret</h2>
-    <p id="budgetTimeframe" class="ll-note"></p>
     <div class="ll-budget-grid">
       <div class="vp-panel vp-panel--plain">
         <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skulen</legend><div class="ll-btn-row" id="budgetJob" role="group"></div></fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Forbruksprofil</legend><div class="ll-btn-row" id="budgetProfile" role="group"></div></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Fritidsaktivitetar</legend><div class="ll-btn-row" id="budgetActivities" role="group"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Kor ofte handlar du i skulekantina?</legend><div class="ll-btn-row" id="budgetCanteen" role="group" aria-label="Kantinekjøp per veke"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brus eller energidrikk kjøper du?</legend><div class="ll-btn-row" id="budgetDrinks" role="group" aria-label="Kjøp av brus eller energidrikk per veke"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Kor ofte kjøper du mat ute?</legend><div class="ll-btn-row" id="budgetEatingOut" role="group" aria-label="Mat ute per veke"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Kor ofte brukar du pengar på festar eller sosiale arrangement?</legend><div class="ll-btn-row" id="budgetSocialEvents" role="group" aria-label="Fest og sosiale arrangement per månad"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brukar du på klesshopping i veka?</legend><div class="ll-btn-row" id="budgetClothingShopping" role="group" aria-label="Klesshopping per veke"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brukar du på kjøp inne i spel i veka?</legend><div class="ll-btn-row" id="budgetInGamePurchases" role="group" aria-label="Kjøp inne i spel per veke"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Kor mykje mobildata brukar du?</legend><div class="ll-btn-row" id="budgetMobile" role="group" aria-label="Mobildata per månad"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Kjøper du sesongpass i spel?</legend><div class="ll-btn-row" id="budgetSeasonPass" role="group" aria-label="Sesongpass i spel"></div></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Fast sparing</legend><div class="ll-btn-row" id="budgetSavings" role="group"></div></fieldset>
       </div>
 
@@ -232,6 +235,10 @@
         <div>
           <div class="ll-pb-month" id="pbMonth">—</div>
           <p class="ll-note" id="pbMonthProgress"></p>
+          <section class="ll-pb-calendar" aria-label="Kalender for halvåret">
+            <div class="ll-pb-calendar-heading"><strong>Kalender for halvåret</strong><span id="pbCalendarStatus" aria-live="polite">Ventar på skulestart</span></div>
+            <div class="ll-pb-calendar-months" id="pbCalendarMonths" role="list" aria-label="Månadene i halvåret"></div>
+          </section>
           <div class="ll-pb-balance-lbl ll-stat-lbl"><span data-icon="coins" data-icon-size="15"></span> Konto</div>
           <div class="ll-stat-val ll-pb-balance" id="pbBalance">0 kr</div>
           <div class="ll-pb-ledger" id="pbLedger"></div>

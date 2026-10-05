@@ -85,7 +85,7 @@ LL.uiReport = (function () {
     { id: 'fagbrev', icon: 'award', label: 'Fagbrev-kurs', desc: 'Sikra ein god læreplass', test: s => s.program.type === 'yrkesfag' && s.flags.laereplassBra },
     { id: 'studieklar', icon: 'book', label: 'Studieklar', desc: 'Studieførebuande med snitt 4+', test: s => s.program.type === 'studieforberedande' && s.stats.grades >= 4 },
     { id: 'balanse', icon: 'heart', label: 'Balansekunstnar', desc: 'Trivsel og energi aldri under 40', test: s => s.minWellbeing >= 40 && s.minEnergy >= 40 },
-    { id: 'noysemd', icon: 'shield', label: 'Nøysemd', desc: 'Nøysam profil i minst 4 halvår', test: s => (s.noysamCount || 0) >= 4 },
+    { id: 'noysemd', icon: 'shield', label: 'Nøysemd', desc: 'Nøysame forbrukarval i minst 4 halvår', test: s => (s.noysamCount || 0) >= 4 },
     { id: 'pluss', icon: 'sparkles', label: 'Alltid i pluss', desc: 'Kontoen var aldri i minus', test: s => !s.wentNegative },
     { id: 'formue', icon: 'trophy', label: 'God start', desc: 'Over 30 000 kr i formue til slutt', test: s => (s.stats.money + s.stats.savings) >= 30000 }
   ];
