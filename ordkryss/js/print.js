@@ -9,11 +9,11 @@ OK.print = (function () {
 
   /* ---- Utskrift ---- */
 
-  /** Rutestorleik i punkt som gjer at rutenettet får plass på A4-breidda. */
-  function printCellSize(cols) {
-    const usableMm = 170;                       // A4 minus margar
-    const px = Math.floor((usableMm * 3.78) / cols);
-    return Math.max(14, Math.min(34, px));
+  /** Rutestorleik i CSS-piksel tilpassa både breidda og høgda på A4-arket. */
+  function printCellSize(cols, rows) {
+    const usableMm = 166;                       // A4-innhald med litt rom rundt rutenettet
+    const px = Math.floor((usableMm * 3.78) / Math.max(cols, rows));
+    return Math.max(14, Math.min(44, px));
   }
 
   function clueColumn(heading, entries, showAnswers) {
@@ -43,7 +43,7 @@ OK.print = (function () {
 
     node.appendChild(OK.render.gridElement(layout, words, {
       showAnswers: !!options.answerKey,
-      cellSize: printCellSize(layout.cols)
+      cellSize: printCellSize(layout.cols, layout.rows)
     }));
 
     const groups = OK.render.clueGroups(layout, words);

@@ -270,6 +270,7 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .podium-3rd { height: 70px; background: #e0a463; }
 
 @media print {
+  @page { size: A4 portrait; margin: 12mm; }
   .vp-header, .fb-nav, .fb-controls, .game-controls, .btn-remove-team { display: none !important; }
   .jeopardy-grid, .box1 { break-inside: avoid; }
 }

@@ -484,6 +484,7 @@ body[data-font="lesefont"] .ljod-bed-letter {
 /* ──────────────── Utskrift ──────────────── */
 
 @media print {
+  @page { size: A4 portrait; margin: 12mm; }
   .vp-header, .vp-hero-stage, .vp-notice, .ljod-tabs, #printLaerar,
   .vp-standard-support, #profiles, #modes, #stars, .ljod-playbar { display: none !important; }
   .vp-panel { border: 0; box-shadow: none; }

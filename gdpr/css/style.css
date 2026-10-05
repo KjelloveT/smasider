@@ -244,7 +244,7 @@
      den som skal kontrollere han. */
   .gd-ark-aktivitet { break-inside: avoid; page-break-inside: avoid; }
 
-  @page { size: A4; margin: 14mm; }
+  @page { size: A4 portrait; margin: 14mm; }
 }
 
 /* ──────────────── Rettleiing ──────────────── */

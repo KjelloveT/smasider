@@ -121,6 +121,7 @@
 }
 
 @media print {
+    @page { size: A4 portrait; margin: 12mm; }
     .vp-header, .toolbar, .gallery, .panel, .bf-hero { display: none !important; }
     .stage { border: none; box-shadow: none; padding: 0; }
     #collage-canvas { border: none; box-shadow: none; }
