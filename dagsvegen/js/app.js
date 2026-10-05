@@ -51,7 +51,6 @@ const App = (() => {
     function setMode(mode) {
         document.body.dataset.mode = mode;
         $('edit-view').classList.toggle('dv-hidden', mode !== 'edit');
-        applyHero();
         if (mode === 'edit') {
             $('empty-state').classList.add('dv-hidden');
             applyPanels();
@@ -62,14 +61,7 @@ const App = (() => {
         }
     }
 
-    /* ---- hero (kan lukkast for godt) ---- */
-
-    function applyHero() {
-        $('hero').classList.toggle('dv-hidden',
-            document.body.dataset.mode !== 'edit' || session.ui.heroDismissed);
-    }
-
-    /* ---- flyttbare panel: dagsplan og plan for timen ---- */
+    /* ---- panel: dagsplan og plan for timen ---- */
 
     function applyPanels() {
         const plan = getTodayPlan();
@@ -95,23 +87,12 @@ const App = (() => {
     function initPanel(wrapId, barId, title, key) {
         const box = $(wrapId);
         const bar = $(barId);
-        bar.appendChild(Icons.create('grip', 14));
+        bar.appendChild(Icons.create(key === 'day' ? 'calendar' : 'clock', 16));
         bar.appendChild(Dom.el('span', { class: 'dv-panel-title', text: title }));
         bar.appendChild(Dom.el('button', {
             class: 'dv-icon-btn', 'aria-label': 'Skjul ' + title.toLowerCase(),
             onclick: () => togglePanel(key)
         }, Icons.create('x', 16)));
-        Widgets.makeDraggable(box, bar, (x, y) => {
-            session.panels[key].x = Math.round(x);
-            session.panels[key].y = Math.round(y);
-            saveSession();
-        });
-        const p = session.panels[key];
-        if (p.x != null && p.y != null) {
-            box.style.left = Math.min(p.x, window.innerWidth - 80) + 'px';
-            box.style.top = Math.min(Math.max(0, p.y), window.innerHeight - 60) + 'px';
-            box.style.right = 'auto';
-        }
     }
 
     function initPanels() {
@@ -121,33 +102,42 @@ const App = (() => {
         $('btn-panel-lesson').addEventListener('click', () => togglePanel('lesson'));
     }
 
-    /* ---- venstremeny ---- */
-
-    function positionSidebar() {
-        const header = document.querySelector('.vp-migrated-header');
-        const bottom = header ? header.getBoundingClientRect().bottom : 80;
-        const top = Math.max(10, bottom + 12);
-        const sidebar = $('sidebar');
-        sidebar.style.top = top + 'px';
-        sidebar.style.maxHeight = Math.max(160, window.innerHeight - top - 16) + 'px';
-    }
+    /* ---- verktøymeny ---- */
 
     function applySidebar() {
         $('sidebar').classList.toggle('open', !!session.ui.sidebarOpen);
         document.body.classList.toggle('dv-sidebar-open', !!session.ui.sidebarOpen);
         $('sidebar-toggle').setAttribute('aria-expanded', String(!!session.ui.sidebarOpen));
+        $('sidebar-toggle').setAttribute('aria-label', session.ui.sidebarOpen ? 'Skjul verktøya' : 'Vis verktøya');
+    }
+
+    function setSidebarOpen(open, restoreFocus = false) {
+        if (session.ui.sidebarOpen === open) return;
+        session.ui.sidebarOpen = open;
+        applySidebar();
+        saveSession();
+        if (restoreFocus) $('sidebar-toggle').focus();
     }
 
     function wireSidebar() {
         $('sidebar-toggle').addEventListener('click', () => {
-            session.ui.sidebarOpen = !session.ui.sidebarOpen;
-            saveSession();
-            applySidebar();
+            setSidebarOpen(!session.ui.sidebarOpen);
         });
+        $('sidebar').addEventListener('click', (ev) => {
+            const action = ev.target.closest('.dv-side-btn');
+            if (action && action.id !== 'sidebar-toggle') {
+                const opensDialog = ['btn-quick', 'btn-break', 'btn-help', 'btn-settings'].includes(action.id);
+                setSidebarOpen(false, !opensDialog);
+            }
+        });
+        document.addEventListener('click', (ev) => {
+            if (session.ui.sidebarOpen && !$('sidebar').contains(ev.target)) setSidebarOpen(false);
+        });
+        if (session.ui.sidebarOpen) {
+            session.ui.sidebarOpen = false;
+            saveSession();
+        }
         applySidebar();
-        positionSidebar();
-        window.addEventListener('resize', positionSidebar);
-        window.addEventListener('load', positionSidebar);
     }
 
     /* ---- toast ---- */
@@ -202,6 +192,7 @@ const App = (() => {
         });
         document.addEventListener('keydown', (ev) => {
             if (ev.key !== 'Escape') return;
+            if (session.ui.sidebarOpen) { setSidebarOpen(false, true); return; }
             if (Draw.isActive()) { Draw.setActive(false); syncDrawBtn(); return; }
             if (Widgets.calmIsOpen()) Widgets.closeCalm();
         });
@@ -259,14 +250,12 @@ const App = (() => {
         $('btn-calm').addEventListener('click', () => Widgets.openCalm());
         $('btn-break').addEventListener('click', () => Widgets.openBrainBreak());
         $('btn-draw').addEventListener('click', () => { Draw.setActive(!Draw.isActive()); syncDrawBtn(); });
-        $('btn-note').addEventListener('click', () => Notes.addNote());
+        $('btn-note').addEventListener('click', () => {
+            setSidebarOpen(false);
+            Notes.addNote();
+        });
         $('btn-settings').addEventListener('click', openSettings);
         $('btn-help').addEventListener('click', () => Vy.openModal($('modal-help')));
-        $('btn-hero-close').addEventListener('click', () => {
-            session.ui.heroDismissed = true;
-            saveSession();
-            applyHero();
-        });
         $('btn-fullscreen').addEventListener('click', () => {
             if (document.fullscreenElement) document.exitFullscreen();
             else document.documentElement.requestFullscreen();

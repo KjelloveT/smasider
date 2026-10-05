@@ -7,45 +7,14 @@
 const Widgets = (() => {
     const $ = (id) => document.getElementById(id);
 
-    /* ---- felles: gjer ein widget dragbar via gripe-lina ---- */
-    function makeDraggable(box, handle, onDrop) {
-        handle.style.touchAction = 'none';
-        handle.addEventListener('pointerdown', (ev) => {
-            if (ev.target.closest('button')) return;
-            ev.preventDefault();
-            const rect = box.getBoundingClientRect();
-            const dx = ev.clientX - rect.left, dy = ev.clientY - rect.top;
-            handle.setPointerCapture(ev.pointerId);
-            function move(e) {
-                const x = Math.min(window.innerWidth - 60, Math.max(0, e.clientX - dx));
-                const y = Math.min(window.innerHeight - 40, Math.max(0, e.clientY - dy));
-                box.style.left = x + 'px';
-                box.style.top = y + 'px';
-                box.style.right = 'auto';
-                box.style.bottom = 'auto';
-            }
-            function up() {
-                handle.removeEventListener('pointermove', move);
-                handle.removeEventListener('pointerup', up);
-                if (onDrop) {
-                    const r = box.getBoundingClientRect();
-                    onDrop(r.left, r.top);
-                }
-            }
-            handle.addEventListener('pointermove', move);
-            handle.addEventListener('pointerup', up);
-        });
-    }
-
-    function widgetFrame(id, title, onClose) {
+    function widgetFrame(id, title, icon, onClose) {
         const box = $(id);
         const bar = Dom.el('div', { class: 'dv-widget-bar' },
-            Icons.create('grip', 14),
+            Icons.create(icon, 16),
             Dom.el('span', { class: 'dv-widget-title', text: title }),
             Dom.el('button', { class: 'dv-icon-btn', 'aria-label': 'Lukk ' + title.toLowerCase(), onclick: onClose },
                 Icons.create('x', 16)));
         box.appendChild(bar);
-        makeDraggable(box, bar);
         return box;
     }
 
@@ -84,7 +53,7 @@ const Widgets = (() => {
     let cdCircle = null, cdDigits = null, cdStartBtn = null;
 
     function initCountdown() {
-        const box = widgetFrame('countdown-widget', 'Nedteljar', () => toggle('countdown-widget'));
+        const box = widgetFrame('countdown-widget', 'Nedteljar', 'hourglass', () => toggle('countdown-widget'));
         cdDigits = Dom.el('div', { class: 'dv-cd-digits', text: '05:00' });
         cdCircle = Dom.el('div', { class: 'dv-cd-circle', 'aria-hidden': 'true' }, cdDigits);
 
@@ -157,7 +126,7 @@ const Widgets = (() => {
     let swDigits = null, swLaps = null, swStartBtn = null;
 
     function initStopwatch() {
-        const box = widgetFrame('stopwatch-widget', 'Stoppeklokke', () => toggle('stopwatch-widget'));
+        const box = widgetFrame('stopwatch-widget', 'Stoppeklokke', 'timer', () => toggle('stopwatch-widget'));
         swDigits = Dom.el('div', { class: 'dv-sw-digits', text: '00:00' });
         swLaps = Dom.el('ol', { class: 'dv-sw-laps' });
         swStartBtn = Dom.el('button', { class: 'btn dv-btn-small', 'aria-label': 'Start eller stopp stoppeklokka',
@@ -205,7 +174,7 @@ const Widgets = (() => {
     const LIGHT_LABELS = { green: 'Grønt: samarbeid er lov', yellow: 'Gult: kviskrestemme', red: 'Raudt: heilt stille' };
 
     function initTraffic() {
-        const box = widgetFrame('traffic-widget', 'Trafikklys', () => toggle('traffic-widget'));
+        const box = widgetFrame('traffic-widget', 'Trafikklys', 'traffic-light', () => toggle('traffic-widget'));
         const lamp = Dom.el('button', { class: 'dv-traffic', 'aria-label': 'Byt trafikklys' },
             Dom.el('span', { class: 'dv-lamp dv-lamp-red' }),
             Dom.el('span', { class: 'dv-lamp dv-lamp-yellow' }),
@@ -254,6 +223,9 @@ const Widgets = (() => {
     function toggle(id) {
         const box = $(id);
         box.classList.toggle('dv-hidden');
+        const dock = $('widget-dock');
+        dock.classList.toggle('is-open', Array.from(dock.querySelectorAll('.dv-widget'))
+            .some(widget => !widget.classList.contains('dv-hidden')));
         return !box.classList.contains('dv-hidden');
     }
 
@@ -266,5 +238,5 @@ const Widgets = (() => {
         $('btn-break-new').addEventListener('click', rollBrainBreak);
     }
 
-    return { init, toggle, openCalm, closeCalm, calmIsOpen, openBrainBreak, applyClockVisibility, applyTraffic, makeDraggable, mountClockToHeader };
+    return { init, toggle, openCalm, closeCalm, calmIsOpen, openBrainBreak, applyClockVisibility, applyTraffic, mountClockToHeader };
 })();

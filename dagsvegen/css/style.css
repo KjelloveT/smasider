@@ -6,53 +6,51 @@
 
 .dv-hidden { display: none !important; }
 
-/* ---- full breidde + plass til venstremenyen ---- */
-.main-content { max-width: none; padding-left: 88px; padding-right: 20px; }
+/* ---- arbeidsflate ---- */
+.main-content { max-width: none; padding: clamp(16px, 2vw, 28px); }
 #edit-view { max-width: 1200px; }
-@media (max-width: 700px) {
-    .main-content { padding-left: 70px; padding-right: 10px; }
-}
 
-/* ---- topplinje (berre datolinja) ---- */
-#topbar { margin-bottom: clamp(12px, 2vw, 20px); }
+/* ---- topplinje ---- */
+#topbar {
+    position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center;
+    gap: 16px; margin-bottom: clamp(12px, 2vw, 20px);
+}
 .dv-dateline {
-    font-size: clamp(1.3rem, 3.5vw, 2.2rem); font-weight: 900;
+    flex: 1 1 auto; min-width: 0; font-size: clamp(1.3rem, 3.5vw, 2.2rem); font-weight: 900;
     color: var(--text); margin: 0; line-height: 1.2;
 }
 .dv-dateline::first-letter { text-transform: uppercase; }
 .dv-tool-icon { display: inline-flex; align-items: center; flex-shrink: 0; }
 
-/* ---- venstremeny ---- */
+/* Verktøya ligg i ei lita nedtrekksmeny ved datolinja. */
 #sidebar {
-    position: fixed; left: 10px; top: 86px; z-index: 800;
+    position: relative; flex: 0 0 auto; z-index: 50;
     display: flex; flex-direction: column; gap: 2px;
-    width: 58px; padding: 6px;
-    background: var(--surface); border: 3px solid var(--border);
-    box-shadow: 5px 5px 0 var(--shadow);
-    max-height: calc(100vh - 100px); overflow-y: auto; overflow-x: hidden;
-    transition: width 0.15s ease;
+    width: auto; max-height: none; padding: 0; overflow: visible;
 }
-#sidebar.open { width: 215px; }
+#sidebar.open {
+    position: relative; grid-column: 1 / -1; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+    align-items: stretch; gap: 4px; width: 100%; max-height: none;
+    overflow: visible;
+    padding: 8px; background: var(--vp-paper, var(--surface)); border: 3px solid var(--vp-frame, var(--border));
+    border-radius: 10px; box-shadow: 0 4px 0 var(--vp-shadow, var(--shadow));
+}
+#sidebar:not(.open) .dv-side-btn:not(#sidebar-toggle),
+#sidebar:not(.open) .dv-side-sep { display: none; }
+body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar.open .dv-side-sep { display: none; }
 .dv-side-btn {
     display: flex; align-items: center; gap: 10px;
-    width: 100%; min-height: 42px; padding: 0;
-    justify-content: center;
-    background: transparent; border: none; cursor: pointer;
+    width: 100%; min-height: 44px; padding: 0 10px;
+    justify-content: flex-start; border: 0; border-radius: 6px; cursor: pointer;
     font-family: inherit; font-weight: 800; font-size: 0.9rem;
-    color: var(--text); text-decoration: none; white-space: nowrap;
+    color: var(--vp-ink, var(--text)); text-decoration: none; white-space: nowrap;
 }
-#sidebar.open .dv-side-btn { justify-content: flex-start; padding: 0 10px; }
-.dv-side-btn:hover { background: var(--accent); color: var(--text-on-accent); }
-.dv-side-btn.active { background: var(--accent2); color: var(--text-on-accent); }
-#sidebar:not(.open) .dv-side-text { display: none; }
-.dv-side-sep { height: 2px; background: var(--border); margin: 3px 0; flex-shrink: 0; }
-@media (max-width: 700px) {
-    #sidebar { left: 6px; width: 52px; }
-}
-
-/* ---- hero med lukkeknapp ---- */
-#hero { position: relative; }
-.dv-hero-x { position: absolute; top: 10px; right: 10px; }
+.dv-side-btn:hover, .dv-side-btn:focus-visible { background: var(--vp-sky, var(--accent)); color: var(--vp-ink, var(--text)); }
+.dv-side-btn.active { background: var(--vp-honey, var(--accent2)); color: var(--vp-ink, var(--text)); }
+#sidebar-toggle { width: auto; min-width: 48px; justify-content: center; padding-inline: 12px; }
+#sidebar.open #sidebar-toggle { grid-column: 1 / -1; justify-self: end; }
+.dv-side-sep { width: 100%; height: 2px; background: var(--vp-frame, var(--border)); margin: 3px 0; flex-shrink: 0; }
 
 /* ---- rettleiing ---- */
 .dv-help-list { margin: 0 0 14px 22px; padding: 0; }
@@ -65,40 +63,44 @@
 .dv-quick-actions { display: flex; justify-content: flex-end; margin-top: 16px; }
 
 /* ---- tom tilstand ---- */
-.dv-empty { position: relative; text-align: center; padding: clamp(24px, 5vw, 48px); max-width: 720px; }
+.dv-empty { position: relative; text-align: center; padding: clamp(24px, 5vw, 48px); max-width: 720px; margin-inline: auto; }
 .dv-empty-x { position: absolute; top: 10px; right: 10px; }
 .dv-empty h2 { font-weight: 900; margin-bottom: 8px; }
 .dv-empty-actions {
     display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 20px;
 }
 
-/* ---- flyttbare panel: dagsplan og plan for timen ---- */
+/* ---- planvising: fast grid held innhaldet samla på alle skjermar ---- */
+.dv-board-layout {
+    display: grid; grid-template-columns: minmax(260px, 0.82fr) minmax(0, 2fr);
+    gap: clamp(12px, 1.6vw, 20px); align-items: stretch; margin-block: 16px 22px;
+}
 .dv-panel {
-    position: fixed; z-index: 540;
-    display: flex; flex-direction: column;
-    max-height: calc(100vh - 170px);
+    position: relative; z-index: auto; display: flex; flex-direction: column;
+    min-width: 0; max-height: min(68dvh, 760px); padding: clamp(12px, 1.5vw, 20px);
+    background: var(--vp-paper, var(--surface)); color: var(--vp-ink, var(--text));
+    border: 3px solid var(--vp-frame, var(--border)); border-radius: 10px;
+    box-shadow: 0 3px 0 var(--vp-shadow, var(--shadow));
 }
 .dv-panel-bar {
-    display: flex; align-items: center; gap: 8px; cursor: grab; flex-shrink: 0;
-    background: var(--surface); border: 3px solid var(--border);
-    box-shadow: 4px 4px 0 var(--shadow);
-    padding: 4px 10px; margin-bottom: 10px; color: var(--muted);
+    display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+    background: transparent; border: 0; border-bottom: 2px solid var(--vp-frame, var(--border));
+    box-shadow: none; padding: 0 0 10px; margin: 0 0 10px; color: var(--vp-ink, var(--muted));
 }
-.dv-panel-bar:active { cursor: grabbing; }
 .dv-panel-title { font-weight: 900; font-size: 0.8rem; text-transform: uppercase; color: var(--text); }
 .dv-panel-bar .dv-icon-btn {
-    margin-left: auto; min-width: 28px; min-height: 28px;
-    border: none; background: transparent; color: var(--text);
+    margin-left: auto; min-width: 40px; min-height: 40px;
+    border: 0; background: transparent; color: var(--vp-ink, var(--text));
 }
-.dv-panel-bar .dv-icon-btn:hover { background: var(--accent); color: var(--text-on-accent); }
-#day-panel { left: 88px; top: 150px; width: clamp(230px, 22vw, 340px); }
-#lesson-wrap { right: 20px; top: 150px; width: clamp(330px, 48vw, 820px); }
-#lesson-panel { overflow-y: auto; margin: 0; }
-@media (max-width: 700px) {
-    #day-panel { left: 64px; width: min(320px, calc(100vw - 76px)); }
-    #lesson-wrap { right: 8px; width: calc(100vw - 72px); top: 320px; }
-    .dv-panel { max-height: calc(100vh - 120px); }
-}
+#day-panel { grid-column: 1; }
+#lesson-wrap { grid-column: 2; }
+#board-layout:has(#day-panel.dv-hidden):not(:has(#lesson-wrap.dv-hidden)) { grid-template-columns: minmax(0, 1fr); }
+#board-layout:has(#day-panel.dv-hidden) #lesson-wrap { grid-column: 1; }
+#board-layout:has(#lesson-wrap.dv-hidden) { grid-template-columns: minmax(0, 1fr); }
+#board-layout:has(#lesson-wrap.dv-hidden) #day-panel { grid-column: 1; }
+#board-layout:has(#day-panel.dv-hidden):has(#lesson-wrap.dv-hidden) { margin: 0; }
+#day-col { flex: 1 1 auto; min-height: 0; }
+#lesson-panel { flex: 1 1 auto; min-height: 0; overflow-y: auto; margin: 0; background: transparent; border: 0; box-shadow: none; }
 
 /* ---- dagsplan-kolonna ---- */
 #day-col {
@@ -333,21 +335,25 @@
 
 /* ---- flytande widgetar ---- */
 .dv-widget {
-    position: fixed; z-index: 600; margin-bottom: 0;
-    padding: 10px; min-width: 180px;
+    margin-bottom: 0; padding: 10px; min-width: 0;
 }
-#clock-widget { top: 90px; right: 16px; min-width: 0; padding: 8px; }
-#countdown-widget { bottom: 20px; right: 16px; }
-#stopwatch-widget { bottom: 20px; right: 230px; }
-#traffic-widget { bottom: 20px; left: 16px; min-width: 0; }
+#widget-dock {
+    position: relative; z-index: auto; display: none;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px;
+    width: 100%; max-width: 1200px; margin: 18px auto 8px; padding: 4px;
+}
+#widget-dock.is-open { display: grid; }
+#widget-dock .dv-widget {
+    position: relative; inset: auto; z-index: auto; width: 100%; min-width: 0; max-width: none;
+    max-height: none; overflow: visible;
+}
 .dv-widget-bar {
-    display: flex; align-items: center; gap: 8px; cursor: grab;
+    display: flex; align-items: center; gap: 8px;
     border-bottom: 2px solid var(--border); margin: -4px -4px 8px; padding: 2px 4px 6px;
     color: var(--muted);
 }
-.dv-widget-bar:active { cursor: grabbing; }
 .dv-widget-title { font-weight: 900; font-size: 0.8rem; text-transform: uppercase; color: var(--text); }
-.dv-widget-bar .dv-icon-btn { margin-left: auto; min-width: 28px; min-height: 28px; border: none; background: transparent; color: var(--text); }
+.dv-widget-bar .dv-icon-btn { margin-left: auto; min-width: 40px; min-height: 40px; border: none; background: transparent; color: var(--text); }
 .dv-widget-bar .dv-icon-btn:hover { background: var(--accent); color: var(--text-on-accent); }
 
 /* Klokke: fargane blir kopla til Dagsvegen-variablane i felles overgangsstil. */
@@ -358,7 +364,7 @@
     --serif: Georgia, 'Times New Roman', serif;
 }
 .dv-clock-box {
-    background: transparent; border: none; box-shadow: none; cursor: grab;
+    background: transparent; border: none; box-shadow: none; cursor: default;
 }
 .dv-clock-digital {
     text-align: center; font-weight: 900; font-size: 1.3rem;
@@ -439,6 +445,17 @@
     background: transparent; border: 2px solid transparent; font-size: 0.85rem;
 }
 .dv-note-style-btn.active { border-color: var(--border); background: rgba(255, 255, 255, 0.4); }
+body.vp-migrated-page[data-vp-app="dagsvegen"] .dv-note-bar {
+    flex-wrap: wrap; gap: 2px; padding: 4px;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] .dv-note-bar .dv-note-styles { gap: 2px; flex-shrink: 0; }
+body.vp-migrated-page[data-vp-app="dagsvegen"] .dv-note-bar .dv-note-style-btn,
+body.vp-migrated-page[data-vp-app="dagsvegen"] .dv-note-bar .dv-note-fs-btn {
+    min-width: 36px; min-height: 40px; padding: 0; line-height: 1; box-shadow: none;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] .dv-note-bar .dv-icon-btn {
+    min-width: 40px; min-height: 40px; padding: 0; box-shadow: none;
+}
 .dv-note-fs-btn {
     min-width: 26px; min-height: 26px; cursor: pointer; font-weight: 900;
     background: transparent; border: none; font-size: 0.8rem; color: inherit;
@@ -489,9 +506,9 @@
     position: fixed; inset: 0; z-index: 1500; cursor: crosshair; touch-action: none;
 }
 #draw-toolbar {
-    position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+    position: fixed; top: max(12px, calc(var(--dv-header-height, 64px) + 8px)); left: 50%; transform: translateX(-50%);
     z-index: 1600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-    padding: 8px 12px; margin: 0; max-width: 95vw;
+    padding: 8px 12px; margin: 0; max-width: min(95vw, 760px); max-height: calc(100dvh - 88px); overflow: auto;
 }
 .dv-draw-color {
     width: 34px; height: 34px; border-radius: 50%;
@@ -562,12 +579,40 @@ body.vp-migrated-page[data-vp-app="dagsvegen"] {
     --text-on-light-accent: #000;
 }
 
-body.vp-migrated-page[data-vp-app="dagsvegen"] .vp-migrated-header .vp-header-row {
+body.vp-migrated-page[data-vp-app="dagsvegen"] .vp-migrated-header .vp-shell.vp-shell--wide.vp-header-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto auto;
     justify-content: initial;
     align-items: center;
+    gap: 8px;
+    min-height: 56px;
+    padding-block: 4px;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] .vp-migrated-header .vp-brand {
+    gap: 8px;
+    font-size: 1.15rem;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] .vp-migrated-header .vp-brand img {
+    width: 32px;
+    height: 32px;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #main .vp-migrated-intro {
+    width: min(100%, 940px);
+    grid-template-columns: minmax(0, 1fr) 88px;
+    gap: 8px;
+    margin-block: 4px 14px;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #main .vp-migrated-intro-board {
+    grid-template-columns: 88px minmax(0, 1fr);
     gap: 12px;
+    min-height: 112px;
+    padding: 12px;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #main .vp-migrated-intro-board > .vp-migrated-logo {
+    max-height: 92px;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #main .vp-migrated-mascot {
+    max-height: 120px;
 }
 body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget.dv-widget {
     position: static;
@@ -585,9 +630,9 @@ body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget.dv-widget {
     cursor: default;
 }
 body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget svg {
-    width: 56px;
-    height: 56px;
-    flex: 0 0 56px;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
 }
 body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget .dv-clock-digital {
     margin: 0;
@@ -599,23 +644,43 @@ body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget .dv-clock-digital {
     font-size: 1rem;
 }
 body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar {
-    left: 10px;
-    z-index: 30;
-    width: 64px;
-    padding: 6px;
-    border: 3px solid var(--vp-frame);
-    border-radius: 9px;
-    background: var(--vp-wood);
-    box-shadow: 0 3px 0 var(--vp-shadow);
-    overscroll-behavior: contain;
+    position: relative;
+    inset: auto;
+    z-index: 50;
+    width: auto;
+    max-height: none;
+    padding: 0;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
 }
 body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar.open {
-    width: min(236px, calc(100vw - 20px));
+    position: relative;
+    z-index: 50;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+    align-items: stretch;
+    gap: 4px;
+    width: 100%;
+    max-height: none;
+    padding: 8px;
+    overflow: visible;
+    border: 3px solid var(--vp-frame);
+    border-radius: 10px;
+    background: var(--vp-paper);
+    box-shadow: 0 4px 0 var(--vp-shadow);
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar:not(.open) .dv-side-btn:not(#sidebar-toggle),
+body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar:not(.open) .dv-side-sep {
+    display: none;
 }
 body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar .dv-side-btn {
     min-height: 44px;
-    justify-content: center;
-    padding: 0;
+    justify-content: flex-start;
+    padding: 0 10px;
     border: 0;
     border-radius: 6px;
     background: transparent;
@@ -626,6 +691,15 @@ body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar .dv-side-btn {
 body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar.open .dv-side-btn {
     justify-content: flex-start;
     padding-inline: 10px;
+}
+body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar-toggle {
+    width: auto;
+    min-width: 48px;
+    justify-content: center;
+    padding-inline: 12px;
+    background: var(--vp-paper);
+    border: 2px solid var(--vp-frame);
+    box-shadow: 0 3px 0 var(--vp-shadow);
 }
 body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar .dv-side-btn:hover,
 body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar .dv-side-btn:focus-visible {
@@ -640,12 +714,11 @@ body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar .dv-side-sep {
     height: 2px;
     background: var(--vp-frame);
 }
-body.vp-migrated-page[data-vp-app="dagsvegen"] :is(main,#main).vp-migrated-main.main-content {
-    padding-left: 92px;
-    padding-right: clamp(14px, 2vw, 28px);
-}
-body.vp-migrated-page[data-vp-app="dagsvegen"].dv-sidebar-open :is(main,#main).vp-migrated-main.main-content {
-    padding-left: 250px;
+body.vp-migrated-page[data-vp-app="dagsvegen"] :is(main,#main).vp-migrated-main.vp-migrated-main--wide.main-content {
+    width: calc(100% - 24px) !important;
+    max-width: 1900px !important;
+    margin: 0 auto 8px;
+    padding: clamp(16px, 2vw, 28px);
 }
 body.vp-migrated-page[data-vp-app="dagsvegen"] .dv-overflow-warn,
 body.vp-migrated-page[data-vp-app="dagsvegen"] .dv-danger:hover {
@@ -653,21 +726,130 @@ body.vp-migrated-page[data-vp-app="dagsvegen"] .dv-danger:hover {
 }
 
 @media (max-width: 700px) {
-    body.vp-migrated-page[data-vp-app="dagsvegen"] .vp-migrated-header .vp-header-row {
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 8px;
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #main .vp-migrated-intro {
+        width: 100%;
+        grid-template-columns: minmax(0, 1fr) 42px;
+        gap: 6px;
+        margin-block: 8px 12px;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #main .vp-migrated-intro-board {
+        grid-template-columns: 40px minmax(0, 1fr);
+        gap: 6px;
+        min-height: 0;
+        padding: 8px;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #main .vp-migrated-intro-board > .vp-migrated-logo {
+        max-height: 60px;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #main .vp-migrated-mascot {
+        max-height: 76px;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #main .vp-migrated-intro-board :is(h1, h2) {
+        margin-bottom: 4px;
+        font-size: clamp(1.1rem, 5.5vw, 1.4rem);
+        letter-spacing: -.045em;
+        white-space: nowrap;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #main .vp-migrated-intro-board p {
+        margin: 0;
+        font-size: .9rem;
+        line-height: 1.3;
+        max-width: none;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar.open {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar.open .dv-side-btn:not(#sidebar-toggle) {
+        gap: 6px;
+        padding-inline: 6px;
+        font-size: .82rem;
+        white-space: normal;
+        text-align: left;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] .vp-migrated-header .vp-shell.vp-shell--wide.vp-header-row {
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        gap: 6px;
+        min-height: 52px;
+        padding-block: 4px;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] .vp-migrated-header .vp-brand {
+        font-size: 1rem;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] .vp-migrated-header .vp-brand img {
+        width: 28px;
+        height: 28px;
     }
     body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget.dv-widget {
-        grid-column: 1 / -1;
-        grid-row: 2;
-        justify-self: center;
+        grid-area: auto;
+        justify-self: end;
+        gap: 4px;
+        padding: 2px 4px;
     }
-    body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar {
-        left: 6px;
-        width: 56px;
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget svg {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
     }
-    body.vp-migrated-page[data-vp-app="dagsvegen"] :is(main,#main).vp-migrated-main.main-content {
-        padding-left: 76px;
-        padding-right: 12px;
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget .dv-clock-digital {
+        font-size: .85rem;
     }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #vpMenuTrigger {
+        min-height: 40px;
+        padding-inline: 10px;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] .dv-board-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] .dv-panel {
+        max-height: none;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #day-col,
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #lesson-panel {
+        overflow: visible;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #day-panel,
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #lesson-wrap {
+        grid-column: 1;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #widget-dock { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (min-width: 701px) and (max-width: 900px) {
+    .dv-board-layout { grid-template-columns: minmax(0, 1fr); }
+    #day-panel, #lesson-wrap { grid-column: 1; }
+    .dv-panel { max-height: none; }
+    #day-col, #lesson-panel { overflow: visible; }
+}
+
+/* Små flater får tekstboksar i eiga rad etter arbeidsflata, ikkje oppå planen. */
+@media (max-width: 900px) {
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #notes-layer {
+        position: relative; inset: auto; display: grid; grid-template-columns: minmax(0, 1fr);
+        gap: 12px; width: 100%; margin: 16px auto 8px; pointer-events: auto; z-index: auto;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #notes-layer .dv-note {
+        position: relative; inset: auto; left: auto !important; top: auto !important;
+        width: 100% !important; min-width: 0; max-width: none; height: auto !important;
+        min-height: 144px; margin: 0;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #notes-layer .dv-note-bar {
+        cursor: default; touch-action: auto;
+    }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #notes-layer .dv-note-resize { display: none; }
+}
+
+@media (max-width: 480px) {
+    #topbar { align-items: flex-start; gap: 8px; }
+    .dv-dateline { font-size: clamp(1rem, 4.4vw, 1.15rem); }
+    .dv-note { width: min(280px, calc(100vw - 24px)); min-width: min(180px, calc(100vw - 24px)); }
+    #draw-toolbar { width: calc(100vw - 24px); max-width: none; justify-content: center; }
+}
+
+@media (max-width: 360px) {
+    body.vp-migrated-page[data-vp-app="dagsvegen"] .vp-migrated-header .vp-brand { gap: 4px; }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget.dv-widget { gap: 2px; padding-inline: 2px; }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #clock-widget svg { width: 30px; height: 30px; flex-basis: 30px; }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #vpMenuTrigger { padding-inline: 8px; }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #main .vp-migrated-intro-board :is(h1, h2) { font-size: 1.05rem; }
+    body.vp-migrated-page[data-vp-app="dagsvegen"] #sidebar.open .dv-side-btn:not(#sidebar-toggle) { font-size: .72rem; }
 }
