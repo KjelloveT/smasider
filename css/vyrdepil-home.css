@@ -40,7 +40,7 @@ body.vp-home-page {
 .vp-home-main .vp-home-app {
   position: relative;
   display: grid;
-  grid-template-rows: 1fr auto auto;
+  grid-template-rows: 1fr auto auto auto auto;
   justify-items: center;
   align-content: start;
   gap: 8px;
@@ -60,6 +60,30 @@ body.vp-home-page {
 .vp-home-main .vp-home-app:focus-visible { outline: none; background: var(--vp-honey); box-shadow: inset 0 -4px 0 var(--vp-focus), 0 3px 0 var(--vp-shadow); }
 .vp-home-app-logo { display: block; width: clamp(86px, 9vw, 118px); height: clamp(86px, 9vw, 118px); object-fit: contain; }
 .vp-home-main .card-title { align-self: end; margin: 0; font-size: 1rem; font-weight: 850; }
+.vp-home-main .vp-home-audience {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.vp-home-main .vp-home-audience-badge {
+  display: inline-flex;
+  justify-content: center;
+  max-width: 100%;
+  padding: 3px 7px;
+  border: 2px solid var(--vp-frame);
+  border-radius: 999px;
+  background: var(--vp-sky);
+  color: var(--vp-ink);
+  font-size: .68rem;
+  font-weight: 750;
+  line-height: 1.2;
+  text-align: center;
+}
 .vp-home-main .card-desc { margin: 0; max-width: 34ch; font-size: .84rem; line-height: 1.4; }
 .vp-home-main .card-btn,
 .vp-home-main .coming-tag { display: inline-flex; align-items: center; justify-content: center; min-height: 30px; font-size: .85rem; font-weight: 750; }
@@ -153,12 +177,20 @@ body.vp-home-page {
   .vp-home-category { gap: 18px; }
   .vp-home-category-heading { padding: 8px 10px; font-size: 1.08rem; }
   .vp-home-category-icon svg { width: 22px; height: 22px; }
-  .vp-home-main .vp-home-app { grid-template-rows: auto auto; align-content: start; gap: 5px; min-height: 112px; padding: 7px 3px 6px; border-width: 2px; }
+  .vp-home-main .vp-home-app { grid-template-rows: auto auto auto; align-content: start; gap: 5px; min-height: 142px; padding: 7px 3px 6px; border-width: 2px; }
   .vp-home-app-logo { width: clamp(42px, 13vw, 58px); height: clamp(42px, 13vw, 58px); }
   .vp-home-main .card-title { align-self: start; font-size: clamp(.62rem, 2.8vw, .76rem); line-height: 1.15; overflow-wrap: anywhere; }
+  .vp-home-main .vp-home-audience { gap: 3px; }
+  .vp-home-main .vp-home-audience-badge { padding: 2px 4px; border-width: 1px; font-size: .58rem; line-height: 1.1; }
   .vp-home-main :is(.card-desc, .card-btn, .coming-tag, .card-flag) { display: none; }
   .vp-home-policy { padding: 16px; }
   .vp-home-policy .privacy-header { align-items: flex-start; }
+}
+
+@media (max-width: 380px) {
+  .vp-home-main .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vp-home-main .vp-home-app { min-height: 128px; }
+  .vp-home-main .vp-home-audience-badge { padding: 3px 7px; font-size: .68rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
