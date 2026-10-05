@@ -262,6 +262,15 @@ Før den fyrste kodeendringa skal AI-agenten stadfeste både kva kodegrunnlag ha
 3. Opne produksjonssida på `https://icy-water-0487ac303.2.azurestaticapps.net/`. Samanlikn versjonsnummeret og siste endring på framsida med lokal `CHANGELOG.md` og `json/endringslogg.json`. Opne òg den aktuelle appen og sjå kva som faktisk er publisert. Ei publisert side kan liggje føre eller etter `origin/main`, så ikkje bruk den eine som prov på den andre. Når oppgåva gjeld ein PR eller ei førehandsvising, kontroller den tilhøyrande preview-URL-en òg.
 4. Dersom Git-grunnlaget eller den publiserte sida ikkje samsvarar med arbeidskopien, noter kva som er ulikt og vel rett grein/arbeidskopi før du endrar kode. Dersom produksjon ikkje kan opnast, sei frå om det og ikkje framstill den publiserte tilstanden som kontrollert.
 
+### Samarbeid når fleire agentar arbeider samstundes
+
+Før parallelt arbeid startar, skal koordinatoren dele opp oppgåva og peike ut ein ansvarleg for kvar fil som fleire deloppgåver kan kome til å endre:
+
+- Kvar aktiv agent arbeider i si eiga arbeidskopi/worktree og på si eiga grein frå oppdatert `origin/main`. To agentar skal ikkje skrive i same arbeidskopi eller på same grein samstundes. Ved behov for å ta over ei grein skal det avtalast ei tydeleg overlevering, og den fyrste agenten skal slutte å skrive der.
+- Gje kvar agent eit avgrensa fil- eller appområde. Ei fellesfil som fleire deloppgåver treng, har éin namngjeven eigar; dei andre sender endringsforslaget til eigaren i PR-teksten eller som patch, men redigerer ikkje fila sjølve.
+- Integrer ferdige greiner éi om gongen mot fersk `origin/main`. Før samanslåing skal integrator sjå gjennom fillista og diffen, og kontrollere at ingen endringar frå ei anna grein eller arbeidsoppgåve vart tekne med ved eit uhell.
+- Bruk reglane for felles utgjevingsfiler i §6.2 når fleire agentar lagar endringsnotat.
+
 ### 6.1 Commit-meldingar
 Commit-meldingar skal skrivast på **nynorsk**. Eksempel:
 - `Fiks emoji i footer på framsida`
@@ -284,6 +293,18 @@ Ein `CHANGELOG.md` på rot skal vedlikehaldast med eit fast format per versjon:
 Oppdater CHANGELOG når du legg til nye spel/verktøy, gjer brytande endringar eller fiksar feil som påverkar brukaropplevinga.
 
 **Endringssida skal følgje CHANGELOG.** `json/endringslogg.json` er kortversjonen som `endringar.html` viser, og notatet på framsida lenkjer dit. Legg du ein ny versjon i `CHANGELOG.md`, skal du i **same pull request** leggje same versjonen i `json/endringslogg.json` med éi kort linje per punkt (`t` = `nytt`, `endra` eller `fiksa`). Ein endringslogg som veks medan sida står stille, er ein endringslogg ingen brukar les.
+
+Når fleire agentar arbeider parallelt, skal dei ikkje redigere dei same fellesfilene. Utgjevingsansvarleg eig `CHANGELOG.md`, `json/endringslogg.json` og versjonsnotatet (`aside.hero-postit`) i rotas `index.html`. Dei andre agentane legg eit forslag i PR-teksten i staden:
+
+```text
+### Endringsnotat (forslag)
+- App/verktøy:
+- Type: nytt / endra / fiksa
+- Kort tekst på nynorsk:
+- Bør hovudsida nemne dette: ja / nei
+```
+
+Utgjevingsansvarleg går gjennom ferdige PR-ar éin om gongen, oppdaterer dei tre filene i den aktuelle PR-en, og held versjonsnummer og tekst samsvarande før PR-en blir klar for samanslåing. Ingen andre agentar skal endre desse filene medan denne samordninga går føre seg. Når berre éin agent arbeider, kan agenten sjølv ta utgjevingsansvaret og gjere alt i same PR.
 
 **Notatet på framsida skal ha med dei største endringane som er gjort siste tida (tillegg av spel, store endringar og liknande). Notatet på framsida skal også ha med nyaste frå CHANGELOG.** Gul-lappen i `index.html` (`aside.hero-postit`) har eit versjonsnummer, og det skal vere det same som øvste versjonen i `CHANGELOG.md`. Legg du til ein ny versjon i endringsloggen, skal du i same pull request setje versjonsnummeret i notatet til den nye versjonen. Merk henne med «Nyaste endring på Vyrdepil».
 
