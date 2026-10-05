@@ -4,8 +4,13 @@
     {
       "versjon": "1.81",
       "dato": "2026-10-05",
-      "samandrag": "Nye, samanhengande karakterressursar i Livslina si prøveutgåve.",
+      "samandrag": "Utskriftsark i Vyrdepil følgjer no A4-formatet, og Livslina har fått nye karakterressursar.",
       "punkt": [
+        {
+          "t": "fiksa",
+          "kva": "Utskrift",
+          "tekst": "Alle utskriftsvisingane bruker no A4 ståande papir. Leitekryss og Ordkryss skriv berre ut arbeidsarka, med større rutenett."
+        },
         {
           "t": "fiksa",
           "kva": "Livslina",

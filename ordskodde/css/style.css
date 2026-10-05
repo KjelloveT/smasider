@@ -220,6 +220,7 @@
 /* ---- Utskrift ---- */
 #printArea { display: none; }
 @media print {
+  @page { size: A4 portrait; margin: 12mm; }
   body * { visibility: hidden; }
   .vp-header { display: none; }
   #printArea, #printArea * { visibility: visible; }
