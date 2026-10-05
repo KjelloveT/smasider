@@ -4,17 +4,13 @@
     {
       "versjon": "1.81",
       "dato": "2026-10-05",
-      "samandrag": "Dagsvegen har fått ei ryddigare og responsiv arbeidsflate.",
+      "samandrag": "Nye, samanhengande karakterressursar i Livslina si prøveutgåve.",
       "punkt": [
         {
           "t": "fiksa",
-          "kva": "Dagsvegen",
-          "tekst": "Verktøymeny og klasseromsverktøy dekkjer ikkje lenger planane. Panel står i fast rekkjefølgje, og tekstboksar får eigne rader på små skjermar."
-        },
-        {
-          "t": "fiksa",
-          "kva": "Dagsvegen",
-          "tekst": "Den doble velkomstplakaten i redigeringsvisinga er fjerna, og rettleiinga er oppdatert."
+          "kva": "Livslina",
+          "tekst": "Karakterbyggjaren har fem val i kvar gruppe, faste festepunkt, samsvarande hud og hender og kontroll av laga.",
+          "merke": "eksperiment"
         }
       ]
     },
