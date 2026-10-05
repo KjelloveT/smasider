@@ -32,7 +32,7 @@
     .room-throw { z-index:5; left:59%; top:67%; width:38%; }
     .room-pillow { z-index:6; left:77%; top:58%; width:15%; }
     .room-guitar { z-index:3; left:79%; top:36%; width:17%; }
-    .preview-characters, .preview-items { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr)); gap:12px; }
+    .preview-items { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr)); gap:12px; }
     .asset-card { min-width:0; padding:10px; border:2px solid #142820; border-radius:8px; background:#fffdf5; }
     .asset-card figure { margin:0; display:grid; grid-template-rows:minmax(150px,1fr) auto; gap:8px; height:100%; }
     .sprite-well { min-height:150px; display:grid; place-items:center; overflow:hidden; background-color:#f5f0e4; background-image:linear-gradient(45deg,#ddd7c8 25%,transparent 25%),linear-gradient(-45deg,#ddd7c8 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#ddd7c8 75%),linear-gradient(-45deg,transparent 75%,#ddd7c8 75%); background-size:18px 18px; background-position:0 0,0 9px,9px -9px,-9px 0; }
@@ -48,7 +48,6 @@
     @media (max-width:560px) {
       .preview-intro { grid-template-columns:minmax(0,1fr) 64px; gap:8px; }
       .preview-vyrde { width:64px; }
-      .preview-characters { grid-template-columns:repeat(2,minmax(0,1fr)); }
       .asset-card { padding:7px; }
     }
   </style>
@@ -97,14 +96,9 @@
 
       <section class="vp-panel vp-panel--plain preview-panel" aria-labelledby="karakter-title">
         <div class="vp-content">
-          <h2 class="vp-heading" id="karakter-title">Karakterprøver</h2>
-          <p class="vp-small preview-note">Desse er heile figurar som viser stil og variasjon. Dei er ikkje delte i hår-, hud- og kleslag enno.</p>
-          <div class="preview-characters">
-            <article class="asset-card"><figure><div class="sprite-well"><img src="characters/student-01.png" width="192" height="256" alt="Elev med kort krøll, runde briller, mosegrøn gensar og mørk bukse" loading="lazy"></div><figcaption>Krøll og briller<span class="asset-id">student-01</span></figcaption></figure></article>
-            <article class="asset-card"><figure><div class="sprite-well"><img src="characters/student-02.png" width="192" height="256" alt="Elev med lyngfarga hovudplagg, korallfarga overskjorte og mørk bukse" loading="lazy"></div><figcaption>Hovudplagg og lag<span class="asset-id">student-02</span></figcaption></figure></article>
-            <article class="asset-card"><figure><div class="sprite-well"><img src="characters/student-03.png" width="192" height="256" alt="Elev med bølgjehår, fregner og lilla gensar" loading="lazy"></div><figcaption>Bølgjer og fregner<span class="asset-id">student-03</span></figcaption></figure></article>
-            <article class="asset-card"><figure><div class="sprite-well"><img src="characters/student-04-wheelchair.png" width="192" height="256" alt="Elev med kort krøll, briller og manuell rullestol" loading="lazy"></div><figcaption>Rullestol som del av figuren<span class="asset-id">student-04-wheelchair</span></figcaption></figure></article>
-          </div>
+          <h2 class="vp-heading" id="karakter-title">Lagdelte karakterressursar</h2>
+          <p class="vp-small preview-note">Dei eldre heilfigurane er tekne ut. Den gjeldande prøva set saman hud, andlet, hår og klede på ei felles meisterfigur.</p>
+          <p><a class="vp-button vp-button--compact" href="character-builder-test.html">Opne karakterbyggjarprøva</a></p>
         </div>
       </section>
 

@@ -1,7 +1,7 @@
 {
   "app": "livslina",
   "version": 1,
-  "updated": "2026-10-04",
+  "updated": "2026-10-05",
   "status": "detaljert-8-bit-produktbibliotek-prototype",
   "artStyle": "detaljert-8-bit",
   "notes": "Den samansette romprøva brukar 126 detaljerte, gjennomsiktige 8-bit-sprites. Ressurspakka v5 har fem prisnivå for seng og 95 nye produktvariantar fordelt på 19 familiar. TV og PC-tårn er eigne varer festa til høvesvis benk og pult. Førebelse prisar er ikkje kopla til speløkonomien. V4 styrer berre geometri og feste; dette er ikkje endeleg godkjend spelgrafikk.",
@@ -65,50 +65,14 @@
     "hifiPlacementPreview": "room/hifi-placement-preview.png"
   },
   "characterBuilderTest": {
-    "id": "character-builder-test-v1",
+    "id": "character-builder-test-v5",
     "page": "character-builder-test.html",
     "renderer": "character-builder-art.js",
     "controller": "character-builder-test.js",
     "resources": "character-builder-test-manifest.json",
-    "status": "local-layered-pixel-art-prototype",
-    "logicalCanvas": "96x128",
-    "detailRevision": 2,
-    "layerOrder": ["skin-body", "clothes", "skin-hands", "face", "hair"],
-    "choicesPerLayer": 5,
-    "possibleCombinations": 625,
-    "randomizeButton": true,
-    "storesUserChoices": false
+    "status": "experimental-layered-pixel-art-prototype",
+    "details": "Det eigne ressursmanifestet er fasit for lag, variantar, festepunkt og kontrollstatus."
   },
-  "characters": [
-    {
-      "id": "student-01",
-      "label": "Krøll, briller og romsleg gensar",
-      "file": "characters/student-01.png",
-      "width": 96,
-      "height": 128
-    },
-    {
-      "id": "student-02",
-      "label": "Hovudplagg og lag på lag",
-      "file": "characters/student-02.png",
-      "width": 96,
-      "height": 128
-    },
-    {
-      "id": "student-03",
-      "label": "Bølgjer, fregner og lilla",
-      "file": "characters/student-03.png",
-      "width": 96,
-      "height": 128
-    },
-    {
-      "id": "student-04-wheelchair",
-      "label": "Krøll, briller og rullestol",
-      "file": "characters/student-04-wheelchair.png",
-      "width": 96,
-      "height": 128
-    }
-  ],
   "rooms": [
     {
       "id": "empty-hybel",

@@ -1,6 +1,6 @@
-# Livslina — framlegg til ressursstandard og prøvepakke
+# Livslina — historisk framlegg til ressursstandard og prøvepakke
 
-> Status: arbeidsframlegg med visuell prøvepakke og ei eiga prøve av romplassering. Bileta er stilprøver, ikkje ferdige modular eller ressursar kopla til speltilstanden.
+> Status: historisk framlegg. Romprøva er sidan utvida til v5, og karakterprøva brukar no lagdelte v5-ressursar. Sjå `assets/prototype/resources-v5/README.md`, `assets/prototype/layout-standard-v4.md` og `character-production-standard-v5.md` for gjeldande standardar.
 
 ## Føremål
 
@@ -121,10 +121,17 @@ Originalar og sluttressursar må komprimerast før dei kjem inn i git-historikke
 - Prøvepakka inneheld fire tydeleg ulike romuttrykk og fleire truverdige karakterkombinasjonar utan merkevarer eller generert tekst.
 - Gjenstandar viser pris og eventuell speleffekt som tekst i brukargrensesnittet; økonomiske val skal vere forståelege utan at spelaren må tolke sjølve biletet.
 
-## Føreslått neste produksjonssteg
+## Status no
 
-Prøvepakka ligg i `../assets/prototype/`. Ho inneheld fire heile karakterillustrasjonar, eit tomt rom og dei 23 planlagde romressursvariantane. Filene er skalerte til logisk spelstorleik, har gjennomsiktig bakgrunn der det høver og er lagra med avgrensa palett. `layout-standard.md` og `layout-prototype.html` prøver ut faste golvpivotar, møbelfeste og fotavtrykk utan å lage eller endre bilete.
+Ressursbiblioteket har ei samansett romprøve med 126 sprites. Rommet brukar den målsette v4-modellen for geometri og feste; sjølve illustrasjonane er framleis prototypegrafikk, og prisane er ikkje kopla til speløkonomien.
 
-Karakterane er førebels heile spriteillustrasjonar. Dei viser korleis stil og variasjon kan fungere, men kan ikkje enno kombinerast som separate hud-, hår- og kleslag. Neste steg er å vurdere stil- og monteringsprøvene, justere kameraretninga ved behov og lage ei lita lagdelt karakterprøve før resten av biblioteket blir utvida. Prøvepakka er ikkje kopla inn i spelvisinga eller butikklogikken.
+Karakterbyggjaren har ei eiga lagdelt v5-prøveside. Ho viser monteringa og dei tilgjengelege komponentane, men er ikkje kopla til spelet si karaktertilpassing eller lagring. Dei eldre heilfigurane og atlaset er tekne ut av ressursprøva.
 
-Ei eiga prøveside for karakterbyggjaren ligg no i `../assets/prototype/character-builder-test.html`. Ho prøver fem val for hud, andlet, hår og klede på ei felles 96 × 128-flate; ressursdetaljane og lagrekkjefølgja står i `../assets/prototype/character-builder-test-manifest.json`. Dette er framleis ei lokal stil- og monteringsprøve, ikkje spelgrafikk kopla til karakterdata eller økonomi.
+Neste steg er å fullføra den lagdelte ressursrunden, byggja karakterbyggjar og rombutikk rundt dei godkjende ressursane, og deretter ferdigstilla VG1–VG3 etter planen i `vgs-ferdigstilling-plan.md`.
+
+## Tidlegare framlegg
+
+Den første prøva med heilfigurane, rommet og 23 planlagde romvariantar er
+erstatta av den lagdelte karakterprøva og ressursbiblioteket v5. Framlegget
+beheld vi berre som bakgrunn for tidlegare val; det er ikkje ei gjeldande
+produksjonsplan. Sjå `vgs-ferdigstilling-plan.md` for neste arbeid.

@@ -2,6 +2,6 @@
 
 Den gjeldande produksjonsplanen er [Karakterstandard v5](character-production-standard-v5.md). Han definerer meisterfigur, faste festepunkt, kjelderegistrering, hudpalettar, klesopningar, fram-/baklag for hår og visuell kontroll.
 
-Prøvesida er `assets/prototype/character-builder-test.html`. Ho har fem hudfargar, fem andlet, fem frisyrar og fem antrekk, tilfeldig figur, tilbakestilling, lagkontroll, festepunkt og forstørring. Ho lagrar ingen val.
+Prøvesida er `assets/prototype/character-builder-test.html`. Ho har kontrollar for dei lagdelte ressursane, tilfeldig figur, tilbakestilling, festepunkt og forstørring. Det dedikerte ressursmanifestet er fasit for tilgjengelege variantar og kontrollstatus. Prøva lagrar ingen val.
 
-Det eldre `character-builder-atlas-v4.png` er berre historisk stilreferanse. Det skal ikkje brukast til å byggje nye kombinasjonar. Den aktive banken ligg i `assets/prototype/characters/v5/`, med 30 fullrammelag. Manifestet på prøvesida dokumenterer kvart lag og den målte samansetjinga.
+Dei eldre heilfigurane og atlaset frå v4 er tekne ut av ressursprøva. Den aktive banken ligg i `assets/prototype/characters/v5/`. Prøva er framleis ein prototype; ho er ikkje kopla til spelet si lagring eller den endelege karaktertilpassinga.
