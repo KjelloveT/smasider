@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.83] — 2026-10-05
+
+### Endra
+- **Livslina har fått fleire kombinerbare karakterdelar.** Prøva har no fem nye korthåra frisyrar, fem nye andletsuttrykk og fem nye klesstilar.
+
 ## [1.82] — 2026-10-05
 
 ### Lagt til

@@ -1,15 +1,15 @@
 {
   "app": "livslina",
   "version": 2,
-  "id": "character-builder-test-v5",
-  "label": "Karakterbyggjar med faste festepunkt",
+  "id": "character-builder-test-v5-1",
+  "label": "Karakterbyggjar med utvida val og faste festepunkt",
   "page": "character-builder-test.html",
   "renderer": "character-builder-art.js",
   "model": "character-builder-model.js",
   "controller": "character-builder-test.js",
   "updated": "2026-10-05",
   "status": "experimental-prototype",
-  "detailRevision": 5,
+  "detailRevision": 6,
   "artStyle": "detailed-pixel-art",
   "generationMode": "built-in-imagegen",
   "logicalCanvas": {
@@ -254,6 +254,31 @@
         "id": "face-05",
         "label": "Sjølvsikker",
         "option": 4
+      },
+      {
+        "id": "face-06",
+        "label": "Lattermild",
+        "option": 5
+      },
+      {
+        "id": "face-07",
+        "label": "Søvnig",
+        "option": 6
+      },
+      {
+        "id": "face-08",
+        "label": "Nysgjerrig",
+        "option": 7
+      },
+      {
+        "id": "face-09",
+        "label": "Bekymra",
+        "option": 8
+      },
+      {
+        "id": "face-10",
+        "label": "Konsentrert",
+        "option": 9
       }
     ],
     "hair": [
@@ -281,6 +306,31 @@
         "id": "hair-05",
         "label": "Høg hestehale",
         "option": 4
+      },
+      {
+        "id": "hair-06",
+        "label": "Rufsete quiff",
+        "option": 5
+      },
+      {
+        "id": "hair-07",
+        "label": "Tett krølltopp",
+        "option": 6
+      },
+      {
+        "id": "hair-08",
+        "label": "Sidesveipt pixie",
+        "option": 7
+      },
+      {
+        "id": "hair-09",
+        "label": "Kjevelang blåsvart bob",
+        "option": 8
+      },
+      {
+        "id": "hair-10",
+        "label": "Luftig blond kortklipp",
+        "option": 9
       }
     ],
     "clothes": [
@@ -308,6 +358,31 @@
         "id": "clothes-05",
         "label": "Turkis skjorte",
         "option": 4
+      },
+      {
+        "id": "clothes-06",
+        "label": "Burgundarraud collegejakke",
+        "option": 5
+      },
+      {
+        "id": "clothes-07",
+        "label": "Lilla cardigan og plissé-skjørt",
+        "option": 6
+      },
+      {
+        "id": "clothes-08",
+        "label": "Rutete flanell og cargobukse",
+        "option": 7
+      },
+      {
+        "id": "clothes-09",
+        "label": "Blått treningssett",
+        "option": 8
+      },
+      {
+        "id": "clothes-10",
+        "label": "Salviegrøn rugbyskorte",
+        "option": 9
       }
     ]
   },
@@ -731,10 +806,305 @@
       ],
       "bytes": 86614,
       "status": "composite-validated"
+    },
+    {
+      "id": "clothes-06",
+      "layer": "clothes",
+      "option": 5,
+      "file": "characters/v5/clothes-06.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 90687,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/clothes-06.png"
+    },
+    {
+      "id": "clothes-07",
+      "layer": "clothes",
+      "option": 6,
+      "file": "characters/v5/clothes-07.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 79269,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/clothes-07.png"
+    },
+    {
+      "id": "clothes-08",
+      "layer": "clothes",
+      "option": 7,
+      "file": "characters/v5/clothes-08.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 122610,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/clothes-08.png"
+    },
+    {
+      "id": "clothes-09",
+      "layer": "clothes",
+      "option": 8,
+      "file": "characters/v5/clothes-09.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 79345,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/clothes-09.png"
+    },
+    {
+      "id": "clothes-10",
+      "layer": "clothes",
+      "option": 9,
+      "file": "characters/v5/clothes-10.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 90332,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/clothes-10.png"
+    },
+    {
+      "id": "face-06",
+      "layer": "face",
+      "option": 5,
+      "file": "characters/v5/face-06.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 4272,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/face-06.png"
+    },
+    {
+      "id": "face-07",
+      "layer": "face",
+      "option": 6,
+      "file": "characters/v5/face-07.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 5029,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/face-07.png"
+    },
+    {
+      "id": "face-08",
+      "layer": "face",
+      "option": 7,
+      "file": "characters/v5/face-08.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 5419,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/face-08.png"
+    },
+    {
+      "id": "face-09",
+      "layer": "face",
+      "option": 8,
+      "file": "characters/v5/face-09.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 5966,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/face-09.png"
+    },
+    {
+      "id": "face-10",
+      "layer": "face",
+      "option": 9,
+      "file": "characters/v5/face-10.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 5643,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/face-10.png"
+    },
+    {
+      "id": "hair-back-06",
+      "layer": "hairBack",
+      "option": 5,
+      "file": "characters/v5/hair-back-06.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 1634,
+      "status": "transparent-short-style-layer"
+    },
+    {
+      "id": "hair-back-07",
+      "layer": "hairBack",
+      "option": 6,
+      "file": "characters/v5/hair-back-07.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 1634,
+      "status": "transparent-short-style-layer"
+    },
+    {
+      "id": "hair-back-08",
+      "layer": "hairBack",
+      "option": 7,
+      "file": "characters/v5/hair-back-08.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 1634,
+      "status": "transparent-short-style-layer"
+    },
+    {
+      "id": "hair-back-09",
+      "layer": "hairBack",
+      "option": 8,
+      "file": "characters/v5/hair-back-09.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 1634,
+      "status": "transparent-short-style-layer"
+    },
+    {
+      "id": "hair-back-10",
+      "layer": "hairBack",
+      "option": 9,
+      "file": "characters/v5/hair-back-10.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 1634,
+      "status": "transparent-short-style-layer"
+    },
+    {
+      "id": "hair-front-06",
+      "layer": "hairFront",
+      "option": 5,
+      "file": "characters/v5/hair-front-06.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 20820,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/hair-06.png"
+    },
+    {
+      "id": "hair-front-07",
+      "layer": "hairFront",
+      "option": 6,
+      "file": "characters/v5/hair-front-07.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 21177,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/hair-07.png"
+    },
+    {
+      "id": "hair-front-08",
+      "layer": "hairFront",
+      "option": 7,
+      "file": "characters/v5/hair-front-08.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 27930,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/hair-08.png"
+    },
+    {
+      "id": "hair-front-09",
+      "layer": "hairFront",
+      "option": 8,
+      "file": "characters/v5/hair-front-09.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 25430,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/hair-09.png"
+    },
+    {
+      "id": "hair-front-10",
+      "layer": "hairFront",
+      "option": 9,
+      "file": "characters/v5/hair-front-10.png",
+      "width": 512,
+      "height": 768,
+      "origin": [
+        0,
+        0
+      ],
+      "bytes": 32434,
+      "status": "registered-layer-visual-reviewed",
+      "source": "../../_kjelder/character-v5.1/raw/hair-10.png"
     }
   ],
-  "totalBytes": 1126217,
-  "combinations": 625,
+  "totalBytes": 1750750,
+  "combinations": 5000,
   "sourceRegistrations": [
     {
       "id": "face-01",
@@ -1018,40 +1388,397 @@
       ],
       "scale": 1,
       "fitting": "cap crown128raw; free pony/braid extent preserved"
+    },
+    {
+      "id": "face-06",
+      "source": "../../_kjelder/character-v5.1/raw/face-06.png",
+      "eyeRect": [
+        387,
+        379,
+        250,
+        104
+      ],
+      "eyeSourceCentres": [
+        429,
+        594.5
+      ],
+      "eyeSourceCentreY": 465,
+      "eyeTargetCentres": [
+        [
+          432,
+          376
+        ],
+        [
+          592,
+          376
+        ]
+      ],
+      "eyeScale": 0.9667673716012085,
+      "nose": "shared measured warm-smile nose at (512,432)",
+      "mouthRect": [
+        456,
+        548,
+        112,
+        61
+      ],
+      "mouthSourcePivot": [
+        512,
+        578.5
+      ],
+      "mouthTarget": [
+        512,
+        492
+      ],
+      "mouthScale": 0.75
+    },
+    {
+      "id": "face-07",
+      "source": "../../_kjelder/character-v5.1/raw/face-07.png",
+      "eyeRect": [
+        361,
+        404,
+        302,
+        118
+      ],
+      "eyeSourceCentres": [
+        412,
+        610.5
+      ],
+      "eyeSourceCentreY": 493.5,
+      "eyeTargetCentres": [
+        [
+          432,
+          376
+        ],
+        [
+          592,
+          376
+        ]
+      ],
+      "eyeScale": 0.8060453400503779,
+      "nose": "shared measured warm-smile nose at (512,432)",
+      "mouthRect": [
+        476,
+        591,
+        71,
+        17
+      ],
+      "mouthSourcePivot": [
+        511.5,
+        599.5
+      ],
+      "mouthTarget": [
+        512,
+        492
+      ],
+      "mouthScale": 0.75
+    },
+    {
+      "id": "face-08",
+      "source": "../../_kjelder/character-v5.1/raw/face-08.png",
+      "eyeRect": [
+        398,
+        378,
+        228,
+        114
+      ],
+      "eyeSourceCentres": [
+        438.5,
+        584.5
+      ],
+      "eyeSourceCentreY": 459.5,
+      "eyeTargetCentres": [
+        [
+          432,
+          376
+        ],
+        [
+          592,
+          376
+        ]
+      ],
+      "eyeScale": 1.095890410958904,
+      "nose": "shared measured warm-smile nose at (512,432)",
+      "mouthRect": [
+        480,
+        549,
+        67,
+        26
+      ],
+      "mouthSourcePivot": [
+        513.5,
+        562
+      ],
+      "mouthTarget": [
+        512,
+        492
+      ],
+      "mouthScale": 0.75
+    },
+    {
+      "id": "face-09",
+      "source": "../../_kjelder/character-v5.1/raw/face-09.png",
+      "eyeRect": [
+        389,
+        395,
+        245,
+        118
+      ],
+      "eyeSourceCentres": [
+        427.5,
+        594.5
+      ],
+      "eyeSourceCentreY": 478,
+      "eyeTargetCentres": [
+        [
+          432,
+          376
+        ],
+        [
+          592,
+          376
+        ]
+      ],
+      "eyeScale": 0.9580838323353293,
+      "nose": "shared measured warm-smile nose at (512,432)",
+      "mouthRect": [
+        472,
+        587,
+        79,
+        17
+      ],
+      "mouthSourcePivot": [
+        511.5,
+        595.5
+      ],
+      "mouthTarget": [
+        512,
+        492
+      ],
+      "mouthScale": 0.75
+    },
+    {
+      "id": "face-10",
+      "source": "../../_kjelder/character-v5.1/raw/face-10.png",
+      "eyeRect": [
+        372,
+        406,
+        281,
+        101
+      ],
+      "eyeSourceCentres": [
+        421.5,
+        602
+      ],
+      "eyeSourceCentreY": 474,
+      "eyeTargetCentres": [
+        [
+          432,
+          376
+        ],
+        [
+          592,
+          376
+        ]
+      ],
+      "eyeScale": 0.8864265927977839,
+      "nose": "shared measured warm-smile nose at (512,432)",
+      "mouthRect": [
+        476,
+        583,
+        71,
+        13
+      ],
+      "mouthSourcePivot": [
+        511.5,
+        589.5
+      ],
+      "mouthTarget": [
+        512,
+        492
+      ],
+      "mouthScale": 0.75
+    },
+    {
+      "id": "hair-06",
+      "source": "../../_kjelder/character-v5.1/raw/hair-06.png",
+      "sourceSilhouette": [
+        223,
+        185,
+        801,
+        593
+      ],
+      "registrationAnchors": [
+        "measured hair-crown top",
+        "measured left/right silhouette limits"
+      ],
+      "scale": 0.8062283737024222,
+      "translation": [
+        99.21107266435985,
+        -21.152249134948107
+      ],
+      "targetCrown": [
+        512,
+        128
+      ],
+      "targetWidth": 466,
+      "backLayer": "fully transparent; short style ends outside nape"
+    },
+    {
+      "id": "hair-07",
+      "source": "../../_kjelder/character-v5.1/raw/hair-07.png",
+      "sourceSilhouette": [
+        270,
+        198,
+        750,
+        556
+      ],
+      "registrationAnchors": [
+        "measured hair-crown top",
+        "measured left/right silhouette limits"
+      ],
+      "scale": 0.9708333333333333,
+      "translation": [
+        16.875,
+        -64.225
+      ],
+      "targetCrown": [
+        512,
+        128
+      ],
+      "targetWidth": 466,
+      "backLayer": "fully transparent; short style ends outside nape"
+    },
+    {
+      "id": "hair-08",
+      "source": "../../_kjelder/character-v5.1/raw/hair-08.png",
+      "sourceSilhouette": [
+        160,
+        174,
+        851,
+        738
+      ],
+      "registrationAnchors": [
+        "measured hair-crown top",
+        "measured left/right silhouette limits"
+      ],
+      "scale": 0.6743849493487699,
+      "translation": [
+        171.0984081041968,
+        10.657018813314039
+      ],
+      "targetCrown": [
+        512,
+        128
+      ],
+      "targetWidth": 466,
+      "backLayer": "fully transparent; short style ends outside nape"
+    },
+    {
+      "id": "hair-09",
+      "source": "../../_kjelder/character-v5.1/raw/hair-09.png",
+      "sourceSilhouette": [
+        131,
+        255,
+        891,
+        968
+      ],
+      "registrationAnchors": [
+        "measured hair-crown top",
+        "measured left/right silhouette limits"
+      ],
+      "scale": 0.6131578947368421,
+      "translation": [
+        198.67631578947368,
+        -28.35526315789474
+      ],
+      "targetCrown": [
+        512,
+        128
+      ],
+      "targetWidth": 466,
+      "backLayer": "fully transparent; short style ends outside nape"
+    },
+    {
+      "id": "hair-10",
+      "source": "../../_kjelder/character-v5.1/raw/hair-10.png",
+      "sourceSilhouette": [
+        229,
+        216,
+        803,
+        649
+      ],
+      "registrationAnchors": [
+        "measured hair-crown top",
+        "measured left/right silhouette limits"
+      ],
+      "scale": 0.8118466898954704,
+      "translation": [
+        93.0871080139373,
+        -47.35888501742161
+      ],
+      "targetCrown": [
+        512,
+        128
+      ],
+      "targetWidth": 466,
+      "backLayer": "fully transparent; short style ends outside nape"
     }
   ],
   "productionGuide": "../../docs/character-production-standard-v5.md",
   "prompts": "../../docs/character-generation-v5-prompts.md",
   "validation": {
-    "exactRendererComparisons": 625,
-    "visualPairChecks": [
-      "25 face/hair",
-      "25 skin/clothes",
-      "25 hair/clothes"
-    ],
-    "browser": {
-      "status": "passed",
-      "date": "2026-10-05",
-      "testedCommit": "97449e614a5e9354721814d8a9cd3180c0156669",
-      "url": "https://icy-water-0487ac303-88.westeurope.2.azurestaticapps.net/livslina/assets/prototype/character-builder-test",
-      "mobileViewportWidths": [
-        320,
-        437
+    "baselineV5": {
+      "exactRendererComparisons": 625,
+      "visualPairChecks": [
+        "25 face/hair",
+        "25 skin/clothes",
+        "25 hair/clothes"
       ],
-      "desktop": "default viewport, passed",
-      "horizontalPageOverflow": false,
-      "choicesChecked": 20,
-      "controls": [
-        "random",
-        "reset",
-        "Enter keyboard",
-        "layer visibility",
-        "anchor overlay",
-        "zoom 1×/2×"
-      ],
-      "consoleErrors": 0,
-      "consoleWarnings": 0
+      "browser": {
+        "status": "passed",
+        "date": "2026-10-05",
+        "testedCommit": "97449e614a5e9354721814d8a9cd3180c0156669",
+        "url": "https://icy-water-0487ac303-88.westeurope.2.azurestaticapps.net/livslina/assets/prototype/character-builder-test",
+        "mobileViewportWidths": [
+          320,
+          437
+        ],
+        "desktop": "default viewport, passed",
+        "horizontalPageOverflow": false,
+        "choicesChecked": 20,
+        "controls": [
+          "random",
+          "reset",
+          "Enter keyboard",
+          "layer visibility",
+          "anchor overlay",
+          "zoom 1×/2×"
+        ],
+        "consoleErrors": 0,
+        "consoleWarnings": 0
+      },
+      "visualComposites": 625
     },
-    "visualComposites": 625
-  }
+    "expansionV5_1": {
+      "status": "visual-review-complete",
+      "addedAssets": 20,
+      "addedHairStyles": 5,
+      "addedExpressions": 5,
+      "addedOutfits": 5,
+      "totalCombinations": 5000,
+      "visualChecks": {
+        "newVariantOverview": true,
+        "faceHairPairs": 100,
+        "hairClothesPairs": 100,
+        "skinClothesPairs": 50,
+        "allSpritesFullFrame": true,
+        "generatedShortHairBackLayers": "fully transparent"
+      },
+      "browser": {
+        "status": "not-run"
+      }
+    }
+  },
+  "promptAdditions": "../../docs/character-generation-v5-additions.md"
 }

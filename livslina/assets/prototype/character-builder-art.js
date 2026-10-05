@@ -1,21 +1,20 @@
-/* Prepackaged full-frame layers. No runtime pixel reads or asset fitting. */
+/* Prepacked full-frame layers. Selection changes never fit or alter pixels. */
 window.LivslinaCharacterArt = (() => {
   const model = window.LivslinaCharacterModel;
   const scriptURL = document.currentScript.src;
   const labels = {
     skin: ["Ljos varm", "Ljos nøytral", "Mellomvarm", "Djup brun", "Mørk brun"],
-    face: ["Breitt smil", "Briller", "Overraska", "Blink og fregner", "Sjølvsikker"],
-    hair: ["Kort krøllhår", "Langt bølgjehår", "Fletter", "Rett lugg", "Høg hestehale"],
-    clothes: ["Blå hettegenser", "Rustraud jakke", "Lilla strikkegenser", "Grøn overall", "Turkis skjorte"]
+    face: ["Breitt smil", "Briller", "Overraska", "Blink og fregner", "Sjølvsikker", "Lattermild", "Søvnig", "Nysgjerrig", "Bekymra", "Konsentrert"],
+    hair: ["Kort krøllhår", "Langt bølgjehår", "Fletter", "Rett lugg", "Høg hestehale", "Rufsete quiff", "Tett krølltopp", "Sidesveipt pixie", "Kjevelang blåsvart bob", "Luftig blond kortklipp"],
+    clothes: ["Blå hettegenser", "Rustraud jakke", "Lilla strikkegenser", "Grøn overall", "Turkis skjorte", "Burgundarraud collegejakke", "Lilla cardigan og plissé-skjørt", "Rutete flanell og cargobukse", "Blått treningssett", "Salviegrøn rugbyskorte"]
   };
-  const fileFamilies = {
-    body: "skin-body", hands: "skin-hands", clothes: "clothes", face: "face",
-    hairBack: "hair-back", hairFront: "hair-front"
-  };
+  const fileFamilies = { body: "skin-body", hands: "skin-hands", clothes: "clothes", face: "face", hairBack: "hair-back", hairFront: "hair-front" };
+  const counts = { body: 5, hands: 5, clothes: 10, face: 10, hairBack: 10, hairFront: 10 };
   const images = {};
   let ready = false;
   let loadError = "";
   let loadedCount = 0;
+  const total = Object.values(counts).reduce((sum, count) => sum + count, 0);
 
   function overlay(ctx) {
     ctx.save();
@@ -46,7 +45,7 @@ window.LivslinaCharacterArt = (() => {
   function draw(ctx, selection, options = {}) {
     if (!ready) return false;
     const visible = { body: true, clothes: true, face: true, hairBack: true, hairFront: true, ...options.visible };
-    const index = (family) => Math.max(0, Math.min(4, Number(selection[family]) || 0));
+    const index = (family) => Math.max(0, Math.min(labels[family].length - 1, Number(selection[family]) || 0));
     const layers = {
       hairBack: images.hairBack[index("hair")],
       body: images.body[index("skin")],
@@ -66,15 +65,14 @@ window.LivslinaCharacterArt = (() => {
   }
 
   const pending = [];
-  const total = Object.keys(fileFamilies).length * 5;
   for (const [family, prefix] of Object.entries(fileFamilies)) {
     images[family] = [];
-    for (let i = 0; i < 5; i++) pending.push(new Promise((resolve, reject) => {
-      const filename = `${prefix}-${String(i + 1).padStart(2, "0")}.png`;
+    for (let i = 0; i < counts[family]; i++) pending.push(new Promise((resolve, reject) => {
+      const filename = prefix + "-" + String(i + 1).padStart(2, "0") + ".png";
       const image = new Image();
       image.addEventListener("load", () => {
         if (image.naturalWidth !== model.assetWidth || image.naturalHeight !== model.assetHeight) {
-          reject(new Error(`${filename} har feil fullrammemål (${image.naturalWidth} × ${image.naturalHeight}).`));
+          reject(new Error(filename + " har feil fullrammemål (" + image.naturalWidth + " × " + image.naturalHeight + ")."));
           return;
         }
         images[family][i] = image;
@@ -82,8 +80,8 @@ window.LivslinaCharacterArt = (() => {
         window.dispatchEvent(new CustomEvent("livslina:character-art-progress", { detail: { loaded: loadedCount, total } }));
         resolve();
       }, { once: true });
-      image.addEventListener("error", () => reject(new Error(`Kunne ikkje laste ${filename}.`)), { once: true });
-      image.src = new URL(`characters/v5/${filename}`, scriptURL).href;
+      image.addEventListener("error", () => reject(new Error("Kunne ikkje laste " + filename + ".")), { once: true });
+      image.src = new URL("characters/v5/" + filename, scriptURL).href;
     }));
   }
   const whenReady = Promise.all(pending).then(() => {
