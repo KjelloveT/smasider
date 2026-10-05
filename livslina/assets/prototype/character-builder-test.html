@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="nn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff9e9">
+  <title>Karakterbyggjar — Livslina</title>
+  <link rel="stylesheet" href="../../../css/vyrdepil-design.css">
+  <link rel="stylesheet" href="character-builder-test.css">
+</head>
+<body class="vp-page" data-vp-design data-vp-app="livslina">
+  <main class="vp-shell builder-shell" id="main">
+    <header class="page-heading">
+      <p class="eyebrow">Livslina · ressursprøve v5</p>
+      <h1>Karakterbyggjar</h1>
+      <p class="intro">Byt hud, andlet, hår og klede. Alle delane brukar same meisterfigur og faste festepunkt.</p>
+    </header>
+
+    <section class="builder" aria-label="Karakterbyggjar">
+      <figure class="vp-panel vp-panel--plain preview-panel">
+        <div class="character-stage" id="character-stage" data-zoom="1">
+          <canvas id="character" width="512" height="768" role="img" aria-label="Karakterressursane lastar"></canvas>
+        </div>
+        <figcaption id="selected-summary" aria-live="polite">Lastar figurressursar …</figcaption>
+        <p class="canvas-note">256 × 384 logiske pikslar · 512 × 768 ressursramme</p>
+        <fieldset class="vp-field zoom-control">
+          <legend>Forstørring</legend>
+          <div class="vp-choices">
+            <button class="vp-button vp-button--compact" type="button" data-zoom="1" aria-pressed="true">1×</button>
+            <button class="vp-button vp-button--compact" type="button" data-zoom="2" aria-pressed="false">2×</button>
+          </div>
+          <p class="vp-help">Ved 2× kan du rulle inni figurruta for å sjå alle detaljane.</p>
+        </fieldset>
+      </figure>
+
+      <div class="vp-panel vp-panel--plain controls-panel">
+        <div class="toolbar">
+          <button class="vp-button vp-button--primary" id="randomize" type="button" disabled>Tilfeldig figur</button>
+          <button class="vp-button" id="reset" type="button" disabled>Start på nytt</button>
+        </div>
+
+        <fieldset class="choice-group" data-family="skin">
+          <legend><span class="step">1</span> Hudfarge</legend>
+          <div class="vp-choices choices">
+            <button type="button" class="vp-button vp-button--compact choice" data-option="0" aria-pressed="true" disabled><span class="swatch swatch--skin-1" aria-hidden="true"></span>Ljos varm</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="1" aria-pressed="false" disabled><span class="swatch swatch--skin-2" aria-hidden="true"></span>Ljos nøytral</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="2" aria-pressed="false" disabled><span class="swatch swatch--skin-3" aria-hidden="true"></span>Mellomvarm</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="3" aria-pressed="false" disabled><span class="swatch swatch--skin-4" aria-hidden="true"></span>Djup brun</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="4" aria-pressed="false" disabled><span class="swatch swatch--skin-5" aria-hidden="true"></span>Mørk brun</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="choice-group" data-family="face">
+          <legend><span class="step">2</span> Andlet</legend>
+          <div class="vp-choices choices">
+            <button type="button" class="vp-button vp-button--compact choice" data-option="0" aria-pressed="true" disabled>Breitt smil</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="1" aria-pressed="false" disabled>Briller</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="2" aria-pressed="false" disabled>Overraska</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="3" aria-pressed="false" disabled>Blink og fregner</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="4" aria-pressed="false" disabled>Sjølvsikker</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="choice-group" data-family="hair">
+          <legend><span class="step">3</span> Frisyre</legend>
+          <div class="vp-choices choices">
+            <button type="button" class="vp-button vp-button--compact choice" data-option="0" aria-pressed="true" disabled>Kort krøllhår</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="1" aria-pressed="false" disabled>Langt bølgjehår</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="2" aria-pressed="false" disabled>Fletter</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="3" aria-pressed="false" disabled>Rett lugg</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="4" aria-pressed="false" disabled>Høg hestehale</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="choice-group" data-family="clothes">
+          <legend><span class="step">4</span> Klede</legend>
+          <div class="vp-choices choices">
+            <button type="button" class="vp-button vp-button--compact choice" data-option="0" aria-pressed="true" disabled>Blå hettegenser</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="1" aria-pressed="false" disabled>Rustraud jakke</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="2" aria-pressed="false" disabled>Lilla strikkegenser</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="3" aria-pressed="false" disabled>Grøn overall</button>
+            <button type="button" class="vp-button vp-button--compact choice" data-option="4" aria-pressed="false" disabled>Turkis skjorte</button>
+          </div>
+        </fieldset>
+
+        <p class="combination-note">Fem val i kvar gruppe gjev 625 moglege kombinasjonar.</p>
+        <details class="vp-accordion audit-panel">
+          <summary>Kontroller laga</summary>
+          <div class="vp-accordion-body">
+            <p class="vp-help">Vis éin del om gongen for å kontrollere køytar og overlapping. Kropp omfattar hovud, hals og hender.</p>
+            <fieldset class="vp-field audit-layers">
+              <legend>Synlege lag</legend>
+              <label class="vp-choice"><input type="checkbox" data-layer="body" checked> Kropp</label>
+              <label class="vp-choice"><input type="checkbox" data-layer="clothes" checked> Klede</label>
+              <label class="vp-choice"><input type="checkbox" data-layer="face" checked> Andlet</label>
+              <label class="vp-choice"><input type="checkbox" data-layer="hairBack" checked> Hår bak</label>
+              <label class="vp-choice"><input type="checkbox" data-layer="hairFront" checked> Hår fram</label>
+            </fieldset>
+            <label class="vp-choice"><input id="show-anchors" type="checkbox"> Vis festepunkt</label>
+            <p class="vp-help">Kvart lag blir teikna i si fulle ramme på same stad. Ingen del blir tilpassa etter innhaldet i biletet.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+    <footer><a href="layout-asset-test.html">Attende til romprøva</a></footer>
+  </main>
+  <script src="character-builder-model.js"></script>
+  <script src="character-builder-art.js"></script>
+  <script src="character-builder-test.js"></script>
+</body>
+</html>

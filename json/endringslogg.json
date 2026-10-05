@@ -2,6 +2,19 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.81",
+      "dato": "2026-10-05",
+      "samandrag": "Nye, samanhengande karakterressursar i Livslina si prøveutgåve.",
+      "punkt": [
+        {
+          "t": "fiksa",
+          "kva": "Livslina",
+          "tekst": "Karakterbyggjaren har fem val i kvar gruppe, faste festepunkt, samsvarande hud og hender og kontroll av laga.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
       "versjon": "1.80",
       "dato": "2026-10-04",
       "samandrag": "BåreTevling har fått kvadratiske brettceller og eit standard Vyrdepil-panel for plassering.",

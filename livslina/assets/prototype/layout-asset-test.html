@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="nn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prøv detaljerte 8-bit-møblar og romting i ei felles, målsett Livslina-romramme.">
+  <title>Livslina — detaljert pikselprøve for rommet</title>
+  <link rel="stylesheet" href="../../../css/vyrdepil-design.css">
+  <link rel="stylesheet" href="layout-asset-test.css">
+  <script src="../../../js/vyrdepil-icons.js" defer></script>
+  <script src="../../../js/vyrdepil-util.js" defer></script>
+  <script src="../../../js/vyrdepil-design.js" defer></script>
+  <script src="resources-v5/item-catalog.js" defer></script>
+  <script src="layout-room-model.js" defer></script>
+  <script src="resources-v5/bed-price-ladder.js" defer></script>
+  <script src="layout-asset-test.js" defer></script>
+</head>
+<body class="vp-page" data-vp-design data-vp-app="livslina">
+  <a class="vp-skip" href="#innhald">Hopp til møbelprøva</a>
+  <main class="vp-shell vp-shell--wide asset-test" id="innhald">
+    <header class="asset-test__intro">
+      <div class="vp-panel vp-panel--plain asset-test__intro-panel">
+        <p class="vp-small">Livslina · intern ressursprøve</p>
+        <h1 class="vp-title">Detaljert 8-bit-rom</h1>
+        <p class="vp-prose">Prøv møblar og pynt i detaljert 8-bit-stil. Dei fleste gjenstandane har fem førebelse prissteg frå brukt eller heimelaga til luksus. Rommodellen styrer perspektiv, storleik og plassering.</p>
+        <a class="vp-button vp-button--compact" href="layout-standard-v4.md">Les den reviderte planen</a>
+        <a class="vp-button vp-button--compact" href="layout-prototype.html">Tilbake til rom- og festeprøva</a>
+      </div>
+      <img class="asset-test__vyrde" src="../../../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt="Stein-Vyrde">
+    </header>
+
+    <section class="vp-panel vp-panel--plain asset-test__scene-panel" aria-labelledby="scene-title">
+      <div class="vp-content">
+        <div class="asset-test__scene-heading">
+          <div>
+            <p class="vp-small">Pikselkunstprøve · rom 4,2 × 3,6 m · fast perspektiv og skala</p>
+            <h2 class="vp-heading" id="scene-title">Slik verkar delane saman</h2>
+          </div>
+          <div class="vp-actions">
+            <button class="vp-button vp-button--primary vp-button--compact" id="randomize-room" type="button">Tilfeldig rom</button>
+            <button class="vp-button vp-button--compact" id="toggle-floor-guides" type="button" aria-pressed="false">Vis golvruter og retning</button>
+            <button class="vp-button vp-button--compact" id="reset-variants" type="button">Standardoppsett</button>
+          </div>
+        </div>
+        <figure class="asset-test__figure">
+          <svg class="asset-test__stage" viewBox="0 0 480 360" shape-rendering="crispEdges" role="img" aria-labelledby="scene-svg-title scene-svg-desc">
+            <title id="scene-svg-title">Rom med valbare møblar</title>
+            <desc id="scene-svg-desc">Ei seng står i det bakre høgre hjørnet. Pult og stol står til høgre, og den sjølvstendige TV-en står på benken til venstre for vindauget. PC-tårnet står på pulten. Sofaen står midt på teppet. Ein plante, eit hifisystem eller eit nattbord kan stå mellom seng og pult.</desc>
+            <g id="room-model"><image href="room/layout-measured-v4.svg" width="480" height="360"></image></g>
+          </svg>
+          <figcaption id="scene-caption">Dei detaljerte teikningane er eigne sprites. Målmodellen fastset berre vinkel, golvkontakt, storleik og veggfeste. Sofaen vender mot TV-en; stolen vender mot pulten.</figcaption>
+        </figure>
+        <p class="asset-test__status" id="variant-status" role="status" aria-live="polite">Målmodellen blir lasta.</p>
+        <noscript><p>Du ser standardmodellen. Slå på JavaScript for å byte storleikar.</p></noscript>
+      </div>
+    </section>
+
+    <section class="vp-panel vp-panel--plain asset-test__controls" aria-labelledby="controls-title">
+      <div class="vp-content">
+        <div>
+          <h2 class="vp-heading" id="controls-title">Møblar</h2>
+          <p class="vp-small">Sengestigen går frå den billegaste heimelaga løysinga til ei luksusseng med hev- og senkefunksjon. Prisane er førebelse spelidéar og er ikkje kopla til speløkonomien. PC-tårnet er eit eige val som følgjer pulten; TV-en er eit eige val som følgjer benken.</p>
+        </div>
+        <div class="asset-test__control-grid">
+          <label class="vp-field" for="bed-variant"><span class="vp-label">Seng · fem prisnivå</span><select class="vp-input" id="bed-variant" data-family="bed"><option value="01">1 · Heimelaga seng · kr 350</option><option value="02">2 · Brukt seng · kr 1 500</option><option value="03">3 · Stødig kvardagseng · kr 4 500</option><option value="04">4 · Polstra seng med oppbevaring · kr 12 000</option><option value="05">5 · Luksusseng med hev- og senkefunksjon · kr 26 000</option></select></label>
+          <div class="asset-test__price-card" aria-live="polite" aria-atomic="true"><p class="vp-small" id="bed-price-label">Førebels spelpris · nivå 1 av 5</p><p class="asset-test__price" id="bed-price">kr 350</p><p class="asset-test__price-detail" id="bed-price-detail">Skeiv ramme av restebord og ein sliten, men brukande madrass.</p></div>
+          <label class="vp-field" for="bench-variant"><span class="vp-label">TV-benk · frå pappkasse til RGB-luksus</span><select class="vp-input" id="bench-variant" data-tier-family="tv-bench"></select></label>
+          <label class="vp-field" for="tv-variant"><span class="vp-label">TV · frå nettbrettstorleik til maks</span><select class="vp-input" id="tv-variant" data-tier-family="tv"></select></label>
+          <label class="vp-field" for="desk-variant"><span class="vp-label">Kontorpult · fem prisnivå</span><select class="vp-input" id="desk-variant" data-tier-family="desk"></select></label>
+          <label class="vp-field" for="chair-variant"><span class="vp-label">Kontorstol · fem prisnivå</span><select class="vp-input" id="chair-variant" data-tier-family="chair"></select></label>
+          <label class="vp-field" for="pc-variant"><span class="vp-label">PC-tårn · fem prisnivå</span><select class="vp-input" id="pc-variant" data-tier-family="pc"></select></label>
+          <label class="vp-field" for="rug-variant"><span class="vp-label">Teppe · fem prisnivå</span><select class="vp-input" id="rug-variant" data-tier-family="rug"></select></label>
+          <label class="vp-field" for="sofa-variant"><span class="vp-label">Sofa · utsjånad</span><select class="vp-input" id="sofa-variant" data-family="sofa"><option value="01">Salviesofa · to sete og puter</option><option value="02">Korallsofa · høge armlene og blå sete</option></select></label>
+          <label class="vp-field" for="sofa-size"><span class="vp-label">Sofa · storleik</span><select class="vp-input" id="sofa-size" data-size-family="sofa"><option value="01">145 × 82 cm</option><option value="02">155 × 90 cm</option></select></label>
+        </div>
+        <dl class="asset-test__measurements" aria-label="Mål på valde møblar">
+          <div><dt>Seng</dt><dd id="measure-bed">95 × 200 cm</dd></div><div><dt>Pult</dt><dd id="measure-desk">120 × 62 cm</dd></div><div><dt>Stol</dt><dd id="measure-chair">46 × 46 cm</dd></div><div><dt>Teppe</dt><dd id="measure-rug">260 × 180 cm</dd></div><div><dt>Sofa</dt><dd id="measure-sofa">145 × 82 cm</dd></div><div><dt>TV-benk</dt><dd id="measure-tv-bench">140 × 45 cm</dd></div><div><dt>TV</dt><dd id="measure-tv">24 cm breidd</dd></div><div><dt>PC-tårn</dt><dd id="measure-pc">22 × 24 × 36 cm</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="vp-panel vp-panel--plain asset-test__controls" aria-labelledby="decor-title">
+      <div class="vp-content">
+        <div>
+          <h2 class="vp-heading" id="decor-title">Veggpynt og golvting</h2>
+          <p class="vp-small">Bilete og hyller held seg til kvar si veggretning. Vel eitt av ti slag ekstra pynt om gongen; veggpynt festar seg til høgre vegg, og småting følgjer skrivebordet. Golvvalet vekslar mellom hifisystem, plante og nattbord.</p>
+        </div>
+        <div class="asset-test__control-grid">
+          <label class="vp-field" for="left-wall-decor"><span class="vp-label">Venstre vegg · ved vindauget</span><select class="vp-input" id="left-wall-decor"><option value="none">Ingen veggting</option><option value="picture">Bilete</option><option value="shelf">Hylle med ting</option><option value="both" selected>Bilete og hylle</option></select></label>
+          <label class="vp-field" for="right-wall-decor"><span class="vp-label">Høgre vegg · over møbla</span><select class="vp-input" id="right-wall-decor"><option value="none">Ingen veggting</option><option value="picture">Bilete</option><option value="shelf">Hylle med ting</option><option value="both" selected>Bilete og hylle</option></select></label>
+          <label class="vp-field" for="picture-style"><span class="vp-label">Bilete · eksisterande veggvariant</span><select class="vp-input" id="picture-style"><option value="01">Sol over åsar</option><option value="02">Nattby med stjerner</option></select></label>
+          <label class="vp-field" for="shelf-style"><span class="vp-label">Hyller · eksisterande veggvariant</span><select class="vp-input" id="shelf-style"><option value="01">Bøker og lita plante</option><option value="02">Fargar og oppbevaringsboks</option></select></label>
+          <label class="vp-field" for="floor-item"><span class="vp-label">Golvting mellom seng og pult</span><select class="vp-input" id="floor-item"><option value="hifi">Hifisystem</option><option value="plant" selected>Plante</option><option value="nightstand">Nattbord</option></select></label>
+          <label class="vp-field" for="floor-variant"><span class="vp-label">Golvting · fem prisnivå</span><select class="vp-input" id="floor-variant" data-tier-family="floor"></select></label>
+          <label class="vp-field" for="decor-kind"><span class="vp-label">Pynt · vel mellom ti slag</span><select class="vp-input" id="decor-kind"><option value="none">Ingen ekstra pynt</option></select></label>
+          <label class="vp-field" for="decor-tier"><span class="vp-label">Pynt · fem prisnivå</span><select class="vp-input" id="decor-tier"></select></label>
+        </div>
+        <p class="vp-small" id="floor-item-summary">Plante · 40 × 40 cm golvplass · 110 cm høgd.</p>
+      </div>
+    </section>
+
+    <p class="vp-small asset-test__footnote">Dette er ei samansett prøve: ho viser korleis detaljert pikselkunst kan fylgje dei målsette festepunkta. Ho er ikkje ei endeleg speleflate.</p>
+  </main>
+</body>
+</html>

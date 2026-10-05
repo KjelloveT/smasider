@@ -1,0 +1,46 @@
+.asset-test { max-width:1180px; }
+.asset-test__intro { display:grid; grid-template-columns:minmax(0,1fr) 76px; gap:14px; align-items:center; margin:18px auto; }
+.asset-test__intro-panel, .asset-test__scene-panel, .asset-test__controls { padding:clamp(14px,2.4vw,24px); }
+.asset-test__intro-panel { display:grid; gap:8px; }
+.asset-test__intro-panel .vp-small, .asset-test__intro-panel .vp-title, .asset-test__intro-panel .vp-prose { margin:0; }
+.asset-test__intro-panel .vp-button { justify-self:start; margin-top:4px; }
+.asset-test__vyrde { display:block; width:76px; height:auto; }
+.asset-test__scene-panel { margin-block:18px; }
+.asset-test__scene-heading { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+.asset-test__scene-heading .vp-small, .asset-test__scene-heading .vp-heading { margin:0; }
+.asset-test__figure { margin:0; overflow:hidden; border:3px solid #142820; background:#f7f3e9; }
+.asset-test__stage { display:block; width:100%; height:auto; aspect-ratio:4 / 3; shape-rendering:crispEdges; }
+.asset-test__background, .asset-test__sprite { image-rendering:pixelated; }
+.asset-test__figure figcaption { padding:9px 12px; border-top:1px solid #142820; background:#fffdf5; color:#000; font-size:.9rem; }
+.asset-test__status { margin:12px 0 0; padding:10px 12px; border-left:4px solid #e7bd59; background:#fff4cc; color:#000; }
+.asset-test__controls { margin-block:18px; }
+.asset-test__controls .vp-content { display:grid; gap:16px; }
+.asset-test__controls h2, .asset-test__controls p { margin-block:0; }
+.asset-test__control-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.asset-test__control-grid .vp-field { min-width:0; margin:0; }
+.asset-test__control-grid .vp-input { width:100%; }
+.asset-test__price-card { grid-column:span 2; display:grid; grid-template-columns:minmax(130px,.6fr) minmax(100px,.35fr) minmax(180px,1fr); align-items:center; gap:8px 14px; min-width:0; padding:12px 14px; border:2px solid #142820; background:#fff4cc; color:#000; }
+.asset-test__price-card p { margin:0; }
+.asset-test__price { font-size:clamp(1.35rem,2.5vw,1.9rem); font-weight:800; }
+.asset-test__price-detail { line-height:1.4; }
+.asset-test__footnote { max-width:75ch; margin:0 auto 28px; }
+.asset-test__measurements { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px 16px; margin:0; }
+.asset-test__measurements div { display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px 10px; padding:8px; background:#fff9e9; border:1px solid #142820; }
+.asset-test__measurements dt { font-weight:700; }
+.asset-test__measurements dd { margin:0; }
+@media (max-width:800px) {
+  .asset-test__control-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .asset-test__measurements { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:520px) {
+  .asset-test__intro { grid-template-columns:minmax(0,1fr) 54px; gap:8px; }
+  .asset-test__vyrde { width:54px; }
+  .asset-test__control-grid { grid-template-columns:1fr; }
+  .asset-test__price-card { grid-column:auto; grid-template-columns:1fr auto; }
+  #bed-price-label { grid-column:1 / -1; }
+  .asset-test__price-detail { grid-column:1 / -1; }
+  .asset-test__measurements { grid-template-columns:1fr; }
+  .asset-test__scene-heading { align-items:flex-start; }
+  .asset-test__scene-heading .vp-button { width:100%; justify-content:center; }
+  .asset-test__figure figcaption { font-size:.82rem; }
+}

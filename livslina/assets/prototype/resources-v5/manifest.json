@@ -1,0 +1,3392 @@
+{
+  "app": "livslina",
+  "version": 1,
+  "package": "resources-v5",
+  "updated": "2026-10-04",
+  "status": "126-item-product-library-prototype",
+  "artStyle": "detaljert-8-bit-med-tydeleg-pikselstruktur",
+  "promptSet": "prompts.md",
+  "instructions": "README.md",
+  "geometryAuthority": "../layout-room-model.js",
+  "camera": "measured-dimetric-v4",
+  "styleAndGeometry": {
+    "geometryGuide": "Controls camera, silhouette, proportions, contact points, room placement and attachments only.",
+    "visualStyle": "Detailed illustrated pixel art with layered shading, material texture, crisp pixel clusters and dark pixel outlines.",
+    "referenceUse": "Supplied images guide illustration detail only. Their room contents, color palette, characters and composition are not reused."
+  },
+  "assembly": {
+    "appearanceAndPhysicalSize": "Each product family has five individually measured price-tier sprites; the prototype selects one tier per family. Ten decor families also have five tiers each.",
+    "rendering": "Transparent sprites preserve their aspect ratio. Furniture aligns to measured floor contacts, wall decor to its wall plane, and mounted accessories to parent-local attachment points.",
+    "attachments": [
+      "TV and support feet are a separate purchasable sprite attached at the center of the selected TV-bench top; it moves with bench height and position.",
+      "PC tower is a separate purchasable sprite attached at the rear-right desk-top slot; monitor and keyboard remain within the desk sprite.",
+      "Desk-top decor attaches to a local tabletop slot. Wall decor mounts to the measured right-wall plane and replaces the other right-wall items during preview.",
+      "Hi-fi system, plant and nightstand share one optional floor slot between bed and desk; the hi-fi uses the clear strip along the right wall to keep its side speakers visible past the sofa."
+    ],
+    "light": "Neutral fixed room light; no evening sun or per-sprite light source.",
+    "totalBytes": 18185877,
+    "bedTierComparison": "Five measured silhouettes share the same 95 x 200 cm footprint; prices are provisional prototype values, not retail prices, and are not connected to game data.",
+    "sofaOrientation": "Both sofa variants face -u toward the TV; neither has block-like details on its back or armrests.",
+    "priceData": "Prototype prices in item-catalog.js and bed-price-ladder.js are illustrative, not retail prices, and are not connected to game economy data.",
+    "tvLadderCm": [
+      24,
+      42,
+      60,
+      90,
+      130
+    ],
+    "visualPreviews": {
+      "allTenDecorCategories": "../room/decor-room-tests.png",
+      "makeupSetAttachedToDesk": "../room/makeup-set-attachment.png"
+    }
+  },
+  "items": [
+    {
+      "id": "bed-01",
+      "family": "bed",
+      "variant": 1,
+      "label": "Eikeseng med mønstra sengetøy",
+      "file": "items/bed-01.png",
+      "camera": "measured-dimetric-v4",
+      "canvasProfileCm": {
+        "w": 95,
+        "d": 200,
+        "h": 95
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 95,
+          "depth": 200,
+          "height": 95
+        },
+        {
+          "width": 120,
+          "depth": 200,
+          "height": 95
+        }
+      ],
+      "sizeSelector": "bed-size",
+      "anchor": "Transparent sprite keeps its ratio and is bottom-centred in the measured model bounds.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1139
+      },
+      "transparent": true,
+      "bytes": 327070
+    },
+    {
+      "id": "bed-02",
+      "family": "bed",
+      "variant": 2,
+      "label": "Polstra seng med farga gavl",
+      "file": "items/bed-02.png",
+      "camera": "measured-dimetric-v4",
+      "canvasProfileCm": {
+        "w": 120,
+        "d": 200,
+        "h": 95
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 95,
+          "depth": 200,
+          "height": 95
+        },
+        {
+          "width": 120,
+          "depth": 200,
+          "height": 95
+        }
+      ],
+      "sizeSelector": "bed-size",
+      "anchor": "Transparent sprite keeps its ratio and is bottom-centred in the measured model bounds.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1104
+      },
+      "transparent": true,
+      "bytes": 321965
+    },
+    {
+      "id": "bed-tier-01",
+      "family": "bed",
+      "variant": 1,
+      "priceTier": 1,
+      "label": "Heimelaga seng",
+      "file": "items/bed-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/bed-tier-01.png",
+      "canvasProfileCm": {
+        "w": 95,
+        "d": 200,
+        "h": 78
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 95,
+          "depth": 200,
+          "height": 78
+        }
+      ],
+      "anchor": "Tier-specific measured silhouette; transparent sprite is bottom-centred and aligned with the measured floor contact.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1048
+      },
+      "transparent": true,
+      "bytes": 258223,
+      "priceSource": "bed-price-ladder.js"
+    },
+    {
+      "id": "bed-tier-02",
+      "family": "bed",
+      "variant": 2,
+      "priceTier": 2,
+      "label": "Brukt seng",
+      "file": "items/bed-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/bed-tier-02.png",
+      "canvasProfileCm": {
+        "w": 95,
+        "d": 200,
+        "h": 82
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 95,
+          "depth": 200,
+          "height": 82
+        }
+      ],
+      "anchor": "Tier-specific measured silhouette; transparent sprite is bottom-centred and aligned with the measured floor contact.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1031
+      },
+      "transparent": true,
+      "bytes": 262691,
+      "priceSource": "bed-price-ladder.js"
+    },
+    {
+      "id": "bed-tier-03",
+      "family": "bed",
+      "variant": 3,
+      "priceTier": 3,
+      "label": "Stødig kvardagseng",
+      "file": "items/bed-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/bed-tier-03.png",
+      "canvasProfileCm": {
+        "w": 95,
+        "d": 200,
+        "h": 86
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 95,
+          "depth": 200,
+          "height": 86
+        }
+      ],
+      "anchor": "Tier-specific measured silhouette; transparent sprite is bottom-centred and aligned with the measured floor contact.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1076
+      },
+      "transparent": true,
+      "bytes": 323281,
+      "priceSource": "bed-price-ladder.js"
+    },
+    {
+      "id": "bed-tier-04",
+      "family": "bed",
+      "variant": 4,
+      "priceTier": 4,
+      "label": "Polstra seng med oppbevaring",
+      "file": "items/bed-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/bed-tier-04.png",
+      "canvasProfileCm": {
+        "w": 95,
+        "d": 200,
+        "h": 94
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 95,
+          "depth": 200,
+          "height": 94
+        }
+      ],
+      "anchor": "Tier-specific measured silhouette; transparent sprite is bottom-centred and aligned with the measured floor contact.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1064
+      },
+      "transparent": true,
+      "bytes": 341541,
+      "priceSource": "bed-price-ladder.js"
+    },
+    {
+      "id": "bed-tier-05",
+      "family": "bed",
+      "variant": 5,
+      "priceTier": 5,
+      "label": "Luksusseng med hev- og senkefunksjon",
+      "file": "items/bed-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/bed-tier-05.png",
+      "canvasProfileCm": {
+        "w": 95,
+        "d": 200,
+        "h": 102
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 95,
+          "depth": 200,
+          "height": 102
+        }
+      ],
+      "anchor": "Tier-specific measured silhouette; transparent sprite is bottom-centred and aligned with the measured floor contact.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1202
+      },
+      "transparent": true,
+      "bytes": 418845,
+      "priceSource": "bed-price-ladder.js"
+    },
+    {
+      "id": "desk-01",
+      "family": "desk",
+      "variant": 1,
+      "label": "Skrivepult med skjermeining",
+      "file": "items/desk-01.png",
+      "camera": "measured-dimetric-v4",
+      "canvasProfileCm": {
+        "w": 120,
+        "d": 60,
+        "h": 75
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 120,
+          "depth": 60,
+          "height": 75
+        },
+        {
+          "width": 150,
+          "depth": 65,
+          "height": 75
+        }
+      ],
+      "sizeSelector": "desk-size",
+      "anchor": "Transparent sprite keeps its ratio and is bottom-centred in the measured model bounds.",
+      "canvasPixels": {
+        "width": 1057,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 286858,
+      "status": "legacy-unused-by-current-library-test"
+    },
+    {
+      "id": "desk-02",
+      "family": "desk",
+      "variant": 2,
+      "label": "Spelpult med PC-tårn",
+      "file": "items/desk-02.png",
+      "camera": "measured-dimetric-v4",
+      "canvasProfileCm": {
+        "w": 150,
+        "d": 65,
+        "h": 75
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 120,
+          "depth": 60,
+          "height": 75
+        },
+        {
+          "width": 150,
+          "depth": 65,
+          "height": 75
+        }
+      ],
+      "sizeSelector": "desk-size",
+      "anchor": "Transparent sprite keeps its ratio and is bottom-centred in the measured model bounds.",
+      "canvasPixels": {
+        "width": 1158,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 299666,
+      "status": "legacy-unused-by-current-library-test"
+    },
+    {
+      "id": "chair-01",
+      "family": "chair",
+      "variant": 1,
+      "label": "Trestol med spiler",
+      "file": "items/chair-01.png",
+      "camera": "measured-dimetric-v4",
+      "canvasProfileCm": {
+        "w": 42,
+        "d": 42,
+        "h": 85
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 42,
+          "depth": 42,
+          "height": 85
+        },
+        {
+          "width": 48,
+          "depth": 48,
+          "height": 90
+        }
+      ],
+      "sizeSelector": "chair-size",
+      "anchor": "Transparent sprite keeps its ratio and is bottom-centred in the measured model bounds.",
+      "canvasPixels": {
+        "width": 824,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 266897
+    },
+    {
+      "id": "chair-02",
+      "family": "chair",
+      "variant": 2,
+      "label": "Kontorstol med hjul",
+      "file": "items/chair-02.png",
+      "camera": "measured-dimetric-v4",
+      "canvasProfileCm": {
+        "w": 48,
+        "d": 48,
+        "h": 90
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 42,
+          "depth": 42,
+          "height": 85
+        },
+        {
+          "width": 48,
+          "depth": 48,
+          "height": 90
+        }
+      ],
+      "sizeSelector": "chair-size",
+      "anchor": "Transparent sprite keeps its ratio and is bottom-centred in the measured model bounds.",
+      "canvasPixels": {
+        "width": 759,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 255199
+    },
+    {
+      "id": "rug-01",
+      "family": "rug",
+      "variant": 1,
+      "label": "Vevd teppe med blomemønster",
+      "file": "items/rug-01.png",
+      "camera": "measured-dimetric-v4",
+      "canvasProfileCm": {
+        "w": 260,
+        "d": 190,
+        "h": 1
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 260,
+          "depth": 190,
+          "height": 1
+        },
+        {
+          "width": 280,
+          "depth": 200,
+          "height": 1
+        }
+      ],
+      "sizeSelector": "rug-size",
+      "anchor": "Transparent sprite keeps its ratio and is bottom-centred in the measured model bounds.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 693
+      },
+      "transparent": true,
+      "bytes": 295836
+    },
+    {
+      "id": "rug-02",
+      "family": "rug",
+      "variant": 2,
+      "label": "Rutete teppe med brei kant",
+      "file": "items/rug-02.png",
+      "camera": "measured-dimetric-v4",
+      "canvasProfileCm": {
+        "w": 280,
+        "d": 200,
+        "h": 1
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 260,
+          "depth": 190,
+          "height": 1
+        },
+        {
+          "width": 280,
+          "depth": 200,
+          "height": 1
+        }
+      ],
+      "sizeSelector": "rug-size",
+      "anchor": "Transparent sprite keeps its ratio and is bottom-centred in the measured model bounds.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 693
+      },
+      "transparent": true,
+      "bytes": 329778
+    },
+    {
+      "id": "sofa-01",
+      "family": "sofa",
+      "variant": 1,
+      "label": "Salviesofa med to sitjeplassar",
+      "file": "items/sofa-01.png",
+      "camera": "measured-dimetric-v4",
+      "canvasProfileCm": {
+        "w": 82,
+        "d": 145,
+        "h": 80
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 82,
+          "depth": 145,
+          "height": 80
+        },
+        {
+          "width": 90,
+          "depth": 155,
+          "height": 80
+        }
+      ],
+      "sizeSelector": "sofa-size",
+      "anchor": "Transparent sprite keeps its ratio and is bottom-centred in the measured model bounds.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1058
+      },
+      "transparent": true,
+      "bytes": 421876,
+      "orientation": "Faces -u toward TV",
+      "backAndArmBlocks": false
+    },
+    {
+      "id": "sofa-02",
+      "family": "sofa",
+      "variant": 2,
+      "label": "Korallsofa med høge armlene",
+      "file": "items/sofa-02.png",
+      "camera": "measured-dimetric-v4",
+      "canvasProfileCm": {
+        "w": 90,
+        "d": 155,
+        "h": 80
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 82,
+          "depth": 145,
+          "height": 80
+        },
+        {
+          "width": 90,
+          "depth": 155,
+          "height": 80
+        }
+      ],
+      "sizeSelector": "sofa-size",
+      "anchor": "Transparent sprite keeps its ratio and is bottom-centred in the measured model bounds.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1058
+      },
+      "transparent": true,
+      "bytes": 344652,
+      "orientation": "Faces -u toward TV",
+      "backAndArmBlocks": false
+    },
+    {
+      "id": "tv-bench-01",
+      "family": "tv-bench",
+      "variant": 1,
+      "label": "TV-benk med skapdører",
+      "file": "items/tv-bench-01.png",
+      "camera": "measured-dimetric-v4",
+      "canvasProfileCm": {
+        "w": 45,
+        "d": 100,
+        "h": 45
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 45,
+          "depth": 100,
+          "height": 45
+        },
+        {
+          "width": 45,
+          "depth": 120,
+          "height": 50
+        }
+      ],
+      "sizeSelector": "tv-bench-size",
+      "anchor": "Transparent sprite keeps its ratio and is bottom-centred in the measured model bounds.",
+      "canvasPixels": {
+        "width": 971,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 292877,
+      "status": "legacy-unused-by-current-library-test"
+    },
+    {
+      "id": "tv-bench-02",
+      "family": "tv-bench",
+      "variant": 2,
+      "label": "TV-benk med opne hyller",
+      "file": "items/tv-bench-02.png",
+      "camera": "measured-dimetric-v4",
+      "canvasProfileCm": {
+        "w": 45,
+        "d": 120,
+        "h": 50
+      },
+      "availableSizeChoicesCm": [
+        {
+          "width": 45,
+          "depth": 100,
+          "height": 45
+        },
+        {
+          "width": 45,
+          "depth": 120,
+          "height": 50
+        }
+      ],
+      "sizeSelector": "tv-bench-size",
+      "anchor": "Transparent sprite keeps its ratio and is bottom-centred in the measured model bounds.",
+      "canvasPixels": {
+        "width": 1038,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 305108,
+      "status": "legacy-unused-by-current-library-test"
+    },
+    {
+      "id": "speaker-01",
+      "family": "floor-item",
+      "kind": "speaker",
+      "variant": 1,
+      "label": "Høgtalar med to element",
+      "file": "items/speaker-01.png",
+      "camera": "measured-dimetric-v4",
+      "footprintCm": {
+        "width": 28,
+        "depth": 30,
+        "height": 90
+      },
+      "anchor": "Base aligns with z=0; u-position follows the bed–desk gap.",
+      "canvasPixels": {
+        "width": 507,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 262092,
+      "status": "legacy-unused-by-current-library-test"
+    },
+    {
+      "id": "speaker-02",
+      "family": "floor-item",
+      "kind": "speaker",
+      "variant": 2,
+      "label": "Høgtalar med vevd front",
+      "file": "items/speaker-02.png",
+      "camera": "measured-dimetric-v4",
+      "footprintCm": {
+        "width": 28,
+        "depth": 30,
+        "height": 90
+      },
+      "anchor": "Base aligns with z=0; u-position follows the bed–desk gap.",
+      "canvasPixels": {
+        "width": 507,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 281951,
+      "status": "legacy-unused-by-current-library-test"
+    },
+    {
+      "id": "plant-01",
+      "family": "floor-item",
+      "kind": "plant",
+      "variant": 1,
+      "label": "Bladplante i terrakottapotte",
+      "file": "items/plant-01.png",
+      "camera": "measured-dimetric-v4",
+      "footprintCm": {
+        "width": 40,
+        "depth": 40,
+        "height": 110
+      },
+      "anchor": "Base aligns with z=0; u-position follows the bed–desk gap.",
+      "canvasPixels": {
+        "width": 455,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 136898,
+      "status": "legacy-unused-by-current-library-test"
+    },
+    {
+      "id": "plant-02",
+      "family": "floor-item",
+      "kind": "plant",
+      "variant": 2,
+      "label": "Breiblada potteplante",
+      "file": "items/plant-02.png",
+      "camera": "measured-dimetric-v4",
+      "footprintCm": {
+        "width": 40,
+        "depth": 40,
+        "height": 110
+      },
+      "anchor": "Base aligns with z=0; u-position follows the bed–desk gap.",
+      "canvasPixels": {
+        "width": 473,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 147720,
+      "status": "legacy-unused-by-current-library-test"
+    },
+    {
+      "id": "nightstand-01",
+      "family": "floor-item",
+      "kind": "nightstand",
+      "variant": 1,
+      "label": "Nattbord med skuff",
+      "file": "items/nightstand-01.png",
+      "camera": "measured-dimetric-v4",
+      "footprintCm": {
+        "width": 45,
+        "depth": 40,
+        "height": 55
+      },
+      "anchor": "Base aligns with z=0; u-position follows the bed–desk gap.",
+      "canvasPixels": {
+        "width": 935,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 414199,
+      "status": "legacy-unused-by-current-library-test"
+    },
+    {
+      "id": "nightstand-02",
+      "family": "floor-item",
+      "kind": "nightstand",
+      "variant": 2,
+      "label": "Nattbord med ope rom",
+      "file": "items/nightstand-02.png",
+      "camera": "measured-dimetric-v4",
+      "footprintCm": {
+        "width": 45,
+        "depth": 40,
+        "height": 55
+      },
+      "anchor": "Base aligns with z=0; u-position follows the bed–desk gap.",
+      "canvasPixels": {
+        "width": 935,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 357332,
+      "status": "legacy-unused-by-current-library-test"
+    },
+    {
+      "id": "wall-picture-left-01",
+      "family": "wall-item",
+      "kind": "picture",
+      "wall": "left",
+      "variant": 1,
+      "label": "Innramma bilete · venstre vegg",
+      "file": "items/wall-picture-left-01.png",
+      "camera": "measured-dimetric-v4",
+      "mountCm": {
+        "alongWall": 55,
+        "height": 57,
+        "depth": 3
+      },
+      "anchor": "Wall-plane mount; left/right assets are separate and must not be mirrored.",
+      "canvasPixels": {
+        "width": 701,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 259208
+    },
+    {
+      "id": "wall-picture-left-02",
+      "family": "wall-item",
+      "kind": "picture",
+      "wall": "left",
+      "variant": 2,
+      "label": "Innramma bilete · venstre vegg",
+      "file": "items/wall-picture-left-02.png",
+      "camera": "measured-dimetric-v4",
+      "mountCm": {
+        "alongWall": 55,
+        "height": 57,
+        "depth": 3
+      },
+      "anchor": "Wall-plane mount; left/right assets are separate and must not be mirrored.",
+      "canvasPixels": {
+        "width": 701,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 273723
+    },
+    {
+      "id": "wall-picture-right-01",
+      "family": "wall-item",
+      "kind": "picture",
+      "wall": "right",
+      "variant": 1,
+      "label": "Innramma bilete · høgre vegg",
+      "file": "items/wall-picture-right-01.png",
+      "camera": "measured-dimetric-v4",
+      "mountCm": {
+        "alongWall": 60,
+        "height": 60,
+        "depth": 3
+      },
+      "anchor": "Wall-plane mount; left/right assets are separate and must not be mirrored.",
+      "canvasPixels": {
+        "width": 716,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 233871
+    },
+    {
+      "id": "wall-picture-right-02",
+      "family": "wall-item",
+      "kind": "picture",
+      "wall": "right",
+      "variant": 2,
+      "label": "Innramma bilete · høgre vegg",
+      "file": "items/wall-picture-right-02.png",
+      "camera": "measured-dimetric-v4",
+      "mountCm": {
+        "alongWall": 60,
+        "height": 60,
+        "depth": 3
+      },
+      "anchor": "Wall-plane mount; left/right assets are separate and must not be mirrored.",
+      "canvasPixels": {
+        "width": 716,
+        "height": 1200
+      },
+      "transparent": true,
+      "bytes": 288295
+    },
+    {
+      "id": "wall-shelf-left-01",
+      "family": "wall-item",
+      "kind": "shelf",
+      "wall": "left",
+      "variant": 1,
+      "label": "Vegghylle med pynt · venstre vegg",
+      "file": "items/wall-shelf-left-01.png",
+      "camera": "measured-dimetric-v4",
+      "mountCm": {
+        "alongWall": 80,
+        "height": 4,
+        "depth": 22
+      },
+      "anchor": "Wall-plane mount; left/right assets are separate and must not be mirrored.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1019
+      },
+      "transparent": true,
+      "bytes": 203445
+    },
+    {
+      "id": "wall-shelf-left-02",
+      "family": "wall-item",
+      "kind": "shelf",
+      "wall": "left",
+      "variant": 2,
+      "label": "Vegghylle med pynt · venstre vegg",
+      "file": "items/wall-shelf-left-02.png",
+      "camera": "measured-dimetric-v4",
+      "mountCm": {
+        "alongWall": 80,
+        "height": 4,
+        "depth": 22
+      },
+      "anchor": "Wall-plane mount; left/right assets are separate and must not be mirrored.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 924
+      },
+      "transparent": true,
+      "bytes": 202765
+    },
+    {
+      "id": "wall-shelf-right-01",
+      "family": "wall-item",
+      "kind": "shelf",
+      "wall": "right",
+      "variant": 1,
+      "label": "Vegghylle med pynt · høgre vegg",
+      "file": "items/wall-shelf-right-01.png",
+      "camera": "measured-dimetric-v4",
+      "mountCm": {
+        "alongWall": 100,
+        "height": 4,
+        "depth": 22
+      },
+      "anchor": "Wall-plane mount; left/right assets are separate and must not be mirrored.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 977
+      },
+      "transparent": true,
+      "bytes": 184386
+    },
+    {
+      "id": "wall-shelf-right-02",
+      "family": "wall-item",
+      "kind": "shelf",
+      "wall": "right",
+      "variant": 2,
+      "label": "Vegghylle med pynt · høgre vegg",
+      "file": "items/wall-shelf-right-02.png",
+      "camera": "measured-dimetric-v4",
+      "mountCm": {
+        "alongWall": 100,
+        "height": 4,
+        "depth": 22
+      },
+      "anchor": "Wall-plane mount; left/right assets are separate and must not be mirrored.",
+      "canvasPixels": {
+        "width": 1200,
+        "height": 943
+      },
+      "transparent": true,
+      "bytes": 179615
+    },
+    {
+      "id": "tv-bench-tier-01",
+      "family": "tv-bench",
+      "variant": 1,
+      "label": "Pappkasser",
+      "priceTier": 1,
+      "provisionalPriceNok": 100,
+      "description": "Ei stødig pappkasse eller to som mellombels underlag.",
+      "file": "items/tv-bench-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/tv-bench-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 45,
+        "d": 140,
+        "h": 34
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 957
+      },
+      "transparent": true,
+      "bytes": 110660,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "topWidthCm": 140,
+      "attachment": "TV sprite is a separate child placed on this top surface."
+    },
+    {
+      "id": "tv-bench-tier-02",
+      "family": "tv-bench",
+      "variant": 2,
+      "label": "Brukt lågbenk",
+      "priceTier": 2,
+      "provisionalPriceNok": 600,
+      "description": "Ein enkel, brukt benk med nok plass til småting.",
+      "file": "items/tv-bench-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/tv-bench-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 45,
+        "d": 140,
+        "h": 38
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 964
+      },
+      "transparent": true,
+      "bytes": 116555,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "topWidthCm": 140,
+      "attachment": "TV sprite is a separate child placed on this top surface."
+    },
+    {
+      "id": "tv-bench-tier-03",
+      "family": "tv-bench",
+      "variant": 3,
+      "label": "Enkel medieseksjon",
+      "priceTier": 3,
+      "provisionalPriceNok": 2200,
+      "description": "Ein ryddig medieseksjon med hyller og skap.",
+      "file": "items/tv-bench-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/tv-bench-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 45,
+        "d": 140,
+        "h": 42
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 993
+      },
+      "transparent": true,
+      "bytes": 105060,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "topWidthCm": 140,
+      "attachment": "TV sprite is a separate child placed on this top surface."
+    },
+    {
+      "id": "tv-bench-tier-04",
+      "family": "tv-bench",
+      "variant": 4,
+      "label": "Solid oppbevaringsbenk",
+      "priceTier": 4,
+      "provisionalPriceNok": 6500,
+      "description": "Ein brei benk med mjuk lukking og skjult kabelrom.",
+      "file": "items/tv-bench-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/tv-bench-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 45,
+        "d": 140,
+        "h": 47
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1029
+      },
+      "transparent": true,
+      "bytes": 116877,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "topWidthCm": 140,
+      "attachment": "TV sprite is a separate child placed on this top surface."
+    },
+    {
+      "id": "tv-bench-tier-05",
+      "family": "tv-bench",
+      "variant": 5,
+      "label": "Luksusbenk med RGB",
+      "priceTier": 5,
+      "provisionalPriceNok": 16000,
+      "description": "Ein eksklusiv benk med glas, lagring og diskret RGB-lys.",
+      "file": "items/tv-bench-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/tv-bench-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 48,
+        "d": 140,
+        "h": 52
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1060
+      },
+      "transparent": true,
+      "bytes": 89601,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "topWidthCm": 140,
+      "attachment": "TV sprite is a separate child placed on this top surface."
+    },
+    {
+      "id": "tv-tier-01",
+      "family": "tv",
+      "variant": 1,
+      "label": "Liten skjerm · nettbrettstorleik",
+      "priceTier": 1,
+      "provisionalPriceNok": 500,
+      "description": "Ein liten, enkel skjerm på om lag 24 cm breidd.",
+      "file": "items/tv-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/tv-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 6,
+        "d": 24,
+        "h": 18
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1584
+      },
+      "transparent": true,
+      "bytes": 75378,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "displayWidthCm": 24,
+      "attachedTo": "tv-bench",
+      "attachment": "Centered on the top surface; follows bench height and position."
+    },
+    {
+      "id": "tv-tier-02",
+      "family": "tv",
+      "variant": 2,
+      "label": "Liten flatskjerm",
+      "priceTier": 2,
+      "provisionalPriceNok": 1800,
+      "description": "Kompakt TV på om lag 42 cm breidd.",
+      "file": "items/tv-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/tv-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 6,
+        "d": 42,
+        "h": 25
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1476
+      },
+      "transparent": true,
+      "bytes": 70749,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "displayWidthCm": 42,
+      "attachedTo": "tv-bench",
+      "attachment": "Centered on the top surface; follows bench height and position."
+    },
+    {
+      "id": "tv-tier-03",
+      "family": "tv",
+      "variant": 3,
+      "label": "Mellomstor TV",
+      "priceTier": 3,
+      "provisionalPriceNok": 5000,
+      "description": "Klar skjerm på om lag 60 cm breidd.",
+      "file": "items/tv-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/tv-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 6,
+        "d": 60,
+        "h": 36
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1520
+      },
+      "transparent": true,
+      "bytes": 97111,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "displayWidthCm": 60,
+      "attachedTo": "tv-bench",
+      "attachment": "Centered on the top surface; follows bench height and position."
+    },
+    {
+      "id": "tv-tier-04",
+      "family": "tv",
+      "variant": 4,
+      "label": "Stor storskjerm",
+      "priceTier": 4,
+      "provisionalPriceNok": 14000,
+      "description": "Stor skjerm på om lag 90 cm breidd.",
+      "file": "items/tv-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/tv-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 7,
+        "d": 90,
+        "h": 53
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1521
+      },
+      "transparent": true,
+      "bytes": 116919,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "displayWidthCm": 90,
+      "attachedTo": "tv-bench",
+      "attachment": "Centered on the top surface; follows bench height and position."
+    },
+    {
+      "id": "tv-tier-05",
+      "family": "tv",
+      "variant": 5,
+      "label": "Maksimal rom-TV",
+      "priceTier": 5,
+      "provisionalPriceNok": 32000,
+      "description": "Største skjerm som får plass på benken og veggstrekninga: 130 cm breidd.",
+      "file": "items/tv-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/tv-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 8,
+        "d": 130,
+        "h": 77
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1525
+      },
+      "transparent": true,
+      "bytes": 131066,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "displayWidthCm": 130,
+      "attachedTo": "tv-bench",
+      "attachment": "Centered on the top surface; follows bench height and position."
+    },
+    {
+      "id": "chair-tier-01",
+      "family": "chair",
+      "variant": 1,
+      "label": "Arva kjøkenstol",
+      "priceTier": 1,
+      "provisionalPriceNok": 120,
+      "description": "Ein gamal og sliten stol som alt finst i huset.",
+      "file": "items/chair-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/chair-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 42,
+        "d": 42,
+        "h": 78
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1772
+      },
+      "transparent": true,
+      "bytes": 84164,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment."
+    },
+    {
+      "id": "chair-tier-02",
+      "family": "chair",
+      "variant": 2,
+      "label": "Enkel trestol",
+      "priceTier": 2,
+      "provisionalPriceNok": 450,
+      "description": "Ein enkel stol med jamnt sete og ryggstø.",
+      "file": "items/chair-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/chair-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 43,
+        "d": 43,
+        "h": 84
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1826
+      },
+      "transparent": true,
+      "bytes": 75196,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment."
+    },
+    {
+      "id": "chair-tier-03",
+      "family": "chair",
+      "variant": 3,
+      "label": "Polstra kontorstol",
+      "priceTier": 3,
+      "provisionalPriceNok": 1800,
+      "description": "Mjuk stol med høg rygg og hjul.",
+      "file": "items/chair-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/chair-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 46,
+        "d": 46,
+        "h": 90
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1893
+      },
+      "transparent": true,
+      "bytes": 91956,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment."
+    },
+    {
+      "id": "chair-tier-04",
+      "family": "chair",
+      "variant": 4,
+      "label": "Ergonomisk stol",
+      "priceTier": 4,
+      "provisionalPriceNok": 6500,
+      "description": "Ergonomisk rygg, armlene og fleire innstillingar.",
+      "file": "items/chair-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/chair-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 48,
+        "d": 48,
+        "h": 96
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1917
+      },
+      "transparent": true,
+      "bytes": 102297,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment."
+    },
+    {
+      "id": "chair-tier-05",
+      "family": "chair",
+      "variant": 5,
+      "label": "Eksklusiv spelstol",
+      "priceTier": 5,
+      "provisionalPriceNok": 18000,
+      "description": "Påkosta stol med nakkepute, korsryggstøtte og justerbare armlene.",
+      "file": "items/chair-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/chair-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 50,
+        "d": 50,
+        "h": 102
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1939
+      },
+      "transparent": true,
+      "bytes": 102698,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment."
+    },
+    {
+      "id": "desk-tier-01",
+      "family": "desk",
+      "variant": 1,
+      "label": "Heimelaga plankepult",
+      "priceTier": 1,
+      "provisionalPriceNok": 250,
+      "description": "Ei enkel plate på bukkar eller eit ujamnt heimesnekra understell.",
+      "file": "items/desk-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/desk-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 110,
+        "d": 58,
+        "h": 72
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1386
+      },
+      "transparent": true,
+      "bytes": 118596,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachments": [
+        "monitor",
+        "keyboard"
+      ]
+    },
+    {
+      "id": "desk-tier-02",
+      "family": "desk",
+      "variant": 2,
+      "label": "Liten brukt pult",
+      "priceTier": 2,
+      "provisionalPriceNok": 700,
+      "description": "Ein kompakt, brukt pult med litt slitasje.",
+      "file": "items/desk-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/desk-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 115,
+        "d": 60,
+        "h": 74
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1364
+      },
+      "transparent": true,
+      "bytes": 91975,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachments": [
+        "monitor",
+        "keyboard"
+      ]
+    },
+    {
+      "id": "desk-tier-03",
+      "family": "desk",
+      "variant": 3,
+      "label": "Stødig arbeidsbord",
+      "priceTier": 3,
+      "provisionalPriceNok": 2800,
+      "description": "Stødig bordplate med skuff og god arbeidsplass.",
+      "file": "items/desk-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/desk-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 120,
+        "d": 62,
+        "h": 75
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1337
+      },
+      "transparent": true,
+      "bytes": 90918,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachments": [
+        "monitor",
+        "keyboard"
+      ]
+    },
+    {
+      "id": "desk-tier-04",
+      "family": "desk",
+      "variant": 4,
+      "label": "Stor spelpult",
+      "priceTier": 4,
+      "provisionalPriceNok": 8500,
+      "description": "Breitt bord med kabelopning og utstyrshylle.",
+      "file": "items/desk-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/desk-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 138,
+        "d": 66,
+        "h": 75
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1238
+      },
+      "transparent": true,
+      "bytes": 121635,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachments": [
+        "monitor",
+        "keyboard"
+      ]
+    },
+    {
+      "id": "desk-tier-05",
+      "family": "desk",
+      "variant": 5,
+      "label": "Eksklusiv hev-senk-pult",
+      "priceTier": 5,
+      "provisionalPriceNok": 24000,
+      "description": "Stilrein hev-senk-pult med kabelbrett og avrunda kantar.",
+      "file": "items/desk-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/desk-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 150,
+        "d": 68,
+        "h": 75
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1185
+      },
+      "transparent": true,
+      "bytes": 112346,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachments": [
+        "monitor",
+        "keyboard"
+      ]
+    },
+    {
+      "id": "pc-tier-01",
+      "family": "pc",
+      "variant": 1,
+      "label": "Gamal kontor-PC",
+      "priceTier": 1,
+      "provisionalPriceNok": 180,
+      "description": "Eit enkelt brukt tårn utan lys eller glas.",
+      "file": "items/pc-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/pc-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 22,
+        "d": 24,
+        "h": 36
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1705
+      },
+      "transparent": true,
+      "bytes": 112731,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachedTo": "desk",
+      "attachment": "Tower rests on the desk top at the local rear-right slot."
+    },
+    {
+      "id": "pc-tier-02",
+      "family": "pc",
+      "variant": 2,
+      "label": "Enkel brukt PC",
+      "priceTier": 2,
+      "provisionalPriceNok": 1800,
+      "description": "Ein ryddig PC for skulearbeid og nettlesing.",
+      "file": "items/pc-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/pc-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 22,
+        "d": 24,
+        "h": 39
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1784
+      },
+      "transparent": true,
+      "bytes": 113447,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachedTo": "desk",
+      "attachment": "Tower rests on the desk top at the local rear-right slot."
+    },
+    {
+      "id": "pc-tier-03",
+      "family": "pc",
+      "variant": 3,
+      "label": "God skule-PC",
+      "priceTier": 3,
+      "provisionalPriceNok": 6500,
+      "description": "Rask maskin med større kjøling.",
+      "file": "items/pc-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/pc-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 23,
+        "d": 25,
+        "h": 43
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1846
+      },
+      "transparent": true,
+      "bytes": 114668,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachedTo": "desk",
+      "attachment": "Tower rests on the desk top at the local rear-right slot."
+    },
+    {
+      "id": "pc-tier-04",
+      "family": "pc",
+      "variant": 4,
+      "label": "Kraftig spel-PC",
+      "priceTier": 4,
+      "provisionalPriceNok": 18000,
+      "description": "Kraftige delar bak eit glasfelt.",
+      "file": "items/pc-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/pc-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 24,
+        "d": 26,
+        "h": 48
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1927
+      },
+      "transparent": true,
+      "bytes": 123233,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachedTo": "desk",
+      "attachment": "Tower rests on the desk top at the local rear-right slot."
+    },
+    {
+      "id": "pc-tier-05",
+      "family": "pc",
+      "variant": 5,
+      "label": "Eksklusiv spel-PC med RGB",
+      "priceTier": 5,
+      "provisionalPriceNok": 42000,
+      "description": "Påkosta komponentar, vasskjøling og justerbart RGB-lys.",
+      "file": "items/pc-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/pc-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 25,
+        "d": 27,
+        "h": 52
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1979
+      },
+      "transparent": true,
+      "bytes": 157387,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachedTo": "desk",
+      "attachment": "Tower rests on the desk top at the local rear-right slot."
+    },
+    {
+      "id": "hifi-tier-01",
+      "family": "hifi",
+      "variant": 1,
+      "label": "Enkel brukt radio",
+      "priceTier": 1,
+      "provisionalPriceNok": 100,
+      "description": "Ein liten brukt radio med enkel lyd.",
+      "file": "items/hifi-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/hifi-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 30,
+        "d": 28,
+        "h": 42
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1646
+      },
+      "transparent": true,
+      "bytes": 76033,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "hifi-tier-02",
+      "family": "hifi",
+      "variant": 2,
+      "label": "Kompakt stereo",
+      "priceTier": 2,
+      "provisionalPriceNok": 900,
+      "description": "Kompakt anlegg med CD-spelar og to små høgtalarar.",
+      "file": "items/hifi-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/hifi-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 34,
+        "d": 28,
+        "h": 50
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1752
+      },
+      "transparent": true,
+      "bytes": 81412,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "hifi-tier-03",
+      "family": "hifi",
+      "variant": 3,
+      "label": "Stereo med to høgtalarar",
+      "priceTier": 3,
+      "provisionalPriceNok": 3800,
+      "description": "Stereo med forsterkar og to separate høgtalarar.",
+      "file": "items/hifi-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/hifi-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 38,
+        "d": 30,
+        "h": 62
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1889
+      },
+      "transparent": true,
+      "bytes": 111536,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "hifi-tier-04",
+      "family": "hifi",
+      "variant": 4,
+      "label": "Kraftig hifi",
+      "priceTier": 4,
+      "provisionalPriceNok": 12000,
+      "description": "Kraftig anlegg med store basselement.",
+      "file": "items/hifi-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/hifi-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 42,
+        "d": 32,
+        "h": 78
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 2075
+      },
+      "transparent": true,
+      "bytes": 178745,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "hifi-tier-05",
+      "family": "hifi",
+      "variant": 5,
+      "label": "Luksuslyd med subwoofer",
+      "priceTier": 5,
+      "provisionalPriceNok": 30000,
+      "description": "Eksklusiv lydpakke med subwoofer, trådlaus tilkopling og kontrolllys.",
+      "file": "items/hifi-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/hifi-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 46,
+        "d": 35,
+        "h": 92
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 2186
+      },
+      "transparent": true,
+      "bytes": 144277,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "plant-tier-01",
+      "family": "plant",
+      "variant": 1,
+      "label": "Lita stikling",
+      "priceTier": 1,
+      "provisionalPriceNok": 40,
+      "description": "Ein liten stikling i ei enkel krukke.",
+      "file": "items/plant-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/plant-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 28,
+        "d": 28,
+        "h": 70
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 2351
+      },
+      "transparent": true,
+      "bytes": 41679,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "plant-tier-02",
+      "family": "plant",
+      "variant": 2,
+      "label": "Grøn potteplante",
+      "priceTier": 2,
+      "provisionalPriceNok": 180,
+      "description": "Ei lettstelt grøn plante.",
+      "file": "items/plant-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/plant-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 34,
+        "d": 34,
+        "h": 88
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 2021
+      },
+      "transparent": true,
+      "bytes": 66038,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "plant-tier-03",
+      "family": "plant",
+      "variant": 3,
+      "label": "Høg bladplante",
+      "priceTier": 3,
+      "provisionalPriceNok": 700,
+      "description": "Ei høg plante med fleire blad.",
+      "file": "items/plant-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/plant-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 40,
+        "d": 40,
+        "h": 110
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 2113
+      },
+      "transparent": true,
+      "bytes": 76811,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "plant-tier-04",
+      "family": "plant",
+      "variant": 4,
+      "label": "Stor greinvaksar",
+      "priceTier": 4,
+      "provisionalPriceNok": 2400,
+      "description": "Ein stor plante med synlege greiner og ny potte.",
+      "file": "items/plant-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/plant-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 46,
+        "d": 46,
+        "h": 128
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 2030
+      },
+      "transparent": true,
+      "bytes": 104080,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "plant-tier-05",
+      "family": "plant",
+      "variant": 5,
+      "label": "Eksotisk prydplante",
+      "priceTier": 5,
+      "provisionalPriceNok": 7800,
+      "description": "Ei sjeldan og frodig prydplante i ei påkosta keramikkrukke.",
+      "file": "items/plant-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/plant-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 50,
+        "d": 50,
+        "h": 142
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 2027
+      },
+      "transparent": true,
+      "bytes": 93306,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "rug-tier-01",
+      "family": "rug",
+      "variant": 1,
+      "label": "Brukt golvteppe",
+      "priceTier": 1,
+      "provisionalPriceNok": 100,
+      "description": "Eit enkelt brukt teppe med synleg reparasjon.",
+      "file": "items/rug-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/rug-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 220,
+        "d": 150,
+        "h": 1
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 702
+      },
+      "transparent": true,
+      "bytes": 104557,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment."
+    },
+    {
+      "id": "rug-tier-02",
+      "family": "rug",
+      "variant": 2,
+      "label": "Enkelt lite teppe",
+      "priceTier": 2,
+      "provisionalPriceNok": 450,
+      "description": "Eit lite og lett teppe.",
+      "file": "items/rug-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/rug-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 240,
+        "d": 165,
+        "h": 1
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 702
+      },
+      "transparent": true,
+      "bytes": 106268,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment."
+    },
+    {
+      "id": "rug-tier-03",
+      "family": "rug",
+      "variant": 3,
+      "label": "Mjukt mønsterteppe",
+      "priceTier": 3,
+      "provisionalPriceNok": 2200,
+      "description": "Eit større teppe med tett mønster.",
+      "file": "items/rug-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/rug-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 260,
+        "d": 180,
+        "h": 1
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 701
+      },
+      "transparent": true,
+      "bytes": 110249,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment."
+    },
+    {
+      "id": "rug-tier-04",
+      "family": "rug",
+      "variant": 4,
+      "label": "Stort, tjukt teppe",
+      "priceTier": 4,
+      "provisionalPriceNok": 6800,
+      "description": "Tjukt teppe som dekkjer mesteparten av sofasona.",
+      "file": "items/rug-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/rug-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 280,
+        "d": 195,
+        "h": 1
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 700
+      },
+      "transparent": true,
+      "bytes": 119018,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment."
+    },
+    {
+      "id": "rug-tier-05",
+      "family": "rug",
+      "variant": 5,
+      "label": "Luksusvevd teppe",
+      "priceTier": 5,
+      "provisionalPriceNok": 19000,
+      "description": "Handvevd utsjånad, tett luv og detaljert kantmønster.",
+      "file": "items/rug-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/rug-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 300,
+        "d": 210,
+        "h": 1
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 700
+      },
+      "transparent": true,
+      "bytes": 128514,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment."
+    },
+    {
+      "id": "nightstand-tier-01",
+      "family": "nightstand",
+      "variant": 1,
+      "label": "Opp-ned trekasse",
+      "priceTier": 1,
+      "provisionalPriceNok": 80,
+      "description": "Ei trekasse som er snudd og brukt som bord.",
+      "file": "items/nightstand-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/nightstand-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 38,
+        "d": 34,
+        "h": 42
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1476
+      },
+      "transparent": true,
+      "bytes": 132638,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "nightstand-tier-02",
+      "family": "nightstand",
+      "variant": 2,
+      "label": "Lite brukt nattbord",
+      "priceTier": 2,
+      "provisionalPriceNok": 350,
+      "description": "Eit lite, brukt bord med enkel hylle.",
+      "file": "items/nightstand-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/nightstand-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 40,
+        "d": 36,
+        "h": 48
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1489
+      },
+      "transparent": true,
+      "bytes": 132507,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "nightstand-tier-03",
+      "family": "nightstand",
+      "variant": 3,
+      "label": "Nattbord med skuff",
+      "priceTier": 3,
+      "provisionalPriceNok": 1400,
+      "description": "Eit stødig nattbord med skuff.",
+      "file": "items/nightstand-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/nightstand-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 43,
+        "d": 38,
+        "h": 52
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1507
+      },
+      "transparent": true,
+      "bytes": 125746,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "nightstand-tier-04",
+      "family": "nightstand",
+      "variant": 4,
+      "label": "Nattbord med hylle",
+      "priceTier": 4,
+      "provisionalPriceNok": 4200,
+      "description": "Påkosta bord med hylle og mjuk lukking.",
+      "file": "items/nightstand-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/nightstand-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 46,
+        "d": 40,
+        "h": 57
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1538
+      },
+      "transparent": true,
+      "bytes": 107079,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "nightstand-tier-05",
+      "family": "nightstand",
+      "variant": 5,
+      "label": "Luksus nattbord med lys",
+      "priceTier": 5,
+      "provisionalPriceNok": 11000,
+      "description": "Luksusbord med skjult lading og varmt underskapslys.",
+      "file": "items/nightstand-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/nightstand-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 48,
+        "d": 42,
+        "h": 62
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1574
+      },
+      "transparent": true,
+      "bytes": 104324,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "attachment": "One optional floor object in the bed–desk gap."
+    },
+    {
+      "id": "poster-tier-01",
+      "family": "poster",
+      "variant": 1,
+      "label": "Enkel utskrift",
+      "priceTier": 1,
+      "provisionalPriceNok": 20,
+      "description": "Ei enkel utskrift festa med teip.",
+      "file": "items/poster-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/poster-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 72,
+        "d": 2,
+        "h": 38
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1388
+      },
+      "transparent": true,
+      "bytes": 79935,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "poster-tier-02",
+      "family": "poster",
+      "variant": 2,
+      "label": "Fargerik plakat",
+      "priceTier": 2,
+      "provisionalPriceNok": 80,
+      "description": "Fargerikt trykk på kraftigare papir.",
+      "file": "items/poster-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/poster-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 80,
+        "d": 2,
+        "h": 42
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1388
+      },
+      "transparent": true,
+      "bytes": 71055,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "poster-tier-03",
+      "family": "poster",
+      "variant": 3,
+      "label": "Innramma motiv",
+      "priceTier": 3,
+      "provisionalPriceNok": 300,
+      "description": "Innramma plakat med passepartout.",
+      "file": "items/poster-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/poster-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 90,
+        "d": 2,
+        "h": 46
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1374
+      },
+      "transparent": true,
+      "bytes": 75518,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "poster-tier-04",
+      "family": "poster",
+      "variant": 4,
+      "label": "Samlarplakat",
+      "priceTier": 4,
+      "provisionalPriceNok": 1100,
+      "description": "Detaljert samlartrykk med metallramme.",
+      "file": "items/poster-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/poster-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 100,
+        "d": 2,
+        "h": 52
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1388
+      },
+      "transparent": true,
+      "bytes": 82913,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "poster-tier-05",
+      "family": "poster",
+      "variant": 5,
+      "label": "Eksklusivt trykk",
+      "priceTier": 5,
+      "provisionalPriceNok": 4000,
+      "description": "Eksklusivt kunsttrykk med spesialramme.",
+      "file": "items/poster-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/poster-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 110,
+        "d": 2,
+        "h": 56
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1376
+      },
+      "transparent": true,
+      "bytes": 116761,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "mirror-tier-01",
+      "family": "mirror",
+      "variant": 1,
+      "label": "Liten brukt spegel",
+      "priceTier": 1,
+      "provisionalPriceNok": 80,
+      "description": "Ein liten spegel med enkel ramme.",
+      "file": "items/mirror-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/mirror-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 68,
+        "d": 2,
+        "h": 42
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1497
+      },
+      "transparent": true,
+      "bytes": 74717,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "mirror-tier-02",
+      "family": "mirror",
+      "variant": 2,
+      "label": "Enkel veggspegel",
+      "priceTier": 2,
+      "provisionalPriceNok": 250,
+      "description": "Ein rein veggspegel med smal kant.",
+      "file": "items/mirror-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/mirror-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 76,
+        "d": 2,
+        "h": 46
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1486
+      },
+      "transparent": true,
+      "bytes": 73637,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "mirror-tier-03",
+      "family": "mirror",
+      "variant": 3,
+      "label": "Spegel med treramme",
+      "priceTier": 3,
+      "provisionalPriceNok": 900,
+      "description": "God spegel med varm treramme.",
+      "file": "items/mirror-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/mirror-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 88,
+        "d": 2,
+        "h": 50
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1445
+      },
+      "transparent": true,
+      "bytes": 70439,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "mirror-tier-04",
+      "family": "mirror",
+      "variant": 4,
+      "label": "Stor fullspegel",
+      "priceTier": 4,
+      "provisionalPriceNok": 3200,
+      "description": "Stor spegel med avrunda hjørne.",
+      "file": "items/mirror-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/mirror-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 100,
+        "d": 2,
+        "h": 54
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1413
+      },
+      "transparent": true,
+      "bytes": 64323,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "mirror-tier-05",
+      "family": "mirror",
+      "variant": 5,
+      "label": "Luksusspegel med lys",
+      "priceTier": 5,
+      "provisionalPriceNok": 9500,
+      "description": "Eksklusiv spegel med innfelt lyskant.",
+      "file": "items/mirror-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/mirror-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 110,
+        "d": 2,
+        "h": 56
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1376
+      },
+      "transparent": true,
+      "bytes": 73896,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "pinboard-tier-01",
+      "family": "pinboard",
+      "variant": 1,
+      "label": "Papp og knappenåler",
+      "priceTier": 1,
+      "provisionalPriceNok": 30,
+      "description": "Ei heimelaga tavle av papp og knappenåler.",
+      "file": "items/pinboard-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/pinboard-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 72,
+        "d": 2,
+        "h": 38
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1388
+      },
+      "transparent": true,
+      "bytes": 93197,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "pinboard-tier-02",
+      "family": "pinboard",
+      "variant": 2,
+      "label": "Korktavle",
+      "priceTier": 2,
+      "provisionalPriceNok": 150,
+      "description": "Enkel korktavle med små lappar.",
+      "file": "items/pinboard-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/pinboard-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 80,
+        "d": 2,
+        "h": 42
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1388
+      },
+      "transparent": true,
+      "bytes": 102743,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "pinboard-tier-03",
+      "family": "pinboard",
+      "variant": 3,
+      "label": "Tavle med ramme",
+      "priceTier": 3,
+      "provisionalPriceNok": 550,
+      "description": "Stødig ramme og ryddige festepunkt.",
+      "file": "items/pinboard-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/pinboard-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 90,
+        "d": 2,
+        "h": 46
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1374
+      },
+      "transparent": true,
+      "bytes": 99677,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "pinboard-tier-04",
+      "family": "pinboard",
+      "variant": 4,
+      "label": "Stoffkledd tavle",
+      "priceTier": 4,
+      "provisionalPriceNok": 1800,
+      "description": "Mjuk stoffflate med skjulte festeknottar.",
+      "file": "items/pinboard-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/pinboard-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 100,
+        "d": 2,
+        "h": 52
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1388
+      },
+      "transparent": true,
+      "bytes": 120682,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "pinboard-tier-05",
+      "family": "pinboard",
+      "variant": 5,
+      "label": "Modulær minnevegg",
+      "priceTier": 5,
+      "provisionalPriceNok": 5200,
+      "description": "Fleire felt med metallkant og lys detalj.",
+      "file": "items/pinboard-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/pinboard-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 110,
+        "d": 2,
+        "h": 56
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1376
+      },
+      "transparent": true,
+      "bytes": 92995,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "neon-sign-tier-01",
+      "family": "neon-sign",
+      "variant": 1,
+      "label": "Handmåla skilt",
+      "priceTier": 1,
+      "provisionalPriceNok": 60,
+      "description": "Eit lite skilt laga for hand.",
+      "file": "items/neon-sign-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/neon-sign-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 72,
+        "d": 2,
+        "h": 38
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1388
+      },
+      "transparent": true,
+      "bytes": 91572,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "neon-sign-tier-02",
+      "family": "neon-sign",
+      "variant": 2,
+      "label": "Liten lyslenkje",
+      "priceTier": 2,
+      "provisionalPriceNok": 250,
+      "description": "Ei lita lenkje med mjukt lys.",
+      "file": "items/neon-sign-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/neon-sign-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 80,
+        "d": 2,
+        "h": 42
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1388
+      },
+      "transparent": true,
+      "bytes": 86737,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "neon-sign-tier-03",
+      "family": "neon-sign",
+      "variant": 3,
+      "label": "Enkelt LED-skilt",
+      "priceTier": 3,
+      "provisionalPriceNok": 900,
+      "description": "Eit enkelt LED-ord eller symbol.",
+      "file": "items/neon-sign-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/neon-sign-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 90,
+        "d": 2,
+        "h": 46
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1374
+      },
+      "transparent": true,
+      "bytes": 87771,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "neon-sign-tier-04",
+      "family": "neon-sign",
+      "variant": 4,
+      "label": "Formskore lysskilt",
+      "priceTier": 4,
+      "provisionalPriceNok": 3200,
+      "description": "Formskore motiv med jamn lyskant.",
+      "file": "items/neon-sign-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/neon-sign-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 100,
+        "d": 2,
+        "h": 52
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1388
+      },
+      "transparent": true,
+      "bytes": 74458,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "neon-sign-tier-05",
+      "family": "neon-sign",
+      "variant": 5,
+      "label": "Påkosta RGB-skilt",
+      "priceTier": 5,
+      "provisionalPriceNok": 9800,
+      "description": "Stort RGB-skilt med mjuk, regulerbar glød.",
+      "file": "items/neon-sign-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/neon-sign-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 110,
+        "d": 2,
+        "h": 56
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1376
+      },
+      "transparent": true,
+      "bytes": 67735,
+      "anchor": "Mounted in the measured right-wall plane.",
+      "mount": "right-wall",
+      "attachment": "Right-wall plane, replacing the default right-wall decor while previewed."
+    },
+    {
+      "id": "desk-lamp-tier-01",
+      "family": "desk-lamp",
+      "variant": 1,
+      "label": "Klypelampe",
+      "priceTier": 1,
+      "provisionalPriceNok": 40,
+      "description": "Ei enkel klypelampe.",
+      "file": "items/desk-lamp-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/desk-lamp-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 22,
+        "d": 20,
+        "h": 32
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1869
+      },
+      "transparent": true,
+      "bytes": 63668,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "desk-lamp-tier-02",
+      "family": "desk-lamp",
+      "variant": 2,
+      "label": "Enkel bordlampe",
+      "priceTier": 2,
+      "provisionalPriceNok": 180,
+      "description": "Lita lampe med brytar på foten.",
+      "file": "items/desk-lamp-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/desk-lamp-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 24,
+        "d": 20,
+        "h": 38
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 2044
+      },
+      "transparent": true,
+      "bytes": 56585,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "desk-lamp-tier-03",
+      "family": "desk-lamp",
+      "variant": 3,
+      "label": "Justerbar lampe",
+      "priceTier": 3,
+      "provisionalPriceNok": 650,
+      "description": "Justerbar hals og breiare lyskjegle.",
+      "file": "items/desk-lamp-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/desk-lamp-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 26,
+        "d": 22,
+        "h": 44
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 2166
+      },
+      "transparent": true,
+      "bytes": 51973,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "desk-lamp-tier-04",
+      "family": "desk-lamp",
+      "variant": 4,
+      "label": "Arkitektlampe",
+      "priceTier": 4,
+      "provisionalPriceNok": 2200,
+      "description": "Fleirledda arm med tung fot.",
+      "file": "items/desk-lamp-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/desk-lamp-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 28,
+        "d": 23,
+        "h": 48
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 2217
+      },
+      "transparent": true,
+      "bytes": 81002,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "desk-lamp-tier-05",
+      "family": "desk-lamp",
+      "variant": 5,
+      "label": "Påkosta arbeidslampe",
+      "priceTier": 5,
+      "provisionalPriceNok": 6200,
+      "description": "Stilrein arbeidslampe med dimming og fleire lysstyrkar.",
+      "file": "items/desk-lamp-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/desk-lamp-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 30,
+        "d": 24,
+        "h": 52
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 2264
+      },
+      "transparent": true,
+      "bytes": 63492,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "alarm-clock-tier-01",
+      "family": "alarm-clock",
+      "variant": 1,
+      "label": "Gamal analog klokke",
+      "priceTier": 1,
+      "provisionalPriceNok": 20,
+      "description": "Ein enkel analog klokke med slitasje.",
+      "file": "items/alarm-clock-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/alarm-clock-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 22,
+        "d": 18,
+        "h": 19
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1330
+      },
+      "transparent": true,
+      "bytes": 92258,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "alarm-clock-tier-02",
+      "family": "alarm-clock",
+      "variant": 2,
+      "label": "Lita digital klokke",
+      "priceTier": 2,
+      "provisionalPriceNok": 120,
+      "description": "Ei lita digital klokke.",
+      "file": "items/alarm-clock-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/alarm-clock-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 24,
+        "d": 19,
+        "h": 21
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1348
+      },
+      "transparent": true,
+      "bytes": 67530,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "alarm-clock-tier-03",
+      "family": "alarm-clock",
+      "variant": 3,
+      "label": "Moderne vekkjarklokke",
+      "priceTier": 3,
+      "provisionalPriceNok": 450,
+      "description": "Tydeleg talvising og fleire alarmval.",
+      "file": "items/alarm-clock-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/alarm-clock-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 26,
+        "d": 20,
+        "h": 23
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1363
+      },
+      "transparent": true,
+      "bytes": 96534,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "alarm-clock-tier-04",
+      "family": "alarm-clock",
+      "variant": 4,
+      "label": "Klokke med lys",
+      "priceTier": 4,
+      "provisionalPriceNok": 1600,
+      "description": "Klokke med dimbart nattlys.",
+      "file": "items/alarm-clock-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/alarm-clock-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 28,
+        "d": 21,
+        "h": 25
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1376
+      },
+      "transparent": true,
+      "bytes": 104016,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "alarm-clock-tier-05",
+      "family": "alarm-clock",
+      "variant": 5,
+      "label": "Luksus smartklokke",
+      "priceTier": 5,
+      "provisionalPriceNok": 4800,
+      "description": "Påkosta klokke med trådlaus lading og mjuk talvising.",
+      "file": "items/alarm-clock-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/alarm-clock-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 30,
+        "d": 22,
+        "h": 27
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1389
+      },
+      "transparent": true,
+      "bytes": 120617,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "plush-tier-01",
+      "family": "plush",
+      "variant": 1,
+      "label": "Arva kosedyr",
+      "priceTier": 1,
+      "provisionalPriceNok": 80,
+      "description": "Eit gamalt, godt brukt kosedyr.",
+      "file": "items/plush-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/plush-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 23,
+        "d": 22,
+        "h": 25
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1619
+      },
+      "transparent": true,
+      "bytes": 111919,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "plush-tier-02",
+      "family": "plush",
+      "variant": 2,
+      "label": "Liten mjuk figur",
+      "priceTier": 2,
+      "provisionalPriceNok": 140,
+      "description": "Ein liten mjuk figur i glade fargar.",
+      "file": "items/plush-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/plush-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 25,
+        "d": 23,
+        "h": 29
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1698
+      },
+      "transparent": true,
+      "bytes": 92122,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "plush-tier-03",
+      "family": "plush",
+      "variant": 3,
+      "label": "Stor kosebamse",
+      "priceTier": 3,
+      "provisionalPriceNok": 650,
+      "description": "Ein større bamse med sydde detaljar.",
+      "file": "items/plush-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/plush-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 27,
+        "d": 24,
+        "h": 34
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1800
+      },
+      "transparent": true,
+      "bytes": 112602,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "plush-tier-04",
+      "family": "plush",
+      "variant": 4,
+      "label": "Samlarbamse",
+      "priceTier": 4,
+      "provisionalPriceNok": 2400,
+      "description": "Samlarutgåve med klede og tilbehøyr.",
+      "file": "items/plush-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/plush-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 29,
+        "d": 25,
+        "h": 39
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1891
+      },
+      "transparent": true,
+      "bytes": 107892,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "plush-tier-05",
+      "family": "plush",
+      "variant": 5,
+      "label": "Eksklusivt designkosedyr",
+      "priceTier": 5,
+      "provisionalPriceNok": 7200,
+      "description": "Nøye sydd designfigur med mjuke teksturar.",
+      "file": "items/plush-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/plush-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 30,
+        "d": 26,
+        "h": 43
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1967
+      },
+      "transparent": true,
+      "bytes": 148138,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "collectibles-tier-01",
+      "family": "collectibles",
+      "variant": 1,
+      "label": "Ein laus figur",
+      "priceTier": 1,
+      "provisionalPriceNok": 40,
+      "description": "Ein liten plastfigur med enkel farge.",
+      "file": "items/collectibles-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/collectibles-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 24,
+        "d": 20,
+        "h": 25
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1573
+      },
+      "transparent": true,
+      "bytes": 69045,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "collectibles-tier-02",
+      "family": "collectibles",
+      "variant": 2,
+      "label": "To små figurar",
+      "priceTier": 2,
+      "provisionalPriceNok": 180,
+      "description": "To små figurar på ein låg sokkel.",
+      "file": "items/collectibles-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/collectibles-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 26,
+        "d": 21,
+        "h": 29
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1654
+      },
+      "transparent": true,
+      "bytes": 79174,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "collectibles-tier-03",
+      "family": "collectibles",
+      "variant": 3,
+      "label": "Figur med sokkel",
+      "priceTier": 3,
+      "provisionalPriceNok": 900,
+      "description": "Måla figur med stødig fot.",
+      "file": "items/collectibles-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/collectibles-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 28,
+        "d": 22,
+        "h": 34
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1760
+      },
+      "transparent": true,
+      "bytes": 99824,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "collectibles-tier-04",
+      "family": "collectibles",
+      "variant": 4,
+      "label": "Detaljert samlarfigur",
+      "priceTier": 4,
+      "provisionalPriceNok": 3600,
+      "description": "Meir detaljert figur med stand.",
+      "file": "items/collectibles-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/collectibles-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 30,
+        "d": 23,
+        "h": 40
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1886
+      },
+      "transparent": true,
+      "bytes": 130013,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "collectibles-tier-05",
+      "family": "collectibles",
+      "variant": 5,
+      "label": "Eksklusiv utstillingsfigur",
+      "priceTier": 5,
+      "provisionalPriceNok": 12000,
+      "description": "Påkosta figur med gjennomsiktig visingskuppel.",
+      "file": "items/collectibles-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/collectibles-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 32,
+        "d": 24,
+        "h": 46
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 2000
+      },
+      "transparent": true,
+      "bytes": 123235,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "books-tier-01",
+      "family": "books",
+      "variant": 1,
+      "label": "Brukte blad",
+      "priceTier": 1,
+      "provisionalPriceNok": 50,
+      "description": "Nokre brukte blad med bretta hjørne.",
+      "file": "items/books-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/books-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 28,
+        "d": 22,
+        "h": 12
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1054
+      },
+      "transparent": true,
+      "bytes": 120167,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "books-tier-02",
+      "family": "books",
+      "variant": 2,
+      "label": "Lita bokstabel",
+      "priceTier": 2,
+      "provisionalPriceNok": 90,
+      "description": "Ein liten stabel med blanda bøker.",
+      "file": "items/books-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/books-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 30,
+        "d": 23,
+        "h": 15
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1092
+      },
+      "transparent": true,
+      "bytes": 120477,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "books-tier-03",
+      "family": "books",
+      "variant": 3,
+      "label": "Favorittserie",
+      "priceTier": 3,
+      "provisionalPriceNok": 450,
+      "description": "Fargerike bind frå ei favorittserie.",
+      "file": "items/books-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/books-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 32,
+        "d": 24,
+        "h": 19
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1146
+      },
+      "transparent": true,
+      "bytes": 125472,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "books-tier-04",
+      "family": "books",
+      "variant": 4,
+      "label": "Samlarutgåver",
+      "priceTier": 4,
+      "provisionalPriceNok": 1800,
+      "description": "Samlarbind med fine ryggar.",
+      "file": "items/books-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/books-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 34,
+        "d": 25,
+        "h": 23
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1193
+      },
+      "transparent": true,
+      "bytes": 129078,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "books-tier-05",
+      "family": "books",
+      "variant": 5,
+      "label": "Eksklusiv bokbunke",
+      "priceTier": 5,
+      "provisionalPriceNok": 5500,
+      "description": "Eksklusivt sett med illustrerte omslag og metallpreg.",
+      "file": "items/books-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/books-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 36,
+        "d": 26,
+        "h": 27
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1236
+      },
+      "transparent": true,
+      "bytes": 121201,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "makeup-set-tier-01",
+      "family": "makeup-set",
+      "variant": 1,
+      "label": "Brukt toalettmappe",
+      "priceTier": 1,
+      "provisionalPriceNok": 80,
+      "description": "Ei enkel, brukt mappe med nokre få ting.",
+      "file": "items/makeup-set-tier-01.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/makeup-set-tier-01.svg",
+      "canvasProfileCm": {
+        "w": 24,
+        "d": 18,
+        "h": 12
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 900
+      },
+      "transparent": true,
+      "bytes": 70159,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "makeup-set-tier-02",
+      "family": "makeup-set",
+      "variant": 2,
+      "label": "Lita sminkepung",
+      "priceTier": 2,
+      "provisionalPriceNok": 350,
+      "description": "Ei lita mappe med ryddige rom til personleg pleie.",
+      "file": "items/makeup-set-tier-02.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/makeup-set-tier-02.svg",
+      "canvasProfileCm": {
+        "w": 26,
+        "d": 19,
+        "h": 15
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 935
+      },
+      "transparent": true,
+      "bytes": 81174,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "makeup-set-tier-03",
+      "family": "makeup-set",
+      "variant": 3,
+      "label": "Sminkeskrin med spegel",
+      "priceTier": 3,
+      "provisionalPriceNok": 1400,
+      "description": "Eit kompakt skrin med spegel og sorterte rom.",
+      "file": "items/makeup-set-tier-03.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/makeup-set-tier-03.svg",
+      "canvasProfileCm": {
+        "w": 28,
+        "d": 21,
+        "h": 19
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 995
+      },
+      "transparent": true,
+      "bytes": 76481,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "makeup-set-tier-04",
+      "family": "makeup-set",
+      "variant": 4,
+      "label": "Påkosta sminkeskrin",
+      "priceTier": 4,
+      "provisionalPriceNok": 4800,
+      "description": "Eit større skrin med fleire rom og god spegel.",
+      "file": "items/makeup-set-tier-04.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/makeup-set-tier-04.svg",
+      "canvasProfileCm": {
+        "w": 30,
+        "d": 23,
+        "h": 24
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1071
+      },
+      "transparent": true,
+      "bytes": 106901,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    },
+    {
+      "id": "makeup-set-tier-05",
+      "family": "makeup-set",
+      "variant": 5,
+      "label": "Luksussett med lysspegel",
+      "priceTier": 5,
+      "provisionalPriceNok": 13000,
+      "description": "Eit stilreint sett med sortering og mjukt lys rundt spegelen.",
+      "file": "items/makeup-set-tier-05.png",
+      "camera": "measured-dimetric-v4",
+      "geometryGuide": "guides/makeup-set-tier-05.svg",
+      "canvasProfileCm": {
+        "w": 32,
+        "d": 24,
+        "h": 28
+      },
+      "canvasPixels": {
+        "width": 1200,
+        "height": 1131
+      },
+      "transparent": true,
+      "bytes": 96464,
+      "anchor": "Transparent sprite aligns to its local floor or parent-surface attachment.",
+      "mount": "desk-surface",
+      "attachedTo": "desk",
+      "attachment": "Local desktop surface slot."
+    }
+  ],
+  "geometryGuideDirectory": "guides/",
+  "priceLadder": "bed-price-ladder.js",
+  "itemCatalog": "item-catalog.js",
+  "newProductSpriteCount": 95,
+  "productFamilyCount": 19
+}
