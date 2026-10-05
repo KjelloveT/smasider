@@ -1,7 +1,7 @@
 {
   "app": "livslina",
   "version": 2,
-  "id": "character-builder-test-v5-2",
+  "id": "character-builder-test-v5-3",
   "label": "Karakterbyggjar med nye andlet og frisyrar",
   "page": "character-builder-test.html",
   "renderer": "character-builder-art.js",
@@ -9,7 +9,7 @@
   "controller": "character-builder-test.js",
   "updated": "2026-10-05",
   "status": "experimental-prototype",
-  "detailRevision": 7,
+  "detailRevision": 8,
   "artStyle": "detailed-pixel-art",
   "generationMode": "built-in-imagegen",
   "logicalCanvas": {
@@ -1242,8 +1242,8 @@
         0,
         0
       ],
-      "bytes": 16423,
-      "status": "registered-layer-visual-reviewed",
+      "bytes": 11591,
+      "status": "registered-short-hair-visual-reviewed",
       "source": "../../_kjelder/character-v5.2/raw/hair-11.png"
     },
     {
@@ -1286,8 +1286,8 @@
         0,
         0
       ],
-      "bytes": 21980,
-      "status": "registered-layer-visual-reviewed",
+      "bytes": 15473,
+      "status": "registered-short-hair-visual-reviewed",
       "source": "../../_kjelder/character-v5.2/raw/hair-12.png"
     },
     {
@@ -1330,8 +1330,8 @@
         0,
         0
       ],
-      "bytes": 20073,
-      "status": "registered-layer-visual-reviewed",
+      "bytes": 13815,
+      "status": "registered-short-hair-visual-reviewed",
       "source": "../../_kjelder/character-v5.2/raw/hair-13.png"
     },
     {
@@ -1374,8 +1374,8 @@
         0,
         0
       ],
-      "bytes": 23029,
-      "status": "registered-layer-visual-reviewed",
+      "bytes": 15948,
+      "status": "registered-short-hair-visual-reviewed",
       "source": "../../_kjelder/character-v5.2/raw/hair-14.png"
     },
     {
@@ -1418,8 +1418,8 @@
         0,
         0
       ],
-      "bytes": 16988,
-      "status": "registered-layer-visual-reviewed",
+      "bytes": 11074,
+      "status": "registered-short-hair-visual-reviewed",
       "source": "../../_kjelder/character-v5.2/raw/hair-15.png"
     },
     {
@@ -1462,8 +1462,8 @@
         0,
         0
       ],
-      "bytes": 21121,
-      "status": "registered-layer-visual-reviewed",
+      "bytes": 14180,
+      "status": "registered-short-hair-visual-reviewed",
       "source": "../../_kjelder/character-v5.2/raw/hair-16.png"
     },
     {
@@ -1506,8 +1506,8 @@
         0,
         0
       ],
-      "bytes": 12558,
-      "status": "registered-layer-visual-reviewed",
+      "bytes": 8752,
+      "status": "registered-short-hair-visual-reviewed",
       "source": "../../_kjelder/character-v5.2/raw/hair-17.png"
     },
     {
@@ -1550,8 +1550,8 @@
         0,
         0
       ],
-      "bytes": 17798,
-      "status": "registered-layer-visual-reviewed",
+      "bytes": 11616,
+      "status": "registered-short-hair-visual-reviewed",
       "source": "../../_kjelder/character-v5.2/raw/hair-18.png"
     },
     {
@@ -1594,8 +1594,8 @@
         0,
         0
       ],
-      "bytes": 16094,
-      "status": "registered-layer-visual-reviewed",
+      "bytes": 10576,
+      "status": "registered-short-hair-visual-reviewed",
       "source": "../../_kjelder/character-v5.2/raw/hair-19.png"
     },
     {
@@ -1639,12 +1639,12 @@
         0,
         0
       ],
-      "bytes": 11012,
-      "status": "registered-layer-visual-reviewed",
+      "bytes": 7719,
+      "status": "registered-short-hair-visual-reviewed",
       "source": "../../_kjelder/character-v5.2/raw/hair-20.png"
     }
   ],
-  "totalBytes": 2005534,
+  "totalBytes": 1949202,
   "combinations": 20000,
   "sourceRegistrations": [
     {
@@ -2647,213 +2647,263 @@
     },
     {
       "file": "hair-11.png",
-      "source": "../../_kjelder/character-v5.2/raw/hair-11.png",
+      "source": "hair-11.png",
       "sourceSilhouette": [
         277,
         161,
         746,
         509
       ],
-      "scale": 0.9936034115138592,
+      "scale": 0.673773987206823,
       "translation": [
-        3.7718550106609996,
-        -31.970149253731336
+        167.36460554371,
+        19.5223880597015
       ],
       "targetCrown": [
         512,
         128
       ],
-      "targetWidth": 466,
-      "backLayer": "transparent; short style"
+      "targetWidth": 316,
+      "backLayer": "transparent; short style",
+      "width": 512,
+      "height": 768,
+      "bytes": 5413,
+      "headWidth": 312,
+      "earSpan": 408
     },
     {
       "file": "hair-12.png",
-      "source": "../../_kjelder/character-v5.2/raw/hair-12.png",
+      "source": "hair-12.png",
       "sourceSilhouette": [
         267,
         256,
         757,
         621
       ],
-      "scale": 0.9510204081632653,
+      "scale": 0.6448979591836734,
       "translation": [
-        25.07755102040818,
-        -115.46122448979591
+        181.8122448979592,
+        -37.0938775510204
       ],
       "targetCrown": [
         512,
         128
       ],
-      "targetWidth": 466,
-      "backLayer": "transparent; short style"
+      "targetWidth": 316,
+      "backLayer": "transparent; short style",
+      "width": 512,
+      "height": 768,
+      "bytes": 6721,
+      "headWidth": 312,
+      "earSpan": 408
     },
     {
       "file": "hair-13.png",
-      "source": "../../_kjelder/character-v5.2/raw/hair-13.png",
+      "source": "hair-13.png",
       "sourceSilhouette": [
         308,
         214,
         717,
         516
       ],
-      "scale": 1.1393643031784841,
+      "scale": 0.7726161369193154,
       "translation": [
-        -71.92420537897311,
-        -115.82396088019561
+        116.03422982885084,
+        -37.339853300733495
       ],
       "targetCrown": [
         512,
         128
       ],
-      "targetWidth": 466,
-      "backLayer": "transparent; short style"
+      "targetWidth": 316,
+      "backLayer": "transparent; short style",
+      "width": 512,
+      "height": 768,
+      "bytes": 6400,
+      "headWidth": 312,
+      "earSpan": 408
     },
     {
       "file": "hair-14.png",
-      "source": "../../_kjelder/character-v5.2/raw/hair-14.png",
+      "source": "hair-14.png",
       "sourceSilhouette": [
         289,
         191,
         734,
         521
       ],
-      "scale": 1.047191011235955,
+      "scale": 0.7101123595505618,
       "translation": [
-        -23.638202247191032,
-        -72.01348314606741
+        148.77752808988762,
+        -7.631460674157324
       ],
       "targetCrown": [
         512,
         128
       ],
-      "targetWidth": 466,
-      "backLayer": "transparent; short style"
+      "targetWidth": 316,
+      "backLayer": "transparent; short style",
+      "width": 512,
+      "height": 768,
+      "bytes": 6640,
+      "headWidth": 312,
+      "earSpan": 408
     },
     {
       "file": "hair-15.png",
-      "source": "../../_kjelder/character-v5.2/raw/hair-15.png",
+      "source": "hair-15.png",
       "sourceSilhouette": [
         272,
         236,
         749,
         574
       ],
-      "scale": 0.9769392033542977,
+      "scale": 0.6624737945492662,
       "translation": [
-        13.272536687631032,
-        -102.55765199161428
+        173.8071278825996,
+        -28.343815513626822
       ],
       "targetCrown": [
         512,
         128
       ],
-      "targetWidth": 466,
-      "backLayer": "transparent; short style"
+      "targetWidth": 316,
+      "backLayer": "transparent; short style",
+      "width": 512,
+      "height": 768,
+      "bytes": 5360,
+      "headWidth": 312,
+      "earSpan": 408
     },
     {
       "file": "hair-16.png",
-      "source": "../../_kjelder/character-v5.2/raw/hair-16.png",
+      "source": "hair-16.png",
       "sourceSilhouette": [
         258,
         252,
         761,
         603
       ],
-      "scale": 0.9264413518886679,
+      "scale": 0.6282306163021869,
       "translation": [
-        39.97813121272367,
-        -105.46322067594431
+        191.91650099403577,
+        -30.314115308151088
       ],
       "targetCrown": [
         512,
         128
       ],
-      "targetWidth": 466,
-      "backLayer": "transparent; short style"
+      "targetWidth": 316,
+      "backLayer": "transparent; short style",
+      "width": 512,
+      "height": 768,
+      "bytes": 5915,
+      "headWidth": 312,
+      "earSpan": 408
     },
     {
       "file": "hair-17.png",
-      "source": "../../_kjelder/character-v5.2/raw/hair-17.png",
+      "source": "hair-17.png",
       "sourceSilhouette": [
         275,
         366,
         749,
         668
       ],
-      "scale": 0.9831223628691983,
+      "scale": 0.6666666666666666,
       "translation": [
-        8.641350210970472,
-        -231.82278481012656
+        170.66666666666669,
+        -116.0
       ],
       "targetCrown": [
         512,
         128
       ],
-      "targetWidth": 466,
-      "backLayer": "transparent; short style"
+      "targetWidth": 316,
+      "backLayer": "transparent; short style",
+      "width": 512,
+      "height": 768,
+      "bytes": 4415,
+      "headWidth": 312,
+      "earSpan": 408
     },
     {
       "file": "hair-18.png",
-      "source": "../../_kjelder/character-v5.2/raw/hair-18.png",
+      "source": "hair-18.png",
       "sourceSilhouette": [
         287,
         167,
         735,
         485
       ],
-      "scale": 1.0401785714285714,
+      "scale": 0.7053571428571429,
       "translation": [
-        -19.53125,
-        -45.709821428571416
+        151.5625,
+        10.205357142857139
       ],
       "targetCrown": [
         512,
         128
       ],
-      "targetWidth": 466,
-      "backLayer": "transparent; short style"
+      "targetWidth": 316,
+      "backLayer": "transparent; short style",
+      "width": 512,
+      "height": 768,
+      "bytes": 5496,
+      "headWidth": 312,
+      "earSpan": 408
     },
     {
       "file": "hair-19.png",
-      "source": "../../_kjelder/character-v5.2/raw/hair-19.png",
+      "source": "hair-19.png",
       "sourceSilhouette": [
         293,
         198,
         731,
         517
       ],
-      "scale": 1.0639269406392695,
+      "scale": 0.7214611872146118,
       "translation": [
-        -32.73059360730599,
-        -82.65753424657535
+        142.61187214611874,
+        -14.849315068493155
       ],
       "targetCrown": [
         512,
         128
       ],
-      "targetWidth": 466,
-      "backLayer": "transparent; short style"
+      "targetWidth": 316,
+      "backLayer": "transparent; short style",
+      "width": 512,
+      "height": 768,
+      "bytes": 5113,
+      "headWidth": 312,
+      "earSpan": 408
     },
     {
       "file": "hair-20.png",
-      "source": "../../_kjelder/character-v5.2/raw/hair-20.png",
+      "source": "hair-20.png",
       "sourceSilhouette": [
         309,
         205,
         717,
         492
       ],
-      "scale": 1.142156862745098,
+      "scale": 0.7745098039215687,
       "translation": [
-        -73.92647058823525,
-        -106.14215686274508
+        114.67647058823528,
+        -30.774509803921575
       ],
       "targetCrown": [
         512,
         128
       ],
-      "targetWidth": 466,
-      "backLayer": "transparent; short style"
+      "targetWidth": 316,
+      "backLayer": "transparent; short style",
+      "width": 512,
+      "height": 768,
+      "bytes": 4255,
+      "headWidth": 312,
+      "earSpan": 408
     }
   ],
   "productionGuide": "../../docs/character-production-standard-v5.md",
@@ -2937,6 +2987,27 @@
         "faceHairPairs": 100,
         "allSpritesFullFrame": true,
         "generatedShortHairBackLayers": "fully transparent",
+        "compositeReview": "passed"
+      }
+    },
+    "expansionV5_3": {
+      "status": "visual-review-complete",
+      "updatedAssets": 10,
+      "shortHairRegistration": {
+        "targetWidthGuide": 316,
+        "headWidthGuide": 312,
+        "earSpanGuide": 408,
+        "crown": [
+          512,
+          128
+        ],
+        "maxBottomY": 363
+      },
+      "visualChecks": {
+        "newHairstyleOverview": true,
+        "earOverlap": "passed; no hair below lower ear edge",
+        "faceHairPairs": 100,
+        "allSpritesFullFrame": true,
         "compositeReview": "passed"
       }
     }
