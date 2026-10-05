@@ -4,12 +4,12 @@ window.LivslinaCharacterArt = (() => {
   const scriptURL = document.currentScript.src;
   const labels = {
     skin: ["Ljos varm", "Ljos nøytral", "Mellomvarm", "Djup brun", "Mørk brun"],
-    face: ["Breitt smil", "Briller", "Overraska", "Blink og fregner", "Sjølvsikker", "Lattermild", "Søvnig", "Nysgjerrig", "Bekymra", "Konsentrert"],
-    hair: ["Kort krøllhår", "Langt bølgjehår", "Fletter", "Rett lugg", "Høg hestehale", "Rufsete quiff", "Tett krølltopp", "Sidesveipt pixie", "Kjevelang blåsvart bob", "Luftig blond kortklipp"],
-    clothes: ["Blå hettegenser", "Rustraud jakke", "Lilla strikkegenser", "Grøn overall", "Turkis skjorte", "Burgundarraud collegejakke", "Lilla cardigan og plissé-skjørt", "Rutete flanell og cargobukse", "Blått treningssett", "Salviegrøn rugbyskorte"]
+    face: ["Breitt smil", "Briller", "Overraska", "Blink og fregner", "Sjølvsikker", "Lattermild", "Søvnig", "Nysgjerrig", "Bekymra", "Konsentrert", "Roleg smil", "Lunt glis", "Sidemil", "Tenksam", "Konsentrert blikk", "Latter", "Varsamt uroleg", "Søvnig sideblikk", "Overraska", "Skeptisk smil"],
+    hair: ["Kort krøllhår", "Langt bølgjehår", "Fletter", "Rett lugg", "Høg hestehale", "Rufsete quiff", "Tett krølltopp", "Sidesveipt pixie", "Kjevelang blåsvart bob", "Luftig blond kortklipp", "Låg fade med tette krøllar", "Brun sideskill", "Koparraud rufseklipp", "Lys kort quiff", "Svarte 360-bølgjer", "Korte tvinnar", "Mørk maskinklipp", "Blåsvart undercut med turkis lokk", "Tett krølltopp med fade", "Kort mørk framoverklipp"],
+    clothes: ["Blå hettegenser", "Rustraud jakke", "Lilla strikkegenser", "Grøn overall", "Turkis skjorte", "Burgunder varsityjakke", "Lilla cardigan og skjørt", "Rutete flanell og cargobukse", "Blått treningssett", "Salviegrøn rugbyskorte"]
   };
   const fileFamilies = { body: "skin-body", hands: "skin-hands", clothes: "clothes", face: "face", hairBack: "hair-back", hairFront: "hair-front" };
-  const counts = { body: 5, hands: 5, clothes: 10, face: 10, hairBack: 10, hairFront: 10 };
+  const counts = { body: 5, hands: 5, clothes: 10, face: 20, hairBack: 20, hairFront: 20 };
   const images = {};
   let ready = false;
   let loadError = "";

@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.84] — 2026-10-05
+
+### Endra
+- **Livslina har fått fleire kombinerbare karakterval.** Prøva har ti nye ansiktsuttrykk og ti nye frisyrar med meir maskuline trekk.
+
 ## [1.83] — 2026-10-05
 
 ### Endra

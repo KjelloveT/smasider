@@ -46,3 +46,5 @@ footer { margin-top: 24px; text-align: center; }
   .character-stage { padding: 0; }
   .toolbar { gap: 8px; }
 }
+
+.choice-note { flex: 1 0 100%; margin: 6px 0 0; font-size: .9rem; font-weight: 700; line-height: 1.4; }

@@ -91,3 +91,12 @@ Prøva lagrar ingen brukarval, har ingen nye avhengnader og endrar ikkje speleø
 - Visuell kontroll omfattar kontaktark med alle fem nye frisyrar, andletsuttrykk og antrekk, med fullstendige kontaktark for 100 andlet/hår-par, 100 hår/klede-par og 50 hud/kledde-par.
 - PR-førehandsvisinga lasta alle 50 ressurslag. Nye ansikt, hår og klede, tilfeldig figur og tilbakestilling er kontrollerte; nettlesaren hadde ingen konsollfeil eller -varsel.
 - Skrivebordsvisinga og mobilbreidda 390 px er kontrollerte. Dokumentsbreidda var 375 px på mobil, utan vassrett overflyt. Resultatet er ført i testmanifestet.
+
+
+## Utviding v5.2 — meir maskuline uttrykk
+
+Ressursprøva har no tjue andletsuttrykk og tjue frisyrar, i tillegg til fem hudtonar og ti klesstilar. Dei ti nye andleta brukar breiare og beinare bryn, smalare augekantar og eit eige uttrykk. Dei ti nye frisyrene varierer krøllar, bølgjer, tvinnar, sideskil og kortklipp. Alle kan kombinerast med alle hudtonar og klede.
+
+Meisterhovudet, naseplasseringa og ansiktsramma er felles. Denne runden varierer augebryn, auge og munn; ho endrar ikkje kjeveforma eller hovudstorleiken. Hårressursane held seg til same målte krone og fullramme. Dei nye korte frisyrene har tomt baklag, og frontlaget blir reinska mot ansiktsvernet før eksport. Ingen hudfarge er bakt inn i ansikts- eller hårlaga.
+
+Dei nye kjeldeteikningane ligg lokalt under `livslina/_kjelder/character-v5.2/raw/` og blir haldne utanfor Git. Målte registreringar og faktiske generasjonsinstruksar ligg i [utvidingsloggen](character-generation-v5-masculine-additions.md).
