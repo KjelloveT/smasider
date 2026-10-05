@@ -87,7 +87,7 @@
   "recurringSpending": {
     "source": "estimate",
     "kind": "estimate",
-    "note": "Representative spelanslag frå 2026. Kantineprisar og abonnement varierer; tala er laga for å synleggjere korleis vanar påverkar budsjettet.",
+    "note": "Representative spelanslag frå 2026. Kantineprisar, mat ute, sosiale arrangement og abonnement varierer; tala er laga for å synleggjere korleis vanar påverkar budsjettet.",
     "canteen": {
       "pricePerVisit": 65,
       "options": [
@@ -104,6 +104,41 @@
         { "perWeek": 1, "label": "1 i veka" },
         { "perWeek": 3, "label": "3 i veka" },
         { "perWeek": 5, "label": "5 i veka" }
+      ]
+    },
+    "eatingOut": {
+      "pricePerVisit": 165,
+      "options": [
+        { "visitsPerWeek": 0, "label": "Aldri" },
+        { "visitsPerWeek": 1, "label": "1 gong i veka" },
+        { "visitsPerWeek": 2, "label": "2 gonger i veka" },
+        { "visitsPerWeek": 4, "label": "4 gonger i veka" }
+      ]
+    },
+    "socialEvents": {
+      "pricePerEvent": 300,
+      "options": [
+        { "eventsPerMonth": 0, "label": "Sjeldan eller aldri" },
+        { "eventsPerMonth": 1, "label": "1 gong i månaden" },
+        { "eventsPerMonth": 2, "label": "2 gonger i månaden" },
+        { "eventsPerMonth": 4, "label": "Om lag 1 gong i veka" },
+        { "eventsPerMonth": 8, "label": "Om lag 2 gonger i veka" }
+      ]
+    },
+    "clothingShopping": {
+      "options": [
+        { "perWeek": 0, "label": "0 kr i veka" },
+        { "perWeek": 100, "label": "100 kr i veka" },
+        { "perWeek": 250, "label": "250 kr i veka" },
+        { "perWeek": 500, "label": "500 kr i veka" }
+      ]
+    },
+    "inGamePurchases": {
+      "options": [
+        { "perWeek": 0, "label": "0 kr i veka" },
+        { "perWeek": 50, "label": "50 kr i veka" },
+        { "perWeek": 200, "label": "200 kr i veka" },
+        { "perWeek": 500, "label": "500 kr i veka" }
       ]
     },
     "mobilePlans": [
