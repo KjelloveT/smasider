@@ -3,6 +3,15 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.87] — 2026-10-05
+
+### Lagt til
+- **Karakterprøva i Livslina har fått 20 nye klesstilar.** Utvalet går frå tur- og regnklede til skjørt, kjole, arbeidsdress, collegejakke og meir formelle antrekk.
+
+### Fiksa
+- **Kleda i Livslina brukar no hudlaget for underarmar og hender.** Lyse hender er fjerna frå flanellplagget, og hudtonen på hendene følgjer figuren.
+- **Den tette krølltoppen sit tettare til hovudet.**
+
 ## [1.86] — 2026-10-05
 
 ### Endra

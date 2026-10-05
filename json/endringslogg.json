@@ -2,6 +2,25 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.87",
+      "dato": "2026-10-05",
+      "samandrag": "Karakterprøva i Livslina har fått tjue nye klede, og hudlag og hår sit betre på figuren.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Livslina",
+          "tekst": "Karakterprøva har fått tjue nye klesstilar med ulike jakker, skjorter, bukser, skjørt, kjole, arbeidsdress og fritidsklede.",
+          "merke": "eksperiment"
+        },
+        {
+          "t": "fiksa",
+          "kva": "Livslina",
+          "tekst": "Tett krølltopp er mindre og ligg tettare til hovudet. Flanellsettet har ikkje lenger lyse hender teikna inn; underarmar og hender brukar vald hudtone under kleslaget.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
       "versjon": "1.86",
       "dato": "2026-10-05",
       "samandrag": "Livslina får større karaktervisingar, konkrete forbruksval og ein kalender som viser tida gjennom halvåret.",
