@@ -19,7 +19,6 @@
 .ll-start-hero-content { inset: 34% 11% 16% 9%; justify-content: center; }
 .ll-start-hero .vp-hero-logo { width: clamp(88px, 14vw, 144px); max-height: 148px; }
 .ll-start-hero .vp-hero-copy p { font-size: clamp(0.95rem, 1.9vw, 1.3rem); line-height: 1.3; }
-.ll-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .ll-life-journey { width: min(100%, 1100px); margin: 0 auto 1.25rem; }
 .ll-life-journey-intro { margin: 0 auto 0.8rem; text-align: center; }
 .ll-life-journey-intro h2 { margin-bottom: 0.25rem; }

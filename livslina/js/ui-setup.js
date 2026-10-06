@@ -79,7 +79,7 @@ LL.uiSetup = (function () {
     if (STEPS[stepIndex] === 'housing') ready = !!s.housing;
     next.disabled = !ready;
     next.innerHTML = stepIndex === STEPS.length - 1
-      ? 'Start livslinja <span data-icon="play"></span>'
+      ? 'Start livsline <span data-icon="play"></span>'
       : 'Neste <span data-icon="arrowRight"></span>';
     LL.util.hydrate(next);
   }
@@ -451,7 +451,7 @@ LL.uiSetup = (function () {
       impFile.addEventListener('change', () => {
         if (!impFile.files.length) return;
         LL.storage.importSave(impFile.files[0])
-          .then(obj => { LL.state.load(obj); LL.storage.saveActive(LL.state.get()); LL.main.enterHome(); LL.main.toast('Livslinje importert.'); })
+          .then(obj => { LL.state.load(obj); LL.storage.saveActive(LL.state.get()); LL.main.enterHome(); LL.main.toast('Livsline importert.'); })
           .catch(err => LL.main.toast(err.message));
         impFile.value = '';
       });
