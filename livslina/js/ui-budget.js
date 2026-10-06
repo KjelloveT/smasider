@@ -30,6 +30,7 @@ LL.uiBudget = (function () {
 
   function renderControls() {
     const restricted = LL.state.get().creditRestriction;
+    renderWeekdayControls();
     // Jobb
     btnGroup('budgetJob', LL.economy.jobOptions().map(o => ({ val: o.hours, label: o.label })),
       draft.jobHours, v => { draft.jobHours = v; recompute(); });
@@ -61,7 +62,7 @@ LL.uiBudget = (function () {
       b.className = 'vp-button vp-button--tool';
       b.textContent = a.label + ' (' + LL.util.kr(a.monthly) + ')' +
         (a.social > 0
-          ? (LL.state.get().stats.social < 100 ? ' · Sosialt +' + a.social + '/mnd' : ' · Sosialmålaren er full')
+          ? (LL.state.get().stats.social < 100 ? ' · Sosialt +' + a.social.toLocaleString('nn-NO', { maximumFractionDigits: 2 }) + '/mnd' : ' · Sosialmålaren er full')
           : '');
       const on = draft.activities.includes(a.id);
       b.setAttribute('aria-pressed', String(on));
@@ -74,6 +75,54 @@ LL.uiBudget = (function () {
       });
       wrap.appendChild(b);
     });
+  }
+
+  function renderWeekdayControls() {
+    const wrap = document.getElementById('budgetWeekdayControls');
+    wrap.textContent = '';
+    LL.economy.weekdayChoices().forEach(choice => {
+      const row = document.createElement('label');
+      row.className = 'll-time-row';
+      row.htmlFor = 'budgetTime-' + choice.key;
+
+      const name = document.createElement('span');
+      name.textContent = choice.label;
+      const select = document.createElement('select');
+      select.className = 'vp-input ll-time-select';
+      select.id = 'budgetTime-' + choice.key;
+      select.setAttribute('aria-label', choice.label + ' per kvardag');
+      for (let hours = 0; hours <= 8; hours++) {
+        const option = document.createElement('option');
+        option.value = String(hours);
+        option.textContent = hours + ' t';
+        select.appendChild(option);
+      }
+      select.value = String(draft.weekdayHours[choice.key] || 0);
+      select.addEventListener('change', () => {
+        draft.weekdayHours[choice.key] = Number(select.value);
+        updateWeekdayControls();
+        recompute();
+      });
+      row.append(name, select);
+      wrap.appendChild(row);
+    });
+    updateWeekdayControls();
+  }
+
+  function updateWeekdayControls() {
+    const choices = LL.economy.weekdayChoices();
+    const selected = draft.weekdayHours;
+    const total = choices.reduce((sum, choice) => sum + (Number(selected[choice.key]) || 0), 0);
+    choices.forEach(choice => {
+      const select = document.getElementById('budgetTime-' + choice.key);
+      if (!select) return;
+      const others = total - (Number(selected[choice.key]) || 0);
+      Array.from(select.options).forEach(option => {
+        option.disabled = Number(option.value) > 8 - others;
+      });
+    });
+    const remaining = document.getElementById('budgetFreeTime');
+    if (remaining) remaining.textContent = Math.max(0, 8 - total) + ' timar til fritid og hobby';
   }
 
   function btnGroup(id, opts, current, onPick, disabled) {
@@ -113,6 +162,12 @@ LL.uiBudget = (function () {
     const state = LL.state.get();
     const preview = Object.assign({}, state, { plan: draft, age: LL.state.currentRound().age });
     const b = LL.economy.monthlyBreakdown(preview);
+    updateWeekdayControls();
+    const weekday = LL.economy.weekdayEffects(draft);
+    const weekdayPreview = document.getElementById('budgetWeekdayPreview');
+    weekdayPreview.textContent = 'Tidsplanen endrar energien med ' + formatDelta(weekday.energyPerMonth) +
+      ' og trivselen med ' + formatDelta(LL.state.scaledWellbeingDelta(weekday.wellbeingPerMonth)) +
+      ' per månad. Eigenstudium gir ' + formatDelta(weekday.gradePerTerm) + ' karakterpoeng per halvår.';
     const socialHint = document.getElementById('budgetSocialHint');
     if (socialHint) {
       const periodMonths = LL.state.currentRound().months || 6;
@@ -159,6 +214,11 @@ LL.uiBudget = (function () {
     } else {
       warn.hidden = true;
     }
+  }
+
+  function formatDelta(value) {
+    const number = Number(value) || 0;
+    return (number > 0 ? '+' : '') + number.toLocaleString('nn-NO', { maximumFractionDigits: 2 });
   }
 
   function row(label, val, isExpense) {

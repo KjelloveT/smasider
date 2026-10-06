@@ -16,10 +16,20 @@ LL.economy = (function () {
   // Fritidsaktivitetar (månadsutgift + trivsel/mnd)
   function activities() {
     return [
-      { id: 'gym', label: 'Treningssenter', monthly: LL.data.value('leisure.gymYouthPerMonth'), wellbeing: 2.4, energy: 0.4, social: 0 },
-      { id: 'sport', label: 'Idrettslag', monthly: LL.data.value('leisure.sportsClubPerYear') / 12, wellbeing: 3.0, energy: 0.5, social: 1 },
-      { id: 'kultur', label: 'Kulturskule/korps', monthly: LL.data.value('leisure.cultureSchoolPerYear') / 12, wellbeing: 2.6, energy: 0.1, social: 1 },
-      { id: 'gaming', label: 'Gaming', monthly: LL.data.value('leisure.gamingPerMonth'), wellbeing: 0.7, energy: -0.3, social: 0 }
+      { id: 'gym', label: 'Treningssenter', monthly: LL.data.value('leisure.gymYouthPerMonth'), wellbeing: 1.2, energy: 0.4, social: 0 },
+      { id: 'sport', label: 'Idrettslag', monthly: LL.data.value('leisure.sportsClubPerYear') / 12, wellbeing: 1.4, energy: 0.5, social: 0.35 },
+      { id: 'kultur', label: 'Kulturskule/korps', monthly: LL.data.value('leisure.cultureSchoolPerYear') / 12, wellbeing: 1.1, energy: 0.1, social: 0.35 },
+      { id: 'gaming', label: 'Gaming', monthly: LL.data.value('leisure.gamingPerMonth'), wellbeing: 0.3, energy: -0.3, social: 0 }
+    ];
+  }
+
+  function weekdayChoices() {
+    return [
+      { key: 'training', label: 'Trening' },
+      { key: 'selfStudy', label: 'Eigenstudium' },
+      { key: 'friends', label: 'Vener' },
+      { key: 'scrolling', label: 'Scrolling på mobil' },
+      { key: 'gaming', label: 'Gaming' }
     ];
   }
 
@@ -69,7 +79,7 @@ LL.economy = (function () {
 
   function defaultPlan() {
     return {
-      jobHours: 0, activities: [],
+      jobHours: 0, activities: [], weekdayHours: LL.state.defaultWeekdayHours(),
       canteenVisitsPerWeek: 1, drinksPerWeek: 1,
       eatingOutPerWeek: 1, socialEventsPerMonth: 1,
       clothingShoppingPerWeek: 100, inGamePurchasesPerWeek: 50,
@@ -196,15 +206,17 @@ LL.economy = (function () {
 
     const incomeTotal = sum(income);
     const expenseTotal = sum(expense);
+    const weekday = weekdayEffects(plan);
 
     return {
       income, expense, incomeTotal, expenseTotal,
       wageTotal: wage + apprenticeWage,
       net: incomeTotal - expenseTotal,
       savings: plan.savings || 0,
-      wellbeingPerMonth: activityWellbeing(plan),
-      socialPerMonth: socialPerMonth(plan),
-      energyPerMonth: jobEnergy(plan) + activityEnergy(plan) + commuteEnergy(state)
+      wellbeingPerMonth: activityWellbeing(plan) + weekday.wellbeingPerMonth,
+      socialPerMonth: socialPerMonth(plan) + weekday.socialPerMonth,
+      energyPerMonth: jobEnergy(plan) + activityEnergy(plan) + weekday.energyPerMonth + commuteEnergy(state),
+      weekdayGradePerTerm: weekday.gradePerTerm
     };
   }
 
@@ -228,12 +240,36 @@ LL.economy = (function () {
   }
 
   function socialPerMonth(plan) {
-    const recurringEvents = Math.max(0, Number(plan.socialEventsPerMonth) || 0) * 0.5;
+    const recurringEvents = Math.max(0, Number(plan.socialEventsPerMonth) || 0) * 0.15;
     const activitySocial = (plan.activities || []).reduce((total, id) => {
       const activity = activities().find(item => item.id === id);
       return total + (activity ? activity.social : 0);
     }, 0);
-    return Math.min(2, recurringEvents + activitySocial);
+    return Math.min(0.6, recurringEvents + activitySocial);
+  }
+
+  function weekdayEffects(plan) {
+    const source = plan && plan.weekdayHours || LL.state.defaultWeekdayHours();
+    const hours = {};
+    let remaining = 8;
+    weekdayChoices().forEach(choice => {
+      const value = Number(source[choice.key]);
+      const safeValue = Number.isFinite(value) ? Math.max(0, Math.min(8, Math.round(value))) : 0;
+      hours[choice.key] = Math.min(safeValue, remaining);
+      remaining -= hours[choice.key];
+    });
+    return {
+      hours,
+      freeHours: remaining,
+      energyPerMonth:
+        hours.training * 0.4 - hours.selfStudy * 0.3 + hours.friends * 0.02 -
+        hours.scrolling * 0.16 - hours.gaming * 0.12 + remaining * 0.1,
+      wellbeingPerMonth:
+        hours.training * 0.12 - hours.selfStudy * 0.04 + hours.friends * 0.1 +
+        hours.scrolling * 0.02 + hours.gaming * 0.05 + remaining * 0.08,
+      socialPerMonth: hours.friends * 0.12,
+      gradePerTerm: hours.selfStudy * 0.14
+    };
   }
 
   function jobEnergy(plan) {
@@ -271,7 +307,7 @@ LL.economy = (function () {
 
   return {
     WEEKS_PER_MONTH,
-    activities, jobOptions, savingsOptions, canteenOptions, drinkOptions, eatingOutOptions, socialEventOptions, weeklyBudgetOptions, mobileDataOptions, seasonPassOptions, hourlyWage, defaultPlan,
+    activities, weekdayChoices, weekdayEffects, jobOptions, savingsOptions, canteenOptions, drinkOptions, eatingOutOptions, socialEventOptions, weeklyBudgetOptions, mobileDataOptions, seasonPassOptions, hourlyWage, defaultPlan,
     selectedSpending, spendingStyle, monthlyBreakdown, taxOnWage, label, ageVariant, sum
   };
 })();

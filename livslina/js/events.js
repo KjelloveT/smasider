@@ -146,7 +146,7 @@ LL.events = (function () {
     if (!(effect > 0)) return '';
     const current = Number(state.stats.social) || 0;
     const gain = Math.min(effect, Math.max(0, 100 - current));
-    return gain > 0 ? 'Sosialt +' + gain : 'Sosialmålaren er full';
+    return gain > 0 ? 'Sosialt +' + gain.toLocaleString('nn-NO', { maximumFractionDigits: 2 }) : 'Sosialmålaren er full';
   }
 
   function choose(ev, ch, state, ctx) {

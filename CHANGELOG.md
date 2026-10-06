@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.94] — 2026-10-06
+
+### Endra
+- **Livslina (skjult prøveutgåve): trivsel og sosialt veks langsamare, og fokusert skulearbeid kan løfte karakterane.** Ein vanleg vekedag kan planleggjast med åtte frie timar; søvn og skule er låste. Hendingane har fleire val mellom tur, vener og skulearbeid.
+
 ## [1.93] — 2026-10-06
 
 ### Endra

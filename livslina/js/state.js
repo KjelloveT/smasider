@@ -7,8 +7,8 @@ window.LL = window.LL || {};
 LL.state = (function () {
   'use strict';
 
-  const SAVE_VERSION = 8;
-  const WELLBEING_POSITIVE_MULTIPLIER = 0.75;
+  const SAVE_VERSION = 9;
+  const WELLBEING_POSITIVE_MULTIPLIER = 0.45;
   const LEGACY_SPENDING_CHOICES = {
     noysam: { eatingOutPerWeek: 0, socialEventsPerMonth: 0, clothingShoppingPerWeek: 0, inGamePurchasesPerWeek: 0 },
     sifo: { eatingOutPerWeek: 1, socialEventsPerMonth: 1, clothingShoppingPerWeek: 100, inGamePurchasesPerWeek: 50 },
@@ -177,13 +177,32 @@ LL.state = (function () {
     }
     delete migrated.profile;
     if (Array.isArray(migrated.activities)) migrated.activities = migrated.activities.slice();
+    migrated.weekdayHours = normalizeWeekdayHours(migrated.weekdayHours);
     return migrated;
+  }
+
+  function defaultWeekdayHours() {
+    return { training: 1, selfStudy: 1, friends: 1, scrolling: 1, gaming: 1 };
+  }
+
+  function normalizeWeekdayHours(hours) {
+    const source = hours && typeof hours === 'object' ? hours : defaultWeekdayHours();
+    const result = {};
+    let remaining = 8;
+    ['training', 'selfStudy', 'friends', 'scrolling', 'gaming'].forEach(key => {
+      const value = Number(source[key]);
+      const safeValue = Number.isFinite(value) ? Math.max(0, Math.min(8, Math.round(value))) : 0;
+      result[key] = Math.min(safeValue, remaining);
+      remaining -= result[key];
+    });
+    return result;
   }
 
   // Versjon 1 lagra sommaren før vårhalvåret. Versjon 3 la til ny karakterform
   // og rominventar; versjon 4 tok vare på planvala; versjon 5 bytte til konkrete
   // forbruksvanar; versjon 6 la til læreveg og saldo-/gjeldssporing; versjon 7
-  // oppdaterte utstyrsstipendet; versjon 8 la til sosialmålaren.
+  // oppdaterte utstyrsstipendet; versjon 8 la til sosialmålaren; versjon 9
+  // la til tidsplanen for ein vanleg vekedag.
   function migrateSave(obj) {
     if (!obj || typeof obj !== 'object') return obj;
     const sourceVersion = Number(obj.version) || 0;
@@ -268,12 +287,18 @@ LL.state = (function () {
   function get() { return save; }
   function stats() { return save.stats; }
 
+  function scaledWellbeingDelta(delta) {
+    const amount = Number(delta);
+    if (!Number.isFinite(amount)) return 0;
+    return amount > 0 ? amount * WELLBEING_POSITIVE_MULTIPLIER : amount;
+  }
+
   function adjustWellbeing(state, delta) {
     const target = state || save;
     const amount = Number(delta);
     if (!target || !target.stats || !Number.isFinite(amount)) return 0;
     const before = Number(target.stats.wellbeing) || 0;
-    const adjusted = amount > 0 ? amount * WELLBEING_POSITIVE_MULTIPLIER : amount;
+    const adjusted = scaledWellbeingDelta(amount);
     target.stats.wellbeing = LL.util.clamp(before + adjusted, 0, 100);
     return target.stats.wellbeing - before;
   }
@@ -340,9 +365,10 @@ LL.state = (function () {
 
   return {
     SAVE_VERSION,
+    defaultWeekdayHours,
     ROUNDS: SCHOOL_ROUNDS,
     newGame, load, get,
-    stats, adjustWellbeing, currentRound, rounds, isLastRound, age, isAdult, recordBalance,
+    stats, adjustWellbeing, scaledWellbeingDelta, currentRound, rounds, isLastRound, age, isAdult, recordBalance,
     seedRng, rng, rngInt, rngPick,
     draw, drawInt, drawPick
   };

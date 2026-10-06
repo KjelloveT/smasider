@@ -137,6 +137,8 @@ LL.sim = (function () {
     if (avgEnergy < 40) dg -= 0.3;
     if (plan.jobHours >= 12) dg -= 0.2;
     if (plan.jobHours === 0 && avgEnergy > 60) dg += 0.1;
+    const studyGain = LL.economy.weekdayEffects(plan).gradePerTerm;
+    dg += studyGain;
     if (state.flags.mistaForarbevis) { /* fråvær-effekt kan leggjast til seinare */ }
     state.stats.grades += dg;
     clampStats(state);
@@ -155,6 +157,7 @@ LL.sim = (function () {
       socialChange: state.stats.social - ctx.startSocial,
       energyChange: state.stats.energy - ctx.startEnergy,
       gradeChange: dg,
+      studyGradeChange: studyGain,
       eventLog: ctx.eventLog,
       factoid: factoid(state, ctx)
     };
