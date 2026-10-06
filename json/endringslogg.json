@@ -2,6 +2,25 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.90",
+      "dato": "2026-10-06",
+      "samandrag": "Livslina viser rette utstyrsstipend for 2026–2027 og har eigne diorama for utdanningsprogramma.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Den skjulte prøveutgåva brukar dei offisielle utstyrsstipendsatsane for 2026–2027, med eigne val for programområde som har avvikande sats. Eldre lagringar får oppdatert sats når dei blir opna.",
+          "merke": "eksperiment"
+        },
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Dei 15 utdanningsprogramma har fått kvar sitt isometriske pikseldiorama.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
       "versjon": "1.89",
       "dato": "2026-10-06",
       "samandrag": "Oppgåvemerka i Ormritaren er lettare å lese, og armane i Livslina-prøva møter mansjettane.",

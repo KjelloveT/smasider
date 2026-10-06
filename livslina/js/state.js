@@ -7,7 +7,7 @@ window.LL = window.LL || {};
 LL.state = (function () {
   'use strict';
 
-  const SAVE_VERSION = 6;
+  const SAVE_VERSION = 7;
   const LEGACY_SPENDING_CHOICES = {
     noysam: { eatingOutPerWeek: 0, socialEventsPerMonth: 0, clothingShoppingPerWeek: 0, inGamePurchasesPerWeek: 0 },
     sifo: { eatingOutPerWeek: 1, socialEventsPerMonth: 1, clothingShoppingPerWeek: 100, inGamePurchasesPerWeek: 50 },
@@ -180,9 +180,11 @@ LL.state = (function () {
 
   // Versjon 1 lagra sommaren før vårhalvåret. Versjon 3 la til ny karakterform
   // og rominventar; versjon 4 tok vare på planvala; versjon 5 bytte til konkrete
-  // forbruksvanar; versjon 6 la til læreveg og saldo-/gjeldssporing.
+  // forbruksvanar; versjon 6 la til læreveg og saldo-/gjeldssporing; versjon 7
+  // oppdaterer utstyrsstipendet for aktive løp og eksporterte lagringar.
   function migrateSave(obj) {
     if (!obj || typeof obj !== 'object') return obj;
+    const sourceVersion = Number(obj.version) || 0;
     if (obj.version <= 1) {
       const oldToNew = [0, 2, 1, 3, 5, 4, 6, 7];
       if (Number.isInteger(obj.roundIndex) && obj.roundIndex >= 0 && obj.roundIndex < oldToNew.length) {
@@ -230,10 +232,30 @@ LL.state = (function () {
       if (previousPlan) obj.preDebtPlanPreferences = JSON.parse(JSON.stringify(previousPlan));
     }
     if (obj.creditRestriction && obj.plan) applyDebtPlan(obj.plan);
+    if (sourceVersion < 7) migrateProgramEquipmentGrant(obj);
     if (obj.version !== SAVE_VERSION) {
       obj.version = SAVE_VERSION;
     }
     return obj;
+  }
+
+  function migrateProgramEquipmentGrant(obj) {
+    const oldProgram = obj.program;
+    const data = window.LL && LL.data;
+    if (!oldProgram || typeof oldProgram !== 'object' || !data || typeof data.getProgram !== 'function') return;
+    const currentProgram = data.getProgram(oldProgram.id);
+    if (!currentProgram) return;
+
+    const allowedRates = [currentProgram.equipmentGrantRate]
+      .concat((currentProgram.equipmentGrantVariants || []).map(variant => variant.equipmentGrantRate));
+    const selectedRate = allowedRates.includes(oldProgram.selectedEquipmentGrantRate)
+      ? oldProgram.selectedEquipmentGrantRate
+      : currentProgram.equipmentGrantRate;
+    obj.program = Object.assign({}, oldProgram, {
+      equipmentGrantRate: currentProgram.equipmentGrantRate,
+      equipmentGrantVariants: (currentProgram.equipmentGrantVariants || []).map(variant => Object.assign({}, variant)),
+      selectedEquipmentGrantRate: selectedRate
+    });
   }
 
   function get() { return save; }
