@@ -230,8 +230,10 @@ LL.uiSetup = (function () {
       const card = document.createElement('button');
       card.type = 'button';
       card.className = 'vp-button vp-button--quiet ll-line-card';
+      card.dataset.programId = p.id;
       card.setAttribute('aria-pressed', String(chosen && chosen.id === p.id));
 
+      const illustration = LL.artProgram.create(p.id);
       const type = document.createElement('span');
       type.className = 'll-line-type';
       type.textContent = p.type === 'yrkesfag' ? 'Yrkesfag' : 'Studieførebuande';
@@ -240,20 +242,73 @@ LL.uiSetup = (function () {
       const careers = document.createElement('p'); careers.className = 'll-line-careers';
       const cs = document.createElement('strong'); cs.textContent = 'Kan bli: ';
       careers.append(cs, document.createTextNode(p.careers.join(', ')));
-      const grant = document.createElement('p'); grant.className = 'll-line-careers';
-      grant.textContent = 'Utstyrsstipend: ' + kr(LL.data.equipmentGrant(p.equipmentGrantRate)) + '/år';
+      const grant = document.createElement('p'); grant.className = 'll-line-careers ll-line-grant';
+      const grantRate = chosen && chosen.id === p.id
+        ? (chosen.selectedEquipmentGrantRate || p.equipmentGrantRate)
+        : p.equipmentGrantRate;
+      grant.textContent = 'Utstyrsstipend: ' + kr(LL.data.equipmentGrant(grantRate)) + '/år';
 
-      card.append(type, h, blurb, careers, grant);
+      card.append(illustration, type, h, blurb, careers, grant);
       card.addEventListener('click', () => selectLine(p, grid));
       grid.appendChild(card);
     });
+    renderGrantAreaChoice(chosen);
     renderTrainingRoute(chosen);
+  }
+
+  function renderGrantAreaChoice(program) {
+    const panel = document.getElementById('lineGrantChoice');
+    panel.textContent = '';
+    const variants = program && Array.isArray(program.equipmentGrantVariants) ? program.equipmentGrantVariants : [];
+    if (!variants.length) {
+      panel.hidden = true;
+      return;
+    }
+
+    panel.hidden = false;
+    const label = document.createElement('label');
+    label.htmlFor = 'lineGrantArea';
+    label.textContent = 'Vel programområde for utstyrsstipendet';
+
+    const select = document.createElement('select');
+    select.className = 'vp-input';
+    select.id = 'lineGrantArea';
+    const defaultOption = document.createElement('option');
+    defaultOption.value = program.equipmentGrantRate;
+    defaultOption.textContent = 'Andre programområde (grunnsats) — ' + kr(LL.data.equipmentGrant(program.equipmentGrantRate)) + '/år';
+    select.appendChild(defaultOption);
+    variants.forEach(variant => {
+      const option = document.createElement('option');
+      option.value = variant.equipmentGrantRate;
+      option.textContent = variant.label + ' — ' + kr(LL.data.equipmentGrant(variant.equipmentGrantRate)) + '/år';
+      select.appendChild(option);
+    });
+    select.value = program.selectedEquipmentGrantRate || program.equipmentGrantRate;
+    select.addEventListener('change', () => {
+      const current = LL.state.get().program;
+      if (current && current.id === program.id) {
+        current.selectedEquipmentGrantRate = select.value;
+        document.querySelectorAll('.ll-line-card').forEach(card => {
+          if (card.dataset.programId !== current.id) return;
+          const grant = card.querySelector('.ll-line-grant');
+          if (grant) grant.textContent = 'Utstyrsstipend: ' + kr(LL.data.equipmentGrant(select.value)) + '/år';
+        });
+      }
+    });
+
+    const help = document.createElement('p');
+    help.className = 'll-line-grant-help';
+    help.textContent = 'Lånekassen har ulik sats for desse programområda. Valet blir brukt i spelbudsjettet.';
+    panel.append(label, select, help);
   }
 
   function selectLine(p, grid) {
     const s = LL.state.get();
     const sameProgram = s.program && s.program.id === p.id;
-    s.program = p;
+    const selectedRate = sameProgram
+      ? (s.program.selectedEquipmentGrantRate || p.equipmentGrantRate)
+      : p.equipmentGrantRate;
+    s.program = { ...p, selectedEquipmentGrantRate: selectedRate };
     s.trainingRoute = p.type === 'yrkesfag'
       ? (sameProgram ? s.trainingRoute : null)
       : 'school';
@@ -262,6 +317,7 @@ LL.uiSetup = (function () {
     grid.querySelectorAll('.ll-line-card').forEach(c => {
       if (c.querySelector('h4').textContent === p.name) c.setAttribute('aria-pressed', 'true');
     });
+    renderGrantAreaChoice(s.program);
     renderTrainingRoute(p);
     updateNav();
   }

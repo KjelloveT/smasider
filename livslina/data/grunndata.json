@@ -1,9 +1,9 @@
 {
   "app": "livslina",
   "version": 1,
-  "updated": "2026-10-05",
+  "updated": "2026-10-06",
   "currency": "NOK",
-  "priceLevelNote": "SIFO-tal frå referansebudsjettet 2025 (prisar innhenta februar 2025). Lånekassen-satsar for skuleåret 2025–2026. Frikortgrense for inntektsåret 2026. Anslag ('estimate') er representative tal sette av redaksjonen og skal reviderast årleg saman med resten.",
+  "priceLevelNote": "SIFO-tal frå referansebudsjettet 2025 (prisar innhenta februar 2025). Utstyrsstipend frå Lånekassen for skuleåret 2026–2027; bortebuarstipend og inntektsavhengig stipend følgjer satsane for 2025–2026. Frikortgrense for inntektsåret 2026. Anslag ('estimate') er representative tal sette av redaksjonen og skal reviderast årleg saman med resten.",
   "sources": {
     "sifo2025": {
       "name": "SIFOs referansebudsjett for forbruksutgifter 2025 (SIFO-rapport 2-2025, OsloMet)",
@@ -14,6 +14,11 @@
       "name": "Lånekassen — satsar for vidaregåande opplæring 2025–2026",
       "url": "https://lanekassen.no/nb-NO/stipend-og-lan/norge/videregaende-skole/",
       "year": 2025
+    },
+    "equipmentGrant2026": {
+      "name": "Kunnskapsdepartementet — utstyrsstipend per utdanningsprogram og programområde 2026–2027",
+      "url": "https://www.regjeringen.no/no/aktuelt/no-far-alle-elevar-i-vidaregaande-utstyrsstipend/id3166766/",
+      "year": 2026
     },
     "skatteetaten2026": {
       "name": "Skatteetaten — frikort og skattekort 2026",
@@ -188,17 +193,19 @@
     "equipmentGrantPerYear": {
       "label": "Utstyrsstipend frå Lånekassen (alle elevar med ungdomsrett, per skuleår)",
       "unit": "krPerYear",
-      "source": "lanekassen2025",
+      "source": "equipmentGrant2026",
       "kind": "official",
-      "rate1": 1398,
-      "rate2": 2630,
-      "rate3": 4242,
-      "rate4": 5762,
-      "rate5": 7202,
+      "rate1": 1427,
+      "rate2": 2685,
+      "rate3": 4331,
+      "rate4": 5883,
+      "rate5": 7353,
       "examples": {
-        "rate1": "studiespesialisering",
-        "rate3": "idrettsfag, helse- og oppvekstfag",
-        "rate5": "elektro, bygg- og anleggsteknikk, naturbruk"
+        "rate1": "studiespesialisering, medier og kommunikasjon, musikk, dans og drama utanom programområdet dans",
+        "rate2": "helse- og oppvekstfag, kunst, design og arkitektur, sal, service og reiseliv, informasjonsteknologi og medieproduksjon",
+        "rate3": "studiespesialisering med toppidrett, elektro og datateknologi, programområdet dans i musikk, dans og drama, og dei fleste programområda i teknologi- og industrifag",
+        "rate4": "idrettsfag",
+        "rate5": "restaurant- og matfag, bygg- og anleggsteknikk, handverk, design og produktutvikling"
       }
     },
     "housingGrantPerMonth": {

@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.90] — 2026-10-06
+
+### Endra
+- **Livslina har rette utstyrsstipend for 2026–2027.** Linjekorta viser offisielle satsar, med val for programområde som har eigne satsar. Spelebudsjettet og eldre lagringar følgjer satsen. Femten nye isometriske diorama skil programma frå kvarandre.
+
 ## [1.89] — 2026-10-06
 
 ### Fiksa

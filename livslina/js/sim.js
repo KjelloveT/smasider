@@ -35,7 +35,7 @@ LL.sim = (function () {
 
     // Utstyrsstipend ved skulestart (haust)
     if (round.equipmentGrant && state.program) {
-      const amt = LL.data.equipmentGrant(state.program.equipmentGrantRate);
+      const amt = LL.data.equipmentGrant(state.program.selectedEquipmentGrantRate || state.program.equipmentGrantRate);
       state.stats.money += amt;
       ctx.grant = amt;
       addCat(ctx.income, 'grant', amt);
