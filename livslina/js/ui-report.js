@@ -18,8 +18,8 @@ LL.uiReport = (function () {
     // Inntekter / utgifter
     fillList('hyIncome', summary.income, false);
     fillList('hyExpense', summary.expense, true);
-    document.getElementById('hyIncomeTotal').textContent = LL.util.kr(summary.incomeTotal);
-    document.getElementById('hyExpenseTotal').textContent = LL.util.kr(summary.expenseTotal);
+    document.getElementById('hyIncomeTotal').textContent = LL.util.kr(displayedTotal(summary.income));
+    document.getElementById('hyExpenseTotal').textContent = LL.util.kr(displayedTotal(summary.expense));
 
     // Statendringar
     const grid = document.getElementById('hyStats');
@@ -53,6 +53,10 @@ LL.uiReport = (function () {
       div.append(l, v);
       wrap.appendChild(div);
     });
+  }
+
+  function displayedTotal(rows) {
+    return Object.values(rows).reduce((total, value) => total + Math.round(value || 0), 0);
   }
 
   function deltaBox(label, val, isMoney, decimals) {

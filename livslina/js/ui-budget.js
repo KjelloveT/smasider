@@ -118,11 +118,14 @@ LL.uiBudget = (function () {
     for (const k in b.income) inc.appendChild(row(LL.economy.label(k), b.income[k], false));
     for (const k in b.expense) exp.appendChild(row(LL.economy.label(k), b.expense[k], true));
 
-    document.getElementById('budgetIncomeTotal').textContent = LL.util.kr(b.incomeTotal);
-    document.getElementById('budgetExpenseTotal').textContent = LL.util.kr(b.expenseTotal);
+    const displayedIncome = displayedTotal(b.income);
+    const displayedExpense = displayedTotal(b.expense);
+    document.getElementById('budgetIncomeTotal').textContent = LL.util.kr(displayedIncome);
+    document.getElementById('budgetExpenseTotal').textContent = LL.util.kr(displayedExpense);
     const net = document.getElementById('budgetNet');
-    net.textContent = (b.net >= 0 ? '+' : '') + LL.util.kr(b.net) + '/mnd';
-    net.className = 'll-stat-val' + (b.net < 0 ? ' neg' : '');
+    const displayedNet = displayedIncome - displayedExpense;
+    net.textContent = (displayedNet >= 0 ? '+' : '') + LL.util.kr(displayedNet) + '/mnd';
+    net.className = 'll-stat-val' + (displayedNet < 0 ? ' neg' : '');
 
     const savLine = document.getElementById('budgetSavingsLine');
     savLine.textContent = b.savings > 0
@@ -153,6 +156,10 @@ LL.uiBudget = (function () {
     const v = document.createElement('strong'); v.textContent = (isExpense ? '−' : '+') + LL.util.kr(val);
     div.append(l, v);
     return div;
+  }
+
+  function displayedTotal(rows) {
+    return Object.values(rows).reduce((total, value) => total + Math.round(value || 0), 0);
   }
 
   function confirm() {
