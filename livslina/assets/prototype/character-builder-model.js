@@ -12,6 +12,15 @@ window.LivslinaCharacterModel = (() => {
   const neckPolygon = [[114, 131], [142, 131], [142, 145], [138, 147], [133, 149], [122, 149], [116, 147], [114, 145]];
   const headBounds = { left: 89, right: 167, top: 42, bottom: 132 };
   const earBounds = { left: 77, right: 179, top: 85, bottom: 109 };
+  // New outfits have different sleeve-cuff heights. Move the shared hand pair
+  // up inside each sleeve so the wrist starts just below the cuff. Units are
+  // logical pixels; clothing IDs match the visible option numbers.
+  const handYOffsetByClothing = {
+    11: -9, 12: 0, 13: -5, 14: -2, 15: -12,
+    16: -4, 17: -21, 18: -8, 19: -2, 20: -10,
+    21: -11, 22: -9, 23: -23, 24: -9, 25: 0,
+    26: -4, 27: -9, 28: -6, 29: -12, 30: -10
+  };
   const anchors = [
     { id: "eye-left", label: "Auge", x: 108, y: 94 },
     { id: "eye-right", label: "Auge", x: 148, y: 94 },
@@ -64,6 +73,7 @@ window.LivslinaCharacterModel = (() => {
     groundY: 361, centerX: 128, alphaCutoff: 200,
     skinRampStops: [55, 110, 160, 210, 255],
     anchors, skinRegions, skinRamps, headBounds, earBounds, neckPolygon,
+    handYOffsetByClothing,
     faceProtectionPath, neckPath, registrations,
     layerOrder: ["hairBack", "body", "hands", "clothes", "face", "hairFront"]
   };

@@ -74,8 +74,10 @@ Dato: 5. oktober 2026. Karakterprøva har fått tjue nye kleslag, frå tur- og r
 | clothes-29 | Stripete genser og vide culottebukser | Lilla stripete genser, culottebukser over ugjennomsiktige strømpebukser og korallraude sko. |
 | clothes-30 | Mørk turkis jakke og lys grå jeans | Mørk turkis jakke over gullgul skjorte, lys grå jeans og joggesko. |
 
-Klesressursane blir registrerte frå skulderlinja til grunnlinja og maskerte med meisterkroppen si alphaform, slik at hovud og hals skin gjennom der dei høyrer til. Alle nye erme sluttar ved handleddsfesta. Den tidlegare flanellressursen hadde lyse armar og hender teikna inn i kleslaget; dei er tekne bort. Hudtonelaga for underarmar og hender ligg no bak kleda, så erma dekkjer armane og berre rett hudtone kjem fram i det opne handleddsfeltet.
+Klesressursane blir registrerte frå skulderlinja til grunnlinja og maskerte med meisterkroppen si alphaform, slik at hovud og hals skin gjennom der dei høyrer til. Mansjettane sit ulikt på dei tjue nye antrekka, så teiknaren flyttar hudlaget for underarmar og hender per antrekk til handleddet møter ermekanten. Hudlaget blir teikna éin gong bak kleda; erma dekkjer den delen av armen som skal liggje inni plagget. Den tidlegare flanellressursen hadde lyse armar og hender teikna inn i kleslaget; dei er tekne bort.
 
 Den tette krølltoppen er registrert på nytt: krunekanten startar ved hårfestet, silhuetten er smalare og avsluttar over nedre øyrekant.
+
+Ved visuell kontroll 6. oktober vart dei tjue nye antrekka, dei nye andleta og dei nye frisyrene sette saman i nettlesaren. Handfesta vart justerte etter mansjettane. Andlets- og hårlaga held seg på same hovudfeste; ingen hovudflytting trongst.
 
 Råteikningane ligg lokalt i `_kjelder/character-v5.4/raw/`. Dei brukte ressursane ligg i `assets/prototype/characters/v5/`; nettlesaren flyttar eller skalerer ikkje laga.

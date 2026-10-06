@@ -4,12 +4,18 @@
     {
       "versjon": "1.89",
       "dato": "2026-10-06",
-      "samandrag": "Oppgåvemerka i Ormritaren har fått lysare bakgrunnar og svart tekst.",
+      "samandrag": "Oppgåvemerka i Ormritaren er lettare å lese, og armane i Livslina-prøva møter mansjettane.",
       "punkt": [
         {
           "t": "fiksa",
           "kva": "Ormritaren",
           "tekst": "Merka for Skriv, Les koden og Rett feilen har no lyse flater og svart tekst."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Livslina",
+          "tekst": "Hudlaget blir flytta per antrekk, slik at handledda møter mansjettane utan doble hender. Ansikts- og hårlaga held seg på same feste.",
+          "merke": "eksperiment"
         }
       ]
     },

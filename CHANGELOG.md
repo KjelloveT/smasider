@@ -7,6 +7,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
 ### Fiksa
 - **Oppgåvemerka i Ormritaren har fått lysare bakgrunnar og svart tekst.** Typane Skriv, Les koden og Rett feilen er lettare å lese.
+- **Livslina (skjult prøveutgåve): armane på dei tjue nye antrekka møter no mansjettane.** Hudlaget blir flytta per antrekk og teikna éin gong bak kleda; ansikts- og hårlaga er kontrollerte saman med antrekka.
 
 ## [1.88] — 2026-10-05
 
