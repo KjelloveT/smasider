@@ -242,13 +242,13 @@
 }
 
 .orm-oppgave[data-type="skriv"] .orm-oppgavemerke {
-    background: var(--orm-skriv-farge); color: var(--orm-skriv-paa);
+    background: var(--vp-sky, #d6e8f1); color: #000000;
 }
 .orm-oppgave[data-type="les"] .orm-oppgavemerke {
-    background: var(--orm-les-farge); color: var(--orm-les-paa);
+    background: var(--vp-honey, #f5dfaa); color: #000000;
 }
 .orm-oppgave[data-type="rett"] .orm-oppgavemerke {
-    background: var(--orm-rett-farge); color: var(--orm-rett-paa);
+    background: var(--vp-blush, #f3d2cf); color: #000000;
 }
 
 .orm-oppgavenummer {
