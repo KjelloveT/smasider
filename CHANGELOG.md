@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.91] — 2026-10-06
+
+### Fiksa
+- **Livslina (skjult prøveutgåve): diorama overlappar ikkje lenger på linjekorta.** Illustrasjonane har jamne, gjennomsiktige margar og inga eiga ramme eller bakgrunnsflate.
+
 ## [1.90] — 2026-10-06
 
 ### Endra
