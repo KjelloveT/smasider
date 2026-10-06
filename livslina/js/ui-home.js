@@ -1,5 +1,5 @@
 /* Livslina — ui-home.js
- * Heimeskjermen: diorama/figur, statspanel og livslinja (tidslinje).
+ * Heimeskjermen: diorama/figur, statspanel og livslina (tidslinje).
  */
 window.LL = window.LL || {};
 

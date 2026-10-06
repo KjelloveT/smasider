@@ -18,7 +18,7 @@ vala utan å kalle dei rette eller galne.
 
 ## Skjermflyt
 
-1. **Start:** kort forklaring, ny livslinje eller hald fram. Skjulde spelet
+1. **Start:** kort forklaring, ny livsline eller hald fram. Skjulde spelet
    held seg utanfor appkatalogen og framsida.
 2. **Lag figur:** eit stort portrett med fire valgrupper: hud, andlet, hår og
    klede. Eitt valsett blir vist om gongen som små, tydelege figurkort.
