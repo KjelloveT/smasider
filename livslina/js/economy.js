@@ -10,6 +10,8 @@ LL.economy = (function () {
   const WEEKS_PER_MONTH = 4.33;
   const LOW_SPENDING_LIMIT = 600;
   const HIGH_SPENDING_LIMIT = 2200;
+  // Pendling til ein fjern skule kostar eitt energipoeng per månad.
+  const COMMUTE_ENERGY_PER_MONTH = -1;
 
   // Fritidsaktivitetar (månadsutgift + trivsel/mnd)
   function activities() {
@@ -201,8 +203,14 @@ LL.economy = (function () {
       net: incomeTotal - expenseTotal,
       savings: plan.savings || 0,
       wellbeingPerMonth: activityWellbeing(plan),
-      energyPerMonth: jobEnergy(plan) + activityEnergy(plan)
+      energyPerMonth: jobEnergy(plan) + activityEnergy(plan) + commuteEnergy(state)
     };
+  }
+
+  function commuteEnergy(state) {
+    return state.housing === 'heime' && state.hybelAvailable
+      ? COMMUTE_ENERGY_PER_MONTH
+      : 0;
   }
 
   function activityWellbeing(plan) {

@@ -250,15 +250,12 @@ LL.uiSetup = (function () {
       h.className = 'll-line-name';
       const locationFacts = document.createElement('span');
       locationFacts.className = 'll-line-facts';
-      locationFacts.setAttribute('aria-label', 'Utfall for nærskule og hybel denne runden');
-      const nearby = document.createElement('span');
-      nearby.className = 'll-line-fact';
-      const nearbyLabel = document.createElement('span');
-      nearbyLabel.className = 'll-line-fact-label';
-      nearbyLabel.textContent = 'Skule nær heimen';
-      const nearbyValue = document.createElement('strong');
-      nearbyValue.textContent = availability.nearbySchool ? 'Ja denne runden' : 'Nei denne runden';
-      nearby.append(nearbyLabel, nearbyValue);
+      locationFacts.setAttribute('aria-label', 'Reise til skulen og hybel denne runden');
+      const distance = document.createElement('span');
+      distance.className = 'll-line-fact ll-line-fact--distance';
+      distance.textContent = availability.nearbySchool
+        ? 'Skulen er nær nok til at du kan ta buss.'
+        : 'Skulen er litt lenger unna, så du må stå opp tidlegare for å ta buss.';
       const housing = document.createElement('span');
       housing.className = 'll-line-fact';
       const housingLabel = document.createElement('span');
@@ -267,7 +264,7 @@ LL.uiSetup = (function () {
       const housingValue = document.createElement('strong');
       housingValue.textContent = availability.hybelAvailable ? 'Mogleg, valfritt' : 'Ikkje naudsynt';
       housing.append(housingLabel, housingValue);
-      locationFacts.append(nearby, housing);
+      locationFacts.append(distance, housing);
       const blurb = document.createElement('p'); blurb.className = 'll-line-blurb'; blurb.textContent = p.blurb;
       const careers = document.createElement('p'); careers.className = 'll-line-careers';
       const cs = document.createElement('strong'); cs.textContent = 'Kan bli: ';
@@ -420,8 +417,9 @@ LL.uiSetup = (function () {
     const opts = document.createElement('div');
     opts.className = 'll-housing-opts';
 
-    opts.appendChild(housingCard('heime', 'Bu heime',
-      'Ingen husleige, foreldra dekkjer det meste. Lommepengar etter familieøkonomien.', s.housing));
+    const homeDescription = 'Ingen husleige, foreldra dekkjer det meste. Lommepengar etter familieøkonomien.' +
+      (s.hybelAvailable ? ' Vel du å pendle, kan den tidlege bussturen tappe litt energi kvar månad.' : '');
+    opts.appendChild(housingCard('heime', 'Bu heime', homeDescription, s.housing));
 
     if (s.hybelAvailable) {
       opts.appendChild(housingCard('hybel', 'Bu på hybel',

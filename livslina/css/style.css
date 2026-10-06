@@ -115,10 +115,11 @@
 .ll-line-type { align-self: flex-start; padding: 0.2rem 0.55rem; border: 1px solid var(--vp-frame); border-radius: 999px; font-size: 0.76rem; font-weight: 800; }
 .ll-line-type--study { background: var(--vp-sky); }
 .ll-line-type--vocational { background: var(--vp-moss); }
-.ll-line-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.45rem; }
+.ll-line-facts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.45rem; }
 .ll-line-fact { display: flex; flex-direction: column; gap: 0.12rem; min-width: 0; padding: 0.42rem 0.5rem; border-radius: 5px; background: var(--vp-stone); line-height: 1.25; }
 .ll-line-fact-label { font-size: 0.72rem; }
 .ll-line-fact strong { font-size: 0.88rem; }
+.ll-line-fact--distance { line-height: 1.4; }
 .ll-line-blurb, .ll-line-careers { margin: 0; font-size: 0.87rem; line-height: 1.45; }
 .ll-housing-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 0.75rem; margin-top: 0.75rem; }
 
