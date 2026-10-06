@@ -6,7 +6,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ## [1.92] — 2026-10-06
 
 ### Endra
-- **Livslina (skjult prøveutgåve): linjevala forklarer skulevegen.** Større diorama og fargemerke gjer programma tydelegare. Korta viser om eleven kan ta buss eller må stå opp tidlegare; pendling heimefrå tappar eitt energipoeng kvar månad.
+- **Livslina (skjult prøveutgåve): linjevala forklarer skulevegen.** Større diorama, fargemerke og ei eiga overskrift gjer programma tydelegare. Den generelle ingresslinja er teken vekk. Korta viser om eleven kan ta buss eller må stå opp tidlegare; pendling heimefrå tappar eitt energipoeng kvar månad.
 - **Livslina (skjult prøveutgåve): budsjettlinjer og summar går no opp på skjermen.** Totalane byggjer på dei avrunda beløpa som blir viste for kvar post.
 
 ## [1.91] — 2026-10-06
