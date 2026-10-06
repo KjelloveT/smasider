@@ -7,7 +7,8 @@ window.LL = window.LL || {};
 LL.state = (function () {
   'use strict';
 
-  const SAVE_VERSION = 7;
+  const SAVE_VERSION = 8;
+  const WELLBEING_POSITIVE_MULTIPLIER = 0.75;
   const LEGACY_SPENDING_CHOICES = {
     noysam: { eatingOutPerWeek: 0, socialEventsPerMonth: 0, clothingShoppingPerWeek: 0, inGamePurchasesPerWeek: 0 },
     sifo: { eatingOutPerWeek: 1, socialEventsPerMonth: 1, clothingShoppingPerWeek: 100, inGamePurchasesPerWeek: 50 },
@@ -129,6 +130,7 @@ LL.state = (function () {
         savingsIsBsu: false,
         wellbeing: 60,
         energy: 70,
+        social: 50,
         grades: 3.5
       },
       plan: null,          // gjeldande halvårsplan frå budsjettkortet
@@ -181,7 +183,7 @@ LL.state = (function () {
   // Versjon 1 lagra sommaren før vårhalvåret. Versjon 3 la til ny karakterform
   // og rominventar; versjon 4 tok vare på planvala; versjon 5 bytte til konkrete
   // forbruksvanar; versjon 6 la til læreveg og saldo-/gjeldssporing; versjon 7
-  // oppdaterer utstyrsstipendet for aktive løp og eksporterte lagringar.
+  // oppdaterte utstyrsstipendet; versjon 8 la til sosialmålaren.
   function migrateSave(obj) {
     if (!obj || typeof obj !== 'object') return obj;
     const sourceVersion = Number(obj.version) || 0;
@@ -208,6 +210,11 @@ LL.state = (function () {
     if (!obj.possessions || typeof obj.possessions !== 'object') {
       obj.possessions = { moped: false, mopedTrimmed: false, phoneInsurance: false };
     }
+    if (!obj.stats || typeof obj.stats !== 'object') {
+      obj.stats = { money: 0, savings: 0, wellbeing: 60, energy: 70, grades: 3.5 };
+    }
+    const savedSocial = Number(obj.stats.social);
+    obj.stats.social = Number.isFinite(savedSocial) ? LL.util.clamp(savedSocial, 0, 100) : 50;
     if (obj.trainingRoute !== 'apprenticeship' && obj.trainingRoute !== 'school') obj.trainingRoute = 'school';
     if (!Array.isArray(obj.eventLog)) obj.eventLog = [];
     if (!Array.isArray(obj.ledger)) obj.ledger = [];
@@ -260,6 +267,16 @@ LL.state = (function () {
 
   function get() { return save; }
   function stats() { return save.stats; }
+
+  function adjustWellbeing(state, delta) {
+    const target = state || save;
+    const amount = Number(delta);
+    if (!target || !target.stats || !Number.isFinite(amount)) return 0;
+    const before = Number(target.stats.wellbeing) || 0;
+    const adjusted = amount > 0 ? amount * WELLBEING_POSITIVE_MULTIPLIER : amount;
+    target.stats.wellbeing = LL.util.clamp(before + adjusted, 0, 100);
+    return target.stats.wellbeing - before;
+  }
   function rounds() {
     return save && save.program && save.program.type === 'yrkesfag' && save.trainingRoute === 'apprenticeship'
       ? APPRENTICE_ROUNDS
@@ -325,7 +342,7 @@ LL.state = (function () {
     SAVE_VERSION,
     ROUNDS: SCHOOL_ROUNDS,
     newGame, load, get,
-    stats, currentRound, rounds, isLastRound, age, isAdult, recordBalance,
+    stats, adjustWellbeing, currentRound, rounds, isLastRound, age, isAdult, recordBalance,
     seedRng, rng, rngInt, rngPick,
     draw, drawInt, drawPick
   };

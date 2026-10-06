@@ -110,10 +110,11 @@ LL.events = (function () {
       lbl.className = 'll-event-choice-lbl';
       lbl.textContent = ch.label + priceHint(ch, state);
       btn.appendChild(lbl);
-      if (ch.note) {
+      const socialHint = socialEffectHint(ch, state);
+      if (ch.note || socialHint) {
         const note = document.createElement('span');
         note.className = 'll-event-choice-note';
-        note.textContent = ch.note;
+        note.textContent = [ch.note, socialHint].filter(Boolean).join(' · ');
         btn.appendChild(note);
       }
       btn.addEventListener('click', () => choose(ev, ch, state, ctx));
@@ -138,6 +139,14 @@ LL.events = (function () {
     if (e.gainToSavings) return ' — +' + LL.util.kr(e.gainToSavings) + ' på sparinga';
     if (e.savingsToMoney) return ' — flytt opptil ' + LL.util.kr(e.savingsToMoney) + ' frå sparinga';
     return '';
+  }
+
+  function socialEffectHint(ch, state) {
+    const effect = ch.effects && Number(ch.effects.social);
+    if (!(effect > 0)) return '';
+    const current = Number(state.stats.social) || 0;
+    const gain = Math.min(effect, Math.max(0, 100 - current));
+    return gain > 0 ? 'Sosialt +' + gain : 'Sosialmålaren er full';
   }
 
   function choose(ev, ch, state, ctx) {
@@ -201,9 +210,14 @@ LL.events = (function () {
     }
 
     // Stat-deltaer
-    if (e.wellbeing) state.stats.wellbeing = LL.util.clamp(state.stats.wellbeing + e.wellbeing, 0, 100);
-    if (e.energy) state.stats.energy = LL.util.clamp(state.stats.energy + e.energy, 0, 100);
-    if (e.grades) state.stats.grades = LL.util.clamp(state.stats.grades + e.grades, 1, 6);
+    if (typeof e.wellbeing === 'number') LL.state.adjustWellbeing(state, e.wellbeing);
+    if (typeof e.energy === 'number') {
+      const beforeEnergy = state.stats.energy;
+      state.stats.energy = LL.util.clamp(state.stats.energy + e.energy, 0, 100);
+      if (ctx && typeof ctx.energyTotal === 'number') ctx.energyTotal += state.stats.energy - beforeEnergy;
+    }
+    if (typeof e.social === 'number') state.stats.social = LL.util.clamp(state.stats.social + e.social, 0, 100);
+    if (typeof e.grades === 'number') state.stats.grades = LL.util.clamp(state.stats.grades + e.grades, 1, 6);
 
     // Flagg og eigedelar
     if (e.flags) for (const k in e.flags) state.flags[k] = e.flags[k];

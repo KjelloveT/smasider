@@ -27,6 +27,7 @@ LL.uiReport = (function () {
     grid.appendChild(deltaBox('Konto', summary.moneyChange, true));
     grid.appendChild(deltaBox('Sparing', summary.savingsChange || 0, true));
     grid.appendChild(deltaBox('Trivsel', summary.wellbeingChange, false));
+    grid.appendChild(deltaBox('Sosialt', summary.socialChange, false));
     grid.appendChild(deltaBox('Energi', summary.energyChange, false));
     grid.appendChild(deltaBox('Karakter', summary.gradeChange, false, 1));
 
@@ -123,6 +124,7 @@ LL.uiReport = (function () {
     grid.appendChild(bigStat('Utdanning', s.program.name, false, true));
     grid.appendChild(bigStat('Karaktersnitt', s.stats.grades.toFixed(1), false));
     grid.appendChild(bigStat('Trivsel', Math.round(s.stats.wellbeing) + '/100', false));
+    grid.appendChild(bigStat('Sosialt', Math.round(s.stats.social) + '/100', false));
 
     // Figur + diorama
     LL.artRoom.render(document.getElementById('finalDiorama'), s.room, null, 'Rommet ditt ved avslutninga av vidaregåande');

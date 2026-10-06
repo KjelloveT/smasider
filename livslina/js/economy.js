@@ -16,10 +16,10 @@ LL.economy = (function () {
   // Fritidsaktivitetar (månadsutgift + trivsel/mnd)
   function activities() {
     return [
-      { id: 'gym', label: 'Treningssenter', monthly: LL.data.value('leisure.gymYouthPerMonth'), wellbeing: 2.4, energy: 0.4 },
-      { id: 'sport', label: 'Idrettslag', monthly: LL.data.value('leisure.sportsClubPerYear') / 12, wellbeing: 3.0, energy: 0.5 },
-      { id: 'kultur', label: 'Kulturskule/korps', monthly: LL.data.value('leisure.cultureSchoolPerYear') / 12, wellbeing: 2.6, energy: 0.1 },
-      { id: 'gaming', label: 'Gaming', monthly: LL.data.value('leisure.gamingPerMonth'), wellbeing: 0.7, energy: -0.3 }
+      { id: 'gym', label: 'Treningssenter', monthly: LL.data.value('leisure.gymYouthPerMonth'), wellbeing: 2.4, energy: 0.4, social: 0 },
+      { id: 'sport', label: 'Idrettslag', monthly: LL.data.value('leisure.sportsClubPerYear') / 12, wellbeing: 3.0, energy: 0.5, social: 1 },
+      { id: 'kultur', label: 'Kulturskule/korps', monthly: LL.data.value('leisure.cultureSchoolPerYear') / 12, wellbeing: 2.6, energy: 0.1, social: 1 },
+      { id: 'gaming', label: 'Gaming', monthly: LL.data.value('leisure.gamingPerMonth'), wellbeing: 0.7, energy: -0.3, social: 0 }
     ];
   }
 
@@ -203,6 +203,7 @@ LL.economy = (function () {
       net: incomeTotal - expenseTotal,
       savings: plan.savings || 0,
       wellbeingPerMonth: activityWellbeing(plan),
+      socialPerMonth: socialPerMonth(plan),
       energyPerMonth: jobEnergy(plan) + activityEnergy(plan) + commuteEnergy(state)
     };
   }
@@ -225,10 +226,20 @@ LL.economy = (function () {
     (plan.activities || []).forEach(id => { const a = acts.find(x => x.id === id); if (a) e += a.energy; });
     return e;
   }
+
+  function socialPerMonth(plan) {
+    const recurringEvents = Math.max(0, Number(plan.socialEventsPerMonth) || 0) * 0.5;
+    const activitySocial = (plan.activities || []).reduce((total, id) => {
+      const activity = activities().find(item => item.id === id);
+      return total + (activity ? activity.social : 0);
+    }, 0);
+    return Math.min(2, recurringEvents + activitySocial);
+  }
+
   function jobEnergy(plan) {
-    if (plan.jobHours >= 12) return -2;
-    if (plan.jobHours >= 6) return -1;
-    return 1; // roleg halvår gjev overskot
+    if (plan.jobHours >= 12) return -1.5;
+    if (plan.jobHours >= 6) return -0.5;
+    return 1.5; // roleg halvår gjev overskot
   }
 
   // Skatt: gjeve årsakkumulert løn og kor mykje som alt er skattlagt,

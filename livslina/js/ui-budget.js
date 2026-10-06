@@ -59,7 +59,10 @@ LL.uiBudget = (function () {
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'vp-button vp-button--tool';
-      b.textContent = a.label + ' (' + LL.util.kr(a.monthly) + ')';
+      b.textContent = a.label + ' (' + LL.util.kr(a.monthly) + ')' +
+        (a.social > 0
+          ? (LL.state.get().stats.social < 100 ? ' · Sosialt +' + a.social + '/mnd' : ' · Sosialmålaren er full')
+          : '');
       const on = draft.activities.includes(a.id);
       b.setAttribute('aria-pressed', String(on));
       b.disabled = restricted;
@@ -110,6 +113,15 @@ LL.uiBudget = (function () {
     const state = LL.state.get();
     const preview = Object.assign({}, state, { plan: draft, age: LL.state.currentRound().age });
     const b = LL.economy.monthlyBreakdown(preview);
+    const socialHint = document.getElementById('budgetSocialHint');
+    if (socialHint) {
+      const periodMonths = LL.state.currentRound().months || 6;
+      const availableSocial = Math.max(0, 100 - state.stats.social);
+      const projectedSocial = Math.min(availableSocial, b.socialPerMonth * periodMonths);
+      socialHint.textContent = projectedSocial > 0
+        ? 'Denne planen kan gi opptil +' + projectedSocial.toLocaleString('nn-NO', { maximumFractionDigits: 1 }) + ' sosialt dette halvåret.'
+        : 'Sosialmålaren er full; desse budsjettvala gir ikkje fleire poeng no.';
+    }
 
     // Oppstilling
     const inc = document.getElementById('budgetIncome');

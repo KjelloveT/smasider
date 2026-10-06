@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.93] — 2026-10-06
+
+### Endra
+- **Livslina (skjult prøveutgåve): sosial kontakt og balanse blir synlege.** Sosiale val gir poeng på ein eigen målar. Energiutviklinga er justert, karakterpåverknaden byggjer på energien gjennom halvåret, og positive trivselendringar er dempa.
+
 ## [1.92] — 2026-10-06
 
 ### Endra
