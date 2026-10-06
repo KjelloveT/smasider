@@ -3,9 +3,9 @@
 `utdanningsprogram-isometrisk.png` er eit gjennomsiktig 4 × 4-sprite-ark med
 isometriske pikselminiscener. Dei 15 fyrste rutene følgjer rekkjefølgja i
 `data/linjer.json`; ruta nedst til høgre er tom. `js/art-programs.js` koplar
-program-ID til kolonne og rad. Korta viser kvar rute inni eit mindre, sentrert
-utsnitt, slik at alle illustrasjonane får like breie gjennomsiktige margar utan
-ramme eller bakgrunnsfarge.
+program-ID til kolonne og rad. Korta viser kvar rute nesten kant-i-kant, med
+like breie gjennomsiktige margar utan ramme eller bakgrunnsfarge. Den vesle
+margen held illustrasjonane frå kvarandre og let dioramaet fylle meir av kortet.
 
 Biletet er 1341 × 1173 pikslar, har gjennomsiktig bakgrunn og 128 fargar. Det
 komprimerte arket er 262 099 byte.

@@ -2,6 +2,19 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.92",
+      "dato": "2026-10-06",
+      "samandrag": "Linjevala i Livslina har større diorama, tydelegare fagmerke og eit nytt nærskuleutfall kvar gong.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Linjekorta har større illustrasjonar og fargemerke. Dei viser prosentsjansar og trekkjer på nytt om nærskulen finst når linjevalet opnast.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
       "versjon": "1.91",
       "dato": "2026-10-06",
       "samandrag": "Livslina-prøva viser programdiorama med jamne, gjennomsiktige margar.",

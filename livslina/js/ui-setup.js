@@ -8,7 +8,6 @@ LL.uiSetup = (function () {
 
   let stepIndex = 0;
   const STEPS = ['character', 'family', 'line', 'housing'];
-  let pendingHybelRoll = false;
 
   // ── Start-skjerm ──
   function renderStart() {
@@ -225,8 +224,18 @@ LL.uiSetup = (function () {
   function renderLine() {
     const grid = document.getElementById('lineGrid');
     grid.textContent = '';
-    const chosen = LL.state.get().program;
+    const state = LL.state.get();
+    const chosen = state.program;
     LL.data.getPrograms().forEach(p => {
+      const hybelChance = Math.max(0, Math.min(1, Number(p.hybelChance) || 0));
+      const hybelAvailable = LL.state.draw() < hybelChance;
+      const availability = { nearbySchool: !hybelAvailable, hybelAvailable };
+      if (chosen && chosen.id === p.id) {
+        Object.assign(chosen, availability);
+        state.hybelAvailable = hybelAvailable;
+        state.housing = 'heime';
+      }
+
       const card = document.createElement('button');
       card.type = 'button';
       card.className = 'vp-button vp-button--quiet ll-line-card';
@@ -235,9 +244,38 @@ LL.uiSetup = (function () {
 
       const illustration = LL.artProgram.create(p.id);
       const type = document.createElement('span');
-      type.className = 'll-line-type';
+      type.className = 'll-line-type ' + (p.type === 'yrkesfag' ? 'll-line-type--vocational' : 'll-line-type--study');
       type.textContent = p.type === 'yrkesfag' ? 'Yrkesfag' : 'Studieførebuande';
       const h = document.createElement('h4'); h.textContent = p.name;
+      h.className = 'll-line-name';
+      const nearbyPercent = Math.round((1 - hybelChance) * 100);
+      const hybelPercent = Math.round(hybelChance * 100);
+      const locationFacts = document.createElement('span');
+      locationFacts.className = 'll-line-facts';
+      locationFacts.setAttribute('aria-label', 'Sjansar og utfall for nærskule og hybel i denne runden');
+      const nearby = document.createElement('span');
+      nearby.className = 'll-line-fact';
+      const nearbyLabel = document.createElement('span');
+      nearbyLabel.className = 'll-line-fact-label';
+      nearbyLabel.textContent = 'Sjanse for nærskule';
+      const nearbyValue = document.createElement('strong');
+      nearbyValue.textContent = nearbyPercent + ' %';
+      const nearbyResult = document.createElement('span');
+      nearbyResult.className = 'll-line-fact-result';
+      nearbyResult.textContent = availability.nearbySchool ? 'Ja denne runden' : 'Nei denne runden';
+      nearby.append(nearbyLabel, nearbyValue, nearbyResult);
+      const housing = document.createElement('span');
+      housing.className = 'll-line-fact';
+      const housingLabel = document.createElement('span');
+      housingLabel.className = 'll-line-fact-label';
+      housingLabel.textContent = 'Sjanse for hybel';
+      const housingValue = document.createElement('strong');
+      housingValue.textContent = hybelPercent + ' %';
+      const housingResult = document.createElement('span');
+      housingResult.className = 'll-line-fact-result';
+      housingResult.textContent = availability.hybelAvailable ? 'Valfritt denne runden' : 'Ikkje naudsynt';
+      housing.append(housingLabel, housingValue, housingResult);
+      locationFacts.append(nearby, housing);
       const blurb = document.createElement('p'); blurb.className = 'll-line-blurb'; blurb.textContent = p.blurb;
       const careers = document.createElement('p'); careers.className = 'll-line-careers';
       const cs = document.createElement('strong'); cs.textContent = 'Kan bli: ';
@@ -248,8 +286,8 @@ LL.uiSetup = (function () {
         : p.equipmentGrantRate;
       grant.textContent = 'Utstyrsstipend: ' + kr(LL.data.equipmentGrant(grantRate)) + '/år';
 
-      card.append(illustration, type, h, blurb, careers, grant);
-      card.addEventListener('click', () => selectLine(p, grid));
+      card.append(illustration, type, h, locationFacts, blurb, careers, grant);
+      card.addEventListener('click', () => selectLine(p, availability, grid));
       grid.appendChild(card);
     });
     renderGrantAreaChoice(chosen);
@@ -302,17 +340,18 @@ LL.uiSetup = (function () {
     panel.append(label, select, help);
   }
 
-  function selectLine(p, grid) {
+  function selectLine(p, availability, grid) {
     const s = LL.state.get();
     const sameProgram = s.program && s.program.id === p.id;
     const selectedRate = sameProgram
       ? (s.program.selectedEquipmentGrantRate || p.equipmentGrantRate)
       : p.equipmentGrantRate;
-    s.program = { ...p, selectedEquipmentGrantRate: selectedRate };
+    s.program = { ...p, ...availability, selectedEquipmentGrantRate: selectedRate };
+    s.hybelAvailable = availability.hybelAvailable;
+    s.housing = 'heime';
     s.trainingRoute = p.type === 'yrkesfag'
       ? (sameProgram ? s.trainingRoute : null)
       : 'school';
-    pendingHybelRoll = true; // ny roll for hybel når vi går til steg 4
     grid.querySelectorAll('.ll-line-card').forEach(c => c.setAttribute('aria-pressed', 'false'));
     grid.querySelectorAll('.ll-line-card').forEach(c => {
       if (c.querySelector('h4').textContent === p.name) c.setAttribute('aria-pressed', 'true');
@@ -375,11 +414,6 @@ LL.uiSetup = (function () {
   // ── Steg 4: busituasjon ──
   function renderHousing() {
     const s = LL.state.get();
-    if (pendingHybelRoll) {
-      s.hybelAvailable = LL.state.draw() < (s.program.hybelChance || 0);
-      s.housing = 'heime';
-      pendingHybelRoll = false;
-    }
     const wrap = document.getElementById('housingBody');
     wrap.textContent = '';
 

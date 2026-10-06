@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.92] — 2026-10-06
+
+### Endra
+- **Livslina (skjult prøveutgåve): linjevala er lettare å samanlikne.** Større diorama, fargemerka utdanningsretning og prosentsjansar med nytt tilfeldig nærskuleutfall kvar gong linjevalet opnast.
+
 ## [1.91] — 2026-10-06
 
 ### Fiksa

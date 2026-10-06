@@ -88,10 +88,13 @@
 .ll-family-facts li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.45rem 0; border-bottom: 1px solid var(--vp-border); }
 .ll-family-facts li:last-child { border: 0; }
 .ll-reroll { margin-top: 0.5rem; }
-.ll-line-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 0.75rem; }
-.ll-line-card, .ll-housing-card { display: flex; flex-direction: column; align-items: stretch; gap: 0.4rem; min-width: 0; height: auto; padding: 0.85rem; white-space: normal; text-align: left; }
+.ll-line-heading { width: fit-content; max-width: 100%; margin: 0 auto 1rem; padding: 0.6rem 1.1rem; text-align: center; }
+.ll-line-heading h2 { margin: 0; font-size: clamp(1.1rem, 2vw, 1.4rem); }
+.ll-line-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 0.75rem; align-items: stretch; }
+.ll-line-card, .ll-housing-card { display: flex; flex-direction: column; align-items: stretch; gap: 0.55rem; min-width: 0; height: auto; padding: 0.75rem; white-space: normal; text-align: left; }
+.ll-line-card { background: var(--vp-paper); font-weight: 400; }
 .ll-program-sprite { position: relative; display: block; width: 100%; aspect-ratio: 1341 / 1173; overflow: hidden; }
-.ll-program-sprite::before { position: absolute; inset: 12.5%; content: ""; background-image: url("../assets/programs/utdanningsprogram-isometrisk.png"); background-repeat: no-repeat; background-size: 400% 400%; background-position: var(--sprite-x) var(--sprite-y); image-rendering: pixelated; }
+.ll-program-sprite::before { position: absolute; inset: 3.5%; content: ""; background-image: url("../assets/programs/utdanningsprogram-isometrisk.png"); background-repeat: no-repeat; background-size: 400% 400%; background-position: var(--sprite-x) var(--sprite-y); image-rendering: pixelated; }
 .ll-line-grant-choice { margin-top: 1rem; padding: 1rem; }
 .ll-line-grant-choice[hidden] { display: none; }
 .ll-line-grant-choice label { display: block; margin-bottom: 0.4rem; font-weight: 700; }
@@ -99,6 +102,8 @@
 .ll-line-grant-help { margin: 0.45rem 0 0; font-size: 0.82rem; line-height: 1.4; }
 .ll-line-card[aria-pressed="true"], .ll-housing-card[aria-pressed="true"] { background: var(--vp-honey); }
 .ll-line-card h4, .ll-housing-card h4 { margin: 0; }
+.ll-line-card .ll-line-name { font-size: clamp(1.08rem, 1.45vw, 1.3rem); font-weight: 850; line-height: 1.2; }
+.ll-line-name::after { display: block; width: 2.4rem; height: 3px; margin-top: 0.38rem; border-radius: 2px; background: var(--vp-frame); content: ""; }
 .ll-line-route { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--vp-forest); }
 .ll-line-route[hidden] { display: none; }
 .ll-line-route > h3 { margin: 0 0 0.35rem; }
@@ -107,7 +112,14 @@
 .ll-route-card { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; height: auto; padding: 1rem; text-align: left; white-space: normal; }
 .ll-route-card[aria-pressed="true"] { background: var(--vp-honey); }
 .ll-route-card span { font-weight: 400; line-height: 1.45; }
-.ll-line-type { align-self: flex-start; padding: 0.18rem 0.45rem; border: 1px solid currentColor; border-radius: 999px; font-size: 0.72rem; font-weight: 700; }
+.ll-line-type { align-self: flex-start; padding: 0.2rem 0.55rem; border: 1px solid var(--vp-frame); border-radius: 999px; font-size: 0.76rem; font-weight: 800; }
+.ll-line-type--study { background: var(--vp-sky); }
+.ll-line-type--vocational { background: var(--vp-moss); }
+.ll-line-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.45rem; }
+.ll-line-fact { display: flex; flex-direction: column; gap: 0.12rem; min-width: 0; padding: 0.42rem 0.5rem; border-radius: 5px; background: var(--vp-stone); line-height: 1.25; }
+.ll-line-fact-label { font-size: 0.72rem; }
+.ll-line-fact strong { font-size: 0.88rem; }
+.ll-line-fact-result { font-size: 0.72rem; font-weight: 700; }
 .ll-line-blurb, .ll-line-careers { margin: 0; font-size: 0.87rem; line-height: 1.45; }
 .ll-housing-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 0.75rem; margin-top: 0.75rem; }
 
