@@ -61,7 +61,14 @@ window.LivslinaCharacterArt = (() => {
     ctx.setTransform(scaleX, 0, 0, scaleY, 0, 0);
     ctx.imageSmoothingEnabled = false;
     for (const name of model.layerOrder) {
-      if (visible[name === "hands" ? "body" : name]) ctx.drawImage(layers[name], 0, 0, model.assetWidth, model.assetHeight);
+      if (!visible[name === "hands" ? "body" : name]) continue;
+      if (name === "hands") {
+        const clothingId = index("clothes") + 1;
+        const offsetY = model.handYOffsetByClothing[clothingId] || 0;
+        ctx.drawImage(layers[name], 0, offsetY * model.scale, model.assetWidth, model.assetHeight);
+      } else {
+        ctx.drawImage(layers[name], 0, 0, model.assetWidth, model.assetHeight);
+      }
     }
     if (options.anchors) overlay(ctx);
     return true;
