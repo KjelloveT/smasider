@@ -160,7 +160,8 @@ LL.sim = (function () {
       wellbeingChange: state.stats.wellbeing - ctx.startWellbeing,
       socialChange: state.stats.social - ctx.startSocial,
       energyChange: state.stats.energy - ctx.startEnergy,
-      gradeChange: dg,
+      gradeChange: state.stats.grades - gradeBefore,
+      stats: Object.assign({}, state.stats),
       studyGradeChange: studyGain,
       eventLog: ctx.eventLog,
       factoid: factoid(state, ctx)

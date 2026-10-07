@@ -3,6 +3,12 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.96] — 2026-10-07
+
+### Endra
+- **Livslina (skjult prøveutgåve): oppgjera viser både nivået etter halvåret og endringa gjennom perioden.** Barometerpilene er større, og raude tal har betre kontrast.
+- **Vekedagsplanen reknar mykje jobb i halve timar.** 12 timar arbeid i veka blir vist som 2,5 timar per kvardag.
+
 ## [1.95] — 2026-10-07
 
 ### Endra

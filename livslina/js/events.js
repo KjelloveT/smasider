@@ -153,7 +153,7 @@ LL.events = (function () {
       arrow.className = 'll-event-meter-trend is-' + direction;
       arrow.setAttribute('aria-hidden', 'true');
       arrow.dataset.icon = direction === 'up' ? 'arrowUp' : (direction === 'down' ? 'arrowDown' : 'arrowRight');
-      arrow.dataset.iconSize = '16';
+      arrow.dataset.iconSize = '24';
       const signal = document.createElement('span');
       signal.className = 'll-event-meter-status';
       signal.textContent = meterStatus(row.key, value, delta);

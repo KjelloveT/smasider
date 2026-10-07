@@ -224,6 +224,7 @@
     <h2 class="heading3 no-mt" id="budgetRound">Planlegg halvåret</h2>
     <div class="ll-budget-grid">
       <div class="vp-panel vp-panel--plain">
+        <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skulen</legend><div class="ll-btn-row" id="budgetJob" role="group"></div></fieldset>
         <fieldset class="vp-field ll-ctrl ll-weekday-plan">
           <legend>Planlegg ein vanleg vekedag</legend>
           <p class="ll-note">Korleis ser ein vanleg vekedag ut? Du kan ikkje gjere noko med 8t kvile og 8t skule. Dei er låst. Men du kan sjølv bestemme kva du skal gjere dei siste 8 timane i døgnet.</p>
@@ -231,10 +232,10 @@
             <div><span>Kvile og søvn</span><strong>8 t · låst</strong></div>
             <div><span>Skule</span><strong>8 t · låst</strong></div>
           </div>
+          <p id="budgetJobTimeImpact" class="ll-job-time-impact" role="status" aria-live="polite">Ingen jobb tek tid frå denne kvardagen.</p>
           <div id="budgetWeekdayControls" class="ll-time-list"></div>
           <p id="budgetFreeTime" class="ll-time-remaining" aria-live="polite">Du har 8 av 8 timar att til eigne val denne kvardagen.</p>
         </fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skulen</legend><div class="ll-btn-row" id="budgetJob" role="group"></div><p class="ll-note">Mykje jobb tek tid frå dei andre aktivitetane på kvardagar.</p></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Fritidsaktivitetar</legend><div class="ll-btn-row" id="budgetActivities" role="group"></div></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Kor ofte handlar du i skulekantina?</legend><div class="ll-btn-row" id="budgetCanteen" role="group" aria-label="Kantinekjøp per veke"></div></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brus eller energidrikk kjøper du?</legend><div class="ll-btn-row" id="budgetDrinks" role="group" aria-label="Kjøp av brus eller energidrikk per veke"></div></fieldset>
