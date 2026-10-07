@@ -5,7 +5,7 @@
   const project = new URL('../', document.currentScript.src);
   let registryPromise;
   function loadRegistry() {
-    if (!registryPromise) registryPromise = fetch(new URL('json/vyrdepil-design.json?v=2', project)).then(response => {
+    if (!registryPromise) registryPromise = fetch(new URL('json/vyrdepil-design.json?v=3', project)).then(response => {
       if (!response.ok) throw new Error('Designregisteret kunne ikkje lastast');
       return response.json();
     }).catch(error => { registryPromise = null; throw error; });
@@ -34,6 +34,14 @@
     const background = registry.backgrounds.find(item => item.id === assignment?.backgroundId);
     if (!background || background.assignedTo !== appId) throw new Error(`Appen manglar ein reservert bakgrunn: ${appId}`);
     root.style.setProperty('--vp-landscape', `url("${new URL(background.file, project)}")`);
+    const backgroundSetId = root.dataset.vpBackgroundSet || appId;
+    if (registry.siteBackgroundSets?.[backgroundSetId] && global.VyrdepilHomeBackground?.apply) {
+      try {
+        await global.VyrdepilHomeBackground.apply(backgroundSetId, root);
+      } catch (error) {
+        console.warn('Brukar den faste appbakgrunnen som reserve:', error.message);
+      }
+    }
     const logo = registry.logo.files[appId];
     if (logo) root.querySelectorAll('[data-vp-app-logo]').forEach(image => {
       if (image.tagName === 'IMG') image.src = new URL(logo, project).href;

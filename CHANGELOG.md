@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.99] — 2026-10-08
+
+### Endra
+- **Duldord og Heimsank skiftar bakgrunn etter årstid og tid på døgnet.** Duldord brukar skulegarden, medan Heimsank brukar flyfotoet.
+
 ## [1.98] — 2026-10-07
 
 ### Endra

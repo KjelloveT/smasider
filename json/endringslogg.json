@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.99",
+      "dato": "2026-10-08",
+      "samandrag": "Duldord og Heimsank får bakgrunnar som følgjer årstid og tid på døgnet.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Duldord og Heimsank",
+          "tekst": "Duldord brukar skulegarden, medan Heimsank brukar flyfotoet; bakgrunnane skiftar med årstid og tid på døgnet."
+        }
+      ]
+    },
+    {
       "versjon": "1.98",
       "dato": "2026-10-07",
       "samandrag": "Livslina er merkt for ungdomsskulen, sidan simulatoren førebur elevane på vidaregåande.",
