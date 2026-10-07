@@ -1,13 +1,14 @@
 {
   "app": "livslina",
   "version": 1,
-  "updated": "2026-10-06",
+  "updated": "2026-10-07",
   "source": "https://www.vilbli.no/nb/no/a/utdanningsprogram-og-programomrader-6",
   "sourceNote": "Namn på utdanningsprogram henta frå vilbli.no. Utstyrsstipend-satsane for 2026–2027 følgjer dei offisielle kategoriane frå Kunnskapsdepartementet (sjå grunndata.json grants.equipmentGrantPerYear). Der satsen varierer med programområde, viser kortet kvar særregelen gjeld.",
   "programs": [
     {
       "id": "studiespes",
       "name": "Studiespesialisering",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.st/studiespesialisering",
       "type": "studieforberedande",
       "equipmentGrantRate": "rate1",
       "equipmentGrantVariants": [
@@ -22,6 +23,7 @@
     {
       "id": "idrettsfag",
       "name": "Idrettsfag",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.id/idrettsfag",
       "type": "studieforberedande",
       "equipmentGrantRate": "rate4",
       "hybelChance": 0.45,
@@ -33,6 +35,7 @@
     {
       "id": "musikk-dans-drama",
       "name": "Musikk, dans og drama",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.md/musikk-dans-og-drama",
       "type": "studieforberedande",
       "equipmentGrantRate": "rate1",
       "equipmentGrantVariants": [
@@ -47,6 +50,7 @@
     {
       "id": "kunst-design-arkitektur",
       "name": "Kunst, design og arkitektur",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.kd/kunst-design-og-arkitektur",
       "type": "studieforberedande",
       "equipmentGrantRate": "rate2",
       "hybelChance": 0.35,
@@ -58,6 +62,7 @@
     {
       "id": "medier-kommunikasjon",
       "name": "Medier og kommunikasjon",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.me/medier-og-kommunikasjon",
       "type": "studieforberedande",
       "equipmentGrantRate": "rate1",
       "hybelChance": 0.25,
@@ -69,6 +74,7 @@
     {
       "id": "bygg-anlegg",
       "name": "Bygg- og anleggsteknikk",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.ba/bygg-og-anleggsteknikk",
       "type": "yrkesfag",
       "equipmentGrantRate": "rate5",
       "hybelChance": 0.4,
@@ -80,6 +86,7 @@
     {
       "id": "elektro",
       "name": "Elektro og datateknologi",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.el/elektro-og-datateknologi",
       "type": "yrkesfag",
       "equipmentGrantRate": "rate3",
       "hybelChance": 0.4,
@@ -91,6 +98,7 @@
     {
       "id": "teknologi-industri",
       "name": "Teknologi- og industrifag",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.tp/teknologi-og-industrifag",
       "type": "yrkesfag",
       "equipmentGrantRate": "rate3",
       "equipmentGrantVariants": [
@@ -105,6 +113,7 @@
     {
       "id": "helse-oppvekst",
       "name": "Helse- og oppvekstfag",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.hs/helse-og-oppvekstfag",
       "type": "yrkesfag",
       "equipmentGrantRate": "rate2",
       "hybelChance": 0.3,
@@ -116,6 +125,7 @@
     {
       "id": "restaurant-mat",
       "name": "Restaurant- og matfag",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.rm/restaurant-og-matfag",
       "type": "yrkesfag",
       "equipmentGrantRate": "rate5",
       "hybelChance": 0.35,
@@ -127,6 +137,7 @@
     {
       "id": "naturbruk",
       "name": "Naturbruk",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.na/naturbruk",
       "type": "yrkesfag",
       "equipmentGrantRate": "rate5",
       "equipmentGrantVariants": [
@@ -141,6 +152,7 @@
     {
       "id": "salg-service-reiseliv",
       "name": "Salg, service og reiseliv",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.sr/salg-service-og-reiseliv",
       "type": "yrkesfag",
       "equipmentGrantRate": "rate2",
       "hybelChance": 0.2,
@@ -152,6 +164,7 @@
     {
       "id": "frisor-blomster-interior",
       "name": "Frisør, blomster, interiør og eksponeringsdesign",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.fd/frisor-blomster-interior-og-eksponeringsdesign",
       "type": "yrkesfag",
       "equipmentGrantRate": "rate3",
       "equipmentGrantVariants": [
@@ -166,6 +179,7 @@
     {
       "id": "handverk-design",
       "name": "Håndverk, design og produktutvikling",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.dt/handverk-design-og-produktutvikling",
       "type": "yrkesfag",
       "equipmentGrantRate": "rate5",
       "hybelChance": 0.4,
@@ -177,6 +191,7 @@
     {
       "id": "it-medieproduksjon",
       "name": "Informasjonsteknologi og medieproduksjon",
+      "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.im/informasjonsteknologi-og-medieproduksjon",
       "type": "yrkesfag",
       "equipmentGrantRate": "rate2",
       "hybelChance": 0.25,

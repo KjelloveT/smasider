@@ -8,7 +8,6 @@ LL.uiSetup = (function () {
 
   let stepIndex = 0;
   const STEPS = ['character', 'family', 'line', 'housing'];
-  let pendingHybelRoll = false;
 
   // ── Start-skjerm ──
   function renderStart() {
@@ -225,8 +224,20 @@ LL.uiSetup = (function () {
   function renderLine() {
     const grid = document.getElementById('lineGrid');
     grid.textContent = '';
-    const chosen = LL.state.get().program;
+    const state = LL.state.get();
+    const chosen = state.program;
     LL.data.getPrograms().forEach(p => {
+      const hybelChance = Math.max(0, Math.min(1, Number(p.hybelChance) || 0));
+      const hybelAvailable = LL.state.draw() < hybelChance;
+      const availability = { nearbySchool: !hybelAvailable, hybelAvailable };
+      if (chosen && chosen.id === p.id) {
+        Object.assign(chosen, availability);
+        state.hybelAvailable = hybelAvailable;
+        state.housing = 'heime';
+      }
+
+      const cardWrap = document.createElement('article');
+      cardWrap.className = 'll-line-card-shell';
       const card = document.createElement('button');
       card.type = 'button';
       card.className = 'vp-button vp-button--quiet ll-line-card';
@@ -235,9 +246,27 @@ LL.uiSetup = (function () {
 
       const illustration = LL.artProgram.create(p.id);
       const type = document.createElement('span');
-      type.className = 'll-line-type';
+      type.className = 'll-line-type ' + (p.type === 'yrkesfag' ? 'll-line-type--vocational' : 'll-line-type--study');
       type.textContent = p.type === 'yrkesfag' ? 'Yrkesfag' : 'Studieførebuande';
       const h = document.createElement('h4'); h.textContent = p.name;
+      h.className = 'll-line-name';
+      const locationFacts = document.createElement('span');
+      locationFacts.className = 'll-line-facts';
+      locationFacts.setAttribute('aria-label', 'Reise til skulen og hybel denne runden');
+      const distance = document.createElement('span');
+      distance.className = 'll-line-fact ll-line-fact--distance';
+      distance.textContent = availability.nearbySchool
+        ? 'Skulen er nær nok til at du kan ta buss.'
+        : 'Skulen er litt lenger unna, så du må stå opp tidlegare for å ta buss.';
+      const housing = document.createElement('span');
+      housing.className = 'll-line-fact';
+      const housingLabel = document.createElement('span');
+      housingLabel.className = 'll-line-fact-label';
+      housingLabel.textContent = 'Hybel';
+      const housingValue = document.createElement('strong');
+      housingValue.textContent = availability.hybelAvailable ? 'Mogleg, valfritt' : 'Ikkje naudsynt';
+      housing.append(housingLabel, housingValue);
+      locationFacts.append(distance, housing);
       const blurb = document.createElement('p'); blurb.className = 'll-line-blurb'; blurb.textContent = p.blurb;
       const careers = document.createElement('p'); careers.className = 'll-line-careers';
       const cs = document.createElement('strong'); cs.textContent = 'Kan bli: ';
@@ -248,10 +277,23 @@ LL.uiSetup = (function () {
         : p.equipmentGrantRate;
       grant.textContent = 'Utstyrsstipend: ' + kr(LL.data.equipmentGrant(grantRate)) + '/år';
 
-      card.append(illustration, type, h, blurb, careers, grant);
-      card.addEventListener('click', () => selectLine(p, grid));
-      grid.appendChild(card);
+      card.append(illustration, type, h, locationFacts, blurb, careers, grant);
+      card.addEventListener('click', () => selectLine(p, availability, grid));
+      const vilbli = document.createElement('a');
+      vilbli.className = 'vp-button vp-button--quiet ll-vilbli-link';
+      vilbli.href = p.vilbliUrl;
+      vilbli.target = '_blank';
+      vilbli.rel = 'noopener noreferrer';
+      const externalIcon = document.createElement('span');
+      externalIcon.dataset.icon = 'externalLink';
+      externalIcon.dataset.iconSize = '15';
+      externalIcon.setAttribute('aria-hidden', 'true');
+      vilbli.append(externalIcon, document.createTextNode('Les om linja på Vilbli.no'));
+      vilbli.setAttribute('aria-label', 'Les om ' + p.name + ' på Vilbli.no, opnar i ny fane');
+      cardWrap.append(card, vilbli);
+      grid.appendChild(cardWrap);
     });
+    LL.util.hydrate(grid);
     renderGrantAreaChoice(chosen);
     renderTrainingRoute(chosen);
   }
@@ -302,20 +344,20 @@ LL.uiSetup = (function () {
     panel.append(label, select, help);
   }
 
-  function selectLine(p, grid) {
+  function selectLine(p, availability, grid) {
     const s = LL.state.get();
     const sameProgram = s.program && s.program.id === p.id;
     const selectedRate = sameProgram
       ? (s.program.selectedEquipmentGrantRate || p.equipmentGrantRate)
       : p.equipmentGrantRate;
-    s.program = { ...p, selectedEquipmentGrantRate: selectedRate };
+    s.program = { ...p, ...availability, selectedEquipmentGrantRate: selectedRate };
+    s.hybelAvailable = availability.hybelAvailable;
+    s.housing = 'heime';
     s.trainingRoute = p.type === 'yrkesfag'
       ? (sameProgram ? s.trainingRoute : null)
       : 'school';
-    pendingHybelRoll = true; // ny roll for hybel når vi går til steg 4
-    grid.querySelectorAll('.ll-line-card').forEach(c => c.setAttribute('aria-pressed', 'false'));
-    grid.querySelectorAll('.ll-line-card').forEach(c => {
-      if (c.querySelector('h4').textContent === p.name) c.setAttribute('aria-pressed', 'true');
+    grid.querySelectorAll('.ll-line-card').forEach(card => {
+      card.setAttribute('aria-pressed', String(card.dataset.programId === p.id));
     });
     renderGrantAreaChoice(s.program);
     renderTrainingRoute(p);
@@ -332,7 +374,7 @@ LL.uiSetup = (function () {
     }
     panel.hidden = false;
     const heading = document.createElement('h3');
-    heading.className = 'heading4';
+    heading.className = 'heading4 ll-route-heading';
     heading.textContent = 'Kva vil du gjere etter VG2?';
     const intro = document.createElement('p');
     intro.className = 'll-note';
@@ -375,11 +417,6 @@ LL.uiSetup = (function () {
   // ── Steg 4: busituasjon ──
   function renderHousing() {
     const s = LL.state.get();
-    if (pendingHybelRoll) {
-      s.hybelAvailable = LL.state.draw() < (s.program.hybelChance || 0);
-      s.housing = 'heime';
-      pendingHybelRoll = false;
-    }
     const wrap = document.getElementById('housingBody');
     wrap.textContent = '';
 
@@ -394,8 +431,9 @@ LL.uiSetup = (function () {
     const opts = document.createElement('div');
     opts.className = 'll-housing-opts';
 
-    opts.appendChild(housingCard('heime', 'Bu heime',
-      'Ingen husleige, foreldra dekkjer det meste. Lommepengar etter familieøkonomien.', s.housing));
+    const homeDescription = 'Ingen husleige, foreldra dekkjer det meste. Lommepengar etter familieøkonomien.' +
+      (s.hybelAvailable ? ' Vel du å pendle, kan den tidlege bussturen tappe litt energi kvar månad.' : '');
+    opts.appendChild(housingCard('heime', 'Bu heime', homeDescription, s.housing));
 
     if (s.hybelAvailable) {
       opts.appendChild(housingCard('hybel', 'Bu på hybel',

@@ -15,7 +15,6 @@
 
 <div class="page-wrapper">
 <main class="vp-shell main-content" id="main">
-  <p class="vp-game-description">Eit spel om økonomi, skulekvardag og vala du tek gjennom vidaregåande.</p>
 
   <p id="bootError" class="vp-panel vp-panel--plain ll-boot-error" role="alert" hidden>
     Klarte ikkje laste speldata. Sjekk at du opnar sida via ein tenar (ikkje som fil).
@@ -132,12 +131,13 @@
     </div>
 
     <!-- Steg 3: linje -->
-    <div id="wpanel-line" class="ll-wizard-panel vp-panel vp-panel--plain">
-      <h2 class="heading3 no-mt">Vel utdanningsprogram</h2>
-      <p>Alle 15 programma på vidaregåande. Linja formar utstyrsstipend, kvardag og kva du kan bli — men ingen av dei er «feil».</p>
+    <div id="wpanel-line" class="ll-wizard-panel">
+      <div class="vp-panel vp-panel--plain ll-line-heading">
+        <h2 class="heading3 no-mt">Vel utdanningsprogram</h2>
+      </div>
       <div class="ll-line-grid" id="lineGrid"></div>
       <div class="ll-line-grant-choice vp-panel vp-panel--plain" id="lineGrantChoice" hidden></div>
-      <div id="lineRoute" class="ll-line-route" hidden></div>
+      <div id="lineRoute" class="ll-line-route vp-panel vp-panel--soft" hidden></div>
     </div>
 
     <!-- Steg 4: busituasjon -->
@@ -224,7 +224,17 @@
     <h2 class="heading3 no-mt" id="budgetRound">Planlegg halvåret</h2>
     <div class="ll-budget-grid">
       <div class="vp-panel vp-panel--plain">
-        <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skulen</legend><div class="ll-btn-row" id="budgetJob" role="group"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl ll-weekday-plan">
+          <legend>Planlegg ein vanleg vekedag</legend>
+          <p class="ll-note">Korleis ser ein vanleg vekedag ut? Du kan ikkje gjere noko med 8t kvile og 8t skule. Dei er låst. Men du kan sjølv bestemme kva du skal gjere dei siste 8 timane i døgnet.</p>
+          <div class="ll-weekday-locked" aria-label="Låst tid kvar vekedag">
+            <div><span>Kvile og søvn</span><strong>8 t · låst</strong></div>
+            <div><span>Skule</span><strong>8 t · låst</strong></div>
+          </div>
+          <div id="budgetWeekdayControls" class="ll-time-list"></div>
+          <p id="budgetFreeTime" class="ll-time-remaining" aria-live="polite">Du har 8 av 8 timar att til eigne val denne kvardagen.</p>
+        </fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skulen</legend><div class="ll-btn-row" id="budgetJob" role="group"></div><p class="ll-note">Mykje jobb tek tid frå dei andre aktivitetane på kvardagar.</p></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Fritidsaktivitetar</legend><div class="ll-btn-row" id="budgetActivities" role="group"></div></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Kor ofte handlar du i skulekantina?</legend><div class="ll-btn-row" id="budgetCanteen" role="group" aria-label="Kantinekjøp per veke"></div></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brus eller energidrikk kjøper du?</legend><div class="ll-btn-row" id="budgetDrinks" role="group" aria-label="Kjøp av brus eller energidrikk per veke"></div></fieldset>
@@ -237,23 +247,25 @@
         <fieldset class="vp-field ll-ctrl"><legend>Fast sparing</legend><div class="ll-btn-row" id="budgetSavings" role="group"></div></fieldset>
       </div>
 
-      <div class="vp-panel vp-panel--soft">
+      <div class="vp-panel vp-panel--soft ll-budget-summary">
         <h3 class="heading4 no-mt">Månadsbudsjett</h3>
-        <div class="ll-budget-cols">
-          <div>
-            <p class="ll-stat-lbl"><span data-icon="arrowDown" data-icon-size="14"></span> Inn</p>
-            <div id="budgetIncome"></div>
-            <div class="ll-budget-row ll-budget-sum"><span>Sum inn</span><strong id="budgetIncomeTotal">0 kr</strong></div>
-          </div>
-          <div>
-            <p class="ll-stat-lbl"><span data-icon="arrowUp" data-icon-size="14"></span> Ut</p>
-            <div id="budgetExpense"></div>
-            <div class="ll-budget-row ll-budget-sum"><span>Sum ut</span><strong id="budgetExpenseTotal">0 kr</strong></div>
-          </div>
+        <div class="ll-budget-totals">
+          <div><span>Sum inn</span><strong id="budgetIncomeTotal">0 kr</strong></div>
+          <div><span>Sum ut</span><strong id="budgetExpenseTotal">0 kr</strong></div>
         </div>
         <div class="vp-panel vp-panel--plain ll-stat ll-stat--net">
           <div class="ll-stat-lbl">Netto per månad</div>
           <div class="ll-stat-val" id="budgetNet">0 kr/mnd</div>
+        </div>
+        <div class="ll-budget-cols">
+          <div>
+            <p class="ll-stat-lbl"><span data-icon="arrowDown" data-icon-size="14"></span> Inn</p>
+            <div id="budgetIncome"></div>
+          </div>
+          <div>
+            <p class="ll-stat-lbl"><span data-icon="arrowUp" data-icon-size="14"></span> Ut</p>
+            <div id="budgetExpense"></div>
+          </div>
         </div>
         <p class="ll-note" id="budgetSavingsLine"></p>
         <p class="ll-note ll-debt-message" id="budgetDebtMessage" hidden></p>
@@ -275,6 +287,10 @@
         <div>
           <div class="ll-pb-month" id="pbMonth">—</div>
           <p class="ll-note" id="pbMonthProgress"></p>
+          <div class="ll-pb-time" aria-label="Tida går gjennom månaden">
+            <div class="ll-pb-time-heading"><strong id="pbTimeStatus">Gjer klar månaden</strong><span id="pbDayCount" aria-hidden="true">Dag 0 av 28</span></div>
+            <progress id="pbTimeProgress" max="28" value="0" aria-label="Framdrift gjennom månaden"></progress>
+          </div>
           <section class="ll-pb-calendar" aria-label="Kalender for halvåret">
             <div class="ll-pb-calendar-heading"><strong>Kalender for halvåret</strong><span id="pbCalendarStatus" aria-live="polite">Ventar på skulestart</span></div>
             <div class="ll-pb-calendar-months" id="pbCalendarMonths" role="list" aria-label="Månadene i halvåret"></div>
@@ -408,6 +424,10 @@
     <p class="ll-event-meta" id="eventMeta"></p>
     <h2 id="eventTitle" class="heading3 no-mt"></h2>
     <p id="eventText"></p>
+    <section class="ll-event-meter-panel" aria-label="Målarane dine før valet">
+      <h3 class="heading4">Slik ligg du an</h3>
+      <div id="eventMeters" class="ll-event-meters"></div>
+    </section>
     <div class="ll-event-choices" id="eventChoices"></div>
   </div>
 </div>

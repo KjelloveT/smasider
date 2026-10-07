@@ -1,14 +1,14 @@
 {
   "app": "livslina",
   "version": 1,
-  "updated": "2026-10-05",
+  "updated": "2026-10-07",
   "_schema": {
     "note": "Hendingskort for fase 1. Kvart kort: id, title, text, art (vignett-nøkkel), focus, when (vilkår), weight, once, positive, forced, kind. Val: choices[] med label, effects og note.",
     "when": "moped(bool), noMoped(bool), housing('hybel'), programType('yrkesfag'|'studieforberedande'), route('school'|'apprenticeship'), moneyAtMost(int), flag(str), notFlag(str), minAge(int), overFrikort(bool)",
     "kind": "'term' (skulehalvår) eller 'summer' (sommar-mellomspel). Standard: term.",
     "focus": "Kort merkelapp for økonomi, trivsel, overskot eller skulearbeid.",
     "forced": "true = alltid vist når vilkåra er oppfylte (styrt særhending). Andre valkort blir trekte til spelaren har 4–5 avgjerder per skulehalvår.",
-    "effects": "cost/gain (direkte kr), costKey/gainKey (nøkkel i grunndata.json), costFromSavings, gainToSavings, savingsToMoney, wellbeing/energy/grades (delta), flags({k:v}), possessions({k:v}), wageHoursGain (timar × gjeldande timeløn), insuranceApplies(bool)",
+    "effects": "cost/gain (direkte kr), costKey/gainKey (nøkkel i grunndata.json), costFromSavings, gainToSavings, savingsToMoney, wellbeing/energy/social/grades (delta), flags({k:v}), possessions({k:v}), wageHoursGain (timar × gjeldande timeløn), insuranceApplies(bool)",
     "debtTrigger": "true = sjekk om kortet skal visast straks saldoen går under moneyAtMost, også midt i eit halvår"
   },
   "events": [
@@ -67,7 +67,7 @@
       "once": true,
       "positive": false,
       "choices": [
-        { "label": "Betal og bli med", "effects": { "costKey": "events.classTripContribution", "wellbeing": 3 } },
+        { "label": "Betal og bli med", "effects": { "costKey": "events.classTripContribution", "wellbeing": 3, "social": 1.25 } },
         { "label": "Stå over", "effects": { "wellbeing": -6 }, "note": "Sparar pengar, men går glipp av noko." }
       ]
     },
@@ -138,7 +138,7 @@
       "weight": 2,
       "positive": true,
       "choices": [
-        { "label": "Bli med", "effects": { "costKey": "leisure.concertTicket", "wellbeing": 6 } },
+        { "label": "Bli med", "effects": { "costKey": "leisure.concertTicket", "wellbeing": 6, "social": 1.25 } },
         { "label": "Stå over denne gongen", "effects": { "wellbeing": -4 } }
       ]
     },
@@ -214,8 +214,8 @@
       "forced": true,
       "positive": false,
       "choices": [
-        { "label": "Bli med på bussen", "effects": { "flags": { "russBuss": true }, "wellbeing": 8 }, "note": "Stor kostnad fordelt over halvåra fram til russetida." },
-        { "label": "Heller rimeleg russetid", "effects": { "flags": { "russMinimal": true } }, "note": "Dress og litt utstyr til slutt — mykje billegare." },
+        { "label": "Bli med på bussen", "effects": { "flags": { "russBuss": true }, "wellbeing": 8, "social": 1.25 }, "note": "Stor kostnad fordelt over halvåra fram til russetida." },
+        { "label": "Heller rimeleg russetid", "effects": { "flags": { "russMinimal": true }, "social": 1.25 }, "note": "Dress og litt utstyr til slutt — mykje billegare." },
         { "label": "Droppe heile russetida", "effects": { "wellbeing": -5, "flags": { "russDropp": true } } }
       ]
     },
@@ -300,15 +300,17 @@
     {
       "id": "klassekveld-vg1h",
       "title": "Klassekveld",
-      "text": "Nokre i klassen vil møtast etter skuletid. Dei foreslår mat ute, men det går òg an å finne på noko billegare saman.",
+      "text": "Nokre i klassen vil møtast etter skuletid. De kan bruke pengar på mat ute, finne på noko heime eller setje av kvelden til skulearbeid.",
       "art": "star",
       "focus": "Økonomi og trivsel",
       "when": { "rounds": ["vg1h"] },
       "weight": 2,
       "once": true,
       "choices": [
-        { "label": "Bli med og kjøp mat", "effects": { "costKey": "events.classMeal", "wellbeing": 5 } },
-        { "label": "Foreslå ein billegare møteplass", "effects": { "wellbeing": 3 }, "note": "De får vere saman utan at det kostar så mykje." }
+        { "label": "Bli med og kjøp mat", "effects": { "costKey": "events.classMeal", "wellbeing": 5, "social": 1.25 } },
+        { "label": "Ha det kjekt med venene heime", "effects": { "wellbeing": 3, "social": 1.25 }, "note": "De får vere saman utan å bruke mykje pengar." },
+        { "label": "Studer åleine", "effects": { "wellbeing": -1, "energy": -2, "grades": 0.1 }, "note": "Du brukar kvelden på å arbeide konsentrert med skulefaga." },
+        { "label": "Inviter til leksekveld", "effects": { "costKey": "events.classMeal", "wellbeing": 1, "social": 1.25, "energy": -1, "grades": 0.2 }, "note": "De jobbar med leksene medan de hjelper kvarandre." }
       ]
     },
     {
@@ -335,8 +337,8 @@
       "weight": 2,
       "once": true,
       "choices": [
-        { "label": "Meld deg på", "effects": { "costKey": "events.activityFee", "wellbeing": 6 } },
-        { "label": "Finn på noko gratis saman", "effects": { "wellbeing": 3 }, "note": "Du held på fellesskapet utan kontingenten." }
+        { "label": "Meld deg på", "effects": { "costKey": "events.activityFee", "wellbeing": 6, "social": 1.25 } },
+        { "label": "Finn på noko gratis saman", "effects": { "wellbeing": 3, "social": 1.25 }, "note": "Du held på fellesskapet utan kontingenten." }
       ]
     },
     {
@@ -363,8 +365,8 @@
       "weight": 3,
       "once": true,
       "choices": [
-        { "label": "Bli med på heile opplegget", "effects": { "costKey": "leisure.concertTicket", "wellbeing": 6 } },
-        { "label": "Bli med på den rimelege delen", "effects": { "costKey": "events.classMeal", "wellbeing": 4 }, "note": "Du får tid med venene og held att litt pengar." }
+        { "label": "Bli med på heile opplegget", "effects": { "costKey": "leisure.concertTicket", "wellbeing": 6, "social": 1.25 } },
+        { "label": "Bli med på den rimelege delen", "effects": { "costKey": "events.classMeal", "wellbeing": 4, "social": 1.25 }, "note": "Du får tid med venene og held att litt pengar." }
       ]
     },
     {
@@ -433,8 +435,8 @@
       "weight": 3,
       "once": true,
       "choices": [
-        { "label": "Bli med på det store opplegget", "effects": { "costKey": "leisure.concertTicket", "wellbeing": 7 } },
-        { "label": "Vel den enkle felleskvelden", "effects": { "costKey": "events.graduationShare", "wellbeing": 5 } }
+        { "label": "Bli med på det store opplegget", "effects": { "costKey": "leisure.concertTicket", "wellbeing": 7, "social": 1.25 } },
+        { "label": "Vel den enkle felleskvelden", "effects": { "costKey": "events.graduationShare", "wellbeing": 5, "social": 1.25 } }
       ]
     },
     {
@@ -448,7 +450,7 @@
       "once": true,
       "choices": [
         { "label": "Bruk helga på førebuing", "effects": { "energy": -5, "grades": 0.1 } },
-        { "label": "Del tida mellom lesing og vener", "effects": { "wellbeing": 4, "grades": -0.05 } }
+        { "label": "Del tida mellom lesing og vener", "effects": { "wellbeing": 4, "grades": -0.05, "social": 1.25 } }
       ]
     },
     {
@@ -467,8 +469,8 @@
       "text": "Klassekameratane vil ete saman etter skuletid. Det freistar å bli med, sjølv om det kostar meir enn matpakka.",
       "art": "canteen", "focus": "Økonomi og trivsel", "when": { "rounds": ["vg1h"] }, "weight": 2, "once": true,
       "choices": [
-        { "label": "Kjøp lunsj saman", "effects": { "costKey": "events.schoolCanteenGroup", "wellbeing": 4 } },
-        { "label": "Ta med matpakke og møt dei etterpå", "effects": { "wellbeing": 3 } }
+        { "label": "Kjøp lunsj saman", "effects": { "costKey": "events.schoolCanteenGroup", "wellbeing": 4, "social": 1.25 } },
+        { "label": "Ta med matpakke og møt dei etterpå", "effects": { "wellbeing": 3, "social": 1.25 } }
       ]
     },
     {
@@ -498,8 +500,8 @@
       "text": "De vil markere at fyrste året snart er over. Den eine planen er dyr; den andre er å møtast og lage mat saman.",
       "art": "party", "focus": "Økonomi og trivsel", "when": { "rounds": ["vg1v"] }, "weight": 2, "once": true,
       "choices": [
-        { "label": "Bli med på klassefesten", "effects": { "costKey": "events.classParty", "wellbeing": 6 } },
-        { "label": "Lag ein rimeleg kveld saman", "effects": { "costKey": "events.classMeal", "wellbeing": 4 } }
+        { "label": "Bli med på klassefesten", "effects": { "costKey": "events.classParty", "wellbeing": 6, "social": 1.25 } },
+        { "label": "Lag ein rimeleg kveld saman", "effects": { "costKey": "events.classMeal", "wellbeing": 4, "social": 1.25 } }
       ]
     },
     {
@@ -528,8 +530,8 @@
       "text": "Ein artist du likar kjem til nabobyen. Billett og reise kostar ein del, men fleire i venegjengen skal dit.",
       "art": "party", "focus": "Økonomi og trivsel", "when": { "rounds": ["vg2h"] }, "weight": 2, "once": true,
       "choices": [
-        { "label": "Kjøp billett og reis med dei andre", "effects": { "costKey": "leisure.concertTicket", "wellbeing": 6 } },
-        { "label": "Bli med på ein rimelegare kveld heime", "effects": { "costKey": "events.classMeal", "wellbeing": 3 } }
+        { "label": "Kjøp billett og reis med dei andre", "effects": { "costKey": "leisure.concertTicket", "wellbeing": 6, "social": 1.25 } },
+        { "label": "Bli med på ein rimelegare kveld heime", "effects": { "costKey": "events.classMeal", "wellbeing": 3, "social": 1.25 } }
       ]
     },
     {
@@ -538,8 +540,8 @@
       "text": "Nokre i klassen vil sjå ein film saman. Billetten kostar litt, men de kan òg møtast gratis og finne på noko anna.",
       "art": "party", "focus": "Økonomi og fellesskap", "when": { "rounds": ["vg2h"] }, "weight": 2, "once": true,
       "choices": [
-        { "label": "Bli med på kino", "effects": { "costKey": "leisure.cinemaTicket", "wellbeing": 4 } },
-        { "label": "Foreslå ein gratis filmkveld heime", "effects": { "wellbeing": 3 } }
+        { "label": "Bli med på kino", "effects": { "costKey": "leisure.cinemaTicket", "wellbeing": 4, "social": 1.25 } },
+        { "label": "Foreslå ein gratis filmkveld heime", "effects": { "wellbeing": 3, "social": 1.25 } }
       ]
     },
     {
@@ -555,11 +557,13 @@
     {
       "id": "helgetur-vg2v",
       "title": "Helgetur med venegjengen",
-      "text": "Venene dine har funne ei rimeleg overnatting og vil reise bort ei helg.",
+      "text": "Venene dine planlegg ein helgetur. Du kan bruke pengar på turen, finne på noko heime eller prioritere skulearbeid.",
       "art": "party", "focus": "Økonomi og trivsel", "when": { "rounds": ["vg2v"] }, "weight": 2, "once": true,
       "choices": [
-        { "label": "Bli med på turen", "effects": { "costKey": "events.weekendTrip", "wellbeing": 7 } },
-        { "label": "Møt dei på ein gratis aktivitet heime", "effects": { "wellbeing": 4 } }
+        { "label": "Bli med på turen", "effects": { "costKey": "events.weekendTrip", "wellbeing": 4, "social": 1.25 } },
+        { "label": "Ha det kjekt med venene heime", "effects": { "wellbeing": 3, "social": 1.25 } },
+        { "label": "Studer åleine", "effects": { "wellbeing": -1, "energy": -2, "grades": 0.2 }, "note": "Du held kostnadene nede og får arbeidd konsentrert." },
+        { "label": "Inviter til leksekveld", "effects": { "costKey": "events.classMeal", "wellbeing": 1, "social": 1.25, "energy": -1, "grades": 0.2 }, "note": "De deler på maten og hjelper kvarandre med skulearbeidet." }
       ]
     },
     {
@@ -678,8 +682,8 @@
       "text": "Dei andre på arbeidsplassen spør om du vil vere med og ete etter jobb. Det kostar litt, men kan gjere det lettare å bli kjend.",
       "art": "canteen", "focus": "Økonomi og trivsel", "when": { "rounds": ["laere1h"], "route": "apprenticeship" }, "weight": 2, "once": true,
       "choices": [
-        { "label": "Bli med på middag", "effects": { "costKey": "events.apprenticeTeamDinner", "wellbeing": 5 } },
-        { "label": "Foreslå ein gratis aktivitet ein annan dag", "effects": { "wellbeing": 3 } }
+        { "label": "Bli med på middag", "effects": { "costKey": "events.apprenticeTeamDinner", "wellbeing": 5, "social": 1.25 } },
+        { "label": "Foreslå ein gratis aktivitet ein annan dag", "effects": { "wellbeing": 3, "social": 1.25 } }
       ]
     },
     {
@@ -698,8 +702,8 @@
       "text": "Du har blitt kjend med fleire gjennom læretida. Nokre planlegg ein helgetur, medan andre gjerne møtest til ein billegare kveld heime.",
       "art": "party", "focus": "Økonomi og fellesskap", "when": { "rounds": ["laere1v"], "route": "apprenticeship" }, "weight": 2, "once": true,
       "choices": [
-        { "label": "Bli med på helgetur", "effects": { "costKey": "events.weekendTrip", "wellbeing": 6 } },
-        { "label": "Inviter til ein roleg kveld heime", "effects": { "wellbeing": 4, "energy": 2 } }
+        { "label": "Bli med på helgetur", "effects": { "costKey": "events.weekendTrip", "wellbeing": 6, "social": 1.25 } },
+        { "label": "Inviter til ein roleg kveld heime", "effects": { "wellbeing": 4, "energy": 2, "social": 1.25 } }
       ]
     },
     {
@@ -768,8 +772,8 @@
       "art": "sport", "focus": "Økonomi og trivsel", "kind": "summer",
       "when": { "rounds": ["sum1"] }, "weight": 2, "once": true,
       "choices": [
-        { "label": "Bli med på turen", "effects": { "costKey": "events.summerTripWithFriends", "wellbeing": 6 } },
-        { "label": "Lag ein gratis utedag", "effects": { "wellbeing": 4, "energy": 2 } }
+        { "label": "Bli med på turen", "effects": { "costKey": "events.summerTripWithFriends", "wellbeing": 6, "social": 1.25 } },
+        { "label": "Lag ein gratis utedag", "effects": { "wellbeing": 4, "energy": 2, "social": 1.25 } }
       ]
     },
     {
@@ -779,8 +783,8 @@
       "art": "party", "focus": "Økonomi og trivsel", "kind": "summer",
       "when": { "rounds": ["sum2"] }, "weight": 2, "once": true,
       "choices": [
-        { "label": "Kjøp billett og reis", "effects": { "costKey": "events.weekendTrip", "wellbeing": 7 } },
-        { "label": "Vel eit gratis arrangement", "effects": { "wellbeing": 4 } }
+        { "label": "Kjøp billett og reis", "effects": { "costKey": "events.weekendTrip", "wellbeing": 7, "social": 1.25 } },
+        { "label": "Vel eit gratis arrangement", "effects": { "wellbeing": 4, "social": 1.25 } }
       ]
     }
   ]

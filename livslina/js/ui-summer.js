@@ -72,7 +72,7 @@ LL.uiSummer = (function () {
       s.stats.energy = LL.util.clamp(s.stats.energy - (weeks >= 6 ? 12 : 6), 0, 100);
       ctx.income.wage = wage;
     } else {
-      s.stats.wellbeing = LL.util.clamp(s.stats.wellbeing + 6, 0, 100);
+      LL.state.adjustWellbeing(s, 6);
       s.stats.energy = LL.util.clamp(s.stats.energy + 10, 0, 100);
     }
 

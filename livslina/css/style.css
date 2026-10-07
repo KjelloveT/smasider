@@ -88,9 +88,16 @@
 .ll-family-facts li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.45rem 0; border-bottom: 1px solid var(--vp-border); }
 .ll-family-facts li:last-child { border: 0; }
 .ll-reroll { margin-top: 0.5rem; }
-.ll-line-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 0.75rem; }
-.ll-line-card, .ll-housing-card { display: flex; flex-direction: column; align-items: stretch; gap: 0.4rem; min-width: 0; height: auto; padding: 0.85rem; white-space: normal; text-align: left; }
-.ll-program-sprite { display: block; width: 100%; aspect-ratio: 1299 / 1211; border: 1px solid var(--vp-frame); border-radius: calc(var(--vp-radius) * 0.65); background-color: var(--vp-paper); background-image: url("../assets/programs/utdanningsprogram-isometrisk.png"); background-repeat: no-repeat; background-size: 400% 400%; background-position: var(--sprite-x) var(--sprite-y); image-rendering: pixelated; }
+.ll-line-heading { width: fit-content; max-width: 100%; margin: 0 auto 1rem; padding: 0.6rem 1.1rem; text-align: center; }
+.ll-line-heading h2 { margin: 0; font-size: clamp(1.1rem, 2vw, 1.4rem); }
+.ll-line-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 0.75rem; align-items: stretch; }
+.ll-line-card-shell { display: flex; flex-direction: column; align-items: stretch; gap: 0.45rem; min-width: 0; padding: 0.5rem; border: 2px solid var(--vp-frame); border-radius: var(--vp-radius); background: var(--vp-paper); }
+.ll-line-card, .ll-housing-card { display: flex; flex-direction: column; align-items: stretch; gap: 0.55rem; min-width: 0; height: auto; padding: 0.75rem; white-space: normal; text-align: left; }
+.ll-line-card { border: 0; border-radius: 0; box-shadow: none; background: var(--vp-paper); font-weight: 400; }
+.ll-line-card[aria-pressed="true"] { background: var(--vp-honey); }
+.ll-vilbli-link { align-self: flex-start; display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2.25rem; padding: 0.45rem 0.7rem; font-size: 0.82rem; }
+.ll-program-sprite { position: relative; display: block; width: 100%; aspect-ratio: 1341 / 1173; overflow: hidden; }
+.ll-program-sprite::before { position: absolute; inset: 3.5%; content: ""; background-image: url("../assets/programs/utdanningsprogram-isometrisk.png"); background-repeat: no-repeat; background-size: 400% 400%; background-position: var(--sprite-x) var(--sprite-y); image-rendering: pixelated; }
 .ll-line-grant-choice { margin-top: 1rem; padding: 1rem; }
 .ll-line-grant-choice[hidden] { display: none; }
 .ll-line-grant-choice label { display: block; margin-bottom: 0.4rem; font-weight: 700; }
@@ -98,15 +105,25 @@
 .ll-line-grant-help { margin: 0.45rem 0 0; font-size: 0.82rem; line-height: 1.4; }
 .ll-line-card[aria-pressed="true"], .ll-housing-card[aria-pressed="true"] { background: var(--vp-honey); }
 .ll-line-card h4, .ll-housing-card h4 { margin: 0; }
-.ll-line-route { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--vp-forest); }
+.ll-line-card .ll-line-name { font-size: clamp(1.08rem, 1.45vw, 1.3rem); font-weight: 850; line-height: 1.2; }
+.ll-line-name::after { display: block; width: 2.4rem; height: 3px; margin-top: 0.38rem; border-radius: 2px; background: var(--vp-frame); content: ""; }
+.ll-line-route { margin-top: 1.25rem; padding: 1rem; border: 2px solid var(--vp-frame); border-radius: var(--vp-radius); background: var(--vp-panel-fill, var(--vp-sky)); }
 .ll-line-route[hidden] { display: none; }
 .ll-line-route > h3 { margin: 0 0 0.35rem; }
+.ll-route-heading { width: fit-content; max-width: 100%; padding: 0.4rem 0.65rem; border: 1px solid var(--vp-frame); border-radius: var(--vp-radius); background: var(--vp-paper); }
 .ll-line-route > p { max-width: 70ch; }
 .ll-route-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 0.75rem; }
 .ll-route-card { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; height: auto; padding: 1rem; text-align: left; white-space: normal; }
 .ll-route-card[aria-pressed="true"] { background: var(--vp-honey); }
 .ll-route-card span { font-weight: 400; line-height: 1.45; }
-.ll-line-type { align-self: flex-start; padding: 0.18rem 0.45rem; border: 1px solid currentColor; border-radius: 999px; font-size: 0.72rem; font-weight: 700; }
+.ll-line-type { align-self: flex-start; padding: 0.2rem 0.55rem; border: 1px solid var(--vp-frame); border-radius: 999px; font-size: 0.76rem; font-weight: 800; }
+.ll-line-type--study { background: var(--vp-sky); }
+.ll-line-type--vocational { background: var(--vp-moss); }
+.ll-line-facts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.45rem; }
+.ll-line-fact { display: flex; flex-direction: column; gap: 0.12rem; min-width: 0; padding: 0.42rem 0.5rem; border-radius: 5px; background: var(--vp-stone); line-height: 1.25; }
+.ll-line-fact-label { font-size: 0.72rem; }
+.ll-line-fact strong { font-size: 0.88rem; }
+.ll-line-fact--distance { line-height: 1.4; }
 .ll-line-blurb, .ll-line-careers { margin: 0; font-size: 0.87rem; line-height: 1.45; }
 .ll-housing-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 0.75rem; margin-top: 0.75rem; }
 
@@ -165,10 +182,28 @@
 
 /* Budsjett, månadsspel og oppgjer */
 .ll-budget-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+.ll-budget-summary { position: sticky; top: 1rem; align-self: start; max-height: calc(100vh - 2rem); overflow-y: auto; z-index: 2; }
 .ll-ctrl { margin: 0 0 0.8rem; }
 .ll-ctrl:last-child { margin-bottom: 0; }
 .ll-btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .ll-btn-row .vp-button { white-space: normal; }
+.ll-weekday-plan { margin-bottom: 1rem; }
+.ll-weekday-locked { display: grid; gap: 0.25rem; margin-block: 0.65rem; }
+.ll-weekday-locked > div, .ll-time-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(6.5rem, 8rem); align-items: center; gap: 0.75rem; }
+.ll-weekday-locked > div { padding-block: 0.35rem; border-bottom: 1px solid var(--vp-border); }
+.ll-weekday-locked strong { text-align: right; }
+.ll-time-list { display: grid; gap: 0.45rem; }
+.ll-time-row { margin: 0; }
+.ll-time-label { display: flex; align-items: center; gap: 0.3rem; min-width: 0; }
+.ll-time-label > label { margin: 0; }
+.ll-time-help-button { flex: 0 0 auto; width: 2rem; min-width: 2rem; height: 2rem; min-height: 2rem; padding: 0; }
+.ll-time-help { padding: 0.6rem 0.75rem; border-left: 3px solid var(--vp-frame); background: var(--vp-paper); }
+.ll-time-select { min-width: 0; }
+.ll-time-remaining { margin: 0.65rem 0 0; font-weight: 700; }
+.ll-budget-totals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; }
+.ll-budget-totals > div { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; padding: 0.55rem 0.65rem; border: 1px solid var(--vp-border); border-radius: var(--vp-radius); background: var(--vp-paper); }
+.ll-budget-totals span { font-size: 0.82rem; }
+.ll-budget-totals strong { font-size: 1.05rem; }
 .ll-budget-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
 .ll-budget-row { display: flex; justify-content: space-between; gap: 0.5rem; padding: 0.3rem 0; border-bottom: 1px solid var(--vp-border); font-size: 0.9rem; }
 .ll-budget-row:last-child { border-bottom: 0; }
@@ -176,6 +211,9 @@
 .ll-stat--net { margin-top: 0.75rem; }
 .ll-pb-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(130px, 0.65fr); gap: 1rem; align-items: start; }
 .ll-pb-month { margin-bottom: 0.6rem; font-size: 1.55rem; font-weight: 800; }
+.ll-pb-time { display: grid; gap: 0.35rem; padding: 0.65rem 0.75rem; border: 1px solid var(--vp-border); border-radius: var(--vp-radius); background: var(--vp-paper); }
+.ll-pb-time-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.25rem 0.6rem; font-size: 0.86rem; }
+.ll-pb-time progress { display: block; width: 100%; height: 0.85rem; accent-color: var(--vp-moss); }
 .ll-pb-calendar { margin-block: 1rem; padding: 0.85rem; border: 1px solid var(--vp-border); border-radius: var(--vp-radius); background: var(--vp-paper); }
 .ll-pb-calendar-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.35rem 0.75rem; margin-bottom: 0.65rem; }
 .ll-pb-calendar-heading span { font-size: 0.9rem; }
@@ -189,6 +227,8 @@
 .ll-calendar-month-head span { font-size: 0.65rem; font-weight: 700; }
 .ll-calendar-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; color: var(--vp-ink); font-size: 0.58rem; line-height: 1.4; text-align: center; }
 .ll-calendar-days span { border-radius: 2px; }
+.ll-calendar-days span.is-passed { background: var(--vp-moss); font-weight: 800; }
+.ll-calendar-days span.is-current-day { outline: 2px solid var(--vp-frame); outline-offset: 1px; font-weight: 900; }
 .ll-pb-balance { font-size: 1.9rem; }
 .ll-pb-ledger { max-height: 220px; margin-top: 0.85rem; overflow: auto; padding: 0.5rem 0.75rem; border: 1px solid var(--vp-border); border-radius: var(--vp-radius); background: var(--vp-paper); }
 .ll-pb-line { display: flex; justify-content: space-between; gap: 0.5rem; padding: 0.35rem 0; border-bottom: 1px solid var(--vp-border); font-size: 0.9rem; }
@@ -204,6 +244,17 @@
 .ll-badge.earned { background: var(--vp-moss); }
 .ll-event-modal { width: min(100%, 42rem); padding: clamp(1.25rem, 4vw, 2rem); }
 .ll-event-modal > * + * { margin-top: 1rem; }
+.ll-event-meter-panel { padding: 0.75rem; border: 1px solid var(--vp-border); border-radius: var(--vp-radius); background: var(--vp-paper); }
+.ll-event-meter-panel h3 { margin: 0 0 0.55rem; }
+.ll-event-meters { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 110px), 1fr)); gap: 0.4rem; }
+.ll-event-meter { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 0.1rem 0.45rem; min-width: 0; padding: 0.4rem 0.5rem; border-radius: calc(var(--vp-radius) * 0.7); background: var(--vp-stone); }
+.ll-event-meter-label { grid-column: 1 / -1; font-size: 0.72rem; font-weight: 700; }
+.ll-event-meter-value { overflow-wrap: anywhere; font-size: 0.95rem; }
+.ll-event-meter-trend { font-size: 1.15rem; font-weight: 900; line-height: 1; }
+.ll-event-meter-status { grid-column: 1 / -1; min-height: 1em; font-size: 0.69rem; line-height: 1.25; }
+.ll-event-meter-trend.is-up { color: #16753c; }
+.ll-event-meter-trend.is-down { color: var(--vp-error); }
+.ll-event-meter-trend.is-steady { color: var(--vp-forest); }
 .ll-event-vignette { width: min(100%, 260px); margin: 0 auto 1rem; }
 .ll-event-sprite { display: block; width: 100%; aspect-ratio: 1300 / 1209; background-image: url('../assets/events/hendingar-isometrisk.png'); background-repeat: no-repeat; background-size: 400% 400%; background-position: var(--sprite-x, 0%) var(--sprite-y, 0%); image-rendering: pixelated; }
 .ll-debt-message { padding: 0.75rem; border-left: 4px solid var(--vp-honey); background: var(--vp-paper); }
@@ -222,6 +273,7 @@
   .ll-room-layout { grid-template-columns: minmax(0, 1fr); }
   .ll-room-stage-panel { position: static; }
   .ll-budget-grid { grid-template-columns: minmax(0, 1fr); }
+  .ll-budget-summary { order: -1; top: 0.35rem; max-height: 42vh; }
 }
 @media (max-width: 620px) {
   .main-content { padding-top: 0.5rem; }

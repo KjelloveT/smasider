@@ -54,6 +54,7 @@ LL.uiHome = (function () {
     wrap.appendChild(statMoney(st.savingsIsBsu ? 'BSU' : 'Sparing', st.savings, 'gem'));
     wrap.appendChild(statMeter('Trivsel', st.wellbeing, 'heart'));
     wrap.appendChild(statMeter('Energi', st.energy, 'zap'));
+    wrap.appendChild(statMeter('Sosialt', st.social, 'users', false));
     wrap.appendChild(statPlain('Karaktersnitt', st.grades.toFixed(1), 'award'));
   }
 
@@ -79,7 +80,7 @@ LL.uiHome = (function () {
     return box;
   }
 
-  function statMeter(label, val, iconName) {
+  function statMeter(label, val, iconName, warnWhenLow) {
     const box = document.createElement('div');
     box.className = 'vp-panel vp-panel--plain ll-stat';
     const l = document.createElement('div'); l.className = 'll-stat-lbl';
@@ -87,7 +88,7 @@ LL.uiHome = (function () {
     const v = document.createElement('div'); v.className = 'll-stat-val'; v.textContent = Math.round(val);
     const m = document.createElement('div'); m.className = 'll-meter';
     const f = document.createElement('div'); f.className = 'll-meter-fill';
-    if (val < 35) f.classList.add('warn');
+    if (warnWhenLow !== false && val < 35) f.classList.add('warn');
     f.style.width = LL.util.clamp(val, 0, 100) + '%';
     m.appendChild(f);
     box.append(l, v, m);
@@ -151,7 +152,7 @@ LL.uiHome = (function () {
       const c = LL.data.value('transport.driversLicenseB');
       items.push({ label: 'Førarkort klasse B', cost: c,
         note: 'Ein stor kostnad no — men opnar for bil i seinare livsfasar.',
-        buy: () => { s.flags.hasLicense = true; s.stats.wellbeing = LL.util.clamp(s.stats.wellbeing + 4, 0, 100); } });
+        buy: () => { s.flags.hasLicense = true; LL.state.adjustWellbeing(s, 4); } });
     }
 
     if (!items.length) {
@@ -212,7 +213,7 @@ LL.uiHome = (function () {
     s.possessions.moped = true;
     if (trimmedVar) s.possessions.mopedTrimmed = true;
     if (trimmedVar) s.flags.mopedTrimmed = true;
-    s.stats.wellbeing = LL.util.clamp(s.stats.wellbeing + 8, 0, 100);
+    LL.state.adjustWellbeing(s, 8);
     LL.storage.saveActive(s);
     LL.main.closeModal('mopedModal');
     LL.main.toast('Moped kjøpt!');

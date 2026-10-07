@@ -10,6 +10,7 @@ LL.uiPlayback = (function () {
   let ctx = null;
   let monthIdx = 0;
   let timer = null;
+  let progressFrame = null;
   const STEP_MS = 2200;
 
   function startTerm() {
@@ -35,13 +36,65 @@ LL.uiPlayback = (function () {
     document.getElementById('pbBalance').textContent = LL.util.kr(state.stats.money);
     document.getElementById('pbLedger').textContent = '';
     renderCalendar();
+    setCalendarMonth(0);
+    setClockStatus('Gjer klar ' + ctx.monthNames[0], false);
     if (ctx.grant) {
       addLedgerLine('Utstyrsstipend', ctx.grant, false);
     }
   }
 
   function scheduleNext(ms) {
-    timer = setTimeout(tick, ms == null ? STEP_MS : ms);
+    if (timer) clearTimeout(timer);
+    stopProgressAnimation();
+    const delay = ms == null ? STEP_MS : ms;
+    const progress = document.getElementById('pbTimeProgress');
+    const dayLabel = document.getElementById('pbDayCount');
+    const monthName = ctx.monthNames[monthIdx];
+    if (!monthName) return;
+    document.getElementById('pbTimeStatus').textContent = monthName + ' · dagane går';
+    progress.max = 28;
+    progress.value = 0;
+    dayLabel.textContent = 'Dag 1 av 28';
+    const currentCard = document.getElementById('pbCalendarMonths').children[monthIdx];
+    const dayCells = currentCard ? Array.from(currentCard.querySelectorAll('.ll-calendar-days span')) : [];
+    const started = performance.now();
+    function advanceDays(now) {
+      const fraction = Math.min(1, (now - started) / delay);
+      const dayPosition = fraction * 28;
+      progress.value = dayPosition;
+      dayLabel.textContent = 'Dag ' + Math.min(28, Math.max(1, Math.ceil(dayPosition))) + ' av 28';
+      dayCells.forEach((cell, index) => {
+        cell.classList.toggle('is-passed', index < Math.floor(dayPosition));
+        cell.classList.toggle('is-current-day', index === Math.min(27, Math.floor(dayPosition)) && fraction < 1);
+      });
+      if (fraction < 1) progressFrame = requestAnimationFrame(advanceDays);
+      else progressFrame = null;
+    }
+    progressFrame = requestAnimationFrame(advanceDays);
+    timer = setTimeout(() => {
+      timer = null;
+      stopProgressAnimation();
+      tick();
+    }, delay);
+  }
+
+  function stopProgressAnimation() {
+    if (progressFrame != null) cancelAnimationFrame(progressFrame);
+    progressFrame = null;
+  }
+
+  function setClockStatus(message, waiting) {
+    const status = document.getElementById('pbTimeStatus');
+    const progress = document.getElementById('pbTimeProgress');
+    status.textContent = message;
+    if (waiting) progress.removeAttribute('value');
+    else progress.value = 0;
+    document.getElementById('pbDayCount').textContent = waiting ? 'Neste steg kjem snart' : 'Dag 0 av 28';
+  }
+
+  function pauseForEvent() {
+    stopProgressAnimation();
+    setClockStatus('Valet er registrert · gjer klar neste steg', true);
   }
 
   function tick() {
@@ -56,13 +109,18 @@ LL.uiPlayback = (function () {
     addLedgerLine(entry.month, entry.income - entry.expense, (entry.income - entry.expense) < 0, true);
 
     monthIdx++;
-    setCalendarMonth(monthIdx - 1);
+    setCalendarMonth(monthIdx);
+    setClockStatus(entry.month + ' er ferdig · førebur neste steg', false);
 
     // Hendingssjekk (M4). Om ein hending blir vist, ventar vi på resume.
     if (LL.events && LL.events.checkMonth) {
-      LL.events.checkMonth(state, ctx, monthIdx, () => scheduleNext());
+      LL.events.checkMonth(state, ctx, monthIdx, () => {
+        if (monthIdx >= (ctx.round.months || 6)) finishTerm();
+        else scheduleNext();
+      });
     } else {
-      scheduleNext();
+      if (monthIdx >= (ctx.round.months || 6)) finishTerm();
+      else scheduleNext();
     }
   }
 
@@ -110,6 +168,7 @@ LL.uiPlayback = (function () {
 
   function setCalendarMonth(index) {
     const wrap = document.getElementById('pbCalendarMonths');
+    if (index >= wrap.children.length) { completeCalendar(); return; }
     const status = document.getElementById('pbCalendarStatus');
     Array.from(wrap.children).forEach((card, idx) => {
       card.classList.remove('is-current', 'is-done', 'is-upcoming', 'arriving');
@@ -176,9 +235,12 @@ LL.uiPlayback = (function () {
   }
 
   // Kalla av events.js etter at ein hending er handtert, for å halde fram
-  function resume() { scheduleNext(400); }
+  function resume() {
+    if (monthIdx >= (ctx.round.months || 6)) finishTerm();
+    else scheduleNext(400);
+  }
 
   function init() { /* ingen faste lyttarar */ }
 
-  return { init, startTerm, resume, addLedgerLine };
+  return { init, startTerm, resume, addLedgerLine, pauseForEvent };
 })();

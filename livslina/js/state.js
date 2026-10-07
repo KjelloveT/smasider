@@ -7,7 +7,8 @@ window.LL = window.LL || {};
 LL.state = (function () {
   'use strict';
 
-  const SAVE_VERSION = 7;
+  const SAVE_VERSION = 9;
+  const WELLBEING_POSITIVE_MULTIPLIER = 0.45;
   const LEGACY_SPENDING_CHOICES = {
     noysam: { eatingOutPerWeek: 0, socialEventsPerMonth: 0, clothingShoppingPerWeek: 0, inGamePurchasesPerWeek: 0 },
     sifo: { eatingOutPerWeek: 1, socialEventsPerMonth: 1, clothingShoppingPerWeek: 100, inGamePurchasesPerWeek: 50 },
@@ -105,10 +106,22 @@ LL.state = (function () {
   ]);
 
   let save = null;
+  let recentStatChanges = { money: 0, energy: 0, wellbeing: 0, social: 0, grades: 0 };
+
+  function recordStatChanges(before, after) {
+    if (!before || !after) return;
+    ['money', 'energy', 'wellbeing', 'social', 'grades'].forEach(key => {
+      const delta = Number(after[key]) - Number(before[key]);
+      if (Number.isFinite(delta) && Math.abs(delta) > 0.0001) recentStatChanges[key] = delta;
+    });
+  }
+
+  function getRecentStatChanges() { return Object.assign({}, recentStatChanges); }
 
   function newGame(opts) {
     const seed = (opts && opts.seed) || (Date.now() >>> 0);
     seedRng(seed);
+    recentStatChanges = { money: 0, energy: 0, wellbeing: 0, social: 0, grades: 0 };
     save = {
       app: 'livslina',
       version: SAVE_VERSION,
@@ -129,6 +142,7 @@ LL.state = (function () {
         savingsIsBsu: false,
         wellbeing: 60,
         energy: 70,
+        social: 50,
         grades: 3.5
       },
       plan: null,          // gjeldande halvårsplan frå budsjettkortet
@@ -158,6 +172,7 @@ LL.state = (function () {
 
   function load(obj) {
     save = migrateSave(obj);
+    recentStatChanges = { money: 0, energy: 0, wellbeing: 0, social: 0, grades: 0 };
     seedRng((save.seed || 1) >>> 0);
     // Spol RNG fram forbi allereie brukte trekk, slik at framtidige trekk er stabile
     const draws = (save._rngDraws || 0);
@@ -175,13 +190,32 @@ LL.state = (function () {
     }
     delete migrated.profile;
     if (Array.isArray(migrated.activities)) migrated.activities = migrated.activities.slice();
+    migrated.weekdayHours = normalizeWeekdayHours(migrated.weekdayHours);
     return migrated;
+  }
+
+  function defaultWeekdayHours() {
+    return { training: 1, selfStudy: 1, friends: 1, scrolling: 1, gaming: 1 };
+  }
+
+  function normalizeWeekdayHours(hours) {
+    const source = hours && typeof hours === 'object' ? hours : defaultWeekdayHours();
+    const result = {};
+    let remaining = 8;
+    ['training', 'selfStudy', 'friends', 'scrolling', 'gaming'].forEach(key => {
+      const value = Number(source[key]);
+      const safeValue = Number.isFinite(value) ? Math.max(0, Math.min(8, Math.round(value))) : 0;
+      result[key] = Math.min(safeValue, remaining);
+      remaining -= result[key];
+    });
+    return result;
   }
 
   // Versjon 1 lagra sommaren før vårhalvåret. Versjon 3 la til ny karakterform
   // og rominventar; versjon 4 tok vare på planvala; versjon 5 bytte til konkrete
   // forbruksvanar; versjon 6 la til læreveg og saldo-/gjeldssporing; versjon 7
-  // oppdaterer utstyrsstipendet for aktive løp og eksporterte lagringar.
+  // oppdaterte utstyrsstipendet; versjon 8 la til sosialmålaren; versjon 9
+  // la til tidsplanen for ein vanleg vekedag.
   function migrateSave(obj) {
     if (!obj || typeof obj !== 'object') return obj;
     const sourceVersion = Number(obj.version) || 0;
@@ -208,6 +242,11 @@ LL.state = (function () {
     if (!obj.possessions || typeof obj.possessions !== 'object') {
       obj.possessions = { moped: false, mopedTrimmed: false, phoneInsurance: false };
     }
+    if (!obj.stats || typeof obj.stats !== 'object') {
+      obj.stats = { money: 0, savings: 0, wellbeing: 60, energy: 70, grades: 3.5 };
+    }
+    const savedSocial = Number(obj.stats.social);
+    obj.stats.social = Number.isFinite(savedSocial) ? LL.util.clamp(savedSocial, 0, 100) : 50;
     if (obj.trainingRoute !== 'apprenticeship' && obj.trainingRoute !== 'school') obj.trainingRoute = 'school';
     if (!Array.isArray(obj.eventLog)) obj.eventLog = [];
     if (!Array.isArray(obj.ledger)) obj.ledger = [];
@@ -260,6 +299,22 @@ LL.state = (function () {
 
   function get() { return save; }
   function stats() { return save.stats; }
+
+  function scaledWellbeingDelta(delta) {
+    const amount = Number(delta);
+    if (!Number.isFinite(amount)) return 0;
+    return amount > 0 ? amount * WELLBEING_POSITIVE_MULTIPLIER : amount;
+  }
+
+  function adjustWellbeing(state, delta) {
+    const target = state || save;
+    const amount = Number(delta);
+    if (!target || !target.stats || !Number.isFinite(amount)) return 0;
+    const before = Number(target.stats.wellbeing) || 0;
+    const adjusted = scaledWellbeingDelta(amount);
+    target.stats.wellbeing = LL.util.clamp(before + adjusted, 0, 100);
+    return target.stats.wellbeing - before;
+  }
   function rounds() {
     return save && save.program && save.program.type === 'yrkesfag' && save.trainingRoute === 'apprenticeship'
       ? APPRENTICE_ROUNDS
@@ -323,10 +378,11 @@ LL.state = (function () {
 
   return {
     SAVE_VERSION,
+    defaultWeekdayHours,
     ROUNDS: SCHOOL_ROUNDS,
     newGame, load, get,
-    stats, currentRound, rounds, isLastRound, age, isAdult, recordBalance,
-    seedRng, rng, rngInt, rngPick,
+    stats, adjustWellbeing, scaledWellbeingDelta, currentRound, rounds, isLastRound, age, isAdult, recordBalance,
+    seedRng, rng, rngInt, rngPick, recordStatChanges, getRecentStatChanges,
     draw, drawInt, drawPick
   };
 })();

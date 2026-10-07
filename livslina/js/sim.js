@@ -26,7 +26,10 @@ LL.sim = (function () {
       startMoney: state.stats.money,
       startSavings: state.stats.savings,
       startWellbeing: state.stats.wellbeing,
+      startSocial: state.stats.social,
       startEnergy: state.stats.energy,
+      energyTotal: 0,
+      energyCount: 0,
       wageThisTerm: 0,
       grant: 0,
       tax: 0,
@@ -49,6 +52,7 @@ LL.sim = (function () {
 
   // Køyr éin månad: bruk økonomi, oppdater saldo/stat, logg ledger.
   function stepMonth(state, ctx, monthIdx) {
+    const metersBefore = Object.assign({}, state.stats);
     const b = LL.economy.monthlyBreakdown(state);
 
     for (const k in b.income) addCat(ctx.income, k, b.income[k]);
@@ -81,11 +85,16 @@ LL.sim = (function () {
     const roomEffect = LL.artRoom.effects(state.room);
     const roomEnergy = roomEffect.energyPerMonth || 0;
     const roomWellbeing = roomEffect.wellbeingPerMonth || 0;
-    state.stats.wellbeing += b.wellbeingPerMonth + roomWellbeing;
+    LL.state.adjustWellbeing(state, b.wellbeingPerMonth);
+    const appliedRoomWellbeing = LL.state.adjustWellbeing(state, roomWellbeing);
     state.stats.energy += b.energyPerMonth + roomEnergy;
+    state.stats.social = LL.util.clamp(state.stats.social + (b.socialPerMonth || 0), 0, 100);
     LL.state.recordBalance(state);
-    if (state.stats.money < 0) state.stats.wellbeing -= 2; // pengestress
+    if (state.stats.money < 0) LL.state.adjustWellbeing(state, -2); // pengestress
     clampStats(state);
+    LL.state.recordStatChanges(metersBefore, state.stats);
+    ctx.energyTotal += state.stats.energy;
+    ctx.energyCount++;
     state.minWellbeing = Math.min(state.minWellbeing, state.stats.wellbeing);
     state.minEnergy = Math.min(state.minEnergy, state.stats.energy);
 
@@ -96,9 +105,10 @@ LL.sim = (function () {
       expense: b.expenseTotal,
       saved: saved,
       roomEnergy: roomEnergy,
-      roomWellbeing: roomWellbeing,
+      roomWellbeing: appliedRoomWellbeing,
       balance: state.stats.money,
       wellbeing: Math.round(state.stats.wellbeing),
+      social: Math.round(state.stats.social),
       networth: Math.round(state.stats.money + state.stats.savings)
     };
     ctx.months.push(entry);
@@ -124,14 +134,18 @@ LL.sim = (function () {
 
     // Karakterdrift (per halvår)
     const plan = state.plan || {};
-    const avgEnergy = state.stats.energy;
+    const avgEnergy = ctx.energyCount ? ctx.energyTotal / ctx.energyCount : state.stats.energy;
     let dg = 0;
     if (avgEnergy < 40) dg -= 0.3;
     if (plan.jobHours >= 12) dg -= 0.2;
     if (plan.jobHours === 0 && avgEnergy > 60) dg += 0.1;
+    const studyGain = LL.economy.weekdayEffects(plan).gradePerTerm;
+    dg += studyGain;
     if (state.flags.mistaForarbevis) { /* fråvær-effekt kan leggjast til seinare */ }
+    const gradeBefore = state.stats.grades;
     state.stats.grades += dg;
     clampStats(state);
+    LL.state.recordStatChanges({ grades: gradeBefore }, { grades: state.stats.grades });
 
     const summary = {
       round: ctx.round,
@@ -144,8 +158,10 @@ LL.sim = (function () {
       moneyChange: state.stats.money - ctx.startMoney,
       savingsChange: state.stats.savings - ctx.startSavings,
       wellbeingChange: state.stats.wellbeing - ctx.startWellbeing,
+      socialChange: state.stats.social - ctx.startSocial,
       energyChange: state.stats.energy - ctx.startEnergy,
       gradeChange: dg,
+      studyGradeChange: studyGain,
       eventLog: ctx.eventLog,
       factoid: factoid(state, ctx)
     };
@@ -180,6 +196,7 @@ LL.sim = (function () {
     const s = state.stats;
     s.wellbeing = LL.util.clamp(s.wellbeing, 0, 100);
     s.energy = LL.util.clamp(s.energy, 0, 100);
+    s.social = LL.util.clamp(s.social, 0, 100);
     s.grades = LL.util.clamp(s.grades, 1, 6);
   }
 

@@ -3,10 +3,42 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.95] — 2026-10-07
+
+### Endra
+- **Livslina (skjult prøveutgåve): sosialmålaren har større spenn, og karakterane følgjer studieinnsatsen tydelegare.** Lite tid med vener kan trekkje sosialmålaren ned; sosiale val gir eit større løft. Eigenstudium kan både styrkje og svekkje karakterutviklinga.
+- **Livslina viser tida medan ho går.** Dagane fyller kalenderen jamt gjennom kvar månad, og spelet viser når det ventar på eit val.
+- **Linjevala lenkjer til Vilbli.** Kvar knapp opnar den offisielle sida for utdanningsprogrammet i ei ny fane.
+- **Vekedagsplanen tek omsyn til mykje jobb.** Arbeidstida reduserer timane eleven kan setje av til andre kvardagsaktivitetar.
+- **Månadsbudsjettet følgjer med medan du planlegg.** Eigenstudium har ei eiga forklaring, og valet etter VG2 har fått tydelegare bakgrunn.
+- **Hendingskorta viser retninga på målarane.** Energi, konto, karakterar, trivsel og sosialt får ei opp-pil eller ned-pil.
+
+### Fiksa
+- **Livslina viser ikkje lenger poengsatsar ved budsjett- og hendingsval.**
+
+## [1.94] — 2026-10-06
+
+### Endra
+- **Livslina (skjult prøveutgåve): trivsel og sosialt veks langsamare, og fokusert skulearbeid kan løfte karakterane.** Ein vanleg vekedag kan planleggjast med åtte frie timar; søvn og skule er låste. Hendingane har fleire val mellom tur, vener og skulearbeid.
+
+## [1.93] — 2026-10-06
+
+### Endra
+- **Livslina (skjult prøveutgåve): sosial kontakt og balanse blir synlege.** Sosiale val gir poeng på ein eigen målar. Energiutviklinga er justert, karakterpåverknaden byggjer på energien gjennom halvåret, og positive trivselendringar er dempa.
+
+## [1.92] — 2026-10-06
+
+### Endra
+- **Livslina (skjult prøveutgåve): linjevala forklarer skulevegen.** Større diorama, fargemerke og ei eiga overskrift gjer programma tydelegare. Den generelle ingresslinja er teken vekk. Korta viser om eleven kan ta buss eller må stå opp tidlegare; pendling heimefrå tappar eitt energipoeng kvar månad.
+- **Livslina (skjult prøveutgåve): budsjettlinjer og summar går no opp på skjermen.** Totalane byggjer på dei avrunda beløpa som blir viste for kvar post.
+
 ## [1.91] — 2026-10-07
 
 ### Endra
 - **Ljodstigen har fått ti små figurar.** Valet av figur følgjer no med i Bokstavjakta og dei animerte 3D-verdane. Dei åtte gamle profilane beheld framgangen sin.
+
+### Fiksa
+- **Livslina (skjult prøveutgåve): diorama overlappar ikkje lenger på linjekorta.** Illustrasjonane har jamne, gjennomsiktige margar og inga eiga ramme eller bakgrunnsflate.
 
 ## [1.90] — 2026-10-06
 
