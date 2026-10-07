@@ -7,12 +7,28 @@
    ══════════════════════════════════════════════ */
 
 .ropet-wrap {
-  position: fixed;
-  inset: 0;
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow: hidden;
   /* Ein himmel bak leiren. Fast farge og ikkje ein temavariabel: leiren
      er ein stad, og han skal sjå lik ut i alle dei 21 temaa. */
   background: linear-gradient(#DCEFF6 0%, #EFF6E4 64%);
+}
+
+/* Felles toppmeny står i vanleg dokumentflyt. Spelet fyller resten av
+   vindauget, slik at bokstaven og telta ikkje hamnar under menyen. */
+body[data-vp-site-page="true"][data-vp-layout="canvas"] {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+body[data-vp-site-page="true"][data-vp-layout="canvas"] > .vp-migrated-header {
+  flex: 0 0 auto;
+  width: 100%;
 }
 
 .ropet-scene {
@@ -52,6 +68,10 @@
   border-radius: 16px;
   box-shadow: 5px 5px 0 rgba(26, 26, 26, 0.25);
 }
+
+/* Den felles typografien nullstiller avsnittsmarginar; hald avstanden frå
+   toppen av spelområdet når skyheaderen står rett over det. */
+.ropet-hud .ropet-bokstav { margin-top: 14px; }
 
 .ropet-melding {
   margin: 10px 0 0;
