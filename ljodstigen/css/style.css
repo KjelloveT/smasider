@@ -110,6 +110,13 @@ body[data-font="lesefont"] .ljod-bed-letter {
 }
 .ljod-avatar:hover { transform: none; }
 .ljod-avatar-name { font-size: 0.75rem; font-weight: 700; }
+.ljod-avatar img,
+.ljod-profile-pick img {
+  width: 56px;
+  height: 56px;
+  display: block;
+  flex: 0 0 auto;
+}
 
 /* Modusar */
 .ljod-modes {

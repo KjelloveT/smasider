@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.91",
+      "dato": "2026-10-07",
+      "samandrag": "Ti eventyrlege figurar i Ljodstigen følgjer med gjennom 2D- og 3D-spela.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Ljodstigen",
+          "tekst": "Vel mellom ti små figurar. Den same figuren følgjer med i Bokstavjakta og dei animerte 3D-verdane."
+        }
+      ]
+    },
+    {
       "versjon": "1.90",
       "dato": "2026-10-06",
       "samandrag": "Livslina viser rette utstyrsstipend for 2026–2027 og har eigne diorama for utdanningsprogramma.",

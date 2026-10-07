@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.91] — 2026-10-07
+
+### Endra
+- **Ljodstigen har fått ti små figurar.** Valet av figur følgjer no med i Bokstavjakta og dei animerte 3D-verdane. Dei åtte gamle profilane beheld framgangen sin.
+
 ## [1.90] — 2026-10-06
 
 ### Endra
