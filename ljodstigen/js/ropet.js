@@ -172,7 +172,7 @@
       };
     }
 
-    const fig = V.figurBuffer();
+    const fig = V.figurBuffer(profil.avatar);
     const figBuf = {
       pos: buffer(fig.pos, 3), nor: buffer(fig.nor, 3), far: buffer(fig.far, 3),
       ledd: buffer(fig.ledd, 4), vekt: buffer(fig.vekt, 4), tal: fig.tal

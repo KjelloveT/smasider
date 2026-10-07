@@ -4,12 +4,12 @@
     {
       "versjon": "1.91",
       "dato": "2026-10-07",
-      "samandrag": "Bokstaven i Bokstavropet på leirplassen er no synleg under toppmenyen.",
+      "samandrag": "Ti eventyrlege figurar i Ljodstigen følgjer med gjennom 2D- og 3D-spela.",
       "punkt": [
         {
-          "t": "fiksa",
+          "t": "endra",
           "kva": "Ljodstigen",
-          "tekst": "Spelflata på leirplassen byrjar under toppmenyen, slik at bokstaven ikkje blir gøymd."
+          "tekst": "Vel mellom ti små figurar. Den same figuren følgjer med i Bokstavjakta og dei animerte 3D-verdane."
         }
       ]
     },

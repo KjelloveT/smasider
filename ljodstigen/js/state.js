@@ -18,17 +18,19 @@
   const APP_ID = 'ljodstigen';
   const VERSION = 1;
 
-  /* Plasshaldarfigurar: rein geometri, ingen teikning. Skal bytast ut
-     når vi veit at spelet fungerer. Namna er valde, ikkje skrivne. */
+  /* Dei åtte fyrste ID-ane er haldne fast, så eksisterande profilar
+     får nye figurar utan at framgangen deira blir flytta eller sletta. */
   const AVATARS = [
-    { id: 'sirkel',   name: 'Ringen',   shape: 'circle',   tone: 'accent'  },
-    { id: 'firkant',  name: 'Steinen',  shape: 'square',   tone: 'accent2' },
-    { id: 'trekant',  name: 'Fjellet',  shape: 'triangle', tone: 'accent3' },
-    { id: 'rombe',    name: 'Droparen', shape: 'diamond',  tone: 'accent4' },
-    { id: 'kross',    name: 'Krossen',  shape: 'cross',    tone: 'accent5' },
-    { id: 'boge',     name: 'Bogen',    shape: 'arch',     tone: 'accent'  },
-    { id: 'stjerne',  name: 'Stjerna',  shape: 'star',     tone: 'accent2' },
-    { id: 'sekskant', name: 'Vaben',    shape: 'hex',      tone: 'accent3' }
+    { id: 'sirkel',   name: 'Mose',     shape: 'circle',   tone: 'accent'  },
+    { id: 'firkant',  name: 'Glimt',    shape: 'square',   tone: 'accent2' },
+    { id: 'trekant',  name: 'Knopp',    shape: 'triangle', tone: 'accent3' },
+    { id: 'rombe',    name: 'Tindra',   shape: 'diamond',  tone: 'accent4' },
+    { id: 'kross',    name: 'Nova',     shape: 'cross',    tone: 'accent5' },
+    { id: 'boge',     name: 'Bris',     shape: 'arch',     tone: 'accent'  },
+    { id: 'stjerne',  name: 'Rusk',     shape: 'star',     tone: 'accent2' },
+    { id: 'sekskant', name: 'Komet',    shape: 'hex',      tone: 'accent3' },
+    { id: 'birk',     name: 'Birk',     shape: 'leaf',     tone: 'accent4' },
+    { id: 'krystall', name: 'Krystall', shape: 'diamond',  tone: 'accent5' }
   ];
 
   const FONTS = [
