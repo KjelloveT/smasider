@@ -21,15 +21,16 @@ LL.uiReport = (function () {
     document.getElementById('hyIncomeTotal').textContent = LL.util.kr(displayedTotal(summary.income));
     document.getElementById('hyExpenseTotal').textContent = LL.util.kr(displayedTotal(summary.expense));
 
-    // Statendringar
+    // Nivå etter halvåret og endringa gjennom perioden
     const grid = document.getElementById('hyStats');
+    const stats = summary.stats || LL.state.get().stats;
     grid.textContent = '';
-    grid.appendChild(deltaBox('Konto', summary.moneyChange, true));
-    grid.appendChild(deltaBox('Sparing', summary.savingsChange || 0, true));
-    grid.appendChild(deltaBox('Trivsel', summary.wellbeingChange, false));
-    grid.appendChild(deltaBox('Sosialt', summary.socialChange, false));
-    grid.appendChild(deltaBox('Energi', summary.energyChange, false));
-    grid.appendChild(deltaBox('Karakter', summary.gradeChange, false, 1));
+    grid.appendChild(deltaBox('Konto', stats.money, summary.moneyChange, { money: true }));
+    grid.appendChild(deltaBox('Sparing', stats.savings, summary.savingsChange || 0, { money: true }));
+    grid.appendChild(deltaBox('Trivsel', stats.wellbeing, summary.wellbeingChange, { scale: 100, decimals: 1 }));
+    grid.appendChild(deltaBox('Sosialt', stats.social, summary.socialChange, { scale: 100, decimals: 1 }));
+    grid.appendChild(deltaBox('Energi', stats.energy, summary.energyChange, { scale: 100, decimals: 1 }));
+    grid.appendChild(deltaBox('Karakter', stats.grades, summary.gradeChange, { decimals: 1 }));
 
     document.getElementById('hyFactoid').textContent = summary.factoid;
 
@@ -60,17 +61,43 @@ LL.uiReport = (function () {
     return Object.values(rows).reduce((total, value) => total + Math.round(value || 0), 0);
   }
 
-  function deltaBox(label, val, isMoney, decimals) {
+  function deltaBox(label, current, change, options) {
     const box = document.createElement('div');
     box.className = 'vp-panel vp-panel--plain ll-stat';
     const l = document.createElement('div'); l.className = 'll-stat-lbl'; l.textContent = label;
     const v = document.createElement('div'); v.className = 'll-stat-val';
-    const rounded = decimals ? val.toFixed(decimals) : Math.round(val);
-    const num = isMoney ? LL.util.kr(val) : (val >= 0 ? '+' : '') + rounded;
-    v.textContent = (isMoney && val >= 0 ? '+' : '') + num;
-    if (val < 0) v.classList.add('neg');
-    box.append(l, v);
+    v.textContent = formatStat(current, options);
+    if (options.money && current < 0) v.classList.add('neg');
+
+    const direction = change > 0.005 ? 'up' : (change < -0.005 ? 'down' : 'steady');
+    const changeLine = document.createElement('div');
+    changeLine.className = 'll-stat-change';
+    const arrow = document.createElement('span');
+    arrow.className = 'll-stat-change-arrow is-' + direction;
+    arrow.dataset.icon = direction === 'up' ? 'arrowUp' : (direction === 'down' ? 'arrowDown' : 'arrowRight');
+    arrow.dataset.iconSize = '20';
+    arrow.setAttribute('aria-hidden', 'true');
+    const detail = document.createElement('span');
+    detail.textContent = formatChange(change, options);
+    changeLine.append(arrow, detail);
+    box.append(l, v, changeLine);
     return box;
+  }
+
+  function formatStat(value, options) {
+    if (options.money) return LL.util.kr(value);
+    if (options.scale) return Math.round(value) + '/' + options.scale;
+    return Number(value).toFixed(options.decimals || 0).replace('.', ',');
+  }
+
+  function formatChange(value, options) {
+    if (Math.abs(value) <= 0.005) return 'Uendra i halvåret';
+    const sign = value > 0 ? '+' : '−';
+    const magnitude = Math.abs(value);
+    const formatted = options.money
+      ? LL.util.kr(magnitude)
+      : magnitude.toFixed(options.decimals || 0).replace('.', ',');
+    return 'Endring i halvåret: ' + sign + formatted;
   }
 
   function continueAfterHalfyear() {

@@ -2,6 +2,38 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.97",
+      "dato": "2026-10-07",
+      "samandrag": "Livslina er no tilgjengeleg frå framsida under Økonomi og livsmeistring.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Livslina",
+          "tekst": "Livslina er publisert på framsida. Følg ein elev gjennom vidaregåande og utforsk korleis vala påverkar kvardagen.",
+          "merke": "verktoy"
+        }
+      ]
+    },
+    {
+      "versjon": "1.96",
+      "dato": "2026-10-07",
+      "samandrag": "Livslina viser nivå og endring for kvar målar, og mykje jobb går opp i halve timar i vekedagsplanen.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Oppgjeret viser nivået etter halvåret og endringa gjennom perioden; piler og raude tal er tydelegare.",
+          "merke": "eksperiment"
+        },
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Mykje jobb tek 2,5 timar per kvardag i planlegginga, avrunda til næraste halve time.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
       "versjon": "1.95",
       "dato": "2026-10-07",
       "samandrag": "Livslina har tydelegare val, viser ikkje barometergevinstar og held månadsbudsjettet synleg medan du planlegg.",

@@ -47,7 +47,7 @@ LL.economy = (function () {
   // Laurdagsskiftet tek ikkje av skuledagen. Ved 12 timar jobb i veka
   // blir arbeidsmengda fordelt over fem kvardagar i vekedagsplanen.
   function weekdayWorkHours(jobHours) {
-    return Number(jobHours) >= 12 ? Number(jobHours) / 5 : 0;
+    return Number(jobHours) >= 12 ? Math.round((Number(jobHours) / 5) * 2) / 2 : 0;
   }
 
   function weekdayTimeLimit(jobHours) {
@@ -341,7 +341,7 @@ LL.economy = (function () {
 
   return {
     WEEKS_PER_MONTH,
-    activities, weekdayChoices, weekdayEffects, weekdayTimeLimit, fitWeekdayHours, socialRules, jobOptions, savingsOptions, canteenOptions, drinkOptions, eatingOutOptions, socialEventOptions, weeklyBudgetOptions, mobileDataOptions, seasonPassOptions, hourlyWage, defaultPlan,
+    activities, weekdayChoices, weekdayEffects, weekdayWorkHours, weekdayTimeLimit, fitWeekdayHours, socialRules, jobOptions, savingsOptions, canteenOptions, drinkOptions, eatingOutOptions, socialEventOptions, weeklyBudgetOptions, mobileDataOptions, seasonPassOptions, hourlyWage, defaultPlan,
     selectedSpending, spendingStyle, monthlyBreakdown, taxOnWage, label, ageVariant, sum
   };
 })();

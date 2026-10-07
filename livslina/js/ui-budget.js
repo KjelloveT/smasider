@@ -158,9 +158,20 @@ LL.uiBudget = (function () {
       });
     });
     const remaining = document.getElementById('budgetFreeTime');
+    const format = value => value.toLocaleString('nn-NO', { maximumFractionDigits: 1 });
+    const jobImpact = document.getElementById('budgetJobTimeImpact');
+    if (jobImpact) {
+      const workHours = LL.economy.weekdayWorkHours(draft.jobHours);
+      if (workHours > 0) {
+        jobImpact.textContent = 'Mykje jobb (12 t/veke) er rekna som ' + format(workHours) + ' timar kvar kvardag i denne planen.';
+      } else if (Number(draft.jobHours) >= 6) {
+        jobImpact.textContent = 'Laurdagsjobben kjem utanom kvardagen og tek ikkje tid frå denne planen.';
+      } else {
+        jobImpact.textContent = 'Ingen jobb tek tid frå denne kvardagen.';
+      }
+    }
     if (remaining) {
       const timeLeft = LL.economy.weekdayEffects(draft).freeHours;
-      const format = value => value.toLocaleString('nn-NO', { maximumFractionDigits: 1 });
       remaining.textContent = 'Du har ' + format(timeLeft) + ' av ' + format(available) + ' timar att til eigne val denne kvardagen.';
     }
   }
