@@ -603,7 +603,7 @@
 
        Kameraet ligg bak figuren og følgjer han. Det er heile grunnen til
        at han kan gå rundt eit tre og sjå det frå andre sida. */
-    const fig = F.buffer();
+    const fig = F.buffer(profil.avatar);
     const figHogd = F.hogd();
     [['pos', fig.pos], ['nor', fig.nor], ['far', fig.far],
      ['ledd', fig.ledd], ['vekt', fig.vekt]].forEach(function (d) {
