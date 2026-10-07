@@ -1,9 +1,10 @@
 /* ══════════════════════════════════════════════
    LISTE.JS — Den innebygde innspelingslista
 
-   AUTOGENERERT frå `ljodstigen/INNSPELING.md`. Endrar du lista der,
-   må du oppdatere denne fila òg — det er ingen byggjesteg som gjer
-   det for deg.
+   Hovudlista er generert frå `ljodstigen/INNSPELING.md`. Steg 6 er ei
+   planlagd utviding frå `ljodstigen/VIDARE_PROGRESJON.md`; han skal ikkje
+   inn i den publiserte lydbanken før spelet kan handsame fleire bokstavar
+   som éin grafemlyd.
 
    Ei liste har fire felt: `id` (blir mappenamn og filnamn-prefiks),
    `name`, `note` og `banks`. Kvar bank blir ei mappe i zip-fila, og
@@ -16,7 +17,7 @@ LB.builtinList = {
   version: 1,
   id: "ljodstigen",
   name: "Ljodstigen",
-  note: "Same stemme, same mikrofon og same rom for heile settet. Snakk roleg og vanleg — ikkje overtydeleg barnestemme.",
+  note: "Same stemme, same mikrofon og same rom for heile settet. Snakk roleg og vanleg — ikkje overtydeleg barnestemme. Steg 6 er planlagde opptak for ei seinare utviding av Ljodstigen.",
   banks: [
     {
       id: "fonem",
@@ -88,6 +89,14 @@ LB.builtinList = {
         { id: "n_x", label: "x", tag: "bokstavnamn", hint: "Du seier «eks» — namnet på bokstaven, ikkje lyden." },
         { id: "n_z", label: "z", tag: "bokstavnamn", hint: "Du seier «sett» — namnet på bokstaven, ikkje lyden." },
         { id: "n_æ", label: "æ", tag: "bokstavnamn", hint: "Du seier «æ» — namnet på bokstaven, ikkje lyden." },
+      ]
+    },
+    {
+      id: "digrafar",
+      name: "Nye lydgrupper — steg 6",
+      note: "Planlagde opptak til neste steg. «ng» er to bokstavar som står for éin språklyd. Ikkje spel inn bokstavnamna eller legg til ein vokal.",
+      items: [
+        { id: "f_ng", label: "/ŋ/ — ng", tag: "steg 6 · lydgruppe", hint: "Hald den mjuke naselyden /ŋ/ i 0,6–0,8 s, som på slutten av «ring». Ingen vokal før eller etter." },
       ]
     },
     {
@@ -165,6 +174,18 @@ LB.builtinList = {
         { id: "o_jente", label: "jente", tag: "steg 5", hint: "Les ordet naturleg og heilt — ikkje lydert, ikkje stava." },
         { id: "o_hær", label: "hær", tag: "steg 5", hint: "Les ordet naturleg og heilt — ikkje lydert, ikkje stava." },
         { id: "o_lære", label: "lære", tag: "steg 5", hint: "Les ordet naturleg og heilt — ikkje lydert, ikkje stava." },
+        { id: "o_ring", label: "ring", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_ting", label: "ting", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_seng", label: "seng", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_lang", label: "lang", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_tung", label: "tung", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_song", label: "song", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd. O-lyden kan variere med talemålet." },
+        { id: "o_gang", label: "gang", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_sving", label: "sving", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_vinge", label: "vinge", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_mange", label: "mange", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_tunge", label: "tunge", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_konge", label: "konge", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
       ]
     },
     {

@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.91] — 2026-10-07
+
+### Endra
+- **Ljodbanken førebur steg 6 i Ljodstigen.** Opptakslista har fått /ŋ/-lyden og 12 ord med «ng». Spelet tek ikkje i bruk opptaka før ordmotoren kan handsame lydgrupper.
+
 ## [1.90] — 2026-10-06
 
 ### Endra

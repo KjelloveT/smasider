@@ -2,6 +2,19 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.91",
+      "dato": "2026-10-07",
+      "samandrag": "Ljodbanken førebur nye opptak for steg 6 i Ljodstigen.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Ljodbanken",
+          "tekst": "Opptakslista har fått /ŋ/-lyden og 12 ord med «ng». Lydane blir ikkje brukte i Ljodstigen før spelet støttar lydgrupper.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
       "versjon": "1.90",
       "dato": "2026-10-06",
       "samandrag": "Livslina viser rette utstyrsstipend for 2026–2027 og har eigne diorama for utdanningsprogramma.",
