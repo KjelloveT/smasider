@@ -28,7 +28,7 @@ LL.economy = (function () {
     return [
       { key: 'training', label: 'Trening' },
       { key: 'selfStudy', label: 'Eigenstudium' },
-      { key: 'friends', label: 'Vener' },
+      { key: 'friends', label: 'Vere sosial med vener' },
       { key: 'scrolling', label: 'Scrolling på mobil' },
       { key: 'gaming', label: 'Gaming' }
     ];
@@ -43,6 +43,37 @@ LL.economy = (function () {
   }
 
   function savingsOptions() { return [0, 250, 500, 1000]; }
+
+  // Laurdagsskiftet tek ikkje av skuledagen. Ved 12 timar jobb i veka
+  // blir arbeidsmengda fordelt over fem kvardagar i vekedagsplanen.
+  function weekdayWorkHours(jobHours) {
+    return Number(jobHours) >= 12 ? Number(jobHours) / 5 : 0;
+  }
+
+  function weekdayTimeLimit(jobHours) {
+    return Math.max(0, 8 - weekdayWorkHours(jobHours));
+  }
+
+  function fitWeekdayHours(plan) {
+    const source = plan.weekdayHours || LL.state.defaultWeekdayHours();
+    const choices = weekdayChoices();
+    const hours = {};
+    choices.forEach(choice => {
+      const value = Number(source[choice.key]);
+      hours[choice.key] = Number.isFinite(value)
+        ? Math.max(0, Math.min(8, Math.round(value * 2) / 2))
+        : 0;
+    });
+    let excess = choices.reduce((sum, choice) => sum + hours[choice.key], 0) - weekdayTimeLimit(plan.jobHours);
+    for (let index = choices.length - 1; index >= 0 && excess > 0; index--) {
+      const key = choices[index].key;
+      const reduction = Math.min(hours[key], Math.ceil(excess * 2) / 2);
+      hours[key] -= reduction;
+      excess -= reduction;
+    }
+    plan.weekdayHours = hours;
+    return hours;
+  }
 
   function canteenOptions() {
     return LL.data.node('recurringSpending.canteen.options').map(option => ({ val: option.visits, label: option.label }));
@@ -252,15 +283,17 @@ LL.economy = (function () {
   function weekdayEffects(plan) {
     const source = plan && plan.weekdayHours || LL.state.defaultWeekdayHours();
     const hours = {};
-    let remaining = 8;
+    let remaining = weekdayTimeLimit(plan && plan.jobHours);
     weekdayChoices().forEach(choice => {
       const value = Number(source[choice.key]);
-      const safeValue = Number.isFinite(value) ? Math.max(0, Math.min(8, Math.round(value))) : 0;
+      const safeValue = Number.isFinite(value) ? Math.max(0, Math.min(8, Math.round(value * 2) / 2)) : 0;
       hours[choice.key] = Math.min(safeValue, remaining);
       remaining -= hours[choice.key];
     });
     return {
       hours,
+      availableHours: weekdayTimeLimit(plan && plan.jobHours),
+      workHoursPerWeekday: weekdayWorkHours(plan && plan.jobHours),
       freeHours: remaining,
       energyPerMonth:
         hours.training * 0.4 - hours.selfStudy * 0.3 + hours.friends * 0.02 -
@@ -308,7 +341,7 @@ LL.economy = (function () {
 
   return {
     WEEKS_PER_MONTH,
-    activities, weekdayChoices, weekdayEffects, socialRules, jobOptions, savingsOptions, canteenOptions, drinkOptions, eatingOutOptions, socialEventOptions, weeklyBudgetOptions, mobileDataOptions, seasonPassOptions, hourlyWage, defaultPlan,
+    activities, weekdayChoices, weekdayEffects, weekdayTimeLimit, fitWeekdayHours, socialRules, jobOptions, savingsOptions, canteenOptions, drinkOptions, eatingOutOptions, socialEventOptions, weeklyBudgetOptions, mobileDataOptions, seasonPassOptions, hourlyWage, defaultPlan,
     selectedSpending, spendingStyle, monthlyBreakdown, taxOnWage, label, ageVariant, sum
   };
 })();

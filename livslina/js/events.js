@@ -111,11 +111,10 @@ LL.events = (function () {
       lbl.className = 'll-event-choice-lbl';
       lbl.textContent = ch.label + priceHint(ch, state);
       btn.appendChild(lbl);
-      const socialHint = socialEffectHint(ch, state);
-      if (ch.note || socialHint) {
+      if (ch.note) {
         const note = document.createElement('span');
         note.className = 'll-event-choice-note';
-        note.textContent = [ch.note, socialHint].filter(Boolean).join(' · ');
+        note.textContent = ch.note;
         btn.appendChild(note);
       }
       btn.addEventListener('click', () => choose(ev, ch, state, ctx));
@@ -169,7 +168,7 @@ LL.events = (function () {
     if (key === 'money') return value < 0 ? 'Konto i minus' : (value < 2000 ? 'Lite på konto' : 'Positiv saldo');
     if (key === 'grades') return delta < 0 ? 'Karakterane går ned' : (value < 3 ? 'Under 3' : 'Stabilt nivå');
     if (key === 'wellbeing') return value < 30 ? 'Lite trivsel' : (value < 50 ? 'Trivselen er låg' : 'Greitt nivå');
-    return value < 30 ? 'Lite sosial kontakt' : (value < 50 ? 'Få sosiale poeng' : 'Greitt nivå');
+    return value < 30 ? 'Lite sosial kontakt' : (value < 50 ? 'Sosial kontakt er låg' : 'Greitt nivå');
   }
 
   function priceHint(ch, state) {
@@ -187,14 +186,6 @@ LL.events = (function () {
     if (e.gainToSavings) return ' — +' + LL.util.kr(e.gainToSavings) + ' på sparinga';
     if (e.savingsToMoney) return ' — flytt opptil ' + LL.util.kr(e.savingsToMoney) + ' frå sparinga';
     return '';
-  }
-
-  function socialEffectHint(ch, state) {
-    const effect = ch.effects && Number(ch.effects.social);
-    if (!(effect > 0)) return '';
-    const current = Number(state.stats.social) || 0;
-    const gain = Math.min(effect, Math.max(0, 100 - current));
-    return gain > 0 ? 'Sosialt +' + gain.toLocaleString('nn-NO', { maximumFractionDigits: 2 }) : 'Sosialmålaren er full';
   }
 
   function choose(ev, ch, state, ctx) {

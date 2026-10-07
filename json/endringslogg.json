@@ -2,14 +2,102 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.95",
+      "dato": "2026-10-07",
+      "samandrag": "Livslina har tydelegare val, viser ikkje barometergevinstar og held månadsbudsjettet synleg medan du planlegg.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Sosialt og karakterar følgjer vala tydelegare, og dagane blir synlege medan månadene går.",
+          "merke": "eksperiment"
+        },
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Linjevala viser no ei eiga lenkje til den offisielle utdanningsinformasjonen på Vilbli.no.",
+          "merke": "eksperiment"
+        },
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Mykje jobb tek av tida til andre kvardagsval, og månadsbudsjettet følgjer med medan ein planlegg.",
+          "merke": "eksperiment"
+        },
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Hendingskort viser piler for endringar i konto, energi, karakterar, trivsel og sosialt.",
+          "merke": "eksperiment"
+        },
+        {
+          "t": "fiksa",
+          "kva": "Livslina",
+          "tekst": "Poengsatsar er fjerna frå budsjett- og hendingsval.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
+      "versjon": "1.94",
+      "dato": "2026-10-06",
+      "samandrag": "Livslina har vekedagsplan, fleire hendingval og lågare utteljing for trivsel og sosialt.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Planlegg dei åtte frie timane i ein vekedag. Eigenstudium påverkar karakterane, og trivsel og sosialt veks langsamare.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
+      "versjon": "1.93",
+      "dato": "2026-10-06",
+      "samandrag": "Livslina får ein sosialmålar og justert balanse for energi, trivsel og karakterar.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Sosiale val gir poeng på ein eigen målar. Energiutviklinga er justert, karakterpåverknaden byggjer på energien gjennom halvåret, og positive trivselendringar er dempa.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
+      "versjon": "1.92",
+      "dato": "2026-10-06",
+      "samandrag": "Livslina har tydelegare linjeval, pendlekostnad og budsjettsummar som stemmer med linjene.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Linjevalet har ei eiga overskrift utan generell ingress. Korta viser om eleven kan ta buss eller må stå opp tidlegare; pendling heimefrå kostar eitt energipoeng kvar månad.",
+          "merke": "eksperiment"
+        },
+        {
+          "t": "fiksa",
+          "kva": "Livslina",
+          "tekst": "Budsjettkortet og halvårsoppgjeret summerer avrunda kronebeløp, slik at viste linjer og totalar stemmer.",
+          "merke": "eksperiment"
+        }
+      ]
+    },
+    {
       "versjon": "1.91",
       "dato": "2026-10-07",
-      "samandrag": "Ti eventyrlege figurar i Ljodstigen følgjer med gjennom 2D- og 3D-spela.",
+      "samandrag": "Ljodstigen har fått ti små figurar, og Livslina-diorama held seg ryddige.",
       "punkt": [
         {
           "t": "endra",
           "kva": "Ljodstigen",
           "tekst": "Vel mellom ti små figurar. Den same figuren følgjer med i Bokstavjakta og dei animerte 3D-verdane."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Livslina",
+          "tekst": "Diorama på linjekorta held seg kvar for seg, utan ramme eller bakgrunnsfarge.",
+          "merke": "eksperiment"
         }
       ]
     },

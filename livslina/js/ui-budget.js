@@ -16,6 +16,8 @@ LL.uiBudget = (function () {
     document.getElementById('budgetRound').textContent = 'Planlegg ' + round.label.toLowerCase();
     draft = Object.assign(LL.economy.defaultPlan(), state.plan || state.planPreferences || {});
     draft.activities = (draft.activities || []).slice();
+    draft.weekdayHours = Object.assign({}, draft.weekdayHours || {});
+    LL.economy.fitWeekdayHours(draft);
     if (state.creditRestriction) applyDebtPlan();
     const debtMessage = document.getElementById('budgetDebtMessage');
     debtMessage.hidden = !state.creditRestriction;
@@ -30,10 +32,15 @@ LL.uiBudget = (function () {
 
   function renderControls() {
     const restricted = LL.state.get().creditRestriction;
-    renderWeekdayControls();
     // Jobb
     btnGroup('budgetJob', LL.economy.jobOptions().map(o => ({ val: o.hours, label: o.label })),
-      draft.jobHours, v => { draft.jobHours = v; recompute(); });
+      draft.jobHours, v => {
+        draft.jobHours = v;
+        LL.economy.fitWeekdayHours(draft);
+        renderWeekdayControls();
+        recompute();
+      });
+    renderWeekdayControls();
     btnGroup('budgetCanteen', LL.economy.canteenOptions(),
       draft.canteenVisitsPerWeek, v => { draft.canteenVisitsPerWeek = v; recompute(); }, restricted);
     btnGroup('budgetDrinks', LL.economy.drinkOptions(),
@@ -60,10 +67,7 @@ LL.uiBudget = (function () {
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'vp-button vp-button--tool';
-      b.textContent = a.label + ' (' + LL.util.kr(a.monthly) + ')' +
-        (a.social > 0
-          ? (LL.state.get().stats.social < 100 ? ' · Sosialt +' + a.social.toLocaleString('nn-NO', { maximumFractionDigits: 2 }) + '/mnd' : ' · Sosialmålaren er full')
-          : '');
+      b.textContent = a.label + ' (' + LL.util.kr(a.monthly) + ')';
       const on = draft.activities.includes(a.id);
       b.setAttribute('aria-pressed', String(on));
       b.disabled = restricted;
@@ -81,20 +85,49 @@ LL.uiBudget = (function () {
     const wrap = document.getElementById('budgetWeekdayControls');
     wrap.textContent = '';
     LL.economy.weekdayChoices().forEach(choice => {
-      const row = document.createElement('label');
+      const row = document.createElement('div');
       row.className = 'll-time-row';
-      row.htmlFor = 'budgetTime-' + choice.key;
 
-      const name = document.createElement('span');
+      const name = document.createElement('label');
+      name.htmlFor = 'budgetTime-' + choice.key;
       name.textContent = choice.label;
+      const labelWrap = document.createElement('div');
+      labelWrap.className = 'll-time-label';
+      labelWrap.appendChild(name);
+      let helpText = null;
+      if (choice.key === 'selfStudy') {
+        const helpButton = document.createElement('button');
+        helpButton.type = 'button';
+        helpButton.className = 'vp-button vp-button--icon vp-button--quiet ll-time-help-button';
+        helpButton.setAttribute('aria-label', 'Forklaring på eigenstudium');
+        helpButton.setAttribute('aria-expanded', 'false');
+        helpButton.setAttribute('aria-controls', 'budgetSelfStudyHelp');
+        const icon = document.createElement('span');
+        icon.dataset.icon = 'helpCircle';
+        icon.dataset.iconSize = '16';
+        icon.setAttribute('aria-hidden', 'true');
+        helpButton.appendChild(icon);
+        helpText = document.createElement('p');
+        helpText.id = 'budgetSelfStudyHelp';
+        helpText.className = 'll-note ll-time-help';
+        helpText.hidden = true;
+        helpText.textContent = 'Du får gjort lekser og skulearbeid innan dei 8 timane som er sette av. Dette er tid til ekstra innsats, øving til prøve og anna skulearbeid som krev meir innsats.';
+        helpButton.addEventListener('click', () => {
+          const isOpen = !helpText.hidden;
+          helpText.hidden = isOpen;
+          helpButton.setAttribute('aria-expanded', String(!isOpen));
+        });
+        labelWrap.appendChild(helpButton);
+      }
       const select = document.createElement('select');
       select.className = 'vp-input ll-time-select';
       select.id = 'budgetTime-' + choice.key;
       select.setAttribute('aria-label', choice.label + ' per kvardag');
-      for (let hours = 0; hours <= 8; hours++) {
+      for (let halfHours = 0; halfHours <= 16; halfHours++) {
+        const hours = halfHours / 2;
         const option = document.createElement('option');
         option.value = String(hours);
-        option.textContent = hours + ' t';
+        option.textContent = hours.toLocaleString('nn-NO', { maximumFractionDigits: 1 }) + ' t';
         select.appendChild(option);
       }
       select.value = String(draft.weekdayHours[choice.key] || 0);
@@ -103,8 +136,9 @@ LL.uiBudget = (function () {
         updateWeekdayControls();
         recompute();
       });
-      row.append(name, select);
+      row.append(labelWrap, select);
       wrap.appendChild(row);
+      if (helpText) wrap.appendChild(helpText);
     });
     updateWeekdayControls();
   }
@@ -113,16 +147,21 @@ LL.uiBudget = (function () {
     const choices = LL.economy.weekdayChoices();
     const selected = draft.weekdayHours;
     const total = choices.reduce((sum, choice) => sum + (Number(selected[choice.key]) || 0), 0);
+    const available = LL.economy.weekdayTimeLimit(draft.jobHours);
     choices.forEach(choice => {
       const select = document.getElementById('budgetTime-' + choice.key);
       if (!select) return;
       const others = total - (Number(selected[choice.key]) || 0);
       Array.from(select.options).forEach(option => {
-        option.disabled = Number(option.value) > 8 - others;
+        option.disabled = Number(option.value) > available - others + 0.001;
       });
     });
     const remaining = document.getElementById('budgetFreeTime');
-    if (remaining) remaining.textContent = Math.max(0, 8 - total) + ' timar til fritid og hobby';
+    if (remaining) {
+      const timeLeft = LL.economy.weekdayEffects(draft).freeHours;
+      const format = value => value.toLocaleString('nn-NO', { maximumFractionDigits: 1 });
+      remaining.textContent = 'Du har ' + format(timeLeft) + ' av ' + format(available) + ' timar att til eigne val denne kvardagen.';
+    }
   }
 
   function btnGroup(id, opts, current, onPick, disabled) {
@@ -163,30 +202,6 @@ LL.uiBudget = (function () {
     const preview = Object.assign({}, state, { plan: draft, age: LL.state.currentRound().age });
     const b = LL.economy.monthlyBreakdown(preview);
     updateWeekdayControls();
-    const weekday = LL.economy.weekdayEffects(draft);
-    const weekdayPreview = document.getElementById('budgetWeekdayPreview');
-    weekdayPreview.textContent = 'Tidsplanen endrar energien med ' + formatDelta(weekday.energyPerMonth) +
-      ' og trivselen med ' + formatDelta(LL.state.scaledWellbeingDelta(weekday.wellbeingPerMonth)) +
-      ' per månad. Eigenstudium endrar karakterane med ' + formatDelta(weekday.gradePerTerm) + ' per halvår.';
-    const socialDetails = document.getElementById('budgetSocialDetails');
-    if (socialDetails) {
-      const rules = LL.economy.socialRules;
-      const number = value => value.toLocaleString('nn-NO', { maximumFractionDigits: 2 });
-      socialDetails.textContent = 'Kvart arrangement gir +' + number(rules.event) + ' sosialt. Idrettslag og kulturskule/korps gir +' + number(rules.activity) + ' kvar, innanfor ei samla grense på +' + number(rules.budgetCap) + ' frå budsjettvala. Vener i vekedagsplanen kjem i tillegg.';
-    }
-    const socialHint = document.getElementById('budgetSocialHint');
-    if (socialHint) {
-      const periodMonths = LL.state.currentRound().months || 6;
-      const availableSocial = Math.max(0, 100 - state.stats.social);
-      const projectedSocial = b.socialPerMonth >= 0
-        ? Math.min(availableSocial, b.socialPerMonth * periodMonths)
-        : -Math.min(state.stats.social, Math.abs(b.socialPerMonth * periodMonths));
-      socialHint.textContent = projectedSocial > 0
-        ? 'Denne planen kan gi opptil +' + projectedSocial.toLocaleString('nn-NO', { maximumFractionDigits: 1 }) + ' sosialt dette halvåret.'
-        : (projectedSocial < 0
-          ? 'Lite tid med vener kan redusere sosialmålaren med opptil ' + Math.abs(projectedSocial).toLocaleString('nn-NO', { maximumFractionDigits: 1 }) + ' dette halvåret.'
-          : 'Budsjettvala gir ikkje meir sosialt no; vel tid med vener for å halde målaren oppe.');
-    }
 
     // Oppstilling
     const inc = document.getElementById('budgetIncome');
@@ -224,11 +239,6 @@ LL.uiBudget = (function () {
     } else {
       warn.hidden = true;
     }
-  }
-
-  function formatDelta(value) {
-    const number = Number(value) || 0;
-    return (number > 0 ? '+' : '') + number.toLocaleString('nn-NO', { maximumFractionDigits: 2 });
   }
 
   function row(label, val, isExpense) {

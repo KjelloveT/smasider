@@ -284,11 +284,16 @@ LL.uiSetup = (function () {
       vilbli.href = p.vilbliUrl;
       vilbli.target = '_blank';
       vilbli.rel = 'noopener noreferrer';
-      vilbli.textContent = 'Les om linja på Vilbli.no';
+      const externalIcon = document.createElement('span');
+      externalIcon.dataset.icon = 'externalLink';
+      externalIcon.dataset.iconSize = '15';
+      externalIcon.setAttribute('aria-hidden', 'true');
+      vilbli.append(externalIcon, document.createTextNode('Les om linja på Vilbli.no'));
       vilbli.setAttribute('aria-label', 'Les om ' + p.name + ' på Vilbli.no, opnar i ny fane');
       cardWrap.append(card, vilbli);
       grid.appendChild(cardWrap);
     });
+    LL.util.hydrate(grid);
     renderGrantAreaChoice(chosen);
     renderTrainingRoute(chosen);
   }
@@ -369,7 +374,7 @@ LL.uiSetup = (function () {
     }
     panel.hidden = false;
     const heading = document.createElement('h3');
-    heading.className = 'heading4';
+    heading.className = 'heading4 ll-route-heading';
     heading.textContent = 'Kva vil du gjere etter VG2?';
     const intro = document.createElement('p');
     intro.className = 'll-note';

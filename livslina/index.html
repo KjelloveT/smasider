@@ -137,7 +137,7 @@
       </div>
       <div class="ll-line-grid" id="lineGrid"></div>
       <div class="ll-line-grant-choice vp-panel vp-panel--plain" id="lineGrantChoice" hidden></div>
-      <div id="lineRoute" class="ll-line-route" hidden></div>
+      <div id="lineRoute" class="ll-line-route vp-panel vp-panel--soft" hidden></div>
     </div>
 
     <!-- Steg 4: busituasjon -->
@@ -232,15 +232,14 @@
             <div><span>Skule</span><strong>8 t · låst</strong></div>
           </div>
           <div id="budgetWeekdayControls" class="ll-time-list"></div>
-          <p id="budgetFreeTime" class="ll-time-remaining" aria-live="polite">3 timar til fritid og hobby</p>
-          <p id="budgetWeekdayPreview" class="ll-note" aria-live="polite"></p>
+          <p id="budgetFreeTime" class="ll-time-remaining" aria-live="polite">Du har 8 av 8 timar att til eigne val denne kvardagen.</p>
         </fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skulen</legend><div class="ll-btn-row" id="budgetJob" role="group"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skulen</legend><div class="ll-btn-row" id="budgetJob" role="group"></div><p class="ll-note">Mykje jobb tek tid frå dei andre aktivitetane på kvardagar.</p></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Fritidsaktivitetar</legend><div class="ll-btn-row" id="budgetActivities" role="group"></div></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Kor ofte handlar du i skulekantina?</legend><div class="ll-btn-row" id="budgetCanteen" role="group" aria-label="Kantinekjøp per veke"></div></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brus eller energidrikk kjøper du?</legend><div class="ll-btn-row" id="budgetDrinks" role="group" aria-label="Kjøp av brus eller energidrikk per veke"></div></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Kor ofte kjøper du mat ute?</legend><div class="ll-btn-row" id="budgetEatingOut" role="group" aria-label="Mat ute per veke"></div></fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Kor ofte brukar du pengar på festar eller sosiale arrangement?</legend><div class="ll-btn-row" id="budgetSocialEvents" role="group" aria-label="Fest og sosiale arrangement per månad"></div><p id="budgetSocialDetails" class="ll-note"></p><p id="budgetSocialHint" class="ll-note" aria-live="polite"></p></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Kor ofte brukar du pengar på festar eller sosiale arrangement?</legend><div class="ll-btn-row" id="budgetSocialEvents" role="group" aria-label="Fest og sosiale arrangement per månad"></div></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brukar du på klesshopping i veka?</legend><div class="ll-btn-row" id="budgetClothingShopping" role="group" aria-label="Klesshopping per veke"></div></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brukar du på kjøp inne i spel i veka?</legend><div class="ll-btn-row" id="budgetInGamePurchases" role="group" aria-label="Kjøp inne i spel per veke"></div></fieldset>
         <fieldset class="vp-field ll-ctrl"><legend>Kor mykje mobildata brukar du?</legend><div class="ll-btn-row" id="budgetMobile" role="group" aria-label="Mobildata per månad"></div></fieldset>
@@ -248,23 +247,25 @@
         <fieldset class="vp-field ll-ctrl"><legend>Fast sparing</legend><div class="ll-btn-row" id="budgetSavings" role="group"></div></fieldset>
       </div>
 
-      <div class="vp-panel vp-panel--soft">
+      <div class="vp-panel vp-panel--soft ll-budget-summary">
         <h3 class="heading4 no-mt">Månadsbudsjett</h3>
-        <div class="ll-budget-cols">
-          <div>
-            <p class="ll-stat-lbl"><span data-icon="arrowDown" data-icon-size="14"></span> Inn</p>
-            <div id="budgetIncome"></div>
-            <div class="ll-budget-row ll-budget-sum"><span>Sum inn</span><strong id="budgetIncomeTotal">0 kr</strong></div>
-          </div>
-          <div>
-            <p class="ll-stat-lbl"><span data-icon="arrowUp" data-icon-size="14"></span> Ut</p>
-            <div id="budgetExpense"></div>
-            <div class="ll-budget-row ll-budget-sum"><span>Sum ut</span><strong id="budgetExpenseTotal">0 kr</strong></div>
-          </div>
+        <div class="ll-budget-totals">
+          <div><span>Sum inn</span><strong id="budgetIncomeTotal">0 kr</strong></div>
+          <div><span>Sum ut</span><strong id="budgetExpenseTotal">0 kr</strong></div>
         </div>
         <div class="vp-panel vp-panel--plain ll-stat ll-stat--net">
           <div class="ll-stat-lbl">Netto per månad</div>
           <div class="ll-stat-val" id="budgetNet">0 kr/mnd</div>
+        </div>
+        <div class="ll-budget-cols">
+          <div>
+            <p class="ll-stat-lbl"><span data-icon="arrowDown" data-icon-size="14"></span> Inn</p>
+            <div id="budgetIncome"></div>
+          </div>
+          <div>
+            <p class="ll-stat-lbl"><span data-icon="arrowUp" data-icon-size="14"></span> Ut</p>
+            <div id="budgetExpense"></div>
+          </div>
         </div>
         <p class="ll-note" id="budgetSavingsLine"></p>
         <p class="ll-note ll-debt-message" id="budgetDebtMessage" hidden></p>
