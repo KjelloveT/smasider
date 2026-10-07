@@ -182,8 +182,8 @@
 
   /* ──────────────── Geometrien ──────────────── */
 
-  /** Hjørna til figuren, klare til fem buffer. */
-  function buffer() {
+  /** Hjørna til den valde figuren, klare til fem buffer. */
+  function buffer(avatarId) {
     const s = 1 / bib.skala;
     const pos = [], nor = [], far = [], ledd = [], vekt = [];
     for (let i = 0; i < bib.tal; i++) {
@@ -191,15 +191,18 @@
       pos.push(bin.getInt16(o, true) * s, bin.getInt16(o + 2, true) * s,
                bin.getInt16(o + 4, true) * s);
       nor.push(bin.getInt8(o + 6) / 127, bin.getInt8(o + 7) / 127, bin.getInt8(o + 8) / 127);
-      far.push(bin.getUint8(o + 9) / 255, bin.getUint8(o + 10) / 255, bin.getUint8(o + 11) / 255);
+      const colour = root.LjodAvatar3D
+        ? root.LjodAvatar3D.colour(avatarId, bin.getUint8(o + 9), bin.getUint8(o + 10), bin.getUint8(o + 11), bin.getUint8(o + 12))
+        : [bin.getUint8(o + 9) / 255, bin.getUint8(o + 10) / 255, bin.getUint8(o + 11) / 255];
+      far.push(colour[0], colour[1], colour[2]);
       ledd.push(bin.getUint8(o + 12), bin.getUint8(o + 13),
                 bin.getUint8(o + 14), bin.getUint8(o + 15));
       vekt.push(bin.getUint8(o + 16) / 255, bin.getUint8(o + 17) / 255,
                 bin.getUint8(o + 18) / 255, bin.getUint8(o + 19) / 255);
     }
-    return { pos: pos, nor: nor, far: far, ledd: ledd, vekt: vekt, tal: bib.tal };
+    if (root.LjodAvatar3D) root.LjodAvatar3D.append(avatarId, pos, nor, far, ledd, vekt);
+    return { pos: pos, nor: nor, far: far, ledd: ledd, vekt: vekt, tal: pos.length / 3 };
   }
-
   /** Kor høg figuren er i kvilepositur, til å skalere han mot verda. */
   function hogd() {
     const s = 1 / bib.skala;

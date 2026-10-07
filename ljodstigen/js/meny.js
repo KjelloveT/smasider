@@ -32,7 +32,7 @@
     b.type = 'button';
     b.dataset.avatar = av.id;
     b.dataset.tone = av.tone;
-    b.appendChild(LjodShapes.avatar(av.shape, 56));
+    b.appendChild(LjodAvatar.image(av.id, 56));
     b.appendChild(R().h('span', 'ljod-avatar-name', av.name));
     b.setAttribute('aria-label', 'Figuren ' + av.name);
     return b;
@@ -52,7 +52,7 @@
 
       const pick = R().h('button', 'ljod-profile-pick vp-button vp-button--quiet vp-button--block');
       pick.type = 'button';
-      pick.appendChild(LjodShapes.avatar(av.shape, 56));
+      pick.appendChild(LjodAvatar.image(av.id, 56));
       pick.appendChild(R().h('span', 'ljod-profile-name', av.name));
       pick.appendChild(R().h('span', 'ljod-profile-sum', st.planted + ' av ' + st.total + ' bokstavar'));
       pick.setAttribute('aria-label', 'Vel ' + av.name + ', ' + st.planted + ' av ' + st.total + ' bokstavar');
