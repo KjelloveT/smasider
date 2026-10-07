@@ -106,10 +106,22 @@ LL.state = (function () {
   ]);
 
   let save = null;
+  let recentStatChanges = { money: 0, energy: 0, wellbeing: 0, social: 0, grades: 0 };
+
+  function recordStatChanges(before, after) {
+    if (!before || !after) return;
+    ['money', 'energy', 'wellbeing', 'social', 'grades'].forEach(key => {
+      const delta = Number(after[key]) - Number(before[key]);
+      if (Number.isFinite(delta) && Math.abs(delta) > 0.0001) recentStatChanges[key] = delta;
+    });
+  }
+
+  function getRecentStatChanges() { return Object.assign({}, recentStatChanges); }
 
   function newGame(opts) {
     const seed = (opts && opts.seed) || (Date.now() >>> 0);
     seedRng(seed);
+    recentStatChanges = { money: 0, energy: 0, wellbeing: 0, social: 0, grades: 0 };
     save = {
       app: 'livslina',
       version: SAVE_VERSION,
@@ -160,6 +172,7 @@ LL.state = (function () {
 
   function load(obj) {
     save = migrateSave(obj);
+    recentStatChanges = { money: 0, energy: 0, wellbeing: 0, social: 0, grades: 0 };
     seedRng((save.seed || 1) >>> 0);
     // Spol RNG fram forbi allereie brukte trekk, slik at framtidige trekk er stabile
     const draws = (save._rngDraws || 0);
@@ -369,7 +382,7 @@ LL.state = (function () {
     ROUNDS: SCHOOL_ROUNDS,
     newGame, load, get,
     stats, adjustWellbeing, scaledWellbeingDelta, currentRound, rounds, isLastRound, age, isAdult, recordBalance,
-    seedRng, rng, rngInt, rngPick,
+    seedRng, rng, rngInt, rngPick, recordStatChanges, getRecentStatChanges,
     draw, drawInt, drawPick
   };
 })();

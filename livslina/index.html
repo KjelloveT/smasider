@@ -286,6 +286,10 @@
         <div>
           <div class="ll-pb-month" id="pbMonth">—</div>
           <p class="ll-note" id="pbMonthProgress"></p>
+          <div class="ll-pb-time" aria-label="Tida går gjennom månaden">
+            <div class="ll-pb-time-heading"><strong id="pbTimeStatus">Gjer klar månaden</strong><span id="pbDayCount" aria-hidden="true">Dag 0 av 28</span></div>
+            <progress id="pbTimeProgress" max="28" value="0" aria-label="Framdrift gjennom månaden"></progress>
+          </div>
           <section class="ll-pb-calendar" aria-label="Kalender for halvåret">
             <div class="ll-pb-calendar-heading"><strong>Kalender for halvåret</strong><span id="pbCalendarStatus" aria-live="polite">Ventar på skulestart</span></div>
             <div class="ll-pb-calendar-months" id="pbCalendarMonths" role="list" aria-label="Månadene i halvåret"></div>
@@ -419,6 +423,10 @@
     <p class="ll-event-meta" id="eventMeta"></p>
     <h2 id="eventTitle" class="heading3 no-mt"></h2>
     <p id="eventText"></p>
+    <section class="ll-event-meter-panel" aria-label="Målarane dine før valet">
+      <h3 class="heading4">Slik ligg du an</h3>
+      <div id="eventMeters" class="ll-event-meters"></div>
+    </section>
     <div class="ll-event-choices" id="eventChoices"></div>
   </div>
 </div>

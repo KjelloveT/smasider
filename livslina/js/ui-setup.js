@@ -236,6 +236,8 @@ LL.uiSetup = (function () {
         state.housing = 'heime';
       }
 
+      const cardWrap = document.createElement('article');
+      cardWrap.className = 'll-line-card-shell';
       const card = document.createElement('button');
       card.type = 'button';
       card.className = 'vp-button vp-button--quiet ll-line-card';
@@ -277,7 +279,15 @@ LL.uiSetup = (function () {
 
       card.append(illustration, type, h, locationFacts, blurb, careers, grant);
       card.addEventListener('click', () => selectLine(p, availability, grid));
-      grid.appendChild(card);
+      const vilbli = document.createElement('a');
+      vilbli.className = 'vp-button vp-button--quiet ll-vilbli-link';
+      vilbli.href = p.vilbliUrl;
+      vilbli.target = '_blank';
+      vilbli.rel = 'noopener noreferrer';
+      vilbli.textContent = 'Les om linja på Vilbli.no';
+      vilbli.setAttribute('aria-label', 'Les om ' + p.name + ' på Vilbli.no, opnar i ny fane');
+      cardWrap.append(card, vilbli);
+      grid.appendChild(cardWrap);
     });
     renderGrantAreaChoice(chosen);
     renderTrainingRoute(chosen);
@@ -341,9 +351,8 @@ LL.uiSetup = (function () {
     s.trainingRoute = p.type === 'yrkesfag'
       ? (sameProgram ? s.trainingRoute : null)
       : 'school';
-    grid.querySelectorAll('.ll-line-card').forEach(c => c.setAttribute('aria-pressed', 'false'));
-    grid.querySelectorAll('.ll-line-card').forEach(c => {
-      if (c.querySelector('h4').textContent === p.name) c.setAttribute('aria-pressed', 'true');
+    grid.querySelectorAll('.ll-line-card').forEach(card => {
+      card.setAttribute('aria-pressed', String(card.dataset.programId === p.id));
     });
     renderGrantAreaChoice(s.program);
     renderTrainingRoute(p);

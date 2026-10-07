@@ -52,6 +52,7 @@ LL.sim = (function () {
 
   // Køyr éin månad: bruk økonomi, oppdater saldo/stat, logg ledger.
   function stepMonth(state, ctx, monthIdx) {
+    const metersBefore = Object.assign({}, state.stats);
     const b = LL.economy.monthlyBreakdown(state);
 
     for (const k in b.income) addCat(ctx.income, k, b.income[k]);
@@ -91,6 +92,7 @@ LL.sim = (function () {
     LL.state.recordBalance(state);
     if (state.stats.money < 0) LL.state.adjustWellbeing(state, -2); // pengestress
     clampStats(state);
+    LL.state.recordStatChanges(metersBefore, state.stats);
     ctx.energyTotal += state.stats.energy;
     ctx.energyCount++;
     state.minWellbeing = Math.min(state.minWellbeing, state.stats.wellbeing);
@@ -140,8 +142,10 @@ LL.sim = (function () {
     const studyGain = LL.economy.weekdayEffects(plan).gradePerTerm;
     dg += studyGain;
     if (state.flags.mistaForarbevis) { /* fråvær-effekt kan leggjast til seinare */ }
+    const gradeBefore = state.stats.grades;
     state.stats.grades += dg;
     clampStats(state);
+    LL.state.recordStatChanges({ grades: gradeBefore }, { grades: state.stats.grades });
 
     const summary = {
       round: ctx.round,

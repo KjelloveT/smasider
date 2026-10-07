@@ -167,15 +167,19 @@ LL.uiBudget = (function () {
     const weekdayPreview = document.getElementById('budgetWeekdayPreview');
     weekdayPreview.textContent = 'Tidsplanen endrar energien med ' + formatDelta(weekday.energyPerMonth) +
       ' og trivselen med ' + formatDelta(LL.state.scaledWellbeingDelta(weekday.wellbeingPerMonth)) +
-      ' per månad. Eigenstudium gir ' + formatDelta(weekday.gradePerTerm) + ' karakterpoeng per halvår.';
+      ' per månad. Eigenstudium endrar karakterane med ' + formatDelta(weekday.gradePerTerm) + ' per halvår.';
     const socialHint = document.getElementById('budgetSocialHint');
     if (socialHint) {
       const periodMonths = LL.state.currentRound().months || 6;
       const availableSocial = Math.max(0, 100 - state.stats.social);
-      const projectedSocial = Math.min(availableSocial, b.socialPerMonth * periodMonths);
+      const projectedSocial = b.socialPerMonth >= 0
+        ? Math.min(availableSocial, b.socialPerMonth * periodMonths)
+        : -Math.min(state.stats.social, Math.abs(b.socialPerMonth * periodMonths));
       socialHint.textContent = projectedSocial > 0
         ? 'Denne planen kan gi opptil +' + projectedSocial.toLocaleString('nn-NO', { maximumFractionDigits: 1 }) + ' sosialt dette halvåret.'
-        : 'Sosialmålaren er full; desse budsjettvala gir ikkje fleire poeng no.';
+        : (projectedSocial < 0
+          ? 'Lite tid med vener kan redusere sosialmålaren med opptil ' + Math.abs(projectedSocial).toLocaleString('nn-NO', { maximumFractionDigits: 1 }) + ' dette halvåret.'
+          : 'Budsjettvala gir ikkje meir sosialt no; vel tid med vener for å halde målaren oppe.');
     }
 
     // Oppstilling

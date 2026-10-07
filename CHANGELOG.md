@@ -3,6 +3,14 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.95] — 2026-10-07
+
+### Endra
+- **Livslina (skjult prøveutgåve): sosialmålaren har større spenn, og karakterane følgjer studieinnsatsen tydelegare.** Lite tid med vener kan trekkje sosialmålaren ned; sosiale val gir eit større løft. Eigenstudium kan både styrkje og svekkje karakterutviklinga.
+- **Livslina viser tida medan ho går.** Dagane fyller kalenderen jamt gjennom kvar månad, og spelet viser når det ventar på eit val.
+- **Linjevala lenkjer til Vilbli.** Kvar knapp opnar den offisielle sida for utdanningsprogrammet i ei ny fane.
+- **Hendingskorta viser retninga på målarane.** Energi, konto, karakterar, trivsel og sosialt får ei opp-pil eller ned-pil.
+
 ## [1.94] — 2026-10-06
 
 ### Endra

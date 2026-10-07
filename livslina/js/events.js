@@ -100,6 +100,7 @@ LL.events = (function () {
     }
     document.getElementById('eventTitle').textContent = ev.title;
     document.getElementById('eventText').textContent = ev.text;
+    renderEventMeters(state);
     const choices = document.getElementById('eventChoices');
     choices.textContent = '';
     ev.choices.forEach(ch => {
@@ -122,6 +123,53 @@ LL.events = (function () {
     });
     LL.main.openModal('eventModal');
     LL.util.hydrate(document.getElementById('eventModal'));
+  }
+
+  function renderEventMeters(state) {
+    const wrap = document.getElementById('eventMeters');
+    if (!wrap) return;
+    wrap.replaceChildren();
+    const changes = LL.state.getRecentStatChanges();
+    const rows = [
+      { key: 'energy', label: 'Energi', format: value => Math.round(value) },
+      { key: 'money', label: 'Konto', format: value => LL.util.kr(value) },
+      { key: 'grades', label: 'Karakterar', format: value => Number(value).toFixed(1).replace('.', ',') },
+      { key: 'wellbeing', label: 'Trivsel', format: value => Math.round(value) },
+      { key: 'social', label: 'Sosialt', format: value => Math.round(value) }
+    ];
+    rows.forEach(row => {
+      const value = Number(state.stats[row.key]) || 0;
+      const delta = Number(changes[row.key]) || 0;
+      const direction = delta > 0 ? 'up' : (delta < 0 ? 'down' : 'steady');
+      const label = direction === 'up' ? 'aukar' : (direction === 'down' ? 'minkar' : 'uendra');
+      const card = document.createElement('div');
+      card.className = 'll-event-meter';
+      const name = document.createElement('span');
+      name.className = 'll-event-meter-label';
+      name.textContent = row.label;
+      const reading = document.createElement('strong');
+      reading.className = 'll-event-meter-value';
+      reading.textContent = row.format(value);
+      const arrow = document.createElement('span');
+      arrow.className = 'll-event-meter-trend is-' + direction;
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.dataset.icon = direction === 'up' ? 'arrowUp' : (direction === 'down' ? 'arrowDown' : 'arrowRight');
+      arrow.dataset.iconSize = '16';
+      const signal = document.createElement('span');
+      signal.className = 'll-event-meter-status';
+      signal.textContent = meterStatus(row.key, value, delta);
+      card.setAttribute('aria-label', row.label + ': ' + row.format(value) + ', ' + label + ', ' + signal.textContent);
+      card.append(name, reading, arrow, signal);
+      wrap.appendChild(card);
+    });
+  }
+
+  function meterStatus(key, value, delta) {
+    if (key === 'energy') return value < 30 ? 'Lite energi' : (value < 50 ? 'Følg med på energien' : 'Greitt energinivå');
+    if (key === 'money') return value < 0 ? 'Konto i minus' : (value < 2000 ? 'Lite på konto' : 'Positiv saldo');
+    if (key === 'grades') return delta < 0 ? 'Karakterane går ned' : (value < 3 ? 'Under 3' : 'Stabilt nivå');
+    if (key === 'wellbeing') return value < 30 ? 'Lite trivsel' : (value < 50 ? 'Trivselen er låg' : 'Greitt nivå');
+    return value < 30 ? 'Lite sosial kontakt' : (value < 50 ? 'Få sosiale poeng' : 'Greitt nivå');
   }
 
   function priceHint(ch, state) {
@@ -156,12 +204,14 @@ LL.events = (function () {
     state.eventLog.push({ round: ctx.round.id, id: ev.id, choice: ch.label, moneyDelta, moneyAfter: state.stats.money, savingsAfter: state.stats.savings });
     ctx.eventLog.push({ id: ev.id, title: ev.title, choice: ch.label, moneyDelta });
     LL.main.closeModal('eventModal');
+    if (LL.uiPlayback && LL.uiPlayback.pauseForEvent) LL.uiPlayback.pauseForEvent();
     LL.storage.saveActive(state);
     pendingResume.idx++;
     setTimeout(showNext, 1500);
   }
 
   function applyEffects(state, e, ctx, ev) {
+    const metersBefore = Object.assign({}, state.stats);
     let moneyDelta = 0;
 
     // Kostnad
@@ -231,6 +281,7 @@ LL.events = (function () {
       });
     }
     LL.state.recordBalance(state);
+    LL.state.recordStatChanges(metersBefore, state.stats);
     return moneyDelta;
   }
 

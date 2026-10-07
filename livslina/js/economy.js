@@ -17,8 +17,8 @@ LL.economy = (function () {
   function activities() {
     return [
       { id: 'gym', label: 'Treningssenter', monthly: LL.data.value('leisure.gymYouthPerMonth'), wellbeing: 1.2, energy: 0.4, social: 0 },
-      { id: 'sport', label: 'Idrettslag', monthly: LL.data.value('leisure.sportsClubPerYear') / 12, wellbeing: 1.4, energy: 0.5, social: 0.35 },
-      { id: 'kultur', label: 'Kulturskule/korps', monthly: LL.data.value('leisure.cultureSchoolPerYear') / 12, wellbeing: 1.1, energy: 0.1, social: 0.35 },
+      { id: 'sport', label: 'Idrettslag', monthly: LL.data.value('leisure.sportsClubPerYear') / 12, wellbeing: 1.4, energy: 0.5, social: 0.65 },
+      { id: 'kultur', label: 'Kulturskule/korps', monthly: LL.data.value('leisure.cultureSchoolPerYear') / 12, wellbeing: 1.1, energy: 0.1, social: 0.65 },
       { id: 'gaming', label: 'Gaming', monthly: LL.data.value('leisure.gamingPerMonth'), wellbeing: 0.3, energy: -0.3, social: 0 }
     ];
   }
@@ -240,12 +240,12 @@ LL.economy = (function () {
   }
 
   function socialPerMonth(plan) {
-    const recurringEvents = Math.max(0, Number(plan.socialEventsPerMonth) || 0) * 0.15;
+    const recurringEvents = Math.max(0, Number(plan.socialEventsPerMonth) || 0) * 0.25;
     const activitySocial = (plan.activities || []).reduce((total, id) => {
       const activity = activities().find(item => item.id === id);
       return total + (activity ? activity.social : 0);
     }, 0);
-    return Math.min(0.6, recurringEvents + activitySocial);
+    return Math.min(1, recurringEvents + activitySocial);
   }
 
   function weekdayEffects(plan) {
@@ -267,8 +267,8 @@ LL.economy = (function () {
       wellbeingPerMonth:
         hours.training * 0.12 - hours.selfStudy * 0.04 + hours.friends * 0.1 +
         hours.scrolling * 0.02 + hours.gaming * 0.05 + remaining * 0.08,
-      socialPerMonth: hours.friends * 0.12,
-      gradePerTerm: hours.selfStudy * 0.14
+      socialPerMonth: hours.friends * 0.4 - 0.35,
+      gradePerTerm: (hours.selfStudy - 1.5) * 0.22
     };
   }
 
