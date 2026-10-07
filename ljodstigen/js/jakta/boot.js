@@ -89,6 +89,9 @@
     }
 
     create() {
+      LjodState.AVATARS.forEach(function (avatar) {
+        this.textures.addImage('ljod-avatar-' + avatar.id, LjodAvatar.loadedImage(avatar.id));
+      }, this);
       JaktaGlyfar.addToPhaser(this, 'glyfar');
       const lastar = $('jakta-lastar');
       if (lastar) lastar.hidden = true;
@@ -119,13 +122,20 @@
 
       /* Banefila teiknar berre det som står PÅ sokkelen; dei tre nedste
          radene legg byggjaren til. Sjå bane.js. */
+      /* Profilen styrer utsjånaden i dette spelet òg. */
+      this.profil = profil();
+      if (!this.profil) {
+        feil('Vel ein figur på Ljodstigen-sida først, så veit spelet kven som speler.');
+        return;
+      }
+
       this.bane = JaktaBane.bygg(this, def.rutenett, {
         basisRader: BASIS_RADER,
         pynt: def.pynt || []
       });
 
       this.spelar = JaktaSpelar.lag(this, this.bane.start.x, this.bane.start.y, {
-        farge: 'Green'
+        avatar: this.profil.avatar
       });
       /* Éin collider mot heile flislaget, uansett kor brei banen er. */
       this.physics.add.collider(this.spelar.kropp, this.bane.lag);
@@ -136,11 +146,6 @@
 
       /* Bokstavane på soklane. Dei blir sette av oppdraget, ikkje av
          banefila: geometrien er fast, innhaldet er adaptivt. */
-      this.profil = profil();
-      if (!this.profil) {
-        feil('Vel ein figur på Ljodstigen-sida først, så veit spelet kven som speler.');
-        return;
-      }
       this.oppdrag = JaktaOppdrag.lag(this.profil, this.bane.soklar, {
         type: def.type,
         /* Berre eigne baner kan ha låste bokstavar. Dei innebygde er
@@ -372,11 +377,13 @@
     /* Fonten FØRST. Blir glyfteksturen laga før Andika er klar, står
        feil bokstavformer der resten av økta — og det blir aldri
        oppdaga, sidan fonten ser rett ut overalt elles. */
-    JaktaGlyfar.ready().then(function (harAndika) {
-      if (!harAndika) console.info('[Bokstavjakta] Andika mangla; brukar fallback-fonten.');
+    Promise.all([JaktaGlyfar.ready(), LjodAvatar.loadAll()]).then(function (resultat) {
+      if (!resultat[0]) console.info('[Bokstavjakta] Andika mangla; brukar fallback-fonten.');
       /* Lyden kan lastast parallelt med at spelet startar. */
       LjodAudio.load(null, { voice: LjodState.read().voice });
       lagSpel();
+    }).catch(function () {
+      feil('Fekk ikkje klargjort figurane. Prøv å laste sida på nytt.');
     });
   }
 

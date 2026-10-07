@@ -1,9 +1,10 @@
 /* ══════════════════════════════════════════════
    LISTE.JS — Den innebygde innspelingslista
 
-   AUTOGENERERT frå `ljodstigen/INNSPELING.md`. Endrar du lista der,
-   må du oppdatere denne fila òg — det er ingen byggjesteg som gjer
-   det for deg.
+   Hovudlista er generert frå `ljodstigen/INNSPELING.md`. Steg 6 er ei
+   planlagde utvidingar for steg 6–10 frå
+   `ljodstigen/VIDARE_PROGRESJON.md`. Dei skal ikkje inn i den publiserte
+   lydbanken før spelet kan handsame lydgrupper og lengre ord.
 
    Ei liste har fire felt: `id` (blir mappenamn og filnamn-prefiks),
    `name`, `note` og `banks`. Kvar bank blir ei mappe i zip-fila, og
@@ -16,7 +17,7 @@ LB.builtinList = {
   version: 1,
   id: "ljodstigen",
   name: "Ljodstigen",
-  note: "Same stemme, same mikrofon og same rom for heile settet. Snakk roleg og vanleg — ikkje overtydeleg barnestemme.",
+  note: "Same stemme, same mikrofon og same rom for heile settet. Snakk roleg og vanleg — ikkje overtydeleg barnestemme. Steg 6–10 er planlagde opptak for seinare utvidingar av Ljodstigen.",
   banks: [
     {
       id: "fonem",
@@ -91,9 +92,22 @@ LB.builtinList = {
       ]
     },
     {
+      id: "lydgrupper",
+      name: "Lydgrupper — steg 6, 8 og 9",
+      note: "Planlagde opptak til seinare steg. Sei kvar lydgruppe som éin naturleg språklyd, ikkje som bokstavnamn. Følg talemålet ditt; ikkje legg til ein vokal.",
+      items: [
+        { id: "f_ng", label: "/ŋ/ — ng", tag: "steg 6 · lydgruppe", hint: "Hald den mjuke naselyden /ŋ/ i 0,6–0,8 s, som på slutten av «ring». Ingen vokal før eller etter." },
+        { id: "f_ei", label: "/ei/ — ei", tag: "steg 8 · diftong", hint: "Sei diftongen som éin samanhengande lyd, ikkje bokstavnamna «e-i». Bruk naturleg talemål." },
+        { id: "f_øy", label: "/øy/ — øy", tag: "steg 8 · diftong", hint: "Sei diftongen som éin samanhengande lyd, ikkje bokstavnamna «ø-y». Bruk naturleg talemål." },
+        { id: "f_au", label: "/au/ — au", tag: "steg 8 · diftong", hint: "Sei diftongen som éin samanhengande lyd, ikkje bokstavnamna «a-u». Bruk naturleg talemål." },
+        { id: "f_sj", label: "Sj-lyden — sj, skj, sk+i", tag: "steg 9 · lydgruppe", hint: "Hald sj-lyden mjukt og utan vokalhale. Same lyd kan skrivast sj, skj eller sk framfor i." },
+        { id: "f_kj", label: "Kj-lyden — kj", tag: "steg 9 · lydgruppe", hint: "Bruk den naturlege kj-uttalen din. Om talemålet ditt slår kj og sj saman, ikkje tving fram eit skilje." },
+      ]
+    },
+    {
       id: "ord",
       name: "Ord",
-      note: "Les ordet naturleg og heilt. Appen lyder sjølv ordet ved å spele fonema etter kvarandre; dette klippet er fasiten eleven skal kjenne att.",
+      note: "For steg 1–5: les ordet naturleg og heilt; spelet lyder det med bokstavlydar. Steg 6–10 er planlagde heile ord til seinare motorstøtte.",
       items: [
         { id: "o_sol", label: "sol", tag: "steg 1", hint: "Les ordet naturleg og heilt — ikkje lydert, ikkje stava. NB: o = annan lyd." },
         { id: "o_mor", label: "mor", tag: "steg 1", hint: "Les ordet naturleg og heilt — ikkje lydert, ikkje stava. NB: o = annan lyd." },
@@ -165,6 +179,79 @@ LB.builtinList = {
         { id: "o_jente", label: "jente", tag: "steg 5", hint: "Les ordet naturleg og heilt — ikkje lydert, ikkje stava." },
         { id: "o_hær", label: "hær", tag: "steg 5", hint: "Les ordet naturleg og heilt — ikkje lydert, ikkje stava." },
         { id: "o_lære", label: "lære", tag: "steg 5", hint: "Les ordet naturleg og heilt — ikkje lydert, ikkje stava." },
+        { id: "o_ring", label: "ring", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_ting", label: "ting", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_seng", label: "seng", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_lang", label: "lang", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_tung", label: "tung", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_song", label: "song", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd. O-lyden kan variere med talemålet." },
+        { id: "o_gang", label: "gang", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_sving", label: "sving", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_vinge", label: "vinge", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_mange", label: "mange", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_tunge", label: "tunge", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_konge", label: "konge", tag: "steg 6 · ng", hint: "Les ordet naturleg og heilt. «ng» står for éin lyd." },
+        { id: "o_takk", label: "takk", tag: "steg 7 · dobbel konsonant", hint: "Les ordet naturleg. Høyr kort vokal før dobbel konsonant; samanlikn med «tak» frå steg 2." },
+        { id: "o_bake", label: "bake", tag: "steg 7 · lang vokal", hint: "Les ordet naturleg. Høyr den lange vokalen før éin konsonant; samanlikn med «bakke»." },
+        { id: "o_bakke", label: "bakke", tag: "steg 7 · dobbel konsonant", hint: "Les ordet naturleg. Høyr kort vokal før dobbel konsonant; samanlikn med «bake»." },
+        { id: "o_måte", label: "måte", tag: "steg 7 · lang vokal", hint: "Les ordet naturleg. Høyr den lange vokalen før éin konsonant; samanlikn med «måtte»." },
+        { id: "o_måtte", label: "måtte", tag: "steg 7 · dobbel konsonant", hint: "Les ordet naturleg. Høyr kort vokal før dobbel konsonant; samanlikn med «måte»." },
+        { id: "o_luke", label: "luke", tag: "steg 7 · lang vokal", hint: "Les ordet naturleg. Høyr den lange vokalen før éin konsonant; samanlikn med «lukke»." },
+        { id: "o_lukke", label: "lukke", tag: "steg 7 · dobbel konsonant", hint: "Les ordet naturleg. Høyr kort vokal før dobbel konsonant; samanlikn med «luke»." },
+        { id: "o_pute", label: "pute", tag: "steg 7 · lang vokal", hint: "Les ordet naturleg. Høyr den lange vokalen før éin konsonant; samanlikn med «putte»." },
+        { id: "o_putte", label: "putte", tag: "steg 7 · dobbel konsonant", hint: "Les ordet naturleg. Høyr kort vokal før dobbel konsonant; samanlikn med «pute»." },
+        { id: "o_åtte", label: "åtte", tag: "steg 7 · dobbel konsonant", hint: "Les ordet naturleg. Høyr kort vokal før dobbel konsonant." },
+        { id: "o_hei", label: "hei", tag: "steg 8 · ei", hint: "Les ordet naturleg; «ei» er ein glidande vokallyd." },
+        { id: "o_feil", label: "feil", tag: "steg 8 · ei", hint: "Les ordet naturleg; «ei» er ein glidande vokallyd." },
+        { id: "o_stein", label: "stein", tag: "steg 8 · ei", hint: "Les ordet naturleg; «ei» er ein glidande vokallyd." },
+        { id: "o_meir", label: "meir", tag: "steg 8 · ei", hint: "Les ordet naturleg; «ei» er ein glidande vokallyd." },
+        { id: "o_reim", label: "reim", tag: "steg 8 · ei", hint: "Les ordet naturleg; «ei» er ein glidande vokallyd." },
+        { id: "o_øy", label: "øy", tag: "steg 8 · øy", hint: "Les ordet naturleg; «øy» er ein glidande vokallyd." },
+        { id: "o_røyk", label: "røyk", tag: "steg 8 · øy", hint: "Les ordet naturleg; «øy» er ein glidande vokallyd." },
+        { id: "o_høyr", label: "høyr", tag: "steg 8 · øy", hint: "Les ordet naturleg; «øy» er ein glidande vokallyd." },
+        { id: "o_raud", label: "raud", tag: "steg 8 · au", hint: "Les ordet naturleg; «au» er ein glidande vokallyd." },
+        { id: "o_laus", label: "laus", tag: "steg 8 · au", hint: "Les ordet naturleg; «au» er ein glidande vokallyd." },
+        { id: "o_haust", label: "haust", tag: "steg 8 · au", hint: "Les ordet naturleg; «au» er ein glidande vokallyd." },
+        { id: "o_saum", label: "saum", tag: "steg 8 · au", hint: "Les ordet naturleg; «au» er ein glidande vokallyd." },
+        { id: "o_maur", label: "maur", tag: "steg 8 · au", hint: "Les ordet naturleg; «au» er ein glidande vokallyd." },
+        { id: "o_sjå", label: "sjå", tag: "steg 9 · sj", hint: "Les ordet naturleg. «sj» står for éin lyd." },
+        { id: "o_sjø", label: "sjø", tag: "steg 9 · sj", hint: "Les ordet naturleg. «sj» står for éin lyd." },
+        { id: "o_sjuk", label: "sjuk", tag: "steg 9 · sj", hint: "Les ordet naturleg. «sj» står for éin lyd." },
+        { id: "o_sjuke", label: "sjuke", tag: "steg 9 · sj", hint: "Les ordet naturleg. «sj» står for éin lyd." },
+        { id: "o_skjorte", label: "skjorte", tag: "steg 9 · skj", hint: "Les ordet naturleg. «skj» står for sj-lyden." },
+        { id: "o_skjule", label: "skjule", tag: "steg 9 · skj", hint: "Les ordet naturleg. «skj» står for sj-lyden." },
+        { id: "o_ski", label: "ski", tag: "steg 9 · sk+i", hint: "Les ordet naturleg. «sk» framfor i kan stå for sj-lyden." },
+        { id: "o_skinn", label: "skinn", tag: "steg 9 · sk+i", hint: "Les ordet naturleg. «sk» framfor i kan stå for sj-lyden." },
+        { id: "o_kjole", label: "kjole", tag: "steg 9 · kj", hint: "Les ordet naturleg. «kj» står for éin lyd; følg talemålet ditt." },
+        { id: "o_kjenne", label: "kjenne", tag: "steg 9 · kj", hint: "Les ordet naturleg. «kj» står for éin lyd; følg talemålet ditt." },
+        { id: "o_kjøpe", label: "kjøpe", tag: "steg 9 · kj", hint: "Les ordet naturleg. «kj» står for éin lyd; følg talemålet ditt." },
+        { id: "o_kjøt", label: "kjøt", tag: "steg 9 · kj", hint: "Les ordet naturleg. «kj» står for éin lyd; følg talemålet ditt." },
+        { id: "o_kjem", label: "kjem", tag: "steg 9 · kj", hint: "Les ordet naturleg. «kj» står for éin lyd; følg talemålet ditt." },
+        { id: "o_skuleveg", label: "skuleveg", tag: "steg 10 · samansett", hint: "Les ordet i stavingar om du treng det, og sei heile ordet naturleg." },
+        { id: "o_solskin", label: "solskin", tag: "steg 10 · samansett", hint: "Les ordet i stavingar om du treng det, og sei heile ordet naturleg." },
+        { id: "o_venene", label: "venene", tag: "steg 10 · bøying", hint: "Les ordet i stavingar om du treng det. Legg merke til fleirtalsendinga." },
+        { id: "o_hestane", label: "hestane", tag: "steg 10 · bøying", hint: "Les ordet i stavingar om du treng det. Legg merke til den bestemte fleirtalsendinga." },
+        { id: "o_bøkene", label: "bøkene", tag: "steg 10 · bøying", hint: "Les ordet i stavingar om du treng det. Legg merke til den bestemte fleirtalsendinga." },
+        { id: "o_leseboka", label: "leseboka", tag: "steg 10 · samansett", hint: "Les ordet i delar: «lese» + «bok» + ending." },
+        { id: "o_skuleplassen", label: "skuleplassen", tag: "steg 10 · samansett", hint: "Les ordet i delar: «skule» + «plass» + ending." },
+        { id: "o_sommarferie", label: "sommarferie", tag: "steg 10 · samansett", hint: "Del det lange ordet i stavingar før du les det heilt." },
+        { id: "o_fotballaget", label: "fotballaget", tag: "steg 10 · bøying", hint: "Les ordet i delar: «fotball» + «lag» + ending." },
+        { id: "o_familien", label: "familien", tag: "steg 10 · fleirstavingsord", hint: "Del det lange ordet i stavingar før du les det heilt." },
+        { id: "o_hageslange", label: "hageslange", tag: "steg 10 · samansett", hint: "Les ordet i delar: «hage» + «slange»." },
+        { id: "o_middagstid", label: "middagstid", tag: "steg 10 · samansett", hint: "Les ordet i delar: «middag» + «tid»." },
+      ]
+    },
+    {
+      id: "setningar",
+      name: "Setningar — steg 10",
+      note: "Les med vanleg stemme, naturlege pausar og uttrykk. Hald fram med forståinga — ikkje berre lydér kvart ord.",
+      items: [
+        { id: "s_lesbok", label: "«Eg les ei bok.»", tag: "steg 10 · setning", hint: "Les heile setninga naturleg, med ei lita pause ved punktum." },
+        { id: "s_solskin", label: "«Sola skin i dag.»", tag: "steg 10 · setning", hint: "Les heile setninga naturleg, med ei lita pause ved punktum." },
+        { id: "s_boker", label: "«Mange bøker ligg i sekken.»", tag: "steg 10 · setning", hint: "Les heile setninga naturleg, med ei lita pause ved punktum." },
+        { id: "s_baten", label: "«Den raude båten er lang.»", tag: "steg 10 · setning", hint: "Les heile setninga naturleg, med ei lita pause ved punktum." },
+        { id: "s_skule", label: "«Vi går til skulen saman.»", tag: "steg 10 · setning", hint: "Les heile setninga naturleg, med ei lita pause ved punktum." },
+        { id: "s_hoyr", label: "«Høyr etter og finn ordet.»", tag: "steg 10 · setning", hint: "Les heile setninga naturleg, med ei lita pause ved punktum." },
       ]
     },
     {
