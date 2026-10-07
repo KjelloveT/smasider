@@ -141,6 +141,7 @@ LL.uiBudget = (function () {
       if (helpText) wrap.appendChild(helpText);
     });
     updateWeekdayControls();
+    LL.util.hydrate(wrap);
   }
 
   function updateWeekdayControls() {
