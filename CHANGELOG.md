@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.98] — 2026-10-07
+
+### Endra
+- **Livslina er no merkt for ungdomsskulen.** Simulatoren førebur elevane på vala dei møter når dei skal vidare til vidaregåande.
+
 ## [1.97] — 2026-10-07
 
 ### Lagt til

@@ -2,6 +2,19 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.98",
+      "dato": "2026-10-07",
+      "samandrag": "Livslina er merkt for ungdomsskulen, sidan simulatoren førebur elevane på vidaregåande.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Livslina",
+          "tekst": "Livslina er no merkt for ungdomsskulen.",
+          "merke": "verktoy"
+        }
+      ]
+    },
+    {
       "versjon": "1.97",
       "dato": "2026-10-07",
       "samandrag": "Livslina er no tilgjengeleg frå framsida under Økonomi og livsmeistring.",
