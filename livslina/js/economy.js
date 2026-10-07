@@ -7,6 +7,7 @@ window.LL = window.LL || {};
 LL.economy = (function () {
   'use strict';
 
+  const socialRules = { event: 0.25, activity: 0.65, budgetCap: 1 };
   const WEEKS_PER_MONTH = 4.33;
   const LOW_SPENDING_LIMIT = 600;
   const HIGH_SPENDING_LIMIT = 2200;
@@ -17,8 +18,8 @@ LL.economy = (function () {
   function activities() {
     return [
       { id: 'gym', label: 'Treningssenter', monthly: LL.data.value('leisure.gymYouthPerMonth'), wellbeing: 1.2, energy: 0.4, social: 0 },
-      { id: 'sport', label: 'Idrettslag', monthly: LL.data.value('leisure.sportsClubPerYear') / 12, wellbeing: 1.4, energy: 0.5, social: 0.65 },
-      { id: 'kultur', label: 'Kulturskule/korps', monthly: LL.data.value('leisure.cultureSchoolPerYear') / 12, wellbeing: 1.1, energy: 0.1, social: 0.65 },
+      { id: 'sport', label: 'Idrettslag', monthly: LL.data.value('leisure.sportsClubPerYear') / 12, wellbeing: 1.4, energy: 0.5, social: socialRules.activity },
+      { id: 'kultur', label: 'Kulturskule/korps', monthly: LL.data.value('leisure.cultureSchoolPerYear') / 12, wellbeing: 1.1, energy: 0.1, social: socialRules.activity },
       { id: 'gaming', label: 'Gaming', monthly: LL.data.value('leisure.gamingPerMonth'), wellbeing: 0.3, energy: -0.3, social: 0 }
     ];
   }
@@ -240,12 +241,12 @@ LL.economy = (function () {
   }
 
   function socialPerMonth(plan) {
-    const recurringEvents = Math.max(0, Number(plan.socialEventsPerMonth) || 0) * 0.25;
+    const recurringEvents = Math.max(0, Number(plan.socialEventsPerMonth) || 0) * socialRules.event;
     const activitySocial = (plan.activities || []).reduce((total, id) => {
       const activity = activities().find(item => item.id === id);
       return total + (activity ? activity.social : 0);
     }, 0);
-    return Math.min(1, recurringEvents + activitySocial);
+    return Math.min(socialRules.budgetCap, recurringEvents + activitySocial);
   }
 
   function weekdayEffects(plan) {
@@ -307,7 +308,7 @@ LL.economy = (function () {
 
   return {
     WEEKS_PER_MONTH,
-    activities, weekdayChoices, weekdayEffects, jobOptions, savingsOptions, canteenOptions, drinkOptions, eatingOutOptions, socialEventOptions, weeklyBudgetOptions, mobileDataOptions, seasonPassOptions, hourlyWage, defaultPlan,
+    activities, weekdayChoices, weekdayEffects, socialRules, jobOptions, savingsOptions, canteenOptions, drinkOptions, eatingOutOptions, socialEventOptions, weeklyBudgetOptions, mobileDataOptions, seasonPassOptions, hourlyWage, defaultPlan,
     selectedSpending, spendingStyle, monthlyBreakdown, taxOnWage, label, ageVariant, sum
   };
 })();

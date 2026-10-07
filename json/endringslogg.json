@@ -23,6 +23,12 @@
           "kva": "Livslina",
           "tekst": "Hendingskort viser piler for endringar i konto, energi, karakterar, trivsel og sosialt.",
           "merke": "eksperiment"
+        },
+        {
+          "t": "fiksa",
+          "kva": "Livslina",
+          "tekst": "Sosialsatsane i budsjettet følgjer no dei faktiske verdiane i spelet.",
+          "merke": "eksperiment"
         }
       ]
     },

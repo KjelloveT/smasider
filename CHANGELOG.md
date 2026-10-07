@@ -11,6 +11,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - **Linjevala lenkjer til Vilbli.** Kvar knapp opnar den offisielle sida for utdanningsprogrammet i ei ny fane.
 - **Hendingskorta viser retninga på målarane.** Energi, konto, karakterar, trivsel og sosialt får ei opp-pil eller ned-pil.
 
+### Fiksa
+- **Livslina viser oppdaterte sosialsatsar i budsjettet.** Forklaringa følgjer no satsane som blir brukte i spelet.
+
 ## [1.94] — 2026-10-06
 
 ### Endra

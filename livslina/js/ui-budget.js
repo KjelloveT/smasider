@@ -168,6 +168,12 @@ LL.uiBudget = (function () {
     weekdayPreview.textContent = 'Tidsplanen endrar energien med ' + formatDelta(weekday.energyPerMonth) +
       ' og trivselen med ' + formatDelta(LL.state.scaledWellbeingDelta(weekday.wellbeingPerMonth)) +
       ' per månad. Eigenstudium endrar karakterane med ' + formatDelta(weekday.gradePerTerm) + ' per halvår.';
+    const socialDetails = document.getElementById('budgetSocialDetails');
+    if (socialDetails) {
+      const rules = LL.economy.socialRules;
+      const number = value => value.toLocaleString('nn-NO', { maximumFractionDigits: 2 });
+      socialDetails.textContent = 'Kvart arrangement gir +' + number(rules.event) + ' sosialt. Idrettslag og kulturskule/korps gir +' + number(rules.activity) + ' kvar, innanfor ei samla grense på +' + number(rules.budgetCap) + ' frå budsjettvala. Vener i vekedagsplanen kjem i tillegg.';
+    }
     const socialHint = document.getElementById('budgetSocialHint');
     if (socialHint) {
       const periodMonths = LL.state.currentRound().months || 6;
