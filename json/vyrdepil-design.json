@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-02",
+  "updated": "2026-10-07",
   "appCatalog": "json/apps.json",
   "policy": {
     "allocation": "random-unused-on-creation",
@@ -756,7 +756,7 @@
         1672,
         941
       ],
-      "assignedTo": null
+      "assignedTo": "livslina"
     },
     {
       "id": "fjord-var-natt",
@@ -2139,6 +2139,9 @@
     },
     "vegamot": {
       "backgroundId": "bypark-haust-kveld"
+    },
+    "livslina": {
+      "backgroundId": "bypark-var-natt"
     }
   },
   "siteBackgroundSets": {
