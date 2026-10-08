@@ -400,6 +400,7 @@ body[data-font="lesefont"] .ljod-bed-letter {
   opacity: 0.5;
 }
 .ljod-badge-icon { display: block; width: 44px; height: 44px; object-fit: contain; }
+.ljod-badge:not(.is-earned) .ljod-badge-icon { filter: grayscale(1); }
 .ljod-badge.is-earned { opacity: 1; }
 .ljod-badge-title { font-weight: 800; }
 .ljod-badge-hint { font-size: 0.78rem; color: var(--muted); }

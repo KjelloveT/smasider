@@ -35,6 +35,7 @@
       appName.textContent = card.dataset.appName || card.dataset.appId || '';
       dialogSource.appendChild(appName);
       const earned = card.dataset.earned === 'true';
+      dialogArt.classList.toggle('vp-bragd-dialog-art--locked', !earned);
       dialogStatus.textContent = earned ? 'Oppnådd' : 'Ikkje oppnådd enno';
       dialogStatus.classList.toggle('vp-bragd-dialog-status--earned', earned);
       Vy.openModal(dialog);
