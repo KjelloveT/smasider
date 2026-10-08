@@ -13,11 +13,17 @@
     const dialogArt = document.getElementById('bragdDialogArt');
     const dialogSource = document.getElementById('bragdDialogSource');
     const dialogStatus = document.getElementById('bragdDialogStatus');
+    const previousButton = document.getElementById('bragdDialogPrev');
+    const nextButton = document.getElementById('bragdDialogNext');
+    const dialogPosition = document.getElementById('bragdDialogPosition');
+    let activeBadgeIndex = -1;
 
-    catalogueHost.addEventListener('click', function (event) {
-      const card = event.target.closest('.vp-bragd-card--compact');
-      if (!card || !catalogueHost.contains(card) || !dialog) return;
+    function showBadgeAt(index) {
+      const cards = Array.from(catalogueHost.querySelectorAll('.vp-bragd-card--compact'));
+      if (!cards.length) return;
 
+      activeBadgeIndex = (index + cards.length) % cards.length;
+      const card = cards[activeBadgeIndex];
       dialogTitle.textContent = card.dataset.bragdName || '';
       dialogHint.textContent = card.dataset.bragdHint || '';
       dialogArt.replaceChildren(card.querySelector('.vp-bragd-emblem').cloneNode(true));
@@ -38,7 +44,30 @@
       dialogArt.classList.toggle('vp-bragd-dialog-art--locked', !earned);
       dialogStatus.textContent = earned ? 'Oppnådd' : 'Ikkje oppnådd enno';
       dialogStatus.classList.toggle('vp-bragd-dialog-status--earned', earned);
+      dialogPosition.textContent = (activeBadgeIndex + 1) + ' av ' + cards.length;
+      previousButton.disabled = false;
+      nextButton.disabled = false;
+    }
+
+    catalogueHost.addEventListener('click', function (event) {
+      const card = event.target.closest('.vp-bragd-card--compact');
+      if (!card || !catalogueHost.contains(card) || !dialog) return;
+
+      const cards = Array.from(catalogueHost.querySelectorAll('.vp-bragd-card--compact'));
+      showBadgeAt(cards.indexOf(card));
       Vy.openModal(dialog);
+    });
+
+    previousButton.addEventListener('click', function () { showBadgeAt(activeBadgeIndex - 1); });
+    nextButton.addEventListener('click', function () { showBadgeAt(activeBadgeIndex + 1); });
+    dialog.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        showBadgeAt(activeBadgeIndex - 1);
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        showBadgeAt(activeBadgeIndex + 1);
+      }
     });
 
     closeButton.addEventListener('click', function () { Vy.closeModal(dialog); });

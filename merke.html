@@ -6,7 +6,7 @@
   <meta name="robots" content="index, follow">
   <title>Bragdane dine — Vyrdepil</title>
   <link rel="icon" href="/_resources/vyrde-ikon.png" sizes="384x384">
-<link rel="stylesheet" href="css/vyrdepil-design.css?v=1.9">
+<link rel="stylesheet" href="css/vyrdepil-design.css?v=1.10">
   <script src="js/vyrdepil-icons.js" defer></script>
   <script src="js/vyrdepil-storage.js?v=2" defer></script>
   <script src="js/vyrdepil-util.js?v=1.2" defer></script>
@@ -15,7 +15,7 @@
   <script src="js/vyrdepil-menu.js?v=3" defer></script>
   <script src="js/vyrdepil-footer.js?v=2" defer></script>
     <script src="js/vyrdepil-bragd.js?v=5" defer></script>
-  <script src="js/bragd-page.js?v=4" defer></script>
+  <script src="js/bragd-page.js?v=5" defer></script>
 </head>
 <body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-site-footer>
   <main id="main" class="vp-shell vp-site-main vp-stack vp-bragd-main">
@@ -61,6 +61,11 @@
         <div id="bragdDialogSource" class="vp-bragd-dialog-source"></div>
         <p id="bragdDialogStatus" class="vp-bragd-dialog-status"></p>
       </div>
+    </div>
+    <div class="vp-bragd-dialog-nav" role="group" aria-label="Naviger mellom bragder">
+      <button id="bragdDialogPrev" class="vp-button vp-button--quiet vp-button--icon" type="button" aria-label="Førre bragd" disabled><span data-icon="arrowLeft" aria-hidden="true"></span></button>
+      <p id="bragdDialogPosition" class="vp-bragd-dialog-position vp-small" aria-live="polite"></p>
+      <button id="bragdDialogNext" class="vp-button vp-button--quiet vp-button--icon" type="button" aria-label="Neste bragd" disabled><span data-icon="arrowRight" aria-hidden="true"></span></button>
     </div>
   </dialog>
 </body>

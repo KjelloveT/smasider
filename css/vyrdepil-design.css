@@ -820,7 +820,7 @@ body.vp-migrated-page:not([data-vp-preserve])[data-vp-layout="canvas"] .vp-fs-to
 .vp-notice > :not(.vp-notice-icon) { min-width: 0; padding: 14px 16px; align-self: center; }
 .vp-bragd-count { margin-top: 16px; }
 .vp-bragd-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,180px),1fr)); gap: 12px; }
-.vp-bragd-main #bragdGrid .vp-bragd-grid { grid-template-columns: repeat(auto-fill,minmax(50px,1fr)); gap: 2px; }
+.vp-bragd-main #bragdGrid .vp-bragd-grid { grid-template-columns: repeat(auto-fill,minmax(60px,1fr)); gap: 4px; }
 .vp-bragd-family { margin-block: 16px; }
 .vp-bragd-family > h2 { margin-bottom: 8px; }
 .vp-bragd-card {
@@ -860,6 +860,8 @@ body.vp-migrated-page:not([data-vp-preserve])[data-vp-layout="canvas"] .vp-fs-to
 .vp-bragd-dialog-source img { width: 36px; height: 36px; object-fit: contain; }
 .vp-bragd-dialog-status { width: fit-content; margin: 0; padding: 3px 10px; border: 2px dashed var(--vp-frame); border-radius: 999px; background: var(--vp-paper); font-size: .9rem; font-weight: 750; }
 .vp-bragd-dialog-status--earned { border-style: solid; background: var(--vp-moss); }
+.vp-bragd-dialog-nav { display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; gap: 12px; margin-top: 16px; }
+.vp-bragd-dialog-position { margin: 0; font-weight: 750; text-align: center; }
 .vp-bragd-progress-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,250px),1fr)); gap: 16px; }
 .vp-bragd-progress-card { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
 .vp-bragd-progress-head { display: flex; width: 100%; align-items: center; gap: 12px; }
@@ -879,7 +881,7 @@ body.vp-migrated-page:not([data-vp-preserve])[data-vp-layout="canvas"] .vp-fs-to
 .vp-bragd-app-panel summary { cursor: pointer; font-weight: 800; }
 .vp-bragd-app-panel .vp-bragd-grid { margin-top: 12px; }
 @media (max-width: 520px) {
-  .vp-bragd-main #bragdGrid .vp-bragd-grid { grid-template-columns: repeat(auto-fill,minmax(50px,1fr)); }
+  .vp-bragd-main #bragdGrid .vp-bragd-grid { grid-template-columns: repeat(auto-fill,minmax(60px,1fr)); }
   .vp-bragd-dialog { padding: 18px; }
   .vp-bragd-dialog-content { grid-template-columns: 1fr; gap: 12px; text-align: center; }
   .vp-bragd-dialog-art .vp-bragd-emblem { width: 144px; }
