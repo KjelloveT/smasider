@@ -4,12 +4,12 @@
     {
       "versjon": "1.99",
       "dato": "2026-10-08",
-      "samandrag": "Duldord og Heimsank får bakgrunnar som følgjer årstid og tid på døgnet.",
+      "samandrag": "Duldord og Heimsank får bakgrunnar som følgjer årstid og tid på døgnet, med leseflater i Heimsank.",
       "punkt": [
         {
           "t": "endra",
           "kva": "Duldord og Heimsank",
-          "tekst": "Duldord brukar skulegarden, medan Heimsank brukar flyfotoet; bakgrunnane skiftar med årstid og tid på døgnet."
+          "tekst": "Duldord brukar skulegarden, medan Heimsank brukar flyfotoet; bakgrunnane skiftar med årstid og tid på døgnet. Heimsank har lyse tekstflater som held teksten lesbar."
         }
       ]
     },
