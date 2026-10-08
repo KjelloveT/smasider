@@ -3,6 +3,14 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.0] — 2026-10-08
+
+### Lagt til
+- Versjon 2 av Vyrdepil med nytt design, nye funksjonar og nye verktøy.
+
+### Endra
+- Vegamot-skildringa er oppdatert: interaktive forteljingar med vegval der slutten ikkje alltid vert den same.
+
 ## [1.99] — 2026-10-08
 
 ### Endra

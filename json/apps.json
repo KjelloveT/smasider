@@ -478,7 +478,7 @@
       "added": "2026-09-29",
       "audience": ["Mellomtrinn", "Ungdomstrinn"],
       "desc": [
-        "Lag interaktive forteljingar med steg, vegval og fleire sluttingar. Vel sjølv kva veg lesaren skal ta, eller bruk tilfeldige val og terningkast.",
+        "Bygg interaktive forteljingar med vegval og der slutten ikkje alltid vert den same.",
         "Teikn forteljinga som eit flytkart, legg eigne bilete til stega og prøv henne i lesarmodus. Forteljingar kan lagrast lokalt, delast som fil eller eksporterast til PowerPoint."
       ]
     },

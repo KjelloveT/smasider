@@ -2,6 +2,25 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "2.0",
+      "dato": "2026-10-08",
+      "samandrag": "Versjon 2 av Vyrdepil med nytt design, nye funksjonar og nye verktøy.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Vyrdepil",
+          "tekst": "Versjon 2 av Vyrdepil er komen, med nytt design, nye funksjonar og nye verktøy.",
+          "merke": ""
+        },
+        {
+          "t": "endra",
+          "kva": "Vegamot",
+          "tekst": "Skildringa legg no vekt på interaktive forteljingar med vegval der slutten ikkje alltid vert den same.",
+          "merke": ""
+        }
+      ]
+    },
+    {
       "versjon": "1.99",
       "dato": "2026-10-08",
       "samandrag": "Bragdane har fått eigne illustrerte ikon, fast snarveg frå framsida, og Livslina er med i felles bragdsamling.",
