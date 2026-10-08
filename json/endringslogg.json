@@ -2,6 +2,25 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.99",
+      "dato": "2026-10-08",
+      "samandrag": "Bragdane har fått eigne illustrerte ikon, og Livslina er med i felles bragdsamling.",
+      "punkt": [
+        {
+          "t": "endra",
+          "kva": "Bragder",
+          "tekst": "Bragdane har fått måla PNG-ikon utan store medaljerammer. Livslina sine bragder blir viste og lagra i den felles samlinga.",
+          "merke": ""
+        },
+        {
+          "t": "endra",
+          "kva": "Ljodstigen",
+          "tekst": "Ljodstigen held på sin eigen progresjon, men nyttar no dei illustrerte bragdsymbola.",
+          "merke": ""
+        }
+      ]
+    },
+    {
       "versjon": "1.98",
       "dato": "2026-10-07",
       "samandrag": "Livslina er merkt for ungdomsskulen, sidan simulatoren førebur elevane på vidaregåande.",

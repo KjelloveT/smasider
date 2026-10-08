@@ -9,41 +9,6 @@ const Progression = (function () {
   const GAME_KEY = 'vidfaren';
   const STATE_VERSION = 1;
 
-  // Merke. ico = nøkkel i icons.js, color = .b-*-klasse, hint = vilkår.
-  const BADGES = [
-    // Rette totalt
-    { id: 'rett10',  name: '10 rette',  ico: 'check',  color: 'b-teal',   hint: 'Svar rett på 10 oppgåver' },
-    { id: 'rett50',  name: '50 rette',  ico: 'check',  color: 'b-blue',   hint: 'Svar rett på 50 oppgåver' },
-    { id: 'rett100', name: '100 rette', ico: 'target', color: 'b-pink',   hint: 'Svar rett på 100 oppgåver' },
-    { id: 'rett250', name: '250 rette', ico: 'target', color: 'b-purple', hint: 'Svar rett på 250 oppgåver' },
-    { id: 'rett500', name: '500 rette', ico: 'crown',  color: 'b-yellow', hint: 'Svar rett på 500 oppgåver' },
-    // Per modus
-    { id: 'hovudstadmeister', name: 'Hovudstadmeister', ico: 'landmark', color: 'b-blue',   hint: '100 rette hovudstader' },
-    { id: 'fjellgeit',        name: 'Fjellgeit',        ico: 'mountain', color: 'b-teal',   hint: '50 rette fjell' },
-    { id: 'innsjokjennar',    name: 'Innsjøkjennar',    ico: 'waves',    color: 'b-blue',   hint: '50 rette innsjøar' },
-    { id: 'silhuettsjaa',     name: 'Silhuett-sjåar',   ico: 'shapes',   color: 'b-pink',   hint: '50 rette omriss' },
-    { id: 'kartlos',          name: 'Kartlos',          ico: 'mapPin',   color: 'b-purple', hint: '50 rette på kartet' },
-    { id: 'flaggkjennar',     name: 'Flaggkjennar',     ico: 'flag',     color: 'b-teal',   hint: '50 rette flagg' },
-    { id: 'flaggmeister',     name: 'Flaggmeister',     ico: 'flag',     color: 'b-yellow', hint: '150 rette flagg' },
-    // Streak
-    { id: 'streak10', name: '10 på rad', ico: 'flame', color: 'b-yellow', hint: 'Få 10 rette på rad' },
-    { id: 'streak25', name: '25 på rad', ico: 'flame', color: 'b-pink',   hint: 'Få 25 rette på rad' },
-    // Plettfrie rundar
-    { id: 'plettfri',   name: 'Plettfri',        ico: 'star',   color: 'b-yellow', hint: 'Fullfør ein runde utan feil' },
-    { id: 'plettfri10', name: 'Ti plettfrie',    ico: 'medal',  color: 'b-purple', hint: 'Ti plettfrie rundar' },
-    // Vanskeleg
-    { id: 'vrien100', name: 'Vrien 100', ico: 'zap', color: 'b-blue',   hint: '100 rette på middels/vanskeleg' },
-    { id: 'vrien250', name: 'Vrien 250', ico: 'zap', color: 'b-purple', hint: '250 rette på middels/vanskeleg' },
-    // Verdsdelar
-    { id: 'europa',  name: 'Europakjennar', ico: 'compass', color: 'b-teal',   hint: '25 rette land i Europa' },
-    { id: 'afrika',  name: 'Afrikakjennar', ico: 'compass', color: 'b-yellow', hint: '25 rette land i Afrika' },
-    { id: 'asia',    name: 'Asiakjennar',   ico: 'compass', color: 'b-pink',   hint: '25 rette land i Asia' },
-    { id: 'amerika', name: 'Amerikakjennar',ico: 'compass', color: 'b-blue',   hint: '25 rette land i Amerika' },
-    { id: 'oseania', name: 'Oseaniakjennar',ico: 'compass', color: 'b-purple', hint: '15 rette land i Oseania' },
-    { id: 'verdsborgar', name: 'Verdsborgar', ico: 'globe', color: 'b-yellow', hint: 'Kjenn alle verdsdelane' },
-    // Uthald
-    { id: 'ihuga', name: 'Ihuga', ico: 'award', color: 'b-teal', hint: 'Spel 25 rundar' }
-  ];
 
   const rc = (s, r) => (s.stats.regionCorrect && s.stats.regionCorrect[r]) || 0;
   const PREDICATES = {
@@ -179,28 +144,36 @@ const Progression = (function () {
   }
 
   // ---- Merke ----
-  function hasBadge(id) { return ensure().badges.includes(id); }
+  function getEarnedBadges() {
+    const legacy = Array.isArray(ensure().badges) ? state.badges : [];
+    try {
+      const shared = VyrdepilStorage.getBragdData().badges[GAME_KEY] || [];
+      return new Set(legacy.concat(shared));
+    } catch (error) {
+      return new Set(legacy);
+    }
+  }
+
+  function hasBadge(id) { return getEarnedBadges().has(id); }
 
   /** Evaluer alle merke; returner nye som vart oppnådde. */
   function evaluate() {
     ensure();
     const earned = [];
-    for (const badge of BADGES) {
-      if (state.badges.includes(badge.id)) continue;
-      const pred = PREDICATES[badge.id];
+    const alreadyEarned = getEarnedBadges();
+    for (const id of Object.keys(PREDICATES)) {
+      if (alreadyEarned.has(id)) continue;
+      const pred = PREDICATES[id];
       if (pred && pred(state)) {
-        state.badges.push(badge.id);
-        earned.push(badge);
+        earned.push(id);
       }
     }
-    if (earned.length > 0) save();
     return earned;
   }
 
   function getStats() { return ensure().stats; }
 
   return {
-    BADGES,
     load, save,
     getEarnedTotal, getHighScore, getStats,
     recordCorrect, noteStreak, finishRound,

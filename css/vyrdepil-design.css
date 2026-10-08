@@ -834,18 +834,9 @@ body.vp-migrated-page:not([data-vp-preserve])[data-vp-layout="canvas"] .vp-fs-to
 .vp-bragd-card[data-family="meistring"] { --bragd-family: var(--vp-coral); }
 .vp-bragd-card[data-family="samling"] { --bragd-family: var(--vp-heather); }
 .vp-bragd-card[data-family="saerbragd"] { --bragd-family: var(--vp-stone); }
-.vp-bragd-emblem { position: relative; display: block; flex: 0 0 auto; width: 78px; aspect-ratio: 1; background: center / contain no-repeat; }
-.vp-bragd-emblem[data-tier="1"] { background-image: url("../_resources/vyrdepil-design/bragder/frame-1.png"); }
-.vp-bragd-emblem[data-tier="2"] { background-image: url("../_resources/vyrdepil-design/bragder/frame-2.png"); }
-.vp-bragd-emblem[data-tier="3"] { background-image: url("../_resources/vyrdepil-design/bragder/frame-3.png"); }
-.vp-bragd-motif { position: absolute; top: 24%; left: 24%; width: 52%; height: 52%; background-image: url("../_resources/vyrdepil-design/bragder/families.png"); background-repeat: no-repeat; background-size: 300% 200%; }
-.vp-bragd-emblem[data-family="milepael"] .vp-bragd-motif { background-position: 0 0; }
-.vp-bragd-emblem[data-family="utforsking"] .vp-bragd-motif { background-position: 50% 0; }
-.vp-bragd-emblem[data-family="uthald"] .vp-bragd-motif { background-position: 100% 0; }
-.vp-bragd-emblem[data-family="meistring"] .vp-bragd-motif { background-position: 0 100%; }
-.vp-bragd-emblem[data-family="samling"] .vp-bragd-motif { background-position: 50% 100%; }
-.vp-bragd-emblem[data-family="saerbragd"] .vp-bragd-motif { background-position: 100% 100%; }
-.vp-bragd-game-logo { position: absolute; top: 77%; left: 50%; width: 15%; height: 15%; transform: translate(-50%,-50%); object-fit: contain; }
+.vp-bragd-emblem { position: relative; display: grid; flex: 0 0 auto; width: 78px; aspect-ratio: 1; place-items: center; }
+.vp-bragd-icon { display: block; width: 100%; height: 100%; object-fit: contain; }
+.vp-bragd-game-logo { position: absolute; right: 0; bottom: 0; width: 22%; height: 22%; padding: 1px; border: 1px solid var(--vp-frame); border-radius: 50%; background: var(--vp-paper); object-fit: contain; }
 .vp-bragd-card--compact { display: grid; min-height: 0; aspect-ratio: 1; place-items: center; padding: 2px; border: 0; border-radius: 50%; background: transparent; box-shadow: none; cursor: pointer; }
 .vp-bragd-card--compact .vp-bragd-emblem { width: 100%; }
 .vp-bragd-card--compact:hover .vp-bragd-emblem { transform: translateY(-2px) scale(1.04); }

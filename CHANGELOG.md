@@ -3,6 +3,12 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.99] — 2026-10-08
+
+### Endra
+- Bragdane har fått eigne måla PNG-ikon utan store medaljerammer. Livslina er med i den felles bragdsamlinga, og tidlegare bragder blir førte over lokalt.
+- Ljodstigen held på sitt eige progresjonssystem, men viser no dei nye illustrerte bragdsymbola.
+
 ## [1.98] — 2026-10-07
 
 ### Endra

@@ -107,21 +107,17 @@
 
   const STAGE_NAMES = ['frø', 'spire', 'to blad', 'knopp', 'blomst', 'tre'];
 
-  /* ──────────────── Merke ──────────────── */
+  /* ──────────────── Bragder ──────────────── */
 
-  /* Eitt skjold, med tal på kor mange kantar. Alle merka ser like ut
-     med vilje — dei skal skiljast på tittelen, ikkje på ein illustrasjon
-     ingen har teikna enno. */
-  function badge(size, earned) {
-    const s = svg(size || 48);
-    s.appendChild(el('path', {
-      d: 'M50 14 L80 26 V52 c0 18 -14 28 -30 34 c-16 -6 -30 -16 -30 -34 V26 Z',
-      fill: earned ? 'currentColor' : 'none',
-      'fill-opacity': earned ? 0.15 : 0
-    }));
-    if (earned) s.appendChild(el('path', { d: 'M36 50 L46 60 L66 38' }));
-    else s.appendChild(el('circle', { cx: 50, cy: 50, r: 6, opacity: 0.4 }));
-    return s;
+  function badgeIcon(iconId, size) {
+    const image = document.createElement('img');
+    image.className = 'ljod-badge-icon';
+    image.src = new URL('../_resources/vyrdepil-design/bragder/icons/' + iconId + '.png', document.baseURI).href;
+    image.alt = '';
+    image.width = size || 44;
+    image.height = size || 44;
+    image.decoding = 'async';
+    return image;
   }
 
   /** Stjerne til dagsstjernene. */
@@ -148,7 +144,7 @@
   root.LjodShapes = {
     avatar: avatar,
     plant: plant,
-    badge: badge,
+    badgeIcon: badgeIcon,
     star: star,
     speaker: speaker,
     STAGE_NAMES: STAGE_NAMES,

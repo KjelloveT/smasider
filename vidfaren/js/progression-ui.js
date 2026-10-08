@@ -14,8 +14,7 @@ const ProgressionUI = (function () {
   }
 
   function announceBadges(earned) {
-    VyrdepilBragd.recordBadges('vidfaren', earned || []);
-    (earned || []).forEach(b => toast('Ny bragd: ' + b.name, b.ico, 'badge'));
+    VyrdepilBragd.announceBadges('vidfaren', earned || []);
   }
 
   /** Evaluer merke og vis toast for nye. Trygg å kalle ofte. */
@@ -24,22 +23,25 @@ const ProgressionUI = (function () {
   }
 
   // ---- Merkegalleri ----
-  function renderBadgeGallery() {
+  async function renderBadgeGallery() {
     const grid = document.getElementById('badgeGrid');
     if (!grid) return;
     grid.setAttribute('aria-busy', 'true');
-    const earnedIds = Progression.BADGES.filter(b => Progression.hasBadge(b.id)).map(b => b.id);
-    VyrdepilBragd.renderGameBadges(grid, 'vidfaren', earnedIds).catch(() => grid.removeAttribute('aria-busy'));
-
+    await VyrdepilBragd.migrationPromise;
+    const earnedIds = VyrdepilStorage.getBragdData().badges.vidfaren || [];
+    const definitions = await VyrdepilBragd.getBadgeDefinitions('vidfaren');
+    await VyrdepilBragd.renderGameBadges(grid, 'vidfaren', earnedIds);
     const count = document.getElementById('badgeCount');
-    if (count) {
-      const earned = Progression.BADGES.filter(b => Progression.hasBadge(b.id)).length;
-      count.textContent = `${earned} / ${Progression.BADGES.length}`;
-    }
+    if (count) count.textContent = `${earnedIds.length} / ${definitions.length}`;
   }
 
   function openBadgeGallery() {
-    renderBadgeGallery();
+    renderBadgeGallery().catch(function () {
+      const grid = document.getElementById('badgeGrid');
+      if (!grid) return;
+      grid.removeAttribute('aria-busy');
+      grid.textContent = 'Bragdane kunne ikkje lastast. Prøv att seinare.';
+    });
     Vy.openModal(document.getElementById('badgeModal'));
   }
   function closeBadgeGallery() {

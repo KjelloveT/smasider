@@ -5,7 +5,7 @@
   const scriptUrl = document.currentScript && document.currentScript.src;
   const project = scriptUrl ? new URL('../', scriptUrl) : new URL('./', location.href);
   const BASE_MIGRATION_VERSION = 1;
-  const MIGRATION_VERSION = 2;
+  const MIGRATION_VERSION = 3;
   const storageApi = typeof VyrdepilStorage !== 'undefined' ? VyrdepilStorage : null;
   let cataloguePromise;
 
@@ -116,7 +116,7 @@
   }
 
   async function migrateLibraryProgress() {
-    if (!storageApi || storageApi.getBragdData().migrationVersion >= MIGRATION_VERSION) return;
+    if (!storageApi || storageApi.getBragdData().migrationVersion >= 2) return;
     const appIds = ['bolkestokk', 'ormritaren'];
     const catalogues = await Promise.all(appIds.map(async appId => {
       const response = await fetch(new URL(appId + '/moduler/index.json', project));
@@ -127,12 +127,37 @@
     appIds.forEach((appId, index) => {
       progress[appId] = snapshotLegacyLibraryProgress(appId, catalogues[index]);
     });
-    storageApi.importBragdData({ version: MIGRATION_VERSION, progress });
+    storageApi.importBragdData({ version: 2, progress });
+  }
+
+  function migrateLivslinaBadges() {
+    if (!storageApi || storageApi.getBragdData().migrationVersion >= MIGRATION_VERSION) return;
+    const state = storageApi.getGameState('livslina') || {};
+    const storedHistory = storageApi.getHistory('livslina');
+    const history = Array.isArray(storedHistory) ? storedHistory : [];
+    const ids = new Set();
+    if (Array.isArray(state.badges)) state.badges.forEach(id => { if (typeof id === 'string') ids.add(id); });
+    history.forEach(run => {
+      if (run && Array.isArray(run.badges)) run.badges.forEach(id => { if (typeof id === 'string') ids.add(id); });
+    });
+    const networths = history.map(run => Number(run && run.networth)).filter(Number.isFinite).filter(value => value >= 0);
+    const grades = history.map(run => Number(run && run.grades)).filter(Number.isFinite).filter(value => value >= 0);
+    const progress = history.length ? {
+      completedRuns: history.length,
+      bestNetworth: networths.length ? Math.max.apply(null, networths) : 0,
+      bestGrades: grades.length ? Math.max.apply(null, grades) : 0
+    } : null;
+    storageApi.importBragdData({
+      version: MIGRATION_VERSION,
+      badges: { livslina: Array.from(ids) },
+      progress: progress ? { livslina: progress } : {}
+    });
   }
 
   async function migrateLegacyData() {
     migrateBaseLegacyData();
     await migrateLibraryProgress();
+    migrateLivslinaBadges();
   }
 
   function loadCatalogue() {
@@ -158,20 +183,25 @@
     const emblem = document.createElement('span');
     emblem.className = 'vp-bragd-emblem';
     emblem.dataset.family = definition.family || 'saerbragd';
-    emblem.dataset.tier = String(definition.tier || 1);
     emblem.setAttribute('aria-hidden', 'true');
 
-    const motif = document.createElement('span');
-    motif.className = 'vp-bragd-motif';
-    emblem.appendChild(motif);
+    const icon = document.createElement('img');
+    icon.className = 'vp-bragd-icon';
+    icon.src = new URL('_resources/vyrdepil-design/bragder/icons/' + (definition.icon || 'answer-check') + '.png', project).href;
+    icon.alt = '';
+    icon.width = 384;
+    icon.height = 384;
+    icon.loading = 'lazy';
+    icon.decoding = 'async';
+    emblem.appendChild(icon);
 
     if (app && app.img) {
       const logo = document.createElement('img');
       logo.className = 'vp-bragd-game-logo';
       logo.src = new URL(app.img, project).href;
       logo.alt = '';
-      logo.width = 32;
-      logo.height = 32;
+      logo.width = 24;
+      logo.height = 24;
       logo.loading = 'lazy';
       logo.decoding = 'async';
       emblem.appendChild(logo);
@@ -191,7 +221,6 @@
     card.dataset.appName = app ? app.name : appId;
     card.dataset.appImg = app && app.img ? app.img : '';
     card.dataset.earned = String(earned);
-    card.dataset.tier = String(definition.tier || 1);
     card.setAttribute('aria-label', definition.name + '. ' + definition.hint + '. ' + (app ? app.name : appId) + '. ' + (earned ? 'Oppnådd.' : 'Ikkje oppnådd.') + ' Opne forklaringa.');
 
     card.appendChild(makeBadgeEmblem(definition, app));
@@ -245,6 +274,20 @@
       host.appendChild(makeBadgeCard(definition, appId, app, isEarned, false));
     });
     host.removeAttribute('aria-busy');
+  }
+
+  async function getBadgeDefinitions(appId) {
+    const data = await loadCatalogue();
+    return data.catalogue.apps[appId] ? data.catalogue.apps[appId].badges.slice() : [];
+  }
+
+  async function getBadgeDefinition(appId, badgeId) {
+    const definitions = await getBadgeDefinitions(appId);
+    return definitions.find(definition => definition.id === badgeId) || null;
+  }
+
+  function getBadgeIconUrl(iconId) {
+    return new URL('_resources/vyrdepil-design/bragder/icons/' + (iconId || 'answer-check') + '.png', project).href;
   }
 
   async function renderBadgeCatalogue(host) {
@@ -305,7 +348,8 @@
       ['gamesPlayed', 'Økter'], ['bestStreak', 'Lengste rekkje']
     ],
     bolkestokk: [],
-    ormritaren: []
+    ormritaren: [],
+    livslina: [['completedRuns', 'Fullførte løp'], ['bestNetworth', 'Beste nettoformue (kr)'], ['bestGrades', 'Høgaste karaktersnitt']]
   };
 
   async function renderProgress(host) {
@@ -314,7 +358,7 @@
     const data = await loadCatalogue();
     const snapshots = storageApi.getBragdData().progress || {};
     host.replaceChildren();
-    ['heimsank', 'vidfaren', 'tidvis', 'bolkestokk', 'ormritaren'].forEach(appId => {
+    ['heimsank', 'vidfaren', 'tidvis', 'bolkestokk', 'ormritaren', 'livslina'].forEach(appId => {
       const app = data.apps[appId];
       const snapshot = snapshots[appId];
       const card = document.createElement('article');
@@ -402,10 +446,29 @@
   }
 
   function recordBadges(appId, badges) {
-    if (!storageApi || !Array.isArray(badges)) return;
+    if (!storageApi || !Array.isArray(badges)) return [];
+    const recorded = [];
     badges.forEach(badge => {
       const id = typeof badge === 'string' ? badge : badge && badge.id;
-      if (id) storageApi.recordBadge(appId, id);
+      if (id && storageApi.recordBadge(appId, id)) recorded.push(id);
+    });
+    return recorded;
+  }
+
+  function announceBadges(appId, badgeIds) {
+    if (!storageApi || !Array.isArray(badgeIds)) return Promise.resolve([]);
+    const freshIds = badgeIds.filter(id => typeof id === 'string' && storageApi.recordBadge(appId, id));
+    if (!freshIds.length) return Promise.resolve([]);
+    return getBadgeDefinitions(appId).then(definitions => {
+      const byId = new Map(definitions.map(definition => [definition.id, definition]));
+      const fresh = freshIds.map(id => byId.get(id)).filter(Boolean);
+      if (global.Vy && typeof global.Vy.toast === 'function') {
+        fresh.forEach(definition => global.Vy.toast('Ny bragd: ' + definition.name, { icon: 'award', kind: 'badge' }));
+      }
+      return fresh;
+    }).catch(error => {
+      console.error('Bragdlista kunne ikkje lastast for feiring:', error);
+      return [];
     });
   }
 
@@ -417,8 +480,12 @@
     loadCatalogue,
     migrationPromise,
     renderGameBadges,
+    getBadgeDefinitions,
+    getBadgeDefinition,
+    getBadgeIconUrl,
     renderBadgeCatalogue,
     renderProgress,
-    recordBadges
+    recordBadges,
+    announceBadges
   };
 })(window);

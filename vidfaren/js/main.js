@@ -18,7 +18,7 @@
   function renderTopStats() {
     $('statHigh').textContent = Progression.getHighScore();
     $('statTotal').textContent = Progression.getEarnedTotal();
-    const earned = Progression.BADGES.filter(b => Progression.hasBadge(b.id)).length;
+    const earned = Progression.getEarnedTotal();
     $('badgeCountTop').textContent = earned;
   }
 

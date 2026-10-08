@@ -164,28 +164,13 @@
 .lk-result-actions { display: flex; gap: 10px; }
 .lk-result-actions .btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
 
-/* ── Merke-modal ────────────────────────────── */
+/* ── Bragd-modal ────────────────────────────── */
 .lk-badge-modal { max-width: 620px; width: 92%; max-height: 86vh; overflow: auto; }
 .lk-badge-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .lk-badge-head h2 { display: inline-flex; align-items: center; gap: 8px; margin: 0; }
 .lk-badge-count { font-size: .85rem; color: var(--muted); font-family: 'Courier New', 'Monaco', ui-monospace, monospace; }
 .lk-modal-close { padding: 8px 10px; }
-.badge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; }
-
-.bdg { position: relative; border: 3px solid var(--border); border-radius: 12px; box-shadow: 3px 3px 0 var(--shadow); padding: 14px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.bdg-medal { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: var(--surface); border: 3px solid var(--border); }
-.bdg-name { font-weight: 700; font-size: .85rem; }
-.bdg-hint { font-size: .7rem; color: #333; line-height: 1.2; }
-.bdg.is-locked { filter: grayscale(1) opacity(.6); }
-.bdg-lock { position: absolute; top: 6px; right: 6px; color: var(--border); }
-
-/* Merkefargar (.b-* — Tidvis-stil) */
-.b-yellow { background: #FFDB58; }
-.b-teal   { background: #7CE0CB; }
-.b-blue   { background: #87CEEB; }
-.b-pink   { background: #FFB3D1; }
-.b-purple { background: #C4A1FF; }
-.b-yellow .bdg-medal, .b-teal .bdg-medal, .b-blue .bdg-medal, .b-pink .bdg-medal, .b-purple .bdg-medal { color: #111; }
+.badge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 12px; }
 /* ── Responsivt ─────────────────────────────── */
 @media (max-width: 560px) {
   .lk-hero { flex-direction: column; text-align: center; gap: 12px; }

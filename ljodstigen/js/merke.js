@@ -16,13 +16,13 @@
      test. Testen får (p, a) der a er den adaptive tilstanden. */
   const BADGES = [
     {
-      id: 'spire', title: 'Første spire', hint: 'Få ein bokstav til å spire',
+      id: 'spire', title: 'Første spire', hint: 'Få ein bokstav til å spire', icon: 'sprout',
       test: function (p, a) {
         return Object.keys(a.items).some(function (ch) { return a.items[ch].maxBox >= 2; });
       }
     },
     {
-      id: 'sjufro', title: 'Sju frø', hint: 'Plant alle bokstavane i det første settet',
+      id: 'sjufro', title: 'Sju frø', hint: 'Plant alle bokstavane i det første settet', icon: 'seven-seeds',
       test: function (p, a) {
         return LjodLetters.STEPS[0].every(function (ch) {
           return a.items[ch] && a.items[ch].maxBox >= 1;
@@ -30,35 +30,35 @@
       }
     },
     {
-      id: 'solstralen', title: 'Solstrålen', hint: 'Lyder ordet «sol»',
+      id: 'solstralen', title: 'Solstrålen', hint: 'Lyder ordet «sol»', icon: 'sunbeam',
       test: function (p) { return (p.counters.words || []).indexOf('sol') !== -1; }
     },
     {
-      id: 'ordbyggjar', title: 'Ordbyggjar', hint: 'Bygg ti ord',
+      id: 'ordbyggjar', title: 'Ordbyggjar', hint: 'Bygg ti ord', icon: 'wooden-blocks',
       test: function (p) { return (p.counters.wordsBuilt || 0) >= 10; }
     },
     {
-      id: 'tvillingane', title: 'Tvillingane', hint: 'Skil b og d ti gonger på rad',
+      id: 'tvillingane', title: 'Tvillingane', hint: 'Skil b og d ti gonger på rad', icon: 'twin-sprouts',
       test: function (p) { return (p.counters.bdStreak || 0) >= 10; }
     },
     {
-      id: 'rolegsikker', title: 'Roleg og sikker', hint: 'Ti rette der du tok deg god tid',
+      id: 'rolegsikker', title: 'Roleg og sikker', hint: 'Ti rette der du tok deg god tid', icon: 'turtle-check',
       test: function (p) { return (p.counters.slowRight || 0) >= 10; }
     },
     {
-      id: 'tolmodig', title: 'Tolmodig', hint: 'Kom att til ein vanskeleg bokstav og fekk han rett',
+      id: 'tolmodig', title: 'Tolmodig', hint: 'Kom att til ein vanskeleg bokstav og fekk han rett', icon: 'returning-trail',
       test: function (p) { return (p.counters.redeemed || []).length >= 1; }
     },
     {
-      id: 'attkome', title: 'Attkomen', hint: 'Spel to dagar på rad',
+      id: 'attkome', title: 'Attkomen', hint: 'Spel to dagar på rad', icon: 'streak-footprints',
       test: function (p) { return LjodState.streakDays(p) >= 2; }
     },
     {
-      id: 'trufast', title: 'Trufast', hint: 'Spel fem dagar på rad',
+      id: 'trufast', title: 'Trufast', hint: 'Spel fem dagar på rad', icon: 'streak-footprints',
       test: function (p) { return LjodState.streakDays(p) >= 5; }
     },
     {
-      id: 'nysgjerrig', title: 'Nysgjerrig', hint: 'Prøv alle modusane du har opne',
+      id: 'nysgjerrig', title: 'Nysgjerrig', hint: 'Prøv alle modusane du har opne', icon: 'category-key',
       test: function (p, a) {
         const open = LjodAdaptive.unlockedModes(a);
         return open.length > 1 && open.every(function (m) {
@@ -67,7 +67,7 @@
       }
     },
     {
-      id: 'heilehagen', title: 'Heile skogen', hint: 'Få alle 29 bokstavane til å bli tre',
+      id: 'heilehagen', title: 'Heile skogen', hint: 'Få alle 29 bokstavane til å bli tre', icon: 'mixed-forest',
       test: function (p, a) {
         return LjodLetters.ALPHABET.every(function (ch) {
           return a.items[ch] && a.items[ch].maxBox >= LjodAdaptive.MAX_BOX;

@@ -1,36 +1,11 @@
-/* achievements.js — merke-definisjonar, opplåsingslogikk og XP/nivå.
-   Eit «merke» låsast opp éin gong og lagrast i progress.unlocked.
+/* achievements.js — bragdvilkår, opplåsingslogikk og XP/nivå.
+   Bragdane blir registrerte i den felles VyrdepilStorage-samlinga.
    XP samlast over økter; playerLevel = floor(xp / XP_PER_LEVEL) + 1. */
 (function () {
   'use strict';
 
   const XP_PER_LEVEL = 200;
   const FAST_MS = 2500;   // terskel for «Lynrask»
-
-  // rekkjefølgje = visingsrekkjefølgje i galleriet
-  const BADGES = [
-    { id: 'fyrste',   name: 'Fyrste rett',     ico: 'star',   color: 'b-pink',
-      hint: 'Svar rett éin gong' },
-    { id: 'streak10', name: 'Ti på rad',       ico: 'flame',  color: 'b-yellow',
-      hint: '10 rette på rad' },
-    { id: 'halvtime', name: 'Halvtimemeister', ico: 'clock',  color: 'b-teal',
-      hint: 'Feilfri runde på «Heile & halve»' },
-    { id: 'kvart',    name: 'Kvartkongen',     ico: 'crown',  color: 'b-blue',
-      hint: 'Feilfri runde på «Kvart»' },
-    { id: 'lynrask',  name: 'Lynrask',         ico: 'bolt',   color: 'b-purple',
-      hint: 'Svar rett på under 2,5 sekund' },
-    { id: 'minutt',   name: 'Minuttmeister',   ico: 'target', color: 'b-pink',
-      hint: 'Klar nivå 4 utan feil' },
-    { id: 'nattugle', name: 'Nattugle',        ico: 'owl',    color: 'b-teal',
-      hint: 'Spel etter klokka 20' },
-    { id: 'hundre',   name: 'Hundreklubben',   ico: 'medal',  color: 'b-yellow',
-      hint: '100 rette totalt' }
-  ];
-
-  function badgeById(id) {
-    for (let i = 0; i < BADGES.length; i++) if (BADGES[i].id === id) return BADGES[i];
-    return null;
-  }
 
   function playerLevelFor(xp) {
     return Math.floor(xp / XP_PER_LEVEL) + 1;
@@ -79,14 +54,19 @@
     p.xp += s.xp;
     const toLevel = playerLevelFor(p.xp);
 
-    // merke
+    // Bragder
     const newBadges = [];
-    for (let i = 0; i < BADGES.length; i++) {
-      const id = BADGES[i].id;
-      if (p.unlocked.indexOf(id) !== -1) continue;
+    const alreadyEarned = new Set(Array.isArray(progress.unlocked) ? progress.unlocked : []);
+    try {
+      const stored = VyrdepilStorage.getBragdData().badges.tidvis || [];
+      stored.forEach(function (id) { alreadyEarned.add(id); });
+    } catch (error) {
+      // Legacy-lista held evalueringa trygg dersom felleslagringa ikkje er tilgjengeleg.
+    }
+    for (const id of Object.keys(PREDICATES)) {
+      if (alreadyEarned.has(id)) continue;
       const pred = PREDICATES[id];
       if (pred && pred(p, s, ctx)) {
-        p.unlocked.push(id);
         newBadges.push(id);
       }
     }
@@ -101,8 +81,6 @@
   }
 
   window.TidvisAchievements = {
-    BADGES: BADGES,
-    badgeById: badgeById,
     evaluate: evaluate,
     playerLevelFor: playerLevelFor,
     levelProgress: levelProgress,
