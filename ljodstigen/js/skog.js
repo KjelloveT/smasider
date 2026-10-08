@@ -184,7 +184,7 @@
     LjodMerke.all().forEach(function (b) {
       const earned = p.badges.indexOf(b.id) !== -1;
       const cell = R().h('div', 'ljod-badge' + (earned ? ' is-earned' : ''));
-      cell.appendChild(LjodShapes.badge(44, earned));
+      cell.appendChild(LjodShapes.badgeIcon(b.icon, 44));
       cell.appendChild(R().h('span', 'ljod-badge-title', b.title));
       cell.appendChild(R().h('span', 'ljod-badge-hint', b.hint));
       cell.setAttribute('aria-label', b.title + '. ' + b.hint + (earned ? '. Teke.' : '. Ikkje teke enno.'));

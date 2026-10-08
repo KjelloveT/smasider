@@ -29,7 +29,9 @@
         const bragdGalleri = document.getElementById('ormBragder');
         if (bragdGalleri && window.VyrdepilBragd) {
             const earned = VyrdepilStorage.getBragdData().badges.ormritaren || [];
-            VyrdepilBragd.renderGameBadges(bragdGalleri, 'ormritaren', earned);
+            VyrdepilBragd.renderGameBadges(bragdGalleri, 'ormritaren', earned).catch(function () {
+                bragdGalleri.textContent = 'Bragdane kunne ikkje lastast. Prøv att seinare.';
+            });
         }
         (katalog.grupper || []).forEach(gruppe => {
             const modular = (katalog.modular || []).filter(m => m.gruppe === gruppe.id);

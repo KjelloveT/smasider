@@ -131,16 +131,17 @@ const ProgressionUI = (function () {
 
   // ---- Merke ----
   function announceBadges(earned) {
-    VyrdepilBragd.recordBadges('heimsank', earned || []);
-    (earned || []).forEach(b => toast(`Ny bragd: ${b.name}`, b.ico, 'badge'));
+    VyrdepilBragd.announceBadges('heimsank', earned || []);
   }
 
   function renderBadgeGallery() {
     const grid = document.getElementById('badgeGrid');
     if (!grid) return;
     grid.setAttribute('aria-busy', 'true');
-    const earned = Progression.BADGES.filter(b => Progression.hasBadge(b.id)).map(b => b.id);
-    VyrdepilBragd.renderGameBadges(grid, 'heimsank', earned).catch(() => grid.removeAttribute('aria-busy'));
+    VyrdepilBragd.migrationPromise.then(() => {
+      const earned = VyrdepilStorage.getBragdData().badges.heimsank || [];
+      return VyrdepilBragd.renderGameBadges(grid, 'heimsank', earned);
+    }).catch(() => grid.removeAttribute('aria-busy'));
   }
 
   function openBadgeGallery() {

@@ -16,47 +16,6 @@ const Progression = (function () {
   // Kategori som alltid er open frå start.
   const DEFAULT_UNLOCKED = 'land';
 
-  // Merke. ico = Lucide-nøkkel i icons.js, color = .b-*-klasse (Tidvis-stil).
-  const BADGES = [
-    // Kort-milepælar
-    { id: 'fyrstekort',  name: 'Fyrste kort',  ico: 'star',     color: 'b-yellow', hint: 'Få ditt fyrste kort' },
-    { id: 'samlar',      name: 'Samlar',       ico: 'layers',   color: 'b-teal',   hint: 'Få 25 kort til saman' },
-    { id: 'storsamlar',  name: 'Storsamlar',   ico: 'trophy',   color: 'b-yellow', hint: 'Få 100 kort til saman' },
-    { id: 'tusensamlar', name: 'Tusensamlar',  ico: 'trophy',   color: 'b-purple', hint: 'Få 1000 kort til saman' },
-    // Sjeldsemd
-    { id: 'sjeldsynt',   name: 'Sjeldsynt',    ico: 'gem',      color: 'b-purple', hint: 'Få eit segngjeten-kort' },
-    { id: 'gudebore',    name: 'Gudebore',     ico: 'crown',    color: 'b-yellow', hint: 'Få eit gudebore-kort' },
-    { id: 'glitrande',   name: 'Glitrande',    ico: 'sparkles', color: 'b-pink',   hint: 'Få eit foil-kort' },
-    // Rett svar — totalt
-    { id: 'rett10',      name: '10 rette',     ico: 'check',    color: 'b-teal',   hint: 'Svar rett på 10 oppgåver' },
-    { id: 'rett20',      name: '20 rette',     ico: 'check',    color: 'b-teal',   hint: 'Svar rett på 20 oppgåver' },
-    { id: 'rett30',      name: '30 rette',     ico: 'check',    color: 'b-blue',   hint: 'Svar rett på 30 oppgåver' },
-    { id: 'rett40',      name: '40 rette',     ico: 'check',    color: 'b-blue',   hint: 'Svar rett på 40 oppgåver' },
-    { id: 'rett50',      name: '50 rette',     ico: 'check',    color: 'b-pink',   hint: 'Svar rett på 50 oppgåver' },
-    { id: 'rett75',      name: '75 rette',     ico: 'target',   color: 'b-pink',   hint: 'Svar rett på 75 oppgåver' },
-    { id: 'reknemeister',name: 'Reknemeister', ico: 'target',   color: 'b-blue',   hint: 'Svar rett på 100 oppgåver' },
-    { id: 'rett200',     name: '200 rette',    ico: 'target',   color: 'b-purple', hint: 'Svar rett på 200 oppgåver' },
-    { id: 'reknegud',    name: 'Reknegud',     ico: 'crown',    color: 'b-purple', hint: 'Svar rett på 500 oppgåver' },
-    // Rett svar på medium/vanskeleg
-    { id: 'vrien100',    name: 'Vrien 100',    ico: 'target',   color: 'b-teal',   hint: 'Svar rett på 100 oppgåver på middels/vanskeleg' },
-    { id: 'vrien200',    name: 'Vrien 200',    ico: 'target',   color: 'b-blue',   hint: 'Svar rett på 200 oppgåver på middels/vanskeleg' },
-    { id: 'vrien300',    name: 'Vrien 300',    ico: 'target',   color: 'b-pink',   hint: 'Svar rett på 300 oppgåver på middels/vanskeleg' },
-    { id: 'vrien400',    name: 'Vrien 400',    ico: 'crown',    color: 'b-yellow', hint: 'Svar rett på 400 oppgåver på middels/vanskeleg' },
-    { id: 'vrien500',    name: 'Vrien 500',    ico: 'crown',    color: 'b-purple', hint: 'Svar rett på 500 oppgåver på middels/vanskeleg' },
-    // Opplåsing
-    { id: 'oppdagar',    name: 'Oppdagar',     ico: 'key',      color: 'b-teal',   hint: 'Ha tre opne kategoriar' },
-    { id: 'heile-verda', name: 'Heile verda',  ico: 'globe',    color: 'b-blue',   hint: 'Lås opp alle kategoriane' },
-    // Unike samlingar
-    { id: 'kategori10',      name: 'God start',           ico: 'layers',   color: 'b-teal',   hint: 'Samle 10 unike kort i éin kategori' },
-    { id: 'kategori25',      name: 'Full korthylle',      ico: 'layers',   color: 'b-yellow', hint: 'Samle 25 unike kort i éin kategori' },
-    { id: 'unik100',         name: 'Hundre unike',        ico: 'trophy',   color: 'b-purple', hint: 'Samle 100 ulike kort' },
-    { id: 'sjeldsamlar',     name: 'Sjeldsamlar',         ico: 'gem',      color: 'b-blue',   hint: 'Samle 10 sjeldgjevne kort' },
-    { id: 'segnsamlar',      name: 'Segnsamlar',          ico: 'sparkles', color: 'b-purple', hint: 'Samle 5 segngjetne kort' },
-    { id: 'gudesamlar',      name: 'Gudesamlar',          ico: 'crown',    color: 'b-yellow', hint: 'Samle 3 gudeborne kort' },
-    { id: 'foilsamlar',      name: 'Foilsamlar',          ico: 'sparkles', color: 'b-pink',   hint: 'Samle 10 unike foil-kort' },
-    { id: 'komplett',        name: 'Komplett samling',    ico: 'check',    color: 'b-yellow', hint: 'Finn kvart kort i ein kategori' }
-  ];
-
   // Vilkår per merke. Samlingsmerka brukar no unike kort i lageret.
   const mh = (s) => s.stats.correctMidHard || 0;
   const rarityCount = (ctx, key) => ctx.rarityUnique?.[key] || 0;
@@ -128,7 +87,6 @@ const Progression = (function () {
     // Defensiv utfylling om eldre/delvis state
     if (!state.stats) state.stats = freshState().stats;
     if (!Array.isArray(state.unlocked)) state.unlocked = [DEFAULT_UNLOCKED];
-    if (!Array.isArray(state.badges)) state.badges = [];
     if (!state.unlocked.includes(DEFAULT_UNLOCKED)) state.unlocked.push(DEFAULT_UNLOCKED);
     return state;
   }
@@ -151,7 +109,7 @@ const Progression = (function () {
         state.version = STATE_VERSION;
         state.unlocked = state.unlocked.filter(id => id !== 'videospill');
         const retired = new Set(['fullhus', 'fullhus-vanleg', 'fullhus-sjeld', 'fullhus-segn', 'fullhus-gude', 'fullhus-foil']);
-        state.badges = state.badges.filter(id => !retired.has(id));
+        if (Array.isArray(state.badges)) state.badges = state.badges.filter(id => !retired.has(id));
         save();
       }
       return state;
@@ -278,10 +236,20 @@ const Progression = (function () {
 
   // ---- Merke ----
 
-  function hasBadge(id) { return ensure().badges.includes(id); }
+  function getEarnedBadges() {
+    const legacy = Array.isArray(ensure().badges) ? state.badges : [];
+    try {
+      const shared = VyrdepilStorage.getBragdData().badges[GAME_KEY] || [];
+      return new Set(legacy.concat(shared));
+    } catch (error) {
+      return new Set(legacy);
+    }
+  }
+
+  function hasBadge(id) { return getEarnedBadges().has(id); }
 
   /**
-   * Evaluate all badges; return the list of newly earned badge objects.
+   * Evaluate all badges; return the IDs that were newly earned.
    * @param {Object} ctx - { unlockedCount, fullCategories, totalCats }
    */
   function evaluate(ctx) {
@@ -289,20 +257,18 @@ const Progression = (function () {
     const context = ctx || {};
     if (context.unlockedCount == null) context.unlockedCount = state.unlocked.length;
     const earned = [];
-    for (const badge of BADGES) {
-      if (state.badges.includes(badge.id)) continue;
-      const pred = PREDICATES[badge.id];
+    const alreadyEarned = getEarnedBadges();
+    for (const id of Object.keys(PREDICATES)) {
+      if (alreadyEarned.has(id)) continue;
+      const pred = PREDICATES[id];
       if (pred && pred(state, context)) {
-        state.badges.push(badge.id);
-        earned.push(badge);
+        earned.push(id);
       }
     }
-    if (earned.length > 0) save();
     return earned;
   }
 
   return {
-    BADGES,
     POINTS,
     load, save,
     reload: fresh,

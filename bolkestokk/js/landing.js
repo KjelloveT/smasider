@@ -32,7 +32,9 @@
         const bragdGalleri = document.getElementById('bolkBragder');
         if (bragdGalleri && window.VyrdepilBragd) {
             const earned = VyrdepilStorage.getBragdData().badges.bolkestokk || [];
-            VyrdepilBragd.renderGameBadges(bragdGalleri, 'bolkestokk', earned);
+            VyrdepilBragd.renderGameBadges(bragdGalleri, 'bolkestokk', earned).catch(function () {
+                bragdGalleri.textContent = 'Bragdane kunne ikkje lastast. Prøv att seinare.';
+            });
         }
         (katalog.grupper || []).forEach(gruppe => {
             const modular = (katalog.modular || []).filter(m => m.gruppe === gruppe.id);

@@ -1,5 +1,5 @@
 /* storage.js — tynn wrapper rundt VyrdepilStorage for Tidvis.
-   Lagrar framgang (nivå/XP, opplåste merke, statistikk, oppsett) som
+   Lagrar framgang (nivå/XP, statistikk, oppsett) som
    éin tilstands-blokk under nøkkelen 'tidvis', og toppscore separat. */
 (function () {
   'use strict';
@@ -9,7 +9,6 @@
   const DEFAULT_PROGRESS = {
     playerLevel: 1,
     xp: 0,
-    unlocked: [],          // merke-id-ar
     levelCompletion: [0, 0, 0, 0],  // antal spursmål besvara per nivå (for opplåsing)
     stats: {
       totalCorrect: 0,

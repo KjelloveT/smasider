@@ -243,11 +243,9 @@
 .ll-factoid [data-icon] { flex: 0 0 auto; margin-top: 0.15rem; }
 .ll-final-diorama { max-width: 660px; margin: 0.75rem auto 0; }
 .ll-chart-wrap { max-width: 100%; overflow-x: auto; }
-.ll-turning, .ll-badge { padding: 0.75rem; }
-.ll-turning + .ll-turning, .ll-badge + .ll-badge { margin-top: 0.5rem; }
+.ll-turning { padding: 0.75rem; }
+.ll-turning + .ll-turning { margin-top: 0.5rem; }
 .ll-turning-delta { font-weight: 800; }
-.ll-badges { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 0.6rem; }
-.ll-badge.earned { background: var(--vp-moss); }
 .ll-event-modal { width: min(100%, 42rem); padding: clamp(1.25rem, 4vw, 2rem); }
 .ll-event-modal > * + * { margin-top: 1rem; }
 .ll-event-meter-panel { padding: 0.75rem; border: 1px solid var(--vp-border); border-radius: var(--vp-radius); background: var(--vp-paper); }

@@ -668,13 +668,23 @@
       leftCard.style.padding = '18px';
       if (sum.newBadges && sum.newBadges.length) {
         const nb = el('tv-newbadge card');
-        const b = TidvisAchievements.badgeById(sum.newBadges[0]);
-        const medal = el('bdg__medal');
-        medal.appendChild(TidvisIcons.el(b.ico, { size: 38 }));
-        nb.appendChild(medal);
+        const badgeIcon = document.createElement('img');
+        badgeIcon.className = 'tv-newbadge__icon';
+        badgeIcon.width = 72;
+        badgeIcon.height = 72;
+        badgeIcon.alt = '';
+        nb.appendChild(badgeIcon);
         const col = el('');
         col.appendChild(txt('div', 'tv-eyebrow', 'NY BRAGD'));
-        col.appendChild(txt('div', 'serif', b.name));
+        const badgeName = txt('div', 'serif', 'Bragd låst opp');
+        col.appendChild(badgeName);
+        VyrdepilBragd.getBadgeDefinition('tidvis', sum.newBadges[0]).then(function (badge) {
+          if (!badge) return;
+          badgeIcon.src = VyrdepilBragd.getBadgeIconUrl(badge.icon);
+          badgeName.textContent = badge.name;
+        }).catch(function () {
+          badgeName.textContent = 'Ny bragd';
+        });
         if (sum.newBadges.length > 1) {
           col.appendChild(txt('div', 'label-strong', '+ ' + (sum.newBadges.length - 1) + ' til'));
         }
@@ -769,8 +779,7 @@
     // ---------- BRAGDGALLERI ----------
     showBadges: function () {
       const self = this;
-      const prog = TidvisStorage.getProgress();
-      const unlocked = prog.unlocked || [];
+      const unlocked = VyrdepilStorage.getBragdData().badges.tidvis || [];
 
       const overlay = el('tv-fb-overlay');
       overlay.style.background = 'rgba(26,23,20,.45)';
@@ -793,7 +802,13 @@
       head.appendChild(h);
       const count = el('pill');
       count.appendChild(TidvisIcons.el('trophy', { size: 16 }));
-      count.appendChild(document.createTextNode(unlocked.length + ' / ' + TidvisAchievements.BADGES.length));
+      const countText = document.createTextNode(unlocked.length + ' / …');
+      count.appendChild(countText);
+      VyrdepilBragd.getBadgeDefinitions('tidvis').then(function (definitions) {
+        countText.textContent = unlocked.length + ' / ' + definitions.length;
+      }).catch(function () {
+        countText.textContent = unlocked.length + ' bragder';
+      });
       head.appendChild(count);
       panel.appendChild(head);
 

@@ -195,7 +195,7 @@
       progress.levelCompletion[s.level] = (progress.levelCompletion[s.level] || 0) + s.answeredCount;
       const ev = TidvisAchievements.evaluate(progress, s);
       TidvisStorage.setProgress(ev.progress);
-      VyrdepilBragd.recordBadges('tidvis', ev.newBadges);
+      const newBadges = VyrdepilBragd.recordBadges('tidvis', ev.newBadges);
       const isRecord = TidvisStorage.saveHighScore(s.score);
       TidvisStorage.saveToHistory({
         score: s.score, mode: s.mode, level: s.level,
@@ -205,7 +205,7 @@
       TidvisUI.showResult({
         session: s,
         accuracy: TidvisState.accuracy(s),
-        newBadges: ev.newBadges,
+        newBadges: newBadges,
         leveledUp: ev.leveledUp,
         fromLevel: ev.fromLevel,
         toLevel: ev.toLevel,

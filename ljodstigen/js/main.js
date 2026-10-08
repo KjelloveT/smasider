@@ -160,7 +160,7 @@
       const list = R().h('div', 'ljod-won');
       wonBadges.forEach(function (b) {
         const cell = R().h('div', 'ljod-badge is-earned');
-        cell.appendChild(LjodShapes.badge(44, true));
+        cell.appendChild(LjodShapes.badgeIcon(b.icon, 44));
         cell.appendChild(R().h('span', 'ljod-badge-title', b.title));
         list.appendChild(cell);
       });

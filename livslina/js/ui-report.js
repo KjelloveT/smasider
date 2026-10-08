@@ -113,15 +113,15 @@ LL.uiReport = (function () {
 
   // ════════════ SLUTTRAPPORT ════════════
 
-  const BADGES = [
-    { id: 'buffer', icon: 'gem', label: 'Bufferbyggjar', desc: 'Minst 20 000 kr spart', test: s => s.stats.savings >= 20000 },
-    { id: 'frikort', icon: 'coins', label: 'Frikortmeister', desc: 'Tente pengar utan å gå over frikortgrensa', test: s => (s.totalWage || 0) >= 30000 && !s.flags.overFrikort },
-    { id: 'fagbrev', icon: 'award', label: 'God start i læretida', desc: 'Møtte godt førebudd til læretida', test: s => s.program.type === 'yrkesfag' && s.trainingRoute === 'apprenticeship' && s.flags.laereplassBra },
-    { id: 'studieklar', icon: 'book', label: 'Studieklar', desc: 'Studieførebuande med snitt 4+', test: s => s.program.type === 'studieforberedande' && s.stats.grades >= 4 },
-    { id: 'balanse', icon: 'heart', label: 'Balansekunstnar', desc: 'Trivsel og energi aldri under 40', test: s => s.minWellbeing >= 40 && s.minEnergy >= 40 },
-    { id: 'noysemd', icon: 'shield', label: 'Nøysemd', desc: 'Nøysame forbrukarval i minst 4 halvår', test: s => (s.noysamCount || 0) >= 4 },
-    { id: 'pluss', icon: 'sparkles', label: 'Alltid i pluss', desc: 'Kontoen var aldri i minus', test: s => !s.wentNegative },
-    { id: 'formue', icon: 'trophy', label: 'God start', desc: 'Over 30 000 kr i formue til slutt', test: s => (s.stats.money + s.stats.savings) >= 30000 }
+  const BADGE_TESTS = [
+    { id: 'buffer', test: s => s.stats.savings >= 20000 },
+    { id: 'frikort', test: s => (s.totalWage || 0) >= 30000 && !s.flags.overFrikort },
+    { id: 'fagbrev', test: s => s.program.type === 'yrkesfag' && s.trainingRoute === 'apprenticeship' && s.flags.laereplassBra },
+    { id: 'studieklar', test: s => s.program.type === 'studieforberedande' && s.stats.grades >= 4 },
+    { id: 'balanse', test: s => s.minWellbeing >= 40 && s.minEnergy >= 40 },
+    { id: 'noysemd', test: s => (s.noysamCount || 0) >= 4 },
+    { id: 'pluss', test: s => !s.wentNegative },
+    { id: 'formue', test: s => (s.stats.money + s.stats.savings) >= 30000 }
   ];
 
   function showFinal() {
@@ -170,22 +170,31 @@ LL.uiReport = (function () {
     // Vendepunkt
     renderTurningPoints(s, networth);
 
-    // Merke
-    renderBadges(s);
+    // Bragder
+    const qualifyingBadges = BADGE_TESTS.filter(badge => badge.test(s)).map(badge => badge.id);
 
     // Lagre fullført løp éin gong
     if (!s._runSaved) {
       s._runSaved = true;
-      const earned = BADGES.filter(b => b.test(s)).map(b => b.id);
-      s.badges = earned;
+      const newlyEarned = VyrdepilBragd.recordBadges('livslina', qualifyingBadges);
       LL.storage.saveCompletedRun({
         program: s.program.name, programType: s.program.type,
         networth: Math.round(networth), grades: +s.stats.grades.toFixed(1),
-        wellbeing: Math.round(s.stats.wellbeing), badges: earned,
+        wellbeing: Math.round(s.stats.wellbeing), badges: newlyEarned,
         housing: s.housing
+      });
+      const completedRuns = LL.storage.completedRuns() || [];
+      const networths = completedRuns.map(run => Number(run && run.networth)).filter(Number.isFinite).filter(value => value >= 0);
+      const grades = completedRuns.map(run => Number(run && run.grades)).filter(Number.isFinite).filter(value => value >= 0);
+      VyrdepilStorage.updateBragdProgress('livslina', {
+        completedRuns: completedRuns.length,
+        bestNetworth: networths.length ? Math.max.apply(null, networths) : 0,
+        bestGrades: grades.length ? Math.max.apply(null, grades) : 0
       });
       LL.storage.saveActive(s);
     }
+
+    renderBadges(VyrdepilStorage.getBragdData().badges.livslina || []);
 
     LL.main.showScreen('screen-final');
     LL.util.hydrate(document.getElementById('screen-final'));
@@ -241,21 +250,11 @@ LL.uiReport = (function () {
     });
   }
 
-  function renderBadges(s) {
+  function renderBadges(earnedIds) {
     const wrap = document.getElementById('finalBadges');
-    wrap.textContent = '';
-    BADGES.forEach(b => {
-      const earned = b.test(s);
-      const card = document.createElement('div');
-      card.className = 'vp-panel vp-panel--plain ll-badge' + (earned ? ' earned' : '');
-      card.innerHTML = '<span class="ll-badge-ico" data-icon="' + b.icon + '" data-icon-size="22"></span>';
-      const t = document.createElement('div');
-      const h = document.createElement('strong'); h.textContent = b.label;
-      const d = document.createElement('p'); d.className = 'll-note'; d.textContent = b.desc;
-      t.append(h, d);
-      card.appendChild(t);
-      wrap.appendChild(card);
-    });
+    wrap.setAttribute('aria-busy', 'true');
+    VyrdepilBragd.renderGameBadges(wrap, 'livslina', earnedIds)
+      .catch(() => wrap.removeAttribute('aria-busy'));
   }
 
   // Enkel SVG-linjegraf: saldo på brukskonto over tid

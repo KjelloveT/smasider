@@ -37,7 +37,7 @@
     leitekryss: 'Gøym ord i eit bokstavrutenett på skjerm eller ark.',
     vitjingsruta: 'Lag og tilpass QR-kodar for lenkjer, nett og kontaktar.',
     dagsvegen: 'Vis dagsplanen og tel ned pågåande undervisningsøkter.',
-    vegamot: 'Bygg interaktive forteljingar med vegval og fleire sluttingar.',
+    vegamot: 'Bygg interaktive forteljingar med vegval og der slutten ikkje alltid vert den same.',
     livslina: 'Følg ein elev gjennom vidaregåande og utforsk korleis skule, arbeid, økonomi og fritid formar kvardagen.'
   });
 

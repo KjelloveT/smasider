@@ -11,12 +11,12 @@ const OrmFramgang = (function () {
     let modular = [];
 
     const BRAGDER = [
-        { id: 'fyrste-leksjon', name: 'Fyrste leksjon', icon: 'footprints', test: s => s.completedLessons >= 1 },
-        { id: 'ti-leksjonar', name: 'Ti leksjonar', icon: 'check', test: s => s.completedLessons >= 10 },
-        { id: 'fyrste-modul', name: 'Ferdig med ein modul', icon: 'layers', test: s => s.modulesCompleted >= 1 },
-        { id: '25-leksjonar', name: '25 leksjonar', icon: 'target', test: s => s.completedLessons >= 25 },
-        { id: 'halvvegs-bibliotek', name: 'Halvvegs i biblioteket', icon: 'map', test: s => s.libraryPercent >= 50 },
-        { id: 'heile-biblioteket', name: 'Heile biblioteket', icon: 'trophy', test: s => s.completedLessons >= s.totalLessons }
+        { id: 'fyrste-leksjon', test: s => s.completedLessons >= 1 },
+        { id: 'ti-leksjonar', test: s => s.completedLessons >= 10 },
+        { id: 'fyrste-modul', test: s => s.modulesCompleted >= 1 },
+        { id: '25-leksjonar', test: s => s.completedLessons >= 25 },
+        { id: 'halvvegs-bibliotek', test: s => s.libraryPercent >= 50 },
+        { id: 'heile-biblioteket', test: s => s.completedLessons >= s.totalLessons }
     ];
 
     /** @returns {Array<{modul:string, leksjon:string, status:string, forsok:number, dato:string}>} */
@@ -62,10 +62,9 @@ const OrmFramgang = (function () {
 
         const earned = new Set(VyrdepilStorage.getBragdData().badges[APP] || []);
         const unlocked = BRAGDER.filter(bragd => bragd.test(snapshot) && !earned.has(bragd.id))
-            .filter(bragd => VyrdepilStorage.recordBadge(APP, bragd.id));
-        if (annonser && typeof Vy !== 'undefined' && Vy.toast) {
-            unlocked.forEach(bragd => Vy.toast('Ny bragd: ' + bragd.name, { icon: bragd.icon, kind: 'badge' }));
-        }
+            .map(bragd => bragd.id);
+        if (annonser && unlocked.length) VyrdepilBragd.announceBadges(APP, unlocked);
+        else unlocked.forEach(id => VyrdepilStorage.recordBadge(APP, id));
         return snapshot;
     }
 
