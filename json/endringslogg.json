@@ -2,6 +2,29 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "1.100",
+      "dato": "2026-10-08",
+      "samandrag": "Tevlingstreet lagar turneringar på A3-ark og storskjerm, med eit felles elevbibliotek.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Tevlingstreet",
+          "tekst": "Fire turneringsformer for enkeltelevar og lag, med samanhengande A3-ark, lokal lagring og direktevising på storskjerm.",
+          "merke": "verktoy"
+        },
+        {
+          "t": "nytt",
+          "kva": "Elevbiblioteket",
+          "tekst": "Felles elevlister og gruppesett i Tevlingstreet, Flokkdeilar, Klassekart og namneveljarane."
+        },
+        {
+          "t": "endra",
+          "kva": "Namneveljarar og personvern",
+          "tekst": "Like elevnamn blir bevarte. Personvernoversikta forklarer lokal lagring av turneringar og elevbibliotek."
+        }
+      ]
+    },
+    {
       "versjon": "1.99",
       "dato": "2026-10-08",
       "samandrag": "Duldord og Heimsank får bakgrunnar som følgjer årstid og tid på døgnet, med leseflater i Heimsank.",

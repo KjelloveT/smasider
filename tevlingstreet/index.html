@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="nn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tevlingstreet — Vyrdepil</title>
+    <link rel="stylesheet" href="../css/vyrdepil-design.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../js/vyrdepil-storage.js" defer></script>
+    <script src="../js/vyrdepil-icons.js" defer></script>
+    <script src="../js/vyrdepil-util.js" defer></script>
+    <script src="../js/vyrdepil-elevgrupper.js" defer></script>
+    <script src="../js/vyrdepil-elevgrupper-ui.js" defer></script>
+    <script src="../js/vyrdepil-design.js" defer></script>
+    <script src="../js/vyrdepil-app-shell.js" defer></script>
+    <script src="../js/vyrdepil-menu.js" defer></script>
+    <script src="../js/vyrdepil-footer.js" defer></script>
+    <script src="js/core.js" defer></script>
+    <script src="js/engine.js" defer></script>
+    <script src="js/swiss.js" defer></script>
+    <script src="js/storage.js" defer></script>
+    <script src="js/sync.js" defer></script>
+    <script src="js/view.js" defer></script>
+    <script src="js/setup.js" defer></script>
+    <script src="js/play.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+<body class="vp-page" data-vp-design data-vp-app="tevlingstreet" data-vp-preserve data-vp-layout="expanded" data-vp-site-footer>
+<main class="vp-shell vp-shell--wide" id="main">
+    <div class="vp-app-intro">
+        <section class="vp-panel vp-panel--plain vp-app-intro-board">
+            <img class="vp-app-logo" data-vp-app-logo src="../_resources/vyrdepil-design/logos/tevlingstreet-mala.png" width="384" height="384" alt="Eit turneringstre av vegvisarskilt">
+            <div class="vp-app-intro-copy"><p class="vp-help">Frå første kamp til finale</p><h1 class="vp-heading">Tevlingstreet</h1><p>Lag ei turnering for elevar eller lag. Følg henne på A3-ark eller på storskjerm.</p></div>
+        </section>
+        <img class="vp-app-intro-mascot" data-vp-mascot src="../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt="Stein-Vyrde held vegvisarskilt">
+    </div>
+    <nav class="vp-toolbar" aria-label="Turneringar">
+        <div class="vp-toolbar-group">
+            <button class="vp-button vp-button--primary" id="newTournament">Ny turnering</button>
+            <button class="vp-button" id="loadTournament">Opne lagra</button>
+            <button class="vp-button" id="importTournament">Hent frå fil</button>
+            <button class="vp-button vp-button--tool" id="openLibrary">Elevbiblioteket</button>
+        </div>
+        <p id="saveStatus" class="vp-help" role="status"></p>
+    </nav>
+    <p id="appError" class="vp-notice vp-notice--text vp-notice--error" role="alert" hidden></p>
+    <section id="workspace" class="ts-workspace" aria-label="Oppsett og gjennomføring"></section>
+    <details class="vp-accordion ts-help"><summary>Slik kjem du i gang</summary><div class="vp-accordion-body vp-prose">
+        <ol><li>Vel elevar eller lag, og hent eller skriv inn deltakarane.</li><li>Vel turneringsform og sjå kor mange kampar det blir.</li><li>Kontroller trekninga og fest oppsettet.</li><li>Skriv ut A3-arka, eller opne storskjermen og før inn resultata her.</li></ol>
+        <p>Du kan bruke arka utan maskin etter at oppsettet er skrive ut. Sveitser krev at du lagar nye paringar mellom rundane; oppskrifta følgjer med arka.</p>
+        <p>Alt blir lagra i denne nettlesaren. På ei felles maskin kan andre som bruker same nettlesar, sjå namna. Last ned ei kopi om du vil flytte turneringa til ei anna maskin.</p>
+    </div></details>
+</main>
+<input type="file" id="importFile" accept=".json,application/json" hidden>
+</body>
+</html>

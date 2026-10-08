@@ -40,7 +40,8 @@
       "ordkryss": "_resources/vyrdepil-design/logos/ordkryss-mala.png",
       "leitekryss": "_resources/leitekryss.svg",
       "vitjingsruta": "_resources/vyrdepil-design/logos/vitjingsruta-mala.png",
-      "dagsvegen": "_resources/vyrdepil-design/logos/dagsvegen-mala.png"
+      "dagsvegen": "_resources/vyrdepil-design/logos/dagsvegen-mala.png",
+      "tevlingstreet": "_resources/vyrdepil-design/logos/tevlingstreet-mala.png"
     }
   },
   "scenes": [
@@ -1340,7 +1341,7 @@
         1672,
         941
       ],
-      "assignedTo": null
+      "assignedTo": "tevlingstreet"
     },
     {
       "id": "fjorestein-haust-kveld",
@@ -2534,6 +2535,9 @@
     },
     "livslina": {
       "backgroundId": "bypark-var-natt"
+    },
+    "tevlingstreet": {
+      "backgroundId": "vidde-vinter-morgon"
     }
   },
   "siteBackgroundSets": {

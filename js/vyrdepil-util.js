@@ -413,7 +413,49 @@ window.Vy = (function () {
         return node;
     }
 
+    /** Ei native dialogflate med felles lukking, fokus og Escape. */
+    function createDialog(title) {
+        const dialog = el('dialog', 'vp-dialog');
+        const heading = el('h2', 'vp-heading', title);
+        heading.id = 'vy-dialog-' + uuid();
+        dialog.setAttribute('aria-labelledby', heading.id);
+        const head = el('div', 'vp-dialog-head');
+        const close = el('button', 'vp-button vp-button--quiet', 'Lukk');
+        close.type = 'button';
+        close.addEventListener('click', function () { closeModal(dialog); });
+        head.append(heading, close);
+        dialog.appendChild(head);
+        document.body.appendChild(dialog);
+        dialog.addEventListener('close', function () { dialog.remove(); });
+        return dialog;
+    }
+    function confirmAction(message, title, action) {
+        return new Promise(function (resolve) {
+            const dialog = createDialog(title || 'Stadfest');
+            dialog.appendChild(el('p', 'vp-prose', message));
+            const buttons = el('div', 'vp-toolbar-group');
+            const yes = el('button', 'vp-button vp-button--primary', action || 'Stadfest');
+            const no = el('button', 'vp-button', 'Avbryt');
+            let accepted = false;
+            yes.type = no.type = 'button';
+            yes.addEventListener('click', function () { accepted = true; closeModal(dialog); });
+            no.addEventListener('click', function () { closeModal(dialog); });
+            buttons.append(yes, no); dialog.appendChild(buttons);
+            dialog.addEventListener('close', function () { resolve(accepted); });
+            openModal(dialog);
+        });
+    }
+    /** Lokal transport; appen eig protokollen og data som skal sendast. */
+    function openChannel(name, onMessage) {
+        let channel;
+        try { channel = new BroadcastChannel(name); } catch (error) { return null; }
+        channel.addEventListener('message', function (event) { onMessage(event.data); });
+        return { send: function (data) { channel.postMessage(data); }, close: function () { channel.close(); } };
+    }
     return {
+        createDialog: createDialog,
+        confirmAction: confirmAction,
+        openChannel: openChannel,
         escapeHtml: escapeHtml,
         slug: slug,
         uuid: uuid,

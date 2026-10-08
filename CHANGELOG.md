@@ -3,6 +3,16 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [1.100] — 2026-10-08
+
+### Lagt til
+- **Tevlingstreet:** turneringar for 2–128 enkeltelevar eller lag, med cup, alle-mot-alle, puljar med sluttspel og sveitser. Same kampnummer på A3-ark og direktevising i eit eige storskjermvindauge.
+- **Elevbiblioteket:** felles elevlister og namngjevne gruppesett. Flokkdeilar, Klassekart, Tevlingstreet og namneveljarane hentar kopiar utan å flytte gamle data.
+
+### Endra
+- Namneveljarane held på to ulike elevar med same namn.
+- Personvernoversikta forklarer lokal lagring av turneringar, elevlister og grupper.
+
 ## [1.99] — 2026-10-08
 
 ### Endra

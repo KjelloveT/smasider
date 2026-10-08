@@ -295,6 +295,8 @@ textarea.vp-input { min-height: 110px; resize: vertical; }
 .vp-notice--success { background: var(--vp-success); }
 .vp-notice--warning { background: var(--vp-warning); }
 .vp-notice--error { background: var(--vp-error); }
+.vp-notice--text { display: block; padding: 14px 16px; }
+.vp-notice--text p { padding: 0; }
 .vp-notice p { margin: 0; padding: 14px 16px; align-self: center; }
 .vp-dialog { color: var(--vp-ink); width: min(600px,calc(100% - 32px)); max-height: calc(100dvh - 48px); padding: 24px; overflow: auto; background: var(--vp-wood); border: 4px solid var(--vp-frame); border-radius: 12px; }
 .vp-dialog::backdrop { background: rgb(11 32 24 / .65); }
@@ -905,4 +907,11 @@ body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-
   body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-hero--has-logo { grid-template-columns: 48px minmax(0,1fr); gap: 8px; }
   body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-hero--has-logo > img.vp-migrated-logo { width: 48px; height: 48px; max-height: 48px; }
   body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-mascot { max-width: 54px; max-height: 48px; }
+}
+/* Felles elevbibliotek: funksjonell geometri, same felt og flater som resten. */
+.vp-library-dialog { width: min(860px, calc(100vw - 24px)); }
+.vp-library-row { display: grid; grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr) auto; gap: 8px; align-items: center; }
+.vp-library-row > :only-child { grid-column: 1 / -1; }
+@media (max-width: 560px) {
+    .vp-library-row { grid-template-columns: minmax(0, 1fr); }
 }

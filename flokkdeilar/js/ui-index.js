@@ -17,6 +17,12 @@
     /* ── DOM-referansar ── */
     const listGrid       = document.getElementById('listGrid');
     const emptyHelp      = document.getElementById('emptyHelp');
+    document.getElementById('btnElevbibliotek').addEventListener('click', () => VyrdepilElevgrupperUI.open({
+        kind: 'students', onChoose: item => {
+            FStorage.create(item.name, item.students.map(s => ({ id: s.id, name: s.name })), null, null, false);
+            render();
+        }
+    }));
 
     const overlayNyListe = document.getElementById('overlayNyListe');
     const inputListeNamn = document.getElementById('inputListeNamn');

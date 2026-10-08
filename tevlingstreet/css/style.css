@@ -1,0 +1,46 @@
+/* Appspesifikk geometri. Fargar og grunnkomponentar kjem frå felles CSS. */
+[hidden] { display: none !important; }
+.ts-workspace { min-width: 0; }
+.ts-setup-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(300px, 1fr); gap: 24px; align-items: start; }
+.ts-stack { display: grid; gap: 16px; }
+.ts-inline { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.ts-inline > .vp-field { flex: 1 1 140px; }
+.ts-roster { display: grid; gap: 12px; }
+.ts-person { display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+.ts-members { grid-column: 2 / -1; display: grid; gap: 8px; }
+.ts-member { display: grid; grid-template-columns: minmax(80px, 1fr) minmax(100px, 1fr) auto; gap: 8px; }
+.ts-choice-description { margin-top: 6px; }
+.ts-format { display: grid; gap: 6px; }
+.ts-format input { align-self: start; }
+.ts-match-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; }
+.ts-match { min-width: 0; overflow-wrap: anywhere; display: grid; gap: 8px; }
+.ts-match p { margin: 0; }
+.ts-match-sides { display: grid; gap: 8px; }
+.ts-match-side { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ts-match-side > strong { flex: 1 1 150px; font-size: clamp(18px, 1.5vw, 24px); }
+.ts-match-side > small { flex: 1 0 100%; }
+.ts-status { font-weight: 700; }
+.ts-table-wrap { max-width: 100%; overflow-x: auto; }
+.ts-table { width: 100%; }
+.ts-table td:nth-child(2) { overflow-wrap: anywhere; min-width: 120px; }
+.ts-tree { display: grid; grid-template-columns: repeat(var(--rounds), minmax(170px, 1fr)); gap: 24px; min-width: 0; }
+.ts-tree-column { display: flex; flex-direction: column; min-width: 0; }
+.ts-tree-stack { flex: 1; display: grid; grid-template-rows: repeat(var(--slots), minmax(0, 1fr)); gap: 10px; }
+.ts-tree-node { align-self: center; position: relative; }
+.ts-tree-node::after { content: '→'; position: absolute; left: calc(100% + 4px); top: 50%; }
+.ts-tree-column:last-child .ts-tree-node::after { display: none; }
+.ts-tree-scroll { overflow-x: auto; }
+.ts-help { margin-top: 24px; }
+.ts-display { max-width: 1920px; margin: 0 auto; padding: clamp(12px, 2vw, 40px); }
+.ts-display h1 { font-size: clamp(24px, 3vw, 48px); overflow-wrap: anywhere; }
+.ts-display .ts-match-side > strong { font-size: clamp(22px, 2.5vw, 40px); }
+.ts-display .ts-table { font-size: clamp(18px, 2vw, 30px); }
+.ts-display .ts-tree .ts-match-side > strong { font-size: clamp(18px, 1.8vw, 28px); }
+.ts-display .ts-tree { gap: 16px; }
+.ts-round-tools { margin: 16px 0; }
+@media (max-width: 800px) {
+    .ts-setup-grid { grid-template-columns: minmax(0, 1fr); }
+    .ts-member { grid-template-columns: minmax(0, 1fr); }
+    .ts-tree { min-width: 720px; }
+}
+@media (prefers-reduced-motion: reduce) { .ts-display * { scroll-behavior: auto; } }
