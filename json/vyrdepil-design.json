@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-07",
+  "updated": "2026-10-08",
   "appCatalog": "json/apps.json",
   "policy": {
     "allocation": "random-unused-on-creation",
@@ -83,6 +83,14 @@
     {
       "id": "skolegard",
       "name": "Skolegard"
+    },
+    {
+      "id": "duldord-skolegard",
+      "name": "Duldord – skulegarden"
+    },
+    {
+      "id": "heimsank-flyfoto",
+      "name": "Heimsank – flyfoto"
     }
   ],
   "seasons": [
@@ -2041,6 +2049,390 @@
         941
       ],
       "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-var-morgon",
+      "scene": "duldord-skolegard",
+      "season": "var",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-var-morgon.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-var-dag",
+      "scene": "duldord-skolegard",
+      "season": "var",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-var-dag.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-var-kveld",
+      "scene": "duldord-skolegard",
+      "season": "var",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-var-kveld.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-var-natt",
+      "scene": "duldord-skolegard",
+      "season": "var",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-var-natt.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-sommar-morgon",
+      "scene": "duldord-skolegard",
+      "season": "sommar",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-sommar-morgon.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-sommar-dag",
+      "scene": "duldord-skolegard",
+      "season": "sommar",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-sommar-dag.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-sommar-kveld",
+      "scene": "duldord-skolegard",
+      "season": "sommar",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-sommar-kveld.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-sommar-natt",
+      "scene": "duldord-skolegard",
+      "season": "sommar",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-sommar-natt.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-haust-morgon",
+      "scene": "duldord-skolegard",
+      "season": "haust",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-haust-morgon.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-haust-dag",
+      "scene": "duldord-skolegard",
+      "season": "haust",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-haust-dag.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-haust-kveld",
+      "scene": "duldord-skolegard",
+      "season": "haust",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-haust-kveld.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-haust-natt",
+      "scene": "duldord-skolegard",
+      "season": "haust",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-haust-natt.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-vinter-morgon",
+      "scene": "duldord-skolegard",
+      "season": "vinter",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-vinter-morgon.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-vinter-dag",
+      "scene": "duldord-skolegard",
+      "season": "vinter",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-vinter-dag.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-vinter-kveld",
+      "scene": "duldord-skolegard",
+      "season": "vinter",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-vinter-kveld.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "duldord-skolegard-vinter-natt",
+      "scene": "duldord-skolegard",
+      "season": "vinter",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-vinter-natt.jpg",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-var-morgon",
+      "scene": "heimsank-flyfoto",
+      "season": "var",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-var-morgon.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-var-dag",
+      "scene": "heimsank-flyfoto",
+      "season": "var",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-var-dag.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-var-kveld",
+      "scene": "heimsank-flyfoto",
+      "season": "var",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-var-kveld.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-var-natt",
+      "scene": "heimsank-flyfoto",
+      "season": "var",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-var-natt.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-sommar-morgon",
+      "scene": "heimsank-flyfoto",
+      "season": "sommar",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-sommar-morgon.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-sommar-dag",
+      "scene": "heimsank-flyfoto",
+      "season": "sommar",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-sommar-dag.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-sommar-kveld",
+      "scene": "heimsank-flyfoto",
+      "season": "sommar",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-sommar-kveld.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-sommar-natt",
+      "scene": "heimsank-flyfoto",
+      "season": "sommar",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-sommar-natt.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-haust-morgon",
+      "scene": "heimsank-flyfoto",
+      "season": "haust",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-haust-morgon.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-haust-dag",
+      "scene": "heimsank-flyfoto",
+      "season": "haust",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-haust-dag.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-haust-kveld",
+      "scene": "heimsank-flyfoto",
+      "season": "haust",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-haust-kveld.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-haust-natt",
+      "scene": "heimsank-flyfoto",
+      "season": "haust",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-haust-natt.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-vinter-morgon",
+      "scene": "heimsank-flyfoto",
+      "season": "vinter",
+      "time": "morgon",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-vinter-morgon.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-vinter-dag",
+      "scene": "heimsank-flyfoto",
+      "season": "vinter",
+      "time": "dag",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-vinter-dag.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-vinter-kveld",
+      "scene": "heimsank-flyfoto",
+      "season": "vinter",
+      "time": "kveld",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-vinter-kveld.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
+    },
+    {
+      "id": "heimsank-flyfoto-vinter-natt",
+      "scene": "heimsank-flyfoto",
+      "season": "vinter",
+      "time": "natt",
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-vinter-natt.jpg",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "assignedTo": null
     }
   ],
   "apps": {
@@ -2164,6 +2556,48 @@
         "skolegard-vinter-dag",
         "skolegard-vinter-kveld",
         "skolegard-vinter-natt"
+      ]
+    },
+    "duldord": {
+      "scene": "duldord-skolegard",
+      "backgroundIds": [
+        "duldord-skolegard-var-morgon",
+        "duldord-skolegard-var-dag",
+        "duldord-skolegard-var-kveld",
+        "duldord-skolegard-var-natt",
+        "duldord-skolegard-sommar-morgon",
+        "duldord-skolegard-sommar-dag",
+        "duldord-skolegard-sommar-kveld",
+        "duldord-skolegard-sommar-natt",
+        "duldord-skolegard-haust-morgon",
+        "duldord-skolegard-haust-dag",
+        "duldord-skolegard-haust-kveld",
+        "duldord-skolegard-haust-natt",
+        "duldord-skolegard-vinter-morgon",
+        "duldord-skolegard-vinter-dag",
+        "duldord-skolegard-vinter-kveld",
+        "duldord-skolegard-vinter-natt"
+      ]
+    },
+    "heimsank": {
+      "scene": "heimsank-flyfoto",
+      "backgroundIds": [
+        "heimsank-flyfoto-var-morgon",
+        "heimsank-flyfoto-var-dag",
+        "heimsank-flyfoto-var-kveld",
+        "heimsank-flyfoto-var-natt",
+        "heimsank-flyfoto-sommar-morgon",
+        "heimsank-flyfoto-sommar-dag",
+        "heimsank-flyfoto-sommar-kveld",
+        "heimsank-flyfoto-sommar-natt",
+        "heimsank-flyfoto-haust-morgon",
+        "heimsank-flyfoto-haust-dag",
+        "heimsank-flyfoto-haust-kveld",
+        "heimsank-flyfoto-haust-natt",
+        "heimsank-flyfoto-vinter-morgon",
+        "heimsank-flyfoto-vinter-dag",
+        "heimsank-flyfoto-vinter-kveld",
+        "heimsank-flyfoto-vinter-natt"
       ]
     }
   }

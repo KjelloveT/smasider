@@ -2,6 +2,7 @@
   const currentScript = document.currentScript;
   const projectRoot = new URL('../', currentScript.src);
   const registryUrl = new URL('json/vyrdepil-design.json', projectRoot);
+  let backgroundDataPromise;
 
   const seasonAt = month => {
     if (month === 12 || month <= 2) return 'vinter';
@@ -22,24 +23,38 @@
     return Object.fromEntries(parts.map(part => [part.type, Number(part.value)]));
   }
 
-  async function applyHomepageBackground() {
-    const response = await fetch(registryUrl, { cache: 'no-store', credentials: 'omit' });
-    if (!response.ok) throw new Error('Bakgrunnsregisteret kunne ikkje lesast.');
-    const timestamp = Date.parse(response.headers.get('Date') || '');
-    if (!Number.isFinite(timestamp)) throw new Error('Tenaren sende ikkje eit gyldig datostempel.');
-    const registry = await response.json();
-    const homepageSet = registry.siteBackgroundSets && registry.siteBackgroundSets.homepage;
-    if (!homepageSet || !Array.isArray(homepageSet.backgroundIds)) throw new Error('Bakgrunnssettet for framsida manglar.');
-    const parts = osloDateParts(timestamp);
-    const id = homepageSet.scene + '-' + seasonAt(parts.month) + '-' + timeAt(parts.hour);
-    const background = registry.backgrounds.find(item => item.id === id && homepageSet.backgroundIds.includes(id));
-    if (!background) throw new Error('Det finst ikkje eit bakgrunnsbilete for denne årstida og tida.');
-    const imageUrl = new URL(background.file, projectRoot);
-    document.body.style.setProperty('--vp-landscape', 'url("' + imageUrl.href + '")');
+  function loadBackgroundData() {
+    if (!backgroundDataPromise) {
+      backgroundDataPromise = fetch(registryUrl, { cache: 'no-store', credentials: 'omit' }).then(async response => {
+        if (!response.ok) throw new Error('Bakgrunnsregisteret kunne ikkje lesast.');
+        const timestamp = Date.parse(response.headers.get('Date') || '');
+        if (!Number.isFinite(timestamp)) throw new Error('Tenaren sende ikkje eit gyldig datostempel.');
+        return { registry: await response.json(), timestamp };
+      }).catch(error => {
+        backgroundDataPromise = null;
+        throw error;
+      });
+    }
+    return backgroundDataPromise;
   }
 
+  async function applyBackgroundSet(setId, root = document.body) {
+    const { registry, timestamp } = await loadBackgroundData();
+    const backgroundSet = registry.siteBackgroundSets && registry.siteBackgroundSets[setId];
+    if (!backgroundSet || !Array.isArray(backgroundSet.backgroundIds)) throw new Error(`Bakgrunnssettet ${setId} manglar.`);
+    const parts = osloDateParts(timestamp);
+    const id = backgroundSet.scene + '-' + seasonAt(parts.month) + '-' + timeAt(parts.hour);
+    const background = registry.backgrounds.find(item => item.id === id && backgroundSet.backgroundIds.includes(id));
+    if (!background) throw new Error('Det finst ikkje eit bakgrunnsbilete for denne årstida og tida.');
+    const imageUrl = new URL(background.file, projectRoot);
+    root.style.setProperty('--vp-landscape', 'url("' + imageUrl.href + '")');
+    return background;
+  }
+
+  window.VyrdepilHomeBackground = { apply: applyBackgroundSet };
+
   if (document.body.dataset.vpHome === 'true') {
-    applyHomepageBackground().catch(error => {
+    applyBackgroundSet('homepage').catch(error => {
       console.warn('Framsidebakgrunnen brukar sommardag som reserve:', error.message);
     });
   }
