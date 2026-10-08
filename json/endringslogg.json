@@ -2,6 +2,28 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "2.0",
+      "dato": "2026-10-08",
+      "samandrag": "Versjon 2 av Vyrdepil er komen, med nytt design, nye funksjonar, nye verktøy og eit felles bragdsystem.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Vyrdepil",
+          "tekst": "Versjon 2 av Vyrdepil er komen, med nytt design, nye funksjonar og nye verktøy."
+        },
+        {
+          "t": "nytt",
+          "kva": "Bragdane",
+          "tekst": "Felles bragdoversikt med distinkte ikon, grå vising av låste bragder, blaing mellom bragder og fast snarveg på framsida."
+        },
+        {
+          "t": "endra",
+          "kva": "Vegamot",
+          "tekst": "Bygg interaktive forteljingar med vegval og der slutten ikkje alltid vert den same."
+        }
+      ]
+    },
+    {
       "versjon": "1.99",
       "dato": "2026-10-08",
       "samandrag": "Duldord og Heimsank får bakgrunnar som følgjer årstid og tid på døgnet, med leseflater i Heimsank.",
