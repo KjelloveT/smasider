@@ -55,3 +55,19 @@
 .hs-settings { padding-top:29px; overflow:hidden; }
 .hs-settings::before { content:''; position:absolute; inset:0 0 auto; height:9px; background:repeating-linear-gradient(90deg,var(--hs-pink) 0 44px,var(--hs-turquoise) 44px 88px,var(--hs-yellow) 88px 132px,var(--hs-violet) 132px 176px); }
 .hs-selected-category { border:2px dashed color-mix(in srgb,var(--hs-indigo) 55%,var(--hs-line)); border-radius:14px 10px 15px 11px; background:color-mix(in srgb,var(--hs-turquoise) 12%,var(--hs-soft)); font-weight:700; }
+
+/* Leseflater held laus tekst tydeleg over dei skiftande heilskjermsbakgrunnane. */
+.hs-text-surface {
+  color:var(--hs-ink);
+  background:rgba(255,253,245,.95);
+  border:2px solid color-mix(in srgb,var(--hs-indigo) 34%,transparent);
+  box-shadow:0 5px 0 color-mix(in srgb,var(--hs-indigo) 22%,transparent),0 16px 34px #17103c18;
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+}
+.hs-top.hs-text-surface { padding:12px clamp(14px,2vw,22px); border-radius:20px 15px 22px 16px; }
+.hs-hero-copy.hs-text-surface { min-width:0; padding:clamp(20px,3vw,34px); border-radius:26px 18px 25px 19px; }
+.hs-section-title.hs-text-surface { align-items:center; padding:14px 18px; border-radius:18px 13px 19px 14px; }
+.hs-empty.hs-text-surface { width:min(100%,420px); margin:20px auto; padding:16px 20px; border-radius:16px; text-align:center; }
+.hs-showcase .hs-fan-label { max-width:min(100%,30ch); padding:7px 13px; border:2px solid color-mix(in srgb,var(--hs-indigo) 34%,transparent); border-radius:14px 10px 15px 12px; background:rgba(255,253,245,.95); box-shadow:0 4px 0 color-mix(in srgb,var(--hs-indigo) 22%,transparent); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+.hs-cat-pill { padding:7px 13px; border:2px solid color-mix(in srgb,var(--hs-indigo) 34%,transparent); border-radius:14px 10px 15px 12px; background:rgba(255,253,245,.95); box-shadow:0 3px 0 color-mix(in srgb,var(--hs-indigo) 20%,transparent); }

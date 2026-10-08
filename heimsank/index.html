@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heimsank — rekn, oppdag og saml</title><link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/setup.css">
+<link rel="stylesheet" href="css/style.css?v=2">
+<link rel="stylesheet" href="css/setup.css?v=2">
 <link rel="stylesheet" href="css/cards.css?v=1.52.2">
 <link rel="stylesheet" href="css/game.css">
 <link rel="stylesheet" href="css/dialogs.css">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.9">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body class="hs-app vp-page" data-vp-app="heimsank" data-vp-layout="standard" data-vp-preserve data-vp-design data-vp-site-footer>
+<body class="hs-app vp-page" data-vp-app="heimsank" data-vp-background-set="heimsank" data-vp-layout="standard" data-vp-preserve data-vp-design data-vp-site-footer>
 <div class="page-wrapper"><main class="main-content hs-main">
 <div id="setupScreen">
-<header class="hs-top"><a class="hs-brand" href="./"><img class="hs-brand-mark" src="assets/heimsank-logo.png" alt="">Heimsank<span class="hs-brand-dot">.</span></a><nav class="hs-actions" aria-label="Dine samlingar"><span class="hs-points" aria-live="polite"><span data-icon="coins"></span><strong id="pointsValue">0</strong> poeng</span><button class="hs-btn" onclick="openCollectionViewer()"><span data-icon="folder"></span>Samlingane mine</button><button class="hs-btn" onclick="openBadgeGallery()"><span data-icon="award"></span>Bragder</button></nav></header>
-<section class="hs-hero" aria-labelledby="heroTitle"><div class="hs-hero-copy"><span class="hs-eyebrow">Små reknestykke. Store oppdagingar.</span><h1 id="heroTitle">Rekn. Oppdag.<br><span>Saml heile verda.</span></h1><p>Seks rette svar, eitt nytt kort. Finn favorittane dine — og kanskje noko heilt sjeldsynt.</p><div class="hs-rarities" aria-label="Fire sjeldsemder"><span data-rarity="vanleg">Vanleg</span><span data-rarity="sjeldgjevt">Sjeldgjævt</span><span data-rarity="segngjeten">Segngjeten</span><span data-rarity="gudebore">Gudebore</span></div></div><div class="hs-showcase"><div class="hs-orbit" aria-hidden="true"></div><span class="hs-motif hs-motif-one" aria-hidden="true">×</span><span class="hs-motif hs-motif-two" aria-hidden="true">+</span><div id="fanContainer" class="hs-fan" aria-hidden="true"></div><p id="fanCatLabel" class="hs-fan-label">Ei verd av kort ventar på deg</p></div></section>
-<p id="setupLoading" class="hs-empty" role="status">Lastar kategoriar…</p>
-<div id="setupContent" class="hs-setup hidden"><section aria-labelledby="categoryTitle"><div class="hs-section-title"><div><span class="hs-eyebrow">Neste oppdaging</span><h2 id="categoryTitle">Kva vil du samle?</h2></div><span class="hs-muted" id="categoryCount"></span></div><div id="catsGrid" class="hs-categories"></div></section>
+<header class="hs-top hs-text-surface"><a class="hs-brand" href="./"><img class="hs-brand-mark" src="assets/heimsank-logo.png" alt="">Heimsank<span class="hs-brand-dot">.</span></a><nav class="hs-actions" aria-label="Dine samlingar"><span class="hs-points" aria-live="polite"><span data-icon="coins"></span><strong id="pointsValue">0</strong> poeng</span><button class="hs-btn" onclick="openCollectionViewer()"><span data-icon="folder"></span>Samlingane mine</button><button class="hs-btn" onclick="openBadgeGallery()"><span data-icon="award"></span>Bragder</button></nav></header>
+<section class="hs-hero" aria-labelledby="heroTitle"><div class="hs-hero-copy hs-text-surface"><span class="hs-eyebrow">Små reknestykke. Store oppdagingar.</span><h1 id="heroTitle">Rekn. Oppdag.<br><span>Saml heile verda.</span></h1><p>Seks rette svar, eitt nytt kort. Finn favorittane dine — og kanskje noko heilt sjeldsynt.</p><div class="hs-rarities" aria-label="Fire sjeldsemder"><span data-rarity="vanleg">Vanleg</span><span data-rarity="sjeldgjevt">Sjeldgjævt</span><span data-rarity="segngjeten">Segngjeten</span><span data-rarity="gudebore">Gudebore</span></div></div><div class="hs-showcase"><div class="hs-orbit" aria-hidden="true"></div><span class="hs-motif hs-motif-one" aria-hidden="true">×</span><span class="hs-motif hs-motif-two" aria-hidden="true">+</span><div id="fanContainer" class="hs-fan" aria-hidden="true"></div><p id="fanCatLabel" class="hs-fan-label">Ei verd av kort ventar på deg</p></div></section>
+<p id="setupLoading" class="hs-empty hs-text-surface" role="status">Lastar kategoriar…</p>
+<div id="setupContent" class="hs-setup hidden"><section aria-labelledby="categoryTitle"><div class="hs-section-title hs-text-surface"><div><span class="hs-eyebrow">Neste oppdaging</span><h2 id="categoryTitle">Kva vil du samle?</h2></div><span class="hs-muted" id="categoryCount"></span></div><div id="catsGrid" class="hs-categories"></div></section>
 <aside class="hs-settings hs-panel" aria-labelledby="settingsTitle"><span class="hs-eyebrow">Di neste runde</span><h2 id="settingsTitle">Gjer deg klar</h2><p id="selectedCategory" class="hs-selected-category">Vel ein kategori</p>
 <fieldset><legend>Vanskegrad</legend><div class="hs-levels"><button class="hs-btn" data-level="lett" aria-pressed="false" onclick="selLevel('lett')">Lett</button><button class="hs-btn" data-level="middels" aria-pressed="true" onclick="selLevel('middels')">Middels</button><button class="hs-btn" data-level="vanskeleg" aria-pressed="false" onclick="selLevel('vanskeleg')">Vanskeleg</button></div></fieldset>
 <fieldset><legend>Rekneartar</legend><div class="hs-operations"><button class="hs-btn" data-op="+" aria-pressed="false" onclick="togOp('+')"><b>+</b>Pluss</button><button class="hs-btn" data-op="-" aria-pressed="false" onclick="togOp('-')"><b>−</b>Minus</button><button class="hs-btn" data-op="*" aria-pressed="true" onclick="togOp('*')"><b>×</b>Gange</button><button class="hs-btn" data-op="/" aria-pressed="true" onclick="togOp('/')"><b>÷</b>Dele</button></div></fieldset>
@@ -58,7 +58,8 @@
 
   <script src="../js/vyrdepil-icons.js"></script>
   <script src="../js/vyrdepil-util.js?v=1.2"></script>
-  <script src="../js/vyrdepil-design.js?v=1.1"></script>
+  <script src="../js/vyrdepil-design.js?v=1.2"></script>
+  <script src="../js/home-background.js?v=2"></script>
   <script src="../js/vyrdepil-app-shell.js?v=8"></script>
   <script src="../js/vyrdepil-menu.js?v=3"></script>
 </body></html>

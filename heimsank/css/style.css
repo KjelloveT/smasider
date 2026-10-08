@@ -1,5 +1,5 @@
 /* Lokalt kortarkade-design; felles toppmeny er urørt. */
-.hs-app { --hs-bg:var(--bg); --hs-panel:var(--surface); --hs-text:var(--text); --hs-muted:var(--text); --hs-line:color-mix(in srgb,var(--text) 15%,transparent); --hs-soft:color-mix(in srgb,var(--surface) 90%,var(--text)); --hs-violet:#6743CB; --hs-yellow:#FFD65A; --hs-ink:#24203D; --hs-shadow:0 12px 35px #17103c0b; background:var(--hs-bg); color:var(--hs-text); font-family:'Segoe UI',system-ui,sans-serif; }
+.hs-app { --hs-bg:var(--bg); --hs-panel:var(--surface); --hs-text:var(--text); --hs-muted:var(--text); --hs-line:color-mix(in srgb,var(--text) 15%,transparent); --hs-soft:color-mix(in srgb,var(--surface) 90%,var(--text)); --hs-violet:#6743CB; --hs-yellow:#FFD65A; --hs-ink:#24203D; --hs-shadow:0 12px 35px #17103c0b; background-color:var(--hs-bg); color:var(--hs-text); font-family:'Segoe UI',system-ui,sans-serif; }
 .hs-app .hidden { display:none!important; }
 .hs-app *, .hs-app *::before, .hs-app *::after { box-sizing:border-box; }
 .hs-app .page-wrapper { background:transparent; }

@@ -2,40 +2,14 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
-      "versjon": "2.0",
-      "dato": "2026-10-08",
-      "samandrag": "Versjon 2 av Vyrdepil med nytt design, nye funksjonar og nye verktøy.",
-      "punkt": [
-        {
-          "t": "nytt",
-          "kva": "Vyrdepil",
-          "tekst": "Versjon 2 av Vyrdepil er komen, med nytt design, nye funksjonar og nye verktøy.",
-          "merke": ""
-        },
-        {
-          "t": "endra",
-          "kva": "Vegamot",
-          "tekst": "Skildringa legg no vekt på interaktive forteljingar med vegval der slutten ikkje alltid vert den same.",
-          "merke": ""
-        }
-      ]
-    },
-    {
       "versjon": "1.99",
       "dato": "2026-10-08",
-      "samandrag": "Bragdane har fått eigne illustrerte ikon, fast snarveg frå framsida, og Livslina er med i felles bragdsamling.",
+      "samandrag": "Duldord og Heimsank får bakgrunnar som følgjer årstid og tid på døgnet, med leseflater i Heimsank.",
       "punkt": [
         {
           "t": "endra",
-          "kva": "Bragder",
-          "tekst": "Bragdane har fått måla PNG-ikon utan store medaljerammer. Låste bragder er gråa ut, spelmerka er flytta inn, og oversikta har større ikon med piler i bragdvisinga. Livslina sine bragder blir viste og lagra i den felles samlinga, som no har ein fast snarveg frå framsida.",
-          "merke": ""
-        },
-        {
-          "t": "endra",
-          "kva": "Ljodstigen",
-          "tekst": "Ljodstigen held på sin eigen progresjon, men nyttar no dei illustrerte bragdsymbola.",
-          "merke": ""
+          "kva": "Duldord og Heimsank",
+          "tekst": "Duldord brukar skulegarden, medan Heimsank brukar flyfotoet; bakgrunnane skiftar med årstid og tid på døgnet. Heimsank har lyse tekstflater som held teksten lesbar."
         }
       ]
     },

@@ -75,6 +75,16 @@
       "id": "skolegard",
       "name": "Skolegard",
       "description": "A Norwegian schoolyard with a large rope-climbing frame at the left, swings and wooden balance equipment on a painted rubber play area, a dark school building at the right, and a wooded mountain ridge. Children in pink reflective vests play in morning, day and evening variations; the yard is empty at night."
+    },
+    {
+      "id": "duldord-skolegard",
+      "name": "Duldord – skulegarden",
+      "description": "Skulegarden ved den grøne skulebygningen, basert på foto frå bakkenivå. Fem–seks born leikar med årstidsrette aktivitetar om dagen og kvelden; skulegarden er tom om natta. Ingen nye lyktestolpar."
+    },
+    {
+      "id": "heimsank-flyfoto",
+      "name": "Heimsank – flyfoto",
+      "description": "Flyfoto av skuleområdet, leikeplassen, fjorden og fjella. Årstid og lys endrar seg gjennom døgnet; skuleplassen er tom om natta."
     }
   ],
   "seasons": [
@@ -2918,6 +2928,582 @@
         941
       ],
       "bytes": 391070
+    },
+    {
+      "key": "duldord-skolegard-var-morgon",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "var-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-var-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1681,
+        936
+      ],
+      "bytes": 444580
+    },
+    {
+      "key": "duldord-skolegard-var-dag",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "var-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1681,
+        936
+      ],
+      "bytes": 477239
+    },
+    {
+      "key": "duldord-skolegard-var-kveld",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "var-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-var-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1681,
+        936
+      ],
+      "bytes": 454937
+    },
+    {
+      "key": "duldord-skolegard-var-natt",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "var-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1681,
+        936
+      ],
+      "bytes": 330329
+    },
+    {
+      "key": "duldord-skolegard-sommar-morgon",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "sommar-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-sommar-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1681,
+        936
+      ],
+      "bytes": 447459
+    },
+    {
+      "key": "duldord-skolegard-sommar-dag",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "sommar-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1681,
+        936
+      ],
+      "bytes": 480731
+    },
+    {
+      "key": "duldord-skolegard-sommar-kveld",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "sommar-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-sommar-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1680,
+        936
+      ],
+      "bytes": 471602
+    },
+    {
+      "key": "duldord-skolegard-sommar-natt",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "sommar-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1681,
+        936
+      ],
+      "bytes": 370768
+    },
+    {
+      "key": "duldord-skolegard-haust-morgon",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "haust-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-haust-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1680,
+        936
+      ],
+      "bytes": 445455
+    },
+    {
+      "key": "duldord-skolegard-haust-dag",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "haust-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1679,
+        937
+      ],
+      "bytes": 482402
+    },
+    {
+      "key": "duldord-skolegard-haust-kveld",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "haust-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-haust-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1681,
+        936
+      ],
+      "bytes": 463246
+    },
+    {
+      "key": "duldord-skolegard-haust-natt",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "haust-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1680,
+        936
+      ],
+      "bytes": 358544
+    },
+    {
+      "key": "duldord-skolegard-vinter-morgon",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "vinter-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-vinter-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1681,
+        936
+      ],
+      "bytes": 424247
+    },
+    {
+      "key": "duldord-skolegard-vinter-dag",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "vinter-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1681,
+        936
+      ],
+      "bytes": 449401
+    },
+    {
+      "key": "duldord-skolegard-vinter-kveld",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "vinter-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-vinter-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1680,
+        936
+      ],
+      "bytes": 405515
+    },
+    {
+      "key": "duldord-skolegard-vinter-natt",
+      "kind": "landscape",
+      "subject": "duldord-skolegard",
+      "variant": "vinter-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/duldord-skolegard-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/duldord-skolegard-source.png",
+      "sourceSize": [
+        1351,
+        752
+      ],
+      "exportSize": [
+        1681,
+        936
+      ],
+      "bytes": 383534
+    },
+    {
+      "key": "heimsank-flyfoto-var-morgon",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "var-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-var-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 462607
+    },
+    {
+      "key": "heimsank-flyfoto-var-dag",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "var-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-var-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 483320
+    },
+    {
+      "key": "heimsank-flyfoto-var-kveld",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "var-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-var-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 469579
+    },
+    {
+      "key": "heimsank-flyfoto-var-natt",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "var-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-var-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 369589
+    },
+    {
+      "key": "heimsank-flyfoto-sommar-morgon",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "sommar-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-sommar-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 422491
+    },
+    {
+      "key": "heimsank-flyfoto-sommar-dag",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "sommar-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-sommar-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 446193
+    },
+    {
+      "key": "heimsank-flyfoto-sommar-kveld",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "sommar-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-sommar-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 403477
+    },
+    {
+      "key": "heimsank-flyfoto-sommar-natt",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "sommar-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-sommar-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 378417
+    },
+    {
+      "key": "heimsank-flyfoto-haust-morgon",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "haust-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-haust-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 468408
+    },
+    {
+      "key": "heimsank-flyfoto-haust-dag",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "haust-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-haust-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 489522
+    },
+    {
+      "key": "heimsank-flyfoto-haust-kveld",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "haust-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-haust-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 432258
+    },
+    {
+      "key": "heimsank-flyfoto-haust-natt",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "haust-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-haust-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 394596
+    },
+    {
+      "key": "heimsank-flyfoto-vinter-morgon",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "vinter-morgon",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-vinter-morgon.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 424667
+    },
+    {
+      "key": "heimsank-flyfoto-vinter-dag",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "vinter-dag",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-vinter-dag.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 442013
+    },
+    {
+      "key": "heimsank-flyfoto-vinter-kveld",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "vinter-kveld",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-vinter-kveld.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 411845
+    },
+    {
+      "key": "heimsank-flyfoto-vinter-natt",
+      "kind": "landscape",
+      "subject": "heimsank-flyfoto",
+      "variant": "vinter-natt",
+      "edition": 1,
+      "file": "_resources/vyrdepil-design/backgrounds/heimsank-flyfoto-vinter-natt.jpg",
+      "original": "_kjelder/bakgrunnar/vyrdepil-scenes/heimsank-flyfoto-source.png",
+      "sourceSize": [
+        2048,
+        1152
+      ],
+      "exportSize": [
+        1672,
+        941
+      ],
+      "bytes": 401405
     }
   ]
 }

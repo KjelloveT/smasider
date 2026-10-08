@@ -3,19 +3,10 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
-## [2.0] — 2026-10-08
-
-### Lagt til
-- Versjon 2 av Vyrdepil med nytt design, nye funksjonar og nye verktøy.
-
-### Endra
-- Vegamot-skildringa er oppdatert: interaktive forteljingar med vegval der slutten ikkje alltid vert den same.
-
 ## [1.99] — 2026-10-08
 
 ### Endra
-- Bragdane har fått eigne måla PNG-ikon utan store medaljerammer; låste bragder er gråa ut, spelmerka er flytta inn, og oversikta har større ikon med piler i bragdvisinga. Livslina er med i den felles bragdsamlinga, tidlegare bragder blir førte over lokalt, og oversikta har ein fast snarveg på framsida.
-- Ljodstigen held på sitt eige progresjonssystem, men viser no dei nye illustrerte bragdsymbola.
+- **Duldord og Heimsank skiftar bakgrunn etter årstid og tid på døgnet.** Duldord brukar skulegarden, medan Heimsank brukar flyfotoet. Heimsank har fått lyse, lett gjennomskinlege tekstflater som held teksten lesbar over bakgrunnsbileta.
 
 ## [1.98] — 2026-10-07
 
