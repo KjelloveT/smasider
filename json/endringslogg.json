@@ -2,6 +2,30 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "2.1",
+      "dato": "2026-10-09",
+      "samandrag": "Tevlingstreet gjer det lett å setje opp turneringar for elevar og lag på papir eller storskjerm.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Tevlingstreet",
+          "tekst": "Set opp cup, alle mot alle, puljar med sluttspel eller sveitser for elevar og lag. Før resultat på A3-ark eller maskin, og vis turneringa på storskjerm.",
+          "merke": "verktoy"
+        },
+        {
+          "t": "nytt",
+          "kva": "Elevbiblioteket",
+          "tekst": "Felles elevlister og gruppesett i Tevlingstreet, Flokkdeilar, Klassekart og namneveljarane."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Tevlingstreet",
+          "tekst": "Resultatretting nullstiller dei påverka kampane; storskjermen handterer lange namn, og cupen viser vinnaren og finaleresultatet.",
+          "merke": "verktoy"
+        }
+      ]
+    },
+    {
       "versjon": "2.0",
       "dato": "2026-10-08",
       "samandrag": "Versjon 2 av Vyrdepil er komen, med nytt design, nye funksjonar, nye verktøy og eit felles bragdsystem.",

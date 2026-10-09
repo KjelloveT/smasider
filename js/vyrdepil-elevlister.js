@@ -40,22 +40,18 @@ window.VyrdepilElevlister = (function () {
     }
 
     /**
-     * Trimmar, fjernar tomme og dublettar, og held rekkjefølgja.
+     * Trimmar, fjernar tomme og held rekkjefølgja og like namn.
      *
-     * Dublettar er ikkje eit teoretisk problem: to elevar med same fornamn i
-     * same klasse er heilt vanleg, men same NAMN to gonger i lista kjem alltid
-     * av ein tastefeil eller ei dobbel innliming, og gjev eit ark for mykje.
+     * To ulike elevar kan ha same namn. Namnet er ikkje ein elev-ID.
      *
      * @param {Array<string|{name:string}>} list
      * @returns {string[]}
      */
     function reinsk(list) {
-        const sedd = new Set();
         const ut = [];
         (list || []).forEach(function (raw) {
             const namn = String(namnAv(raw) || '').trim();
-            if (!namn || sedd.has(namn)) return;
-            sedd.add(namn);
+            if (!namn) return;
             ut.push(namn);
         });
         return ut;
@@ -115,6 +111,11 @@ window.VyrdepilElevlister = (function () {
     function kjelder() {
         let lister = [];
         try {
+            if (window.VyrdepilElevgrupper) {
+                return VyrdepilElevgrupper.sources().map(function (item) {
+                    return { label: item.name, source: item.source, names: item.students.map(function (s) { return s.name; }) };
+                }).filter(function (item) { return item.names.length; });
+            }
             lister = fraaFlokkdeilar().concat(fraaKlassekart());
         } catch (e) {
             lister = [];

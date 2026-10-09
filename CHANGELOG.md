@@ -3,6 +3,18 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.1] — 2026-10-09
+
+### Lagt til
+- **Tevlingstreet er publisert under Klasseverktøy.** Lærarar kan setje opp cup, alle mot alle, puljar med sluttspel eller sveitser for elevar og lag, føre resultat på A3-ark eller maskin og vise turneringa på storskjerm.
+- **Elevbiblioteket samlar elevlister og namngjevne gruppesett.** Flokkdeilar, Klassekart, Tevlingstreet og namneveljarane kan hente og lagre kopiar utan å flytte dei gamle listene.
+
+### Endra
+- Elevnamn har stabile ID-ar, slik at to elevar med same namn kan vere med i same liste.
+
+### Fiksa
+- Resultat som blir retta, nullstiller alle påverka kampar vidare i cup og puljesluttspel. Storskjermen tilpassar seg lange namn, og cupen viser turneringsvinnaren og finaleresultatet.
+
 ## [2.0] — 2026-10-08
 
 ### Lagt til

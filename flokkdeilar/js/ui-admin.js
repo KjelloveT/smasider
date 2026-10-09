@@ -25,6 +25,10 @@
     const extendedSection         = document.getElementById('extendedSection');
     const activateExtendedSection = document.getElementById('activateExtendedSection');
     const inputListeNamn          = document.getElementById('inputListeNamn');
+    document.getElementById('btnSaveLibrary').addEventListener('click', () => VyrdepilElevgrupperUI.editor({
+        kind: 'roster', name: inputListeNamn.value || liste.name,
+        students: editStudents.map(s => ({ id: s.id, name: s.name })), groups: []
+    }));
     const studentList             = document.getElementById('studentList');
     const relationGrid            = document.getElementById('relationGrid');
     const pinInput                = document.getElementById('pinInput');
