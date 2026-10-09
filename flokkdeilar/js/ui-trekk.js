@@ -17,6 +17,15 @@
     let absentIds    = new Set();
     let lockedGroups = [];
     let lastGroups   = [];
+    document.getElementById('btnSaveGroups').addEventListener('click', () => {
+        if (!lastGroups.length) return Vy.toast('Trekk gruppene fyrst.');
+        const people = new Map();
+        lastGroups.forEach(g => g.members.forEach(s => people.set(s.id, { id: s.id, name: s.name })));
+        VyrdepilElevgrupperUI.editor({
+            kind: 'groups', name: liste.name + ' — grupper', students: [...people.values()],
+            groups: lastGroups.map(g => ({ id: Vy.uuid(), name: g.name, memberIds: g.members.map(s => s.id) }))
+        });
+    });
 
     /* ── DOM ── */
     const listeTittel  = document.getElementById('listeTittel');
