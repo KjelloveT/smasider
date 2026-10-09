@@ -21,6 +21,11 @@
           "t": "endra",
           "kva": "Namneveljarar og personvern",
           "tekst": "Like elevnamn blir bevarte. Personvernoversikta forklarer lokal lagring av turneringar og elevbibliotek."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Tevlingstreet",
+          "tekst": "Resultatretting nullstiller alle påverka finalar. Valde knappar får hake, og storskjermen tilpassar sidene til lange namn og ledig plass. Cup viser sluttresultat i staden for ein poengtabell."
         }
       ]
     },

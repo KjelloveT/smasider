@@ -125,7 +125,7 @@
                 if (!screen) app.error('Nettlesaren blokkerte storskjermen. Tillat vindauge frå Vyrdepil og prøv att.');
             }));
             const mode = el('select', 'vp-input'); mode.setAttribute('aria-label', 'Vising på storskjermen');
-            [['matches', 'Kampar'], ['tree', 'Turneringstre'], ['table', 'Poengtabell']].forEach(([id, text]) => mode.append(new Option(text, id)));
+            [['matches', 'Kampar'], ['tree', 'Turneringstre'], ['table', t.settings.format === 'cup' ? 'Sluttresultat' : 'Poengtabell']].forEach(([id, text]) => mode.append(new Option(text, id)));
             mode.value = t.display.mode; mode.disabled = !app.editable;
             mode.addEventListener('change', () => { t.display.mode = mode.value; app.changed(); }); displayTools.append(mode);
             [['rotate', 'Byt side kvart 15. sekund'], ['members', 'Vis elevnamn på laga']].forEach(([key, text]) => {
@@ -143,7 +143,7 @@
         const nextInfo = el('p', 'vp-notice vp-notice--text'); nextInfo.hidden = true;
         search.addEventListener('change', () => { nextInfo.textContent = search.value ? C.participant(t, search.value).name + ': ' + E.next(t, search.value) : ''; nextInfo.hidden = !search.value; }); panel.append(search, nextInfo);
         const tabs = el('div', 'vp-toolbar-group');
-        ['Kampar', 'Turneringstre', 'Poengtabell'].forEach((label, i) => { const b = U.button(label, () => { app.view = i; render(app); }); b.setAttribute('aria-pressed', String((app.view || 0) === i)); tabs.append(b); });
+        ['Kampar', 'Turneringstre', t.settings.format === 'cup' ? 'Sluttresultat' : 'Poengtabell'].forEach((label, i) => { const b = U.button(label, () => { app.view = i; render(app); }); b.setAttribute('aria-pressed', String((app.view || 0) === i)); tabs.append(b); });
         panel.append(tabs);
         if (t.participants.some(p => p.members?.length)) {
             const roster = el('details', 'vp-accordion');
@@ -169,7 +169,7 @@
             });
             else if (t.settings.format === 'cup') {
                 const final = t.matches.filter(m => m.stage === 'cup').at(-1), winner = C.resolve(t, { kind: 'winner', id: final.id });
-                panel.append(el('p', 'vp-notice vp-notice--text', winner.id ? 'Turneringsvinnar: ' + C.participant(t, winner.id).name : 'Vinnaren blir klar når finalen er avgjord.'));
+                panel.append(el('p', 'vp-notice vp-notice--text', winner.id ? 'Turneringsvinnar: ' + C.displayName(t, winner.id) : 'Vinnaren blir klar når finalen er avgjord.'));
             } else panel.append(V.table(t));
         } else {
             const select = el('select', 'vp-input'); select.setAttribute('aria-label', 'Vel runde eller pulje');
@@ -188,6 +188,7 @@
             }
         }
         area.append(panel);
+        VyrdepilDesign.initSelections(area);
     }
     TS.Play = { render };
 })(window);

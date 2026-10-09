@@ -15,9 +15,10 @@ function fixture(n, format, long) {
     const file = path.join(output, format + '-' + n + '.json'); fs.writeFileSync(file, JSON.stringify(Store.exportData(t))); return file;
 }
 async function importFile(page, file) {
+    const previous = await page.locator('#workspace').getAttribute('data-tournament-id');
     await page.locator('#importFile').setInputFiles(file);
+    await page.waitForFunction(previous => { const id = document.querySelector('#workspace')?.dataset.tournamentId; return id && id !== previous; }, previous);
     await page.getByRole('button', { name: 'Start neste spelbolk', exact: true }).waitFor();
-    await page.waitForFunction(() => !!document.querySelector('#workspace')?.dataset.tournamentId);
     return page.locator('#workspace').getAttribute('data-tournament-id');
 }
 (async () => {

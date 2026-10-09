@@ -97,15 +97,27 @@
         if (t.settings.format === 'swiss') TS.Swiss.confirm(t, TS.Swiss.propose(t), false);
         waves(t); return t;
     }
+    function changedMatches(t, altered) {
+        const affected = [];
+        // Clear each changed match before resolving its descendants. Even an unchanged
+        // finalist must wait for a semifinal whose result has just been cleared.
+        t.matches.filter(m => ['cup', 'bronze'].includes(m.stage) && m.result).forEach(m => {
+            if (C.resolve(t, m.a).id !== C.resolve(altered, m.a).id || C.resolve(t, m.b).id !== C.resolve(altered, m.b).id) {
+                affected.push(m.id);
+                altered.matches.find(x => x.id === m.id).result = null;
+            }
+        });
+        return affected;
+    }
     function impact(t, id, result) {
         const m = t.matches.find(m => m.id === id);
         if (!m || m.result === result) return [];
+        if (!t.matches.some(x => ['cup', 'bronze'].includes(x.stage) && x.result)) return [];
+        if (['league', 'swiss'].includes(m.stage)) return [];
         const altered = C.copy(t);
         altered.matches.find(m => m.id === id).result = result;
         if (m.stage === 'pool') delete altered.qualification[m.pool];
-        return t.matches.filter(x => ['cup', 'bronze'].includes(x.stage) && x.result && (
-            C.resolve(t, x.a).id !== C.resolve(altered, x.a).id || C.resolve(t, x.b).id !== C.resolve(altered, x.b).id
-        )).map(x => x.id);
+        return changedMatches(t, altered);
     }
     function setResult(t, id, result) {
         const m = t.matches.find(m => m.id === id);
@@ -136,7 +148,7 @@
             available.splice(available.indexOf(selected), 1);
         });
         const altered = C.copy(t); altered.qualification[poolId] = ids.slice();
-        const affected = t.matches.filter(m => m.result && ['cup', 'bronze'].includes(m.stage) && (C.resolve(t, m.a).id !== C.resolve(altered, m.a).id || C.resolve(t, m.b).id !== C.resolve(altered, m.b).id)).map(m => m.id);
+        const affected = changedMatches(t, altered);
         C.remember(t, affected); t.qualification[poolId] = ids.slice();
         affected.forEach(id => { t.matches.find(m => m.id === id).result = null; });
         waves(t);

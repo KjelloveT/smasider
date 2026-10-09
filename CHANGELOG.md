@@ -13,6 +13,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - Namneveljarane held på to ulike elevar med same namn.
 - Personvernoversikta forklarer lokal lagring av turneringar, elevlister og grupper.
 
+### Fiksa
+- Tevlingstreet nullstiller alle påverka kampar etter resultat- eller kvalifiseringsretting, også når ein tidlegare semifinalevinnar kom frå den andre greina. Valde knappar får svart hake. Storskjermen måler sideinnhaldet og tilpassar kampoversikt, turneringstre og tabell til lange namn og skjermstorleiken.
+- Cup viser turneringsvinnar, finale og eventuell bronsefinale under «Sluttresultat», i staden for ein poengtabell. Visingsvindauge byter turnering når læraren følgjer ei anna lokal visingslenkje.
+
 ## [1.99] — 2026-10-08
 
 ### Endra

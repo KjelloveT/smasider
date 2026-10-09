@@ -83,7 +83,12 @@
             const column = el('div', 'ts-tree-column');
             column.append(el('h3', '', section.title === 'Bronsefinale' ? 'Bronse' : 'Runde ' + t.matches.find(m => m.id === ids[0]).round));
             const stack = el('div', 'ts-tree-stack'); stack.style.setProperty('--slots', largest);
-            ids.forEach(id => { const box = card(t, t.matches.find(m => m.id === id)); box.classList.add('ts-tree-node'); box.style.gridRow = 'span ' + Math.pow(2, index); stack.append(box); });
+            ids.forEach(id => {
+                const box = card(t, t.matches.find(m => m.id === id)); box.classList.add('ts-tree-node');
+                const next = t.matches.find(m => [m.a, m.b].some(s => s?.kind === 'winner' && s.id === id));
+                if (next) box.append(el('p', 'vp-help', 'Vinnaren går til kamp ' + next.id + '.'));
+                box.style.gridRow = 'span ' + Math.pow(2, index); stack.append(box);
+            });
             column.append(stack); grid.append(column);
         });
         return grid;

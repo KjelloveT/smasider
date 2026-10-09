@@ -29,4 +29,6 @@
         return { request };
     }
     TS.Receiver = { start };
+    // Following a different local viewing link must open that tournament's channel.
+    root.addEventListener('hashchange', () => root.location.reload());
 })(window);
