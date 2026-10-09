@@ -3,6 +3,15 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.0] — 2026-10-08
+
+### Lagt til
+- **Versjon 2 av Vyrdepil er komen**, med nytt design, nye funksjonar og nye verktøy.
+- **Bragdane har fått eit felles system** med distinkte ikon, større oversikt, grå vising av låste bragder, blaing mellom bragder og ein fast snarveg på framsida.
+
+### Endra
+- **Vegamot-skildringa er oppdatert**: Bygg interaktive forteljingar med vegval og der slutten ikkje alltid vert den same.
+
 ## [1.99] — 2026-10-08
 
 ### Endra
