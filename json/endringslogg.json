@@ -2,30 +2,24 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
-      "versjon": "1.100",
+      "versjon": "2.0",
       "dato": "2026-10-08",
-      "samandrag": "Tevlingstreet lagar turneringar på A3-ark og storskjerm, med eit felles elevbibliotek.",
+      "samandrag": "Versjon 2 av Vyrdepil er komen, med nytt design, nye funksjonar, nye verktøy og eit felles bragdsystem.",
       "punkt": [
         {
           "t": "nytt",
-          "kva": "Tevlingstreet",
-          "tekst": "Fire turneringsformer for enkeltelevar og lag, med samanhengande A3-ark, lokal lagring og direktevising på storskjerm.",
-          "merke": "verktoy"
+          "kva": "Vyrdepil",
+          "tekst": "Versjon 2 av Vyrdepil er komen, med nytt design, nye funksjonar og nye verktøy."
         },
         {
           "t": "nytt",
-          "kva": "Elevbiblioteket",
-          "tekst": "Felles elevlister og gruppesett i Tevlingstreet, Flokkdeilar, Klassekart og namneveljarane."
+          "kva": "Bragdane",
+          "tekst": "Felles bragdoversikt med distinkte ikon, grå vising av låste bragder, blaing mellom bragder og fast snarveg på framsida."
         },
         {
           "t": "endra",
-          "kva": "Namneveljarar og personvern",
-          "tekst": "Like elevnamn blir bevarte. Personvernoversikta forklarer lokal lagring av turneringar og elevbibliotek."
-        },
-        {
-          "t": "fiksa",
-          "kva": "Tevlingstreet",
-          "tekst": "Resultatretting nullstiller alle påverka finalar. Valde knappar får hake, og storskjermen tilpassar sidene til lange namn og ledig plass. Cup viser sluttresultat i staden for ein poengtabell."
+          "kva": "Vegamot",
+          "tekst": "Bygg interaktive forteljingar med vegval og der slutten ikkje alltid vert den same."
         }
       ]
     },

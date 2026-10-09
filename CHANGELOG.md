@@ -3,19 +3,14 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
-## [1.100] — 2026-10-08
+## [2.0] — 2026-10-08
 
 ### Lagt til
-- **Tevlingstreet:** turneringar for 2–128 enkeltelevar eller lag, med cup, alle-mot-alle, puljar med sluttspel og sveitser. Same kampnummer på A3-ark og direktevising i eit eige storskjermvindauge.
-- **Elevbiblioteket:** felles elevlister og namngjevne gruppesett. Flokkdeilar, Klassekart, Tevlingstreet og namneveljarane hentar kopiar utan å flytte gamle data.
+- **Versjon 2 av Vyrdepil er komen**, med nytt design, nye funksjonar og nye verktøy.
+- **Bragdane har fått eit felles system** med distinkte ikon, større oversikt, grå vising av låste bragder, blaing mellom bragder og ein fast snarveg på framsida.
 
 ### Endra
-- Namneveljarane held på to ulike elevar med same namn.
-- Personvernoversikta forklarer lokal lagring av turneringar, elevlister og grupper.
-
-### Fiksa
-- Tevlingstreet nullstiller alle påverka kampar etter resultat- eller kvalifiseringsretting, også når ein tidlegare semifinalevinnar kom frå den andre greina. Valde knappar får svart hake. Storskjermen måler sideinnhaldet og tilpassar kampoversikt, turneringstre og tabell til lange namn og skjermstorleiken.
-- Cup viser turneringsvinnar, finale og eventuell bronsefinale under «Sluttresultat», i staden for ein poengtabell. Visingsvindauge byter turnering når læraren følgjer ei anna lokal visingslenkje.
+- **Vegamot-skildringa er oppdatert**: Bygg interaktive forteljingar med vegval og der slutten ikkje alltid vert den same.
 
 ## [1.99] — 2026-10-08
 
