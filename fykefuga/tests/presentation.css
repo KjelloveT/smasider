@@ -1,0 +1,3 @@
+#audio-results { display: grid; gap: 20px; }
+#audio-results audio { width: 100%; margin: 8px 0; }
+#audio-results p { overflow-wrap: anywhere; }

@@ -1,0 +1,85 @@
+/* Godkjent barokkunntak: rasterdekor, med felles knappar, felt og fokus. */
+body[data-vp-app="fykefuga"] { background: #ebe0c8 url('../assets/marmor.jpg') center / cover fixed; }
+.ff-view[hidden], .ff-overlay[hidden], [hidden] { display: none !important; }
+.ff-intro { display: flex; align-items: center; gap: clamp(16px, 3vw, 36px); background: #fff9e9; border: 4px solid #142820; border-radius: 10px; padding: 20px 30px; margin: 24px auto; }
+.ff-intro h1 { margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(32px, 5vw, 60px); }
+.ff-intro p { margin: 4px 0; }
+.ff-logo { object-fit: contain; width: clamp(80px, 12vw, 120px); height: auto; }
+.ff-eyebrow { font-weight: 700; }
+.ff-setup { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 24px; }
+.ff-baroque { position: relative; overflow: hidden; }
+.ff-baroque::after { content: ''; display: block; height: 32px; margin-top: 16px; background: url('../assets/ornament.png') center / auto 32px repeat-x; pointer-events: none; }
+.ff-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 16px 0; }
+.ff-fields .vp-field { margin: 0; }
+.ff-actions, .ff-options { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 16px 0; }
+.ff-actions > *, .ff-options > * { max-width: 100%; }
+.ff-sound-settings output { margin-left: auto; font-weight: 400; }
+.ff-sound-settings input[type="range"] { width: 100%; min-height: 36px; accent-color: #8a5b25; }
+.ff-sound-settings input[type="range"]:focus-visible { outline: 3px solid #8a5b25; outline-offset: 3px; }
+.ff-answer { transition: background-color .1s, box-shadow .1s; }
+@media (prefers-reduced-motion: reduce) { .ff-answer { transition: none; } }
+.ff-tutorials { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
+.ff-tutorials button { display: flex; flex-direction: column; gap: 4px; white-space: normal; }
+.ff-tutorials img { width: 40px; height: 40px; object-fit: contain; }
+.ff-bragder { margin-top: 24px; }
+.ff-game-toolbar, .ff-game-bottom { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: #fff9e9; padding: 10px 14px; border: 2px solid #142820; border-radius: 10px; }
+.ff-game-toolbar span { font-weight: 700; }
+.ff-game-toolbar span:first-child { margin-right: auto; }
+.ff-game-bottom p { flex: 1 1 250px; margin: 0; }
+.ff-game-stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; touch-action: none; user-select: none; background: #fff9e9; }
+#game-canvas { display: block; width: 100%; height: 100%; }
+.ff-question-board { position: absolute; top: 1.5%; left: 3%; right: 3%; background: #fff9e9; border: 3px solid #142820; border-radius: 8px; padding: 4px 12px; text-align: center; pointer-events: none; }
+#question-text { font-size: clamp(16px, 2.25vw, 27px); font-weight: 750; margin: 0; line-height: 1.25; overflow-wrap: anywhere; }
+#question-help { margin: 1px 0; font-size: clamp(12px, 1.3vw, 16px); }
+.ff-answer { position: absolute; left: 37%; width: 59%; background: #fffdf5; border: 3px solid #142820; border-radius: 8px; padding: 6px 10px; font-size: clamp(15px, 2vw, 24px); font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; pointer-events: none; }
+.ff-answer--upper { top: 37%; }
+.ff-answer--lower { top: 73%; }
+.ff-answer.is-selected { background: #f5dfaa; box-shadow: inset 0 -4px #8a5b25; }
+.ff-overlay { position: absolute; inset: 0; background: rgb(255 249 233 / 75%); display: grid; place-items: center; padding: 16px; }
+.ff-overlay .vp-panel { text-align: center; max-width: 600px; }
+.ff-library-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; margin-top: 24px; }
+.ff-library-card { min-width: 0; }
+.ff-library-card h3 { overflow-wrap: anywhere; margin-top: 0; }
+.ff-library-card .ff-actions { margin-bottom: 0; }
+.ff-question-rows { display: grid; gap: 16px; margin: 18px 0; }
+.ff-question-row { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr) auto; gap: 12px; padding: 16px; border: 2px solid #142820; border-radius: 8px; background: #fffdf5; }
+.ff-question-row .vp-field { margin: 0; }
+.ff-question-row .ff-variants { grid-column: 1 / -1; }
+.ff-question-row textarea { min-height: 72px; resize: vertical; }
+.ff-recommend { margin: 20px 0; border: 2px solid #142820; border-radius: 8px; padding: 16px; }
+#dialog-body { overflow-wrap: anywhere; }
+#dialog-body textarea { width: 100%; min-height: 150px; }
+#dialog-body .ff-errors { display: grid; gap: 12px; }
+#dialog-body a { overflow-wrap: anywhere; }
+.ff-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+body.ff-playing #intro, body.ff-playing .vp-header { display: none; }
+body.ff-playing main { padding-top: 8px; }
+body.ff-playing #game-view { max-width: min(1200px, calc((100dvh - 176px) * 16 / 9)); margin: auto; }
+body.ff-playing #game-view:fullscreen { background: #fff9e9; display: flex; flex-direction: column; justify-content: center; width: 100vw; max-width: none; padding: 8px; }
+#game-view:fullscreen > * { width: min(1200px, calc((100dvh - 176px) * 16 / 9)); margin-inline: auto; }
+@media (max-width: 800px) {
+  .ff-setup { grid-template-columns: minmax(0, 1fr); }
+  .ff-question-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .ff-question-row .vp-field:first-child { grid-column: 1 / -1; }
+  .ff-intro { padding: 16px; }
+}
+@media (max-width: 480px) {
+  .ff-fields { grid-template-columns: minmax(0, 1fr); }
+  .ff-game-toolbar, .ff-game-bottom { gap: 6px; padding: 6px; }
+  .ff-game-toolbar button, .ff-game-bottom button { min-height: 44px; }
+  .ff-question-row { grid-template-columns: minmax(0, 1fr); }
+  .ff-question-row .ff-variants { grid-column: 1; }
+}
+@media (orientation: landscape) and (max-height: 550px) {
+  body.ff-playing main { padding: 0 6px; }
+  body.ff-playing #game-view { max-width: none; }
+  #game-frame { width: calc((100dvh - 130px) * 16 / 9); max-width: 100%; margin-inline: auto; }
+  .ff-game-toolbar, .ff-game-bottom { padding: 2px; gap: 5px; font-size: 12px; }
+  .ff-game-toolbar button, .ff-game-bottom button { min-height: 40px; padding: 3px 9px; font-size: 13px; }
+  .ff-game-bottom p { flex-basis: 120px; }
+  .ff-question-board { padding: 2px 6px; border-width: 2px; }
+  #question-text { font-size: 16px; }
+  #question-help { display: none; }
+  #game-view:fullscreen > * { width: calc((100dvh - 130px) * 16 / 9); }
+  #game-view:fullscreen .ff-game-toolbar, #game-view:fullscreen .ff-game-bottom { width: 100%; }
+}

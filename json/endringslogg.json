@@ -2,6 +2,17 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "2.2",
+      "dato": "2026-10-10",
+      "samandrag": "Fykefuga kombinerer presis fart med korte faglege vegval i ei måla barokkverd.",
+      "punkt": [
+        { "t": "nytt", "kva": "Fykefuga", "tekst": "Åtte farkostar, øvingsbaner, fire hovudbaner og endelaus fuga med faglege vegval.", "merke": "verktoy" },
+        { "t": "nytt", "kva": "Lærarbibliotek", "tekst": "Lag spørsmål, lim inn ordpar, importer Ordaklok og del sett med elevane. Rekordar, kosmetikk og bragder ligg lokalt." },
+        { "t": "nytt", "kva": "Barokkressursar", "tekst": "Original rastergrafikk, fire fleirstemte barokksatsar, romklang og volumval. Spor, lysband og animasjonar følgjer farkostane." },
+        { "t": "endra", "kva": "Deling", "tekst": "Felles delingsmodul for Fykefuga og Ordaklok, med støtte for eksisterande lenkjer." }
+      ]
+    },
+    {
       "versjon": "2.1",
       "dato": "2026-10-09",
       "samandrag": "Tevlingstreet gjer det lett å setje opp turneringar for elevar og lag på papir eller storskjerm.",

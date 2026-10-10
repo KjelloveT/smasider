@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-08",
+  "updated": "2026-10-10",
   "appCatalog": "json/apps.json",
   "policy": {
     "allocation": "random-unused-on-creation",
@@ -11,6 +11,7 @@
     "style": "mala",
     "name": "Måla flater",
     "files": {
+      "fykefuga": "fykefuga/assets/logo.png",
       "duldord": "_resources/vyrdepil-design/logos/duldord-mala.png",
       "klassekart": "_resources/vyrdepil-design/logos/klassekart-mala.png",
       "rissverk": "_resources/vyrdepil-design/logos/rissverk-mala.png",
@@ -1617,7 +1618,7 @@
         1672,
         941
       ],
-      "assignedTo": null
+      "assignedTo": "fykefuga"
     },
     {
       "id": "sykkelsti-var-kveld",
@@ -2538,6 +2539,9 @@
     },
     "tevlingstreet": {
       "backgroundId": "vidde-vinter-morgon"
+    },
+    "fykefuga": {
+      "backgroundId": "sykkelsti-var-morgon"
     }
   },
   "siteBackgroundSets": {

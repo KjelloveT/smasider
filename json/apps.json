@@ -48,6 +48,20 @@
   ],
   "apps": [
     {
+      "id": "fykefuga",
+      "name": "Fykefuga",
+      "href": "fykefuga/index.html",
+      "cat": "matematikk_programmering",
+      "btn": "Fyk av stad",
+      "img": "fykefuga/assets/logo.png",
+      "added": "2026-10-10",
+      "audience": ["Alle elevgrupper"],
+      "desc": [
+        "Fyk gjennom måla barokksalar med åtte ulike farkostar. Vel vegen med rett svar på korte spørsmål, og start raskt på nytt ved feil eller krasj.",
+        "Øv på gangetabellen, hovudrekning og gloser, eller lag eigne spørsmål. Lærarar kan importere Ordaklok-lister og dele sett med tilrådde spelval."
+      ]
+    },
+    {
       "id": "duldord",
       "name": "Duldord",
       "href": "duldord/index.html",

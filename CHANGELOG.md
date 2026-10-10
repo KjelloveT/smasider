@@ -3,6 +3,16 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.2] — 2026-10-10
+
+### Lagt til
+- **Fykefuga**: eit barokk fartsspel med åtte rørslemodusar, åtte øvingsbaner, fire hovudbaner og endelaus fuga. Korte fagspørsmål avgjer kva svarveg eleven skal styre gjennom.
+- Lærarbibliotek med eigne spørsmål, innlimte ordpar, Ordaklok-import, førehandsvising, JSON-filer og delingslenkjer. Rekordar, kosmetikk og fire felles bragder blir lagra lokalt.
+- Originale genererte rasterressursar og fire sekstentakts barokksatsar med cembalo, fiolin, cello og orgel, stereoromklang og separate volumval. Farkostane har spor, lysband, eksos og eigne reaksjonar ved hopp, landing og teletransport.
+
+### Endra
+- Ordaklok og Fykefuga bruker ein felles delingsmodul. Eksisterande Ordaklok-lenkjer blir framleis lesne.
+
 ## [2.1] — 2026-10-09
 
 ### Lagt til
