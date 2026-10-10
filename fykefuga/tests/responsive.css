@@ -1,0 +1,2 @@
+.test-scroll { overflow: auto; margin: 24px 0; }
+#test-frame { display: block; box-sizing: content-box; border: 2px solid #142820; background: #fff9e9; max-width: none; }

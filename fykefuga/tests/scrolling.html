@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="nn"><head><base href="../"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fykefuga — prøve av rulling</title><link rel="stylesheet" href="../css/vyrdepil-design.css"><link rel="stylesheet" href="tests/scrolling.css"></head>
+<body><main><h1>Fykefuga: rulling og bakgrunnsskøyt</h1><p>Prøva bruker dei faktiske rasterressursane og teiknemodulane. Kameraet går gjennom fleire bakgrunnsgjentakingar utan krasj eller omstart.</p>
+<label>Miljø <select id="scene"><option value="0">Marmorsalen</option><option value="1">Urverkhagen</option><option value="2">Spegelgalleriet</option><option value="3">Orgeltårnet</option></select></label>
+<button id="play" type="button">Pause rullinga</button><button id="seam" type="button">Gå til bakgrunnsskøyten</button>
+<canvas id="canvas" width="960" height="540" aria-label="Prøvebane med samanhengande rulling"></canvas>
+<label>Kameraposisjon <input id="camera" type="range" min="0" max="80000" step="1" value="0"></label><p id="position"></p><p id="checks" role="status">Lastar rasterressursar …</p><p id="detail"></p>
+</main><script src="../js/vyrdepil-util.js"></script><script src="js/data.js"></script><script src="js/physics.js"></script><script src="js/levels.js"></script><script src="js/assets.js"></script><script src="js/effects.js"></script><script src="js/scenery.js"></script><script src="js/motion.js"></script><script src="js/render.js"></script><script src="tests/scrolling-preview.js"></script></body></html>

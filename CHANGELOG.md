@@ -3,6 +3,24 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.2] — 2026-10-10
+
+### Lagt til
+- **Fykefuga**: eit barokk fartsspel med åtte rørslemodusar, åtte øvingsbaner, fire hovudbaner og endelaus fuga. Korte fagspørsmål avgjer kva svarveg eleven skal styre gjennom.
+- Lærarbibliotek med eigne spørsmål, innlimte ordpar, Ordaklok-import, førehandsvising, JSON-filer og delingslenkjer. Rekordar, kosmetikk og fire felles bragder blir lagra lokalt.
+- Originale genererte rasterressursar og fire sekstentakts barokksatsar med cembalo, fiolin, cello og orgel, stereoromklang og separate volumval. Farkostane har spor, lysband, eksos og eigne reaksjonar ved hopp, landing og teletransport.
+
+### Endra
+- Ordaklok og Fykefuga bruker ein felles delingsmodul. Eksisterande Ordaklok-lenkjer blir framleis lesne.
+- Fykefuga har 61 prosent høgare fart og fire til seks hindergrupper i kvart spelparti, med hoppkombinasjonar og vekselvise flygeportar. Lesestrekningane held same lesetid.
+- Fiolin- og cellogrupper bruker ein eigen PCM-lydbank med bogestøy og instrumentresonansar. Strykarane fører melodien, og cembaloet ligg som følgje. Hopp, landing og styring får større utbrot, sjokkbølgjer, framdrift og rørsleanimasjonar.
+
+### Fiksa
+- Figurspritar er isolerte i polstra celler utan bitar av nabomotiv. Rørslespor bruker lysband i staden for overlappande figurkopiar. Rekordar frå den tidlegare, langsamare hinderbanken blir haldne skilde.
+
+- Fykefuga rullar jamt mellom fysikkstega. Bakgrunnane har samanhengande skøytar og blir førebudde før start; dekor bevarer proporsjonane, og golv og svarhyller har faste teksturar. Kula og svingfarkosten snur utan vinkelhopp.
+- Synlege treffområderammer rundt hindera i Fykefuga er fjerna.
+
 ## [2.1] — 2026-10-09
 
 ### Lagt til

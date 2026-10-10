@@ -8,6 +8,7 @@
       "/images/*.{png,jpg,gif}",
       "/css/*",
       "/_resources/*",
+      "/fykefuga/assets/*",
       "/ljodstigen/lyd/*",
       "/ljodstigen/jakta/*",
       "/ljodstigen/skog/*",

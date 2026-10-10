@@ -1,0 +1,280 @@
+{
+  "app": "fykefuga",
+  "version": 1,
+  "origin": "Originale rasterbilete genererte med imagegen; originalar tekne vare på lokalt. Musikk og ljod er original Web Audio-syntese i js/audio.js.",
+  "files": [
+    {
+      "file": "column.png",
+      "width": 253,
+      "height": 256,
+      "bytes": 27616,
+      "sha256": "331115333cb08cb783b6485dd62a78c25806a5fb3bd1229fc9bf234f8d13cffc"
+    },
+    {
+      "file": "copper-ball.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 4367,
+      "sha256": "df8a2dca50adf1eba11792fa2c960534f6a081b999347639ce89d9e5e5580552"
+    },
+    {
+      "file": "copper-cube.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 4569,
+      "sha256": "ba9710ce34b5bbd81308f717cd6dee5753cbb57345784928cc55601e84fa436c"
+    },
+    {
+      "file": "copper-robot.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 3000,
+      "sha256": "382b0095328ad551b9efd57ff63aa86ed14cd4afb0c87b076e488018a9cc5b46"
+    },
+    {
+      "file": "copper-ship.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2909,
+      "sha256": "87c5cae0f0d8a058569fc8320500bfbe1df92035eb5622dfff6080efa2cbe365"
+    },
+    {
+      "file": "copper-spider.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2921,
+      "sha256": "95434a410423210b91611205c35720221865340fa662471ded6766924a2565cd"
+    },
+    {
+      "file": "copper-swing.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2727,
+      "sha256": "9f9eb59c93e0648ecf90373adfd660cdf082afde0ac757359620f0c78f98613f"
+    },
+    {
+      "file": "copper-ufo.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2812,
+      "sha256": "1c37a8a27f67c94f0030631f0566f42871cc462ec84a8632f6231adda206de3a"
+    },
+    {
+      "file": "copper-wave.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 3024,
+      "sha256": "e7356832d2a60a6d343fc85cd3e511f048f75168381cd7691977c66944c9a8d5"
+    },
+    {
+      "file": "floor.png",
+      "width": 256,
+      "height": 83,
+      "bytes": 9544,
+      "sha256": "6c463e193a2722ff63a1a2e97b0e7fa426e8edb03110badbdf911e3cce8b6dd0"
+    },
+    {
+      "file": "gate.png",
+      "width": 80,
+      "height": 256,
+      "bytes": 8422,
+      "sha256": "4076b32dc07da139abbc7ace5c1cefa8bb5b0652cf72ff94887f73d763088313"
+    },
+    {
+      "file": "gold-ball.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 4342,
+      "sha256": "b4fb1e47be2b057ccbdc08228be9bee0671db165f3269dea579572c2a17aee24"
+    },
+    {
+      "file": "gold-cube.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 4308,
+      "sha256": "dc07efa04eef341385765357c8e7644cde00adf0f8c851a156bd5225716f2bd6"
+    },
+    {
+      "file": "gold-robot.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2980,
+      "sha256": "8aa127c47b83013d5dbfdae25f27bc2d67e4f4ac74e41abcb598d6c912b2b29b"
+    },
+    {
+      "file": "gold-ship.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2878,
+      "sha256": "04b2d8847b781c79b356c29c758bace0405657260f6360ceea961e23a3480772"
+    },
+    {
+      "file": "gold-spider.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2826,
+      "sha256": "c3b9ab71d09b617634984f9f3b1575c80c4ae43bac62c0a73de37cfd199b14de"
+    },
+    {
+      "file": "gold-swing.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2798,
+      "sha256": "c64c30345b71bd1c536c51625895577edfbf7524327a74e2c94bf00ff633eac1"
+    },
+    {
+      "file": "gold-ufo.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2830,
+      "sha256": "c6f355ef26251974efdf709dd77dfe944e4e90592b1ff472fe8bc9715953098c"
+    },
+    {
+      "file": "gold-wave.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2907,
+      "sha256": "4d418cb985c3f6cdb7ee1e7738710999feb12e7368d52b728a56961b88377e7b"
+    },
+    {
+      "file": "logo.png",
+      "width": 384,
+      "height": 361,
+      "bytes": 45765,
+      "sha256": "60837d335c1c638f889ab7394a4b396ccad5e74eeae9e33f2f9a2e55acd02d5d"
+    },
+    {
+      "file": "marmor.jpg",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 401604,
+      "sha256": "df84725d1bc46d8d5f1a74f6c8556e9c510990582e94f8edf6853da022a7ecbd"
+    },
+    {
+      "file": "mid-0.png",
+      "width": 129,
+      "height": 385,
+      "bytes": 19682,
+      "sha256": "f35a98e45e9cd200a9133657bec6dfb6643bf8162f2dff951413f2f1e3a0dd38"
+    },
+    {
+      "file": "mid-1.png",
+      "width": 320,
+      "height": 341,
+      "bytes": 48850,
+      "sha256": "0bc5a5f6bcc2850c5a5ad88049896816f8135bbd2254b80f026b8a7160841bf4"
+    },
+    {
+      "file": "mid-2.png",
+      "width": 212,
+      "height": 396,
+      "bytes": 34204,
+      "sha256": "aba739b560f0dfabfb97ce515735624b8821bc431597fa92468567ef574cfda0"
+    },
+    {
+      "file": "mid-3.png",
+      "width": 298,
+      "height": 398,
+      "bytes": 41391,
+      "sha256": "2c8e2248648f415ffec858c22c696672eb84e3bb3efbda2b87dbda76cc9f0ead"
+    },
+    {
+      "file": "orgel.jpg",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 364442,
+      "sha256": "84cf9f6e4b095c0fd947acae8a950b1bfa7bbac4bb7cc035d94126a27b7aafc7"
+    },
+    {
+      "file": "ornament.png",
+      "width": 256,
+      "height": 103,
+      "bytes": 11756,
+      "sha256": "1cf63f0b39b4294230dca217a51abe80a24c39d55e0853422f8b66a639bfdaf8"
+    },
+    {
+      "file": "porcelain-ball.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 4672,
+      "sha256": "b043d54e21a5776270ef5f35b474c2147df68ac18e85fec1b6a36175d2b75574"
+    },
+    {
+      "file": "porcelain-cube.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 4796,
+      "sha256": "2513e7b67e1f916a06ea6dbc9b68c3fa35cef3247ec62fda0b3a5f472ee26662"
+    },
+    {
+      "file": "porcelain-robot.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 3068,
+      "sha256": "e37744466612504e36e5614748fcb9621920fab60848d293f5d07e0cca9361f9"
+    },
+    {
+      "file": "porcelain-ship.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 3110,
+      "sha256": "3cf750f50bd3fa983e545488c0413a6490163a2b9d6e50622eb629d70bfadfff"
+    },
+    {
+      "file": "porcelain-spider.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2944,
+      "sha256": "e0883951462741f836ee87cce3e4738ec3404fe357cd15de46cab7b8a67cbafe"
+    },
+    {
+      "file": "porcelain-swing.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2798,
+      "sha256": "11db50124f2cfdc0bb61ce40b7041f71a8a35f9be96b276ca558864f40f08dc2"
+    },
+    {
+      "file": "porcelain-ufo.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 2935,
+      "sha256": "6bfd3471a3f99be5235afb752747e967c4103c5144b66cc360ffc0505459bcda"
+    },
+    {
+      "file": "porcelain-wave.png",
+      "width": 96,
+      "height": 96,
+      "bytes": 3177,
+      "sha256": "8da841c54451a5dbab559ae2eda09aeba4f10ea35fc2b2a17a3e36016d9a2b14"
+    },
+    {
+      "file": "spegel.jpg",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 374563,
+      "sha256": "e3e3aaf70106a6db0baf7ea15fc4b39953e24ef4a2af24664984cadd09eea675"
+    },
+    {
+      "file": "spike.png",
+      "width": 256,
+      "height": 117,
+      "bytes": 12116,
+      "sha256": "1602e0d3b064d9af30f8bbe328efd58d4eaf8a9198a69d4ef41f98b47404d3d3"
+    },
+    {
+      "file": "sprites.png",
+      "width": 768,
+      "height": 288,
+      "bytes": 53846,
+      "sha256": "640fb3dec4c0942f472f40ca1e2b50babbbe1703e3a35271a11b4aa1bef42dcc"
+    },
+    {
+      "file": "urverk.jpg",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 443618,
+      "sha256": "7bcbde171349b1fc19002eb1664d711c297c78689282f0b930bbab8c48eb7d38"
+    }
+  ]
+}

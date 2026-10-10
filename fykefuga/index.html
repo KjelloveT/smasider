@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="nn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fykefuga — Vyrdepil</title>
+  <link rel="stylesheet" href="../css/vyrdepil-design.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="vp-page" data-vp-design data-vp-app="fykefuga" data-vp-layout="canvas" data-vp-preserve>
+<main id="main" class="vp-shell vp-shell--wide">
+  <div id="intro" class="vp-app-intro ff-intro">
+    <img src="assets/logo.png" width="120" height="120" alt="" class="ff-logo">
+    <div><p class="ff-eyebrow">Fart, fag og forgylte farkostar</p><h1>Fykefuga</h1><p>Fyk gjennom barokksalen. Vel vegen med rett svar.</p></div>
+  </div>
+  <section id="setup-view" class="ff-view">
+    <div class="ff-setup">
+      <section class="vp-panel vp-panel--plain ff-baroque">
+        <div class="vp-content">
+          <h2>Gjer klar farkosten</h2>
+          <label class="vp-field">Spørsmålsett<select id="pack-select" class="vp-input"></select></label>
+          <p id="pack-description" class="vp-help"></p>
+          <p id="shared-note" class="vp-notice" hidden>Dette settet kjem frå ei delingslenkje. Du kan spele straks eller lagre ein kopi.</p>
+          <button id="save-shared" class="vp-button vp-button--positive" hidden>Lagre lokal kopi</button>
+          <div class="ff-fields">
+            <label class="vp-field">Bane<select id="level-select" class="vp-input"></select></label>
+            <label class="vp-field">Lesetid<select id="reading-select" class="vp-input"><option value="2">2 sekund</option><option value="4" selected>4 sekund</option><option value="6">6 sekund</option></select></label>
+            <label id="difficulty-field" class="vp-field" hidden>Endelaus vanskegrad<select id="difficulty-select" class="vp-input"><option value="0">Varsam</option><option value="1">Kvik</option><option value="2">Virtuos</option></select></label>
+            <label class="vp-field">Utsjånad<select id="skin-select" class="vp-input"></select></label>
+          </div>
+          <div class="ff-options">
+            <label class="vp-choice"><input id="sound-input" type="checkbox"> Musikk og ljod</label>
+            <label class="vp-choice"><input id="reduced-input" type="checkbox"> Redusert dekor</label>
+          </div>
+          <details class="vp-accordion ff-sound-settings"><summary>Musikk og spel-ljod</summary><div class="vp-accordion-body">
+            <div class="ff-fields">
+              <label class="vp-field" for="music-volume">Musikk <output id="music-volume-value" for="music-volume">65 %</output><input id="music-volume" type="range" min="0" max="100" value="65"></label>
+              <label class="vp-field" for="effects-volume">Spel-ljod <output id="effects-volume-value" for="effects-volume">80 %</output><input id="effects-volume" type="range" min="0" max="100" value="80"></label>
+            </div>
+            <label class="vp-field">Musikkstykke<select id="preview-theme" class="vp-input"><option value="0">Marmorfuga</option><option value="1">Urverksinvensjon</option><option value="2">Spegelmenuett</option><option value="3">Tårntoccata</option></select></label>
+            <div class="ff-actions"><button id="preview-music" class="vp-button vp-button--compact">Prøv musikken</button><button id="preview-effect" class="vp-button vp-button--compact">Prøv spel-ljoden</button></div>
+            <p class="vp-help">Fire eigne barokkstykke med fiolin- og cellogrupper, cembalo og orgel. Strykarane har ein eigen lydbank med bogestøy og varme instrumentresonansar.</p>
+          </div></details>
+          <p id="record-label" class="vp-help"></p>
+          <div class="ff-actions"><button id="start-button" class="vp-button vp-button--primary vp-button--large">Start spelet</button><button id="library-button" class="vp-button vp-button--tool">Lærarbibliotek</button></div>
+          <p id="setup-message" role="status" class="vp-notice" hidden></p>
+        </div>
+      </section>
+      <section class="vp-panel vp-panel--plain ff-baroque ff-teaching">
+        <div class="vp-content">
+          <h2>Lær å fyke</h2><p>Mellomrom, pil opp, museknapp eller berøring styrer farkosten. R startar på nytt. P eller Escape tek pause.</p>
+          <div id="tutorials" class="ff-tutorials"></div>
+          <details class="vp-accordion"><summary>Vegval og framgang</summary><div class="vp-accordion-body"><p>Spørsmålet kjem før eit romsleg vegskilje. Styr mot svaret du meiner er rett. Den forgylte avgjerdslina låser valet.</p><p>Feil svar eller krasj startar bana frå byrjinga. Spørsmåla kjem i same rekkjefølgje, medan svara kan byte plass.</p><p>Porselen blir opna etter ei hovudbane. Patinert kopar blir opna etter 100 rette svar. Alle modusar er opne frå starten.</p><p>Vel liggjande skjerm på mobil og nettbrett. Lyd er av frå starten.</p></div></details>
+        </div>
+      </section>
+    </div>
+    <section class="vp-panel vp-panel--plain ff-bragder"><h2>Bragdane dine</h2><p id="progress-label"></p><div id="bragder" class="bragd-grid" aria-busy="true"></div></section>
+  </section>
+  <section id="game-view" class="ff-view" hidden>
+    <div class="ff-game-toolbar"><span id="mode-label"></span><span id="run-label"></span><button id="pause-button" class="vp-button vp-button--compact">Pause</button><button id="game-sound" class="vp-button vp-button--compact" aria-pressed="false">Ljod av</button><button id="fullscreen-button" class="vp-button vp-button--compact">Fullskjerm</button><button id="leave-button" class="vp-button vp-button--compact">Avslutt</button></div>
+    <div id="game-frame" class="vp-game-frame">
+      <div id="game-stage" class="vp-game-stage ff-game-stage" tabindex="0" aria-label="Spelefelt. Mellomrom eller pil opp styrer farkosten.">
+        <canvas id="game-canvas" width="960" height="540" aria-label="Fykefuga spelefelt"></canvas>
+        <div id="question-board" class="ff-question-board"><p id="question-text">Gjer deg klar</p><p id="question-help">Styr med mellomrom eller berøring.</p></div>
+        <div id="upper-answer" class="ff-answer ff-answer--upper" hidden></div><div id="lower-answer" class="ff-answer ff-answer--lower" hidden></div>
+        <div id="game-overlay" class="ff-overlay" hidden><div class="vp-panel vp-panel--plain"><h2 id="overlay-title">Pause</h2><p id="overlay-text"></p><button id="resume-button" class="vp-button vp-button--primary">Hald fram</button></div></div>
+      </div>
+    </div>
+    <div class="ff-game-bottom"><p id="control-help"></p><button id="restart-button" class="vp-button">Omstart</button><button id="errors-button" class="vp-button">Sjå feila dine</button><button id="new-round-button" class="vp-button">Ny runde</button></div>
+    <p id="game-announcement" class="ff-sr" aria-live="polite"></p>
+  </section>
+  <section id="result-view" class="ff-view vp-panel vp-panel--plain ff-baroque" hidden><h2 id="result-title">Bana er fullført!</h2><p id="result-text"></p><div class="ff-actions"><button id="next-batch" class="vp-button vp-button--primary">Neste spørsmålpulje</button><button id="replay-button" class="vp-button">Spel på nytt</button><button id="result-home" class="vp-button">Attende til start</button></div></section>
+  <section id="library-view" class="ff-view vp-panel vp-panel--plain ff-baroque" hidden>
+    <h2>Lærarbibliotek</h2><p>Lag korte spørsmål, del dei med elevane og tilrå spelval. Elevane kan justere vala sjølve. Alt blir lagra i denne nettlesaren.</p>
+    <div class="ff-actions"><button id="create-pack" class="vp-button vp-button--primary">Nytt spørsmålsett</button><button id="import-button" class="vp-button">Importer JSON</button><button id="import-ordaklok" class="vp-button">Hent frå Ordaklok</button><button id="export-library" class="vp-button">Eksporter bibliotek</button><button id="library-home" class="vp-button">Attende</button></div>
+    <input id="import-file" type="file" accept=".json,application/json" hidden>
+    <p id="library-message" class="vp-notice" role="status" hidden></p><div id="library-list" class="ff-library-list"></div>
+  </section>
+  <section id="editor-view" class="ff-view vp-panel vp-panel--plain ff-baroque" hidden>
+    <h2>Lag spørsmålsett</h2>
+    <label class="vp-field">Namn på settet<input id="editor-title" class="vp-input" type="text"></label>
+    <p>Høgst 60 teikn i spørsmålet og 24 i kvart svar. La feilalternativet stå tomt for å hente eit svar frå eit anna ordpar. Godkjende variantar blir aldri brukte som feilalternativ.</p>
+    <div class="ff-actions"><button id="add-question" class="vp-button">Legg til spørsmål</button><button id="paste-pairs" class="vp-button">Lim inn to kolonnar</button></div>
+    <div id="question-rows" class="ff-question-rows"></div>
+    <fieldset class="ff-recommend"><legend>Tilrådde spelval</legend><div class="ff-fields"><label class="vp-field">Bane<select id="editor-level" class="vp-input"></select></label><label class="vp-field">Lesetid<select id="editor-reading" class="vp-input"><option value="2">2 sekund</option><option value="4">4 sekund</option><option value="6">6 sekund</option></select></label><label class="vp-field">Endelaus vanskegrad<select id="editor-difficulty" class="vp-input"><option value="0">Varsam</option><option value="1">Kvik</option><option value="2">Virtuos</option></select></label></div></fieldset>
+    <div id="editor-issues" class="vp-notice vp-notice--error" role="status" hidden></div>
+    <div class="ff-actions"><button id="save-pack" class="vp-button vp-button--positive">Lagre sett</button><button id="preview-pack" class="vp-button">Førehandsvis</button><button id="editor-back" class="vp-button">Avbryt</button></div>
+  </section>
+  <dialog id="utility-dialog" class="vp-dialog" aria-labelledby="dialog-title"><div class="vp-dialog-head"><h2 id="dialog-title"></h2><button id="dialog-close" class="vp-button vp-button--compact">Lukk</button></div><div id="dialog-body"></div></dialog>
+</main>
+<script src="../js/vyrdepil-storage.js"></script><script src="../js/vyrdepil-icons.js"></script><script src="../js/vyrdepil-util.js"></script><script src="../js/vyrdepil-share.js"></script><script src="../js/vyrdepil-fullscreen.js"></script><script src="../js/vyrdepil-design.js"></script><script src="../js/vyrdepil-app-shell.js"></script><script src="../js/vyrdepil-menu.js"></script><script src="../js/vyrdepil-bragd.js"></script>
+<script src="js/data.js"></script><script src="js/questions.js"></script><script src="js/storage.js"></script><script src="js/input.js"></script><script src="js/physics.js"></script><script src="js/levels.js"></script><script src="js/engine.js"></script><script src="js/assets.js"></script><script src="js/effects.js"></script><script src="js/scenery.js"></script><script src="js/motion.js"></script><script src="js/render.js"></script><script src="js/score.js"></script><script src="js/strings.js"></script><script src="js/instruments.js"></script><script src="js/mixer.js"></script><script src="js/audio.js"></script><script src="js/sound-controls.js"></script><script src="js/library.js"></script><script src="js/app.js"></script>
+</body>
+</html>
