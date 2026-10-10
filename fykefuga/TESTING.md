@@ -2,7 +2,7 @@
 
 ## Automatisk kontroll
 
-`node fykefuga/tests/run.cjs`: 533 kontrollar består. Prøva bruker dei faktiske modulane og kontrollerer rørsle ved 30, 60, 120 og 144 biletruter per sekund, begge svarvegar i alle åtte modusar, alle 48 hinderstykke med 500 einingar/sekund og fire til seks hindergrupper, alle hovudbaner med 2/4/6 sekund lesetid og 27 endelause løp med 100 rette vegval. Ho kontrollerer òg tynne hinder, rask input, halde kontroll ved omstart, same spørsmålsrekkje, varierande svarplassering, lokal lagring, kosmetikk, Bragd-vilkår, importformat og gamle Ordaklok-lenkjer. Rasterformat, polstra figurspritar, PCM-format, sjekksummar, filstorleik, modulstorleik og fråvær av SVG i spelmodulane blir kontrollerte.
+`node fykefuga/tests/run.cjs`: 564 kontrollar består. Prøva bruker dei faktiske modulane og kontrollerer rørsle ved 30, 60, 120 og 144 biletruter per sekund, begge svarvegar i alle åtte modusar, alle 48 hinderstykke med 500 einingar/sekund og fire til seks hindergrupper, alle hovudbaner med 2/4/6 sekund lesetid og 27 endelause løp med 100 rette vegval. Ho kontrollerer òg tynne hinder, rask input, halde kontroll ved omstart, same spørsmålsrekkje, varierande svarplassering, lokal lagring, kosmetikk, Bragd-vilkår, importformat og gamle Ordaklok-lenkjer. Rasterformat, polstra figurspritar, PCM-format, sjekksummar, filstorleik, modulstorleik og fråvær av SVG i spelmodulane blir kontrollerte.
 
 Musikkprøvene kontrollerer fire instrumentgrupper, gyldige notar, full sats, gjentaking og tretakt i menuetten. Presentasjonen har avgrensa partikkeltal og sporhistorikk, endrar ikkje speltilstanden og fjernar partiklar og skjermristing ved redusert dekor.
 
@@ -25,3 +25,9 @@ Prøvd i skrivebordsnettlesaren med lokal tenar:
 Fysisk iPad/Safari og Android må framleis prøvast med berøring, skjermrotasjon, fullskjerm, nettbortfall og ljod i høgtalarar og hovudtelefonar. Input blir handsama neste fysikksteg. Faktisk responstid innan to biletruter må målast på dei aktuelle mobile einingane under vanleg belastning. Den endelege musikalske vurderinga krev prøvelytting.
 
 Dei eksisterande globale stilkontrollane har feil frå før denne greina: modalreglar i `heite_stavrim/css/style.css` og `ormritaren/css/editor-design.css`, og ein feilrapport for ei innebygd ikonadresse i felles CSS. Desse filene er uendra i Fykefuga-PR-en.
+
+## Rulling og kulissar
+
+Den nye prøva `tests/scrolling.cjs` kontrollerer jamn kamerafart og samordna figurrørsle ved 30/60/120/144 Hz, utan å endre speltilstanden. Ho prøver også omstart, momentan teletransport, kulerotasjon ved gravitasjonsbyte og pause, faste hylleteksturar, dekorproporsjonar og uendra tal på rasterflater gjennom kamerarundgang.
+
+`tests/scrolling.html` bruker dei faktiske rasterressursane og teiknemodulane. Lokal nettlesarprøve med handheva tryggingsheadarar gav størst gjennomsnittleg pikselendring på 0,147 av 255 over dei åtte bakgrunnsskøytane. Alle består grensa på 1. Kameraet går gjennom fleire gjentakingar utan å lage nye rasterflater; golv og tak har rette kanter, og kulissane held sideforholdet. Den ekte spelsida er prøvd med hinder, hopp, svarhylle, pause og omstart. Ingen konsollfeil vart funne. Dette er ikkje ei måling av biletrutetid på fysiske nettbrett.

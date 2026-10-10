@@ -69,7 +69,7 @@
     }
     function ribbon(ctx, state) {
       if (history.length < 2) return;
-      const points = history.concat([{ x: state.x, y: state.player.y }]);
+      const points = history.filter(point => point.x < state.x).concat([{ x: state.x, y: state.player.y }]);
       ctx.lineJoin = 'round'; ctx.lineCap = 'round';
       // A tapered ribbon follows movement. It never duplicates the player sprite.
       for (let i = 1; i < points.length; i++) {
@@ -93,7 +93,7 @@
         for (let i = 0; i < 3; i++) { ctx.globalAlpha = .48 - i * .12; ctx.lineWidth = 2; ctx.strokeStyle = i ? palette.colour : palette.light; ctx.beginPath(); ctx.ellipse(0, 18 + i * 8, 20 - i * 4 + Math.sin(age * 28 + i) * 3, 4, 0, 0, Math.PI * 2); ctx.stroke(); }
       }
       if (p.mode === 'swing' || p.mode === 'ball') {
-        ctx.rotate(age * 8 * p.gravity); ctx.strokeStyle = palette.accent; ctx.lineWidth = 3;
+        ctx.rotate(p.angle + age * 3); ctx.strokeStyle = palette.accent; ctx.lineWidth = 3;
         for (let i = 0; i < 3; i++) { ctx.globalAlpha = .45; ctx.beginPath(); ctx.arc(0, 0, 29 + steering * 15, i * 2.1, i * 2.1 + .85); ctx.stroke(); }
       }
       if (p.mode === 'spider' || p.mode === 'robot' && p.grounded) {

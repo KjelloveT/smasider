@@ -77,7 +77,7 @@
       soundControls.stopPreview(); await F.Audio.init(); F.Audio.setVolumes(config.musicVolume, config.effectsVolume); F.Audio.setMuted(!config.sound); await F.Assets.load();
       $('setup-message').hidden = true;
       F.Storage.saveSettings({ ...getConfig() });
-      engine = F.Engine.create(selected, config); render.reset(config); errors.length = 0; paused = false; countdown = 0; feedbackUntil = 0;
+      engine = F.Engine.create(selected, config); render.reset(config, engine.state); errors.length = 0; paused = false; countdown = 0; feedbackUntil = 0;
       $('game-overlay').hidden = true; view('game'); input.enable(true); clock.clear(); previous = performance.now();
       F.Audio.start(engine.world.segment(0).scene); syncSound(); $('game-stage').focus({ preventScroll: true }); processEvents();
       cancelAnimationFrame(frame); frame = requestAnimationFrame(loop);
@@ -86,7 +86,7 @@
   }
   function restart() {
     if (!engine || currentView !== 'game' || paused) return;
-    clearTimeout(deathTimer); engine.reset(); render.reset(config); clock.clear(); input.discardPress(); previous = performance.now(); processEvents();
+    clearTimeout(deathTimer); engine.reset(); render.reset(config, engine.state); clock.clear(); input.discardPress(); previous = performance.now(); processEvents();
   }
   function processEvents() {
     engine.drain().forEach(event => {
@@ -134,23 +134,24 @@
   function loop(now) {
     if (currentView !== 'game') return;
     const elapsed = Math.max(0, (now - previous) / 1000); previous = now;
+    let alpha = 1;
     if (!paused && countdown <= now) {
-      if (countdown) { countdown = 0; $('game-overlay').hidden = true; input.enable(true); F.Audio.init().then(() => F.Audio.start(engine.world.at(engine.state.time).scene)); }
+      if (countdown) { countdown = 0; render.snap(engine.state); $('game-overlay').hidden = true; input.enable(true); F.Audio.init().then(() => F.Audio.start(engine.world.at(engine.state.time).scene)); }
       if (elapsed > 0.25) pause('Spelet tok ein pust i bakken. Hald fram når du er klar.');
-      else clock.advance(elapsed, () => { const control = input.read(); engine.step(control); render.update(engine.state, control); processEvents(); });
+      else alpha = clock.advance(elapsed, () => { const control = input.read(); engine.step(control); render.update(engine.state, control); processEvents(); }).alpha;
     } else if (!paused && countdown) $('overlay-title').textContent = 'Klar om ' + Math.ceil((countdown - now) / 1000);
-    if (currentView === 'game') { render.draw(engine, config); hud(); frame = requestAnimationFrame(loop); }
+    if (currentView === 'game') { render.draw(engine, config, alpha); hud(); frame = requestAnimationFrame(loop); }
   }
   function pause(reason) {
     if (currentView !== 'game' || paused) return;
-    paused = true; countdown = 0; clearTimeout(deathTimer); input.enable(false); clock.clear(); F.Audio.stop();
+    paused = true; countdown = 0; render.snap(engine.state); clearTimeout(deathTimer); input.enable(false); clock.clear(); F.Audio.stop();
     $('game-overlay').hidden = false; $('overlay-title').textContent = 'Pause'; $('overlay-text').textContent = reason || 'Hald fram når du er klar.'; $('resume-button').hidden = false;
   }
   function resume() {
     if (currentView !== 'game' || !paused || document.hidden) return;
     paused = false; countdown = performance.now() + 2000; input.enable(false); clock.clear(); $('overlay-title').textContent = 'Klar om 2'; $('resume-button').hidden = true;
     F.Audio.init();
-    if (engine.state.status === 'dead') { engine.reset(); render.reset(config); processEvents(); }
+    if (engine.state.status === 'dead') { engine.reset(); render.reset(config, engine.state); processEvents(); }
   }
   function syncSound() { $('game-sound').textContent = config.sound ? 'Ljod på' : 'Ljod av'; $('game-sound').setAttribute('aria-pressed', String(config.sound)); $('sound-input').checked = config.sound; }
   $('start-button').addEventListener('click', () => start());
