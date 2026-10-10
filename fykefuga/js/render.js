@@ -20,7 +20,7 @@
       ctx.save(); ctx.translate(0, effects.shake);
       tile(scenes[segment.scene] + '.jpg', config.reduced ? 0 : state.x * 0.08, 0, 960, 540);
       // Lys slør skil spelplanet frå den detaljrike måla kulissen.
-      ctx.fillStyle = 'rgba(255,249,233,.48)'; ctx.fillRect(0, 122, 960, 356);
+      ctx.fillStyle = 'rgba(255,249,233,.32)'; ctx.fillRect(0, 122, 960, 356);
       if (!config.reduced) tile('mid-' + segment.scene + '.png', state.x * 0.24, 115, 500, 360, 0.22);
       if (!config.reduced) {
         ctx.fillStyle = '#fff5cc';
@@ -61,15 +61,15 @@
         });
       }
       const p = state.player, sprite = F.Assets.get(config.skin + '-' + p.mode + '.png');
-      effects.behind(ctx, state, sprite);
+      effects.behind(ctx, state);
       if (sprite) {
         const pose = effects.pose(p), scale = state.status === 'dead' ? effects.deadScale : 1;
         ctx.save(); ctx.translate(190, p.y);
-        const angle = p.mode === 'wave' ? (p.velocity < 0 ? -1 : 1) * Math.PI / 4 : p.mode === 'cube' && p.grounded ? Math.round(p.angle / (Math.PI / 2)) * Math.PI / 2 : p.angle || 0;
+        const angle = p.mode === 'ball' ? state.x / 18 * p.gravity : p.mode === 'wave' ? (p.velocity < 0 ? -1 : 1) * Math.PI / 4 : p.mode === 'cube' && p.grounded ? Math.round(p.angle / (Math.PI / 2)) * Math.PI / 2 : p.angle || 0;
         ctx.rotate((p.mode === 'swing' ? Math.sin(state.time * 7) * 0.15 + (p.gravity < 0 ? Math.PI : 0) : angle) + pose.rotation);
         ctx.scale(pose.x * scale, pose.y * scale);
         if (p.gravity < 0 && ['robot', 'spider'].includes(p.mode)) ctx.scale(1, -1);
-        ctx.drawImage(sprite, -23, -23, 46, 46); ctx.restore();
+        ctx.drawImage(sprite, -28, -28, 56, 56); ctx.restore();
       }
       effects.front(ctx, state); ctx.restore();
       if (!world.endless) {

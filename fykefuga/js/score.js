@@ -21,18 +21,19 @@
     if (bar === 14) lead = [4, 3, 2, 1, 0, 1, 2, 1][pulse];
     if (bar === 15) lead = [0, 2, 4, 2, 0, 2, 4, 0][pulse];
     const ornament = pulse === pulses - 1 && bar % 4 === 3 && bar !== 15;
-    add('cembalo', pitch(score, lead, 1), ornament ? .44 : .84, pulse % 2 ? .14 : .19, -.24);
-    if (ornament) add('cembalo', pitch(score, lead + 1, 1), .42, .12, -.19, .5);
+    add('cembalo', pitch(score, lead, 0), ornament ? .44 : .84, pulse % 2 ? .055 : .075, -.24);
+    if (ornament) add('cembalo', pitch(score, lead + 1, 0), .42, .06, -.19, .5);
+    if (pulse % 2 === 0) add('violin', pitch(score, lead, 1), 2.05, pulse === 0 ? .24 : .20, -.28);
     // Andre inngang etter to taktar, og ein rolegare motrøyst i tredje delen.
     if (bar >= 2 && pulse % 2 === 0) {
       const counter = degree + [4, 2, 0, 2][(pulse / 2 + (bar % 2)) % 4];
-      add('violin', pitch(score, counter, 0), 1.7, variation === 2 ? .11 : .075, .34);
+      add('violin', pitch(score, counter, 0), 2.1, variation === 2 ? .13 : .10, .34);
     }
-    if (pulse % 2 === 0) {
-      const bass = degree + (pulse === 6 && bar !== 15 ? 4 : 0);
-      add('cello', pitch(score, bass, -2), 1.75, pulse === 0 ? .17 : .11, -.06);
+    if (pulse === 0 || pulse === (scene === 2 ? 3 : 4)) {
+      const bass = degree + (pulse > 0 && bar !== 15 ? 4 : 0);
+      add('cello', pitch(score, bass, -1), scene === 2 ? 3.1 : 4.1, pulse === 0 ? .20 : .16, -.06);
     }
-    if (pulse === 0) [0, 2, 4].forEach((interval, i) => add('organ', pitch(score, degree + interval, -1), 7.2, scene === 3 ? .055 : .027, (i - 1) * .22));
+    if (pulse === 0) [0, 2, 4].forEach((interval, i) => add('organ', pitch(score, degree + interval, -1), pulses - .2, scene === 3 ? .048 : .023, (i - 1) * .22));
     if ((scene === 1 || scene === 3) && pulse % 2 === 1 && bar > 3) add('cembalo', pitch(score, degree + [2, 4, 2, 0][Math.floor(pulse / 2)], 0), .58, .065, .18);
     return notes;
   }

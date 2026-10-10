@@ -49,28 +49,36 @@ check(F.Questions.validate(duplicate).some(issue => issue.message.includes('fasi
 assert.throws(() => F.Questions.parsePairs('berre eitt felt')); assertions++;
 const imported = F.Questions.fromOrdaklok({ app: 'ordaklok', title: 'Æ ø å', pairs: [{ a: 'cat', b: 'katt', alts: ['pus'] }, { a: 'dog', b: 'hund' }] });
 check(imported.questions[0].accepted.includes('pus'), 'Ordaklok-variant vart borte');
+function flightControl(p, hazards, x) {
+  const next = hazards.find(h => h.x + h.w > x - 14);
+  const pair = next ? hazards.filter(h => h.x === next.x) : [];
+  const top = pair.find(h => h.y === 126), bottom = pair.find(h => h.y > 126);
+  const target = top && bottom ? (top.y + top.h + bottom.y) / 2 : 320;
+  const held = p.mode === 'wave' ? p.y > target : p.y + p.velocity * .18 > target;
+  const pressed = p.mode === 'ufo' ? p.y > target + 20 && p.velocity > -100 : p.mode === 'swing' ? p.gravity !== (held ? -1 : 1) : false;
+  return { held, pressed };
+}
+check(F.Levels.SPEED >= 480, 'Farten vart ikkje auka');
 for (const mode of F.modes) for (let variant = 0; variant < 2; variant++) for (let difficulty = 0; difficulty < 3; difficulty++) {
   const hazards = F.Levels.obstacles(mode.id, 0, difficulty, variant);
-  check(hazards.every(h => h.x / 310 < 5.2 && h.w / 310 + h.x / 310 < 5.2), 'Hinder ligg i lesestrekninga');
+  check(hazards.every(h => (h.x + h.w) / F.Levels.SPEED < F.Levels.ACTION - .7), 'Hinder ligg i lesestrekninga eller manglar trygg utgang');
+  check(new Set(hazards.map(h => Math.round(h.x / F.Levels.SPEED * 10))).size >= 4, 'For få hindergrupper');
   // Ein enkel kontrollpolicy provar at kvart av dei endelege byggjestykka er framkomeleg.
   const p = F.Physics.player(mode.id);
   let alive = true;
-  for (let tick = 0; tick < 624 && alive; tick++) {
-    const time = tick / 120, x = time * 310;
+  for (let tick = 0; tick < F.Levels.ACTION * 120 && alive; tick++) {
+    const time = tick / 120, x = time * F.Levels.SPEED;
     const next = hazards.find(h => h.x + h.w > x - 14);
-    const near = next && (next.x - x) / 310 < (['cube', 'robot'].includes(mode.id) ? 0.30 : 0.5);
+    const near = next && (next.x - x) / F.Levels.SPEED < (['cube', 'robot'].includes(mode.id) ? 0.30 : 0.5);
     let held = false, pressed = false;
     if (['cube', 'robot'].includes(mode.id)) { held = !!near; pressed = !!near && p.grounded; }
     else if (['ball', 'spider'].includes(mode.id)) {
       pressed = !!near && p.grounded && (next.y > 300 ? p.gravity === 1 : p.gravity === -1);
     } else {
-      const target = next ? (next.y > 300 ? 245 : 360) : 320;
-      held = p.y > target;
-      if (mode.id === 'ufo') pressed = held && p.velocity > -100;
-      if (mode.id === 'swing') pressed = held ? p.gravity === 1 && p.velocity > -100 : p.gravity === -1 && p.velocity < 100;
+      ({ held, pressed } = flightControl(p, hazards, x));
     }
     F.Physics.update(p, { held, pressed });
-    alive = !hazards.some(h => F.Physics.collision(x, x + 310 / 120, p, h));
+    alive = !hazards.some(h => F.Physics.collision(x, x + F.Levels.SPEED / 120, p, h));
   }
   check(alive, 'Uframkomeleg byggjestykke: ' + mode.id + ', nivå ' + difficulty + ', variant ' + variant);
 }
@@ -103,11 +111,10 @@ function control(run, tick) {
     return { held: upper, pressed: mode === 'ufo' && upper && tick % 24 === 0 };
   }
   const next = segment.obstacles.find(h => h.x + h.w > state.x - 14);
-  const near = next && (next.x - state.x) / 310 < (['cube', 'robot'].includes(mode) ? 0.3 : 0.5);
+  const near = next && (next.x - state.x) / run.world.speed < (['cube', 'robot'].includes(mode) ? 0.3 : 0.5);
   if (['cube', 'robot'].includes(mode)) return { held: !!near, pressed: !!near && p.grounded };
   if (['ball', 'spider'].includes(mode)) return { held: false, pressed: !!near && p.grounded && (next.y > 300 ? p.gravity === 1 : p.gravity === -1) };
-  const target = next ? (next.y > 300 ? 245 : 360) : 320, held = p.y > target;
-  return { held, pressed: mode === 'ufo' ? held && p.velocity > -100 : mode === 'swing' ? held ? p.gravity === 1 && p.velocity > -100 : p.gravity === -1 && p.velocity < 100 : false };
+  return flightControl(p, segment.obstacles, state.x);
 }
 for (const reading of [2, 4, 6]) for (const level of F.levels) {
   const run = F.Engine.create(pack, { level: level.id, reading, seed: 735, offset: 0 });
@@ -129,6 +136,17 @@ for (const asset of manifest.files) {
   check(bytes.length <= 500 * 1024 && bytes.length === asset.bytes, 'Bilete bryt storleiksgrensa');
   check(crypto.createHash('sha256').update(bytes).digest('hex') === asset.sha256, 'Ressursoversikta er utdatert');
   check(asset.file.endsWith('.png') ? bytes.subarray(1, 4).toString() === 'PNG' : bytes[0] === 255 && bytes[1] === 216, 'Ressursen er ikkje eit rasterbilete');
+}
+for (const skin of F.skins) for (const mode of F.modes) {
+  const file = manifest.files.find(asset => asset.file === skin.id + '-' + mode.id + '.png');
+  check(file.width === 96 && file.height === 96, 'Sprite manglar isolert celle med fast sideforhold og luft');
+}
+const sounds = JSON.parse(fs.readFileSync(path.join(root, 'fykefuga/assets/audio/manifest.json'), 'utf8'));
+check(sounds.files.length === 8 && sounds.loopStart < sounds.loopEnd, 'Den eigne strykarbanken manglar toneregister');
+for (const sound of sounds.files) {
+  const bytes = fs.readFileSync(path.join(root, 'fykefuga/assets/audio', sound.file));
+  check(bytes.length === sound.bytes && bytes.length < 500 * 1024 && crypto.createHash('sha256').update(bytes).digest('hex') === sound.sha256, 'Ljodbanken er utdatert eller for stor');
+  check(bytes.subarray(0,4).toString() === 'RIFF' && bytes.subarray(8,12).toString() === 'WAVE' && bytes.readUInt16LE(34) === 16, 'Strykarbanken skal ha eigne PCM-klangar med 16 bit');
 }
 for (const directory of ['fykefuga/js', 'fykefuga/css']) for (const file of fs.readdirSync(path.join(root, directory))) {
   const text = fs.readFileSync(path.join(root, directory, file), 'utf8');
@@ -177,6 +195,7 @@ for (const directory of ['fykefuga/js', 'fykefuga/css']) for (const file of fs.r
   vm.runInContext(fs.readFileSync(path.join(root,'fykefuga/js/storage.js'),'utf8'),context);
   const baseConfig = { level: 'marmor', reading: 4, difficulty: 0 };
   F.Storage.save(pack);
+  check(F.Storage.key(pack,baseConfig).startsWith('tempo-2|'), 'Gamle rekordar blir samanlikna med den raskare hinderbanken');
   check(F.Storage.list().some(item => item.id === pack.id), 'Lagra spørsmålsett vart borte');
   check(F.Storage.key(pack,baseConfig) !== F.Storage.key(pack,{...baseConfig,reading:6}), 'Ulike lesetider deler rekord');
   const changedPack = structuredClone(pack); changedPack.questions[0].correct += '!';
@@ -229,9 +248,15 @@ for (const directory of ['fykefuga/js', 'fykefuga/css']) for (const file of fs.r
     const before = JSON.stringify(visualState); presentation.update(visualState,{held:true});
     if (step === 599) check(before === JSON.stringify(visualState), 'Spor eller partiklar endrar fysikk eller speltilstand');
   }
-  check(presentation.count <= 120 && presentation.trailCount <= 30 && presentation.trailCount > 10, 'Presentasjonen har ubunde ressursbruk eller manglar spor');
+  check(presentation.count <= F.Effects.LIMIT && presentation.trailCount <= 26 && presentation.trailCount > 10, 'Presentasjonen har ubunde ressursbruk eller manglar spor');
   presentation.reset({skin:'gold',reduced:true});
   presentation.notify({type:'dead'},visualState); presentation.update(visualState,{held:true});
   check(presentation.count === 0 && presentation.trailCount === 0 && presentation.shake === 0, 'Redusert dekor gir framleis skjermristing eller partiklar');
+  presentation.reset({skin:'gold',reduced:false}); presentation.notify({type:'jump'},visualState);
+  check(presentation.count >= 30 && presentation.pose(visualState.player).y > 1, 'Hoppet manglar synleg utbrot eller strekk');
+  for (let tick = 0; tick < 60; tick++) presentation.update(visualState,{held:true});
+  const canvasCalls = [], canvas = new Proxy({}, {get(_,key) { return () => canvasCalls.push(key); },set(){return true;}});
+  presentation.behind(canvas,{...visualState,player:{...visualState.player,mode:'ship'}},{});
+  check(!canvasCalls.includes('drawImage'), 'Sporet kopierer figuren og lagar spriteoverlapp');
   process.stdout.write(assertions + ' meiningsfulle kontrollar bestod.\n');
 })().catch(error => { console.error(error); process.exitCode = 1; });

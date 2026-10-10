@@ -2,7 +2,7 @@
 
 ## Automatisk kontroll
 
-`node fykefuga/tests/run.cjs`: 437 kontrollar består. Prøva bruker dei faktiske modulane og kontrollerer rørsle ved 30, 60, 120 og 144 biletruter per sekund, begge svarvegar i alle åtte modusar, alle 48 hinderstykke, alle hovudbaner med 2/4/6 sekund lesetid og 27 endelause løp med 100 rette vegval. Ho kontrollerer òg tynne hinder, rask input, halde kontroll ved omstart, same spørsmålsrekkje, varierande svarplassering, lokal lagring, kosmetikk, Bragd-vilkår, importformat og gamle Ordaklok-lenkjer. Rasterformat, sjekksummar, filstorleik, modulstorleik og fråvær av SVG i spelmodulane blir kontrollerte.
+`node fykefuga/tests/run.cjs`: 533 kontrollar består. Prøva bruker dei faktiske modulane og kontrollerer rørsle ved 30, 60, 120 og 144 biletruter per sekund, begge svarvegar i alle åtte modusar, alle 48 hinderstykke med 500 einingar/sekund og fire til seks hindergrupper, alle hovudbaner med 2/4/6 sekund lesetid og 27 endelause løp med 100 rette vegval. Ho kontrollerer òg tynne hinder, rask input, halde kontroll ved omstart, same spørsmålsrekkje, varierande svarplassering, lokal lagring, kosmetikk, Bragd-vilkår, importformat og gamle Ordaklok-lenkjer. Rasterformat, polstra figurspritar, PCM-format, sjekksummar, filstorleik, modulstorleik og fråvær av SVG i spelmodulane blir kontrollerte.
 
 Musikkprøvene kontrollerer fire instrumentgrupper, gyldige notar, full sats, gjentaking og tretakt i menuetten. Presentasjonen har avgrensa partikkeltal og sporhistorikk, endrar ikkje speltilstanden og fjernar partiklar og skjermristing ved redusert dekor.
 
@@ -18,7 +18,7 @@ Prøvd i skrivebordsnettlesaren med lokal tenar:
 - Spelet held fram med grafikk, spørsmål og ljod etter at den særskilde prøvetenaren er stoppa. Prøvetenaren handheva produksjonen sine tryggingsheadarar.
 - Den ekte spelsida er prøvd i rammer på 375 × 812, 568 × 320, 844 × 390 og 1024 × 768, og på PC ved 1280 × 720. Ingen vassrett overflyt; liggjande spelvising passar innan høgda. Dette prøver CSS-oppsettet og er ikkje fysisk einingstesting.
 
-`tests/presentation.html` prøver heile satsar med den faktiske Web Audio-miksen i OfflineAudioContext. Alle fire består med null klipte eller ugyldige verdiar og fungerande stereo. Toppnivå ligg på 0,220–0,265 og RMS på 0,039–0,046 ved standardvolum. Startsida har prøvelytting til dei fire satsane og spel-ljoden.
+`tests/presentation.html` prøver heile satsar med den faktiske Web Audio-miksen i OfflineAudioContext. Den nye PCM-strykarbanken er med i prøva. Alle fire består med null klipte eller ugyldige verdiar og fungerande stereo. Toppnivå ligg på 0,194–0,225 og RMS på 0,042–0,045 ved standardvolum. Startsida har prøvelytting til dei fire satsane og spel-ljoden.
 
 ## Før merge
 

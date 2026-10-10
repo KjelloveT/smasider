@@ -8,8 +8,6 @@
       partials.forEach((value, i) => { imag[i + 1] = value; }); waves[name] = context.createPeriodicWave(real, imag);
     }
     wave('cembalo', [1, .66, .42, .3, .23, .15, .13, .10, .075, .06, .05, .025]);
-    wave('violin', [1, .7, .55, .4, .32, .27, .2, .16, .13, .10, .075, .055]);
-    wave('cello', [1, .56, .3, .25, .12, .11, .07, .04]);
     wave('organ', [1, .34, .025, .24, .01, .065, .009, .08]);
     const noise = context.createBuffer(1, Math.ceil(context.sampleRate * .35), context.sampleRate);
     const samples = noise.getChannelData(0), random = Vy.rng(47831);
@@ -26,7 +24,7 @@
       value.finish = () => { voices.delete(value); nodes.forEach(node => { try { node.disconnect(); } catch (_) {} }); };
       value.launch = () => {
         let remaining = sources.length;
-        sources.forEach(source => { source.onended = () => { if (--remaining === 0) value.finish(); }; source.start(start); source.stop(value.end + .03); });
+        sources.forEach(source => { source.onended = () => { if (--remaining === 0) value.finish(); }; if (source.buffer) source.start(start, source.offset || 0); else source.start(start); source.stop(value.end + .03); });
       };
       return value;
     }
@@ -47,16 +45,22 @@
         v.filter.frequency.setValueAtTime(5600, start); v.filter.frequency.exponentialRampToValueAtTime(1700, v.end);
       } else {
         const bowed = instrument === 'violin' || instrument === 'cello';
-        const source = oscillator(v, event.midi, instrument, bowed ? -4 : 0, bowed ? .52 : .7);
         if (bowed) {
-          oscillator(v, event.midi, instrument, 4, .45);
-          const vibrato = context.createOscillator(), depth = context.createGain();
-          vibrato.frequency.value = instrument === 'cello' ? 4.9 : 5.6; depth.gain.value = 3.2;
-          vibrato.connect(depth); depth.connect(source.detune); v.nodes.push(vibrato, depth); v.sources.push(vibrato);
-        }
-        gain.exponentialRampToValueAtTime(velocity, start + Math.min(bowed ? .055 : .024, duration / 2));
-        gain.setValueAtTime(velocity * .85, start + duration); gain.exponentialRampToValueAtTime(.0001, v.end);
-        v.filter.frequency.value = instrument === 'violin' ? 3800 : instrument === 'cello' ? 1400 : 4200;
+          const sample = root.Fykefuga.Strings.nearest(instrument, event.midi);
+          if (!sample) { v.finish(); return; }
+          // Three separately timed players per section; PCM carries body resonance and bow friction.
+          [-6, 1, 7].forEach((cents, i) => {
+            const source = context.createBufferSource(), level = context.createGain(), spread = context.createStereoPanner();
+            source.buffer = sample.buffer; source.loop = true; source.loopStart = .3; source.loopEnd = 2.6; source.offset = .04 + i * .137;
+            source.playbackRate.value = Math.pow(2, (event.midi - sample.midi) / 12); source.detune.value = cents;
+            level.gain.value = [.52, .34, .3][i]; spread.pan.value = (i - 1) * .28;
+            source.connect(level); level.connect(spread); spread.connect(v.gain); v.nodes.push(source, level, spread); v.sources.push(source);
+          });
+        } else oscillator(v, event.midi, instrument, 0, .7);
+        gain.exponentialRampToValueAtTime(velocity, start + Math.min(bowed ? .065 : .024, duration / 2));
+        gain.setTargetAtTime(velocity * .87, start + .09, .16);
+        gain.setValueAtTime(velocity * .87, start + duration); gain.exponentialRampToValueAtTime(.0001, v.end);
+        v.filter.frequency.value = instrument === 'violin' ? 6500 : instrument === 'cello' ? 4200 : 4200;
       }
       v.launch();
     }
@@ -71,10 +75,18 @@
     function rustle(start, duration, velocity, cutoff) {
       const v = voice(effects, start, duration, 0); if (!v) return;
       const source = context.createBufferSource(); source.buffer = noise; source.connect(v.gain); v.sources.push(source); v.nodes.push(source);
-      v.filter.frequency.value = cutoff; v.gain.gain.setValueAtTime(velocity, start); v.gain.gain.exponentialRampToValueAtTime(.0001, v.end); v.launch();
+      v.filter.frequency.value = cutoff; v.gain.gain.setValueAtTime(.0001, start); v.gain.gain.exponentialRampToValueAtTime(velocity, start + .012); v.gain.gain.exponentialRampToValueAtTime(.0001, v.end); v.launch();
+    }
+    function impact(start, fundamental, duration, velocity) {
+      const v = voice(effects, start, duration, 0); if (!v) return;
+      [1, 2.76, 5.4, 8.93].forEach((ratio, i) => {
+        const source = context.createOscillator(), level = context.createGain(); source.type = 'sine'; source.frequency.value = fundamental * ratio;
+        level.gain.value = 1 / Math.pow(i + 1, 2); source.connect(level); level.connect(v.gain); v.nodes.push(source, level); v.sources.push(source);
+      });
+      v.filter.frequency.value = 6500; v.gain.gain.setValueAtTime(.0001, start); v.gain.gain.exponentialRampToValueAtTime(velocity, start + .003); v.gain.gain.exponentialRampToValueAtTime(.0001, v.end); v.launch();
     }
     function clear(bus) { voices.forEach(v => { if (bus && v.bus !== bus) return; v.sources.forEach(source => { try { source.stop(); } catch (_) {} }); v.finish(); }); }
-    return { note, sweep, rustle, clear, voiceCount: () => voices.size };
+    return { note, sweep, rustle, impact, clear, voiceCount: () => voices.size };
   }
   root.Fykefuga.Instruments = { create };
 })(window);

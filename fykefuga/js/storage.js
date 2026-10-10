@@ -33,7 +33,7 @@
     write(); return normalized;
   }
   function remove(id) { fresh(); state.packs = state.packs.filter(pack => pack.id !== id); write(); }
-  function key(pack, config) { return [F.Questions.revision(pack), config.level, config.reading, config.difficulty].join('|'); }
+  function key(pack, config) { return ['tempo-2', F.Questions.revision(pack), config.level, config.reading, config.difficulty].join('|'); }
   function record(pack, config, run) {
     fresh();
     const id = key(pack, config), previous = state.records[id] || 0;

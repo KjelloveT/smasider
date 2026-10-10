@@ -12,6 +12,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
 ### Endra
 - Ordaklok og Fykefuga bruker ein felles delingsmodul. Eksisterande Ordaklok-lenkjer blir framleis lesne.
+- Fykefuga har 61 prosent høgare fart og fire til seks hindergrupper i kvart spelparti, med hoppkombinasjonar og vekselvise flygeportar. Lesestrekningane held same lesetid.
+- Fiolin- og cellogrupper bruker ein eigen PCM-lydbank med bogestøy og instrumentresonansar. Strykarane fører melodien, og cembaloet ligg som følgje. Hopp, landing og styring får større utbrot, sjokkbølgjer, framdrift og rørsleanimasjonar.
+
+### Fiksa
+- Figurspritar er isolerte i polstra celler utan bitar av nabomotiv. Rørslespor bruker lysband i staden for overlappande figurkopiar. Rekordar frå den tidlegare, langsamare hinderbanken blir haldne skilde.
 
 ## [2.1] — 2026-10-09
 

@@ -1,0 +1,66 @@
+{
+  "app": "fykefuga",
+  "version": 1,
+  "origin": "Original spectral string synthesis with body resonances and bow friction noise. No third-party samples.",
+  "sampleRate": 22050,
+  "loopStart": 0.3,
+  "loopEnd": 2.6,
+  "files": [
+    {
+      "file": "violin-55.wav",
+      "instrument": "violin",
+      "midi": 55,
+      "bytes": 123524,
+      "sha256": "beba49febb16b62f057661f0839eeea3eea7d6d43a2fcbf424f0bd0172f35574"
+    },
+    {
+      "file": "violin-62.wav",
+      "instrument": "violin",
+      "midi": 62,
+      "bytes": 123524,
+      "sha256": "539ee12527a097bca9372807b73e0ee176d556ab732b9ec5a357a7d614534daf"
+    },
+    {
+      "file": "violin-69.wav",
+      "instrument": "violin",
+      "midi": 69,
+      "bytes": 123524,
+      "sha256": "39f59b64d2496f2ff21d0cbbe3e5b341372b95404205f1fcdd65e94de8fc5908"
+    },
+    {
+      "file": "violin-76.wav",
+      "instrument": "violin",
+      "midi": 76,
+      "bytes": 123524,
+      "sha256": "59bf303ade560681b1d9b7b929ee2f6e66047aa9148f02564560f2be5e323346"
+    },
+    {
+      "file": "cello-36.wav",
+      "instrument": "cello",
+      "midi": 36,
+      "bytes": 123524,
+      "sha256": "b85c5f2c6ba3c278d427bcc2eb26f8a66256a741c677300bb116335fa9d73c3b"
+    },
+    {
+      "file": "cello-43.wav",
+      "instrument": "cello",
+      "midi": 43,
+      "bytes": 123524,
+      "sha256": "6ba21a587fe1cfddc530a734d05a6522d026d12024ba439d3f0b3acc5bc0f8a5"
+    },
+    {
+      "file": "cello-50.wav",
+      "instrument": "cello",
+      "midi": 50,
+      "bytes": 123524,
+      "sha256": "ffd3a991d7aa2f9c438825f5b84d883a493abafc0ee42c253f36c434c4af189a"
+    },
+    {
+      "file": "cello-57.wav",
+      "instrument": "cello",
+      "midi": 57,
+      "bytes": 123524,
+      "sha256": "41f742ef43cc9fd8616f9ffd40b5fbfa4da80ef8bd9f017f7d7fa0325deffc74"
+    }
+  ]
+}

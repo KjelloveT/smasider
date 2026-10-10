@@ -22,7 +22,7 @@
         const score = F.Score.scores[scene], steps = F.Score.stepsPerBar(scene) * 16;
         document.getElementById('audio-status').textContent = 'Gjer ' + score.name + ' …';
         const seconds = steps * F.Score.quaver(scene) + 2, context = new Offline(2, Math.ceil(seconds * 32000), 32000);
-        const mix = F.Mixer.create(context);
+        await F.Strings.load(context); const mix = F.Mixer.create(context);
         for (let step = 0; step < steps; step++) {
           const at = .04 + step * F.Score.quaver(scene);
           F.Score.eventsAt(scene, step).forEach(note => mix.instruments.note(note, at + note.delay));

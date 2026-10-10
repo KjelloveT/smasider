@@ -102,7 +102,7 @@
           errors.push({ prompt: event.detail.item.prompt, correct: event.detail.item.correct, chosen: event.detail.chosen }); if (errors.length > 100) errors.shift();
           $('question-text').textContent = 'Fasit: ' + event.detail.item.correct; $('question-help').textContent = 'Spørsmålet: ' + event.detail.item.prompt;
         } else { $('question-text').textContent = 'Krasj! Prøv på nytt.'; $('question-help').textContent = 'Same bane og spørsmålsrekkje.'; }
-        feedbackUntil = performance.now() + 1700;
+        feedbackUntil = performance.now() + (event.reason === 'answer' ? 1700 : 280);
         $('upper-answer').hidden = $('lower-answer').hidden = true;
         deathTimer = setTimeout(restart, 280);
       }
@@ -128,7 +128,7 @@
       $('upper-answer').hidden = $('lower-answer').hidden = true;
       const untilSwitch = segment.end - state.time, nextMode = engine.world.segment(segment.index + 1).mode;
       $('question-text').textContent = !engine.world.tutorial && untilSwitch < 1 ? 'Neste modus: ' + F.mode(nextMode).name : F.mode(state.player.mode).name;
-      $('question-help').textContent = engine.world.tutorial ? F.mode(state.player.mode).help : 'Pass hinderet. Spørsmålet kjem på ei trygg strekning.';
+      $('question-help').textContent = engine.world.tutorial ? F.mode(state.player.mode).help : 'Pass hinderpartiet. Spørsmålet kjem på ei trygg strekning.';
     }
   }
   function loop(now) {

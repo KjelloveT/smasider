@@ -9,7 +9,10 @@
         { "t": "nytt", "kva": "Fykefuga", "tekst": "Åtte farkostar, øvingsbaner, fire hovudbaner og endelaus fuga med faglege vegval.", "merke": "verktoy" },
         { "t": "nytt", "kva": "Lærarbibliotek", "tekst": "Lag spørsmål, lim inn ordpar, importer Ordaklok og del sett med elevane. Rekordar, kosmetikk og bragder ligg lokalt." },
         { "t": "nytt", "kva": "Barokkressursar", "tekst": "Original rastergrafikk, fire fleirstemte barokksatsar, romklang og volumval. Spor, lysband og animasjonar følgjer farkostane." },
-        { "t": "endra", "kva": "Deling", "tekst": "Felles delingsmodul for Fykefuga og Ordaklok, med støtte for eksisterande lenkjer." }
+        { "t": "endra", "kva": "Deling", "tekst": "Felles delingsmodul for Fykefuga og Ordaklok, med støtte for eksisterande lenkjer." },
+        { "t": "endra", "kva": "Fykefuga", "tekst": "61 prosent høgare fart, fire til seks hindergrupper per spelparti og vekselvise flygeportar. Lesetida er bevart." },
+        { "t": "endra", "kva": "Musikk og effektar", "tekst": "Eigen strykarbank med bogestøy og instrumentresonansar, og større effektar ved hopp, landing og styring." },
+        { "t": "fiksa", "kva": "Figurar", "tekst": "Isolerte spritar utan nabobitar eller overlappande figurkopiar. Rekordar frå den langsamare utgåva blir skilde frå dei nye." }
       ]
     },
     {
