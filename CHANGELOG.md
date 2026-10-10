@@ -19,6 +19,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - Figurspritar er isolerte i polstra celler utan bitar av nabomotiv. Rørslespor bruker lysband i staden for overlappande figurkopiar. Rekordar frå den tidlegare, langsamare hinderbanken blir haldne skilde.
 
 - Fykefuga rullar jamt mellom fysikkstega. Bakgrunnane har samanhengande skøytar og blir førebudde før start; dekor bevarer proporsjonane, og golv og svarhyller har faste teksturar. Kula og svingfarkosten snur utan vinkelhopp.
+- Synlege treffområderammer rundt hindera i Fykefuga er fjerna.
 
 ## [2.1] — 2026-10-09
 

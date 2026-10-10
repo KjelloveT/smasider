@@ -52,8 +52,6 @@
           if (x < -100 || x > 1000) return;
           const img = F.Assets.get(obstacle.kind + '.png');
           if (img) ctx.drawImage(img, x, obstacle.y, obstacle.w, obstacle.h);
-          // Treffområdet får ein tydeleg mørk fot; biletdetaljane endrar aldri fysikken.
-          ctx.strokeStyle = '#142820'; ctx.lineWidth = 2; ctx.strokeRect(x, obstacle.y, obstacle.w, obstacle.h);
         });
       }
       const p = state.player, sprite = F.Assets.get(config.skin + '-' + p.mode + '.png');
