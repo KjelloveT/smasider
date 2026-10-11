@@ -68,13 +68,15 @@
     button.append(image, Vy.el('span', '', mode.name)); button.title = mode.help; button.addEventListener('click', () => { $('level-select').value = 'tutorial-' + mode.id; start(); }); $('tutorials').appendChild(button);
   });
   async function start(nextConfig) {
+    if ($('start-button').disabled) return;
     const issues = F.Questions.validate(selected);
     if (issues.length && !getConfig().level.startsWith('tutorial-')) { $('setup-message').textContent = 'Settet må rettast: ' + issues[0].message; $('setup-message').hidden = false; return; }
-    $('start-button').disabled = true; $('setup-message').textContent = 'Lastar farkostar og kulissar …'; $('setup-message').hidden = false;
+    $('start-button').disabled = true; $('setup-message').textContent = 'Lastar farkostar, kulissar og musikk …'; $('setup-message').hidden = false;
     try {
       config = nextConfig || { ...getConfig(), seed: Vy.newSeed(), offset: 0 };
       if (config.level !== 'endless' && !config.level.startsWith('tutorial-')) config.difficulty = F.level(config.level).difficulty;
-      soundControls.stopPreview(); await F.Audio.init(); F.Audio.setVolumes(config.musicVolume, config.effectsVolume); F.Audio.setMuted(!config.sound); await F.Assets.load();
+      soundControls.stopPreview(); await F.Audio.init(config.level === 'endless' || config.level.startsWith('tutorial-') ? 0 : F.level(config.level).scene); F.Audio.setVolumes(config.musicVolume, config.effectsVolume); F.Audio.setMuted(!config.sound); await F.Assets.load();
+      if (document.hidden) throw new Error('Kom attende til fana og start spelet når du er klar.');
       $('setup-message').hidden = true;
       F.Storage.saveSettings({ ...getConfig() });
       engine = F.Engine.create(selected, config); render.reset(config, engine.state); errors.length = 0; paused = false; countdown = 0; feedbackUntil = 0;
@@ -86,7 +88,7 @@
   }
   function restart() {
     if (!engine || currentView !== 'game' || paused) return;
-    clearTimeout(deathTimer); engine.reset(); render.reset(config, engine.state); clock.clear(); input.discardPress(); previous = performance.now(); processEvents();
+    clearTimeout(deathTimer); engine.reset(); F.Audio.start(engine.world.segment(0).scene); render.reset(config, engine.state); clock.clear(); input.discardPress(); previous = performance.now(); processEvents();
   }
   function processEvents() {
     engine.drain().forEach(event => {
@@ -136,7 +138,7 @@
     const elapsed = Math.max(0, (now - previous) / 1000); previous = now;
     let alpha = 1;
     if (!paused && countdown <= now) {
-      if (countdown) { countdown = 0; render.snap(engine.state); $('game-overlay').hidden = true; input.enable(true); F.Audio.init().then(() => F.Audio.start(engine.world.at(engine.state.time).scene)); }
+      if (countdown) { countdown = 0; render.snap(engine.state); $('game-overlay').hidden = true; input.enable(true); F.Audio.resume(engine.world.at(engine.state.time).scene); }
       if (elapsed > 0.25) pause('Spelet tok ein pust i bakken. Hald fram når du er klar.');
       else alpha = clock.advance(elapsed, () => { const control = input.read(); engine.step(control); render.update(engine.state, control); processEvents(); }).alpha;
     } else if (!paused && countdown) $('overlay-title').textContent = 'Klar om ' + Math.ceil((countdown - now) / 1000);
@@ -144,14 +146,14 @@
   }
   function pause(reason) {
     if (currentView !== 'game' || paused) return;
-    paused = true; countdown = 0; render.snap(engine.state); clearTimeout(deathTimer); input.enable(false); clock.clear(); F.Audio.stop();
+    paused = true; countdown = 0; render.snap(engine.state); clearTimeout(deathTimer); input.enable(false); clock.clear(); F.Audio.pause();
     $('game-overlay').hidden = false; $('overlay-title').textContent = 'Pause'; $('overlay-text').textContent = reason || 'Hald fram når du er klar.'; $('resume-button').hidden = false;
   }
   function resume() {
     if (currentView !== 'game' || !paused || document.hidden) return;
     paused = false; countdown = performance.now() + 2000; input.enable(false); clock.clear(); $('overlay-title').textContent = 'Klar om 2'; $('resume-button').hidden = true;
-    F.Audio.init();
-    if (engine.state.status === 'dead') { engine.reset(); render.reset(config, engine.state); processEvents(); }
+    F.Audio.init(engine.world.at(engine.state.time).scene).catch(error => Vy.toast(error.message));
+    if (engine.state.status === 'dead') { engine.reset(); F.Audio.rewind(); render.reset(config, engine.state); processEvents(); }
   }
   function syncSound() { $('game-sound').textContent = config.sound ? 'Ljod på' : 'Ljod av'; $('game-sound').setAttribute('aria-pressed', String(config.sound)); $('sound-input').checked = config.sound; }
   $('start-button').addEventListener('click', () => start());

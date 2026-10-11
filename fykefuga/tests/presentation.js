@@ -1,46 +1,74 @@
 (function () {
   'use strict';
-  const F = window.Fykefuga, button = document.getElementById('run-audio'), results = document.getElementById('audio-results');
-  const urls = [];
-  function wav(buffer) {
-    const frames = buffer.length, bytes = new ArrayBuffer(44 + frames * 4), view = new DataView(bytes);
-    const word = (offset, text) => { for (let i = 0; i < text.length; i++) view.setUint8(offset + i, text.charCodeAt(i)); };
-    word(0, 'RIFF'); view.setUint32(4, bytes.byteLength - 8, true); word(8, 'WAVE'); word(12, 'fmt '); view.setUint32(16, 16, true);
-    view.setUint16(20, 1, true); view.setUint16(22, 2, true); view.setUint32(24, buffer.sampleRate, true); view.setUint32(28, buffer.sampleRate * 4, true);
-    view.setUint16(32, 4, true); view.setUint16(34, 16, true); word(36, 'data'); view.setUint32(40, frames * 4, true);
+  const F = window.Fykefuga, button = document.getElementById('run-audio');
+  const status = document.getElementById('audio-status'), results = document.getElementById('audio-results');
+  const wait = seconds => new Promise(resolve => setTimeout(resolve, seconds * 1000));
+  function assert(value, label) { if (!value) throw new Error(label); }
+  function stats(buffer) {
+    let peak = 0, sum = 0, bad = 0;
     for (let channel = 0; channel < 2; channel++) {
       const data = buffer.getChannelData(channel);
-      for (let i = 0; i < frames; i++) view.setInt16(44 + i * 4 + channel * 2, Math.round(Math.max(-1, Math.min(1, data[i])) * 32767), true);
+      for (const value of data) {
+        if (!Number.isFinite(value)) bad++;
+        peak = Math.max(peak, Math.abs(value)); sum += value * value;
+      }
     }
-    return new Blob([bytes], { type: 'audio/wav' });
+    return { peak, rms: Math.sqrt(sum / (buffer.length * 2)), bad };
   }
   button.addEventListener('click', async () => {
-    button.disabled = true; urls.forEach(URL.revokeObjectURL); urls.length = 0; results.replaceChildren();
+    button.disabled = true; results.replaceChildren();
     try {
+      await F.Music.load();
       const Offline = window.OfflineAudioContext || window.webkitOfflineAudioContext;
-      for (let scene = 0; scene < 4; scene++) {
-        const score = F.Score.scores[scene], steps = F.Score.stepsPerBar(scene) * 16;
-        document.getElementById('audio-status').textContent = 'Gjer ' + score.name + ' …';
-        const seconds = steps * F.Score.quaver(scene) + 2, context = new Offline(2, Math.ceil(seconds * 32000), 32000);
-        await F.Strings.load(context); const mix = F.Mixer.create(context);
-        for (let step = 0; step < steps; step++) {
-          const at = .04 + step * F.Score.quaver(scene);
-          F.Score.eventsAt(scene, step).forEach(note => mix.instruments.note(note, at + note.delay));
+      for (const rate of [44100, 48000]) for (let scene = 0; scene < 4; scene++) {
+        const track = F.Music.track(scene);
+        status.textContent = 'Kontrollerer ' + track.title + ' ved ' + rate + ' Hz …';
+        const context = new Offline(2, rate * 2, rate), entry = await F.Music.prepare(context, scene);
+        const measurement = stats(entry.buffer);
+        assert(measurement.bad === 0 && measurement.peak < 1 && measurement.rms > .01, 'Ugyldig lyd: ' + track.title);
+        const duration = entry.loopEnd - entry.loopStart;
+        assert(Math.abs(duration - track.frames / track.sampleRate) < 2 / rate, 'Feil sløyfelengd');
+        const source = context.createBufferSource(); source.buffer = entry.buffer;
+        source.loop = true; source.loopStart = entry.loopStart; source.loopEnd = entry.loopEnd;
+        source.connect(context.destination); source.start(0, entry.loopEnd - 1);
+        const loop = await context.startRendering(), data = loop.getChannelData(0);
+        const jump = Math.abs(data[rate] - data[rate - 1]), steps = [];
+        for (let i = rate - 4410; i < rate + 4410; i++) steps.push(Math.abs(data[i] - data[i - 1]));
+        steps.sort((a, b) => a - b);
+        assert(jump < Math.max(.06, steps[Math.floor(steps.length * .99)] * 1.8), 'Brått brot i musikksløyfa');
+        for (const start of [rate - Math.round(rate * .05), rate]) {
+          let sum = 0;
+          for (let i = start; i < start + Math.round(rate * .05); i++) sum += data[i] ** 2;
+          assert(Math.sqrt(sum / Math.round(rate * .05)) > .005, 'Stille hol ved sløyfeskøyt');
         }
-        const buffer = await context.startRendering(), left = buffer.getChannelData(0), right = buffer.getChannelData(1);
-        let peak = 0, squares = 0, clipped = 0, invalid = 0, stereo = 0;
-        for (let i = 0; i < buffer.length; i++) {
-          for (const value of [left[i], right[i]]) { if (!Number.isFinite(value)) invalid++; peak = Math.max(peak, Math.abs(value)); squares += value * value; if (Math.abs(value) >= .999) clipped++; }
-          stereo += Math.abs(left[i] - right[i]);
-        }
-        const rms = Math.sqrt(squares / (buffer.length * 2)), passed = !clipped && !invalid && rms > .01 && stereo > 1;
-        const section = Vy.el('section', 'vp-panel vp-panel--inset'); section.append(Vy.el('h2', '', score.name), Vy.el('p', '', (passed ? 'BESTÅTT' : 'FEIL') + ' · topp ' + peak.toFixed(3) + ' · RMS ' + rms.toFixed(3) + ' · klipte verdiar ' + clipped + ' · ugyldige verdiar ' + invalid + ' · stereo ' + (stereo / buffer.length).toFixed(4)));
-        const url = URL.createObjectURL(wav(buffer)); urls.push(url);
-        const audio = document.createElement('audio'); audio.controls = true; audio.src = url; audio.setAttribute('aria-label', 'Prøvelytt til ' + score.name);
-        const link = Vy.el('a', 'vp-button vp-button--compact', 'Last ned ' + score.name); link.href = url; link.download = 'fykefuga-' + scene + '.wav'; section.append(audio, link); results.append(section);
+        const row = document.createElement('p');
+        row.textContent = track.title + ' · ' + rate + ' Hz · ' + duration.toFixed(3) + ' s · start ' +
+          entry.loopStart.toFixed(5) + ' s · samsvar ' + entry.similarity.toFixed(4) + ' · topp ' +
+          measurement.peak.toFixed(3) + ' · skøyt ' + jump.toFixed(4) + ' · BESTÅTT';
+        results.append(row);
       }
-      document.getElementById('audio-status').textContent = 'Alle fire ljodprøvene er ferdige.';
-    } catch (error) { document.getElementById('audio-status').textContent = 'Prøva feila: ' + error.message; }
+      status.textContent = 'Prøver pause, omstart, volum og raske temabyte …';
+      await F.Audio.init(0); F.Audio.setMuted(true); F.Audio.start(0); await wait(.12);
+      assert(F.Audio.status().music.title === 'Marmorfuga', 'Feil starttema');
+      F.Audio.setVolumes(0, 80); assert(F.Audio.status().musicVolume === 0, 'Musikk av feila');
+      F.Audio.setVolumes(65, 0); assert(F.Audio.status().effectsVolume === 0, 'Spel-ljod av feila');
+      const before = F.Audio.status().music.position; F.Audio.pause(); await wait(.06);
+      const paused = F.Audio.status();
+      assert(!paused.music.playing && paused.context === 'suspended', 'Pause held fram med lyd');
+      assert(Math.abs(paused.music.position - before) < .08, 'Pause mistar musikkposisjon');
+      await F.Audio.init(0); F.Audio.resume(0); await wait(.05);
+      assert(F.Audio.status().music.position >= before, 'Vidareføring startar musikken på nytt');
+      F.Audio.start(0); await wait(.03);
+      assert(F.Audio.status().music.position < .08, 'Omstart nullstiller ikkje musikken');
+      F.Audio.setScene(3); F.Audio.setScene(1); F.Audio.pause(); await wait(.3);
+      assert(!F.Audio.status().music.playing, 'Sein dekoding startar lyd etter pause');
+      await F.Audio.init(2); F.Audio.start(2); await wait(.05);
+      assert(F.Audio.status().music.title === 'Spegelmenuett' && F.Audio.status().music.cachedThemes <= 2, 'Feil tema eller ubunde minnebruk');
+      F.Audio.stop(); await wait(.05);
+      assert(F.Audio.status().context === 'suspended', 'Avslutt held fram med lyd');
+      const row = document.createElement('p'); row.textContent = 'Pause, vidareføring, omstart, lyd av, volum og avbrotne temabyte: BESTÅTT.'; results.append(row);
+      status.textContent = 'Alle åtte dekodingsprøvene og lydstyringa består.';
+    } catch (error) { F.Audio.stop(); status.textContent = 'Prøva feila: ' + error.message; }
     finally { button.disabled = false; }
   });
 })();

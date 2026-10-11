@@ -8,12 +8,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ### Lagt til
 - **Fykefuga**: eit barokk fartsspel med åtte rørslemodusar, åtte øvingsbaner, fire hovudbaner og endelaus fuga. Korte fagspørsmål avgjer kva svarveg eleven skal styre gjennom.
 - Lærarbibliotek med eigne spørsmål, innlimte ordpar, Ordaklok-import, førehandsvising, JSON-filer og delingslenkjer. Rekordar, kosmetikk og fire felles bragder blir lagra lokalt.
-- Originale genererte rasterressursar og fire sekstentakts barokksatsar med cembalo, fiolin, cello og orgel, stereoromklang og separate volumval. Farkostane har spor, lysband, eksos og eigne reaksjonar ved hopp, landing og teletransport.
+- Originale genererte rasterressursar og fire originale Spitfire-barokksatsar med innspelte fiolinar, bratsj og cello, og separate volumval for musikk og spel-ljod. Farkostane har spor, lysband, eksos og eigne reaksjonar ved hopp, landing og teletransport.
 
 ### Endra
 - Ordaklok og Fykefuga bruker ein felles delingsmodul. Eksisterande Ordaklok-lenkjer blir framleis lesne.
 - Fykefuga har 61 prosent høgare fart og fire til seks hindergrupper i kvart spelparti, med hoppkombinasjonar og vekselvise flygeportar. Lesestrekningane held same lesetid.
-- Fiolin- og cellogrupper bruker ein eigen PCM-lydbank med bogestøy og instrumentresonansar. Strykarane fører melodien, og cembaloet ligg som følgje. Hopp, landing og styring får større utbrot, sjokkbølgjer, framdrift og rørsleanimasjonar.
+- Banemusikken bruker ferdige orkesteropptak på 65–83 sekund, med presise sløyfer, mjuke temabyte, bevart musikkposisjon ved pause og rask omstart. Spel-ljodane er eigne Web Audio-klangar. Hopp, landing og styring får større utbrot, sjokkbølgjer, framdrift og rørsleanimasjonar.
 
 ### Fiksa
 - Figurspritar er isolerte i polstra celler utan bitar av nabomotiv. Rørslespor bruker lysband i staden for overlappande figurkopiar. Rekordar frå den tidlegare, langsamare hinderbanken blir haldne skilde.

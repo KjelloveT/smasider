@@ -2,9 +2,9 @@
 
 ## Automatisk kontroll
 
-`node fykefuga/tests/run.cjs`: 564 kontrollar består. Prøva bruker dei faktiske modulane og kontrollerer rørsle ved 30, 60, 120 og 144 biletruter per sekund, begge svarvegar i alle åtte modusar, alle 48 hinderstykke med 500 einingar/sekund og fire til seks hindergrupper, alle hovudbaner med 2/4/6 sekund lesetid og 27 endelause løp med 100 rette vegval. Ho kontrollerer òg tynne hinder, rask input, halde kontroll ved omstart, same spørsmålsrekkje, varierande svarplassering, lokal lagring, kosmetikk, Bragd-vilkår, importformat og gamle Ordaklok-lenkjer. Rasterformat, polstra figurspritar, PCM-format, sjekksummar, filstorleik, modulstorleik og fråvær av SVG i spelmodulane blir kontrollerte.
+`node fykefuga/tests/run.cjs`: 545 kontrollar består etter musikkbytet. Prøva bruker dei faktiske modulane og kontrollerer rørsle ved 30, 60, 120 og 144 biletruter per sekund, begge svarvegar i alle åtte modusar, alle 48 hinderstykke med 500 einingar/sekund og fire til seks hindergrupper, alle hovudbaner med 2/4/6 sekund lesetid og 27 endelause løp med 100 rette vegval. Ho kontrollerer òg tynne hinder, rask input, halde kontroll ved omstart, same spørsmålsrekkje, varierande svarplassering, lokal lagring, kosmetikk, Bragd-vilkår, importformat og gamle Ordaklok-lenkjer. Rasterformat, polstra figurspritar, dei fire MP3-temaa, sjekksummar, filstorleik, modulstorleik og fråvær av SVG i spelmodulane blir kontrollerte.
 
-Musikkprøvene kontrollerer fire instrumentgrupper, gyldige notar, full sats, gjentaking og tretakt i menuetten. Presentasjonen har avgrensa partikkeltal og sporhistorikk, endrar ikkje speltilstanden og fjernar partiklar og skjermristing ved redusert dekor.
+`node fykefuga/tests/music.cjs` har 64 kontrollar for MP3-dekoding med og utan startforskyving ved 44,1/48 kHz, pauseposisjon, omstart, avbrotne og kølagde temabyte, høgst to dekoda tema, nettbortfall og uavhengig muting av musikk og spel-ljod. Presentasjonen har avgrensa partikkeltal og sporhistorikk, endrar ikkje speltilstanden og fjernar partiklar og skjermristing ved redusert dekor.
 
 `node designsystem/manage-backgrounds.cjs check`: ingen appar utan bakgrunnsreservasjon. `git diff --check` består.
 
@@ -18,7 +18,9 @@ Prøvd i skrivebordsnettlesaren med lokal tenar:
 - Spelet held fram med grafikk, spørsmål og ljod etter at den særskilde prøvetenaren er stoppa. Prøvetenaren handheva produksjonen sine tryggingsheadarar.
 - Den ekte spelsida er prøvd i rammer på 375 × 812, 568 × 320, 844 × 390 og 1024 × 768, og på PC ved 1280 × 720. Ingen vassrett overflyt; liggjande spelvising passar innan høgda. Dette prøver CSS-oppsettet og er ikkje fysisk einingstesting.
 
-`tests/presentation.html` prøver heile satsar med den faktiske Web Audio-miksen i OfflineAudioContext. Den nye PCM-strykarbanken er med i prøva. Alle fire består med null klipte eller ugyldige verdiar og fungerande stereo. Toppnivå ligg på 0,194–0,225 og RMS på 0,042–0,045 ved standardvolum. Startsida har prøvelytting til dei fire satsane og spel-ljoden.
+`tests/presentation.html` dekodar dei fire publiserte Spitfire-filene med dei faktiske spelmodulane ved 44,1 og 48 kHz. Alle åtte prøver består. Nettlesaren fjernar MP3-startforskyvinga; bølgjeformreferansen gjev samsvar 1,0000, rett lengd og sløyfestart 0. Ingen klipping, ugyldige verdiar eller stille hol ved skjøten. Toppnivå i dei dekoda filene ligg på 0,852–0,870. Prøva spelar over den ekte sløyfegrensa med OfflineAudioContext og prøver òg den faktiske lydstyringa: pause, vidareføring frå same posisjon, omstart, separate volumval og sein dekoding etter eit avbrote temabyte.
+
+Den lokale tenaren handhevar produksjonen sine tryggingsheadarar. Alle musikkfiler blir henta frå same origin; ingen ny CSP-origin eller ny lagring er naudsynt. Spitfire-samples, plugin, separate stemmer og WAV-masterar blir ikkje publiserte.
 
 ## Før merge
 

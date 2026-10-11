@@ -16,7 +16,7 @@
     }
     reverb.buffer = impulse;
     const wet = context.createGain(); wet.gain.value = .19;
-    music.connect(compressor); effects.connect(compressor); music.connect(reverb); effects.connect(reverb); reverb.connect(wet); wet.connect(compressor);
+    music.connect(compressor); effects.connect(compressor); effects.connect(reverb); reverb.connect(wet); wet.connect(compressor);
     compressor.connect(highpass); highpass.connect(master); master.connect(context.destination);
     master.gain.value = .68; music.gain.value = .65; effects.gain.value = .8;
     return { master, music, effects, instruments: root.Fykefuga.Instruments.create(context, music, effects) };

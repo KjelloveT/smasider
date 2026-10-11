@@ -44,20 +44,8 @@
         gain.exponentialRampToValueAtTime(.0001, v.end);
         v.filter.frequency.setValueAtTime(5600, start); v.filter.frequency.exponentialRampToValueAtTime(1700, v.end);
       } else {
-        const bowed = instrument === 'violin' || instrument === 'cello';
-        if (bowed) {
-          const sample = root.Fykefuga.Strings.nearest(instrument, event.midi);
-          if (!sample) { v.finish(); return; }
-          // Three separately timed players per section; PCM carries body resonance and bow friction.
-          [-6, 1, 7].forEach((cents, i) => {
-            const source = context.createBufferSource(), level = context.createGain(), spread = context.createStereoPanner();
-            source.buffer = sample.buffer; source.loop = true; source.loopStart = .3; source.loopEnd = 2.6; source.offset = .04 + i * .137;
-            source.playbackRate.value = Math.pow(2, (event.midi - sample.midi) / 12); source.detune.value = cents;
-            level.gain.value = [.52, .34, .3][i]; spread.pan.value = (i - 1) * .28;
-            source.connect(level); level.connect(spread); spread.connect(v.gain); v.nodes.push(source, level, spread); v.sources.push(source);
-          });
-        } else oscillator(v, event.midi, instrument, 0, .7);
-        gain.exponentialRampToValueAtTime(velocity, start + Math.min(bowed ? .065 : .024, duration / 2));
+        oscillator(v, event.midi, instrument, 0, .7);
+        gain.exponentialRampToValueAtTime(velocity, start + Math.min(.024, duration / 2));
         gain.setTargetAtTime(velocity * .87, start + .09, .16);
         gain.setValueAtTime(velocity * .87, start + duration); gain.exponentialRampToValueAtTime(.0001, v.end);
         v.filter.frequency.value = instrument === 'violin' ? 6500 : instrument === 'cello' ? 4200 : 4200;

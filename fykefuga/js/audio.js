@@ -1,50 +1,48 @@
 (function (root) {
   'use strict';
   const F = root.Fykefuga;
-  let context, master, music, effects, instruments, timer, step = 0, next = 0, scene = 0, pendingScene = 0;
-  let active = false, muted = true, musicVolume = .65, effectsVolume = .8, duckUntil = 0, tailTimer;
+  let context, master, music, effects, instruments, player, timer, tailTimer, suspendTimer;
+  let active = false, muted = true, musicVolume = .65, effectsVolume = .8, duckUntil = 0;
   function levels() {
-    if (!context) return;
+    if (!master) return;
     const now = context.currentTime;
     master.gain.setTargetAtTime(muted ? 0 : .68, now, .025);
     music.gain.setTargetAtTime(musicVolume * (now < duckUntil ? .42 : 1), now, .025);
     effects.gain.setTargetAtTime(effectsVolume, now, .018);
   }
-  async function init() {
-    clearTimeout(tailTimer);
-    if (context && instruments) return context.resume().catch(() => {});
+  async function init(scene) {
+    clearTimeout(tailTimer); clearTimeout(suspendTimer);
     const Audio = root.AudioContext || root.webkitAudioContext;
-    if (!Audio) return Promise.resolve();
-    try {
-      if (!context) context = new Audio({ latencyHint: 'interactive' });
-      const resumed = context.resume().catch(() => {});
-      await F.Strings.load(context); await resumed;
-      ({ master, music, effects, instruments } = F.Mixer.create(context)); master.gain.value = 0; levels();
-    } catch (error) { if (context) context.suspend().catch(() => {}); throw error; }
-    return context ? context.resume().catch(() => {}) : Promise.resolve();
-  }
-  function schedule() {
-    if (!active || !context || context.state !== 'running') return;
-    levels(); if (next < context.currentTime) next = context.currentTime + .015;
-    let count = 0;
-    while (next < context.currentTime + .13 && count++ < 8) {
-      // Modusskiftet held pulsen; ny sats kjem inn på neste taktstrek.
-      if (step % F.Score.stepsPerBar(scene) === 0 && pendingScene !== scene) { scene = pendingScene; step = 0; }
-      if (!muted && musicVolume > 0) F.Score.eventsAt(scene, step).forEach(event => instruments.note(event, next + event.delay));
-      next += F.Score.quaver(scene); step++;
+    if (!Audio) return;
+    if (!context) {
+      context = new Audio({ latencyHint: 'interactive' });
+      ({ master, music, effects, instruments } = F.Mixer.create(context));
+      master.gain.value = 0; player = F.Music.create(context, music); levels();
     }
+    // Resume from the user gesture, before awaiting any downloads.
+    const resumed = context.resume();
+    await Promise.all([F.Music.prepare(context, scene === undefined ? 0 : scene), resumed]);
   }
-  function start(newScene) {
-    if (!context) return;
-    clearTimeout(tailTimer);
-    scene = pendingScene = newScene; active = true; step = 0; next = context.currentTime + .025;
-    clearInterval(timer); timer = setInterval(schedule, 35); schedule();
+  function report(error) { stop(); Vy.toast(error.message || 'Musikken kunne ikkje klargjerast. Prøv på nytt.'); }
+  function run(scene, resume) {
+    if (!player) return;
+    clearTimeout(tailTimer); clearTimeout(suspendTimer); duckUntil = 0;
+    active = true; instruments.clear();
+    clearInterval(timer); timer = setInterval(levels, 35); levels();
+    (resume ? player.resume(scene) : player.start(scene)).catch(report);
   }
   function stop(tail) {
-    active = false; clearInterval(timer); clearTimeout(tailTimer);
+    active = false; clearInterval(timer); clearTimeout(tailTimer); clearTimeout(suspendTimer);
+    if (player) player.stop();
     if (instruments) instruments.clear(tail ? music : null);
     if (context && tail && !muted) tailTimer = setTimeout(() => stop(), 1700);
-    else if (context) context.suspend().catch(() => {});
+    else if (context) suspendTimer = setTimeout(() => context.suspend().catch(() => {}), 20);
+  }
+  function pause() {
+    active = false; clearInterval(timer); clearTimeout(tailTimer); clearTimeout(suspendTimer);
+    if (player) player.pause();
+    if (instruments) instruments.clear();
+    if (context) suspendTimer = setTimeout(() => context.suspend().catch(() => {}), 20);
   }
   function setMuted(value) { muted = !!value; levels(); }
   function setVolumes(musicLevel, effectsLevel) { musicVolume = Math.max(0, Math.min(1, musicLevel / 100)); effectsVolume = Math.max(0, Math.min(1, effectsLevel / 100)); levels(); }
@@ -73,5 +71,9 @@
     }
     levels();
   }
-  F.Audio = { init, start, stop, setMuted, setVolumes, effect, setScene(value) { pendingScene = value; } };
+  F.Audio = { init, start(scene) { run(scene, false); }, resume(scene) { run(scene, true); }, stop, pause,
+    rewind() { if (player) player.rewind(); }, setMuted, setVolumes, effect,
+    setScene(scene) { if (player && active) player.setScene(scene).catch(report); },
+    status() { return { context: context ? context.state : 'uninitialised', active, muted, musicVolume, effectsVolume,
+      music: player ? player.status() : null }; } };
 })(window);

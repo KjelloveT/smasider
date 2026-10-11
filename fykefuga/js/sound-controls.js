@@ -18,7 +18,7 @@
     }
     async function prepare() {
       $('preview-music').disabled = $('preview-effect').disabled = true;
-      try { await F.Audio.init(); return true; }
+      try { await F.Audio.init(Number($('preview-theme').value)); if (document.hidden) { F.Audio.stop(); return false; } return true; }
       catch (error) { Vy.toast(error.message); return false; }
       finally { $('preview-music').disabled = $('preview-effect').disabled = false; }
     }
@@ -26,12 +26,12 @@
     $('preview-music').addEventListener('click', async () => {
       if (preview) { stopPreview(); return; }
       if (!await prepare()) return; $('sound-input').checked = true; F.Audio.setMuted(false); update(); save();
-      preview = true; F.Audio.start(Number($('preview-theme').value)); $('preview-music').textContent = 'Stopp musikken'; timer = setTimeout(stopPreview, 30000);
+      preview = true; F.Audio.start(Number($('preview-theme').value)); $('preview-music').textContent = 'Stopp musikken'; timer = setTimeout(stopPreview, 120000);
     });
     $('preview-theme').addEventListener('change', () => { if (preview) F.Audio.setScene(Number($('preview-theme').value)); });
     $('preview-effect').addEventListener('click', async () => { if (!await prepare()) return; $('sound-input').checked = true; F.Audio.setMuted(false); update(); save(); F.Audio.effect({ type: 'answer' }); if (!preview) { clearTimeout(timer); timer = setTimeout(() => F.Audio.stop(), 900); } });
     $('sound-input').addEventListener('change', () => { F.Audio.setMuted(!$('sound-input').checked); save(); });
-    document.addEventListener('visibilitychange', () => { if (document.hidden) { stopPreview(); F.Audio.stop(); } });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) { if (preview) stopPreview(); else if ($('game-view').hidden) F.Audio.stop(); } });
     update(); return { values, stopPreview };
   }
   F.SoundControls = { create };

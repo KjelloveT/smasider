@@ -6,7 +6,7 @@ const crypto = require('node:crypto');
 const root = path.resolve(__dirname, '../..');
 const context = vm.createContext({ console, URL, URLSearchParams, TextEncoder, TextDecoder, Blob, CompressionStream, DecompressionStream, btoa, atob, setTimeout, clearTimeout, crypto: crypto.webcrypto, document: { addEventListener() {} } });
 context.window = context;
-for (const file of ['js/vyrdepil-util.js', 'js/vyrdepil-share.js', 'fykefuga/js/data.js', 'fykefuga/js/questions.js', 'fykefuga/js/physics.js', 'fykefuga/js/levels.js', 'fykefuga/js/engine.js', 'fykefuga/js/score.js', 'fykefuga/js/effects.js', 'fykefuga/js/scenery.js', 'fykefuga/js/motion.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
+for (const file of ['js/vyrdepil-util.js', 'js/vyrdepil-share.js', 'fykefuga/js/data.js', 'fykefuga/js/questions.js', 'fykefuga/js/physics.js', 'fykefuga/js/levels.js', 'fykefuga/js/engine.js', 'fykefuga/js/effects.js', 'fykefuga/js/scenery.js', 'fykefuga/js/motion.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
 const F = context.Fykefuga;
 let assertions = 0;
 function check(condition, message) { assert.ok(condition, message); assertions++; }
@@ -141,13 +141,15 @@ for (const skin of F.skins) for (const mode of F.modes) {
   const file = manifest.files.find(asset => asset.file === skin.id + '-' + mode.id + '.png');
   check(file.width === 96 && file.height === 96, 'Sprite manglar isolert celle med fast sideforhold og luft');
 }
-const sounds = JSON.parse(fs.readFileSync(path.join(root, 'fykefuga/assets/audio/manifest.json'), 'utf8'));
-check(sounds.files.length === 8 && sounds.loopStart < sounds.loopEnd, 'Den eigne strykarbanken manglar toneregister');
-for (const sound of sounds.files) {
+const sounds = JSON.parse(fs.readFileSync(path.join(root, 'fykefuga/assets/audio/music-v1.json'), 'utf8'));
+check(sounds.app === 'fykefuga' && sounds.version === 1 && sounds.tracks.length === 4, 'Musikkoversikta manglar fire tema');
+for (const [scene, sound] of sounds.tracks.entries()) {
   const bytes = fs.readFileSync(path.join(root, 'fykefuga/assets/audio', sound.file));
-  check(bytes.length === sound.bytes && bytes.length < 500 * 1024 && crypto.createHash('sha256').update(bytes).digest('hex') === sound.sha256, 'Ljodbanken er utdatert eller for stor');
-  check(bytes.subarray(0,4).toString() === 'RIFF' && bytes.subarray(8,12).toString() === 'WAVE' && bytes.readUInt16LE(34) === 16, 'Strykarbanken skal ha eigne PCM-klangar med 16 bit');
+  check(bytes.length === sound.bytes && bytes.length < 2.1 * 1024 * 1024 && crypto.createHash('sha256').update(bytes).digest('hex') === sound.sha256, 'Banemusikken er utdatert eller for stor');
+  check(sound.scene === scene && sound.frames / sound.sampleRate > 60 && sound.frames / sound.sampleRate < 100, 'Feil tema eller sløyfelengd');
+  check(sound.alignment.samples.length === 256 && sound.alignment.step > 0 && sound.encoderDelayFrames > 0, 'Musikken manglar dekodingsreferanse');
 }
+check(sounds.tracks[2].beats === 3 && sounds.tracks[3].bpm > sounds.tracks[0].bpm, 'Menuetten må ha tretakt, og finalen må vere kvikkare');
 for (const directory of ['fykefuga/js', 'fykefuga/css']) for (const file of fs.readdirSync(path.join(root, directory))) {
   const text = fs.readFileSync(path.join(root, directory, file), 'utf8');
   check(!/<svg[\s>]|\.svg\b|image\/svg/i.test(text), 'SVG vart brukt i speldesignet');
@@ -233,14 +235,6 @@ for (const directory of ['fykefuga/js', 'fykefuga/css']) for (const file of fs.r
   keyboard.keydown(keyEvent); controls.discardPress();
   const restartControl = controls.read(); check(restartControl.held && !restartControl.pressed, 'Omstart mistar halde kontroll eller finn på eit nytt trykk');
   controls.enable(false); keyboard.keydown(keyEvent); check(!controls.read().held, 'Kontroll blir teken imot under pause');
-  for (let scene = 0; scene < 4; scene++) {
-    const bars = F.Score.stepsPerBar(scene) * 16;
-    const notes = Array.from({length:bars}, (_,step)=>F.Score.eventsAt(scene,step)).flat();
-    check(notes.length > 200 && notes.every(note => Number.isFinite(note.midi) && note.midi >= 24 && note.midi < 100 && note.duration > 0 && note.velocity > 0 && note.delay >= 0), 'Musikksatsen har ugyldige eller manglande notar');
-    check(new Set(notes.map(note=>note.instrument)).size === 4, 'Satsen manglar ei instrumentgruppe');
-    check(JSON.stringify(F.Score.eventsAt(scene,0)) === JSON.stringify(F.Score.eventsAt(scene,bars)), 'Satsen får eit brot ved gjentaking');
-  }
-  check(F.Score.stepsPerBar(2) === 6, 'Menuetten må ha tretakt');
   const presentation = F.Effects.create(); presentation.reset({skin:'gold',reduced:false});
   const visualState = { player:F.Physics.player('wave'),status:'running',x:0 };
   for (let step = 0; step < 600; step++) {
