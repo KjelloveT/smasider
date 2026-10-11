@@ -47,7 +47,7 @@
       }
       if (id === 'level-select') {
         if (option.value === 'endless') return 'Ei ny rekkje kvar runde';
-        if (option.value === 'retray-probe') return 'Dei fyrste 9 prosentane, utan spørsmål · bana er under arbeid.';
+        if (option.value === 'retray-probe') return 'Eitt minutt med portalar og hinder, utan spørsmål · spelbar baneprøve.';
         if (option.value.startsWith('tutorial-')) return 'Øving i éin modus';
         return F.level(option.value).description;
       }

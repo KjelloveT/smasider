@@ -60,6 +60,11 @@
       [48, 60, 64, 67].forEach(n => instruments.note({ instrument: 'organ', midi: n, duration: 1.2, velocity: .065, pan: .12 }, time + .74, effects));
     } else if (kind === 'mode') {
       instruments.rustle(time, .16, .06, 4000); instruments.impact(time, 620, .25, .08);
+    } else if (kind === 'portal') {
+      instruments.rustle(time, .24, .085, 3500); instruments.impact(time, 330, .24, .07);
+      [60, 67].forEach((midi, i) => instruments.note({ instrument: 'organ', midi, duration: .35, velocity: .04, pan: i ? .13 : -.13 }, time + i * .035, effects));
+    } else if (kind === 'pace') {
+      instruments.rustle(time, .12, .04, 2800); instruments.impact(time, 220, .14, .04);
     } else if (kind === 'teleport') {
       instruments.rustle(time, .17, .14, 5200); instruments.impact(time, 980, .2, .10);
     } else if (kind === 'turn') {

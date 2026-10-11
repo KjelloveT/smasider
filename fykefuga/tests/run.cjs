@@ -83,19 +83,7 @@ for (const mode of F.modes) for (let variant = 0; variant < 2; variant++) for (l
   check(alive, 'Uframkomeleg byggjestykke: ' + mode.id + ', nivå ' + difficulty + ', variant ' + variant);
 }
 check(F.Physics.collision(0, 100, { mode: 'wave', y: 250, previousY: 250 }, { x: 50, y: 230, w: 2, h: 40 }), 'Tynn hindring vart hoppa over');
-const probe = F.Engine.create(pack, { level: 'retray-probe', reading: 4, difficulty: 0, seed: 7, offset: 0 });
-check(probe.world.demo && probe.activeChoice() === null, 'Baneprøva skal vere utan spørsmål');
-check(F.ReTray.SPEED === 300 && F.ReTray.PORTAL_X === 1729, 'Banegeometrien har feil målestokk');
-check(JSON.stringify(F.ReTray.obstacles.filter(item => item.kind === 'spike').map(item => item.x)) === '[480,910]', 'Piggane følgjer ikkje banedata');
-const probeJumps = [370, 800, 990, 1240], usedJumps = new Set();
-let probeTicks = 0;
-while (probe.state.status === 'running' && probeTicks++ < 1200) {
-  const target = probeJumps.find(value => probe.state.x >= value && !usedJumps.has(value));
-  const pressed = !!(target && probe.state.player.grounded);
-  if (pressed) usedJumps.add(target);
-  probe.step({ held: pressed, pressed, released: false });
-}
-check(probe.state.status === 'complete' && probe.state.correct === 0 && usedJumps.size === 4, 'Opninga kan ikkje spelast ferdig');
+require('./retray.cjs')(F, check, pack);
 const engine = F.Engine.create(pack, { level: 'marmor', seed: 42, reading: 4, offset: 0 });
 const before = Array.from({ length: 4 }, (_, index) => engine.getChoice(index).item.id);
 const placements = Array.from({ length: 4 }, (_, index) => engine.getChoice(index).correctSide);

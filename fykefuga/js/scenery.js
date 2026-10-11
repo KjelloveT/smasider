@@ -62,7 +62,22 @@
       for (const tileX of positions(x - ANCHOR, floor.width, left, right)) ctx.drawImage(floor, tileX, ceiling ? 0 : y);
       ctx.restore();
     }
-    return { prepare, backdrop, background, surface, get cacheCount() { return backgrounds.length + props.length + (floor ? 1 : 0); } };
+    // The whole raster's carved ends belong to a finite terrace; the repeating
+    // middle is clipped in world coordinates and never exposes a cut edge.
+    function platform(ctx, camera, y, height, left, right) {
+      if (right <= left) return;
+      const image = F.Assets.get('floor.png'), sourceCap = Math.round(image.width * .19);
+      const cap = Math.min((right - left) / 2, Math.max(15, height * .72));
+      const innerLeft = left + cap, innerRight = right - cap;
+      ctx.save(); ctx.beginPath(); ctx.rect(innerLeft, y, Math.max(0, innerRight - innerLeft), height); ctx.clip();
+      const tileWidth = floor.width * height / 64;
+      for (const tileX of positions(camera - ANCHOR, tileWidth, innerLeft, innerRight))
+        ctx.drawImage(floor, tileX, y, tileWidth, height);
+      ctx.restore();
+      ctx.drawImage(image, 0, 0, sourceCap, image.height, left, y, cap, height);
+      ctx.drawImage(image, image.width - sourceCap, 0, sourceCap, image.height, right - cap, y, cap, height);
+    }
+    return { prepare, backdrop, background, surface, platform, get cacheCount() { return backgrounds.length + props.length + (floor ? 1 : 0); } };
   }
   F.Scenery = { create, positions, wrap, ANCHOR };
 })(window);

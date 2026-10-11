@@ -86,7 +86,7 @@
       if (document.hidden) throw new Error('Kom attende til fana og start spelet når du er klar.');
       $('setup-message').hidden = true;
       F.Storage.saveSettings({ ...getConfig() });
-      engine = F.Engine.create(selected, config); render.reset(config, engine.state); errors.length = 0; paused = false; countdown = 0; feedbackUntil = 0;
+      engine = F.Engine.create(selected, config); $('question-board').hidden = true; render.reset(config, engine.state); errors.length = 0; paused = false; countdown = 0; feedbackUntil = 0;
       $('game-overlay').hidden = true; view('game'); input.enable(true); clock.clear(); previous = performance.now();
       F.Audio.start(engine.world.musicScene ?? engine.world.segment(0).scene); syncSound(); $('game-stage').focus({ preventScroll: true }); processEvents();
       cancelAnimationFrame(frame); frame = requestAnimationFrame(loop);
@@ -122,7 +122,7 @@
     const score = engine.world.demo ? { best: 0, newRecord: false } : F.Storage.record(selected, config, engine.state);
     if (engine.world.demo) {
       $('result-title').textContent = 'Baneprøva er fullført!';
-      $('result-text').textContent = 'Du har kome gjennom opninga frå ReTraY. Neste del skal føre deg inn i luftskipet.';
+      $('result-text').textContent = 'Du har kome gjennom heile baneprøva med terning, luftskip, sveveklokke, kule og bølgje.';
       $('next-batch').hidden = true; view('result'); refresh(); $('replay-button').focus(); return;
     }
     $('result-title').textContent = engine.world.tutorial ? 'Øvinga er fullført!' : F.level(config.level).name + ' er fullført!';
@@ -131,18 +131,17 @@
     view('result'); refresh(); $('replay-button').focus();
   }
   function hud() {
-    const state = engine.state, choice = engine.activeChoice(), segment = engine.world.at(state.time);
+    const state = engine.state, choice = engine.activeChoice();
     $('run-label').textContent = engine.world.demo ? 'Baneprøve · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
     if (choice && state.status === 'running') {
+      $('question-board').hidden = false;
       $('control-help').textContent = ['cube', 'robot'].includes(state.player.mode) ? 'Hopp opp på hylla for øvre svar. Bli på golvet for nedre.' : F.mode(state.player.mode).help;
       $('question-text').textContent = choice.item.prompt; $('question-help').textContent = 'Vel vegen før avgjerdslina · ' + choice.remaining.toFixed(1) + ' s';
       ['upper', 'lower'].forEach(side => { const answer = $(side + '-answer'); answer.hidden = false; answer.textContent = (side === 'upper' ? 'Øvre: ' : 'Nedre: ') + choice[side]; answer.classList.toggle('is-selected', (state.player.y < F.Physics.SPLIT ? 'upper' : 'lower') === side); });
     } else if (state.status === 'running' && performance.now() > feedbackUntil) {
+      $('question-board').hidden = true;
       $('control-help').textContent = F.mode(state.player.mode).help;
       $('upper-answer').hidden = $('lower-answer').hidden = true;
-      const untilSwitch = segment.end - state.time, nextMode = engine.world.segment(segment.index + 1).mode;
-      $('question-text').textContent = engine.world.demo ? 'ReTraY · opninga' : !engine.world.tutorial && untilSwitch < 1 ? 'Neste modus: ' + F.mode(nextMode).name : F.mode(state.player.mode).name;
-      $('question-help').textContent = engine.world.demo ? 'Hopp i takt gjennom piggar og marmorterrassar.' : engine.world.tutorial ? F.mode(state.player.mode).help : 'Pass hinderpartiet. Spørsmålet kjem på ei trygg strekning.';
     }
   }
   function loop(now) {

@@ -7,10 +7,10 @@
   };
   const LIMIT = 220;
   function create() {
-    let particles, history, rings, age, tick, kick, impact, deathAge, teleport, reduced, lastHeld, steering, held;
+    let particles, history, rings, age, tick, kick, impact, portalFlash, deathAge, teleport, reduced, lastHeld, steering, held;
     let random, palette;
     function reset(config) {
-      particles = []; history = []; rings = []; age = 0; tick = 0; kick = 0; impact = 0; deathAge = -1; teleport = null;
+      particles = []; history = []; rings = []; age = 0; tick = 0; kick = 0; impact = 0; portalFlash = 0; deathAge = -1; teleport = null;
       lastHeld = held = false; steering = 0; random = Vy.rng(67139); reduced = !!config.reduced; palette = palettes[config.skin] || palettes.gold;
     }
     function particle(x, y, vx, vy, life, size, kind) {
@@ -30,6 +30,12 @@
     function notify(event, state) {
       const p = state.player;
       if (event.type === 'mode') { history = []; ring(state.x, p.y, 65, .4); burst(state.x, p.y, 26, 180); }
+      if (event.type === 'portal') {
+        history = []; portalFlash = reduced ? 0 : .4; impact = reduced ? 0 : .055; kick = .18;
+        ring(state.x, p.y, 110, .48); ring(state.x, p.y, 60, .32);
+        burst(state.x, p.y, 42, 260, 'spark');
+      }
+      if (event.type === 'pace') { ring(state.x, p.y, 65, .35); burst(state.x, p.y, 18, 160); }
       if (event.type === 'jump') {
         kick = .24; const y = p.y + 16;
         burst(state.x - 5, y, p.mode === 'ufo' ? 26 : 22, 210, 'dust', -Math.PI / 2);
@@ -47,7 +53,7 @@
     function update(state, input) {
       const dt = F.Physics.STEP, p = state.player; age += dt; tick++; held = !!input.held;
       kick = kick > 0 ? Math.max(0, kick - dt) : Math.min(0, kick + dt); steering = Math.max(0, steering - dt);
-      impact = Math.max(0, impact - dt); if (deathAge >= 0) deathAge += dt;
+      impact = Math.max(0, impact - dt); portalFlash = Math.max(0, portalFlash - dt); if (deathAge >= 0) deathAge += dt;
       if (teleport && (teleport.life -= dt) <= 0) teleport = null;
       particles.forEach(part => { part.life -= dt; part.x += part.vx * dt; part.y += part.vy * dt; if (part.kind === 'dust' || part.kind === 'shard') part.vy += 280 * dt; });
       particles = particles.filter(part => part.life > 0);
@@ -141,7 +147,7 @@
         rotation: p.mode === 'robot' && p.grounded ? Math.sin(age * 34) * .08 : p.mode === 'spider' ? Math.sin(age * 27) * .06 : 0 };
     }
     reset({});
-    return { reset, notify, update, behind, front, pose, get shake() { return impact ? Math.sin(age * 70) * impact * 16 : 0; }, get deadScale() { return reduced ? 1 : Math.max(0, 1 - deathAge / .16); }, get count() { return particles.length; }, get trailCount() { return history.length; } };
+    return { reset, notify, update, behind, front, pose, get shake() { return impact ? Math.sin(age * 70) * impact * 16 : 0; }, get portalFlash() { return portalFlash; }, get deadScale() { return reduced ? 1 : Math.max(0, 1 - deathAge / .16); }, get count() { return particles.length; }, get trailCount() { return history.length; } };
   }
   F.Effects = { create, LIMIT };
 })(window);

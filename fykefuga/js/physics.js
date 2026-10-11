@@ -6,7 +6,8 @@
   function player(mode) {
     return { mode, y: ['ship', 'ufo', 'wave', 'swing'].includes(mode) ? 320 : BOTTOM, previousY: 320, velocity: 0, gravity: 1, grounded: true, angle: 0, jumpTime: 0 };
   }
-  function update(p, input) {
+  function update(p, input, bounds) {
+    const top = bounds ? bounds.top : TOP, bottom = bounds ? bounds.bottom : BOTTOM;
     p.previousY = p.y;
     const flying = ['ship', 'wave', 'swing', 'ufo'].includes(p.mode);
     if (p.mode === 'cube' && p.grounded && (input.held || input.pressed)) { p.velocity = -1040; p.grounded = false; }
@@ -24,8 +25,8 @@
     else if (p.mode === 'swing') p.velocity = clamp(p.velocity + p.gravity * 1850 * STEP, -420, 420);
     else if (p.mode !== 'spider') p.velocity += (p.mode === 'ufo' ? 1650 : 3400) * p.gravity * STEP;
     p.y += p.velocity * STEP;
-    if (p.y >= BOTTOM) { p.y = BOTTOM; if (p.velocity > 0) p.velocity = 0; p.grounded = p.gravity === 1; }
-    else if (p.y <= TOP) { p.y = TOP; if (p.velocity < 0) p.velocity = 0; p.grounded = p.gravity === -1; }
+    if (p.y >= bottom) { p.y = bottom; if (p.velocity > 0) p.velocity = 0; p.grounded = p.gravity === 1; }
+    else if (p.y <= top) { p.y = top; if (p.velocity < 0) p.velocity = 0; p.grounded = p.gravity === -1; }
     else p.grounded = false;
     if (flying) p.grounded = false;
     if (p.mode === 'cube' || p.mode === 'ball') p.angle += (p.grounded ? 0 : 6.8) * STEP;
