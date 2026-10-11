@@ -9,63 +9,55 @@
       const at = finish ? F.ReTray.END_X : section.from;
       const x = 190 + at - state.x;
       if (x < -100 || x > 1050) return;
+      const frame = F.Assets.get('portal-side.png');
+      if (!frame) return;
       const corridor = world.viewAt(Math.min(at, F.ReTray.END_X - 1));
       const centre = section && section.portalY || (corridor.top + corridor.bottom) / 2;
       const height = Math.min(230, corridor.bottom - corridor.top + 18);
+      const width = height * frame.width / frame.height;
+      const left = x - width / 2, top = centre - height / 2;
       const speedOnly = !finish && section.index && world.segment(section.index - 1).mode === section.mode;
       const glow = finish ? '#f7d36d' : speedOnly ? '#e8a65a' : '#75bfd0';
       const phase = config.reduced ? 0 : state.time;
-      const pulse = config.reduced ? 0 : Math.sin(phase * 5 + at * .01) * 1.8;
-      const radius = 30 + pulse, vertical = height * .43;
       ctx.save();
       if (!foreground) {
-        // The inner space and moving ripples sit behind the craft.
-        ctx.fillStyle = '#102c3b'; ctx.globalAlpha = .56;
-        ctx.beginPath(); ctx.ellipse(x, centre, radius, vertical, 0, 0, Math.PI * 2); ctx.fill();
-        ctx.save(); ctx.beginPath(); ctx.ellipse(x, centre, radius - 3, vertical - 5, 0, 0, Math.PI * 2); ctx.clip();
-        const light = ctx.createLinearGradient(x - radius, centre, x + radius, centre);
-        light.addColorStop(0, 'rgba(45,119,139,.18)'); light.addColorStop(.5, 'rgba(158,238,237,.46)');
-        light.addColorStop(1, 'rgba(36,95,121,.16)');
-        ctx.globalAlpha = .9; ctx.fillStyle = light;
-        ctx.fillRect(x - radius, centre - vertical, radius * 2, vertical * 2);
-        ctx.strokeStyle = finish ? '#ffe4a0' : '#b1eeee'; ctx.lineWidth = 2;
-        for (let row = -3; row <= 3; row++) {
-          const y = centre + row * height * .095;
-          ctx.globalAlpha = .15 + (3 - Math.abs(row)) * .055;
-          ctx.beginPath();
-          for (let step = -30; step <= 30; step += 3) {
-            const wave = y + Math.sin(step * .14 + phase * 3.4 + row) * 5;
-            if (step === -30) ctx.moveTo(x + step, wave); else ctx.lineTo(x + step, wave);
-          }
-          ctx.stroke();
+        // The far lip and painted energy sit behind nearby obstacles and the craft.
+        if (!config.reduced) {
+          ctx.shadowColor = glow; ctx.shadowBlur = 16;
+          ctx.globalAlpha = .32 + Math.sin(phase * 4 + at) * .08;
+          ctx.drawImage(frame, left, top, width, height);
+          ctx.shadowBlur = 0; ctx.globalAlpha = 1;
         }
-        ctx.restore();
-      } else {
-        const distance = state.x - at;
-        const crossing = Math.max(0, 1 - Math.abs(distance) / 62);
-        if (crossing) {
-          ctx.save(); ctx.beginPath(); ctx.ellipse(x, centre, radius - 4, vertical - 5, 0, 0, Math.PI * 2); ctx.clip();
-          ctx.fillStyle = glow; ctx.globalAlpha = crossing * .63;
-          ctx.fillRect(x - radius, centre - vertical, radius * 2, vertical * 2);
-          ctx.fillStyle = '#ffffff'; ctx.globalAlpha = crossing * .48;
-          ctx.fillRect(190 + Math.max(-22, Math.min(22, distance * .8)) - 3, centre - vertical, 6, vertical * 2);
+        ctx.drawImage(frame, left, top, width, height);
+        if (!config.reduced) {
+          // A moving sheen is confined to the raster's narrow energy seam.
+          ctx.save(); ctx.beginPath();
+          ctx.ellipse(x + width * .17, centre, width * .14, height * .40, 0, 0, Math.PI * 2); ctx.clip();
+          ctx.globalCompositeOperation = 'screen';
+          ctx.globalAlpha = .28 + Math.sin(phase * 3.2) * .08;
+          ctx.drawImage(frame, left, top + Math.sin(phase * 2.4 + at) * 7, width, height);
+          ctx.globalAlpha = 1;
+          const shimmerY = centre - height * .4 + ((phase * 72 + at) % (height * .8));
+          const sheen = ctx.createRadialGradient(x + width * .17, shimmerY, 1,
+            x + width * .17, shimmerY, height * .15);
+          sheen.addColorStop(0, finish ? 'rgba(255,235,173,.58)' : 'rgba(225,255,249,.54)');
+          sheen.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = sheen; ctx.fillRect(left, top, width, height);
           ctx.restore();
         }
-        ctx.shadowColor = glow; ctx.shadowBlur = config.reduced ? 0 : 14;
-        ctx.strokeStyle = glow; ctx.globalAlpha = .97; ctx.lineWidth = 6;
-        ctx.beginPath(); ctx.ellipse(x, centre, radius, vertical, 0, 0, Math.PI * 2); ctx.stroke();
-        ctx.shadowBlur = 0;
-        ctx.setLineDash([7, 11]); ctx.lineDashOffset = -phase * 24;
-        ctx.strokeStyle = finish ? '#fff2bf' : '#f0d898'; ctx.globalAlpha = .82; ctx.lineWidth = 2.5;
-        ctx.beginPath(); ctx.ellipse(x, centre, radius + 7, vertical + 6, 0, 0, Math.PI * 2); ctx.stroke();
-        ctx.setLineDash([]);
-        ctx.fillStyle = '#fff3c4';
-        for (let i = 0; i < 8; i++) {
-          const angle = phase * 1.45 + i * Math.PI / 4;
-          const px = x + Math.cos(angle) * (radius + 7);
-          const py = centre + Math.sin(angle) * (vertical + 6);
-          ctx.globalAlpha = config.reduced ? .4 : .36 + .56 * Math.max(0, Math.sin(phase * 4 + i));
-          ctx.beginPath(); ctx.arc(px, py, i % 2 ? 2 : 2.8, 0, Math.PI * 2); ctx.fill();
+      } else {
+        // The near painted lip is redrawn after obstacles and the craft; nothing
+        // rectangular floats across the whole corridor during a crossing.
+        const nearWidth = Math.round(frame.width * .47);
+        ctx.drawImage(frame, 0, 0, nearWidth, frame.height,
+          left, top, width * nearWidth / frame.width, height);
+        const crossing = Math.max(0, 1 - Math.abs(state.x - at) / 48);
+        if (crossing && !config.reduced) {
+          const halo = ctx.createRadialGradient(190, state.player.y, 2, 190, state.player.y, 34);
+          halo.addColorStop(0, finish ? 'rgba(255,238,182,.42)' : 'rgba(199,255,244,.38)');
+          halo.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = crossing;
+          ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(190, state.player.y, 34, 0, Math.PI * 2); ctx.fill();
         }
       }
       ctx.restore();

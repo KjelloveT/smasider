@@ -1,13 +1,14 @@
 # Originale Fykefuga-ressursar
 
-Alle bileta er genererte særskilt for spelet med imagegen 10. oktober 2026. Ingen bilete eller fontar er henta frå tredjepartar. Banemusikken er komponert særskilt og rendra med Spitfire-instrumentbanken som brukaren har installert. Ingen SVG er brukt til spelgrafikken eller barokkdekor. Generert biletekst blir ikkje brukt; alle spørsmål og svar er ekte HTML-tekst.
+Alle bileta er genererte særskilt for spelet med imagegen 10.–11. oktober 2026. Ingen bilete eller fontar er henta frå tredjepartar. Banemusikken er komponert særskilt og rendra med Spitfire-instrumentbanken som brukaren har installert. Ingen SVG er brukt til spelgrafikken eller barokkdekor. Generert biletekst blir ikkje brukt; alle spørsmål og svar er ekte HTML-tekst.
 
 - **Figurar:** eit gjennomsiktig ark med åtte kolonnar og tre familiar: forgylte urverk med blå detaljar, kvitt porselen med koboltdekor og patinert kopar. Motiva er terning, luftskip, sveveklokke, svingfarkost, rullekule, bølgje, urverksløpar og spinneverk. Silhuettane er skorne ut som heile objekt og komprimerte til palett-PNG. `sprites.png` samlar alle 24 figurane.
 - **Marmorsalen:** ein lys marmorsal med forgylte søyler, bogar, lysekroner og blå brokade.
 - **Urverkhagen:** ein formell hage med topiar, marmorbogar, astronomiske ur og forgylte tannhjul.
 - **Spegelgalleriet:** høge forgylte speglar, blå brokade og ljos marmor.
 - **Orgeltårnet:** messingpiper, treskurd, høge vindauge og kremfarga stein.
-- **Spelplan og mellomgrunn:** eit gjennomsiktig 3 × 3-ark med pigger, marmorkloss, klokkestolpe, golvflis, akantusornament, søyle, hagebog, spegel og orgelpiper. Bileta er skorne ut og palettkomprimerte. Fire eigne mellomgrunnslag gir ulik djupne i miljøa.
+- **Spelplan:** eit gjennomsiktig 3 × 3-ark med pigger, marmorkloss, klokkestolpe, golvflis, akantusornament, søyle, hagebog, spegel og orgelpiper. Bileta er skorne ut og palettkomprimerte. Golv og endelege plattformer får no ei flat 2D-marmorflate frå midtfeltet av `floor.png`, med rette måla kantar. Tidlegare mellomgrunnsbilete ligg i ressursbanken, men blir ikkje lasta eller teikna; den gjennomsiktige søyla er borte.
+- **Modusport:** `portal-side.png` er eit nytt sidevend, palettkomprimert PNG-bilete med transparent bakgrunn. Originalen ligg lokalt i `_kjelder/fykefuga-menu/`. Canvas flyttar eit avgrensa ljosglimt i den måla energisprekken og teiknar den nære portkanten etter både hinder og figur, medan den fjerne kanten ligg bak. Ingen frontvend oval blir strekt for å passe spelet.
 - **Applogo:** eit måla, forgylta luftskip i ein akantusring med porselensdetaljar og blågrønt band, utan tekst.
 
 Originalane ligg lokalt i ignorerte `_kjelder/`-mapper. Bakgrunnar er JPEG i kvalitet 82, høgst 1920 pikslar. Logoen er høgst 384 pikslar og 128 fargar. Alle publiserte bilete er mindre enn 500 kB. Heile banken har om lag 1,9 MiB.

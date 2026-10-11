@@ -1,7 +1,7 @@
 {
   "app": "fykefuga",
   "version": 1,
-  "origin": "Originale rasterbilete genererte med imagegen; originalar tekne vare på lokalt. Musikk og ljod er original Web Audio-syntese i js/audio.js.",
+  "origin": "Originale rasterbilete genererte med imagegen; originalar tekne vare på lokalt. Musikk og spel-ljod er eigne komposisjonar og effektar.",
   "files": [
     {
       "file": "column.png",
@@ -191,6 +191,13 @@
       "height": 103,
       "bytes": 11756,
       "sha256": "1cf63f0b39b4294230dca217a51abe80a24c39d55e0853422f8b66a639bfdaf8"
+    },
+    {
+      "file": "portal-side.png",
+      "width": 61,
+      "height": 512,
+      "bytes": 15660,
+      "sha256": "f2c03c5d4d63ae8adee7c406e405daeef6cb5282a0a87a4ca55a536414c69ab1"
     },
     {
       "file": "porcelain-ball.png",

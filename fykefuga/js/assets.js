@@ -1,7 +1,7 @@
 (function (root) {
   'use strict';
   const images = new Map();
-  const files = ['marmor.jpg', 'urverk.jpg', 'spegel.jpg', 'orgel.jpg', 'spike.png', 'column.png', 'gate.png', 'floor.png', 'ornament.png', 'mid-0.png', 'mid-1.png', 'mid-2.png', 'mid-3.png'];
+  const files = ['marmor.jpg', 'urverk.jpg', 'spegel.jpg', 'orgel.jpg', 'spike.png', 'column.png', 'gate.png', 'floor.png', 'portal-side.png', 'ornament.png'];
   root.Fykefuga.skins.forEach(skin => root.Fykefuga.modes.forEach(mode => files.push(skin.id + '-' + mode.id + '.png')));
   let pending;
   function load() {

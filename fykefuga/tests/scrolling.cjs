@@ -42,8 +42,9 @@ module.exports = function (F, check, context) {
   for (const x of [0, 1012 / .08 - .01, 1012 / .08 + .01, 2024 / .08 - .01, 2024 / .08 + .01, 80000]) {
     scenery.prepare(); scenery.background(ctx, 0, x, false); scenery.surface(ctx, x, 476, 64);
   }
-  check(allocations.length === count && count === 9 && scenery.cacheCount === 9, 'Ressursar blir laga på nytt når bakgrunnen går rundt');
-  check(Math.abs(allocations[1].width / allocations[1].height - 129 / 385) < .005, 'Dekor blir strekt ut av proporsjon');
+  check(allocations.length === count && count === 5 && scenery.cacheCount === 5, 'Ressursar blir laga på nytt når bakgrunnen går rundt');
+  drawCalls.length = 0; scenery.background(ctx, 0, 1200, false);
+  check(drawCalls.length > 0 && drawCalls.every(args => args[0] === allocations[0]), 'Gjennomsiktig mellomgrunn står framleis framfor bakgrunnen');
   drawCalls.length = 0;
   scenery.surface(ctx, 1000, 350, 8, -100, 900); scenery.surface(ctx, 1005, 350, 8, -105, 895);
   check(drawCalls.every(args => args.length === 3), 'Svarhylla skalerer teksturen ved rulling');

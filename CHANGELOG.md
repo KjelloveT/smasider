@@ -12,7 +12,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - Originale genererte rasterressursar og fire originale Spitfire-barokksatsar med innspelte fiolinar, bratsj og cello, og separate volumval for musikk og spel-ljod. Farkostane har spor, lysband, eksos og eigne reaksjonar ved hopp, landing og teletransport.
 
 ### Endra
-- Baneprøva har plattformer med synlege endar, animerte portalpasseringar utan strekte klokker, rytmeplasserte hinder, meir rom i bølgjegangen og tettare kamera i låge gangar. Fykefuga har visuelle kortval med bane- og figurbilete, døme frå spørsmålsetta og synlege val for lesetid. Bragdene står to i breidda på mobil og fire på større skjermar, øvingskorta bruker fleire kolonnar på breie skjermar, og «Vegval og framgang» er fjerna.
+- Baneprøva har flate marmorklossar med rette endar og golv utan perspektivkant. Sidevende rasterportalar har måla energisprekk, vandrande ljos og ei fram- og bakside som verkar òg når dei kryssar hinder. Ho har rytmeplasserte hinder, meir rom i bølgjegangen og tettare kamera i låge gangar. Fykefuga har visuelle kortval med bane- og figurbilete, døme frå spørsmålsetta og synlege val for lesetid. Bragdene står to i breidda på mobil og fire på større skjermar, øvingskorta bruker fleire kolonnar på breie skjermar, og «Vegval og framgang» er fjerna.
 - Ordaklok og Fykefuga bruker ein felles delingsmodul. Eksisterande Ordaklok-lenkjer blir framleis lesne.
 - Fykefuga har 61 prosent høgare fart og fire til seks hindergrupper i kvart spelparti, med hoppkombinasjonar og vekselvise flygeportar. Lesestrekningane held same lesetid.
 - Banemusikken bruker ferdige orkesteropptak på 65–83 sekund, med presise sløyfer, mjuke temabyte, bevart musikkposisjon ved pause og rask omstart. Spel-ljodane er eigne Web Audio-klangar. Hopp, landing og styring får større utbrot, sjokkbølgjer, framdrift og rørsleanimasjonar.
@@ -22,6 +22,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
 - Fykefuga rullar jamt mellom fysikkstega. Bakgrunnane har samanhengande skøytar og blir førebudde før start; dekor bevarer proporsjonane, og golv og svarhyller har faste teksturar. Kula og svingfarkosten snur utan vinkelhopp.
 - Synlege treffområderammer rundt hindera i Fykefuga er fjerna.
+- Det gjennomsiktige søylelaget som dreiv framfor bakgrunnen i Fykefuga, er fjerna.
 
 ## [2.1] — 2026-10-09
 

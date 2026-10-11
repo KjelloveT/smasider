@@ -10,7 +10,7 @@
     return result;
   }
   function create() {
-    const backgrounds = [], props = [];
+    const backgrounds = [];
     let floor;
     function bitmap(width, height) {
       const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height; return canvas;
@@ -30,13 +30,14 @@
         // The painted foreground belongs behind the playing plane, not inside it.
         const cropHeight = Math.round(image.height * .8), width = Math.round(image.width * HEIGHT / cropHeight);
         backgrounds[scene] = repeat(image, 0, 0, image.width, cropHeight, width, HEIGHT);
-        const prop = F.Assets.get('mid-' + scene + '.png'), height = [330, 270, 300, 330][scene];
-        const cached = bitmap(Math.round(prop.width * height / prop.height), height);
-        cached.getContext('2d').drawImage(prop, 0, 0, cached.width, cached.height); props[scene] = cached;
       });
-      const image = F.Assets.get('floor.png'), inset = Math.round(image.width * .19), sw = image.width - inset * 2;
-      // Remove the sloping end caps; marble and carving now form a straight surface.
-      floor = repeat(image, inset, 0, sw, image.height, Math.round(sw * 64 / image.height), 64);
+      const image = F.Assets.get('floor.png');
+      // Only the painted marble face is used. The source image's top and carved
+      // underside gave both the ground and finite platforms a false 3D depth.
+      const sourceX = Math.round(image.width * .27), sourceWidth = Math.round(image.width * .46);
+      const sourceY = Math.round(image.height * .08), sourceHeight = Math.round(image.height * .29);
+      floor = repeat(image, sourceX, sourceY, sourceWidth, sourceHeight,
+        Math.round(sourceWidth * 64 / sourceHeight), 64);
     }
     function backdrop(ctx, scene, x, reduced, opacity = 1) {
       const image = backgrounds[scene]; ctx.globalAlpha = opacity;
@@ -45,12 +46,6 @@
     }
     function background(ctx, scene, x, reduced, opacity = 1) {
       backdrop(ctx, scene, x, reduced, opacity);
-      if (!reduced) {
-        const prop = props[scene], camera = x * .22 - ANCHOR - 320;
-        ctx.globalAlpha = opacity * .34;
-        // Keep the actual proportions and place the base on the scenery floor.
-        for (const left of positions(camera, 1160, -prop.width, WIDTH)) ctx.drawImage(prop, left, 468 - prop.height);
-      }
       ctx.globalAlpha = 1;
     }
     function surface(ctx, x, y, height, left = 0, right = WIDTH, ceiling = false) {
@@ -61,23 +56,25 @@
       // Clip a world-anchored texture. Growing/shrinking visible bounds never stretch it.
       for (const tileX of positions(x - ANCHOR, floor.width, left, right)) ctx.drawImage(floor, tileX, ceiling ? 0 : y);
       ctx.restore();
+      ctx.fillStyle = '#c99e5c'; ctx.fillRect(left, ceiling ? y + height - 4 : y, right - left, 2);
+      ctx.fillStyle = '#142820'; ctx.fillRect(left, ceiling ? y + height - 2 : y + 2, right - left, 2);
     }
-    // The whole raster's carved ends belong to a finite terrace; the repeating
-    // middle is clipped in world coordinates and never exposes a cut edge.
+    // A finite, flat marble rectangle with straight painted end strokes.
     function platform(ctx, camera, y, height, left, right) {
       if (right <= left) return;
-      const image = F.Assets.get('floor.png'), sourceCap = Math.round(image.width * .19);
-      const cap = Math.min((right - left) / 2, Math.max(15, height * .72));
-      const innerLeft = left + cap, innerRight = right - cap;
-      ctx.save(); ctx.beginPath(); ctx.rect(innerLeft, y, Math.max(0, innerRight - innerLeft), height); ctx.clip();
+      ctx.save(); ctx.beginPath(); ctx.rect(left, y, right - left, height); ctx.clip();
       const tileWidth = floor.width * height / 64;
-      for (const tileX of positions(camera - ANCHOR, tileWidth, innerLeft, innerRight))
+      for (const tileX of positions(camera - ANCHOR, tileWidth, left, right))
         ctx.drawImage(floor, tileX, y, tileWidth, height);
       ctx.restore();
-      ctx.drawImage(image, 0, 0, sourceCap, image.height, left, y, cap, height);
-      ctx.drawImage(image, image.width - sourceCap, 0, sourceCap, image.height, right - cap, y, cap, height);
+      ctx.fillStyle = '#142820';
+      ctx.fillRect(left, y, right - left, 3); ctx.fillRect(left, y + height - 3, right - left, 3);
+      ctx.fillRect(left, y, 3, height); ctx.fillRect(right - 3, y, 3, height);
+      ctx.fillStyle = '#c99e5c';
+      ctx.fillRect(left + 3, y + 3, right - left - 6, 2);
+      ctx.fillRect(left + 3, y + 3, 2, height - 6); ctx.fillRect(right - 5, y + 3, 2, height - 6);
     }
-    return { prepare, backdrop, background, surface, platform, get cacheCount() { return backgrounds.length + props.length + (floor ? 1 : 0); } };
+    return { prepare, backdrop, background, surface, platform, get cacheCount() { return backgrounds.length + (floor ? 1 : 0); } };
   }
   F.Scenery = { create, positions, wrap, ANCHOR };
 })(window);
