@@ -5,6 +5,7 @@
     const ctx = canvas.getContext('2d', { alpha: false });
     const effects = F.Effects.create();
     const scenery = F.Scenery.create(), motion = F.Motion.create();
+    let screen = null;
     function portal(ctx, section, state, world, config, finish = false, foreground = false) {
       const at = finish ? F.ReTray.END_X : section.from;
       const x = 190 + at - state.x;
@@ -12,13 +13,15 @@
       const frame = F.Assets.get('portal-side.png');
       if (!frame) return;
       const corridor = world.viewAt(Math.min(at, F.ReTray.END_X - 1));
-      const centre = section && section.portalY || (corridor.top + corridor.bottom) / 2;
-      const height = Math.min(230, corridor.bottom - corridor.top + 18);
+      const lanes = !finish && world.quiz ? F.ReTray.lanes(section) : null;
+      const centres = lanes ? [lanes.upper, lanes.lower] : [section && section.portalY || (corridor.top + corridor.bottom) / 2];
+      const height = lanes ? lanes.height : Math.min(230, corridor.bottom - corridor.top + 18);
       const width = height * frame.width / frame.height;
-      const left = x - width / 2, top = centre - height / 2;
       const speedOnly = !finish && section.index && world.segment(section.index - 1).mode === section.mode;
       const glow = finish ? '#f7d36d' : speedOnly ? '#e8a65a' : '#75bfd0';
       const phase = config.reduced ? 0 : state.time;
+      centres.forEach(centre => {
+      const left = x - width / 2, top = centre - height / 2;
       ctx.save();
       if (!foreground) {
         // The far lip and painted energy sit behind nearby obstacles and the craft.
@@ -51,7 +54,7 @@
         const nearWidth = Math.round(frame.width * .47);
         ctx.drawImage(frame, 0, 0, nearWidth, frame.height,
           left, top, width * nearWidth / frame.width, height);
-        const crossing = Math.max(0, 1 - Math.abs(state.x - at) / 48);
+        const crossing = Math.max(0, 1 - Math.abs(state.x - at) / 48) * Math.max(0, 1 - Math.abs(state.player.y - centre) / (height * .7));
         if (crossing && !config.reduced) {
           const halo = ctx.createRadialGradient(190, state.player.y, 2, 190, state.player.y, 34);
           halo.addColorStop(0, finish ? 'rgba(255,238,182,.42)' : 'rgba(199,255,244,.38)');
@@ -61,6 +64,7 @@
         }
       }
       ctx.restore();
+      });
     }
     function draw(engine, config, alpha = 1) {
       const state = motion.sample(engine.state, alpha), world = engine.world, segment = world.at(state.time);
@@ -90,7 +94,7 @@
       }
       const floor = view.bottom + F.Physics.SIZE / 2, ceiling = view.top - F.Physics.SIZE / 2;
       const choice = engine.activeChoice();
-      if (choice) {
+      if (choice && !world.demo) {
         ctx.fillStyle = 'rgba(255,253,245,.42)'; ctx.fillRect(0, 140, 960, 322);
         ctx.setLineDash([12, 9]); ctx.strokeStyle = '#8a5b25'; ctx.lineWidth = 2;
         ctx.beginPath(); ctx.moveTo(0, F.Physics.SPLIT); ctx.lineTo(960, F.Physics.SPLIT); ctx.stroke(); ctx.setLineDash([]);
@@ -151,6 +155,8 @@
       }
       ctx.restore();
       ctx.restore();
+      screen = { x: 190, playerY: 300 + (state.player.y - view.focusY) * view.zoom + effects.shake,
+        zoom: view.zoom, focusY: view.focusY, shake: effects.shake, worldX: state.x };
       if (world.demo && effects.portalFlash && !config.reduced) {
         ctx.fillStyle = 'rgba(255,239,183,' + (effects.portalFlash * .22).toFixed(3) + ')';
         ctx.fillRect(0, 0, 960, 540);
@@ -160,7 +166,7 @@
         ctx.fillStyle = '#8a5b25'; ctx.fillRect(0, 534, 960 * Math.min(1, state.time / world.end), 6);
       }
     }
-    return { draw, snap: state => motion.snap(state), reset(config, state) { scenery.prepare(); motion.reset(state); effects.reset(config); },
+    return { draw, get screen() { return screen; }, snap: state => motion.snap(state), reset(config, state) { scenery.prepare(); motion.reset(state); effects.reset(config); },
       update(state, input) { motion.update(state); effects.update(state, input); }, notify: (event, state) => effects.notify(event, state) };
   }
   F.Render = { create };

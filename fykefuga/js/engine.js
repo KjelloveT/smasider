@@ -11,6 +11,7 @@
       return choices.get(index);
     }
     function reset() {
+      if (world.demo && state && state.status === 'dead') world.quiz.reroll();
       attempt++;
       random = Vy.rng(config.seed + attempt * 104729);
       choices.clear();
@@ -33,6 +34,15 @@
       }
       const segment = world.at(state.time);
       if (segment.index !== state.segment) {
+        if (world.demo && !world.previewRoute) {
+          const choice = world.quiz.get(segment.index - 1);
+          const lanes = F.ReTray.lanes(segment);
+          const side = state.player.y < lanes.split ? 'upper' : 'lower';
+          if (Math.abs(state.player.y - lanes[side]) > lanes.height / 2 + F.Physics.SIZE / 2) { die('crash'); return; }
+          if (side !== choice.correctSide) { die('answer', { ...choice, chosen: choice[side] }); return; }
+          state.correct++;
+          state.events.push({ type: 'answer', item: choice.item, correct: state.correct });
+        }
         state.segment = segment.index;
         if (world.demo) {
           const former = state.player, changed = former.mode !== segment.mode;
@@ -56,7 +66,8 @@
         else if (p.gravity === -1 && Math.abs(p.y - oldCorridor.top) < 2) p.y = corridor.top;
       }
       const before = { velocity: p.velocity, grounded: p.grounded, gravity: p.gravity, y: p.y };
-      if (world.demo && segment.auto) {
+      const next = world.demo && state.segment < world.count - 1 ? world.segment(state.segment + 1) : null;
+      if (world.demo && segment.auto && (world.previewRoute || !next || state.time < next.start - 2)) {
         p.previousY = p.y; p.y = F.ReTray.autoTarget(segment, state.x, p, corridor);
         p.velocity = (p.y - p.previousY) / F.Physics.STEP;
         p.grounded = segment.mode === 'cube' && p.y >= corridor.bottom - .5;
@@ -95,6 +106,7 @@
       }
     }
     function activeChoice() {
+      if (world.demo) return F.ReTrayQuestions.active(world, state);
       const segment = world.at(state.time);
       return !world.tutorial && state.time >= segment.questionAt && state.time <= segment.gateAt + 0.15 ? { ...getChoice(segment.index), remaining: Math.max(0, segment.gateAt - state.time), segment } : null;
     }

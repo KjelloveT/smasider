@@ -29,7 +29,7 @@
     return result;
   }
   function create(config) {
-    if (config.level === 'retray-probe') return F.ReTray.create();
+    if (config.level === 'retray-probe') return F.ReTray.create(config);
     const tutorial = config.level.startsWith('tutorial-');
     const endless = config.level === 'endless';
     const level = F.level(config.level);

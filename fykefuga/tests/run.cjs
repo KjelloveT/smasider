@@ -6,7 +6,7 @@ const crypto = require('node:crypto');
 const root = path.resolve(__dirname, '../..');
 const context = vm.createContext({ console, URL, URLSearchParams, TextEncoder, TextDecoder, Blob, CompressionStream, DecompressionStream, btoa, atob, setTimeout, clearTimeout, crypto: crypto.webcrypto, document: { addEventListener() {} } });
 context.window = context;
-for (const file of ['js/vyrdepil-util.js', 'js/vyrdepil-share.js', 'fykefuga/js/data.js', 'fykefuga/js/questions.js', 'fykefuga/js/physics.js', 'fykefuga/js/retray.js', 'fykefuga/js/levels.js', 'fykefuga/js/engine.js', 'fykefuga/js/effects.js', 'fykefuga/js/scenery.js', 'fykefuga/js/motion.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
+for (const file of ['js/vyrdepil-util.js', 'js/vyrdepil-share.js', 'fykefuga/js/data.js', 'fykefuga/js/questions.js', 'fykefuga/js/physics.js', 'fykefuga/js/retray-questions.js', 'fykefuga/js/retray.js', 'fykefuga/js/levels.js', 'fykefuga/js/engine.js', 'fykefuga/js/effects.js', 'fykefuga/js/scenery.js', 'fykefuga/js/motion.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
 const F = context.Fykefuga;
 let assertions = 0;
 function check(condition, message) { assert.ok(condition, message); assertions++; }

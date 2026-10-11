@@ -2,8 +2,10 @@
   'use strict';
   const F = window.Fykefuga;
   const slider = document.getElementById('position'), label = document.getElementById('status');
-  const game = F.Engine.create(F.builtins[0], { level: 'retray-probe', seed: 1 });
+  const game = F.Engine.create(F.builtins[0], { level: 'retray-probe', seed: 1, previewRoute: true });
   const render = F.Render.create(document.getElementById('canvas'));
+  const hud = F.ReTrayHud.create(document.getElementById('preview-stage'));
+  slider.max = F.ReTray.END_X;
   const config = { skin: 'gold', reduced: false };
   const route = [];
   const jumps = [370, 800, 990, 1240], used = new Set();
@@ -49,7 +51,7 @@
   const state = game.state;
   route.push({ time: state.time, x: state.x, segment: state.segment, status: state.status,
     player: { ...state.player } });
-  const preview = { world: game.world, get state() { return frame; }, activeChoice: () => null };
+  const preview = { world: game.world, get state() { return frame; }, activeChoice: () => F.ReTrayQuestions.active(game.world, frame) };
   const playButton = document.getElementById('play');
   let playback = 0, startedAt = 0, startedTime = 0;
   function stop() {
@@ -60,7 +62,7 @@
     const x = Number(slider.value);
     let low = 0, high = route.length - 1;
     while (low < high) { const mid = (low + high) >> 1; if (route[mid].x < x) low = mid + 1; else high = mid; }
-    frame = route[low]; render.snap(frame); render.draw(preview, config);
+    frame = route[low]; render.snap(frame); render.draw(preview, config); hud.update(preview.activeChoice(), render.screen);
     const section = game.world.at(frame.time), view = game.world.viewAt(frame.x);
     label.textContent = 'x = ' + Math.round(frame.x) + ' · ' + section.title + ' · ' + frame.time.toFixed(1) +
       ' s · fart ' + section.speed + ' · kamera ' + view.zoom.toFixed(2) + '× · ' +

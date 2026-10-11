@@ -28,6 +28,10 @@ body[data-vp-app="fykefuga"] { background: #ebe0c8 url('../assets/marmor.jpg') c
 .ff-game-bottom p { flex: 1 1 250px; margin: 0; }
 .ff-game-stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; touch-action: none; user-select: none; background: #fff9e9; }
 #game-canvas { display: block; width: 100%; height: 100%; }
+.ff-retray-question, .ff-retray-answer { position: absolute; z-index: 2; pointer-events: none; color: #000; background: #fff9e9; border: 2px solid #142820; box-shadow: 0 3px 0 #8a5b25, 0 4px 12px #14282055; font-family: Georgia, 'Times New Roman', serif; font-weight: 800; line-height: 1; white-space: nowrap; }
+.ff-retray-question { padding: clamp(3px, .7vw, 7px) clamp(5px, 1vw, 10px); border-radius: 7px; font-size: clamp(13px, 2.2vw, 27px); transform: translate(-50%, -100%); }
+.ff-retray-question--below { transform: translate(-50%, 0); }
+.ff-retray-answer { padding: clamp(2px, .5vw, 5px) clamp(5px, .8vw, 9px); border-radius: 5px; font-size: clamp(12px, 2vw, 24px); transform: translateY(-50%); }
 .ff-question-board { position: absolute; top: 1.5%; left: 3%; right: 3%; background: #fff9e9; border: 3px solid #142820; border-radius: 8px; padding: 4px 12px; text-align: center; pointer-events: none; }
 #question-text { font-size: clamp(16px, 2.25vw, 27px); font-weight: 750; margin: 0; line-height: 1.25; overflow-wrap: anywhere; }
 #question-help { margin: 1px 0; font-size: clamp(12px, 1.3vw, 16px); }

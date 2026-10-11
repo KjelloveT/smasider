@@ -3,6 +3,7 @@
   const F = root.Fykefuga, $ = id => document.getElementById(id);
   let sharedPack, selected, engine, config, currentView = 'setup', paused = false, countdown = 0, deathTimer, frame = 0, previous = 0, feedbackUntil = 0;
   const errors = [], render = F.Render.create($('game-canvas'));
+  const retrayHud = F.ReTrayHud.create($('game-stage'));
   const clock = F.Physics.accumulator(), input = F.Input.create($('game-stage'), restart, () => paused ? resume() : pause('Spelet er sett på pause.'));
   const settings = F.Storage.settings();
   const soundControls = F.SoundControls.create(settings, () => F.Storage.saveSettings(getConfig()));
@@ -86,7 +87,7 @@
       if (document.hidden) throw new Error('Kom attende til fana og start spelet når du er klar.');
       $('setup-message').hidden = true;
       F.Storage.saveSettings({ ...getConfig() });
-      engine = F.Engine.create(selected, config); $('question-board').hidden = true; render.reset(config, engine.state); errors.length = 0; paused = false; countdown = 0; feedbackUntil = 0;
+      engine = F.Engine.create(selected, config); $('question-board').hidden = true; retrayHud.hide(); render.reset(config, engine.state); errors.length = 0; paused = false; countdown = 0; feedbackUntil = 0;
       $('game-overlay').hidden = true; view('game'); input.enable(true); clock.clear(); previous = performance.now();
       F.Audio.start(engine.world.musicScene ?? engine.world.segment(0).scene); syncSound(); $('game-stage').focus({ preventScroll: true }); processEvents();
       cancelAnimationFrame(frame); frame = requestAnimationFrame(loop);
@@ -122,7 +123,7 @@
     const score = engine.world.demo ? { best: 0, newRecord: false } : F.Storage.record(selected, config, engine.state);
     if (engine.world.demo) {
       $('result-title').textContent = 'Baneprøva er fullført!';
-      $('result-text').textContent = 'Du har kome gjennom heile baneprøva med terning, luftskip, sveveklokke, kule og bølgje.';
+      $('result-text').textContent = engine.state.correct + ' rette gangestykke og heile baneprøva fullført.';
       $('next-batch').hidden = true; view('result'); refresh(); $('replay-button').focus(); return;
     }
     $('result-title').textContent = engine.world.tutorial ? 'Øvinga er fullført!' : F.level(config.level).name + ' er fullført!';
@@ -132,7 +133,14 @@
   }
   function hud() {
     const state = engine.state, choice = engine.activeChoice();
-    $('run-label').textContent = engine.world.demo ? 'Baneprøve · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
+    $('run-label').textContent = engine.world.demo ? 'Baneprøve · ' + state.correct + '/' + (engine.world.count - 1) + ' rette · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
+    if (engine.world.demo) {
+      $('question-board').hidden = $('upper-answer').hidden = $('lower-answer').hidden = true;
+      $('control-help').textContent = F.mode(state.player.mode).help;
+      retrayHud.update(choice, render.screen);
+      return;
+    }
+    retrayHud.hide();
     if (choice && state.status === 'running') {
       $('question-board').hidden = false;
       $('control-help').textContent = ['cube', 'robot'].includes(state.player.mode) ? 'Hopp opp på hylla for øvre svar. Bli på golvet for nedre.' : F.mode(state.player.mode).help;
@@ -184,7 +192,7 @@
     else errors.forEach(error => { const item = Vy.el('div', 'vp-panel vp-panel--inset'); item.append(Vy.el('h3', '', error.prompt), Vy.el('p', '', 'Du valde: ' + error.chosen), Vy.el('p', '', 'Rett svar: ' + error.correct)); body.appendChild(item); });
   });
   $('next-batch').addEventListener('click', () => start({ ...config, offset: config.offset + engine.world.count }));
-  $('replay-button').addEventListener('click', () => start({ ...config }));
+  $('replay-button').addEventListener('click', () => start({ ...config, seed: engine.world.demo ? Vy.newSeed() : config.seed }));
   document.addEventListener('visibilitychange', () => { if (document.hidden) pause('Fana vart lagd i bakgrunnen.'); });
   window.addEventListener('blur', () => pause('Vindauget mista fokus.'));
   window.addEventListener('orientationchange', () => pause('Skjermen vart snudd.'));

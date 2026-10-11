@@ -3,8 +3,8 @@
   const F = root.Fykefuga;
   // The mode and speed portal positions are read from ReTraY (level 6508283).
   // Obstacles are a deliberately playable study of its nine-part structure.
-  const SPEED = 300, PORTAL_X = 1729, END_X = 18345, BPM = 108;
-  const definitions = [
+  const SPEED = 300, PORTAL_X = 1729, SOURCE_END_X = 18345, BPM = 108;
+  const source = [
     { from: 0, mode: 'cube', speed: 300, top: 142, bottom: 462, zoom: 1.38, focus: 350, scene: 0, title: 'Terningopninga' },
     { from: 1729, mode: 'ship', speed: 290, top: 205, bottom: 430, zoom: 1.54, portalY: 370, scene: 0, title: 'Luftskipet' },
     { from: 3525, mode: 'ufo', speed: 290, top: 190, bottom: 442, zoom: 1.48, scene: 1, title: 'Sveveklokka' },
@@ -18,6 +18,20 @@
     { from: 14895, mode: 'ufo', speed: 390, top: 240, bottom: 420, zoom: 1.73, portalY: 395, scene: 3, auto: true, title: 'Automatisk svev' },
     { from: 17235, mode: 'ufo', speed: 290, top: 185, bottom: 445, zoom: 1.46, scene: 0, title: 'Siste svev' }
   ];
+  // Every junction gets a full two-second decision runway, even where the
+  // source level places two speed portals almost on top of one another.
+  let extra = 0, previousFrom = 0;
+  const definitions = source.map((item, index) => {
+    let from = item.from + extra;
+    if (index) {
+      const previous = source[index - 1];
+      const minimum = previousFrom + Math.ceil(previous.speed * 2.25);
+      if (from < minimum) { extra += minimum - from; from = minimum; }
+    }
+    previousFrom = from;
+    return { ...item, from, shift: extra };
+  });
+  const END_X = SOURCE_END_X + extra;
   const sections = [];
   let elapsed = 0;
   definitions.forEach((item, index) => {
@@ -28,10 +42,10 @@
     elapsed += duration;
   });
   function spike(section, x, y, width = 38, height = 40) {
-    section.obstacles.push({ x, y, w: width, h: height, kind: 'spike' });
+    section.obstacles.push({ x: x + section.shift, y, w: width, h: height, kind: 'spike' });
   }
   function platform(section, x, y, width, height) {
-    section.obstacles.push({ x, y, w: width, h: height, kind: 'platform' });
+    section.obstacles.push({ x: x + section.shift, y, w: width, h: height, kind: 'platform' });
   }
   function gate(section, x, centre, gap, width = 48) {
     const edgeTop = centre - gap / 2, edgeBottom = centre + gap / 2;
@@ -57,6 +71,11 @@
   platform(sections[9], 14470, 424, 180, 36);
   [330, 322, 335, 325].forEach((centre, i) => gate(sections[10], onBeat(sections[10], 2 * (i + 1)), centre, 130));
   [315, 340, 320].forEach((centre, i) => gate(sections[11], onBeat(sections[11], 2 * (i + 1)), centre, 155));
+  // Remove hazards in the two seconds reserved for reading and steering.
+  sections.slice(0, -1).forEach(section => {
+    const start = section.to - 2 * section.speed;
+    section.obstacles = section.obstacles.filter(item => item.kind === 'platform' || item.x + item.w < start);
+  });
   const obstacles = sections.flatMap(section => section.obstacles);
   const smooth = value => { const x = Math.max(0, Math.min(1, value)); return x * x * (3 - 2 * x); };
   const mix = (a, b, part) => a + (b - a) * part;
@@ -78,20 +97,27 @@
   }
   function autoTarget(section, x, player, view) {
     if (section.mode === 'cube') {
-      const target = x < 14670 ? 410 : view.bottom;
-      return x < 14470 ? mix(player.y, 410, .09) : mix(player.y, target, .12);
+      const target = x < 14670 + section.shift ? 410 : view.bottom;
+      return x < 14470 + section.shift ? mix(player.y, 410, .09) : mix(player.y, target, .12);
     }
     const target = 328 + Math.sin((x - section.from) / 270) * 13;
     return mix(player.y, target, .08);
   }
-  function create() {
+  function lanes(section) {
+    const corridor = viewAt(section.from);
+    const span = corridor.bottom - corridor.top;
+    return { upper: corridor.top + span * .21, lower: corridor.bottom - span * .21,
+      split: (corridor.top + corridor.bottom) / 2, height: Math.min(94, span * .35) };
+  }
+  function create(config = {}) {
     return { speed: SPEED, duration: elapsed, count: sections.length, end: elapsed,
       tutorial: true, demo: true, endless: false, musicScene: 4,
+      quiz: F.ReTrayQuestions.create(config.seed || 1, sections.length - 1), previewRoute: !!config.previewRoute,
       segment: index => sections[Math.max(0, Math.min(sections.length - 1, index))],
       at: time => sections.find(section => time < section.end) || sections[sections.length - 1],
       xAt: time => { const section = sections.find(value => time < value.end) || sections[sections.length - 1];
         return Math.min(END_X, section.from + (time - section.start) * section.speed); },
       viewAt };
   }
-  F.ReTray = { create, obstacles, sections, viewAt, autoTarget, SPEED, PORTAL_X, END_X, BPM };
+  F.ReTray = { create, obstacles, sections, viewAt, autoTarget, lanes, SPEED, PORTAL_X, END_X, BPM };
 })(window);
