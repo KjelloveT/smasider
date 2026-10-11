@@ -89,7 +89,7 @@ body.ff-playing #game-view:fullscreen { background: #fff9e9; display: flex; flex
 .ff-setup { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); align-items: start; }
 .ff-setup > .ff-teaching { container-type: inline-size; }
 .ff-card-fieldset { min-width: 0; margin-block: 20px; }
-.ff-choice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 155px), 1fr)); gap: 12px; }
+.ff-choice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 185px), 1fr)); gap: 12px; }
 .ff-choice-card { display: grid; grid-template-columns: auto minmax(0, 1fr); align-content: start; align-items: center; min-width: 0; gap: 8px; }
 .ff-choice-card input { width: 20px; height: 20px; }
 .ff-choice-title { overflow-wrap: anywhere; font-weight: 700; line-height: 1.3; }
