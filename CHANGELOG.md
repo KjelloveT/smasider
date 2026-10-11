@@ -11,6 +11,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - Originale genererte rasterressursar og fire originale Spitfire-barokksatsar med innspelte fiolinar, bratsj og cello, og separate volumval for musikk og spel-ljod. Farkostane har spor, lysband, eksos og eigne reaksjonar ved hopp, landing og teletransport.
 
 ### Endra
+- Fykefuga har visuelle kortval med bane- og figurbilete, døme frå spørsmålsetta og synlege val for lesetid. Bragdene står to i breidda på mobil og fire på større skjermar, øvingskorta bruker fleire kolonnar på breie skjermar, og «Vegval og framgang» er fjerna.
 - Ordaklok og Fykefuga bruker ein felles delingsmodul. Eksisterande Ordaklok-lenkjer blir framleis lesne.
 - Fykefuga har 61 prosent høgare fart og fire til seks hindergrupper i kvart spelparti, med hoppkombinasjonar og vekselvise flygeportar. Lesestrekningane held same lesetid.
 - Banemusikken bruker ferdige orkesteropptak på 65–83 sekund, med presise sløyfer, mjuke temabyte, bevart musikkposisjon ved pause og rask omstart. Spel-ljodane er eigne Web Audio-klangar. Hopp, landing og styring får større utbrot, sjokkbølgjer, framdrift og rørsleanimasjonar.

@@ -22,6 +22,7 @@
     if (includeTutorials) F.modes.forEach(mode => select.add(new Option('Øving: ' + mode.name, 'tutorial-' + mode.id)));
   }
   options($('level-select'), true); options($('editor-level'));
+  const setupChoices = F.SetupChoices.create();
   function refresh() {
     const old = $('pack-select').value;
     const packs = F.Storage.list(); if (sharedPack) packs.push(sharedPack);
@@ -34,7 +35,7 @@
     $('skin-select').value = F.Storage.unlocked(oldSkin) ? oldSkin : 'gold';
     const progress = F.Storage.progressData(); $('progress-label').textContent = progress.correct + ' rette vegval · ' + progress.levels.length + '/4 hovudbaner · ' + progress.modes.length + '/8 modusar meistra';
     VyrdepilBragd.renderGameBadges($('bragder'), 'fykefuga', F.Storage.earned()).catch(() => { $('bragder').textContent = 'Bragdlista kunne ikkje lastast. Last sida på nytt.'; });
-    updateSetup();
+    setupChoices.refresh(packs); updateSetup();
   }
   function getConfig() {
     const level = $('level-select').value;
@@ -43,20 +44,21 @@
   }
   function updateSetup() {
     if (!selected) return;
+    setupChoices.sync();
     const c = getConfig(); $('difficulty-field').hidden = c.level !== 'endless';
     $('pack-description').textContent = selected.questions.length + ' korte spørsmål. Tilrådde val kan justerast.';
     $('shared-note').hidden = selected !== sharedPack; $('save-shared').hidden = selected !== sharedPack;
     $('record-label').textContent = 'Rekord med desse vala: ' + F.Storage.best(selected, c) + ' rette vegval.';
   }
-  function select(pack) {
+  function select(pack, focusStart = true) {
     selected = pack;
     if (!F.Storage.list().some(item => item.id === pack.id) && pack !== sharedPack) { sharedPack = pack; refresh(); }
     $('pack-select').value = pack.id;
     const recommendation = pack.recommended; $('level-select').value = recommendation.level; $('reading-select').value = recommendation.reading; $('difficulty-select').value = recommendation.difficulty;
-    view('setup'); updateSetup(); $('start-button').focus();
+    view('setup'); updateSetup(); if (focusStart) $('start-button').focus();
   }
   const library = F.Library.create({ view, dialog, refresh, select });
-  $('pack-select').addEventListener('change', () => { const pack = F.Storage.list().concat(sharedPack ? [sharedPack] : []).find(item => item.id === $('pack-select').value); if (pack) select(pack); });
+  $('pack-select').addEventListener('change', () => { const pack = F.Storage.list().concat(sharedPack ? [sharedPack] : []).find(item => item.id === $('pack-select').value); if (pack) select(pack, false); });
   ['level-select', 'reading-select', 'difficulty-select', 'skin-select'].forEach(id => $(id).addEventListener('change', updateSetup));
   $('sound-input').checked = !!settings.sound; $('reduced-input').checked = settings.reduced === undefined ? matchMedia('(prefers-reduced-motion: reduce)').matches : !!settings.reduced;
   if (Array.from($('level-select').options).some(option => option.value === settings.level)) $('level-select').value = settings.level;

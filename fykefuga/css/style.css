@@ -83,3 +83,47 @@ body.ff-playing #game-view:fullscreen { background: #fff9e9; display: flex; flex
   #game-view:fullscreen > * { width: calc((100dvh - 130px) * 16 / 9); }
   #game-view:fullscreen .ff-game-toolbar, #game-view:fullscreen .ff-game-bottom { width: 100%; }
 }
+
+/* Visuelle val bruker felles vp-choice og dei eksisterande rasterressursane. */
+#setup-view { max-width: 1920px; margin-inline: auto; }
+.ff-setup { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); align-items: start; }
+.ff-setup > .ff-teaching { container-type: inline-size; }
+.ff-card-fieldset { min-width: 0; margin-block: 20px; }
+.ff-choice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 155px), 1fr)); gap: 12px; }
+.ff-choice-card { display: grid; grid-template-columns: auto minmax(0, 1fr); align-content: start; align-items: center; min-width: 0; gap: 8px; }
+.ff-choice-card input { width: 20px; height: 20px; }
+.ff-choice-title { overflow-wrap: anywhere; font-weight: 700; line-height: 1.3; }
+.ff-choice-hint { grid-column: 1 / -1; overflow-wrap: anywhere; line-height: 1.4; }
+.ff-choice-preview { display: flex; grid-column: 1 / -1; width: 100%; aspect-ratio: 16 / 7; overflow: hidden; border-radius: 3px; }
+.ff-choice-preview img { display: block; width: 100%; height: 100%; min-width: 0; object-fit: cover; }
+.ff-choice-preview--figures { align-items: center; justify-content: center; }
+.ff-choice-preview--figures img { width: 32%; height: 100%; object-fit: contain; }
+.ff-choice-preview--figures img:only-child { width: 60%; }
+.ff-choice-preview--scenes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); }
+.ff-choice-preview--words { flex-direction: column; justify-content: center; align-items: center; gap: 4px; padding: 4px; text-align: center; aspect-ratio: auto; min-height: 76px; overflow-wrap: anywhere; }
+.ff-choice-preview--words > span { font-size: 1.2rem; font-weight: 700; max-width: 100%; }
+.ff-choice-preview--words > small { max-width: 100%; }
+.ff-choice-card--locked { cursor: default; }
+.ff-card-fieldset--reading-select .ff-choice-grid, .ff-card-fieldset--difficulty-select .ff-choice-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ff-card-fieldset--reading-select .ff-choice-card, .ff-card-fieldset--difficulty-select .ff-choice-card { padding: 12px 8px; }
+.ff-setup .ff-fields:has(.ff-card-fieldset) { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.ff-tutorials { grid-template-columns: repeat(auto-fit, minmax(min(100%, 125px), 1fr)); gap: 12px; }
+.ff-tutorials button { min-height: 116px; min-width: 0; overflow-wrap: anywhere; }
+.ff-tutorials img { width: 64px; height: 64px; }
+.ff-bragder .vp-bragd-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 2vw, 24px); }
+.ff-bragder .vp-bragd-card { min-width: 0; }
+@media (max-width: 1100px) {
+  .ff-setup { grid-template-columns: minmax(0, 1fr); }
+  .ff-tutorials { grid-template-columns: repeat(auto-fit, minmax(min(100%, 130px), 1fr)); }
+}
+@media (max-width: 600px) {
+  .ff-choice-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .ff-choice-card { grid-template-columns: minmax(0, 1fr); padding: 10px 8px; }
+  .ff-choice-card input, .ff-choice-card .ff-choice-title { grid-column: 1; }
+  .ff-choice-title { font-size: clamp(0.82rem, 3.3vw, 1rem); hyphens: auto; overflow-wrap: normal; }
+  .ff-card-fieldset--reading-select .ff-choice-grid, .ff-card-fieldset--difficulty-select .ff-choice-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ff-card-fieldset--reading-select .ff-choice-hint, .ff-card-fieldset--difficulty-select .ff-choice-hint { grid-column: 1 / -1; }
+  .ff-bragder .vp-bragd-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .ff-bragder .vp-bragd-card { padding-inline: 8px; }
+  .ff-tutorials { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
