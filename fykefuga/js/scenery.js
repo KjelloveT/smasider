@@ -11,7 +11,7 @@
   }
   function create() {
     const backgrounds = [];
-    let floor;
+    let floor, panel;
     function bitmap(width, height) {
       const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height; return canvas;
     }
@@ -31,13 +31,12 @@
         const cropHeight = Math.round(image.height * .8), width = Math.round(image.width * HEIGHT / cropHeight);
         backgrounds[scene] = repeat(image, 0, 0, image.width, cropHeight, width, HEIGHT);
       });
-      const image = F.Assets.get('floor.png');
-      // Only the painted marble face is used. The source image's top and carved
-      // underside gave both the ground and finite platforms a false 3D depth.
-      const sourceX = Math.round(image.width * .27), sourceWidth = Math.round(image.width * .46);
-      const sourceY = Math.round(image.height * .08), sourceHeight = Math.round(image.height * .29);
-      floor = repeat(image, sourceX, sourceY, sourceWidth, sourceHeight,
-        Math.round(sourceWidth * 64 / sourceHeight), 64);
+      panel = F.Assets.get('platform-panel.png');
+      // The painted centre reflects at each seam; ornamental ends are reserved
+      // for finite platforms, so every length has complete end caps.
+      const cap = Math.round(panel.height * .6), centreWidth = panel.width - 2 * cap;
+      floor = repeat(panel, cap, 0, centreWidth, panel.height,
+        Math.round(centreWidth * 64 / panel.height), 64);
     }
     function backdrop(ctx, scene, x, reduced, opacity = 1) {
       const image = backgrounds[scene]; ctx.globalAlpha = opacity;
@@ -56,23 +55,23 @@
       // Clip a world-anchored texture. Growing/shrinking visible bounds never stretch it.
       for (const tileX of positions(x - ANCHOR, floor.width, left, right)) ctx.drawImage(floor, tileX, ceiling ? 0 : y);
       ctx.restore();
-      ctx.fillStyle = '#c99e5c'; ctx.fillRect(left, ceiling ? y + height - 4 : y, right - left, 2);
-      ctx.fillStyle = '#142820'; ctx.fillRect(left, ceiling ? y + height - 2 : y + 2, right - left, 2);
     }
-    // A finite, flat marble rectangle with straight painted end strokes.
+    // Nine-slice-like rendering: the centre repeats while both painted ends
+    // keep their aspect ratio, including on the shortest blocks.
     function platform(ctx, camera, y, height, left, right) {
       if (right <= left) return;
+      const sourceCap = Math.round(panel.height * .6);
+      const capWidth = Math.min((right - left) / 2, sourceCap * height / panel.height);
+      const insideLeft = left + capWidth, insideRight = right - capWidth;
       ctx.save(); ctx.beginPath(); ctx.rect(left, y, right - left, height); ctx.clip();
       const tileWidth = floor.width * height / 64;
-      for (const tileX of positions(camera - ANCHOR, tileWidth, left, right))
+      ctx.beginPath(); ctx.rect(insideLeft, y, insideRight - insideLeft, height); ctx.clip();
+      for (const tileX of positions(camera - ANCHOR, tileWidth, insideLeft, insideRight))
         ctx.drawImage(floor, tileX, y, tileWidth, height);
       ctx.restore();
-      ctx.fillStyle = '#142820';
-      ctx.fillRect(left, y, right - left, 3); ctx.fillRect(left, y + height - 3, right - left, 3);
-      ctx.fillRect(left, y, 3, height); ctx.fillRect(right - 3, y, 3, height);
-      ctx.fillStyle = '#c99e5c';
-      ctx.fillRect(left + 3, y + 3, right - left - 6, 2);
-      ctx.fillRect(left + 3, y + 3, 2, height - 6); ctx.fillRect(right - 5, y + 3, 2, height - 6);
+      ctx.drawImage(panel, 0, 0, sourceCap, panel.height, left, y, capWidth, height);
+      ctx.drawImage(panel, panel.width - sourceCap, 0, sourceCap, panel.height,
+        insideRight, y, capWidth, height);
     }
     return { prepare, backdrop, background, surface, platform, get cacheCount() { return backgrounds.length + (floor ? 1 : 0); } };
   }

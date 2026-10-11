@@ -91,9 +91,6 @@
       const floor = view.bottom + F.Physics.SIZE / 2, ceiling = view.top - F.Physics.SIZE / 2;
       scenery.surface(ctx, state.x, floor, 64);
       scenery.surface(ctx, state.x, ceiling - 64, 64, 0, 960, true);
-      ctx.strokeStyle = '#142820'; ctx.lineWidth = 3 / view.zoom;
-      ctx.beginPath(); ctx.moveTo(0, floor); ctx.lineTo(960, floor);
-      ctx.moveTo(0, ceiling); ctx.lineTo(960, ceiling); ctx.stroke();
       const choice = engine.activeChoice();
       if (choice) {
         ctx.fillStyle = 'rgba(255,253,245,.42)'; ctx.fillRect(0, 140, 960, 322);

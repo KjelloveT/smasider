@@ -36,7 +36,7 @@ module.exports = function (F, check, context) {
     const canvas = { width: 0, height: 0, getContext() { return new Proxy({}, { get: () => (...args) => calls.push(args), set: () => true }); } };
     allocations.push(canvas); return canvas;
   };
-  F.Assets = { get(name) { return name.endsWith('.jpg') ? {width:1536,height:1024} : name === 'floor.png' ? {width:256,height:83} : {width:129,height:385}; } };
+  F.Assets = { get(name) { return name.endsWith('.jpg') ? {width:1536,height:1024} : name === 'platform-panel.png' ? {width:1657,height:192} : {width:129,height:385}; } };
   const scenery = F.Scenery.create(); scenery.prepare(); const count = allocations.length;
   const drawCalls = [], clips = [], ctx = new Proxy({}, { get(_, name) { return (...args) => { if (name === 'drawImage') drawCalls.push(args); if (name === 'rect') clips.push(args); }; }, set: () => true });
   for (const x of [0, 1012 / .08 - .01, 1012 / .08 + .01, 2024 / .08 - .01, 2024 / .08 + .01, 80000]) {

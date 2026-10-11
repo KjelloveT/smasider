@@ -193,6 +193,13 @@
       "sha256": "1cf63f0b39b4294230dca217a51abe80a24c39d55e0853422f8b66a639bfdaf8"
     },
     {
+      "file": "platform-panel.png",
+      "width": 1657,
+      "height": 192,
+      "bytes": 91602,
+      "sha256": "aa74a8ab0abf982060c111e282373d55f3940895600b3e76e1c3fa9ee3841c9e"
+    },
+    {
       "file": "portal-side.png",
       "width": 61,
       "height": 512,
