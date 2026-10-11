@@ -50,6 +50,7 @@
         part.obstacles.forEach(obstacle => {
           const x = 190 + obstacle.x - state.x;
           if (x < -100 || x > 1000) return;
+          if (obstacle.kind === 'platform') { scenery.surface(ctx, state.x, obstacle.y, obstacle.h, x, x + obstacle.w); return; }
           const img = F.Assets.get(obstacle.kind + '.png');
           if (img) ctx.drawImage(img, x, obstacle.y, obstacle.w, obstacle.h);
         });

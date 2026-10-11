@@ -6,7 +6,7 @@ const crypto = require('node:crypto');
 const root = path.resolve(__dirname, '../..');
 const context = vm.createContext({ console, URL, URLSearchParams, TextEncoder, TextDecoder, Blob, CompressionStream, DecompressionStream, btoa, atob, setTimeout, clearTimeout, crypto: crypto.webcrypto, document: { addEventListener() {} } });
 context.window = context;
-for (const file of ['js/vyrdepil-util.js', 'js/vyrdepil-share.js', 'fykefuga/js/data.js', 'fykefuga/js/questions.js', 'fykefuga/js/physics.js', 'fykefuga/js/levels.js', 'fykefuga/js/engine.js', 'fykefuga/js/effects.js', 'fykefuga/js/scenery.js', 'fykefuga/js/motion.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
+for (const file of ['js/vyrdepil-util.js', 'js/vyrdepil-share.js', 'fykefuga/js/data.js', 'fykefuga/js/questions.js', 'fykefuga/js/physics.js', 'fykefuga/js/retray.js', 'fykefuga/js/levels.js', 'fykefuga/js/engine.js', 'fykefuga/js/effects.js', 'fykefuga/js/scenery.js', 'fykefuga/js/motion.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
 const F = context.Fykefuga;
 let assertions = 0;
 function check(condition, message) { assert.ok(condition, message); assertions++; }
@@ -83,6 +83,19 @@ for (const mode of F.modes) for (let variant = 0; variant < 2; variant++) for (l
   check(alive, 'Uframkomeleg byggjestykke: ' + mode.id + ', nivå ' + difficulty + ', variant ' + variant);
 }
 check(F.Physics.collision(0, 100, { mode: 'wave', y: 250, previousY: 250 }, { x: 50, y: 230, w: 2, h: 40 }), 'Tynn hindring vart hoppa over');
+const probe = F.Engine.create(pack, { level: 'retray-probe', reading: 4, difficulty: 0, seed: 7, offset: 0 });
+check(probe.world.demo && probe.activeChoice() === null, 'Baneprøva skal vere utan spørsmål');
+check(F.ReTray.SPEED === 300 && F.ReTray.PORTAL_X === 1729, 'Banegeometrien har feil målestokk');
+check(JSON.stringify(F.ReTray.obstacles.filter(item => item.kind === 'spike').map(item => item.x)) === '[480,910]', 'Piggane følgjer ikkje banedata');
+const probeJumps = [370, 800, 990, 1240], usedJumps = new Set();
+let probeTicks = 0;
+while (probe.state.status === 'running' && probeTicks++ < 1200) {
+  const target = probeJumps.find(value => probe.state.x >= value && !usedJumps.has(value));
+  const pressed = !!(target && probe.state.player.grounded);
+  if (pressed) usedJumps.add(target);
+  probe.step({ held: pressed, pressed, released: false });
+}
+check(probe.state.status === 'complete' && probe.state.correct === 0 && usedJumps.size === 4, 'Opninga kan ikkje spelast ferdig');
 const engine = F.Engine.create(pack, { level: 'marmor', seed: 42, reading: 4, offset: 0 });
 const before = Array.from({ length: 4 }, (_, index) => engine.getChoice(index).item.id);
 const placements = Array.from({ length: 4 }, (_, index) => engine.getChoice(index).correctSide);
@@ -142,14 +155,14 @@ for (const skin of F.skins) for (const mode of F.modes) {
   check(file.width === 96 && file.height === 96, 'Sprite manglar isolert celle med fast sideforhold og luft');
 }
 const sounds = JSON.parse(fs.readFileSync(path.join(root, 'fykefuga/assets/audio/music-v1.json'), 'utf8'));
-check(sounds.app === 'fykefuga' && sounds.version === 1 && sounds.tracks.length === 4, 'Musikkoversikta manglar fire tema');
+check(sounds.app === 'fykefuga' && sounds.version === 1 && sounds.tracks.length === 5, 'Musikkoversikta manglar fem tema');
 for (const [scene, sound] of sounds.tracks.entries()) {
   const bytes = fs.readFileSync(path.join(root, 'fykefuga/assets/audio', sound.file));
   check(bytes.length === sound.bytes && bytes.length < 2.1 * 1024 * 1024 && crypto.createHash('sha256').update(bytes).digest('hex') === sound.sha256, 'Banemusikken er utdatert eller for stor');
-  check(sound.scene === scene && sound.frames / sound.sampleRate > 60 && sound.frames / sound.sampleRate < 100, 'Feil tema eller sløyfelengd');
+  check(sound.scene === scene && (scene === 4 ? sound.frames / sound.sampleRate > 17 && sound.frames / sound.sampleRate < 19 : sound.frames / sound.sampleRate > 60 && sound.frames / sound.sampleRate < 100), 'Feil tema eller sløyfelengd');
   check(sound.alignment.samples.length === 256 && sound.alignment.step > 0 && sound.encoderDelayFrames > 0, 'Musikken manglar dekodingsreferanse');
 }
-check(sounds.tracks[2].beats === 3 && sounds.tracks[3].bpm > sounds.tracks[0].bpm, 'Menuetten må ha tretakt, og finalen må vere kvikkare');
+check(sounds.tracks[2].beats === 3 && sounds.tracks[3].bpm > sounds.tracks[0].bpm && sounds.tracks[4].bpm === 108, 'Menuetten må ha tretakt, og baneprøva rolegare tempo');
 for (const directory of ['fykefuga/js', 'fykefuga/css']) for (const file of fs.readdirSync(path.join(root, directory))) {
   const text = fs.readFileSync(path.join(root, directory, file), 'utf8');
   check(!/<svg[\s>]|\.svg\b|image\/svg/i.test(text), 'SVG vart brukt i speldesignet');

@@ -5,7 +5,7 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '../..');
 let checks = 0;
 function check(value, label) { assert.ok(value, label); checks++; }
-const manifest = { tracks: [0, 1, 2, 3].map(scene => ({ scene, title: 'tema-' + scene,
+const manifest = { tracks: [0, 1, 2, 3, 4].map(scene => ({ scene, title: 'tema-' + scene,
   file: 'theme-' + scene + '.mp3', frames: 44100, sampleRate: 44100,
   encoderDelayFrames: 1105, bpm: 160 + scene * 8, beats: scene === 2 ? 3 : 4,
   alignment: { startFrame: 256, step: 4, samples: Array.from({ length: 64 }, (_, i) =>
@@ -59,7 +59,7 @@ const wait = milliseconds => new Promise(resolve => setTimeout(resolve, millisec
   await Promise.all([F.Music.load(), F.Music.load()]);
   for (const rate of [44100, 48000]) for (const padding of [false, true]) {
     const audio = audioContext(rate, padding);
-    for (let scene = 0; scene < 4; scene++) {
+    for (let scene = 0; scene < 5; scene++) {
       const entry = await F.Music.prepare(audio, scene);
       check(entry.similarity > .99, 'Wrong MP3 alignment');
       check(Math.abs(entry.loopEnd - entry.loopStart - 1) < 1 / rate, 'Wrong loop duration');

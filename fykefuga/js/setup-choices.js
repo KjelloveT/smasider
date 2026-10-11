@@ -15,12 +15,13 @@
       const box = Vy.el('span', 'ff-choice-preview');
       box.setAttribute('aria-hidden', 'true');
       if (selectId === 'level-select' || selectId === 'preview-theme') {
-        if (value.startsWith('tutorial-')) {
+        if (value === 'retray-probe') { box.append(picture('marmor.jpg')); }
+        else if (value.startsWith('tutorial-')) {
           box.classList.add('ff-choice-preview--figures'); box.append(picture('gold-' + value.slice(9) + '.png'));
         } else if (value === 'endless') {
           box.classList.add('ff-choice-preview--scenes'); scenes.forEach(scene => box.append(picture(scene + '.jpg')));
         } else {
-          const scene = selectId === 'preview-theme' ? scenes[Number(value)] : value;
+          const scene = selectId === 'preview-theme' ? scenes[Number(value)] || 'marmor' : value;
           box.append(picture(scene + '.jpg'));
         }
       } else if (selectId === 'skin-select') {
@@ -46,6 +47,7 @@
       }
       if (id === 'level-select') {
         if (option.value === 'endless') return 'Ei ny rekkje kvar runde';
+        if (option.value === 'retray-probe') return 'Dei fyrste 9 prosentane, utan spørsmål · bana er under arbeid.';
         if (option.value.startsWith('tutorial-')) return 'Øving i éin modus';
         return F.level(option.value).description;
       }

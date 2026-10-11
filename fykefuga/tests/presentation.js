@@ -20,7 +20,7 @@
     try {
       await F.Music.load();
       const Offline = window.OfflineAudioContext || window.webkitOfflineAudioContext;
-      for (const rate of [44100, 48000]) for (let scene = 0; scene < 4; scene++) {
+      for (const rate of [44100, 48000]) for (let scene = 0; scene < 5; scene++) {
         const track = F.Music.track(scene);
         status.textContent = 'Kontrollerer ' + track.title + ' ved ' + rate + ' Hz …';
         const context = new Offline(2, rate * 2, rate), entry = await F.Music.prepare(context, scene);
@@ -67,7 +67,7 @@
       F.Audio.stop(); await wait(.05);
       assert(F.Audio.status().context === 'suspended', 'Avslutt held fram med lyd');
       const row = document.createElement('p'); row.textContent = 'Pause, vidareføring, omstart, lyd av, volum og avbrotne temabyte: BESTÅTT.'; results.append(row);
-      status.textContent = 'Alle åtte dekodingsprøvene og lydstyringa består.';
+      status.textContent = 'Alle ti dekodingsprøvene og lydstyringa består.';
     } catch (error) { F.Audio.stop(); status.textContent = 'Prøva feila: ' + error.message; }
     finally { button.disabled = false; }
   });

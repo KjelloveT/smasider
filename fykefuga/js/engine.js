@@ -49,7 +49,21 @@
       if (p.mode === 'spider' && before.y !== p.y) state.events.push({ type: 'teleport', mode: p.mode, fromY: before.y });
       else if (before.gravity !== p.gravity) state.events.push({ type: 'turn', mode: p.mode });
       if (!before.grounded && p.grounded && Math.abs(before.velocity) > 150) state.events.push({ type: 'land', mode: p.mode });
-      if (segment.obstacles.some(obstacle => F.Physics.collision(oldX, state.x, state.player, obstacle))) { die('crash'); return; }
+      // On the ReTraY study, solid marble steps can be landed on from above.
+      // Their sides and undersides still stop the player.
+      let landed = null;
+      if (world.demo) for (const block of segment.obstacles.filter(item => item.kind === 'platform')) {
+        const surface = block.y - F.Physics.SIZE / 2;
+        if (p.velocity >= 0 && p.previousY <= surface + 2 && p.y >= surface &&
+            state.x + F.Physics.SIZE / 2 > block.x && state.x - F.Physics.SIZE / 2 < block.x + block.w) {
+          p.y = surface; p.velocity = 0; p.grounded = true; landed = block; break;
+        }
+      }
+      if (segment.obstacles.some(obstacle => {
+        if (obstacle === landed) return false;
+        if (obstacle.kind === 'platform' && p.previousY <= obstacle.y - F.Physics.SIZE / 2 + .01 && p.y <= obstacle.y - F.Physics.SIZE / 2 + .01) return false;
+        return F.Physics.collision(oldX, state.x, p, obstacle);
+      })) { die('crash'); return; }
       if (!world.tutorial && state.time + 1e-8 >= segment.gateAt && !state.answered.has(segment.index)) {
         const choice = getChoice(segment.index);
         const side = state.player.y < F.Physics.SPLIT ? 'upper' : 'lower';

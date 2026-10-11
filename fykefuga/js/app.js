@@ -18,7 +18,9 @@
   }
   $('dialog-close').addEventListener('click', () => Vy.closeModal($('utility-dialog')));
   function options(select, includeTutorials) {
-    F.levels.concat([{ id: 'endless', name: 'Endelaus fuga' }]).forEach(level => select.add(new Option(level.name, level.id)));
+    const levels = F.levels.concat([{ id: 'endless', name: 'Endelaus fuga' }]);
+    if (includeTutorials) levels.push({ id: 'retray-probe', name: 'ReTraY · baneprøve' });
+    levels.forEach(level => select.add(new Option(level.name, level.id)));
     if (includeTutorials) F.modes.forEach(mode => select.add(new Option('Øving: ' + mode.name, 'tutorial-' + mode.id)));
   }
   options($('level-select'), true); options($('editor-level'));
@@ -45,9 +47,12 @@
   function updateSetup() {
     if (!selected) return;
     setupChoices.sync();
-    const c = getConfig(); $('difficulty-field').hidden = c.level !== 'endless';
+    const c = getConfig(), probe = c.level === 'retray-probe';
+    $('difficulty-field').hidden = c.level !== 'endless';
+    $('pack-select-choices').hidden = probe; $('pack-description').hidden = probe;
+    $('reading-select-choices').hidden = probe; $('record-label').hidden = probe;
     $('pack-description').textContent = selected.questions.length + ' korte spørsmål. Tilrådde val kan justerast.';
-    $('shared-note').hidden = selected !== sharedPack; $('save-shared').hidden = selected !== sharedPack;
+    $('shared-note').hidden = probe || selected !== sharedPack; $('save-shared').hidden = probe || selected !== sharedPack;
     $('record-label').textContent = 'Rekord med desse vala: ' + F.Storage.best(selected, c) + ' rette vegval.';
   }
   function select(pack, focusStart = true) {
@@ -72,36 +77,36 @@
   async function start(nextConfig) {
     if ($('start-button').disabled) return;
     const issues = F.Questions.validate(selected);
-    if (issues.length && !getConfig().level.startsWith('tutorial-')) { $('setup-message').textContent = 'Settet må rettast: ' + issues[0].message; $('setup-message').hidden = false; return; }
+    if (issues.length && !getConfig().level.startsWith('tutorial-') && getConfig().level !== 'retray-probe') { $('setup-message').textContent = 'Settet må rettast: ' + issues[0].message; $('setup-message').hidden = false; return; }
     $('start-button').disabled = true; $('setup-message').textContent = 'Lastar farkostar, kulissar og musikk …'; $('setup-message').hidden = false;
     try {
       config = nextConfig || { ...getConfig(), seed: Vy.newSeed(), offset: 0 };
       if (config.level !== 'endless' && !config.level.startsWith('tutorial-')) config.difficulty = F.level(config.level).difficulty;
-      soundControls.stopPreview(); await F.Audio.init(config.level === 'endless' || config.level.startsWith('tutorial-') ? 0 : F.level(config.level).scene); F.Audio.setVolumes(config.musicVolume, config.effectsVolume); F.Audio.setMuted(!config.sound); await F.Assets.load();
+      soundControls.stopPreview(); await F.Audio.init(config.level === 'retray-probe' ? 4 : config.level === 'endless' || config.level.startsWith('tutorial-') ? 0 : F.level(config.level).scene); F.Audio.setVolumes(config.musicVolume, config.effectsVolume); F.Audio.setMuted(!config.sound); await F.Assets.load();
       if (document.hidden) throw new Error('Kom attende til fana og start spelet når du er klar.');
       $('setup-message').hidden = true;
       F.Storage.saveSettings({ ...getConfig() });
       engine = F.Engine.create(selected, config); render.reset(config, engine.state); errors.length = 0; paused = false; countdown = 0; feedbackUntil = 0;
       $('game-overlay').hidden = true; view('game'); input.enable(true); clock.clear(); previous = performance.now();
-      F.Audio.start(engine.world.segment(0).scene); syncSound(); $('game-stage').focus({ preventScroll: true }); processEvents();
+      F.Audio.start(engine.world.musicScene ?? engine.world.segment(0).scene); syncSound(); $('game-stage').focus({ preventScroll: true }); processEvents();
       cancelAnimationFrame(frame); frame = requestAnimationFrame(loop);
     } catch (error) { $('setup-message').textContent = error.message; $('setup-message').hidden = false; view('setup'); }
     finally { $('start-button').disabled = false; }
   }
   function restart() {
     if (!engine || currentView !== 'game' || paused) return;
-    clearTimeout(deathTimer); engine.reset(); F.Audio.start(engine.world.segment(0).scene); render.reset(config, engine.state); clock.clear(); input.discardPress(); previous = performance.now(); processEvents();
+    clearTimeout(deathTimer); engine.reset(); F.Audio.start(engine.world.musicScene ?? engine.world.segment(0).scene); render.reset(config, engine.state); clock.clear(); input.discardPress(); previous = performance.now(); processEvents();
   }
   function processEvents() {
     engine.drain().forEach(event => {
       F.Audio.effect(event); render.notify(event, engine.state);
       if (event.type === 'mode') {
         const mode = F.mode(event.mode); $('mode-label').textContent = mode.name; $('control-help').textContent = mode.help;
-        F.Audio.setScene(engine.world.at(engine.state.time).scene);
+        F.Audio.setScene(engine.world.musicScene ?? engine.world.at(engine.state.time).scene);
       }
-      if (event.type === 'answer' || event.type === 'complete') F.Storage.progress(event, { ...config, mode: engine.state.player.mode });
+      if (!engine.world.demo && (event.type === 'answer' || event.type === 'complete')) F.Storage.progress(event, { ...config, mode: engine.state.player.mode });
       if (event.type === 'dead') {
-        F.Storage.record(selected, config, engine.state);
+        if (!engine.world.demo) F.Storage.record(selected, config, engine.state);
         if (event.reason === 'answer') {
           errors.push({ prompt: event.detail.item.prompt, correct: event.detail.item.correct, chosen: event.detail.chosen }); if (errors.length > 100) errors.shift();
           $('question-text').textContent = 'Fasit: ' + event.detail.item.correct; $('question-help').textContent = 'Spørsmålet: ' + event.detail.item.prompt;
@@ -114,7 +119,12 @@
     });
   }
   function complete() {
-    const score = F.Storage.record(selected, config, engine.state);
+    const score = engine.world.demo ? { best: 0, newRecord: false } : F.Storage.record(selected, config, engine.state);
+    if (engine.world.demo) {
+      $('result-title').textContent = 'Baneprøva er fullført!';
+      $('result-text').textContent = 'Du har kome gjennom opninga frå ReTraY. Neste del skal føre deg inn i luftskipet.';
+      $('next-batch').hidden = true; view('result'); refresh(); $('replay-button').focus(); return;
+    }
     $('result-title').textContent = engine.world.tutorial ? 'Øvinga er fullført!' : F.level(config.level).name + ' er fullført!';
     $('result-text').textContent = engine.world.tutorial ? 'Du har øvd på ' + F.mode(engine.state.player.mode).name.toLowerCase() + '. Prøv ei hovudbane eller ein ny modus.' : engine.state.correct + ' rette vegval. ' + (score.newRecord ? 'Ny rekord! ' : '') + 'Rekord med desse vala: ' + score.best + '.';
     $('next-batch').hidden = engine.world.tutorial || selected.questions.length <= engine.world.count;
@@ -122,7 +132,7 @@
   }
   function hud() {
     const state = engine.state, choice = engine.activeChoice(), segment = engine.world.at(state.time);
-    $('run-label').textContent = state.correct + ' rette · forsøk ' + state.attempt;
+    $('run-label').textContent = engine.world.demo ? 'Baneprøve · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
     if (choice && state.status === 'running') {
       $('control-help').textContent = ['cube', 'robot'].includes(state.player.mode) ? 'Hopp opp på hylla for øvre svar. Bli på golvet for nedre.' : F.mode(state.player.mode).help;
       $('question-text').textContent = choice.item.prompt; $('question-help').textContent = 'Vel vegen før avgjerdslina · ' + choice.remaining.toFixed(1) + ' s';
@@ -131,8 +141,8 @@
       $('control-help').textContent = F.mode(state.player.mode).help;
       $('upper-answer').hidden = $('lower-answer').hidden = true;
       const untilSwitch = segment.end - state.time, nextMode = engine.world.segment(segment.index + 1).mode;
-      $('question-text').textContent = !engine.world.tutorial && untilSwitch < 1 ? 'Neste modus: ' + F.mode(nextMode).name : F.mode(state.player.mode).name;
-      $('question-help').textContent = engine.world.tutorial ? F.mode(state.player.mode).help : 'Pass hinderpartiet. Spørsmålet kjem på ei trygg strekning.';
+      $('question-text').textContent = engine.world.demo ? 'ReTraY · opninga' : !engine.world.tutorial && untilSwitch < 1 ? 'Neste modus: ' + F.mode(nextMode).name : F.mode(state.player.mode).name;
+      $('question-help').textContent = engine.world.demo ? 'Hopp i takt gjennom piggar og marmorterrassar.' : engine.world.tutorial ? F.mode(state.player.mode).help : 'Pass hinderpartiet. Spørsmålet kjem på ei trygg strekning.';
     }
   }
   function loop(now) {
@@ -140,7 +150,7 @@
     const elapsed = Math.max(0, (now - previous) / 1000); previous = now;
     let alpha = 1;
     if (!paused && countdown <= now) {
-      if (countdown) { countdown = 0; render.snap(engine.state); $('game-overlay').hidden = true; input.enable(true); F.Audio.resume(engine.world.at(engine.state.time).scene); }
+      if (countdown) { countdown = 0; render.snap(engine.state); $('game-overlay').hidden = true; input.enable(true); F.Audio.resume(engine.world.musicScene ?? engine.world.at(engine.state.time).scene); }
       if (elapsed > 0.25) pause('Spelet tok ein pust i bakken. Hald fram når du er klar.');
       else alpha = clock.advance(elapsed, () => { const control = input.read(); engine.step(control); render.update(engine.state, control); processEvents(); }).alpha;
     } else if (!paused && countdown) $('overlay-title').textContent = 'Klar om ' + Math.ceil((countdown - now) / 1000);
@@ -154,7 +164,7 @@
   function resume() {
     if (currentView !== 'game' || !paused || document.hidden) return;
     paused = false; countdown = performance.now() + 2000; input.enable(false); clock.clear(); $('overlay-title').textContent = 'Klar om 2'; $('resume-button').hidden = true;
-    F.Audio.init(engine.world.at(engine.state.time).scene).catch(error => Vy.toast(error.message));
+    F.Audio.init(engine.world.musicScene ?? engine.world.at(engine.state.time).scene).catch(error => Vy.toast(error.message));
     if (engine.state.status === 'dead') { engine.reset(); F.Audio.rewind(); render.reset(config, engine.state); processEvents(); }
   }
   function syncSound() { $('game-sound').textContent = config.sound ? 'Ljod på' : 'Ljod av'; $('game-sound').setAttribute('aria-pressed', String(config.sound)); $('sound-input').checked = config.sound; }
@@ -165,7 +175,7 @@
   $('pause-button').addEventListener('click', () => paused ? resume() : pause()); $('resume-button').addEventListener('click', resume);
   $('restart-button').addEventListener('click', restart);
   $('new-round-button').addEventListener('click', () => start({ ...config, seed: Vy.newSeed(), offset: 0 }));
-  $('leave-button').addEventListener('click', () => { F.Storage.record(selected, config, engine.state); view('setup'); refresh(); });
+  $('leave-button').addEventListener('click', () => { if (!engine.world.demo) F.Storage.record(selected, config, engine.state); view('setup'); refresh(); });
   $('game-sound').addEventListener('click', () => { config.sound = !config.sound; F.Audio.setMuted(!config.sound); F.Storage.saveSettings({ ...getConfig(), sound: config.sound }); syncSound(); });
   $('fullscreen-button').hidden = !VyrdepilFullscreen.isSupported;
   $('fullscreen-button').addEventListener('click', () => VyrdepilFullscreen.toggle($('game-view'), 'landscape'));
