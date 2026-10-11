@@ -1,6 +1,6 @@
 (function (root) {
   'use strict';
-  const F = root.Fykefuga, WIDTH = 960, HEIGHT = 540, ANCHOR = 190;
+  const F = root.Fykefuga, WIDTH = 960, HEIGHT = 540, ANCHOR = 190, SURFACE_LEAD = 8;
   const scenes = ['marmor', 'urverk', 'spegel', 'orgel'];
   const wrap = (value, period) => ((value % period) + period) % period;
   function positions(camera, period, left = 0, right = WIDTH) {
@@ -52,8 +52,10 @@
       if (right <= left) return;
       ctx.save(); ctx.beginPath(); ctx.rect(left, y, right - left, height); ctx.clip();
       if (ceiling) { ctx.translate(0, y + height); ctx.scale(1, -1); }
-      // Clip a world-anchored texture. Growing/shrinking visible bounds never stretch it.
-      for (const tileX of positions(x - ANCHOR, floor.width, left, right)) ctx.drawImage(floor, tileX, ceiling ? 0 : y);
+      // The PNG has eight transparent pixels before its painted edge. Align
+      // that edge with the collision plane, including on the mirrored ceiling.
+      for (const tileX of positions(x - ANCHOR, floor.width, left, right))
+        ctx.drawImage(floor, tileX, ceiling ? -SURFACE_LEAD : y - SURFACE_LEAD);
       ctx.restore();
     }
     // Nine-slice-like rendering: the centre repeats while both painted ends

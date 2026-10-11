@@ -89,8 +89,6 @@
         ctx.translate(190, 300); ctx.scale(view.zoom, view.zoom); ctx.translate(-190, -view.focusY);
       }
       const floor = view.bottom + F.Physics.SIZE / 2, ceiling = view.top - F.Physics.SIZE / 2;
-      scenery.surface(ctx, state.x, floor, 64);
-      scenery.surface(ctx, state.x, ceiling - 64, 64, 0, 960, true);
       const choice = engine.activeChoice();
       if (choice) {
         ctx.fillStyle = 'rgba(255,253,245,.42)'; ctx.fillRect(0, 140, 960, 322);
@@ -120,9 +118,20 @@
             scenery.platform(ctx, state.x, obstacle.y, obstacle.h, x, x + obstacle.w); return;
           }
           const img = F.Assets.get(obstacle.kind + '.png');
-          if (img) ctx.drawImage(img, x, obstacle.y, obstacle.w, obstacle.h);
+          if (!img) return;
+          if (obstacle.kind === 'column') {
+            // Extend the painted shaft behind the moving ceiling/floor. Its
+            // hitbox stays fixed; only the hidden end grows with the camera.
+            const upper = obstacle.y + obstacle.h < (ceiling + floor) / 2;
+            const top = upper ? Math.min(obstacle.y, ceiling - 20) : obstacle.y;
+            const bottom = upper ? obstacle.y + obstacle.h : Math.max(obstacle.y + obstacle.h, floor + 20);
+            ctx.drawImage(img, x, top, obstacle.w, bottom - top);
+          } else ctx.drawImage(img, x, obstacle.y, obstacle.w, obstacle.h);
         });
       }
+      // The painted ledges cover the hidden ends of columns and anchor spikes.
+      scenery.surface(ctx, state.x, floor, 64);
+      scenery.surface(ctx, state.x, ceiling - 64, 64, 0, 960, true);
       const p = state.player, sprite = F.Assets.get(config.skin + '-' + p.mode + '.png');
       effects.behind(ctx, state);
       if (sprite) {
