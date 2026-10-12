@@ -27,9 +27,10 @@
       [upper, lower].forEach((node, index) => {
         const laneY = index ? lanes.lower : lanes.upper;
         const y = (300 + (laneY - screen.focusY) * screen.zoom + screen.shake) * height;
-        node.hidden = answerX < -30 || answerX > stage.clientWidth - 8 || y < 0 || y > stage.clientHeight;
+        node.hidden = answerX < -30 || y < 0 || y > stage.clientHeight;
         node.textContent = index ? choice.lower : choice.upper;
-        node.style.left = answerX + 'px'; node.style.top = y + 'px';
+        node.style.left = Math.min(answerX, stage.clientWidth - Math.max(node.offsetWidth, 58) - 8) + 'px';
+        node.style.top = y + 'px';
       });
     }
     return { update, hide };

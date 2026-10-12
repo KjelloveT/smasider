@@ -13,7 +13,7 @@
       start: index * PART_SECONDS, end,
       mode: ship ? 'ship' : 'cube', speed: SPEED,
       top: ship ? 186 : 142, bottom: ship ? 440 : 462,
-      zoom: ship ? 1.48 : 1.42, focus: ship ? 313 : 338,
+      zoom: ship ? 1.48 : 1.70, focus: ship ? 313 : 379,
       scene: Math.floor(index / 6), title: ['Terningopning', 'Luftskip', 'Marmortrapp', 'Siste svev'][Math.floor(index / 6)],
       questionAt: Infinity, gateAt: Infinity, obstacles: [] };
   });

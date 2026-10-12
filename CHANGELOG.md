@@ -14,7 +14,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
 ### Endra
 - Baneprøva har flate marmorklossar med høgoppløyst marmor og fullstendige akantusavslutningar på plattformer i alle lengder; golvet har måla forgylte kantar utan perspektiv eller grøne strekar. Sidevende rasterportalar har måla energisprekk, vandrande ljos og ei fram- og bakside som verkar òg når dei kryssar hinder. Ho har rytmeplasserte hinder, romslegare svarstrekningar, meir rom i bølgjegangen og tettare kamera i låge gangar. Fykefuga har visuelle kortval med bane- og figurbilete, døme frå spørsmålsetta og synlege val for lesetid. Bragdene står to i breidda på mobil og fire på større skjermar, øvingskorta bruker fleire kolonnar på breie skjermar, og «Vegval og framgang» er fjerna.
-- Terningen har ei varsam rulling på golvet frå fyrste sekund og rettar seg opp etter landing. Treffområdet er uendra.
+- Terningen har ei varsam rulling på golvet frå fyrste sekund og rettar seg opp etter landing. I Stereogangen kjem kameraet tettare på terningpartia medan golv og svarvegar held seg synlege. Treffområdet er uendra.
 - Ordaklok og Fykefuga bruker ein felles delingsmodul. Eksisterande Ordaklok-lenkjer blir framleis lesne.
 - Fykefuga har 61 prosent høgare fart og fire til seks hindergrupper i kvart spelparti, med hoppkombinasjonar og vekselvise flygeportar. Lesestrekningane held same lesetid.
 - Banemusikken bruker ferdige orkesteropptak på 65–83 sekund, med presise sløyfer, mjuke temabyte, bevart musikkposisjon ved pause og rask omstart. Spel-ljodane er eigne Web Audio-klangar. Hopp, landing og styring får større utbrot, sjokkbølgjer, framdrift og rørsleanimasjonar.

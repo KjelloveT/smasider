@@ -7,6 +7,9 @@ module.exports = function testStereo(F, check, pack) {
   check(world.segment(0).obstacles.length < world.segment(8).obstacles.length, 'Bana skal byggje seg opp frå ei enkel opning');
   check(world.at(18).scene === 1 && world.at(36).scene === 2 && world.at(54).scene === 3,
     'Kulisseskifta må fylgje musikken sine fire delar');
+  check(world.viewAt(1200).zoom > world.viewAt(7000).zoom + .2 &&
+    300 + (476 - world.viewAt(1200).focusY) * world.viewAt(1200).zoom < 480,
+    'Terningkameraet må kome nær utan å klippe golvet');
   for (let index = 0; index < world.count - 1; index++) {
     const section = world.segment(index);
     check(section.obstacles.every(obstacle => obstacle.x + obstacle.w < section.to - 2 * section.speed),
