@@ -71,6 +71,11 @@
       instruments.impact(time, 510, .085, .13); instruments.rustle(time, .1, .045, 2800);
     } else if (kind === 'land') {
       instruments.impact(time, 94, .1, .1); instruments.rustle(time, .075, .06, 1900);
+    } else if (kind === 'jump' && event.pad) {
+      instruments.impact(time, 185, .24, .19);
+      instruments.sweep(240, 660, .24, .10, time + .018, 'sine');
+      instruments.rustle(time, .20, .07, 4800);
+      [67, 74, 79].forEach((midi, i) => pluck(midi, i * .045, .27, .15, (i - 1) * .12));
     } else if (kind === 'jump') {
       instruments.rustle(time, .14, .11, mode === 'ufo' ? 4300 : 2400); instruments.impact(time, mode === 'robot' ? 210 : 145, .1, .07);
     }

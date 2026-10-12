@@ -5,7 +5,37 @@
     const ctx = canvas.getContext('2d', { alpha: false });
     const effects = F.Effects.create();
     const scenery = F.Scenery.create(), motion = F.Motion.create();
+    const activePads = new Map();
     let screen = null;
+    function springPad(ctx, image, obstacle, x, time, reduced) {
+      const floorY = obstacle.y + obstacle.h;
+      const elapsed = time - (activePads.get(obstacle.x) ?? -Infinity);
+      const active = elapsed >= 0 && elapsed < .5;
+      const spring = !active || reduced ? 0 : elapsed < .14
+        ? .23 * Math.sin(Math.PI * elapsed / .14)
+        : -.10 * Math.sin(Math.PI * Math.min(1, (elapsed - .14) / .36));
+      const height = obstacle.h * (1 - spring), top = floorY - height;
+      const glow = reduced ? 0 : active ? 1 - elapsed / .5 : .17 + .08 * Math.sin(time * 5 + obstacle.x * .01);
+      ctx.save();
+      if (glow > 0) { ctx.shadowColor = '#ffe290'; ctx.shadowBlur = 7 + glow * 18; }
+      ctx.drawImage(image, x, top, obstacle.w, height);
+      if (glow > 0) {
+        const jewel = ctx.createRadialGradient(x + obstacle.w / 2, top + height * .74, 1,
+          x + obstacle.w / 2, top + height * .74, 23 + glow * 12);
+        jewel.addColorStop(0, 'rgba(255,249,211,' + Math.min(.72, glow * .55).toFixed(3) + ')');
+        jewel.addColorStop(1, 'rgba(255,230,150,0)');
+        ctx.shadowBlur = 0; ctx.globalCompositeOperation = 'screen';
+        ctx.fillStyle = jewel; ctx.fillRect(x + obstacle.w * .2, top + height * .3, obstacle.w * .6, height * .7);
+      }
+      if (active && !reduced) {
+        ctx.globalCompositeOperation = 'screen';
+        ctx.strokeStyle = 'rgba(255,225,145,' + ((1 - elapsed / .5) * .7).toFixed(3) + ')';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.ellipse(x + obstacle.w / 2, floorY - 3,
+          obstacle.w * (.45 + elapsed * .6), 7 + elapsed * 13, 0, Math.PI, Math.PI * 2); ctx.stroke();
+      }
+      ctx.restore();
+    }
     function portal(ctx, section, state, world, config, finish = false, foreground = false) {
       const at = finish ? world.finishX : section.from;
       const x = 190 + at - state.x;
@@ -123,7 +153,8 @@
           }
           const img = F.Assets.get(obstacle.kind + '.png');
           if (!img) return;
-          if (obstacle.kind === 'column') {
+          if (obstacle.kind === 'pad') springPad(ctx, img, obstacle, x, state.time, config.reduced);
+          else if (obstacle.kind === 'column') {
             // Extend the painted shaft behind the moving ceiling/floor. Its
             // hitbox stays fixed; only the hidden end grows with the camera.
             const upper = obstacle.y + obstacle.h < (ceiling + floor) / 2;
@@ -168,8 +199,12 @@
         ctx.fillStyle = '#8a5b25'; ctx.fillRect(0, 534, 960 * Math.min(1, state.time / world.end), 6);
       }
     }
-    return { draw, get screen() { return screen; }, snap: state => motion.snap(state), reset(config, state) { scenery.prepare(); motion.reset(state); effects.reset(config); },
-      update(state, input) { motion.update(state); effects.update(state, input); }, notify: (event, state) => effects.notify(event, state) };
+    return { draw, get screen() { return screen; }, snap: state => motion.snap(state), reset(config, state) {
+      scenery.prepare(); motion.reset(state); effects.reset(config); activePads.clear();
+    }, update(state, input) { motion.update(state); effects.update(state, input); }, notify(event, state) {
+      if (event.pad && event.padX !== undefined) activePads.set(event.padX, state.time);
+      effects.notify(event, state);
+    } };
   }
   F.Render = { create };
 })(window);

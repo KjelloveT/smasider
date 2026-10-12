@@ -67,17 +67,27 @@
       }
       const before = { velocity: p.velocity, grounded: p.grounded, gravity: p.gravity, y: p.y };
       const next = world.demo && state.segment < world.count - 1 ? world.segment(state.segment + 1) : null;
-      if (world.demo && segment.auto && (world.previewRoute || !next || state.time < next.start - 2)) {
+      if (world.demo && segment.auto && (world.previewRoute || !next || state.time < next.start - (world.readingSeconds || 2))) {
         p.previousY = p.y; p.y = world.autoTarget(segment, state.x, p, corridor);
         p.velocity = (p.y - p.previousY) / F.Physics.STEP;
         p.grounded = segment.mode === 'cube' && p.y >= corridor.bottom - .5;
       } else F.Physics.update(p, input, corridor);
+      let bounced = false;
+      if (world.demo && p.mode === 'cube' && p.grounded) {
+        const pad = segment.obstacles.find(item => item.kind === 'pad' &&
+          state.x + F.Physics.SIZE / 2 >= item.x && oldX - F.Physics.SIZE / 2 <= item.x + item.w);
+        if (pad) {
+          p.velocity = -1180; p.grounded = false;
+          bounced = true;
+          state.events.push({ type: 'jump', mode: p.mode, pad: true, padX: pad.x });
+        }
+      }
       // Ei einvegshylle gjev hoppmodusane ein stabil øvre svarveg.
       if (!world.tutorial && ['cube', 'robot'].includes(segment.mode) && state.time >= segment.questionAt + 0.5 && state.time <= segment.gateAt + 0.1) {
         const p = state.player, surface = 336;
         if (p.previousY <= surface && p.y >= surface && p.velocity >= 0) { p.y = surface; p.velocity = 0; p.grounded = true; }
       }
-      if (!segment.auto && (p.mode === 'ufo' && input.pressed || ['cube', 'robot'].includes(p.mode) && before.grounded && p.velocity < -400)) state.events.push({ type: 'jump', mode: p.mode });
+      if (!bounced && !segment.auto && (p.mode === 'ufo' && input.pressed || ['cube', 'robot'].includes(p.mode) && before.grounded && p.velocity < -400)) state.events.push({ type: 'jump', mode: p.mode });
       if (p.mode === 'spider' && before.y !== p.y) state.events.push({ type: 'teleport', mode: p.mode, fromY: before.y });
       else if (before.gravity !== p.gravity) state.events.push({ type: 'turn', mode: p.mode });
       // On the ReTraY study, solid marble steps can be landed on from above.
@@ -92,6 +102,7 @@
       }
       if (!before.grounded && p.grounded && Math.abs(before.velocity) > 150) state.events.push({ type: 'land', mode: p.mode });
       if (segment.obstacles.some(obstacle => {
+        if (obstacle.kind === 'pad') return false;
         if (obstacle === landed) return false;
         if (obstacle.kind === 'platform' && p.previousY <= obstacle.y - F.Physics.SIZE / 2 + .01 && p.y <= obstacle.y - F.Physics.SIZE / 2 + .01) return false;
         return F.Physics.collision(oldX, state.x, p, obstacle);

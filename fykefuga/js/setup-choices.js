@@ -15,13 +15,15 @@
       const box = Vy.el('span', 'ff-choice-preview');
       box.setAttribute('aria-hidden', 'true');
       if (selectId === 'level-select' || selectId === 'preview-theme') {
-        if (value === 'retray-probe' || value === 'stereo-study') { box.append(picture(value === 'stereo-study' ? 'spegel.jpg' : 'marmor.jpg')); }
+        if (value === 'retray-probe' || value === 'stereo-study' || value === 'back-on-track-study') {
+          box.append(picture(value === 'stereo-study' ? 'spegel.jpg' : value === 'back-on-track-study' ? 'urverk.jpg' : 'marmor.jpg'));
+        }
         else if (value.startsWith('tutorial-')) {
           box.classList.add('ff-choice-preview--figures'); box.append(picture('gold-' + value.slice(9) + '.png'));
         } else if (value === 'endless') {
           box.classList.add('ff-choice-preview--scenes'); scenes.forEach(scene => box.append(picture(scene + '.jpg')));
         } else {
-          const scene = selectId === 'preview-theme' ? value === '5' ? 'spegel' : scenes[Number(value)] || 'marmor' : value;
+          const scene = selectId === 'preview-theme' ? value === '5' ? 'spegel' : value === '6' ? 'urverk' : scenes[Number(value)] || 'marmor' : value;
           box.append(picture(scene + '.jpg'));
         }
       } else if (selectId === 'skin-select') {
@@ -49,6 +51,7 @@
         if (option.value === 'endless') return 'Ei ny rekkje kvar runde';
         if (option.value === 'retray-probe') return 'Portalar og hinder med elleve gangestykke frå 6- til 13-gongen.';
         if (option.value === 'stereo-study') return 'Lettare terning- og luftskipbane med 22 gangestykke frå 2- til 9-gongen og eigen heilskapleg musikk.';
+        if (option.value === 'back-on-track-study') return 'Terning, sprettplater og eitt luftskipstrekk med 23 hovudstader i Europa.';
         if (option.value.startsWith('tutorial-')) return 'Øving i éin modus';
         return F.level(option.value).description;
       }

@@ -131,3 +131,6 @@ body.ff-playing #game-view:fullscreen { background: #fff9e9; display: flex; flex
   .ff-bragder .vp-bragd-card { padding-inline: 8px; }
   .ff-tutorials { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* The fixed level picker is the only setup panel while the learner tools are hidden. */
+.ff-setup { grid-template-columns: minmax(0, 1fr); }

@@ -6,6 +6,7 @@
   const retrayHud = F.ReTrayHud.create($('game-stage'));
   const clock = F.Physics.accumulator(), input = F.Input.create($('game-stage'), restart, () => paused ? resume() : pause('Spelet er sett på pause.'));
   const settings = F.Storage.settings();
+  const demoLevels = ['retray-probe', 'stereo-study', 'back-on-track-study'];
   const soundControls = F.SoundControls.create(settings, () => F.Storage.saveSettings(getConfig()));
   function view(name) {
     currentView = name;
@@ -19,12 +20,14 @@
   }
   $('dialog-close').addEventListener('click', () => Vy.closeModal($('utility-dialog')));
   function options(select, includeTutorials) {
-    const levels = F.levels.concat([{ id: 'endless', name: 'Endelaus fuga' }]);
-    if (includeTutorials) levels.push({ id: 'stereo-study', name: 'Stereogangen · Stereo Madness-studie' }, { id: 'retray-probe', name: 'ReTraY · baneprøve' });
+    const levels = [
+      { id: 'retray-probe', name: 'ReTraY' },
+      { id: 'stereo-study', name: 'Stereogangen' },
+      { id: 'back-on-track-study', name: 'Hovudstadsporet' }
+    ];
     levels.forEach(level => select.add(new Option(level.name, level.id)));
-    if (includeTutorials) F.modes.forEach(mode => select.add(new Option('Øving: ' + mode.name, 'tutorial-' + mode.id)));
   }
-  options($('level-select'), true); options($('editor-level'));
+  options($('level-select')); options($('editor-level'));
   const setupChoices = F.SetupChoices.create();
   function refresh() {
     const old = $('pack-select').value;
@@ -36,22 +39,22 @@
     const oldSkin = $('skin-select').value || settings.skin || 'gold'; $('skin-select').replaceChildren();
     F.skins.forEach(skin => { const option = new Option(skin.name + (F.Storage.unlocked(skin.id) ? '' : ' · låst'), skin.id); option.disabled = !F.Storage.unlocked(skin.id); $('skin-select').add(option); });
     $('skin-select').value = F.Storage.unlocked(oldSkin) ? oldSkin : 'gold';
-    const progress = F.Storage.progressData(); $('progress-label').textContent = progress.correct + ' rette vegval · ' + progress.levels.length + '/4 hovudbaner · ' + progress.modes.length + '/8 modusar meistra';
-    VyrdepilBragd.renderGameBadges($('bragder'), 'fykefuga', F.Storage.earned()).catch(() => { $('bragder').textContent = 'Bragdlista kunne ikkje lastast. Last sida på nytt.'; });
+    $('progress-label').textContent = 'Kjem snart.';
+    $('bragder').hidden = true;
     setupChoices.refresh(packs); updateSetup();
   }
   function getConfig() {
     const level = $('level-select').value;
-    const difficulty = level === 'endless' ? Number($('difficulty-select').value) : level.startsWith('tutorial-') || ['retray-probe', 'stereo-study'].includes(level) ? 0 : F.level(level).difficulty;
+    const difficulty = level === 'endless' ? Number($('difficulty-select').value) : level.startsWith('tutorial-') || demoLevels.includes(level) ? 0 : F.level(level).difficulty;
     return { level, reading: Number($('reading-select').value), difficulty, skin: $('skin-select').value, reduced: $('reduced-input').checked, sound: $('sound-input').checked, ...soundControls.values() };
   }
   function updateSetup() {
     if (!selected) return;
     setupChoices.sync();
-    const c = getConfig(), probe = ['retray-probe', 'stereo-study'].includes(c.level);
-    $('difficulty-field').hidden = c.level !== 'endless';
-    $('pack-select-choices').hidden = probe; $('pack-description').hidden = probe;
-    $('reading-select-choices').hidden = probe; $('record-label').hidden = probe;
+    const c = getConfig(), probe = demoLevels.includes(c.level);
+    $('difficulty-field').hidden = true;
+    $('pack-select-choices').hidden = true; $('pack-description').hidden = true;
+    $('reading-select-choices').hidden = true; $('record-label').hidden = true;
     $('pack-description').textContent = selected.questions.length + ' korte spørsmål. Tilrådde val kan justerast.';
     $('shared-note').hidden = probe || selected !== sharedPack; $('save-shared').hidden = probe || selected !== sharedPack;
     $('record-label').textContent = 'Rekord med desse vala: ' + F.Storage.best(selected, c) + ' rette vegval.';
@@ -70,20 +73,15 @@
   if (Array.from($('level-select').options).some(option => option.value === settings.level)) $('level-select').value = settings.level;
   if ([2, 4, 6].includes(settings.reading)) $('reading-select').value = settings.reading;
   if ([0, 1, 2].includes(settings.difficulty)) $('difficulty-select').value = settings.difficulty;
-  F.modes.forEach(mode => {
-    const button = Vy.el('button', 'vp-button vp-button--compact');
-    const image = document.createElement('img'); image.src = 'assets/gold-' + mode.id + '.png'; image.alt = ''; image.width = 40; image.height = 40;
-    button.append(image, Vy.el('span', '', mode.name)); button.title = mode.help; button.addEventListener('click', () => { $('level-select').value = 'tutorial-' + mode.id; start(); }); $('tutorials').appendChild(button);
-  });
   async function start(nextConfig) {
     if ($('start-button').disabled) return;
     const issues = F.Questions.validate(selected);
-    if (issues.length && !getConfig().level.startsWith('tutorial-') && !['retray-probe', 'stereo-study'].includes(getConfig().level)) { $('setup-message').textContent = 'Settet må rettast: ' + issues[0].message; $('setup-message').hidden = false; return; }
+    if (issues.length && !getConfig().level.startsWith('tutorial-') && !demoLevels.includes(getConfig().level)) { $('setup-message').textContent = 'Settet må rettast: ' + issues[0].message; $('setup-message').hidden = false; return; }
     $('start-button').disabled = true; $('setup-message').textContent = 'Lastar farkostar, kulissar og musikk …'; $('setup-message').hidden = false;
     try {
       config = nextConfig || { ...getConfig(), seed: Vy.newSeed(), offset: 0 };
-      if (config.level !== 'endless' && !config.level.startsWith('tutorial-') && !['retray-probe', 'stereo-study'].includes(config.level)) config.difficulty = F.level(config.level).difficulty;
-      const musicScene = config.level === 'stereo-study' ? 5 : config.level === 'retray-probe' ? 4 : config.level === 'endless' || config.level.startsWith('tutorial-') ? 0 : F.level(config.level).scene;
+      if (config.level !== 'endless' && !config.level.startsWith('tutorial-') && !demoLevels.includes(config.level)) config.difficulty = F.level(config.level).difficulty;
+      const musicScene = config.level === 'back-on-track-study' ? 6 : config.level === 'stereo-study' ? 5 : config.level === 'retray-probe' ? 4 : config.level === 'endless' || config.level.startsWith('tutorial-') ? 0 : F.level(config.level).scene;
       soundControls.stopPreview(); await F.Audio.init(musicScene); F.Audio.setVolumes(config.musicVolume, config.effectsVolume); F.Audio.setMuted(!config.sound); await F.Assets.load();
       if (document.hidden) throw new Error('Kom attende til fana og start spelet når du er klar.');
       $('setup-message').hidden = true;
@@ -123,8 +121,8 @@
   function complete() {
     const score = engine.world.demo ? { best: 0, newRecord: false } : F.Storage.record(selected, config, engine.state);
     if (engine.world.demo) {
-      $('result-title').textContent = config.level === 'stereo-study' ? 'Stereogangen er fullført!' : 'Baneprøva er fullført!';
-      $('result-text').textContent = engine.state.correct + ' rette gangestykke og heile bana fullført.';
+      $('result-title').textContent = config.level === 'back-on-track-study' ? 'Hovudstadsporet er fullført!' : config.level === 'stereo-study' ? 'Stereogangen er fullført!' : 'Baneprøva er fullført!';
+      $('result-text').textContent = engine.state.correct + (config.level === 'back-on-track-study' ? ' rette hovudstader' : ' rette gangestykke') + ' og heile bana fullført.';
       $('next-batch').hidden = true; view('result'); refresh(); $('replay-button').focus(); return;
     }
     $('result-title').textContent = engine.world.tutorial ? 'Øvinga er fullført!' : F.level(config.level).name + ' er fullført!';
@@ -134,7 +132,7 @@
   }
   function hud() {
     const state = engine.state, choice = engine.activeChoice();
-    $('run-label').textContent = engine.world.demo ? (config.level === 'stereo-study' ? 'Stereogangen' : 'Baneprøve') + ' · ' + state.correct + '/' + (engine.world.count - 1) + ' rette · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
+    $('run-label').textContent = engine.world.demo ? (config.level === 'back-on-track-study' ? 'Hovudstadsporet' : config.level === 'stereo-study' ? 'Stereogangen' : 'Baneprøve') + ' · ' + state.correct + '/' + (engine.world.count - 1) + ' rette · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
     if (engine.world.demo) {
       $('question-board').hidden = $('upper-answer').hidden = $('lower-answer').hidden = true;
       $('control-help').textContent = F.mode(state.player.mode).help;

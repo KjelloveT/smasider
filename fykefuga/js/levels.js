@@ -31,6 +31,7 @@
   function create(config) {
     if (config.level === 'retray-probe') return F.ReTray.create(config);
     if (config.level === 'stereo-study') return F.Stereo.create(config);
+    if (config.level === 'back-on-track-study') return F.BackOnTrack.create(config);
     const tutorial = config.level.startsWith('tutorial-');
     const endless = config.level === 'endless';
     const level = F.level(config.level);

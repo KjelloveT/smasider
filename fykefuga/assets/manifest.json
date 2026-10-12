@@ -193,6 +193,13 @@
       "sha256": "1cf63f0b39b4294230dca217a51abe80a24c39d55e0853422f8b66a639bfdaf8"
     },
     {
+      "file": "pad.png",
+      "width": 420,
+      "height": 151,
+      "bytes": 13917,
+      "sha256": "f46fd044cc09ba15a9c83916c6e5150e95ce81ddc891ccfb08efa016d3bb2a1e"
+    },
+    {
       "file": "platform-panel.png",
       "width": 1657,
       "height": 192,

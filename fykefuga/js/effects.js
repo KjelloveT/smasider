@@ -37,9 +37,11 @@
       }
       if (event.type === 'pace') { ring(state.x, p.y, 65, .35); burst(state.x, p.y, 18, 160); }
       if (event.type === 'jump') {
-        kick = .24; const y = p.y + 16;
-        burst(state.x - 5, y, p.mode === 'ufo' ? 26 : 22, 210, 'dust', -Math.PI / 2);
-        burst(state.x, y, 10, 180, 'spark', Math.PI); ring(state.x, y, 58, .32, .24);
+        kick = event.pad ? .34 : .24; const y = p.y + (event.pad ? 27 : 16);
+        burst(state.x - 5, y, event.pad ? 38 : p.mode === 'ufo' ? 26 : 22,
+          event.pad ? 330 : 210, event.pad ? 'spark' : 'dust', -Math.PI / 2);
+        burst(state.x, y, event.pad ? 20 : 10, 180, 'spark', Math.PI);
+        ring(state.x, y, event.pad ? 88 : 58, event.pad ? .48 : .32, .24);
       }
       if (event.type === 'land') { kick = -.18; burst(state.x, p.y + 13 * p.gravity, 26, 220, 'dust', -p.gravity * Math.PI / 2); ring(state.x, p.y + 14 * p.gravity, 64, .3, .16); }
       if (event.type === 'turn') { kick = .18; steering = .25; ring(state.x, p.y, 58, .3, 1); burst(state.x, p.y, 20, 165); }

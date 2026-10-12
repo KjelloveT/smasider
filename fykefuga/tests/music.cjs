@@ -5,9 +5,9 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '../..');
 let checks = 0;
 function check(value, label) { assert.ok(value, label); checks++; }
-const manifest = { tracks: [0, 1, 2, 3, 4, 5].map(scene => ({ scene, title: 'tema-' + scene,
+const manifest = { tracks: [0, 1, 2, 3, 4, 5, 6].map(scene => ({ scene, title: 'tema-' + scene,
   file: 'theme-' + scene + '.mp3', frames: 44100, sampleRate: 44100,
-  loop: scene === 5 ? false : true,
+  loop: scene >= 5 ? false : true,
   encoderDelayFrames: 1105, bpm: 160 + scene * 8, beats: scene === 2 ? 3 : 4,
   alignment: { startFrame: 256, step: 4, samples: Array.from({ length: 64 }, (_, i) =>
     Math.round(signal((256 + i * 4) / 44100, scene) * 32767)) } })) };
@@ -42,7 +42,7 @@ function audioContext(rate, padding) {
     } };
   return context;
 }
-let fail = false, offline = false, fetches = 0, mixes = 0, effects = 0;
+let fail = false, offline = false, fetches = 0, mixes = 0, effects = 0, sweeps = 0;
 const context = vm.createContext({ URL, console, setTimeout, clearTimeout, setInterval, clearInterval,
   document: { currentScript: { src: 'http://localhost/fykefuga/js/music.js' } },
   Vy: { toast(message) { throw new Error('Unexpected toast: ' + message); } },
@@ -61,7 +61,7 @@ const wait = milliseconds => new Promise(resolve => setTimeout(resolve, millisec
   await Promise.all([F.Music.load(), F.Music.load()]);
   for (const rate of [44100, 48000]) for (const padding of [false, true]) {
     const audio = audioContext(rate, padding);
-    for (let scene = 0; scene < 6; scene++) {
+    for (let scene = 0; scene < 7; scene++) {
       const entry = await F.Music.prepare(audio, scene);
       check(entry.similarity > .99, 'Wrong MP3 alignment');
       check(Math.abs(entry.loopEnd - entry.loopStart - 1) < 1 / rate, 'Wrong loop duration');
@@ -94,15 +94,22 @@ const wait = milliseconds => new Promise(resolve => setTimeout(resolve, millisec
   check(player.status().voices === 0 && player.status().position === 1,
     'Den heile Stereo-satsen skal stogge ved avslutninga');
   player.stop(); audio.advance(.03);
+  await player.start(6); audio.advance(.4);
+  check(audio.sources.at(-1).loop === false && player.status().scene === 6,
+    'Hovudstadsporet må starte sin eigen sats utan sløyfe');
+  player.stop(); audio.advance(.03);
   const real = audioContext(44100, false);
   context.AudioContext = function () { return real; };
   F.Mixer = { create() { mixes++; return { master: real.createGain(), music: real.createGain(), effects: real.createGain(),
-    instruments: { clear() {}, note() { effects++; }, impact() { effects++; }, rustle() { effects++; } } }; } };
+    instruments: { clear() {}, note() { effects++; }, impact() { effects++; }, rustle() { effects++; },
+      sweep() { effects++; sweeps++; } } }; } };
   vm.runInContext(fs.readFileSync(path.join(root, 'fykefuga/js/audio.js'), 'utf8'), context);
   await Promise.all([F.Audio.init(0), F.Audio.init(0)]);
   check(mixes === 1, 'Concurrent init creates duplicate mixer');
   F.Audio.setMuted(false); F.Audio.setVolumes(0, 80); F.Audio.start(0); await wait(1);
   F.Audio.effect('jump'); check(effects > 0, 'Music zero also mutes game effects');
+  F.Audio.effect({ type: 'jump', mode: 'cube', pad: true });
+  check(sweeps === 1, 'Sprettplata må ha eit eige fjør-ljod');
   const previous = effects; F.Audio.setVolumes(65, 0); F.Audio.effect('jump');
   check(effects === previous, 'Effects zero does not mute effects');
   F.Audio.setVolumes(65, 80); F.Audio.setMuted(true); F.Audio.effect('answer');
