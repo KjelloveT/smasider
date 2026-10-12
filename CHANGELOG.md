@@ -3,6 +3,34 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.2] — 2026-10-12
+
+### Lagt til
+- **Fykefuga**: eit barokk fartsspel med åtte rørslemodusar, åtte øvingsbaner, fire hovudbaner og endelaus fuga. Korte fagspørsmål avgjer kva svarveg eleven skal styre gjennom.
+- Lærarbibliotek med eigne spørsmål, innlimte ordpar, Ordaklok-import, førehandsvising, JSON-filer og delingslenkjer. Rekordar, kosmetikk og fire felles bragder blir lagra lokalt.
+- **Sorgsalane**: ei nesten umogleg bane med vanskelege hopp og vanskelegare multiplikasjon, bygd som ei spelbar tolking av ReTraY-løypa. Ho har alle modusportane, elleve gangestykke og ein original strykarloop på 108 slag i minuttet. Kvart gangestykke kjem to sekund før eit øvre eller nedre portval; feil svar startar bana på nytt med same stykke og eit nytt feilalternativ.
+- **Villrina i Gyllengarden**: den enklaste bana, med enkel multiplikasjon og ei handbygd terning–luftskip–terning–luftskip-form inspirert av Stereo Madness. 22 gangestykke frå 2- til 9-gongen blir trekte ved ny banestart; feilalternativ og svarside skiftar ved død. Ein original 72-sekundars Spitfire-sats følgjer dei fire delane utan musikksløyfe.
+- **Eidskvedet**: ei middels vanskeleg bane der eleven koplar europeiske land med hovudstadene deira, inspirert av Back on Track. Ho varer 84 sekund og har terning, sprettplater, eitt luftskipstrekk og 23 vegval. Landnamna står åleine, og eit nytt feilalternativ kjem ved kvart forsøk. Eit eige orkesterstykke varer heile bana utan sløyfe.
+- Originale genererte rasterressursar og fire originale Spitfire-barokksatsar med innspelte fiolinar, bratsj og cello, og separate volumval for musikk og spel-ljod. Farkostane har spor, lysband, eksos og eigne reaksjonar ved hopp, landing og teletransport.
+
+### Endra
+- Sorgsalane har flate marmorklossar med høgoppløyst marmor og fullstendige akantusavslutningar på plattformer i alle lengder; golvet har måla forgylte kantar utan perspektiv eller grøne strekar. Sidevende rasterportalar har måla energisprekk, vandrande ljos og ei fram- og bakside som verkar òg når dei kryssar hinder. Baneprøva har rytmeplasserte hinder, romslegare svarstrekningar, meir rom i bølgjegangen og tettare kamera i låge gangar. Fykefuga har visuelle kortval med bane- og figurbilete, døme frå spørsmålsetta og synlege val for lesetid. Bragdene står to i breidda på mobil og fire på større skjermar, øvingskorta bruker fleire kolonnar på breie skjermar, og «Vegval og framgang» er fjerna.
+- Terningen har ei varsam rulling på golvet frå fyrste sekund og rettar seg opp etter landing. I Villrina i Gyllengarden kjem kameraet tettare på terningpartia medan golv og svarvegar held seg synlege. Treffområdet er uendra.
+- Sprettplatene i Eidskvedet er større og forankra i golvet. Dei fjørar, lyser og sender ut glimt ved treff, med eit eige mekanisk sprettljod.
+- Ordaklok og Fykefuga bruker ein felles delingsmodul. Eksisterande Ordaklok-lenkjer blir framleis lesne.
+- Fykefuga har 61 prosent høgare fart og fire til seks hindergrupper i kvart spelparti, med hoppkombinasjonar og vekselvise flygeportar. Lesestrekningane held same lesetid.
+- Startvisinga i Fykefuga viser no berre Villrina i Gyllengarden, Eidskvedet og Sorgsalane, frå enklast til vanskelegast. Spørsmålssett, lesetid, modusøvingar og lærarbibliotek er tekne ut av elevmenyen; bragdane kjem seinare.
+- Banemusikken bruker ferdige orkesteropptak på 65–83 sekund, med presise sløyfer, mjuke temabyte, bevart musikkposisjon ved pause og rask omstart. Spel-ljodane er eigne Web Audio-klangar. Hopp, landing og styring får større utbrot, sjokkbølgjer, framdrift og rørsleanimasjonar.
+
+### Fiksa
+- Figurspritar er isolerte i polstra celler utan bitar av nabomotiv. Rørslespor bruker lysband i staden for overlappande figurkopiar. Rekordar frå den tidlegare, langsamare hinderbanken blir haldne skilde.
+
+- Fykefuga rullar jamt mellom fysikkstega. Bakgrunnane har samanhengande skøytar og blir førebudde før start; dekor bevarer proporsjonane, og golv og svarhyller har faste teksturar. Kula og svingfarkosten snur utan vinkelhopp.
+- Synlege treffområderammer rundt hindera i Fykefuga er fjerna.
+- Svartala ved portalane er større og blir plasserte på skjermpikslane utan teksttransformasjon, så dei held seg skarpare i rørsle.
+- Det gjennomsiktige søylelaget som dreiv framfor bakgrunnen i Fykefuga, er fjerna.
+- Golv og tak byrjar ved kollisjonsflata, så piggar og plattformer ikkje svevar. Søylehinder går inn bak golv og tak sjølv når kamerahøgda endrar seg.
+
 ## [2.1] — 2026-10-09
 
 ### Lagt til

@@ -11,6 +11,8 @@ Utgåve 1.2 · 2. oktober 2026. Brukarvald retning for heile Vyrdepil.
 
 ## Identitet og ressursar
 
+**Fykefuga har eit eksplisitt brukaravtalt barokkunntak.** Spelverda, applogoen, menyane og lærarverktøyet bruker eigne genererte rasterbilete med forgylte urverk, marmor og brokade. Ingen SVG blir brukt til spelgrafikk eller barokkdekor. Felles skyheader, appmeny, Bragd-komponent, knappar, felt, dialogar og fokusfunksjonar blir brukte vidare, med svart tekst på lyse flater. Unntaket gjeld berre Fykefuga og endrar ikkje standarden for andre appar.
+
 - **Måla flater** er vald logostil: breie måla fasettar, litt ujamn mørk kontur, naturlege materialfargar, avgrensa tekstur og få tydelege detaljar. Nye applogoar skal følgje den etablerte logofamilien i `_resources/vyrdepil-design/logos/`, saman med stein-Vyrde. Namn skal vere ekte HTML-tekst, ikkje generert tekst inni logoen.
 - Stein-Vyrde i `_resources/vyrdepil-design/vyrde.png` er maskotten i toppmeny, appmeny og ved hero. Alle katalogførte appar, også skjulte appar med direkte ruter, skal ha logo i stilen Måla flater. Logoavgjerdene som er stadfesta i gjennomgangen: Duldord og Ordkryss held på tidlegare logo; Heimsank held på originalen; Frødebrett får Jeopardy-liknande spørsmålsrute; Leitekryss får eit ringa ord.
 - Ressursane i `_resources/vyrdepil-design/` er felles. Bruk dei eksisterande filene; ikkje generer eit nytt skilt, stolpebilete eller ornament for kvart oppdrag.

@@ -27,6 +27,14 @@
     }
   ],
   "apps": {
+    "fykefuga": {
+      "badges": [
+        { "id": "fyrste-bane", "name": "Fyrste fuga", "hint": "Fullfør ei hovudbane", "family": "milepael", "icon": "flag-pole" },
+        { "id": "alle-banene", "name": "Slottsmeister", "hint": "Fullfør alle fire hovudbanene", "family": "meistring", "icon": "certificate-seal" },
+        { "id": "alle-modusane", "name": "Åtte farkostar", "hint": "Fullfør ei øving eller eit rett vegval i kvar av dei åtte modusane", "family": "utforsking", "icon": "wooden-blocks" },
+        { "id": "tjuefem-vegval", "name": "Langfykaren", "hint": "Vel rett veg 25 gonger i eitt endelaust løp", "family": "uthald", "icon": "speed-stopwatch" }
+      ]
+    },
     "heimsank": {
       "badges": [
         {

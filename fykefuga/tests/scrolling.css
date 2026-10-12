@@ -1,0 +1,8 @@
+body { margin:0; background:#fff9e9; color:#000; font:16px/1.4 system-ui,sans-serif; }
+main { width:min(960px,calc(100% - 32px)); margin:16px auto; }
+h1 { font-size:clamp(20px,3vw,28px); margin:0; }
+canvas { display:block; width:100%; aspect-ratio:16/9; margin:16px 0; border:2px solid #142820; box-sizing:border-box; }
+button,select,input { font:inherit; }
+button,select { background:#fff6ce; color:#000; padding:8px 12px; border:2px solid #142820; border-radius:6px; }
+input { width:100%; }
+:focus-visible { outline:3px solid #8a5b25; outline-offset:2px; }
