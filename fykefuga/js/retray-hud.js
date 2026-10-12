@@ -1,6 +1,7 @@
 (function (root) {
   'use strict';
   const F = root.Fykefuga;
+  const snap = value => Math.round(value * (root.devicePixelRatio || 1)) / (root.devicePixelRatio || 1);
   function create(stage) {
     const question = stage.querySelector('[data-retray-question]');
     const upper = stage.querySelector('[data-retray-upper]');
@@ -10,7 +11,7 @@
       if (!choice || !screen) { hide(); return; }
       const width = stage.clientWidth / 960, height = stage.clientHeight / 540;
       const x = screen.x * width;
-      question.textContent = choice.item.prompt;
+      if (question.textContent !== choice.item.prompt) question.textContent = choice.item.prompt;
       question.hidden = false;
       question.style.left = x + 'px';
       const above = (screen.playerY - 31 * screen.zoom) * height;
@@ -27,10 +28,12 @@
       [upper, lower].forEach((node, index) => {
         const laneY = index ? lanes.lower : lanes.upper;
         const y = (300 + (laneY - screen.focusY) * screen.zoom + screen.shake) * height;
+        const answer = String(index ? choice.lower : choice.upper);
+        if (node.textContent !== answer) node.textContent = answer;
         node.hidden = answerX < -30 || y < 0 || y > stage.clientHeight;
-        node.textContent = index ? choice.lower : choice.upper;
-        node.style.left = Math.min(answerX, stage.clientWidth - Math.max(node.offsetWidth, 58) - 8) + 'px';
-        node.style.top = y + 'px';
+        if (node.hidden) return;
+        node.style.left = snap(Math.min(answerX, stage.clientWidth - node.offsetWidth - 8)) + 'px';
+        node.style.top = snap(y - node.offsetHeight / 2) + 'px';
       });
     }
     return { update, hide };

@@ -19,6 +19,7 @@
         { "t": "fiksa", "kva": "Figurar", "tekst": "Isolerte spritar utan nabobitar eller overlappande figurkopiar. Rekordar frå den langsamare utgåva blir skilde frå dei nye." },
         { "t": "fiksa", "kva": "Rulling i Fykefuga", "tekst": "Samanhengande bakgrunnsskøytar, jamn rørsle mellom fysikkstega, rette dekorproporsjonar og faste golv- og hylleteksturar." },
         { "t": "fiksa", "kva": "Hinder i Fykefuga", "tekst": "Synlege treffområderammer rundt hindera er fjerna." },
+        { "t": "fiksa", "kva": "Svarportalar", "tekst": "Større svartal held seg skarpare når portalane flyttar seg." },
         { "t": "fiksa", "kva": "Kulissar i Fykefuga", "tekst": "Den gjennomsiktige søyla framfor bakgrunnen er fjerna." },
         { "t": "fiksa", "kva": "Golv og tak i Fykefuga", "tekst": "Piggar står på golvet, og søylehinder går inn bak golv og tak utan synlege gliper." }
       ]

@@ -24,6 +24,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
 - Fykefuga rullar jamt mellom fysikkstega. Bakgrunnane har samanhengande skøytar og blir førebudde før start; dekor bevarer proporsjonane, og golv og svarhyller har faste teksturar. Kula og svingfarkosten snur utan vinkelhopp.
 - Synlege treffområderammer rundt hindera i Fykefuga er fjerna.
+- Svartala ved portalane er større og blir plasserte på skjermpikslane utan teksttransformasjon, så dei held seg skarpare i rørsle.
 - Det gjennomsiktige søylelaget som dreiv framfor bakgrunnen i Fykefuga, er fjerna.
 - Golv og tak byrjar ved kollisjonsflata, så piggar og plattformer ikkje svevar. Søylehinder går inn bak golv og tak sjølv når kamerahøgda endrar seg.
 
