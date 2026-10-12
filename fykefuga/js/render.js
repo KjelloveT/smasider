@@ -7,13 +7,13 @@
     const scenery = F.Scenery.create(), motion = F.Motion.create();
     let screen = null;
     function portal(ctx, section, state, world, config, finish = false, foreground = false) {
-      const at = finish ? F.ReTray.END_X : section.from;
+      const at = finish ? world.finishX : section.from;
       const x = 190 + at - state.x;
       if (x < -100 || x > 1050) return;
       const frame = F.Assets.get('portal-side.png');
       if (!frame) return;
-      const corridor = world.viewAt(Math.min(at, F.ReTray.END_X - 1));
-      const lanes = !finish && world.quiz ? F.ReTray.lanes(section) : null;
+      const corridor = world.viewAt(Math.min(at, world.finishX - 1));
+      const lanes = !finish && world.quiz ? world.lanes(section) : null;
       const centres = lanes ? [lanes.upper, lanes.lower] : [section && section.portalY || (corridor.top + corridor.bottom) / 2];
       const height = lanes ? lanes.height : Math.min(230, corridor.bottom - corridor.top + 18);
       const width = height * frame.width / frame.height;
@@ -140,9 +140,11 @@
       effects.behind(ctx, state);
       if (sprite) {
         const pose = effects.pose(p), scale = state.status === 'dead' ? effects.deadScale : 1;
-        ctx.save(); ctx.translate(190, p.y);
+        const groundRoll = p.mode === 'cube' && p.grounded ? Math.sin(state.x / 20) * .15 : 0;
+        const groundBob = p.mode === 'cube' && p.grounded ? -1.5 * Math.abs(Math.sin(state.x / 20)) : 0;
+        ctx.save(); ctx.translate(190, p.y + groundBob);
         const angle = p.mode === 'wave' ? (p.velocity < 0 ? -1 : 1) * Math.PI / 4 : p.angle || 0;
-        ctx.rotate(angle + (p.mode === 'swing' ? Math.sin(state.time * 7) * .15 : 0) + pose.rotation);
+        ctx.rotate(angle + groundRoll + (p.mode === 'swing' ? Math.sin(state.time * 7) * .15 : 0) + pose.rotation);
         ctx.scale(pose.x * scale, pose.y * scale);
         if (p.gravity < 0 && ['robot', 'spider'].includes(p.mode)) ctx.scale(1, -1);
         ctx.drawImage(sprite, -28, -28, 56, 56); ctx.restore();

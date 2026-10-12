@@ -113,6 +113,7 @@
     return { speed: SPEED, duration: elapsed, count: sections.length, end: elapsed,
       tutorial: true, demo: true, endless: false, musicScene: 4,
       quiz: F.ReTrayQuestions.create(config.seed || 1, sections.length - 1), previewRoute: !!config.previewRoute,
+      lanes, finishX: END_X, autoTarget,
       segment: index => sections[Math.max(0, Math.min(sections.length - 1, index))],
       at: time => sections.find(section => time < section.end) || sections[sections.length - 1],
       xAt: time => { const section = sections.find(value => time < value.end) || sections[sections.length - 1];

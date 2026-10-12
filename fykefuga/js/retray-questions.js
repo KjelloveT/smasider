@@ -2,15 +2,15 @@
   'use strict';
   const F = root.Fykefuga;
   const offsets = [-4, -3, -2, 2, 3, 4];
-  const pairs = [];
-  for (let first = 6; first <= 13; first++)
-    for (let second = first; second <= 13; second++) pairs.push([first, second]);
-
-  function create(seed, count) {
+  function create(seed, count, firstFactor = 6, lastFactor = 13, id = 'retray') {
+    const pairs = [];
+    for (let first = firstFactor; first <= lastFactor; first++)
+      for (let second = first; second <= lastFactor; second++) pairs.push([first, second]);
+    if (count > pairs.length) throw new Error('For få ulike gangestykke til bana.');
     const random = Vy.rng((seed ^ 0x5f4b6a31) >>> 0);
     const chosen = Vy.shuffle(pairs, random).slice(0, count);
     const questions = chosen.map(([first, second], index) => ({
-      item: { id: 'retray-' + index, prompt: first + ' × ' + second, correct: String(first * second) },
+      item: { id: id + '-' + index, prompt: first + ' × ' + second, correct: String(first * second) },
       wrong: null, correctSide: null, upper: null, lower: null
     }));
     function reroll() {
@@ -30,7 +30,7 @@
     if (!world.demo || state.status !== 'running') return null;
     const next = world.segment(state.segment + 1);
     if (!next || next.index <= state.segment || state.time + 1e-8 < next.start - 2 || state.time >= next.start) return null;
-    return { ...world.quiz.get(next.index - 1), remaining: next.start - state.time, section: next, demo: true };
+    return { ...world.quiz.get(next.index - 1), remaining: next.start - state.time, section: next, world, demo: true };
   }
   F.ReTrayQuestions = { create, active, offsets };
 })(window);

@@ -3,16 +3,18 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
-## [2.2] — 2026-10-10
+## [2.2] — 2026-10-12
 
 ### Lagt til
 - **Fykefuga**: eit barokk fartsspel med åtte rørslemodusar, åtte øvingsbaner, fire hovudbaner og endelaus fuga. Korte fagspørsmål avgjer kva svarveg eleven skal styre gjennom.
 - Lærarbibliotek med eigne spørsmål, innlimte ordpar, Ordaklok-import, førehandsvising, JSON-filer og delingslenkjer. Rekordar, kosmetikk og fire felles bragder blir lagra lokalt.
 - Ei spelbar prøve av heile ReTraY-løypa, bygd frå banedata, med alle modusportane, elleve gangestykke og ein original strykarloop på 108 slag i minuttet. Kvart gangestykke kjem to sekund før eit øvre eller nedre portval; feil svar startar bana på nytt med same stykke og eit nytt feilalternativ.
+- **Stereogangen**: ei lettare, handbygd bane etter terning–luftskip–terning–luftskip-forma frå Stereo Madness. 22 gangestykke frå 2- til 9-gongen blir trekte ved ny banestart; feilalternativ og svarside skiftar ved død. Ein original 72-sekundars Spitfire-sats følgjer dei fire delane utan musikksløyfe.
 - Originale genererte rasterressursar og fire originale Spitfire-barokksatsar med innspelte fiolinar, bratsj og cello, og separate volumval for musikk og spel-ljod. Farkostane har spor, lysband, eksos og eigne reaksjonar ved hopp, landing og teletransport.
 
 ### Endra
 - Baneprøva har flate marmorklossar med høgoppløyst marmor og fullstendige akantusavslutningar på plattformer i alle lengder; golvet har måla forgylte kantar utan perspektiv eller grøne strekar. Sidevende rasterportalar har måla energisprekk, vandrande ljos og ei fram- og bakside som verkar òg når dei kryssar hinder. Ho har rytmeplasserte hinder, romslegare svarstrekningar, meir rom i bølgjegangen og tettare kamera i låge gangar. Fykefuga har visuelle kortval med bane- og figurbilete, døme frå spørsmålsetta og synlege val for lesetid. Bragdene står to i breidda på mobil og fire på større skjermar, øvingskorta bruker fleire kolonnar på breie skjermar, og «Vegval og framgang» er fjerna.
+- Terningen har ei varsam rulling på golvet frå fyrste sekund og rettar seg opp etter landing. Treffområdet er uendra.
 - Ordaklok og Fykefuga bruker ein felles delingsmodul. Eksisterande Ordaklok-lenkjer blir framleis lesne.
 - Fykefuga har 61 prosent høgare fart og fire til seks hindergrupper i kvart spelparti, med hoppkombinasjonar og vekselvise flygeportar. Lesestrekningane held same lesetid.
 - Banemusikken bruker ferdige orkesteropptak på 65–83 sekund, med presise sløyfer, mjuke temabyte, bevart musikkposisjon ved pause og rask omstart. Spel-ljodane er eigne Web Audio-klangar. Hopp, landing og styring får større utbrot, sjokkbølgjer, framdrift og rørsleanimasjonar.

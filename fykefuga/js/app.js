@@ -20,7 +20,7 @@
   $('dialog-close').addEventListener('click', () => Vy.closeModal($('utility-dialog')));
   function options(select, includeTutorials) {
     const levels = F.levels.concat([{ id: 'endless', name: 'Endelaus fuga' }]);
-    if (includeTutorials) levels.push({ id: 'retray-probe', name: 'ReTraY · baneprøve' });
+    if (includeTutorials) levels.push({ id: 'stereo-study', name: 'Stereogangen · Stereo Madness-studie' }, { id: 'retray-probe', name: 'ReTraY · baneprøve' });
     levels.forEach(level => select.add(new Option(level.name, level.id)));
     if (includeTutorials) F.modes.forEach(mode => select.add(new Option('Øving: ' + mode.name, 'tutorial-' + mode.id)));
   }
@@ -42,13 +42,13 @@
   }
   function getConfig() {
     const level = $('level-select').value;
-    const difficulty = level === 'endless' ? Number($('difficulty-select').value) : level.startsWith('tutorial-') ? 0 : F.level(level).difficulty;
+    const difficulty = level === 'endless' ? Number($('difficulty-select').value) : level.startsWith('tutorial-') || ['retray-probe', 'stereo-study'].includes(level) ? 0 : F.level(level).difficulty;
     return { level, reading: Number($('reading-select').value), difficulty, skin: $('skin-select').value, reduced: $('reduced-input').checked, sound: $('sound-input').checked, ...soundControls.values() };
   }
   function updateSetup() {
     if (!selected) return;
     setupChoices.sync();
-    const c = getConfig(), probe = c.level === 'retray-probe';
+    const c = getConfig(), probe = ['retray-probe', 'stereo-study'].includes(c.level);
     $('difficulty-field').hidden = c.level !== 'endless';
     $('pack-select-choices').hidden = probe; $('pack-description').hidden = probe;
     $('reading-select-choices').hidden = probe; $('record-label').hidden = probe;
@@ -78,12 +78,13 @@
   async function start(nextConfig) {
     if ($('start-button').disabled) return;
     const issues = F.Questions.validate(selected);
-    if (issues.length && !getConfig().level.startsWith('tutorial-') && getConfig().level !== 'retray-probe') { $('setup-message').textContent = 'Settet må rettast: ' + issues[0].message; $('setup-message').hidden = false; return; }
+    if (issues.length && !getConfig().level.startsWith('tutorial-') && !['retray-probe', 'stereo-study'].includes(getConfig().level)) { $('setup-message').textContent = 'Settet må rettast: ' + issues[0].message; $('setup-message').hidden = false; return; }
     $('start-button').disabled = true; $('setup-message').textContent = 'Lastar farkostar, kulissar og musikk …'; $('setup-message').hidden = false;
     try {
       config = nextConfig || { ...getConfig(), seed: Vy.newSeed(), offset: 0 };
-      if (config.level !== 'endless' && !config.level.startsWith('tutorial-')) config.difficulty = F.level(config.level).difficulty;
-      soundControls.stopPreview(); await F.Audio.init(config.level === 'retray-probe' ? 4 : config.level === 'endless' || config.level.startsWith('tutorial-') ? 0 : F.level(config.level).scene); F.Audio.setVolumes(config.musicVolume, config.effectsVolume); F.Audio.setMuted(!config.sound); await F.Assets.load();
+      if (config.level !== 'endless' && !config.level.startsWith('tutorial-') && !['retray-probe', 'stereo-study'].includes(config.level)) config.difficulty = F.level(config.level).difficulty;
+      const musicScene = config.level === 'stereo-study' ? 5 : config.level === 'retray-probe' ? 4 : config.level === 'endless' || config.level.startsWith('tutorial-') ? 0 : F.level(config.level).scene;
+      soundControls.stopPreview(); await F.Audio.init(musicScene); F.Audio.setVolumes(config.musicVolume, config.effectsVolume); F.Audio.setMuted(!config.sound); await F.Assets.load();
       if (document.hidden) throw new Error('Kom attende til fana og start spelet når du er klar.');
       $('setup-message').hidden = true;
       F.Storage.saveSettings({ ...getConfig() });
@@ -122,8 +123,8 @@
   function complete() {
     const score = engine.world.demo ? { best: 0, newRecord: false } : F.Storage.record(selected, config, engine.state);
     if (engine.world.demo) {
-      $('result-title').textContent = 'Baneprøva er fullført!';
-      $('result-text').textContent = engine.state.correct + ' rette gangestykke og heile baneprøva fullført.';
+      $('result-title').textContent = config.level === 'stereo-study' ? 'Stereogangen er fullført!' : 'Baneprøva er fullført!';
+      $('result-text').textContent = engine.state.correct + ' rette gangestykke og heile bana fullført.';
       $('next-batch').hidden = true; view('result'); refresh(); $('replay-button').focus(); return;
     }
     $('result-title').textContent = engine.world.tutorial ? 'Øvinga er fullført!' : F.level(config.level).name + ' er fullført!';
@@ -133,7 +134,7 @@
   }
   function hud() {
     const state = engine.state, choice = engine.activeChoice();
-    $('run-label').textContent = engine.world.demo ? 'Baneprøve · ' + state.correct + '/' + (engine.world.count - 1) + ' rette · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
+    $('run-label').textContent = engine.world.demo ? (config.level === 'stereo-study' ? 'Stereogangen' : 'Baneprøve') + ' · ' + state.correct + '/' + (engine.world.count - 1) + ' rette · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
     if (engine.world.demo) {
       $('question-board').hidden = $('upper-answer').hidden = $('lower-answer').hidden = true;
       $('control-help').textContent = F.mode(state.player.mode).help;

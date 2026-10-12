@@ -29,7 +29,10 @@
     else if (p.y <= top) { p.y = top; if (p.velocity < 0) p.velocity = 0; p.grounded = p.gravity === -1; }
     else p.grounded = false;
     if (flying) p.grounded = false;
-    if (p.mode === 'cube' || p.mode === 'ball') p.angle += (p.grounded ? 0 : 6.8) * STEP;
+    if (p.mode === 'cube') {
+      if (p.grounded) p.angle += (Math.round(p.angle / (Math.PI / 2)) * Math.PI / 2 - p.angle) * .24;
+      else p.angle += 6.8 * STEP;
+    } else if (p.mode === 'ball') p.angle += (p.grounded ? 0 : 6.8) * STEP;
     else if (p.mode === 'ship' || p.mode === 'ufo') p.angle = clamp(p.velocity / 1000, -0.4, 0.4);
     else p.angle = 0;
   }

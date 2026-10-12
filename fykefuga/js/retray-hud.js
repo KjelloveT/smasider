@@ -22,7 +22,7 @@
         question.style.top = above + 'px';
         question.classList.remove('ff-retray-question--below');
       }
-      const lanes = F.ReTray.lanes(choice.section);
+      const lanes = choice.world ? choice.world.lanes(choice.section) : F.ReTray.lanes(choice.section);
       const answerX = (screen.x + (choice.section.from - screen.worldX) * screen.zoom + 25) * width;
       [upper, lower].forEach((node, index) => {
         const laneY = index ? lanes.lower : lanes.upper;

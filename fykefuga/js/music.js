@@ -3,7 +3,7 @@
   const F = root.Fykefuga, base = new URL('../assets/audio/', document.currentScript.src);
   const encoded = new Map(), contexts = new WeakMap();
   let manifest, loading;
-  function sceneIndex(scene) { return Number.isInteger(scene) && scene >= 0 && scene < 5 ? scene : 0; }
+  function sceneIndex(scene) { return Number.isInteger(scene) && scene >= 0 && scene < 6 ? scene : 0; }
   function load() {
     if (!loading) loading = (async () => {
       const response = await fetch(new URL('music-v1.json', base));
@@ -71,7 +71,8 @@
     function position(value) {
       if (!value) return saved;
       const duration = value.entry.loopEnd - value.entry.loopStart;
-      return (value.offset + Math.max(0, context.currentTime - value.at)) % duration;
+      const elapsed = value.offset + Math.max(0, context.currentTime - value.at);
+      return value.entry.track.loop === false ? Math.min(duration, elapsed) : elapsed % duration;
     }
     function fadeOut(value, at, duration) {
       const gain = value.gain.gain;
@@ -100,11 +101,14 @@
         at = now + Math.max(.008, bar - position(voice) % bar);
       }
       const fade = transition ? .18 : .012, source = context.createBufferSource(), gain = context.createGain();
-      source.buffer = entry.buffer; source.loop = true; source.loopStart = entry.loopStart; source.loopEnd = entry.loopEnd;
+      source.buffer = entry.buffer; source.loop = entry.track.loop !== false;
+      if (source.loop) { source.loopStart = entry.loopStart; source.loopEnd = entry.loopEnd; }
       gain.gain.setValueAtTime(0, now); gain.gain.setValueAtTime(0, at); gain.gain.linearRampToValueAtTime(1, at + fade);
       source.connect(gain); gain.connect(bus);
       if (voice) fadeOut(voice, at, fade);
-      const value = { entry, source, gain, scene, offset: offset % (entry.loopEnd - entry.loopStart), at };
+      const duration = entry.loopEnd - entry.loopStart;
+      const value = { entry, source, gain, scene,
+        offset: source.loop ? offset % duration : Math.min(Math.max(0, offset), duration - .001), at };
       voices.add(value); voice = value;
       source.onended = () => { voices.delete(value); source.disconnect(); gain.disconnect(); };
       source.start(at, entry.loopStart + value.offset);

@@ -5,8 +5,9 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '../..');
 let checks = 0;
 function check(value, label) { assert.ok(value, label); checks++; }
-const manifest = { tracks: [0, 1, 2, 3, 4].map(scene => ({ scene, title: 'tema-' + scene,
+const manifest = { tracks: [0, 1, 2, 3, 4, 5].map(scene => ({ scene, title: 'tema-' + scene,
   file: 'theme-' + scene + '.mp3', frames: 44100, sampleRate: 44100,
+  loop: scene === 5 ? false : true,
   encoderDelayFrames: 1105, bpm: 160 + scene * 8, beats: scene === 2 ? 3 : 4,
   alignment: { startFrame: 256, step: 4, samples: Array.from({ length: 64 }, (_, i) =>
     Math.round(signal((256 + i * 4) / 44100, scene) * 32767)) } })) };
@@ -28,7 +29,8 @@ function audioContext(rate, padding) {
     decodeAudioData(bytes) { this.decodes++; return Promise.resolve(buffer(new Uint8Array(bytes)[0], rate, padding)); },
     createGain() { return { gain: param(), connect() {}, disconnect() {} }; },
     createBufferSource() {
-      const source = { connect() {}, disconnect() {}, start(at, offset) { this.at = at; this.offset = offset; },
+      const source = { connect() {}, disconnect() {}, start(at, offset) { this.at = at; this.offset = offset;
+        if (!this.loop) this.end = at + this.buffer.duration - offset; },
         stop(at = context.currentTime) { this.end = at; } };
       this.sources.push(source); return source;
     },
@@ -59,7 +61,7 @@ const wait = milliseconds => new Promise(resolve => setTimeout(resolve, millisec
   await Promise.all([F.Music.load(), F.Music.load()]);
   for (const rate of [44100, 48000]) for (const padding of [false, true]) {
     const audio = audioContext(rate, padding);
-    for (let scene = 0; scene < 5; scene++) {
+    for (let scene = 0; scene < 6; scene++) {
       const entry = await F.Music.prepare(audio, scene);
       check(entry.similarity > .99, 'Wrong MP3 alignment');
       check(Math.abs(entry.loopEnd - entry.loopStart - 1) < 1 / rate, 'Wrong loop duration');
@@ -85,6 +87,13 @@ const wait = milliseconds => new Promise(resolve => setTimeout(resolve, millisec
   check(player.status().cachedThemes <= 2, 'Unbounded decode cache');
   player.stop(); audio.advance(.03);
   check(player.status().voices === 0, 'Stop leaks sources');
+  await player.start(5); audio.advance(.4);
+  check(audio.sources.at(-1).loop === false && player.status().position > .3,
+    'Den heile Stereo-satsen må starte utan sløyfe');
+  audio.advance(1.1);
+  check(player.status().voices === 0 && player.status().position === 1,
+    'Den heile Stereo-satsen skal stogge ved avslutninga');
+  player.stop(); audio.advance(.03);
   const real = audioContext(44100, false);
   context.AudioContext = function () { return real; };
   F.Mixer = { create() { mixes++; return { master: real.createGain(), music: real.createGain(), effects: real.createGain(),

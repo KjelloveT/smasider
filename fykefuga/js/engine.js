@@ -36,7 +36,7 @@
       if (segment.index !== state.segment) {
         if (world.demo && !world.previewRoute) {
           const choice = world.quiz.get(segment.index - 1);
-          const lanes = F.ReTray.lanes(segment);
+          const lanes = world.lanes(segment);
           const side = state.player.y < lanes.split ? 'upper' : 'lower';
           if (Math.abs(state.player.y - lanes[side]) > lanes.height / 2 + F.Physics.SIZE / 2) { die('crash'); return; }
           if (side !== choice.correctSide) { die('answer', { ...choice, chosen: choice[side] }); return; }
@@ -68,7 +68,7 @@
       const before = { velocity: p.velocity, grounded: p.grounded, gravity: p.gravity, y: p.y };
       const next = world.demo && state.segment < world.count - 1 ? world.segment(state.segment + 1) : null;
       if (world.demo && segment.auto && (world.previewRoute || !next || state.time < next.start - 2)) {
-        p.previousY = p.y; p.y = F.ReTray.autoTarget(segment, state.x, p, corridor);
+        p.previousY = p.y; p.y = world.autoTarget(segment, state.x, p, corridor);
         p.velocity = (p.y - p.previousY) / F.Physics.STEP;
         p.grounded = segment.mode === 'cube' && p.y >= corridor.bottom - .5;
       } else F.Physics.update(p, input, corridor);

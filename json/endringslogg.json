@@ -3,13 +3,15 @@
   "versjonar": [
     {
       "versjon": "2.2",
-      "dato": "2026-10-10",
+      "dato": "2026-10-12",
       "samandrag": "Fykefuga kombinerer presis fart med korte faglege vegval i ei måla barokkverd.",
       "punkt": [
         { "t": "nytt", "kva": "Fykefuga", "tekst": "Åtte farkostar, øvingsbaner, fire hovudbaner og endelaus fuga med faglege vegval.", "merke": "verktoy" },
         { "t": "nytt", "kva": "Lærarbibliotek", "tekst": "Lag spørsmål, lim inn ordpar, importer Ordaklok og del sett med elevane. Rekordar, kosmetikk og bragder ligg lokalt." },
         { "t": "nytt", "kva": "Barokkressursar", "tekst": "Original rastergrafikk, fire Spitfire-barokksatsar med innspelte orkesterinstrument og separate volumval. Spor, lysband og animasjonar følgjer farkostane." },
         { "t": "nytt", "kva": "Baneprøve i Fykefuga", "tekst": "Prøv heile ReTraY-løypa med elleve gangestykke, to svarportar ved kvart vegval og eiga strykarmusikk i rolegare tempo." },
+        { "t": "nytt", "kva": "Stereogangen", "tekst": "Ei lettare bane inspirert av Stereo Madness: terning og luftskip, 22 gangestykke frå 2- til 9-gongen og ein original 72-sekundars orkestersats utan sløyfe." },
+        { "t": "endra", "kva": "Terningen", "tekst": "Rullar varsamt på golvet frå fyrste sekund og rettar seg opp etter landing utan endra treffområde." },
         { "t": "endra", "kva": "Fykefuga-menyen", "tekst": "Baneprøva har måla marmorklossar med heile forgylte endar i alle lengder, sidevende rasterportalar med fram- og bakside, ein romslegare bølgjegang og tettare kamera. Vel spelvala med visuelle kort; bragder og øvingskort har luftigare rutenett." },
         { "t": "endra", "kva": "Deling", "tekst": "Felles delingsmodul for Fykefuga og Ordaklok, med støtte for eksisterande lenkjer." },
         { "t": "endra", "kva": "Fykefuga", "tekst": "61 prosent høgare fart, fire til seks hindergrupper per spelparti og vekselvise flygeportar. Lesetida er bevart." },
