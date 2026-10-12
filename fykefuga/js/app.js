@@ -21,9 +21,9 @@
   $('dialog-close').addEventListener('click', () => Vy.closeModal($('utility-dialog')));
   function options(select, includeTutorials) {
     const levels = [
-      { id: 'retray-probe', name: 'ReTraY' },
-      { id: 'stereo-study', name: 'Stereogangen' },
-      { id: 'back-on-track-study', name: 'Hovudstadsporet' }
+      { id: 'stereo-study', name: 'Villrina i Gyllengarden' },
+      { id: 'back-on-track-study', name: 'Eidskvedet' },
+      { id: 'retray-probe', name: 'Sorgsalane' }
     ];
     levels.forEach(level => select.add(new Option(level.name, level.id)));
   }
@@ -121,7 +121,7 @@
   function complete() {
     const score = engine.world.demo ? { best: 0, newRecord: false } : F.Storage.record(selected, config, engine.state);
     if (engine.world.demo) {
-      $('result-title').textContent = config.level === 'back-on-track-study' ? 'Hovudstadsporet er fullført!' : config.level === 'stereo-study' ? 'Stereogangen er fullført!' : 'Baneprøva er fullført!';
+      $('result-title').textContent = config.level === 'back-on-track-study' ? 'Eidskvedet er fullført!' : config.level === 'stereo-study' ? 'Villrina i Gyllengarden er fullført!' : 'Sorgsalane er fullført!';
       $('result-text').textContent = engine.state.correct + (config.level === 'back-on-track-study' ? ' rette hovudstader' : ' rette gangestykke') + ' og heile bana fullført.';
       $('next-batch').hidden = true; view('result'); refresh(); $('replay-button').focus(); return;
     }
@@ -132,7 +132,7 @@
   }
   function hud() {
     const state = engine.state, choice = engine.activeChoice();
-    $('run-label').textContent = engine.world.demo ? (config.level === 'back-on-track-study' ? 'Hovudstadsporet' : config.level === 'stereo-study' ? 'Stereogangen' : 'Baneprøve') + ' · ' + state.correct + '/' + (engine.world.count - 1) + ' rette · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
+    $('run-label').textContent = engine.world.demo ? (config.level === 'back-on-track-study' ? 'Eidskvedet' : config.level === 'stereo-study' ? 'Villrina i Gyllengarden' : 'Sorgsalane') + ' · ' + state.correct + '/' + (engine.world.count - 1) + ' rette · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
     if (engine.world.demo) {
       $('question-board').hidden = $('upper-answer').hidden = $('lower-answer').hidden = true;
       $('control-help').textContent = F.mode(state.player.mode).help;

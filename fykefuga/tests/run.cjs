@@ -154,9 +154,9 @@ for (const [scene, sound] of sounds.tracks.entries()) {
 }
 check(sounds.tracks[2].beats === 3 && sounds.tracks[3].bpm > sounds.tracks[0].bpm && sounds.tracks[4].bpm === 108, 'Menuetten må ha tretakt, og baneprøva rolegare tempo');
 check(sounds.tracks[5].loop === false && sounds.tracks[5].bars === 36 && sounds.tracks[5].frames / sounds.tracks[5].sampleRate > 72,
-  'Stereogangen må ha ein heil 72-sekundars sats utan sløyfe');
+  'Villrina i Gyllengarden må ha ein heil 72-sekundars sats utan sløyfe');
 check(sounds.tracks[6].loop === false && sounds.tracks[6].bars === 42 && sounds.tracks[6].frames / sounds.tracks[6].sampleRate > 84,
-  'Hovudstadsporet må ha ein heil 84-sekundars sats utan sløyfe');
+  'Eidskvedet må ha ein heil 84-sekundars sats utan sløyfe');
 for (const directory of ['fykefuga/js', 'fykefuga/css']) for (const file of fs.readdirSync(path.join(root, directory))) {
   const text = fs.readFileSync(path.join(root, directory, file), 'utf8');
   check(!/<svg[\s>]|\.svg\b|image\/svg/i.test(text), 'SVG vart brukt i speldesignet');

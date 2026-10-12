@@ -49,9 +49,9 @@
       }
       if (id === 'level-select') {
         if (option.value === 'endless') return 'Ei ny rekkje kvar runde';
-        if (option.value === 'retray-probe') return 'Portalar og hinder med elleve gangestykke frå 6- til 13-gongen.';
-        if (option.value === 'stereo-study') return 'Lettare terning- og luftskipbane med 22 gangestykke frå 2- til 9-gongen og eigen heilskapleg musikk.';
-        if (option.value === 'back-on-track-study') return 'Terning, sprettplater og eitt luftskipstrekk med 23 hovudstader i Europa.';
+        if (option.value === 'retray-probe') return 'Ei nestan umogleg bane med vanskelege hopp og vanskelegare multiplikasjon.';
+        if (option.value === 'stereo-study') return 'Enklaste bana med enkel multiplikasjon.';
+        if (option.value === 'back-on-track-study') return 'Match land med hovudstadar i ei middels vanskeleg bane.';
         if (option.value.startsWith('tutorial-')) return 'Øving i éin modus';
         return F.level(option.value).description;
       }

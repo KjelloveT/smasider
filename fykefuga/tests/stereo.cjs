@@ -1,6 +1,6 @@
 module.exports = function testStereo(F, check, pack) {
   const world = F.Stereo.create({ seed: 19 });
-  check(world.duration === 72 && world.musicScene === 5, 'Stereogangen må fylgje heile den nye musikken');
+  check(world.duration === 72 && world.musicScene === 5, 'Villrina i Gyllengarden må fylgje heile den nye musikken');
   check(world.count === 23 && world.quiz.count === 22, 'Tjueto gangestykke må høyre til kvar sin svarportal');
   check(world.segment(0).mode === 'cube' && world.segment(6).mode === 'ship' &&
     world.segment(12).mode === 'cube' && world.segment(18).mode === 'ship', 'Dei fire delane må fylgje terning–skip–terning–skip');
@@ -77,7 +77,7 @@ module.exports = function testStereo(F, check, pack) {
   for (const seed of [19, 20, 21, 22, 23, 24]) {
     const { run, ticks } = play(seed);
     check(run.state.status === 'complete' && run.state.correct === 22 && ticks === 72 * 120,
-      'Heile Stereogangen må vere spelbar med spørsmåla: ' + seed + ', ' +
+      'Heile Villrina i Gyllengarden må vere spelbar med spørsmåla: ' + seed + ', ' +
       run.state.status + ', x=' + Math.round(run.state.x) + ', del=' + run.state.segment +
       ', grunn=' + (run.state.events.find(item => item.type === 'dead')?.reason || 'ingen'));
   }

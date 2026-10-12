@@ -96,7 +96,7 @@ const wait = milliseconds => new Promise(resolve => setTimeout(resolve, millisec
   player.stop(); audio.advance(.03);
   await player.start(6); audio.advance(.4);
   check(audio.sources.at(-1).loop === false && player.status().scene === 6,
-    'Hovudstadsporet må starte sin eigen sats utan sløyfe');
+    'Eidskvedet må starte sin eigen sats utan sløyfe');
   player.stop(); audio.advance(.03);
   const real = audioContext(44100, false);
   context.AudioContext = function () { return real; };

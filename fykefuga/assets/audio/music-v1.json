@@ -1386,7 +1386,7 @@
     {
       "id": "stereo-study",
       "scene": 5,
-      "title": "Stereogangen",
+      "title": "Villrina i Gyllengarden",
       "file": "stereogangen-spitfire-v1.mp3",
       "bpm": 120,
       "beats": 4,
@@ -1663,7 +1663,7 @@
     {
       "id": "back-on-track-study",
       "scene": 6,
-      "title": "Hovudstadsporet",
+      "title": "Eidskvedet",
       "file": "hovudstadsporet-spitfire-v1.mp3",
       "bpm": 120,
       "beats": 4,

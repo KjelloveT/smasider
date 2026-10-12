@@ -81,7 +81,7 @@ module.exports = function testCapitals(F, check, pack) {
     check(run.state.events.filter(event => event.pad && Number.isFinite(event.padX)).length >= 6,
       'Sprettplatene må utløyse eigne hendingar i eit fullt spel');
     check(run.state.status === 'complete' && run.state.correct === 23 && ticks === 84 * 120,
-      'Heile Hovudstadsporet må vere spelbart: ' + seed + ', ' + run.state.status +
+      'Heile Eidskvedet må vere spelbart: ' + seed + ', ' + run.state.status +
       ', x=' + Math.round(run.state.x) + ', del=' + run.state.segment +
       ', y=' + Math.round(run.state.player.y) + ', fart=' + Math.round(run.state.player.velocity) +
       ', sprett=' + run.state.events.filter(event => event.pad).length);
