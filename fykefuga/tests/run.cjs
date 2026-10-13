@@ -158,8 +158,10 @@ check(sounds.tracks[5].loop === false && sounds.tracks[5].bars === 36 && sounds.
   'Villrina i Gyllengarden må ha ein heil 72-sekundars sats utan sløyfe');
 check(sounds.tracks[6].loop === false && sounds.tracks[6].bars === 42 && sounds.tracks[6].frames / sounds.tracks[6].sampleRate > 84,
   'Eidskvedet må ha ein heil 84-sekundars sats utan sløyfe');
-check(sounds.tracks[7].loop === false && sounds.tracks[7].bars === 44 && sounds.tracks[7].frames / sounds.tracks[7].sampleRate > 88,
-  'Polargeist må ha ein heil 88-sekundars sats utan sløyfe');
+check(sounds.tracks[7].loop === false && sounds.tracks[7].bars === 46 &&
+  sounds.tracks[7].beats === 3 && sounds.tracks[7].bpm === 90 &&
+  sounds.tracks[7].frames / sounds.tracks[7].sampleRate > 92,
+  'Polargeist må ha ein eigen tredelt 92-sekundars sats utan sløyfe');
 for (const directory of ['fykefuga/js', 'fykefuga/css']) for (const file of fs.readdirSync(path.join(root, directory))) {
   const text = fs.readFileSync(path.join(root, directory, file), 'utf8');
   check(!/<svg[\s>]|\.svg\b|image\/svg/i.test(text), 'SVG vart brukt i speldesignet');

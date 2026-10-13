@@ -6,7 +6,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ## [2.2] — 2026-10-12
 
 ### Lagt til
-- **Polargeist**: ei ny 88-sekundars flaggbane inspirert av Polargeist, med hoppringar, 51 europeiske flagg i eit lokalt PNG-ark, eigne barokkkulissar og ein heil orkestersats.
+- **Polargeist**: ei 92-sekundars flaggbane med tettare piggrekkjer, marmortrapper, sprettplate, skipshinder og seks hoppringar. Alle 51 europeiske flagga ligg i eit lokalt PNG-ark. Eigne barokkkulissar og ein heil original kammersats i tretakt fylgjer bana.
 - **Fykefuga**: eit barokk fartsspel med åtte rørslemodusar, åtte øvingsbaner, fire hovudbaner og endelaus fuga. Korte fagspørsmål avgjer kva svarveg eleven skal styre gjennom.
 - Lærarbibliotek med eigne spørsmål, innlimte ordpar, Ordaklok-import, førehandsvising, JSON-filer og delingslenkjer. Rekordar, kosmetikk og fire felles bragder blir lagra lokalt.
 - **Sorgsalane**: ei nesten umogleg bane med vanskelege hopp og vanskelegare multiplikasjon, bygd som ei spelbar tolking av ReTraY-løypa. Ho har alle modusportane, elleve gangestykke og ein original strykarloop på 108 slag i minuttet. Kvart gangestykke kjem to sekund før eit øvre eller nedre portval; feil svar startar bana på nytt med same stykke og eit nytt feilalternativ.

@@ -1,16 +1,22 @@
 module.exports = function testPolargeist(F, check, pack) {
   const world = F.Polargeist.create({ seed: 51 });
-  check(world.duration === 88 && world.count === 22 && world.musicScene === 7,
+  check(world.duration === 92 && world.count === 23 && world.musicScene === 7 &&
+    F.Polargeist.BPM === 90 && world.segment(8).start / world.duration > .34 &&
+    world.segment(11).start / world.duration < .48,
     'Flaggbana må fylgje den heile orkestersatsen');
   check(world.segment(0).mode === 'cube' && world.segment(8).mode === 'ship' &&
-    world.segment(12).mode === 'cube', 'Flaggbana må ha terning–skip–terning');
-  check(world.quiz.count === 21 && F.FlagQuestions.codes.length === 51,
-    'Alle europeiske flagg må vere i PNG-arket og 21 portpar må få spørsmål');
-  check(F.Polargeist.obstacles.filter(item => item.kind === 'ring').length >= 5,
-    'Hoppringane manglar');
+    world.segment(11).mode === 'cube', 'Flaggbana må ha terning–skip–terning');
+  check(world.quiz.count === 22 && F.FlagQuestions.codes.length === 51,
+    'Alle europeiske flagg må vere i PNG-arket og 22 portpar må få spørsmål');
+  check(F.Polargeist.obstacles.filter(item => item.kind === 'spike').length >= 45 &&
+    F.Polargeist.obstacles.filter(item => item.kind === 'ring').length >= 6 &&
+    F.Polargeist.obstacles.filter(item => item.kind === 'platform').length >= 6 &&
+    F.Polargeist.obstacles.filter(item => item.kind === 'column').length >= 18,
+    'Polargeist må ha tette hopp, trapper, ringar og skipshinder');
   for (const section of F.Polargeist.sections) {
     check(section.scene === 4, 'Den nye kulissa må brukast i heile flaggbana');
-    check(section.obstacles.every(item => item.x + item.w < section.to - world.readingSeconds * world.speed),
+    check(section.index === world.count - 1 ||
+      section.obstacles.every(item => item.x + item.w < section.to - world.readingSeconds * world.speed),
       'Hinder ligg i flaggvalet');
   }
   const choices = Array.from({ length: world.quiz.count }, (_, index) => world.quiz.get(index));
@@ -44,7 +50,7 @@ module.exports = function testPolargeist(F, check, pack) {
     const run = F.Engine.create(pack, { level: 'polargeist-study', seed });
     const jumped = new Set();
     let ticks = 0;
-    while (run.state.status === 'running' && ticks < 11000) {
+    while (run.state.status === 'running' && ticks < 12000) {
       const state = run.state, section = run.world.segment(state.segment);
       const next = state.segment < run.world.count - 1 ? run.world.segment(state.segment + 1) : null;
       const answer = next ? run.world.quiz.get(next.index - 1) : null;
@@ -57,9 +63,9 @@ module.exports = function testPolargeist(F, check, pack) {
           else if (!state.player.grounded && Math.abs(ringDistance) < 38 &&
               Math.abs(state.player.y - ring.y - ring.h / 2) < 60) pressed = true;
         }
-        const spike = section.obstacles.find(item => item.kind === 'spike' &&
+        const hazard = section.obstacles.find(item => ['spike', 'platform'].includes(item.kind) &&
           item.x > state.x && item.x - state.x < 85 && !jumped.has(item.x));
-        if (!pressed && spike && state.player.grounded) { pressed = true; jumped.add(spike.x); }
+        if (!pressed && hazard && state.player.grounded) { pressed = true; jumped.add(hazard.x); }
         if (!pressed && next && answer.correctSide === 'upper' &&
             state.x >= next.from - 102 && state.x < next.from - 80 && state.player.grounded) pressed = true;
         held = pressed;
@@ -74,8 +80,9 @@ module.exports = function testPolargeist(F, check, pack) {
   }
   for (const seed of [51, 52, 53]) {
     const { run, ticks } = play(seed);
-    check(run.state.status === 'complete' && run.state.correct === 21 && ticks === 88 * 120 &&
-      run.state.events.filter(event => event.ring).length >= 5,
+    check(run.state.status === 'complete' && run.state.correct === 22 && ticks === 92 * 120 &&
+      run.state.events.filter(event => event.ring).length >= 6 &&
+      run.state.events.filter(event => event.type === 'jump').length >= 40,
       'Heile Polargeist må vere spelbar: ' + seed + ', ' + run.state.status +
       ', del=' + run.state.segment + ', x=' + Math.round(run.state.x) +
       ', y=' + Math.round(run.state.player.y) + ', ring=' + run.state.events.filter(event => event.ring).length +

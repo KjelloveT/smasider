@@ -114,7 +114,8 @@
       if (segment.obstacles.some(obstacle => {
         if (obstacle.kind === 'pad' || obstacle.kind === 'ring') return false;
         if (obstacle === landed) return false;
-        if (obstacle.kind === 'platform' && p.previousY <= obstacle.y - F.Physics.SIZE / 2 + .01 && p.y <= obstacle.y - F.Physics.SIZE / 2 + .01) return false;
+        if (obstacle.kind === 'platform' && p.previousY <= obstacle.y - F.Physics.SIZE / 2 + 2 &&
+            p.y <= obstacle.y - F.Physics.SIZE / 2 + 2) return false;
         return F.Physics.collision(oldX, state.x, p, obstacle);
       })) { die('crash'); return; }
       if (!world.tutorial && state.time + 1e-8 >= segment.gateAt && !state.answered.has(segment.index)) {
