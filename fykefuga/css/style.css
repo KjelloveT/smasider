@@ -32,6 +32,8 @@ body[data-vp-app="fykefuga"] { background: #ebe0c8 url('../assets/marmor.jpg') c
 .ff-retray-question { padding: clamp(3px, .7vw, 7px) clamp(5px, 1vw, 10px); border-radius: 7px; font-size: clamp(13px, 2.2vw, 27px); transform: translate(-50%, -100%); }
 .ff-retray-question--below { transform: translate(-50%, 0); }
 .ff-retray-answer { padding: clamp(5px, .6vw, 7px) clamp(8px, 1vw, 12px); border-radius: 5px; box-shadow: 0 3px 0 #8a5b25; font-size: clamp(18px, 2.6vw, 32px); font-variant-numeric: lining-nums tabular-nums; }
+.ff-retray-answer--flag { padding: 3px; line-height: 0; }
+.ff-retray-answer--flag canvas { display: block; width: clamp(66px, 8vw, 106px); height: auto; image-rendering: auto; }
 .ff-question-board { position: absolute; top: 1.5%; left: 3%; right: 3%; background: #fff9e9; border: 3px solid #142820; border-radius: 8px; padding: 4px 12px; text-align: center; pointer-events: none; }
 #question-text { font-size: clamp(16px, 2.25vw, 27px); font-weight: 750; margin: 0; line-height: 1.25; overflow-wrap: anywhere; }
 #question-help { margin: 1px 0; font-size: clamp(12px, 1.3vw, 16px); }
@@ -77,14 +79,14 @@ body.ff-playing #game-view:fullscreen { background: #fff9e9; display: flex; flex
 @media (orientation: landscape) and (max-height: 550px) {
   body.ff-playing main { padding: 0 6px; }
   body.ff-playing #game-view { max-width: none; }
-  #game-frame { width: calc((100dvh - 130px) * 16 / 9); max-width: 100%; margin-inline: auto; }
+  #game-frame { width: calc((100dvh - 72px) * 16 / 9); max-width: 100%; margin-inline: auto; }
   .ff-game-toolbar, .ff-game-bottom { padding: 2px; gap: 5px; font-size: 12px; }
   .ff-game-toolbar button, .ff-game-bottom button { min-height: 40px; padding: 3px 9px; font-size: 13px; }
   .ff-game-bottom p { flex-basis: 120px; }
   .ff-question-board { padding: 2px 6px; border-width: 2px; }
   #question-text { font-size: 16px; }
   #question-help { display: none; }
-  #game-view:fullscreen > * { width: calc((100dvh - 130px) * 16 / 9); }
+  #game-view:fullscreen > * { width: calc((100dvh - 72px) * 16 / 9); }
   #game-view:fullscreen .ff-game-toolbar, #game-view:fullscreen .ff-game-bottom { width: 100%; }
 }
 
@@ -95,6 +97,8 @@ body.ff-playing #game-view:fullscreen { background: #fff9e9; display: flex; flex
 .ff-card-fieldset { min-width: 0; margin-block: 20px; }
 .ff-choice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 185px), 1fr)); gap: 12px; }
 .ff-choice-card { display: grid; grid-template-columns: auto minmax(0, 1fr); align-content: start; align-items: center; min-width: 0; gap: 8px; }
+.ff-card-fieldset--level-select .ff-choice-card { position: relative; }
+.ff-best-badge { position: absolute; top: 8px; right: 8px; z-index: 1; padding: 3px 7px; border: 2px solid #142820; border-radius: 6px; background: #fff9e9; color: #000; font-size: .9rem; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.2; }
 .ff-choice-card input { width: 20px; height: 20px; }
 .ff-choice-title { overflow-wrap: anywhere; font-weight: 700; line-height: 1.3; }
 .ff-choice-hint { grid-column: 1 / -1; overflow-wrap: anywhere; line-height: 1.4; }
@@ -142,6 +146,7 @@ body.ff-playing #game-view:fullscreen { background: #fff9e9; display: flex; flex
 .ff-icon-button { box-sizing: border-box; flex: 0 0 44px; width: 44px; height: 44px; min-width: 44px; min-height: 44px; padding: 0; display: inline-grid; place-items: center; }
 .ff-icon-button [data-icon], .ff-icon-button svg { display: block; width: 20px; height: 20px; }
 #game-sound { position: relative; }
+#game-sound .vp-selection-mark { display: none; }
 #game-sound[aria-pressed="false"]::after { content: ''; position: absolute; top: 50%; left: 50%; width: 27px; height: 2px; transform: translate(-50%, -50%) rotate(-45deg); background: #000; pointer-events: none; }
 .ff-run-progress { flex: 0 0 auto; min-width: 48px; padding: 7px 8px; border: 2px solid #142820; border-radius: 7px; background: #fffdf5; font-variant-numeric: tabular-nums; font-weight: 800; text-align: center; }
 .ff-death-progress { position: absolute; z-index: 5; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(.72); opacity: 0; padding: 10px 22px; border: 3px solid #142820; border-radius: 12px; background: #fff9e9; box-shadow: 0 5px 0 #8a5b25, 0 12px 30px #14282066; color: #000; font: 900 clamp(32px, 8vw, 76px)/1 Georgia, 'Times New Roman', serif; pointer-events: none; }

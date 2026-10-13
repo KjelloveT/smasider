@@ -6,7 +6,10 @@
       "dato": "2026-10-12",
       "samandrag": "Fykefuga kombinerer presis fart med korte faglege vegval i ei måla barokkverd.",
       "punkt": [
-        { "t": "endra", "kva": "Fykefuga-menylinje", "tekst": "Smalt startoppsett, éi rad med ikonknappar og framdrift i prosent. Prosenten kjem òg fram eit kort sekund når spelaren døyr." },
+        { "t": "nytt", "kva": "Polargeist", "tekst": "Ny flaggbane med hoppringar, eige barokkbilete og ein heil orkestersats." },
+        { "t": "endra", "kva": "Beste forsøk", "tekst": "Beste prosent står på banekortet og i spelmenyen." },
+        { "t": "fiksa", "kva": "Lydknappen", "tekst": "Den uynskte haka under høgtalarikonet er fjerna." },
+        { "t": "endra", "kva": "Fykefuga-menylinje", "tekst": "Smalt startoppsett, éi rad med ikonknappar og beste prosent. Framdrifta i forsøket kjem fram når spelaren døyr." },
         { "t": "nytt", "kva": "Fykefuga", "tekst": "Åtte farkostar, øvingsbaner, fire hovudbaner og endelaus fuga med faglege vegval.", "merke": "verktoy" },
         { "t": "nytt", "kva": "Lærarbibliotek", "tekst": "Lag spørsmål, lim inn ordpar, importer Ordaklok og del sett med elevane. Rekordar, kosmetikk og bragder ligg lokalt." },
         { "t": "nytt", "kva": "Barokkressursar", "tekst": "Original rastergrafikk, fire Spitfire-barokksatsar med innspelte orkesterinstrument og separate volumval. Spor, lysband og animasjonar følgjer farkostane." },

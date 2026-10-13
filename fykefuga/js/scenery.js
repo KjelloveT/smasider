@@ -1,7 +1,7 @@
 (function (root) {
   'use strict';
   const F = root.Fykefuga, WIDTH = 960, HEIGHT = 540, ANCHOR = 190, SURFACE_LEAD = 8;
-  const scenes = ['marmor', 'urverk', 'spegel', 'orgel'];
+  const scenes = ['marmor', 'urverk', 'spegel', 'orgel', 'polargalleri'];
   const wrap = (value, period) => ((value % period) + period) % period;
   function positions(camera, period, left = 0, right = WIDTH) {
     const first = Math.floor((left + camera) / period) * period - camera;

@@ -15,15 +15,15 @@
       const box = Vy.el('span', 'ff-choice-preview');
       box.setAttribute('aria-hidden', 'true');
       if (selectId === 'level-select' || selectId === 'preview-theme') {
-        if (value === 'retray-probe' || value === 'stereo-study' || value === 'back-on-track-study') {
-          box.append(picture(value === 'stereo-study' ? 'spegel.jpg' : value === 'back-on-track-study' ? 'urverk.jpg' : 'marmor.jpg'));
+        if (value === 'retray-probe' || value === 'stereo-study' || value === 'back-on-track-study' || value === 'polargeist-study') {
+          box.append(picture(value === 'polargeist-study' ? 'polargalleri.jpg' : value === 'stereo-study' ? 'spegel.jpg' : value === 'back-on-track-study' ? 'urverk.jpg' : 'marmor.jpg'));
         }
         else if (value.startsWith('tutorial-')) {
           box.classList.add('ff-choice-preview--figures'); box.append(picture('gold-' + value.slice(9) + '.png'));
         } else if (value === 'endless') {
           box.classList.add('ff-choice-preview--scenes'); scenes.forEach(scene => box.append(picture(scene + '.jpg')));
         } else {
-          const scene = selectId === 'preview-theme' ? value === '5' ? 'spegel' : value === '6' ? 'urverk' : scenes[Number(value)] || 'marmor' : value;
+          const scene = selectId === 'preview-theme' ? value === '5' ? 'spegel' : value === '6' ? 'urverk' : value === '7' ? 'polargalleri' : scenes[Number(value)] || 'marmor' : value;
           box.append(picture(scene + '.jpg'));
         }
       } else if (selectId === 'skin-select') {
@@ -52,6 +52,7 @@
         if (option.value === 'retray-probe') return 'Ei nestan umogleg bane med vanskelege hopp og vanskelegare multiplikasjon.';
         if (option.value === 'stereo-study') return 'Enklaste bana med enkel multiplikasjon.';
         if (option.value === 'back-on-track-study') return 'Match land med hovudstadar i ei middels vanskeleg bane.';
+        if (option.value === 'polargeist-study') return 'Kjenn att europeiske flagg og treff hoppringane med rett timing.';
         if (option.value.startsWith('tutorial-')) return 'Øving i éin modus';
         return F.level(option.value).description;
       }
@@ -72,6 +73,12 @@
         title.id = group.id + '-title-' + index; radio.setAttribute('aria-labelledby', title.id);
         const art = preview(group.id, option.value); if (art) card.append(art);
         card.append(radio, title);
+        if (group.id === 'level-select') {
+          const best = F.Storage.bestPercent(option.value);
+          const badge = Vy.el('span', 'ff-best-badge', best + '%');
+          badge.setAttribute('aria-label', 'Beste forsøk: ' + best + ' prosent');
+          card.append(badge);
+        }
         const description = hint(group.id, option);
         if (description) {
           const help = Vy.el('small', 'ff-choice-hint', description);

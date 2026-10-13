@@ -1,7 +1,7 @@
 {
   "app": "fykefuga",
   "version": 1,
-  "origin": "Originale rasterbilete genererte med imagegen; originalar tekne vare på lokalt. Musikk og spel-ljod er eigne komposisjonar og effektar.",
+  "origin": "Originale rasterbilete genererte med imagegen; originalar tekne vare på lokalt. Europeiske flagg er henta som PNG frå FlagCDN og samla i eitt lokalt spriteark. Musikk og spel-ljod er eigne komposisjonar og effektar.",
   "files": [
     {
       "file": "column.png",
@@ -65,6 +65,13 @@
       "height": 96,
       "bytes": 3024,
       "sha256": "e7356832d2a60a6d343fc85cd3e511f048f75168381cd7691977c66944c9a8d5"
+    },
+    {
+      "file": "europe-flags.png",
+      "width": 960,
+      "height": 532,
+      "bytes": 77796,
+      "sha256": "f4de448fe5da6af03cfa593b3dda11b96a19e1e916baf8f22c7b9305fe42acbe"
     },
     {
       "file": "floor.png",
@@ -137,6 +144,13 @@
       "sha256": "4d418cb985c3f6cdb7ee1e7738710999feb12e7368d52b728a56961b88377e7b"
     },
     {
+      "file": "jump-ring.png",
+      "width": 192,
+      "height": 192,
+      "bytes": 13716,
+      "sha256": "178c79a3666206e7d3f9588e6c0085550bb9d54c9b38bcae3ab1bb7d7c601c37"
+    },
+    {
       "file": "logo.png",
       "width": 384,
       "height": 361,
@@ -207,11 +221,11 @@
       "sha256": "aa74a8ab0abf982060c111e282373d55f3940895600b3e76e1c3fa9ee3841c9e"
     },
     {
-      "file": "portal-side.png",
-      "width": 61,
-      "height": 512,
-      "bytes": 15660,
-      "sha256": "f2c03c5d4d63ae8adee7c406e405daeef6cb5282a0a87a4ca55a536414c69ab1"
+      "file": "polargalleri.jpg",
+      "width": 1891,
+      "height": 831,
+      "bytes": 433503,
+      "sha256": "c92f7ef5ce2287a2974d7c1581920fd60ad65111d83f8ad4508fce6e6868dc22"
     },
     {
       "file": "porcelain-ball.png",
@@ -270,6 +284,13 @@
       "sha256": "8da841c54451a5dbab559ae2eda09aeba4f10ea35fc2b2a17a3e36016d9a2b14"
     },
     {
+      "file": "portal-side.png",
+      "width": 61,
+      "height": 512,
+      "bytes": 15660,
+      "sha256": "f2c03c5d4d63ae8adee7c406e405daeef6cb5282a0a87a4ca55a536414c69ab1"
+    },
+    {
       "file": "spegel.jpg",
       "width": 1536,
       "height": 1024,
@@ -297,5 +318,6 @@
       "bytes": 443618,
       "sha256": "7bcbde171349b1fc19002eb1664d711c297c78689282f0b930bbab8c48eb7d38"
     }
-  ]
+  ],
+  "flagSource": "https://flagcdn.com/ · nasjonalflagg som lokale PNG-filer, ikkje SVG i spelet"
 }

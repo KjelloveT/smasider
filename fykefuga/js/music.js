@@ -3,7 +3,7 @@
   const F = root.Fykefuga, base = new URL('../assets/audio/', document.currentScript.src);
   const encoded = new Map(), contexts = new WeakMap();
   let manifest, loading;
-  function sceneIndex(scene) { return Number.isInteger(scene) && scene >= 0 && scene < 7 ? scene : 0; }
+  function sceneIndex(scene) { return Number.isInteger(scene) && scene >= 0 && scene < 8 ? scene : 0; }
   function load() {
     if (!loading) loading = (async () => {
       const response = await fetch(new URL('music-v1.json', base));

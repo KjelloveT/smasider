@@ -5,7 +5,7 @@
     const ctx = canvas.getContext('2d', { alpha: false });
     const effects = F.Effects.create();
     const scenery = F.Scenery.create(), motion = F.Motion.create();
-    const activePads = new Map();
+    const activePads = new Map(), activeRings = new Map();
     let screen = null;
     function springPad(ctx, image, obstacle, x, time, reduced) {
       const floorY = obstacle.y + obstacle.h;
@@ -34,6 +34,22 @@
         ctx.beginPath(); ctx.ellipse(x + obstacle.w / 2, floorY - 3,
           obstacle.w * (.45 + elapsed * .6), 7 + elapsed * 13, 0, Math.PI, Math.PI * 2); ctx.stroke();
       }
+      ctx.restore();
+    }
+    function jumpRing(ctx, obstacle, x, time, reduced, foreground) {
+      const image = F.Assets.get('jump-ring.png');
+      if (!image) return;
+      const centreX = x + obstacle.w / 2, centreY = obstacle.y + obstacle.h / 2;
+      const activated = time - (activeRings.get(obstacle.x) ?? -Infinity);
+      const pulse = !reduced && activated >= 0 && activated < .45 ? 1 - activated / .45 : 0;
+      ctx.save(); ctx.translate(centreX, centreY);
+      if (!reduced) ctx.rotate(Math.sin(time * 3.4 + obstacle.x) * .045);
+      if (!foreground && !reduced) { ctx.shadowColor = '#ffe29a'; ctx.shadowBlur = 10 + 20 * pulse; }
+      // The oval is seen obliquely from the side. Its far and near lips
+      // occupy separate drawing planes so the cube can cross between them.
+      const half = image.width / 2;
+      if (foreground) ctx.drawImage(image, 0, 0, half, image.height, -22, -38, 22, 76);
+      else ctx.drawImage(image, half, 0, half, image.height, 0, -38, 22, 76);
       ctx.restore();
     }
     function portal(ctx, section, state, world, config, finish = false, foreground = false) {
@@ -148,6 +164,7 @@
         part.obstacles.forEach(obstacle => {
           const x = 190 + obstacle.x - state.x;
           if (x + obstacle.w < -100 || x > 1050) return;
+          if (obstacle.kind === 'ring') { jumpRing(ctx, obstacle, x, state.time, config.reduced, false); return; }
           if (obstacle.kind === 'platform') {
             scenery.platform(ctx, state.x, obstacle.y, obstacle.h, x, x + obstacle.w); return;
           }
@@ -169,7 +186,15 @@
       scenery.surface(ctx, state.x, ceiling - 64, 64, 0, 960, true);
       const p = state.player, sprite = F.Assets.get(config.skin + '-' + p.mode + '.png');
       effects.behind(ctx, state);
-      if (sprite) {
+      const nearbyRings = [];
+      if (world.demo) for (let i = Math.max(0, state.segment - 1); i <= Math.min(world.count - 1, state.segment + 1); i++)
+        world.segment(i).obstacles.filter(item => item.kind === 'ring').forEach(item => nearbyRings.push(item));
+      const crossingRing = nearbyRings.find(item => Math.abs(state.x - item.x - item.w / 2) < 30 &&
+        Math.abs(p.y - item.y - item.h / 2) < 52);
+      function drawSprite(clipLeft, clipRight) {
+        if (!sprite) return;
+        ctx.save();
+        if (clipLeft !== undefined) { ctx.beginPath(); ctx.rect(clipLeft, 0, clipRight - clipLeft, 540); ctx.clip(); }
         const pose = effects.pose(p), scale = state.status === 'dead' ? effects.deadScale : 1;
         const groundRoll = p.mode === 'cube' && p.grounded ? Math.sin(state.x / 20) * .15 : 0;
         const groundBob = p.mode === 'cube' && p.grounded ? -1.5 * Math.abs(Math.sin(state.x / 20)) : 0;
@@ -178,9 +203,19 @@
         ctx.rotate(angle + groundRoll + (p.mode === 'swing' ? Math.sin(state.time * 7) * .15 : 0) + pose.rotation);
         ctx.scale(pose.x * scale, pose.y * scale);
         if (p.gravity < 0 && ['robot', 'spider'].includes(p.mode)) ctx.scale(1, -1);
-        ctx.drawImage(sprite, -28, -28, 56, 56); ctx.restore();
+        ctx.drawImage(sprite, -28, -28, 56, 56); ctx.restore(); ctx.restore();
       }
+      if (crossingRing) {
+        const plane = 190 + crossingRing.x + crossingRing.w / 2 - state.x;
+        drawSprite(0, plane);
+        jumpRing(ctx, crossingRing, 190 + crossingRing.x - state.x, state.time, config.reduced, true);
+        drawSprite(plane, 960);
+      } else drawSprite();
       effects.front(ctx, state);
+      nearbyRings.forEach(item => {
+        if (item === crossingRing) return;
+        jumpRing(ctx, item, 190 + item.x - state.x, state.time, config.reduced, true);
+      });
       if (world.demo) {
         for (let i = Math.max(1, segment.index - 1); i <= Math.min(world.count - 1, segment.index + 1); i++)
           portal(ctx, world.segment(i), state, world, config, false, true);
@@ -200,9 +235,10 @@
       }
     }
     return { draw, get screen() { return screen; }, snap: state => motion.snap(state), reset(config, state) {
-      scenery.prepare(); motion.reset(state); effects.reset(config); activePads.clear();
+      scenery.prepare(); motion.reset(state); effects.reset(config); activePads.clear(); activeRings.clear();
     }, update(state, input) { motion.update(state); effects.update(state, input); }, notify(event, state) {
       if (event.pad && event.padX !== undefined) activePads.set(event.padX, state.time);
+      if (event.ring && event.ringX !== undefined) activeRings.set(event.ringX, state.time);
       effects.notify(event, state);
     } };
   }

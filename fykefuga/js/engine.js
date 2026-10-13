@@ -15,7 +15,7 @@
       attempt++;
       random = Vy.rng(config.seed + attempt * 104729);
       choices.clear();
-      state = { status: 'running', time: 0, x: 0, segment: 0, player: F.Physics.player(world.segment(0).mode), correct: 0, attempt, events: [], answered: new Set(), errors: [] };
+      state = { status: 'running', time: 0, x: 0, segment: 0, player: F.Physics.player(world.segment(0).mode), correct: 0, attempt, events: [], answered: new Set(), ringsUsed: new Set(), errors: [] };
       state.events.push({ type: 'mode', mode: state.player.mode });
       return state;
     }
@@ -72,6 +72,16 @@
         p.velocity = (p.y - p.previousY) / F.Physics.STEP;
         p.grounded = segment.mode === 'cube' && p.y >= corridor.bottom - .5;
       } else F.Physics.update(p, input, corridor);
+      if (world.demo && p.mode === 'cube' && !p.grounded && input.pressed) {
+        const ring = segment.obstacles.find(item => item.kind === 'ring' &&
+          !state.ringsUsed.has(item.x) && Math.abs(state.x - item.x - item.w / 2) < 44 &&
+          Math.abs(p.y - item.y - item.h / 2) < 62);
+        if (ring) {
+          p.velocity = -1000;
+          state.ringsUsed.add(ring.x);
+          state.events.push({ type: 'jump', mode: p.mode, ring: true, ringX: ring.x, ringY: ring.y + ring.h / 2 });
+        }
+      }
       let bounced = false;
       if (world.demo && p.mode === 'cube' && p.grounded) {
         const pad = segment.obstacles.find(item => item.kind === 'pad' &&
@@ -102,7 +112,7 @@
       }
       if (!before.grounded && p.grounded && Math.abs(before.velocity) > 150) state.events.push({ type: 'land', mode: p.mode });
       if (segment.obstacles.some(obstacle => {
-        if (obstacle.kind === 'pad') return false;
+        if (obstacle.kind === 'pad' || obstacle.kind === 'ring') return false;
         if (obstacle === landed) return false;
         if (obstacle.kind === 'platform' && p.previousY <= obstacle.y - F.Physics.SIZE / 2 + .01 && p.y <= obstacle.y - F.Physics.SIZE / 2 + .01) return false;
         return F.Physics.collision(oldX, state.x, p, obstacle);

@@ -71,6 +71,10 @@
       instruments.impact(time, 510, .085, .13); instruments.rustle(time, .1, .045, 2800);
     } else if (kind === 'land') {
       instruments.impact(time, 94, .1, .1); instruments.rustle(time, .075, .06, 1900);
+    } else if (kind === 'jump' && event.ring) {
+      instruments.sweep(420, 1140, .31, .13, time, 'sine');
+      [79, 86, 91].forEach((midi, i) => pluck(midi, i * .045, .34, .18, (i - 1) * .13));
+      instruments.rustle(time, .18, .07, 5500);
     } else if (kind === 'jump' && event.pad) {
       instruments.impact(time, 185, .24, .19);
       instruments.sweep(240, 660, .24, .10, time + .018, 'sine');
