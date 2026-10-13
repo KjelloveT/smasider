@@ -134,3 +134,25 @@ body.ff-playing #game-view:fullscreen { background: #fff9e9; display: flex; flex
 
 /* The fixed level picker is the only setup panel while the learner tools are hidden. */
 .ff-setup { grid-template-columns: minmax(0, 1fr); }
+
+/* Bruk standard breidd på oppsettet; spelefeltet held den eksisterande storleiken. */
+#setup-view .ff-setup { max-width: 1200px; margin-inline: auto; }
+.ff-game-toolbar { flex-wrap: nowrap; min-width: 0; overflow: hidden; }
+.ff-game-toolbar #run-label { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ff-icon-button { flex: 0 0 44px; width: 44px; min-width: 44px; min-height: 44px; padding: 0; display: inline-grid; place-items: center; }
+.ff-icon-button [data-icon], .ff-icon-button svg { display: block; width: 20px; height: 20px; }
+.ff-run-progress { flex: 0 0 auto; min-width: 48px; padding: 7px 8px; border: 2px solid #142820; border-radius: 7px; background: #fffdf5; font-variant-numeric: tabular-nums; font-weight: 800; text-align: center; }
+.ff-death-progress { position: absolute; z-index: 5; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(.72); opacity: 0; padding: 10px 22px; border: 3px solid #142820; border-radius: 12px; background: #fff9e9; box-shadow: 0 5px 0 #8a5b25, 0 12px 30px #14282066; color: #000; font: 900 clamp(32px, 8vw, 76px)/1 Georgia, 'Times New Roman', serif; pointer-events: none; }
+.ff-death-progress.is-visible { animation: ff-progress-flash 1s ease-out both; }
+@keyframes ff-progress-flash { 0% { opacity: 0; transform: translate(-50%, -42%) scale(.72); } 12% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); } 28% { transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -58%) scale(.96); } }
+@media (max-width: 520px) {
+  .ff-game-toolbar #run-label { display: none; }
+  .ff-game-toolbar { justify-content: space-between; gap: 2px; padding: 4px; }
+  .ff-icon-button { flex-basis: 36px; width: 36px; min-width: 36px; min-height: 36px; }
+  .ff-run-progress { min-width: 38px; padding: 5px 4px; }
+}
+@media (max-width: 340px) {
+  .ff-icon-button { flex-basis: 34px; width: 34px; min-width: 34px; min-height: 36px; }
+  .ff-run-progress { min-width: 34px; }
+}
+@media (prefers-reduced-motion: reduce) { .ff-death-progress.is-visible { animation-duration: .2s; } }

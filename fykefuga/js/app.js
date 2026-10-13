@@ -1,7 +1,7 @@
 (function (root) {
   'use strict';
   const F = root.Fykefuga, $ = id => document.getElementById(id);
-  let sharedPack, selected, engine, config, currentView = 'setup', paused = false, countdown = 0, deathTimer, frame = 0, previous = 0, feedbackUntil = 0;
+  let sharedPack, selected, engine, config, currentView = 'setup', paused = false, countdown = 0, deathTimer, deathProgressTimer, frame = 0, previous = 0, feedbackUntil = 0;
   const errors = [], render = F.Render.create($('game-canvas'));
   const retrayHud = F.ReTrayHud.create($('game-stage'));
   const clock = F.Physics.accumulator(), input = F.Input.create($('game-stage'), restart, () => paused ? resume() : pause('Spelet er sett på pause.'));
@@ -97,16 +97,34 @@
     if (!engine || currentView !== 'game' || paused) return;
     clearTimeout(deathTimer); engine.reset(); F.Audio.start(engine.world.musicScene ?? engine.world.segment(0).scene); render.reset(config, engine.state); clock.clear(); input.discardPress(); previous = performance.now(); processEvents();
   }
+  function progressPercent() {
+    if (!engine || !Number.isFinite(engine.world.end) || engine.world.end <= 0) return null;
+    return engine.state.status === 'complete' ? 100 : Math.max(0, Math.min(99, Math.floor(engine.state.time / engine.world.end * 100)));
+  }
+  function flashProgress() {
+    clearTimeout(deathProgressTimer);
+    const percent = progressPercent();
+    if (percent === null) return;
+    const badge = $('death-progress');
+    badge.textContent = percent + '%'; badge.hidden = false;
+    badge.classList.remove('is-visible'); void badge.offsetWidth; badge.classList.add('is-visible');
+    deathProgressTimer = setTimeout(() => { badge.hidden = true; badge.classList.remove('is-visible'); }, 1000);
+  }
+  function setIcon(button, name) {
+    const icon = button.querySelector('[data-icon]');
+    if (!icon) return;
+    icon.dataset.icon = name; delete icon.dataset.iconDone; icon.replaceChildren(); hydrateIcons(button);
+  }
   function processEvents() {
     engine.drain().forEach(event => {
       F.Audio.effect(event); render.notify(event, engine.state);
       if (event.type === 'mode') {
-        const mode = F.mode(event.mode); $('mode-label').textContent = mode.name; $('control-help').textContent = mode.help;
         F.Audio.setScene(engine.world.musicScene ?? engine.world.at(engine.state.time).scene);
       }
       if (!engine.world.demo && (event.type === 'answer' || event.type === 'complete')) F.Storage.progress(event, { ...config, mode: engine.state.player.mode });
       if (event.type === 'dead') {
         if (!engine.world.demo) F.Storage.record(selected, config, engine.state);
+        flashProgress();
         if (event.reason === 'answer') {
           errors.push({ prompt: event.detail.item.prompt, correct: event.detail.item.correct, chosen: event.detail.chosen }); if (errors.length > 100) errors.shift();
           $('question-text').textContent = 'Fasit: ' + event.detail.item.correct; $('question-help').textContent = 'Spørsmålet: ' + event.detail.item.prompt;
@@ -133,21 +151,19 @@
   function hud() {
     const state = engine.state, choice = engine.activeChoice();
     $('run-label').textContent = engine.world.demo ? (config.level === 'back-on-track-study' ? 'Eidskvedet' : config.level === 'stereo-study' ? 'Villrina i Gyllengarden' : 'Sorgsalane') + ' · ' + state.correct + '/' + (engine.world.count - 1) + ' rette · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
+    const progress = progressPercent(); $('run-progress').textContent = progress === null ? '∞' : progress + '%';
     if (engine.world.demo) {
       $('question-board').hidden = $('upper-answer').hidden = $('lower-answer').hidden = true;
-      $('control-help').textContent = F.mode(state.player.mode).help;
       retrayHud.update(choice, render.screen);
       return;
     }
     retrayHud.hide();
     if (choice && state.status === 'running') {
       $('question-board').hidden = false;
-      $('control-help').textContent = ['cube', 'robot'].includes(state.player.mode) ? 'Hopp opp på hylla for øvre svar. Bli på golvet for nedre.' : F.mode(state.player.mode).help;
       $('question-text').textContent = choice.item.prompt; $('question-help').textContent = 'Vel vegen før avgjerdslina · ' + choice.remaining.toFixed(1) + ' s';
       ['upper', 'lower'].forEach(side => { const answer = $(side + '-answer'); answer.hidden = false; answer.textContent = (side === 'upper' ? 'Øvre: ' : 'Nedre: ') + choice[side]; answer.classList.toggle('is-selected', (state.player.y < F.Physics.SPLIT ? 'upper' : 'lower') === side); });
     } else if (state.status === 'running' && performance.now() > feedbackUntil) {
       $('question-board').hidden = true;
-      $('control-help').textContent = F.mode(state.player.mode).help;
       $('upper-answer').hidden = $('lower-answer').hidden = true;
     }
   }
@@ -164,16 +180,16 @@
   }
   function pause(reason) {
     if (currentView !== 'game' || paused) return;
-    paused = true; countdown = 0; render.snap(engine.state); clearTimeout(deathTimer); input.enable(false); clock.clear(); F.Audio.pause();
+    paused = true; countdown = 0; setIcon($('pause-button'), 'play'); $('pause-button').setAttribute('aria-label', 'Hald fram'); $('pause-button').title = 'Hald fram'; render.snap(engine.state); clearTimeout(deathTimer); input.enable(false); clock.clear(); F.Audio.pause();
     $('game-overlay').hidden = false; $('overlay-title').textContent = 'Pause'; $('overlay-text').textContent = reason || 'Hald fram når du er klar.'; $('resume-button').hidden = false;
   }
   function resume() {
     if (currentView !== 'game' || !paused || document.hidden) return;
-    paused = false; countdown = performance.now() + 2000; input.enable(false); clock.clear(); $('overlay-title').textContent = 'Klar om 2'; $('resume-button').hidden = true;
+    paused = false; setIcon($('pause-button'), 'pause'); $('pause-button').setAttribute('aria-label', 'Pause'); $('pause-button').title = 'Pause'; countdown = performance.now() + 2000; input.enable(false); clock.clear(); $('overlay-title').textContent = 'Klar om 2'; $('resume-button').hidden = true;
     F.Audio.init(engine.world.musicScene ?? engine.world.at(engine.state.time).scene).catch(error => Vy.toast(error.message));
     if (engine.state.status === 'dead') { engine.reset(); F.Audio.rewind(); render.reset(config, engine.state); processEvents(); }
   }
-  function syncSound() { $('game-sound').textContent = config.sound ? 'Ljod på' : 'Ljod av'; $('game-sound').setAttribute('aria-pressed', String(config.sound)); $('sound-input').checked = config.sound; }
+  function syncSound() { const label = config.sound ? 'Ljod på' : 'Ljod av'; $('game-sound').setAttribute('aria-label', label); $('game-sound').title = label; $('game-sound').setAttribute('aria-pressed', String(config.sound)); $('sound-input').checked = config.sound; }
   $('start-button').addEventListener('click', () => start());
   $('library-button').addEventListener('click', () => { library.render(); view('library'); });
   ['library-home', 'result-home'].forEach(id => $(id).addEventListener('click', () => { view('setup'); refresh(); }));
