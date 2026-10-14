@@ -54,7 +54,7 @@
       const under = R().h('div', 'ljod-skog3d-under');
       under.appendChild(R().h('p', 'ljod-hint ljod-skog3d-hint',
         'Gå rundt med piltastane eller styrespaken. Kameraet følgjer etter deg.'));
-      under.appendChild(proveknapp(host, p));
+
       host.insertBefore(under, vert.nextSibling);
     }).catch(function (e) {
       /* Den flate skogen står allereie. Vi seier frå i konsollen og lèt
@@ -81,38 +81,6 @@
       b.addEventListener('click', k[2]);
       rad.appendChild(b);
     });
-    return rad;
-  }
-
-  /* ── PRØVEKNAPP ──
-
-     Han set eit tilfeldig vekststeg på kvar bokstav, så ein kan sjå
-     korleis skogen tek seg ut utan å løyse tjueni oppgåver først. Han
-     står her medan skogen er ny og skal ut av vegen når han er ferdig
-     prøvd — difor er han merkt som det han er, og ikkje gøymd bak ein
-     tastekombinasjon vi kjem til å gløyme.
-
-     Han skriv til den ekte profilen. Det er meininga: skal ein sjå
-     korleis skogen ser ut etter ei omlasting, må det som blir vist vere
-     lagra. Ein elev som har ekte framgang skal ikkje trykkje på han. */
-  function proveknapp(host, p) {
-    const rad = R().h('div', 'ljod-skog3d-prov');
-    const knapp = R().h('button', 'vp-button vp-button--compact', 'Tilfeldig vekst');
-    knapp.type = 'button';
-    knapp.addEventListener('click', function () {
-      const a = p.adaptive;
-      /* Steget må òg opp, elles står dei fleste bokstavane som «ikkje
-         opna enno» og skogen ser like tom ut som før. */
-      a.step = LjodLetters.STEPS.length;
-      LjodLetters.ALPHABET.forEach(function (ch) {
-        LjodAdaptive.item(a, ch).maxBox = Math.floor(Math.random() * 6);
-      });
-      LjodState.saveProfile(p);
-      renderSkog(host, p);
-    });
-    rad.appendChild(knapp);
-    rad.appendChild(R().h('span', 'ljod-hint',
-      'Prøveknapp: gjev kvar bokstav eit tilfeldig vekststeg, og skriv over framgangen til denne figuren.'));
     return rad;
   }
 

@@ -123,7 +123,7 @@
    */
   function taskFrame(opts) {
     opts = opts || {};
-    const root_ = h('div', 'ljod-task');
+    const root_ = h('div', 'ljod-task vp-panel vp-panel--plain');
 
     const head = h('div', 'ljod-task-head');
     const prompt = h('p', 'ljod-prompt', opts.prompt || '');

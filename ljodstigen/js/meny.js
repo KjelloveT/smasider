@@ -46,7 +46,7 @@
 
     s.profiles.forEach(function (p) {
       const av = LjodState.avatarOf(p.avatar);
-      const st = LjodAdaptive.stats(p.adaptive);
+      const st = LjodProgress.summary(p);
       const card = R().h('div', 'ljod-profile vp-panel vp-panel--inset' + (current && current.id === p.id ? ' is-active' : ''));
       card.dataset.tone = av.tone;
 
@@ -54,8 +54,8 @@
       pick.type = 'button';
       pick.appendChild(LjodAvatar.image(av.id, 56));
       pick.appendChild(R().h('span', 'ljod-profile-name', av.name));
-      pick.appendChild(R().h('span', 'ljod-profile-sum', st.planted + ' av ' + st.total + ' bokstavar'));
-      pick.setAttribute('aria-label', 'Vel ' + av.name + ', ' + st.planted + ' av ' + st.total + ' bokstavar');
+      pick.appendChild(R().h('span', 'ljod-profile-sum', st.completed + ' av ' + st.total + ' steg · ' + st.percent + ' %'));
+      pick.setAttribute('aria-label', 'Vel ' + av.name + ', ' + st.completed + ' av ' + st.total + ' steg · ' + st.percent + ' %');
       pick.setAttribute('aria-pressed', String(!!(current && current.id === p.id)));
       pick.addEventListener('click', function () { select(p.id); });
       card.appendChild(pick);
@@ -130,7 +130,7 @@
 
       const card = R().h(unlocked ? 'a' : 'div', 'ljod-mode vp-panel ' + (unlocked ? 'vp-panel--plain' : 'vp-panel--inset is-locked'));
       if (unlocked) {
-        card.href = 'spel.html?p=' + encodeURIComponent(current.id) + '&m=' + encodeURIComponent(m.id);
+        card.href = 'spel.html#' + new URLSearchParams({ p: current.id, m: m.id });
       }
       card.appendChild(R().h('span', 'ljod-mode-title', m.label));
       card.appendChild(R().h('span', 'ljod-mode-blurb', def ? def.blurb : ''));
@@ -143,7 +143,7 @@
         card.appendChild(R().h('span', 'ljod-mode-flag', 'Framlegg'));
       }
       if (!unlocked) {
-        card.appendChild(R().h('span', 'ljod-mode-flag', 'Opnar seg snart'));
+        card.appendChild(R().h('span', 'ljod-mode-flag', m.reading ? 'Opnar etter bokstavsteg 5' : 'Opnar seg snart'));
         card.setAttribute('aria-disabled', 'true');
       }
 
@@ -185,6 +185,7 @@
     if (title) title.textContent = av.name;
 
     renderModes();
+    LjodProgressUI.render($('journey'), current);
     LjodSkog.renderStars($('stars'), current);
     LjodSkog.renderSkog($('garden'), current);
     LjodSkog.renderBadges($('badges'), current);

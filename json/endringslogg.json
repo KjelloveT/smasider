@@ -2,6 +2,38 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "2.3",
+      "dato": "2026-10-14",
+      "samandrag": "Ljodstigen har nye opptak, ti steg og ei felles framgangsoversikt for elev og lærar.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Ljodstigen",
+          "tekst": "Fem nye lesesteg med ng, dobbel konsonant, diftongar, sj/kj, lange ord og setningar."
+        },
+        {
+          "t": "nytt",
+          "kva": "Framgang",
+          "tekst": "Sjå fullførte steg, prosent, neste mål og det som står att. Læraren ser òg vilkåra og kvart attståande lesemål."
+        },
+        {
+          "t": "endra",
+          "kva": "Lydopptak",
+          "tekst": "213 nye opptak i ei ny lydmappe. Heile opptaket er bevart med ekstra luft før og etter."
+        },
+        {
+          "t": "endra",
+          "kva": "Profilar",
+          "tekst": "Eksisterande framgang blir bevart, og nye lesemål blir lagra lokalt utan elevnamn."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Elevframgang",
+          "tekst": "Prøveknappen som skreiv tilfeldig vekst over framgangen, er fjerna. Avbrotne lydkjeder held ikkje fram inn i neste oppgåve."
+        }
+      ]
+    },
+    {
       "versjon": "2.2",
       "dato": "2026-10-12",
       "samandrag": "Fykefuga kombinerer presis fart med korte faglege vegval i ei måla barokkverd.",

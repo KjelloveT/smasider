@@ -20,6 +20,7 @@ import json
 import re
 import io
 import os
+import subprocess
 
 ROT = os.path.dirname(os.path.abspath(__file__))
 APP = os.path.join(ROT, 'ljodstigen')
@@ -122,13 +123,13 @@ def main():
             steg_for[ch] = i
     alfabet = sorted(steg_for, key=lambda c: (steg_for[c], c))
 
-    manifest = {'fonem': {}, 'namn': {}, 'ord': {}, 'ros': {}}
+    manifest = {'fonem': {}, 'namn': {}, 'ord': {}, 'ros': {}, 'lydgrupper': {}, 'setningar': {}}
     L = []
     A = L.append
 
     A('# Ljodstigen — innspelingsliste\n')
     A('> Generert av `lag_ljodstigen_lydliste.py`. Ikkje rediger for hand —')
-    A('> endre `ljodstigen/js/letters.js` eller `words.js` og køyr skriptet på nytt.\n')
+    A('> endre `ljodstigen/js/letters.js` eller `words.js` / `reading-data.js` og køyr skriptet på nytt.\n')
 
     # Statustabellen høyrer heime her, men tala finst ikkje enno:
     # manifest blir fylt lenger nede medan dokumentet blir skrive.
@@ -137,9 +138,9 @@ def main():
 
     A('## Slik gjer du det\n')
     A('**Éin fil per klipp.** Filnamnet er id-en i tabellane under, med `.wav`')
-    A('eller `.mp3`. Byggjeskriptet skøyter dei saman til fire lydsprites.\n')
+    A('eller `.mp3`. Byggjeskriptet skøyter WAV-filene saman til seks lydsprites.\n')
     A('**Legg filene i `_kjelder/ljodstigen-lyd/<bank>/`** — altså `fonem/`,')
-    A('`namn/`, `ord/` og `ros/`. Mappa er `.gitignore`-a, så råopptaka blir')
+    A('`namn/`, `ord/`, `ros/`, `lydgrupper/` og `setningar/`. Mappa er `.gitignore`-a, så råopptaka blir')
     A('aldri publiserte. Dei ligg lokalt så banken kan byggjast på nytt seinare.\n')
     A('**Same stemme, same mikrofon, same rom for heile settet.** Byter stemma')
     A('midt i eit sett, les elevane det som eit signal om at noko er annleis.\n')
@@ -211,12 +212,31 @@ def main():
         A('| `%s` | «%s» |' % (i, t))
     A('')
 
+    # Les dei nye stega frå same datamodul som nettlesaren brukar.
+    program = "const fs=require('node:fs'),vm=require('node:vm');const c={window:{}};vm.runInNewContext(fs.readFileSync('ljodstigen/js/reading-data.js','utf8'),c);process.stdout.write(JSON.stringify(c.window.LjodReading.LEVELS));"
+    levels = json.loads(subprocess.check_output(['node', '-e', program], cwd=ROT, text=True, encoding='utf-8'))
+    A('---\n')
+    A('## 5. Lesesteg 6–10\n')
+    A('Heile råopptaket blir bevart, med 80 ms ekstra luft før og 140 ms etter. Ingen automatisk trimming.\n')
+    for level in levels:
+        A('### Steg %d — %s\n' % (level['number'], level['title']))
+        A('| Id | Tekst |')
+        A('|---|---|')
+        for group in level['groups']:
+            manifest['lydgrupper'][group['id']] = group['text']
+            A('| `%s` | Lydgruppa %s, lesen som éin samanhengande lyd |' % (group['id'], group['text']))
+        for target in level['items']:
+            bank = 'setningar' if target['kind'] == 'sentence' else 'ord'
+            manifest[bank][target['id']] = target['text']
+            A('| `%s` | %s |' % (target['id'], target['text']))
+        A('')
+
     total = sum(len(b) for b in manifest.values())
     A('---\n')
     A('## Samla\n')
     A('| Bank | Klipp |')
     A('|---|---|')
-    for b in ('fonem', 'namn', 'ord', 'ros'):
+    for b in manifest:
         A('| %s | %d |' % (b, len(manifest[b])))
     A('| **I alt** | **%d** |' % total)
     A('')
@@ -227,7 +247,7 @@ def main():
     # No er manifest fullt, og statusen kan reknast.
     raa = os.path.join(ROT, '_kjelder', 'ljodstigen-lyd')
     status = ['## Status', '', '| Bank | Treng | Spelt inn | Står att |', '|---|---|---|---|']
-    for b in ('fonem', 'namn', 'ord', 'ros'):
+    for b in manifest:
         d = os.path.join(raa, b)
         har = len([f for f in os.listdir(d) if f.lower().endswith('.wav')]) if os.path.isdir(d) else 0
         vil = len(manifest[b])

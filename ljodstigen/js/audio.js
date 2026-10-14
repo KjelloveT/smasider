@@ -1,8 +1,8 @@
 /* ══════════════════════════════════════════════
    AUDIO.JS — Lyd i Ljodstigen
 
-   Lyden ligg som fire lydsprites: éin MP3 per bank pluss eit JSON-kart
-   med offset og lengd. Fire nettverkskall i staden for tre hundre.
+   Lyden ligg som seks lydsprites: éin MP3 per bank pluss eit JSON-kart
+   med offset og lengd. Seks bankar i staden for 213 einskildfiler.
 
    PLASSHALDARLYD. Så lenge ein bank manglar MP3-fila, lagar vi tonar
    med Web Audio i staden. Kvar id gjev alltid same tone, og dei fire
@@ -21,7 +21,8 @@
 (function (root) {
   'use strict';
 
-  const BANKS = ['fonem', 'namn', 'ord', 'ros'];
+  const BANKS = ['fonem', 'namn', 'ord', 'ros', 'lydgrupper', 'setningar'];
+  const GROUPS = ['f_ng', 'f_ei', 'f_øy', 'f_au', 'f_sj', 'f_kj'];
   const ROOT = 'lyd/';
 
   /* Stemma som er i bruk, og den vi fell tilbake til. Blir sett av
@@ -51,6 +52,7 @@
   const missing = new Set();   // bankar utan ekte lyd
   const borrowed = new Set();  // bankar lånte frå standardstemma
   let ready = false;
+  let generation = 0;
   let playing = [];       // aktive kjelder, så stop() faktisk stoppar
 
   function context() {
@@ -70,6 +72,8 @@
   }
 
   function bankOf(id) {
+    if (GROUPS.indexOf(id) !== -1) return 'lydgrupper';
+    if (String(id).indexOf('s_') === 0) return 'setningar';
     const p = String(id).split('_')[0];
     return p === 'f' ? 'fonem' : p === 'n' ? 'namn' : p === 'o' ? 'ord' : 'ros';
   }
@@ -136,7 +140,7 @@
 
   /** Registeret over stemmer. Resolvar med null om fila ikkje finst. */
   function voices() {
-    return fetchJson(ROOT + 'stemmer.json').catch(function () { return null; });
+    return fetchJson(ROOT + 'stemmer.json?v=20261014').catch(function () { return null; });
   }
 
   /**
@@ -183,6 +187,7 @@
   /* ──────────────── Avspeling ──────────────── */
 
   function stop() {
+    generation++;
     playing.forEach(function (n) { try { n.stop(); } catch (e) {} });
     playing = [];
   }
@@ -257,14 +262,17 @@
   /** Spel éin lyd. Resolvar når han er ferdig. */
   function play(id) {
     if (!id) return Promise.resolve();
-    return unlock().then(function () { return playClip(id); });
+    const token = generation;
+    return unlock().then(function () { if (token === generation) return playClip(id); });
   }
 
   /** Spel fleire etter kvarandre, med valfri pause imellom (ms). */
   function playSeq(ids, gapMs) {
     const gap = gapMs == null ? 120 : gapMs;
+    const token = generation;
     return ids.reduce(function (chain, id) {
       return chain.then(function () {
+        if (token !== generation) return;
         return play(id).then(function () {
           return new Promise(function (r) { setTimeout(r, gap); });
         });
@@ -274,14 +282,17 @@
 
   /** Lyder eit ord: kvar lyd for seg, så heile ordet. */
   function sound_out(word, gapMs) {
+    const token = generation;
     const ids = word.letters.map(function (ch) { return 'f_' + ch; });
     return playSeq(ids, gapMs == null ? 260 : gapMs).then(function () {
+      if (token !== generation) return;
       return new Promise(function (r) { setTimeout(r, 260); });
-    }).then(function () { return play(word.sound); });
+    }).then(function () { if (token === generation) return play(word.sound); });
   }
 
   root.LjodAudio = {
     BANKS: BANKS,
+    hasClip: function (id) { const bank = bankOf(id); return !!(buffers[bank] && maps[bank] && maps[bank][id]); },
     unlock: unlock,
     load: load,
     play: play,

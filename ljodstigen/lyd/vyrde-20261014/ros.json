@@ -1,0 +1,65 @@
+{
+ "app": "ljodstigen",
+ "version": 1,
+ "bank": "ros",
+ "voice": "vyrde-20261014",
+ "rate": 48000,
+ "gapMs": 100,
+ "leadMs": 80,
+ "tailMs": 140,
+ "preservesSource": true,
+ "clips": {
+  "r_bra": [
+   0.1,
+   0.56
+  ],
+  "r_derja": [
+   0.76,
+   0.96
+  ],
+  "r_flink": [
+   1.82,
+   0.88
+  ],
+  "r_flott": [
+   2.8,
+   0.74
+  ],
+  "r_gjort": [
+   3.6401,
+   0.95
+  ],
+  "r_klarte": [
+   4.6901,
+   0.87
+  ],
+  "r_nesten": [
+   5.6601,
+   2.0
+  ],
+  "r_nettopp": [
+   7.7601,
+   0.72
+  ],
+  "r_okt": [
+   8.5801,
+   2.24
+  ],
+  "r_prov": [
+   10.9201,
+   1.4
+  ],
+  "r_rett": [
+   12.4201,
+   0.66
+  ],
+  "r_saman": [
+   13.1801,
+   1.6
+  ],
+  "r_vanskeleg": [
+   14.8801,
+   2.63
+  ]
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "app": "ljodstigen",
+ "version": 1,
+ "bank": "lydgrupper",
+ "voice": "vyrde-20261014",
+ "rate": 48000,
+ "gapMs": 100,
+ "leadMs": 80,
+ "tailMs": 140,
+ "preservesSource": true,
+ "clips": {
+  "f_au": [
+   0.1,
+   0.6
+  ],
+  "f_ei": [
+   0.8,
+   0.52
+  ],
+  "f_kj": [
+   1.42,
+   0.74
+  ],
+  "f_ng": [
+   2.26,
+   1.15
+  ],
+  "f_sj": [
+   3.51,
+   0.84
+  ],
+  "f_øy": [
+   4.45,
+   0.57
+  ]
+ }
+}

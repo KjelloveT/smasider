@@ -7,34 +7,22 @@
 Les WAV-filer frå  _kjelder/ljodstigen-lyd/<stemme>/<bank>/<id>.wav
 og skriv           ljodstigen/lyd/<stemme>/<bank>.mp3  +  <bank>.json
 
-Standardstemma er «vyrde». Ligg råopptaka rett under
+Standardstemma er «vyrde-20261014». Ligg råopptaka rett under
 _kjelder/ljodstigen-lyd/<bank>/ utan stemmemappe, blir dei lesne der òg,
 slik det var før stemmepakkane kom.
 
-Éin MP3 per bank i staden for 141 småfiler: fire nettverkskall i staden
+Éin MP3 per bank i staden for 213 småfiler: seks bankar i staden
 for hundrevis, som betyr noko på skule-wifi.
 
-TRE TING SKRIPTET GJER MED LYDEN, OG KVIFOR:
-
-1. TRIMMAR til fast innleiing. Råklippa har frå 0,01 til 0,27 s stille
-   framfor lyden. Ulik innleiing gjer at nokre bokstavar «svarar» treigare
-   enn andre, og i eit spel som måler responstid er det ikkje greitt.
-
-2. JAMNAR STYRKEN DELVIS. Opptaka er toppnormaliserte til -1 dBFS, men
-   topp er ikkje det øyret høyrer: ein kort smell og ein hald vokal med
-   same topp har 12 dB skilnad i RMS. I Bokstavropet skal eleven velje
-   mellom to lydar, og då kan ikkje «den høgaste» vere eit utilsikta hint.
-   Vi flyttar kvart klipp HALVVEGS mot median-RMS, ikkje heilt: /t/ ER
-   naturleg svakare enn /m/, og full utjamning høyrest kunstig ut.
-
-3. LEGG 60 ms STILLE mellom klippa. MP3-koding gjev nokre millisekund
-   forskyving i begge endar, og utan margin lek naboklippet inn. Marginen
-   er òg grunnen til at spriten toler at offseta er nokre få ms unna.
+HEILE RÅOPPTAKET BLIR BEVART. Ingen terskel, stilldeteksjon eller trimming
+får fjerne svake konsonantopningar eller utklinging. Legg 80 ms luft før,
+140 ms etter og 100 ms mellom klippa. Berre den tilførte stilla blir fada.
+Styrken blir delvis jamna, med -1 dBFS som tak.
 
 MP3 er valt framfor Opus fordi iPad er utbreidd i norske klasserom og
 Safari sin Opus-støtte er for fersk. 64 kbps mono: desse klippa er
 læremateriell der det å skilje /f/ frå /v/ er sjølve poenget, og heile
-banken er nokre hundre kilobyte uansett.
+banken er kring 1,7 MB ferdig pakka.
 """
 import array
 import io
@@ -43,23 +31,22 @@ import math
 import os
 import sys
 import wave
+import subprocess
 
 ROT = os.path.dirname(os.path.abspath(__file__))
 KJELDE = os.path.join(ROT, '_kjelder', 'ljodstigen-lyd')
 LYD = os.path.join(ROT, 'ljodstigen', 'lyd')
 MANIFEST = os.path.join(LYD, 'manifest.json')
 STEMMER = os.path.join(LYD, 'stemmer.json')
-STANDARD_STEMME = 'vyrde'
+STANDARD_STEMME = 'vyrde-20261014'
 
-BANKS = ('fonem', 'namn', 'ord', 'ros')
+BANKS = ('fonem', 'namn', 'ord', 'ros', 'lydgrupper', 'setningar')
 
-LEAD_MS = 20        # stille framfor kvart klipp, likt for alle
-TAIL_MS = 40        # naturleg utklang vi lèt stå
-GAP_MS = 60         # stille mellom klipp i spriten
-HEAD_MS = 80        # stille heilt i starten, tek unna kodeforsinking
-FADE_MS = 5         # mot klikk i skøytane
-SILENCE_DB = -30    # terskel under toppen for «her byrjar lyden»
-FLOOR_OVER_DB = 12  # ... men alltid minst så mykje over støygolvet i klippet
+LEAD_MS = 80        # ekstra luft; heile originalen kjem etter henne
+TAIL_MS = 140       # ekstra luft etter heile originalen
+GAP_MS = 100        # isolerer naboklippa, òg ved MP3-forskyving
+HEAD_MS = 100
+FADE_MS = 5         # berre i den tilførte stilla
 PEAK_CEIL = 0.891   # -1 dBFS
 ALIGN = 0.5         # kor langt mot median-RMS vi flyttar (0 = ikkje, 1 = heilt)
 BITRATE = 64
@@ -90,66 +77,9 @@ def peak(a):
     return (max(abs(v) for v in a) / 32768.0) if len(a) else 0.0
 
 
-def find_sound(a, fr, win_ms=5, hold_ms=25):
-    """Første og siste sample der det faktisk er lyd.
-
-    Terskelen åleine held ikkje. Fleire av råklippa har eit einsleg blaff
-    på kring -40 dB tidleg — ein munnlyd, eit klikk frå stolen — og ein
-    detektor som ser på eitt vindauge om gongen trur lyden byrjar der.
-    Resultatet var 160 ms daud luft framfor /y/, som eleven ventar på i
-    ei oppgåve som måler responstid.
-
-    Difor: vi krev at nivået HELD SEG oppe. Snittet over dei neste
-    hold_ms må vere over terskelen. Ein tikk fell tilbake med ein gong og
-    dreg ikkje snittet opp; ein ekte taleoppstart gjer det.
-    """
-    win = max(1, int(fr * win_ms / 1000))
-    levels = []
-    for i in range(0, len(a) - win + 1, win):
-        levels.append(rms(a[i:i + win]))
-    if not levels:
-        return 0, len(a)
-    top = max(levels)
-    if top <= 0:
-        return 0, len(a)
-    # To tersklar, og vi tek den strengaste.
-    #
-    # Berre «topp minus 30 dB» held ikkje. Ord- og ros-opptaka har eit
-    # støygolv på -34 til -44 dB, medan bokstavlydane låg på -50 til -58.
-    # Med toppen på -11 dB hamna terskelen på -41 dB, altså UNDER romtona,
-    # og då blir heile klippet rekna som lyd: «pose» kom ut som 550 ms tale
-    # med 800 ms romtone framfor og 600 ms etter.
-    #
-    # Difor måler vi støygolvet i kvart klipp for seg — 10. persentil av
-    # vindaugsnivåa — og krev at lyden ligg minst 12 dB over det. Klipp
-    # med stille rom oppfører seg som før; klipp med støyande rom blir
-    # trimma etter sitt eige golv.
-    quiet = sorted(levels)
-    floor = quiet[max(0, int(len(quiet) * 0.10) - 1)]
-    thr = max(top * (10 ** (SILENCE_DB / 20.0)),
-              floor * (10 ** (FLOOR_OVER_DB / 20.0)))
-    hold = max(1, int(hold_ms / win_ms))
-
-    def sustained(i, step):
-        """Snittnivå over hold vindauge frå i og utover i retning step."""
-        idx = [i + k * step for k in range(hold)]
-        idx = [j for j in idx if 0 <= j < len(levels)]
-        return (sum(levels[j] for j in idx) / len(idx)) if idx else 0.0
-
-    start = next((i for i in range(len(levels)) if sustained(i, 1) > thr), None)
-    if start is None:                       # ingenting over terskel: bruk alt
-        return 0, len(a)
-    end = next((i for i in range(len(levels) - 1, -1, -1) if sustained(i, -1) > thr), start)
-    return start * win, min(len(a), (end + 1) * win)
-
-
 def trim(a, fr):
-    s, e = find_sound(a, fr)
-    lead = int(fr * LEAD_MS / 1000)
-    tail = int(fr * TAIL_MS / 1000)
-    s = max(0, s - lead)
-    e = min(len(a), e + tail)
-    return a[s:e]
+    """Bakoverkompatibelt namn: bevar ALT, og legg til tryggingsmargin."""
+    return silence(fr, LEAD_MS) + a + silence(fr, TAIL_MS)
 
 
 def fade(a, fr):
@@ -237,11 +167,15 @@ def build(bank, manifest, stemme, verbose=True):
 
     ut = os.path.join(LYD, stemme)
     os.makedirs(ut, exist_ok=True)
-    with open(os.path.join(ut, bank + '.mp3'), 'wb') as f:
+    target = os.path.join(ut, bank + '.mp3')
+    if os.path.exists(target) and open(target, 'rb').read() != mp3:
+        raise SystemExit('Lydmappa er versjonspinna og kan ikkje skrivast over. Bruk --stemme <ny-id> og oppdater stemmer.json.')
+    with open(target, 'wb') as f:
         f.write(mp3)
     with open(os.path.join(ut, bank + '.json'), 'w', encoding='utf-8', newline='\n') as f:
         json.dump({'app': 'ljodstigen', 'version': 1, 'bank': bank, 'voice': stemme,
-                   'rate': rate, 'gapMs': GAP_MS, 'clips': offsets},
+                   'rate': rate, 'gapMs': GAP_MS, 'leadMs': LEAD_MS, 'tailMs': TAIL_MS,
+                   'preservesSource': True, 'clips': offsets},
                   f, ensure_ascii=False, indent=1)
         f.write('\n')
 
@@ -256,15 +190,10 @@ def build(bank, manifest, stemme, verbose=True):
 
 
 def encode(samples, rate):
-    import lameenc
-    enc = lameenc.Encoder()
-    enc.set_bit_rate(BITRATE)
-    enc.set_in_sample_rate(rate)
-    enc.set_channels(1)
-    enc.set_quality(2)              # 2 = høg kvalitet, treg koding. 21 s totalt.
-    data = enc.encode(samples.tobytes())
-    data += enc.flush()
-    return bytes(data)
+    # Same sjølv-hosta kodar som Lydskurd/Ljodbanken; ingen installasjon.
+    return subprocess.check_output(
+        ['node', os.path.join(ROT, 'bygg_ljodstigen_mp3.cjs'), str(rate)],
+        input=samples.tobytes())
 
 
 def main():

@@ -1,0 +1,113 @@
+'use strict';
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const app = path.join(__dirname, '..');
+const context = { window: null, Vy: { shuffle: list => list.slice() }, Date, URLSearchParams };
+context.window = context;
+let stored = null;
+context.VyrdepilStorage = { getGameState: () => stored, setGameState: (_, value) => { stored = value; } };
+vm.createContext(context);
+for (const name of ['letters', 'reading-data', 'adaptive', 'progress', 'state']) {
+  vm.runInContext(fs.readFileSync(path.join(app, 'js', name + '.js'), 'utf8'), context);
+}
+const { LjodLetters: L, LjodReading: D, LjodProgress: P, LjodState: S, LjodAdaptive: A } = context;
+function profile() { return { id: 'test', adaptive: A.newState(), reading: P.hydrate(null) }; }
+function lettersDone(p) {
+  p.adaptive.step = 5;
+  L.ALPHABET.forEach(ch => { p.adaptive.items[ch] = { ...A.item(p.adaptive, ch), box: 3, maxBox: 3 }; });
+}
+
+test('ny profil, gamle profilar og idempotent lagring', () => {
+  assert.equal(P.summary(profile()).percent, 0);
+  const old = { id: 'old', avatar: 'sirkel', adaptive: { step: 4, items: { s: { box: 4, maxBox: 5, right: 12 } } }, badges: ['spire'], counters: { wordsBuilt: 10 } };
+  stored = { version: 1, profiles: [old], lastProfile: 'old', voice: 'vyrde' };
+  const hydrated = S.read();
+  assert.equal(hydrated.profiles[0].adaptive.items.s.maxBox, 5);
+  assert.equal(hydrated.profiles[0].counters.wordsBuilt, 10);
+  assert.equal(hydrated.profiles[0].badges[0], 'spire');
+  assert.equal(P.summary(hydrated.profiles[0]).completed, 3);
+  S.write(hydrated);
+  const once = JSON.stringify(S.read());
+  S.write(S.read());
+  assert.equal(JSON.stringify(S.read()), once);
+  assert.equal(stored.version, 2);
+});
+
+test('alle ti steg, og 100 prosent berre når alle måla er ferdige', () => {
+  const p = profile();
+  lettersDone(p);
+  assert.equal(P.summary(p).completed, 5);
+  assert.equal(P.summary(p).percent, 50);
+  assert.ok(A.unlockedModes(p.adaptive).some(m => m.id === 'lesestigen'));
+  for (const level of D.LEVELS) {
+    assert.equal(P.summary(p).current, level.number);
+    level.items.forEach(target => P.record(p, level.number, target.id, true));
+    assert.equal(P.summary(p).current, level.number);
+    level.items.forEach(target => P.record(p, level.number, target.id, true));
+    assert.equal(P.summary(p).completed, level.number);
+  }
+  assert.equal(P.summary(p).percent, 100);
+  assert.equal(P.summary(p).done, true);
+  assert.equal(P.summary(p).remaining, 0);
+});
+
+test('feil tek ikkje bort ferdige mål, og førehandsøving hoppar ikkje over steg', () => {
+  const p = profile();
+  const target = D.LEVELS[4].items[0];
+  P.record(p, 10, target.id, true);
+  P.record(p, 10, target.id, true);
+  P.record(p, 10, target.id, false);
+  assert.equal(P.resultFor(p, target.id).right, 2);
+  assert.equal(P.summary(p).current, 1);
+  assert.equal(P.summary(p).percent, 0);
+  P.record(p, 6, target.id, true);
+  assert.equal(P.resultFor(p, target.id).right, 2);
+  assert.equal(A.unlockedModes(p.adaptive).some(m => m.id === 'lesestigen'), false);
+});
+
+test('alle nye mål har eit ekte klipp og eit eintydig steg', () => {
+  const voice = JSON.parse(fs.readFileSync(path.join(app, 'lyd/stemmer.json'))).default;
+  assert.notEqual(voice, 'vyrde');
+  const manifest = JSON.parse(fs.readFileSync(path.join(app, 'lyd/manifest.json'))).banks;
+  let count = 0;
+  for (const [bank, entries] of Object.entries(manifest)) {
+    const map = JSON.parse(fs.readFileSync(path.join(app, 'lyd', voice, bank + '.json')));
+    assert.equal(map.preservesSource, true);
+    assert.ok(map.leadMs >= 80 && map.tailMs >= 140);
+    assert.deepEqual(Object.keys(map.clips).sort(), Object.keys(entries).sort());
+    count += Object.keys(entries).length;
+    let end = 0;
+    for (const [start, duration] of Object.values(map.clips)) {
+      assert.ok(start >= end && duration > 0.22);
+      end = start + duration;
+    }
+  }
+  assert.equal(count, 213);
+  const ids = new Set();
+  for (const level of D.LEVELS) {
+    for (const target of level.items) {
+      assert.equal(ids.has(target.id), false);
+      ids.add(target.id);
+      assert.ok(manifest[target.kind === 'sentence' ? 'setningar' : 'ord'][target.id]);
+      assert.ok(level.items.filter(item => item.kind === target.kind).length >= 3);
+      if (target.pair) assert.ok(level.items.some(item => item.text === target.pair));
+    }
+    level.groups.forEach(group => assert.ok(manifest.lydgrupper[group.id]));
+  }
+});
+
+test('alle inngangssider lastar ny profilmodell og alle lokale ressursar finst', () => {
+  for (const name of fs.readdirSync(app).filter(name => name.endsWith('.html'))) {
+    const html = fs.readFileSync(path.join(app, name), 'utf8');
+    if (html.includes('js/state.js')) assert.ok(html.includes('js/progress.js'), name);
+    for (const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)) {
+      const url = match[1].split(/[?#]/)[0];
+      if (/^(?:https?:|data:)/.test(url)) continue;
+      const file = url.startsWith('/') ? path.join(app, '..', url) : path.resolve(app, url);
+      assert.ok(fs.existsSync(file), name + ': ' + url);
+    }
+  }
+});

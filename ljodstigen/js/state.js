@@ -16,7 +16,7 @@
   /* Byte av namn på appen er eitt søk-og-erstatt herifrå. Namnet er
      mellombels — sjå toppen av planen. */
   const APP_ID = 'ljodstigen';
-  const VERSION = 1;
+  const VERSION = 2;
 
   /* Dei åtte fyrste ID-ane er haldne fast, så eksisterande profilar
      får nye figurar utan at framgangen deira blir flytta eller sletta. */
@@ -102,6 +102,7 @@
       avatar: p.avatar || AVATARS[0].id,
       created: p.created || today(),
       adaptive: LjodAdaptive.hydrate(p.adaptive),
+      reading: LjodProgress.hydrate(p.reading),
       badges: Array.isArray(p.badges) ? p.badges : [],
       days: Array.isArray(p.days) ? p.days.slice(-40) : [],
       stars: (p.stars && typeof p.stars === 'object') ? p.stars : { date: null, ids: [] },

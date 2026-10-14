@@ -21,13 +21,14 @@
     lydfangst: function () { return LjodMode_lydfangst; },
     bokstavropet: function () { return LjodMode_bokstavropet; },
     forstelyd: function () { return LjodMode_forstelyd; },
-    ordbyggjar: function () { return LjodMode_ordbyggjar; }
+    ordbyggjar: function () { return LjodMode_ordbyggjar; },
+    lesestigen: function () { return LjodMode_lesestigen; }
   };
 
   const R = function () { return LjodRender; };
 
   function param(name) {
-    return new URLSearchParams(location.search).get(name);
+    return new URLSearchParams(location.hash.slice(1)).get(name) || new URLSearchParams(location.search).get(name);
   }
 
   function go(url) { location.href = url; }
@@ -44,6 +45,12 @@
     const mode = MODES[modeId] ? MODES[modeId]() : null;
 
     if (!profile || !mode) { go('index.html'); return; }
+    const progress = LjodProgress.summary(profile);
+    const allOpen = LjodState.read().allModes;
+    if (mode.id === 'lesestigen' && progress.current < 6 && !allOpen) { go('index.html'); return; }
+    let readingLevel = Number(param('level'));
+    if (!Number.isInteger(readingLevel) || readingLevel < 6 || readingLevel > 10 ||
+        (!allOpen && readingLevel > progress.current)) readingLevel = Math.max(6, progress.current);
 
     document.body.dataset.font = LjodState.read().font;
 
@@ -51,7 +58,7 @@
        ei oppgåve som ventar på nettverket er ei oppgåve eleven trur er
        øydelagd. */
     R().clear(host);
-    const loading = R().h('div', 'ljod-loading');
+    const loading = R().h('div', 'ljod-loading vp-panel vp-panel--plain');
     loading.appendChild(R().h('p', 'ljod-prompt', 'Hentar lydane…'));
     const bar = R().h('div', 'ljod-progress');
     const fill = R().h('div', 'ljod-progress-fill');
@@ -62,13 +69,24 @@
     LjodAudio.load(function (done, total) {
       fill.style.width = Math.round(100 * done / total) + '%';
     }, { voice: LjodState.read().voice }).then(function (res) {
-      runSession(host, profile, mode, res);
+      if (mode.id === 'lesestigen') {
+        const level = LjodReading.LEVELS.find(function (l) { return l.number === readingLevel; });
+        if (!level.items.concat(level.groups).every(function (item) { return LjodAudio.hasClip(item.id); })) {
+          R().clear(host);
+          host.appendChild(R().h('p', 'vp-notice vp-notice--error', 'Lydane til dette steget kunne ikkje lastast. Prøv å laste sida på nytt.'));
+          const retry = R().h('button', 'vp-button', 'Prøv på nytt');
+          retry.addEventListener('click', function () { location.reload(); });
+          host.appendChild(retry);
+          return;
+        }
+      }
+      runSession(host, profile, mode, res, readingLevel);
     });
   }
 
   /* ──────────────── Sjølve økta ──────────────── */
 
-  function runSession(host, profile, mode, audioRes) {
+  function runSession(host, profile, mode, audioRes, readingLevel) {
     const newStars = LjodState.startSession(profile, mode.id);
     LjodState.saveProfile(profile);
 
@@ -94,13 +112,17 @@
       frame.head.appendChild(note);
     }
 
-    const ctx = { profile: profile, adaptive: profile.adaptive, guarantee: false };
+    const ctx = { profile: profile, adaptive: profile.adaptive, guarantee: false, readingLevel: readingLevel };
+    const journey = R().h('div');
+    frame.head.appendChild(journey);
+    LjodProgressUI.render(journey, profile, { compact: true, inTask: true });
     let n = 0;
 
     function nextTask() {
       if (n >= TASKS_PER_SESSION) { finish(host, profile, newStars); return; }
 
       frame.setProgress(n, TASKS_PER_SESSION);
+      LjodProgressUI.render(journey, profile, { compact: true, inTask: true });
       /* Siste oppgåva skal eleven klare. */
       ctx.guarantee = (n === TASKS_PER_SESSION - 1);
 
@@ -119,6 +141,10 @@
         applyResult(profile, res);
         LjodState.saveProfile(profile);
         n++;
+        if (res.reading && LjodProgress.levels(profile)[ctx.readingLevel - 1].done) {
+          finish(host, profile, newStars);
+          return;
+        }
         nextTask();
       });
     }
@@ -130,7 +156,9 @@
      per rute, sidan eleven kan ha to bokstavar rett og éin feil. */
   function applyResult(profile, res) {
     const a = profile.adaptive;
-    if (res.letters) {
+    if (res.reading) {
+      LjodProgress.record(profile, res.reading.level, res.reading.id, res.correct);
+    } else if (res.letters) {
       res.letters.forEach(function (l) {
         LjodAdaptive.record(a, l.ch, l.correct, res.latencyMs / res.letters.length, l.chosen);
         LjodMerke.noteAnswer(profile, l.ch, l.correct, res.latencyMs / res.letters.length, l.chosen);
@@ -148,7 +176,7 @@
     LjodState.saveProfile(profile);
 
     R().clear(host);
-    const box = R().h('div', 'box2 ljod-done');
+    const box = R().h('div', 'vp-panel vp-panel--plain ljod-done');
 
     const canvas = R().h('canvas', 'ljod-confetti');
     box.appendChild(canvas);
@@ -172,18 +200,28 @@
     LjodSkog.renderStars(stars, profile);
     box.appendChild(stars);
 
+    const journey = R().h('section');
+    LjodProgressUI.render(journey, profile, { compact: true });
+    box.appendChild(journey);
+
     /* Skogen er det siste eleven ser. */
     const garden = R().h('div');
     LjodSkog.renderSkog(garden, profile);
     box.appendChild(garden);
 
     const row = R().h('div', 'ljod-btn-row');
-    const again = R().h('button', 'btn', 'Ein runde til');
+    const again = R().h('button', 'vp-button', 'Ein runde til');
     again.type = 'button';
     again.addEventListener('click', function () { location.reload(); });
-    const back = R().h('a', 'btn', 'Tilbake');
+    const back = R().h('a', 'vp-button', 'Tilbake');
     back.href = 'index.html';
     row.appendChild(again);
+    const progress = LjodProgress.summary(profile);
+    if (progress.current >= 6 && !progress.done) {
+      const onward = R().h('a', 'vp-button vp-button--positive', 'Vidare til steg ' + progress.current);
+      onward.href = 'spel.html#' + new URLSearchParams({ p: profile.id, m: 'lesestigen', level: progress.current });
+      row.appendChild(onward);
+    }
     row.appendChild(back);
     box.appendChild(row);
 
@@ -195,6 +233,16 @@
   }
 
   root.LjodMain = { start: start, TASKS_PER_SESSION: TASKS_PER_SESSION, MODES: MODES };
+
+  // Lenkja til neste steg endrar berre fragmentet på same spelside.
+  // Ei ny økt må få ein ny dokumenttilstand, utan gamle lydlovnader.
+  root.addEventListener('hashchange', function () {
+    const values = new URLSearchParams(location.hash.slice(1));
+    if (values.has('p') && values.has('m')) {
+      LjodAudio.stop();
+      location.reload();
+    }
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', start);
