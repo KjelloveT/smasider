@@ -34,8 +34,9 @@
       }
       const segment = world.at(state.time);
       if (segment.index !== state.segment) {
-        if (world.demo && !world.previewRoute) {
-          const choice = world.quiz.get(segment.index - 1);
+        const choiceIndex = world.choiceIndex ? world.choiceIndex(segment) : segment.index - 1;
+        if (world.demo && !world.previewRoute && choiceIndex >= 0) {
+          const choice = world.quiz.get(choiceIndex);
           const lanes = world.lanes(segment);
           const side = state.player.y < lanes.split ? 'upper' : 'lower';
           if (Math.abs(state.player.y - lanes[side]) > lanes.height / 2 + F.Physics.SIZE / 2) { die('crash'); return; }
@@ -112,7 +113,7 @@
       }
       if (!before.grounded && p.grounded && Math.abs(before.velocity) > 150) state.events.push({ type: 'land', mode: p.mode });
       if (segment.obstacles.some(obstacle => {
-        if (obstacle.kind === 'pad' || obstacle.kind === 'ring') return false;
+        if (obstacle.kind === 'pad' || obstacle.kind === 'ring' || obstacle.kind === 'chain') return false;
         if (obstacle === landed) return false;
         if (obstacle.kind === 'platform' && p.previousY <= obstacle.y - F.Physics.SIZE / 2 + 2 &&
             p.y <= obstacle.y - F.Physics.SIZE / 2 + 2) return false;

@@ -59,7 +59,8 @@
       const frame = F.Assets.get('portal-side.png');
       if (!frame) return;
       const corridor = world.viewAt(Math.min(at, world.finishX - 1));
-      const lanes = !finish && world.quiz ? world.lanes(section) : null;
+      const hasChoice = section && (world.choiceIndex ? world.choiceIndex(section) >= 0 : true);
+      const lanes = !finish && world.quiz && hasChoice ? world.lanes(section) : null;
       const centres = lanes ? [lanes.upper, lanes.lower] : [section && section.portalY || (corridor.top + corridor.bottom) / 2];
       const height = lanes ? lanes.height : Math.min(230, corridor.bottom - corridor.top + 18);
       const width = height * frame.width / frame.height;
@@ -165,6 +166,18 @@
           const x = 190 + obstacle.x - state.x;
           if (x + obstacle.w < -100 || x > 1050) return;
           if (obstacle.kind === 'ring') { jumpRing(ctx, obstacle, x, state.time, config.reduced, false); return; }
+          if (obstacle.kind === 'pit') {
+            const spike = F.Assets.get('spike.png');
+            if (spike) for (let tile = x; tile < x + obstacle.w; tile += 25)
+              ctx.drawImage(spike, tile, obstacle.y, Math.min(27, x + obstacle.w - tile), obstacle.h);
+            return;
+          }
+          if (obstacle.kind === 'chain') {
+            const ornament = F.Assets.get('column.png');
+            if (ornament) ctx.drawImage(ornament, Math.round(ornament.width * .45), 0,
+              Math.round(ornament.width * .1), ornament.height, x, obstacle.y, obstacle.w, obstacle.h);
+            return;
+          }
           if (obstacle.kind === 'platform') {
             scenery.platform(ctx, state.x, obstacle.y, obstacle.h, x, x + obstacle.w); return;
           }

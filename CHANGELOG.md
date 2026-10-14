@@ -3,6 +3,12 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.3] — 2026-10-14
+
+### Endra
+- **Utflukt med danning** fylgjer no posisjonane i Polargeist-banekartet: piggehav, hengjande plattformer, 29 hoppringar, sprettplater og skipspartiet. Åtte eigne svarstrekningar er sette inn mellom partia, og banenamnet er oppdatert i spelet.
+- Pigger og andre skadelege hinder i Fykefuga har litt mindre treffområde enn dei synlege figurane.
+
 ## [2.2] — 2026-10-12
 
 ### Lagt til

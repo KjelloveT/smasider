@@ -2,6 +2,15 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "2.3",
+      "dato": "2026-10-14",
+      "samandrag": "Utflukt med danning har fått det faktiske banekartet med plattformer, piggehav og hoppringar.",
+      "punkt": [
+        { "t": "endra", "kva": "Utflukt med danning", "tekst": "Polargeist-posisjonane gjev piggehav, hengjeplattformer, 29 hoppringar og åtte flaggval." },
+        { "t": "endra", "kva": "Treffområde", "tekst": "Pigger og andre skadelege hinder er litt meir tilgjevande enn dei synlege figurane." }
+      ]
+    },
+    {
       "versjon": "2.2",
       "dato": "2026-10-12",
       "samandrag": "Fykefuga kombinerer presis fart med korte faglege vegval i ei måla barokkverd.",

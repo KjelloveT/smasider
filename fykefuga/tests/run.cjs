@@ -6,7 +6,7 @@ const crypto = require('node:crypto');
 const root = path.resolve(__dirname, '../..');
 const context = vm.createContext({ console, URL, URLSearchParams, TextEncoder, TextDecoder, Blob, CompressionStream, DecompressionStream, btoa, atob, setTimeout, clearTimeout, crypto: crypto.webcrypto, document: { addEventListener() {} } });
 context.window = context;
-for (const file of ['js/vyrdepil-util.js', 'js/vyrdepil-share.js', 'fykefuga/js/data.js', 'fykefuga/js/questions.js', 'fykefuga/js/physics.js', 'fykefuga/js/retray-questions.js', 'fykefuga/js/capital-questions.js', 'fykefuga/js/flag-questions.js', 'fykefuga/js/retray.js', 'fykefuga/js/stereo.js', 'fykefuga/js/back-on-track.js', 'fykefuga/js/polargeist.js', 'fykefuga/js/levels.js', 'fykefuga/js/engine.js', 'fykefuga/js/effects.js', 'fykefuga/js/scenery.js', 'fykefuga/js/motion.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
+for (const file of ['js/vyrdepil-util.js', 'js/vyrdepil-share.js', 'fykefuga/js/data.js', 'fykefuga/js/questions.js', 'fykefuga/js/physics.js', 'fykefuga/js/retray-questions.js', 'fykefuga/js/capital-questions.js', 'fykefuga/js/flag-questions.js', 'fykefuga/js/retray.js', 'fykefuga/js/stereo.js', 'fykefuga/js/back-on-track.js', 'fykefuga/js/polargeist-layout.js', 'fykefuga/js/polargeist.js', 'fykefuga/js/levels.js', 'fykefuga/js/engine.js', 'fykefuga/js/effects.js', 'fykefuga/js/scenery.js', 'fykefuga/js/motion.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
 const F = context.Fykefuga;
 let assertions = 0;
 function check(condition, message) { assert.ok(condition, message); assertions++; }
@@ -83,6 +83,10 @@ for (const mode of F.modes) for (let variant = 0; variant < 2; variant++) for (l
   check(alive, 'Uframkomeleg byggjestykke: ' + mode.id + ', nivå ' + difficulty + ', variant ' + variant);
 }
 check(F.Physics.collision(0, 100, { mode: 'wave', y: 250, previousY: 250 }, { x: 50, y: 230, w: 2, h: 40 }), 'Tynn hindring vart hoppa over');
+check(!F.Physics.collision(0, 0, { mode: 'cube', y: 220, previousY: 220 },
+  { x: 0, y: 230, w: 32, h: 32, kind: 'spike' }), 'Piggspissen har for stort treffområde');
+check(F.Physics.collision(0, 0, { mode: 'cube', y: 240, previousY: 240 },
+  { x: 0, y: 230, w: 32, h: 32, kind: 'spike' }), 'Midten av piggen må framleis vere farleg');
 require('./retray.cjs')(F, check, pack);
 require('./stereo.cjs')(F, check, pack);
 require('./capital.cjs')(F, check, pack);

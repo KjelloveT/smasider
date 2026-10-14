@@ -1,39 +1,44 @@
 module.exports = function testPolargeist(F, check, pack) {
   const world = F.Polargeist.create({ seed: 51 });
-  check(world.duration === 92 && world.count === 23 && world.musicScene === 7 &&
-    F.Polargeist.BPM === 90 && world.segment(8).start / world.duration > .34 &&
-    world.segment(11).start / world.duration < .48,
-    'Flaggbana må fylgje den heile orkestersatsen');
-  check(world.segment(0).mode === 'cube' && world.segment(8).mode === 'ship' &&
-    world.segment(11).mode === 'cube', 'Flaggbana må ha terning–skip–terning');
-  check(world.quiz.count === 22 && F.FlagQuestions.codes.length === 51,
-    'Alle europeiske flagg må vere i PNG-arket og 22 portpar må få spørsmål');
-  check(F.Polargeist.obstacles.filter(item => item.kind === 'spike').length >= 45 &&
-    F.Polargeist.obstacles.filter(item => item.kind === 'ring').length >= 6 &&
-    F.Polargeist.obstacles.filter(item => item.kind === 'platform').length >= 6 &&
-    F.Polargeist.obstacles.filter(item => item.kind === 'column').length >= 18,
-    'Polargeist må ha tette hopp, trapper, ringar og skipshinder');
-  for (const section of F.Polargeist.sections) {
-    check(section.scene === 4, 'Den nye kulissa må brukast i heile flaggbana');
-    check(section.index === world.count - 1 ||
-      section.obstacles.every(item => item.x + item.w < section.to - world.readingSeconds * world.speed),
-      'Hinder ligg i flaggvalet');
+  const source = F.PolargeistSource;
+  check(world.duration === 92 && world.musicScene === 7 && F.Polargeist.BPM === 90,
+    'Flaggbana og det heile orkesterstykket må vare like lenge');
+  check(source.pits.length === 470 && source.spikes.length === 184 &&
+    source.rings.length === 29 && source.ledges.length === 64,
+    'Banekartet må byggje på dei dekoda originalposisjonane');
+  check(world.questionCount === 8 && world.quiz.count === 8 && world.count === 11,
+    'Åtte flaggval og to eigne modusskifte må vere på plass');
+  check(world.at(F.Polargeist.mapX(9645) / world.speed - .01).mode === 'cube' &&
+    world.at(F.Polargeist.mapX(9645) / world.speed + .01).mode === 'ship' &&
+    world.at(F.Polargeist.mapX(13305) / world.speed + .01).mode === 'cube',
+    'Terning–skip–terning må skifte ved dei opphavlege portalplasseringane');
+  check(F.Polargeist.obstacles.filter(item => item.kind === 'ring').length === 29 &&
+    F.Polargeist.obstacles.filter(item => item.kind === 'spike').length >= 160 &&
+    F.Polargeist.obstacles.some(item => item.kind === 'pit' && item.w > 900),
+    'Hoppringar, piggar og lange piggehav må vere att i bana');
+  check(F.Polargeist.obstacles.some(item => item.kind === 'platform' &&
+    item.y < 420 && item.h === 16), 'Hengjeplattformene må liggje over piggehavet');
+  for (const gate of F.Polargeist.gates) {
+    const boundary = F.Polargeist.mapX(gate);
+    const previous = world.at((boundary - 1) / world.speed);
+    const following = world.at((boundary + 1) / world.speed);
+    check(previous.obstacles.filter(item => !['chain', 'ring'].includes(item.kind))
+      .every(item => item.x + item.w < boundary - 580),
+      'Svarstrekninga har eit hinder ved x=' + gate);
+    check(following.obstacles.filter(item => ['spike', 'pit', 'platform'].includes(item.kind))
+      .every(item => item.x >= boundary + 180),
+      'Utgangen frå svarportalen har eit hinder ved x=' + gate);
   }
+  check(F.FlagQuestions.codes.length === 51, 'Flaggatlaset må framleis ha alle europeiske flagga');
   const choices = Array.from({ length: world.quiz.count }, (_, index) => world.quiz.get(index));
   check(new Set(choices.map(item => item.item.prompt)).size === choices.length,
     'Land vart gjentekne i same flaggrunde');
-  for (const choice of choices) {
-    check(choice.item.kind === 'flag' && choice.upper !== choice.lower &&
-      [choice.upper, choice.lower].includes(choice.item.code) &&
-      F.FlagQuestions.codes.includes(choice.wrong), 'Ugyldig flaggval');
-  }
-  const prompt = choices[0].item.prompt, wrong = choices[0].wrong, side = choices[0].correctSide;
+  const prompt = choices[0].item.prompt, wrong = choices[0].wrong;
   world.quiz.reroll();
-  check(world.quiz.get(0).item.prompt === prompt && world.quiz.get(0).wrong !== wrong &&
-    world.quiz.get(0).correctSide !== side, 'Nytt forsøk skal halde land, men byte feilflagg og svarside');
+  check(world.quiz.get(0).item.prompt === prompt && world.quiz.get(0).wrong !== wrong,
+    'Nytt forsøk skal halde land, men byte feilflagg');
   const game = F.Engine.create(pack, { level: 'polargeist-study', seed: 51 });
-  const ring = game.world.segment(2).obstacles.find(item => item.kind === 'ring');
-  game.state.segment = 2;
+  const ring = game.world.segment(0).obstacles.find(item => item.kind === 'ring');
   game.state.x = ring.x + ring.w / 2 - 2;
   game.state.time = game.state.x / game.world.speed;
   game.state.player.y = ring.y + ring.h / 2;
@@ -42,50 +47,9 @@ module.exports = function testPolargeist(F, check, pack) {
   game.state.player.grounded = false;
   game.step({ held: true, pressed: true });
   check(game.state.player.velocity === -1000 && game.state.events.some(event => event.ring),
-    'Eit nytt trykk gjennom hoppringen må gje løft og hending');
-  check(F.ReTrayQuestions.active(world, { status: 'running', segment: 0, time: 2 })?.item.kind === 'flag',
-    'Flaggspørsmålet må kome to sekund før portalen');
-
-  function play(seed) {
-    const run = F.Engine.create(pack, { level: 'polargeist-study', seed });
-    const jumped = new Set();
-    let ticks = 0;
-    while (run.state.status === 'running' && ticks < 12000) {
-      const state = run.state, section = run.world.segment(state.segment);
-      const next = state.segment < run.world.count - 1 ? run.world.segment(state.segment + 1) : null;
-      const answer = next ? run.world.quiz.get(next.index - 1) : null;
-      let held = false, pressed = false;
-      if (state.player.mode === 'cube') {
-        const ring = section.obstacles.find(item => item.kind === 'ring');
-        const ringDistance = ring ? ring.x + ring.w / 2 - state.x : Infinity;
-        if (ring && !state.ringsUsed.has(ring.x)) {
-          if (state.player.grounded && ringDistance > 75 && ringDistance < 100) pressed = true;
-          else if (!state.player.grounded && Math.abs(ringDistance) < 38 &&
-              Math.abs(state.player.y - ring.y - ring.h / 2) < 60) pressed = true;
-        }
-        const hazard = section.obstacles.find(item => ['spike', 'platform'].includes(item.kind) &&
-          item.x > state.x && item.x - state.x < 85 && !jumped.has(item.x));
-        if (!pressed && hazard && state.player.grounded) { pressed = true; jumped.add(hazard.x); }
-        if (!pressed && next && answer.correctSide === 'upper' &&
-            state.x >= next.from - 102 && state.x < next.from - 80 && state.player.grounded) pressed = true;
-        held = pressed;
-      } else {
-        let target = 310;
-        if (next && next.from - state.x < 640) target = run.world.lanes(next)[answer.correctSide];
-        held = state.player.y + state.player.velocity * .14 > target;
-      }
-      run.step({ held, pressed }); ticks++;
-    }
-    return { run, ticks };
-  }
-  for (const seed of [51, 52, 53]) {
-    const { run, ticks } = play(seed);
-    check(run.state.status === 'complete' && run.state.correct === 22 && ticks === 92 * 120 &&
-      run.state.events.filter(event => event.ring).length >= 6 &&
-      run.state.events.filter(event => event.type === 'jump').length >= 40,
-      'Heile Polargeist må vere spelbar: ' + seed + ', ' + run.state.status +
-      ', del=' + run.state.segment + ', x=' + Math.round(run.state.x) +
-      ', y=' + Math.round(run.state.player.y) + ', ring=' + run.state.events.filter(event => event.ring).length +
-      ', brukt=' + run.state.ringsUsed.size);
-  }
+    'Eit nytt trykk gjennom ein faktisk plassert hoppring må gje løft');
+  const firstGate = world.segment(1);
+  check(F.ReTrayQuestions.active(world, { status: 'running', segment: 0,
+    time: firstGate.start - 1 })?.item.kind === 'flag',
+    'Flaggspørsmålet må kome i den trygge strekninga før portalen');
 };

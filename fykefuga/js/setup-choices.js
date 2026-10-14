@@ -52,7 +52,7 @@
         if (option.value === 'retray-probe') return 'Ei nestan umogleg bane med vanskelege hopp og vanskelegare multiplikasjon.';
         if (option.value === 'stereo-study') return 'Enklaste bana med enkel multiplikasjon.';
         if (option.value === 'back-on-track-study') return 'Match land med hovudstadar i ei middels vanskeleg bane.';
-        if (option.value === 'polargeist-study') return 'Kjenn att europeiske flagg og treff hoppringane med rett timing.';
+        if (option.value === 'polargeist-study') return 'Kjenn att europeiske flagg mellom piggehav, hengjeplattformer og hoppringar.';
         if (option.value.startsWith('tutorial-')) return 'Øving i éin modus';
         return F.level(option.value).description;
       }

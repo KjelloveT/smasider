@@ -23,7 +23,7 @@
     const levels = [
       { id: 'stereo-study', name: 'Villrina i Gyllengarden' },
       { id: 'back-on-track-study', name: 'Eidskvedet' },
-      { id: 'polargeist-study', name: 'Polargeist' },
+      { id: 'polargeist-study', name: 'Utflukt med danning' },
       { id: 'retray-probe', name: 'Sorgsalane' }
     ];
     levels.forEach(level => select.add(new Option(level.name, level.id)));
@@ -148,7 +148,7 @@
     saveBestPercent();
     const score = engine.world.demo ? { best: 0, newRecord: false } : F.Storage.record(selected, config, engine.state);
     if (engine.world.demo) {
-      $('result-title').textContent = config.level === 'polargeist-study' ? 'Polargeist er fullført!' : config.level === 'back-on-track-study' ? 'Eidskvedet er fullført!' : config.level === 'stereo-study' ? 'Villrina i Gyllengarden er fullført!' : 'Sorgsalane er fullført!';
+      $('result-title').textContent = config.level === 'polargeist-study' ? 'Utflukt med danning er fullført!' : config.level === 'back-on-track-study' ? 'Eidskvedet er fullført!' : config.level === 'stereo-study' ? 'Villrina i Gyllengarden er fullført!' : 'Sorgsalane er fullført!';
       $('result-text').textContent = engine.state.correct + (config.level === 'polargeist-study' ? ' rette flagg' : config.level === 'back-on-track-study' ? ' rette hovudstader' : ' rette gangestykke') + ' og heile bana fullført.';
       $('next-batch').hidden = true; view('result'); refresh(); $('replay-button').focus(); return;
     }
@@ -159,7 +159,7 @@
   }
   function hud() {
     const state = engine.state, choice = engine.activeChoice();
-    $('run-label').textContent = engine.world.demo ? (config.level === 'polargeist-study' ? 'Polargeist' : config.level === 'back-on-track-study' ? 'Eidskvedet' : config.level === 'stereo-study' ? 'Villrina i Gyllengarden' : 'Sorgsalane') + ' · ' + state.correct + '/' + (engine.world.count - 1) + ' rette · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
+    $('run-label').textContent = engine.world.demo ? (config.level === 'polargeist-study' ? 'Utflukt med danning' : config.level === 'back-on-track-study' ? 'Eidskvedet' : config.level === 'stereo-study' ? 'Villrina i Gyllengarden' : 'Sorgsalane') + ' · ' + state.correct + '/' + (engine.world.questionCount || engine.world.count - 1) + ' rette · forsøk ' + state.attempt : state.correct + ' rette · forsøk ' + state.attempt;
     const progress = progressPercent(); $('run-progress').textContent = progress === null ? '∞' : Math.max(bestPercent, progress) + '%';
     if (engine.world.demo) {
       $('question-board').hidden = $('upper-answer').hidden = $('lower-answer').hidden = true;
