@@ -2,6 +2,7 @@
   'use strict';
   const F = root.Fykefuga;
   const STEP = 1 / 120, TOP = 142, BOTTOM = 462, SIZE = 28, SPLIT = 358;
+  const hazardInsets = { spike: [6, 8], pit: [3, 8], column: [4, 4] };
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
   function player(mode) {
     return { mode, y: ['ship', 'ufo', 'wave', 'swing'].includes(mode) ? 320 : BOTTOM, previousY: 320, velocity: 0, gravity: 1, grounded: true, angle: 0, jumpTime: 0 };
@@ -39,9 +40,12 @@
   // Samanhengande kollisjon mellom to AABB-ar. Spider testar berre landingsflata i y.
   function collision(oldX, newX, p, obstacle) {
     const half = SIZE / 2;
+    const inset = hazardInsets[obstacle.kind] || [0, 0];
+    const insetX = Math.min(inset[0], Math.max(0, obstacle.w / 2 - 1));
+    const insetY = Math.min(inset[1], Math.max(0, obstacle.h / 2 - 1));
     let t0 = 0, t1 = 1;
     const oldY = p.mode === 'spider' ? p.y : p.previousY;
-    const axes = [[oldX, newX - oldX, obstacle.x - half, obstacle.x + obstacle.w + half], [oldY, p.y - oldY, obstacle.y - half, obstacle.y + obstacle.h + half]];
+    const axes = [[oldX, newX - oldX, obstacle.x + insetX - half, obstacle.x + obstacle.w - insetX + half], [oldY, p.y - oldY, obstacle.y + insetY - half, obstacle.y + obstacle.h - insetY + half]];
     for (const [position, delta, min, max] of axes) {
       if (Math.abs(delta) < 1e-9) { if (position <= min || position >= max) return false; }
       else {

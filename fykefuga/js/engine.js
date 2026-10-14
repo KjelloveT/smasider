@@ -15,7 +15,7 @@
       attempt++;
       random = Vy.rng(config.seed + attempt * 104729);
       choices.clear();
-      state = { status: 'running', time: 0, x: 0, segment: 0, player: F.Physics.player(world.segment(0).mode), correct: 0, attempt, events: [], answered: new Set(), errors: [] };
+      state = { status: 'running', time: 0, x: 0, segment: 0, player: F.Physics.player(world.segment(0).mode), correct: 0, attempt, events: [], answered: new Set(), ringsUsed: new Set(), errors: [] };
       state.events.push({ type: 'mode', mode: state.player.mode });
       return state;
     }
@@ -34,8 +34,9 @@
       }
       const segment = world.at(state.time);
       if (segment.index !== state.segment) {
-        if (world.demo && !world.previewRoute) {
-          const choice = world.quiz.get(segment.index - 1);
+        const choiceIndex = world.choiceIndex ? world.choiceIndex(segment) : segment.index - 1;
+        if (world.demo && !world.previewRoute && choiceIndex >= 0) {
+          const choice = world.quiz.get(choiceIndex);
           const lanes = world.lanes(segment);
           const side = state.player.y < lanes.split ? 'upper' : 'lower';
           if (Math.abs(state.player.y - lanes[side]) > lanes.height / 2 + F.Physics.SIZE / 2) { die('crash'); return; }
@@ -72,6 +73,18 @@
         p.velocity = (p.y - p.previousY) / F.Physics.STEP;
         p.grounded = segment.mode === 'cube' && p.y >= corridor.bottom - .5;
       } else F.Physics.update(p, input, corridor);
+      if (world.demo && p.mode === 'cube' && !p.grounded && input.pressed) {
+        const reach = world.ringReach || { before: 44, after: 44, y: 62 };
+        const ring = segment.obstacles.find(item => item.kind === 'ring' &&
+          !state.ringsUsed.has(item.x) && state.x > item.x + item.w / 2 - reach.before &&
+          state.x < item.x + item.w / 2 + reach.after &&
+          Math.abs(p.y - item.y - item.h / 2) < reach.y);
+        if (ring) {
+          p.velocity = world.ringImpulse || -1000;
+          state.ringsUsed.add(ring.x);
+          state.events.push({ type: 'jump', mode: p.mode, ring: true, ringX: ring.x, ringY: ring.y + ring.h / 2 });
+        }
+      }
       let bounced = false;
       if (world.demo && p.mode === 'cube' && p.grounded) {
         const pad = segment.obstacles.find(item => item.kind === 'pad' &&
@@ -102,9 +115,10 @@
       }
       if (!before.grounded && p.grounded && Math.abs(before.velocity) > 150) state.events.push({ type: 'land', mode: p.mode });
       if (segment.obstacles.some(obstacle => {
-        if (obstacle.kind === 'pad') return false;
+        if (obstacle.kind === 'pad' || obstacle.kind === 'ring' || obstacle.kind === 'chain') return false;
         if (obstacle === landed) return false;
-        if (obstacle.kind === 'platform' && p.previousY <= obstacle.y - F.Physics.SIZE / 2 + .01 && p.y <= obstacle.y - F.Physics.SIZE / 2 + .01) return false;
+        if (obstacle.kind === 'platform' && p.previousY <= obstacle.y - F.Physics.SIZE / 2 + 2 &&
+            p.y <= obstacle.y - F.Physics.SIZE / 2 + 2) return false;
         return F.Physics.collision(oldX, state.x, p, obstacle);
       })) { die('crash'); return; }
       if (!world.tutorial && state.time + 1e-8 >= segment.gateAt && !state.answered.has(segment.index)) {

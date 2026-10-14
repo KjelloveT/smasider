@@ -42,7 +42,7 @@ module.exports = function (F, check, context) {
   for (const x of [0, 1012 / .08 - .01, 1012 / .08 + .01, 2024 / .08 - .01, 2024 / .08 + .01, 80000]) {
     scenery.prepare(); scenery.background(ctx, 0, x, false); scenery.surface(ctx, x, 476, 64);
   }
-  check(allocations.length === count && count === 5 && scenery.cacheCount === 5, 'Ressursar blir laga på nytt når bakgrunnen går rundt');
+  check(allocations.length === count && count === 6 && scenery.cacheCount === 6, 'Ressursar blir laga på nytt når bakgrunnen går rundt');
   drawCalls.length = 0; scenery.background(ctx, 0, 1200, false);
   check(drawCalls.length > 0 && drawCalls.every(args => args[0] === allocations[0]), 'Gjennomsiktig mellomgrunn står framleis framfor bakgrunnen');
   drawCalls.length = 0;

@@ -5,8 +5,8 @@
     const ctx = canvas.getContext('2d', { alpha: false });
     const effects = F.Effects.create();
     const scenery = F.Scenery.create(), motion = F.Motion.create();
-    const activePads = new Map();
-    let screen = null;
+    const activePads = new Map(), activeRings = new Map();
+    let screen = null, darkSpike = null;
     function springPad(ctx, image, obstacle, x, time, reduced) {
       const floorY = obstacle.y + obstacle.h;
       const elapsed = time - (activePads.get(obstacle.x) ?? -Infinity);
@@ -36,6 +36,47 @@
       }
       ctx.restore();
     }
+    function jumpRing(ctx, obstacle, x, time, reduced, foreground) {
+      const image = F.Assets.get('jump-ring.png');
+      if (!image) return;
+      const centreX = x + obstacle.w / 2, centreY = obstacle.y + obstacle.h / 2;
+      const activated = time - (activeRings.get(obstacle.x) ?? -Infinity);
+      const pulse = !reduced && activated >= 0 && activated < .45 ? 1 - activated / .45 : 0;
+      ctx.save(); ctx.translate(centreX, centreY);
+      if (!reduced) ctx.rotate(Math.sin(time * 3.4 + obstacle.x) * .045);
+      if (!foreground && !reduced) {
+        const aura = ctx.createRadialGradient(0, 0, 10, 0, 0, 54);
+        aura.addColorStop(0, 'rgba(208,246,255,.20)');
+        aura.addColorStop(1, 'rgba(208,246,255,0)');
+        ctx.fillStyle = aura; ctx.fillRect(-54, -54, 108, 108);
+        ctx.shadowColor = '#ecfaff'; ctx.shadowBlur = 14 + 22 * pulse;
+      }
+      // The oval is seen obliquely from the side. Its far and near lips
+      // occupy separate drawing planes so the cube can cross between them.
+      const half = image.width / 2;
+      if (foreground) ctx.drawImage(image, 0, 0, half, image.height, -22, -38, 22, 76);
+      else ctx.drawImage(image, half, 0, half, image.height, 0, -38, 22, 76);
+      ctx.restore();
+    }
+    function drawSpike(ctx, image, x, y, width, height, rotation, clearContrast) {
+      if (clearContrast) {
+        if (!darkSpike) {
+          darkSpike = document.createElement('canvas');
+          darkSpike.width = image.width; darkSpike.height = image.height;
+          const brush = darkSpike.getContext('2d');
+          brush.drawImage(image, 0, 0);
+          brush.globalCompositeOperation = 'source-atop';
+          brush.fillStyle = 'rgba(10,21,27,.74)'; brush.fillRect(0, 0, image.width, image.height);
+        }
+        image = darkSpike;
+      }
+      ctx.save();
+      ctx.translate(x + width / 2, y + height / 2);
+      if (rotation) ctx.rotate(rotation * Math.PI / 180);
+      if (clearContrast && rotation) { ctx.shadowColor = '#f7edc4'; ctx.shadowBlur = 5; }
+      ctx.drawImage(image, -width / 2, -height / 2, width, height);
+      ctx.restore();
+    }
     function portal(ctx, section, state, world, config, finish = false, foreground = false) {
       const at = finish ? world.finishX : section.from;
       const x = 190 + at - state.x;
@@ -43,7 +84,8 @@
       const frame = F.Assets.get('portal-side.png');
       if (!frame) return;
       const corridor = world.viewAt(Math.min(at, world.finishX - 1));
-      const lanes = !finish && world.quiz ? world.lanes(section) : null;
+      const hasChoice = section && (world.choiceIndex ? world.choiceIndex(section) >= 0 : true);
+      const lanes = !finish && world.quiz && hasChoice ? world.lanes(section) : null;
       const centres = lanes ? [lanes.upper, lanes.lower] : [section && section.portalY || (corridor.top + corridor.bottom) / 2];
       const height = lanes ? lanes.height : Math.min(230, corridor.bottom - corridor.top + 18);
       const width = height * frame.width / frame.height;
@@ -108,6 +150,9 @@
       const blend = Math.min(1, Math.max(0, (state.time - segment.start) / .65));
       if (oldScene !== segment.scene && blend < 1) scenery.background(ctx, oldScene, state.x, config.reduced);
       scenery.background(ctx, segment.scene, state.x, config.reduced, oldScene === segment.scene ? 1 : blend);
+      if (world.musicScene === 7) {
+        ctx.fillStyle = 'rgba(13,26,42,.34)'; ctx.fillRect(0, 0, 960, 540);
+      }
       if (!config.reduced) {
         ctx.fillStyle = '#fff5cc';
         for (let i = 0; i < 24; i++) {
@@ -148,12 +193,29 @@
         part.obstacles.forEach(obstacle => {
           const x = 190 + obstacle.x - state.x;
           if (x + obstacle.w < -100 || x > 1050) return;
+          if (obstacle.kind === 'ring') { jumpRing(ctx, obstacle, x, state.time, config.reduced, false); return; }
+          if (obstacle.kind === 'pit') {
+            const spikeImage = F.Assets.get('spike.png');
+            if (spikeImage) for (let tile = x; tile < x + obstacle.w; tile += 25)
+              drawSpike(ctx, spikeImage, tile, obstacle.y, Math.min(27, x + obstacle.w - tile), obstacle.h, 0, world.musicScene === 7);
+            return;
+          }
+          if (obstacle.kind === 'chain') {
+            ctx.save(); ctx.strokeStyle = '#e7c67e'; ctx.lineWidth = 2;
+            ctx.shadowColor = '#1b2730'; ctx.shadowBlur = 2;
+            for (let link = obstacle.y; link < obstacle.y + obstacle.h - 5; link += 9) {
+              ctx.beginPath(); ctx.ellipse(x + 4, link + 5, 3, 5, 0, 0, Math.PI * 2); ctx.stroke();
+            }
+            ctx.restore();
+            return;
+          }
           if (obstacle.kind === 'platform') {
             scenery.platform(ctx, state.x, obstacle.y, obstacle.h, x, x + obstacle.w); return;
           }
           const img = F.Assets.get(obstacle.kind + '.png');
           if (!img) return;
           if (obstacle.kind === 'pad') springPad(ctx, img, obstacle, x, state.time, config.reduced);
+          else if (obstacle.kind === 'spike') drawSpike(ctx, img, x, obstacle.y, obstacle.w, obstacle.h, obstacle.rotation, world.musicScene === 7);
           else if (obstacle.kind === 'column') {
             // Extend the painted shaft behind the moving ceiling/floor. Its
             // hitbox stays fixed; only the hidden end grows with the camera.
@@ -169,7 +231,15 @@
       scenery.surface(ctx, state.x, ceiling - 64, 64, 0, 960, true);
       const p = state.player, sprite = F.Assets.get(config.skin + '-' + p.mode + '.png');
       effects.behind(ctx, state);
-      if (sprite) {
+      const nearbyRings = [];
+      if (world.demo) for (let i = Math.max(0, state.segment - 1); i <= Math.min(world.count - 1, state.segment + 1); i++)
+        world.segment(i).obstacles.filter(item => item.kind === 'ring').forEach(item => nearbyRings.push(item));
+      const crossingRing = nearbyRings.find(item => Math.abs(state.x - item.x - item.w / 2) < 30 &&
+        Math.abs(p.y - item.y - item.h / 2) < 52);
+      function drawSprite(clipLeft, clipRight) {
+        if (!sprite) return;
+        ctx.save();
+        if (clipLeft !== undefined) { ctx.beginPath(); ctx.rect(clipLeft, 0, clipRight - clipLeft, 540); ctx.clip(); }
         const pose = effects.pose(p), scale = state.status === 'dead' ? effects.deadScale : 1;
         const groundRoll = p.mode === 'cube' && p.grounded ? Math.sin(state.x / 20) * .15 : 0;
         const groundBob = p.mode === 'cube' && p.grounded ? -1.5 * Math.abs(Math.sin(state.x / 20)) : 0;
@@ -178,9 +248,19 @@
         ctx.rotate(angle + groundRoll + (p.mode === 'swing' ? Math.sin(state.time * 7) * .15 : 0) + pose.rotation);
         ctx.scale(pose.x * scale, pose.y * scale);
         if (p.gravity < 0 && ['robot', 'spider'].includes(p.mode)) ctx.scale(1, -1);
-        ctx.drawImage(sprite, -28, -28, 56, 56); ctx.restore();
+        ctx.drawImage(sprite, -28, -28, 56, 56); ctx.restore(); ctx.restore();
       }
+      if (crossingRing) {
+        const plane = 190 + crossingRing.x + crossingRing.w / 2 - state.x;
+        drawSprite(0, plane);
+        jumpRing(ctx, crossingRing, 190 + crossingRing.x - state.x, state.time, config.reduced, true);
+        drawSprite(plane, 960);
+      } else drawSprite();
       effects.front(ctx, state);
+      nearbyRings.forEach(item => {
+        if (item === crossingRing) return;
+        jumpRing(ctx, item, 190 + item.x - state.x, state.time, config.reduced, true);
+      });
       if (world.demo) {
         for (let i = Math.max(1, segment.index - 1); i <= Math.min(world.count - 1, segment.index + 1); i++)
           portal(ctx, world.segment(i), state, world, config, false, true);
@@ -200,9 +280,10 @@
       }
     }
     return { draw, get screen() { return screen; }, snap: state => motion.snap(state), reset(config, state) {
-      scenery.prepare(); motion.reset(state); effects.reset(config); activePads.clear();
+      scenery.prepare(); motion.reset(state); effects.reset(config); activePads.clear(); activeRings.clear();
     }, update(state, input) { motion.update(state); effects.update(state, input); }, notify(event, state) {
       if (event.pad && event.padX !== undefined) activePads.set(event.padX, state.time);
+      if (event.ring && event.ringX !== undefined) activeRings.set(event.ringX, state.time);
       effects.notify(event, state);
     } };
   }

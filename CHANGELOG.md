@@ -3,9 +3,17 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.3] — 2026-10-14
+
+### Endra
+- **Utflukt med danning** fylgjer no posisjonane i Polargeist-banekartet: piggehav, hengjande plattformer, 29 hoppringar, sprettplater og skipspartiet. Åtte eigne svarstrekningar er sette inn mellom partia, og banenamnet er oppdatert i spelet.
+- Pigger og andre skadelege hinder i Fykefuga har litt mindre treffområde enn dei synlege figurane.
+- Dei to fyrste ringhoppa i Utflukt med danning har lengre piggstrekk og romslegare aktivering av hoppringen. Piggane under svevande blokker vender nedover eller til sida slik originalkartet viser; blokkene er løfta og eitt par flytta så terningen kan hoppe mellom tak- og golvpiggane. Smale lenkjer held plattformene oppe. Eit dempa kulisselag og mørkare piggar gjer spelplanet lettare å lese.
+
 ## [2.2] — 2026-10-12
 
 ### Lagt til
+- **Polargeist**: ei 92-sekundars flaggbane med tettare piggrekkjer, marmortrapper, sprettplate, skipshinder og seks hoppringar. Alle 51 europeiske flagga ligg i eit lokalt PNG-ark. Eigne barokkkulissar og ein heil original kammersats i tretakt fylgjer bana.
 - **Fykefuga**: eit barokk fartsspel med åtte rørslemodusar, åtte øvingsbaner, fire hovudbaner og endelaus fuga. Korte fagspørsmål avgjer kva svarveg eleven skal styre gjennom.
 - Lærarbibliotek med eigne spørsmål, innlimte ordpar, Ordaklok-import, førehandsvising, JSON-filer og delingslenkjer. Rekordar, kosmetikk og fire felles bragder blir lagra lokalt.
 - **Sorgsalane**: ei nesten umogleg bane med vanskelege hopp og vanskelegare multiplikasjon, bygd som ei spelbar tolking av ReTraY-løypa. Ho har alle modusportane, elleve gangestykke og ein original strykarloop på 108 slag i minuttet. Kvart gangestykke kjem to sekund før eit øvre eller nedre portval; feil svar startar bana på nytt med same stykke og eit nytt feilalternativ.
@@ -14,6 +22,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - Originale genererte rasterressursar og fire originale Spitfire-barokksatsar med innspelte fiolinar, bratsj og cello, og separate volumval for musikk og spel-ljod. Farkostane har spor, lysband, eksos og eigne reaksjonar ved hopp, landing og teletransport.
 
 ### Endra
+- Fykefuga viser beste forsøk i prosent både på banekorta og i spelmenyen. Hoppringen er teikna skrått frå sida, med figurdelar framfor og bak ringen under kryssing.
+- Fykefuga-startsida har standard breidd utan at spelefeltet er endra. Spelkontrollane står på éi ikonrad med tilgjengelege namn; modus- og styringstekstane er tekne vekk. Beste prosent står i rada, medan framdrifta i forsøket kjem tydeleg fram ved død.
 - Sorgsalane har flate marmorklossar med høgoppløyst marmor og fullstendige akantusavslutningar på plattformer i alle lengder; golvet har måla forgylte kantar utan perspektiv eller grøne strekar. Sidevende rasterportalar har måla energisprekk, vandrande ljos og ei fram- og bakside som verkar òg når dei kryssar hinder. Baneprøva har rytmeplasserte hinder, romslegare svarstrekningar, meir rom i bølgjegangen og tettare kamera i låge gangar. Fykefuga har visuelle kortval med bane- og figurbilete, døme frå spørsmålsetta og synlege val for lesetid. Bragdene står to i breidda på mobil og fire på større skjermar, øvingskorta bruker fleire kolonnar på breie skjermar, og «Vegval og framgang» er fjerna.
 - Terningen har ei varsam rulling på golvet frå fyrste sekund og rettar seg opp etter landing. I Villrina i Gyllengarden kjem kameraet tettare på terningpartia medan golv og svarvegar held seg synlege. Treffområdet er uendra.
 - Sprettplatene i Eidskvedet er større og forankra i golvet. Dei fjørar, lyser og sender ut glimt ved treff, med eit eige mekanisk sprettljod.
@@ -23,6 +33,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 - Banemusikken bruker ferdige orkesteropptak på 65–83 sekund, med presise sløyfer, mjuke temabyte, bevart musikkposisjon ved pause og rask omstart. Spel-ljodane er eigne Web Audio-klangar. Hopp, landing og styring får større utbrot, sjokkbølgjer, framdrift og rørsleanimasjonar.
 
 ### Fiksa
+- Lydknappen har ikkje lenger ei uynskt hake under ikonet.
+- Lydknappen i Fykefuga held same storleik som dei andre ikonknappane og viser ein strek over høgtalaren når lyden er av.
 - Figurspritar er isolerte i polstra celler utan bitar av nabomotiv. Rørslespor bruker lysband i staden for overlappande figurkopiar. Rekordar frå den tidlegare, langsamare hinderbanken blir haldne skilde.
 
 - Fykefuga rullar jamt mellom fysikkstega. Bakgrunnane har samanhengande skøytar og blir førebudde før start; dekor bevarer proporsjonane, og golv og svarhyller har faste teksturar. Kula og svingfarkosten snur utan vinkelhopp.

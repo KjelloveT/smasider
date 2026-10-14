@@ -30,7 +30,9 @@
     if (!world.demo || state.status !== 'running') return null;
     const next = world.segment(state.segment + 1);
     if (!next || next.index <= state.segment || state.time + 1e-8 < next.start - (world.readingSeconds || 2) || state.time >= next.start) return null;
-    return { ...world.quiz.get(next.index - 1), remaining: next.start - state.time, section: next, world, demo: true };
+    const choiceIndex = world.choiceIndex ? world.choiceIndex(next) : next.index - 1;
+    if (choiceIndex < 0) return null;
+    return { ...world.quiz.get(choiceIndex), remaining: next.start - state.time, section: next, world, demo: true };
   }
   F.ReTrayQuestions = { create, active, offsets };
 })(window);

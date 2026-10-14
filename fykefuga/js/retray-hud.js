@@ -29,7 +29,24 @@
         const laneY = index ? lanes.lower : lanes.upper;
         const y = (300 + (laneY - screen.focusY) * screen.zoom + screen.shake) * height;
         const answer = String(index ? choice.lower : choice.upper);
-        if (node.textContent !== answer) node.textContent = answer;
+        if (choice.item.kind === 'flag') {
+          node.classList.add('ff-retray-answer--flag');
+          if (node.dataset.flagCode !== answer) {
+            const atlas = F.Assets.get('europe-flags.png'), flagIndex = F.FlagQuestions.indexFor(answer);
+            if (atlas && flagIndex >= 0) {
+              const image = document.createElement('canvas'); image.width = 120; image.height = 76;
+              image.getContext('2d').drawImage(atlas, flagIndex % 8 * 120, Math.floor(flagIndex / 8) * 76, 120, 76, 0, 0, 120, 76);
+              node.replaceChildren(image);
+              node.dataset.flagCode = answer;
+              const country = F.FlagQuestions.countries.find(([, code]) => code === answer);
+              node.setAttribute('aria-label', country ? country[0] : 'Flagg');
+            }
+          }
+        } else {
+          node.classList.remove('ff-retray-answer--flag'); delete node.dataset.flagCode;
+          node.removeAttribute('aria-label');
+          if (node.textContent !== answer) node.textContent = answer;
+        }
         node.hidden = answerX < -30 || y < 0 || y > stage.clientHeight;
         if (node.hidden) return;
         node.style.left = snap(Math.min(answerX, stage.clientWidth - node.offsetWidth - 8)) + 'px';

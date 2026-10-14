@@ -8,6 +8,7 @@
     packs: Array.isArray(raw.packs) ? raw.packs : [],
     settings: raw.settings && typeof raw.settings === 'object' ? raw.settings : {},
     records: raw.records && typeof raw.records === 'object' ? raw.records : {},
+    bestPercent: raw.bestPercent && typeof raw.bestPercent === 'object' ? raw.bestPercent : {},
     results: Array.isArray(raw.results) ? raw.results.slice(-100) : [],
     progress: { correct: 0, levels: [], modes: [], ...(raw.progress || {}) }
   };
@@ -33,6 +34,19 @@
     write(); return normalized;
   }
   function remove(id) { fresh(); state.packs = state.packs.filter(pack => pack.id !== id); write(); }
+  function bestPercent(level) {
+    fresh();
+    const value = state.bestPercent[level];
+    return Number.isFinite(value) ? Math.max(0, Math.min(100, Math.floor(value))) : 0;
+  }
+  function recordPercent(level, value) {
+    if (!level || !Number.isFinite(value)) return bestPercent(level);
+    fresh();
+    const previous = Number.isFinite(state.bestPercent[level]) ? state.bestPercent[level] : 0;
+    const next = Math.max(previous, Math.max(0, Math.min(100, Math.floor(value))));
+    if (next !== previous) { state.bestPercent[level] = next; write(); }
+    return next;
+  }
   function key(pack, config) { return ['tempo-2', F.Questions.revision(pack), config.level, config.reading, config.difficulty].join('|'); }
   function record(pack, config, run) {
     fresh();
@@ -65,7 +79,7 @@
     write();
   }
   const unlocked = skin => { fresh(); return skin === 'gold' || skin === 'porcelain' && state.progress.levels.length > 0 || skin === 'copper' && state.progress.correct >= 100; };
-  F.Storage = { list, save, remove, key, record, progress, unlocked,
+  F.Storage = { list, save, remove, key, record, bestPercent, recordPercent, progress, unlocked,
     settings: () => { fresh(); return { ...state.settings }; },
     saveSettings(settings) { fresh(); state.settings = { ...settings }; write(); },
     best: (pack, config) => { fresh(); return state.records[key(pack, config)] || 0; },

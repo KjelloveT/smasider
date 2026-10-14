@@ -6,7 +6,7 @@ const crypto = require('node:crypto');
 const root = path.resolve(__dirname, '../..');
 const context = vm.createContext({ console, URL, URLSearchParams, TextEncoder, TextDecoder, Blob, CompressionStream, DecompressionStream, btoa, atob, setTimeout, clearTimeout, crypto: crypto.webcrypto, document: { addEventListener() {} } });
 context.window = context;
-for (const file of ['js/vyrdepil-util.js', 'js/vyrdepil-share.js', 'fykefuga/js/data.js', 'fykefuga/js/questions.js', 'fykefuga/js/physics.js', 'fykefuga/js/retray-questions.js', 'fykefuga/js/capital-questions.js', 'fykefuga/js/retray.js', 'fykefuga/js/stereo.js', 'fykefuga/js/back-on-track.js', 'fykefuga/js/levels.js', 'fykefuga/js/engine.js', 'fykefuga/js/effects.js', 'fykefuga/js/scenery.js', 'fykefuga/js/motion.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
+for (const file of ['js/vyrdepil-util.js', 'js/vyrdepil-share.js', 'fykefuga/js/data.js', 'fykefuga/js/questions.js', 'fykefuga/js/physics.js', 'fykefuga/js/retray-questions.js', 'fykefuga/js/capital-questions.js', 'fykefuga/js/flag-questions.js', 'fykefuga/js/retray.js', 'fykefuga/js/stereo.js', 'fykefuga/js/back-on-track.js', 'fykefuga/js/polargeist-layout.js', 'fykefuga/js/polargeist.js', 'fykefuga/js/levels.js', 'fykefuga/js/engine.js', 'fykefuga/js/effects.js', 'fykefuga/js/scenery.js', 'fykefuga/js/motion.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
 const F = context.Fykefuga;
 let assertions = 0;
 function check(condition, message) { assert.ok(condition, message); assertions++; }
@@ -83,9 +83,14 @@ for (const mode of F.modes) for (let variant = 0; variant < 2; variant++) for (l
   check(alive, 'Uframkomeleg byggjestykke: ' + mode.id + ', nivå ' + difficulty + ', variant ' + variant);
 }
 check(F.Physics.collision(0, 100, { mode: 'wave', y: 250, previousY: 250 }, { x: 50, y: 230, w: 2, h: 40 }), 'Tynn hindring vart hoppa over');
+check(!F.Physics.collision(0, 0, { mode: 'cube', y: 220, previousY: 220 },
+  { x: 0, y: 230, w: 32, h: 32, kind: 'spike' }), 'Piggspissen har for stort treffområde');
+check(F.Physics.collision(0, 0, { mode: 'cube', y: 240, previousY: 240 },
+  { x: 0, y: 230, w: 32, h: 32, kind: 'spike' }), 'Midten av piggen må framleis vere farleg');
 require('./retray.cjs')(F, check, pack);
 require('./stereo.cjs')(F, check, pack);
 require('./capital.cjs')(F, check, pack);
+require('./polargeist.cjs')(F, check, pack);
 const engine = F.Engine.create(pack, { level: 'marmor', seed: 42, reading: 4, offset: 0 });
 const before = Array.from({ length: 4 }, (_, index) => engine.getChoice(index).item.id);
 const placements = Array.from({ length: 4 }, (_, index) => engine.getChoice(index).correctSide);
@@ -145,7 +150,7 @@ for (const skin of F.skins) for (const mode of F.modes) {
   check(file.width === 96 && file.height === 96, 'Sprite manglar isolert celle med fast sideforhold og luft');
 }
 const sounds = JSON.parse(fs.readFileSync(path.join(root, 'fykefuga/assets/audio/music-v1.json'), 'utf8'));
-check(sounds.app === 'fykefuga' && sounds.version === 1 && sounds.tracks.length === 7, 'Musikkoversikta manglar sju tema');
+check(sounds.app === 'fykefuga' && sounds.version === 1 && sounds.tracks.length === 8, 'Musikkoversikta manglar åtte tema');
 for (const [scene, sound] of sounds.tracks.entries()) {
   const bytes = fs.readFileSync(path.join(root, 'fykefuga/assets/audio', sound.file));
   check(bytes.length === sound.bytes && bytes.length < 2.1 * 1024 * 1024 && crypto.createHash('sha256').update(bytes).digest('hex') === sound.sha256, 'Banemusikken er utdatert eller for stor');
@@ -157,6 +162,10 @@ check(sounds.tracks[5].loop === false && sounds.tracks[5].bars === 36 && sounds.
   'Villrina i Gyllengarden må ha ein heil 72-sekundars sats utan sløyfe');
 check(sounds.tracks[6].loop === false && sounds.tracks[6].bars === 42 && sounds.tracks[6].frames / sounds.tracks[6].sampleRate > 84,
   'Eidskvedet må ha ein heil 84-sekundars sats utan sløyfe');
+check(sounds.tracks[7].loop === false && sounds.tracks[7].bars === 46 &&
+  sounds.tracks[7].beats === 3 && sounds.tracks[7].bpm === 90 &&
+  sounds.tracks[7].frames / sounds.tracks[7].sampleRate > 92,
+  'Polargeist må ha ein eigen tredelt 92-sekundars sats utan sløyfe');
 for (const directory of ['fykefuga/js', 'fykefuga/css']) for (const file of fs.readdirSync(path.join(root, directory))) {
   const text = fs.readFileSync(path.join(root, directory, file), 'utf8');
   check(!/<svg[\s>]|\.svg\b|image\/svg/i.test(text), 'SVG vart brukt i speldesignet');
