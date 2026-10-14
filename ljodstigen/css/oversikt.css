@@ -18,6 +18,7 @@
 .ljod-teacher-dialog > .vp-stack { min-width: 0; }
 .ljod-teacher-dialog .ljod-table th { background: var(--vp-stone); color: var(--vp-ink); }
 .ljod-profile-dialog { width: min(960px, calc(100vw - 24px)); }
+:is(.ljod-profile-dialog, .ljod-teacher-dialog) .vp-dialog-head > .vp-button { flex-shrink: 0; white-space: nowrap; }
 .ljod-profile-dialog .ljod-profiles { grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr)); gap: 20px; }
 .ljod-profile-dialog :is(.ljod-avatar, .ljod-profile-pick) img { width: 88px; height: 88px; }
 .ljod-profile-dialog .ljod-avatar-name { font-size: 1rem; }
