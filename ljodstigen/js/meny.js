@@ -54,8 +54,8 @@
       pick.type = 'button';
       pick.appendChild(LjodAvatar.image(av.id, 56));
       pick.appendChild(R().h('span', 'ljod-profile-name', av.name));
-      pick.appendChild(R().h('span', 'ljod-profile-sum', st.completed + ' av ' + st.total + ' steg · ' + st.percent + ' %'));
-      pick.setAttribute('aria-label', 'Vel ' + av.name + ', ' + st.completed + ' av ' + st.total + ' steg · ' + st.percent + ' %');
+      pick.appendChild(R().h('span', 'ljod-profile-sum', st.completed + ' av ' + st.total));
+      pick.setAttribute('aria-label', 'Vel ' + av.name + ', ' + st.completed + ' av ' + st.total + ' steg');
       pick.setAttribute('aria-pressed', String(!!(current && current.id === p.id)));
       pick.addEventListener('click', function () { select(p.id); });
       card.appendChild(pick);
@@ -132,6 +132,13 @@
       if (unlocked) {
         card.href = 'spel.html#' + new URLSearchParams({ p: current.id, m: m.id });
       }
+      const thumbnail = R().h('img', 'ljod-mode-thumbnail');
+      thumbnail.src = 'resources/val/' + m.id + '.jpg';
+      thumbnail.width = 480;
+      thumbnail.height = 360;
+      thumbnail.alt = '';
+      thumbnail.loading = 'lazy';
+      card.appendChild(thumbnail);
       card.appendChild(R().h('span', 'ljod-mode-title', m.label));
       card.appendChild(R().h('span', 'ljod-mode-blurb', def ? def.blurb : ''));
 
@@ -140,7 +147,7 @@
       } else if (unlocked && m.id === suggested) {
         /* Appen foreslår, eleven vel. Forslaget er ei brikke, ikkje ein
            låst veg — autonomi er halve motivasjonen på dette trinnet. */
-        card.appendChild(R().h('span', 'ljod-mode-flag', 'Framlegg'));
+        card.appendChild(R().h('span', 'ljod-mode-flag', 'Prøv denne'));
       }
       if (!unlocked) {
         card.appendChild(R().h('span', 'ljod-mode-flag', m.reading ? 'Opnar etter bokstavsteg 5' : 'Opnar seg snart'));
@@ -173,7 +180,15 @@
   /* ──────────────── Panel ──────────────── */
 
   function refresh() {
+    if (!current) current = LjodState.currentProfile();
     renderProfiles();
+    const chosen = $('currentProfile');
+    if (chosen && current) {
+      R().clear(chosen);
+      const avatar = LjodState.avatarOf(current.avatar);
+      chosen.appendChild(LjodAvatar.image(avatar.id, 96));
+      chosen.appendChild(R().h('strong', null, avatar.name));
+    }
     const panel = $('player');
     if (!panel) return;
 
@@ -192,33 +207,12 @@
     LjodLaerar.render($('laerar'), current);
   }
 
-  /* ──────────────── Fontveljar ──────────────── */
-
-  /* Ligg synleg ved sida av dei andre spelvala: eit val som høyrer heime i ein
-     app for dei som strevar med lesing, ikkje gøymd i ei innstilling. */
-  function wireFont() {
-    const host = $('fontpick');
-    if (!host) return;
-    const s = LjodState.read();
-    document.body.dataset.font = s.font;
-
-    LjodState.FONTS.forEach(function (f) {
-      const b = R().h('button', 'vp-button vp-button--compact ljod-fontbtn' + (s.font === f.id ? ' active' : ''));
-      b.type = 'button';
-      b.setAttribute('aria-pressed', String(s.font === f.id));
-      b.textContent = f.label;
-      b.addEventListener('click', function () {
-        const st = LjodState.read();
-        st.font = f.id;
-        LjodState.write(st);
-        document.body.dataset.font = f.id;
-        Array.prototype.forEach.call(host.children, function (c) { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
-        b.classList.add('active');
-        b.setAttribute('aria-pressed', 'true');
-      });
-      host.appendChild(b);
-    });
-    if (root.VyrdepilDesign) root.VyrdepilDesign.initSelections(host);
+  function wireTeacher() {
+    const dialog = $('teacherDialog');
+    if (!dialog) return;
+    $('teacherOpen').addEventListener('click', function () { Vy.openModal(dialog); });
+    $('teacherClose').addEventListener('click', function () { Vy.closeModal(dialog); });
+    Vy.bindOverlayClose(dialog);
   }
 
   /* ──────────────── Faner ──────────────── */
@@ -298,7 +292,8 @@
   }
 
   function init() {
-    wireFont();
+    document.body.dataset.font = 'lesefont';
+    wireTeacher();
     wireVoice();
     wireAllModes();
     wireTabs();

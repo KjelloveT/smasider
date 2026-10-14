@@ -10,22 +10,28 @@
     host.classList.add('ljod-journey');
     if (!opts.inTask) host.appendChild(R.h('h3', 'vp-heading vp-heading--small',
       s.done ? 'Du har fullført Ljodstigen!' : 'Vegen din gjennom Ljodstigen'));
-    host.appendChild(R.h('p', 'ljod-journey-summary', s.completed + ' av ' + s.total +
-      ' steg fullførte · ' + s.percent + ' % · ' + s.remaining + ' steg står att'));
-    const bar = R.h('progress', 'ljod-journey-progress');
-    bar.max = 100;
-    bar.value = s.percent;
-    bar.setAttribute('aria-label', 'Fullførte læringsmål i Ljodstigen');
-    bar.textContent = s.percent + ' %';
-    host.appendChild(bar);
+    const summary = R.h('p', 'ljod-journey-summary', s.completed + ' av ' + s.total);
+    summary.setAttribute('aria-label', s.completed + ' av ' + s.total + ' steg fullførte');
+    host.appendChild(summary);
+    if (!opts.inTask) {
+      const dots = R.h('ol', 'ljod-stage-dots');
+      dots.setAttribute('aria-label', 'Dei ti stega i Ljodstigen');
+      s.levels.forEach(function (level) {
+        const done = level.number <= s.completed;
+        const item = R.h('li', 'ljod-stage-dot' + (done ? ' is-complete' : !s.done && level.number === s.current ? ' is-current' : ''), String(level.number));
+        item.setAttribute('aria-label', 'Steg ' + level.number + ': ' + (done ? 'fullført' : level.number === s.current ? 'du er her' : 'står att'));
+        dots.appendChild(item);
+      });
+      host.appendChild(dots);
+    }
     if (!opts.inTask) host.appendChild(R.h('p', 'vp-help', s.done
       ? 'Alle ti stega er ferdige. Du kan halde fram med å øve og la skogen vekse.'
       : 'Neste mål: steg ' + s.current + ' — ' + s.levels[s.current - 1].title + '.'));
 
     if (opts.compact) return;
-    if (!opts.teacher && s.current >= 6) {
+    if (!opts.teacher) {
       const next = R.h('a', 'vp-button vp-button--positive', s.done ? 'Øv på lesestega' : 'Hald fram på steg ' + s.current);
-      next.href = 'spel.html#' + new URLSearchParams({ p: p.id, m: 'lesestigen', level: s.current });
+      next.href = practiceUrl(p, s.current);
       host.appendChild(next);
     }
     const list = R.h('ol', 'ljod-levels');
@@ -48,10 +54,17 @@
             return item.text + ' (' + LjodProgress.resultFor(p, item.id).right + '/2)';
           }).join(', ') + '.' : 'Alle lesemåla på dette steget er ferdige.'));
       }
-      if (level.number >= 6 && available && !opts.teacher) {
-        const link = R.h('a', 'vp-button vp-button--compact', finished ? 'Øv om att' : 'Øv på steg ' + level.number);
-        link.href = 'spel.html#' + new URLSearchParams({ p: p.id, m: 'lesestigen', level: level.number });
-        card.appendChild(link);
+      if (!opts.teacher) {
+        if (available) {
+          const link = R.h('a', 'vp-button vp-button--compact', 'Øv på steg ' + level.number);
+          link.href = practiceUrl(p, level.number);
+          card.appendChild(link);
+        } else {
+          const button = R.h('button', 'vp-button vp-button--compact', 'Opnar etter steg ' + (level.number - 1));
+          button.type = 'button';
+          button.disabled = true;
+          card.appendChild(button);
+        }
       }
       list.appendChild(card);
     });
@@ -68,5 +81,9 @@
       'Framgangen viser øvingsmål, ikkje ein karakter eller ein lesetest. Fullførte mål blir verande sjølv om du svarar feil seinare.'));
   }
 
-  root.LjodProgressUI = { render: render };
+  function practiceUrl(p, number) {
+    return 'spel.html#' + new URLSearchParams({ p: p.id, m: number <= 5 ? 'lydfangst' : 'lesestigen', level: number });
+  }
+
+  root.LjodProgressUI = { render: render, practiceUrl: practiceUrl };
 })(window);

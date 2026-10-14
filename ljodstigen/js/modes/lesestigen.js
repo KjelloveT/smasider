@@ -26,22 +26,11 @@
     const play = function (id) { LjodAudio.stop(); return LjodAudio.play(id); };
     frame.setPrompt('Steg ' + number + ' — ' + level.title);
     const body = R.clear(frame.body);
-    body.appendChild(R.h('p', 'vp-help', level.hint));
     body.appendChild(R.h('p', 'ljod-prompt', target.kind === 'sentence'
       ? 'Høyr og vel setninga som blir lesen.' : 'Høyr og vel ordet som blir lese.'));
     const replay = R.replayButton(function () { return play(target.id); },
       target.kind === 'sentence' ? 'Høyr setninga om att' : 'Høyr ordet om att');
     body.appendChild(replay);
-    if (level.groups.length) {
-      const groupRow = R.h('div', 'vp-actions ljod-sound-groups');
-      level.groups.forEach(function (group) {
-        const button = R.h('button', 'vp-button vp-button--compact', 'Høyr ' + group.text);
-        button.type = 'button';
-        button.addEventListener('click', function () { play(group.id); });
-        groupRow.appendChild(button);
-      });
-      body.appendChild(groupRow);
-    }
     let answered = false;
     return new Promise(function (resolve) {
       const items = optionsFor(level, target).map(function (item) {
@@ -56,7 +45,6 @@
         const correct = key === target.id;
         R.lock(grid, true);
         replay.disabled = true;
-        body.querySelectorAll('.ljod-sound-groups button').forEach(function (b) { b.disabled = true; });
         if (correct) R.markCorrect(button);
         else {
           R.markWrong(button);

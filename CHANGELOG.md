@@ -7,11 +7,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
 ### Lagt til
 - **Ljodstigen har ti steg.** Etter dei fem bokstavstega kjem ng-lyden, enkel og dobbel konsonant, diftongar, sj-/kj-lydar og lange ord med setningar. Lesestigen nyttar 60 nye ord, seks lydgrupper og seks setningar.
-- **Elev og lærar ser heile vegen.** Oversikta viser fullførte steg, prosent, neste mål og det som står att. Læraren ser vilkåra og attståande lesemål; ferdige mål blir verande ved seinare feil. Dei nye stega krev to rette attkjenningar per mål utan fartskrav.
+- **Elev og lærar ser heile vegen.** Ti sirklar viser fullførte steg, neste mål og det som står att. Læraren ser vilkåra og attståande lesemål; ferdige mål blir verande ved seinare feil. Dei nye stega krev to rette attkjenningar per mål utan fartskrav.
+- **Måla figurar og spelbilete i Ljodstigen.** Ti originale rasterfigurar erstattar SVG-figurane, og fem eigne spelbilete viser handlingane i spelvala. Alle opne steg har ein øvingsknapp; bokstavsteg 1–5 kan øvast kvar for seg.
 
 ### Endra
 - **Alle 213 opptaka er henta frå den nye innspelinga.** Heile råopptaket er bevart, med ekstra luft før og etter. Ei ny, versjonspinna lydmappe unngår gammal nettlesarcache.
 - **Eksisterande profilar held på framgangen.** Lesemål blir lagra i same lokale profil gjennom VyrdepilStorage, utan elevnamn. Progresjonsoversikta er ei øvingsoversikt og ingen lesetest.
+- **Ljodstigen har ryddigare meny.** Mose er standard for nye spelarar. Figurval og lærarverktøy ligg i sidemenyen, medan framgang, spelval og samling har kvar si rute. Lesefonten Andika er fast, og oppgåvene viser berre «2 av 10» som framgangstekst.
 
 ### Fiksa
 - **Prøveknappen som skreiv tilfeldig vekst over ekte elevframgang, er fjerna.** Byte av lyd eller oppgåve stansar òg lydkjedene frå førre oppgåve.

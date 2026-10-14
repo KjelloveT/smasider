@@ -14,7 +14,12 @@
         {
           "t": "nytt",
           "kva": "Framgang",
-          "tekst": "Sjå fullførte steg, prosent, neste mål og det som står att. Læraren ser òg vilkåra og kvart attståande lesemål."
+          "tekst": "Ti sirklar viser fullførte steg og vegen vidare. Læraren ser òg vilkåra og kvart attståande lesemål."
+        },
+        {
+          "t": "nytt",
+          "kva": "Figurar og spelval",
+          "tekst": "Ti måla rasterfigurar, fem spelbilete og øvingsknappar for alle opne steg."
         },
         {
           "t": "endra",
@@ -30,6 +35,11 @@
           "t": "fiksa",
           "kva": "Elevframgang",
           "tekst": "Prøveknappen som skreiv tilfeldig vekst over framgangen, er fjerna. Avbrotne lydkjeder held ikkje fram inn i neste oppgåve."
+        },
+        {
+          "t": "endra",
+          "kva": "Ljodstigen-menyen",
+          "tekst": "Mose som standardfigur, figurval og lærarverktøy i sidemenyen, eigne ruter for spel og framgang, og fast lesefont."
         }
       ]
     },

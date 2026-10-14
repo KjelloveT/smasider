@@ -48,6 +48,9 @@
     const progress = LjodProgress.summary(profile);
     const allOpen = LjodState.read().allModes;
     if (mode.id === 'lesestigen' && progress.current < 6 && !allOpen) { go('index.html'); return; }
+    const requestedStep = Number(param('level'));
+    const practiceStep = mode.id === 'lydfangst' && Number.isInteger(requestedStep) && requestedStep >= 1 && requestedStep <= 5 &&
+      (requestedStep <= progress.current || allOpen) ? requestedStep : null;
     let readingLevel = Number(param('level'));
     if (!Number.isInteger(readingLevel) || readingLevel < 6 || readingLevel > 10 ||
         (!allOpen && readingLevel > progress.current)) readingLevel = Math.max(6, progress.current);
@@ -80,13 +83,13 @@
           return;
         }
       }
-      runSession(host, profile, mode, res, readingLevel);
+      runSession(host, profile, mode, res, readingLevel, practiceStep);
     });
   }
 
   /* ──────────────── Sjølve økta ──────────────── */
 
-  function runSession(host, profile, mode, audioRes, readingLevel) {
+  function runSession(host, profile, mode, audioRes, readingLevel, practiceStep) {
     const newStars = LjodState.startSession(profile, mode.id);
     LjodState.saveProfile(profile);
 
@@ -112,7 +115,8 @@
       frame.head.appendChild(note);
     }
 
-    const ctx = { profile: profile, adaptive: profile.adaptive, guarantee: false, readingLevel: readingLevel };
+    const ctx = { profile: profile, adaptive: profile.adaptive, guarantee: false, readingLevel: readingLevel, letterPool: practiceStep ? LjodLetters.STEPS[practiceStep - 1].slice() : null };
+    if (practiceStep) frame.head.prepend(R().h('p', 'vp-help', 'Bokstavsteg ' + practiceStep));
     const journey = R().h('div');
     frame.head.appendChild(journey);
     LjodProgressUI.render(journey, profile, { compact: true, inTask: true });

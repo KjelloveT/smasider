@@ -1,0 +1,39 @@
+/* Funksjonelt oppsett for figurveljar, spelbilete og framgang. */
+.ljod-current-profile { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px; }
+.ljod-current-profile img { width: 96px; height: 96px; object-fit: contain; }
+.ljod-player { gap: 28px; }
+.ljod-player .ljod-modes { grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 20px; }
+.ljod-mode-thumbnail { display: block; width: 100%; height: clamp(110px, 15vw, 160px); object-fit: contain; border-radius: 6px; }
+.ljod-mode-par { display: flex; flex-direction: column; gap: 12px; }
+.ljod-mode-par > .ljod-mode { min-height: 0; flex: 1; }
+.ljod-stage-dots { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; list-style: none; margin: 0; padding: 0; }
+.ljod-stage-dot { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 44px; aspect-ratio: 1; border: 2px solid var(--vp-frame); border-radius: 50%; background: var(--vp-paper); color: var(--vp-ink); font-weight: 700; }
+.ljod-stage-dot.is-complete { background: var(--vp-moss); }
+.ljod-stage-dot.is-current { background: var(--vp-honey); }
+.ljod-play-mascot { width: 64px; height: 62px; object-fit: contain; }
+.ljod-teacher-dialog { width: min(1100px, calc(100vw - 24px)); }
+.ljod-teacher-dialog > .vp-stack { min-width: 0; }
+body[data-font="lesefont"] main,
+body[data-font="lesefont"] .ljod-teacher-dialog { font-family: var(--ljod-font-read); }
+body[data-font="lesefont"] :is(main, .ljod-teacher-dialog) :is(button, input, select, textarea, .ljod-prompt) { font-family: var(--ljod-font-read); }
+body[data-font="lesefont"] :is(main, .ljod-teacher-dialog) :is(h1, h2, h3, h4, .vp-heading, .vp-title) { font-family: var(--ljod-font-read); }
+@media (max-width: 820px) {
+  .vp-standard > #player { grid-row: 3; }
+  .vp-standard:has(> #player) > .vp-standard-support { grid-column: 1; grid-row: 2; }
+  .vp-standard-support .vp-content { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #profile-title { display: none; }
+  #currentProfile { grid-column: 1 / -1; justify-content: flex-start; }
+  .ljod-current-profile img { width: 56px; height: 56px; }
+  #profilePicker[open] { grid-column: 1 / -1; }
+}
+@media (max-width: 480px) {
+  .vp-standard .vp-hero p { display: none; }
+  .vp-standard-support .vp-content { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 380px) { .ljod-stage-dots { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+@media print {
+  body:has(#teacherDialog[open]) main,
+  body:has(#teacherDialog[open]) footer { display: none; }
+  #teacherDialog[open] { position: static; display: block; width: auto; max-width: none; max-height: none; }
+  #teacherOpen, #teacherClose, #allmodes, #printLaerar { display: none; }
+}

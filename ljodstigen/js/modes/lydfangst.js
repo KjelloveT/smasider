@@ -11,7 +11,7 @@
 
   function run(frame, ctx) {
     const A = LjodAdaptive;
-    const q = A.pick(ctx.adaptive, { guarantee: ctx.guarantee });
+    const q = A.pick(ctx.adaptive, { guarantee: ctx.guarantee, pool: ctx.letterPool || undefined });
     if (!q) return Promise.resolve(null);
 
     frame.setPrompt('Kva bokstav høyrer du?');

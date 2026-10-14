@@ -33,11 +33,6 @@
     { id: 'krystall', name: 'Krystall', shape: 'diamond',  tone: 'accent5' }
   ];
 
-  const FONTS = [
-    { id: 'lesefont', label: 'Lesefont',    css: 'var(--ljod-font-read)' },
-    { id: 'system',   label: 'Systemfont',  css: 'inherit' }
-  ];
-
   function today() {
     const d = new Date();
     return d.getFullYear() + '-' +
@@ -63,7 +58,7 @@
     const s = blank();
     s.profiles = Array.isArray(raw.profiles) ? raw.profiles.map(hydrateProfile) : [];
     s.lastProfile = raw.lastProfile || null;
-    s.font = raw.font === 'system' ? 'system' : 'lesefont';
+    s.font = 'lesefont';
     /* Opnar alle modusane uavhengig av kor langt eleven er komen.
        Innstillinga ligg på eininga, ikkje på profilen: ho handlar om
        kven som brukar maskina, ikkje om kva eleven kan. Progresjonen
@@ -79,6 +74,7 @@
   function write(s) {
     s.app = APP_ID;
     s.version = VERSION;
+    s.font = 'lesefont';
     try { VyrdepilStorage.setGameState(APP_ID, s); } catch (e) {
       console.warn('[Ljodstigen] fekk ikkje lagra:', e);
     }
@@ -141,6 +137,19 @@
     return read().profiles.filter(function (p) { return p.id === id; })[0] || null;
   }
 
+  function currentProfile() {
+    const s = read();
+    const p = s.profiles.find(function (profile) { return profile.id === s.lastProfile; }) ||
+      s.profiles.find(function (profile) { return profile.avatar === 'sirkel'; }) ||
+      s.profiles[0] || createProfile('sirkel');
+    if (s.lastProfile !== p.id) {
+      const latest = read();
+      latest.lastProfile = p.id;
+      write(latest);
+    }
+    return p;
+  }
+
   function saveProfile(p) {
     const s = read();
     const i = s.profiles.findIndex(function (x) { return x.id === p.id; });
@@ -199,11 +208,11 @@
   root.LjodState = {
     APP_ID: APP_ID, VERSION: VERSION,
     AVATARS: AVATARS,
-    ROPET_MAAL: ROPET_MAAL, FONTS: FONTS, STARS: STARS,
+    ROPET_MAAL: ROPET_MAAL, STARS: STARS,
     today: today, daysBetween: daysBetween,
     read: read, write: write,
     createProfile: createProfile, deleteProfile: deleteProfile,
-    getProfile: getProfile, saveProfile: saveProfile,
+    getProfile: getProfile, saveProfile: saveProfile, currentProfile: currentProfile,
     avatarOf: avatarOf,
     startSession: startSession, streakDays: streakDays
   };

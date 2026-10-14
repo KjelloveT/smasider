@@ -36,6 +36,52 @@ test('ny profil, gamle profilar og idempotent lagring', () => {
   assert.equal(stored.version, 2);
 });
 
+test('Mose er standard éin gong, medan eit tidlegare figurval og framsteg blir verande', () => {
+  stored = null;
+  const mose = S.currentProfile();
+  assert.equal(mose.avatar, 'sirkel');
+  assert.equal(S.currentProfile().id, mose.id);
+  assert.equal(S.read().profiles.length, 1);
+  assert.equal(S.read().lastProfile, mose.id);
+
+  stored = { profiles: [
+    { id: 'mose', avatar: 'sirkel' },
+    { id: 'glimt', avatar: 'firkant', adaptive: { step: 4, items: { s: { maxBox: 5, right: 12 } } } }
+  ], lastProfile: 'glimt', font: 'system' };
+  const chosen = S.currentProfile();
+  assert.equal(chosen.id, 'glimt');
+  assert.equal(chosen.adaptive.step, 4);
+  assert.equal(chosen.adaptive.items.s.right, 12);
+  assert.equal(S.read().font, 'lesefont');
+  S.write({ ...S.read(), font: 'system' });
+  assert.equal(stored.font, 'lesefont');
+  assert.equal(S.currentProfile().id, 'glimt');
+});
+
+test('øving på eit valt bokstavsteg held alle alternativa i steget utan å flytte nivået', () => {
+  const state = A.newState();
+  const pool = L.STEPS[4];
+  for (let i = 0; i < 30; i++) {
+    const question = A.pick(state, { pool, guarantee: i % 2 === 0 });
+    assert.ok(pool.includes(question.ch));
+    assert.ok(question.options.includes(question.ch));
+    assert.ok(question.options.every(ch => pool.includes(ch)));
+  }
+  assert.equal(state.step, 1);
+});
+
+test('øvingslenkjer vel rett modus og legg profil og steg i fragmentet', () => {
+  vm.runInContext(fs.readFileSync(path.join(app, 'js/progress-ui.js'), 'utf8'), context);
+  for (let step = 1; step <= 10; step++) {
+    const url = context.LjodProgressUI.practiceUrl({ id: 'ein profil' }, step);
+    assert.equal(url.includes('?'), false);
+    const params = new URLSearchParams(url.split('#')[1]);
+    assert.equal(params.get('p'), 'ein profil');
+    assert.equal(params.get('level'), String(step));
+    assert.equal(params.get('m'), step <= 5 ? 'lydfangst' : 'lesestigen');
+  }
+});
+
 test('alle ti steg, og 100 prosent berre når alle måla er ferdige', () => {
   const p = profile();
   lettersDone(p);
