@@ -6,7 +6,7 @@
     const effects = F.Effects.create();
     const scenery = F.Scenery.create(), motion = F.Motion.create();
     const activePads = new Map(), activeRings = new Map();
-    let screen = null;
+    let screen = null, darkSpike = null;
     function springPad(ctx, image, obstacle, x, time, reduced) {
       const floorY = obstacle.y + obstacle.h;
       const elapsed = time - (activePads.get(obstacle.x) ?? -Infinity);
@@ -44,12 +44,37 @@
       const pulse = !reduced && activated >= 0 && activated < .45 ? 1 - activated / .45 : 0;
       ctx.save(); ctx.translate(centreX, centreY);
       if (!reduced) ctx.rotate(Math.sin(time * 3.4 + obstacle.x) * .045);
-      if (!foreground && !reduced) { ctx.shadowColor = '#ffe29a'; ctx.shadowBlur = 10 + 20 * pulse; }
+      if (!foreground && !reduced) {
+        const aura = ctx.createRadialGradient(0, 0, 10, 0, 0, 54);
+        aura.addColorStop(0, 'rgba(208,246,255,.20)');
+        aura.addColorStop(1, 'rgba(208,246,255,0)');
+        ctx.fillStyle = aura; ctx.fillRect(-54, -54, 108, 108);
+        ctx.shadowColor = '#ecfaff'; ctx.shadowBlur = 14 + 22 * pulse;
+      }
       // The oval is seen obliquely from the side. Its far and near lips
       // occupy separate drawing planes so the cube can cross between them.
       const half = image.width / 2;
       if (foreground) ctx.drawImage(image, 0, 0, half, image.height, -22, -38, 22, 76);
       else ctx.drawImage(image, half, 0, half, image.height, 0, -38, 22, 76);
+      ctx.restore();
+    }
+    function drawSpike(ctx, image, x, y, width, height, rotation, clearContrast) {
+      if (clearContrast) {
+        if (!darkSpike) {
+          darkSpike = document.createElement('canvas');
+          darkSpike.width = image.width; darkSpike.height = image.height;
+          const brush = darkSpike.getContext('2d');
+          brush.drawImage(image, 0, 0);
+          brush.globalCompositeOperation = 'source-atop';
+          brush.fillStyle = 'rgba(10,21,27,.74)'; brush.fillRect(0, 0, image.width, image.height);
+        }
+        image = darkSpike;
+      }
+      ctx.save();
+      ctx.translate(x + width / 2, y + height / 2);
+      if (rotation) ctx.rotate(rotation * Math.PI / 180);
+      if (clearContrast && rotation) { ctx.shadowColor = '#f7edc4'; ctx.shadowBlur = 5; }
+      ctx.drawImage(image, -width / 2, -height / 2, width, height);
       ctx.restore();
     }
     function portal(ctx, section, state, world, config, finish = false, foreground = false) {
@@ -125,6 +150,9 @@
       const blend = Math.min(1, Math.max(0, (state.time - segment.start) / .65));
       if (oldScene !== segment.scene && blend < 1) scenery.background(ctx, oldScene, state.x, config.reduced);
       scenery.background(ctx, segment.scene, state.x, config.reduced, oldScene === segment.scene ? 1 : blend);
+      if (world.musicScene === 7) {
+        ctx.fillStyle = 'rgba(13,26,42,.34)'; ctx.fillRect(0, 0, 960, 540);
+      }
       if (!config.reduced) {
         ctx.fillStyle = '#fff5cc';
         for (let i = 0; i < 24; i++) {
@@ -167,15 +195,18 @@
           if (x + obstacle.w < -100 || x > 1050) return;
           if (obstacle.kind === 'ring') { jumpRing(ctx, obstacle, x, state.time, config.reduced, false); return; }
           if (obstacle.kind === 'pit') {
-            const spike = F.Assets.get('spike.png');
-            if (spike) for (let tile = x; tile < x + obstacle.w; tile += 25)
-              ctx.drawImage(spike, tile, obstacle.y, Math.min(27, x + obstacle.w - tile), obstacle.h);
+            const spikeImage = F.Assets.get('spike.png');
+            if (spikeImage) for (let tile = x; tile < x + obstacle.w; tile += 25)
+              drawSpike(ctx, spikeImage, tile, obstacle.y, Math.min(27, x + obstacle.w - tile), obstacle.h, 0, world.musicScene === 7);
             return;
           }
           if (obstacle.kind === 'chain') {
-            const ornament = F.Assets.get('column.png');
-            if (ornament) ctx.drawImage(ornament, Math.round(ornament.width * .45), 0,
-              Math.round(ornament.width * .1), ornament.height, x, obstacle.y, obstacle.w, obstacle.h);
+            ctx.save(); ctx.strokeStyle = '#e7c67e'; ctx.lineWidth = 2;
+            ctx.shadowColor = '#1b2730'; ctx.shadowBlur = 2;
+            for (let link = obstacle.y; link < obstacle.y + obstacle.h - 5; link += 9) {
+              ctx.beginPath(); ctx.ellipse(x + 4, link + 5, 3, 5, 0, 0, Math.PI * 2); ctx.stroke();
+            }
+            ctx.restore();
             return;
           }
           if (obstacle.kind === 'platform') {
@@ -184,6 +215,7 @@
           const img = F.Assets.get(obstacle.kind + '.png');
           if (!img) return;
           if (obstacle.kind === 'pad') springPad(ctx, img, obstacle, x, state.time, config.reduced);
+          else if (obstacle.kind === 'spike') drawSpike(ctx, img, x, obstacle.y, obstacle.w, obstacle.h, obstacle.rotation, world.musicScene === 7);
           else if (obstacle.kind === 'column') {
             // Extend the painted shaft behind the moving ceiling/floor. Its
             // hitbox stays fixed; only the hidden end grows with the camera.

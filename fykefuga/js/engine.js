@@ -74,11 +74,13 @@
         p.grounded = segment.mode === 'cube' && p.y >= corridor.bottom - .5;
       } else F.Physics.update(p, input, corridor);
       if (world.demo && p.mode === 'cube' && !p.grounded && input.pressed) {
+        const reach = world.ringReach || { before: 44, after: 44, y: 62 };
         const ring = segment.obstacles.find(item => item.kind === 'ring' &&
-          !state.ringsUsed.has(item.x) && Math.abs(state.x - item.x - item.w / 2) < 44 &&
-          Math.abs(p.y - item.y - item.h / 2) < 62);
+          !state.ringsUsed.has(item.x) && state.x > item.x + item.w / 2 - reach.before &&
+          state.x < item.x + item.w / 2 + reach.after &&
+          Math.abs(p.y - item.y - item.h / 2) < reach.y);
         if (ring) {
-          p.velocity = -1000;
+          p.velocity = world.ringImpulse || -1000;
           state.ringsUsed.add(ring.x);
           state.events.push({ type: 'jump', mode: p.mode, ring: true, ringX: ring.x, ringY: ring.y + ring.h / 2 });
         }

@@ -7,6 +7,7 @@
       "samandrag": "Utflukt med danning har fått det faktiske banekartet med plattformer, piggehav og hoppringar.",
       "punkt": [
         { "t": "endra", "kva": "Utflukt med danning", "tekst": "Polargeist-posisjonane gjev piggehav, hengjeplattformer, 29 hoppringar og åtte flaggval." },
+        { "t": "fiksa", "kva": "Ring og piggar", "tekst": "Lengre opningsstrekk krev hoppringane, som er lettare å treffe. Takpiggar peikar nedover, og dempa kulissar gjer hinder tydelegare." },
         { "t": "endra", "kva": "Treffområde", "tekst": "Pigger og andre skadelege hinder er litt meir tilgjevande enn dei synlege figurane." }
       ]
     },

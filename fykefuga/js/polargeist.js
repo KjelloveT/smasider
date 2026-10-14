@@ -54,17 +54,39 @@
       flush();
     }
   }
-  runs(source.blocks, 30, 30, 'platform');
+  // Our cube jumps higher than the original game's cube. Raise the two early
+  // hanging ceilings as complete assemblies so their underside spikes leave
+  // a real jump path above the floor spikes instead of closing the corridor.
+  const overhangLift = (x, y) => y >= 100 &&
+    (x >= 2480 && x <= 2700 || x >= 5660 && x <= 5940) ? 100 : 0;
+  // The second pair needs a landing gap before the next jump at our speed.
+  const overhangShift = x => x >= 2639 && x <= 2669 ? 55 : 0;
+  const raisedBlocks = source.blocks.map(([id, x, y]) =>
+    [id, x + overhangShift(x), y + overhangLift(x, y)]);
+  runs(raisedBlocks, 30, 30, 'platform');
   runs(source.ledges, 30, 16, 'platform');
   runs(source.pits, 30, 32, 'pit');
-  for (const [, x, y] of source.spikes) add({ x: mapX(x) - 16, y: floorY - y - 16,
-    w: 32, h: 32, kind: 'spike' });
+  const spikes = source.spikes.slice();
+  // The source's first two four-spike jumps are short enough to clear with a
+  // plain cube jump after our horizontal scaling. Extend their landing zones
+  // so the nearby rings become useful, while retaining the original starts.
+  for (const [first, last] of [[565, 685], [1019, 1139]])
+    for (let x = first + 30; x <= last; x += 30) spikes.push([39, x, 6]);
+  for (const [, x, y, rotation = 0] of spikes) add({ x: mapX(x + overhangShift(x)) - 16,
+    y: floorY - y - (rotation === 180 ? overhangLift(x, y) : 0) - 16,
+    w: 32, h: 32, kind: 'spike', rotation });
   for (const [, x, y] of source.rings) add({ x: mapX(x) - 32, y: floorY - y - 32,
     w: 64, h: 64, kind: 'ring' });
   for (const [, x, y] of source.pads) add({ x: mapX(x) - 24, y: floorY - y - 11,
     w: 48, h: 22, kind: 'pad' });
-  for (const [, x, y] of source.chains) add({ x: mapX(x) - 4, y: floorY - y - 15,
-    w: 8, h: 30, kind: 'chain' });
+  const supports = [...raisedBlocks, ...source.ledges];
+  for (const [, x, y] of source.chains) {
+    const shiftedX = x + overhangShift(x);
+    const anchor = supports.filter(([, blockX]) => Math.abs(blockX - shiftedX) < 8)
+      .sort((left, right) => right[2] - left[2])[0];
+    const bottom = anchor ? floorY - anchor[2] - 15 : floorY - y + 15;
+    add({ x: mapX(shiftedX) - 4, y: 45, w: 8, h: Math.max(12, bottom - 45), kind: 'chain' });
+  }
   // Leave a short recovery space after every answer portal. The source map
   // resumes immediately after it; only the colliders in this small margin go.
   sections.filter(section => section.choiceIndex !== undefined).forEach(section => {
@@ -75,7 +97,7 @@
     section.obstacles.sort((a, b) => a.x - b.x);
     const high = section.obstacles.filter(item => ['platform', 'spike', 'ring'].includes(item.kind))
       .reduce((max, item) => Math.max(max, floorY - item.y), 0);
-    if (section.mode === 'cube' && high > 240) {
+    if (section.mode === 'cube' && high > 260) {
       section.top = 62; section.zoom = 1.27; section.focus = 290;
     } else if (section.mode === 'cube' && high > 165) {
       section.top = 100; section.zoom = 1.47; section.focus = 328;
@@ -105,6 +127,7 @@
     return { speed: SPEED, duration: END_X / SPEED, count: sections.length,
       questionCount: gates.length, end: END_X / SPEED, tutorial: true, demo: true,
       endless: false, musicScene: 7, readingSeconds: 2,
+      ringReach: { before: 50, after: 85, y: 90 }, ringImpulse: -1220,
       quiz: F.FlagQuestions.create(config.seed || 1, gates.length),
       previewRoute: !!config.previewRoute, lanes, finishX: END_X, viewAt,
       choiceIndex: section => section.choiceIndex === undefined ? -1 : section.choiceIndex,

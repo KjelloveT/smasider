@@ -42,7 +42,13 @@ def main():
         object_id = int(obj["1"])
         for name, ids in GROUPS.items():
             if object_id in ids:
-                groups[name].append((object_id, round(float(obj["2"])), round(float(obj["3"]))))
+                position = (object_id, round(float(obj["2"])), round(float(obj["3"])))
+                # Key 5 mirrors a spike vertically; key 6 rotates it. Without
+                # these, ceiling and wall spikes point into their own blocks.
+                angle = int(float(obj.get("6", "0")))
+                if name == "spikes" and obj.get("5") == "1":
+                    angle = (angle + 180) % 360
+                groups[name].append(position + (angle,) if angle else position)
                 break
 
     lines = [

@@ -8,6 +8,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 ### Endra
 - **Utflukt med danning** fylgjer no posisjonane i Polargeist-banekartet: piggehav, hengjande plattformer, 29 hoppringar, sprettplater og skipspartiet. Åtte eigne svarstrekningar er sette inn mellom partia, og banenamnet er oppdatert i spelet.
 - Pigger og andre skadelege hinder i Fykefuga har litt mindre treffområde enn dei synlege figurane.
+- Dei to fyrste ringhoppa i Utflukt med danning har lengre piggstrekk og romslegare aktivering av hoppringen. Piggane under svevande blokker vender nedover eller til sida slik originalkartet viser; blokkene er løfta og eitt par flytta så terningen kan hoppe mellom tak- og golvpiggane. Smale lenkjer held plattformene oppe. Eit dempa kulisselag og mørkare piggar gjer spelplanet lettare å lese.
 
 ## [2.2] — 2026-10-12
 
