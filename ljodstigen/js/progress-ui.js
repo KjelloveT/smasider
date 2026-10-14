@@ -30,7 +30,7 @@
 
     if (opts.compact) return;
     if (!opts.teacher) {
-      const next = R.h('a', 'vp-button vp-button--positive', s.done ? 'Øv på lesestega' : 'Hald fram på steg ' + s.current);
+      const next = R.h('a', 'vp-button vp-button--positive', s.done ? 'Øv vidare i Lesestigen' : 'Hald fram i ' + practiceMode(s.current) + ' — steg ' + s.current);
       next.href = practiceUrl(p, s.current);
       host.appendChild(next);
     }
@@ -46,6 +46,9 @@
       card.appendChild(R.h('p', 'vp-help', level.detail));
       card.appendChild(R.h('p', null, level.status));
       if (opts.teacher) card.appendChild(R.h('p', 'vp-help', level.goal));
+      if (opts.teacher && level.number <= 5) card.appendChild(R.h('p', 'vp-help', level.practice.length
+        ? 'Øv vidare på: ' + level.practice.join(' · ').toUpperCase() + '.'
+        : 'Alle bokstavane på dette steget sit godt.'));
       if (opts.teacher && level.number >= 6) {
         const data = LjodReading.LEVELS.find(function (item) { return item.number === level.number; });
         const left = data.items.filter(function (item) { return LjodProgress.resultFor(p, item.id).right < LjodProgress.REQUIRED; });
@@ -56,7 +59,7 @@
       }
       if (!opts.teacher) {
         if (available) {
-          const link = R.h('a', 'vp-button vp-button--compact', 'Øv på steg ' + level.number);
+          const link = R.h('a', 'vp-button vp-button--compact', 'Øv på steg ' + level.number + ' i ' + practiceMode(level.number));
           link.href = practiceUrl(p, level.number);
           card.appendChild(link);
         } else {
@@ -85,5 +88,7 @@
     return 'spel.html#' + new URLSearchParams({ p: p.id, m: number <= 5 ? 'lydfangst' : 'lesestigen', level: number });
   }
 
-  root.LjodProgressUI = { render: render, practiceUrl: practiceUrl };
+  function practiceMode(number) { return number <= 5 ? 'Lydfangst' : 'Lesestigen'; }
+
+  root.LjodProgressUI = { render: render, practiceUrl: practiceUrl, practiceMode: practiceMode };
 })(window);

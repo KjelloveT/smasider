@@ -2,6 +2,8 @@
 
 Arbeidsplan, 14. oktober 2026. Dette er eit framlegg til vidare utvikling, ikkje ei liste over ferdige spel.
 
+Planen gjeld ei seinare utgåve. Bokstavjakta og banelagaren ligg ikkje i V1-menyen.
+
 ## Retning
 
 Bygg ein lun skog der Mose og dei andre skogvenene treng hjelp til å gjere møteplassen sin levande. Eleven lærer gjennom korte handlingar: lytte, velje, setje saman og lese. Trea som alt veks i Ljodstigen blir det synlege minnet om innsatsen. Vi lagar eigne figurar, stader, handlingar og bilete.

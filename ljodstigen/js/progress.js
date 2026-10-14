@@ -33,12 +33,16 @@
       }).length;
       const needed = letters.length - 1;
       const done = a.step > index + 1 || solid >= needed;
+      const practice = letters.filter(function (ch) {
+        return !a.items[ch] || a.items[ch].maxBox < 3;
+      });
       return {
         number: index + 1, title: 'Bokstavsteg ' + (index + 1),
         detail: letters.join(' · ').toUpperCase(),
         done: done, fraction: done ? 1 : solid / needed,
         status: solid + ' av ' + letters.length + ' bokstavar sit godt',
-        goal: 'Minst ' + needed + ' av ' + letters.length + ' bokstavar på vekststeg 3. Éin vanskeleg bokstav kan øvast vidare på.'
+        goal: 'Minst ' + needed + ' av ' + letters.length + ' bokstavar på vekststeg 3.',
+        practice: practice
       };
     });
     return letterLevels.concat(LjodReading.LEVELS.map(function (level) {

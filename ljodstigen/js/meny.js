@@ -17,7 +17,7 @@
   const VARIANTAR = {
     bokstavropet: {
       href: 'ropet.html',
-      label: 'Prøv på leirplassen →',
+      label: 'Prøv Bokstavropet på Leirplassen',
       aria: 'Bokstavropet på leirplassen, ei 3D-utgåve der lydane bur i telt'
     }
   };
@@ -47,7 +47,7 @@
     s.profiles.forEach(function (p) {
       const av = LjodState.avatarOf(p.avatar);
       const st = LjodProgress.summary(p);
-      const card = R().h('div', 'ljod-profile vp-panel vp-panel--inset' + (current && current.id === p.id ? ' is-active' : ''));
+      const card = R().h('div', 'ljod-profile' + (current && current.id === p.id ? ' is-active' : ''));
       card.dataset.tone = av.tone;
 
       const pick = R().h('button', 'ljod-profile-pick vp-button vp-button--quiet vp-button--block');
@@ -78,21 +78,15 @@
     /* Ledige figurar å opprette. */
     const taken = s.profiles.map(function (p) { return p.avatar; });
     const free = LjodState.AVATARS.filter(function (a) { return taken.indexOf(a.id) === -1; });
-    if (free.length) {
-      const add = R().h('div', 'ljod-newprofile vp-panel vp-panel--plain');
-      add.appendChild(R().h('p', 'ljod-hint', 'Vel ein figur for å byrje:'));
-      const row = R().h('div', 'ljod-avatar-row');
-      free.forEach(function (av) {
-        const b = avatarButton(av, false);
-        b.addEventListener('click', function () {
-          const p = LjodState.createProfile(av.id);
-          select(p.id);
-        });
-        row.appendChild(b);
+    free.forEach(function (av) {
+      const b = avatarButton(av, false);
+      b.appendChild(R().h('span', 'ljod-profile-sum', '0 av 10'));
+      b.addEventListener('click', function () {
+        const p = LjodState.createProfile(av.id);
+        select(p.id);
       });
-      add.appendChild(row);
-      host.appendChild(add);
-    }
+      host.appendChild(b);
+    });
     if (root.VyrdepilDesign) root.VyrdepilDesign.initSelections(host);
   }
 
@@ -102,8 +96,8 @@
     s.lastProfile = id;
     LjodState.write(s);
     refresh();
-    const panel = $('player');
-    if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const dialog = $('profileDialog');
+    if (dialog && dialog.open) Vy.closeModal(dialog);
   }
 
   /* ──────────────── Modusar ──────────────── */
@@ -128,12 +122,13 @@
       const def = window['LjodMode_' + m.id];
       const unlocked = open.indexOf(m.id) !== -1;
 
-      const card = R().h(unlocked ? 'a' : 'div', 'ljod-mode vp-panel ' + (unlocked ? 'vp-panel--plain' : 'vp-panel--inset is-locked'));
-      if (unlocked) {
+      const variant = VARIANTAR[m.id];
+      const card = R().h(unlocked && !variant ? 'a' : 'article', 'ljod-mode vp-panel ' + (unlocked ? 'vp-panel--plain' : 'vp-panel--inset is-locked'));
+      if (unlocked && !variant) {
         card.href = 'spel.html#' + new URLSearchParams({ p: current.id, m: m.id });
       }
       const thumbnail = R().h('img', 'ljod-mode-thumbnail');
-      thumbnail.src = 'resources/val/' + m.id + '.jpg';
+      thumbnail.src = LjodAvatar.thumbnailUrl(current.avatar, m.id);
       thumbnail.width = 480;
       thumbnail.height = 360;
       thumbnail.alt = '';
@@ -154,24 +149,22 @@
         card.setAttribute('aria-disabled', 'true');
       }
 
-      /* BOKSTAVROPET FINST I TO UTGÅVER, og eleven vel sjølv.
-
-         Den vanlege er raskare og har alle alternativa framme samtidig.
-         Leirplassen tek lengre tid, og det er heile poenget: han må
-         halde lyden i hovudet medan han går til neste telt.
-
-         Valet ligg her og ikkje som ein eigen modus, fordi det ER same
-         oppgåva og same framgangen. To modusar ville gjeve eleven
-         inntrykk av to ulike ting å lære. */
-      if (unlocked && VARIANTAR[m.id]) {
-        const boks = R().h('div', 'ljod-mode-par');
-        boks.appendChild(card);
-        const alt = R().h('a', 'ljod-mode-variant vp-button vp-button--quiet vp-button--compact', VARIANTAR[m.id].label);
-        alt.href = VARIANTAR[m.id].href;
-        alt.setAttribute('aria-label', VARIANTAR[m.id].aria);
-        boks.appendChild(alt);
-        host.appendChild(boks);
-        return;
+      if (variant) {
+        const actions = R().h('div', 'vp-actions ljod-mode-actions');
+        const start = R().h(unlocked ? 'a' : 'button', 'vp-button vp-button--positive', 'Start');
+        const alt = R().h(unlocked ? 'a' : 'button', 'vp-button', variant.label);
+        if (unlocked) {
+          start.href = 'spel.html#' + new URLSearchParams({ p: current.id, m: m.id });
+          start.setAttribute('aria-label', 'Start Bokstavropet');
+          alt.href = variant.href;
+          alt.setAttribute('aria-label', variant.label);
+        } else {
+          start.type = alt.type = 'button';
+          start.disabled = alt.disabled = true;
+        }
+        actions.appendChild(start);
+        actions.appendChild(alt);
+        card.appendChild(actions);
       }
       host.appendChild(card);
     });
@@ -207,12 +200,14 @@
     LjodLaerar.render($('laerar'), current);
   }
 
-  function wireTeacher() {
-    const dialog = $('teacherDialog');
-    if (!dialog) return;
-    $('teacherOpen').addEventListener('click', function () { Vy.openModal(dialog); });
-    $('teacherClose').addEventListener('click', function () { Vy.closeModal(dialog); });
-    Vy.bindOverlayClose(dialog);
+  function wireDialogs() {
+    ['teacher', 'profile'].forEach(function (name) {
+      const dialog = $(name + 'Dialog');
+      if (!dialog) return;
+      $(name + 'Open').addEventListener('click', function () { Vy.openModal(dialog); });
+      $(name + 'Close').addEventListener('click', function () { Vy.closeModal(dialog); });
+      Vy.bindOverlayClose(dialog);
+    });
   }
 
   /* ──────────────── Faner ──────────────── */
@@ -293,7 +288,7 @@
 
   function init() {
     document.body.dataset.font = 'lesefont';
-    wireTeacher();
+    wireDialogs();
     wireVoice();
     wireAllModes();
     wireTabs();

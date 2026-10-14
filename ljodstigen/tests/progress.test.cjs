@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
+const { pathToFileURL, fileURLToPath } = require('node:url');
 const app = path.join(__dirname, '..');
 const context = { window: null, Vy: { shuffle: list => list.slice() }, Date, URLSearchParams };
 context.window = context;
@@ -100,6 +101,21 @@ test('alle ti steg, og 100 prosent berre når alle måla er ferdige', () => {
   assert.equal(P.summary(p).remaining, 0);
 });
 
+test('læraroversikta peikar ut kvar attståande bokstav, også etter at steget er fullført', () => {
+  const p = profile();
+  const letters = L.STEPS[0];
+  p.adaptive.step = 2;
+  letters.slice(1).forEach(ch => { p.adaptive.items[ch] = { ...A.item(p.adaptive, ch), maxBox: 3 }; });
+  const before = JSON.stringify(p);
+  const first = P.levels(p)[0];
+  assert.equal(first.done, true);
+  assert.deepEqual(Array.from(first.practice), [letters[0]]);
+  assert.deepEqual(Array.from(P.levels(p)[2].practice), Array.from(L.STEPS[2]));
+  assert.equal(JSON.stringify(p), before);
+  p.adaptive.items[letters[0]] = { ...A.item(p.adaptive, letters[0]), maxBox: 3 };
+  assert.equal(P.levels(p)[0].practice.length, 0);
+});
+
 test('feil tek ikkje bort ferdige mål, og førehandsøving hoppar ikkje over steg', () => {
   const p = profile();
   const target = D.LEVELS[4].items[0];
@@ -143,6 +159,26 @@ test('alle nye mål har eit ekte klipp og eit eintydig steg', () => {
     }
     level.groups.forEach(group => assert.ok(manifest.lydgrupper[group.id]));
   }
+});
+
+test('kvar figur har fem eigne lokale spelbilete med stabile profil-ID-ar', () => {
+  const avatars = { window: null, URL, document: { currentScript: { src: pathToFileURL(path.join(app, 'js/avatars.js')).href } } };
+  avatars.window = avatars;
+  vm.createContext(avatars);
+  vm.runInContext(fs.readFileSync(path.join(app, 'js/avatars.js'), 'utf8'), avatars);
+  const urls = new Set();
+  for (const avatar of S.AVATARS) {
+    for (const mode of A.MODES) {
+      const url = avatars.LjodAvatar.thumbnailUrl(avatar.id, mode.id);
+      assert.equal(urls.has(url), false, avatar.id + ': ' + mode.id);
+      urls.add(url);
+      const file = fileURLToPath(url);
+      assert.ok(fs.existsSync(file), file);
+      assert.ok(fs.statSync(file).size < 500000, file);
+    }
+  }
+  assert.equal(urls.size, 50);
+  assert.equal(avatars.LjodAvatar.thumbnailUrl('ukjend', 'lydfangst'), avatars.LjodAvatar.thumbnailUrl('sirkel', 'lydfangst'));
 });
 
 test('alle inngangssider lastar ny profilmodell og alle lokale ressursar finst', () => {

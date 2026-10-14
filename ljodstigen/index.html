@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="css/style.css?v=5">
     <script src="../js/vyrde.js" defer></script>
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
-<link rel="stylesheet" href="css/oversikt.css?v=1">
+<link rel="stylesheet" href="css/oversikt.css?v=2">
   <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
 <body data-font="lesefont" class="vp-page" data-vp-design data-vp-site-page="true" data-vp-layout="standard" data-vp-site-footer>
@@ -35,7 +35,7 @@
     </div>
 
     <section id="player" class="ljod-player vp-stack vp-standard-main vp-standard-play" hidden>
-      <section class="vp-panel vp-panel--plain" aria-labelledby="playerName">
+      <section class="vp-panel vp-panel--plain ljod-overview" aria-labelledby="playerName">
         <div class="vp-content vp-stack">
           <h2 class="vp-heading" id="playerName">Mose</h2>
           <div id="stars"></div>
@@ -43,18 +43,14 @@
         </div>
       </section>
 
-      <section class="vp-panel vp-panel--plain" aria-labelledby="modesTitle">
+      <section class="vp-panel vp-panel--plain ljod-wide" aria-labelledby="modesTitle">
         <div class="vp-content vp-stack">
           <h2 class="vp-panel-heading vp-heading" id="modesTitle">Kva vil du spele?</h2>
           <div id="modes" class="ljod-modes"></div>
-          <div data-laerarbaner hidden>
-            <h3 class="vp-heading vp-heading--small">Banene til læraren</h3>
-            <div id="laerarbaner" class="ljod-modes"></div>
-          </div>
         </div>
       </section>
 
-      <section class="vp-panel vp-panel--plain" aria-label="Skog og bragder">
+      <section class="vp-panel vp-panel--plain ljod-wide" aria-label="Skog og bragder">
         <div class="vp-content vp-stack">
           <div class="ljod-tabs" role="tablist" aria-label="Samlinga di">
             <button class="vp-button vp-button--quiet vp-button--compact active" data-tab="skog" role="tab" aria-selected="true">Skogen</button>
@@ -68,15 +64,6 @@
         </div>
       </section>
 
-      <section class="vp-panel vp-panel--plain">
-        <details class="vp-accordion">
-          <summary>Under utprøving</summary>
-          <div class="vp-accordion-body vp-stack">
-            <p>Bokstavjakta er ei tidleg prøveflate. Nye småspel og eit eige måla landskap er under planlegging.</p>
-            <a href="jakta.html" class="vp-button">Prøv Bokstavjakta</a>
-          </div>
-        </details>
-      </section>
     </section>
 
     <aside class="vp-sign vp-sign--grounded vp-standard-support" aria-label="Figur og lærarverktøy">
@@ -88,19 +75,21 @@
         <div class="vp-content vp-stack">
           <h2 class="vp-panel-heading vp-heading" id="profile-title">Figuren din</h2>
           <div id="currentProfile" class="ljod-current-profile"></div>
-          <details class="vp-accordion" id="profilePicker">
-            <summary>Vel ein annan figur</summary>
-            <div class="vp-accordion-body">
-              <p class="vp-help">Kvar figur hugsar sin eigen framgang på denne eininga.</p>
-              <div id="profiles" class="ljod-profiles"></div>
-            </div>
-          </details>
+          <button id="profileOpen" type="button" class="vp-button vp-button--block" aria-haspopup="dialog" aria-controls="profileDialog">Vel annan figur</button>
           <button id="teacherOpen" type="button" class="vp-button vp-button--block" aria-haspopup="dialog" aria-controls="teacherDialog">For læraren</button>
         </div>
       </section>
     </aside>
   </div>
 </main>
+<dialog id="profileDialog" class="vp-dialog ljod-profile-dialog" aria-labelledby="profileTitle">
+  <div class="vp-dialog-head">
+    <h2 id="profileTitle">Vel annan figur</h2>
+    <button id="profileClose" type="button" class="vp-button vp-button--compact">Lukk</button>
+  </div>
+  <p>Kvar figur hugsar sin eigen framgang på denne eininga.</p>
+  <div id="profiles" class="ljod-profiles"></div>
+</dialog>
 <dialog id="teacherDialog" class="vp-dialog ljod-teacher-dialog" aria-labelledby="teacherTitle">
   <div class="vp-dialog-head">
     <h2 id="teacherTitle">For læraren</h2>
@@ -117,7 +106,6 @@
     <div id="laerar"></div>
     <div class="vp-actions">
       <button class="vp-button" id="printLaerar" type="button">Skriv ut</button>
-      <a class="vp-button" href="banelagar.html">Lag eigne baner</a>
     </div>
   </div>
 </dialog>
@@ -130,28 +118,24 @@
 <script src="js/adaptive.js?v=2"></script>
 <script src="js/shapes.js?v=2"></script>
 <script src="js/reading-data.js"></script>
-<script src="js/progress.js"></script>
+<script src="js/progress.js?v=2"></script>
 <script src="js/state.js?v=3"></script>
-<script src="js/avatars.js?v=2"></script>
+<script src="js/avatars.js?v=3"></script>
 <script src="js/merke.js?v=2"></script>
-<script src="js/render.js?v=2"></script>
+<script src="js/render.js?v=3"></script>
 <script src="js/audio.js?v=4"></script>
 <script src="js/avatars-3d.js"></script>
 <script src="js/figur3d.js"></script>
 <script src="js/skog3d.js"></script>
 <script src="js/skog.js?v=2"></script>
-<script src="js/progress-ui.js?v=2"></script>
+<script src="js/progress-ui.js?v=3"></script>
 <script src="js/laerar.js?v=2"></script>
 <script src="js/modes/lydfangst.js?v=2"></script>
 <script src="js/modes/bokstavropet.js"></script>
 <script src="js/modes/forstelyd.js"></script>
 <script src="js/modes/ordbyggjar.js"></script>
-<script src="js/jakta/blokker.js"></script>
-<script src="js/jakta/validator.js"></script>
-<script src="js/jakta/eigne.js"></script>
-<script src="js/laerarbaner.js"></script>
 <script src="js/modes/lesestigen.js?v=2"></script>
-<script src="js/meny.js?v=3"></script>
+<script src="js/meny.js?v=4"></script>
 
 
 

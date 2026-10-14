@@ -2,7 +2,7 @@
 
 Laga 14. oktober 2026 med det innebygde `image_gen`-verktøyet, éi køyring per bilete. Ingen CLI eller nye avhengnader.
 
-Figurane er PNG med alfa, maks 384 × 384 px og 128 fargar. Spelbileta er JPEG, 480 × 360 px, kvalitet 82. Alle femten publiserte bileta er under 46 kB kvar; samla er dei kring 500 kB. Originalane ligg lokalt under `_kjelder/ljodstigen-bilete/` og er ikkje med i Git.
+Figurane er PNG med alfa, maks 384 × 384 px og 128 fargar. Spelbileta er JPEG, 480 × 360 px, kvalitet 82. Alle 60 publiserte bileta er under 46 kB kvar; samla er dei kring 2,1 MB. Ved figurbyte blir berre dei fem spelbileta for den valde figuren viste. Originalane ligg lokalt under `_kjelder/ljodstigen-bilete/` og er ikkje med i Git.
 
 ## Figurfamilien
 
@@ -56,3 +56,10 @@ Felles avslutning:
 > Original cohesive hand-painted gouache storybook art, broad painted facets, warm forest colors of moss green, honey, cream and small turquoise accents, bold dark green contours. All subjects fully visible inside generous safe margins, one very clear simple composition readable at 160 pixels. Pale warm cream background, very little clutter. Any requested letter must be black on a light cream tile, correct and simple; no other text, no captions, no title, no interface, no watermark, no photo, no logos, no imitation Poio characters. Use one illustration, not a contact sheet.
 
 Spelbileta er berre illustrasjonar av handlinga i menyen. Bokstavar og ord i sjølve oppgåvene blir framleis ekte tekst i Andika.
+
+
+## Spelbilete for alle figurane
+
+Dei fem opphavlege bileta i `val/` viser Mose. Dei ni andre figurane har dei same fem motiva i `val/<figurnamn>/`, til saman 50 spelbilete. Alle 45 nye variantar vart laga med det innebygde verktøyet, éi køyring per variant. Fyrste innbilete var originalmotivet i full oppløysing, og andre innbilete var den opphavlege figur-PNG-en som identitetsreferanse. Originalane er kopierte til `_kjelder/ljodstigen-bilete/val/<figur>/`. Ingen variant er sett saman med SVG eller teikna med kode.
+
+Den nøyaktige promptmalen, motivtekstane, figurnamna og dei 45 filstiane står i [VARIANTPROMPTAR.json](VARIANTPROMPTAR.json). Komprimerte sluttbilete er kontrollerte samla for rett figur, bokstavrekkjefølgje, komplett motiv og same måla stil. Ingen oppgåvefasit i sjølve spelet er avhengig av bokstavane i illustrasjonane.

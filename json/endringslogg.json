@@ -19,7 +19,7 @@
         {
           "t": "nytt",
           "kva": "Figurar og spelval",
-          "tekst": "Ti måla rasterfigurar, fem spelbilete og øvingsknappar for alle opne steg."
+          "tekst": "Ti måla rasterfigurar med fem spelbilete kvar og øvingsknappar for alle opne steg."
         },
         {
           "t": "endra",
@@ -39,7 +39,12 @@
         {
           "t": "endra",
           "kva": "Ljodstigen-menyen",
-          "tekst": "Mose som standardfigur, figurval og lærarverktøy i sidemenyen, eigne ruter for spel og framgang, og fast lesefont."
+          "tekst": "Mose som standard, dialog for figurbyte, breie spelval, begge Bokstavropet-knappane i same kort og fast lesefont. Prøvebana og banelagaren er tekne ut av V1-menyen."
+        },
+        {
+          "t": "endra",
+          "kva": "Øktframgang",
+          "tekst": "Figuren går mot eit målflagg, med tolv stjerner og tydeleg teljing. Læraren ser kva bokstavar som treng meir øving."
         }
       ]
     },

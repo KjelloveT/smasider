@@ -19,6 +19,10 @@
   const promises = Object.create(null), images = Object.create(null), canvases = Object.create(null);
   function get(id) { return DEFINITIONS[id] || DEFINITIONS.sirkel; }
   function assetUrl(id) { return new URL('../resources/figurar/' + (FILES[id] || FILES.sirkel) + '.png', SCRIPT_URL).href; }
+  function thumbnailUrl(id, mode) {
+    const folder = FILES[id] || FILES.sirkel;
+    return new URL('../resources/val/' + (folder === 'mose' ? '' : folder + '/') + mode + '.jpg', SCRIPT_URL).href;
+  }
   function loadImage(id) {
     if (!promises[id]) promises[id] = new Promise(function (resolve, reject) {
       const image = new Image();
@@ -46,6 +50,6 @@
     img.setAttribute('aria-hidden', 'true');
     return img;
   }
-  root.LjodAvatar = { get: get, url: assetUrl, dataUrl: assetUrl, image: image,
+  root.LjodAvatar = { get: get, url: assetUrl, dataUrl: assetUrl, thumbnailUrl: thumbnailUrl, image: image,
     loadAll: function () { return Promise.all(Object.keys(FILES).map(loadImage)); }, loadedImage: loadedImage };
 })(window);

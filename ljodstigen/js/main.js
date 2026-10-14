@@ -93,7 +93,7 @@
     const newStars = LjodState.startSession(profile, mode.id);
     LjodState.saveProfile(profile);
 
-    const frame = R().taskFrame({ prompt: '' });
+    const frame = R().taskFrame({ prompt: '', avatar: profile.avatar });
     R().clear(host);
     host.appendChild(frame.root);
 
@@ -222,7 +222,7 @@
     row.appendChild(again);
     const progress = LjodProgress.summary(profile);
     if (progress.current >= 6 && !progress.done) {
-      const onward = R().h('a', 'vp-button vp-button--positive', 'Vidare til steg ' + progress.current);
+      const onward = R().h('a', 'vp-button vp-button--positive', 'Vidare i Lesestigen — steg ' + progress.current);
       onward.href = 'spel.html#' + new URLSearchParams({ p: profile.id, m: 'lesestigen', level: progress.current });
       row.appendChild(onward);
     }
