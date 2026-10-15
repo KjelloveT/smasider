@@ -3,9 +3,15 @@
   "versjonar": [
     {
       "versjon": "2.3",
-      "dato": "2026-10-14",
-      "samandrag": "Ljodstigen har nye opptak, ti steg og ei felles framgangsoversikt for elev og lærar.",
+      "dato": "2026-10-15",
+      "samandrag": "Ljodstigen er på framsida og i appmenyen, med innspelte lydar og ti steg frå bokstavlydar til setningar.",
       "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Ljodstigen på framsida",
+          "tekst": "Lesespelet for småtrinnet ligg under Språk og ord på framsida og i appmenyen, med omtale i infoskiltet.",
+          "merke": "verktoy"
+        },
         {
           "t": "nytt",
           "kva": "Ljodstigen",
@@ -20,6 +26,11 @@
           "t": "nytt",
           "kva": "Figurar og spelval",
           "tekst": "Ti måla rasterfigurar med fem spelbilete kvar og øvingsknappar for alle opne steg."
+        },
+        {
+          "t": "endra",
+          "kva": "Rettleiing for læraren",
+          "tekst": "Fleire elevar på same eining bruker kvar sin figur. Lærarrettleiinga forklarer korleis dei held fram med sin eigen framgang."
         },
         {
           "t": "endra",

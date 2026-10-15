@@ -3,14 +3,16 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
-## [2.3] — 2026-10-14
+## [2.3] — 2026-10-15
 
 ### Lagt til
+- **Ljodstigen på framsida og i appmenyen.** Lesespelet for småtrinnet ligg under «Språk og ord», med eigen logo og omtale i infoskiltet.
 - **Ljodstigen har ti steg.** Etter dei fem bokstavstega kjem ng-lyden, enkel og dobbel konsonant, diftongar, sj-/kj-lydar og lange ord med setningar. Lesestigen nyttar 60 nye ord, seks lydgrupper og seks setningar.
 - **Elev og lærar ser heile vegen.** Ti sirklar viser fullførte steg, neste mål og det som står att. Læraren ser vilkåra og attståande lesemål; ferdige mål blir verande ved seinare feil. Dei nye stega krev to rette attkjenningar per mål utan fartskrav.
 - **Måla figurar og spelbilete i Ljodstigen.** Ti originale rasterfigurar erstattar SVG-figurane, og kvar figur har fem eigne spelbilete som viser handlingane i spelvala. Alle opne steg har ein øvingsknapp; bokstavsteg 1–5 kan øvast kvar for seg. Framhaldsknappen seier kva spel han opnar.
 
 ### Endra
+- **Kort rettleiing for fleire elevar.** «For læraren» forklarer at kvar elev vel sin eigen figur, og bruker den same figuren neste gong for å halde fram med sin eigen framgang.
 - **Alle 213 opptaka er henta frå den nye innspelinga.** Heile råopptaket er bevart, med ekstra luft før og etter. Ei ny, versjonspinna lydmappe unngår gammal nettlesarcache.
 - **Eksisterande profilar held på framgangen.** Lesemål blir lagra i same lokale profil gjennom VyrdepilStorage, utan elevnamn. Progresjonsoversikta er ei øvingsoversikt og ingen lesetest.
 - **Ljodstigen har ryddigare meny.** Mose er standard for nye spelarar. Sidemenyen opnar dialogar for figurbyte og lærarverktøy. Spelvala og samlinga bruker heile breidda under skiltet; Bokstavropet har to startknappar i same kort. Lenker til prøvebana og banelagaren er tekne ut av V1-menyen. Lesefonten Andika er fast, og oppgåvene viser berre «2 av 10» for heile stigen.

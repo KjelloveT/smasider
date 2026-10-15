@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-10",
+  "updated": "2026-10-15",
   "appCatalog": "json/apps.json",
   "policy": {
     "allocation": "random-unused-on-creation",
@@ -1750,7 +1750,7 @@
         1672,
         941
       ],
-      "assignedTo": null
+      "assignedTo": "ljodstigen"
     },
     {
       "id": "hogfjell-sommar-morgon",
@@ -2542,6 +2542,9 @@
     },
     "fykefuga": {
       "backgroundId": "sykkelsti-var-morgon"
+    },
+    "ljodstigen": {
+      "backgroundId": "sykkelsti-vinter-natt"
     }
   },
   "siteBackgroundSets": {
