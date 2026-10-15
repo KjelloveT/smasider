@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "2.3.1",
+      "dato": "2026-10-15",
+      "samandrag": "Tydelegare bokstavruter og lydframheving i Ljodstigen.",
+      "punkt": [
+        { "t": "endra", "kva": "Lydfangst", "tekst": "Fast bokstavstorleik med plass til åtte svarruter på éi rad. Smale skjermar får fleire rader med same storleik." },
+        { "t": "endra", "kva": "Ordbyggjaren", "tekst": "Kvar bokstav blir framheva medan lyden blir lesen. Når heile ordet blir lese, blir alle bokstavane framheva samtidig." },
+        { "t": "fiksa", "kva": "Bokstavruter", "tekst": "Bokstavar med nedstrekar, som g og y, held seg innanfor ramma i Ordbyggjaren." },
+        { "t": "fiksa", "kva": "Ordutval", "tekst": "far er teke ut av rotasjon medan ordopptaket blir retta." },
+        { "t": "fiksa", "kva": "Lesestigen", "tekst": "Den ekstra Rett!-boksen er fjerna. Svarmarkering og lydtilbakemelding står att." }
+      ]
+    },
+    {
       "versjon": "2.3",
       "dato": "2026-10-15",
       "samandrag": "Ljodstigen er på framsida og i appmenyen, med innspelte lydar og ti steg frå bokstavlydar til setningar.",

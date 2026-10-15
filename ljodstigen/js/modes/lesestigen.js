@@ -50,7 +50,7 @@
           R.markWrong(button);
           R.revealAnswer(grid, target.id);
         }
-        body.appendChild(R.h('p', 'vp-notice', correct ? 'Rett!' : 'Høyr og sjå: ' + target.text));
+        if (!correct) body.appendChild(R.h('p', 'vp-notice', 'Høyr og sjå: ' + target.text));
         R.setMood(correct ? 'happy' : 'think');
         LjodAudio.stop();
         R.feedback(correct, correct ? [] : [target.id]).then(function () {

@@ -56,6 +56,7 @@
           resolve({ ch: q.ch, correct: correct, latencyMs: latency, chosen: correct ? null : key });
         });
       });
+      grid.classList.add('ljod-lydfangst-options');
       body.appendChild(grid);
 
       /* Spel oppgåva med ein gong. unlock() inni play() sørgjer for at
