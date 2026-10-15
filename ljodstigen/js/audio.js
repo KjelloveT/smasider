@@ -259,21 +259,30 @@
     return endedOr(src, dur);
   }
 
-  /** Spel éin lyd. Resolvar når han er ferdig. */
-  function play(id) {
+  /** Spel éin lyd. Valfrie markørar følgjer klippet, også når det blir stoppa. */
+  function play(id, hooks) {
     if (!id) return Promise.resolve();
     const token = generation;
-    return unlock().then(function () { if (token === generation) return playClip(id); });
+    return unlock().then(function () {
+      if (token !== generation) return;
+      if (hooks && hooks.onStart) hooks.onStart();
+      return playClip(id).finally(function () {
+        if (hooks && hooks.onEnd) hooks.onEnd();
+      });
+    });
   }
 
   /** Spel fleire etter kvarandre, med valfri pause imellom (ms). */
-  function playSeq(ids, gapMs) {
+  function playSeq(ids, gapMs, hooks) {
     const gap = gapMs == null ? 120 : gapMs;
     const token = generation;
-    return ids.reduce(function (chain, id) {
+    return ids.reduce(function (chain, id, index) {
       return chain.then(function () {
         if (token !== generation) return;
-        return play(id).then(function () {
+        return play(id, {
+          onStart: function () { if (hooks && hooks.onStart) hooks.onStart(index); },
+          onEnd: function () { if (hooks && hooks.onEnd) hooks.onEnd(index); }
+        }).then(function () {
           return new Promise(function (r) { setTimeout(r, gap); });
         });
       });
@@ -281,13 +290,19 @@
   }
 
   /** Lyder eit ord: kvar lyd for seg, så heile ordet. */
-  function sound_out(word, gapMs) {
+  function sound_out(word, gapMs, hooks) {
     const token = generation;
     const ids = word.letters.map(function (ch) { return 'f_' + ch; });
-    return playSeq(ids, gapMs == null ? 260 : gapMs).then(function () {
+    return playSeq(ids, gapMs == null ? 260 : gapMs, {
+      onStart: function (index) { if (hooks && hooks.onLetter) hooks.onLetter(index); },
+      onEnd: function () { if (hooks && hooks.onEnd) hooks.onEnd(); }
+    }).then(function () {
       if (token !== generation) return;
       return new Promise(function (r) { setTimeout(r, 260); });
-    }).then(function () { if (token === generation) return play(word.sound); });
+    }).then(function () {
+      if (token !== generation) return;
+      return play(word.sound, { onStart: hooks && hooks.onWord, onEnd: hooks && hooks.onEnd });
+    });
   }
 
   root.LjodAudio = {

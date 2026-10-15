@@ -3,6 +3,17 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.3.1] — 2026-10-15
+
+### Endra
+- **Lydfangst har fast bokstavstorleik.** Mindre svarruter gjev plass til åtte bokstavar på éi rad på store skjermar. På smale skjermar får dei fleire rader, med same bokstavstorleik.
+- **Ordbyggjaren viser kvar lyden høyrer til.** Éin bokstav blir framheva under kvar bokstavlyd, og alle bokstavane blir framheva når heile ordet blir lese.
+
+### Fiksa
+- **Nedstrekar held seg innanfor bokstavrutene.** Bokstavar som g, y, j, p og q har meir luft under seg i Ordbyggjaren.
+- **«far» er teke ut av ordutvalet** medan ordopptaket blir retta.
+- **Den ekstra «Rett!»-boksen er fjerna frå Lesestigen.** Svarmarkeringa og lydtilbakemeldinga står att.
+
 ## [2.3] — 2026-10-15
 
 ### Lagt til

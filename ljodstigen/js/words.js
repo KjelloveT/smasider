@@ -29,7 +29,8 @@
     ['vase', []], ['kake', []], ['vise', []], ['ost', ['o']], ['sint', []],
     ['salt', []], ['stol', ['o']], ['tre', []],
 
-    ['far', []], ['fem', []], ['fin', []], ['fot', ['o']], ['gul', []],
+    /* «far» er ute av rotasjon til ordopptaket er retta. */
+    ['fem', []], ['fin', []], ['fot', ['o']], ['gul', []],
     ['gås', []], ['god', ['o']], ['dag', []], ['dal', []], ['due', []],
     ['uke', []], ['gate', []], ['måne', []], ['sofa', ['o']], ['mus', []],
     ['sur', []], ['gris', []], ['drage', []],

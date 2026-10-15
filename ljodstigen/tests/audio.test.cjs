@@ -50,11 +50,61 @@ test('lydgrupper og setningar finn rett bank, og stoppa lydering held ikkje fram
   await audio.play('s_lesbok');
   assert.deepEqual(played, ['lydgrupper', 'setningar']);
   played.length = 0;
-  const pending = audio.soundOut({ letters: ['a'], sound: 'o_is' });
+  const markers = [];
+  const pending = audio.soundOut({ letters: ['a'], sound: 'o_is' }, null, {
+    onLetter: index => markers.push(index),
+    onWord: () => markers.push('word'),
+    onEnd: () => markers.push('end')
+  });
   await new Promise(resolve => setImmediate(resolve));
   audio.stop();
   // Fullfør ventetida som alt var planlagd før avbrotet.
   while (timers.length) timers.shift()();
   await pending;
   assert.deepEqual(played, ['fonem']);
+  assert.deepEqual(markers, [0, 'end']);
+});
+
+test('lyderingsmarkørane følgjer kvar førekomst og heile ordet, og blir rydda ved stopp', async () => {
+  const timers = [], nodes = [], markers = [];
+  const context = { console, window: null, setTimeout: fn => timers.push(fn) };
+  context.window = context;
+  context.AudioContext = function () {
+    this.state = 'running';
+    this.destination = {};
+    this.decodeAudioData = (_, resolve) => resolve({});
+    this.createBufferSource = () => {
+      const node = { connect() {}, start() {}, stop() { this.onended(); } };
+      nodes.push(node);
+      return node;
+    };
+  };
+  context.fetch = async url => ({
+    ok: true, headers: { get: () => '' }, arrayBuffer: async () => ({}),
+    json: async () => url.includes('stemmer.json') ? { default: 'vyrde', voices: [{ id: 'vyrde' }] } : { clips: { f_a: [0, 0.5], o_aa: [0, 0.5] } }
+  });
+  vm.runInNewContext(source, context);
+  const audio = context.LjodAudio;
+  await audio.load();
+  const pending = audio.soundOut({ letters: ['a', 'a'], sound: 'o_aa' }, null, {
+    onLetter: index => markers.push('letter:' + index),
+    onWord: () => markers.push('word'),
+    onEnd: () => markers.push('end')
+  });
+  const tick = () => new Promise(resolve => setImmediate(resolve));
+  const advance = async () => { while (timers.length) timers.shift()(); await tick(); };
+  await tick();
+  assert.deepEqual(markers, ['letter:0']);
+  nodes[0].onended();
+  await tick();
+  await advance();
+  assert.deepEqual(markers, ['letter:0', 'end', 'letter:1']);
+  nodes[1].onended();
+  await tick();
+  await advance();
+  await advance();
+  assert.deepEqual(markers, ['letter:0', 'end', 'letter:1', 'end', 'word']);
+  audio.stop();
+  await pending;
+  assert.deepEqual(markers, ['letter:0', 'end', 'letter:1', 'end', 'word', 'end']);
 });

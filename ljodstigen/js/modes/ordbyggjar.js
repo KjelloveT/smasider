@@ -74,8 +74,9 @@
     frame.setPrompt('Bygg ordet du høyrer.');
     const body = R().clear(frame.body);
 
-    const play = function () { return LjodAudio.play(word.sound); };
-    body.appendChild(R().replayButton(play, 'Høyr ordet om att'));
+    const play = function () { return speak(word.sound); };
+    const replay = R().replayButton(play, 'Høyr ordet om att');
+    body.appendChild(replay);
 
     /* Rutene */
     const slotRow = R().h('div', 'ljod-slots');
@@ -104,6 +105,24 @@
     const started = performance.now();
     let firstAttempt = null;   // resultatet vi rapporterer til motoren
     let done = false;
+    let speech = 0;
+    let revision = 0;
+
+    function highlight(index) {
+      slots.forEach(function (s, i) {
+        s.node.classList.toggle('is-speaking', index === 'word' ? !!s.ch : i === index);
+      });
+    }
+
+    function speak(id, index) {
+      const token = ++speech;
+      LjodAudio.stop();
+      highlight(null);
+      return LjodAudio.play(id, {
+        onStart: function () { if (token === speech) highlight(index == null ? 'word' : index); },
+        onEnd: function () { if (token === speech) highlight(null); }
+      });
+    }
 
     return new Promise(function (resolve) {
 
@@ -137,14 +156,20 @@
         slots[i].from = t;
         refreshSlot(i);
         /* Brikka seier lyden sin når ho landar. */
-        LjodAudio.play('f_' + t.ch);
-        if (nextEmpty() === -1) setTimeout(check, 420);
+        const placed = ++revision;
+        speak('f_' + t.ch, i).then(function () {
+          if (!done && placed === revision && nextEmpty() === -1 && body.isConnected) check();
+        });
       }
 
       function pullTile(i) {
         if (done) return;
         const s = slots[i];
         if (!s.ch) return;
+        revision++;
+        speech++;
+        LjodAudio.stop();
+        highlight(null);
         s.from.used = false;
         s.from.node.classList.remove('is-used');
         s.from.node.disabled = false;
@@ -174,14 +199,25 @@
 
         if (correct) {
           done = true;
+          replay.disabled = true;
+          const token = ++speech;
+          LjodAudio.stop();
+          highlight(null);
           slots.forEach(function (s) { s.node.classList.add('is-right'); });
           R().setMood('happy');
           LjodMerke.noteWord(p, word.text);
           /* Lyder ordet seint, så heilt. Det er her lydering blir til
              lesing, og det er verdt dei tre sekunda. */
-          LjodAudio.soundOut(word)
-            .then(function () { return LjodAudio.play(R().praiseId()); })
+          LjodAudio.soundOut(word, null, {
+            onLetter: function (index) { highlight(index); },
+            onWord: function () { highlight('word'); },
+            onEnd: function () { highlight(null); }
+          })
             .then(function () {
+              if (token === speech && body.isConnected) return LjodAudio.play(R().praiseId());
+            })
+            .then(function () {
+              if (token !== speech || !body.isConnected) return;
               setTimeout(function () {
                 resolve(Object.assign({ word: word }, firstAttempt));
               }, 500);
