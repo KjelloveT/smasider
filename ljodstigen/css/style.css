@@ -25,6 +25,34 @@
   font-display: swap;
 }
 
+/* Framgang i ti steg. Flater, knappar og typografi kjem frå felles CSS. */
+.ljod-journey { display: grid; gap: 12px; min-width: 0; }
+.ljod-journey > :is(h3, p) { margin: 0; }
+.ljod-journey-summary { font-weight: 700; }
+.ljod-journey-progress { width: 100%; height: 24px; accent-color: var(--vp-moss); }
+.ljod-levels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ljod-level { display: grid; align-content: start; gap: 8px; min-width: 0; overflow-wrap: anywhere; }
+.ljod-level > p { margin: 0; }
+.ljod-level-state { font-weight: 700; }
+.ljod-playing .ljod-reading-option { font-size: clamp(1.15rem, 3vw, 1.7rem); line-height: 1.5; font-weight: 400; overflow-wrap: anywhere; }
+.ljod-playing[data-font="lesefont"] .ljod-reading-option { font-family: var(--ljod-font-read); }
+.ljod-sound-groups { justify-content: center; margin-block: 12px; }
+.ljod-task .ljod-journey { text-align: left; margin-block: 12px; }
+.ljod-game-shell { max-width: 960px; padding-block: 24px; }
+.ljod-options.ljod-reading-options { grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); }
+.ljod-reading-option.is-right { background: var(--ljod-right); }
+.ljod-reading-option.is-wrong { background: var(--ljod-wrong); }
+.ljod-reading-option.is-answer { background: var(--ljod-answer); }
+.ljod-player [data-pane], #laerar { min-width: 0; }
+.ljod-table-wrap { max-width: 100%; overflow-x: auto; }
+
 :root {
   --ljod-font-read: 'Andika', Verdana, Geneva, "DejaVu Sans", Tahoma, sans-serif;
 
@@ -490,6 +518,8 @@ body[data-font="lesefont"] .ljod-bed-letter {
 /* ──────────────── Utskrift ──────────────── */
 
 @media print {
+  .ljod-player > section:first-child { display: none; }
+  .ljod-table-wrap { overflow: visible; }
   @page { size: A4 portrait; margin: 12mm; }
   .vp-header, .vp-hero-stage, .vp-notice, .ljod-tabs, #printLaerar,
   .vp-standard-support, #profiles, #modes, #stars, .ljod-playbar { display: none !important; }

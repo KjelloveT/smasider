@@ -17,7 +17,7 @@
   const VARIANTAR = {
     bokstavropet: {
       href: 'ropet.html',
-      label: 'Prøv på leirplassen →',
+      label: 'Prøv Bokstavropet på Leirplassen',
       aria: 'Bokstavropet på leirplassen, ei 3D-utgåve der lydane bur i telt'
     }
   };
@@ -46,16 +46,16 @@
 
     s.profiles.forEach(function (p) {
       const av = LjodState.avatarOf(p.avatar);
-      const st = LjodAdaptive.stats(p.adaptive);
-      const card = R().h('div', 'ljod-profile vp-panel vp-panel--inset' + (current && current.id === p.id ? ' is-active' : ''));
+      const st = LjodProgress.summary(p);
+      const card = R().h('div', 'ljod-profile' + (current && current.id === p.id ? ' is-active' : ''));
       card.dataset.tone = av.tone;
 
       const pick = R().h('button', 'ljod-profile-pick vp-button vp-button--quiet vp-button--block');
       pick.type = 'button';
       pick.appendChild(LjodAvatar.image(av.id, 56));
       pick.appendChild(R().h('span', 'ljod-profile-name', av.name));
-      pick.appendChild(R().h('span', 'ljod-profile-sum', st.planted + ' av ' + st.total + ' bokstavar'));
-      pick.setAttribute('aria-label', 'Vel ' + av.name + ', ' + st.planted + ' av ' + st.total + ' bokstavar');
+      pick.appendChild(R().h('span', 'ljod-profile-sum', st.completed + ' av ' + st.total));
+      pick.setAttribute('aria-label', 'Vel ' + av.name + ', ' + st.completed + ' av ' + st.total + ' steg');
       pick.setAttribute('aria-pressed', String(!!(current && current.id === p.id)));
       pick.addEventListener('click', function () { select(p.id); });
       card.appendChild(pick);
@@ -78,21 +78,15 @@
     /* Ledige figurar å opprette. */
     const taken = s.profiles.map(function (p) { return p.avatar; });
     const free = LjodState.AVATARS.filter(function (a) { return taken.indexOf(a.id) === -1; });
-    if (free.length) {
-      const add = R().h('div', 'ljod-newprofile vp-panel vp-panel--plain');
-      add.appendChild(R().h('p', 'ljod-hint', 'Vel ein figur for å byrje:'));
-      const row = R().h('div', 'ljod-avatar-row');
-      free.forEach(function (av) {
-        const b = avatarButton(av, false);
-        b.addEventListener('click', function () {
-          const p = LjodState.createProfile(av.id);
-          select(p.id);
-        });
-        row.appendChild(b);
+    free.forEach(function (av) {
+      const b = avatarButton(av, false);
+      b.appendChild(R().h('span', 'ljod-profile-sum', '0 av 10'));
+      b.addEventListener('click', function () {
+        const p = LjodState.createProfile(av.id);
+        select(p.id);
       });
-      add.appendChild(row);
-      host.appendChild(add);
-    }
+      host.appendChild(b);
+    });
     if (root.VyrdepilDesign) root.VyrdepilDesign.initSelections(host);
   }
 
@@ -102,8 +96,8 @@
     s.lastProfile = id;
     LjodState.write(s);
     refresh();
-    const panel = $('player');
-    if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const dialog = $('profileDialog');
+    if (dialog && dialog.open) Vy.closeModal(dialog);
   }
 
   /* ──────────────── Modusar ──────────────── */
@@ -128,10 +122,18 @@
       const def = window['LjodMode_' + m.id];
       const unlocked = open.indexOf(m.id) !== -1;
 
-      const card = R().h(unlocked ? 'a' : 'div', 'ljod-mode vp-panel ' + (unlocked ? 'vp-panel--plain' : 'vp-panel--inset is-locked'));
-      if (unlocked) {
-        card.href = 'spel.html?p=' + encodeURIComponent(current.id) + '&m=' + encodeURIComponent(m.id);
+      const variant = VARIANTAR[m.id];
+      const card = R().h(unlocked && !variant ? 'a' : 'article', 'ljod-mode vp-panel ' + (unlocked ? 'vp-panel--plain' : 'vp-panel--inset is-locked'));
+      if (unlocked && !variant) {
+        card.href = 'spel.html#' + new URLSearchParams({ p: current.id, m: m.id });
       }
+      const thumbnail = R().h('img', 'ljod-mode-thumbnail');
+      thumbnail.src = LjodAvatar.thumbnailUrl(current.avatar, m.id);
+      thumbnail.width = 480;
+      thumbnail.height = 360;
+      thumbnail.alt = '';
+      thumbnail.loading = 'lazy';
+      card.appendChild(thumbnail);
       card.appendChild(R().h('span', 'ljod-mode-title', m.label));
       card.appendChild(R().h('span', 'ljod-mode-blurb', def ? def.blurb : ''));
 
@@ -140,31 +142,29 @@
       } else if (unlocked && m.id === suggested) {
         /* Appen foreslår, eleven vel. Forslaget er ei brikke, ikkje ein
            låst veg — autonomi er halve motivasjonen på dette trinnet. */
-        card.appendChild(R().h('span', 'ljod-mode-flag', 'Framlegg'));
+        card.appendChild(R().h('span', 'ljod-mode-flag', 'Prøv denne'));
       }
       if (!unlocked) {
-        card.appendChild(R().h('span', 'ljod-mode-flag', 'Opnar seg snart'));
+        card.appendChild(R().h('span', 'ljod-mode-flag', m.reading ? 'Opnar etter bokstavsteg 5' : 'Opnar seg snart'));
         card.setAttribute('aria-disabled', 'true');
       }
 
-      /* BOKSTAVROPET FINST I TO UTGÅVER, og eleven vel sjølv.
-
-         Den vanlege er raskare og har alle alternativa framme samtidig.
-         Leirplassen tek lengre tid, og det er heile poenget: han må
-         halde lyden i hovudet medan han går til neste telt.
-
-         Valet ligg her og ikkje som ein eigen modus, fordi det ER same
-         oppgåva og same framgangen. To modusar ville gjeve eleven
-         inntrykk av to ulike ting å lære. */
-      if (unlocked && VARIANTAR[m.id]) {
-        const boks = R().h('div', 'ljod-mode-par');
-        boks.appendChild(card);
-        const alt = R().h('a', 'ljod-mode-variant vp-button vp-button--quiet vp-button--compact', VARIANTAR[m.id].label);
-        alt.href = VARIANTAR[m.id].href;
-        alt.setAttribute('aria-label', VARIANTAR[m.id].aria);
-        boks.appendChild(alt);
-        host.appendChild(boks);
-        return;
+      if (variant) {
+        const actions = R().h('div', 'vp-actions ljod-mode-actions');
+        const start = R().h(unlocked ? 'a' : 'button', 'vp-button vp-button--positive', 'Start');
+        const alt = R().h(unlocked ? 'a' : 'button', 'vp-button', variant.label);
+        if (unlocked) {
+          start.href = 'spel.html#' + new URLSearchParams({ p: current.id, m: m.id });
+          start.setAttribute('aria-label', 'Start Bokstavropet');
+          alt.href = variant.href;
+          alt.setAttribute('aria-label', variant.label);
+        } else {
+          start.type = alt.type = 'button';
+          start.disabled = alt.disabled = true;
+        }
+        actions.appendChild(start);
+        actions.appendChild(alt);
+        card.appendChild(actions);
       }
       host.appendChild(card);
     });
@@ -173,7 +173,15 @@
   /* ──────────────── Panel ──────────────── */
 
   function refresh() {
+    if (!current) current = LjodState.currentProfile();
     renderProfiles();
+    const chosen = $('currentProfile');
+    if (chosen && current) {
+      R().clear(chosen);
+      const avatar = LjodState.avatarOf(current.avatar);
+      chosen.appendChild(LjodAvatar.image(avatar.id, 96));
+      chosen.appendChild(R().h('strong', null, avatar.name));
+    }
     const panel = $('player');
     if (!panel) return;
 
@@ -185,39 +193,21 @@
     if (title) title.textContent = av.name;
 
     renderModes();
+    LjodProgressUI.render($('journey'), current);
     LjodSkog.renderStars($('stars'), current);
     LjodSkog.renderSkog($('garden'), current);
     LjodSkog.renderBadges($('badges'), current);
     LjodLaerar.render($('laerar'), current);
   }
 
-  /* ──────────────── Fontveljar ──────────────── */
-
-  /* Ligg synleg ved sida av dei andre spelvala: eit val som høyrer heime i ein
-     app for dei som strevar med lesing, ikkje gøymd i ei innstilling. */
-  function wireFont() {
-    const host = $('fontpick');
-    if (!host) return;
-    const s = LjodState.read();
-    document.body.dataset.font = s.font;
-
-    LjodState.FONTS.forEach(function (f) {
-      const b = R().h('button', 'vp-button vp-button--compact ljod-fontbtn' + (s.font === f.id ? ' active' : ''));
-      b.type = 'button';
-      b.setAttribute('aria-pressed', String(s.font === f.id));
-      b.textContent = f.label;
-      b.addEventListener('click', function () {
-        const st = LjodState.read();
-        st.font = f.id;
-        LjodState.write(st);
-        document.body.dataset.font = f.id;
-        Array.prototype.forEach.call(host.children, function (c) { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
-        b.classList.add('active');
-        b.setAttribute('aria-pressed', 'true');
-      });
-      host.appendChild(b);
+  function wireDialogs() {
+    ['teacher', 'profile'].forEach(function (name) {
+      const dialog = $(name + 'Dialog');
+      if (!dialog) return;
+      $(name + 'Open').addEventListener('click', function () { Vy.openModal(dialog); });
+      $(name + 'Close').addEventListener('click', function () { Vy.closeModal(dialog); });
+      Vy.bindOverlayClose(dialog);
     });
-    if (root.VyrdepilDesign) root.VyrdepilDesign.initSelections(host);
   }
 
   /* ──────────────── Faner ──────────────── */
@@ -297,7 +287,8 @@
   }
 
   function init() {
-    wireFont();
+    document.body.dataset.font = 'lesefont';
+    wireDialogs();
     wireVoice();
     wireAllModes();
     wireTabs();

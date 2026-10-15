@@ -255,7 +255,8 @@
     { id: 'lydfangst',    label: 'Lydfangst',    needs: 0, box: 0 },
     { id: 'bokstavropet', label: 'Bokstavropet', needs: 3, box: 2 },
     { id: 'ordbyggjar',   label: 'Ordbyggjaren', needs: 3, box: 3 },
-    { id: 'forstelyd',    label: 'Første lyd',   needs: 5, box: 3 }
+    { id: 'forstelyd',    label: 'Første lyd',   needs: 5, box: 3 },
+    { id: 'lesestigen', label: 'Lesestigen', needs: 0, box: 0, reading: true }
   ];
 
   function solidCount(state, minBox) {
@@ -266,6 +267,13 @@
 
   function unlockedModes(state) {
     return MODES.filter(function (m) {
+      if (m.reading) {
+        return LjodLetters.STEPS.every(function (letters, index) {
+          return state.step > index + 1 || letters.filter(function (ch) {
+            return state.items[ch] && state.items[ch].maxBox >= 3;
+          }).length >= letters.length - 1;
+        });
+      }
       return m.needs === 0 || solidCount(state, m.box) >= m.needs;
     });
   }

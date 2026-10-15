@@ -16,7 +16,7 @@
   /* Byte av namn på appen er eitt søk-og-erstatt herifrå. Namnet er
      mellombels — sjå toppen av planen. */
   const APP_ID = 'ljodstigen';
-  const VERSION = 1;
+  const VERSION = 2;
 
   /* Dei åtte fyrste ID-ane er haldne fast, så eksisterande profilar
      får nye figurar utan at framgangen deira blir flytta eller sletta. */
@@ -31,11 +31,6 @@
     { id: 'sekskant', name: 'Komet',    shape: 'hex',      tone: 'accent3' },
     { id: 'birk',     name: 'Birk',     shape: 'leaf',     tone: 'accent4' },
     { id: 'krystall', name: 'Krystall', shape: 'diamond',  tone: 'accent5' }
-  ];
-
-  const FONTS = [
-    { id: 'lesefont', label: 'Lesefont',    css: 'var(--ljod-font-read)' },
-    { id: 'system',   label: 'Systemfont',  css: 'inherit' }
   ];
 
   function today() {
@@ -63,7 +58,7 @@
     const s = blank();
     s.profiles = Array.isArray(raw.profiles) ? raw.profiles.map(hydrateProfile) : [];
     s.lastProfile = raw.lastProfile || null;
-    s.font = raw.font === 'system' ? 'system' : 'lesefont';
+    s.font = 'lesefont';
     /* Opnar alle modusane uavhengig av kor langt eleven er komen.
        Innstillinga ligg på eininga, ikkje på profilen: ho handlar om
        kven som brukar maskina, ikkje om kva eleven kan. Progresjonen
@@ -79,6 +74,7 @@
   function write(s) {
     s.app = APP_ID;
     s.version = VERSION;
+    s.font = 'lesefont';
     try { VyrdepilStorage.setGameState(APP_ID, s); } catch (e) {
       console.warn('[Ljodstigen] fekk ikkje lagra:', e);
     }
@@ -102,6 +98,7 @@
       avatar: p.avatar || AVATARS[0].id,
       created: p.created || today(),
       adaptive: LjodAdaptive.hydrate(p.adaptive),
+      reading: LjodProgress.hydrate(p.reading),
       badges: Array.isArray(p.badges) ? p.badges : [],
       days: Array.isArray(p.days) ? p.days.slice(-40) : [],
       stars: (p.stars && typeof p.stars === 'object') ? p.stars : { date: null, ids: [] },
@@ -138,6 +135,19 @@
 
   function getProfile(id) {
     return read().profiles.filter(function (p) { return p.id === id; })[0] || null;
+  }
+
+  function currentProfile() {
+    const s = read();
+    const p = s.profiles.find(function (profile) { return profile.id === s.lastProfile; }) ||
+      s.profiles.find(function (profile) { return profile.avatar === 'sirkel'; }) ||
+      s.profiles[0] || createProfile('sirkel');
+    if (s.lastProfile !== p.id) {
+      const latest = read();
+      latest.lastProfile = p.id;
+      write(latest);
+    }
+    return p;
   }
 
   function saveProfile(p) {
@@ -198,11 +208,11 @@
   root.LjodState = {
     APP_ID: APP_ID, VERSION: VERSION,
     AVATARS: AVATARS,
-    ROPET_MAAL: ROPET_MAAL, FONTS: FONTS, STARS: STARS,
+    ROPET_MAAL: ROPET_MAAL, STARS: STARS,
     today: today, daysBetween: daysBetween,
     read: read, write: write,
     createProfile: createProfile, deleteProfile: deleteProfile,
-    getProfile: getProfile, saveProfile: saveProfile,
+    getProfile: getProfile, saveProfile: saveProfile, currentProfile: currentProfile,
     avatarOf: avatarOf,
     startSession: startSession, streakDays: streakDays
   };

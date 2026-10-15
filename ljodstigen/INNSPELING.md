@@ -1,7 +1,7 @@
 # Ljodstigen — innspelingsliste
 
 > Generert av `lag_ljodstigen_lydliste.py`. Ikkje rediger for hand —
-> endre `ljodstigen/js/letters.js` eller `words.js` og køyr skriptet på nytt.
+> endre `ljodstigen/js/letters.js` eller `words.js` / `reading-data.js` og køyr skriptet på nytt.
 
 ## Status
 
@@ -9,8 +9,10 @@
 |---|---|---|---|
 | fonem | 29 | 29 | ingen |
 | namn | 29 | 29 | ingen |
-| ord | 70 | 70 | ingen |
+| ord | 130 | 130 | ingen |
 | ros | 13 | 13 | ingen |
+| lydgrupper | 6 | 6 | ingen |
+| setningar | 6 | 6 | ingen |
 
 Bygg banken på nytt når nye klipp er på plass:
 
@@ -23,10 +25,10 @@ Skriptet tek med det som finst og seier frå om kva som manglar.
 ## Slik gjer du det
 
 **Éin fil per klipp.** Filnamnet er id-en i tabellane under, med `.wav`
-eller `.mp3`. Byggjeskriptet skøyter dei saman til fire lydsprites.
+eller `.mp3`. Byggjeskriptet skøyter WAV-filene saman til seks lydsprites.
 
 **Legg filene i `_kjelder/ljodstigen-lyd/<bank>/`** — altså `fonem/`,
-`namn/`, `ord/` og `ros/`. Mappa er `.gitignore`-a, så råopptaka blir
+`namn/`, `ord/`, `ros/`, `lydgrupper/` og `setningar/`. Mappa er `.gitignore`-a, så råopptaka blir
 aldri publiserte. Dei ligg lokalt så banken kan byggjast på nytt seinare.
 
 **Same stemme, same mikrofon, same rom for heile settet.** Byter stemma
@@ -239,15 +241,121 @@ nokon, sluttar å prøve.
 
 ---
 
+## 5. Lesesteg 6–10
+
+Heile råopptaket blir bevart, med 80 ms ekstra luft før og 140 ms etter. Ingen automatisk trimming.
+
+### Steg 6 — Ng-lyden
+
+| Id | Tekst |
+|---|---|
+| `f_ng` | Lydgruppa ng, lesen som éin samanhengande lyd |
+| `o_ring` | ring |
+| `o_ting` | ting |
+| `o_seng` | seng |
+| `o_lang` | lang |
+| `o_tung` | tung |
+| `o_song` | song |
+| `o_gang` | gang |
+| `o_sving` | sving |
+| `o_vinge` | vinge |
+| `o_mange` | mange |
+| `o_tunge` | tunge |
+| `o_konge` | konge |
+
+### Steg 7 — Enkel og dobbel konsonant
+
+| Id | Tekst |
+|---|---|
+| `o_tak` | tak |
+| `o_takk` | takk |
+| `o_bake` | bake |
+| `o_bakke` | bakke |
+| `o_måte` | måte |
+| `o_måtte` | måtte |
+| `o_luke` | luke |
+| `o_lukke` | lukke |
+| `o_pute` | pute |
+| `o_putte` | putte |
+| `o_åtte` | åtte |
+
+### Steg 8 — Diftongar
+
+| Id | Tekst |
+|---|---|
+| `f_ei` | Lydgruppa ei, lesen som éin samanhengande lyd |
+| `f_øy` | Lydgruppa øy, lesen som éin samanhengande lyd |
+| `f_au` | Lydgruppa au, lesen som éin samanhengande lyd |
+| `o_hei` | hei |
+| `o_feil` | feil |
+| `o_stein` | stein |
+| `o_meir` | meir |
+| `o_reim` | reim |
+| `o_øy` | øy |
+| `o_røyk` | røyk |
+| `o_høyr` | høyr |
+| `o_raud` | raud |
+| `o_laus` | laus |
+| `o_haust` | haust |
+| `o_saum` | saum |
+| `o_maur` | maur |
+
+### Steg 9 — Sj- og kj-lydar
+
+| Id | Tekst |
+|---|---|
+| `f_sj` | Lydgruppa sj, lesen som éin samanhengande lyd |
+| `f_kj` | Lydgruppa kj, lesen som éin samanhengande lyd |
+| `o_sjå` | sjå |
+| `o_sjø` | sjø |
+| `o_sjuk` | sjuk |
+| `o_sjuke` | sjuke |
+| `o_skjorte` | skjorte |
+| `o_skjule` | skjule |
+| `o_ski` | ski |
+| `o_skinn` | skinn |
+| `o_kjole` | kjole |
+| `o_kjenne` | kjenne |
+| `o_kjøpe` | kjøpe |
+| `o_kjøt` | kjøt |
+| `o_kjem` | kjem |
+
+### Steg 10 — Lange ord og setningar
+
+| Id | Tekst |
+|---|---|
+| `o_skuleveg` | skuleveg |
+| `o_solskin` | solskin |
+| `o_venene` | venene |
+| `o_hestane` | hestane |
+| `o_bøkene` | bøkene |
+| `o_leseboka` | leseboka |
+| `o_skuleplassen` | skuleplassen |
+| `o_sommarferie` | sommarferie |
+| `o_fotballaget` | fotballaget |
+| `o_familien` | familien |
+| `o_hageslange` | hageslange |
+| `o_middagstid` | middagstid |
+| `s_lesbok` | Eg les ei bok. |
+| `s_solskin` | Sola skin i dag. |
+| `s_boker` | Mange bøker ligg i sekken. |
+| `s_baten` | Den raude båten er lang. |
+| `s_skule` | Vi går til skulen saman. |
+| `s_hoyr` | Høyr etter og finn ordet. |
+
+---
+
 ## Samla
 
 | Bank | Klipp |
 |---|---|
 | fonem | 29 |
 | namn | 29 |
-| ord | 70 |
+| ord | 130 |
 | ros | 13 |
-| **I alt** | **141** |
+| lydgrupper | 6 |
+| setningar | 6 |
+| **I alt** | **213** |
 
-Rekna som ~0,8 s i snitt og 48 kbps mono blir det kring **676 kB** ferdig
+Rekna som ~0,8 s i snitt og 48 kbps mono blir det kring **1022 kB** ferdig
 pakka — godt innanfor det repoet toler.

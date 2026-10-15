@@ -123,7 +123,7 @@
    */
   function taskFrame(opts) {
     opts = opts || {};
-    const root_ = h('div', 'ljod-task');
+    const root_ = h('div', 'ljod-task vp-panel vp-panel--plain');
 
     const head = h('div', 'ljod-task-head');
     const prompt = h('p', 'ljod-prompt', opts.prompt || '');
@@ -134,12 +134,29 @@
     root_.appendChild(body);
 
     const foot = h('div', 'ljod-task-foot');
-    const bar = h('div', 'ljod-progress');
+    const progressHead = h('div', 'ljod-session-head');
+    progressHead.appendChild(h('strong', null, 'Runden din'));
+    const count = h('span', 'ljod-session-count');
+    progressHead.appendChild(count);
+    foot.appendChild(progressHead);
+    const track = h('div', 'ljod-session-track');
+    const avatar = LjodAvatar.image(opts.avatar || 'sirkel', 56);
+    avatar.className = 'ljod-session-avatar';
+    track.appendChild(avatar);
+    const goal = h('span', 'ljod-session-goal');
+    goal.setAttribute('aria-hidden', 'true');
+    goal.innerHTML = ICON('flag', 28);
+    track.appendChild(goal);
+    const bar = h('div', 'ljod-progress ljod-session-progress');
     const fill = h('div', 'ljod-progress-fill');
     bar.appendChild(fill);
+    const marks = h('div', 'ljod-session-marks');
+    marks.setAttribute('aria-hidden', 'true');
+    bar.appendChild(marks);
     bar.setAttribute('role', 'progressbar');
     bar.setAttribute('aria-label', 'Kor langt du er komen i økta');
-    foot.appendChild(bar);
+    track.appendChild(bar);
+    foot.appendChild(track);
     root_.appendChild(foot);
 
     return {
@@ -149,10 +166,25 @@
       foot: foot,
       setPrompt: function (t) { prompt.textContent = t; },
       setProgress: function (done, total) {
-        fill.style.width = Math.round(100 * done / total) + '%';
+        const fraction = total ? Math.min(1, Math.max(0, done / total)) : 0;
+        fill.style.width = Math.round(100 * fraction) + '%';
+        track.style.setProperty('--ljod-session-fraction', String(fraction));
+        count.textContent = done + ' av ' + total + ' oppgåver';
+        if (marks.children.length !== total) {
+          clear(marks);
+          for (let i = 0; i < total; i++) {
+            const mark = h('span', 'ljod-session-mark');
+            mark.innerHTML = ICON('star', 14);
+            marks.appendChild(mark);
+          }
+        }
+        Array.prototype.forEach.call(marks.children, function (mark, index) {
+          mark.classList.toggle('is-complete', index < done);
+        });
         bar.setAttribute('aria-valuenow', String(done));
         bar.setAttribute('aria-valuemin', '0');
         bar.setAttribute('aria-valuemax', String(total));
+        bar.setAttribute('aria-valuetext', done + ' av ' + total + ' oppgåver ferdige i denne runden');
       }
     };
   }

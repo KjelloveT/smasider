@@ -28,8 +28,11 @@
     head.appendChild(R().h('h2', 'heading3 no-mt', 'Oversikt — ' + av.name));
     head.appendChild(R().h('p', 'ljod-muted',
       'Starta ' + p.created + '. Spelt ' + p.days.length + ' dagar. ' +
-      'Steg ' + st.step + ' av ' + LjodLetters.STEPS.length + '.'));
+      'Bokstavsteg ' + st.step + ' av ' + LjodLetters.STEPS.length + '.'));
     host.appendChild(head);
+    const journey = R().h('section');
+    LjodProgressUI.render(journey, p, { teacher: true });
+    host.appendChild(journey);
 
     /* Samandrag */
     const sum = R().h('div', 'ljod-laerar-sum');
@@ -75,7 +78,9 @@
     if (!tbody.childNodes.length) {
       host.appendChild(R().h('p', 'ljod-muted', 'Eleven har ikkje svart på noko enno.'));
     } else {
-      host.appendChild(table);
+      const wrap = R().h('div', 'ljod-table-wrap');
+      wrap.appendChild(table);
+      host.appendChild(wrap);
     }
 
     /* Det læraren skal gjere noko med */

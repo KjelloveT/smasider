@@ -48,6 +48,20 @@
   ],
   "apps": [
     {
+      "id": "ljodstigen",
+      "name": "Ljodstigen",
+      "href": "ljodstigen/index.html",
+      "cat": "spraak_ord",
+      "btn": "Start øvinga",
+      "img": "_resources/vyrdepil-design/logos/ljodstigen-mala.png",
+      "added": "2026-10-15",
+      "audience": ["Småtrinn"],
+      "desc": [
+        "Øv på bokstavlydar, ord og setningar gjennom ti steg i ditt eige tempo.",
+        "Vel ein figur som hugsar framgangen din på denne eininga. Læraren kan sjå kva som sit godt, og kva som treng meir øving."
+      ]
+    },
+    {
       "id": "fykefuga",
       "name": "Fykefuga",
       "href": "fykefuga/index.html",
