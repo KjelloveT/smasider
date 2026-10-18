@@ -91,7 +91,7 @@
         body.appendChild(R.h('p', 'ljod-prompt', 'Godt øvd!'));
         LjodAudio.play('r_gjort').then(function () {
           resolve({ word: word, skill: 'read', target: word.text, correct: correct,
-            helped: assisted || correct === false, adult: isAdult === true, kind: word.kind || null });
+            helped: assisted, adult: isAdult === true, kind: word.kind || null });
         });
       }
       const help = P.button(word.sound ? 'Høyr ordet' : 'Høyr lydane', function () {

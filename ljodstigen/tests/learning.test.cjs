@@ -45,6 +45,9 @@ test('eigenrapport er berre øving; vaksenlytta lesing og seinare gjenkalling bl
   assert.equal(L.get(p, 'read', 'lam').later, 1);
   L.record(p, 'read', 'lam', { correct: true, adult: true, helped: true });
   assert.equal(L.get(p, 'read', 'lam').adult, 3);
+  L.record(p, 'read', 'mep', { correct: false, adult: true });
+  assert.equal(L.get(p, 'read', 'mep').wrong, 1);
+  assert.equal(L.get(p, 'read', 'mep').helped, 0);
 });
 test('migrering er idempotent, bevarer gamle tre og tener ikkje nye bevis frå gamle data', () => {
   const c = setup(), S = c.LjodState;

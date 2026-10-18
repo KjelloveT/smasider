@@ -14,12 +14,12 @@
     if (!rows.length) box.appendChild(R.h('p', null, 'Ingen nye oppgåvesvar enno.'));
     else {
       const wrap = R.h('div', 'ljod-observations'), table = R.h('table', 'vp-data-table'), head = R.h('tr');
-      ['Oppgåve', 'Mål', 'Øvd', 'Rett utan hjelp', 'Med hjelp', 'Att i seinare økt', 'Las sjølv med vaksen'].forEach(function (text) { head.appendChild(R.h('th', null, text)); });
+      ['Oppgåve', 'Mål', 'Øvd', 'Rett utan hjelp', 'Med hjelp', 'Feil svar', 'Att i seinare økt', 'Las sjølv med vaksen'].forEach(function (text) { head.appendChild(R.h('th', null, text)); });
       const thead = R.h('thead'); thead.appendChild(head); table.appendChild(thead);
       const tbody = R.h('tbody');
       rows.forEach(function (it) {
         const row = R.h('tr');
-        [it.label, targetLabel(it), it.attempts, it.independent, it.helped, it.later, it.adult]
+        [it.label, targetLabel(it), it.attempts, it.independent, it.helped, it.wrong, it.later, it.adult]
           .forEach(function (text) { row.appendChild(R.h('td', null, String(text))); });
         tbody.appendChild(row);
       });
