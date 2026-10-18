@@ -295,13 +295,11 @@
       laast = true;
       const t = telt[naerTelt];
       const rett = t.ch === oppgaave.ch;
-      const svartid = oppgaave.komFram ? performance.now() - oppgaave.komFram : 4000;
 
       settKlipp(rett ? 'emote-yes' : 'emote-no', 1.1);
       $('ropet-melding').textContent = rett ? 'Riktig!' : 'Ikkje det teltet.';
 
-      LjodAdaptive.record(profil.adaptive, oppgaave.ch, rett, svartid,
-                          rett ? null : t.ch);
+      LjodLearning.record(profil, 'sound', oppgaave.ch, { correct: rett });
       LjodState.saveProfile(profil);
       if (kroken && kroken.etterSvar) kroken.etterSvar(rett);
 

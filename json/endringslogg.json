@@ -2,6 +2,43 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "2.4",
+      "dato": "2026-10-18",
+      "samandrag": "Lydlyngen og Ordbryggja gir nye øvingsmåtar utan fartskrav, med skilde observasjonar for læraren.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Lydlyngen og Ordbryggja",
+          "tekst": "Ei fyrste utprøving med bokstavplantar, lydsamantrekking, ordbygging og Les sjølv. Ein vaksen kan lytte når de les i lag."
+        },
+        {
+          "t": "nytt",
+          "kva": "Øvingsobservasjonar",
+          "tekst": "Læraren ser sjølvstendige og hjelpte svar, gjenkalling i seinare økter og vaksenstadfesta høgtlesing i eit avgrensa lokalt samandrag."
+        },
+        {
+          "t": "endra",
+          "kva": "Bokstavframgang",
+          "tekst": "Rette bokstavsvar gir framgang utan firesekundsgrense. Ulike oppgåvetypar blir haldne frå kvarandre, og gamle tre og bragder blir bevarte."
+        },
+        {
+          "t": "endra",
+          "kva": "Lesesteg",
+          "tekst": "Opplåsing følgjer nødvendige grunnlydar framfor heile alfabetstigen. Nye steg har ei kort innføring."
+        },
+        {
+          "t": "endra",
+          "kva": "Personvern",
+          "tekst": "Framsida og personvernsida forklarer dei nye øvingssamandraga. Ingen elevnamn, mikrofonopptak eller tenarsending."
+        },
+        {
+          "t": "fiksa",
+          "kva": "Ordutval",
+          "tekst": "Ordbryggja kan gå vidare til lengre ord; korte ord blir brukte til repetisjon."
+        }
+      ]
+    },
+    {
       "versjon": "2.3.1",
       "dato": "2026-10-15",
       "samandrag": "Tydelegare bokstavruter og lydframheving i Ljodstigen.",

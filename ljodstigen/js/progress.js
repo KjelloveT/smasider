@@ -62,12 +62,23 @@
     }));
   }
 
+  function available(p, number) {
+    if (number <= 5) return number <= p.adaptive.step;
+    const level = LjodReading.LEVELS.find(function (l) { return l.number === number; });
+    if (!level) return false;
+    if (level.items.every(function (target) { return resultFor(p, target.id).right >= REQUIRED; })) return true;
+    const base = Array.from(new Set(level.items.map(function (target) {
+      return target.text.toLowerCase().replace(/skj|sj|kj|ng|ei|øy|au|sk(?=i)/g, '').replace(/[^a-zæøå]/g, '');
+    }).join('').split('')));
+    return base.every(function (ch) { return p.adaptive.items[ch] && p.adaptive.items[ch].maxBox >= 2; });
+  }
+
   function summary(p) {
     const list = levels(p);
-    const next = list.find(function (level) { return !level.done; });
-    // Vis berre den samanhengande fullførte stigen som fullførte steg.
-    const completed = next ? next.number - 1 : list.length;
-    const fraction = (completed + (next ? next.fraction : 0)) / list.length;
+    const next = list.find(function (level) { return level.number >= 6 && !level.done && available(p, level.number); }) ||
+      list.find(function (level) { return !level.done; });
+    const completed = list.filter(function (level) { return level.done; }).length;
+    const fraction = list.reduce(function (sum, level) { return sum + level.fraction; }, 0) / list.length;
     return {
       levels: list, completed: completed, total: list.length,
       remaining: list.length - completed, current: next ? next.number : list.length,
@@ -99,5 +110,5 @@
   }
 
   root.LjodProgress = { REQUIRED: REQUIRED, hydrate: hydrate, levels: levels,
-    summary: summary, record: record, pick: pick, resultFor: resultFor };
+    summary: summary, available: available, record: record, pick: pick, resultFor: resultFor };
 })(window);

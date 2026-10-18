@@ -18,36 +18,6 @@
 
   const R = function () { return LjodRender; };
 
-  /* Kva ord eleven er klar for. Vi strammar krava og slakkar dei
-     gradvis, så vi alltid har eit ord å gje — ei tom oppgåve er verre
-     enn eit litt for lett ord. */
-  function pickWord(p) {
-    const a = p.adaptive;
-    const known = LjodLetters.upTo(a.step).filter(function (ch) {
-      return LjodAdaptive.item(a, ch).maxBox >= 2;
-    });
-    const built = (p.counters.wordsBuilt || 0);
-
-    /* Dei første orda er heilt regelrette og korte. <o> som seier /u/
-       (sol, mor, bok) kjem først når eleven har bygd nokre ord der
-       bokstav og lyd står ein-til-ein. */
-    const tries = [
-      { clean: true,  maxLen: 3, letters: known },
-      { clean: true,  maxLen: built >= 5 ? 4 : 3, letters: known },
-      { clean: built < 8, maxLen: 4, letters: known },
-      { clean: false, maxLen: 4, letters: known },
-      { clean: false, maxLen: 4 },
-      {}
-    ];
-    for (let i = 0; i < tries.length; i++) {
-      const opts = tries[i];
-      if (opts.letters && !opts.letters.length) continue;
-      const pool = LjodWords.available(a.step, opts);
-      if (pool.length) return pool[Math.floor(Math.random() * pool.length)];
-    }
-    return null;
-  }
-
   /* Brikkene: bokstavane i ordet, stokka, pluss ein distraktor når
      eleven er komen eit stykke. Fleire distraktorar ville gjort
      oppgåva til ei leiting i staden for ei lydering. */
@@ -59,20 +29,18 @@
       });
       if (pool.length) set.push(pool[Math.floor(Math.random() * pool.length)]);
     }
-    for (let i = set.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const t = set[i]; set[i] = set[j]; set[j] = t;
-    }
-    return set;
+    return Vy.shuffle(set);
   }
 
   function run(frame, ctx) {
     const p = ctx.profile;
-    const word = pickWord(p);
+    const word = ctx.word || LjodLearning.words(p, 'build')[0];
     if (!word) return Promise.resolve(null);
 
-    frame.setPrompt('Bygg ordet du høyrer.');
+    frame.setPrompt('Ordbryggja — bygg ordet du høyrer.');
     const body = R().clear(frame.body);
+    const scenery = LjodPractice.scene(body, p, true);
+    let helped = ctx.introHelped === true;
 
     const play = function () { return speak(word.sound); };
     const replay = R().replayButton(play, 'Høyr ordet om att');
@@ -102,11 +70,37 @@
     });
     body.appendChild(tray);
 
+    let resumeAfterHelp = function () {};
+    const show = LjodPractice.button('Vis meg', function () {
+      if (done || helping || checking) return;
+      helped = helping = true;
+      revision++; speech++;
+      highlight(null);
+      R().lock(body, true);
+      const plate = LjodPractice.wordPlate(word);
+      body.appendChild(plate);
+      show.disabled = true;
+      LjodPractice.sound(word, plate, true).finally(function () {
+        plate.remove(); helping = false;
+        if (!done && body.isConnected) {
+          unlock();
+          resumeAfterHelp();
+        }
+      });
+    });
+    body.appendChild(show);
     const started = performance.now();
     let firstAttempt = null;   // resultatet vi rapporterer til motoren
     let done = false;
+    let helping = false, checking = false;
     let speech = 0;
     let revision = 0;
+
+    function unlock() {
+      replay.disabled = show.disabled = false;
+      slots.forEach(function (s) { s.node.disabled = false; });
+      tiles.forEach(function (t) { t.node.disabled = t.used; });
+    }
 
     function highlight(index) {
       slots.forEach(function (s, i) {
@@ -146,7 +140,7 @@
       }
 
       function placeTile(t) {
-        if (done || t.used) return;
+        if (done || helping || checking || t.used) return;
         const i = nextEmpty();
         if (i === -1) return;
         t.used = true;
@@ -163,7 +157,7 @@
       }
 
       function pullTile(i) {
-        if (done) return;
+        if (done || helping) return;
         const s = slots[i];
         if (!s.ch) return;
         revision++;
@@ -178,6 +172,9 @@
       }
 
       function check() {
+        if (done || checking || helping) return;
+        checking = true;
+        R().lock(body, true);
         const guess = slots.map(function (s) { return s.ch; });
         const correct = guess.join('') === word.text;
 
@@ -185,8 +182,8 @@
           firstAttempt = {
             correct: correct,
             latencyMs: performance.now() - started,
-            /* Éin post per rute, så motoren kan flytte kvar bokstav for
-               seg. Ein elev kan ha `s` og `l` på plass og bomme på `o`. */
+            /* Ruter er tilbakemelding i oppgåva. Dei gir ikkje automatisk
+               den same kunnskapsstatusen som lyd-til-bokstav-svar. */
             letters: slots.map(function (s, i) {
               return {
                 ch: word.letters[i],
@@ -199,15 +196,15 @@
 
         if (correct) {
           done = true;
-          replay.disabled = true;
+          replay.disabled = show.disabled = true;
+          scenery.finish();
           const token = ++speech;
           LjodAudio.stop();
           highlight(null);
           slots.forEach(function (s) { s.node.classList.add('is-right'); });
           R().setMood('happy');
           LjodMerke.noteWord(p, word.text);
-          /* Lyder ordet seint, så heilt. Det er her lydering blir til
-             lesing, og det er verdt dei tre sekunda. */
+          /* Lyder ordet seint, så heilt, med framheving av kvar rute. */
           LjodAudio.soundOut(word, null, {
             onLetter: function (index) { highlight(index); },
             onWord: function () { highlight('word'); },
@@ -219,7 +216,7 @@
             .then(function () {
               if (token !== speech || !body.isConnected) return;
               setTimeout(function () {
-                resolve(Object.assign({ word: word }, firstAttempt));
+                resolve(Object.assign({ word: word, skill: 'build', target: word.text, helped: helped }, firstAttempt));
               }, 500);
             });
           return;
@@ -228,6 +225,7 @@
         /* Feil: dei rette rutene blir ståande, dei gale blir tømde.
            Eleven mistar aldri alt han fekk til. */
         R().setMood('think');
+        helped = true;
         slots.forEach(function (s, i) {
           if (s.ch === word.letters[i]) { s.node.classList.add('is-right'); }
           else { s.node.classList.add('is-wrong'); }
@@ -241,10 +239,11 @@
             if (s.ch !== word.letters[i]) pullTile(i);
             else s.node.classList.remove('is-wrong');
           });
-          return play();
+          return play().then(function () { checking = false; unlock(); });
         });
       }
 
+      resumeAfterHelp = function () { if (nextEmpty() === -1) check(); };
       tiles.forEach(function (t) {
         t.node.addEventListener('click', function () { placeTile(t); });
       });
@@ -256,7 +255,7 @@
     });
   }
 
-  root.LjodMode_ordbyggjar = {
+  root.LjodBridgeBuild = {
     id: 'ordbyggjar',
     label: 'Ordbyggjaren',
     blurb: 'Høyr eit ord og bygg det av bokstavar',

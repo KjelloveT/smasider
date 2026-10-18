@@ -3,6 +3,20 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.4] — 2026-10-18
+
+### Lagt til
+- **Lydlyngen og Ordbryggja er klare til ei fyrste utprøving.** Lydlyngen koplar lyd og bokstav med modellering og planteval. Ordbryggja har oppdrag for lydsamantrekking, ordbygging og sjølvstendig leseøving, med ein valfri lyttande vaksen.
+- **Læraren får skilde øvingsobservasjonar.** Forsøk, rette svar utan hjelp, hjelpte svar, gjenkalling i seinare økter og vaksenstadfesta høgtlesing blir viste kvar for seg. Samandraga ligg avgrensa og lokalt, utan elevnamn eller lydopptak.
+
+### Endra
+- **Korrekte bokstavsvar gir framgang utan fartskrav.** Ulike oppgåvetypar blir haldne frå kvarandre. Gamle tre, bragder og lesemål blir bevarte.
+- **Lesesteg følgjer grunnlydane dei treng.** Vanlege lydgrupper treng ikkje vente på sjeldne alfabetbokstavar. Nye steg har ei kort innføring.
+- **Personverninformasjonen forklarer dei nye lokale øvingssamandraga.**
+
+### Fiksa
+- **Ordbryggja går vidare til lengre ord.** Det korte ordutvalet stengjer ikkje lenger for vidare progresjon. Ord med uavklart lydplan blir haldne utanfor den fyrste lyd-for-lyd-utprøvinga.
+
 ## [2.3.1] — 2026-10-15
 
 ### Endra

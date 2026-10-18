@@ -10,15 +10,15 @@
       Ordaklok har berre dagsklokka, og der er 1 dag kortaste intervall.
       Eleven møter difor aldri same bokstav to gonger i same økt.
 
-   2. FART TEL. Rett-men-treig forfremjar ikkje. Målet er automatisering,
-      ikkje at eleven greier å resonnere seg fram til svaret.
+   2. PRESISJON TEL. Rette svar gir kunnskapsframgang uavhengig av fart.
+      Historisk svartid er bevart; han er ingen måling av leseflyt.
 
    3. FEILBEVISSTE DISTRAKTORAR. Vi hugsar kva eleven faktisk forvekslar,
       og set aldri to forvekslingsbokstavar opp mot kvarandre før begge
       sit kvar for seg.
 
-   4. FRUSTRASJONSVAKT. To feil på rad tvingar fram ei oppgåve eleven
-      garantert klarer. Tre på rad senkar vanskegraden stille.
+   4. STØTTE ETTER FEIL. To feil på rad prioriterer ei kjend oppgåve.
+      Modusen kan vise modellen på nytt, utan å fjerne opptening.
 
    maxBox fell aldri. Det er det skogen viser - sjå skog.js.
    ══════════════════════════════════════════════ */
@@ -33,7 +33,7 @@
   /* Øktklokka: kor mange andre oppgåver som skal kome imellom. */
   const SESSION_GAP = [0, 3, 6, 12, 25, 40];
 
-  /* Over dette reknar vi svaret som tenkt fram, ikkje automatisert. */
+  /* Historisk terskel for ei bragd. Styrer ikkje kunnskapsframgangen. */
   const FAST_MS = 4000;
 
   const MAX_BOX = 5;
@@ -112,8 +112,8 @@
     if (correct) {
       it.right++;
       state.streakWrong = 0;
-      /* Fart tel: berre eit raskt, sikkert svar flyttar bokstaven opp. */
-      if (latencyMs <= FAST_MS && it.box < MAX_BOX) it.box++;
+      /* Rett utan fasithjelp tel også når eleven treng god tid. */
+      if (it.box < MAX_BOX) it.box++;
     } else {
       it.wrong++;
       state.streakWrong++;
@@ -252,9 +252,9 @@
   /* ──────────────── Modusar ──────────────── */
 
   const MODES = [
-    { id: 'lydfangst',    label: 'Lydfangst',    needs: 0, box: 0 },
+    { id: 'lydfangst',    label: 'Lydlyngen',    needs: 0, box: 0 },
     { id: 'bokstavropet', label: 'Bokstavropet', needs: 3, box: 2 },
-    { id: 'ordbyggjar',   label: 'Ordbyggjaren', needs: 3, box: 3 },
+    { id: 'ordbyggjar',   label: 'Ordbryggja', needs: 3, box: 3 },
     { id: 'forstelyd',    label: 'Første lyd',   needs: 5, box: 3 },
     { id: 'lesestigen', label: 'Lesestigen', needs: 0, box: 0, reading: true }
   ];
@@ -267,13 +267,10 @@
 
   function unlockedModes(state) {
     return MODES.filter(function (m) {
-      if (m.reading) {
-        return LjodLetters.STEPS.every(function (letters, index) {
-          return state.step > index + 1 || letters.filter(function (ch) {
-            return state.items[ch] && state.items[ch].maxBox >= 3;
-          }).length >= letters.length - 1;
-        });
-      }
+      if (m.id === 'ordbyggjar' && root.LjodLearning && !LjodLearning.words({ adaptive: state }, 'build').length) return false;
+      if (m.reading) return !!root.LjodProgress && LjodReading.LEVELS.some(function (level) {
+        return LjodProgress.available({ adaptive: state }, level.number);
+      });
       return m.needs === 0 || solidCount(state, m.box) >= m.needs;
     });
   }

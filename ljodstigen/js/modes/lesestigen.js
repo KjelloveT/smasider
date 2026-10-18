@@ -16,7 +16,7 @@
     return Vy.shuffle([target].concat(others.slice(0, 2)));
   }
 
-  function run(frame, ctx) {
+  function runQuestion(frame, ctx) {
     const number = ctx.readingLevel;
     const level = LjodReading.LEVELS.find(function (l) { return l.number === number; });
     const target = LjodProgress.pick(ctx.profile, number, ctx.lastReadingId);
@@ -60,6 +60,36 @@
       grid.classList.add('ljod-reading-options');
       body.appendChild(grid);
       play(target.id);
+    });
+  }
+
+  function run(frame, ctx) {
+    const level = LjodReading.LEVELS.find(function (l) { return l.number === ctx.readingLevel; });
+    if (!level) return Promise.resolve(null);
+    const key = ['_ng', '_double', '_diphthong', '_sjkj', '_sentences'][level.number - 6];
+    const previous = LjodLearning.get(ctx.profile, 'recognise', key);
+    if (previous && previous.introduced) return runQuestion(frame, ctx);
+    const R = LjodRender, P = LjodPractice, body = R.clear(frame.body);
+    frame.setPrompt('Steg ' + level.number + ' — ' + level.title);
+    body.appendChild(R.h('p', 'ljod-prompt', level.hint));
+    body.appendChild(R.h('p', 'ljod-prompt', level.groups.length
+      ? level.groups.map(function (group) { return group.text; }).join(' · ')
+      : level.items.slice(0, 2).map(function (item) { return item.text; }).join(' · ')));
+    return new Promise(function (resolve) {
+      const listen = P.button('Høyr og sjå', function () {
+        listen.disabled = true;
+        LjodAudio.stop();
+        LjodAudio.playSeq(level.groups.map(function (group) { return group.id; }).concat(level.items.slice(0, 2).map(function (item) { return item.id; })), 260)
+          .then(function () { if (body.isConnected) { next.disabled = false; listen.disabled = false; } });
+      });
+      const next = P.button('Prøv sjølv', function () {
+        LjodAudio.stop();
+        LjodLearning.introduce(ctx.profile, 'recognise', key);
+        LjodState.saveProfile(ctx.profile);
+        runQuestion(frame, ctx).then(function (result) { result.helped = true; resolve(result); });
+      }, true);
+      next.disabled = true;
+      body.append(listen, next);
     });
   }
 

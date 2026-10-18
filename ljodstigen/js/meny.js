@@ -71,7 +71,6 @@
         refresh();
       });
       card.appendChild(del);
-
       host.appendChild(card);
     });
 
@@ -123,8 +122,9 @@
       const unlocked = open.indexOf(m.id) !== -1;
 
       const variant = VARIANTAR[m.id];
-      const card = R().h(unlocked && !variant ? 'a' : 'article', 'ljod-mode vp-panel ' + (unlocked ? 'vp-panel--plain' : 'vp-panel--inset is-locked'));
-      if (unlocked && !variant) {
+      const bridge = m.id === 'ordbyggjar';
+      const card = R().h(unlocked && !variant && !bridge ? 'a' : 'article', 'ljod-mode vp-panel ' + (unlocked ? 'vp-panel--plain' : 'vp-panel--inset is-locked'));
+      if (unlocked && !variant && !bridge) {
         card.href = 'spel.html#' + new URLSearchParams({ p: current.id, m: m.id });
       }
       const thumbnail = R().h('img', 'ljod-mode-thumbnail');
@@ -145,7 +145,7 @@
         card.appendChild(R().h('span', 'ljod-mode-flag', 'Prøv denne'));
       }
       if (!unlocked) {
-        card.appendChild(R().h('span', 'ljod-mode-flag', m.reading ? 'Opnar etter bokstavsteg 5' : 'Opnar seg snart'));
+        card.appendChild(R().h('span', 'ljod-mode-flag', m.reading ? 'Opnar når grunnlydane er øvde' : 'Opnar seg snart'));
         card.setAttribute('aria-disabled', 'true');
       }
 
@@ -164,6 +164,15 @@
         }
         actions.appendChild(start);
         actions.appendChild(alt);
+        card.appendChild(actions);
+      }
+      if (bridge && unlocked) {
+        const actions = R().h('div', 'vp-actions ljod-mode-actions');
+        [['blend', 'Set lydane saman'], ['build', 'Bygg ordet'], ['read', 'Les sjølv']].forEach(function (task) {
+          const link = R().h('a', 'vp-button', task[1]);
+          link.href = 'spel.html#' + new URLSearchParams({ p: current.id, m: m.id, task: task[0] });
+          actions.appendChild(link);
+        });
         card.appendChild(actions);
       }
       host.appendChild(card);
