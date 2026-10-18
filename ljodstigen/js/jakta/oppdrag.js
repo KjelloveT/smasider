@@ -5,15 +5,13 @@
    kvar gong; KVA BOKSTAV som står på kvar sokkel blir avgjort her, av
    LjodAdaptive — same motor som dei fire andre modusane.
 
-   Det tyder at plattformspelet arvar heile det pedagogiske arbeidet
-   gratis: dei to klokkene, fartskravet, frustrasjonsvakta og — viktigast
-   — forvekslingsregelen. `b` og `d` hamnar ikkje på to soklar ved sida
+   Plattformspelet gjenbruker utvalet og forvekslingsregelen frå motoren.
+   `b` og `d` hamnar ikkje på to soklar ved sida
    av kvarandre før begge sit kvar for seg. Det er den regelen som lettast
    forsvinn når innhaldet flyttar til ein ny modus, og det er difor han
    ikkje blir skriven på nytt her.
 
-   Eit rett plukk går inn i motoren som eit vanleg svar, med responstid.
-   Skogen veks av å spele Bokstavjakta akkurat som av Lydfangst.
+   Plukk blir observerte separat, sidan rørsla òg påverkar handlinga.
    ══════════════════════════════════════════════ */
 (function (root) {
   'use strict';
@@ -158,13 +156,7 @@
       if (o.ferdig || !sokkel || sokkel.teken) return null;
       const vil = o.gjeldande();
       const rett = sokkel.bokstav === vil;
-      const brukt = performance.now() - o.starta;
-
-      /* Inn i motoren som eit heilt vanleg svar. Dette er koplinga som
-         gjer Bokstavjakta til ein læringsmodus og ikkje eit spel ved
-         sida av. */
-      LjodAdaptive.record(a, vil, rett, brukt, rett ? null : sokkel.bokstav);
-      LjodMerke.noteAnswer(profil, vil, rett, brukt, rett ? null : sokkel.bokstav);
+      LjodLearning.record(profil, 'hunt', vil, { correct: rett });
 
       if (rett) {
         sokkel.teken = true;

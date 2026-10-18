@@ -1,0 +1,27 @@
+/* Oppsett og funksjonelle spelelement. UI-flater kjem frå felleskomponentane. */
+.ljod-practice-scene { position: relative; display: flex; align-items: end; justify-content: center; min-height: 110px; width: min(100%, 500px); margin-inline: auto; }
+.ljod-practice-scene > img { position: relative; z-index: 1; width: 100px; height: 100px; object-fit: contain; transition: transform .6s ease; }
+.ljod-practice-scene.is-bridge { justify-content: flex-start; padding-bottom: 20px; }
+.ljod-practice-scene.is-finished > img { transform: translateX(40px); }
+.ljod-practice-scene.is-bridge.is-finished > img { transform: translateX(min(240px, 40vw)); }
+.ljod-bridge-deck { position: absolute; bottom: 0; inset-inline: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.ljod-bridge-deck > span { height: 24px; }
+.ljod-model-word { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+.ljod-model-word > span { display: grid; place-items: center; min-width: 48px; min-height: 64px; padding: 6px 12px; font: 2.5rem/1.4 var(--ljod-font-read); }
+.ljod-model-word > .is-speaking { background: var(--vp-honey); }
+.ljod-plants { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.ljod-plants > button { display: flex; flex-direction: column; gap: 8px; min-width: 104px; min-height: 160px; }
+.ljod-plants .ljod-glyph { font-size: 3rem; line-height: 1.4; }
+.ljod-plants svg { width: 64px; height: 64px; color: var(--vp-frame); }
+.ljod-word-options { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.ljod-word-options > button { font: 2rem/1.4 var(--ljod-font-read); min-width: 100px; }
+.ljod-task-body > .vp-actions { justify-content: center; flex-wrap: wrap; }
+.ljod-practice-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-block: 12px; }
+.ljod-practice-actions > a { flex: 1 1 150px; }
+.ljod-observations { overflow-x: auto; max-width: 100%; }
+@media (max-width: 480px) {
+  .ljod-model-word > span { min-width: 38px; min-height: 56px; padding: 4px 8px; font-size: 2rem; }
+  .ljod-task-body .ljod-slots { flex-wrap: wrap; }
+  .ljod-task-body .ljod-slot { width: 56px; height: 72px; min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .ljod-practice-scene > img { transition: none; } }

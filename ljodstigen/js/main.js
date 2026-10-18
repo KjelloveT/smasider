@@ -1,17 +1,4 @@
-/* ══════════════════════════════════════════════
-   MAIN.JS — Økta
-
-   Ei økt er 12 oppgåver, fem til sju minutt. Ho har ein fast form, og
-   to av eigenskapane hennar er meir gjennomtenkte enn dei ser ut:
-
-   1. SISTE OPPGÅVE ER ALLTID EIN SIGER. Vi ber motoren om ei garantert
-      oppgåve på slutten. Kva eleven ser sist avgjer om han opnar appen
-      i morgon, og ein elev som sluttar på eit nederlag gjer ikkje det.
-
-   2. HAGEN ER DET SISTE BILETET. Ikkje eit resultat, ikkje ein prosent.
-      Ein prosent under adaptiv vanskegrad seier uansett ingenting:
-      motoren siktar mot same treffrate for alle.
-   ══════════════════════════════════════════════ */
+/* Økta samlar tolv faglege oppgåver. Innsats blir feira utan fartskrav. */
 (function (root) {
   'use strict';
 
@@ -47,15 +34,24 @@
     if (!profile || !mode) { go('index.html'); return; }
     const progress = LjodProgress.summary(profile);
     const allOpen = LjodState.read().allModes;
-    if (mode.id === 'lesestigen' && progress.current < 6 && !allOpen) { go('index.html'); return; }
+    const openReading = LjodReading.LEVELS.filter(function (level) { return allOpen || LjodProgress.available(profile, level.number); });
+    if (mode.id === 'lesestigen' && !openReading.length) { go('index.html'); return; }
     const requestedStep = Number(param('level'));
     const practiceStep = mode.id === 'lydfangst' && Number.isInteger(requestedStep) && requestedStep >= 1 && requestedStep <= 5 &&
-      (requestedStep <= progress.current || allOpen) ? requestedStep : null;
-    let readingLevel = Number(param('level'));
-    if (!Number.isInteger(readingLevel) || readingLevel < 6 || readingLevel > 10 ||
-        (!allOpen && readingLevel > progress.current)) readingLevel = Math.max(6, progress.current);
+      (requestedStep <= profile.adaptive.step || allOpen) ? requestedStep : null;
+    const readingLevel = openReading.some(function (level) { return level.number === requestedStep; }) ? requestedStep :
+      (openReading.find(function (level) { return !LjodProgress.levels(profile)[level.number - 1].done; }) || openReading[0] || {}).number;
 
     document.body.dataset.font = LjodState.read().font;
+
+    if (mode.id === 'ordbyggjar' && !LjodLearning.words(profile, 'build').length) {
+      R().clear(host);
+      host.appendChild(R().h('p', 'vp-notice', 'Øv på fleire grunnlydar i Lydlyngen før du byggjer desse orda.'));
+      const practice = R().h('a', 'vp-button vp-button--positive', 'Til Lydlyngen');
+      practice.href = 'spel.html#' + new URLSearchParams({ p: profile.id, m: 'lydfangst' });
+      host.appendChild(practice);
+      return;
+    }
 
     /* Lasteskjerm. Lyden skal vere ferdig dekoda før første oppgåve —
        ei oppgåve som ventar på nettverket er ei oppgåve eleven trur er
@@ -72,6 +68,11 @@
     LjodAudio.load(function (done, total) {
       fill.style.width = Math.round(100 * done / total) + '%';
     }, { voice: LjodState.read().voice }).then(function (res) {
+      if ((mode.id === 'lydfangst' || mode.id === 'ordbyggjar') && res.missing.some(function (bank) { return bank === 'fonem' || bank === 'ord'; })) {
+        R().clear(host);
+        host.appendChild(R().h('p', 'vp-notice', 'Oppgåvelydane kunne ikkje lastast. Last sida på nytt for å prøve att.'));
+        return;
+      }
       if (mode.id === 'lesestigen') {
         const level = LjodReading.LEVELS.find(function (l) { return l.number === readingLevel; });
         if (!level.items.concat(level.groups).every(function (item) { return LjodAudio.hasClip(item.id); })) {
@@ -115,7 +116,7 @@
       frame.head.appendChild(note);
     }
 
-    const ctx = { profile: profile, adaptive: profile.adaptive, guarantee: false, readingLevel: readingLevel, letterPool: practiceStep ? LjodLetters.STEPS[practiceStep - 1].slice() : null };
+    const ctx = { profile: profile, adaptive: profile.adaptive, guarantee: false, bridgeTask: param('task') || 'build', readingLevel: readingLevel, letterPool: practiceStep ? LjodLetters.STEPS[practiceStep - 1].slice() : null };
     if (practiceStep) frame.head.prepend(R().h('p', 'vp-help', 'Bokstavsteg ' + practiceStep));
     const journey = R().h('div');
     frame.head.appendChild(journey);
@@ -142,7 +143,7 @@
 
       p.then(function (res) {
         if (!res) { finish(host, profile, newStars); return; }
-        applyResult(profile, res);
+        applyResult(profile, res, mode.id);
         LjodState.saveProfile(profile);
         n++;
         if (res.reading && LjodProgress.levels(profile)[ctx.readingLevel - 1].done) {
@@ -156,19 +157,16 @@
     nextTask();
   }
 
-  /* Eitt svar inn i motoren og i merka. Ordbyggjaren leverer eit svar
-     per rute, sidan eleven kan ha to bokstavar rett og éin feil. */
-  function applyResult(profile, res) {
-    const a = profile.adaptive;
+  /* Registrer handling og hjelp kvar for seg. Berre lyd-til-bokstav-svar
+     utan fasithjelp flyttar bokstavprogresjonen. */
+  function applyResult(profile, res, modeId) {
+    const skill = res.skill || { lydfangst: 'listen', bokstavropet: 'sound', forstelyd: 'first', lesestigen: 'recognise' }[modeId];
+    const target = res.target || (res.reading ? res.reading.id : res.ch);
+    if (skill && target) LjodLearning.record(profile, skill, target, res);
     if (res.reading) {
-      LjodProgress.record(profile, res.reading.level, res.reading.id, res.correct);
-    } else if (res.letters) {
-      res.letters.forEach(function (l) {
-        LjodAdaptive.record(a, l.ch, l.correct, res.latencyMs / res.letters.length, l.chosen);
-        LjodMerke.noteAnswer(profile, l.ch, l.correct, res.latencyMs / res.letters.length, l.chosen);
-      });
-    } else {
-      LjodAdaptive.record(a, res.ch, res.correct, res.latencyMs, res.chosen);
+      if (!res.helped) LjodProgress.record(profile, res.reading.level, res.reading.id, res.correct);
+    } else if (modeId === 'lydfangst' && !res.helped) {
+      LjodAdaptive.record(profile.adaptive, res.ch, res.correct, res.latencyMs, res.chosen);
       LjodMerke.noteAnswer(profile, res.ch, res.correct, res.latencyMs, res.chosen);
     }
   }
@@ -236,7 +234,7 @@
     requestAnimationFrame(function () { LjodSkog.celebrate(canvas); });
   }
 
-  root.LjodMain = { start: start, TASKS_PER_SESSION: TASKS_PER_SESSION, MODES: MODES };
+  root.LjodMain = { start: start, TASKS_PER_SESSION: TASKS_PER_SESSION, MODES: MODES, applyResult: applyResult };
 
   // Lenkja til neste steg endrar berre fragmentet på same spelside.
   // Ei ny økt må få ein ny dokumenttilstand, utan gamle lydlovnader.

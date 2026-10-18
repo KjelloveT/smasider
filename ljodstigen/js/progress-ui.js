@@ -17,7 +17,7 @@
       const dots = R.h('ol', 'ljod-stage-dots');
       dots.setAttribute('aria-label', 'Dei ti stega i Ljodstigen');
       s.levels.forEach(function (level) {
-        const done = level.number <= s.completed;
+        const done = level.done;
         const item = R.h('li', 'ljod-stage-dot' + (done ? ' is-complete' : !s.done && level.number === s.current ? ' is-current' : ''), String(level.number));
         item.setAttribute('aria-label', 'Steg ' + level.number + ': ' + (done ? 'fullført' : level.number === s.current ? 'du er her' : 'står att'));
         dots.appendChild(item);
@@ -37,8 +37,8 @@
     const list = R.h('ol', 'ljod-levels');
     const teacherOpen = LjodState.read().allModes;
     s.levels.forEach(function (level) {
-      const finished = level.number <= s.completed;
-      const available = level.number <= s.current || teacherOpen;
+      const finished = level.done;
+      const available = LjodProgress.available(p, level.number) || teacherOpen;
       const card = R.h('li', 'vp-panel vp-panel--inset ljod-level');
       const status = finished ? 'Fullført' : level.number === s.current ? 'Du er her' : 'Står att';
       card.appendChild(R.h('strong', null, level.number + '. ' + level.title));
@@ -63,7 +63,7 @@
           link.href = practiceUrl(p, level.number);
           card.appendChild(link);
         } else {
-          const button = R.h('button', 'vp-button vp-button--compact', 'Opnar etter steg ' + (level.number - 1));
+          const button = R.h('button', 'vp-button vp-button--compact', 'Øv på grunnlydane fyrst');
           button.type = 'button';
           button.disabled = true;
           card.appendChild(button);
@@ -88,7 +88,7 @@
     return 'spel.html#' + new URLSearchParams({ p: p.id, m: number <= 5 ? 'lydfangst' : 'lesestigen', level: number });
   }
 
-  function practiceMode(number) { return number <= 5 ? 'Lydfangst' : 'Lesestigen'; }
+  function practiceMode(number) { return number <= 5 ? 'Lydlyngen' : 'Lesestigen'; }
 
   root.LjodProgressUI = { render: render, practiceUrl: practiceUrl, practiceMode: practiceMode };
 })(window);

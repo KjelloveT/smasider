@@ -30,13 +30,14 @@
       'Starta ' + p.created + '. Spelt ' + p.days.length + ' dagar. ' +
       'Bokstavsteg ' + st.step + ' av ' + LjodLetters.STEPS.length + '.'));
     host.appendChild(head);
+    if (root.LjodLearningUI) LjodLearningUI.render(host, p);
     const journey = R().h('section');
     LjodProgressUI.render(journey, p, { teacher: true });
     host.appendChild(journey);
 
     /* Samandrag */
     const sum = R().h('div', 'ljod-laerar-sum');
-    [['Planta', st.planted], ['Sit godt', st.grown], ['Heilt sikre', st.mastered], ['Av i alt', st.total]]
+    [['Planta', st.planted], ['Har nådd steg 3', st.grown], ['Har nådd steg 5', st.mastered], ['Av i alt', st.total]]
       .forEach(function (row) {
         const box = R().h('div', 'ljod-stat');
         box.appendChild(R().h('span', 'ljod-stat-num', String(row[1])));
@@ -50,7 +51,7 @@
     const table = R().h('table', 'ljod-table');
     const thead = R().h('thead');
     const hr = R().h('tr');
-    ['Bokstav', 'Nivå', 'Rett', 'Feil', 'Snittid', 'Byter med'].forEach(function (t) {
+    ['Bokstav', 'Høgaste vekststeg', 'Rett', 'Feil', 'Historisk svartid', 'Byter med'].forEach(function (t) {
       hr.appendChild(R().h('th', null, t));
     });
     thead.appendChild(hr);
@@ -76,7 +77,7 @@
     table.appendChild(tbody);
 
     if (!tbody.childNodes.length) {
-      host.appendChild(R().h('p', 'ljod-muted', 'Eleven har ikkje svart på noko enno.'));
+      host.appendChild(R().h('p', 'ljod-muted', 'Ingen bokstavsvar utan hjelp er registrerte enno.'));
     } else {
       const wrap = R().h('div', 'ljod-table-wrap');
       wrap.appendChild(table);

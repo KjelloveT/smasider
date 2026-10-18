@@ -34,7 +34,7 @@ test('ny profil, gamle profilar og idempotent lagring', () => {
   const once = JSON.stringify(S.read());
   S.write(S.read());
   assert.equal(JSON.stringify(S.read()), once);
-  assert.equal(stored.version, 2);
+  assert.equal(stored.version, 3);
 });
 
 test('Mose er standard éin gong, medan eit tidlegare figurval og framsteg blir verande', () => {

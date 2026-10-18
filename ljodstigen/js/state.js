@@ -16,7 +16,7 @@
   /* Byte av namn på appen er eitt søk-og-erstatt herifrå. Namnet er
      mellombels — sjå toppen av planen. */
   const APP_ID = 'ljodstigen';
-  const VERSION = 2;
+  const VERSION = 3;
 
   /* Dei åtte fyrste ID-ane er haldne fast, så eksisterande profilar
      får nye figurar utan at framgangen deira blir flytta eller sletta. */
@@ -99,6 +99,7 @@
       created: p.created || today(),
       adaptive: LjodAdaptive.hydrate(p.adaptive),
       reading: LjodProgress.hydrate(p.reading),
+      learning: root.LjodLearning ? LjodLearning.hydrate(p.learning) : { version: 1, session: 0, items: {} },
       badges: Array.isArray(p.badges) ? p.badges : [],
       days: Array.isArray(p.days) ? p.days.slice(-40) : [],
       stars: (p.stars && typeof p.stars === 'object') ? p.stars : { date: null, ids: [] },
@@ -174,6 +175,7 @@
 
   /** Kall når ei økt startar. Returnerer stjernene som blei tente no. */
   function startSession(p, modeId) {
+    if (root.LjodLearning) LjodLearning.start(p);
     const t = today();
     if (p.stars.date !== t) p.stars = { date: t, ids: [] };
     const won = [];
