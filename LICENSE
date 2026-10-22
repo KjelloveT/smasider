@@ -21,6 +21,11 @@ UNNTAK — dette dekkjer lisensen IKKJE:
     `_libs/CREDITS.md`.
   * Bilete som blir henta frå Wikimedia Commons under køyring (Heimsank,
     Vidfaren) høyrer opphavspersonane sine til og har sine eigne lisensar.
+  * Ordbokdata frå Nynorskordboka, Universitetet i Bergen og Språkrådet,
+    og tilpassa ordforklaringar i Ordbås er delte under CC BY 4.0:
+    https://creativecommons.org/licenses/by/4.0/. Sjå ordbas/README.md og
+    docs/ordbas/KJELDER.md. Denne lisensen legg ikkje fleire avgrensingar
+    på desse dataa.
   * Namnet «Vyrdepil» og maskoten Vyrde kan ikkje brukast slik at ei
     endra utgåve framstår som den offisielle nettstaden.
 
