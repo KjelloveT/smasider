@@ -347,6 +347,7 @@
       ['level', 'Nivå'], ['xp', 'XP totalt'], ['xpIntoLevel', 'XP i nivået'], ['correctAnswers', 'Rette svar'],
       ['gamesPlayed', 'Økter'], ['bestStreak', 'Lengste rekkje']
     ],
+    ordbas: [['rounds', 'Leveringar'], ['correct', 'Ord på plass'], ['firstTry', 'Rette på fyrste forsøk']],
     bolkestokk: [],
     ormritaren: [],
     livslina: [['completedRuns', 'Fullførte løp'], ['bestNetworth', 'Beste nettoformue (kr)'], ['bestGrades', 'Høgaste karaktersnitt']]
@@ -358,7 +359,7 @@
     const data = await loadCatalogue();
     const snapshots = storageApi.getBragdData().progress || {};
     host.replaceChildren();
-    ['heimsank', 'vidfaren', 'tidvis', 'bolkestokk', 'ormritaren', 'livslina'].forEach(appId => {
+    ['heimsank', 'vidfaren', 'tidvis', 'bolkestokk', 'ormritaren', 'livslina', 'ordbas'].forEach(appId => {
       const app = data.apps[appId];
       const snapshot = snapshots[appId];
       const card = document.createElement('article');

@@ -27,6 +27,45 @@
     }
   ],
   "apps": {
+    "ordbas": {
+      "badges": [
+        {
+          "id": "fyrste-levering",
+          "name": "Fyrste levering",
+          "hint": "Fullfør ei levering i Ordbås",
+          "family": "milepael",
+          "icon": "lesson-book-check"
+        },
+        {
+          "id": "fire-basar",
+          "name": "Alle fire båsane",
+          "hint": "Sorter eit ord i kvar av dei fire ordklassane",
+          "family": "utforsking",
+          "icon": "wooden-blocks"
+        },
+        {
+          "id": "vyrdes-hjelpar",
+          "name": "Vyrdes hjelpar",
+          "hint": "Fullfør ei levering i Hjelp Vyrde",
+          "family": "meistring",
+          "icon": "answer-check"
+        },
+        {
+          "id": "ordskiftar",
+          "name": "Ordskiftar",
+          "hint": "Fullfør ei levering i Ordskiftet",
+          "family": "meistring",
+          "icon": "prism-card"
+        },
+        {
+          "id": "hundre-ord",
+          "name": "Ordryddaren",
+          "hint": "Sorter 100 ord i Ordbås, utan å telje repetisjonar i same levering",
+          "family": "uthald",
+          "icon": "full-bookshelf-check"
+        }
+      ]
+    },
     "fykefuga": {
       "badges": [
         { "id": "fyrste-bane", "name": "Fyrste fuga", "hint": "Fullfør ei hovudbane", "family": "milepael", "icon": "flag-pole" },

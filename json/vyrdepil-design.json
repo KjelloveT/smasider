@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-15",
+  "updated": "2026-10-22",
   "appCatalog": "json/apps.json",
   "policy": {
     "allocation": "random-unused-on-creation",
@@ -42,7 +42,8 @@
       "leitekryss": "_resources/leitekryss.svg",
       "vitjingsruta": "_resources/vyrdepil-design/logos/vitjingsruta-mala.png",
       "dagsvegen": "_resources/vyrdepil-design/logos/dagsvegen-mala.png",
-      "tevlingstreet": "_resources/vyrdepil-design/logos/tevlingstreet-mala.png"
+      "tevlingstreet": "_resources/vyrdepil-design/logos/tevlingstreet-mala.png",
+      "ordbas": "_resources/vyrdepil-design/bragder/icons/wooden-blocks.png"
     }
   },
   "scenes": [
@@ -1438,7 +1439,7 @@
         1672,
         941
       ],
-      "assignedTo": null
+      "assignedTo": "ordbas"
     },
     {
       "id": "klippe-vinter-natt",
@@ -2545,6 +2546,9 @@
     },
     "ljodstigen": {
       "backgroundId": "sykkelsti-vinter-natt"
+    },
+    "ordbas": {
+      "backgroundId": "klippe-vinter-morgon"
     }
   },
   "siteBackgroundSets": {

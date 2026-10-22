@@ -1,0 +1,3010 @@
+{
+  "app": "Ordbås",
+  "version": 1,
+  "language": "nn",
+  "attribution": "Nynorskordboka, Universitetet i Bergen og Språkrådet, ordbøkene.no, CC-BY 4.0. Ordforklaringane er korta ned og tilpassa; setningar, hint og grammatikkforklaringar er skrivne for Ordbås.",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "sourceFetchedOn": "2026-10-22",
+  "questions": [
+    {
+      "id": "ob-001",
+      "wordId": "substantiv-nn-73441",
+      "wordClass": "substantiv",
+      "level": 1,
+      "lemma": "stein",
+      "target": {
+        "before": "Vyrde finn ein ",
+        "text": "stein",
+        "after": " på stigen."
+      },
+      "meaning": "Ein liten bit av berg.",
+      "reason": "Stein er namn på noko Vyrde finn.",
+      "tip": "Kva er det Vyrde finn?",
+      "pairId": null,
+      "source": {
+        "articleId": 73441,
+        "definitionId": 6,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/73441",
+        "updated": "2024-12-18 08:10:17",
+        "dictionaryExplanation": "blokk eller klump av stein",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-002",
+      "wordId": "substantiv-nn-7330",
+      "wordClass": "substantiv",
+      "level": 1,
+      "lemma": "bok",
+      "target": {
+        "before": "På bordet ligg ei ",
+        "text": "bok",
+        "after": "."
+      },
+      "meaning": "Noko med sider som du kan lese i.",
+      "reason": "Bok er namn på noko vi kan lese i.",
+      "tip": "Kva er det som ligg på bordet?",
+      "pairId": null,
+      "source": {
+        "articleId": 7330,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/7330",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "samanhefta eller innbundne ark med tekst og/eller bilete på",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-003",
+      "wordId": "substantiv-nn-31856",
+      "wordClass": "substantiv",
+      "level": 1,
+      "lemma": "hund",
+      "target": {
+        "before": "Ein ",
+        "text": "hund",
+        "after": " ventar ved porten."
+      },
+      "meaning": "Eit tamt dyr som kan bjeffe.",
+      "reason": "Hund er namn på eit dyr.",
+      "tip": "Kva dyr ventar ved porten?",
+      "pairId": null,
+      "source": {
+        "articleId": 31856,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/31856",
+        "updated": "2022-09-04 12:10:49",
+        "dictionaryExplanation": "husdyr (som finst i ulik storleik, farge, skapnad og åtferd) som blir halde som kjæledyr eller bruksdyr, som er lett å dressere og som ein kan bruke til jakt eller andre oppgåver; Canis familiaris",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-004",
+      "wordId": "substantiv-nn-80631",
+      "wordClass": "substantiv",
+      "level": 1,
+      "lemma": "tre",
+      "target": {
+        "before": "Eit ",
+        "text": "tre",
+        "after": " veks ved huset."
+      },
+      "meaning": "Ei stor plante med stamme og greiner.",
+      "reason": "Tre er namn på ei plante.",
+      "tip": "Kva er det som veks?",
+      "pairId": null,
+      "source": {
+        "articleId": 80631,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/80631",
+        "updated": "2025-06-23 08:11:15",
+        "dictionaryExplanation": "fleirårig plante som har kraftige røter  og meir el mindre høg og kraftig stamme med greiner og kvister som ber blad, barnåler, kongler, nøtter, blomstrar eller frukter",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-005",
+      "wordId": "substantiv-nn-71552",
+      "wordClass": "substantiv",
+      "level": 1,
+      "lemma": "sol",
+      "target": {
+        "before": "",
+        "text": "Sola",
+        "after": " skin over tunet."
+      },
+      "meaning": "Stjerna som gjev jorda lys og varme.",
+      "reason": "Sola er bunden form av substantivet sol.",
+      "tip": "Kva er det som skin?",
+      "pairId": null,
+      "source": {
+        "articleId": 71552,
+        "definitionId": 1,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/71552",
+        "updated": "2025-08-07 13:47:14",
+        "dictionaryExplanation": "lys- og energigjevande stjerne som jorda og dei andre planetane i solsystemet vårt krinsar om, og som er føresetnaden for alt liv på jorda",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-006",
+      "wordId": "substantiv-nn-15477",
+      "wordClass": "substantiv",
+      "level": 1,
+      "lemma": "eple",
+      "target": {
+        "before": "Vyrde et eit ",
+        "text": "eple",
+        "after": "."
+      },
+      "meaning": "Ei rund frukt som veks på tre.",
+      "reason": "Eple er namn på ei frukt.",
+      "tip": "Kva er det Vyrde et?",
+      "pairId": null,
+      "source": {
+        "articleId": 15477,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/15477",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "rund raud, grøn eller gul frukt av epletre",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-007",
+      "wordId": "substantiv-nn-4342",
+      "wordClass": "substantiv",
+      "level": 1,
+      "lemma": "ball",
+      "target": {
+        "before": "Dei kastar ein ",
+        "text": "ball",
+        "after": " til kvarandre."
+      },
+      "meaning": "Ei rund leike til å kaste, sparke eller trille.",
+      "reason": "Ball er namn på ei leike.",
+      "tip": "Kva kastar dei?",
+      "pairId": null,
+      "source": {
+        "articleId": 4342,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/4342",
+        "updated": "2022-08-10 06:30:15",
+        "dictionaryExplanation": "(lett) kule av gummi, plast o_l til å leike el spele med",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-008",
+      "wordId": "substantiv-nn-100431",
+      "wordClass": "substantiv",
+      "level": 1,
+      "lemma": "skule",
+      "target": {
+        "before": "Vi går på ",
+        "text": "skule",
+        "after": "."
+      },
+      "meaning": "Ein stad der elevar lærer saman.",
+      "reason": "Skule er namn på ein stad der vi lærer.",
+      "tip": "Kva stad går vi på?",
+      "pairId": null,
+      "source": {
+        "articleId": 100431,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/100431",
+        "updated": "2024-10-23 08:44:53",
+        "dictionaryExplanation": "institusjon som driv regelbunden opplæring og undervisning",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-009",
+      "wordId": "substantiv-nn-6900",
+      "wordClass": "substantiv",
+      "level": 2,
+      "lemma": "blom",
+      "target": {
+        "before": "Vi plukkar ",
+        "text": "blomar",
+        "after": " i hagen."
+      },
+      "meaning": "Plantedelar som ofte har fargar og lukt.",
+      "reason": "Blomar er fleirtal av substantivet blom.",
+      "tip": "Kva er det vi plukkar?",
+      "pairId": null,
+      "source": {
+        "articleId": 6900,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/6900",
+        "updated": "2025-11-13 16:36:05",
+        "dictionaryExplanation": "plantedel som består av ei samling (godt synlege) farga kronblad og andre delar som inngår i formeiringa av planta; blomster",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-010",
+      "wordId": "substantiv-nn-76279",
+      "wordClass": "substantiv",
+      "level": 2,
+      "lemma": "sykkel",
+      "target": {
+        "before": "",
+        "text": "Syklane",
+        "after": " står ved gjerdet."
+      },
+      "meaning": "Køyretøy med to hjul og pedalar.",
+      "reason": "Syklane er ei bøygd form av substantivet sykkel.",
+      "tip": "Kva er det som står ved gjerdet?",
+      "pairId": null,
+      "source": {
+        "articleId": 76279,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/76279",
+        "updated": "2026-04-22 11:33:16",
+        "dictionaryExplanation": "køyretøy som oftast har styre, to hjul etter kvarandre og pedalar",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-011",
+      "wordId": "substantiv-nn-88684",
+      "wordClass": "substantiv",
+      "level": 2,
+      "lemma": "ven",
+      "target": {
+        "before": "",
+        "text": "Venene",
+        "after": " kjem på besøk."
+      },
+      "meaning": "Menneske som likar kvarandre og held saman.",
+      "reason": "Venene er ei bøygd form av substantivet ven.",
+      "tip": "Kven er det som kjem på besøk?",
+      "pairId": null,
+      "source": {
+        "articleId": 88684,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/88684",
+        "updated": "2026-02-24 14:35:24",
+        "dictionaryExplanation": "person ein har eit nært forhold til, og som ein har mykje omgang med; særs god kjenning, kamerat",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-012",
+      "wordId": "substantiv-nn-22699",
+      "wordClass": "substantiv",
+      "level": 2,
+      "lemma": "fugl",
+      "target": {
+        "before": "",
+        "text": "Fuglane",
+        "after": " syng i trea."
+      },
+      "meaning": "Dyr med fjører, venger og nebb.",
+      "reason": "Fuglane er ei bøygd form av substantivet fugl.",
+      "tip": "Kva dyr er det som syng?",
+      "pairId": null,
+      "source": {
+        "articleId": 22699,
+        "definitionId": 3,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/22699",
+        "updated": "2023-10-05 14:59:24",
+        "dictionaryExplanation": "virveldyr med to bein, fjør og venger, som legg egg",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-013",
+      "wordId": "substantiv-nn-10205",
+      "wordClass": "substantiv",
+      "level": 2,
+      "lemma": "båt",
+      "target": {
+        "before": "",
+        "text": "Båtane",
+        "after": " ligg ved kaia."
+      },
+      "meaning": "Farkostar som flyt på vatnet.",
+      "reason": "Båtane er ei bøygd form av substantivet båt.",
+      "tip": "Kva er det som ligg ved kaia?",
+      "pairId": null,
+      "source": {
+        "articleId": 10205,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/10205",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "liten farkost til å ro el til å drive fram med segl el motor",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-014",
+      "wordId": "substantiv-nn-4655",
+      "wordClass": "substantiv",
+      "level": 2,
+      "lemma": "barn",
+      "target": {
+        "before": "Alle ",
+        "text": "barna",
+        "after": " finn ein plass."
+      },
+      "meaning": "Unge menneske som enno ikkje er vaksne.",
+      "reason": "Barna er ei bøygd form av substantivet barn.",
+      "tip": "Kven er det som finn ein plass?",
+      "pairId": null,
+      "source": {
+        "articleId": 4655,
+        "definitionId": 7,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/4655",
+        "updated": "2022-06-03 09:12:03",
+        "dictionaryExplanation": "person som ikkje er vaksen; person som ikkje har nådd myndigalder",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-015",
+      "wordId": "substantiv-nn-28743",
+      "wordClass": "substantiv",
+      "level": 2,
+      "lemma": "hand",
+      "target": {
+        "before": "Vyrde vaskar ",
+        "text": "hendene",
+        "after": "."
+      },
+      "meaning": "Kroppsdelane vi held og grip med.",
+      "reason": "Hendene er ei bøygd form av substantivet hand.",
+      "tip": "Kva er det Vyrde vaskar?",
+      "pairId": null,
+      "source": {
+        "articleId": 28743,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/28743",
+        "updated": "2023-10-13 11:38:02",
+        "dictionaryExplanation": "kroppsdel ytst på arm, med fingrar som mellom anna kan gripe og halde",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-016",
+      "wordId": "substantiv-nn-31964",
+      "wordClass": "substantiv",
+      "level": 2,
+      "lemma": "hus",
+      "target": {
+        "before": "",
+        "text": "Husa",
+        "after": " ligg langs vegen."
+      },
+      "meaning": "Bygningar som menneske kan bu i.",
+      "reason": "Husa er ei bøygd form av substantivet hus.",
+      "tip": "Kva er det som ligg langs vegen?",
+      "pairId": null,
+      "source": {
+        "articleId": 31964,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/31964",
+        "updated": "2024-02-01 07:09:34",
+        "dictionaryExplanation": "bygning (med tak og vegger) brukt til bu- eller tilhaldsstad for menneske og dyr, til lagringsstad og liknande",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-017",
+      "wordId": "substantiv-nn-25652",
+      "wordClass": "substantiv",
+      "level": 3,
+      "lemma": "glede",
+      "target": {
+        "before": "Vyrde kjenner ",
+        "text": "glede",
+        "after": " når venene kjem."
+      },
+      "meaning": "Ei god kjensle av å vere glad.",
+      "reason": "Glede er namn på ei kjensle.",
+      "tip": "Er ordet namn på noko vi kjenner?",
+      "pairId": null,
+      "source": {
+        "articleId": 25652,
+        "definitionId": 3,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/25652",
+        "updated": "2024-06-26 12:51:56",
+        "dictionaryExplanation": "kjensle av å vere glad og tilfreds; lykke, hygge, velnøye, frygd",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-018",
+      "wordId": "substantiv-nn-77502",
+      "wordClass": "substantiv",
+      "level": 3,
+      "lemma": "tanke",
+      "target": {
+        "before": "Ein ny ",
+        "text": "tanke",
+        "after": " dukkar opp."
+      },
+      "meaning": "Noko du tenkjer eller førestiller deg.",
+      "reason": "Tanke er namn på noko som skjer i tankelivet.",
+      "tip": "Kva er det som dukkar opp?",
+      "pairId": null,
+      "source": {
+        "articleId": 77502,
+        "definitionId": 4,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/77502",
+        "updated": "2025-05-06 11:38:11",
+        "dictionaryExplanation": "det ein tenkjer; førestilling i medvitet",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-019",
+      "wordId": "substantiv-nn-87050",
+      "wordClass": "substantiv",
+      "level": 3,
+      "lemma": "val",
+      "target": {
+        "before": "Eit ",
+        "text": "val",
+        "after": " kan vere vanskeleg."
+      },
+      "meaning": "Det å bestemme seg for eitt av fleire høve.",
+      "reason": "Val er namn på det å velje.",
+      "tip": "Kva er det setninga fortel om?",
+      "pairId": null,
+      "source": {
+        "articleId": 87050,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/87050",
+        "updated": "2026-04-27 10:59:00",
+        "dictionaryExplanation": "det å velje; det å ta noko heller enn noko anna; høve til å velje",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-020",
+      "wordId": "substantiv-nn-1828",
+      "wordClass": "substantiv",
+      "level": 3,
+      "lemma": "ansvar",
+      "target": {
+        "before": "Vyrde har ",
+        "text": "ansvar",
+        "after": " for hagen."
+      },
+      "meaning": "Plikt til å ta vare på noko og svare for det.",
+      "reason": "Ansvar er namn på ei plikt.",
+      "tip": "Kva er det Vyrde har?",
+      "pairId": null,
+      "source": {
+        "articleId": 1828,
+        "definitionId": 4,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/1828",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "(moralsk) skyldnad til å stå til svars, til rette for noko",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-021",
+      "wordId": "substantiv-nn-17190",
+      "wordClass": "substantiv",
+      "level": 3,
+      "lemma": "fellesskap",
+      "target": {
+        "before": "Laget har eit godt ",
+        "text": "fellesskap",
+        "after": "."
+      },
+      "meaning": "Det å høyre saman og dele noko med andre.",
+      "reason": "Fellesskap er namn på noko menneske har saman.",
+      "tip": "Kva er det laget har saman?",
+      "pairId": null,
+      "source": {
+        "articleId": 17190,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/17190",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "det å ha noko sams; noko som er sams; sameksistens; samband; samkjensle; samarbeid; felles beste; samfunn",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-022",
+      "wordId": "substantiv-nn-60761",
+      "wordClass": "substantiv",
+      "level": 3,
+      "lemma": "regel",
+      "target": {
+        "before": "Vi følgjer ein enkel ",
+        "text": "regel",
+        "after": "."
+      },
+      "meaning": "Ei fast rettleiing for kva ein skal gjere.",
+      "reason": "Regel er namn på ei rettleiing vi følgjer.",
+      "tip": "Kva er det vi følgjer?",
+      "pairId": null,
+      "source": {
+        "articleId": 60761,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/60761",
+        "updated": "2024-10-18 09:56:40",
+        "dictionaryExplanation": "norm som ein rettar seg etter; rettesnor, forskrift",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-023",
+      "wordId": "substantiv-nn-72971",
+      "wordClass": "substantiv",
+      "level": 3,
+      "lemma": "spørsmål",
+      "target": {
+        "before": "Eleven stiller eit ",
+        "text": "spørsmål",
+        "after": "."
+      },
+      "meaning": "Noko ein spør om og ønskjer svar på.",
+      "reason": "Spørsmål er namn på noko vi stiller.",
+      "tip": "Kva ønskjer eleven svar på?",
+      "pairId": null,
+      "source": {
+        "articleId": 72971,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/72971",
+        "updated": "2025-05-13 12:22:14",
+        "dictionaryExplanation": "spørjande setning el ytring",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-024",
+      "wordId": "substantiv-nn-12519",
+      "wordClass": "substantiv",
+      "level": 3,
+      "lemma": "draum",
+      "target": {
+        "before": "Eg hadde ein morosam ",
+        "text": "draum",
+        "after": "."
+      },
+      "meaning": "Bilete og hendingar du opplever medan du søv.",
+      "reason": "Draum er namn på ei oppleving i søvne.",
+      "tip": "Kva slags oppleving blir det fortalt om?",
+      "pairId": null,
+      "source": {
+        "articleId": 12519,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/12519",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "(kjede av) sansebilete i medvitet når ein søv",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-025",
+      "wordId": "substantiv-nn-11330",
+      "wordClass": "substantiv",
+      "level": 4,
+      "lemma": "demokrati",
+      "target": {
+        "before": "I eit ",
+        "text": "demokrati",
+        "after": " kan folket vere med og bestemme."
+      },
+      "meaning": "Ei styreform der folket har innverknad.",
+      "reason": "Demokrati er namn på ei styreform.",
+      "tip": "Kva styreform blir nemnd?",
+      "pairId": null,
+      "source": {
+        "articleId": 11330,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/11330",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "styreform der fleirtalet av folket har avgjerdsmakta, anten gjennom direkte avstemmingar eller gjennom val av politiske representantar; folkestyre",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-026",
+      "wordId": "substantiv-nn-79067",
+      "wordClass": "substantiv",
+      "level": 4,
+      "lemma": "tillit",
+      "target": {
+        "before": "Venene har ",
+        "text": "tillit",
+        "after": " til kvarandre."
+      },
+      "meaning": "Tru på at nokon er til å stole på.",
+      "reason": "Tillit er namn på noko vi kan ha til andre.",
+      "tip": "Kva er det venene har til kvarandre?",
+      "pairId": null,
+      "source": {
+        "articleId": 79067,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/79067",
+        "updated": "2024-12-18 08:59:30",
+        "dictionaryExplanation": "sterk kjensle av eller tru på at nokon eller noko er til å lite på; tiltru",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-027",
+      "wordId": "substantiv-nn-22083",
+      "wordClass": "substantiv",
+      "level": 4,
+      "lemma": "fridom",
+      "target": {
+        "before": "Eleven har ",
+        "text": "fridom",
+        "after": " til å velje."
+      },
+      "meaning": "Det å kunne handle eller velje utan unødig tvang.",
+      "reason": "Fridom er namn på eit abstrakt omgrep.",
+      "tip": "Kva er det eleven har?",
+      "pairId": null,
+      "source": {
+        "articleId": 22083,
+        "definitionId": 8,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/22083",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "det å ha rett og høve til å gjere, seie og tenkje som ein ynskjer, utan band, restriksjonar eller tvang",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-028",
+      "wordId": "substantiv-nn-42886",
+      "wordClass": "substantiv",
+      "level": 4,
+      "lemma": "kunnskap",
+      "target": {
+        "before": "Lesing kan gje ny ",
+        "text": "kunnskap",
+        "after": "."
+      },
+      "meaning": "Det ein veit eller har lært om noko.",
+      "reason": "Kunnskap er namn på det vi veit og har lært.",
+      "tip": "Kva kan lesinga gje oss?",
+      "pairId": null,
+      "source": {
+        "articleId": 42886,
+        "definitionId": 6,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/42886",
+        "updated": "2024-12-20 12:15:45",
+        "dictionaryExplanation": "lærdom; innsikt",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-029",
+      "wordId": "substantiv-nn-50785",
+      "wordClass": "substantiv",
+      "level": 4,
+      "lemma": "motivasjon",
+      "target": {
+        "before": "Ros gjev Vyrde ny ",
+        "text": "motivasjon",
+        "after": "."
+      },
+      "meaning": "Lyst og drivkraft til å gjere noko.",
+      "reason": "Motivasjon er namn på ei indre drivkraft.",
+      "tip": "Kva er det rosen gjev Vyrde?",
+      "pairId": null,
+      "source": {
+        "articleId": 50785,
+        "definitionId": 2,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/50785",
+        "updated": "2024-01-09 09:49:59",
+        "dictionaryExplanation": "det å vere motivert for noko; lyst til å handle på ein viss måte",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-030",
+      "wordId": "substantiv-nn-57159",
+      "wordClass": "substantiv",
+      "level": 4,
+      "lemma": "perspektiv",
+      "target": {
+        "before": "Vi ser saka frå eit anna ",
+        "text": "perspektiv",
+        "after": "."
+      },
+      "meaning": "Ein måte å sjå eller forstå noko på.",
+      "reason": "Perspektiv er namn på ein synsmåte.",
+      "tip": "Kva er det som gjev oss ein annan synsmåte?",
+      "pairId": null,
+      "source": {
+        "articleId": 57159,
+        "definitionId": 5,
+        "wordClass": "NOUN",
+        "url": "https://ordbokene.no/nn/57159",
+        "updated": "2024-10-30 14:31:09",
+        "dictionaryExplanation": "i overf: (vidare) samanheng; utsyn over eit tidsrom; synsmåte",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-031",
+      "wordId": "verb-nn-31276",
+      "wordClass": "verb",
+      "level": 1,
+      "lemma": "hoppe",
+      "target": {
+        "before": "Vyrde vil ",
+        "text": "hoppe",
+        "after": " over pytten."
+      },
+      "meaning": "Å løfte seg frå bakken med eit sprang.",
+      "reason": "Hoppe fortel kva Vyrde vil gjere.",
+      "tip": "Kva vil Vyrde gjere?",
+      "pairId": null,
+      "source": {
+        "articleId": 31276,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/31276",
+        "updated": "2023-10-24 15:24:05",
+        "dictionaryExplanation": "ta sats og sprette i vêret med hjelp av føtene; bykse, jumpe",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-032",
+      "wordId": "verb-nn-45348",
+      "wordClass": "verb",
+      "level": 1,
+      "lemma": "lese",
+      "target": {
+        "before": "Vi skal ",
+        "text": "lese",
+        "after": " ei bok."
+      },
+      "meaning": "Å sjå på skrivne teikn og forstå innhaldet.",
+      "reason": "Lese fortel kva vi skal gjere.",
+      "tip": "Kva skal vi gjere med boka?",
+      "pairId": null,
+      "source": {
+        "articleId": 45348,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/45348",
+        "updated": "2023-11-28 13:32:25",
+        "dictionaryExplanation": "følgje (språk)teikn med auga og gje dei att som språk; forstå skriftteikn",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-033",
+      "wordId": "verb-nn-71977",
+      "wordClass": "verb",
+      "level": 1,
+      "lemma": "sove",
+      "target": {
+        "before": "Katten vil ",
+        "text": "sove",
+        "after": " i stolen."
+      },
+      "meaning": "Å kvile i søvn.",
+      "reason": "Sove fortel om ein tilstand. Verb treng ikkje vere rørsler.",
+      "tip": "Kva tilstand vil katten vere i?",
+      "pairId": null,
+      "source": {
+        "articleId": 71977,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/71977",
+        "updated": "2026-05-04 08:01:01",
+        "dictionaryExplanation": "liggje i ein medvitslaus kviletilstand; liggje i søvn; mots vake",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-034",
+      "wordId": "verb-nn-15798",
+      "wordClass": "verb",
+      "level": 1,
+      "lemma": "ete",
+      "target": {
+        "before": "Vyrde vil ",
+        "text": "ete",
+        "after": " eit eple."
+      },
+      "meaning": "Å ta til seg mat.",
+      "reason": "Ete fortel kva Vyrde vil gjere.",
+      "tip": "Kva vil Vyrde gjere med eplet?",
+      "pairId": null,
+      "source": {
+        "articleId": 15798,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/15798",
+        "updated": "2025-12-01 14:04:49",
+        "dictionaryExplanation": "innta næring i form av mat, føde el måltid; setje til livs, fortære",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-035",
+      "wordId": "verb-nn-77904",
+      "wordClass": "verb",
+      "level": 1,
+      "lemma": "teikne",
+      "target": {
+        "before": "Eg vil ",
+        "text": "teikne",
+        "after": " eit tre."
+      },
+      "meaning": "Å lage bilete med strekar.",
+      "reason": "Teikne fortel kva eg vil gjere.",
+      "tip": "Kva vil eg gjere?",
+      "pairId": null,
+      "source": {
+        "articleId": 77904,
+        "definitionId": 11,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/77904",
+        "updated": "2025-12-17 14:09:31",
+        "dictionaryExplanation": "lage bilete av eller gje att ved hjelp av strekar",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-036",
+      "wordId": "verb-nn-72232",
+      "wordClass": "verb",
+      "level": 1,
+      "lemma": "spele",
+      "target": {
+        "before": "Vi skal ",
+        "text": "spele",
+        "after": " eit spel."
+      },
+      "meaning": "Å vere med i ein leik eller eit spel.",
+      "reason": "Spele fortel kva vi skal gjere.",
+      "tip": "Kva skal vi gjere saman?",
+      "pairId": null,
+      "source": {
+        "articleId": 72232,
+        "definitionId": 8,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/72232",
+        "updated": "2026-05-04 08:09:49",
+        "dictionaryExplanation": "vere med i spel med kort, terningar eller liknande",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-037",
+      "wordId": "verb-nn-45094",
+      "wordClass": "verb",
+      "level": 1,
+      "lemma": "leike",
+      "target": {
+        "before": "Barna vil ",
+        "text": "leike",
+        "after": " ute."
+      },
+      "meaning": "Å halde på med leik.",
+      "reason": "Leike fortel kva barna vil gjere.",
+      "tip": "Kva vil barna gjere?",
+      "pairId": null,
+      "source": {
+        "articleId": 45094,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/45094",
+        "updated": "2026-04-23 07:09:05",
+        "dictionaryExplanation": "halde på med leik eller leikar; more seg",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-038",
+      "wordId": "verb-nn-12658",
+      "wordClass": "verb",
+      "level": 1,
+      "lemma": "drikke",
+      "target": {
+        "before": "Vyrde vil ",
+        "text": "drikke",
+        "after": " vatn."
+      },
+      "meaning": "Å ta til seg væske gjennom munnen.",
+      "reason": "Drikke fortel kva Vyrde vil gjere.",
+      "tip": "Kva vil Vyrde gjere med vatnet?",
+      "pairId": null,
+      "source": {
+        "articleId": 12658,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/12658",
+        "updated": "2026-04-13 11:31:53",
+        "dictionaryExplanation": "gje væske til kroppen gjennom munnen",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-039",
+      "wordId": "verb-nn-72763",
+      "wordClass": "verb",
+      "level": 2,
+      "lemma": "springe",
+      "target": {
+        "before": "I går ",
+        "text": "sprang",
+        "after": " Vyrde heim."
+      },
+      "meaning": "Å flytte seg med raske steg eller sprang.",
+      "reason": "Sprang er fortidsforma av verbet springe.",
+      "tip": "Kva gjorde Vyrde i går?",
+      "pairId": null,
+      "source": {
+        "articleId": 72763,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/72763",
+        "updated": "2026-05-04 08:49:45",
+        "dictionaryExplanation": "fare raskt fram på føtene; løpe/laupe, renne",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-040",
+      "wordId": "verb-nn-68793",
+      "wordClass": "verb",
+      "level": 2,
+      "lemma": "skrive",
+      "target": {
+        "before": "No ",
+        "text": "skriv",
+        "after": " eleven eit brev."
+      },
+      "meaning": "Å forme bokstavar, ord og tekst.",
+      "reason": "Skriv er notidsforma av verbet skrive.",
+      "tip": "Kva gjer eleven?",
+      "pairId": null,
+      "source": {
+        "articleId": 68793,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/68793",
+        "updated": "2024-11-06 08:12:28",
+        "dictionaryExplanation": "lage skrift på papir eller skjerm ved hjelp av blyant, penn, tastatur e_l",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-041",
+      "wordId": "verb-nn-76458",
+      "wordClass": "verb",
+      "level": 2,
+      "lemma": "syngje",
+      "target": {
+        "before": "I går ",
+        "text": "song",
+        "after": " vi saman."
+      },
+      "meaning": "Å lage melodi med røysta.",
+      "reason": "Song er fortidsforma av verbet syngje her.",
+      "tip": "Kva gjorde vi i går?",
+      "pairId": null,
+      "source": {
+        "articleId": 76458,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/76458",
+        "updated": "2026-04-22 15:17:17",
+        "dictionaryExplanation": "lage tonar med røysta, særleg slik at dei blir til ein melodi med ord",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-042",
+      "wordId": "verb-nn-18013",
+      "wordClass": "verb",
+      "level": 2,
+      "lemma": "finne",
+      "target": {
+        "before": "Vyrde ",
+        "text": "fann",
+        "after": " ein stein."
+      },
+      "meaning": "Å oppdage noko eller få auge på det.",
+      "reason": "Fann er fortidsforma av verbet finne.",
+      "tip": "Kva gjorde Vyrde?",
+      "pairId": null,
+      "source": {
+        "articleId": 18013,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/18013",
+        "updated": "2026-04-14 06:56:56",
+        "dictionaryExplanation": "kome over, treffe på, oppdage",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-043",
+      "wordId": "verb-nn-28084",
+      "wordClass": "verb",
+      "level": 2,
+      "lemma": "ha",
+      "target": {
+        "before": "Vyrde ",
+        "text": "har",
+        "after": " ein sekk."
+      },
+      "meaning": "Å eige eller ha noko til rådvelde.",
+      "reason": "Har er ei form av verbet ha.",
+      "tip": "Kva ord seier noko om at sekken høyrer til Vyrde?",
+      "pairId": null,
+      "source": {
+        "articleId": 28084,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/28084",
+        "updated": "2024-01-08 06:54:09",
+        "dictionaryExplanation": "eige, rå over, disponere",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-044",
+      "wordId": "verb-nn-40202",
+      "wordClass": "verb",
+      "level": 2,
+      "lemma": "kome",
+      "target": {
+        "before": "I går ",
+        "text": "kom",
+        "after": " gjestene tidleg."
+      },
+      "meaning": "Å nå fram til ein stad.",
+      "reason": "Kom er fortidsforma av verbet kome.",
+      "tip": "Kva gjorde gjestene?",
+      "pairId": null,
+      "source": {
+        "articleId": 40202,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/40202",
+        "updated": "2023-09-04 11:56:03",
+        "dictionaryExplanation": "nærme seg; vere i rørsle mot",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-045",
+      "wordId": "verb-nn-5353",
+      "wordClass": "verb",
+      "level": 2,
+      "lemma": "bere",
+      "target": {
+        "before": "Vyrde ",
+        "text": "bar",
+        "after": " korga heim."
+      },
+      "meaning": "Å halde noko oppe og ta det med seg.",
+      "reason": "Bar er fortidsforma av verbet bere.",
+      "tip": "Kva gjorde Vyrde med korga?",
+      "pairId": null,
+      "source": {
+        "articleId": 5353,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/5353",
+        "updated": "2024-11-05 09:20:55",
+        "dictionaryExplanation": "halde (noko) oppe (og føre det med seg)",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-046",
+      "wordId": "verb-nn-9664",
+      "wordClass": "verb",
+      "level": 2,
+      "lemma": "byggje",
+      "target": {
+        "before": "Dei ",
+        "text": "bygde",
+        "after": " eit hus."
+      },
+      "meaning": "Å setje saman noko av materiale.",
+      "reason": "Bygde er fortidsforma av verbet byggje.",
+      "tip": "Kva gjorde dei med materiala?",
+      "pairId": null,
+      "source": {
+        "articleId": 9664,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/9664",
+        "updated": "2026-04-13 10:41:10",
+        "dictionaryExplanation": "(la) føre opp; (la) tømre el mure; lage til",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-047",
+      "wordId": "verb-nn-89604",
+      "wordClass": "verb",
+      "level": 3,
+      "lemma": "vite",
+      "target": {
+        "before": "Vyrde ",
+        "text": "veit",
+        "after": " kvar kartet er."
+      },
+      "meaning": "Å ha kjennskap til noko.",
+      "reason": "Veit er ei form av verbet vite. Verb kan handle om det vi veit.",
+      "tip": "Kva ord seier noko om kva Vyrde veit?",
+      "pairId": null,
+      "source": {
+        "articleId": 89604,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/89604",
+        "updated": "2025-01-06 16:49:32",
+        "dictionaryExplanation": "ha kjennskap til; ha greie på",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-048",
+      "wordId": "verb-nn-89137",
+      "wordClass": "verb",
+      "level": 3,
+      "lemma": "vere",
+      "target": {
+        "before": "Boka ",
+        "text": "er",
+        "after": " på bordet."
+      },
+      "meaning": "Å finnast eller vere til stades.",
+      "reason": "Er er ei form av verbet vere.",
+      "tip": "Kva ord knyter boka til staden der ho er?",
+      "pairId": null,
+      "source": {
+        "articleId": 89137,
+        "definitionId": 6,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/89137",
+        "updated": "2024-12-20 08:57:17",
+        "dictionaryExplanation": "halde til på ein stad; opphalde seg; kome",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-049",
+      "wordId": "verb-nn-20953",
+      "wordClass": "verb",
+      "level": 3,
+      "lemma": "forstå",
+      "target": {
+        "before": "No ",
+        "text": "forstår",
+        "after": " eg oppgåva."
+      },
+      "meaning": "Å skjøne kva noko tyder eller korleis det heng saman.",
+      "reason": "Forstår fortel om noko som skjer i tankane.",
+      "tip": "Kva skjer med forståinga mi?",
+      "pairId": null,
+      "source": {
+        "articleId": 20953,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/20953",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "skjøne/skjønne, oppfatte, fatte; kunne",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-050",
+      "wordId": "verb-nn-45604",
+      "wordClass": "verb",
+      "level": 3,
+      "lemma": "like",
+      "target": {
+        "before": "Vyrde ",
+        "text": "likar",
+        "after": " å lese."
+      },
+      "meaning": "Å vere glad i eller setje pris på noko.",
+      "reason": "Likar er ei form av verbet like.",
+      "tip": "Kva ord seier noko om kva Vyrde er glad i?",
+      "pairId": null,
+      "source": {
+        "articleId": 45604,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/45604",
+        "updated": "2026-05-04 08:11:07",
+        "dictionaryExplanation": "synast godt om; vere nøgd med",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-051",
+      "wordId": "verb-nn-78310",
+      "wordClass": "verb",
+      "level": 3,
+      "lemma": "tenkje",
+      "target": {
+        "before": "Eg ",
+        "text": "tenkjer",
+        "after": " på løysinga."
+      },
+      "meaning": "Å bruke tankane på noko.",
+      "reason": "Tenkjer fortel kva som går føre seg i tankane.",
+      "tip": "Kva gjer eg med tankane mine?",
+      "pairId": null,
+      "source": {
+        "articleId": 78310,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/78310",
+        "updated": "2026-05-06 10:45:06",
+        "dictionaryExplanation": "binde saman førestillingar til tankar, drive tankeverksemd; resonnere",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-052",
+      "wordId": "verb-nn-32752",
+      "wordClass": "verb",
+      "level": 3,
+      "lemma": "høyre",
+      "target": {
+        "before": "Vyrde ",
+        "text": "høyrer",
+        "after": " fuglane."
+      },
+      "meaning": "Å oppfatte lyd med øyra.",
+      "reason": "Høyrer er ei form av verbet høyre.",
+      "tip": "Kva gjer Vyrde med høyrselen?",
+      "pairId": null,
+      "source": {
+        "articleId": 32752,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/32752",
+        "updated": "2026-04-14 11:54:29",
+        "dictionaryExplanation": "oppfatte lyd; sanse med høyrsla",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-053",
+      "wordId": "verb-nn-88155",
+      "wordClass": "verb",
+      "level": 3,
+      "lemma": "vege",
+      "target": {
+        "before": "Sekken ",
+        "text": "veg",
+        "after": " tre kilo."
+      },
+      "meaning": "Å ha ei viss vekt.",
+      "reason": "Veg er ei form av verbet vege. Verb kan fortelje om ein eigenskap ved ein tilstand.",
+      "tip": "Kva ord fortel kor tung sekken er?",
+      "pairId": null,
+      "source": {
+        "articleId": 88155,
+        "definitionId": 6,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/88155",
+        "updated": "2026-07-16 11:59:47",
+        "dictionaryExplanation": "ha ei viss vekt; tyngd/tyngde",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-054",
+      "wordId": "verb-nn-88378",
+      "wordClass": "verb",
+      "level": 3,
+      "lemma": "vekse",
+      "target": {
+        "before": "Treet ",
+        "text": "veks",
+        "after": " litt kvart år."
+      },
+      "meaning": "Å bli større.",
+      "reason": "Veks er notidsforma av verbet vekse.",
+      "tip": "Kva skjer med treet?",
+      "pairId": null,
+      "source": {
+        "articleId": 88378,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/88378",
+        "updated": "2026-07-16 11:59:47",
+        "dictionaryExplanation": "om menneske og dyr: auke i lengd, høgd, omfang o_l; bli større",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-055",
+      "wordId": "verb-nn-63575",
+      "wordClass": "verb",
+      "level": 4,
+      "lemma": "samanlikne",
+      "target": {
+        "before": "Vi vil ",
+        "text": "samanlikne",
+        "after": " dei to teikningane."
+      },
+      "meaning": "Å undersøkje kva som er likt og ulikt.",
+      "reason": "Samanlikne fortel kva vi vil gjere.",
+      "tip": "Kva vil vi gjere med teikningane?",
+      "pairId": null,
+      "source": {
+        "articleId": 63575,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/63575",
+        "updated": "2024-07-29 09:05:23",
+        "dictionaryExplanation": "stille saman for å finne innbyrdes likskap og ulikskap; jamføre",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-056",
+      "wordId": "verb-nn-1370",
+      "wordClass": "verb",
+      "level": 4,
+      "lemma": "analysere",
+      "target": {
+        "before": "Elevane skal ",
+        "text": "analysere",
+        "after": " teksten."
+      },
+      "meaning": "Å undersøkje noko nøye og sjå på delane.",
+      "reason": "Analysere er eit verb i infinitiv.",
+      "tip": "Kva skal elevane gjere med teksten?",
+      "pairId": null,
+      "source": {
+        "articleId": 1370,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/1370",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "gjere ein analyse (av)",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-057",
+      "wordId": "verb-nn-84838",
+      "wordClass": "verb",
+      "level": 4,
+      "lemma": "undersøkje",
+      "target": {
+        "before": "Vi skal ",
+        "text": "undersøkje",
+        "after": " vatnet."
+      },
+      "meaning": "Å sjå nøye etter og prøve å finne ut noko.",
+      "reason": "Undersøkje fortel kva vi skal gjere.",
+      "tip": "Kva skal vi gjere for å finne ut meir?",
+      "pairId": null,
+      "source": {
+        "articleId": 84838,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/84838",
+        "updated": "2024-12-18 08:18:52",
+        "dictionaryExplanation": "finne ut (om, av); granske, saumfare",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-058",
+      "wordId": "verb-nn-20619",
+      "wordClass": "verb",
+      "level": 4,
+      "lemma": "formulere",
+      "target": {
+        "before": "Vi skal ",
+        "text": "formulere",
+        "after": " eit svar."
+      },
+      "meaning": "Å gje uttrykk for noko med ord.",
+      "reason": "Formulere fortel kva vi skal gjere med svaret.",
+      "tip": "Kva skal vi gjere for å uttrykkje svaret?",
+      "pairId": null,
+      "source": {
+        "articleId": 20619,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/20619",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "gje språkleg form; uttrykkje/uttrykke, målbere",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-059",
+      "wordId": "verb-nn-60729",
+      "wordClass": "verb",
+      "level": 4,
+      "lemma": "reflektere",
+      "target": {
+        "before": "Vi skal ",
+        "text": "reflektere",
+        "after": " over det vi lærte."
+      },
+      "meaning": "Å tenkje nøye gjennom noko.",
+      "reason": "Reflektere fortel kva vi skal gjere med det vi lærte.",
+      "tip": "Kva skal vi gjere med tankane våre?",
+      "pairId": null,
+      "source": {
+        "articleId": 60729,
+        "definitionId": 5,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/60729",
+        "updated": "2026-04-29 11:03:24",
+        "dictionaryExplanation": "tenkje over; grunde; jf reflektert",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-060",
+      "wordId": "verb-nn-2367",
+      "wordClass": "verb",
+      "level": 4,
+      "lemma": "argumentere",
+      "target": {
+        "before": "Elevane skal ",
+        "text": "argumentere",
+        "after": " for forslaget."
+      },
+      "meaning": "Å gje grunnar som støttar eit syn.",
+      "reason": "Argumentere fortel kva elevane skal gjere.",
+      "tip": "Kva skal elevane gjere for å støtte forslaget?",
+      "pairId": null,
+      "source": {
+        "articleId": 2367,
+        "definitionId": 2,
+        "wordClass": "VERB",
+        "url": "https://ordbokene.no/nn/2367",
+        "updated": "2026-04-13 08:04:16",
+        "dictionaryExplanation": "kome med argument",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-061",
+      "wordId": "adjektiv-nn-60456",
+      "wordClass": "adjektiv",
+      "level": 1,
+      "lemma": "raud",
+      "target": {
+        "before": "Vyrde finn ein ",
+        "text": "raud",
+        "after": " stein."
+      },
+      "meaning": "Som har farge som eit raudt bær.",
+      "reason": "Raud skildrar steinen.",
+      "tip": "Seier ordet noko om steinen eller om finninga?",
+      "pairId": null,
+      "source": {
+        "articleId": 60456,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/60456",
+        "updated": "2024-06-18 10:53:49",
+        "dictionaryExplanation": "som har ein farge som blod (og som ligg mellom oransje og fiolett i fargespekteret)",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-062",
+      "wordId": "adjektiv-nn-71127",
+      "wordClass": "adjektiv",
+      "level": 1,
+      "lemma": "snill",
+      "target": {
+        "before": "Ein ",
+        "text": "snill",
+        "after": " nabo hjelper oss."
+      },
+      "meaning": "Som er god og venleg mot andre.",
+      "reason": "Snill skildrar naboen.",
+      "tip": "Kven er det ordet skildrar?",
+      "pairId": null,
+      "source": {
+        "articleId": 71127,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/71127",
+        "updated": "2026-08-03 13:09:38",
+        "dictionaryExplanation": "god å omgåast med; lydig/lydug",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-063",
+      "wordId": "adjektiv-nn-45893",
+      "wordClass": "adjektiv",
+      "level": 1,
+      "lemma": "liten",
+      "target": {
+        "before": "Ein ",
+        "text": "liten",
+        "after": " fugl sit i treet."
+      },
+      "meaning": "Som har lite omfang eller liten storleik.",
+      "reason": "Liten skildrar fuglen.",
+      "tip": "Kva seier ordet noko om?",
+      "pairId": null,
+      "source": {
+        "articleId": 45893,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/45893",
+        "updated": "2023-04-14 08:23:33",
+        "dictionaryExplanation": "som ikkje er stor; med avgrensa storleik; under middels høg; jf litle, mindre, minst, små og vesle",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-064",
+      "wordId": "adjektiv-nn-25513",
+      "wordClass": "adjektiv",
+      "level": 1,
+      "lemma": "glad",
+      "target": {
+        "before": "Vyrde er ",
+        "text": "glad",
+        "after": " i dag."
+      },
+      "meaning": "Som kjenner glede.",
+      "reason": "Glad skildrar korleis Vyrde er.",
+      "tip": "Seier ordet noko om Vyrde?",
+      "pairId": null,
+      "source": {
+        "articleId": 25513,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/25513",
+        "updated": "2026-06-25 13:30:58",
+        "dictionaryExplanation": "fylt av glede; i godlag, munter, tilfreds",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-065",
+      "wordId": "adjektiv-nn-36355",
+      "wordClass": "adjektiv",
+      "level": 1,
+      "lemma": "kald",
+      "target": {
+        "before": "Ein ",
+        "text": "kald",
+        "after": " vind bles."
+      },
+      "meaning": "Som har låg temperatur.",
+      "reason": "Kald skildrar vinden.",
+      "tip": "Kva er det som har låg temperatur?",
+      "pairId": null,
+      "source": {
+        "articleId": 36355,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/36355",
+        "updated": "2024-01-25 11:41:21",
+        "dictionaryExplanation": "med låg temperatur; kjølig, sval; avkjøle",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-066",
+      "wordId": "adjektiv-nn-87514",
+      "wordClass": "adjektiv",
+      "level": 1,
+      "lemma": "varm",
+      "target": {
+        "before": "Vi drikk ",
+        "text": "varm",
+        "after": " kakao."
+      },
+      "meaning": "Som har høg temperatur.",
+      "reason": "Varm skildrar kakaoen.",
+      "tip": "Kva er det som har høg temperatur?",
+      "pairId": null,
+      "source": {
+        "articleId": 87514,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/87514",
+        "updated": "2026-09-03 10:32:56",
+        "dictionaryExplanation": "som har høg temperatur; som gjev varme; heit",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-067",
+      "wordId": "adjektiv-nn-62130",
+      "wordClass": "adjektiv",
+      "level": 1,
+      "lemma": "roleg",
+      "target": {
+        "before": "Ein ",
+        "text": "roleg",
+        "after": " hund ventar."
+      },
+      "meaning": "Som er stillferdig og ikkje uroleg.",
+      "reason": "Roleg skildrar hunden her.",
+      "tip": "Skildrar ordet hunden eller ei handling?",
+      "pairId": "roleg",
+      "source": {
+        "articleId": 62130,
+        "definitionId": 6,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/62130",
+        "updated": "2026-07-02 12:52:55",
+        "dictionaryExplanation": "utan hast; nøktern, tenksam, avslappa",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-068",
+      "wordId": "adjektiv-nn-73796",
+      "wordClass": "adjektiv",
+      "level": 1,
+      "lemma": "stille",
+      "target": {
+        "before": "Dei ",
+        "text": "stille",
+        "after": " barna ventar på tur."
+      },
+      "meaning": "Som lagar lite lyd.",
+      "reason": "Stille skildrar barna her.",
+      "tip": "Kven er det som lagar lite lyd?",
+      "pairId": "stille",
+      "source": {
+        "articleId": 73796,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/73796",
+        "updated": "2025-11-11 11:40:04",
+        "dictionaryExplanation": "still",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-069",
+      "wordId": "adjektiv-nn-27397",
+      "wordClass": "adjektiv",
+      "level": 2,
+      "lemma": "grøn",
+      "target": {
+        "before": "Dei ",
+        "text": "grøne",
+        "after": " blada rører seg."
+      },
+      "meaning": "Som har farge som gras og lauv.",
+      "reason": "Grøne er ei bøygd form av adjektivet grøn og skildrar blada.",
+      "tip": "Kva er det som har denne fargen?",
+      "pairId": null,
+      "source": {
+        "articleId": 27397,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/27397",
+        "updated": "2022-04-04 12:11:27",
+        "dictionaryExplanation": "som har ein farge som friskt gras (og som ligg mellom gult og blått i fargespekteret)",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-070",
+      "wordId": "adjektiv-nn-74040",
+      "wordClass": "adjektiv",
+      "level": 2,
+      "lemma": "stor",
+      "target": {
+        "before": "Det ",
+        "text": "store",
+        "after": " huset ligg på høgda."
+      },
+      "meaning": "Som har stort omfang.",
+      "reason": "Store er ei bøygd form av adjektivet stor og skildrar huset.",
+      "tip": "Kva er det som har stor storleik?",
+      "pairId": null,
+      "source": {
+        "articleId": 74040,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/74040",
+        "updated": "2025-10-08 10:08:29",
+        "dictionaryExplanation": "som tek mykje plass el rom; diger, dryg, svær; mots liten; jf større, størst",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-071",
+      "wordId": "adjektiv-nn-24036",
+      "wordClass": "adjektiv",
+      "level": 2,
+      "lemma": "gammal",
+      "target": {
+        "before": "Dei ",
+        "text": "gamle",
+        "after": " trea står ved bekken."
+      },
+      "meaning": "Som har levd eller funnest lenge.",
+      "reason": "Gamle er ei bøygd form av adjektivet gammal og skildrar trea.",
+      "tip": "Kva er det som har stått der lenge?",
+      "pairId": null,
+      "source": {
+        "articleId": 24036,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/24036",
+        "updated": "2023-07-25 10:55:18",
+        "dictionaryExplanation": "som har levd lenge; tilårskomen/tilårskommen; merkt av elde",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-072",
+      "wordId": "adjektiv-nn-73649",
+      "wordClass": "adjektiv",
+      "level": 2,
+      "lemma": "sterk",
+      "target": {
+        "before": "Dei ",
+        "text": "sterke",
+        "after": " røtene held treet fast."
+      },
+      "meaning": "Som toler mykje kraft eller påkjenning.",
+      "reason": "Sterke skildrar røtene.",
+      "tip": "Kva er det som toler mykje?",
+      "pairId": null,
+      "source": {
+        "articleId": 73649,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/73649",
+        "updated": "2026-06-22 10:46:03",
+        "dictionaryExplanation": "som toler mykje, varer lenge; solid, varig",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-073",
+      "wordId": "adjektiv-nn-26058",
+      "wordClass": "adjektiv",
+      "level": 2,
+      "lemma": "god",
+      "target": {
+        "before": "Det var eit ",
+        "text": "godt",
+        "after": " svar."
+      },
+      "meaning": "Som har gode eigenskapar og høver godt til føremålet.",
+      "reason": "Godt skildrar svaret her.",
+      "tip": "Skildrar ordet svaret eller måten nokon svarar på?",
+      "pairId": "godt",
+      "source": {
+        "articleId": 26058,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/26058",
+        "updated": "2025-11-05 12:41:25",
+        "dictionaryExplanation": "av høg kvalitet; bra, fin, framifrå; tilfredsstillande, gagnleg, tenleg",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-074",
+      "wordId": "adjektiv-nn-60398",
+      "wordClass": "adjektiv",
+      "level": 2,
+      "lemma": "rask",
+      "target": {
+        "before": "Eit ",
+        "text": "raskt",
+        "after": " dyr sprang forbi."
+      },
+      "meaning": "Som kan flytte seg fort.",
+      "reason": "Raskt skildrar dyret her.",
+      "tip": "Skildrar ordet dyret eller springinga?",
+      "pairId": "raskt",
+      "source": {
+        "articleId": 60398,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/60398",
+        "updated": "2024-06-18 10:53:39",
+        "dictionaryExplanation": "snøgg, kvikk",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-075",
+      "wordId": "adjektiv-nn-32480",
+      "wordClass": "adjektiv",
+      "level": 2,
+      "lemma": "høg",
+      "target": {
+        "before": "Eit ",
+        "text": "høgt",
+        "after": " tre veks her."
+      },
+      "meaning": "Som strekkjer seg langt opp.",
+      "reason": "Høgt skildrar treet her.",
+      "tip": "Skildrar ordet treet eller måten noko skjer på?",
+      "pairId": "høgt",
+      "source": {
+        "articleId": 32480,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/32480",
+        "updated": "2024-10-10 13:42:15",
+        "dictionaryExplanation": "som strekkjer seg langt oppover (i vertikal retning); som har stor høgd/høgde",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-076",
+      "wordId": "adjektiv-nn-29080",
+      "wordClass": "adjektiv",
+      "level": 2,
+      "lemma": "hard",
+      "target": {
+        "before": "Eit ",
+        "text": "hardt",
+        "after": " skal vernar frøet."
+      },
+      "meaning": "Som er fast og vanskeleg å trykkje saman.",
+      "reason": "Hardt skildrar skalet her.",
+      "tip": "Kva er det som er fast og motstandsdyktig?",
+      "pairId": "hardt",
+      "source": {
+        "articleId": 29080,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/29080",
+        "updated": "2026-06-25 12:54:43",
+        "dictionaryExplanation": "om stoff eller lekam: som ikkje så lett gjev etter for trykk; fast, tett, stiv, uelastisk; til skilnad frå blaut og mjuk",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-077",
+      "wordId": "adjektiv-nn-61495",
+      "wordClass": "adjektiv",
+      "level": 3,
+      "lemma": "rett",
+      "target": {
+        "before": "Svaret er ",
+        "text": "rett",
+        "after": "."
+      },
+      "meaning": "Som stemmer og ikkje er feil.",
+      "reason": "Rett skildrar svaret her.",
+      "tip": "Skildrar ordet svaret eller måten å svare på?",
+      "pairId": "rett",
+      "source": {
+        "articleId": 61495,
+        "definitionId": 4,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/61495",
+        "updated": "2026-06-22 10:56:58",
+        "dictionaryExplanation": "i samsvar med reglar eller lover; feilfri, korrekt; høveleg, passande",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-078",
+      "wordId": "adjektiv-nn-83011",
+      "wordClass": "adjektiv",
+      "level": 3,
+      "lemma": "tydeleg",
+      "target": {
+        "before": "Svaret er ",
+        "text": "tydeleg",
+        "after": "."
+      },
+      "meaning": "Som er lett å oppfatte og forstå.",
+      "reason": "Tydeleg skildrar svaret her.",
+      "tip": "Skildrar ordet svaret eller måten å snakke på?",
+      "pairId": "tydeleg",
+      "source": {
+        "articleId": 83011,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/83011",
+        "updated": "2026-06-26 06:45:47",
+        "dictionaryExplanation": "lett å tyde; grei; mots utydeleg",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-079",
+      "wordId": "adjektiv-nn-45403",
+      "wordClass": "adjektiv",
+      "level": 3,
+      "lemma": "lett",
+      "target": {
+        "before": "Ein ",
+        "text": "lett",
+        "after": " sekk heng på knaggen."
+      },
+      "meaning": "Som veg lite.",
+      "reason": "Lett skildrar sekken her.",
+      "tip": "Kva er det som har låg vekt?",
+      "pairId": "lett",
+      "source": {
+        "articleId": 45403,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/45403",
+        "updated": "2026-06-22 11:11:29",
+        "dictionaryExplanation": "som har etter måten lita vekt; mots tung",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-080",
+      "wordId": "adjektiv-nn-81743",
+      "wordClass": "adjektiv",
+      "level": 3,
+      "lemma": "trygg",
+      "target": {
+        "before": "Vegen er ",
+        "text": "trygg",
+        "after": "."
+      },
+      "meaning": "Som er utan fare.",
+      "reason": "Trygg skildrar vegen her.",
+      "tip": "Kva er det som er utan fare?",
+      "pairId": null,
+      "source": {
+        "articleId": 81743,
+        "definitionId": 5,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/81743",
+        "updated": "2024-12-18 08:11:52",
+        "dictionaryExplanation": "som ikkje er utsett for eller utgjer ei fare; sikker",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-081",
+      "wordId": "adjektiv-nn-54581",
+      "wordClass": "adjektiv",
+      "level": 3,
+      "lemma": "open",
+      "target": {
+        "before": "Døra er ",
+        "text": "open",
+        "after": "."
+      },
+      "meaning": "Som ikkje er lukka.",
+      "reason": "Open skildrar døra her.",
+      "tip": "Kva er det som ikkje er lukka?",
+      "pairId": null,
+      "source": {
+        "articleId": 54581,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/54581",
+        "updated": "2026-06-22 13:23:59",
+        "dictionaryExplanation": "ikkje lukka eller stengd",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-082",
+      "wordId": "adjektiv-nn-53585",
+      "wordClass": "adjektiv",
+      "level": 3,
+      "lemma": "nær",
+      "target": {
+        "before": "Vyrde er ein ",
+        "text": "nær",
+        "after": " ven."
+      },
+      "meaning": "Som ein har eit tett og godt forhold til.",
+      "reason": "Nær skildrar venskapen og venen.",
+      "tip": "Kva slags ven er Vyrde?",
+      "pairId": null,
+      "source": {
+        "articleId": 53585,
+        "definitionId": 5,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/53585",
+        "updated": "2026-06-22 08:33:48",
+        "dictionaryExplanation": "intim, fortruleg; inngåande",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-083",
+      "wordId": "adjektiv-nn-45475",
+      "wordClass": "adjektiv",
+      "level": 3,
+      "lemma": "levande",
+      "target": {
+        "before": "Ei ",
+        "text": "levande",
+        "after": " plante treng vatn."
+      },
+      "meaning": "Som har liv.",
+      "reason": "Levande skildrar planta.",
+      "tip": "Kva er det som har liv?",
+      "pairId": null,
+      "source": {
+        "articleId": 45475,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/45475",
+        "updated": "2023-11-28 13:32:27",
+        "dictionaryExplanation": "som lever; som er i live",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-084",
+      "wordId": "adjektiv-nn-22751",
+      "wordClass": "adjektiv",
+      "level": 3,
+      "lemma": "full",
+      "target": {
+        "before": "Sekken er ",
+        "text": "full",
+        "after": "."
+      },
+      "meaning": "Som ikkje har plass til meir.",
+      "reason": "Full skildrar sekken.",
+      "tip": "Kva er det som ikkje har meir plass?",
+      "pairId": null,
+      "source": {
+        "articleId": 22751,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/22751",
+        "updated": "2026-06-22 11:08:02",
+        "dictionaryExplanation": "som har maksimalt innhald; fylt (til randa)",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-085",
+      "wordId": "adjektiv-nn-40704",
+      "wordClass": "adjektiv",
+      "level": 4,
+      "lemma": "konkret",
+      "target": {
+        "before": "Læraren gjev eit ",
+        "text": "konkret",
+        "after": " døme."
+      },
+      "meaning": "Som er bestemt og lett å knyte til noko verkeleg.",
+      "reason": "Konkret skildrar dømet.",
+      "tip": "Kva slags døme gjev læraren?",
+      "pairId": null,
+      "source": {
+        "articleId": 40704,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/40704",
+        "updated": "2026-03-30 13:51:50",
+        "dictionaryExplanation": "som ein kan oppfatte med sansane; som byggjer på røynlege forhold, er knytt til ein viss situasjon, samanheng e_l; handgripeleg, røyndomsnær; mots abstrakt",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-086",
+      "wordId": "adjektiv-nn-91977",
+      "wordClass": "adjektiv",
+      "level": 4,
+      "lemma": "ærleg",
+      "target": {
+        "before": "Eit ",
+        "text": "ærleg",
+        "after": " svar er til å stole på."
+      },
+      "meaning": "Som held seg til sanninga.",
+      "reason": "Ærleg skildrar svaret.",
+      "tip": "Kva slags svar er det snakk om?",
+      "pairId": null,
+      "source": {
+        "articleId": 91977,
+        "definitionId": 5,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/91977",
+        "updated": "2026-02-27 12:36:01",
+        "dictionaryExplanation": "som uttrykkjer sanninga; sann, sannferdig, oppriktig",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-087",
+      "wordId": "adjektiv-nn-1829",
+      "wordClass": "adjektiv",
+      "level": 4,
+      "lemma": "ansvarleg",
+      "target": {
+        "before": "Ein ",
+        "text": "ansvarleg",
+        "after": " elev passar på utstyret."
+      },
+      "meaning": "Som tek pliktene sine på alvor.",
+      "reason": "Ansvarleg skildrar eleven.",
+      "tip": "Kven er det ordet skildrar?",
+      "pairId": null,
+      "source": {
+        "articleId": 1829,
+        "definitionId": 4,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/1829",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "som har, ber ansvaret for noko",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-088",
+      "wordId": "adjektiv-nn-53760",
+      "wordClass": "adjektiv",
+      "level": 4,
+      "lemma": "nøyaktig",
+      "target": {
+        "before": "Målinga er ",
+        "text": "nøyaktig",
+        "after": "."
+      },
+      "meaning": "Som er presis og utan unødige avvik.",
+      "reason": "Nøyaktig skildrar målinga her.",
+      "tip": "Skildrar ordet målinga eller måten å måle på?",
+      "pairId": "nøyaktig",
+      "source": {
+        "articleId": 53760,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/53760",
+        "updated": "2023-09-26 11:55:08",
+        "dictionaryExplanation": "heilt korrekt; presis",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-089",
+      "wordId": "adjektiv-nn-76406",
+      "wordClass": "adjektiv",
+      "level": 4,
+      "lemma": "sympatisk",
+      "target": {
+        "before": "Den ",
+        "text": "sympatiske",
+        "after": " figuren hjelper oss."
+      },
+      "meaning": "Som er venleg og vekkjer godvilje.",
+      "reason": "Sympatiske skildrar figuren.",
+      "tip": "Kva slags figur er det?",
+      "pairId": null,
+      "source": {
+        "articleId": 76406,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/76406",
+        "updated": "2026-04-22 15:17:17",
+        "dictionaryExplanation": "som vekkjer sympati; tiltalande",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-090",
+      "wordId": "adjektiv-nn-41784",
+      "wordClass": "adjektiv",
+      "level": 4,
+      "lemma": "kreativ",
+      "target": {
+        "before": "Eit ",
+        "text": "kreativt",
+        "after": " lag finn nye løysingar."
+      },
+      "meaning": "Som har evne til å skape og finne på.",
+      "reason": "Kreativt skildrar laget her.",
+      "tip": "Skildrar ordet laget eller måten det arbeider på?",
+      "pairId": "kreativt",
+      "source": {
+        "articleId": 41784,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/41784",
+        "updated": "2023-04-24 06:46:19",
+        "dictionaryExplanation": "som lett får nye idear (og gjennomfører dei); idérik/iderik",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-091",
+      "wordId": "adverb-nn-30256",
+      "wordClass": "adverb",
+      "level": 1,
+      "lemma": "her",
+      "target": {
+        "before": "Vyrde står ",
+        "text": "her",
+        "after": "."
+      },
+      "meaning": "På denne staden.",
+      "reason": "Her seier kvar Vyrde står.",
+      "tip": "Kva seier ordet om staden?",
+      "pairId": null,
+      "source": {
+        "articleId": 30256,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/30256",
+        "updated": "2022-08-27 14:19:09",
+        "dictionaryExplanation": "på denne staden; til skilnad frå der",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-092",
+      "wordId": "adverb-nn-11401",
+      "wordClass": "adverb",
+      "level": 1,
+      "lemma": "der",
+      "target": {
+        "before": "Sekken ligg ",
+        "text": "der",
+        "after": "."
+      },
+      "meaning": "På den staden.",
+      "reason": "Der seier kvar sekken ligg.",
+      "tip": "Kva seier ordet om staden?",
+      "pairId": null,
+      "source": {
+        "articleId": 11401,
+        "definitionId": 5,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/11401",
+        "updated": "2025-06-24 12:10:11",
+        "dictionaryExplanation": "på den staden (eit stykke unna); til skilnad frå her",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-093",
+      "wordId": "adverb-nn-52864",
+      "wordClass": "adverb",
+      "level": 1,
+      "lemma": "no",
+      "target": {
+        "before": "Vi byrjar ",
+        "text": "no",
+        "after": "."
+      },
+      "meaning": "På dette tidspunktet.",
+      "reason": "No seier når vi byrjar.",
+      "tip": "Kva seier ordet om tida?",
+      "pairId": null,
+      "source": {
+        "articleId": 52864,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/52864",
+        "updated": "2023-11-10 13:52:28",
+        "dictionaryExplanation": "i denne augeblinken; på dette tidspunktet; på eit tidspunkt som nett har vore",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-094",
+      "wordId": "adverb-nn-71002",
+      "wordClass": "adverb",
+      "level": 1,
+      "lemma": "snart",
+      "target": {
+        "before": "Vi skal heim ",
+        "text": "snart",
+        "after": "."
+      },
+      "meaning": "Om kort tid.",
+      "reason": "Snart seier når vi skal heim.",
+      "tip": "Kva seier ordet om tida?",
+      "pairId": null,
+      "source": {
+        "articleId": 71002,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/71002",
+        "updated": "2024-12-18 07:12:09",
+        "dictionaryExplanation": "om ikkje lenge; jf snarare og snarast",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-095",
+      "wordId": "adverb-nn-54013",
+      "wordClass": "adverb",
+      "level": 1,
+      "lemma": "ofte",
+      "target": {
+        "before": "Vi les ",
+        "text": "ofte",
+        "after": " saman."
+      },
+      "meaning": "Mange gonger eller med korte mellomrom.",
+      "reason": "Ofte seier kor ofte vi les.",
+      "tip": "Kva seier ordet om kor ofte noko skjer?",
+      "pairId": null,
+      "source": {
+        "articleId": 54013,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/54013",
+        "updated": "2024-05-07 11:00:45",
+        "dictionaryExplanation": "mange gonger; til vanleg; hyppig, stadig, tidt/titt",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-096",
+      "wordId": "adverb-nn-738",
+      "wordClass": "adverb",
+      "level": 1,
+      "lemma": "aldri",
+      "target": {
+        "before": "Vyrde gløymer ",
+        "text": "aldri",
+        "after": " sekken."
+      },
+      "meaning": "Ikkje nokon gong.",
+      "reason": "Aldri seier kor ofte Vyrde gløymer sekken.",
+      "tip": "Kva seier ordet om kor ofte noko skjer?",
+      "pairId": null,
+      "source": {
+        "articleId": 738,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/738",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "ikkje nokosinne",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-097",
+      "wordId": "adverb-adj-nn-62130",
+      "wordClass": "adverb",
+      "level": 1,
+      "lemma": "roleg",
+      "target": {
+        "before": "Hunden går ",
+        "text": "roleg",
+        "after": " gjennom tunet."
+      },
+      "meaning": "Utan hastverk eller uro.",
+      "reason": "Roleg seier korleis hunden går her.",
+      "tip": "Skildrar ordet hunden eller gåinga?",
+      "pairId": "roleg",
+      "source": {
+        "articleId": 62130,
+        "definitionId": 6,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/62130",
+        "updated": "2026-07-02 12:52:55",
+        "dictionaryExplanation": "utan hast; nøktern, tenksam, avslappa",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-098",
+      "wordId": "adverb-adj-nn-73796",
+      "wordClass": "adverb",
+      "level": 1,
+      "lemma": "stille",
+      "target": {
+        "before": "Vyrde går ",
+        "text": "stille",
+        "after": " forbi døra."
+      },
+      "meaning": "Med lite eller ingen lyd.",
+      "reason": "Stille seier korleis Vyrde går her.",
+      "tip": "Skildrar ordet Vyrde eller gåinga?",
+      "pairId": "stille",
+      "source": {
+        "articleId": 73796,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/73796",
+        "updated": "2025-11-11 11:40:04",
+        "dictionaryExplanation": "still",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-099",
+      "wordId": "adverb-nn-34053",
+      "wordClass": "adverb",
+      "level": 2,
+      "lemma": "inne",
+      "target": {
+        "before": "Vyrde ventar ",
+        "text": "inne",
+        "after": "."
+      },
+      "meaning": "På innsida eller innandørs.",
+      "reason": "Inne seier kvar Vyrde ventar.",
+      "tip": "Kva seier ordet om staden?",
+      "pairId": null,
+      "source": {
+        "articleId": 34053,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/34053",
+        "updated": "2022-09-15 05:53:06",
+        "dictionaryExplanation": "i det indre av, innanfor grensa av noko (i hus, rom eller liknande)",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-100",
+      "wordId": "adverb-nn-85887",
+      "wordClass": "adverb",
+      "level": 2,
+      "lemma": "ute",
+      "target": {
+        "before": "Barna leikar ",
+        "text": "ute",
+        "after": "."
+      },
+      "meaning": "På utsida eller utandørs.",
+      "reason": "Ute seier kvar barna leikar.",
+      "tip": "Kva seier ordet om staden?",
+      "pairId": null,
+      "source": {
+        "articleId": 85887,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/85887",
+        "updated": "2025-09-18 14:24:21",
+        "dictionaryExplanation": "under open himmel; i friluft; utandørs/utadørs; mots inne",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-101",
+      "wordId": "adverb-nn-63548",
+      "wordClass": "adverb",
+      "level": 2,
+      "lemma": "saman",
+      "target": {
+        "before": "Venene arbeider ",
+        "text": "saman",
+        "after": "."
+      },
+      "meaning": "I lag med kvarandre.",
+      "reason": "Saman seier korleis venene arbeider i forhold til kvarandre.",
+      "tip": "Kva seier ordet om samarbeidet?",
+      "pairId": null,
+      "source": {
+        "articleId": 63548,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/63548",
+        "updated": "2024-07-29 09:05:28",
+        "dictionaryExplanation": "i lag, med kvarandre",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-102",
+      "wordId": "adverb-nn-33268",
+      "wordClass": "adverb",
+      "level": 2,
+      "lemma": "ikkje",
+      "target": {
+        "before": "Vyrde finn ",
+        "text": "ikkje",
+        "after": " sekken."
+      },
+      "meaning": "Eit ord som nektar for noko.",
+      "reason": "Ikkje nektar for at Vyrde finn sekken.",
+      "tip": "Kva ord nektar for det som skjer?",
+      "pairId": null,
+      "source": {
+        "articleId": 33268,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/33268",
+        "updated": "2023-08-10 08:08:41",
+        "dictionaryExplanation": "brukt til å nekte innhaldet i ei setning",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-103",
+      "wordId": "adverb-adj-nn-26058",
+      "wordClass": "adverb",
+      "level": 2,
+      "lemma": "god",
+      "target": {
+        "before": "Vyrde syng ",
+        "text": "godt",
+        "after": "."
+      },
+      "meaning": "På ein god måte.",
+      "reason": "Godt seier korleis Vyrde syng her.",
+      "tip": "Skildrar ordet Vyrde eller songen hans?",
+      "pairId": "godt",
+      "source": {
+        "articleId": 26058,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/26058",
+        "updated": "2025-11-05 12:41:25",
+        "dictionaryExplanation": "av høg kvalitet; bra, fin, framifrå; tilfredsstillande, gagnleg, tenleg",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-104",
+      "wordId": "adverb-adj-nn-60398",
+      "wordClass": "adverb",
+      "level": 2,
+      "lemma": "rask",
+      "target": {
+        "before": "Vyrde spring ",
+        "text": "raskt",
+        "after": " heim."
+      },
+      "meaning": "Med høg fart.",
+      "reason": "Raskt seier korleis Vyrde spring her.",
+      "tip": "Skildrar ordet Vyrde eller springinga?",
+      "pairId": "raskt",
+      "source": {
+        "articleId": 60398,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/60398",
+        "updated": "2024-06-18 10:53:39",
+        "dictionaryExplanation": "snøgg, kvikk",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-105",
+      "wordId": "adverb-adj-nn-32480",
+      "wordClass": "adverb",
+      "level": 2,
+      "lemma": "høg",
+      "target": {
+        "before": "Vyrde ropar ",
+        "text": "høgt",
+        "after": "."
+      },
+      "meaning": "Med sterk lyd.",
+      "reason": "Høgt seier korleis Vyrde ropar her.",
+      "tip": "Skildrar ordet Vyrde eller ropinga?",
+      "pairId": "høgt",
+      "source": {
+        "articleId": 32480,
+        "definitionId": 18,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/32480",
+        "updated": "2024-10-10 13:42:15",
+        "dictionaryExplanation": "om lyd: sterk, kraftig",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-106",
+      "wordId": "adverb-adj-nn-29080",
+      "wordClass": "adverb",
+      "level": 2,
+      "lemma": "hard",
+      "target": {
+        "before": "Vyrde bankar ",
+        "text": "hardt",
+        "after": " på døra."
+      },
+      "meaning": "Med mykje kraft.",
+      "reason": "Hardt seier korleis Vyrde bankar her.",
+      "tip": "Skildrar ordet døra eller bankinga?",
+      "pairId": "hardt",
+      "source": {
+        "articleId": 29080,
+        "definitionId": 12,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/29080",
+        "updated": "2026-06-25 12:54:43",
+        "dictionaryExplanation": "kraftig, intens, vanskeleg, slitsam",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-107",
+      "wordId": "adverb-nn-24153",
+      "wordClass": "adverb",
+      "level": 3,
+      "lemma": "ganske",
+      "target": {
+        "before": "Vyrde er ",
+        "text": "ganske",
+        "after": " glad."
+      },
+      "meaning": "I nokså stor grad.",
+      "reason": "Ganske seier noko om graden av adjektivet glad.",
+      "tip": "Kva seier ordet om kor glad Vyrde er?",
+      "pairId": null,
+      "source": {
+        "articleId": 24153,
+        "definitionId": 4,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/24153",
+        "updated": "2022-04-04 08:40:26",
+        "dictionaryExplanation": "til ein viss grad; nokså/nokso, heller; temmeleg",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-108",
+      "wordId": "adverb-nn-36881",
+      "wordClass": "adverb",
+      "level": 3,
+      "lemma": "kanskje",
+      "target": {
+        "before": "",
+        "text": "Kanskje",
+        "after": " kjem Vyrde i morgon."
+      },
+      "meaning": "Det er mogleg, men ikkje sikkert.",
+      "reason": "Kanskje uttrykkjer uvisse om heile innhaldet i setninga.",
+      "tip": "Kva seier ordet om kor sikkert dette er?",
+      "pairId": null,
+      "source": {
+        "articleId": 36881,
+        "definitionId": 3,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/36881",
+        "updated": "2023-02-08 08:28:25",
+        "dictionaryExplanation": "brukt for å uttrykkje at noko er mogleg; kan hende/kan henda",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-109",
+      "wordId": "adverb-nn-979",
+      "wordClass": "adverb",
+      "level": 3,
+      "lemma": "alltid",
+      "target": {
+        "before": "Vi hjelper ",
+        "text": "alltid",
+        "after": " kvarandre."
+      },
+      "meaning": "Kvar gong, utan unntak.",
+      "reason": "Alltid seier kor ofte vi hjelper kvarandre.",
+      "tip": "Kva seier ordet om kor ofte noko skjer?",
+      "pairId": null,
+      "source": {
+        "articleId": 979,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/979",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "jamt, støtt; kvar gong",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-110",
+      "wordId": "adverb-nn-15943",
+      "wordClass": "adverb",
+      "level": 3,
+      "lemma": "etterpå",
+      "target": {
+        "before": "Vi ryddar ",
+        "text": "etterpå",
+        "after": "."
+      },
+      "meaning": "Etter at noko anna har skjedd.",
+      "reason": "Etterpå seier når vi ryddar.",
+      "tip": "Kva seier ordet om rekkjefølgja i tid?",
+      "pairId": null,
+      "source": {
+        "articleId": 15943,
+        "definitionId": 3,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/15943",
+        "updated": "2023-01-07 15:44:07",
+        "dictionaryExplanation": "på eit seinare tidspunkt; sidan, deretter",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-111",
+      "wordId": "adverb-adj-nn-61495",
+      "wordClass": "adverb",
+      "level": 3,
+      "lemma": "rett",
+      "target": {
+        "before": "Vyrde svarar ",
+        "text": "rett",
+        "after": "."
+      },
+      "meaning": "Slik at svaret stemmer.",
+      "reason": "Rett seier korleis Vyrde svarar her.",
+      "tip": "Skildrar ordet Vyrde eller måten å svare på?",
+      "pairId": "rett",
+      "source": {
+        "articleId": 61495,
+        "definitionId": 4,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/61495",
+        "updated": "2026-06-22 10:56:58",
+        "dictionaryExplanation": "i samsvar med reglar eller lover; feilfri, korrekt; høveleg, passande",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-112",
+      "wordId": "adverb-adj-nn-83011",
+      "wordClass": "adverb",
+      "level": 3,
+      "lemma": "tydeleg",
+      "target": {
+        "before": "Vyrde snakkar ",
+        "text": "tydeleg",
+        "after": "."
+      },
+      "meaning": "Slik at det er lett å oppfatte og forstå.",
+      "reason": "Tydeleg seier korleis Vyrde snakkar her.",
+      "tip": "Skildrar ordet Vyrde eller snakkinga?",
+      "pairId": "tydeleg",
+      "source": {
+        "articleId": 83011,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/83011",
+        "updated": "2026-06-26 06:45:47",
+        "dictionaryExplanation": "lett å tyde; grei; mots utydeleg",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-113",
+      "wordId": "adverb-adj-nn-45403",
+      "wordClass": "adverb",
+      "level": 3,
+      "lemma": "lett",
+      "target": {
+        "before": "Vyrde løftar sekken ",
+        "text": "lett",
+        "after": "."
+      },
+      "meaning": "Utan stor innsats eller vanskar.",
+      "reason": "Lett seier korleis Vyrde løftar sekken her.",
+      "tip": "Skildrar ordet sekken eller løftinga?",
+      "pairId": "lett",
+      "source": {
+        "articleId": 45403,
+        "definitionId": 15,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/45403",
+        "updated": "2026-06-22 11:11:29",
+        "dictionaryExplanation": "utan å anstrengje seg; naturleg",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-114",
+      "wordId": "adverb-adj-nn-81743",
+      "wordClass": "adverb",
+      "level": 3,
+      "lemma": "trygg",
+      "target": {
+        "before": "Vyrde kjem ",
+        "text": "trygt",
+        "after": " heim."
+      },
+      "meaning": "Utan å bli utsett for fare.",
+      "reason": "Trygt seier korleis Vyrde kjem heim.",
+      "tip": "Kva seier ordet om heimferda?",
+      "pairId": null,
+      "source": {
+        "articleId": 81743,
+        "definitionId": 5,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/81743",
+        "updated": "2024-12-18 08:11:52",
+        "dictionaryExplanation": "som ikkje er utsett for eller utgjer ei fare; sikker",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-115",
+      "wordId": "adverb-nn-11407",
+      "wordClass": "adverb",
+      "level": 4,
+      "lemma": "difor",
+      "target": {
+        "before": "Det regnar. ",
+        "text": "Difor",
+        "after": " tek Vyrde på seg jakka."
+      },
+      "meaning": "Av den grunnen.",
+      "reason": "Difor knyter grunnen til det Vyrde gjer.",
+      "tip": "Kva ord viser til grunnen som alt er nemnd?",
+      "pairId": null,
+      "source": {
+        "articleId": 11407,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/11407",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "av den grunn",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-116",
+      "wordId": "adverb-nn-11514",
+      "wordClass": "adverb",
+      "level": 4,
+      "lemma": "dessutan",
+      "target": {
+        "before": "Vyrde har mat og ",
+        "text": "dessutan",
+        "after": " vatn."
+      },
+      "meaning": "I tillegg til det som alt er nemnt.",
+      "reason": "Dessutan legg noko til det som alt er sagt.",
+      "tip": "Kva ord legg til ei ny opplysning?",
+      "pairId": null,
+      "source": {
+        "articleId": 11514,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/11514",
+        "updated": "2022-02-24 00:12:03",
+        "dictionaryExplanation": "i tillegg til det; attåt, elles",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-117",
+      "wordId": "adverb-nn-45643",
+      "wordClass": "adverb",
+      "level": 4,
+      "lemma": "likevel",
+      "target": {
+        "before": "Det regnar, men Vyrde går ut ",
+        "text": "likevel",
+        "after": "."
+      },
+      "meaning": "Trass i det som er nemnt.",
+      "reason": "Likevel seier at noko skjer trass i ei hindring.",
+      "tip": "Kva ord viser at regnet ikkje stoppar Vyrde?",
+      "pairId": null,
+      "source": {
+        "articleId": 45643,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/45643",
+        "updated": "2023-06-20 12:00:15",
+        "dictionaryExplanation": "trass i det, kor som er, like fullt, for det, enda; i alle fall",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-118",
+      "wordId": "adverb-nn-52137",
+      "wordClass": "adverb",
+      "level": 4,
+      "lemma": "naturlegvis",
+      "target": {
+        "before": "Vyrde hjelper ",
+        "text": "naturlegvis",
+        "after": " venen sin."
+      },
+      "meaning": "Som venta eller som noko sjølvsagt.",
+      "reason": "Naturlegvis seier noko om kor sjølvsagt innhaldet er.",
+      "tip": "Kva ord viser at dette er sjølvsagt?",
+      "pairId": null,
+      "source": {
+        "articleId": 52137,
+        "definitionId": 2,
+        "wordClass": "ADV",
+        "url": "https://ordbokene.no/nn/52137",
+        "updated": "2023-09-06 10:16:37",
+        "dictionaryExplanation": "sjølvsagd",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-119",
+      "wordId": "adverb-adj-nn-53760",
+      "wordClass": "adverb",
+      "level": 4,
+      "lemma": "nøyaktig",
+      "target": {
+        "before": "Vyrde måler ",
+        "text": "nøyaktig",
+        "after": "."
+      },
+      "meaning": "På ein presis måte.",
+      "reason": "Nøyaktig seier korleis Vyrde måler her.",
+      "tip": "Skildrar ordet ei måling eller måten å måle på?",
+      "pairId": "nøyaktig",
+      "source": {
+        "articleId": 53760,
+        "definitionId": 2,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/53760",
+        "updated": "2023-09-26 11:55:08",
+        "dictionaryExplanation": "heilt korrekt; presis",
+        "adapted": true
+      }
+    },
+    {
+      "id": "ob-120",
+      "wordId": "adverb-adj-nn-41784",
+      "wordClass": "adverb",
+      "level": 4,
+      "lemma": "kreativ",
+      "target": {
+        "before": "Laget arbeider ",
+        "text": "kreativt",
+        "after": "."
+      },
+      "meaning": "På ein skapande og oppfinnsam måte.",
+      "reason": "Kreativt seier korleis laget arbeider her.",
+      "tip": "Skildrar ordet laget eller arbeidet?",
+      "pairId": "kreativt",
+      "source": {
+        "articleId": 41784,
+        "definitionId": 4,
+        "wordClass": "ADJ",
+        "url": "https://ordbokene.no/nn/41784",
+        "updated": "2023-04-24 06:46:19",
+        "dictionaryExplanation": "prega av idérikdom; nyskapande",
+        "adapted": true
+      }
+    }
+  ]
+}

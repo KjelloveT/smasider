@@ -3,6 +3,13 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.4] — 2026-10-22
+
+### Lagt til
+- **Ordbås – ordklassar med Vyrde.** Sorter substantiv, verb, adjektiv og adverb i korte leveringar. Vel Båsrunden, Hjelp Vyrde eller Ordskiftet, og øv på fire opne ordsteg utan tidspress.
+- **120 oppgåver med ordforklaringar.** Kvar oppgåve har ei setning, ei tilpassa forklaring frå ei vald tyding i Nynorskordboka og ei grunngjeven fasit. Oppgåver og forklaringar ligg lokalt; spelet gjer ingen ordbokoppslag under bruk.
+- **Avgrensa lokal øving og felles bragder.** Ordbås hugsar val, øvingstal og inntil 30 oppgåver å repetere. Dragging, trykk og tastatur gjev same svarflyt. Personvernoversiktene forklarer lagringa.
+
 ## [2.3.1] — 2026-10-15
 
 ### Endra

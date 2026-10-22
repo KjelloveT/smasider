@@ -2,6 +2,29 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "2.4",
+      "dato": "2026-10-22",
+      "samandrag": "Ordbås: sorter ordklassar med Vyrde, ordforklaringar og roleg øving.",
+      "punkt": [
+        {
+          "t": "nytt",
+          "kva": "Ordbås",
+          "merke": "verktoy",
+          "tekst": "Tre spelmåtar, fire ordklassar og fire opne ordsteg. Sorter med trykk, dragging eller tastatur."
+        },
+        {
+          "t": "nytt",
+          "kva": "Ordforklaringar",
+          "tekst": "120 setningsoppgåver med ei vald ordtyding frå Nynorskordboka, ei kort tilpassa forklaring og grunngjeven fasit. Ingen ordbokoppslag medan eleven spelar."
+        },
+        {
+          "t": "nytt",
+          "kva": "Øving og bragder",
+          "tekst": "Val, avgrensa øvingstal og inntil 30 repetisjonsoppgåver blir lagra lokalt. Felles bragder og oppdaterte personvernoversikter."
+        }
+      ]
+    },
+    {
       "versjon": "2.3.1",
       "dato": "2026-10-15",
       "samandrag": "Tydelegare bokstavruter og lydframheving i Ljodstigen.",

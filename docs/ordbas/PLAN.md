@@ -4,7 +4,9 @@ Plan og fyrste ordutval · 22. oktober 2026
 
 **Ordbås skal vere eit kort, leikande sorteringsspel der eleven hjelper Vyrde å få ord på rett plass.** Det byrjar med substantiv, verb og adjektiv. Adverb kjem med som eit eige steg, med tydeleg setningskontekst. Ei vanleg økt tek 3–6 minutt.
 
-Denne leveransen er ein spelplan og ein ordreserve. Ho inneheld 1000 oppføringar i kvar av dei fire ordklassane, fordelte på fire førebelse nivå, og 40 skrivne dømeoppgåver. Spelet er enno ikkje implementert eller publisert. Ordreserven er ikkje 4000 ferdige speloppgåver: nye setningar, forklaringar og vurdering av tyding må skrivast før fleire oppføringar blir tekne inn i spelet.
+Den opphavlege planleveransen inneheld 1000 oppføringar i kvar av dei fire ordklassane, fordelte på fire førebelse nivå, og 40 skrivne dømeoppgåver. Ordreserven er ikkje 4000 ferdige speloppgåver: nye setningar, forklaringar og vurdering av tyding må skrivast før fleire oppføringar blir tekne inn i spelet.
+
+**Implementeringsstatus:** Fyrste spelutgåve ligg no i `ordbas/`, med 120 setningsoppgåver, 30 per ordklasse, alle tre spelmåtane, lokal framgang og felles bragder. Ordforklaringane er tilpassa frå uttrykkeleg valde ordboktydingar. Sjå `ordbas/README.md` for innhaldsbygging og kontroll. Planen under skildrar òg vidare arbeid: meir innhald, meir rørsle i tunet og eigne val av grunngjeving. Alle fire ordstega er opne frå start; Hjelp Vyrde viser ei grunngjeving etter svaret i denne utgåva. Publisering skjer fyrst etter PR og kontroll av førehandsvisinga.
 
 ## 1. Det eleven møter
 
@@ -134,7 +136,7 @@ Ord og oppgåver blir pakka som lokale filer. Ingen ordbok-API eller KI-kall nå
 
 Lagring skal gå gjennom `VyrdepilStorage`. Føreslått minimum er innstillingar, fullførte steg, avgrensa teljingar per ordklasse/nivå og høgst 30 oppgåve-ID-ar for repetisjon. Ikkje lagre elevnamn, fritekstsvar, datoar eller ein uavgrensa detaljhistorikk. Det skal vere lett å starte på nytt. Felles Bragd-blokk får berre tillatne ID-ar og framgang. Når lagringa blir implementert, oppdater personverninformasjonen på framsida og personvernsida i same endring.
 
-Ved oppretting av den faktiske appen: registrer `ordbas` i eksisterande `json/apps.json`, tildel ein ledig bakgrunn med `manage-backgrounds.cjs`, og køyr kontrollen. Denne planleveransen registrerer inga uferdig app og reserverer ikkje bakgrunn. Nye bilete eller andre avhengnader krev eige grunnlag etter prosjektreglane.
+Ved oppretting av den faktiske appen: registrer `ordbas` i eksisterande `json/apps.json`, tildel ein ledig bakgrunn med `manage-backgrounds.cjs`, og køyr kontrollen. Den opphavlege planleveransen registrerte inga app eller bakgrunn. Fyrste spelutgåve registrerer appen og tildeler ein eigen ledig bakgrunn. Nye bilete eller andre avhengnader krev eige grunnlag etter prosjektreglane.
 
 Før publisering: test lokalt og i Azure-førehandsvisinga, konsoll, nettverk, hovudflyt, lagring, ny økt, import/eksport dersom det blir teke med, tastatur, skjermlesarstatus, redusert rørsle og breidder 320, 437, 768, 1024 og 1440 px. Ingen vassrett sideflyt, overlapp eller krympa ordkort. Kontroller at spelet fungerer utan eksterne datakall etter at filene er lasta. Reell fyrstegongsbruk utan nett krev at dei lokale filene er tilgjengelege; «lokal logikk» er ikkje i seg sjølv ein garanti for nettlesarcache.
 
@@ -143,9 +145,9 @@ Implementering skal leverast på ny grein frå oppdatert `origin/main`, gjennom 
 ## 11. Kjelder og kontrollgrunnlag
 
 - [Den delte idédugnaden](https://chatgpt.com/share/6ada563f-cee0-83ed-a119-4e2556e5f8ea) var tilgjengeleg og er lesen. Den synlege samtalen handlar særleg om ordtydingar, definisjonsoppgåver og jokarar. Ordbås-planen er ei vidare utforming frå bestillinga i denne samtalen. Poenget om eintydige oppgåver er teke med.
-- [Nynorskordboka: opne data](https://ord.uib.no/ord_1_Ordlister.html), henta 22. oktober 2026. Lemma, ordklasse, artikkel-ID og bøyingsformer er brukte til kontroll og utval. Ingen definisjonar eller dømesetningar er kopierte inn i oppgåvene.
+- [Nynorskordboka: opne data](https://ord.uib.no/ord_1_Ordlister.html), henta 22. oktober 2026. Lemma, ordklasse, artikkel-ID og bøyingsformer er brukte til kontroll og utval. Ordreserven inneheld ikkje definisjonar eller dømesetningar. Den seinare spelutgåva inneheld tilpassa ordforklaringar med kjeldetyding per oppgåve.
 - [Nynorsksenteret: adjektiv og adverb](https://nynorsksenteret.no/nynorsk-grammatikk/adjektiv-pa-nynorsk), grunnlag for den skulegrammatiske skilnaden i bruk.
 - [CLARINO/Språkbanken: frekvensordliste for nynorsk avisspråk](https://www.nb.no/sprakbanken/ressurskatalog/oai-repo-clarino-uib-no-11509-158/), generert 25. august 2025. Brukt som støttesignal, med avgrensingane oppgjevne ovanfor.
 - [Kreditering og lisens](KJELDER.md) ligg ved. Ordbokdataa har sin eigen CC-BY 4.0-lisens og skal ikkje få meir avgrensande vilkår gjennom Vyrdepil sin generelle lisens.
 
-Arbeidsgrunnlaget for denne planleveransen er `origin/main` på `6398a1a41e6bce51b5dd2795754d9f5be7486199`, etter henting frå origin. Produksjonsframsida vart opna i nettlesar og viste 2.3.1 og siste Ljodstigen-endring, i samsvar med denne arbeidskopien. Den opphavlege arbeidsmappa stod på ei eldre grein med omfattande lokale endringar og endringslogg 1.61. Ho vart ikkje endra som del av planarbeidet. Ordbås finst enno ikkje som publisert app; inga Ordbås-side eller PR-førehandsvising er difor gjennomspelt.
+Arbeidsgrunnlaget for denne planleveransen er `origin/main` på `6398a1a41e6bce51b5dd2795754d9f5be7486199`, etter henting frå origin. Produksjonsframsida vart opna i nettlesar og viste 2.3.1 og siste Ljodstigen-endring, i samsvar med denne arbeidskopien. Den opphavlege arbeidsmappa stod på ei eldre grein med omfattande lokale endringar og endringslogg 1.61. Ho vart ikkje endra som del av planarbeidet. Dette var kontrollen ved planleveransen; sjå PR-en for den seinare spelutgåva for spel- og førehandsvisingskontroll.

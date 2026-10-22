@@ -1,0 +1,63 @@
+/* Berre speloppsett, båsar og rørsle. Felles flater og kontrollar kjem frå Vyrdepil. */
+.ob-app { padding-block: 20px 60px; }
+.ob-app .vp-standard-support { width: calc(100% - 32px); justify-self: center; }
+.ob-eyebrow { font-size: .78rem; letter-spacing: .12em; font-weight: 800; margin-block-end: 8px; }
+.ob-mode-grid { display: grid; gap: 10px; }
+.ob-mode-choice { display: grid; grid-template-columns: auto 1fr; align-items: start; text-align: left; padding: 12px; }
+.ob-mode-choice span { display: grid; gap: 4px; }
+.ob-mode-choice small { font-weight: 400; line-height: 1.4; }
+.ob-start-actions { margin-block: 24px 12px; }
+.ob-class-options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+.ob-round-head, .ob-counter-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.ob-round-head h2 { font-size: clamp(1.2rem,3vw,1.7rem); margin-block-end: 0; }
+.ob-counter-row { margin-block: 16px 8px; font-size: .9rem; }
+#roundProgress { width: 100%; height: 12px; accent-color: var(--vp-frame); }
+.ob-companion { display: grid; grid-template-columns: 92px minmax(0,1fr); align-items: center; gap: 12px; margin-block: 16px; }
+.ob-vyrde { width: 100%; height: auto; transform-origin: 50% 95%; }
+.ob-speech { --vp-panel-fill: var(--vp-sky); margin: 0; font-size: .95rem; }
+.ob-task { text-align: center; }
+.ob-sentence { font-size: clamp(1.15rem,2.3vw,1.5rem); line-height: 1.55; text-wrap: pretty; }
+.ob-sentence strong { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
+.ob-word-card { min-height: 72px; min-width: min(220px,100%); font-size: clamp(1.5rem,4vw,2.2rem); cursor: grab; touch-action: none; user-select: none; }
+.ob-drag-ghost { position: fixed; z-index: 10000; pointer-events: none; margin: 0; opacity: .9; cursor: grabbing; }
+.ob-instruction { margin-block: 12px 0; }
+.ob-meaning-action { justify-content: center; margin-block: 14px; }
+.ob-meaning p { margin-block: 4px 0; }
+.ob-bins { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin-block: 20px 16px; }
+.ob-bin { min-height: 108px; flex-direction: column; gap: 6px; padding: 14px 10px; }
+.ob-bin strong { font-size: clamp(1rem,2vw,1.2rem); }
+.ob-bin small { font-weight: 400; font-size: .85rem; }
+.ob-bin[data-class="substantiv"] { --vp-button-fill: var(--vp-moss); }
+.ob-bin[data-class="verb"] { --vp-button-fill: var(--vp-sky); }
+.ob-bin[data-class="adjektiv"] { --vp-button-fill: var(--vp-heather); }
+.ob-bin[data-class="adverb"] { --vp-button-fill: var(--vp-honey); }
+.ob-bin[data-state="wrong"] { --vp-button-fill: var(--vp-error); }
+.ob-bin[data-state="right"] { --vp-button-fill: var(--vp-success); }
+.ob-bin.ob-drag-over { transform: translateY(-3px); --vp-button-fill: var(--vp-honey); }
+.ob-bin-state:empty { display: none; }
+.ob-feedback p { margin: 0; }
+.ob-next { margin-block-start: 16px; }
+.ob-next a { font-size: .8rem; }
+.ob-result-note { display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 18px; align-items: center; --vp-panel-fill: var(--vp-moss); margin-block: 20px; }
+.ob-result-note img { width: 100%; height: auto; }
+.ob-big-number { font-family: var(--vp-heading-font); font-size: clamp(1.7rem,4vw,2.8rem); margin-bottom: 6px; }
+.ob-review-words { margin-block: 18px; }
+.ob-review-words ul { padding-inline-start: 22px; }
+.ob-level { display: grid; gap: 4px; }
+.ob-level p { margin: 0; }
+.ob-playing .ob-perch { visibility: hidden; }
+.ob-playing #appHero { margin-block-end: 6px; }
+.ob-companion[data-reaction="success"] .ob-vyrde { animation: ob-nod .55s ease; }
+.ob-companion[data-reaction="retry"] .ob-vyrde { animation: ob-peek .5s ease; }
+@keyframes ob-nod { 35% { transform: translateY(-8px) rotate(-4deg); } 70% { transform: rotate(3deg); } }
+@keyframes ob-peek { 40% { transform: rotate(-5deg); } }
+@media (max-width: 520px) {
+  .ob-companion { grid-template-columns: 66px minmax(0,1fr); gap: 8px; }
+  .ob-speech { font-size: .9rem; padding: 10px; }
+  .ob-bin { min-height: 100px; }
+  .ob-result-note { grid-template-columns: 75px minmax(0,1fr); padding: 14px; gap: 12px; }
+  .ob-round-head > button { order: 2; }
+  .ob-start-actions { display: grid; }
+  .ob-start-actions > button { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .ob-vyrde { animation: none !important; } .ob-bin { transform: none !important; } }
