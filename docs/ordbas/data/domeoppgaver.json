@@ -1,0 +1,529 @@
+{
+  "app": "Ordbås",
+  "version": 1,
+  "language": "nn",
+  "status": "planning-examples",
+  "count": 40,
+  "questions": [
+    {
+      "id": "ordbas-demo-001",
+      "wordId": "substantiv-nn-73441",
+      "level": 1,
+      "target": {
+        "before": "Vyrde finn ein ",
+        "text": "stein",
+        "after": " på stigen."
+      },
+      "answerClass": "substantiv",
+      "explanation": "Stein er namn på noko. Her står ordet saman med «ein».",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-002",
+      "wordId": "substantiv-nn-7330",
+      "level": 1,
+      "target": {
+        "before": "På bordet ligg ei ",
+        "text": "bok",
+        "after": "."
+      },
+      "answerClass": "substantiv",
+      "explanation": "Bok er eit substantiv. Det er namn på noko vi kan lese i.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-003",
+      "wordId": "substantiv-nn-31856",
+      "level": 1,
+      "target": {
+        "before": "Ein ",
+        "text": "hund",
+        "after": " ventar ved porten."
+      },
+      "answerClass": "substantiv",
+      "explanation": "Hund er eit substantiv. Her er det namn på eit dyr.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-004",
+      "wordId": "substantiv-nn-6900",
+      "level": 2,
+      "target": {
+        "before": "Dei plukkar ",
+        "text": "blomar",
+        "after": " i hagen."
+      },
+      "answerClass": "substantiv",
+      "explanation": "Blomar er fleirtal av substantivet blom.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-005",
+      "wordId": "substantiv-nn-4655",
+      "level": 2,
+      "target": {
+        "before": "Alle ",
+        "text": "barna",
+        "after": " finn ein plass."
+      },
+      "answerClass": "substantiv",
+      "explanation": "Barna er ei bøygd form av substantivet barn.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-006",
+      "wordId": "substantiv-nn-7330",
+      "level": 2,
+      "target": {
+        "before": "Vyrde legg ",
+        "text": "bøkene",
+        "after": " i sekken."
+      },
+      "answerClass": "substantiv",
+      "explanation": "Bøkene er fleirtal i bunden form av substantivet bok.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-007",
+      "wordId": "substantiv-nn-25652",
+      "level": 3,
+      "target": {
+        "before": "Det er ei ",
+        "text": "glede",
+        "after": " å sjå deg."
+      },
+      "answerClass": "substantiv",
+      "explanation": "Glede er namn på noko vi kjenner. Substantiv treng ikkje vere ting vi kan ta på.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-008",
+      "wordId": "substantiv-nn-87050",
+      "level": 3,
+      "target": {
+        "before": "Eit ",
+        "text": "val",
+        "after": " kan vere vanskeleg."
+      },
+      "answerClass": "substantiv",
+      "explanation": "Val er eit substantiv. Her står ordet saman med «eit».",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-009",
+      "wordId": "substantiv-nn-17190",
+      "level": 3,
+      "target": {
+        "before": "Laget har eit godt ",
+        "text": "fellesskap",
+        "after": "."
+      },
+      "answerClass": "substantiv",
+      "explanation": "Fellesskap er eit substantiv. Det er namn på noko menneske kan ha saman.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-010",
+      "wordId": "substantiv-nn-11330",
+      "level": 4,
+      "target": {
+        "before": "I eit ",
+        "text": "demokrati",
+        "after": " kan folket vere med og bestemme."
+      },
+      "answerClass": "substantiv",
+      "explanation": "Demokrati er eit substantiv. Ordet er namn på ei styreform.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-011",
+      "wordId": "verb-nn-31276",
+      "level": 1,
+      "target": {
+        "before": "Vyrde vil ",
+        "text": "hoppe",
+        "after": " over pytten."
+      },
+      "answerClass": "verb",
+      "explanation": "Hoppe er eit verb. Her fortel det kva Vyrde vil gjere.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-012",
+      "wordId": "verb-nn-45348",
+      "level": 1,
+      "target": {
+        "before": "Vi skal ",
+        "text": "lese",
+        "after": " ei bok."
+      },
+      "answerClass": "verb",
+      "explanation": "Lese er eit verb i infinitiv. Det fortel kva vi skal gjere.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-013",
+      "wordId": "verb-nn-71977",
+      "level": 1,
+      "target": {
+        "before": "Katten vil ",
+        "text": "sove",
+        "after": " i stolen."
+      },
+      "answerClass": "verb",
+      "explanation": "Sove er eit verb, sjølv om katten ligg i ro.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-014",
+      "wordId": "verb-nn-72763",
+      "level": 2,
+      "target": {
+        "before": "I går ",
+        "text": "sprang",
+        "after": " Vyrde heim."
+      },
+      "answerClass": "verb",
+      "explanation": "Sprang er fortidsforma av verbet springe.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-015",
+      "wordId": "verb-nn-68793",
+      "level": 2,
+      "target": {
+        "before": "No ",
+        "text": "skriv",
+        "after": " eleven eit brev."
+      },
+      "answerClass": "verb",
+      "explanation": "Skriv er notidsforma av verbet skrive.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-016",
+      "wordId": "verb-nn-89137",
+      "level": 2,
+      "target": {
+        "before": "Boka ",
+        "text": "er",
+        "after": " på bordet."
+      },
+      "answerClass": "verb",
+      "explanation": "Er er ei form av verbet vere. Verb kan seie noko om ein tilstand.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-017",
+      "wordId": "verb-nn-89604",
+      "level": 3,
+      "target": {
+        "before": "Vyrde ",
+        "text": "veit",
+        "after": " kvar kartet er."
+      },
+      "answerClass": "verb",
+      "explanation": "Veit er ei form av verbet vite. Verb kan seie noko om kva nokon veit.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-018",
+      "wordId": "verb-nn-20953",
+      "level": 3,
+      "target": {
+        "before": "No ",
+        "text": "forstår",
+        "after": " eg oppgåva."
+      },
+      "answerClass": "verb",
+      "explanation": "Forstår er eit verb. Det seier noko om kva som skjer i tankane.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-019",
+      "wordId": "verb-nn-63575",
+      "level": 3,
+      "target": {
+        "before": "Vi vil ",
+        "text": "samanlikne",
+        "after": " dei to teikningane."
+      },
+      "answerClass": "verb",
+      "explanation": "Samanlikne er eit verb. Her er det noko vi vil gjere.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-020",
+      "wordId": "verb-nn-1370",
+      "level": 4,
+      "target": {
+        "before": "Elevane skal ",
+        "text": "analysere",
+        "after": " teksten."
+      },
+      "answerClass": "verb",
+      "explanation": "Analysere er eit verb i infinitiv. Det tyder her å undersøkje teksten nøye.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-021",
+      "wordId": "adjektiv-nn-60456",
+      "level": 1,
+      "target": {
+        "before": "Vyrde finn ein ",
+        "text": "raud",
+        "after": " stein."
+      },
+      "answerClass": "adjektiv",
+      "explanation": "Raud er eit adjektiv. Det skildrar steinen.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-022",
+      "wordId": "adjektiv-nn-71127",
+      "level": 1,
+      "target": {
+        "before": "Ein ",
+        "text": "snill",
+        "after": " nabo hjelper oss."
+      },
+      "answerClass": "adjektiv",
+      "explanation": "Snill er eit adjektiv. Det seier noko om naboen.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-023",
+      "wordId": "adjektiv-nn-45893",
+      "level": 1,
+      "target": {
+        "before": "Ein ",
+        "text": "liten",
+        "after": " fugl sit i treet."
+      },
+      "answerClass": "adjektiv",
+      "explanation": "Liten er eit adjektiv. Det skildrar fuglen.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-024",
+      "wordId": "adjektiv-nn-27397",
+      "level": 2,
+      "target": {
+        "before": "Dei ",
+        "text": "grøne",
+        "after": " blada rører seg."
+      },
+      "answerClass": "adjektiv",
+      "explanation": "Grøne er ei bøygd form av adjektivet grøn. Forma passar til fleirtalet blad.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-025",
+      "wordId": "adjektiv-nn-32480",
+      "level": 3,
+      "target": {
+        "before": "Eit ",
+        "text": "høgt",
+        "after": " tre veks her."
+      },
+      "answerClass": "adjektiv",
+      "explanation": "Høgt er eit adjektiv her. Ordet skildrar treet.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-026",
+      "wordId": "adjektiv-nn-62130",
+      "level": 3,
+      "target": {
+        "before": "Ein ",
+        "text": "roleg",
+        "after": " hund ventar ved døra."
+      },
+      "answerClass": "adjektiv",
+      "explanation": "Roleg er eit adjektiv her. Ordet skildrar hunden.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-027",
+      "wordId": "adjektiv-nn-62130",
+      "level": 3,
+      "target": {
+        "before": "Hunden er ",
+        "text": "roleg",
+        "after": "."
+      },
+      "answerClass": "adjektiv",
+      "explanation": "Roleg er eit adjektiv her. Det seier noko om hunden, også når ordet står etter er.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-028",
+      "wordId": "adjektiv-nn-26058",
+      "level": 2,
+      "target": {
+        "before": "Det var eit ",
+        "text": "godt",
+        "after": " svar."
+      },
+      "answerClass": "adjektiv",
+      "explanation": "Godt er ei bøygd form av adjektivet god. Ordet skildrar svaret.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-029",
+      "wordId": "adjektiv-nn-40704",
+      "level": 3,
+      "target": {
+        "before": "Læraren gjev eit ",
+        "text": "konkret",
+        "after": " døme."
+      },
+      "answerClass": "adjektiv",
+      "explanation": "Konkret er eit adjektiv. Det skildrar dømet.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-030",
+      "wordId": "adjektiv-nn-76406",
+      "level": 4,
+      "target": {
+        "before": "Den ",
+        "text": "sympatiske",
+        "after": " figuren hjelper oss."
+      },
+      "answerClass": "adjektiv",
+      "explanation": "Sympatiske er ei bøygd form av adjektivet sympatisk. Det skildrar figuren.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-031",
+      "wordId": "adverb-nn-30256",
+      "level": 1,
+      "target": {
+        "before": "Vyrde står ",
+        "text": "her",
+        "after": "."
+      },
+      "answerClass": "adverb",
+      "explanation": "Her er eit adverb. Det seier kvar Vyrde står.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-032",
+      "wordId": "adverb-nn-71002",
+      "level": 1,
+      "target": {
+        "before": "Vi skal heim ",
+        "text": "snart",
+        "after": "."
+      },
+      "answerClass": "adverb",
+      "explanation": "Snart er eit adverb. Det seier noko om når vi skal heim.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-033",
+      "wordId": "adverb-nn-54013",
+      "level": 1,
+      "target": {
+        "before": "Vi les ",
+        "text": "ofte",
+        "after": " saman."
+      },
+      "answerClass": "adverb",
+      "explanation": "Ofte er eit adverb. Det seier kor ofte vi les.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-034",
+      "wordId": "adverb-nn-33268",
+      "level": 1,
+      "target": {
+        "before": "Vyrde finn ",
+        "text": "ikkje",
+        "after": " sekken."
+      },
+      "answerClass": "adverb",
+      "explanation": "Ikkje er eit adverb som nektar for at Vyrde finn sekken.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-035",
+      "wordId": "adverb-adj-nn-60398",
+      "level": 2,
+      "target": {
+        "before": "Vyrde spring ",
+        "text": "raskt",
+        "after": " heim."
+      },
+      "answerClass": "adverb",
+      "explanation": "Raskt er brukt som adverb her. Det seier korleis Vyrde spring.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-036",
+      "wordId": "adverb-adj-nn-87618",
+      "level": 2,
+      "target": {
+        "before": "Vyrde går ",
+        "text": "varsamt",
+        "after": " over brua."
+      },
+      "answerClass": "adverb",
+      "explanation": "Varsamt er brukt som adverb. Det seier korleis Vyrde går.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-037",
+      "wordId": "adverb-adj-nn-62130",
+      "level": 3,
+      "target": {
+        "before": "Hunden går ",
+        "text": "roleg",
+        "after": " gjennom tunet."
+      },
+      "answerClass": "adverb",
+      "explanation": "Roleg er brukt som adverb her. Det seier noko om gåinga.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-038",
+      "wordId": "adverb-adj-nn-32480",
+      "level": 3,
+      "target": {
+        "before": "Vyrde ropar ",
+        "text": "høgt",
+        "after": "."
+      },
+      "answerClass": "adverb",
+      "explanation": "Høgt er brukt som adverb her. Det seier korleis Vyrde ropar.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-039",
+      "wordId": "adverb-nn-24153",
+      "level": 3,
+      "target": {
+        "before": "Vyrde er ",
+        "text": "ganske",
+        "after": " glad."
+      },
+      "answerClass": "adverb",
+      "explanation": "Ganske er eit adverb. Det seier noko om graden av adjektivet glad.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    },
+    {
+      "id": "ordbas-demo-040",
+      "wordId": "adverb-nn-36881",
+      "level": 4,
+      "target": {
+        "before": "",
+        "text": "Kanskje",
+        "after": " kjem Vyrde i morgon."
+      },
+      "answerClass": "adverb",
+      "explanation": "Kanskje er eit adverb. Det uttrykkjer uvisse om det som blir sagt i setninga.",
+      "reviewStatus": "authored-planning-example-not-human-piloted"
+    }
+  ]
+}

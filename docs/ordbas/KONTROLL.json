@@ -1,0 +1,96 @@
+{
+  "app": "Ordbås",
+  "version": 1,
+  "checkedOn": "2026-10-22",
+  "wordClasses": {
+    "substantiv": {
+      "count": 1000,
+      "uniqueWordForms": 1000,
+      "uniqueSourceEntries": 1000,
+      "levels": {
+        "1": 147,
+        "2": 500,
+        "3": 250,
+        "4": 103
+      },
+      "contextRequired": 285,
+      "dictionaryAdverbs": 0,
+      "proposedAdverbialAdjectives": 0
+    },
+    "verb": {
+      "count": 1000,
+      "uniqueWordForms": 1000,
+      "uniqueSourceEntries": 1000,
+      "levels": {
+        "1": 132,
+        "2": 246,
+        "3": 482,
+        "4": 140
+      },
+      "contextRequired": 315,
+      "dictionaryAdverbs": 0,
+      "proposedAdverbialAdjectives": 0
+    },
+    "adjektiv": {
+      "count": 1000,
+      "uniqueWordForms": 1000,
+      "uniqueSourceEntries": 1000,
+      "levels": {
+        "1": 111,
+        "2": 142,
+        "3": 433,
+        "4": 314
+      },
+      "contextRequired": 278,
+      "dictionaryAdverbs": 0,
+      "proposedAdverbialAdjectives": 0
+    },
+    "adverb": {
+      "count": 1000,
+      "uniqueWordForms": 1000,
+      "uniqueSourceEntries": 1000,
+      "levels": {
+        "1": 52,
+        "2": 159,
+        "3": 316,
+        "4": 473
+      },
+      "contextRequired": 1000,
+      "dictionaryAdverbs": 500,
+      "proposedAdverbialAdjectives": 500
+    }
+  },
+  "exampleCount": 40,
+  "checks": [
+    "4 ordklassar med nøyaktig 1000 oppføringar kvar",
+    "Unike ID-ar på tvers av alle 4000 oppføringar",
+    "Ingen doble ordformer eller kjeldeoppføringar innan ei ordklasse",
+    "Kjeldeartikkel, lemma og form samsvarar for alle oppføringar",
+    "Alle adverb krev kontekst",
+    "Dømeoppgåvene peikar på eksisterande ord-ID-ar og godkjende ordformer",
+    "Alle JSON-filer har app og version"
+  ],
+  "limitations": [
+    "Ordklassar og ordformer er kontrollerte mot den henta kjelda. Det er ikkje ein semantisk kontroll av alle moglege bruksområde.",
+    "Ordnivåa er førebelse estimat, ikkje målte lesenivå.",
+    "Adjektivformer i adverbbanken krev naturlege, eintydige setningar og fagleg vurdering før publisering.",
+    "Ordreserven er ikkje eit ferdig oppgåvesett. Dei 40 døma er ikkje prøvde med elevar.",
+    "Ingen Ordbås-app eller førehandsvising er publisert eller funksjonstesta."
+  ],
+  "totalEntries": 4000,
+  "uniqueFormsAcrossClasses": 3627,
+  "sourceFiles": {
+    "lemma.json": {
+      "sha256": "d40a0cf0c13e6fa0dc3d10f4100bbbc98ed8ef4e9918481954a581270759effa"
+    },
+    "lemma_expanded.json": {
+      "sha256": "22d5f3ca55179782c1e9b9a75d4a41d357bfb0cbf97a219dbf5fdc29a94dccd4"
+    },
+    "frequency.tsv": {
+      "sha256": "78bf998ba4b58ac8ad8b0e045b2eb715ed6a4c2a9f06110a43f4d2fbae745638"
+    },
+    "inflection_tags.json": {
+      "sha256": "7596d21a0b614857c1238380ba3d064b15351ae05ddcf411c6f818864d379c4b"
+    }
+  }
+}
