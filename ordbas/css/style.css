@@ -62,11 +62,11 @@
 .ob-trail-stone svg { width: 18px; height: 18px; }
 .ob-play-space { --ob-vyrde-size: 138px; display: grid; grid-template-columns: minmax(0,1fr) 138px; align-items: center; gap: 16px; margin-block: 18px; min-height: 160px; }
 .ob-task { text-align: center; min-width: 0; }
-#game[data-mode="sort"] .ob-task { display: grid; grid-template-columns: minmax(0,1fr) minmax(120px,180px); gap: 20px; align-items: center; }
+#game[data-mode="sort"] .ob-task { display: grid; grid-template-columns: minmax(0,1fr) minmax(120px,220px); gap: 20px; align-items: center; }
 .ob-sentence { font-size: clamp(1.2rem,2.1vw,1.6rem); line-height: 1.5; text-wrap: pretty; margin: 0; }
 .ob-sentence strong,.ob-pair-tile strong { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
-.ob-word-card { --vp-button-fill: var(--vp-paper); min-height: 72px; min-width: 0; width: 100%; max-width: 100%; font-size: clamp(1.3rem,3.5vw,2rem); cursor: grab; touch-action: none; user-select: none; transform: rotate(-2deg); }
-.ob-word-card[data-long="true"] { font-size: clamp(1rem,2.3cqi,1.35rem); overflow-wrap: anywhere; }
+.ob-word-card { --vp-button-fill: var(--vp-paper); height: 72px; min-height: 72px; min-width: 0; width: 100%; max-width: 100%; padding: 12px 16px; line-height: 1.15; white-space: nowrap; overflow-wrap: normal; word-break: normal; font-size: clamp(1.3rem,3.5vw,2rem); cursor: grab; touch-action: none; user-select: none; transform: rotate(-2deg); }
+#wordText { display: inline-block; flex-shrink: 0; white-space: nowrap; }
 .ob-word-card:disabled { transform: rotate(0deg); }
 .ob-drag-ghost { position: fixed; z-index: 10000; pointer-events: none; margin: 0; opacity: .9; cursor: grabbing; }
 .ob-sprite { display: block; aspect-ratio: 1; background: url('../assets/vyrde-reaksjonar.png') 0 0 / 300% 200% no-repeat; }
@@ -105,9 +105,11 @@
 .ob-bin[data-class="verb"] .ob-stall-layer { background-position: 100% 0; }
 .ob-bin[data-class="adjektiv"] .ob-stall-layer { background-position: 0 100%; }
 .ob-bin[data-class="adverb"] .ob-stall-layer { background-position: 100% 100%; }
+.ob-bin[data-class="verb"] .ob-stall-name,.ob-bin[data-class="adverb"] .ob-stall-name { left: 29%; }
+.ob-bin[data-class="adjektiv"] .ob-stall-front,.ob-bin[data-class="adverb"] .ob-stall-front { clip-path: polygon(0 69%,100% 69%,100% 100%,0 100%); }
 .ob-bin[data-class="adjektiv"] .ob-stall-back { clip-path: polygon(0 1.2%,14% 1.2%,14% 0,26% 0,26% 1.2%,100% 1.2%,100% 100%,0 100%); }
 .ob-bin[data-class="adverb"] .ob-stall-back { clip-path: polygon(0 1.2%,70% 1.2%,70% 0,100% 0,100% 100%,0 100%); }
-.ob-stall-name { position: absolute; left: 25%; right: 25%; top: 39%; height: 13%; z-index: 5; display: grid; place-items: center; font-size: clamp(.75rem,7cqi,1.1rem); line-height: 1; white-space: nowrap; text-align: center; }
+.ob-stall-name { position: absolute; left: 31%; right: 29%; top: 39%; height: 13%; z-index: 5; display: grid; place-items: center; font-size: clamp(.6rem,5.7cqi,1rem); line-height: 1; white-space: nowrap; text-align: center; }
 .ob-bin.vp-button:active:not(:disabled),.ob-bin.vp-button:hover:not(:disabled),.ob-bin.ob-drag-over { transform: none; }
 .ob-bay::before { content: ''; position: absolute; inset: 5% -4% 0; border-radius: 45%; background: radial-gradient(ellipse,var(--vp-honey) 0 36%,transparent 70%); opacity: 0; pointer-events: none; transition: opacity .24s ease; }
 .ob-bay:has(.ob-drag-over)::before { opacity: .9; }
@@ -120,7 +122,8 @@
 .ob-cavity { position: absolute; left: 20%; right: 20%; top: 52%; bottom: 25%; z-index: 3; display: grid; align-items: end; justify-items: center; pointer-events: none; perspective: 500px; overflow: hidden; }
 .ob-collected-card { grid-area: 1 / 1; width: max-content; min-width: 70%; max-width: 100%; padding: 3px 2px 15px; font-size: clamp(.8rem,6cqi,1rem); line-height: 1.3; font-weight: 600; white-space: normal; overflow-wrap: anywhere; transform-origin: center bottom; transform: translate(calc(var(--ob-card-depth) * -5px),calc(var(--ob-card-depth) * -5px)) rotateX(-10deg) rotateZ(calc(var(--ob-card-depth) * 4deg - 3deg)); }
 #game[data-mode="pairs"] .ob-bin { max-width: 380px; aspect-ratio: .9; min-height: 440px; }
-#game[data-mode="pairs"] .ob-collected-card { width: 100%; font-weight: 400; font-size: .92rem; padding: 6px 6px 30px; }
+#game[data-mode="pairs"] .ob-cavity { top: 50%; }
+#game[data-mode="pairs"] .ob-collected-card { width: 100%; font-weight: 400; font-size: .92rem; padding: 6px 6px 38px; transform: rotateX(-10deg); }
 .ob-collected-card strong { text-decoration: underline; text-underline-offset: 2px; }
 .ob-flying-card { position: fixed; z-index: 10010; pointer-events: none; padding: 10px 18px; font-weight: 800; max-width: min(80vw,320px); }
 .ob-feedback { margin-block: 20px; }
@@ -172,7 +175,7 @@
   .ob-pair-tile { min-height: 70px; padding: 10px; }
   #game[data-mode="pairs"] .ob-bins { grid-template-columns: 1fr; }
   #game[data-mode="sort"] .ob-task { grid-template-columns: minmax(0,1fr); gap: 12px; }
-  .ob-word-card { min-width: 0; width: 100%; min-height: 60px; padding: 10px; }
+  .ob-word-card { min-width: 0; width: 100%; height: 64px; min-height: 60px; padding: 10px; }
   .ob-scoreboard { gap: 10px; }
   .ob-streak { font-size: .8rem; padding: 7px; }
   .ob-trail-stone { width: 24px; height: 24px; }
@@ -204,9 +207,10 @@
 @container (max-width: 350px) {
   .ob-play-space { --ob-vyrde-size: 82px; grid-template-columns: minmax(0,1fr) 82px; }
   .ob-vyrde-control { width: 82px; height: 82px; }
-  .ob-word-card[data-long="true"] { font-size: 1rem; }
+  #game[data-mode="sort"] .ob-play-space { grid-template-columns: 1fr; }
+  #game[data-mode="sort"] .ob-companion { grid-column: 1; grid-row: 1; justify-self: end; }
+  #game[data-mode="sort"] .ob-task { grid-column: 1; grid-row: 2; }
   .ob-bins { grid-template-columns: 1fr; }
-  .ob-stall-name { font-size: 1rem; }
   .ob-pair-tile { font-size: 1rem; }
   #game[data-mode="helper"] .ob-play-space,#game[data-mode="pairs"] .ob-play-space { grid-template-columns: 1fr; }
   #game[data-mode="helper"] .ob-companion,#game[data-mode="pairs"] .ob-companion { justify-self: end; }

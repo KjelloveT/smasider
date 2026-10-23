@@ -21,6 +21,8 @@
       box.type = 'checkbox'; box.name = 'wordClass'; box.value = c.id; label.append(box,document.createTextNode(c.name)); byId('classChoices').append(label);
       const p = el('p'); p.append(el('strong','',c.name + ': '),document.createTextNode(c.guide)); byId('classGuide').append(p);
     });
+    if (root.ResizeObserver) new root.ResizeObserver(fitWord).observe(byId('wordCard'));
+    root.addEventListener('resize',fitWord);
     byId('loading').hidden = true;
   }
   function screen(name) {
@@ -50,7 +52,7 @@
     byId('counter').textContent = `${state.answers.filter(a => !a.retry).length} / ${round.summary().total}`;
     O.Yard.trail(round); O.Yard.pairs(round); O.Yard.hunt(round);
     O.Yard.sentence(byId('sentence'),q); byId('sentence').hidden = helper || paired;
-    const card = byId('wordCard'); card.hidden = helper || paired; card.textContent = q.target.text; card.dataset.long = String(q.target.text.length > 10);
+    const card = byId('wordCard'); card.hidden = helper || paired; byId('wordText').textContent = q.target.text;
     card.setAttribute('aria-label',`Ordkort: ${q.target.text}. Vel ein bås.`); card.setAttribute('aria-pressed','false'); card.disabled = state.phase === 'feedback'; card.draggable = false;
     byId('nextButton').hidden = state.phase !== 'feedback';
     byId('nextLabel').textContent = paired ? 'Neste par' : helper ? 'Neste gåte' : 'Neste ord';
@@ -64,7 +66,18 @@
     byId('feedbackText').textContent = text; feedback.hidden = !text; speech.hidden = !speech.textContent;
     const source = byId('sourceLink'); source.hidden = state.phase !== 'feedback' || helper; source.href = `https://ordbokene.no/nn/${q.source.articleId}`;
     byId('companion').dataset.reaction = 'hint';
-    meaning(round); O.Yard.bins(round); screen('game');
+    meaning(round); O.Yard.bins(round); screen('game'); fitWord();
+  }
+  function fitWord() {
+    const card = byId('wordCard'), text = byId('wordText');
+    if (!card || card.hidden || !card.clientWidth) return;
+    text.style.fontSize = '';
+    const style = root.getComputedStyle(card);
+    const available = card.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    // Measure the rendered word: letter widths matter more than character count.
+    if (text.scrollWidth > available && available > 0) {
+      text.style.fontSize = `${parseFloat(style.fontSize) * available / text.scrollWidth * .98}px`;
+    }
   }
   function meaning(round) {
     const active = round.current(), helper = round.state.settings.mode === 'helper'; byId('meaningBox').hidden = !active.meaning;
@@ -95,5 +108,5 @@
   function badges() { return root.VyrdepilBragd.renderGameBadges(byId('badges'),'ordbas',O.Storage.earned()); }
   function focus(id) { const target = byId(id); if (target && !target.hidden) target.focus({preventScroll:true}); }
   function focusTask() { const target = byId('game').querySelector('#pairContext:not([hidden]) .ob-pair-tile[aria-pressed="true"],#wordHunt:not([hidden]) button:not(:disabled),#wordCard:not([hidden])'); if (target) target.focus({preventScroll:true}); }
-  O.View = {init,screen,setup,game,meaning,progress,result,badges,focus,focusTask,byId};
+  O.View = {init,screen,setup,game,fitWord,meaning,progress,result,badges,focus,focusTask,byId};
 })(window);

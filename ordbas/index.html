@@ -7,7 +7,7 @@
   <meta name="description" content="Spel i ordtunet med Vyrde. Sorter ord, finn ord ut frå tydinga og oppdag korleis same ord kan skifte bås.">
   <link rel="icon" href="../favicon.ico" sizes="any">
   <link rel="stylesheet" href="../css/vyrdepil-design.css?v=ordbas-2">
-  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <script src="../js/vyrdepil-storage.js" defer></script>
   <script src="../js/vyrdepil-icons.js" defer></script>
   <script src="../js/vyrdepil-util.js" defer></script>
@@ -72,7 +72,7 @@
                 </div>
                 <button type="button" class="vp-button vp-button--illustration ob-vyrde-control" id="meaningButton" aria-label="Vyrde: gje eit hint" aria-expanded="false" aria-controls="vyrdeBubble"><span class="ob-sprite ob-vyrde" id="vyrde" aria-hidden="true"></span><span class="ob-hint-label" aria-hidden="true">Hint</span></button><p class="vp-panel vp-panel--soft vp-panel--compact ob-speech" id="vyrdeSpeech" hidden></p>
               </div>
-              <div class="ob-task"><div id="pairContext" class="ob-pair-context" hidden></div><p class="ob-sentence" id="sentence" tabindex="-1"></p><button type="button" class="vp-button vp-button--large ob-word-card" id="wordCard" aria-pressed="false"></button><section id="wordHunt" class="ob-word-hunt" aria-label="Finn ordet" hidden><p id="huntSentence" class="ob-hunt-sentence" aria-label="Vel ordet i setninga"></p></section></div>
+              <div class="ob-task"><div id="pairContext" class="ob-pair-context" hidden></div><p class="ob-sentence" id="sentence" tabindex="-1"></p><button type="button" class="vp-button vp-button--large ob-word-card" id="wordCard" aria-pressed="false"><span id="wordText"></span></button><section id="wordHunt" class="ob-word-hunt" aria-label="Finn ordet" hidden><p id="huntSentence" class="ob-hunt-sentence" aria-label="Vel ordet i setninga"></p></section></div>
             </div>
             <div class="ob-bins" id="bins" role="group" aria-label="Ordbåsane"></div><section id="wordBook" class="vp-panel vp-panel--soft ob-word-book" aria-labelledby="bookTitle" hidden><h3 id="bookTitle"><span data-icon="bookOpen" aria-hidden="true"></span>Ordboka til Vyrde</h3><dl id="foundWords" class="ob-found-words"></dl></section>
             <div id="feedback" class="vp-notice vp-notice--text ob-feedback" role="status" aria-live="polite" aria-atomic="true" hidden><p id="feedbackText"></p></div>

@@ -29,6 +29,7 @@
       event.preventDefault();dragged=true;
       if(!ghost){
         ghost=pointer.card.cloneNode(true);ghost.removeAttribute('id');ghost.removeAttribute('aria-pressed');
+        ghost.querySelectorAll('[id]').forEach(node=>node.removeAttribute('id'));
         ghost.setAttribute('aria-hidden','true');ghost.tabIndex=-1;ghost.classList.add('ob-drag-ghost');
         ghost.style.width=pointer.bounds.width+'px';ghost.style.height=pointer.bounds.height+'px';
         document.body.append(ghost);
