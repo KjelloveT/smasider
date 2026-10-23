@@ -14,7 +14,10 @@
       "/ljodstigen/skog/*",
       "/ljodstigen/ropet/*",
       "/ljodstigen/figur/*",
-      "/gdpr/data/*"
+      "/gdpr/data/*",
+      "/ordbas/js/*",
+      "/ordbas/css/*",
+      "/ordbas/data/*"
     ]
   },
   "routes": [

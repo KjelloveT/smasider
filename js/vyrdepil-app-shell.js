@@ -6,6 +6,8 @@
   const project = new URL('../', script.src);
   const body = document.body;
   const appId = body.dataset.vpApp;
+  // Native appar deler navigasjonen utan å få det eldre migreringsoppsettet.
+  const nativeIntro = Boolean(body.querySelector('[data-vp-native-intro]'));
   const isHome = body.dataset.vpHome === 'true';
   const isSitePage = body.dataset.vpSitePage === 'true';
   if (!appId && !isHome && !isSitePage) return;
@@ -14,7 +16,7 @@
   const preserveDesign = protectedApps.has(appId) || body.hasAttribute('data-vp-preserve');
   if (isHome) body.classList.add('vp-home-page');
   else if (isSitePage) body.classList.add('vp-site-page');
-  else body.classList.add('vp-migrated-page');
+  else if (!nativeIntro) body.classList.add('vp-migrated-page');
   if (preserveDesign) body.setAttribute('data-vp-preserve', '');
   if (!preserveDesign) {
     body.classList.add('vp-page');
@@ -59,7 +61,7 @@
     if (!main.id) main.id = 'main';
     if (isHome) main.classList.add('vp-home-main');
     else if (isSitePage) main.classList.add('vp-site-main');
-    else main.classList.add('vp-migrated-main');
+    else if (!nativeIntro) main.classList.add('vp-migrated-main');
     if (body.dataset.vpLayout === 'expanded') main.classList.add('vp-migrated-main--wide');
     if (body.dataset.vpLayout === 'canvas') main.classList.add('vp-migrated-main--canvas');
     const skip = document.createElement('a');
@@ -97,7 +99,7 @@
     return hero || null;
   }
   function addAppIntro(app, logoPath) {
-    if (preserveDesign || body.dataset.vpFullscreen === 'true') return;
+    if (preserveDesign || body.dataset.vpFullscreen === 'true' || nativeIntro) return;
     const root = main || document.body;
     const hero = findHero(root);
     const stage = document.createElement('div');

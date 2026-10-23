@@ -915,3 +915,8 @@ body.vp-migrated-page[data-vp-game-active]:not([data-vp-preserve]) .vp-migrated-
 @media (max-width: 560px) {
     .vp-library-row { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Illustrerte spelobjekt er sjølve treffflata; fokus kjem frå fellesknappen. */
+.vp-button--illustration { --vp-button-fill: transparent; --vp-button-shadow: 0 0 0 transparent; border-width: 0; padding: 0; }
+.vp-button--illustration:hover:not(:disabled), .vp-button--illustration:disabled { background: transparent; }
+.vp-button--illustration:disabled { cursor: default; }

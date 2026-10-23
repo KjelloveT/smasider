@@ -48,6 +48,24 @@
   ],
   "apps": [
     {
+      "id": "ordbas",
+      "name": "Ordbås",
+      "href": "ordbas/index.html",
+      "cat": "spraak_ord",
+      "btn": "Opne ordkorga",
+      "img": "_resources/vyrdepil-design/bragder/icons/wooden-blocks.png",
+      "added": "2026-10-22",
+      "audience": [
+        "Småtrinn",
+        "Mellomtrinn",
+        "Ungdomstrinn"
+      ],
+      "desc": [
+        "Hjelp Vyrde å sortere substantiv, verb, adjektiv og adverb i rett bås. Les setninga og få ei kort ordforklaring når du treng det.",
+        "Vel Båsrunden, Hjelp Vyrde eller Ordskiftet. 400 nynorske oppgåver, fire vanskegradar og lokal framgang utan tidspress."
+      ]
+    },
+    {
       "id": "ljodstigen",
       "name": "Ljodstigen",
       "href": "ljodstigen/index.html",
