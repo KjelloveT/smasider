@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ordbås – finn rett ordklasse | Vyrdepil</title>
-  <meta name="description" content="Hjelp Vyrde å sortere substantiv, verb, adjektiv og adverb. Korte nynorske oppgåver med ordforklaringar og roleg øving.">
+  <meta name="description" content="Spel i ordtunet med Vyrde. Sorter ord, finn feilsorteringar og oppdag korleis same ord kan skifte bås.">
   <link rel="icon" href="../favicon.ico" sizes="any">
-  <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/vyrdepil-design.css?v=ordbas-2">
+  <link rel="stylesheet" href="css/style.css?v=2">
   <script src="../js/vyrdepil-storage.js" defer></script>
   <script src="../js/vyrdepil-icons.js" defer></script>
   <script src="../js/vyrdepil-util.js" defer></script>
@@ -20,72 +20,72 @@
   <script src="js/content.js" defer></script>
   <script src="js/round.js" defer></script>
   <script src="js/storage.js" defer></script>
+  <script src="js/yard.js" defer></script>
   <script src="js/render.js" defer></script>
+  <script src="js/effects.js" defer></script>
   <script src="js/input.js" defer></script>
   <script src="js/main.js" defer></script>
 </head>
 <body class="vp-page" data-vp-design data-vp-app="ordbas" data-vp-layout="medium" data-vp-site-footer>
   <main class="vp-shell ob-app" id="main">
-    <p class="vp-game-description">Eit ord, ei setning – kva for ein bås høyrer ordet til?</p>
+    <p class="vp-game-description">Finn rett plass til orda.</p>
     <div class="vp-standard">
       <section class="vp-hero-stage" id="appHero" data-vp-native-intro aria-labelledby="appTitle">
         <div class="vp-hero"><div class="vp-hero-content vp-hero-content--app">
           <img class="vp-hero-logo" data-vp-app-logo src="../_resources/vyrdepil-design/bragder/icons/wooden-blocks.png" width="360" height="360" alt="">
-          <div class="vp-hero-copy"><h1 class="vp-title" id="appTitle">Ordbås</h1><p>Rydd i orda med Vyrde</p></div>
+          <div class="vp-hero-copy"><h1 class="vp-title" id="appTitle">Ordbås</h1><p>Velkomen til ordtunet!</p></div>
         </div></div>
       </section>
-      <div class="vp-mascot-perch ob-perch"><img src="../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt="Vyrde er klar til å hjelpe deg."></div>
+      <div class="vp-mascot-perch ob-perch"><span class="ob-sprite ob-delivery" role="img" aria-label="Vyrde kjem med ordkorga."></span></div>
       <section class="vp-panel vp-standard-main" id="workPanel" aria-label="Ordtunet">
-        <div class="vp-decor vp-decor--grain" aria-hidden="true"></div>
-        <div class="vp-content">
+        <div class="vp-decor ob-ground" aria-hidden="true"></div>
+        <div class="vp-content ob-content">
           <div id="loading" role="status">Vyrde gjer klar ordkorga …</div>
-          <div id="loadError" class="vp-notice vp-notice--error" role="alert" hidden><p>Ordkorga kunne ikkje lastast. Prøv å laste sida på nytt.</p><button type="button" class="vp-button" id="reloadButton">Last sida på nytt</button></div>
-          <noscript><p>Ordbås treng JavaScript for å sortere ord. Slå på JavaScript i nettlesaren.</p></noscript>
+          <div id="loadError" class="vp-notice vp-notice--text vp-notice--error" role="alert" hidden><p>Ordkorga kunne ikkje lastast.</p><button type="button" class="vp-button" id="reloadButton">Prøv att</button></div>
+          <noscript><p>Ordbås treng JavaScript for å spele.</p></noscript>
           <section id="setup" aria-labelledby="setupTitle" hidden>
-            <p class="ob-eyebrow">ORDTUNET ER OPE</p>
-            <h2 class="vp-heading" id="setupTitle" tabindex="-1">Kva skal vi sortere i dag?</h2>
-            <p>Vyrde har ei korg full av ord. Les setninga og finn rett ordklasse. Du kan ta den tida du treng.</p>
-            <fieldset class="vp-choices"><legend>Vel spelmåte</legend><div id="modeChoices" class="ob-mode-grid"></div></fieldset>
-            <div class="ob-start-actions vp-actions"><button type="button" class="vp-button vp-button--primary vp-button--large" id="startButton"><span data-icon="play" aria-hidden="true"></span>Opne ordkorga</button><button type="button" class="vp-button vp-button--tool" id="adverbButton">Prøv med adverb</button></div>
-            <p class="vp-help" id="poolSummary"></p>
-            <details class="vp-accordion" id="settingsDetails"><summary>Tilpass øvinga</summary><div class="vp-accordion-body vp-stack">
-              <label class="vp-field"><span class="vp-label">Ordsteget ditt</span><select id="levelSelect" class="vp-input"><option value="1">1 · Fyrste båsane</option><option value="2">2 · Bøygde ord</option><option value="3">3 · Ord i samanheng</option><option value="4">4 · Ordmeisteren</option></select></label>
-              <fieldset class="vp-choices"><legend>Ordklassar i korga</legend><div id="classChoices" class="ob-class-options"></div></fieldset>
-              <label class="vp-field"><span class="vp-label">Lengd på leveringa</span><select id="countSelect" class="vp-input"><option value="5">5 kort</option><option value="8">8 kort</option><option value="12">12 kort</option></select></label>
-              <label class="vp-choice"><input id="meaningToggle" type="checkbox">Vis ordforklaringa frå start</label>
-              <p class="vp-help">Ordskiftet bruker adjektiv og adverb i par. Alle steg er opne. Ordforklaring er lesestøtte og kostar ingen poeng.</p>
+            <h2 class="vp-heading" id="setupTitle" tabindex="-1">Vel ein leik</h2>
+            <fieldset class="vp-choices"><legend class="ob-sr-only">Spelmåte</legend><div id="modeChoices" class="ob-mode-grid"></div></fieldset>
+            <div class="ob-start-actions vp-actions"><button type="button" class="vp-button vp-button--primary vp-button--large" id="startButton"><span data-icon="play" aria-hidden="true"></span>Spel</button><span class="vp-small" id="setupSelection"></span></div>
+            <p class="vp-help" id="poolSummary" role="status"></p>
+            <details class="vp-accordion" id="settingsDetails"><summary><span data-icon="settings" aria-hidden="true"></span>Spelval</summary><div class="vp-accordion-body vp-stack">
+              <label class="vp-field"><span class="vp-label">Ordsteg</span><select id="levelSelect" class="vp-input"><option value="1">1 · Fyrste båsane</option><option value="2">2 · Bøygde ord</option><option value="3">3 · Ord i samanheng</option><option value="4">4 · Ordmeisteren</option></select></label>
+              <fieldset class="vp-choices"><legend>Ordklassar</legend><div id="classChoices" class="ob-class-options"></div></fieldset>
+              <label class="vp-field"><span class="vp-label">Ordkort</span><select id="countSelect" class="vp-input"><option value="5">5 kort</option><option value="8">8 kort</option><option value="12">12 kort</option></select></label>
+              <label class="vp-choice"><input id="meaningToggle" type="checkbox">Vis hint frå start</label>
+              <button type="button" class="vp-button vp-button--tool" id="adverbButton">Spel med adverb</button>
             </div></details>
             <p id="setupMessage" class="vp-help" role="status"></p>
-            <button type="button" class="vp-button vp-button--quiet" id="reviewButton" hidden>Øv på ord frå før</button>
+            <button type="button" class="vp-button vp-button--quiet" id="reviewButton" hidden>Øv meir</button>
           </section>
           <section id="game" aria-labelledby="roundTitle" hidden>
-            <div class="ob-round-head"><div><p class="ob-eyebrow" id="roundMode"></p><h2 class="vp-heading" id="roundTitle" tabindex="-1">Ei ny levering</h2></div><button type="button" class="vp-button vp-button--quiet vp-button--compact" id="backButton"><span data-icon="arrowLeft" aria-hidden="true"></span>Til tunet</button></div>
-            <div class="ob-counter-row"><span id="counter"></span><span id="firstTryCounter"></span></div>
-            <progress id="roundProgress" max="8" value="0" aria-label="Framgang i leveringa"></progress>
-            <div class="ob-companion" id="companion"><img class="ob-vyrde" id="vyrde" src="../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt=""><p class="vp-panel vp-panel--soft vp-panel--compact ob-speech" id="vyrdeSpeech"></p></div>
-            <div class="ob-task"><p class="ob-sentence" id="sentence"></p><button type="button" class="vp-button vp-button--large ob-word-card" id="wordCard" aria-pressed="false"></button><p class="vp-help ob-instruction">Trykk på ein bås, eller dra kortet dit. Tastane 1–4 vel bås.</p></div>
-            <div class="vp-actions ob-meaning-action"><button type="button" class="vp-button vp-button--tool vp-button--compact" id="meaningButton" aria-expanded="false" aria-controls="meaningBox"><span data-icon="bookOpen" aria-hidden="true"></span>Vyrde, forklar ordet</button></div>
-            <div class="vp-notice ob-meaning" id="meaningBox" hidden><strong>Ordet tyder:</strong><p id="meaningText"></p></div>
-            <div class="ob-bins" id="bins" role="group" aria-label="Vel rett ordklasse"></div>
-            <div id="feedback" class="vp-notice ob-feedback" role="status" aria-live="polite" aria-atomic="true"><p id="feedbackText"></p></div>
-            <div class="vp-actions ob-next"><button type="button" class="vp-button vp-button--positive" id="nextButton" hidden>Neste ord<span data-icon="arrowRight" aria-hidden="true"></span></button><a class="vp-small" id="sourceLink" target="_blank" rel="noopener noreferrer" hidden>Sjå ordtydinga i Nynorskordboka</a></div>
+            <div class="ob-round-head"><div><p class="ob-eyebrow" id="roundMode"></p><h2 class="vp-heading" id="roundTitle" tabindex="-1">Båsrunden</h2></div><button type="button" class="vp-button vp-button--quiet vp-button--compact" id="backButton"><span data-icon="arrowLeft" aria-hidden="true"></span>Til tunet</button></div>
+            <div class="ob-scoreboard"><div class="vp-panel vp-panel--soft vp-panel--compact ob-score" role="status" aria-live="polite" aria-atomic="true"><span data-icon="star" aria-hidden="true"></span><span><strong id="scoreValue">0</strong><span class="ob-score-label">poeng</span></span><span id="scoreGain" class="ob-score-gain" aria-hidden="true"></span></div><span class="vp-panel vp-panel--soft vp-panel--compact ob-streak" id="streakBadge" hidden><span data-icon="sparkles" aria-hidden="true"></span><strong id="streakValue">0</strong> på rad</span><span class="ob-counter" id="counter"></span></div>
+            <div class="ob-round-trail" id="roundTrail" role="img" aria-label="Framgang"></div>
+            <div class="ob-play-space">
+              <div class="ob-task"><div id="pairContext" class="ob-pair-context" hidden></div><p class="ob-sentence" id="sentence" tabindex="-1"></p><button type="button" class="vp-button vp-button--large ob-word-card" id="wordCard" aria-pressed="false"></button><p id="helperPrompt" class="ob-helper-prompt" tabindex="-1" hidden></p></div>
+              <div class="ob-companion" id="companion" data-reaction="hint"><button type="button" class="vp-button vp-button--illustration ob-vyrde-control" id="meaningButton" aria-label="Vyrde: gje eit hint" aria-expanded="false" aria-controls="meaningBox"><span class="ob-sprite ob-vyrde" id="vyrde" aria-hidden="true"></span><span class="ob-hint-label" aria-hidden="true">Hint</span></button><p class="vp-panel vp-panel--soft vp-panel--compact ob-speech" id="vyrdeSpeech" hidden></p></div>
+            </div>
+            <div class="vp-notice vp-notice--text ob-meaning" id="meaningBox" hidden><p id="meaningText"></p></div>
+            <div class="ob-bins" id="bins" role="group" aria-label="Ordbåsane"></div>
+            <div id="feedback" class="vp-notice vp-notice--text ob-feedback" role="status" aria-live="polite" aria-atomic="true" hidden><p id="feedbackText"></p></div>
+            <div class="vp-actions ob-next"><button type="button" class="vp-button vp-button--primary" id="checkButton" hidden><span data-icon="check" aria-hidden="true"></span>Sjekk tunet</button><button type="button" class="vp-button vp-button--positive" id="nextButton" hidden>Neste ord<span data-icon="arrowRight" aria-hidden="true"></span></button><a class="vp-small" id="sourceLink" aria-label="Sjå ordet i Nynorskordboka" target="_blank" rel="noopener noreferrer" hidden>Ordbok</a></div>
           </section>
           <section id="result" aria-labelledby="resultTitle" hidden>
-            <p class="ob-eyebrow">GODT ARBEID I ORDTUNET</p><h2 class="vp-heading" id="resultTitle" tabindex="-1">Leveringa er framme!</h2>
-            <div class="vp-panel vp-panel--soft ob-result-note"><img src="../_resources/vyrdepil-design/vyrde.png" width="384" height="368" alt=""><div><p class="ob-big-number" id="resultScore"></p><p id="resultSummary"></p></div></div>
-            <div id="reviewWords" class="ob-review-words"></div>
-            <div class="vp-actions"><button type="button" class="vp-button vp-button--primary" id="againButton">Ei korg til</button><button type="button" class="vp-button vp-button--tool" id="practiceButton" hidden>Øv på desse orda</button><button type="button" class="vp-button" id="homeButton">Til tunet</button></div>
+            <h2 class="vp-heading" id="resultTitle" tabindex="-1">Tunet er ryddig!</h2>
+            <div class="ob-result-note"><span class="ob-sprite ob-celebration" role="img" aria-label="Vyrde jublar."></span><div class="vp-panel vp-panel--soft ob-result-score"><p class="ob-big-number" id="resultScore"></p><strong>poeng</strong><p id="resultStreak"></p></div></div>
+            <p id="resultSummary"></p><div id="reviewWords" class="ob-review-words"></div>
+            <div class="vp-actions"><button type="button" class="vp-button vp-button--primary" id="againButton">Spel ein gong til</button><button type="button" class="vp-button vp-button--tool" id="practiceButton" hidden>Øv på desse orda</button><button type="button" class="vp-button" id="homeButton">Til tunet</button></div>
           </section>
         </div>
       </section>
-      <aside class="vp-sign vp-sign--grounded vp-standard-support" aria-label="Vyrdes hugselappar">
-        <div class="vp-panel"><div class="vp-decor" data-vp-corners aria-hidden="true"><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i></div><div class="vp-content">
-          <h2 class="vp-heading">Vyrdes hugselappar</h2>
-          <details class="vp-accordion" data-vp-support><summary>Dei fire båsane</summary><div class="vp-accordion-body" id="classGuide"></div></details>
-          <details class="vp-accordion" data-vp-support><summary>Arbeidet ditt</summary><div class="vp-accordion-body"><p id="progressSummary">Du har ei tom ordkorg å fylle.</p><div id="levelProgress" class="vp-stack"></div><p class="vp-small">Dette er øvingstal på denne eininga, og er ikkje ei vurdering av eleven.</p></div></details>
-          <details class="vp-accordion"><summary>Bragdane dine</summary><div class="vp-accordion-body"><div id="badges" class="vp-bragd-grid" aria-busy="true"></div></div></details>
-          <details class="vp-accordion"><summary>Om ord og ordforklaringar</summary><div class="vp-accordion-body vp-prose"><p>120 oppgåver, med 30 i kvar ordklasse. Same ord kan høyre til ulike båsar når bruken i setninga endrar seg.</p><p>Ordforklaringane byggjer på éi vald tyding i Nynorskordboka og er korta ned for spelet. Setningar og grammatikkforklaringar er skrivne for Ordbås.</p><p>Nynorskordboka, Universitetet i Bergen og Språkrådet, <a href="https://ordbokene.no" target="_blank" rel="noopener noreferrer">ordbøkene.no</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC-BY 4.0</a>.</p><p>Spelet bruker den skulegrammatiske forklaringa der adjektiv kan brukast som adverb i ei setning.</p></div></details>
-          <details class="vp-accordion"><summary>Lagring på denne eininga</summary><div class="vp-accordion-body"><p>Ordbås hugsar val, fullførte leveringar, korte øvingstal og inntil 30 oppgåver å øve meir på. Ingen namn eller datoar blir lagra.</p><p>Ordforklaringar og oppgåver ligg i spelet. Ingen ord blir sende til ei ordbokteneste når du spelar.</p><button type="button" class="vp-button vp-button--danger vp-button--compact" id="resetButton">Nullstill Ordbås-øvinga</button><p class="vp-small">Bragdene blir verande i den felles Vyrdepil-samlinga.</p></div></details>
+      <aside class="vp-sign vp-sign--grounded vp-standard-support" aria-label="Hjelp og framgang">
+        <div class="vp-panel"><div class="vp-decor" data-vp-corners aria-hidden="true"><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i></div><div class="vp-content ob-support-content">
+          <details class="vp-accordion"><summary><img src="../_resources/vyrdepil-design/bragder/icons/wooden-blocks.png" width="40" height="40" alt="">Båsane</summary><div class="vp-accordion-body" id="classGuide"></div></details>
+          <details class="vp-accordion"><summary><img src="../_resources/vyrdepil-design/bragder/icons/streak-footprints.png" width="40" height="40" alt="">Framgang</summary><div class="vp-accordion-body"><p id="progressSummary"></p><div id="levelProgress" class="vp-stack"></div></div></details>
+          <details class="vp-accordion"><summary><img src="../_resources/vyrdepil-design/bragder/icons/perfect-star.png" width="40" height="40" alt="">Bragder</summary><div class="vp-accordion-body"><div id="badges" class="vp-bragd-grid" aria-busy="true"></div></div></details>
+          <details class="vp-accordion"><summary><img src="../_resources/vyrdepil-design/bragder/icons/module-book-stack.png" width="40" height="40" alt="">Om spelet</summary><div class="vp-accordion-body vp-prose"><p>120 oppgåver. Båsrunden: eitt kort om gongen. Hjelp Vyrde: flytt feilsorterte setningskort og sjekk tunet. Ordskiftet: same ordform i to setningar.</p><p>10 poeng på fyrste forsøk, 5 etter eit feilval. Kvart tredje rette på rad gjev 5 ekstra. Hint kostar ingenting. Repetisjonskort gjev øving utan fleire poeng.</p><p>Tastane 1–4 vel bås. Du kan òg trykkje eller dra kortet.</p><p>Ordforklaringane er tilpassa frå valde tydingar i Nynorskordboka, Universitetet i Bergen og Språkrådet: <a href="https://ordbokene.no" target="_blank" rel="noopener noreferrer">ordbøkene.no</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC-BY 4.0</a>. Spelet bruker den skulegrammatiske forklaringa der adjektiv kan brukast som adverb.</p></div></details>
+          <details class="vp-accordion"><summary><span data-icon="hardDrive" aria-hidden="true"></span>Lagring</summary><div class="vp-accordion-body"><p>Val, øvingstal og inntil 30 oppgåver å øve meir på blir hugsa på denne eininga. Ingen namn eller datoar. Poenga gjeld berre denne runden.</p><p>Ingen ord eller svar blir sende til eksterne tenester medan du spelar.</p><button type="button" class="vp-button vp-button--danger vp-button--compact" id="resetButton">Nullstill øvinga</button><p class="vp-small">Opptente bragder blir verande.</p></div></details>
         </div></div>
       </aside>
     </div>

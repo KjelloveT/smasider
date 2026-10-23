@@ -6,7 +6,7 @@ Plan og fyrste ordutval · 22. oktober 2026
 
 Den opphavlege planleveransen inneheld 1000 oppføringar i kvar av dei fire ordklassane, fordelte på fire førebelse nivå, og 40 skrivne dømeoppgåver. Ordreserven er ikkje 4000 ferdige speloppgåver: nye setningar, forklaringar og vurdering av tyding må skrivast før fleire oppføringar blir tekne inn i spelet.
 
-**Implementeringsstatus:** Fyrste spelutgåve ligg no i `ordbas/`, med 120 setningsoppgåver, 30 per ordklasse, alle tre spelmåtane, lokal framgang og felles bragder. Ordforklaringane er tilpassa frå uttrykkeleg valde ordboktydingar. Sjå `ordbas/README.md` for innhaldsbygging og kontroll. Planen under skildrar òg vidare arbeid: meir innhald, meir rørsle i tunet og eigne val av grunngjeving. Alle fire ordstega er opne frå start; Hjelp Vyrde viser ei grunngjeving etter svaret i denne utgåva. Publisering skjer fyrst etter PR og kontroll av førehandsvisinga.
+**Implementeringsstatus:** Fyrste spelutgåve ligg no i `ordbas/`, med 120 setningsoppgåver, 30 per ordklasse, alle tre spelmåtane, lokal framgang og felles bragder. Ordforklaringane er tilpassa frå uttrykkeleg valde ordboktydingar. Sjå `ordbas/README.md` for innhaldsbygging og kontroll. Planen under skildrar òg vidare arbeid: meir innhald og eigne val av grunngjeving. Alle fire ordstega er opne frå start. Hjelp Vyrde er no ei ryddeoppgåve med fleire setningskort og felles sjekk av tunet; Ordskiftet viser begge setningane saman. Trebåsar, steinsti, rundepoeng og Vyrde-uttrykk gjer framgangen synleg. Publisering skjer fyrst etter PR og kontroll av førehandsvisinga.
 
 ## 1. Det eleven møter
 

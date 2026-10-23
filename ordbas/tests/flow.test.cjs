@@ -97,3 +97,60 @@ test('progress syncs immediately and delivery badge requires completion',async()
 test('reset removes only app state and leaves earned badges intact',async()=>{
   const {O,data,badges,snapshot}=setup();await O.Content.load();await O.Storage.finish('sort');O.Storage.reset();assert.equal(data(),null);assert.ok(badges.has('fyrste-levering'));assert.equal(snapshot().correct,0);
 });
+
+
+test('points reward first attempts and streaks, with no duplicate or hint penalty',()=>{
+  const {O}=setup(),r=O.Round.create(pack.questions,settings,()=>.4);
+  r.revealMeaning();assert.equal(r.answer(r.current().question.wordClass).result.points,10);
+  assert.equal(r.answer(r.current().question.wordClass).accepted,false);assert.equal(r.state.points,10);r.next();
+  r.answer(r.current().question.wordClass);r.next();
+  assert.equal(r.answer(r.current().question.wordClass).result.points,15);assert.equal(r.state.points,35);r.next();
+  const q=r.current().question;r.answer(settings.classes.find(c=>c!==q.wordClass));assert.equal(r.state.streak,0);
+  assert.equal(r.answer(q.wordClass).result.points,5);assert.equal(r.state.points,40);
+});
+
+test('repeated practice is free of extra points and does not increase the streak',()=>{
+  const {O}=setup(),r=O.Round.create(pack.questions,settings,()=>.4);
+  const first=r.current().question;r.answer(settings.classes.find(c=>c!==first.wordClass));r.answer(first.wordClass);r.next();
+  while(r.state.index<4){r.answer(r.current().question.wordClass);r.next();}
+  assert.equal(r.current().retry,true);const before=r.state.points,streak=r.state.streak;
+  assert.equal(r.answer(first.wordClass).result.points,0);assert.equal(r.state.points,before);assert.equal(r.state.streak,streak);
+});
+
+test('Hjelp Vyrde opens a yard with correct and misplaced cards, including short final yards',()=>{
+  const {O}=setup();
+  for(const count of [5,8,12]){
+    const r=O.Round.create(pack.questions,{...settings,mode:'helper',count},()=>.4);
+    assert.equal(r.board().length,4);assert.ok(r.board().some(i=>i.placement===i.question.wordClass));assert.ok(r.board().some(i=>i.placement!==i.question.wordClass));
+    while(r.state.phase!=='complete'){
+      const board=r.board();board.forEach(item=>{r.selectCard(r.state.queue.indexOf(item));r.move(item.question.wordClass);});
+      const check=r.check();assert.equal(check.correct,true);assert.equal(check.results.length,board.length);assert.ok(r.next());
+    }
+    assert.equal(r.summary().total,count);assert.equal(r.summary().answers.length,count);assert.equal(r.summary().firstTry,count);
+  }
+});
+
+test('yard checks lock correct cards and require corrections without counting twice',()=>{
+  const {O}=setup(),r=O.Round.create(pack.questions,{...settings,mode:'helper'},()=>.4);
+  const first=r.check();assert.equal(first.correct,false);assert.equal(first.results.length,2);assert.equal(first.wrongIds.length,2);
+  const points=r.state.points;assert.equal(r.check().results.length,0);assert.equal(r.state.points,points);
+  const locked=r.board().find(i=>i.locked);r.selectCard(r.state.queue.indexOf(locked));assert.equal(r.move(settings.classes.find(c=>c!==locked.question.wordClass)).accepted,false);
+  assert.equal(r.selectCard(5),false);
+  r.board().filter(i=>!i.locked).forEach(item=>{r.selectCard(r.state.queue.indexOf(item));r.move(item.question.wordClass);});
+  const last=r.check();assert.equal(last.correct,true);assert.equal(last.results.length,2);assert.ok(last.results.every(a=>!a.firstTry));
+  assert.equal(r.state.answers.length,4);assert.equal(r.check().accepted,false);assert.equal(r.state.retries,0);assert.ok(r.next());assert.equal(r.state.index,4);
+});
+
+test('a checked yard publishes each completed card once through the normal storage path',async()=>{
+  const {O,data}=setup();await O.Content.load();const r=O.Round.create(pack.questions,{...settings,mode:'helper'},()=>.4);
+  r.check().results.forEach(O.Storage.recordAnswer);r.check().results.forEach(O.Storage.recordAnswer);assert.equal(data().correct,2);
+  r.board().filter(i=>!i.locked).forEach(item=>{r.selectCard(r.state.queue.indexOf(item));r.answer(item.question.wordClass);});
+  r.check().results.forEach(O.Storage.recordAnswer);assert.equal(data().correct,4);assert.equal(data().review.length,2);
+  assert.equal(data().points,undefined);
+});
+
+test('an incorrect answer in Ordskiftet keeps the paired context together',()=>{
+  const {O}=setup(),r=O.Round.create(pack.questions,{...settings,mode:'pairs',level:3,classes:['adjektiv','adverb']},()=>.4),q=r.current().question;
+  r.answer(r.state.settings.classes.find(c=>c!==q.wordClass));r.answer(q.wordClass);assert.equal(r.state.queue.length,8);assert.equal(r.state.retries,0);
+  const pairId=q.pairId;r.next();assert.equal(r.current().question.pairId,pairId);
+});

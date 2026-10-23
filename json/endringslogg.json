@@ -10,12 +10,17 @@
           "t": "nytt",
           "kva": "Ordbås",
           "merke": "verktoy",
-          "tekst": "Tre spelmåtar, fire ordklassar og fire opne ordsteg. Sorter med trykk, dragging eller tastatur."
+          "tekst": "Sorter eitt kort, rydd feilsorterte kort, eller samanlikn same ord i to setningar. Fire ordklassar og fire opne ordsteg."
         },
         {
           "t": "nytt",
           "kva": "Ordforklaringar",
           "tekst": "120 setningsoppgåver med ei vald ordtyding frå Nynorskordboka, ei kort tilpassa forklaring og grunngjeven fasit. Ingen ordbokoppslag medan eleven spelar."
+        },
+        {
+          "t": "nytt",
+          "kva": "Ordtunet",
+          "tekst": "Illustrerte trebåsar, rundepoeng og steinsti viser framgangen. Vyrde held eit hint-skilt og skiftar uttrykk. Hjelpa er lukka frå start."
         },
         {
           "t": "nytt",

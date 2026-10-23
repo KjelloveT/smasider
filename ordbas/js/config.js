@@ -9,9 +9,9 @@
       { id: 'adverb', name: 'Adverb', short: 'Kvar, når, korleis, grad', guide: 'Seier noko om verb, adjektiv, andre adverb eller heile setningar. Døme: går roleg, ganske glad.' }
     ],
     modes: [
-      { id: 'sort', name: 'Båsrunden', description: 'Finn rett bås for eitt ord om gongen.' },
-      { id: 'helper', name: 'Hjelp Vyrde', description: 'Vyrde foreslår ein bås. Hjelp han å velje rett.' },
-      { id: 'pairs', name: 'Ordskiftet', description: 'Same ordform i to setningar – bruken skiftar.' }
+      { id: 'sort', name: 'Båsrunden', description: 'Kort for kort.' },
+      { id: 'helper', name: 'Hjelp Vyrde', description: 'Finn og flytt feilsorterte kort.' },
+      { id: 'pairs', name: 'Ordskiftet', description: 'Same ord. Ny bås.' }
     ],
     levels: ['Fyrste båsane', 'Bøygde ord', 'Ord i samanheng', 'Ordmeisteren'],
     defaults: { mode: 'sort', level: 1, count: 8, classes: ['substantiv','verb','adjektiv'], showMeaning: false }
