@@ -6,7 +6,7 @@ Plan og fyrste ordutval · 22. oktober 2026
 
 Den opphavlege planleveransen inneheld 1000 oppføringar i kvar av dei fire ordklassane, fordelte på fire førebelse nivå, og 40 skrivne dømeoppgåver. Ordreserven er ikkje 4000 ferdige speloppgåver: nye setningar, forklaringar og vurdering av tyding må skrivast før fleire oppføringar blir tekne inn i spelet.
 
-**Implementeringsstatus:** Fyrste spelutgåve ligg no i `ordbas/`, med 120 setningsoppgåver, 30 per ordklasse, alle tre spelmåtane, lokal framgang og felles bragder. Ordforklaringane er tilpassa frå uttrykkeleg valde ordboktydingar. Sjå `ordbas/README.md` for innhaldsbygging og kontroll. Planen under skildrar òg vidare arbeid: meir innhald og eigne val av grunngjeving. Alle fire ordstega er opne frå start. Hjelp Vyrde er no ei ryddeoppgåve med fleire setningskort og felles sjekk av tunet; Ordskiftet viser begge setningane saman. Trebåsar, steinsti, rundepoeng og Vyrde-uttrykk gjer framgangen synleg. Publisering skjer fyrst etter PR og kontroll av førehandsvisinga.
+**Implementeringsstatus:** Fyrste spelutgåve ligg no i `ordbas/`, med 120 setningsoppgåver, 30 per ordklasse, alle tre spelmåtane, lokal framgang og felles bragder. Ordforklaringane er tilpassa frå uttrykkeleg valde ordboktydingar. Sjå `ordbas/README.md` for innhaldsbygging og kontroll. Planen under skildrar òg vidare arbeid: meir innhald og eigne val av grunngjeving. Alle fire ordstega er opne frå start. Hjelp Vyrde er no ei ordjakt der eleven finn ordet i ei setning ut frå Vyrde si forklaring, utan sorteringsbåsar. Ordskiftet lèt eleven flytte begge heile setningskorta oppi kvar sin bås i valfri rekkjefølgje. Trebåsar, steinsti, rundepoeng og Vyrde-uttrykk gjer framgangen synleg. Publisering skjer fyrst etter PR og kontroll av førehandsvisinga.
 
 ## 1. Det eleven møter
 
@@ -30,20 +30,20 @@ Vyrde gjer noko i sjølve spelet, med den eksisterande stein-Vyrde som figur:
 
 - **Leverer ord:** kjem fram til ordkortet og ventar på at eleven bestemmer seg.
 - **Hjelper med eit spørsmål:** «Seier ordet noko om hunden eller om korleis han går?» Hintet peikar mot undersøking, ikkje berre svaret.
-- **Lærer av eleven:** i «Hjelp Vyrde» har figuren lagt eit kort i feil bås. Eleven flyttar det og vel ei kort grunngjeving.
+- **Leitar med eleven:** i «Hjelp Vyrde» skildrar figuren eit ord. Eleven finn ordet i setninga og fyller ordboka hans.
 - **Viser utvikling:** ryddar, snur seg mot rett bås og feirar ei avslutta levering med eit lite nikk eller hopp.
 
 Bruk korte reaksjonar med variasjon. Eitt hint om gongen. Vyrde skal ikkje dekkje kort eller svarfelt. På mobil står figuren ved statusfeltet; på brei skjerm kan han stå ved sida av arbeidsflata. Redusert rørsle skal gje rolege tilstandsskifte. Alle opplysningar må òg stå som tekst.
 
-Ingen nye spriteark eller UI-bilete trengst til fyrste utgåve. Gjenbruk dei godkjende ressursane og enkle rørsler av den eksisterande figuren.
+Etter brukarens visuelle gjennomgang er det generert eit nytt Vyrde-ark og spelillustrasjonar i same familie. Ressursar og endeleg promptgrunnlag står i `ordbas/assets/README.md`.
 
 ## 3. Tre spelmåtar som deler same faglege kjerne
 
 | Spelmåte | Det eleven gjer | Kva som gjer henne fengjande |
 |---|---|---|
 | **Båsrunden** | Sorterer 8 kort, eitt om gongen. | Korte leveringar, Vyrde i arbeid og synleg framgang. Dette er hovudmåten. |
-| **Hjelp Vyrde** | Finn og rettar ei feilplassering; vel ei forklaring. | Eleven får vere den kunnige som hjelper figuren. Ei bonusoppgåve etter to leveringar. |
-| **Ordskiftet** | Sorterer same ordform i to ulike setningar. | Ei lita oppdaging: ordet ser likt ut, men bruken skiftar. Opnar saman med adverb. |
+| **Hjelp Vyrde** | Les ei forklaring og vel rett ord i ei setning utan framheving. | Eleven fyller ordboka til Vyrde. Eit eige ordjaktspel utan båsar, ope frå start. |
+| **Ordskiftet** | Flyttar to heile setningskort til kvar sin bås; vel sjølv rekkjefølgja. | Ei lita oppdaging: ordet ser likt ut, men bruken skiftar. Opent frå start, med adjektiv og adverb. |
 
 Ein valfri fartsrunde kan kome etter at grunnspelet fungerer, med eigne resultat. Fart skal ikkje avgjere om eleven meistrar ei ordklasse, og fartsrunden skal aldri slåast på automatisk.
 

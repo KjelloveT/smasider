@@ -1,7 +1,7 @@
 /* Spelgeometri og tilstandar. Flater, kontrollar og fokus kjem frå fellesdesignet. */
 .ob-app { padding-block: 20px 60px; }
-.ob-app .vp-standard { grid-template-columns: minmax(0,1fr) 240px; gap: 32px; }
-.ob-app .vp-standard-support { width: calc(100% - 24px); justify-self: center; }
+.ob-app .vp-standard { grid-template-columns: minmax(0,1fr) 290px; gap: 32px; }
+.ob-app .vp-standard-support { width: 100%; justify-self: center; }
 .ob-content { container-type: inline-size; }
 .ob-ground { background: radial-gradient(ellipse at 50% 100%,var(--vp-moss) 0 38%,transparent 68%); }
 .ob-eyebrow { font-size: .78rem; letter-spacing: .12em; font-weight: 800; margin-block-end: 4px; }
@@ -10,7 +10,7 @@
 .ob-mode-choice { display: grid; grid-template-columns: auto 1fr; gap: 4px; align-items: start; padding: 12px 8px 14px; text-align: center; }
 .ob-mode-choice input { grid-column: 1; grid-row: 1; }
 .ob-mode-picture { grid-column: 1 / -1; grid-row: 1; pointer-events: none; display: block; aspect-ratio: 1; background: url('../assets/spelval.png') 0 50% / 300% 100% no-repeat; margin: 2px 0 8px; }
-.ob-mode-picture[data-mode="helper"] { background-position: 50% 50%; }
+.ob-mode-picture[data-mode="helper"] { background-image: url('../assets/vyrde-reaksjonar.png'); background-size: 300% 200%; background-position: 100% 0; }
 .ob-mode-picture[data-mode="pairs"] { background-position: 100% 50%; }
 .ob-mode-copy { grid-column: 1 / -1; display: grid; gap: 6px; }
 .ob-mode-copy strong { font-size: clamp(.95rem,2vw,1.1rem); }
@@ -25,8 +25,10 @@
 #reviewButton { margin-block-start: 8px; }
 .ob-support-content { display: grid; gap: 14px; }
 .ob-support-content .vp-accordion { margin: 0; }
-.ob-support-content summary { gap: 8px; justify-content: start; }
-.ob-support-content summary::after { margin-left: auto; }
+.ob-support-content summary { display: grid; grid-template-columns: 34px minmax(0,1fr) 14px; gap: 10px; align-items: center; padding: 12px; }
+.ob-support-content summary::after { grid-column: 3; margin: 0; justify-self: center; }
+.ob-support-content summary > span { min-width: 0; }
+.ob-support-content .vp-accordion-body { padding-inline: 14px; }
 .ob-support-content summary img { width: 34px; height: 34px; object-fit: contain; flex: 0 0 34px; }
 #classGuide { display: grid; gap: 18px; }
 #classGuide p { margin: 0; }
@@ -52,9 +54,10 @@
 .ob-trail-stone svg { width: 18px; height: 18px; }
 .ob-play-space { display: grid; grid-template-columns: minmax(0,1fr) 138px; align-items: center; gap: 16px; margin-block: 18px; min-height: 160px; }
 .ob-task { text-align: center; min-width: 0; }
-.ob-sentence { font-size: clamp(1.2rem,2.1vw,1.6rem); line-height: 1.5; text-wrap: pretty; margin-block: 8px 18px; }
+#game[data-mode="sort"] .ob-task { display: grid; grid-template-columns: minmax(0,1fr) minmax(120px,180px); gap: 20px; align-items: center; }
+.ob-sentence { font-size: clamp(1.2rem,2.1vw,1.6rem); line-height: 1.5; text-wrap: pretty; margin: 0; }
 .ob-sentence strong,.ob-pair-tile strong { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
-.ob-word-card { --vp-button-fill: var(--vp-paper); min-height: 72px; min-width: min(200px,100%); max-width: 100%; font-size: clamp(1.3rem,3.5vw,2rem); cursor: grab; touch-action: none; user-select: none; transform: rotate(-2deg); }
+.ob-word-card { --vp-button-fill: var(--vp-paper); min-height: 72px; min-width: 0; width: 100%; max-width: 100%; font-size: clamp(1.3rem,3.5vw,2rem); cursor: grab; touch-action: none; user-select: none; transform: rotate(-2deg); }
 .ob-word-card:disabled { transform: rotate(0deg); }
 .ob-drag-ghost { position: fixed; z-index: 10000; pointer-events: none; margin: 0; opacity: .9; cursor: grabbing; }
 .ob-sprite { display: block; aspect-ratio: 1; background: url('../assets/vyrde-reaksjonar.png') 0 0 / 300% 200% no-repeat; }
@@ -75,44 +78,42 @@
 .ob-meaning p,.ob-feedback p { padding: 0; margin: 0; }
 .ob-bins { display: grid; grid-template-columns: repeat(var(--ob-columns,3),minmax(0,1fr)); gap: 16px; align-items: start; margin-block: 24px 18px; }
 .ob-bay { min-width: 0; position: relative; }
-.ob-bin { position: relative; display: block; width: 100%; aspect-ratio: 1; }
-.ob-bin { user-select: none; max-width: 230px; margin-inline: auto; }
-.ob-bin > img { display: block; width: 100%; height: auto; pointer-events: none; -webkit-user-drag: none; }
-.ob-stall-name { position: absolute; left: 3%; right: 3%; top: 66%; font-size: clamp(.9rem,1.5vw,1.1rem); line-height: 1.3; }
-.ob-stall-key { position: absolute; left: 30%; right: 30%; top: 34%; font-size: .9rem; }
+.ob-bin { position: relative; display: block; width: 100%; aspect-ratio: 1; user-select: none; max-width: 250px; margin-inline: auto; text-align: center; }
+.ob-stall-picture { position: absolute; inset: 0; background: url('../assets/baasar.png') 0 0 / 200% 200% no-repeat; pointer-events: none; }
+.ob-bin[data-class="verb"] .ob-stall-picture { background-position: 100% 0; }
+.ob-bin[data-class="adjektiv"] .ob-stall-picture { background-position: 0 100%; }
+.ob-bin[data-class="adverb"] .ob-stall-picture { background-position: 100% 100%; }
+.ob-bin[data-class="adjektiv"] .ob-stall-picture,.ob-bin[data-class="adverb"] .ob-stall-picture { clip-path: inset(3% 0 0); }
+.ob-stall-name { position: absolute; left: 25%; right: 25%; top: 38%; height: 14%; display: grid; place-items: center; font-size: clamp(.75rem,2cqi,1.15rem); line-height: 1; white-space: nowrap; text-align: center; }
 .ob-bin.ob-drag-over { transform: translateY(-6px); }
 .ob-bin.ob-drag-over .ob-stall-name { text-decoration: underline; text-decoration-thickness: 3px; }
-.ob-bin-state { position: absolute; bottom: -2px; left: 15%; right: 15%; padding: 5px; font-size: .85rem; }
-.ob-bin[data-state="wrong"] .ob-bin-state { --vp-panel-fill: var(--vp-error); }
-.ob-bin[data-state="right"] .ob-bin-state { --vp-panel-fill: var(--vp-success); }
+.ob-bin[data-state="wrong"] .ob-stall-name { text-decoration: line-through; }
+.ob-bin[data-state="right"] .ob-stall-name::after { content: ''; width: 7px; height: 12px; border: solid #000; border-width: 0 3px 3px 0; transform: rotate(45deg); position: absolute; right: -12px; }
 .ob-bay-count { --vp-panel-fill: var(--vp-honey); position: absolute; right: 0; top: 8px; min-width: 30px; text-align: center; padding: 4px; font-weight: 800; }
-.ob-collected { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 5px; margin-block-start: 6px; min-height: 24px; }
-.ob-collected-card { padding: 3px 7px; font-size: .75rem; transform: rotate(-4deg); }
-.ob-collected-card:nth-child(even) { transform: rotate(5deg); }
-.ob-flying-card { position: fixed; z-index: 10010; pointer-events: none; padding: 10px 18px; font-weight: 800; }
+.ob-cavity { position: absolute; left: 20%; right: 20%; top: 54%; bottom: 28%; display: grid; align-items: end; justify-items: center; pointer-events: none; }
+.ob-collected-card { grid-area: 1 / 1; max-width: 100%; padding: 3px 8px; font-size: clamp(.8rem,1.7cqi,1rem); line-height: 1.3; font-weight: 600; white-space: normal; overflow-wrap: anywhere; transform: translate(calc(var(--ob-card-depth) * -3px),calc(var(--ob-card-depth) * -4px)) rotate(calc(var(--ob-card-depth) * -3deg)); }
+#game[data-mode="pairs"] .ob-bin { max-width: 380px; aspect-ratio: .92; min-height: 350px; }
+#game[data-mode="pairs"] .ob-collected-card { font-weight: 400; font-size: .92rem; padding: 6px; }
+.ob-collected-card strong { text-decoration: underline; text-underline-offset: 2px; }
+.ob-flying-card { position: fixed; z-index: 10010; pointer-events: none; padding: 10px 18px; font-weight: 800; max-width: min(80vw,320px); }
 .ob-feedback { margin-block: 20px; }
 .ob-next { margin-block: 18px 0; justify-content: center; }
 .ob-next a { font-size: .8rem; margin-inline-start: 12px; }
-.ob-helper-prompt { font-size: 1.15rem; font-weight: 700; margin: 0; }
-#game[data-mode="helper"] .ob-play-space { min-height: 140px; }
-#game[data-mode="helper"] .ob-bay { --vp-panel-fill: var(--vp-paper); padding: 8px; }
-#game[data-mode="helper"] .ob-bay[data-class="substantiv"] { --vp-panel-fill: var(--vp-moss); }
-#game[data-mode="helper"] .ob-bay[data-class="verb"] { --vp-panel-fill: var(--vp-sky); }
-#game[data-mode="helper"] .ob-bay[data-class="adjektiv"] { --vp-panel-fill: var(--vp-heather); }
-#game[data-mode="helper"] .ob-bay[data-class="adverb"] { --vp-panel-fill: var(--vp-honey); }
-.ob-yard-cards { display: grid; gap: 10px; padding-block: 12px 4px; min-height: 55px; }
-.ob-yard-card { --vp-button-fill: var(--vp-paper); display: block; width: 100%; font-size: .85rem; font-weight: 400; line-height: 1.5; padding: 9px; }
-.ob-yard-card { user-select: none; }
-.ob-yard-card:not(:disabled) { cursor: grab; touch-action: none; }
-.ob-yard-card strong { text-decoration: underline; text-underline-offset: 3px; }
-.ob-yard-card[data-state="right"] { --vp-button-fill: var(--vp-success); }
-.ob-yard-card[data-state="right"] svg { display: inline; width: 16px; height: 16px; vertical-align: middle; margin-left: 4px; }
-.ob-yard-card[data-state="wrong"] { --vp-button-fill: var(--vp-error); }
-.ob-pair-context { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin-block-end: 18px; }
-.ob-pair-tile { --vp-panel-fill: var(--vp-paper); display: grid; gap: 10px; align-content: center; min-height: 110px; padding: 14px; }
-.ob-pair-tile p { font-size: 1rem; margin: 0; }
-.ob-pair-tile[data-active="true"] { --vp-panel-fill: var(--vp-honey); }
-.ob-pair-stamp { display: flex; justify-content: center; align-items: center; gap: 4px; font-weight: 800; font-size: .9rem; }
+.ob-word-hunt { display: grid; gap: 20px; }
+.ob-clue { --vp-panel-fill: var(--vp-sky); text-align: left; padding: 16px 20px; }
+.ob-clue p { font-size: clamp(1.2rem,2.4cqi,1.6rem); margin: 6px 0 0; line-height: 1.4; }
+.ob-hunt-sentence { font-size: 1.3rem; line-height: 2.6; text-align: center; margin: 0; }
+.ob-hunt-word { display: inline-flex; vertical-align: baseline; min-height: 42px; font-size: inherit; margin: 4px 1px; padding: 4px 9px; }
+.ob-hunt-word[data-state="wrong"] { text-decoration: line-through; }
+.ob-hunt-word[data-state="right"] { --vp-button-fill: var(--vp-moss); text-decoration: underline; }
+.ob-word-book { --vp-panel-fill: var(--vp-paper); margin-block: 20px; min-height: 130px; border-left-width: 10px; }
+.ob-word-book h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; font-size: 1rem; }
+.ob-found-words { display: flex; gap: 12px; flex-wrap: wrap; }
+.ob-found-word { --vp-panel-fill: var(--vp-honey); display: flex; gap: 5px; align-items: center; padding: 6px 12px; }
+.ob-pair-context { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.ob-pair-tile { --vp-button-fill: var(--vp-paper); display: block; min-height: 110px; padding: 18px; font-weight: 400; font-size: 1.15rem; line-height: 1.5; text-align: center; cursor: grab; touch-action: none; user-select: none; white-space: normal; }
+.ob-pair-tile[aria-pressed="true"] { --vp-button-fill: var(--vp-honey); }
+#game[data-mode="pairs"] .ob-task { align-self: stretch; display: grid; align-items: center; }
 .ob-result-note { display: grid; grid-template-columns: minmax(100px,190px) minmax(0,1fr); gap: 24px; align-items: center; margin-block: 24px; }
 .ob-result-score { --vp-panel-fill: var(--vp-honey); text-align: center; }
 .ob-big-number { font-family: var(--vp-heading-font); font-size: clamp(2.5rem,7vw,4rem); margin: 0; }
@@ -127,9 +128,8 @@
 @keyframes ob-pop { 50% { transform: scale(1.2); } }
 @container (max-width: 560px) {
   .ob-bins { grid-template-columns: repeat(2,minmax(0,1fr)); }
-  #game[data-mode="helper"] .ob-bay { padding: 4px; }
   .ob-mode-grid { grid-template-columns: 1fr; gap: 12px; }
-  .ob-mode-choice { grid-template-columns: auto 90px minmax(0,1fr); align-items: center; text-align: left; padding: 8px 12px; gap: 8px; }
+  .ob-mode-choice { grid-template-columns: auto 90px minmax(0,1fr); align-items: center; text-align: center; padding: 8px 12px; gap: 8px; }
   .ob-mode-picture { grid-column: 2; grid-row: 1; margin: 0; width: 90px; }
   .ob-mode-copy { grid-column: 3; grid-row: 1; }
   .ob-play-space { grid-template-columns: minmax(0,1fr) 100px; gap: 8px; }
@@ -138,6 +138,8 @@
   .ob-speech { max-width: 100px; }
   .ob-pair-context { grid-template-columns: minmax(0,1fr); }
   .ob-pair-tile { min-height: 70px; padding: 10px; }
+  #game[data-mode="pairs"] .ob-bins { grid-template-columns: 1fr; }
+  #game[data-mode="sort"] .ob-task { grid-template-columns: minmax(0,1fr); gap: 12px; }
   .ob-word-card { min-width: 0; width: 100%; min-height: 60px; padding: 10px; }
   .ob-scoreboard { gap: 10px; }
   .ob-streak { font-size: .8rem; padding: 7px; }
@@ -147,7 +149,7 @@
   .ob-app .vp-standard { grid-template-columns: minmax(0,1fr); gap: 24px; }
 }
 @media (max-width: 520px) {
-  .ob-app .vp-standard-support { width: calc(100% - 32px); }
+  .ob-app .vp-standard-support { width: 100%; }
   .ob-round-trail { gap: 5px; }
   .ob-score { min-width: 108px; padding: 7px 10px; gap: 8px; }
   #scoreValue { font-size: 1.65rem; }
@@ -159,7 +161,7 @@
   .ob-mode-copy small { font-size: .8rem; }
   .ob-sentence { font-size: 1.1rem; }
   .ob-next > button { width: 100%; }
-  .ob-stall-name { font-size: .88rem; }
+
 }
 @media (prefers-reduced-motion: reduce) {
   .ob-sprite,.ob-pop { animation: none !important; }
@@ -170,7 +172,9 @@
   .ob-play-space { grid-template-columns: minmax(0,1fr) 82px; }
   .ob-vyrde-control { width: 82px; height: 82px; }
   .ob-word-card[data-long="true"] { font-size: 1rem; }
+  .ob-bins { grid-template-columns: 1fr; }
+  .ob-stall-name { font-size: 1rem; }
+  .ob-pair-tile { font-size: 1rem; }
+  #game[data-mode="helper"] .ob-play-space,#game[data-mode="pairs"] .ob-play-space { grid-template-columns: 1fr; }
+  #game[data-mode="helper"] .ob-companion,#game[data-mode="pairs"] .ob-companion { justify-self: end; }
 }
-
-.ob-pair-pointer { position: absolute; left: 3px; top: 50%; transform: translateY(-50%); }
-.ob-pair-tile[data-active="true"] { padding-left: 25px; }

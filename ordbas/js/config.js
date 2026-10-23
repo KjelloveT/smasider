@@ -10,8 +10,8 @@
     ],
     modes: [
       { id: 'sort', name: 'Båsrunden', description: 'Kort for kort.' },
-      { id: 'helper', name: 'Hjelp Vyrde', description: 'Finn og flytt feilsorterte kort.' },
-      { id: 'pairs', name: 'Ordskiftet', description: 'Same ord. Ny bås.' }
+      { id: 'helper', name: 'Hjelp Vyrde', description: 'Vyrde skildrar. Du finn ordet.' },
+      { id: 'pairs', name: 'Ordskiftet', description: 'To setningar. To ulike båsar.' }
     ],
     levels: ['Fyrste båsane', 'Bøygde ord', 'Ord i samanheng', 'Ordmeisteren'],
     defaults: { mode: 'sort', level: 1, count: 8, classes: ['substantiv','verb','adjektiv'], showMeaning: false }

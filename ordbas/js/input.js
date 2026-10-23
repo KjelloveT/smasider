@@ -12,16 +12,16 @@
       if(hovered)hovered.classList.remove('ob-drag-over');
       ghost=null;hovered=null;pointer=null;
     }
-    host.addEventListener('dragstart',event=>{if(event.target.closest('#wordCard,button[data-helper-index]'))event.preventDefault();});
+    host.addEventListener('dragstart',event=>{if(event.target.closest('#wordCard,button[data-pair-index]'))event.preventDefault();});
     host.addEventListener('pointerdown',event=>{
       dragged=false;
-      const card=event.target.closest('#wordCard,button[data-helper-index]'),round=O.App.round();
+      const card=event.target.closest('#wordCard,button[data-pair-index]'),round=O.App.round();
       if(!card||card.disabled||event.button!==0||!event.isPrimary||!round||round.state.phase!=='answering')return;
       event.preventDefault();
       const bounds=card.getBoundingClientRect();
       pointer={id:event.pointerId,x:event.clientX,y:event.clientY,bounds,card};
       host.setPointerCapture(event.pointerId);
-      if(card.dataset.helperIndex!==undefined)O.App.selectCard(Number(card.dataset.helperIndex));
+      if(card.dataset.pairIndex!==undefined)O.App.selectCard(Number(card.dataset.pairIndex));
     });
     host.addEventListener('pointermove',event=>{
       if(!pointer||pointer.id!==event.pointerId)return;
@@ -48,7 +48,7 @@
     });
     host.addEventListener('pointercancel',clear);
     host.addEventListener('lostpointercapture',clear);
-    host.addEventListener('click',event=>{if(dragged){event.preventDefault();event.stopImmediatePropagation();}},true);
+    host.addEventListener('click',event=>{if(dragged&&event.detail>0){dragged=false;event.preventDefault();event.stopImmediatePropagation();}},true);
   }
   function bind(){
     byId('setup').addEventListener('change',()=>O.App.change(collect()));
@@ -56,7 +56,6 @@
     byId('adverbButton').addEventListener('click',()=>O.App.start({mode:'sort',level:3,classes:O.Config.classes.map(c=>c.id)}));
     byId('meaningButton').addEventListener('click',()=>O.App.meaning());
     byId('nextButton').addEventListener('click',()=>O.App.next());
-    byId('checkButton').addEventListener('click',()=>O.App.check());
     byId('againButton').addEventListener('click',()=>O.App.start());
     byId('homeButton').addEventListener('click',()=>O.App.home());
     byId('backButton').addEventListener('click',()=>O.App.home());
@@ -65,7 +64,9 @@
     byId('resetButton').addEventListener('click',()=>O.App.reset());
     byId('reloadButton').addEventListener('click',()=>location.reload());
     byId('wordCard').addEventListener('click',event=>{event.currentTarget.setAttribute('aria-pressed','true');});
-    byId('bins').addEventListener('click',event=>{const button=event.target.closest('button[data-class]');const card=event.target.closest('button[data-helper-index]');if(card){O.App.selectCard(Number(card.dataset.helperIndex));return;}if(button&&!button.disabled)O.App.answer(button.dataset.class);});
+    byId('bins').addEventListener('click',event=>{const button=event.target.closest('button[data-class]');if(button&&!button.disabled)O.App.answer(button.dataset.class);});
+    byId('pairContext').addEventListener('click',event=>{const card=event.target.closest('button[data-pair-index]');if(card)O.App.selectCard(Number(card.dataset.pairIndex));});
+    byId('huntSentence').addEventListener('click',event=>{const word=event.target.closest('button[data-word-index]');if(word&&!word.disabled)O.App.chooseWord(Number(word.dataset.wordIndex));});
     bindDrag();
     document.addEventListener('keydown',event=>{
       if(event.repeat||event.ctrlKey||event.altKey||event.metaKey||byId('game').hidden||document.querySelector('dialog[open]')||event.target.closest('input,select,textarea'))return;

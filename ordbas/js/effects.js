@@ -21,12 +21,11 @@
     const gain = document.getElementById('scoreGain'); gain.textContent = '+' + value;
     later(() => { gain.textContent = ''; }, 1600);
   }
-  function delivery(wordClass, text) {
+  function delivery(wordClass, text, from) {
     if (reduced()) return;
-    const card = document.getElementById('wordCard');
     const target = document.querySelector('#bins button[data-class="' + wordClass + '"]');
-    if (!target || !card || card.hidden) return;
-    const from = card.getBoundingClientRect(), to = target.getBoundingClientRect();
+    if (!target || !from) return;
+    const to = target.getBoundingClientRect();
     const token = el('span', 'vp-panel vp-panel--compact ob-flying-card', text);
     token.setAttribute('aria-hidden', 'true'); token.style.left = from.left + 'px'; token.style.top = from.top + 'px';
     document.body.append(token); overlays.add(token);

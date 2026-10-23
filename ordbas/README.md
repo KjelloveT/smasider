@@ -1,6 +1,6 @@
 # Ordbås
 
-120 setningsoppgåver i tre spelmåtar: Båsrunden (kort for kort), Hjelp Vyrde (rydd fleire feilsorterte setningskort og sjekk heile tunet) og Ordskiftet (to setningar synlege saman). Fire ordklassar og fire opne ordsteg. Vanilla HTML/CSS/JS, felles Vyrdepil-design, lagring og bragder.
+120 setningsoppgåver i tre spelmåtar: Båsrunden (kort for kort), Hjelp Vyrde (finn ordet i ei setning ut frå Vyrde si ordforklaring) og Ordskiftet (flytt to heile setningskort til kvar sin bås i valfri rekkjefølgje). Fire ordklassar og fire opne ordsteg. Vanilla HTML/CSS/JS, felles Vyrdepil-design, lagring og bragder.
 
 ## Innhald og kjelder
 
@@ -14,12 +14,12 @@ Verktøyet tools/build-content.cjs byggjer den lokale oppgåvefila frå tools/op
 
 Køyr node --test ordbas/tests/*.test.cjs frå prosjektrota. Test lokalt med serve.ps1 (eller ein ledig lokal port) og i Azure-førehandsvisinga før publisering. Sjå docs/ordbas/PLAN.md for den større ordreserven og vidare innhaldsarbeid.
 
-Lokalt kontrollert: alle 20 målretta testar, korrektur/repetisjon og resultat, alle tre spelmåtane, ordforklaringar, tastane 1–4, dra-og-slepp med peikar, lagring etter sideoppfrisking og Escape i nullstillingsdialogen. Skjermbreidder 320, 437, 768, 1024 og 1440 px er kontrollerte utan vassrett sideflyt. Reell fingerbruk og klasseromsutprøving står att.
+Lokalt kontrollert: alle 21 målretta testar, korrektur/repetisjon og resultat, alle tre spelmåtane, ordforklaringar, tastane 1–4, dra-og-slepp med peikar, lagring etter sideoppfrisking og Escape i nullstillingsdialogen. Skjermbreidder 320, 437, 768, 1024 og 1440 px er kontrollerte utan vassrett sideflyt. Reell fingerbruk og klasseromsutprøving står att.
 
 ## Speluttrykk og poeng
 
-Ordtunet har illustrerte trebåsar, ord som samlar seg, ein steinsti, synleg rundepoeng og rekkjer med rette svar. Vyrde held eit ekte hint-skilt og får ulike uttrykk med korte rørsler. Hjelpetekst og spelval ligg i lukka trekkspel frå start. Ein illustrasjonsvariant av fellesknappen held på det vanlege tastaturfokuset. All rørsle respekterer redusert rørsle.
+Ordtunet har fire ulike illustrerte trebåsar med ordklassane sentrerte på hengjeskilta, kort som samlar seg inni kassene, ein steinsti, synleg rundepoeng og rekkjer med rette svar. Vyrde held eit ekte hint-skilt og får ulike uttrykk med korte rørsler. Hjelpetekst og spelval ligg i lukka trekkspel frå start. Ein illustrasjonsvariant av fellesknappen held på det vanlege tastaturfokuset. All rørsle respekterer redusert rørsle.
 
-Eit primærkort gjev 10 poeng på fyrste forsøk, elles 5. Kvart tredje rette primærkort på rad gjev 5 ekstra; feil bryt rekkja. Repetisjonskort gjev ikkje fleire poeng eller betre rekkje. Hint kostar ingenting. Poeng og rekkje ligg berre i den aktive runden og blir ikkje lagra. Hjelp Vyrde registrerer eit kort fyrst når tunet blir sjekka; rette kort blir låste, og fleire sjekkar tel dei ikkje om att.
+Eit primærkort gjev 10 poeng på fyrste forsøk, elles 5. Kvart tredje rette primærkort på rad gjev 5 ekstra; feil bryt rekkja. Repetisjonskort gjev ikkje fleire poeng eller betre rekkje. Hint kostar ingenting. Poeng og rekkje ligg berre i den aktive runden og blir ikkje lagra. Hjelp Vyrde viser ei forklaring og ein ordklasse utan å framheve målordet. Eleven vel ordet direkte i setninga. Hintet gjev eit grammatisk spørsmål; funne ord blir samla i ordboka til Vyrde. I Ordskiftet blir kvart setningskort låst og lagt i rett kasse; begge må vere sorterte før neste par. Eit nytt par har eigne tomme kasser. Ingen av dei to spelmåtane legg inn repetisjonskort i runden.
 
 `yard.js` teiknar båsar, stien og ordpar. `effects.js` eig tidsavgrensa rørsler og ryddar dei ved skjermskifte. `round.js` eig reglane, medan lagringsmodulen brukar same avgrensa øvingsdata som før. Bilete, komprimering og promptgrunnlag er dokumenterte i [assets/README.md](assets/README.md).

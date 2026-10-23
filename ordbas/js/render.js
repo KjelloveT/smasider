@@ -3,7 +3,7 @@
   const O = root.Ordbas, el = root.Vy.el;
   const byId = id => document.getElementById(id);
   function init() {
-    O.Config.modes.forEach((mode,index) => {
+    O.Config.modes.forEach(mode => {
       const label = el('label','vp-choice ob-mode-choice'), radio = el('input');
       radio.type = 'radio'; radio.name = 'mode'; radio.value = mode.id;
       const picture = el('span','ob-mode-picture'); picture.dataset.mode = mode.id; picture.setAttribute('aria-hidden','true');
@@ -41,28 +41,19 @@
     byId('roundTitle').textContent = O.Config.modes.find(m => m.id === state.settings.mode).name;
     byId('scoreValue').textContent = state.points;
     byId('streakValue').textContent = state.streak; byId('streakBadge').hidden = state.streak < 2;
-    byId('counter').textContent = helper ? `Tun ${Math.floor(state.index / 4) + 1} / ${Math.ceil(state.queue.length / 4)}` : `${state.answers.filter(a => !a.retry).length} / ${round.summary().total}`;
-    O.Yard.trail(round); O.Yard.pairs(round);
+    byId('counter').textContent = `${state.answers.filter(a => !a.retry).length} / ${round.summary().total}`;
+    O.Yard.trail(round); O.Yard.pairs(round); O.Yard.hunt(round);
     O.Yard.sentence(byId('sentence'),q); byId('sentence').hidden = helper || paired;
-    const card = byId('wordCard'); card.hidden = helper; card.textContent = q.target.text; card.dataset.long = String(q.target.text.length > 10);
+    const card = byId('wordCard'); card.hidden = helper || paired; card.textContent = q.target.text; card.dataset.long = String(q.target.text.length > 10);
     card.setAttribute('aria-label',`Ordkort: ${q.target.text}. Vel ein bås.`); card.setAttribute('aria-pressed','false'); card.disabled = state.phase === 'feedback'; card.draggable = false;
-    byId('helperPrompt').hidden = !helper;
-    byId('helperPrompt').textContent = helper ? (state.phase === 'feedback' ? 'Alle korta er på plass!' : `Flytt «${q.target.text}» til rett bås.`) : '';
-    byId('checkButton').hidden = !helper || state.phase !== 'answering';
     byId('nextButton').hidden = state.phase !== 'feedback';
-    byId('nextButton').firstChild.textContent = helper ? 'Neste tun' : 'Neste ord';
+    byId('nextLabel').textContent = paired ? 'Neste par' : helper ? 'Neste gåte' : 'Neste ord';
     const feedback = byId('feedback'), speech = byId('vyrdeSpeech');
     feedback.classList.remove('vp-notice--success','vp-notice--warning'); let text = '';
-    if (helper) {
-      if (state.lastCheck) {
-        text = state.lastCheck.wrong ? `${state.lastCheck.wrong === 1 ? 'Eitt kort står' : state.lastCheck.wrong + ' kort står'} framleis feil.` : 'Tunet er ryddig!';
-        feedback.classList.add(state.lastCheck.wrong ? 'vp-notice--warning' : 'vp-notice--success');
-      }
-      speech.textContent = state.lastCheck ? (state.lastCheck.wrong ? 'Vi er på sporet.' : 'Du fann rett plass!') : '';
-    } else if (state.phase === 'feedback') {
-      text = q.reason; feedback.classList.add('vp-notice--success');
-      speech.textContent = ['Den sat!','Fint sortert!','Der høyrde ordet heime!'][state.index % 3];
-    } else if (active.wrong.length) { text = q.tip; feedback.classList.add('vp-notice--warning'); speech.textContent = 'Prøv att.'; }
+    if (state.lastOutcome && state.lastOutcome.correct) {
+      text = state.lastOutcome.question.reason; feedback.classList.add('vp-notice--success');
+      speech.textContent = helper ? 'Det var ordet mitt!' : ['Den sat!','Fint sortert!','Der høyrde ordet heime!'][state.index % 3];
+    } else if (state.lastOutcome) { text = helper ? 'Leit etter ordet som passar til forklaringa.' : q.tip; feedback.classList.add('vp-notice--warning'); speech.textContent = 'Prøv att.'; }
     else speech.textContent = '';
     byId('feedbackText').textContent = text; feedback.hidden = !text; speech.hidden = !speech.textContent;
     const source = byId('sourceLink'); source.hidden = state.phase !== 'feedback' || helper; source.href = `https://ordbokene.no/nn/${q.source.articleId}`;
@@ -72,8 +63,8 @@
   function meaning(round) {
     const active = round.current(); byId('meaningBox').hidden = !active.meaning;
     const button = byId('meaningButton'); button.setAttribute('aria-expanded',String(active.meaning)); button.disabled = active.meaning;
-    button.setAttribute('aria-label',`Vyrde: hint om «${active.question.target.text}»`);
-    byId('meaningText').textContent = active.question.meaning;
+    button.setAttribute('aria-label',round.state.settings.mode === 'helper' ? 'Vyrde: gje eit hint' : `Vyrde: hint om «${active.question.target.text}»`);
+    byId('meaningText').textContent = round.state.settings.mode === 'helper' ? active.question.tip : active.question.meaning;
   }
   function progress(data) {
     byId('progressSummary').textContent = `${data.rounds === 1 ? '1 levering' : data.rounds + ' leveringar'} · ${data.correct} ord på plass.`;
@@ -85,7 +76,7 @@
     });
   }
   function result(round) {
-    const summary = round.summary(); byId('resultScore').textContent = summary.points;
+    const summary = round.summary(); byId('resultTitle').textContent = round.state.settings.mode === 'helper' ? 'Ordboka veks!' : round.state.settings.mode === 'pairs' ? 'Alle para er på plass!' : 'Tunet er ryddig!'; byId('resultScore').textContent = summary.points;
     byId('resultSummary').textContent = `${summary.firstTry} av ${summary.total} på fyrste forsøk`;
     byId('resultStreak').textContent = summary.bestStreak > 1 ? `${summary.bestStreak} på rad!` : 'Alle orda kom på plass!';
     const review = byId('reviewWords'); review.replaceChildren();
@@ -96,5 +87,6 @@
   }
   function badges() { return root.VyrdepilBragd.renderGameBadges(byId('badges'),'ordbas',O.Storage.earned()); }
   function focus(id) { const target = byId(id); if (target && !target.hidden) target.focus({preventScroll:true}); }
-  O.View = {init,screen,setup,game,meaning,progress,result,badges,focus,byId};
+  function focusTask() { const target = byId('game').querySelector('#pairContext:not([hidden]) .ob-pair-tile[aria-pressed="true"],#wordHunt:not([hidden]) button:not(:disabled),#wordCard:not([hidden])'); if (target) target.focus({preventScroll:true}); }
+  O.View = {init,screen,setup,game,meaning,progress,result,badges,focus,focusTask,byId};
 })(window);

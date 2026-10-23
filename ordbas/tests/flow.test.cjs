@@ -117,40 +117,51 @@ test('repeated practice is free of extra points and does not increase the streak
   assert.equal(r.answer(first.wordClass).result.points,0);assert.equal(r.state.points,before);assert.equal(r.state.streak,streak);
 });
 
-test('Hjelp Vyrde opens a yard with correct and misplaced cards, including short final yards',()=>{
-  const {O}=setup();
-  for(const count of [5,8,12]){
-    const r=O.Round.create(pack.questions,{...settings,mode:'helper',count},()=>.4);
-    assert.equal(r.board().length,4);assert.ok(r.board().some(i=>i.placement===i.question.wordClass));assert.ok(r.board().some(i=>i.placement!==i.question.wordClass));
-    while(r.state.phase!=='complete'){
-      const board=r.board();board.forEach(item=>{r.selectCard(r.state.queue.indexOf(item));r.move(item.question.wordClass);});
-      const check=r.check();assert.equal(check.correct,true);assert.equal(check.results.length,board.length);assert.ok(r.next());
-    }
-    assert.equal(r.summary().total,count);assert.equal(r.summary().answers.length,count);assert.equal(r.summary().firstTry,count);
-  }
-});
-
-test('yard checks lock correct cards and require corrections without counting twice',()=>{
+test('word hunt accepts the intended occurrence, not any word of the class',()=>{
   const {O}=setup(),r=O.Round.create(pack.questions,{...settings,mode:'helper'},()=>.4);
-  const first=r.check();assert.equal(first.correct,false);assert.equal(first.results.length,2);assert.equal(first.wrongIds.length,2);
-  const points=r.state.points;assert.equal(r.check().results.length,0);assert.equal(r.state.points,points);
-  const locked=r.board().find(i=>i.locked);r.selectCard(r.state.queue.indexOf(locked));assert.equal(r.move(settings.classes.find(c=>c!==locked.question.wordClass)).accepted,false);
-  assert.equal(r.selectCard(5),false);
-  r.board().filter(i=>!i.locked).forEach(item=>{r.selectCard(r.state.queue.indexOf(item));r.move(item.question.wordClass);});
-  const last=r.check();assert.equal(last.correct,true);assert.equal(last.results.length,2);assert.ok(last.results.every(a=>!a.firstTry));
-  assert.equal(r.state.answers.length,4);assert.equal(r.check().accepted,false);assert.equal(r.state.retries,0);assert.ok(r.next());assert.equal(r.state.index,4);
+  const words=O.Round.words(r.current().question),right=words.find(w=>w.target),wrong=words.find(w=>!w.target);
+  assert.equal(r.answer(r.current().question.wordClass).accepted,false);
+  assert.equal(r.chooseWord(-1).accepted,false);assert.equal(r.chooseWord(.5).accepted,false);
+  assert.equal(r.chooseWord(wrong.index).correct,false);assert.equal(r.chooseWord(wrong.index).accepted,false);
+  assert.equal(r.chooseWord(right.index).result.firstTry,false);assert.equal(r.state.points,5);
+  assert.equal(r.chooseWord(right.index).accepted,false);assert.equal(r.state.answers.length,1);
 });
 
-test('a checked yard publishes each completed card once through the normal storage path',async()=>{
-  const {O,data}=setup();await O.Content.load();const r=O.Round.create(pack.questions,{...settings,mode:'helper'},()=>.4);
-  r.check().results.forEach(O.Storage.recordAnswer);r.check().results.forEach(O.Storage.recordAnswer);assert.equal(data().correct,2);
-  r.board().filter(i=>!i.locked).forEach(item=>{r.selectCard(r.state.queue.indexOf(item));r.answer(item.question.wordClass);});
-  r.check().results.forEach(O.Storage.recordAnswer);assert.equal(data().correct,4);assert.equal(data().review.length,2);
-  assert.equal(data().points,undefined);
+test('word hunt preserves repeated words, punctuation and Norwegian letters',()=>{
+  const {O}=setup(),q={target:{before:'«Går Vyrde? Vyrde ',text:'går',after:' heim.»'}};
+  const words=O.Round.words(q);assert.equal(words.length,5);assert.equal(words.filter(w=>w.target).length,1);
+  assert.equal(words[0].target,false);assert.equal(words[3].target,true);assert.equal(words[3].text,'går');
+  for(const q of pack.questions)assert.equal(O.Round.words(q).filter(w=>w.target).length,1,q.id);
 });
 
-test('an incorrect answer in Ordskiftet keeps the paired context together',()=>{
-  const {O}=setup(),r=O.Round.create(pack.questions,{...settings,mode:'pairs',level:3,classes:['adjektiv','adverb']},()=>.4),q=r.current().question;
-  r.answer(r.state.settings.classes.find(c=>c!==q.wordClass));r.answer(q.wordClass);assert.equal(r.state.queue.length,8);assert.equal(r.state.retries,0);
-  const pairId=q.pairId;r.next();assert.equal(r.current().question.pairId,pairId);
+test('word hunt completes with hint support and publishes once through normal storage',async()=>{
+  const {O,data}=setup();await O.Content.load();const r=O.Round.create(pack.questions,{...settings,mode:'helper',count:5},()=>.4);
+  while(r.state.phase!=='complete'){
+    r.revealMeaning();const result=r.chooseWord(O.Round.words(r.current().question).find(w=>w.target).index);
+    assert.equal(result.result.meaningUsed,true);O.Storage.recordAnswer(result.result);assert.equal(r.next(),true);
+  }
+  assert.equal(r.summary().answers.length,5);assert.equal(r.summary().firstTry,5);assert.equal(data().correct,5);
+  assert.equal(r.state.retries,0);assert.equal(data().points,undefined);
+});
+
+test('Ordskiftet accepts either sentence first and advances only when both are placed',()=>{
+  const {O}=setup(),r=O.Round.create(pack.questions,{...settings,mode:'pairs',level:3,classes:['adjektiv','adverb']},()=>.4);
+  const first=r.board()[0],second=r.board()[1];assert.equal(r.selectCard(2),false);
+  assert.equal(r.selectCard(1),true);const result=r.answer(second.question.wordClass);
+  assert.equal(result.correct,true);assert.equal(second.locked,true);assert.equal(first.locked,false);
+  assert.equal(r.current(),first);assert.equal(r.next(),false);assert.equal(r.selectCard(1),false);
+  assert.equal(r.answer(first.question.wordClass).correct,true);assert.equal(r.state.phase,'feedback');
+  assert.equal(r.state.answers.length,2);assert.equal(r.state.answers[0].id,second.question.id);
+  assert.equal(r.answer(first.question.wordClass).accepted,false);assert.equal(r.next(),true);assert.equal(r.state.index,2);
+});
+
+test('Ordskiftet keeps separate mistakes and original sentences in the correct booths',()=>{
+  const {O}=setup(),r=O.Round.create(pack.questions,{...settings,mode:'pairs',level:3,classes:['adjektiv','adverb']},()=>.4);
+  const first=r.current(),pair=first.question.pairId;
+  r.answer(r.state.settings.classes.find(c=>c!==first.question.wordClass));r.answer(first.question.wordClass);
+  assert.equal(r.state.queue.length,8);assert.equal(r.state.retries,0);assert.equal(r.current().wrong.length,0);
+  assert.equal(r.current().question.pairId,pair);assert.equal(r.state.answers[0].firstTry,false);
+  r.answer(r.current().question.wordClass);
+  const placed=r.board().filter(item=>item.locked);assert.equal(placed.length,2);assert.notEqual(placed[0].question.target.before,placed[1].question.target.before);
+  assert.notEqual(placed[0].question.wordClass,placed[1].question.wordClass);assert.equal(r.summary().answers[1].firstTry,true);
 });
