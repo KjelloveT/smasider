@@ -58,9 +58,10 @@
       button.setAttribute('aria-label',c.name); button.setAttribute('aria-keyshortcuts',String(index + 1));
       const picture = el('span','ob-stall-picture'); picture.setAttribute('aria-hidden','true');
       button.append(picture,el('strong','ob-stall-name',c.name));
-      button.disabled = state.phase === 'feedback' || active.wrong.includes(id);
+      const wrongChoice = state.phase === 'answering' && active.wrong.includes(id);
+      button.disabled = state.phase === 'feedback' || wrongChoice;
       const outcome = state.lastOutcome;
-      if (active.wrong.includes(id)) button.dataset.state = 'wrong';
+      if (wrongChoice) button.dataset.state = 'wrong';
       if (outcome && outcome.correct && id === outcome.question.wordClass) button.dataset.state = 'right';
       const answers = paired ? round.board().filter(item => item.locked && item.question.wordClass === id).map(item => item.question) : state.answers.filter(a => !a.retry && a.wordClass === id).map(a => O.Content.get(a.id));
       const cavity = el('span','ob-cavity');
