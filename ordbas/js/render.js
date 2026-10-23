@@ -10,6 +10,12 @@
       const copy = el('span','ob-mode-copy'); copy.append(el('strong','',mode.name),el('small','',mode.description));
       label.append(radio,picture,copy); byId('modeChoices').append(label);
     });
+    O.Config.levels.forEach((name,index) => {
+      const label = el('label','vp-choice ob-level-choice'), radio = el('input'), picture = el('img');
+      radio.type = 'radio'; radio.name = 'level'; radio.value = String(index + 1);
+      picture.src = `../_resources/vyrdepil-design/bragder/icons/${O.Config.levelPictures[index]}.png`; picture.alt = ''; picture.width = 80; picture.height = 80;
+      label.append(radio,picture,el('strong','',name)); byId('levelChoices').append(label);
+    });
     O.Config.classes.forEach(c => {
       const label = el('label','vp-choice'), box = el('input');
       box.type = 'checkbox'; box.name = 'wordClass'; box.value = c.id; label.append(box,document.createTextNode(c.name)); byId('classChoices').append(label);
@@ -26,18 +32,18 @@
   function setup(settings) {
     document.querySelectorAll('input[name="mode"]').forEach(input => { input.checked = input.value === settings.mode; });
     document.querySelectorAll('input[name="wordClass"]').forEach(input => { input.checked = settings.classes.includes(input.value); input.disabled = settings.mode === 'pairs'; });
-    byId('levelSelect').value = String(settings.level); byId('countSelect').value = String(settings.count); byId('meaningToggle').checked = settings.showMeaning;
+    document.querySelectorAll('input[name="level"]').forEach(input => { input.checked = Number(input.value) === settings.level; }); byId('countSelect').value = String(settings.count); byId('meaningToggle').checked = settings.showMeaning;
     const size = O.Round.pool(O.Content.all(),settings).length, invalid = settings.classes.length < 2 || size < 1;
     byId('startButton').disabled = invalid;
     byId('poolSummary').textContent = invalid ? 'Vel minst to ordklassar.' : '';
     const data = O.Storage.read(); byId('reviewButton').hidden = !data.review.length;
     byId('reviewButton').textContent = `Øv meir (${data.review.length})`;
-    byId('setupSelection').textContent = `${O.Config.levels[settings.level - 1]} · ${settings.count} kort`;
+    byId('setupSelection').textContent = `${Math.min(size,settings.mode === 'pairs' ? Math.floor(settings.count / 2) * 2 : settings.count)} kort`;
   }
   function game(round) {
     const {state} = round, active = round.current(), q = active.question, helper = state.settings.mode === 'helper', paired = state.settings.mode === 'pairs';
     byId('game').dataset.mode = state.settings.mode;
-    byId('roundMode').textContent = active.retry ? 'Eit ord kjem att' : 'Steg ' + state.settings.level;
+    byId('roundMode').textContent = active.retry ? 'Eit ord kjem att' : O.Config.levels[state.settings.level - 1];
     byId('roundTitle').textContent = O.Config.modes.find(m => m.id === state.settings.mode).name;
     byId('scoreValue').textContent = state.points;
     byId('streakValue').textContent = state.streak; byId('streakBadge').hidden = state.streak < 2;
@@ -61,7 +67,8 @@
     meaning(round); O.Yard.bins(round); screen('game');
   }
   function meaning(round) {
-    const active = round.current(); byId('meaningBox').hidden = !active.meaning;
+    const active = round.current(), helper = round.state.settings.mode === 'helper'; byId('meaningBox').hidden = !active.meaning;
+    byId('huntClueBox').hidden = !helper; byId('vyrdeBubble').hidden = !helper && !active.meaning;
     const button = byId('meaningButton'); button.setAttribute('aria-expanded',String(active.meaning)); button.disabled = active.meaning;
     button.setAttribute('aria-label',round.state.settings.mode === 'helper' ? 'Vyrde: gje eit hint' : `Vyrde: hint om «${active.question.target.text}»`);
     byId('meaningText').textContent = round.state.settings.mode === 'helper' ? active.question.tip : active.question.meaning;

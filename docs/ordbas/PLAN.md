@@ -6,7 +6,7 @@ Plan og fyrste ordutval · 22. oktober 2026
 
 Den opphavlege planleveransen inneheld 1000 oppføringar i kvar av dei fire ordklassane, fordelte på fire førebelse nivå, og 40 skrivne dømeoppgåver. Ordreserven er ikkje 4000 ferdige speloppgåver: nye setningar, forklaringar og vurdering av tyding må skrivast før fleire oppføringar blir tekne inn i spelet.
 
-**Implementeringsstatus:** Fyrste spelutgåve ligg no i `ordbas/`, med 120 setningsoppgåver, 30 per ordklasse, alle tre spelmåtane, lokal framgang og felles bragder. Ordforklaringane er tilpassa frå uttrykkeleg valde ordboktydingar. Sjå `ordbas/README.md` for innhaldsbygging og kontroll. Planen under skildrar òg vidare arbeid: meir innhald og eigne val av grunngjeving. Alle fire ordstega er opne frå start. Hjelp Vyrde er no ei ordjakt der eleven finn ordet i ei setning ut frå Vyrde si forklaring, utan sorteringsbåsar. Ordskiftet lèt eleven flytte begge heile setningskorta oppi kvar sin bås i valfri rekkjefølgje. Trebåsar, steinsti, rundepoeng og Vyrde-uttrykk gjer framgangen synleg. Publisering skjer fyrst etter PR og kontroll av førehandsvisinga.
+**Implementeringsstatus:** Fyrste spelutgåve ligg no i `ordbas/`, med 400 setningsoppgåver, 100 per ordklasse, alle tre spelmåtane, lokal framgang og felles bragder. Ordforklaringane er tilpassa frå uttrykkeleg valde ordboktydingar. Sjå `ordbas/README.md` for innhaldsbygging og kontroll. Planen under skildrar òg vidare arbeid: meir innhald og eigne val av grunngjeving. Alle fire vanskegradane er opne frå start, med enkle illustrerte val. Talet på ordklassar er eit eige synleg val; fyrstegongsoppsettet er Lett med substantiv og verb. Hjelp Vyrde er no ei ordjakt der eleven finn ordet i ei setning ut frå Vyrde si forklaring, utan sorteringsbåsar. Ordskiftet lèt eleven flytte begge heile setningskorta oppi kvar sin bås i valfri rekkjefølgje. Trebåsar, steinsti, rundepoeng og Vyrde-uttrykk gjer framgangen synleg. Publisering skjer fyrst etter PR og kontroll av førehandsvisinga.
 
 ## 1. Det eleven møter
 
@@ -122,7 +122,7 @@ Bruk middels `vp-shell`, felles lyse flater, svart tekst, Lucide-ikon og stein-V
 
 ## 9. Avgrensa fyrste byggjesteg
 
-1. **Fagleg prøvesett:** skriv 120 naturlege oppgåver, 30 per ordklasse, med fasit og korte forklaringar. Dei 40 døma i denne leveransen er eit utgangspunkt. Kontroller alle tydingar, ordformer og forklaringar, og få fagleg gjennomlesing før publisering.
+1. **Fagleg prøvesett:** skriv 400 naturlege oppgåver, 100 per ordklasse, med fasit og korte forklaringar. Dei 40 døma i denne leveransen er eit utgangspunkt. Kontroller alle tydingar, ordformer og forklaringar, og få fagleg gjennomlesing før publisering.
 2. **Spelbar kjerne:** lag Båsrunden med klikk/tastatur/dragging, Vyrde-reaksjonar, hint og ei avslutta levering. Ta med alle fire ordklassane, med den føreslåtte vegen inn gjennom tre.
 3. **Utprøving:** prøv med elevar på ulike nivå. Undersøk forståing av båsskilta, leseinnsats, motoriske krav, feilforklaringar og om det er freistande å ta ei runde til. Juster ordnivåa ut frå dette.
 4. **Variasjon og framgang:** legg til Hjelp Vyrde, Ordskiftet, felles bragder og lokal framgang. Lærarval held alle nivå tilgjengelege.

@@ -3,24 +3,24 @@
   "versjonar": [
     {
       "versjon": "2.4",
-      "dato": "2026-10-22",
+      "dato": "2026-10-23",
       "samandrag": "Ordbås: sorter ordklassar med Vyrde, ordforklaringar og roleg øving.",
       "punkt": [
         {
           "t": "nytt",
           "kva": "Ordbås",
           "merke": "verktoy",
-          "tekst": "Sorter ordkort, finn ord ut frå ei forklaring, eller legg heile setningskort i båsane. Fire ordklassar og fire opne ordsteg."
+          "tekst": "Sorter ordkort, finn ord ut frå ei forklaring, eller legg heile setningskort i båsane. Fire ordklassar og illustrerte val frå Lett til Ekstrem. Lett byrjar med substantiv og verb."
         },
         {
           "t": "nytt",
           "kva": "Ordforklaringar",
-          "tekst": "120 setningsoppgåver med ei vald ordtyding frå Nynorskordboka, ei kort tilpassa forklaring og grunngjeven fasit. Ingen ordbokoppslag medan eleven spelar."
+          "tekst": "400 setningsoppgåver med ei vald ordtyding frå Nynorskordboka, ei kort tilpassa forklaring og grunngjeven fasit. Ingen ordbokoppslag medan eleven spelar."
         },
         {
           "t": "nytt",
           "kva": "Ordtunet",
-          "tekst": "Fire ulike trebåsar med hengjeskilt og kort oppi kassene, rundepoeng og steinsti viser framgangen. Vyrde held eit hint-skilt og skiftar uttrykk. Hjelpa er lukka frå start."
+          "tekst": "Fire ulike trebåsar med hengjeskilt og kort oppi kassene, rundepoeng og steinsti viser framgangen. Vyrde snakkar i ei boble. Båsane har mjuk glød og kort bak kassefronten; ordboka samlar ord med forklaring. Hjelpa er lukka frå start."
         },
         {
           "t": "nytt",

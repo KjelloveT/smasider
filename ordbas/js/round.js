@@ -9,7 +9,7 @@
       if (!grouped.has(q.pairId)) grouped.set(q.pairId, []);
       grouped.get(q.pairId).push(q);
     });
-    return [...grouped.values()].filter(pair => pair.length === 2 && pair[0].target.text.toLowerCase() === pair[1].target.text.toLowerCase() && pair[0].wordClass !== pair[1].wordClass).flat();
+    return [...grouped.values()].filter(pair => pair.length === 2 && Math.max(...pair.map(q => q.level)) === settings.level && pair[0].target.text.toLowerCase() === pair[1].target.text.toLowerCase() && pair[0].wordClass !== pair[1].wordClass).flat();
   }
   function select(questions, settings, random) {
     const available = pool(questions, settings);

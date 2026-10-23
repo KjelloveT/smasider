@@ -6,7 +6,7 @@
     if (!pack || pack.app !== 'Ordbås' || pack.version !== 1 || !Array.isArray(pack.questions)) throw new Error('Ukjent oppgåveformat');
     const ids = new Set();
     pack.questions.forEach(q => {
-      if (!q || !/^ob-\d{3}$/.test(q.id) || ids.has(q.id) || !O.Config.classes.some(c => c.id === q.wordClass)) throw new Error('Ugyldig oppgåve');
+      if (!q || !/^ob-\d{3,5}$/.test(q.id) || ids.has(q.id) || !O.Config.classes.some(c => c.id === q.wordClass)) throw new Error('Ugyldig oppgåve');
       if (![1,2,3,4].includes(q.level) || !q.target || !['before','text','after'].every(k => typeof q.target[k] === 'string') || !q.target.text) throw new Error('Ugyldig setning');
       if (!['meaning','reason','tip','lemma'].every(k => typeof q[k] === 'string' && q[k].trim())) throw new Error('Ufullstendig forklaring');
       if (!q.source || !Number.isInteger(q.source.articleId) || !Number.isInteger(q.source.definitionId)) throw new Error('Manglar ordbokkjelde');

@@ -7,8 +7,16 @@ const project = path.resolve(root, '..');
 const cache = path.join(root, '.cache');
 fs.mkdirSync(cache, { recursive: true });
 const banks = ['substantiv','verb','adjektiv','adverb'].flatMap(name => JSON.parse(fs.readFileSync(path.join(project,'docs/ordbas/data',name+'.json'),'utf8')).words);
-const specs = fs.readFileSync(path.join(__dirname,'oppgaver.tsv'),'utf8').replace(/^\uFEFF/,'').trim().split(/\r?\n/).map((line,index)=>{
-  const [wordClass,level,lemma,before,target,after,meaning,reason,tip,pairId] = line.split('|');
+const coreRows = fs.readFileSync(path.join(__dirname,'oppgaver.tsv'),'utf8').replace(/^\uFEFF/,'').trim().split(/\r?\n/).map(line => line.split('|'));
+const tips = {substantiv:'Prøv å setje ein, ei eller eit framfor ordet.',verb:'Prøv å setje å framfor grunnforma av ordet.',adjektiv:'Kva ord skildrar noko eller nokon i setninga?',adverb:'Kva ord seier kvar, når, korleis eller i kva grad?'};
+const extraRows = fs.readFileSync(path.join(__dirname,'utviding.tsv'),'utf8').trim().split(/\r?\n/).map((line,index) => {
+  const [wordClass,level,lemma,sentence,meaning,reason,pairId] = line.split('|');
+  const match = /^(.*?)\[([^\[\]]+)\](.*)$/.exec(sentence);
+  if (!match) throw new Error('Manglar eitt markert målord i utviding '+(index+1));
+  return [wordClass,level,lemma,match[1],match[2],match[3],meaning,reason,tips[wordClass],pairId||''];
+});
+const specs = [...coreRows,...extraRows].map((row,index) => {
+  const [wordClass,level,lemma,before,target,after,meaning,reason,tip,pairId] = row;
   const word=banks.find(item=>item.wordClass===wordClass && (item.lemma===lemma||item.word===lemma));
   if(!word) throw new Error(`Manglar ord ${index+1}: ${wordClass}:${lemma}`);
   return {id:'ob-'+String(index+1).padStart(3,'0'),wordClass,level:Number(level),lemma,target:{before,text:target,after},meaning,reason,tip,pairId:pairId||null,word};
@@ -27,7 +35,7 @@ function senses(article){
     if(Array.isArray(node)){node.forEach(walk);return;}
     if(!node||node.type_!=='definition')return;
     const text=(node.elements||[]).filter(e=>e.type_==='explanation').map(expand).join('; ');
-    if(text&&!/^brukt som /i.test(text))out.push({id:node.id,text});
+    if(text)out.push({id:node.id,text});
     (node.elements||[]).filter(e=>e.type_==='definition').forEach(walk);
   }
   walk(article.body.definitions);return out;
@@ -45,20 +53,24 @@ async function main(){
   await Promise.all(Array.from({length:4},async()=>{while(cursor<ids.length){const id=ids[cursor++];articles.set(id,await article(id));}}));
   const overridesPath=path.join(__dirname,'senses.json');
   const overrides=fs.existsSync(overridesPath)?JSON.parse(fs.readFileSync(overridesPath,'utf8')):{};
+  const detail = specs.map(spec => ({id:spec.id,wordClass:spec.wordClass,lemma:spec.lemma,target:spec.target.text,meaning:spec.meaning,candidates:(spec.word.possibleSourceArticleIds||[spec.word.sourceArticleId]).map(id=>({articleId:id,senses:senses(articles.get(id))}))}));
+  fs.writeFileSync(path.join(cache,'content-review.json'),JSON.stringify(detail,null,2)+'\n');
+  if(process.argv.includes('--review')) { console.log(`${specs.length} oppgåver klare for tydingskontroll, ${articles.size} artiklar.`); return; }
   const questions=specs.map(spec=>{
     const override=overrides[spec.id]||{};
     const id=override.articleId||spec.word.sourceArticleId;
     const data=articles.get(id), list=senses(data);
-    const chosen=override.definitionId!==undefined?list.find(s=>s.id===override.definitionId):list[0];
+    const chosen=override.definitionId!==undefined?list.find(s=>s.id===override.definitionId):null;
     if(!chosen)throw new Error('Manglar forklaring '+spec.id);
     const forms=data.lemmas.flatMap(l=>[l.lemma,...(l.paradigm_info||[]).filter(p=>p.standardisation==='STANDARD'&&p.to===null).flatMap(p=>(p.inflection||[]).map(f=>f.word_form))]);
     if(!forms.includes(spec.target.text.toLocaleLowerCase('nn-NO')))throw new Error('Ugyldig form '+spec.id+': '+spec.target.text);
     return {id:spec.id,wordId:spec.word.id,wordClass:spec.wordClass,level:spec.level,lemma:spec.lemma,target:spec.target,meaning:spec.meaning,reason:spec.reason,tip:spec.tip,pairId:spec.pairId,source:{articleId:id,definitionId:chosen.id,wordClass:spec.word.sourceWordClass,url:`https://ordbokene.no/nn/${id}`,updated:data.updated,dictionaryExplanation:chosen.text,adapted:true}};
   });
-  const data={app:'Ordbås',version:1,language:'nn',attribution:'Nynorskordboka, Universitetet i Bergen og Språkrådet, ordbøkene.no, CC-BY 4.0. Ordforklaringane er korta ned og tilpassa; setningar, hint og grammatikkforklaringar er skrivne for Ordbås.',license:'https://creativecommons.org/licenses/by/4.0/',sourceFetchedOn:'2026-10-22',questions};
+  const data={app:'Ordbås',version:1,language:'nn',attribution:'Nynorskordboka, Universitetet i Bergen og Språkrådet, ordbøkene.no, CC-BY 4.0. Ordforklaringane er korta ned og tilpassa; setningar, hint og grammatikkforklaringar er skrivne for Ordbås.',license:'https://creativecommons.org/licenses/by/4.0/',sourceCheckedOn:'2026-10-23',questions};
   fs.writeFileSync(path.join(root,'data/oppgaver.json'),JSON.stringify(data,null,2)+'\n');
   const review=specs.map(s=>`\n${s.id} ${s.wordClass} ${s.lemma} – ${s.meaning}\n`+(s.word.possibleSourceArticleIds||[s.word.sourceArticleId]).map(id=>`${id}: `+senses(articles.get(id)).map(x=>`[${x.id}] ${x.text}`).join(' / ')).join('\n')).join('\n');
   fs.writeFileSync(path.join(cache,'sense-review.txt'),review);
   console.log(`${questions.length} oppgåver, ${articles.size} ordbokartiklar. SHA-256: ${crypto.createHash('sha256').update(JSON.stringify(data)).digest('hex')}`);
 }
-main().catch(error=>{console.error(error.message);process.exitCode=1;});
+if(require.main===module) main().catch(error=>{console.error(error.message);process.exitCode=1;});
+module.exports={senses,specs};

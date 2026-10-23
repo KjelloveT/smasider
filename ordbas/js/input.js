@@ -2,7 +2,7 @@
   'use strict';
   const O=root.Ordbas,byId=id=>document.getElementById(id);
   function collect(){
-    return {mode:document.querySelector('input[name="mode"]:checked').value,level:Number(byId('levelSelect').value),count:Number(byId('countSelect').value),classes:[...document.querySelectorAll('input[name="wordClass"]:checked')].map(x=>x.value),showMeaning:byId('meaningToggle').checked};
+    return {mode:document.querySelector('input[name="mode"]:checked').value,level:Number(document.querySelector('input[name="level"]:checked').value),count:Number(byId('countSelect').value),classes:[...document.querySelectorAll('input[name="wordClass"]:checked')].map(x=>x.value),showMeaning:byId('meaningToggle').checked};
   }
   function bindDrag(){
     const host=byId('game');
@@ -53,7 +53,6 @@
   function bind(){
     byId('setup').addEventListener('change',()=>O.App.change(collect()));
     byId('startButton').addEventListener('click',()=>O.App.start());
-    byId('adverbButton').addEventListener('click',()=>O.App.start({mode:'sort',level:3,classes:O.Config.classes.map(c=>c.id)}));
     byId('meaningButton').addEventListener('click',()=>O.App.meaning());
     byId('nextButton').addEventListener('click',()=>O.App.next());
     byId('againButton').addEventListener('click',()=>O.App.start());

@@ -13,7 +13,8 @@
       { id: 'helper', name: 'Hjelp Vyrde', description: 'Vyrde skildrar. Du finn ordet.' },
       { id: 'pairs', name: 'Ordskiftet', description: 'To setningar. To ulike båsar.' }
     ],
-    levels: ['Fyrste båsane', 'Bøygde ord', 'Ord i samanheng', 'Ordmeisteren'],
-    defaults: { mode: 'sort', level: 1, count: 8, classes: ['substantiv','verb','adjektiv'], showMeaning: false }
+    levels: ['Lett', 'Middels', 'Vanskeleg', 'Ekstrem'],
+    levelPictures: ['sprout','twin-sprouts','mixed-forest','mountain-goat'],
+    defaults: { mode: 'sort', level: 1, count: 8, classes: ['substantiv','verb'], showMeaning: false }
   };
 })(window);

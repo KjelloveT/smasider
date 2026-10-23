@@ -23,13 +23,14 @@
   }
   function delivery(wordClass, text, from) {
     if (reduced()) return;
-    const target = document.querySelector('#bins button[data-class="' + wordClass + '"]');
+    const target = document.querySelector('#bins button[data-class="' + wordClass + '"] .ob-cavity');
     if (!target || !from) return;
     const to = target.getBoundingClientRect();
     const token = el('span', 'vp-panel vp-panel--compact ob-flying-card', text);
     token.setAttribute('aria-hidden', 'true'); token.style.left = from.left + 'px'; token.style.top = from.top + 'px';
     document.body.append(token); overlays.add(token);
-    const animation = token.animate([{transform:'translate(0,0) rotate(-4deg)',opacity:1},{transform:`translate(${to.left + to.width / 2 - from.left - 25}px,${to.top + to.height / 2 - from.top}px) rotate(8deg) scale(.55)`,opacity:0}], {duration:650,easing:'cubic-bezier(.3,.7,.3,1)'});
+    const flying = token.getBoundingClientRect();
+    const animation = token.animate([{transform:'translate(0,0) rotate(-4deg)',opacity:1},{transform:`translate(${to.left + to.width / 2 - from.left - flying.width / 2}px,${to.bottom - from.top - flying.height}px) rotate(8deg) scale(.55)`,opacity:0}], {duration:650,easing:'cubic-bezier(.3,.7,.3,1)'});
     animation.finished.catch(() => {}).finally(() => { token.remove(); overlays.delete(token); });
   }
   O.Effects = { clear, react, points, delivery };

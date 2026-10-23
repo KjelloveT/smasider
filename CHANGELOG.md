@@ -3,12 +3,12 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
-## [2.4] — 2026-10-22
+## [2.4] — 2026-10-23
 
 ### Lagt til
-- **Ordbås – ordklassar med Vyrde.** Sorter substantiv, verb, adjektiv og adverb i korte leveringar. Sorter kort i Båsrunden, finn ord ut frå Vyrde sine forklaringar i Hjelp Vyrde, eller legg heile setningskort i båsane i Ordskiftet. Fire opne ordsteg utan tidspress.
-- **120 oppgåver med ordforklaringar.** Kvar oppgåve har ei setning, ei tilpassa forklaring frå ei vald tyding i Nynorskordboka og ei grunngjeven fasit. Oppgåver og forklaringar ligg lokalt; spelet gjer ingen ordbokoppslag under bruk.
-- **Eit illustrert ordtun.** Fire ulike trebåsar med hengjeskilt, poeng, steinsti og kort oppi kassene viser framgangen. Vyrde held eit hint-skilt, skiftar uttrykk og reagerer med rørsle. Hjelpa er lukka frå start; redusert rørsle blir respektert. Poenga gjeld berre den aktive runden.
+- **Ordbås – ordklassar med Vyrde.** Sorter substantiv, verb, adjektiv og adverb i korte leveringar. Sorter kort i Båsrunden, finn ord ut frå Vyrde sine forklaringar i Hjelp Vyrde, eller legg heile setningskort i båsane i Ordskiftet. Fire illustrerte vanskegradar utan tidspress; fyrstegongsoppsettet er Lett med substantiv og verb.
+- **400 oppgåver med ordforklaringar.** 100 per ordklasse. Kvar oppgåve har ei setning, ei tilpassa forklaring frå ei vald tyding i Nynorskordboka og ei grunngjeven fasit. Oppgåver og forklaringar ligg lokalt; spelet gjer ingen ordbokoppslag under bruk.
+- **Eit illustrert ordtun.** Fire ulike trebåsar med hengjeskilt, poeng, steinsti og kort oppi kassene viser framgangen. Vyrde held eit hint-skilt, snakkar i ei boble og skiftar uttrykk. Båsane står stille med mjuk glød, og kassefronten ligg framfor ordkorta. Ordboka viser funne ord med forklaring, fyrst etter det fyrste funnet. Hjelpa er lukka frå start; redusert rørsle blir respektert. Poenga gjeld berre den aktive runden.
 - **Avgrensa lokal øving og felles bragder.** Ordbås hugsar val, øvingstal og inntil 30 oppgåver å repetere. Dragging, trykk og tastatur gjev same svarflyt. Personvernoversiktene forklarer lagringa.
 
 ## [2.3.1] — 2026-10-15

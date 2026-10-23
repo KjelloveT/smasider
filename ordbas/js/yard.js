@@ -29,7 +29,7 @@
   }
   function hunt(round) {
     const host = byId('wordHunt'), helper = round.state.settings.mode === 'helper';
-    host.hidden = !helper; byId('wordBook').hidden = !helper; if (!helper) return;
+    host.hidden = !helper; byId('wordBook').hidden = !helper || !round.state.answers.length; if (!helper) return;
     const active = round.current(), q = active.question, text = q.target.before + q.target.text + q.target.after;
     byId('huntClass').textContent = O.Config.classes.find(c => c.id === q.wordClass).name;
     byId('huntClue').textContent = q.meaning;
@@ -45,8 +45,10 @@
     });
     choices.append(document.createTextNode(text.slice(end)));
     const found = byId('foundWords'); found.replaceChildren();
-    round.state.answers.forEach(answer => { const word = el('span','vp-panel vp-panel--compact ob-found-word',O.Content.get(answer.id).target.text); word.prepend(icon('check')); found.append(word); });
-    byId('bookEmpty').hidden = round.state.answers.length > 0;
+    round.state.answers.forEach(answer => {
+      const q = O.Content.get(answer.id), entry = el('div','ob-found-entry'), term = el('dt');
+      term.append(icon('check'),el('strong','',q.target.text)); entry.append(term,el('dd','',q.meaning)); found.append(entry);
+    });
   }
   function bins(round) {
     const {state} = round, active = round.current(), paired = state.settings.mode === 'pairs', host = byId('bins');
@@ -56,7 +58,7 @@
       const c = O.Config.classes.find(c => c.id === id), bay = el('div','ob-bay'); bay.dataset.class = id;
       const button = el('button','vp-button vp-button--illustration ob-bin'); button.type = 'button'; button.dataset.class = id;
       button.setAttribute('aria-label',c.name); button.setAttribute('aria-keyshortcuts',String(index + 1));
-      const picture = el('span','ob-stall-picture'); picture.setAttribute('aria-hidden','true');
+      const picture = el('span','ob-stall-layer ob-stall-back'); picture.setAttribute('aria-hidden','true');
       button.append(picture,el('strong','ob-stall-name',c.name));
       const wrongChoice = state.phase === 'answering' && active.wrong.includes(id);
       button.disabled = state.phase === 'feedback' || wrongChoice;
@@ -73,7 +75,8 @@
         if (paired) sentence(card,q); else card.textContent = q.target.text;
         cavity.append(card);
       });
-      button.append(cavity);
+      const front = el('span','ob-stall-layer ob-stall-front'); front.setAttribute('aria-hidden','true');
+      button.append(cavity,front);
       if (answers.length && !paired) { const count = el('span','vp-panel vp-panel--soft vp-panel--compact ob-bay-count',String(answers.length)); count.setAttribute('aria-hidden','true'); button.append(count); }
       bay.append(button); host.append(bay);
     });

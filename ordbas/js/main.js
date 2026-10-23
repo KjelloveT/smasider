@@ -3,7 +3,7 @@
   const O = root.Ordbas;
   let settings, round;
   function change(next) {
-    if (next.mode === 'pairs') { next.classes = ['adjektiv','adverb']; if (settings.mode !== 'pairs') next.level = Math.max(2,next.level); }
+    if (next.mode === 'pairs') { next.classes = ['adjektiv','adverb']; }
     else if (settings.mode === 'pairs') next.classes = O.Config.defaults.classes.slice();
     settings = next; O.View.setup(settings);
   }

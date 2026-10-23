@@ -15,10 +15,10 @@ function setup(initial={}){
   return {O:context.Ordbas,data:()=>data,badges,snapshot:()=>snapshot};
 }
 const settings={mode:'sort',level:1,count:8,classes:['substantiv','verb','adjektiv'],showMeaning:false};
-test('120 complete questions, 30 in each class, every level represented',()=>{
-  const {O}=setup();assert.equal(O.Content.validate(pack).length,120);
-  assert.equal(new Set(pack.questions.map(q=>q.id)).size,120);
-  for(const c of O.Config.classes){assert.equal(pack.questions.filter(q=>q.wordClass===c.id).length,30);for(const l of [1,2,3,4])assert.ok(pack.questions.some(q=>q.wordClass===c.id&&q.level===l));}
+test('400 complete questions, 100 in each class, every level represented',()=>{
+  const {O}=setup();assert.equal(O.Content.validate(pack).length,400);
+  assert.equal(new Set(pack.questions.map(q=>q.id)).size,400);
+  for(const c of O.Config.classes){assert.equal(pack.questions.filter(q=>q.wordClass===c.id).length,100);for(const l of [1,2,3,4])assert.ok(pack.questions.some(q=>q.wordClass===c.id&&q.level===l));}
   for(const q of pack.questions){assert.ok(q.meaning.length<150);assert.ok(q.source.adapted);assert.ok(q.source.dictionaryExplanation);assert.ok(q.source.url.endsWith('/'+q.source.articleId));assert.ok(!q.meaning.includes('$'));}
 });
 test('reject malformed content before play',()=>{
@@ -67,7 +67,7 @@ test('Ordskiftet keeps matching forms with both grammatical uses',()=>{
   for(const level of [1,2,3,4]){
     const r=O.Round.create(pack.questions,{...settings,mode:'pairs',classes:['adjektiv','adverb'],level},()=>.4);
     assert.ok(r.state.queue.length>=4);
-    for(let i=0;i<r.state.queue.length;i+=2){const a=r.state.queue[i].question,b=r.state.queue[i+1].question;assert.equal(a.pairId,b.pairId);assert.equal(a.target.text.toLowerCase(),b.target.text.toLowerCase());assert.notEqual(a.wordClass,b.wordClass);}
+    for(let i=0;i<r.state.queue.length;i+=2){const a=r.state.queue[i].question,b=r.state.queue[i+1].question;assert.equal(a.pairId,b.pairId);assert.equal(Math.max(a.level,b.level),level);assert.equal(a.target.text.toLowerCase(),b.target.text.toLowerCase());assert.notEqual(a.wordClass,b.wordClass);}
   }
 });
 test('practice may include words from a different level',()=>{
@@ -164,4 +164,21 @@ test('Ordskiftet keeps separate mistakes and original sentences in the correct b
   r.answer(r.current().question.wordClass);
   const placed=r.board().filter(item=>item.locked);assert.equal(placed.length,2);assert.notEqual(placed[0].question.target.before,placed[1].question.target.before);
   assert.notEqual(placed[0].question.wordClass,placed[1].question.wordClass);assert.equal(r.summary().answers[1].firstTry,true);
+});
+
+
+test('first-time play starts with familiar nouns and verbs, with all levels available',async()=>{
+  const {O}=setup();await O.Content.load();const initial=O.Storage.read().settings;
+  assert.deepEqual(Array.from(initial.classes),['substantiv','verb']);assert.equal(initial.level,1);
+  assert.deepEqual(Array.from(O.Config.levels),['Lett','Middels','Vanskeleg','Ekstrem']);
+  for(const level of [1,2,3,4])assert.ok(O.Round.pool(pack.questions,{...initial,level}).length>=40);
+});
+
+test('the expansion preserves established question IDs and has explicit dictionary senses',()=>{
+  const {O}=setup();const senses=JSON.parse(fs.readFileSync(path.join(root,'ordbas/tools/senses.json'),'utf8'));
+  for(const [id,lemma] of [['ob-001','stein'],['ob-031','hoppe'],['ob-061','raud'],['ob-091','her'],['ob-120','kreativ'],['ob-121','arm'],['ob-400','neppe']])assert.equal(pack.questions.find(q=>q.id===id).lemma,lemma);
+  for(const q of pack.questions){assert.equal(senses[q.id].articleId,q.source.articleId);assert.equal(senses[q.id].definitionId,q.source.definitionId);}
+  for(const c of O.Config.classes)assert.equal(new Set(pack.questions.filter(q=>q.wordClass===c.id).map(q=>q.lemma)).size,100);
+  const groups=Map.groupBy(pack.questions.filter(q=>q.pairId),q=>q.pairId);assert.ok(groups.size>=20);
+  for(const pair of groups.values()){assert.equal(pair.length,2);assert.equal(pair[0].target.text.toLowerCase(),pair[1].target.text.toLowerCase());assert.notEqual(pair[0].wordClass,pair[1].wordClass);}
 });
