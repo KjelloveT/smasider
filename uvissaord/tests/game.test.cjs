@@ -10,7 +10,7 @@ function load(files, extra = {}) {
   files.forEach(file => vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context));
   return context;
 }
-const context = load(['ordvett/data/ordbank.js', 'ordvett/js/game.js', 'js/vyrdepil-util.js']);
+const context = load(['uvissaord/data/ordbank.js', 'uvissaord/js/game.js', 'js/vyrdepil-util.js']);
 const Game = context.window.OrdvettGame;
 const Bank = context.window.OrdvettBank;
 const Vy = context.window.Vy;
@@ -133,7 +133,7 @@ test('faste sett dekkjer heile banken utan gjentaking og held same rekkje', () =
 function storage(raw = null) {
   let saved = raw;
   const api = { getGameState: () => saved, setGameState: (name, value) => { assert.equal(name, 'ordvett'); saved = JSON.parse(JSON.stringify(value)); } };
-  const result = load(['ordvett/js/storage.js'], { VyrdepilStorage: api });
+  const result = load(['uvissaord/js/storage.js'], { VyrdepilStorage: api });
   return { api: result.window.OrdvettStorage, value: () => saved };
 }
 test('rekordar føretrekkjer fleire løyste ord før lågare kostnad', () => {
@@ -161,7 +161,7 @@ test('øydelagde lokale appfelt får trygge standardverdiar', () => {
   assert.equal(store.api.getRecord('bad'), null);
 });
 
-const scheduleContext = load(['ordvett/js/schedule.js'], { OrdvettBank: Bank, Vy });
+const scheduleContext = load(['uvissaord/js/schedule.js'], { OrdvettBank: Bank, Vy });
 const Schedule = scheduleContext.window.OrdvettSchedule;
 const dateAfter = offset => new Date(Date.UTC(2026, 9, 24 + offset)).toISOString().slice(0, 10);
 

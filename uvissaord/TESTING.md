@@ -1,6 +1,6 @@
 # Kontroll av UvissaOrd
 
-Kontrollert 24. oktober 2026 på greina `feat/ordvett-hintspel`, vidareført frå den opne PR-en #124. Fersk `origin/main` var `6398a1a`. Produksjonsframsida viste 2.3.1; `ordvett/` gav framsida som reserve, ikkje det nye spelet. App-ID og adresse er haldne stabile ved namnebyte.
+Kontrollert 24. oktober 2026 på greina `feat/ordvett-hintspel`, vidareført frå den opne PR-en #124. Fersk `origin/main` var `6398a1a`. Produksjonsframsida viste 2.3.1; `ordvett/` gav framsida som reserve, ikkje det nye spelet. Dette var tilstanden før opphavleg publisering. Den offentlege adressa vart seinare endra til `uvissaord/`; berre intern app-ID og lagringsnøkkel er haldne stabile.
 
 ## Spelreglar og lagring
 
@@ -27,3 +27,9 @@ Lokal tenar brukar dei handheva tryggingsheaderane og CSP frå produksjonskonfig
 Felles UI-kontroll går gjennom 80 HTML-sider og finn dei same to eksisterande modalfeila i Heite Stavrim og Ormritaren; ingen kjem frå UvissaOrd. Fysiske telefonar/nettbrett og elev-/lærarutprøving står att.
 
 Azure-preview for PR 124 har tidlegare vorte stoppa av «maximum number of staging environments». Siste deploy blir kontrollert etter push. Ingen eksisterande miljø blir sletta, og ingen endringar blir lagde på `main`.
+
+## Adressefiksen
+
+Vidareført frå fersk origin/main på 5f2c044 etter merge av PR #124. Produksjon viste versjon 2.4 og UvissaOrd under ordvett/. Den nye uvissaord/-adressa viste enno framsida som reserve. Appmappa, kataloglenkja, framsidelenkja og vedlikehalds-/lisensstiane er no flytta til uvissaord/. Den gamle ruta blir ikkje halden ved lag, etter ynske frå brukaren. Dei same 26 speltestane og kontrollen av bakgrunnsreservasjonar passerer.
+
+Nettlesarkontroll av adressefiksen: lenkja i endringsnotatet, appkortet og appmenyen peikar på uvissaord/index.html. Lenkja vart følgd frå framsida til den nye adressa. Lagra arkivdato, hint og 8 brukte myntar var framleis synlege med «Hald fram». Den nye sida, spelkoden og myntbileta svarar med HTTP 200 lokalt.

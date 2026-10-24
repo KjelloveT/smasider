@@ -32,10 +32,10 @@ function senses(article) {
 async function main() {
   await fs.mkdir(cache, { recursive: true });
   const lemmaIndex = await getJson('/nn/fil/lemma.json', 'lemma.json');
-  const rows = (await fs.readFile(path.join(root, 'ordvett/data/ordgrunnlag.tsv'), 'utf8'))
+  const rows = (await fs.readFile(path.join(root, 'uvissaord/data/ordgrunnlag.tsv'), 'utf8'))
     .trim().split(/\r?\n/).filter(line => line && !line.startsWith('#')).map(line => line.split('|'));
   let choices = {};
-  try { choices = JSON.parse(await fs.readFile(path.join(root, 'ordvett/data/tydingar.json'), 'utf8')); }
+  try { choices = JSON.parse(await fs.readFile(path.join(root, 'uvissaord/data/tydingar.json'), 'utf8')); }
   catch (error) { if (error.code !== 'ENOENT') throw error; }
   const words = new Array(rows.length);
   const audit = new Array(rows.length);
@@ -84,7 +84,7 @@ async function main() {
     changes: 'Ordutval, tema, vanskegrad, forklaringar og setningsdøme er tilpassa for Ordvett. Ordklasse, normerte oppslagsformer og bøying er henta frå Nynorskordboka.',
     words
   };
-  await fs.writeFile(path.join(root, 'ordvett/data/ordbank.js'),
+  await fs.writeFile(path.join(root, 'uvissaord/data/ordbank.js'),
     '/* Nynorskordboka (UiB og Språkrådet), CC BY 4.0. Sjå KJELDER.md. */\nwindow.OrdvettBank = ' + JSON.stringify(data, null, 2) + ';\n');
   await fs.writeFile(path.join(cache, 'tydingskontroll.txt'), audit.join('\n\n'));
   console.log(`Bygde ${words.length} ord. Kontroller _kjelder/ordvett/tydingskontroll.txt.`);

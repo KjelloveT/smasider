@@ -19,8 +19,8 @@ Datafilene under `data/`, medrekna det tilpassa ordgrunnlaget, er delte under CC
 Køyr frå prosjektrota:
 
 ```sh
-node ordvett/tools/bygg-ordbank.cjs
-node --test ordvett/tests/game.test.cjs
+node uvissaord/tools/bygg-ordbank.cjs
+node --test uvissaord/tests/game.test.cjs
 ```
 
 Skriptet les `data/ordgrunnlag.tsv`, hentar lemmaindeksen og artiklar frå UiB og skriv `data/ordbank.js`. Henting skjer med tre samtidige førespurnader. Rådata og ei liste for tydingskontroll ligg lokalt i den ignorerte mappa `_kjelder/ordvett/` og blir ikkje publiserte. Ta vare på rådata for reprodusering; flytt den lokale hurtigbufferen til ei ny kjeldemappe før ei medviten oppdatering frå API-et.

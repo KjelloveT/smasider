@@ -16,9 +16,9 @@ brukar det kommersielt, og deler dine eigne utgåver på same vilkår.
 
 UNNTAK — dette dekkjer lisensen IKKJE:
 
-  * Ordbanken under `ordvett/data/` er delt under CC BY 4.0. Han byggjer
+  * Ordbanken under `uvissaord/data/` er delt under CC BY 4.0. Han byggjer
     på Nynorskordboka frå Universitetet i Bergen og Språkrådet, med
-    tilpassa hint. Sjå `ordvett/KJELDER.md` for kjelder og bearbeiding.
+    tilpassa hint. Sjå `uvissaord/KJELDER.md` for kjelder og bearbeiding.
   * Tredjepartsbiblioteka under `_libs/` (Phaser, Pyodide, CodeMirror,
     lamejs, skrifta Andika m.fl.) har sine eigne lisensar. Sjå
     `_libs/CREDITS.md`.
