@@ -2,6 +2,16 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "2.4",
+      "dato": "2026-10-24",
+      "samandrag": "Ordvett: Finn nynorske ord ved å kjøpe hint og bruke så få myntar som mogleg.",
+      "punkt": [
+        { "t": "nytt", "kva": "Ordvett", "tekst": "Fem ord per omgang, språklege hint og bokstavhint, to vanskegrader og 200 utvalde ord.", "merke": "verktoy" },
+        { "t": "nytt", "kva": "Lokal ordbank", "tekst": "Data frå Nynorskordboka og tilpassa hint ligg ved spelet med kjeldetilvising. Ingen API-oppslag under speling." },
+        { "t": "nytt", "kva": "Rekordar per sett", "tekst": "Vanskegrad, valt sett og inntil 40 rekordar blir lagra lokalt. Namn og innskrivne svar blir ikkje lagra." }
+      ]
+    },
+    {
       "versjon": "2.3.1",
       "dato": "2026-10-15",
       "samandrag": "Tydelegare bokstavruter og lydframheving i Ljodstigen.",

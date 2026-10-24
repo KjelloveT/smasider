@@ -3,6 +3,13 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.4] — 2026-10-24
+
+### Lagt til
+- **Ordvett.** Finn fem nynorske ord med så få myntar som mogleg. Kjøp språklege hint eller bokstavar, vel mellom to vanskegrader og 200 utvalde ord, og samanlikn strategiar på faste oppgåvesett.
+- **Lokal ordbank frå Nynorskordboka.** Ordklasse, normerte grunnformer og bøying er henta frå UiB og Språkrådet. Tilpassa hint er knytte til valde artiklar og tydingar, med CC BY 4.0-kreditering. Ingen API-oppslag blir gjorde under speling.
+- **Rekordar per oppgåvesett.** Vanskegrad, valt sett og inntil 40 rekordar blir lagra gjennom VyrdepilStorage. Talet på løyste ord kjem fyrst, deretter lågaste myntforbruk. Innskrivne svar og namn blir ikkje lagra.
+
 ## [2.3.1] — 2026-10-15
 
 ### Endra

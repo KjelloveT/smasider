@@ -48,6 +48,20 @@
   ],
   "apps": [
     {
+      "id": "ordvett",
+      "name": "Ordvett",
+      "href": "ordvett/index.html",
+      "cat": "spraak_ord",
+      "btn": "Finn ordet",
+      "img": "_resources/vyrdepil-design/logos/ordaklok-mala.png",
+      "added": "2026-10-24",
+      "audience": ["Mellomtrinn"],
+      "desc": [
+        "Finn fem nynorske ord ved å kjøpe hint om ordklasse, bruk, tyding og bokstavar. Kor få myntar treng du?",
+        "Vel mellom to vanskegrader og 200 utvalde ord. Same oppgåvesett har dei same orda, så klassen kan samanlikne strategiar. Rekordar blir lagra berre på denne eininga."
+      ]
+    },
+    {
       "id": "ljodstigen",
       "name": "Ljodstigen",
       "href": "ljodstigen/index.html",
