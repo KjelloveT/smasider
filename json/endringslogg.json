@@ -2,6 +2,17 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "2.4",
+      "dato": "2026-10-24",
+      "samandrag": "UvissaOrd: Dagens fem ord, fri øving og ein visuell hintbutikk.",
+      "punkt": [
+        { "t": "nytt", "kva": "UvissaOrd", "tekst": "Dagens fem ord og fri øving med to nivå og 200 ord. 30 myntar dekkjer hint og feil svar; tema og ordlengd kan kjøpast. Også tomme bokstavplassar kostar.", "merke": "verktoy" },
+        { "t": "nytt", "kva": "Måla hintbutikk", "tekst": "Eigne hintikon, leiken mysteriekasselogo og snurrande myntar med Vyrde-hovud og V. Planteikon frå Ordbås viser nivåa." },
+        { "t": "nytt", "kva": "Lokal ordbank", "tekst": "Data frå Nynorskordboka og tilpassa hint ligg ved spelet med kjeldetilvising. Ingen API-oppslag under speling." },
+        { "t": "nytt", "kva": "Lagra dagsframgang", "tekst": "Val, inntil fire dagsrundar og 40 resultat blir lagra lokalt. Samanlikningsavtrykk hindrar dobbel betaling for same feil; svartekst og namn blir ikkje lagra." }
+      ]
+    },
+    {
       "versjon": "2.3.1",
       "dato": "2026-10-15",
       "samandrag": "Tydelegare bokstavruter og lydframheving i Ljodstigen.",

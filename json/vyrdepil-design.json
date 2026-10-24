@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-15",
+  "updated": "2026-10-24",
   "appCatalog": "json/apps.json",
   "policy": {
     "allocation": "random-unused-on-creation",
@@ -42,7 +42,8 @@
       "leitekryss": "_resources/leitekryss.svg",
       "vitjingsruta": "_resources/vyrdepil-design/logos/vitjingsruta-mala.png",
       "dagsvegen": "_resources/vyrdepil-design/logos/dagsvegen-mala.png",
-      "tevlingstreet": "_resources/vyrdepil-design/logos/tevlingstreet-mala.png"
+      "tevlingstreet": "_resources/vyrdepil-design/logos/tevlingstreet-mala.png",
+      "ordvett": "_resources/vyrdepil-design/logos/uvissaord-mala.png"
     }
   },
   "scenes": [
@@ -1006,7 +1007,7 @@
         1672,
         941
       ],
-      "assignedTo": null
+      "assignedTo": "ordvett"
     },
     {
       "id": "bypark-vinter-natt",
@@ -2545,6 +2546,9 @@
     },
     "ljodstigen": {
       "backgroundId": "sykkelsti-vinter-natt"
+    },
+    "ordvett": {
+      "backgroundId": "sykkelsti-sommar-morgon"
     }
   },
   "siteBackgroundSets": {

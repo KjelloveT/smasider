@@ -57,7 +57,7 @@ Knappetekst skal vere sentrert, både med og utan ikon. Bruk berre ikonnamn som 
 
 | Del | Klassar og struktur |
 |---|---|
-| Handling | `vp-button`; `--primary` korall, `--tool` himmel, `--positive` mose, `--danger` lys raud, `--quiet` utan skugge. `--compact`, `--large`, `--icon`, `--block` styrer form/storleik. |
+| Handling | `vp-button`; `--primary` korall, `--tool` himmel, `--positive` mose, `--danger` lys raud, `--quiet` utan skugge. `--compact`, `--large`, `--icon`, `--block` styrer form/storleik. `--purchase` held lys flate på deaktiverte butikkvarer; appen markerer sjølve mynten som utilgjengeleg. |
 | Spelomtale | `vp-game-description` står i ei eiga, kort linje over heroen. Hald teksten kort; han kan brytast på smale skjermar. |
 | Kompakt spelhero | Legg `vp-hero-stage--compact` på `vp-hero-stage` når sjølve spelet er i gang. Logo og namn står att; undertittelen blir gøymd. |
 | Migrert speltilstand | Eldre appflyter bruker `VyrdepilAppShell.setGameActive(true)` når spelet startar og `false` når brukaren går attende til oppsettet. |
@@ -81,6 +81,8 @@ Hjørne: maks 160 px, 18 px ut frå kanten, opasitet 0,55. Fire ulike motiv per 
 Editorar, tabellar, små felt, spelkontrollar og tette lister har reine flater utan ornament/stolper. Gje dekor etter funksjon; ikkje pynt kvar undergruppe.
 
 ## Sideoppsett
+
+`data-vp-open-shell` på `<body>` gjev ei open grunnramme utan den ytre bakgrunnsboksen. Appen sine panel og skilt står då fritt i landskapet. Hald minst 56 px fri avstand mellom heroen og skilt med stolpetoppar som stikk 40 px opp. Vanlege trekkspel utan `data-vp-support` er lukka som standard på alle skjermbreidder.
 
 | Oppsett | Bruk og struktur |
 |---|---|

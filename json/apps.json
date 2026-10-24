@@ -48,6 +48,20 @@
   ],
   "apps": [
     {
+      "id": "ordvett",
+      "name": "UvissaOrd",
+      "href": "ordvett/index.html",
+      "cat": "spraak_ord",
+      "btn": "Finn ordet",
+      "img": "_resources/vyrdepil-design/logos/uvissaord-mala.png",
+      "added": "2026-10-24",
+      "audience": ["Mellomtrinn"],
+      "desc": [
+        "Du har 30 myntar til fem løynde nynorske ord. Kjøp dei hinta du treng, og spar på myntane.",
+        "Dagens fem ord er dei same for alle på kvart nivå. Hald fram der du slapp, eller vel fri øving frå 200 utvalde ord. Framgangen blir lagra berre på denne eininga."
+      ]
+    },
+    {
       "id": "ljodstigen",
       "name": "Ljodstigen",
       "href": "ljodstigen/index.html",

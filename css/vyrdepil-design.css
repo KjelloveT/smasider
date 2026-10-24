@@ -124,6 +124,8 @@ body[data-vp-site-footer] {
 .vp-button[aria-pressed="true"] > .vp-selection-mark { visibility: visible; }
 .vp-button:focus-visible { --vp-button-focus: inset 0 -4px 0 var(--vp-focus); }
 .vp-button:disabled { --vp-button-fill: var(--vp-stone); --vp-button-shadow: 0 0 0 transparent; color: var(--vp-ink); border-style: dashed; cursor: not-allowed; }
+/* Butikkvarer held motivet og flata synlege; mynten viser at kjøpet er stengt. */
+[data-vp-design] .vp-button--purchase:disabled { --vp-button-fill: var(--vp-paper); background: var(--vp-button-fill); border-style: solid; }
 
 /* Flater: innhaldet avgjer høgda. Dekor blir alltid klipt i eit eige lag. */
 .vp-panel {
@@ -749,6 +751,10 @@ body.vp-migrated-page:not([data-vp-preserve]) :is(main,#main).vp-migrated-main {
   body.vp-migrated-page:not([data-vp-preserve]) :is(main,#main).vp-migrated-main { padding: 12px; border-width: 2px; }
 }
 
+/* Open grunnramme: appen sine eigne panel står fritt i landskapet. */
+body.vp-migrated-page:not([data-vp-preserve])[data-vp-open-shell] :is(main,#main).vp-migrated-main {
+  padding: 0; border: 0; background: transparent !important; box-shadow: none;
+}
 body.vp-migrated-page:not([data-vp-preserve])[data-vp-layout="canvas"] :is(main,#main).vp-migrated-main {
   display: flex !important; flex-direction: column; align-items: center; justify-content: flex-start; gap: 16px;
   width: calc(100% - 24px) !important; max-width: 1920px !important; margin: 0 auto;
