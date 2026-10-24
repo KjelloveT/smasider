@@ -3,6 +3,14 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.4] — 2026-10-24
+
+### Lagt til
+- **UvissaOrd.** Dagens fem nynorske ord på to vanskegrader, med same oppgåver for alle i norsk tid. Vel eldre dagssett i ein kalender og lær spelet i ei interaktiv prøverunde. Ein felles pott på 40 myntar dekkjer hint og feil svar; tema og ordlengd er òg kjøpbare hint. Bokstavplassar som ikkje finst, kostar like fullt.
+- **Måla hintbutikk.** Eigne hintikon, ein leiken mysteriekasselogo og ein mynt med Vyrde-hovud framme og stor V bak. Kjøpte kort flyttar opp og lèt tomrom stå att i butikken. Det større svarfeltet følgjer rullinga, og myntteljaren står ved butikkoverskrifta. Kjøp får snurrande myntar; vanskegradene brukar planteikona frå Ordbås.
+- **Lokal ordbank frå Nynorskordboka.** Ordklasse, normerte grunnformer og bøying er henta frå UiB og Språkrådet. Tilpassa hint er knytte til valde artiklar og tydingar, med CC BY 4.0-kreditering. Ingen API-oppslag blir gjorde under speling.
+- **Lagra dagsframgang.** Spelet hugsar val, vald arkivdato, inntil 40 dagsrundar og 40 resultat gjennom VyrdepilStorage. Dagsrunden held fram etter ny innlasting, og eit ferdig sett opnar resultatet. Samanlikningsavtrykk hindrar dobbel betaling for same feil; svartekst og namn blir ikkje lagra.
+
 ## [2.3.1] — 2026-10-15
 
 ### Endra
