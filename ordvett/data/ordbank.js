@@ -3,7 +3,7 @@ window.OrdvettBank = {
   "app": "ordvett",
   "version": 1,
   "bankVersion": "2026-10-24.1",
-  "rulesVersion": 1,
+  "rulesVersion": 3,
   "attribution": "Nynorskordboka, Universitetet i Bergen og Språkrådet, ordbøkene.no, CC BY 4.0.",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "changes": "Ordutval, tema, vanskegrad, forklaringar og setningsdøme er tilpassa for Ordvett. Ordklasse, normerte oppslagsformer og bøying er henta frå Nynorskordboka.",

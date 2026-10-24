@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Finn nynorske ord ved å kjøpe hint. Løys fem ord med så få myntar som mogleg.">
-  <title>Ordvett — Vyrdepil</title>
+  <meta name="description" content="Dagens fem nynorske ord. Kjøp hint og bruk så få myntar som mogleg.">
+  <title>UvissaOrd — Vyrdepil</title>
   <link rel="icon" href="../favicon.ico">
   <link rel="stylesheet" href="../css/vyrdepil-design.css">
   <link rel="stylesheet" href="css/style.css">
@@ -17,100 +17,74 @@
   <script src="../js/vyrdepil-footer.js" defer></script>
   <script src="data/ordbank.js" defer></script>
   <script src="js/game.js" defer></script>
+  <script src="js/schedule.js" defer></script>
   <script src="js/storage.js" defer></script>
+  <script src="js/effects.js" defer></script>
   <script src="js/render.js" defer></script>
   <script src="js/app.js" defer></script>
 </head>
-<body class="vp-page" data-vp-design data-vp-app="ordvett" data-vp-layout="medium" data-vp-site-footer>
+<body class="vp-page" data-vp-design data-vp-app="ordvett" data-vp-layout="medium" data-vp-open-shell data-vp-site-footer>
   <main class="vp-shell" id="main">
-    <section class="hero"><img src="../_resources/vyrdepil-design/logos/ordaklok-mala.png" width="384" height="384" alt=""><div><h1 class="vp-title">Ordvett</h1><p>Finn ordet med kloke hintkjøp.</p></div></section>
-    <p class="vp-game-description">Kva hint er verd prisen? Finn fem ord med så få myntar som mogleg.</p>
+    <section class="hero"><img src="../_resources/vyrdepil-design/logos/uvissaord-mala.png" width="384" height="384" alt=""><div><h1 class="vp-title">UvissaOrd</h1><p>Fem ord. Tretti myntar. Kva skjuler seg?</p></div></section>
     <div class="ov-layout">
       <section class="vp-panel ov-main" aria-label="Ordspel">
         <div class="vp-decor vp-decor--grain" aria-hidden="true"></div>
         <div class="vp-content">
           <section id="setup" aria-labelledby="setupTitle">
-            <p class="ov-eyebrow">Ord for ord, hint for hint</p>
-            <h2 class="vp-heading" id="setupTitle" tabindex="-1">Kor lite hjelp treng du?</h2>
-            <p>Du får eit tema og tomme bokstavruter. Vel hint sjølv, og finn ordet før myntane hopar seg opp.</p>
+            <div class="vp-actions ov-modes" role="group" aria-label="Spelemåte">
+              <button class="vp-button vp-button--tool" type="button" data-mode="daily" aria-pressed="true"><span data-icon="calendar" aria-hidden="true"></span>Dagens ord</button>
+              <button class="vp-button vp-button--tool" type="button" data-mode="practice" aria-pressed="false"><span data-icon="shuffle" aria-hidden="true"></span>Øv fritt</button>
+            </div>
+            <div class="ov-day-heading"><span class="ov-calendar" aria-hidden="true"><span data-icon="calendar"></span><strong id="dayNumber"></strong></span><div><h2 class="vp-heading" id="setupTitle" tabindex="-1">Dagens ord</h2><p id="dayLabel"></p></div></div>
+            <div class="ov-setup-preview" id="setupProgress" role="group" aria-label="Fem ord"></div>
             <form id="setupForm" class="vp-stack">
-              <fieldset class="vp-choices">
-                <legend>Vel vanskegrad</legend>
-                <label class="vp-choice"><input type="radio" name="level" value="lett" checked> Lett — kjende ting frå kvardagen</label>
-                <label class="vp-choice"><input type="radio" name="level" value="utfordring"> Utfordring — ting, handlingar og eigenskapar</label>
-              </fieldset>
-              <label class="vp-field"><span class="vp-label">Oppgåvesett</span><select class="vp-input" id="setSelect" name="setIndex"></select></label>
-              <p class="vp-help" id="setHelp">Fem ord i kvart sett. Same sett har alltid dei same orda.</p>
-              <p class="vp-notice"><span class="vp-notice-icon" data-icon="coins" aria-hidden="true"></span><span id="setupRecord">Ingen rekord for dette settet enno.</span></p>
-              <button class="vp-button vp-button--primary vp-button--large" type="submit"><span data-icon="search" aria-hidden="true"></span>Start omgangen</button>
+              <fieldset class="vp-choices ov-levels"><legend>Vanskegrad</legend><div class="ov-level-grid">
+                <label class="vp-choice ov-level-choice"><input type="radio" name="level" value="lett" checked><img src="../_resources/vyrdepil-design/bragder/icons/sprout.png" width="80" height="80" alt=""><strong>Lett</strong></label>
+                <label class="vp-choice ov-level-choice"><input type="radio" name="level" value="utfordring"><img src="../_resources/vyrdepil-design/bragder/icons/mixed-forest.png" width="80" height="80" alt=""><strong>Utfordring</strong></label>
+              </div></fieldset>
+              <p class="ov-setup-state" id="setupRecord"></p>
+              <button class="vp-button vp-button--primary vp-button--large vp-button--block" id="startButton" type="submit"><span data-icon="play" aria-hidden="true"></span><span id="startLabel">Start</span></button>
             </form>
           </section>
           <section id="game" aria-labelledby="gameTitle" hidden>
-            <div class="ov-status">
-              <p id="progressText">Ord 1 av 5</p>
-              <p class="vp-panel vp-panel--soft vp-panel--compact ov-coins"><span data-icon="coins" aria-hidden="true"></span>Brukt: <strong id="totalCost">0</strong> <span id="totalCurrency">myntar</span></p>
-            </div>
+            <div class="ov-status"><div class="ov-progress" id="progress" role="group" aria-label="Framgang"></div><div class="vp-panel vp-panel--soft vp-panel--compact ov-wallet" id="coinCounter" aria-label="Brukte myntar"><span class="ov-coin ov-coin--large" aria-hidden="true"><img class="ov-coin-face ov-coin-face--front" src="assets/coin-front.png" alt=""><img class="ov-coin-face ov-coin-face--back" src="assets/coin-back.png" alt=""></span><span><span class="ov-wallet-label">Att <span>av 30</span></span><strong id="totalCost">30</strong></span><span class="ov-wallet-pile" id="coinPile" aria-hidden="true"></span></div></div>
             <h2 class="vp-heading" id="gameTitle" tabindex="-1">Finn ordet</h2>
-            <p id="wordInfo"></p>
+            <p class="ov-sr-only" id="wordInfo"></p>
             <div class="ov-letters" id="letters" role="group" aria-label="Bokstavruter"></div>
-            <div class="vp-notice" id="chooseNotice" hidden><span class="vp-notice-icon" data-icon="lightbulb" aria-hidden="true"></span><div><p>Vel ei skjult rute. Du betaler fyrst når bokstaven blir vist.</p><button class="vp-button vp-button--quiet vp-button--compact" id="cancelChoice" type="button">Avbryt</button></div></div>
+            <form class="ov-choose" id="chooseNotice" hidden><label class="vp-field"><span>Vel bokstavplass</span><input class="vp-input" id="position" type="number" inputmode="numeric" min="1" max="30" step="1" value="5" required></label><button class="vp-button vp-button--primary" type="submit" aria-label="Kjøp bokstavplass for 5 myntar">Kjøp <span class="ov-price"><img class="ov-price-coin" src="assets/coin-front.png" width="28" height="28" alt="myntar">5</span></button><button class="vp-button vp-button--quiet vp-button--compact" id="cancelChoice" type="button">Avbryt</button></form>
             <form id="answerForm" class="ov-answer">
-              <label class="vp-field"><span class="vp-label">Kva er ordet?</span><input class="vp-input" id="answer" name="answer" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="64" aria-describedby="answerHelp feedback"></label>
-              <button class="vp-button vp-button--primary" type="submit">Prøv svaret</button>
-              <p class="vp-help" id="answerHelp">Skriv grunnforma. Eit nytt feil svar kostar 2 myntar.</p>
+              <label class="vp-field"><span class="ov-sr-only">Kva er ordet?</span><input class="vp-input" id="answer" name="answer" placeholder="Ditt ord" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="64" aria-describedby="answerHelp feedback"></label>
+              <button class="vp-button vp-button--primary" id="guessButton" type="submit"><span data-icon="check" aria-hidden="true"></span>Prøv</button>
+              <p class="vp-help ov-answer-help" id="answerHelp">Grunnform <span aria-label="Eit nytt feil svar kostar 2 myntar">Feil: <img class="ov-price-coin" src="assets/coin-front.png" width="22" height="22" alt="">2</span></p>
             </form>
-            <div class="vp-notice" id="feedback" role="status" aria-live="polite" aria-atomic="true" hidden><span class="vp-notice-icon" data-icon="lightbulb" aria-hidden="true"></span><span id="feedbackText"></span></div>
-            <section id="hintShop" aria-labelledby="hintTitle">
-              <h3 class="vp-heading" id="hintTitle">Kjøp eit hint</h3>
-              <div class="ov-hints" id="hintButtons"></div>
-              <p class="vp-help">Myntane tel kor mykje hjelp du brukar. Du kan alltid kjøpe meir.</p>
-            </section>
-            <section class="ov-purchased" aria-labelledby="purchasedTitle">
-              <h3 class="vp-heading" id="purchasedTitle">Hinta dine</h3>
-              <p id="noHints">Du har ikkje kjøpt nokon hint enno.</p>
-              <ol class="ov-hint-list" id="purchasedHints"></ol>
-            </section>
-            <section class="vp-panel vp-panel--soft" id="solution" aria-labelledby="solutionTitle" hidden>
-              <h3 class="vp-heading" id="solutionTitle"></h3>
-              <p id="solutionDefinition"></p><p id="solutionGrammar"></p><p class="vp-small" id="solutionForms"></p>
-              <p class="vp-small" id="solutionAlternatives"></p>
-              <p class="vp-small"><a id="sourceLink" target="_blank" rel="noopener noreferrer">Sjå oppslaget i Nynorskordboka</a></p>
+            <p class="vp-help" id="fundsNotice" hidden>Du treng 2 myntar for eit forsøk. Vis fasit for å gå vidare.</p><p class="ov-feedback" id="feedback" hidden></p>
+            <section class="ov-purchased" id="purchasedSection" aria-labelledby="purchasedTitle" hidden><h3 class="vp-heading" id="purchasedTitle">Hinta dine</h3><ol class="ov-hint-list" id="purchasedHints"></ol></section>
+            <section id="hintShop" aria-labelledby="hintTitle"><h3 class="vp-heading" id="hintTitle">Hintbutikken</h3><div class="ov-hints" id="hintButtons"></div></section>
+            <section class="vp-panel vp-panel--soft ov-solution" id="solution" aria-labelledby="solutionTitle" hidden>
+              <span class="ov-solution-stamp" id="solutionStamp"></span><h3 class="vp-heading" id="solutionTitle"></h3><p id="solutionDefinition"></p>
+              <details class="vp-accordion"><summary>Meir om ordet</summary><div class="vp-accordion-body"><p id="solutionGrammar"></p><p class="vp-small" id="solutionForms"></p><p class="vp-small" id="solutionAlternatives"></p><a id="sourceLink" target="_blank" rel="noopener noreferrer">Nynorskordboka</a></div></details>
               <button class="vp-button vp-button--primary" id="nextButton" type="button">Neste ord</button>
             </section>
-            <div class="vp-actions ov-bottom-actions">
-              <button class="vp-button vp-button--quiet" id="revealButton" type="button">Vis fasit</button>
-              <button class="vp-button vp-button--quiet" id="leaveButton" type="button">Til oppsettet</button>
-            </div>
+            <div class="vp-actions ov-bottom-actions"><button class="vp-button vp-button--quiet" id="revealButton" type="button"><span data-icon="eye" aria-hidden="true"></span>Fasit</button><button class="vp-button vp-button--quiet" id="leaveButton" type="button"><span data-icon="arrowLeft" aria-hidden="true"></span>Tilbake</button></div>
           </section>
           <section id="results" aria-labelledby="resultsTitle" hidden>
-            <p class="ov-eyebrow">Omgangen er ferdig</p>
-            <h2 class="vp-heading" id="resultsTitle" tabindex="-1">Godt ordarbeid!</h2>
-            <p class="ov-result-number" id="resultSolved"></p>
-            <p id="resultCost"></p><p class="vp-notice"><span class="vp-notice-icon" data-icon="coins" aria-hidden="true"></span><span id="recordMessage"></span></p>
-            <ol class="ov-results" id="resultWords"></ol>
-            <p class="vp-help">Fleire løyste ord kjem fyrst. Ved like mange løyste ord er lågare myntforbruk best.</p>
-            <div class="vp-actions"><button class="vp-button vp-button--primary" id="newSetButton" type="button">Prøv neste sett</button><button class="vp-button vp-button--quiet" id="setupButton" type="button">Vel oppgåvesett</button></div>
+            <h2 class="vp-heading" id="resultsTitle" tabindex="-1">Dagens ord er ferdige</h2><p id="resultDate"></p>
+            <div class="ov-result-totals"><p class="ov-result-number" id="resultSolved"></p><p class="ov-result-cost" id="resultCost"></p></div>
+            <p class="vp-small" id="recordMessage"></p><ol class="ov-results" id="resultWords"></ol>
+            <div class="vp-actions"><button class="vp-button vp-button--primary" id="newSetButton" type="button"><span data-icon="shuffle" aria-hidden="true"></span>Øv vidare</button><button class="vp-button vp-button--quiet" id="setupButton" type="button">Vel nivå</button></div>
           </section>
-          <noscript><p>Slå på JavaScript i nettlesaren for å spele Ordvett.</p></noscript>
+          <p class="ov-sr-only" id="announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+          <noscript><p>Slå på JavaScript i nettlesaren for å spele UvissaOrd.</p></noscript>
         </div>
       </section>
-      <aside class="vp-sign vp-sign--grounded ov-support" aria-label="Hjelp og informasjon">
-        <div class="vp-panel"><div class="vp-decor" data-vp-corners aria-hidden="true"><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i></div>
-          <div class="vp-content">
-            <h2 class="vp-heading">Bruk ordvettet</h2>
-            <p>Er ein bokstav nok, eller treng du ei forklaring?</p>
-            <details class="vp-accordion" data-vp-support><summary>Slik spelar du</summary><div class="vp-accordion-body"><ol><li>Sjå på temaet og talet på bokstavar.</li><li>Kjøp eit hint som kan hjelpe deg vidare.</li><li>Skriv svaret i grunnform. Verb kan ha a- eller e-ending.</li><li>Løys fem ord med minst mogleg myntbruk.</li></ol><p>Du har god tenkjetid. «Vis fasit» gjev deg forklaringa og registrerer ordet som uløyst.</p><p>Kjøpte hint blir ståande. Same feil svar blir berre trekt éin gong.</p></div></details>
-            <details class="vp-accordion"><summary>For læraren</summary><div class="vp-accordion-body"><p>La elevane grunngje hintvalet sitt før dei kjøper. Kva veit dei alt, og kva treng dei å finne ut?</p><p>Vel same oppgåvesett og vanskegrad for å arbeide saman på storskjerm eller samanlikne strategiar.</p><p>200 utvalde ord er delte i 20 sett på kvart nivå. Orda er gjennomgåtte under utvikling; hintprisane er førebelse og kan justerast etter utprøving i klassen.</p></div></details>
-            <details class="vp-accordion"><summary>Kjelder og personvern</summary><div class="vp-accordion-body"><p>Nynorskordboka, Universitetet i Bergen og Språkrådet, <a href="https://ordbokene.no" target="_blank" rel="noopener noreferrer">ordbøkene.no</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener noreferrer">CC BY 4.0</a>.</p><p>Ordutval, forklaringar, tema og setningsdøme er tilpassa for Ordvett. Ordklasse, normerte former og bøying kjem frå ordboka.</p><p>Vanskegrad, valt sett og rekordar blir lagra på denne eininga. Namn og svara du skriv, blir ikkje lagra. Ein pågåande omgang blir ikkje teken vare på når du lukkar sida.</p><p>Ingen oppslag går til ordboka under speling. <a href="../personvern.html">Les om personvern</a>.</p></div></details>
-          </div>
-        </div>
-      </aside>
+      <aside class="vp-sign vp-sign--grounded ov-support" aria-label="Hjelp og informasjon"><div class="vp-panel"><div class="vp-decor" data-vp-corners aria-hidden="true"><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i><i class="vp-corner"></i></div><div class="vp-content">
+        <h2 class="vp-heading">Hjelp</h2>
+        <details class="vp-accordion"><summary>Slik spelar du</summary><div class="vp-accordion-body"><p>Du har 30 myntar til fem ord. Hint og nye feil svar brukar av same potten. Eit svarforsøk krev at du har minst 2 myntar att; rett svar kostar ingenting. Er potten tom, kan du vise fasit og gå vidare.</p><p>Tema og ordlengd er òg hint du kan kjøpe. «Vel rute» let deg be om plass 1–30. Ein plass som ikkje finst, kostar òg 5 myntar; den same plassen kan du ikkje kjøpe to gonger. Skriv grunnforma. Verb kan ha a- eller e-ending. Fasit gjev eit uløyst ord.</p><p>Dagens ord er dei same for alle på kvart nivå og skiftar ved midnatt i norsk tid. Dagsrunden blir lagra undervegs. Øving kan du spele så mykje du vil.</p></div></details>
+        <details class="vp-accordion"><summary>For læraren</summary><div class="vp-accordion-body"><p>La elevane velje hint og samanlikne strategiar. «Lett» har kvardagsord; «Utfordring» blandar ting, handlingar og eigenskapar.</p><p>200 ord frå Nynorskordboka. Hintprisane kan justerast etter utprøving i klassen.</p></div></details>
+        <details class="vp-accordion"><summary>Kjelder og personvern</summary><div class="vp-accordion-body"><p>Nynorskordboka, Universitetet i Bergen og Språkrådet, <a href="https://ordbokene.no" target="_blank" rel="noopener noreferrer">ordbøkene.no</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener noreferrer">CC BY 4.0</a>. Hinttekstane er tilpassa.</p><p>Val, dagsframgang og resultat blir lagra på denne eininga. Svartekst og namn blir ikkje lagra. Lokale samanlikningsavtrykk av feil svar hindrar at same feil kostar på nytt etter ny innlasting.</p><p>Ingen ordbokoppslag under speling. <a href="../personvern.html">Meir om personvern</a>.</p></div></details>
+      </div></div></aside>
     </div>
   </main>
-  <dialog class="vp-dialog" id="leaveDialog" aria-labelledby="leaveTitle">
-    <div class="vp-dialog-head"><h2 class="vp-heading" id="leaveTitle">Avslutte omgangen?</h2><button class="vp-button vp-button--quiet vp-button--icon" id="closeLeave" aria-label="Lukk dialogen"><span data-icon="x" aria-hidden="true"></span></button></div>
-    <p>Denne omgangen blir ikkje lagra. Rekordar frå tidlegare omgangar blir tekne vare på.</p>
-    <div class="vp-actions"><button class="vp-button vp-button--primary" id="continueButton" type="button">Spel vidare</button><button class="vp-button vp-button--quiet" id="confirmLeave" type="button">Avslutt omgangen</button></div>
-  </dialog>
+  <dialog class="vp-dialog" id="leaveDialog" aria-labelledby="leaveTitle"><div class="vp-dialog-head"><h2 class="vp-heading" id="leaveTitle">Avslutte øvinga?</h2><button class="vp-button vp-button--quiet vp-button--icon" id="closeLeave" aria-label="Lukk dialogen"><span data-icon="x" aria-hidden="true"></span></button></div><p>Øvinga blir ikkje lagra.</p><div class="vp-actions"><button class="vp-button vp-button--primary" id="continueButton" type="button">Spel vidare</button><button class="vp-button vp-button--quiet" id="confirmLeave" type="button">Avslutt</button></div></dialog>
 </body>
 </html>
