@@ -18,4 +18,4 @@ Felles `designsystem/check-ui-system.cjs` køyrer gjennom 80 HTML-sider og finn 
 
 Elevutprøving, lærarfagleg gjennomgang og testing på fysiske telefonar/nettbrett står att. Prisane er førebelse. Spelet gjenbruker eit eksisterande godkjent bokmotiv som applogo.
 
-PR-preview og produksjonskontroll av den nye appen krev at greina fyrst blir publisert. GitHub CLI hadde utgått innlogging, og Git Credential Manager hadde ingen aktiv legitimasjon under arbeidet. Ingen endringar er lagde på `main`.
+PR-preview blir kontrollert etter at greina er publisert. Ingen endringar er lagde på `main`.
