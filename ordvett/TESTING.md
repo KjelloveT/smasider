@@ -1,24 +1,29 @@
 # Kontroll av UvissaOrd
 
-Kontrollert 24. oktober 2026 frå `origin/main` på `6398a1a` (versjon 2.3.1). Produksjonsframsida og endringsloggen viste òg 2.3.1 før utvikling. Ordvett-adressa i produksjon gav framsida som reserve, ikkje det nye spelet. Den tekniske app-ID-en/adressa `ordvett` blir halden stabil etter namnebyte til UvissaOrd.
+Kontrollert 24. oktober 2026 på greina `feat/ordvett-hintspel`, vidareført frå den opne PR-en #124. Fersk `origin/main` var `6398a1a`. Produksjonsframsida viste 2.3.1; `ordvett/` gav framsida som reserve, ikkje det nye spelet. App-ID og adresse er haldne stabile ved namnebyte.
 
-- 23 automatiske testar passerer: ordbank og normerte svar, hintprisar, eingongskjøp, betalte tomme bokstavplassar, løynd ordlengd/tema, gjentekne feil, maksimal pott, heile omgangar, dagsrotasjon, norsk midnatt/vintertid, gjenoppretting, ugyldige data, avgrensa lagring og idempotent oppgradering frå format 1.
-- Alle sju spelmodulane er syntakskontrollerte. Bankversjonen er 2026-10-24.1 og regelversjonen er 3. Nye reglar har eigne dagsnøklar; eldre resultat blir ikkje rekna om med nye prisar.
-- Bakgrunnsreservasjonane passerer felles kontroll; Ordvett/UvissaOrd har éi unik reservasjon.
-- Lokal HTTP-test med handheva `Content-Security-Policy` frå produksjonskonfigurasjonen. `serve.ps1` fekk ikkje løyve til å starte HttpListener på denne maskina; lokal testing brukar ein mellombels Node-tenar utan nye avhengnader.
-- Nettlesartest av dagssett, fri øving, hintkjøp, bokstavval, avbroten handel, tomt/gjenteke svar, riktige svar, fasit og resultat. A-formene «trekkja» og «bera» vart òg prøvde. Eit fullført dagssett opnar resultatet etter ny innlasting; øving endrar ikkje dagsresultatet.
-- Med dei nye prisane vart lett dagssett fullført med 5/5 ord og 28 brukte myntar. Kjøp av plass 5 i «vegg» kosta 5 og gav ingen bokstav. Hint, tom plass og samanlikningsavtrykk av feil svar overlevde ny innlasting; same feil kosta ikkje på nytt.
-- Fri øving vart prøvd med 24 myntar i teksthint, 5 for tom plass 30 og 1 for ordklasse. Ved 30 brukte myntar var alle butikkort og svarforsøket inaktive; fasit var tilgjengeleg. Potten gjekk aldri under null.
-- Tema og faktisk ordlengd var skjulte før kjøp, òg i tilgjengenamna. Kjøpte kort heldt lys flate og farga ikon; berre mynten var grå og stroken over. Native `disabled` og dei felles hover-/active-reglane hindrar klikk og hoverrespons.
-- Escape lukkar avsluttingsdialogen og gjev fokus attende til knappen. Kjøp flyttar fokus til det nye hintkortet; nye oppgåver og resultat får overskriftsfokus. Myntanimasjonar og kort/bokstav-rørsle tek omsyn til redusert rørsle.
-- Visuell kontroll på 320, 768, 1024 px og stor skrivebordsskjerm med dei nye bileta; 437 px vart òg kontrollert under omlegginga. Faktisk dokumentbreidd hadde ingen vassrett overflyt, ingen synlege handlingsknappar var under 44 px, og ingen synlege bilete mangla. På 320 px held myntteljar og dei fem framgangspunkta seg på same rad.
-- Ingen konsollfeil frå spelet. Chrome viste separate feil frå den installerte Zotero-utvidinga.
-- Alle nye prosjektbilete er komprimerte PNG-filer med 128 fargar. Logoen er 384 px (30,9 kB), hintikona 192 px og myntane 128 px. Originalane ligg i ignorerte kjeldemapper.
+## Spelreglar og lagring
+
+- 26 automatiske testar passerer: kjeldemerkt ordbank, hintprisar, normerte svar, eingongskjøp, tomme bokstavplassar, gjentekne feil, maks 40 myntar, gjenoppretting, norsk midnatt/vintertid, arkivdatoar, skotår, ugyldige datoar, avgrensa lagring og idempotent oppgradering.
+- Regelversjon 4 har ein pott på 40 myntar. Hintprisane er uendra, og nye feil svar kostar 2. Alle 20 feil i éi oppgåve kan gjenopprettast etter ny innlasting, utan fleire trekk eller negativ pott.
+- Lagringsformat 3 hugsar vald arkivdato, inntil 40 dagsrundar og 40 resultat. Ei påbyrja runde frå 30-myntutgåva kan halde fram med 40-potten, utan at kjeldefelta blir endra. Svartekst og namn blir ikkje lagra.
+- Alle JavaScriptfilene er syntakskontrollerte. Bankversjonen er 2026-10-24.1.
+
+## Nettlesar
+
+Lokal tenar brukar dei handheva tryggingsheaderane og CSP frå produksjonskonfigurasjonen. Han køyrer som ein skjult bakgrunnsprosess. Kontrollen vart gjort i ei separat Chrome-fane på `127.0.0.1:8081`, med eiga lagring, for å la den opne brukarrunden på `localhost` vere i fred.
+
+- Dagens sett vart fullført med 5/5 ord og 15 brukte myntar. Det omfatta fleire tilfeldige bokstavar, betalt plass 30 i «lampe» og betalt plass 5 i «vegg», som ikkje finst. Hintplassane vart tomme i butikken, og kjøpte hint vart samla i små kort med tre kolonnar på større skjermar og to på mobil.
+- Fleire kjøp av tilfeldig eller vald bokstav fungerer frå det kjøpte kortet. Same bokstavplass kostar ikkje på nytt. Nye oppgåver ryddar dei kjøpte korta og fyller butikken att.
+- Svarfeltet er 64 px høgt og ligg i ei tydeleg lys flate. Ved rulling på 320 px vart svarflata målt til topp 8 px, med heile inputen synleg. Myntteljaren stod til høgre for butikkoverskrifta.
+- Den interaktive prøverunden vart fullført gjennom kjøp av ordlengd, bokstav og tyding og deretter svaret «eple». Dagens runde hadde dei same 35 myntane att og dei same bokstavhinta etter retur og ny innlasting. Prøverunden vart òg avslutta med Escape. På 320 px tek den fyrste rettleiinga 130 px, og svarfeltet kjem fram når det er svarsteget sin tur.
+- Kalenderen opna 29. februar 2024. Den runden heldt fram med same hint etter ny innlasting, vart fullført med fasit, og fekk ferdigmarkering i kalenderen. Dagens runde var uendra. Dagens og framtidige datoar kan ikkje veljast i arkivmodusen.
+- Kontroll av mobil (320 px), nettbrett (768 px), mellomstor og stor skjerm. Ingen vassrett overflyt eller manglande synlege bilete. Synlege handlingsknappar er minst 44 px høge. Appnamnet held seg på éi linje på smal mobil.
+- Ingen konsollfeil frå UvissaOrd. Separate meldingar frå Chrome si Zotero-utviding er ikkje spelkode.
+- Kort- og myntanimasjonar tek omsyn til redusert rørsle. Kjøpte/utilgjengelege varer reagerer ikkje på klikk eller hover.
 
 ## Avgrensingar
 
-Felles `designsystem/check-ui-system.cjs` kontrollerer 80 HTML-sider og finn to eksisterande feil i filer denne oppgåva ikkje endrar: modalutsjånad i `heite_stavrim/css/style.css` og `ormritaren/css/editor-design.css`. Kontrollen melder ingen feil frå UvissaOrd.
+Felles UI-kontroll går gjennom 80 HTML-sider og finn dei same to eksisterande modalfeila i Heite Stavrim og Ormritaren; ingen kjem frå UvissaOrd. Fysiske telefonar/nettbrett og elev-/lærarutprøving står att.
 
-Elevutprøving, lærarfagleg gjennomgang og testing på fysiske telefonar/nettbrett står att. Prisane og 30-myntpotten er spelval som bør prøvast i klassen.
-
-Azure-preview blir kontrollert etter siste push. Tidlegare bygg av PR 124 vart stoppa av full kvote for førehandsvisingsmiljø. Ingen endringar er lagde på `main`.
+Azure-preview for PR 124 har tidlegare vorte stoppa av «maximum number of staging environments». Siste deploy blir kontrollert etter push. Ingen eksisterande miljø blir sletta, og ingen endringar blir lagde på `main`.

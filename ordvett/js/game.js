@@ -1,7 +1,7 @@
 /* Spelreglar. Ingen DOM, nettverk eller lagring i denne modulen. */
 window.OrdvettGame = (function () {
   'use strict';
-  const BUDGET = 30;
+  const BUDGET = 40;
   const MAX_POSITION = 30;
   const HINTS = Object.freeze([
     { id: 'pos', label: 'Ordklasse', icon: 'bookOpen', price: 1 },
@@ -108,7 +108,7 @@ window.OrdvettGame = (function () {
       if (saved?.version !== 2 || saved.questions?.length !== words.length || !Number.isInteger(saved.index) || saved.index < 0 || saved.index >= words.length) return null;
       const round = createRound(words, random);
       saved.questions.forEach((entry, index) => {
-        if (entry.wordId !== words[index].id || ![null, 'solved', 'revealed'].includes(entry.outcome) || !Array.isArray(entry.guesses) || entry.guesses.length > 15 || !Array.isArray(entry.purchases) || entry.purchases.length > 30) throw new Error('Ugyldig dagsrunde');
+        if (entry.wordId !== words[index].id || ![null, 'solved', 'revealed'].includes(entry.outcome) || !Array.isArray(entry.guesses) || entry.guesses.length > BUDGET / 2 || !Array.isArray(entry.purchases) || entry.purchases.length > 30) throw new Error('Ugyldig dagsrunde');
         if (index < saved.index && !entry.outcome || index > saved.index && (entry.outcome || entry.guesses.length || entry.purchases.length)) throw new Error('Ugyldig rekkjefølgje');
         round.index = index;
         entry.purchases.forEach(purchase => { if (!buyHint(round, purchase.id, purchase.position).ok) throw new Error('Ugyldig hintkjøp'); });

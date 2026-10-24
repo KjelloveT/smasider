@@ -9,8 +9,10 @@ window.OrdvettSchedule = (function () {
     return `${part('year')}-${part('month')}-${part('day')}`;
   }
   function dateLabel(key) {
-    return new Intl.DateTimeFormat('nn-NO', { day: 'numeric', month: 'long', timeZone: 'Europe/Oslo' }).format(new Date(key + 'T12:00:00Z'));
+    return new Intl.DateTimeFormat('nn-NO', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Oslo' }).format(new Date(key + 'T12:00:00Z'));
   }
+  function isDate(key) { return typeof key === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(key) && Number.isFinite(Date.parse(key + 'T12:00:00Z')) && new Date(key + 'T12:00:00Z').toISOString().slice(0, 10) === key; }
+  function previousDay(key = dateKey()) { return new Date(Date.parse(key + 'T12:00:00Z') - DAY).toISOString().slice(0, 10); }
   function daily(level, key = dateKey()) {
     const day = Date.parse(key + 'T00:00:00Z') / DAY - epoch;
     const words = OrdvettBank.words.filter(word => word.level === level);
@@ -25,5 +27,9 @@ window.OrdvettSchedule = (function () {
   function practice(level, seed = Vy.newSeed()) {
     return { level, mode: 'practice', seed, key: null, words: Vy.shuffle(OrdvettBank.words.filter(word => word.level === level), Vy.rng(seed)).slice(0, 5) };
   }
-  return Object.freeze({ dateKey, dateLabel, daily, practice });
+  function archive(level, key, today = dateKey()) {
+    if (!isDate(key) || key >= today) throw new Error('Vel ein tidlegare dag.');
+    return { ...daily(level, key), mode: 'archive' };
+  }
+  return Object.freeze({ dateKey, dateLabel, isDate, previousDay, daily, archive, practice });
 })();

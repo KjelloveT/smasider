@@ -1,7 +1,7 @@
 /* Spelbrett, myntar og rørsle. Felleskomponentane eig UI-flater og fokus. */
 .ov-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 280px); gap: clamp(24px, 4vw, 48px); align-items: start; margin-block: 56px 72px; }
 .ov-main, .ov-support, .ov-layout .vp-content { min-width: 0; }
-.ov-main :is([tabindex="-1"],input,button) { scroll-margin-top: 120px; }
+.ov-main :is([tabindex="-1"],input,button) { scroll-margin-top: var(--ov-answer-offset, 160px); }
 .ov-support { overflow-x: clip; }
 .ov-support .vp-accordion { margin-top: 12px; }
 .ov-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -26,7 +26,9 @@
 .ov-level-choice input { position: absolute; top: 12px; left: 12px; }
 .ov-level-choice img { width: 80px; height: 80px; object-fit: contain; }
 .ov-setup-state { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 0; }
-.ov-status { position: sticky; top: 8px; z-index: 3; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px 12px; margin-bottom: 28px; padding-block: 8px; background: var(--vp-wood); }
+.ov-status { display: flex; align-items: center; margin-bottom: 24px; }
+.ov-shop-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.ov-shop-heading h3 { margin-bottom: 0; }
 .ov-wallet { display: flex; align-items: center; gap: 10px; min-width: 152px; padding: 10px 14px; }
 .ov-wallet-label { display: block; font-size: .8rem; }
 #totalCost { display: block; font-size: 1.9rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
@@ -45,7 +47,10 @@
 .ov-letter--new { animation: ov-letter-turn 440ms var(--tile-delay, 0ms) both; }
 .ov-choose { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .ov-choose button { margin-left: auto; }
-.ov-answer { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; align-items: end; margin-bottom: 24px; }
+.ov-answer-dock { position: sticky; top: 8px; z-index: 10; padding: 12px; margin-bottom: 24px; }
+.ov-answer { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; align-items: end; margin: 0; }
+#answer { min-height: 64px; width: 100%; font-size: clamp(1.1rem, 2vw, 1.4rem); }
+#guessButton { min-height: 64px; }
 .ov-answer .vp-field { margin: 0; }
 .ov-answer .vp-help { grid-column: 1 / -1; margin: 0; }
 .ov-answer-help { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
@@ -53,17 +58,23 @@
 .ov-answer-help .ov-coin { width: 20px; height: 20px; flex-basis: 20px; }
 .ov-answer-help .ov-coin .icon { width: 13px; height: 13px; }
 .ov-hints { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.ov-shop-slot { min-width: 0; min-height: 166px; }
+.ov-shop-slot .ov-hint { width: 100%; height: 100%; }
 .ov-hint { display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 118px; padding: 12px 6px; }
 .ov-hint > .ov-icon .icon { width: 28px; height: 28px; }
 .ov-hint-name { font-size: .95rem; }
 .ov-paid { display: inline-flex; align-items: center; gap: 3px; font-size: .8rem; }
 .ov-paid .icon { width: 16px; height: 16px; }
 .ov-hint-list, .ov-results { display: grid; gap: 12px; padding: 0; list-style: none; }
+.ov-hint-list { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+.ov-hint-list .ov-receipt { padding: 12px; min-width: 0; }
+.ov-main .ov-receipt { scroll-margin-top: calc(var(--ov-answer-offset, 160px) + 24px); }
 .ov-hint-list li, .ov-results li { padding: 12px 16px; overflow-wrap: anywhere; }
 .ov-hint-list p { margin-block: 8px 0; }
 .ov-receipt-head { display: flex; align-items: center; gap: 8px; }
-.ov-receipt-head > :last-child { margin-left: auto; }
-.ov-receipt--new { animation: ov-receipt-arrive 500ms ease-out both; }
+.ov-receipt-head strong { min-width: 0; }
+.ov-receipt--moving { z-index: 6; transform-origin: top left; }
+.ov-buy-again { width: 100%; margin-top: 12px; gap: 4px; }
 .ov-purchased { margin-block: 28px; }
 .ov-bottom-actions { margin-top: 24px; }
 .ov-feedback { display: flex; align-items: center; gap: 8px; margin-block: 16px; font-weight: 750; }
@@ -76,11 +87,12 @@
 .ov-result-cost .ov-coin .icon { width: 25px; height: 25px; }
 .ov-result-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; }
 .ov-flying-coin { position: fixed; z-index: 1000; pointer-events: none; }
-@keyframes ov-receipt-arrive { from { opacity: 0; transform: translateY(18px) rotate(-1deg); } to { opacity: 1; transform: none; } }
 @keyframes ov-letter-turn { 0% { transform: rotateX(90deg); background: var(--vp-honey); } 65% { transform: rotateX(-12deg); } 100% { transform: none; } }
 @media (max-width: 820px) { .ov-layout { grid-template-columns: minmax(0, 1fr); row-gap: 64px; } }
 @media (max-width: 600px) {
-  .ov-hints { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .ov-hints, .ov-hint-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .ov-receipt-head { flex-direction: column; align-items: start; }
+  .ov-shop-slot { min-height: 152px; }
   .ov-progress { gap: 4px; }
   .ov-progress .ov-step { width: 28px; height: 28px; flex-basis: 28px; }
   .ov-wallet { min-width: 0; gap: 6px; padding: 6px 8px; }
@@ -92,19 +104,19 @@
 }
 @media (max-width: 440px) {
   .ov-modes { grid-template-columns: minmax(0, 1fr); }
-  .ov-answer { grid-template-columns: minmax(0, 1fr); }
-  .ov-answer button { grid-row: 3; }
+  .ov-answer { gap: 8px; }
+  #guessButton { padding-inline: 10px; }
   .ov-letter { width: 44px; height: 50px; flex-basis: 44px; }
   .ov-letters { gap: 6px; }
   .ov-step { width: 32px; height: 32px; flex-basis: 32px; }
   .ov-wallet { margin-left: auto; }
 }
-@media (prefers-reduced-motion: reduce) { .ov-letter--new, .ov-receipt--new { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .ov-letter--new { animation: none; } }
 /* Måla butikkvarer og Vyrde-mynten er spelinnhald, med to sider i same mynt. */
 .ov-hint-image { display: block; width: 80px; height: 80px; object-fit: contain; }
 .ov-hint { min-height: 166px; }
 .ov-hint-name { font-size: clamp(.8rem, 1.5vw, .95rem); }
-.ov-receipt-head .ov-hint-image { width: 36px; height: 36px; }
+.ov-receipt-head .ov-hint-image { width: 28px; height: 28px; }
 .ov-price-coin { display: inline-block; width: 28px; height: 28px; object-fit: contain; vertical-align: middle; }
 .ov-coin { position: relative; border: 0; background: transparent; perspective: 180px; }
 .ov-coin-face { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; backface-visibility: hidden; }
@@ -128,3 +140,35 @@
 }
 @media (prefers-reduced-motion: reduce) { .ov-flying-coin .ov-coin-face { animation: none; } }
 @media (max-width: 600px) { .ov-wallet-label > span { display: none; } }
+.ov-calendar-picker { padding: 12px; margin-bottom: 20px; }
+.ov-calendar-nav { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 8px; align-items: center; margin-bottom: 12px; }
+.ov-calendar-nav .vp-field { margin: 0; min-width: 0; }
+.ov-calendar-nav .vp-input { width: 100%; min-width: 0; padding-inline: 6px; }
+.ov-calendar-nav .vp-button { width: 44px; }
+.ov-calendar-weekdays, .ov-calendar-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; text-align: center; }
+.ov-calendar-weekdays { margin-bottom: 8px; font-size: .8rem; font-weight: 750; }
+.ov-calendar-day { position: relative; min-width: 0; min-height: 44px; padding: 4px 0; }
+.ov-calendar-day .vp-selection-mark { position: absolute; inset: auto 1px 1px auto; width: 10px; height: 10px; }
+.ov-calendar-day .vp-selection-mark .icon { width: 10px; height: 10px; }
+.ov-calendar-mark { position: absolute; left: 2px; bottom: 0; display: grid; place-items: center; width: 12px; height: 12px; }
+.ov-calendar-mark .icon { width: 12px; height: 12px; }
+.ov-tutorial-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.ov-tutorial-heading > button { margin-left: auto; }
+.ov-tutorial-progress { display: inline-flex; gap: 4px; }
+.ov-tutorial-progress > span { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--vp-frame); border-radius: 50%; font-size: .8rem; }
+.ov-tutorial-progress .icon { width: 14px; height: 14px; }
+.ov-tutorial-progress [data-state="active"] { background: var(--vp-honey); }
+.ov-tutorial-progress [data-state="done"] { background: var(--vp-success); }
+.ov-tutorial-instruction { display: flex; align-items: center; gap: 8px; margin-block: 12px !important; }
+.ov-tutorial-instruction img { object-fit: contain; }
+.ov-tutorial-target { box-shadow: inset 0 0 0 4px var(--vp-focus); }
+@media (max-width: 440px) {
+  .ov-answer-dock { padding: 8px; }
+  .ov-shop-heading .vp-heading { font-size: 1.2rem; }
+  .ov-buy-again { flex-wrap: wrap; }
+  .ov-calendar-picker { padding: 8px; }
+  .ov-tutorial-heading { gap: 4px; }
+  .ov-tutorial-progress > span { width: 16px; height: 16px; font-size: .65rem; }
+  .ov-tutorial-progress .icon { width: 12px; height: 12px; }
+}
+@media (max-width: 430px) { #main .hero h1 { font-size: clamp(1.2rem, 6vw, 1.6rem); } }

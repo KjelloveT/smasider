@@ -27,9 +27,9 @@ Skriptet les `data/ordgrunnlag.tsv`, hentar lemmaindeksen og artiklar frå UiB o
 
 Kontroller tyding, kjønn, normerte alternative grunnformer og at hint ikkje røper svaret, før ny bank blir teken i bruk. Endra `bankVersion` i byggjeskriptet når ord, hint, ordrekkjefølgje eller godtekne svar blir endra. Endra `rulesVersion` når prisar eller spelreglar blir endra. Dagsnøkkelen inneheld begge versjonane, vanskegrad og dato i norsk tid.
 
-`schedule.js` gjev alle same fem ord på kvart nivå per norsk kalenderdag. Kvart ord blir brukt éin gong per 20-dagarsbolk; neste bolk får ny deterministisk blanding. Ein påbyrja runde held på datoen ved midnatt. Fri øving trekkjer fem ord lokalt utan å endre dagsresultatet.
+`schedule.js` gjev alle same fem ord på kvart nivå per norsk kalenderdag. Kvart ord blir brukt éin gong per 20-dagarsbolk; neste bolk får ny deterministisk blanding. Ein påbyrja runde held på datoen ved midnatt. Arkivkalenderen opnar dei same datofesta setta for tidlegare dagar. Den interaktive prøverunden brukar eitt fast øvingsord utan å endre dags- eller arkivframgangen.
 
-Lagringsformat 2 tek vare på inntil fire dagsrundar og 40 resultat. Gjenoppretting reknar myntkostnaden frå hintkjøp og lokale samanlikningsavtrykk av feil svar. Svartekst blir ikkje lagra. Avtrykka er ikkje kryptering. Lesing av format 1 og neste lagring oppgraderer oppsett og resultat utan å endre kjeldedata.
+Lagringsformat 3 tek vare på vald arkivdato, inntil 40 dagsrundar og 40 resultat. Gjenoppretting reknar myntkostnaden frå hintkjøp og lokale samanlikningsavtrykk av feil svar. Svartekst blir ikkje lagra. Avtrykka er ikkje kryptering. Lesing av format 1 og 2 og neste lagring oppgraderer oppsett og resultat utan å endre kjeldedata. Regelversjon 4 aukar potten frå 30 til 40 med same prisar. Ei påbyrja runde frå regelversjon 3 blir lesen vidare til den nye potten; kjelda blir ikkje endra.
 
 Spelet lastar ferdigbygde data som eit lokalt skript. Ingen API-kall blir gjorde av spelet. Appen brukar den felles Vyrdepil-ramma, som lastar lokale katalog- og designfiler over HTTP; ei lokal utgåve skal difor køyrast med `serve.ps1`.
 

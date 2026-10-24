@@ -2,6 +2,7 @@
 window.OrdvettEffects = (function () {
   'use strict';
   let counterFrame;
+  const moving = new Set();
   const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function coin() {
     const node = Vy.el('span', 'ov-coin');
@@ -15,12 +16,12 @@ window.OrdvettEffects = (function () {
   function pulse(node) {
     if (!reduced() && node?.animate) node.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.07)', offset: .4 }, { transform: 'scale(1)' }], { duration: 380 });
   }
-  function spend(origin, price, before, after) {
+  function spend(origin, price, before, after, source) {
     const wallet = document.getElementById('coinCounter');
     const total = document.getElementById('totalCost');
     cancelAnimationFrame(counterFrame);
     if (reduced() || !origin || !wallet.animate) { total.textContent = String(OrdvettGame.BUDGET - after); return; }
-    const target = wallet.getBoundingClientRect();
+    const target = source || wallet.getBoundingClientRect();
     const destination = { x: origin.left + origin.width / 2, y: origin.top + origin.height / 2 };
     for (let i = 0; i < price; i++) {
       const node = coin(); node.classList.add('ov-flying-coin');
@@ -47,6 +48,20 @@ window.OrdvettEffects = (function () {
   function clear() {
     cancelAnimationFrame(counterFrame);
     document.querySelectorAll('.ov-flying-coin').forEach(node => node.remove());
+    moving.forEach(animation => animation.cancel()); moving.clear();
   }
-  return Object.freeze({ coin, spend, pulse, clear });
+  function moveHint(origin, target) {
+    if (!origin || !target || reduced() || !target.animate) return;
+    const end = target.getBoundingClientRect();
+    if (!end.width || !end.height) return;
+    const scaleX = origin.width / end.width, scaleY = origin.height / end.height;
+    target.classList.add('ov-receipt--moving');
+    const animation = target.animate([
+      { transform: `translate(${origin.left - end.left}px,${origin.top - end.top}px) scale(${scaleX},${scaleY})`, opacity: .7 },
+      { transform: 'none', opacity: 1 }
+    ], { duration: 560, easing: 'cubic-bezier(.2,.75,.2,1)' });
+    moving.add(animation);
+    animation.finished.catch(() => {}).finally(() => { moving.delete(animation); target.classList.remove('ov-receipt--moving'); });
+  }
+  return Object.freeze({ coin, spend, pulse, moveHint, clear });
 })();

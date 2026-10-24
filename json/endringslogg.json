@@ -4,12 +4,12 @@
     {
       "versjon": "2.4",
       "dato": "2026-10-24",
-      "samandrag": "UvissaOrd: Dagens fem ord, fri øving og ein visuell hintbutikk.",
+      "samandrag": "UvissaOrd: Dagens utfordring, arkivkalender, prøverunde og visuell hintbutikk.",
       "punkt": [
-        { "t": "nytt", "kva": "UvissaOrd", "tekst": "Dagens fem ord og fri øving med to nivå og 200 ord. 30 myntar dekkjer hint og feil svar; tema og ordlengd kan kjøpast. Også tomme bokstavplassar kostar.", "merke": "verktoy" },
-        { "t": "nytt", "kva": "Måla hintbutikk", "tekst": "Eigne hintikon, leiken mysteriekasselogo og snurrande myntar med Vyrde-hovud og V. Planteikon frå Ordbås viser nivåa." },
+        { "t": "nytt", "kva": "UvissaOrd", "tekst": "Dagens fem ord og kalender for tidlegare utfordringar, med to nivå og 200 ord. 40 myntar dekkjer hint og feil svar; tema og ordlengd kan kjøpast. Også tomme bokstavplassar kostar.", "merke": "verktoy" },
+        { "t": "nytt", "kva": "Måla hintbutikk", "tekst": "Måla ikon og Vyrde-myntar. Kjøpte kort flyttar opp, og tomrommet står att. Større svarfelt følgjer rullinga; prøverunden lærer bort kjøpa." },
         { "t": "nytt", "kva": "Lokal ordbank", "tekst": "Data frå Nynorskordboka og tilpassa hint ligg ved spelet med kjeldetilvising. Ingen API-oppslag under speling." },
-        { "t": "nytt", "kva": "Lagra dagsframgang", "tekst": "Val, inntil fire dagsrundar og 40 resultat blir lagra lokalt. Samanlikningsavtrykk hindrar dobbel betaling for same feil; svartekst og namn blir ikkje lagra." }
+        { "t": "nytt", "kva": "Lagra dagsframgang", "tekst": "Val, arkivdato, inntil 40 dagsrundar og 40 resultat blir lagra lokalt. Samanlikningsavtrykk hindrar dobbel betaling for same feil; svartekst og namn blir ikkje lagra." }
       ]
     },
     {
