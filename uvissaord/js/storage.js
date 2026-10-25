@@ -38,8 +38,15 @@ window.OrdvettStorage = (function () {
     save();
   }
   const previousKey = key => key.replace('-r6-d', '-r5-d');
-  function dailyFor(key) { return data.daily[key] || data.daily[previousKey(key)] || null; }
-  function getRecord(key) { const record = data.records[key] || data.records[previousKey(key)]; return record ? { ...record } : null; }
+  function dailyFor(key) {
+    const previous = previousKey(key);
+    return (Object.hasOwn(data.daily, key) ? data.daily[key] : null) || (Object.hasOwn(data.daily, previous) ? data.daily[previous] : null);
+  }
+  function getRecord(key) {
+    const previous = previousKey(key);
+    const record = (Object.hasOwn(data.records, key) ? data.records[key] : null) || (Object.hasOwn(data.records, previous) ? data.records[previous] : null);
+    return record ? { ...record } : null;
+  }
   function better(result, record) { return !record || result.solved > record.solved || result.solved === record.solved && result.cost < record.cost; }
   function recordResult(key, result) {
     if (!result.complete) return false;
