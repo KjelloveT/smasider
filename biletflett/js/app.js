@@ -4,6 +4,7 @@
 
 (() => {
     let canvas, fileInput, slotInput, slotTarget = -1;
+    let selectionRequest = 0;
     let crop = null; // { img, id, sel, dragging }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -17,8 +18,10 @@
             onChange: () => {}
         });
         Collage.setCropHandler(openCrop);
+        Stickers.init(canvas, () => Collage.render());
 
-        buildGallery();
+        Gallery.init(selectTemplate);
+        PhotoLayouts.init((count, layout) => Collage.setLayout(count, layout));
         bindToolbar();
         bindCrop();
         bindModals();
@@ -27,68 +30,31 @@
         // så vi ventar på dei før første render — og teiknar på nytt etterpå
         // i tilfelle noko kom seint.
         Fonts.load().then(() => Collage.render());
-        selectTemplate(Templates.all[0].id);
+        selectTemplate(Templates.tema[0].id);
     });
 
-    /* ──────────────── Malgalleri med miniatyrar ──────────────── */
-    function buildGallery() {
-        const host = document.getElementById('gallery');
-        host.innerHTML = '';
-        const groups = [
-            { label: 'Standard', items: Templates.standard },
-            { label: 'Tema', items: Templates.tema },
-            { label: 'Ungdomssteget', items: Templates.ungdom }
-        ];
-        groups.forEach(g => {
-            const h = document.createElement('div');
-            h.className = 'gallery-group-title';
-            h.textContent = g.label;
-            host.appendChild(h);
-            g.items.forEach(t => {
-                const card = document.createElement('button');
-                card.className = 'tpl-card';
-                card.dataset.id = t.id;
-                card.setAttribute('aria-label', 'Vel mal: ' + t.name);
-                const thumb = document.createElement('canvas');
-                renderThumb(thumb, t);
-                const name = document.createElement('span');
-                name.className = 'tpl-name';
-                name.textContent = t.name;
-                card.appendChild(thumb);
-                card.appendChild(name);
-                card.addEventListener('click', () => selectTemplate(t.id));
-                host.appendChild(card);
-            });
-        });
-    }
-
-    function renderThumb(cv, t) {
-        const ratio = t.orientation === 'landscape' ? [168, 119] : t.orientation === 'square' ? [140, 140] : [119, 168];
-        cv.width = ratio[0]; cv.height = ratio[1];
-        const c = cv.getContext('2d');
-        const W = cv.width, H = cv.height, pal = t.palette;
-        Decor.background(c, W, H, t.background, pal);
-        (t.decor || []).filter(d => d.layer === 'back').forEach(d => Decor.item(c, W, H, d, pal));
-        t.slots.forEach(s => {
-            c.save();
-            c.fillStyle = pal.accent || '#999'; c.globalAlpha = 0.55;
-            const x = s.x * W, y = s.y * H, w = s.w * W, h = s.h * H;
-            c.translate(x + w / 2, y + h / 2); c.rotate((s.rotation || 0) * Math.PI / 180);
-            c.fillStyle = s.frame === 'polaroid' ? '#ffffff' : (pal.accent || '#999');
-            if (s.frame === 'circle') { c.beginPath(); c.ellipse(0, 0, w / 2, h / 2, 0, 0, Math.PI * 2); c.fill(); }
-            else c.fillRect(-w / 2, -h / 2, w, h);
-            c.restore();
-        });
-        (t.decor || []).filter(d => d.layer !== 'back').forEach(d => Decor.item(c, W, H, d, pal));
-    }
-
-    function selectTemplate(id) {
+    async function selectTemplate(id) {
+        const request = ++selectionRequest;
+        const template = Templates.get(id);
+        const status = document.getElementById('artwork-status');
+        status.textContent = template.background?.type === 'image' ? 'Lastar bakgrunnen …' : '';
+        Gallery.status(status.textContent);
+        try {
+            if (template.background?.type === 'image') await Artwork.load(template.background.src);
+        } catch (error) {
+            if (request === selectionRequest) {
+                status.textContent = error.message + ' Vel bakgrunnen på nytt for å prøve att.';
+                Gallery.status(status.textContent);
+            }
+            return false;
+        }
+        if (request !== selectionRequest) return false;
+        status.textContent = ''; Gallery.status('');
         Collage.setTemplate(id);
-        document.querySelectorAll('.tpl-card').forEach(el => {
-            el.classList.toggle('active', el.dataset.id === id);
-        });
+        Gallery.select(id);
         syncFormatButtons();
         buildTextPanel();
+        return true;
     }
 
     /* ──────────────── Tekst-panel ──────────────── */
@@ -140,7 +106,7 @@
         });
         document.getElementById('btn-download').addEventListener('click', () => Collage.exportPNG());
         document.getElementById('btn-clear').addEventListener('click', () => {
-            if (confirm('Vil du fjerne alle bileta frå malen?')) Collage.clearAll();
+            if (confirm('Vil du fjerne alle bileta og all pynten frå malen?')) Collage.clearAll();
         });
         document.querySelectorAll('[data-format]').forEach(btn => {
             btn.addEventListener('click', () => { Collage.setFormat(btn.dataset.format); syncFormatButtons(); });
