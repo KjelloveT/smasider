@@ -86,7 +86,12 @@ window.OrdvettView = (function () {
     byId('chooseNotice').hidden = !chooseMode;
     byId('answerDock').hidden = done;
     byId('answerForm').hidden = done;
-    byId('guessButton').disabled = remaining < 2;
+    byId('guessButton').disabled = !Game.canGuess(round);
+    byId('guessLabel').textContent = remaining < 2 ? 'Siste tipp' : 'Prøv';
+    const penalty = byId('answerPenalty');
+    penalty.setAttribute('aria-label', remaining < 2 ? 'Eit feil svar avsluttar runden' : 'Eit nytt feil svar kostar 2 myntar');
+    penalty.replaceChildren(...(remaining < 2 ? [el('span', '', 'Feil avsluttar runden')] : [el('span', '', 'Feil:'), price(2)]));
+    byId('answer').setAttribute('aria-describedby', `answerHelp feedback${remaining < 2 ? ' fundsNotice' : ''}`);
     byId('fundsNotice').hidden = done || remaining >= 2;
     byId('wrongGuesses').replaceChildren(...current.wrongGuesses.map(value => {
       const chip = el('span', 'vp-panel vp-panel--plain ov-wrong-word'); chip.append(icon('x'), el('span', '', value)); return chip;
@@ -146,11 +151,11 @@ window.OrdvettView = (function () {
   }
   function results(round, descriptor) {
     const result = Game.summary(round);
-    byId('resultsTitle').textContent = descriptor.mode === 'daily' ? 'Ferdig for i dag!' : 'Utfordringa er ferdig!';
+    byId('resultsTitle').textContent = Game.lastChanceFailed(round) ? 'Siste sjanse brukt' : descriptor.mode === 'daily' ? 'Ferdig for i dag!' : 'Utfordringa er ferdig!';
     byId('resultDate').textContent = `${OrdvettSchedule.dateLabel(descriptor.date)} · ${OrdvettSchedule.LEVELS.find(level => level.id === descriptor.level)?.label || ''}`;
     byId('resultSolved').replaceChildren(icon('check'), el('strong', '', `${result.solved} / 5`));
     byId('resultCost').replaceChildren(price(result.cost));
-    byId('recordMessage').textContent = descriptor.mode === 'daily' ? 'Nye ord i morgon' : '';
+    byId('recordMessage').textContent = Game.lastChanceFailed(round) ? 'Siste tipset var feil. Runden er over.' : descriptor.mode === 'daily' ? 'Nye ord i morgon' : '';
     byId('resultWords').replaceChildren(...round.questions.map((question, index) => OrdvettOverview.wordResult(question, index)));
     show('results', 'resultsTitle');
   }

@@ -3,7 +3,7 @@ window.OrdvettBank = {
   "app": "ordvett",
   "version": 1,
   "bankVersion": "2026-10-24.2",
-  "rulesVersion": 5,
+  "rulesVersion": 6,
   "attribution": "Nynorskordboka, Universitetet i Bergen og Språkrådet, ordbøkene.no, CC BY 4.0.",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "changes": "Ordutval, tema, vanskegrad, forklaringar og setningsdøme er tilpassa for UvissaOrd. Ordklasse, normerte oppslagsformer og bøying er henta frå Nynorskordboka.",
