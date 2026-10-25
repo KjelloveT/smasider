@@ -17,23 +17,29 @@
   function setup(focus) {
     Effects.clear(); chooseMode = false; round = null;
     const today = Schedule.dateKey();
-    if (!Schedule.isDate(settings.archiveDate) || settings.archiveDate >= today) settings.archiveDate = Schedule.previousDay(today);
+    if (!Schedule.inRange(settings.archiveDate) || settings.archiveDate >= today) settings.archiveDate = Schedule.latestArchive(today);
+    if (settings.mode === 'archive' && !settings.archiveDate) settings.mode = 'daily';
     descriptor = settings.mode === 'archive' ? Schedule.archive(settings.level, settings.archiveDate) : Schedule.daily(settings.level);
-    View.setup(settings, descriptor, savedRound());
-    if (settings.mode === 'archive') OrdvettCalendar.render(settings.archiveDate, settings.level);
+    View.setup(settings, descriptor);
+    OrdvettOverview.render(settings, descriptor.date, level => {
+      settings.level = level;
+      descriptor = settings.mode === 'archive' ? Schedule.archive(level, settings.archiveDate) : Schedule.daily(level);
+      start();
+    });
+    if (settings.mode === 'archive') OrdvettCalendar.render(settings.archiveDate);
     View.feedback(null); View.show('setup', focus ? 'setupTitle' : null);
   }
   function transact(action, origin, hintId) {
-    const bounds = (origin?.closest('.ov-shop-slot,.ov-receipt') || origin)?.getBoundingClientRect();
+    const bounds = origin?.getBoundingClientRect();
     const wallet = View.byId('coinCounter').getBoundingClientRect(), before = Game.summary(round).cost;
     const result = action(); chooseMode = false;
     Tutorial.receive(result, hintId); persist(); update(result); View.feedback(result);
     if (result.price > 0) Effects.spend(bounds, result.price, before, Game.summary(round).cost, wallet);
     if (result.status === 'bought') {
-      const card = View.byId('purchasedHints').querySelector(`[data-owned-hint="${hintId}"]`);
+      const card = View.byId('purchasedHints').lastElementChild;
       card?.focus({ preventScroll: true }); card?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
       Effects.moveHint(bounds, card);
-    } else if (hintId === 'chosen') (View.byId('purchasedHints').querySelector('[data-hint="chosen"]') || View.byId('answer')).focus();
+    } else if (hintId === 'chosen') View.byId('answer').focus();
     return result;
   }
   function update(change) {
@@ -48,20 +54,16 @@
     syncAnswerOffset();
   }
   function start() {
-    if (settings.mode === 'daily' && descriptor.date !== Schedule.dateKey()) descriptor = Schedule.daily(settings.level);
+    if (settings.mode === 'daily' && descriptor.date !== Schedule.currentDate()) descriptor = Schedule.daily(settings.level);
     Storage.setSettings(settings);
     round = savedRound() || Game.createRound(descriptor.words, Vy.rng(descriptor.seed)); chooseMode = false;
     if (Game.summary(round).complete) { View.results(round, descriptor); return; }
     persist(); View.byId('answer').value = ''; View.feedback(null); update(); View.show('game', 'gameTitle');
   }
-  document.querySelectorAll('input[name="level"]').forEach(input => input.addEventListener('change', () => {
-    settings.level = input.value; Storage.setSettings(settings); setup(false);
-  }));
   document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => {
     settings.mode = button.dataset.mode; Storage.setSettings(settings); setup(false);
   }));
   OrdvettCalendar.init(date => { settings.archiveDate = date; Storage.setSettings(settings); setup(false); });
-  View.byId('setupForm').addEventListener('submit', event => { event.preventDefault(); start(); });
   View.byId('answerForm').addEventListener('submit', event => {
     event.preventDefault(); if (Tutorial.getActive() && !Tutorial.allows(null)) return;
     transact(() => Game.guess(round, View.byId('answer').value), View.byId('guessButton'));
@@ -107,7 +109,7 @@
     else if (chooseMode) { event.preventDefault(); cancelChoice(); }
   });
   if (window.ResizeObserver) new ResizeObserver(syncAnswerOffset).observe(View.byId('answerDock'));
-  function refreshDay() { if (!document.hidden && !round && settings.mode === 'daily' && descriptor.date !== Schedule.dateKey()) setup(false); }
+  function refreshDay() { if (!document.hidden && !round && settings.mode === 'daily' && descriptor.date !== Schedule.currentDate()) setup(false); }
   window.addEventListener('focus', refreshDay); document.addEventListener('visibilitychange', refreshDay);
   setup(false);
 })();

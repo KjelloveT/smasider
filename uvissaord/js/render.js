@@ -35,28 +35,19 @@ window.OrdvettView = (function () {
       return node;
     }));
   }
-  function setup(settings, descriptor, savedRound) {
+  function setup(settings, descriptor) {
     const daily = settings.mode === 'daily';
-    const finished = savedRound && Game.summary(savedRound).complete;
-    document.querySelectorAll('input[name="level"]').forEach(input => { input.checked = input.value === settings.level; });
     document.querySelectorAll('[data-mode]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mode === settings.mode)));
     byId('setupTitle').textContent = daily ? 'Dagens utfordring' : 'Tidlegare utfordringar';
     byId('dayLabel').textContent = OrdvettSchedule.dateLabel(descriptor.date);
     byId('dayNumber').textContent = String(Number(descriptor.date.slice(-2)));
     byId('archivePicker').hidden = daily;
-    byId('startLabel').textContent = finished ? 'Sjå resultat' : savedRound ? 'Hald fram' : 'Start';
-    progress(savedRound, byId('setupProgress'));
-    const state = byId('setupRecord'); state.replaceChildren();
-    if (finished) {
-      const result = Game.summary(savedRound);
-      state.append(icon('check'), el('span', '', `${result.solved} / 5`), price(result.cost));
-    } else if (savedRound) state.append(el('span', '', `Ord ${savedRound.index + 1} / 5`), price(Game.summary(savedRound).cost));
-    state.hidden = !savedRound;
+    byId('archiveButton').disabled = OrdvettSchedule.dateKey() <= OrdvettSchedule.START;
   }
   function feedback(result) {
     byId('announcement').textContent = result?.message || '';
     const host = byId('feedback'); host.replaceChildren();
-    const labels = { empty: 'Skriv eit ord', repeat: 'Alt prøvd', wrong: 'Prøv att', funds: 'Ikkje nok myntar', position: 'Vel ein ny plass' };
+    const labels = { empty: 'Skriv eit ord', repeat: 'Alt prøvd', wrong: 'Prøv att', funds: 'Ikkje nok myntar', position: 'Vel ein ny plass', stock: 'Utselt', long: 'For langt svar' };
     host.hidden = !labels[result?.status];
     if (!host.hidden) { host.append(icon('x'), el('span', '', labels[result.status])); if (result.price) host.append(price(result.price)); }
   }
@@ -98,39 +89,46 @@ window.OrdvettView = (function () {
     byId('answerForm').hidden = done;
     byId('guessButton').disabled = remaining < 2;
     byId('fundsNotice').hidden = done || remaining >= 2;
+    byId('wrongGuesses').replaceChildren(...current.wrongGuesses.map(value => {
+      const chip = el('span', 'vp-panel vp-panel--plain ov-wrong-word'); chip.append(icon('x'), el('span', '', value)); return chip;
+    }));
+    byId('wrongGuesses').hidden = current.wrongGuesses.length === 0;
     byId('hintShop').hidden = done;
     byId('revealButton').hidden = done;
     byId('leaveButton').hidden = false;
     byId('nextButton').hidden = false;
     byId('hintButtons').replaceChildren(...Game.HINTS.map(hint => {
       const slot = el('div', 'ov-shop-slot'); slot.dataset.slot = hint.id;
-      if (current.purchases.some(purchase => purchase.id === hint.id)) { slot.setAttribute('aria-hidden', 'true'); return slot; }
+      const stock = Game.stock(round, hint.id);
+      const stack = el('div', 'ov-card-stack'); slot.append(stack);
+      for (let layer = stock - 1; layer > 0; layer--) {
+        const card = el('span', 'vp-panel vp-panel--inset ov-stock-card'); card.setAttribute('aria-hidden', 'true');
+        card.style.setProperty('--layer', layer); stack.append(card);
+      }
+      const count = el('span', 'vp-panel vp-panel--inset ov-stock-count');
+      count.append(icon('layers'), el('strong', '', String(stock)));
+      count.setAttribute('aria-label', `${stock} av ${hint.stock} kort att i heile runden`);
+      if (!stock) {
+        const empty = el('div', 'ov-stock-empty'); empty.append(hintImage(hint.id), el('span', '', hint.label), count);
+        empty.setAttribute('aria-label', `${hint.label}: utselt for heile runden`); stack.append(empty); return slot;
+      }
       const button = el('button', 'vp-button vp-button--tool vp-button--purchase ov-hint'); button.type = 'button'; button.dataset.hint = hint.id;
       button.disabled = !Game.available(round, hint.id);
       const known = Game.known(round, hint.id);
-      button.append(hintImage(hint.id), el('span', 'ov-hint-name', hint.label));
+      button.append(hintImage(hint.id), el('span', 'ov-hint-name', hint.label), count);
       const tag = price(hint.price); if (button.disabled) tag.classList.add('ov-price--unavailable'); button.append(tag);
       if (known) { const stamp = el('span', 'ov-paid'); stamp.append(icon('check'), el('span', '', 'Kjent')); button.append(stamp); }
-      button.setAttribute('aria-label', known ? `${hint.label}: alt kjent` : `${hint.label}, ${hint.price} ${hint.price === 1 ? 'mynt' : 'myntar'}${button.disabled ? ', ikkje nok myntar' : ''}`);
-      button.addEventListener('click', event => handlers.hint(hint.id, event.currentTarget)); slot.append(button); return slot;
+      button.setAttribute('aria-label', `${hint.label}, ${stock} kort att, ${hint.price} ${hint.price === 1 ? 'mynt' : 'myntar'}${known ? ', alt kjent for dette ordet' : button.disabled ? ', ikkje nok myntar' : ''}`);
+      button.addEventListener('click', event => handlers.hint(hint.id, event.currentTarget)); stack.append(button); return slot;
     }));
     const list = byId('purchasedHints');
-    const groups = new Map();
-    current.purchases.forEach(purchase => { if (!groups.has(purchase.id)) groups.set(purchase.id, []); groups.get(purchase.id).push(purchase); });
-    list.replaceChildren(...[...groups].map(([id, purchases]) => {
-      const hint = Game.HINTS.find(item => item.id === id);
+    list.replaceChildren(...current.purchases.map((purchase, index) => {
+      const id = purchase.id, hint = Game.HINTS.find(item => item.id === id);
       const item = el('li', 'vp-panel vp-panel--plain ov-receipt');
-      item.tabIndex = -1; item.dataset.ownedHint = id;
-      const head = el('div', 'ov-receipt-head'); head.append(hintImage(id), el('strong', '', hint.label)); item.append(head);
-      purchases.forEach(purchase => item.append(el('p', '', purchase.text)));
-      if (!done && ['random', 'chosen'].includes(id)) {
-        const button = el('button', 'vp-button vp-button--tool vp-button--purchase vp-button--compact ov-buy-again');
-        button.type = 'button'; button.dataset.hint = id; button.disabled = !Game.available(round, id);
-        button.append(el('span', '', id === 'random' ? 'Ny bokstav' : 'Vel rute'));
-        const tag = price(hint.price); if (button.disabled) tag.classList.add('ov-price--unavailable'); button.append(tag);
-        button.setAttribute('aria-label', `${hint.label}, ${hint.price} myntar${button.disabled ? ', ikkje tilgjengeleg' : ''}`);
-        button.addEventListener('click', event => handlers.hint(id, event.currentTarget)); item.append(button);
-      }
+      item.tabIndex = -1; item.dataset.ownedHint = id; item.dataset.purchase = index;
+      const head = el('div', 'ov-receipt-head'); head.append(hintImage(id), el('strong', '', id === 'chosen' ? `Bokstav nr ${purchase.position + 1}` : hint.label)); item.append(head);
+      item.append(el('p', '', purchase.text));
+      const paid = el('span', 'ov-paid'); paid.append(icon('check'), price(hint.price)); item.append(paid);
       return item;
     }));
     byId('purchasedSection').hidden = current.purchases.length === 0;
@@ -150,15 +148,12 @@ window.OrdvettView = (function () {
   function results(round, descriptor) {
     const result = Game.summary(round);
     byId('resultsTitle').textContent = descriptor.mode === 'daily' ? 'Ferdig for i dag!' : 'Utfordringa er ferdig!';
-    byId('resultDate').textContent = OrdvettSchedule.dateLabel(descriptor.date);
+    byId('resultDate').textContent = `${OrdvettSchedule.dateLabel(descriptor.date)} · ${OrdvettSchedule.LEVELS.find(level => level.id === descriptor.level)?.label || ''}`;
     byId('resultSolved').replaceChildren(icon('check'), el('strong', '', `${result.solved} / 5`));
     byId('resultCost').replaceChildren(price(result.cost));
     byId('recordMessage').textContent = descriptor.mode === 'daily' ? 'Nye ord i morgon' : '';
-    byId('resultWords').replaceChildren(...round.questions.map(current => {
-      const item = el('li', 'vp-panel vp-panel--plain ov-result-row');
-      item.append(icon(current.outcome === 'solved' ? 'check' : 'eye'), el('strong', '', current.word.answer), price(current.cost)); return item;
-    }));
+    byId('resultWords').replaceChildren(...round.questions.map((question, index) => OrdvettOverview.wordResult(question, index)));
     show('results', 'resultsTitle');
   }
-  return Object.freeze({ byId, show, setup, question, feedback, results });
+  return Object.freeze({ byId, show, setup, question, feedback, results, progress, icon, price, hintImage });
 })();

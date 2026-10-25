@@ -5,11 +5,11 @@ Alle dei nye bileta vart laga 24. oktober 2026 med den innebygde bildegeneratore
 ## Filer
 
 - Applogo: `_resources/vyrdepil-design/logos/uvissaord-mala.png`, 384 × 384, PNG med 128 fargar (30 878 byte).
-- Hint: `ordvett/assets/hints/pos.png`, `grammar.png`, `usage.png`, `sentence.png`, `random.png`, `chosen.png`, `definition.png`, `theme.png` og `length.png`. Alle er 192 × 192, gjennomsiktige PNG-filer med 128 fargar, om lag 8–14 kB kvar.
-- Mynt: `ordvett/assets/coin-front.png` og `coin-back.png`, 128 × 128, gjennomsiktige PNG-filer med 128 fargar, om lag 8 kB kvar.
+- Hint: `uvissaord/assets/hints/pos.png`, `grammar.png`, `usage.png`, `sentence.png`, `random.png`, `chosen.png`, `definition.png`, `theme.png` og `length.png`. Alle er 192 × 192, gjennomsiktige PNG-filer med 128 fargar, om lag 8–14 kB kvar.
+- Mynt: `uvissaord/assets/coin-front.png` og `coin-back.png`, 128 × 128, gjennomsiktige PNG-filer med 128 fargar, om lag 8 kB kvar.
 - Original logo ligg i den ignorerte mappa `_kjelder/logoar/`. Andre originalar og kontaktark ligg i `_kjelder/ordvett/bilete/`.
 
-Namnet er UvissaOrd. Den tekniske app-ID-en og adressa `ordvett/` blir haldne stabile slik at eksisterande lokale data og bakgrunnsreservasjonen framleis høyrer til same spel.
+Adressa er `uvissaord/`. Den interne app-ID-en og lagringsnøkkelen `ordvett` er haldne stabile slik at lagra framgang og bakgrunnsreservasjonen framleis høyrer til same spel.
 
 ## Felles prompt for hintikona
 
