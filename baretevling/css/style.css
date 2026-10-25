@@ -97,8 +97,18 @@ body.vp-migrated-page[data-vp-app="baretevling"] main#main.vp-migrated-main {
     padding: 0 clamp(8px, 2vw, 20px);
 }
 
-.bt-howto {
-    margin: 0 0 22px;
+.bt-help-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.bt-help-grid > details { min-width: 0; }
+
+@media (max-width: 620px) {
+    .bt-help-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
 }
 
 .bt-howto > summary {
