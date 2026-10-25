@@ -157,6 +157,8 @@ test('resultatlagringa er avgrensa og forkastar ekstra felt', () => {
   assert.ok(!JSON.stringify(saved).includes('hemmeleg'));
   assert.equal(saved.version, 5);
   assert.equal(store.api.getRecord('sett-0'), null);
+  assert.equal(store.api.getRecord('constructor'), null);
+  assert.equal(store.api.getRecord('__proto__'), null);
 });
 test('øydelagde lokale appfelt får trygge standardverdiar', () => {
   const store = storage({ version: 1, settings: { level: 'feil', setIndex: -9 }, records: { bad: { solved: 8, cost: -1 } } });
