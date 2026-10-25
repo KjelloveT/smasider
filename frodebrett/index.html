@@ -90,6 +90,7 @@
           <div class="final-question-text">
             <h3 class="heading4-accent2">Spørsmål</h3>
             <div id="final-question-display"></div>
+            <img id="final-question-image" class="fb-question-image hidden" alt="Bilete til finalspørsmålet">
           </div>
           <div id="final-answer" class="final-answer hidden">
             <h3 class="heading4-accent2">Svar</h3>
@@ -148,6 +149,7 @@
             <textarea class="form-input" id="editor-final-question" placeholder="Fullstendig spørsmål for finalen…"></textarea>
           </div>
           <div class="form-group">
+            <div id="editor-final-image"></div>
             <label for="editor-final-answer">Finalesvar</label>
             <input type="text" class="form-input" id="editor-final-answer" placeholder="Korrekt svar…">
           </div>
@@ -215,6 +217,7 @@
     <div class="modal-body">
       <div id="dd-banner" class="dd-banner hidden">★ DAGENS DOBBEL! · ×2 ★</div>
       <div id="question-text" class="question-text"></div>
+      <img id="question-image" class="fb-question-image hidden" alt="Bilete til spørsmålet">
       <div id="question-answer" class="question-answer hidden">
         <div class="answer-label">Svar</div>
         <div id="answer-text" class="answer-text"></div>
@@ -238,6 +241,7 @@
     <div id="preview-board" class="jeopardy-grid"></div>
     <div id="preview-question" class="preview-question hidden">
       <div id="preview-question-text" class="question-text"></div>
+      <img id="preview-question-image" class="fb-question-image hidden" alt="Bilete til spørsmålet">
       <div id="preview-answer-text" class="answer-text hidden"></div>
       <div class="fb-controls">
         <button class="btn btn-small btn-accent" id="btn-preview-reveal">Vis svar</button>
@@ -267,10 +271,11 @@
 <script src="../js/vyrdepil-storage.js"></script>
 <script src="../js/vyrdepil-icons.js"></script>
 <script src="../js/vyrdepil-util.js?v=1.2"></script>
-<script src="js/storage.js?v=6"></script>
+<script src="js/storage.js?v=7"></script>
 <script src="js/state.js?v=6"></script>
-<script src="js/board.js?v=6"></script>
-<script src="js/editor.js?v=6"></script>
+<script src="js/images.js?v=1"></script>
+<script src="js/board.js?v=7"></script>
+<script src="js/editor.js?v=7"></script>
 <script src="js/saved.js?v=6"></script>
 <script src="js/app.js?v=6"></script>
 

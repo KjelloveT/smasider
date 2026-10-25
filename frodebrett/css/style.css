@@ -292,3 +292,13 @@ body[data-vp-app="frodebrett"] {
   --text-on-accent: #000;
   --text-on-light-accent: #000;
 }
+
+/* Spørsmålsbilete */
+.fb-image-control { grid-column: 2 / -1; display: grid; gap: 8px; min-width: 0; margin-bottom: 16px; }
+.fb-image-control .vp-input { width: 100%; min-width: 0; }
+.fb-image-control p { margin: 0; }
+.fb-image-control [hidden] { display: none; }
+.fb-image-preview { display: block; max-width: 100%; width: auto; max-height: 180px; object-fit: contain; }
+.fb-question-image { display: block; max-width: 100%; max-height: 45vh; width: auto; height: auto; object-fit: contain; margin: 12px auto 20px; }
+.fb-question-image.hidden { display: none; }
+@media (max-width: 600px) { .fb-image-control { grid-column: 1 / -1; } }

@@ -48,7 +48,7 @@
       state.quizzes.push(quiz);
     }
     writeState(state);
-    return true;
+    return VyrdepilStorage.getStatus().mode === 'persistent';
   }
 
   function deleteQuiz(quizId) {
