@@ -36,7 +36,24 @@ frå prosjektet er brukt.
 > OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 > SOFTWARE.
 
-## Bakgrunnsformer — eigen kode
+## Måla malar og pynt — biletgenerering
+
+Dei 90 bakgrunnane i `assets/malar/` og dei 100 gjennomsiktige
+pyntedetaljane i `assets/pynt/` er laga med OpenAI si innebygde
+biletgenerering i oktober 2026, særskilt for BiletFlett.
+Motiva er tilpassa små born og barneskulen, utan tekst eller tal som
+låsar malane til eit bestemt namn, alder eller høve.
+
+Dei 80 måla og abstrakte bakgrunnane er komprimerte JPEG-filer, og dei ti
+pikselbakgrunnane er PNG med redusert palett. Lengste side er høgst 1920 px.
+Pynten er PNG med alfakanal, høgst 512 px og 128 palettfargar.
+Miniatyrar av bakgrunnane blir brukte i malgalleriet; sjølve bakgrunnen
+blir berre lasta når brukaren vel malen. Ingen eksterne bilettenester
+blir brukte under vanleg bruk av verktøyet.
+
+Sjå `assets/README.md` for motivoversikt og genereringsinstruksar.
+
+## Eldre bakgrunnsformer — eigen kode
 
 `js/backdrops.js` inneheld **ingen importerte ressursar**. Formene er
 rekna ut proseduralt fordi malane finst i tre format (portrett, landskap,
@@ -50,6 +67,6 @@ Vil du lage varianter, er dei to nettstadene gode å hente idear frå.
 
 ## Figurar — Lucide (ISC)
 
-Pynten i malane er teikna frå path-dataen i det felles ikonsettet
+Den eldre teikna pynten brukar path-data frå det felles ikonsettet
 `../js/vyrdepil-icons.js`, som byggjer på [Lucide](https://lucide.dev/).
 Lucide er alt husstandarden for ikon i Vyrdepil (sjå `AGENTS.md` §3.2).

@@ -40,31 +40,20 @@
     .gallery { max-height: none; }
 }
 
-/* Galleri */
-.gallery {
-    background: var(--surface); border: 3px solid var(--border); box-shadow: 5px 5px 0 var(--shadow);
-    padding: 14px; max-height: 78vh; overflow-y: auto;
-    display: flex; flex-direction: column; gap: 8px;
-}
-.gallery-group-title {
-    font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
-    font-size: 0.8rem; color: var(--accent); margin: 8px 0 2px;
-    border-bottom: 3px solid var(--border); padding-bottom: 4px;
-}
-.tpl-card {
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
-    padding: 8px; cursor: pointer; font-family: inherit;
-    background: var(--bg); border: 3px solid var(--border); box-shadow: 3px 3px 0 var(--shadow);
-    transition: transform 0.1s, box-shadow 0.1s;
-}
-.tpl-card:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--shadow); }
-.tpl-card.active { background: var(--accent4); box-shadow: 3px 3px 0 var(--accent); }
-.tpl-card canvas { width: auto; max-height: 120px; border: 2px solid var(--border); background: #fff; }
-.tpl-name { font-size: 0.82rem; font-weight: 800; color: var(--text); text-align: center; line-height: 1.1; }
+/* Bakgrunnsveljar — felles panel, felt og knappar; lokal geometri. */
+.gallery { display: flex; flex-direction: column; gap: 12px; min-width: 0; max-height: none; overflow: visible; }
+.background-filters { display: grid; gap: 10px; }
+.background-chosen { margin: 0; }
+.background-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; max-height: 46vh; overflow-y: auto; padding: 4px; align-items: stretch; }
+.background-grid--plain { max-height: 300px; margin-top: 12px; }
+.tpl-card { display: flex; flex-direction: column; gap: 8px; padding: 8px; width: 100%; min-width: 0; min-height: 154px; height: auto; white-space: normal; }
+.tpl-card img, .tpl-card canvas { width: 100%; height: 106px; object-fit: contain; flex: none; }
+.tpl-name { overflow-wrap: anywhere; }
+.tpl-card[data-style="pixel"] img { image-rendering: pixelated; }
 @media (max-width: 1024px) {
-    .gallery { flex-direction: row; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 16px; }
-    .gallery-group-title { display: none; }
-    .tpl-card { flex: 0 0 auto; width: 120px; }
+    .background-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .background-search { grid-column: 1 / -1; }
+    .background-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); max-height: 280px; }
 }
 
 /* Scene / lerret */
@@ -86,7 +75,7 @@
 .panel-hint { color: var(--muted); font-size: 0.9rem; }
 #text-fields { display: flex; flex-direction: column; gap: 12px; }
 .field { display: flex; flex-direction: column; gap: 4px; }
-.field-label { font-weight: 800; font-size: 0.82rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.4px; }
+.field-label { font-weight: 800; font-size: 0.82rem; color: #000000; text-transform: uppercase; letter-spacing: 0.4px; }
 
 .neo-input {
     width: 100%; padding: 9px 12px; font-family: inherit; font-size: 0.95rem; font-weight: 600;
@@ -126,4 +115,35 @@
     .stage { border: none; box-shadow: none; padding: 0; }
     #collage-canvas { border: none; box-shadow: none; }
     .app-layout { display: block; }
+}
+
+/* Biletgenererte malar og flyttbar pynt. */
+.decor-library { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; max-height: 340px; overflow-y: auto; padding: 8px 2px; }
+.decor-card { min-width: 0; flex-direction: column; padding: 8px; }
+.decor-card img { width: 64px; height: 64px; object-fit: contain; }
+.decor-card span { white-space: normal; overflow-wrap: anywhere; }
+.decor-picker p { margin-block: 12px; }
+.decor-controls { display: grid; gap: 12px; }
+.decor-controls[hidden] { display: none; }
+.panel, .gallery, .stage { min-width: 0; }
+#artwork-status:empty, #decor-status:empty { display: none; }
+@media (max-width: 1024px) { .decor-library { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); } }
+
+/* Romsleg bakgrunnsdialog; utsjånaden kjem frå det felles dialogsystmet. */
+dialog.vp-dialog.background-dialog { width: min(1180px, calc(100vw - 24px)); max-width: calc(100vw - 24px); max-height: calc(100dvh - 24px); }
+.background-dialog #close-background { flex-shrink: 0; white-space: nowrap; }
+.background-dialog .background-filters { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.background-dialog .background-search { grid-column: auto; }
+.background-dialog .background-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); max-height: 55vh; gap: 12px; }
+.background-dialog .tpl-card { position: relative; min-height: 244px; }
+.background-dialog .tpl-card img, .background-dialog .tpl-card canvas { height: 180px; }
+.tpl-card > .vp-selection-mark { position: absolute; top: 8px; right: 8px; }
+.current-background-preview { width: auto; max-width: 100%; height: 150px; object-fit: contain; align-self: center; }
+.current-background-preview[hidden] { display: none; }
+@media (max-width: 600px) {
+    .background-dialog .background-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .background-dialog .background-search { grid-column: 1 / -1; }
+    .background-dialog .background-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: 48vh; }
+    .background-dialog .tpl-card { min-height: 208px; }
+    .background-dialog .tpl-card img, .background-dialog .tpl-card canvas { height: 144px; }
 }

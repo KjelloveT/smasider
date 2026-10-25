@@ -11,11 +11,12 @@ const Collage = (() => {
     let canvas, ctx, W = 1240, H = 1754;
     let template = null;
     let format = 'portrait';
+    let photoCount = 3, photoLayout = 'feature';
     let pool = [];            // { id, img }
     let slotData = {};        // slotIndex -> { imgId, offsetX, offsetY, zoom }
     let textValues = {};      // textId -> string
     let hovered = -1;
-    let dragging = false, dragSlot = -1, dragLast = { x: 0, y: 0 };
+    let input = null;
     let controlRects = [];
     let nextId = 1;
     let onEmptyClick = null, onChange = null;
@@ -26,21 +27,14 @@ const Collage = (() => {
         ctx = canvas.getContext('2d');
         onEmptyClick = (opts && opts.onEmptyClick) || null;
         onChange = (opts && opts.onChange) || null;
-        canvas.addEventListener('mousedown', onDown);
-        canvas.addEventListener('mousemove', onMove);
-        window.addEventListener('mouseup', onUp);
-        canvas.addEventListener('mouseleave', () => { if (hovered !== -1) { hovered = -1; render(); } });
-        canvas.addEventListener('touchstart', touchTo('mousedown'), { passive: false });
-        canvas.addEventListener('touchmove', touchTo('mousemove'), { passive: false });
-        canvas.addEventListener('touchend', (e) => { e.preventDefault(); onUp({}); });
-    }
-
-    function touchTo(type) {
-        return (e) => {
-            e.preventDefault();
-            const t = e.touches[0]; if (!t && type !== 'mouseup') return;
-            if (t) canvas.dispatchEvent(new MouseEvent(type, { clientX: t.clientX, clientY: t.clientY }));
-        };
+        input = CollageInput.init(canvas, {
+            template: () => template, slots: () => slotData, hovered: () => hovered,
+            controls: () => controlRects, point: pt, contains: pointInSlot,
+            hover: index => { hovered = index; render(); }, render,
+            zoom: zoomSlot, remove: clearSlot,
+            crop: index => { if (cropRequest) cropRequest(index); },
+            open: index => { if (onEmptyClick) onEmptyClick(index); }
+        });
     }
 
     /* Skaler klientkoordinat til lerretspikslar (KJERNEFIKS) */
@@ -54,12 +48,18 @@ const Collage = (() => {
 
     /* ──────────────── Mal og format ──────────────── */
     function setTemplate(id) {
-        template = Templates.get(id);
-        if (!template) return;
-        format = template.orientation || 'portrait';
-        slotData = {};
-        textValues = {};
-        (template.texts || []).forEach(t => { textValues[t.id] = t.text || ''; });
+        const next = Templates.get(id);
+        if (!next) return;
+        const first = !template;
+        template = { ...next };
+        if (first) {
+            format = template.orientation || 'portrait';
+            slotData = {};
+            textValues = {};
+        }
+        (template.texts || []).forEach(t => {
+            if (!Object.prototype.hasOwnProperty.call(textValues, t.id)) textValues[t.id] = t.text || '';
+        });
         applyFormat();
         autofill();
         render();
@@ -74,8 +74,19 @@ const Collage = (() => {
 
     function applyFormat() {
         [W, H] = DIMS[format];
+        if (template) template.slots = PhotoLayouts.make(photoCount, photoLayout, format);
         canvas.width = W;
         canvas.height = H;
+    }
+
+    function setLayout(count, layout) {
+        if (!Number.isFinite(count) || !PhotoLayouts.styles[layout]) return;
+        photoCount = Math.max(1, Math.min(12, Math.round(count)));
+        photoLayout = layout;
+        hovered = -1; input?.cancel();
+        Object.values(slotData).forEach(data => { data.offsetX = 0; data.offsetY = 0; data.zoom = 1; });
+        applyFormat(); autofill(); render();
+        if (onChange) onChange();
     }
 
     function setText(id, value) {
@@ -84,7 +95,7 @@ const Collage = (() => {
     }
 
     function getTextFields() {
-        return (template && template.texts) ? template.texts : [];
+        return (template?.texts || []).map(field => ({ ...field, text: textValues[field.id] ?? field.text ?? '' }));
     }
 
     /* ──────────────── Bilete ──────────────── */
@@ -154,6 +165,7 @@ const Collage = (() => {
 
     function clearAll() {
         pool = []; slotData = {};
+        Stickers.clear();
         render();
         if (onChange) onChange();
     }
@@ -192,9 +204,10 @@ const Collage = (() => {
         (template.decor || []).filter(d => d.layer !== 'back').forEach(d => Decor.item(ctx, W, H, d, pal));
 
         (template.texts || []).forEach(t => drawText(t));
+        Stickers.paint(ctx, W, H, interactive);
 
         controlRects = [];
-        if (interactive && hovered !== -1 && slotData[hovered]) drawControls(template.slots[hovered], hovered);
+        if (interactive && hovered !== -1 && slotData[hovered]) controlRects = CollageControls.draw(ctx, W, slotRect(template.slots[hovered]));
     }
 
     function drawSlot(slot, idx) {
@@ -370,107 +383,22 @@ const Collage = (() => {
     }
 
     /* ──────────────── Slot-kontrollar (overlay) ──────────────── */
-    function drawControls(slot, idx) {
-        const r = slotRect(slot);
-        const size = Math.max(34, W * 0.040);
-        const gap = size * 0.25;
-        const actions = ['zoomOut', 'zoomIn', 'crop', 'remove'];
-        const totalW = actions.length * size + (actions.length - 1) * gap;
-        let bx = r.x + r.w / 2 - totalW / 2;
-        const by = r.y + gap;
-        actions.forEach(act => {
-            ctx.save();
-            ctx.fillStyle = act === 'remove' ? 'rgba(217,48,37,0.92)' : 'rgba(26,26,26,0.82)';
-            ctx.beginPath(); ctx.arc(bx + size / 2, by + size / 2, size / 2, 0, Math.PI * 2); ctx.fill();
-            ctx.strokeStyle = '#fff'; ctx.lineWidth = Math.max(2, size * 0.07);
-            ctx.lineCap = 'round';
-            glyph(act, bx + size / 2, by + size / 2, size * 0.26);
-            ctx.restore();
-            controlRects.push({ action: act, x: bx, y: by, w: size, h: size });
-            bx += size + gap;
-        });
-    }
-
-    function glyph(act, cx, cy, s) {
-        ctx.beginPath();
-        if (act === 'zoomIn' || act === 'zoomOut') {
-            ctx.moveTo(cx - s, cy); ctx.lineTo(cx + s, cy);
-            if (act === 'zoomIn') { ctx.moveTo(cx, cy - s); ctx.lineTo(cx, cy + s); }
-        } else if (act === 'remove') {
-            ctx.moveTo(cx - s, cy - s); ctx.lineTo(cx + s, cy + s);
-            ctx.moveTo(cx + s, cy - s); ctx.lineTo(cx - s, cy + s);
-        } else if (act === 'crop') {
-            ctx.moveTo(cx - s, cy - s * 0.4); ctx.lineTo(cx - s, cy + s); ctx.lineTo(cx + s * 0.4, cy + s);
-            ctx.moveTo(cx + s, cy + s * 0.4); ctx.lineTo(cx + s, cy - s); ctx.lineTo(cx - s * 0.4, cy - s);
-        }
-        ctx.stroke();
-    }
-
     /* ──────────────── Inndata ──────────────── */
     let cropRequest = null;
     function setCropHandler(fn) { cropRequest = fn; }
 
-    function onDown(e) {
-        if (!template) return;
-        const p = pt(e);
-        // kontrollar på den hovra sloten
-        if (hovered !== -1 && slotData[hovered]) {
-            for (const c of controlRects) {
-                if (p.x >= c.x && p.x <= c.x + c.w && p.y >= c.y && p.y <= c.y + c.h) {
-                    if (c.action === 'zoomIn') zoomSlot(hovered, 1.15);
-                    else if (c.action === 'zoomOut') zoomSlot(hovered, 0.87);
-                    else if (c.action === 'remove') clearSlot(hovered);
-                    else if (c.action === 'crop' && cropRequest) cropRequest(hovered);
-                    return;
-                }
-            }
-        }
-        // klikk i slot
-        for (let i = 0; i < template.slots.length; i++) {
-            if (pointInSlot(p.x, p.y, template.slots[i])) {
-                if (slotData[i]) { dragging = true; dragSlot = i; dragLast = p; canvas.style.cursor = 'grabbing'; }
-                else if (onEmptyClick) onEmptyClick(i);
-                return;
-            }
-        }
-    }
-
-    function onMove(e) {
-        if (!template) return;
-        const p = pt(e);
-        if (dragging && slotData[dragSlot]) {
-            slotData[dragSlot].offsetX += p.x - dragLast.x;
-            slotData[dragSlot].offsetY += p.y - dragLast.y;
-            dragLast = p;
-            render();
-            return;
-        }
-        let h = -1;
-        for (let i = 0; i < template.slots.length; i++) {
-            if (pointInSlot(p.x, p.y, template.slots[i])) { h = i; break; }
-        }
-        if (h !== hovered) { hovered = h; render(); }
-        canvas.style.cursor = (h !== -1 && slotData[h]) ? 'grab' : (h !== -1 ? 'pointer' : 'default');
-    }
-
-    function onUp() {
-        dragging = false; dragSlot = -1;
-        if (canvas) canvas.style.cursor = 'default';
-    }
-
     /* ──────────────── Eksport ──────────────── */
     function exportPNG() {
         render(false);
-        const url = canvas.toDataURL('image/png');
-        render(true);
-        const link = document.createElement('a');
-        link.download = `biletflett-${template ? template.id : 'collage'}.png`;
-        link.href = url;
-        link.click();
+        const filename = `biletflett-${template ? template.id : 'collage'}.png`;
+        canvas.toBlob(blob => {
+            render(true);
+            if (blob) Vy.downloadBlob(blob, filename);
+        }, 'image/png');
     }
 
     return {
-        init, setTemplate, setFormat, setText, getTextFields,
+        init, setTemplate, setFormat, setLayout, setText, getTextFields,
         addImages, addImagesToSlot, replaceImage, clearAll,
         getSlotImageId, poolImg, exportPNG, render,
         setCropHandler,

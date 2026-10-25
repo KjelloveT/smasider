@@ -1,0 +1,1147 @@
+{
+  "app": "biletflett",
+  "version": 1,
+  "generator": "OpenAI innebygd biletegenerering",
+  "assets": [
+    {
+      "id": "mala-01",
+      "kind": "malar",
+      "name": "Vårskog med kvitveis",
+      "prompt": "Use case: illustration-story. Create ONE beautiful premium hand-painted watercolor and gouache portrait background template for a school photo collage: spring woodland with white wood anemones, delicate birch foliage and soft green woodland details concentrated around the outer edges. Large luminous warm ivory center (central 70%) mostly empty for users' photos and text. Full bleed paper surface, refined organic textures, lovely detailed botanical painting, harmonious gentle natural colors, printable portrait composition. No text, letters, logos, watermark, photo placeholders, grid or frames. This is artwork for the collage content, not website UI."
+    },
+    {
+      "id": "mala-02",
+      "kind": "malar",
+      "name": "Sommareng med prestekragar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: sommareng med prestekragar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-03",
+      "kind": "malar",
+      "name": "Haustskog med gylne blad",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: haustskog med gylne blad. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-04",
+      "kind": "malar",
+      "name": "Vinterlandskap med snø",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: vinterlandskap med snø. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-05",
+      "kind": "malar",
+      "name": "Fjellvatn med mjuke fjell",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: fjellvatn med mjuke fjell. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-06",
+      "kind": "malar",
+      "name": "Kyst med svaberg og sjø",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: kyst med svaberg og sjø. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-07",
+      "kind": "malar",
+      "name": "Bjørkeskog i morgonlys",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: bjørkeskog i morgonlys. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-08",
+      "kind": "malar",
+      "name": "Granskog med mose",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: granskog med mose. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-09",
+      "kind": "malar",
+      "name": "Blomehage med pastellblomar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: blomehage med pastellblomar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-10",
+      "kind": "malar",
+      "name": "Eplehage i bløming",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: eplehage i bløming. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-11",
+      "kind": "malar",
+      "name": "Regn og små vassringar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: regn og små vassringar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-12",
+      "kind": "malar",
+      "name": "Regnboge over lyse skyer",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: regnboge over lyse skyer. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-13",
+      "kind": "malar",
+      "name": "Nattehimmel med stjerner",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: nattehimmel med stjerner. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-14",
+      "kind": "malar",
+      "name": "Nordlys over fjell",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: nordlys over fjell. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-15",
+      "kind": "malar",
+      "name": "Soloppgang ved havet",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: soloppgang ved havet. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-16",
+      "kind": "malar",
+      "name": "Sandstrand med skjel",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: sandstrand med skjel. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-17",
+      "kind": "malar",
+      "name": "Undervasshage med tang",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: undervasshage med tang. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-18",
+      "kind": "malar",
+      "name": "Hage med sommarfuglar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: hage med sommarfuglar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-19",
+      "kind": "malar",
+      "name": "Skogbotn med sopp",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: skogbotn med sopp. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-20",
+      "kind": "malar",
+      "name": "Lynghei med bær",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: lynghei med bær. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-21",
+      "kind": "malar",
+      "name": "Bursdag med ballongar",
+      "prompt": "Use case: illustration-story. ONE beautiful portrait photo collage background template: a joyful balloon birthday party, pastel and primary balloons with beautiful ribbons and tiny paper confetti around edges. Art directed for children's birthdays and primary school ages 4–10, charming sophisticated picture-book gouache and watercolor, refined tactile painting and clear appealing silhouettes, lively joyful colors without visual clutter. Decoration concentrated at outer 15% edge. Central 70% light warm ivory blank negative space for real photos, name and age added by users later. No text, numbers, letters, logos, watermark, collage slots, photo placeholders, scary imagery or baby nursery styling. Full bleed portrait composition."
+    },
+    {
+      "id": "mala-22",
+      "kind": "malar",
+      "name": "Bursdag med skogsdyr",
+      "prompt": "Use case: illustration-story. ONE beautiful portrait photo collage background template: a woodland birthday party with friendly fox, hedgehog, rabbit and squirrel wearing little party hats, wildflowers and bunting along lower outer edge. Art directed for children's birthdays and primary school ages 4–10, charming sophisticated picture-book gouache and watercolor, refined tactile painting and clear appealing silhouettes, lively joyful colors without visual clutter. Decoration concentrated at outer 15% edge. Central 70% light warm ivory blank negative space for real photos, name and age added by users later. No text, numbers, letters, logos, watermark, collage slots, photo placeholders, scary imagery or baby nursery styling. Full bleed portrait composition."
+    },
+    {
+      "id": "mala-23",
+      "kind": "malar",
+      "name": "Dinosaurbursdag",
+      "prompt": "Use case: illustration-story. ONE beautiful portrait photo collage background template: a friendly dinosaur birthday party, charming gentle little dinosaurs with party hats, prehistoric foliage and colorful bunting at edges. Art directed for children's birthdays and primary school ages 4–10, charming sophisticated picture-book gouache and watercolor, refined tactile painting and clear appealing silhouettes, lively joyful colors without visual clutter. Decoration concentrated at outer 15% edge. Central 70% light warm ivory blank negative space for real photos, name and age added by users later. No text, numbers, letters, logos, watermark, collage slots, photo placeholders, scary imagery or baby nursery styling. Full bleed portrait composition."
+    },
+    {
+      "id": "mala-24",
+      "kind": "malar",
+      "name": "Bursdag under havet",
+      "prompt": "Use case: illustration-story. ONE beautiful portrait photo collage background template: an undersea birthday party with friendly whale, seahorse, starfish, sea plants and bubble garlands, ocean turquoise and warm coral. Art directed for children's birthdays and primary school ages 4–10, charming sophisticated picture-book gouache and watercolor, refined tactile painting and clear appealing silhouettes, lively joyful colors without visual clutter. Decoration concentrated at outer 15% edge. Central 70% light warm ivory blank negative space for real photos, name and age added by users later. No text, numbers, letters, logos, watermark, collage slots, photo placeholders, scary imagery or baby nursery styling. Full bleed portrait composition."
+    },
+    {
+      "id": "mala-25",
+      "kind": "malar",
+      "name": "Regnbogebursdag",
+      "prompt": "Use case: illustration-story. ONE beautiful portrait photo collage background template: a rainbow birthday party with soft rainbow arches, cheerful small clouds, golden stars, ribbon bunting and a little wrapped gift near bottom corner. Art directed for children's birthdays and primary school ages 4–10, charming sophisticated picture-book gouache and watercolor, refined tactile painting and clear appealing silhouettes, lively joyful colors without visual clutter. Decoration concentrated at outer 15% edge. Central 70% light warm ivory blank negative space for real photos, name and age added by users later. No text, numbers, letters, logos, watermark, collage slots, photo placeholders, scary imagery or baby nursery styling. Full bleed portrait composition."
+    },
+    {
+      "id": "mala-26",
+      "kind": "malar",
+      "name": "Handlaga papir med pressa blad",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: handlaga papir med pressa blad. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-27",
+      "kind": "malar",
+      "name": "Rivepapir i varme jordfargar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: rivepapir i varme jordfargar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-28",
+      "kind": "malar",
+      "name": "Rivepapir i kjølege sjøfargar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: rivepapir i kjølege sjøfargar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-29",
+      "kind": "malar",
+      "name": "Linstruktur med botaniske hjørne",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: linstruktur med botaniske hjørne. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-30",
+      "kind": "malar",
+      "name": "Skissebok med blyant og pensel",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: skissebok med blyant og pensel. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-31",
+      "kind": "malar",
+      "name": "Skulemateriell langs kanten",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: skulemateriell langs kanten. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-32",
+      "kind": "malar",
+      "name": "Bøker og leseglede",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: bøker og leseglede. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-33",
+      "kind": "malar",
+      "name": "Bokstavleik",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: bokstavar som abstrakte papirutklipp utan skrift. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-34",
+      "kind": "malar",
+      "name": "Fargerike treklossar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: talrike fargerike geometriske treklossar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-35",
+      "kind": "malar",
+      "name": "Musikk med instrument langs kanten",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: musikk med instrument langs kanten. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-36",
+      "kind": "malar",
+      "name": "Målarverkstad med fargeklattar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: målarverkstad med fargeklattar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-37",
+      "kind": "malar",
+      "name": "Hagefest med vimplar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: hagefest med vimplar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-38",
+      "kind": "malar",
+      "name": "Ballongfest",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: bursdag med ballongar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-39",
+      "kind": "malar",
+      "name": "Konfetti i mjuke pastellar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: konfetti i mjuke pastellar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-40",
+      "kind": "malar",
+      "name": "Gullstjerner på krempapir",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: gullstjerner på krempapir. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-41",
+      "kind": "malar",
+      "name": "Vinterfest med granbar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: vinterfest med granbar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-42",
+      "kind": "malar",
+      "name": "Hausttakk med graskar og blad",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: hausttakk med graskar og blad. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-43",
+      "kind": "malar",
+      "name": "Vårfest med tulipanar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: vårfest med tulipanar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-44",
+      "kind": "malar",
+      "name": "Sommarfest med blomar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: sommarfest med blomar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-45",
+      "kind": "malar",
+      "name": "Idrett med ballar langs kantane",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: idrett med ballar langs kantane. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-46",
+      "kind": "malar",
+      "name": "Kart og reiser",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: reise med kartinspirert papir utan tekst. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-47",
+      "kind": "malar",
+      "name": "Romfart med planetar langs kanten",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: romfart med planetar langs kanten. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-48",
+      "kind": "malar",
+      "name": "Dinosaurdal med bregnar",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: dinosaurdal med bregnar. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-49",
+      "kind": "malar",
+      "name": "Havseventyr med seglbåt",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: havseventyr med seglbåt. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-50",
+      "kind": "malar",
+      "name": "Eventyrskog med små lyshus",
+      "prompt": "Use case: illustration-story. Asset: ONE premium printable portrait photo collage background. Theme: eventyrskog med små lyshus. Beautiful sophisticated hand-painted watercolor, gouache and tactile paper artistry, harmonious nuanced colors, thoughtful detailed edge decoration. Central 70% luminous light nearly empty negative space for users' photographs and text, decoration concentrated at outer perimeter. Full bleed portrait artwork. No words, letters, numbers, logos, watermark, grids, photo placeholders. School appropriate, professionally art directed, no generic vector shapes."
+    },
+    {
+      "id": "mala-51",
+      "kind": "malar",
+      "name": "Pikseleng",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a sunny flower meadow. Authentic beautiful pixel art with intentional crisp square pixels, carefully clustered colors, classic detailed 16-bit game background artistry, no antialiasing, no smooth painting, no blur. Restrained cohesive palette, appealing high quality pixel sprites at edges. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-52",
+      "kind": "malar",
+      "name": "Pikselskog",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a peaceful woodland with mushrooms. Authentic beautiful pixel art with intentional crisp square pixels, carefully clustered colors, classic detailed 16-bit game background artistry, no antialiasing, no smooth painting, no blur. Restrained cohesive palette, appealing high quality pixel sprites at edges. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-53",
+      "kind": "malar",
+      "name": "Pikselfjell",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: mountains and a lake. Authentic beautiful pixel art with intentional crisp square pixels, carefully clustered colors, classic detailed 16-bit game background artistry, no antialiasing, no smooth painting, no blur. Restrained cohesive palette, appealing high quality pixel sprites at edges. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-54",
+      "kind": "malar",
+      "name": "Pikselkyst",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a cheerful beach with seashells. Authentic beautiful pixel art with intentional crisp square pixels, carefully clustered colors, classic detailed 16-bit game background artistry, no antialiasing, no smooth painting, no blur. Restrained cohesive palette, appealing high quality pixel sprites at edges. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-55",
+      "kind": "malar",
+      "name": "Pikselrommet",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: planets and stars in outer space. Authentic beautiful pixel art with intentional crisp square pixels, carefully clustered colors, classic detailed 16-bit game background artistry, no antialiasing, no smooth painting, no blur. Restrained cohesive palette, appealing high quality pixel sprites at edges. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-56",
+      "kind": "malar",
+      "name": "Pikselbursdag",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a birthday celebration with balloons and bunting. Authentic beautiful pixel art with intentional crisp square pixels, carefully clustered colors, classic detailed 16-bit game background artistry, no antialiasing, no smooth painting, no blur. Restrained cohesive palette, appealing high quality pixel sprites at edges. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-57",
+      "kind": "malar",
+      "name": "Pikselhage",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a vegetable and flower garden. Authentic beautiful pixel art with intentional crisp square pixels, carefully clustered colors, classic detailed 16-bit game background artistry, no antialiasing, no smooth painting, no blur. Restrained cohesive palette, appealing high quality pixel sprites at edges. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-58",
+      "kind": "malar",
+      "name": "Pikselvinter",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a winter woodland with snowflakes. Authentic beautiful pixel art with intentional crisp square pixels, carefully clustered colors, classic detailed 16-bit game background artistry, no antialiasing, no smooth painting, no blur. Restrained cohesive palette, appealing high quality pixel sprites at edges. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-59",
+      "kind": "malar",
+      "name": "Pikseleventyr",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a friendly fairytale woodland with tiny cottages. Authentic beautiful pixel art with intentional crisp square pixels, carefully clustered colors, classic detailed 16-bit game background artistry, no antialiasing, no smooth painting, no blur. Restrained cohesive palette, appealing high quality pixel sprites at edges. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-60",
+      "kind": "malar",
+      "name": "Pikselby",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a colorful friendly small town. Authentic beautiful pixel art with intentional crisp square pixels, carefully clustered colors, classic detailed 16-bit game background artistry, no antialiasing, no smooth painting, no blur. Restrained cohesive palette, appealing high quality pixel sprites at edges. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-61",
+      "kind": "malar",
+      "name": "Den løynde hagen",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a secret flower garden with a friendly robin and butterflies. Beautiful contemporary children's picture-book illustration, expressive friendly characters, sophisticated hand-painted gouache with pencil detail and tactile paper texture, warm thoughtful art direction, charming and suitable for primary school children rather than babies. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-62",
+      "kind": "malar",
+      "name": "Skogsvenene",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a friendly fox rabbit and hedgehog woodland gathering. Beautiful contemporary children's picture-book illustration, expressive friendly characters, sophisticated hand-painted gouache with pencil detail and tactile paper texture, warm thoughtful art direction, charming and suitable for primary school children rather than babies. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-63",
+      "kind": "malar",
+      "name": "Drakefest",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: two friendly little dragons with colorful bunting. Beautiful contemporary children's picture-book illustration, expressive friendly characters, sophisticated hand-painted gouache with pencil detail and tactile paper texture, warm thoughtful art direction, charming and suitable for primary school children rather than babies. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-64",
+      "kind": "malar",
+      "name": "Havvenene",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a friendly whale seahorse and sea turtle undersea scene. Beautiful contemporary children's picture-book illustration, expressive friendly characters, sophisticated hand-painted gouache with pencil detail and tactile paper texture, warm thoughtful art direction, charming and suitable for primary school children rather than babies. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-65",
+      "kind": "malar",
+      "name": "Måneferda",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a gentle little moon journey with a rabbit astronaut and stars. Beautiful contemporary children's picture-book illustration, expressive friendly characters, sophisticated hand-painted gouache with pencil detail and tactile paper texture, warm thoughtful art direction, charming and suitable for primary school children rather than babies. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-66",
+      "kind": "malar",
+      "name": "Bursdag i hagen",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a birthday picnic with charming woodland animals and balloons. Beautiful contemporary children's picture-book illustration, expressive friendly characters, sophisticated hand-painted gouache with pencil detail and tactile paper texture, warm thoughtful art direction, charming and suitable for primary school children rather than babies. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-67",
+      "kind": "malar",
+      "name": "Livet ved tjørna",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a pond with friendly frogs ducklings and water lilies. Beautiful contemporary children's picture-book illustration, expressive friendly characters, sophisticated hand-painted gouache with pencil detail and tactile paper texture, warm thoughtful art direction, charming and suitable for primary school children rather than babies. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-68",
+      "kind": "malar",
+      "name": "Blomebyen",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a whimsical town of flower houses with cheerful birds. Beautiful contemporary children's picture-book illustration, expressive friendly characters, sophisticated hand-painted gouache with pencil detail and tactile paper texture, warm thoughtful art direction, charming and suitable for primary school children rather than babies. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-69",
+      "kind": "malar",
+      "name": "Vintereventyret",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a cozy winter woodland with friendly animals and a snowman. Beautiful contemporary children's picture-book illustration, expressive friendly characters, sophisticated hand-painted gouache with pencil detail and tactile paper texture, warm thoughtful art direction, charming and suitable for primary school children rather than babies. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-70",
+      "kind": "malar",
+      "name": "På oppdagingsferd",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: an exploration adventure with binoculars a map without writing and a small backpack. Beautiful contemporary children's picture-book illustration, expressive friendly characters, sophisticated hand-painted gouache with pencil detail and tactile paper texture, warm thoughtful art direction, charming and suitable for primary school children rather than babies. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-71",
+      "kind": "malar",
+      "name": "Fargeblyantar",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: colorful pencils crayons and an eraser arranged around edges. Beautiful polished school-themed gouache and cut-paper collage illustration for primary school ages 6–12, lively clear colors, rich tactile craftsmanship, friendly and thoughtfully composed. Objects must be recognizable, no corporate clipart or generic SVG look. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-72",
+      "kind": "malar",
+      "name": "Leseglede",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: open books and book stacks with friendly paper birds. Beautiful polished school-themed gouache and cut-paper collage illustration for primary school ages 6–12, lively clear colors, rich tactile craftsmanship, friendly and thoughtfully composed. Objects must be recognizable, no corporate clipart or generic SVG look. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-73",
+      "kind": "malar",
+      "name": "Rekneglede",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: beautiful colorful wooden geometric blocks an abacus and counting beads. Beautiful polished school-themed gouache and cut-paper collage illustration for primary school ages 6–12, lively clear colors, rich tactile craftsmanship, friendly and thoughtfully composed. Objects must be recognizable, no corporate clipart or generic SVG look. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-74",
+      "kind": "malar",
+      "name": "Undrande forskarar",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: magnifying glass simple microscope leaves crystals and a friendly little model solar system. Beautiful polished school-themed gouache and cut-paper collage illustration for primary school ages 6–12, lively clear colors, rich tactile craftsmanship, friendly and thoughtfully composed. Objects must be recognizable, no corporate clipart or generic SVG look. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-75",
+      "kind": "malar",
+      "name": "Musikkglede",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: small musical instruments including a recorder xylophone and hand drum. Beautiful polished school-themed gouache and cut-paper collage illustration for primary school ages 6–12, lively clear colors, rich tactile craftsmanship, friendly and thoughtfully composed. Objects must be recognizable, no corporate clipart or generic SVG look. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-76",
+      "kind": "malar",
+      "name": "Skulehagen",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: school garden with carrots sunflowers watering can and small seedling pots. Beautiful polished school-themed gouache and cut-paper collage illustration for primary school ages 6–12, lively clear colors, rich tactile craftsmanship, friendly and thoughtfully composed. Objects must be recognizable, no corporate clipart or generic SVG look. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-77",
+      "kind": "malar",
+      "name": "Skulegarden",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a welcoming school playground with a swing hopscotch shapes without numbers a ball and trees. Beautiful polished school-themed gouache and cut-paper collage illustration for primary school ages 6–12, lively clear colors, rich tactile craftsmanship, friendly and thoughtfully composed. Objects must be recognizable, no corporate clipart or generic SVG look. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-78",
+      "kind": "malar",
+      "name": "Kunstverkstaden",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: paintbrushes color palette paper scraps glue scissors and playful paint marks. Beautiful polished school-themed gouache and cut-paper collage illustration for primary school ages 6–12, lively clear colors, rich tactile craftsmanship, friendly and thoughtfully composed. Objects must be recognizable, no corporate clipart or generic SVG look. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-79",
+      "kind": "malar",
+      "name": "På skuletur",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a cheerful school nature outing with boots backpacks compass and leaves. Beautiful polished school-themed gouache and cut-paper collage illustration for primary school ages 6–12, lively clear colors, rich tactile craftsmanship, friendly and thoughtfully composed. Objects must be recognizable, no corporate clipart or generic SVG look. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-80",
+      "kind": "malar",
+      "name": "Klassen vår",
+      "prompt": "Use case: illustration-story. ONE premium PORTRAIT background template for a primary school photo collage. Subject: a cheerful welcoming classroom with colorful chairs books paper bunting pencils and potted plants. Beautiful polished school-themed gouache and cut-paper collage illustration for primary school ages 6–12, lively clear colors, rich tactile craftsmanship, friendly and thoughtfully composed. Objects must be recognizable, no corporate clipart or generic SVG look. Important composition: keep the central 70% of the page very light ivory and largely empty for users' own photos and text. All illustrated decoration concentrated around the outer perimeter, with lovely corners and edge details. Full bleed printable portrait artwork. School appropriate and appealing to children. No text, lettering, numbers, logos, watermark, photo placeholders or grid."
+    },
+    {
+      "id": "mala-81",
+      "kind": "malar",
+      "name": "Mjuk korall",
+      "prompt": "Use case: stylized-concept. ONE sophisticated entirely abstract NONFIGURATIVE portrait background for a primary-school photo collage. Palette and pattern: soft coral, cream and dusty rose; broad gently curved color fields. Beautiful harmonious colors, simple polished graphic composition with subtle tactile matte paper finish. Strictly NO recognizable objects, plants, landscapes, people, animals, symbols, icons, lettering or representational shapes. Keep the central 70% quiet, very light and mostly empty for real photographs and editable text; use the abstract forms mostly at the outer edges. Full bleed, refined simple patterns, generous negative space. No text, numbers, logos, watermark, photo slots or grid for photographs."
+    },
+    {
+      "id": "mala-82",
+      "kind": "malar",
+      "name": "Havblå rytme",
+      "prompt": "Use case: stylized-concept. ONE sophisticated entirely abstract NONFIGURATIVE portrait background for a primary-school photo collage. Palette and pattern: sea blue, ivory and muted turquoise; simple alternating flowing bands. Beautiful harmonious colors, simple polished graphic composition with subtle tactile matte paper finish. Strictly NO recognizable objects, plants, landscapes, people, animals, symbols, icons, lettering or representational shapes. Keep the central 70% quiet, very light and mostly empty for real photographs and editable text; use the abstract forms mostly at the outer edges. Full bleed, refined simple patterns, generous negative space. No text, numbers, logos, watermark, photo slots or grid for photographs."
+    },
+    {
+      "id": "mala-83",
+      "kind": "malar",
+      "name": "Solgult papir",
+      "prompt": "Use case: stylized-concept. ONE sophisticated entirely abstract NONFIGURATIVE portrait background for a primary-school photo collage. Palette and pattern: warm yellow, apricot and cream; a sparse rhythm of overlapping paper-like circles and arcs. Beautiful harmonious colors, simple polished graphic composition with subtle tactile matte paper finish. Strictly NO recognizable objects, plants, landscapes, people, animals, symbols, icons, lettering or representational shapes. Keep the central 70% quiet, very light and mostly empty for real photographs and editable text; use the abstract forms mostly at the outer edges. Full bleed, refined simple patterns, generous negative space. No text, numbers, logos, watermark, photo slots or grid for photographs."
+    },
+    {
+      "id": "mala-84",
+      "kind": "malar",
+      "name": "Lavendelro",
+      "prompt": "Use case: stylized-concept. ONE sophisticated entirely abstract NONFIGURATIVE portrait background for a primary-school photo collage. Palette and pattern: lavender, pale lilac and soft cream; elegant large translucent geometric planes. Beautiful harmonious colors, simple polished graphic composition with subtle tactile matte paper finish. Strictly NO recognizable objects, plants, landscapes, people, animals, symbols, icons, lettering or representational shapes. Keep the central 70% quiet, very light and mostly empty for real photographs and editable text; use the abstract forms mostly at the outer edges. Full bleed, refined simple patterns, generous negative space. No text, numbers, logos, watermark, photo slots or grid for photographs."
+    },
+    {
+      "id": "mala-85",
+      "kind": "malar",
+      "name": "Grøn balanse",
+      "prompt": "Use case: stylized-concept. ONE sophisticated entirely abstract NONFIGURATIVE portrait background for a primary-school photo collage. Palette and pattern: sage green, pale olive and ivory; restrained organic rounded shapes. Beautiful harmonious colors, simple polished graphic composition with subtle tactile matte paper finish. Strictly NO recognizable objects, plants, landscapes, people, animals, symbols, icons, lettering or representational shapes. Keep the central 70% quiet, very light and mostly empty for real photographs and editable text; use the abstract forms mostly at the outer edges. Full bleed, refined simple patterns, generous negative space. No text, numbers, logos, watermark, photo slots or grid for photographs."
+    },
+    {
+      "id": "mala-86",
+      "kind": "malar",
+      "name": "Fargeleik",
+      "prompt": "Use case: stylized-concept. ONE sophisticated entirely abstract NONFIGURATIVE portrait background for a primary-school photo collage. Palette and pattern: teal, coral, honey yellow and cream; playful simple large geometric blocks. Beautiful harmonious colors, simple polished graphic composition with subtle tactile matte paper finish. Strictly NO recognizable objects, plants, landscapes, people, animals, symbols, icons, lettering or representational shapes. Keep the central 70% quiet, very light and mostly empty for real photographs and editable text; use the abstract forms mostly at the outer edges. Full bleed, refined simple patterns, generous negative space. No text, numbers, logos, watermark, photo slots or grid for photographs."
+    },
+    {
+      "id": "mala-87",
+      "kind": "malar",
+      "name": "Rosa bogar",
+      "prompt": "Use case: stylized-concept. ONE sophisticated entirely abstract NONFIGURATIVE portrait background for a primary-school photo collage. Palette and pattern: dusty pink, terracotta and pale peach; clean concentric arches concentrated at edges. Beautiful harmonious colors, simple polished graphic composition with subtle tactile matte paper finish. Strictly NO recognizable objects, plants, landscapes, people, animals, symbols, icons, lettering or representational shapes. Keep the central 70% quiet, very light and mostly empty for real photographs and editable text; use the abstract forms mostly at the outer edges. Full bleed, refined simple patterns, generous negative space. No text, numbers, logos, watermark, photo slots or grid for photographs."
+    },
+    {
+      "id": "mala-88",
+      "kind": "malar",
+      "name": "Blått rutenett",
+      "prompt": "Use case: stylized-concept. ONE sophisticated entirely abstract NONFIGURATIVE portrait background for a primary-school photo collage. Palette and pattern: powder blue, indigo accents and cream; subtle irregular large checker and stripe patterns. Beautiful harmonious colors, simple polished graphic composition with subtle tactile matte paper finish. Strictly NO recognizable objects, plants, landscapes, people, animals, symbols, icons, lettering or representational shapes. Keep the central 70% quiet, very light and mostly empty for real photographs and editable text; use the abstract forms mostly at the outer edges. Full bleed, refined simple patterns, generous negative space. No text, numbers, logos, watermark, photo slots or grid for photographs."
+    },
+    {
+      "id": "mala-89",
+      "kind": "malar",
+      "name": "Varm jord",
+      "prompt": "Use case: stylized-concept. ONE sophisticated entirely abstract NONFIGURATIVE portrait background for a primary-school photo collage. Palette and pattern: ochre, clay, sand and warm cream; simple minimal layered asymmetric planes. Beautiful harmonious colors, simple polished graphic composition with subtle tactile matte paper finish. Strictly NO recognizable objects, plants, landscapes, people, animals, symbols, icons, lettering or representational shapes. Keep the central 70% quiet, very light and mostly empty for real photographs and editable text; use the abstract forms mostly at the outer edges. Full bleed, refined simple patterns, generous negative space. No text, numbers, logos, watermark, photo slots or grid for photographs."
+    },
+    {
+      "id": "mala-90",
+      "kind": "malar",
+      "name": "Pastellbølgjer",
+      "prompt": "Use case: stylized-concept. ONE sophisticated entirely abstract NONFIGURATIVE portrait background for a primary-school photo collage. Palette and pattern: mint, pale peach, lilac and ivory; broad graceful undulating stripes. Beautiful harmonious colors, simple polished graphic composition with subtle tactile matte paper finish. Strictly NO recognizable objects, plants, landscapes, people, animals, symbols, icons, lettering or representational shapes. Keep the central 70% quiet, very light and mostly empty for real photographs and editable text; use the abstract forms mostly at the outer edges. Full bleed, refined simple patterns, generous negative space. No text, numbers, logos, watermark, photo slots or grid for photographs."
+    },
+    {
+      "id": "pynt-001",
+      "kind": "pynt",
+      "name": "Eikeblad",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: eikeblad. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-002",
+      "kind": "pynt",
+      "name": "Bjørkeblad",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: bjørkeblad. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-003",
+      "kind": "pynt",
+      "name": "Lønneblad",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: lønneblad. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-004",
+      "kind": "pynt",
+      "name": "Bregneblad",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: bregneblad. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-005",
+      "kind": "pynt",
+      "name": "Grankvist",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: grankvist. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-006",
+      "kind": "pynt",
+      "name": "Furukongle",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: furukongle. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-007",
+      "kind": "pynt",
+      "name": "Eikenøtt",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: eikenøtt. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-008",
+      "kind": "pynt",
+      "name": "Hasselnøtt",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: hasselnøtt. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-009",
+      "kind": "pynt",
+      "name": "Rognebærkvist",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: rognebærkvist. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-010",
+      "kind": "pynt",
+      "name": "Blåbærkvist",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: blåbærkvist. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-011",
+      "kind": "pynt",
+      "name": "Tyttebærkvist",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: tyttebærkvist. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-012",
+      "kind": "pynt",
+      "name": "Markjordbær",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: markjordbær. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-013",
+      "kind": "pynt",
+      "name": "Raud flugesopp",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: raud flugesopp. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-014",
+      "kind": "pynt",
+      "name": "Kantarell",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: kantarell. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-015",
+      "kind": "pynt",
+      "name": "Mosekledd stein",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: mosekledd stein. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-016",
+      "kind": "pynt",
+      "name": "Liten trestubbe",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: liten trestubbe. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-017",
+      "kind": "pynt",
+      "name": "Kvitveis",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: kvitveis. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-018",
+      "kind": "pynt",
+      "name": "Prestekrage",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: prestekrage. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-019",
+      "kind": "pynt",
+      "name": "Solsikke",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: solsikke. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-020",
+      "kind": "pynt",
+      "name": "Tulipan",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: tulipan. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-021",
+      "kind": "pynt",
+      "name": "Rose",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: rose. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-022",
+      "kind": "pynt",
+      "name": "Lavendelkvist",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: lavendelkvist. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-023",
+      "kind": "pynt",
+      "name": "Løvetann",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: løvetann. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-024",
+      "kind": "pynt",
+      "name": "Blomekrans",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: blomekrans. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-025",
+      "kind": "pynt",
+      "name": "Bukett med engblomar",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: bukett med engblomar. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-026",
+      "kind": "pynt",
+      "name": "Sommarfugl",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: sommarfugl. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-027",
+      "kind": "pynt",
+      "name": "Marihøne",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: marihøne. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-028",
+      "kind": "pynt",
+      "name": "Humle",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: humle. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-029",
+      "kind": "pynt",
+      "name": "Libelle",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: libelle. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-030",
+      "kind": "pynt",
+      "name": "Snigel",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: snigel. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-031",
+      "kind": "pynt",
+      "name": "Raudrev",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: raudrev. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-032",
+      "kind": "pynt",
+      "name": "Piggsvin",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: piggsvin. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-033",
+      "kind": "pynt",
+      "name": "Ekorn",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: ekorn. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-034",
+      "kind": "pynt",
+      "name": "Hare",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: hare. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-035",
+      "kind": "pynt",
+      "name": "Ugle",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: ugle. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-036",
+      "kind": "pynt",
+      "name": "Raudstrupe",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: raudstrupe. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-037",
+      "kind": "pynt",
+      "name": "Kjøtmeis",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: kjøtmeis. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-038",
+      "kind": "pynt",
+      "name": "Andunge",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: andunge. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-039",
+      "kind": "pynt",
+      "name": "Frosk",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: frosk. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-040",
+      "kind": "pynt",
+      "name": "Rådyrkalv",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: rådyrkalv. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-041",
+      "kind": "pynt",
+      "name": "Sol",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: sol. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-042",
+      "kind": "pynt",
+      "name": "Måne",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: måne. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-043",
+      "kind": "pynt",
+      "name": "Lita sky",
+      "prompt": "Use case: illustration-story. ONE isolated decorative cutout for a children's primary-school photo collage. Subject: one small fluffy white WEATHER CLOUD with pale blue watercolor shading, a cloud in the sky; no person, no fairy, no faces. Beautiful refined watercolor and gouache illustration with crisp readable silhouette and warm tactile pigments. Entire single object visible centered with generous clear margin. Genuinely transparent background with alpha. No paper rectangle, no checkerboard, no ground shadow outside the object, no text, logo or watermark."
+    },
+    {
+      "id": "pynt-044",
+      "kind": "pynt",
+      "name": "Regnboge",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: regnboge. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-045",
+      "kind": "pynt",
+      "name": "Regndrope",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: regndrope. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-046",
+      "kind": "pynt",
+      "name": "Snøkrystall",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: snøkrystall. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-047",
+      "kind": "pynt",
+      "name": "Stjerneskot",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: stjerneskot. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-048",
+      "kind": "pynt",
+      "name": "Gullstjerne",
+      "prompt": "Use case: illustration-story. ONE isolated decorative cutout for a children's primary-school photo collage. Subject: one simple shiny golden FIVE-POINTED STAR ornament, a geometric star; no flowers or plants. Beautiful refined watercolor and gouache illustration with crisp readable silhouette and warm tactile pigments. Entire single object visible centered with generous clear margin. Genuinely transparent background with alpha. No paper rectangle, no checkerboard, no ground shadow outside the object, no text, logo or watermark."
+    },
+    {
+      "id": "pynt-049",
+      "kind": "pynt",
+      "name": "Liten planet med ring",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: liten planet med ring. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-050",
+      "kind": "pynt",
+      "name": "Jordklode utan tekst",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: jordklode utan tekst. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-051",
+      "kind": "pynt",
+      "name": "Skjel",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: skjel. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-052",
+      "kind": "pynt",
+      "name": "Sjøstjerne",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: sjøstjerne. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-053",
+      "kind": "pynt",
+      "name": "Sjøhest",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: sjøhest. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-054",
+      "kind": "pynt",
+      "name": "Krabbe",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: krabbe. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-055",
+      "kind": "pynt",
+      "name": "Liten kval",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: liten kval. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-056",
+      "kind": "pynt",
+      "name": "Seglbåt",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: seglbåt. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-057",
+      "kind": "pynt",
+      "name": "Anker",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: anker. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-058",
+      "kind": "pynt",
+      "name": "Fyrtårn",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: fyrtårn. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-059",
+      "kind": "pynt",
+      "name": "Drivvedkvist",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: drivvedkvist. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-060",
+      "kind": "pynt",
+      "name": "Bølgjesprut",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: bølgjesprut. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-061",
+      "kind": "pynt",
+      "name": "Raud ballong",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: raud ballong. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-062",
+      "kind": "pynt",
+      "name": "Gul ballong",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: gul ballong. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-063",
+      "kind": "pynt",
+      "name": "Ballongbukett",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: ballongbukett. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-064",
+      "kind": "pynt",
+      "name": "Vimpelrekkje",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: vimpelrekkje. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-065",
+      "kind": "pynt",
+      "name": "Gåvepakke",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: gåvepakke. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-066",
+      "kind": "pynt",
+      "name": "Bursdagskake utan tal",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: bursdagskake utan tal. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-067",
+      "kind": "pynt",
+      "name": "Festhatt",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: festhatt. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-068",
+      "kind": "pynt",
+      "name": "Konfettiklynge",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: konfettiklynge. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-069",
+      "kind": "pynt",
+      "name": "Papirvifte",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: papirvifte. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-070",
+      "kind": "pynt",
+      "name": "Blomeforma rosett",
+      "prompt": "Use case: illustration-story. ONE isolated decorative cutout for a children's primary-school photo collage. Subject: one beautiful folded PAPER PARTY ROSETTE, flower-shaped accordion paper medallion with two short ribbon tails, coral sage and honey colors; no plant or succulent. Beautiful refined watercolor and gouache illustration with crisp readable silhouette and warm tactile pigments. Entire single object visible centered with generous clear margin. Genuinely transparent background with alpha. No paper rectangle, no checkerboard, no ground shadow outside the object, no text, logo or watermark."
+    },
+    {
+      "id": "pynt-071",
+      "kind": "pynt",
+      "name": "Open bok utan skrift",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: open bok utan skrift. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-072",
+      "kind": "pynt",
+      "name": "Bokstabel utan skrift",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: bokstabel utan skrift. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-073",
+      "kind": "pynt",
+      "name": "Blyant",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: blyant. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-074",
+      "kind": "pynt",
+      "name": "Fargeblyantbukett",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: fargeblyantbukett. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-075",
+      "kind": "pynt",
+      "name": "Pensel",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: pensel. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-076",
+      "kind": "pynt",
+      "name": "Målarpalett",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: målarpalett. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-077",
+      "kind": "pynt",
+      "name": "Saks",
+      "prompt": "Use case: illustration-story. ONE isolated decorative cutout for a children's primary-school photo collage. Subject: one pair of child-safe blunt-tipped SCHOOL SCISSORS with blue handles and silver blades; no bag, no pouch, no fabric. Beautiful refined watercolor and gouache illustration with crisp readable silhouette and warm tactile pigments. Entire single object visible centered with generous clear margin. Genuinely transparent background with alpha. No paper rectangle, no checkerboard, no ground shadow outside the object, no text, logo or watermark."
+    },
+    {
+      "id": "pynt-078",
+      "kind": "pynt",
+      "name": "Limstift utan merke",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: limstift utan merke. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-079",
+      "kind": "pynt",
+      "name": "Linjal utan skrift",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: linjal utan skrift. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-080",
+      "kind": "pynt",
+      "name": "Liten ryggsekk utan merke",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: liten ryggsekk utan merke. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-081",
+      "kind": "pynt",
+      "name": "Fotball",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: fotball. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-082",
+      "kind": "pynt",
+      "name": "Basketball",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: basketball. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-083",
+      "kind": "pynt",
+      "name": "Tennisball",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: tennisball. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-084",
+      "kind": "pynt",
+      "name": "Badmintonfjør",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: badmintonfjør. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-085",
+      "kind": "pynt",
+      "name": "Hoppetau",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: hoppetau. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-086",
+      "kind": "pynt",
+      "name": "Sparkesykkel",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: sparkesykkel. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-087",
+      "kind": "pynt",
+      "name": "Sykkel",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: sykkel. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-088",
+      "kind": "pynt",
+      "name": "Vott",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: vott. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-089",
+      "kind": "pynt",
+      "name": "Skjerf",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: skjerf. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-090",
+      "kind": "pynt",
+      "name": "Gummistøvel",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: gummistøvel. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-091",
+      "kind": "pynt",
+      "name": "Papirfly",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: papirfly. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-092",
+      "kind": "pynt",
+      "name": "Luftballong",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: luftballong. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-093",
+      "kind": "pynt",
+      "name": "Drake med hale",
+      "prompt": "Use case: illustration-story. ONE isolated decorative cutout for a children's primary-school photo collage. Subject: one colorful diamond-shaped PAPER KITE with a long ribbon-bow tail, red teal and gold panels; no duck, no bird, no animal. Beautiful refined watercolor and gouache illustration with crisp readable silhouette and warm tactile pigments. Entire single object visible centered with generous clear margin. Genuinely transparent background with alpha. No paper rectangle, no checkerboard, no ground shadow outside the object, no text, logo or watermark."
+    },
+    {
+      "id": "pynt-094",
+      "kind": "pynt",
+      "name": "Rakett",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: rakett. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-095",
+      "kind": "pynt",
+      "name": "Kikkert",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: kikkert. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-096",
+      "kind": "pynt",
+      "name": "Kompass utan skrift",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: kompass utan skrift. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-097",
+      "kind": "pynt",
+      "name": "Lita tekanne",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: lita tekanne. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-098",
+      "kind": "pynt",
+      "name": "Kopp med kakao",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: kopp med kakao. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-099",
+      "kind": "pynt",
+      "name": "Hjarte av tre",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: hjarte av tre. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    },
+    {
+      "id": "pynt-100",
+      "kind": "pynt",
+      "name": "Sløyfe av linband",
+      "prompt": "Use case: illustration-story. Asset: ONE isolated small decorative cutout for a school photo collage. Subject: sløyfe av linband. Beautiful refined hand-painted watercolor and gouache illustration, tactile pigments, warm natural colors, coherent premium children's nature scrapbook collection. Entire subject visible centered with clear margin, crisp readable silhouette at small size, no other objects except those integral to named subject. GENUINELY TRANSPARENT background with alpha, no paper square, no checkerboard painted into artwork, no ground or cast shadow outside object, no lettering, numbers, logos, watermark. One motif only, not a sheet."
+    }
+  ]
+}

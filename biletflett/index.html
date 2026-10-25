@@ -7,7 +7,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=20261025f">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
@@ -35,22 +35,57 @@
                 <button class="btn c-red" id="btn-clear"><span data-icon="trash-2"></span> Tøm</button>
             </div>
 
+            <p id="artwork-status" role="status"></p>
             <div class="app-layout">
-                <aside class="gallery" id="gallery" aria-label="Malar"></aside>
+                <aside class="vp-panel vp-panel--compact gallery" aria-label="Oppsett">
+                    <h2 class="vp-heading vp-heading--small">Bakgrunn</h2>
+                    <img id="current-background-preview" class="current-background-preview" alt="" width="100" height="150">
+                    <p id="current-background-name"></p>
+                    <button type="button" class="vp-button vp-button--tool" id="choose-background">Vel bakgrunn og stil</button>
+                    <h2 class="vp-heading vp-heading--small">Fotooppsett</h2>
+                    <label class="vp-field">Tal på bilete <select id="photo-count" class="vp-input" aria-label="Tal på bilete"></select></label>
+                    <label class="vp-field">Plassering <select id="photo-layout" class="vp-input" aria-label="Plassering av bilete"></select></label>
+                    <p class="vp-help">Byt oppsett utan å byte bakgrunn. Bilete som ikkje får plass, kjem fram att når du vel fleire felt.</p>
+                </aside>
 
-                <section class="stage">
+                <section class="stage" aria-label="Arbeidsflate">
                     <canvas id="collage-canvas" aria-label="Collage-lerret"></canvas>
                 </section>
 
                 <aside class="vp-panel vp-panel--compact panel">
                     <h2 class="vp-heading vp-heading--small vp-panel-heading"><span data-icon="type" data-icon-size="16"></span> Tekst</h2>
                     <div id="text-fields"></div>
+                    <details class="vp-accordion decor-picker">
+                        <summary>Pynt collagen</summary>
+                        <p>Vel mellom 100 måla detaljar. Du kan leggje til fleire av same slag.</p>
+                        <div id="decor-library" class="decor-library"></div>
+                    </details>
+                    <p id="decor-status" role="status" class="panel-hint"></p>
+                    <label class="vp-field">Pynt på lerretet
+                        <select id="placed-decor" class="vp-input" aria-label="Vel pynt på lerretet"></select>
+                    </label>
+                    <div id="decor-controls" class="decor-controls" hidden>
+                        <label class="vp-field">Vassrett plassering <input class="vp-input" id="decor-x" type="range" min="0" max="100" value="50"></label>
+                        <label class="vp-field">Loddrett plassering <input class="vp-input" id="decor-y" type="range" min="0" max="100" value="50"></label>
+                        <label class="vp-field">Storleik <input class="vp-input" id="decor-size" type="range" min="5" max="60" value="20"></label>
+                        <label class="vp-field">Vinkel <input class="vp-input" id="decor-rotation" type="range" min="-180" max="180" value="0"></label>
+                        <button type="button" class="vp-button vp-button--danger vp-button--compact" id="decor-remove">Fjern vald pynt</button>
+                    </div>
                     <p class="panel-tip">Klikk eit tomt felt for å leggje til bilete der. Hald peikaren over eit bilete for å zoome, skjere eller fjerne. Dra for å flytte biletet i feltet.</p>
                 </aside>
             </div>
 
         </main>
     </div>
+
+    <dialog class="vp-dialog background-dialog" id="background-dialog" aria-labelledby="background-dialog-title">
+        <div class="vp-dialog-head">
+            <h2 id="background-dialog-title">Vel bakgrunn og stil</h2>
+            <button type="button" class="vp-button vp-button--quiet vp-button--compact" id="close-background">Lukk</button>
+        </div>
+        <p>Vel mellom 90 bakgrunnar. Bruk stil, tema eller søk for å finne eit motiv. Fotooppsettet vel du ved lerretet.</p>
+        <div id="background-gallery"></div>
+    </dialog>
 
     <!-- Skjulte filinndata -->
     <input type="file" id="file-input" accept="image/*" multiple hidden>
@@ -88,7 +123,7 @@
                     <li><strong>Alt skjer lokalt:</strong> Bileta blir handsama berre i nettlesaren din. Ingenting blir sendt til nokon tenar.</li>
                     <li><strong>Ingen lagring:</strong> Bileta blir ikkje lagra. Når du lukkar fana, er alt borte.</li>
                     <li><strong>Ingen cookies eller sporing.</strong></li>
-                    <li><strong>Fungerer offline</strong> når sida først er lasta.</li>
+                    <li><strong>Fungerer offline</strong> med malar og pynt som alt er lasta inn i nettlesaren.</li>
                 </ul>
                 <p>Verktøyet brukar HTML5 Canvas og FileReader for å handsame bilete lokalt. Bileta forlèt aldri eininga di.</p>
             </div>
@@ -97,16 +132,23 @@
 
     <!-- Skript -->
     <script src="../js/vyrdepil-icons.js"></script>
+    <script src="../js/vyrdepil-util.js?v=1.2"></script>
     <script src="js/icons.js"></script>
     <script src="js/fonts.js"></script>
     <script src="js/palette.js"></script>
     <script src="js/glyphs.js"></script>
     <script src="js/backdrops.js"></script>
-    <script src="js/templates.js"></script>
-    <script src="js/decor.js"></script>
-    <script src="js/collage.js"></script>
-    <script src="js/app.js"></script>
-    <script src="../js/vyrdepil-util.js?v=1.2"></script>
+    <script src="js/assets.js?v=20261025c"></script>
+    <script src="js/artwork.js?v=20261025c"></script>
+    <script src="js/templates.js?v=20261025c"></script>
+    <script src="js/decor.js?v=20261025c"></script>
+    <script src="js/stickers.js?v=20261025c"></script>
+    <script src="js/layouts.js?v=20261025c"></script>
+    <script src="js/collage-input.js?v=20261025c"></script>
+    <script src="js/collage-controls.js?v=20261025c"></script>
+    <script src="js/collage.js?v=20261025e"></script>
+    <script src="js/gallery.js?v=20261025c"></script>
+    <script src="js/app.js?v=20261025c"></script>
 <script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=6"></script>
 <script src="../js/vyrdepil-menu.js"></script>

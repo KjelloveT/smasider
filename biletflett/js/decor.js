@@ -71,6 +71,11 @@ const Decor = (() => {
        blir teikna i rekkjefølgje oppå grunnfyllet, men under all pynt. */
     function background(ctx, W, H, bg, palette) {
         bg = bg ? resolved(bg, palette) : { type: 'solid', color: palette.bg };
+        if (bg.type === 'image') {
+            ctx.fillStyle = '#fff9e9'; ctx.fillRect(0, 0, W, H);
+            Artwork.draw(ctx, W, H, bg.src, bg.pixelated);
+            return;
+        }
         fillBase(ctx, W, H, bg, palette);
         (bg.layers || []).forEach(layer => {
             if (typeof Backdrops !== 'undefined' && Backdrops.has(layer.type)) {
