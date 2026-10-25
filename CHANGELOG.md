@@ -3,6 +3,11 @@
 Alle merkbare endringar i prosjektet blir dokumenterte her.
 Format: [Keep a Changelog](https://keepachangelog.com/), datoar i ISO 8601.
 
+## [2.4.1] — 2026-10-25
+
+### Fiksa
+- **Oppdaterte logoar i Vitjingsruta.** Logoveljaren og QR-kodane bruker dei gjeldande applogoane frå det felles designregisteret.
+
 ## [2.4] — 2026-10-24
 
 ### Lagt til

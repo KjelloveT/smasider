@@ -2,6 +2,18 @@
   "_note": "Kort oppsummering av CHANGELOG.md, til sida endringar.html (js/endringar.js). Éi linje per punkt i loggen. t = type (nytt, endra, fiksa). merke: verktoy = nytt verktøy sleppt til sida, eksperiment = ikkje publisert på framsida.",
   "versjonar": [
     {
+      "versjon": "2.4.1",
+      "dato": "2026-10-25",
+      "samandrag": "Vitjingsruta bruker dei gjeldande applogoane i QR-kodar.",
+      "punkt": [
+        {
+          "t": "fiksa",
+          "kva": "Vitjingsruta",
+          "tekst": "Logoveljaren og QR-kodane bruker dei gjeldande applogoane frå det felles designregisteret."
+        }
+      ]
+    },
+    {
       "versjon": "2.4",
       "dato": "2026-10-24",
       "samandrag": "UvissaOrd: Dagens utfordring, arkivkalender, prøverunde og visuell hintbutikk.",
