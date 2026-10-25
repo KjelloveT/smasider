@@ -444,10 +444,16 @@
 
   async function buildAppGrid() {
     let apps = [];
+    let logos = {};
     try {
-      const res = await fetch('../json/apps.json');
+      const [res, registry] = await Promise.all([
+        fetch('../json/apps.json'),
+        VyrdepilDesign.loadRegistry()
+      ]);
+      if (!res.ok) throw new Error('Appkatalogen kunne ikkje lastast');
       const data = await res.json();
-      apps = (data.apps || []).filter(a => a.img && !a.hidden);
+      logos = registry.logo?.files || {};
+      apps = (data.apps || []).filter(a => (logos[a.id] || a.img) && !a.hidden);
     } catch (err) {
       els.appGrid.appendChild(U.el('p', 'vr-muted vr-tiny', 'Fekk ikkje lasta lista over sider.'));
       return;
@@ -459,7 +465,7 @@
       btn.setAttribute('role', 'radio');
       btn.setAttribute('aria-checked', app.id === state.design.logo.app ? 'true' : 'false');
       const img = U.el('img');
-      img.src = '../' + String(app.img).replace(/^\.?\//, '');
+      img.src = '../' + String(logos[app.id] || app.img).replace(/^\.?\//, '');
       img.alt = '';
       img.loading = 'lazy';
       btn.appendChild(img);
