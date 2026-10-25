@@ -20,6 +20,8 @@ window.OrdvettView = (function () {
   }
   function show(screen, focusId) {
     ['setup', 'game', 'results'].forEach(id => { byId(id).hidden = id !== screen; });
+    document.querySelector('.ov-main').classList.toggle('vp-panel', screen !== 'setup');
+    document.querySelector('.ov-main > .vp-decor').hidden = screen === 'setup';
     VyrdepilAppShell?.setGameActive(screen !== 'setup');
     if (focusId) byId(focusId).focus();
   }
@@ -70,10 +72,7 @@ window.OrdvettView = (function () {
     byId('letters').setAttribute('aria-label', lengthKnown ? `Ordet har ${Array.from(word.answer).length} bokstavar` : 'Kjøpte bokstavspor. Ordlengda er skjult.');
     const letters = byId('letters'); letters.replaceChildren();
     const positions = lengthKnown ? Array.from(word.answer, (_, index) => index) : [...current.revealed, ...current.misses].sort((a, b) => a - b);
-    if (!positions.length) {
-      const sealed = el('span', 'ov-sealed-word'); sealed.setAttribute('aria-hidden', 'true');
-      sealed.append(hintImage('length'), el('strong', '', '?')); letters.append(sealed);
-    }
+    letters.hidden = positions.length === 0;
     positions.forEach(index => {
       const revealed = done || current.revealed.has(index), letter = Array.from(word.answer)[index];
       const tile = el('span', 'ov-letter vp-panel vp-panel--inset');

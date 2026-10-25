@@ -38,6 +38,8 @@ Lagringsformat 4 tek vare på inntil 900 rundar og resultat, nok til alle 846 se
 
 Spelet lastar ferdigbygde data som eit lokalt skript. Ingen API-kall blir gjorde av spelet. Appen brukar den felles Vyrdepil-ramma, som lastar lokale katalog- og designfiler over HTTP; ei lokal utgåve skal difor køyrast med `serve.ps1`.
 
+Førstegongstipset blir vist ved opning når det ikkje finst lagra rundar eller resultat, også frå eldre format. Det brukar berre desse eksisterande dataa som vilkår og lagrar ikkje eit eige visingsflagg. Prøverunden og lukking av tipset endrar ikkje dagsframgangen.
+
 ## Kontroll før levering
 
 Prøv alle hint, tomme og gjentekne svar, alternative skrivemåtar, fasit, femordsresultat, dei tre nivåa og avbroten omgang. Kontroller at lageret varer over alle fem orda og etter ny innlasting. Kontroller tastatur og Escape i prøverunden og nummerkjøpet, mobil, nettbrett og stor skjerm. Spelet skal ikkje gje konsollfeil eller kontakte eksterne tenester under speling. Berre eit medvite klikk på kjeldelenkja opnar ordboka.

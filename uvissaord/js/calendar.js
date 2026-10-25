@@ -10,16 +10,14 @@ window.OrdvettCalendar = (function () {
     byId('archiveMonth').value = month; byId('archiveMonth').min = firstMonth; byId('archiveMonth').max = lastMonth;
     byId('nextMonth').disabled = month >= lastMonth;
     byId('previousMonth').disabled = month <= firstMonth;
-    const first = new Date(month + '-01T12:00:00Z');
-    const offset = (first.getUTCDay() + 6) % 7;
-    const next = new Date(first); next.setUTCMonth(next.getUTCMonth() + 1);
-    const count = Math.round((next - first) / 86400000);
-    const dates = Array.from({ length: count }, (_, index) => `${month}-${String(index + 1).padStart(2, '0')}`);
+    byId('archiveNotice').hidden = month > firstMonth;
+    const dates = OrdvettSchedule.archiveDates(month, today);
+    const offset = dates.length ? (new Date(dates[0] + 'T12:00:00Z').getUTCDay() + 6) % 7 : 0;
     const keys = dates.map(date => OrdvettSchedule.inRange(date) ? OrdvettSchedule.LEVELS.map(level => OrdvettSchedule.daily(level.id, date).key) : []);
     const statuses = OrdvettStorage.dayStatuses(keys.flat());
     const cells = Array.from({ length: offset }, () => { const blank = Vy.el('span'); blank.setAttribute('aria-hidden', 'true'); return blank; });
     dates.forEach((date, index) => {
-      const button = Vy.el('button', 'vp-button vp-button--quiet ov-calendar-day', String(index + 1));
+      const button = Vy.el('button', 'vp-button vp-button--quiet ov-calendar-day', String(Number(date.slice(-2))));
       button.type = 'button'; button.disabled = date >= today || !OrdvettSchedule.inRange(date);
       button.setAttribute('aria-pressed', String(date === selected));
       const dayStates = keys[index].map(key => statuses[key]);

@@ -21,6 +21,16 @@ window.OrdvettSchedule = (function () {
   function inRange(key) { return isDate(key) && key >= START && key <= END; }
   function currentDate() { const today = dateKey(); return today < START ? START : today > END ? END : today; }
   function latestArchive(today = dateKey()) { return today <= START ? null : today > END ? END : previousDay(today); }
+  function archiveDates(month, today = dateKey()) {
+    if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(month)) return [];
+    const first = new Date(month + '-01T00:00:00Z'), next = new Date(first);
+    next.setUTCMonth(next.getUTCMonth() + 1);
+    const from = Math.max(first.getTime(), Date.parse(START));
+    const to = Math.min(next.getTime() - DAY, Date.parse(END), Date.parse(previousDay(today)));
+    const dates = [];
+    for (let day = from; day <= to; day += DAY) dates.push(new Date(day).toISOString().slice(0, 10));
+    return dates;
+  }
   function daily(level, key = currentDate()) {
     if (!inRange(key) || !LEVELS.some(item => item.id === level)) throw new Error('Utfordringa finst ikkje i denne ordbanken.');
     const ids = OrdvettDays.days[key]?.[level];
@@ -33,5 +43,5 @@ window.OrdvettSchedule = (function () {
     if (!inRange(key) || key >= today) throw new Error('Vel ein tidlegare dag i oppgåveperioden.');
     return { ...daily(level, key), mode: 'archive' };
   }
-  return Object.freeze({ START, END, LEVELS, dateKey, dateLabel, isDate, inRange, previousDay, currentDate, latestArchive, daily, archive });
+  return Object.freeze({ START, END, LEVELS, dateKey, dateLabel, isDate, inRange, previousDay, currentDate, latestArchive, archiveDates, daily, archive });
 })();

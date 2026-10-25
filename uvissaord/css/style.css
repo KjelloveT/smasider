@@ -9,6 +9,7 @@
 .ov-modes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .ov-day-heading { display: flex; gap: 18px; align-items: center; margin-block: 28px 20px; }
 .ov-day-heading h2, .ov-day-heading p { margin-bottom: 4px; }
+.ov-setup-header .ov-day-heading { margin-block: 16px 0; }
 .ov-calendar { display: grid; place-items: center; position: relative; flex: 0 0 64px; height: 70px; }
 .ov-calendar > span { position: absolute; inset: 3px 0; display: grid; place-items: center; }
 .ov-calendar .icon { width: 64px; height: 64px; stroke-width: 1.4; }
@@ -21,7 +22,7 @@
 .ov-step[data-state="solved"] { background: var(--vp-success); }
 .ov-step[data-state="revealed"] { background: var(--vp-stone); }
 .ov-levels { display: block; }
-.ov-level-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; }
+.ov-level-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 24px; }
 .ov-level-choice { display: flex; flex-direction: column; align-items: center; position: relative; gap: 4px; padding: 12px; text-align: center; }
 .ov-level-choice input { position: absolute; top: 12px; left: 12px; }
 .ov-level-choice img { width: 80px; height: 80px; object-fit: contain; }
@@ -123,8 +124,6 @@
 .ov-coin-face--back { transform: rotateY(180deg); }
 .ov-flying-coin .ov-coin-face--front { animation: ov-coin-front 650ms linear both; }
 .ov-flying-coin .ov-coin-face--back { animation: ov-coin-back 650ms linear both; }
-.ov-sealed-word { display: flex; align-items: center; gap: 12px; min-height: 80px; }
-.ov-sealed-word strong { font-size: 2.5rem; }
 .ov-letter { position: relative; }
 .ov-letter-position { position: absolute; top: 2px; left: 5px; font-size: .65rem; line-height: 1; }
 .ov-choose { align-items: end; }
@@ -140,7 +139,7 @@
 }
 @media (prefers-reduced-motion: reduce) { .ov-flying-coin .ov-coin-face { animation: none; } }
 @media (max-width: 600px) { .ov-wallet-label > span { display: none; } }
-.ov-calendar-picker { padding: 12px; margin-bottom: 20px; }
+.ov-calendar-picker { margin-top: 20px; }
 .ov-calendar-nav { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 8px; align-items: center; margin-bottom: 12px; }
 .ov-calendar-nav .vp-field { margin: 0; min-width: 0; }
 .ov-calendar-nav .vp-input { width: 100%; min-width: 0; padding-inline: 6px; }
@@ -188,45 +187,51 @@
 .ov-receipt > .ov-paid { margin-top: 12px; }
 .ov-receipt .ov-price { font-size: .8rem; }
 .ov-receipt .ov-coin { width: 18px; height: 18px; flex-basis: 18px; }
-.ov-level-start { width: 100%; display: flex; flex-direction: column; gap: 12px; padding: 16px 8px; text-align: center; }
-.ov-level-start > img { width: 80px; height: 80px; object-fit: contain; }
-.ov-level-start > strong { font-size: 1.15rem; }
+.ov-level-heading { display: grid; grid-template-columns: 80px minmax(0, 1fr) auto; gap: 12px; align-items: center; }
+.ov-level-heading > img { width: 80px; height: 80px; object-fit: contain; }
+.ov-level-copy { display: grid; gap: 10px; min-width: 0; }
+.ov-level-copy > h3 { margin: 0; }
+.ov-level-action { justify-self: end; }
 .ov-mode-progress { display: flex; gap: 4px; }
 .ov-mode-progress .ov-step { width: 23px; height: 23px; flex-basis: 23px; font-size: .7rem; border-width: 1px; }
 .ov-mode-progress .ov-step .icon { width: 14px; height: 14px; }
 .ov-mode-progress .ov-step[data-state="active"] { outline-width: 1px; outline-offset: 1px; }
-.ov-mode-totals, .ov-mode-solved, .ov-mode-action { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
-.ov-mode-totals { gap: 8px 14px; font-size: .9rem; min-height: 24px; }
-.ov-mode-action { font-size: .85rem; }
-.ov-day-details { margin-top: 12px; }
-.ov-day-details > summary { gap: 6px; font-size: .85rem; }
-.ov-day-details > .vp-accordion-body { padding: 6px; }
-.ov-history-words { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-.ov-word-result { padding: 12px; min-width: 0; overflow-wrap: anywhere; }
-.ov-day-details .ov-result-row { gap: 4px; grid-template-columns: auto minmax(0, 1fr); font-size: .9rem; }
-.ov-day-details .ov-result-row > .ov-price { grid-column: 2; font-size: .8rem; }
+.ov-mode-totals, .ov-mode-solved { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.ov-mode-totals { gap: 8px 16px; font-size: .9rem; }
+.ov-history-words { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 12px; }
+.ov-word-result { padding: 16px; min-width: 0; overflow-wrap: anywhere; }
 .ov-wrong-words { display: flex; flex-wrap: wrap; gap: 6px; margin-block: 12px; }
 .ov-wrong-word { display: inline-flex; align-items: center; gap: 3px; padding: 3px 6px; font-size: .85rem; overflow-wrap: anywhere; min-width: 0; }
 .ov-wrong-word .icon { width: 16px; height: 16px; }
 .ov-wrong-word > span:last-child { min-width: 0; }
-.ov-history-hints { display: flex; flex-wrap: wrap; align-items: start; gap: 6px; margin-top: 10px; }
-.ov-history-hint { flex: 1 1 60px; max-width: 100%; }
-.ov-history-hint[open] { flex-basis: 100%; }
-.ov-history-hint > summary { padding: 4px; gap: 2px; font-size: .8rem; min-height: 44px; }
+.ov-history-hints { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); align-items: start; gap: 16px 24px; margin-top: 16px; }
+.ov-history-hint { min-width: 0; }
+.ov-history-hint-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: .9rem; }
 .ov-history-hint .ov-hint-image { width: 28px; height: 28px; }
-.ov-history-hint .vp-accordion-body { padding: 8px; font-size: .85rem; }
-.ov-history-hint p { margin-block: 6px; }
+.ov-history-hint p { margin-block: 6px 0; font-size: .95rem; }
 @media (max-width: 600px) {
   .ov-card-stack { min-height: 194px; }
-  .ov-level-grid { grid-template-columns: minmax(0, 1fr); }
-  .ov-level-start { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 8px 12px; padding: 12px; }
-  .ov-level-start > img { grid-row: 1 / 4; width: 64px; height: 64px; }
-  .ov-level-start > strong { grid-column: 2; text-align: left; }
-  .ov-level-start .ov-mode-progress { grid-column: 2; }
-  .ov-mode-totals { grid-column: 2 / 4; justify-content: start; }
-  .ov-mode-totals--blank { display: none; }
-  .ov-mode-action { grid-column: 3; grid-row: 1 / 3; }
-  .ov-day-details .ov-result-row { grid-template-columns: auto minmax(0, 1fr) auto; }
-  .ov-day-details .ov-result-row > .ov-price { grid-column: 3; }
+  .ov-level-heading { grid-template-columns: 64px minmax(0, 1fr); }
+  .ov-level-heading > img { width: 64px; height: 64px; }
+  .ov-level-action { grid-column: 1 / -1; justify-self: stretch; }
+  .ov-word-result { padding: 12px; }
 }
-@media (max-width: 360px) { .ov-level-start { grid-template-columns: 48px minmax(0, 1fr); } .ov-level-start > img { width: 48px; height: 48px; } .ov-mode-action { grid-column: 2; grid-row: auto; justify-content: start; } .ov-mode-totals { grid-column: 2; } }
+/* Heimlenkjene bevarer det felles hero-oppsettet, også i kompakt speltilstand. */
+.ov-home-logo { display: grid; place-items: center; align-self: center; }
+.ov-home-logo img { display: block; height: 150px; width: 100%; object-fit: contain; }
+#main .hero h1 a { text-decoration: none; }
+#main .hero p { display: block; }
+body[data-vp-game-active] .ov-home-logo img { height: 56px; }
+@media (max-width: 740px) { .ov-home-logo img { height: 82px; } }
+/* Førstegongstipset brukar felles dialogflate; berre innhaldsoppsettet er lokalt. */
+.ov-welcome-steps { list-style: none; padding: 0; margin-block: 24px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.ov-welcome-steps li { display: grid; grid-template-rows: 80px auto; align-items: center; justify-items: center; gap: 12px; text-align: center; }
+.ov-welcome-steps img { width: 80px; height: 80px; object-fit: contain; }
+.ov-welcome-cost { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.ov-welcome-cost > img { width: 24px; height: 24px; object-fit: contain; }
+@media (max-width: 480px) {
+  .ov-welcome-steps { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .ov-welcome-steps li { grid-template-columns: 64px minmax(0, 1fr); grid-template-rows: auto; text-align: left; justify-items: start; }
+  .ov-welcome-steps img { width: 64px; height: 64px; }
+  .ov-welcome-steps li:last-child { grid-template-columns: minmax(0, 1fr); }
+}
