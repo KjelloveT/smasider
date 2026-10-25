@@ -6,7 +6,7 @@ window.OrdvettStorage = (function () {
     const settings = { level: 'lett', mode: 'daily', setIndex: 0, archiveDate: null };
     const records = Object.create(null);
     const daily = Object.create(null);
-    if (raw && [1, 2, 3, 4].includes(raw.version)) {
+    if (raw && [1, 2, 3, 4, 5].includes(raw.version)) {
       if (['lett', 'middels', 'krokut'].includes(raw.settings?.level)) settings.level = raw.settings.level;
       if (raw.settings?.level === 'utfordring') settings.level = 'middels';
       if (['daily', 'archive'].includes(raw.settings?.mode)) settings.mode = raw.settings.mode;
@@ -20,12 +20,12 @@ window.OrdvettStorage = (function () {
       }
       if (raw.version >= 2 && raw.daily && typeof raw.daily === 'object') {
         Object.entries(raw.daily).slice(-900).forEach(([key, value]) => {
-          if (/^[\w.-]{1,100}$/.test(key) && [1, 2, 3].includes(value?.version) && Array.isArray(value.questions) && value.questions.length === 5 &&
+          if (/^[\w.-]{1,100}$/.test(key) && [1, 2, 3, 4].includes(value?.version) && Array.isArray(value.questions) && value.questions.length === 5 &&
               value.questions.every(question => question && typeof question === 'object' && [null, 'solved', 'revealed'].includes(question.outcome))) daily[key] = value;
         });
       }
     }
-    return { app: 'ordvett', version: 4, settings, records, daily };
+    return { app: 'ordvett', version: 5, settings, records, daily };
   }
   let data = load();
   function save() { VyrdepilStorage.setGameState('ordvett', data); }
@@ -37,7 +37,9 @@ window.OrdvettStorage = (function () {
       archiveDate: /^\d{4}-\d{2}-\d{2}$/.test(settings.archiveDate || '') ? settings.archiveDate : null };
     save();
   }
-  function getRecord(key) { return Object.hasOwn(data.records, key) ? { ...data.records[key] } : null; }
+  const previousKey = key => key.replace('-r6-d', '-r5-d');
+  function dailyFor(key) { return data.daily[key] || data.daily[previousKey(key)] || null; }
+  function getRecord(key) { const record = data.records[key] || data.records[previousKey(key)]; return record ? { ...record } : null; }
   function better(result, record) { return !record || result.solved > record.solved || result.solved === record.solved && result.cost < record.cost; }
   function recordResult(key, result) {
     if (!result.complete) return false;
@@ -51,14 +53,13 @@ window.OrdvettStorage = (function () {
   }
   function getDaily(key) {
     data = load();
-    if (Object.hasOwn(data.daily, key)) return JSON.parse(JSON.stringify(data.daily[key]));
-    // Ny bank og felles hintlager har eigne nøklar. Eldre resultat blir bevarte,
-    // men blir ikkje tolka som eit nytt dagssett med andre ord og reglar.
-    return null;
+    // Regel 6 har same ord og prisar som regel 5. Hald fram utan å endre kjelda.
+    const saved = dailyFor(key);
+    return saved ? JSON.parse(JSON.stringify(saved)) : null;
   }
   function saveDaily(key, snapshot, result) {
     data = load();
-    if (data.daily[key]?.questions.every(question => question.outcome)) return;
+    if (dailyFor(key)?.questions.every(question => question.outcome)) return;
     data.daily[key] = snapshot;
     data.daily = Object.fromEntries(Object.entries(data.daily).slice(-900));
     if (!result.complete || !recordResult(key, result)) save();
@@ -66,8 +67,8 @@ window.OrdvettStorage = (function () {
   function clearDaily(key) { data = load(); delete data.daily[key]; save(); }
   function dayStatuses(keys) {
     data = load();
-    return Object.fromEntries(keys.map(key => [key, data.daily[key] ?
-      data.daily[key].questions.every(question => question.outcome) ? 'complete' : 'started' : data.records[key] ? 'complete' : null]));
+    return Object.fromEntries(keys.map(key => { const saved = dailyFor(key); return [key, saved ?
+      saved.questions.every(question => question.outcome) ? 'complete' : 'started' : getRecord(key) ? 'complete' : null]; }));
   }
   function hasHistory() { data = load(); return Object.keys(data.daily).length > 0 || Object.keys(data.records).length > 0; }
   return Object.freeze({ getSettings, setSettings, getRecord, recordResult, getDaily, saveDaily, clearDaily, dayStatuses, hasHistory });

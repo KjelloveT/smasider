@@ -7,16 +7,18 @@ window.OrdvettTutorial = (function () {
     { hint: 'definition', image: 'definition', text: 'Kjøp tydinga.' },
     { hint: null, image: 'chosen', text: 'Finn ordet og prøv svaret.' }
   ];
-  let active = false, step = 0, onClose;
+  let active = false, step = 0, failed = false, onClose;
   const byId = id => document.getElementById(id);
   function begin(close) {
-    active = true; step = 0; onClose = close;
+    active = true; step = 0; failed = false; onClose = close;
     const word = OrdvettBank.words.find(word => word.answer === 'eple');
     return OrdvettGame.createRound([word], Vy.rng(731));
   }
   function allows(id) { return !active || steps[step]?.hint === id; }
   function receive(result, id) {
-    if (!active || !result.ok) return;
+    if (!active) return;
+    if (result.status === 'lastWrong') { failed = true; step = steps.length; return; }
+    if (!result.ok) return;
     if (result.status === 'bought' && steps[step]?.hint === id || result.status === 'solved' && step === 3) step++;
   }
   function render() {
@@ -37,7 +39,7 @@ window.OrdvettTutorial = (function () {
     close.type = 'button'; close.addEventListener('click', onClose); heading.append(close);
     const instruction = Vy.el('p', 'ov-tutorial-instruction');
     if (current) { const image = Vy.el('img'); image.src = `assets/hints/${current.image}.png`; image.width = 36; image.height = 36; image.alt = ''; instruction.append(image); }
-    instruction.append(Vy.el('strong', '', finished ? 'Du fann ordet!' : current.text));
+    instruction.append(Vy.el('strong', '', finished ? failed ? 'Prøverunden er over.' : 'Du fann ordet!' : current.text));
     guide.replaceChildren(heading, instruction);
     VyrdepilIcons.hydrateIcons(guide);
     byId('answerForm').hidden = step !== 3;

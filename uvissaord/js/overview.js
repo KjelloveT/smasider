@@ -57,10 +57,12 @@ window.OrdvettOverview = (function () {
         const spent = View.price(result.cost); spent.setAttribute('aria-label', `${result.cost} myntar brukte`);
         totals.append(solved, spent); copy.append(totals);
       }
-      const action = result?.complete ? 'Sjå resultat' : round ? 'Hald fram' : 'Spel';
-      button.append(View.icon(result?.complete ? 'check' : 'play'), el('span', '', action));
+      const action = round ? 'Hald fram' : 'Spel';
+      button.append(View.icon('play'), el('span', '', action));
       button.setAttribute('aria-label', `${level.label}: ${action}${result ? `, ${result.solved} av 5 ord, ${result.cost} myntar brukte` : ', 5 ord og 60 myntar'}`);
-      button.addEventListener('click', () => onStart(level.id)); heading.append(image, copy, button); article.append(heading);
+      button.addEventListener('click', () => onStart(level.id)); heading.append(image, copy);
+      if (!result?.complete) heading.append(button);
+      article.append(heading);
       if (round && round.questions.some(question => question.outcome || question.purchases.length || question.guesses.size)) {
         const list = el('ol', 'ov-history-words'); round.questions.forEach((question, index) => {
           if (question.outcome || question.purchases.length || question.guesses.size) list.append(wordResult(question, index));
