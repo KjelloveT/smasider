@@ -2,11 +2,11 @@
 window.OrdvettBank = {
   "app": "ordvett",
   "version": 1,
-  "bankVersion": "2026-10-24.1",
-  "rulesVersion": 4,
+  "bankVersion": "2026-10-24.2",
+  "rulesVersion": 5,
   "attribution": "Nynorskordboka, Universitetet i Bergen og Språkrådet, ordbøkene.no, CC BY 4.0.",
   "license": "https://creativecommons.org/licenses/by/4.0/",
-  "changes": "Ordutval, tema, vanskegrad, forklaringar og setningsdøme er tilpassa for Ordvett. Ordklasse, normerte oppslagsformer og bøying er henta frå Nynorskordboka.",
+  "changes": "Ordutval, tema, vanskegrad, forklaringar og setningsdøme er tilpassa for UvissaOrd. Ordklasse, normerte oppslagsformer og bøying er henta frå Nynorskordboka.",
   "words": [
     {
       "id": "nn-76279-1093071",
@@ -769,7 +769,7 @@ window.OrdvettBank = {
       "answer": "stjerne",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "lett",
+      "level": "middels",
       "theme": "Verdsrommet",
       "grammar": "Hokjønn: ei",
       "usage": "Dette kan glitre på nattehimmelen.",
@@ -1095,7 +1095,7 @@ window.OrdvettBank = {
       "answer": "edderkopp",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "lett",
+      "level": "middels",
       "theme": "Dyr",
       "grammar": "Hankjønn: ein",
       "usage": "Dette vesle dyret har åtte bein.",
@@ -1143,7 +1143,7 @@ window.OrdvettBank = {
         "sumarfugl"
       ],
       "pos": "NOUN",
-      "level": "lett",
+      "level": "middels",
       "theme": "Dyr",
       "grammar": "Hankjønn: ein",
       "usage": "Dette insektet har vore ei larve.",
@@ -1214,7 +1214,7 @@ window.OrdvettBank = {
         "viskeler"
       ],
       "pos": "NOUN",
-      "level": "lett",
+      "level": "middels",
       "theme": "Skule",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette hjelper når du har teikna feil.",
@@ -1490,7 +1490,7 @@ window.OrdvettBank = {
         "vindauga"
       ],
       "pos": "NOUN",
-      "level": "lett",
+      "level": "middels",
       "theme": "Heime",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette slepper dagslys inn i eit rom.",
@@ -1657,7 +1657,7 @@ window.OrdvettBank = {
         "tallerk"
       ],
       "pos": "NOUN",
-      "level": "lett",
+      "level": "middels",
       "theme": "Mat og kjøken",
       "grammar": "Hankjønn: ein",
       "usage": "Du kan leggje middagen på denne.",
@@ -2329,7 +2329,7 @@ window.OrdvettBank = {
       "answer": "demning",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Natur og samfunn",
       "grammar": "Hankjønn: ein / Hokjønn: ei",
       "usage": "Dette kan regulere vatn.",
@@ -2353,7 +2353,7 @@ window.OrdvettBank = {
       "answer": "kompass",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Ferdsel",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette hjelper deg å halde rett kurs.",
@@ -2375,7 +2375,7 @@ window.OrdvettBank = {
       "answer": "horisont",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Natur",
       "grammar": "Hankjønn: ein",
       "usage": "Dette ser du langt borte når utsikta er open.",
@@ -2398,7 +2398,7 @@ window.OrdvettBank = {
       "answer": "krater",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Natur",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette kan oppstå etter eit nedslag.",
@@ -2422,7 +2422,7 @@ window.OrdvettBank = {
         "isbrede"
       ],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Natur",
       "grammar": "Hankjønn: ein",
       "usage": "Dette flyttar seg svært sakte.",
@@ -2445,7 +2445,7 @@ window.OrdvettBank = {
       "answer": "halvøy",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Natur",
       "grammar": "Hokjønn: ei",
       "usage": "Denne landforma har ei tilknyting til fastlandet.",
@@ -2470,7 +2470,7 @@ window.OrdvettBank = {
       "answer": "foss",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Natur",
       "grammar": "Hankjønn: ein",
       "usage": "Her skiftar vatnet høgd raskt.",
@@ -2496,7 +2496,7 @@ window.OrdvettBank = {
         "bølge"
       ],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Natur",
       "grammar": "Hokjønn: ei",
       "usage": "Du kan sjå dette på ei uroleg vassflate.",
@@ -2519,7 +2519,7 @@ window.OrdvettBank = {
       "answer": "skugge",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Natur",
       "grammar": "Hankjønn: ein",
       "usage": "Dette oppstår når noko stengjer for lyset.",
@@ -2542,7 +2542,7 @@ window.OrdvettBank = {
       "answer": "ekko",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Lyd",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette kan du oppleve når du ropar mot ein bergvegg.",
@@ -2564,7 +2564,7 @@ window.OrdvettBank = {
       "answer": "rytme",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Musikk",
       "grammar": "Hankjønn: ein",
       "usage": "Dette kan du klappe eller trampe.",
@@ -2587,7 +2587,7 @@ window.OrdvettBank = {
       "answer": "melodi",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Musikk",
       "grammar": "Hankjønn: ein",
       "usage": "Dette kan du nynne.",
@@ -2610,7 +2610,7 @@ window.OrdvettBank = {
       "answer": "instrument",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Musikk",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette kan brukast til å lage tonar.",
@@ -2632,7 +2632,7 @@ window.OrdvettBank = {
       "answer": "publikum",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kultur",
       "grammar": "Inkjekjønn: eit",
       "usage": "Desse ser eller høyrer på ei framføring.",
@@ -2656,7 +2656,7 @@ window.OrdvettBank = {
       "answer": "replikk",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Hankjønn: ein",
       "usage": "Dette kan ein skodespelar øve inn.",
@@ -2679,7 +2679,7 @@ window.OrdvettBank = {
       "answer": "avsnitt",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette hjelper deg å dele opp ein tekst.",
@@ -2701,7 +2701,7 @@ window.OrdvettBank = {
       "answer": "overskrift",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Hokjønn: ei",
       "usage": "Dette står gjerne øvst i ein tekst.",
@@ -2724,7 +2724,7 @@ window.OrdvettBank = {
       "answer": "synonym",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette handlar om forholdet mellom to ord.",
@@ -2746,7 +2746,7 @@ window.OrdvettBank = {
       "answer": "dialekt",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Hankjønn: ein / Hokjønn: ei",
       "usage": "Denne kan vise kvar ein person kjem frå.",
@@ -2772,7 +2772,7 @@ window.OrdvettBank = {
       "answer": "ordtak",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette kan uttrykkje ein gamal leveregel.",
@@ -2794,7 +2794,7 @@ window.OrdvettBank = {
       "answer": "kjelde",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Hokjønn: ei",
       "usage": "Denne kan fortelje kvar ei opplysning kjem frå.",
@@ -2817,7 +2817,7 @@ window.OrdvettBank = {
       "answer": "bevis",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette skal støtte at noko er sant.",
@@ -2839,7 +2839,7 @@ window.OrdvettBank = {
       "answer": "forsøk",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette kan du gjere for å undersøkje noko.",
@@ -2861,7 +2861,7 @@ window.OrdvettBank = {
       "answer": "oppfinning",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Hokjønn: ei",
       "usage": "Dette er noko nytt som nokon har kome på.",
@@ -2884,7 +2884,7 @@ window.OrdvettBank = {
       "answer": "løysing",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Hokjønn: ei",
       "usage": "Dette leitar du etter når du møter eit problem.",
@@ -2907,7 +2907,7 @@ window.OrdvettBank = {
       "answer": "ansvar",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette kan du ha for ei oppgåve.",
@@ -2929,7 +2929,7 @@ window.OrdvettBank = {
       "answer": "avtale",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Hankjønn: ein / Hokjønn: ei",
       "usage": "Dette blir partar einige om.",
@@ -2955,7 +2955,7 @@ window.OrdvettBank = {
       "answer": "rettferd",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Hokjønn: ei",
       "usage": "Dette handlar om rimeleg handsaming.",
@@ -2978,7 +2978,7 @@ window.OrdvettBank = {
       "answer": "tolmod",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette treng du når noko tek lang tid.",
@@ -3000,7 +3000,7 @@ window.OrdvettBank = {
       "answer": "mot",
       "alternatives": [],
       "pos": "NOUN",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Inkjekjønn: eit",
       "usage": "Dette kan hjelpe deg når du er redd.",
@@ -3025,7 +3025,7 @@ window.OrdvettBank = {
         "lesast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Skule",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du brukar dette når du møter ein skriven tekst.",
@@ -3056,7 +3056,7 @@ window.OrdvettBank = {
         "skrivast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Skule",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Dette kan du gjere med penn eller tastatur.",
@@ -3087,7 +3087,7 @@ window.OrdvettBank = {
         "reknast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Skule",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du arbeider med tal når du gjer dette.",
@@ -3116,7 +3116,7 @@ window.OrdvettBank = {
         "teiknast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Skule",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Dette kan du gjere med blyant på papir.",
@@ -3145,7 +3145,7 @@ window.OrdvettBank = {
         "målast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du kan trenge linjal eller vekt til dette.",
@@ -3176,7 +3176,7 @@ window.OrdvettBank = {
         "teljast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du kan gjere dette éin etter éin.",
@@ -3210,7 +3210,7 @@ window.OrdvettBank = {
         "forklårast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du hjelper nokon å forstå når du gjer dette.",
@@ -3242,7 +3242,7 @@ window.OrdvettBank = {
         "spørjast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du gjer dette når du ønskjer eit svar.",
@@ -3273,7 +3273,7 @@ window.OrdvettBank = {
         "svarast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Dette kjem gjerne etter eit spørsmål.",
@@ -3305,7 +3305,7 @@ window.OrdvettBank = {
         "lyttast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du rettar merksemda mot lyd når du gjer dette.",
@@ -3334,7 +3334,7 @@ window.OrdvettBank = {
         "snakkast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du brukar røysta til dette.",
@@ -3363,7 +3363,7 @@ window.OrdvettBank = {
         "kviskrast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du gjer dette svært lågt.",
@@ -3392,7 +3392,7 @@ window.OrdvettBank = {
         "ropast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du brukar sterk røyst til dette.",
@@ -3427,7 +3427,7 @@ window.OrdvettBank = {
         "syngast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Musikk",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du brukar røysta til å lage musikk.",
@@ -3459,7 +3459,7 @@ window.OrdvettBank = {
         "spelast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Musikk",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du kan gjere dette på eit piano.",
@@ -3491,7 +3491,7 @@ window.OrdvettBank = {
         "dansast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Musikk",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Kroppen følgjer gjerne musikken når du gjer dette.",
@@ -3520,7 +3520,7 @@ window.OrdvettBank = {
         "springast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Rørsle",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Dette er raskare enn å gå.",
@@ -3552,7 +3552,7 @@ window.OrdvettBank = {
         "hoppast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Rørsle",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du forlèt underlaget ei kort stund.",
@@ -3584,7 +3584,7 @@ window.OrdvettBank = {
         "svømmast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Rørsle",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Dette kan du gjere i eit basseng.",
@@ -3615,7 +3615,7 @@ window.OrdvettBank = {
         "klatrast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Rørsle",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du brukar gjerne både hender og føter.",
@@ -3644,7 +3644,7 @@ window.OrdvettBank = {
         "krypast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Rørsle",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du held kroppen nær bakken når du gjer dette.",
@@ -3676,7 +3676,7 @@ window.OrdvettBank = {
         "rullast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Rørsle",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Noko dreiar seg medan det flyttar seg.",
@@ -3705,7 +3705,7 @@ window.OrdvettBank = {
         "berast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du held noko oppe medan du flyttar det.",
@@ -3740,7 +3740,7 @@ window.OrdvettBank = {
         "løftast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Noko kjem høgare når du gjer dette.",
@@ -3773,7 +3773,7 @@ window.OrdvettBank = {
         "skyvast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Krafta går bort frå deg.",
@@ -3812,7 +3812,7 @@ window.OrdvettBank = {
         "trekkast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Krafta kan gå mot deg.",
@@ -3843,7 +3843,7 @@ window.OrdvettBank = {
         "kastast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Rørsle",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du slepper taket etter å ha sett fart på noko.",
@@ -3872,7 +3872,7 @@ window.OrdvettBank = {
         "fangast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Rørsle",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du får tak i noko som er i rørsle.",
@@ -3904,7 +3904,7 @@ window.OrdvettBank = {
         "byggast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Skaping",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Fleire delar blir sette saman.",
@@ -3936,7 +3936,7 @@ window.OrdvettBank = {
         "reparerast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Skaping",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Noko som er øydelagt, skal verke att.",
@@ -3967,7 +3967,7 @@ window.OrdvettBank = {
         "sorterast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du deler ting i grupper etter eigenskapar.",
@@ -3998,7 +3998,7 @@ window.OrdvettBank = {
         "samanliknast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du ser på likskapar og skilnader.",
@@ -4030,7 +4030,7 @@ window.OrdvettBank = {
         "undersøkast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du ser nøye etter for å finne ut noko.",
@@ -4061,7 +4061,7 @@ window.OrdvettBank = {
         "oppdagast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du blir merksam på noko nytt.",
@@ -4091,7 +4091,7 @@ window.OrdvettBank = {
         "foreslåast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du kjem med ein idé til andre.",
@@ -4124,7 +4124,7 @@ window.OrdvettBank = {
         "samarbeidast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Fleire arbeider mot eit felles mål.",
@@ -4156,7 +4156,7 @@ window.OrdvettBank = {
         "delast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Fleire kan få kvar sin del.",
@@ -4187,7 +4187,7 @@ window.OrdvettBank = {
         "veljast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Du tek stilling til fleire alternativ.",
@@ -4218,7 +4218,7 @@ window.OrdvettBank = {
         "hugsast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Tankar",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Noko frå før kjem fram i tankane.",
@@ -4247,7 +4247,7 @@ window.OrdvettBank = {
         "gløymast"
       ],
       "pos": "VERB",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Tankar",
       "grammar": "Verb: Ordet står i infinitiv.",
       "usage": "Noko du visste, er borte frå minnet.",
@@ -4278,7 +4278,7 @@ window.OrdvettBank = {
         "vennleg"
       ],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ein god måte å møte andre på.",
@@ -4302,7 +4302,7 @@ window.OrdvettBank = {
       "answer": "ærleg",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ein som seier det som er sant.",
@@ -4326,7 +4326,7 @@ window.OrdvettBank = {
       "answer": "modig",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ein som vågar noko vanskeleg.",
@@ -4350,7 +4350,7 @@ window.OrdvettBank = {
       "answer": "rettferdig",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ei rimeleg fordeling.",
@@ -4372,7 +4372,7 @@ window.OrdvettBank = {
       "answer": "tolmodig",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ein som toler å vente.",
@@ -4396,7 +4396,7 @@ window.OrdvettBank = {
       "answer": "nysgjerrig",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Tankar",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ein som vil lære meir.",
@@ -4420,7 +4420,7 @@ window.OrdvettBank = {
       "answer": "merksam",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Tankar",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ein som følgjer godt med.",
@@ -4443,7 +4443,7 @@ window.OrdvettBank = {
       "answer": "varsam",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ein som tek omsyn til at noko kan bli skadd.",
@@ -4468,7 +4468,7 @@ window.OrdvettBank = {
       "answer": "nøyaktig",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko utan slurv.",
@@ -4492,7 +4492,7 @@ window.OrdvettBank = {
       "answer": "tydeleg",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Språk",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko som er lett å oppfatte.",
@@ -4516,7 +4516,7 @@ window.OrdvettBank = {
       "answer": "løynd",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Tankar",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko du må leite etter.",
@@ -4539,7 +4539,7 @@ window.OrdvettBank = {
       "answer": "sjeldan",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Natur",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko det finst få av.",
@@ -4563,7 +4563,7 @@ window.OrdvettBank = {
       "answer": "vanleg",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko du ofte møter.",
@@ -4587,7 +4587,7 @@ window.OrdvettBank = {
       "answer": "lik",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ting som har mykje felles.",
@@ -4612,7 +4612,7 @@ window.OrdvettBank = {
       "answer": "ulik",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kunnskap",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ting med skilnader.",
@@ -4635,7 +4635,7 @@ window.OrdvettBank = {
       "answer": "jamn",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ei flate utan humpar.",
@@ -4660,7 +4660,7 @@ window.OrdvettBank = {
       "answer": "bratt",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Natur",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ei stigning som er tung å gå.",
@@ -4684,7 +4684,7 @@ window.OrdvettBank = {
       "answer": "djup",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Natur",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre eit vatn der botnen ligg langt nede.",
@@ -4709,7 +4709,7 @@ window.OrdvettBank = {
       "answer": "grunn",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Natur",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre vatn der du lett når botnen.",
@@ -4734,7 +4734,7 @@ window.OrdvettBank = {
       "answer": "tung",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko som krev kraft å bere.",
@@ -4759,7 +4759,7 @@ window.OrdvettBank = {
       "answer": "lett",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko som veg lite.",
@@ -4783,7 +4783,7 @@ window.OrdvettBank = {
       "answer": "mjuk",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko som gjev etter for trykk.",
@@ -4808,7 +4808,7 @@ window.OrdvettBank = {
       "answer": "hard",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko som toler trykk utan å gje etter.",
@@ -4833,7 +4833,7 @@ window.OrdvettBank = {
       "answer": "ru",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ei overflate du kjenner mot huda.",
@@ -4858,7 +4858,7 @@ window.OrdvettBank = {
       "answer": "glatt",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Kvardag",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre ei flate du lett glir på.",
@@ -4884,7 +4884,7 @@ window.OrdvettBank = {
         "turr"
       ],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Vêr",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre klede etter ei stund på snora.",
@@ -4909,7 +4909,7 @@ window.OrdvettBank = {
       "answer": "våt",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Vêr",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko etter eit regnskyll.",
@@ -4934,7 +4934,7 @@ window.OrdvettBank = {
       "answer": "varm",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Vêr",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko med høg temperatur.",
@@ -4959,7 +4959,7 @@ window.OrdvettBank = {
       "answer": "kald",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Vêr",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko med låg temperatur.",
@@ -4984,7 +4984,7 @@ window.OrdvettBank = {
       "answer": "roleg",
       "alternatives": [],
       "pos": "ADJ",
-      "level": "utfordring",
+      "level": "middels",
       "theme": "Samspel",
       "grammar": "Adjektiv: Ordet står i positiv, utan gradbøying.",
       "usage": "Dette kan skildre noko utan uro eller mykje rørsle.",
@@ -5001,6 +5001,5831 @@ window.OrdvettBank = {
         "articleId": 62130,
         "senseId": 4,
         "url": "https://ordbokene.no/nn/62130"
+      }
+    },
+    {
+      "id": "nn-24571-1029771",
+      "answer": "geit",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette husdyret klatrar lett i bratt terreng.",
+      "definition": "Husdyr med horn, skjegg og ofte kvit pels.",
+      "sentence": "Ei ___ stod på den bratte bergknausen.",
+      "inflections": [
+        "geit",
+        "geita",
+        "geiter",
+        "geitene"
+      ],
+      "source": {
+        "articleId": 24571,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/24571"
+      }
+    },
+    {
+      "id": "nn-1403-1001731",
+      "answer": "and",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hokjønn: ei",
+      "usage": "Du kan sjå denne fuglen symje i ein dam.",
+      "definition": "Symjefugl med breitt nebb og korte føter.",
+      "sentence": "Ei ___ dukka hovudet under vatnet.",
+      "inflections": [
+        "and",
+        "anda",
+        "ander",
+        "andene"
+      ],
+      "source": {
+        "articleId": 1403,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/1403"
+      }
+    },
+    {
+      "id": "nn-28036-1033988",
+      "answer": "gås",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne fuglen kan vakte tunet med høge rop.",
+      "definition": "Stor symjefugl med lang hals.",
+      "sentence": "Ei ___ strekte hals og snatra mot oss.",
+      "inflections": [
+        "gås",
+        "gåsa",
+        "gjæser",
+        "gjæsene"
+      ],
+      "source": {
+        "articleId": 28036,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/28036"
+      }
+    },
+    {
+      "id": "nn-84031-1102977",
+      "answer": "ugle",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne fuglen jaktar ofte når det er mørkt.",
+      "definition": "Rovfugl med store auge framme på hovudet.",
+      "sentence": "Ei ___ sat stille i treet om natta.",
+      "inflections": [
+        "ugle",
+        "ugla",
+        "ugler",
+        "uglene"
+      ],
+      "source": {
+        "articleId": 84031,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/84031"
+      }
+    },
+    {
+      "id": "nn-92260-1113971",
+      "answer": "ørn",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hankjønn: ein / Hokjønn: ei",
+      "usage": "Denne store fuglen kan sveve høgt over fjellet.",
+      "definition": "Stor rovfugl med kraftig nebb og sterke klør.",
+      "sentence": "Ei ___ breidde vengene over dalen.",
+      "inflections": [
+        "ørn",
+        "ørnen",
+        "ørnar",
+        "ørnane",
+        "ørna",
+        "ørner",
+        "ørnene"
+      ],
+      "source": {
+        "articleId": 92260,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/92260"
+      }
+    },
+    {
+      "id": "nn-51101-1062524",
+      "answer": "mus",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette vesle dyret kan gnage på maten i eit hus.",
+      "definition": "Liten gnagar med spiss snute og lang hale.",
+      "sentence": "Ei ___ smatt inn i eit hol i veggen.",
+      "inflections": [
+        "mus",
+        "musa",
+        "musene",
+        "myser",
+        "mysene"
+      ],
+      "source": {
+        "articleId": 51101,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/51101"
+      }
+    },
+    {
+      "id": "nn-62334-1075699",
+      "answer": "rotte",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette dyret er ein større slektning av ein liten gnagar i huset.",
+      "definition": "Gnagar med lang, nesten naken hale.",
+      "sentence": "Ei ___ sprang langs kanten av kaia.",
+      "inflections": [
+        "rotte",
+        "rotta",
+        "rotter",
+        "rottene"
+      ],
+      "source": {
+        "articleId": 62334,
+        "senseId": 3,
+        "url": "https://ordbokene.no/nn/62334"
+      }
+    },
+    {
+      "id": "nn-55415-1067811",
+      "answer": "orm",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette dyret kjem seg fram utan føter.",
+      "definition": "Langstrekt krypdyr utan bein.",
+      "sentence": "Ein ___ låg og sola seg på ein stein.",
+      "inflections": [
+        "orm",
+        "ormen",
+        "ormar",
+        "ormane"
+      ],
+      "source": {
+        "articleId": 55415,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/55415"
+      }
+    },
+    {
+      "id": "nn-64640-1078509",
+      "answer": "sel",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette sjødyret kviler gjerne på eit skjer.",
+      "definition": "Pattedyr med luffar som lever mykje av livet i sjøen.",
+      "sentence": "Ein ___ stakk hovudet opp av sjøen.",
+      "inflections": [
+        "sel",
+        "selen",
+        "selar",
+        "selane"
+      ],
+      "source": {
+        "articleId": 64640,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/64640"
+      }
+    },
+    {
+      "id": "nn-43158-1052371",
+      "answer": "kval",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette store sjødyret må opp til overflata for å puste.",
+      "definition": "Stort pattedyr som lever i havet.",
+      "sentence": "Ein ___ slo med halen ute i fjorden.",
+      "inflections": [
+        "kval",
+        "kvalen",
+        "kvalar",
+        "kvalane"
+      ],
+      "source": {
+        "articleId": 43158,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/43158"
+      }
+    },
+    {
+      "id": "nn-28182-1034153",
+      "answer": "hai",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne fisken har skjelett av brusk.",
+      "definition": "Rovfisk med fleire rekkjer skarpe tenner.",
+      "sentence": "Ein ___ gleid forbi i det store akvariet.",
+      "inflections": [
+        "hai",
+        "haien",
+        "haiar",
+        "haiane"
+      ],
+      "source": {
+        "articleId": 28182,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/28182"
+      }
+    },
+    {
+      "id": "nn-41623-1050522",
+      "answer": "krabbe",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hankjønn: ein / Hokjønn: ei",
+      "usage": "Dette dyret går gjerne sidelengs på havbotnen.",
+      "definition": "Krepsdyr med breitt skal og to store klør.",
+      "sentence": "Ei ___ gøymde seg under ein stein i fjøra.",
+      "inflections": [
+        "krabbe",
+        "krabben",
+        "krabbar",
+        "krabbane",
+        "krabba",
+        "krabber",
+        "krabbene"
+      ],
+      "source": {
+        "articleId": 41623,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/41623"
+      }
+    },
+    {
+      "id": "nn-61008-1074148",
+      "answer": "reke",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette vesle sjødyret skiftar farge når det blir kokt.",
+      "definition": "Lite krepsdyr med lang kropp og følehorn.",
+      "sentence": "Ei ___ svømde baklengs i vatnet.",
+      "inflections": [
+        "reke",
+        "reka",
+        "reker",
+        "rekene"
+      ],
+      "source": {
+        "articleId": 61008,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/61008"
+      }
+    },
+    {
+      "id": "nn-19308-1023148",
+      "answer": "fluge",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette insektet kan surre kring maten om sommaren.",
+      "definition": "Lite insekt med to venger og korte følehorn.",
+      "sentence": "Ei ___ landa på vindauget.",
+      "inflections": [
+        "fluge",
+        "fluga",
+        "fluger",
+        "flugene"
+      ],
+      "source": {
+        "articleId": 19308,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/19308"
+      }
+    },
+    {
+      "id": "nn-43339-1052590",
+      "answer": "veps",
+      "alternatives": [
+        "kvefs"
+      ],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette gulstripete insektet kan stikke.",
+      "definition": "Insekt med smal midje og brodd.",
+      "sentence": "Ein ___ surra rundt saftglaset.",
+      "inflections": [
+        "veps",
+        "vepsen",
+        "vepsar",
+        "vepsane"
+      ],
+      "source": {
+        "articleId": 43339,
+        "senseId": 6,
+        "url": "https://ordbokene.no/nn/43339"
+      }
+    },
+    {
+      "id": "nn-51246-1062715",
+      "answer": "mygg",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette insektet kan gje deg kløande stikk.",
+      "definition": "Lite, spinkelt insekt med lange bein.",
+      "sentence": "Ein ___ surra ved øyret mitt.",
+      "inflections": [
+        "mygg",
+        "myggen",
+        "myggar",
+        "myggane"
+      ],
+      "source": {
+        "articleId": 51246,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/51246"
+      }
+    },
+    {
+      "id": "nn-71089-1086802",
+      "answer": "snigel",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette dyret legg att eit slimspor når det flyttar seg.",
+      "definition": "Mjukt dyr som kryp på ein brei fot, ofte med eit skal på ryggen.",
+      "sentence": "Ein ___ kryssa stien etter regnet.",
+      "inflections": [
+        "snigel",
+        "snigelen",
+        "sniglar",
+        "sniglane"
+      ],
+      "source": {
+        "articleId": 71089,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/71089"
+      }
+    },
+    {
+      "id": "nn-47908-1058727",
+      "answer": "mark",
+      "alternatives": [
+        "makk"
+      ],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Dyr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette dyret lagar gangar i jorda.",
+      "definition": "Langt, mjukt dyr utan bein som lever i jord.",
+      "sentence": "Ein ___ kom fram då vi grov i bedet.",
+      "inflections": [
+        "mark",
+        "marken",
+        "markar",
+        "markane"
+      ],
+      "source": {
+        "articleId": 47908,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/47908"
+      }
+    },
+    {
+      "id": "nn-61953-1075265",
+      "answer": "ris",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hankjønn: ein",
+      "usage": "Desse små korna blir ofte kokte til middag.",
+      "definition": "Korn frå ei grasplante som veks i varme land.",
+      "sentence": "Vi kokte ___ til grønsakene.",
+      "inflections": [
+        "ris",
+        "risen",
+        "risar",
+        "risane"
+      ],
+      "source": {
+        "articleId": 61953,
+        "senseId": 3,
+        "url": "https://ordbokene.no/nn/61953"
+      }
+    },
+    {
+      "id": "nn-26635-1032237",
+      "answer": "graut",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne varme maten kan etast med kanel på.",
+      "definition": "Tjukk mat kokt av gryn eller mjøl og væske.",
+      "sentence": "Det var varm ___ i skåla.",
+      "inflections": [
+        "graut",
+        "grauten",
+        "grautar",
+        "grautane"
+      ],
+      "source": {
+        "articleId": 26635,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/26635"
+      }
+    },
+    {
+      "id": "nn-75607-1092250",
+      "answer": "suppe",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne flytande middagsretten et du gjerne med skei.",
+      "definition": "Flytande matrett med til dømes grønsaker eller fisk.",
+      "sentence": "Vi åt varm ___ etter skituren.",
+      "inflections": [
+        "suppe",
+        "suppa",
+        "supper",
+        "suppene"
+      ],
+      "source": {
+        "articleId": 75607,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/75607"
+      }
+    },
+    {
+      "id": "nn-70715-1086385",
+      "answer": "smør",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette kan du smørje på brød eller ha i steikepanna.",
+      "definition": "Feittprodukt laga ved å kinne fløyte.",
+      "sentence": "Ho la litt ___ i den varme panna.",
+      "inflections": [
+        "smør",
+        "smøret",
+        "smøra"
+      ],
+      "source": {
+        "articleId": 70715,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/70715"
+      }
+    },
+    {
+      "id": "nn-63232-1076871",
+      "answer": "saft",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne drikken blir ofte blanda ut med vatn.",
+      "definition": "Søt drikk laga av pressa frukt eller bær.",
+      "sentence": "Vi blanda raud ___ i ei mugge.",
+      "inflections": [
+        "saft",
+        "safta",
+        "safter",
+        "saftene"
+      ],
+      "source": {
+        "articleId": 63232,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/63232"
+      }
+    },
+    {
+      "id": "nn-88000-1108379",
+      "answer": "vatn",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Natur",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette drikk du når du er tørst.",
+      "definition": "Klar væske som fyller hav, elvar og innsjøar.",
+      "sentence": "Eg fylte flaska med kaldt ___.",
+      "inflections": [
+        "vatn",
+        "vatnet",
+        "vatna"
+      ],
+      "source": {
+        "articleId": 88000,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/88000"
+      }
+    },
+    {
+      "id": "nn-50158-1061405",
+      "answer": "mjøl",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette treng du når du skal lage brøddeig.",
+      "definition": "Fint pulver av knuste korn.",
+      "sentence": "Vi vog opp ___ til baksten.",
+      "inflections": [
+        "mjøl",
+        "mjølet",
+        "mjøla"
+      ],
+      "source": {
+        "articleId": 50158,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/50158"
+      }
+    },
+    {
+      "id": "nn-36290-1044102",
+      "answer": "kake",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne baksten blir ofte servert i selskap.",
+      "definition": "Søtt bakverk som gjerne er pynta.",
+      "sentence": "På bordet stod ei ___ med lys på.",
+      "inflections": [
+        "kake",
+        "kaka",
+        "kaker",
+        "kakene"
+      ],
+      "source": {
+        "articleId": 36290,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/36290"
+      }
+    },
+    {
+      "id": "nn-7469-1008855",
+      "answer": "bolle",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne runde baksten kan ha rosiner i seg.",
+      "definition": "Lite, rundt og mjukt bakverk.",
+      "sentence": "Eg åt ein nysteikt ___ med rosiner.",
+      "inflections": [
+        "bolle",
+        "bollen",
+        "bollar",
+        "bollane"
+      ],
+      "source": {
+        "articleId": 7469,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/7469"
+      }
+    },
+    {
+      "id": "nn-12812-1015361",
+      "answer": "drue",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne saftige frukta veks i klasar.",
+      "definition": "Lite, saftig bær frå ei slyngplante.",
+      "sentence": "Eg tok ei grøn ___ frå klasen.",
+      "inflections": [
+        "drue",
+        "drua",
+        "druer",
+        "druene"
+      ],
+      "source": {
+        "articleId": 12812,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/12812"
+      }
+    },
+    {
+      "id": "nn-57739-1070413",
+      "answer": "plomme",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne frukta har éin stor stein inni.",
+      "definition": "Rund eller avlang steinfrukt med mjukt fruktkjøt.",
+      "sentence": "Ei mogen ___ fall ned frå treet.",
+      "inflections": [
+        "plomme",
+        "plomma",
+        "plommer",
+        "plommene"
+      ],
+      "source": {
+        "articleId": 57739,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/57739"
+      }
+    },
+    {
+      "id": "nn-9946-1012050",
+      "answer": "bær",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Desse små fruktene kan du plukke i skogen.",
+      "definition": "Lita, saftig frukt med frø inni.",
+      "sentence": "Vi plukka ei bøtte full av ___.",
+      "inflections": [
+        "bær",
+        "bæret",
+        "bæra"
+      ],
+      "source": {
+        "articleId": 9946,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/9946"
+      }
+    },
+    {
+      "id": "nn-34852-1042230",
+      "answer": "is",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Natur",
+      "grammar": "Hankjønn: ein",
+      "usage": "Du kan sjå dette på ein dam når det har vore frost.",
+      "definition": "Vatn som har frose og vorte fast.",
+      "sentence": "Det låg tjukk ___ på dammen.",
+      "inflections": [
+        "is",
+        "isen",
+        "isar",
+        "isane"
+      ],
+      "source": {
+        "articleId": 34852,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/34852"
+      }
+    },
+    {
+      "id": "nn-77821-1094996",
+      "answer": "te",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne varme drikken blir trekt med blad i vatn.",
+      "definition": "Drikk laga ved å la tørka blad trekkje i varmt vatn.",
+      "sentence": "Ho helte varm ___ i koppen.",
+      "inflections": [
+        "te",
+        "teen",
+        "tear",
+        "teane"
+      ],
+      "source": {
+        "articleId": 77821,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/77821"
+      }
+    },
+    {
+      "id": "nn-36192-1043989",
+      "answer": "kaffi",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne mørke drikken blir laga av brende bønner.",
+      "definition": "Drikk av malne og brende frø frå ei tropisk plante.",
+      "sentence": "Dei vaksne drakk ___ til frukosten.",
+      "inflections": [
+        "kaffi",
+        "kaffien",
+        "kaffiar",
+        "kaffiane"
+      ],
+      "source": {
+        "articleId": 36192,
+        "senseId": 5,
+        "url": "https://ordbokene.no/nn/36192"
+      }
+    },
+    {
+      "id": "nn-36283-1044092",
+      "answer": "kakao",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne søte, varme drikken smakar sjokolade.",
+      "definition": "Drikk laga med eit brunt pulver frå tropiske frø.",
+      "sentence": "Vi fekk varm ___ etter aketuren.",
+      "inflections": [
+        "kakao",
+        "kakaoen",
+        "kakaoar",
+        "kakaoane"
+      ],
+      "source": {
+        "articleId": 36283,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/36283"
+      }
+    },
+    {
+      "id": "nn-63473-1077137",
+      "answer": "salt",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette krydderet finst òg i sjøvatn.",
+      "definition": "Kvitt mineral som blir brukt til å gje mat smak.",
+      "sentence": "Det kom litt for mykje ___ i maten.",
+      "inflections": [
+        "salt",
+        "saltet",
+        "salta"
+      ],
+      "source": {
+        "articleId": 63473,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/63473"
+      }
+    },
+    {
+      "id": "nn-75400-1092006",
+      "answer": "sukker",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette søte stoffet blir ofte brukt når du bakar.",
+      "definition": "Søtt stoff i kvite eller brune krystallar.",
+      "sentence": "Vi rørte ___ inn i røra.",
+      "inflections": [
+        "sukker",
+        "sukkeret",
+        "sukkera"
+      ],
+      "source": {
+        "articleId": 75400,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/75400"
+      }
+    },
+    {
+      "id": "nn-56970-1069558",
+      "answer": "pepar",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette krydderet kan gje maten ein sterk smak.",
+      "definition": "Krydder av tørka frukter frå ei klatreplante.",
+      "sentence": "Ho kverna litt ___ over maten.",
+      "inflections": [
+        "pepar",
+        "peparen",
+        "peparar",
+        "peparane"
+      ],
+      "source": {
+        "articleId": 56970,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/56970"
+      }
+    },
+    {
+      "id": "nn-11144-1013495",
+      "answer": "deig",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne massen knar du før baksten går i omnen.",
+      "definition": "Blanding av mjøl og væske som skal bakast.",
+      "sentence": "Vi lét ein ___ heve i bakebollen.",
+      "inflections": [
+        "deig",
+        "deigen",
+        "deigar",
+        "deigane"
+      ],
+      "source": {
+        "articleId": 11144,
+        "senseId": 3,
+        "url": "https://ordbokene.no/nn/11144"
+      }
+    },
+    {
+      "id": "nn-67733-1082269",
+      "answer": "skive",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Mat",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne tynne biten kan du skjere av eit brød.",
+      "definition": "Tynn og flat del skoren av noko.",
+      "sentence": "Eg skar ei ___ av det ferske brødet.",
+      "inflections": [
+        "skive",
+        "skiva",
+        "skiver",
+        "skivene"
+      ],
+      "source": {
+        "articleId": 67733,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/67733"
+      }
+    },
+    {
+      "id": "nn-7403-1008776",
+      "answer": "boks",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Heime",
+      "grammar": "Hankjønn: ein",
+      "usage": "I denne kan du oppbevare småting eller mat.",
+      "definition": "Liten behaldar med faste sider og ofte lok.",
+      "sentence": "Eg la knappane i ein liten ___.",
+      "inflections": [
+        "boks",
+        "boksen",
+        "boksar",
+        "boksane"
+      ],
+      "source": {
+        "articleId": 7403,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/7403"
+      }
+    },
+    {
+      "id": "nn-18873-1022601",
+      "answer": "flaske",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Heime",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne behaldaren har smal hals og kan ha kork.",
+      "definition": "Behaldar for væske med smal opning øvst.",
+      "sentence": "Ei ___ med vatn stod på bordet.",
+      "inflections": [
+        "flaske",
+        "flaska",
+        "flasker",
+        "flaskene"
+      ],
+      "source": {
+        "articleId": 18873,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/18873"
+      }
+    },
+    {
+      "id": "nn-87663-1107932",
+      "answer": "vase",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Heime",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne set du avskorne blomar i.",
+      "definition": "Ope kar til å setje blomar i.",
+      "sentence": "Vi sette tulipanane i ein ___.",
+      "inflections": [
+        "vase",
+        "vasen",
+        "vasar",
+        "vasane"
+      ],
+      "source": {
+        "articleId": 87663,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/87663"
+      }
+    },
+    {
+      "id": "nn-13048-1015670",
+      "answer": "duk",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Heime",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette tøystykket kan du dekkje bordet med.",
+      "definition": "Stykke stoff som blir lagt over eit bord.",
+      "sentence": "Ein kvit ___ låg på middagsbordet.",
+      "inflections": [
+        "duk",
+        "duken",
+        "dukar",
+        "dukane"
+      ],
+      "source": {
+        "articleId": 13048,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/13048"
+      }
+    },
+    {
+      "id": "nn-59610-1072503",
+      "answer": "pute",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Heime",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne kan du leggje hovudet på når du kviler.",
+      "definition": "Mjukt, fylt trekk brukt som støtte.",
+      "sentence": "Eg la ei mjuk ___ under hovudet.",
+      "inflections": [
+        "pute",
+        "puta",
+        "puter",
+        "putene"
+      ],
+      "source": {
+        "articleId": 59610,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/59610"
+      }
+    },
+    {
+      "id": "nn-13335-1016001",
+      "answer": "dyne",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Heime",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne breier du over deg i senga.",
+      "definition": "Fylt sengeteppe som held kroppen varm.",
+      "sentence": "Eg trekte ei varm ___ over meg.",
+      "inflections": [
+        "dyne",
+        "dyna",
+        "dyner",
+        "dynene"
+      ],
+      "source": {
+        "articleId": 13335,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/13335"
+      }
+    },
+    {
+      "id": "nn-78399-1095673",
+      "answer": "teppe",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Heime",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette kan liggje på golvet eller varme deg i sofaen.",
+      "definition": "Tjukt stykke tekstil til dekke eller varme.",
+      "sentence": "Det låg eit mjukt ___ framfor sofaen.",
+      "inflections": [
+        "teppe",
+        "teppet",
+        "teppa"
+      ],
+      "source": {
+        "articleId": 78399,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/78399"
+      }
+    },
+    {
+      "id": "nn-71487-1087293",
+      "answer": "sofa",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Heime",
+      "grammar": "Hankjønn: ein",
+      "usage": "I dette møbelet kan fleire sitje og kvile.",
+      "definition": "Polstra sitjemøbel med rygg og plass til fleire.",
+      "sentence": "Vi sat tett saman i ein mjuk ___.",
+      "inflections": [
+        "sofa",
+        "sofaen",
+        "sofaer",
+        "sofaene",
+        "sofaar",
+        "sofaane"
+      ],
+      "source": {
+        "articleId": 71487,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/71487"
+      }
+    },
+    {
+      "id": "nn-5303-1006246",
+      "answer": "benk",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Heime",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette lange setet har plass til fleire personar.",
+      "definition": "Langt sete, med eller utan rygg.",
+      "sentence": "Vi sette oss på ein ___ i parken.",
+      "inflections": [
+        "benk",
+        "benken",
+        "benkar",
+        "benkane",
+        "benker",
+        "benkene"
+      ],
+      "source": {
+        "articleId": 5303,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/5303"
+      }
+    },
+    {
+      "id": "nn-32244-1039054",
+      "answer": "hylle",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Heime",
+      "grammar": "Hokjønn: ei",
+      "usage": "På denne kan du stille bøker eller pynt.",
+      "definition": "Vassrett plate til å setje ting på.",
+      "sentence": "Boka stod på ei høg ___.",
+      "inflections": [
+        "hylle",
+        "hylla",
+        "hyller",
+        "hyllene"
+      ],
+      "source": {
+        "articleId": 32244,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/32244"
+      }
+    },
+    {
+      "id": "nn-80546-1098268",
+      "answer": "trapp",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Heime",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne hjelper deg opp eller ned mellom etasjar.",
+      "definition": "Rekkje av trinn mellom to høgder.",
+      "sentence": "Vi gjekk opp ei bratt ___.",
+      "inflections": [
+        "trapp",
+        "trappa",
+        "trapper",
+        "trappene"
+      ],
+      "source": {
+        "articleId": 80546,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/80546"
+      }
+    },
+    {
+      "id": "nn-39116-1047598",
+      "answer": "klokke",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Tid",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne ser du på for å vite kva tid det er.",
+      "definition": "Instrument som måler og viser tida.",
+      "sentence": "Ei ___ på veggen viste halv tre.",
+      "inflections": [
+        "klokke",
+        "klokka",
+        "klokker",
+        "klokkene"
+      ],
+      "source": {
+        "articleId": 39116,
+        "senseId": 11,
+        "url": "https://ordbokene.no/nn/39116"
+      }
+    },
+    {
+      "id": "nn-59985-1072960",
+      "answer": "radio",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Media",
+      "grammar": "Hankjønn: ein",
+      "usage": "Med dette apparatet kan du lytte til sendingar.",
+      "definition": "Apparat som tek imot lydsendingar gjennom elektromagnetiske bølgjer.",
+      "sentence": "Vi høyrde nyheitene på ein ___.",
+      "inflections": [
+        "radio",
+        "radioen",
+        "radioar",
+        "radioane"
+      ],
+      "source": {
+        "articleId": 59985,
+        "senseId": 6,
+        "url": "https://ordbokene.no/nn/59985"
+      }
+    },
+    {
+      "id": "nn-5949-1007029",
+      "answer": "bilete",
+      "alternatives": [
+        "bilde"
+      ],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Skaping",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette kan du teikne, måle eller ta med eit kamera.",
+      "definition": "Framstilling av noko på ei flate.",
+      "sentence": "Ho hengde eit ___ på veggen.",
+      "inflections": [
+        "bilete",
+        "biletet",
+        "bileta"
+      ],
+      "source": {
+        "articleId": 5949,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/5949"
+      }
+    },
+    {
+      "id": "nn-4342-1005144",
+      "answer": "ball",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Leik",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne runde tingen kan du kaste eller sparke.",
+      "definition": "Rund gjenstand brukt i leik og idrett.",
+      "sentence": "Eg sparka ein ___ over graset.",
+      "inflections": [
+        "ball",
+        "ballen",
+        "ballar",
+        "ballane"
+      ],
+      "source": {
+        "articleId": 4342,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/4342"
+      }
+    },
+    {
+      "id": "nn-12184-1014616",
+      "answer": "dokke",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Leik",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne leika ser ut som eit menneske.",
+      "definition": "Menneskeliknande figur brukt som leike.",
+      "sentence": "Barnet la ei ___ i vogna.",
+      "inflections": [
+        "dokke",
+        "dokka",
+        "dokker",
+        "dokkene"
+      ],
+      "source": {
+        "articleId": 12184,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/12184"
+      }
+    },
+    {
+      "id": "nn-77764-1094920",
+      "answer": "tau",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "lett",
+      "theme": "Reiskap",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette kan du bruke til å feste eller dra noko.",
+      "definition": "Tjukk snor av tvinna fibrar.",
+      "sentence": "Vi festa båten med eit langt ___.",
+      "inflections": [
+        "tau",
+        "tauet",
+        "taua"
+      ],
+      "source": {
+        "articleId": 77764,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/77764"
+      }
+    },
+    {
+      "id": "nn-48732-1059698",
+      "answer": "matpakke",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Mat",
+      "grammar": "Hankjønn: ein / Hokjønn: ei",
+      "usage": "Denne kan du ta med deg til skulen eller på tur.",
+      "definition": "Mat som er pakka inn for å etast seinare.",
+      "sentence": "Eg la ei ___ i sekken før skuleturen.",
+      "inflections": [
+        "matpakke",
+        "matpakken",
+        "matpakkar",
+        "matpakkane",
+        "matpakka",
+        "matpakker",
+        "matpakkene"
+      ],
+      "source": {
+        "articleId": 48732,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/48732"
+      }
+    },
+    {
+      "id": "nn-56453-1068988",
+      "answer": "paraply",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Klede",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne held du over hovudet når det regnar.",
+      "definition": "Samanleggbar skjerm på eit skaft som vernar mot regn.",
+      "sentence": "Ho slo opp ein ___ då regnet kom.",
+      "inflections": [
+        "paraply",
+        "paraplyen",
+        "paraplyar",
+        "paraplyane"
+      ],
+      "source": {
+        "articleId": 56453,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/56453"
+      }
+    },
+    {
+      "id": "nn-36424-1044258",
+      "answer": "kalender",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Tid",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne hjelper deg å halde orden på dagar og avtalar.",
+      "definition": "Oversikt over dagar, veker og månader i eit år.",
+      "sentence": "Vi skreiv turdagen inn i ein ___.",
+      "inflections": [
+        "kalender",
+        "kalenderen",
+        "kalendrar",
+        "kalendrane"
+      ],
+      "source": {
+        "articleId": 36424,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/36424"
+      }
+    },
+    {
+      "id": "nn-137450-2414288",
+      "answer": "sykkelhjelm",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Tryggleik",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne vernar hovudet når du ferdast på to hjul.",
+      "definition": "Vernande hovudplagg for den som trør ein tohjuling.",
+      "sentence": "Eg festa ein ___ under haka før eg trødde av garde.",
+      "inflections": [
+        "sykkelhjelm",
+        "sykkelhjelmen",
+        "sykkelhjelmar",
+        "sykkelhjelmane"
+      ],
+      "source": {
+        "articleId": 137450,
+        "senseId": 1,
+        "url": "https://ordbokene.no/nn/137450"
+      }
+    },
+    {
+      "id": "nn-28879-1126205",
+      "answer": "handkle",
+      "alternatives": [
+        "handklede"
+      ],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Heime",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette brukar du til å tørke deg etter vask.",
+      "definition": "Stykke tøy til å tørke kroppen med.",
+      "sentence": "Eit mjukt ___ hang ved vasken.",
+      "inflections": [
+        "handkle",
+        "handkleet",
+        "handklea"
+      ],
+      "source": {
+        "articleId": 28879,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/28879"
+      }
+    },
+    {
+      "id": "nn-77586-1094691",
+      "answer": "tannbørste",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Helse",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne brukar du i munnen morgon og kveld.",
+      "definition": "Lita børste til å gjere tennene reine med.",
+      "sentence": "Eg tok tannkrem på ei ___.",
+      "inflections": [
+        "tannbørste",
+        "tannbørsten",
+        "tannbørstar",
+        "tannbørstane"
+      ],
+      "source": {
+        "articleId": 77586,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/77586"
+      }
+    },
+    {
+      "id": "nn-38417-1046539",
+      "answer": "kjøleskap",
+      "alternatives": [
+        "kjøleskåp"
+      ],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Heime",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette apparatet held maten kald.",
+      "definition": "Skap med elektrisk nedkjøling til oppbevaring av mat.",
+      "sentence": "Vi sette mjølka inn i eit ___.",
+      "inflections": [
+        "kjøleskap",
+        "kjøleskapet",
+        "kjøleskapa"
+      ],
+      "source": {
+        "articleId": 38417,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/38417"
+      }
+    },
+    {
+      "id": "nn-73433-1089533",
+      "answer": "steikeomn",
+      "alternatives": [
+        "steikjeomn"
+      ],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Heime",
+      "grammar": "Hankjønn: ein",
+      "usage": "I dette apparatet kan du lage pizza og brød.",
+      "definition": "Lukka rom der mat blir varma med høg temperatur.",
+      "sentence": "Brødet stod i ein varm ___.",
+      "inflections": [
+        "steikeomn",
+        "steikeomnen",
+        "steikeomnar",
+        "steikeomnane"
+      ],
+      "source": {
+        "articleId": 73433,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/73433"
+      }
+    },
+    {
+      "id": "nn-87702-1107976",
+      "answer": "vaskemaskin",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Heime",
+      "grammar": "Hokjønn: ei / Hankjønn: ein",
+      "usage": "Denne kan gjere skitne klede reine.",
+      "definition": "Maskin som vaskar og skyl tekstilar.",
+      "sentence": "Vi la dei skitne sokkane i ei ___.",
+      "inflections": [
+        "vaskemaskin",
+        "vaskemaskina",
+        "vaskemaskiner",
+        "vaskemaskinene",
+        "vaskemaskinen",
+        "vaskemaskinar",
+        "vaskemaskinane"
+      ],
+      "source": {
+        "articleId": 87702,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/87702"
+      }
+    },
+    {
+      "id": "nn-10967-1013280",
+      "answer": "datamaskin",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Teknologi",
+      "grammar": "Hankjønn: ein / Hokjønn: ei",
+      "usage": "Med denne kan du skrive, rekne og spele digitale spel.",
+      "definition": "Elektronisk apparat som handsamar informasjon etter instruksjonar.",
+      "sentence": "Eg skreiv forteljinga på ei ___.",
+      "inflections": [
+        "datamaskin",
+        "datamaskinen",
+        "datamaskinar",
+        "datamaskinane",
+        "datamaskina",
+        "datamaskiner",
+        "datamaskinene"
+      ],
+      "source": {
+        "articleId": 10967,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/10967"
+      }
+    },
+    {
+      "id": "nn-77751-1094899",
+      "answer": "tastatur",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Teknologi",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "På dette trykkjer du for å skrive på ein skjerm.",
+      "definition": "Samling knappar som du skriv bokstavar og teikn med.",
+      "sentence": "Det låg eit ___ framfor skjermen.",
+      "inflections": [
+        "tastatur",
+        "tastaturet",
+        "tastatura"
+      ],
+      "source": {
+        "articleId": 77751,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/77751"
+      }
+    },
+    {
+      "id": "nn-5768-1006793",
+      "answer": "bibliotek",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Skule",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Her kan du låne bøker og finne lesestoff.",
+      "definition": "Stad med ei samling bøker og andre medium til utlån.",
+      "sentence": "Vi lånte tre bøker på eit ___.",
+      "inflections": [
+        "bibliotek",
+        "biblioteket",
+        "biblioteka"
+      ],
+      "source": {
+        "articleId": 5768,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/5768"
+      }
+    },
+    {
+      "id": "nn-38728-1046976",
+      "answer": "klasserom",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Skule",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Her møtest elevane til undervisning.",
+      "definition": "Rom der ei gruppe elevar har timar.",
+      "sentence": "Elevane kom inn i eit lyst ___.",
+      "inflections": [
+        "klasserom",
+        "klasserommet",
+        "klasseromma"
+      ],
+      "source": {
+        "articleId": 38728,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/38728"
+      }
+    },
+    {
+      "id": "nn-45102-1054822",
+      "answer": "leikeplass",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Leik",
+      "grammar": "Hankjønn: ein",
+      "usage": "Her kan barn finne husker og sklier.",
+      "definition": "Område laga til for at barn skal kunne vere i aktivitet.",
+      "sentence": "Vi møttest på ein ___ med ei stor sklie.",
+      "inflections": [
+        "leikeplass",
+        "leikeplassen",
+        "leikeplassar",
+        "leikeplassane"
+      ],
+      "source": {
+        "articleId": 45102,
+        "senseId": 1,
+        "url": "https://ordbokene.no/nn/45102"
+      }
+    },
+    {
+      "id": "nn-21323-1025568",
+      "answer": "fotball",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Idrett",
+      "grammar": "Hankjønn: ein",
+      "usage": "I denne lagidretten prøver du å sparke noko i mål.",
+      "definition": "Lagspel der ein brukar føtene til å føre ein rund gjenstand mot målet.",
+      "sentence": "Vi spelte ___ på grasbana.",
+      "inflections": [
+        "fotball",
+        "fotballen",
+        "fotballar",
+        "fotballane"
+      ],
+      "source": {
+        "articleId": 21323,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/21323"
+      }
+    },
+    {
+      "id": "nn-28748-1034839",
+      "answer": "handball",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Idrett",
+      "grammar": "Hankjønn: ein",
+      "usage": "I denne lagidretten kastar spelarane mot eit mål.",
+      "definition": "Lagspel der ein fører og kastar ein rund gjenstand med hendene.",
+      "sentence": "Vi spelte ___ i idrettshallen.",
+      "inflections": [
+        "handball",
+        "handballen",
+        "handballar",
+        "handballane"
+      ],
+      "source": {
+        "articleId": 28748,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/28748"
+      }
+    },
+    {
+      "id": "nn-76385-1093187",
+      "answer": "symjebasseng",
+      "alternatives": [
+        "svømmebasseng"
+      ],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Idrett",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Her kan du øve på å ta deg fram i vatn.",
+      "definition": "Kunstig behaldar med vatn til bading og trening.",
+      "sentence": "Vi øvde på ryggtak i eit ___.",
+      "inflections": [
+        "symjebasseng",
+        "symjebassenget",
+        "symjebassenga"
+      ],
+      "source": {
+        "articleId": 76385,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/76385"
+      }
+    },
+    {
+      "id": "nn-9373-1011319",
+      "answer": "bursdag",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Fellesskap",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne dagen feirar du at du har vorte eitt år eldre.",
+      "definition": "Årsdagen for den dagen nokon vart fødd.",
+      "sentence": "Vi åt kake fordi venen min hadde ___.",
+      "inflections": [
+        "bursdag",
+        "bursdagen",
+        "bursdagar",
+        "bursdagane"
+      ],
+      "source": {
+        "articleId": 9373,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/9373"
+      }
+    },
+    {
+      "id": "nn-22439-1026953",
+      "answer": "frukost",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Mat",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette måltidet et du vanlegvis fyrst på dagen.",
+      "definition": "Det fyrste måltidet om morgonen.",
+      "sentence": "Vi åt ___ før vi gjekk til skulen.",
+      "inflections": [
+        "frukost",
+        "frukosten",
+        "frukostar",
+        "frukostane"
+      ],
+      "source": {
+        "articleId": 22439,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/22439"
+      }
+    },
+    {
+      "id": "nn-49549-1060632",
+      "answer": "middag",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Mat",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette er ofte det største varme måltidet om dagen.",
+      "definition": "Hovudmåltid som gjerne blir ete om ettermiddagen.",
+      "sentence": "Vi hadde fisk og poteter til ___.",
+      "inflections": [
+        "middag",
+        "middagen",
+        "middagar",
+        "middagane"
+      ],
+      "source": {
+        "articleId": 49549,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/49549"
+      }
+    },
+    {
+      "id": "nn-43420-1052698",
+      "answer": "kveldsmat",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Mat",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette måltidet kan du ete før du legg deg.",
+      "definition": "Måltid som blir ete seint på dagen.",
+      "sentence": "Vi åt ___ før vi pussa tennene.",
+      "inflections": [
+        "kveldsmat",
+        "kveldsmaten",
+        "kveldsmatar",
+        "kveldsmatane"
+      ],
+      "source": {
+        "articleId": 43420,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/43420"
+      }
+    },
+    {
+      "id": "nn-56268-1068777",
+      "answer": "pannekake",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Mat",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne tynne retten kan du rulle rundt syltetøy.",
+      "definition": "Flat rett av røre som blir steikt på begge sider.",
+      "sentence": "Eg rulla ei ___ med blåbær inni.",
+      "inflections": [
+        "pannekake",
+        "pannekaka",
+        "pannekaker",
+        "pannekakene"
+      ],
+      "source": {
+        "articleId": 56268,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/56268"
+      }
+    },
+    {
+      "id": "nn-8461-1010039",
+      "answer": "bringebær",
+      "alternatives": [
+        "bringbær"
+      ],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Mat",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Desse raude fruktene veks på tornete buskar.",
+      "definition": "Raude, samansette småfrukter som losnar frå ein kvit tapp.",
+      "sentence": "Vi plukka ___ i krattet ved skogen.",
+      "inflections": [
+        "bringebær",
+        "bringebæret",
+        "bringebæra"
+      ],
+      "source": {
+        "articleId": 8461,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/8461"
+      }
+    },
+    {
+      "id": "nn-35751-1043418",
+      "answer": "jordbær",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Mat",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Denne søte raude frukta har små frø på utsida.",
+      "definition": "Raud hagefrukt med grøne blad øvst og mange små nøtter på overflata.",
+      "sentence": "Vi åt ___ med fløyte om sommaren.",
+      "inflections": [
+        "jordbær",
+        "jordbæret",
+        "jordbæra"
+      ],
+      "source": {
+        "articleId": 35751,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/35751"
+      }
+    },
+    {
+      "id": "nn-7158-1008482",
+      "answer": "blåbær",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Mat",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Desse små skogsfruktene kan farge tunga mørk.",
+      "definition": "Små mørkeblå frukter på låge buskar i skogen.",
+      "sentence": "Vi fylte spannet med ___ på skogturen.",
+      "inflections": [
+        "blåbær",
+        "blåbæret",
+        "blåbæra"
+      ],
+      "source": {
+        "articleId": 7158,
+        "senseId": 5,
+        "url": "https://ordbokene.no/nn/7158"
+      }
+    },
+    {
+      "id": "nn-18351-1021946",
+      "answer": "fiskestong",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Friluftsliv",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne held du når du prøver å få fangst på krok.",
+      "definition": "Lang, bøyeleg stong med snøre og krok.",
+      "sentence": "Eg kasta snøret uti med ei ___.",
+      "inflections": [
+        "fiskestong",
+        "fiskestonga",
+        "fiskestenger",
+        "fiskestengene"
+      ],
+      "source": {
+        "articleId": 18351,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/18351"
+      }
+    },
+    {
+      "id": "nn-62707-1076130",
+      "answer": "ryggsekk",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Friluftsliv",
+      "grammar": "Hankjønn: ein",
+      "usage": "I denne kan du bere det du treng på ein tur.",
+      "definition": "Veske med to reimar som blir boren bak på kroppen.",
+      "sentence": "Eg pakka niste og klede i ein ___.",
+      "inflections": [
+        "ryggsekk",
+        "ryggsekken",
+        "ryggsekkar",
+        "ryggsekkane",
+        "ryggsekker",
+        "ryggsekkene"
+      ],
+      "source": {
+        "articleId": 62707,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/62707"
+      }
+    },
+    {
+      "id": "nn-46447-1056676",
+      "answer": "lommelykt",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Friluftsliv",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne lyser opp når du går i mørkret.",
+      "definition": "Lite, berbart lysapparat som går på batteri.",
+      "sentence": "Vi fann stien med ei ___.",
+      "inflections": [
+        "lommelykt",
+        "lommelykta",
+        "lommelykter",
+        "lommelyktene"
+      ],
+      "source": {
+        "articleId": 46447,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/46447"
+      }
+    },
+    {
+      "id": "nn-71987-1087911",
+      "answer": "sovepose",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Friluftsliv",
+      "grammar": "Hankjønn: ein",
+      "usage": "I denne kan du halde varmen når du overnattar ute.",
+      "definition": "Varmt trekk som omsluttar kroppen under søvn.",
+      "sentence": "Eg kraup ned i ein varm ___.",
+      "inflections": [
+        "sovepose",
+        "soveposen",
+        "soveposar",
+        "soveposane"
+      ],
+      "source": {
+        "articleId": 71987,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/71987"
+      }
+    },
+    {
+      "id": "nn-78204-1095433",
+      "answer": "telt",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Friluftsliv",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette berbare lyet kan du sove i ute.",
+      "definition": "Flyttbar bustad av duk spent over stenger.",
+      "sentence": "Vi sette opp eit ___ ved vatnet.",
+      "inflections": [
+        "telt",
+        "teltet",
+        "telta"
+      ],
+      "source": {
+        "articleId": 78204,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/78204"
+      }
+    },
+    {
+      "id": "nn-37717-1045696",
+      "answer": "kikkert",
+      "alternatives": [
+        "kikert"
+      ],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Friluftsliv",
+      "grammar": "Hankjønn: ein",
+      "usage": "Med denne kan du sjå nærare på noko langt unna.",
+      "definition": "Optisk reiskap som gjer fjerne ting større for auga.",
+      "sentence": "Vi såg på fuglane gjennom ein ___.",
+      "inflections": [
+        "kikkert",
+        "kikkerten",
+        "kikkertar",
+        "kikkertane"
+      ],
+      "source": {
+        "articleId": 37717,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/37717"
+      }
+    },
+    {
+      "id": "nn-60685-1073797",
+      "answer": "redningsvest",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Tryggleik",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne tek du på deg for å halde deg flytande.",
+      "definition": "Vernande plagg som held ein person oppe i vatnet.",
+      "sentence": "Alle i båten hadde ___ på seg.",
+      "inflections": [
+        "redningsvest",
+        "redningsvesten",
+        "redningsvestar",
+        "redningsvestane"
+      ],
+      "source": {
+        "articleId": 60685,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/60685"
+      }
+    },
+    {
+      "id": "nn-80345-1098047",
+      "answer": "trafikkskilt",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Ferdsel",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette fortel deg kva reglar som gjeld langs vegen.",
+      "definition": "Plate med symbol eller tekst som styrer ferdsel.",
+      "sentence": "Eit ___ synte kor fort vi kunne køyre.",
+      "inflections": [
+        "trafikkskilt",
+        "trafikkskiltet",
+        "trafikkskilta"
+      ],
+      "source": {
+        "articleId": 80345,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/80345"
+      }
+    },
+    {
+      "id": "nn-127858-1138614",
+      "answer": "togstasjon",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Ferdsel",
+      "grammar": "Hankjønn: ein",
+      "usage": "Her kan du vente på eit skinnegåande transportmiddel.",
+      "definition": "Stad der passasjerar stig på og av jernbana.",
+      "sentence": "Vi venta på perrongen ved ein ___.",
+      "inflections": [
+        "togstasjon",
+        "togstasjonen",
+        "togstasjonar",
+        "togstasjonane"
+      ],
+      "source": {
+        "articleId": 127858,
+        "senseId": 1,
+        "url": "https://ordbokene.no/nn/127858"
+      }
+    },
+    {
+      "id": "nn-19451-1023310",
+      "answer": "flyplass",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Ferdsel",
+      "grammar": "Hankjønn: ein",
+      "usage": "Her finst rullebaner for avgang og landing.",
+      "definition": "Område der luftfartøy tek av og landar.",
+      "sentence": "Vi såg mange reisande på ein ___.",
+      "inflections": [
+        "flyplass",
+        "flyplassen",
+        "flyplassar",
+        "flyplassane"
+      ],
+      "source": {
+        "articleId": 19451,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/19451"
+      }
+    },
+    {
+      "id": "nn-7985-1009441",
+      "answer": "brannbil",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Tryggleik",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette køyretøyet har utstyr til å sløkkje eld.",
+      "definition": "Utrykkingsbil med slangar og anna utstyr mot eld.",
+      "sentence": "Ein ___ kom med blålys og sirene.",
+      "inflections": [
+        "brannbil",
+        "brannbilen",
+        "brannbilar",
+        "brannbilane"
+      ],
+      "source": {
+        "articleId": 7985,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/7985"
+      }
+    },
+    {
+      "id": "nn-1224-1001544",
+      "answer": "ambulanse",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Helse",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette køyretøyet fraktar sjuke og skadde.",
+      "definition": "Bil med utstyr for å hjelpe og transportere pasientar.",
+      "sentence": "Ein ___ køyrde pasienten til behandling.",
+      "inflections": [
+        "ambulanse",
+        "ambulansen",
+        "ambulansar",
+        "ambulansane"
+      ],
+      "source": {
+        "articleId": 1224,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/1224"
+      }
+    },
+    {
+      "id": "nn-66382-1080575",
+      "answer": "sjukehus",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Helse",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Her kan du bli lagd inn for undersøking og behandling.",
+      "definition": "Institusjon der legar og sjukepleiarar behandlar pasientar.",
+      "sentence": "Legen arbeidde på eit stort ___.",
+      "inflections": [
+        "sjukehus",
+        "sjukehuset",
+        "sjukehusa"
+      ],
+      "source": {
+        "articleId": 66382,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/66382"
+      }
+    },
+    {
+      "id": "nn-116277-1094734",
+      "answer": "tannlege",
+      "alternatives": [
+        "tannlækjar"
+      ],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Helse",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne personen undersøker munnen og reparerer hol.",
+      "definition": "Fagperson som behandlar tenner og tannkjøt.",
+      "sentence": "Ein ___ kontrollerte at alt var i orden i munnen.",
+      "inflections": [
+        "tannlege",
+        "tannlegen",
+        "tannlegar",
+        "tannlegane"
+      ],
+      "source": {
+        "articleId": 116277,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/116277"
+      }
+    },
+    {
+      "id": "nn-47349-1057988",
+      "answer": "lærar",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Skule",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne personen hjelper elevar med å lære.",
+      "definition": "Person som underviser.",
+      "sentence": "Ein ___ forklarte oppgåva for klassen.",
+      "inflections": [
+        "lærar",
+        "læraren",
+        "lærarar",
+        "lærarane"
+      ],
+      "source": {
+        "articleId": 47349,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/47349"
+      }
+    },
+    {
+      "id": "nn-71105-1086821",
+      "answer": "snikkar",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Arbeid",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne fagpersonen lagar og reparerer ting av tre.",
+      "definition": "Handverkar som arbeider med treverk.",
+      "sentence": "Ein ___ bygde den nye trappa.",
+      "inflections": [
+        "snikkar",
+        "snikkaren",
+        "snikkarar",
+        "snikkarane"
+      ],
+      "source": {
+        "articleId": 71105,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/71105"
+      }
+    },
+    {
+      "id": "nn-7549-1008940",
+      "answer": "bonde",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Arbeid",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne personen kan dyrke jord og stelle husdyr.",
+      "definition": "Person som driv ein gard.",
+      "sentence": "Ein ___ køyrde traktoren over jordet.",
+      "inflections": [
+        "bonde",
+        "bonden",
+        "bønder",
+        "bøndene"
+      ],
+      "source": {
+        "articleId": 7549,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/7549"
+      }
+    },
+    {
+      "id": "nn-9497-1011482",
+      "answer": "butikk",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Arbeid",
+      "grammar": "Hankjønn: ein",
+      "usage": "Her kan du kjøpe varer.",
+      "definition": "Lokale der varer blir selde.",
+      "sentence": "Vi handla frukt i ein ___.",
+      "inflections": [
+        "butikk",
+        "butikken",
+        "butikkar",
+        "butikkane"
+      ],
+      "source": {
+        "articleId": 9497,
+        "senseId": 3,
+        "url": "https://ordbokene.no/nn/9497"
+      }
+    },
+    {
+      "id": "nn-58256-1071004",
+      "answer": "postkasse",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "middels",
+      "theme": "Heime",
+      "grammar": "Hokjønn: ei / Hankjønn: ein",
+      "usage": "Her legg bodet brev til deg.",
+      "definition": "Kasse til å ta imot sendingar som blir leverte heim.",
+      "sentence": "Det låg eit brev i ei ___.",
+      "inflections": [
+        "postkasse",
+        "postkassa",
+        "postkasser",
+        "postkassene",
+        "postkassen",
+        "postkassar",
+        "postkassane"
+      ],
+      "source": {
+        "articleId": 58256,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/58256"
+      }
+    },
+    {
+      "id": "nn-91222-1112517",
+      "answer": "vyrdnad",
+      "alternatives": [
+        "vørdnad"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Fellesskap",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette viser du når du verdset andre.",
+      "definition": "Respekt og høgaktelse for nokon.",
+      "sentence": "Vi møtte den gamle læraren med stor ___.",
+      "inflections": [
+        "vyrdnad",
+        "vyrdnaden",
+        "vyrdnadar",
+        "vyrdnadane",
+        "vyrdnader",
+        "vyrdnadene"
+      ],
+      "source": {
+        "articleId": 91222,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/91222"
+      }
+    },
+    {
+      "id": "nn-63758-1077473",
+      "answer": "samhald",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Fellesskap",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette gjer ei gruppe sterk når dei står saman.",
+      "definition": "Kjensle av fellesskap og vilje til å støtte kvarandre.",
+      "sentence": "Det var godt ___ mellom elevane.",
+      "inflections": [
+        "samhald",
+        "samhaldet",
+        "samhalda"
+      ],
+      "source": {
+        "articleId": 63758,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/63758"
+      }
+    },
+    {
+      "id": "nn-50840-1062235",
+      "answer": "motsegn",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Språk",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette kan du kome med når du er usamd i ein påstand.",
+      "definition": "Ytring som seier imot noko som er sagt.",
+      "sentence": "Ho kom med ei ___ til påstanden.",
+      "inflections": [
+        "motsegn",
+        "motsegna",
+        "motsegner",
+        "motsegnene"
+      ],
+      "source": {
+        "articleId": 50840,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/50840"
+      }
+    },
+    {
+      "id": "nn-13030-1015636",
+      "answer": "dugnad",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Fellesskap",
+      "grammar": "Hankjønn: ein",
+      "usage": "Slik kan naboar hjelpe kvarandre utan betaling.",
+      "definition": "Felles arbeid som blir gjort frivillig og utan løn.",
+      "sentence": "Vi rydda leikeplassen på ___.",
+      "inflections": [
+        "dugnad",
+        "dugnaden",
+        "dugnadar",
+        "dugnadane",
+        "dugnader",
+        "dugnadene"
+      ],
+      "source": {
+        "articleId": 13030,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/13030"
+      }
+    },
+    {
+      "id": "nn-44176-1053701",
+      "answer": "lagnad",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Livet",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette ordet handlar om det som møter deg gjennom livet.",
+      "definition": "Det som hender nokon og formar livet deira; skjebne.",
+      "sentence": "Helten i forteljinga fekk ein merkeleg ___.",
+      "inflections": [
+        "lagnad",
+        "lagnaden",
+        "lagnader",
+        "lagnadene",
+        "lagnadar",
+        "lagnadane"
+      ],
+      "source": {
+        "articleId": 44176,
+        "senseId": 8,
+        "url": "https://ordbokene.no/nn/44176"
+      }
+    },
+    {
+      "id": "nn-90862-1112146",
+      "answer": "von",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kjensler",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette kan du halde fast ved når noko er vanskeleg.",
+      "definition": "Tru på at noko ynskt kan hende.",
+      "sentence": "Vi hadde ___ om betre vêr dagen etter.",
+      "inflections": [
+        "von",
+        "vona",
+        "voner",
+        "vonene"
+      ],
+      "source": {
+        "articleId": 90862,
+        "senseId": 5,
+        "url": "https://ordbokene.no/nn/90862"
+      }
+    },
+    {
+      "id": "nn-31666-1038381",
+      "answer": "hug",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kjensler",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette kan du ha til å gjere noko du likar.",
+      "definition": "Lyst eller trong til noko.",
+      "sentence": "Eg fekk ___ til å gå ein lang tur.",
+      "inflections": [
+        "hug",
+        "hugen",
+        "hugar",
+        "hugane"
+      ],
+      "source": {
+        "articleId": 31666,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/31666"
+      }
+    },
+    {
+      "id": "nn-31702-1038423",
+      "answer": "hugnad",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kjensler",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette kan ei hyggeleg stund gje deg.",
+      "definition": "Glede, trivsel og velvære.",
+      "sentence": "Det var stor ___ i å møtast att.",
+      "inflections": [
+        "hugnad",
+        "hugnaden",
+        "hugnadar",
+        "hugnadane",
+        "hugnader",
+        "hugnadene"
+      ],
+      "source": {
+        "articleId": 31702,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/31702"
+      }
+    },
+    {
+      "id": "nn-2924-1003413",
+      "answer": "atterhald",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Språk",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette tek du når du ikkje kan love noko heilt sikkert.",
+      "definition": "Vilkår eller innvending som avgrensar ei utsegn.",
+      "sentence": "Ho sa ja, men med eit viktig ___.",
+      "inflections": [
+        "atterhald",
+        "atterhaldet",
+        "atterhalda"
+      ],
+      "source": {
+        "articleId": 2924,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/2924"
+      }
+    },
+    {
+      "id": "nn-23454-1028280",
+      "answer": "føremon",
+      "alternatives": [
+        "føremonn"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Livet",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette har du når noko gjer situasjonen lettare for deg.",
+      "definition": "Noko som er til nytte eller gjev eit betre utgangspunkt.",
+      "sentence": "Det var ein ___ å kjenne vegen frå før.",
+      "inflections": [
+        "føremon",
+        "føremonen",
+        "føremonar",
+        "føremonane",
+        "føremoner",
+        "føremonene"
+      ],
+      "source": {
+        "articleId": 23454,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/23454"
+      }
+    },
+    {
+      "id": "nn-23477-1028320",
+      "answer": "føresetnad",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Tenking",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette må vere på plass før noko anna kan skje.",
+      "definition": "Vilkår som noko byggjer på eller er avhengig av.",
+      "sentence": "God søvn er ein ___ for å vere opplagd.",
+      "inflections": [
+        "føresetnad",
+        "føresetnaden",
+        "føresetnader",
+        "føresetnadene",
+        "føresetnadar",
+        "føresetnadane"
+      ],
+      "source": {
+        "articleId": 23477,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/23477"
+      }
+    },
+    {
+      "id": "nn-16000-1019192",
+      "answer": "ettertanke",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Tenking",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette gjer du når du tenkjer over noko på nytt.",
+      "definition": "Grundigare vurdering etter ei hending eller ein fyrste tanke.",
+      "sentence": "Etter litt ___ valde eg ei anna løysing.",
+      "inflections": [
+        "ettertanke",
+        "ettertanken",
+        "ettertankar",
+        "ettertankane"
+      ],
+      "source": {
+        "articleId": 16000,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/16000"
+      }
+    },
+    {
+      "id": "nn-54502-1066762",
+      "answer": "omtanke",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Fellesskap",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette viser du når du tek omsyn til andre.",
+      "definition": "Omsorg og merksemd for korleis andre har det.",
+      "sentence": "Ho viste stor ___ for den nye eleven.",
+      "inflections": [
+        "omtanke",
+        "omtanken",
+        "omtankar",
+        "omtankane"
+      ],
+      "source": {
+        "articleId": 54502,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/54502"
+      }
+    },
+    {
+      "id": "nn-48914-1059924",
+      "answer": "medkjensle",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kjensler",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette kan du kjenne når andre har det vondt.",
+      "definition": "Innleving i og sorg over andre si liding.",
+      "sentence": "Vi kjende ___ med venen som var lei seg.",
+      "inflections": [
+        "medkjensle",
+        "medkjensla",
+        "medkjensler",
+        "medkjenslene"
+      ],
+      "source": {
+        "articleId": 48914,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/48914"
+      }
+    },
+    {
+      "id": "nn-91919-1113518",
+      "answer": "ærefrykt",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kjensler",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette kan du kjenne framfor noko storslått.",
+      "definition": "Blanding av djup respekt og ei kjensle av å vere liten.",
+      "sentence": "Vi stod med ___ framfor det veldige fjellet.",
+      "inflections": [
+        "ærefrykt",
+        "ærefrykta",
+        "ærefrykter",
+        "ærefryktene"
+      ],
+      "source": {
+        "articleId": 91919,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/91919"
+      }
+    },
+    {
+      "id": "nn-33262-1040461",
+      "answer": "ihuge",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kjensler",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette kan drive deg til å arbeide ivrig med ei sak.",
+      "definition": "Sterk interesse, iver og engasjement.",
+      "sentence": "Ho gjekk til arbeidet med stor ___.",
+      "inflections": [
+        "ihuge",
+        "ihugen",
+        "ihugar",
+        "ihugane"
+      ],
+      "source": {
+        "articleId": 33262,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/33262"
+      }
+    },
+    {
+      "id": "nn-31718-1038441",
+      "answer": "hugskot",
+      "alternatives": [
+        "hugskott"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Tenking",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette kan kome brått når du får ein idé.",
+      "definition": "Plutseleg tanke eller innfall.",
+      "sentence": "Eg fekk eit ___ om korleis gåta kunne løysast.",
+      "inflections": [
+        "hugskot",
+        "hugskotet",
+        "hugskota"
+      ],
+      "source": {
+        "articleId": 31718,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/31718"
+      }
+    },
+    {
+      "id": "nn-63048-1076670",
+      "answer": "råderett",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Samfunn",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette gjev deg høve til å bestemme over noko.",
+      "definition": "Rett til å styre eller disponere noko.",
+      "sentence": "Laget hadde ___ over det nye rommet.",
+      "inflections": [
+        "råderett",
+        "råderetten",
+        "råderettar",
+        "råderettane"
+      ],
+      "source": {
+        "articleId": 63048,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/63048"
+      }
+    },
+    {
+      "id": "nn-66705-1080950",
+      "answer": "sjølvtillit",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kjensler",
+      "grammar": "Hankjønn: ein / Hokjønn: ei",
+      "usage": "Dette veks når du får tru på det du kan.",
+      "definition": "Tru på eigne evner og eigen verdi.",
+      "sentence": "Øving gav henne større ___ før framføringa.",
+      "inflections": [
+        "sjølvtillit",
+        "sjølvtilliten",
+        "sjølvtillitar",
+        "sjølvtillitane",
+        "sjølvtillita",
+        "sjølvtilliter",
+        "sjølvtillitene"
+      ],
+      "source": {
+        "articleId": 66705,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/66705"
+      }
+    },
+    {
+      "id": "nn-2346-1002780",
+      "answer": "ard",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne gamle reiskapen drog ein gjennom åkeren.",
+      "definition": "Enkel plog som rispar opp jorda utan å vende henne.",
+      "sentence": "Bonden drog ein ___ gjennom åkeren.",
+      "inflections": [
+        "ard",
+        "arden",
+        "ardar",
+        "ardane"
+      ],
+      "source": {
+        "articleId": 2346,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/2346"
+      }
+    },
+    {
+      "id": "nn-46248-1056439",
+      "answer": "ljå",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Hankjønn: ein",
+      "usage": "Med denne reiskapen kan du slå gras for hand.",
+      "definition": "Langt, krumt skjerande blad på eit skaft.",
+      "sentence": "Han slo enga med ein ___.",
+      "inflections": [
+        "ljå",
+        "ljåen",
+        "ljår",
+        "ljårne",
+        "ljåar",
+        "ljåane"
+      ],
+      "source": {
+        "articleId": 46248,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/46248"
+      }
+    },
+    {
+      "id": "nn-65525-1079590",
+      "answer": "sigd",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne vesle reiskapen vart brukt til å skjere korn.",
+      "definition": "Kort, krumt skjerande blad med handtak.",
+      "sentence": "Ho skar kornstråa med ein ___.",
+      "inflections": [
+        "sigd",
+        "sigden",
+        "sigdar",
+        "sigdane"
+      ],
+      "source": {
+        "articleId": 65525,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/65525"
+      }
+    },
+    {
+      "id": "nn-30422-1036888",
+      "answer": "hesje",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Hokjønn: ei",
+      "usage": "På denne kan graset tørke ute.",
+      "definition": "Rekkje stolpar med tråd eller stenger til å tørke høy på.",
+      "sentence": "Vi hengde graset på ei ___.",
+      "inflections": [
+        "hesje",
+        "hesja",
+        "hesjer",
+        "hesjene"
+      ],
+      "source": {
+        "articleId": 30422,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/30422"
+      }
+    },
+    {
+      "id": "nn-73351-1089434",
+      "answer": "staur",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne spisse trestokken kan du slå ned i jorda.",
+      "definition": "Lang, tilspissa stokk brukt som støtte eller feste.",
+      "sentence": "Vi slo ein ___ ned ved gjerdet.",
+      "inflections": [
+        "staur",
+        "stauren",
+        "staurar",
+        "staurane"
+      ],
+      "source": {
+        "articleId": 73351,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/73351"
+      }
+    },
+    {
+      "id": "nn-41316-1050176",
+      "answer": "kornband",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette laga ein ved å binde saman strå etter hausting.",
+      "definition": "Knippe avskorne strå med aks på.",
+      "sentence": "Eit ___ stod til tørk på åkeren.",
+      "inflections": [
+        "kornband",
+        "kornbandet",
+        "kornbanda"
+      ],
+      "source": {
+        "articleId": 41316,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/41316"
+      }
+    },
+    {
+      "id": "nn-73002-1089066",
+      "answer": "stabbur",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "I dette vesle huset lagra ein mat på garden.",
+      "definition": "Lagerhus som ofte står på stolpar eller steinar.",
+      "sentence": "På garden stod eit gamalt ___ med matlager.",
+      "inflections": [
+        "stabbur",
+        "stabburet",
+        "stabbura"
+      ],
+      "source": {
+        "articleId": 73002,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/73002"
+      }
+    },
+    {
+      "id": "nn-14760-1017770",
+      "answer": "eldhus",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "I dette gardshuset kunne ein bake og koke.",
+      "definition": "Eige hus med eldstad til matlaging og anna arbeid.",
+      "sentence": "Dei baka flatbrød i eit ___.",
+      "inflections": [
+        "eldhus",
+        "eldhuset",
+        "eldhusa"
+      ],
+      "source": {
+        "articleId": 14760,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/14760"
+      }
+    },
+    {
+      "id": "nn-52235-1064019",
+      "answer": "naust",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette huset vernar farkosten din på land.",
+      "definition": "Hus ved sjø eller vatn til oppbevaring av båtar.",
+      "sentence": "Vi drog robåten inn i eit ___.",
+      "inflections": [
+        "naust",
+        "naustet",
+        "nausta"
+      ],
+      "source": {
+        "articleId": 52235,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/52235"
+      }
+    },
+    {
+      "id": "nn-47405-1058056",
+      "answer": "løe",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Hokjønn: ei",
+      "usage": "Her kunne ein lagre gras som var tørka til vinterfôr.",
+      "definition": "Gardshus til høy og anna avling.",
+      "sentence": "Det tørre høyet vart bore inn i ei ___.",
+      "inflections": [
+        "løe",
+        "løa",
+        "løer",
+        "løene"
+      ],
+      "source": {
+        "articleId": 47405,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/47405"
+      }
+    },
+    {
+      "id": "nn-82188-1100407",
+      "answer": "tun",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette er den opne plassen mellom husa på ein gard.",
+      "definition": "Open plass som gardshusa ligg kring.",
+      "sentence": "Alle samla seg på eit ___ mellom husa.",
+      "inflections": [
+        "tun",
+        "tunet",
+        "tuna"
+      ],
+      "source": {
+        "articleId": 82188,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/82188"
+      }
+    },
+    {
+      "id": "nn-26887-1032537",
+      "answer": "grind",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne kan du opne når du skal gjennom eit gjerde.",
+      "definition": "Stengsel som kan opnast i eit gjerde.",
+      "sentence": "Vi lukka ei ___ så sauene ikkje slapp ut.",
+      "inflections": [
+        "grind",
+        "grinda",
+        "grinder",
+        "grindene"
+      ],
+      "source": {
+        "articleId": 26887,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/26887"
+      }
+    },
+    {
+      "id": "nn-24579-1029783",
+      "answer": "geitebukk",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Dyr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette hanndyret har gjerne skjegg og store horn.",
+      "definition": "Hann av eit klatrande husdyr som gjev mjølk.",
+      "sentence": "Ein ___ stod og stanga mot gjerdet.",
+      "inflections": [
+        "geitebukk",
+        "geitebukken",
+        "geitebukkar",
+        "geitebukkane"
+      ],
+      "source": {
+        "articleId": 24579,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/24579"
+      }
+    },
+    {
+      "id": "nn-44883-1054518",
+      "answer": "lauv",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette fell gjerne frå trea om hausten.",
+      "definition": "Blad på tre og buskar.",
+      "sentence": "Gult ___ låg strødd over stien.",
+      "inflections": [
+        "lauv",
+        "lauvet",
+        "lauva"
+      ],
+      "source": {
+        "articleId": 44883,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/44883"
+      }
+    },
+    {
+      "id": "nn-4575-1005393",
+      "answer": "bar",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette grøne materialet kan du finne på gran og furu.",
+      "definition": "Nåleforma blad og små greiner på visse tre.",
+      "sentence": "Vi la grønt ___ framfor døra.",
+      "inflections": [
+        "bar",
+        "baret",
+        "bara"
+      ],
+      "source": {
+        "articleId": 4575,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/4575"
+      }
+    },
+    {
+      "id": "nn-43664-1053083",
+      "answer": "kvist",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne vesle delen av eit tre kan du finne på bakken.",
+      "definition": "Tynn grein på tre eller busk.",
+      "sentence": "Fuglen bar ein ___ til reiret.",
+      "inflections": [
+        "kvist",
+        "kvisten",
+        "kvistar",
+        "kvistane",
+        "kvister",
+        "kvistene"
+      ],
+      "source": {
+        "articleId": 43664,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/43664"
+      }
+    },
+    {
+      "id": "nn-52665-1064506",
+      "answer": "never",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette kvite materialet kan du finne ytst på bjørkestammen.",
+      "definition": "Ytste laget av bork på bjørk.",
+      "sentence": "Vi såg kvit ___ på den gamle bjørka.",
+      "inflections": [
+        "never",
+        "nevra",
+        "nevrer",
+        "nevrene",
+        "nevrar",
+        "nevrane"
+      ],
+      "source": {
+        "articleId": 52665,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/52665"
+      }
+    },
+    {
+      "id": "nn-65314-1079356",
+      "answer": "sevje",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne væska stig i trea om våren.",
+      "definition": "Væske med næring som blir transportert gjennom planter.",
+      "sentence": "Det rann ___ frå eit sår i stammen.",
+      "inflections": [
+        "sevje",
+        "sevja",
+        "sevjer",
+        "sevjene"
+      ],
+      "source": {
+        "articleId": 65314,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/65314"
+      }
+    },
+    {
+      "id": "nn-43146-1052358",
+      "answer": "kvae",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette klebrige stoffet kan piple ut av ein trestamme.",
+      "definition": "Tjukk, klissete plantesaft som stivnar i luft.",
+      "sentence": "Det sat klissete ___ på furustammen.",
+      "inflections": [
+        "kvae",
+        "kvaa",
+        "kvaer",
+        "kvaene"
+      ],
+      "source": {
+        "articleId": 43146,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/43146"
+      }
+    },
+    {
+      "id": "nn-80141-1097800",
+      "answer": "torv",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Inkjekjønn: eit / Hokjønn: ei",
+      "usage": "Dette kan dekkje eit tradisjonelt hustak.",
+      "definition": "Jordlag med røter og delvis nedbrotne planter.",
+      "sentence": "Det voks gras i eit lag ___ på taket.",
+      "inflections": [
+        "torv",
+        "torvet",
+        "torva",
+        "torver",
+        "torvene"
+      ],
+      "source": {
+        "articleId": 80141,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/80141"
+      }
+    },
+    {
+      "id": "nn-51314-1062803",
+      "answer": "myr",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hokjønn: ei",
+      "usage": "Her er bakken ofte våt og mjuk å gå på.",
+      "definition": "Våtmark der daude planter blir brotne langsamt ned.",
+      "sentence": "Vi måtte gå rundt ei våt ___.",
+      "inflections": [
+        "myr",
+        "myra",
+        "myrer",
+        "myrene",
+        "myrar",
+        "myrane"
+      ],
+      "source": {
+        "articleId": 51314,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/51314"
+      }
+    },
+    {
+      "id": "nn-47117-1057587",
+      "answer": "lyng",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hankjønn: ein",
+      "usage": "Desse låge buskane kan farge heia lilla.",
+      "definition": "Små buskar med nåleliknande blad og små blomar.",
+      "sentence": "Det blømde lilla ___ på heia.",
+      "inflections": [
+        "lyng",
+        "lyngen",
+        "lyngar",
+        "lyngane"
+      ],
+      "source": {
+        "articleId": 47117,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/47117"
+      }
+    },
+    {
+      "id": "nn-14095-1016968",
+      "answer": "einer",
+      "alternatives": [
+        "eine"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne stikkande busken får blå, bærliknande kongler.",
+      "definition": "Eviggrøn busk med spisse nåler og aromatiske kongler.",
+      "sentence": "Ein ___ stod grøn mellom dei nakne trea.",
+      "inflections": [
+        "einer",
+        "eineren",
+        "einerar",
+        "einerane"
+      ],
+      "source": {
+        "articleId": 14095,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/14095"
+      }
+    },
+    {
+      "id": "nn-6345-1007526",
+      "answer": "bjørk",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette treet er lett å kjenne på den lyse stammen.",
+      "definition": "Lauvtre med lys bork og små, taggete blad.",
+      "sentence": "Ei ___ med kvit stamme voks ved huset.",
+      "inflections": [
+        "bjørk",
+        "bjørka",
+        "bjørker",
+        "bjørkene"
+      ],
+      "source": {
+        "articleId": 6345,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/6345"
+      }
+    },
+    {
+      "id": "nn-64671-1078541",
+      "answer": "selje",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette treet får mjuke, lodne knoppar tidleg om våren.",
+      "definition": "Lauvtre som får gåsungar før blada sprett.",
+      "sentence": "Ei ___ stod full av grå gåsungar.",
+      "inflections": [
+        "selje",
+        "selja",
+        "seljer",
+        "seljene"
+      ],
+      "source": {
+        "articleId": 64671,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/64671"
+      }
+    },
+    {
+      "id": "nn-55524-1067926",
+      "answer": "osp",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hokjønn: ei",
+      "usage": "Blada på dette treet skjelv lett i vinden.",
+      "definition": "Lauvtre med runde blad på lange, flate stilkar.",
+      "sentence": "Ei ___ skalv med blada sjølv i svak vind.",
+      "inflections": [
+        "osp",
+        "ospa",
+        "osper",
+        "ospene"
+      ],
+      "source": {
+        "articleId": 55524,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/55524"
+      }
+    },
+    {
+      "id": "nn-26457-1032039",
+      "answer": "gran",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette treet blir ofte pynta til jul.",
+      "definition": "Bartre med korte nåler og hengande kongler.",
+      "sentence": "Vi pynta ei ___ med lys til jul.",
+      "inflections": [
+        "gran",
+        "grana",
+        "graner",
+        "granene"
+      ],
+      "source": {
+        "articleId": 26457,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/26457"
+      }
+    },
+    {
+      "id": "nn-22898-1027497",
+      "answer": "furu",
+      "alternatives": [
+        "fure"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette treet har lange nåler som sit to og to.",
+      "definition": "Bartre med lange nåler og ofte raudbrun bork øvst.",
+      "sentence": "Ei ___ klamra seg fast på berget.",
+      "inflections": [
+        "furu",
+        "furua",
+        "furuer",
+        "furuene"
+      ],
+      "source": {
+        "articleId": 22898,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/22898"
+      }
+    },
+    {
+      "id": "nn-14035-1016909",
+      "answer": "eik",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette store treet får nøtter i små skåler.",
+      "definition": "Lauvtre med flikete blad og hardt treverk.",
+      "sentence": "Ei gammal ___ hadde ei vid krone.",
+      "inflections": [
+        "eik",
+        "eika",
+        "eiker",
+        "eikene"
+      ],
+      "source": {
+        "articleId": 14035,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/14035"
+      }
+    },
+    {
+      "id": "nn-2665-1003143",
+      "answer": "ask",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hankjønn: ein",
+      "usage": "Treverket frå dette treet er sterkt og bøyeleg.",
+      "definition": "Lauvtre med samansette blad og svarte knoppar.",
+      "sentence": "Ein ___ med svarte knoppar voks ved bekken.",
+      "inflections": [
+        "ask",
+        "asken",
+        "askar",
+        "askane"
+      ],
+      "source": {
+        "articleId": 2665,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/2665"
+      }
+    },
+    {
+      "id": "nn-997-1001198",
+      "answer": "alm",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette treet har ru blad som er skeive ved stilken.",
+      "definition": "Lauvtre med taggete, skeive blad og små, flate frukter.",
+      "sentence": "Ein ___ kasta skugge over benken.",
+      "inflections": [
+        "alm",
+        "almen",
+        "almar",
+        "almane"
+      ],
+      "source": {
+        "articleId": 997,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/997"
+      }
+    },
+    {
+      "id": "nn-62104-1075428",
+      "answer": "rogn",
+      "alternatives": [
+        "raun"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hankjønn: ein / Hokjønn: ei",
+      "usage": "Fuglane et dei raude fruktene på dette treet.",
+      "definition": "Lauvtre med samansette blad og raude frukter i klasar.",
+      "sentence": "Ei ___ stod full av raude klasar.",
+      "inflections": [
+        "rogn",
+        "rognen",
+        "rognar",
+        "rognane",
+        "rogna",
+        "rogner",
+        "rognene"
+      ],
+      "source": {
+        "articleId": 62104,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/62104"
+      }
+    },
+    {
+      "id": "nn-29261-1035479",
+      "answer": "hassel",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Natur",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne busken kan gje deg nøtter om hausten.",
+      "definition": "Busk eller lite tre med runde blad og etande nøtter.",
+      "sentence": "Ein ___ voks tett ved skogkanten.",
+      "inflections": [
+        "hassel",
+        "hasselen",
+        "haslar",
+        "haslane"
+      ],
+      "source": {
+        "articleId": 29261,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/29261"
+      }
+    },
+    {
+      "id": "nn-75741-1092410",
+      "answer": "svaberg",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "På denne glatte steinflata kan du sitje ved sjøen.",
+      "definition": "Nake, glatt berg, gjerne slipt av is og vatn.",
+      "sentence": "Vi bada frå eit solvarmt ___.",
+      "inflections": [
+        "svaberg",
+        "svaberget",
+        "svaberga"
+      ],
+      "source": {
+        "articleId": 75741,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/75741"
+      }
+    },
+    {
+      "id": "nn-85276-1104758",
+      "answer": "ur",
+      "alternatives": [
+        "urd"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Hokjønn: ei",
+      "usage": "Her må du finne vegen mellom lause steinar.",
+      "definition": "Samling av laus stein i ei fjellside.",
+      "sentence": "Vi gjekk varsamt gjennom ei bratt ___.",
+      "inflections": [
+        "ur",
+        "ura",
+        "urer",
+        "urene"
+      ],
+      "source": {
+        "articleId": 85276,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/85276"
+      }
+    },
+    {
+      "id": "nn-67071-1081400",
+      "answer": "skar",
+      "alternatives": [
+        "skard"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Her kan ein sti gå gjennom ei fjellrekkje.",
+      "definition": "Lågt søkk eller pass mellom fjelltoppar.",
+      "sentence": "Stien førte oss gjennom eit ___ i fjellet.",
+      "inflections": [
+        "skar",
+        "skaret",
+        "skara"
+      ],
+      "source": {
+        "articleId": 67071,
+        "senseId": 5,
+        "url": "https://ordbokene.no/nn/67071"
+      }
+    },
+    {
+      "id": "nn-68640-1083580",
+      "answer": "skred",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette kan rase nedover ei bratt fjellside.",
+      "definition": "Masse av snø, jord eller stein som rasar ut.",
+      "sentence": "Eit ___ hadde gått ned den bratte sida.",
+      "inflections": [
+        "skred",
+        "skredet",
+        "skreda"
+      ],
+      "source": {
+        "articleId": 68640,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/68640"
+      }
+    },
+    {
+      "id": "nn-19966-1023905",
+      "answer": "fonn",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne snømengda kan liggje att langt utover sommaren.",
+      "definition": "Stor samling snø som blir liggjande lenge.",
+      "sentence": "Ei kvit ___ låg att under toppen.",
+      "inflections": [
+        "fonn",
+        "fonna",
+        "fonner",
+        "fonnene",
+        "fenner",
+        "fennene"
+      ],
+      "source": {
+        "articleId": 19966,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/19966"
+      }
+    },
+    {
+      "id": "nn-35578-1043227",
+      "answer": "jettegryte",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette runde holet vart slipt ut av rennande vatn og stein.",
+      "definition": "Gryteforma fordjuping i berg laga av virvlande vatn.",
+      "sentence": "Vi fann ei djup ___ i svaberget.",
+      "inflections": [
+        "jettegryte",
+        "jettegryta",
+        "jettegryter",
+        "jettegrytene"
+      ],
+      "source": {
+        "articleId": 35578,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/35578"
+      }
+    },
+    {
+      "id": "nn-50564-1061916",
+      "answer": "morene",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette materialet vart frakta og lagt att av ein isbre.",
+      "definition": "Jord og stein som ein bre har ført med seg.",
+      "sentence": "Ei ___ synte kvar breen ein gong hadde lege.",
+      "inflections": [
+        "morene",
+        "morenen",
+        "morenar",
+        "morenane"
+      ],
+      "source": {
+        "articleId": 50564,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/50564"
+      }
+    },
+    {
+      "id": "nn-60568-1073668",
+      "answer": "ravine",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne smale dalen kan vatn grave ut i laus jord.",
+      "definition": "Djup, trong dal med bratte sider.",
+      "sentence": "Bekken rann gjennom ein smal ___.",
+      "inflections": [
+        "ravine",
+        "ravinen",
+        "ravinar",
+        "ravinane"
+      ],
+      "source": {
+        "articleId": 60568,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/60568"
+      }
+    },
+    {
+      "id": "nn-36065-1043836",
+      "answer": "juv",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Her kan elva renne djupt mellom bratte fjellveggar.",
+      "definition": "Djup og trong kløft i fjellet.",
+      "sentence": "Vi såg ned i eit mørkt ___.",
+      "inflections": [
+        "juv",
+        "juvet",
+        "juva"
+      ],
+      "source": {
+        "articleId": 36065,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/36065"
+      }
+    },
+    {
+      "id": "nn-25048-1030323",
+      "answer": "gjel",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Hankjønn: ein / Inkjekjønn: eit",
+      "usage": "Denne tronge kløfta kan ha ein foss gjennom seg.",
+      "definition": "Trong sprekk eller kløft med bratte sider.",
+      "sentence": "Elva brusa gjennom eit trongt ___.",
+      "inflections": [
+        "gjel",
+        "gjelen",
+        "gjelar",
+        "gjelane",
+        "gjelet",
+        "gjela"
+      ],
+      "source": {
+        "articleId": 25048,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/25048"
+      }
+    },
+    {
+      "id": "nn-52585-1064408",
+      "answer": "nes",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Her stikk land eit stykke ut i sjøen.",
+      "definition": "Landtunge som stikk ut i vatn.",
+      "sentence": "Vi gjekk ut på eit ___ og såg utover fjorden.",
+      "inflections": [
+        "nes",
+        "neset",
+        "nesa"
+      ],
+      "source": {
+        "articleId": 52585,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/52585"
+      }
+    },
+    {
+      "id": "nn-53915-1066065",
+      "answer": "odde",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne spissen av land kan peike ut i sjøen.",
+      "definition": "Smal, spiss landtunge.",
+      "sentence": "Eit fyr stod ytst på ein ___.",
+      "inflections": [
+        "odde",
+        "odden",
+        "oddar",
+        "oddane"
+      ],
+      "source": {
+        "articleId": 53915,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/53915"
+      }
+    },
+    {
+      "id": "nn-13949-1016809",
+      "answer": "eid",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Over denne smale landstripa kan du gå mellom to vassområde.",
+      "definition": "Smalt landstykke mellom to sjøar eller fjordar.",
+      "sentence": "Vi bar kanoen over eit ___.",
+      "inflections": [
+        "eid",
+        "eidet",
+        "eida"
+      ],
+      "source": {
+        "articleId": 13949,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/13949"
+      }
+    },
+    {
+      "id": "nn-89833-1110894",
+      "answer": "vik",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Hokjønn: ei",
+      "usage": "Her bøyer strandlinja seg inn i landet.",
+      "definition": "Innbuktning i ei strand.",
+      "sentence": "Vi ankra opp i ei lun ___.",
+      "inflections": [
+        "vik",
+        "vika",
+        "viker",
+        "vikene",
+        "vikar",
+        "vikane"
+      ],
+      "source": {
+        "articleId": 89833,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/89833"
+      }
+    },
+    {
+      "id": "nn-91255-1112696",
+      "answer": "våg",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne lune innbukta kan gje båtar ly.",
+      "definition": "Smal eller grunn bukt som går inn frå sjøen.",
+      "sentence": "Småbåtane låg trygt i ein ___.",
+      "inflections": [
+        "våg",
+        "vågen",
+        "vågar",
+        "vågane"
+      ],
+      "source": {
+        "articleId": 91255,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/91255"
+      }
+    },
+    {
+      "id": "nn-75539-1092170",
+      "answer": "sund",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Gjennom denne smale passasjen kan båtar fare mellom landområde.",
+      "definition": "Smalt vassområde mellom to landstykke.",
+      "sentence": "Vi rodde gjennom eit smalt ___.",
+      "inflections": [
+        "sund",
+        "sundet",
+        "sunda"
+      ],
+      "source": {
+        "articleId": 75539,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/75539"
+      }
+    },
+    {
+      "id": "nn-18613-1022263",
+      "answer": "fjord",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne lange havarmen strekkjer seg inn i landet.",
+      "definition": "Lang, ofte djup innbuktning frå havet.",
+      "sentence": "Bratte fjell stod på begge sider av ein ___.",
+      "inflections": [
+        "fjord",
+        "fjorden",
+        "fjordar",
+        "fjordane"
+      ],
+      "source": {
+        "articleId": 18613,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/18613"
+      }
+    },
+    {
+      "id": "nn-67911-1082487",
+      "answer": "skjergard",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Hankjønn: ein",
+      "usage": "Her kan du ferdast mellom mange små øyar ved kysten.",
+      "definition": "Samling av små øyar og skjer utanfor kysten.",
+      "sentence": "Vi padla gjennom ein vakker ___.",
+      "inflections": [
+        "skjergard",
+        "skjergarden",
+        "skjergardar",
+        "skjergardane"
+      ],
+      "source": {
+        "articleId": 67911,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/67911"
+      }
+    },
+    {
+      "id": "nn-67894-1082470",
+      "answer": "skjer",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Landskap",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Denne låge steinknausen kan stikke så vidt opp av sjøen.",
+      "definition": "Lita, naken øy eller berggrunn like over vassflata.",
+      "sentence": "Ein måse sat på eit lågt ___.",
+      "inflections": [
+        "skjer",
+        "skjeret",
+        "skjera"
+      ],
+      "source": {
+        "articleId": 67894,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/67894"
+      }
+    },
+    {
+      "id": "nn-19187-1023001",
+      "answer": "flod",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Havet",
+      "grammar": "Hokjønn: ei",
+      "usage": "No stig havet og dekkjer meir av stranda.",
+      "definition": "Tidevatn når sjøen står høgt.",
+      "sentence": "Ved ___ låg båten heilt inntil bryggja.",
+      "inflections": [
+        "flod",
+        "floda",
+        "floder",
+        "flodene"
+      ],
+      "source": {
+        "articleId": 19187,
+        "senseId": 7,
+        "url": "https://ordbokene.no/nn/19187"
+      }
+    },
+    {
+      "id": "nn-18666-1022328",
+      "answer": "fjøre",
+      "alternatives": [
+        "fjære"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Havet",
+      "grammar": "Hokjønn: ei",
+      "usage": "No kan du sjå delar av botnen som vanlegvis er under vatn.",
+      "definition": "Tidevatn når sjøen står lågt.",
+      "sentence": "Ved ___ kunne vi gå langt ut på sanden.",
+      "inflections": [
+        "fjøre",
+        "fjøra",
+        "fjører",
+        "fjørene"
+      ],
+      "source": {
+        "articleId": 18666,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/18666"
+      }
+    },
+    {
+      "id": "nn-13583-1016334",
+      "answer": "dønning",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Havet",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne store rørsla i sjøen kan halde fram etter vinden har løya.",
+      "definition": "Lang, avrunda havbølgje.",
+      "sentence": "Ei tung ___ løfta båten roleg opp og ned.",
+      "inflections": [
+        "dønning",
+        "dønningen",
+        "dønningar",
+        "dønningane"
+      ],
+      "source": {
+        "articleId": 13583,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/13583"
+      }
+    },
+    {
+      "id": "nn-8506-1010114",
+      "answer": "bris",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Vêr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne moderate vinden kan fylle eit segl.",
+      "definition": "Vindstyrke mellom flau vind og kuling.",
+      "sentence": "Ein lett ___ ruska i blada.",
+      "inflections": [
+        "bris",
+        "brisen",
+        "brisar",
+        "brisane"
+      ],
+      "source": {
+        "articleId": 8506,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/8506"
+      }
+    },
+    {
+      "id": "nn-42742-1051915",
+      "answer": "kuling",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Vêr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne sterke vinden gjer det uroleg på sjøen.",
+      "definition": "Kraftig vind, sterkare enn bris og svakare enn storm.",
+      "sentence": "Det bles ___ ute på havet.",
+      "inflections": [
+        "kuling",
+        "kulingen",
+        "kulingar",
+        "kulingane"
+      ],
+      "source": {
+        "articleId": 42742,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/42742"
+      }
+    },
+    {
+      "id": "nn-68098-1082748",
+      "answer": "skodde",
+      "alternatives": [
+        "skodd"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Vêr",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette kan gjere det vanskeleg å sjå langt framfor seg.",
+      "definition": "Små vassdropar som svevar tett i lufta nær bakken.",
+      "sentence": "Tett ___ la seg over dalen.",
+      "inflections": [
+        "skodde",
+        "skodda",
+        "skodder",
+        "skoddene"
+      ],
+      "source": {
+        "articleId": 68098,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/68098"
+      }
+    },
+    {
+      "id": "nn-12154-1014578",
+      "answer": "dogg",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Vêr",
+      "grammar": "Hokjønn: ei",
+      "usage": "Desse dropane kan liggje på graset ein kjøleg morgon.",
+      "definition": "Vassdropar som blir skilde ut på kalde flater.",
+      "sentence": "Graset var vått av ___ tidleg om morgonen.",
+      "inflections": [
+        "dogg",
+        "dogga",
+        "dogger",
+        "doggene"
+      ],
+      "source": {
+        "articleId": 12154,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/12154"
+      }
+    },
+    {
+      "id": "nn-61854-1075136",
+      "answer": "rim",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Vêr",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette kvite laget kan dekkje greiner etter ei kald natt.",
+      "definition": "Tynt lag av iskrystallar på kalde flater.",
+      "sentence": "Det låg kvitt ___ på gjerdet.",
+      "inflections": [
+        "rim",
+        "rimet",
+        "rima"
+      ],
+      "source": {
+        "articleId": 61854,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/61854"
+      }
+    },
+    {
+      "id": "nn-28160-1034129",
+      "answer": "hagl",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Vêr",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Desse harde kulene kan falle frå ei sky.",
+      "definition": "Små isklumpar som fell som nedbør.",
+      "sentence": "Det tromma ___ mot taket.",
+      "inflections": [
+        "hagl",
+        "haglet",
+        "hagla"
+      ],
+      "source": {
+        "articleId": 28160,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/28160"
+      }
+    },
+    {
+      "id": "nn-70213-1085800",
+      "answer": "sludd",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Vêr",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Denne nedbøren er ei blanding av to kjende slag.",
+      "definition": "Blanding av regn og våt snø.",
+      "sentence": "Det kom ___ i staden for tørr snø.",
+      "inflections": [
+        "sludd",
+        "sluddet",
+        "sludda"
+      ],
+      "source": {
+        "articleId": 70213,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/70213"
+      }
+    },
+    {
+      "id": "nn-67076-1081413",
+      "answer": "skare",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Vêr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette harde laget kan bere deg oppå snøen.",
+      "definition": "Hard skorpe på overflata av snø.",
+      "sentence": "Det var så sterk ___ at vi kunne gå oppå.",
+      "inflections": [
+        "skare",
+        "skaren",
+        "skarar",
+        "skarane"
+      ],
+      "source": {
+        "articleId": 67076,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/67076"
+      }
+    },
+    {
+      "id": "nn-67245-1081613",
+      "answer": "skavl",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Vêr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne kanten av snø kan vinden byggje ut frå eit fjell.",
+      "definition": "Snøhaug eller utheng som vinden har forma.",
+      "sentence": "Ein stor ___ hang utover fjellsida.",
+      "inflections": [
+        "skavl",
+        "skavlen",
+        "skavlar",
+        "skavlane"
+      ],
+      "source": {
+        "articleId": 67245,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/67245"
+      }
+    },
+    {
+      "id": "nn-78042-1095254",
+      "answer": "tele",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Vêr",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette i bakken kan gjere det vanskeleg å grave om vinteren.",
+      "definition": "Frosen jord eller frost i jorda.",
+      "sentence": "Det var framleis ___ i bakken om våren.",
+      "inflections": [
+        "tele",
+        "telen",
+        "telar",
+        "telane"
+      ],
+      "source": {
+        "articleId": 78042,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/78042"
+      }
+    },
+    {
+      "id": "nn-51475-1063037",
+      "answer": "mørker",
+      "alternatives": [
+        "mørke"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Tid",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "I dette treng du gjerne ei lampe for å sjå.",
+      "definition": "Tilstand der det er lite eller ikkje noko lys.",
+      "sentence": "Rommet låg i ___ då lyset gjekk.",
+      "inflections": [
+        "mørker",
+        "mørkeret",
+        "mørkera"
+      ],
+      "source": {
+        "articleId": 51475,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/51475"
+      }
+    },
+    {
+      "id": "nn-27494-1033284",
+      "answer": "grålysning",
+      "alternatives": [
+        "grålysing"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Tid",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne tida kjem før sola har stått ordentleg opp.",
+      "definition": "Den fyrste lyse stunda om morgonen.",
+      "sentence": "Fuglane byrja å syngje i ___.",
+      "inflections": [
+        "grålysning",
+        "grålysninga",
+        "grålysningar",
+        "grålysningane"
+      ],
+      "source": {
+        "articleId": 27494,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/27494"
+      }
+    },
+    {
+      "id": "nn-69272-1084567",
+      "answer": "skumring",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Tid",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne tida kjem når dagslyset gradvis blir borte.",
+      "definition": "Halvmørker mellom dag og natt.",
+      "sentence": "Vi gjekk heim i ___ etter solnedgangen.",
+      "inflections": [
+        "skumring",
+        "skumringa",
+        "skumringar",
+        "skumringane"
+      ],
+      "source": {
+        "articleId": 69272,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/69272"
+      }
+    },
+    {
+      "id": "nn-53029-1064886",
+      "answer": "nordlys",
+      "alternatives": [
+        "nordljos"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Himmelen",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette fargespelet kan danse på himmelen i mørke netter.",
+      "definition": "Lysfenomen frå ladde partiklar høgt i atmosfæren.",
+      "sentence": "Grønt ___ bølgja over nattehimmelen.",
+      "inflections": [
+        "nordlys",
+        "nordlyset",
+        "nordlysa"
+      ],
+      "source": {
+        "articleId": 53029,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/53029"
+      }
+    },
+    {
+      "id": "nn-73901-1090109",
+      "answer": "stjernebilete",
+      "alternatives": [
+        "stjernebilde"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Himmelen",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette mønsteret på himmelen kan du bruke for å finne retninga.",
+      "definition": "Gruppe lysande himmellekamar som dannar ein tenkt figur.",
+      "sentence": "Vi leita etter eit kjent ___ på himmelen.",
+      "inflections": [
+        "stjernebilete",
+        "stjernebiletet",
+        "stjernebileta"
+      ],
+      "source": {
+        "articleId": 73901,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/73901"
+      }
+    },
+    {
+      "id": "nn-92748-1114607",
+      "answer": "åre",
+      "alternatives": [
+        "år"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne reiskapen brukar du når du ror.",
+      "definition": "Langt skaft med eit flatt blad som blir ført gjennom vatnet.",
+      "sentence": "Eg sette ei ___ ned i vatnet og drog.",
+      "inflections": [
+        "åre",
+        "åra",
+        "årer",
+        "årene"
+      ],
+      "source": {
+        "articleId": 92748,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/92748"
+      }
+    },
+    {
+      "id": "nn-37629-1045591",
+      "answer": "keip",
+      "alternatives": [
+        "keipe"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette festet held roreiskapen på plass ved båtripa.",
+      "definition": "Feste på båtkanten som ei roåre kviler i.",
+      "sentence": "Åra låg støtt i ein ___.",
+      "inflections": [
+        "keip",
+        "keipen",
+        "keipar",
+        "keipane"
+      ],
+      "source": {
+        "articleId": 37629,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/37629"
+      }
+    },
+    {
+      "id": "nn-79700-1097246",
+      "answer": "tofte",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Hokjønn: ei",
+      "usage": "På denne sit du gjerne når du ror ein liten båt.",
+      "definition": "Tverrbenk til å sitje på i ein båt.",
+      "sentence": "Eg sette meg på ei ___ og tok årene.",
+      "inflections": [
+        "tofte",
+        "tofta",
+        "tofter",
+        "toftene"
+      ],
+      "source": {
+        "articleId": 79700,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/79700"
+      }
+    },
+    {
+      "id": "nn-62233-1075575",
+      "answer": "ror",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Med denne delen kan du styre eit fartøy.",
+      "definition": "Flyttbar plate bak på ein båt som styrer retninga.",
+      "sentence": "Eit ___ bak på båten vart dreidd mot venstre.",
+      "inflections": [
+        "ror",
+        "roret",
+        "rora"
+      ],
+      "source": {
+        "articleId": 62233,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/62233"
+      }
+    },
+    {
+      "id": "nn-38392-1046512",
+      "answer": "kjøl",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne delen går langs midten under ein båt.",
+      "definition": "Langsgåande botnstykke i eit fartøy.",
+      "sentence": "Båten hadde ein djup ___ som gav stø kurs.",
+      "inflections": [
+        "kjøl",
+        "kjølen",
+        "kjølar",
+        "kjølane"
+      ],
+      "source": {
+        "articleId": 38392,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/38392"
+      }
+    },
+    {
+      "id": "nn-73123-1089193",
+      "answer": "stamn",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne oppreiste delen finst heilt framme eller bak på ein båt.",
+      "definition": "Fremre eller bakre ende av eit fartøyskrog.",
+      "sentence": "Ein høg ___ skar gjennom bølgjene.",
+      "inflections": [
+        "stamn",
+        "stamnen",
+        "stamnar",
+        "stamnane"
+      ],
+      "source": {
+        "articleId": 73123,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/73123"
+      }
+    },
+    {
+      "id": "nn-64380-1078221",
+      "answer": "segl",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette fangar vinden og driv båten fram.",
+      "definition": "Stor duk spent ut for å nytte vinden som drivkraft.",
+      "sentence": "Vi heiste eit kvitt ___ då vinden kom.",
+      "inflections": [
+        "segl",
+        "seglet",
+        "segla"
+      ],
+      "source": {
+        "articleId": 64380,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/64380"
+      }
+    },
+    {
+      "id": "nn-48632-1059582",
+      "answer": "mast",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne høge stonga kan bere duk og rigg på ein båt.",
+      "definition": "Loddrett stong på eit fartøy.",
+      "sentence": "Eit flagg vaia høgt oppe i ei ___.",
+      "inflections": [
+        "mast",
+        "masta",
+        "master",
+        "mastene"
+      ],
+      "source": {
+        "articleId": 48632,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/48632"
+      }
+    },
+    {
+      "id": "nn-61774-1075049",
+      "answer": "rigg",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette utstyret held segla og stengene på plass.",
+      "definition": "Master, tauverk og anna utstyr på eit seglfartøy.",
+      "sentence": "Vi kontrollerte all ___ før vi la frå kai.",
+      "inflections": [
+        "rigg",
+        "riggen",
+        "riggar",
+        "riggane"
+      ],
+      "source": {
+        "articleId": 61774,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/61774"
+      }
+    },
+    {
+      "id": "nn-10147-1012364",
+      "answer": "bøye",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Hankjønn: ein / Hokjønn: ei",
+      "usage": "Denne flytande markøren kan syne leia på sjøen.",
+      "definition": "Flytande merke festa til botnen.",
+      "sentence": "Ei raud ___ duva ved innseglinga.",
+      "inflections": [
+        "bøye",
+        "bøyen",
+        "bøyar",
+        "bøyane",
+        "bøya",
+        "bøyer",
+        "bøyene"
+      ],
+      "source": {
+        "articleId": 10147,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/10147"
+      }
+    },
+    {
+      "id": "nn-28683-1034769",
+      "answer": "hamn",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Hokjønn: ei",
+      "usage": "Her kan båtar liggje i ly og laste varer.",
+      "definition": "Verna stad der fartøy kan leggje til.",
+      "sentence": "Båten kom trygt inn i ei ___.",
+      "inflections": [
+        "hamn",
+        "hamna",
+        "hamner",
+        "hamnene"
+      ],
+      "source": {
+        "articleId": 28683,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/28683"
+      }
+    },
+    {
+      "id": "nn-50419-1061754",
+      "answer": "molo",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette byggverket dempar bølgjene utanfor ein liggjeplass.",
+      "definition": "Langt vern av stein eller betong ute i sjøen.",
+      "sentence": "Ein ___ verna småbåtane mot bølgjene.",
+      "inflections": [
+        "molo",
+        "moloen",
+        "moloar",
+        "moloane"
+      ],
+      "source": {
+        "articleId": 50419,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/50419"
+      }
+    },
+    {
+      "id": "nn-23100-1027764",
+      "answer": "fyr",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette lyset hjelper sjøfarande med å finne vegen.",
+      "definition": "Tårn eller bygning med eit sterkt lys til rettleiing på sjøen.",
+      "sentence": "Eit ___ blinka ute på neset.",
+      "inflections": [
+        "fyr",
+        "fyret",
+        "fyra"
+      ],
+      "source": {
+        "articleId": 23100,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/23100"
+      }
+    },
+    {
+      "id": "nn-46502-1128058",
+      "answer": "los",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Arbeid",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne fagpersonen kjenner farvatnet og hjelper fartøy inn.",
+      "definition": "Person som rettleier skip gjennom vanskelege farvatn.",
+      "sentence": "Ein ___ kom om bord for å vise leia.",
+      "inflections": [
+        "los",
+        "losen",
+        "losar",
+        "losane"
+      ],
+      "source": {
+        "articleId": 46502,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/46502"
+      }
+    },
+    {
+      "id": "nn-62234-1075576",
+      "answer": "rorbu",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Hokjønn: ei",
+      "usage": "I denne budde fiskarar medan dei var på sesongfiske.",
+      "definition": "Lite hus ved sjøen for fiskarar.",
+      "sentence": "Fiskarane overnatta i ei raud ___.",
+      "inflections": [
+        "rorbu",
+        "rorbua",
+        "rorbuer",
+        "rorbuene"
+      ],
+      "source": {
+        "articleId": 62234,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/62234"
+      }
+    },
+    {
+      "id": "nn-82648-1100982",
+      "answer": "tust",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Heime",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette kan vere ein liten bustete bunt av hår eller gras.",
+      "definition": "Lite knippe eller liten bunt av noko som stikk ut.",
+      "sentence": "Ein ___ av hår stod rett opp.",
+      "inflections": [
+        "tust",
+        "tusten",
+        "tustar",
+        "tustane"
+      ],
+      "source": {
+        "articleId": 82648,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/82648"
+      }
+    },
+    {
+      "id": "nn-53502-1065869",
+      "answer": "nøste",
+      "alternatives": [
+        "nyste"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Handverk",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Denne runde bunten held orden på garnet.",
+      "definition": "Tråd eller garn vunde saman til ein ball.",
+      "sentence": "Katten rulla eit ___ over golvet.",
+      "inflections": [
+        "nøste",
+        "nøstet",
+        "nøsta"
+      ],
+      "source": {
+        "articleId": 53502,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/53502"
+      }
+    },
+    {
+      "id": "nn-71055-1086765",
+      "answer": "snelle",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Handverk",
+      "grammar": "Hokjønn: ei",
+      "usage": "På denne kan tråd vere vunden rundt ein liten sylinder.",
+      "definition": "Liten sylinder med kantar til å vinde tråd på.",
+      "sentence": "Ei ___ med blå tråd låg ved nåla.",
+      "inflections": [
+        "snelle",
+        "snella",
+        "sneller",
+        "snellene"
+      ],
+      "source": {
+        "articleId": 71055,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/71055"
+      }
+    },
+    {
+      "id": "nn-89655-1110690",
+      "answer": "vev",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Handverk",
+      "grammar": "Hankjønn: ein",
+      "usage": "I denne reiskapen kan du lage stoff av trådar.",
+      "definition": "Reiskap der trådar blir kryssa og bundne til tøy.",
+      "sentence": "Ho laga eit teppe i ein ___.",
+      "inflections": [
+        "vev",
+        "veven",
+        "vever",
+        "vevene",
+        "vevar",
+        "vevane"
+      ],
+      "source": {
+        "articleId": 89655,
+        "senseId": 8,
+        "url": "https://ordbokene.no/nn/89655"
+      }
+    },
+    {
+      "id": "nn-61235-1074425",
+      "answer": "renning",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Handverk",
+      "grammar": "Hokjønn: ei",
+      "usage": "Desse trådane går på langs når ein lagar tøy.",
+      "definition": "Dei langsgåande trådane i eit vove stoff.",
+      "sentence": "Ho stramma ei ___ før arbeidet byrja.",
+      "inflections": [
+        "renning",
+        "renninga",
+        "renningar",
+        "renningane"
+      ],
+      "source": {
+        "articleId": 61235,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/61235"
+      }
+    },
+    {
+      "id": "nn-34362-1041705",
+      "answer": "innslag",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Handverk",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Desse trådane går på tvers av dei som står spente.",
+      "definition": "Tråd som blir ført på tvers gjennom langsgåande trådar i ein vev.",
+      "sentence": "Raudt ___ danna striper i stoffet.",
+      "inflections": [
+        "innslag",
+        "innslaget",
+        "innslaga"
+      ],
+      "source": {
+        "articleId": 34362,
+        "senseId": 7,
+        "url": "https://ordbokene.no/nn/34362"
+      }
+    },
+    {
+      "id": "nn-62121-1075451",
+      "answer": "rokk",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Handverk",
+      "grammar": "Hankjønn: ein",
+      "usage": "Med denne gamle reiskapen kan du spinne garn.",
+      "definition": "Reiskap med hjul til å tvinne fibrar til tråd.",
+      "sentence": "Bestemor spann ull på ein ___.",
+      "inflections": [
+        "rokk",
+        "rokken",
+        "rokkar",
+        "rokkane"
+      ],
+      "source": {
+        "articleId": 62121,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/62121"
+      }
+    },
+    {
+      "id": "nn-77935-1095125",
+      "answer": "tein",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Handverk",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne tynne stonga kan brukast til å spinne tråd.",
+      "definition": "Tynn stong eller pinne, mellom anna til spinning.",
+      "sentence": "Ulla vart spunnen kring ein ___.",
+      "inflections": [
+        "tein",
+        "teinen",
+        "teinar",
+        "teinane"
+      ],
+      "source": {
+        "articleId": 77935,
+        "senseId": 5,
+        "url": "https://ordbokene.no/nn/77935"
+      }
+    },
+    {
+      "id": "nn-64236-1078045",
+      "answer": "saum",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Handverk",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette held to stoffkantar saman.",
+      "definition": "Rekkje sting som bind tøy saman.",
+      "sentence": "Ein ___ hadde gått opp i jakka.",
+      "inflections": [
+        "saum",
+        "saumen",
+        "saumar",
+        "saumane"
+      ],
+      "source": {
+        "articleId": 64236,
+        "senseId": 6,
+        "url": "https://ordbokene.no/nn/64236"
+      }
+    },
+    {
+      "id": "nn-16357-1019589",
+      "answer": "fald",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Handverk",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne innbretta kanten gjer at stoffet ikkje raknar.",
+      "definition": "Kant av tøy som er bretta inn og sydd fast.",
+      "sentence": "Ho sydde ein ___ nedst på buksa.",
+      "inflections": [
+        "fald",
+        "falden",
+        "faldar",
+        "faldane"
+      ],
+      "source": {
+        "articleId": 16357,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/16357"
+      }
+    },
+    {
+      "id": "nn-30155-1036530",
+      "answer": "hempe",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Handverk",
+      "grammar": "Hokjønn: ei",
+      "usage": "Med denne vesle lykkja kan du hengje opp eit plagg.",
+      "definition": "Lita lykkje av band eller snor.",
+      "sentence": "Jakkeermet hadde ei ___ til oppheng.",
+      "inflections": [
+        "hempe",
+        "hempa",
+        "hemper",
+        "hempene"
+      ],
+      "source": {
+        "articleId": 30155,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/30155"
+      }
+    },
+    {
+      "id": "nn-72281-1088251",
+      "answer": "spenne",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Klede",
+      "grammar": "Inkjekjønn: eit / Hokjønn: ei",
+      "usage": "Denne kan halde eit belte eller eit band fast.",
+      "definition": "Feste som bind saman eller strammar eit band.",
+      "sentence": "Beltet hadde ei blank ___.",
+      "inflections": [
+        "spenne",
+        "spennet",
+        "spenna",
+        "spenner",
+        "spennene"
+      ],
+      "source": {
+        "articleId": 72281,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/72281"
+      }
+    },
+    {
+      "id": "nn-46435-1056663",
+      "answer": "lomme",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Klede",
+      "grammar": "Hokjønn: ei",
+      "usage": "Her kan du leggje småting i eit plagg.",
+      "definition": "Liten pose sydd på eller inn i klede.",
+      "sentence": "Eg fann ein stein i ei ___.",
+      "inflections": [
+        "lomme",
+        "lomma",
+        "lommer",
+        "lommene"
+      ],
+      "source": {
+        "articleId": 46435,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/46435"
+      }
+    },
+    {
+      "id": "nn-15575-1018677",
+      "answer": "erme",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Klede",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Denne delen av eit plagg dekkjer armen.",
+      "definition": "Del av eit klesplagg som går rundt ein arm.",
+      "sentence": "Det var eit hol i eit ___ på genseren.",
+      "inflections": [
+        "erme",
+        "ermet",
+        "erma"
+      ],
+      "source": {
+        "articleId": 15575,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/15575"
+      }
+    },
+    {
+      "id": "nn-118036-1130476",
+      "answer": "nøkkelbein",
+      "alternatives": [
+        "nykelbein"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kroppen",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette beinet ligg mellom brystet og skuldra.",
+      "definition": "Bein som bind brystbeinet saman med skulderbladet.",
+      "sentence": "Eit ___ kan kjennast øvst på brystet.",
+      "inflections": [
+        "nøkkelbein",
+        "nøkkelbeinet",
+        "nøkkelbeina"
+      ],
+      "source": {
+        "articleId": 118036,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/118036"
+      }
+    },
+    {
+      "id": "nn-69065-1084178",
+      "answer": "skulder",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kroppen",
+      "grammar": "Hokjønn: ei",
+      "usage": "Her møter armen resten av overkroppen.",
+      "definition": "Kroppsdel mellom halsen og overarmen.",
+      "sentence": "Sekken låg tungt på ei ___.",
+      "inflections": [
+        "skulder",
+        "skuldra",
+        "skuldrer",
+        "skuldrene"
+      ],
+      "source": {
+        "articleId": 69065,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/69065"
+      }
+    },
+    {
+      "id": "nn-54047-1126480",
+      "answer": "ankel",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kroppen",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette leddet ligg like over foten.",
+      "definition": "Leddet mellom leggen og foten.",
+      "sentence": "Eg trakka skeivt og fekk vondt i ein ___.",
+      "inflections": [
+        "ankel",
+        "ankelen",
+        "anklar",
+        "anklane"
+      ],
+      "source": {
+        "articleId": 54047,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/54047"
+      }
+    },
+    {
+      "id": "nn-54123-1066302",
+      "answer": "olboge",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kroppen",
+      "grammar": "Hankjønn: ein",
+      "usage": "I dette leddet bøyer du armen.",
+      "definition": "Ledd mellom overarmen og underarmen.",
+      "sentence": "Ho lente ein ___ mot bordet.",
+      "inflections": [
+        "olboge",
+        "olbogen",
+        "olbogar",
+        "olbogane"
+      ],
+      "source": {
+        "articleId": 54123,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/54123"
+      }
+    },
+    {
+      "id": "nn-115599-1035016",
+      "answer": "handledd",
+      "alternatives": [
+        "handled"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kroppen",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "I dette leddet kan du bøye og dreie handa.",
+      "definition": "Leddet mellom underarmen og handa.",
+      "sentence": "Eg hadde eit band kring eit ___.",
+      "inflections": [
+        "handledd",
+        "handleddet",
+        "handledda"
+      ],
+      "source": {
+        "articleId": 115599,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/115599"
+      }
+    },
+    {
+      "id": "nn-39675-1048313",
+      "answer": "knoke",
+      "alternatives": [
+        "knok"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kroppen",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne kulen blir tydeleg når du knyter handa.",
+      "definition": "Framståande del av eit fingerledd.",
+      "sentence": "Eg skrapa ein ___ mot den ru veggen.",
+      "inflections": [
+        "knoke",
+        "knoken",
+        "knokar",
+        "knokane"
+      ],
+      "source": {
+        "articleId": 39675,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/39675"
+      }
+    },
+    {
+      "id": "nn-79374-1096844",
+      "answer": "tinning",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kroppen",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne staden ligg på sida av hovudet, ved auget.",
+      "definition": "Del av hovudet mellom panna og øyret.",
+      "sentence": "Ho kjende pulsen ved ei ___.",
+      "inflections": [
+        "tinning",
+        "tinningen",
+        "tinningar",
+        "tinningane"
+      ],
+      "source": {
+        "articleId": 79374,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/79374"
+      }
+    },
+    {
+      "id": "nn-24101-1029229",
+      "answer": "gane",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kroppen",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette er taket inne i munnen.",
+      "definition": "Øvre flate i munnhola.",
+      "sentence": "Tunga rørte ved ein ___ inne i munnen.",
+      "inflections": [
+        "gane",
+        "ganen",
+        "ganar",
+        "ganane"
+      ],
+      "source": {
+        "articleId": 24101,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/24101"
+      }
+    },
+    {
+      "id": "nn-26785-1032416",
+      "answer": "grend",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Busetnad",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette er ei lita samling hus ute på landet.",
+      "definition": "Liten krins av gardar eller bustader.",
+      "sentence": "Familien budde i ei lita ___ ved fjorden.",
+      "inflections": [
+        "grend",
+        "grenda",
+        "grender",
+        "grendene"
+      ],
+      "source": {
+        "articleId": 26785,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/26785"
+      }
+    },
+    {
+      "id": "nn-26514-1032096",
+      "answer": "grannelag",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Busetnad",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette er området og folka som bur nær deg.",
+      "definition": "Krins av naboar eller nærliggjande bustader.",
+      "sentence": "Alle i eit ___ møttest til vårfest.",
+      "inflections": [
+        "grannelag",
+        "grannelaget",
+        "grannelaga"
+      ],
+      "source": {
+        "articleId": 26514,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/26514"
+      }
+    },
+    {
+      "id": "nn-86254-1106136",
+      "answer": "utmark",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Hokjønn: ei",
+      "usage": "Her kan dyr beite utanfor dei dyrka områda.",
+      "definition": "Udyrka jord utanfor åker og eng.",
+      "sentence": "Sauene beita i ___ heile sommaren.",
+      "inflections": [
+        "utmark",
+        "utmarka",
+        "utmarker",
+        "utmarkene"
+      ],
+      "source": {
+        "articleId": 86254,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/86254"
+      }
+    },
+    {
+      "id": "nn-34264-1041590",
+      "answer": "innmark",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette området på garden omfattar dyrka jord.",
+      "definition": "Dyrka eller inngjerda jord nær gardshusa.",
+      "sentence": "Vi gjekk utanom ___ då graset var høgt.",
+      "inflections": [
+        "innmark",
+        "innmarka",
+        "innmarker",
+        "innmarkene"
+      ],
+      "source": {
+        "articleId": 34264,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/34264"
+      }
+    },
+    {
+      "id": "nn-927-1001082",
+      "answer": "allmenning",
+      "alternatives": [
+        "ålmenning"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Samfunn",
+      "grammar": "Hankjønn: ein",
+      "usage": "I dette området kan fleire ha felles bruksrett.",
+      "definition": "Jord eller skog som fleire har rett til å bruke.",
+      "sentence": "Bygdefolket kunne hente ved i ein ___.",
+      "inflections": [
+        "allmenning",
+        "allmenningen",
+        "allmenningar",
+        "allmenningane"
+      ],
+      "source": {
+        "articleId": 927,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/927"
+      }
+    },
+    {
+      "id": "nn-86124-1105958",
+      "answer": "utkant",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Busetnad",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette er delen som ligg lengst frå midten.",
+      "definition": "Ytre del av eit område.",
+      "sentence": "Huset låg i ein ___ av bygda.",
+      "inflections": [
+        "utkant",
+        "utkanten",
+        "utkantar",
+        "utkantane"
+      ],
+      "source": {
+        "articleId": 86124,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/86124"
+      }
+    },
+    {
+      "id": "nn-8901-1010756",
+      "answer": "bryggje",
+      "alternatives": [
+        "brygge"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Ferdsel",
+      "grammar": "Hokjønn: ei",
+      "usage": "Her kan du gå om bord i ein båt.",
+      "definition": "Byggverk langs sjø eller vatn der båtar kan leggje til.",
+      "sentence": "Vi sat på ei ___ med beina over kanten.",
+      "inflections": [
+        "bryggje",
+        "bryggja",
+        "bryggjer",
+        "bryggjene"
+      ],
+      "source": {
+        "articleId": 8901,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/8901"
+      }
+    },
+    {
+      "id": "nn-75770-1092445",
+      "answer": "svalgang",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne opne gangen går langs utsida av eit hus.",
+      "definition": "Overbygd gang utanpå ein bygning.",
+      "sentence": "Ein ___ gjekk langs andre etasje.",
+      "inflections": [
+        "svalgang",
+        "svalgangen",
+        "svalgangar",
+        "svalgangane"
+      ],
+      "source": {
+        "articleId": 75770,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/75770"
+      }
+    },
+    {
+      "id": "nn-46323-1056518",
+      "answer": "loft",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette rommet ligg heilt øvst under taket.",
+      "definition": "Øvste rom eller etasje under taket i eit hus.",
+      "sentence": "Vi fann ei gammal kiste på eit ___.",
+      "inflections": [
+        "loft",
+        "loftet",
+        "lofta"
+      ],
+      "source": {
+        "articleId": 46323,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/46323"
+      }
+    },
+    {
+      "id": "nn-45209-1054955",
+      "answer": "lem",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne luka kan du opne opp til eit rom under taket.",
+      "definition": "Lokk eller luke over ei opning.",
+      "sentence": "Vi opna ein ___ i taket og klatra opp.",
+      "inflections": [
+        "lem",
+        "lemmen",
+        "lemmar",
+        "lemmane"
+      ],
+      "source": {
+        "articleId": 45209,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/45209"
+      }
+    },
+    {
+      "id": "nn-13628-1016383",
+      "answer": "dørstokk",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne kanten stig du over når du går inn i eit rom.",
+      "definition": "Tverrstykke nedst i ei døropning.",
+      "sentence": "Eg snubla i ein høg ___.",
+      "inflections": [
+        "dørstokk",
+        "dørstokken",
+        "dørstokkar",
+        "dørstokkane"
+      ],
+      "source": {
+        "articleId": 13628,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/13628"
+      }
+    },
+    {
+      "id": "nn-6304-1007482",
+      "answer": "bjelke",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Hankjønn: ein",
+      "usage": "Denne kraftige delen ber noko av vekta i eit hus.",
+      "definition": "Lang og tjukk stokk eller konstruksjonsdel.",
+      "sentence": "Ein kraftig ___ bar taket.",
+      "inflections": [
+        "bjelke",
+        "bjelken",
+        "bjelkar",
+        "bjelkane"
+      ],
+      "source": {
+        "articleId": 6304,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/6304"
+      }
+    },
+    {
+      "id": "nn-38828-1047154",
+      "answer": "kledning",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Hankjønn: ein / Hokjønn: ei",
+      "usage": "Dette ytre laget vernar veggen på eit hus.",
+      "definition": "Lag av bord eller plater utanpå ein bygningsdel.",
+      "sentence": "Huset fekk ny ___ av tre.",
+      "inflections": [
+        "kledning",
+        "kledningen",
+        "kledningar",
+        "kledningane",
+        "kledninga"
+      ],
+      "source": {
+        "articleId": 38828,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/38828"
+      }
+    },
+    {
+      "id": "nn-51436-1062986",
+      "answer": "møne",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Bygningar",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette er den øvste kanten der takflatene møtest.",
+      "definition": "Vassrett toppkant på eit skråtak.",
+      "sentence": "Ein fugl sat på eit ___ øvst på huset.",
+      "inflections": [
+        "møne",
+        "mønet",
+        "møna"
+      ],
+      "source": {
+        "articleId": 51436,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/51436"
+      }
+    },
+    {
+      "id": "nn-87409-1107622",
+      "answer": "varde",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Friluftsliv",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette steinmerket kan vise vegen i fjellet.",
+      "definition": "Haug av steinar brukt som merke.",
+      "sentence": "Ei ___ viste kvar stien gjekk vidare.",
+      "inflections": [
+        "varde",
+        "varden",
+        "vardar",
+        "vardane"
+      ],
+      "source": {
+        "articleId": 87409,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/87409"
+      }
+    },
+    {
+      "id": "nn-75121-1091691",
+      "answer": "støl",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Hankjønn: ein",
+      "usage": "Hit flytta folk og husdyr gjerne om sommaren.",
+      "definition": "Sommarplass i fjellet der husdyr beiter og blir mjølka.",
+      "sentence": "Kyrne gjekk på ein ___ heile sommaren.",
+      "inflections": [
+        "støl",
+        "stølen",
+        "stølar",
+        "stølane"
+      ],
+      "source": {
+        "articleId": 75121,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/75121"
+      }
+    },
+    {
+      "id": "nn-5151-1006068",
+      "answer": "beite",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Her finn husdyra mat som veks ute.",
+      "definition": "Område der dyr et gras og andre planter.",
+      "sentence": "Kyrne gjekk på grønt ___ ved garden.",
+      "inflections": [
+        "beite",
+        "beitet",
+        "beita"
+      ],
+      "source": {
+        "articleId": 5151,
+        "senseId": 5,
+        "url": "https://ordbokene.no/nn/5151"
+      }
+    },
+    {
+      "id": "nn-3698-1004340",
+      "answer": "avling",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Hokjønn: ei",
+      "usage": "Dette får bonden etter ein god vekstsesong.",
+      "definition": "Mengda av det som blir hausta av dyrka planter.",
+      "sentence": "Det vart ei stor ___ med poteter dette året.",
+      "inflections": [
+        "avling",
+        "avlinga",
+        "avlingar",
+        "avlingane"
+      ],
+      "source": {
+        "articleId": 3698,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/3698"
+      }
+    },
+    {
+      "id": "nn-77059-1094085",
+      "answer": "såkorn",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Jordbruk",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "Dette tek ein vare på for å få ny vekst neste år.",
+      "definition": "Korn som skal leggjast i jorda for å spire.",
+      "sentence": "Bonden sparte godt ___ til våren.",
+      "inflections": [
+        "såkorn",
+        "såkornet",
+        "såkorna"
+      ],
+      "source": {
+        "articleId": 77059,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/77059"
+      }
+    },
+    {
+      "id": "nn-68768-1083740",
+      "answer": "skrin",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Heime",
+      "grammar": "Inkjekjønn: eit",
+      "usage": "I denne vesle kassa kan du oppbevare noko verdifullt.",
+      "definition": "Lita kasse med lok til å gøyme ting i.",
+      "sentence": "Breva låg i eit lite ___ av tre.",
+      "inflections": [
+        "skrin",
+        "skrinet",
+        "skrina"
+      ],
+      "source": {
+        "articleId": 68768,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/68768"
+      }
+    },
+    {
+      "id": "nn-37904-1045917",
+      "answer": "kiste",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Heime",
+      "grammar": "Hokjønn: ei",
+      "usage": "Denne store kassa kan romme klede og tekstilar.",
+      "definition": "Stor kasse med lok til oppbevaring.",
+      "sentence": "På loftet stod ei ___ full av gamle klede.",
+      "inflections": [
+        "kiste",
+        "kista",
+        "kister",
+        "kistene"
+      ],
+      "source": {
+        "articleId": 37904,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/37904"
+      }
+    },
+    {
+      "id": "nn-67940-1082523",
+      "answer": "skjerv",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Fellesskap",
+      "grammar": "Hankjønn: ein",
+      "usage": "Dette vesle bidraget kan hjelpe ei felles sak.",
+      "definition": "Lite bidrag, gjerne av pengar.",
+      "sentence": "Alle gav ein ___ til den nye leikeplassen.",
+      "inflections": [
+        "skjerv",
+        "skjerven",
+        "skjervar",
+        "skjervane"
+      ],
+      "source": {
+        "articleId": 67940,
+        "senseId": 2,
+        "url": "https://ordbokene.no/nn/67940"
+      }
+    },
+    {
+      "id": "nn-25906-1031376",
+      "answer": "gløtt",
+      "alternatives": [
+        "glytt"
+      ],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Sansar",
+      "grammar": "Inkjekjønn: eit / Hankjønn: ein",
+      "usage": "Dette kan du få gjennom ei lita opning.",
+      "definition": "Kort blikk eller lite innsyn i noko.",
+      "sentence": "Vi fekk ein ___ av sjøen mellom trea.",
+      "inflections": [
+        "gløtt",
+        "gløttet",
+        "gløtta",
+        "gløtten",
+        "gløttar",
+        "gløttane"
+      ],
+      "source": {
+        "articleId": 25906,
+        "senseId": 4,
+        "url": "https://ordbokene.no/nn/25906"
+      }
+    },
+    {
+      "id": "nn-92909-1114814",
+      "answer": "åsyn",
+      "alternatives": [],
+      "pos": "NOUN",
+      "level": "krokut",
+      "theme": "Kroppen",
+      "grammar": "Inkjekjønn: eit / Hokjønn: ei",
+      "usage": "Dette eldre ordet kan du bruke om den delen av hovudet andre ser framfrå.",
+      "definition": "Andlet eller oppsyn.",
+      "sentence": "Eit venleg ___ møtte oss i døra.",
+      "inflections": [
+        "åsyn",
+        "åsynet",
+        "åsyna",
+        "åsyner",
+        "åsynene"
+      ],
+      "source": {
+        "articleId": 92909,
+        "senseId": 5,
+        "url": "https://ordbokene.no/nn/92909"
       }
     }
   ]

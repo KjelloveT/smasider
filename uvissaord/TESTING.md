@@ -1,35 +1,26 @@
 # Kontroll av UvissaOrd
 
-Kontrollert 24. oktober 2026 på greina `feat/ordvett-hintspel`, vidareført frå den opne PR-en #124. Fersk `origin/main` var `6398a1a`. Produksjonsframsida viste 2.3.1; `ordvett/` gav framsida som reserve, ikkje det nye spelet. Dette var tilstanden før opphavleg publisering. Den offentlege adressa vart seinare endra til `uvissaord/`; berre intern app-ID og lagringsnøkkel er haldne stabile.
+Kontrollert 25. oktober 2026 i den reine arbeidskopien for PR #125, vidareført frå `64c4007`. Fersk `origin/main` var `5f2c044`. Produksjon viste versjon 2.4 og den publiserte 40-myntsutgåva under `ordvett/`. PR-en flyttar den offentlege adressa til `uvissaord/`, etter uttrykkeleg ynske utan ei gammal rute i tillegg. Intern app-ID, lagringsnøkkel og bakgrunnsreservasjon er haldne stabile.
 
-## Spelreglar og lagring
+## Automatiske kontrollar
 
-- 26 automatiske testar passerer: kjeldemerkt ordbank, hintprisar, normerte svar, eingongskjøp, tomme bokstavplassar, gjentekne feil, maks 40 myntar, gjenoppretting, norsk midnatt/vintertid, arkivdatoar, skotår, ugyldige datoar, avgrensa lagring og idempotent oppgradering.
-- Regelversjon 4 har ein pott på 40 myntar. Hintprisane er uendra, og nye feil svar kostar 2. Alle 20 feil i éi oppgåve kan gjenopprettast etter ny innlasting, utan fleire trekk eller negativ pott.
-- Lagringsformat 3 hugsar vald arkivdato, inntil 40 dagsrundar og 40 resultat. Ei påbyrja runde frå 30-myntutgåva kan halde fram med 40-potten, utan at kjeldefelta blir endra. Svartekst og namn blir ikkje lagra.
-- Alle JavaScriptfilene er syntakskontrollerte. Bankversjonen er 2026-10-24.1.
+- 32 speltestar passerer: 60-myntsgrensa, hintprisar, felles kortlager, kjøp utanfor ordlengda, gyldige svar og variantar, gjentekne feil, gjenoppretting, lager etter ny innlasting, øydelagde dagsdata og norsk midnatt/vintertid.
+- Banken har 450 ulike kjeldemerkte ord, 150 per nivå. Alle lettord har høgst seks bokstavar. Alle oppføringar har ordbokkjelde, grammatikk, bøying og tre språklege hint utan sjølve svaret.
+- Skulekontrollen passerer for fasit, godtekne former, bøying og alle hintfelt. Testane kontrollerer òg at kjende seksualiserte ord, banning og rasistiske skjellsord blir stoppa dersom dei kjem inn i eit slikt felt.
+- Alle 846 dagssett frå 24.10.2026 til og med 01.08.2027 er kontrollerte: tre nivå per dag, fem ulike ord på rett nivå, ingen gjentekne femordssett og minst 15 dagar mellom same ord. Heile kvart nivå blir brukt éin gong i kvar heil 30-dagarsbolk.
+- Lagringsformat 4 og rundesnapshot 3 tek vare på feilorda lokalt. Gamle format blir lesne utan å endre kjelda; eldre dagsnøklar blir ikkje flytta til nye oppgåver og reglar. Alle 846 nye dagsrundar får plass innan grensa på 900.
+- JavaScript-syntaks, diffkontroll og bakgrunnsreservasjonar passerer. Felles UI-kontroll finn dei same to eksisterande modalfeila i Heite Stavrim og Ormritaren; ingen gjeld UvissaOrd.
 
 ## Nettlesar
 
-Lokal tenar brukar dei handheva tryggingsheaderane og CSP frå produksjonskonfigurasjonen. Han køyrer som ein skjult bakgrunnsprosess. Kontrollen vart gjort i ei separat Chrome-fane på `127.0.0.1:8081`, med eiga lagring, for å la den opne brukarrunden på `localhost` vere i fred.
+Kontrollen vart gjort i ei separat Chrome-fane på `127.0.0.1:8081`, med eiga lagring, medan brukaren si `localhost`-fane vart liggjande i fred. Den lokale tenaren brukar dei handheva tryggingsheaderane og CSP frå produksjonskonfigurasjonen.
 
-- Dagens sett vart fullført med 5/5 ord og 15 brukte myntar. Det omfatta fleire tilfeldige bokstavar, betalt plass 30 i «lampe» og betalt plass 5 i «vegg», som ikkje finst. Hintplassane vart tomme i butikken, og kjøpte hint vart samla i små kort med tre kolonnar på større skjermar og to på mobil.
-- Fleire kjøp av tilfeldig eller vald bokstav fungerer frå det kjøpte kortet. Same bokstavplass kostar ikkje på nytt. Nye oppgåver ryddar dei kjøpte korta og fyller butikken att.
-- Svarfeltet er 64 px høgt og ligg i ei tydeleg lys flate. Ved rulling på 320 px vart svarflata målt til topp 8 px, med heile inputen synleg. Myntteljaren stod til høgre for butikkoverskrifta.
-- Den interaktive prøverunden vart fullført gjennom kjøp av ordlengd, bokstav og tyding og deretter svaret «eple». Dagens runde hadde dei same 35 myntane att og dei same bokstavhinta etter retur og ny innlasting. Prøverunden vart òg avslutta med Escape. På 320 px tek den fyrste rettleiinga 130 px, og svarfeltet kjem fram når det er svarsteget sin tur.
-- Kalenderen opna 29. februar 2024. Den runden heldt fram med same hint etter ny innlasting, vart fullført med fasit, og fekk ferdigmarkering i kalenderen. Dagens runde var uendra. Dagens og framtidige datoar kan ikkje veljast i arkivmodusen.
-- Kontroll av mobil (320 px), nettbrett (768 px), mellomstor og stor skjerm. Ingen vassrett overflyt eller manglande synlege bilete. Synlege handlingsknappar er minst 44 px høge. Appnamnet held seg på éi linje på smal mobil.
-- Ingen konsollfeil frå UvissaOrd. Separate meldingar frå Chrome si Zotero-utviding er ikkje spelkode.
-- Kort- og myntanimasjonar tek omsyn til redusert rørsle. Kjøpte/utilgjengelege varer reagerer ikkje på klikk eller hover.
+- Nivåkortet startar runden direkte. Lett, Middels og Krokut har kvar sin pott og sitt lager. Geita på fjellet er brukt for Krokut.
+- Bruk vart kjøpt på fyrste ord; stakken var tom òg på ord nummer to. To tilfeldige bokstavkjøp gav to eigne kort og reduserte lageret frå åtte til seks. Val av nummer 30 kosta fem myntar og eitt kort utan å røpe ordlengda. Lager, kostnad og framgang var dei same etter ny innlasting.
+- Lett-runden vart fullført med 1/5 løyste ord og 19 brukte myntar. Middels hadde 1/5 og 10 brukte myntar; Krokut hadde 1/5 og 13 brukte myntar. Startsida synte kvar av dei, med framgangssymbol, myntbruk og opnbare kvitteringar for feilord og kjøpte hint. Bokstavkvitteringa synte begge kjøpa.
+- Prøverunden vart fullført med ordlengd, bokstav, tyding og svaret «eple». Etter retur stod det same dagsresultatet med 19 brukte myntar. Prøverunden blir ikkje lagra.
+- Kalenderen tillét 24. oktober som fyrste arkivdag. Tidlegare datoar, dagens dato og framtidige datoar var utilgjengelege. Kalenderen synte status for alle tre nivåa.
+- Mobil 320 px, nettbrett 768 px, smalt skrivebord 832 px, 1280 px og stor skjerm: ingen vassrett overflyt eller manglande synlege bilete. På 320 px var svarflata festa 8 px frå toppen og inputen var 64 px høg og heilt synleg.
+- Ingen konsollfeil eller åtvaringar frå spelet i kontrollfana. Kort- og myntanimasjonar har framleis vern for redusert rørsle.
 
-## Avgrensingar
-
-Felles UI-kontroll går gjennom 80 HTML-sider og finn dei same to eksisterande modalfeila i Heite Stavrim og Ormritaren; ingen kjem frå UvissaOrd. Fysiske telefonar/nettbrett og elev-/lærarutprøving står att.
-
-Azure-preview for PR 124 har tidlegare vorte stoppa av «maximum number of staging environments». Siste deploy blir kontrollert etter push. Ingen eksisterande miljø blir sletta, og ingen endringar blir lagde på `main`.
-
-## Adressefiksen
-
-Vidareført frå fersk origin/main på 5f2c044 etter merge av PR #124. Produksjon viste versjon 2.4 og UvissaOrd under ordvett/. Den nye uvissaord/-adressa viste enno framsida som reserve. Appmappa, kataloglenkja, framsidelenkja og vedlikehalds-/lisensstiane er no flytta til uvissaord/. Den gamle ruta blir ikkje halden ved lag, etter ynske frå brukaren. Dei same 26 speltestane og kontrollen av bakgrunnsreservasjonar passerer.
-
-Nettlesarkontroll av adressefiksen: lenkja i endringsnotatet, appkortet og appmenyen peikar på uvissaord/index.html. Lenkja vart følgd frå framsida til den nye adressa. Lagra arkivdato, hint og 8 brukte myntar var framleis synlege med «Hald fram». Den nye sida, spelkoden og myntbileta svarar med HTTP 200 lokalt.
+Fysiske telefonar/nettbrett og elev-/lærarutprøving står att. Azure-preview blir kontrollert etter siste push; sjå PR-en for deploy-status.

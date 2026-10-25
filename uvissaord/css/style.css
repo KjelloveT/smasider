@@ -21,7 +21,7 @@
 .ov-step[data-state="solved"] { background: var(--vp-success); }
 .ov-step[data-state="revealed"] { background: var(--vp-stone); }
 .ov-levels { display: block; }
-.ov-level-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.ov-level-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; }
 .ov-level-choice { display: flex; flex-direction: column; align-items: center; position: relative; gap: 4px; padding: 12px; text-align: center; }
 .ov-level-choice input { position: absolute; top: 12px; left: 12px; }
 .ov-level-choice img { width: 80px; height: 80px; object-fit: contain; }
@@ -58,8 +58,8 @@
 .ov-answer-help .ov-coin { width: 20px; height: 20px; flex-basis: 20px; }
 .ov-answer-help .ov-coin .icon { width: 13px; height: 13px; }
 .ov-hints { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.ov-shop-slot { min-width: 0; min-height: 166px; }
-.ov-shop-slot .ov-hint { width: 100%; height: 100%; }
+.ov-shop-slot { min-width: 0; }
+.ov-shop-slot .ov-hint { position: relative; width: 100%; height: 100%; z-index: 1; }
 .ov-hint { display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 118px; padding: 12px 6px; }
 .ov-hint > .ov-icon .icon { width: 28px; height: 28px; }
 .ov-hint-name { font-size: .95rem; }
@@ -152,6 +152,10 @@
 .ov-calendar-day .vp-selection-mark .icon { width: 10px; height: 10px; }
 .ov-calendar-mark { position: absolute; left: 2px; bottom: 0; display: grid; place-items: center; width: 12px; height: 12px; }
 .ov-calendar-mark .icon { width: 12px; height: 12px; }
+.ov-calendar-mark { display: flex; gap: 2px; left: 3px; width: auto; bottom: 2px; }
+.ov-calendar-mark i { width: 5px; height: 5px; border: 1px solid var(--vp-frame); border-radius: 50%; }
+.ov-calendar-mark i[data-state="complete"] { background: var(--vp-success); }
+.ov-calendar-mark i[data-state="started"] { background: var(--vp-honey); }
 .ov-tutorial-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
 .ov-tutorial-heading > button { margin-left: auto; }
 .ov-tutorial-progress { display: inline-flex; gap: 4px; }
@@ -172,3 +176,57 @@
   .ov-tutorial-progress .icon { width: 12px; height: 12px; }
 }
 @media (max-width: 430px) { #main .hero h1 { font-size: clamp(1.2rem, 6vw, 1.6rem); } }
+/* Kortstakken er sjølve lageret: eitt lag per kort, også mellom orda. */
+.ov-hints { gap: 16px; }
+.ov-card-stack { position: relative; padding-top: 42px; margin-right: 14px; min-height: 208px; display: grid; }
+.ov-stock-card { position: absolute; top: calc(42px - var(--layer) * 6px); left: calc(var(--layer) * 2px); right: calc(var(--layer) * -2px); bottom: calc(var(--layer) * 6px); padding: 0; pointer-events: none; }
+.ov-hint { padding-top: 24px; }
+.ov-stock-count { position: absolute; right: 6px; top: 6px; padding: 2px 5px; display: inline-flex; align-items: center; gap: 3px; font-size: .85rem; }
+.ov-stock-count .icon { width: 14px; height: 14px; }
+.ov-stock-empty { position: relative; min-height: 166px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 24px 6px 12px; font-size: .95rem; text-align: center; }
+.ov-stock-empty > .ov-hint-image { filter: grayscale(1); opacity: .3; }
+.ov-receipt > .ov-paid { margin-top: 12px; }
+.ov-receipt .ov-price { font-size: .8rem; }
+.ov-receipt .ov-coin { width: 18px; height: 18px; flex-basis: 18px; }
+.ov-level-start { width: 100%; display: flex; flex-direction: column; gap: 12px; padding: 16px 8px; text-align: center; }
+.ov-level-start > img { width: 80px; height: 80px; object-fit: contain; }
+.ov-level-start > strong { font-size: 1.15rem; }
+.ov-mode-progress { display: flex; gap: 4px; }
+.ov-mode-progress .ov-step { width: 23px; height: 23px; flex-basis: 23px; font-size: .7rem; border-width: 1px; }
+.ov-mode-progress .ov-step .icon { width: 14px; height: 14px; }
+.ov-mode-progress .ov-step[data-state="active"] { outline-width: 1px; outline-offset: 1px; }
+.ov-mode-totals, .ov-mode-solved, .ov-mode-action { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
+.ov-mode-totals { gap: 8px 14px; font-size: .9rem; min-height: 24px; }
+.ov-mode-action { font-size: .85rem; }
+.ov-day-details { margin-top: 12px; }
+.ov-day-details > summary { gap: 6px; font-size: .85rem; }
+.ov-day-details > .vp-accordion-body { padding: 6px; }
+.ov-history-words { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.ov-word-result { padding: 12px; min-width: 0; overflow-wrap: anywhere; }
+.ov-day-details .ov-result-row { gap: 4px; grid-template-columns: auto minmax(0, 1fr); font-size: .9rem; }
+.ov-day-details .ov-result-row > .ov-price { grid-column: 2; font-size: .8rem; }
+.ov-wrong-words { display: flex; flex-wrap: wrap; gap: 6px; margin-block: 12px; }
+.ov-wrong-word { display: inline-flex; align-items: center; gap: 3px; padding: 3px 6px; font-size: .85rem; overflow-wrap: anywhere; min-width: 0; }
+.ov-wrong-word .icon { width: 16px; height: 16px; }
+.ov-wrong-word > span:last-child { min-width: 0; }
+.ov-history-hints { display: flex; flex-wrap: wrap; align-items: start; gap: 6px; margin-top: 10px; }
+.ov-history-hint { flex: 1 1 60px; max-width: 100%; }
+.ov-history-hint[open] { flex-basis: 100%; }
+.ov-history-hint > summary { padding: 4px; gap: 2px; font-size: .8rem; min-height: 44px; }
+.ov-history-hint .ov-hint-image { width: 28px; height: 28px; }
+.ov-history-hint .vp-accordion-body { padding: 8px; font-size: .85rem; }
+.ov-history-hint p { margin-block: 6px; }
+@media (max-width: 600px) {
+  .ov-card-stack { min-height: 194px; }
+  .ov-level-grid { grid-template-columns: minmax(0, 1fr); }
+  .ov-level-start { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 8px 12px; padding: 12px; }
+  .ov-level-start > img { grid-row: 1 / 4; width: 64px; height: 64px; }
+  .ov-level-start > strong { grid-column: 2; text-align: left; }
+  .ov-level-start .ov-mode-progress { grid-column: 2; }
+  .ov-mode-totals { grid-column: 2 / 4; justify-content: start; }
+  .ov-mode-totals--blank { display: none; }
+  .ov-mode-action { grid-column: 3; grid-row: 1 / 3; }
+  .ov-day-details .ov-result-row { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .ov-day-details .ov-result-row > .ov-price { grid-column: 3; }
+}
+@media (max-width: 360px) { .ov-level-start { grid-template-columns: 48px minmax(0, 1fr); } .ov-level-start > img { width: 48px; height: 48px; } .ov-mode-action { grid-column: 2; grid-row: auto; justify-content: start; } .ov-mode-totals { grid-column: 2; } }

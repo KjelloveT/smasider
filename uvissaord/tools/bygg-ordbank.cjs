@@ -32,7 +32,7 @@ function senses(article) {
 async function main() {
   await fs.mkdir(cache, { recursive: true });
   const lemmaIndex = await getJson('/nn/fil/lemma.json', 'lemma.json');
-  const rows = (await fs.readFile(path.join(root, 'uvissaord/data/ordgrunnlag.tsv'), 'utf8'))
+  const rows = (await Promise.all(['ordgrunnlag.tsv', 'fleire-ord.tsv'].map(file => fs.readFile(path.join(root, 'uvissaord/data', file), 'utf8')))).join('\n')
     .trim().split(/\r?\n/).filter(line => line && !line.startsWith('#')).map(line => line.split('|'));
   let choices = {};
   try { choices = JSON.parse(await fs.readFile(path.join(root, 'uvissaord/data/tydingar.json'), 'utf8')); }
@@ -77,16 +77,18 @@ async function main() {
     }
   }
   await Promise.all([worker(), worker(), worker()]);
+  require('./ordkontroll.cjs').checkWords(words);
   const data = {
-    app: 'ordvett', version: 1, bankVersion: '2026-10-24.1', rulesVersion: 4,
+    app: 'ordvett', version: 1, bankVersion: '2026-10-24.2', rulesVersion: 5,
     attribution: 'Nynorskordboka, Universitetet i Bergen og Språkrådet, ordbøkene.no, CC BY 4.0.',
     license: 'https://creativecommons.org/licenses/by/4.0/',
-    changes: 'Ordutval, tema, vanskegrad, forklaringar og setningsdøme er tilpassa for Ordvett. Ordklasse, normerte oppslagsformer og bøying er henta frå Nynorskordboka.',
+    changes: 'Ordutval, tema, vanskegrad, forklaringar og setningsdøme er tilpassa for UvissaOrd. Ordklasse, normerte oppslagsformer og bøying er henta frå Nynorskordboka.',
     words
   };
   await fs.writeFile(path.join(root, 'uvissaord/data/ordbank.js'),
     '/* Nynorskordboka (UiB og Språkrådet), CC BY 4.0. Sjå KJELDER.md. */\nwindow.OrdvettBank = ' + JSON.stringify(data, null, 2) + ';\n');
   await fs.writeFile(path.join(cache, 'tydingskontroll.txt'), audit.join('\n\n'));
+  await require('./dagssett.cjs').buildSchedule(root, data);
   console.log(`Bygde ${words.length} ord. Kontroller _kjelder/ordvett/tydingskontroll.txt.`);
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });
