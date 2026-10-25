@@ -155,7 +155,7 @@ test('resultatlagringa er avgrensa og forkastar ekstra felt', () => {
   const saved = store.value();
   assert.equal(Object.keys(saved.records).length, 900);
   assert.ok(!JSON.stringify(saved).includes('hemmeleg'));
-  assert.equal(saved.version, 4);
+  assert.equal(saved.version, 5);
   assert.equal(store.api.getRecord('sett-0'), null);
 });
 test('øydelagde lokale appfelt får trygge standardverdiar', () => {
@@ -289,7 +289,7 @@ test('versjon 1 blir oppgradert idempotent utan å endre kjeldedata eller miste 
   assert.equal(store.api.getSettings().mode, 'daily');
   store.api.setSettings(store.api.getSettings());
   const migrated = JSON.stringify(store.value());
-  assert.equal(store.value().version, 4);
+  assert.equal(store.value().version, 5);
   assert.equal(store.api.getSettings().level, 'middels');
   assert.equal(store.api.getRecord('gammalt').cost, 12);
   store.api.setSettings(store.api.getSettings());
@@ -331,7 +331,7 @@ test('hint og feil svar kan aldri trekkje meir enn 60 myntar over fem ord', () =
   assert.equal(Game.summary(game).cost, 60);
   assert.equal(Game.available(game, 'random'), false);
   assert.equal(Game.buyHint(game, 'random').status, 'funds');
-  assert.equal(Game.guess(game, word.answer).status, 'funds');
+  assert.equal(Game.guess(game, word.answer).status, 'solved');
   for (let i = 0; i < 5; i++) { Game.reveal(game); Game.advance(game); }
   assert.equal(Game.summary(game).cost, 60);
   assert.equal(Game.summary(game).complete, true);
@@ -339,7 +339,8 @@ test('hint og feil svar kan aldri trekkje meir enn 60 myntar over fem ord', () =
   const wrong = round();
   for (let i = 0; i < 35; i++) Game.guess(wrong, 'feil-' + i);
   assert.equal(Game.summary(wrong).cost, 60);
-  assert.equal(Game.current(wrong).guesses.size, 30);
+  assert.equal(Game.current(wrong).guesses.size, 31);
+  assert.equal(Game.lastChanceFailed(wrong), true);
 });
 
 test('arkivet validerer datoar og brukar det same datofesta settet som dagsrunden', () => {
@@ -366,7 +367,7 @@ test('eldre rundar blir bevarte, men ikkje flytta til ein bank med andre ord og 
   assert.equal(JSON.stringify(store.api.getDaily('bank-r3-d2026-10-23-lett')), JSON.stringify(snapshot));
   store.api.setSettings({ level: 'lett', mode: 'archive', archiveDate: '2026-10-23' });
   store.api.saveDaily('bank-r5-d2026-10-24-lett', snapshot, Game.summary(game));
-  assert.equal(store.value().version, 4);
+  assert.equal(store.value().version, 5);
   assert.equal(store.api.getSettings().archiveDate, '2026-10-23');
   assert.equal(store.api.dayStatuses(['bank-r5-d2026-10-24-lett'])['bank-r5-d2026-10-24-lett'], 'started');
   assert.equal(JSON.stringify(old), before);
@@ -376,7 +377,98 @@ test('alle 30 feil kan gjenopprettast når 60-myntpotten er brukt opp', () => {
   for (let i = 0; i < 30; i++) Game.guess(game, 'feil-' + i);
   const restored = Game.restore([word], JSON.parse(JSON.stringify(Game.pack(game))));
   assert.ok(restored); assert.equal(Game.summary(restored).remaining, 0);
-  assert.equal(Game.guess(restored, 'ny feil').status, 'funds');
+  assert.equal(Game.canGuess(restored), true);
+  assert.equal(Game.guess(restored, 'ny feil').status, 'lastWrong');
+});
+
+test('rette svar er gratis når potten er tom og siste sjansen varer til fyrste feil', () => {
+  const words = Bank.words.slice(0, 5), game = Game.createRound(words);
+  for (let i = 0; i < 30; i++) Game.guess(game, 'bom-' + i);
+  assert.equal(Game.summary(game).remaining, 0);
+  assert.equal(Game.guess(game, words[0].answer).status, 'solved');
+  assert.equal(Game.advance(game), true);
+  const restored = Game.restore(words, JSON.parse(JSON.stringify(Game.pack(game))));
+  assert.ok(restored); assert.equal(Game.canGuess(restored), true);
+  assert.equal(Game.guess(restored, words[1].answer).status, 'solved');
+  Game.advance(restored);
+  assert.equal(Game.guess(restored, 'siste bom').status, 'lastWrong');
+  assert.equal(Game.summary(restored).solved, 2);
+  assert.equal(Game.summary(restored).complete, true);
+  assert.equal(Game.summary(restored).cost, 60);
+  assert.equal(Game.canGuess(restored), false);
+  assert.equal(Game.advance(restored), false);
+});
+test('tomt, for langt eller gjenteke svar brukar ikkje siste sjansen', () => {
+  const game = round();
+  for (let i = 0; i < 30; i++) Game.guess(game, 'bom-' + i);
+  assert.equal(Game.guess(game, ' ').status, 'empty');
+  assert.equal(Game.guess(game, 'x'.repeat(65)).status, 'long');
+  assert.equal(Game.guess(game, ' BOM-0 ').status, 'repeat');
+  assert.equal(Game.lastChanceFailed(game), false);
+  assert.equal(Game.guess(game, word.answer).status, 'solved');
+});
+test('siste feil med null eller éin mynt avsluttar og held låsen etter ny innlasting', () => {
+  for (const odd of [false, true]) {
+    const words = Bank.words.slice(0, 5), game = Game.createRound(words);
+    if (odd) Game.buyHint(game, 'pos');
+    for (let i = 0; i < (odd ? 29 : 30); i++) Game.guess(game, 'bom-' + i);
+    assert.equal(Game.summary(game).remaining, odd ? 1 : 0);
+    const result = Game.guess(game, 'siste bom');
+    assert.equal(result.status, 'lastWrong'); assert.equal(result.price, odd ? 1 : 0);
+    const saved = JSON.parse(JSON.stringify(Game.pack(game))), restored = Game.restore(words, saved);
+    assert.ok(restored); assert.equal(Game.summary(restored).complete, true);
+    assert.equal(Game.summary(restored).remaining, 0);
+    assert.equal(Game.guess(restored, words[0].answer).status, 'closed');
+    assert.equal(Game.buyHint(restored, 'random').ok, false);
+    assert.equal(JSON.stringify(Game.pack(restored)), JSON.stringify(saved));
+    const store = storage(); store.api.saveDaily('bank-r6-d2026-10-25-lett', saved, Game.summary(restored));
+    store.api.saveDaily('bank-r6-d2026-10-25-lett', Game.pack(Game.createRound(words)), {complete:false});
+    assert.equal(store.api.getDaily('bank-r6-d2026-10-25-lett').questions[0].lastChanceMiss, saved.questions[0].lastChanceMiss);
+  }
+});
+test('ein ugyldig siste-sjanse-markør kan ikkje redusere pris eller hoppe over ord', () => {
+  const words = Bank.words.slice(0, 5), game = Game.createRound(words);
+  for (let i = 0; i < 30; i++) Game.guess(game, 'bom-' + i);
+  Game.guess(game, 'siste bom');
+  const saved = JSON.parse(JSON.stringify(Game.pack(game)));
+  for (const edit of [
+    data => { data.questions[0].lastChanceMiss = null; },
+    data => { data.questions[0].lastChanceMiss = data.questions[0].guesses[0]; },
+    data => { data.questions[0].guesses.splice(0, 2); data.questions[0].wrongGuesses.splice(0, 2); },
+    data => { data.questions[1].outcome = 'solved'; },
+    data => { data.index = 1; },
+    data => { data.questions[1].lastChanceMiss = data.questions[0].lastChanceMiss; }
+  ]) {
+    const copy = JSON.parse(JSON.stringify(saved)); edit(copy); assert.equal(Game.restore(words, copy), null);
+  }
+});
+test('regel 5 held fram under regel 6 utan å endre kjeldedata eller kalenderstatus', () => {
+  const words = Bank.words.slice(0, 5), game = Game.createRound(words);
+  for (let i = 0; i < 30; i++) Game.guess(game, 'bom-' + i);
+  const snapshot = JSON.parse(JSON.stringify(Game.pack(game))); snapshot.version = 3;
+  snapshot.questions.forEach(question => delete question.lastChanceMiss);
+  const key = 'bank-r5-d2026-10-25-lett', next = 'bank-r6-d2026-10-25-lett';
+  const raw = {app:'ordvett',version:4,daily:{[key]:snapshot},records:{}};
+  const original = JSON.stringify(raw), store = storage(raw);
+  assert.equal(store.api.dayStatuses([next])[next], 'started');
+  const restored = Game.restore(words, store.api.getDaily(next));
+  assert.ok(restored); assert.equal(Game.guess(restored, words[0].answer).status, 'solved');
+  store.api.saveDaily(next, Game.pack(restored), Game.summary(restored));
+  assert.equal(store.value().version, 5); assert.equal(store.value().daily[next].version, 4);
+  assert.equal(JSON.stringify(store.value().daily[key]), JSON.stringify(snapshot));
+  assert.equal(JSON.stringify(raw), original);
+});
+test('fullførte rundar frå regel 5 blir ståande som fullførte under regel 6', () => {
+  const words = Bank.words.slice(0, 5), game = Game.createRound(words);
+  for (const item of words) { Game.guess(game, item.answer); Game.advance(game); }
+  const saved = JSON.parse(JSON.stringify(Game.pack(game))); saved.version = 3;
+  saved.questions.forEach(question => delete question.lastChanceMiss);
+  const key = 'bank-r5-d2026-10-25-lett', next = 'bank-r6-d2026-10-25-lett';
+  const store = storage({version:4,daily:{[key]:saved},records:{[key]:{solved:5,cost:0}}});
+  assert.equal(store.api.dayStatuses([next])[next], 'complete');
+  assert.equal(Game.summary(Game.restore(words, store.api.getDaily(next))).complete, true);
+  store.api.saveDaily(next, Game.pack(Game.createRound(words)), {complete:false});
+  assert.equal(JSON.stringify(store.api.getDaily(next)), JSON.stringify(saved));
 });
 
 test('bruk, setning og tyding har eitt kort kvar for alle fem orda', () => {

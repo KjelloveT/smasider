@@ -40,6 +40,7 @@
       card?.focus({ preventScroll: true }); card?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
       Effects.moveHint(bounds, card);
     } else if (hintId === 'chosen') View.byId('answer').focus();
+    if (result.status === 'lastWrong' && !Tutorial.getActive()) View.results(round, descriptor);
     return result;
   }
   function update(change) {
@@ -66,7 +67,11 @@
   OrdvettCalendar.init(date => { settings.archiveDate = date; Storage.setSettings(settings); setup(false); });
   View.byId('answerForm').addEventListener('submit', event => {
     event.preventDefault(); if (Tutorial.getActive() && !Tutorial.allows(null)) return;
-    transact(() => Game.guess(round, View.byId('answer').value), View.byId('guessButton'));
+    const result = transact(() => Game.guess(round, View.byId('answer').value), View.byId('guessButton'));
+    if (result.status === 'lastWrong') {
+      if (Tutorial.getActive()) View.byId('tutorialGuide').querySelector('button').focus();
+      return;
+    }
     if (Game.current(round).outcome) {
       if (Tutorial.getActive()) View.byId('tutorialGuide').querySelector('button').focus();
       else View.byId('nextButton').focus();

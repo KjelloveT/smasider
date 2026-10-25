@@ -4,7 +4,7 @@ window.OrdvettSchedule = (function () {
   const DAY = 86400000, START = '2026-10-24', END = '2027-08-01';
   const LEVELS = Object.freeze([
     { id: 'lett', label: 'Lett', image: 'sprout' },
-    { id: 'middels', label: 'Middels', image: 'twin-sprouts' },
+    { id: 'middels', label: 'Middels', image: 'mixed-forest' },
     { id: 'krokut', label: 'Krokut', image: 'mountain-goat' }
   ]);
   const words = new Map(OrdvettBank.words.map(word => [word.id, word]));
