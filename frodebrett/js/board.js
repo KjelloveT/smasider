@@ -260,6 +260,8 @@
     S.currentQuestion = {
       category: category.name,
       question: question.question,
+      image: question.image,
+      imageAlt: question.imageAlt,
       answer: question.answer,
       basePoints: question.points,
       points: isDD ? question.points * 2 : question.points,
@@ -273,6 +275,7 @@
     const q = S.currentQuestion;
     FB.el('question-category').textContent = q.category;
     FB.el('question-text').textContent = q.question;
+    FB.Images.show('question-image', q);
     FB.el('answer-text').textContent = q.answer;
 
     const pointsEl = FB.el('question-points');
@@ -482,6 +485,7 @@
     FB.show('final-question');
     FB.el('final-clue-display').textContent = S.currentQuiz.final.hint || '';
     FB.el('final-question-display').textContent = S.currentQuiz.final.question;
+    FB.Images.show('final-question-image', S.currentQuiz.final);
     FB.el('final-answer-display').textContent = S.currentQuiz.final.answer;
     FB.hide('final-answer');
     FB.show('btn-reveal-final');

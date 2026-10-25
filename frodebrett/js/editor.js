@@ -29,7 +29,13 @@
       FB.show('preview-board');
     });
 
+    Editor.setFinalImage({});
     Editor.initCategories(2);
+  };
+
+  Editor.setFinalImage = function (question) {
+    S.editorFinalImage = { image: question.image, imageAlt: question.imageAlt };
+    FB.el('editor-final-image').replaceChildren(FB.Images.control(S.editorFinalImage, 'finalspørsmålet'));
   };
 
   Editor.emptyCategory = function () {
@@ -118,6 +124,7 @@
       aInput.placeholder = 'Svar';
       row.appendChild(aInput);
 
+      row.appendChild(FB.Images.control(q, p + ' poeng'));
       container.appendChild(row);
     });
   };
@@ -174,6 +181,7 @@
   Editor.validate = function () {
     Editor.saveActiveTab();
     const errors = [];
+    if (FB.Images.busy()) errors.push('Vent til biletet er ferdig handsama.');
     const warnings = [];
 
     const title = FB.el('quiz-title').value.trim();
@@ -181,12 +189,12 @@
 
     S.editorCategories.forEach((cat, i) => {
       if (!cat.name) errors.push('Kategori ' + (i + 1) + ' manglar namn.');
-      const filled = cat.questions.filter(q => q.question && q.answer);
+      const filled = cat.questions.filter(q => (q.question || FB.Images.valid(q.image)) && q.answer);
       if (filled.length === 0) {
         errors.push('Kategori ' + (i + 1) + ' («' + (cat.name || 'utan namn') + '») har ingen spørsmål.');
       }
       cat.questions.forEach(q => {
-        if (q.question && !q.answer) {
+        if ((q.question || FB.Images.valid(q.image)) && !q.answer) {
           warnings.push('Kategori «' + (cat.name || 'Kategori ' + (i + 1)) + '», ' + q.points + ' poeng: Manglar svar.');
         }
       });
@@ -197,7 +205,7 @@
       const fq = FB.el('editor-final-question').value.trim();
       const fa = FB.el('editor-final-answer').value.trim();
       if (!fc) errors.push('Finalerunde: Kategori manglar.');
-      if (!fq) errors.push('Finalerunde: Spørsmål manglar.');
+      if (!fq && !FB.Images.valid(S.editorFinalImage.image)) errors.push('Finalerunde: Spørsmål manglar.');
       if (!fa) errors.push('Finalerunde: Svar manglar.');
     }
 
@@ -209,7 +217,7 @@
     const hint = FB.el('editor-final-clue').value.trim();
     const question = FB.el('editor-final-question').value.trim();
     const answer = FB.el('editor-final-answer').value.trim();
-    if (category && question && answer) return { category, hint, question, answer };
+    if (category && (question || FB.Images.valid(S.editorFinalImage.image)) && answer) return { category, hint, question, answer, ...S.editorFinalImage };
     return null;
   };
 
@@ -223,7 +231,7 @@
       title: FB.el('quiz-title').value.trim(),
       categories: S.editorCategories.map(cat => ({
         name: cat.name,
-        questions: cat.questions.filter(q => q.question && q.answer)
+        questions: cat.questions.filter(q => (q.question || FB.Images.valid(q.image)) && q.answer)
       })),
       final: FB.el('final-round-toggle').checked ? Editor.extractFinal() : null,
       created: new Date().toISOString()
@@ -249,15 +257,16 @@
         FB.App.showScreen('saved');
       }, warnings.length ? 2000 : 800);
     } else {
-      Editor.showError(['Feil ved lagring!']);
+      Editor.showError(['Frøda kunne ikkje lagrast varig. Ho finst mellombels under Lagra frøder; eksporter henne før du lukkar sida.']);
     }
   };
 
   // ---- Førehandsvising ----
 
   Editor.previewQuiz = function () {
+    if (FB.Images.busy()) { Editor.showError(['Vent til biletet er ferdig handsama.']); return; }
     Editor.saveActiveTab();
-    const categories = S.editorCategories.filter(c => c.name && c.questions.some(q => q.question && q.answer));
+    const categories = S.editorCategories.filter(c => c.name && c.questions.some(q => (q.question || FB.Images.valid(q.image)) && q.answer));
     if (categories.length === 0) {
       Editor.showError(['Legg til minst éin kategori med spørsmål for å førehandsvise.']);
       return;
@@ -284,7 +293,7 @@
 
     FB.POINTS.forEach(pts => {
       categories.forEach((cat, ci) => {
-        const q = cat.questions.find(qu => qu.points === pts && qu.question && qu.answer);
+        const q = cat.questions.find(qu => qu.points === pts && (qu.question || FB.Images.valid(qu.image)) && qu.answer);
         const cell = document.createElement('div');
         cell.className = 'jeopardy-cell';
         if (q) {
@@ -311,12 +320,14 @@
     FB.hide('preview-board');
     FB.show('preview-question');
     FB.el('preview-question-text').textContent = q.points + ' poeng: ' + q.question;
+    FB.Images.show('preview-question-image', q);
     const ans = FB.el('preview-answer-text');
     ans.textContent = 'Svar: ' + q.answer;
     ans.classList.add('hidden');
   };
 
   Editor.clear = function () {
+    Editor.setFinalImage({});
     FB.el('quiz-title').value = '';
     FB.el('editor-final-category').value = '';
     FB.el('editor-final-clue').value = '';
@@ -333,6 +344,7 @@
     const quiz = Store.getQuizzes().find(q => q.id === quizId);
     if (!quiz) { alert('Frøde ikkje funne!'); return; }
 
+    Editor.setFinalImage(quiz.final || {});
     S.editingQuizId = quizId;
     FB.el('quiz-title').value = quiz.title;
     Editor.hideMessages();
