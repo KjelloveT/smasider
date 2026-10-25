@@ -169,6 +169,15 @@ test('øydelagde dagsfelt kan ikkje velte kalenderen eller startsida', () => {
   assert.equal(store.api.getDaily('bad'), null);
   assert.equal(store.api.dayStatuses(['bad']).bad, null);
 });
+test('førstegongstipset skil innstillingar frå verkeleg spelhistorikk', () => {
+  const fresh = storage(); assert.equal(fresh.api.hasHistory(), false);
+  fresh.api.setSettings({level:'lett',mode:'daily'});
+  assert.equal(fresh.api.hasHistory(), false);
+  const game = Game.createRound(Bank.words.slice(0, 5));
+  fresh.api.saveDaily('dag', Game.pack(game), Game.summary(game));
+  assert.equal(fresh.api.hasHistory(), true);
+  assert.equal(storage({version:1,records:{gammalt:{solved:2,cost:18}}}).api.hasHistory(), true);
+});
 
 const daysContext = load(['uvissaord/data/dagssett.js']);
 const Days = daysContext.window.OrdvettDays;
@@ -214,6 +223,16 @@ test('kalenderen avgrensar til publiserte datoar og nivå', () => {
   assert.equal(Schedule.latestArchive('2026-10-24'), null);
   assert.equal(Schedule.latestArchive('2026-10-25'), '2026-10-24');
   assert.equal(Schedule.latestArchive('2027-09-01'), '2027-08-01');
+});
+test('arkivkalenderen viser berre spelbare dagar, utan datoar før lanseringa', () => {
+  const dates = (month, today) => Array.from(Schedule.archiveDates(month, today));
+  assert.deepEqual(dates('2026-09', '2026-10-25'), []);
+  assert.deepEqual(dates('2026-10', '2026-10-24'), []);
+  assert.deepEqual(dates('2026-10', '2026-10-25'), ['2026-10-24']);
+  assert.equal(dates('2026-10', '2026-11-01').length, 8);
+  assert.equal(dates('2027-01', '2027-02-01').length, 31);
+  assert.deepEqual(dates('2027-08', '2027-08-10'), ['2027-08-01']);
+  assert.deepEqual(dates('2026-13', '2027-01-01'), []);
 });
 test('dagsframgang gjenopprettar kort, ruter, kostnad og lokale feilord', () => {
   const words = Bank.words.filter(word => word.level === 'lett').slice(0, 5);

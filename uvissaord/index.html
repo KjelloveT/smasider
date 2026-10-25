@@ -21,23 +21,29 @@
   <script src="js/schedule.js" defer></script>
   <script src="js/storage.js" defer></script>
   <script src="js/effects.js" defer></script>
-  <script src="js/render.js" defer></script><script src="js/overview.js" defer></script><script src="js/calendar.js" defer></script><script src="js/tutorial.js" defer></script>
+  <script src="js/render.js" defer></script><script src="js/overview.js" defer></script><script src="js/calendar.js" defer></script><script src="js/tutorial.js" defer></script><script src="js/welcome.js" defer></script>
   <script src="js/app.js" defer></script>
 </head>
 <body class="vp-page" data-vp-design data-vp-app="ordvett" data-vp-layout="medium" data-vp-open-shell data-vp-site-footer>
   <main class="vp-shell" id="main">
-    <section class="hero"><img src="../_resources/vyrdepil-design/logos/uvissaord-mala.png" width="384" height="384" alt=""><div><h1 class="vp-title">UvissaOrd</h1><p>Kor mange av dagens 5 ord klarer du å finne med 60 myntar?</p></div></section>
+    <section class="hero"><a href="#setup" data-home class="ov-home-logo" aria-label="UvissaOrd – til startsida"><img src="../_resources/vyrdepil-design/logos/uvissaord-mala.png" width="384" height="384" alt=""></a><div><h1 class="vp-title"><a href="#setup" data-home>UvissaOrd</a></h1><p>Du har 60 myntar til å kjøpe hint for. Kor mange av dagens 5 ord klarer du?</p></div></section>
     <div class="ov-layout">
       <section class="vp-panel ov-main" aria-label="Ordspel">
         <div class="vp-decor vp-decor--grain" aria-hidden="true"></div>
         <div class="vp-content">
           <section id="setup" aria-labelledby="setupTitle">
+            <div class="vp-panel vp-panel--plain ov-setup-header">
             <div class="vp-actions ov-modes" role="group" aria-label="Spelemåte">
               <button class="vp-button vp-button--tool" type="button" data-mode="daily" aria-pressed="true"><span data-icon="calendar" aria-hidden="true"></span>Dagens ord</button>
               <button class="vp-button vp-button--tool" type="button" id="archiveButton" data-mode="archive" aria-pressed="false"><span data-icon="calendar" aria-hidden="true"></span>Tidlegare utfordringar</button>
             </div>
             <div class="ov-day-heading"><span class="ov-calendar" aria-hidden="true"><span data-icon="calendar"></span><strong id="dayNumber"></strong></span><div><h2 class="vp-heading" id="setupTitle" tabindex="-1">Dagens utfordring</h2><p id="dayLabel"></p></div></div>
-            <section class="vp-panel vp-panel--plain ov-calendar-picker" id="archivePicker" aria-label="Kalender for tidlegare utfordringar" hidden><div class="ov-calendar-nav"><button class="vp-button vp-button--quiet vp-button--icon" id="previousMonth" type="button" aria-label="Førre månad"><span data-icon="arrowLeft" aria-hidden="true"></span></button><label class="vp-field"><span class="ov-sr-only">Vel månad</span><input class="vp-input" type="month" id="archiveMonth"></label><button class="vp-button vp-button--quiet vp-button--icon" id="nextMonth" type="button" aria-label="Neste månad"><span data-icon="arrowRight" aria-hidden="true"></span></button></div><div class="ov-calendar-weekdays" aria-hidden="true"><span>M</span><span>T</span><span>O</span><span>T</span><span>F</span><span>L</span><span>S</span></div><div class="ov-calendar-days" id="archiveDays" role="group" aria-label="Vel ein dag"></div></section><div class="ov-level-grid" id="levelCards" role="group" aria-label="Vel nivå og start"></div>
+            <section class="ov-calendar-picker" id="archivePicker" aria-label="Kalender for tidlegare utfordringar" hidden>
+              <p class="vp-help" id="archiveNotice">Det finst ikkje tidlegare utfordringar. Spelet vart lansert 24. oktober 2026.</p>
+              <div class="ov-calendar-nav"><button class="vp-button vp-button--quiet vp-button--icon" id="previousMonth" type="button" aria-label="Førre månad"><span data-icon="arrowLeft" aria-hidden="true"></span></button><label class="vp-field"><span class="ov-sr-only">Vel månad</span><input class="vp-input" type="month" id="archiveMonth"></label><button class="vp-button vp-button--quiet vp-button--icon" id="nextMonth" type="button" aria-label="Neste månad"><span data-icon="arrowRight" aria-hidden="true"></span></button></div>
+              <div class="ov-calendar-weekdays" aria-hidden="true"><span>M</span><span>T</span><span>O</span><span>T</span><span>F</span><span>L</span><span>S</span></div><div class="ov-calendar-days" id="archiveDays" role="group" aria-label="Vel ein dag"></div>
+            </section>
+            </div><div class="ov-level-grid" id="levelCards" role="group" aria-label="Vel nivå og start"></div>
           </section>
           <section id="game" aria-labelledby="gameTitle" hidden>
             <div class="ov-status"><div class="ov-progress" id="progress" role="group" aria-label="Framgang"></div></div>
@@ -80,6 +86,16 @@
       </div></div></aside>
     </div>
   </main>
-
+  <dialog class="vp-dialog ov-welcome" id="welcomeDialog" aria-labelledby="welcomeTitle" aria-describedby="welcomeDescription">
+    <div class="vp-dialog-head"><h2 class="vp-heading" id="welcomeTitle">Slik spelar du</h2><button class="vp-button vp-button--quiet vp-button--icon" id="welcomeClose" type="button" aria-label="Lukk tipsa"><span data-icon="x" aria-hidden="true"></span></button></div>
+    <ol class="ov-welcome-steps">
+      <li><img src="assets/coin-front.png" width="80" height="80" alt=""><strong>60 myntar</strong></li>
+      <li><img src="assets/hints/pos.png" width="80" height="80" alt=""><strong>Kjøp hint</strong></li>
+      <li><div id="welcomeProgress" class="ov-mode-progress" aria-label="Fem ord"></div><strong>Finn 5 ord</strong></li>
+    </ol>
+    <p id="welcomeDescription">Kortstakkane skal vare til alle fem orda.</p>
+    <p class="ov-welcome-cost"><span data-icon="x" aria-hidden="true"></span>Feilforsøk: <img src="assets/coin-front.png" width="24" height="24" alt="">2 myntar</p>
+    <div class="vp-actions"><button class="vp-button vp-button--primary" id="welcomeTutorial" type="button"><span data-icon="play" aria-hidden="true"></span>Prøverunde</button><button class="vp-button vp-button--quiet" id="welcomePlay" type="button">Vel nivå</button></div>
+  </dialog>
 </body>
 </html>

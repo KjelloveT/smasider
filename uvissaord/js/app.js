@@ -96,13 +96,20 @@
       else { View.byId('answer').value = previous.answer; update(); View.feedback(null); View.show('game', Game.current(round).outcome ? 'gameTitle' : 'answer'); }
     } else setup(true);
   }
-  View.byId('tutorialButton').addEventListener('click', () => {
+  function beginTutorial() {
     if (Tutorial.getActive()) return;
     persist(); tutorialReturn = { round, descriptor, chooseMode, answer: View.byId('answer').value, screen: View.byId('results').hidden ? 'game' : 'results' };
     Effects.clear(); round = Tutorial.begin(endTutorial); descriptor = { mode: 'tutorial', key: null }; chooseMode = false;
     View.byId('answer').value = ''; View.feedback(null); update(); View.show('game', 'gameTitle');
     View.byId('tutorialGuide').scrollIntoView({ block: 'nearest' });
-  });
+  }
+  View.byId('tutorialButton').addEventListener('click', beginTutorial);
+  document.querySelectorAll('[data-home]').forEach(link => link.addEventListener('click', event => {
+    event.preventDefault();
+    if (Tutorial.getActive()) { Tutorial.end(); tutorialReturn = null; }
+    else persist();
+    settings.mode = 'daily'; Storage.setSettings(settings); setup(true);
+  }));
   document.addEventListener('keydown', event => {
     if (event.key !== 'Escape' || event.defaultPrevented || document.querySelector('dialog[open]')) return;
     if (Tutorial.getActive()) { event.preventDefault(); endTutorial(); }
@@ -112,4 +119,5 @@
   function refreshDay() { if (!document.hidden && !round && settings.mode === 'daily' && descriptor.date !== Schedule.currentDate()) setup(false); }
   window.addEventListener('focus', refreshDay); document.addEventListener('visibilitychange', refreshDay);
   setup(false);
+  OrdvettWelcome.init(beginTutorial);
 })();

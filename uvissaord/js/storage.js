@@ -69,5 +69,6 @@ window.OrdvettStorage = (function () {
     return Object.fromEntries(keys.map(key => [key, data.daily[key] ?
       data.daily[key].questions.every(question => question.outcome) ? 'complete' : 'started' : data.records[key] ? 'complete' : null]));
   }
-  return Object.freeze({ getSettings, setSettings, getRecord, recordResult, getDaily, saveDaily, clearDaily, dayStatuses });
+  function hasHistory() { data = load(); return Object.keys(data.daily).length > 0 || Object.keys(data.records).length > 0; }
+  return Object.freeze({ getSettings, setSettings, getRecord, recordResult, getDaily, saveDaily, clearDaily, dayStatuses, hasHistory });
 })();
