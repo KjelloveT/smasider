@@ -1,0 +1,94 @@
+{
+  "app": "livslina",
+  "version": 10,
+  "phase": 1,
+  "seed": 42,
+  "created": "2026-11-01T12:00:00.000Z",
+  "roundIndex": 8,
+  "finished": true,
+  "character": {
+    "skin": 1,
+    "face": 0,
+    "hair": 0,
+    "clothes": 0
+  },
+  "family": {
+    "id": "normal",
+    "label": "Vanleg økonomi"
+  },
+  "program": {
+    "id": "studiespes",
+    "name": "Studiespesialisering",
+    "vilbliUrl": "https://www.vilbli.no/nb/no/om/v.st/studiespesialisering",
+    "type": "studieforberedande",
+    "equipmentGrantRate": "rate1",
+    "equipmentGrantVariants": [
+      {
+        "label": "Med programområde toppidrett",
+        "equipmentGrantRate": "rate3"
+      }
+    ],
+    "hybelChance": 0.15,
+    "phase2": "studium",
+    "phase2Note": "Gjev generell studiekompetanse — vidare til universitet eller høgskule.",
+    "careers": [
+      "Lækjar",
+      "Jurist",
+      "Lærar",
+      "Ingeniør",
+      "Økonom"
+    ],
+    "blurb": "Mest teori. Held alle dører opne mot høgare utdanning, men du må velje retning seinare."
+  },
+  "trainingRoute": "school",
+  "housing": "heime",
+  "hybelAvailable": false,
+  "stats": {
+    "money": 48000,
+    "savings": 12000,
+    "savingsIsBsu": false,
+    "wellbeing": 60,
+    "energy": 70,
+    "social": 50,
+    "grades": 3.5
+  },
+  "plan": null,
+  "planPreferences": null,
+  "possessions": {
+    "moped": false,
+    "mopedTrimmed": false,
+    "phoneInsurance": false
+  },
+  "room": {
+    "owned": [
+      "bed-tier-01",
+      "desk-tier-01",
+      "chair-tier-01"
+    ],
+    "equipped": {
+      "bed": "bed-tier-01",
+      "desk": "desk-tier-01",
+      "chair": "chair-tier-01",
+      "sofa": null,
+      "rug": null,
+      "floorItem": null,
+      "decor": null
+    }
+  },
+  "flags": {
+    "birthday18": true,
+    "laereplassBra": true
+  },
+  "ledger": [],
+  "decisions": [],
+  "eventLog": [],
+  "badges": [],
+  "minWellbeing": 60,
+  "minEnergy": 70,
+  "noysamCount": 0,
+  "wentNegative": false,
+  "lowestBalance": null,
+  "creditRestriction": false,
+  "totalWage": 0,
+  "age": 19
+}

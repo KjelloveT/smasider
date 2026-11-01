@@ -378,7 +378,7 @@ LL.uiSetup = (function () {
     heading.textContent = 'Kva vil du gjere etter VG2?';
     const intro = document.createElement('p');
     intro.className = 'll-note';
-    intro.textContent = 'Vel mellom VG3 i skule og fyrste året som lærling. Spelet følgjer det fyrste læreåret; 2+2-løpet held fram med eitt læreår til før fagprøva.';
+    intro.textContent = 'Vel mellom VG3 i skule og to år i lære. Lærlingløpet blir fullført med fagprøve før neste livsfase. Spelet brukar ein forenkla 2+2-modell; verkelege løp varierer med faget.';
     panel.append(heading, intro);
 
     const choices = document.createElement('div');
@@ -389,7 +389,7 @@ LL.uiSetup = (function () {
     ));
     choices.appendChild(routeCard(
       'apprenticeship', 'Lærling i bedrift',
-      'Fyrste året etter VG2. Spelet brukar eit KS-basert lønsoverslag: 30 % om hausten og 40 % om våren.'
+      'To læreår etter VG2. Spelet brukar eit KS-basert lønsoverslag på 30, 40, 50 og 80 % gjennom dei fire halvåra.'
     ));
     panel.appendChild(choices);
   }
@@ -488,9 +488,10 @@ LL.uiSetup = (function () {
       impBtn.addEventListener('click', () => impFile.click());
       impFile.addEventListener('change', () => {
         if (!impFile.files.length) return;
+        document.getElementById('importFeedback').hidden = true;
         LL.storage.importSave(impFile.files[0])
           .then(obj => { LL.state.load(obj); LL.storage.saveActive(LL.state.get()); LL.main.enterHome(); LL.main.toast('Livsline importert.'); })
-          .catch(err => LL.main.toast(err.message));
+          .catch(err => { const feedback = document.getElementById('importFeedback'); feedback.textContent = err.message; feedback.hidden = false; LL.main.toast(err.message); });
         impFile.value = '';
       });
     }

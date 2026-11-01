@@ -12,7 +12,7 @@ LL.uiReport = (function () {
     document.getElementById('hyProgress').textContent = nextRound
       ? summary.round.label + ' er fullført. Neste periode er ' + nextRound.label + '.'
       : (summary.round.apprenticeship
-        ? 'Du har fullført VG1 og VG2, to somrar og det fyrste læreåret.'
+        ? 'Du har fullført VG1 og VG2, to somrar og begge læreåra.'
         : 'Du har fullført alle seks skulehalvåra og dei to sommarane.');
 
     // Inntekter / utgifter
@@ -116,7 +116,7 @@ LL.uiReport = (function () {
   const BADGE_TESTS = [
     { id: 'buffer', test: s => s.stats.savings >= 20000 },
     { id: 'frikort', test: s => (s.totalWage || 0) >= 30000 && !s.flags.overFrikort },
-    { id: 'fagbrev', test: s => s.program.type === 'yrkesfag' && s.trainingRoute === 'apprenticeship' && s.flags.laereplassBra },
+    { id: 'fagbrev', test: s => s.program.type === 'yrkesfag' && s.trainingRoute === 'apprenticeship' && s.flags.fagprovePass },
     { id: 'studieklar', test: s => s.program.type === 'studieforberedande' && s.stats.grades >= 4 },
     { id: 'balanse', test: s => s.minWellbeing >= 40 && s.minEnergy >= 40 },
     { id: 'noysemd', test: s => (s.noysamCount || 0) >= 4 },
@@ -126,10 +126,11 @@ LL.uiReport = (function () {
 
   function showFinal() {
     const s = LL.state.get();
+    LL.phase2State.completeSchool(s);
     const networth = s.stats.money + s.stats.savings;
     const apprenticeRoute = s.program.type === 'yrkesfag' && s.trainingRoute === 'apprenticeship';
     document.getElementById('finalTimelineSummary').textContent = apprenticeRoute
-      ? 'Du har fullført VG1 og VG2, og det fyrste læreåret med løn. Det vanlege 2+2-løpet held fram med eitt læreår til før fagprøva.'
+      ? (s.flags.fagprovePass ? 'Du har fullført VG1 og VG2, begge læreåra og fagprøva. Fagbrevet blir med deg vidare.' : 'Du har fullført VG1 og VG2 og begge læreåra. Hald fram for å avslutte fagprøva før neste livsfase.')
       : 'Du har fullført seks skulehalvår og to sommarar frå starten av VG1 til slutten av VG3. Slik gjekk det — og slik kunne det gått annleis.';
 
     const lowestBalance = Number.isFinite(Number(s.lowestBalance))
@@ -174,9 +175,9 @@ LL.uiReport = (function () {
     const qualifyingBadges = BADGE_TESTS.filter(badge => badge.test(s)).map(badge => badge.id);
 
     // Lagre fullført løp éin gong
+    const newlyEarned = VyrdepilBragd.recordBadges('livslina', qualifyingBadges);
     if (!s._runSaved) {
       s._runSaved = true;
-      const newlyEarned = VyrdepilBragd.recordBadges('livslina', qualifyingBadges);
       LL.storage.saveCompletedRun({
         program: s.program.name, programType: s.program.type,
         networth: Math.round(networth), grades: +s.stats.grades.toFixed(1),
@@ -216,12 +217,11 @@ LL.uiReport = (function () {
     if (p.type === 'yrkesfag') {
       if (s.trainingRoute === 'apprenticeship') {
         const start = s.flags.laereplassBra ? 'Du møtte godt førebudd til læretida.' : 'Du har byrja i lære og tent lærlingløn.';
-        return start + ' Eitt læreår står att før fagprøva og fagbrev som ' + p.careers[0].toLowerCase() + '.';
+        return start + (s.flags.fagprovePass ? ' Begge læreåra og fagprøva er no fullførte. Du kan arbeide i faget ditt eller ta påbygg før studium.' : ' Begge læreåra er fullførte. Fagprøva står att før faseovergangen.');
       }
       return 'Du valde VG3 i skule. Etterpå kan du søkje læreplass eller ta påbygg, alt etter kva som finst i faget ditt.';
     }
-    if (s.stats.grades >= 4) return 'Med snittet ditt (' + s.stats.grades.toFixed(1) + ') står dei fleste studia opne. Neste livsfase blir studielån, deltidsjobb og eige husvære.';
-    return 'Snittet ditt (' + s.stats.grades.toFixed(1) + ') avgrensar nokre studieval, men mange dører er framleis opne. Neste fase: studium eller arbeid.';
+    return 'Du tek med studiekompetanse og karaktersnittet ' + s.stats.grades.toFixed(1) + '. Prøveutgåva av fase 2 sjekkar studiekompetanse; verkelege opptaksgrenser varierer mellom studium og lærestader.';
   }
 
   function renderTurningPoints(s, networth) {
@@ -292,6 +292,7 @@ LL.uiReport = (function () {
   }
 
   function init() {
+    document.getElementById('finalContinue').addEventListener('click', () => LL.uiPhase2.transition());
     document.getElementById('hyContinue').addEventListener('click', continueAfterHalfyear);
     const exp = document.getElementById('finalExport');
     if (exp) exp.addEventListener('click', () => LL.storage.exportSave(LL.state.get()));

@@ -1,0 +1,33 @@
+/* Berre oppsett og funksjonell geometri; flater og felt kjem frå felles CSS. */
+.ll-adult-stack { display: grid; gap: 1rem; min-width: 0; }
+.ll-adult-heading { display: flex; align-items: start; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.ll-adult-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.ll-adult-menu { max-width: 100%; }
+.ll-adult-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: 0.65rem; }
+.ll-adult-panel { min-width: 0; padding: clamp(1rem, 2.5vw, 1.5rem); }
+.ll-adult-panel p { max-width: 78ch; }
+.ll-adult-stat { display: block; font-size: clamp(1rem, 2vw, 1.35rem); overflow-wrap: anywhere; }
+.ll-adult-layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 1rem; }
+.ll-adult-field { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.35rem; margin-block: 0.85rem; max-width: 45rem; }
+.ll-adult-field .vp-input { width: 100%; min-width: 0; }
+.ll-adult-field input[type="checkbox"] { width: 1.5rem; height: 1.5rem; }
+.ll-adult-goal-editor { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.25rem 1rem; min-width: 0; }
+.ll-adult-goal-editor legend { padding-block: 0.5rem; }
+.ll-adult-goal { display: grid; gap: 0.5rem; margin-block: 1rem; }
+#screen-adult progress { width: 100%; height: 1.2rem; }
+.ll-adult-choices { display: grid; gap: 0.75rem; }
+.ll-adult-choice { display: grid; gap: 0.4rem; justify-items: center; white-space: normal; overflow-wrap: anywhere; }
+.ll-adult-room { width: 100%; aspect-ratio: 4 / 3; min-width: 0; overflow: hidden; }
+#screen-adult .ll-budget-row { gap: 1rem; align-items: start; }
+#screen-adult .ll-budget-row > span { min-width: 0; overflow-wrap: anywhere; }
+#screen-adult .ll-budget-row > strong { flex: 0 0 auto; text-align: right; }
+@media (max-width: 740px) {
+  .ll-adult-layout, .ll-adult-goal-editor { grid-template-columns: minmax(0, 1fr); }
+  .ll-adult-actions .vp-button { flex: 1 1 10rem; }
+}
+@media (max-width: 400px) {
+  .ll-adult-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ll-adult-stats .ll-adult-panel { padding: 0.75rem; }
+  #screen-adult .ll-budget-row { flex-direction: column; gap: 0.25rem; }
+  #screen-adult .ll-budget-row > strong { text-align: left; }
+}

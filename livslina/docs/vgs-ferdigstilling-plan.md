@@ -1,13 +1,15 @@
 # Livslina — plan for å ferdigstille vidaregåandedelen
 
 Dato: 5. oktober 2026
-Status: arbeidsplan etter avklaring med brukaren
+Status: historisk arbeidsplan for fyrste milepåle. Vidaregåandedelen er no
+publisert. Vidare arbeid følgjer [fase 2-planen](fase2-plan.md), avklart
+1. november 2026, inkludert siste læreår og overgangen til vaksenlivet.
 
 ## Mål og avgrensing
 
 Fyrste milepåle er eit samanhengande spel om vidaregåande, frå starten av VG1
 til avslutta VG3. Fase 2 etter vidaregåande er utanfor denne leveransen.
-Livslina skal vera skjult medan arbeidet held fram.
+Ved denne milepålen skulle Livslina haldast skjult fram til eiga publisering.
 
 Spelet skal gjera tid og konsekvensar lette å forstå. Det skal vise korleis
 økonomi, skulekvardag, arbeid, kvile og trivsel verkar saman, utan å peike ut

@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Livslina — val gjennom vidaregåande</title>
+<title>Livslina — val gjennom livet</title>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.9">
 <link rel="stylesheet" href="css/style.css?v=2">
+<link rel="stylesheet" href="css/phase2.css?v=1">
   <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
 <body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-layout="medium" data-vp-site-footer>
@@ -50,7 +51,7 @@
         <li class="vp-panel vp-panel--plain ll-life-stage is-upcoming">
           <strong class="ll-life-stage-age">20–25 år</strong>
           <span class="ll-life-stage-label">Studium eller arbeid</span>
-          <span class="ll-life-stage-status">Under utvikling</span>
+          <span class="ll-life-stage-status">Prøveutgåve etter vidaregåande</span>
           <span class="ll-life-stage-arrow" aria-hidden="true">→</span>
         </li>
         <li class="vp-panel vp-panel--plain ll-life-stage is-upcoming">
@@ -87,6 +88,7 @@
         <span data-icon="helpCircle"></span> Om tala
       </button>
       <input type="file" id="importFile" accept="application/json" hidden>
+      <p id="importFeedback" class="vp-help" role="alert" hidden></p>
     </div>
   </section>
 
@@ -224,13 +226,13 @@
     <h2 class="heading3 no-mt" id="budgetRound">Planlegg halvåret</h2>
     <div class="ll-budget-grid">
       <div class="vp-panel vp-panel--plain">
-        <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skulen</legend><div class="ll-btn-row" id="budgetJob" role="group"></div></fieldset>
+        <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skule eller læretid</legend><div class="ll-btn-row" id="budgetJob" role="group"></div></fieldset>
         <fieldset class="vp-field ll-ctrl ll-weekday-plan">
           <legend>Planlegg ein vanleg vekedag</legend>
-          <p class="ll-note">Korleis ser ein vanleg vekedag ut? Du kan ikkje gjere noko med 8t kvile og 8t skule. Dei er låst. Men du kan sjølv bestemme kva du skal gjere dei siste 8 timane i døgnet.</p>
+          <p class="ll-note">I denne forenkla kvardagsplanen er 8 timar sette av til kvile og 8 timar til skule eller arbeid i lære. Du kan fordele dei siste 8 timane mellom eigne val.</p>
           <div class="ll-weekday-locked" aria-label="Låst tid kvar vekedag">
             <div><span>Kvile og søvn</span><strong>8 t · låst</strong></div>
-            <div><span>Skule</span><strong>8 t · låst</strong></div>
+            <div><span>Skule eller læretid</span><strong>8 t · låst</strong></div>
           </div>
           <p id="budgetJobTimeImpact" class="ll-job-time-impact" role="status" aria-live="polite">Ingen jobb tek tid frå denne kvardagen.</p>
           <div id="budgetWeekdayControls" class="ll-time-list"></div>
@@ -342,7 +344,7 @@
     </div>
 
     <div class="vp-panel vp-panel--plain">
-      <h3 class="heading4 no-mt"><span data-icon="coins"></span> Brukskontoen gjennom tre år</h3>
+      <h3 class="heading4 no-mt" id="finalChartTitle"><span data-icon="coins"></span> Brukskontoen gjennom vidaregåande</h3>
       <div id="finalChart"></div>
     </div>
 
@@ -363,6 +365,7 @@
     </div>
 
     <div class="ll-wizard-nav">
+      <button class="vp-button vp-button--primary" id="finalContinue" type="button">Hald fram i livslina <span data-icon="arrowRight"></span></button>
       <button class="vp-button vp-button--tool" id="finalExport" type="button"><span data-icon="download"></span> Eksporter</button>
       <button class="vp-button vp-button--primary" id="finalAgain" type="button"><span data-icon="rotateCcw"></span> Prøv ein annan veg</button>
     </div>
@@ -382,6 +385,7 @@
     </div>
   </section>
 
+  <section id="screen-adult" class="screen" aria-label="Studium og arbeid"><div id="adultContent" class="ll-adult-stack"></div></section>
 </main>
 </div>
 
@@ -458,23 +462,30 @@
 <script src="assets/prototype/character-builder-art.js"></script>
 
 <script src="js/util.js"></script>
-<script src="js/data.js"></script>
-<script src="js/state.js"></script>
-<script src="js/storage.js"></script>
+<script src="js/data.js?v=10"></script>
+<script src="js/state.js?v=10"></script>
+<script src="js/phase2-state.js"></script>
+<script src="js/storage.js?v=10"></script>
 <script src="js/economy.js"></script>
 <script src="js/events.js"></script>
 <script src="js/sim.js"></script>
+<script src="js/phase2-economy.js"></script>
+<script src="js/phase2-events.js"></script>
+<script src="js/phase2-sim.js"></script>
 <script src="js/art-character.js"></script>
 <script src="js/art-room.js"></script>
 <script src="js/art-vignettes.js"></script>
 <script src="js/art-programs.js"></script>
-<script src="js/ui-setup.js"></script>
-<script src="js/ui-home.js"></script>
+<script src="js/ui-setup.js?v=10"></script>
+<script src="js/ui-home.js?v=10"></script>
 <script src="js/ui-room.js"></script>
 <script src="js/ui-budget.js"></script>
 <script src="js/ui-summer.js"></script>
 <script src="js/ui-playback.js"></script>
-<script src="js/ui-report.js?v=2"></script>
-<script src="js/main.js"></script>
+<script src="js/ui-report.js?v=10"></script>
+<script src="js/ui-phase2.js"></script>
+<script src="js/ui-phase2-plan.js"></script>
+<script src="js/ui-phase2-play.js"></script>
+<script src="js/main.js?v=10"></script>
 </body>
 </html>

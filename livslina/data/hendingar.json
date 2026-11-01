@@ -715,6 +715,201 @@
         { "label": "Lag ein nedbetalingsplan med ein vaksen du stolar på", "effects": { "flags": { "gjeldsplan": true }, "wellbeing": 2 } },
         { "label": "Bruk 5 000 kr frå sparepengane", "effects": { "savingsToMoney": 5000, "wellbeing": -1 } }
       ]
+    },
+    {
+      "id": "laere-plan2",
+      "title": "Plan for siste læreår",
+      "text": "Du skal få oversikt over kva du treng å øve på før fagprøva.",
+      "art": "apprentice",
+      "focus": "Læretid og vegen vidare",
+      "when": {
+        "rounds": [
+          "laere2h"
+        ],
+        "route": "apprenticeship"
+      },
+      "forced": true,
+      "once": true,
+      "weight": 1,
+      "choices": [
+        {
+          "label": "Lag ein plan med rettleiaren",
+          "effects": {
+            "grades": 0.1,
+            "energy": -1
+          }
+        },
+        {
+          "label": "Set eit eige øvingsmål",
+          "effects": {
+            "grades": 0.1,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "laere-ansvar2",
+      "title": "Meir sjølvstendig arbeid",
+      "text": "Du får ei oppgåve med større ansvar.",
+      "art": "apprentice",
+      "focus": "Læretid og vegen vidare",
+      "when": {
+        "rounds": [
+          "laere2h"
+        ],
+        "route": "apprenticeship"
+      },
+      "forced": true,
+      "once": true,
+      "weight": 1,
+      "choices": [
+        {
+          "label": "Avklar forventningar og støtte",
+          "effects": {
+            "wellbeing": 3,
+            "energy": -1
+          }
+        },
+        {
+          "label": "Øv saman med ein kollega",
+          "effects": {
+            "grades": 0.1,
+            "energy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "laere-buffer2",
+      "title": "Løn og framtidsplanar",
+      "text": "Du vil finne ut kva høgare lærlingløn kan bety for vegen vidare.",
+      "art": "apprentice",
+      "focus": "Læretid og vegen vidare",
+      "when": {
+        "rounds": [
+          "laere2h"
+        ],
+        "route": "apprenticeship"
+      },
+      "forced": true,
+      "once": true,
+      "weight": 1,
+      "choices": [
+        {
+          "label": "Lag eit spareoversyn",
+          "effects": {
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Undersøk arbeid og påbygg",
+          "effects": {
+            "wellbeing": 2,
+            "energy": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "laere-prove2",
+      "title": "Førebu fagprøva",
+      "text": "Du kan be om ekstra rettleiing før avslutninga av læretida.",
+      "art": "apprentice",
+      "focus": "Læretid og vegen vidare",
+      "when": {
+        "rounds": [
+          "laere2v"
+        ],
+        "route": "apprenticeship"
+      },
+      "forced": true,
+      "once": true,
+      "weight": 1,
+      "choices": [
+        {
+          "label": "Be om rettleiing",
+          "effects": {
+            "grades": 0.1,
+            "flags": {
+              "fagprovePrepared": true
+            }
+          }
+        },
+        {
+          "label": "Øv på ei konkret oppgåve",
+          "effects": {
+            "grades": 0.1,
+            "energy": -2,
+            "flags": {
+              "fagprovePrepared": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "laere-etter2",
+      "title": "Kva skjer etter læretida?",
+      "text": "Du undersøker arbeid i faget og moglegheita for påbygg.",
+      "art": "apprentice",
+      "focus": "Læretid og vegen vidare",
+      "when": {
+        "rounds": [
+          "laere2v"
+        ],
+        "route": "apprenticeship"
+      },
+      "forced": true,
+      "once": true,
+      "weight": 1,
+      "choices": [
+        {
+          "label": "Snakk med rådgjevar",
+          "effects": {
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Snakk med ein fagarbeidar",
+          "effects": {
+            "wellbeing": 2,
+            "energy": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "laere-avslutning2",
+      "title": "Marker avslutninga",
+      "text": "Kollegaene foreslår ei lita markering av læretida.",
+      "art": "apprentice",
+      "focus": "Læretid og vegen vidare",
+      "when": {
+        "rounds": [
+          "laere2v"
+        ],
+        "route": "apprenticeship"
+      },
+      "forced": true,
+      "once": true,
+      "weight": 1,
+      "choices": [
+        {
+          "label": "Bli med på ei rimeleg markering",
+          "effects": {
+            "cost": 300,
+            "wellbeing": 3
+          }
+        },
+        {
+          "label": "Foreslå ein gratis felles aktivitet",
+          "effects": {
+            "wellbeing": 2,
+            "energy": 2
+          }
+        }
+      ]
     }
   ],
   "summerEvents": [

@@ -1,0 +1,1930 @@
+{
+  "app": "livslina",
+  "version": 1,
+  "updated": "2026-11-01",
+  "note": "Prøveutgåve: alle år brukar fast prisnivå frå 2026. Løn, leige, renter og caseprisar er representative spelanslag. Skatt og støtte er forenkla; sjå kjeldene og avgrensingane.",
+  "sources": [
+    {
+      "id": "student",
+      "label": "Lånekassen: basislån 2026–2027, 15 488 kr i elleve månader",
+      "url": "https://lanekassen.no/nb-NO/hjelp-og-kontakt/tre-ting-du-ma-vite-om-stipend-og-lan-for-2026-2027/",
+      "year": 2026,
+      "kind": "official"
+    },
+    {
+      "id": "conversion",
+      "label": "Lånekassen: omgjering, inntekts- og formuesgrenser 2026",
+      "url": "https://lanekassen.no/nb-NO/stipend-og-lan/omgjoring-av-basislan/",
+      "year": 2026,
+      "kind": "official"
+    },
+    {
+      "id": "tax",
+      "label": "Skatteetaten: forskotsutskriving 2026 og BSU",
+      "url": "https://www.skatteetaten.no/rettskilder/type/uttalelser/uttalelser/forskuddsutskrivingen-2026/",
+      "year": 2026,
+      "kind": "official"
+    },
+    {
+      "id": "study",
+      "label": "HK-dir: Studiebarometeret 2025",
+      "url": "https://hkdir.no/no/rapporter-undersokelser-og-statistikk/les-rapporten/studiebarometeret-uh-2025/overordnet-tilfredshet",
+      "year": 2025,
+      "kind": "research"
+    },
+    {
+      "id": "completion",
+      "label": "SSB: gjennomføring i høgare utdanning, publisert 31.8.2026",
+      "url": "https://www.ssb.no/utdanning/hoyere-utdanning/statistikk/gjennomforing-ved-universiteter-og-hogskoler",
+      "year": 2026,
+      "kind": "statistics"
+    },
+    {
+      "id": "work",
+      "label": "STAMI: forskingsoversyn om jobbtilfredsheit",
+      "url": "https://noa.stami.no/arbeidsmiljofaktorer/tilfredshet-og-motivasjon/jobbtilfredshet/",
+      "year": 2026,
+      "kind": "research"
+    },
+    {
+      "id": "workSurvey",
+      "label": "SSB: arbeidsmiljø og jobbtilfredsheit 2025",
+      "url": "https://www.ssb.no/arbeid-og-lonn/arbeidsmiljo-sykefravaer-og-arbeidskonflikter/statistikk/arbeidsmiljo-levekarsundersokelsen",
+      "year": 2025,
+      "kind": "statistics"
+    },
+    {
+      "id": "qualification",
+      "label": "Udir: påbygg etter fag- og yrkesopplæring",
+      "url": "https://www.udir.no/regelverk-og-tilsyn/skole-og-opplaring/retten-til-videregaende-opplaring/rett-til-pabygging/",
+      "year": 2026,
+      "kind": "official"
+    }
+  ],
+  "rates": {
+    "studentMonthly": 15488,
+    "supportMonths": 11,
+    "passGrant": 0.15,
+    "degreeGrant": 0.25,
+    "incomeLimit": 234821,
+    "shortIncomeLimit": 587053,
+    "wealthLimit": 534225,
+    "incomeReduction": 0.05,
+    "wealthReduction": 0.02,
+    "bsuAnnual": 27500,
+    "bsuTotal": 300000,
+    "bsuTaxCredit": 0.1,
+    "savingsRate": 0.035,
+    "bsuRate": 0.06,
+    "loanRate": 0.05,
+    "creditRate": 0.18,
+    "hourlyWage": 220,
+    "food": 4680,
+    "mobile": 299,
+    "insurance": 200,
+    "transport": 591,
+    "household": 600,
+    "leisure": 600,
+    "materials": 400,
+    "semester": 850,
+    "moving": 1800,
+    "depositMonths": 3,
+    "jobChange": 1000,
+    "studyChange": 700,
+    "repayment": 1200,
+    "summerHourly": 220,
+    "tax": {
+      "allowance": 114540,
+      "deductionRate": 0.46,
+      "deductionMax": 95700,
+      "incomeRate": 0.22,
+      "insuranceRate": 0.076,
+      "insuranceFloor": 99650,
+      "insuranceCap": 0.25,
+      "brackets": [
+        [
+          226100,
+          0.017
+        ],
+        [
+          318300,
+          0.04
+        ],
+        [
+          725050,
+          0.137
+        ],
+        [
+          980100,
+          0.168
+        ],
+        [
+          1467200,
+          0.178
+        ]
+      ]
+    },
+    "bridgeMonthly": 6000
+  },
+  "housing": [
+    {
+      "id": "heime",
+      "label": "Bu heime",
+      "rent": 2500,
+      "food": 1800,
+      "utilities": 0,
+      "studentOnly": false,
+      "note": "Bidrag til hushaldet. Familieprofilen gir ingen automatisk støtte i vaksenlivet."
+    },
+    {
+      "id": "hybel",
+      "label": "Studenthybel",
+      "rent": 6200,
+      "utilities": 500,
+      "studentOnly": true,
+      "note": "For studentar og påbygg i spelmodellen. Studium er tilgjengeleg lokalt eller i same region i prøveutgåva."
+    },
+    {
+      "id": "kollektiv",
+      "label": "Privat hybel / kollektiv",
+      "rent": 7200,
+      "utilities": 700,
+      "studentOnly": false,
+      "note": "For alle retningar. Tre månaders leige blir bunde som depositum."
+    }
+  ],
+  "routes": [
+    {
+      "id": "sjukepleie",
+      "label": "Sjukepleie",
+      "kind": "study",
+      "years": 3,
+      "annualPay": 530000,
+      "graduate": "Sjukepleiar",
+      "note": "Tre studieår med praksis og pendling. Førstejobb med turnus.",
+      "source": "https://www.hvl.no/studier/studieprogram/sykepleie/"
+    },
+    {
+      "id": "okonomi",
+      "label": "Økonomi og administrasjon",
+      "kind": "study",
+      "years": 3,
+      "annualPay": 510000,
+      "graduate": "Økonomimedarbeidar",
+      "note": "Tre studieår med prosjekt, eksamen og samarbeid.",
+      "source": "https://www.oslomet.no/no/studier/sam/okonomi-administrasjon"
+    },
+    {
+      "id": "laerar",
+      "label": "Grunnskulelærar 1.–7. trinn",
+      "kind": "study",
+      "years": 5,
+      "annualPay": 570000,
+      "graduate": "Grunnskulelærar",
+      "note": "Fem studieår med praksis. Sein start eller pause kan føre studiet inn i neste livsfase.",
+      "source": "https://www.hvl.no/studier/studieprogram/grunnskolelaerer-1-7-bergen/"
+    },
+    {
+      "id": "tomrar",
+      "label": "Tømrar",
+      "kind": "job",
+      "program": "bygg-anlegg",
+      "annualPay": 500000,
+      "note": "Relevant fagbrev. Utstyr, arbeidsveg og samarbeid på byggeplassen."
+    },
+    {
+      "id": "helsefag",
+      "label": "Helsefagarbeidar",
+      "kind": "job",
+      "program": "helse-oppvekst",
+      "annualPay": 475000,
+      "note": "Relevant fagbrev. Turnus og kollegafellesskap."
+    },
+    {
+      "id": "itdrift",
+      "label": "IT-driftsteknikar",
+      "kind": "job",
+      "program": "it-medieproduksjon",
+      "annualPay": 510000,
+      "note": "Relevant fagbrev. Opplæring, problemløysing og ansvar."
+    },
+    {
+      "id": "eige-fag",
+      "label": "Arbeid i eige fag",
+      "kind": "job",
+      "program": "other",
+      "annualPay": 490000,
+      "note": "Felles jobbspor for andre fagbrev i prøveutgåva. Du held på det faktiske fagbrevet ditt."
+    },
+    {
+      "id": "butikk",
+      "label": "Butikkmedarbeidar",
+      "kind": "job",
+      "annualPay": 420000,
+      "note": "Utan fagbrevskrav i spelmodellen. Vel stillingsprosent og vaktmengd."
+    },
+    {
+      "id": "lager",
+      "label": "Lagermedarbeidar",
+      "kind": "job",
+      "annualPay": 440000,
+      "note": "Utan fagbrevskrav i spelmodellen. Skift, transport og opplæring; arbeidsgjevaren ordnar nødvendig kurs."
+    },
+    {
+      "id": "kafe",
+      "label": "Kafémedarbeidar",
+      "kind": "job",
+      "annualPay": 410000,
+      "note": "Utan fagbrevskrav i spelmodellen. Kundar, skift og travle periodar."
+    },
+    {
+      "id": "pabygg",
+      "label": "Påbygg til studiekompetanse",
+      "kind": "bridge",
+      "years": 1,
+      "note": "Eitt kvalifiseringsår etter yrkesfag. Opnar studia etter fullføring. Støtte er eit eige spelanslag, ikkje ordinært universitetsstipend."
+    },
+    {
+      "id": "friarbeid",
+      "label": "Friår med arbeid og sparing",
+      "kind": "gap",
+      "annualPay": 400000,
+      "note": "Arbeid i eitt år før du vel retning på nytt."
+    },
+    {
+      "id": "frikvile",
+      "label": "Friår med kvile og avklaring",
+      "kind": "gap",
+      "annualPay": 180000,
+      "note": "Deltidsarbeid og meir rom for kvile og å undersøkje vegar vidare."
+    },
+    {
+      "id": "frioppleving",
+      "label": "Friår med opplevingar",
+      "kind": "gap",
+      "annualPay": 260000,
+      "extraAnnual": 24000,
+      "note": "Deltidsarbeid og eit avgrensa opplevingsbudsjett på 24 000 kr per år."
+    }
+  ],
+  "goals": [
+    {
+      "id": "buffer",
+      "label": "Byggje buffer",
+      "kind": "money",
+      "defaultTarget": 30000
+    },
+    {
+      "id": "bustad",
+      "label": "Spare til eigen bustad",
+      "kind": "money",
+      "defaultTarget": 150000
+    },
+    {
+      "id": "flytting",
+      "label": "Spare til flytting",
+      "kind": "money",
+      "defaultTarget": 25000
+    },
+    {
+      "id": "utdanning",
+      "label": "Fullføre utdanning",
+      "kind": "study",
+      "defaultTarget": 3
+    },
+    {
+      "id": "gjeld",
+      "label": "Betale ned gjeld",
+      "kind": "debt",
+      "defaultTarget": 20000
+    },
+    {
+      "id": "overskot",
+      "label": "Meir overskot",
+      "kind": "energy",
+      "defaultTarget": 70
+    }
+  ],
+  "research": {
+    "directAnnualEffect": 0,
+    "maxAnnualEffect": 2,
+    "note": "Statistikken formar case om studiemiljø og arbeidsvilkår. Ingen fast bonus eller straff kjem frå yrkesnamnet. Fullføringsstatistikk er ingen tilfeldig sjanse for å stryke.",
+    "study": {
+      "source": "study",
+      "population": "Studentar i andre studieår og femte år på lange løp",
+      "year": 2025,
+      "measure": "Tilfredsheit med studieprogrammet",
+      "scope": "Utdanningstypar og lærestader",
+      "sampleNote": "Ulike svarprosentar og utval; ingen presis profil for den einskilde figuren.",
+      "effect": 0
+    },
+    "work": {
+      "source": "work",
+      "population": "Forskingsoversyn om yrkesaktive",
+      "year": 2026,
+      "measure": "Samanheng mellom arbeidsvilkår og jobbtilfredsheit",
+      "scope": "Kollegastøtte, sjølvbestemming, oppgåver og utvikling",
+      "sampleNote": "Oversyn, ikkje ei eiga spørjeundersøking med eitt svartal. Yrkesgrupper blir ikkje gjorde om til personlege lykkepoeng.",
+      "effect": 0
+    }
+  },
+  "events": [
+    {
+      "id": "vener",
+      "group": "common",
+      "title": "Vener på ulike stader",
+      "text": "Venegjengen er spreidd. De prøver å halde kontakten.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Avtal ein gratis digital kveld",
+          "effects": {
+            "social": 5,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Reis på helgebesøk",
+          "effects": {
+            "cash": -1800,
+            "social": 7,
+            "energy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mobil",
+      "group": "common",
+      "title": "Mobilen sviktar",
+      "text": "Telefonen treng reparasjon midt i ein travel periode.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Reparer telefonen",
+          "effects": {
+            "cash": -1800
+          }
+        },
+        {
+          "label": "Lån ein telefon medan du sparer",
+          "effects": {
+            "energy": -2,
+            "wellbeing": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "mat",
+      "group": "common",
+      "title": "Matplan for kvardagen",
+      "text": "Matutgiftene vart høgare enn venta.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Lag handleliste og felles matplan",
+          "effects": {
+            "monthlyExpense": -150,
+            "energy": -1
+          }
+        },
+        {
+          "label": "Hald på fridomen i kvardagen",
+          "effects": {
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "roersle",
+      "group": "common",
+      "title": "Ein pause ute",
+      "text": "Du kjenner at dagane blir stillesitjande eller einsidige.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Gå tur med ein ven",
+          "effects": {
+            "energy": 4,
+            "social": 3
+          }
+        },
+        {
+          "label": "Meld deg på ein aktivitet",
+          "effects": {
+            "cash": -900,
+            "energy": 5,
+            "social": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "rekning",
+      "group": "common",
+      "title": "Ei uventa rekning",
+      "text": "Ei rekning kjem før neste utbetaling.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Betal og juster planen",
+          "effects": {
+            "cash": -1200
+          }
+        },
+        {
+          "label": "Avtal delbetaling, med synleg tillegg",
+          "effects": {
+            "cash": -400,
+            "monthlyExpense": 120
+          }
+        }
+      ]
+    },
+    {
+      "id": "heimreise",
+      "group": "common",
+      "title": "Heimreise i ferien",
+      "text": "Du vurderer eit besøk heime.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Reis no",
+          "effects": {
+            "cash": -1000,
+            "social": 4,
+            "energy": 2
+          }
+        },
+        {
+          "label": "Spar reisa og avtal ein lang prat",
+          "effects": {
+            "social": 2,
+            "energy": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "vennekveld",
+      "group": "common",
+      "title": "Ein rimeleg vennekveld",
+      "text": "Nokre du kjenner vil finne på noko saman.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Lag ein felles middag",
+          "effects": {
+            "cash": -250,
+            "social": 5
+          }
+        },
+        {
+          "label": "Foreslå ein gratis tur",
+          "effects": {
+            "social": 4,
+            "energy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "sykkel",
+      "group": "common",
+      "title": "Sykkelen treng stell",
+      "text": "Bremsene på sykkelen må ordnast.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Bruk verkstad",
+          "effects": {
+            "cash": -1200
+          }
+        },
+        {
+          "label": "Få hjelp og lær å reparere",
+          "effects": {
+            "cash": -300,
+            "energy": -2,
+            "social": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "abonnement",
+      "group": "common",
+      "title": "Småtrekk på kontoen",
+      "text": "Du oppdagar abonnement du knapt brukar.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Rydd i avtalane",
+          "effects": {
+            "monthlyExpense": -100,
+            "energy": -1
+          }
+        },
+        {
+          "label": "Behald dei du likar",
+          "effects": {
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "plan",
+      "group": "common",
+      "title": "Ei travel veke",
+      "text": "Kalenderen har fylt seg opp.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Set av ein kveld til kvile",
+          "effects": {
+            "energy": 5
+          }
+        },
+        {
+          "label": "Hald avtalen med venene",
+          "effects": {
+            "social": 5,
+            "energy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "forsikring",
+      "group": "common",
+      "title": "Gå gjennom forsikringa",
+      "text": "Du får høve til å sjå kva innbuforsikringa dekkjer.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Bruk litt tid på avtalen",
+          "effects": {
+            "energy": -1,
+            "flag": "insuranceReviewed"
+          }
+        },
+        {
+          "label": "Be om ei enkel forklaring",
+          "effects": {
+            "social": 1,
+            "flag": "insuranceReviewed"
+          }
+        }
+      ]
+    },
+    {
+      "id": "familie",
+      "group": "common",
+      "title": "Nokon heime treng kontakt",
+      "text": "Ein nær person ønskjer at de snakkar oftare saman.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Avtal ein fast prat",
+          "effects": {
+            "social": 4,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Planlegg eit besøk",
+          "effects": {
+            "cash": -700,
+            "social": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "brukt",
+      "group": "common",
+      "title": "Noko til rommet",
+      "text": "Du finn noko du kunne tenkje deg til rommet.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Kjøp brukt",
+          "effects": {
+            "cash": -600,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Bruk det du alt eig",
+          "effects": {
+            "energy": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "dugnad",
+      "group": "common",
+      "title": "Dugnad i nærmiljøet",
+      "text": "Du blir invitert med på eit praktisk fellesarbeid.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Bli med nokre timar",
+          "effects": {
+            "social": 5,
+            "energy": -2
+          }
+        },
+        {
+          "label": "Ta ein roleg dag",
+          "effects": {
+            "energy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "reise",
+      "group": "common",
+      "title": "Transportprisen aukar",
+      "text": "Reisa til arbeid eller studium blir dyrare resten av året.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Vel eit rimelegare alternativ",
+          "effects": {
+            "monthlyExpense": 50,
+            "energy": -2
+          }
+        },
+        {
+          "label": "Behald den raske reisa",
+          "effects": {
+            "monthlyExpense": 150,
+            "energy": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "stotte",
+      "group": "common",
+      "title": "Du kjenner press",
+      "text": "Du merkar at krav og forventningar tek plass.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Snakk med nokon du stolar på",
+          "effects": {
+            "energy": 3,
+            "wellbeing": 3
+          }
+        },
+        {
+          "label": "Lag ein mindre ambisiøs vekeplan",
+          "effects": {
+            "energy": 4,
+            "social": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "kollokvie",
+      "group": "study",
+      "title": "Ei kollokviegruppe",
+      "text": "Medstudentar spør om du vil øve saman.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Bli med i gruppa",
+          "effects": {
+            "study": 0.1,
+            "social": 4,
+            "energy": -1
+          }
+        },
+        {
+          "label": "Arbeid roleg på eiga hand",
+          "effects": {
+            "study": 0.05,
+            "energy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "pensum",
+      "group": "study",
+      "title": "Pensumkostnaden",
+      "text": "Noko av pensumet kostar meir enn venta.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Kjøp brukt",
+          "effects": {
+            "cash": -1000,
+            "study": 0.05
+          }
+        },
+        {
+          "label": "Bruk biblioteket og del ressursar",
+          "effects": {
+            "study": 0.05,
+            "energy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "rettleiing",
+      "group": "study",
+      "title": "Tilbakemelding på arbeidet",
+      "text": "Du kan be om rettleiing før ei viktig innlevering.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Be om konkrete råd",
+          "effects": {
+            "study": 0.1,
+            "energy": -1
+          }
+        },
+        {
+          "label": "Jobb vidare sjølv",
+          "effects": {
+            "study": 0.03,
+            "energy": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "ekstravakt",
+      "group": "study",
+      "title": "Ekstravakt før eksamen",
+      "text": "Arbeidsgjevaren tilbyr ei vakt før eksamen.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Ta vakta",
+          "effects": {
+            "wage": 1800,
+            "energy": -4,
+            "study": -0.08
+          }
+        },
+        {
+          "label": "Hald av tid til førebuing",
+          "effects": {
+            "study": 0.1,
+            "energy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "studentmiljo",
+      "group": "study",
+      "title": "Finn eit miljø",
+      "text": "Du kan prøve ei studentforeining.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Prøv ein gratis aktivitet",
+          "effects": {
+            "social": 5,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Prioriter kjende vener",
+          "effects": {
+            "social": 3,
+            "energy": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "organisering",
+      "group": "study",
+      "title": "Timeplanen blir endra",
+      "text": "Ei brå timeplanendring gjer kvardagen vanskelegare.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Be om hjelp til ein ny plan",
+          "effects": {
+            "energy": -1,
+            "study": 0.05
+          }
+        },
+        {
+          "label": "Ordne det på eiga hand",
+          "effects": {
+            "energy": -3,
+            "study": 0.02
+          }
+        }
+      ]
+    },
+    {
+      "id": "sommarjobb",
+      "group": "study",
+      "title": "Sommarjobb og ferie",
+      "text": "Du får tilbod om litt ekstra sommararbeid.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Arbeid nokre ekstra dagar",
+          "effects": {
+            "wage": 6000,
+            "energy": -4
+          }
+        },
+        {
+          "label": "Hald på ferien",
+          "effects": {
+            "energy": 5,
+            "social": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "eksamensro",
+      "group": "study",
+      "title": "Førebu siste innspurt",
+      "text": "Du vil finne ein måte å halde oversikta på.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Lag ein realistisk leseplan",
+          "effects": {
+            "study": 0.1,
+            "energy": 1
+          }
+        },
+        {
+          "label": "Øv saman med nokon",
+          "effects": {
+            "study": 0.07,
+            "social": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "sjukepleie-praksisreise",
+      "group": "sjukepleie",
+      "title": "Praksis eit stykke unna",
+      "text": "Praksisplassen krev meir reise enn undervisninga.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Pendl i perioden",
+          "effects": {
+            "cash": -1800,
+            "energy": -3,
+            "study": 0.05
+          }
+        },
+        {
+          "label": "Del mellombels bustad med ein medstudent",
+          "effects": {
+            "cash": -3500,
+            "energy": 1,
+            "social": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "sjukepleie-praksisrettleiar",
+      "group": "sjukepleie",
+      "title": "Spør praksisrettleiaren",
+      "text": "Du er usikker på ei praktisk oppgåve i opplæringa.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Be om rettleiing",
+          "effects": {
+            "study": 0.12,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Avtal ekstra øving",
+          "effects": {
+            "study": 0.08,
+            "energy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "sjukepleie-turnusforbuing",
+      "group": "sjukepleie",
+      "title": "Førebu turnuskvardagen",
+      "text": "Du undersøker korleis arbeidstid kan verke inn på livet ditt.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Planlegg kvile og fritid",
+          "effects": {
+            "energy": 4,
+            "study": 0.03
+          }
+        },
+        {
+          "label": "Snakk med ein erfaren fagperson",
+          "effects": {
+            "social": 2,
+            "study": 0.08
+          }
+        }
+      ]
+    },
+    {
+      "id": "okonomi-prosjekt",
+      "group": "okonomi",
+      "title": "Prosjekt i ei gruppe",
+      "text": "Gruppa må fordele ei større oppgåve.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Avtal tydelege roller",
+          "effects": {
+            "study": 0.1,
+            "social": 3
+          }
+        },
+        {
+          "label": "Ta ein større del sjølv",
+          "effects": {
+            "study": 0.06,
+            "energy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "okonomi-relevantjobb",
+      "group": "okonomi",
+      "title": "Relevant deltidsoppdrag",
+      "text": "Eit lite kontoroppdrag gir erfaring, men tek lesetid.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Ta eit avgrensa oppdrag",
+          "effects": {
+            "wage": 3000,
+            "study": 0.05,
+            "energy": -3
+          }
+        },
+        {
+          "label": "Prioriter studiet no",
+          "effects": {
+            "study": 0.1,
+            "energy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "okonomi-verktoy",
+      "group": "okonomi",
+      "title": "Eit nytt analyseverktøy",
+      "text": "Du kan bruke tid på å lære eit arbeidsverktøy.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Øv med gratisressursane",
+          "effects": {
+            "study": 0.1,
+            "energy": -2
+          }
+        },
+        {
+          "label": "Øv saman med medstudentar",
+          "effects": {
+            "study": 0.08,
+            "social": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "laerar-skulepraksis",
+      "group": "laerar",
+      "title": "Praksis på ein skule",
+      "text": "Du skal kombinere planlegging, praksis og reise.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Planlegg i lag med medstudentar",
+          "effects": {
+            "study": 0.1,
+            "social": 3
+          }
+        },
+        {
+          "label": "Set av ein ekstra førebuingskveld",
+          "effects": {
+            "study": 0.12,
+            "energy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "laerar-rettleiarsamtale",
+      "group": "laerar",
+      "title": "Samtale etter praksis",
+      "text": "Rettleiaren tilbyr ei ekstra samtale om det du prøvde.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Ta imot rettleiinga",
+          "effects": {
+            "study": 0.12,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Skriv eigne refleksjonar",
+          "effects": {
+            "study": 0.07,
+            "energy": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "laerar-langtloep",
+      "group": "laerar",
+      "title": "Eit langt utdanningsløp",
+      "text": "Du vurderer korleis du skal halde på motivasjonen vidare.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Set eit nært delmål",
+          "effects": {
+            "study": 0.1,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Avtal ein frikveld kvar veke",
+          "effects": {
+            "energy": 4,
+            "social": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "tomrar-verktoy",
+      "group": "tomrar",
+      "title": "Utstyr på arbeidsplassen",
+      "text": "Du treng betre oversikt over kva utstyr bedrifta held.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Avklar med arbeidsleiaren",
+          "effects": {
+            "energy": -1,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Kjøp eige tilleggsutstyr",
+          "effects": {
+            "cash": -2000,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "tomrar-arbeidslag",
+      "group": "tomrar",
+      "title": "Nytt arbeidslag",
+      "text": "Du blir med eit nytt lag på eit prosjekt.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Be ein kollega vise rutinane",
+          "effects": {
+            "social": 4,
+            "wellbeing": 3
+          }
+        },
+        {
+          "label": "Avtal tydelege oppgåver med leiaren",
+          "effects": {
+            "energy": 2,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "tomrar-arbeidsveg",
+      "group": "tomrar",
+      "title": "Prosjekt lenger unna",
+      "text": "Arbeidsstaden flyttar ei tid.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Samkøyr med ein kollega",
+          "effects": {
+            "monthlyExpense": 100,
+            "social": 2
+          }
+        },
+        {
+          "label": "Reis på eiga hand",
+          "effects": {
+            "monthlyExpense": 300,
+            "energy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "helsefag-vaktplan",
+      "group": "helsefag",
+      "title": "Ein ny vaktplan",
+      "text": "Arbeidstidene blir lagde om.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Be om ei føreseieleg ordning",
+          "effects": {
+            "energy": 4,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Ta fleire ledige vakter",
+          "effects": {
+            "wage": 4000,
+            "energy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "helsefag-kollegastotte",
+      "group": "helsefag",
+      "title": "Støtte i ein travel kvardag",
+      "text": "Du kan drøfte arbeidsdagen med ein erfaren kollega.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Avtal ein kort fagprat",
+          "effects": {
+            "social": 3,
+            "wellbeing": 3
+          }
+        },
+        {
+          "label": "Set av tid til kvile etter jobb",
+          "effects": {
+            "energy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "helsefag-fagkurs",
+      "group": "helsefag",
+      "title": "Tilbod om fagkurs",
+      "text": "Arbeidsgjevaren tilbyr opplæring i arbeidstida.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Delta på kurset",
+          "effects": {
+            "wellbeing": 3,
+            "energy": -1
+          }
+        },
+        {
+          "label": "Be om rettleiing i ei konkret oppgåve",
+          "effects": {
+            "wellbeing": 2,
+            "social": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "itdrift-mentor",
+      "group": "itdrift",
+      "title": "Ein mentor på jobb",
+      "text": "Ein erfaren kollega tilbyr ei innføring i systema.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Avtal rettleiing",
+          "effects": {
+            "wellbeing": 3,
+            "social": 3
+          }
+        },
+        {
+          "label": "Lag ein eigen læringsplan",
+          "effects": {
+            "wellbeing": 2,
+            "energy": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "itdrift-ansvar",
+      "group": "itdrift",
+      "title": "Meir ansvar",
+      "text": "Du får spørsmål om å ta ansvar for ei ny oppgåve.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Avklar tid og støtte fyrst",
+          "effects": {
+            "wellbeing": 3
+          }
+        },
+        {
+          "label": "Ta oppgåva med ein gong",
+          "effects": {
+            "wage": 2500,
+            "energy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "itdrift-avbrot",
+      "group": "itdrift",
+      "title": "Mange avbrot",
+      "text": "Stadige småførespurnader bryt opp arbeidsdagen.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Avtal tydelege prioriteringar",
+          "effects": {
+            "energy": 3,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Be kollegaene dele på vakta",
+          "effects": {
+            "social": 3,
+            "energy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "butikk-storrestilling",
+      "group": "butikk",
+      "title": "Større stilling",
+      "text": "Butikken kan tilby meir arbeid resten av året.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Ta nokre fleire vakter",
+          "effects": {
+            "monthlyWage": 1000,
+            "energy": -3
+          }
+        },
+        {
+          "label": "Hald på den noverande planen",
+          "effects": {
+            "energy": 2,
+            "social": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "butikk-kundekveld",
+      "group": "butikk",
+      "title": "Ein travel kundekveld",
+      "text": "De ventar ekstra mange kundar.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Avtal arbeidsdeling med kollegaene",
+          "effects": {
+            "social": 3,
+            "energy": 1
+          }
+        },
+        {
+          "label": "Ta eit ekstra skift",
+          "effects": {
+            "wage": 1800,
+            "energy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "butikk-opplaering",
+      "group": "butikk",
+      "title": "Lær ei ny oppgåve",
+      "text": "Du får opplæring i eit nytt arbeidsområde.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Bruk tid på opplæringa",
+          "effects": {
+            "wellbeing": 3,
+            "energy": -1
+          }
+        },
+        {
+          "label": "Be om å øve saman med ein kollega",
+          "effects": {
+            "social": 3,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "lager-tidlegskift",
+      "group": "lager",
+      "title": "Tidleg skift",
+      "text": "Ei endring i skiftplanen krev tidlegare reise.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Juster søvn og reiseplan",
+          "effects": {
+            "energy": 2,
+            "monthlyExpense": 100
+          }
+        },
+        {
+          "label": "Samkøyr med ein kollega",
+          "effects": {
+            "social": 3,
+            "monthlyExpense": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": "lager-kurs",
+      "group": "lager",
+      "title": "Opplæring i arbeidstida",
+      "text": "Du får eit kurs som arbeidsgjevaren betaler.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Delta og øv",
+          "effects": {
+            "wellbeing": 3,
+            "energy": -1
+          }
+        },
+        {
+          "label": "Avtal tettare rettleiing",
+          "effects": {
+            "wellbeing": 2,
+            "social": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "lager-team",
+      "group": "lager",
+      "title": "Fordel arbeidet",
+      "text": "Laget vil finne ei betre fordeling av oppgåvene.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Kom med forslag",
+          "effects": {
+            "wellbeing": 3,
+            "social": 2
+          }
+        },
+        {
+          "label": "Be om ei tydeleg eiga oppgåve",
+          "effects": {
+            "energy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "kafe-faerrevakter",
+      "group": "kafe",
+      "title": "Færre vakter",
+      "text": "Kafeen har ei rolegare tid enn venta.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Ta færre vakter ei stund",
+          "effects": {
+            "monthlyWage": -600,
+            "energy": 3
+          }
+        },
+        {
+          "label": "Finn eit lite ekstraoppdrag",
+          "effects": {
+            "wage": 2000,
+            "energy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "kafe-helgevakt",
+      "group": "kafe",
+      "title": "Helgevakt eller vennekveld",
+      "text": "Ei ledig vakt fell på ein kveld du hadde planar.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Ta vakta",
+          "effects": {
+            "wage": 1800,
+            "energy": -2
+          }
+        },
+        {
+          "label": "Hald på avtalen",
+          "effects": {
+            "social": 4,
+            "energy": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "kafe-rutinar",
+      "group": "kafe",
+      "title": "Betre rutinar",
+      "text": "De prøver å gjere travle skift meir oversiktlege.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Lag ein plan saman",
+          "effects": {
+            "social": 3,
+            "wellbeing": 3
+          }
+        },
+        {
+          "label": "Be om tydelegare prioriteringar",
+          "effects": {
+            "energy": 3,
+            "wellbeing": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "fri-spareplan",
+      "group": "gap",
+      "title": "Kva vil du ha ut av friåret?",
+      "text": "Du ser på kva som er mogleg dette året.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Set eit realistisk delmål",
+          "effects": {
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Undersøk ei ny retning",
+          "effects": {
+            "energy": -1,
+            "wellbeing": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "fri-opendag",
+      "group": "gap",
+      "title": "Undersøk eit studium",
+      "text": "Du kan besøkje eit lærestad eller møte ein rådgjevar.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Reis på open dag",
+          "effects": {
+            "cash": -1000,
+            "wellbeing": 3
+          }
+        },
+        {
+          "label": "Bruk eit digitalt møte",
+          "effects": {
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "fri-ekstraarbeid",
+      "group": "gap",
+      "title": "Arbeid i friåret",
+      "text": "Du får tilbod om nokre ekstra dagar på jobb.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Arbeid litt meir",
+          "effects": {
+            "wage": 5000,
+            "energy": -4
+          }
+        },
+        {
+          "label": "Hald av tid til føremålet med friåret",
+          "effects": {
+            "energy": 4,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "fri-tur",
+      "group": "gap",
+      "title": "Ei oppleving saman",
+      "text": "Ein ven foreslår ei reise.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Vel ein kort og rimeleg tur",
+          "effects": {
+            "cash": -2500,
+            "social": 5
+          }
+        },
+        {
+          "label": "Finn ei gratis oppleving nær heimen",
+          "effects": {
+            "social": 4,
+            "energy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "fri-kvile",
+      "group": "gap",
+      "title": "Rom for kvile",
+      "text": "Du vurderer kor mykje du vil fylle vekene med.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Hald på ein roleg rytme",
+          "effects": {
+            "energy": 5
+          }
+        },
+        {
+          "label": "Prøv ein aktivitet med andre",
+          "effects": {
+            "social": 5,
+            "energy": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "fri-retur",
+      "group": "gap",
+      "title": "Tanken på neste år",
+      "text": "Du vil førebu retninga etter friåret.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Undersøk krav og søknad",
+          "effects": {
+            "wellbeing": 3,
+            "flag": "routePrepared"
+          }
+        },
+        {
+          "label": "Snakk med nokon i eit aktuelt yrke",
+          "effects": {
+            "social": 2,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "overgang-nyby",
+      "group": "transition",
+      "title": "Nytt nærmiljø",
+      "text": "Du skal finne deg til rette på ein ny stad.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Bli med på ein gratis møteplass",
+          "effects": {
+            "social": 5
+          }
+        },
+        {
+          "label": "Inviter ein kjend ven",
+          "effects": {
+            "cash": -300,
+            "social": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "overgang-forstejobb",
+      "group": "transition",
+      "title": "Starten i ny jobb",
+      "text": "Du prøver å finne gode rutinar i ein ny jobb.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Be om klare forventningar",
+          "effects": {
+            "wellbeing": 3,
+            "energy": 1
+          }
+        },
+        {
+          "label": "Finn ein kollega å spørje",
+          "effects": {
+            "social": 4,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "overgang-leigekontrakt",
+      "group": "transition",
+      "title": "Les leigeavtalen",
+      "text": "Du vil vite kva leiga omfattar.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Gå gjennom avtalen saman med nokon",
+          "effects": {
+            "energy": -1,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Be utleigaren forklare postane",
+          "effects": {
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "overgang-byteplan",
+      "group": "transition",
+      "title": "Ny retning krev tid",
+      "text": "Du vil halde oversikta når du byter retning.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Lag ei sjekkliste",
+          "effects": {
+            "energy": -1,
+            "wellbeing": 3
+          }
+        },
+        {
+          "label": "Be om ei rettleiingssamtale",
+          "effects": {
+            "social": 2,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "overgang-pabygggruppe",
+      "group": "transition",
+      "title": "Fellesskap på påbygg",
+      "text": "Du møter andre som vil få studiekompetanse.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Øv saman",
+          "effects": {
+            "study": 0.12,
+            "social": 3
+          }
+        },
+        {
+          "label": "Lag ein eigen leseplan",
+          "effects": {
+            "study": 0.08,
+            "energy": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "overgang-fagveg",
+      "group": "transition",
+      "title": "Erfaring frå fagarbeid",
+      "text": "Du ser at praktisk erfaring kan vere nyttig vidare.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Drøft erfaringa med ein rettleiar",
+          "effects": {
+            "wellbeing": 3
+          }
+        },
+        {
+          "label": "Skriv ned kva du har lært",
+          "effects": {
+            "wellbeing": 2,
+            "energy": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "overgang-grense",
+      "group": "transition",
+      "title": "Setje grenser",
+      "text": "Du vil finne ei betre balanse mellom plikter og fritid.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Avtal ei tydeleg grense",
+          "effects": {
+            "energy": 4
+          }
+        },
+        {
+          "label": "Ta praten med ein kollega eller medstudent",
+          "effects": {
+            "social": 3,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "maal-buffer",
+      "group": "goal",
+      "title": "Buffer eller eit ønskje",
+      "text": "Du vurderer eit kjøp opp mot sparemålet.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Utset kjøpet",
+          "effects": {
+            "wellbeing": 1
+          }
+        },
+        {
+          "label": "Kjøp noko lite du har ønskt deg",
+          "effects": {
+            "cash": -800,
+            "wellbeing": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "maal-bustad",
+      "group": "goal",
+      "title": "Eit framtidig husvære",
+      "text": "Du undersøker kva du må spare for å flytte seinare.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Lag eit enkelt oversyn",
+          "effects": {
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Snakk med nokon om realistiske kostnader",
+          "effects": {
+            "social": 2,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "maal-feiring",
+      "group": "goal",
+      "title": "Eit delmål å markere",
+      "text": "Du vil markere at du har halde på ein plan.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Gjer noko gratis saman med ein ven",
+          "effects": {
+            "social": 4,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Set av litt til ei feiring",
+          "effects": {
+            "cash": -400,
+            "wellbeing": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "maal-justering",
+      "group": "goal",
+      "title": "Målet tek lengre tid",
+      "text": "Du ser at målet treng meir tid enn venta.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Juster tidsfristen",
+          "effects": {
+            "energy": 3,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Ta eit lite ekstraoppdrag",
+          "effects": {
+            "wage": 1500,
+            "energy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "maal-overskot",
+      "group": "goal",
+      "title": "Overskot som mål",
+      "text": "Du prøver å halde av tid til deg sjølv.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Vern om ein frikveld",
+          "effects": {
+            "energy": 4
+          }
+        },
+        {
+          "label": "Avtal ein roleg aktivitet med nokon",
+          "effects": {
+            "energy": 2,
+            "social": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "maal-gjeld",
+      "group": "goal",
+      "title": "Oversyn over gjelda",
+      "text": "Du vil forstå kva du skuldar og kva renter betyr.",
+      "when": {},
+      "choices": [
+        {
+          "label": "Lag ei oversikt med ein rettleiar",
+          "effects": {
+            "wellbeing": 3
+          }
+        },
+        {
+          "label": "Gå gjennom tala i ro og mak",
+          "effects": {
+            "energy": -1,
+            "wellbeing": 2
+          }
+        }
+      ]
+    }
+  ]
+}
