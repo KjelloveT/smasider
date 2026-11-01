@@ -16,6 +16,9 @@ LL.main = (function () {
   }
 
   function enterHome() {
+    const state = LL.state.get();
+    if (state && state.phase === 2) { LL.uiPhase2.open(); return; }
+    if (state && state.finished) { LL.uiReport.showFinal(); return; }
     LL.uiHome.render();
     showScreen('screen-home');
   }
