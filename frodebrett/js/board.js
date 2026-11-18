@@ -9,6 +9,13 @@
 
   const Board = {};
 
+  Board.bind = function () {
+    Board.bindTeamSetup();
+    Board.bindQuestionModal();
+    Board.bindGameControls();
+    Board.bindFinalRound();
+  };
+
   // ===== LAGOPPSETT =====
 
   Board.bindTeamSetup = function () {
@@ -26,12 +33,13 @@
 
     const input = document.createElement('input');
     input.type = 'text';
-    input.className = 'form-input team-name';
+    input.className = 'vp-input team-name';
     input.placeholder = 'Lag ' + (count + 1);
+    input.setAttribute('aria-label', input.placeholder);
     input.maxLength = 20;
 
     const btn = document.createElement('button');
-    btn.className = 'btn btn-icon btn-remove-team';
+    btn.className = 'vp-button vp-button--icon btn-remove-team';
     btn.setAttribute('aria-label', 'Fjern lag');
     btn.textContent = '×';
 
@@ -59,41 +67,6 @@
     }
   };
 
-  // ===== FRØDEVAL =====
-
-  Board.loadQuizList = function () {
-    const quizzes = Store.getQuizzes();
-    const container = FB.el('quiz-list');
-    container.innerHTML = '';
-
-    if (quizzes.length === 0) {
-      const p = document.createElement('p');
-      p.className = 'fb-muted';
-      p.textContent = 'Ingen frøder funne. Lag ein i editoren!';
-      container.appendChild(p);
-      return;
-    }
-
-    quizzes.forEach(quiz => {
-      const card = document.createElement('button');
-      card.className = 'quiz-card';
-      card.type = 'button';
-
-      const h = document.createElement('h3');
-      h.textContent = quiz.title;
-      card.appendChild(h);
-
-      const meta = document.createElement('p');
-      const nQ = quiz.categories.reduce((sum, c) => sum + c.questions.length, 0);
-      meta.textContent = quiz.categories.length + ' kategoriar · ' + nQ + ' spørsmål'
-        + (quiz.final ? ' · finalerunde' : '');
-      card.appendChild(meta);
-
-      card.addEventListener('click', () => Board.selectQuiz(quiz));
-      container.appendChild(card);
-    });
-  };
-
   Board.selectQuiz = function (quiz) {
     S.currentQuiz = quiz;
     Board.startGame();
@@ -109,7 +82,7 @@
       const color = FB.TEAM_COLORS[i % FB.TEAM_COLORS.length];
       S.teams.push({ id: i + 1, name, score: 0, color });
     });
-    Store.saveTeams(S.teams.map(t => ({ name: t.name })));
+    Store?.saveTeams(S.teams.map(t => ({ name: t.name })));
 
     S.answeredCells.clear();
     S.finalBets = {};
@@ -120,13 +93,21 @@
     FB.hide('quiz-selection');
     FB.show('game-board');
 
+    FB.el('game-title').textContent = S.currentQuiz.title;
+    FB.el('btn-go-final').classList.toggle('hidden', !S.currentQuiz.final);
     Board.renderScoreBoard();
     Board.renderGameBoard();
+    FB.el('game-title').focus();
   };
 
   Board.initializeDailyDouble = function () {
-    const total = S.currentQuiz.categories.length * FB.POINTS.length;
-    S.dailyDoubleCell = Math.floor(Math.random() * total);
+    const cells = [];
+    S.currentQuiz.categories.forEach((category, column) => {
+      FB.POINTS.forEach((points, row) => {
+        if (category.questions.some(q => q.points === points)) cells.push(column * FB.POINTS.length + row);
+      });
+    });
+    S.dailyDoubleCell = Vy.shuffle(cells)[0];
   };
 
   // ===== POENGTAVLE + TUR =====
@@ -213,8 +194,8 @@
     FB.POINTS.forEach((points, rowIndex) => {
       cats.forEach((category, ci) => {
         const question = category.questions.find(q => q.points === points);
-        const cellKey = category.name + '-' + points;
-        const isAnswered = S.answeredCells.has(cellKey);
+        const cellIndex = ci * FB.POINTS.length + rowIndex;
+        const isAnswered = S.answeredCells.has(cellIndex);
 
         const cell = document.createElement('div');
         cell.className = 'jeopardy-cell';
@@ -230,7 +211,7 @@
           cell.setAttribute('tabindex', '0');
           cell.dataset.col = ci;
           cell.dataset.row = rowIndex;
-          const cellIndex = ci * FB.POINTS.length + rowIndex;
+          cell.setAttribute('aria-label', category.name + ', ' + points + ' poeng');
           const open = () => Board.selectQuestion(category, question, cellIndex);
           cell.addEventListener('click', open);
           cell.addEventListener('keydown', (e) => {
@@ -267,7 +248,7 @@
       points: isDD ? question.points * 2 : question.points,
       isDailyDouble: isDD
     };
-    S.answeredCells.add(category.name + '-' + question.points);
+    S.answeredCells.add(cellIndex);
     Board.showQuestion();
   };
 
@@ -376,6 +357,11 @@
   };
 
   Board.bindQuestionModal = function () {
+    const modal = FB.el('question-modal');
+    Vy.bindOverlayClose(modal);
+    modal.addEventListener('click', e => {
+      if (e.target === modal) Board.renderGameBoard();
+    });
     FB.el('btn-reveal-modal').addEventListener('click', () => {
       FB.show('question-answer');
       FB.hide('btn-reveal-modal');
@@ -594,6 +580,7 @@
     FB.show('jeopardy-grid');
 
     document.querySelectorAll('.team-name').forEach(i => { i.value = ''; });
+    FB.el('library-heading').focus();
   };
 
   // ===== TASTATUR I SPEL =====
@@ -636,7 +623,8 @@
       return;
     }
 
-    if (e.key === ' ' && !FB.el('team-setup').classList.contains('hidden')) {
+    const setup = FB.el('team-setup');
+    if (e.key === ' ' && setup.open && !setup.classList.contains('hidden') && e.target === document.body) {
       e.preventDefault();
       FB.el('btn-add-team').click();
     }
