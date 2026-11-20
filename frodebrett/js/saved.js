@@ -36,9 +36,7 @@
     const more = Vy.el('details', 'vp-accordion vp-accordion--compact');
     const moreActions = Vy.el('div', 'vp-accordion-body vp-actions');
     moreActions.append(
-      action('Last ned JSON', 'vp-button--quiet', '', quiz, () => {
-        Vy.downloadJson({ app: 'frodebrett', version: 1, quiz }, 'frodebrett_' + Vy.slug(quiz.title) + '.json');
-      }),
+      action('Last ned JSON', 'vp-button--quiet', '', quiz, () => FB.Export.downloadJson(quiz)),
       action('Slett frøde', 'vp-button--danger', '', quiz, () => {
         if (!confirm('Vil du slette «' + quiz.title + '» frå denne eininga?')) return;
         Store.deleteQuiz(quiz.id);

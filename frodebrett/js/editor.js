@@ -16,11 +16,9 @@
   Editor.bind = function () {
     FB.el('btn-add-category').addEventListener('click', addCategory);
     FB.el('btn-save-quiz').addEventListener('click', Editor.saveQuiz);
-    FB.el('btn-editor-export').addEventListener('click', e => {
-      const quiz = prepareQuiz();
-      if (quiz) FB.Export.download(quiz, e.currentTarget);
-    });
+    FB.Export.bindEditor(prepareQuiz);
     FB.el('btn-preview').addEventListener('click', () => Editor.previewQuiz());
+    FB.el('btn-final-tab').addEventListener('click', () => selectTab('final'));
     FB.el('final-round-toggle').addEventListener('change', showFinalFields);
     FB.el('editor-screen').addEventListener('input', () => FB.hide('editor-errors'));
 
@@ -70,11 +68,33 @@
     return { label, input };
   }
 
-  function selectCategory(index) {
+  function selectTab(index) {
     S.activeTab = index;
+    const isFinal = index === 'final';
     const tabs = [...FB.el('category-tabs').children];
-    tabs.forEach((tab, i) => tab.setAttribute('aria-pressed', String(i === index)));
-    renderCategory();
+    tabs.forEach((tab, i) => {
+      const selected = tab.id === 'btn-final-tab' ? isFinal : i === index;
+      tab.setAttribute('aria-pressed', String(selected));
+    });
+    FB.el('category-name-fields').hidden = isFinal;
+    FB.el('category-tab-content').hidden = isFinal;
+    FB.el('editor-final-section').hidden = !isFinal;
+    if (!isFinal) renderCategory();
+  }
+
+  function updateCategoryTab(tab, category, index) {
+    const started = category.questions.filter(q => hasQuestion(q) || q.answer);
+    const ready = Boolean(category.name && started.length && started.every(isComplete));
+    const label = tabName(category, index);
+    const description = ready ? 'Klar til spel' : 'Ikkje klar til spel';
+    const status = tab.querySelector('.fb-category-status');
+    tab.querySelector('.fb-tab-name').textContent = label;
+    tab.setAttribute('aria-label', label + ' · ' + description);
+    if (status.dataset.ready !== String(ready)) {
+      status.dataset.ready = String(ready);
+      status.title = description;
+      status.innerHTML = ICON(ready ? 'check' : 'circle', 16);
+    }
   }
 
   function renderTabs() {
@@ -85,13 +105,16 @@
       const mark = Vy.el('span', 'vp-selection-mark');
       mark.setAttribute('aria-hidden', 'true');
       mark.innerHTML = ICON('check', 18);
-      tab.append(mark, Vy.el('span', 'fb-tab-name', tabName(category, i)));
+      const status = Vy.el('span', 'fb-category-status');
+      status.setAttribute('aria-hidden', 'true');
+      tab.append(mark, Vy.el('span', 'fb-tab-name'), status);
+      updateCategoryTab(tab, category, i);
       tab.addEventListener('click', () => {
-        if (S.activeTab !== i) selectCategory(i);
+        if (S.activeTab !== i) selectTab(i);
       });
       return tab;
     });
-    FB.el('category-tabs').replaceChildren(...tabs);
+    FB.el('category-tabs').replaceChildren(...tabs, FB.el('btn-final-tab'));
     FB.el('btn-add-category').disabled = tabs.length >= 6;
   }
 
@@ -109,14 +132,14 @@
     return details;
   }
 
-  function makeQuestionRow(question) {
+  function makeQuestionRow(question, onChange) {
     const details = Vy.el('details', 'vp-accordion fb-question');
     details.name = 'editor-questions';
     const summary = Vy.el('summary');
     const title = Vy.el('span', 'fb-question-summary');
     const status = Vy.el('span', 'fb-question-status');
     const prompt = Vy.el('span', 'fb-question-snippet');
-    title.append(Vy.el('strong', '', question.points + ' poeng'), prompt);
+    title.append(Vy.el('strong', 'fb-question-points', question.points + ' poeng'), prompt);
     summary.append(title, status);
 
     const body = Vy.el('div', 'vp-accordion-body vp-stack');
@@ -130,6 +153,7 @@
         : hasQuestion(question) ? 'Manglar fasit'
         : question.answer ? 'Manglar spørsmål' : 'Tom';
       status.dataset.state = isComplete(question) ? 'ready' : hasQuestion(question) || question.answer ? 'partial' : 'empty';
+      onChange();
     }
     questionField.input.addEventListener('input', () => {
       question.question = questionField.input.value.trim();
@@ -149,11 +173,15 @@
     const category = S.editorCategories[S.activeTab];
     const nameFields = FB.el('category-name-fields');
     const questions = FB.el('category-tab-content');
+    const syncTab = () => {
+      const index = S.editorCategories.indexOf(category);
+      if (index >= 0) updateCategoryTab(FB.el('category-tabs').children[index], category, index);
+    };
     const name = field('editor-cat-name', 'Kategorinamn', category.name);
     name.input.maxLength = 30;
     name.input.addEventListener('input', () => {
       category.name = name.input.value.trim();
-      FB.el('category-tabs').children[S.activeTab].querySelector('.fb-tab-name').textContent = tabName(category, S.activeTab);
+      syncTab();
     });
     nameFields.replaceChildren(name.label);
     if (S.editorCategories.length > 2) {
@@ -164,12 +192,12 @@
           && !confirm('Vil du fjerne «' + tabName(category, S.activeTab) + '» og spørsmåla i kategorien?')) return;
         S.editorCategories.splice(S.activeTab, 1);
         renderTabs();
-        selectCategory(Math.min(S.activeTab, S.editorCategories.length - 1));
+        selectTab(Math.min(S.activeTab, S.editorCategories.length - 1));
         FB.el('category-tabs').children[S.activeTab].focus();
       });
       nameFields.append(remove);
     }
-    questions.replaceChildren(...category.questions.map(makeQuestionRow));
+    questions.replaceChildren(...category.questions.map(question => makeQuestionRow(question, syncTab)));
     if (!category.questions.some(q => hasQuestion(q) || q.answer)) questions.firstElementChild.open = true;
   }
 
@@ -177,7 +205,7 @@
     if (S.editorCategories.length >= 6) return;
     S.editorCategories.push(makeCategory());
     renderTabs();
-    selectCategory(S.editorCategories.length - 1);
+    selectTab(S.editorCategories.length - 1);
     FB.el('editor-cat-name').focus();
   }
 
@@ -350,14 +378,13 @@
     S.editorCategories = (quiz?.categories || []).map(makeCategory);
     while (S.editorCategories.length < 2) S.editorCategories.push(makeCategory());
     renderTabs();
-    selectCategory(0);
+    selectTab(0);
 
     const final = quiz?.final;
     S.editorFinalImage = { image: final?.image, imageAlt: final?.imageAlt };
     FB.el('editor-final-image').replaceChildren(editImage(S.editorFinalImage, 'finalspørsmålet'));
     Object.entries(finalFields).forEach(([key, id]) => { FB.el(id).value = final?.[key] || ''; });
     FB.el('final-round-toggle').checked = Boolean(final);
-    FB.el('editor-final-section').open = false;
     showFinalFields();
     updateSaveLabel();
     baseline = snapshot();

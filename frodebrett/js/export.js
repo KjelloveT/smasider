@@ -3,6 +3,16 @@
   'use strict';
 
   const FB = root.FB;
+  const downloadHelp = {
+    html: {
+      title: 'Køyrbar spelefil',
+      text: 'HTML-fila inneheld heile spelet. Send fila vidare eller opne henne direkte i ein nettlesar. Ho kan spelast utan nett.'
+    },
+    json: {
+      title: 'Redigerbar JSON-fil',
+      text: 'Send JSON-fila til den du vil dele frøda med. Mottakaren vel «Opne JSON-fil» i Frødebrett og kan deretter redigere eller spele frøda.'
+    }
+  };
   const page = new URL('../index.html', document.currentScript.src);
   let cachedAssets;
 
@@ -109,12 +119,16 @@ ${code}
 </html>`;
   }
 
+  function fileName(quiz, extension) {
+    return 'frodebrett_' + (Vy.slug(quiz.title) || 'spel') + '.' + extension;
+  }
+
   async function download(quiz, button) {
     button.disabled = true;
     try {
       const html = await buildHtml(quiz);
       Vy.downloadBlob(new Blob([html], { type: 'text/html;charset=utf-8' }),
-        'frodebrett_' + (Vy.slug(quiz.title) || 'spel') + '.html');
+        fileName(quiz, 'html'));
       Vy.toast('HTML-fila er lasta ned. Ho kan opnast direkte i nettlesaren.', { kind: 'good' });
     } catch {
       Vy.toast('Kunne ikkje lage HTML-fila. Prøv å laste sida på nytt.', { kind: 'warn' });
@@ -123,5 +137,31 @@ ${code}
     }
   }
 
-  FB.Export = { download };
+  function downloadJson(quiz) {
+    Vy.downloadJson({ app: 'frodebrett', version: 1, quiz }, fileName(quiz, 'json'));
+  }
+
+  function bindEditor(prepareQuiz) {
+    FB.el('btn-editor-export').addEventListener('click', event => {
+      const quiz = prepareQuiz();
+      if (quiz) download(quiz, event.currentTarget);
+    });
+    FB.el('btn-editor-export-json').addEventListener('click', () => {
+      const quiz = prepareQuiz();
+      if (quiz) downloadJson(quiz);
+    });
+    const dialog = FB.el('download-help-dialog');
+    document.querySelectorAll('[data-fb-download-help]').forEach(button => {
+      button.addEventListener('click', () => {
+        const help = downloadHelp[button.dataset.fbDownloadHelp];
+        FB.el('download-help-title').textContent = help.title;
+        FB.el('download-help-text').textContent = help.text;
+        Vy.openModal(dialog);
+      });
+    });
+    FB.el('btn-close-download-help').addEventListener('click', () => Vy.closeModal(dialog));
+    Vy.bindOverlayClose(dialog);
+  }
+
+  FB.Export = { download, downloadJson, bindEditor };
 })(window);

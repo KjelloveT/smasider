@@ -7,7 +7,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=4">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
@@ -130,7 +130,14 @@
       <div class="vp-toolbar fb-editor-toolbar" aria-label="Handlingar for frøda" role="group">
         <button class="vp-button vp-button--primary" id="btn-save-quiz" type="button"><span data-icon="save" aria-hidden="true"></span><span id="editor-save-label">Lagre frøde</span></button>
         <button class="vp-button" id="btn-preview" type="button">Førehandsvis</button>
-        <button class="vp-button vp-button--tool" id="btn-editor-export" type="button"><span data-icon="download" aria-hidden="true"></span>Last ned HTML</button>
+        <div class="fb-download-action">
+          <button class="vp-button vp-button--tool" id="btn-editor-export" type="button"><span data-icon="download" aria-hidden="true"></span><span>Last ned heile spelet som køyrbar fil</span></button>
+          <button class="vp-button vp-button--icon vp-button--quiet" type="button" data-fb-download-help="html" aria-label="Om den køyrbare spelefila" aria-haspopup="dialog" aria-controls="download-help-dialog"><span data-icon="helpCircle" aria-hidden="true"></span></button>
+        </div>
+        <div class="fb-download-action">
+          <button class="vp-button" id="btn-editor-export-json" type="button"><span data-icon="fileJson" aria-hidden="true"></span><span>Last ned JSON</span></button>
+          <button class="vp-button vp-button--icon vp-button--quiet" type="button" data-fb-download-help="json" aria-label="Om JSON-fila" aria-haspopup="dialog" aria-controls="download-help-dialog"><span data-icon="helpCircle" aria-hidden="true"></span></button>
+        </div>
       </div>
       <div id="editor-errors" class="vp-notice hidden" role="status" tabindex="-1"></div>
 
@@ -140,15 +147,19 @@
             <h3 id="category-heading">Kategoriar (2–6)</h3>
             <button class="vp-button vp-button--tool vp-button--compact" id="btn-add-category" type="button"><span data-icon="plus" aria-hidden="true"></span>Legg til kategori</button>
           </div>
-          <div id="category-tabs" class="editor-tabs" role="group" aria-labelledby="category-heading"></div>
+          <div id="category-tabs" class="editor-tabs" role="group" aria-labelledby="category-heading">
+            <button class="vp-button vp-button--compact fb-final-tab" id="btn-final-tab" type="button" aria-pressed="false" aria-controls="editor-final-section">
+              <span class="vp-selection-mark" data-icon="check" aria-hidden="true"></span>
+              <span data-icon="flag" aria-hidden="true"></span>
+              <span>Finalerunde</span>
+              <span id="editor-final-state">Av</span>
+            </button>
+          </div>
           <div id="category-name-fields" class="fb-category-head"></div>
         </div>
         <div id="category-tab-content" class="fb-question-list"></div>
-      </div>
 
-      <details class="vp-accordion" id="editor-final-section">
-        <summary>Finalerunde <span id="editor-final-state">Av</span></summary>
-        <div class="vp-accordion-body vp-stack">
+        <section class="vp-panel vp-panel--plain vp-panel--compact vp-stack" id="editor-final-section" aria-labelledby="btn-final-tab" hidden>
           <label class="vp-choice">
             <input type="checkbox" id="final-round-toggle">
             <span>Inkluder finalerunde</span>
@@ -174,8 +185,8 @@
             </div>
             <div id="editor-final-image"></div>
           </div>
-        </div>
-      </details>
+        </section>
+      </div>
     </section>
   </div>
 
@@ -183,6 +194,14 @@
 </div>
 
 <!-- ===== MODALAR ===== -->
+
+<dialog class="vp-dialog" id="download-help-dialog" aria-labelledby="download-help-title" aria-describedby="download-help-text">
+  <div class="vp-dialog-head">
+    <h2 id="download-help-title"></h2>
+    <button class="vp-button vp-button--icon vp-button--quiet" id="btn-close-download-help" type="button" aria-label="Lukk forklaringa"><span data-icon="x" aria-hidden="true"></span></button>
+  </div>
+  <p id="download-help-text" class="vp-prose"></p>
+</dialog>
 
 <!-- Spørsmål -->
 <div id="question-modal" class="modal-overlay vp-modal-backdrop" data-vp-modal-escape="local" aria-labelledby="question-category">
@@ -252,9 +271,9 @@
 <script src="js/state.js?v=7"></script>
 <script src="js/images.js?v=2"></script>
 <script src="js/board.js?v=8"></script>
-<script src="js/editor.js?v=9"></script>
-<script src="js/export.js?v=1"></script>
-<script src="js/saved.js?v=7"></script>
+<script src="js/editor.js?v=10"></script>
+<script src="js/export.js?v=2"></script>
+<script src="js/saved.js?v=8"></script>
 <script src="js/app.js?v=8"></script>
 
 
