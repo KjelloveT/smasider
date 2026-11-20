@@ -19,3 +19,4 @@ _libs/** -text
 *.ico binary
 *.woff binary
 *.woff2 binary
+*.seb binary
