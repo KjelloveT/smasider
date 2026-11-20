@@ -1,0 +1,30 @@
+/* The shared design system owns the colours and controls. */
+.seb-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(16px, 3vw, 30px);
+}
+
+.seb-workspace,
+.seb-guide {
+  padding: clamp(18px, 3vw, 30px);
+  min-width: 0;
+}
+
+.seb-layout .vp-heading { margin-block: 0 14px; }
+.seb-fields,
+.seb-password-fields { display: grid; gap: 16px; }
+.seb-fields { min-width: 0; margin: 0; padding: 0; border: 0; }
+.seb-file-input { padding: 6px; }
+.seb-file-input::file-selector-button { font: inherit; margin-inline-end: 8px; }
+.seb-file-input:focus-visible { outline: 2px solid var(--vp-focus); outline-offset: 2px; }
+.seb-status { margin-block-start: 16px; overflow-wrap: anywhere; }
+.seb-status[hidden] { display: none; }
+.seb-guide p { margin-block: 0 16px; }
+.seb-guide .seb-privacy { display: flex; gap: 9px; margin-block: 20px 0; font-size: .9rem; }
+.seb-privacy > [data-icon] { flex: none; }
+
+@media (max-width: 760px) {
+  .seb-layout { grid-template-columns: minmax(0, 1fr); }
+}

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="nn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>SEB - Lærarens verkty | Vyrdepil</title>
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="../js/vyrdepil-icons.js" defer></script>
+  <script src="../js/vyrdepil-util.js?v=1.2" defer></script>
+  <script src="../js/vyrdepil-design.js?v=1.1" defer></script>
+  <script src="../js/vyrdepil-app-shell.js" defer></script>
+  <script src="../js/vyrdepil-menu.js" defer></script>
+  <script src="../js/vyrdepil-footer.js?v=2" defer></script>
+  <script src="js/seb-file.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body class="vp-page" data-vp-design data-vp-app="seb-laerarens-verkty" data-vp-layout="medium" data-vp-site-footer>
+  <main class="vp-shell" id="main">
+    <!-- The shared app shell moves this heading into the sign. -->
+    <div class="hero">
+      <h1 class="vp-title">SEB - Lærarens verkty</h1>
+      <p>Lag ei kryptert prøvefil for Safe Exam Browser.</p>
+    </div>
+
+    <div class="seb-layout">
+      <section class="vp-panel vp-panel--plain seb-workspace" aria-labelledby="setup-title">
+        <h2 id="setup-title" class="vp-heading">Lag prøvefil</h2>
+        <noscript><p class="vp-notice vp-notice--text vp-notice--error">Slå på JavaScript for å kryptere og laste ned fila.</p></noscript>
+        <form id="exam-form" autocomplete="off">
+          <fieldset class="seb-fields" id="exam-fields">
+            <div class="vp-field">
+              <label for="start-url">Startadresse for prøva</label>
+              <input class="vp-input" id="start-url" type="url" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="8192" placeholder="https://…" required aria-describedby="url-help">
+              <p class="vp-help" id="url-help">Lim inn svarlenkja frå «Samle inn svar» i Microsoft Forms, eller ei anna HTTPS-adresse.</p>
+            </div>
+            <div class="vp-field">
+              <label for="new-password">Opningspassord for prøvefila</label>
+              <input class="vp-input" id="new-password" type="password" autocomplete="new-password" spellcheck="false" maxlength="1024" required aria-describedby="password-help">
+              <p class="vp-help" id="password-help">Gje elevane dette passordet når prøva byrjar.</p>
+            </div>
+            <div class="vp-field">
+              <label for="confirm-password">Stadfest opningspassordet</label>
+              <input class="vp-input" id="confirm-password" type="password" autocomplete="new-password" spellcheck="false" maxlength="1024" required>
+            </div>
+
+            <details class="vp-accordion" id="template-options">
+              <summary>Bruk eigen SEB-mal</summary>
+              <div class="vp-accordion-body seb-password-fields">
+                <div class="vp-field">
+                  <label for="template-file">SEB-mal</label>
+                  <input class="vp-input seb-file-input" id="template-file" type="file" accept=".seb" aria-describedby="template-help">
+                  <p class="vp-help" id="template-help">Vel ei passordkryptert <code>.seb</code>-fil lagra med «Starting an exam».</p>
+                </div>
+                <div class="vp-field">
+                  <label for="template-password">Opningspassord for malen</label>
+                  <input class="vp-input" id="template-password" type="password" autocomplete="off" spellcheck="false" maxlength="1024">
+                </div>
+              </div>
+            </details>
+
+            <div class="vp-actions seb-actions">
+              <button class="vp-button vp-button--primary" id="export-exam" type="submit" disabled>
+                <span data-icon="download" aria-hidden="true"></span> Krypter og last ned
+              </button>
+            </div>
+          </fieldset>
+        </form>
+        <div role="status" aria-live="polite" aria-atomic="true">
+          <div id="export-status" class="vp-notice vp-notice--text seb-status" hidden><p></p></div>
+        </div>
+      </section>
+
+      <aside class="vp-panel vp-panel--plain seb-guide" aria-labelledby="guide-title">
+        <h2 id="guide-title" class="vp-heading">Standardmal for utprøving</h2>
+        <p>Vyrdepil hentar standardmalen for deg. Nettadressefilteret er av, og eleven kan avslutte SEB sjølv.</p>
+        <p>Bruk eigen mal om skulen har eit godkjent prøveoppsett. Filter og eventuelt avslutningspassord følgjer den malen.</p>
+        <p>Prøv fila på ei elevmaskin med SEB, med innlogging og innsending.</p>
+        <p class="seb-privacy"><span data-icon="lock" aria-hidden="true"></span><span>Fila, lenkja og passorda vert handsama lokalt i nettlesaren. Berre prøvefila du lastar ned, vert lagra av verktyet.</span></p>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-24",
+  "updated": "2026-11-20",
   "appCatalog": "json/apps.json",
   "policy": {
     "allocation": "random-unused-on-creation",
@@ -1775,7 +1775,7 @@
         1672,
         941
       ],
-      "assignedTo": null
+      "assignedTo": "seb-laerarens-verkty"
     },
     {
       "id": "hogfjell-haust-kveld",
@@ -2549,6 +2549,9 @@
     },
     "ordvett": {
       "backgroundId": "sykkelsti-sommar-morgon"
+    },
+    "seb-laerarens-verkty": {
+      "backgroundId": "hogfjell-sommar-kveld"
     }
   },
   "siteBackgroundSets": {

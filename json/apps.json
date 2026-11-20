@@ -390,6 +390,18 @@
       ]
     },
     {
+      "id": "seb-laerarens-verkty",
+      "name": "SEB - Lærarens verkty",
+      "href": "seb-laerarens-verkty/index.html",
+      "cat": "klasseverktoy",
+      "btn": "Lag prøvefil",
+      "img": "_resources/vyrde-ikon.png",
+      "audience": ["Lærar"],
+      "desc": [
+        "Lag ei kryptert prøvefil for Safe Exam Browser med prøvelenkje og opningspassord. Bruk standardmalen frå Vyrdepil eller vel ein eigen mal."
+      ]
+    },
+    {
       "id": "klassekart",
       "name": "Klassekart",
       "href": "klassekart/index.html",
