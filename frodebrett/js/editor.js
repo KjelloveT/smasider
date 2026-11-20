@@ -81,7 +81,7 @@
     const tabs = S.editorCategories.map((category, i) => {
       const tab = Vy.el('button', 'vp-button vp-button--compact');
       tab.type = 'button';
-      tab.setAttribute('aria-controls', 'category-tab-content');
+      tab.setAttribute('aria-controls', 'category-name-fields category-tab-content');
       const mark = Vy.el('span', 'vp-selection-mark');
       mark.setAttribute('aria-hidden', 'true');
       mark.innerHTML = ICON('check', 18);
@@ -147,15 +147,15 @@
 
   function renderCategory() {
     const category = S.editorCategories[S.activeTab];
-    const container = FB.el('category-tab-content');
-    const heading = Vy.el('div', 'fb-category-head');
+    const nameFields = FB.el('category-name-fields');
+    const questions = FB.el('category-tab-content');
     const name = field('editor-cat-name', 'Kategorinamn', category.name);
     name.input.maxLength = 30;
     name.input.addEventListener('input', () => {
       category.name = name.input.value.trim();
       FB.el('category-tabs').children[S.activeTab].querySelector('.fb-tab-name').textContent = tabName(category, S.activeTab);
     });
-    heading.append(name.label);
+    nameFields.replaceChildren(name.label);
     if (S.editorCategories.length > 2) {
       const remove = Vy.el('button', 'vp-button vp-button--danger vp-button--quiet vp-button--compact', 'Fjern kategori');
       remove.type = 'button';
@@ -167,12 +167,10 @@
         selectCategory(Math.min(S.activeTab, S.editorCategories.length - 1));
         FB.el('category-tabs').children[S.activeTab].focus();
       });
-      heading.append(remove);
+      nameFields.append(remove);
     }
-    const questions = Vy.el('div', 'fb-question-list');
-    questions.append(...category.questions.map(makeQuestionRow));
+    questions.replaceChildren(...category.questions.map(makeQuestionRow));
     if (!category.questions.some(q => hasQuestion(q) || q.answer)) questions.firstElementChild.open = true;
-    container.replaceChildren(heading, questions);
   }
 
   function addCategory() {

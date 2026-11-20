@@ -7,7 +7,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="css/style.css?v=2">
+<link rel="stylesheet" href="css/style.css?v=3">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
@@ -117,11 +117,16 @@
 
   <!-- ===== EDITORSKJERM ===== -->
   <div id="editor-screen" class="screen hidden">
-    <section class="vp-panel vp-stack" aria-labelledby="editor-heading">
-      <header class="fb-section-head">
-        <h2 id="editor-heading" tabindex="-1">Ny frøde</h2>
-        <button class="vp-button vp-button--quiet" id="btn-editor-back" type="button"><span data-icon="arrowLeft" aria-hidden="true"></span>Til frødene</button>
-      </header>
+    <section class="vp-stack" aria-labelledby="editor-heading">
+      <div class="vp-panel vp-panel--plain vp-panel--compact vp-stack">
+        <header class="fb-section-head">
+          <h2 id="editor-heading" tabindex="-1">Ny frøde</h2>
+          <button class="vp-button vp-button--quiet" id="btn-editor-back" type="button"><span data-icon="arrowLeft" aria-hidden="true"></span>Til frødene</button>
+        </header>
+        <label class="vp-field fb-title-field" for="quiz-title"><strong>Tittel</strong>
+          <input type="text" class="vp-input" id="quiz-title" placeholder="T.d. Norsk geografi">
+        </label>
+      </div>
       <div class="vp-toolbar fb-editor-toolbar" aria-label="Handlingar for frøda" role="group">
         <button class="vp-button vp-button--primary" id="btn-save-quiz" type="button"><span data-icon="save" aria-hidden="true"></span><span id="editor-save-label">Lagre frøde</span></button>
         <button class="vp-button" id="btn-preview" type="button">Førehandsvis</button>
@@ -129,17 +134,16 @@
       </div>
       <div id="editor-errors" class="vp-notice hidden" role="status" tabindex="-1"></div>
 
-      <label class="vp-field fb-title-field" for="quiz-title"><strong>Tittel</strong>
-        <input type="text" class="vp-input" id="quiz-title" placeholder="T.d. Norsk geografi">
-      </label>
-
       <div id="categories-section">
-        <div class="fb-section-head">
-          <h3 id="category-heading">Kategoriar (2–6)</h3>
-          <button class="vp-button vp-button--tool vp-button--compact" id="btn-add-category" type="button"><span data-icon="plus" aria-hidden="true"></span>Legg til kategori</button>
+        <div class="vp-panel vp-panel--plain vp-panel--compact vp-stack">
+          <div class="fb-section-head">
+            <h3 id="category-heading">Kategoriar (2–6)</h3>
+            <button class="vp-button vp-button--tool vp-button--compact" id="btn-add-category" type="button"><span data-icon="plus" aria-hidden="true"></span>Legg til kategori</button>
+          </div>
+          <div id="category-tabs" class="editor-tabs" role="group" aria-labelledby="category-heading"></div>
+          <div id="category-name-fields" class="fb-category-head"></div>
         </div>
-        <div id="category-tabs" class="editor-tabs" role="group" aria-labelledby="category-heading"></div>
-        <div id="category-tab-content" class="vp-panel vp-panel--plain vp-stack"></div>
+        <div id="category-tab-content" class="fb-question-list"></div>
       </div>
 
       <details class="vp-accordion" id="editor-final-section">
@@ -248,10 +252,10 @@
 <script src="js/state.js?v=7"></script>
 <script src="js/images.js?v=2"></script>
 <script src="js/board.js?v=8"></script>
-<script src="js/editor.js?v=8"></script>
+<script src="js/editor.js?v=9"></script>
 <script src="js/export.js?v=1"></script>
 <script src="js/saved.js?v=7"></script>
-<script src="js/app.js?v=7"></script>
+<script src="js/app.js?v=8"></script>
 
 
 <script src="../js/vyrdepil-design.js?v=1.1"></script>

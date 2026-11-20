@@ -32,6 +32,7 @@
     const screen = FB.el(name + '-screen');
     if (screen) screen.classList.remove('hidden');
     S.currentScreen = name;
+    document.body.toggleAttribute('data-vp-open-shell', name === 'editor');
 
     if (name === 'game') FB.Saved.render();
   };
