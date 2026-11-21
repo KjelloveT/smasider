@@ -15,11 +15,18 @@ LL.artVignette = (function () {
     shield: [1, 0], warning: [0, 3], coins: [0, 3], gift: [0, 3],
     star: [3, 0], home: [0, 3], book: [3, 3]
   };
+  const ADULT_CELLS = {
+    adultCommunity: [0, 0], adultKitchen: [1, 0], adultBills: [2, 0], adultTravel: [3, 0],
+    adultStudy: [0, 1], adultGuidance: [1, 1], adultNursing: [2, 1], adultTeaching: [3, 1],
+    adultCarpentry: [0, 2], adultIt: [1, 2], adultRetail: [2, 2], adultWarehouse: [3, 2],
+    adultCafe: [0, 3], adultRest: [1, 3], adultMoving: [2, 3], adultGoals: [3, 3]
+  };
 
   function create(key) {
-    const [column, row] = CELLS[key] || CELLS.study;
+    const adult = Boolean(ADULT_CELLS[key]);
+    const [column, row] = ADULT_CELLS[key] || CELLS[key] || CELLS.study;
     const sprite = document.createElement('span');
-    sprite.className = 'll-event-sprite';
+    sprite.className = 'll-event-sprite' + (adult ? ' ll-event-sprite--adult' : '');
     sprite.setAttribute('aria-hidden', 'true');
     sprite.style.setProperty('--sprite-x', (column * 100 / 3) + '%');
     sprite.style.setProperty('--sprite-y', (row * 100 / 3) + '%');
