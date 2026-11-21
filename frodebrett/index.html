@@ -7,11 +7,11 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=5">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-vp-app="frodebrett" data-vp-layout="expanded" data-vp-site-footer>
+<body data-vp-app="frodebrett" data-vp-layout="expanded" data-vp-open-shell data-vp-site-footer>
 
 <div class="page-wrapper">
 <main class="main-content">
@@ -126,17 +126,17 @@
         <label class="vp-field fb-title-field" for="quiz-title"><strong>Tittel</strong>
           <input type="text" class="vp-input" id="quiz-title" placeholder="T.d. Norsk geografi">
         </label>
-      </div>
-      <div class="vp-toolbar fb-editor-toolbar" aria-label="Handlingar for frøda" role="group">
-        <button class="vp-button vp-button--primary" id="btn-save-quiz" type="button"><span data-icon="save" aria-hidden="true"></span><span id="editor-save-label">Lagre frøde</span></button>
-        <button class="vp-button" id="btn-preview" type="button">Førehandsvis</button>
-        <div class="fb-download-action">
-          <button class="vp-button vp-button--tool" id="btn-editor-export" type="button"><span data-icon="download" aria-hidden="true"></span><span>Last ned heile spelet som køyrbar fil</span></button>
-          <button class="vp-button vp-button--icon vp-button--quiet" type="button" data-fb-download-help="html" aria-label="Om den køyrbare spelefila" aria-haspopup="dialog" aria-controls="download-help-dialog"><span data-icon="helpCircle" aria-hidden="true"></span></button>
-        </div>
-        <div class="fb-download-action">
-          <button class="vp-button" id="btn-editor-export-json" type="button"><span data-icon="fileJson" aria-hidden="true"></span><span>Last ned JSON</span></button>
-          <button class="vp-button vp-button--icon vp-button--quiet" type="button" data-fb-download-help="json" aria-label="Om JSON-fila" aria-haspopup="dialog" aria-controls="download-help-dialog"><span data-icon="helpCircle" aria-hidden="true"></span></button>
+        <div class="vp-actions fb-editor-actions" aria-label="Handlingar for frøda" role="group">
+          <button class="vp-button vp-button--primary" id="btn-save-quiz" type="button"><span data-icon="save" aria-hidden="true"></span><span id="editor-save-label">Lagre frøde</span></button>
+          <button class="vp-button" id="btn-preview" type="button">Førehandsvis</button>
+          <div class="fb-download-action">
+            <button class="vp-button vp-button--tool" id="btn-editor-export" type="button"><span data-icon="download" aria-hidden="true"></span><span>Last ned heile spelet som køyrbar fil</span></button>
+            <button class="vp-button vp-button--tool vp-button--icon" type="button" data-fb-download-help="html" aria-label="Om den køyrbare spelefila" aria-haspopup="dialog" aria-controls="download-help-dialog"><span data-icon="helpCircle" aria-hidden="true"></span></button>
+          </div>
+          <div class="fb-download-action">
+            <button class="vp-button" id="btn-editor-export-json" type="button"><span data-icon="fileJson" aria-hidden="true"></span><span>Last ned JSON</span></button>
+            <button class="vp-button vp-button--icon" type="button" data-fb-download-help="json" aria-label="Om JSON-fila" aria-haspopup="dialog" aria-controls="download-help-dialog"><span data-icon="helpCircle" aria-hidden="true"></span></button>
+          </div>
         </div>
       </div>
       <div id="editor-errors" class="vp-notice hidden" role="status" tabindex="-1"></div>
@@ -274,7 +274,7 @@
 <script src="js/editor.js?v=10"></script>
 <script src="js/export.js?v=2"></script>
 <script src="js/saved.js?v=8"></script>
-<script src="js/app.js?v=8"></script>
+<script src="js/app.js?v=9"></script>
 
 
 <script src="../js/vyrdepil-design.js?v=1.1"></script>

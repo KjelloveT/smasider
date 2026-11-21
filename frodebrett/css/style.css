@@ -195,12 +195,22 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .final-answer #final-answer-display { font-weight: 800; font-size: 1.15rem; }
 
 /* ===== Editor ===== */
-.vp-toolbar.fb-editor-toolbar { border: 0; }
 .fb-download-action {
   display: grid; grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center; gap: 6px; max-inline-size: 100%;
+  max-inline-size: 100%;
 }
-.fb-download-action > .vp-button { min-inline-size: 0; }
+.fb-download-action > .vp-button:first-child {
+  min-inline-size: 0;
+  border-inline-end-width: 1px;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+.fb-download-action > .vp-button:last-child {
+  border-inline-start-width: 0;
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+.fb-download-action > .vp-button:active:not(:disabled) { transform: none; }
 .fb-download-action [data-icon] { flex-shrink: 0; }
 .fb-title-field { max-inline-size: 60ch; }
 #categories-section { display: grid; gap: 16px; min-width: 0; }
@@ -250,11 +260,6 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 @media (min-width: 1000px) {
   .fb-question-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
-@media (min-width: 1060px) {
-  .fb-editor-toolbar { position: sticky; top: 8px; z-index: 1; }
-  #editor-errors { scroll-margin-top: 6rem; }
-}
-
 /* ===== Førehandsvising ===== */
 .preview-question { margin-top: 16px; border: 3px solid var(--border); padding: 16px; background: var(--surface); }
 .preview-modal .jeopardy-grid { margin-top: 0; }
@@ -278,7 +283,7 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 
 @media print {
   @page { size: A4 portrait; margin: 12mm; }
-  .vp-header, .fb-controls, #editor-screen .vp-toolbar, .btn-remove-team { display: none !important; }
+  .vp-header, .fb-controls, .fb-editor-actions, .btn-remove-team { display: none !important; }
   .jeopardy-grid, .box1 { break-inside: avoid; }
 }
 
