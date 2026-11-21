@@ -12,6 +12,7 @@
     App.bindNavigation();
     FB.Board.bind();
     FB.Editor.bind();
+    FB.Export.bindHelp();
     FB.Saved.bind();
     App.bindKeyboard();
     App.loadSampleQuizzes();
@@ -34,6 +35,16 @@
     S.currentScreen = name;
 
     if (name === 'game') FB.Saved.render();
+  };
+
+  App.playFromEditor = function (quiz) {
+    FB.Board.selectQuiz(quiz, {
+      beforeStart: () => App.showScreen('game'),
+      afterFinish: () => {
+        App.showScreen('editor');
+        FB.el('btn-editor-start').focus();
+      }
+    });
   };
 
   // ===== STANDARDFRØDER =====

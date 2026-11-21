@@ -16,6 +16,10 @@
   Editor.bind = function () {
     FB.el('btn-add-category').addEventListener('click', addCategory);
     FB.el('btn-save-quiz').addEventListener('click', Editor.saveQuiz);
+    FB.el('btn-editor-start').addEventListener('click', () => {
+      const quiz = prepareQuiz();
+      if (quiz) FB.App.playFromEditor(quiz);
+    });
     FB.Export.bindEditor(prepareQuiz);
     FB.el('btn-preview').addEventListener('click', () => Editor.previewQuiz());
     FB.el('btn-final-tab').addEventListener('click', () => selectTab('final'));

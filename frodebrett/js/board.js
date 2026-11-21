@@ -8,80 +8,33 @@
   const Store = root.FrodebrettStorage;
 
   const Board = {};
+  let afterGame;
 
   Board.bind = function () {
-    Board.bindTeamSetup();
+    FB.TeamSetup.bind();
     Board.bindQuestionModal();
     Board.bindGameControls();
     Board.bindFinalRound();
   };
 
-  // ===== LAGOPPSETT =====
-
-  Board.bindTeamSetup = function () {
-    FB.el('btn-add-team').addEventListener('click', () => Board.addTeamInput());
-    Board.updateTeamRemoveButtons();
-  };
-
-  Board.addTeamInput = function () {
-    const container = FB.el('teams-container');
-    const count = container.children.length;
-    if (count >= 6) return;
-
-    const row = document.createElement('div');
-    row.className = 'team-input';
-
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.className = 'vp-input team-name';
-    input.placeholder = 'Lag ' + (count + 1);
-    input.setAttribute('aria-label', input.placeholder);
-    input.maxLength = 20;
-
-    const btn = document.createElement('button');
-    btn.className = 'vp-button vp-button--icon btn-remove-team';
-    btn.setAttribute('aria-label', 'Fjern lag');
-    btn.textContent = '×';
-
-    row.appendChild(input);
-    row.appendChild(btn);
-    container.appendChild(row);
-    Board.updateTeamRemoveButtons();
-  };
-
-  Board.updateTeamRemoveButtons = function () {
-    const rows = document.querySelectorAll('.team-input');
-    rows.forEach(row => {
-      const btn = row.querySelector('.btn-remove-team');
-      if (btn) {
-        btn.style.display = rows.length > 2 ? 'inline-flex' : 'none';
-        btn.onclick = () => Board.removeTeamInput(btn);
-      }
+  Board.selectQuiz = function (quiz, { beforeStart, afterFinish } = {}) {
+    FB.TeamSetup.open(quiz.title, names => {
+      S.currentQuiz = quiz;
+      afterGame = afterFinish;
+      beforeStart?.();
+      Board.startGame(names);
     });
-  };
-
-  Board.removeTeamInput = function (btn) {
-    if (document.querySelectorAll('.team-input').length > 2) {
-      btn.parentElement.remove();
-      Board.updateTeamRemoveButtons();
-    }
-  };
-
-  Board.selectQuiz = function (quiz) {
-    S.currentQuiz = quiz;
-    Board.startGame();
   };
 
   // ===== SPELSTART =====
 
-  Board.startGame = function () {
-    const inputs = document.querySelectorAll('.team-name');
-    S.teams = [];
-    inputs.forEach((input, i) => {
-      const name = input.value.trim() || ('Lag ' + (i + 1));
-      const color = FB.TEAM_COLORS[i % FB.TEAM_COLORS.length];
-      S.teams.push({ id: i + 1, name, score: 0, color });
-    });
+  Board.startGame = function (names) {
+    S.teams = names.map((name, i) => ({
+      id: i + 1,
+      name: name || ('Lag ' + (i + 1)),
+      score: 0,
+      color: FB.TEAM_COLORS[i]
+    }));
     Store?.saveTeams(S.teams.map(t => ({ name: t.name })));
 
     S.answeredCells.clear();
@@ -89,7 +42,6 @@
     S.activeTeamId = S.teams.length ? S.teams[0].id : null;
     Board.initializeDailyDouble();
 
-    FB.hide('team-setup');
     FB.hide('quiz-selection');
     FB.show('game-board');
 
@@ -573,14 +525,16 @@
     FB.closeOverlay('question-modal');
     FB.hide('modal-point-controls');
     FB.hide('final-point-controls');
-    FB.show('team-setup');
     FB.show('quiz-selection');
     FB.show('game-controls');
     FB.show('turn-indicator');
     FB.show('jeopardy-grid');
 
-    document.querySelectorAll('.team-name').forEach(i => { i.value = ''; });
-    FB.el('library-heading').focus();
+    FB.TeamSetup.reset();
+    const finish = afterGame;
+    afterGame = null;
+    if (finish) finish();
+    else FB.el('library-heading').focus();
   };
 
   // ===== TASTATUR I SPEL =====
@@ -593,6 +547,7 @@
   }
 
   Board.handleGameKeyboard = function (e) {
+    if (FB.isOverlayOpen('team-setup')) return;
     const modalOpen = FB.isOverlayOpen('question-modal');
 
     if (e.key === 'Escape') {
@@ -620,13 +575,6 @@
           if (plusBtn) plusBtn.click();
         }
       }
-      return;
-    }
-
-    const setup = FB.el('team-setup');
-    if (e.key === ' ' && setup.open && !setup.classList.contains('hidden') && e.target === document.body) {
-      e.preventDefault();
-      FB.el('btn-add-team').click();
     }
   };
 

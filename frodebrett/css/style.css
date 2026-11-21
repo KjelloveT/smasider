@@ -13,7 +13,7 @@
 }
 .fb-section-head :is(h2, h3) { margin: 0; }
 #game-screen > * + * { margin-block-start: 16px; }
-#editor-screen, #quiz-selection, #team-setup {
+#editor-screen, #quiz-selection {
   max-inline-size: 1120px; margin-inline: auto;
 }
 #teams-container { display: grid; gap: 8px; max-inline-size: 52ch; }
@@ -67,7 +67,12 @@ textarea.form-input { resize: vertical; min-height: 80px; }
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
 }
 .fb-quiz-card { display: grid; gap: 10px; align-content: start; overflow-wrap: anywhere; }
-.fb-quiz-card h3 { margin: 0; }
+.fb-quiz-card > .fb-quiz-title {
+  margin: 0;
+  padding: 10px 12px;
+  font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+}
+.fb-quiz-card > .vp-help { margin: 0; }
 .fb-quiz-card .vp-actions { gap: 8px; }
 .fb-export-all { justify-self: start; }
 

@@ -7,7 +7,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=6">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
@@ -28,7 +28,7 @@
   <!-- ===== SPELSKJERM ===== -->
   <div id="game-screen" class="screen">
 
-    <!-- Lagoppsett -->
+    <!-- Frødebibliotek -->
     <div id="quiz-selection" class="vp-panel vp-stack">
       <div class="fb-section-head">
         <h2 id="library-heading" tabindex="-1">Frøder</h2>
@@ -40,27 +40,8 @@
       </div>
       <p id="library-status" role="status" hidden></p>
       <div id="quiz-list" class="fb-quiz-list"></div>
-      <p class="vp-help">HTML-fila kan spelast utan nett. Bruk JSON om du vil redigere frøda vidare.</p>
       <button class="vp-button vp-button--quiet vp-button--compact fb-export-all" id="btn-export-all" type="button">Last ned alle som JSON</button>
     </div>
-
-    <details id="team-setup" class="vp-accordion">
-      <summary>Lagoppsett før spelstart</summary>
-      <div class="vp-accordion-body vp-stack">
-        <p>Til vanleg spelar to lag. Her kan du endre lagnamna og leggje til fleire lag.</p>
-        <div id="teams-container">
-          <div class="team-input">
-            <input type="text" class="vp-input team-name" aria-label="Lag 1" placeholder="Lag 1" maxlength="20">
-            <button class="vp-button vp-button--icon btn-remove-team" aria-label="Fjern lag" style="display:none;">×</button>
-          </div>
-          <div class="team-input">
-            <input type="text" class="vp-input team-name" aria-label="Lag 2" placeholder="Lag 2" maxlength="20">
-            <button class="vp-button vp-button--icon btn-remove-team" aria-label="Fjern lag" style="display:none;">×</button>
-          </div>
-        </div>
-        <div><button class="vp-button vp-button--compact" id="btn-add-team">Legg til lag</button></div>
-      </div>
-    </details>
 
     <!-- Spelbrett -->
     <div id="game-board" class="hidden">
@@ -128,6 +109,7 @@
         </label>
         <div class="vp-actions fb-editor-actions" aria-label="Handlingar for frøda" role="group">
           <button class="vp-button vp-button--primary" id="btn-save-quiz" type="button"><span data-icon="save" aria-hidden="true"></span><span id="editor-save-label">Lagre frøde</span></button>
+          <button class="vp-button vp-button--positive" id="btn-editor-start" type="button" aria-haspopup="dialog" aria-controls="team-setup"><span data-icon="play" aria-hidden="true"></span>Start spel</button>
           <button class="vp-button" id="btn-preview" type="button">Førehandsvis</button>
           <div class="fb-download-action">
             <button class="vp-button vp-button--tool" id="btn-editor-export" type="button"><span data-icon="download" aria-hidden="true"></span><span>Last ned heile spelet som køyrbar fil</span></button>
@@ -194,6 +176,21 @@
 </div>
 
 <!-- ===== MODALAR ===== -->
+
+<dialog class="vp-dialog" id="team-setup" aria-labelledby="team-setup-heading" aria-describedby="team-setup-quiz">
+  <div class="vp-dialog-head">
+    <h2 id="team-setup-heading">Lagoppsett</h2>
+  </div>
+  <form class="vp-stack" id="team-setup-form" method="dialog">
+    <p class="vp-label" id="team-setup-quiz"></p>
+    <div id="teams-container"></div>
+    <div class="vp-actions">
+      <button class="vp-button vp-button--compact" id="btn-add-team" type="button">Legg til lag</button>
+      <button class="vp-button vp-button--quiet" id="btn-cancel-team-setup" type="button">Avbryt</button>
+      <button class="vp-button vp-button--positive" id="btn-confirm-team-setup" type="submit">Start spel</button>
+    </div>
+  </form>
+</dialog>
 
 <dialog class="vp-dialog" id="download-help-dialog" aria-labelledby="download-help-title" aria-describedby="download-help-text">
   <div class="vp-dialog-head">
@@ -270,11 +267,12 @@
 <script src="js/storage.js?v=7"></script>
 <script src="js/state.js?v=7"></script>
 <script src="js/images.js?v=2"></script>
-<script src="js/board.js?v=8"></script>
-<script src="js/editor.js?v=10"></script>
-<script src="js/export.js?v=2"></script>
-<script src="js/saved.js?v=8"></script>
-<script src="js/app.js?v=9"></script>
+<script src="js/team-setup.js?v=1"></script>
+<script src="js/board.js?v=9"></script>
+<script src="js/editor.js?v=11"></script>
+<script src="js/export.js?v=3"></script>
+<script src="js/saved.js?v=9"></script>
+<script src="js/app.js?v=10"></script>
 
 
 <script src="../js/vyrdepil-design.js?v=1.1"></script>

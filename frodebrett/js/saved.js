@@ -26,18 +26,15 @@
     const questionCount = quiz.categories.reduce((total, category) => total + category.questions.length, 0);
     const meta = quiz.categories.length + ' kategoriar · ' + questionCount + ' spørsmål'
       + (quiz.final ? ' · finalerunde' : '');
+    const heading = Vy.el('h3', 'vp-panel vp-panel--soft fb-quiz-title', quiz.title);
+    const start = action('Start spel', 'vp-button--positive', 'play', quiz, () => FB.Board.selectQuiz(quiz));
+    start.setAttribute('aria-haspopup', 'dialog');
+    start.setAttribute('aria-controls', 'team-setup');
     const actions = Vy.el('div', 'vp-actions');
     actions.append(
-      action('Start spel', 'vp-button--positive', 'play', quiz, () => FB.Board.selectQuiz(quiz)),
+      start,
       action('Rediger', 'vp-button--tool', 'pencil', quiz, () => FB.Editor.editQuiz(quiz)),
-      action('Last ned HTML', '', 'download', quiz, button => FB.Export.download(quiz, button))
-    );
-
-    const more = Vy.el('details', 'vp-accordion vp-accordion--compact');
-    const moreActions = Vy.el('div', 'vp-accordion-body vp-actions');
-    moreActions.append(
-      action('Last ned JSON', 'vp-button--quiet', '', quiz, () => FB.Export.downloadJson(quiz)),
-      action('Slett frøde', 'vp-button--danger', '', quiz, () => {
+      action('Slett', 'vp-button--danger vp-button--quiet', 'trash2', quiz, () => {
         if (!confirm('Vil du slette «' + quiz.title + '» frå denne eininga?')) return;
         Store.deleteQuiz(quiz.id);
         Saved.render();
@@ -45,9 +42,13 @@
         FB.el('library-heading').focus();
       })
     );
-    more.append(Vy.el('summary', '', 'Fleire val'), moreActions);
 
-    card.append(Vy.el('h3', '', quiz.title), Vy.el('p', 'vp-help', meta), actions, more);
+    const downloads = Vy.el('div', 'vp-actions');
+    const html = action('Last ned HTML', 'vp-button--tool', 'download', quiz, button => FB.Export.download(quiz, button));
+    const json = action('Last ned JSON', '', 'fileJson', quiz, () => FB.Export.downloadJson(quiz));
+    downloads.append(FB.Export.withHelp(html, 'html'), FB.Export.withHelp(json, 'json'));
+
+    card.append(heading, Vy.el('p', 'vp-help', meta), actions, downloads);
     return card;
   }
 
