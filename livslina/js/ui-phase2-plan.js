@@ -24,35 +24,38 @@ LL.uiPhase2Plan = (function () {
     let initial;
     try { initial = LL.phase2Economy.normalizePlan(s, a.draft ? a.draft.plan : a.plan || LL.phase2Economy.defaultPlan(s)); }
     catch (_) { initial = LL.phase2Economy.defaultPlan(s); }
-    const root = ui.frame('Planlegg året · ' + a.age + '–' + (a.age + 1) + ' år', 'August–juli · inntekt, skatt og hendingar blir rekna månad for månad.');
+    const root = ui.frame('Årsplan · ' + a.age + '–' + (a.age + 1) + ' år', 'August–juli');
     const form = el('form', 'll-adult-stack');
     const routePanel = ui.panel('Vel retning og bustad');
     const route = select('adultRoute', d.routes.map(r => [r.id, LL.phase2State.label(s, r.id) + (!LL.phase2State.available(s, r) ? ' · manglar opptaksgrunnlag' : ''), !LL.phase2State.available(s, r)]), initial.routeId);
     const home = select('adultHousing', d.housing.map(h => [h.id, h.label]), initial.housing);
-    const routeNote = el('p', 'll-note'), homeNote = el('p', 'll-note');
-    routePanel.append(field('Kva vil du gjere dette året?', route), routeNote, field('Kvar vil du bu?', home), homeNote);
+    const routeNote = el('div', 'll-adult-route-preview'), homeNote = el('p', 'll-note');
+    routePanel.append(field('Retning', route), routeNote, field('Bustad', home), homeNote);
     form.append(routePanel);
     const daily = ui.panel('Arbeid og kvardagsrytme');
     const hours = select('adultJobHours', [[0, 'Ingen deltidsjobb'], [6, '6 timar i veka'], [12, '12 timar i veka']], initial.jobHours);
     const percent = select('adultWorkPercent', [[0.5, '50 %'], [0.8, '80 %'], [1, '100 %']], initial.workPercent);
     const summer = select('adultSummer', [[0, 'Ingen sommarjobb'], [2, '2 veker'], [4, '4 veker'], [6, '6 veker']], initial.summerWeeks);
-    const leisure = select('adultLeisure', [['quiet', 'Meir kvile og rolege aktivitetar'], ['balanced', 'Balanse mellom kvile og sosialt'], ['social', 'Meir sosial aktivitet']], initial.leisure);
-    const hoursWrap = field('Deltidsjobb ved sida av utdanninga', hours, '12 timar tek meir energi og kan påverke studieframdrifta.');
-    const percentWrap = field('Stillingsprosent', percent, 'For friår er dette prosent av den avgrensa arbeidsmengda i friårssporet.');
-    const summerWrap = field('Sommarjobb', summer, 'Fordelt på juni og juli i tillegg til deltidsjobben.');
+    const leisure = select('adultLeisure', [['quiet', 'Kvile'], ['balanced', 'Balanse'], ['social', 'Sosialt']], initial.leisure);
+    const hoursWrap = field('Deltidsjobb', hours, '12 timar gir mindre rom for studiet.');
+    const percentWrap = field('Stillingsprosent', percent);
+    const summerWrap = field('Sommarjobb · juni–juli', summer);
     const timeNote = el('p', 'll-note');
-    daily.append(hoursWrap, percentWrap, summerWrap, field('Kva vil du prioritere på fritida?', leisure), timeNote); form.append(daily);
+    daily.append(hoursWrap, percentWrap, summerWrap, field('Fritid', leisure), timeNote); form.append(daily);
     const finance = ui.panel('Sparing og finansiering');
     const borrow = el('input'); borrow.type = 'checkbox'; borrow.id = 'adultBorrow'; borrow.checked = initial.borrow;
-    const borrowWrap = field('Ta opp ordinært basislån frå Lånekassen', borrow, 'Dette er gjeld. Eventuell omgjering til stipend krev mellom anna bestått utdanning og vilkår om bustad, inntekt og formue.');
+    const borrowWrap = field('Studentlån frå Lånekassen', borrow, 'Lån aukar gjelda. Stipend krev oppfylte vilkår.');
     route.addEventListener('change', () => { if (LL.phase2State.route(route.value).kind === 'study') borrow.checked = true; });
     const savings = number('adultSavings', initial.savings, 10000, 100);
     const bsu = number('adultBsu', initial.bsu, 2250, 50);
     const debt = number('adultDebt', initial.extraDebt || 0, 5000, 100);
-    finance.append(borrowWrap, field('Til fri sparing kvar månad · kr', savings), field('Til BSU kvar månad · kr', bsu, 'Bundne bustadpengar. Spelet kontrollerer kalenderårsgrensa og samla innskotsgrense.'), field('Ekstra nedbetaling av gjeld kvar månad · kr', debt));
+    finance.append(borrowWrap, field('Fri sparing · kr/mnd', savings), field('BSU · kr/mnd', bsu, 'Bundne bustadpengar.'), field('Ekstra nedbetaling · kr/mnd', debt));
+    const terms = el('details', 'vp-accordion'); terms.append(el('summary', '', 'Lån og sparing: vilkår'));
+    const termsBody = el('div', 'vp-accordion-body'); termsBody.append(el('p', '', 'Stipend krev bestått utdanning og vilkår om bustad, inntekt og formue. BSU har grenser per kalenderår og totalt. Sparing skjer berre når kontoen har dekning.'));
+    terms.append(termsBody); finance.append(terms);
     form.append(finance);
     const goalPanel = ui.panel('Måla du vil arbeide mot');
-    goalPanel.append(el('p', 'll-note', 'Fordel høgst 100 % av fri sparing mellom pengemåla. Bustadmålet kan i tillegg telje BSU. Måla flyttar ingen pengar i seg sjølve.'));
+    goalPanel.append(el('p', 'll-note', 'Fordel sparinga mellom måla · maks 100 %.'));
     const previousGoals = a.draft ? a.draft.goals : a.goals;
     const goalFields = [0, 1].map(index => {
       const g = previousGoals[index] || { id: index ? '' : 'buffer', target: index ? 150000 : 30000, deadline: a.age + 3, share: index ? 0 : 100 };
@@ -61,14 +64,14 @@ LL.uiPhase2Plan = (function () {
       const target = number('adultGoalTarget' + index, g.target, 1000000, 1); target.min = '1';
       const deadline = number('adultGoalAge' + index, Math.max(a.age + 1, g.deadline), 40); deadline.min = String(a.age + 1);
       const share = number('adultGoalShare' + index, g.share, 100, 5);
-      row.append(field('Mål', choice), field('Målsum eller målnivå', target), field('Ønskt alder ved måloppnåing', deadline), field('Del av fri sparing · prosent', share));
+      row.append(field('Mål', choice), field('Sum / nivå', target), field('Alder ved målet', deadline), field('Del av fri sparing · %', share));
       choice.addEventListener('change', () => { const def = d.goals.find(x => x.id === choice.value); if (def) target.value = def.defaultTarget; update(); });
       goalPanel.append(row); return { choice, target, deadline, share, baseline: g.baseline, studyRouteId: g.routeId };
     });
     form.append(goalPanel);
     const preview = ui.panel('Venta økonomi gjennom året'); preview.setAttribute('aria-live', 'polite');
     const error = el('p', 'vp-help'); error.setAttribute('role', 'alert');
-    const start = ui.button('Stadfest årsplanen og start året', () => {}, 'primary'); start.type = 'submit';
+    const start = ui.button('Start året', () => {}, 'primary'); start.type = 'submit'; start.append(LL.uiPhase2Visuals.icon('arrowRight'));
     form.append(preview, error, start, ui.button('Til oversikta', ui.home, 'quiet'));
     root.append(form);
     function read() {
@@ -91,18 +94,27 @@ LL.uiPhase2Plan = (function () {
         if (g.choice.value === 'utdanning') g.target.value = item.years || (LL.phase2State.route(g.studyRouteId) || {}).years || (a.qualifications.study ? 3 : 1);
         g.share.disabled = !['buffer', 'bustad', 'flytting'].includes(g.choice.value);
       });
-      routeNote.textContent = item.note + (studying ? ' Fullført frå før: ' + studyYears + ' år. Byte til eit anna studium startar det studiet frå første år; ein pause bevarer framdrifta.' : '') + ' Lønsnivå er eit spelanslag.';
+      routeNote.replaceChildren();
+      const vignette = el('div', 'll-adult-route-art'); vignette.append(LL.artVignette.create(item.art)); routeNote.append(vignette);
+      if (studying) routeNote.append(LL.uiPhase2Visuals.studySteps(s, item));
+      if (a.routeId && a.routeId !== item.id && studying) routeNote.append(el('p', 'll-note', studyYears ? 'Du held fram der du slapp.' : 'Nytt studium startar på år 1. Tidlegare framdrift er lagra.'));
       const studentOption = Array.from(home.options).find(o => o.value === 'hybel'); studentOption.disabled = !studying;
       if (!studying && home.value === 'hybel') { home.value = 'kollektiv'; draft.housing = 'kollektiv'; }
-      homeNote.textContent = d.housing.find(h => h.id === home.value).note;
-      timeNote.textContent = studying ? 'Utdanning er hovudaktiviteten. Jobb kjem i tillegg; kvile og sosial kontakt påverkar overskotet.' : 'Arbeidstid og fritid verkar saman. Større stilling gir høgare inntekt og mindre rom for kvile.';
+      const housing = d.housing.find(h => h.id === home.value);
+      homeNote.textContent = LL.util.kr(housing.rent + housing.utilities) + '/mnd · ' + (home.value === 'heime' ? 'bidrag heime' : 'leige og straum');
+      timeNote.hidden = item.kind !== 'gap';
+      timeNote.textContent = 'Stillingsprosenten gjeld arbeidsmengda i friårssporet.';
       preview.replaceChildren(el('h2', 'heading4 no-mt', 'Venta økonomi gjennom året'));
       try {
         const estimate = LL.phase2Economy.preview(s, draft);
-        const values = [['Brutto arbeidsinntekt', estimate.wage], ['Studentlån · aukar gjelda', estimate.loan], ['Støtte til påbygg · spelanslag', estimate.bridge],
-          ['Utgifter med venta skatt', estimate.expense], ['Disponibelt etter flytting og depositum, før sparing og nedbetaling', estimate.available], ['Ønskt sparing og ekstra nedbetaling', estimate.saved], ['Konto rett etter flytting og byte', estimate.firstCash]];
+        preview.append(LL.uiPhase2Visuals.moneyFlow([['Arbeidsinntekt', estimate.wage], ['Studentlån', estimate.loan, 'bookOpen'], ['Påbyggstøtte', estimate.bridge, 'bookOpen'], ['Utgifter og skatt', estimate.expense]]));
+        const values = [['Til overs før sparing og nedbetaling', estimate.available], ['Sparing og ekstra nedbetaling', estimate.saved], ['Konto etter flytting og byte', estimate.firstCash]];
         values.forEach(([label, value]) => { const row = el('div', 'll-budget-row'); row.append(el('span', '', label), el('strong', '', LL.util.kr(value))); preview.append(row); });
-        preview.append(el('p', 'll-note', 'Hendingar, renter, ordinær gjeldsbetaling og endeleg kalenderårsskatt kan endre utfallet. Sparing skjer berre når det er dekning.'));
+        if (estimate.move.deposit) {
+          const deposit = LL.util.kr(estimate.move.deposit) + ' depositum';
+          preview.append(LL.uiPhase2Visuals.token('lock', deposit, deposit + ' bunde ved flytting'));
+        }
+        preview.append(el('p', 'll-note', 'Spelanslag · hendingar, renter og endeleg skatt kan endre tala.'));
         const selected = readGoals();
         const share = selected.reduce((sum, g) => sum + (d.goals.find(x => x.id === g.id).kind === 'money' ? g.share : 0), 0);
         const duplicate = selected.length > 1 && selected[0].id === selected[1].id;

@@ -9,31 +9,45 @@ LL.uiPhase2Play = (function () {
     const event = LL.phase2Events.pending(s);
     const month = r.month ? LL.phase2Sim.MONTHS[r.month - 1] : 'Året er klart';
     const root = ui.frame(month + ' · ' + a.age + '–' + (a.age + 1) + ' år', LL.phase2State.label(s, r.plan.routeId));
-    root.append(ui.stats(s));
-    const clock = ui.panel('Året ditt');
-    const progress = el('progress'); progress.max = 12; progress.value = r.month; progress.setAttribute('aria-label', 'Månader gjennomførte');
-    clock.append(progress, el('p', 'll-note', r.month + ' av 12 månader gjennomførte · ' + r.resolved.length + ' av ' + r.schedule.length + ' caseval tekne. Året blir lagra etter kvart steg.'));
+    const visuals = LL.uiPhase2Visuals;
+    const stats = el('div');
+    stats.append(ui.stats(s));
+    root.append(stats);
+    const clock = ui.panel(); clock.setAttribute('aria-label', 'Året ditt');
+    clock.append(visuals.year(r));
     root.append(clock);
     ui.recovery(s, root);
     if (event) {
-      const p = ui.panel(event.title);
-      p.append(el('p', '', event.text));
+      const p = ui.panel(); p.classList.add('ll-adult-event');
+      const vignette = el('div', 'll-adult-vignette'); vignette.append(LL.artVignette.create(event.art));
+      const content = el('div', 'll-adult-event-content');
+      content.append(el('h2', 'heading3 no-mt', event.title));
+      if (event.text) content.append(el('p', '', event.text));
       const choices = el('div', 'll-adult-choices');
       event.choices.forEach((choice, index) => {
+        const signals = visuals.effects(choice, s);
         const b = ui.button('', () => {
           if (!LL.phase2Events.choose(s, event.id, index)) return;
           ui.save();
-          const effect = ui.panel('Valet er registrert');
-          effect.append(el('p', '', choice.label), el('p', 'll-note', LL.phase2Events.consequence(choice)));
-          choices.replaceChildren(); b.disabled = true; p.replaceChildren(effect);
-          root.append(ui.button('Hald fram gjennom året', advance, 'primary'));
+          const receipt = el('div', 'll-adult-receipt'); receipt.setAttribute('role', 'status');
+          receipt.append(visuals.icon('check', 28), el('strong', '', choice.label), signals);
+          const next = ui.button('Vidare', advance, 'primary'); next.append(visuals.icon('arrowRight'));
+          content.replaceChildren(el('h2', 'heading3 no-mt', event.title), receipt, next);
+          stats.replaceChildren(ui.stats(s)); clock.replaceChildren(visuals.year(r)); next.focus();
         });
-        b.classList.add('ll-adult-choice'); b.append(el('strong', '', choice.label), el('small', '', LL.phase2Events.consequence(choice)));
+        b.classList.add('ll-adult-choice'); b.append(el('strong', '', choice.label), signals);
         choices.append(b);
       });
-      p.append(choices, el('p', 'll-note', 'Tilbod, kollegastøtte, rettleiing og kvardagsvilkår påverkar trivselen. Yrkesnamnet gir ingen fast bonus.'));
+      content.append(choices); p.append(vignette, content);
       root.append(p);
-    } else root.append(ui.button(r.month === 12 ? 'Sjå årsoppgjeret' : 'Hald fram til neste hending', advance, 'primary'));
+    } else {
+      let label = 'Vidare';
+      if (r.month === 0) label = 'Start året';
+      if (r.month === 12) label = 'Årsoppgjer';
+      const next = ui.button(label, advance, 'primary');
+      next.append(visuals.icon('arrowRight'));
+      root.append(next);
+    }
     const recent = s.ledger.filter(entry => entry.phase === 2 && entry.round === 'adult-' + r.year);
     if (recent.length) {
       const details = el('details', 'vp-accordion'); details.append(el('summary', '', 'Månadsoversyn'));

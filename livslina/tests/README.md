@@ -31,3 +31,24 @@ Felleskontrollen `node designsystem/check-ui-system.cjs` på arbeidskopien
 kontrollerer 80 HTML-sider og melder to eksisterande avvik i
 `heite_stavrim/css/style.css` og `ormritaren/css/editor-design.css`.
 Desse filene er uendra frå hovudgreina. Ingen Livslina-avvik er melde.
+
+## Nettlesarkontroll av den visuelle utgåva 2026-11-21
+
+- Importerte `studieklar.json` og spelte sjukepleie med studenthybel,
+  BSU og bustadmål gjennom alle tolv månadene og seks hendingar.
+- Månadssporet viste rett steg. Hendingskorta viste diorama og symbol for
+  valfølgjene, med eige symbol for sosialt. Ei ny innlasting etter første
+  val bevarte månad, saldo og val, og gav handlinga «Vidare».
+- Årsoppgjeret viste studieframdrift og økonomi. Trekkspela for rekneskap
+  og val kunne opnast. Eksportfila inneheldt tolv månadsrader og eitt
+  årsoppgjer.
+- Importerte `fagprove.json` på ei 390 pikslar brei vising med emulert
+  berøring. Fagprøva gav tilgang til tømrarløpet og første hending.
+- Sjekka faseovergang, oversikt, årsplan, hendingskort og årsoppgjer på
+  320, 437, 768, 1024 og 1440 pikslar utan vassrett overflyt. Escape lukka
+  kjeldedialogen og returnerte fokus. Alle 16 dioramautsnitta vart kontrollerte,
+  og alle 70 hendingane og 14 årsretningane peika til gyldige motiv.
+- Køyrde i Chrome med handheva tryggingsheaderar frå
+  `staticwebapp.config.json`. Ingen konsoll- eller lastingsfeil i gjennomspelinga.
+- 16 automatiserte fasetestar passerer. Felleskontrollen av 81 HTML-sider
+  melder dei same to avvika i Heite Stavrim og Ormritaren.
