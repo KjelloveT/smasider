@@ -8,8 +8,8 @@
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.9">
-<link rel="stylesheet" href="css/style.css?v=4">
-<link rel="stylesheet" href="css/phase2.css?v=2">
+<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/phase2.css?v=3">
   <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
 <body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-layout="medium" data-vp-site-footer>
@@ -225,7 +225,7 @@
   <section id="screen-budget" class="screen">
     <div class="vp-panel vp-panel--plain vp-panel--compact ll-budget-navigation">
       <h2 class="heading3" id="budgetRound">Planlegg halvåret</h2>
-      <div class="ll-budget-tabs" id="budgetTabs" role="tablist" aria-label="Delar av halvårsplanen">
+      <div class="ll-plan-tabs" id="budgetTabs" role="tablist" aria-label="Delar av halvårsplanen">
         <button class="vp-button vp-button--tool vp-button--compact" id="budgetTabJob" type="button" role="tab" aria-selected="true" aria-controls="budgetSectionJob">
           <span class="vp-selection-mark" data-icon="check" aria-hidden="true"></span>Jobb
         </button>
@@ -252,7 +252,7 @@
     <div class="ll-budget-grid">
       <div>
         <div class="vp-panel vp-panel--plain">
-          <div class="ll-budget-step-bar">
+          <div class="ll-plan-step-bar">
             <button class="vp-button vp-button--icon vp-button--compact" id="budgetPrevSection" type="button" aria-label="Førre del av planen" disabled>
               <span data-icon="arrowLeft" aria-hidden="true"></span>
             </button>
@@ -471,17 +471,17 @@
   </div>
 </div>
 
-<dialog class="vp-dialog" id="budgetStartDialog" aria-labelledby="budgetStartTitle" aria-describedby="budgetStartMissing">
+<dialog class="vp-dialog" id="planStartDialog" aria-labelledby="planStartTitle" aria-describedby="planStartMissing">
   <div class="vp-dialog-head">
-    <h2 class="vp-heading" id="budgetStartTitle">Vil du køyre halvåret no?</h2>
-    <button class="vp-button vp-button--icon vp-button--quiet" type="button" data-close-modal="budgetStartDialog" aria-label="Lukk">
+    <h2 class="vp-heading" id="planStartTitle">Vil du starte no?</h2>
+    <button class="vp-button vp-button--icon vp-button--quiet" type="button" data-close-modal="planStartDialog" aria-label="Lukk">
       <span data-icon="x" aria-hidden="true"></span>
     </button>
   </div>
-  <p id="budgetStartMissing"></p>
+  <p id="planStartMissing"></p>
   <div class="vp-actions">
-    <button class="vp-button vp-button--tool" id="budgetReview" type="button" autofocus>Sjå over vala</button>
-    <button class="vp-button vp-button--primary" id="budgetRunAnyway" type="button">Køyr halvåret likevel</button>
+    <button class="vp-button vp-button--tool" id="planReview" type="button" autofocus>Sjå over vala</button>
+    <button class="vp-button vp-button--primary" id="planStartAnyway" type="button">Start likevel</button>
   </div>
 </dialog>
 
@@ -542,13 +542,14 @@
 <script src="js/ui-setup.js?v=11"></script>
 <script src="js/ui-home.js?v=10"></script>
 <script src="js/ui-room.js"></script>
-<script src="js/ui-budget.js?v=3"></script>
+<script src="js/ui-plan-steps.js"></script>
+<script src="js/ui-budget.js?v=4"></script>
 <script src="js/ui-summer.js"></script>
 <script src="js/ui-playback.js"></script>
 <script src="js/ui-report.js?v=10"></script>
 <script src="js/ui-phase2-visuals.js"></script>
-<script src="js/ui-phase2.js?v=2"></script>
-<script src="js/ui-phase2-plan.js?v=4"></script>
+<script src="js/ui-phase2.js?v=3"></script>
+<script src="js/ui-phase2-plan.js?v=5"></script>
 <script src="js/ui-phase2-play.js?v=2"></script>
 <script src="js/main.js?v=10"></script>
 </body>

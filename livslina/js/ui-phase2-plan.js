@@ -18,21 +18,59 @@ LL.uiPhase2Plan = (function () {
     const input = el('input', 'vp-input'); input.type = 'number'; input.id = id;
     input.min = '0'; input.max = String(max); input.step = String(step || 1); input.value = String(value); input.required = true; return input;
   }
+  function arrow(icon, label) {
+    const button = el('button', 'vp-button vp-button--icon vp-button--compact');
+    button.type = 'button';
+    button.setAttribute('aria-label', label);
+    button.append(LL.uiPhase2Visuals.icon(icon, 18));
+    return button;
+  }
+  function addStep(tabs, box, id, label, panel) {
+    const tab = el('button', 'vp-button vp-button--tool vp-button--compact');
+    tab.type = 'button';
+    tab.id = id + 'Tab';
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-controls', id);
+    const mark = LL.uiPhase2Visuals.icon('check', 18);
+    mark.classList.add('vp-selection-mark');
+    tab.append(mark, label);
+    panel.id = id;
+    panel.setAttribute('role', 'tabpanel');
+    panel.setAttribute('aria-labelledby', tab.id);
+    panel.tabIndex = 0;
+    tabs.append(tab);
+    box.append(panel);
+  }
   function open() {
     const s = LL.state.get(), a = s.adult, d = LL.data.getAdult(), ui = LL.uiPhase2;
     if (a.run || a.complete) { ui.open(); return; }
     let initial;
     try { initial = LL.phase2Economy.normalizePlan(s, a.draft ? a.draft.plan : a.plan || LL.phase2Economy.defaultPlan(s)); }
     catch (_) { initial = LL.phase2Economy.defaultPlan(s); }
-    const root = ui.frame('Årsplan · ' + a.age + '–' + (a.age + 1) + ' år', 'August–juli');
+    const tabs = el('div', 'll-plan-tabs');
+    tabs.setAttribute('role', 'tablist');
+    tabs.setAttribute('aria-label', 'Delar av årsplanen');
+    const root = ui.frame('Årsplan', a.age + '–' + (a.age + 1) + ' år · August–juli', tabs);
     const form = el('form', 'll-adult-stack');
-    const routePanel = ui.panel('Vel retning og bustad');
+    form.noValidate = true;
+    const box = ui.panel();
+    const category = el('h2', 'heading4', 'Retning');
+    category.tabIndex = -1;
+    category.setAttribute('aria-live', 'polite');
+    const previous = arrow('arrowLeft', 'Førre del av planen');
+    const next = arrow('arrowRight', 'Neste del av planen');
+    const bar = el('div', 'll-plan-step-bar');
+    bar.append(previous, category, next);
+    box.append(bar);
+
+    const routePanel = el('div');
+    const housingPanel = el('div');
     const route = select('adultRoute', d.routes.map(r => [r.id, LL.phase2State.label(s, r.id) + (!LL.phase2State.available(s, r) ? ' · manglar opptaksgrunnlag' : ''), !LL.phase2State.available(s, r)]), initial.routeId);
     const home = select('adultHousing', d.housing.map(h => [h.id, h.label]), initial.housing);
     const routeNote = el('div', 'll-adult-route-preview'), homeNote = el('p', 'll-note');
-    routePanel.append(field('Retning', route), routeNote, field('Bustad', home), homeNote);
-    form.append(routePanel);
-    const daily = ui.panel('Arbeid og kvardagsrytme');
+    routePanel.append(field('Retning', route), routeNote);
+    housingPanel.append(field('Bustad', home), homeNote);
+    const daily = el('div');
     const hours = select('adultJobHours', [[0, 'Ingen deltidsjobb'], [6, '6 timar i veka'], [12, '12 timar i veka']], initial.jobHours);
     const percent = select('adultWorkPercent', [[0.5, '50 %'], [0.8, '80 %'], [1, '100 %']], initial.workPercent);
     const summer = select('adultSummer', [[0, 'Ingen sommarjobb'], [2, '2 veker'], [4, '4 veker'], [6, '6 veker']], initial.summerWeeks);
@@ -41,8 +79,8 @@ LL.uiPhase2Plan = (function () {
     const percentWrap = field('Stillingsprosent', percent);
     const summerWrap = field('Sommarjobb · juni–juli', summer);
     const timeNote = el('p', 'll-note');
-    daily.append(hoursWrap, percentWrap, summerWrap, field('Fritid', leisure), timeNote); form.append(daily);
-    const finance = ui.panel('Sparing og finansiering');
+    daily.append(hoursWrap, percentWrap, summerWrap, field('Fritid', leisure), timeNote);
+    const finance = el('div');
     const borrow = el('input'); borrow.type = 'checkbox'; borrow.id = 'adultBorrow'; borrow.checked = initial.borrow;
     const borrowWrap = field('Studentlån frå Lånekassen', borrow, 'Lån aukar gjelda. Stipend krev oppfylte vilkår.');
     route.addEventListener('change', () => { if (LL.phase2State.route(route.value).kind === 'study') borrow.checked = true; });
@@ -53,30 +91,55 @@ LL.uiPhase2Plan = (function () {
     const terms = el('details', 'vp-accordion'); terms.append(el('summary', '', 'Lån og sparing: vilkår'));
     const termsBody = el('div', 'vp-accordion-body'); termsBody.append(el('p', '', 'Stipend krev bestått utdanning og vilkår om bustad, inntekt og formue. BSU har grenser per kalenderår og totalt. Sparing skjer berre når kontoen har dekning.'));
     terms.append(termsBody); finance.append(terms);
-    form.append(finance);
-    const goalPanel = ui.panel('Måla du vil arbeide mot');
+    const goalPanel = el('div', 'll-adult-stack');
     goalPanel.append(el('p', 'll-note', 'Fordel sparinga mellom måla · maks 100 %.'));
     const previousGoals = a.draft ? a.draft.goals : a.goals;
     const goalFields = [0, 1].map(index => {
       const g = previousGoals[index] || { id: index ? '' : 'buffer', target: index ? 150000 : 30000, deadline: a.age + 3, share: index ? 0 : 100 };
-      const row = el('fieldset', 'vp-field ll-adult-goal-editor'); row.append(el('legend', '', index ? 'Mindre mål · valfritt' : 'Hovudmål'));
+      const row = el('fieldset', 'vp-field ll-adult-goal-editor');
+      if (index) row.setAttribute('aria-label', 'Mindre mål');
+      else row.append(el('legend', '', 'Hovudmål'));
       const choice = select('adultGoal' + index, [['', 'Ingen mål no'], ...d.goals.map(x => [x.id, x.label])], g.id);
       const target = number('adultGoalTarget' + index, g.target, 1000000, 1); target.min = '1';
       const deadline = number('adultGoalAge' + index, Math.max(a.age + 1, g.deadline), 40); deadline.min = String(a.age + 1);
       const share = number('adultGoalShare' + index, g.share, 100, 5);
       row.append(field('Mål', choice), field('Sum / nivå', target), field('Alder ved målet', deadline), field('Del av fri sparing · %', share));
       choice.addEventListener('change', () => { const def = d.goals.find(x => x.id === choice.value); if (def) target.value = def.defaultTarget; update(); });
-      goalPanel.append(row); return { choice, target, deadline, share, baseline: g.baseline, studyRouteId: g.routeId };
+      if (index) {
+        const optional = el('details', 'vp-accordion');
+        optional.open = Boolean(g.id);
+        const body = el('div', 'vp-accordion-body');
+        body.append(row);
+        optional.append(el('summary', '', 'Mindre mål · valfritt'), body);
+        goalPanel.append(optional);
+      } else {
+        goalPanel.append(row);
+      }
+      return { choice, target, deadline, share, baseline: g.baseline, studyRouteId: g.routeId };
     });
-    form.append(goalPanel);
-    const preview = ui.panel('Venta økonomi gjennom året'); preview.setAttribute('aria-live', 'polite');
+    const budgetPanel = el('div', 'll-adult-stack');
+    const preview = el('div'); preview.setAttribute('aria-live', 'polite');
     const expenses = el('details', 'vp-accordion');
     const expenseRows = el('div', 'vp-accordion-body');
     expenses.append(el('summary', '', 'Utgifter i august'), expenseRows);
     const error = el('p', 'vp-help'); error.setAttribute('role', 'alert');
-    const start = ui.button('Start året', () => {}, 'primary'); start.type = 'submit'; start.append(LL.uiPhase2Visuals.icon('arrowRight'));
-    form.append(preview, expenses, error, start, ui.button('Til oversikta', ui.home, 'quiet'));
+    const start = el('button', 'vp-button vp-button--primary', 'Start året');
+    start.type = 'submit';
+    start.append(LL.uiPhase2Visuals.icon('arrowRight'));
+    const startActions = el('div', 'vp-actions'); startActions.append(start);
+    budgetPanel.append(preview, expenses, error, startActions);
+    addStep(tabs, box, 'adultPlanRoute', 'Retning', routePanel);
+    addStep(tabs, box, 'adultPlanHousing', 'Bustad', housingPanel);
+    addStep(tabs, box, 'adultPlanDaily', 'Arbeid og kvardag', daily);
+    addStep(tabs, box, 'adultPlanFinance', 'Sparing og lån', finance);
+    addStep(tabs, box, 'adultPlanGoals', 'Mål', goalPanel);
+    addStep(tabs, box, 'adultPlanBudget', 'Budsjett', budgetPanel);
+    const exitActions = el('div', 'vp-actions');
+    exitActions.append(ui.button('Til oversikta', ui.home, 'quiet'));
+    form.append(box, exitActions);
     root.append(form);
+    const steps = LL.uiPlanSteps.connect(tabs, category, previous, next);
+
     function read() {
       return { routeId: route.value, housing: home.value, jobHours: Number(hours.value), workPercent: Number(percent.value), summerWeeks: Number(summer.value), leisure: leisure.value,
         borrow: borrow.checked, savings: Number(savings.value), bsu: Number(bsu.value), extraDebt: Number(debt.value) };
@@ -107,7 +170,7 @@ LL.uiPhase2Plan = (function () {
       homeNote.textContent = LL.util.kr(housing.rent + housing.utilities) + '/mnd · ' + (home.value === 'heime' ? 'bustadbidrag. Familien dekkjer fellesutgiftene og delar av maten.' : 'leige og straum');
       timeNote.hidden = item.kind !== 'gap';
       timeNote.textContent = 'Stillingsprosenten gjeld arbeidsmengda i friårssporet.';
-      preview.replaceChildren(el('h2', 'heading4 no-mt', 'Venta økonomi gjennom året'));
+      preview.replaceChildren();
       try {
         const estimate = LL.phase2Economy.preview(s, draft);
         preview.append(LL.uiPhase2Visuals.moneyFlow([['Arbeidsinntekt', estimate.wage], ['Studentlån', estimate.loan, 'bookOpen'], ['Påbyggstøtte', estimate.bridge, 'bookOpen'], ['Utgifter og skatt', estimate.expense]]));
@@ -131,10 +194,12 @@ LL.uiPhase2Plan = (function () {
         const needsDeposit = estimate.firstCash < 0 && estimate.move.deposit > estimate.move.returned;
         error.textContent = duplicate ? 'Vel to ulike mål.' : share > 100 ? 'Fordelinga av fri sparing kan høgst vere 100 %.' : needsDeposit ? 'Flytting krev meir pengar no. Hent fri buffer frå oversikta eller vel eit rimelegare bustadval.' : '';
         start.disabled = Boolean(error.textContent);
+        error.hidden = !error.textContent;
         if (estimate.firstCash < 0) preview.append(ui.button('Til kontoen og fri buffer', ui.home));
         a.draft = { plan: estimate.plan, goals: selected }; ui.save();
       } catch (e) {
         error.textContent = e.message;
+        error.hidden = false;
         expenses.hidden = true;
         start.disabled = true;
       }
@@ -143,10 +208,23 @@ LL.uiPhase2Plan = (function () {
     form.addEventListener('input', event => { if (event.target.type === 'number') update(); });
     form.addEventListener('submit', event => {
       event.preventDefault();
-      try {
-        if (start.disabled || !form.reportValidity()) return;
-        LL.phase2Sim.begin(s, read(), readGoals()); delete a.draft; ui.save(); LL.uiPhase2Play.render();
-      } catch (e) { error.textContent = e.message; }
+      if (budgetPanel.hidden || start.disabled) return;
+      const invalid = Array.from(form.elements).find(control => control.willValidate && !control.validity.valid);
+      if (invalid) {
+        steps.reveal(invalid);
+        const details = invalid.closest('details');
+        if (details) details.open = true;
+        invalid.reportValidity();
+        return;
+      }
+      LL.uiPlanSteps.confirmStart(steps, 'Vil du starte året no?', 'Start året likevel', () => {
+        try {
+          LL.phase2Sim.begin(s, read(), readGoals()); delete a.draft; ui.save(); LL.uiPhase2Play.render();
+        } catch (e) {
+          error.textContent = e.message;
+          error.hidden = false;
+        }
+      });
     });
     update();
   }

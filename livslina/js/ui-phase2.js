@@ -14,7 +14,7 @@ LL.uiPhase2 = (function () {
     if (title) p.append(el('h2', 'heading4 no-mt', title));
     return p;
   }
-  function frame(title, subtitle) {
+  function frame(title, subtitle, navigation) {
     const root = document.getElementById('adultContent'); root.replaceChildren();
     const head = el('div', 'vp-panel vp-panel--plain ll-adult-panel ll-adult-heading');
     const copy = el('div');
@@ -28,7 +28,9 @@ LL.uiPhase2 = (function () {
     const menu = el('details', 'vp-accordion ll-adult-menu');
     menu.append(el('summary', '', 'Val og hjelp'));
     const menuBody = el('div', 'vp-accordion-body'); menuBody.append(actions); menu.append(menuBody);
-    head.append(copy, menu); root.append(head);
+    head.append(copy, menu);
+    if (navigation) head.append(navigation);
+    root.append(head);
     LL.main.showScreen('screen-adult'); h.focus(); return root;
   }
   function stats(s) {

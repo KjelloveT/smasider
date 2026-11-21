@@ -8,8 +8,7 @@ LL.uiBudget = (function () {
   'use strict';
 
   let draft = null;
-  let activeSection = 0;
-  const visitedSections = new Set();
+  let steps = null;
 
   function open() {
     const state = LL.state.get();
@@ -28,29 +27,9 @@ LL.uiBudget = (function () {
       : '';
     renderControls();
     recompute();
-    visitedSections.clear();
-    selectSection(0);
+    steps.reset();
     LL.main.showScreen('screen-budget');
     LL.util.hydrate(document.getElementById('screen-budget'));
-  }
-
-  function selectSection(index, focusTab = false) {
-    const tabs = Array.from(document.getElementById('budgetTabs').children);
-    const selected = tabs[index];
-    if (!selected) return;
-    activeSection = index;
-    visitedSections.add(index);
-    document.getElementById('budgetCategory').textContent = selected.textContent.trim();
-
-    tabs.forEach(tab => {
-      const isSelected = tab === selected;
-      tab.setAttribute('aria-selected', String(isSelected));
-      tab.tabIndex = isSelected ? 0 : -1;
-      document.getElementById(tab.getAttribute('aria-controls')).hidden = !isSelected;
-    });
-    document.getElementById('budgetPrevSection').disabled = index === 0;
-    document.getElementById('budgetNextSection').disabled = index === tabs.length - 1;
-    if (focusTab) selected.focus();
   }
 
   function renderControls() {
@@ -304,62 +283,14 @@ LL.uiBudget = (function () {
     LL.uiPlayback.startTerm();
   }
 
-  function initStartDialog(tabs) {
-    const dialog = document.getElementById('budgetStartDialog');
-    const unvisitedTabs = () => tabs.filter((_, index) => !visitedSections.has(index));
-    Vy.bindOverlayClose(dialog);
-
-    document.getElementById('budgetRun').addEventListener('click', () => {
-      const remaining = unvisitedTabs();
-      if (!remaining.length) {
-        startHalfyear();
-        return;
-      }
-
-      const names = new Intl.ListFormat('nn-NO').format(remaining.map(tab => tab.textContent.trim()));
-      document.getElementById('budgetStartMissing').textContent = 'Du har ' + names + ' att å sjå over.';
-      Vy.openModal(dialog);
-    });
-
-    document.getElementById('budgetReview').addEventListener('click', () => {
-      const first = tabs.indexOf(unvisitedTabs()[0]);
-      dialog.addEventListener('close', () => {
-        selectSection(first);
-        document.getElementById('budgetCategory').focus();
-      }, { once: true });
-      Vy.closeModal(dialog);
-    });
-
-    document.getElementById('budgetRunAnyway').addEventListener('click', () => {
-      Vy.closeModal(dialog);
-      startHalfyear();
-    });
-  }
-
   function init() {
-    const tabList = document.getElementById('budgetTabs');
-    const tabs = Array.from(tabList.children);
-    tabs.forEach((tab, index) => tab.addEventListener('click', () => selectSection(index)));
-    tabList.addEventListener('keydown', event => {
-      let index;
-      switch (event.key) {
-        case 'ArrowLeft': index = (activeSection - 1 + tabs.length) % tabs.length; break;
-        case 'ArrowRight': index = (activeSection + 1) % tabs.length; break;
-        case 'Home': index = 0; break;
-        case 'End': index = tabs.length - 1; break;
-        default: return;
-      }
-      event.preventDefault();
-      selectSection(index, true);
+    steps = LL.uiPlanSteps.connect(
+      document.getElementById('budgetTabs'), document.getElementById('budgetCategory'),
+      document.getElementById('budgetPrevSection'), document.getElementById('budgetNextSection')
+    );
+    document.getElementById('budgetRun').addEventListener('click', () => {
+      LL.uiPlanSteps.confirmStart(steps, 'Vil du køyre halvåret no?', 'Køyr halvåret likevel', startHalfyear);
     });
-    [['budgetPrevSection', -1], ['budgetNextSection', 1]].forEach(([id, offset]) => {
-      const arrow = document.getElementById(id);
-      arrow.addEventListener('click', () => {
-        selectSection(activeSection + offset);
-        if (arrow.disabled) document.getElementById('budgetCategory').focus();
-      });
-    });
-    initStartDialog(tabs);
     document.getElementById('budgetBack').addEventListener('click', () => LL.main.enterHome());
   }
 
