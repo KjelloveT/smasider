@@ -75,7 +75,7 @@ LL.uiPhase2Plan = (function () {
     expenses.append(el('summary', '', 'Utgifter i august'), expenseRows);
     const error = el('p', 'vp-help'); error.setAttribute('role', 'alert');
     const start = ui.button('Start året', () => {}, 'primary'); start.type = 'submit'; start.append(LL.uiPhase2Visuals.icon('arrowRight'));
-    form.append(preview, error, start, ui.button('Til oversikta', ui.home, 'quiet'));
+    form.append(preview, expenses, error, start, ui.button('Til oversikta', ui.home, 'quiet'));
     root.append(form);
     function read() {
       return { routeId: route.value, housing: home.value, jobHours: Number(hours.value), workPercent: Number(percent.value), summerWeeks: Number(summer.value), leisure: leisure.value,
@@ -123,7 +123,7 @@ LL.uiPhase2Plan = (function () {
           row.append(el('span', '', LL.economy.label(key)), el('strong', '', LL.util.kr(value)));
           return row;
         }));
-        preview.append(expenses);
+        expenses.hidden = false;
         preview.append(el('p', 'll-note', 'Spelanslag · hendingar, renter og endeleg skatt kan endre tala.'));
         const selected = readGoals();
         const share = selected.reduce((sum, g) => sum + (d.goals.find(x => x.id === g.id).kind === 'money' ? g.share : 0), 0);
@@ -133,7 +133,11 @@ LL.uiPhase2Plan = (function () {
         start.disabled = Boolean(error.textContent);
         if (estimate.firstCash < 0) preview.append(ui.button('Til kontoen og fri buffer', ui.home));
         a.draft = { plan: estimate.plan, goals: selected }; ui.save();
-      } catch (e) { error.textContent = e.message; start.disabled = true; }
+      } catch (e) {
+        error.textContent = e.message;
+        expenses.hidden = true;
+        start.disabled = true;
+      }
     }
     form.addEventListener('change', update);
     form.addEventListener('input', event => { if (event.target.type === 'number') update(); });
