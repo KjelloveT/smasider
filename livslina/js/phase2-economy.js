@@ -47,9 +47,11 @@ LL.phase2Economy = (function () {
     wage = Math.max(0, wage + (m.monthlyWage || 0));
     const loan = p.borrow && month !== 11 ? r.studentMonthly : 0;
     const bridge = item.kind === 'bridge' && month !== 11 ? (r.bridgeMonthly || 6000) : 0;
-    const expenses = { housing: h.rent, utilities: h.utilities, food: h.food || r.food,
-      mobile: r.mobile, insurance: r.insurance, transport: r.transport,
-      household: p.housing === 'heime' ? 0 : r.household,
+    const personal = LL.economy.personalCosts(s.adult.age);
+    const expenses = { housing: h.rent, utilities: h.utilities, food: h.food ?? personal.food,
+      clothing: personal.clothing, personalCare: personal.personalCare, equipment: r.equipment,
+      mobile: r.mobile, insurance: r.insurance, transport: LL.economy.transportCost(s.adult.age, studying),
+      household: h.household,
       leisure: r.leisure * (p.leisure === 'social' ? 2 : p.leisure === 'quiet' ? 0.5 : 1),
       materials: studying ? r.materials : 0,
       semester: studying && [0, 5].includes(month) ? r.semester : 0,

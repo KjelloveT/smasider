@@ -2,6 +2,8 @@
 
 Køyr `node --test livslina/tests/phase2.test.cjs` frå prosjektrota.
 Testane brukar Node sine innebygde modular og den faktiske spelkoden.
+Dei omfattar òg skule- og lærlingstipend, månadsbudsjett, og korleis utgiftene
+endrar seg ved flytting eller byte mellom studium og arbeid.
 
 Prøvelagringane i `fixtures/` inneheld ingen persondata. Importer dei med
 den vanlege Importer-knappen:

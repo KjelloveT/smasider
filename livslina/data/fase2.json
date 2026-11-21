@@ -1,7 +1,7 @@
 {
   "app": "livslina",
   "version": 1,
-  "updated": "2026-11-01",
+  "updated": "2026-11-21",
   "note": "Prøveutgåve: alle år brukar fast prisnivå frå 2026. Løn, leige, renter og caseprisar er representative spelanslag. Skatt og støtte er forenkla; sjå kjeldene og avgrensingane.",
   "sources": [
     {
@@ -59,6 +59,20 @@
       "url": "https://www.udir.no/regelverk-og-tilsyn/skole-og-opplaring/retten-til-videregaende-opplaring/rett-til-pabygging/",
       "year": 2026,
       "kind": "official"
+    },
+    {
+      "id": "sifo2026",
+      "label": "SIFO 2026: mat, klede, personleg pleie, transport og hushaldsutgifter",
+      "url": "https://hdl.handle.net/11250/5517284",
+      "year": 2026,
+      "kind": "reference"
+    },
+    {
+      "id": "rent",
+      "label": "SSB: leigemarknadsundersøkinga, samanlikningsgrunnlag for leige",
+      "url": "https://www.ssb.no/priser-og-prisindekser/boligpriser-og-boligprisindekser/statistikk/leiemarkedsundersokelsen",
+      "year": 2025,
+      "kind": "statistics"
     }
   ],
   "rates": {
@@ -79,11 +93,9 @@
     "loanRate": 0.05,
     "creditRate": 0.18,
     "hourlyWage": 220,
-    "food": 4680,
     "mobile": 299,
     "insurance": 200,
-    "transport": 591,
-    "household": 600,
+    "equipment": 400,
     "leisure": 600,
     "materials": 400,
     "semester": 850,
@@ -133,24 +145,27 @@
       "rent": 2500,
       "food": 1800,
       "utilities": 0,
+      "household": 0,
       "studentOnly": false,
-      "note": "Bidrag til hushaldet. Familieprofilen gir ingen automatisk støtte i vaksenlivet."
+      "note": "Familien deler mat og dekkjer fellesutgiftene. Du betaler bustadbidrag, din del av maten og eigne personlege utgifter."
     },
     {
       "id": "hybel",
       "label": "Studenthybel",
       "rent": 6200,
       "utilities": 500,
+      "household": 1540,
       "studentOnly": true,
-      "note": "For studentar og påbygg i spelmodellen. Studium er tilgjengeleg lokalt eller i same region i prøveutgåva."
+      "note": "Du dekkjer mat og eigne hushaldsvarer. Hushaldsposten er SIFO-satsane for daglegvarer, hushaldsartiklar og møblar for éin person."
     },
     {
       "id": "kollektiv",
       "label": "Privat hybel / kollektiv",
       "rent": 7200,
       "utilities": 700,
+      "household": 885,
       "studentOnly": false,
-      "note": "For alle retningar. Tre månaders leige blir bunde som depositum."
+      "note": "Du deler hushaldsvarer og utstyr med ein annan. Tre månaders leige blir bunde som depositum."
     }
   ],
   "routes": [

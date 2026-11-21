@@ -70,6 +70,9 @@ LL.uiPhase2Plan = (function () {
     });
     form.append(goalPanel);
     const preview = ui.panel('Venta økonomi gjennom året'); preview.setAttribute('aria-live', 'polite');
+    const expenses = el('details', 'vp-accordion');
+    const expenseRows = el('div', 'vp-accordion-body');
+    expenses.append(el('summary', '', 'Utgifter i august'), expenseRows);
     const error = el('p', 'vp-help'); error.setAttribute('role', 'alert');
     const start = ui.button('Start året', () => {}, 'primary'); start.type = 'submit'; start.append(LL.uiPhase2Visuals.icon('arrowRight'));
     form.append(preview, error, start, ui.button('Til oversikta', ui.home, 'quiet'));
@@ -101,7 +104,7 @@ LL.uiPhase2Plan = (function () {
       const studentOption = Array.from(home.options).find(o => o.value === 'hybel'); studentOption.disabled = !studying;
       if (!studying && home.value === 'hybel') { home.value = 'kollektiv'; draft.housing = 'kollektiv'; }
       const housing = d.housing.find(h => h.id === home.value);
-      homeNote.textContent = LL.util.kr(housing.rent + housing.utilities) + '/mnd · ' + (home.value === 'heime' ? 'bidrag heime' : 'leige og straum');
+      homeNote.textContent = LL.util.kr(housing.rent + housing.utilities) + '/mnd · ' + (home.value === 'heime' ? 'bustadbidrag. Familien dekkjer fellesutgiftene og delar av maten.' : 'leige og straum');
       timeNote.hidden = item.kind !== 'gap';
       timeNote.textContent = 'Stillingsprosenten gjeld arbeidsmengda i friårssporet.';
       preview.replaceChildren(el('h2', 'heading4 no-mt', 'Venta økonomi gjennom året'));
@@ -114,6 +117,13 @@ LL.uiPhase2Plan = (function () {
           const deposit = LL.util.kr(estimate.move.deposit) + ' depositum';
           preview.append(LL.uiPhase2Visuals.token('lock', deposit, deposit + ' bunde ved flytting'));
         }
+        const firstMonth = LL.phase2Economy.breakdown(s, estimate.plan, 0);
+        expenseRows.replaceChildren(...Object.entries(firstMonth.expenses).filter(([, value]) => value).map(([key, value]) => {
+          const row = el('div', 'll-budget-row');
+          row.append(el('span', '', LL.economy.label(key)), el('strong', '', LL.util.kr(value)));
+          return row;
+        }));
+        preview.append(expenses);
         preview.append(el('p', 'll-note', 'Spelanslag · hendingar, renter og endeleg skatt kan endre tala.'));
         const selected = readGoals();
         const share = selected.reduce((sum, g) => sum + (d.goals.find(x => x.id === g.id).kind === 'money' ? g.share : 0), 0);

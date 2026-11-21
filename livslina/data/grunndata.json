@@ -1,19 +1,19 @@
 {
   "app": "livslina",
   "version": 1,
-  "updated": "2026-10-06",
+  "updated": "2026-11-21",
   "currency": "NOK",
-  "priceLevelNote": "SIFO-tal frå referansebudsjettet 2025 (prisar innhenta februar 2025). Utstyrsstipend frå Lånekassen for skuleåret 2026–2027; bortebuarstipend og inntektsavhengig stipend følgjer satsane for 2025–2026. Frikortgrense for inntektsåret 2026. Anslag ('estimate') er representative tal sette av redaksjonen og skal reviderast årleg saman med resten.",
+  "priceLevelNote": "Kvardagsutgiftene byggjer på SIFO sitt referansebudsjett frå 2026. Stipenda følgjer satsane for skuleåret 2026–2027, med lønsprøving i læretida. Bustadprisar, kostdeling heime og andre postar merkte «estimate» er spelanslag. Frikortgrensa er frå 2026.",
   "sources": {
-    "sifo2025": {
-      "name": "SIFOs referansebudsjett for forbruksutgifter 2025 (SIFO-rapport 2-2025, OsloMet)",
-      "url": "https://www.oslomet.no/om/sifo/referansebudsjettet",
-      "year": 2025
+    "sifo2026": {
+      "name": "SIFOs referansebudsjett for forbruksutgifter 2026 (SIFO-rapport 9-2026 og rekneark, OsloMet)",
+      "url": "https://hdl.handle.net/11250/5517284",
+      "year": 2026
     },
-    "lanekassen2025": {
-      "name": "Lånekassen — satsar for vidaregåande opplæring 2025–2026",
-      "url": "https://lanekassen.no/nb-NO/stipend-og-lan/norge/videregaende-skole/",
-      "year": 2025
+    "lanekassen2026": {
+      "name": "Forskrift om utdanningsstøtte, kapittel 9 — stipend til vidaregåande og behovsprøving for lærlingar 2026–2027",
+      "url": "https://lovdata.no/dokument/SF/forskrift/2020-04-15-798/KAPITTEL_2-2",
+      "year": 2026
     },
     "equipmentGrant2026": {
       "name": "Kunnskapsdepartementet — utstyrsstipend per utdanningsprogram og programområde 2026–2027",
@@ -50,47 +50,47 @@
     "food": {
       "label": "Mat og drikke",
       "unit": "krPerMonth",
-      "source": "sifo2025",
+      "source": "sifo2026",
       "kind": "official",
-      "values": { "boy14_17": 4470, "girl14_17": 3910, "man18_30": 5080, "woman18_30": 4280 },
-      "gameValue14_17": 4190,
-      "gameValue18_30": 4680,
-      "note": "Spelet brukar midtpunktet av SIFO-satsane for gutar og jenter, sidan figuren er kjønnsnøytral."
+      "values": { "boy15_17": 4640, "girl15_17": 4120, "man18_24": 4945, "woman18_24": 4445 },
+      "gameValue14_17": 4380,
+      "gameValue18plus": 4695,
+      "note": "Spelet brukar gjennomsnittet av dei to satsane i kvar aldersgruppe, 15–17 og 18–24 år."
     },
     "clothing": {
       "label": "Klede og sko",
       "unit": "krPerMonth",
-      "source": "sifo2025",
+      "source": "sifo2026",
       "kind": "official",
-      "values": { "boy14_17": 990, "girl14_17": 1010, "man18plus": 1100, "woman18plus": 1070 },
-      "gameValue14_17": 1000,
-      "gameValue18plus": 1085
+      "values": { "boy14_17": 1010, "girl14_17": 1030, "man18plus": 1119.8, "woman18plus": 1090 },
+      "gameValue14_17": 1020,
+      "gameValue18plus": 1105
     },
     "personalCare": {
-      "label": "Personleg pleie",
+      "label": "Personleg pleie og vanlege helsekostnader",
       "unit": "krPerMonth",
-      "source": "sifo2025",
+      "source": "sifo2026",
       "kind": "official",
-      "values": { "boy14_17": 490, "girl14_17": 610, "man18plus": 800, "woman18_50": 990 },
-      "gameValue14_17": 550,
-      "gameValue18plus": 895
+      "values": { "boy14_17": 510, "girl14_17": 630, "man18plus": 820, "woman18_50": 1020 },
+      "gameValue14_17": 570,
+      "gameValue18plus": 920,
+      "note": "SIFO-posten omfattar mellom anna hygiene, tannlegeettersyn og eitt årleg legebesøk."
     },
     "playAndMedia": {
       "label": "Leik og mediebruk (individuelt: fritid, gåver, abonnement m.m.)",
       "unit": "krPerMonth",
-      "source": "sifo2025",
+      "source": "sifo2026",
       "kind": "official",
-      "values": { "age14_17": 1650, "age18plus": 1060 },
-      "gameValue14_17": 1650,
-      "gameValue18plus": 1060
+      "values": { "age14_17": 1690, "age18plus": 1080 },
+      "gameValue14_17": 1690,
+      "gameValue18plus": 1080
     },
     "publicTransportYouth": {
-      "label": "Kollektivtransport, ungdomsbillett 30 dagar (Ruter-pris; varierer mellom fylka)",
+      "label": "Kollektivtransport, 30 dagar (Ruter-prisar frå februar 2026)",
       "unit": "krPerMonth",
-      "source": "sifo2025",
+      "source": "sifo2026",
       "kind": "official",
-      "values": { "age6_19": 327, "age20_66": 985, "student20_29": 591 },
-      "gameValue14_17": 327
+      "values": { "age6_19": 338, "age20_66": 1019, "student20_29": 612 }
     }
   },
 
@@ -161,14 +161,14 @@
   },
 
   "householdCostsSinglePerson": {
-    "label": "Husholdsspesifikke utgifter for éin person — gjeld berre når spelaren bur på hybel",
+    "label": "Hushaldsutgifter for éin person på hybel i vidaregåande",
     "unit": "krPerMonth",
-    "source": "sifo2025",
+    "source": "sifo2026",
     "kind": "official",
-    "otherGroceries": 435,
-    "householdItems": 585,
-    "furniture": 565,
-    "mediaAndLeisure": 2520,
+    "otherGroceries": 400,
+    "householdItems": 590,
+    "furniture": 550,
+    "mediaAndLeisure": 2570,
     "note": "mediaAndLeisure dekkjer internett, straumetenester, avis m.m. for husstanden. Bur ein heime, ber foreldra desse kostnadene."
   },
 
@@ -182,10 +182,14 @@
       "range": [3500, 6500],
       "note": "Varierer mykje med stad. SSB si leigemarknadsundersøking gjeld heile bustader og passar ikkje direkte for hybel."
     },
-    "livingAtHome": {
-      "label": "Bu heime hos foreldra",
+    "apprenticeAtHome": {
+      "label": "Eige bidrag og mat for ein heimebuande lærling",
       "unit": "krPerMonth",
-      "gameValue": 0
+      "source": "estimate",
+      "kind": "estimate",
+      "contribution": 2000,
+      "food": 1600,
+      "note": "Familien dekkjer resten av maten og dei andre fellesutgiftene. Lærlingen betaler eigne klede og personleg pleie."
     }
   },
 
@@ -211,20 +215,25 @@
     "housingGrantPerMonth": {
       "label": "Bortebuarstipend (krev ≥ 40 km eller ≥ 3 t dagleg reisetid)",
       "unit": "krPerMonth",
-      "source": "lanekassen2025",
+      "source": "lanekassen2026",
       "kind": "official",
-      "gameValue": 6871,
-      "monthsPerYear": 10
+      "gameValue": 7015,
+      "monthsPerYear": 10,
+      "apprenticeMonthsPerYear": 11,
+      "apprenticeIncomeThreshold": 18677,
+      "apprenticeReduction": 0.6,
+      "note": "For lærlingar blir 60 prosent av brutto lærlingløn over 18 677 kr per månad trekte frå stipendet (§ 53)."
     },
     "incomeDependentGrantPerMonth": {
       "label": "Inntektsavhengig stipend (etter foreldreøkonomi)",
       "unit": "krPerMonth",
-      "source": "lanekassen2025",
+      "source": "lanekassen2026",
       "kind": "official",
-      "rateLow": 1328,
-      "rateMid": 2658,
-      "rateFull": 3987,
-      "thresholdNote": "Full sats ved husstandsinntekt under om lag 320 000 kr, lågaste sats under om lag 590 000 kr (anslått frå Lånekassens tabellar)."
+      "rateLow": 1356,
+      "rateMid": 2714,
+      "rateFull": 4071,
+      "apprenticeReduction": 0.6,
+      "note": "Familieprofilen modellerer månadsretten før behovsprøving. For lærlingar trekkjer vi 60 øre per krone i lærlingløn."
     }
   },
 

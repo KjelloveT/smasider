@@ -78,19 +78,20 @@ Noko må vike») som tvingar fram eit justeringsval — spelet skal aldri straff
 
 **Inntekter**
 - Laurdagsjobb: timar/veke × 4,33 × timeløn (`work.hourlyWageUnder18` før 18-årsdagen i runde 4, deretter `work.hourlyWage18plus`)
-- Lommepengar (heimebuande) eller foreldrebidrag (hybel): `family.profiles`
-- Bortebuarstipend (hybel): `grants.housingGrantPerMonth`, 10 mnd/år
-- Inntektsavhengig stipend: `grants.incomeDependentGrantPerMonth` etter familieprofil
-- Utstyrsstipend: eingongsutbetaling kvar haust (runde 1, 3, 5)
+- Lommepengar for heimebuande skuleelevar og foreldrebidrag på hybel følgjer `family.profiles`.
+- Bortebuarstipend og inntektsavhengig stipend følgjer satsane for 2026–2027. Løpande stipend går frå august til mai for elevar og frå august til juni for lærlingar.
+- Lærlingløn reduserer inntektsavhengig stipend med 60 øre per krone. For bortebuarstipend gjeld 60 øre per krone over 18 677 kr i månadsløn.
+- Utstyrsstipend er ei eingongsutbetaling kvar haust i skuleløpet.
 
 **Faste utgifter (heimebuande)**
-- Mobil og transport. Foreldra dekkjer nødvendige klede, personleg pleie, mat og dei faste medieutgiftene.
+- Mobil og transport. Foreldra dekkjer nødvendige klede, personleg pleie, mat og faste medieutgifter for skuleelevar.
+- Heimebuande lærlingar betaler bustadbidrag og ein del av maten (`housing.apprenticeAtHome`), saman med eigne klede, pleie og fritid.
 - Kollektivkort (`monthlyCosts.publicTransportYouth`) — fell bort med moped
 - Valde fritidsaktivitetar (`leisure.*`)
 - Eigene val for kantine, drikke, mat ute, sosiale arrangement, klesshopping og kjøp inne i spel.
 
 **Faste utgifter (hybel, i tillegg)**
-- Husleige (`housing.hybelRent`), mat (`monthlyCosts.food`), hushaldsutgifter (`householdCostsSinglePerson`: dagligvarer + husholdningsartiklar + mediebruk/internett; møblar-posten er med frå månad 2)
+- Husleige (`housing.hybelRent`), mat etter alder, eigne klede og pleie, og hushaldsutgifter (`householdCostsSinglePerson`). Forbrukspostane byggjer på SIFO sitt referansebudsjett for 2026.
 
 **Forbruksvanar** (vel per halvår): konkrete frekvens- og vekebudsjett for mat
 ute, sosiale arrangement, klesshopping og spelkjøp viser kva eigne val kostar.

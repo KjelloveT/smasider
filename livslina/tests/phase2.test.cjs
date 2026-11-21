@@ -12,9 +12,12 @@ function environment() {
   c.window = c; vm.createContext(c);
   for (const file of ['js/vyrdepil-util.js', 'livslina/js/util.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), c, { filename: file });
   const adult = JSON.parse(fs.readFileSync(path.join(root, 'livslina/data/fase2.json')));
+  const base = JSON.parse(fs.readFileSync(path.join(root, 'livslina/data/grunndata.json')));
   const programs = JSON.parse(fs.readFileSync(path.join(root, 'livslina/data/linjer.json'))).programs;
-  c.LL.data = { getAdult: () => adult, getProgram: id => programs.find(p => p.id === id) };
-  for (const file of ['state', 'phase2-state', 'phase2-economy', 'phase2-events', 'phase2-sim']) vm.runInContext(fs.readFileSync(path.join(root, 'livslina/js/' + file + '.js'), 'utf8'), c, { filename: file });
+  const node = key => key.split('.').reduce((entry, part) => entry?.[part], base);
+  c.LL.data = { getAdult: () => adult, getProgram: id => programs.find(p => p.id === id),
+    node, value: (key, variant = 'gameValue') => node(key)?.[variant] ?? 0 };
+  for (const file of ['state', 'economy', 'phase2-state', 'phase2-economy', 'phase2-events', 'phase2-sim']) vm.runInContext(fs.readFileSync(path.join(root, 'livslina/js/' + file + '.js'), 'utf8'), c, { filename: file });
   return c.LL;
 }
 function school(LL, id = 'studiespes', apprenticeship = false) {
@@ -53,6 +56,77 @@ test('eldre lærlingavslutning får att siste læreår utan å miste pengar elle
   assert.equal(loaded.stats.money, 50000); assert.equal(loaded.eventLog.length, 1);
   const twice = LL.state.load(clone(loaded));
   assert.equal(twice.roundIndex, 8); assert.equal(twice.stats.money, 50000);
+});
+
+test('skuleelev får stipend i ti månader, og halvårsbudsjettet viser snittet', () => {
+  const LL = environment();
+  const s = school(LL);
+  s.finished = false;
+  s.family = { incomeDependentGrant: 'rateFull' };
+  s.housing = 'hybel';
+  s.roundIndex = 0;
+  const autumn = Array.from({ length: 6 }, (_, month) => LL.economy.monthlyBreakdown(s, month).income.housingGrant || 0);
+  s.roundIndex = 1;
+  const spring = Array.from({ length: 6 }, (_, month) => LL.economy.monthlyBreakdown(s, month).income);
+  assert.deepEqual(spring.map(income => income.housingGrant || 0), [7015, 7015, 7015, 7015, 0, 0]);
+  assert.equal(autumn.concat(spring.map(income => income.housingGrant || 0)).reduce((a, b) => a + b, 0), 70150);
+  assert.equal(spring[3].studyGrant, 4071);
+  assert.equal(spring[4].studyGrant, undefined);
+  assert.equal(Math.round(LL.economy.monthlyBreakdown(s).income.housingGrant * 6), 28060);
+});
+
+test('lærlingløn blir prøvd mot begge tilskota og lærlingen kan få støtte i juni', () => {
+  const LL = environment();
+  const s = school(LL, 'bygg-anlegg', true);
+  s.finished = false;
+  s.age = 18;
+  s.family = { incomeDependentGrant: 'rateFull' };
+  s.housing = 'hybel';
+  s.roundIndex = 7;
+  s.plan = { ...LL.economy.defaultPlan(), jobHours: 12 };
+  const june = LL.economy.monthlyBreakdown(s, 4);
+  assert.equal(june.income.studyGrant, undefined);
+  assert.equal(june.income.housingGrant, 7015);
+  assert.equal(LL.economy.monthlyBreakdown(s, 5).income.housingGrant, undefined);
+  s.roundIndex = 8;
+  assert.equal(LL.economy.monthlyBreakdown(s, 0).income.housingGrant, 6339);
+  s.roundIndex = 9;
+  assert.equal(LL.economy.monthlyBreakdown(s, 0).income.housingGrant, undefined);
+});
+
+test('heimebuande lærling betaler sin del av kvardagen gjennom læretida', () => {
+  const LL = environment();
+  const s = school(LL, 'bygg-anlegg', true);
+  s.age = 18;
+  s.family = { allowancePerMonth: 500 };
+  s.plan = { ...LL.economy.defaultPlan(), clothingShoppingPerWeek: 100 };
+  s.roundIndex = 0;
+  const pupil = LL.economy.monthlyBreakdown(s, 0);
+  assert.equal(pupil.income.allowance, 500);
+  assert.equal(pupil.expense.homeContribution, undefined);
+  s.roundIndex = 6;
+  const apprentice = LL.economy.monthlyBreakdown(s, 0);
+  assert.equal(apprentice.income.allowance, undefined);
+  assert.equal(apprentice.expense.homeContribution, 2000);
+  assert.equal(apprentice.expense.food, 1600);
+  assert.equal(apprentice.expense.personalCare, 920);
+  assert.equal(apprentice.expense.clothing + apprentice.expense.clothingShopping, 1105);
+});
+
+test('vaksne betaler basisutgifter med mat, transport og hushald tilpassa bustad og retning', () => {
+  const LL = environment(), s = adult(LL);
+  s.adult.age = 20;
+  const home = LL.phase2Economy.breakdown(s, { routeId: 'butikk', housing: 'heime' }, 0).expenses;
+  const shared = LL.phase2Economy.breakdown(s, { routeId: 'butikk', housing: 'kollektiv' }, 0).expenses;
+  const student = LL.phase2Economy.breakdown(s, { routeId: 'sjukepleie', housing: 'hybel' }, 0).expenses;
+  assert.equal(home.food, 1800);
+  assert.equal(home.household, 0);
+  assert.equal(home.clothing + home.personalCare + home.equipment, 2425);
+  assert.equal(home.transport, 1019);
+  assert.equal(shared.household, 885);
+  assert.equal(student.food, 4695);
+  assert.equal(student.household, 1540);
+  assert.equal(student.transport, 612);
 });
 test('lærlingen må avslutte fagprøva før overgangen, og får rett fagbrev', () => {
   const LL = environment(), s = school(LL, 'helse-oppvekst', true);

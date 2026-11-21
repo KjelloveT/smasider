@@ -431,14 +431,18 @@ LL.uiSetup = (function () {
     const opts = document.createElement('div');
     opts.className = 'll-housing-opts';
 
-    const homeDescription = 'Ingen husleige, foreldra dekkjer det meste. Lommepengar etter familieøkonomien.' +
+    const homeCosts = s.trainingRoute === 'apprenticeship'
+      ? 'Familien dekkjer det meste i skuletida. Som lærling betaler du eit bustadbidrag, ein del av maten og eigne klede og pleie.'
+      : 'Ingen husleige. Foreldra dekkjer det meste, og lommepengar følgjer familieøkonomien.';
+    const homeDescription = homeCosts +
       (s.hybelAvailable ? ' Vel du å pendle, kan den tidlege bussturen tappe litt energi kvar månad.' : '');
     opts.appendChild(housingCard('heime', 'Bu heime', homeDescription, s.housing));
 
     if (s.hybelAvailable) {
       opts.appendChild(housingCard('hybel', 'Bu på hybel',
-        'Eigen hybel med husleige, mat og faste rekningar — men bortebuarstipend (' +
-        kr(LL.data.value('grants.housingGrantPerMonth')) + '/mnd) og full fridom.', s.housing));
+        'Du betaler husleige, mat og faste rekningar. Bortebuarstipend opptil ' +
+        kr(LL.data.value('grants.housingGrantPerMonth')) + '/mnd.' +
+        (s.trainingRoute === 'apprenticeship' ? ' Lærlingløn kan minske stipendet.' : ''), s.housing));
     }
     wrap.appendChild(opts);
     updateNav();

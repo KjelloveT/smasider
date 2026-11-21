@@ -109,6 +109,37 @@ LL.economy = (function () {
   // Aldersvariant for SIFO-postar
   function ageVariant(age) { return age >= 18 ? 'gameValue18plus' : 'gameValue14_17'; }
 
+  function personalCosts(age) {
+    const variant = ageVariant(age);
+    return {
+      food: LL.data.value('monthlyCosts.food', variant),
+      clothing: LL.data.value('monthlyCosts.clothing', variant),
+      personalCare: LL.data.value('monthlyCosts.personalCare', variant)
+    };
+  }
+
+  function transportCost(age, student) {
+    const prices = LL.data.node('monthlyCosts.publicTransportYouth').values;
+    if (age < 20) return prices.age6_19;
+    return student ? prices.student20_29 : prices.age20_66;
+  }
+
+  function schoolGrants(state, round, apprenticeWage, monthIndex) {
+    const housing = LL.data.node('grants.housingGrantPerMonth');
+    const rates = LL.data.node('grants.incomeDependentGrantPerMonth');
+    const months = round.apprenticeship ? housing.apprenticeMonthsPerYear : housing.monthsPerYear;
+    const offset = round.period === 'Vår' ? round.months : 0;
+    const eligible = Math.max(0, Math.min(round.months, months - offset));
+    const fraction = monthIndex === undefined ? eligible / round.months : Number(monthIndex < eligible);
+    const housingReduction = Math.max(0, apprenticeWage - housing.apprenticeIncomeThreshold) * housing.apprenticeReduction;
+    const housingGrant = state.housing === 'hybel' ? housing.gameValue - housingReduction : 0;
+    const studyGrant = (rates[state.family.incomeDependentGrant] || 0) - apprenticeWage * rates.apprenticeReduction;
+    return {
+      housingGrant: Math.max(0, Math.round(housingGrant)) * fraction,
+      studyGrant: Math.max(0, Math.round(studyGrant)) * fraction
+    };
+  }
+
   function defaultPlan() {
     return {
       jobHours: 0, activities: [], weekdayHours: LL.state.defaultWeekdayHours(),
@@ -149,8 +180,8 @@ LL.economy = (function () {
     return 'sifo';
   }
 
-  // Full månadsoppstilling gjeve state + plan. Returnerer breakdown-objekt.
-  function monthlyBreakdown(state) {
+  // Oppstilling for ein faktisk månad, eller snittet for budsjettkortet.
+  function monthlyBreakdown(state, monthIndex) {
     const plan = state.plan || defaultPlan();
     const age = state.age;
     const wageVar = ageVariant(age);
@@ -164,8 +195,9 @@ LL.economy = (function () {
     const wage = plan.jobHours * WEEKS_PER_MONTH * hourlyWage(state);
     if (wage > 0) income.wage = wage;
     const round = LL.state.currentRound();
+    const apprentice = Boolean(round && round.apprenticeship);
     const apprenticeModel = LL.data.node('work.apprenticePayPercentages');
-    const apprenticeRate = round && round.apprenticeship && apprenticeModel
+    const apprenticeRate = apprentice && apprenticeModel
       ? apprenticeModel.values[round.apprenticeHalfYear - 1]
       : 0;
     const apprenticeWage = apprenticeRate
@@ -175,14 +207,13 @@ LL.economy = (function () {
 
     if (hybel) {
       if (f.parentContributionHybelPerMonth) income.parents = f.parentContributionHybelPerMonth;
-      income.housingGrant = LL.data.value('grants.housingGrantPerMonth');
-    } else if (f.allowancePerMonth) {
+    } else if (!apprentice && f.allowancePerMonth) {
       income.allowance = f.allowancePerMonth;
     }
-    if (f.incomeDependentGrant && f.incomeDependentGrant !== 'none') {
-      const g = LL.data.node('grants.incomeDependentGrantPerMonth');
-      const rate = g ? (g[f.incomeDependentGrant] || g.rateFull) : 0;
-      if (rate) income.studyGrant = rate;
+    if (round && round.kind === 'term') {
+      const { housingGrant, studyGrant } = schoolGrants(state, round, apprenticeWage, monthIndex);
+      if (housingGrant) income.housingGrant = housingGrant;
+      if (studyGrant) income.studyGrant = studyGrant;
     }
 
     // ── Utgifter ──
@@ -199,7 +230,7 @@ LL.economy = (function () {
       expense.transport = LL.data.value('transport.mopedFuelPerMonth');
       expense.mopedInsurance = LL.data.value('transport.mopedInsurancePerYear') / 12;
     } else {
-      expense.transport = LL.data.value('monthlyCosts.publicTransportYouth', 'gameValue14_17');
+      expense.transport = transportCost(age, !apprentice);
     }
     if (state.possessions.phoneInsurance) {
       expense.phoneInsurance = LL.data.value('events.phoneInsurancePerMonth');
@@ -209,21 +240,26 @@ LL.economy = (function () {
     const actCost = activityCost(plan);
     if (actCost > 0) expense.activities = actCost;
 
-    if (hybel) {
-      // Full sjølvhushaldning — spelaren ber alt sjølv.
-      const basicClothing = LL.data.value('monthlyCosts.clothing', wageVar);
-      const remainingClothing = Math.max(0, basicClothing - spending.clothingShopping);
+    if (hybel || apprentice) {
+      const personal = personalCosts(age);
+      const remainingClothing = Math.max(0, personal.clothing - spending.clothingShopping);
       if (remainingClothing > 0) expense.clothing = remainingClothing;
       if (spending.clothingShopping > 0) expense.clothingShopping = spending.clothingShopping;
-      expense.personalCare = LL.data.value('monthlyCosts.personalCare', wageVar);
+      expense.personalCare = personal.personalCare;
       const basicPlayAndMedia = LL.data.value('monthlyCosts.playAndMedia', wageVar);
       const remainingPlayAndMedia = Math.max(0, basicPlayAndMedia - spending.inGamePurchases);
       if (remainingPlayAndMedia > 0) expense.playAndMedia = remainingPlayAndMedia;
       if (spending.inGamePurchases > 0) expense.inGamePurchases = spending.inGamePurchases;
-      expense.rent = LL.data.value('housing.hybelRent');
-      expense.food = LL.data.value('monthlyCosts.food', 'gameValue14_17');
-      const h = LL.data.node('householdCostsSinglePerson');
-      expense.household = (h.otherGroceries + h.householdItems + h.furniture + h.mediaAndLeisure);
+      if (hybel) {
+        expense.rent = LL.data.value('housing.hybelRent');
+        expense.food = personal.food;
+        const h = LL.data.node('householdCostsSinglePerson');
+        expense.household = h.otherGroceries + h.householdItems + h.furniture + h.mediaAndLeisure;
+      } else {
+        const home = LL.data.node('housing.apprenticeAtHome');
+        expense.homeContribution = home.contribution;
+        expense.food = home.food;
+      }
     } else {
       // Bur heime: foreldra dekkjer nødvendige klede, mat, pleie og dei faste
       // medieutgiftene. Spelaren sine eigne val kjem fram som eigne budsjettlinjer.
@@ -329,12 +365,14 @@ LL.economy = (function () {
     wage: 'Løn frå deltidsjobb', apprentice: 'Lærlingløn', parents: 'Foreldrebidrag', housingGrant: 'Bortebuarstipend',
     allowance: 'Lommepengar', studyGrant: 'Inntektsavh. stipend', grant: 'Utstyrsstipend',
     tax: 'Skatt',
-    clothing: 'Klede og sko', clothingShopping: 'Klesshopping', personalCare: 'Personleg pleie', playAndMedia: 'Fritid og medium',
+    clothing: 'Klede og sko', clothingShopping: 'Klesshopping', personalCare: 'Pleie og helse', playAndMedia: 'Fritid og medium',
     mobile: 'Mobil og mobildata', canteen: 'Kjøp i skulekantina', drinks: 'Brus og energidrikk',
     eatingOut: 'Mat ute', socialEvents: 'Fest og sosiale arrangement',
     inGamePurchases: 'Kjøp inne i spel', seasonPass: 'Sesongpass i spel', transport: 'Transport', mopedInsurance: 'Mopedforsikring',
     phoneInsurance: 'Mobilforsikring', activities: 'Fritidsaktivitetar',
-    rent: 'Husleige', food: 'Mat', household: 'Hushald', russBus: 'Russebuss',
+    rent: 'Husleige', homeContribution: 'Bustadbidrag heime', housing: 'Bustad', utilities: 'Straum', food: 'Mat', household: 'Hushald', russBus: 'Russebuss',
+    insurance: 'Forsikring', equipment: 'Utskifting av utstyr', leisure: 'Fritid', materials: 'Studiemateriell', semester: 'Semesteravgift',
+    experiences: 'Opplevingar', adjustments: 'Endringar frå hendingar',
     events: 'Uventa hendingar'
   };
   function label(key) { return LABELS[key] || key; }
@@ -342,6 +380,6 @@ LL.economy = (function () {
   return {
     WEEKS_PER_MONTH,
     activities, weekdayChoices, weekdayEffects, weekdayWorkHours, weekdayTimeLimit, fitWeekdayHours, socialRules, jobOptions, savingsOptions, canteenOptions, drinkOptions, eatingOutOptions, socialEventOptions, weeklyBudgetOptions, mobileDataOptions, seasonPassOptions, hourlyWage, defaultPlan,
-    selectedSpending, spendingStyle, monthlyBreakdown, taxOnWage, label, ageVariant, sum
+    selectedSpending, spendingStyle, personalCosts, transportCost, monthlyBreakdown, taxOnWage, label, ageVariant, sum
   };
 })();
