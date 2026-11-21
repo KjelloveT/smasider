@@ -9,6 +9,7 @@ LL.uiBudget = (function () {
 
   let draft = null;
   let activeSection = 0;
+  const visitedSections = new Set();
 
   function open() {
     const state = LL.state.get();
@@ -27,6 +28,7 @@ LL.uiBudget = (function () {
       : '';
     renderControls();
     recompute();
+    visitedSections.clear();
     selectSection(0);
     LL.main.showScreen('screen-budget');
     LL.util.hydrate(document.getElementById('screen-budget'));
@@ -37,6 +39,8 @@ LL.uiBudget = (function () {
     const selected = tabs[index];
     if (!selected) return;
     activeSection = index;
+    visitedSections.add(index);
+    document.getElementById('budgetCategory').textContent = selected.textContent.trim();
 
     tabs.forEach(tab => {
       const isSelected = tab === selected;
@@ -285,7 +289,7 @@ LL.uiBudget = (function () {
     return Object.values(rows).reduce((total, value) => total + Math.round(value || 0), 0);
   }
 
-  function confirm() {
+  function startHalfyear() {
     const state = LL.state.get();
     state.plan = Object.assign({}, draft, { activities: draft.activities.slice() });
     if (!state.creditRestriction) {
@@ -298,6 +302,38 @@ LL.uiBudget = (function () {
     else state.possessions.hobby = 'plante';
     LL.storage.saveActive(state);
     LL.uiPlayback.startTerm();
+  }
+
+  function initStartDialog(tabs) {
+    const dialog = document.getElementById('budgetStartDialog');
+    const unvisitedTabs = () => tabs.filter((_, index) => !visitedSections.has(index));
+    Vy.bindOverlayClose(dialog);
+
+    document.getElementById('budgetRun').addEventListener('click', () => {
+      const remaining = unvisitedTabs();
+      if (!remaining.length) {
+        startHalfyear();
+        return;
+      }
+
+      const names = new Intl.ListFormat('nn-NO').format(remaining.map(tab => tab.textContent.trim()));
+      document.getElementById('budgetStartMissing').textContent = 'Du har ' + names + ' att å sjå over.';
+      Vy.openModal(dialog);
+    });
+
+    document.getElementById('budgetReview').addEventListener('click', () => {
+      const first = tabs.indexOf(unvisitedTabs()[0]);
+      dialog.addEventListener('close', () => {
+        selectSection(first);
+        document.getElementById('budgetCategory').focus();
+      }, { once: true });
+      Vy.closeModal(dialog);
+    });
+
+    document.getElementById('budgetRunAnyway').addEventListener('click', () => {
+      Vy.closeModal(dialog);
+      startHalfyear();
+    });
   }
 
   function init() {
@@ -316,9 +352,14 @@ LL.uiBudget = (function () {
       event.preventDefault();
       selectSection(index, true);
     });
-    document.getElementById('budgetPrevSection').addEventListener('click', () => selectSection(activeSection - 1, true));
-    document.getElementById('budgetNextSection').addEventListener('click', () => selectSection(activeSection + 1, true));
-    document.getElementById('budgetRun').addEventListener('click', confirm);
+    [['budgetPrevSection', -1], ['budgetNextSection', 1]].forEach(([id, offset]) => {
+      const arrow = document.getElementById(id);
+      arrow.addEventListener('click', () => {
+        selectSection(activeSection + offset);
+        if (arrow.disabled) document.getElementById('budgetCategory').focus();
+      });
+    });
+    initStartDialog(tabs);
     document.getElementById('budgetBack').addEventListener('click', () => LL.main.enterHome());
   }
 

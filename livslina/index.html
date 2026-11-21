@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.9">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=4">
 <link rel="stylesheet" href="css/phase2.css?v=2">
   <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
@@ -224,15 +224,7 @@
   <!-- ══════════ BUDSJETTKORTET ══════════ -->
   <section id="screen-budget" class="screen">
     <div class="vp-panel vp-panel--plain vp-panel--compact ll-budget-navigation">
-      <div class="ll-budget-step-bar">
-        <button class="vp-button vp-button--icon vp-button--compact" id="budgetPrevSection" type="button" aria-label="Førre del av planen" disabled>
-          <span data-icon="arrowLeft" aria-hidden="true"></span>
-        </button>
-        <h2 class="heading3" id="budgetRound">Planlegg halvåret</h2>
-        <button class="vp-button vp-button--icon vp-button--compact" id="budgetNextSection" type="button" aria-label="Neste del av planen">
-          <span data-icon="arrowRight" aria-hidden="true"></span>
-        </button>
-      </div>
+      <h2 class="heading3" id="budgetRound">Planlegg halvåret</h2>
       <div class="ll-budget-tabs" id="budgetTabs" role="tablist" aria-label="Delar av halvårsplanen">
         <button class="vp-button vp-button--tool vp-button--compact" id="budgetTabJob" type="button" role="tab" aria-selected="true" aria-controls="budgetSectionJob">
           <span class="vp-selection-mark" data-icon="check" aria-hidden="true"></span>Jobb
@@ -260,6 +252,15 @@
     <div class="ll-budget-grid">
       <div>
         <div class="vp-panel vp-panel--plain">
+          <div class="ll-budget-step-bar">
+            <button class="vp-button vp-button--icon vp-button--compact" id="budgetPrevSection" type="button" aria-label="Førre del av planen" disabled>
+              <span data-icon="arrowLeft" aria-hidden="true"></span>
+            </button>
+            <h3 class="heading4" id="budgetCategory" tabindex="-1" aria-live="polite">Jobb</h3>
+            <button class="vp-button vp-button--icon vp-button--compact" id="budgetNextSection" type="button" aria-label="Neste del av planen">
+              <span data-icon="arrowRight" aria-hidden="true"></span>
+            </button>
+          </div>
           <div id="budgetSectionJob" role="tabpanel" aria-labelledby="budgetTabJob" tabindex="0">
             <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skule eller læretid</legend><div class="ll-btn-row" id="budgetJob" role="group"></div></fieldset>
           </div>
@@ -470,6 +471,20 @@
   </div>
 </div>
 
+<dialog class="vp-dialog" id="budgetStartDialog" aria-labelledby="budgetStartTitle" aria-describedby="budgetStartMissing">
+  <div class="vp-dialog-head">
+    <h2 class="vp-heading" id="budgetStartTitle">Vil du køyre halvåret no?</h2>
+    <button class="vp-button vp-button--icon vp-button--quiet" type="button" data-close-modal="budgetStartDialog" aria-label="Lukk">
+      <span data-icon="x" aria-hidden="true"></span>
+    </button>
+  </div>
+  <p id="budgetStartMissing"></p>
+  <div class="vp-actions">
+    <button class="vp-button vp-button--tool" id="budgetReview" type="button" autofocus>Sjå over vala</button>
+    <button class="vp-button vp-button--primary" id="budgetRunAnyway" type="button">Køyr halvåret likevel</button>
+  </div>
+</dialog>
+
 <!-- ══════════ Hendingskort-modal ══════════ -->
 <div class="modal-overlay modal-locked vp-modal-backdrop" data-vp-modal-escape="local" id="eventModal" aria-hidden="true">
   <div class="ll-event-modal vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="eventTitle">
@@ -527,7 +542,7 @@
 <script src="js/ui-setup.js?v=11"></script>
 <script src="js/ui-home.js?v=10"></script>
 <script src="js/ui-room.js"></script>
-<script src="js/ui-budget.js?v=2"></script>
+<script src="js/ui-budget.js?v=3"></script>
 <script src="js/ui-summer.js"></script>
 <script src="js/ui-playback.js"></script>
 <script src="js/ui-report.js?v=10"></script>

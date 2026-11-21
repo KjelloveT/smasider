@@ -186,8 +186,9 @@
 .ll-product-action-row .vp-button { flex: 0 0 auto; }
 
 /* Budsjett, månadsspel og oppgjer */
-.ll-budget-step-bar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0.5rem; }
-.ll-budget-step-bar h2 { margin: 0; text-align: center; }
+.ll-budget-navigation h2 { margin: 0; text-align: center; }
+.ll-budget-step-bar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+.ll-budget-step-bar h3 { margin: 0; text-align: center; }
 .ll-budget-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: 0.75rem; }
 .ll-budget-tabs .vp-button { position: relative; padding-inline: 1.5rem; }
 .ll-budget-tabs .vp-selection-mark { position: absolute; inset-inline-start: 0.35rem; }
