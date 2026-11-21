@@ -21,7 +21,7 @@
 
   function loadGrade(grade) {
     if (!grades.has(grade)) {
-      const pending = fetch('json/standard/' + grade + '.json?v=1')
+      const pending = fetch('json/standard/' + grade + '.json?v=2')
         .then(response => {
           if (!response.ok) throw new Error('Kunne ikkje laste trinnet.');
           return response.json();

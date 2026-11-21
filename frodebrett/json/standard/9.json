@@ -7,41 +7,41 @@
         {
           "name": "Geometri og måleiningar",
           "questions": [
-            ["Kor mange kvadratcentimeter er éin kvadratdesimeter?","100 cm²."],
-            ["Kva er farten i km/t om du køyrer 150 km på 3 timar?","50 km/t."],
-            ["Eit kart har målestokk 1:25 000. Kartavstanden er 4 cm. Kva er den verkelege avstanden?","1 km."],
-            ["Ein rettvinkla trekant har katetar 6 og 8 cm. Kva er hypotenusen?","10 cm."],
-            ["Ein figur blir forstørra med lengdefaktor 3. Kva skjer med arealet?","Det blir ni gonger så stort."],
-            ["Ein stige står 1,8 m frå veggen og når 2,4 m opp. Kor lang er stigen?","3 m."]
+            ["Kor mange kvadratcentimeter er éin kvadratdesimeter?","100 cm²"],
+            ["Kva er farten i km/t om du køyrer 150 km på 3 timar?","50 km/t"],
+            ["Eit kart har målestokk 1:25 000. Kartavstanden er 4 cm. Kva er den verkelege avstanden?","1 km"],
+            ["Ein rettvinkla trekant har katetar 6 og 8 cm. Kva er hypotenusen?","10 cm"],
+            ["Ein figur blir forstørra med lengdefaktor 3 i begge retningar. Kor mange gonger så stort blir arealet?","9 gonger"],
+            ["Ein stige står 1,8 m frå veggen og når 2,4 m opp. Kor lang er stigen?","3 m"]
           ]
         },
         {
           "name": "Sannsyn og modellar",
           "questions": [
-            ["Kva er sannsynet for krone ved eitt kast med ein rettferdig mynt?","1/2."],
-            ["Ein pose har fire raude og seks blå brikker. Kva er sjansen for raudt i første trekk?","4/10 = 40 %."],
-            ["Kva er sannsynet for to mynt på rad med ein rettferdig mynt?","1/4."],
-            ["Kva er sannsynet for minst ein seksar ved to uavhengige terningkast?","11/36."],
-            ["Posen har tre raude og to blå. To blir trekte utan å leggje att den første. Kva er sjansen for to raude?","3/5 × 2/4 = 3/10."],
-            ["Eit spel gjev 24 kr når ein rettferdig terning viser 6 og kostar 5 kr kvar gong. Kva blir forventa netto per spel?","4 − 5 = −1 kr."]
+            ["Kva er sannsynet for krone ved eitt kast med ein rettferdig mynt?","1/2"],
+            ["Ein pose har fire raude og seks blå brikker. Kva er sjansen i prosent for raudt i fyrste trekk?","40 %"],
+            ["Du kastar ein rettferdig mynt to gonger. Kva er sannsynet for å få mynt begge gongene?","1/4"],
+            ["Kva er sannsynet for minst ein seksar ved to uavhengige terningkast?","11/36"],
+            ["Posen har tre raude og to blå. To blir trekte utan å leggje att den første. Kva er sjansen for to raude?","3/10"],
+            ["Eit spel gjev 24 kr når ein rettferdig terning viser 6 og kostar 5 kr kvar gong. Kva blir forventa netto per spel?","−1 kr"]
           ]
         },
         {
           "name": "Snodige fakta",
           "questions": [
-            ["Ein maraton er 42,195 km. Kor mange meter er det?","42 195 m."],
-            ["Eit trillehjul går rundt med omkrins på 2 m. Kor langt trillar det på 150 rundar?","300 m."],
-            ["Ein terning med flater 1 til 6 blir kasta. Er det like sannsynleg å få partal som oddetal?","Ja, tre av kvar."],
-            ["Ein robot går 3 m nord og 4 m aust. Kor langt er han frå start i luftlinje?","5 m."],
-            ["Du slår saman to like forsøk med kvar 50 kast. Kva er samla prosentdel ved 20 og 30 seksarar?","50 %."],
-            ["Eit kart blir skrive ut i dobbel storleik. Kva blir den nye målestokken om den gamle var 1:10 000?","1:5 000."]
+            ["Eit maraton er 42,195 km. Kva er halvparten av denne lengda i meter?","21097,5 m"],
+            ["Eit trillehjul går rundt med omkrins på 2 m. Kor langt trillar det på 150 rundar?","300 m"],
+            ["Kva har ein rettferdig terning flest av, partal eller oddetal?","Like mange"],
+            ["Ein robot går 3 m nord og 4 m aust. Kor langt er han frå start i luftlinje?","5 m"],
+            ["To forsøk har 50 terningkast kvar. Dei gjev 20 og 30 seksarar. Kor stor prosentdel av alle kasta vart seksarar?","50 %"],
+            ["Eit kart blir forstørra slik at alle lengdene blir dobla. Kva blir målestokken om den gamle var 1:10 000?","1:5000"]
           ]
         }
       ],
       "final": {
         "category": "Bra fart på sykkelen",
         "question": "Du syklar 12 km på 40 minutt og 6 km på 20 minutt. Kva er gjennomsnittsfarten for heile turen?",
-        "answer": "18 km/t."
+        "answer": "18 km/t"
       }
     },
     {
@@ -50,41 +50,41 @@
         {
           "name": "Energi og bølgjer",
           "questions": [
-            ["Kva er måleeininga hertz eit mål på?","Frekvens, tal svingingar per sekund."],
-            ["Kva skjer med tonen dersom frekvensen blir høgare?","Tonen blir lysare."],
-            ["Kva kan hindre at vi høyrer lyd i eit rom heilt utan luft?","Lyd treng eit stoff, som luft, for å kunne breie seg."],
-            ["Skil mellom energikjelde og energiberar med hydrogen som døme.","Ei kjelde gjev opphavleg energi. Hydrogen ber energi som først må leggjast inn når han blir framstilt."],
-            ["Kvifor blir om lag resten av energien til varme når ein motor berre gjer ein del av energien til nyttig rørsle?","Energi blir overført og omforma. Friksjon og andre prosessar varmar opp motoren og omgjevnadene."],
-            ["Korleis kontrollerer du om ein mjuk vegg dempar lyd betre enn ein hard når du har ein lydmålar?","Bruk same lyd, avstand og geometri og byt berre materialet. Gjenta målingane."]
+            ["Kva kallar vi energien ein sykkel har medan han rullar?","Rørsleenergi"],
+            ["Kva eining måler vi frekvens i?","Hertz"],
+            ["Kva for bølgjer kan gå gjennom vakuum, lyd eller ljos?","Ljos"],
+            ["Kva kallar vi avstanden mellom to nabotoppar i ei bølgje?","Bølgjelengd"],
+            ["Kva for ein eigenskap ved ei lydbølgje avgjer om tonen er lys eller mørk?","Frekvensen"],
+            ["Ein lyd har frekvens 200 Hz. Kor mange svingingar skjer på 0,25 sekund?","50 svingingar"]
           ]
         },
         {
           "name": "Jord, klima og data",
           "questions": [
-            ["Kva blir dei store delane av jordskorpa som flyttar seg, kalla?","Jordplater."],
-            ["Kva er eit fossil?","Ein bevart rest eller eit spor etter noko som levde før."],
-            ["Kvifor blir kloden varmare av meir klimagass i lufta?","Meir av varmestrålinga blir teken opp og sendt attende, så mindre energi slepp ut straks."],
-            ["Kva får meir havvatn til å ta plass når temperaturen stig?","Varmare vatn utvidar seg."],
-            ["Kva skil smelting av flytande havis frå smelting av is på land når det gjeld havnivå?","Landisen legg til vatn; flytande is fortrengjer alt vatn om lag tilsvarande vekta si."],
-            ["Kvifor kan ein kald månad ikkje åleine seie om jordklimaet er blitt kaldare?","Klima krev data for mange område og lang tid. Kortvarig vêr varierer."]
+            ["Kva del av atmosfæren har mykje ozon og absorberer mykje skadeleg UV-stråling?","Ozonlaget"],
+            ["Kva kallar vi gjennomsnitt og variasjon i vêret over lang tid?","Klima"],
+            ["Kva drivhusgass med formelen CO₂ blir mellom anna danna når kol brenn?","Karbondioksid"],
+            ["Kva blir overgangen frå is direkte til vassdamp kalla?","Sublimasjon"],
+            ["Kva fysiske eigenskap seier kor stor del av sollyset ei overflate reflekterer?","Albedo"],
+            ["Ein snøflekk smeltar og mørk jord kjem til syne. Kva skjer med albedoen, aukar han eller minkar han?","Han minkar"]
           ]
         },
         {
           "name": "Snodige fakta",
           "questions": [
-            ["Kva er raskast, lyd i lufta eller synleg lys i lufta?","Lys."],
-            ["Kva er eit ekko?","Reflektert lyd som kjem tilbake til lyttaren."],
-            ["Kvifor ser vi lynet før vi høyrer toresmellen?","Lys går mykje raskare enn lyd."],
-            ["Ein mobil vibrerer ved lyd. Korleis kan ei vibrerande overflate lage lyd i luft?","Overflata set lufta nær seg i svinging og startar trykkbølgjer."],
-            ["Kvifor kjennest metall kaldare enn tre i same rom?","Metallet leier varme raskare bort frå handa."],
-            ["To bølgjer har same fart. Den eine har dobbel frekvens. Kva skjer med bølgjelengda?","Ho blir halvparten så lang."]
+            ["Kva lysfenomen over polområda oppstår når partiklar frå sola påverkar lufta høgt oppe?","Polarlys"],
+            ["Kva for ei måleeining for lydnivå har forkortinga dB?","Desibel"],
+            ["Kva går lyset gjennom for å danne ein vanleg regnboge etter ei regnbye?","Regndropar"],
+            ["Kva heiter ljoset med bølgjelengd kortare enn synleg fiolett?","Ultrafiolett stråling"],
+            ["Lyd kan vende tilbake frå ein bergvegg som eit rop. Kva heiter den fysiske prosessen?","Refleksjon"],
+            ["Ein tone blir dobbelt så høg i frekvens. Kva musikalsk intervall er frekvensforholdet 2:1?","Oktav"]
           ]
         }
       ],
       "final": {
         "category": "Forsøk med isolasjon",
-        "question": "Du vil teste om ull eller papir held vatn varmt. Kva må du halde likt for at samanlikninga blir rettvist?",
-        "answer": "Same kopp, starttemperatur, måletid og omgjevnader. Bruk same tjukkleik om de samanliknar materiale."
+        "question": "To like koppar med vatn på 70 °C står 10 minutt. A endar på 60 °C, B på 64 °C. Kva kopp er best isolert?",
+        "answer": "Kopp B"
       }
     },
     {
@@ -93,41 +93,41 @@
         {
           "name": "Historisk endring",
           "questions": [
-            ["Kva er ei koloni?","Eit territorium under kontroll av ei anna makt."],
-            ["Kva heiter prosessen der koloniar får sjølvstende?","Avkolonisering."],
-            ["Kva skil ei årsak til ei hending frå ein konsekvens?","Årsaka bidreg til at ho skjer, konsekvensen følgjer av henne."],
-            ["Kvifor kunne maskinar endre kvar folk budde?","Jobbar flytta seg, og folk kunne flytte etter arbeidsplassane."],
-            ["Kvifor endrar nye lover og vanar seg ofte i ulik fart?","Ei lov kan vedtakast raskt, medan haldningar og vanar kan halde fram."],
-            ["Korleis undersøkjer du både brot og vidareføring etter ein revolusjon?","Samanlikn styre, levekår og kvar einskild gruppe si stilling før og etter."]
+            ["Fullfør namnet «Den …» på omveltinga som tok til i Frankrike i 1789.","franske revolusjonen"],
+            ["Kva samfunnsendring gav stort skifte frå handverk til fabrikkproduksjon frå slutten av 1700-talet?","Industrialiseringa"],
+            ["Kva ord skildrar makt overtatt brått og ulovleg, ofte av ei lita gruppe i leiinga eller militæret?","Statskupp"],
+            ["Kva fredsavtale mellom Tyskland og fleire sigermakter vart underteikna i 1919 etter fyrste verdskrigen?","Versaillestraktaten"],
+            ["Kva år fall Berlinmuren?","1989"],
+            ["Kva periode med sterk rivalisering mellom USA og Sovjetunionen blir kalla «Den …»? Fullfør namnet.","kalde krigen"]
           ]
         },
         {
           "name": "Mediemakt og kjelder",
           "questions": [
-            ["Kva er ei kjelde i ei nyheitssak?","Ein person, eit dokument eller anna opphav til informasjonen."],
-            ["Kva skil ei meining frå ein sjekkbar påstand?","Ein sjekkbar påstand kan prøvast mot prov; ei meining er ei vurdering."],
-            ["Kva viser avsendaren av eit innlegg?","Kven som skreiv, publiserte eller støttar det."],
-            ["Kvifor ser to personar ofte ulike saker i same teneste?","Tilrådingane kan byggje på tidlegare bruk og ulike interesser."],
-            ["Kva er problemet når ei graf berre viser dei siste tre månadene?","Utsnittet kan skjule tidlegare endringar og gi eit skeivt bilete."],
-            ["Ei kjelde har eigeninteresse i saka. Korleis nyttar du henne redelig?","Gjer interessa tydeleg og sjekk påstandar mot uavhengige kjelder."]
+            ["Kva kallar vi delen av eit avisinnlegg som tydeleg er skriven for å argumentere for ei meining?","Meiningsstoff"],
+            ["Kva slags kjelde var fotografen av ei demonstrasjon sjølv dersom han var der?","Fyrstehandskjelde"],
+            ["Kva kallast falskt innhald som er laga og spreidd med vilje for å villeie?","Desinformasjon"],
+            ["Kva kallar vi det å sjå mest innlegg som styrkjer dei eigne meiningane i ei lukka gruppe?","Ekkokammer"],
+            ["Kva treng eit foto av ein demonstrasjon, i tillegg til stad, om vi skal sjekke om det kjem frå rett dag?","Dato"],
+            ["Tre nettaviser siterer same augevitne om same hending. Kor mange uavhengige augevitne er kjelda deira?","Eitt"]
           ]
         },
         {
           "name": "Snodige fakta",
           "questions": [
-            ["Kva kallar vi eit oppdikta avisoppslag som gjer narr av noko i samfunnet?","Satire."],
-            ["Kvifor er mange klikk ikkje prov på at mange er samde?","Folk kan klikke for å undersøkje, le, protestere eller av nyfikne."],
-            ["Eit internettbilete har fått ein ny dato. Kva kan avsløre det?","Leit etter tidlegare publiseringar og sjekk opphav og motiv."],
-            ["Kva kan ein karikatur frå fortida vise sjølv om scena er oppdikta?","Kva nokon i tida meinte var viktig nok å skildre eller kritisere."],
-            ["Kvifor kan «Fleire bussar?» og «Meir skatt til bussar?» gje ulike svar?","Spørsmåla framhevar ulikt mål eller kostnad."],
-            ["To reportasjar brukar same setning frå eit intervju på motsette måtar. Kva bør du lese?","Heile intervjuet og omstenda for setninga."]
+            ["Kva internasjonal organisasjon vart grunnlagd i 1945 og har hovudkvarter i New York?","FN"],
+            ["Kva heimsdel vart delt inn i koloniar av europeiske makter etter Berlin-konferansen 1884–85?","Afrika"],
+            ["Kva heiter ein avisteikning som gjer narr av ein politikar ved overdrive ansiktsdrag?","Karikatur"],
+            ["Kva rekkjefølgje har årstala i ei tidsline når ho går frå den eldste hendinga til den nyaste?","Kronologisk rekkjefølgje"],
+            ["Kva heiter ein video der KI får ein verkeleg person til å sjå ut som om dei seier noko dei aldri har sagt?","Djupforfalsking"],
+            ["Ei gjenstandskjelde blir omtala i fem artiklar, men alle viser til same rapport. Kor mange rapportar er hovudkjelda?","Éin"]
           ]
         }
       ],
       "final": {
         "category": "Kva veit vi sikkert?",
-        "question": "Ein video påstår å vise ei ny hending på skulen din. Kva gjer du før du deler?",
-        "answer": "Sjekk kjelde, dato, stad og full samanheng, og leit etter ei uavhengig stadfesting."
+        "question": "Ein skribent var til stades i 1910, men skreiv memoarane sine i 1950. Kor mange år etter hendinga skreiv han dei?",
+        "answer": "40 år"
       }
     },
     {
@@ -136,41 +136,41 @@
         {
           "name": "Religion i historie og samfunn",
           "questions": [
-            ["Kva tyder religionsfridom?","Fridom til tru, tilhøyrsle og utøving, òg til å byte eller ikkje ha religion."],
-            ["Kva er ei reformrørsle?","Folk som arbeider for å endre ein tradisjon eller institusjon."],
-            ["Kva kan forklare at same religion tek ulike former i ulike samfunn?","Lokal historie, politiske forhold, kontakt med andre og ulik tolking."],
-            ["Gje eit døme på at religiøse fellesskap kan bidra i samfunnet.","Til dømes frivillig arbeid, kultur, støtte eller offentleg debatt."],
-            ["Kvifor er det for enkelt å forklare ein konflikt med religion åleine?","Makt, økonomi, identitet, historie og politikk kan verke saman."],
-            ["Korleis kan lover og institusjonar verne både religionsfridom og rettar for dei som står utanfor ei tru?","Gjennom lik behandling, vern mot tvang og rom for frivillig praksis."]
+            ["Kva kristen rørsle på 1500-talet førte mellom anna til lutherske og reformerte kyrkjer?","Reformasjonen"],
+            ["Kva kristen reformator publiserte 95 tesar om avlat i 1517?","Martin Luther"],
+            ["Kva tysk by knyter ein tradisjonelt dei 95 tesane til?","Wittenberg"],
+            ["Kva fagord for ei kyrkjesplitting blir brukt om brotet mellom aust- og vestkyrkja kring 1054?","Skisma"],
+            ["Kva endringsprosess tyder at religion får mindre innverknad i samfunnet over tid?","Sekularisering"],
+            ["Kva antikk konge i India støtta spreiing av buddhisme og lét prege etiske påbod på søyler?","Ashoka"]
           ]
         },
         {
           "name": "Etiske grunngjevingar",
           "questions": [
-            ["Kva vektlegg konsekvensetikk?","Kva følgjer handlinga kan få."],
-            ["Kva vektlegg pliktetikk?","Plikter, prinsipp og rettar handlinga må følgje."],
-            ["Kva kan dydsetikk spørje om ved eit val?","Kva ein god eigenskap som rettferd, mot eller omtanke tilseier."],
-            ["Kvifor kan folk med same mål likevel vurdere ein regel ulikt?","Dei kan prioritere ulike plikter, konsekvensar eller karaktertrekk."],
-            ["Gje døme på korleis eit løfte og ønsket om å hindre skade kan stå mot kvarandre.","Til dømes når du har lova å teie, men nokon kan ta skade om ingen hjelper."],
-            ["Korleis kan ein drøfte ein digital spøk med både konsekvens- og pliktetikk?","Vurder virkninga for dei som rammast og plikta til å respektere samtykke og verdigheit."]
+            ["Kva etisk teori spør mest om kva reglar eller plikter ein skal følgje?","Pliktetikk"],
+            ["Kva etisk teori vurderer ei handling ut frå det handlinga fører til?","Konsekvensetikk"],
+            ["Kva etisk teori spør mest om karaktertrekk, som mot og måtehald?","Dygdsetikk"],
+            ["Kva kallar vi grunngjevinga «Me bør gjere dette fordi det minskar skaden for dei fleste»?","Konsekvensargument"],
+            ["Kva type grunngjeving er «Eg må gjere det fordi det er mi oppgåve, uavhengig av kva eg tener på det»?","Pliktargument"],
+            ["Kva feilslutning ligg i å seie «Dette må vere sant fordi nesten alle meiner det»?","Popularitetsargument"]
           ]
         },
         {
           "name": "Snodige fakta",
           "questions": [
-            ["Kvifor er eit menneske med prestekrage i ein film ikkje kjelde åleine til kva alle prestar gjer?","Ein filmfigur er vald og forma for ei historie."],
-            ["Kva er eit godt teikn på at ein påstand er ein stereotypi?","Han tilskriv svært mange menneske dei same eigenskapane utan å vise variasjon."],
-            ["Kva slags argument er «Det er sant fordi alle trur det»?","Popularitetsargument. Mange som trur noko gjer det ikkje sant."],
-            ["Ein maskin kan sortere ord om «rett» og «gale». Kvifor er ikkje handlinga dermed moralsk vurdert?","Han sorterer mønster, men grunngjev ikkje kva omsyn som tel for menneska."],
-            ["Kvifor kan ei lita endring i eit tenkt døme endre vårt moralske svar?","Ansvaret, risikoen eller mogelegheita til å samtykkje kan bli ulik."],
-            ["Ein dommar i ei tenkt forteljing premierer berre fine ord om å vere hjelpsam. Kva viktige data saknar ho?","Kva folk faktisk gjer og kva hjelp handlingane fører til."]
+            ["Kva heiter den greske filosofen som veit at han ikkje veit, og som ofte er hovudpersonen i samtalane til Platon?","Sokrates"],
+            ["Kva heiter bergfestninga i Tibet som tradisjonelt var residens for Dalai Lama, Potala eller Taj Mahal?","Potala"],
+            ["Kva buddhistisk omgrep handlar om at intensjon og handling har følgjer, og har gjeve namn til mange vitsar om at det slår attende på deg?","Karma"],
+            ["Kva kallar vi ei lita historie om éi verkeleg hending, ofte brukt som døme i ein debatt?","Anekdote"],
+            ["Kva er det filosofiske namnet på regelen «Ei meining kan vere sann for meg, men ikkje for deg», av relativisme og absolutisme?","Relativisme"],
+            ["Kva blir det å bruke ei dramatisk, emosjonell historie til å få støtte frå publikum, særleg ved retorisk appell til kjensler?","Patos"]
           ]
         }
       ],
       "final": {
         "category": "Kva tel som ein god grunn?",
-        "question": "Kan det vere rett å bryte ei mindre regel for å hjelpe nokon? Gje to etiske måtar å grunngje svaret på.",
-        "answer": "Til dømes vurder skade og nytte, og om ei plikt til å hjelpe veg tyngre enn regelen."
+        "question": "Ein debattant seier «Høyr på meg fordi eg er ekspert», utan å vise belegg. Kva type argument er det?",
+        "answer": "Autoritetsargument"
       }
     },
     {
@@ -179,41 +179,41 @@
         {
           "name": "Setningar og språkval",
           "questions": [
-            ["Kva heiter appellforma som handlar om truverdet til avsendaren?","Etos."],
-            ["I «Dei venta medan snøen lava ned», kva ord innleier leddsetninga?","Medan."],
-            ["Kvifor kan eit ord få ulik klang i munnleg prat og ein formell søknad?","Situasjonen og mottakaren påverkar kva som verkar høveleg og korleis ein blir forstått."],
-            ["Gjer bokmålssetninga «Hun mente de måtte gjøre noe med miljøet» om til nynorsk.","«Ho meinte at dei måtte gjere noko med miljøet.»"],
-            ["Setninga «Det vart gjort feil» nemner ingen ansvarleg. Kva for språkleg val gjer dette mogleg?","Passivforma «vart gjort», der den som gjorde handlinga, kan utelatast."],
-            ["Korleis endrar ei leddsetning før hovudsetninga rekkjefølgja på subjekt og verbal i «Då vi svinga, forsvann bussen»?","Leddsetninga tek fyrsteplassen. Verbet «forsvann» kjem før subjektet «bussen»."]
+            ["Kva appellform handlar om truverdet til avsendaren?","Etos"],
+            ["I «Dei venta medan snøen lava ned», kva ord innleier leddsetninga?","Medan"],
+            ["Kva heiter språkvalet i ein tekst når ord og stil er tilpassa til dømes vener eller eit formelt publikum?","Register"],
+            ["Kva pronomen på nynorsk erstattar «hun» i «Hun mente …»?","Ho"],
+            ["Kva heiter den grammatiske forma der den som handlar, kan utelatast, som i «Det vart gjort feil»?","Passiv"],
+            ["Kva er verbalet i hovudsetninga i «Då vi svinga, forsvann bussen»?","Forsvann"]
           ]
         },
         {
           "name": "Teksttolking og argumentasjon",
           "questions": [
-            ["Kva er ein kontrast mellom to personar eller hendingar i ei forteljing?","Ein tydeleg skilnad som kan framheve eigenskapar hos begge."],
-            ["Kva tyder «open slutt»?","At teksten lèt viktige spørsmål stå opne for lesaren."],
-            ["Kva kan vere eit motargument til «Alle burde lese same bok»?","Til dømes at ulik leserøynsle og ulike interesser gjer at fleire får utbyte av val."],
-            ["Korleis kan eit upåliteleg forteljarperspektiv gjere eit mysterium meir spennande?","Lesaren må vurdere kva forteljaren misforstår, gløymer eller held løynt."],
-            ["Ein opinionsartikkel samanliknar ei enkelt god oppleving med statistikk over hundrevis. Kvifor bør tala vurderast sjølvstendig?","Eit einskild tilfelle kan vere utypisk, medan statistikk kan syne mønster men òg krev kontroll av kjelda og måten ho vart samla."],
-            ["Korleis kan brotet med forventinga få fram eit tema når ein tittel lovar «Sommarferie» og teksten handlar om einsemd?","Det lyfter fram avstanden mellom idealet om glad ferie og erfaringa til personen."]
+            ["Kva heiter ei avslutning som lèt lesaren fylle ut kva som skjer etterpå?","Open slutt"],
+            ["Kva heiter det når ein tekst set to tydelege motsetningar opp mot kvarandre?","Kontrast"],
+            ["Kva del av eit argument legg fram påstanden som motparten skal svare på, premiss eller konklusjon?","Konklusjon"],
+            ["Kva kan ein kalle forteljaren når lesaren har grunn til å tvile på det forteljaren seier?","Upåliteleg forteljar"],
+            ["«Alle burde lese same bok», seier Ali. «Elevar les ulikt fort», svarar Eline. Kva funksjon har Eline si innvending?","Motargument"],
+            ["I novella vekslar vi mellom no og eit barndomsminne. Kva heiter brotet der teksten går tilbake til den førre tida?","Tilbakeblikk"]
           ]
         },
         {
           "name": "Snodige fakta",
           "questions": [
-            ["Kva kan ei «tørr forteljing» tyde utan at papiret er tørt?","At forteljinga er keisam, nøktern eller skriv med tørr humor."],
-            ["Kva er «ein berg-og-dal-bane av kjensler» døme på?","Ein metafor for sterke omslag i kjenslene."],
-            ["Kva gjer setninga «Ekspert på pausar tok ein pause for å forklare pausar» lett absurd?","Gjentakinga gjer ei lita kvardagshending til noko overdrive fagleg, og personen gjer sjølv det han forklarer."],
-            ["Kva risikerer du om du skriv «Hjelp min ven» utan komma når du vil rope til venen om hjelp?","Det kan lesast som ei oppmoding om at nokon må hjelpe venen. «Hjelp, min ven!» vender seg til venen."],
-            ["Kva er skilnaden mellom ei ironisk og ei oppriktig «For ein strålande start!» etter at sekken rivna?","Ironien seier noko positivt for å vise det motsette. Ein oppriktig kommentar krev at talaren faktisk likte starten."],
-            ["Kva dobbel lesing kan liggje i «Språkeksperten levde av luftige ord»?","Eksperten kan tene pengar ved å snakke, og orda kan vere innhaldstomme eller svevande."]
+            ["«Prøv ikkje å leggje lokk på kjenslene.» Kva verkemiddel er det når «lokk» blir brukt overført om å halde noko inne?","Metafor"],
+            ["Kva ord spelar på to tydingar i «Rotlaus plante på flyttefot» og kan seie både noko om plantestell og oppleving av å ikkje høyre til?","Rotlaus"],
+            ["Kva teikn må inn etter «Hjelp» når den neste delen er namnet til venen du ropar til?","Komma"],
+            ["Kva dømer ein replikk på med «For ein strålande start!» etter at sekken rivna, dersom talaren meiner det motsette?","Ironi"],
+            ["Kva ord kan vise både til ein lyd frå ein person og ei røyst ved eit val?","Stemme"],
+            ["Kva heiter ei fast, overbrukt vending som «eit hav av tid» i ein overskrift?","Klisjé"]
           ]
         }
       ],
       "final": {
         "category": "Ord i forkledning",
-        "question": "Kva skil det å bruke eit sterkt sitat som illustrasjon frå å bruke det som bevis på kva dei fleste i ei gruppe meiner?",
-        "answer": "Sitatet viser kva éin person sa. Å påstå fleirtalsmeining krev eit breiare, representativt grunnlag."
+        "question": "Eit innlegg siterer éin person og konkluderer med at «alle ungdomar meiner det same». Kva tankefeil gjer skribenten?",
+        "answer": "Overgeneralisering"
       }
     },
     {
@@ -222,41 +222,41 @@
         {
           "name": "Presist og variert engelsk",
           "questions": [
-            ["Kva uttrykk innleier eit døme i ein tekst, «for instance» eller «in conclusion»?","«For instance.»"],
-            ["Kva skil advice og advise i ordklasse?","Advice er substantiv, advise er verb."],
-            ["Omskriv «Send me the details» som ei høfleg førespurnad i ein e-post.","Til dømes «Could you send me the details, please?»"],
-            ["Skriv om «If we leave now, we catch the bus» så det uttrykkjer ei tenkt handling vi ikkje reknar med.","Til dømes «If we left now, we would catch the bus.»"],
-            ["Kvifor kan «The results seem to suggest …» vere meir presist enn «The results prove …»?","Det opnar for at grunnlaget peikar i ei retning utan å gje endeleg bevis."],
-            ["Gjer «Lee said, ‘I have lost my key’» om til rapportert tale med vanleg tidsskifte.","«Lee said that they had lost their key.» Pronomen kan tilpassast Lee."]
+            ["Kva uttrykk innleier eit døme, «for instance» eller «in conclusion»?","For instance"],
+            ["Kva ordklasse høyrer «advise» til, i motsetnad til «advice»?","Verb"],
+            ["Kva for to ord kan du setje framfor «send me the details» for å gjere utsegna til eit høfleg spørsmål?","Could you"],
+            ["Fullfør det hypotetiske alternativet «If we left now, we … catch the bus».","Would"],
+            ["Kva engelsk verb i «The results suggest …» gjer setninga mindre sikker enn «The results prove …»?","Suggest"],
+            ["«Lee said: ‘I have lost my key.’» Kva to verbord fullfører rapportert tale med tidsskifte, «Lee said that they … their key»?","Had lost"]
           ]
         },
         {
           "name": "Lesing, kultur og kjelder",
           "questions": [
-            ["Kva vil «point of view» seie om ei forteljing?","Perspektivet handlinga blir fortald gjennom."],
-            ["Kvifor kan datoen på ei kjelde om dagens digitale vanar vere viktig?","Vanar og teknologi kan endre seg, så eldre opplysningar kan vere utdaterte."],
-            ["Kva skil formuleringane «The town is diverse» og «The town is divided» som skildringar av same stad?","Diverse framhevar variasjon. Divided framhevar splitting eller konflikt."],
-            ["I «Living between two languages, I sometimes feel at home twice and sometimes nowhere», kva spenning skildrar forteljaren?","To språk kan gje fleire fellesskap, men òg ei kjensle av å ikkje høyre heime ein bestemt stad."],
-            ["Samanlikn «Some residents said the new park is useful» med «Everyone loves the new park». Kva må sjekkast før ein vel den siste?","Ein må ha breitt grunnlag for kven som har svart, og absolutt «everyone» krev langt meir enn nokre utsegner."],
-            ["Ein engelsk film viser alle frå ein stad som like. Kva kan du gjere for å utfordre framstillinga utan å avvise kvart einskild døme?","Søk ulike stemmer frå staden, vurder sjangeren og samanlikn med truverdige kjelder."]
+            ["Kva er «point of view» på norsk når vi snakkar om forteljingar?","Synsvinkel"],
+            ["Kva for ei kjeldeopplysning hjelper deg å avgjere om ein tekst om dagens digitale vanar er oppdatert?","Datoen"],
+            ["«The town is diverse» og «The town is divided» skildrar same stad. Kva ord framhevar splitting?","Divided"],
+            ["«Between two languages, I sometimes feel at home twice and sometimes nowhere.» Kva hovudtema kjem fram, tilhøyring eller tid?","Tilhøyring"],
+            ["«Some residents said the park is useful.» Ei overskrift seier «Everyone loves the park.» Kva engelsk ord gjer overskrifta altfor generell?","Everyone"],
+            ["Ein film framstiller alle frå ein plass som heilt like. Kva kallar vi ei slik forenkla førestilling på engelsk, «stereotype» eller «synonym»?","Stereotype"]
           ]
         },
         {
           "name": "Snodige fakta",
           "questions": [
-            ["Kva tyder «break the ice» når nye elevar skal bli kjende?","Å få i gang samtalen og gjere stemninga mindre stiv."],
-            ["Kva tyder «under the weather»?","Å kjenne seg litt sjuk eller i dårleg form."],
-            ["Det kan stå «Wind the clock» og «The wind is cold». Kva endrar seg i uttalen og tydinga?","Verbforma wind rimar på find og tyder å trekkje opp. Substantivet wind rimar på pinned og tyder vind."],
-            ["Kva gjer «Time flies like an arrow. Fruit flies like a banana» til eit ordspel?","I fyrste setning er flies eit verb og like tyder «som». I den andre er fruit flies eit substantiv og like eit verb."],
-            ["Kvifor passar «I had to draw the line somewhere» frå ein teiknelærar som vil setje ei grense?","Uttrykket tyder å setje ei grense og kan bokstaveleg tyde å teikne ei line."],
-            ["«The committee took a stand, but the chair stayed seated.» Forklar dei doble tydingane.","To take a stand er å ta eit standpunkt. Chair er både ein stol og ein møteleiar, som kan sitje."]
+            ["Kva tyder «break the ice» når nye elevar skal bli kjende, få i gang praten eller fryse?","Starte praten"],
+            ["«I’m feeling under the weather today.» Korleis kjenner personen seg?","Litt sjuk"],
+            ["Kva av substantivet «wind» og verbet «wind» rimar på «find»?","Verbet"],
+            ["Kva dyr er «fruit flies» i «Fruit flies like a banana»?","Fruktfluger"],
+            ["Kva tyder «draw the line» når ein person set ei grense for åtferd?","Setje grense"],
+            ["I ordspelet «The committee took a stand, but the chair stayed seated», kva person kan «chair» tyde?","Møteleiar"]
           ]
         }
       ],
       "final": {
         "category": "Engelsk på vranga",
-        "question": "Korleis kan du bruke ei engelsk kjelde på ein sjølvstendig måte i ein tekst som argumenterer for noko?",
-        "answer": "Gje att sentralt innhald med eigne ord eller eit tydeleg sitat, vis til kjelda, forklar relevansen og vurder kvaliteten."
+        "question": "«The report was written before the app was launched.» Kva av kjelda og app-lanseringa kom fyrst?",
+        "answer": "Kjelda"
       }
     },
     {
@@ -265,41 +265,41 @@
         {
           "name": "Forteljing, form og påverknad",
           "questions": [
-            ["Kva heiter eit planlagt utsnitt som viser ein liten del av hovudmotivet stort?","Eit nærbilete."],
-            ["Kva kan ei handskisse vise som ei formell arbeidsteikning med mål ikkje alltid viser like lett?","Frie idéar og moglege løysingar før ein vel ei retning."],
-            ["Kva sannsynleg verknad har ei svart form mot sterk lys bakgrunn i eit trykk?","Ho skil seg tydeleg ut og kan verke som eit fokuspunkt."],
-            ["Kvifor kan eit reklamebilete bruke stor open plass rundt éin liten gjenstand?","Det let gjenstanden dominere og kan signalisere ro, eksklusivitet eller merksemd."],
-            ["Korleis kan eit utsnitt av eit folksamt torg både vere ekte og gje eit misvisande inntrykk?","Det kan vise berre den tettaste delen, utan dei store tomme områda."],
-            ["Korleis kan innpakning, fotografi og skrift saman få ei vanleg vare til å sjå meir luksuriøs ut?","Til dømes gjennom få element, forseggjort typografi, nærbilete og roleg komposisjon. Drøft kva val som gjer kva."]
+            ["Kva kallar vi eit utsnitt som viser ein liten del av motivet stort?","Nærbilete"],
+            ["Kva heiter ei arbeidsteikning frå toppen som syner korleis rom er fordelte i eit bygg?","Planteikning"],
+            ["Kva grep trekkjer blikket til ein svart form på ei lys flate?","Kontrast"],
+            ["Kva kallar vi den synlege flata utan tekst eller figurar som dannar rom rundt motivet?","Negativt rom"],
+            ["Kva teknikk gjer at ein fotograf kan vise den tettaste delen av eit torg og la dei tomme delane vere utanfor?","Beskjering"],
+            ["Kva heiter teiknegrepet der alle linene som går innover på eit bilete møtest i eitt punkt på horisonten?","Eittpunktsperspektiv"]
           ]
         },
         {
           "name": "Produkt og livsløp",
           "questions": [
-            ["Kva er eit produkt sitt livsløp?","Frå utvinning eller val av råvarer via produksjon og bruk til ombruk, attvinning eller avfall."],
-            ["Kva tyder modulbasert utforming i eit møbel?","At møbelet er bygd av delar som kan setjast saman, bytast eller tilpassast."],
-            ["Korleis kan ei skruefesting hjelpe ved ombruk samanlikna med to delar limte saman permanent?","Skruen kan takast ut slik at delane kan bytast eller sorterast."],
-            ["Kva må du undersøkje før du kan seie at ein bruksting laga av gjenbrukte materiale toler den nye oppgåva?","Sjekk tilstand, belastning, tryggleik og korleis delane held saman. Test eller samanlikn med eigna materiale."],
-            ["Kva kompromiss kan oppstå mellom eit lett produkt og eit produkt som varer lenge?","Mindre materiale kan gje lågare vekt, men kan òg redusere styrke og reparasjonsmargin. Materialval og form kan betre begge."],
-            ["Kvifor bør ein undersøkje meir enn emballasjen før ein samanliknar miljøverknaden frå to vassflasker?","Brukstid, opphav til materiale, produksjon, transport, vask, ombruk og slutthandsaming kan alle spele inn."]
+            ["Kva kallar vi ferda til eit produkt frå råstoff, via produksjon og bruk, til ombruk eller avfall?","Livsløp"],
+            ["Kva type design er eit møbel med utskiftbare, uavhengige delar?","Modulbasert design"],
+            ["Kva heiter det å skilje eit produkt i delane sine utan å øydeleggje dei?","Demontering"],
+            ["Kva for ei eigenskap testar de når de opnar og stengjer same pose tusen gonger utan å endre belastninga?","Slitestyrke"],
+            ["Kva kan du setje på ein del som må bytast ofte for at ein skal kunne ta han av, fast lim eller skrufeste?","Skrufeste"],
+            ["Kva analyse kan samanlikne energi og materiale frå råvare til kassering for to flasker?","Livsløpsanalyse"]
           ]
         },
         {
           "name": "Snodige fakta",
           "questions": [
-            ["Kva kan ein stol som berre er ei teikning, aldri gjere for den som ser han?","Bere vekta til den som vil setje seg."],
-            ["Kva heiter kunst der ein set saman gjenstandar til eit tredimensjonalt verk?","Til dømes assemblage eller objektkunst."],
-            ["Kvifor ser ei vassrett line ut som om ho stig når eit mønster av korte liner kryssar henne på skrå?","Retningssignala frå mønsteret kan villeie hjernen. Det er eit optisk bedrag."],
-            ["Kva kan ei kake i eit langvarig kunstverk gjere som ein modell av keramikk ikkje gjer på same måten?","Ho kan turke, verke fersk, lukte eller rotne, slik at tid og nedbryting blir synleg."],
-            ["Korleis kan bladrestar frå ein lauvhaug gje ein komisk eller uventa effekt som veggbilete?","Blada kan plasserast som til dømes ansikt, hår eller klede, slik at dei gjev ein ny kontrast mellom motiv og materiale."],
-            ["Ein plakat brukar ein bitteliten tittel og ei overdrive stor teikning av ei mus. Kva forventing eller regel bryt han, og kva kan det gjere med bodskapen?","Han byter kva som verkar viktig og stor. Det kan få musa eller humoren til å dominere over sjølve teksten."]
+            ["Kva heiter kunstforma der fleire ferdige ting blir sette saman til eit romleg verk?","Assemblage"],
+            ["Kva kan ein kalle kunst som blir laga ute og brukar materiale som sand, stein og lauv der dei finst?","Land art"],
+            ["Kva heiter ein måla illusjon der ei flat veggflate ser ut til å ha ei opning?","Trompe-l’œil"],
+            ["To like lange liner ser ulike ut fordi det er teikna vinklar som piler på endane. Kva heiter fenomenet?","Optisk bedrag"],
+            ["Kva heiter ei overdriven teikning av ein person som framhevar kjenneteikn som ei svært stor nase?","Karikatur"],
+            ["Kva heiter eit avtrykk frå ei plate der graveringa held på fargen nede i spora i staden for på toppen?","Djuptrykk"]
           ]
         }
       ],
       "final": {
         "category": "Snodige fakta",
-        "question": "Korleis kan du samanlikne to mobilhaldarar slik at du kan grunngje eit designval med både funksjon og ressursbruk?",
-        "answer": "Test stabilitet og støtte for fleire mobilar, vurder materiale, mogleg reparasjon og kor mykje som trengst, og vis kva du prioriterer."
+        "question": "To materiale veg høvesvis 1,2 kg og 1,5 kg per møbel. Kor mykje materiale i kg sparer ein ved å lage ti møblar av den lettaste varianten?",
+        "answer": "3 kg"
       }
     },
     {
@@ -308,41 +308,41 @@
         {
           "name": "Musikalsk analyse",
           "questions": [
-            ["Kva er melodisk kontur?","Korleis melodien rører seg opp, ned eller blir på same tone."],
-            ["Kva meiner vi med tekstur i musikk?","Korleis lydlag og stemmer ligg saman i musikken."],
-            ["Kva kan ein gjennomgåande bassfigur gjere for forma i eit stykke?","Skape samanheng mellom ulike delar og halde attkjenning."],
-            ["Kva er ein vanleg skilnad på solo og tutti?","Éin utøvar eller ei stemme er i fokus i solo. Alle eller heile gruppa spelar i tutti."],
-            ["Kva kan ein samanlikne mellom to innspelingar for å vurdere korleis ein protestbodskap kjem fram?","Tekst, historie, stemmebruk, musikalsk intensitet, arrangement og kven musikken vender seg til."],
-            ["Korleis kan ein gjenteken harmonisk sirkel få to delar til å verke ulike sjølv om akkordane er dei same?","Rytme, instrumentering, melodiføring, register og dynamikk kan skape nye lag over den same sirkelen."]
+            ["Kva heiter forma på melodien når du ser på om tonane går opp, ned eller ligg stille?","Melodisk kontur"],
+            ["Kva omgrep viser korleis fleire samtidige stemmer og lag er ordna i musikken?","Tekstur"],
+            ["Kva er namnet på eit samspel der éin melodi har størst plass, og dei andre stemmene støttar med akkordar?","Homofoni"],
+            ["Kva heiter det i eit partitur når heile orkesteret skal spele saman, «solo» eller «tutti»?","Tutti"],
+            ["Kva heiter ein kort frase som kjem att i eit verk for å vise til ein bestemd person eller idé?","Leitmotiv"],
+            ["Kva kallar vi gjentakinga av dei same akkordane i ei fast rekkjefølgje som kan berast av ulike melodiar?","Akkordprogresjon"]
           ]
         },
         {
           "name": "Framføring og produksjon",
           "questions": [
-            ["Kva er samplingsprosessen i musikkproduksjon?","Å bruke eit utvalt lydopptak som materiale i eit nytt spor."],
-            ["Kva kan skje om to lydspor med mykje energi i same frekvensområde ligg oppå kvarandre?","Dei kan maskere kvarandre, så detaljar blir vanskelegare å høyre."],
-            ["Kvifor kan ein leggje same musikkopptak med litt ulike lydnivå og lytte før ein bestemmer dynamikken?","For å høyre om variasjon og balanse tener uttrykket og gjer viktige delar tydelege."],
-            ["Kva gjer ein ved panorering av eit spor?","Justerer kor langt til venstre eller høgre lyden verkar å liggje."],
-            ["Kva kan ein musikalsk prøve utan trommer avdekkje før gruppa legg trommene tilbake?","Om dei andre held pulsen sjølve, og om rytmiske problem blir skjulte av trommene."],
-            ["Grunngje kvifor lånt musikk i ein offentleg elevfilm krev vurdering sjølv om filmen er gratis.","Allmenn publisering kan krevje lisens eller løyve til komposisjon og opptak, og opphav skal eventuelt krediterast."]
+            ["Kva heiter det å ta ein del av eit lydopptak og bruke han i eit nytt spor?","Sampling"],
+            ["Kva skjer når ein djup basstone gjer ein annan lyd i same frekvensområde vanskeleg å høyre?","Maskering"],
+            ["Kva norsk musikkfagord står for det å justere kor langt til venstre eller høgre eit spor skal høyrast?","Panorering"],
+            ["Kva effekt senkar skilnaden mellom sterke og svake parti ved å dempe nivå over terskelen?","Kompressor"],
+            ["Kva måleining forkorta dB blir brukt for å oppgje lydnivå?","Desibel"],
+            ["Kva anna form for vern enn verkets opphavsrett gjeld sjølve innspelinga når ein brukar eit lydopptak, masterrettar eller forbrukarrettar?","Masterrettar"]
           ]
         },
         {
           "name": "Snodige fakta",
           "questions": [
-            ["Kva slags «instrument» er eit røystopptak som blir endra til ei robotliknande røyst med effekt?","Det er ei prosessert menneskestemme."],
-            ["Korleis kan ei mjuk pute gjere ei tromme lågare utan å flytte éin einaste note?","Ho kan dempe vibrasjonen, så det kjem mindre lyd og kortare etterklang."],
-            ["Kva illusjon kan eit lydspor frå bak deg skape om biletet syner nokon som snur seg?","At lydkjelda kan vere bak deg eller bak figuren, sjølv om lyden kjem frå høgtalaren."],
-            ["Kvifor kan det same opptaket av eit trinn høyrest ut som ein kjempe når det blir spela saktare?","Den lengre lyden og lågare tonehøgda kan skape inntrykk av noko større og tyngre."],
-            ["Ei kort tuba-frase set i gang kvar gong ein veldig liten karakter kjem inn. Kva kan denne gjentakinga bli kalla og korleis skaper ho humor?","Eit attkjenneleg leitmotiv. Djup stor klang står i kontrast til den vesle figuren."],
-            ["Korleis kan ein svært alvorleg songtekst verke annleis med sprettande akkompagnement?","Avstanden mellom tekst og lyd kan skape ironi, uro eller galgenhumor, avhengig av framføringa."]
+            ["Kva heiter bølgja til ein rein tone som berre har éin frekvens og ei glatt, jamn kurve?","Sinusbølgje"],
+            ["Kva musikalsk teikn tyder at ein tone skal haldast lenger enn han vanlegvis ville vart?","Fermate"],
+            ["Kva heiter det om ein lagar eit lydspor for ein film i etterkant ved å ta opp til dømes fotsteg?","Foley"],
+            ["Kva skjer med tonehøgda til eit skritt som skal likne ein kjempe og blir spelt av ved halv fart?","Ho søkk"],
+            ["Ein dyster tekst blir framført som ei lystig fanfare med vilje. Kva heiter det musikalske grepet der dei to uttrykka står mot kvarandre?","Kontrast"],
+            ["Kva dynamikkteikn tyder at musikken gradvis blir svakare, crescendo eller diminuendo?","Diminuendo"]
           ]
         }
       ],
       "final": {
         "category": "Snodige fakta",
-        "question": "Du vil vise at ei tolking av ein song har meir spenning enn ein annan. Kva konkrete døme bør du bruke?",
-        "answer": "Peik på stader i innspelingane og samanlikn til dømes dynamikk, pausar, tempo, rytme og klang."
+        "question": "Ein miks har 16 spor. Eit kvart av spora er trommer, og to av resten er vokal. Kor mange spor er korkje trommer eller vokal?",
+        "answer": "Ti spor"
       }
     },
     {
@@ -351,41 +351,41 @@
         {
           "name": "Planlegg og vurder rørsle",
           "questions": [
-            ["Kva skil ei treningsøkt med korte innsatsperiodar og pausar frå jamt arbeid utan slike avbrot?","Den fyrste er intervallprega. Den andre er samanhengande arbeid."],
-            ["Kva seier ein logg over sjølvopplevd innsats deg?","Kor krevjande aktiviteten kjendest for deg på ulike tidspunkt."],
-            ["Kva er ei teknisk justering i eit kast?","Ei endring i korleis du utfører rørsla, som tidspunktet du slepper ballen."],
-            ["Kvifor bør ein fastsetje eit felles underlag og same utstyr når ein samanliknar tekniske forsøk?","Då er det lettare å knyte skilnader til teknikken og ikkje rammene for forsøket."],
-            ["Ein spelar vil øve mottak medan han spring. Kvifor kan ein gradvis gå frå stilleståande mottak til mottak i fart?","Ein byggjer tryggleik i den enkle rørsla og legg til fart og timing når mottaket er meir sikkert."],
-            ["Korleis kan ein vurdere om fire veker med eigen aktivitet har hjelpt med eit avtalt mål, sjølv med ein dårleg siste dag?","Bruk fleire samanliknbare forsøk, logg øving og dagsform, og vurder teknikk i tillegg til eitt resultat."]
+            ["Kva kallar vi ei økt med gjentekne korte drag og tydelege pausar?","Intervalløkt"],
+            ["Kva kallar vi samla påverknad frå kor hardt, lenge og ofte ein trenar?","Belastning"],
+            ["Kva er namnet på den gradvise utviklinga over fleire økter der ein aukar éin del om gongen?","Progresjon"],
+            ["Kva er mage- og ryggmusklane som bidreg til å stabilisere overkroppen, ofte kalla?","Kjernemuskulatur"],
+            ["Kva for ein storleiksvariabel held du fast når to elevar kastar frå same strek ved kvart forsøk?","Avstanden"],
+            ["Ein løpar brukar 16 minutt på 3,2 km. Kva er gjennomsnittsfarten i km/t?","12 km/t"]
           ]
         },
         {
           "name": "Ferdsel og deltaking",
           "questions": [
-            ["Kva tyder risikovurdering før tur?","Å peike ut kva som kan gå gale og velje tiltak, rute og utstyr som reduserer faren."],
-            ["Kva er eit døme på ei tryggleikssjekk som er nyttig ved bruk av sykkel på tur?","Sjekk at bremser, dekk og hjelmar fungerer og er tilpassa."],
-            ["Kva generell verknad kan vindavkjøling ha i ei pause ute?","Du kan miste varme raskare, særleg om du er sveitt, våt eller utan ly."],
-            ["Korleis kan velvilje og rettvise sjå ulike ut i ein konkurranse der nokre har mykje meir øving enn andre?","Velvilje handlar om åtferd. Rettvise kan krevje reglar, øvingsval eller rollefordeling som gjev reelle høve til deltaking."],
-            ["Kva bør ei gruppe vurdere om den planlagde rasteplassen ligg ved ein bratt kant, men ein alternativ ligg i ly og har plass for alle?","Vel ein trygg rasteplass med god avstand til kanten, ly, plass og moglegheit for gruppa å halde saman."],
-            ["Korleis kan du oppdage om eit lagtiltak mot utestenging verka berre medan læraren såg på?","Observer deltaking i fleire situasjonar og høyr utøvane sine røynsler, utan å leggje ansvaret på dei som vart utestengde."]
+            ["Kva kallar vi gjennomgangen av kva som kan gå gale og kva tiltak de treng på ein tur?","Risikovurdering"],
+            ["Kva kan ein gjere med farten når ein syklar mot ei blind kurve før møtande blir synlege?","Senke han"],
+            ["Kva heiter retten til å ferdast varsamt i utmark?","Allemannsretten"],
+            ["Kva term viser til lågare opplevd temperatur og større varmetap når det bles?","Vindavkjøling"],
+            ["På kartet er stigninga 100 m over 500 m målt vassrett. Kva er gjennomsnittleg stigning i prosent?","20 %"],
+            ["Ein ny regel gjev fleire pasningar til tidlegare lite involverte elevar. Kva fellesskapsmål støttar dette?","Inkludering"]
           ]
         },
         {
           "name": "Snodige fakta",
           "questions": [
-            ["Kvifor kan padling sjå ut som om vatnet går bakover medan båten går fram?","Padleåra skyv vatnet bakover. Vatnet verkar tilbake på åra og båten."],
-            ["Kva kan ein stokk over skuldrene vise om korleis overkroppen vrir seg i ei rørsleoppgåve?","Han gjer retninga til skuldrene lettare å sjå."],
-            ["Kva kan ein kvikk skøyteløpar og ein lyktestolpe ha felles dersom begge treng å stå støtt?","Eit stødig grunnlag og god balanse mellom kraft og støttepunkt."],
-            ["Kvifor går ein tennisball lett fort i eit slag sjølv når racketen veg mykje mindre enn spelaren?","Rørsla overfører energi og fart til ein lett ball over kort tid."],
-            ["Korleis kan synkron gåing gjere ein gruppe tilsynelatande mykje meir samkøyrd enn når alle går tilfeldig?","Jamne like steg i same rytme gjev eit samla visuelt inntrykk, sjølv om kvar person går sine eigne steg."],
-            ["Kva gjer ein sakte baklengs stafett krevjande og kva regel kan hindre samanstøyt?","Synsfelt og balanse blir annleis, så bruk eigne tomme baner og gå kontrollert med tydeleg stoppsignal."]
+            ["Kva slags åre har blad i begge endar og blir brukt i kajakk?","Kajakkåre"],
+            ["Kva blir eit balansepunkt i ein kropp kalla når tyngda er tenkt samla i det punktet?","Tyngdepunkt"],
+            ["I kva idrett jagar ein etter ein flygande disk og får poeng ved mottak i ei målsone?","Ultimate"],
+            ["Kva består skøyteblad som toler harde skjeringar i is av, oftast?","Stål"],
+            ["Kvifor dreg ein kunstløpar armane inn i piruetten, kva aukar om dreiemomentet utanfrå er lite?","Rotasjonsfarten"],
+            ["To roarar går gjennom vatnet med heilt lik fart. Den eine tek færre åretak. Kva mål per åretak må i snitt vere større?","Avstand"]
           ]
         }
       ],
       "final": {
-        "category": "Snodige fakta",
-        "question": "Vel to teikn på at ei ny øving fungerer i eit lag og forklar korleis de kan vurdere dei.",
-        "answer": "Til dømes gode pasningsval og deltaking frå fleire. Tel pasningar til ulike spelarar og spør korleis rollene kjennest."
+        "category": "Treningsdata",
+        "question": "Framgangen i eit kastforsøk går frå 12 av 20 treff til 16 av 20. Kor mange prosentpoeng har treffprosenten gått opp?",
+        "answer": "20 prosentpoeng"
       }
     },
     {
@@ -394,41 +394,41 @@
         {
           "name": "Planlegg måltid og vurder påstandar",
           "questions": [
-            ["Kva for einingar står ofte ved energiinnhaldet på ei matpakning?","Kilojoule og kilokaloriar, kJ og kcal."],
-            ["Kva tyder «porsjonsstorleik» i ei utrekning av næringsinnhald?","Vekta eller mengda i den eine serveringa ein reknar på."],
-            ["Kva er skilnaden på kva folk likar å ete og kva ein kan måle i mat?","Preferansar er personlege. Mengd og innhald kan ein undersøkje med eigna målingar."],
-            ["De dobla retten, men hadde same form. Kvifor blir ikkje same steikjetid automatisk rett?","Maten kan liggje i tjukkare lag og varmen treng lengre tid inn. Metode og form påverkar tida."],
-            ["Ein annonse seier «Denne eine råvara gjer alle sunnare». Kva bør du undersøkje før du trur på det?","Kjelda, kva som faktisk er undersøkt, kven det gjeld og resten av kosthaldet og vanane."],
-            ["Kvifor er det nyttig å skilje tilsett sukker frå sukkerartar som finst naturleg i råvara når du argumenterer ut frå ei pakning?","Næringstabellen viser vanlegvis totale sukkerartar. Ingredienslista kan vise om nokre sukkerkjelder er tilsette."]
+            ["Kva eining blir forkorta kcal på ei næringstabell?","Kilokalori"],
+            ["Kva felles referansemengd nyttar næringstabellen når ho viser innhald for faste matvarer uavhengig av porsjonsstorleiken?","100 g"],
+            ["Kva del av etiketten viser om sukker er tilsett som ei eiga råvare i maten?","Ingredienslista"],
+            ["Ein prøve målar 7,5 g sukker per 100 g. Kva er massen sukker i 240 g mat?","18 g"],
+            ["Kva kallar vi ei oppskrift på mat som er tilpassa eit visst tal gjester og reknar om råvarene til eit anna tal?","Oppskalering"],
+            ["Kva heiter prosessen der ein samanliknar påstandar frå fleire avsendarar og sjekkar grunnlaget bak dei?","Kjeldekritikk"]
           ]
         },
         {
           "name": "Råvarer, kultur og berekraft",
           "questions": [
-            ["Kva meiner vi med sesong for ei råvare?","Tida på året ho vanlegvis er moden og kan haustast i eit bestemt område."],
-            ["Kva er ein førebuingskostnad eit matsvinnstiltak kan ha?","Til dømes meir tid til planlegging eller utstyr til oppbevaring."],
-            ["Kva kan lang tradisjon med salting, tørking eller syrning seie om mat og lokalsamfunn?","Metodane har gjort det mogleg å lagre råvarer og forme særprega retter over tid."],
-            ["Kvifor kan fisk og grønsaker ha ulikt miljøavtrykk sjølv når dei blir frakta like langt?","Måte å produsere, fange eller dyrke på, lagring, utbyte og bruk av ressursar kan vere ulike."],
-            ["Kva omsyn kan dra i kvar si retning når de planlegg mat med lita tidsramme og lite svinn?","Enkelt eller ferdig oppmålt kan spare tid, medan fleksible råvarer og god porsjonering kan spare mat. Valet kjem an på behov og oppbevaring."],
-            ["Grunngje korleis du kan halde både smaken og ein del av tradisjonen i live dersom ei vanleg råvare ikkje finst.","Kartlegg kva råvara gjer i retten, vel noko med liknande eigenskap og fortel kva som er endra og kvifor."]
+            ["Kva heiter tida på året ei råvare vanlegvis er klar til å haustast i eit område?","Sesong"],
+            ["Kva ord har handlinga der ein lèt luft fjerne mykje av vatnet frå ei matvare for å bevare henne?","Tørking"],
+            ["Kva konserveringsmetode er brukt i surkål utan at ein tilset ferdig eddik og der mjølkesyre blir danna?","Fermentering"],
+            ["Kva omgrep måler klimagassutslepp i CO₂-ekvivalentar frå ei vare sin produksjon og bruk?","Klimafotavtrykk"],
+            ["Kva måler ein dersom ein vil vite kor stor del av eit måltid som går tapt, massen av etande restar eller talet på stolar?","Etande restar"],
+            ["I butikk A kostar mjølet 22 kr for 1 kg, i B 43 kr for 2 kg. Kva er lågaste kilopris?","21,50 kr"]
           ]
         },
         {
           "name": "Snodige fakta",
           "questions": [
-            ["Kva gjer bakepulver nyttig i raske bakverk?","Når det blir væta og/eller varma, kan det frigjere gassbobler som gjer bakverket luftig."],
-            ["Kva får lufta i ein fersk marengs til å bli hengande i skum?","Vispa protein i eggekviten kan stabilisere boblene, og sukker kan støtte skummet."],
-            ["Kva betyr det når eit eple er «mjølete», sjølv om du ikkje har dryssa kveitemjøl på det?","Det har ein tørr, mjuk eller kornete konsistens."],
-            ["Kvifor kan lukt av steikt løk verke søtare etter ei stund utan at du har dryssa sukker i panna?","Varmen mjuknar lauken og dannar eller frigjer fleire aromastoff. Naturlege sukkerartar og bruningsreaksjonar kan bidra."],
-            ["Kva slags forsøk kan vise om eit lag olje og vatn faktisk har blanda seg varig dersom du let blandinga stå litt?","Rist like glas med og utan emulgator, lat dei stå i same tid og samanlikn kor fort dei deler seg."],
-            ["Kva gjer ei «tørr suppe» i ein pose til eit morosamt uttrykk, og korleis blir ho til suppe?","Suppe er vanlegvis flytande. Pulveret har lite vatn og må blandast og lagast til etter oppskrifta."]
+            ["Kva får bakepulver til å heve ei røre når det reagerer, små bobler av ein gass eller lys?","Gassbobler"],
+            ["Kva for ein halvpart av egget er det vanleg å vispe til marengs?","Eggekviten"],
+            ["Kva konsistens har eit eple som er vorte kornete og tørt i fruktkjøtet, mjølete eller saftig?","Mjølete"],
+            ["Kva heiter bruningsreaksjonen mellom sukker og protein når ei brødskorpe blir sterkt varma?","Maillardreaksjonen"],
+            ["Kva type stoff hindrar at dei små oljedropane lett samlar seg til eit eige lag i ein dressing?","Emulgator"],
+            ["Kva må pulver til posesuppe få tilført for å bli flytande, luft eller vatn?","Vatn"]
           ]
         }
       ],
       "final": {
         "category": "Snodige fakta",
-        "question": "Du har eit enkelt måltid med råvarer som kan brukast i fleire rettar. Korleis kan du grunngje menyen med to ulike mål, og kva kan du måle?",
-        "answer": "Til dømes lite svinn og passe pris. Planlegg bruk av restar, mål etande restar og rekn kostnad per porsjon."
+        "question": "De lagar 12 porsjonar grønsakssuppe for 96 kr. De legg til brød som kostar 24 kr. Kva er ny pris per porsjon?",
+        "answer": "10 kr"
       }
     },
     {
@@ -437,41 +437,41 @@
         {
           "name": "Utdanningsvegar og kjelder",
           "questions": [
-            ["Kva tyder vidaregåande opplæring?","Opplæringa som kjem etter grunnskulen."],
-            ["Kva er eit utdanningsprogram?","Eit organisert løp med eit fagleg innhald i vidaregåande opplæring."],
-            ["Kva heiter dei to hovudtypane utdanningsprogram i vidaregåande?","Studieførebuande og yrkesfaglege."],
-            ["Kva tyder det å vere lærling i vanleg yrkesopplæring?","Å få opplæring i ei godkjend verksemd og arbeide mot fag- eller sveinebrev etter lærefaget."],
-            ["Kva bør du samanlikne når to utdanningsløp verkar like ut frå namna?","Faga, arbeidsmåtar, lokale tilbod, kva dei fører fram til og vegar vidare."],
-            ["Kvifor bør du sjå på dato og stad når du finn informasjon om kva program ein skule har?","Tilbod og søknadsinformasjon kan endre seg. Sjekk kjelder som gjeld rett år og fylke."]
+            ["Kva utdanningsnivå kjem rett etter grunnskulen?","Vidaregåande opplæring"],
+            ["Kva heiter det samla valet av eit fagleg løp i vidaregåande, som til dømes «Elektro og datateknologi»?","Utdanningsprogram"],
+            ["Kva heiter hovudtypen utdanningsprogram som er retta direkte mot yrkeskompetanse?","Yrkesfag"],
+            ["Kva blir ein person med opplæring i ei lærebedrift, fram mot ein fag- eller sveineprøve, vanlegvis kalla?","Lærling"],
+            ["Kva heiter dokumentet som viser oppnådd kompetanse etter bestått fagprøve i eit lærefag?","Fagbrev"],
+            ["Utdanningsbrosjyra er fem år gammal. Kva opplysning må stemme med året du skal byrje?","Skuleåret"]
           ]
         },
         {
           "name": "Val, forventingar og arbeidsliv",
           "questions": [
-            ["Kva er ein arbeidsplasskultur?","Vanar og verdiar for korleis folk samarbeider, lærer og oppfører seg på jobben."],
-            ["Kva kan ei tilbakemelding frå ein som observerte deg på hospitering, fortelje?","Kva dei såg du gjorde godt, og noko du kan prøve annleis eller undersøkje meir."],
-            ["Kva kan telje som overførbar kompetanse frå ei frivillig oppgåve?","Til dømes samarbeid, tidsplanlegging, kommunikasjon eller evne til å løyse problem."],
-            ["Korleis kan familie, vener og media verke inn på kva yrke ein elev kjenner til?","Dei kan utvide eller avgrense bileta av kva ein kan bli, særleg når dei viser nokre få yrke oftare enn andre."],
-            ["Kva for ein fordel og ein veikskap har eit intervju med éin fagarbeidar som kjelde til eit heilt yrke?","Det gjev konkrete røynsler, men representerer berre éin person og arbeidsplass."],
-            ["Ein elev er i tvil mellom to program som båe kan passe. Korleis kan eleven prøve ut vala utan å gjere eitt uoppretteleg val no?","Snakk med rådgjevar, les planane, hospiter eller besøk og samanlikn eigne røynsler med det ein vil lære."]
+            ["Kva kallar vi vanane og dei felles uskrivne reglane på ein arbeidsplass?","Arbeidskultur"],
+            ["Kva kallar ein eit råd frå nokon som såg korleis du løyste ei oppgåve, med ein konkret ting du gjorde bra eller kan endre?","Tilbakemelding"],
+            ["Ein elev brukte planlegging frå fotballaget til å organisere eit anna prosjekt. Kva kallar vi ferdigheiter som kan brukast på tvers av oppgåver?","Overførbare ferdigheiter"],
+            ["Kva kallar vi det å vere til stades ein kort periode på ein skule eller arbeidsplass for å sjå korleis arbeidet går føre seg?","Hospitering"],
+            ["Ein podkast siterer ein som har høyrt om ein jobb frå ei syster. Kva slags kjelde er den som berre har høyrt om jobben?","Andrehandskjelde"],
+            ["Kva bør ein bruke for å sjå skilnader mellom to utdanningar på forhand, dei gjeldande læreplanane eller fem år gamle brosjyrar?","Gjeldande læreplanar"]
           ]
         },
         {
           "name": "Snodige fakta",
           "questions": [
-            ["Kva slags fagperson kan styre lys som endrar stemninga i ein konsert utan å spele ein tone?","Til dømes ein lysteknikar."],
-            ["Kva har ein idrettsdommar og ein kvalitetskontrollør til felles?","Dei vurderer om noko møter fastsette reglar eller kriterium."],
-            ["Kven kan bruke både bakevarer og matematikk i same arbeidsdag?","Til dømes ein bakar som reknar om porsjonar, vekt og svinn."],
-            ["Kvifor kan ein speldesignar ha nytte av å sjå ein som aldri har spela spelet, prøve det?","Ein ny spelar kan vise kva som er uklårt utan forkunnskap og kvar ein bør endre spelet."],
-            ["Eit museum vil stille ut ein 150 år gammal sko. Kva kan minst to ulike yrkesgrupper gjere for å få det til?","Til dømes konservator ta vare på skoen og formidlar lage tekst. Utstillingsdesignar kan planleggje lys og plassering."],
-            ["Ein arbeidsplass annonserer etter nokon som skal få ein gigantisk oppblåsen dinosaur til å stå trygt. Kvifor kan fleire ulike utdanningsvegar vere relevante?","Oppgåva kan krevje kunnskap om materiale og feste, vêr, design, planlegging og trygg publikumshandtering."]
+            ["Kva fagperson styrer lysfargar og lysstyrke på konsertar og i teater?","Lysteknikar"],
+            ["Kva slags arbeid undersøker om kvar produsert del har rett mål og verkar slik han skal?","Kvalitetskontroll"],
+            ["Kva kallar ein det å justere råvaremengda når eit bakeri skal lage tre gonger så mange bollar?","Oppskalering"],
+            ["Kva kallar ein ei prøve der ein heilt ny brukar viser kvar reglane i eit spel blir uklåre?","Brukartest"],
+            ["Kva yrke kan behandle ein gammal sko med forsiktige metodar slik at han toler å bli stilt ut?","Konservator"],
+            ["Ein lydkunstnar går i grus i eit studio for å lage fotsteg til ein film. Kva heiter det synkrone lydeffektarbeidet?","Foley"]
           ]
         }
       ],
       "final": {
         "category": "Snodige fakta",
-        "question": "Lag ein enkel plan for å samanlikne to aktuelle program. Kva for tre typar opplysningar bør vere med?",
-        "answer": "Til dømes innhald og arbeidsmåtar, formell kompetanse og vegar vidare, og kva skule eller praksisstader faktisk tilbyr."
+        "question": "Du samanliknar to utdanningsprogram. Kva heiter dei faglege målsetjingane som viser kva elevane skal kunne etter opplæringa?",
+        "answer": "Kompetansemål"
       }
     }
   ]

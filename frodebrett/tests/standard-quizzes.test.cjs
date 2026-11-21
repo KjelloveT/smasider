@@ -13,8 +13,13 @@ function nonEmptyText(text, field) {
   assert.ok(text.trim(), field);
 }
 
+function shortAnswer(answer, field) {
+  nonEmptyText(answer, field);
+  assert.ok(answer.trim().split(/\s+/u).length <= 2, field + ': ' + answer);
+}
+
 for (let grade = 1; grade <= 10; grade++) {
-  test(`LK20-frøder for ${grade}. trinn har full fagdekning og alle poengnivå`, () => {
+  test(`LK20-frøder for ${grade}. trinn har alle fag og poengnivå, med korte fasitsvar`, () => {
     const pack = JSON.parse(readFileSync(path.join(__dirname, '../json/standard', grade + '.json'), 'utf8'));
     const expected = grade < 8 ? subjects : [...subjects, 'utdanningsval'];
     assert.equal(pack.grade, grade);
@@ -34,14 +39,14 @@ for (let grade = 1; grade <= 10; grade++) {
           assert.equal(pair.length, 2);
           const [question, answer] = pair;
           nonEmptyText(question, category.name + ' question');
-          nonEmptyText(answer, category.name + ' answer');
+          shortAnswer(answer, question);
           prompts.add(question.trim());
         }
       }
 
       nonEmptyText(quiz.final.category, quiz.subject + ' final category');
       nonEmptyText(quiz.final.question, quiz.subject + ' final question');
-      nonEmptyText(quiz.final.answer, quiz.subject + ' final answer');
+      shortAnswer(quiz.final.answer, quiz.final.question);
       prompts.add(quiz.final.question.trim());
       assert.equal(prompts.size, 19, quiz.subject + ' unique prompts');
     }
