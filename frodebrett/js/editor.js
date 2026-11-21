@@ -1,278 +1,321 @@
-/* Frødebrett — editor: kategori-faner, validering, førehandsvising, lagring. */
+/* Frødebrett — kategoriar, spørsmålsfelt og lagring. */
 (function (root) {
   'use strict';
 
   const FB = root.FB;
   const S = FB.state;
   const Store = root.FrodebrettStorage;
-
   const Editor = {};
+  const finalFields = {
+    category: 'editor-final-category', hint: 'editor-final-clue',
+    question: 'editor-final-question', answer: 'editor-final-answer'
+  };
+  let baseline;
+  let editingQuiz;
 
   Editor.bind = function () {
-    S.editorCategories = [];
-    S.activeTab = 0;
-
-    FB.el('btn-add-category').addEventListener('click', () => Editor.addCategory());
-    FB.el('btn-remove-category').addEventListener('click', () => Editor.removeCategory());
-    FB.el('btn-save-quiz').addEventListener('click', () => Editor.saveQuiz());
-    FB.el('btn-preview').addEventListener('click', () => Editor.previewQuiz());
-    FB.el('btn-clear').addEventListener('click', () => Editor.clear());
-
-    FB.el('final-round-toggle').addEventListener('change', (e) => {
-      FB.el('final-round-fields').classList.toggle('hidden', !e.target.checked);
+    FB.el('btn-add-category').addEventListener('click', addCategory);
+    FB.el('btn-save-quiz').addEventListener('click', Editor.saveQuiz);
+    FB.el('btn-editor-start').addEventListener('click', () => {
+      const quiz = prepareQuiz();
+      if (quiz) FB.App.playFromEditor(quiz);
     });
+    FB.Export.bindEditor(prepareQuiz);
+    FB.el('btn-preview').addEventListener('click', () => Editor.previewQuiz());
+    FB.el('btn-final-tab').addEventListener('click', () => selectTab('final'));
+    FB.el('final-round-toggle').addEventListener('change', showFinalFields);
+    FB.el('editor-screen').addEventListener('input', () => FB.hide('editor-errors'));
 
     FB.el('btn-close-preview').addEventListener('click', () => FB.closeOverlay('preview-modal'));
+    Vy.bindOverlayClose(FB.el('preview-modal'));
     FB.el('btn-preview-reveal').addEventListener('click', () => FB.show('preview-answer-text'));
     FB.el('btn-preview-back').addEventListener('click', () => {
       FB.hide('preview-question');
       FB.show('preview-board');
     });
-
-    Editor.setFinalImage({});
-    Editor.initCategories(2);
   };
 
-  Editor.setFinalImage = function (question) {
-    S.editorFinalImage = { image: question.image, imageAlt: question.imageAlt };
-    FB.el('editor-final-image').replaceChildren(FB.Images.control(S.editorFinalImage, 'finalspørsmålet'));
-  };
-
-  Editor.emptyCategory = function () {
-    return {
-      name: '',
-      questions: FB.POINTS.map(p => ({ points: p, question: '', answer: '' }))
-    };
-  };
-
-  Editor.initCategories = function (count) {
-    S.editorCategories = [];
-    for (let i = 0; i < count; i++) S.editorCategories.push(Editor.emptyCategory());
-    S.activeTab = 0;
-    Editor.renderTabs();
-    Editor.renderActiveTab();
-  };
-
-  Editor.renderTabs = function () {
-    const container = FB.el('category-tabs');
-    container.innerHTML = '';
-    S.editorCategories.forEach((cat, i) => {
-      const tab = document.createElement('button');
-      tab.type = 'button';
-      tab.className = 'box-tab' + (i === S.activeTab ? ' active' : '');
-      tab.textContent = cat.name || ('Kategori ' + (i + 1));
-      tab.addEventListener('click', () => {
-        Editor.saveActiveTab();
-        S.activeTab = i;
-        Editor.renderTabs();
-        Editor.renderActiveTab();
-      });
-      container.appendChild(tab);
-    });
-    FB.el('btn-remove-category').disabled = S.editorCategories.length <= 2;
-    FB.el('btn-add-category').disabled = S.editorCategories.length >= 6;
-  };
-
-  Editor.renderActiveTab = function () {
-    const container = FB.el('category-tab-content');
-    container.innerHTML = '';
-    const cat = S.editorCategories[S.activeTab];
-    if (!cat) return;
-
-    const nameGroup = document.createElement('div');
-    nameGroup.className = 'form-group';
-    const nameLabel = document.createElement('label');
-    nameLabel.textContent = 'Kategorinamn';
-    const nameInput = document.createElement('input');
-    nameInput.type = 'text';
-    nameInput.className = 'form-input';
-    nameInput.id = 'editor-cat-name';
-    nameInput.value = cat.name;
-    nameInput.placeholder = 'Skriv kategorinamn…';
-    nameInput.maxLength = 30;
-    nameInput.addEventListener('input', () => {
-      cat.name = nameInput.value.trim();
-      const tabs = document.querySelectorAll('#category-tabs .box-tab');
-      if (tabs[S.activeTab]) tabs[S.activeTab].textContent = cat.name || ('Kategori ' + (S.activeTab + 1));
-    });
-    nameGroup.appendChild(nameLabel);
-    nameGroup.appendChild(nameInput);
-    container.appendChild(nameGroup);
-
-    FB.POINTS.forEach((p, qi) => {
-      const q = cat.questions[qi] || { points: p, question: '', answer: '' };
-      const row = document.createElement('div');
-      row.className = 'question-input';
-      row.dataset.qi = qi;
-
-      const pl = document.createElement('span');
-      pl.className = 'points-label';
-      pl.textContent = p;
-      row.appendChild(pl);
-
-      const qInput = document.createElement('input');
-      qInput.type = 'text';
-      qInput.className = 'form-input question-text';
-      qInput.value = q.question;
-      qInput.placeholder = 'Spørsmål for ' + p + ' poeng';
-      row.appendChild(qInput);
-
-      const aInput = document.createElement('input');
-      aInput.type = 'text';
-      aInput.className = 'form-input answer-text';
-      aInput.value = q.answer;
-      aInput.placeholder = 'Svar';
-      row.appendChild(aInput);
-
-      row.appendChild(FB.Images.control(q, p + ' poeng'));
-      container.appendChild(row);
-    });
-  };
-
-  Editor.saveActiveTab = function () {
-    const cat = S.editorCategories[S.activeTab];
-    if (!cat) return;
-    const nameInput = FB.el('editor-cat-name');
-    if (nameInput) cat.name = nameInput.value.trim();
-    document.querySelectorAll('#category-tab-content .question-input').forEach((row, qi) => {
-      if (cat.questions[qi]) {
-        cat.questions[qi].question = row.querySelector('.question-text').value.trim();
-        cat.questions[qi].answer = row.querySelector('.answer-text').value.trim();
-      }
-    });
-  };
-
-  Editor.addCategory = function () {
-    if (S.editorCategories.length >= 6) return;
-    Editor.saveActiveTab();
-    S.editorCategories.push(Editor.emptyCategory());
-    S.activeTab = S.editorCategories.length - 1;
-    Editor.renderTabs();
-    Editor.renderActiveTab();
-  };
-
-  Editor.removeCategory = function () {
-    if (S.editorCategories.length <= 2) return;
-    S.editorCategories.splice(S.activeTab, 1);
-    if (S.activeTab >= S.editorCategories.length) S.activeTab = S.editorCategories.length - 1;
-    Editor.renderTabs();
-    Editor.renderActiveTab();
-  };
-
-  // ---- Meldingar ----
-
-  function messageBox(items, cls) {
-    const el = FB.el('editor-errors');
-    el.innerHTML = '';
-    items.forEach(m => {
-      const div = document.createElement('div');
-      div.className = cls;
-      div.textContent = '⚠ ' + m;
-      el.appendChild(div);
-    });
-    el.classList.remove('hidden');
-    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  function emptyQuestion(points) {
+    return { points, question: '', answer: '' };
   }
 
-  Editor.showError = (items) => messageBox(items, 'editor-error-item');
-  Editor.showWarning = (items) => messageBox(items, 'editor-warning-item');
-  Editor.hideMessages = () => FB.hide('editor-errors');
+  function makeCategory(category) {
+    return {
+      name: category?.name || '',
+      questions: FB.POINTS.map(points => ({
+        ...emptyQuestion(points), ...category?.questions.find(q => q.points === points)
+      }))
+    };
+  }
 
-  Editor.validate = function () {
-    Editor.saveActiveTab();
+  function tabName(category, index) {
+    return category.name || 'Kategori ' + (index + 1);
+  }
+
+  function hasQuestion(q) {
+    return Boolean(q.question || FB.Images.valid(q.image));
+  }
+
+  function isComplete(q) {
+    return hasQuestion(q) && Boolean(q.answer);
+  }
+
+  function field(id, text, value, multiline = false) {
+    const label = Vy.el('label', 'vp-field');
+    label.htmlFor = id;
+    const input = Vy.el(multiline ? 'textarea' : 'input', 'vp-input');
+    input.id = id;
+    if (multiline) input.rows = 3;
+    else input.type = 'text';
+    input.value = value;
+    label.append(Vy.el('strong', '', text), input);
+    return { label, input };
+  }
+
+  function selectTab(index) {
+    S.activeTab = index;
+    const isFinal = index === 'final';
+    const tabs = [...FB.el('category-tabs').children];
+    tabs.forEach((tab, i) => {
+      const selected = tab.id === 'btn-final-tab' ? isFinal : i === index;
+      tab.setAttribute('aria-pressed', String(selected));
+    });
+    FB.el('category-name-fields').hidden = isFinal;
+    FB.el('category-tab-content').hidden = isFinal;
+    FB.el('editor-final-section').hidden = !isFinal;
+    if (!isFinal) renderCategory();
+  }
+
+  function updateCategoryTab(tab, category, index) {
+    const started = category.questions.filter(q => hasQuestion(q) || q.answer);
+    const ready = Boolean(category.name && started.length && started.every(isComplete));
+    const label = tabName(category, index);
+    const description = ready ? 'Klar til spel' : 'Ikkje klar til spel';
+    const status = tab.querySelector('.fb-category-status');
+    tab.querySelector('.fb-tab-name').textContent = label;
+    tab.setAttribute('aria-label', label + ' · ' + description);
+    if (status.dataset.ready !== String(ready)) {
+      status.dataset.ready = String(ready);
+      status.title = description;
+      status.innerHTML = ICON(ready ? 'check' : 'circle', 16);
+    }
+  }
+
+  function renderTabs() {
+    const tabs = S.editorCategories.map((category, i) => {
+      const tab = Vy.el('button', 'vp-button vp-button--compact');
+      tab.type = 'button';
+      tab.setAttribute('aria-controls', 'category-name-fields category-tab-content');
+      const mark = Vy.el('span', 'vp-selection-mark');
+      mark.setAttribute('aria-hidden', 'true');
+      mark.innerHTML = ICON('check', 18);
+      const status = Vy.el('span', 'fb-category-status');
+      status.setAttribute('aria-hidden', 'true');
+      tab.append(mark, Vy.el('span', 'fb-tab-name'), status);
+      updateCategoryTab(tab, category, i);
+      tab.addEventListener('click', () => {
+        if (S.activeTab !== i) selectTab(i);
+      });
+      return tab;
+    });
+    FB.el('category-tabs').replaceChildren(...tabs, FB.el('btn-final-tab'));
+    FB.el('btn-add-category').disabled = tabs.length >= 6;
+  }
+
+  function editImage(question, label, onChange = () => {}) {
+    const details = Vy.el('details', 'vp-accordion vp-accordion--compact fb-image-details');
+    const summary = Vy.el('summary');
+    const body = Vy.el('div', 'vp-accordion-body');
+    function update() {
+      summary.textContent = FB.Images.valid(question.image) ? 'Bilete lagt til' : 'Bilete (valfritt)';
+      onChange();
+    }
+    body.append(FB.Images.control(question, label, update));
+    details.append(summary, body);
+    update();
+    return details;
+  }
+
+  function makeQuestionRow(question, onChange) {
+    const details = Vy.el('details', 'vp-accordion fb-question');
+    details.name = 'editor-questions';
+    const summary = Vy.el('summary');
+    const title = Vy.el('span', 'fb-question-summary');
+    const status = Vy.el('span', 'fb-question-status');
+    const prompt = Vy.el('span', 'fb-question-snippet');
+    title.append(Vy.el('strong', 'fb-question-points', question.points + ' poeng'), prompt);
+    summary.append(title, status);
+
+    const body = Vy.el('div', 'vp-accordion-body vp-stack');
+    const fields = Vy.el('div', 'fb-question-fields');
+    const questionField = field('editor-question-' + question.points, 'Spørsmål', question.question, true);
+    const answerField = field('editor-answer-' + question.points, 'Fasitsvar', question.answer, true);
+    function update() {
+      const hasImage = FB.Images.valid(question.image);
+      prompt.textContent = question.question || (hasImage ? 'Biletspørsmål' : '');
+      status.textContent = isComplete(question) ? 'Klar'
+        : hasQuestion(question) ? 'Manglar fasit'
+        : question.answer ? 'Manglar spørsmål' : 'Tom';
+      status.dataset.state = isComplete(question) ? 'ready' : hasQuestion(question) || question.answer ? 'partial' : 'empty';
+      onChange();
+    }
+    questionField.input.addEventListener('input', () => {
+      question.question = questionField.input.value.trim();
+      update();
+    });
+    answerField.input.addEventListener('input', () => {
+      question.answer = answerField.input.value.trim();
+      update();
+    });
+    fields.append(questionField.label, answerField.label);
+    body.append(fields, editImage(question, question.points + ' poeng', update));
+    details.append(summary, body);
+    return details;
+  }
+
+  function renderCategory() {
+    const category = S.editorCategories[S.activeTab];
+    const nameFields = FB.el('category-name-fields');
+    const questions = FB.el('category-tab-content');
+    const syncTab = () => {
+      const index = S.editorCategories.indexOf(category);
+      if (index >= 0) updateCategoryTab(FB.el('category-tabs').children[index], category, index);
+    };
+    const name = field('editor-cat-name', 'Kategorinamn', category.name);
+    name.input.maxLength = 30;
+    name.input.addEventListener('input', () => {
+      category.name = name.input.value.trim();
+      syncTab();
+    });
+    nameFields.replaceChildren(name.label);
+    if (S.editorCategories.length > 2) {
+      const remove = Vy.el('button', 'vp-button vp-button--danger vp-button--quiet vp-button--compact', 'Fjern kategori');
+      remove.type = 'button';
+      remove.addEventListener('click', () => {
+        if ((category.name || category.questions.some(q => hasQuestion(q) || q.answer))
+          && !confirm('Vil du fjerne «' + tabName(category, S.activeTab) + '» og spørsmåla i kategorien?')) return;
+        S.editorCategories.splice(S.activeTab, 1);
+        renderTabs();
+        selectTab(Math.min(S.activeTab, S.editorCategories.length - 1));
+        FB.el('category-tabs').children[S.activeTab].focus();
+      });
+      nameFields.append(remove);
+    }
+    questions.replaceChildren(...category.questions.map(question => makeQuestionRow(question, syncTab)));
+    if (!category.questions.some(q => hasQuestion(q) || q.answer)) questions.firstElementChild.open = true;
+  }
+
+  function addCategory() {
+    if (S.editorCategories.length >= 6) return;
+    S.editorCategories.push(makeCategory());
+    renderTabs();
+    selectTab(S.editorCategories.length - 1);
+    FB.el('editor-cat-name').focus();
+  }
+
+  function showFinalFields() {
+    const enabled = FB.el('final-round-toggle').checked;
+    FB.el('editor-final-state').textContent = enabled ? 'På' : 'Av';
+    FB.el('final-round-fields').classList.toggle('hidden', !enabled);
+  }
+
+  function readFinal() {
+    const final = { ...S.editorFinalImage };
+    Object.entries(finalFields).forEach(([key, id]) => { final[key] = FB.el(id).value.trim(); });
+    return final;
+  }
+
+  function snapshot() {
+    return JSON.stringify([
+      FB.el('quiz-title').value.trim(), S.editorCategories, FB.el('final-round-toggle').checked, readFinal()
+    ]);
+  }
+
+  Editor.canLeave = function () {
+    return (!FB.Images.busy() && snapshot() === baseline)
+      || confirm('Vil du gå attende utan å lagre endringane?');
+  };
+
+  function showMessage(messages, kind) {
+    const box = FB.el('editor-errors');
+    box.className = 'vp-notice vp-notice--' + kind;
+    const marker = Vy.el('span', 'vp-notice-icon');
+    marker.setAttribute('aria-hidden', 'true');
+    marker.innerHTML = ICON(kind === 'success' ? 'check' : 'alertTriangle', 22);
+    const content = Vy.el('div');
+    if (messages.length === 1) content.append(Vy.el('strong', '', messages[0]));
+    else {
+      const list = Vy.el('ul');
+      list.append(...messages.map(message => Vy.el('li', '', message)));
+      content.append(Vy.el('strong', '', 'Sjå over desse felta'), list);
+    }
+    box.replaceChildren(marker, content);
+    box.focus();
+  }
+
+  Editor.showError = messages => showMessage(messages, 'error');
+
+  function prepareQuiz() {
     const errors = [];
     if (FB.Images.busy()) errors.push('Vent til biletet er ferdig handsama.');
-    const warnings = [];
-
     const title = FB.el('quiz-title').value.trim();
-    if (!title) errors.push('Tittel manglar.');
+    if (!title) errors.push('Gje frøda ein tittel.');
 
-    S.editorCategories.forEach((cat, i) => {
-      if (!cat.name) errors.push('Kategori ' + (i + 1) + ' manglar namn.');
-      const filled = cat.questions.filter(q => (q.question || FB.Images.valid(q.image)) && q.answer);
-      if (filled.length === 0) {
-        errors.push('Kategori ' + (i + 1) + ' («' + (cat.name || 'utan namn') + '») har ingen spørsmål.');
-      }
-      cat.questions.forEach(q => {
-        if ((q.question || FB.Images.valid(q.image)) && !q.answer) {
-          warnings.push('Kategori «' + (cat.name || 'Kategori ' + (i + 1)) + '», ' + q.points + ' poeng: Manglar svar.');
-        }
+    S.editorCategories.forEach((category, i) => {
+      const name = tabName(category, i);
+      if (!category.name) errors.push(name + ' manglar namn.');
+      if (!category.questions.some(isComplete)) errors.push(name + ' treng minst eitt ferdig spørsmål.');
+      category.questions.forEach(q => {
+        if (hasQuestion(q) && !q.answer) errors.push(name + ', ' + q.points + ' poeng, manglar fasitsvar.');
+        if (!hasQuestion(q) && q.answer) errors.push(name + ', ' + q.points + ' poeng, manglar spørsmål eller bilete.');
       });
     });
 
-    if (FB.el('final-round-toggle').checked) {
-      const fc = FB.el('editor-final-category').value.trim();
-      const fq = FB.el('editor-final-question').value.trim();
-      const fa = FB.el('editor-final-answer').value.trim();
-      if (!fc) errors.push('Finalerunde: Kategori manglar.');
-      if (!fq && !FB.Images.valid(S.editorFinalImage.image)) errors.push('Finalerunde: Spørsmål manglar.');
-      if (!fa) errors.push('Finalerunde: Svar manglar.');
+    const final = FB.el('final-round-toggle').checked ? readFinal() : null;
+    if (final) {
+      if (!final.category) errors.push('Finalerunden manglar kategori.');
+      if (!hasQuestion(final)) errors.push('Finalerunden manglar spørsmål eller bilete.');
+      if (!final.answer) errors.push('Finalerunden manglar fasitsvar.');
     }
 
-    return { errors, warnings };
-  };
-
-  Editor.extractFinal = function () {
-    const category = FB.el('editor-final-category').value.trim();
-    const hint = FB.el('editor-final-clue').value.trim();
-    const question = FB.el('editor-final-question').value.trim();
-    const answer = FB.el('editor-final-answer').value.trim();
-    if (category && (question || FB.Images.valid(S.editorFinalImage.image)) && answer) return { category, hint, question, answer, ...S.editorFinalImage };
-    return null;
-  };
+    if (errors.length) {
+      Editor.showError(errors);
+      return null;
+    }
+    FB.hide('editor-errors');
+    return {
+      title,
+      categories: S.editorCategories.map(category => ({
+        name: category.name, questions: category.questions.filter(isComplete)
+      })),
+      final
+    };
+  }
 
   Editor.saveQuiz = function () {
-    const { errors, warnings } = Editor.validate();
-    if (errors.length) { Editor.showError(errors); return; }
-    Editor.hideMessages();
-
-    const quiz = {
-      id: S.editingQuizId || Store.generateId('quiz'),
-      title: FB.el('quiz-title').value.trim(),
-      categories: S.editorCategories.map(cat => ({
-        name: cat.name,
-        questions: cat.questions.filter(q => (q.question || FB.Images.valid(q.image)) && q.answer)
-      })),
-      final: FB.el('final-round-toggle').checked ? Editor.extractFinal() : null,
-      created: new Date().toISOString()
-    };
-
-    if (Store.saveQuiz(quiz)) {
-      const el = FB.el('editor-errors');
-      el.innerHTML = '';
-      const ok = document.createElement('div');
-      ok.className = 'editor-success';
-      ok.textContent = '✓ Frøde lagra!';
-      el.appendChild(ok);
-      warnings.forEach(w => {
-        const div = document.createElement('div');
-        div.className = 'editor-warning-item';
-        div.textContent = '⚠ ' + w;
-        el.appendChild(div);
-      });
-      el.classList.remove('hidden');
-      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      setTimeout(() => {
-        Editor.clear();
-        FB.App.showScreen('saved');
-      }, warnings.length ? 2000 : 800);
-    } else {
-      Editor.showError(['Frøda kunne ikkje lagrast varig. Ho finst mellombels under Lagra frøder; eksporter henne før du lukkar sida.']);
-    }
+    const quiz = prepareQuiz();
+    if (!quiz) return;
+    quiz.id = editingQuiz?.id || Store.generateId('quiz');
+    quiz.created = editingQuiz?.created || new Date().toISOString();
+    const persistent = Store.saveQuiz(quiz);
+    editingQuiz = quiz;
+    baseline = snapshot();
+    updateSaveLabel();
+    if (persistent) showMessage(['«' + quiz.title + '» er lagra.'], 'success');
+    else showMessage(['Frøda ligg mellombels i denne fana. Last ned ein kopi før du lukkar sida.'], 'warning');
   };
+
 
   // ---- Førehandsvising ----
 
   Editor.previewQuiz = function () {
     if (FB.Images.busy()) { Editor.showError(['Vent til biletet er ferdig handsama.']); return; }
-    Editor.saveActiveTab();
-    const categories = S.editorCategories.filter(c => c.name && c.questions.some(q => (q.question || FB.Images.valid(q.image)) && q.answer));
+    const categories = S.editorCategories.filter(c => c.name && c.questions.some(isComplete));
     if (categories.length === 0) {
       Editor.showError(['Legg til minst éin kategori med spørsmål for å førehandsvise.']);
       return;
     }
-    Editor.hideMessages();
-
+    FB.hide('editor-errors');
     FB.el('preview-title').textContent = FB.el('quiz-title').value.trim() || 'Utan tittel';
 
     const board = FB.el('preview-board');
@@ -293,7 +336,7 @@
 
     FB.POINTS.forEach(pts => {
       categories.forEach((cat, ci) => {
-        const q = cat.questions.find(qu => qu.points === pts && (qu.question || FB.Images.valid(qu.image)) && qu.answer);
+        const q = cat.questions.find(qu => qu.points === pts && isComplete(qu));
         const cell = document.createElement('div');
         cell.className = 'jeopardy-cell';
         if (q) {
@@ -326,56 +369,36 @@
     ans.classList.add('hidden');
   };
 
-  Editor.clear = function () {
-    Editor.setFinalImage({});
-    FB.el('quiz-title').value = '';
-    FB.el('editor-final-category').value = '';
-    FB.el('editor-final-clue').value = '';
-    FB.el('editor-final-question').value = '';
-    FB.el('editor-final-answer').value = '';
-    FB.el('final-round-toggle').checked = false;
-    FB.hide('final-round-fields');
-    S.editingQuizId = null;
-    Editor.hideMessages();
-    Editor.initCategories(2);
-  };
+  function updateSaveLabel() {
+    FB.el('editor-heading').textContent = editingQuiz ? 'Rediger frøda' : 'Ny frøde';
+    const saveLabel = editingQuiz?.id ? 'Lagre endringar' : editingQuiz ? 'Lagre kopi' : 'Lagre frøde';
+    FB.el('editor-save-label').textContent = saveLabel;
+  }
 
-  Editor.editQuiz = function (quizId) {
-    const quiz = Store.getQuizzes().find(q => q.id === quizId);
-    if (!quiz) { alert('Frøde ikkje funne!'); return; }
+  function openEditor(quiz) {
+    editingQuiz = quiz;
+    FB.el('quiz-title').value = quiz?.title || '';
+    FB.hide('editor-errors');
 
-    Editor.setFinalImage(quiz.final || {});
-    S.editingQuizId = quizId;
-    FB.el('quiz-title').value = quiz.title;
-    Editor.hideMessages();
+    S.editorCategories = (quiz?.categories || []).map(makeCategory);
+    while (S.editorCategories.length < 2) S.editorCategories.push(makeCategory());
+    renderTabs();
+    selectTab(0);
 
-    S.editorCategories = quiz.categories.map(cat => ({
-      name: cat.name,
-      questions: FB.POINTS.map(p => {
-        const existing = cat.questions.find(q => q.points === p);
-        return existing ? { ...existing } : { points: p, question: '', answer: '' };
-      })
-    }));
-    while (S.editorCategories.length < 2) S.editorCategories.push(Editor.emptyCategory());
-
-    S.activeTab = 0;
-    Editor.renderTabs();
-    Editor.renderActiveTab();
-
-    if (quiz.final) {
-      FB.el('final-round-toggle').checked = true;
-      FB.show('final-round-fields');
-      FB.el('editor-final-category').value = quiz.final.category;
-      FB.el('editor-final-clue').value = quiz.final.hint || '';
-      FB.el('editor-final-question').value = quiz.final.question;
-      FB.el('editor-final-answer').value = quiz.final.answer;
-    } else {
-      FB.el('final-round-toggle').checked = false;
-      FB.hide('final-round-fields');
-    }
+    const final = quiz?.final;
+    S.editorFinalImage = { image: final?.image, imageAlt: final?.imageAlt };
+    FB.el('editor-final-image').replaceChildren(editImage(S.editorFinalImage, 'finalspørsmålet'));
+    Object.entries(finalFields).forEach(([key, id]) => { FB.el(id).value = final?.[key] || ''; });
+    FB.el('final-round-toggle').checked = Boolean(final);
+    showFinalFields();
+    updateSaveLabel();
+    baseline = snapshot();
 
     FB.App.showScreen('editor');
-  };
+    FB.el(quiz ? 'editor-heading' : 'quiz-title').focus();
+  }
 
+  Editor.newQuiz = () => openEditor(null);
+  Editor.editQuiz = openEditor;
   FB.Editor = Editor;
 })(window);

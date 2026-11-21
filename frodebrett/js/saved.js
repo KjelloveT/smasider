@@ -1,181 +1,123 @@
-/* Frødebrett — lagra frøder + eksport/import (inkl. eksporter alle). */
+/* Frødebrett — frødebibliotek og JSON-filer. */
 (function (root) {
   'use strict';
 
   const FB = root.FB;
   const Store = root.FrodebrettStorage;
-
   const Saved = {};
 
-  Saved.bind = function () {
-    FB.el('btn-export-quiz').addEventListener('click', () => Saved.exportQuiz());
-    FB.el('btn-export-all').addEventListener('click', () => Saved.exportAll());
-    FB.el('btn-import-quiz').addEventListener('click', () => FB.el('import-quiz-file').click());
-    FB.el('import-quiz-file').addEventListener('change', (e) => {
-      if (e.target.files[0]) {
-        Saved.importFile(e.target.files[0]);
-        e.target.value = '';
-      }
-    });
+  function action(text, style, icon, quiz, run) {
+    const button = Vy.el('button', 'vp-button vp-button--compact ' + style);
+    button.type = 'button';
+    button.setAttribute('aria-label', text + ' – ' + quiz.title);
+    if (icon) {
+      const marker = Vy.el('span');
+      marker.setAttribute('aria-hidden', 'true');
+      marker.innerHTML = ICON(icon, 18);
+      button.append(marker);
+    }
+    button.append(text);
+    button.addEventListener('click', () => run(button));
+    return button;
+  }
+
+  Saved.makeCard = function (quiz, standard = false) {
+    const card = Vy.el('article', 'vp-panel vp-panel--plain vp-panel--compact fb-quiz-card');
+    const questionCount = quiz.categories.reduce((total, category) => total + category.questions.length, 0);
+    const meta = standard
+      ? quiz.categories.slice(0, 2).map(category => category.name).join(' · ')
+      : quiz.categories.length + ' kategoriar · ' + questionCount + ' spørsmål' + (quiz.final ? ' · finalerunde' : '');
+    const heading = Vy.el('h3', 'vp-panel vp-panel--soft fb-quiz-title', quiz.title);
+    const start = action('Start spel', 'vp-button--positive', 'play', quiz, () => FB.Board.selectQuiz(quiz));
+    start.setAttribute('aria-haspopup', 'dialog');
+    start.setAttribute('aria-controls', 'team-setup');
+    const actions = Vy.el('div', 'vp-actions');
+    actions.append(
+      start,
+      action(standard ? 'Rediger kopi' : 'Rediger', 'vp-button--tool', 'pencil', quiz, () => FB.Editor.editQuiz(quiz))
+    );
+    if (!standard) {
+      actions.append(action('Slett', 'vp-button--danger vp-button--quiet', 'trash2', quiz, () => {
+        if (!confirm('Vil du slette «' + quiz.title + '» frå denne eininga?')) return;
+        Store.deleteQuiz(quiz.id);
+        Saved.render();
+        status('Frøda er sletta.');
+        FB.el('own-quizzes-heading').focus();
+      }));
+    }
+
+    const downloads = standard ? actions : Vy.el('div', 'vp-actions');
+    const html = action('Last ned HTML', 'vp-button--tool', 'download', quiz, button => FB.Export.download(quiz, button));
+    const json = action('Last ned JSON', '', 'fileJson', quiz, () => FB.Export.downloadJson(quiz));
+    downloads.append(FB.Export.withHelp(html, 'html'), FB.Export.withHelp(json, 'json'));
+
+    card.append(heading, Vy.el('p', 'vp-help', meta), actions);
+    if (!standard) card.append(downloads);
+    return card;
   };
 
   Saved.render = function () {
     const quizzes = Store.getQuizzes();
-    const container = FB.el('saved-list');
-    container.innerHTML = '';
-
-    if (quizzes.length === 0) {
-      const p = document.createElement('p');
-      p.className = 'fb-muted';
-      p.textContent = 'Ingen lagra frøder.';
-      container.appendChild(p);
-    } else {
-      quizzes.forEach(quiz => {
-        const item = document.createElement('div');
-        item.className = 'saved-item';
-
-        const info = document.createElement('div');
-        const h = document.createElement('h3');
-        h.textContent = quiz.title;
-        info.appendChild(h);
-        const meta = document.createElement('p');
-        const nQ = quiz.categories.reduce((s, c) => s + c.questions.length, 0);
-        meta.textContent = quiz.categories.length + ' kategoriar · ' + nQ + ' spørsmål'
-          + (quiz.final ? ' · finalerunde' : '');
-        info.appendChild(meta);
-        item.appendChild(info);
-
-        const actions = document.createElement('div');
-        actions.className = 'saved-actions';
-
-        const edit = document.createElement('button');
-        edit.type = 'button';
-        edit.className = 'btn btn-small';
-        edit.textContent = 'Rediger';
-        edit.addEventListener('click', () => FB.Editor.editQuiz(quiz.id));
-        actions.appendChild(edit);
-
-        const del = document.createElement('button');
-        del.type = 'button';
-        del.className = 'btn btn-small btn-danger';
-        del.textContent = 'Slett';
-        del.addEventListener('click', () => Saved.deleteQuiz(quiz.id));
-        actions.appendChild(del);
-
-        item.appendChild(actions);
-        container.appendChild(item);
-      });
-    }
-
-    Saved.populateExportSelect(quizzes);
+    const container = FB.el('quiz-list');
+    container.replaceChildren();
+    if (quizzes.length) container.append(...quizzes.map(quiz => Saved.makeCard(quiz)));
+    else container.append(Vy.el('p', '', 'Her kjem frødene dine når du lagar ei ny eller opnar ei JSON-fil.'));
+    FB.el('btn-export-all').hidden = !quizzes.length;
   };
 
-  Saved.populateExportSelect = function (quizzes) {
-    const select = FB.el('export-quiz-select');
-    if (!select) return;
-    select.innerHTML = '';
-    const first = document.createElement('option');
-    first.value = '';
-    first.textContent = 'Vel ein frøde…';
-    select.appendChild(first);
-    (quizzes || Store.getQuizzes()).forEach(q => {
-      const opt = document.createElement('option');
-      opt.value = q.id;
-      opt.textContent = q.title;
-      select.appendChild(opt);
+  function status(message) {
+    const el = FB.el('library-status');
+    el.hidden = false;
+    el.textContent = message;
+  }
+
+  function isQuiz(quiz) {
+    return quiz && typeof quiz.title === 'string' && Array.isArray(quiz.categories)
+      && quiz.categories.length > 0 && quiz.categories.length <= 6
+      && quiz.categories.every(category => category && typeof category.name === 'string'
+        && Array.isArray(category.questions) && category.questions.every(question =>
+          question && (typeof question.question === 'string' || FB.Images.valid(question.image))
+          && typeof question.answer === 'string'));
+  }
+
+  async function importFile(file) {
+    let data;
+    try {
+      data = JSON.parse(await file.text());
+    } catch {
+      status('Kunne ikkje lese fila. Vel ei gyldig JSON-fil frå Frødebrett.');
+      return;
+    }
+
+    const isFrode = data && (data.app === 'frodebrett' || data.frodebrett || data.frodetavla);
+    const quizzes = isFrode && (Array.isArray(data.quizzes) ? data.quizzes : [data.quiz]);
+    if (!quizzes || !quizzes.length || !quizzes.every(isQuiz)) {
+      status('Fila inneheld ingen gyldige frøder frå Frødebrett.');
+      return;
+    }
+
+    let persistent = true;
+    for (const quiz of quizzes) {
+      quiz.id = Store.generateId('quiz');
+      quiz.created = new Date().toISOString();
+      if (!Store.saveQuiz(quiz)) persistent = false;
+    }
+    Saved.render();
+    const message = quizzes.length === 1 ? '«' + quizzes[0].title + '» er opna.' : quizzes.length + ' frøder er opna.';
+    status(persistent ? message : message + ' Innhaldet ligg mellombels i denne fana. Last ned ein kopi før du lukkar sida.');
+  }
+
+  Saved.bind = function () {
+    const fileInput = FB.el('import-quiz-file');
+    FB.el('btn-import-quiz').addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (file) importFile(file);
+      fileInput.value = '';
     });
-  };
-
-  function safeName(title) {
-    return (title || 'froede').replace(/[^a-zA-Z0-9æøåÆØÅ ]/g, '').replace(/ /g, '_') || 'froede';
-  }
-
-  function download(obj, filename) {
-    const blob = new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-
-  Saved.exportQuiz = function () {
-    const quizId = FB.el('export-quiz-select').value;
-    if (!quizId) { alert('Vel ein frøde å eksportere!'); return; }
-    const quiz = Store.getQuizzes().find(q => q.id === quizId);
-    if (!quiz) return;
-    download({ app: 'frodebrett', version: 1, quiz }, 'frodebrett_' + safeName(quiz.title) + '.json');
-  };
-
-  Saved.exportAll = function () {
-    const quizzes = Store.getQuizzes();
-    if (quizzes.length === 0) { alert('Ingen frøder å eksportere!'); return; }
-    download(Store.exportData(), 'frodebrett_alle.json');
-  };
-
-  function status(msg, ok) {
-    const el = FB.el('import-status');
-    el.innerHTML = '';
-    const span = document.createElement('span');
-    span.className = ok ? 'import-ok' : 'import-err';
-    span.textContent = (ok ? '✓ ' : '⚠ ') + msg;
-    el.appendChild(span);
-    el.classList.remove('hidden');
-  }
-
-  Saved.importFile = function (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      let data;
-      try {
-        data = JSON.parse(e.target.result);
-      } catch (err) {
-        status('Kunne ikkje lese fila. Er det ei gyldig .json-fil?', false);
-        return;
-      }
-
-      const isFrode = data && (data.app === 'frodebrett' || data.frodebrett || data.frodetavla);
-
-      // Bulk: { quizzes: [...] }
-      if (isFrode && Array.isArray(data.quizzes)) {
-        let n = 0;
-        data.quizzes.forEach(q => {
-          if (q && q.categories) {
-            q.id = Store.generateId('quiz');
-            q.created = new Date().toISOString();
-            if (Store.saveQuiz(q)) n++;
-          }
-        });
-        status(n + ' frøde(r) importert!', true);
-        Saved.render();
-        return;
-      }
-
-      // Enkel: { quiz: {...} }
-      if (isFrode && data.quiz && data.quiz.categories) {
-        const quiz = data.quiz;
-        quiz.id = Store.generateId('quiz');
-        quiz.created = new Date().toISOString();
-        if (Store.saveQuiz(quiz)) {
-          status('«' + quiz.title + '» importert!', true);
-          Saved.render();
-        } else {
-          status('Feil ved lagring.', false);
-        }
-        return;
-      }
-
-      status('Ugyldig fil. Fila må vere eksportert frå Frødebrett.', false);
-    };
-    reader.readAsText(file);
-  };
-
-  Saved.deleteQuiz = function (quizId) {
-    if (confirm('Er du sikker på at du vil slette denne frøden?')) {
-      Store.deleteQuiz(quizId);
-      Saved.render();
-    }
+    FB.el('btn-export-all').addEventListener('click', () => {
+      Vy.downloadJson(Store.exportData(), 'frodebrett_alle.json');
+    });
   };
 
   FB.Saved = Saved;

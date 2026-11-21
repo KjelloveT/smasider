@@ -38,7 +38,7 @@
       throw Error('Biletet har for mange detaljar. Vel eit mindre bilete.');
     } finally { URL.revokeObjectURL(url); }
   }
-  Images.control = function (question, label) {
+  Images.control = function (question, label, onChange) {
     const group = document.createElement('div');
     group.className = 'fb-image-control';
     const pickerLabel = document.createElement('label');
@@ -50,7 +50,8 @@
     input.className = 'vp-input';
     pickerLabel.appendChild(input);
     const hint = document.createElement('p');
-    hint.textContent = 'Valfritt. JPEG, PNG eller WebP, inntil 20 MB. Biletet blir forminska og lagra berre på denne eininga.';
+    hint.className = 'vp-help';
+    hint.textContent = 'JPEG, PNG eller WebP, inntil 20 MB. Biletet blir forminska og kan følgje med i ei eksportert frøde.';
     const preview = document.createElement('img');
     preview.className = 'fb-image-preview';
     preview.alt = 'Valt spørsmålsbilete';
@@ -64,7 +65,7 @@
     alt.addEventListener('input', () => { question.imageAlt = alt.value.trim(); });
     const remove = document.createElement('button');
     remove.type = 'button';
-    remove.className = 'vp-button vp-button--small';
+    remove.className = 'vp-button vp-button--compact';
     remove.textContent = 'Fjern bilete';
     const status = document.createElement('p');
     status.setAttribute('role', 'status');
@@ -80,6 +81,7 @@
       alt.value = input.value = '';
       status.textContent = '';
       refresh();
+      onChange();
     });
     input.addEventListener('change', async () => {
       const file = input.files[0];
@@ -89,8 +91,9 @@
       status.textContent = 'Handsamar biletet…';
       try {
         question.image = await read(file);
-        status.textContent = 'Biletet er klart. Hugs å lagre frøda.';
+        status.textContent = 'Biletet er klart.';
         refresh();
+        onChange();
       } catch (error) {
         status.textContent = error.message || 'Kunne ikkje lese biletet.';
       } finally {
