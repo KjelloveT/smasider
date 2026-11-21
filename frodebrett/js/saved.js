@@ -21,11 +21,12 @@
     return button;
   }
 
-  function makeCard(quiz) {
+  Saved.makeCard = function (quiz, standard = false) {
     const card = Vy.el('article', 'vp-panel vp-panel--plain vp-panel--compact fb-quiz-card');
     const questionCount = quiz.categories.reduce((total, category) => total + category.questions.length, 0);
-    const meta = quiz.categories.length + ' kategoriar · ' + questionCount + ' spørsmål'
-      + (quiz.final ? ' · finalerunde' : '');
+    const meta = standard
+      ? quiz.categories.slice(0, 2).map(category => category.name).join(' · ')
+      : quiz.categories.length + ' kategoriar · ' + questionCount + ' spørsmål' + (quiz.final ? ' · finalerunde' : '');
     const heading = Vy.el('h3', 'vp-panel vp-panel--soft fb-quiz-title', quiz.title);
     const start = action('Start spel', 'vp-button--positive', 'play', quiz, () => FB.Board.selectQuiz(quiz));
     start.setAttribute('aria-haspopup', 'dialog');
@@ -33,30 +34,33 @@
     const actions = Vy.el('div', 'vp-actions');
     actions.append(
       start,
-      action('Rediger', 'vp-button--tool', 'pencil', quiz, () => FB.Editor.editQuiz(quiz)),
-      action('Slett', 'vp-button--danger vp-button--quiet', 'trash2', quiz, () => {
+      action(standard ? 'Rediger kopi' : 'Rediger', 'vp-button--tool', 'pencil', quiz, () => FB.Editor.editQuiz(quiz))
+    );
+    if (!standard) {
+      actions.append(action('Slett', 'vp-button--danger vp-button--quiet', 'trash2', quiz, () => {
         if (!confirm('Vil du slette «' + quiz.title + '» frå denne eininga?')) return;
         Store.deleteQuiz(quiz.id);
         Saved.render();
         status('Frøda er sletta.');
-        FB.el('library-heading').focus();
-      })
-    );
+        FB.el('own-quizzes-heading').focus();
+      }));
+    }
 
-    const downloads = Vy.el('div', 'vp-actions');
+    const downloads = standard ? actions : Vy.el('div', 'vp-actions');
     const html = action('Last ned HTML', 'vp-button--tool', 'download', quiz, button => FB.Export.download(quiz, button));
     const json = action('Last ned JSON', '', 'fileJson', quiz, () => FB.Export.downloadJson(quiz));
     downloads.append(FB.Export.withHelp(html, 'html'), FB.Export.withHelp(json, 'json'));
 
-    card.append(heading, Vy.el('p', 'vp-help', meta), actions, downloads);
+    card.append(heading, Vy.el('p', 'vp-help', meta), actions);
+    if (!standard) card.append(downloads);
     return card;
-  }
+  };
 
   Saved.render = function () {
     const quizzes = Store.getQuizzes();
     const container = FB.el('quiz-list');
     container.replaceChildren();
-    if (quizzes.length) container.append(...quizzes.map(makeCard));
+    if (quizzes.length) container.append(...quizzes.map(quiz => Saved.makeCard(quiz)));
     else container.append(Vy.el('p', '', 'Her kjem frødene dine når du lagar ei ny eller opnar ei JSON-fil.'));
     FB.el('btn-export-all').hidden = !quizzes.length;
   };

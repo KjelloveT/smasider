@@ -62,9 +62,19 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .team-name { flex: 1; min-width: 0; }
 
 /* ===== Frødebibliotek ===== */
+.fb-library-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: 12px;
+  max-inline-size: 36rem;
+}
+#quiz-selection .fb-standard-status { margin: 0; }
 .fb-quiz-list {
   display: grid; gap: 14px;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+}
+#standard-list {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
 }
 .fb-quiz-card { display: grid; gap: 10px; align-content: start; overflow-wrap: anywhere; }
 .fb-quiz-card > .fb-quiz-title {
@@ -289,7 +299,7 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 @media print {
   @page { size: A4 portrait; margin: 12mm; }
   .vp-header, .fb-controls, .fb-editor-actions, .btn-remove-team { display: none !important; }
-  .jeopardy-grid, .box1 { break-inside: avoid; }
+  .jeopardy-grid, #score-board, #final-round { break-inside: avoid; }
 }
 
 /* Bruk fast Vyrdepil-palett på spelrutene. Den mørke ramma skal vere skilje mellom lyse ruter,

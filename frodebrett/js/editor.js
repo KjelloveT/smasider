@@ -371,7 +371,8 @@
 
   function updateSaveLabel() {
     FB.el('editor-heading').textContent = editingQuiz ? 'Rediger frøda' : 'Ny frøde';
-    FB.el('editor-save-label').textContent = editingQuiz ? 'Lagre endringar' : 'Lagre frøde';
+    const saveLabel = editingQuiz?.id ? 'Lagre endringar' : editingQuiz ? 'Lagre kopi' : 'Lagre frøde';
+    FB.el('editor-save-label').textContent = saveLabel;
   }
 
   function openEditor(quiz) {

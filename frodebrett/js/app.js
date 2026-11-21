@@ -4,7 +4,6 @@
 
   const FB = root.FB;
   const S = FB.state;
-  const Store = root.FrodebrettStorage;
 
   const App = {};
 
@@ -14,8 +13,8 @@
     FB.Editor.bind();
     FB.Export.bindHelp();
     FB.Saved.bind();
+    FB.StandardQuizzes.bind();
     App.bindKeyboard();
-    App.loadSampleQuizzes();
     App.showScreen('game');
   };
 
@@ -45,27 +44,6 @@
         FB.el('btn-editor-start').focus();
       }
     });
-  };
-
-  // ===== STANDARDFRØDER =====
-
-  // Standardfrødene blir lagde til éin gong. Lagre og slett verkar òg på desse.
-  const SEED_VERSION = 2;
-
-  App.loadSampleQuizzes = function () {
-    if (Store.getSeedVersion() >= SEED_VERSION) return;
-
-    Promise.all([
-      fetch('json/frodebrett_Blanda_drops.json').then(r => r.json()),
-      fetch('json/frodebrett_Småtrinn.json').then(r => r.json())
-    ]).then(files => {
-      const existing = new Set(Store.getQuizzes().map(q => q.id));
-      for (const { quiz } of files) {
-        if (quiz && !existing.has(quiz.id)) Store.saveQuiz(quiz);
-      }
-      Store.setSeedVersion(SEED_VERSION);
-      if (S.currentScreen === 'game') FB.Saved.render();
-    }).catch(err => console.error('Klarte ikkje laste standardfrøder:', err));
   };
 
   // ===== TASTATUR =====

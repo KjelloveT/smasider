@@ -1,0 +1,435 @@
+{
+  "grade": 5,
+  "quizzes": [
+    {
+      "subject": "matematikk",
+      "categories": [
+        {
+          "name": "Brøk i kvardagen",
+          "questions": [
+            ["Kva heiter talet over brøkstreken?","Teljaren."],
+            ["Kva er ein firedel av 20?","5."],
+            ["Kva er størst, ein halv eller tre åttandedelar?","Ein halv."],
+            ["Skriv ein brøk som er lik to tredelar, med 12 som nemnar.","8/12."],
+            ["Du et éin åttandedel av ein pizza. Ein ven et tre åttandedelar. Kor stor del er att?","4/8, altså ein halv."],
+            ["Tre firedelar av bøttene er fulle. Seks bøtter er tomme, og alle er anten fulle eller tomme. Kor mange bøtter er det?","24 bøtter."]
+          ]
+        },
+        {
+          "name": "Tal og reknestrategiar",
+          "questions": [
+            ["Kva verdi har sifferet 7 i 7 235?","7 000."],
+            ["Kva er 18 × 25?","450."],
+            ["Kva er 936 delt på 9?","104."],
+            ["Kva desimaltal er størst, 2,5 eller 2,49?","2,5."],
+            ["På tre hyller står det 27 bøker kvar. 19 bøker blir lånte ut. Kor mange står att?","62 bøker."],
+            ["Fire familiar kjøper to kinobillettar kvar. Dei betaler 960 kr til saman. Kva er prisen for éin billett?","120 kr."]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Ein fotballkamp har 90 ordinære minutt. Kor mange er det i ein omgang?","45 minutt."],
+            ["Golf gir vanlegvis gevinst til den med færrast slag. Kven vann med 67, 74 og 72 slag?","Spelaren med 67 slag."],
+            ["Eit frimerke er ein firedel av arealet til lappen sin. Kor stor del er utanfor merket?","Tre firedelar."],
+            ["Ein datafigur hoppar 9 steg på eitt trykk. Kor mange trykk trengst for å gå minst 50 steg?","6 trykk."],
+            ["Eit orkester har 6 slagverkarar av 24 musikarar. Kva er det som forkorta brøk?","1/4."],
+            ["Eit timeglas brukar 7 minutt. Kor mange gonger må det tømmast for å måle nøyaktig 35 minutt?","5 gonger."]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Biten som er att",
+        "question": "Ein kake blir delt i 24 like bitar. Først går ein tredel, så ein firedel av heile kaka. Kor mange bitar er att?",
+        "answer": "10 bitar."
+      }
+    },
+    {
+      "subject": "naturfag",
+      "categories": [
+        {
+          "name": "Kroppen i arbeid",
+          "questions": [
+            ["Kva organ pumpar blod rundt i kroppen?","Hjartet."],
+            ["Kva er dei viktigaste organa for å ta inn oksygen frå lufta?","Lungene."],
+            ["Kva er ein jobb til skjelettet?","Det støttar kroppen, gjev feste for musklar eller vernar organ."],
+            ["Kvifor pustar du raskare når du spring?","Musklane brukar meir oksygen, og kroppen må frakte karbondioksid ut raskare."],
+            ["Når ein muskel dreg i eit bein ved eit ledd, kva rørsle kan skje?","Beinet flyttar seg eller bøyer/strekkjer seg ved leddet."],
+            ["Korleis ville du samanlikne pulsen før og etter same aktivitet hos éin person?","Tel eller mål pulsen like lenge i ro og straks etter ein fast aktivitet, og samanlikn."]
+          ]
+        },
+        {
+          "name": "Krinsar og magnetar",
+          "questions": [
+            ["Kva gjev ei enkel lommelykt straum?","Eit batteri."],
+            ["Kva skjer med to nordpolar på magnetar når dei kjem nær?","Dei støyter frå kvarandre."],
+            ["Kva må vere lukka for at ei lampe i ein enkel straumkrins skal lyse?","Heile krinsen frå den eine batteripolen, gjennom lampa og attende til den andre."],
+            ["Kva leier straum best, ei koparleidning eller ein plastbit?","Koparleidninga."],
+            ["To pærer står etter kvarandre i same krins. Kva skjer med den andre om du skrur ut den fyrste?","Ho sløkjer òg, fordi ein seriekrins blir broten."],
+            ["Du testar om spikar, papir og aluminiumsfolie leier straum. Kva held du likt i testen?","Same batteri, lampe og krins, og byter berre prøvestykket."]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kvifor festar ein kjøleskåpmagnet seg ofte på døra, men ikkje på eit eple?","Døra inneheld jern eller stål. Eplet er ikkje magnetisk."],
+            ["Kva har kompassnåla i seg som gjer at ho snur seg mot nord?","Ho er ein liten magnet."],
+            ["Kvifor bankar du fortare med eit lite trommeslag enn med heile armen?","Ei lita rørsle kan gjerast raskare og krev mindre flytting av armen."],
+            ["Kvifor sit du ofte att med ei lun hand når du har gnidd hendene mot kvarandre?","Friksjon gjer noko av rørsleenergien om til varme."],
+            ["Ei lampe i ein lukka krins blir mørk når du set inn ein trebite på same plass som ei leidning. Kvifor?","Tre leier straumen svært dårleg, så krinsen verkar som om han er broten."],
+            ["Korleis kan du påvise magnetisme utan at magneten rører bindersen?","Test om bindersen flyttar seg når du held magneten nær utan å røre han."]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Lampa som slutta",
+        "question": "Lykta verkar berre når du held ein batterikontakt ned. Kva enkel feil er sannsynleg?",
+        "answer": "Kontakten er laus, så krinsen blir broten når du slepper."
+      }
+    },
+    {
+      "subject": "samfunnsfag",
+      "categories": [
+        {
+          "name": "Historiske kjelder",
+          "questions": [
+            ["Kva kallar vi ei ordna rekkje av hendingar frå fortida til notida?","Ei tidslinje."],
+            ["Kva er ei skriftleg kjelde frå tida då ei hending fann stad?","Til dømes eit brev, ei dagbok eller ei avis frå den tida."],
+            ["Kvifor er det lurt å sjekke datoen på ei historisk kjelde?","Då kan ein sjå om ho vart laga nær hendinga, eller seinare."],
+            ["Kva kan arkeologar finne som fortel om kva folk åt før i tida?","Til dømes frø, dyrebein, skal eller restar i kokekar."],
+            ["Ein reklametekst seier at bygda var den finaste i landet. Kva seier han sikkert, og kva seier han mindre sikkert?","Han viser kva avsendaren ville formidle, men kan ikkje åleine avgjere kor fin bygda var."],
+            ["Korleis kan ei kjelde laga av nokon som vart utsett for ei avgjerd, utfylle ei kjelde frå den som tok henne?","Ho kan vise andre erfaringar og konsekvensar av same avgjerd."]
+          ]
+        },
+        {
+          "name": "Kart og busetnad",
+          "questions": [
+            ["Kva er busetnad?","Kvar og korleis folk bur i eit område."],
+            ["Kva viser høgdelinjer på eit kart?","Høgda over havet ved dei ulike linjene."],
+            ["Kva tyder tette høgdelinjer?","At terrenget er bratt."],
+            ["Kvifor har mange byar vakse fram ved sjøen eller ei elv?","Vatn gjorde det lettare å frakte folk og varer og kunne gi tilgang til mat eller kraft."],
+            ["Korleis kan eit godt offentleg busstilbod endre kvar ein familie kan bu?","Det kan gjere det mogeleg å nå skule og arbeid frå fleire stader."],
+            ["Kva kan gjere at ein ny veg både styrkjer og svekkjer eit lokalsamfunn?","Han kan lette reiser og handel, men òg gje støy, meir trafikk eller tap av natur."]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kvifor er Grønland mykje større på nokre flate kart enn storleiken i høve til Afrika skulle tilseie?","Kartframstillinga kan strekkje område nær polane."],
+            ["Kva kan eit skilt med «Gamlevegen» antyde?","Det kan ha funnest ei eldre reiserute der."],
+            ["Kvifor kan eit skip sjå ut til å gå «feil veg» på eit kart dersom vinden er viktig?","Båten kan måtte segle i ei anna retning ei stund for å få framdrift."],
+            ["Kva er ein fordel med ei tidlegare bryggje som historisk kjelde samanlikna med berre eit moderne namn på staden?","Bryggja kan vise kvar og korleis båtar faktisk kunne leggje til."],
+            ["Ein familie finn to foto med same motiv, men treet er mykje større på det eine. Kva tyder det, og kva bør dei sjekke?","Det kan vere teke seinare. Sjekk dato, vinkel og om det er same tre."],
+            ["Kvifor kan eit kart med folketettleik gi eit anna inntrykk enn eit kart med kor mange som bur i kvart fylke?","Tettleik tek omsyn til arealet; eit stort fylke kan ha mange folk spreidd."]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Eit nytt reisemål",
+        "question": "Du skal tilrå éin stad for ei ny busshaldeplass. Kva to typar informasjon må du skaffe?",
+        "answer": "Til dømes kart over gangvegar og data eller innspel om kvar pendlare, elevar og andre treng stoppet."
+      }
+    },
+    {
+      "subject": "krle",
+      "categories": [
+        {
+          "name": "Høgtider i ulike tradisjonar",
+          "questions": [
+            ["Kva markerer påska i kristen tradisjon?","Forteljinga om Jesu død og oppstode."],
+            ["Kva jødisk høgtid er knytt til forteljinga om utgangen frå Egypt?","Pesach."],
+            ["Kva namn brukar mange på lysfesten i fleire indiske religiøse tradisjonar?","Diwali."],
+            ["Nemn eitt trekk som to ulike høgtider kan ha felles utan same bakgrunn.","Til dømes ljos, mat, samvær eller ei forteljing som blir hugsa."],
+            ["Korleis kan same høgtid vere viktig for ein som trur mykje, og ein med meir kulturell tilknyting?","Den eine kan leggje vekt på tru og ritual, den andre på familie og tradisjon."],
+            ["Kvifor er det lurt å bruke fleire personar som kjelde når du undersøkjer ei feiring?","Ein person kan fortelje om eiga erfaring, medan fleire viser at praksis varierer."]
+          ]
+        },
+        {
+          "name": "Filosofiske spørsmål",
+          "questions": [
+            ["Kva er eit argument?","Ein grunn for eller mot eit syn."],
+            ["Kva skil ei grunngjeving frå berre å seie «fordi eg vil»?","Ei grunngjeving gir ein grunn andre kan vurdere."],
+            ["Kva er eit døme på eit filosofisk spørsmål?","Til dømes «Kva er rettferd?»"],
+            ["To vil gi ei gåve som den eine har laga åleine. Kva omsyn kan ein grunngje med?","Til dømes ærleg kreditering, takknemlegheit og kven som gjorde arbeidet."],
+            ["Kvifor kan lik deling vere urettvis når folk har ulike behov?","Dei kan trenge noko ulikt for å få same mogelegheit."],
+            ["Kva kan endre svaret ditt i ein etisk diskusjon om ei gåve?","Nye opplysningar om behov, samtykke eller konsekvensar."]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kven har alltid rett når to er usamde om favorittfarge?","Ingen treng ha «rett». Favorittfarge er ei smakssak."],
+            ["Kvifor er ein kalender nyttig for høgtider?","Han hjelper folk å vite når dei skal markerast."],
+            ["Kvifor kan id og jolaftan vere på ulike datoar frå kvarandre kvart år?","Dei følgjer ulike kalendrar."],
+            ["Kva kan to kjelder meine med same ord «fest»?","Ei religiøs markering, ei familiesamling eller noko heilt anna."],
+            ["Eit barn ber ein robot avgjere kven som fortener mest kake. Kva bør roboten vite før han kan gjere ei rettvis vurdering?","Kva fordelingsregel gruppa har valt og om nokon har særlege behov."],
+            ["Ein person gjev ei stor gåve berre for å få skryt. Kva to sider kan ein drøfte?","Handlinga kan hjelpe nokon, medan motivet er ønsket om skryt."]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Drøft gåva",
+        "question": "Ei gruppe vil velje ei gåve for å takke ein person. Kva omsyn gjer forslaget respektfullt?",
+        "answer": "Tenk på kva mottakaren ønskjer, om gåva passar og at alle kan delta frivillig."
+      }
+    },
+    {
+      "subject": "norsk",
+      "categories": [
+        {
+          "name": "Språk og bøying",
+          "questions": [
+            ["Er «eldst» eit substantiv, eit adjektiv eller eit verb i «Det eldste treet»?","Eit adjektiv, i superlativ."],
+            ["Kva er fleirtalsforma av «ei bok» på nynorsk?","Bøker."],
+            ["Kva er pronomenet i «Dei lo av vitsen»?","Dei."],
+            ["Skriv «Jeg fant to bøker» med nynorsk form av eg og å finne.","«Eg fann to bøker.»"],
+            ["Kva er subjektet i «I skogen fann jenta ein boks»?","Jenta."],
+            ["Kva ord knyter saman «Me vart inne» og «det regna», og kva slags samanheng viser det?","Til dømes «fordi», som gjev grunnen."]
+          ]
+        },
+        {
+          "name": "Forteljing og argument",
+          "questions": [
+            ["Kva er hovudpersonen i ei forteljing?","Personen handlinga dreier seg mest om."],
+            ["Kva er ein påstand?","Noko ein hevdar, som ein kan grunngje eller undersøkje."],
+            ["«Bordet sukka under alle bøkene.» Kva for verkemiddel er dette?","Personifikasjon eller personleggjering."],
+            ["I «Liv la brevet i lomma og smilte så vidt» får vi ikkje lese brevet. Kva gjer det med lesinga?","Det skapar spenning eller nyfikne om kva som står og kvifor Liv smiler."],
+            ["«Vi bør ha bokbyte på skulen.» Gje eit argument som støttar påstanden.","Til dømes at elevar kan få noko nytt å lese utan å kjøpe fleire bøker."],
+            ["Kvifor kan ei kjelde med dato vere viktig når du skriv om kor mange som bur i ein by?","Folketalet endrar seg, så datoen seier når talet gjeld."]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva ord kan tyde både ei del av ei bok og ein kant eller ei retning?","Side."],
+            ["Kva kan ein slå opp i, både utan å slå og utan å opne ei dør?","Ei ordbok."],
+            ["Kva tyder det å ha is i magen i eit uttrykk?","Å halde seg roleg og vente sjølv om ein er spent."],
+            ["Kva to ulike ting kan ei rot vere i språket og i ei potte?","Grunnforma til eit ord, og ein del av planten som veks ned i jorda."],
+            ["Kva er skilnaden mellom «fiskekake» og «kakefisk» som samansette ord?","Fiskekake er ei kake av fisk. Kakefisk ville høyrest ut som ein fisk som har med kake å gjere."],
+            ["Forklar dei to moglege tydingane av «Dei såg kråka med dei nye brillene».","Brillene kan grammatisk høyre til personane som såg, eller til kråka."]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Ord med fleire liv",
+        "question": "Gjer den generelle påstanden «Bøker er bra» meir presis og gje ein grunn.",
+        "answer": "Til dømes «Høgtlesing kan gje klassen felles tekstopplevingar, fordi alle høyrer same forteljinga.»"
+      }
+    },
+    {
+      "subject": "engelsk",
+      "categories": [
+        {
+          "name": "Tider og samanlikningar",
+          "questions": [
+            ["Kva ord tyder «alltid», always eller away?","Always."],
+            ["Kva er motsett av expensive?","Cheap eller inexpensive."],
+            ["Kva er fortidsforma av «buy»?","Bought."],
+            ["I «She is reading now», kvifor står det is reading og ikkje reads?","Handlinga skjer akkurat no."],
+            ["Set inn rett samanlikningsform i «A bicycle is … than a car», med adjektivet slow.","Slower."],
+            ["Endre «We never buy ice cream at the beach» til ei setning om éin tur i går.","Til dømes «We didn’t buy ice cream at the beach yesterday.»"]
+          ]
+        },
+        {
+          "name": "Meldingar og lesing",
+          "questions": [
+            ["Du les skiltet «Closed on Mondays». Kva dag er staden stengd?","Måndag."],
+            ["«I got your message after the match.» Når fekk eg meldinga?","Etter kampen."],
+            ["«The bike shop closes at five. It is ten to five.» Kor mange minutt har du att?","Ti minutt."],
+            ["Skriv ei kort melding på engelsk for å seie at du kjem ti minutt for seint.","Til dømes «Sorry, I’ll be ten minutes late.»"],
+            ["«I packed a raincoat anyway, even though the sky was clear.» Kva kontrast viser even though?","Det var klårt ute, men forteljaren tok likevel med regnjakke."],
+            ["«The letter was addressed to Jo, but it lay unopened in the hall for a week.» Kva veit vi sikkert, og kva veit vi ikkje?","Brevet var til Jo og vart liggjande. Vi veit til dømes ikkje kvifor det ikkje vart opna."]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva betyr piece i «a piece of cake» heilt bokstaveleg?","Eit stykke."],
+            ["Kva slags mat eller drikke er ein «hot dog»?","Ein matrett med pølse, ofte i brød."],
+            ["Kva er skilnaden på pear og pair når dei blir skrivne?","Pear er ei pære. Pair er eit par."],
+            ["«Hold your horses!» Kva ber nokon deg truleg om å gjere om det ikkje finst hestar?","Vente litt eller ta det med ro."],
+            ["Kvifor kan «a barking dog» og «a barking tree» gje eit ordspel?","Ein hund kan bjeffe, «bark». Bark er òg den ytre delen på eit tre."],
+            ["Skriv «there», «their» og «they’re» der dei høyrer heime i «… opening … bags over …».","«They’re opening their bags over there.»"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Rare språkreglar",
+        "question": "Sei på engelsk at du heller vil ta bussen enn å gå fordi det regnar.",
+        "answer": "Til dømes «I’d rather take the bus than walk because it’s raining.»"
+      }
+    },
+    {
+      "subject": "kunst-og-handverk",
+      "categories": [
+        {
+          "name": "Visuell bodskap",
+          "questions": [
+            ["Kva er ei skisse?","Ei enkel teikning eller eit utkast til ein idé."],
+            ["Kvifor har mange skilt få og store ord?","Dei skal kunne lesast snøgt."],
+            ["Kva er hovudmotivet i eit bilete?","Det motivet som får mest merksemd."],
+            ["Korleis kan tomt rom rundt ei overskrift gjere henne meir synleg?","Det skil henne frå detaljane rundt og gjev auga ei tydeleg plass å sjå."],
+            ["Kva er ein forskjell på eit nærbilete av ein sykkel og eit bilete tatt langt unna?","Nærbiletet viser detaljar. Avstand viser heilskap og omgjevnader."],
+            ["Du lagar ein plakat om plantedag for elevar. Kva informasjon bør skilje seg ut frå illustrasjonen?","Til dømes namn på hendinga og kvar og når ho er."]
+          ]
+        },
+        {
+          "name": "Verkstad og bruksting",
+          "questions": [
+            ["Kva brukar du ofte ein linjal til før du klipper papp til ein modell?","Å måle og merke der du skal klippe."],
+            ["Korleis kan du gjere kantane på ein trebit jamnare?","Pusse dei med sandpapir."],
+            ["Kvifor kan ei pappeske bere større last dersom kvar vegg er bretta med kantar?","Falden stivar av og gjer det vanskelegare for veggen å bøye seg."],
+            ["Kva er funksjonen til eit handtak på ein kvardagsgjenstand, ut over korleis det ser ut?","Det gjer gjenstanden lettare eller tryggare å gripe, løfte eller dra."],
+            ["Kvifor kan du lage ein enkel prøve i papp før du byggjer eit skrin i tre?","For å teste mål og løysing med eit materiale som er lett å justere."],
+            ["Korleis kan du gje ein haldar for blyantar ein tryggare botn utan å leggje berre meir vekt på toppen?","Breie ut botnen, flytte tyngda ned eller la behaldaren gå mindre i høgda."]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva kallast eit bilete med berre omrisset av til dømes ein katt som mørk flate?","Ein silhuett."],
+            ["Kva har ein kartong av bølgjepapp inni mellom to plane lag?","Eit bølgja lag med luftrom."],
+            ["Kva kan du bruke som brett til å lage eit trykk med små prikkar om du må gjenbruke noko?","Til dømes bobleplast frå ei pakke."],
+            ["Kvifor kan alt utstyr på eit pultbilete sjå ut som leiketøy når du fotograferer frå golvet og tett på?","Den låge synsvinkelen og korte avstanden kan endre forholdet mellom storleik og omgjevnader."],
+            ["Kva verknad kan ein skugge mykje større enn ein liten figur ha i eit bilete?","Han kan gjere figuren til dømes dramatisk, truande eller komisk."],
+            ["Kva er eit optisk bedrag i eit bilete?","Ein visuell effekt som får hjernen til å tolke til dømes form eller rørsle annleis enn det som faktisk er teikna."]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "Lag to gode grunnar til at ein kan lage ein testversjon av eit fuglebrett før ein festar det ute.",
+        "answer": "Til dømes sjekke at delane passar og at brettet står stødig og kan reingjerast."
+      }
+    },
+    {
+      "subject": "musikk",
+      "categories": [
+        {
+          "name": "Byggjesteinar i musikken",
+          "questions": [
+            ["Kva kallast det svakaste av piano og forte som styrketeikn?","Piano."],
+            ["Kva er ein taktstrek i eit notebilete?","Ei loddrett line som skil taktane."],
+            ["Kva er fire firedelsslag i 4/4 til saman?","Éin takt."],
+            ["Kva er ein akkord?","Fleire tonar som kling saman."],
+            ["Korleis skil ein omkved frå ei bru i ein popsong?","Eit omkved kjem att. Ei bru lagar ofte ein kontrast og bind delar saman."],
+            ["Ein song har 16 taktar i 4/4. Kor mange firedelsslag er det?","64 slag."]
+          ]
+        },
+        {
+          "name": "Instrument og samspel",
+          "questions": [
+            ["Kva gjer ein tromme med fotpedal som ofte ligg lågast i ei trommesett-formasjon?","Stortromma lagar djupe slag, ofte som del av pulsen."],
+            ["Kva for instrumentfamilie høyrer trompet til?","Messingblåsarar."],
+            ["Kva kan ein riff vere på ein gitar?","Ei attkjenneleg, kort frase eller eit mønster som ofte blir gjenteke."],
+            ["Kva tyder det at ei gruppe spelar i unison?","Dei spelar eller syng den same melodien samstundes, vanlegvis i same tonehøgd eller oktavdobling."],
+            ["Kvifor gjer ei kjend bassline det lettare å spele saman sjølv om melodien skiftar noko?","Basslina gjev felles rytmisk og harmonisk støtte."],
+            ["To stemmer byrjar same melodien med nokre slag imellom. Kva er forma og kva må dei passe på?","Kanon. Kvar må halde sin plass medan den andre byrjar på same melodien seinare."]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva er instrumentet som har to trekuler med skaft fylte med små frø eller korn tradisjonelt kalla?","Marakasar."],
+            ["Kva musikalisk lyd får du i ein sirene som går glatt opp og ned, trinn eller glid?","Eit glid i tonehøgd, eit glissando-liknande drag."],
+            ["Kva kan ein instrumentbyggjar med eit suge­røyr lage om enden blir klypt flat og klypt skrått på begge sider?","Eit enkelt røyrblad som kan vibrere ved blås, liknande ei enkel røyrfløyte."],
+            ["Kvifor verkar ei lita bjelle og ei stor klokke ofte ulike i tonehøgd?","Storleik, form og materiale gjer at dei vibrerer med ulike frekvensar."],
+            ["Ein klovn går i takt med at orkesteret stoppar eit kort sekund. Kva kan gjere at vi ventar å høyre neste slag likevel?","Pulsen er etablert, og hjernen held fram med å vente på neste slag i det jamne mønsteret."],
+            ["Kva får du om du legg ein lys piccolo øvst og ein tuba lågt i same musikalske svar?","Stor kontrast i klang og tonehøgd, nyttig for å få svara til å likne to ulike figurar."]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "Over fire taktar vil du at publikum skal høyre både spørsmålet og svaret. Korleis kan du organisere to grupper musikalsk?",
+        "answer": "Lat ei gruppe spele fyrst og den andre svare i dei neste taktane, gjerne med ein avtalt pause eller tydeleg kontrast."
+      }
+    },
+    {
+      "subject": "kroppsøving",
+      "categories": [
+        {
+          "name": "Øv godt og spel saman",
+          "questions": [
+            ["Kva blir pulsen målt som?","Hjarteslag per minutt."],
+            ["Kva er oppvarming i kroppsøving?","Rørsle som gradvis førebur kroppen på det som kjem."],
+            ["Kva viser eit hjørne på ein oppmerkt bane deltakarane?","Til dømes ei grense mellom to sider av speleområdet."],
+            ["Kvifor kan ei mjuk matte vere nyttig når ein øver på nye låge hopp eller rørsler?","Ho kan dempe landing og gje eit jamt underlag."],
+            ["Korleis kan den som får ei tilbakemelding om eit kast, bruke henne i neste forsøk?","Vel eitt grep å prøve, som å sikte i rett høgd, og samanlikn forsøka."],
+            ["Kva kan eit lag endre dersom dei mistar ballen fordi alle står tett saman?","Spreie seg, tilby fleire pasningsalternativ og avtale kven som går ledig."]
+          ]
+        },
+        {
+          "name": "Vurder tur og tryggleik",
+          "questions": [
+            ["Kva viser ei kompassnål når ho får svinge fritt?","Retninga mot magnetisk nord med nordenden av nåla."],
+            ["Kva kan eit turkart si målestokk hjelpe deg å rekne ut?","Kor langt det er i røynda mellom stader på kartet."],
+            ["Kva er éin fordel med fleire tynne kleslag på ein tur der vêret skiftar?","Du kan ta av og på lag etter varme og vind."],
+            ["Kva bør du vurdere før du vel den kortaste av to ruter etter mykje regn?","Underlag, høgdeskilnad, elvekryssing og om ruta kan gås trygt."],
+            ["Forklar korleis ein bør ta omsyn til andre turgåarar når ei stor gruppe går på ein smal sti.","Hald farten roleg nær andre, gå til sides der det er plass og la dei passere."],
+            ["Korleis kan du skildre ein alternativ tur som både øver orientering og held gruppa samla om det blir tett skodde?","Vel ei kort, kjend og tydeleg rute med avtalte stopp. Hald gruppa samla og vend i tide."]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva kjem først i ordet «elghufs» og kva slags kondisjonsrørsle er det?","Elg. Det er ei spenstig gange eller springing, ofte oppover."],
+            ["Kvifor er det lettare å skli på vått haustlauv enn på ru, tørr asfalt?","Vatn og lauv kan minske grepet mellom sko og underlag."],
+            ["Kva kroppssans hjelper deg å vite kvar armen er sjølv om du ikkje ser han?","Stillingssansen, òg kalla propriosepsjon."],
+            ["Kva kan lage høge, regelmessige knirk når ein går på skare som med eit golv som knirkar?","Trykk frå foten kan bryte snøskorpa og lage lyd for kvart steg."],
+            ["Kvifor snur vi om lag like lett frå begge sider på glatt underlag dersom vi tek korte kontrollerte steg, samanlikna med brå harde steg?","Korte steg krev mindre brå kraft og gjer det lettare å halde tyngda over føtene."],
+            ["Kva kan vere komisk med eit ballspel der ballen er så stor at to nesten ikkje kan sjå kvarandre, og korleis kan de spele trygt?","Han gøymer spelarar og rullar annleis. Bruk ein svært lett ball, roleg fart og god plass."]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "Du skal gje eit råd til den som har lett for å bomme i eit kast. Korleis kan du gjere rådet presist og enkelt å prøve?",
+        "answer": "Nemn det du ser og gje eitt konkret grep, som å sjå på målet før kastet. Lat personen teste og sjekke om det hjelper."
+      }
+    },
+    {
+      "subject": "mat-og-helse",
+      "categories": [
+        {
+          "name": "Metodar ved gryta",
+          "questions": [
+            ["Kva vil det seie å koke mat?","Å varme han i væske som kokar."],
+            ["Kva er eit vanleg teikn på at vatn kokar i ei open gryte?","Bobler og damp, med tydeleg rørsle i vatnet."],
+            ["Kva gjer ein rasp med ein ost eller ei gulrot?","Deler han i små rivne bitar."],
+            ["Kva skil koking frå steiking i panne når vi tenkjer på korleis varmen kjem inn i maten?","Ved koking kjem varmen frå væska. I panne kjem mykje av han frå den varme steikjeflata og eventuelt litt feitt."],
+            ["Kva gjer du med mål og steikjetid når du doblar ein oppskrift?","Doble mengdene. Tida treng ikkje doblast og må vurderast ut frå metode og storleik på porsjon/form."],
+            ["Korleis kan du steikje fleire små grønsaksporsjonar med liknande resultat dersom panna er for lita til alle samstundes?","Del i omgangar, bruk om lag same varme og bitstorleik og pass på at panna ikkje blir overfylt."]
+          ]
+        },
+        {
+          "name": "Variasjon og råvarer",
+          "questions": [
+            ["Kva matvare er ei belgfrukt, linse eller ris?","Linse."],
+            ["Kva kallar vi alt som står lista som råvarer i ein ferdig matvare?","Ingrediensane."],
+            ["Kva for eit måltid gjev størst variasjon mellom råvaregrupper, tre ulike brødskiver utan pålegg eller brød, bønnepålegg og grønsaker?","Måltidet med brød, bønnepålegg og grønsaker."],
+            ["Kva kan vere ein grunn til å velje lokale eple i haustsesongen?","Dei kan vere lettare tilgjengelege og ha reist kortare, men sjekk faktisk opphav."],
+            ["Korleis kan trygg bruk av ei attståande tomatsaus endre både måltidsplan og matavfall?","Planlegg tidleg ein ny rett der sausen passar, og bruk han medan han er trygt lagra og eigna."],
+            ["Nemn to måtar å planleggje eit klasseselskap som gjev høve til matval og mindre avfall.","Til dømes oversikt over allergiar og behov, passe porsjonar og servering som gjev folk høve til å ta meir ved behov."]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva grunnstoff er det mykje av i salt saman med klor, natrium eller kalsium?","Natrium."],
+            ["Kva gjer eit hardkokt egg fast inni?","Proteina endrar form og stivnar når dei blir varma."],
+            ["Kva er dei små «auga» på ei potet?","Det er knoppane der ei ny spire kan vekse ut."],
+            ["Kvifor kan ein sitronpressar trylle fram mange syrlege dropar frå ei sitron, men ikkje frå ein tørr kjeks?","Sitrona har saft ein kan presse ut. Ein tørr kjeks har lite fri væske."],
+            ["Kva kan forklare at mjøl og vatn blir klebrig sjølv om ingen har helt lim i bollen?","Mjølet tek opp vatn, og stivelse og protein gjer blandinga tjukk og klebrig."],
+            ["Ein stor potetbit og mange små ligg i same gryta. Kva bit blir som regel mør seinast, og kvifor?","Den store, fordi varmen treng lengre tid inn til midten."]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "De skal bruke 300 g kikerter i 4 porsjonar. Kor mykje treng de i 6 porsjonar med same storleik?",
+        "answer": "450 g."
+      }
+    }
+  ]
+}

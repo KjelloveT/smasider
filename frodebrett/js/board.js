@@ -356,7 +356,9 @@
     FB.show('final-round');
 
     FB.el('final-category-display').textContent = S.currentQuiz.final.category;
-    FB.el('final-clue-display').textContent = S.currentQuiz.final.hint || '';
+    const hint = String(S.currentQuiz.final.hint ?? '').trim();
+    FB.el('final-clue-display').textContent = hint;
+    FB.el('final-clue').classList.toggle('hidden', !hint);
 
     FB.show('final-betting');
     FB.hide('final-question');
@@ -421,7 +423,6 @@
   Board.showFinalQuestion = function () {
     FB.hide('final-betting');
     FB.show('final-question');
-    FB.el('final-clue-display').textContent = S.currentQuiz.final.hint || '';
     FB.el('final-question-display').textContent = S.currentQuiz.final.question;
     FB.Images.show('final-question-image', S.currentQuiz.final);
     FB.el('final-answer-display').textContent = S.currentQuiz.final.answer;

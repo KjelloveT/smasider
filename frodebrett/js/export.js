@@ -38,6 +38,7 @@
 
     const game = markup.getElementById('game-screen');
     const panel = game.querySelector('#quiz-selection');
+    panel.classList.add('vp-panel', 'vp-panel--plain');
     panel.replaceChildren();
     const start = Vy.el('button', 'vp-button vp-button--positive', 'Start spel');
     start.type = 'button';
@@ -46,7 +47,6 @@
     start.setAttribute('aria-controls', 'team-setup');
     panel.append(start);
 
-    game.querySelectorAll('.box1').forEach(element => element.classList.add('vp-panel', 'vp-panel--plain'));
     const setup = markup.getElementById('team-setup');
     const question = markup.getElementById('question-modal');
     const winner = markup.getElementById('winner-modal');
