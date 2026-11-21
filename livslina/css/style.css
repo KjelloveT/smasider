@@ -186,6 +186,13 @@
 .ll-product-action-row .vp-button { flex: 0 0 auto; }
 
 /* Budsjett, månadsspel og oppgjer */
+.ll-budget-step-bar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0.5rem; }
+.ll-budget-step-bar h2 { margin: 0; text-align: center; }
+.ll-budget-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: 0.75rem; }
+.ll-budget-tabs .vp-button { position: relative; padding-inline: 1.5rem; }
+.ll-budget-tabs .vp-selection-mark { position: absolute; inset-inline-start: 0.35rem; }
+.ll-budget-tabs [aria-selected="true"] { --vp-button-fill: var(--vp-honey); }
+.ll-budget-tabs [aria-selected="true"] .vp-selection-mark { visibility: visible; }
 .ll-budget-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
 .ll-budget-summary { position: sticky; top: 1rem; align-self: start; max-height: calc(100vh - 2rem); overflow-y: auto; z-index: 2; }
 .ll-ctrl { margin: 0 0 0.8rem; }
@@ -277,7 +284,7 @@
   .ll-room-layout { grid-template-columns: minmax(0, 1fr); }
   .ll-room-stage-panel { position: static; }
   .ll-budget-grid { grid-template-columns: minmax(0, 1fr); }
-  .ll-budget-summary { order: -1; top: 0.35rem; max-height: 42vh; }
+  .ll-budget-summary { position: static; max-height: none; overflow: visible; }
 }
 @media (max-width: 620px) {
   .main-content { padding-top: 0.5rem; }

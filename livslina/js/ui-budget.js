@@ -8,6 +8,7 @@ LL.uiBudget = (function () {
   'use strict';
 
   let draft = null;
+  let activeSection = 0;
 
   function open() {
     const state = LL.state.get();
@@ -26,8 +27,26 @@ LL.uiBudget = (function () {
       : '';
     renderControls();
     recompute();
+    selectSection(0);
     LL.main.showScreen('screen-budget');
     LL.util.hydrate(document.getElementById('screen-budget'));
+  }
+
+  function selectSection(index, focusTab = false) {
+    const tabs = Array.from(document.getElementById('budgetTabs').children);
+    const selected = tabs[index];
+    if (!selected) return;
+    activeSection = index;
+
+    tabs.forEach(tab => {
+      const isSelected = tab === selected;
+      tab.setAttribute('aria-selected', String(isSelected));
+      tab.tabIndex = isSelected ? 0 : -1;
+      document.getElementById(tab.getAttribute('aria-controls')).hidden = !isSelected;
+    });
+    document.getElementById('budgetPrevSection').disabled = index === 0;
+    document.getElementById('budgetNextSection').disabled = index === tabs.length - 1;
+    if (focusTab) selected.focus();
   }
 
   function renderControls() {
@@ -282,6 +301,23 @@ LL.uiBudget = (function () {
   }
 
   function init() {
+    const tabList = document.getElementById('budgetTabs');
+    const tabs = Array.from(tabList.children);
+    tabs.forEach((tab, index) => tab.addEventListener('click', () => selectSection(index)));
+    tabList.addEventListener('keydown', event => {
+      let index;
+      switch (event.key) {
+        case 'ArrowLeft': index = (activeSection - 1 + tabs.length) % tabs.length; break;
+        case 'ArrowRight': index = (activeSection + 1) % tabs.length; break;
+        case 'Home': index = 0; break;
+        case 'End': index = tabs.length - 1; break;
+        default: return;
+      }
+      event.preventDefault();
+      selectSection(index, true);
+    });
+    document.getElementById('budgetPrevSection').addEventListener('click', () => selectSection(activeSection - 1, true));
+    document.getElementById('budgetNextSection').addEventListener('click', () => selectSection(activeSection + 1, true));
     document.getElementById('budgetRun').addEventListener('click', confirm);
     document.getElementById('budgetBack').addEventListener('click', () => LL.main.enterHome());
   }
