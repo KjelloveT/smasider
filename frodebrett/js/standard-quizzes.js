@@ -20,7 +20,10 @@
   const themes = {
     land: 'Land og geografi',
     dyr: 'Dyr',
+    hogtider: 'Religion og høgtider',
     film: 'Film',
+    tv: 'TV-seriar',
+    barnetv: 'Barne-TV',
     bil: 'Bilmerke',
     fotball: 'Fotball'
   };
@@ -57,7 +60,7 @@
   }
 
   async function themeCards(selectedThemes) {
-    const manifest = await load('json/themes/index.json?v=2');
+    const manifest = await load('json/themes/index.json?v=3');
     return manifest.filter(entry => selectedThemes.includes(entry.theme)).map(entry => {
       const summary = { title: entry.title, categories: entry.categories.map(name => ({ name })) };
       const loadQuiz = () => load('json/themes/' + entry.file + '?v=1').then(data => data.quiz);

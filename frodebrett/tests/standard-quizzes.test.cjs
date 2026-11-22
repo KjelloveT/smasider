@@ -106,7 +106,19 @@ test('Temakatalogen peikar på heile brett med korte fasitar og krediterte bilet
     ['Norsk fauna', 'dyr'],
     ['Disney-filmar', 'film'],
     ['Kjende bilmerke', 'bil'],
-    ['Fotballspelarar i 2026', 'fotball']
+    ['Fotballspelarar i 2026', 'fotball'],
+    ['Kristne høgtider', 'hogtider'],
+    ['Høgtider i islam', 'hogtider'],
+    ['Jødiske høgtider', 'hogtider'],
+    ['Hinduistiske høgtider', 'hogtider'],
+    ['Buddhistiske høgtider', 'hogtider'],
+    ['Norske familiefilmar', 'film'],
+    ['Animasjonsfilmar', 'film'],
+    ['Slik blir film laga', 'film'],
+    ['Bluey', 'tv'],
+    ['Pokémon – Indigo-ligaen', 'tv'],
+    ['Avatar – legenda om Aang', 'tv'],
+    ['Barne-TV', 'barnetv']
   ]);
   assert.equal(catalogue.length, expected.size);
   assert.equal(new Set(catalogue.map(entry => entry.file)).size, expected.size);
@@ -139,16 +151,31 @@ test('Temakatalogen peikar på heile brett med korte fasitar og krediterte bilet
         }
       }
     }
-    if (['land', 'dyr', 'bil'].includes(entry.theme)) assert.ok(imageCount >= 6, entry.title);
-    assert.equal(wikidata.filter(claim => ['P18', 'P41', 'P154'].includes(claim.property)).length, imageCount);
     if (entry.categories.includes('Hovudstader')) {
       assert.equal(wikidata.filter(claim => claim.property === 'P36').length, points.length);
     }
     nonEmptyText(quiz.final.category, entry.title);
     nonEmptyText(quiz.final.question, quiz.final.category);
     shortAnswer(quiz.final.answer, quiz.final.question);
+    if (quiz.final.image) {
+      checkMedia(quiz.final);
+      imageCount++;
+    }
+    if (['land', 'dyr', 'bil'].includes(entry.theme)) assert.ok(imageCount >= 6, entry.title);
+    if (['hogtider', 'tv', 'barnetv'].includes(entry.theme)) assert.ok(imageCount > 0, entry.title);
+    assert.equal(wikidata.filter(claim => ['P18', 'P41', 'P154'].includes(claim.property)).length, imageCount);
     prompts.add(quiz.final.question.trim());
     assert.equal(prompts.size, 31, entry.title);
+  }
+});
+
+test('TV-frødene har dokumentert aldersgrense til og med 12 år', () => {
+  const entries = readTheme('index.json').filter(entry => entry.theme === 'tv');
+  assert.equal(entries.length, 3);
+  for (const entry of entries) {
+    const { minimumAge, sources } = readTheme(entry.file);
+    assert.ok(Number.isInteger(minimumAge) && minimumAge >= 0 && minimumAge <= 12, entry.title);
+    assert.match(sources[0], /^https:\/\/(?:www\.)?(?:disneyplus\.com\/(?:en|no)-no\/|netflix\.com\/no\/)/);
   }
 });
 

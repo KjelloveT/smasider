@@ -188,5 +188,149 @@
       "Klubbar og karrierar",
       "Prisar og rekordar"
     ]
+  },
+  {
+    "theme": "hogtider",
+    "file": "kristne-hogtider.json",
+    "title": "Kristne høgtider",
+    "categories": [
+      "Advent og jul",
+      "Fastetid og påske",
+      "Himmelferd og pinse",
+      "Høgtider og minnedagar",
+      "Lys og symbol"
+    ]
+  },
+  {
+    "theme": "hogtider",
+    "file": "hogtider-i-islam.json",
+    "title": "Høgtider i islam",
+    "categories": [
+      "Fastemånaden",
+      "Festen etter fasten",
+      "Offerhøgtida",
+      "Hajj og heilage stader",
+      "Kalender og merkedagar"
+    ]
+  },
+  {
+    "theme": "hogtider",
+    "file": "jodiske-hogtider.json",
+    "title": "Jødiske høgtider",
+    "categories": [
+      "Ut av Egypt",
+      "Nyttår og forsoning",
+      "Lysfest",
+      "Forteljinga om Purim",
+      "Hytter og innhausting"
+    ]
+  },
+  {
+    "theme": "hogtider",
+    "file": "hinduistiske-hogtider.json",
+    "title": "Hinduistiske høgtider",
+    "categories": [
+      "Lysfesten",
+      "Fargar og vår",
+      "Gudinner og dans",
+      "Krishna, Rama og Ganesha",
+      "Haust og familietradisjonar"
+    ]
+  },
+  {
+    "theme": "hogtider",
+    "file": "buddhistiske-hogtider.json",
+    "title": "Buddhistiske høgtider",
+    "categories": [
+      "Buddha og fullmånen",
+      "Lys, gåver og symbol",
+      "Høgtider i Aust-Asia",
+      "Theravada-høgtider",
+      "Tibetanske høgtider"
+    ]
+  },
+  {
+    "theme": "film",
+    "file": "norske-familiefilmar.json",
+    "title": "Norske familiefilmar",
+    "categories": [
+      "Flåklypa",
+      "Kjende figurar",
+      "Skog og dyr",
+      "Jul på kino",
+      "Mysterium og bøker"
+    ]
+  },
+  {
+    "theme": "film",
+    "file": "animasjonsfilmar.json",
+    "title": "Animasjonsfilmar",
+    "categories": [
+      "Pixar",
+      "DreamWorks",
+      "Studio Ghibli",
+      "Leire og dokker",
+      "Filmdyr"
+    ]
+  },
+  {
+    "theme": "film",
+    "file": "slik-blir-film-laga.json",
+    "title": "Slik blir film laga",
+    "categories": [
+      "Folk bak filmen",
+      "På filmsettet",
+      "Frå idé til scene",
+      "Lyd og effektar",
+      "Frå filmrull til kino"
+    ]
+  },
+  {
+    "theme": "tv",
+    "file": "bluey.json",
+    "title": "Bluey",
+    "categories": [
+      "Familien",
+      "Leik i huset",
+      "Vener og naboar",
+      "Ute på tur",
+      "Draumar og rare leikar"
+    ]
+  },
+  {
+    "theme": "tv",
+    "file": "pokemon-indigo.json",
+    "title": "Pokémon – Indigo-ligaen",
+    "categories": [
+      "Trenarar og hjelparar",
+      "Ash sine Pokémon",
+      "Team Rocket",
+      "Byar og medaljar",
+      "På vegen"
+    ]
+  },
+  {
+    "theme": "tv",
+    "file": "avatar-aang.json",
+    "title": "Avatar – legenda om Aang",
+    "categories": [
+      "Gjengen",
+      "Dei fire elementa",
+      "Stader og folk",
+      "Vener og rivalar",
+      "Ting og episodar"
+    ]
+  },
+  {
+    "theme": "barnetv",
+    "file": "barne-tv.json",
+    "title": "Barne-TV",
+    "categories": [
+      "Kjende figurar",
+      "Julekalendrar",
+      "Barne-TV frå før",
+      "Verda og kroppen",
+      "Musikk og leik"
+    ]
   }
 ]

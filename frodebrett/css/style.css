@@ -208,6 +208,13 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .final-clue > div, .final-question-text > div {
   padding: 14px; border: 2px solid var(--border); background: var(--surface); font-weight: 600;
 }
+.final-question-text > div {
+  padding: clamp(14px, 2vw, 24px);
+  font-size: clamp(1.625rem, 4vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
 /* ===== Editor ===== */
 .fb-download-action {
   display: grid; grid-template-columns: minmax(0, 1fr) auto;

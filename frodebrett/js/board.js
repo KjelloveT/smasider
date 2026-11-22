@@ -432,6 +432,7 @@
     FB.hide('final-answer');
     FB.show('btn-reveal-final');
     FB.hide('btn-final-points');
+    FB.el('final-question-display').scrollIntoView({ block: 'nearest' });
   };
 
   Board.bindFinalRound = function () {
