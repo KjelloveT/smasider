@@ -8,6 +8,11 @@
   'use strict';
 
   const GAME = 'frodebrett';
+  // Fingeravtrykk av dei to opphavlege døma, før eventuell redigering.
+  const retiredExamples = new Map([
+    ['quiz_1775584820677_kcjoxdpit', 'd263a64ff470456d25682f092e570d41d6b7efaa83fbc1448d2165ec7fdf39ae'],
+    ['quiz_1775591268761_cdzw99bu8', '15aaf2ffd41326a638483c29492440d5466c2c25c698e20dc1f7a17ba9ca8419']
+  ]);
 
   function defaultState() {
     return { quizzes: [], teams: [], seedVersion: 0 };
@@ -58,15 +63,22 @@
     return true;
   }
 
-  // ---- Standardfrøder ----
-
-  function getSeedVersion() {
-    return readState().seedVersion;
-  }
-
-  function setSeedVersion(v) {
+  async function retireExamples() {
+    if (!root.crypto?.subtle) return false;
+    const originals = new Map();
+    for (const quiz of getQuizzes()) {
+      const expected = retiredExamples.get(quiz?.id);
+      if (!expected) continue;
+      const serialized = JSON.stringify(quiz);
+      const digest = await root.crypto.subtle.digest('SHA-256', new TextEncoder().encode(serialized));
+      const hash = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+      if (hash === expected) originals.set(quiz.id, serialized);
+    }
+    if (!originals.size) return false;
     const state = readState();
-    state.seedVersion = v;
+    const remaining = state.quizzes.filter(quiz => !originals.has(quiz?.id) || originals.get(quiz.id) !== JSON.stringify(quiz));
+    if (remaining.length === state.quizzes.length) return false;
+    state.quizzes = remaining;
     writeState(state);
     return true;
   }
@@ -118,8 +130,7 @@
     getQuizzes,
     saveQuiz,
     deleteQuiz,
-    getSeedVersion,
-    setSeedVersion,
+    retireExamples,
     getTeams,
     saveTeams,
     exportData,

@@ -1,0 +1,435 @@
+{
+  "grade": 4,
+  "quizzes": [
+    {
+      "subject": "matematikk",
+      "categories": [
+        {
+          "name": "Rekning med store tal",
+          "questions": [
+            ["Kva verdi har sifferet 6 i 462?","60"],
+            ["Kva er 300 minus 78?","222"],
+            ["Kva er 6 gonger 23?","138"],
+            ["128 elevar blir fordelte likt på fire bussar. Kor mange er det i kvar buss?","32"],
+            ["Det er 5 gradar ute. Temperaturen fell med 8 gradar. Kva blir han?","−3 grader"],
+            ["Ein loddseljar har 240 lodd. Om morgonen sel ho 36. Seinare sel ho tre gonger så mange som om morgonen. Kor mange er att?","96 lodd"]
+          ]
+        },
+        {
+          "name": "Lengd, tid og areal",
+          "questions": [
+            ["Kor mange centimeter er éin meter?","100 cm"],
+            ["Kor mange minutt går det frå klokka 14.20 til 14.50?","30 minutt"],
+            ["Kva er omkrinsen til eit rektangel med sider 6 cm og 4 cm?","20 cm"],
+            ["Kva er arealet av eit kvadrat med side 9 cm?","81 cm²"],
+            ["Ei økt byrjar klokka 09.45 og varer i 1 time og 35 minutt. Når sluttar ho?","11.20"],
+            ["To plankar på 75 cm og 125 cm skal liggje i ei rett line langs ein vegg på 2,5 m. Kor mykje av veggen blir utan plankar?","50 cm"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva måleining passar best for lengda på ein banan, meter eller centimeter?","Centimeter"],
+            ["Ein katt søv i 12 av dei 24 timane i eit døgn. Kva del av døgnet søv han?","Halvparten"],
+            ["Eit hus har 8 rom. Eit hotell har dobbelt så mange. Kor mange rom har hotellet?","16 rom"],
+            ["Ved midnatt er det minus 4 gradar. Ved frukost er det 3. Kor mykje har temperaturen stige?","7 gradar"],
+            ["Ein leiketraktor og ein tilhengjar har fire hjul kvar. Dei får eitt nytt hjul kvar. Kor mange av dei opphavlege hjula sit framleis på?","6 hjul"],
+            ["Ein robot gjer eitt pip kvart femte minutt. Første pip er klokka 12.00. Når kjem det sjuande?","12.30"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Turen heim",
+        "question": "Skulevegen er 750 m kvar veg. Heimvegen blir 180 m lengre om du går ein omveg. Kor langt går du til saman den dagen?",
+        "answer": "1680 m"
+      }
+    },
+    {
+      "subject": "naturfag",
+      "categories": [
+        {
+          "name": "Energi i rørsle",
+          "questions": [
+            ["Kva for ei kraft trekkjer ein ball ned mot bakken når du kastar han opp?","Tyngdekrafta"],
+            ["Kva kallar vi motstanden mellom ei skosåle og bakken?","Friksjon"],
+            ["Kva form for energi kjem frå ei varm plate på komfyren?","Varmeenergi"],
+            ["Kva skjer oftast med farten til ein leikebil som trillar fritt ned ein skrå bakke?","Han aukar"],
+            ["Kva slags energi er lagra i ein strikk når du strekkjer han?","Elastisk energi"],
+            ["To like bilar blir sleppte frå same høgda på to flater. Den eine har mindre friksjon. Kva bil trillar lengst før han stansar?","Minst friksjon"]
+          ]
+        },
+        {
+          "name": "Vatn, luft og forsøk",
+          "questions": [
+            ["Kva heiter gassforma av vatn?","Vassdamp"],
+            ["Ved kva temperatur frys reint vatn vanlegvis?","0 °C"],
+            ["Kva kallar vi lufta rundt jorda, sett som eit lag gass?","Atmosfæren"],
+            ["Kva heiter det når usynleg vassdamp går over til små dropar på eit kaldt glas?","Kondens"],
+            ["Kva blir endra dersom ein isbit smeltar fortare i eit varmt rom enn ein like stor isbit i eit kaldt rom?","Lufttemperaturen"],
+            ["Du måler kor mykje plass vatnet tek før det frys, og kor mykje plass isen tek etterpå. Kva kallar vi storleiken målt i milliliter?","Volum"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva farge har sollyset når alle dei synlege regnbogefargane er blanda?","Kvitt"],
+            ["Kva tilstand er is i, fast, flytande eller gass?","Fast"],
+            ["Kva for eit dyr har større evne til å flyge lydlaust i mørkret, ei ugle eller ei høne?","Ugle"],
+            ["Kvifor kan ein ball hoppe attende frå golvet? Kva eigenskap lèt han få att forma?","Elastisitet"],
+            ["Kva ser vi på eit solur, skuggen eller spegelbiletet av pinnen?","Skuggen"],
+            ["Kvifor flyt eit skip av stål trass tungt metall? Kva stoff fyller mykje av det tomme rommet i skroget?","Luft"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Ei rettvis isprøve",
+        "question": "To like isbitar skal tine på same stad. Den eine ligg i ull og den andre utanpå. Kva heiter eigenskapen til ulla som bremsar varmen?",
+        "answer": "Isolasjon"
+      }
+    },
+    {
+      "subject": "samfunnsfag",
+      "categories": [
+        {
+          "name": "Noreg, folk og stader",
+          "questions": [
+            ["Kva er hovudstaden i Noreg?","Oslo"],
+            ["Kva heiter nasjonaldagen til Noreg når vi seier datoen?","17. mai"],
+            ["Kva hav ligg mellom kysten av Sør-Noreg og Storbritannia?","Nordsjøen"],
+            ["Kva naboland til Noreg har Moskva som hovudstad?","Russland"],
+            ["Kva dato er den samiske nasjonaldagen?","6. februar"],
+            ["Kva fylke har Bodø som administrasjonssenter og omfattar Lofoten?","Nordland"]
+          ]
+        },
+        {
+          "name": "Kjelder og fellesskap",
+          "questions": [
+            ["Kva heiter ein person som såg ei hending sjølv?","Augevitne"],
+            ["Kva kallar vi ei bok med minne og fakta om livet til ein annan verkeleg person?","Biografi"],
+            ["Kva er ei kjelde frå same tid som ho skildrar, ei opphavskjelde eller ei attforteljing laga lenge etter?","Opphavskjelde"],
+            ["Kva heiter eit kommunalt bygg eller ein netteneste som tek vare på brev og dokument over tid?","Arkiv"],
+            ["Du ser to bilete av same gate, eitt frå 1910 og eitt frå 1935. Kor mange år er det mellom dei?","25 år"],
+            ["Eit foto viser berre den tomme delen av eit fullt torg. Kva del av fotografiet skjer bort folkemengda?","Utsnittet"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva flaggfarge i det norske flagget finst ikkje i flagget til Sverige?","Raud"],
+            ["Kva europeisk land høyrer øygruppa Svalbard til?","Noreg"],
+            ["Kva dyr frå Nord-Noreg har store gevir og er knytt til samisk reindrift?","Rein"],
+            ["Kva er namnet på det norrøne skriftsystemet med mange rette strekar, brukt på runesteinar?","Runer"],
+            ["Kva namn fekk byen som vart bygd opp att på ein ny stad etter bybrannen i Oslo i 1624?","Christiania"],
+            ["Kva innretning kunne sende lyd og nyhende heim til folk før fjernsynet kom, med antenne og frekvens som hint?","Radio"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Fleire måtar å fortelje",
+        "question": "Ein mann skriv dagbok på dagen då ei bru opnar. Kva slags kjelde er teksten når vi undersøker kva han sjølv opplevde?",
+        "answer": "Fyrstehandskjelde"
+      }
+    },
+    {
+      "subject": "krle",
+      "categories": [
+        {
+          "name": "Religionar og livssyn",
+          "questions": [
+            ["Kva heiter dei to hovuddelane av Bibelen som til saman utgjer boka?","Testamenta"],
+            ["Kva kristen høgtid markerer Jesu oppstode?","Påske"],
+            ["Kva heiter månaden der mange muslimar fastar på dagtid?","Ramadan"],
+            ["Kva høgtid i buddhismen markerer livet til Buddha og blir feira kring fullmånen i mai i mange land?","Vesak"],
+            ["Kva heiter den hinduistiske lysfesten med oljelamper som òg blir feira av andre tradisjonar?","Diwali"],
+            ["Kva norsk livssynsorganisasjon med førebokstavane HEF arrangerer humanistisk konfirmasjon?","Human-Etisk Forbund"]
+          ]
+        },
+        {
+          "name": "Rett, gale og ansvar",
+          "questions": [
+            ["Kva kallar vi eit val der to viktige omsyn dreg i kvar si retning?","Dilemma"],
+            ["Kva kallast det ein gjer for eit barn når ein lyttar, trøystar og hjelper det som trengst?","Omsorg"],
+            ["Kva ord brukar vi om å behandle folk som om dei har same menneskeverd?","Likeverd"],
+            ["Kva nemning handlar om å kunne svare for det du sjølv har gjort?","Ansvar"],
+            ["I ei gruppe får éin elev ekstra lesetid fordi ho treng det for å delta. Er dette helst premie eller tilpassing?","Tilpassing"],
+            ["Du lovar ein ven å halde noko løynt. Du får vite at ein elev kan bli skadd om ingen hjelper. Kva omsyn bør kome før det å halde løftet?","Tryggleik"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva kvit fugl blir ofte teikna med ein olivenkvist som symbol på fred?","Due"],
+            ["Kva heiter fartøyet som berga folk og dyr frå flaumen i forteljinga om Noah?","Noas ark"],
+            ["Kva feiring kan ha fargerikt pulver som mange kastar opp i lufta i India og andre land?","Holi"],
+            ["Kva heiter den sjuarma lysestaken som er eit historisk jødisk symbol?","Menora"],
+            ["Kva heiter den skikken der ein går utan mat ei viss tid av religiøse grunnar?","Faste"],
+            ["Kva slags vesen er den sinte skapningen under brua i eventyret om Bukkane Bruse?","Troll"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Fleire stader å lære",
+        "question": "Bibel, bøneklede og forteljingar kan vere kjelder. Kva slags kjelde er eit forskingsintervju med ein person om eigne røynsler?",
+        "answer": "Fyrstehandskjelde"
+      }
+    },
+    {
+      "subject": "norsk",
+      "categories": [
+        {
+          "name": "Verkty for skriving",
+          "questions": [
+            ["Kva teikn bruker vi på slutten av eit direkte spørsmål?","Spørjeteikn"],
+            ["Kva ordklasse høyrer «bok», «tog» og «elv» til?","Substantiv"],
+            ["Kva er fortidsforma av «spring» i «I går … eg heim»?","Sprang"],
+            ["Kva heiter ei gruppe setningar om same emne, skild frå resten med til dømes ei tom linje?","Avsnitt"],
+            ["Kva er fleirtal av «ein lang veg», utan talord?","Lange vegar"],
+            ["Kva ord bind saman dei to delane i «Eva ville gå ut, men regnet heldt henne inne»?","Men"]
+          ]
+        },
+        {
+          "name": "Fakta og forteljing",
+          "questions": [
+            ["Kva slags tekst har ofte ei ingrediensliste og ei trinnvis forklaring bak henne?","Matoppskrift"],
+            ["«Snigelen er eit blautdyr.» Kva slags påstand kan vi sjekke om er sann, ein faktapåstand eller eit ynske?","Faktapåstand"],
+            ["«Vinden kviskra mellom trea.» Kva verb gjev vinden ei menneskeleg handling?","Kviskra"],
+            ["Kva kallar vi ei kort forklaring under eit fotografi i ei avis?","Bilettekst"],
+            ["I ei forteljing står «Bussen stoppa klokka fire». Kva er det enklaste å etterprøve med klokka på bussen, tidspunkt eller stemning?","Tidspunkt"],
+            ["«Månen var som ei lampe over tunet.» Kva heiter grepet med å jamføre månen med ei lampe?","Samanlikning"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva dyr gøymer seg i dei to bokstavane rett etter a-en i «akustikk»?","Ku"],
+            ["Fullfør uttrykket for å unngå å seie det ein eigentleg meiner. «Å gå rundt …»","Grauten"],
+            ["Kva teikn manglar føre «bestefar» i «Kom og et bestefar!» når bestefar blir beden til bords?","Komma"],
+            ["Kva ord kan tyde både ei brødflate og ein rund del av ei brems?","Skive"],
+            ["Kva reiskap gøymer seg på slutten av «snøskuffe»?","Skuffe"],
+            ["Kva fugl finst i ordtaket «ei … gjer ingen sommar»?","Svale"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Ordoverraskingar",
+        "question": "«Eg er uroleg», fortel den som opplever hendinga sjølv. Kva synsvinkel har forteljinga?",
+        "answer": "Fyrsteperson"
+      }
+    },
+    {
+      "subject": "engelsk",
+      "categories": [
+        {
+          "name": "Frå notid til fortid",
+          "questions": [
+            ["Kva av «loud» og «slow» er motsett av «quiet»?","Loud"],
+            ["Kva er fortidsforma av verbet «play»?","Played"],
+            ["Kva ord høver i «She … a book every day», «read» eller «reads»?","Reads"],
+            ["Kva er fleirtalsforma av «child»?","Children"],
+            ["Kva erstattar «go» i fortid i «They … to the pool yesterday»?","Went"],
+            ["Kva spørjeord for stad fullfører «… did you see the fox?»","Where"]
+          ]
+        },
+        {
+          "name": "Les og samtal",
+          "questions": [
+            ["«I can hear birds outside my window.» Kva sans brukar forteljaren?","Høyrsla"],
+            ["«Tara forgot her lunch. I gave her half of mine.» Kva del av lunsjen gav eg henne?","Halvparten"],
+            ["«Please wait here until the door opens.» Kva må opne før du går vidare?","Døra"],
+            ["«The train was late, so Liam called his friend.» Kva var forseinka?","Toget"],
+            ["Kva høfleg, kort engelsk ord kan du seie med spørjande tone for å be nokon seie noko om att, «pardon» eller «welcome»?","Pardon"],
+            ["«I saw the footprints, but snow had covered the end of the trail.» Kva dekte slutten av sporet?","Snø"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva engelsk ord tyder «sommarfugl» og ser ut som ei blanding av mat og flyging?","Butterfly"],
+            ["Kva dyr er «a bat» som flyg om natta?","Flaggermus"],
+            ["Kva dyr frå havet ligg bak det engelske ordet «starfish»?","Sjøstjerne"],
+            ["Kva engelsk verb har same lyd som «sea» og tyder «sjå»?","See"],
+            ["Kva engelsk ord kan vere både eit lite dyr og ein ting ein brukar til å klikke med på ein datamaskin?","Mouse"],
+            ["«The ring was on the bus. I can still hear the ring from the bell.» I kva setning viser «ring» til ein lyd, den fyrste eller den andre?","Den andre"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Språkkrøll",
+        "question": "«The bus did not leave until ten, although the ticket said nine.» Kor mykje seinare gjekk bussen enn det stod på billetten?",
+        "answer": "Éin time"
+      }
+    },
+    {
+      "subject": "kunst-og-handverk",
+      "categories": [
+        {
+          "name": "Bilete, rom og lys",
+          "questions": [
+            ["Kva heiter feltet i biletet som verkar å liggje nærast oss?","Framgrunnen"],
+            ["Kva viser kvar lyset er stengt ute på den mørke sida av ei kule?","Skuggen"],
+            ["Kva form ser du når du ser rett på éi side av ein terning?","Kvadrat"],
+            ["Ei lykt skin frå venstre. Kva veg fell skuggen til ein figur på høgre side av lykta?","Mot høgre"],
+            ["Kva heiter lina der himmel og hav ser ut til å møtast?","Horisontlina"],
+            ["Kva heiter den delen av komposisjonen som først trekkjer til seg blikket?","Fokuspunktet"]
+          ]
+        },
+        {
+          "name": "Tråd og materiale",
+          "questions": [
+            ["Kva må du træ gjennom nålauga når du skal sy?","Tråd"],
+            ["Kva set du på trådenden så heile tråden ikkje glir gjennom stoffet?","Knute"],
+            ["Kva får du ved å leggje tre tekstilstrimlar vekselvis over kvarandre, frå utsida til midten?","Ei flette"],
+            ["Kva heiter dei langsgåande trådane som er spente opp i ein vev?","Renninga"],
+            ["Kva heiter tråden som går tvers over og under renninga?","Innslaget"],
+            ["Kva heiter det mjuke stoffet som er laga av samanfiltra fibrar og raknar lite i kantane?","Filt"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva dyr med mange piggar kan ein pensel med sprikande bust minne om?","Piggsvin"],
+            ["Kva kallar vi eit einsfarga, mørkt omriss mot lys bakgrunn, til dømes ein skuggefigur?","Silhuett"],
+            ["Kva farge er komplementær til lilla i den tradisjonelle fargesirkelen vi brukar med raud, gul og blå?","Gul"],
+            ["Du vil gjere skuggen større utan å flytte veggen. Skal figuren nærare eller lenger frå ljoskjelda?","Nærare"],
+            ["Kva blir det kalla når eit teppe kjenner ruglete eller glatt ut under handa?","Tekstur"],
+            ["Kor mange hjørne er det på ein kube, sjølv om teikninga berre viser nokre av dei?","Åtte"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "Eit skilt har store kvite bokstavar på mørk bakgrunn. Kva heiter den tydelege skilnaden i lysheit?",
+        "answer": "Kontrast"
+      }
+    },
+    {
+      "subject": "musikk",
+      "categories": [
+        {
+          "name": "Rytme og noteteikn",
+          "questions": [
+            ["Kva er dei jamne grunnslaga ein kan telje til i eit musikkstykke?","Puls"],
+            ["Kva italiensk musikkord tyder gradvis sterkare lyd?","Crescendo"],
+            ["Kor mange firedelsnotar fyller same tid som ein halvnote?","To"],
+            ["Kva er eit kort, musikalsk mønster som blir gjenteke fleire gonger, ofte kalla?","Ostinat"],
+            ["Kor mange åttandedelsnotar varer til saman like lenge som ein firedelsnote?","To"],
+            ["I ein 4/4-takt er det ein halvnote og ein firedelsnote. Kva slagverdi må fylle den siste plassen?","Ein firedel"]
+          ]
+        },
+        {
+          "name": "Musikk og uttrykk",
+          "questions": [
+            ["Kva av fiolin og trompet er eit strykeinstrument?","Fiolin"],
+            ["Kva heiter det å spele under ein songar for å støtte songen?","Akkompagnere"],
+            ["Kva del av ein song syng du med ord, teksten eller pulsen?","Teksten"],
+            ["Kva musikkord fortel kor raskt eller seint ein spelar?","Tempo"],
+            ["Kva heiter kontrasten mellom svak og sterk lyd i eit stykke?","Dynamikk"],
+            ["Eit stykke blir spelt med jamn puls på 120 slag i minuttet. Kor mange slag blir det på eit halvt minutt?","60 slag"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva instrument held ein ved munnen medan ein metalltunge vibrerer og lagar lyd?","Munnharpe"],
+            ["Kva slags tone høyrer du når ei lita fløyte har høg frekvens, lys eller mørk?","Lys"],
+            ["Kva av ein fiolin og ei djembe kan du spele ved å slå med handflata?","Djembe"],
+            ["Kva heiter lyden frå eit rop når han kjem att frå ein fjellvegg med eit lite opphald?","Ekko"],
+            ["Kva gongliknande instrument består av to store metallskiver ein kan slå mot kvarandre?","Cymbalar"],
+            ["Kva ord skildrar korte, fråskilde tonar, «legato» eller «staccato»?","Staccato"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Instrument på skrå",
+        "question": "Bruk 4/4-takt. To taktar har ei firedelspause kvar og lyd på resten av slaga. Kor mange lydslag blir det til saman?",
+        "answer": "Seks"
+      }
+    },
+    {
+      "subject": "kroppsøving",
+      "categories": [
+        {
+          "name": "Leik og rørslekunnskap",
+          "questions": [
+            ["Kva kallar vi eit mjukt, tjukt underlag som dempar landing etter hopp i gymsalen?","Matte"],
+            ["Kva muskel har to hovud øvst på framsida av overarmen og hjelper deg å bøye albogen?","Biceps"],
+            ["Kva engelsk uttrykk står for å spele rettvist og respektere spelarar og reglar?","Fair play"],
+            ["Kva heiter det å gjere lette rørsler før ein aktivitet for å førebu kroppen?","Oppvarming"],
+            ["Kva type pasning går langs golvet og fram til ein annan spelar utan noko kast i lufta?","Rullepasning"],
+            ["Ein dans har fyrst tre steg til høgre og fire til venstre. Kor mange fleire steg går du mot venstre?","Eitt steg"]
+          ]
+        },
+        {
+          "name": "Ved vatn og i naturen",
+          "questions": [
+            ["Kva slags vest med flytekrage har ofte fløyte og refleksar til bruk på vatnet?","Redningsvest"],
+            ["Kva kallar vi kammen av vatn som veks når vinden bles over ein innsjø?","Bølgje"],
+            ["Kva kallar vi vatn der du kan stå med botnen under føtene og hovudet godt over overflata?","Grunt vatn"],
+            ["På kartet ser du to blå flater. Den eine står stille, den andre er ei line som buktar seg nedover. Kva kan den siste vere?","Elv"],
+            ["Kva kallar vi staden der de er skjerma frå vinden og kan raste?","Le"],
+            ["Kva symjeart brukar begge armane samstundes fram over vatnet og eit samla delfinspark?","Butterfly"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva dyr med åtte armar kan skyve seg raskt baklengs gjennom vatnet?","Blekksprut"],
+            ["Kva pustar ein kval gjennom på toppen av hovudet?","Blåsehol"],
+            ["Kva slags skøyter brukar ein i den olympiske sporten med piruettar og hopp til musikk?","Kunstløpsskøyter"],
+            ["Kva særskild type sko dekkjer foten når du badar på steinete botn?","Badesko"],
+            ["Kva kroppsdel brukar ein flodhest til å skyve seg frå botnen når han rører seg i djupt vatn?","Føtene"],
+            ["To dansarar går like langt. Den eine tek dobbelt så mange steg. Kor lange er stega hennar samanlikna med den andre sine?","Halvparten"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Trygg veg",
+        "question": "På ein sti står de ved ein bratt bakke. Kva av tette og vide høgdekurver viser vanlegvis den bratte bakken?",
+        "answer": "Tette høgdekurver"
+      }
+    },
+    {
+      "subject": "mat-og-helse",
+      "categories": [
+        {
+          "name": "Reine rutinar og reiskap",
+          "questions": [
+            ["Kva legg du under gulrota når du skal skjere henne med kniv?","Skjerefjøl"],
+            ["Kva reiskap kan fjerne det tynne ytste laget på ei gulrot?","Skrellar"],
+            ["Kva brukar ein til å slå luft inn i eggekviten?","Visp"],
+            ["Kva står forkortinga ts for i ei oppskrift?","Teskei"],
+            ["Kva bør du bruke for å skjere rå salat etter at den fyrste fjøla vart brukt til rå kylling, ei rein fjøl eller same uvaska fjøl?","Rein fjøl"],
+            ["Kva del av oppskrifta bør du sjekke for å vere viss på at du har alle råvarene før du byrjar?","Ingredienslista"]
+          ]
+        },
+        {
+          "name": "Smak og måltid saman",
+          "questions": [
+            ["Kva grunnsmak kjennest tydelegast når du smakar på reint sukker?","Søt"],
+            ["Kva skjer vanlegvis med ei rå gulrot som blir kokt lenge, blir ho sprøare eller mjukare?","Mjukare"],
+            ["Kva kallar vi eit serveringsopplegg der kvar gjest kan forsyne seg frå fleire fat på eit eige bord?","Buffé"],
+            ["Kva vanleg kjølerom heime held mange råvarer kalde til neste dag utan å fryse dei?","Kjøleskap"],
+            ["Kva kallar vi sansen som registrerer mellom anna søtt, salt og surt?","Smakssansen"],
+            ["I eit måltid skal seks elevar få éi halv brødskive til kvar. Kor mange heile brødskiver må de dele?","Tre"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva reiskap har to varme plater som lagar det rutete mønsteret på baksten?","Vaffeljarn"],
+            ["Kva frukt har eit hardt, brunt skal og kvitt fruktkjøt ein kan lage ei mjølkeliknande væske av?","Kokosnøtt"],
+            ["Kva matvare er raud og mjuk når ho er mogen, har frø som ei frukt og blir ofte brukt som grønsak i salat?","Tomat"],
+            ["Kva pressar skalet i eit maiskorn frå innsida når kornet blir varmt og sprett?","Damp"],
+            ["Kva sitrusvæske kan senke bruninga når du har skore eit eple?","Sitronsaft"],
+            ["Kvar i eit glas med vatn ligg ein isbit etter at han har falle til ro, ved botnen eller vassflata?","Ved vassflata"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "Ei oppskrift til to treng 3 dl havre og 2 dl yoghurt. Kor mykje havre treng de til seks?",
+        "answer": "9 dl"
+      }
+    }
+  ]
+}

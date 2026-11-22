@@ -1,0 +1,478 @@
+{
+  "grade": 8,
+  "quizzes": [
+    {
+      "subject": "matematikk",
+      "categories": [
+        {
+          "name": "Potensar og røter",
+          "questions": [
+            ["Kva er 3²?","9"],
+            ["Kva er kvadratrota av 81?","9"],
+            ["Rekn ut 2⁴ + 3².","25"],
+            ["Skriv 2³ × 2⁵ som éin potens.","2⁸"],
+            ["Kva er det største heiltalet som er mindre enn kvadratrota av 50?","7"],
+            ["Skriv (3²)³ delt på 3⁴ som éin potens med grunntal 3.","3²"]
+          ]
+        },
+        {
+          "name": "Uttrykk og prosent",
+          "questions": [
+            ["Samle 3a + 5a.","8a"],
+            ["Rekn ut 2x² − 3 når x = −2.","5"],
+            ["Ein pris aukar frå 80 til 100 kr. Kor mange prosent aukar han?","25 %"],
+            ["Forenkle 4(2x − 3) − 3x.","5x−12"],
+            ["Kor mykje blir 600 kr etter først 10 % avslag og så 20 % avslag?","432 kr"],
+            ["A kostar 150 kr i oppstart og 45 kr per gong. B kostar 75 kr per gong. Når kostar dei det same?","5 gonger"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kor mange ulike tosifra kodar kan du lage med berre siffera 0 og 1, medrekna 00?","Fire"],
+            ["Kva er kvadratet av eit negativt tal, positivt eller negativt?","Positivt"],
+            ["Ein chattetråd får dobbelt så mange meldingar kvar dag. Han byrjar med 3. Kor mange får han på fjerde dag?","24"],
+            ["Korleis skriv du ein million som potens med grunntal 10?","10⁶"],
+            ["Ein rettferdig terning har gjeve tre seksarar på rad. Kva er sannsynet for seks i neste kast?","1/6"],
+            ["Start på 100. Auk med 10 %. Trekk så frå 10 % av det nye talet. Kva tal endar du på?","99"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Samanlikn tilboda",
+        "question": "Tre kinoturar kostar 315 kr etter 30 % samla avslag. Kva kosta éin tur før avslaget?",
+        "answer": "150 kr"
+      }
+    },
+    {
+      "subject": "naturfag",
+      "categories": [
+        {
+          "name": "Celler og arv",
+          "questions": [
+            ["Kva del av ei typisk dyrecelle inneheld det meste av DNA-et?","Cellekjernen"],
+            ["Kva kallar vi DNA-bitane som inneheld oppskrifter eller verkar inn på arvelege trekk?","Gen"],
+            ["Kva stiv struktur finst rundt planteceller utanfor cellemembranen?","Cellevegg"],
+            ["Kva celleorganell driv fotosyntesen i grøne planteceller?","Kloroplast"],
+            ["Kva type celledeling kan danne kjønnsceller med halvparten av kromosomtalet?","Meiose"],
+            ["Eit trekk krev to recessive variantar r. Kor stor sjanse for rr har kryssinga Rr × Rr?","25 %"]
+          ]
+        },
+        {
+          "name": "Stoff og reaksjonar",
+          "questions": [
+            ["Kva teikn har oksygen i periodesystemet?","O"],
+            ["Kva er den kjemiske formelen for vatn?","H₂O"],
+            ["Kva slags stoff har pH under 7 i vassløysing, surt eller basisk?","Surt"],
+            ["Kva gass lagar boblene når natron blir blanda med sitronsaft?","Karbondioksid"],
+            ["Kor mange oksygenatom er det i eitt molekyl CO₂?","To"],
+            ["Massen av stoffa før ein reaksjon i ein lukka behaldar er 27 g. Kva er massen etter reaksjonen?","27 g"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva for ei gruppe mikroorganismar kan få brøddeig til å heve og høyrer til soppriket?","Gjærsopp"],
+            ["Kva pigment gjev mange planteblad grøn farge?","Klorofyll"],
+            ["Kva grunnstoff finst både i diamant og blyantgrafitt?","Karbon"],
+            ["Kva metall er flytande ved vanleg romtemperatur og vart brukt i mange gamle termometer?","Kvikksølv"],
+            ["Kva farge får raudt lakmuspapir i ei basisk løysing?","Blå"],
+            ["Kva er formelen for hydrogengassen som har to hydrogenatom bundne saman?","H₂"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Ein reaksjon i glaset",
+        "question": "Ein indikator fargar glas A raudt ved pH 3 og glas B blått ved pH 10. Kva glas har høgast konsentrasjon av oksoniumion?",
+        "answer": "Glas A"
+      }
+    },
+    {
+      "subject": "samfunnsfag",
+      "categories": [
+        {
+          "name": "Medborgarskap og makt",
+          "questions": [
+            ["Kva heiter den delen av demokratiet som består av deltaking og ansvar i samfunnet, til dømes ved å røyste og organisere seg?","Medborgarskap"],
+            ["Kva folkevalt organ gjev regjeringa lover og løyvingar på nasjonalt nivå?","Stortinget"],
+            ["Kva blir ei regjering kalla dersom regjeringa sine parti har mindre enn halvparten av seta i Stortinget?","Mindretalsregjering"],
+            ["Kva nemning brukar vi om retten til å skrive og gje ut nyhende utan ulovleg press?","Pressefridom"],
+            ["Kva heiter styringsprinsippet som deler makt mellom den lovgjevande, utøvande og dømmande funksjonen?","Maktfordeling"],
+            ["Kva heiter framlegget Stortinget kan røyste over for å uttrykkje at ein statsråd eller regjeringa må gå av?","Mistillitsframlegg"]
+          ]
+        },
+        {
+          "name": "Flytting og ressursar",
+          "questions": [
+            ["Kva heiter personar som har forlate landet sitt og søkjer vern i eit anna land på grunn av fare eller forfølging?","Asylsøkjarar"],
+            ["Kva type flytting brukar orda innvandring og utvandring som motsetnader for, flytting over grensene eller innanlands?","Over grensene"],
+            ["Kva kallar ein ei opplysning som dreg folk til ein stad, til dømes gode jobbutsikter?","Trekkfaktor"],
+            ["Kva slags faktor er eit jordskred som gjer at folk forlèt ei bygd, skyve- eller trekkfaktor?","Skyvefaktor"],
+            ["Kva er nemninga på skilnaden mellom kor mange som flyttar inn og kor mange som flyttar ut?","Nettoinnflytting"],
+            ["900 flyttar inn i kommunen og 650 flyttar ut på eitt år. Kva blir nettoinnflyttinga?","250 personar"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva er størst i røynda, sjølv om Grønland ser svært stort ut på mange verdskart, Grønland eller Afrika?","Afrika"],
+            ["Kva tittel har den representanten som leier eit norsk kommunestyre?","Ordførar"],
+            ["Kva heiter karttypen der fargar viser nivå av ein verdi per område, som folketettleik?","Koropletkart"],
+            ["Kva kallar vi eit land utan kyst, slik som Sveits?","Innlandsstat"],
+            ["Kva line går ved null grad breidde og deler jorda i nordleg og sørleg halvkule?","Ekvator"],
+            ["Kva slags kartframstilling har rette breidde- og lengdegradsliner og gjer Grønland mykje større i forhold til Afrika enn i røynda?","Mercatorprojeksjon"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Kartet og røynda",
+        "question": "Eit kart markerer land etter BNP per person. Kva betre mål kan du bruke for å sjå skilnader mellom rike og fattige i landet?",
+        "answer": "Gini-koeffisienten"
+      }
+    },
+    {
+      "subject": "krle",
+      "categories": [
+        {
+          "name": "Perspektiv på tru og livssyn",
+          "questions": [
+            ["Kva blir det kalla når ein stat og religiøse institusjonar er tydeleg skilde i styringa?","Sekularisme"],
+            ["Kva heiter retten til å velje, byte og praktisere religion eller livssyn?","Trusfridom"],
+            ["Kva omgrep skildrar eit samfunn der fleire religionar og livssyn lever side om side?","Livssynsmangfald"],
+            ["Kva er namnet på dei delane av kanonisk bibeltekst som fortel om Jesus i fire ulike bøker?","Evangelia"],
+            ["Kva heiter hovudretninga innan islam der tradisjonen etter sunna og dei fyrste kalifane står sentralt, av sunni og sjia?","Sunni"],
+            ["Kva blir det kalla å forklare og tolke ein religiøs tekst systematisk?","Teksttolking"]
+          ]
+        },
+        {
+          "name": "Etiske val og relasjonar",
+          "questions": [
+            ["Kva heiter eit tydeleg, friviljug ja frå dei det gjeld?","Samtykke"],
+            ["Kva heiter retten til å ha delar av livet i fred for andre?","Privatliv"],
+            ["Kva heiter ei fast, forenkla førestelling om korleis alle i ei gruppe er?","Stereotypi"],
+            ["Kva heiter det å seie noko sant, men la vere å fortelje ein viktig del med vilje?","Utelating"],
+            ["Kva etisk omgrep handlar om å ta ansvar for korleis eit val påverkar andre sin tryggleik, omsorg eller lydnad?","Omsorg"],
+            ["Ein elev legg ut eit bilete av ein medelev utan løyve. Kva del av livet til medeleven er det viktig å verne?","Privatlivet"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva taust symbol i eit andlet har smilande munn og tårer, og blir brukt om latter i digitale meldingar?","Latteremoji"],
+            ["Kva teikn med to felt i svart og kvitt blir ofte knytt til yin og yang i kinesisk filosofi?","Taijitu"],
+            ["Kva instrument med pedalar lagar ofte lyd frå mange luftfylte piper i ei kyrkje?","Orgel"],
+            ["Kva heiter den ringforma markeringa over hovudet på helgenar i fleire biletradisjonar?","Glorie"],
+            ["Kva snurrebass med éin hebraisk bokstav på kvar av fire sider blir brukt under hanukka?","Dreidel"],
+            ["Kva for ei skrifttolkingsform kan ein kalle det å lese «lys» som eit bilete på håp og ikkje ein fysisk ljosstråle?","Symbolsk tolking"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Ei varleg samanlikning",
+        "question": "Ei bok seier at «alle i denne trua gjer det same», basert på eit einaste intervju. Kva tankefeil ligg nærast?",
+        "answer": "Overgeneralisering"
+      }
+    },
+    {
+      "subject": "norsk",
+      "categories": [
+        {
+          "name": "Språk i endring",
+          "questions": [
+            ["Kva er det andre norske skriftspråket i tillegg til nynorsk?","Bokmål"],
+            ["Kva heiter ein variant av talemålet som er typisk for ein viss stad?","Dialekt"],
+            ["Kva ordklasse høyrer «og» til i «sol og regn»?","Konjunksjon"],
+            ["Kva nynorsk pronomen erstattar «de» i bokmålssetninga «De tok bussen», når ordet viser til folk ein snakkar om?","Dei"],
+            ["Kva er bunden form fleirtal av substantivet «tre» på nynorsk?","Trea"],
+            ["Kva heitte skriftspråket Ivar Aasen bygde opp før namnet vart endra til nynorsk?","Landsmål"]
+          ]
+        },
+        {
+          "name": "Argument og forteljemåtar",
+          "questions": [
+            ["Kva heiter ei hending som gjer at handlinga i forteljinga brått tek ei ny retning?","Vendepunkt"],
+            ["Kva av dei tre appellformene byggjer særleg på logiske grunnar og belegg?","Logos"],
+            ["«Tenk på kor einsam du ville vore utan den grøne parken.» Kva appellform brukar talaren mest direkte?","Patos"],
+            ["Kva er eit argument som talar mot eit forslag, gjerne sitert før ein drøftar det?","Motargument"],
+            ["Ein forteljar vender stadig attende til nøkkelen som vart att etter stormen. Ordet «nøkkelen» er eit konkret, tilbakevendande …?","Motiv"],
+            ["Ein tittel «Lurer du framleis?» blir brukt i ein annonse der talaren sjølv svarar. Kva heiter spørsmålsforma?","Retorisk spørsmål"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva heiter eit ord som «radar», som blir skrive likt frå høgre og venstre?","Palindrom"],
+            ["Kva frukt manglar i uttrykket «å bite i det sure …» når du må gjere noko ubehageleg?","Eplet"],
+            ["Kva kallar vi like vokallydar og konsonantlydar frå siste trykksterke vokal i «makt» og «prakt» i ei songline?","Enderim"],
+            ["Når noko ser tilgjengeleg ut, men ikkje er det, kan det kallast «berre på papiret». Kva ord blir brukt overført her?","Papiret"],
+            ["Kva kallar vi same konsonantlyd fyrst i «Langs lauvet låg lause liner»?","Bokstavrim"],
+            ["«Dagen kom, dagen gjekk, dagen vart gløymd.» Kva ord er gjenteke fyrst i kvart ledd?","Dagen"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Fiffige formuleringar",
+        "question": "I ein appell seier ein talar «Som lege har eg sett kva lange dagar utan dagslys gjer med skuleelevar». Kva appellform byggjer setninga på for å skape truverd?",
+        "answer": "Etos"
+      }
+    },
+    {
+      "subject": "engelsk",
+      "categories": [
+        {
+          "name": "Språk og samspel",
+          "questions": [
+            ["Kva for uttrykk tyder «etter mi meining», «I think» eller «they know»?","I think"],
+            ["Vel den høflegaste byrjinga på ein førespurnad, «Could you …» eller «You must …».","Could you"],
+            ["«They must be home. The lights are on.» Brukar talaren «must» til å gje ein ordre eller trekkje ei slutning?","Slutning"],
+            ["Kva bind «therefore» inn i ein argumenterande tekst, ein kontrast eller ein konsekvens?","Konsekvens"],
+            ["Kva engelske verbform fullfører passiven «English is … in many countries» med verbet «speak»?","Spoken"],
+            ["«You might want to try again» mildnar ei oppmoding. Kva modalverb blir brukt?","Might"]
+          ]
+        },
+        {
+          "name": "Tekst, avsendar og mottakar",
+          "questions": [
+            ["Kva er det engelske ordet for målgruppa når ho er lesarar, tilhøyrarar eller sjåarar?","Audience"],
+            ["«Dear Sir or Madam» står fyrst i brevet. Er stilen formell eller uformell?","Formell"],
+            ["Kva kallar vi ein tekst som fyrst og fremst vil få deg til å kjøpe ei vare?","Reklame"],
+            ["Kva engelsk uttrykk kan leggje til noko i eit argument, «in addition» eller «in contrast»?","In addition"],
+            ["«I missed my train, so I folded the ticket and put it away. There would be other trains.» Kva synsvinkel er teksten skriven i?","Fyrsteperson"],
+            ["To tekstar kallar same område «quiet» og «dull». Kva adjektiv framstiller mest direkte området som keisamt?","Dull"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva tyder «raining cats and dogs»?","Pøsregnar"],
+            ["Å vere «a bad apple» handlar om eit negativt trekk. Viser uttrykket til ein person eller ei moden frukt?","Person"],
+            ["Kva kallar ein «chips» i britisk engelsk når det er varmt potettilbehøyr?","Pommes frites"],
+            ["I vitsen «A calendar thief got twelve months», kva ting forklarer den bokstavelege tydinga av «twelve months»?","Kalender"],
+            ["Kva kan «dough» tyde i engelsk slang når ein bakar «couldn’t make enough dough»?","Pengar"],
+            ["«Well, that went brilliantly», seier ein etter eit mislukka møte og meiner det motsette. Kva heiter verkemiddelet?","Ironi"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Engelske finter",
+        "question": "«The sign reads: Visitors must report to reception.» Kva er det engelske ordet som viser at dette er påbode?",
+        "answer": "Must"
+      }
+    },
+    {
+      "subject": "kunst-og-handverk",
+      "categories": [
+        {
+          "name": "Visuell kommunikasjon",
+          "questions": [
+            ["Kva heiter fagområdet som handlar om form, storleik og plassering av bokstavar og ord?","Typografi"],
+            ["Kva heiter ein tydeleg skilnad mellom lyst og mørkt, eller stort og smått, i eit bilete?","Kontrast"],
+            ["Kva farge får ein vanlegvis ved å blande raud og blå måling i enkel fargelære?","Lilla"],
+            ["Kva kameravinkel viser eit høgt tårn sett heilt nede frå foten?","Froskeperspektiv"],
+            ["Kva blir teksten rett under eit foto kalla?","Bilettekst"],
+            ["Kva brukar du i tillegg til raudt og grønt for å vise status utan å krevje fargesyn, fargetone eller symbol?","Symbol"]
+          ]
+        },
+        {
+          "name": "Form, rom og funksjon",
+          "questions": [
+            ["Kva slags teikning viser romma i huset rett ovanfrå, med veggar og dører?","Planteikning"],
+            ["Kva blir tomromma rundt og mellom dei synlege delane av ei form kalla i formgjeving?","Negativt rom"],
+            ["Ein modell er laga i målestokk 1:50. Kor langt er 4 cm i modellen i røynda?","2 m"],
+            ["Kva kallar vi ein del av eit bygg som må stå på plass for at tak eller etasjar over ikkje skal rase?","Berande del"],
+            ["Kva type prototyptest gjer du når du ser andre prøve eit verktøy og noterer når dei får problem?","Brukartest"],
+            ["Teikninga har målestokk 1:20. Ei rampe skal vere 2,4 m lang. Kor lang skal ho teiknast på arket?","12 cm"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva heiter mønsteret som oppstår når to like sider ligg spegelvendt om ei midtline?","Speglsymmetri"],
+            ["Kva heiter ein effekt der hjernen ser andlet i til dømes ei stikkontakt?","Pareidoli"],
+            ["Kvar verkar to like grå ruter lysast, mot svart eller kvit bakgrunn?","Mot svart"],
+            ["Er ein frittståande skulptur todimensjonal eller tredimensjonal?","Tredimensjonal"],
+            ["Kva teknikk fordeler mange små farga prikkar slik at dei ser ut som samanhengande farge på avstand?","Pointillisme"],
+            ["Kva perspektivgrep kan ein bruke når to like store ting ser svært ulike ut i storleik fordi den eine ligg heilt nær kameraet?","Tvunge perspektiv"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "Plakaten ser lik ut i ein fargeversjon og i gråtonar. Kva eigenskap skal vere stor mellom tekst og bakgrunn for at ho framleis er lett å lese?",
+        "answer": "Lyskontrast"
+      }
+    },
+    {
+      "subject": "musikk",
+      "categories": [
+        {
+          "name": "Rytme, stil og struktur",
+          "questions": [
+            ["Kva er forkortinga for slag per minutt i musikk?","BPM"],
+            ["Kva heiter aksenten som blir lagd på eit svakt taktslag eller mellom dei vanlege sterke slaga?","Synkope"],
+            ["Kva heiter det å flytte alle tonane i eit stykke til ein annan toneart med same intervall mellom dei?","Transponering"],
+            ["Kva tredelt takt er vanleg i vals?","3/4"],
+            ["Kva heiter to rytmar som går samstundes med ulik deling av same puls, til dømes tre jamne slag mot to?","Polyrytme"],
+            ["Eit motiv i 3/4 varer åtte taktar. Kor mange firedelsslag varer motivet?","24 slag"]
+          ]
+        },
+        {
+          "name": "Lyd som blir forma",
+          "questions": [
+            ["Kva heiter ein digital lydsekvens som startar att når han når slutten?","Lydsløyfe"],
+            ["Kva gjer ein fadar på eit digitalt miksebord meir eller mindre av på kvart spor?","Lydstyrken"],
+            ["Kva heiter forvrenginga når ein digital topp blir kutta fordi nivået blir for høgt?","Klipping"],
+            ["Kva heiter mange refleksjonar som smeltar saman til eit klangteppe i eit tomt rom?","Romklang"],
+            ["Kva heiter ein avgrensa bit lyd frå eit anna opptak som kan brukast som byggjestein?","Sample"],
+            ["Kva effekt endrar nivået opp og ned på utvalde frekvensområde i eit lydspor?","Equalizer"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Du spelar eit vanleg lydopptak dobbelt så fort utan korrigering. Tonefrekvensen blir dobla. Kor stort er spranget i tonehøgd?","Éin oktav"],
+            ["Kva slags lyd kan ein metallbit som fell på eit flisgolv lage, klirr eller sus?","Klirr"],
+            ["Kva gjer glaset når ein får tonen ved å stryke ein fuktig finger langs kanten?","Vibrerer"],
+            ["Kva verkemiddel kan kome inn over stemma frå ein som fell utan at lyden kom frå sjølve filmopptaket?","Lydeffekt"],
+            ["Ein lyd varer 4 sekund. Kor lenge varer han om avspelingsfarten blir dobla?","2 sekund"],
+            ["Kva teknikk endrar varigheita av eit lydopptak med minst mogleg endring av tonehøgda?","Tidsstrekking"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "Musikken er 120 BPM og går i 4/4. Kor mange sekund varer åtte taktar?",
+        "answer": "16 sekund"
+      }
+    },
+    {
+      "subject": "kroppsøving",
+      "categories": [
+        {
+          "name": "Trening og kroppskunnskap",
+          "questions": [
+            ["Kva heiter det å auke vanske, tid eller mengd gradvis over fleire økter?","Progresjon"],
+            ["Kva type tilpassing skjer når ein elev tek lettare ball og øver på same teknikk?","Utstyrstilpassing"],
+            ["Kva heiter det å halde ein muskel strekt kortvarig utan å gjere mange gjentekne rørsler?","Statisk tøying"],
+            ["Kva organ aukar slagfrekvensen når du byrjar å springe?","Hjartet"],
+            ["Ved jamn fart på 5 km/t, kor langt går ein på 18 minutt?","1,5 km"],
+            ["Til ein pasningstest på ulike dagar held du ball, avstand og mål likt. Kva type test er dette når vilkåra er like?","Standardisert test"]
+          ]
+        },
+        {
+          "name": "Friluftsliv, val og inkludering",
+          "questions": [
+            ["Kva liner finn du på eit turkart dersom du vil samanlikne høgder og stigning?","Høgdekurver"],
+            ["Kva seier mange tette høgdekurver om terrenget dei går gjennom?","Bratt"],
+            ["Kva kallar vi ferdsel der ein tek med søppel og lèt vegetasjonen vere i fred?","Sporlaus ferdsel"],
+            ["Kva heiter tida de har avtalt å snu på ein tur, sjølv om turmålet er rett framfor dykk?","Vendetid"],
+            ["I goalball kan spelarar finne ballen utan å sjå han. Kva har ballen inni som ein kan høyre?","Bjøller"],
+            ["Eit kart er i målestokk 1:20 000. Kva er 7,5 cm i røynda?","1,5 km"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva grasstad kan dempe lyden av eit steg meir enn eit hardt golv, ei mjuk eng eller flislagt gang?","Mjuk eng"],
+            ["Kva dyr er den største nolevande fuglen og spring raskt med lange bein?","Struts"],
+            ["Kva kallar vi rørsla når ein robotfigur snur seg rundt på staden?","Rotasjon"],
+            ["I ein halvtime økt er 18 minutt roleg rørsle. Kor stor del av økta er det i prosent?","60 %"],
+            ["Kva slags kraft verkar motsatt glideretninga til ei skøyte på is?","Glidefriksjon"],
+            ["Kva heiter energien i ein ball medan han rullar?","Rørsleenergi"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Kroppen i rørsle",
+        "question": "Etter to drag på 400 m og tre på 200 m, kor langt har ein sprunge i draga?",
+        "answer": "1400 m"
+      }
+    },
+    {
+      "subject": "mat-og-helse",
+      "categories": [
+        {
+          "name": "Matkjemi i praksis",
+          "questions": [
+            ["Kva heiter prosessen der bakegjær bryt ned sukker og dannar karbondioksid?","Gjæring"],
+            ["Kva kallar vi ei blanding med små oljedropar spreidde i ei vasshaldig væske?","Emulsjon"],
+            ["Kva stoff i ei maisjamning får væska til å tjukne når det blir varma?","Stivelse"],
+            ["Kva faktor må de endre for å undersøkje om meir varme gjev brunare pannekaker, temperatur eller røre?","Temperaturen"],
+            ["Du har vispa egg og olje saman til majones, men olja legg seg i eit eige lag. Kva har brote saman?","Emulsjonen"],
+            ["Ei gryte mat mister 300 g under steiking, frå 1200 g til 900 g. Kor stor prosentdel av massen forsvann?","25 %"]
+          ]
+        },
+        {
+          "name": "Haldbarheit og bruk av ressursar",
+          "questions": [
+            ["Kva heiter etande mat som blir kasta?","Matsvinn"],
+            ["Kva datoord på ei mjølkepakning er fyrst og fremst knytt til venta kvalitet, «best før» eller «siste forbruksdag»?","Best før"],
+            ["Kva metode for å planleggje matlageret nyttar ein når den eldste pakka blir brukt fyrst, lagerrotasjon eller blindtest?","Lagerrotasjon"],
+            ["Kva heiter matdelen av ein rett som er att etter servering og kan brukast att ved trygg oppbevaring?","Matresten"],
+            ["130 g matrestar kjem frå tallerkenane til fem elevar. Kva er gjennomsnittet per elev?","26 g"],
+            ["Matresten er 400 g på måndag og 300 g etter endringa på tysdag. Kva er prosentnedgangen?","25 %"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva reiskap brukar ein for å måle temperaturen midt i eit ferdigsteikt brød?","Steikjetermometer"],
+            ["Kva heiter den korte, brotne lyden frå ein sprø kjeks når du tygg?","Knas"],
+            ["Kva del av ei potet blir på folkemunne kalla «auge», ein knopp eller ei rot?","Ein knopp"],
+            ["Kva heiter overgangen frå vatn på maten til damp som kan gjere overflata tørrare?","Fordamping"],
+            ["I eit forsøk blir epleskivene som fekk sitronsaft, seinare brune. Kva eigenskap ved safta kan hemje bruninga, syre eller feitt?","Syre"],
+            ["Kva protein frå kveite er viktig for at ein deig kan strekkjast utan straks å bli riven av?","Gluten"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "To epleskiver ligg på same bord i 20 minutt, den eine med sitron og den andre utan. Kva skive er kontrollprøva?",
+        "answer": "Utan sitron"
+      }
+    },
+    {
+      "subject": "utdanningsval",
+      "categories": [
+        {
+          "name": "Interesser og ferdigheiter",
+          "questions": [
+            ["Kva omgrep brukar vi om noko du likar å drive med eller vil lære meir om, til dømes å byggje?","Interesse"],
+            ["Kva omgrep brukar vi om noko du kan gjere, som å planleggje ei rute eller bruke eit verktøy?","Ferdigheit"],
+            ["Kva er namnet på skulepersonen som kan hjelpe deg å finne informasjon om framtidige utdanningsval?","Rådgjevar"],
+            ["Kva heiter ferdigheita du brukar når du og andre fordeler oppgåver og arbeider mot same mål?","Samarbeid"],
+            ["Kva er ei organisert økt der elevar får prøve ein arbeidsplass i røynda, arbeidspraksis eller leseøkt?","Arbeidspraksis"],
+            ["Ein elev vil undersøkje om eit yrke passar betre enn eit anna. Kva slags kjelde kan gje ei direkte oppleving av kvardagen, praksis eller reklame?","Praksis"]
+          ]
+        },
+        {
+          "name": "Utforsk arbeidslivet",
+          "questions": [
+            ["Kva kallar vi typen arbeid ein person har som hovudjobb?","Yrke"],
+            ["Kva heiter namnet ei verksemd gjev jobben, til dømes «tømrar» eller «bibliotekar»?","Stillingstittel"],
+            ["Kva kallast ei samtale der du stiller planlagde spørsmål til ein som har det yrket du vil lære om?","Intervju"],
+            ["Kva er ei forenkla førestelling om at ein type jobb berre passar for éi bestemt gruppe?","Stereotypi"],
+            ["Kva tyder det å vere gjest på ein annan skule eller på ein arbeidsplass ei kort tid for å lære, hospitering eller søknad?","Hospitering"],
+            ["Frå ein heil arbeidsdag fortel ei reklamebrosjyre berre om den mest spanande oppgåva. Kva føremål har brosjyra, å lokke eller dokumentere alt?","Å lokke"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva yrke sjekkar nye dataspel systematisk for feil før dei kjem ut?","Speltestar"],
+            ["Kva er fagpersonen som undersøkjer og behandlar sjuke dyr, kalla?","Veterinær"],
+            ["Kva yrke bruker ei kjevle og ein omn til å lage brød for sal?","Bakar"],
+            ["Kva fagperson styrer lys på ei scene for å få fram ulike stemningar?","Lysteknikar"],
+            ["Kva arbeidsoppgåve handlar om å lage teikningar og utrekningar før ei bru blir bygd?","Prosjektering"],
+            ["Kva yrke tek vare på gamle ting i museum ved å undersøkje og stabilisere materiala?","Konservator"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "Du vil lære om arbeidet frå ein som gjer det sjølv kvar dag. Er svara frå denne personen ei fyrstehands- eller andrehandskjelde?",
+        "answer": "Fyrstehandskjelde"
+      }
+    }
+  ]
+}

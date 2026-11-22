@@ -22,8 +22,9 @@ UNNTAK — dette dekkjer lisensen IKKJE:
   * Tredjepartsbiblioteka under `_libs/` (Phaser, Pyodide, CodeMirror,
     lamejs, skrifta Andika m.fl.) har sine eigne lisensar. Sjå
     `_libs/CREDITS.md`.
-  * Bilete som blir henta frå Wikimedia Commons under køyring (Heimsank,
-    Vidfaren) høyrer opphavspersonane sine til og har sine eigne lisensar.
+  * Bilete frå Wikimedia Commons i Heimsank, Vidfaren og Frødebrett har
+    kvar sine lisensar. Opphav, lisens og originalfil for dei innebygde
+    Frødebrett-bileta er oppførte i frødedata og ved svaret i spelet.
   * Namnet «Vyrdepil» og maskoten Vyrde kan ikkje brukast slik at ei
     endra utgåve framstår som den offisielle nettstaden.
 
