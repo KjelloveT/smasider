@@ -25,7 +25,7 @@
     const card = Vy.el('article', 'vp-panel vp-panel--plain vp-panel--compact fb-quiz-card');
     const questionCount = quiz.categories.reduce((total, category) => total + category.questions.length, 0);
     const meta = standard
-      ? quiz.categories.slice(0, 2).map(category => category.name).join(' · ')
+      ? quiz.categories.map(category => category.name).filter(name => name !== 'Snodige fakta').join(' · ')
       : quiz.categories.length + ' kategoriar · ' + questionCount + ' spørsmål' + (quiz.final ? ' · finalerunde' : '');
     const heading = Vy.el('h3', 'vp-panel vp-panel--soft fb-quiz-title', quiz.title);
     const start = action('Start spel', 'vp-button--positive', 'play', quiz, () => FB.Board.selectQuiz(quiz));
@@ -42,7 +42,7 @@
         Store.deleteQuiz(quiz.id);
         Saved.render();
         status('Frøda er sletta.');
-        FB.el('own-quizzes-heading').focus();
+        FB.el('library-heading').focus();
       }));
     }
 
@@ -72,12 +72,15 @@
   }
 
   function isQuiz(quiz) {
-    return quiz && typeof quiz.title === 'string' && Array.isArray(quiz.categories)
+    return quiz && typeof quiz.title === 'string' && quiz.title.trim() && Array.isArray(quiz.categories)
       && quiz.categories.length > 0 && quiz.categories.length <= 6
       && quiz.categories.every(category => category && typeof category.name === 'string'
         && Array.isArray(category.questions) && category.questions.every(question =>
           question && (typeof question.question === 'string' || FB.Images.valid(question.image))
-          && typeof question.answer === 'string'));
+          && typeof question.answer === 'string'))
+      && quiz.categories.some(category => category.questions.some(question =>
+        FB.POINTS.includes(question.points) && question.answer.trim()
+        && ((typeof question.question === 'string' && question.question.trim()) || FB.Images.valid(question.image))));
   }
 
   async function importFile(file) {
@@ -92,7 +95,9 @@
     const isFrode = data && (data.app === 'frodebrett' || data.frodebrett || data.frodetavla);
     const quizzes = isFrode && (Array.isArray(data.quizzes) ? data.quizzes : [data.quiz]);
     if (!quizzes || !quizzes.length || !quizzes.every(isQuiz)) {
-      status('Fila inneheld ingen gyldige frøder frå Frødebrett.');
+      status(Array.isArray(data?._instruksar)
+        ? 'Fyll ut malen med tittel, kategoriar, spørsmål og fasitsvar før du opnar fila.'
+        : 'Fila inneheld ingen gyldige frøder frå Frødebrett.');
       return;
     }
 
@@ -109,6 +114,10 @@
 
   Saved.bind = function () {
     const fileInput = FB.el('import-quiz-file');
+    Store.retireExamples().then(changed => {
+      if (changed) Saved.render();
+    });
+    FB.el('btn-download-template').addEventListener('click', FB.Export.downloadTemplate);
     FB.el('btn-import-quiz').addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', () => {
       const file = fileInput.files[0];

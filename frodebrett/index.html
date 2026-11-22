@@ -7,7 +7,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="css/style.css?v=7">
+<link rel="stylesheet" href="css/style.css?v=8">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
@@ -32,34 +32,45 @@
     <div id="quiz-selection" class="vp-stack">
       <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="library-heading">
         <div class="fb-section-head">
-          <h2 id="library-heading" tabindex="-1">Standardfrøder</h2>
-          <a href="#own-quizzes-heading">Til eigne frøder</a>
+          <h2 id="library-heading" tabindex="-1">Eigne frøder</h2>
+          <button class="vp-button vp-button--primary" id="btn-editor" type="button"><span data-icon="plus" aria-hidden="true"></span>Ny frøde</button>
         </div>
-        <div class="fb-library-filters">
-          <label class="vp-field"><span class="vp-label">Trinn</span>
-            <select class="vp-input" id="standard-grade"><option value="">Vel trinn</option></select>
-          </label>
-          <label class="vp-field"><span class="vp-label">Fag</span>
-            <select class="vp-input" id="standard-subject"><option value="">Alle fag</option></select>
-          </label>
-        </div>
-        <p class="vp-help fb-standard-status" id="standard-status" role="status">Vel trinn for å sjå frødene.</p>
-        <div id="standard-list" class="fb-quiz-list" hidden></div>
-        <a class="vp-help" id="standard-curriculum" referrerpolicy="no-referrer" hidden></a>
+        <div id="quiz-list" class="fb-quiz-list"></div>
       </section>
 
-      <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="own-quizzes-heading">
-        <div class="fb-section-head">
-          <h2 id="own-quizzes-heading" tabindex="-1">Eigne frøder</h2>
-          <div class="vp-actions">
-            <button class="vp-button vp-button--primary" id="btn-editor" type="button"><span data-icon="plus" aria-hidden="true"></span>Ny frøde</button>
-            <button class="vp-button" id="btn-import-quiz" type="button"><span data-icon="upload" aria-hidden="true"></span>Opne JSON-fil</button>
-            <input type="file" id="import-quiz-file" accept=".json,application/json" hidden>
-          </div>
+      <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="json-files-heading">
+        <h2 id="json-files-heading">JSON-filer</h2>
+        <p class="vp-prose" id="json-files-help">Gje den tome malen til ein KI-modell, og opne den ferdige JSON-fila her. Når du opnar ei fil, blir ho lesen og lagra berre i nettlesaren på denne eininga. Frøda kan spelast her med ein gong.</p>
+        <div class="vp-actions">
+          <button class="vp-button vp-button--tool" id="btn-download-template" type="button"><span data-icon="fileJson" aria-hidden="true"></span>Last ned tom JSON-mal</button>
+          <button class="vp-button" id="btn-import-quiz" type="button" aria-describedby="json-files-help"><span data-icon="upload" aria-hidden="true"></span>Opne JSON-fil</button>
+          <input type="file" id="import-quiz-file" accept=".json,application/json" hidden>
+          <button class="vp-button vp-button--quiet" id="btn-export-all" type="button" hidden>Last ned alle eigne frøder</button>
         </div>
         <p id="library-status" role="status" hidden></p>
-        <div id="quiz-list" class="fb-quiz-list"></div>
-        <button class="vp-button vp-button--quiet vp-button--compact fb-export-all" id="btn-export-all" type="button">Last ned alle som JSON</button>
+      </section>
+
+      <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="premade-heading">
+        <h2 id="premade-heading">Førehandslaga frøder</h2>
+        <p class="vp-prose">Alle dei førehandslaga frødene er laga av KI. Ein god del av spørsmåla og svara er snodige. Me rår deg sterkt til å sjå gjennom både spørsmåla og svara før du brukar dei med ein klasse. Frødene skal gje deg ein rask start med eit nesten ferdig oppsett.</p>
+        <p class="vp-help" id="premade-filter-help">Vel eitt eller fleire trinn og fag. Temafrøder kan veljast åleine eller saman med fagfrødene.</p>
+        <div class="fb-library-filters" id="standard-filters" aria-describedby="premade-filter-help">
+          <fieldset class="vp-choices">
+            <legend>Trinn</legend>
+            <div class="vp-actions" id="standard-grade"></div>
+          </fieldset>
+          <fieldset class="vp-choices">
+            <legend>Fag</legend>
+            <div class="vp-actions" id="standard-subject"></div>
+          </fieldset>
+          <fieldset class="vp-choices">
+            <legend>Tema</legend>
+            <div class="vp-actions" id="standard-theme"></div>
+          </fieldset>
+        </div>
+        <p class="vp-help" id="standard-status" role="status"></p>
+        <div id="standard-list" class="fb-quiz-list" hidden></div>
+        <div class="vp-actions" id="standard-curriculum" hidden></div>
       </section>
     </div>
 
@@ -103,6 +114,7 @@
           <div id="final-answer" class="final-answer hidden">
             <h3 class="heading4-accent2">Svar</h3>
             <div id="final-answer-display"></div>
+            <p class="vp-help fb-image-credit" id="final-question-image-credit" hidden></p>
           </div>
           <div id="final-point-controls" class="point-controls hidden"></div>
           <div class="fb-controls">
@@ -235,6 +247,7 @@
       <div id="question-answer" class="question-answer hidden">
         <div class="answer-label">Svar</div>
         <div id="answer-text" class="answer-text"></div>
+        <p class="vp-help fb-image-credit" id="question-image-credit" hidden></p>
       </div>
       <div id="modal-point-controls" class="point-controls hidden"></div>
     </div>
@@ -256,7 +269,10 @@
     <div id="preview-question" class="preview-question hidden">
       <div id="preview-question-text" class="question-text"></div>
       <img id="preview-question-image" class="fb-question-image hidden" alt="Bilete til spørsmålet">
-      <div id="preview-answer-text" class="answer-text hidden"></div>
+      <div id="preview-answer" class="hidden">
+        <div id="preview-answer-text" class="answer-text"></div>
+        <p class="vp-help fb-image-credit" id="preview-question-image-credit" hidden></p>
+      </div>
       <div class="fb-controls">
         <button class="btn btn-small btn-accent" id="btn-preview-reveal">Vis svar</button>
         <button class="btn btn-small" id="btn-preview-back">Tilbake til brett</button>
@@ -284,15 +300,15 @@
 <script src="../js/vyrdepil-storage.js"></script>
 <script src="../js/vyrdepil-icons.js"></script>
 <script src="../js/vyrdepil-util.js?v=1.2"></script>
-<script src="js/storage.js?v=7"></script>
+<script src="js/storage.js?v=8"></script>
 <script src="js/state.js?v=7"></script>
-<script src="js/images.js?v=2"></script>
+<script src="js/images.js?v=3"></script>
 <script src="js/team-setup.js?v=1"></script>
-<script src="js/board.js?v=10"></script>
-<script src="js/editor.js?v=12"></script>
-<script src="js/export.js?v=4"></script>
-<script src="js/saved.js?v=10"></script>
-<script src="js/standard-quizzes.js?v=2"></script>
+<script src="js/board.js?v=11"></script>
+<script src="js/editor.js?v=13"></script>
+<script src="js/export.js?v=5"></script>
+<script src="js/saved.js?v=11"></script>
+<script src="js/standard-quizzes.js?v=3"></script>
 <script src="js/app.js?v=11"></script>
 
 

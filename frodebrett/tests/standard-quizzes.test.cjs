@@ -52,3 +52,29 @@ for (let grade = 1; grade <= 10; grade++) {
     }
   });
 }
+
+test('Land i verda har korte fasitar og innebygde bilete med kjelder', () => {
+  const data = JSON.parse(readFileSync(path.join(__dirname, '../json/themes/land-i-verda.json'), 'utf8'));
+  assert.equal(data.app, 'frodebrett');
+  assert.equal(data.version, 1);
+  const { categories, final } = data.quiz;
+  assert.deepEqual(categories.map(category => category.name), ['Flagg', 'Hovudstader', 'Landemerke']);
+  for (const category of categories) {
+    assert.deepEqual(category.questions.map(question => question.points), [100, 200, 300, 400, 500, 1000]);
+    for (const question of category.questions) {
+      nonEmptyText(question.question, category.name);
+      shortAnswer(question.answer, question.question);
+      if (category.name === 'Hovudstader') continue;
+      assert.match(question.image, /^data:image\/(?:png|webp);base64,[A-Za-z0-9+/=]+$/);
+      assert.ok(question.image.length <= 280000);
+      nonEmptyText(question.imageAlt, question.question);
+      const { title, author, license, source, licenseUrl } = question.imageCredit;
+      for (const text of [title, author, license]) nonEmptyText(text, source);
+      assert.match(source, /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+      if (license.startsWith('CC ')) assert.match(licenseUrl, /^https:\/\/creativecommons\.org\/licenses\//);
+    }
+  }
+  shortAnswer(final.answer, final.question);
+  assert.equal(data.wikidata.filter(claim => claim.property === 'P41').length, 6);
+  assert.equal(data.wikidata.filter(claim => claim.property === 'P18').length, 6);
+});

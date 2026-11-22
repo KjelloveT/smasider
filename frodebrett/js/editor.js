@@ -28,7 +28,7 @@
 
     FB.el('btn-close-preview').addEventListener('click', () => FB.closeOverlay('preview-modal'));
     Vy.bindOverlayClose(FB.el('preview-modal'));
-    FB.el('btn-preview-reveal').addEventListener('click', () => FB.show('preview-answer-text'));
+    FB.el('btn-preview-reveal').addEventListener('click', () => FB.show('preview-answer'));
     FB.el('btn-preview-back').addEventListener('click', () => {
       FB.hide('preview-question');
       FB.show('preview-board');
@@ -364,9 +364,8 @@
     FB.show('preview-question');
     FB.el('preview-question-text').textContent = q.points + ' poeng: ' + q.question;
     FB.Images.show('preview-question-image', q);
-    const ans = FB.el('preview-answer-text');
-    ans.textContent = 'Svar: ' + q.answer;
-    ans.classList.add('hidden');
+    FB.el('preview-answer-text').textContent = 'Svar: ' + q.answer;
+    FB.hide('preview-answer');
   };
 
   function updateSaveLabel() {
@@ -386,7 +385,7 @@
     selectTab(0);
 
     const final = quiz?.final;
-    S.editorFinalImage = { image: final?.image, imageAlt: final?.imageAlt };
+    S.editorFinalImage = { image: final?.image, imageAlt: final?.imageAlt, imageCredit: final?.imageCredit };
     FB.el('editor-final-image').replaceChildren(editImage(S.editorFinalImage, 'finalspørsmålet'));
     Object.entries(finalFields).forEach(([key, id]) => { FB.el(id).value = final?.[key] || ''; });
     FB.el('final-round-toggle').checked = Boolean(final);

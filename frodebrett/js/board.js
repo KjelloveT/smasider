@@ -195,6 +195,7 @@
       question: question.question,
       image: question.image,
       imageAlt: question.imageAlt,
+      imageCredit: question.imageCredit,
       answer: question.answer,
       basePoints: question.points,
       points: isDD ? question.points * 2 : question.points,

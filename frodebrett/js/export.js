@@ -63,6 +63,7 @@
     if (FB.Images.valid(question.image)) {
       data.image = question.image;
       data.imageAlt = question.imageAlt || '';
+      if (question.imageCredit) data.imageCredit = question.imageCredit;
     }
     return data;
   }
@@ -144,6 +145,30 @@ ${code}
     Vy.downloadJson({ app: 'frodebrett', version: 1, quiz }, fileName(quiz, 'json'));
   }
 
+  function downloadTemplate() {
+    const emptyCategory = () => ({
+      name: '',
+      questions: FB.POINTS.map(points => ({ points, question: '', answer: '' }))
+    });
+    Vy.downloadJson({
+      app: 'frodebrett',
+      version: 1,
+      _instruksar: [
+        'Lag ei spelbar frøde på nynorsk for emnet og aldersgruppa brukaren oppgjev.',
+        'Fyll ut tittel og 2–6 kategoriar med ulike namn. Kvar kategori skal ha seks spørsmål, eitt for kvar av poengverdiane 100, 200, 300, 400, 500 og 1000.',
+        'Lat spørsmåla bli vanskelegare med poengverdien. Kvart spørsmål skal peike på eitt tydeleg fasitsvar utan å røpe det.',
+        'Skriv fasitsvar på eitt eller to ord, eller eit tal med eventuell eining. Gje svar utan forklaringar.',
+        'Fyll ut finalen med kategori, valfritt hint, spørsmål og kort fasitsvar. Set final til null om brukaren vil spele utan finale.',
+        'Behald app, version og quiz samt feltnamna i malen. Fjern _instruksar. Lever berre gyldig JSON utan Markdown eller kodegjerde.'
+      ],
+      quiz: {
+        title: '',
+        categories: [emptyCategory(), emptyCategory()],
+        final: { category: '', hint: '', question: '', answer: '' }
+      }
+    }, 'frodebrett_tom_mal.json');
+  }
+
   function withHelp(button, format) {
     const group = Vy.el('div', 'fb-download-action');
     const help = Vy.el('button', button.className + ' vp-button--icon');
@@ -182,5 +207,5 @@ ${code}
     Vy.bindOverlayClose(dialog);
   }
 
-  FB.Export = { download, downloadJson, withHelp, bindEditor, bindHelp };
+  FB.Export = { download, downloadJson, downloadTemplate, withHelp, bindEditor, bindHelp };
 })(window);

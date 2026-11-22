@@ -1,4 +1,4 @@
-/* Frødebrett — fast katalog med frøder etter fag og trinn. */
+/* Frødebrett — førehandslaga frøder etter fag, trinn og tema. */
 (function (root) {
   'use strict';
 
@@ -16,23 +16,27 @@
     'mat-og-helse': { name: 'Mat og helse', plan: 'mhe01-03' },
     utdanningsval: { name: 'Utdanningsval', plan: 'utv01-03', firstGrade: 8 }
   };
-  const grades = new Map();
+  const gradeNumbers = Array.from({ length: 10 }, (_, index) => index + 1);
+  const themes = {
+    land: { name: 'Land og geografi', path: 'json/themes/land-i-verda.json?v=1' }
+  };
+  const catalogue = new Map();
   let renderVersion = 0;
 
-  function loadGrade(grade) {
-    if (!grades.has(grade)) {
-      const pending = fetch('json/standard/' + grade + '.json?v=2')
+  function load(path) {
+    if (!catalogue.has(path)) {
+      const pending = fetch(path)
         .then(response => {
-          if (!response.ok) throw new Error('Kunne ikkje laste trinnet.');
+          if (!response.ok) throw new Error('Kunne ikkje laste frødene.');
           return response.json();
         })
         .catch(error => {
-          grades.delete(grade);
+          catalogue.delete(path);
           throw error;
         });
-      grades.set(grade, pending);
+      catalogue.set(path, pending);
     }
-    return grades.get(grade);
+    return catalogue.get(path);
   }
 
   function toQuiz(standard, grade) {
@@ -48,57 +52,89 @@
     };
   }
 
+  function checked(id) {
+    return [...FB.el(id).querySelectorAll('input:checked')].map(input => input.value);
+  }
+
+  function renderCurricula(selectedSubjects) {
+    const source = FB.el('standard-curriculum');
+    const links = selectedSubjects.map(id => {
+      const item = subjects[id];
+      const link = Vy.el('a', 'vp-help', 'Læreplan for ' + item.name + ' (Udir)');
+      link.href = 'https://www.udir.no/lk20/' + item.plan + '?lang=nno';
+      link.referrerPolicy = 'no-referrer';
+      return link;
+    });
+    source.replaceChildren(...links);
+    source.hidden = !links.length;
+  }
+
   async function render() {
     const version = ++renderVersion;
-    const grade = Number(FB.el('standard-grade').value);
-    const select = FB.el('standard-subject');
-    for (const option of select.options) {
-      option.disabled = Boolean(grade && subjects[option.value]?.firstGrade > grade);
-    }
-    if (select.selectedOptions[0].disabled) select.value = '';
-    const subject = select.value;
+    const selectedGrades = checked('standard-grade').map(Number);
+    const selectedSubjects = checked('standard-subject');
+    const selectedThemes = checked('standard-theme');
     const list = FB.el('standard-list');
     const status = FB.el('standard-status');
-    const source = FB.el('standard-curriculum');
     list.replaceChildren();
     list.hidden = true;
-    source.hidden = !grade || !subject;
-    if (!source.hidden) {
-      source.href = 'https://www.udir.no/lk20/' + subjects[subject].plan + '?lang=nno';
-      source.textContent = 'Læreplan for ' + subjects[subject].name + ' (Udir)';
-    }
-    status.textContent = grade ? 'Lastar frødene …' : 'Vel trinn for å sjå frødene.';
-    if (!grade) return;
+    renderCurricula(selectedSubjects);
 
-    try {
-      const pack = await loadGrade(grade);
-      if (renderVersion !== version) return;
-      const quizzes = pack.quizzes.filter(standard => !subject || standard.subject === subject);
-      list.append(...quizzes.map(standard => FB.Saved.makeCard(toQuiz(standard, grade), true)));
-      list.hidden = !quizzes.length;
-      status.textContent = quizzes.length
-        ? quizzes.length + (quizzes.length === 1 ? ' frøde' : ' frøder') + ' for ' + grade + '. trinn'
-        : 'Ingen frøder for dette valet.';
-    } catch {
-      if (renderVersion === version) status.textContent = 'Kunne ikkje laste frødene. Vel trinn på nytt for å prøve att.';
+    if (!selectedGrades.length && !selectedSubjects.length && !selectedThemes.length) {
+      status.textContent = 'Kryss av eit trinn, eit fag eller eit tema.';
+      return;
     }
+    status.textContent = 'Lastar frødene …';
+    const grades = selectedGrades.length ? selectedGrades : gradeNumbers;
+    const loads = selectedThemes.map(id => load(themes[id].path).then(data => [data.quiz]));
+    if (selectedGrades.length || selectedSubjects.length) {
+      for (const grade of grades) {
+        if (selectedSubjects.length && !selectedSubjects.some(id => (subjects[id].firstGrade ?? 1) <= grade)) continue;
+        loads.push(load('json/standard/' + grade + '.json?v=2').then(pack => pack.quizzes
+          .filter(standard => !selectedSubjects.length || selectedSubjects.includes(standard.subject))
+          .map(standard => toQuiz(standard, grade))));
+      }
+    }
+    const results = await Promise.allSettled(loads);
+    if (renderVersion !== version) return;
+    const quizzes = results.flatMap(result => result.status === 'fulfilled' ? result.value : []);
+    list.append(...quizzes.map(quiz => FB.Saved.makeCard(quiz, true)));
+    list.hidden = !quizzes.length;
+    const count = quizzes.length ? quizzes.length + (quizzes.length === 1 ? ' frøde' : ' frøder') : '';
+    if (results.some(result => result.status === 'rejected')) {
+      status.textContent = count
+        ? count + '. Nokre frøder kunne ikkje lastast.'
+        : 'Kunne ikkje laste frødene. Endre eit val for å prøve att.';
+    } else {
+      status.textContent = count || 'Ingen frøder for desse vala.';
+    }
+  }
+
+  function addChoice(group, value, name, selected = false) {
+    const label = Vy.el('label', 'vp-choice');
+    const input = Vy.el('input');
+    input.type = 'checkbox';
+    input.value = value;
+    input.checked = input.defaultChecked = selected;
+    label.append(input, name);
+    group.append(label);
+    return input;
   }
 
   function bind() {
     const grade = FB.el('standard-grade');
     const subject = FB.el('standard-subject');
-    for (let number = 1; number <= 10; number++) {
-      const option = Vy.el('option', '', number + '. trinn');
-      option.value = number;
-      grade.append(option);
+    const theme = FB.el('standard-theme');
+    for (const number of gradeNumbers) {
+      addChoice(grade, number, number + '.').setAttribute('aria-label', number + '. trinn');
     }
     for (const [id, item] of Object.entries(subjects)) {
-      const option = Vy.el('option', '', item.name);
-      option.value = id;
-      subject.append(option);
+      addChoice(subject, id, item.name);
     }
-    grade.addEventListener('change', render);
-    subject.addEventListener('change', render);
+    for (const [id, item] of Object.entries(themes)) {
+      addChoice(theme, id, item.name, id === 'land');
+    }
+    FB.el('standard-filters').addEventListener('change', render);
     render();
   }
 
