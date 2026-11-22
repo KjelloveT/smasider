@@ -4,6 +4,14 @@ LL.uiPhase2Visuals = (function () {
   'use strict';
   const el = (...args) => Vy.el(...args);
   const METERS = { energy: ['Energi', 'zap'], wellbeing: ['Trivsel', 'smile'], social: ['Sosialt', 'users'] };
+  const METER_STOPS = [[0, 3], [7, 27], [18, 51], [32, 105], [49, 137]];
+  const METER_COLOURS = Array.from({ length: 50 }, (_, level) => {
+    const end = METER_STOPS.findIndex(([stop], index) => index > 0 && stop >= level);
+    const [fromLevel, fromHue] = METER_STOPS[end - 1];
+    const [toLevel, toHue] = METER_STOPS[end];
+    const hue = fromHue + (toHue - fromHue) * (level - fromLevel) / (toLevel - fromLevel);
+    return 'hsl(' + hue.toFixed(1) + ' 65% 41%)';
+  });
   function icon(name, size) {
     const node = el('span'); node.setAttribute('aria-hidden', 'true');
     node.innerHTML = LL.util.icon(name, size || 22); return node;
@@ -32,14 +40,17 @@ LL.uiPhase2Visuals = (function () {
   }
   function meter(key, value, delta) {
     const bar = el('div', 'll-meter'), fill = el('div', 'll-meter-fill');
+    const score = LL.util.clamp(value, 0, 100);
+    const last = METER_COLOURS.length - 1;
     bar.setAttribute('role', 'meter'); bar.setAttribute('aria-label', METERS[key][0]);
     bar.setAttribute('aria-valuemin', '0'); bar.setAttribute('aria-valuemax', '100');
-    bar.setAttribute('aria-valuenow', Math.round(value));
-    fill.style.width = LL.util.clamp(value, 0, 100) + '%';
+    bar.setAttribute('aria-valuenow', Math.round(score));
+    fill.style.width = score + '%';
+    fill.style.setProperty('--ll-meter-colour', METER_COLOURS[Math.round(score * last / 100)]);
     if (Number.isFinite(delta)) {
-      if (Math.abs(delta) >= .05) fill.dataset.direction = delta > 0 ? 'up' : 'down';
-      bar.setAttribute('aria-valuetext', Math.round(value) + ' · ' + (delta > 0 ? 'opp ' : delta < 0 ? 'ned ' : '') + sign(delta));
-    } else if (key !== 'social' && value < 35) fill.classList.add('warn');
+      const change = Math.abs(delta) < .05 ? 'uendra' : (delta > 0 ? 'opp ' : 'ned ') + sign(delta);
+      bar.setAttribute('aria-valuetext', Math.round(score) + ' · ' + change);
+    }
     bar.append(fill); return bar;
   }
   function effects(choice, s, actual) {

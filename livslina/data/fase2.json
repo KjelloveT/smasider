@@ -254,6 +254,7 @@
   ],
   "admissions": {
     "checked": "2026-11-22",
+    "firstQuotaAgeByYear": { "2026": 21 },
     "examples": {
       "sjukepleie": [
         {

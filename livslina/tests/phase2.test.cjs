@@ -46,6 +46,22 @@ function year(LL, s, overrides = {}) {
   return s.adult.reports.at(-1);
 }
 
+test('opptaksdøma bruker snittet frå VGS og les eldre lagringar', () => {
+  const LL = environment(), s = school(LL);
+  s.stats.grades = 4.276;
+  LL.phase2State.begin(s);
+  s.stats.grades = 4.92;
+  const original = LL.phase2State.schoolGrade(s);
+  assert.equal(original.average, 4.28);
+  assert.equal(original.points, 42.8);
+
+  delete s.schoolResult;
+  const older = LL.phase2State.schoolGrade(s);
+  assert.equal(older.average, 4.92);
+  assert.equal(older.points, 49.2);
+  assert.equal(LL.phase2State.schoolGrade({ stats: { grades: 0 } }), null);
+});
+
 test('bustadkjøp krev finansiering og bind eigenkapital utan å telje avdrag som forbruk', () => {
   const LL = environment(), s = adult(LL);
   const plan = { routeId: 'kafe', housing: 'eigd-leilegheit', workPercent: 1, bsu: 500 };

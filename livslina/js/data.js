@@ -20,7 +20,7 @@ LL.data = (function () {
       fetch('data/linjer.json').then(r => r.json()),
       fetch('data/hendingar.json?v=10').then(r => r.json()).catch(() => ({ events: [], summerEvents: [] })),
       fetch('data/rombutikk.json').then(r => r.json()),
-      fetch('data/fase2.json?v=4').then(r => { if (!r.ok) throw new Error('Fase 2-data manglar.'); return r.json(); })
+      fetch('data/fase2.json?v=5').then(r => { if (!r.ok) throw new Error('Fase 2-data manglar.'); return r.json(); })
     ]);
     base = g;
     programs = l.programs || [];

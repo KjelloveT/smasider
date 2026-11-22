@@ -90,6 +90,14 @@ LL.phase2State = (function () {
     return item.label;
   }
 
+  function schoolGrade(s) {
+    const stored = [s.schoolResult?.stats?.grades, s.stats?.grades]
+      .find(value => Number.isFinite(value) && value >= 1 && value <= 6);
+    if (stored === undefined) return null;
+    const average = Math.round((stored + Number.EPSILON) * 100) / 100;
+    return { average, points: Math.round(average * 100) / 10 };
+  }
+
   function networth(s) {
     const a = s.adult;
     return s.stats.money + s.stats.savings + a.bsu + a.deposit + LL.phase2Housing.equity(a.property) - a.studentDebt - a.creditDebt;
@@ -163,5 +171,5 @@ LL.phase2State = (function () {
       if (r.resolved.some(id => !r.schedule.some(e => e.id === id))) throw new Error('Ugyldige hendingsval.');
     }
   }
-  return { migrate, completeSchool, passTradeExam, begin, route, available, progress, isStudying, label, networth, goalValue, normalizeGoals, validate };
+  return { migrate, completeSchool, passTradeExam, begin, route, available, progress, isStudying, label, schoolGrade, networth, goalValue, normalizeGoals, validate };
 })();

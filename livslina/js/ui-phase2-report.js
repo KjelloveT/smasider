@@ -50,17 +50,24 @@ LL.uiPhase2Report = (function () {
       const delta = after - before;
       const format = value => money ? LL.util.kr(value) : value.toLocaleString('nn-NO', { maximumFractionDigits: 1 });
       title.textContent = label;
-      const headline = el('div', 'll-adult-report-reading');
-      headline.append(visuals.icon(symbol, 28), el('strong', '', format(before) + ' → ' + format(after)));
       const direction = visuals.trend(delta, money);
-      headline.append(direction);
+      const result = el('div', 'vp-panel vp-panel--soft vp-panel--compact ll-adult-report-result');
+      result.dataset.direction = direction.dataset.direction;
+      const reading = el('dl', 'll-adult-report-reading');
+      for (const [name, value] of [['Ved start', before], ['Ved slutt', after]]) {
+        const item = el('div');
+        item.append(el('dt', '', name), el('dd', '', format(value)));
+        reading.append(item);
+      }
+      const change = el('div', 'll-adult-report-change');
+      change.append(visuals.icon(symbol, 24), direction);
+      result.append(reading, change, el('p', '', comment(key, delta)));
       const choices = key === 'networth' ? balanceContributions(report) :
         (Array.isArray(report.impacts) ? report.impacts : []).filter(Boolean).map(item => [item.label, item.deltas?.[key]]);
       const notable = choices.filter(([, value]) => Number.isFinite(value) && Math.abs(value) >= (money ? .5 : .05));
       const strongest = [1, -1].flatMap(sign => notable.filter(([, value]) => Math.sign(value) === sign)
         .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 4));
-      body.replaceChildren(el('p', 'll-note', (page + 1) + ' av ' + measures.length), headline,
-        el('p', '', comment(key, delta)));
+      body.replaceChildren(el('p', 'll-note', (page + 1) + ' av ' + measures.length), result);
       if (strongest.length) {
         const list = el('ul', 'll-adult-report-list');
         for (const [description, value] of strongest) {
