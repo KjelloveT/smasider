@@ -99,10 +99,14 @@ test('Temakatalogen peikar på heile brett med korte fasitar og krediterte bilet
     ['Land i Sør-Amerika', 'land'],
     ['Land i Oseania', 'land'],
     ['Antarktis', 'land'],
-    ['Utdøydde dyr', 'utdoydde-dyr'],
-    ['Fisk', 'fisk'],
-    ['Pattedyr', 'pattedyr'],
-    ['Fuglar', 'fuglar']
+    ['Utdøydde dyr', 'dyr'],
+    ['Fisk', 'dyr'],
+    ['Pattedyr', 'dyr'],
+    ['Fuglar', 'dyr'],
+    ['Norsk fauna', 'dyr'],
+    ['Disney-filmar', 'film'],
+    ['Kjende bilmerke', 'bil'],
+    ['Fotballspelarar i 2026', 'fotball']
   ]);
   assert.equal(catalogue.length, expected.size);
   assert.equal(new Set(catalogue.map(entry => entry.file)).size, expected.size);
@@ -110,8 +114,8 @@ test('Temakatalogen peikar på heile brett med korte fasitar og krediterte bilet
 
   for (const entry of catalogue) {
     assert.equal(entry.theme, expected.get(entry.title), entry.title);
-    assert.match(entry.file, /^[a-z-]+\.json$/);
-    const { app, version, quiz, wikidata } = readTheme(entry.file);
+    assert.match(entry.file, /^[a-z0-9-]+\.json$/);
+    const { app, version, quiz, wikidata = [] } = readTheme(entry.file);
     assert.equal(app, 'frodebrett');
     assert.equal(version, 1);
     assert.equal(quiz.title, entry.title);
@@ -135,8 +139,8 @@ test('Temakatalogen peikar på heile brett med korte fasitar og krediterte bilet
         }
       }
     }
-    assert.ok(imageCount >= 6, entry.title);
-    assert.equal(wikidata.filter(claim => ['P18', 'P41'].includes(claim.property)).length, imageCount);
+    if (['land', 'dyr', 'bil'].includes(entry.theme)) assert.ok(imageCount >= 6, entry.title);
+    assert.equal(wikidata.filter(claim => ['P18', 'P41', 'P154'].includes(claim.property)).length, imageCount);
     if (entry.categories.includes('Hovudstader')) {
       assert.equal(wikidata.filter(claim => claim.property === 'P36').length, points.length);
     }
@@ -145,5 +149,18 @@ test('Temakatalogen peikar på heile brett med korte fasitar og krediterte bilet
     shortAnswer(quiz.final.answer, quiz.final.question);
     prompts.add(quiz.final.question.trim());
     assert.equal(prompts.size, 31, entry.title);
+  }
+});
+
+test('Logogjettinga har Wikidata-logoar og nøytrale ledetrådar', () => {
+  const { quiz, wikidata } = readTheme('bilmerke.json');
+  const logoCategory = quiz.categories.find(category => category.name === 'Kjenn att logoen');
+  assert.equal(logoCategory.questions.length, points.length);
+  assert.ok(wikidata.every(claim => /^Q\d+$/.test(claim.item) && claim.property === 'P154'));
+
+  for (const question of logoCategory.questions) {
+    checkMedia(question);
+    const clue = (question.question + ' ' + question.imageAlt).toLowerCase();
+    assert.ok(!clue.includes(question.answer.toLowerCase()), question.answer);
   }
 });

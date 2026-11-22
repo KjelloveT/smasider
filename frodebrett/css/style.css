@@ -157,10 +157,11 @@ textarea.form-input { resize: vertical; min-height: 80px; }
   background: var(--accent4); color: #000; border: 2px solid var(--border); padding: 2px 10px;
 }
 .question-text { font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 700; line-height: 1.35; margin: 8px 0 18px; }
-.question-answer { background: var(--accent3); color: #000; border: 3px solid var(--border); padding: 16px; margin-bottom: 18px; }
-.answer-label { font-weight: 900; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; margin-bottom: 6px; }
-.answer-text { font-size: 1.2rem; font-weight: 700; color: #000; }
-.question-text, .answer-text, #final-question-display, #final-answer-display { white-space: pre-wrap; overflow-wrap: anywhere; }
+.fb-answer { margin-bottom: 18px; }
+.question-answer { background: var(--accent3); color: #000; border: 3px solid var(--border); padding: 16px; }
+.answer-label { margin: 0 0 6px; font-weight: 900; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; }
+.answer-text { font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 800; line-height: 1.25; }
+.question-text, .answer-text, #final-question-display { white-space: pre-wrap; overflow-wrap: anywhere; }
 .fb-image-credit { margin-block: 8px 0; overflow-wrap: anywhere; }
 
 /* Daglegdobbel-banner (UX1) */
@@ -207,9 +208,6 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .final-clue > div, .final-question-text > div {
   padding: 14px; border: 2px solid var(--border); background: var(--surface); font-weight: 600;
 }
-.final-answer { background: var(--accent3); color: #000; border: 3px solid var(--border); padding: 14px; margin-bottom: 14px; }
-.final-answer #final-answer-display { font-weight: 800; font-size: 1.15rem; }
-
 /* ===== Editor ===== */
 .fb-download-action {
   display: grid; grid-template-columns: minmax(0, 1fr) auto;

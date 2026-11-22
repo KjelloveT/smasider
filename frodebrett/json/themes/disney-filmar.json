@@ -1,0 +1,198 @@
+{
+  "app": "frodebrett",
+  "version": 1,
+  "sources": [
+    "https://disneyanimation.com/films/",
+    "https://www.oscars.org/ar/oscars/ceremonies/1939/memorable-moments",
+    "https://movies.disney.com/frozen",
+    "https://movies.disney.com/zootopia",
+    "https://movies.disney.com/big-hero-6",
+    "https://www.disneyanimation.com/publications/encanto-let-s-talk-about-brunos-visions/",
+    "https://d23.com/wda-a-look-back-at-the-oscars-snow-white-and-the-seven-dwarfs/"
+  ],
+  "quiz": {
+    "title": "Disney-filmar",
+    "categories": [
+      {
+        "name": "Disney-klassikarar",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva heiter filmen der løveungen Simba må ta over som konge etter far sin?",
+            "answer": "Løvenes konge"
+          },
+          {
+            "points": 200,
+            "question": "Kva Disney-film frå 2013 handlar om systrene Elsa og Anna og ein sommar som blir til vinter?",
+            "answer": "Frost"
+          },
+          {
+            "points": 300,
+            "question": "Kva Disney-film frå 1940 handlar om ei tredokke som får lengre nase når ho lyg?",
+            "answer": "Pinocchio"
+          },
+          {
+            "points": 400,
+            "question": "Kva film handlar om ein hjortekalv som møter haren Trampe og prøver seg på glatt is?",
+            "answer": "Bambi"
+          },
+          {
+            "points": 500,
+            "question": "Kva Disney-film frå 1973 har ein rev som bogeskyttar og ein bjørn som heiter vesle Jon?",
+            "answer": "Robin Hood"
+          },
+          {
+            "points": 1000,
+            "question": "Kva film frå 1940 set fleire teiknefilmsekvensar til klassisk musikk, mellom anna «Trollmannens læregut»?",
+            "answer": "Fantasia"
+          }
+        ]
+      },
+      {
+        "name": "Figurar",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva heiter snømannen som helst vil oppleve sommaren i Frost?",
+            "answer": "Olaf"
+          },
+          {
+            "points": 200,
+            "question": "Kva heiter havfrua som drøymer om eit liv på land i Disney-filmen frå 1989?",
+            "answer": "Ariel"
+          },
+          {
+            "points": 300,
+            "question": "Kva heiter romvesenet med forsøksnummer 626 som Lilo tek til seg?",
+            "answer": "Stitch"
+          },
+          {
+            "points": 400,
+            "question": "Kva heltinne kler seg ut som soldat og tek plassen til far sin i den kinesiske hæren?",
+            "answer": "Mulan"
+          },
+          {
+            "points": 500,
+            "question": "Kva heiter kaninen som blir politibetjent og løyser ei sak saman med reven Nick Wilde?",
+            "answer": "Judy Hopps"
+          },
+          {
+            "points": 1000,
+            "question": "Kva heiter rådgjevaren som planlegg å ta plassen til keisar Kuzco?",
+            "answer": "Yzma"
+          }
+        ]
+      },
+      {
+        "name": "Stader i filmane",
+        "questions": [
+          {
+            "points": 100,
+            "question": "På kva øygruppe møter Lilo eit romvesen som ho fyrst trur er ein hund?",
+            "answer": "Hawaii"
+          },
+          {
+            "points": 200,
+            "question": "Kva heiter kongeriket til Elsa og Anna?",
+            "answer": "Arendelle"
+          },
+          {
+            "points": 300,
+            "question": "Kva heiter byen der Aladdin møter prinsesse Jasmin?",
+            "answer": "Agrabah"
+          },
+          {
+            "points": 400,
+            "question": "Kva heiter staden Peter Pan flyg til med Wendy og brørne hennar i filmen frå 1953, på engelsk?",
+            "answer": "Never Land"
+          },
+          {
+            "points": 500,
+            "question": "Kva heiter byen i Big Hero 6 med namn sett saman av San Francisco og Tokyo?",
+            "answer": "San Fransokyo"
+          },
+          {
+            "points": 1000,
+            "question": "Kva heiter heimøya til Vaiana, som ho dreg frå for å finne halvguden Maui?",
+            "answer": "Motunui"
+          }
+        ]
+      },
+      {
+        "name": "Magi og ting",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva slags sko mistar Oskepott då ho spring frå ballet?",
+            "answer": "Glassko"
+          },
+          {
+            "points": 200,
+            "question": "Kva slags ting finn Aladdin i hola, med ein ande inni?",
+            "answer": "Lampe"
+          },
+          {
+            "points": 300,
+            "question": "Kva slags frukt er det den forkledde dronninga forgiftar og gjev til Snøkvit?",
+            "answer": "Eple"
+          },
+          {
+            "points": 400,
+            "question": "Kva slags blom har Udyret under ei glasklokke i filmen om Belle?",
+            "answer": "Rose"
+          },
+          {
+            "points": 500,
+            "question": "Kva del av rokken stikk Tornerose fingeren på når forbanninga slår til?",
+            "answer": "Spinneteinen"
+          },
+          {
+            "points": 1000,
+            "question": "Kva reiskap vekker Mikke Mus til live med magi i sekvensen «Trollmannens læregut»?",
+            "answer": "Ein kost"
+          }
+        ]
+      },
+      {
+        "name": "Snodige fakta",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva brukar elefanten Dumbo som venger når han lærer å flyge?",
+            "answer": "Øyra"
+          },
+          {
+            "points": 200,
+            "question": "Kva slags dyr er Pascal, venen til Rapunsel?",
+            "answer": "Kameleon"
+          },
+          {
+            "points": 300,
+            "question": "Kva heiter den oppblåsbare pleieroboten som blir ven med Hiro i Big Hero 6?",
+            "answer": "Baymax"
+          },
+          {
+            "points": 400,
+            "question": "Kva dyr blir keisar Kuzco forvandla til etter å ha drukke ein trylledrikk?",
+            "answer": "Lama"
+          },
+          {
+            "points": 500,
+            "question": "Kva kan onkel Bruno i Encanto gjere med den magiske gåva si?",
+            "answer": "Sjå framtida"
+          },
+          {
+            "points": 1000,
+            "question": "Kva heiter bjørnungen som viser Kenai vegen til fjellet i Disney-filmen Brother Bear?",
+            "answer": "Koda"
+          }
+        ]
+      }
+    ],
+    "final": {
+      "category": "Ein uvanleg Oscar",
+      "question": "Kva heiter prinsessa på engelsk i Disney-langfilmen frå 1937 som fekk ein heiders-Oscar saman med sju små statuettar?",
+      "answer": "Snow White"
+    }
+  }
+}

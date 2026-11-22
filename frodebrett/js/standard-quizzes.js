@@ -19,10 +19,10 @@
   const gradeNumbers = Array.from({ length: 10 }, (_, index) => index + 1);
   const themes = {
     land: 'Land og geografi',
-    'utdoydde-dyr': 'Utdøydde dyr',
-    fisk: 'Fisk',
-    pattedyr: 'Pattedyr',
-    fuglar: 'Fuglar'
+    dyr: 'Dyr',
+    film: 'Film',
+    bil: 'Bilmerke',
+    fotball: 'Fotball'
   };
   const catalogue = new Map();
   let renderVersion = 0;
@@ -57,7 +57,7 @@
   }
 
   async function themeCards(selectedThemes) {
-    const manifest = await load('json/themes/index.json?v=1');
+    const manifest = await load('json/themes/index.json?v=2');
     return manifest.filter(entry => selectedThemes.includes(entry.theme)).map(entry => {
       const summary = { title: entry.title, categories: entry.categories.map(name => ({ name })) };
       const loadQuiz = () => load('json/themes/' + entry.file + '?v=1').then(data => data.quiz);

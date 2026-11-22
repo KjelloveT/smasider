@@ -28,7 +28,8 @@
     const license = typeof credit.licenseUrl === 'string' && credit.licenseUrl.startsWith('https://creativecommons.org/')
       ? creditLink(credit.license, credit.licenseUrl)
       : credit.license;
-    note.append(creditLink(credit.title, credit.source), ' · ' + credit.author + ' · ', license, ' · Forminska');
+    const changes = credit.cropped === true ? 'Forminska og skore til' : 'Forminska';
+    note.append(creditLink(credit.title, credit.source), ' · ' + credit.author + ' · ', license, ' · ' + changes);
   }
 
   Images.show = function (id, question) {

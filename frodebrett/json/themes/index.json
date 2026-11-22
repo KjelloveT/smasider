@@ -94,7 +94,7 @@
     ]
   },
   {
-    "theme": "utdoydde-dyr",
+    "theme": "dyr",
     "file": "utdoydde-dyr.json",
     "title": "Utdøydde dyr",
     "categories": [
@@ -106,7 +106,7 @@
     ]
   },
   {
-    "theme": "fisk",
+    "theme": "dyr",
     "file": "fisk.json",
     "title": "Fisk",
     "categories": [
@@ -118,7 +118,7 @@
     ]
   },
   {
-    "theme": "pattedyr",
+    "theme": "dyr",
     "file": "pattedyr.json",
     "title": "Pattedyr",
     "categories": [
@@ -130,7 +130,7 @@
     ]
   },
   {
-    "theme": "fuglar",
+    "theme": "dyr",
     "file": "fuglar.json",
     "title": "Fuglar",
     "categories": [
@@ -139,6 +139,54 @@
       "Trekk og reir",
       "Kropp og sansar",
       "Snodige fakta og rekordar"
+    ]
+  },
+  {
+    "theme": "film",
+    "file": "disney-filmar.json",
+    "title": "Disney-filmar",
+    "categories": [
+      "Disney-klassikarar",
+      "Figurar",
+      "Stader i filmane",
+      "Magi og ting",
+      "Snodige fakta"
+    ]
+  },
+  {
+    "theme": "dyr",
+    "file": "norsk-fauna.json",
+    "title": "Norsk fauna",
+    "categories": [
+      "Pattedyr",
+      "Fuglar",
+      "Fisk",
+      "Spor og teikn",
+      "Snodige fakta"
+    ]
+  },
+  {
+    "theme": "bil",
+    "file": "bilmerke.json",
+    "title": "Kjende bilmerke",
+    "categories": [
+      "Kjenn att logoen",
+      "Opphavsland",
+      "Kjende modellar",
+      "Snodige bilfakta",
+      "Elbilar"
+    ]
+  },
+  {
+    "theme": "fotball",
+    "file": "fotball-2026.json",
+    "title": "Fotballspelarar i 2026",
+    "categories": [
+      "Norske spelarar",
+      "VM-stjerner",
+      "Kvinnefotball",
+      "Klubbar og karrierar",
+      "Prisar og rekordar"
     ]
   }
 ]

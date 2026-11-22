@@ -231,6 +231,7 @@
     S.pendingAward = null;
     Board.showPointControls();
     FB.openOverlay('question-modal');
+    FB.el('question-modal').querySelector('.modal-body').scrollTop = 0;
   };
 
   Board.closeQuestion = function () {
@@ -318,6 +319,7 @@
     FB.el('btn-reveal-modal').addEventListener('click', () => {
       FB.show('question-answer');
       FB.hide('btn-reveal-modal');
+      FB.el('answer-text').scrollIntoView({ block: 'nearest' });
     });
     FB.el('btn-confirm-award').addEventListener('click', () => Board.confirmAward());
     FB.el('btn-close-modal').addEventListener('click', () => Board.closeQuestion());
@@ -437,6 +439,7 @@
       FB.show('final-answer');
       FB.hide('btn-reveal-final');
       FB.show('btn-final-points');
+      FB.el('final-answer-display').scrollIntoView({ block: 'nearest' });
     });
     FB.el('btn-final-points').addEventListener('click', () => Board.processFinalResults());
     FB.el('btn-confirm-final').addEventListener('click', () => Board.confirmFinal());
