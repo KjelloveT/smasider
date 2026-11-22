@@ -4,27 +4,40 @@ LL.phase2Sim = (function () {
   'use strict';
   const MONTHS = ['August', 'September', 'Oktober', 'November', 'Desember', 'Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli'];
   const clone = v => JSON.parse(JSON.stringify(v));
+  const debt = a => a.studentDebt + a.creditDebt + (a.property?.balance || 0);
   function begin(s, draft, goals) {
     const a = s.adult;
     if (a.run || a.complete) return false;
     const p = LL.phase2Economy.normalizePlan(s, draft);
     const preview = LL.phase2Economy.preview(s, p);
-    if (preview.firstCash < 0 && preview.move.deposit > preview.move.returned) throw new Error('Du treng dekning for flytting og nytt depositum før året kan starte. Bruk fri buffer eller vel eit rimelegare bustadval.');
-    const start = { stats: clone(s.stats), networth: LL.phase2State.networth(s), debt: a.studentDebt + a.creditDebt, bsu: a.bsu, deposit: a.deposit };
-    s.stats.money += preview.move.returned - preview.move.deposit - preview.move.expense;
+    const move = preview.move;
+    if (move.purchase?.requiresJob || move.purchase && preview.firstCash < 0) throw new Error('Bustadkjøpet krev nok eigenkapital og godkjend finansiering. Sjå vilkåra under Bustad.');
+    if (preview.firstCash < 0 && move.deposit > move.returned) throw new Error('Du treng dekning for flytting og nytt depositum før året kan starte. Bruk fri buffer eller vel eit rimelegare bustadval.');
+    const start = { stats: clone(s.stats), networth: LL.phase2State.networth(s), debt: debt(a), bsu: a.bsu, deposit: a.deposit, propertyValue: a.property?.value || 0 };
     const changed = a.routeId && a.routeId !== p.routeId;
+    const moved = a.housing !== p.housing;
     const changeCost = changed ? (LL.phase2State.route(p.routeId).kind === 'study' ? LL.data.getAdult().rates.studyChange : LL.data.getAdult().rates.jobChange) : 0;
-    s.stats.money -= changeCost;
-    if (a.housing !== p.housing) a.deposit = preview.move.deposit;
+    s.stats.money = preview.firstCash;
+    if (moved) {
+      a.deposit = move.deposit;
+      a.property = move.purchase?.property || null;
+      a.bsu -= move.bsu;
+      a.bsuUsed = a.bsuUsed || move.bsu > 0;
+      s.stats.savings -= move.savings;
+    }
     a.goals = LL.phase2State.normalizeGoals(s, goals);
     a.housing = p.housing;
     a.plan = p;
     a.routeId = p.routeId;
     a.status = 'playing';
     a.run = { year: a.year, month: 0, plan: clone(p), changed: Boolean(changed), start,
-      schedule: LL.phase2Events.prepare(s, p), resolved: [], modifiers: { monthlyExpense: 0, monthlyWage: 0 },
-      totals: { wage: 0, loan: 0, bridge: 0, otherIncome: 0, expense: preview.move.expense + changeCost, tax: 0, saved: 0, bsu: 0, repaid: 0, caseCash: 0, converted: 0, interest: 0, earnedInterest: 0, capitalizedInterest: 0, grantRefund: 0 },
-      study: 0, energyTotal: 0, loanIndexes: [], notes: [] };
+      schedule: LL.phase2Events.prepare(s, p, { moved, changed, renting: move.deposit > 0 }),
+      resolved: [], modifiers: { monthlyExpense: 0, monthlyWage: 0 },
+      totals: { wage: 0, loan: 0, bridge: 0, otherIncome: 0, expense: move.expense + changeCost, tax: 0, saved: 0, bsu: 0, repaid: 0, mortgagePrincipal: 0, caseCash: 0, converted: 0, interest: 0, earnedInterest: 0, capitalizedInterest: 0, grantRefund: 0 },
+      study: 0, energyTotal: 0, loanIndexes: [], notes: [], impacts: [] };
+    const impact = LL.phase2Effects;
+    impact.record(a.run, 'move', 'Bustadvalet · ' + LL.phase2Housing.option(p.housing).label, { money: s.stats.money - start.stats.money + changeCost });
+    impact.record(a.run, 'changed-route', 'Byte av retning', { money: -changeCost });
     return true;
   }
 
@@ -36,6 +49,8 @@ LL.phase2Sim = (function () {
     const calKey = r.year + (i >= 5 ? 1 : 0);
     const cal = LL.phase2Economy.calendar(s, calKey);
     s.stats.money += b.net;
+    if (a.property) a.property.balance -= b.mortgage.principal;
+    r.totals.mortgagePrincipal = (r.totals.mortgagePrincipal || 0) + b.mortgage.principal;
     a.studentDebt += b.loan;
     cal.wage += b.wage; cal.taxPaid += b.tax;
     if (b.loan) {
@@ -52,13 +67,14 @@ LL.phase2Sim = (function () {
     s.stats.savings += interest; a.bsu += bsuInterest;
     cal.interest += interest + bsuInterest;
     r.totals.earnedInterest = (r.totals.earnedInterest || 0) + interest + bsuInterest;
+    let repaid;
     if (!b.studying) {
       const debtInterest = a.studentDebt * rates.loanRate / 12;
       a.studentDebt += debtInterest;
       r.totals.capitalizedInterest = (r.totals.capitalizedInterest || 0) + debtInterest;
-      const amount = LL.phase2Economy.repay(s, rates.repayment + r.plan.extraDebt);
-      r.totals.repaid += amount;
-    } else r.totals.repaid += LL.phase2Economy.repay(s, r.plan.extraDebt);
+      repaid = LL.phase2Economy.repay(s, rates.repayment + r.plan.extraDebt);
+    } else repaid = LL.phase2Economy.repay(s, r.plan.extraDebt);
+    r.totals.repaid += repaid;
     const creditInterest = a.creditDebt * rates.creditRate / 12;
     const overdraftInterest = Math.max(0, -s.stats.money) * rates.creditRate / 12;
     a.creditDebt += creditInterest;
@@ -68,9 +84,16 @@ LL.phase2Sim = (function () {
     r.totals.interest += creditInterest + overdraftInterest;
     const workload = b.studying ? r.plan.jobHours / 8 : (r.plan.workPercent >= 1 ? 0.9 : 0.2);
     const recovery = r.plan.leisure === 'quiet' ? 1.4 : r.plan.leisure === 'balanced' ? 0.7 : 0.2;
-    s.stats.energy = LL.util.clamp(s.stats.energy + recovery - workload, 0, 100);
-    s.stats.social = LL.util.clamp(s.stats.social + (r.plan.leisure === 'social' ? 0.8 : r.plan.leisure === 'quiet' ? -0.4 : 0.1), 0, 100);
-    s.stats.wellbeing = LL.util.clamp(s.stats.wellbeing + (s.stats.energy < 25 ? -0.5 : 0) + (s.stats.money < 0 ? -0.7 : 0), 0, 100);
+    const effects = LL.phase2Effects;
+    const quiet = r.plan.leisure === 'quiet', social = r.plan.leisure === 'social';
+    const leisureLabel = quiet ? 'Du prioriterte kvile' : social ? 'Du sette av tid til vener' : 'Du valde ein balansert kvardag';
+    const bare = effects.sparseRoom(s);
+    effects.measure(s, 'energy', [['leisure', leisureLabel, recovery], ['workload', b.studying ? 'Deltidsjobb ved sida av studiet' : 'Arbeidsmengda du valde', -workload]]);
+    effects.measure(s, 'social', [['leisure', leisureLabel, social ? 0.8 : quiet ? -0.4 : 0.1],
+      ['room', 'Færre besøk når rommet er lite innbydande', bare && !social ? rates.room.missedVisitsSocial : 0]]);
+    effects.measure(s, 'wellbeing', [['low-energy', 'Lågt overskot i kvardagen', s.stats.energy < 25 ? -0.5 : 0],
+      ['low-cash', 'Stram økonomi', s.stats.money < 0 ? -0.7 : 0],
+      ['room', 'Færre besøk når rommet er lite innbydande', bare ? rates.room.sparseWellbeing : 0]]);
     r.energyTotal += s.stats.energy;
     if (i === 4) {
       const settled = LL.phase2Economy.closeCalendar(s, calKey);
@@ -78,9 +101,23 @@ LL.phase2Sim = (function () {
       r.totals.grantRefund = (r.totals.grantRefund || 0) + (settled.refund || 0);
       r.notes.push('Kalenderåret er gjort opp i desember. Omgjering krev òg bestått utdanning og eventuell grad.');
     }
+    const cashRows = [
+      ['wage', 'Arbeidsinntekt frå vald retning', b.wage],
+      ['student-loan', 'Du valde studentlån', b.loan],
+      ['bridge', 'Støtte til påbygg', b.bridge],
+      ['expenses', 'Bustad, kvardag og skatt', -b.expense],
+      ['mortgage-principal', 'Avdrag på bustadlånet', -b.mortgage.principal],
+      ['saving', 'Overført til sparing og BSU', -saving.saved - saving.bsu],
+      ['repayment', 'Nedbetaling av student- og kredittgjeld', -repaid]
+    ];
+    cashRows.forEach(([id, label, amount]) => effects.record(r, id, label, { money: amount }));
+    const delta = effects.changes(before, s.stats);
+    const accounted = cashRows.reduce((sum, row) => sum + row[2], 0);
+    effects.record(r, 'calendar', 'Renter og kalenderoppgjer', { money: delta.money - accounted });
+    r.trends = delta;
     const entry = { phase: 2, round: 'adult-' + r.year, month: MONTHS[i], income: b.wage + b.bridge,
       borrowed: b.loan, expense: b.expense, saved: saving.saved + saving.bsu, balance: s.stats.money,
-      savings: s.stats.savings, bsu: a.bsu, debt: a.studentDebt + a.creditDebt, networth: LL.phase2State.networth(s),
+      savings: s.stats.savings, bsu: a.bsu, debt: debt(a), networth: LL.phase2State.networth(s),
       wellbeing: s.stats.wellbeing, energy: s.stats.energy, social: s.stats.social };
     s.ledger.push(entry);
     r.month++;
@@ -110,12 +147,14 @@ LL.phase2Sim = (function () {
     }
     a.progress[item.id] = p;
     const beforeDebt = a.studentDebt;
+    const beforeCash = s.stats.money;
     const converted = LL.phase2Economy.convertGrants(s);
     r.totals.converted += converted;
     r.totals.grantRefund = (r.totals.grantRefund || 0) + Math.max(0, converted - beforeDebt);
+    LL.phase2Effects.record(r, 'grants', 'Lån gjort om til stipend', { money: s.stats.money - beforeCash });
     const report = { year: a.year, age: a.age, routeId: item.id, housing: r.plan.housing,
-      start: r.start, end: { stats: clone(s.stats), networth: LL.phase2State.networth(s), debt: a.studentDebt + a.creditDebt, bsu: a.bsu, deposit: a.deposit },
-      totals: clone(r.totals), events: r.resolved.slice(), progress, notes: r.notes,
+      start: r.start, end: { stats: clone(s.stats), networth: LL.phase2State.networth(s), debt: debt(a), bsu: a.bsu, deposit: a.deposit, propertyValue: a.property?.value || 0 },
+      totals: clone(r.totals), impacts: r.impacts || [], events: r.resolved.slice(), progress, notes: r.notes,
       goals: a.goals.map(g => Object.assign({}, g, { value: LL.phase2State.goalValue(s, g) })) };
     a.reports.push(report);
     a.year++; a.age++; s.age = a.age;

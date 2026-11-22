@@ -364,7 +364,7 @@ LL.economy = (function () {
   const LABELS = {
     wage: 'Løn frå deltidsjobb', apprentice: 'Lærlingløn', parents: 'Foreldrebidrag', housingGrant: 'Bortebuarstipend',
     allowance: 'Lommepengar', studyGrant: 'Inntektsavh. stipend', grant: 'Utstyrsstipend',
-    tax: 'Skatt',
+    tax: 'Skatt', mortgageInterest: 'Renter på bustadlån', mortgagePrincipal: 'Avdrag på bustadlån', ownerCosts: 'Felleskostnader og vedlikehald',
     clothing: 'Klede og sko', clothingShopping: 'Klesshopping', personalCare: 'Pleie og helse', playAndMedia: 'Fritid og medium',
     mobile: 'Mobil og mobildata', canteen: 'Kjøp i skulekantina', drinks: 'Brus og energidrikk',
     eatingOut: 'Mat ute', socialEvents: 'Fest og sosiale arrangement',

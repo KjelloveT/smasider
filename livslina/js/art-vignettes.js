@@ -21,15 +21,23 @@ LL.artVignette = (function () {
     adultCarpentry: [0, 2], adultIt: [1, 2], adultRetail: [2, 2], adultWarehouse: [3, 2],
     adultCafe: [0, 3], adultRest: [1, 3], adultMoving: [2, 3], adultGoals: [3, 3]
   };
+  const STORY_CELLS = {
+    adultSchedule: [0, 0], adultBudgetChoice: [1, 0], adultMilestone: [2, 0],
+    adultFriendsTalk: [0, 1], adultBoxes: [1, 1], adultRainBus: [2, 1],
+    adultShift: [0, 2], adultWard: [1, 2], adultPhoneRepair: [2, 2]
+  };
 
   function create(key) {
-    const adult = Boolean(ADULT_CELLS[key]);
-    const [column, row] = ADULT_CELLS[key] || CELLS[key] || CELLS.study;
+    const story = STORY_CELLS[key];
+    const adult = Boolean(story || ADULT_CELLS[key]);
+    const [column, row] = story || ADULT_CELLS[key] || CELLS[key] || CELLS.study;
+    const steps = story ? 2 : 3;
     const sprite = document.createElement('span');
     sprite.className = 'll-event-sprite' + (adult ? ' ll-event-sprite--adult' : '');
+    if (story) sprite.classList.add('ll-event-sprite--story');
     sprite.setAttribute('aria-hidden', 'true');
-    sprite.style.setProperty('--sprite-x', (column * 100 / 3) + '%');
-    sprite.style.setProperty('--sprite-y', (row * 100 / 3) + '%');
+    sprite.style.setProperty('--sprite-x', (column * 100 / steps) + '%');
+    sprite.style.setProperty('--sprite-y', (row * 100 / steps) + '%');
     return sprite;
   }
 

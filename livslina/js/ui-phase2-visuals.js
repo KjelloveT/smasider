@@ -3,7 +3,7 @@ window.LL = window.LL || {};
 LL.uiPhase2Visuals = (function () {
   'use strict';
   const el = (...args) => Vy.el(...args);
-  const METERS = { energy: ['Energi', 'zap'], wellbeing: ['Trivsel', 'heart'], social: ['Sosialt', 'users'] };
+  const METERS = { energy: ['Energi', 'zap'], wellbeing: ['Trivsel', 'smile'], social: ['Sosialt', 'users'] };
   function icon(name, size) {
     const node = el('span'); node.setAttribute('aria-hidden', 'true');
     node.innerHTML = LL.util.icon(name, size || 22); return node;
@@ -17,25 +17,41 @@ LL.uiPhase2Visuals = (function () {
     const text = el('span', '', value); text.setAttribute('aria-hidden', 'true');
     node.append(icon(name), text); return node;
   }
-  function meter(key, value) {
+  function trend(value, money) {
+    const delta = Math.abs(value) < (money ? .5 : .05) ? 0 : value;
+    const formatted = sign(delta, money);
+    const label = delta > 0 ? 'Opp ' + formatted : delta < 0 ? 'Ned ' + formatted : 'Uendra';
+    const direction = delta > 0 ? 'up' : delta < 0 ? 'down' : 'steady';
+    const node = el('span', 'll-adult-trend');
+    node.dataset.direction = direction;
+    node.setAttribute('role', 'img');
+    node.setAttribute('aria-label', label);
+    node.title = label;
+    node.append(icon(delta > 0 ? 'arrowUp' : delta < 0 ? 'arrowDown' : 'minus', 16), el('span', '', formatted));
+    return node;
+  }
+  function meter(key, value, delta) {
     const bar = el('div', 'll-meter'), fill = el('div', 'll-meter-fill');
     bar.setAttribute('role', 'meter'); bar.setAttribute('aria-label', METERS[key][0]);
     bar.setAttribute('aria-valuemin', '0'); bar.setAttribute('aria-valuemax', '100');
     bar.setAttribute('aria-valuenow', Math.round(value));
     fill.style.width = LL.util.clamp(value, 0, 100) + '%';
-    if (key !== 'social' && value < 35) fill.classList.add('warn');
+    if (Number.isFinite(delta)) {
+      if (Math.abs(delta) >= .05) fill.dataset.direction = delta > 0 ? 'up' : 'down';
+      bar.setAttribute('aria-valuetext', Math.round(value) + ' · ' + (delta > 0 ? 'opp ' : delta < 0 ? 'ned ' : '') + sign(delta));
+    } else if (key !== 'social' && value < 35) fill.classList.add('warn');
     bar.append(fill); return bar;
   }
-  function effects(choice, s) {
+  function effects(choice, s, actual) {
     const e = choice.effects, items = [];
-    const cash = (e.cash || 0) + (e.wage || 0);
+    const cash = actual ? actual.money : (e.cash || 0) + (e.wage || 0);
     if (cash) items.push(['coins', sign(cash, true), sign(cash, true) + ' på konto no' + (e.wage ? ', før endeleg skatt' : '')]);
     if (e.monthlyExpense) items.push(['coins', sign(-e.monthlyExpense, true) + '/mnd', 'Utgifter ' + sign(e.monthlyExpense, true) + ' kvar månad resten av året']);
     if (e.monthlyWage) items.push(['coins', sign(e.monthlyWage, true) + '/mnd før skatt', 'Bruttoløn ' + sign(e.monthlyWage, true) + ' kvar månad resten av året']);
     Object.entries(METERS).forEach(([key, [name, symbol]]) => {
       if (!e[key]) return;
-      let delta = key === 'wellbeing' ? LL.state.scaledWellbeingDelta(e[key]) : e[key];
-      if (s) delta = LL.util.clamp(s.stats[key] + delta, 0, 100) - s.stats[key];
+      let delta = actual ? actual[key] : key === 'wellbeing' ? LL.state.scaledWellbeingDelta(e[key]) : e[key];
+      if (s && !actual) delta = LL.util.clamp(s.stats[key] + delta, 0, 100) - s.stats[key];
       items.push([symbol, sign(delta), name + ' ' + sign(delta)]);
     });
     if (e.study) items.push(['bookOpen', e.study > 0 ? '↑' : '↓', e.study > 0 ? 'Meir rom for studiearbeid' : 'Mindre rom for studiearbeid']);
@@ -57,6 +73,19 @@ LL.uiPhase2Visuals = (function () {
       cell.append(label, icon(passed ? 'check' : scheduled ? 'mapPin' : 'minus', 19)); list.append(cell);
     });
     return list;
+  }
+  function yearProgress(run) {
+    const progress = el('div', 'll-adult-year-progress');
+    const status = el('strong', 'll-adult-year-status');
+    status.setAttribute('role', 'status');
+    status.textContent = run.month ? 'Månad ' + run.month + ' av 12 · ' + LL.phase2Sim.MONTHS[run.month - 1] : '0 av 12 månader';
+    const track = el('div', 'll-adult-year-track');
+    const fill = el('div', 'll-adult-year-fill');
+    track.setAttribute('aria-hidden', 'true');
+    fill.style.width = (run.month * 100 / 12) + '%';
+    track.append(fill);
+    progress.append(status, track, year(run));
+    return progress;
   }
   function studySteps(s, item) {
     const wrap = el('div', 'll-adult-study-years');
@@ -86,5 +115,5 @@ LL.uiPhase2Visuals = (function () {
     });
     return wrap;
   }
-  return { METERS, icon, token, meter, effects, year, studySteps, moneyFlow };
+  return { METERS, icon, token, sign, trend, meter, effects, yearProgress, studySteps, moneyFlow };
 })();

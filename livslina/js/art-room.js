@@ -51,9 +51,14 @@ LL.artRoom = (function () {
     };
   }
 
-  function render(target, room, previewId, label) {
+  function render(target, room, previewId, label, roomView) {
     if (!target || !roomModel || !LL.data.getRoomShop()) return false;
     const scene = selectionFor(room, previewId);
+    if (roomView) scene.roomView = roomView;
+    if (roomView === 'living') {
+      scene['tv-benchPresent'] = true;
+      scene.tvPresent = true;
+    }
     const markup = '<svg xmlns="http://www.w3.org/2000/svg" class="ll-room-svg" viewBox="0 0 480 360" role="img" aria-label="' +
       (label || 'Soverommet ditt') + '">' + roomModel.build(scene, false, ASSET_ROOT) + '</svg>';
     const parsed = new DOMParser().parseFromString(markup, 'image/svg+xml');

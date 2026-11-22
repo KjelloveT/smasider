@@ -52,7 +52,7 @@ LL.phase2State = (function () {
       status: 'planning', qualifications: clone(s.qualifications), progress: {},
       bsu: wasBsu ? saved : 0, bsuContributed: wasBsu ? Math.min(saved, 300000) : 0,
       deposit: s.flags.depositumBetalt ? 6000 : 0,
-      studentDebt: 0, creditDebt: 0, loanLots: [], calendars: {},
+      studentDebt: 0, creditDebt: 0, property: null, bsuUsed: false, loanLots: [], calendars: {},
       housing: s.housing === 'hybel' ? 'kollektiv' : 'heime',
       goals: [], reports: [], plan: null, run: null, careerYears: 0,
       narrative: s.stats.money < 0 ? 'Du tek med ein stram konto frå vidaregåande.' : 'Pengane og vala frå vidaregåande blir med deg vidare.'
@@ -92,14 +92,14 @@ LL.phase2State = (function () {
 
   function networth(s) {
     const a = s.adult;
-    return s.stats.money + s.stats.savings + a.bsu + a.deposit - a.studentDebt - a.creditDebt;
+    return s.stats.money + s.stats.savings + a.bsu + a.deposit + LL.phase2Housing.equity(a.property) - a.studentDebt - a.creditDebt;
   }
 
   function goalValue(s, goal) {
     if (goal.id === 'utdanning') return progress(s, goal.routeId).years;
     if (goal.id === 'overskot') return s.stats.energy;
     if (goal.id === 'gjeld') return Math.max(0, goal.baseline - s.adult.studentDebt - s.adult.creditDebt);
-    return s.stats.savings * (goal.share / 100) + (goal.id === 'bustad' ? s.adult.bsu : 0);
+    return s.stats.savings * (goal.share / 100) + (goal.id === 'bustad' ? s.adult.bsu + LL.phase2Housing.equity(s.adult.property) : 0);
   }
 
   function normalizeGoals(s, goals) {
@@ -128,6 +128,16 @@ LL.phase2State = (function () {
     if (!a || a.version !== 1 || !Number.isInteger(a.year) || a.year < 0 || a.year > 15 || !Number.isInteger(a.age) || a.age < 19 || a.age > 40 || !a.qualifications || !a.progress || !a.calendars || !Array.isArray(a.reports) || !Array.isArray(a.loanLots) || !Array.isArray(a.goals)) throw new Error('Fase 2-lagringa har eit ukjent format.');
     for (const key of ['bsu', 'bsuContributed', 'deposit', 'studentDebt', 'creditDebt']) {
       if (!Number.isFinite(a[key]) || a[key] < 0 || a[key] > 100000000) throw new Error('Ugyldig kontoverdi i fase 2-lagringa.');
+    }
+    if (!LL.phase2Housing.option(a.housing)) throw new Error('Ukjend bustad i lagringa.');
+    a.property ??= null;
+    a.bsuUsed ??= false;
+    const owned = LL.phase2Housing.option(a.housing).price;
+    const property = a.property;
+    if (Boolean(owned) !== Boolean(property) || property && (property.id !== a.housing || property.value !== owned ||
+      !Number.isFinite(property.balance) || property.balance < 0 || property.balance > property.value ||
+      !Number.isFinite(property.payment) || property.payment < 0 || property.payment > property.value)) {
+      throw new Error('Ugyldig bustadlån i lagringa.');
     }
     if (a.routeId && !route(a.routeId)) throw new Error('Lagringa viser til ei ukjend retning.');
     if (!['planning', 'playing', 'report'].includes(a.status) || !Number.isInteger(a.entryAge) || a.entryAge < 19 || a.entryAge > 20 || typeof a.qualifications.study !== 'boolean') throw new Error('Ugyldig fasestatus.');

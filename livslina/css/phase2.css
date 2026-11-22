@@ -8,7 +8,30 @@
 .ll-adult-panel { min-width: 0; padding: clamp(1rem, 2.5vw, 1.5rem); }
 .ll-adult-panel p { max-width: 78ch; }
 .ll-adult-stat { display: block; font-size: clamp(1rem, 2vw, 1.35rem); overflow-wrap: anywhere; }
+.ll-adult-stat-reading { display: flex; align-items: center; flex-wrap: wrap; gap: .4rem; }
+.ll-adult-trend { display: inline-flex; align-items: center; gap: .2rem; padding: .15rem .35rem; border-radius: .35rem; white-space: nowrap; font-weight: 750; }
+.ll-adult-trend[data-direction="up"] { background: var(--vp-moss); }
+.ll-adult-trend[data-direction="down"] { background: var(--vp-blush); }
+#screen-adult .ll-meter-fill[data-direction="up"] { background: #478456; }
+#screen-adult .ll-meter-fill[data-direction="down"] { background: #b24646; }
+.ll-adult-report-dialog .ll-adult-stack { gap: .65rem; }
+.ll-adult-report-dialog .ll-adult-stack p { margin: 0; }
+.ll-adult-report-dialog > .vp-actions { margin-top: 1rem; justify-content: space-between; }
+.ll-adult-report-reading { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+.ll-adult-report-reading > strong { font-size: clamp(1.05rem, 3vw, 1.5rem); }
+.ll-adult-report-list { display: grid; gap: .4rem; padding: 0; margin: 0; list-style: none; }
+.ll-adult-report-list li { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .2rem .6rem; }
 .ll-adult-layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 1rem; }
+.ll-adult-plan-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: start; gap: 1rem; }
+.ll-adult-plan-layout:has(#adultPlanBudget:not([hidden])) { grid-template-columns: minmax(0, 1fr); }
+.ll-adult-plan-layout:has(#adultPlanBudget:not([hidden])) > .ll-adult-plan-budget { display: none; }
+.ll-adult-plan-budget { position: sticky; inset-block-start: .75rem; z-index: 1; }
+.ll-adult-budget-numbers { display: grid; gap: .55rem; margin: 0; }
+.ll-adult-budget-numbers > div { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem .55rem; }
+.ll-adult-budget-numbers dd { margin: 0; font-weight: 800; }
+.ll-adult-route-fields { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: center; gap: 1rem; }
+.ll-adult-route-table { width: 100%; table-layout: fixed; overflow-wrap: anywhere; }
+#adultPlanRoute > details, #adultPlanRoute > div > details { margin-top: .75rem; }
 .ll-adult-field { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.35rem; margin-block: 0.85rem; max-width: 45rem; }
 .ll-adult-field .vp-input { width: 100%; min-width: 0; }
 .ll-adult-field input[type="checkbox"] { width: 1.5rem; height: 1.5rem; }
@@ -22,6 +45,15 @@
 .ll-adult-token > span:first-child { display: inline-flex; flex: 0 0 auto; }
 .ll-adult-effects { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
 .ll-adult-year { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0.35rem; padding: 0; margin: 0; list-style: none; }
+.ll-adult-year-progress { display: grid; gap: .6rem; }
+.ll-adult-year-track { height: .65rem; overflow: hidden; border: 1px solid var(--vp-frame); border-radius: 99px; background: var(--vp-stone); }
+.ll-adult-year-fill { height: 100%; background: var(--vp-forest); transition: width 460ms linear; }
+.ll-adult-month.is-passing { --vp-panel-fill: var(--vp-sky) !important; animation: ll-month-passing 450ms ease-out; }
+@keyframes ll-month-passing { from { transform: translateY(0); } 45% { transform: translateY(-.25rem); } to { transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .ll-adult-year-fill { transition: none; }
+  .ll-adult-month.is-passing { animation: none; }
+}
 .ll-adult-month { display: grid; place-items: center; gap: 0.3rem; padding: 0.4rem 0.1rem; }
 .ll-adult-month > span:first-child { font-size: 0.8rem; }
 .ll-adult-month[aria-current] { border-width: 3px; }
@@ -33,6 +65,7 @@
 .ll-adult-receipt { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.75rem; }
 .ll-adult-receipt .ll-adult-effects { grid-column: 1 / -1; justify-content: start; }
 .ll-event-sprite--adult { aspect-ratio: 1; background-image: url('../assets/events/fase2-isometrisk.png'); }
+.ll-event-sprite--story { background-image: url('../assets/events/fase2-kvardag.webp'); background-size: 300% 300%; }
 .ll-adult-study-years { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
 .ll-adult-study-step { display: flex; align-items: center; gap: 0.4rem; padding: 0.55rem; }
 .ll-adult-route-preview { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
@@ -46,6 +79,12 @@
 #screen-adult .ll-budget-row > span { min-width: 0; overflow-wrap: anywhere; }
 #screen-adult .ll-budget-row > strong { flex: 0 0 auto; text-align: right; }
 @media (max-width: 740px) {
+  .ll-adult-plan-layout { grid-template-columns: minmax(0, 1fr); }
+  .ll-adult-plan-budget { order: -1; inset-block-start: 0; z-index: 3; padding-block: .55rem; }
+  .ll-adult-plan-budget > h2 { margin: 0 0 .3rem; }
+  .ll-adult-budget-numbers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ll-adult-budget-numbers > div { display: block; overflow-wrap: anywhere; }
+  .ll-adult-budget-detail { display: none; }
   .ll-adult-layout, .ll-adult-goal-editor { grid-template-columns: minmax(0, 1fr); }
   .ll-adult-actions .vp-button { flex: 1 1 10rem; }
   .ll-adult-year { grid-template-columns: repeat(6, minmax(0, 1fr)); }
@@ -53,6 +92,7 @@
   .ll-adult-vignette { width: min(100%, 230px); }
 }
 @media (max-width: 437px) {
+  .ll-adult-route-fields { grid-template-columns: minmax(0, 1fr); gap: .25rem; }
   .ll-adult-heading > .ll-plan-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ll-adult-heading > .ll-plan-tabs .vp-button { padding-inline: 1.25rem; }
   .ll-adult-heading > .ll-plan-tabs .vp-selection-mark { inset-inline-start: 0.25rem; }

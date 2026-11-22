@@ -188,6 +188,7 @@
 /* Steg i halvårsplanen og årsplanen */
 .ll-plan-step-bar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
 .ll-plan-step-bar :is(h2, h3) { margin: 0; text-align: center; }
+.ll-plan-step-bar :is(h2, h3):focus { outline: none; }
 .ll-plan-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
 .ll-plan-tabs .vp-button { position: relative; padding-inline: 1.5rem; }
 .ll-plan-tabs .vp-selection-mark { position: absolute; inset-inline-start: 0.35rem; }

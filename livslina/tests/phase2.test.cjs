@@ -17,7 +17,7 @@ function environment() {
   const node = key => key.split('.').reduce((entry, part) => entry?.[part], base);
   c.LL.data = { getAdult: () => adult, getProgram: id => programs.find(p => p.id === id),
     node, value: (key, variant = 'gameValue') => node(key)?.[variant] ?? 0 };
-  for (const file of ['state', 'economy', 'phase2-state', 'phase2-economy', 'phase2-events', 'phase2-sim']) vm.runInContext(fs.readFileSync(path.join(root, 'livslina/js/' + file + '.js'), 'utf8'), c, { filename: file });
+  for (const file of ['state', 'economy', 'phase2-state', 'phase2-housing', 'phase2-economy', 'phase2-effects', 'phase2-events', 'phase2-sim']) vm.runInContext(fs.readFileSync(path.join(root, 'livslina/js/' + file + '.js'), 'utf8'), c, { filename: file });
   return c.LL;
 }
 function school(LL, id = 'studiespes', apprenticeship = false) {
@@ -45,6 +45,68 @@ function year(LL, s, overrides = {}) {
   assert.ok(guard < 30, 'Året skal alltid kunne avsluttast');
   return s.adult.reports.at(-1);
 }
+
+test('bustadkjøp krev finansiering og bind eigenkapital utan å telje avdrag som forbruk', () => {
+  const LL = environment(), s = adult(LL);
+  const plan = { routeId: 'kafe', housing: 'eigd-leilegheit', workPercent: 1, bsu: 500 };
+  s.stats.money = 550000;
+  s.stats.savings = 100000;
+  s.adult.bsu = 50000;
+  const noJob = LL.phase2Economy.preview(s, plan);
+  assert.equal(noJob.move.purchase.requiresJob, true);
+  assert.throws(() => LL.phase2Sim.begin(s, plan, []), /finansiering/);
+  assert.equal(s.adult.property, null);
+  assert.equal(s.stats.money, 550000);
+
+  s.adult.routeId = 'kafe';
+  s.adult.progress.kafe = { years: 0, graduated: false, workYears: 1 };
+  s.adult.studentDebt = 600000;
+  const quote = LL.phase2Economy.preview(s, plan);
+  const value = quote.move.purchase.property.value;
+  const mortgage = quote.move.purchase.property.balance;
+  assert.equal(quote.move.purchase.requiresJob, false);
+  assert.ok(mortgage <= value * .9 && mortgage + s.adult.studentDebt <= quote.wage * 5);
+  assert.ok(quote.move.down > quote.move.purchase.minimumDown);
+  assert.ok(quote.firstCash >= 0);
+  const before = LL.phase2State.networth(s);
+  assert.equal(LL.phase2Sim.begin(s, plan, []), true);
+  assert.equal(s.adult.bsu, 0);
+  assert.equal(s.adult.bsuUsed, true);
+  assert.equal(s.adult.run.plan.bsu, 0);
+  assert.equal(s.stats.money, quote.firstCash);
+  assert.ok(Math.abs(LL.phase2State.networth(s) - before + quote.move.expense) < .001);
+  LL.phase2Sim.month(s);
+  assert.ok(s.adult.property.balance < mortgage);
+  assert.ok(s.adult.run.totals.mortgagePrincipal > 0);
+  const loaded = LL.state.load(clone(s));
+  assert.equal(loaded.adult.property.balance, s.adult.property.balance);
+  const sale = LL.phase2Economy.preview(loaded, { ...plan, housing: 'leilegheit' });
+  assert.equal(sale.move.sale, value - loaded.adult.property.balance);
+  assert.equal(sale.move.deposit, 11790 * 3);
+});
+
+test('årsoppgjeret summerer faktiske utslag og eit innbydande rom unngår romtrekket', () => {
+  const LL = environment(), s = adult(LL);
+  const report = year(LL, s, { routeId: 'kafe', housing: 'heime' });
+  for (const key of ['money', 'wellbeing', 'energy', 'social']) {
+    const sum = report.impacts.reduce((total, item) => total + (item.deltas[key] || 0), 0);
+    assert.ok(Math.abs(sum - (report.end.stats[key] - report.start.stats[key])) < .0001, key);
+  }
+  assert.ok(report.impacts.find(item => item.id === 'room').deltas.wellbeing < 0);
+  assert.ok(s.eventLog.some(event => event.phase === 2 && event.choiceLabel && event.delta));
+  s.room.equipped.sofa = 'sofa-01';
+  const next = year(LL, s, { routeId: 'kafe', housing: 'heime' });
+  assert.equal(next.impacts.some(item => item.id === 'room'), false);
+  const story = LL.data.getAdult().events.find(event => event.id === 'maal-justering');
+  s.eventLog.push({ phase: 2, id: 'maal-buffer', choice: 0 });
+  assert.match(LL.phase2Events.story(s, story)[0], /sparepengane stå/);
+  s.eventLog.push({ phase: 2, id: 'maal-buffer', choice: 1 });
+  assert.match(LL.phase2Events.story(s, story)[0], /unna deg/);
+  const returning = adult(LL);
+  returning.eventLog.push({ phase: 2, id: 'vener', choice: 0 });
+  const schedule = LL.phase2Events.prepare(returning, LL.phase2Economy.defaultPlan(returning));
+  assert.ok(schedule.some(event => event.id === 'vennekveld'));
+});
 
 test('eldre lærlingavslutning får att siste læreår utan å miste pengar eller historikk', () => {
   const LL = environment(), s = school(LL, 'bygg-anlegg', true);

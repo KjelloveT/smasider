@@ -87,6 +87,16 @@
       if(items.decor.mount==="wall"){items.decor.u=260;items.decor.v=0;items.decor.z=175;}
       else{items.decor.u=items.desk.u+5;items.decor.v=items.desk.v+items.desk.d-items.decor.d-4;items.decor.z=items.desk.h;}
     }
+    if(gameRoom&&selection.roomView){
+      // Romma brukar dei målsette festepunkta frå v4. Kvar ting blir vist éin stad.
+      const hide={
+        bedroom:["sofa","rug"],
+        "bedroom-house":["sofa","rug","desk","chair","pc","decor"],
+        living:["bed","desk","chair","pc","decor","floorItem"],
+        workroom:["bed","sofa","rug","floorItem"]
+      }[selection.roomView]||[];
+      hide.forEach(function(key){delete items[key];});
+    }
     return items;
   }
   function wallLayout(selection,items){

@@ -4,7 +4,7 @@ LL.phase2Economy = (function () {
   'use strict';
   const data = () => LL.data.getAdult();
   const limit = (v, min, max) => LL.util.clamp(Number(v) || 0, min, max);
-  const housing = id => data().housing.find(h => h.id === id);
+  const housing = id => LL.phase2Housing.option(id);
   function normalizePlan(s, draft) {
     const d = draft || {};
     const item = LL.phase2State.route(d.routeId);
@@ -14,7 +14,7 @@ LL.phase2Economy = (function () {
     if (h.studentOnly && !studying) h = housing('kollektiv');
     return { routeId: item.id, housing: h.id, jobHours: studying ? limit(d.jobHours, 0, 12) : 0,
       workPercent: [0.5, 0.8, 1].includes(Number(d.workPercent)) ? Number(d.workPercent) : 1,
-      savings: limit(d.savings, 0, 10000), bsu: limit(d.bsu, 0, 2250), extraDebt: limit(d.extraDebt, 0, 5000),
+      savings: limit(d.savings, 0, 10000), bsu: LL.phase2Housing.canSaveBsu(s, { housing: h.id }) ? limit(d.bsu, 0, 2250) : 0, extraDebt: limit(d.extraDebt, 0, 5000),
       leisure: ['quiet', 'balanced', 'social'].includes(d.leisure) ? d.leisure : 'balanced',
       summerWeeks: studying ? Math.round(limit(d.summerWeeks, 0, 6)) : 0,
       borrow: studying && item.kind === 'study' && d.borrow !== false };
@@ -38,7 +38,7 @@ LL.phase2Economy = (function () {
     return Math.max(0, tax - Math.min(bsuPaid, data().rates.bsuAnnual) * data().rates.bsuTaxCredit);
   }
 
-  function breakdown(s, plan, month, modifiers) {
+  function breakdown(s, plan, month, modifiers, property = s.adult.property) {
     const p = normalizePlan(s, plan), item = LL.phase2State.route(p.routeId);
     const r = data().rates, h = housing(p.housing), studying = LL.phase2State.isStudying(s, p);
     const m = modifiers || { monthlyExpense: 0, monthlyWage: 0 };
@@ -48,7 +48,9 @@ LL.phase2Economy = (function () {
     const loan = p.borrow && month !== 11 ? r.studentMonthly : 0;
     const bridge = item.kind === 'bridge' && month !== 11 ? (r.bridgeMonthly || 6000) : 0;
     const personal = LL.economy.personalCosts(s.adult.age);
-    const expenses = { housing: h.rent, utilities: h.utilities, food: h.food ?? personal.food,
+    const mortgage = LL.phase2Housing.payment(property?.id === h.id ? property : null);
+    const expenses = { housing: h.rent, mortgageInterest: mortgage.interest, ownerCosts: h.ownerCosts || 0,
+      utilities: h.utilities, food: h.food ?? personal.food,
       clothing: personal.clothing, personalCare: personal.personalCare, equipment: r.equipment,
       mobile: r.mobile, insurance: r.insurance, transport: LL.economy.transportCost(s.adult.age, studying),
       household: h.household,
@@ -60,27 +62,32 @@ LL.phase2Economy = (function () {
     const tax = annualTax(wage * 12, 0, 0) / 12;
     expenses.tax = tax;
     const expense = Object.values(expenses).reduce((sum, value) => sum + value, 0);
-    return { wage, loan, bridge, expense, expenses, tax, net: wage + loan + bridge - expense, studying };
+    return { wage, loan, bridge, expense, expenses, tax, mortgage, net: wage + loan + bridge - expense - mortgage.principal, studying };
   }
 
   function movingCost(s, plan) {
-    const a = s.adult;
-    if (a.housing === plan.housing) return { deposit: 0, returned: 0, expense: 0 };
-    return { deposit: plan.housing === 'heime' ? 0 : housing(plan.housing).rent * data().rates.depositMonths,
-      returned: a.deposit, expense: data().rates.moving };
+    return LL.phase2Housing.transition(s, plan, breakdown(s, plan, 0, null, null));
   }
 
   function preview(s, draft) {
     const p = normalizePlan(s, draft);
-    const months = Array.from({ length: 12 }, (_, i) => breakdown(s, p, i));
     const move = movingCost(s, p);
+    const property = move.purchase?.property || (p.housing === s.adult.housing ? s.adult.property : null);
+    const projected = property ? { ...property } : null;
+    const months = Array.from({ length: 12 }, (_, i) => {
+      const month = breakdown(s, p, i, null, projected);
+      if (projected) projected.balance -= month.mortgage.principal;
+      return month;
+    });
     const change = s.adult.routeId && s.adult.routeId !== p.routeId ? (LL.phase2State.route(p.routeId).kind === 'study' ? data().rates.studyChange : data().rates.jobChange) : 0;
-    const result = { wage: 0, loan: 0, bridge: 0, expense: move.expense + change, tax: 0, move, plan: p };
+    const result = { wage: 0, loan: 0, bridge: 0, expense: move.expense + change, tax: 0, move, plan: p, firstMonth: months[0], changeCost: change };
     months.forEach(m => ['wage', 'loan', 'bridge', 'expense', 'tax'].forEach(k => { result[k] += m[k]; }));
-    result.net = result.wage + result.loan + result.bridge - result.expense;
-    result.available = result.net + move.returned - move.deposit;
+    result.mortgagePrincipal = months.reduce((sum, month) => sum + month.mortgage.principal, 0);
+    result.net = result.wage + result.loan + result.bridge - result.expense - result.mortgagePrincipal;
+    const transfer = move.returned + move.sale - move.deposit - move.down + move.bsu + move.savings;
+    result.available = result.net + transfer;
     result.saved = (p.savings + p.bsu + p.extraDebt) * 12;
-    result.firstCash = s.stats.money + move.returned - move.deposit - move.expense - change;
+    result.firstCash = s.stats.money + transfer - move.expense - change;
     return result;
   }
 
@@ -131,7 +138,7 @@ LL.phase2Economy = (function () {
   function closeCalendar(s, key) {
     const cal = calendar(s, key);
     if (cal.closed) return { taxAdjustment: 0, converted: 0 };
-    const due = annualTax(cal.wage, cal.interest, cal.bsuPaid);
+    const due = annualTax(cal.wage, cal.interest, s.adult.property ? 0 : cal.bsuPaid);
     const adjustment = due - cal.taxPaid;
     s.stats.money -= adjustment;
     cal.taxPaid = due;

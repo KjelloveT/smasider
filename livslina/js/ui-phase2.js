@@ -39,16 +39,23 @@ LL.uiPhase2 = (function () {
     const grid = el('div', 'll-adult-stats');
     const finances = el('div', 'll-adult-stats');
     const v = LL.uiPhase2Visuals;
+    const previous = a.reports.at(-1)?.start.stats;
+    const deltas = a.run ? a.run.trends : previous && LL.phase2Effects.changes(previous, s.stats);
     const values = [['Konto', kr(s.stats.money), 'coins'], ['Fri sparing', kr(s.stats.savings), 'coins'], ['BSU', kr(a.bsu), 'home'],
       ['Depositum', kr(a.deposit)], ['Studiegjeld', kr(a.studentDebt)], ['Kredittgjeld', kr(a.creditDebt)],
-      ['Nettoformue', kr(LL.phase2State.networth(s))], ['Energi', Math.round(s.stats.energy), 'zap', 'energy'],
-      ['Trivsel', Math.round(s.stats.wellbeing), 'heart', 'wellbeing'], ['Sosialt', Math.round(s.stats.social), 'users', 'social']];
+      ['Nettoformue', kr(LL.phase2State.networth(s))]];
+    if (a.property) values.push(['Bustadverdi', kr(a.property.value), 'home'], ['Bustadlån', kr(a.property.balance)]);
+    Object.entries(v.METERS).forEach(([key, [name, icon]]) => values.push([name, Math.round(s.stats[key]), icon, key]));
     values.forEach(([label, value, symbol, key], index) => {
       const box = panel(), heading = el('div', 'll-stat-lbl');
       if (symbol) heading.append(v.icon(symbol, 18)); heading.append(el('span', '', label));
-      box.append(heading, el('strong', 'll-adult-stat', String(value)));
-      if (key) box.append(v.meter(key, s.stats[key]));
-      (index === 0 || index >= 7 ? grid : finances).append(box);
+      const reading = el('div', 'll-adult-stat-reading');
+      reading.append(el('strong', 'll-adult-stat', String(value)));
+      const delta = deltas?.[key];
+      if (Number.isFinite(delta) && Math.abs(delta) >= .05) reading.append(v.trend(delta));
+      box.append(heading, reading);
+      if (key) box.append(v.meter(key, s.stats[key], delta));
+      (index === 0 || key ? grid : finances).append(box);
     });
     const details = el('details', 'vp-accordion'); details.append(el('summary', '', 'Sparing, depositum og gjeld'));
     const body = el('div', 'vp-accordion-body'); body.append(finances); details.append(body); wrap.append(grid, details);
@@ -91,6 +98,33 @@ LL.uiPhase2 = (function () {
     if (a.status === 'report' && a.reports.length) { report(); return; }
     home();
   }
+  function roomPanel(s) {
+    const panelView = panel('Rommet og tinga dine');
+    const housing = LL.phase2Housing.option(s.adult.housing);
+    const rooms = housing.rooms || ['bedroom'];
+    const labels = { bedroom: 'Soverom', living: 'Stove', workroom: 'Arbeidsrom' };
+    const scene = el('div', 'll-adult-room');
+    const picker = el('div', 'vp-actions');
+    picker.setAttribute('role', 'group'); picker.setAttribute('aria-label', 'Rom i bustaden');
+    function show(id) {
+      const view = rooms.length === 1 ? null : id === 'bedroom' && rooms.includes('workroom') ? 'bedroom-house' : id;
+      LL.artRoom.render(scene, s.room, null, labels[id] + ' i bustaden din', view);
+      Array.from(picker.children).forEach(tab => tab.setAttribute('aria-pressed', String(tab.textContent === labels[id])));
+    }
+    if (rooms.length > 1) {
+      rooms.forEach(id => picker.append(button(labels[id], () => show(id), 'quiet')));
+      panelView.append(picker);
+    }
+    panelView.append(scene);
+    show(rooms[0]);
+    if (LL.phase2Effects.sparseRoom(s)) {
+      const warning = el('p', 'll-note', 'Rommet er lite innbydande. Vener vel oftare å møtast ein annan stad, og færre besøk dreg ned trivselen litt kvar månad. Ei sitjeplass eller eit teppe saman med pynt kan hjelpe.');
+      warning.setAttribute('role', 'status');
+      panelView.append(warning);
+    }
+    panelView.append(button('Opne rombutikken', LL.uiRoom.open));
+    return panelView;
+  }
   function home() {
     const s = LL.state.get(), a = s.adult;
     const root = frame(a.complete ? 'Neste steg i livslina' : 'Studium og arbeid', a.age + ' år' + (a.complete ? ' · Fase 2 fullført' : ' · August–juli'));
@@ -115,10 +149,7 @@ LL.uiPhase2 = (function () {
     const figure = panel('Figuren din');
     const portrait = LL.artCharacter.createCanvas(s.character, { className: 'll-character-canvas ll-character-canvas--portrait', label: 'Figuren din', width: 160, height: 240 });
     figure.append(portrait); right.append(figure);
-    const room = panel('Rommet og tinga dine');
-    const scene = el('div', 'll-adult-room'); room.append(scene);
-    LL.artRoom.render(scene, s.room, null, 'Rominventaret du tek med frå vidaregåande');
-    right.append(room);
+    right.append(roomPanel(s));
     layout.append(left, right); root.append(layout);
   }
   function transition() {
@@ -155,13 +186,11 @@ LL.uiPhase2 = (function () {
     else p.append(v.token('check', item.kind === 'gap' ? 'Friår fullført' : 'Arbeidsår fullført', r.progress));
     p.append(v.moneyFlow([['Arbeidsinntekt', r.totals.wage], ['Studentlån', r.totals.loan, 'bookOpen'], ['Påbyggstøtte', r.totals.bridge, 'bookOpen'], ['Utgifter og skatt', r.totals.expense]]));
     const worth = el('div', 'll-budget-row'); worth.append(el('span', '', 'Nettoformue'), el('strong', '', kr(r.start.networth) + ' → ' + kr(r.end.networth))); p.append(worth);
-    const changes = el('div', 'll-adult-effects');
-    Object.entries(v.METERS).forEach(([key, [label, symbol]]) => changes.append(v.token(symbol, Math.round(r.start.stats[key]) + ' → ' + Math.round(r.end.stats[key]), label + ': ' + Math.round(r.start.stats[key]) + ' til ' + Math.round(r.end.stats[key]))));
-    p.append(changes);
+    p.append(button('Sjå målingane', () => LL.uiPhase2Report.open(r)));
     const details = el('details', 'vp-accordion'); details.append(el('summary', '', 'Heile rekneskapen'));
     const accounts = el('div', 'vp-accordion-body');
     const values = [['Brutto arbeidsinntekt', r.totals.wage], ['Utbetalt studentlån', r.totals.loan], ['Støtte til påbygg · spelanslag', r.totals.bridge],
-      ['Utgifter, inkludert skatt og flytting', r.totals.expense], ['Skatt i utgiftene', r.totals.tax], ['Nedbetaling av gjeld', r.totals.repaid],
+      ['Utgifter, inkludert skatt og flytting', r.totals.expense], ['Skatt i utgiftene', r.totals.tax], ['Nedbetaling av student- og kredittgjeld', r.totals.repaid], ['Avdrag på bustadlånet', r.totals.mortgagePrincipal],
       ['Flytta til fri sparing', r.totals.saved], ['Flytta til BSU', r.totals.bsu], ['Lån gjort om til stipend', r.totals.converted], ['Renter lagde til gjelda', r.totals.capitalizedInterest || 0], ['Sparerenter', r.totals.earnedInterest || 0], ['Kontoutslag frå case · med i tala ovanfor', r.totals.caseCash]];
     values.filter(row => row[1]).forEach(([key, value]) => { const row = el('div', 'll-budget-row'); row.append(el('span', '', key), el('strong', '', kr(value))); accounts.append(row); });
     accounts.append(el('p', 'll-note', 'Lån er gjeld. Sparing flyttar eigne pengar. Omgjering til stipend blir rekna per kalenderår.'));
@@ -169,10 +198,15 @@ LL.uiPhase2 = (function () {
     root.append(p); goals(s, root);
     const history = el('details', 'vp-accordion'); history.append(el('summary', '', 'Vala dine'));
     const historyBody = el('div', 'vp-accordion-body');
-    r.events.forEach(id => { const event = LL.data.getAdult().events.find(e => e.id === id); const logged = s.eventLog.find(e => e.phase === 2 && e.year === r.year && e.id === id); if (event && logged) historyBody.append(el('p', '', event.title + ' — ' + event.choices[logged.choice].label)); });
+    r.events.forEach(id => {
+      const event = LL.data.getAdult().events.find(e => e.id === id);
+      const logged = s.eventLog.find(e => e.phase === 2 && e.year === r.year && e.id === id);
+      if (event && logged) historyBody.append(el('p', '', event.title + ' — ' + (logged.choiceLabel || event.choices[logged.choice]?.label || 'Val registrert')));
+    });
     history.append(historyBody);
     root.append(history);
     root.append(button(a.complete ? 'Sjå neste steg i livslina' : 'Til neste årsval', () => { a.status = 'planning'; save(); home(); }, 'primary'));
+    LL.uiPhase2Report.open(r);
   }
   function research() {
     const body = document.getElementById('infoModalBody'); body.replaceChildren();

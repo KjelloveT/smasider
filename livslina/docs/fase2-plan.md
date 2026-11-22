@@ -209,3 +209,49 @@ retningsbyte, kvalifikasjonar, målfordeling, BSU, stipend og avstemming av
 kontantstraum/nettoformue. Nettlesaren er brukt til import, overgang,
 fagprøve, ei heil årsrunde, reload, eksport og skjermbreiddene 320, 437, 768,
 1024 og desktop. Sjå `tests/README.md` for etterprøvbar kontroll.
+
+## Vidare plan for vener, kjærast og familie
+
+Spelaren skal kjenne att folk frå tidlegare år og oppdage at dei hugsar kva
+som vart sagt og gjort. Den første prøva byggjer på to oppdikta personar med
+kvar sin kvardag. Ein gammal ven kan bli med vidare frå VGS, og ein ny person
+kan dukke opp gjennom jobb, studium eller fritid. På oversikta får kvar person
+ei kort linje om kva som skjedde sist og eitt mogleg neste steg.
+
+**Start med ei vennehistorie over to år.** Ein ven har halde av ein kveld
+som kolliderer med ei ekstravakt. Du kan ta vakta og foreslå ein konkret ny
+dag, halde avtalen eller seie at du treng ein pause. Når de møtest att, kan
+venen nemne den siste avtalen og ha eigne behov. Den som tek ei vakt og følgjer
+opp, skal få eit anna møte enn den som gjer fleire avtalar og aldri kjem.
+Å snakke ærleg, seie frå i tide og gjere noko gratis skal vere moglege vegar
+til eit nært vennskap. Kvile og andre vener kan òg gi ein god kvardag.
+
+**La eit forhold utvikle seg i fleire val.** Eit møte kan bli eit vennskap
+eller gå vidare til ei gjensidig invitasjon til å bli betre kjende. Spelaren
+kan takke nei, ta det roleg eller velje å prøve eit forhold. Når tid, avstand
+eller forventningar skaper usemje, får begge ei stemme. Eit forhold kan bli
+reparert, ta slutt etter eit spelarval eller ende fordi den andre vil noko
+anna. Eit brot kan gi ein dårleg periode, og støtte frå vener eller ein ny
+kvardag kan hjelpe etter kvart. Det skal vere like mogleg å trivast som einsleg.
+
+**Gjer sambuarskap til eit praktisk val.** Når begge vil flytte saman,
+viser Bustad ei konkret samanlikning av leige, innskot, plass og deling av
+utgifter før nokon takkar ja. Eit seinare brot opnar nye bustadval og eit
+oversyn over kva kvar av dei eig eller skuldar. Start med delt leige.
+Felles eigarskap treng ei eiga avgjerd om eigardelar, ansvar for lån og kva
+som skjer ved sal.
+
+**Prøv barn som ei valfri utviding til slutt.** Ei samtale om ønske og
+tidspunkt må kome før ein slik familieveg blir tilgjengeleg. Når spelaren
+vel å gå vidare, må årsplanen vise kven som kan ta omsorg, korleis tid og
+utgifter endrar seg, og kva støtte eller endra arbeidsplan som er mogeleg.
+Vis både gode stunder og vanskelege avvegingar. Bruk eigne kjelder for
+foreldrepengar og barnehagekostnader når den delen skal byggjast.
+
+Relasjonane bør lagrast med stabile person-ID-ar, status, siste viktige
+hending og oppfølgingar, saman med det lokale spelutkastet. Eldre lagringar
+startar med tom relasjonshistorikk. Bruk oppdikta namn og la hendingsplanen
+bruke høgst to av dei seks plassane i året til samanhengande relasjonsscener.
+Prøv vennehistoria frå første møte til ei seinare oppfølging, med lagring og
+ny innlasting etter kvart val. Test deretter både vennskap, forhold, frivillig
+brot og den andre sitt brot før sambuarskap eller barn blir lagt til.
