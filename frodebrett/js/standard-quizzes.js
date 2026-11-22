@@ -18,7 +18,11 @@
   };
   const gradeNumbers = Array.from({ length: 10 }, (_, index) => index + 1);
   const themes = {
-    land: { name: 'Land og geografi', path: 'json/themes/land-i-verda.json?v=1' }
+    land: 'Land og geografi',
+    'utdoydde-dyr': 'Utdøydde dyr',
+    fisk: 'Fisk',
+    pattedyr: 'Pattedyr',
+    fuglar: 'Fuglar'
   };
   const catalogue = new Map();
   let renderVersion = 0;
@@ -50,6 +54,15 @@
       })),
       final: standard.final
     };
+  }
+
+  async function themeCards(selectedThemes) {
+    const manifest = await load('json/themes/index.json?v=1');
+    return manifest.filter(entry => selectedThemes.includes(entry.theme)).map(entry => {
+      const summary = { title: entry.title, categories: entry.categories.map(name => ({ name })) };
+      const loadQuiz = () => load('json/themes/' + entry.file + '?v=1').then(data => data.quiz);
+      return FB.Saved.makeCard(summary, true, loadQuiz);
+    });
   }
 
   function checked(id) {
@@ -86,21 +99,21 @@
     }
     status.textContent = 'Lastar frødene …';
     const grades = selectedGrades.length ? selectedGrades : gradeNumbers;
-    const loads = selectedThemes.map(id => load(themes[id].path).then(data => [data.quiz]));
+    const loads = selectedThemes.length ? [themeCards(selectedThemes)] : [];
     if (selectedGrades.length || selectedSubjects.length) {
       for (const grade of grades) {
         if (selectedSubjects.length && !selectedSubjects.some(id => (subjects[id].firstGrade ?? 1) <= grade)) continue;
         loads.push(load('json/standard/' + grade + '.json?v=2').then(pack => pack.quizzes
           .filter(standard => !selectedSubjects.length || selectedSubjects.includes(standard.subject))
-          .map(standard => toQuiz(standard, grade))));
+          .map(standard => FB.Saved.makeCard(toQuiz(standard, grade), true))));
       }
     }
     const results = await Promise.allSettled(loads);
     if (renderVersion !== version) return;
-    const quizzes = results.flatMap(result => result.status === 'fulfilled' ? result.value : []);
-    list.append(...quizzes.map(quiz => FB.Saved.makeCard(quiz, true)));
-    list.hidden = !quizzes.length;
-    const count = quizzes.length ? quizzes.length + (quizzes.length === 1 ? ' frøde' : ' frøder') : '';
+    const cards = results.flatMap(result => result.status === 'fulfilled' ? result.value : []);
+    list.append(...cards);
+    list.hidden = !cards.length;
+    const count = cards.length ? cards.length + (cards.length === 1 ? ' frøde' : ' frøder') : '';
     if (results.some(result => result.status === 'rejected')) {
       status.textContent = count
         ? count + '. Nokre frøder kunne ikkje lastast.'
@@ -131,8 +144,8 @@
     for (const [id, item] of Object.entries(subjects)) {
       addChoice(subject, id, item.name);
     }
-    for (const [id, item] of Object.entries(themes)) {
-      addChoice(theme, id, item.name, id === 'land');
+    for (const [id, name] of Object.entries(themes)) {
+      addChoice(theme, id, name, id === 'land');
     }
     FB.el('standard-filters').addEventListener('change', render);
     render();

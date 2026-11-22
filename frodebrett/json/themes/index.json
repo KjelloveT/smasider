@@ -1,0 +1,144 @@
+[
+  {
+    "theme": "land",
+    "file": "land-i-verda.json",
+    "title": "Land i verda",
+    "categories": [
+      "Flagg",
+      "Hovudstader",
+      "Landemerke"
+    ]
+  },
+  {
+    "theme": "land",
+    "file": "europa.json",
+    "title": "Land i Europa",
+    "categories": [
+      "Flagg",
+      "Hovudstader",
+      "Landemerke",
+      "Kart og natur",
+      "Land og grenser"
+    ]
+  },
+  {
+    "theme": "land",
+    "file": "asia.json",
+    "title": "Land i Asia",
+    "categories": [
+      "Flagg",
+      "Hovudstader",
+      "Landemerke",
+      "Kart og natur",
+      "Land og grenser"
+    ]
+  },
+  {
+    "theme": "land",
+    "file": "afrika.json",
+    "title": "Land i Afrika",
+    "categories": [
+      "Flagg",
+      "Hovudstader",
+      "Landemerke",
+      "Kart og natur",
+      "Land og grenser"
+    ]
+  },
+  {
+    "theme": "land",
+    "file": "nordamerika.json",
+    "title": "Land i Nord-Amerika",
+    "categories": [
+      "Flagg",
+      "Hovudstader",
+      "Landemerke",
+      "Kart og natur",
+      "Land og grenser"
+    ]
+  },
+  {
+    "theme": "land",
+    "file": "soramerika.json",
+    "title": "Land i Sør-Amerika",
+    "categories": [
+      "Flagg",
+      "Hovudstader",
+      "Landemerke",
+      "Kart og natur",
+      "Land og grenser"
+    ]
+  },
+  {
+    "theme": "land",
+    "file": "oseania.json",
+    "title": "Land i Oseania",
+    "categories": [
+      "Flagg",
+      "Hovudstader",
+      "Landemerke",
+      "Kart og natur",
+      "Land og øystatar"
+    ]
+  },
+  {
+    "theme": "land",
+    "file": "antarktis.json",
+    "title": "Antarktis",
+    "categories": [
+      "Kart og landskap",
+      "Is og vêr",
+      "Dyreliv",
+      "Forskingsstasjonar",
+      "Polferder"
+    ]
+  },
+  {
+    "theme": "utdoydde-dyr",
+    "file": "utdoydde-dyr.json",
+    "title": "Utdøydde dyr",
+    "categories": [
+      "Dinosaurar",
+      "Istidsdyr",
+      "Dyr frå havet",
+      "Borte i nyare tid",
+      "Fossil og funn"
+    ]
+  },
+  {
+    "theme": "fisk",
+    "file": "fisk.json",
+    "title": "Fisk",
+    "categories": [
+      "Kjenn att fisken",
+      "Hav og ferskvatn",
+      "Kropp og sansar",
+      "Snodige fakta og rekordar",
+      "Fisk i Noreg"
+    ]
+  },
+  {
+    "theme": "pattedyr",
+    "file": "pattedyr.json",
+    "title": "Pattedyr",
+    "categories": [
+      "Kjenn att pattedyret",
+      "Havpattedyr",
+      "Spor og levevis",
+      "Ungar og familie",
+      "Snodige fakta og rekordar"
+    ]
+  },
+  {
+    "theme": "fuglar",
+    "file": "fuglar.json",
+    "title": "Fuglar",
+    "categories": [
+      "Kjenn att fuglen",
+      "Fuglar i Noreg",
+      "Trekk og reir",
+      "Kropp og sansar",
+      "Snodige fakta og rekordar"
+    ]
+  }
+]

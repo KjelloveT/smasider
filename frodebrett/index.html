@@ -38,23 +38,10 @@
         <div id="quiz-list" class="fb-quiz-list"></div>
       </section>
 
-      <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="json-files-heading">
-        <h2 id="json-files-heading">JSON-filer</h2>
-        <p class="vp-prose" id="json-files-help">Gje den tome malen til ein KI-modell, og opne den ferdige JSON-fila her. Når du opnar ei fil, blir ho lesen og lagra berre i nettlesaren på denne eininga. Frøda kan spelast her med ein gong.</p>
-        <div class="vp-actions">
-          <button class="vp-button vp-button--tool" id="btn-download-template" type="button"><span data-icon="fileJson" aria-hidden="true"></span>Last ned tom JSON-mal</button>
-          <button class="vp-button" id="btn-import-quiz" type="button" aria-describedby="json-files-help"><span data-icon="upload" aria-hidden="true"></span>Opne JSON-fil</button>
-          <input type="file" id="import-quiz-file" accept=".json,application/json" hidden>
-          <button class="vp-button vp-button--quiet" id="btn-export-all" type="button" hidden>Last ned alle eigne frøder</button>
-        </div>
-        <p id="library-status" role="status" hidden></p>
-      </section>
-
       <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="premade-heading">
         <h2 id="premade-heading">Førehandslaga frøder</h2>
-        <p class="vp-prose">Alle dei førehandslaga frødene er laga av KI. Ein god del av spørsmåla og svara er snodige. Me rår deg sterkt til å sjå gjennom både spørsmåla og svara før du brukar dei med ein klasse. Frødene skal gje deg ein rask start med eit nesten ferdig oppsett.</p>
-        <p class="vp-help" id="premade-filter-help">Vel eitt eller fleire trinn og fag. Temafrøder kan veljast åleine eller saman med fagfrødene.</p>
-        <div class="fb-library-filters" id="standard-filters" aria-describedby="premade-filter-help">
+        <p class="vp-prose">Dei førehandslaga frødene skal gje deg ein rask start med eit nesten ferdig oppsett. Dei er laga av KI, og ein god del av spørsmåla og svara er snodige. Sjå nøye gjennom både spørsmåla og svara før du brukar ei frøde med ein klasse.</p>
+        <div class="fb-library-filters" id="standard-filters">
           <fieldset class="vp-choices">
             <legend>Trinn</legend>
             <div class="vp-actions" id="standard-grade"></div>
@@ -71,6 +58,18 @@
         <p class="vp-help" id="standard-status" role="status"></p>
         <div id="standard-list" class="fb-quiz-list" hidden></div>
         <div class="vp-actions" id="standard-curriculum" hidden></div>
+      </section>
+
+      <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="json-files-heading">
+        <h2 id="json-files-heading">Last ned ein tom mal som du kan få KI til å fylle ut</h2>
+        <p class="vp-prose" id="json-files-help">Bruk din eigen KI, og last opp att fila her etterpå. Fila blir lesen og lagra berre i nettlesaren på denne eininga.</p>
+        <div class="vp-actions">
+          <button class="vp-button vp-button--tool" id="btn-download-template" type="button"><span data-icon="fileJson" aria-hidden="true"></span>Last ned tom JSON-mal</button>
+          <button class="vp-button" id="btn-import-quiz" type="button" aria-describedby="json-files-help"><span data-icon="upload" aria-hidden="true"></span>Opne JSON-fil</button>
+          <input type="file" id="import-quiz-file" accept=".json,application/json" hidden>
+          <button class="vp-button vp-button--quiet" id="btn-export-all" type="button" hidden>Last ned alle eigne frøder</button>
+        </div>
+        <p id="library-status" role="status" hidden></p>
       </section>
     </div>
 
@@ -307,8 +306,8 @@
 <script src="js/board.js?v=11"></script>
 <script src="js/editor.js?v=13"></script>
 <script src="js/export.js?v=5"></script>
-<script src="js/saved.js?v=11"></script>
-<script src="js/standard-quizzes.js?v=3"></script>
+<script src="js/saved.js?v=12"></script>
+<script src="js/standard-quizzes.js?v=4"></script>
 <script src="js/app.js?v=11"></script>
 
 

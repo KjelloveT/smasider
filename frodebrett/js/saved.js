@@ -5,6 +5,7 @@
   const FB = root.FB;
   const Store = root.FrodebrettStorage;
   const Saved = {};
+  let navigationVersion = 0;
 
   function action(text, style, icon, quiz, run) {
     const button = Vy.el('button', 'vp-button vp-button--compact ' + style);
@@ -21,20 +22,46 @@
     return button;
   }
 
-  Saved.makeCard = function (quiz, standard = false) {
+  Saved.makeCard = function (quiz, standard = false, loadQuiz) {
+    function useQuiz(run, navigates = false) {
+      return async button => {
+        const version = navigates ? ++navigationVersion : navigationVersion;
+        if (!loadQuiz) return run(quiz, button);
+
+        const hadFocus = document.activeElement === button;
+        let loadedQuiz;
+        button.disabled = true;
+        try {
+          loadedQuiz = await loadQuiz();
+        } catch {
+          loadedQuiz = null;
+        } finally {
+          button.disabled = false;
+        }
+        if (navigates && (version !== navigationVersion || !button.getClientRects().length)) return;
+        if (hadFocus && document.activeElement === document.body) button.focus();
+        if (!loadedQuiz) {
+          Vy.toast('Kunne ikkje laste frøda. Prøv på nytt.');
+          return;
+        }
+        return run(loadedQuiz, button);
+      };
+    }
+
     const card = Vy.el('article', 'vp-panel vp-panel--plain vp-panel--compact fb-quiz-card');
-    const questionCount = quiz.categories.reduce((total, category) => total + category.questions.length, 0);
     const meta = standard
       ? quiz.categories.map(category => category.name).filter(name => name !== 'Snodige fakta').join(' · ')
-      : quiz.categories.length + ' kategoriar · ' + questionCount + ' spørsmål' + (quiz.final ? ' · finalerunde' : '');
+      : quiz.categories.length + ' kategoriar · '
+        + quiz.categories.reduce((total, category) => total + category.questions.length, 0)
+        + ' spørsmål' + (quiz.final ? ' · finalerunde' : '');
     const heading = Vy.el('h3', 'vp-panel vp-panel--soft fb-quiz-title', quiz.title);
-    const start = action('Start spel', 'vp-button--positive', 'play', quiz, () => FB.Board.selectQuiz(quiz));
+    const start = action('Start spel', 'vp-button--positive', 'play', quiz, useQuiz(data => FB.Board.selectQuiz(data), true));
     start.setAttribute('aria-haspopup', 'dialog');
     start.setAttribute('aria-controls', 'team-setup');
     const actions = Vy.el('div', 'vp-actions');
     actions.append(
       start,
-      action(standard ? 'Rediger kopi' : 'Rediger', 'vp-button--tool', 'pencil', quiz, () => FB.Editor.editQuiz(quiz))
+      action(standard ? 'Rediger kopi' : 'Rediger', 'vp-button--tool', 'pencil', quiz, useQuiz(data => FB.Editor.editQuiz(data), true))
     );
     if (!standard) {
       actions.append(action('Slett', 'vp-button--danger vp-button--quiet', 'trash2', quiz, () => {
@@ -47,8 +74,8 @@
     }
 
     const downloads = standard ? actions : Vy.el('div', 'vp-actions');
-    const html = action('Last ned HTML', 'vp-button--tool', 'download', quiz, button => FB.Export.download(quiz, button));
-    const json = action('Last ned JSON', '', 'fileJson', quiz, () => FB.Export.downloadJson(quiz));
+    const html = action('Last ned HTML', 'vp-button--tool', 'download', quiz, useQuiz(FB.Export.download));
+    const json = action('Last ned JSON', '', 'fileJson', quiz, useQuiz(FB.Export.downloadJson));
     downloads.append(FB.Export.withHelp(html, 'html'), FB.Export.withHelp(json, 'json'));
 
     card.append(heading, Vy.el('p', 'vp-help', meta), actions);
