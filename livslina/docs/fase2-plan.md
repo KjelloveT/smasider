@@ -3,6 +3,8 @@
 Dato: 2026-11-01. Arbeidsplan etter avklaring med brukaren. Denne planen
 erstattar eldre avgrensingar om at berre vidaregåande skal vere spelbar.
 
+Den vidare utbygginga er planlagd i [Fleire vegar gjennom Livslina](fase2-utvidingsplan.md).
+
 ## Avtalt ramme
 
 - Same person, økonomi, kompetanse, rom, sosiale band og valhistorikk følgjer
@@ -74,6 +76,11 @@ Kvart studium får eit relevant førstejobbspor ved fullføring. Opptaksgrunnlag
 og eventuelle forenklingar blir synlege. Fullføring av høgare utdanning blir
 halden skild frå karakterane frå vidaregåande.
 
+Nye opptak i spelet krev studiekompetanse og at karakterpoenga når minst
+éi av dei viste 2026-grensene i ein kvote figuren kan søkje i. Spelet reknar
+karaktersnitt gonga med ti. Frå 22 år brukar denne modellen ordinær kvote.
+Studium som alt er påbegynte, kan takast opp att frå lagra framdrift.
+
 Retningsbyte ved årsstart viser ny inntekt, gjeld, attståande studietid,
 eventuell godskriving, flytting og overgangskostnader før stadfesting.
 Fullførte studieår blir bevarte ved pause og retur. Byte mellom ulike studium
@@ -93,7 +100,8 @@ tolv månader med 4–6 case → årsoppgjer → nytt årsval.
   ei synleg tidsramme. Endringar midt i året blir daterte og gjeld framover.
 - Mål viser sum eller framdrift, tidsfrist og venta bidrag frå planen. Pengar
   i buffer og BSU er reelle konti, medan måla berre viser kva dei er sette av til.
-- Bustadkjøp er eit seinare steg. Oppnådd sparemål er inga lånegodkjenning.
+- Leilegheit og hus kan kjøpast når spelaren har finansiering. Bustadmålet
+  viser spareframdrift, og bustadvalet viser kva som trengst ved kjøp.
 
 ## 5. Økonomi
 
@@ -200,8 +208,8 @@ blir vurderte; fullføring blir aldri avgjord av ein statistisk terning.
 Avgrensingar som skal vere synlege i prøveutgåva: fast 2026-prisnivå,
 representative løns- og bustadanslag, forenkla skatt og tidspunkt for
 stipendomgjering, separat støtteanslag for påbygg og ei forenkla fagprøve
-som fullførast med støtte. Opptak sjekkar studiekompetanse og relevant fagbrev,
-ikkje konkurransepoeng. Jobbspora er tilgjengelege i den lokale spelregionen.
+som fullførast med støtte. Den første prøveutgåva brukte studiekompetanse og
+relevant fagbrev som opptaksgrunnlag. Jobbspora er tilgjengelege i den lokale spelregionen.
 Detaljert jobbkonkurranse og individuelle interesseprofilar kjem seinare.
 
 Kontroll: automatiserte testar av migrering, idempotens, årslengd, retningar,

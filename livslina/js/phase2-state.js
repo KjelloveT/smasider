@@ -98,6 +98,23 @@ LL.phase2State = (function () {
     return { average, points: Math.round(average * 100) / 10 };
   }
 
+  function studyAdmission(s, item) {
+    if (item.kind !== 'study' || progress(s, item.id).graduated) return null;
+    const data = LL.data.getAdult().admissions;
+    const samples = data.examples[item.id];
+    if (!samples?.length) return null;
+    const examples = samples.map(example => {
+      const ageLimit = data.firstQuotaAgeByYear?.[example.year];
+      const ageExceeded = Number.isInteger(ageLimit) && s.adult.age > ageLimit;
+      return { ...example, excludedFirstQuotaAge: ageExceeded ? ageLimit : undefined };
+    });
+    const lowest = Math.min(...examples.map(example => example.excludedFirstQuotaAge === undefined ?
+      Math.min(example.first, example.ordinary) : example.ordinary));
+    const continuing = s.adult.routeId === item.id || progress(s, item.id).years > 0;
+    const grade = schoolGrade(s);
+    return { examples, grade, lowest, continuing, admitted: continuing || Boolean(grade && grade.points >= lowest) };
+  }
+
   function networth(s) {
     const a = s.adult;
     return s.stats.money + s.stats.savings + a.bsu + a.deposit + LL.phase2Housing.equity(a.property) - a.studentDebt - a.creditDebt;
@@ -171,5 +188,5 @@ LL.phase2State = (function () {
       if (r.resolved.some(id => !r.schedule.some(e => e.id === id))) throw new Error('Ugyldige hendingsval.');
     }
   }
-  return { migrate, completeSchool, passTradeExam, begin, route, available, progress, isStudying, label, schoolGrade, networth, goalValue, normalizeGoals, validate };
+  return { migrate, completeSchool, passTradeExam, begin, route, available, progress, isStudying, label, schoolGrade, studyAdmission, networth, goalValue, normalizeGoals, validate };
 })();

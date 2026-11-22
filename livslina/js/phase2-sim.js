@@ -9,6 +9,8 @@ LL.phase2Sim = (function () {
     const a = s.adult;
     if (a.run || a.complete) return false;
     const p = LL.phase2Economy.normalizePlan(s, draft);
+    const admission = LL.phase2State.studyAdmission(s, LL.phase2State.route(p.routeId));
+    if (admission && !admission.admitted) throw new Error('Vel ei retning du oppfyller opptakskrava for.');
     const preview = LL.phase2Economy.preview(s, p);
     const move = preview.move;
     if (move.purchase?.requiresJob || move.purchase && preview.firstCash < 0) throw new Error('Bustadkjøpet krev nok eigenkapital og godkjend finansiering. Sjå vilkåra under Bustad.');

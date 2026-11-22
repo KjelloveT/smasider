@@ -8,7 +8,8 @@ endrar seg ved flytting eller byte mellom studium og arbeid.
 Prøvelagringane i `fixtures/` inneheld ingen persondata. Importer dei med
 den vanlege Importer-knappen:
 
-- `studieklar.json`: avslutta skuleløp, klar for faseovergangen.
+- `studieklar.json`: avslutta skuleløp med 5,30 i snitt, klar for
+  faseovergangen og alle dei tre studia i prøveutgåva.
 - `fagprove.json`: begge læreåra er ferdige, fagprøva står att.
 - `siste-laerehalvaar.json`: siste lærehalvår, for kontroll av den gamle flyten.
 
@@ -54,3 +55,14 @@ Desse filene er uendra frå hovudgreina. Ingen Livslina-avvik er melde.
   `staticwebapp.config.json`. Ingen konsoll- eller lastingsfeil i gjennomspelinga.
 - 16 automatiserte fasetestar passerer. Felleskontrollen av 81 HTML-sider
   melder dei same to avvika i Heite Stavrim og Ormritaren.
+
+## Kontroll av poengkravet 2026-11-22
+
+- Ein ny søkjar på 22 år med 35,0 poeng kan sjå lærarstudiet og budsjettet
+  for det. Retninga viser kravet på 38,9, og «Start året» er sperra.
+- Ei eldre lagring med 35,0 poeng og to studieår kan halde fram, også etter
+  eit friår. Ein ny søkjar som når grensa, kan starte.
+- Nettlesaren viste rett opptaksstatus frå 320 til 1440 pikslar. Prøvelagringa
+  med 5,30 i snitt kom inn på sjukepleie. Tolv månader, seks hendingar,
+  årsoppgjer, ny innlasting og eksport vart prøvde under same tryggingsheaderar
+  som førehandsvisinga. Alle 25 automatiserte fasetestar passerte.

@@ -25,7 +25,9 @@ LL.uiPhase2Guide = (function () {
         const effectiveKind = route.kind === 'study' && LL.phase2State.progress(s, route.id).graduated ? 'job' : route.kind;
         if (effectiveKind !== kind) continue;
         const enabled = LL.phase2State.available(s, route);
-        const option = el('option', '', LL.phase2State.label(s, route.id) + (enabled ? '' : ' · manglar opptaksgrunnlag'));
+        const admission = enabled ? LL.phase2State.studyAdmission(s, route) : null;
+        const reason = !enabled ? ' · manglar opptaksgrunnlag' : admission?.admitted === false ? ' · sjå poengkravet' : '';
+        const option = el('option', '', LL.phase2State.label(s, route.id) + reason);
         option.value = route.id;
         option.disabled = !enabled;
         group.append(option);
@@ -34,27 +36,6 @@ LL.uiPhase2Guide = (function () {
     }
     input.value = selected;
     return input;
-  }
-
-  function comparison(s, routes) {
-    const details = el('details', 'vp-accordion');
-    details.append(el('summary', '', 'Samanlikn retningane'));
-    const body = el('div', 'vp-accordion-body');
-    const table = el('table', 'vp-data-table ll-adult-route-table');
-    const heading = table.createTHead().insertRow();
-    for (const label of ['Retning', 'Type løp']) {
-      const cell = el('th', '', label); cell.scope = 'col'; heading.append(cell);
-    }
-    const rows = table.createTBody();
-    for (const route of routes) {
-      const row = rows.insertRow();
-      const name = LL.phase2State.label(s, route.id);
-      row.insertCell().textContent = name;
-      row.insertCell().textContent = routeType(s, route) + (LL.phase2State.available(s, route) ? '' : ' · manglar opptaksgrunnlag i spelet');
-    }
-    body.append(table);
-    details.append(body);
-    return details;
   }
 
   function admissionLine(label, limit, grade, ageLimit) {
@@ -71,14 +52,9 @@ LL.uiPhase2Guide = (function () {
     return row;
   }
 
-  function admissions(s, route) {
-    const data = LL.data.getAdult().admissions;
-    const examples = data.examples[route.id];
-    if (!examples?.length || !LL.phase2State.isStudying(s, { routeId: route.id })) return null;
-    const details = el('details', 'vp-accordion');
-    details.append(el('summary', '', 'Opptakskrav og poenggrenser'));
-    const body = el('div', 'vp-accordion-body');
-    const grade = LL.phase2State.schoolGrade(s);
+  function admissions(admission, expanded) {
+    if (!admission) return [];
+    const { examples, grade, lowest, admitted, continuing } = admission;
     const profile = el('div', 'vp-panel vp-panel--soft vp-panel--compact ll-adult-admission-profile');
     if (grade) {
       const figures = el('dl', 'll-adult-admission-grades');
@@ -86,40 +62,42 @@ LL.uiPhase2Guide = (function () {
         const row = el('div'); row.append(el('dt', '', label), el('dd', '', value)); figures.append(row);
       }
       profile.append(figures);
-    } else {
-      profile.append(el('p', '', 'Karaktersnittet frå VGS manglar i denne lagringa.'));
     }
-    profile.append(el('p', '', 'Med studiekompetansen din kan du velje dette studiet i Livslina.'));
-    body.append(profile);
+    const status = continuing ? 'Du er alt teken opp og kan halde fram med studiet.' : admitted ?
+      'Du oppfyller opptakskrava for å starte dette studiet i Livslina.' : grade ?
+        'Du treng minst ' + number(lowest, 1) + ' poeng for å starte dette studiet i Livslina.' :
+        'Spelet treng karaktersnittet ditt frå VGS for å vurdere eit nytt opptak.';
+    const message = el('p');
+    message.append(el('strong', '', status));
+    profile.append(message);
+
+    const details = el('details', 'vp-accordion');
+    details.open = Boolean(expanded);
+    details.append(el('summary', '', 'Opptakskrav og poenggrenser'));
+    const body = el('div', 'vp-accordion-body');
+    body.append(el('p', '', 'For nye opptak brukar spelet den lågaste av grensene i dei kvotane du kan søkje i. Karaktersnittet gonga med ti gir karakterpoenga dine i spelet. Lærestadene kan ha eigne fagkrav, og tilleggspoeng og konkurranse kan endre utfallet i eit verkeleg opptak.'));
     const list = el('ul', 'll-adult-admission-list');
-    let reaches = false;
     for (const example of examples) {
-      const ageLimit = data.firstQuotaAgeByYear?.[example.year];
-      const ageExceeded = Number.isInteger(ageLimit) && s.adult.age > ageLimit;
-      if (grade && (grade.points >= example.ordinary || !ageExceeded && grade.points >= example.first)) reaches = true;
       const item = el('li');
       const source = el('a', '', example.institution);
       source.href = example.url; source.target = '_blank'; source.rel = 'noopener noreferrer';
       const quotas = el('dl');
-      quotas.append(admissionLine('Førstegongsvitnemål', example.first, grade, ageExceeded ? ageLimit : undefined),
+      quotas.append(admissionLine('Førstegongsvitnemål', example.first, grade, example.excludedFirstQuotaAge),
         admissionLine('Ordinær kvote', example.ordinary, grade));
       item.append(source, ', ' + example.campus + ' (' + example.year + ')', quotas);
       list.append(item);
     }
-    if (grade) {
+    body.append(list);
+    if (grade && !admitted) {
       const lowestOrdinary = Math.min(...examples.map(example => example.ordinary));
-      const advice = reaches ? 'Karakterpoenga dine når minst éi av dei viste grensene i ei aktuell kvote.' :
-        'Med karakterane åleine ligg du under dei viste grensene i dei aktuelle kvotane. Du kan sjå etter andre studiestader eller vurdere å ta opp fag som privatist. Utan tilleggspoeng svarar den lågaste ordinære grensa her til eit snitt på ' +
-        number(lowestOrdinary / 10, 2) + '.';
-      body.append(el('p', '', advice));
+      body.append(el('p', '', 'Du manglar ' + number(lowest - grade.points, 1) + ' poeng. I eit verkeleg opptak kan du undersøkje andre studiestader eller ta opp fag som privatist. Utan tilleggspoeng svarar den lågaste ordinære grensa her til eit snitt på ' + number(lowestOrdinary / 10, 2) + '.'));
     }
-    body.append(el('p', '', 'Karaktersnitt gonga med ti gir karakterpoeng. Poenggrensene nedanfor viser kor mange poeng den siste som fekk tilbod i kvar kvote, hadde det året. Kvotereglar, tilleggspoeng og konkurransen om plassane påverkar opptaket.'), list);
     const retake = el('a', '', 'Samordna opptak om å ta opp fag');
     retake.href = 'https://www.samordnaopptak.no/universitet-og-hogskole/poengberegning/forbedringer-og-nye-fag/';
     retake.target = '_blank'; retake.rel = 'noopener noreferrer';
     body.append(el('p', '', 'Betre karakterar frå privatisteksamen etter VGS tel i ordinær kvote. I kvoten for førstegongsvitnemål er det det opphavlege vitnemålet som tel.'), retake);
     details.append(body);
-    return details;
+    return [profile, details];
   }
 
   function homeNote(home, estimate, target) {
@@ -160,5 +138,5 @@ LL.uiPhase2Guide = (function () {
     return lines;
   }
 
-  return { routeType, routeSelect, comparison, admissions, homeNote, liveBudget };
+  return { routeType, routeSelect, admissions, homeNote, liveBudget };
 })();

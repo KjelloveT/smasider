@@ -72,8 +72,8 @@ LL.uiPhase2Plan = (function () {
     const routeFields = el('div', 'll-adult-route-fields');
     routeFields.append(field('Retning', route), routeType);
     const routeDescription = el('p', 'll-note');
-    const admission = el('div');
-    routePanel.append(routeFields, routeDescription, routeNote, guide.comparison(s, d.routes), admission);
+    const admission = el('div', 'll-adult-stack ll-adult-admission');
+    routePanel.append(routeFields, routeDescription, routeNote, admission);
     housingPanel.append(field('Bustad', home), homeNote);
     const daily = el('div');
     const hours = select('adultJobHours', [[0, 'Ingen deltidsjobb'], [6, '6 timar i veka'], [12, '12 timar i veka']], initial.jobHours);
@@ -160,7 +160,8 @@ LL.uiPhase2Plan = (function () {
     const liveBudget = ui.panel();
     liveBudget.classList.add('ll-adult-plan-budget');
     const liveRows = el('div'); liveRows.setAttribute('aria-live', 'polite');
-    liveBudget.append(el('h2', 'vp-heading--small no-mt', 'Budsjett per månad'), liveRows);
+    const liveTitle = el('h2', 'vp-heading--small no-mt', 'Budsjett per månad');
+    liveBudget.append(liveTitle, liveRows);
     layout.append(box, liveBudget);
     form.append(layout, exitActions);
     root.append(form);
@@ -191,10 +192,11 @@ LL.uiPhase2Plan = (function () {
       });
       routeType.replaceChildren(el('strong', '', 'Type løp'), el('div', '', guide.routeType(s, item)));
       routeDescription.textContent = item.note;
-      const wasExpanded = admission.firstElementChild?.open;
-      const admissionDetails = guide.admissions(s, item);
-      if (admissionDetails) admissionDetails.open = Boolean(wasExpanded);
-      admission.replaceChildren(...(admissionDetails ? [admissionDetails] : []));
+      const studyAdmission = LL.phase2State.studyAdmission(s, item);
+      const admissionBlocked = studyAdmission?.admitted === false;
+      const wasExpanded = admission.querySelector('details')?.open;
+      admission.replaceChildren(...guide.admissions(studyAdmission, wasExpanded));
+      liveTitle.textContent = admissionBlocked ? 'Budsjettdøme per månad' : 'Budsjett per månad';
       routeNote.replaceChildren();
       const vignette = el('div', 'll-adult-route-art'); vignette.append(LL.artVignette.create(item.art)); routeNote.append(vignette);
       if (studying) routeNote.append(LL.uiPhase2Visuals.studySteps(s, item));
@@ -232,7 +234,8 @@ LL.uiPhase2Plan = (function () {
         const duplicate = selected.length > 1 && selected[0].id === selected[1].id;
         const needsDeposit = estimate.firstCash < 0 && estimate.move.deposit > estimate.move.returned;
         const blockedPurchase = estimate.move.purchase && (estimate.move.purchase.requiresJob || estimate.firstCash < 0);
-        error.textContent = duplicate ? 'Vel to ulike mål.' : share > 100 ? 'Fordelinga av fri sparing kan høgst vere 100 %.' :
+        error.textContent = admissionBlocked ? 'Sjå opptakskrava under Retning, og vel ei retning du kan starte.' :
+          duplicate ? 'Vel to ulike mål.' : share > 100 ? 'Fordelinga av fri sparing kan høgst vere 100 %.' :
           blockedPurchase ? 'Bustadkjøpet krev finansiering. Opne Bustad for å sjå kva som manglar.' :
           needsDeposit ? 'Flytting krev meir pengar no. Hent fri buffer frå oversikta eller vel eit rimelegare bustadval.' : '';
         start.disabled = Boolean(error.textContent);

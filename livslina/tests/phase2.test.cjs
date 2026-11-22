@@ -24,6 +24,7 @@ function school(LL, id = 'studiespes', apprenticeship = false) {
   const s = LL.state.newGame({ seed: 12345 });
   s.program = LL.data.getProgram(id); s.trainingRoute = apprenticeship ? 'apprenticeship' : 'school';
   s.family = { id: 'normal' }; s.housing = 'heime'; s.stats.money = 50000; s.stats.savings = 10000;
+  s.stats.grades = 5.3;
   s.roundIndex = LL.state.rounds().length; s.finished = true;
   return s;
 }
@@ -60,6 +61,46 @@ test('opptaksdøma bruker snittet frå VGS og les eldre lagringar', () => {
   assert.equal(older.average, 4.92);
   assert.equal(older.points, 49.2);
   assert.equal(LL.phase2State.schoolGrade({ stats: { grades: 0 } }), null);
+});
+
+test('nye studium krev poeng i ei aktuell kvote før året kan starte', () => {
+  const LL = environment(), s = adult(LL);
+  const route = LL.phase2State.route('laerar');
+  const plan = { routeId: route.id, housing: 'hybel' };
+  s.schoolResult.stats.grades = 3.5;
+  assert.equal(LL.phase2State.studyAdmission(s, route).lowest, 36.3);
+  assert.equal(LL.phase2Economy.defaultPlan(s).routeId, 'butikk');
+  assert.doesNotThrow(() => LL.phase2Economy.preview(s, plan));
+  const before = clone(s);
+  assert.throws(() => LL.phase2Sim.begin(s, plan, []), /opptakskrava/);
+  assert.deepEqual(clone(s), before);
+
+  s.schoolResult.stats.grades = 3.63;
+  s.adult.age = 21;
+  assert.equal(LL.phase2State.studyAdmission(s, route).admitted, true);
+  s.adult.age = 22;
+  assert.equal(LL.phase2State.studyAdmission(s, route).lowest, 38.9);
+  assert.equal(LL.phase2State.studyAdmission(s, route).admitted, false);
+  s.schoolResult.stats.grades = s.stats.grades = null;
+  assert.equal(LL.phase2State.studyAdmission(s, route).admitted, false);
+  s.schoolResult.stats.grades = 3.89;
+  assert.equal(LL.phase2Sim.begin(s, plan, []), true);
+});
+
+test('ei eldre lagring med lågt snitt kan halde fram med studiet, også etter pause', () => {
+  const LL = environment(), s = adult(LL);
+  const route = LL.phase2State.route('laerar');
+  year(LL, s, { routeId: route.id });
+  year(LL, s, { routeId: route.id });
+  year(LL, s, { routeId: 'friarbeid' });
+  s.schoolResult.stats.grades = s.stats.grades = 3.5;
+  const loaded = LL.state.load(clone(s));
+  const admission = LL.phase2State.studyAdmission(loaded, route);
+  assert.equal(admission.lowest, 38.9);
+  assert.equal(admission.continuing, true);
+  assert.equal(admission.admitted, true);
+  assert.equal(LL.phase2Sim.begin(loaded, { routeId: route.id, housing: 'heime' }, []), true);
+  assert.ok(LL.state.load(clone(loaded)).adult.run);
 });
 
 test('bustadkjøp krev finansiering og bind eigenkapital utan å telje avdrag som forbruk', () => {

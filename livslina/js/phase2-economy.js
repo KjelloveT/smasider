@@ -22,7 +22,9 @@ LL.phase2Economy = (function () {
 
   function defaultPlan(s) {
     const a = s.adult;
-    const fallback = a.qualifications.study ? 'okonomi' : a.qualifications.trade ? (data().routes.find(r => r.program === a.qualifications.trade) || { id: 'eige-fag' }).id : 'butikk';
+    const preferred = LL.phase2State.route('okonomi');
+    const canStudy = a.qualifications.study && preferred && LL.phase2State.studyAdmission(s, preferred)?.admitted !== false;
+    const fallback = canStudy ? preferred.id : a.qualifications.trade ? (data().routes.find(r => r.program === a.qualifications.trade) || { id: 'eige-fag' }).id : 'butikk';
     const previous = a.plan && LL.phase2State.route(a.plan.routeId);
     const chosen = previous && LL.phase2State.available(s, previous) ? previous.id : fallback;
     return normalizePlan(s, Object.assign({ housing: a.housing, jobHours: 6, workPercent: 1, savings: 500, bsu: 0, leisure: 'balanced', summerWeeks: 4 }, a.plan || {}, { routeId: chosen, borrow: previous && previous.id === chosen ? a.plan.borrow : true }));
