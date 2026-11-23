@@ -1,30 +1,45 @@
-name: Frødebrett · Prøvekøyring før merge
+name: Frødebrett · Prøvekøyring med PR og e-post
 
 on:
   push:
     branches: [feat/frodebrett-provekoyring]
 
-permissions:
-  contents: read
+env:
+  WEEKLY_TEST_DATE: '2026-11-23'
+
+permissions: {}
+
+concurrency:
+  group: frodebrett-prøvekøyring
+  cancel-in-progress: false
 
 jobs:
   draft:
-    name: Lag og valider ei nyheitsfrøde
+    if: github.ref_name == 'feat/frodebrett-provekoyring'
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    env:
-      WEEKLY_EDITION: '2026-11-21'
+    permissions:
+      contents: read
+    outputs:
+      edition: ${{ steps.period.outputs.edition }}
+      payload: ${{ steps.validate.outputs.payload }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           persist-credentials: false
       - name: Finn datoperioden
+        id: period
+        env:
+          WEEKLY_EDITION: ''
         run: node .github/frodebrett/weekly-news.mjs prepare
       - name: Hent kjelder til vekas nyheiter
+        if: steps.period.outputs.ready == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          WEEKLY_EDITION: ${{ steps.period.outputs.edition }}
         run: node .github/frodebrett/news-research.mjs
       - name: Lag eit utkast med Codex
+        if: steps.period.outputs.ready == 'true'
         uses: openai/codex-action@306c6a196a99dcc6582530c396a19d2672d5e9ec # v1
         with:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
@@ -35,53 +50,133 @@ jobs:
           codex-args: '["--ephemeral", "--output-schema", ".github/frodebrett/weekly-news.schema.json"]'
       - name: Kontroller utkastet
         id: validate
+        if: steps.period.outputs.ready == 'true'
+        env:
+          WEEKLY_EDITION: ${{ steps.period.outputs.edition }}
         run: node .github/frodebrett/weekly-news.mjs check
-      - name: Bygg testbrett og e-postutkast
-        env:
-          WEEKLY_PAYLOAD: ${{ steps.validate.outputs.payload }}
-          WEEKLY_PR: https://github.com/KjelloveT/smasider/pull/137
-          MAIL_TO: ${{ secrets.FRODEBRETT_MAIL_TO }}
-          MAIL_FROM: ${{ secrets.FRODEBRETT_GMAIL_USER || secrets.FRODEBRETT_MAIL_TO }}
-        run: |
-          MAIL_FROM=$(printf '%s' "$MAIL_FROM" | tr -d '[:space:]')
-          MAIL_TO=$(printf '%s' "$MAIL_TO" | tr -d '[:space:]')
-          node .github/frodebrett/weekly-news.mjs build
-          cp frodebrett/json/weekly-news.json "$RUNNER_TEMP/weekly-reviewed.json"
-          node .github/frodebrett/weekly-news.mjs email
-          node -e 'const {period,quiz}=require("./frodebrett/json/weekly-news.json"); const questions=quiz.categories.flatMap(c=>c.questions); console.log(period.from+" – "+period.through+": "+quiz.categories.length+" kategoriar, "+questions.length+" spørsmål og ein finale."); console.log("Bilete: "+questions.filter(q=>q.image).length+". Pressefotoframlegg: "+questions.filter(q=>q.suggestedPressPhoto).length+".");'
-          echo "E-postutkastet er klart."
 
-  gmail:
-    name: Sjekk Gmail-innlogginga
+  pull-request:
+    needs: draft
+    if: needs.draft.outputs.payload != ''
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 6
+    permissions:
+      contents: write
+      pull-requests: read
+    outputs:
+      url: ${{ steps.submit.outputs.url }}
+      commit: ${{ steps.branch.outputs.commit }}
+    env:
+      WEEKLY_EDITION: ${{ needs.draft.outputs.edition }}
     steps:
-      - name: Stadfest SMTP-innlogging med NOOP
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: preview
+          persist-credentials: false
+      - name: Stadfest tilgang til å opprette PR
         env:
+          PR_TOKEN: ${{ secrets.FRODEBRETT_PR_TOKEN }}
+        run: |
+          if [ -z "$PR_TOKEN" ]; then
+            echo "::error::Set FRODEBRETT_PR_TOKEN med Pull requests: Read and write for dette repoet."
+            exit 1
+          fi
+      - name: Legg den nye quizfila på ei eiga grein
+        id: branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WEEKLY_PAYLOAD: ${{ needs.draft.outputs.payload }}
+        run: |
+          set -euo pipefail
+          branch="feat/frodebrett-prove-$WEEKLY_EDITION"
+          quiz="frodebrett/json/weekly-news.json"
+          existing=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$branch" --state all --json url --jq '.[0].url // ""')
+          if [ -n "$existing" ]; then
+            echo "Det finst alt ein PR for denne veka."
+            exit 0
+          fi
+          newest=$(node -p 'require("./frodebrett/json/weekly-news.json").period?.edition ?? ""')
+          if [[ "$newest" > "$WEEKLY_EDITION" || "$newest" == "$WEEKLY_EDITION" ]]; then
+            echo "Det ligg alt ei like ny eller nyare frøde på preview."
+            exit 0
+          fi
+
+          if git ls-remote --exit-code --heads origin "refs/heads/$branch" >/dev/null; then
+            changed=$(gh api "repos/$GITHUB_REPOSITORY/compare/preview...feat%2Ffrodebrett-prove-$WEEKLY_EDITION" --jq '.files[].filename')
+            if [ "$changed" != "$quiz" ]; then
+              echo "::error::Den eksisterande vekegreina endrar andre filer eller manglar quizfila."
+              exit 1
+            fi
+            git fetch --depth=1 origin "refs/heads/$branch"
+            commit=$(git rev-parse FETCH_HEAD)
+          else
+            node .github/frodebrett/weekly-news.mjs build
+            git switch -c "$branch"
+            git add -- "$quiz"
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m "Legg til nyheitsfrøda for $WEEKLY_EDITION"
+            git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push origin "HEAD:refs/heads/$branch"
+            commit=$(git rev-parse HEAD)
+          fi
+
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          echo "commit=$commit" >> "$GITHUB_OUTPUT"
+      - name: Opne PR for redaksjonell godkjenning
+        id: submit
+        if: steps.branch.outputs.branch != ''
+        env:
+          GH_TOKEN: ${{ secrets.FRODEBRETT_PR_TOKEN }}
+          WEEKLY_BRANCH: ${{ steps.branch.outputs.branch }}
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/weekly-pr.md" <<'EOF'
+          Prøvekøyring med 23. november som skjeringstidspunkt. Denne PR-en gjeld preview.
+
+          Eit KI-utkast med fem kategoriar, 30 spørsmål og ein finale. Alle fasitar og
+          artikkelkjelder ligg i quizfila og i e-posten til redaktøren.
+
+          Kontroller datoperiode, fakta, nynorsk, aldersnivå, fasitar og eventuell
+          biletbruk før du godkjenner og flettar inn PR-en.
+          EOF
+          url=$(gh api --method POST "repos/$GITHUB_REPOSITORY/pulls" \
+            -f 'base=preview' -f "head=$WEEKLY_BRANCH" -f "title=Frødebrett · Prøvefrøda $WEEKLY_EDITION" \
+            -F "body=@$RUNNER_TEMP/weekly-pr.md" --jq .html_url)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+  email:
+    needs: [draft, pull-request]
+    if: needs.pull-request.outputs.url != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Send spørsmål, fasitar og kjelder til redaktøren
+        env:
+          WEEKLY_EDITION: ${{ needs.draft.outputs.edition }}
+          WEEKLY_PR: ${{ needs.pull-request.outputs.url }}
+          WEEKLY_COMMIT: ${{ needs.pull-request.outputs.commit }}
+          MAIL_TO: ${{ secrets.FRODEBRETT_MAIL_TO }}
           MAIL_FROM: ${{ secrets.FRODEBRETT_GMAIL_USER || secrets.FRODEBRETT_MAIL_TO }}
           MAIL_PASSWORD: ${{ secrets.FRODEBRETT_GMAIL_APP_PASSWORD }}
         run: |
-          if [ -z "$MAIL_FROM" ] || [ -z "$MAIL_PASSWORD" ]; then
-            echo "::error::Gmail-innlogginga manglar ei opplysning."
+          set -euo pipefail
+          MAIL_FROM=$(printf '%s' "$MAIL_FROM" | tr -d '[:space:]')
+          MAIL_TO=$(printf '%s' "$MAIL_TO" | tr -d '[:space:]')
+          MAIL_PASSWORD=$(printf '%s' "$MAIL_PASSWORD" | tr -d '[:space:]')
+          if [ -z "$MAIL_FROM" ] || [ -z "$MAIL_TO" ] || [ -z "$MAIL_PASSWORD" ]; then
+            echo "::error::Kontroller avsendar, FRODEBRETT_MAIL_TO og FRODEBRETT_GMAIL_APP_PASSWORD før utsending."
             exit 1
           fi
-          sender=$(printf '%s' "$MAIL_FROM" | tr -d '[:space:]')
-          app_password=$(printf '%s' "$MAIL_PASSWORD" | tr -d '[:space:]')
-          echo "::add-mask::$sender"
-          echo "::add-mask::$app_password"
-          if [ "${#app_password}" -ne 16 ]; then
-            echo "::error::Gmail-app-passordet har feil format etter fjerning av mellomrom."
-            exit 1
-          fi
-          if [ "$app_password" = "$MAIL_PASSWORD" ] && [ "$sender" = "$MAIL_FROM" ]; then
-            echo "Innloggingsverdiane hadde ingen skiljemellomrom."
-          else
-            echo "Fjerna skiljemellomrom i innloggingsverdiane."
-          fi
-          if status=$(curl --silent --show-error --max-time 30 --ssl-reqd --request NOOP --output /dev/null --write-out '%{response_code}' \
-            --url 'smtps://smtp.gmail.com:465' --user "$sender:$app_password"); then
-            echo "SMTP-innlogginga er godkjend."
-          else
-            echo "::error::Gmail avviste innlogginga med SMTP-status $status."
-            exit 1
-          fi
+          echo "::add-mask::$MAIL_FROM"
+          echo "::add-mask::$MAIL_TO"
+          echo "::add-mask::$MAIL_PASSWORD"
+          git fetch --depth=1 origin "$WEEKLY_COMMIT"
+          git show 'FETCH_HEAD:frodebrett/json/weekly-news.json' > "$RUNNER_TEMP/weekly-reviewed.json"
+          node .github/frodebrett/weekly-news.mjs email
+          curl --fail --silent --show-error --max-time 60 --ssl-reqd --write-out 'SMTP-svar %{response_code}\n' \
+            --url 'smtps://smtp.gmail.com:465' --user "$MAIL_FROM:$MAIL_PASSWORD" \
+            --mail-from "$MAIL_FROM" --mail-rcpt "$MAIL_TO" --upload-file "$RUNNER_TEMP/weekly-mail.eml"
