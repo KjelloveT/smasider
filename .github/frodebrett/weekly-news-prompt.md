@@ -16,7 +16,7 @@ Lag eitt Frødebrett for 5.–7. trinn. Skriv på nynorsk og lever JSON i det gj
 
 ## Vel kjeldebilete
 
-- Bruk eigna, krediterte pressefoto frå kjeldegrunnlaget. Kopier det verifiserte biletframlegget frå same artikkel. Vel motiv som forklarer saka eller gjev eit visuelt spor, til dømes ein stad, ei bru, ein gjenstand eller eit lag. Bruk trygge motiv og unngå identifiserbare barn. Lat biletfelta stå tomme når biletet er uvisst, skremmande eller røper fasiten med tekst.
-- Bruk ei verifisert Commons-fil frå grunnlaget dersom ho er meir tenleg. Ta med ei kort nynorsk biletskildring som held fasiten løynd.
+- Bruk eigna, krediterte pressefoto frå kjeldegrunnlaget. Kopier fotolenkja og kreditten frå same artikkel, og skriv ei kort biletskildring som held fasiten løynd. Vel trygge motiv som forklarer saka eller gjev eit visuelt spor, til dømes ein stad, ei bru, ein gjenstand eller eit lag. Utelat bilete med identifiserbare barn, skremmande motiv eller tekst som røper fasiten.
+- Felta `imagePage` og `imageAlt` gjeld berre Wikimedia Commons. Bruk ei verifisert Commons-fil frå grunnlaget dersom ho er meir tenleg, med ei kort nynorsk skildring som held fasiten løynd. Set begge felta til tom streng for pressefoto.
 
 Kontroller til slutt at heile brettet speglar nyheitsveka. Sjå særleg etter viktige saker du har oversett, emne som går att, og spørsmål om perifere detaljar som ein elev må gjette seg fram til.

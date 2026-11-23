@@ -142,6 +142,8 @@ test('eit verifisert pressefoto ligg i quizmappa, PR-en og e-posten med same kre
   const imageUrl = 'https://gfx.nrk.no/123/bilete.png';
   first.source.url = article;
   first.source.publisher = 'NRK';
+  first.imagePage = article;
+  first.imageAlt = 'Rådhuset';
   first.pressPhoto = { url: article, credit: 'Foto Eigar', description: 'Bilete av rådhuset' };
   const fetchPhoto = async (url, options) => {
     assert.equal(options.redirect, 'error');
@@ -151,7 +153,8 @@ test('eit verifisert pressefoto ligg i quizmappa, PR-en og e-posten med same kre
     return new Response(imageBytes, { headers: { 'content-type': 'image/png' } });
   };
   assert.equal(await publisherImage(first.source, { ...first.pressPhoto, url: 'https://other.example/a' }, fetchPhoto), null);
-  const data = await buildQuiz(draft, period, undefined, (source, proposal) => publisherImage(source, proposal, fetchPhoto));
+  const data = await buildQuiz(draft, period, () => assert.fail('Pressefoto er ikkje ei Commons-fil'),
+    (source, proposal) => publisherImage(source, proposal, fetchPhoto));
   const folder = mkdtempSync(join(tmpdir(), 'frodebrett-media-'));
   t.after(() => rmSync(folder, { recursive: true }));
   storeWeeklyImages(quizQuestions(data.quiz).map(({ item }) => item), folder);

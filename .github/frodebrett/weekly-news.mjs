@@ -46,6 +46,10 @@ function normalized(value) {
   return value.normalize('NFKC').toLocaleLowerCase('nn-NO').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 }
 
+function revealsAnswer(alt, answer) {
+  return (' ' + normalized(alt) + ' ').includes(' ' + normalized(answer) + ' ');
+}
+
 function publicArticle(value) {
   if (!text(value, 1200)) return false;
   try {
@@ -117,11 +121,6 @@ export function validateDraft(draft, period, sources) {
     if (source.importance === 'minor' && ++minorCount > 2) {
       throw Error('Frøda kan ha høgst to småsaker.');
     }
-    if (item.imagePage !== '' || item.imageAlt !== '') {
-      if (!commonsFile(item.imagePage) || !safeText(item.imageAlt, 160)) {
-        throw Error(context + ' har ei ugyldig biletkjelde eller biletskildring.');
-      }
-    }
   }
 
   for (const [index, category] of categories.entries()) {
@@ -143,11 +142,11 @@ export async function buildQuiz(draft, period, loadPhoto = licensedImage, loadPr
   const photos = new Map();
   const picturedStories = new Set();
   const picturedImages = new Set();
-  const candidates = items.filter(item => item.imagePage
-    && !normalized(item.imageAlt).includes(normalized(item.answer)));
+  const candidates = items.filter(item => commonsFile(item.imagePage) && safeText(item.imageAlt, 160)
+    && !revealsAnswer(item.imageAlt, item.answer));
   const press = items.filter(item => publicArticle(item.pressPhoto?.url)
     && safeText(item.pressPhoto.credit, 180) && safeText(item.pressPhoto.description, 200)
-    && !normalized(item.pressPhoto.description).includes(normalized(item.answer)));
+    && !revealsAnswer(item.pressPhoto.description, item.answer));
 
   function addPhotos(pairs) {
     for (const [item, photo] of pairs) {
@@ -225,7 +224,9 @@ async function run(mode) {
         const source = evidence.get(articleKey(item.source.url));
         item.source.title = source.title;
         item.source.url = source.url;
-        item.pressPhoto = item.pressPhoto?.url === source.pressPhoto?.url ? source.pressPhoto : undefined;
+        const proposal = item.pressPhoto;
+        item.pressPhoto = source.pressPhoto && proposal?.url === source.pressPhoto.url
+          ? { ...source.pressPhoto, description: proposal.description } : undefined;
       }
       output('payload', gzipSync(JSON.stringify(draft)).toString('base64'));
       return;
