@@ -18,9 +18,12 @@
   function renderCredit(note, question) {
     if (!note) return;
     const credit = question.imageCredit;
+    const isCommons = typeof credit?.source === 'string' && credit.source.startsWith('https://commons.wikimedia.org/wiki/File:');
+    const isPress = typeof credit?.publisher === 'string' && credit.publisher.trim() && typeof credit.source === 'string'
+      && credit.source.startsWith('https://');
     const visible = Images.valid(question.image) && typeof credit?.title === 'string'
       && typeof credit.author === 'string' && typeof credit.license === 'string'
-      && typeof credit.source === 'string' && credit.source.startsWith('https://commons.wikimedia.org/wiki/File:');
+      && (isCommons || isPress);
     note.replaceChildren();
     note.hidden = !visible;
     if (!visible) return;
@@ -29,7 +32,8 @@
       ? creditLink(credit.license, credit.licenseUrl)
       : credit.license;
     const changes = credit.cropped === true ? 'Forminska og skore til' : 'Forminska';
-    note.append(creditLink(credit.title, credit.source), ' · ' + credit.author + ' · ', license, ' · ' + changes);
+    const source = isCommons ? creditLink(credit.title, credit.source) : credit.title + ' · ' + credit.publisher;
+    note.append(source, ' · ' + credit.author + ' · ', license, ' · ' + changes);
   }
 
   Images.show = function (id, question) {
