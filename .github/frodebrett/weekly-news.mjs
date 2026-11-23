@@ -101,6 +101,12 @@ export async function buildQuiz(draft, period, loadPhoto = licensedImage) {
   const items = [...draft.categories.flatMap(category => category.questions), draft.final.entry];
   const photos = new Map();
   const candidates = items.filter(item => item.imagePage && !normalized(item.imageAlt).includes(normalized(item.answer)));
+  const pressSuggestions = new Map(items.flatMap(item => {
+    const proposal = item.pressPhoto;
+    if (!publicArticle(proposal?.url) || !safeText(proposal.description, 200)) return [];
+    const credit = safeText(proposal.credit, 180) ? proposal.credit : '';
+    return [[item, { url: proposal.url, description: proposal.description, credit }]];
+  }).slice(0, 4));
   await Promise.all(candidates.slice(0, 4).map(async item => {
     const photo = await loadPhoto(item.imagePage, item.imageAlt);
     if (photo) photos.set(item, photo);
@@ -109,10 +115,12 @@ export async function buildQuiz(draft, period, loadPhoto = licensedImage) {
   function makeQuestion(item) {
     const { question, answer, source, imagePage } = item;
     const photo = photos.get(item);
+    const pressPhoto = pressSuggestions.get(item);
     return {
       question, answer, ...(photo || {}),
       source: { title: source.title, publisher: source.publisher, url: source.url, published: source.published },
-      ...(imagePage && !photo ? { suggestedImagePage: imagePage } : {})
+      ...(imagePage && !photo ? { suggestedImagePage: imagePage } : {}),
+      ...(pressPhoto ? { suggestedPressPhoto: pressPhoto } : {})
     };
   }
 
@@ -137,6 +145,7 @@ function formatPeriod(period) {
 export function reviewText({ period, quiz }, prUrl) {
   function questionText(question, number) {
     const { title, url, published, publisher } = question.source;
+    const pressPhoto = question.suggestedPressPhoto;
     return [
       number + '. ' + question.question,
       'Fasit – ' + question.answer,
@@ -146,7 +155,11 @@ export function reviewText({ period, quiz }, prUrl) {
         'Bilete i frøda – ' + question.imageCredit.author + ', ' + question.imageCredit.license,
         question.imageCredit.source, question.imageCredit.licenseUrl
       ] : []),
-      ...(question.suggestedImagePage ? ['Biletframlegg til vurdering', question.suggestedImagePage] : [])
+      ...(question.suggestedImagePage ? ['Biletframlegg til vurdering', question.suggestedImagePage] : []),
+      ...(pressPhoto ? [
+        'Pressefoto til vurdering – ' + pressPhoto.description + (pressPhoto.credit ? ' · ' + pressPhoto.credit : ''),
+        pressPhoto.url
+      ] : [])
     ].join('\n');
   }
   return [

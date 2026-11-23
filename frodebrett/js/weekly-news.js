@@ -19,6 +19,8 @@
       panel.setAttribute('aria-labelledby', heading.id);
       const start = Vy.el('button', 'vp-button vp-button--primary', 'Spel nyheitsfrøda');
       start.type = 'button';
+      start.setAttribute('aria-haspopup', 'dialog');
+      start.setAttribute('aria-controls', 'team-setup');
       start.addEventListener('click', () => FB.Board.selectQuiz(quiz));
       panel.append(heading, Vy.el('p', 'vp-help', 'Nyheiter frå ' + dates), start);
       FB.el('quiz-selection').prepend(panel);

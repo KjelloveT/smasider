@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { newsPeriod, validateDraft, buildQuiz, reviewEmail } from './weekly-news.mjs';
 import { licensedImage } from './news-images.mjs';
+import { addReviewedPhoto } from './add-reviewed-photo.mjs';
 
 const period = { edition: '2026-11-28', from: '2026-11-21', through: '2026-11-27' };
 const filePage = 'https://commons.wikimedia.org/wiki/File:Test.jpg';
@@ -75,9 +76,12 @@ test('berre eit bilete med kjent Wikimedia-kjelde, opphav og støtta lisens blir
 test('quiz og e-post bruker same fasitar, kjelder, datoperiode og PR', async () => {
   const draft = exampleDraft();
   Object.assign(draft.categories[0].questions[0], { imagePage: filePage, imageAlt: 'Ein bygning' });
+  const pressPhoto = { url: 'https://example.org/photos/1', credit: 'Foto Eigar', description: 'Bilete av rådhuset' };
+  draft.categories[0].questions[0].pressPhoto = pressPhoto;
   const data = await buildQuiz(draft, period, async () => null);
   assert.deepEqual(data.quiz.categories[0].questions.map(item => item.points), [100, 200, 300, 400, 500, 1000]);
   assert.equal(data.quiz.categories[0].questions[0].suggestedImagePage, filePage);
+  assert.deepEqual(data.quiz.categories[0].questions[0].suggestedPressPhoto, pressPhoto);
   assert.equal(data.quiz.categories[0].questions[0].image, undefined);
   const message = reviewEmail(data, {
     prUrl: 'https://github.com/KjelloveT/smasider/pull/999', from: 'test@example.org', to: 'review@example.org'
@@ -87,4 +91,22 @@ test('quiz og e-post bruker same fasitar, kjelder, datoperiode og PR', async () 
   assert.match(body, /https:\/\/github\.com\/KjelloveT\/smasider\/pull\/999/);
   assert.match(body, /https:\/\/example\.org\/news\/31/);
   assert.ok(body.includes(filePage));
+  assert.match(body, /Pressefoto til vurdering – Bilete av rådhuset · Foto Eigar/);
+  assert.ok(body.includes(pressPhoto.url));
+});
+
+test('redaktøren kan leggje til eit vurdert pressefoto med opphav og bruksgrunnlag', async () => {
+  const board = await buildQuiz(exampleDraft(), period);
+  const credit = {
+    title: 'Rådhuset', author: 'Foto Eigar', publisher: 'Prøveavis',
+    source: 'https://example.org/news/2', rights: 'Løyve frå fotograf', alt: 'Ein bygning'
+  };
+  assert.throws(() => addReviewedPhoto(board, '2.1', imageBytes, { ...credit, rights: '' }), /bruksgrunnlag/);
+  assert.throws(() => addReviewedPhoto(board, '2.1', Buffer.from('not an image'), credit), /JPEG/);
+  addReviewedPhoto(board, '2.1', imageBytes, credit);
+  const question = board.quiz.categories[1].questions[0];
+  assert.equal(question.imageCredit.publisher, 'Prøveavis');
+  assert.equal(question.imageCredit.license, 'Løyve frå fotograf');
+  assert.equal(question.imageAlt, 'Ein bygning');
+  assert.match(question.image, /^data:image\/png;base64,/);
 });

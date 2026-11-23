@@ -25,8 +25,7 @@
     activeTeamId: null,      // kven som er på tur (UX6)
     pendingAward: null,      // {teamId, value} venter på stadfesting (UX2)
     editorCategories: [],
-    activeTab: 0,
-    editingQuizId: null
+    activeTab: 0
   };
 
   // ---- DOM-hjelparar ----

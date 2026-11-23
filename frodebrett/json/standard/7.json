@@ -1,0 +1,435 @@
+{
+  "grade": 7,
+  "quizzes": [
+    {
+      "subject": "matematikk",
+      "categories": [
+        {
+          "name": "Likningar og tal",
+          "questions": [
+            ["Kva er x når x + 9 = 16?","7"],
+            ["Kva er x når 3x = 24?","8"],
+            ["Kva er x når 2x + 5 = 17?","6"],
+            ["Ein inngang kostar 35 kr, og kvar spelrunde kostar x kr. Tre rundar kostar 71 kr med inngang. Kva er x?","12 kr"],
+            ["Løys 4x − 8 = 2x + 10. Kva er x?","9"],
+            ["Ein stor boks inneheld tre like små boksar og åtte lause klossar. To store boksar har 58 klossar til saman. Kor mange ligg det i kvar liten boks?","7 klossar"]
+          ]
+        },
+        {
+          "name": "Statistikk og overslag",
+          "questions": [
+            ["Kva er typetalet i 2, 3, 3, 4, 6?","3"],
+            ["Kva er medianen i 8, 1, 4, 7, 5?","5"],
+            ["Kva er gjennomsnittet av 2, 5 og 11?","6"],
+            ["Gjer eit overslag for 197 × 32 med 200 og 30.","6000"],
+            ["Kva er skilnaden mellom gjennomsnitt og median i talrekkja 3, 4, 4, 5 og 100?","19,2"],
+            ["Gjennomsnittet av fire tal er 8. Tre av tala er 5, 7 og 12. Kva er det fjerde?","8"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Veka har fem skuledagar. Kor mange prosent av skuledagane utgjer måndagen?","20 %"],
+            ["Tre edderkoppar kjøper to sko til kvart bein. Kor mange sko kjøper dei til saman?","48 sko"],
+            ["Tre grupper har fem personar kvar. Kva er gjennomsnittet av gruppestorleikane?","5 personar"],
+            ["Ein quiz får 4, 5, 5 og 2 stjerner. Kva er skilnaden mellom høgaste og lågaste vurdering?","3 stjerner"],
+            ["Ei kattevideo får 300, 300 og 3 000 visingar over tre dagar. Kva er gjennomsnittet per dag?","1200"],
+            ["Du har ni klossar og legg til eit partal klossar. Kva slags tal blir summen, partal eller oddetal?","Oddetal"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Les tala",
+        "question": "To like billettar og 35 kr i gebyr kostar 261 kr. Kva kostar éin billett før gebyret?",
+        "answer": "113 kr"
+      }
+    },
+    {
+      "subject": "naturfag",
+      "categories": [
+        {
+          "name": "Økosystem og samspel",
+          "questions": [
+            ["Kva kallar vi eit dyr som fangar andre dyr for å ete dei?","Rovdyr"],
+            ["Kva kallar vi organismar som bryt ned restar av døde plantar og dyr?","Nedbrytarar"],
+            ["Kva prosess lagar sukker frå vatn og karbondioksid ved hjelp av lys?","Fotosyntese"],
+            ["Kva gruppe i næringskjeda lagar organisk stoff sjølv, produsentar eller forbrukarar?","Produsentar"],
+            ["Graset blir ete av ei grashoppe, og grashoppa blir eten av ein fugl. Kva er primærforbrukaren?","Grashoppa"],
+            ["Kva kallar vi fleire næringskjeder som er knytte saman i eit leveområde?","Næringsnett"]
+          ]
+        },
+        {
+          "name": "Jorda og naturressursane",
+          "questions": [
+            ["Kva heiter det ytste, faste laget av jorda der vi bur?","Jordskorpa"],
+            ["Kva er sola ei kjelde til i solcellepanel, elektrisk energi direkte eller strålingsenergi?","Strålingsenergi"],
+            ["Kva heiter naturressursar som kan byggjast opp på nytt i menneskeleg tid, som vind og sol?","Fornybare ressursar"],
+            ["Kva er den vanlegaste energikjelda i norske vasskraftverk, rennande vatn eller varm damp?","Rennande vatn"],
+            ["Kva kallar vi fjerning og flytting av jord og stein frå rennande vatn, vind eller is?","Erosjon"],
+            ["Kva bergart blir til når magma eller lava størknar, magmatisk eller sedimentær?","Magmatisk bergart"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva slags dyr er ei blåskjel, eit blautdyr eller ein fisk?","Blautdyr"],
+            ["Kva skalldyr kan halde ei sjøanemone i kvar klo, som to små boksehanskar?","Boksekrabbe"],
+            ["Kva piggete sjødyr har fem tenner i eit apparat kalla «Aristoteles’ lykt»?","Kråkebolle"],
+            ["Kva kjem inn i eit måkeegg frå lufta gjennom mange bitte små porer i skalet?","Oksygen"],
+            ["Kva levande organisme kan vere eit sambuarskap mellom ein sopp og ein alge?","Lav"],
+            ["Kva stoff kan turre plantar som torv til slutt bli omdanna til under høgt trykk over lang tid?","Kol"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Endring i dammen",
+        "question": "I ein dam får rovfiskane færre av eit byttedyr fordi eit nytt rovdyr òg et det. Kva heiter samspeltypen mellom dei to rovdyra?",
+        "answer": "Konkurranse"
+      }
+    },
+    {
+      "subject": "samfunnsfag",
+      "categories": [
+        {
+          "name": "Rettar og reglar",
+          "questions": [
+            ["Kva heiter lova som vart vedteken på Eidsvoll i 1814 og står over vanlege lover?","Grunnlova"],
+            ["Kva heiter retten til å seie og skrive det ein meiner innanfor lovlege grenser?","Ytringsfridom"],
+            ["Kva er dei grunnleggjande rettane alle menneske har, til dømes retten til liv og fridom?","Menneskerettar"],
+            ["Kva heiter det internasjonale dokumentet som fastset eigne rettar for dei under 18 år?","Barnekonvensjonen"],
+            ["Kva heiter prinsippet om at domstolane skal dømme sjølvstendig utan ordre frå dei som lagar lovene?","Domstolsuavhengigheit"],
+            ["Ei gruppe som utgjer mindre enn halvparten av folket, brukar eit eige språk. Kva ord skildrar gruppa i tal?","Mindretal"]
+          ]
+        },
+        {
+          "name": "Samfunn i endring",
+          "questions": [
+            ["Kva heiter det når stadig fleire i eit land flyttar til og bur i byar?","Urbanisering"],
+            ["Kva kallar vi det når store endringar i produksjon kjem med fabrikkar og maskinkraft?","Industrialisering"],
+            ["Kva blir det å flytte frå eitt land til eit anna for å busetje seg kalla, samla som omgrep?","Migrasjon"],
+            ["Ein by har 6000 innbyggjarar, og 1500 av dei er barn. Kor stor del er barn i prosent?","25 %"],
+            ["Kva kallar vi det når folk flyttar ut av eit område raskare enn nye folk flyttar inn?","Fråflytting"],
+            ["Ein stad har 8000 innbyggjarar. Ti år seinare har han 10 000. Kva er auken i prosent?","25 %"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva stad gav namnet sitt til «eidsvollsmennene» i 1814?","Eidsvoll"],
+            ["Kva type vogn på skjenegang er kjend for bjella og går i bygate saman med bilar?","Trikk"],
+            ["Kva europeisk land på om lag 2 km² ligg ved Middelhavet og grensar berre til Frankrike?","Monaco"],
+            ["Kva komponist var avbilda på den eldre norske 500-kronesetelen i setelserie VI?","Edvard Grieg"],
+            ["Kva retning peikar ei nordpil dersom eit kart er snudd så aust ligg øvst, mot venstre eller høgre?","Mot venstre"],
+            ["Kva by på Vestlandet vart bygd opp att i jugendstil etter den store bybrannen i 1904?","Ålesund"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Fleire kjelder",
+        "question": "Ein avisartikkel frå 1920 og ein dokumentar frå 2020 skildrar ei opning i 1920. Kva kjelde ligg nærast i tid til opninga?",
+        "answer": "Avisartikkelen"
+      }
+    },
+    {
+      "subject": "krle",
+      "categories": [
+        {
+          "name": "Religiøse uttrykk og tekstar",
+          "questions": [
+            ["Kva blir bønneutropet i islam kalla?","Adhan"],
+            ["Kva heiter den kristne riten der vatn blir brukt ved innviing i kyrkja?","Dåp"],
+            ["Kva heiter det rituelle jødiske kvile- og høgtidsdøgnet som startar fredag kveld?","Sabbat"],
+            ["Kva heiter samlinga av 150 songar og bøner i Bibelen på norsk?","Salmane"],
+            ["Kva heilag tekst er utforma som ein samtale mellom Krishna og Arjuna før eit avgjerande slag?","Bhagavadgita"],
+            ["Kva to ord kjem før ærestittelen «Sahib» i namnet på den heilage boka i sikhismen?","Guru Granth"]
+          ]
+        },
+        {
+          "name": "Argument og menneskeverd",
+          "questions": [
+            ["Kva skil ein påstand frå ein grunn som støttar han, kva heiter grunnen?","Argument"],
+            ["Kva heiter eit svar som går imot grunngjevinga frå ein talar?","Motargument"],
+            ["Kva ord skildrar den verdien alle har fordi dei er menneske?","Menneskeverd"],
+            ["Kva for namn har det å angripe personen som meiner noko, framfor å svare på saka?","Personangrep"],
+            ["Kva slags omsyn står sterkast når ein meiner at same regel skal gjelde alle, likskap eller popularitet?","Likskap"],
+            ["Ein elev meiner alle må få spele fordi alle har same verdi. Kva omgrep byggjer grunnen på?","Likeverd"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva orienterer ein muslim seg mot ved tradisjonell bøn, Mekka eller Medina?","Mekka"],
+            ["Kva blir det ofte kuppelforma eller tårnforma buddhistiske monumentet som kan romme relikviar, kalla?","Stupa"],
+            ["Kva dyr rir Jesus på i den bibelske forteljinga om inntoget i Jerusalem?","Esel"],
+            ["Kva heiter dei store, måla panela bak altaret i mange eldre kyrkjer?","Altartavler"],
+            ["Kva kunstform brukar skriftstrekar frå alfabetet som dekorasjon på til dømes moskéveggar?","Kalligrafi"],
+            ["Kva slags figurar i kristen kunst blir ofte avbilda som bodberarar med vengjer?","Englar"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Ein kjeldeprøve",
+        "question": "Du intervjuar ein person om kva ho gjer kvar veke i sitt eige trussamfunn. Kva type kjelde er ho om si eiga røynsle?",
+        "answer": "Fyrstehandskjelde"
+      }
+    },
+    {
+      "subject": "norsk",
+      "categories": [
+        {
+          "name": "Ord og tekstbinding",
+          "questions": [
+            ["Kva bindeord viser følgje i «Eg var svolten, så eg laga mat»?","Så"],
+            ["Kva heiter førestavinga u- i «uvanleg» med eit grammatisk fagord?","Prefiks"],
+            ["Kva ordklasse høyrer «baking» til i «Baking tar tid»?","Substantiv"],
+            ["Etter kva ord skal kommaet stå i «Ja det kan eg»?","Ja"],
+            ["Kva er verbalet i «Med eitt vart himmelen mørk»?","Vart"],
+            ["Kva er det nynorske eigedomsordet som erstattar bokmål «deres» når eigarane er «dei»?","Deira"]
+          ]
+        },
+        {
+          "name": "Forteljar og retorikk",
+          "questions": [
+            ["«Skyene låg som eit teppe.» Kva heiter verkemiddelet?","Samanlikning"],
+            ["Kva synsvinkel viser «Eg visste ikkje kvifor Elin snudde», fyrste eller tredje person?","Fyrsteperson"],
+            ["Kva heiter eit spørsmål i ein tale som skal setje i gang tankar utan å krevje svar?","Retorisk spørsmål"],
+            ["«Det rosa lyset skalv over himmelen.» Kva er adjektivet som byggjer opp synsinntrykket?","Rosa"],
+            ["«Løvet låg som ein raud duk.» Kva ord viser at dette er ei uttrykkjeleg samanlikning?","Som"],
+            ["Ein artikkel kallar befolkninga «ei flodbølgje» utan ordet «som». Kva heiter verkemiddelet?","Metafor"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva krydder bruker talemåten «ta det med ei klype …»?","Salt"],
+            ["Kva verb kan tyde både varme opp vatn til det boblar og vere svært sint?","Koke"],
+            ["«Etter ein lang dag sette sofaen seg ned.» Kva ting får ei menneskeleg rolle?","Sofaen"],
+            ["Kva ord kan både vekse på eit tre og vere eit tidsskrift?","Blad"],
+            ["«For ein nydeleg dag», sa ho då skoen vart fylt med søle. Kva verkemiddel ligg i å meine det motsette?","Ironi"],
+            ["«Nytt lys på biblioteket» kan tyde både lysarmatur og ny innsikt. Kva kallar vi det at overskrifta kan lesast to ulike måtar?","Tvityding"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Tvisyn i talemåtar",
+        "question": "«Ho kneip att auga. Døra small.» Forteljaren røper berre det ein observatør kan sjå eller høyre. Kva synsvinkel er det?",
+        "answer": "Ytre synsvinkel"
+      }
+    },
+    {
+      "subject": "engelsk",
+      "categories": [
+        {
+          "name": "Samanheng og ordtilfang",
+          "questions": [
+            ["Kva engelsk ord signaliserer motsetning mellom to påstandar, «however» eller «therefore»?","However"],
+            ["Kva er det norske ordet for «journey»?","Reise"],
+            ["Kva tyder «inexperienced», i motsetnad til «experienced»?","Urøynd"],
+            ["Vel «since» eller «for» i «We have lived here … 2020».","Since"],
+            ["Vel rett bindeord i «… it was cold, we went swimming», «although» eller «because», når du vil vise kontrast.","Although"],
+            ["Kva av «might» og «will» gjev størst rom for tvil i «It … rain tomorrow»?","Might"]
+          ]
+        },
+        {
+          "name": "Les, tolk og svar",
+          "questions": [
+            ["Kva er «main idea» på norsk i omtale av ein tekst?","Hovudtanken"],
+            ["«The playground was empty except for one red kite.» Kva fann vi på leikeplassen?","Raud drake"],
+            ["«To be honest, I expected more from the film. It was nowhere near as good as the book.» Kva likte personen best?","Boka"],
+            ["«Could you explain why you think that?» Spør ein etter grunn eller tidspunkt?","Grunn"],
+            ["«I checked the clock again and again, afraid that everyone had forgotten our meeting.» Finn ordet som seier korleis forteljaren kjende seg.","Afraid"],
+            ["«I disagree because the park is a place anyone can meet for free.» Kva for eitt ord fortel at det er gratis å møtast der?","Free"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva gjer du om nokon seier «I’m all ears» til deg, fortel vidare eller teiknar?","Fortel vidare"],
+            ["Kva engelsk ord tyder «etterrett» og har to s-ar?","Dessert"],
+            ["Kva britisk ord svarar til amerikansk «elevator»?","Lift"],
+            ["Kva engelsk ord for å elte høyrest likt ut som «need»?","Knead"],
+            ["I «a kind person» og «a kind of tree», kva tyder «kind» i det siste uttrykket?","Type"],
+            ["«The farmer grew tired.» Kva tyder «grew» her, «vart» eller «dyrka»?","Vart"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Orda lurer oss",
+        "question": "Du skriv «… your point, I still disagree» og vil vise motsetning med ei føreopning. Kva ord fullfører, «despite» eller «because»?",
+        "answer": "Despite"
+      }
+    },
+    {
+      "subject": "kunst-og-handverk",
+      "categories": [
+        {
+          "name": "Bilete som fortel",
+          "questions": [
+            ["Kva heiter ei rekkje teikningar som viser dei planlagde scenene før ein film blir laga?","Storyboard"],
+            ["Kva heiter linja som går frå botnen på venstre side til toppen på høgre, diagonal eller vassrett?","Diagonal"],
+            ["Kva heiter eit grafisk kjennemerke som skal identifisere ein organisasjon?","Logo"],
+            ["Kva i fotografiet blir valt ved å klippe bort noko rundt kanten, utsnittet eller ljoskjelda?","Utsnittet"],
+            ["Eit skilt brukar lite synleg grå skrift på grå bakgrunn. Kva visuell eigenskap må aukast for betre lesbarheit?","Kontrasten"],
+            ["Kva heilskap får du om tre foto viser det som skjedde fyrst, undervegs og til slutt, eit forløp eller eit enkeltbilete?","Eit forløp"]
+          ]
+        },
+        {
+          "name": "Frå idé til modell",
+          "questions": [
+            ["Kva heiter ein tidleg modell ein kan teste og endre?","Prototype"],
+            ["Kva eining står ein centimeter i modellen til målestokk 1:1000 for i røynda?","10 meter"],
+            ["Kva bind to pinnar saman når du legg snor stramt rundt dei fleire gonger i eit kryss?","Surring"],
+            ["Kva type form blir ofte brukt i fagverk i ei bru fordi ho held vinklane godt når sidene har fast lengd?","Trekant"],
+            ["Kva mekanisk eigenskap testar ein når ein legg gradvis meir vekt på same plass på ei bru til ho brest?","Bereevne"],
+            ["Kva for ei gruppe bør teste ein modell dersom målet er å sjå om han er lett for dei å bruke?","Brukarane"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva heiter det når papirbitar frå blad, aviser og bøker blir limte saman til eitt bilete?","Collage"],
+            ["Kva teknikk brukar ein når eit motiv blir trykt fleire gonger på same flate i ulike gjennomsiktige fargar?","Overtrykk"],
+            ["Andletet til ein giraff fyller nesten heile biletet i ein film. Kva slags utsnitt er det?","Nærbilete"],
+            ["Kva heiter ei teikning som overdriv andletstrekk som stor nase eller spiss hake?","Karikatur"],
+            ["Kva slags plan får du om du ser reint ovanfrå på veggar og dører i ein husmodell?","Planteikning"],
+            ["Ein måla figur på eit torg ser tredimensjonal ut berre frå éin stad. Kva type synsbedrag er det, anamorfose eller sjølvportrett?","Anamorfose"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "Eit lesehjørne har ei dør som er 55 cm brei. Kva fysisk mål bør vurderast fyrst for at ein rullestol skal kome inn?",
+        "answer": "Dørbreidda"
+      }
+    },
+    {
+      "subject": "musikk",
+      "categories": [
+        {
+          "name": "Lytting og musikalske trekk",
+          "questions": [
+            ["Kva for ein vanleg toneart blir ofte sett opp mot dur i vestleg musikkteori?","Moll"],
+            ["Kva heiter rekkja tonar i eit stykke som ein kan syngje att eller kjenne att?","Melodi"],
+            ["Kva heiter avstanden i tonehøgd mellom to tonar?","Intervall"],
+            ["Kva kallar vi spennet frå lågaste til høgaste tone i eit musikkstykke?","Toneomfang"],
+            ["Kva heiter eit oppstartsteikn som seier at musikken gradvis skal bli svakare, «crescendo» eller «diminuendo»?","Diminuendo"],
+            ["Kva tone dannar ein rein oktav over tonen C?","C"]
+          ]
+        },
+        {
+          "name": "Samspel og lydopptak",
+          "questions": [
+            ["Kva reiskap gjer lyd om til eit elektrisk signal før opptak?","Mikrofon"],
+            ["Kva kallar vi høgre og venstre signal i eit stereoopptak?","Lydkanalar"],
+            ["Kva er ein akustisk effekt der lyden blir kasta attende så ein tydeleg høyrer gjentakinga?","Ekko"],
+            ["Kva oppgåve gjer ein lydteknikar når hen balanserer volumet på vokal og fleire instrumentspor?","Miksing"],
+            ["Kva tar ein ned først om ein vil dempe trommene på opptaket utan å endre røysta, volumet på trommesporet eller hovudvolumet?","Trommesporet"],
+            ["Eit stereoopptak kjem ut berre på ein av kanalane etter eksport. Kva type lyd har berre éin kanal?","Mono"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva kallar vi den knakande lyden ein gammal dør eller stol kan lage når han rører seg?","Knirk"],
+            ["Kva instrument har belg som ein dreg ut og klemmer saman medan ein spelar?","Trekkspel"],
+            ["Kva kallar ein det når tonane går jamt og mjukt inn i kvarandre, «staccato» eller «legato»?","Legato"],
+            ["Kva lydfenomen er det når dei forsterka tonane frå høgtalaren går inn att i mikrofonen og gir ei sterk piping?","Feedback"],
+            ["Kva heiter ei digital lydeffekt som kan spele den same lydsnutten litt seinare, som eit ekko?","Delay"],
+            ["Kva kan ein kalle ei ny utgåve av ein song der ein har endra instrument, toneart og korleis røystene er fordelte?","Arrangement"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "Etter opptak på lang avstand flyttar du mikrofonen nær instrumentet. Kva kjem tydelegare fram, instrumentlyden eller romklangen?",
+        "answer": "Instrumentlyden"
+      }
+    },
+    {
+      "subject": "kroppsøving",
+      "categories": [
+        {
+          "name": "Rørsle, puls og øving",
+          "questions": [
+            ["Kva er talet på hjarteslag per minutt kalla?","Puls"],
+            ["Kva heiter graden av kor hardt kroppen arbeider under ei økt?","Intensitet"],
+            ["Kva heiter den delen av ei økt der kroppen får hente seg inn etter ein innsatsperiode?","Pause"],
+            ["Kva nemner vi som evna til å utvikle stor kraft i ei rørsle?","Styrke"],
+            ["Kva for type trening vekslar systematisk mellom innsatsperiodar og pausar?","Intervalltrening"],
+            ["Tre drag varer 90 sekund kvar. Kor mange minutt er den samla innsatsen utan pausar?","4,5 minutt"]
+          ]
+        },
+        {
+          "name": "Vegval og fellesskap",
+          "questions": [
+            ["Kva tyder det å vende kartet slik at kartretningane stemmer med terrenget?","Orientere kartet"],
+            ["Kva kallar ein tida ein på førehand avtalar at turgruppa skal snu ved om ho ikkje har nådd målet?","Vendetid"],
+            ["Kva kallar vi ei løysing som gjer at alle kan bidra sjølv med ulike føresetnader, med å endre utstyr eller reglar?","Tilpassing"],
+            ["Kva kan den som går sist i ei turgruppe, kallast når rolla er å sjå til at ingen hamnar bak?","Baktropp"],
+            ["Kva for ei av ruter med brattaste eller slakaste helling går vanlegvis langs høgdekurvene ei stund?","Slakaste ruta"],
+            ["Eit lag registrerer kor mange ballpasningar kvar elev fekk før og etter ein ny regel. Kva må avgjere om fleire er med, totalsummen eller fordelinga?","Fordelinga"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva sportsutstyr blir halde i rørsle rundt livet når hoftene gjer jamne svingar?","Rokkering"],
+            ["Kva kraft mellom gummidekk og bakken gjer at ein sykkel kan svinge utan å skli?","Friksjon"],
+            ["Kva heiter det når ein kunstløpar roterer rundt sin eigen kroppsakse på éi skøyte?","Piruett"],
+            ["Kva heiter teknikken der ein skøyteløpar kryssar den eine skøyta framfor den andre i svingen?","Oversteg"],
+            ["To dansarar går same distanse på same tid. Den eine tek halvparten så mange steg. Kva steglengd har ho stort sett?","Dobbel steglengd"],
+            ["Ei robåtåre dreier rundt eit feste på båtkanten. Kva enkel maskin er åra eit døme på?","Vektstong"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Prøv og samanlikn",
+        "question": "I eit kastforsøk aukar talet på treff frå 6 av 20 til 9 av 20. Kor mange prosentpoeng aukar treffprosenten?",
+        "answer": "15 prosentpoeng"
+      }
+    },
+    {
+      "subject": "mat-og-helse",
+      "categories": [
+        {
+          "name": "Les matmerket",
+          "questions": [
+            ["Kva del av ei matpakning viser kva råvarer vara er laga av?","Ingredienslista"],
+            ["Kva heiter eit stoff som kan utløyse ein allergisk reaksjon hos nokon som er allergisk?","Allergen"],
+            ["Kva eining er g i «5 g fiber per 100 g»?","Gram"],
+            ["Kva er fagordet for mengda mat i éi servering?","Porsjonsstorleik"],
+            ["Kva står vanlegvis fyrst i ingredienslista, det det er mest eller minst av?","Mest"],
+            ["100 g mat inneheld 4 g fiber. Kor mykje fiber er det i ein porsjon på 175 g?","7 g"]
+          ]
+        },
+        {
+          "name": "Smak, kultur og bruk",
+          "questions": [
+            ["Kva kallar vi matkokekunst, servering og måltidsvanar som lever vidare over tid i eit fellesskap?","Mattradisjon"],
+            ["Kva heiter den mjuke, flate baksten som kan lagast av poteter og serverast med smør og sukker?","Lefse"],
+            ["Kva grunnsmak er særleg knytt til moden tomat og lagra ost når smaken blir skildra som fyldig og kjøtaktig?","Umami"],
+            ["Kva prosess brukar ein når fisk blir halden over vedrøyk for smak og haldbarheit?","Røyking"],
+            ["Kva heiter konserveringsmetoden for sild der det blir brukt mykje natriumklorid?","Salting"],
+            ["Kva biologisk konserveringsmåte brukar mjølkesyrebakteriar til å lage surkål av kål og salt?","Fermentering"]
+          ]
+        },
+        {
+          "name": "Snodige fakta",
+          "questions": [
+            ["Kva «nøtt» kan ein lage eit smør av, sjølv om planten botanisk er ei belgvekst?","Peanøtt"],
+            ["Kva krydder kan ha form som ei samanrulla barkremse?","Kanel"],
+            ["Kva sans registrerer aroma frå mat i munnen og kan bli svekt når nasen er tett?","Luktesansen"],
+            ["Kvifor kan auga renne når du skjer lauk, sender lauken ut irriterande stoff eller vassdamp frå koking?","Irriterande stoff"],
+            ["Kva heiter den enzymatiske fargeendringa på snittflata av eit eple som ligg i luft?","Bruning"],
+            ["Kva organisme lagar gassen som gjer at deigen kan heve i eit vanleg gjærbrød?","Gjærsopp"]
+          ]
+        }
+      ],
+      "final": {
+        "category": "Snodige fakta",
+        "question": "To delar av same produkt har 3,5 g og 2 g fiber per 100 g. Kor mange gram meir fiber får du med 200 g av fyrste del?",
+        "answer": "3 g"
+      }
+    }
+  ]
+}

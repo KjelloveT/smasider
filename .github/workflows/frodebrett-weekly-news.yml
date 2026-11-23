@@ -63,10 +63,10 @@ jobs:
     timeout-minutes: 6
     permissions:
       contents: write
-      pull-requests: write
+      pull-requests: read
     outputs:
       url: ${{ steps.submit.outputs.url }}
-      commit: ${{ steps.submit.outputs.commit }}
+      commit: ${{ steps.branch.outputs.commit }}
     env:
       WEEKLY_EDITION: ${{ needs.draft.outputs.edition }}
     steps:
@@ -74,8 +74,16 @@ jobs:
         with:
           ref: main
           persist-credentials: false
-      - name: Lag eit forslag til godkjenning
-        id: submit
+      - name: Stadfest tilgang til å opprette PR
+        env:
+          PR_TOKEN: ${{ secrets.FRODEBRETT_PR_TOKEN }}
+        run: |
+          if [ -z "$PR_TOKEN" ]; then
+            echo "::error::Set FRODEBRETT_PR_TOKEN med Pull requests: Read and write for dette repoet."
+            exit 1
+          fi
+      - name: Legg den nye quizfila på ei eiga grein
+        id: branch
         env:
           GH_TOKEN: ${{ github.token }}
           WEEKLY_PAYLOAD: ${{ needs.draft.outputs.payload }}
@@ -112,6 +120,16 @@ jobs:
             commit=$(git rev-parse HEAD)
           fi
 
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          echo "commit=$commit" >> "$GITHUB_OUTPUT"
+      - name: Opne PR for redaksjonell godkjenning
+        id: submit
+        if: steps.branch.outputs.branch != ''
+        env:
+          GH_TOKEN: ${{ secrets.FRODEBRETT_PR_TOKEN }}
+          WEEKLY_BRANCH: ${{ steps.branch.outputs.branch }}
+        run: |
+          set -euo pipefail
           cat > "$RUNNER_TEMP/weekly-pr.md" <<'EOF'
           Eit KI-utkast med fem kategoriar, 30 spørsmål og ein finale. Alle fasitar og
           artikkelkjelder ligg i quizfila og i e-posten til redaktøren.
@@ -119,10 +137,10 @@ jobs:
           Kontroller datoperiode, fakta, nynorsk, aldersnivå, fasitar og eventuell
           biletbruk før du godkjenner og flettar inn PR-en.
           EOF
-          url=$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" \
-            --title "Frødebrett · Nyheitsfrøda $WEEKLY_EDITION" --body-file "$RUNNER_TEMP/weekly-pr.md")
+          url=$(gh api --method POST "repos/$GITHUB_REPOSITORY/pulls" \
+            -f 'base=main' -f "head=$WEEKLY_BRANCH" -f "title=Frødebrett · Nyheitsfrøda $WEEKLY_EDITION" \
+            -F "body=@$RUNNER_TEMP/weekly-pr.md" --jq .html_url)
           echo "url=$url" >> "$GITHUB_OUTPUT"
-          echo "commit=$commit" >> "$GITHUB_OUTPUT"
 
   email:
     needs: [draft, pull-request]
