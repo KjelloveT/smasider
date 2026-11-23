@@ -88,6 +88,19 @@ function draftQuestions(draft) {
   return [...draft.categories.flatMap(category => category.questions), draft.final.entry];
 }
 
+export function attachSources(draft, sources) {
+  const evidence = new Map(sources.map(source => [source.id, source]));
+  for (const item of draftQuestions(draft)) {
+    const source = evidence.get(item.sourceId);
+    if (!source) throw Error('Spørsmålet må bruke ein artikkel frå kjeldegrunnlaget.');
+    item.source = source;
+    item.imagePage = item.imageAlt && source.imagePage ? source.imagePage : '';
+    item.pressPhoto = item.pressPhotoAlt && source.pressPhoto?.url
+      ? { ...source.pressPhoto, description: item.pressPhotoAlt } : undefined;
+  }
+  return draft;
+}
+
 export function validateDraft(draft, period, sources) {
   const categories = draft?.categories;
   if (!Array.isArray(categories) || categories.length !== 5) throw Error('Frøda må ha fem kategoriar.');
@@ -216,18 +229,9 @@ async function run(mode) {
       return;
     }
     case 'check': {
-      const draft = readJson(file('weekly-draft.json'));
       const sources = readJson(file('weekly-sources.json'));
+      const draft = attachSources(readJson(file('weekly-draft.json')), sources);
       validateDraft(draft, period, sources);
-      const evidence = new Map(sources.map(source => [articleKey(source.url), source]));
-      for (const item of draftQuestions(draft)) {
-        const source = evidence.get(articleKey(item.source.url));
-        item.source.title = source.title;
-        item.source.url = source.url;
-        const proposal = item.pressPhoto;
-        item.pressPhoto = source.pressPhoto && proposal?.url === source.pressPhoto.url
-          ? { ...source.pressPhoto, description: proposal.description } : undefined;
-      }
       output('payload', gzipSync(JSON.stringify(draft)).toString('base64'));
       return;
     }

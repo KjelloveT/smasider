@@ -1,4 +1,4 @@
-import { appendFileSync, writeFileSync } from 'node:fs';
+import { appendFileSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { articleKey, newsPeriod, validSource, validStory } from './weekly-news.mjs';
@@ -40,11 +40,12 @@ const schema = {
   }
 };
 
-function researchPrompt(period, topic) {
+function researchPrompt(period, topic, maxToolCalls) {
+  const amount = maxToolCalls <= 5 ? 'fire til seks' : 'åtte til ti';
   return [
     'Du er nyheitsredaktør for eit nyheitsbrett for 5.–7. trinn. Kartlegg fyrst dei største nyheitene i perioden frå og med '
       + period.from + ' til og med ' + period.through + ', norsk tid. Søk med nøyaktige datoar og opne kjeldene.',
-    'Finn åtte til ti ulike, skuleeigna hendingar innanfor ' + topic + '. Start med vekas hovudsaker og saker fleire uavhengige redaksjonar har dekt. Bruk oppfølgingssøk om dei konkrete sakene. Lever éin god artikkel per hending.',
+    'Finn ' + amount + ' ulike, skuleeigna hendingar innanfor ' + topic + '. Start med vekas hovudsaker og saker fleire uavhengige redaksjonar har dekt. Bruk oppfølgingssøk om dei konkrete sakene. Lever éin god artikkel per hending.',
     'Bruk nasjonale redaksjonar som NRK, TV 2, VG, Dagbladet og Aftenposten, breie internasjonale redaksjonar som Reuters, AP, BBC og Euronews og primærkjelder for konkrete fakta. Daterte rapportar frå ei avslutta veke kan ha ein ny utvikling i ei eldre sak.',
     'Merk saker med brei redaksjonell dekning eller store samfunnsfølgjer som major. Merk lokale småhendingar og kuriøse enkeltsaker som minor, og ta med høgst éi slik sak her. Sjå etter overraskande sider ved store saker.',
     'Gje same korte story-id med små ASCII-bokstavar, tal og bindestrek til artiklar om same hending, til dømes valresultat-land. Skriv verifisert publiseringsdato (ÅÅÅÅ-MM-DD), artikkeltittel, utgjevar, direkte artikkellenkje og to til fire korte fakta i eigne ord.',
@@ -65,7 +66,9 @@ export function readResearch(response, period) {
   ];
   const urls = new Set(citations.map(citation => articleKey(citation.url)).filter(Boolean));
   if (response.status !== 'completed' || !searched.length || !urls.size || !messages.length) {
-    throw Error('Nettsøket leverte ikkje eit ferdig kjeldegrunnlag.');
+    const error = Error('Nettsøket leverte ikkje eit ferdig kjeldegrunnlag.');
+    error.code = 'incomplete_research';
+    throw error;
   }
   const { articles } = JSON.parse(messages.map(item => item.text).join(''));
   if (!Array.isArray(articles)) throw Error('Nettsøket leverte ikkje ei kjeldeliste.');
@@ -88,7 +91,7 @@ async function search(topic, period, apiKey, timeout, maxToolCalls) {
     body: JSON.stringify({
       model: 'gpt-6.1-terra',
       reasoning: { effort: 'low' },
-      input: researchPrompt(period, topic),
+      input: researchPrompt(period, topic, maxToolCalls),
       tools: [{ type: 'web_search', search_context_size: 'medium' }],
       include: ['web_search_call.action.sources'],
       text: { format: { type: 'json_schema', name: 'weekly_news_sources', strict: true, schema } },
@@ -109,8 +112,8 @@ async function researchTopic(topic, period, apiKey) {
   try {
     return await search(topic, period, apiKey, 150_000, 8);
   } catch (error) {
-    if (error.name !== 'TimeoutError') throw error;
-    console.log('Nettsøket om ' + topic + ' tok for lang tid. Prøver att med eit kortare søk.');
+    if (error.name !== 'TimeoutError' && error.code !== 'incomplete_research') throw error;
+    console.log('Nettsøket om ' + topic + ' vart ikkje fullført. Prøver att med eit mindre søk.');
     return search(topic, period, apiKey, 120_000, 5);
   }
 }
@@ -136,9 +139,12 @@ async function run() {
     }
   }
   if (!unique.size) throw Error('Ingen av nettsøka gav eit gyldig kjeldegrunnlag.');
-  const sources = [...unique.values()];
+  const sources = [...unique.values()].map((source, index) => ({ ...source, id: 'kjelde-' + (index + 1) }));
   const evidence = JSON.stringify(sources, null, 2);
+  const draftSchema = JSON.parse(readFileSync(new URL('./weekly-news.schema.json', import.meta.url), 'utf8'));
+  draftSchema.$defs.question.properties.sourceId.enum = sources.map(source => source.id);
   writeFileSync(join(RUNNER_TEMP, 'weekly-sources.json'), evidence + '\n');
+  writeFileSync(join(RUNNER_TEMP, 'weekly-draft.schema.json'), JSON.stringify(draftSchema) + '\n');
   appendFileSync(join(RUNNER_TEMP, 'weekly-prompt.md'), '\n# Kjeldegrunnlag for vekefrøda\n\n' + JSON.stringify(sources) + '\n');
   console.log('Nettsøket fann ' + sources.length + ' kjelder frå ' + period.from + ' til ' + period.through + '.');
 }

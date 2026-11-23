@@ -3,7 +3,7 @@ import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { newsPeriod, validateDraft, buildQuiz, reviewEmail } from './weekly-news.mjs';
+import { newsPeriod, validateDraft, attachSources, buildQuiz, reviewEmail } from './weekly-news.mjs';
 import { readResearch } from './news-research.mjs';
 import { licensedImage, publisherImage, storeWeeklyImages, weeklyImageFile } from './news-images.mjs';
 import { quizQuestions, reviewImages } from './news-review.mjs';
@@ -82,6 +82,23 @@ test('valideringa fangar opp enkelte upassande emne i både spørsmål og kjelde
   assert.throws(() => validateDraft(draft, period), /gyldig kjelde/);
   draft.categories[0].questions[0].question = 'Kvar hende skytinga?';
   assert.throws(() => validateDraft(draft, period), /trygg fasit/);
+});
+
+test('utkastet får lenkje, dato og biletkreditt frå den valde kjelda', () => {
+  const draft = exampleDraft();
+  const items = [...draft.categories.flatMap(category => category.questions), draft.final.entry];
+  const sources = items.map(({ source }, index) => ({ ...source, id: 'kjelde-' + index }));
+  items.forEach((item, index) => { item.sourceId = sources[index].id; });
+  const item = items[0];
+  item.source = { url: 'https://example.org/unverified' };
+  item.pressPhotoAlt = 'Ein bygning';
+  sources[0].pressPhoto = { url: sources[0].url, description: 'Rådhuset', credit: 'Foto Eigar' };
+  assert.doesNotThrow(() => validateDraft(attachSources(draft, sources), period, sources));
+  assert.equal(item.source.url, sources[0].url);
+  assert.equal(item.pressPhoto.credit, 'Foto Eigar');
+  assert.equal(item.pressPhoto.description, 'Ein bygning');
+  item.sourceId = 'kjelde-ukjend';
+  assert.throws(() => attachSources(draft, sources), /artikkel frå kjeldegrunnlaget/);
 });
 
 test('store konfliktsaker er tillatne og grensene for småsaker og gjentaking gjeld heile brettet', () => {
