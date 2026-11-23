@@ -80,11 +80,11 @@ export function readResearch(response, period) {
   return [...sources.values()];
 }
 
-async function search(topic, period, apiKey) {
+async function search(topic, period, apiKey, timeout, maxToolCalls) {
   const response = await fetch('https://api.openai.com/v1/responses', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + apiKey, 'Content-Type': 'application/json' },
-    signal: AbortSignal.timeout(180_000),
+    signal: AbortSignal.timeout(timeout),
     body: JSON.stringify({
       model: 'gpt-6.1-terra',
       reasoning: { effort: 'low' },
@@ -92,7 +92,7 @@ async function search(topic, period, apiKey) {
       tools: [{ type: 'web_search', search_context_size: 'medium' }],
       include: ['web_search_call.action.sources'],
       text: { format: { type: 'json_schema', name: 'weekly_news_sources', strict: true, schema } },
-      max_tool_calls: 8,
+      max_tool_calls: maxToolCalls,
       max_output_tokens: 5200,
       store: false
     })
@@ -105,12 +105,22 @@ async function search(topic, period, apiKey) {
   return readResearch(await response.json(), period);
 }
 
+async function researchTopic(topic, period, apiKey) {
+  try {
+    return await search(topic, period, apiKey, 150_000, 8);
+  } catch (error) {
+    if (error.name !== 'TimeoutError') throw error;
+    console.log('Nettsøket om ' + topic + ' tok for lang tid. Prøver att med eit kortare søk.');
+    return search(topic, period, apiKey, 120_000, 5);
+  }
+}
+
 async function run() {
   const { OPENAI_API_KEY, RUNNER_TEMP, WEEKLY_EDITION, WEEKLY_TEST_DATE } = process.env;
   if (!OPENAI_API_KEY) throw Error('Set OPENAI_API_KEY før nettsøket.');
   const period = newsPeriod(new Date(), WEEKLY_EDITION, WEEKLY_TEST_DATE);
   const batches = await Promise.allSettled(topics.map(async topic => {
-    const articles = (await search(topic, period, OPENAI_API_KEY)).slice(0, 10);
+    const articles = (await researchTopic(topic, period, OPENAI_API_KEY)).slice(0, 10);
     console.log('Nettsøk om ' + topic + ' fann ' + articles.length + ' kjelder.');
     return articles;
   }));

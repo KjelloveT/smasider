@@ -80,6 +80,12 @@ jobs:
         with:
           ref: main
           persist-credentials: false
+      - name: Hent same generatorkode som utkastjobben brukte
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.sha }}
+          path: .weekly-generator
+          persist-credentials: false
       - name: Stadfest tilgang til å opprette PR
         env:
           PR_TOKEN: ${{ secrets.FRODEBRETT_PR_TOKEN }}
@@ -121,7 +127,7 @@ jobs:
             git fetch --depth=1 origin "refs/heads/$branch"
             commit=$(git rev-parse FETCH_HEAD)
           else
-            node .github/frodebrett/weekly-news.mjs build
+            node .weekly-generator/.github/frodebrett/weekly-news.mjs build
             git switch -c "$branch"
             git add -A -- frodebrett/json
             check_paths "$(git diff --cached --name-only)"
@@ -151,7 +157,7 @@ jobs:
           biletbruk før du godkjenner og flettar inn PR-en.
           EOF
           git show "${WEEKLY_COMMIT}:frodebrett/json/weekly-news.json" > "$RUNNER_TEMP/weekly-reviewed.json"
-          node .github/frodebrett/weekly-news.mjs review >> "$RUNNER_TEMP/weekly-pr.md"
+          node .weekly-generator/.github/frodebrett/weekly-news.mjs review >> "$RUNNER_TEMP/weekly-pr.md"
           url=$(gh api --method POST "repos/$GITHUB_REPOSITORY/pulls" \
             -f 'base=main' -f "head=$WEEKLY_BRANCH" -f "title=Frødebrett · Nyheitsfrøda $WEEKLY_EDITION" \
             -F "body=@$RUNNER_TEMP/weekly-pr.md" --jq .html_url)
