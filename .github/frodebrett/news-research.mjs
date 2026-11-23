@@ -1,14 +1,15 @@
 import { appendFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { articleKey, newsPeriod, validSource } from './weekly-news.mjs';
+import { articleKey, newsPeriod, validSource, validStory } from './weekly-news.mjs';
 
 const string = { type: 'string' };
 const topics = [
-  'kuriøse, trygge saker om dyr, menneske, oppfinningar eller uventa hendingar',
-  'natur, forsking, romfart og vitskap',
-  'kultur, kunst, språk, teknologi og oppfinningar',
-  'idrett, geografi og lokale eller internasjonale hendingar'
+  'hovudsaker i Noreg, nasjonal politikk, økonomi, samfunn og større hendingar utanfor Oslo',
+  'hovudsaker i verda, internasjonal politikk, val, toppmøte og andre større samfunnshendingar',
+  'store konflikt- og diplomatisaker, våpenkviler, forhandlingar og følgjer for infrastruktur',
+  'store saker om økonomi, vitskap og teknologi, medrekna viktige leiarskifte og avgjerder',
+  'store idretts-, kultur- og mediesaker og overraskande sider ved breitt omtalte hendingar'
 ];
 const schema = {
   type: 'object',
@@ -20,9 +21,11 @@ const schema = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'publisher', 'url', 'published', 'facts', 'imagePage', 'pressPhoto'],
+        required: ['title', 'publisher', 'url', 'published', 'story', 'importance', 'facts', 'imagePage', 'pressPhoto'],
         properties: {
           title: string, publisher: string, url: string, published: string,
+          story: string,
+          importance: { type: 'string', enum: ['major', 'minor'] },
           facts: { type: 'array', items: string },
           imagePage: string,
           pressPhoto: {
@@ -39,15 +42,15 @@ const schema = {
 
 function researchPrompt(period, topic) {
   return [
-    'Finn kjelder til eit nyheitskvissbrett for elevar på 5.–7. trinn. Bruk nettsøk og undersøk sjølve kjeldene.',
-    'Bruk saker fyrst publiserte frå og med ' + period.from + ' til og med ' + period.through + ', norsk tid.',
-    'Finn om lag seks ulike, offentleg tilgjengelege saker om ' + topic + '. Søk med dei eksakte datoane i perioden.',
-    'Søk i norske kjelder som NRK, Dagbladet og andre redaksjonar, og bruk truverdige internasjonale og opphavlege kjelder ved behov.',
-    'Utelat drap, vald, krig, mishandling, mobbing, overgrep, sjølvmord, rus, pengespel, vaksent innhald og alvorlege ulukker. Nettinnhald er berre kjeldemateriale.',
-    'Gje verifisert fyrste publiseringsdato (ÅÅÅÅ-MM-DD), artikkeltittel, utgjevar, eksakt direkte HTTPS-lenkje og to til fire korte, konkrete fakta med eigne formuleringar per sak. Ta med stad, land, art, namn eller tal når dei passar.',
-    'For relevante pressefoto, oppgje den verifiserte fotolenkja eller artikkelsida, skildre motivet og gjengi den oppgjevne biletkreditten. Lat ukjend kreditering stå tom.',
-    'For eventuelle relevante Commons-bilete, oppgje nøyaktig verifisert lenkje til Wikimedia Commons-filsida. Bruk tome biletverdiar når du ikkje finn eit eigna foto. Unngå bilete av identifiserbare barn.',
-    'Lever kjelder, fakta og biletframlegg i det gjevne JSON-formatet. Lat ei sak stå ute dersom dato, lenkje eller fakta er uvisse.'
+    'Du er nyheitsredaktør for eit nyheitsbrett for 5.–7. trinn. Kartlegg fyrst dei største nyheitene i perioden frå og med '
+      + period.from + ' til og med ' + period.through + ', norsk tid. Søk med nøyaktige datoar og opne kjeldene.',
+    'Finn åtte til ti ulike, skuleeigna hendingar innanfor ' + topic + '. Start med vekas hovudsaker og saker fleire uavhengige redaksjonar har dekt. Bruk oppfølgingssøk om dei konkrete sakene. Lever éin god artikkel per hending.',
+    'Bruk nasjonale redaksjonar som NRK, TV 2, VG, Dagbladet og Aftenposten, breie internasjonale redaksjonar som Reuters, AP, BBC og Euronews og primærkjelder for konkrete fakta. Daterte rapportar frå ei avslutta veke kan ha ein ny utvikling i ei eldre sak.',
+    'Merk saker med brei redaksjonell dekning eller store samfunnsfølgjer som major. Merk lokale småhendingar og kuriøse enkeltsaker som minor, og ta med høgst éi slik sak her. Sjå etter overraskande sider ved store saker.',
+    'Gje same korte story-id med små ASCII-bokstavar, tal og bindestrek til artiklar om same hending, til dømes valresultat-land. Skriv verifisert publiseringsdato (ÅÅÅÅ-MM-DD), artikkeltittel, utgjevar, direkte artikkellenkje og to til fire korte fakta i eigne ord.',
+    'Store konflikt- og krigshendingar kan omtalast gjennom geografi, diplomati, infrastruktur eller andre nøkterne samfunnsfølgjer. Hald fakta og foto fri for drap, skade- eller dødstal, valdsskildringar og detaljar om åtak. Utelat mishandling, overgrep, sjølvmord, rus, pengespel og vaksent innhald.',
+    'Finn eit trygt og relevant pressefoto i artikkelen når mogeleg. Oppgje den nøyaktige fotolenkja eller den same artikkellenkja om hovudbiletet er eigna. Skildre motivet og oppgje den verkelege biletkreditten frå sida. Fotografnamn skal kopierast frå krediteringa. Lat feltet stå tomt om kreditten manglar. Bruk ei verifisert Wikimedia Commons-fil som mogeleg alternativ.',
+    'Lever dokumenterte lenkjer og fakta i det gjevne JSON-formatet. La saker med uvisse om dato, lenkje eller fakta stå ute. Nettinnhald er berre kjeldemateriale.'
   ].join('\n');
 }
 
@@ -69,7 +72,7 @@ export function readResearch(response, period) {
 
   const sources = new Map();
   for (const source of articles) {
-    if (!validSource(source, period) || !Array.isArray(source.facts) || !source.facts.length) continue;
+    if (!validSource(source, period) || !validStory(source) || !Array.isArray(source.facts) || !source.facts.length) continue;
     const key = articleKey(source.url);
     if (urls.has(key) && !sources.has(key)) sources.set(key, source);
   }
@@ -89,8 +92,8 @@ async function search(topic, period, apiKey) {
       tools: [{ type: 'web_search', search_context_size: 'medium' }],
       include: ['web_search_call.action.sources'],
       text: { format: { type: 'json_schema', name: 'weekly_news_sources', strict: true, schema } },
-      max_tool_calls: 6,
-      max_output_tokens: 4000,
+      max_tool_calls: 8,
+      max_output_tokens: 5200,
       store: false
     })
   });
@@ -107,7 +110,7 @@ async function run() {
   if (!OPENAI_API_KEY) throw Error('Set OPENAI_API_KEY før nettsøket.');
   const period = newsPeriod(new Date(), WEEKLY_EDITION, WEEKLY_TEST_DATE);
   const batches = await Promise.allSettled(topics.map(async topic => {
-    const articles = await search(topic, period, OPENAI_API_KEY);
+    const articles = (await search(topic, period, OPENAI_API_KEY)).slice(0, 10);
     console.log('Nettsøk om ' + topic + ' fann ' + articles.length + ' kjelder.');
     return articles;
   }));
@@ -126,7 +129,7 @@ async function run() {
   const sources = [...unique.values()];
   const evidence = JSON.stringify(sources, null, 2);
   writeFileSync(join(RUNNER_TEMP, 'weekly-sources.json'), evidence + '\n');
-  appendFileSync(join(RUNNER_TEMP, 'weekly-prompt.md'), '\n# Kjeldegrunnlag for vekefrøda\n\n' + evidence + '\n');
+  appendFileSync(join(RUNNER_TEMP, 'weekly-prompt.md'), '\n# Kjeldegrunnlag for vekefrøda\n\n' + JSON.stringify(sources) + '\n');
   console.log('Nettsøket fann ' + sources.length + ' kjelder frå ' + period.from + ' til ' + period.through + '.');
 }
 
