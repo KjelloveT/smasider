@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { newsPeriod, validateDraft, buildQuiz, reviewEmail } from './weekly-news.mjs';
+import { readResearch } from './news-research.mjs';
 import { licensedImage } from './news-images.mjs';
 import { addReviewedPhoto } from './add-reviewed-photo.mjs';
 
@@ -45,6 +46,25 @@ test('utkastet må ha rett fast kategori, korte fasitar og kjelder innanfor peri
   const wrongCategory = exampleDraft();
   wrongCategory.categories[0].name = 'Snodige nyheiter';
   assert.throws(() => validateDraft(wrongCategory, period), /snodige nyheter/);
+});
+
+test('nettsøket tek berre med kjelder det fann, og frøda bruker dei same datoane', () => {
+  const draft = exampleDraft();
+  const articles = [...draft.categories.flatMap(category => category.questions), draft.final.entry]
+    .map(item => ({ ...item.source, facts: ['Saka gjeld Oslo.'] }));
+  const results = articles.map(source => ({ url: source.url + '?utm_source=test' }));
+  const unverified = { ...articles[0], url: 'https://example.org/news/unverified' };
+  const old = { ...unverified, url: 'https://example.org/news/old', published: '2026-11-20' };
+  const response = { status: 'completed', output: [
+    { type: 'web_search_call', status: 'completed', action: { sources: [...results, { url: old.url }] } },
+    { type: 'message', content: [{ type: 'output_text', text: JSON.stringify({ articles: [...articles, old, unverified] }) }] }
+  ] };
+  const sources = readResearch(response, period);
+  assert.deepEqual(sources, articles);
+  assert.doesNotThrow(() => validateDraft(draft, period, sources));
+  draft.categories[0].questions[0].source.url = unverified.url;
+  assert.throws(() => validateDraft(draft, period, sources), /kjeldegrunnlaget/);
+  assert.throws(() => readResearch({ ...response, status: 'incomplete' }, period), /ferdig kjeldegrunnlag/);
 });
 
 test('valideringa fangar opp enkelte upassande emne i både spørsmål og kjelder', () => {

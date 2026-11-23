@@ -39,7 +39,13 @@ jobs:
         env:
           WEEKLY_EDITION: ${{ inputs.saturday }}
         run: node .github/frodebrett/weekly-news.mjs prepare
-      - name: Undersøk vekas nyheiter og lag eit utkast
+      - name: Hent kjelder til vekas nyheiter
+        if: steps.period.outputs.ready == 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          WEEKLY_EDITION: ${{ steps.period.outputs.edition }}
+        run: node .github/frodebrett/news-research.mjs
+      - name: Lag eit utkast med Codex
         if: steps.period.outputs.ready == 'true'
         uses: openai/codex-action@306c6a196a99dcc6582530c396a19d2672d5e9ec # v1
         with:
@@ -48,7 +54,7 @@ jobs:
           output-file: ${{ runner.temp }}/weekly-draft.json
           sandbox: read-only
           safety-strategy: drop-sudo
-          codex-args: '["--ephemeral", "-c", "web_search=\"live\"", "--output-schema", ".github/frodebrett/weekly-news.schema.json"]'
+          codex-args: '["--ephemeral", "--output-schema", ".github/frodebrett/weekly-news.schema.json"]'
       - name: Kontroller utkastet
         id: validate
         if: steps.period.outputs.ready == 'true'
@@ -163,10 +169,16 @@ jobs:
           MAIL_PASSWORD: ${{ secrets.FRODEBRETT_GMAIL_APP_PASSWORD }}
         run: |
           set -euo pipefail
-          if [ -z "$MAIL_TO" ] || [ -z "$MAIL_PASSWORD" ]; then
-            echo "::error::Set FRODEBRETT_MAIL_TO og FRODEBRETT_GMAIL_APP_PASSWORD før utsending."
+          MAIL_FROM=$(printf '%s' "$MAIL_FROM" | tr -d '[:space:]')
+          MAIL_TO=$(printf '%s' "$MAIL_TO" | tr -d '[:space:]')
+          MAIL_PASSWORD=$(printf '%s' "$MAIL_PASSWORD" | tr -d '[:space:]')
+          if [ -z "$MAIL_FROM" ] || [ -z "$MAIL_TO" ] || [ -z "$MAIL_PASSWORD" ]; then
+            echo "::error::Kontroller avsendar, FRODEBRETT_MAIL_TO og FRODEBRETT_GMAIL_APP_PASSWORD før utsending."
             exit 1
           fi
+          echo "::add-mask::$MAIL_FROM"
+          echo "::add-mask::$MAIL_TO"
+          echo "::add-mask::$MAIL_PASSWORD"
           git fetch --depth=1 origin "$WEEKLY_COMMIT"
           git show 'FETCH_HEAD:frodebrett/json/weekly-news.json' > "$RUNNER_TEMP/weekly-reviewed.json"
           node .github/frodebrett/weekly-news.mjs email

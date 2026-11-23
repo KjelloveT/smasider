@@ -50,7 +50,17 @@ function publicArticle(value) {
   }
 }
 
-function validSource(source, period) {
+export function articleKey(value) {
+  if (!publicArticle(value)) return null;
+  const url = new URL(value);
+  url.hash = '';
+  for (const key of [...url.searchParams.keys()]) {
+    if (key.startsWith('utm_')) url.searchParams.delete(key);
+  }
+  return url.href.replace(/\/$/, '');
+}
+
+export function validSource(source, period) {
   if (!safeText(source?.title, 240) || !safeText(source.publisher, 90) || !publicArticle(source.url)) return false;
   const published = source.published;
   if (!/^\d{4}-\d{2}-\d{2}$/.test(published)) return false;
@@ -58,7 +68,7 @@ function validSource(source, period) {
   return Number.isFinite(+date) && iso(date) === published && published >= period.from && published <= period.through;
 }
 
-export function validateDraft(draft, period) {
+export function validateDraft(draft, period, sources) {
   const categories = draft?.categories;
   if (!Array.isArray(categories) || categories.length !== 5) throw Error('Frøda må ha fem kategoriar.');
   if (categories.filter(category => category?.name === oddNews).length !== 1) {
@@ -66,6 +76,7 @@ export function validateDraft(draft, period) {
   }
   const names = new Set();
   const questions = new Set();
+  const evidence = sources && new Map(sources.map(source => [articleKey(source.url), source.published]));
 
   function checkQuestion(item, context) {
     if (!safeText(item?.question, 320) || !safeText(item.answer, 65) || item.answer.split(/\s+/u).length > 2
@@ -76,6 +87,9 @@ export function validateDraft(draft, period) {
     if (!key || questions.has(key)) throw Error(context + ' manglar ei spørsmålsformulering eller gjentek eit anna spørsmål.');
     questions.add(key);
     if (!validSource(item.source, period)) throw Error(context + ' har inga gyldig kjelde i datoperioden.');
+    if (evidence && evidence.get(articleKey(item.source.url)) !== item.source.published) {
+      throw Error(context + ' brukar ei kjelde eller ein dato som manglar i kjeldegrunnlaget.');
+    }
     if (item.imagePage !== '' || item.imageAlt !== '') {
       if (!commonsFile(item.imagePage) || !safeText(item.imageAlt, 160)) {
         throw Error(context + ' har ei ugyldig biletkjelde eller biletskildring.');
@@ -214,7 +228,7 @@ async function run(mode) {
     }
     case 'check': {
       const draft = readJson(file('weekly-draft.json'));
-      validateDraft(draft, period);
+      validateDraft(draft, period, readJson(file('weekly-sources.json')));
       output('payload', gzipSync(JSON.stringify(draft)).toString('base64'));
       return;
     }
