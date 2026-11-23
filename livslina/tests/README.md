@@ -66,3 +66,18 @@ Desse filene er uendra frå hovudgreina. Ingen Livslina-avvik er melde.
   med 5,30 i snitt kom inn på sjukepleie. Tolv månader, seks hendingar,
   årsoppgjer, ny innlasting og eksport vart prøvde under same tryggingsheaderar
   som førehandsvisinga. Alle 25 automatiserte fasetestar passerte.
+
+## Kontroll av utvidinga 2026-11-23
+
+- Alle 32 fasetestar passerer. Kontrollane dekkjer opptak og fagskule,
+  privatist og realfag, vidare spel etter 25 år, folkehøgskule og reise,
+  føraropplæring, planlagd familie og flytting og sal av inventar.
+- I Chrome vart karriereveljaren, månadsbudsjettet, fire førarkortsteg,
+  fire samanhengande år med familieval og rombutikken prøvde frå 320 til
+  1440 pikslar. Fordelinga av husleige og depositum stemde med årsplanen.
+  Ved avbrot før stadfesting vart ingen plan om barn sett i gang.
+- Tre bilete per familiesituasjon vart lasta. Same bilete kom att ved
+  ny innlasting midt i ei hending. Målmodellen vart kontrollert med
+  representative kombinasjonar for soverom, stove, kjøken, arbeidsrom
+  og barnerom. Halvårsplanen og fagprøva vart prøvde på mobil.
+- [Resultat frå dei same 50 spelprofilane før og etter utvidinga](../docs/fase2-gjennomforing.md#50-para-gjennomspelingar).

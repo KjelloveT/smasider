@@ -11,7 +11,7 @@ LL.uiPhase2Play = (function () {
     const choiceLog = pending ? null : LL.phase2Events.resolvedNow(s);
     const event = pending || (choiceLog && LL.data.getAdult().events.find(item => item.id === choiceLog.id));
     const month = r.month ? LL.phase2Sim.MONTHS[r.month - 1] : 'Året er klart';
-    const root = ui.frame(month + ' · ' + a.age + '–' + (a.age + 1) + ' år', LL.phase2State.label(s, r.plan.routeId));
+    const root = ui.frame(month + ' · ' + a.age + '–' + (a.age + 1) + ' år', LL.phase2State.label(s, r.plan.routeId, r.plan.roleId));
     const visuals = LL.uiPhase2Visuals;
     const stats = el('div', 'll-adult-play-stats');
     stats.append(ui.stats(s));
@@ -27,7 +27,8 @@ LL.uiPhase2Play = (function () {
     }
     if (event) {
       const p = ui.panel(); p.classList.add('ll-adult-event');
-      const vignette = el('div', 'll-adult-vignette'); vignette.append(LL.artVignette.create(event.art));
+      const vignette = el('div', 'll-adult-vignette');
+      vignette.append(LL.artVignette.create(event.art, { seed: s.seed, year: r.year, occurrence: event.id }));
       const content = el('div', 'll-adult-event-content');
       content.append(el('h2', 'heading3 no-mt', event.title));
       if (pending) {

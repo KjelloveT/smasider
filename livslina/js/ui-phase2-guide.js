@@ -7,66 +7,51 @@ LL.uiPhase2Guide = (function () {
   const number = (value, digits) => value.toLocaleString('nn-NO', { minimumFractionDigits: digits, maximumFractionDigits: digits });
 
   function routeType(s, route) {
-    if (route.kind === 'study' && LL.phase2State.progress(s, route.id).graduated) return 'Arbeid etter fullført grad';
+    if (route.kind === 'study' && LL.phase2State.progress(s, route.id).graduated) return 'Arbeid etter fullført utdanning';
+    if (route.education === 'fagskule') return 'Fagskule · ' + route.years + ' år';
     if (route.kind === 'study') return 'Høgskule / universitet · ' + route.years + ' år';
     if (route.kind === 'bridge') return 'Vidaregåande · påbygg';
+    if (route.experience === 'folk') return 'Folkehøgskule · eitt år';
+    if (route.experience === 'travel') return 'Reise og arbeid · eitt år';
+    if (route.kind === 'year') return 'Kvalifisering · eitt år';
     if (route.kind === 'gap') return 'Friår';
     return route.program ? 'Arbeid · fagbrev' : 'Arbeid';
   }
 
-  function routeSelect(s, routes, selected) {
-    const input = el('select', 'vp-input');
-    input.id = 'adultRoute';
-    const groups = { study: 'Høgskule og universitet', job: 'Arbeid', bridge: 'Påbygg', gap: 'Friår' };
-    for (const [kind, label] of Object.entries(groups)) {
-      const group = el('optgroup');
-      group.label = label;
-      for (const route of routes) {
-        const effectiveKind = route.kind === 'study' && LL.phase2State.progress(s, route.id).graduated ? 'job' : route.kind;
-        if (effectiveKind !== kind) continue;
-        const enabled = LL.phase2State.available(s, route);
-        const admission = enabled ? LL.phase2State.studyAdmission(s, route) : null;
-        const reason = !enabled ? ' · manglar opptaksgrunnlag' : admission?.admitted === false ? ' · sjå poengkravet' : '';
-        const option = el('option', '', LL.phase2State.label(s, route.id) + reason);
-        option.value = route.id;
-        option.disabled = !enabled;
-        group.append(option);
-      }
-      if (group.children.length) input.append(group);
-    }
-    input.value = selected;
-    return input;
-  }
-
-  function admissionLine(label, limit, grade, ageLimit) {
+  function admissionLine(label, limit, points, reason, gameLimit) {
     const row = el('div');
     const heading = el('dt', '', label);
-    const reading = el('dd', '', number(limit, 1) + ' poeng');
-    if (ageLimit !== undefined) {
-      reading.append(' · du er over aldersgrensa på ' + ageLimit + ' år i dette dømet');
-    } else if (grade) {
-      const gap = Math.round((grade.points - limit) * 10) / 10;
+    const reading = el('dd', '', limit === 'all' ? 'Alle kvalifiserte fekk tilbod' :
+      typeof limit === 'number' ? number(limit, 1) + ' poeng' : 'Ukjend poenggrense');
+    if (reason) reading.append(' · ' + reason);
+    else if (points != null && typeof limit === 'number') {
+      const gap = Math.round((points - limit) * 10) / 10;
       reading.append(' · ' + (gap === 0 ? 'på grensa' : number(Math.abs(gap), 1) + ' poeng ' + (gap > 0 ? 'over' : 'under')));
     }
+    if (gameLimit != null) reading.append(' · spelgrense ' + number(gameLimit, 1));
     row.append(heading, reading);
     return row;
   }
 
-  function admissions(admission, expanded) {
+  function admissions(admission, expanded, formal) {
     if (!admission) return [];
-    const { examples, grade, lowest, admitted, continuing } = admission;
+    const { examples, grade, ordinary, lowest, missing, open, unknown, admitted, continuing } = admission;
     const profile = el('div', 'vp-panel vp-panel--soft vp-panel--compact ll-adult-admission-profile');
     if (grade) {
       const figures = el('dl', 'll-adult-admission-grades');
-      for (const [label, value] of [['Snitt frå VGS', number(grade.average, 2)], ['Karakterpoeng før tillegg', number(grade.points, 1)]]) {
+      const stats = [['Snitt frå VGS', number(grade.average, 2)], ['Karakterpoeng før tillegg', number(grade.points, 1)]];
+      if (ordinary !== grade.points && ordinary != null) stats.push(['Poeng i ordinær kvote i spelet', number(ordinary, 1)]);
+      for (const [label, value] of stats) {
         const row = el('div'); row.append(el('dt', '', label), el('dd', '', value)); figures.append(row);
       }
       profile.append(figures);
     }
-    const status = continuing ? 'Du er alt teken opp og kan halde fram med studiet.' : admitted ?
+    const status = formal || (continuing ? 'Du er alt teken opp og kan halde fram med studiet.' : open ?
+      'Ved minst éin av studiestadene fekk alle kvalifiserte plass i ein kvote du kan søkje i.' : unknown ?
+      'Her er den historiske poenggrensa ukjend. Spelet brukar dei formelle opptakskrava.' : admitted ?
       'Du oppfyller opptakskrava for å starte dette studiet i Livslina.' : grade ?
         'Du treng minst ' + number(lowest, 1) + ' poeng for å starte dette studiet i Livslina.' :
-        'Spelet treng karaktersnittet ditt frå VGS for å vurdere eit nytt opptak.';
+        'Spelet treng karaktersnittet ditt frå VGS for å vurdere eit nytt opptak.');
     const message = el('p');
     message.append(el('strong', '', status));
     profile.append(message);
@@ -82,15 +67,18 @@ LL.uiPhase2Guide = (function () {
       const source = el('a', '', example.institution);
       source.href = example.url; source.target = '_blank'; source.rel = 'noopener noreferrer';
       const quotas = el('dl');
-      quotas.append(admissionLine('Førstegongsvitnemål', example.first, grade, example.excludedFirstQuotaAge),
-        admissionLine('Ordinær kvote', example.ordinary, grade));
+      const reason = example.excludedFirstQuotaAge !== undefined ? 'du er over aldersgrensa på ' + example.excludedFirstQuotaAge + ' år i dette dømet' :
+        example.newScience ? 'realfaga er tekne etter vidaregåande' : '';
+      quotas.append(admissionLine('Førstegongsvitnemål', example.first, grade?.points, reason),
+        admissionLine('Ordinær kvote', example.ordinary, ordinary, '', example.gameOrdinary));
       item.append(source, ', ' + example.campus + ' (' + example.year + ')', quotas);
       list.append(item);
     }
     body.append(list);
-    if (grade && !admitted) {
-      const lowestOrdinary = Math.min(...examples.map(example => example.ordinary));
-      body.append(el('p', '', 'Du manglar ' + number(lowest - grade.points, 1) + ' poeng. I eit verkeleg opptak kan du undersøkje andre studiestader eller ta opp fag som privatist. Utan tilleggspoeng svarar den lågaste ordinære grensa her til eit snitt på ' + number(lowestOrdinary / 10, 2) + '.'));
+    if (missing > 0 && !admitted && !formal) {
+      const ordinaryLimits = examples.map(item => item.gameOrdinary ?? item.ordinary).filter(limit => typeof limit === 'number');
+      const target = ordinaryLimits.length ? ' Den lågaste ordinære spelgrensa svarar til eit snitt på ' + number(Math.min(...ordinaryLimits) / 10, 2) + '.' : '';
+      body.append(el('p', '', 'Du manglar ' + number(missing, 1) + ' poeng. Vel eit anna løp eller ta opp fag som privatist i årsplanen.' + target));
     }
     const retake = el('a', '', 'Samordna opptak om å ta opp fag');
     retake.href = 'https://www.samordnaopptak.no/universitet-og-hogskole/poengberegning/forbedringer-og-nye-fag/';
@@ -103,8 +91,9 @@ LL.uiPhase2Guide = (function () {
   function homeNote(home, estimate, target) {
     const move = estimate.move;
     const mortgage = estimate.firstMonth.mortgage;
-    const total = home.rent + home.utilities + (home.ownerCosts || 0) + mortgage.interest + mortgage.principal;
+    const total = estimate.firstMonth.expenses.housing + estimate.firstMonth.expenses.utilities + (home.ownerCosts || 0) + mortgage.interest + mortgage.principal;
     target.replaceChildren(el('p', '', home.note), el('p', 'll-note', kr(total) + '/mnd til ' + (home.price ? 'bustad, straum og lån.' : 'bustad og straum.')));
+    if (estimate.firstMonth.family.share) target.append(el('p', 'll-note', 'Beløpet viser din halvdel av leiga og straumen. De planlegg delinga under Hushald.'));
     if (!move.purchase) return;
 
     const rules = LL.data.getAdult().rates.mortgage;
@@ -125,7 +114,7 @@ LL.uiPhase2Guide = (function () {
 
   function liveBudget(estimate) {
     const purchase = estimate.move.purchase;
-    const totalIncome = (estimate.wage + estimate.loan + estimate.bridge) / 12;
+    const totalIncome = (estimate.wage + estimate.loan + estimate.bridge + estimate.benefit) / 12;
     const routineExpense = (estimate.expense - estimate.move.expense - (estimate.changeCost || 0) + estimate.mortgagePrincipal) / 12;
     const saving = estimate.saved / 12;
     const numbers = el('dl', 'll-adult-budget-numbers');
@@ -138,5 +127,5 @@ LL.uiPhase2Guide = (function () {
     return lines;
   }
 
-  return { routeType, routeSelect, admissions, homeNote, liveBudget };
+  return { routeType, admissions, homeNote, liveBudget };
 })();

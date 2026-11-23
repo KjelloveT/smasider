@@ -36,8 +36,9 @@ LL.phase2Effects = (function () {
   }
 
   function sparseRoom(s) {
-    const room = s.room?.equipped || {};
-    return !room.sofa && !(room.rug && room.decor);
+    const placements = s.room?.placements;
+    const items = placements ? Object.values(placements) : [s.room?.equipped || {}];
+    return !items.some(room => room.sofa || room.dining || room.rug && room.decor);
   }
 
   return { changes, record, measure, sparseRoom };

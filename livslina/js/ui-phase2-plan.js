@@ -41,11 +41,11 @@ LL.uiPhase2Plan = (function () {
     tabs.append(tab);
     box.append(panel);
   }
-  function open() {
+  function open(focusPanel) {
     const s = LL.state.get(), a = s.adult, d = LL.data.getAdult(), ui = LL.uiPhase2, guide = LL.uiPhase2Guide;
     if (a.run || a.complete) { ui.open(); return; }
     let initial;
-    try { initial = LL.phase2Economy.normalizePlan(s, a.draft ? a.draft.plan : a.plan || LL.phase2Economy.defaultPlan(s)); }
+    try { initial = a.draft ? LL.phase2Economy.normalizePlan(s, a.draft.plan, true) : LL.phase2Economy.defaultPlan(s); }
     catch (_) { initial = LL.phase2Economy.defaultPlan(s); }
     const tabs = el('div', 'll-plan-tabs');
     tabs.setAttribute('role', 'tablist');
@@ -65,15 +65,15 @@ LL.uiPhase2Plan = (function () {
 
     const routePanel = el('div');
     const housingPanel = el('div');
-    const route = guide.routeSelect(s, d.routes, initial.routeId);
+    const career = LL.uiPhase2Career.create(s, initial, { field, select });
+    const route = career.route;
     const home = select('adultHousing', d.housing.map(h => [h.id, h.label]), initial.housing);
     const routeNote = el('div', 'll-adult-route-preview'), homeNote = el('div');
     const routeType = el('div');
-    const routeFields = el('div', 'll-adult-route-fields');
-    routeFields.append(field('Retning', route), routeType);
     const routeDescription = el('p', 'll-note');
     const admission = el('div', 'll-adult-stack ll-adult-admission');
-    routePanel.append(routeFields, routeDescription, routeNote, admission);
+    const switching = el('p', 'vp-panel vp-panel--soft vp-panel--compact');
+    routePanel.append(career.panel, routeType, routeDescription, routeNote, admission, switching);
     housingPanel.append(field('Bustad', home), homeNote);
     const daily = el('div');
     const hours = select('adultJobHours', [[0, 'Ingen deltidsjobb'], [6, '6 timar i veka'], [12, '12 timar i veka']], initial.jobHours);
@@ -84,11 +84,22 @@ LL.uiPhase2Plan = (function () {
     const percentWrap = field('Stillingsprosent', percent);
     const summerWrap = field('Sommarjobb · juni–juli', summer);
     const timeNote = el('p', 'll-note');
-    daily.append(hoursWrap, percentWrap, summerWrap, field('Fritid', leisure), timeNote);
+    const travel = select('adultTravelMonths', [[2, '2 månader'], [4, '4 månader'], [6, '6 månader']], initial.travelMonths || 2);
+    const travelWrap = field('Reisemånader først i året', travel, 'Arbeid og løn kjem etter reisa. Under Bustad vel du om du vil halde fram med å betale leige medan du er borte.');
+    const folk = select('adultFolkActivities', [['standard', 'Grunnpakke'], ['extra', 'Ekstra turar og utstyr']], initial.folkActivities);
+    const folkWrap = field('Turar og utstyr på folkehøgskulen', folk);
+    const exam = select('adultExamHours', [[4, '4 timar i veka'], [8, '8 timar i veka'], [12, '12 timar i veka']], initial.examHours);
+    const examWrap = field('Tid til eksamensførebuing', exam, 'Eit mindre jobbomfang kan gi meir overskot til å førebu seg.');
+    daily.append(hoursWrap, percentWrap, summerWrap, travelWrap, folkWrap, examWrap, field('Fritid', leisure), timeNote);
+    const transport = LL.uiPhase2Life.transport(s, initial, { field, select });
+    const family = LL.uiPhase2Life.family(s, initial, { field, select });
     const finance = el('div');
     const borrow = el('input'); borrow.type = 'checkbox'; borrow.id = 'adultBorrow'; borrow.checked = initial.borrow;
     const borrowWrap = field('Studentlån frå Lånekassen', borrow, 'Lån aukar gjelda. Stipend krev oppfylte vilkår.');
-    route.addEventListener('change', () => { if (LL.phase2State.route(route.value).kind === 'study') borrow.checked = true; });
+    route.addEventListener('change', () => {
+      const item = LL.phase2State.route(route.value);
+      if (item.kind === 'study' || item.experience === 'folk') borrow.checked = true;
+    });
     const savings = number('adultSavings', initial.savings, 10000, 100);
     const bsu = number('adultBsu', initial.bsu, 2250, 50);
     const debt = number('adultDebt', initial.extraDebt || 0, 5000, 100);
@@ -150,7 +161,9 @@ LL.uiPhase2Plan = (function () {
     budgetPanel.append(preview, expenses, error, startActions);
     addStep(tabs, box, 'adultPlanRoute', 'Retning', routePanel);
     addStep(tabs, box, 'adultPlanHousing', 'Bustad', housingPanel);
+    addStep(tabs, box, 'adultPlanTransport', 'Transport', transport.panel);
     addStep(tabs, box, 'adultPlanDaily', 'Arbeid og kvardag', daily);
+    addStep(tabs, box, 'adultPlanFamily', 'Hushald', family.panel);
     addStep(tabs, box, 'adultPlanFinance', 'Sparing og lån', finance);
     addStep(tabs, box, 'adultPlanGoals', 'Mål', goalPanel);
     addStep(tabs, box, 'adultPlanBudget', 'Budsjett', budgetPanel);
@@ -169,7 +182,8 @@ LL.uiPhase2Plan = (function () {
 
     function read() {
       return { routeId: route.value, housing: home.value, jobHours: Number(hours.value), workPercent: Number(percent.value), summerWeeks: Number(summer.value), leisure: leisure.value,
-        borrow: borrow.checked, savings: Number(savings.value), bsu: Number(bsu.value), extraDebt: Number(debt.value) };
+        roleId: career.work.value, travelMonths: Number(travel.value), folkActivities: folk.value, examHours: Number(exam.value),
+        transport: transport.read(), family: family.read(), borrow: borrow.checked, savings: Number(savings.value), bsu: Number(bsu.value), extraDebt: Number(debt.value) };
     }
     function readGoals() {
       const current = LL.phase2State.route(route.value);
@@ -182,6 +196,9 @@ LL.uiPhase2Plan = (function () {
       hoursWrap.hidden = !studying; summerWrap.hidden = !studying; percentWrap.hidden = studying;
       borrowWrap.hidden = !studying || item.kind === 'bridge';
       const studyYears = LL.phase2State.progress(s, item.id).years;
+      travelWrap.hidden = item.experience !== 'travel';
+      folkWrap.hidden = item.experience !== 'folk';
+      examWrap.hidden = !['retake', 'science'].includes(item.experience);
       goalFields.forEach(g => {
         g.target.disabled = g.choice.value === 'utdanning';
         g.targetLabel.textContent = g.choice.value === 'utdanning' ? 'Studieår som skal fullførast' :
@@ -193,15 +210,37 @@ LL.uiPhase2Plan = (function () {
       routeType.replaceChildren(el('strong', '', 'Type løp'), el('div', '', guide.routeType(s, item)));
       routeDescription.textContent = item.note;
       const studyAdmission = LL.phase2State.studyAdmission(s, item);
-      const admissionBlocked = studyAdmission?.admitted === false;
+      const formal = LL.phase2Paths.qualification(s, item);
+      const admissionBlocked = formal || studyAdmission?.admitted === false;
       const wasExpanded = admission.querySelector('details')?.open;
-      admission.replaceChildren(...guide.admissions(studyAdmission, wasExpanded));
+      admission.replaceChildren(...guide.admissions(studyAdmission, wasExpanded, formal));
+      if (!studyAdmission && formal) admission.append(el('p', 'vp-panel vp-panel--soft vp-panel--compact', formal));
       liveTitle.textContent = admissionBlocked ? 'Budsjettdøme per månad' : 'Budsjett per månad';
+      switching.textContent = LL.phase2Paths.change(s, item) || '';
+      switching.hidden = !switching.textContent;
       routeNote.replaceChildren();
       const vignette = el('div', 'll-adult-route-art'); vignette.append(LL.artVignette.create(item.art)); routeNote.append(vignette);
       if (studying) routeNote.append(LL.uiPhase2Visuals.studySteps(s, item));
+      if (studying && item.roles?.length) {
+        routeNote.append(el('p', 'll-note', 'Etter utdanninga kan du mellom anna arbeide som ' +
+          new Intl.ListFormat('nn-NO').format(item.roles.slice(0, 3).map(role => role.label.toLocaleLowerCase('nn-NO'))) + '.'));
+      }
+      const work = LL.phase2Paths.role(s, item, draft.roleId);
+      const paths = LL.phase2Paths.otherRoutes(item, work?.occupation);
+      if (paths.length) routeNote.append(el('p', 'll-note', work.label + ' er også ei mogeleg rolle etter «' + paths[0].label + '».'));
+      if (item.source) {
+        const source = el('a', '', 'Kjelde til utdanningsløpet');
+        source.href = item.source; source.target = '_blank'; source.rel = 'noopener noreferrer';
+        routeNote.append(source);
+      }
       if (a.routeId && a.routeId !== item.id && studying) routeNote.append(el('p', 'll-note', studyYears ? 'Du held fram der du slapp.' : 'Nytt studium startar på år 1. Tidlegare framdrift er lagra.'));
       const studentOption = Array.from(home.options).find(o => o.value === 'hybel'); studentOption.disabled = !studying;
+      const hostelOption = Array.from(home.options).find(o => o.value === 'internat'); hostelOption.disabled = item.experience !== 'folk';
+      if (item.experience === 'folk') { home.value = draft.housing = 'internat'; home.disabled = true; }
+      else {
+        home.disabled = false;
+        if (home.value === 'internat') home.value = draft.housing = 'heime';
+      }
       if (!studying && home.value === 'hybel') { home.value = 'kollektiv'; draft.housing = 'kollektiv'; }
       const housing = d.housing.find(h => h.id === home.value);
       bsu.disabled = !LL.phase2Housing.canSaveBsu(s, draft);
@@ -213,14 +252,19 @@ LL.uiPhase2Plan = (function () {
       try {
         const estimate = LL.phase2Economy.preview(s, draft);
         guide.homeNote(housing, estimate, homeNote);
+        transport.update(estimate);
+        family.update(estimate);
         liveRows.replaceChildren(...guide.liveBudget(estimate));
-        preview.append(LL.uiPhase2Visuals.moneyFlow([['Arbeidsinntekt', estimate.wage], ['Studentlån', estimate.loan, 'bookOpen'], ['Påbyggstøtte', estimate.bridge, 'bookOpen'], ['Utgifter og skatt', estimate.expense]]));
+        preview.append(LL.uiPhase2Visuals.moneyFlow([['Arbeidsinntekt', estimate.wage - estimate.parental],
+          ['Foreldrepengar · spelanslag', estimate.parental, 'users'], ['Studentlån', estimate.loan, 'bookOpen'],
+          ['Påbyggstøtte', estimate.bridge, 'bookOpen'], ['Anna støtte til familien', estimate.benefit, 'users'], ['Utgifter og skatt', estimate.expense]]));
         const values = [['Til overs før sparing og nedbetaling', estimate.available], ['Sparing og ekstra nedbetaling', estimate.saved], ['Konto etter flytting og byte', estimate.firstCash]];
         values.forEach(([label, value]) => { const row = el('div', 'll-budget-row'); row.append(el('span', '', label), el('strong', '', LL.util.kr(value))); preview.append(row); });
         if (estimate.move.deposit) {
           const deposit = LL.util.kr(estimate.move.deposit) + ' depositum';
           preview.append(LL.uiPhase2Visuals.token('lock', deposit, deposit + ' bunde ved flytting'));
         }
+        if (estimate.transport.price || estimate.transport.sale) preview.append(el('p', '', 'Transport ved årsstart · kjøp ' + LL.util.kr(estimate.transport.price) + ' og sal ' + LL.util.kr(estimate.transport.sale) + '.'));
         const firstMonth = estimate.firstMonth;
         expenseRows.replaceChildren(...Object.entries({ ...firstMonth.expenses, mortgagePrincipal: firstMonth.mortgage.principal }).filter(([, value]) => value).map(([key, value]) => {
           const row = el('div', 'll-budget-row');
@@ -235,9 +279,9 @@ LL.uiPhase2Plan = (function () {
         const needsDeposit = estimate.firstCash < 0 && estimate.move.deposit > estimate.move.returned;
         const blockedPurchase = estimate.move.purchase && (estimate.move.purchase.requiresJob || estimate.firstCash < 0);
         error.textContent = admissionBlocked ? 'Sjå opptakskrava under Retning, og vel ei retning du kan starte.' :
-          duplicate ? 'Vel to ulike mål.' : share > 100 ? 'Fordelinga av fri sparing kan høgst vere 100 %.' :
+          LL.phase2Economy.planIssue(s, estimate) || (duplicate ? 'Vel to ulike mål.' : share > 100 ? 'Fordelinga av fri sparing kan høgst vere 100 %.' :
           blockedPurchase ? 'Bustadkjøpet krev finansiering. Opne Bustad for å sjå kva som manglar.' :
-          needsDeposit ? 'Flytting krev meir pengar no. Hent fri buffer frå oversikta eller vel eit rimelegare bustadval.' : '';
+          needsDeposit ? 'Flytting krev meir pengar no. Hent fri buffer frå oversikta eller vel eit rimelegare bustadval.' : '');
         start.disabled = Boolean(error.textContent);
         error.hidden = !error.textContent;
         if (estimate.firstCash < 0) preview.append(ui.button('Til kontoen og fri buffer', ui.home));
@@ -262,16 +306,24 @@ LL.uiPhase2Plan = (function () {
         invalid.reportValidity();
         return;
       }
+      const plan = LL.phase2Economy.normalizePlan(s, read());
+      const goals = readGoals();
       LL.uiPlanSteps.confirmStart(steps, 'Vil du starte året no?', 'Start året likevel', () => {
-        try {
-          LL.phase2Sim.begin(s, read(), readGoals()); delete a.draft; ui.save(); LL.uiPhase2Play.render();
-        } catch (e) {
-          error.textContent = e.message;
-          error.hidden = false;
-        }
+        LL.uiPhase2Life.confirm(s, plan, approvals => {
+          try {
+            LL.phase2Sim.begin(s, plan, goals, approvals); delete a.draft; ui.save(); LL.uiPhase2Play.render();
+          } catch (e) {
+            error.textContent = e.message;
+            error.hidden = false;
+          }
+        });
       });
     });
     update();
+    if (focusPanel) {
+      const target = box.querySelector('#' + focusPanel);
+      if (target) steps.reveal(target);
+    }
   }
   return { open };
 })();

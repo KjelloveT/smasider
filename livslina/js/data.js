@@ -15,12 +15,15 @@ LL.data = (function () {
   let adult = null;
 
   async function loadAll() {
-    const [g, l, h, r, a] = await Promise.all([
+    const [g, l, h, r, a, paths, life] = await Promise.all([
       fetch('data/grunndata.json?v=2').then(r => r.json()),
       fetch('data/linjer.json').then(r => r.json()),
       fetch('data/hendingar.json?v=10').then(r => r.json()).catch(() => ({ events: [], summerEvents: [] })),
-      fetch('data/rombutikk.json').then(r => r.json()),
-      fetch('data/fase2.json?v=5').then(r => { if (!r.ok) throw new Error('Fase 2-data manglar.'); return r.json(); })
+      fetch('data/rombutikk.json?v=2').then(r => r.json()),
+      ...['fase2.json?v=5', 'fase2-vegar.json', 'fase2-kvardag.json'].map(file => fetch('data/' + file).then(r => {
+        if (!r.ok) throw new Error('Fase 2-data manglar.');
+        return r.json();
+      }))
     ]);
     base = g;
     programs = l.programs || [];
@@ -31,7 +34,7 @@ LL.data = (function () {
     }
     roomShop = r;
     if (a.app !== 'livslina' || a.version !== 1 || !Array.isArray(a.routes) || !Array.isArray(a.events)) throw new Error('Fase 2 har eit ukjent dataformat.');
-    adult = a;
+    adult = LL.phase2Paths.merge(a, paths, life);
     return { base, programs, events };
   }
 

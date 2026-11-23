@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.9">
 <link rel="stylesheet" href="css/style.css?v=6">
-<link rel="stylesheet" href="css/phase2.css?v=6">
+<link rel="stylesheet" href="css/phase2.css?v=7">
   <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
 <body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-layout="medium" data-vp-site-footer>
@@ -197,6 +197,7 @@
     <div class="ll-room-layout">
       <section class="vp-panel vp-panel--plain ll-room-stage-panel" aria-labelledby="roomSceneTitle">
         <h3 class="heading4 no-mt" id="roomSceneTitle">Slik ser rommet ut</h3>
+        <div id="roomAdultControls" class="ll-adult-stack" hidden></div>
         <div id="roomDiorama" class="ll-room-scene"></div>
         <p class="vp-help">Vel ein ting i butikken for å sjå henne i rommet før du kjøper.</p>
       </section>
@@ -211,10 +212,12 @@
           <p class="ll-eyebrow">Vald vare</p>
           <h4 id="roomSelectedName"></h4>
           <p id="roomSelectedDescription" class="ll-note"></p>
+          <div id="roomDestination" hidden></div>
           <div class="ll-product-action-row">
             <strong id="roomSelectedPrice"></strong>
             <button class="vp-button vp-button--primary" id="roomAction" type="button"></button>
           </div>
+          <div id="roomInventoryActions" class="vp-actions" hidden></div>
         </article>
         <p id="roomShopStatus" class="ll-note" role="status" aria-live="polite"></p>
       </section>
@@ -520,41 +523,47 @@
 
 <script src="assets/prototype/resources-v5/item-catalog.js"></script>
 <script src="assets/prototype/resources-v5/bed-price-ladder.js"></script>
-<script src="assets/prototype/layout-room-model.js?v=2"></script>
+<script src="assets/prototype/layout-room-model.js?v=3"></script>
 <script src="assets/prototype/character-builder-model.js"></script>
 <script src="assets/prototype/character-builder-art.js"></script>
 
 <script src="js/util.js"></script>
-<script src="js/data.js?v=14"></script>
-<script src="js/state.js?v=10"></script>
-<script src="js/phase2-state.js?v=4"></script>
+<script src="js/phase2-paths.js?v=1"></script>
+<script src="js/data.js?v=15"></script>
+<script src="js/state.js?v=11"></script>
+<script src="js/phase2-transport.js?v=1"></script>
+<script src="js/phase2-family.js?v=1"></script>
+<script src="js/phase2-rooms.js?v=1"></script>
+<script src="js/phase2-state.js?v=5"></script>
 <script src="js/storage.js?v=10"></script>
-<script src="js/economy.js?v=3"></script>
+<script src="js/economy.js?v=4"></script>
 <script src="js/events.js"></script>
 <script src="js/sim.js?v=2"></script>
-<script src="js/phase2-housing.js"></script>
-<script src="js/phase2-economy.js?v=4"></script>
-<script src="js/phase2-effects.js"></script>
-<script src="js/phase2-events.js?v=2"></script>
-<script src="js/phase2-sim.js?v=3"></script>
+<script src="js/phase2-housing.js?v=2"></script>
+<script src="js/phase2-economy.js?v=5"></script>
+<script src="js/phase2-effects.js?v=2"></script>
+<script src="js/phase2-events.js?v=3"></script>
+<script src="js/phase2-sim.js?v=4"></script>
 <script src="js/art-character.js"></script>
-<script src="js/art-room.js?v=2"></script>
-<script src="js/art-vignettes.js?v=3"></script>
+<script src="js/art-room.js?v=3"></script>
+<script src="js/art-vignettes.js?v=4"></script>
 <script src="js/art-programs.js"></script>
 <script src="js/ui-setup.js?v=11"></script>
 <script src="js/ui-home.js?v=10"></script>
-<script src="js/ui-room.js"></script>
+<script src="js/ui-room.js?v=2"></script>
 <script src="js/ui-plan-steps.js"></script>
 <script src="js/ui-budget.js?v=4"></script>
 <script src="js/ui-summer.js"></script>
 <script src="js/ui-playback.js"></script>
 <script src="js/ui-report.js?v=10"></script>
 <script src="js/ui-phase2-visuals.js?v=3"></script>
-<script src="js/ui-phase2-guide.js?v=3"></script>
-<script src="js/ui-phase2-report.js?v=2"></script>
-<script src="js/ui-phase2.js?v=4"></script>
-<script src="js/ui-phase2-plan.js?v=7"></script>
-<script src="js/ui-phase2-play.js?v=3"></script>
+<script src="js/ui-phase2-guide.js?v=4"></script>
+<script src="js/ui-phase2-career.js?v=1"></script>
+<script src="js/ui-phase2-life.js?v=1"></script>
+<script src="js/ui-phase2-report.js?v=3"></script>
+<script src="js/ui-phase2.js?v=5"></script>
+<script src="js/ui-phase2-plan.js?v=8"></script>
+<script src="js/ui-phase2-play.js?v=4"></script>
 <script src="js/main.js?v=10"></script>
 </body>
 </html>

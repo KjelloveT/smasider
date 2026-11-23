@@ -12,6 +12,7 @@ LL.uiPhase2Report = (function () {
       ['BSU', end.bsu - start.bsu],
       ['Depositum', end.deposit - start.deposit],
       ['Bustadverdi', (end.propertyValue || 0) - (start.propertyValue || 0)],
+      ['Verdi av transportmiddel', (end.vehicleValue || 0) - (start.vehicleValue || 0)],
       ['Endring i samla gjeld', start.debt - end.debt]
     ];
   }

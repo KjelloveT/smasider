@@ -56,6 +56,10 @@ hifinivåa i rommet](../room/hifi-placement-preview.png).
 
 ## Status
 
+Fire nye sprites for kjøkenbenk, matbord, barneseng og kiste er målsette i
+[`room-fixtures.json`](room-fixtures.json). Rommodellen teiknar dei planlagde
+festepunkta og plasserer ressursane i Livslina.
+
 Mål, festepunkt og biletfiler er lista i `manifest.json`. Spritefamiliane er
 viste i den samansette romprøva, men er framleis prototypeillustrasjonar.
 Vurder kvar familie og kombinasjon vidare før endeleg bruk i spelet. Felles

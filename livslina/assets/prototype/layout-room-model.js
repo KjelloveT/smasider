@@ -16,6 +16,12 @@
   const colors={wood:["#dbc39a","#b99b72","#cbaa80"],sage:["#cad9bb","#8aa77b","#abc29b"],coral:["#f2c6b4","#c98f79","#dfaa94"],plum:["#d6c2df","#a78cb3","#baa3c5"],teal:["#bbdce5","#75a4b3","#95bfcd"],cream:["#fff7df","#d5c8ac","#e9dfc6"],metal:["#8d9398","#4d5860","#6d777e"]};
   const names={bed:"Seng",desk:"Pult",chair:"Stol",rug:"Teppe",sofa:"Sofa","tv-bench":"TV-benk",tv:"TV",pc:"PC",decor:"Pynt",floorItem:"Golvting"};
   const floorTypes={speaker:{w:28,d:30,h:90,label:"Høgtalar"},plant:{w:40,d:40,h:110,label:"Plante"},nightstand:{w:45,d:40,h:55,label:"Nattbord"}};
+  const roomFixtures={
+    kitchenUnit:{u:175,v:0,w:195,d:62,h:91,label:"Kjøkenbenk",file:"kitchen-unit.png"},
+    dining:{u:222,v:149,w:98,d:70,h:74,label:"Matbord",file:"dining-table.png"},
+    crib:{u:142,v:8,w:75,d:133,h:92,label:"Barneseng",file:"baby-crib.png"},
+    chest:{u:302,v:98,w:72,d:44,h:49,label:"Oppbevaringskiste",file:"toy-chest.png"}
+  };
   function tierIndex(value){const n=Number(value);return Number.isInteger(n)&&n>=1&&n<=5?n-1:0;}
   function tierItem(family,value){const tier=tierIndex(value),definition=catalog.families[family],dims=definition.options[tier].dimensions;
     return Object.assign({family:family,tier:tier,variant:tier,label:definition.label}, {w:dims[0],d:dims[1],h:dims[2]});}
@@ -90,14 +96,43 @@
     if(gameRoom&&selection.roomView){
       // Romma brukar dei målsette festepunkta frå v4. Kvar ting blir vist éin stad.
       const hide={
-        bedroom:["sofa","rug"],
+        bedroom:[],
         "bedroom-house":["sofa","rug","desk","chair","pc","decor"],
-        living:["bed","desk","chair","pc","decor","floorItem"],
-        workroom:["bed","sofa","rug","floorItem"]
+        living:["bed","desk","chair","pc","decor"],
+        workroom:["bed","sofa","floorItem"],
+        kitchen:["bed","desk","chair","sofa","rug","tv-bench","tv","pc","decor","floorItem"],
+        extra:["desk","chair","sofa","pc","decor","tv-bench","tv"]
       }[selection.roomView]||[];
       hide.forEach(function(key){delete items[key];});
     }
+    if(gameRoom){
+      if(selection.roomView==="kitchen")items.kitchenUnit={...roomFixtures.kitchenUnit};
+      ["dining","crib","chest"].forEach(function(key){
+        if(selection[key+"Present"])items[key]={...roomFixtures[key]};
+      });
+      if(items.crib&&items.floorItem){items.floorItem.u=150;items.floorItem.v=183;}
+      if(selection.roomView==="living"&&items.floorItem){items.floorItem.u=140;items.floorItem.v=282;}
+      (selection.unfurnished||[]).forEach(function(key){delete items[key];});
+      if(!items.desk){delete items.pc;if(items.decor?.mount==="desk")delete items.decor;}
+    }
     return items;
+  }
+
+  function fixture(a, key){
+    const {u,v,w,d,h}=a;
+    if(key==="kitchenUnit"){
+      let out=box(u,v,0,w,d,h-4,"sage")+box(u,v,h-4,w,d,4,"wood");
+      for(let i=1;i<4;i++)out+=screenOnV(u+i*w/4,v+d+.1,18,3,62,"metal");
+      return out+box(u+12,v+8,h,45,32,1,"metal")+box(u+125,v+9,h,49,35,1,"metal");
+    }
+    if(key==="dining")return legs(u,v,w,d,h-4,"wood")+box(u,v,h-4,w,d,4,"wood");
+    if(key==="crib"){
+      let out=legs(u,v,w,d,24,"wood")+box(u,v,24,w,d,12,"cream");
+      out+=box(u,v,30,w,4,h-30,"wood")+box(u,v+d-4,30,w,4,h-30,"wood");
+      for(let i=8;i<d-4;i+=12)out+=box(u+w-4,v+i,32,4,4,h-33,"wood");
+      return out+box(u+w-4,v,86,4,d,6,"wood");
+    }
+    return box(u,v,0,w,d,h-5,"sage")+box(u,v,h-5,w,d,5,"wood");
   }
   function wallLayout(selection,items){
     const result=[];
@@ -527,6 +562,7 @@
     if(items.decor&&items.decor.mount==="wall")out+='<g data-furniture="decor">'+sprite(decorObject(items.decor),items.decor.kind+"-tier-0"+(items.decor.tier+1)+".png",assetRoot,"asset-test__sprite--wall")+'</g>';
     if(items.rug)out+='<g data-furniture="rug">'+sprite(rug(items.rug),"rug-tier-0"+(items.rug.tier+1)+".png",assetRoot,"asset-test__sprite--rug")+'</g>';
     const renderers={bed:bed,desk:desk,chair:chair,sofa:sofa,"tv-bench":bench,tv:function(a){return tieredFurniture(a,"tv");},pc:function(a){return tieredFurniture(a,"pc");}};
+    Object.keys(roomFixtures).forEach(function(key){renderers[key]=function(a){return fixture(a,key);};});
     if(items.floorItem)renderers.floorItem=function(a){return tieredFurniture(a,a.kind);};
     if(items.decor&&items.decor.mount!=="wall")renderers.decor=decorObject;
     Object.keys(renderers).filter(function(k){return !!items[k];}).sort(function(a,b){
@@ -534,8 +570,8 @@
       if(b==="decor"&&a==="desk")return -1;
       const x=items[a],y=items[b];return (x.u+x.w/2+x.v+x.d/2)-(y.u+y.w/2+y.v+y.d/2);
     }).forEach(function(k){
-      const a=items[k],family=k==="decor"?a.kind:(k==="floorItem"?a.kind:k),file=k==="bed"&&Number.isInteger(a.tier)?"bed-tier-0"+(a.tier+1)+".png":
-        family==="sofa"?"sofa-0"+(a.variant+1)+".png":family+"-tier-0"+(a.tier+1)+".png";
+      const a=items[k],family=k==="decor"?a.kind:(k==="floorItem"?a.kind:k),file=a.file|| (k==="bed"&&Number.isInteger(a.tier)?"bed-tier-0"+(a.tier+1)+".png":
+        family==="sofa"?"sofa-0"+(a.variant+1)+".png":family+"-tier-0"+(a.tier+1)+".png");
       const cls=k==="decor"&&a.mount==="wall"?"asset-test__sprite--wall":"asset-test__sprite--item";
       out+='<g data-furniture="'+k+'">'+sprite(renderers[k](a),file,assetRoot,cls)+'</g>';
     });
@@ -567,5 +603,10 @@
     });});
     return errors;
   }
-  window.LivslinaRoomPlan={camera:camera,room:room,variants:variants,floorTypes:floorTypes,wallLayout:wallLayout,layout:layout,project:project,build:build,assetGuide:assetGuide,validate:validate};
+  function fixtureGuide(key){
+    const a=roomFixtures[key];
+    const markup=fixture(a,key);
+    return { markup, bounds: projectedBounds(markup), size: [a.w,a.d,a.h], contact: project(a.u,a.v,0) };
+  }
+  window.LivslinaRoomPlan={camera:camera,room:room,variants:variants,floorTypes:floorTypes,wallLayout:wallLayout,layout:layout,project:project,build:build,assetGuide:assetGuide,validate:validate,fixtureGuide:fixtureGuide,roomFixtures:roomFixtures};
 }());

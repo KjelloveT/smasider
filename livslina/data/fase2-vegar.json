@@ -1,0 +1,667 @@
+{
+  "app": "livslina",
+  "version": 1,
+  "checked": "2026-11-22",
+  "fields": {
+    "helse": "Helse og omsorg",
+    "oppvekst": "Oppvekst og utdanning",
+    "samfunn": "Samfunn og offentleg teneste",
+    "bygg": "Bygg og handverk",
+    "industri": "Industri og energi",
+    "data": "Data og teknologi",
+    "natur": "Natur, landbruk og realfag",
+    "logistikk": "Transport og logistikk",
+    "service": "Sal, service og mat",
+    "okonomi": "Økonomi, kontor og leiing",
+    "kultur": "Kultur, media og idrett",
+    "beredskap": "Tryggleik og beredskap"
+  },
+  "sources": [
+    {
+      "id": "occupation-catalogue",
+      "label": "Utdanning.no: fagfelt og yrkesskildringar",
+      "url": "https://utdanning.no/jobbkompasset/",
+      "kind": "official",
+      "year": 2026
+    },
+    {
+      "id": "occupation-code",
+      "label": "SSB: standard for yrkesklassifisering",
+      "url": "https://www.ssb.no/klass/klassifikasjoner/7",
+      "kind": "official",
+      "year": 2026
+    },
+    {
+      "id": "earnings",
+      "label": "SSB: yrkesfordelt månadsløn, brukt som bakgrunn for spelanslag",
+      "url": "https://www.ssb.no/statbank/table/11418/",
+      "kind": "official",
+      "year": 2025
+    },
+    {
+      "id": "admissions-snapshot",
+      "label": "HK-dir: poenggrenser i hovudopptaket 2026",
+      "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html",
+      "kind": "official",
+      "year": 2026
+    },
+    {
+      "id": "fagskule",
+      "label": "Samordna opptak: opptakskrav i fagskulen",
+      "url": "https://www.samordnaopptak.no/fagskole/opptakskrav/",
+      "kind": "official",
+      "year": 2026
+    },
+    {
+      "id": "folkehogskule",
+      "label": "Lånekassen: folkehøgskule i Noreg",
+      "url": "https://lanekassen.no/nb-NO/stipend-og-lan/norge/folkehogskole-i-norge/",
+      "kind": "official",
+      "year": 2026
+    }
+  ],
+  "core": {
+    "sjukepleie": {
+      "field": "helse",
+      "roles": [
+        {"id": "post", "label": "Sjukepleiar på sengepost", "rhythm": "shift"},
+        {"id": "heime", "label": "Sjukepleiar i heimetenesta", "rhythm": "shift", "payFactor": 0.98},
+        {"id": "bustad", "label": "Sjukepleiar i omsorgsbustad", "rhythm": "shift", "payFactor": 0.97}
+      ]
+    },
+    "okonomi": {
+      "field": "okonomi",
+      "roles": [
+        {"id": "okonom", "label": "Økonomimedarbeidar", "rhythm": "day"},
+        {"id": "rekneskap", "label": "Rekneskapsmedarbeidar", "rhythm": "day", "payFactor": 1.025},
+        {"id": "innkjop", "label": "Innkjøpsmedarbeidar", "rhythm": "day", "payFactor": 1.05, "occupation": "innkjop"},
+        {"id": "hr", "label": "HR-medarbeidar", "rhythm": "day", "payFactor": 1.04}
+      ]
+    },
+    "laerar": {
+      "field": "oppvekst",
+      "roles": [
+        {"id": "grunnskule", "label": "Grunnskulelærar", "rhythm": "day"},
+        {"id": "kontakt", "label": "Kontaktlærar på barnetrinnet", "rhythm": "day", "payFactor": 1.04, "experience": 1},
+        {"id": "vikar", "label": "Lærarvikar på mellomtrinnet", "rhythm": "day", "payFactor": 0.94}
+      ]
+    },
+    "tomrar": {
+      "field": "bygg",
+      "roles": [
+        {"id": "nybygg", "label": "Tømrar på nybygg", "rhythm": "early"},
+        {"id": "rehab", "label": "Tømrar i rehabilitering", "rhythm": "early", "payFactor": 1.04}
+      ]
+    },
+    "helsefag": {
+      "field": "helse",
+      "roles": [
+        {"id": "sjukeheim", "label": "Helsefagarbeidar på sjukeheim", "rhythm": "shift"},
+        {"id": "heimeteneste", "label": "Helsefagarbeidar i heimetenesta", "rhythm": "shift", "payFactor": 1.02}
+      ]
+    },
+    "itdrift": {
+      "field": "data",
+      "roles": [
+        {"id": "drift", "label": "IT-driftsteknikar", "rhythm": "day"},
+        {"id": "brukar", "label": "Brukarstøttemedarbeidar", "rhythm": "day", "payFactor": 0.96}
+      ]
+    },
+    "eige-fag": {
+      "field": "fagbrev"
+    },
+    "butikk": {
+      "field": "service",
+      "roles": [
+        {"id": "butikk", "label": "Butikkmedarbeidar", "rhythm": "shift"},
+        {"id": "kasse", "label": "Kassemedarbeidar", "rhythm": "shift", "payFactor": 0.96},
+        {"id": "kundesenter", "label": "Kundesentermedarbeidar", "rhythm": "day", "payFactor": 1.04}
+      ]
+    },
+    "lager": {
+      "field": "logistikk",
+      "roles": [
+        {"id": "lager", "label": "Lagermedarbeidar", "rhythm": "shift"},
+        {"id": "pakke", "label": "Pakkemedarbeidar", "rhythm": "early", "payFactor": 0.96},
+        {"id": "varemottak", "label": "Varemottakar", "rhythm": "early", "payFactor": 1.04}
+      ]
+    },
+    "kafe": {
+      "field": "service",
+      "roles": [
+        {"id": "kafe", "label": "Kafémedarbeidar", "rhythm": "shift"},
+        {"id": "barista", "label": "Barista", "rhythm": "early", "payFactor": 1.015},
+        {"id": "kantine", "label": "Kantinemedarbeidar", "rhythm": "day", "payFactor": 1.025}
+      ]
+    },
+    "pabygg": {
+      "field": ""
+    },
+    "friarbeid": {
+      "field": ""
+    },
+    "frikvile": {
+      "field": ""
+    },
+    "frioppleving": {
+      "field": ""
+    }
+  },
+  "routes": [
+    {
+      "id": "vernepleie",
+      "label": "Vernepleie",
+      "field": "helse",
+      "kind": "study",
+      "years": 3,
+      "annualPay": 520000,
+      "art": "adultWard",
+      "note": "Praksis og miljøarbeid. Du øver på å ta avgjerder saman med menneska du støttar.",
+      "graduate": "Vernepleiar i bufellesskap",
+      "roles": [
+        {"id": "miljo", "label": "Vernepleiar i bufellesskap", "rhythm": "shift"},
+        {"id": "dag", "label": "Vernepleiar i dagtilbod", "rhythm": "day", "payFactor": 0.97},
+        {"id": "arbeid", "label": "Miljøterapeut i arbeidstiltak", "rhythm": "day", "payFactor": 1.02}
+      ]
+    },
+    {
+      "id": "barnehage",
+      "label": "Barnehagelærar",
+      "field": "oppvekst",
+      "kind": "study",
+      "years": 3,
+      "annualPay": 510000,
+      "art": "adultEarlyYears",
+      "note": "Planlegg leik, samarbeid med foreldre og ha praksis i barnehage.",
+      "graduate": "Barnehagelærar",
+      "roles": [
+        {"id": "barnehage", "label": "Barnehagelærar", "rhythm": "day"},
+        {"id": "ute", "label": "Barnehagelærar i naturbarnehage", "rhythm": "early", "payFactor": 1.02},
+        {"id": "ped", "label": "Pedagogisk leiar", "rhythm": "day", "payFactor": 1.08, "experience": 2}
+      ]
+    },
+    {
+      "id": "sosialt",
+      "label": "Sosialt arbeid",
+      "field": "samfunn",
+      "kind": "study",
+      "years": 3,
+      "annualPay": 515000,
+      "art": "adultCommunity",
+      "note": "Praksis, samtaletrening og samarbeid om oppfølging.",
+      "graduate": "Sosionom",
+      "roles": [
+        {"id": "sosionom", "label": "Sosionom", "rhythm": "day"},
+        {"id": "nav", "label": "Arbeidsretta rettleiar", "rhythm": "day", "payFactor": 1.03},
+        {"id": "ung", "label": "Ungdomsrettleiar", "rhythm": "shift", "payFactor": 0.98}
+      ]
+    },
+    {
+      "id": "jus",
+      "label": "Rettsvitskap",
+      "field": "samfunn",
+      "kind": "study",
+      "years": 5,
+      "annualPay": 595000,
+      "art": "adultStudy",
+      "note": "Les og drøft saker og grunngjev kva regel som gjeld. Juristarbeid kan følgje etter fullført master.",
+      "graduate": "Jurist",
+      "roles": [
+        {"id": "jurist", "label": "Jurist", "rhythm": "day"},
+        {"id": "forvalting", "label": "Sakshandsamar med juridiske oppgåver", "rhythm": "day", "payFactor": 0.94},
+        {"id": "arbeid", "label": "Rådgjevar i arbeidsrett", "rhythm": "day", "payFactor": 1.06}
+      ]
+    },
+    {
+      "id": "byggingenior",
+      "label": "Byggingeniør",
+      "field": "bygg",
+      "kind": "study",
+      "years": 3,
+      "annualPay": 565000,
+      "art": "adultArchitecture",
+      "note": "Arbeid med berekningar, byggteikningar og prosjekt saman med andre.",
+      "graduate": "Konstruksjonsingeniør",
+      "roles": [
+        {"id": "konstruk", "label": "Konstruksjonsingeniør", "rhythm": "day"},
+        {"id": "prosjekt", "label": "Prosjektingeniør i bygg", "rhythm": "early", "payFactor": 1.05},
+        {"id": "bim", "label": "BIM-koordinator i bygg", "rhythm": "day", "payFactor": 1.01}
+      ],
+      "science": "hing"
+    },
+    {
+      "id": "datateknologi",
+      "label": "Bruksretta datateknologi",
+      "field": "data",
+      "kind": "study",
+      "years": 3,
+      "annualPay": 555000,
+      "art": "adultIt",
+      "note": "Løys oppgåver med kode, tilgjenge og drift i lag med andre.",
+      "graduate": "Systemutviklar",
+      "roles": [
+        {"id": "utviklar", "label": "Systemutviklar", "rhythm": "day"},
+        {"id": "test", "label": "Programvaretestar", "rhythm": "day", "payFactor": 0.95},
+        {"id": "universell", "label": "Rådgjevar for digital tilgjenge", "rhythm": "day", "payFactor": 0.99}
+      ]
+    },
+    {
+      "id": "medisin",
+      "label": "Medisin",
+      "field": "helse",
+      "kind": "study",
+      "years": 6,
+      "annualPay": 640000,
+      "art": "adultWard",
+      "note": "Seks år med teori og praksis. Første legejobb ligg etter fullført grad og autorisasjon i spelet.",
+      "graduate": "Lege i spesialisering 1",
+      "roles": [
+        {"id": "lis", "label": "Lege i spesialisering 1", "rhythm": "shift"},
+        {"id": "vikar", "label": "Legevikar med autorisasjon", "rhythm": "shift", "payFactor": 1.02}
+      ],
+      "science": "merod"
+    },
+    {
+      "id": "bioingenior",
+      "label": "Bioingeniør",
+      "field": "helse",
+      "kind": "study",
+      "years": 3,
+      "annualPay": 530000,
+      "art": "adultLaboratory",
+      "note": "Laboratoriearbeid, prøvesvar og kvalitetssikring i praksis.",
+      "graduate": "Bioingeniør på sjukehus",
+      "roles": [
+        {"id": "lab", "label": "Bioingeniør på sjukehus", "rhythm": "shift"},
+        {"id": "blod", "label": "Bioingeniør på blodbank", "rhythm": "day", "payFactor": 1.015},
+        {"id": "kontroll", "label": "Bioingeniør i kvalitetsarbeid", "rhythm": "day", "payFactor": 1.035}
+      ],
+      "science": "bio"
+    },
+    {
+      "id": "naturforvalting",
+      "label": "Natur- og miljøforvalting",
+      "field": "natur",
+      "kind": "study",
+      "years": 3,
+      "annualPay": 515000,
+      "art": "adultGreenhouse",
+      "note": "Kartlegg natur ute og drøft korleis ein tek vare på område som er i bruk.",
+      "graduate": "Miljørådgjevar",
+      "roles": [
+        {"id": "rad", "label": "Miljørådgjevar", "rhythm": "day"},
+        {"id": "kart", "label": "Naturkartleggjar", "rhythm": "early", "payFactor": 0.98},
+        {"id": "park", "label": "Naturforvaltar", "rhythm": "day", "payFactor": 1.02}
+      ]
+    },
+    {
+      "id": "logistikk",
+      "label": "Logistikk og forsyning",
+      "field": "logistikk",
+      "kind": "study",
+      "years": 3,
+      "annualPay": 530000,
+      "art": "adultPacking",
+      "note": "Planlegg lager, vareflyt og transport når tid og plass er avgrensa.",
+      "graduate": "Logistikkplanleggjar",
+      "roles": [
+        {"id": "plan", "label": "Logistikkplanleggjar", "rhythm": "day"},
+        {"id": "transport", "label": "Transportkoordinator", "rhythm": "shift", "payFactor": 1.04},
+        {"id": "flyt", "label": "Forsyningsmedarbeidar", "rhythm": "day", "payFactor": 0.98},
+        {"id": "innkjop", "label": "Innkjøpsmedarbeidar", "rhythm": "day", "payFactor": 1.025, "occupation": "innkjop"}
+      ]
+    },
+    {
+      "id": "media",
+      "label": "Medium og kommunikasjon",
+      "field": "kultur",
+      "kind": "study",
+      "years": 3,
+      "annualPay": 505000,
+      "art": "adultMediaDesk",
+      "note": "Lag medieinnhald for eit publikum og jobb med idé, verifisering og publisering.",
+      "graduate": "Innhaldsprodusent",
+      "roles": [
+        {"id": "innhald", "label": "Innhaldsprodusent", "rhythm": "day"},
+        {"id": "komm", "label": "Kommunikasjonsmedarbeidar", "rhythm": "day", "payFactor": 1.035},
+        {"id": "lyd", "label": "Lyd- og medieprodusent", "rhythm": "shift", "payFactor": 1.01}
+      ]
+    },
+    {
+      "id": "beredskap",
+      "label": "Samfunnstryggleik",
+      "field": "beredskap",
+      "kind": "study",
+      "years": 3,
+      "annualPay": 540000,
+      "art": "adultEmergency",
+      "note": "Øv på beredskapsplanar, samhandling og risikovurdering i lokalsamfunnet.",
+      "graduate": "Beredskapskoordinator",
+      "roles": [
+        {"id": "koordinator", "label": "Beredskapskoordinator", "rhythm": "day"},
+        {"id": "tryggleik", "label": "Tryggleiksrådgjevar", "rhythm": "day", "payFactor": 1.04},
+        {"id": "oving", "label": "Øvingskoordinator", "rhythm": "day", "payFactor": 1.015}
+      ]
+    },
+    {
+      "id": "fagskule-bygg",
+      "label": "Fagskule i bygg",
+      "field": "bygg",
+      "kind": "study",
+      "years": 2,
+      "annualPay": 550000,
+      "art": "adultArchitecture",
+      "note": "Gå frå fagbrev til planlegging, teikning og leiing på byggeplass.",
+      "graduate": "Kalkulatør i bygg",
+      "roles": [
+        {"id": "kalk", "label": "Kalkulatør i bygg", "rhythm": "day"},
+        {"id": "bim", "label": "BIM-teknikar", "rhythm": "day", "payFactor": 1.045},
+        {"id": "lag", "label": "Arbeidsleiar i bygg", "rhythm": "early", "payFactor": 1.075, "experience": 1}
+      ],
+      "education": "fagskule",
+      "programs": [
+        "bygg-anlegg"
+      ],
+      "source": "https://www.samordnaopptak.no/fagskole/opptakskrav/"
+    },
+    {
+      "id": "fagskule-automasjon",
+      "label": "Fagskule i automasjon",
+      "field": "industri",
+      "kind": "study",
+      "years": 2,
+      "annualPay": 565000,
+      "art": "adultElectronics",
+      "note": "Lær om styring og vedlikehald av produksjonsutstyr, med praktiske prosjekt.",
+      "graduate": "Automasjonsteknikar",
+      "roles": [
+        {"id": "automasjon", "label": "Automasjonsteknikar", "rhythm": "day"},
+        {"id": "vedlikehald", "label": "Vedlikehaldsplanleggjar", "rhythm": "day", "payFactor": 1.02},
+        {"id": "drift", "label": "Driftskoordinator i industrien", "rhythm": "shift", "payFactor": 1.05, "experience": 1}
+      ],
+      "education": "fagskule",
+      "programs": [
+        "elektro",
+        "teknologi-industri"
+      ],
+      "source": "https://www.samordnaopptak.no/fagskole/opptakskrav/"
+    },
+    {
+      "id": "fagskule-omsorg",
+      "label": "Fagskule i helse og miljøarbeid",
+      "field": "helse",
+      "kind": "study",
+      "years": 1,
+      "annualPay": 495000,
+      "art": "adultWard",
+      "note": "Bygg vidare på fagbrev og utforsk meir ansvar i omsorgskvardagen.",
+      "graduate": "Helsefagarbeidar i demensomsorg",
+      "roles": [
+        {"id": "demens", "label": "Helsefagarbeidar i demensomsorg", "rhythm": "shift"},
+        {"id": "miljo", "label": "Helsefagleg miljøarbeidar", "rhythm": "shift", "payFactor": 1.04}
+      ],
+      "education": "fagskule",
+      "programs": [
+        "helse-oppvekst"
+      ],
+      "source": "https://www.samordnaopptak.no/fagskole/opptakskrav/"
+    },
+    {
+      "id": "elektro",
+      "label": "Arbeid i elektrofag",
+      "field": "industri",
+      "kind": "job",
+      "program": "elektro",
+      "annualPay": 515000,
+      "art": "adultElectronics",
+      "note": "Oppdrag med praktisk feilsøking, planlegging og samarbeid.",
+      "roles": [
+        {"id": "elektrikar", "label": "Elektrikar", "rhythm": "early"},
+        {"id": "service", "label": "Serviceelektrikar", "rhythm": "early", "payFactor": 1.05}
+      ]
+    },
+    {
+      "id": "industri",
+      "label": "Arbeid i industrifag",
+      "field": "industri",
+      "kind": "job",
+      "program": "teknologi-industri",
+      "annualPay": 512000,
+      "art": "adultProduction",
+      "note": "Praktisk vedlikehald og faste rutinar på eit arbeidslag.",
+      "roles": [
+        {"id": "mekanikar", "label": "Industrimekanikar", "rhythm": "shift"},
+        {"id": "montor", "label": "Industrimontør", "rhythm": "early", "payFactor": 0.97}
+      ]
+    },
+    {
+      "id": "barnearbeid",
+      "label": "Arbeid med barn og unge",
+      "field": "oppvekst",
+      "kind": "job",
+      "program": "helse-oppvekst",
+      "annualPay": 455000,
+      "art": "adultEarlyYears",
+      "note": "Legg til rette for leik og aktivitet og samarbeid med føresette og kollegaer.",
+      "roles": [
+        {"id": "sfo", "label": "Barne- og ungdomsarbeidar i SFO", "rhythm": "day"},
+        {"id": "barne", "label": "Barne- og ungdomsarbeidar i barnehage", "rhythm": "day", "payFactor": 1.025}
+      ]
+    },
+    {
+      "id": "kokk",
+      "label": "Arbeid på kjøken",
+      "field": "service",
+      "kind": "job",
+      "program": "restaurant-mat",
+      "annualPay": 470000,
+      "art": "adultCafe",
+      "note": "Førebu mat, fordel oppgåver og handter travle serveringar.",
+      "roles": [
+        {"id": "kokk", "label": "Kokk", "rhythm": "shift"},
+        {"id": "ernaering", "label": "Ernæringskokk", "rhythm": "early", "payFactor": 1.035}
+      ]
+    },
+    {
+      "id": "naturbruk",
+      "label": "Arbeid i naturbruk",
+      "field": "natur",
+      "kind": "job",
+      "program": "naturbruk",
+      "annualPay": 460000,
+      "art": "adultGreenhouse",
+      "note": "Arbeid med dyrking og oppgåver som følgjer sesongen.",
+      "roles": [
+        {"id": "gartnar", "label": "Gartnar", "rhythm": "early"},
+        {"id": "agro", "label": "Landbruksarbeidar", "rhythm": "early", "payFactor": 1.035}
+      ]
+    },
+    {
+      "id": "folke-friluft",
+      "label": "Folkehøgskule · friluftsliv",
+      "field": "kultur",
+      "kind": "year",
+      "experience": "folk",
+      "years": 1,
+      "annualPay": 0,
+      "art": "adultBoarding",
+      "note": "Bu på internat og vel kor mykje du vil bruke på turar og utstyr.",
+      "source": "https://www.folkehogskole.no/om-folkehogskole/sann-soker-du-pa-folkehogskole"
+    },
+    {
+      "id": "folke-kultur",
+      "label": "Folkehøgskule · musikk og medium",
+      "field": "kultur",
+      "kind": "year",
+      "experience": "folk",
+      "years": 1,
+      "annualPay": 0,
+      "art": "adultMusic",
+      "note": "Øv, lag ei framsyning og del kvardagen på internatet med andre.",
+      "source": "https://www.folkehogskole.no/om-folkehogskole/sann-soker-du-pa-folkehogskole"
+    },
+    {
+      "id": "reise",
+      "label": "Reiseår med arbeidsmånader",
+      "field": "",
+      "kind": "year",
+      "experience": "travel",
+      "annualPay": 395000,
+      "art": "adultTrain",
+      "note": "Vel kor mange månader du reiser. Arbeidsinntekt kjem i resten av året."
+    },
+    {
+      "id": "privatist",
+      "label": "Forbetre karakterar som privatist",
+      "field": "",
+      "kind": "year",
+      "experience": "retake",
+      "annualPay": 390000,
+      "art": "adultGuidance",
+      "note": "Set av tid og pengar til førebuing og eksamen. Eit betre resultat tel i den ordinære kvoten.",
+      "source": "https://www.samordnaopptak.no/universitet-og-hogskole/poengberegning/forbedringer-og-nye-fag/"
+    },
+    {
+      "id": "realfag",
+      "label": "Ta særkrav i realfag",
+      "field": "",
+      "kind": "year",
+      "experience": "science",
+      "annualPay": 380000,
+      "art": "adultLaboratory",
+      "note": "Ta eit forenkla realfagsløp som dekkjer spelkrava til ingeniør, bioingeniør og medisin.",
+      "source": "https://www.samordnaopptak.no/universitet-og-hogskole/opptakskrav/spesielle-opptakskrav/"
+    }
+  ],
+  "examples": {
+    "vernepleie": [
+      {
+        "institution": "OsloMet",
+        "campus": "Kjeller",
+        "year": 2026,
+        "first": 33.3,
+        "ordinary": 46.4,
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html"
+      }
+    ],
+    "barnehage": [
+      {
+        "institution": "USN",
+        "campus": "Vestfold",
+        "year": 2026,
+        "first": "all",
+        "ordinary": "all",
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html"
+      }
+    ],
+    "sosialt": [
+      {
+        "institution": "OsloMet",
+        "campus": "Pilestredet",
+        "year": 2026,
+        "first": 45.9,
+        "ordinary": 53.8,
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html"
+      }
+    ],
+    "jus": [
+      {
+        "institution": "Universitetet i Innlandet",
+        "campus": "Lillehammer",
+        "year": 2026,
+        "first": 51.2,
+        "ordinary": 57.3,
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html"
+      }
+    ],
+    "byggingenior": [
+      {
+        "institution": "USN",
+        "campus": "Porsgrunn",
+        "year": 2026,
+        "first": "all",
+        "ordinary": "all",
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html"
+      }
+    ],
+    "datateknologi": [
+      {
+        "institution": "OsloMet",
+        "campus": "Pilestredet",
+        "year": 2026,
+        "first": 38.8,
+        "ordinary": 50.1,
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html"
+      }
+    ],
+    "medisin": [
+      {
+        "institution": "UiO",
+        "campus": "Oslo/Innlandet",
+        "year": 2026,
+        "first": 57.5,
+        "ordinary": 67.3,
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html",
+        "gameOrdinary": 59
+      }
+    ],
+    "bioingenior": [
+      {
+        "institution": "OsloMet",
+        "campus": "Pilestredet",
+        "year": 2026,
+        "first": 45.5,
+        "ordinary": 56.4,
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html"
+      }
+    ],
+    "naturforvalting": [
+      {
+        "institution": "USN",
+        "campus": "Bø",
+        "year": 2026,
+        "first": "all",
+        "ordinary": "all",
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html"
+      }
+    ],
+    "logistikk": [
+      {
+        "institution": "Høgskolen i Molde",
+        "campus": "Molde",
+        "year": 2026,
+        "first": "all",
+        "ordinary": "all",
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html"
+      }
+    ],
+    "media": [
+      {
+        "institution": "OsloMet",
+        "campus": "Pilestredet",
+        "year": 2026,
+        "first": 46,
+        "ordinary": 52.3,
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html"
+      },
+      {
+        "institution": "UiT",
+        "campus": "Tromsø · medie- og dokumentasjonsvitskap",
+        "year": 2026,
+        "first": "all",
+        "ordinary": "all",
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html"
+      }
+    ],
+    "beredskap": [
+      {
+        "institution": "UiT",
+        "campus": "Tromsø",
+        "year": 2026,
+        "first": 38.7,
+        "ordinary": 44.3,
+        "url": "https://sokertallrapport.samordnaopptak.no/2026/figurer/side_5_konkurranse_hoved/tabeller/poenggrense_min_26.html"
+      }
+    ]
+  }
+}

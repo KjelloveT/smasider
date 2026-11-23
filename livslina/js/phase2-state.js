@@ -62,15 +62,14 @@ LL.phase2State = (function () {
     s.age = age;
     s.phase = 2;
     s.finished = false;
+    LL.phase2Transport.migrate(s);
+    LL.phase2Family.migrate(s);
+    LL.phase2Rooms.migrate(s);
     return s.adult;
   }
 
   function available(s, item) {
-    const a = s.adult;
-    if (item.kind === 'study') return a.qualifications.study;
-    if (item.kind === 'bridge') return !a.qualifications.study;
-    if (item.program === 'other') return Boolean(a.qualifications.trade) && !LL.data.getAdult().routes.some(r => r.program === a.qualifications.trade);
-    return !item.program || item.program === a.qualifications.trade;
+    return !LL.phase2Paths.qualification(s, item);
   }
 
   function progress(s, id) {
@@ -79,14 +78,15 @@ LL.phase2State = (function () {
 
   function isStudying(s, plan) {
     const item = route(plan.routeId);
-    return item && (item.kind === 'bridge' || item.kind === 'study' && !progress(s, item.id).graduated);
+    return item && (['bridge', 'study'].includes(item.kind) && !progress(s, item.id).graduated || item.experience === 'folk');
   }
 
-  function label(s, id) {
+  function label(s, id, roleId) {
     const item = route(id);
     if (!item) return 'Vel retning';
-    if (item.kind === 'study' && progress(s, id).graduated) return item.graduate + ' · arbeid etter fullført grad';
     if (item.id === 'eige-fag') return item.label + ' · ' + s.program.name;
+    if (roleId) return LL.phase2Paths.role(s, item, roleId)?.label || item.label;
+    if (item.kind === 'study' && progress(s, id).graduated) return item.graduate + ' · arbeid etter utdanning';
     return item.label;
   }
 
@@ -103,21 +103,51 @@ LL.phase2State = (function () {
     const data = LL.data.getAdult().admissions;
     const samples = data.examples[item.id];
     if (!samples?.length) return null;
+    const grade = schoolGrade(s);
+    const ordinaryAverage = s.adult.ordinaryGrade ?? grade?.average;
+    const ordinary = ordinaryAverage === undefined ? null : Math.round(ordinaryAverage * 100) / 10;
     const examples = samples.map(example => {
       const ageLimit = data.firstQuotaAgeByYear?.[example.year];
       const ageExceeded = Number.isInteger(ageLimit) && s.adult.age > ageLimit;
-      return { ...example, excludedFirstQuotaAge: ageExceeded ? ageLimit : undefined };
+      return { ...example, excludedFirstQuotaAge: ageExceeded ? ageLimit : undefined,
+        newScience: Boolean(item.science && s.adult.qualifications.science) };
     });
-    const lowest = Math.min(...examples.map(example => example.excludedFirstQuotaAge === undefined ?
-      Math.min(example.first, example.ordinary) : example.ordinary));
+    const quotas = examples.flatMap(example => {
+      const general = { limit: example.gameOrdinary ?? example.ordinary, points: ordinary };
+      if (example.excludedFirstQuotaAge !== undefined || example.newScience) return [general];
+      return [general, { limit: example.first, points: grade?.points ?? null }];
+    });
+    const numeric = quotas.filter(q => typeof q.limit === 'number');
+    const lowest = numeric.length ? Math.min(...numeric.map(q => q.limit)) : null;
+    const pointsShort = numeric.filter(q => q.points !== null).map(q => q.limit - q.points);
+    const missing = pointsShort.length ? Math.max(0, Math.round(Math.min(...pointsShort) * 10) / 10) : null;
+    const open = quotas.some(q => q.limit === 'all');
+    const unknown = !open && !numeric.length;
     const continuing = s.adult.routeId === item.id || progress(s, item.id).years > 0;
-    const grade = schoolGrade(s);
-    return { examples, grade, lowest, continuing, admitted: continuing || Boolean(grade && grade.points >= lowest) };
+    return { examples, grade, ordinary, lowest, missing, open, unknown, continuing,
+      admitted: continuing || open || unknown || missing === 0 };
+  }
+
+  function startIssue(s, item) {
+    const qualification = LL.phase2Paths.qualification(s, item);
+    if (qualification) return qualification;
+    if (studyAdmission(s, item)?.admitted === false) return 'Du fyller ikkje poengkravet. Sjå Retning for døme på andre studiestader eller på å ta opp fag.';
+    return '';
+  }
+
+  function continueLife(s) {
+    const adult = s.adult;
+    if (!adult.complete || adult.age !== 25 || adult.run) return false;
+    adult.extended = true;
+    adult.complete = false;
+    adult.status = 'planning';
+    return true;
   }
 
   function networth(s) {
     const a = s.adult;
-    return s.stats.money + s.stats.savings + a.bsu + a.deposit + LL.phase2Housing.equity(a.property) - a.studentDebt - a.creditDebt;
+    return s.stats.money + s.stats.savings + a.bsu + a.deposit + LL.phase2Housing.equity(a.property) +
+      (a.mobility?.vehicle?.value || 0) - a.studentDebt - a.creditDebt;
   }
 
   function goalValue(s, goal) {
@@ -150,11 +180,15 @@ LL.phase2State = (function () {
 
   function validate(s) {
     const a = s.adult;
-    if (!a || a.version !== 1 || !Number.isInteger(a.year) || a.year < 0 || a.year > 15 || !Number.isInteger(a.age) || a.age < 19 || a.age > 40 || !a.qualifications || !a.progress || !a.calendars || !Array.isArray(a.reports) || !Array.isArray(a.loanLots) || !Array.isArray(a.goals)) throw new Error('Fase 2-lagringa har eit ukjent format.');
+    if (!a || a.version !== 1 || !Number.isInteger(a.year) || a.year < 0 || a.year > 21 || !Number.isInteger(a.age) || a.age < 19 || a.age > 40 || !a.qualifications || !a.progress || !a.calendars || !Array.isArray(a.reports) || !Array.isArray(a.loanLots) || !Array.isArray(a.goals)) throw new Error('Fase 2-lagringa har eit ukjent format.');
+    LL.phase2Transport.migrate(s);
+    LL.phase2Family.migrate(s);
+    if (a.ordinaryGrade != null && (!Number.isFinite(a.ordinaryGrade) || a.ordinaryGrade < 1 || a.ordinaryGrade > 6)) throw new Error('Ugyldig privatistresultat i lagringa.');
     for (const key of ['bsu', 'bsuContributed', 'deposit', 'studentDebt', 'creditDebt']) {
       if (!Number.isFinite(a[key]) || a[key] < 0 || a[key] > 100000000) throw new Error('Ugyldig kontoverdi i fase 2-lagringa.');
     }
     if (!LL.phase2Housing.option(a.housing)) throw new Error('Ukjend bustad i lagringa.');
+    LL.phase2Rooms.migrate(s);
     a.property ??= null;
     a.bsuUsed ??= false;
     const owned = LL.phase2Housing.option(a.housing).price;
@@ -188,5 +222,5 @@ LL.phase2State = (function () {
       if (r.resolved.some(id => !r.schedule.some(e => e.id === id))) throw new Error('Ugyldige hendingsval.');
     }
   }
-  return { migrate, completeSchool, passTradeExam, begin, route, available, progress, isStudying, label, schoolGrade, studyAdmission, networth, goalValue, normalizeGoals, validate };
+  return { migrate, completeSchool, passTradeExam, begin, route, available, progress, isStudying, label, schoolGrade, studyAdmission, startIssue, continueLife, networth, goalValue, normalizeGoals, validate };
 })();

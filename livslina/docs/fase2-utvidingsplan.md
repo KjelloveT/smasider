@@ -5,6 +5,8 @@ tek med seg karakterar, fagbrev, pengar, bustad og tidlegare val. Årsplanen
 skal gjere det lett å forstå kva eit val opnar, kva det kostar og kva som
 endrar seg fram til neste sommar.
 
+Sjå [gjennomføring og speltest](fase2-gjennomforing.md) for utgåva som byggjer på planen.
+
 ## 1. Utdanning, yrke og eit år til å prøve noko nytt
 
 Bygg katalogen av **utdanningsløp, kvalifikasjonar og yrke**. Eitt løp kan

@@ -26,13 +26,21 @@ LL.phase2Housing = (function () {
     const a = s.adult;
     const home = option(plan.housing);
     const move = { deposit: 0, returned: 0, expense: 0, sale: 0, down: 0, bsu: 0, savings: 0, purchase: null };
-    if (a.housing === plan.housing) return move;
+    const sharing = LL.phase2Family.sharing(s, plan);
+    const deposit = home.id === 'heime' || home.price ? 0 : Math.round(home.rent * data().rates.depositMonths * (sharing ? .5 : 1));
+    if (a.housing === plan.housing) {
+      if (home.shareable && Boolean(a.household?.lease) !== sharing) {
+        move.returned = a.deposit;
+        move.deposit = deposit;
+      }
+      return move;
+    }
 
     move.returned = a.deposit;
     move.sale = equity(a.property);
     move.expense = data().rates.moving;
     if (!home.price) {
-      if (home.id !== 'heime') move.deposit = home.rent * data().rates.depositMonths;
+      move.deposit = deposit;
       return move;
     }
 
@@ -46,7 +54,7 @@ LL.phase2Housing = (function () {
 
     const workYears = LL.phase2State.progress(s, plan.routeId).workYears || 0;
     const stable = a.routeId === plan.routeId && !baseline.studying &&
-      LL.phase2State.route(plan.routeId).kind !== 'gap' && workYears >= r.stableWorkYears &&
+      LL.phase2Paths.category(s, LL.phase2State.route(plan.routeId)) === 'work' && workYears >= r.stableWorkYears &&
       plan.workPercent >= r.minimumWorkPercent;
     move.expense += Math.round(home.price * r.deedTax);
     move.down = home.price - loan;

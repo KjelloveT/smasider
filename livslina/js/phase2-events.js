@@ -12,6 +12,9 @@ LL.phase2Events = (function () {
     if (event.id === 'overgang-leigekontrakt' && (!context.moved || !context.renting)) return false;
     if (event.id === 'overgang-byteplan' && !context.changed) return false;
     if (event.group === 'goal' && !s.adult.goals.length) return false;
+    if (event.group.startsWith('field-')) return event.group === 'field-' + LL.phase2Paths.field(s, item);
+    if (event.group.startsWith('experience-')) return event.group === 'experience-' + item.experience;
+    if (event.group.startsWith('transport-') || event.group === 'family') return false;
     return ['common', 'goal', 'transition'].includes(event.group) ||
       event.group === 'study' && studying || event.group === 'gap' && item.kind === 'gap' ||
       event.group === item.id && (item.kind !== 'study' || studying);
@@ -19,18 +22,38 @@ LL.phase2Events = (function () {
 
   function prepare(s, plan, context) {
     const all = LL.data.getAdult().events;
+    const route = LL.phase2State.route(plan.routeId);
     const recent = new Set(s.adult.reports.slice(-2).flatMap(r => r.events || []));
     const pool = all.filter(e => eligible(s, e, plan, context));
     const shuffled = Vy.shuffle(pool.filter(e => !recent.has(e.id)), LL.state.draw);
-    const specific = shuffled.find(e => e.group === plan.routeId || e.group === (LL.phase2State.isStudying(s, plan) ? 'study' : LL.phase2State.route(plan.routeId).kind));
-    const chosen = specific ? [specific] : [];
-    const continuation = shuffled.find(event => !chosen.includes(event) && recall(s, event));
-    if (continuation) chosen.push(continuation);
-    for (const event of shuffled.concat(Vy.shuffle(pool, LL.state.draw))) {
-      if (chosen.length >= 6) break;
-      if (!chosen.includes(event)) chosen.push(event);
+    const reserved = LL.phase2Family.schedule(s, plan);
+    const schedule = [], used = new Set();
+    function add(id, month) {
+      if (!id || used.has(id) || schedule.length >= 6) return;
+      while (schedule.some(entry => entry.month === month)) month = month % 12 + 1;
+      schedule.push({ id, month });
+      used.add(id);
     }
-    return chosen.map((event, i) => ({ id: event.id, month: 2 + i * 2 }));
+    reserved.forEach(event => add(event.id, event.month));
+    const mainGroups = ['experience-' + route.experience, 'field-' + LL.phase2Paths.field(s, route), route.id,
+      LL.phase2State.isStudying(s, plan) ? 'study' : route.kind];
+    const specific = mainGroups.map(group => shuffled.find(event => event.group === group)).find(Boolean);
+    add(specific?.id, 2);
+    const lessons = LL.phase2Transport.training(s, plan);
+    const mode = plan.transport.mode;
+    if (lessons.some(lesson => lesson.index === 3)) add('transport-prove', 8);
+    else if (lessons.length) add('transport-koyretime', 6);
+    else if (mode === 'public') add('transport-buss', 6);
+    else if (mode === 'bike') add('transport-sykkel', 6);
+    else if (mode === 'car') add('transport-verkstad', 6);
+    const continuation = shuffled.find(event => !used.has(event.id) && recall(s, event));
+    add(continuation?.id, 4);
+    for (const event of shuffled.concat(Vy.shuffle(pool, LL.state.draw))) {
+      if (schedule.length >= 6) break;
+      const month = [2, 4, 6, 8, 10, 12].find(index => !schedule.some(entry => entry.month === index));
+      add(event.id, month);
+    }
+    return schedule.sort((a, b) => a.month - b.month);
   }
 
   function pending(s) {
@@ -59,6 +82,7 @@ LL.phase2Events = (function () {
     ['monthlyExpense', 'monthlyWage'].forEach(k => { r.modifiers[k] += effects[k] || 0; });
     r.study += effects.study || 0;
     if (effects.flag) s.flags['adult_' + effects.flag] = true;
+    if (effects.family) LL.phase2Family.deliver(s, effects.family);
     r.resolved.push(event.id);
     const delta = LL.phase2Effects.changes(before, s.stats);
     LL.phase2Effects.record(r, 'event-' + event.id, event.title + ' · ' + selected.label, delta);

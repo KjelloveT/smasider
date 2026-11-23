@@ -11,13 +11,16 @@ function environment() {
     document: { addEventListener() {} } };
   c.window = c; vm.createContext(c);
   for (const file of ['js/vyrdepil-util.js', 'livslina/js/util.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), c, { filename: file });
-  const adult = JSON.parse(fs.readFileSync(path.join(root, 'livslina/data/fase2.json')));
+  vm.runInContext(fs.readFileSync(path.join(root, 'livslina/js/phase2-paths.js'), 'utf8'), c);
+  const phaseData = file => JSON.parse(fs.readFileSync(path.join(root, 'livslina/data/' + file + '.json')));
+  const adult = c.LL.phase2Paths.merge(phaseData('fase2'), phaseData('fase2-vegar'), phaseData('fase2-kvardag'));
   const base = JSON.parse(fs.readFileSync(path.join(root, 'livslina/data/grunndata.json')));
   const programs = JSON.parse(fs.readFileSync(path.join(root, 'livslina/data/linjer.json'))).programs;
   const node = key => key.split('.').reduce((entry, part) => entry?.[part], base);
-  c.LL.data = { getAdult: () => adult, getProgram: id => programs.find(p => p.id === id),
+  const shop = phaseData('rombutikk');
+  c.LL.data = { getAdult: () => adult, getRoomShop: () => shop, getProgram: id => programs.find(p => p.id === id),
     node, value: (key, variant = 'gameValue') => node(key)?.[variant] ?? 0 };
-  for (const file of ['state', 'economy', 'phase2-state', 'phase2-housing', 'phase2-economy', 'phase2-effects', 'phase2-events', 'phase2-sim']) vm.runInContext(fs.readFileSync(path.join(root, 'livslina/js/' + file + '.js'), 'utf8'), c, { filename: file });
+  for (const file of ['state', 'economy', 'phase2-transport', 'phase2-family', 'phase2-rooms', 'phase2-state', 'phase2-housing', 'phase2-economy', 'phase2-effects', 'phase2-events', 'phase2-sim', 'art-vignettes']) vm.runInContext(fs.readFileSync(path.join(root, 'livslina/js/' + file + '.js'), 'utf8'), c, { filename: file });
   return c.LL;
 }
 function school(LL, id = 'studiespes', apprenticeship = false) {
@@ -33,10 +36,10 @@ function adult(LL, id, apprenticeship) {
   if (apprenticeship) LL.phase2State.passTradeExam(s, true);
   LL.phase2State.begin(s); return s;
 }
-function year(LL, s, overrides = {}) {
+function year(LL, s, overrides = {}, approvals) {
   s.adult.status = 'planning';
   const plan = Object.assign({}, LL.phase2Economy.defaultPlan(s), overrides);
-  assert.equal(LL.phase2Sim.begin(s, plan, s.adult.goals), true);
+  assert.equal(LL.phase2Sim.begin(s, plan, s.adult.goals, approvals), true);
   let guard = 0;
   while (s.adult.run && guard++ < 30) {
     const e = LL.phase2Events.pending(s);
@@ -72,7 +75,7 @@ test('nye studium krev poeng i ei aktuell kvote før året kan starte', () => {
   assert.equal(LL.phase2Economy.defaultPlan(s).routeId, 'butikk');
   assert.doesNotThrow(() => LL.phase2Economy.preview(s, plan));
   const before = clone(s);
-  assert.throws(() => LL.phase2Sim.begin(s, plan, []), /opptakskrava/);
+  assert.throws(() => LL.phase2Sim.begin(s, plan, []), /poengkravet/);
   assert.deepEqual(clone(s), before);
 
   s.schoolResult.stats.grades = 3.63;
@@ -101,6 +104,155 @@ test('ei eldre lagring med lågt snitt kan halde fram med studiet, også etter p
   assert.equal(admission.admitted, true);
   assert.equal(LL.phase2Sim.begin(loaded, { routeId: route.id, housing: 'heime' }, []), true);
   assert.ok(LL.state.load(clone(loaded)).adult.run);
+});
+
+test('karrierekatalogen dekkjer fagfelt, eigne roller og reelle vilkår for fagskule', () => {
+  const LL = environment(), s = adult(LL, 'bygg-anlegg', true);
+  const data = LL.data.getAdult();
+  assert.equal(data.routes.length, 39);
+  assert.equal(Object.keys(data.fields).length, 12);
+  const labels = data.routes.flatMap(item => (item.roles || []).map(role => role.label));
+  assert.ok(new Set(labels).size >= 60);
+  assert.equal(LL.phase2Paths.tradeRoute(s).id, 'tomrar');
+  assert.match(LL.phase2Paths.change(s, LL.phase2State.route('folke-kultur')), /Fagbrevet blir med vidare/);
+  assert.equal(LL.phase2State.startIssue(s, LL.phase2State.route('fagskule-bygg')), '');
+  assert.match(LL.phase2State.startIssue(s, LL.phase2State.route('fagskule-automasjon')), /relevant fagbrev/);
+  year(LL, s, { routeId: 'fagskule-bygg', jobHours: 0, borrow: false });
+  year(LL, s, { routeId: 'fagskule-bygg', jobHours: 0, borrow: false });
+  const item = LL.phase2State.route('fagskule-bygg');
+  assert.ok(LL.phase2Paths.roles(s, item).some(role => role.id === 'bim'));
+  assert.ok(!LL.phase2Paths.roles(s, item).some(role => role.id === 'lag'));
+  const first = LL.phase2Economy.preview(s, { routeId: item.id, roleId: 'kalk' });
+  const second = LL.phase2Economy.preview(s, { routeId: item.id, roleId: 'bim' });
+  assert.ok(second.wage > first.wage);
+  year(LL, s, { routeId: item.id, roleId: 'bim' });
+  assert.ok(LL.phase2Paths.roles(s, item).some(role => role.id === 'lag'));
+});
+
+test('privatist endrar ordinær kvote, realfag opnar særkrav og utdanning kan halde fram etter 25', () => {
+  const LL = environment(), s = adult(LL);
+  s.schoolResult.stats.grades = 3.5;
+  const teacher = LL.phase2State.route('laerar');
+  const build = LL.phase2State.route('byggingenior');
+  assert.match(LL.phase2State.startIssue(s, build), /Matematikk/);
+  year(LL, s, { routeId: 'privatist', examHours: 12, workPercent: .5 });
+  year(LL, s, { routeId: 'privatist', examHours: 12, workPercent: .5 });
+  assert.equal(LL.phase2State.schoolGrade(s).average, 3.5);
+  assert.equal(LL.phase2State.studyAdmission(s, teacher).ordinary, 40.6);
+  assert.equal(LL.phase2State.studyAdmission(s, teacher).admitted, true);
+  year(LL, s, { routeId: 'realfag', examHours: 12, workPercent: .5 });
+  assert.equal(LL.phase2State.startIssue(s, build), '');
+  while (!s.adult.complete) year(LL, s, { routeId: 'laerar', jobHours: 0 });
+  assert.equal(s.adult.age, 25);
+  assert.ok(LL.phase2State.continueLife(s));
+  assert.equal(LL.phase2State.continueLife(s), false);
+  year(LL, s, { routeId: 'laerar', jobHours: 0 });
+  assert.equal(s.adult.age, 26);
+  assert.equal(LL.state.load(clone(s)).adult.progress.laerar.years, 4);
+});
+
+test('folkehøgskule og reise bruker eigne kostnader i månadene som gjeld', () => {
+  const LL = environment(), s = adult(LL);
+  const folk = LL.phase2Economy.preview(s, { routeId: 'folke-friluft', borrow: true, housing: 'heime' });
+  assert.equal(folk.plan.housing, 'internat');
+  assert.equal(folk.months.filter(month => month.loan > 0).length, 10);
+  assert.equal(folk.firstMonth.expenses.food, 0);
+  assert.ok(folk.months[10].expenses.food > 0);
+  assert.equal(folk.firstMonth.expenses.housing, 0);
+  s.stats.money = 5000;
+  const trip = { routeId: 'reise', travelMonths: 4, housing: 'heime' };
+  assert.throws(() => LL.phase2Sim.begin(s, trip, []), /buffer/);
+  s.stats.money = 150000;
+  const estimate = LL.phase2Economy.preview(s, trip);
+  assert.equal(estimate.months.filter(month => month.wage === 0).length, 4);
+  assert.equal(estimate.months.filter(month => month.expenses.travelBudget > 0).length, 4);
+  assert.equal(estimate.firstMonth.expenses.food, 0);
+  assert.equal(year(LL, s, trip).totals.loan, 0);
+});
+
+test('føraropplæring, eigarskap og sal blir rekna éin gong', () => {
+  const LL = environment(), s = adult(LL);
+  const drive = { routeId: 'butikk', transport: { area: 'by', mode: 'car', action: 'car' } };
+  assert.throws(() => LL.phase2Sim.begin(s, drive, []), /førarkort/);
+  const training = { routeId: 'butikk', transport: { area: 'by', mode: 'public', units: 4, privatePractice: true } };
+  const trainingReport = year(LL, s, training);
+  assert.equal(s.adult.mobility.stage, 4);
+  assert.equal(trainingReport.totals.licence, 25350);
+  s.stats.money = 150000;
+  const before = LL.phase2State.networth(s);
+  assert.ok(LL.phase2Sim.begin(s, drive, []));
+  assert.equal(s.stats.money, 84000);
+  assert.equal(s.adult.mobility.vehicle.value, 66000);
+  assert.equal(LL.phase2State.networth(s), before);
+  const loaded = LL.state.load(clone(s));
+  LL.phase2Sim.month(loaded);
+  assert.ok(loaded.adult.mobility.vehicle.value < 66000);
+  const expenses = LL.phase2Economy.breakdown(loaded, loaded.adult.run.plan, 1).expenses;
+  assert.ok(expenses.vehicleInsurance && expenses.vehicleMaintenance && expenses.vehicleFuel);
+});
+
+test('barn krev samtykke og stadfesting, og omsorg følgjer med over årsskifte og brot', () => {
+  const LL = environment(), s = adult(LL);
+  const action = { routeId: 'kafe', family: { meet: true, time: 'household' } };
+  year(LL, s, action);
+  assert.ok(s.adult.household.partner);
+  assert.equal(s.adult.household.pregnancy, null);
+  year(LL, s, { routeId: 'kafe', family: { talk: true, time: 'household' } });
+  assert.ok(s.adult.household.cohabitConsent && s.adult.household.childConsent);
+  assert.equal(s.adult.household.pregnancy, null);
+  const childPlan = { routeId: 'kafe', housing: 'leilegheit',
+    family: { action: 'join', child: 'plan', startMonth: 6, time: 'household' } };
+  const original = clone(s);
+  assert.throws(() => LL.phase2Sim.begin(s, childPlan, []), /Stadfest/);
+  assert.deepEqual(clone(s), original);
+  const estimate = LL.phase2Economy.preview(s, childPlan);
+  assert.equal(estimate.firstMonth.expenses.housing, 5895);
+  assert.equal(estimate.move.deposit, 17685);
+  year(LL, s, childPlan, { child: true });
+  assert.equal(s.adult.household.child, null);
+  assert.equal(s.adult.household.pregnancy.due, 39);
+  const loaded = LL.state.load(clone(s));
+  const report = year(LL, loaded, { routeId: 'kafe', family: { time: 'household', leave: 3 } });
+  assert.equal(loaded.adult.household.pregnancy, null);
+  assert.equal(loaded.adult.household.child.due, 39);
+  assert.ok(report.totals.familyBenefit > 0 && report.totals.care > 0);
+  const post = year(LL, loaded, { routeId: 'kafe', family: { action: 'end', care: 'player' } });
+  assert.equal(loaded.adult.household.partner, null);
+  assert.equal(loaded.adult.household.lease, false);
+  assert.equal(loaded.adult.household.child.due, 39);
+  assert.ok(post.totals.care > report.totals.care);
+});
+
+test('familieillustrasjonar varierer per scene og held seg etter ny innlasting', () => {
+  const LL = environment(), variant = LL.artVignette.familyVariant;
+  const p = { seed: 51002, year: 3, occurrence: 'familie-plan-barn' };
+  assert.equal(variant('adultFamilyPlan', p), variant('adultFamilyPlan', clone(p)));
+  assert.equal(new Set(Array.from({ length: 50 }, (_, seed) =>
+    variant('adultFamilyPlan', { ...p, seed }))).size, 3);
+});
+
+test('møblar følgjer flytting, lager og sal utan dobbel plassering eller betaling', () => {
+  const LL = environment(), s = adult(LL);
+  const model = LL.phase2Rooms;
+  const crib = { ...LL.data.getRoomShop().categories.find(category => category.id === 'crib').products[0], slot: 'crib' };
+  s.adult.housing = 'stor-leilegheit';
+  model.migrate(s);
+  const cash = s.stats.money;
+  assert.ok(model.buy(s, crib, 'extra'));
+  assert.equal(s.stats.money, cash - crib.price);
+  assert.equal(model.location(s, crib), 'extra');
+  assert.ok(model.buy(s, crib, 'bedroom'));
+  assert.equal(s.stats.money, cash - crib.price);
+  assert.equal(s.room.placements.extra.crib, undefined);
+  assert.ok(model.buy(s, crib, 'extra'));
+  assert.ok(LL.phase2Sim.begin(s, { routeId: 'butikk', housing: 'heime' }, []));
+  const loaded = LL.state.load(clone(s));
+  assert.equal(model.location(loaded, crib), undefined);
+  assert.ok(model.stock(loaded).some(item => item.id === crib.id));
+  const before = loaded.stats.money;
+  assert.ok(model.sell(loaded, crib));
+  assert.equal(model.sell(loaded, crib), false);
+  assert.equal(loaded.stats.money, before + model.sale(crib));
 });
 
 test('bustadkjøp krev finansiering og bind eigenkapital utan å telje avdrag som forbruk', () => {
@@ -151,7 +303,7 @@ test('årsoppgjeret summerer faktiske utslag og eit innbydande rom unngår romtr
   }
   assert.ok(report.impacts.find(item => item.id === 'room').deltas.wellbeing < 0);
   assert.ok(s.eventLog.some(event => event.phase === 2 && event.choiceLabel && event.delta));
-  s.room.equipped.sofa = 'sofa-01';
+  assert.equal(LL.phase2Rooms.buy(s, { id: 'sofa-01', slot: 'sofa', family: 'sofa', price: 500 }, 'bedroom'), true);
   const next = year(LL, s, { routeId: 'kafe', housing: 'heime' });
   assert.equal(next.impacts.some(item => item.id === 'room'), false);
   const story = LL.data.getAdult().events.find(event => event.id === 'maal-justering');
@@ -345,9 +497,12 @@ test('stipend krev bortebuing og bestått utdanning; gradomgjering skjer éin go
 test('alle retningar kan spelast og halvferdig lang utdanning blir bevart ved 25 år', () => {
   const LL = environment();
   for (const item of LL.data.getAdult().routes) {
-    const id = item.program === 'other' ? 'elektro' : item.program;
+    const id = item.program === 'other' ? 'handverk-design' : item.program || item.programs?.[0];
     const s = adult(LL, id || 'studiespes', Boolean(id));
     if (item.kind === 'bridge') s.adult.qualifications.study = false;
+    if (item.science) s.adult.qualifications.science = true;
+    s.schoolResult.stats.grades = 6;
+    if (item.experience === 'travel') s.stats.money = 130000;
     year(LL, s, { routeId: item.id, housing: 'heime', jobHours: 0 });
     assert.ok(Number.isFinite(LL.phase2State.networth(s)), item.id);
   }

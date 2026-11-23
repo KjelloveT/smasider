@@ -7,7 +7,7 @@ window.LL = window.LL || {};
 LL.state = (function () {
   'use strict';
 
-  const SAVE_VERSION = 10;
+  const SAVE_VERSION = 11;
   const WELLBEING_POSITIVE_MULTIPLIER = 0.45;
   const LEGACY_SPENDING_CHOICES = {
     noysam: { eatingOutPerWeek: 0, socialEventsPerMonth: 0, clothingShoppingPerWeek: 0, inGamePurchasesPerWeek: 0 },
@@ -55,7 +55,9 @@ LL.state = (function () {
       fallback.owned = Object.keys(ROOM_ITEM_SLOT).filter(id => Object.values(fallback.equipped).includes(id));
       return fallback;
     }
-    const owned = Array.from(new Set(STARTER_ROOM.owned.concat(source.owned.filter(id => ROOM_ITEM_SLOT[id]))));
+    const shop = LL.data.getRoomShop?.();
+    const items = new Set(shop?.categories.flatMap(category => category.products.map(item => item.id)) || []);
+    const owned = Array.from(new Set(STARTER_ROOM.owned.concat(source.owned.filter(id => ROOM_ITEM_SLOT[id] || items.has(id)))));
     const equipped = Object.assign({}, STARTER_ROOM.equipped);
     Object.keys(equipped).forEach(slot => {
       const id = source.equipped[slot];
@@ -65,7 +67,8 @@ LL.state = (function () {
         equipped[slot] = id;
       }
     });
-    return { owned, equipped };
+    const placements = source.placements && typeof source.placements === 'object' ? source.placements : undefined;
+    return { owned, equipped, ...(placements ? { placements } : {}) };
   }
 
   // ── Seedbasert RNG (mulberry32) — deterministisk gjeve seed ──

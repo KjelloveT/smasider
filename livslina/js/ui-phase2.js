@@ -99,16 +99,14 @@ LL.uiPhase2 = (function () {
     home();
   }
   function roomPanel(s) {
-    const panelView = panel('Rommet og tinga dine');
-    const housing = LL.phase2Housing.option(s.adult.housing);
-    const rooms = housing.rooms || ['bedroom'];
-    const labels = { bedroom: 'Soverom', living: 'Stove', workroom: 'Arbeidsrom' };
+    const panelView = panel('Bustad og eigedelar');
+    const model = LL.phase2Rooms, rooms = model.rooms(s);
+    const labels = Object.fromEntries(rooms.map(id => [id, model.label(s, id)]));
     const scene = el('div', 'll-adult-room');
     const picker = el('div', 'vp-actions');
     picker.setAttribute('role', 'group'); picker.setAttribute('aria-label', 'Rom i bustaden');
     function show(id) {
-      const view = rooms.length === 1 ? null : id === 'bedroom' && rooms.includes('workroom') ? 'bedroom-house' : id;
-      LL.artRoom.render(scene, s.room, null, labels[id] + ' i bustaden din', view);
+      LL.artRoom.render(scene, model.view(s, id), null, labels[id] + ' i bustaden din', id);
       Array.from(picker.children).forEach(tab => tab.setAttribute('aria-pressed', String(tab.textContent === labels[id])));
     }
     if (rooms.length > 1) {
@@ -118,23 +116,45 @@ LL.uiPhase2 = (function () {
     panelView.append(scene);
     show(rooms[0]);
     if (LL.phase2Effects.sparseRoom(s)) {
-      const warning = el('p', 'll-note', 'Rommet er lite innbydande. Vener vel oftare å møtast ein annan stad, og færre besøk dreg ned trivselen litt kvar månad. Ei sitjeplass eller eit teppe saman med pynt kan hjelpe.');
+      const warning = el('p', 'll-note', 'Du har få gode plassar for besøk. Vener vel oftare å møtast ein annan stad, og færre besøk kan trekkje ned trivselen. Ein sofa, eit matbord eller teppe og pynt kan hjelpe.');
       warning.setAttribute('role', 'status');
       panelView.append(warning);
     }
-    panelView.append(button('Opne rombutikken', LL.uiRoom.open));
+    const actions = el('div', 'vp-actions');
+    actions.append(button('Opne rombutikken', LL.uiRoom.open));
+    if (!s.adult.complete) actions.append(button('Planlegg transport', () => LL.uiPhase2Plan.open('adultPlanTransport'), 'quiet'));
+    panelView.append(actions);
+    const stock = model.stock(s);
+    if (stock.length) panelView.append(el('p', 'll-note', stock.length + (stock.length === 1 ? ' ting ligg på lager.' : ' ting ligg på lager.')));
     return panelView;
+  }
+
+  function familyPanel(s) {
+    const f = LL.phase2Family.current(s);
+    const view = panel('Hushald og relasjonar');
+    const values = el('ul', 'll-life-list');
+    LL.uiPhase2Life.familyStatus(s).forEach(text => values.append(el('li', '', text)));
+    const card = el('div', 'll-adult-life-card');
+    const scene = f.child ? 'adultFamilyReading' : f.pregnancy ? 'adultFamilyPlan' : f.partner ? 'adultFamilyTalk' : 'adultFamilyTea';
+    card.append(LL.artVignette.create(scene, { seed: s.seed, year: s.adult.year, occurrence: 'hushald-' + scene }), values);
+    view.append(card);
+    if (f.last) view.append(el('p', 'll-note', f.last));
+    if (!s.adult.complete) view.append(button('Planlegg hushaldet', () => LL.uiPhase2Plan.open('adultPlanFamily'), 'quiet'));
+    return view;
   }
   function home() {
     const s = LL.state.get(), a = s.adult;
     const root = frame(a.complete ? 'Neste steg i livslina' : 'Studium og arbeid', a.age + ' år' + (a.complete ? ' · Fase 2 fullført' : ' · August–juli'));
     if (!a.complete) root.append(button('Planlegg neste år', () => LL.uiPhase2Plan.open(), 'primary'));
+    else if (a.age === 25) root.append(button('Hald fram etter 25', () => {
+      if (LL.phase2State.continueLife(s)) { save(); LL.uiPhase2Plan.open(); }
+    }, 'primary'));
     root.append(stats(s));
     const layout = el('div', 'll-adult-layout'), left = el('div', 'll-adult-stack'), right = el('div', 'll-adult-stack');
     const current = panel(a.complete ? 'Vidare i livet' : 'Vegen din');
     if (a.routeId) {
       const item = LL.phase2State.route(a.routeId);
-      current.append(el('p', '', LL.phase2State.label(s, a.routeId)));
+      current.append(el('p', '', LL.phase2State.label(s, a.routeId, a.plan?.roleId)));
       if (item.years) current.append(LL.uiPhase2Visuals.studySteps(s, item));
     }
     const qualification = a.qualifications.trade ? 'Fagbrev' : a.qualifications.study ? 'Studiekompetanse' : 'Yrkesfag';
@@ -142,10 +162,10 @@ LL.uiPhase2 = (function () {
     if (a.complete) {
       const pending = Object.entries(a.progress).filter(([id, p]) => LL.phase2State.route(id).kind === 'study' && !p.graduated && p.years > 0);
       pending.forEach(([id]) => { if (id !== a.routeId) current.append(el('p', '', LL.phase2State.route(id).label), LL.uiPhase2Visuals.studySteps(s, LL.phase2State.route(id))); });
-      current.append(el('p', 'll-note', 'Neste fase er under arbeid. Studia og måla dine er lagra.'));
+      current.append(el('p', 'll-note', a.age === 25 ? 'Du kan halde fram med årsplanar. Studium, arbeid, hushald og eigedelar blir med vidare.' : 'Studium, arbeid og dei andre vala dine er lagra.'));
     }
     if (a.reports.length) current.append(button('Sjå siste årsoppgjer', report));
-    left.append(current); goals(s, left); recovery(s, left);
+    left.append(current, familyPanel(s)); goals(s, left); recovery(s, left);
     const figure = panel('Figuren din');
     const portrait = LL.artCharacter.createCanvas(s.character, { className: 'll-character-canvas ll-character-canvas--portrait', label: 'Figuren din', width: 160, height: 240 });
     figure.append(portrait); right.append(figure);
@@ -178,18 +198,24 @@ LL.uiPhase2 = (function () {
   }
   function report() {
     const s = LL.state.get(), a = s.adult, r = a.reports[a.reports.length - 1];
-    const root = frame('Årsoppgjer · ' + r.age + '–' + (r.age + 1) + ' år', LL.phase2State.label(s, r.routeId) + ' · august–juli');
+    const root = frame('Årsoppgjer · ' + r.age + '–' + (r.age + 1) + ' år', LL.phase2State.label(s, r.routeId, r.roleId) + ' · august–juli');
     root.append(stats(s));
     const p = panel('Slik gjekk året');
     const item = LL.phase2State.route(r.routeId), v = LL.uiPhase2Visuals;
     if (item.years) p.append(v.studySteps(s, item));
-    else p.append(v.token('check', item.kind === 'gap' ? 'Friår fullført' : 'Arbeidsår fullført', r.progress));
-    p.append(v.moneyFlow([['Arbeidsinntekt', r.totals.wage], ['Studentlån', r.totals.loan, 'bookOpen'], ['Påbyggstøtte', r.totals.bridge, 'bookOpen'], ['Utgifter og skatt', r.totals.expense]]));
+    else p.append(el('p', '', r.progress));
+    const parental = r.totals.parentalBenefit || 0;
+    p.append(v.moneyFlow([['Arbeidsinntekt', r.totals.wage - parental], ['Foreldrepengar · spelanslag', parental, 'users'],
+      ['Studentlån', r.totals.loan, 'bookOpen'], ['Påbyggstøtte', r.totals.bridge, 'bookOpen'],
+      ['Anna støtte til familien', r.totals.familyBenefit, 'users'], ['Utgifter og skatt', r.totals.expense]]));
     const worth = el('div', 'll-budget-row'); worth.append(el('span', '', 'Nettoformue'), el('strong', '', kr(r.start.networth) + ' → ' + kr(r.end.networth))); p.append(worth);
     p.append(button('Sjå målingane', () => LL.uiPhase2Report.open(r)));
     const details = el('details', 'vp-accordion'); details.append(el('summary', '', 'Heile rekneskapen'));
     const accounts = el('div', 'vp-accordion-body');
-    const values = [['Brutto arbeidsinntekt', r.totals.wage], ['Utbetalt studentlån', r.totals.loan], ['Støtte til påbygg · spelanslag', r.totals.bridge],
+    const values = [['Brutto arbeidsinntekt', r.totals.wage - parental], ['Foreldrepengar · spelanslag', parental], ['Utbetalt studentlån', r.totals.loan], ['Støtte til påbygg · spelanslag', r.totals.bridge],
+      ['Støtte til familien', r.totals.familyBenefit], ['Omsorg i utgiftene', r.totals.care], ['Føraropplæring i utgiftene', r.totals.licence],
+      ['Kjøp av transportmiddel', r.totals.vehiclePurchase], ['Sal av transportmiddel', r.totals.vehicleSale],
+      ['Verditap på transportmiddel', r.totals.vehicleDepreciation],
       ['Utgifter, inkludert skatt og flytting', r.totals.expense], ['Skatt i utgiftene', r.totals.tax], ['Nedbetaling av student- og kredittgjeld', r.totals.repaid], ['Avdrag på bustadlånet', r.totals.mortgagePrincipal],
       ['Flytta til fri sparing', r.totals.saved], ['Flytta til BSU', r.totals.bsu], ['Lån gjort om til stipend', r.totals.converted], ['Renter lagde til gjelda', r.totals.capitalizedInterest || 0], ['Sparerenter', r.totals.earnedInterest || 0], ['Kontoutslag frå case · med i tala ovanfor', r.totals.caseCash]];
     values.filter(row => row[1]).forEach(([key, value]) => { const row = el('div', 'll-budget-row'); row.append(el('span', '', key), el('strong', '', kr(value))); accounts.append(row); });

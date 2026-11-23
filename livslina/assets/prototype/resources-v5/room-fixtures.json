@@ -1,0 +1,82 @@
+[
+  {
+    "id": "kitchenUnit",
+    "file": "items/kitchen-unit.png",
+    "camera": "v4",
+    "widthDepthHeightCm": [
+      195,
+      62,
+      91
+    ],
+    "canvasPixels": [
+      231,
+      228
+    ],
+    "groundAnchorOnScene": [
+      298.8083117443839,
+      181.5
+    ],
+    "mount": "floor",
+    "status": "kontrollert sprite"
+  },
+  {
+    "id": "dining",
+    "file": "items/dining-table.png",
+    "camera": "v4",
+    "widthDepthHeightCm": [
+      98,
+      70,
+      74
+    ],
+    "canvasPixels": [
+      151,
+      161
+    ],
+    "groundAnchorOnScene": [
+      252.8743243276573,
+      232.46
+    ],
+    "mount": "floor",
+    "status": "kontrollert sprite"
+  },
+  {
+    "id": "crib",
+    "file": "items/baby-crib.png",
+    "camera": "v4",
+    "widthDepthHeightCm": [
+      75,
+      133,
+      92
+    ],
+    "canvasPixels": [
+      187,
+      201
+    ],
+    "groundAnchorOnScene": [
+      280.3446501356997,
+      175
+    ],
+    "mount": "floor",
+    "status": "kontrollert sprite"
+  },
+  {
+    "id": "chest",
+    "file": "items/toy-chest.png",
+    "camera": "v4",
+    "widthDepthHeightCm": [
+      72,
+      44,
+      49
+    ],
+    "canvasPixels": [
+      104,
+      111
+    ],
+    "groundAnchorOnScene": [
+      311.8679748334532,
+      240
+    ],
+    "mount": "floor",
+    "status": "kontrollert sprite"
+  }
+]

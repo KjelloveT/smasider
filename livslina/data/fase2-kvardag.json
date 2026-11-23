@@ -1,0 +1,1130 @@
+{
+  "app": "livslina",
+  "version": 1,
+  "priceYear": 2026,
+  "housingChanges": {
+    "leilegheit": {
+      "rooms": [
+        "bedroom",
+        "living",
+        "kitchen"
+      ],
+      "shareable": true
+    },
+    "eigd-leilegheit": {
+      "rooms": [
+        "bedroom",
+        "living",
+        "kitchen"
+      ]
+    },
+    "eigd-hus": {
+      "rooms": [
+        "bedroom",
+        "living",
+        "kitchen",
+        "workroom",
+        "extra"
+      ]
+    }
+  },
+  "housing": [
+    {
+      "id": "stor-leilegheit",
+      "label": "Leige ei større leilegheit",
+      "rent": 13910,
+      "utilities": 1200,
+      "household": 1840,
+      "rooms": [
+        "bedroom",
+        "living",
+        "kitchen",
+        "extra"
+      ],
+      "shareable": true,
+      "note": "Tre rom med stove og ekstra soverom. Spelprisen brukar landssnittet for treroms leigebustader frå SSB 2025."
+    },
+    {
+      "id": "internat",
+      "label": "Internat på folkehøgskulen",
+      "rent": 0,
+      "utilities": 0,
+      "household": 500,
+      "rooms": [
+        "bedroom"
+      ],
+      "folkOnly": true,
+      "note": "Kost og losji ligg i internatposten frå august til mai. I dei to sommarmånadene bur du heime i spelmodellen."
+    }
+  ],
+  "sources": [
+    {
+      "id": "driver-training",
+      "label": "Statens vegvesen: føraropplæring for klasse B",
+      "year": 2026,
+      "kind": "official",
+      "url": "https://www.vegvesen.no/forerkort/ta-forerkort/veien-til-forerkortet/personbil-b/"
+    },
+    {
+      "id": "housing-rooms",
+      "label": "SSB: leige etter rom og område",
+      "year": 2025,
+      "kind": "official",
+      "url": "https://www.ssb.no/statbank/table/09895"
+    },
+    {
+      "id": "family-permission",
+      "label": "NAV: foreldrepengar og eingongsstønad",
+      "year": 2026,
+      "kind": "official",
+      "url": "https://www.nav.no/foreldrepenger/foreldrepenger-eller-engangsstonad/"
+    },
+    {
+      "id": "family-allowance",
+      "label": "NAV: barnetrygd",
+      "year": 2026,
+      "kind": "official",
+      "url": "https://www.nav.no/barnetrygd"
+    },
+    {
+      "id": "nursery",
+      "label": "Udir: foreldrebetaling i barnehagen",
+      "year": 2026,
+      "kind": "official",
+      "url": "https://www.udir.no/regelverk-og-tilsyn/barnehage/foreldrebetaling/"
+    }
+  ],
+  "extraYears": {
+    "folk": {
+      "internat": 10900,
+      "activities": 1200,
+      "loan": 15488,
+      "summerRent": 2500,
+      "grant": 0.4
+    },
+    "travel": {
+      "food": 2400,
+      "bed": 5200,
+      "insurance": 400,
+      "local": 900,
+      "start": 3600,
+      "end": 2600,
+      "buffer": 7000
+    },
+    "retake": {
+      "preparation": 1200,
+      "exam": 3200,
+      "improvement": 0.28
+    },
+    "science": {
+      "preparation": 1800,
+      "exam": 4100
+    }
+  },
+  "transport": {
+    "areas": {
+      "by": {
+        "label": "By",
+        "walk": [
+          0,
+          30
+        ],
+        "bike": [
+          140,
+          16
+        ],
+        "public": [
+          745,
+          25
+        ],
+        "carpool": [
+          1100,
+          18
+        ],
+        "car": [
+          650,
+          20
+        ]
+      },
+      "tettstad": {
+        "label": "Tettstad",
+        "walk": [
+          0,
+          48
+        ],
+        "bike": [
+          140,
+          26
+        ],
+        "public": [
+          640,
+          38
+        ],
+        "carpool": [
+          950,
+          25
+        ],
+        "car": [
+          300,
+          24
+        ]
+      },
+      "spreidd": {
+        "label": "Spreidd busetnad",
+        "walk": [
+          0,
+          85
+        ],
+        "bike": [
+          190,
+          44
+        ],
+        "public": [
+          700,
+          65
+        ],
+        "carpool": [
+          1250,
+          35
+        ],
+        "car": [
+          150,
+          38
+        ]
+      }
+    },
+    "vehicles": {
+      "bike": {
+        "label": "Brukt sykkel",
+        "price": 2500,
+        "retention": 0.988
+      },
+      "car": {
+        "label": "Brukt småbil",
+        "price": 66000,
+        "retention": 0.989,
+        "insurance": 820,
+        "fuel": 900,
+        "maintenance": 650
+      }
+    },
+    "steps": [
+      {
+        "label": "Trafikalt grunnkurs",
+        "cost": 3100,
+        "hours": 17,
+        "month": 1
+      },
+      {
+        "label": "Køyretimar og tryggleikskurs",
+        "cost": 20700,
+        "privateCost": 15200,
+        "hours": 40,
+        "privateHours": 56,
+        "month": 3
+      },
+      {
+        "label": "Teoriprøve",
+        "cost": 500,
+        "hours": 12,
+        "month": 6
+      },
+      {
+        "label": "Oppkøyring og utferding",
+        "cost": 6550,
+        "hours": 13,
+        "month": 9
+      }
+    ]
+  },
+  "family": {
+    "bills": {
+      "prebirth": 2300,
+      "birthEquipment": 4200,
+      "childInfant": 1580,
+      "childToddler": 1940,
+      "childcare": 1200,
+      "foodSharedFactor": 0.92,
+      "benefit": 2012,
+      "singleBenefit": 2572,
+      "lump": 92648,
+      "leaveShare": 0.8,
+      "leaveMonths": 6,
+      "forecastMinimumAnnualWage": 100000,
+      "mutualDelay": 9
+    },
+    "people": {
+      "maja": {
+        "name": "Maja",
+        "role": "Ven frå vidaregåande"
+      },
+      "sam": {
+        "name": "Sam",
+        "role": "Ein du har møtt etter vidaregåande"
+      }
+    }
+  },
+  "events": [
+    {
+      "id": "felt-helse",
+      "group": "field-helse",
+      "art": "adultLaboratory",
+      "title": "Ein kollega vil dobbeltsjekke",
+      "text": "De er nesten ferdige for dagen då ein kollega spør om de kan sjå gjennom ei usikker registrering saman. Bussen din går snart.",
+      "choices": [
+        {
+          "label": "Gå gjennom registreringa saman",
+          "effects": {
+            "energy": -2,
+            "social": 3,
+            "study": 0.15
+          }
+        },
+        {
+          "label": "Avtal ei ny gjennomgåing før de startar i morgon",
+          "effects": {
+            "wellbeing": 2,
+            "study": 0.06
+          }
+        }
+      ]
+    },
+    {
+      "id": "felt-oppvekst",
+      "group": "field-oppvekst",
+      "art": "adultEarlyYears",
+      "title": "To vil sitje på same plass",
+      "text": "To born kranglar om plassen nærast døra. Resten av gruppa ventar på at de skal lese vidare.",
+      "choices": [
+        {
+          "label": "Set av tid til å finne ei løysing saman",
+          "effects": {
+            "energy": -2,
+            "wellbeing": 2,
+            "study": 0.15
+          }
+        },
+        {
+          "label": "Be ein kollega ta gruppa medan du snakkar med dei",
+          "effects": {
+            "social": 3,
+            "study": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "felt-samfunn",
+      "group": "field-samfunn",
+      "art": "adultCommunity",
+      "title": "To avtalar på same tid",
+      "text": "Ei sak hastar, men ein person har alt ordna transport for å kome til avtalen de sette opp førre veke.",
+      "choices": [
+        {
+          "label": "Hald avtalen og be om hjelp med den nye saka",
+          "effects": {
+            "social": 3,
+            "energy": -1
+          }
+        },
+        {
+          "label": "Ring tidleg og tilby eit nytt tidspunkt",
+          "effects": {
+            "wellbeing": 2,
+            "study": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "felt-bygg",
+      "group": "field-bygg",
+      "art": "adultArchitecture",
+      "title": "Teikninga og målet stemmer ulikt",
+      "text": "Målet på arbeidsstaden er litt annleis enn på teikninga. Ei avklaring no kan spare dykk for mykje arbeid i morgon.",
+      "choices": [
+        {
+          "label": "Mål ein gong til med arbeidslaget",
+          "effects": {
+            "energy": -2,
+            "social": 3,
+            "study": 0.18
+          }
+        },
+        {
+          "label": "Dokumenter skilnaden og be den som har ansvar avklare",
+          "effects": {
+            "study": 0.12,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "felt-industri",
+      "group": "field-industri",
+      "art": "adultProduction",
+      "title": "Stans i produksjonen",
+      "text": "Ei maskin stoppar på slutten av eit skift. Du har fått tilbod om å vere med på gjennomgangen etter at området er sikra.",
+      "choices": [
+        {
+          "label": "Ver med på gjennomgangen",
+          "effects": {
+            "energy": -3,
+            "study": 0.17,
+            "social": 3
+          }
+        },
+        {
+          "label": "Skriv ned det du såg og møt på neste skift",
+          "effects": {
+            "wellbeing": 2,
+            "study": 0.08
+          }
+        }
+      ]
+    },
+    {
+      "id": "felt-data",
+      "group": "field-data",
+      "art": "adultElectronics",
+      "title": "Feilen kjem berre hjå éin brukar",
+      "text": "Du får ei melding om at dei nye sidene er vanskelege å bruke med tastatur. Resten av laget vil sende dei ut i dag.",
+      "choices": [
+        {
+          "label": "Be brukaren vise kva som stoppar opp",
+          "effects": {
+            "energy": -2,
+            "study": 0.2,
+            "social": 3
+          }
+        },
+        {
+          "label": "Registrer feilen og avtal ei seinare retting",
+          "effects": {
+            "wellbeing": 1,
+            "study": 0.07
+          }
+        }
+      ]
+    },
+    {
+      "id": "felt-natur",
+      "group": "field-natur",
+      "art": "adultGreenhouse",
+      "title": "Vêret snur under feltarbeidet",
+      "text": "Regnet gjer at de neppe rekk dei siste målingane. Laget må velje kva dei treng for å forstå området.",
+      "choices": [
+        {
+          "label": "Vel eit mindre område og få gode målingar",
+          "effects": {
+            "study": 0.17,
+            "energy": -1
+          }
+        },
+        {
+          "label": "Flytt resten av målingane til ein tørr dag",
+          "effects": {
+            "wellbeing": 2,
+            "social": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "felt-logistikk",
+      "group": "field-logistikk",
+      "art": "adultPacking",
+      "title": "Varene kjem før tida",
+      "text": "To leveransar kjem til same port. De har knapt med plass, og eit anna lag treng tilgang før ettermiddagen.",
+      "choices": [
+        {
+          "label": "Fordel portane saman med dei andre",
+          "effects": {
+            "energy": -2,
+            "social": 4,
+            "study": 0.12
+          }
+        },
+        {
+          "label": "Be éin leverandør vente og klargjer plassen",
+          "effects": {
+            "wellbeing": 2,
+            "study": 0.06
+          }
+        }
+      ]
+    },
+    {
+      "id": "felt-service",
+      "group": "field-service",
+      "art": "adultCafe",
+      "title": "Ein kollega treng å byte vakt",
+      "text": "Kveldsvakta vil byte fordi eit møte vart flytta. Du har sjølv sett av kvelden til noko du gler deg til.",
+      "choices": [
+        {
+          "label": "Ta vakta og avtal når du får byte att",
+          "effects": {
+            "wage": 500,
+            "energy": -3,
+            "social": 2
+          }
+        },
+        {
+          "label": "Hald på kvelden og hjelp med å spørje andre",
+          "effects": {
+            "wellbeing": 3,
+            "social": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "felt-okonomi",
+      "group": "field-okonomi",
+      "art": "adultBudgetChoice",
+      "title": "Eit tal som endrar svaret",
+      "text": "Du oppdagar ein utgiftspost som har hamna i feil månad. Planen kan framleis gå opp, men det vil ta tid å forklare avviket.",
+      "choices": [
+        {
+          "label": "Vis begge utrekningane til laget",
+          "effects": {
+            "study": 0.14,
+            "social": 3,
+            "energy": -2
+          }
+        },
+        {
+          "label": "Noter avviket og avklar før neste møte",
+          "effects": {
+            "wellbeing": 2,
+            "study": 0.06
+          }
+        }
+      ]
+    },
+    {
+      "id": "felt-kultur",
+      "group": "field-kultur",
+      "art": "adultMediaDesk",
+      "title": "Kven får ordet i historia?",
+      "text": "Ein interviewperson ber om å få sjå gjennom si eiga utsegn. Fristen for ferdig innhald er i morgon.",
+      "choices": [
+        {
+          "label": "Ta ein kort gjennomgang saman",
+          "effects": {
+            "energy": -2,
+            "social": 3,
+            "study": 0.17
+          }
+        },
+        {
+          "label": "Avtal ein presis frist for tilbakemelding",
+          "effects": {
+            "wellbeing": 2,
+            "study": 0.08
+          }
+        }
+      ]
+    },
+    {
+      "id": "felt-beredskap",
+      "group": "field-beredskap",
+      "art": "adultEmergency",
+      "title": "Varslinga nådde ikkje alle",
+      "text": "Etter ei skrivebordsøving oppdagar de at to personar fekk beskjed for seint. De får velje kva de vil prøve annleis neste gong.",
+      "choices": [
+        {
+          "label": "Spør dei to kva som hindra beskjeden",
+          "effects": {
+            "study": 0.18,
+            "social": 3
+          }
+        },
+        {
+          "label": "Gå gjennom rollene i varslingsplanen",
+          "effects": {
+            "energy": -1,
+            "study": 0.13,
+            "wellbeing": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "folke-kjoken",
+      "group": "experience-folk",
+      "art": "adultBoarding",
+      "title": "Felleskjøkenet treng ein plan",
+      "text": "Tre ulike middagsplanar endar i den same oppvasken. Dei du bur med spør om de kan lage ei enkel vaktliste.",
+      "choices": [
+        {
+          "label": "Lag kveldsmat og fordel oppgåver saman",
+          "effects": {
+            "social": 5,
+            "energy": -2,
+            "study": 0.1
+          }
+        },
+        {
+          "label": "Ta ein roleg kveld og byt oppgåve med ein annan",
+          "effects": {
+            "energy": 3,
+            "social": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "folke-oving",
+      "group": "experience-folk",
+      "art": "adultMusic",
+      "title": "Ei framsyning for dei andre",
+      "text": "Gruppa har lyst å vise det de har halde på med, men eit par elevar trivst best bak scenen.",
+      "choices": [
+        {
+          "label": "Finn ei rolle til kvar i gruppa",
+          "effects": {
+            "social": 5,
+            "study": 0.15,
+            "energy": -2
+          }
+        },
+        {
+          "label": "Lag ei mindre framsyning for internatet",
+          "effects": {
+            "wellbeing": 4,
+            "study": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "reise-tog",
+      "group": "experience-travel",
+      "art": "adultTrain",
+      "title": "Toget går ein dag seinare",
+      "text": "Du må velje mellom ein ekstra kveld der du er og ei dyrare avreise no. Rommet er framleis ledig til i morgon.",
+      "choices": [
+        {
+          "label": "Del rommet med ein annan reisande",
+          "effects": {
+            "cash": -280,
+            "social": 4
+          }
+        },
+        {
+          "label": "Ta ei anna avreise og hald planen",
+          "effects": {
+            "cash": -550,
+            "energy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "reise-vandrarheim",
+      "group": "experience-travel",
+      "art": "adultHostel",
+      "title": "Kveld på vandrarheimen",
+      "text": "Nokon spør om du vil vere med ut. Det er ei god stund til neste løn, og det finst eit kjøken på vandrarheimen.",
+      "choices": [
+        {
+          "label": "Lag middag saman på kjøkenet",
+          "effects": {
+            "cash": -120,
+            "social": 4,
+            "wellbeing": 2
+          }
+        },
+        {
+          "label": "Bli med og ta ein roleg dag i morgon",
+          "effects": {
+            "cash": -420,
+            "social": 4,
+            "energy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "privatist-gruppe",
+      "group": "experience-retake",
+      "art": "adultGuidance",
+      "title": "Øve før eksamen",
+      "text": "Ein annan privatist spør om de skal gå gjennom svara saman. Arbeidsdagen har vore lang.",
+      "choices": [
+        {
+          "label": "Øv saman i ein time",
+          "effects": {
+            "study": 0.24,
+            "social": 3,
+            "energy": -2
+          }
+        },
+        {
+          "label": "Kvile i kveld og set av tid i morgon",
+          "effects": {
+            "study": 0.12,
+            "energy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "realfag-forsok",
+      "group": "experience-science",
+      "art": "adultLaboratory",
+      "title": "Den fyrste utrekninga stemmer ikkje",
+      "text": "Du må forstå feilen før neste økt. Det sit ein lærar i rommet ved sida av, og ei kollega på jobb kan byte ei vakt.",
+      "choices": [
+        {
+          "label": "Spør læraren og gjer oppgåva på nytt",
+          "effects": {
+            "study": 0.25,
+            "energy": -2
+          }
+        },
+        {
+          "label": "Byt ei vakt og arbeid vidare med eit døme",
+          "effects": {
+            "study": 0.14,
+            "energy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "transport-buss",
+      "group": "transport-public",
+      "art": "adultLocalBus",
+      "title": "Neste buss går om ein time",
+      "text": "Vakta sluttar seinare enn venta. Ein kollega skal til same stoppestad som deg.",
+      "choices": [
+        {
+          "label": "Vent saman og ta den neste bussen",
+          "effects": {
+            "energy": -2,
+            "social": 3
+          }
+        },
+        {
+          "label": "Del ei kortare heimreise",
+          "effects": {
+            "cash": -140,
+            "energy": 2,
+            "social": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "transport-sykkel",
+      "group": "transport-bike",
+      "art": "adultCycle",
+      "title": "Sykkelen må på verkstad",
+      "text": "Kjedet hoppar på veg heim. Du kan ordne det saman med ein ven eller få verkstaden til å sjå over sykkelen.",
+      "choices": [
+        {
+          "label": "Bruk ein kveld på å fikse det saman",
+          "effects": {
+            "cash": -150,
+            "energy": -1,
+            "social": 3
+          }
+        },
+        {
+          "label": "Betal for service",
+          "effects": {
+            "cash": -500,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "transport-koyretime",
+      "group": "transport-licence",
+      "art": "adultDrivingLesson",
+      "title": "Ei økt med køyrelæraren",
+      "text": "Du får råd om å ta deg betre tid til å observere og planleggje før eit val i trafikken. Kva tek du med deg til neste øving?",
+      "choices": [
+        {
+          "label": "Set av litt tid til å snakke gjennom økta",
+          "effects": {
+            "energy": -2,
+            "wellbeing": 3
+          }
+        },
+        {
+          "label": "Hald av ein kvilekveld før neste økt",
+          "effects": {
+            "energy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "transport-prove",
+      "group": "transport-test",
+      "art": "adultDrivingTest",
+      "title": "Førebuing til oppkøyring",
+      "text": "Du har sett av tid til førarprøva. Ein ven tilbyr å hjelpe deg med å halde ro og finne fram til timen.",
+      "choices": [
+        {
+          "label": "Ta imot hjelp med praktiske førebuingar",
+          "effects": {
+            "social": 3,
+            "energy": 2
+          }
+        },
+        {
+          "label": "Gjer klart utstyret og ta ein tidleg kveld",
+          "effects": {
+            "energy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "transport-verkstad",
+      "group": "transport-car",
+      "art": "adultGarage",
+      "title": "Ei utgift på bilen",
+      "text": "Verkstaden seier at noko bør skiftast. Du vil ha ei trygg løysing og treng ei anna reise heim medan dei ser på bilen.",
+      "choices": [
+        {
+          "label": "Ordne service og samkøyr heim",
+          "effects": {
+            "cash": -1300,
+            "social": 2
+          }
+        },
+        {
+          "label": "Betal for service og ta kollektivt heim",
+          "effects": {
+            "cash": -1420,
+            "energy": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "familie-ven",
+      "group": "family",
+      "art": "adultFamilyTea",
+      "title": "Maja vil finne ein kveld",
+      "text": "Maja har halde av torsdag. Det kjem ei ekstravakt på same tid, og ho spør om de skal finne ein ny kveld.",
+      "choices": [
+        {
+          "label": "Hald avtalen med Maja",
+          "effects": {
+            "social": 5,
+            "wellbeing": 3,
+            "family": "friend-keep"
+          }
+        },
+        {
+          "label": "Ta vakta og foreslå ein konkret ny kveld",
+          "effects": {
+            "wage": 550,
+            "energy": -2,
+            "social": 1,
+            "family": "friend-new"
+          }
+        }
+      ]
+    },
+    {
+      "id": "familie-ven-oppfolging",
+      "group": "family",
+      "art": "adultFamilyTea",
+      "title": "Maja hugsar avtalen",
+      "text": "Maja har teke med te. Ho vil gjerne sjå deg oftare, men seier frå om at ho treng at de er tydelege på når de kan møtast.",
+      "choices": [
+        {
+          "label": "Finn ein kveld kvar av dykk kan halde av",
+          "effects": {
+            "social": 5,
+            "wellbeing": 2,
+            "family": "friend-follow"
+          }
+        },
+        {
+          "label": "Avtal kortare møte når de har tid",
+          "effects": {
+            "social": 3,
+            "energy": 2,
+            "family": "friend-follow"
+          }
+        }
+      ],
+      "recall": [
+        {
+          "id": "familie-ven",
+          "choice": 0,
+          "text": "«Det betydde noko at du heldt av kvelden sist òg», seier Maja."
+        },
+        {
+          "id": "familie-ven",
+          "choice": 1,
+          "text": "«Eg vart glad for at du faktisk foreslo ein ny dag sist», seier Maja."
+        }
+      ]
+    },
+    {
+      "id": "familie-sam",
+      "group": "family",
+      "art": "adultFamilyTalk",
+      "title": "Sam spør om de skal møtast att",
+      "text": "De har snakka ei stund, og Sam likar å vere saman med deg. Sam spør om de vil prøve å bli kjende som noko meir enn vener.",
+      "choices": [
+        {
+          "label": "Ja, prøv eit forhold i roleg tempo",
+          "effects": {
+            "social": 4,
+            "wellbeing": 4,
+            "family": "partner-start"
+          }
+        },
+        {
+          "label": "Hald fram som vener",
+          "effects": {
+            "social": 4,
+            "wellbeing": 2,
+            "family": "partner-friend"
+          }
+        }
+      ]
+    },
+    {
+      "id": "familie-maja",
+      "group": "family",
+      "art": "adultFamilyTalk",
+      "title": "Maja spør om de skal møtast att",
+      "text": "Maja likar å vere saman med deg og spør om de skal prøve eit forhold. Du kan ta praten og framleis velje det som passar deg.",
+      "choices": [
+        {
+          "label": "Ja, prøv eit forhold i roleg tempo",
+          "effects": {
+            "social": 4,
+            "wellbeing": 4,
+            "family": "partner-maja"
+          }
+        },
+        {
+          "label": "Hald fram som vener",
+          "effects": {
+            "social": 4,
+            "wellbeing": 2,
+            "family": "maja-friend"
+          }
+        }
+      ]
+    },
+    {
+      "id": "familie-bu-saman",
+      "group": "family",
+      "art": "adultFamilyMove",
+      "title": "Kvar vil de bu?",
+      "text": "De trivst saman, men har ulik reiseveg. Partnaren spør om de vil sjå på kva ei delt leige og ein kvardag saman ville koste.",
+      "choices": [
+        {
+          "label": "Undersøk delt leige til neste årsplan",
+          "effects": {
+            "social": 4,
+            "wellbeing": 2,
+            "family": "cohabit-yes"
+          }
+        },
+        {
+          "label": "Bu kvar for dykk litt til",
+          "effects": {
+            "energy": 2,
+            "social": 2,
+            "family": "cohabit-wait"
+          }
+        }
+      ]
+    },
+    {
+      "id": "familie-plan-barn",
+      "group": "family",
+      "art": "adultFamilyPlan",
+      "title": "Kva ønskjer de framover?",
+      "text": "De snakkar om tid, økonomi og om de ønskjer barn. Partnaren vil berre gå vidare dersom de båe ønskjer det og har ein plan.",
+      "choices": [
+        {
+          "label": "Snakk om eit mogeleg tidspunkt i årsplanen",
+          "effects": {
+            "social": 4,
+            "wellbeing": 2,
+            "family": "child-yes"
+          }
+        },
+        {
+          "label": "Vent med å leggje ein plan",
+          "effects": {
+            "social": 2,
+            "energy": 2,
+            "family": "child-wait"
+          }
+        }
+      ]
+    },
+    {
+      "id": "familie-avstand",
+      "group": "family",
+      "art": "adultSharedCare",
+      "title": "De treng tid til ein prat",
+      "text": "Det har vore fleire veker med kolliderande planar. Partnaren fortel at de må endre måten de held kontakt på dersom forholdet skal vare.",
+      "choices": [
+        {
+          "label": "Finn ei endring begge vil prøve",
+          "effects": {
+            "social": 4,
+            "energy": -1,
+            "family": "partner-repair"
+          }
+        },
+        {
+          "label": "Avslutt forholdet og lag ei løysing for det praktiske",
+          "effects": {
+            "wellbeing": -4,
+            "energy": 2,
+            "family": "partner-end"
+          }
+        }
+      ]
+    },
+    {
+      "id": "familie-slutt",
+      "group": "family",
+      "art": "adultSharedCare",
+      "title": "Partnaren vil avslutte forholdet",
+      "text": "Partnaren har tenkt på dei samtalane de har hatt tidlegare. No vil dei avslutte forholdet. De må finne ei praktisk løysing for avtalane de har saman.",
+      "choices": [
+        { "label": "Ta ein samtale om dei neste vekene", "effects": { "family": "partner-end", "wellbeing": -3, "social": 2 } },
+        { "label": "Be om ein pause og avtal eit praktisk møte seinare", "effects": { "family": "partner-end", "wellbeing": -4, "energy": 2 } }
+      ]
+    },
+    {
+      "id": "familie-ven-stotte",
+      "group": "family",
+      "art": "adultFamilyHelp",
+      "title": "Maja kjem innom med middag",
+      "text": "De har hatt lite søvn og mykje å gjere. Maja tilbyr å bli ei stund så du kan få ein pause, eller å setje frå seg middagen og gå.",
+      "choices": [
+        {
+          "label": "Ta imot middag og litt hjelp",
+          "effects": {
+            "energy": 5,
+            "social": 4,
+            "family": "friend-follow"
+          }
+        },
+        {
+          "label": "Takk for maten og ta ein roleg kveld",
+          "effects": {
+            "energy": 4,
+            "wellbeing": 2,
+            "family": "friend-follow"
+          }
+        }
+      ]
+    },
+    {
+      "id": "familie-trilletur",
+      "group": "family",
+      "art": "adultStroller",
+      "title": "Ein roleg trilletur",
+      "text": "Barnet har endeleg sovna. Du får velje om du vil ta ein kort tur med ein ven eller la resten av dagen vere roleg.",
+      "choices": [
+        {
+          "label": "Gå ein liten tur saman med ein ven",
+          "effects": {
+            "social": 4,
+            "wellbeing": 3
+          }
+        },
+        {
+          "label": "Gå heim og ta ein pause",
+          "effects": {
+            "energy": 4,
+            "wellbeing": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "familie-barnehage",
+      "group": "family",
+      "art": "adultChildcare",
+      "title": "Kven hentar i barnehagen?",
+      "text": "Ei vakt vart flytta. De treng ei løysing som gjer at barnet blir henta i tide, og som kan verke seinare òg.",
+      "choices": [
+        {
+          "label": "Avtal kven som kan ta hentedagen fast",
+          "effects": {
+            "social": 4,
+            "energy": -1
+          }
+        },
+        {
+          "label": "Flytt ei oppgåve og hent sjølv i dag",
+          "effects": {
+            "energy": -2,
+            "wellbeing": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "familie-delt-omsorg",
+      "group": "family",
+      "art": "adultSharedCare",
+      "title": "To heimar, éin kvardagsplan",
+      "text": "De har kome fram til ulike planar for ei frihelg. De må finne ut kvar barnet skal vere og kven som tek turen mellom heimane.",
+      "choices": [
+        {
+          "label": "Lag ein delt kalender og avklar reisa",
+          "effects": {
+            "energy": -1,
+            "social": 4
+          }
+        },
+        {
+          "label": "Hald på avtalen og finn ein ny dato for turen",
+          "effects": {
+            "wellbeing": 3,
+            "social": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "familie-lesestund",
+      "group": "family",
+      "art": "adultFamilyReading",
+      "title": "Ei bok før kvelden",
+      "text": "Barnet hentar den same boka som i går. Du har òg ein frist i morgon og har lova å ringje ein ven.",
+      "choices": [
+        {
+          "label": "Les saman og send venen ei kort melding",
+          "effects": {
+            "energy": -1,
+            "wellbeing": 4,
+            "social": 2
+          }
+        },
+        {
+          "label": "Del opp kveldane og hald på ein fast lesekveld",
+          "effects": {
+            "energy": 2,
+            "wellbeing": 3
+          }
+        }
+      ]
+    }
+  ]
+}
