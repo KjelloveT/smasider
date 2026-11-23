@@ -32,7 +32,7 @@ jobs:
                const coredemo = require('@actions/core')
                return await coredemo.getIDToken()
            result-encoding: string
-       - name: Prepare static site content
+      - name: Prepare static site content
         run: |
           mkdir -p _deploy-content
           git archive HEAD | tar -x -C _deploy-content
