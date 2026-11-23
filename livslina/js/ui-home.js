@@ -106,7 +106,7 @@ LL.uiHome = (function () {
     const totalTerms = rounds.filter(r => r.kind === 'term').length;
     const apprenticeRoute = state.program.type === 'yrkesfag' && state.trainingRoute === 'apprenticeship';
     wrap.setAttribute('aria-label', apprenticeRoute
-      ? 'VG1 og VG2, fyrste læreår og sommarpausar'
+      ? 'VG1 og VG2, begge læreåra og sommarpausar'
       : 'Dei seks skulehalvåra og dei to sommarane');
     const summary = document.getElementById('homeTimelineSummary');
     if (current && current.kind === 'summer') {

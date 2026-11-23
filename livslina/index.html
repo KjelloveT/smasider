@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Livslina — val gjennom vidaregåande</title>
+<title>Livslina — val gjennom livet</title>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.9">
-<link rel="stylesheet" href="css/style.css?v=2">
+<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="css/phase2.css?v=7">
   <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
 <body class="vp-page" data-vp-design data-vp-site-page="true" data-vp-layout="medium" data-vp-site-footer>
@@ -50,7 +51,7 @@
         <li class="vp-panel vp-panel--plain ll-life-stage is-upcoming">
           <strong class="ll-life-stage-age">20–25 år</strong>
           <span class="ll-life-stage-label">Studium eller arbeid</span>
-          <span class="ll-life-stage-status">Under utvikling</span>
+          <span class="ll-life-stage-status">Prøveutgåve etter vidaregåande</span>
           <span class="ll-life-stage-arrow" aria-hidden="true">→</span>
         </li>
         <li class="vp-panel vp-panel--plain ll-life-stage is-upcoming">
@@ -87,6 +88,7 @@
         <span data-icon="helpCircle"></span> Om tala
       </button>
       <input type="file" id="importFile" accept="application/json" hidden>
+      <p id="importFeedback" class="vp-help" role="alert" hidden></p>
     </div>
   </section>
 
@@ -195,6 +197,7 @@
     <div class="ll-room-layout">
       <section class="vp-panel vp-panel--plain ll-room-stage-panel" aria-labelledby="roomSceneTitle">
         <h3 class="heading4 no-mt" id="roomSceneTitle">Slik ser rommet ut</h3>
+        <div id="roomAdultControls" class="ll-adult-stack" hidden></div>
         <div id="roomDiorama" class="ll-room-scene"></div>
         <p class="vp-help">Vel ein ting i butikken for å sjå henne i rommet før du kjøper.</p>
       </section>
@@ -209,10 +212,12 @@
           <p class="ll-eyebrow">Vald vare</p>
           <h4 id="roomSelectedName"></h4>
           <p id="roomSelectedDescription" class="ll-note"></p>
+          <div id="roomDestination" hidden></div>
           <div class="ll-product-action-row">
             <strong id="roomSelectedPrice"></strong>
             <button class="vp-button vp-button--primary" id="roomAction" type="button"></button>
           </div>
+          <div id="roomInventoryActions" class="vp-actions" hidden></div>
         </article>
         <p id="roomShopStatus" class="ll-note" role="status" aria-live="polite"></p>
       </section>
@@ -221,35 +226,89 @@
 
   <!-- ══════════ BUDSJETTKORTET ══════════ -->
   <section id="screen-budget" class="screen">
-    <h2 class="heading3 no-mt" id="budgetRound">Planlegg halvåret</h2>
+    <div class="vp-panel vp-panel--plain vp-panel--compact ll-budget-navigation">
+      <h2 class="heading3" id="budgetRound">Planlegg halvåret</h2>
+      <div class="ll-plan-tabs" id="budgetTabs" role="tablist" aria-label="Delar av halvårsplanen">
+        <button class="vp-button vp-button--tool vp-button--compact" id="budgetTabJob" type="button" role="tab" aria-selected="true" aria-controls="budgetSectionJob">
+          <span class="vp-selection-mark" data-icon="check" aria-hidden="true"></span>Jobb
+        </button>
+        <button class="vp-button vp-button--tool vp-button--compact" id="budgetTabWeekday" type="button" role="tab" aria-selected="false" aria-controls="budgetSectionWeekday" tabindex="-1">
+          <span class="vp-selection-mark" data-icon="check" aria-hidden="true"></span>Vekedag
+        </button>
+        <button class="vp-button vp-button--tool vp-button--compact" id="budgetTabLeisure" type="button" role="tab" aria-selected="false" aria-controls="budgetSectionLeisure" tabindex="-1">
+          <span class="vp-selection-mark" data-icon="check" aria-hidden="true"></span>Fritid
+        </button>
+        <button class="vp-button vp-button--tool vp-button--compact" id="budgetTabFood" type="button" role="tab" aria-selected="false" aria-controls="budgetSectionFood" tabindex="-1">
+          <span class="vp-selection-mark" data-icon="check" aria-hidden="true"></span>Mat og drikke
+        </button>
+        <button class="vp-button vp-button--tool vp-button--compact" id="budgetTabClothesMobile" type="button" role="tab" aria-selected="false" aria-controls="budgetSectionClothesMobile" tabindex="-1">
+          <span class="vp-selection-mark" data-icon="check" aria-hidden="true"></span>Klede og mobil
+        </button>
+        <button class="vp-button vp-button--tool vp-button--compact" id="budgetTabGames" type="button" role="tab" aria-selected="false" aria-controls="budgetSectionGames" tabindex="-1">
+          <span class="vp-selection-mark" data-icon="check" aria-hidden="true"></span>Spelkjøp
+        </button>
+        <button class="vp-button vp-button--tool vp-button--compact" id="budgetTabSavings" type="button" role="tab" aria-selected="false" aria-controls="budgetSectionSavings" tabindex="-1">
+          <span class="vp-selection-mark" data-icon="check" aria-hidden="true"></span>Sparing
+        </button>
+      </div>
+    </div>
     <div class="ll-budget-grid">
-      <div class="vp-panel vp-panel--plain">
-        <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skulen</legend><div class="ll-btn-row" id="budgetJob" role="group"></div></fieldset>
-        <fieldset class="vp-field ll-ctrl ll-weekday-plan">
-          <legend>Planlegg ein vanleg vekedag</legend>
-          <p class="ll-note">Korleis ser ein vanleg vekedag ut? Du kan ikkje gjere noko med 8t kvile og 8t skule. Dei er låst. Men du kan sjølv bestemme kva du skal gjere dei siste 8 timane i døgnet.</p>
-          <div class="ll-weekday-locked" aria-label="Låst tid kvar vekedag">
-            <div><span>Kvile og søvn</span><strong>8 t · låst</strong></div>
-            <div><span>Skule</span><strong>8 t · låst</strong></div>
+      <div>
+        <div class="vp-panel vp-panel--plain">
+          <div class="ll-plan-step-bar">
+            <button class="vp-button vp-button--icon vp-button--compact" id="budgetPrevSection" type="button" aria-label="Førre del av planen" disabled>
+              <span data-icon="arrowLeft" aria-hidden="true"></span>
+            </button>
+            <h3 class="heading4" id="budgetCategory" tabindex="-1" aria-live="polite">Jobb</h3>
+            <button class="vp-button vp-button--icon vp-button--compact" id="budgetNextSection" type="button" aria-label="Neste del av planen">
+              <span data-icon="arrowRight" aria-hidden="true"></span>
+            </button>
           </div>
-          <p id="budgetJobTimeImpact" class="ll-job-time-impact" role="status" aria-live="polite">Ingen jobb tek tid frå denne kvardagen.</p>
-          <div id="budgetWeekdayControls" class="ll-time-list"></div>
-          <p id="budgetFreeTime" class="ll-time-remaining" aria-live="polite">Du har 8 av 8 timar att til eigne val denne kvardagen.</p>
-        </fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Fritidsaktivitetar</legend><div class="ll-btn-row" id="budgetActivities" role="group"></div></fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Kor ofte handlar du i skulekantina?</legend><div class="ll-btn-row" id="budgetCanteen" role="group" aria-label="Kantinekjøp per veke"></div></fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brus eller energidrikk kjøper du?</legend><div class="ll-btn-row" id="budgetDrinks" role="group" aria-label="Kjøp av brus eller energidrikk per veke"></div></fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Kor ofte kjøper du mat ute?</legend><div class="ll-btn-row" id="budgetEatingOut" role="group" aria-label="Mat ute per veke"></div></fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Kor ofte brukar du pengar på festar eller sosiale arrangement?</legend><div class="ll-btn-row" id="budgetSocialEvents" role="group" aria-label="Fest og sosiale arrangement per månad"></div></fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brukar du på klesshopping i veka?</legend><div class="ll-btn-row" id="budgetClothingShopping" role="group" aria-label="Klesshopping per veke"></div></fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brukar du på kjøp inne i spel i veka?</legend><div class="ll-btn-row" id="budgetInGamePurchases" role="group" aria-label="Kjøp inne i spel per veke"></div></fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Kor mykje mobildata brukar du?</legend><div class="ll-btn-row" id="budgetMobile" role="group" aria-label="Mobildata per månad"></div></fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Kjøper du sesongpass i spel?</legend><div class="ll-btn-row" id="budgetSeasonPass" role="group" aria-label="Sesongpass i spel"></div></fieldset>
-        <fieldset class="vp-field ll-ctrl"><legend>Fast sparing</legend><div class="ll-btn-row" id="budgetSavings" role="group"></div></fieldset>
+          <div id="budgetSectionJob" role="tabpanel" aria-labelledby="budgetTabJob" tabindex="0">
+            <fieldset class="vp-field ll-ctrl"><legend>Jobb ved sida av skule eller læretid</legend><div class="ll-btn-row" id="budgetJob" role="group"></div></fieldset>
+          </div>
+          <div id="budgetSectionWeekday" role="tabpanel" aria-labelledby="budgetTabWeekday" tabindex="0" hidden>
+            <fieldset class="vp-field ll-ctrl ll-weekday-plan">
+              <legend>Planlegg ein vanleg vekedag</legend>
+              <p class="ll-note">I denne forenkla kvardagsplanen er 8 timar sette av til kvile og 8 timar til skule eller arbeid i lære. Du kan fordele dei siste 8 timane mellom eigne val.</p>
+              <div class="ll-weekday-locked" aria-label="Låst tid kvar vekedag">
+                <div><span>Kvile og søvn</span><strong>8 t · låst</strong></div>
+                <div><span>Skule eller læretid</span><strong>8 t · låst</strong></div>
+              </div>
+              <p id="budgetJobTimeImpact" class="ll-job-time-impact" role="status" aria-live="polite">Ingen jobb tek tid frå denne kvardagen.</p>
+              <div id="budgetWeekdayControls" class="ll-time-list"></div>
+              <p id="budgetFreeTime" class="ll-time-remaining" aria-live="polite">Du har 8 av 8 timar att til eigne val denne kvardagen.</p>
+            </fieldset>
+          </div>
+          <div id="budgetSectionLeisure" role="tabpanel" aria-labelledby="budgetTabLeisure" tabindex="0" hidden>
+            <fieldset class="vp-field ll-ctrl"><legend>Fritidsaktivitetar</legend><div class="ll-btn-row" id="budgetActivities" role="group"></div></fieldset>
+            <fieldset class="vp-field ll-ctrl"><legend>Kor ofte brukar du pengar på festar eller sosiale arrangement?</legend><div class="ll-btn-row" id="budgetSocialEvents" role="group" aria-label="Fest og sosiale arrangement per månad"></div></fieldset>
+          </div>
+          <div id="budgetSectionFood" role="tabpanel" aria-labelledby="budgetTabFood" tabindex="0" hidden>
+            <fieldset class="vp-field ll-ctrl"><legend>Kor ofte handlar du i skulekantina?</legend><div class="ll-btn-row" id="budgetCanteen" role="group" aria-label="Kantinekjøp per veke"></div></fieldset>
+            <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brus eller energidrikk kjøper du?</legend><div class="ll-btn-row" id="budgetDrinks" role="group" aria-label="Kjøp av brus eller energidrikk per veke"></div></fieldset>
+            <fieldset class="vp-field ll-ctrl"><legend>Kor ofte kjøper du mat ute?</legend><div class="ll-btn-row" id="budgetEatingOut" role="group" aria-label="Mat ute per veke"></div></fieldset>
+          </div>
+          <div id="budgetSectionClothesMobile" role="tabpanel" aria-labelledby="budgetTabClothesMobile" tabindex="0" hidden>
+            <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brukar du på klesshopping i veka?</legend><div class="ll-btn-row" id="budgetClothingShopping" role="group" aria-label="Klesshopping per veke"></div></fieldset>
+            <fieldset class="vp-field ll-ctrl"><legend>Kor mykje mobildata brukar du?</legend><div class="ll-btn-row" id="budgetMobile" role="group" aria-label="Mobildata per månad"></div></fieldset>
+          </div>
+          <div id="budgetSectionGames" role="tabpanel" aria-labelledby="budgetTabGames" tabindex="0" hidden>
+            <fieldset class="vp-field ll-ctrl"><legend>Kor mykje brukar du på kjøp inne i spel i veka?</legend><div class="ll-btn-row" id="budgetInGamePurchases" role="group" aria-label="Kjøp inne i spel per veke"></div></fieldset>
+            <fieldset class="vp-field ll-ctrl"><legend>Kjøper du sesongpass i spel?</legend><div class="ll-btn-row" id="budgetSeasonPass" role="group" aria-label="Sesongpass i spel"></div></fieldset>
+          </div>
+          <div id="budgetSectionSavings" role="tabpanel" aria-labelledby="budgetTabSavings" tabindex="0" hidden>
+            <fieldset class="vp-field ll-ctrl"><legend>Fast sparing</legend><div class="ll-btn-row" id="budgetSavings" role="group"></div></fieldset>
+          </div>
+        </div>
+        <div class="ll-wizard-nav">
+          <button class="vp-button vp-button--quiet" id="budgetBack" type="button"><span data-icon="arrowLeft" aria-hidden="true"></span> Til oversikta</button>
+          <button class="vp-button vp-button--primary" id="budgetRun" type="button">Køyr halvåret <span data-icon="play"></span></button>
+        </div>
       </div>
 
       <div class="vp-panel vp-panel--soft ll-budget-summary">
-        <h3 class="heading4 no-mt">Månadsbudsjett</h3>
+        <h3 class="heading4 no-mt">Snitt per månad dette halvåret</h3>
         <div class="ll-budget-totals">
           <div><span>Sum inn</span><strong id="budgetIncomeTotal">0 kr</strong></div>
           <div><span>Sum ut</span><strong id="budgetExpenseTotal">0 kr</strong></div>
@@ -272,11 +331,6 @@
         <p class="ll-note ll-debt-message" id="budgetDebtMessage" hidden></p>
         <p class="ll-note" id="budgetFrikort" hidden></p>
       </div>
-    </div>
-
-    <div class="ll-wizard-nav">
-      <button class="vp-button vp-button--quiet" id="budgetBack" type="button"><span data-icon="arrowLeft"></span> Tilbake</button>
-      <button class="vp-button vp-button--primary" id="budgetRun" type="button">Køyr halvåret <span data-icon="play"></span></button>
     </div>
   </section>
 
@@ -342,7 +396,7 @@
     </div>
 
     <div class="vp-panel vp-panel--plain">
-      <h3 class="heading4 no-mt"><span data-icon="coins"></span> Brukskontoen gjennom tre år</h3>
+      <h3 class="heading4 no-mt" id="finalChartTitle"><span data-icon="coins"></span> Brukskontoen gjennom vidaregåande</h3>
       <div id="finalChart"></div>
     </div>
 
@@ -363,6 +417,7 @@
     </div>
 
     <div class="ll-wizard-nav">
+      <button class="vp-button vp-button--primary" id="finalContinue" type="button">Hald fram i livslina <span data-icon="arrowRight"></span></button>
       <button class="vp-button vp-button--tool" id="finalExport" type="button"><span data-icon="download"></span> Eksporter</button>
       <button class="vp-button vp-button--primary" id="finalAgain" type="button"><span data-icon="rotateCcw"></span> Prøv ein annan veg</button>
     </div>
@@ -382,6 +437,7 @@
     </div>
   </section>
 
+  <section id="screen-adult" class="screen" aria-label="Studium og arbeid"><div id="adultContent" class="ll-adult-stack"></div></section>
 </main>
 </div>
 
@@ -418,6 +474,20 @@
   </div>
 </div>
 
+<dialog class="vp-dialog" id="planStartDialog" aria-labelledby="planStartTitle" aria-describedby="planStartMissing">
+  <div class="vp-dialog-head">
+    <h2 class="vp-heading" id="planStartTitle">Vil du starte no?</h2>
+    <button class="vp-button vp-button--icon vp-button--quiet" type="button" data-close-modal="planStartDialog" aria-label="Lukk">
+      <span data-icon="x" aria-hidden="true"></span>
+    </button>
+  </div>
+  <p id="planStartMissing"></p>
+  <div class="vp-actions">
+    <button class="vp-button vp-button--tool" id="planReview" type="button" autofocus>Sjå over vala</button>
+    <button class="vp-button vp-button--primary" id="planStartAnyway" type="button">Start likevel</button>
+  </div>
+</dialog>
+
 <!-- ══════════ Hendingskort-modal ══════════ -->
 <div class="modal-overlay modal-locked vp-modal-backdrop" data-vp-modal-escape="local" id="eventModal" aria-hidden="true">
   <div class="ll-event-modal vp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="eventTitle">
@@ -445,7 +515,7 @@
 
 <script src="../js/vyrdepil-storage.js"></script>
 <script src="../js/vyrdepil-bragd.js?v=5"></script>
-<script src="../js/vyrdepil-icons.js"></script>
+<script src="../js/vyrdepil-icons.js?v=livslina-smile"></script>
 <script src="../js/vyrdepil-util.js?v=1.2"></script>
 <script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=8"></script>
@@ -453,28 +523,47 @@
 
 <script src="assets/prototype/resources-v5/item-catalog.js"></script>
 <script src="assets/prototype/resources-v5/bed-price-ladder.js"></script>
-<script src="assets/prototype/layout-room-model.js"></script>
+<script src="assets/prototype/layout-room-model.js?v=3"></script>
 <script src="assets/prototype/character-builder-model.js"></script>
 <script src="assets/prototype/character-builder-art.js"></script>
 
 <script src="js/util.js"></script>
-<script src="js/data.js"></script>
-<script src="js/state.js"></script>
-<script src="js/storage.js"></script>
-<script src="js/economy.js"></script>
+<script src="js/phase2-paths.js?v=1"></script>
+<script src="js/data.js?v=15"></script>
+<script src="js/state.js?v=11"></script>
+<script src="js/phase2-transport.js?v=1"></script>
+<script src="js/phase2-family.js?v=1"></script>
+<script src="js/phase2-rooms.js?v=1"></script>
+<script src="js/phase2-state.js?v=5"></script>
+<script src="js/storage.js?v=10"></script>
+<script src="js/economy.js?v=4"></script>
 <script src="js/events.js"></script>
-<script src="js/sim.js"></script>
+<script src="js/sim.js?v=2"></script>
+<script src="js/phase2-housing.js?v=2"></script>
+<script src="js/phase2-economy.js?v=5"></script>
+<script src="js/phase2-effects.js?v=2"></script>
+<script src="js/phase2-events.js?v=3"></script>
+<script src="js/phase2-sim.js?v=4"></script>
 <script src="js/art-character.js"></script>
-<script src="js/art-room.js"></script>
-<script src="js/art-vignettes.js"></script>
+<script src="js/art-room.js?v=3"></script>
+<script src="js/art-vignettes.js?v=4"></script>
 <script src="js/art-programs.js"></script>
-<script src="js/ui-setup.js"></script>
-<script src="js/ui-home.js"></script>
-<script src="js/ui-room.js"></script>
-<script src="js/ui-budget.js"></script>
+<script src="js/ui-setup.js?v=11"></script>
+<script src="js/ui-home.js?v=10"></script>
+<script src="js/ui-room.js?v=2"></script>
+<script src="js/ui-plan-steps.js"></script>
+<script src="js/ui-budget.js?v=4"></script>
 <script src="js/ui-summer.js"></script>
 <script src="js/ui-playback.js"></script>
-<script src="js/ui-report.js?v=2"></script>
-<script src="js/main.js"></script>
+<script src="js/ui-report.js?v=10"></script>
+<script src="js/ui-phase2-visuals.js?v=3"></script>
+<script src="js/ui-phase2-guide.js?v=4"></script>
+<script src="js/ui-phase2-career.js?v=1"></script>
+<script src="js/ui-phase2-life.js?v=1"></script>
+<script src="js/ui-phase2-report.js?v=3"></script>
+<script src="js/ui-phase2.js?v=5"></script>
+<script src="js/ui-phase2-plan.js?v=8"></script>
+<script src="js/ui-phase2-play.js?v=4"></script>
+<script src="js/main.js?v=10"></script>
 </body>
 </html>

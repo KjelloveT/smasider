@@ -53,7 +53,7 @@ LL.sim = (function () {
   // Køyr éin månad: bruk økonomi, oppdater saldo/stat, logg ledger.
   function stepMonth(state, ctx, monthIdx) {
     const metersBefore = Object.assign({}, state.stats);
-    const b = LL.economy.monthlyBreakdown(state);
+    const b = LL.economy.monthlyBreakdown(state, monthIdx);
 
     for (const k in b.income) addCat(ctx.income, k, b.income[k]);
     for (const k in b.expense) addCat(ctx.expense, k, b.expense[k]);

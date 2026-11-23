@@ -28,8 +28,11 @@ LL.artRoom = (function () {
     const rug = product(equipped.rug);
     const floorItem = product(equipped.floorItem);
     const decor = product(equipped.decor);
+    const bench = product(equipped['tv-bench']), tv = product(equipped.tv), pc = product(equipped.pc);
+    const adult = room?.adultRoom;
     return {
       gameRoomMode: true,
+      unfurnished: adult ? ['bed', 'desk', 'chair'].filter(slot => !equipped[slot]) : [],
       bed: String(bed.tier).padStart(2, '0'),
       bedTier: bed.tier,
       desk: String(desk.tier),
@@ -39,9 +42,15 @@ LL.artRoom = (function () {
       sofaSize: sofa ? String(sofa.variant).padStart(2, '0') : '01',
       rugPresent: !!rug,
       rug: rug ? String(rug.tier) : '01',
-      'tv-benchPresent': false,
-      tvPresent: false,
-      pcPresent: false,
+      'tv-benchPresent': Boolean(bench),
+      'tv-bench': String(bench?.tier || 1),
+      tvPresent: Boolean(tv),
+      tv: String(tv?.tier || 1),
+      pcPresent: Boolean(pc),
+      pc: String(pc?.tier || 1),
+      diningPresent: Boolean(equipped.dining),
+      cribPresent: Boolean(equipped.crib),
+      chestPresent: Boolean(equipped.chest),
       floorItem: floorItem ? floorItem.family : 'none',
       floorVariant: floorItem ? String(floorItem.tier) : '01',
       decorKind: decor ? decor.family : 'none',
@@ -51,11 +60,16 @@ LL.artRoom = (function () {
     };
   }
 
-  function render(target, room, previewId, label) {
+  function render(target, room, previewId, label, roomView) {
     if (!target || !roomModel || !LL.data.getRoomShop()) return false;
     const scene = selectionFor(room, previewId);
+    if (roomView) scene.roomView = roomView;
+    if (roomView === 'living' && !room?.adultRoom) {
+      scene['tv-benchPresent'] = true;
+      scene.tvPresent = true;
+    }
     const markup = '<svg xmlns="http://www.w3.org/2000/svg" class="ll-room-svg" viewBox="0 0 480 360" role="img" aria-label="' +
-      (label || 'Soverommet ditt') + '">' + roomModel.build(scene, false, ASSET_ROOT) + '</svg>';
+      Vy.escapeHtml(label || 'Soverommet ditt') + '">' + roomModel.build(scene, false, ASSET_ROOT) + '</svg>';
     const parsed = new DOMParser().parseFromString(markup, 'image/svg+xml');
     if (parsed.querySelector('parsererror')) return false;
     target.replaceChildren(document.importNode(parsed.documentElement, true));
@@ -76,5 +90,5 @@ LL.artRoom = (function () {
     return result;
   }
 
-  return { products, product, render, effects };
+  return { products, product, render, effects, selectionFor };
 })();

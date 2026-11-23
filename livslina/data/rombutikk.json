@@ -94,6 +94,204 @@
         { "id": "desk-lamp-tier-04", "family": "desk-lamp", "tier": 4, "price": 1800, "wellbeingPerMonth": 0.12 },
         { "id": "desk-lamp-tier-05", "family": "desk-lamp", "tier": 5, "price": 3500, "wellbeingPerMonth": 0.15 }
       ]
+    },
+    {
+      "id": "benk",
+      "label": "Oppbevaring og TV-benk",
+      "slot": "tv-bench",
+      "hint": "Ein benk med plass til TV eller oppbevaring i stova.",
+      "products": [
+        {
+          "id": "tv-bench-tier-02",
+          "family": "tv-bench",
+          "tier": 2,
+          "price": 450,
+          "condition": "used",
+          "rooms": [
+            "living"
+          ]
+        },
+        {
+          "id": "tv-bench-tier-03",
+          "family": "tv-bench",
+          "tier": 3,
+          "price": 1450,
+          "condition": "new",
+          "rooms": [
+            "living"
+          ]
+        }
+      ],
+      "adultOnly": true
+    },
+    {
+      "id": "tv",
+      "label": "TV",
+      "slot": "tv",
+      "hint": "Skjermen blir festa midt på TV-benken.",
+      "products": [
+        {
+          "id": "tv-tier-01",
+          "family": "tv",
+          "tier": 1,
+          "price": 550,
+          "condition": "used",
+          "rooms": [
+            "living"
+          ]
+        },
+        {
+          "id": "tv-tier-03",
+          "family": "tv",
+          "tier": 3,
+          "price": 3000,
+          "condition": "new",
+          "rooms": [
+            "living"
+          ]
+        }
+      ],
+      "adultOnly": true
+    },
+    {
+      "id": "pc",
+      "label": "Datamaskin",
+      "slot": "pc",
+      "hint": "Tårnet står på arbeidsbordet og flyttar seg med det.",
+      "products": [
+        {
+          "id": "pc-tier-02",
+          "family": "pc",
+          "tier": 2,
+          "price": 1900,
+          "condition": "used",
+          "rooms": [
+            "bedroom",
+            "workroom"
+          ],
+          "energyPerMonth": 0.1
+        },
+        {
+          "id": "pc-tier-03",
+          "family": "pc",
+          "tier": 3,
+          "price": 4900,
+          "condition": "new",
+          "rooms": [
+            "bedroom",
+            "workroom"
+          ],
+          "energyPerMonth": 0.18
+        }
+      ],
+      "adultOnly": true
+    },
+    {
+      "id": "nattbord",
+      "label": "Nattbord",
+      "slot": "floorItem",
+      "hint": "Står på golvet ved senga.",
+      "products": [
+        {
+          "id": "nightstand-tier-01",
+          "family": "nightstand",
+          "tier": 1,
+          "price": 180,
+          "condition": "used",
+          "rooms": [
+            "bedroom",
+            "extra"
+          ]
+        },
+        {
+          "id": "nightstand-tier-03",
+          "family": "nightstand",
+          "tier": 3,
+          "price": 620,
+          "condition": "new",
+          "rooms": [
+            "bedroom",
+            "extra"
+          ]
+        }
+      ],
+      "adultOnly": true
+    },
+    {
+      "id": "dining",
+      "label": "Matbord",
+      "slot": "dining",
+      "hint": "Matbordet høyrer til kjøkenkroken.",
+      "products": [
+        {
+          "id": "dining-used",
+          "family": "dining",
+          "label": "Brukt matbord i tre",
+          "description": "Eit lite bord med plass til to.",
+          "price": 420,
+          "condition": "used",
+          "rooms": [
+            "kitchen"
+          ],
+          "wellbeingPerMonth": 0.4
+        },
+        {
+          "id": "dining-new",
+          "family": "dining",
+          "label": "Lite matbord i tre",
+          "description": "Eit nytt og lett bord for kjøkenkroken.",
+          "price": 1090,
+          "condition": "new",
+          "rooms": [
+            "kitchen"
+          ],
+          "wellbeingPerMonth": 0.4
+        }
+      ],
+      "adultOnly": true
+    },
+    {
+      "id": "crib",
+      "label": "Barneseng",
+      "slot": "crib",
+      "hint": "Barnesenga får plass i soverommet eller det ekstra rommet.",
+      "products": [
+        {
+          "id": "crib-new",
+          "family": "crib",
+          "label": "Barneseng med madrass",
+          "description": "Ei eiga seng til barnet.",
+          "price": 1290,
+          "condition": "new",
+          "rooms": [
+            "bedroom",
+            "extra"
+          ],
+          "energyPerMonth": 0.18
+        }
+      ],
+      "adultOnly": true
+    },
+    {
+      "id": "chest",
+      "label": "Kiste",
+      "slot": "chest",
+      "hint": "Kista gjev plass til klede, bøker og leiker.",
+      "products": [
+        {
+          "id": "chest-used",
+          "family": "chest",
+          "label": "Brukt oppbevaringskiste",
+          "description": "Ei låg kiste i tre til det ekstra rommet.",
+          "price": 300,
+          "condition": "used",
+          "rooms": [
+            "extra"
+          ],
+          "wellbeingPerMonth": 0.2
+        }
+      ],
+      "adultOnly": true
     }
   ]
 }

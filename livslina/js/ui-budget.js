@@ -8,6 +8,7 @@ LL.uiBudget = (function () {
   'use strict';
 
   let draft = null;
+  let steps = null;
 
   function open() {
     const state = LL.state.get();
@@ -26,6 +27,7 @@ LL.uiBudget = (function () {
       : '';
     renderControls();
     recompute();
+    steps.reset();
     LL.main.showScreen('screen-budget');
     LL.util.hydrate(document.getElementById('screen-budget'));
   }
@@ -266,7 +268,7 @@ LL.uiBudget = (function () {
     return Object.values(rows).reduce((total, value) => total + Math.round(value || 0), 0);
   }
 
-  function confirm() {
+  function startHalfyear() {
     const state = LL.state.get();
     state.plan = Object.assign({}, draft, { activities: draft.activities.slice() });
     if (!state.creditRestriction) {
@@ -282,7 +284,13 @@ LL.uiBudget = (function () {
   }
 
   function init() {
-    document.getElementById('budgetRun').addEventListener('click', confirm);
+    steps = LL.uiPlanSteps.connect(
+      document.getElementById('budgetTabs'), document.getElementById('budgetCategory'),
+      document.getElementById('budgetPrevSection'), document.getElementById('budgetNextSection')
+    );
+    document.getElementById('budgetRun').addEventListener('click', () => {
+      LL.uiPlanSteps.confirmStart(steps, 'Vil du køyre halvåret no?', 'Køyr halvåret likevel', startHalfyear);
+    });
     document.getElementById('budgetBack').addEventListener('click', () => LL.main.enterHome());
   }
 

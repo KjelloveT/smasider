@@ -7,7 +7,7 @@ window.LL = window.LL || {};
 LL.state = (function () {
   'use strict';
 
-  const SAVE_VERSION = 9;
+  const SAVE_VERSION = 11;
   const WELLBEING_POSITIVE_MULTIPLIER = 0.45;
   const LEGACY_SPENDING_CHOICES = {
     noysam: { eatingOutPerWeek: 0, socialEventsPerMonth: 0, clothingShoppingPerWeek: 0, inGamePurchasesPerWeek: 0 },
@@ -55,7 +55,9 @@ LL.state = (function () {
       fallback.owned = Object.keys(ROOM_ITEM_SLOT).filter(id => Object.values(fallback.equipped).includes(id));
       return fallback;
     }
-    const owned = Array.from(new Set(STARTER_ROOM.owned.concat(source.owned.filter(id => ROOM_ITEM_SLOT[id]))));
+    const shop = LL.data.getRoomShop?.();
+    const items = new Set(shop?.categories.flatMap(category => category.products.map(item => item.id)) || []);
+    const owned = Array.from(new Set(STARTER_ROOM.owned.concat(source.owned.filter(id => ROOM_ITEM_SLOT[id] || items.has(id)))));
     const equipped = Object.assign({}, STARTER_ROOM.equipped);
     Object.keys(equipped).forEach(slot => {
       const id = source.equipped[slot];
@@ -65,7 +67,8 @@ LL.state = (function () {
         equipped[slot] = id;
       }
     });
-    return { owned, equipped };
+    const placements = source.placements && typeof source.placements === 'object' ? source.placements : undefined;
+    return { owned, equipped, ...(placements ? { placements } : {}) };
   }
 
   // ── Seedbasert RNG (mulberry32) — deterministisk gjeve seed ──
@@ -102,7 +105,9 @@ LL.state = (function () {
 
   const APPRENTICE_ROUNDS = SCHOOL_ROUNDS.slice(0, 6).concat([
     { id: 'laere1h', kind: 'term', schoolYear: 3, period: 'Haust', label: 'Fyrste læreår · haust', short: 'Læreår 1 · haust', age: 18, months: 6, apprenticeHalfYear: 1, apprenticeship: true, yearStart: true },
-    { id: 'laere1v', kind: 'term', schoolYear: 3, period: 'Vår', label: 'Fyrste læreår · vår', short: 'Læreår 1 · vår', age: 19, months: 6, apprenticeHalfYear: 2, apprenticeship: true }
+    { id: 'laere1v', kind: 'term', schoolYear: 3, period: 'Vår', label: 'Fyrste læreår · vår', short: 'Læreår 1 · vår', age: 19, months: 6, apprenticeHalfYear: 2, apprenticeship: true },
+    { id: 'laere2h', kind: 'term', schoolYear: 4, period: 'Haust', label: 'Siste læreår · haust', short: 'Læreår 2 · haust', age: 19, months: 6, apprenticeHalfYear: 3, apprenticeship: true, yearStart: true },
+    { id: 'laere2v', kind: 'term', schoolYear: 4, period: 'Vår', label: 'Siste læreår · vår', short: 'Læreår 2 · vår', age: 20, months: 6, apprenticeHalfYear: 4, apprenticeship: true }
   ]);
 
   let save = null;
@@ -219,6 +224,7 @@ LL.state = (function () {
   function migrateSave(obj) {
     if (!obj || typeof obj !== 'object') return obj;
     const sourceVersion = Number(obj.version) || 0;
+    if (sourceVersion > SAVE_VERSION) throw new Error('Lagringa er frå ei nyare Livslina-utgåve.');
     if (obj.version <= 1) {
       const oldToNew = [0, 2, 1, 3, 5, 4, 6, 7];
       if (Number.isInteger(obj.roundIndex) && obj.roundIndex >= 0 && obj.roundIndex < oldToNew.length) {
@@ -272,6 +278,7 @@ LL.state = (function () {
     }
     if (obj.creditRestriction && obj.plan) applyDebtPlan(obj.plan);
     if (sourceVersion < 7) migrateProgramEquipmentGrant(obj);
+    if (LL.phase2State) LL.phase2State.migrate(obj, sourceVersion);
     if (obj.version !== SAVE_VERSION) {
       obj.version = SAVE_VERSION;
     }
