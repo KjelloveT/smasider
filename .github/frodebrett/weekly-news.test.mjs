@@ -33,6 +33,10 @@ test('veka tek til laurdag i norsk tid og dekkjer sju fullførte datoar', () => 
     edition: '2027-01-02', from: '2026-12-26', through: '2027-01-01'
   });
   assert.throws(() => newsPeriod(new Date(), '2026-11-27'), /laurdag/);
+  assert.deepEqual(newsPeriod(new Date('2026-11-23T08:00:00Z'), '', '2026-11-23'), {
+    edition: '2026-11-23', from: '2026-11-16', through: '2026-11-22'
+  });
+  assert.throws(() => newsPeriod(new Date(), '', '2026-11-31'), /gyldig dato/);
 });
 
 test('utkastet må ha rett fast kategori, korte fasitar og kjelder innanfor perioden', () => {
@@ -113,6 +117,11 @@ test('quiz og e-post bruker same fasitar, kjelder, datoperiode og PR', async () 
   assert.ok(body.includes(filePage));
   assert.match(body, /Pressefoto til vurdering – Bilete av rådhuset · Foto Eigar/);
   assert.ok(body.includes(pressPhoto.url));
+  const previewMail = reviewEmail({ ...data, testRun: true }, {
+    prUrl: 'https://github.com/KjelloveT/smasider/pull/999', from: 'test@example.org', to: 'review@example.org'
+  });
+  const subject = Buffer.from(previewMail.match(/Subject: =\?UTF-8\?B\?([^?]+)\?=/)[1], 'base64').toString('utf8');
+  assert.match(subject, /Prøvekøyring/);
 });
 
 test('redaktøren kan leggje til eit vurdert pressefoto med opphav og bruksgrunnlag', async () => {

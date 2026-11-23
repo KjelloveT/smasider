@@ -103,9 +103,9 @@ async function search(topic, period, apiKey) {
 }
 
 async function run() {
-  const { OPENAI_API_KEY, RUNNER_TEMP, WEEKLY_EDITION } = process.env;
+  const { OPENAI_API_KEY, RUNNER_TEMP, WEEKLY_EDITION, WEEKLY_TEST_DATE } = process.env;
   if (!OPENAI_API_KEY) throw Error('Set OPENAI_API_KEY før nettsøket.');
-  const period = newsPeriod(new Date(), WEEKLY_EDITION);
+  const period = newsPeriod(new Date(), WEEKLY_EDITION, WEEKLY_TEST_DATE);
   const batches = await Promise.allSettled(topics.map(async topic => {
     const articles = await search(topic, period, OPENAI_API_KEY);
     console.log('Nettsøk om ' + topic + ' fann ' + articles.length + ' kjelder.');
