@@ -12,17 +12,21 @@ const iso = date => date.toISOString().slice(0, 10);
 const dateFormat = new Intl.DateTimeFormat('nn-NO', { dateStyle: 'medium', timeZone: 'UTC' });
 const unsafeTopic = /(?:^|[^\p{L}])(?:drap|drep|mishandl|valdtekt|voldtekt|overgrep|skyting|terrordåd|sjølvmord|selvmord|pornografi|pengespel|pengespill|seksuell|krig\b|mobbing|narkotika|blodbad)/iu;
 
-export function newsPeriod(now = new Date(), edition) {
+export function newsPeriod(now = new Date(), edition, testDate) {
   const localDate = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Oslo', dateStyle: 'short' }).format(now);
-  const date = new Date(edition || localDate);
-  if (edition && (!/^\d{4}-\d{2}-\d{2}$/.test(edition) || !Number.isFinite(+date) || iso(date) !== edition || date.getUTCDay() !== 6)) {
+  const reference = testDate || edition;
+  const date = new Date(reference || localDate);
+  if (reference && (!/^\d{4}-\d{2}-\d{2}$/.test(reference) || !Number.isFinite(+date) || iso(date) !== reference)) {
+    throw Error('Oppgje ein gyldig dato i formatet ÅÅÅÅ-MM-DD.');
+  }
+  if (!testDate && edition && date.getUTCDay() !== 6) {
     throw Error('Vekedatoen må vere ein laurdag i formatet ÅÅÅÅ-MM-DD.');
   }
-  const saturday = new Date(+date - (date.getUTCDay() + 1) % 7 * day);
+  const cutoff = testDate ? date : new Date(+date - (date.getUTCDay() + 1) % 7 * day);
   return {
-    edition: iso(saturday),
-    from: iso(new Date(+saturday - 7 * day)),
-    through: iso(new Date(+saturday - day))
+    edition: iso(cutoff),
+    from: iso(new Date(+cutoff - 7 * day)),
+    through: iso(new Date(+cutoff - day))
   };
 }
 
@@ -156,7 +160,7 @@ function formatPeriod(period) {
   return dateFormat.formatRange(new Date(period.from), new Date(period.through));
 }
 
-export function reviewText({ period, quiz }, prUrl) {
+export function reviewText({ period, quiz, testRun }, prUrl) {
   function questionText(question, number) {
     const { title, url, published, publisher } = question.source;
     const pressPhoto = question.suggestedPressPhoto;
@@ -177,7 +181,8 @@ export function reviewText({ period, quiz }, prUrl) {
     ].join('\n');
   }
   return [
-    'Vekas nyheitsfrøde · ' + formatPeriod(period),
+    (testRun ? 'Prøvekøyring · ' : '') + 'Vekas nyheitsfrøde · ' + formatPeriod(period),
+    ...(testRun ? ['Prøvefrøda er lagd fram for godkjenning i førehandsvisinga.'] : []),
     'Gå gjennom spørsmål, fasitar og eventuelle bilete før du godkjenner PR-en.',
     prUrl, '',
     ...quiz.categories.flatMap(({ name, questions }) => [
@@ -193,7 +198,7 @@ export function reviewEmail(data, { prUrl, from, to }) {
   const email = /^[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   if (!email.test(from) || !email.test(to)) throw Error('Avsendar og mottakar må vere gyldige e-postadresser.');
   if (!/^https:\/\/github\.com\/KjelloveT\/smasider\/pull\/\d+$/i.test(prUrl)) throw Error('Ugyldig PR-lenkje for vekefrøda.');
-  const subject = Buffer.from('Frødebrett · Vekas nyheitsfrøde ' + data.period.edition).toString('base64');
+  const subject = Buffer.from('Frødebrett · ' + (data.testRun ? 'Prøvekøyring ' : 'Vekas nyheitsfrøde ') + data.period.edition).toString('base64');
   const body = Buffer.from(reviewText(data, prUrl)).toString('base64').match(/.{1,76}/g).join('\r\n');
   return [
     'From: Vyrdepil <' + from + '>',
@@ -210,8 +215,8 @@ const readJson = path => JSON.parse(readFileSync(path, 'utf8'));
 const output = (key, value) => appendFileSync(process.env.GITHUB_OUTPUT, key + '=' + value + '\n');
 
 async function run(mode) {
-  const { WEEKLY_EDITION, RUNNER_TEMP, WEEKLY_PAYLOAD, WEEKLY_PR, MAIL_FROM, MAIL_TO } = process.env;
-  const period = newsPeriod(new Date(), WEEKLY_EDITION);
+  const { WEEKLY_EDITION, WEEKLY_TEST_DATE, RUNNER_TEMP, WEEKLY_PAYLOAD, WEEKLY_PR, MAIL_FROM, MAIL_TO } = process.env;
+  const period = newsPeriod(new Date(), WEEKLY_EDITION, WEEKLY_TEST_DATE);
   const file = name => join(RUNNER_TEMP, name);
 
   switch (mode) {
@@ -235,6 +240,7 @@ async function run(mode) {
     case 'build': {
       const draft = JSON.parse(gunzipSync(Buffer.from(WEEKLY_PAYLOAD, 'base64')).toString('utf8'));
       const board = await buildQuiz(draft, period);
+      if (WEEKLY_TEST_DATE) board.testRun = true;
       writeFileSync(quizPath, JSON.stringify(board, null, 2) + '\n');
       return;
     }
