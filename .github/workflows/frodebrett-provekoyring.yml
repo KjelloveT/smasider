@@ -8,6 +8,49 @@ permissions:
   contents: read
 
 jobs:
+  draft:
+    name: Lag og valider ei nyheitsfrøde
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      WEEKLY_EDITION: '2026-11-21'
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Finn datoperioden
+        run: node .github/frodebrett/weekly-news.mjs prepare
+      - name: Hent kjelder til vekas nyheiter
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node .github/frodebrett/news-research.mjs
+      - name: Lag eit utkast med Codex
+        uses: openai/codex-action@306c6a196a99dcc6582530c396a19d2672d5e9ec # v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt-file: ${{ runner.temp }}/weekly-prompt.md
+          output-file: ${{ runner.temp }}/weekly-draft.json
+          sandbox: read-only
+          safety-strategy: drop-sudo
+          codex-args: '["--ephemeral", "--output-schema", ".github/frodebrett/weekly-news.schema.json"]'
+      - name: Kontroller utkastet
+        id: validate
+        run: node .github/frodebrett/weekly-news.mjs check
+      - name: Bygg testbrett og e-postutkast
+        env:
+          WEEKLY_PAYLOAD: ${{ steps.validate.outputs.payload }}
+          WEEKLY_PR: https://github.com/KjelloveT/smasider/pull/137
+          MAIL_TO: ${{ secrets.FRODEBRETT_MAIL_TO }}
+          MAIL_FROM: ${{ secrets.FRODEBRETT_GMAIL_USER || secrets.FRODEBRETT_MAIL_TO }}
+        run: |
+          MAIL_FROM=$(printf '%s' "$MAIL_FROM" | tr -d '[:space:]')
+          MAIL_TO=$(printf '%s' "$MAIL_TO" | tr -d '[:space:]')
+          node .github/frodebrett/weekly-news.mjs build
+          cp frodebrett/json/weekly-news.json "$RUNNER_TEMP/weekly-reviewed.json"
+          node .github/frodebrett/weekly-news.mjs email
+          node -e 'const {period,quiz}=require("./frodebrett/json/weekly-news.json"); const questions=quiz.categories.flatMap(c=>c.questions); console.log(period.from+" – "+period.through+": "+quiz.categories.length+" kategoriar, "+questions.length+" spørsmål og ein finale."); console.log("Bilete: "+questions.filter(q=>q.image).length+". Pressefotoframlegg: "+questions.filter(q=>q.suggestedPressPhoto).length+".");'
+          echo "E-postutkastet er klart."
+
   gmail:
     name: Sjekk Gmail-innlogginga
     runs-on: ubuntu-latest
