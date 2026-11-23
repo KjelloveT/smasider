@@ -1,0 +1,199 @@
+{
+  "app": "frodebrett",
+  "version": 1,
+  "sources": [
+    "https://www.fifa.com/en/articles/fifa-world-cup-2026-squads-confirmed",
+    "https://www.fifa.com/en/tournaments/mens/worldcup/articles/players-most-appearances-games-matches-history",
+    "https://www.fifa.com/mens/articles/award-winners",
+    "https://www.fotball.no/landslag/norge-a-herrer/vm-2026/troppen/",
+    "https://www.fotball.no/landslag/norge-a-kvinner/2026/norges-tropp-mot-tyskland-og-osterrike/",
+    "https://www.uefa.com/ballondor/",
+    "https://www.uefa.com/womenschampionsleague/news/02a5-20b20887fb85-ff415d20bbb3-1000/",
+    "https://www.uefa.com/uefachampionsleague/news/02a5-20c1d7bf915e-f9e703cf0108-1000--khvicha-kvaratskhelia-named-2025-26-uefa-champions-league-/"
+  ],
+  "quiz": {
+    "title": "Fotballspelarar i 2026",
+    "categories": [
+      {
+        "name": "Norske spelarar",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva norsk spiss voks opp på Bryne og var Manchester City-spelar då han spelte herre-VM i 2026?",
+            "answer": "Erling Haaland"
+          },
+          {
+            "points": 200,
+            "question": "Kva norsk midtbanespelar frå Drammen var landslagskaptein i herre-VM i 2026 og kaptein for Arsenal?",
+            "answer": "Martin Ødegaard"
+          },
+          {
+            "points": 300,
+            "question": "Kva norsk spiss fekk den aller fyrste Gullballen for kvinner i 2018?",
+            "answer": "Ada Hegerberg"
+          },
+          {
+            "points": 400,
+            "question": "Kva norsk venstrekant gjekk frå LSK Kvinner til Chelsea i 2019 og vidare til Gotham FC i 2026?",
+            "answer": "Guro Reiten"
+          },
+          {
+            "points": 500,
+            "question": "Kva norsk vingspelar gjekk frå Wolfsburg til Barcelona i 2019 og vann meisterligaen med Barcelona i 2026?",
+            "answer": "Graham Hansen"
+          },
+          {
+            "points": 1000,
+            "question": "Kva norsk landslagsback frå Lyngdal gjekk frå Union Berlin til Borussia Dortmund i januar 2023?",
+            "answer": "Julian Ryerson"
+          }
+        ]
+      },
+      {
+        "name": "VM-stjerner",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva argentinsk spelar var oppe i 34 kampar i herre-VM etter finalen i 2026?",
+            "answer": "Lionel Messi"
+          },
+          {
+            "points": 200,
+            "question": "Kva portugisisk angrepsspelar var med i sitt sjette herre-VM i 2026?",
+            "answer": "Cristiano Ronaldo"
+          },
+          {
+            "points": 300,
+            "question": "Kva fransk spiss vart toppskårar i herre-VM både i 2022 og i 2026?",
+            "answer": "Kylian Mbappé"
+          },
+          {
+            "points": 400,
+            "question": "Kva spansk kantspelar skåra mot Frankrike i EM-semifinalen som 16-åring og spelte herre-VM i 2026?",
+            "answer": "Lamine Yamal"
+          },
+          {
+            "points": 500,
+            "question": "Kva spelar frå USA vann meisterligafinalen med Chelsea i 2021 og spelte for USA i herre-VM 2026?",
+            "answer": "Christian Pulisic"
+          },
+          {
+            "points": 1000,
+            "question": "Kva spelar skåra Canada sitt fyrste mål i eit herre-VM, mot Kroatia i 2022, og kom inn mot Sør-Afrika i VM i 2026?",
+            "answer": "Alphonso Davies"
+          }
+        ]
+      },
+      {
+        "name": "Kvinnefotball",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva spansk midtbanespelar vann Gullballen for kvinner både i 2021 og i 2022?",
+            "answer": "Alexia Putellas"
+          },
+          {
+            "points": 200,
+            "question": "Kva spansk Barcelona-spelar vann Gullballen for kvinner tre år på rad frå 2023 til 2025?",
+            "answer": "Aitana Bonmatí"
+          },
+          {
+            "points": 300,
+            "question": "Kva Chelsea-spelar er syster til Reece James og spelte mot Arsenal i meisterligaen i mars 2026?",
+            "answer": "Lauren James"
+          },
+          {
+            "points": 400,
+            "question": "Kva engelsk Arsenal-spiss skåra ni mål i meisterligaen for kvinner i 2025/26?",
+            "answer": "Alessia Russo"
+          },
+          {
+            "points": 500,
+            "question": "Kva polsk Barcelona-spiss vart toppskårar i meisterligaen for kvinner i 2025/26 med elleve mål?",
+            "answer": "Ewa Pajor"
+          },
+          {
+            "points": 1000,
+            "question": "Kva spansk spelar skåra dei to siste måla då Barcelona vann 4–0 i meisterligafinalen på Ullevaal i 2026?",
+            "answer": "Salma Paralluelo"
+          }
+        ]
+      },
+      {
+        "name": "Klubbar og karrierar",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva engelsk spiss gjekk frå Tottenham til Bayern München sommaren 2023?",
+            "answer": "Harry Kane"
+          },
+          {
+            "points": 200,
+            "question": "Kva egyptisk angrepsspelar gjekk frå Roma til Liverpool i 2017?",
+            "answer": "Mohamed Salah"
+          },
+          {
+            "points": 300,
+            "question": "Kva engelsk midtbanespelar gjekk frå Borussia Dortmund til Real Madrid i 2023?",
+            "answer": "Jude Bellingham"
+          },
+          {
+            "points": 400,
+            "question": "Kva engelsk Arsenal-kant kom opp frå klubben sitt akademi og skåra mot Sveits i EM i 2024?",
+            "answer": "Bukayo Saka"
+          },
+          {
+            "points": 500,
+            "question": "Kva nederlandsk midtstoppar gjekk frå Southampton til Liverpool i januar 2018 og var landslagskaptein i 2026?",
+            "answer": "Van Dijk"
+          },
+          {
+            "points": 1000,
+            "question": "Kva argentinsk spiss gjekk frå Racing Club til Inter i 2018 og skåra vinnarmålet i Copa América-finalen i 2024?",
+            "answer": "Lautaro Martínez"
+          }
+        ]
+      },
+      {
+        "name": "Prisar og rekordar",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva spansk midtbanespelar vann Gullballen for menn i 2024 og vart kåra til den beste spelaren i herre-VM i 2026?",
+            "answer": "Rodri"
+          },
+          {
+            "points": 200,
+            "question": "Kva fransk PSG-spelar vann Gullballen for menn i 2025?",
+            "answer": "Ousmane Dembélé"
+          },
+          {
+            "points": 300,
+            "question": "Kva brasiliansk Real Madrid-spelar vann prisen «The Best» som årets mannlege FIFA-spelar i 2024?",
+            "answer": "Vinícius Júnior"
+          },
+          {
+            "points": 400,
+            "question": "Kva argentinsk målvakt fekk prisen Gullhansken i herre-VM i Qatar i 2022?",
+            "answer": "Emiliano Martínez"
+          },
+          {
+            "points": 500,
+            "question": "Kva spansk målvakt fekk Gullhansken etter sju kampar utan baklengsmål i herre-VM 2026?",
+            "answer": "Unai Simón"
+          },
+          {
+            "points": 1000,
+            "question": "Kva spansk midtstoppar vart kåra til den beste unge spelaren i herre-VM 2026?",
+            "answer": "Pau Cubarsí"
+          }
+        ]
+      }
+    ],
+    "final": {
+      "category": "Meisterligaen i 2026",
+      "question": "Kva georgisk PSG-spelar kåra UEFA til den beste spelaren i meisterligaen for menn i 2025/26?",
+      "answer": "Khvicha Kvaratskhelia"
+    }
+  }
+}

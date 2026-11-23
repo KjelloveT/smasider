@@ -7,11 +7,11 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=10">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
-<body data-vp-app="frodebrett" data-vp-layout="expanded" data-vp-site-footer>
+<body data-vp-app="frodebrett" data-vp-layout="expanded" data-vp-open-shell data-vp-site-footer>
 
 <div class="page-wrapper">
 <main class="main-content">
@@ -21,44 +21,62 @@
     <img src="../_resources/frødebrett.png" alt="Frødebrett-logo" class="hero-logo">
     <div class="hero-text">
       <h1>Frødebrett</h1>
-      <p>Lag eit jeopardy-brett for klasserommet — kategoriar, poeng, daglegdobbel og finalerunde.</p>
-      <div class="fb-nav">
-        <button class="btn nav-btn" id="btn-play" data-screen="game">Spel</button>
-        <button class="btn nav-btn" id="btn-editor" data-screen="editor">Ny frøde</button>
-        <button class="btn nav-btn" id="btn-saved" data-screen="saved">Lagra frøder</button>
-      </div>
+      <p>Lag og spel kvissbrett med kategoriar, poeng og finalerunde.</p>
     </div>
   </section>
 
   <!-- ===== SPELSKJERM ===== -->
   <div id="game-screen" class="screen">
 
-    <!-- Lagoppsett -->
-    <div id="team-setup" class="box1">
-      <h2 class="heading4 no-mt">Lag (2–6)</h2>
-      <div id="teams-container">
-        <div class="team-input">
-          <input type="text" class="form-input team-name" placeholder="Lag 1" maxlength="20">
-          <button class="btn btn-icon btn-remove-team" aria-label="Fjern lag" style="display:none;">×</button>
+    <!-- Frødebibliotek -->
+    <div id="quiz-selection" class="vp-stack">
+      <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="library-heading">
+        <div class="fb-section-head">
+          <h2 id="library-heading" tabindex="-1">Eigne frøder</h2>
+          <button class="vp-button vp-button--primary" id="btn-editor" type="button"><span data-icon="plus" aria-hidden="true"></span>Ny frøde</button>
         </div>
-        <div class="team-input">
-          <input type="text" class="form-input team-name" placeholder="Lag 2" maxlength="20">
-          <button class="btn btn-icon btn-remove-team" aria-label="Fjern lag" style="display:none;">×</button>
-        </div>
-      </div>
-      <button class="btn btn-small" id="btn-add-team">+ Legg til lag</button>
-    </div>
+        <div id="quiz-list" class="fb-quiz-list"></div>
+      </section>
 
-    <!-- Frødeval -->
-    <div id="quiz-selection" class="box1">
-      <h2 class="heading4 no-mt">Vel frøde</h2>
-      <div id="quiz-list" class="quiz-grid"></div>
+      <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="premade-heading">
+        <h2 id="premade-heading">Førehandslaga frøder</h2>
+        <p class="vp-prose">Dei førehandslaga frødene skal gje deg ein rask start med eit nesten ferdig oppsett. Dei er laga av KI, og ein god del av spørsmåla og svara er snodige. Sjå nøye gjennom både spørsmåla og svara før du brukar ei frøde med ein klasse.</p>
+        <div class="fb-library-filters" id="standard-filters">
+          <fieldset class="vp-choices">
+            <legend>Trinn</legend>
+            <div class="vp-actions" id="standard-grade"></div>
+          </fieldset>
+          <fieldset class="vp-choices">
+            <legend>Fag</legend>
+            <div class="vp-actions" id="standard-subject"></div>
+          </fieldset>
+          <fieldset class="vp-choices">
+            <legend>Tema som ikkje er knytt til fag</legend>
+            <div class="vp-actions" id="standard-theme"></div>
+          </fieldset>
+        </div>
+        <p class="vp-help" id="standard-status" role="status"></p>
+        <div id="standard-list" class="fb-quiz-list" hidden></div>
+        <div class="vp-actions" id="standard-curriculum" hidden></div>
+      </section>
+
+      <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="json-files-heading">
+        <h2 id="json-files-heading">Last ned ein tom mal som du kan få KI til å fylle ut</h2>
+        <p class="vp-prose" id="json-files-help">Last ned den tome malen, gje han til din eigen KI-modell og be modellen lage ein kviss. Når kvissen er ferdig, kan du laste opp JSON-fila her på Vyrdepil med «Opne JSON-fil». Fila blir lesen og lagra berre i nettlesaren på denne eininga.</p>
+        <div class="vp-actions">
+          <button class="vp-button vp-button--tool" id="btn-download-template" type="button"><span data-icon="fileJson" aria-hidden="true"></span>Last ned tom JSON-mal</button>
+          <button class="vp-button" id="btn-import-quiz" type="button" aria-describedby="json-files-help"><span data-icon="upload" aria-hidden="true"></span>Opne JSON-fil</button>
+          <input type="file" id="import-quiz-file" accept=".json,application/json" hidden>
+          <button class="vp-button vp-button--quiet" id="btn-export-all" type="button" hidden>Last ned alle eigne frøder</button>
+        </div>
+        <p id="library-status" role="status" hidden></p>
+      </section>
     </div>
 
     <!-- Spelbrett -->
     <div id="game-board" class="hidden">
-      <div id="score-board" class="box1">
-        <h2 class="heading4 no-mt">Poengtavle</h2>
+      <div id="score-board" class="vp-panel vp-panel--plain vp-panel--compact">
+        <h2 class="heading4 no-mt" id="game-title" tabindex="-1">Poengtavle</h2>
         <p class="fb-muted fb-hint">Klikk eit lag for å setje det på tur.</p>
         <div id="teams-score" class="teams-score"></div>
         <div id="turn-indicator" class="turn-indicator"></div>
@@ -72,7 +90,7 @@
       </div>
 
       <!-- Finalerunde -->
-      <div id="final-round" class="box1 hidden">
+      <div id="final-round" class="vp-panel vp-panel--plain hidden">
         <h2 class="heading4 no-mt">Finalerunde</h2>
         <div class="final-category">
           <h3 class="heading4-accent2 no-mt">Kategori</h3>
@@ -82,7 +100,7 @@
           <h3 class="heading4-accent2">Satse poeng</h3>
           <div id="betting-controls" class="betting-controls"></div>
         </div>
-        <div class="final-clue">
+        <div class="final-clue" id="final-clue">
           <h3 class="heading4-accent2">Hint</h3>
           <div id="final-clue-display"></div>
         </div>
@@ -92,9 +110,12 @@
             <div id="final-question-display"></div>
             <img id="final-question-image" class="fb-question-image hidden" alt="Bilete til finalspørsmålet">
           </div>
-          <div id="final-answer" class="final-answer hidden">
-            <h3 class="heading4-accent2">Svar</h3>
-            <div id="final-answer-display"></div>
+          <div id="final-answer" class="fb-answer hidden">
+            <div class="question-answer">
+              <h3 class="answer-label">Svar</h3>
+              <div id="final-answer-display" class="answer-text"></div>
+            </div>
+            <p class="vp-help fb-image-credit" id="final-question-image-credit" hidden></p>
           </div>
           <div id="final-point-controls" class="point-controls hidden"></div>
           <div class="fb-controls">
@@ -110,95 +131,78 @@
 
   <!-- ===== EDITORSKJERM ===== -->
   <div id="editor-screen" class="screen hidden">
-    <div class="box1">
-      <h2 class="heading4 no-mt">Ny frøde</h2>
-
-      <div id="editor-errors" class="editor-errors hidden"></div>
-
-      <div class="form-group">
-        <label for="quiz-title">Tittel</label>
-        <input type="text" class="form-input" id="quiz-title" placeholder="T.d. Norsk geografi">
+    <section class="vp-stack" aria-labelledby="editor-heading">
+      <div class="vp-panel vp-panel--plain vp-panel--compact vp-stack">
+        <header class="fb-section-head">
+          <h2 id="editor-heading" tabindex="-1">Ny frøde</h2>
+          <button class="vp-button vp-button--quiet" id="btn-editor-back" type="button"><span data-icon="arrowLeft" aria-hidden="true"></span>Til frødene</button>
+        </header>
+        <label class="vp-field fb-title-field" for="quiz-title"><strong>Tittel</strong>
+          <input type="text" class="vp-input" id="quiz-title" placeholder="T.d. Norsk geografi">
+        </label>
+        <div class="vp-actions fb-editor-actions" aria-label="Handlingar for frøda" role="group">
+          <button class="vp-button vp-button--primary" id="btn-save-quiz" type="button"><span data-icon="save" aria-hidden="true"></span><span id="editor-save-label">Lagre frøde</span></button>
+          <button class="vp-button vp-button--positive" id="btn-editor-start" type="button" aria-haspopup="dialog" aria-controls="team-setup"><span data-icon="play" aria-hidden="true"></span>Start spel</button>
+          <button class="vp-button" id="btn-preview" type="button">Førehandsvis</button>
+          <div class="fb-download-action">
+            <button class="vp-button vp-button--tool" id="btn-editor-export" type="button"><span data-icon="download" aria-hidden="true"></span><span>Last ned heile spelet som køyrbar fil</span></button>
+            <button class="vp-button vp-button--tool vp-button--icon" type="button" data-fb-download-help="html" aria-label="Om den køyrbare spelefila" aria-haspopup="dialog" aria-controls="download-help-dialog"><span data-icon="helpCircle" aria-hidden="true"></span></button>
+          </div>
+          <div class="fb-download-action">
+            <button class="vp-button" id="btn-editor-export-json" type="button"><span data-icon="fileJson" aria-hidden="true"></span><span>Last ned JSON</span></button>
+            <button class="vp-button vp-button--icon" type="button" data-fb-download-help="json" aria-label="Om JSON-fila" aria-haspopup="dialog" aria-controls="download-help-dialog"><span data-icon="helpCircle" aria-hidden="true"></span></button>
+          </div>
+        </div>
       </div>
+      <div id="editor-errors" class="vp-notice hidden" role="status" tabindex="-1"></div>
 
       <div id="categories-section">
-        <h3 class="heading4-accent2">Kategoriar (2–6)</h3>
-        <div class="editor-tab-bar">
-          <div id="category-tabs" class="box-tabs editor-tabs"></div>
-          <button class="btn btn-icon" id="btn-add-category" aria-label="Legg til kategori">+</button>
-          <button class="btn btn-icon btn-danger" id="btn-remove-category" aria-label="Fjern denne kategorien">−</button>
+        <div class="vp-panel vp-panel--plain vp-panel--compact vp-stack">
+          <div class="fb-section-head">
+            <h3 id="category-heading">Kategoriar (2–6)</h3>
+            <button class="vp-button vp-button--tool vp-button--compact" id="btn-add-category" type="button"><span data-icon="plus" aria-hidden="true"></span>Legg til kategori</button>
+          </div>
+          <div id="category-tabs" class="editor-tabs" role="group" aria-labelledby="category-heading">
+            <button class="vp-button vp-button--compact fb-final-tab" id="btn-final-tab" type="button" aria-pressed="false" aria-controls="editor-final-section">
+              <span class="vp-selection-mark" data-icon="check" aria-hidden="true"></span>
+              <span data-icon="flag" aria-hidden="true"></span>
+              <span>Finalerunde</span>
+              <span id="editor-final-state">Av</span>
+            </button>
+          </div>
+          <div id="category-name-fields" class="fb-category-head"></div>
         </div>
-        <div id="category-tab-content" class="category-tab-content"></div>
-      </div>
+        <div id="category-tab-content" class="fb-question-list"></div>
 
-      <div class="fb-final-toggle">
-        <label class="editor-checkbox-label">
-          <input type="checkbox" id="final-round-toggle">
-          <span>Inkluder finalerunde</span>
-        </label>
-        <div id="final-round-fields" class="hidden">
-          <div class="form-group">
-            <label for="editor-final-category">Finalkategori</label>
-            <input type="text" class="form-input" id="editor-final-category" placeholder="T.d. Norsk geografi">
-          </div>
-          <div class="form-group">
-            <label for="editor-final-clue">Hint</label>
-            <input type="text" class="form-input" id="editor-final-clue" placeholder="Kort hint om kategorien…">
-          </div>
-          <div class="form-group">
-            <label for="editor-final-question">Finalspørsmål</label>
-            <textarea class="form-input" id="editor-final-question" placeholder="Fullstendig spørsmål for finalen…"></textarea>
-          </div>
-          <div class="form-group">
+        <section class="vp-panel vp-panel--plain vp-panel--compact vp-stack" id="editor-final-section" aria-labelledby="btn-final-tab" hidden>
+          <label class="vp-choice">
+            <input type="checkbox" id="final-round-toggle">
+            <span>Inkluder finalerunde</span>
+          </label>
+          <div id="final-round-fields" class="vp-stack hidden">
+            <div class="fb-question-fields">
+              <div class="vp-field">
+                <label for="editor-final-category">Finalkategori</label>
+                <input type="text" class="vp-input" id="editor-final-category">
+              </div>
+              <div class="vp-field">
+                <label for="editor-final-clue">Hint (valfritt)</label>
+                <input type="text" class="vp-input" id="editor-final-clue">
+              </div>
+              <div class="vp-field">
+                <label for="editor-final-question">Finalspørsmål</label>
+                <textarea class="vp-input" id="editor-final-question" rows="3"></textarea>
+              </div>
+              <div class="vp-field">
+                <label for="editor-final-answer">Fasitsvar</label>
+                <textarea class="vp-input" id="editor-final-answer" rows="3"></textarea>
+              </div>
+            </div>
             <div id="editor-final-image"></div>
-            <label for="editor-final-answer">Finalesvar</label>
-            <input type="text" class="form-input" id="editor-final-answer" placeholder="Korrekt svar…">
           </div>
-        </div>
+        </section>
       </div>
-
-      <div class="fb-controls">
-        <button class="btn btn-accent" id="btn-save-quiz">Lagre frøde</button>
-        <button class="btn btn-accent4" id="btn-preview">Førehandsvis</button>
-        <button class="btn" id="btn-clear">Tøm</button>
-        <button class="btn btn-small fb-right" data-goto="game">Tilbake</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== LAGRA FRØDER ===== -->
-  <div id="saved-screen" class="screen hidden">
-    <div class="box1">
-      <h2 class="heading4 no-mt">Lagra frøder</h2>
-      <div id="saved-list"></div>
-      <div class="fb-controls">
-        <button class="btn btn-accent" data-goto="editor">Lag ny frøde</button>
-        <button class="btn btn-small fb-right" data-goto="game">Tilbake</button>
-      </div>
-    </div>
-
-    <div class="box1">
-      <h2 class="heading4 no-mt">Eksporter / importer</h2>
-      <div class="fb-file-grid">
-        <div class="fb-file-box">
-          <h3 class="heading4-accent2 no-mt">Eksporter</h3>
-          <p>Last ned ein frøde som <strong>.json-fil</strong> du kan dele med andre.</p>
-          <select id="export-quiz-select" class="form-input">
-            <option value="">Vel ein frøde…</option>
-          </select>
-          <div class="fb-file-actions">
-            <button class="btn btn-small btn-accent" id="btn-export-quiz">Last ned .json</button>
-            <button class="btn btn-small" id="btn-export-all">Eksporter alle</button>
-          </div>
-        </div>
-        <div class="fb-file-box">
-          <h3 class="heading4-accent2 no-mt">Importer</h3>
-          <p>Last opp ei <strong>.json-fil</strong> frå ein annan for å legge til frøden.</p>
-          <button class="btn btn-small btn-accent" id="btn-import-quiz">Vel fil…</button>
-          <input type="file" id="import-quiz-file" accept=".json" class="hidden">
-          <div id="import-status" class="import-status hidden"></div>
-        </div>
-      </div>
-    </div>
+    </section>
   </div>
 
 </main>
@@ -206,8 +210,31 @@
 
 <!-- ===== MODALAR ===== -->
 
+<dialog class="vp-dialog" id="team-setup" aria-labelledby="team-setup-heading" aria-describedby="team-setup-quiz">
+  <div class="vp-dialog-head">
+    <h2 id="team-setup-heading">Lagoppsett</h2>
+  </div>
+  <form class="vp-stack" id="team-setup-form" method="dialog">
+    <p class="vp-label" id="team-setup-quiz"></p>
+    <div id="teams-container"></div>
+    <div class="vp-actions">
+      <button class="vp-button vp-button--compact" id="btn-add-team" type="button">Legg til lag</button>
+      <button class="vp-button vp-button--quiet" id="btn-cancel-team-setup" type="button">Avbryt</button>
+      <button class="vp-button vp-button--positive" id="btn-confirm-team-setup" type="submit">Start spel</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog class="vp-dialog" id="download-help-dialog" aria-labelledby="download-help-title" aria-describedby="download-help-text">
+  <div class="vp-dialog-head">
+    <h2 id="download-help-title"></h2>
+    <button class="vp-button vp-button--icon vp-button--quiet" id="btn-close-download-help" type="button" aria-label="Lukk forklaringa"><span data-icon="x" aria-hidden="true"></span></button>
+  </div>
+  <p id="download-help-text" class="vp-prose"></p>
+</dialog>
+
 <!-- Spørsmål -->
-<div id="question-modal" class="modal-overlay vp-modal-backdrop">
+<div id="question-modal" class="modal-overlay vp-modal-backdrop" data-vp-modal-escape="local" aria-labelledby="question-category">
   <div class="modal3 question-modal vp-modal-panel">
     <div class="modal-header">
       <span id="question-category" class="question-category"></span>
@@ -218,9 +245,12 @@
       <div id="dd-banner" class="dd-banner hidden">★ DAGENS DOBBEL! · ×2 ★</div>
       <div id="question-text" class="question-text"></div>
       <img id="question-image" class="fb-question-image hidden" alt="Bilete til spørsmålet">
-      <div id="question-answer" class="question-answer hidden">
-        <div class="answer-label">Svar</div>
-        <div id="answer-text" class="answer-text"></div>
+      <div id="question-answer" class="fb-answer hidden">
+        <div class="question-answer">
+          <div class="answer-label">Svar</div>
+          <div id="answer-text" class="answer-text"></div>
+        </div>
+        <p class="vp-help fb-image-credit" id="question-image-credit" hidden></p>
       </div>
       <div id="modal-point-controls" class="point-controls hidden"></div>
     </div>
@@ -234,15 +264,21 @@
 </div>
 
 <!-- Førehandsvising -->
-<div id="preview-modal" class="modal-overlay vp-modal-backdrop">
+<div id="preview-modal" class="modal-overlay vp-modal-backdrop" aria-labelledby="preview-title">
   <div class="modal4 preview-modal vp-modal-panel">
     <button class="btn btn-icon modal-close" id="btn-close-preview" aria-label="Lukk">×</button>
-    <h2 id="preview-title" class="heading4 no-mt">Førehandsvisning</h2>
+    <h2 id="preview-title" class="heading4 no-mt">Førehandsvising</h2>
     <div id="preview-board" class="jeopardy-grid"></div>
     <div id="preview-question" class="preview-question hidden">
       <div id="preview-question-text" class="question-text"></div>
       <img id="preview-question-image" class="fb-question-image hidden" alt="Bilete til spørsmålet">
-      <div id="preview-answer-text" class="answer-text hidden"></div>
+      <div id="preview-answer" class="fb-answer hidden">
+        <div class="question-answer">
+          <div class="answer-label">Svar</div>
+          <div id="preview-answer-text" class="answer-text"></div>
+        </div>
+        <p class="vp-help fb-image-credit" id="preview-question-image-credit" hidden></p>
+      </div>
       <div class="fb-controls">
         <button class="btn btn-small btn-accent" id="btn-preview-reveal">Vis svar</button>
         <button class="btn btn-small" id="btn-preview-back">Tilbake til brett</button>
@@ -252,10 +288,9 @@
 </div>
 
 <!-- Vinnar -->
-<div id="winner-modal" class="modal-overlay vp-modal-backdrop">
+<div id="winner-modal" class="modal-overlay vp-modal-backdrop" aria-labelledby="winner-title">
   <div class="modal2 winner-modal vp-modal-panel">
-    <div class="winner-trophy">🏆</div>
-    <h2 class="winner-title">Vinnar!</h2>
+    <h2 id="winner-title" class="winner-title">Vinnar!</h2>
     <div id="winner-name" class="winner-name"></div>
     <div id="winner-score" class="winner-score"></div>
     <div class="winner-podium">
@@ -271,13 +306,16 @@
 <script src="../js/vyrdepil-storage.js"></script>
 <script src="../js/vyrdepil-icons.js"></script>
 <script src="../js/vyrdepil-util.js?v=1.2"></script>
-<script src="js/storage.js?v=7"></script>
-<script src="js/state.js?v=6"></script>
-<script src="js/images.js?v=1"></script>
-<script src="js/board.js?v=7"></script>
-<script src="js/editor.js?v=7"></script>
-<script src="js/saved.js?v=6"></script>
-<script src="js/app.js?v=6"></script>
+<script src="js/storage.js?v=8"></script>
+<script src="js/state.js?v=7"></script>
+<script src="js/images.js?v=4"></script>
+<script src="js/team-setup.js?v=1"></script>
+<script src="js/board.js?v=13"></script>
+<script src="js/editor.js?v=14"></script>
+<script src="js/export.js?v=5"></script>
+<script src="js/saved.js?v=12"></script>
+<script src="js/standard-quizzes.js?v=6"></script>
+<script src="js/app.js?v=11"></script>
 
 
 <script src="../js/vyrdepil-design.js?v=1.1"></script>

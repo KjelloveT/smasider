@@ -5,10 +5,21 @@
 
 .main-content { padding-bottom: 60px; }
 
-/* ===== Hero + navigasjon ===== */
+/* ===== Sideoppsett ===== */
 .fb-hero { margin-top: clamp(16px, 3vw, 28px); }
-.fb-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
-.nav-btn { font-size: clamp(0.9rem, 2vw, 1rem); }
+.fb-section-head {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.fb-section-head :is(h2, h3) { margin: 0; }
+#game-screen > * + * { margin-block-start: 16px; }
+#editor-screen, #quiz-selection {
+  max-inline-size: 1120px; margin-inline: auto;
+}
+#teams-container { display: grid; gap: 8px; max-inline-size: 52ch; }
+
+/* Dei nye kontrollane brukar felles knappetilstandar òg under det migrerte skalet. */
+.vp-button.vp-button { background-color: var(--vp-button-fill); }
 
 /* ===== Spelspesifikke knappevariantar ===== */
 .btn-accent  { background: var(--accent);  color: var(--text-on-accent); }
@@ -23,7 +34,6 @@
 .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: 4px 4px 0 var(--shadow); }
 
 .fb-controls { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
-.fb-right { margin-left: auto; }
 
 /* ===== Skjerm-overgang ===== */
 .screen { animation: fb-slide 0.25s ease-out; }
@@ -48,19 +58,32 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .fb-hint { font-size: 0.85rem; margin-bottom: 10px; }
 
 /* ===== Lagoppsett ===== */
-.team-input { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
-.team-name { flex: 1; }
+.team-input { display: flex; gap: 10px; align-items: center; }
+.team-name { flex: 1; min-width: 0; }
 
-/* ===== Frødeval ===== */
-.quiz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
-.quiz-card {
-  text-align: left; background: var(--surface); border: 3px solid var(--border);
-  box-shadow: 4px 4px 0 var(--shadow); padding: 16px; cursor: pointer;
-  font-family: inherit; color: var(--text); transition: transform 0.12s, box-shadow 0.12s;
+/* ===== Frødebibliotek ===== */
+.fb-library-filters {
+  display: grid;
+  gap: 16px;
 }
-.quiz-card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--shadow); }
-.quiz-card h3 { font-size: 1.15rem; margin-bottom: 6px; color: var(--text); }
-.quiz-card p { font-size: 0.85rem; color: var(--muted); }
+.fb-library-filters .vp-choices { min-inline-size: 0; }
+.fb-library-filters .vp-choice { min-block-size: 44px; padding-block: 6px; }
+#quiz-selection > section > :is(h2, p) { margin: 0; }
+.fb-quiz-list {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+}
+#standard-list {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+.fb-quiz-card { display: grid; gap: 10px; align-content: start; overflow-wrap: anywhere; }
+.fb-quiz-card > .fb-quiz-title {
+  margin: 0;
+  padding: 10px 12px;
+  font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+}
+.fb-quiz-card > .vp-help { margin: 0; }
+.fb-quiz-card .vp-actions { gap: 8px; }
 
 /* ===== Poengtavle + tur ===== */
 .teams-score { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
@@ -114,6 +137,10 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .jeopardy-cell.answered {
   background: transparent; border-color: transparent; box-shadow: none; cursor: default;
 }
+@media (max-width: 600px) {
+  .jeopardy-grid { gap: 4px; padding: 4px; }
+  .jeopardy-cell { padding-inline: 0; font-size: clamp(.75rem, 3vw, 1.1rem); }
+}
 
 /* ===== Spørsmålsmodal ===== */
 .question-modal {
@@ -123,15 +150,19 @@ textarea.form-input { resize: vertical; min-height: 80px; }
   border: 3px solid var(--vp-frame, #142820);
   box-shadow: 0 4px 0 var(--vp-shadow, #142820);
 }
-.question-category { font-weight: 900; font-size: 1.1rem; }
+.question-category { min-inline-size: 0; overflow-wrap: anywhere; font-weight: 900; font-size: 1.1rem; }
+#question-modal .modal-header .modal-close { position: static; }
 .question-points {
-  margin-left: auto; margin-right: 10px; font-weight: 900;
+  flex-shrink: 0; margin-inline-start: auto; white-space: nowrap; font-weight: 900;
   background: var(--accent4); color: #000; border: 2px solid var(--border); padding: 2px 10px;
 }
 .question-text { font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 700; line-height: 1.35; margin: 8px 0 18px; }
-.question-answer { background: var(--accent3); color: #000; border: 3px solid var(--border); padding: 16px; margin-bottom: 18px; }
-.answer-label { font-weight: 900; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; margin-bottom: 6px; }
-.answer-text { font-size: 1.2rem; font-weight: 700; color: #000; }
+.fb-answer { margin-bottom: 18px; }
+.question-answer { background: var(--accent3); color: #000; border: 3px solid var(--border); padding: 16px; }
+.answer-label { margin: 0 0 6px; font-weight: 900; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; }
+.answer-text { font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 800; line-height: 1.25; }
+.question-text, .answer-text, #final-question-display { white-space: pre-wrap; overflow-wrap: anywhere; }
+.fb-image-credit { margin-block: 8px 0; overflow-wrap: anywhere; }
 
 /* Daglegdobbel-banner (UX1) */
 .dd-banner {
@@ -177,83 +208,85 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .final-clue > div, .final-question-text > div {
   padding: 14px; border: 2px solid var(--border); background: var(--surface); font-weight: 600;
 }
-.final-answer { background: var(--accent3); color: #000; border: 3px solid var(--border); padding: 14px; margin-bottom: 14px; }
-.final-answer #final-answer-display { font-weight: 800; font-size: 1.15rem; }
+.final-question-text > div {
+  padding: clamp(14px, 2vw, 24px);
+  font-size: clamp(1.625rem, 4vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
 
 /* ===== Editor ===== */
-.editor-tab-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
-.editor-tabs { flex: 1; display: flex; gap: 6px; flex-wrap: wrap; }
-.box-tabs.editor-tabs .box-tab {
-  padding: 9px 16px;
-  font-weight: 800;
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  font-family: inherit;
-  background: var(--surface);
-  color: var(--text);
-  border: 3px solid var(--border);
-  border-bottom-width: 3px;
-  box-shadow: 3px 3px 0 var(--shadow);
+.fb-download-action {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  max-inline-size: 100%;
 }
-.box-tabs.editor-tabs .box-tab:hover { background: var(--bg); }
-/* Vald fane brukar ei lys flate og mørk tekst frå fellespaletten. */
-.box-tabs.editor-tabs .box-tab.active {
-  background: var(--text);
-  color: var(--surface);
-  border-bottom-color: var(--text);
-  box-shadow: 3px 3px 0 var(--shadow);
+.fb-download-action > .vp-button:first-child {
+  min-inline-size: 0;
+  border-inline-end-width: 1px;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
 }
-.category-tab-content { border: 3px solid var(--border); padding: 16px; background: var(--surface); box-shadow: 4px 4px 0 var(--shadow); }
-.question-input { display: grid; grid-template-columns: 64px 1fr minmax(120px, 220px); gap: 8px; align-items: center; margin-bottom: 8px; }
-.points-label {
-  padding: 8px; border: 2px solid var(--border); font-weight: 900; text-align: center;
-  background: var(--bg); color: var(--text); font-size: 0.85rem;
+.fb-download-action > .vp-button:last-child {
+  border-inline-start-width: 0;
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
 }
-.fb-final-toggle { margin: 22px 0; }
-.editor-checkbox-label { display: flex; align-items: center; gap: 10px; font-weight: 800; cursor: pointer; margin-bottom: 12px; }
-.editor-checkbox-label input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--accent); cursor: pointer; }
-
-.editor-errors { border: 3px solid var(--accent2); background: var(--surface); padding: 12px 14px; margin-bottom: 16px; }
-.editor-error-item { font-weight: 700; color: var(--accent2); margin-bottom: 4px; }
-.editor-error-item:last-child, .editor-warning-item:last-child { margin-bottom: 0; }
-.editor-warning-item { font-weight: 700; color: var(--text); margin-bottom: 4px; }
-.editor-success { font-weight: 900; color: var(--text); margin-bottom: 6px; }
-.editor-errors:has(.editor-success) { border-color: var(--accent); }
-
-@media (max-width: 600px) {
-  .question-input { grid-template-columns: 48px 1fr; }
-  .question-input .answer-text { grid-column: 2; }
+.fb-download-action > .vp-button:active:not(:disabled) { transform: none; }
+.fb-download-action [data-icon] { flex-shrink: 0; }
+.fb-title-field { max-inline-size: 60ch; }
+#categories-section { display: grid; gap: 16px; min-width: 0; }
+.editor-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.editor-tabs .vp-button { gap: 6px; padding-inline: 9px; }
+.editor-tabs .vp-selection-mark { flex-basis: 14px; }
+.editor-tabs .vp-selection-mark svg { max-inline-size: 100%; }
+.fb-tab-name { overflow-wrap: anywhere; }
+.fb-category-status {
+  display: grid; place-items: center; flex: 0 0 24px;
+  block-size: 24px; border-radius: 50%; background: var(--vp-stone);
 }
-
-/* ===== Lagra frøder ===== */
-.saved-item {
-  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
-  border: 3px solid var(--border); box-shadow: 3px 3px 0 var(--shadow);
-  background: var(--surface); padding: 14px; margin-bottom: 12px;
+.fb-category-status[data-ready="true"] { background: var(--vp-moss); }
+.vp-button.fb-final-tab { --vp-button-fill: var(--vp-heather); }
+#editor-final-state { font-size: .8rem; }
+.fb-category-head {
+  display: flex; align-items: end; flex-wrap: wrap; gap: 12px;
 }
-.saved-item h3 { font-size: 1.1rem; margin-bottom: 2px; color: var(--text); }
-.saved-item p { font-size: 0.85rem; color: var(--muted); }
-.saved-actions { display: flex; gap: 8px; }
+.fb-category-head .vp-field { flex: 1 1 16rem; max-inline-size: 54ch; }
+.fb-question-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; min-width: 0; }
+.fb-question[open] { grid-column: 1 / -1; }
+.fb-question > summary { justify-content: initial; gap: 10px; min-block-size: 76px; }
+.fb-question-summary { display: grid; flex: 1; min-width: 0; }
+.fb-question-points { font-size: 1.375rem; line-height: 1.2; font-weight: 900; }
+.fb-question-snippet { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+.fb-question-status {
+  font-size: .85rem;
+  border-radius: 5px; padding: 2px 6px; background: var(--vp-stone); color: var(--vp-ink);
+}
+.fb-question-status[data-state="ready"] { background: var(--vp-moss); }
+.fb-question-status[data-state="partial"] { background: var(--vp-honey); }
+.fb-question-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.vp-accordion.fb-image-details { width: min(100%, 58ch); border: 0; background: transparent; }
+.vp-accordion.fb-image-details > summary { padding-inline: 0; justify-content: flex-start; }
+.fb-image-details > summary:not(:focus-visible) { background: transparent; }
+.vp-accordion.fb-image-details[open] > summary { border-bottom: 0; }
+.fb-image-details > .vp-accordion-body { padding: 0; }
+#editor-final-section .vp-choice { justify-self: start; }
+#editor-errors ul { margin-block: 4px 0; padding-inline-start: 1.3rem; }
 
-.fb-file-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.fb-file-box { border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); padding: 16px; background: var(--surface); }
-.fb-file-box p { font-size: 0.85rem; margin: 6px 0 12px; line-height: 1.4; color: var(--text); }
-.fb-file-box .form-input { margin-bottom: 10px; }
-.fb-file-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.import-status { margin-top: 12px; font-weight: 700; }
-.import-ok { color: var(--text); }
-.import-err { color: var(--accent2); }
-@media (max-width: 600px) { .fb-file-grid { grid-template-columns: 1fr; } }
-
+@media (max-width: 640px) {
+  .fb-question-fields { grid-template-columns: minmax(0, 1fr); }
+}
+@media (min-width: 641px) {
+  .fb-question-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) {
+  .fb-question-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 /* ===== Førehandsvising ===== */
 .preview-question { margin-top: 16px; border: 3px solid var(--border); padding: 16px; background: var(--surface); }
 .preview-modal .jeopardy-grid { margin-top: 0; }
 
 /* ===== Vinnar ===== */
 .winner-modal { text-align: center; }
-.winner-trophy { font-size: 3.5rem; margin-bottom: 8px; animation: dd-flash 1.6s ease-in-out infinite; }
 .winner-title { font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 12px; }
 .winner-name { font-size: 1.6rem; font-weight: 900; color: var(--text); }
 .winner-score { font-size: 1.2rem; font-weight: 700; color: var(--muted); margin-bottom: 18px; }
@@ -271,8 +304,8 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 
 @media print {
   @page { size: A4 portrait; margin: 12mm; }
-  .vp-header, .fb-nav, .fb-controls, .game-controls, .btn-remove-team { display: none !important; }
-  .jeopardy-grid, .box1 { break-inside: avoid; }
+  .vp-header, .fb-controls, .fb-editor-actions, .btn-remove-team { display: none !important; }
+  .jeopardy-grid, #score-board, #final-round { break-inside: avoid; }
 }
 
 /* Bruk fast Vyrdepil-palett på spelrutene. Den mørke ramma skal vere skilje mellom lyse ruter,
@@ -294,11 +327,10 @@ body[data-vp-app="frodebrett"] {
 }
 
 /* Spørsmålsbilete */
-.fb-image-control { grid-column: 2 / -1; display: grid; gap: 8px; min-width: 0; margin-bottom: 16px; }
+.fb-image-control { display: grid; gap: 8px; min-width: 0; }
 .fb-image-control .vp-input { width: 100%; min-width: 0; }
 .fb-image-control p { margin: 0; }
 .fb-image-control [hidden] { display: none; }
 .fb-image-preview { display: block; max-width: 100%; width: auto; max-height: 180px; object-fit: contain; }
 .fb-question-image { display: block; max-width: 100%; max-height: 45vh; width: auto; height: auto; object-fit: contain; margin: 12px auto 20px; }
 .fb-question-image.hidden { display: none; }
-@media (max-width: 600px) { .fb-image-control { grid-column: 1 / -1; } }

@@ -82,7 +82,9 @@ Editorar, tabellar, små felt, spelkontrollar og tette lister har reine flater u
 
 ## Sideoppsett
 
-`data-vp-open-shell` på `<body>` gjev ei open grunnramme utan den ytre bakgrunnsboksen. Appen sine panel og skilt står då fritt i landskapet. Hald minst 56 px fri avstand mellom heroen og skilt med stolpetoppar som stikk 40 px opp. Vanlege trekkspel utan `data-vp-support` er lukka som standard på alle skjermbreidder.
+Ver varsam med å leggje ei ramme rundt heile sideinnhaldet. Lat sjølvstendige boksar stå fritt, med gode mellomrom der bakgrunnen kjem fram. Lufta mellom boksane gjer dei tydelegare og lettare å skilje frå kvarandre.
+
+`data-vp-open-shell` på `<body>` let appen sine panel og skilt stå fritt i landskapet. Hald minst 56 px fri avstand mellom heroen og skilt med stolpetoppar som stikk 40 px opp. Vanlege trekkspel utan `data-vp-support` er lukka som standard på alle skjermbreidder.
 
 | Oppsett | Bruk og struktur |
 |---|---|

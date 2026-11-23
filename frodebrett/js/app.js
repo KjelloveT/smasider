@@ -4,29 +4,26 @@
 
   const FB = root.FB;
   const S = FB.state;
-  const Store = root.FrodebrettStorage;
 
   const App = {};
 
   App.init = function () {
     App.bindNavigation();
-    FB.Board.bindTeamSetup();
-    FB.Board.bindQuestionModal();
-    FB.Board.bindGameControls();
-    FB.Board.bindFinalRound();
+    FB.Board.bind();
     FB.Editor.bind();
+    FB.Export.bindHelp();
     FB.Saved.bind();
+    FB.StandardQuizzes.bind();
     App.bindKeyboard();
-    App.loadSampleQuizzes();
     App.showScreen('game');
   };
 
   App.bindNavigation = function () {
-    FB.el('btn-play').addEventListener('click', () => App.showScreen('game'));
-    FB.el('btn-editor').addEventListener('click', () => App.showScreen('editor'));
-    FB.el('btn-saved').addEventListener('click', () => App.showScreen('saved'));
-    document.querySelectorAll('[data-goto]').forEach(btn => {
-      btn.addEventListener('click', () => App.showScreen(btn.dataset.goto));
+    FB.el('btn-editor').addEventListener('click', () => FB.Editor.newQuiz());
+    FB.el('btn-editor-back').addEventListener('click', () => {
+      if (!FB.Editor.canLeave()) return;
+      App.showScreen('game');
+      FB.el('library-heading').focus();
     });
   };
 
@@ -36,47 +33,17 @@
     if (screen) screen.classList.remove('hidden');
     S.currentScreen = name;
 
-    document.querySelectorAll('.nav-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.screen === name);
-    });
-
-    if (name === 'game') FB.Board.loadQuizList();
-    else if (name === 'saved') FB.Saved.render();
+    if (name === 'game') FB.Saved.render();
   };
 
-  // ===== STANDARDFRØDER =====
-
-  // Auk denne når innhaldet i json/-filene er endra, så alle får oppdaterte
-  // standardfrøder — utan han ville berre heilt nye brukarar sett endringane.
-  const SEED_VERSION = 2;
-
-  App.loadSampleQuizzes = function () {
-    const legacyTitles = ['Norsk geografi', 'Matte 5. trinn', 'Naturfag'];
-    const defaultTitles = ['Blanda drops', 'Småtrinn'];
-
-    Store.getQuizzes()
-      .filter(q => legacyTitles.includes(q.title))
-      .forEach(q => Store.deleteQuiz(q.id));
-
-    const outdated = Store.getSeedVersion() < SEED_VERSION;
-    const existing = new Set(Store.getQuizzes().map(q => q.title));
-    if (!outdated && defaultTitles.every(t => existing.has(t))) return;
-
-    Promise.all([
-      fetch('json/frodebrett_Blanda_drops.json').then(r => r.json()),
-      fetch('json/frodebrett_Småtrinn.json').then(r => r.json())
-    ]).then(files => {
-      files.forEach(fileData => {
-        if (!fileData || !fileData.quiz) return;
-        const quiz = fileData.quiz;
-        // Standardfrødene har faste id-ar, så saveQuiz oppdaterer den lagra
-        // kopien i staden for å lage ein duplikat.
-        const titles = new Set(Store.getQuizzes().map(q => q.title));
-        if (outdated || !titles.has(quiz.title)) Store.saveQuiz(quiz);
-      });
-      Store.setSeedVersion(SEED_VERSION);
-      if (S.currentScreen === 'game') FB.Board.loadQuizList();
-    }).catch(err => console.error('Klarte ikkje laste standardfrøder:', err));
+  App.playFromEditor = function (quiz) {
+    FB.Board.selectQuiz(quiz, {
+      beforeStart: () => App.showScreen('game'),
+      afterFinish: () => {
+        App.showScreen('editor');
+        FB.el('btn-editor-start').focus();
+      }
+    });
   };
 
   // ===== TASTATUR =====
@@ -86,7 +53,6 @@
       if (e.ctrlKey || e.metaKey) {
         const k = e.key.toLowerCase();
         if (k === 's' && S.currentScreen === 'editor') { e.preventDefault(); FB.Editor.saveQuiz(); }
-        else if (k === 'n' && S.currentScreen === 'editor') { e.preventDefault(); FB.Editor.clear(); }
         return;
       }
       if (S.currentScreen === 'game') FB.Board.handleGameKeyboard(e);
