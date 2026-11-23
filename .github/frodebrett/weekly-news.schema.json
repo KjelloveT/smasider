@@ -37,12 +37,14 @@
         "source": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["title", "publisher", "url", "published"],
+          "required": ["title", "publisher", "url", "published", "story", "importance"],
           "properties": {
             "title": { "type": "string" },
             "publisher": { "type": "string" },
             "url": { "type": "string" },
-            "published": { "type": "string" }
+            "published": { "type": "string" },
+            "story": { "type": "string" },
+            "importance": { "type": "string", "enum": ["major", "minor"] }
           }
         },
         "imagePage": { "type": "string" },

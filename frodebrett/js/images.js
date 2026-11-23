@@ -33,7 +33,8 @@
       : credit.license;
     const changes = credit.cropped === true ? 'Forminska og skore til' : 'Forminska';
     const source = isCommons ? creditLink(credit.title, credit.source) : credit.title + ' · ' + credit.publisher;
-    note.append(source, ' · ' + credit.author + ' · ', license, ' · ' + changes);
+    note.append(source, ' · ' + credit.author + ' · ', license);
+    if (!credit.preserved) note.append(' · ' + changes);
   }
 
   Images.show = function (id, question) {
