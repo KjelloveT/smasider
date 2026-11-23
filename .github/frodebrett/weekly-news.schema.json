@@ -1,0 +1,63 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["categories", "final"],
+  "properties": {
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "questions"],
+        "properties": {
+          "name": { "type": "string" },
+          "questions": { "type": "array", "items": { "$ref": "#/$defs/question" } }
+        }
+      }
+    },
+    "final": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "hint", "entry"],
+      "properties": {
+        "category": { "type": "string" },
+        "hint": { "type": "string" },
+        "entry": { "$ref": "#/$defs/question" }
+      }
+    }
+  },
+  "$defs": {
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["question", "answer", "source", "imagePage", "imageAlt", "pressPhoto"],
+      "properties": {
+        "question": { "type": "string" },
+        "answer": { "type": "string" },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["title", "publisher", "url", "published"],
+          "properties": {
+            "title": { "type": "string" },
+            "publisher": { "type": "string" },
+            "url": { "type": "string" },
+            "published": { "type": "string" }
+          }
+        },
+        "imagePage": { "type": "string" },
+        "imageAlt": { "type": "string" },
+        "pressPhoto": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["url", "description", "credit"],
+          "properties": {
+            "url": { "type": "string" },
+            "description": { "type": "string" },
+            "credit": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

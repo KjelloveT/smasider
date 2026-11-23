@@ -126,7 +126,7 @@
     }
   }
 
-  function addChoice(group, value, name, selected = false) {
+  function addChoice(group, value, name, selected) {
     const label = Vy.el('label', 'vp-choice');
     const input = Vy.el('input');
     input.type = 'checkbox';
@@ -138,19 +138,29 @@
   }
 
   function bind() {
+    const filters = FB.el('standard-filters');
+    const all = FB.el('standard-all');
     const grade = FB.el('standard-grade');
     const subject = FB.el('standard-subject');
     const theme = FB.el('standard-theme');
     for (const number of gradeNumbers) {
-      addChoice(grade, number, number + '.').setAttribute('aria-label', number + '. trinn');
+      addChoice(grade, number, number + '.', all.checked).setAttribute('aria-label', number + '. trinn');
     }
     for (const [id, item] of Object.entries(subjects)) {
-      addChoice(subject, id, item.name);
+      addChoice(subject, id, item.name, all.checked);
     }
     for (const [id, name] of Object.entries(themes)) {
-      addChoice(theme, id, name, id === 'land');
+      addChoice(theme, id, name, all.checked);
     }
-    FB.el('standard-filters').addEventListener('change', render);
+    const choices = [...filters.querySelectorAll('input[type="checkbox"]:not(#standard-all)')];
+    filters.addEventListener('change', ({ target }) => {
+      if (target === all) {
+        for (const choice of choices) choice.checked = all.checked;
+      } else {
+        all.checked = choices.every(choice => choice.checked);
+      }
+      render();
+    });
     render();
   }
 
