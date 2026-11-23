@@ -1,4 +1,4 @@
-name: Frødebrett · Prøvekøyring med PR og e-post
+name: Frødebrett · Prøvekøyring 2 med kjeldebilete
 
 on:
   push:
@@ -6,11 +6,12 @@ on:
 
 env:
   WEEKLY_TEST_DATE: '2026-11-23'
+  WEEKLY_TEST_LABEL: '2'
 
 permissions: {}
 
 concurrency:
-  group: frodebrett-prøvekøyring
+  group: frodebrett-provekoyring
   cancel-in-progress: false
 
 jobs:
@@ -29,8 +30,6 @@ jobs:
           persist-credentials: false
       - name: Finn datoperioden
         id: period
-        env:
-          WEEKLY_EDITION: ''
         run: node .github/frodebrett/weekly-news.mjs prepare
       - name: Hent kjelder til vekas nyheiter
         if: steps.period.outputs.ready == 'true'
@@ -81,15 +80,22 @@ jobs:
             echo "::error::Set FRODEBRETT_PR_TOKEN med Pull requests: Read and write for dette repoet."
             exit 1
           fi
-      - name: Legg den nye quizfila på ei eiga grein
+      - name: Legg frøda og bileta på ei eiga grein
         id: branch
         env:
           GH_TOKEN: ${{ github.token }}
           WEEKLY_PAYLOAD: ${{ needs.draft.outputs.payload }}
         run: |
           set -euo pipefail
-          branch="feat/frodebrett-prove-$WEEKLY_EDITION"
+          branch="feat/frodebrett-prove-$WEEKLY_EDITION-r2"
           quiz="frodebrett/json/weekly-news.json"
+          check_paths() {
+            if ! grep -Fqx "$quiz" <<< "$1" ||
+              grep -qvEx '^frodebrett/json/(weekly-news\.json|weekly-media/[0-9a-f]{24}\.(jpg|png|webp))$' <<< "$1"; then
+              echo "::error::Vekegreina må innehalde quizfila og berre tillatne quizbilete."
+              exit 1
+            fi
+          }
           existing=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$branch" --state all --json url --jq '.[0].url // ""')
           if [ -n "$existing" ]; then
             echo "Det finst alt ein PR for denne veka."
@@ -102,17 +108,21 @@ jobs:
           fi
 
           if git ls-remote --exit-code --heads origin "refs/heads/$branch" >/dev/null; then
-            changed=$(gh api "repos/$GITHUB_REPOSITORY/compare/preview...feat%2Ffrodebrett-prove-$WEEKLY_EDITION" --jq '.files[].filename')
-            if [ "$changed" != "$quiz" ]; then
-              echo "::error::Den eksisterande vekegreina endrar andre filer eller manglar quizfila."
-              exit 1
-            fi
+            changed=$(gh api "repos/$GITHUB_REPOSITORY/compare/preview...feat%2Ffrodebrett-prove-$WEEKLY_EDITION-r2" --jq '.files[].filename')
+            check_paths "$changed"
             git fetch --depth=1 origin "refs/heads/$branch"
             commit=$(git rev-parse FETCH_HEAD)
           else
             node .github/frodebrett/weekly-news.mjs build
+            if ! node -e 'const q = require("./frodebrett/json/weekly-news.json").quiz;
+              const items = [...q.categories.flatMap(c => c.questions), q.final];
+              process.exit(items.some(item => item.imageCredit?.license === "Pressefoto") ? 0 : 1);'; then
+              echo "::error::Biletprøva treng minst eitt faktisk pressefoto."
+              exit 1
+            fi
             git switch -c "$branch"
-            git add -- "$quiz"
+            git add -A -- frodebrett/json
+            check_paths "$(git diff --cached --name-only)"
             git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
               commit -m "Legg til nyheitsfrøda for $WEEKLY_EDITION"
             git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push origin "HEAD:refs/heads/$branch"
@@ -127,19 +137,23 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.FRODEBRETT_PR_TOKEN }}
           WEEKLY_BRANCH: ${{ steps.branch.outputs.branch }}
+          WEEKLY_COMMIT: ${{ steps.branch.outputs.commit }}
         run: |
           set -euo pipefail
           cat > "$RUNNER_TEMP/weekly-pr.md" <<'EOF'
-          Prøvekøyring med 23. november som skjeringstidspunkt. Denne PR-en gjeld preview.
+          Andre prøvekøyring med ny redaksjonsinstruks. Denne PR-en gjeld preview.
 
           Eit KI-utkast med fem kategoriar, 30 spørsmål og ein finale. Alle fasitar og
-          artikkelkjelder ligg i quizfila og i e-posten til redaktøren.
+          artikkelkjelder ligg i quizfila og i e-posten til redaktøren. Krediterte
+          bilete kan sjåast her og i e-posten.
 
           Kontroller datoperiode, fakta, nynorsk, aldersnivå, fasitar og eventuell
           biletbruk før du godkjenner og flettar inn PR-en.
           EOF
+          git show "${WEEKLY_COMMIT}:frodebrett/json/weekly-news.json" > "$RUNNER_TEMP/weekly-reviewed.json"
+          node .github/frodebrett/weekly-news.mjs review >> "$RUNNER_TEMP/weekly-pr.md"
           url=$(gh api --method POST "repos/$GITHUB_REPOSITORY/pulls" \
-            -f 'base=preview' -f "head=$WEEKLY_BRANCH" -f "title=Frødebrett · Prøvefrøda $WEEKLY_EDITION" \
+            -f 'base=preview' -f "head=$WEEKLY_BRANCH" -f "title=Frødebrett · Prøvefrøda 2 · $WEEKLY_EDITION" \
             -F "body=@$RUNNER_TEMP/weekly-pr.md" --jq .html_url)
           echo "url=$url" >> "$GITHUB_OUTPUT"
 
