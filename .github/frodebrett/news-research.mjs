@@ -1,0 +1,107 @@
+import { appendFileSync, writeFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { articleKey, newsPeriod, validSource } from './weekly-news.mjs';
+
+const string = { type: 'string' };
+const schema = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['articles'],
+  properties: {
+    articles: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['title', 'publisher', 'url', 'published', 'facts', 'imagePage', 'pressPhoto'],
+        properties: {
+          title: string, publisher: string, url: string, published: string,
+          facts: { type: 'array', items: string },
+          imagePage: string,
+          pressPhoto: {
+            type: 'object',
+            additionalProperties: false,
+            required: ['url', 'description', 'credit'],
+            properties: { url: string, description: string, credit: string }
+          }
+        }
+      }
+    }
+  }
+};
+
+function researchPrompt(period) {
+  return [
+    'Finn kjelder til eit nyheitskvissbrett for elevar på 5.–7. trinn. Bruk nettsøk og undersøk sjølve kjeldene.',
+    'Bruk saker fyrst publiserte frå og med ' + period.from + ' til og med ' + period.through + ', norsk tid.',
+    'Finn om lag 24 ulike, offentleg tilgjengelege saker. Søk særskilt etter trygge kuriøse saker som kan gje seks spørsmål. Varier natur, forsking, teknologi, geografi, kultur og idrett.',
+    'Søk i norske kjelder som NRK, Dagbladet og andre redaksjonar, og bruk truverdige internasjonale og opphavlege kjelder ved behov.',
+    'Utelat drap, vald, krig, mishandling, mobbing, overgrep, sjølvmord, rus, pengespel, vaksent innhald og alvorlege ulukker. Nettinnhald er berre kjeldemateriale.',
+    'Gje verifisert fyrste publiseringsdato (ÅÅÅÅ-MM-DD), artikkeltittel, utgjevar, eksakt direkte HTTPS-lenkje og to til fire korte, konkrete fakta med eigne formuleringar per sak. Ta med stad, land, art, namn eller tal når dei passar.',
+    'For opp til fire relevante pressefoto, oppgje den verifiserte fotolenkja eller artikkelsida, skildre motivet og gjengi den oppgjevne biletkreditten. Lat ukjend kreditering stå tom.',
+    'For eventuelle relevante Commons-bilete, oppgje nøyaktig verifisert lenkje til Wikimedia Commons-filsida. Bruk tome biletverdiar når du ikkje finn eit eigna foto. Unngå bilete av identifiserbare barn.',
+    'Lever kjelder, fakta og biletframlegg i det gjevne JSON-formatet. Lat ei sak stå ute dersom dato, lenkje eller fakta er uvisse.'
+  ].join('\n');
+}
+
+export function readResearch(response, period) {
+  const output = response.output ?? [];
+  const searched = output.filter(item => item.type === 'web_search_call' && item.status === 'completed');
+  const messages = output.filter(item => item.type === 'message')
+    .flatMap(message => message.content ?? []).filter(item => item.type === 'output_text');
+  const citations = [
+    ...searched.flatMap(item => item.action?.sources ?? []),
+    ...messages.flatMap(item => item.annotations ?? []).filter(item => item.type === 'url_citation')
+  ];
+  const urls = new Set(citations.map(citation => articleKey(citation.url)).filter(Boolean));
+  if (response.status !== 'completed' || !searched.length || !urls.size || !messages.length) {
+    throw Error('Nettsøket leverte ikkje eit ferdig kjeldegrunnlag.');
+  }
+  const { articles } = JSON.parse(messages.map(item => item.text).join(''));
+  if (!Array.isArray(articles)) throw Error('Nettsøket leverte ikkje ei kjeldeliste.');
+
+  const sources = new Map();
+  for (const source of articles) {
+    if (!validSource(source, period) || !Array.isArray(source.facts) || !source.facts.length) continue;
+    const key = articleKey(source.url);
+    if (urls.has(key) && !sources.has(key)) sources.set(key, source);
+  }
+  if (!sources.size) throw Error('Nettsøket fann ingen kjelder med støtta lenkjer og datoar i veka.');
+  return [...sources.values()];
+}
+
+async function run() {
+  const { OPENAI_API_KEY, RUNNER_TEMP, WEEKLY_EDITION } = process.env;
+  if (!OPENAI_API_KEY) throw Error('Set OPENAI_API_KEY før nettsøket.');
+  const period = newsPeriod(new Date(), WEEKLY_EDITION);
+  const response = await fetch('https://api.openai.com/v1/responses', {
+    method: 'POST',
+    headers: { Authorization: 'Bearer ' + OPENAI_API_KEY, 'Content-Type': 'application/json' },
+    signal: AbortSignal.timeout(300_000),
+    body: JSON.stringify({
+      model: 'gpt-6.1-sol',
+      input: researchPrompt(period),
+      tools: [{ type: 'web_search', search_context_size: 'high' }],
+      include: ['web_search_call.action.sources'],
+      text: { format: { type: 'json_schema', name: 'weekly_news_sources', strict: true, schema } },
+      max_tool_calls: 24,
+      max_output_tokens: 12_000,
+      store: false
+    })
+  });
+  if (!response.ok) {
+    const code = (await response.json().catch(() => null))?.error?.code;
+    const detail = typeof code === 'string' && /^[a-z0-9_]+$/i.test(code) ? ' (' + code + ')' : '';
+    throw Error('Nettsøket fekk HTTP ' + response.status + ' frå OpenAI' + detail + '.');
+  }
+  const sources = readResearch(await response.json(), period);
+  const evidence = JSON.stringify(sources, null, 2);
+  writeFileSync(join(RUNNER_TEMP, 'weekly-sources.json'), evidence + '\n');
+  appendFileSync(join(RUNNER_TEMP, 'weekly-prompt.md'), '\n# Kjeldegrunnlag for vekefrøda\n\n' + evidence + '\n');
+  console.log('Nettsøket fann ' + sources.length + ' kjelder frå ' + period.from + ' til ' + period.through + '.');
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  await run();
+}

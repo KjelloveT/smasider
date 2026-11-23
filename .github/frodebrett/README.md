@@ -2,7 +2,7 @@
 
 GitHub Actions startar Codex laurdag klokka 08.15 norsk tid. Frøda dekkjer sju heile kalenderdøgn frå førre laurdag til og med fredag. Ho har fem kategoriar med seks spørsmål kvar og ein finale. Den faste kategorien heiter «snodige nyheter».
 
-Codex får [redaksjonsinstruksen](weekly-news-prompt.md) og leverer eit JSON-utkast. Jobben sjekkar datoperioden, strukturen og fasitlengda. Ein eigen jobb lagar ein PR mot main der den einaste nye endringa er quizfila. E-posten inneheld spørsmåla, fasitane, artikkellenkjene og PR-lenkja. Redaktøren godkjenner og flettar inn PR-en manuelt.
+Jobben hentar eit datert kjeldegrunnlag med OpenAI sitt nettsøk. Codex får kjeldene og [redaksjonsinstruksen](weekly-news-prompt.md) og leverer eit JSON-utkast. Jobben sjekkar kjelder, datoperiode, struktur og fasitlengd. Ein eigen jobb lagar ein PR mot main der den einaste nye endringa er quizfila. E-posten inneheld spørsmåla, fasitane, artikkellenkjene og PR-lenkja. Redaktøren godkjenner og flettar inn PR-en manuelt.
 
 ## Aktivering på GitHub
 
@@ -13,7 +13,7 @@ Codex får [redaksjonsinstruksen](weekly-news-prompt.md) og leverer eit JSON-utk
    | OPENAI_API_KEY | Ein API-nøkkel frå eit OpenAI-prosjekt som kan køyre Codex |
    | FRODEBRETT_PR_TOKEN | Eit avgrensa GitHub-token for å opprette vekas PR |
    | FRODEBRETT_MAIL_TO | E-postadressa til redaktøren |
-   | FRODEBRETT_GMAIL_APP_PASSWORD | Eit Gmail-app-passord for avsendarkontoen, utan skiljemellomroma |
+   | FRODEBRETT_GMAIL_APP_PASSWORD | Eit Gmail-app-passord for avsendarkontoen. Jobben fjernar skiljemellomrom. |
    | FRODEBRETT_GMAIL_USER | Valfritt. Gmail-adressa til avsendaren dersom ho er ulik mottakaradressa |
 
 2. Opprett eit [fine-grained personal access token](https://github.com/settings/personal-access-tokens/new) med berre dette repoet og **Pull requests → Read and write**. Bruk dette som FRODEBRETT_PR_TOKEN og forny det før utløp. Den innebygde Actions-nøkkelen skriv til vekegreina. Det avgrensa tokenet opprettar PR-en, og vanlege GitHub-reglar gjeld ved manuell godkjenning og merge.
