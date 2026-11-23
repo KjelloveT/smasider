@@ -1,8 +1,12 @@
 import assert from 'node:assert/strict';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import test from 'node:test';
 import { newsPeriod, validateDraft, buildQuiz, reviewEmail } from './weekly-news.mjs';
 import { readResearch } from './news-research.mjs';
-import { licensedImage } from './news-images.mjs';
+import { licensedImage, publisherImage, storeWeeklyImages, weeklyImageFile } from './news-images.mjs';
+import { quizQuestions, reviewImages } from './news-review.mjs';
 import { addReviewedPhoto } from './add-reviewed-photo.mjs';
 
 const period = { edition: '2026-11-28', from: '2026-11-21', through: '2026-11-27' };
@@ -13,7 +17,8 @@ function exampleDraft() {
   const make = (label, published = period.through) => ({
     question: 'Kva stad gjeld artikkel ' + label + '?',
     answer: 'Oslo',
-    source: { title: 'Ein trygg testartikkel', publisher: 'Prøveavis', url: 'https://example.org/news/' + label, published },
+    source: { title: 'Ein trygg testartikkel', publisher: 'Prøveavis', url: 'https://example.org/news/' + label,
+      published, story: 'test-' + label, importance: 'major' },
     imagePage: '',
     imageAlt: ''
   });
@@ -79,6 +84,20 @@ test('valideringa fangar opp enkelte upassande emne i både spørsmål og kjelde
   assert.throws(() => validateDraft(draft, period), /trygg fasit/);
 });
 
+test('store konfliktsaker er tillatne og grensene for småsaker og gjentaking gjeld heile brettet', () => {
+  const draft = exampleDraft();
+  const [first, second, third] = draft.categories[0].questions;
+  first.source.title = 'Ny runde med forhandlingar om krigen';
+  first.question = 'I kva land fann våpenkvilesamtalane om krigen stad?';
+  first.source.importance = second.source.importance = 'minor';
+  assert.doesNotThrow(() => validateDraft(draft, period));
+  draft.final.entry.source.importance = 'minor';
+  assert.throws(() => validateDraft(draft, period), /høgst to småsaker/);
+  draft.final.entry.source.importance = 'major';
+  second.source.story = third.source.story = first.source.story;
+  assert.throws(() => validateDraft(draft, period), /Meir enn to spørsmål frå same hending/);
+});
+
 test('berre eit bilete med kjent Wikimedia-kjelde, opphav og støtta lisens blir lagt inn', async () => {
   function serve(licenseUrl) {
     return async url => url.hostname === 'commons.wikimedia.org'
@@ -99,13 +118,8 @@ test('berre eit bilete med kjent Wikimedia-kjelde, opphav og støtta lisens blir
 
 test('quiz og e-post bruker same fasitar, kjelder, datoperiode og PR', async () => {
   const draft = exampleDraft();
-  Object.assign(draft.categories[0].questions[0], { imagePage: filePage, imageAlt: 'Ein bygning' });
-  const pressPhoto = { url: 'https://example.org/photos/1', credit: 'Foto Eigar', description: 'Bilete av rådhuset' };
-  draft.categories[0].questions[0].pressPhoto = pressPhoto;
-  const data = await buildQuiz(draft, period, async () => null);
+  const data = await buildQuiz(draft, period);
   assert.deepEqual(data.quiz.categories[0].questions.map(item => item.points), [100, 200, 300, 400, 500, 1000]);
-  assert.equal(data.quiz.categories[0].questions[0].suggestedImagePage, filePage);
-  assert.deepEqual(data.quiz.categories[0].questions[0].suggestedPressPhoto, pressPhoto);
   assert.equal(data.quiz.categories[0].questions[0].image, undefined);
   const message = reviewEmail(data, {
     prUrl: 'https://github.com/KjelloveT/smasider/pull/999', from: 'test@example.org', to: 'review@example.org'
@@ -114,14 +128,53 @@ test('quiz og e-post bruker same fasitar, kjelder, datoperiode og PR', async () 
   assert.equal((body.match(/Fasit – Oslo/g) || []).length, 31);
   assert.match(body, /https:\/\/github\.com\/KjelloveT\/smasider\/pull\/999/);
   assert.match(body, /https:\/\/example\.org\/news\/31/);
-  assert.ok(body.includes(filePage));
-  assert.match(body, /Pressefoto til vurdering – Bilete av rådhuset · Foto Eigar/);
-  assert.ok(body.includes(pressPhoto.url));
-  const previewMail = reviewEmail({ ...data, testRun: true }, {
+  const previewMail = reviewEmail({ ...data, testRun: true, testLabel: '2' }, {
     prUrl: 'https://github.com/KjelloveT/smasider/pull/999', from: 'test@example.org', to: 'review@example.org'
   });
   const subject = Buffer.from(previewMail.match(/Subject: =\?UTF-8\?B\?([^?]+)\?=/)[1], 'base64').toString('utf8');
-  assert.match(subject, /Prøvekøyring/);
+  assert.match(subject, /Prøvekøyring 2 · /);
+});
+
+test('eit verifisert pressefoto ligg i quizmappa, PR-en og e-posten med same kreditering', async t => {
+  const draft = exampleDraft();
+  const first = draft.categories[0].questions[0];
+  const article = 'https://www.nrk.no/norge/ei-nasjonal-sak-1.123';
+  const imageUrl = 'https://gfx.nrk.no/123/bilete.png';
+  first.source.url = article;
+  first.source.publisher = 'NRK';
+  first.pressPhoto = { url: article, credit: 'Foto Eigar', description: 'Bilete av rådhuset' };
+  const fetchPhoto = async (url, options) => {
+    assert.equal(options.redirect, 'error');
+    if (url.href === article) return new Response('<head><meta content="' + imageUrl
+      + '" property="og:image"></head>', { headers: { 'content-type': 'text/html; charset=utf-8' } });
+    assert.equal(url.href, imageUrl);
+    return new Response(imageBytes, { headers: { 'content-type': 'image/png' } });
+  };
+  assert.equal(await publisherImage(first.source, { ...first.pressPhoto, url: 'https://other.example/a' }, fetchPhoto), null);
+  const data = await buildQuiz(draft, period, undefined, (source, proposal) => publisherImage(source, proposal, fetchPhoto));
+  const folder = mkdtempSync(join(tmpdir(), 'frodebrett-media-'));
+  t.after(() => rmSync(folder, { recursive: true }));
+  storeWeeklyImages(quizQuestions(data.quiz).map(({ item }) => item), folder);
+  const question = data.quiz.categories[0].questions[0];
+  const name = weeklyImageFile(question.image);
+  assert.deepEqual(readFileSync(join(folder, question.image)), imageBytes);
+  assert.equal(question.imageCredit.imageUrl, imageUrl);
+  assert.equal(question.imageCredit.author, 'Foto Eigar');
+  const pr = reviewImages(data, 'a'.repeat(40));
+  assert.ok(pr.includes('/' + question.image));
+  assert.ok(pr.includes('NRK · Foto Eigar · Pressefoto'));
+  assert.ok(pr.includes(article));
+  const mail = reviewEmail(data, { prUrl: 'https://github.com/KjelloveT/smasider/pull/999',
+    from: 'test@example.org', to: 'review@example.org',
+    readPhoto: filename => {
+      assert.equal(filename, name);
+      return readFileSync(join(folder, question.image));
+    }
+  });
+  assert.match(mail, /Content-Type: multipart\/related/);
+  assert.match(mail, /Content-ID: <frodebrett-1\.1@vyrdepil>/);
+  const attachment = mail.match(/Content-Disposition: inline[^\r]+\r\n\r\n([A-Za-z0-9+/=\r\n]+)\r\n--/);
+  assert.deepEqual(Buffer.from(attachment[1], 'base64'), imageBytes);
 });
 
 test('redaktøren kan leggje til eit vurdert pressefoto med opphav og bruksgrunnlag', async () => {
