@@ -8,64 +8,6 @@ permissions:
   contents: read
 
 jobs:
-  draft:
-    name: Lag og valider ei nyheitsfrøde
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    env:
-      WEEKLY_EDITION: '2026-11-21'
-    steps:
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
-        with:
-          persist-credentials: false
-      - name: Finn datoperioden
-        run: node .github/frodebrett/weekly-news.mjs prepare
-      - name: Undersøk vekas nyheiter med Codex
-        uses: openai/codex-action@306c6a196a99dcc6582530c396a19d2672d5e9ec # v1
-        with:
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          prompt-file: ${{ runner.temp }}/weekly-prompt.md
-          output-file: ${{ runner.temp }}/weekly-draft.json
-          sandbox: read-only
-          safety-strategy: drop-sudo
-          codex-args: '["--ephemeral", "-c", "web_search=\"live\"", "--output-schema", ".github/frodebrett/weekly-news.schema.json"]'
-      - name: Kontroller utkastet
-        id: validate
-        run: node .github/frodebrett/weekly-news.mjs check
-      - name: Bygg testbrett og e-postutkast
-        env:
-          WEEKLY_PAYLOAD: ${{ steps.validate.outputs.payload }}
-          WEEKLY_PR: https://github.com/KjelloveT/smasider/pull/137
-          MAIL_TO: ${{ secrets.FRODEBRETT_MAIL_TO }}
-          MAIL_FROM: ${{ secrets.FRODEBRETT_GMAIL_USER || secrets.FRODEBRETT_MAIL_TO }}
-        run: |
-          node .github/frodebrett/weekly-news.mjs build
-          cp frodebrett/json/weekly-news.json "$RUNNER_TEMP/weekly-reviewed.json"
-          node .github/frodebrett/weekly-news.mjs email
-          node -e 'const {period,quiz}=require("./frodebrett/json/weekly-news.json"); console.log(period.from+" – "+period.through+": "+quiz.categories.length+" kategoriar, "+quiz.categories.flatMap(c=>c.questions).length+" spørsmål og ein finale.");'
-          echo "E-postutkastet er klart."
-
-  pr-token:
-    name: Sjekk PR-tokenet
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-    steps:
-      - name: Prøv PR-tilgangen med same grein som head og base
-        env:
-          PR_TOKEN: ${{ secrets.FRODEBRETT_PR_TOKEN }}
-        run: |
-          response="$RUNNER_TEMP/weekly-pr-response.json"
-          code=$(curl --silent --show-error --max-time 30 --output "$response" --write-out '%{response_code}' \
-            --request POST --header 'Accept: application/vnd.github+json' --header 'Content-Type: application/json' \
-            --header "Authorization: Bearer $PR_TOKEN" --data '{"title":"Frødebrett tilgangssjekk","base":"main","head":"main"}' \
-            "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls")
-          if [ "$code" != '422' ]; then
-            echo "::error::PR-endepunktet gav HTTP $code"
-            exit 1
-          fi
-          node -e 'const result=require(process.argv[1]); const errors=[result.message,...(result.errors||[]).map(e=>e.message)].filter(Boolean); if(!errors.some(e=>/no commits between|head.*base.*same|same.*branch/i.test(e))){console.log(JSON.stringify(errors));process.exit(1)}' "$response"
-          echo "GitHub validerte PR-førespurnaden med tokenet. Head og base var den same greina."
-
   gmail:
     name: Sjekk Gmail-innlogginga
     runs-on: ubuntu-latest
@@ -80,6 +22,23 @@ jobs:
             echo "::error::Gmail-innlogginga manglar ei opplysning."
             exit 1
           fi
-          curl --silent --show-error --max-time 30 --ssl-reqd --request NOOP --output /dev/null \
-            --url 'smtps://smtp.gmail.com:465' --user "$MAIL_FROM:$MAIL_PASSWORD"
-          echo "SMTP-innlogginga er godkjend."
+          sender=$(printf '%s' "$MAIL_FROM" | tr -d '[:space:]')
+          app_password=$(printf '%s' "$MAIL_PASSWORD" | tr -d '[:space:]')
+          echo "::add-mask::$sender"
+          echo "::add-mask::$app_password"
+          if [ "${#app_password}" -ne 16 ]; then
+            echo "::error::Gmail-app-passordet har feil format etter fjerning av mellomrom."
+            exit 1
+          fi
+          if [ "$app_password" = "$MAIL_PASSWORD" ] && [ "$sender" = "$MAIL_FROM" ]; then
+            echo "Innloggingsverdiane hadde ingen skiljemellomrom."
+          else
+            echo "Fjerna skiljemellomrom i innloggingsverdiane."
+          fi
+          if status=$(curl --silent --show-error --max-time 30 --ssl-reqd --request NOOP --output /dev/null --write-out '%{response_code}' \
+            --url 'smtps://smtp.gmail.com:465' --user "$sender:$app_password"); then
+            echo "SMTP-innlogginga er godkjend."
+          else
+            echo "::error::Gmail avviste innlogginga med SMTP-status $status."
+            exit 1
+          fi
