@@ -1,8 +1,11 @@
+import { execFileSync } from 'node:child_process';
 import { appendFileSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync, gunzipSync } from 'node:zlib';
-import { commonsFile, licensedImage } from './news-images.mjs';
+import { commonsFile, licensedImage, publisherImage, storeWeeklyImages } from './news-images.mjs';
+import { quizQuestions, reviewEmail, reviewImages } from './news-review.mjs';
+export { reviewEmail } from './news-review.mjs';
 
 const points = [100, 200, 300, 400, 500, 1000];
 const oddNews = 'snodige nyheter';
@@ -10,7 +13,7 @@ const quizPath = 'frodebrett/json/weekly-news.json';
 const day = 86_400_000;
 const iso = date => date.toISOString().slice(0, 10);
 const dateFormat = new Intl.DateTimeFormat('nn-NO', { dateStyle: 'medium', timeZone: 'UTC' });
-const unsafeTopic = /(?:^|[^\p{L}])(?:drap|drep|mishandl|valdtekt|voldtekt|overgrep|skyting|terrordåd|sjølvmord|selvmord|pornografi|pengespel|pengespill|seksuell|krig\b|mobbing|narkotika|blodbad)/iu;
+const unsafeTopic = /(?:^|[^\p{L}])(?:drap|drep|mishandl|valdtekt|voldtekt|overgrep|skyting|terrordåd|sjølvmord|selvmord|pornografi|pengespel|pengespill|seksuell|mobbing|narkotika|blodbad|murder|sexual assault|torture|suicide)/iu;
 
 export function newsPeriod(now = new Date(), edition, testDate) {
   const localDate = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Oslo', dateStyle: 'short' }).format(now);
@@ -72,6 +75,15 @@ export function validSource(source, period) {
   return Number.isFinite(+date) && iso(date) === published && published >= period.from && published <= period.through;
 }
 
+export function validStory(source) {
+  return typeof source?.story === 'string' && source.story.length <= 70
+    && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(source.story) && ['major', 'minor'].includes(source.importance);
+}
+
+function draftQuestions(draft) {
+  return [...draft.categories.flatMap(category => category.questions), draft.final.entry];
+}
+
 export function validateDraft(draft, period, sources) {
   const categories = draft?.categories;
   if (!Array.isArray(categories) || categories.length !== 5) throw Error('Frøda må ha fem kategoriar.');
@@ -80,7 +92,9 @@ export function validateDraft(draft, period, sources) {
   }
   const names = new Set();
   const questions = new Set();
-  const evidence = sources && new Map(sources.map(source => [articleKey(source.url), source.published]));
+  const storyCounts = new Map();
+  const evidence = sources && new Map(sources.map(source => [articleKey(source.url), source]));
+  let minorCount = 0;
 
   function checkQuestion(item, context) {
     if (!safeText(item?.question, 320) || !safeText(item.answer, 65) || item.answer.split(/\s+/u).length > 2
@@ -90,9 +104,18 @@ export function validateDraft(draft, period, sources) {
     const key = normalized(item.question);
     if (!key || questions.has(key)) throw Error(context + ' manglar ei spørsmålsformulering eller gjentek eit anna spørsmål.');
     questions.add(key);
-    if (!validSource(item.source, period)) throw Error(context + ' har inga gyldig kjelde i datoperioden.');
-    if (evidence && evidence.get(articleKey(item.source.url)) !== item.source.published) {
-      throw Error(context + ' brukar ei kjelde eller ein dato som manglar i kjeldegrunnlaget.');
+    const source = item.source;
+    if (!validSource(source, period) || !validStory(source)) throw Error(context + ' har inga gyldig kjelde i datoperioden.');
+    const verified = evidence?.get(articleKey(source.url));
+    if (evidence && (!verified || source.published !== verified.published || source.story !== verified.story
+      || source.importance !== verified.importance || source.publisher !== verified.publisher)) {
+      throw Error(context + ' brukar kjeldeopplysningar som manglar i kjeldegrunnlaget.');
+    }
+    const count = (storyCounts.get(source.story) ?? 0) + 1;
+    storyCounts.set(source.story, count);
+    if (count > 2) throw Error('Meir enn to spørsmål frå same hending: ' + source.story + '.');
+    if (source.importance === 'minor' && ++minorCount > 2) {
+      throw Error('Frøda kan ha høgst to småsaker.');
     }
     if (item.imagePage !== '' || item.imageAlt !== '') {
       if (!commonsFile(item.imagePage) || !safeText(item.imageAlt, 160)) {
@@ -114,31 +137,43 @@ export function validateDraft(draft, period, sources) {
   checkQuestion(draft.final.entry, 'Finalen');
 }
 
-export async function buildQuiz(draft, period, loadPhoto = licensedImage) {
+export async function buildQuiz(draft, period, loadPhoto = licensedImage, loadPressPhoto = publisherImage) {
   validateDraft(draft, period);
-  const items = [...draft.categories.flatMap(category => category.questions), draft.final.entry];
+  const items = draftQuestions(draft);
   const photos = new Map();
-  const candidates = items.filter(item => item.imagePage && !normalized(item.imageAlt).includes(normalized(item.answer)));
-  const pressSuggestions = new Map(items.flatMap(item => {
-    const proposal = item.pressPhoto;
-    if (!publicArticle(proposal?.url) || !safeText(proposal.description, 200)) return [];
-    const credit = safeText(proposal.credit, 180) ? proposal.credit : '';
-    return [[item, { url: proposal.url, description: proposal.description, credit }]];
-  }).slice(0, 4));
-  await Promise.all(candidates.slice(0, 4).map(async item => {
-    const photo = await loadPhoto(item.imagePage, item.imageAlt);
-    if (photo) photos.set(item, photo);
-  }));
+  const picturedStories = new Set();
+  const picturedImages = new Set();
+  const candidates = items.filter(item => item.imagePage
+    && !normalized(item.imageAlt).includes(normalized(item.answer)));
+  const press = items.filter(item => publicArticle(item.pressPhoto?.url)
+    && safeText(item.pressPhoto.credit, 180) && safeText(item.pressPhoto.description, 200)
+    && !normalized(item.pressPhoto.description).includes(normalized(item.answer)));
+
+  function addPhotos(pairs) {
+    for (const [item, photo] of pairs) {
+      if (!photo || picturedStories.has(item.source.story) || picturedImages.has(photo.image)) continue;
+      picturedStories.add(item.source.story);
+      picturedImages.add(photo.image);
+      photos.set(item, photo);
+      if (photos.size === 6) break;
+    }
+  }
+  addPhotos(await Promise.all(press.slice(0, 18).map(async item =>
+    [item, await loadPressPhoto(item.source, item.pressPhoto)])));
+  if (photos.size < 6) {
+    addPhotos(await Promise.all(candidates.filter(item => !picturedStories.has(item.source.story)).slice(0, 6)
+      .map(async item => [item, await loadPhoto(item.imagePage, item.imageAlt)])));
+  }
 
   function makeQuestion(item) {
-    const { question, answer, source, imagePage } = item;
+    const { question, answer, source } = item;
     const photo = photos.get(item);
-    const pressPhoto = pressSuggestions.get(item);
     return {
       question, answer, ...(photo || {}),
-      source: { title: source.title, publisher: source.publisher, url: source.url, published: source.published },
-      ...(imagePage && !photo ? { suggestedImagePage: imagePage } : {}),
-      ...(pressPhoto ? { suggestedPressPhoto: pressPhoto } : {})
+      source: {
+        title: source.title, publisher: source.publisher, url: source.url, published: source.published,
+        story: source.story, importance: source.importance
+      }
     };
   }
 
@@ -160,62 +195,12 @@ function formatPeriod(period) {
   return dateFormat.formatRange(new Date(period.from), new Date(period.through));
 }
 
-export function reviewText({ period, quiz, testRun }, prUrl) {
-  function questionText(question, number) {
-    const { title, url, published, publisher } = question.source;
-    const pressPhoto = question.suggestedPressPhoto;
-    return [
-      number + '. ' + question.question,
-      'Fasit – ' + question.answer,
-      'Kjelde og artikkelbilete – ' + publisher + ', «' + title + '», ' + published,
-      url,
-      ...(question.imageCredit ? [
-        'Bilete i frøda – ' + question.imageCredit.author + ', ' + question.imageCredit.license,
-        question.imageCredit.source, question.imageCredit.licenseUrl
-      ] : []),
-      ...(question.suggestedImagePage ? ['Biletframlegg til vurdering', question.suggestedImagePage] : []),
-      ...(pressPhoto ? [
-        'Pressefoto til vurdering – ' + pressPhoto.description + (pressPhoto.credit ? ' · ' + pressPhoto.credit : ''),
-        pressPhoto.url
-      ] : [])
-    ].join('\n');
-  }
-  return [
-    (testRun ? 'Prøvekøyring · ' : '') + 'Vekas nyheitsfrøde · ' + formatPeriod(period),
-    ...(testRun ? ['Prøvefrøda er lagd fram for godkjenning i førehandsvisinga.'] : []),
-    'Gå gjennom spørsmål, fasitar og eventuelle bilete før du godkjenner PR-en.',
-    prUrl, '',
-    ...quiz.categories.flatMap(({ name, questions }) => [
-      name, ...questions.map((question, index) => questionText(question, index + 1)), ''
-    ]),
-    'Finale · ' + quiz.final.category,
-    'Hint – ' + quiz.final.hint,
-    questionText(quiz.final, 31)
-  ].join('\n\n');
-}
-
-export function reviewEmail(data, { prUrl, from, to }) {
-  const email = /^[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  if (!email.test(from) || !email.test(to)) throw Error('Avsendar og mottakar må vere gyldige e-postadresser.');
-  if (!/^https:\/\/github\.com\/KjelloveT\/smasider\/pull\/\d+$/i.test(prUrl)) throw Error('Ugyldig PR-lenkje for vekefrøda.');
-  const subject = Buffer.from('Frødebrett · ' + (data.testRun ? 'Prøvekøyring ' : 'Vekas nyheitsfrøde ') + data.period.edition).toString('base64');
-  const body = Buffer.from(reviewText(data, prUrl)).toString('base64').match(/.{1,76}/g).join('\r\n');
-  return [
-    'From: Vyrdepil <' + from + '>',
-    'To: ' + to,
-    'Subject: =?UTF-8?B?' + subject + '?=',
-    'Date: ' + new Date().toUTCString(),
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=utf-8',
-    'Content-Transfer-Encoding: base64', '', body, ''
-  ].join('\r\n');
-}
-
 const readJson = path => JSON.parse(readFileSync(path, 'utf8'));
 const output = (key, value) => appendFileSync(process.env.GITHUB_OUTPUT, key + '=' + value + '\n');
 
 async function run(mode) {
-  const { WEEKLY_EDITION, WEEKLY_TEST_DATE, RUNNER_TEMP, WEEKLY_PAYLOAD, WEEKLY_PR, MAIL_FROM, MAIL_TO } = process.env;
+  const { WEEKLY_EDITION, WEEKLY_TEST_DATE, WEEKLY_TEST_LABEL, RUNNER_TEMP,
+    WEEKLY_PAYLOAD, WEEKLY_COMMIT, WEEKLY_PR, MAIL_FROM, MAIL_TO } = process.env;
   const period = newsPeriod(new Date(), WEEKLY_EDITION, WEEKLY_TEST_DATE);
   const file = name => join(RUNNER_TEMP, name);
 
@@ -233,21 +218,45 @@ async function run(mode) {
     }
     case 'check': {
       const draft = readJson(file('weekly-draft.json'));
-      validateDraft(draft, period, readJson(file('weekly-sources.json')));
+      const sources = readJson(file('weekly-sources.json'));
+      validateDraft(draft, period, sources);
+      const evidence = new Map(sources.map(source => [articleKey(source.url), source]));
+      for (const item of draftQuestions(draft)) {
+        const source = evidence.get(articleKey(item.source.url));
+        item.source.title = source.title;
+        item.source.url = source.url;
+        item.pressPhoto = item.pressPhoto?.url === source.pressPhoto?.url ? source.pressPhoto : undefined;
+      }
       output('payload', gzipSync(JSON.stringify(draft)).toString('base64'));
       return;
     }
     case 'build': {
       const draft = JSON.parse(gunzipSync(Buffer.from(WEEKLY_PAYLOAD, 'base64')).toString('utf8'));
       const board = await buildQuiz(draft, period);
-      if (WEEKLY_TEST_DATE) board.testRun = true;
+      if (WEEKLY_TEST_DATE) {
+        board.testRun = true;
+        if (/^\d{1,3}$/.test(WEEKLY_TEST_LABEL ?? '')) board.testLabel = WEEKLY_TEST_LABEL;
+      }
+      const items = quizQuestions(board.quiz).map(({ item }) => item);
+      storeWeeklyImages(items, 'frodebrett');
       writeFileSync(quizPath, JSON.stringify(board, null, 2) + '\n');
+      console.log('Frøda har ' + items.filter(item => item.image).length + ' bilete, av dei '
+        + items.filter(item => item.imageCredit?.license === 'Pressefoto').length + ' pressefoto.');
+      return;
+    }
+    case 'review': {
+      const board = readJson(file('weekly-reviewed.json'));
+      process.stdout.write(reviewImages(board, WEEKLY_COMMIT));
       return;
     }
     case 'email': {
       const board = readJson(file('weekly-reviewed.json'));
       if (board.period?.edition !== period.edition) throw Error('Brettet i PR-en gjeld feil veke.');
-      writeFileSync(file('weekly-mail.eml'), reviewEmail(board, { prUrl: WEEKLY_PR, from: MAIL_FROM, to: MAIL_TO }));
+      const readPhoto = name => execFileSync('git', ['show', 'FETCH_HEAD:frodebrett/json/weekly-media/' + name],
+        { maxBuffer: 195_001 });
+      writeFileSync(file('weekly-mail.eml'), reviewEmail(board, {
+        prUrl: WEEKLY_PR, from: MAIL_FROM, to: MAIL_TO, readPhoto
+      }));
       return;
     }
     default:
