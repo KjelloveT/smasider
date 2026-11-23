@@ -46,7 +46,7 @@ jobs:
           output-file: ${{ runner.temp }}/weekly-draft.json
           sandbox: read-only
           safety-strategy: drop-sudo
-          codex-args: '["--ephemeral", "--output-schema", ".github/frodebrett/weekly-news.schema.json"]'
+          codex-args: '["--ephemeral", "--output-schema", "${{ runner.temp }}/weekly-draft.schema.json"]'
       - name: Kontroller utkastet
         id: validate
         if: steps.period.outputs.ready == 'true'
