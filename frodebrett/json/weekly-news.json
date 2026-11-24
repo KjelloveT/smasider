@@ -14,25 +14,25 @@
         "questions": [
           {
             "points": 100,
-            "question": "Ministrar frå nordiske og afrikanske land møttest i den norske hovudstaden for å snakke om mellom anna handel og klima. Kva by møttest dei i?",
-            "answer": "Oslo",
+            "question": "Kva vart stillinga då Noreg snudde landskampen mot Danmark i Parken?",
+            "answer": "3–2",
             "source": {
-              "title": "Nordic-African Foreign Minister’s Meeting in Oslo",
-              "publisher": "Noregs utanriksdepartement via Officially.news",
-              "url": "https://officially.news/p/01a1f995-2203-7562-b847-fb444892c1cc",
-              "published": "2026-11-20",
-              "story": "nordisk-afrikansk-mote-oslo",
+              "title": "Norge vann mot Danmark – efter jättetabben",
+              "publisher": "SVT Sport",
+              "url": "https://www.svt.se/sport/fotboll/norge-vann-mot-danmark-efter-jattetabben",
+              "published": "2026-11-17",
+              "story": "danmark-norge-fotball",
               "importance": "major"
             }
           },
           {
             "points": 200,
-            "question": "Fem parti forhandla på Stortinget om korleis staten skal bruke pengane sine, men var framleis usamde søndag. Kva kallar vi denne pengeplanen?",
-            "answer": "Statsbudsjettet",
+            "question": "Kva parti forhandla med fire andre parti om statsbudsjettet då samtalane enda utan semje sundag kveld?",
+            "answer": "Arbeidarpartiet",
             "source": {
-              "title": "Ingen budsjettenighet på Stortinget søndag",
-              "publisher": "Bergens Tidende / NTB",
-              "url": "https://www.bt.no/politikk/i/bk5bEk/budsjettforhandlingene-fortsetter-soendag-morgen",
+              "title": "Statsbudsjettet: Budsjettdramaet drar ut. Aps tilbud på bordet",
+              "publisher": "Aftenposten",
+              "url": "https://www.aftenposten.no/norge/politikk/i/OypA7O/statsbudsjettet-budsjettdramaet-drar-ut-aps-tilbud-paa-bordet",
               "published": "2026-11-22",
               "story": "statsbudsjett-2027",
               "importance": "major"
@@ -40,53 +40,53 @@
           },
           {
             "points": 300,
-            "question": "Regjeringa sende eit forslag på høyring om å drive oppdrett langt frå land, ved mellom anna Frøyabanken og Trænabanken. Kor mange havområde føreslo regjeringa?",
-            "answer": "Tre",
+            "question": "Kva flyselskap bad kundar sperre bankkorta sine etter ein datalekkasje hjå ein IT-leverandør?",
+            "answer": "Norwegian",
             "source": {
-              "title": "Sender havbruk til havs på høring",
-              "publisher": "Kyst.no",
-              "url": "https://www.kyst.no/havbruk-til-havs-horing-offshore-havbruk/sender-havbruk-til-havs-pa-horing/2212173",
-              "published": "2026-11-17",
-              "story": "havbruk-til-havs",
+              "title": "Norwegian airline warns thousands of customers over data breach",
+              "publisher": "The Local",
+              "url": "https://www.thelocal.no/20261120/norwegian-airline-warns-thousands-of-customers-over-data-breach",
+              "published": "2026-11-20",
+              "story": "norwegian-datalekkasje",
               "importance": "major"
             }
           },
           {
             "points": 400,
-            "question": "Regjeringa la fram ei melding om kva sjansar gutar og menn har på skulen, på jobb og i familien. Kva ord brukar vi om at folk skal ha like moglegheiter uavhengig av kjønn?",
-            "answer": "Likestilling",
+            "question": "Kvifor stengde Sporveien store delar av T-banen frå torsdag til sundag? Kva slags system skulle dei teste?",
+            "answer": "Eit signalsystem",
             "source": {
-              "title": "Gutter og menn får sin første likestillingsmelding på 20 år",
-              "publisher": "Radio Haugaland / NTB",
-              "url": "https://radioh.no/gutter-og-menn-far-sin-forste-likestillingsmelding-pa-20-ar/",
-              "published": "2026-11-20",
-              "story": "likestilling-gutar-menn",
+              "title": "En av tidenes største T-banestengninger. Dette må du vite.",
+              "publisher": "Aftenposten",
+              "url": "https://www.aftenposten.no/oslo/i/2vGow4/stengt-t-bane-1922-november-slik-klarer-du-deg-uten-t-banen",
+              "published": "2026-11-18",
+              "story": "oslo-tbane-stenging",
               "importance": "major"
             }
           },
           {
             "points": 500,
-            "question": "Regjeringa vil gjere det enklare å byggje nær fjellparti som blir overvaka. Dersom eit varsel går og folk må flytte seg til ein trygg stad, kva heiter det?",
-            "answer": "Evakuering",
+            "question": "Kva etat arbeidde med å avgrense utbrotet av fugleinfluensa i norske fjørfehald?",
+            "answer": "Mattilsynet",
             "source": {
-              "title": "Enklare reglar for bygging i område med overvaka fjellparti",
-              "publisher": "Direktoratet for byggkvalitet",
-              "url": "https://www.dibk.no/Nyhetsarkiv/enklare-reglar-for-bygging-i-omrade-med-overvaka-fjellparti",
-              "published": "2026-11-18",
-              "story": "bygging-overvaka-fjell",
+              "title": "Bird flu outbreak ‘under control’",
+              "publisher": "Norway's News in English",
+              "url": "https://www.newsinenglish.no/2026/11/17/bird-flu-outbreak-under-control/",
+              "published": "2026-11-17",
+              "story": "fugleinfluensa-utbrot",
               "importance": "major"
             }
           },
           {
             "points": 1000,
-            "question": "Regjeringa føreslo 70 millionar kroner ekstra for å betale tilbake meirverdiavgift til frivillige organisasjonar. Kva er det korte namnet på denne avgifta?",
-            "answer": "Moms",
+            "question": "Om lag kor mange stader i Noreg var det markeringar mot kutt i posttenestene?",
+            "answer": "40",
             "source": {
-              "title": "Prop. 24 S (2026–2027): Endringer i statsbudsjettet 2026 under Kultur- og likestillingsdepartementet",
-              "publisher": "Kultur- og likestillingsdepartementet",
-              "url": "https://www.regjeringen.no/contentassets/2ef6d84ff4834ffa99b26815ad1d70e8/no/pdfs/prp202620270024000dddpdfs.pdf",
-              "published": "2026-11-20",
-              "story": "momskompensasjon-frivillige",
+              "title": "Norway rallies to save postal service",
+              "publisher": "Norway's News in English",
+              "url": "https://www.newsinenglish.no/2026/11/16/norway-rallies-to-save-postal-service/",
+              "published": "2026-11-16",
+              "story": "posten-streik",
               "importance": "major"
             }
           }
@@ -97,79 +97,79 @@
         "questions": [
           {
             "points": 100,
-            "question": "Familiar byrja å vende tilbake til Nuseirat, og det kom melding om at ein viktig veg var opna att. Kva område ligg Nuseirat i?",
-            "answer": "Gaza",
+            "question": "I kva by møtte amerikanske utsendingar Ukrainas president og europeiske leiarar til samtalar om krigen?",
+            "answer": "Berlin",
             "source": {
-              "title": "Gazans return to battered camp after Israel says it concluded tank raid",
-              "publisher": "Reuters, via StreetInsider",
-              "url": "https://www.streetinsider.com/Reuters/Gazans%2Breturn%2Bto%2Bbattered%2Bcamp%2Bafter%2BIsrael%2Bsays%2Bit%2Bconcluded%2Btank%2Braid/27372164.html",
-              "published": "2026-11-19",
-              "story": "gaza-veg-opna",
+              "title": "Trump tells skeptical Europeans: \"Putin wants to end the war\"",
+              "publisher": "Axios",
+              "url": "https://www.axios.com/2026/11/20/trump-pushes-putin-ukraine-war-deal",
+              "published": "2026-11-20",
+              "story": "ukraina-samtalar-berlin",
               "importance": "major"
             }
           },
           {
             "points": 200,
-            "question": "Volodymyr Zelenskyj møtte europeiske leiarar og amerikanske utsendingar i Berlin for å drøfte tryggleiken etter ein eventuell fred. Kva land er han president i?",
-            "answer": "Ukraina",
+            "question": "Kva land vedtok denne veka å stengje veggrenseovergangane sine til Russland frå 1. desember?",
+            "answer": "Estland",
             "source": {
-              "title": "The Latest: Kushner says he believes Russia is ‘comfortable’ with NATO-like security for Ukraine",
-              "publisher": "AP",
-              "url": "https://apnews.com/article/3d0f8ed366d6084e1cfe12a4d8020c55",
-              "published": "2026-11-19",
-              "story": "ukraina-berlin-mote",
+              "title": "Estonia to shut border with Russia over GRU-linked sabotage attack",
+              "publisher": "Euronews",
+              "url": "https://www.euronews.com/2026/11/20/estonia-to-shut-border-with-russia-over-gru-linked-sabotage-attack",
+              "published": "2026-11-20",
+              "story": "estland-russland-grense",
               "importance": "major"
             }
           },
           {
             "points": 300,
-            "question": "Xi Jinping tok imot leiarane for USA og Russland i Shenzhen. Dei snakka mellom anna om krigen i Ukraina. Kva land var vertskap for møtet?",
-            "answer": "Kina",
+            "question": "Kva ukrainsk by fekk straumbrot i fleire bydelar og trafikkavgrensingar på Sørbrua denne veka?",
+            "answer": "Kyiv",
             "source": {
-              "title": "Xi, Trump, Putin conclude historic trilateral meeting in China's Shenzhen",
-              "publisher": "Anadolu Agency",
-              "url": "https://www.aa.com.tr/en/asia-pacific/xi-trump-putin-hold-first-ever-trilateral-talks-in-shenzhen/4130184",
-              "published": "2026-11-19",
-              "story": "toppmote-shenzhen",
+              "title": "Russian attacks on Kyiv kill 3, cripple bridges and cut power",
+              "publisher": "AP / NY1",
+              "url": "https://ny1.com/nyc/all-boroughs/ap-top-news/2026/11/20/russian-attacks-on-kyiv-kill-3-cripple-bridges-and-cut-power",
+              "published": "2026-11-20",
+              "story": "kyiv-bruer-straum",
               "importance": "major"
             }
           },
           {
             "points": 400,
-            "question": "Noreg og Storbritannia vil betale for to båtar til Ukraina for å gjere handelsrutene tryggare. Kva hav sør for Ukraina gjeld det?",
-            "answer": "Svartehavet",
+            "question": "Kva land påla FN-domstolen denne veka å leggje til rette for at rohingyaer på flukt kan vende trygt og frivillig heim?",
+            "answer": "Myanmar",
             "source": {
-              "title": "UK and Norway further boost Ukrainian Navy at Coalition of the Willing meeting",
-              "publisher": "Den britiske regjeringa",
-              "url": "https://www.gov.uk/government/news/uk-and-norway-further-boost-ukrainian-navy-at-coalition-of-the-willing-meeting--2",
+              "title": "For the first time, UN’s highest court finds a country responsible for genocide: Myanmar",
+              "publisher": "AP",
+              "url": "https://apnews.com/article/rohingya-myanmar-genocide-court-icj-30df77b12bf3f911f1100e77ebe3973a",
               "published": "2026-11-19",
-              "story": "norge-storbritannia-ukraina-batar",
+              "story": "myanmar-domstol-rohingya",
               "importance": "major"
             }
           },
           {
             "points": 500,
-            "question": "Etter ein avtale i den irakiske byen Jurf al-Sakhar skal styresmaktene passe på røyrleidningar som fraktar ei viktig eksportvare. Kva går gjennom desse leidningane?",
-            "answer": "Olje",
+            "question": "Kva sund kan ifølgje vekas dekning bli omfatta av ei mogleg avtale om skipsfart med Iran?",
+            "answer": "Hormuzsundet",
             "source": {
-              "title": "Iraqi forces deploy to Jurf al-Sakhar after deal with Iran-backed group",
-              "publisher": "Al Jazeera og Reuters",
-              "url": "https://www.aljazeera.com/news/2026/11/20/iraqi-forces-deploy-to-jurf-al-sakhar-after-deal-with-iran-backed-group",
+              "title": "Trump insists Iran won't make an 'acceptable' deal as concerns grow about next steps",
+              "publisher": "AP",
+              "url": "https://apnews.com/article/iran-war-trump-diplomacy-attacks-8fd6dcd6dc4a1a77437cedc4567fbee8",
               "published": "2026-11-20",
-              "story": "irak-jurf-avtale",
+              "story": "iran-usa-forhandlingar",
               "importance": "major"
             }
           },
           {
             "points": 1000,
-            "question": "Ifølgje Axios møtte amerikanske utsendingar representantar frå eit land som prøver å få USA og Iran tilbake til forhandlingsbordet. Kva land, som har Doha som hovudstad, meklar?",
-            "answer": "Qatar",
+            "question": "Kva slags felles fråsegn gav Trump, Xi og Putin ut etter at dei møttest i Kina denne veka?",
+            "answer": "Ei fredserklæring",
             "source": {
-              "title": "Scoop: Witkoff and Kushner meet Qatari mediators to discuss Iran negotiations",
-              "publisher": "Axios",
-              "url": "https://www.axios.com/2026/11/20/witkoff-kushner-meet-qatari-mediators-iran",
-              "published": "2026-11-21",
-              "story": "iran-qatar-mekling",
+              "title": "Trump, Xi and Putin release ’peace declaration’ from unprecedented summit",
+              "publisher": "Reuters",
+              "url": "https://www.investing.com/news/world-news/trump-xi-and-putin-release-peace-declaration-from-unprecedented-summit-5040365",
+              "published": "2026-11-19",
+              "story": "toppmoete-shenzhen",
               "importance": "major"
             }
           }
@@ -180,217 +180,173 @@
         "questions": [
           {
             "points": 100,
-            "question": "Carlos Alcaraz slo Ben Shelton i Torino og gjekk vidare til finalen mot Alexander Zverev. I kva idrett brukar dei racket og slår ein ball over eit nett?",
-            "answer": "Tennis",
-            "image": "json/weekly-media/cfaf54b31431e3657de18a58.jpg",
-            "imageAlt": "Ein spelar helsar publikum etter semifinalen.",
-            "imageCredit": {
-              "title": "Ein spelar helsar publikum etter semifinalen.",
-              "author": "Luca Bruno/AP",
-              "publisher": "The Guardian",
-              "source": "https://www.theguardian.com/sport/2026/nov/21/carlos-alcaraz-holds-off-ben-shelton-to-book-his-place-in-the-atp-finals",
-              "imageUrl": "https://i.guim.co.uk/img/media/e9b9d23305a7d630fb0ca7f3b4264b90894b6fa4/511_0_5112_4089/master/5112.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=edf0e0b5327cc33e29f179121022e6b3",
-              "license": "Pressefoto",
-              "preserved": true
-            },
+            "question": "Kven sette inn sigersmålet på straffe på overtid då Noreg slo Danmark i fotball?",
+            "answer": "Erling Haaland",
             "source": {
-              "title": "Alcaraz holds off Shelton to set up final showdown with Zverev at ATP Finals",
-              "publisher": "The Guardian",
-              "url": "https://www.theguardian.com/sport/2026/nov/21/carlos-alcaraz-holds-off-ben-shelton-to-book-his-place-in-the-atp-finals",
-              "published": "2026-11-21",
-              "story": "atp-finals-semifinalar",
+              "title": "Norge vann mot Danmark – efter jättetabben",
+              "publisher": "SVT Sport",
+              "url": "https://www.svt.se/sport/fotboll/norge-vann-mot-danmark-efter-jattetabben",
+              "published": "2026-11-17",
+              "story": "danmark-norge-fotball",
               "importance": "major"
             }
           },
           {
             "points": 200,
-            "question": "Luca Williams-Barnett skåra då han for første gong spelte frå start for Tottenhams førstelag. Tottenham vann 2–0 mot Ipswich. Kva idrett spelte dei?",
-            "answer": "Fotball",
-            "image": "json/weekly-media/126a8d5c4a26c8fbc4cb3f96.jpg",
-            "imageAlt": "Ein målskårar blir feira av medspelarane.",
-            "imageCredit": {
-              "title": "Ein målskårar blir feira av medspelarane.",
-              "author": "Mark Leech/Offside/Getty Images",
-              "publisher": "The Guardian",
-              "source": "https://www.theguardian.com/football/2026/nov/21/tottenham-ipswich-premier-league-match-report",
-              "imageUrl": "https://i.guim.co.uk/img/media/53f1dc6f7ac06615f3cf6886146797ae9a2bd896/423_0_4232_3385/master/4232.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=d54584951e8a44df31dd35cc2db2b641",
-              "license": "Pressefoto",
-              "preserved": true
-            },
+            "question": "Kva lag slo Manchester United i Mauricio Pochettinos fyrste kamp som United-trenar?",
+            "answer": "Liverpool",
             "source": {
-              "title": "Teenage ace Williams-Barnett puts Tottenham on path to win over Ipswich",
-              "publisher": "The Guardian",
-              "url": "https://www.theguardian.com/football/2026/nov/21/tottenham-ipswich-premier-league-match-report",
-              "published": "2026-11-21",
-              "story": "tottenham-ipswich",
+              "title": "Liverpool 4-0 Man Utd: Mauricio Pochettino endures nightmare start as Leny Yoro's early red card sparks collapse",
+              "publisher": "Sky Sports",
+              "url": "https://www.skysports.com/football/liverpool-vs-man-utd/5154073202367135232",
+              "published": "2026-11-22",
+              "story": "liverpool-manchester-united",
               "importance": "major"
             }
           },
           {
             "points": 300,
-            "question": "Leeds United vann 4–1 over Chelsea. Noah Okafor stod for halvparten av måla til Leeds. Kor mange mål skåra han?",
-            "answer": "To",
-            "image": "json/weekly-media/6e8a72773cf904525ce6338f.jpg",
-            "imageAlt": "Ein spelar feirar ei skåring.",
-            "imageCredit": {
-              "title": "Ein spelar feirar ei skåring.",
-              "author": "Henry Nicholls/AFP/Getty Images",
-              "publisher": "The Guardian",
-              "source": "https://www.theguardian.com/football/2026/nov/21/chelsea-leeds-premier-league-match-report",
-              "imageUrl": "https://i.guim.co.uk/img/media/0671343c3cf539d0fa4d9b7314a9e14107aec25a/222_0_2220_1776/master/2220.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=c429c4b013bb68b9840f5e797e1e6c43",
-              "license": "Pressefoto",
-              "preserved": true
-            },
+            "question": "Kven vann Formel 1-løpet i Las Vegas denne veka?",
+            "answer": "Max Verstappen",
             "source": {
-              "title": "‘Fragile’ Chelsea must toughen up after Leeds humiliation, admits Xabi Alonso",
-              "publisher": "The Guardian",
-              "url": "https://www.theguardian.com/football/2026/nov/21/chelsea-leeds-premier-league-match-report",
-              "published": "2026-11-21",
-              "story": "chelsea-leeds",
+              "title": "Verstappen wins exhilarating Las Vegas Grand Prix from Norris and Piastri",
+              "publisher": "Formula 1",
+              "url": "https://www.formula1.com/en/latest/article/verstappen-wins-exhilarating-las-vegas-grand-prix-from-norris-and-piastri.2eeBWqekZdir9mdDVK9YVX.2eeBWqekZdir9mdDVK9YVX",
+              "published": "2026-11-22",
+              "story": "formel1-las-vegas",
               "importance": "major"
             }
           },
           {
             "points": 400,
-            "question": "Nikhil Chaudhary hjelpte Australia til siger over England med berre éi balllevering att. Kva idrett spelar dei i ein T20-kamp, der slagmannen vernar tre pinnar?",
-            "answer": "Cricket",
-            "image": "json/weekly-media/cd0e4953cef9fce15a593cf5.jpg",
-            "imageAlt": "Ein spelar slår ballen med eit flatt balltre.",
-            "imageCredit": {
-              "title": "Ein spelar slår ballen med eit flatt balltre.",
-              "author": "William West/AFP/Getty Images",
-              "publisher": "The Guardian",
-              "source": "https://www.theguardian.com/sport/2026/nov/21/england-australia-first-t20-international-report-cricket",
-              "imageUrl": "https://i.guim.co.uk/img/media/131704720fa1f887b8b2d60f28ab8573de5b79fa/728_0_5002_4001/master/5002.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=7ed7d0098d1457d524e4b77f4298e9dc",
-              "license": "Pressefoto",
-              "preserved": true
-            },
+            "question": "Kven vann 15-kilometeren i fri teknikk under langrennsopninga på Beitostølen?",
+            "answer": "Karoline Grøtting",
             "source": {
-              "title": "Chaudhary outshines Brook as Australia pip England in gripping T20 opener",
-              "publisher": "The Guardian",
-              "url": "https://www.theguardian.com/sport/2026/nov/21/england-australia-first-t20-international-report-cricket",
-              "published": "2026-11-21",
-              "story": "cricket-australia-england",
+              "title": "Karoline Grøtting suveren på 15 kilometer – Weng utenfor pallen",
+              "publisher": "VG",
+              "url": "https://www.vg.no/sport/i/pMLkgo/karoline-groetting-suveren-paa-15-kilometer-weng-utenfor-pallen",
+              "published": "2026-11-22",
+              "story": "langrenn-beitostoelen",
               "importance": "major"
             }
           },
           {
             "points": 500,
-            "question": "Skottland avslutta gruppespelet i rugby ved å vinne 67–5 mot laget frå landet der Tokyo er hovudstad. Kva land slo dei?",
-            "answer": "Japan",
+            "question": "Kven sette straffesparket i mål etter at Alexander Sørloth skaffa det for Atlético Madrid mot Getafe?",
+            "answer": "Álex Grimaldo",
             "source": {
-              "title": "Graham and McConnell inspire 11-try Scotland to crushing win against Japan",
-              "publisher": "The Guardian",
-              "url": "https://www.theguardian.com/sport/2026/nov/21/scotland-japan-nations-championship-match-report",
-              "published": "2026-11-21",
-              "story": "rugby-skottland-japan",
+              "title": "Sørloth-innhopp da Atlético Madrid vant borte – skaffet straffe",
+              "publisher": "VG",
+              "url": "https://www.vg.no/sport/i/JnoAEJ/soerloth-innhopp-da-atletico-madrid-vant-borte-skaffet-straffe",
+              "published": "2026-11-22",
+              "story": "atletico-getafe",
               "importance": "major"
             }
           },
           {
             "points": 1000,
-            "question": "Australia slo Wales med tre poeng i ein jamn rugbykamp. Kva heiter den walisiske hovudstaden der kampen blei spelt?",
-            "answer": "Cardiff",
-            "image": "json/weekly-media/9df4fb034db647e56cf91a32.jpg",
-            "imageAlt": "Tre spelarar på bana etter den jamne kampen.",
-            "imageCredit": {
-              "title": "Tre spelarar på bana etter den jamne kampen.",
-              "author": "Mike Egerton/PA",
-              "publisher": "The Guardian",
-              "source": "https://www.theguardian.com/sport/2026/nov/21/wales-australia-nations-championship-rugby-union-match-report",
-              "imageUrl": "https://i.guim.co.uk/img/media/e3aa77d9c871ec06adc3c92fce56b8b35aec76fd/334_0_4510_3609/master/4510.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=e665a7747658251a9e5a72b72f04362b",
-              "license": "Pressefoto",
-              "preserved": true
-            },
+            "question": "Kor mange verdsmeistertitlar i MotoGP hadde Marc Márquez etter løpet i Portimão?",
+            "answer": "Åtte",
             "source": {
-              "title": "Wales fightback not enough as Australia edge thriller thanks to Gordon",
-              "publisher": "The Guardian",
-              "url": "https://www.theguardian.com/sport/2026/nov/21/wales-australia-nations-championship-rugby-union-match-report",
-              "published": "2026-11-21",
-              "story": "rugby-wales-australia",
+              "title": "Marc Marquez, un huitième titre record en MotoGP pour sortir, enfin, de l’ombre de Valentino Rossi",
+              "publisher": "Le Monde",
+              "url": "https://www.lemonde.fr/sport/article/2026/11/22/marc-marquez-un-huitieme-titre-record-en-motogp-pour-sortir-enfin-de-l-ombre-de-valentino-rossi_6814217_3242.html",
+              "published": "2026-11-22",
+              "story": "motogp-marquez",
               "importance": "major"
             }
           }
         ]
       },
       {
-        "name": "Handel og teknologi",
+        "name": "Økonomi og teknologi",
         "questions": [
           {
             "points": 100,
-            "question": "EU blei samd med landet som gjekk ut av unionen ved brexit om å gjere det lettare for unge å reise, studere eller arbeide på den andre sida. Kva land inngjekk EU avtalen med?",
-            "answer": "Storbritannia",
+            "question": "Kva norsk energiselskap melde at produksjonen gjekk som normalt etter eit dataåtak denne veka?",
+            "answer": "Equinor",
             "source": {
-              "title": "EU-UK and post-Brexit relations, agreement on reset. Burnham: “Historic agreement”. What changes for young people",
-              "publisher": "Adnkronos via Jiji Press",
-              "url": "https://jen.jiji.com/eu-uk-and-post-brexit-relations-agreement-on-reset-burnham-historic-agreement-what-changes-for-young-people/",
+              "title": "Gas supplier giant Equinor hit by cyberattack — Europe's biggest gas supplier says it has now restored services",
+              "publisher": "TechRadar",
+              "url": "https://www.techradar.com/pro/security/gas-supplier-giant-equinor-hit-by-cyberattack-europes-biggest-gas-supplier-says-it-has-now-restored-services",
               "published": "2026-11-20",
-              "story": "eu-storbritannia-avtale",
+              "story": "equinor-dataangrep",
               "importance": "major"
             }
           },
           {
             "points": 200,
-            "question": "EU og landet som Bali høyrer til, skreiv under på ein handelsavtale etter ti år med forhandlingar. Kva land er det?",
+            "question": "Kva land skreiv under på handels- og investeringsavtalar med EU etter ti år med forhandlingar?",
             "answer": "Indonesia",
+            "image": "json/weekly-media/2b93c41f7b23f8c0f0d8ecbd.jpg",
+            "imageAlt": "EU-kommisjonens president Ursula von der Leyen på ein pressekonferanse.",
+            "imageCredit": {
+              "title": "EU-kommisjonens president Ursula von der Leyen på ein pressekonferanse.",
+              "author": "The Associated Press",
+              "publisher": "Euronews",
+              "source": "https://www.euronews.com/2026/11/21/european-union-and-indonesia-sign-free-trade-deal-after-decade-of-talks",
+              "imageUrl": "https://images.euronews.com/articles/stories/10/00/25/39/1200x675_cmsv2_b6a51226-14f9-541e-8c88-4828b53c21fd-10002539.jpg",
+              "license": "Pressefoto",
+              "preserved": true
+            },
             "source": {
-              "title": "Indonesia, EU sign trade deal after 10 years of negotiations",
-              "publisher": "Reuters via The Jakarta Post",
-              "url": "https://www.thejakartapost.com/business/2026/11/21/indonesia-eu-sign-trade-deal-after-10-years-of-negotiations",
+              "title": "European Union and Indonesia sign free trade deal after decade of talks",
+              "publisher": "Euronews",
+              "url": "https://www.euronews.com/2026/11/21/european-union-and-indonesia-sign-free-trade-deal-after-decade-of-talks",
               "published": "2026-11-21",
-              "story": "eu-indonesia-handel",
+              "story": "eu-indonesia-handelsavtale",
               "importance": "major"
             }
           },
           {
             "points": 300,
-            "question": "Nvidia sa nei til å få den tidlegare toppsjefen sin tilbake. Kva lagar selskapet som får datamaskiner til å gjere utrekningar for kunstig intelligens?",
-            "answer": "Databrikker",
+            "question": "Kva KI-selskap debuterte på børsen denne veka med ein fyrste handelspris på 111,50 dollar per aksje?",
+            "answer": "Anthropic",
             "source": {
-              "title": "Nvidia rejects Jensen Huang's offer to return as CEO",
-              "publisher": "Associated Press",
-              "url": "https://apnews.com/article/nvidia-jensen-huang-china-national-security-chips-3026bcbe04ab57b844884382e583422a",
-              "published": "2026-11-17",
-              "story": "nvidia-leiarskifte",
+              "title": "Anthropic hits $2 trillion market value in debut; major indexes fall",
+              "publisher": "Reuters, publisert hos AOL",
+              "url": "https://www.aol.com/articles/anthropic-set-soar-debut-ai-160003000.html",
+              "published": "2026-11-19",
+              "story": "anthropic-borsdebut",
               "importance": "major"
             }
           },
           {
             "points": 400,
-            "question": "Sør-Korea sette rekord då verdien av det landet sel til andre land passerte éin billion dollar. Kva kallar vi slikt sal?",
-            "answer": "Eksport",
+            "question": "Kva e-postteneste gjekk Intuit med på å selje til Bending Spoons denne veka?",
+            "answer": "Mailchimp",
             "source": {
-              "title": "(LEAD) S. Korea's exports top US$1 tln for 1st time on strong chip demand",
-              "publisher": "Yonhap News Agency",
-              "url": "https://en.yna.co.kr/view/AEN20261119003951320",
-              "published": "2026-11-19",
-              "story": "sorkorea-eksportrekord",
+              "title": "Bending Spoons' Mailchimp pounce tests its limits",
+              "publisher": "Reuters Breakingviews",
+              "url": "https://www.breakingviews.com/40925ca4af2b/columns/breaking-view/bending-spoons-mailchimp-pounce-tests-its-limits-2026-11-20/",
+              "published": "2026-11-20",
+              "story": "mailchimp-sal",
               "importance": "major"
             }
           },
           {
             "points": 500,
-            "question": "Då selskapet bak samtaleroboten Claude kom på Nasdaq-børsen, kunne folk kjøpe små eigardelar i selskapet. Kva heiter slike eigardelar?",
-            "answer": "Aksjar",
+            "question": "Kva ville Donald Trump leggje ein høg skatt på når amerikanske selskap byggjer dei i utlandet?",
+            "answer": "Datasenter",
             "source": {
-              "title": "Anthropic begins public trading in major test for promise and risk of AI",
-              "publisher": "ABC News",
-              "url": "https://abcnews.com/Business/anthropic-public/story?id=138174650",
-              "published": "2026-11-19",
-              "story": "anthropic-borsnotering",
+              "title": "Trump says US to penalize firms building data centers abroad",
+              "publisher": "Reuters, publisert hos AOL",
+              "url": "https://www.aol.co.uk/articles/trump-says-us-penalize-firms-180803000.html",
+              "published": "2026-11-20",
+              "story": "usa-datasenter-utlandet",
               "importance": "major"
             }
           },
           {
             "points": 1000,
-            "question": "Fredag fall aksjekursane på Wall Street kraftig, særleg for selskap som jobbar med teknologien bak moderne samtalerobotar. Kva heiter denne teknologien?",
-            "answer": "Kunstig intelligens",
+            "question": "Kva slags kvotar vart EU og Storbritannia samde om å knyte saman handelen med etter toppmøtet i Brussel?",
+            "answer": "Utsleppskvotar",
             "source": {
-              "title": "Wall Street reels as AI-linked companies spark massive sell-off in the US",
-              "publisher": "Le Monde",
-              "url": "https://www.lemonde.fr/en/economy/article/2026/11/21/wall-street-reels-as-ai-linked-companies-spark-massive-sell-off-in-the-us_6785968_19.html",
-              "published": "2026-11-21",
-              "story": "borsfall-ki-aksjar",
+              "title": "Factbox-What EU and UK have agreed to at summit",
+              "publisher": "Reuters, publisert hos Yahoo Finance",
+              "url": "https://uk.finance.yahoo.com/news/factbox-eu-uk-agreed-summit-142703850.html",
+              "published": "2026-11-20",
+              "story": "eu-storbritannia-avtale",
               "importance": "major"
             }
           }
@@ -401,79 +357,90 @@
         "questions": [
           {
             "points": 100,
-            "question": "Ein norsk by kjend for regn nærma seg rekord i soltimar for november. Målingane blei gjorde på Flesland. Kva by var det?",
-            "answer": "Bergen",
+            "question": "Kva planet kom romfartøyet BepiColombo fram til denne veka etter ei reise på åtte år?",
+            "answer": "Merkur",
             "source": {
-              "title": "I dag setter solbyen Bergen ny rekord",
-              "publisher": "Bergens Tidende",
-              "url": "https://www.bt.no/v%C3%A6ret/Vestland/Bergen/Bergen",
-              "published": "2026-11-22",
-              "story": "soltimer-bergen-november",
-              "importance": "minor"
+              "title": "BepiColombo finally reaches Mercury after eight-year odyssey",
+              "publisher": "Nature",
+              "url": "https://www.nature.com/articles/d41586-026-03803-8",
+              "published": "2026-11-21",
+              "story": "bepicolombo-merkur",
+              "importance": "major"
             }
           },
           {
             "points": 200,
-            "question": "På klimatoppmøtet heldt landa fram med å forhandle medan arbeidarar byrja å pakke ned møtelokala. Kva kallar vi tida etter den planlagde sluttid som dei no forhandla på?",
-            "answer": "Overtid",
+            "question": "Donald Trump var ikkje i rommet då leiarane møttest i Berlin for å snakke om Ukraina. Korleis deltok han i møtet?",
+            "answer": "På telefon",
             "source": {
-              "title": "UN climate talk negotiators go into second day of overtime while at odds over fossil fuels",
-              "publisher": "Associated Press",
-              "url": "https://apnews.com/article/cop31-un-turkey-climate-change-global-warming-b54eebcade92e5ee4c513b9a5b2192a7",
-              "published": "2026-11-21",
-              "story": "cop31-klimaforhandlingar",
+              "title": "Trump tells skeptical Europeans: \"Putin wants to end the war\"",
+              "publisher": "Axios",
+              "url": "https://www.axios.com/2026/11/20/trump-pushes-putin-ukraine-war-deal",
+              "published": "2026-11-20",
+              "story": "ukraina-samtalar-berlin",
               "importance": "major"
             }
           },
           {
             "points": 300,
-            "question": "Før rugbykampen mot England framførte New Zealand ein tradisjonell maoridans med rop og kraftige rørsler. Kva heiter dansen?",
-            "answer": "Haka",
+            "question": "Kva skiskyttar overraska med å ta tredjeplassen i langrennsopninga på Beitostølen?",
+            "answer": "Ida Lien",
+            "image": "json/weekly-media/009d43455ee698a13613e643.jpg",
+            "imageAlt": "Vinnaren går 15-kilometeren i fri teknikk på Beitostølen.",
+            "imageCredit": {
+              "title": "Vinnaren går 15-kilometeren i fri teknikk på Beitostølen.",
+              "author": "Terje Pedersen / NTB",
+              "publisher": "VG",
+              "source": "https://www.vg.no/sport/i/pMLkgo/karoline-groetting-suveren-paa-15-kilometer-weng-utenfor-pallen",
+              "imageUrl": "https://akamai.vgc.no/v2/images/d5ffa174-edb8-3038-b412-f6cd29bb42a2?format=auto&w=1080&s=b811b2c2fc90934cc103440e4c3364d809c662b5",
+              "license": "Pressefoto",
+              "preserved": true
+            },
             "source": {
-              "title": "England beat New Zealand 37-12 after former skipper Lewis Moody faces haka amid MND fight",
-              "publisher": "ABC News",
-              "url": "https://www.abc.net.au/news/2026-11-22/england-beat-nz-all-blacks-former-skipper-lewis-moody-haka-mnd/107413688",
-              "published": "2026-11-21",
-              "story": "rugby-england-new-zealand",
+              "title": "Karoline Grøtting suveren på 15 kilometer – Weng utenfor pallen",
+              "publisher": "VG",
+              "url": "https://www.vg.no/sport/i/pMLkgo/karoline-groetting-suveren-paa-15-kilometer-weng-utenfor-pallen",
+              "published": "2026-11-22",
+              "story": "langrenn-beitostoelen",
               "importance": "major"
             }
           },
           {
             "points": 400,
-            "question": "Europa valde eit nytt romoppdrag der sju satellittar skal studere korleis energi frå ei stjerne påverkar rommet rundt jorda. Kva stjerne skal dei følgje med på?",
-            "answer": "Sola",
+            "question": "Kva slags vatn må ein passe på når det skal leggjast til rette for bybane og sykkelveg ved Bryggen i Bergen?",
+            "answer": "Grunnvatnet",
             "source": {
-              "title": "Plasma Observatory, missione Esa a guida italiana",
-              "publisher": "Media INAF",
-              "url": "https://www.media.inaf.it/2026/11/19/selezione-plasma-observatory/",
-              "published": "2026-11-19",
-              "story": "esa-plasma-observatory",
+              "title": "Riksantikvaren godtek ny bybane- og sykkeltrasé",
+              "publisher": "Riksantikvaren",
+              "url": "https://riksantikvaren.no/riksantikvaren-godtek-ny-bybane-og-sykkeltrase/",
+              "published": "2026-11-20",
+              "story": "bergen-bybane-bryggen",
               "importance": "major"
             }
           },
           {
             "points": 500,
-            "question": "Ein ny leitemetode avslørte ei stjerne som snurrar 261 gonger i sekundet og sender signal med jamne mellomrom. Kva heiter ei slik stjerne, med eit namn som minner om ordet «puls»?",
-            "answer": "Pulsar",
+            "question": "BepiColombo fór forbi planeten han skulle undersøkje fleire gonger før han kom i bane. Kor mange gonger passerte han planeten på vegen?",
+            "answer": "Seks",
             "source": {
-              "title": "Efficient Algorithm Slashes Pulsar Discovery Time",
-              "publisher": "Physics Magazine",
-              "url": "https://physics.aps.org/articles/v19/s144",
-              "published": "2026-11-19",
-              "story": "ny-pulsar-algoritme",
+              "title": "BepiColombo spacecraft enter orbit around Mercury after eight-year cruise",
+              "publisher": "AP",
+              "url": "https://apnews.com/article/mercury-bepicolombo-space-planet-esa-0c80bbf2039ed4f6ee4a34426b3594a0",
+              "published": "2026-11-22",
+              "story": "bepicolombo-merkur",
               "importance": "major"
             }
           },
           {
             "points": 1000,
-            "question": "Med hjelp frå kunstig intelligens la ein matematikar fram eit mogleg bevis om korleis tal som 2, 3, 5 og 7 er fordelte. Kva kallar vi heile tal større enn 1 som berre kan delast utan rest på 1 og seg sjølve?",
-            "answer": "Primtal",
+            "question": "Kva KI-verktøy sa matematikaren Levent Alpöge at han hadde brukt til å finne eit mogleg bevis for Riemann-hypotesen?",
+            "answer": "Claude",
             "source": {
-              "title": "Likely solution to Riemann hypothesis by AI marks turning point for mathematics",
-              "publisher": "Le Monde",
-              "url": "https://www.lemonde.fr/en/science/article/2026/11/21/the-likely-solution-to-the-riemann-hypothesis-by-ai-marks-a-turning-point-for-mathematics_6786232_10.html",
-              "published": "2026-11-21",
-              "story": "riemann-matematikk",
+              "title": "Mathematicians astounded by AI and human-written proofs of iconic Riemann hypothesis",
+              "publisher": "Nature",
+              "url": "https://www.nature.com/articles/d41586-026-03812-7",
+              "published": "2026-11-20",
+              "story": "riemann-mogleg-bevis",
               "importance": "major"
             }
           }
@@ -481,20 +448,20 @@
       }
     ],
     "final": {
-      "category": "Ei helsing frå rommet",
-      "hint": "Sonden er éin lysdag frå jorda.",
-      "question": "Voyager 1 har reist sidan 1977. No er romsonden så langt unna at lyset bruker 24 timar på å nå jorda frå der han er. Kor lang tid bruker ei radiomelding frå sonden, målt i døgn?",
-      "answer": "Eitt døgn",
+      "category": "Klimatoppmøtet",
+      "hint": "Nesten 200 land deltok, men møtet enda utan ei felles sluttavtale.",
+      "question": "I kva by gjekk vekas klimatoppmøte COP31 føre seg?",
+      "answer": "Antalya",
       "source": {
-        "title": "NASA's Voyager 1 phones home from one light-day away",
-        "publisher": "Associated Press",
-        "url": "https://apnews.com/article/voyager-nasa-light-day-interstellar-space-db9f5f8d9ec3a40f1f434446baf326b5",
-        "published": "2026-11-19",
-        "story": "voyager-ein-lysdag",
+        "title": "U.N. COP31 climate conference ends with no agreement after fossil fuel debate reaches standstill",
+        "publisher": "CBS News",
+        "url": "https://www.cbsnews.com/news/un-cop31-climate-conference-ends-no-agreement-fossil-fuel-debate-standstill/",
+        "published": "2026-11-22",
+        "story": "cop31-utan-avtale",
         "importance": "major"
       }
     }
   },
   "testRun": true,
-  "testLabel": "2"
+  "testLabel": "3"
 }
