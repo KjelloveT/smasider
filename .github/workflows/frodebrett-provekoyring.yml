@@ -1,4 +1,4 @@
-name: Frødebrett · Prøvekøyring 2 med kjeldebilete
+name: Frødebrett · Prøvekøyring 3 med nyheitsspørsmål
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 env:
   WEEKLY_TEST_DATE: '2026-11-23'
-  WEEKLY_TEST_LABEL: '2'
+  WEEKLY_TEST_LABEL: '3'
 
 permissions: {}
 
@@ -93,7 +93,7 @@ jobs:
           WEEKLY_PAYLOAD: ${{ needs.draft.outputs.payload }}
         run: |
           set -euo pipefail
-          branch="feat/frodebrett-prove-$WEEKLY_EDITION-r2"
+          branch="feat/frodebrett-prove-$WEEKLY_EDITION-r3"
           quiz="frodebrett/json/weekly-news.json"
           check_paths() {
             if ! grep -Fqx "$quiz" <<< "$1" ||
@@ -114,18 +114,12 @@ jobs:
           fi
 
           if git ls-remote --exit-code --heads origin "refs/heads/$branch" >/dev/null; then
-            changed=$(gh api "repos/$GITHUB_REPOSITORY/compare/preview...feat%2Ffrodebrett-prove-$WEEKLY_EDITION-r2" --jq '.files[].filename')
+            changed=$(gh api "repos/$GITHUB_REPOSITORY/compare/preview...feat%2Ffrodebrett-prove-$WEEKLY_EDITION-r3" --jq '.files[].filename')
             check_paths "$changed"
             git fetch --depth=1 origin "refs/heads/$branch"
             commit=$(git rev-parse FETCH_HEAD)
           else
             node .weekly-generator/.github/frodebrett/weekly-news.mjs build
-            if ! node -e 'const q = require("./frodebrett/json/weekly-news.json").quiz;
-              const items = [...q.categories.flatMap(c => c.questions), q.final];
-              process.exit(items.some(item => item.imageCredit?.license === "Pressefoto") ? 0 : 1);'; then
-              echo "::error::Biletprøva treng minst eitt faktisk pressefoto."
-              exit 1
-            fi
             git switch -c "$branch"
             git add -A -- frodebrett/json
             check_paths "$(git diff --cached --name-only)"
@@ -147,7 +141,8 @@ jobs:
         run: |
           set -euo pipefail
           cat > "$RUNNER_TEMP/weekly-pr.md" <<'EOF'
-          Andre prøvekøyring med ny redaksjonsinstruks. Denne PR-en gjeld preview.
+          Tredje prøvekøyring med breiare norske saker og spørsmål om sjølve nyheita.
+          Prøva bruker same nyheitsveke som førre runde. Denne PR-en gjeld preview.
 
           Eit KI-utkast med fem kategoriar, 30 spørsmål og ein finale. Alle fasitar og
           artikkelkjelder ligg i quizfila og i e-posten til redaktøren. Krediterte
@@ -159,7 +154,7 @@ jobs:
           git show "${WEEKLY_COMMIT}:frodebrett/json/weekly-news.json" > "$RUNNER_TEMP/weekly-reviewed.json"
           node .weekly-generator/.github/frodebrett/weekly-news.mjs review >> "$RUNNER_TEMP/weekly-pr.md"
           url=$(gh api --method POST "repos/$GITHUB_REPOSITORY/pulls" \
-            -f 'base=preview' -f "head=$WEEKLY_BRANCH" -f "title=Frødebrett · Prøvefrøda 2 · $WEEKLY_EDITION" \
+            -f 'base=preview' -f "head=$WEEKLY_BRANCH" -f "title=Frødebrett · Prøvefrøda 3 · $WEEKLY_EDITION" \
             -F "body=@$RUNNER_TEMP/weekly-pr.md" --jq .html_url)
           echo "url=$url" >> "$GITHUB_OUTPUT"
 
