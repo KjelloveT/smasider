@@ -9,7 +9,7 @@ const norwayTopic = 'hovudsaker i Noreg på tvers av stoffområde og landsdelar'
 const topics = [
   norwayTopic,
   'hovudsaker i verda, internasjonal politikk, val, toppmøte og andre større samfunnshendingar',
-  'store konflikt- og diplomatisaker, våpenkviler, forhandlingar og følgjer for infrastruktur',
+  'verdsnyheiter som vedkjem born og ungdom, med nokre av dei største konflikt- og diplomatisakene forklart for målgruppa',
   'natur, dyr, vitskap, spel og teknologi, med vekt på det som opptek born og ungdom',
   'idrett, kultur, skule, fritid og mediesaker med særleg interesse for born og ungdom'
 ];
