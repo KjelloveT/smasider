@@ -2,91 +2,337 @@
   "app": "frodebrett",
   "version": 1,
   "period": {
-    "edition": "2026-11-23",
-    "from": "2026-11-16",
-    "through": "2026-11-22"
+    "edition": "2026-11-25",
+    "from": "2026-11-18",
+    "through": "2026-11-24"
   },
   "quiz": {
-    "title": "Vekas nyheitsfrøde · 16.–22. nov. 2026",
+    "title": "Vekas nyheitsfrøde · 18.–24. nov. 2026",
     "categories": [
       {
         "name": "I Noreg",
         "questions": [
           {
             "points": 100,
-            "question": "Kva vart stillinga då Noreg snudde landskampen mot Danmark i Parken?",
-            "answer": "3–2",
+            "question": "Mattilsynet leita etter meir fugleinfluensa denne veka. På kor mange norske gardar var smitten påvist måndag?",
+            "answer": "8 gardar",
+            "options": [
+              "14 gardar",
+              "5 gardar",
+              "11 gardar",
+              "8 gardar"
+            ],
+            "image": "json/weekly-media/b8fc4869909580174edef711.jpg",
+            "imageAlt": "Høner i eit hønsehus",
+            "imageCredit": {
+              "title": "Barn hens.jpg",
+              "author": "USDA",
+              "source": "https://commons.wikimedia.org/wiki/File:Barn_hens.jpg",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
+            },
             "source": {
-              "title": "Norge vann mot Danmark – efter jättetabben",
-              "publisher": "SVT Sport",
-              "url": "https://www.svt.se/sport/fotboll/norge-vann-mot-danmark-efter-jattetabben",
-              "published": "2026-11-17",
-              "story": "danmark-norge-fotball",
+              "title": "Tester nye fjørfehold for fugleinfluensa: – Fortsatt ikke fullstendig oversikt",
+              "publisher": "Radio Haugaland / NTB",
+              "url": "https://radioh.no/tester-nye-fjorfehold-for-fugleinfluensa-fortsatt-ikke-fullstendig-oversikt/",
+              "published": "2026-11-23",
+              "story": "fugleinfluensa-norge",
               "importance": "major"
             }
           },
           {
             "points": 200,
-            "question": "Kva parti forhandla med fire andre parti om statsbudsjettet då samtalane enda utan semje sundag kveld?",
-            "answer": "Arbeidarpartiet",
+            "question": "Opninga av Vikingtidsmuseet vart utsett på nytt denne veka. Kva år skal museet no opne att?",
+            "answer": "2028",
+            "options": [
+              "2028",
+              "2026",
+              "2027",
+              "2029"
+            ],
+            "image": "json/weekly-media/1d156d2e72349c56c4edd093.jpg",
+            "imageAlt": "Vikingtidsmuseet på Bygdøy",
+            "imageCredit": {
+              "title": "Vikingtidsmuseet på Bygdøy",
+              "author": "Håkon Mosvold Larsen / NTB",
+              "publisher": "Radio Haugaland / NTB",
+              "source": "https://radioh.no/apningen-av-vikingtidsmuseet-utsatt-igjen/",
+              "imageUrl": "https://radioh.no/wp-content/uploads/2026/11/ntb-1298454-wcd7dkYgaPQ-925-925x600.jpg",
+              "license": "Pressefoto",
+              "preserved": true
+            },
             "source": {
-              "title": "Statsbudsjettet: Budsjettdramaet drar ut. Aps tilbud på bordet",
-              "publisher": "Aftenposten",
-              "url": "https://www.aftenposten.no/norge/politikk/i/OypA7O/statsbudsjettet-budsjettdramaet-drar-ut-aps-tilbud-paa-bordet",
-              "published": "2026-11-22",
-              "story": "statsbudsjett-2027",
+              "title": "Åpningen av Vikingtidsmuseet utsatt igjen",
+              "publisher": "Radio Haugaland / NTB",
+              "url": "https://radioh.no/apningen-av-vikingtidsmuseet-utsatt-igjen/",
+              "published": "2026-11-23",
+              "story": "vikingtidsmuseet-utsett",
               "importance": "major"
             }
           },
           {
             "points": 300,
-            "question": "Kva flyselskap bad kundar sperre bankkorta sine etter ein datalekkasje hjå ein IT-leverandør?",
-            "answer": "Norwegian",
+            "question": "Delane til den nye Sotrabrua skulle alt ha vore monterte. I kva land låg dei framleis på lager då Bergens Tidende melde om forseinkinga?",
+            "answer": "Kina",
+            "options": [
+              "Sør-Korea",
+              "Sverige",
+              "Polen",
+              "Kina"
+            ],
+            "image": "json/weekly-media/7f1ace25d6af67b450138308.jpg",
+            "imageAlt": "Den gamle Sotrabrua over sundet",
+            "imageCredit": {
+              "title": "Sotrabrua-2003-12-21.jpg",
+              "author": "No machine-readable author provided. Gunnarbu~commonswiki assumed (based on copyright claims).",
+              "source": "https://commons.wikimedia.org/wiki/File:Sotrabrua-2003-12-21.jpg",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
+            },
             "source": {
-              "title": "Norwegian airline warns thousands of customers over data breach",
-              "publisher": "The Local",
-              "url": "https://www.thelocal.no/20261120/norwegian-airline-warns-thousands-of-customers-over-data-breach",
-              "published": "2026-11-20",
-              "story": "norwegian-datalekkasje",
+              "title": "Brodekket skulle vært ferdig montert i september. Står fortsatt på lager i Kina.",
+              "publisher": "Bergens Tidende",
+              "url": "https://www.bt.no/nyheter/okonomi/i/Pv9xob/brodekket-skulle-vaert-ferdig-montert-i-september-staar-fortsatt-paa-lager-i-kina",
+              "published": "2026-11-24",
+              "story": "sotrasambandet-brodekke",
               "importance": "major"
             }
           },
           {
             "points": 400,
-            "question": "Kvifor stengde Sporveien store delar av T-banen frå torsdag til sundag? Kva slags system skulle dei teste?",
-            "answer": "Eit signalsystem",
+            "question": "Eit norsk juletre vart felt nær Oslo 20. november. Kva by skal få treet i år?",
+            "answer": "London",
+            "options": [
+              "Cardiff",
+              "Dublin",
+              "London",
+              "Edinburgh"
+            ],
+            "image": "json/weekly-media/d7be0d5445a8d557e7ab389c.jpg",
+            "imageAlt": "Høge graner i ein norsk skog",
+            "imageCredit": {
+              "title": "Norway Spruce forest, Latvia Фото0314.jpg",
+              "author": "Dimaniznik",
+              "source": "https://commons.wikimedia.org/wiki/File:Norway_Spruce_forest,_Latvia_%D0%A4%D0%BE%D1%82%D0%BE0314.jpg",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "illustration": true
+            },
             "source": {
-              "title": "En av tidenes største T-banestengninger. Dette må du vite.",
-              "publisher": "Aftenposten",
-              "url": "https://www.aftenposten.no/oslo/i/2vGow4/stengt-t-bane-1922-november-slik-klarer-du-deg-uten-t-banen",
-              "published": "2026-11-18",
-              "story": "oslo-tbane-stenging",
+              "title": "When is the Trafalgar Square Christmas tree lit in 2026? Norway's 21-metre spruce felled near Oslo by the Lord Mayor of Westminster",
+              "publisher": "Westminster Pimlico News",
+              "url": "https://westminsterpimliconews.co.uk/trafalgar-square-christmas-tree-2026/",
+              "published": "2026-11-21",
+              "story": "juletre-london-2026",
               "importance": "major"
             }
           },
           {
             "points": 500,
-            "question": "Kva etat arbeidde med å avgrense utbrotet av fugleinfluensa i norske fjørfehald?",
-            "answer": "Mattilsynet",
+            "question": "E24 undersøkte eit bustadhus der leilegheiter framleis vart leigde ut til reisande etter at kommunen hadde sagt nei til eit leilegheitshotell. I kva norsk by låg huset?",
+            "answer": "Bergen",
+            "options": [
+              "Stavanger",
+              "Oslo",
+              "Bergen",
+              "Trondheim"
+            ],
             "source": {
-              "title": "Bird flu outbreak ‘under control’",
-              "publisher": "Norway's News in English",
-              "url": "https://www.newsinenglish.no/2026/11/17/bird-flu-outbreak-under-control/",
-              "published": "2026-11-17",
-              "story": "fugleinfluensa-utbrot",
+              "title": "Fortviler over Airbnb-naboen: – Kynisk utnyttelse",
+              "publisher": "E24",
+              "url": "https://e24.no/naeringsliv/i/7P0LxB/fortviler-over-airbnb-naboen-kynisk-utnyttelse",
+              "published": "2026-11-21",
+              "story": "korttidsutleige-bergen",
               "importance": "major"
             }
           },
           {
             "points": 1000,
-            "question": "Om lag kor mange stader i Noreg var det markeringar mot kutt i posttenestene?",
-            "answer": "40",
+            "question": "Mattilsynet fann ein samanheng mellom fleire av dei norske gardane med fugleinfluensa. Kor mange av gardane hadde fått smitten via unghøner frå den same flokken?",
+            "answer": "7 gardar",
+            "options": [
+              "4 gardar",
+              "7 gardar",
+              "6 gardar",
+              "5 gardar"
+            ],
+            "image": "json/weekly-media/7ecc56a730cbcbfddbcecf31.jpg",
+            "imageAlt": "Ein gard med eit stort hønsehus",
+            "imageCredit": {
+              "title": "Poultry Farm Postbox - geograph.org.uk - 3484618.jpg",
+              "author": "Geographer",
+              "source": "https://commons.wikimedia.org/wiki/File:Poultry_Farm_Postbox_-_geograph.org.uk_-_3484618.jpg",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "illustration": true
+            },
             "source": {
-              "title": "Norway rallies to save postal service",
-              "publisher": "Norway's News in English",
-              "url": "https://www.newsinenglish.no/2026/11/16/norway-rallies-to-save-postal-service/",
-              "published": "2026-11-16",
-              "story": "posten-streik",
+              "title": "Fugleinfluensa-utbruddet: Mattilsynet har vedtatt avliving av 225.000 høner",
+              "publisher": "NTB / Radio Haugaland",
+              "url": "https://radioh.no/mattilsynet-influensarammet-oppdretter-flyttet-fugler-uten-lov/",
+              "published": "2026-11-24",
+              "story": "fugleinfluensa-noreg",
+              "importance": "major"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Ute i verda",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Elevar og studentar demonstrerte i mange europeiske land 20. november. Kva ønskte dei meir pengar til, ved sida av klimatiltak og hjelp med levekostnader?",
+            "answer": "Utdanning",
+            "options": [
+              "Fritidstilbod",
+              "Utdanning",
+              "Kollektivtransport",
+              "Helsetenester"
+            ],
+            "source": {
+              "title": "Students Strike Across Europe, US International Enrolment Falls and Early Learning Faces a $35 Billion Gap",
+              "publisher": "Global Student Forum",
+              "url": "https://www.globalstudentforum.org/europes-student-strike-and-falling-us-enrolment/",
+              "published": "2026-11-23",
+              "story": "europeisk-elevstreik",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 200,
+            "question": "I Storbritannia skal forskarar undersøkje kva ei planlagd aldersgrense for sosiale medium kan føre til. Kor gamle må born vere etter framlegget for å bruke sosiale medium?",
+            "answer": "16 år",
+            "options": [
+              "15 år",
+              "13 år",
+              "16 år",
+              "18 år"
+            ],
+            "image": "json/weekly-media/bcb5ca5bd2a6bfa7f508f79d.jpg",
+            "imageAlt": "Ein mobiltelefon med appar på skjermen",
+            "imageCredit": {
+              "title": "Social Media App Icons On The Screen of A Smartphone.jpg",
+              "author": "mikemacmarketing",
+              "source": "https://commons.wikimedia.org/wiki/File:Social_Media_App_Icons_On_The_Screen_of_A_Smartphone.jpg",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "illustration": true
+            },
+            "source": {
+              "title": "£10m ‘once-in-a-generation’ study to explore effects of children’s social media ban",
+              "publisher": "The Guardian",
+              "url": "https://www.theguardian.com/uk-news/2026/nov/18/social-media-ban-once-in-a-generation-study",
+              "published": "2026-11-18",
+              "story": "studie-sosiale-medium",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 300,
+            "question": "Etter funn av fugleinfluensa på ein gard nord i Frankrike vart varslingsnivået sett til høgt. Kvar skal fjørfeet haldast etter dei nye tiltaka?",
+            "answer": "Innandørs",
+            "options": [
+              "Innandørs",
+              "På beite",
+              "I luftegardar",
+              "Under netting"
+            ],
+            "source": {
+              "title": "France reports bird flu outbreak on farm in north of country",
+              "publisher": "Reuters / AOL",
+              "url": "https://www.aol.com/articles/france-reports-bird-flu-outbreak-170809000.html",
+              "published": "2026-11-23",
+              "story": "fugleinfluensa-frankrike",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 400,
+            "question": "Klimatoppmøtet COP31 enda utan ei felles hovudavtale. I kva land vart møtet halde?",
+            "answer": "Tyrkia",
+            "options": [
+              "Brasil",
+              "Egypt",
+              "Tyrkia",
+              "Aserbajdsjan"
+            ],
+            "image": "json/weekly-media/b0be1e88b1e2aa4b2d47943d.jpg",
+            "imageAlt": "Ein stor konferansesal med rader av sete",
+            "imageCredit": {
+              "title": "Main entrance of the UN Biodiversity Conference COP17 at Meridian Expo Center, Yerevan.jpg",
+              "author": "Mammysou17",
+              "source": "https://commons.wikimedia.org/wiki/File:Main_entrance_of_the_UN_Biodiversity_Conference_COP17_at_Meridian_Expo_Center,_Yerevan.jpg",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "illustration": true
+            },
+            "source": {
+              "title": "COP31 talks break down as EU rejects deal without reference to fossil fuels",
+              "publisher": "Al Jazeera",
+              "url": "https://www.aljazeera.com/amp/news/2026/11/22/fossil-fuel-impasse-pushes-cop31-climate-talks-into-second-day-of-overtime",
+              "published": "2026-11-22",
+              "story": "cop31-klimatoppmote",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 500,
+            "question": "Ei ny oversikt over fugleinfluensa kom 24. november. Kor mange land og område i Amerika hadde meldt om utbrot hos fuglar?",
+            "answer": "13",
+            "options": [
+              "13",
+              "9",
+              "21",
+              "17"
+            ],
+            "image": "json/weekly-media/b272d5ec30dc19e0639ca09d.jpg",
+            "imageAlt": "Ein flokk ville fuglar ved eit våtmarksområde",
+            "imageCredit": {
+              "title": "Common Pochard.jpg",
+              "author": "K0nvaliya",
+              "source": "https://commons.wikimedia.org/wiki/File:Common_Pochard.jpg",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "illustration": true
+            },
+            "source": {
+              "title": "Epidemiological Alert: Avian Influenza A(H5N1) in the Americas Region",
+              "publisher": "Pan American Health Organization",
+              "url": "https://www.paho.org/sites/default/files/2026/11/2026-11-24-phe-epidemiological-alert-avian-influenza-ah5-final.pdf",
+              "published": "2026-11-24",
+              "story": "fugleinfluensa-amerika",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 1000,
+            "question": "Under elev- og studentstreiken 20. november var det markeringar i over 70 byar og tettstader i eitt land. Kva land var det?",
+            "answer": "Tyskland",
+            "options": [
+              "Frankrike",
+              "Spania",
+              "Tyskland",
+              "Italia"
+            ],
+            "image": "json/weekly-media/0a993476c758f40cab0f84df.jpg",
+            "imageAlt": "Ein megafon i ei folkemengd",
+            "imageCredit": {
+              "title": "Robert Kennedy CORE rally speech2.jpg",
+              "author": "Leffler, Warren K.",
+              "source": "https://commons.wikimedia.org/wiki/File:Robert_Kennedy_CORE_rally_speech2.jpg",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
+            },
+            "source": {
+              "title": "Students Strike Across Europe, US International Enrolment Falls and Early Learning Faces a $35 Billion Gap",
+              "publisher": "Global Student Forum",
+              "url": "https://www.globalstudentforum.org/europes-student-strike-and-falling-us-enrolment/",
+              "published": "2026-11-23",
+              "story": "europeisk-elevstreik",
               "importance": "major"
             }
           }
@@ -97,350 +343,516 @@
         "questions": [
           {
             "points": 100,
-            "question": "I kva by møtte amerikanske utsendingar Ukrainas president og europeiske leiarar til samtalar om krigen?",
+            "question": "UNICEF leverte skulepultar og stolar til mellombelse undervisningsstader denne veka. Kvar gjekk leveransen?",
+            "answer": "Gaza",
+            "options": [
+              "Vestbreidda",
+              "Gaza",
+              "Sudan",
+              "Jemen"
+            ],
+            "source": {
+              "title": "UNICEF brings desks and chairs to Gaza learning centres",
+              "publisher": "Hasbara",
+              "url": "https://hasbara.co.il/enemies/un/unicef/unicef-furnishes-gaza-learning-centres-with-desks-and-chairs",
+              "published": "2026-11-24",
+              "story": "gaza-skulemoblar",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 200,
+            "question": "Donald Trump, Xi Jinping og Vladimir Putin møttest til eit historisk toppmøte. I kva land fann møtet stad?",
+            "answer": "Kina",
+            "options": [
+              "Kina",
+              "Russland",
+              "USA",
+              "Japan"
+            ],
+            "image": "json/weekly-media/35ce608fbb9661311e45ba35.jpg",
+            "imageAlt": "Eit møtebord med mikrofonar",
+            "imageCredit": {
+              "title": "Ford B0376 NLGRF photo contact sheet (1976-06-28)(Gerald Ford Library).jpg",
+              "author": "White House Photographic Office (WHPO) - Fitz-Patrick",
+              "source": "https://commons.wikimedia.org/wiki/File:Ford_B0376_NLGRF_photo_contact_sheet_(1976-06-28)(Gerald_Ford_Library).jpg",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
+            },
+            "source": {
+              "title": "(6th LD) Trump, Xi, Putin hold unprecedented 3-way summit with nuclear arms reduction in focus",
+              "publisher": "Yonhap News Agency",
+              "url": "https://en.yna.co.kr/view/AEN20261119001356315?section=national/diplomacy",
+              "published": "2026-11-19",
+              "story": "toppmote-shenzhen",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 300,
+            "question": "Denne veka møtte Ukrainas president fleire europeiske leiarar for å snakke om Ukraina. I kva by møttest dei?",
             "answer": "Berlin",
+            "options": [
+              "Berlin",
+              "Warszawa",
+              "Brussel",
+              "Paris"
+            ],
+            "image": "json/weekly-media/38b15464829dc192fa96826a.jpg",
+            "imageAlt": "Ukrainske og europeiske flagg ved eit møtebord",
+            "imageCredit": {
+              "title": "Ukrainian and EU flags in Kherson.jpg",
+              "author": "Defense of Ukraine",
+              "source": "https://commons.wikimedia.org/wiki/File:Ukrainian_and_EU_flags_in_Kherson.jpg",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
+            },
             "source": {
-              "title": "Trump tells skeptical Europeans: \"Putin wants to end the war\"",
-              "publisher": "Axios",
-              "url": "https://www.axios.com/2026/11/20/trump-pushes-putin-ukraine-war-deal",
-              "published": "2026-11-20",
-              "story": "ukraina-samtalar-berlin",
-              "importance": "major"
-            }
-          },
-          {
-            "points": 200,
-            "question": "Kva land vedtok denne veka å stengje veggrenseovergangane sine til Russland frå 1. desember?",
-            "answer": "Estland",
-            "source": {
-              "title": "Estonia to shut border with Russia over GRU-linked sabotage attack",
-              "publisher": "Euronews",
-              "url": "https://www.euronews.com/2026/11/20/estonia-to-shut-border-with-russia-over-gru-linked-sabotage-attack",
-              "published": "2026-11-20",
-              "story": "estland-russland-grense",
-              "importance": "major"
-            }
-          },
-          {
-            "points": 300,
-            "question": "Kva ukrainsk by fekk straumbrot i fleire bydelar og trafikkavgrensingar på Sørbrua denne veka?",
-            "answer": "Kyiv",
-            "source": {
-              "title": "Russian attacks on Kyiv kill 3, cripple bridges and cut power",
-              "publisher": "AP / NY1",
-              "url": "https://ny1.com/nyc/all-boroughs/ap-top-news/2026/11/20/russian-attacks-on-kyiv-kill-3-cripple-bridges-and-cut-power",
-              "published": "2026-11-20",
-              "story": "kyiv-bruer-straum",
+              "title": "The Latest: Kushner says he believes Russia is ‘comfortable’ with NATO-like security for Ukraine",
+              "publisher": "Associated Press",
+              "url": "https://apnews.com/article/3d0f8ed366d6084e1cfe12a4d8020c55",
+              "published": "2026-11-19",
+              "story": "ukraina-mote-berlin",
               "importance": "major"
             }
           },
           {
             "points": 400,
-            "question": "Kva land påla FN-domstolen denne veka å leggje til rette for at rohingyaer på flukt kan vende trygt og frivillig heim?",
-            "answer": "Myanmar",
+            "question": "FN fortalde at vaksinar ikkje kom fram til born i byen Taiz. I kva land skulle vaksinasjonen ha gått føre seg?",
+            "answer": "Jemen",
+            "options": [
+              "Jemen",
+              "Somalia",
+              "Sudan",
+              "Syria"
+            ],
+            "image": "json/weekly-media/9c86d86361a5561f3bf490ca.jpg",
+            "imageAlt": "Ein kjøleboks til transport av vaksinar",
+            "imageCredit": {
+              "title": "USAID carriers for COVID-19 vaccines (51631453610).jpg",
+              "author": "UNICEF Ukraine from Kyiv, Ukraine",
+              "source": "https://commons.wikimedia.org/wiki/File:USAID_carriers_for_COVID-19_vaccines_(51631453610).jpg",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "illustration": true
+            },
             "source": {
-              "title": "For the first time, UN’s highest court finds a country responsible for genocide: Myanmar",
-              "publisher": "AP",
-              "url": "https://apnews.com/article/rohingya-myanmar-genocide-court-icj-30df77b12bf3f911f1100e77ebe3973a",
-              "published": "2026-11-19",
-              "story": "myanmar-domstol-rohingya",
+              "title": "World News in Brief: Vaccine crisis in Yemen, aid for Ukraine, another UNRWA staffer killed",
+              "publisher": "UN News / Global Issues",
+              "url": "https://www.globalissues.org/news/2026/11/24/44685",
+              "published": "2026-11-24",
+              "story": "jemen-vaksinar-taiz",
               "importance": "major"
             }
           },
           {
             "points": 500,
-            "question": "Kva sund kan ifølgje vekas dekning bli omfatta av ei mogleg avtale om skipsfart med Iran?",
-            "answer": "Hormuzsundet",
+            "question": "På toppmøtet med Xi Jinping og Vladimir Putin tok Donald Trump opp eit mogeleg samarbeid. Kva ville han redusere talet på?",
+            "answer": "Atomvåpen",
+            "options": [
+              "Atomvåpen",
+              "Handelshinder",
+              "Militærøvingar",
+              "Grensekontrollar"
+            ],
             "source": {
-              "title": "Trump insists Iran won't make an 'acceptable' deal as concerns grow about next steps",
-              "publisher": "AP",
-              "url": "https://apnews.com/article/iran-war-trump-diplomacy-attacks-8fd6dcd6dc4a1a77437cedc4567fbee8",
-              "published": "2026-11-20",
-              "story": "iran-usa-forhandlingar",
+              "title": "(6th LD) Trump, Xi, Putin hold unprecedented 3-way summit with nuclear arms reduction in focus",
+              "publisher": "Yonhap News Agency",
+              "url": "https://en.yna.co.kr/view/AEN20261119001356315?section=national/diplomacy",
+              "published": "2026-11-19",
+              "story": "toppmote-shenzhen",
               "importance": "major"
             }
           },
           {
             "points": 1000,
-            "question": "Kva slags felles fråsegn gav Trump, Xi og Putin ut etter at dei møttest i Kina denne veka?",
-            "answer": "Ei fredserklæring",
+            "question": "Det internasjonale atomenergibyrået kom med nytt om fleire atomkraftverk i Ukraina. Kva system på kraftverka melde byrået at framleis verka?",
+            "answer": "Tryggleikssystema",
+            "options": [
+              "Tryggleikssystema",
+              "Varmesystema",
+              "Telefonsystema",
+              "Datasystema"
+            ],
+            "image": "json/weekly-media/999887a55ec51888f50851f1.jpg",
+            "imageAlt": "Kraftliner ved eit ukrainsk atomkraftverk",
+            "imageCredit": {
+              "title": "Chernobyl nuclear plant2.jpg",
+              "author": "Tiia Monto",
+              "source": "https://commons.wikimedia.org/wiki/File:Chernobyl_nuclear_plant2.jpg",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "illustration": true
+            },
             "source": {
-              "title": "Trump, Xi and Putin release ’peace declaration’ from unprecedented summit",
-              "publisher": "Reuters",
-              "url": "https://www.investing.com/news/world-news/trump-xi-and-putin-release-peace-declaration-from-unprecedented-summit-5040365",
+              "title": "IAEA, Grossi give updates on Ukraine, Iran, North Korea, nuclear power growth projections",
+              "publisher": "ANS Nuclear Newswire",
+              "url": "https://www.ans.org/news/2026-11-19/article-8592/iaea-grossi-give-updates-on-ukraine-iran-north-korea-nuclear-power-growth-projections/",
               "published": "2026-11-19",
-              "story": "toppmoete-shenzhen",
+              "story": "ukraina-atomkraftverk",
               "importance": "major"
             }
           }
         ]
       },
       {
-        "name": "Idrett",
+        "name": "Idrett og kultur",
         "questions": [
           {
             "points": 100,
-            "question": "Kven sette inn sigersmålet på straffe på overtid då Noreg slo Danmark i fotball?",
+            "question": "Noreg låg under mot Danmark i Nasjonsligaen, men snudde kampen. Kven skåra vinnarmålet?",
             "answer": "Erling Haaland",
-            "source": {
-              "title": "Norge vann mot Danmark – efter jättetabben",
-              "publisher": "SVT Sport",
-              "url": "https://www.svt.se/sport/fotboll/norge-vann-mot-danmark-efter-jattetabben",
-              "published": "2026-11-17",
-              "story": "danmark-norge-fotball",
-              "importance": "major"
-            }
-          },
-          {
-            "points": 200,
-            "question": "Kva lag slo Manchester United i Mauricio Pochettinos fyrste kamp som United-trenar?",
-            "answer": "Liverpool",
-            "source": {
-              "title": "Liverpool 4-0 Man Utd: Mauricio Pochettino endures nightmare start as Leny Yoro's early red card sparks collapse",
-              "publisher": "Sky Sports",
-              "url": "https://www.skysports.com/football/liverpool-vs-man-utd/5154073202367135232",
-              "published": "2026-11-22",
-              "story": "liverpool-manchester-united",
-              "importance": "major"
-            }
-          },
-          {
-            "points": 300,
-            "question": "Kven vann Formel 1-løpet i Las Vegas denne veka?",
-            "answer": "Max Verstappen",
-            "source": {
-              "title": "Verstappen wins exhilarating Las Vegas Grand Prix from Norris and Piastri",
-              "publisher": "Formula 1",
-              "url": "https://www.formula1.com/en/latest/article/verstappen-wins-exhilarating-las-vegas-grand-prix-from-norris-and-piastri.2eeBWqekZdir9mdDVK9YVX.2eeBWqekZdir9mdDVK9YVX",
-              "published": "2026-11-22",
-              "story": "formel1-las-vegas",
-              "importance": "major"
-            }
-          },
-          {
-            "points": 400,
-            "question": "Kven vann 15-kilometeren i fri teknikk under langrennsopninga på Beitostølen?",
-            "answer": "Karoline Grøtting",
-            "source": {
-              "title": "Karoline Grøtting suveren på 15 kilometer – Weng utenfor pallen",
-              "publisher": "VG",
-              "url": "https://www.vg.no/sport/i/pMLkgo/karoline-groetting-suveren-paa-15-kilometer-weng-utenfor-pallen",
-              "published": "2026-11-22",
-              "story": "langrenn-beitostoelen",
-              "importance": "major"
-            }
-          },
-          {
-            "points": 500,
-            "question": "Kven sette straffesparket i mål etter at Alexander Sørloth skaffa det for Atlético Madrid mot Getafe?",
-            "answer": "Álex Grimaldo",
-            "source": {
-              "title": "Sørloth-innhopp da Atlético Madrid vant borte – skaffet straffe",
-              "publisher": "VG",
-              "url": "https://www.vg.no/sport/i/JnoAEJ/soerloth-innhopp-da-atletico-madrid-vant-borte-skaffet-straffe",
-              "published": "2026-11-22",
-              "story": "atletico-getafe",
-              "importance": "major"
-            }
-          },
-          {
-            "points": 1000,
-            "question": "Kor mange verdsmeistertitlar i MotoGP hadde Marc Márquez etter løpet i Portimão?",
-            "answer": "Åtte",
-            "source": {
-              "title": "Marc Marquez, un huitième titre record en MotoGP pour sortir, enfin, de l’ombre de Valentino Rossi",
-              "publisher": "Le Monde",
-              "url": "https://www.lemonde.fr/sport/article/2026/11/22/marc-marquez-un-huitieme-titre-record-en-motogp-pour-sortir-enfin-de-l-ombre-de-valentino-rossi_6814217_3242.html",
-              "published": "2026-11-22",
-              "story": "motogp-marquez",
-              "importance": "major"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Økonomi og teknologi",
-        "questions": [
-          {
-            "points": 100,
-            "question": "Kva norsk energiselskap melde at produksjonen gjekk som normalt etter eit dataåtak denne veka?",
-            "answer": "Equinor",
-            "source": {
-              "title": "Gas supplier giant Equinor hit by cyberattack — Europe's biggest gas supplier says it has now restored services",
-              "publisher": "TechRadar",
-              "url": "https://www.techradar.com/pro/security/gas-supplier-giant-equinor-hit-by-cyberattack-europes-biggest-gas-supplier-says-it-has-now-restored-services",
-              "published": "2026-11-20",
-              "story": "equinor-dataangrep",
-              "importance": "major"
-            }
-          },
-          {
-            "points": 200,
-            "question": "Kva land skreiv under på handels- og investeringsavtalar med EU etter ti år med forhandlingar?",
-            "answer": "Indonesia",
-            "image": "json/weekly-media/2b93c41f7b23f8c0f0d8ecbd.jpg",
-            "imageAlt": "EU-kommisjonens president Ursula von der Leyen på ein pressekonferanse.",
+            "options": [
+              "Alexander Sørloth",
+              "Martin Ødegaard",
+              "Erling Haaland",
+              "Antonio Nusa"
+            ],
+            "image": "json/weekly-media/4b6324be647b851005258e77.jpg",
+            "imageAlt": "Ein fotball på graset framfor eit mål",
             "imageCredit": {
-              "title": "EU-kommisjonens president Ursula von der Leyen på ein pressekonferanse.",
-              "author": "The Associated Press",
-              "publisher": "Euronews",
-              "source": "https://www.euronews.com/2026/11/21/european-union-and-indonesia-sign-free-trade-deal-after-decade-of-talks",
-              "imageUrl": "https://images.euronews.com/articles/stories/10/00/25/39/1200x675_cmsv2_b6a51226-14f9-541e-8c88-4828b53c21fd-10002539.jpg",
-              "license": "Pressefoto",
-              "preserved": true
+              "title": "Assoc football match.jpg",
+              "author": "Unknown author Unknown author",
+              "source": "https://commons.wikimedia.org/wiki/File:Assoc_football_match.jpg",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
             },
             "source": {
-              "title": "European Union and Indonesia sign free trade deal after decade of talks",
-              "publisher": "Euronews",
-              "url": "https://www.euronews.com/2026/11/21/european-union-and-indonesia-sign-free-trade-deal-after-decade-of-talks",
-              "published": "2026-11-21",
-              "story": "eu-indonesia-handelsavtale",
+              "title": "Norge klar for titteljakt – se hva som venter i nasjonsligaen",
+              "publisher": "NTB / Radio Haugaland",
+              "url": "https://radioh.no/norge-klar-for-titteljakt-se-hva-som-venter-i-nasjonsligaen/",
+              "published": "2026-11-18",
+              "story": "danmark-noreg-nasjonsligaen",
               "importance": "major"
             }
           },
           {
-            "points": 300,
-            "question": "Kva KI-selskap debuterte på børsen denne veka med ein fyrste handelspris på 111,50 dollar per aksje?",
-            "answer": "Anthropic",
+            "points": 200,
+            "question": "Barcelona sikra seg plass i kvartfinalen i meisterligaen for kvinner med ein siger mot Servette. Kva vart stillinga til slutt?",
+            "answer": "6–0",
+            "options": [
+              "6–0",
+              "4–0",
+              "5–0",
+              "6–1"
+            ],
+            "image": "json/weekly-media/10e841447f1a06c93e9a344b.jpg",
+            "imageAlt": "Tribunane på ein fotballstadion i Barcelona",
+            "imageCredit": {
+              "title": "Estadi Johan Cruyff.jpg",
+              "author": "Wilnel José Verdú Guerrero",
+              "source": "https://commons.wikimedia.org/wiki/File:Estadi_Johan_Cruyff.jpg",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "illustration": true
+            },
             "source": {
-              "title": "Anthropic hits $2 trillion market value in debut; major indexes fall",
-              "publisher": "Reuters, publisert hos AOL",
-              "url": "https://www.aol.com/articles/anthropic-set-soar-debut-ai-160003000.html",
+              "title": "2026/27 Women's Champions League: All the league phase fixtures and results",
+              "publisher": "UEFA",
+              "url": "https://www.uefa.com/womenschampionsleague/news/02a9-21848dfb62c3-1313bc23426c-1000--2026-27-womens-champions-league-all-the-league-phase-fix/",
               "published": "2026-11-19",
-              "story": "anthropic-borsdebut",
+              "story": "meisterliga-kvinner-barcelona-lyon",
               "importance": "major"
+            }
+          },
+          {
+            "points": 300,
+            "question": "West Coast Insanity frå Haugalandet gjorde det godt i Norwegian Open i cheerleading. Kor mange gull tok klubben?",
+            "answer": "5 gull",
+            "options": [
+              "5 gull",
+              "4 gull",
+              "6 gull",
+              "3 gull"
+            ],
+            "image": "json/weekly-media/682e75f762652a40801afa91.jpg",
+            "imageAlt": "Ein konkurransehall med matter til cheerleading",
+            "imageCredit": {
+              "title": "FinalDestinationLogo.JPG",
+              "author": "Kirsten5400",
+              "source": "https://commons.wikimedia.org/wiki/File:FinalDestinationLogo.JPG",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+              "illustration": true
+            },
+            "source": {
+              "title": "Historisk gullfest for Haugalandets cheerleadere",
+              "publisher": "Radio Haugaland",
+              "url": "https://radioh.no/historisk-gullfest-for-haugalandets-cheerleadere/",
+              "published": "2026-11-23",
+              "story": "cheerleading-haugalandet",
+              "importance": "minor"
             }
           },
           {
             "points": 400,
-            "question": "Kva e-postteneste gjekk Intuit med på å selje til Bending Spoons denne veka?",
-            "answer": "Mailchimp",
+            "question": "Goat Simulator 3 fekk ei ny utviding denne veka. Kva slags stad kan spelarane utforske der?",
+            "answer": "Ein fornøyelsespark",
+            "options": [
+              "Ein flyplass",
+              "Ein fornøyelsespark",
+              "Ein dyrepark",
+              "Eit kjøpesenter"
+            ],
+            "image": "json/weekly-media/9aa86d13245a7a4d2dbd1b70.jpg",
+            "imageAlt": "Ei geit som står på graset",
+            "imageCredit": {
+              "title": "Goat in Syria (no camera watermark).jpg",
+              "author": "Dhahi boss",
+              "source": "https://commons.wikimedia.org/wiki/File:Goat_in_Syria_(no_camera_watermark).jpg",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "illustration": true
+            },
             "source": {
-              "title": "Bending Spoons' Mailchimp pounce tests its limits",
-              "publisher": "Reuters Breakingviews",
-              "url": "https://www.breakingviews.com/40925ca4af2b/columns/breaking-view/bending-spoons-mailchimp-pounce-tests-its-limits-2026-11-20/",
-              "published": "2026-11-20",
-              "story": "mailchimp-sal",
-              "importance": "major"
+              "title": "Move over GTA 6, the \"second biggest\" game of the year is out now — Goat Simulator 3: Ticket to Dizzyworld",
+              "publisher": "Windows Central",
+              "url": "https://www.windowscentral.com/gaming/move-over-gta-6-the-second-biggest-game-of-the-year-is-out-now-goat-simulator-3-ticket-to-dizzyworld",
+              "published": "2026-11-19",
+              "story": "goat-simulator-dizzyworld",
+              "importance": "minor"
             }
           },
           {
             "points": 500,
-            "question": "Kva ville Donald Trump leggje ein høg skatt på når amerikanske selskap byggjer dei i utlandet?",
-            "answer": "Datasenter",
+            "question": "Vinnarmålet til Noreg mot Danmark kom på overtid. Kor mange minutt på overtid vart målet skåra?",
+            "answer": "6 minutt",
+            "options": [
+              "2 minutt",
+              "8 minutt",
+              "4 minutt",
+              "6 minutt"
+            ],
+            "image": "json/weekly-media/4f8c621539301f49ae246e05.jpg",
+            "imageAlt": "Den norske leiren feirar sigeren over Danmark",
+            "imageCredit": {
+              "title": "Den norske leiren feirar sigeren over Danmark",
+              "author": "Fredrik Varfjell / NTB",
+              "publisher": "NTB / Radio Haugaland",
+              "source": "https://radioh.no/norge-klar-for-titteljakt-se-hva-som-venter-i-nasjonsligaen/",
+              "imageUrl": "https://radioh.no/wp-content/uploads/2026/11/ntb-1297268-WvmNVSiyQnU-925-925x600.jpg",
+              "license": "Pressefoto",
+              "preserved": true
+            },
             "source": {
-              "title": "Trump says US to penalize firms building data centers abroad",
-              "publisher": "Reuters, publisert hos AOL",
-              "url": "https://www.aol.co.uk/articles/trump-says-us-penalize-firms-180803000.html",
-              "published": "2026-11-20",
-              "story": "usa-datasenter-utlandet",
+              "title": "Norge klar for titteljakt – se hva som venter i nasjonsligaen",
+              "publisher": "NTB / Radio Haugaland",
+              "url": "https://radioh.no/norge-klar-for-titteljakt-se-hva-som-venter-i-nasjonsligaen/",
+              "published": "2026-11-18",
+              "story": "danmark-noreg-nasjonsligaen",
               "importance": "major"
             }
           },
           {
             "points": 1000,
-            "question": "Kva slags kvotar vart EU og Storbritannia samde om å knyte saman handelen med etter toppmøtet i Brussel?",
-            "answer": "Utsleppskvotar",
+            "question": "OL Lyonnes sikra seg òg plass i kvartfinalen i meisterligaen for kvinner. Kva lag slo dei på bortebane 19. november?",
+            "answer": "Arsenal",
+            "options": [
+              "Chelsea",
+              "Real Madrid",
+              "Bayern München",
+              "Arsenal"
+            ],
+            "image": "json/weekly-media/f8493141a7af4056bf044ed3.jpg",
+            "imageAlt": "Ein ball ved hjørneflagget på ein fotballstadion",
+            "imageCredit": {
+              "title": "Football corner flag 2017.jpg",
+              "author": "Santeri Viinamäki",
+              "source": "https://commons.wikimedia.org/wiki/File:Football_corner_flag_2017.jpg",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "illustration": true
+            },
             "source": {
-              "title": "Factbox-What EU and UK have agreed to at summit",
-              "publisher": "Reuters, publisert hos Yahoo Finance",
-              "url": "https://uk.finance.yahoo.com/news/factbox-eu-uk-agreed-summit-142703850.html",
-              "published": "2026-11-20",
-              "story": "eu-storbritannia-avtale",
+              "title": "2026/27 Women's Champions League: All the league phase fixtures and results",
+              "publisher": "UEFA",
+              "url": "https://www.uefa.com/womenschampionsleague/news/02a9-21848dfb62c3-1313bc23426c-1000--2026-27-womens-champions-league-all-the-league-phase-fix/",
+              "published": "2026-11-19",
+              "story": "meisterliga-kvinner-barcelona-lyon",
               "importance": "major"
             }
           }
         ]
       },
       {
-        "name": "snodige nyheter",
+        "name": "snodige nyheiter",
         "questions": [
           {
             "points": 100,
-            "question": "Kva planet kom romfartøyet BepiColombo fram til denne veka etter ei reise på åtte år?",
-            "answer": "Merkur",
+            "question": "Voyager 1 nådde ein ny milepåle ute i rommet. Kor lang tid bruker eit radiosignal frå jorda no på å nå romfartøyet?",
+            "answer": "Eitt døgn",
+            "options": [
+              "To døgn",
+              "Eit halvdøgn",
+              "Eitt døgn",
+              "Ein time"
+            ],
+            "image": "json/weekly-media/c680dad8d867b05e2e6d6496.jpg",
+            "imageAlt": "Ei teikning av Voyager med den store parabolantenna",
+            "imageCredit": {
+              "title": "Voyager spacecraft.jpg",
+              "author": "NASA/JPL",
+              "source": "https://commons.wikimedia.org/wiki/File:Voyager_spacecraft.jpg",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
+            },
             "source": {
-              "title": "BepiColombo finally reaches Mercury after eight-year odyssey",
-              "publisher": "Nature",
-              "url": "https://www.nature.com/articles/d41586-026-03803-8",
-              "published": "2026-11-21",
-              "story": "bepicolombo-merkur",
+              "title": "NASA’s Voyager 1 is one light-day from Earth",
+              "publisher": "Spaceflight Now",
+              "url": "https://spaceflightnow.com/2026/11/18/nasas-voyager-1-is-one-light-day-from-earth/",
+              "published": "2026-11-18",
+              "story": "voyager-eitt-lysdoegn",
               "importance": "major"
             }
           },
           {
             "points": 200,
-            "question": "Donald Trump var ikkje i rommet då leiarane møttest i Berlin for å snakke om Ukraina. Korleis deltok han i møtet?",
-            "answer": "På telefon",
+            "question": "NASA viste denne veka at den japanske øya Iwo Jima hadde fått meir land. Kva hadde laga det nye landområdet?",
+            "answer": "Eit vulkanutbrot",
+            "options": [
+              "Eit vulkanutbrot",
+              "Ei utfylling",
+              "Eit jordskred",
+              "Ein storm"
+            ],
+            "image": "json/weekly-media/4c3c065f7f7b1ea9b89a1d23.jpg",
+            "imageAlt": "Iwo Jima sett frå lufta",
+            "imageCredit": {
+              "title": "Aerial view of Iwo Jima in September 2014.JPG",
+              "author": "U.S. Navy photo by Mass Communication Specialist 1st Class Trevor Welsh",
+              "source": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Iwo_Jima_in_September_2014.JPG",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
+            },
             "source": {
-              "title": "Trump tells skeptical Europeans: \"Putin wants to end the war\"",
-              "publisher": "Axios",
-              "url": "https://www.axios.com/2026/11/20/trump-pushes-putin-ukraine-war-deal",
-              "published": "2026-11-20",
-              "story": "ukraina-samtalar-berlin",
+              "title": "Eruption Extends Iwo Jima’s Beach",
+              "publisher": "NASA Earth Observatory",
+              "url": "https://science.nasa.gov/earth/earth-observatory/eruption-extends-iwo-jimas-beach/",
+              "published": "2026-11-24",
+              "story": "iwo-jima-nytt-land",
               "importance": "major"
             }
           },
           {
             "points": 300,
-            "question": "Kva skiskyttar overraska med å ta tredjeplassen i langrennsopninga på Beitostølen?",
-            "answer": "Ida Lien",
-            "image": "json/weekly-media/009d43455ee698a13613e643.jpg",
-            "imageAlt": "Vinnaren går 15-kilometeren i fri teknikk på Beitostølen.",
+            "question": "Teknologiselskapet Nvidia fekk ein tidlegare sjef tilbake etter ei avgjerd i styret denne veka. Kven kom tilbake som sjef?",
+            "answer": "Jensen Huang",
+            "options": [
+              "Satya Nadella",
+              "Lisa Su",
+              "Jensen Huang",
+              "Colette Kress"
+            ],
+            "image": "json/weekly-media/70c82c4bfae33510c4fbf958.jpg",
+            "imageAlt": "Eit nærbilete av eit Nvidia-grafikkort",
             "imageCredit": {
-              "title": "Vinnaren går 15-kilometeren i fri teknikk på Beitostølen.",
-              "author": "Terje Pedersen / NTB",
-              "publisher": "VG",
-              "source": "https://www.vg.no/sport/i/pMLkgo/karoline-groetting-suveren-paa-15-kilometer-weng-utenfor-pallen",
-              "imageUrl": "https://akamai.vgc.no/v2/images/d5ffa174-edb8-3038-b412-f6cd29bb42a2?format=auto&w=1080&s=b811b2c2fc90934cc103440e4c3364d809c662b5",
-              "license": "Pressefoto",
-              "preserved": true
+              "title": "Asus Strix RTX 4090.jpg",
+              "author": "Benlisquare",
+              "source": "https://commons.wikimedia.org/wiki/File:Asus_Strix_RTX_4090.jpg",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "illustration": true
             },
             "source": {
-              "title": "Karoline Grøtting suveren på 15 kilometer – Weng utenfor pallen",
-              "publisher": "VG",
-              "url": "https://www.vg.no/sport/i/pMLkgo/karoline-groetting-suveren-paa-15-kilometer-weng-utenfor-pallen",
-              "published": "2026-11-22",
-              "story": "langrenn-beitostoelen",
+              "title": "NVIDIA Board Reinstates Jensen Huang as President, CEO and Board Director",
+              "publisher": "NVIDIA",
+              "url": "https://www.globenewswire.com/de/news-release/2026/11/23/3408381/0/en/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director.html",
+              "published": "2026-11-23",
+              "story": "nvidia-huang-tilbake",
               "importance": "major"
             }
           },
           {
             "points": 400,
-            "question": "Kva slags vatn må ein passe på når det skal leggjast til rette for bybane og sykkelveg ved Bryggen i Bergen?",
-            "answer": "Grunnvatnet",
+            "question": "Grana som vart felt nær Oslo som gåve til London, har fått sitt eige namn. Kva heiter ho?",
+            "answer": "Jolly Cheery",
+            "options": [
+              "Festive Fir",
+              "Winter Star",
+              "Merry Spruce",
+              "Jolly Cheery"
+            ],
+            "image": "json/weekly-media/8cccfc9a9fe21dea6e5d485c.jpg",
+            "imageAlt": "Eit pynta juletre på Trafalgar Square",
+            "imageCredit": {
+              "title": "Trafalgar Square Christmas tree9.jpg",
+              "author": "Anneke_B",
+              "source": "https://commons.wikimedia.org/wiki/File:Trafalgar_Square_Christmas_tree9.jpg",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "illustration": true
+            },
             "source": {
-              "title": "Riksantikvaren godtek ny bybane- og sykkeltrasé",
-              "publisher": "Riksantikvaren",
-              "url": "https://riksantikvaren.no/riksantikvaren-godtek-ny-bybane-og-sykkeltrase/",
-              "published": "2026-11-20",
-              "story": "bergen-bybane-bryggen",
+              "title": "When is the Trafalgar Square Christmas tree lit in 2026? Norway's 21-metre spruce felled near Oslo by the Lord Mayor of Westminster",
+              "publisher": "Westminster Pimlico News",
+              "url": "https://westminsterpimliconews.co.uk/trafalgar-square-christmas-tree-2026/",
+              "published": "2026-11-21",
+              "story": "juletre-london-2026",
               "importance": "major"
             }
           },
           {
             "points": 500,
-            "question": "BepiColombo fór forbi planeten han skulle undersøkje fleire gonger før han kom i bane. Kor mange gonger passerte han planeten på vegen?",
-            "answer": "Seks",
+            "question": "Delegatane på klimatoppmøtet COP31 måtte bli lenger enn planlagt. Kor mange ekstra dagar heldt forhandlingane fram?",
+            "answer": "2 dagar",
+            "options": [
+              "4 dagar",
+              "3 dagar",
+              "2 dagar",
+              "1 dag"
+            ],
+            "image": "json/weekly-media/53ff7ab0939c0cdcb109a9cf.jpg",
+            "imageAlt": "Eit COP31-skilt ved inngangen til konferansesenteret",
+            "imageCredit": {
+              "title": "Eit COP31-skilt ved inngangen til konferansesenteret",
+              "author": "Chris Mcgrath/Getty Images",
+              "publisher": "ABC News",
+              "source": "https://abcnews.com/Technology/climate-conference-ends-signature-agreement-countries-clash-fossil/story?id=138359179",
+              "imageUrl": "https://i.abcnewsfe.com/a/af4fb17e-4ea6-4c48-abeb-aac112be4be9/COP31_gty_cw_20261122_1795362581631_hpMain_16x9.jpg?w=1600",
+              "license": "Pressefoto",
+              "preserved": true
+            },
             "source": {
-              "title": "BepiColombo spacecraft enter orbit around Mercury after eight-year cruise",
-              "publisher": "AP",
-              "url": "https://apnews.com/article/mercury-bepicolombo-space-planet-esa-0c80bbf2039ed4f6ee4a34426b3594a0",
+              "title": "UN climate conference ends without its signature agreement as countries clash over fossil fuels and finance",
+              "publisher": "ABC News",
+              "url": "https://abcnews.com/Technology/climate-conference-ends-signature-agreement-countries-clash-fossil/story?id=138359179",
               "published": "2026-11-22",
-              "story": "bepicolombo-merkur",
+              "story": "klimatoppmote-cop31",
               "importance": "major"
             }
           },
           {
             "points": 1000,
-            "question": "Kva KI-verktøy sa matematikaren Levent Alpöge at han hadde brukt til å finne eit mogleg bevis for Riemann-hypotesen?",
-            "answer": "Claude",
+            "question": "NASA melde at det flygande romfartøyet Dragonfly hadde fått kamera. Kva måne skal fartøyet utforske?",
+            "answer": "Titan",
+            "options": [
+              "Europa",
+              "Ganymedes",
+              "Titan",
+              "Enceladus"
+            ],
+            "image": "json/weekly-media/dcbd475d646466ff36c7ae25.jpg",
+            "imageAlt": "To teknikarar monterer eit kamera på Dragonfly",
+            "imageCredit": {
+              "title": "To teknikarar monterer eit kamera på Dragonfly",
+              "author": "NASA/Johns Hopkins APL/Ed Whitman",
+              "publisher": "NASA Science",
+              "source": "https://science.nasa.gov/missions/dragonfly/nasas-titan-bound-dragonfly-rotorcraft-gets-its-eyes/",
+              "imageUrl": "https://assets.science.nasa.gov/content/dam/science/missions/dragonfly/WACmosiac.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+              "license": "Pressefoto",
+              "preserved": true
+            },
             "source": {
-              "title": "Mathematicians astounded by AI and human-written proofs of iconic Riemann hypothesis",
-              "publisher": "Nature",
-              "url": "https://www.nature.com/articles/d41586-026-03812-7",
-              "published": "2026-11-20",
-              "story": "riemann-mogleg-bevis",
+              "title": "NASA’s Titan-Bound Dragonfly Rotorcraft Gets Its Eyes",
+              "publisher": "NASA Science",
+              "url": "https://science.nasa.gov/missions/dragonfly/nasas-titan-bound-dragonfly-rotorcraft-gets-its-eyes/",
+              "published": "2026-11-24",
+              "story": "dragonfly-faar-kamera",
               "importance": "major"
             }
           }
@@ -448,20 +860,37 @@
       }
     ],
     "final": {
-      "category": "Klimatoppmøtet",
-      "hint": "Nesten 200 land deltok, men møtet enda utan ei felles sluttavtale.",
-      "question": "I kva by gjekk vekas klimatoppmøte COP31 føre seg?",
-      "answer": "Antalya",
+      "category": "Nasjonsligaen",
+      "hint": "Noreg skal spele den fyrste kvartfinalekampen heime.",
+      "question": "Mot kva land vart Noreg trekt i kvartfinalen i Nasjonsligaen 20. november?",
+      "answer": "England",
+      "options": [
+        "Frankrike",
+        "Spania",
+        "Portugal",
+        "England"
+      ],
+      "image": "json/weekly-media/b9c25acd06409e27b68b73f9.jpg",
+      "imageAlt": "Det norske landslaget jublar etter sigeren over Danmark",
+      "imageCredit": {
+        "title": "Det norske landslaget jublar etter sigeren over Danmark",
+        "author": "Cornelius Poppe / NTB",
+        "publisher": "NTB / Radio Haugaland",
+        "source": "https://radioh.no/norge-moter-england-i-kvartfinalen-i-nasjonsligaen/",
+        "imageUrl": "https://radioh.no/wp-content/uploads/2026/11/ntb-1297777-t9ySYOPOSQc-925-925x600.jpg",
+        "license": "Pressefoto",
+        "preserved": true
+      },
       "source": {
-        "title": "U.N. COP31 climate conference ends with no agreement after fossil fuel debate reaches standstill",
-        "publisher": "CBS News",
-        "url": "https://www.cbsnews.com/news/un-cop31-climate-conference-ends-no-agreement-fossil-fuel-debate-standstill/",
-        "published": "2026-11-22",
-        "story": "cop31-utan-avtale",
+        "title": "Norge møter England i kvartfinalen i nasjonsligaen",
+        "publisher": "NTB / Radio Haugaland",
+        "url": "https://radioh.no/norge-moter-england-i-kvartfinalen-i-nasjonsligaen/",
+        "published": "2026-11-20",
+        "story": "norge-england-trekning",
         "importance": "major"
       }
     }
   },
   "testRun": true,
-  "testLabel": "3"
+  "testLabel": "4"
 }
