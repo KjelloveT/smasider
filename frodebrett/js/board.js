@@ -18,6 +18,7 @@
   };
 
   Board.selectQuiz = function (quiz, { beforeStart, afterFinish } = {}) {
+    if (FB.Session && !FB.Session.canStart()) return;
     FB.TeamSetup.open(quiz.title, names => {
       S.currentQuiz = quiz;
       afterGame = afterFinish;
@@ -28,20 +29,59 @@
 
   // ===== SPELSTART =====
 
-  Board.startGame = function (names) {
-    S.teams = names.map((name, i) => ({
+  function teamsFor(names) {
+    return names.map(({ name, score = 0 }, i) => ({
       id: i + 1,
       name: name || ('Lag ' + (i + 1)),
-      score: 0,
+      score,
       color: FB.TEAM_COLORS[i]
     }));
+  }
+
+  Board.startGame = function (names) {
+    S.teams = teamsFor(names.map(name => ({ name })));
     Store?.saveTeams(S.teams.map(t => ({ name: t.name })));
 
     S.answeredCells.clear();
+    S.currentQuestion = null;
+    S.pendingAward = null;
+    S.finalStage = null;
     S.finalBets = {};
     S.activeTeamId = S.teams.length ? S.teams[0].id : null;
     Board.initializeDailyDouble();
+    FB.Session?.start();
+    Board.showGame();
+  };
 
+  Board.resumeGame = function (session) {
+    S.currentQuiz = session.quiz;
+    S.teams = teamsFor(session.teams);
+    S.answeredCells = new Set(session.answeredCells);
+    S.activeTeamId = session.activeTeamId;
+    S.dailyDoubleCell = session.dailyDoubleCell;
+    S.currentQuestion = null;
+    S.finalStage = null;
+    S.finalBets = {};
+    Board.showGame();
+
+    if (session.finalStage && S.currentQuiz.final) {
+      Board.startFinalRound(session.finalBets);
+      if (session.finalStage !== 'betting') Board.showFinalQuestion();
+      if (['answer', 'awarding', 'scored'].includes(session.finalStage)) Board.revealFinalAnswer();
+      if (session.finalStage === 'awarding') Board.processFinalResults();
+      if (session.finalStage === 'scored') Board.showFinalEnd();
+    } else if (Number.isInteger(session.openCell)) {
+      const category = S.currentQuiz.categories[Math.floor(session.openCell / FB.POINTS.length)];
+      const points = FB.POINTS[session.openCell % FB.POINTS.length];
+      const question = category?.questions.find(item => item.points === points);
+      if (question) {
+        Board.selectQuestion(category, question, session.openCell);
+        if (session.answerRevealed) Board.revealQuestion();
+      }
+    }
+  };
+
+  Board.showGame = function () {
     FB.hide('quiz-selection');
     FB.show('game-board');
 
@@ -89,6 +129,7 @@
       card.addEventListener('click', () => {
         S.activeTeamId = team.id;
         Board.renderScoreBoard();
+        FB.Session?.save();
       });
       container.appendChild(card);
     });
@@ -190,9 +231,14 @@
 
   Board.selectQuestion = function (category, question, cellIndex) {
     const isDD = cellIndex === S.dailyDoubleCell;
+    const column = Math.floor(cellIndex / FB.POINTS.length);
     S.currentQuestion = {
+      cellIndex,
       category: category.name,
+      color: FB.CAT_COLORS[column % FB.CAT_COLORS.length],
       question: question.question,
+      hint: question.hint,
+      options: question.options,
       image: question.image,
       imageAlt: question.imageAlt,
       imageCredit: question.imageCredit,
@@ -203,13 +249,18 @@
     };
     S.answeredCells.add(cellIndex);
     Board.showQuestion();
+    FB.Session?.save();
   };
 
   Board.showQuestion = function () {
     const q = S.currentQuestion;
+    const header = FB.el('question-header');
+    header.style.backgroundColor = q.color;
+    header.style.color = FB.textOn(q.color);
     FB.el('question-category').textContent = q.category;
     FB.el('question-text').textContent = q.question;
     FB.Images.show('question-image', q);
+    FB.Hints.prepare('question', q);
     FB.el('answer-text').textContent = q.answer;
 
     const pointsEl = FB.el('question-points');
@@ -236,7 +287,18 @@
 
   Board.closeQuestion = function () {
     FB.closeOverlay('question-modal');
+    S.currentQuestion = null;
+    S.pendingAward = null;
     Board.renderGameBoard();
+    FB.Session?.save();
+  };
+
+  Board.revealQuestion = function () {
+    S.currentQuestion.answerRevealed = true;
+    FB.show('question-answer');
+    FB.hide('btn-reveal-modal');
+    FB.el('answer-text').scrollIntoView({ block: 'nearest' });
+    FB.Session?.save();
   };
 
   // ===== POENGGJEVING (med stadfest, UX2) =====
@@ -311,16 +373,13 @@
   };
 
   Board.bindQuestionModal = function () {
+    FB.Hints.bind('question');
     const modal = FB.el('question-modal');
     Vy.bindOverlayClose(modal);
     modal.addEventListener('click', e => {
-      if (e.target === modal) Board.renderGameBoard();
+      if (e.target === modal) Board.closeQuestion();
     });
-    FB.el('btn-reveal-modal').addEventListener('click', () => {
-      FB.show('question-answer');
-      FB.hide('btn-reveal-modal');
-      FB.el('answer-text').scrollIntoView({ block: 'nearest' });
-    });
+    FB.el('btn-reveal-modal').addEventListener('click', () => Board.revealQuestion());
     FB.el('btn-confirm-award').addEventListener('click', () => Board.confirmAward());
     FB.el('btn-close-modal').addEventListener('click', () => Board.closeQuestion());
     FB.el('btn-back-modal').addEventListener('click', () => Board.closeQuestion());
@@ -349,7 +408,7 @@
 
   // ===== FINALERUNDE =====
 
-  Board.startFinalRound = function () {
+  Board.startFinalRound = function (bets = {}) {
     if (!S.currentQuiz.final) { alert('Denne frøden har ingen finalerunde!'); return; }
 
     FB.closeOverlay('question-modal');
@@ -366,14 +425,20 @@
     FB.show('final-betting');
     FB.hide('final-question');
     FB.hide('final-answer');
+    FB.hide('final-point-controls');
+    FB.hide('btn-confirm-final');
     FB.show('btn-reveal-final');
     FB.hide('btn-final-points');
     FB.hide('btn-end-game-final');
 
-    Board.setupBettingControls();
+    S.currentQuestion = null;
+    S.pendingAward = null;
+    S.finalStage = 'betting';
+    Board.setupBettingControls(bets);
+    FB.Session?.save();
   };
 
-  Board.setupBettingControls = function () {
+  Board.setupBettingControls = function (bets) {
     const container = FB.el('betting-controls');
     container.innerHTML = '';
     S.finalBets = {};
@@ -399,20 +464,20 @@
       input.type = 'number';
       input.className = 'form-input bet-input';
       input.min = 0;
-      input.max = Math.max(0, team.score);
-      input.value = 0;
+      const maxBet = Math.max(0, team.score);
+      input.max = maxBet;
+      input.value = bets[team.id] ?? 0;
+      S.finalBets[team.id] = Number(input.value);
       input.setAttribute('aria-label', 'Innsats for ' + team.name);
       input.addEventListener('input', () => {
-        let v = parseInt(input.value, 10) || 0;
-        if (v < 0) v = 0;
-        if (v > team.score) v = team.score;
-        input.value = v;
-        S.finalBets[team.id] = v;
+        const value = Math.min(maxBet, Math.max(0, parseInt(input.value, 10) || 0));
+        input.value = value;
+        S.finalBets[team.id] = value;
+        FB.Session?.save();
       });
       box.appendChild(input);
 
       container.appendChild(box);
-      S.finalBets[team.id] = 0;
     });
 
     const cont = document.createElement('button');
@@ -428,27 +493,37 @@
     FB.show('final-question');
     FB.el('final-question-display').textContent = S.currentQuiz.final.question;
     FB.Images.show('final-question-image', S.currentQuiz.final);
+    FB.Hints.prepare('final-question', S.currentQuiz.final, S.currentQuiz.final.questionHint || '');
     FB.el('final-answer-display').textContent = S.currentQuiz.final.answer;
     FB.hide('final-answer');
     FB.show('btn-reveal-final');
     FB.hide('btn-final-points');
     FB.el('final-question-display').scrollIntoView({ block: 'nearest' });
+    S.finalStage = 'question';
+    FB.Session?.save();
+  };
+
+  Board.revealFinalAnswer = function () {
+    FB.show('final-answer');
+    FB.hide('btn-reveal-final');
+    FB.show('btn-final-points');
+    FB.el('final-answer-display').scrollIntoView({ block: 'nearest' });
+    S.finalStage = 'answer';
+    FB.Session?.save();
   };
 
   Board.bindFinalRound = function () {
-    FB.el('btn-reveal-final').addEventListener('click', () => {
-      FB.show('final-answer');
-      FB.hide('btn-reveal-final');
-      FB.show('btn-final-points');
-      FB.el('final-answer-display').scrollIntoView({ block: 'nearest' });
-    });
+    FB.Hints.bind('final-question');
+    FB.el('btn-reveal-final').addEventListener('click', () => Board.revealFinalAnswer());
     FB.el('btn-final-points').addEventListener('click', () => Board.processFinalResults());
     FB.el('btn-confirm-final').addEventListener('click', () => Board.confirmFinal());
     FB.el('btn-end-game-final').addEventListener('click', () => Board.endGame());
-    FB.el('btn-winner-close').addEventListener('click', () => {
-      FB.closeOverlay('winner-modal');
-      Board.resetGame();
+    const modal = FB.el('winner-modal');
+    Vy.bindOverlayClose(modal);
+    modal.addEventListener('click', e => {
+      if (e.target === modal) Board.closeWinner();
     });
+    FB.el('btn-winner-close').addEventListener('click', () => Board.closeWinner());
   };
 
   Board.processFinalResults = function () {
@@ -470,6 +545,8 @@
     FB.hide('btn-final-points');
     FB.show('btn-confirm-final');
     FB.hide('btn-end-game-final');
+    S.finalStage = 'awarding';
+    FB.Session?.save();
   };
 
   Board.confirmFinal = function () {
@@ -480,11 +557,21 @@
       });
     }
     S.pendingAward = null;
+    Board.renderScoreBoard();
+    Board.showFinalEnd();
+  };
+
+  Board.showFinalEnd = function () {
+    FB.hide('final-point-controls');
     FB.hide('btn-confirm-final');
+    FB.hide('btn-final-points');
     FB.show('btn-end-game-final');
+    S.finalStage = 'scored';
+    FB.Session?.save();
   };
 
   Board.endGame = function () {
+    FB.Session?.clear();
     if (!S.teams.length) { Board.resetGame(); return; }
     const winner = S.teams.reduce((a, b) => (a.score >= b.score ? a : b));
     Board.showWinnerModal(winner);
@@ -516,12 +603,18 @@
     FB.openOverlay('winner-modal');
   };
 
-  Board.resetGame = function () {
+  Board.closeWinner = function () {
+    FB.closeOverlay('winner-modal');
+    Board.resetGame();
+  };
+
+  Board.resetGame = function ({ paused = false } = {}) {
     S.currentQuiz = null;
     S.teams = [];
     S.currentQuestion = null;
     S.dailyDoubleCell = null;
     S.answeredCells.clear();
+    S.finalStage = null;
     S.finalBets = {};
     S.activeTeamId = null;
     S.pendingAward = null;
@@ -539,7 +632,7 @@
     FB.TeamSetup.reset();
     const finish = afterGame;
     afterGame = null;
-    if (finish) finish();
+    if (finish && !paused) finish();
     else FB.el('library-heading').focus();
   };
 
@@ -558,7 +651,8 @@
 
     if (e.key === 'Escape') {
       if (modalOpen) Board.closeQuestion();
-      else if (!FB.el('final-round').classList.contains('hidden')) Board.endGame();
+      else if (FB.isOverlayOpen('winner-modal')) Board.closeWinner();
+      else if (!FB.Session && !FB.el('final-round').classList.contains('hidden')) Board.endGame();
       return;
     }
 

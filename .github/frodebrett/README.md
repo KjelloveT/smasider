@@ -1,0 +1,34 @@
+# Vekas nyheitsfrøde
+
+GitHub Actions startar Codex laurdag klokka 08.15 norsk tid. Frøda dekkjer sju heile kalenderdøgn frå førre laurdag til og med fredag. Ho har fem kategoriar med seks spørsmål kvar og ein finale, laga for 5.–10. trinn. Den faste kategorien heiter «snodige nyheiter». Kvart spørsmål har fire svaralternativ bak «Vis hint».
+
+Fem nettsøk finn hovudsaker i Noreg og verda, vurderer kor store dei er og hentar daterte kjelder. Codex får kjeldene og [redaksjonsinstruksen](weekly-news-prompt.md). Valideringa sjekkar fem kategoriar, kjelder, datoperiode, fasitlengd, høgst to spørsmål per hending og høgst to spørsmål frå småsaker på heile brettet. Ein eigen jobb lagar ein PR mot main med quizfila og tilhøyrande biletfiler. E-posten inneheld spørsmåla, fasitane, artikkellenkjene, bileta og PR-lenkja. Redaktøren godkjenner og flettar inn PR-en manuelt.
+
+## Aktivering på GitHub
+
+1. Legg til desse verdiane som repository secrets under **Settings → Secrets and variables → Actions**.
+
+   | Namn | Verdi |
+   | --- | --- |
+   | OPENAI_API_KEY | Ein API-nøkkel frå eit OpenAI-prosjekt som kan køyre Codex |
+   | FRODEBRETT_PR_TOKEN | Eit avgrensa GitHub-token for å opprette vekas PR |
+   | FRODEBRETT_MAIL_TO | E-postadressa til redaktøren |
+   | FRODEBRETT_GMAIL_APP_PASSWORD | Eit Gmail-app-passord for avsendarkontoen. Jobben fjernar skiljemellomrom. |
+   | FRODEBRETT_GMAIL_USER | Valfritt. Gmail-adressa til avsendaren dersom ho er ulik mottakaradressa |
+
+2. Opprett eit [fine-grained personal access token](https://github.com/settings/personal-access-tokens/new) med berre dette repoet og **Pull requests → Read and write**. Bruk dette som FRODEBRETT_PR_TOKEN og forny det før utløp. Den innebygde Actions-nøkkelen skriv til vekegreina. Det avgrensa tokenet opprettar PR-en, og vanlege GitHub-reglar gjeld ved manuell godkjenning og merge.
+3. Flett oppsetts-PR-en inn i main. Køyreplanen startar fyrste laurdag etter dette. Du kan òg velje **Run workflow** under Actions og la **Prøvekøyr utan PR og e-post** stå på for å teste generering og validering med den same KI-nøkkelen.
+
+Bruk [Google sitt oppsett for app-passord](https://support.google.com/accounts/answer/185833) dersom Gmail-kontoen støttar det. Legg hemmelege verdiar direkte i GitHub. Dersom utsendinga feilar etter at PR-en er oppretta, kan du bruke **Re-run failed jobs** på køyringa for å prøve e-posten att.
+
+## Bilete og godkjenning
+
+Jobben hentar relevante, krediterte pressefoto frå den oppgjevne kjeldeartikkelen når biletet er tilgjengeleg i eit støtta format og innanfor storleiksgrensa. Han kan òg ta inn bilete frå Wikimedia Commons med oppgjeve opphav og støtta open lisens. PR-skildringa viser bileta frå commiten, og e-posten har dei same bileta bygde inn. I spelet kjem kjelde og kreditering fram saman med fasiten.
+
+Minst 15 brettspørsmål må ha nedlasta biletfiler for at jobben skal opprette ein PR og sende e-post. Bruk gjerne eit fritt Wikimedia-illustrasjonsbilete når saka manglar eit eigna pressefoto. GitHub-PR-en og Azure-førehandsvisinga er offentlege. Redaktøren vurderer kvart pressefoto før merge.
+
+Tittel og kort omtale frå Supernytt hjelper nettsøket å prioritere saker for born og ungdom. Fasiten kjem frå daterte artiklar. Når ei ny frøde blir publisert, ligg den førre i arkivet med bileta sine.
+
+Når redaktøren har vurdert eit pressefoto, kan det leggjast til lokalt på greina for vekas PR. Bruk eit JPEG-, PNG- eller WebP-bilete på høgst 195 kB og ei lokal JSON-fil med felta title, author, publisher, source, rights og alt. Bruk cropped: true dersom biletet er skore til. Køyr **node .github/frodebrett/add-reviewed-photo.mjs 1.1 bilete.jpg kreditering.json** frå rota av repoet og legg den oppdaterte quizfila til i PR-en. Her viser 1.1 til fyrste spørsmål i fyrste kategori. Skriv **finale** for finalespørsmålet.
+
+Sjekk at kvar lenkje støttar fasiten og at språk og nyheitsstoff passar i grunnskulen. Frødebrett viser datoperioden for brettet som er publisert. Ved ei mislukka køyring eller utsett godkjenning kan ein bruke brettet som alt ligg ute.
