@@ -33,7 +33,7 @@
       "required": ["question", "answer", "distractors", "sourceId", "imageAlt", "pressPhotoAlt", "imageSearch"],
       "properties": {
         "question": { "type": "string" },
-        "answer": { "type": "string" },
+        "answer": { "type": "string", "pattern": "^\\S+(?: \\S+)?$" },
         "distractors": { "type": "array", "items": { "type": "string" }, "minItems": 3, "maxItems": 3 },
         "sourceId": { "type": "string" },
         "imageAlt": { "type": "string" },
