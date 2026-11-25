@@ -183,6 +183,7 @@ export async function buildQuiz(draft, period, loadPhoto = licensedImage, loadPr
     if (!photo && safeText(item.imageSearch, 110) && !revealsAnswer(item.imageSearch, item.answer)) {
       photo = await searchPhoto(item.imageSearch, item.imageAlt);
     }
+    if (photo?.imageCredit?.illustration && revealsAnswer(photo.imageCredit.title, item.answer)) return null;
     return photo;
   }
 

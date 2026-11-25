@@ -132,7 +132,7 @@ export async function publisherImage(source, proposal, fetchPhoto = fetch) {
       if (image) return {
         image, imageAlt: proposal.description,
         imageCredit: {
-          title: proposal.description, author: proposal.credit || 'Fotograf ikkje oppgjeven', publisher: source.publisher,
+          title: proposal.description, author: proposal.credit || 'Fotograf ikkje stadfesta', publisher: source.publisher,
           source: article.href, imageUrl: photo.href, license: 'Pressefoto', preserved: true
         }
       };
@@ -173,7 +173,15 @@ async function commonsResults(params, fetchPhoto) {
   return response.ok ? (await response.json()).query?.pages ?? [] : [];
 }
 
-async function commonsPhoto(info, alt, fetchPhoto) {
+function commonsTitle(source) {
+  return source.slice(5).replace(/_/g, ' ');
+}
+
+export function illustrationAlt(title) {
+  return 'Illustrasjonsbilete frå Wikimedia Commons. ' + title.replace(/\.[a-z0-9]{2,5}$/i, '');
+}
+
+async function commonsPhoto(info, fetchPhoto) {
   const fields = info?.extmetadata;
   const author = fields?.Artist?.value?.replace(/<[^>]*>/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
   if (!author || /^unknown$/i.test(author) || fields.Restrictions?.value || !info.thumburl) return null;
@@ -185,9 +193,10 @@ async function commonsPhoto(info, alt, fetchPhoto) {
   const thumbnail = new URL(info.thumburl);
   if (!rights || !source || !imageHosts.has(thumbnail.origin)) return null;
   const image = await readThumbnail(await fetchPhoto(thumbnail, requestOptions()));
+  const title = commonsTitle(source);
   return image ? {
-    image, imageAlt: alt,
-    imageCredit: { title: source.slice(5).replace(/_/g, ' '), author, source: info.descriptionurl, ...rights, illustration: true }
+    image, imageAlt: illustrationAlt(title),
+    imageCredit: { title, author, source: info.descriptionurl, ...rights, illustration: true }
   } : null;
 }
 
@@ -196,7 +205,7 @@ export async function licensedImage(imagePage, alt, fetchPhoto = fetch) {
     const title = commonsFile(imagePage);
     if (!title || !alt) return null;
     const pages = await commonsResults({ titles: title }, fetchPhoto);
-    return await commonsPhoto(pages[0]?.imageinfo?.[0], alt, fetchPhoto);
+    return await commonsPhoto(pages[0]?.imageinfo?.[0], fetchPhoto);
   } catch {
     // Uvisse om fil, opphav eller lisens gjev eit spørsmål utan bilete.
     return null;
@@ -207,7 +216,9 @@ export async function findLicensedImage(search, alt, fetchPhoto = fetch) {
   if (typeof search !== 'string' || !alt) return null;
   const terms = search.normalize('NFKC').replace(/[^\p{L}\p{N} -]+/gu, ' ').trim().split(/\s+/).slice(0, 7);
   if (!terms[0]) return null;
-  const significant = terms.filter(term => term.length > 2 && !/^(the|and|from|for)$/i.test(term));
+  const significant = [...new Set(terms.map(term => term.toLowerCase()))]
+    .filter(term => term.length > 2 && !/^(the|and|from|for)$/.test(term));
+  if (!significant.length) return null;
   try {
     const searches = new Set([terms.join(' '), terms.slice(0, 3).join(' ')]);
     for (const query of searches) {
@@ -216,9 +227,13 @@ export async function findLicensedImage(search, alt, fetchPhoto = fetch) {
       }, fetchPhoto);
       for (const page of pages.sort((a, b) => (a.index ?? 0) - (b.index ?? 0))) {
         const info = page.imageinfo?.[0];
-        const description = (page.title + ' ' + (info?.extmetadata?.ImageDescription?.value ?? '')).toLowerCase();
-        if (!significant.some(term => description.includes(term.toLowerCase()))) continue;
-        const photo = await commonsPhoto(info, alt, fetchPhoto).catch(() => null);
+        const title = String(page.title || '').toLowerCase();
+        if (/logo|contact[- ]sheet|photo montage|watermark/i.test(title)) continue;
+        const description = (title + ' ' + (info?.extmetadata?.ImageDescription?.value ?? '')).toLowerCase();
+        const titleMatch = significant.some(term => title.includes(term));
+        const matches = significant.filter(term => description.includes(term)).length;
+        if (!titleMatch || matches < Math.min(2, significant.length)) continue;
+        const photo = await commonsPhoto(info, fetchPhoto).catch(() => null);
         if (photo) return photo;
       }
     }
