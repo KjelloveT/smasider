@@ -10,6 +10,16 @@
     return choices(question)?.map((value, index) => 'ABCD'[index] + '. ' + value).join('\n') || '';
   }
 
+  function readOptions(text) {
+    const lines = text.split('\n');
+    if (lines.length !== 4) return null;
+    const options = lines.map((line, index) => {
+      const prefix = 'ABCD'[index] + '. ';
+      return line.startsWith(prefix) ? line.slice(prefix.length).trim() : '';
+    });
+    return choices({ options });
+  }
+
   function setOpen(prefix, open) {
     const button = FB.el(prefix + '-hint-button');
     const panel = FB.el(prefix + '-hint');
@@ -45,5 +55,5 @@
     });
   }
 
-  FB.Hints = { choices, formatOptions, prepare, bind };
+  FB.Hints = { choices, formatOptions, readOptions, prepare, bind };
 })(window);

@@ -92,7 +92,7 @@
       cachedAssets = null;
       throw error;
     });
-    const { game, modals, css, scripts } = await cachedAssets;
+    const [{ game, modals, css, scripts }, portableQuiz] = await Promise.all([cachedAssets, embedImages(quiz)]);
     const title = Vy.escapeHtml(quiz.title);
     const code = scripts.map(source => '<script>' + source.replace(/<\/script/gi, '<\\/script') + '</script>').join('\n');
 
@@ -121,7 +121,7 @@ ${game}
 <footer class="fb-export-credit"><small>Spelmotor frå Vyrdepil · CC BY-NC-SA 4.0</small></footer>
 </main>
 ${modals}
-<script id="frode-data" type="application/json">${packageData(quiz)}</script>
+<script id="frode-data" type="application/json">${packageData(portableQuiz)}</script>
 ${code}
 </body>
 </html>`;
@@ -145,8 +145,49 @@ ${code}
     }
   }
 
-  function downloadJson(quiz) {
-    Vy.downloadJson({ app: 'frodebrett', version: 1, quiz }, fileName(quiz, 'json'));
+  async function embedImages(quiz, photos = new Map()) {
+    async function embed(question) {
+      const path = question.image;
+      if (!FB.Images.isPublished(path)) return question;
+      if (!photos.has(path)) photos.set(path, FB.Images.embedPublished(path));
+      const { image, resized } = await photos.get(path);
+      const copy = { ...question, image };
+      if (resized && copy.imageCredit) copy.imageCredit = { ...copy.imageCredit, preserved: false };
+      return copy;
+    }
+
+    const categories = await Promise.all(quiz.categories.map(async category => ({
+      ...category, questions: await Promise.all(category.questions.map(embed))
+    })));
+    const final = quiz.final ? await embed(quiz.final) : quiz.final;
+    return { ...quiz, categories, final };
+  }
+
+  async function downloadJsonFile(data, name, button) {
+    button.disabled = true;
+    try {
+      if (data.quiz) {
+        data.quiz = await embedImages(data.quiz);
+      } else {
+        const photos = new Map();
+        const quizzes = [];
+        for (const quiz of data.quizzes) quizzes.push(await embedImages(quiz, photos));
+        data.quizzes = quizzes;
+      }
+      Vy.downloadJson(data, name);
+    } catch {
+      Vy.toast('Kunne ikkje lage JSON-fila. Prøv att når bileta er tilgjengelege.', { kind: 'warn' });
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  function downloadJson(quiz, button) {
+    return downloadJsonFile({ app: 'frodebrett', version: 1, quiz }, fileName(quiz, 'json'), button);
+  }
+
+  function downloadCollection(data, button) {
+    return downloadJsonFile(data, 'frodebrett_alle.json', button);
   }
 
   function downloadTemplate() {
@@ -192,9 +233,9 @@ ${code}
       const quiz = prepareQuiz();
       if (quiz) download(quiz, event.currentTarget);
     });
-    FB.el('btn-editor-export-json').addEventListener('click', () => {
+    FB.el('btn-editor-export-json').addEventListener('click', event => {
       const quiz = prepareQuiz();
-      if (quiz) downloadJson(quiz);
+      if (quiz) downloadJson(quiz, event.currentTarget);
     });
   }
 
@@ -212,5 +253,5 @@ ${code}
     Vy.bindOverlayClose(dialog);
   }
 
-  FB.Export = { download, downloadJson, downloadTemplate, withHelp, bindEditor, bindHelp };
+  FB.Export = { download, downloadJson, downloadCollection, downloadTemplate, withHelp, bindEditor, bindHelp };
 })(window);

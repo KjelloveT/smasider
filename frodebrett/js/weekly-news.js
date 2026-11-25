@@ -5,6 +5,7 @@
   const FB = root.FB;
   const dateFormat = new Intl.DateTimeFormat('nn-NO', { dateStyle: 'medium', timeZone: 'UTC' });
   const dateId = /^\d{4}-\d{2}-\d{2}$/;
+  let navigationVersion = 0;
 
   function label(period) {
     return dateFormat.formatRange(new Date(period.from), new Date(period.through));
@@ -24,25 +25,36 @@
     return board.quiz;
   }
 
-  function bindPlay(button, load, status) {
+  function bindQuizActions(play, edit, load, status) {
+    const statusText = status.textContent;
+    const statusHidden = status.hidden;
     let ready;
-    button.addEventListener('click', async () => {
-      button.disabled = true;
-      try {
-        ready ??= Promise.resolve().then(load).then(quiz => {
-          if (!quiz) throw Error('Kunne ikkje laste nyheitsfrøda.');
-          return quiz;
-        });
-        const quiz = await ready;
-        if (button.getClientRects().length) FB.Board.selectQuiz(quiz);
-      } catch {
-        ready = null;
-        status.hidden = false;
-        status.textContent = 'Kunne ikkje laste nyheitsfrøda. Prøv att.';
-      } finally {
-        button.disabled = false;
-      }
-    });
+    function bind(button, activate) {
+      button.addEventListener('click', async () => {
+        const version = ++navigationVersion;
+        const hadFocus = document.activeElement === button;
+        play.disabled = edit.disabled = true;
+        let quiz;
+        try {
+          ready ??= Promise.resolve().then(load).then(quiz => {
+            if (!quiz) throw Error('Kunne ikkje laste nyheitsfrøda.');
+            return quiz;
+          });
+          quiz = await ready;
+        } catch {
+          ready = null;
+        } finally {
+          play.disabled = edit.disabled = false;
+        }
+        if (version !== navigationVersion || !button.getClientRects().length) return;
+        if (hadFocus && document.activeElement === document.body) button.focus();
+        status.hidden = quiz ? statusHidden : false;
+        status.textContent = quiz ? statusText : 'Kunne ikkje laste nyheitsfrøda. Prøv att.';
+        if (quiz) activate(quiz);
+      });
+    }
+    bind(play, FB.Board.selectQuiz);
+    bind(edit, FB.Editor.editCopy);
   }
 
   async function showWeeklyQuiz() {
@@ -52,7 +64,7 @@
       const quiz = readQuiz(board);
       if (!quiz || !board.period) return;
       status.textContent = (board.testRun === true ? 'Prøvefrøde · Nyheiter frå ' : 'Nyheiter frå ') + label(board.period);
-      bindPlay(FB.el('btn-start-weekly-news'), () => quiz, status);
+      bindQuizActions(FB.el('btn-start-weekly-news'), FB.el('btn-copy-weekly-news'), () => quiz, status);
       FB.show('weekly-news-actions');
     } catch {
       status.textContent = 'Kunne ikkje laste nyheitsfrøda.';
@@ -68,12 +80,17 @@
       const periods = editions.filter(period => [period.edition, period.from, period.through].every(value => dateId.test(value)))
         .sort((a, b) => b.edition.localeCompare(a.edition));
       for (const period of periods) {
-        const button = Vy.el('button', 'vp-button vp-button--compact', label(period));
-        button.type = 'button';
-        button.setAttribute('aria-haspopup', 'dialog');
-        button.setAttribute('aria-controls', 'team-setup');
-        bindPlay(button, async () => readQuiz(await readJson('json/weekly-archive/' + period.edition + '.json')), status);
-        list.append(button);
+        const date = label(period);
+        const actions = Vy.el('div', 'vp-actions');
+        const play = Vy.el('button', 'vp-button vp-button--compact', date);
+        const edit = Vy.el('button', 'vp-button vp-button--tool vp-button--compact', 'Rediger kopi');
+        play.type = edit.type = 'button';
+        play.setAttribute('aria-haspopup', 'dialog');
+        play.setAttribute('aria-controls', 'team-setup');
+        edit.setAttribute('aria-label', 'Rediger kopi av nyheitsfrøda frå ' + date);
+        bindQuizActions(play, edit, async () => readQuiz(await readJson('json/weekly-archive/' + period.edition + '.json')), status);
+        actions.append(play, edit);
+        list.append(actions);
       }
       archive.hidden = !list.childElementCount;
     } catch {

@@ -4,10 +4,11 @@
   const FB = root.FB;
   let pending = 0;
   const Images = { busy: () => pending > 0 };
-  Images.valid = value => typeof value === 'string' && value.length <= 280000
+  const embeddedImage = value => typeof value === 'string' && value.length <= 280000
     && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(value);
-  const displayable = value => Images.valid(value) || (typeof value === 'string'
-    && /^json\/weekly-media\/[a-f0-9]{24}\.(jpg|png|webp)$/.test(value));
+  Images.isPublished = value => typeof value === 'string'
+    && /^json\/weekly-media\/[a-f0-9]{24}\.(jpg|png|webp)$/.test(value);
+  Images.valid = value => embeddedImage(value) || Images.isPublished(value);
 
   function creditLink(text, url) {
     const link = Vy.el('a', '', text);
@@ -23,7 +24,7 @@
     const isCommons = typeof credit?.source === 'string' && credit.source.startsWith('https://commons.wikimedia.org/wiki/File:');
     const isPress = typeof credit?.publisher === 'string' && credit.publisher.trim() && typeof credit.source === 'string'
       && credit.source.startsWith('https://');
-    const visible = displayable(question.image) && typeof credit?.title === 'string'
+    const visible = Images.valid(question.image) && typeof credit?.title === 'string'
       && typeof credit.author === 'string' && typeof credit.license === 'string'
       && (isCommons || isPress);
     note.replaceChildren();
@@ -42,7 +43,7 @@
 
   Images.show = function (id, question) {
     const image = FB.el(id);
-    const valid = displayable(question.image);
+    const valid = Images.valid(question.image);
     image.classList.toggle('hidden', !valid);
     if (valid) {
       image.src = question.image;
@@ -68,11 +69,33 @@
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
       for (const quality of [0.82, 0.65, 0.45]) {
         const data = canvas.toDataURL('image/jpeg', quality);
-        if (Images.valid(data)) return data;
+        if (embeddedImage(data)) return data;
       }
       throw Error('Biletet har for mange detaljar. Vel eit mindre bilete.');
     } finally { URL.revokeObjectURL(url); }
   }
+
+  Images.embedPublished = async function (path) {
+    if (!Images.isPublished(path)) throw Error('Ugyldig sti til nyheitsbiletet.');
+    const response = await fetch(path);
+    if (!response.ok) throw Error('Kunne ikkje hente nyheitsbiletet.');
+    const blob = await response.blob();
+    const format = path.split('.').at(-1);
+    const type = 'image/' + (format === 'jpg' ? 'jpeg' : format);
+    if (!blob.size || (blob.type !== type && blob.type !== 'application/octet-stream')) {
+      throw Error('Kunne ikkje lese nyheitsbiletet.');
+    }
+    const photo = blob.slice(0, blob.size, type);
+    const data = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(photo);
+    });
+    if (embeddedImage(data)) return { image: data };
+    return { image: await read(photo), resized: true };
+  };
+
   Images.control = function (question, label, onChange) {
     const group = document.createElement('div');
     group.className = 'fb-image-control';

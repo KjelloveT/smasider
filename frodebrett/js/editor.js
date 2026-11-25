@@ -175,8 +175,11 @@
       update();
     });
     hintField.input.addEventListener('input', () => {
-      question.hint = hintField.input.value.trim();
-      delete question.options;
+      const hint = hintField.input.value.trim();
+      const options = FB.Hints.readOptions(hint);
+      question.hint = options ? '' : hint;
+      if (options) question.options = options;
+      else delete question.options;
       update();
     });
     fields.append(questionField.label, answerField.label);
@@ -233,7 +236,13 @@
 
   function readFinal() {
     const final = { ...S.editorFinalImage };
+    if (editingQuiz?.final?.source) final.source = editingQuiz.final.source;
     Object.entries(finalFields).forEach(([key, id]) => { final[key] = FB.el(id).value.trim(); });
+    const options = FB.Hints.readOptions(final.questionHint);
+    if (options) {
+      final.options = options;
+      final.questionHint = '';
+    }
     return final;
   }
 
@@ -414,5 +423,9 @@
 
   Editor.newQuiz = () => openEditor(null);
   Editor.editQuiz = openEditor;
+  Editor.editCopy = function (quiz) {
+    const { title, categories, final } = structuredClone(quiz);
+    openEditor({ title, categories, final });
+  };
   FB.Editor = Editor;
 })(window);

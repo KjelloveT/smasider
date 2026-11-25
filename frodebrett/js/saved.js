@@ -61,7 +61,8 @@
     const actions = Vy.el('div', 'vp-actions');
     actions.append(
       start,
-      action(standard ? 'Rediger kopi' : 'Rediger', 'vp-button--tool', 'pencil', quiz, useQuiz(data => FB.Editor.editQuiz(data), true))
+      action(standard ? 'Rediger kopi' : 'Rediger', 'vp-button--tool', 'pencil', quiz,
+        useQuiz(standard ? FB.Editor.editCopy : FB.Editor.editQuiz, true))
     );
     if (!standard) {
       actions.append(action('Slett', 'vp-button--danger vp-button--quiet', 'trash2', quiz, () => {
@@ -151,8 +152,8 @@
       if (file) importFile(file);
       fileInput.value = '';
     });
-    FB.el('btn-export-all').addEventListener('click', () => {
-      Vy.downloadJson(Store.exportData(), 'frodebrett_alle.json');
+    FB.el('btn-export-all').addEventListener('click', event => {
+      FB.Export.downloadCollection(Store.exportData(), event.currentTarget);
     });
   };
 
