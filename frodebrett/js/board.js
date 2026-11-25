@@ -193,6 +193,8 @@
     S.currentQuestion = {
       category: category.name,
       question: question.question,
+      hint: question.hint,
+      options: question.options,
       image: question.image,
       imageAlt: question.imageAlt,
       imageCredit: question.imageCredit,
@@ -210,6 +212,7 @@
     FB.el('question-category').textContent = q.category;
     FB.el('question-text').textContent = q.question;
     FB.Images.show('question-image', q);
+    FB.Hints.prepare('question', q);
     FB.el('answer-text').textContent = q.answer;
 
     const pointsEl = FB.el('question-points');
@@ -311,6 +314,7 @@
   };
 
   Board.bindQuestionModal = function () {
+    FB.Hints.bind('question');
     const modal = FB.el('question-modal');
     Vy.bindOverlayClose(modal);
     modal.addEventListener('click', e => {
@@ -428,6 +432,7 @@
     FB.show('final-question');
     FB.el('final-question-display').textContent = S.currentQuiz.final.question;
     FB.Images.show('final-question-image', S.currentQuiz.final);
+    FB.Hints.prepare('final-question', S.currentQuiz.final, S.currentQuiz.final.questionHint || '');
     FB.el('final-answer-display').textContent = S.currentQuiz.final.answer;
     FB.hide('final-answer');
     FB.show('btn-reveal-final');
@@ -436,6 +441,7 @@
   };
 
   Board.bindFinalRound = function () {
+    FB.Hints.bind('final-question');
     FB.el('btn-reveal-final').addEventListener('click', () => {
       FB.show('final-answer');
       FB.hide('btn-reveal-final');

@@ -30,13 +30,15 @@
     "question": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["question", "answer", "sourceId", "imageAlt", "pressPhotoAlt"],
+      "required": ["question", "answer", "distractors", "sourceId", "imageAlt", "pressPhotoAlt", "imageSearch"],
       "properties": {
         "question": { "type": "string" },
         "answer": { "type": "string" },
+        "distractors": { "type": "array", "items": { "type": "string" }, "minItems": 3, "maxItems": 3 },
         "sourceId": { "type": "string" },
         "imageAlt": { "type": "string" },
-        "pressPhotoAlt": { "type": "string" }
+        "pressPhotoAlt": { "type": "string" },
+        "imageSearch": { "type": "string" }
       }
     }
   }

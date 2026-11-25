@@ -1,14 +1,15 @@
 import { execFileSync } from 'node:child_process';
-import { appendFileSync, readFileSync, writeFileSync } from 'node:fs';
+import { randomInt } from 'node:crypto';
+import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync, gunzipSync } from 'node:zlib';
-import { commonsFile, licensedImage, publisherImage, storeWeeklyImages } from './news-images.mjs';
+import { commonsFile, findLicensedImage, imageLimit, licensedImage, publisherImage, storeWeeklyImages, weeklyImageFile } from './news-images.mjs';
 import { quizQuestions, reviewEmail, reviewImages } from './news-review.mjs';
 export { reviewEmail } from './news-review.mjs';
 
 const points = [100, 200, 300, 400, 500, 1000];
-const oddNews = 'snodige nyheter';
+const oddNews = 'snodige nyheiter';
 const quizPath = 'frodebrett/json/weekly-news.json';
 const day = 86_400_000;
 const iso = date => date.toISOString().slice(0, 10);
@@ -95,8 +96,8 @@ export function attachSources(draft, sources) {
     if (!source) throw Error('Spørsmålet må bruke ein artikkel frå kjeldegrunnlaget.');
     item.source = source;
     item.imagePage = item.imageAlt && source.imagePage ? source.imagePage : '';
-    item.pressPhoto = item.pressPhotoAlt && source.pressPhoto?.url
-      ? { ...source.pressPhoto, description: item.pressPhotoAlt } : undefined;
+    item.pressPhoto = item.pressPhotoAlt
+      ? { ...source.pressPhoto, url: source.pressPhoto?.url || source.url, description: item.pressPhotoAlt } : undefined;
   }
   return draft;
 }
@@ -105,7 +106,7 @@ export function validateDraft(draft, period, sources) {
   const categories = draft?.categories;
   if (!Array.isArray(categories) || categories.length !== 5) throw Error('Frøda må ha fem kategoriar.');
   if (categories.filter(category => category?.name === oddNews).length !== 1) {
-    throw Error('Frøda må ha éin kategori med namnet «snodige nyheter».');
+    throw Error('Frøda må ha éin kategori med namnet «' + oddNews + '».');
   }
   const names = new Set();
   const questions = new Set();
@@ -117,6 +118,12 @@ export function validateDraft(draft, period, sources) {
     if (!safeText(item?.question, 320) || !safeText(item.answer, 65) || item.answer.split(/\s+/u).length > 2
       || !normalized(item.answer) || /[;\/]|^eller\b|\beller$/iu.test(item.answer)) {
       throw Error(context + ' treng eit tydeleg spørsmål og éin trygg fasit på høgst to ord.');
+    }
+    const distractors = item.distractors;
+    if (!Array.isArray(distractors) || distractors.length !== 3
+      || !distractors.every(option => safeText(option, 65) && normalized(option) && option.split(/\s+/u).length <= 2)
+      || new Set([item.answer, ...distractors].map(normalized)).size !== 4) {
+      throw Error(context + ' treng tre ulike, korte svaralternativ i tillegg til fasiten.');
     }
     const key = normalized(item.question);
     if (!key || questions.has(key)) throw Error(context + ' manglar ei spørsmålsformulering eller gjentek eit anna spørsmål.');
@@ -149,39 +156,54 @@ export function validateDraft(draft, period, sources) {
   checkQuestion(draft.final.entry, 'Finalen');
 }
 
-export async function buildQuiz(draft, period, loadPhoto = licensedImage, loadPressPhoto = publisherImage) {
+function mixOptions(item) {
+  const options = [item.answer, ...item.distractors];
+  for (let index = options.length - 1; index > 0; index--) {
+    const other = randomInt(index + 1);
+    [options[index], options[other]] = [options[other], options[index]];
+  }
+  return options;
+}
+
+export async function buildQuiz(draft, period, loadPhoto = licensedImage, loadPressPhoto = publisherImage,
+  searchPhoto = findLicensedImage) {
   validateDraft(draft, period);
   const items = draftQuestions(draft);
   const photos = new Map();
-  const picturedStories = new Set();
-  const picturedImages = new Set();
-  const candidates = items.filter(item => commonsFile(item.imagePage) && safeText(item.imageAlt, 160)
-    && !revealsAnswer(item.imageAlt, item.answer));
-  const press = items.filter(item => publicArticle(item.pressPhoto?.url)
-    && safeText(item.pressPhoto.credit, 180) && safeText(item.pressPhoto.description, 200)
-    && !revealsAnswer(item.pressPhoto.description, item.answer));
+  const picturedImages = new Map();
 
-  function addPhotos(pairs) {
-    for (const [item, photo] of pairs) {
-      if (!photo || picturedStories.has(item.source.story) || picturedImages.has(photo.image)) continue;
-      picturedStories.add(item.source.story);
-      picturedImages.add(photo.image);
-      photos.set(item, photo);
-      if (photos.size === 6) break;
+  async function getPhoto(item) {
+    let photo;
+    const press = item.pressPhoto;
+    if (publicArticle(press?.url) && safeText(press.description, 200) && !revealsAnswer(press.description, item.answer)) {
+      photo = await loadPressPhoto(item.source, { ...press, credit: safeText(press.credit, 180) ? press.credit : '' });
     }
+    if (photo || !safeText(item.imageAlt, 160) || revealsAnswer(item.imageAlt, item.answer)) return photo;
+    if (commonsFile(item.imagePage)) photo = await loadPhoto(item.imagePage, item.imageAlt);
+    if (!photo && safeText(item.imageSearch, 110) && !revealsAnswer(item.imageSearch, item.answer)) {
+      photo = await searchPhoto(item.imageSearch, item.imageAlt);
+    }
+    return photo;
   }
-  addPhotos(await Promise.all(press.slice(0, 18).map(async item =>
-    [item, await loadPressPhoto(item.source, item.pressPhoto)])));
-  if (photos.size < 6) {
-    addPhotos(await Promise.all(candidates.filter(item => !picturedStories.has(item.source.story)).slice(0, 6)
-      .map(async item => [item, await loadPhoto(item.imagePage, item.imageAlt)])));
+
+  for (let index = 0; index < items.length; index += 6) {
+    const batch = items.slice(index, index + 6);
+    const results = await Promise.all(batch.map(getPhoto));
+    for (const [offset, photo] of results.entries()) {
+      if (!photo) continue;
+      const item = batch[offset];
+      const prior = picturedImages.get(photo.image);
+      if (prior && prior !== item.source.story) continue;
+      picturedImages.set(photo.image, item.source.story);
+      photos.set(item, photo);
+    }
   }
 
   function makeQuestion(item) {
     const { question, answer, source } = item;
     const photo = photos.get(item);
     return {
-      question, answer, ...(photo || {}),
+      question, answer, options: mixOptions(item), ...(photo || {}),
       source: {
         title: source.title, publisher: source.publisher, url: source.url, published: source.published,
         story: source.story, importance: source.importance
@@ -209,6 +231,20 @@ function formatPeriod(period) {
 
 const readJson = path => JSON.parse(readFileSync(path, 'utf8'));
 const output = (key, value) => appendFileSync(process.env.GITHUB_OUTPUT, key + '=' + value + '\n');
+
+export function archivePrevious(board, appDirectory) {
+  const period = board?.period;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(period?.edition) || !board.quiz || board.testRun) return;
+  const folder = join(appDirectory, 'json', 'weekly-archive');
+  const indexPath = join(folder, 'index.json');
+  const index = existsSync(indexPath) ? readJson(indexPath) : { app: 'frodebrett', version: 1, editions: [] };
+  if (index.editions.some(entry => entry.edition === period.edition)) return;
+  mkdirSync(folder, { recursive: true });
+  writeFileSync(join(folder, period.edition + '.json'), JSON.stringify(board, null, 2) + '\n');
+  index.editions.push(period);
+  index.editions.sort((a, b) => b.edition.localeCompare(a.edition));
+  writeFileSync(indexPath, JSON.stringify(index, null, 2) + '\n');
+}
 
 async function run(mode) {
   const { WEEKLY_EDITION, WEEKLY_TEST_DATE, WEEKLY_TEST_LABEL, RUNNER_TEMP,
@@ -244,9 +280,12 @@ async function run(mode) {
       }
       const items = quizQuestions(board.quiz).map(({ item }) => item);
       storeWeeklyImages(items, 'frodebrett');
-      writeFileSync(quizPath, JSON.stringify(board, null, 2) + '\n');
-      console.log('Frøda har ' + items.filter(item => item.image).length + ' bilete, av dei '
+      const count = items.slice(0, -1).filter(item => weeklyImageFile(item.image)).length;
+      console.log('Frøda har ' + count + ' brettspørsmål med bilete, av dei '
         + items.filter(item => item.imageCredit?.license === 'Pressefoto').length + ' pressefoto.');
+      if (count < 15) throw Error('Frøda treng minst 15 brettspørsmål med bilete. Fann ' + count + '.');
+      if (!WEEKLY_TEST_DATE) archivePrevious(readJson(quizPath), 'frodebrett');
+      writeFileSync(quizPath, JSON.stringify(board, null, 2) + '\n');
       return;
     }
     case 'review': {
@@ -258,7 +297,7 @@ async function run(mode) {
       const board = readJson(file('weekly-reviewed.json'));
       if (board.period?.edition !== period.edition) throw Error('Brettet i PR-en gjeld feil veke.');
       const readPhoto = name => execFileSync('git', ['show', 'FETCH_HEAD:frodebrett/json/weekly-media/' + name],
-        { maxBuffer: 195_001 });
+        { maxBuffer: imageLimit + 1 });
       writeFileSync(file('weekly-mail.eml'), reviewEmail(board, {
         prUrl: WEEKLY_PR, from: MAIL_FROM, to: MAIL_TO, readPhoto
       }));

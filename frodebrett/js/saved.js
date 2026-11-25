@@ -88,7 +88,7 @@
     const container = FB.el('quiz-list');
     container.replaceChildren();
     if (quizzes.length) container.append(...quizzes.map(quiz => Saved.makeCard(quiz)));
-    else container.append(Vy.el('p', '', 'Her kjem frødene dine når du lagar ei ny eller opnar ei JSON-fil.'));
+    else container.append(Vy.el('p', '', 'Her kjem frødene dine når du lagar ei ny eller importerer ei JSON-fil.'));
     FB.el('btn-export-all').hidden = !quizzes.length;
   };
 

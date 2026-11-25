@@ -6,6 +6,8 @@
   const Images = { busy: () => pending > 0 };
   Images.valid = value => typeof value === 'string' && value.length <= 280000
     && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(value);
+  const displayable = value => Images.valid(value) || (typeof value === 'string'
+    && /^json\/weekly-media\/[a-f0-9]{24}\.(jpg|png|webp)$/.test(value));
 
   function creditLink(text, url) {
     const link = Vy.el('a', '', text);
@@ -21,7 +23,7 @@
     const isCommons = typeof credit?.source === 'string' && credit.source.startsWith('https://commons.wikimedia.org/wiki/File:');
     const isPress = typeof credit?.publisher === 'string' && credit.publisher.trim() && typeof credit.source === 'string'
       && credit.source.startsWith('https://');
-    const visible = Images.valid(question.image) && typeof credit?.title === 'string'
+    const visible = displayable(question.image) && typeof credit?.title === 'string'
       && typeof credit.author === 'string' && typeof credit.license === 'string'
       && (isCommons || isPress);
     note.replaceChildren();
@@ -33,13 +35,14 @@
       : credit.license;
     const changes = credit.cropped === true ? 'Forminska og skore til' : 'Forminska';
     const source = isCommons ? creditLink(credit.title, credit.source) : credit.title + ' · ' + credit.publisher;
+    if (credit.illustration) note.append('Illustrasjonsbilete · ');
     note.append(source, ' · ' + credit.author + ' · ', license);
     if (!credit.preserved) note.append(' · ' + changes);
   }
 
   Images.show = function (id, question) {
     const image = FB.el(id);
-    const valid = Images.valid(question.image);
+    const valid = displayable(question.image);
     image.classList.toggle('hidden', !valid);
     if (valid) {
       image.src = question.image;

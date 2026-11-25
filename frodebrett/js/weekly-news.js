@@ -4,57 +4,85 @@
 
   const FB = root.FB;
   const dateFormat = new Intl.DateTimeFormat('nn-NO', { dateStyle: 'medium', timeZone: 'UTC' });
-  const mediaPath = /^json\/weekly-media\/[a-f0-9]{24}\.(jpg|png|webp)$/;
+  const dateId = /^\d{4}-\d{2}-\d{2}$/;
 
-  async function loadPhoto(question) {
-    const path = question.image;
-    if (!mediaPath.test(path)) return;
-    delete question.image;
-    try {
-      const response = await fetch(path);
-      if (!response.ok) return;
-      const blob = await response.blob();
-      if (blob.size > 195000) return;
-      const image = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      });
-      if (FB.Images.valid(image)) question.image = image;
-    } catch {
-      // Eit bilete som ikkje kan lastast, skal ikkje hindre spelstart.
+  function label(period) {
+    return dateFormat.formatRange(new Date(period.from), new Date(period.through));
+  }
+
+  async function readJson(path) {
+    const response = await fetch(path, { cache: 'no-cache' });
+    if (!response.ok) throw Error('Kunne ikkje laste nyheitsfrøda.');
+    return response.json();
+  }
+
+  function readQuiz(board) {
+    if (board.app !== 'frodebrett' || board.version !== 1 || board.quiz?.categories?.length !== 5) return null;
+    for (const category of board.quiz.categories) {
+      if (category.name === 'snodige nyheter') category.name = 'snodige nyheiter';
     }
+    return board.quiz;
+  }
+
+  function bindPlay(button, load, status) {
+    let ready;
+    button.addEventListener('click', async () => {
+      button.disabled = true;
+      try {
+        ready ??= Promise.resolve().then(load).then(quiz => {
+          if (!quiz) throw Error('Kunne ikkje laste nyheitsfrøda.');
+          return quiz;
+        });
+        const quiz = await ready;
+        if (button.getClientRects().length) FB.Board.selectQuiz(quiz);
+      } catch {
+        ready = null;
+        status.hidden = false;
+        status.textContent = 'Kunne ikkje laste nyheitsfrøda. Prøv att.';
+      } finally {
+        button.disabled = false;
+      }
+    });
   }
 
   async function showWeeklyQuiz() {
     const status = FB.el('weekly-news-period');
     try {
-      const response = await fetch('json/weekly-news.json', { cache: 'no-cache' });
-      if (!response.ok) throw Error('Kunne ikkje laste nyheitsfrøda.');
-      const { app, version, period, quiz, testRun } = await response.json();
-      if (app !== 'frodebrett' || version !== 1 || !period || quiz?.categories?.length !== 5) return;
-
-      const dates = dateFormat.formatRange(new Date(period.from), new Date(period.through));
-      status.textContent = (testRun === true ? 'Prøvefrøde · Nyheiter frå ' : 'Nyheiter frå ') + dates;
-      const start = FB.el('btn-start-weekly-news');
-      const questions = [...quiz.categories.flatMap(category => category.questions), quiz.final].filter(Boolean);
-      let photos;
-      start.addEventListener('click', async () => {
-        start.disabled = true;
-        try {
-          photos ??= Promise.all(questions.map(loadPhoto));
-          await photos;
-          FB.Board.selectQuiz(quiz);
-        } finally {
-          start.disabled = false;
-        }
-      });
+      const board = await readJson('json/weekly-news.json');
+      const quiz = readQuiz(board);
+      if (!quiz || !board.period) return;
+      status.textContent = (board.testRun === true ? 'Prøvefrøde · Nyheiter frå ' : 'Nyheiter frå ') + label(board.period);
+      bindPlay(FB.el('btn-start-weekly-news'), () => quiz, status);
       FB.show('weekly-news-actions');
-    } catch (error) {
+    } catch {
       status.textContent = 'Kunne ikkje laste nyheitsfrøda.';
     }
   }
 
-  document.addEventListener('DOMContentLoaded', showWeeklyQuiz);
+  async function showArchive() {
+    const archive = FB.el('weekly-news-archive');
+    const list = FB.el('weekly-news-history');
+    const status = FB.el('weekly-news-history-status');
+    try {
+      const { editions } = await readJson('json/weekly-archive/index.json');
+      const periods = editions.filter(period => [period.edition, period.from, period.through].every(value => dateId.test(value)))
+        .sort((a, b) => b.edition.localeCompare(a.edition));
+      for (const period of periods) {
+        const button = Vy.el('button', 'vp-button vp-button--compact', label(period));
+        button.type = 'button';
+        button.setAttribute('aria-haspopup', 'dialog');
+        button.setAttribute('aria-controls', 'team-setup');
+        bindPlay(button, async () => readQuiz(await readJson('json/weekly-archive/' + period.edition + '.json')), status);
+        list.append(button);
+      }
+      archive.hidden = !list.childElementCount;
+    } catch {
+      // Den vekentlege frøda er tilgjengeleg sjølv om arkivet ikkje kan lastast.
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    showWeeklyQuiz();
+    showArchive();
+  });
 })(window);
