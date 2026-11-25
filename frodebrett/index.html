@@ -7,7 +7,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="css/style.css?v=10">
+<link rel="stylesheet" href="css/style.css?v=11">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
@@ -33,17 +33,34 @@
       <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="library-heading">
         <div class="fb-section-head">
           <h2 id="library-heading" tabindex="-1">Eigne frøder</h2>
-          <button class="vp-button vp-button--primary" id="btn-editor" type="button"><span data-icon="plus" aria-hidden="true"></span>Ny frøde</button>
+          <div class="vp-actions">
+            <button class="vp-button vp-button--primary" id="btn-editor" type="button"><span data-icon="plus" aria-hidden="true"></span>Ny frøde</button>
+            <button class="vp-button" id="btn-import-quiz" type="button"><span data-icon="upload" aria-hidden="true"></span>Importer JSON</button>
+            <input type="file" id="import-quiz-file" accept=".json,application/json" hidden>
+          </div>
         </div>
         <div id="quiz-list" class="fb-quiz-list"></div>
+        <p id="library-status" role="status" hidden></p>
       </section>
 
       <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="weekly-news-heading">
-        <h2 id="weekly-news-heading">Vekas nyheitsfrøde</h2>
-        <p class="vp-help" id="weekly-news-period" role="status">Nyheitsfrøda kjem her når ho er publisert.</p>
-        <div class="vp-actions hidden" id="weekly-news-actions">
-          <button class="vp-button vp-button--primary" id="btn-start-weekly-news" type="button" aria-haspopup="dialog" aria-controls="team-setup">Spel nyheitsfrøda</button>
+        <div class="fb-weekly-layout">
+          <div class="vp-stack">
+            <h2 id="weekly-news-heading">Vekas nyheitsfrøde</h2>
+            <p class="vp-help" id="weekly-news-period" role="status">Nyheitsfrøda kjem her når ho er publisert.</p>
+            <div class="vp-actions hidden" id="weekly-news-actions">
+              <button class="vp-button vp-button--primary" id="btn-start-weekly-news" type="button" aria-haspopup="dialog" aria-controls="team-setup">Spel nyheitsfrøda</button>
+            </div>
+          </div>
+          <img class="fb-weekly-art" src="resources/vekanyheiter.jpg" alt="" width="720" height="480">
         </div>
+        <details class="vp-accordion vp-accordion--compact" id="weekly-news-archive" hidden>
+          <summary>Tidlegare nyheitsfrøder</summary>
+          <div class="vp-accordion-body vp-stack">
+            <div class="vp-actions" id="weekly-news-history"></div>
+            <p class="vp-help" id="weekly-news-history-status" role="status" hidden></p>
+          </div>
+        </details>
       </section>
 
       <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="premade-heading">
@@ -73,14 +90,11 @@
 
       <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="json-files-heading">
         <h2 id="json-files-heading">Last ned ein tom mal som du kan få KI til å fylle ut</h2>
-        <p class="vp-prose" id="json-files-help">Last ned den tome malen, gje han til din eigen KI-modell og be modellen lage ein kviss. Når kvissen er ferdig, kan du laste opp JSON-fila her på Vyrdepil med «Opne JSON-fil». Fila blir lesen og lagra berre i nettlesaren på denne eininga.</p>
+        <p class="vp-prose">Last ned den tome malen, gje han til din eigen KI-modell og be modellen lage ein kviss. Når kvissen er ferdig, vel du «Importer JSON» under «Eigne frøder». Fila blir lesen og lagra berre i nettlesaren på denne eininga.</p>
         <div class="vp-actions">
           <button class="vp-button vp-button--tool" id="btn-download-template" type="button"><span data-icon="fileJson" aria-hidden="true"></span>Last ned tom JSON-mal</button>
-          <button class="vp-button" id="btn-import-quiz" type="button" aria-describedby="json-files-help"><span data-icon="upload" aria-hidden="true"></span>Opne JSON-fil</button>
-          <input type="file" id="import-quiz-file" accept=".json,application/json" hidden>
           <button class="vp-button vp-button--quiet" id="btn-export-all" type="button" hidden>Last ned alle eigne frøder</button>
         </div>
-        <p id="library-status" role="status" hidden></p>
       </section>
     </div>
 
@@ -121,6 +135,7 @@
             <div id="final-question-display"></div>
             <img id="final-question-image" class="fb-question-image hidden" alt="Bilete til finalspørsmålet">
           </div>
+          <div id="final-question-hint" class="vp-panel vp-panel--inset fb-question-hint" hidden></div>
           <div id="final-answer" class="fb-answer hidden">
             <div class="question-answer">
               <h3 class="answer-label">Svar</h3>
@@ -130,6 +145,7 @@
           </div>
           <div id="final-point-controls" class="point-controls hidden"></div>
           <div class="fb-controls">
+            <button class="vp-button vp-button--tool" id="final-question-hint-button" type="button" aria-controls="final-question-hint" aria-expanded="false" hidden>Vis hint</button>
             <button class="btn btn-accent" id="btn-reveal-final">Vis svar</button>
             <button class="btn btn-accent" id="btn-final-points">Fordel poeng</button>
             <button class="btn btn-accent" id="btn-confirm-final">Stadfest poeng</button>
@@ -197,7 +213,7 @@
                 <input type="text" class="vp-input" id="editor-final-category">
               </div>
               <div class="vp-field">
-                <label for="editor-final-clue">Hint (valfritt)</label>
+                <label for="editor-final-clue">Hint før innsats (valfritt)</label>
                 <input type="text" class="vp-input" id="editor-final-clue">
               </div>
               <div class="vp-field">
@@ -209,6 +225,10 @@
                 <textarea class="vp-input" id="editor-final-answer" rows="3"></textarea>
               </div>
             </div>
+            <label class="vp-field" for="editor-final-hint">
+              <strong>Hint til spørsmålet (valfritt)</strong>
+              <textarea class="vp-input" id="editor-final-hint" rows="3"></textarea>
+            </label>
             <div id="editor-final-image"></div>
           </div>
         </section>
@@ -256,6 +276,7 @@
       <div id="dd-banner" class="dd-banner hidden">★ DAGENS DOBBEL! · ×2 ★</div>
       <div id="question-text" class="question-text"></div>
       <img id="question-image" class="fb-question-image hidden" alt="Bilete til spørsmålet">
+      <div id="question-hint" class="vp-panel vp-panel--inset fb-question-hint" hidden></div>
       <div id="question-answer" class="fb-answer hidden">
         <div class="question-answer">
           <div class="answer-label">Svar</div>
@@ -266,6 +287,7 @@
       <div id="modal-point-controls" class="point-controls hidden"></div>
     </div>
     <div class="modal-footer">
+      <button class="vp-button vp-button--tool" id="question-hint-button" type="button" aria-controls="question-hint" aria-expanded="false" hidden>Vis hint</button>
       <button class="btn btn-accent" id="btn-reveal-modal">Vis svar</button>
       <button class="btn btn-accent" id="btn-confirm-award">Stadfest poeng</button>
       <button class="btn btn-accent4 hidden" id="btn-final-modal">Gå til finalerunde</button>
@@ -283,6 +305,7 @@
     <div id="preview-question" class="preview-question hidden">
       <div id="preview-question-text" class="question-text"></div>
       <img id="preview-question-image" class="fb-question-image hidden" alt="Bilete til spørsmålet">
+      <div id="preview-question-hint" class="vp-panel vp-panel--inset fb-question-hint" hidden></div>
       <div id="preview-answer" class="fb-answer hidden">
         <div class="question-answer">
           <div class="answer-label">Svar</div>
@@ -291,6 +314,7 @@
         <p class="vp-help fb-image-credit" id="preview-question-image-credit" hidden></p>
       </div>
       <div class="fb-controls">
+        <button class="vp-button vp-button--tool vp-button--compact" id="preview-question-hint-button" type="button" aria-controls="preview-question-hint" aria-expanded="false" hidden>Vis hint</button>
         <button class="btn btn-small btn-accent" id="btn-preview-reveal">Vis svar</button>
         <button class="btn btn-small" id="btn-preview-back">Tilbake til brett</button>
       </div>
@@ -319,12 +343,13 @@
 <script src="../js/vyrdepil-util.js?v=1.2"></script>
 <script src="js/storage.js?v=8"></script>
 <script src="js/state.js?v=7"></script>
-<script src="js/images.js?v=6"></script>
+<script src="js/images.js?v=7"></script>
 <script src="js/team-setup.js?v=1"></script>
-<script src="js/board.js?v=13"></script>
-<script src="js/editor.js?v=14"></script>
-<script src="js/export.js?v=5"></script>
-<script src="js/saved.js?v=12"></script>
+<script src="js/hints.js?v=1"></script>
+<script src="js/board.js?v=14"></script>
+<script src="js/editor.js?v=15"></script>
+<script src="js/export.js?v=6"></script>
+<script src="js/saved.js?v=13"></script>
 <script src="js/standard-quizzes.js?v=7"></script>
 <script src="js/app.js?v=11"></script>
 
@@ -332,6 +357,6 @@
 <script src="../js/vyrdepil-design.js?v=1.1"></script>
 <script src="../js/vyrdepil-app-shell.js?v=6"></script>
 <script src="../js/vyrdepil-menu.js"></script>
-<script src="js/weekly-news.js?v=3"></script>
+<script src="js/weekly-news.js?v=4"></script>
 </body>
 </html>

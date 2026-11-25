@@ -3,7 +3,8 @@ import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { newsPeriod, validateDraft, attachSources, buildQuiz, reviewEmail } from './weekly-news.mjs';
+import { newsPeriod, validateDraft, attachSources, archivePrevious, buildQuiz, reviewEmail } from './weekly-news.mjs';
+import { supernyttTopics } from './supernytt.mjs';
 import { readResearch } from './news-research.mjs';
 import { licensedImage, publisherImage, storeWeeklyImages, weeklyImageFile } from './news-images.mjs';
 import { quizQuestions, reviewImages } from './news-review.mjs';
@@ -17,13 +18,14 @@ function exampleDraft() {
   const make = (label, published = period.through) => ({
     question: 'Kva stad gjeld artikkel ' + label + '?',
     answer: 'Oslo',
+    distractors: ['Bergen', 'Trondheim', 'Tromsø'],
     source: { title: 'Ein trygg testartikkel', publisher: 'Prøveavis', url: 'https://example.org/news/' + label,
       published, story: 'test-' + label, importance: 'major' },
     imagePage: '',
     imageAlt: ''
   });
   return {
-    categories: ['snodige nyheter', 'Natur', 'Idrett', 'Kultur og språk', 'Teknologi'].map((name, index) => ({
+    categories: ['snodige nyheiter', 'Natur', 'Idrett', 'Kultur og språk', 'Teknologi'].map((name, index) => ({
       name,
       questions: Array.from({ length: 6 }, (_, number) => make(1 + index * 6 + number))
     })),
@@ -54,7 +56,44 @@ test('utkastet må ha rett fast kategori, korte fasitar og kjelder innanfor peri
   assert.throws(() => validateDraft(tooLong, period), /høgst to ord/);
   const wrongCategory = exampleDraft();
   wrongCategory.categories[0].name = 'Snodige nyheiter';
-  assert.throws(() => validateDraft(wrongCategory, period), /snodige nyheter/);
+  assert.throws(() => validateDraft(wrongCategory, period), /snodige nyheiter/);
+});
+
+test('fire svaralternativ er ulike, og fasiten er med éin gong i alle rutene', async () => {
+  const draft = exampleDraft();
+  const board = await buildQuiz(draft, period);
+  for (const { item } of quizQuestions(board.quiz)) {
+    assert.equal(new Set(item.options).size, 4);
+    assert.equal(item.options.filter(option => option === item.answer).length, 1);
+  }
+  draft.final.entry.distractors[2] = 'OSLO';
+  assert.throws(() => validateDraft(draft, period), /tre ulike/);
+});
+
+test('episodemetadata frå Supernytt er avgrensa til veka', async () => {
+  const calls = [];
+  const results = await supernyttTopics(period, async url => {
+    calls.push(url);
+    return Response.json({ _embedded: { instalments: [
+      { releaseDateOnDemand: '2026-11-24T09:00+01:00', titles: { title: 'Om naturen', subtitle: 'Om dyr og skog.' } },
+      { releaseDateOnDemand: '2026-11-28T09:00+01:00', titles: { title: 'For seint', subtitle: 'Ny episode.' } }
+    ] } });
+  });
+  assert.deepEqual(results, [{ date: '2026-11-24', title: 'Om naturen', summary: 'Om dyr og skog.' }]);
+  assert.deepEqual(calls, ['https://psapi.nrk.no/tv/catalog/series/supernytt/seasons/202611']);
+});
+
+test('arkivet bevarer ei publisert frøde og hoppar over prøvekøyringar', async t => {
+  const folder = mkdtempSync(join(tmpdir(), 'frodebrett-archive-'));
+  t.after(() => rmSync(folder, { recursive: true }));
+  const board = await buildQuiz(exampleDraft(), period);
+  archivePrevious({ ...board, testRun: true }, folder);
+  assert.throws(() => readFileSync(join(folder, 'json', 'weekly-archive', 'index.json')), /ENOENT/);
+  archivePrevious(board, folder);
+  archivePrevious(board, folder);
+  const read = file => JSON.parse(readFileSync(join(folder, 'json', 'weekly-archive', file), 'utf8'));
+  assert.deepEqual(read('index.json').editions, [period]);
+  assert.deepEqual(read(period.edition + '.json'), board);
 });
 
 test('nettsøket tek berre med kjelder det fann, og frøda bruker dei same datoane', () => {
@@ -145,6 +184,7 @@ test('quiz og e-post bruker same fasitar, kjelder, datoperiode og PR', async () 
   assert.equal((body.match(/Fasit – Oslo/g) || []).length, 31);
   assert.match(body, /https:\/\/github\.com\/KjelloveT\/smasider\/pull\/999/);
   assert.match(body, /https:\/\/example\.org\/news\/31/);
+  assert.match(body, /[A-D]\. Trondheim/);
   const previewMail = reviewEmail({ ...data, testRun: true, testLabel: '2' }, {
     prUrl: 'https://github.com/KjelloveT/smasider/pull/999', from: 'test@example.org', to: 'review@example.org'
   });
@@ -193,6 +233,11 @@ test('eit verifisert pressefoto ligg i quizmappa, PR-en og e-posten med same kre
   });
   assert.match(mail, /Content-Type: multipart\/related/);
   assert.match(mail, /Content-ID: <frodebrett-1\.1@vyrdepil>/);
+  const htmlPayload = mail.match(/Content-Type: text\/html; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n([A-Za-z0-9+/=\r\n]+)\r\n--/);
+  const html = Buffer.from(htmlPayload[1], 'base64').toString('utf8');
+  assert.match(html, /<h2[^>]*>snodige nyheiter<\/h2>/);
+  assert.match(html, /<ol type="A"/);
+  assert.match(html, /<strong>Fasit:<\/strong> Oslo/);
   const attachment = mail.match(/Content-Disposition: inline[^\r]+\r\n\r\n([A-Za-z0-9+/=\r\n]+)\r\n--/);
   assert.deepEqual(Buffer.from(attachment[1], 'base64'), imageBytes);
 });
