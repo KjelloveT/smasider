@@ -1,7 +1,8 @@
 /* Frødebrett — lagringslag (wrapper rundt VyrdepilStorage)
  * All state ligg under VyrdepilStorage.frodebrett.state = {
  *   quizzes: [ {id, title, categories:[{name, questions:[{points,question,answer}]}], final, created} ],
- *   teams:   [ {name} ]   // siste lagoppsett, valfritt
+ *   teams:   [ {name} ],  // siste lagoppsett, valfritt
+ *   session: pågåande spel, valfritt
  * }
  */
 (function (root) {
@@ -24,7 +25,8 @@
     return {
       quizzes: Array.isArray(s.quizzes) ? s.quizzes : [],
       teams: Array.isArray(s.teams) ? s.teams : [],
-      seedVersion: typeof s.seedVersion === 'number' ? s.seedVersion : 0
+      seedVersion: typeof s.seedVersion === 'number' ? s.seedVersion : 0,
+      session: s.session
     };
   }
 

@@ -30,35 +30,15 @@
     "question": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["question", "answer", "source", "imagePage", "imageAlt", "pressPhoto"],
+      "required": ["question", "answer", "distractors", "sourceId", "imageAlt", "pressPhotoAlt", "imageSearch"],
       "properties": {
         "question": { "type": "string" },
-        "answer": { "type": "string" },
-        "source": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["title", "publisher", "url", "published", "story", "importance"],
-          "properties": {
-            "title": { "type": "string" },
-            "publisher": { "type": "string" },
-            "url": { "type": "string" },
-            "published": { "type": "string" },
-            "story": { "type": "string" },
-            "importance": { "type": "string", "enum": ["major", "minor"] }
-          }
-        },
-        "imagePage": { "type": "string" },
+        "answer": { "type": "string", "pattern": "^\\S+(?: \\S+)?$" },
+        "distractors": { "type": "array", "items": { "type": "string" }, "minItems": 3, "maxItems": 3 },
+        "sourceId": { "type": "string" },
         "imageAlt": { "type": "string" },
-        "pressPhoto": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["url", "description", "credit"],
-          "properties": {
-            "url": { "type": "string" },
-            "description": { "type": "string" },
-            "credit": { "type": "string" }
-          }
-        }
+        "pressPhotoAlt": { "type": "string" },
+        "imageSearch": { "type": "string" }
       }
     }
   }

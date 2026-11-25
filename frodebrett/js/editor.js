@@ -8,7 +8,7 @@
   const Editor = {};
   const finalFields = {
     category: 'editor-final-category', hint: 'editor-final-clue',
-    question: 'editor-final-question', answer: 'editor-final-answer'
+    question: 'editor-final-question', answer: 'editor-final-answer', questionHint: 'editor-final-hint'
   };
   let baseline;
   let editingQuiz;
@@ -27,6 +27,7 @@
     FB.el('editor-screen').addEventListener('input', () => FB.hide('editor-errors'));
 
     FB.el('btn-close-preview').addEventListener('click', () => FB.closeOverlay('preview-modal'));
+    FB.Hints.bind('preview-question');
     Vy.bindOverlayClose(FB.el('preview-modal'));
     FB.el('btn-preview-reveal').addEventListener('click', () => {
       FB.show('preview-answer');
@@ -153,6 +154,9 @@
     const fields = Vy.el('div', 'fb-question-fields');
     const questionField = field('editor-question-' + question.points, 'Spørsmål', question.question, true);
     const answerField = field('editor-answer-' + question.points, 'Fasitsvar', question.answer, true);
+    const hintField = field('editor-hint-' + question.points, 'Hint (valfritt)',
+      question.hint || FB.Hints.formatOptions(question), true);
+    hintField.input.placeholder = 'Eit teksthint eller eitt svaralternativ på kvar linje';
     function update() {
       const hasImage = FB.Images.valid(question.image);
       prompt.textContent = question.question || (hasImage ? 'Biletspørsmål' : '');
@@ -170,8 +174,13 @@
       question.answer = answerField.input.value.trim();
       update();
     });
+    hintField.input.addEventListener('input', () => {
+      question.hint = hintField.input.value.trim();
+      delete question.options;
+      update();
+    });
     fields.append(questionField.label, answerField.label);
-    body.append(fields, editImage(question, question.points + ' poeng', update));
+    body.append(fields, hintField.label, editImage(question, question.points + ' poeng', update));
     details.append(summary, body);
     return details;
   }
@@ -367,6 +376,7 @@
     FB.show('preview-question');
     FB.el('preview-question-text').textContent = q.points + ' poeng: ' + q.question;
     FB.Images.show('preview-question-image', q);
+    FB.Hints.prepare('preview-question', q);
     FB.el('preview-answer-text').textContent = q.answer;
     FB.hide('preview-answer');
     FB.el('preview-modal').querySelector('.preview-modal').scrollTop = 0;
@@ -392,6 +402,7 @@
     S.editorFinalImage = { image: final?.image, imageAlt: final?.imageAlt, imageCredit: final?.imageCredit };
     FB.el('editor-final-image').replaceChildren(editImage(S.editorFinalImage, 'finalspørsmålet'));
     Object.entries(finalFields).forEach(([key, id]) => { FB.el(id).value = final?.[key] || ''; });
+    if (!final?.questionHint) FB.el('editor-final-hint').value = FB.Hints.formatOptions(final);
     FB.el('final-round-toggle').checked = Boolean(final);
     showFinalFields();
     updateSaveLabel();
