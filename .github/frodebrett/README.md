@@ -1,6 +1,6 @@
 # Vekas nyheitsfrøde
 
-GitHub Actions startar Codex laurdag klokka 08.15 norsk tid. Frøda dekkjer sju heile kalenderdøgn frå førre laurdag til og med fredag. Ho har fem kategoriar med seks spørsmål kvar og ein finale. Den faste kategorien heiter «snodige nyheter».
+GitHub Actions startar Codex laurdag klokka 08.15 norsk tid. Frøda dekkjer sju heile kalenderdøgn frå førre laurdag til og med fredag. Ho har fem kategoriar med seks spørsmål kvar og ein finale, laga for 5.–10. trinn. Den faste kategorien heiter «snodige nyheiter». Kvart spørsmål har fire svaralternativ bak «Vis hint».
 
 Fem nettsøk finn hovudsaker i Noreg og verda, vurderer kor store dei er og hentar daterte kjelder. Codex får kjeldene og [redaksjonsinstruksen](weekly-news-prompt.md). Valideringa sjekkar fem kategoriar, kjelder, datoperiode, fasitlengd, høgst to spørsmål per hending og høgst to spørsmål frå småsaker på heile brettet. Ein eigen jobb lagar ein PR mot main med quizfila og tilhøyrande biletfiler. E-posten inneheld spørsmåla, fasitane, artikkellenkjene, bileta og PR-lenkja. Redaktøren godkjenner og flettar inn PR-en manuelt.
 
@@ -25,7 +25,9 @@ Bruk [Google sitt oppsett for app-passord](https://support.google.com/accounts/a
 
 Jobben hentar relevante, krediterte pressefoto frå den oppgjevne kjeldeartikkelen når biletet er tilgjengeleg i eit støtta format og innanfor storleiksgrensa. Han kan òg ta inn bilete frå Wikimedia Commons med oppgjeve opphav og støtta open lisens. PR-skildringa viser bileta frå commiten, og e-posten har dei same bileta bygde inn. I spelet kjem kjelde og kreditering fram saman med fasiten.
 
-GitHub-PR-en og Azure-førehandsvisinga er offentlege. Redaktøren vurderer kvart pressefoto og fjernar eventuelle bilete som ikkje skal publiserast før merge.
+Minst 15 brettspørsmål må ha nedlasta biletfiler for at jobben skal opprette ein PR og sende e-post. Bruk gjerne eit fritt Wikimedia-illustrasjonsbilete når saka manglar eit eigna pressefoto. GitHub-PR-en og Azure-førehandsvisinga er offentlege. Redaktøren vurderer kvart pressefoto før merge.
+
+Tittel og kort omtale frå Supernytt hjelper nettsøket å prioritere saker for born og ungdom. Fasiten kjem frå daterte artiklar. Når ei ny frøde blir publisert, ligg den førre i arkivet med bileta sine.
 
 Når redaktøren har vurdert eit pressefoto, kan det leggjast til lokalt på greina for vekas PR. Bruk eit JPEG-, PNG- eller WebP-bilete på høgst 195 kB og ei lokal JSON-fil med felta title, author, publisher, source, rights og alt. Bruk cropped: true dersom biletet er skore til. Køyr **node .github/frodebrett/add-reviewed-photo.mjs 1.1 bilete.jpg kreditering.json** frå rota av repoet og legg den oppdaterte quizfila til i PR-en. Her viser 1.1 til fyrste spørsmål i fyrste kategori. Skriv **finale** for finalespørsmålet.
 

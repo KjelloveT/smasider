@@ -12,6 +12,24 @@
   flex-wrap: wrap; gap: 12px;
 }
 .fb-section-head :is(h2, h3) { margin: 0; }
+
+.fb-weekly-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(9rem, 14rem);
+  gap: clamp(12px, 3vw, 24px);
+  align-items: center;
+}
+.fb-weekly-art { display: block; width: 100%; height: auto; border-radius: 6px; }
+.fb-question-hint { margin-block: 12px; text-align: start; overflow-wrap: anywhere; }
+.fb-hint-options { margin-block: .375rem 0; padding-inline-start: 1.75rem; }
+.fb-hint-options li + li { margin-block-start: .25rem; }
+.fb-hint-text { margin: 0; white-space: pre-wrap; }
+#weekly-news-archive[hidden], .fb-question-hint[hidden], button[id$="-hint-button"][hidden] { display: none; }
+
+@media (max-width: 520px) {
+  .fb-weekly-layout { grid-template-columns: minmax(0, 1fr); }
+  .fb-weekly-art { width: min(62%, 14rem); justify-self: center; }
+}
 #game-screen > * + * { margin-block-start: 16px; }
 #editor-screen, #quiz-selection {
   max-inline-size: 1120px; margin-inline: auto;

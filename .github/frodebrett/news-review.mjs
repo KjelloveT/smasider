@@ -13,7 +13,8 @@ export function quizQuestions(quiz) {
 }
 
 function creditText(credit) {
-  return [credit.publisher, credit.author, credit.license].filter(Boolean).join(' · ');
+  return [credit.illustration ? 'Illustrasjonsbilete' : '', credit.publisher, credit.author, credit.license]
+    .filter(Boolean).join(' · ');
 }
 
 function reviewText({ period, quiz, testRun }, prUrl) {
@@ -23,6 +24,7 @@ function reviewText({ period, quiz, testRun }, prUrl) {
     const suggestion = question.suggestedPressPhoto;
     return [
       number + '. ' + question.question,
+      ...(question.options ?? []).map((option, index) => 'ABCD'[index] + '. ' + option),
       'Fasit – ' + question.answer,
       'Kjelde – ' + publisher + ', «' + title + '», ' + published,
       url,
@@ -75,9 +77,9 @@ function httpsLink(value) {
   }
 }
 
-function htmlLine(line) {
-  const url = line.startsWith('https://') && httpsLink(line);
-  return url ? '<a href="' + escapeHtml(url) + '">' + escapeHtml(line) + '</a>' : escapeHtml(line);
+function htmlLink(value, title) {
+  const url = httpsLink(value);
+  return url ? '<a href="' + escapeHtml(url) + '">' + escapeHtml(title) + '</a>' : escapeHtml(title);
 }
 
 function reviewPhotos(quiz, readPhoto) {
@@ -93,6 +95,39 @@ function reviewPhotos(quiz, readPhoto) {
   return photos;
 }
 
+function reviewHtml(data, prUrl, photos) {
+  const { quiz, period, testRun } = data;
+  const bySlot = new Map(photos.map(photo => [photo.slot, photo]));
+  const para = 'style="margin:8px 0"';
+  const small = 'style="margin:8px 0;font-size:14px"';
+  function question(item, slot, heading) {
+    const photo = bySlot.get(slot);
+    const { title, url, published, publisher } = item.source;
+    const options = item.options?.length ? '<ol type="A" style="margin:6px 0;padding-left:24px">'
+      + item.options.map(option => '<li>' + escapeHtml(option) + '</li>').join('') + '</ol>' : '';
+    const picture = photo ? '<div style="margin:12px 0"><img width="440" style="max-width:100%;height:auto" src="cid:'
+      + photo.id + '" alt="' + escapeHtml(photo.alt) + '"><p ' + small + '>'
+      + escapeHtml(creditText(photo.credit)) + ' · ' + htmlLink(photo.credit.source, 'Biletkjelde')
+      + (photo.credit.licenseUrl ? ' · ' + htmlLink(photo.credit.licenseUrl, 'Lisens') : '') + '</p></div>' : '';
+    return '<li style="margin:0 0 12px;padding:10px 12px;background:#fff9e9;border:1px solid #d8d7c9">'
+      + '<p ' + para + '><strong>' + escapeHtml(heading) + '</strong> ' + escapeHtml(item.question) + '</p>'
+      + options + '<p ' + para + '><strong>Fasit:</strong> ' + escapeHtml(item.answer) + '</p>'
+      + '<p ' + small + '>' + htmlLink(url, publisher + ' · ' + title) + ' · ' + escapeHtml(published) + '</p>'
+      + picture + '</li>';
+  }
+  const categories = quiz.categories.map(({ name, questions }, col) =>
+    '<h2 style="margin:26px 0 8px">' + escapeHtml(name) + '</h2><ol style="margin:0;padding-left:20px">'
+    + questions.map((item, row) => question(item, (col + 1) + '.' + (row + 1), item.points + ' poeng')).join('') + '</ol>');
+  return '<html lang="nn"><body style="margin:0;color:#000;font-family:system-ui,sans-serif;line-height:1.5">'
+    + '<div style="max-width:700px;margin:auto;padding:18px"><h1 style="margin:0">Vekas nyheitsfrøde</h1><p '
+    + para + '>' + (testRun ? 'Prøvekøyring · ' : '')
+    + escapeHtml(dateFormat.formatRange(new Date(period.from), new Date(period.through))) + ' · 30 spørsmål og finale</p>'
+    + '<p ' + para + '>' + htmlLink(prUrl, 'Opne PR-en for redaksjonell gjennomgang') + '</p>'
+    + categories.join('') + '<h2>Finale · ' + escapeHtml(quiz.final.category) + '</h2>'
+    + (quiz.final.hint ? '<p ' + para + '><strong>Hint før innsats:</strong> ' + escapeHtml(quiz.final.hint) + '</p>' : '')
+    + '<ol style="margin:0;padding-left:20px">' + question(quiz.final, 'finale', '') + '</ol></div></body></html>';
+}
+
 export function reviewEmail(data, { prUrl, from, to, readPhoto }) {
   const email = /^[A-Z0-9.!#$%&'*+/=?^`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   if (!email.test(from) || !email.test(to)) throw Error('Avsendar og mottakar må vere gyldige e-postadresser.');
@@ -103,13 +138,8 @@ export function reviewEmail(data, { prUrl, from, to, readPhoto }) {
   const body = reviewText(data, prUrl);
   const plain = encodedPart('text/plain; charset=utf-8', body);
   const photos = reviewPhotos(data.quiz, readPhoto);
-  const figures = photos.map(({ slot, id, alt, credit }) => '<figure style="margin:1em 0"><img width="480" '
-    + 'style="max-width:100%;height:auto" src="cid:' + id + '" alt="' + escapeHtml(alt) + '"><figcaption>'
-    + escapeHtml('Bilete ' + slot + ' · ' + creditText(credit)) + ' · ' + htmlLine(credit.source) + '</figcaption></figure>');
-  const html = '<html lang="nn"><body><h1>Vekas nyheitsfrøde</h1>' + figures.join('')
-    + '<p>' + body.split('\n').map(htmlLine).join('<br>') + '</p></body></html>';
   const related = photos.length ? multipart('related', [
-    encodedPart('text/html; charset=utf-8', html),
+    encodedPart('text/html; charset=utf-8', reviewHtml(data, prUrl, photos)),
     ...photos.map(photo => encodedPart('image/' + photo.format, photo.bytes, [
       'Content-ID: <' + photo.id + '>',
       'Content-Disposition: inline; filename="bilete-' + photo.slot + '.' + photo.format + '"'

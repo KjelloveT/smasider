@@ -54,7 +54,7 @@ jobs:
           output-file: ${{ runner.temp }}/weekly-draft.json
           sandbox: read-only
           safety-strategy: drop-sudo
-          codex-args: '["--ephemeral", "--output-schema", ".github/frodebrett/weekly-news.schema.json"]'
+          codex-args: '["--ephemeral", "--output-schema", "${{ runner.temp }}/weekly-draft.schema.json"]'
       - name: Kontroller utkastet
         id: validate
         if: steps.period.outputs.ready == 'true'
@@ -80,6 +80,12 @@ jobs:
         with:
           ref: main
           persist-credentials: false
+      - name: Hent same generatorkode som utkastjobben brukte
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.sha }}
+          path: .weekly-generator
+          persist-credentials: false
       - name: Stadfest tilgang til å opprette PR
         env:
           PR_TOKEN: ${{ secrets.FRODEBRETT_PR_TOKEN }}
@@ -99,7 +105,7 @@ jobs:
           quiz="frodebrett/json/weekly-news.json"
           check_paths() {
             if ! grep -Fqx "$quiz" <<< "$1" ||
-              grep -qvEx '^frodebrett/json/(weekly-news\.json|weekly-media/[0-9a-f]{24}\.(jpg|png|webp))$' <<< "$1"; then
+              grep -qvEx '^frodebrett/json/(weekly-news\.json|weekly-media/[0-9a-f]{24}\.(jpg|png|webp)|weekly-archive/(index|[0-9]{4}-[0-9]{2}-[0-9]{2})\.json)$' <<< "$1"; then
               echo "::error::Vekegreina må innehalde quizfila og berre tillatne quizbilete."
               exit 1
             fi
@@ -121,7 +127,7 @@ jobs:
             git fetch --depth=1 origin "refs/heads/$branch"
             commit=$(git rev-parse FETCH_HEAD)
           else
-            node .github/frodebrett/weekly-news.mjs build
+            node .weekly-generator/.github/frodebrett/weekly-news.mjs build
             git switch -c "$branch"
             git add -A -- frodebrett/json
             check_paths "$(git diff --cached --name-only)"
@@ -151,7 +157,7 @@ jobs:
           biletbruk før du godkjenner og flettar inn PR-en.
           EOF
           git show "${WEEKLY_COMMIT}:frodebrett/json/weekly-news.json" > "$RUNNER_TEMP/weekly-reviewed.json"
-          node .github/frodebrett/weekly-news.mjs review >> "$RUNNER_TEMP/weekly-pr.md"
+          node .weekly-generator/.github/frodebrett/weekly-news.mjs review >> "$RUNNER_TEMP/weekly-pr.md"
           url=$(gh api --method POST "repos/$GITHUB_REPOSITORY/pulls" \
             -f 'base=main' -f "head=$WEEKLY_BRANCH" -f "title=Frødebrett · Nyheitsfrøda $WEEKLY_EDITION" \
             -F "body=@$RUNNER_TEMP/weekly-pr.md" --jq .html_url)

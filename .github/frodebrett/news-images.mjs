@@ -1,20 +1,24 @@
 import { createHash } from 'node:crypto';
-import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const commons = 'https://commons.wikimedia.org';
 const imageHosts = new Set(['https://upload.wikimedia.org', 'https://thumb.wikimedia.org']);
-const imageLimit = 195_000;
+export const imageLimit = 450_000;
 const userAgent = 'Vyrdepil-Frodebrett/1.0 (https://github.com/KjelloveT/smasider)';
 const pressHosts = [
   'nrk.no', 'tv2.no', 'vg.no', 'dagbladet.no', 'aftenposten.no', 'nettavisen.no', 'e24.no', 'dn.no', 'bt.no',
   'adressa.no', 'abcnyheter.no', 'morgenbladet.no', 'klassekampen.no', 'radioh.no',
   'apnews.com', 'reuters.com', 'bbc.com', 'bbc.co.uk', 'euronews.com', 'theguardian.com',
-  'cnn.com', 'nytimes.com', 'cnbc.com', 'nvidia.com', 'regjeringen.no', 'stortinget.no', 'olympics.com',
-  'fotball.no', 'fifa.com', 'uefa.com', 'skiforbundet.no', 'worldathletics.org'
+  'cnn.com', 'nytimes.com', 'cnbc.com', 'abcnews.com', 'antaranews.com', 'techradar.com', 'nvidia.com',
+  'regjeringen.no', 'stortinget.no', 'olympics.com', 'sportsbasen.no', 'fotball.no', 'fifa.com', 'uefa.com',
+  'skiforbundet.no', 'worldathletics.org', 'forskning.no', 'nrksuper.no', 'framtida.no',
+  'ung.no', 'skysports.com', 'sky.com', 'cbsnews.com', 'space.com', 'nature.com', 'theconversation.com',
+  'abc.net.au', 'formula1.com', 'svt.se', 'yle.fi', 'dr.dk'
 ];
-const pressImageHosts = [...pressHosts, 'nrk.cloud', 'vgcloud.no', 'ichef.bbci.co.uk', 'euro.news',
-  'en-images-on-demand.s3.amazonaws.com'];
+const pressImageHosts = [...pressHosts, 'nrk.cloud', 'vgc.no', 'vgcloud.no', 'ichef.bbci.co.uk', 'euro.news',
+  'i.guim.co.uk', 'i.abcnewsfe.com', 'cdn.mos.cms.futurecdn.net', 'en-images-on-demand.s3.amazonaws.com',
+  'cbsnewsstatic.com', 'skysports.com', 'img.formula1.com', 'cdn.sanity.io', 'svtstatic.se'];
 const photoFolder = 'json/weekly-media';
 const photoName = /^[a-f0-9]{24}\.(jpg|png|webp)$/;
 
@@ -59,7 +63,7 @@ function imageFormat(bytes) {
 
 export function decodeImage(image) {
   const encoded = /^data:image\/(jpeg|png|webp);base64,([A-Za-z0-9+/=]+)$/.exec(image);
-  if (!encoded || image.length > 260100) return null;
+  if (!encoded || image.length > Math.ceil(imageLimit * 4 / 3) + 40) return null;
   const bytes = Buffer.from(encoded[2], 'base64');
   return bytes.length <= imageLimit && imageFormat(bytes) === encoded[1] ? { bytes, format: encoded[1] } : null;
 }
@@ -111,7 +115,7 @@ async function articleMetadata(response) {
 
 export async function publisherImage(source, proposal, fetchPhoto = fetch) {
   const article = pressUrl(source.url, pressHosts);
-  if (!article || !proposal?.credit || !proposal.description) return null;
+  if (!article || !proposal?.description) return null;
   try {
     const metadata = await articleMetadata(await fetchPhoto(article, requestOptions()));
     const images = ['og:image:secure_url', 'og:image', 'twitter:image'].flatMap(key => {
@@ -119,17 +123,19 @@ export async function publisherImage(source, proposal, fetchPhoto = fetch) {
       return value ? [pressUrl(new URL(value, article).href, pressImageHosts)] : [];
     }).filter(Boolean);
     const proposed = new URL(proposal.url);
-    const photo = proposed.href === article.href ? images[0] : images.find(image => image.href === proposed.href);
-    if (!photo || /(?:placeholder|favicon|\/logo[./_-])/i.test(photo.pathname)) return null;
-    const image = await readThumbnail(await fetchPhoto(photo, requestOptions()));
-    if (!image) return null;
-    return {
-      image, imageAlt: proposal.description,
-      imageCredit: {
-        title: proposal.description, author: proposal.credit, publisher: source.publisher,
-        source: article.href, imageUrl: photo.href, license: 'Pressefoto', preserved: true
-      }
-    };
+    const matches = proposed.href === article.href ? images.slice(0, 1) : images.filter(image => image.href === proposed.href);
+    for (const photo of matches) {
+      if (/(?:placeholder|favicon|\/logo[./_-]|default-image)/i.test(photo.pathname)) continue;
+      const image = await readThumbnail(await fetchPhoto(photo, requestOptions()));
+      if (image) return {
+        image, imageAlt: proposal.description,
+        imageCredit: {
+          title: proposal.description, author: proposal.credit || 'Fotograf ikkje oppgjeven', publisher: source.publisher,
+          source: article.href, imageUrl: photo.href, license: 'Pressefoto', preserved: true
+        }
+      };
+    }
+    return null;
   } catch {
     return null;
   }
@@ -143,7 +149,6 @@ export function weeklyImageFile(image) {
 
 export function storeWeeklyImages(items, appDirectory) {
   const folder = join(appDirectory, photoFolder);
-  const kept = new Set();
   for (const item of items) {
     const photo = decodeImage(item.image);
     if (!photo) continue;
@@ -151,50 +156,66 @@ export function storeWeeklyImages(items, appDirectory) {
     const name = hash + '.' + (photo.format === 'jpeg' ? 'jpg' : photo.format);
     mkdirSync(folder, { recursive: true });
     writeFileSync(join(folder, name), photo.bytes);
-    kept.add(name);
     item.image = photoFolder + '/' + name;
   }
-  let files;
-  try {
-    files = readdirSync(folder, { withFileTypes: true });
-  } catch (error) {
-    if (error.code === 'ENOENT') return;
-    throw error;
-  }
-  for (const file of files) {
-    if (file.isFile() && photoName.test(file.name) && !kept.has(file.name)) rmSync(join(folder, file.name));
-  }
+}
+
+async function commonsResults(params, fetchPhoto) {
+  const metadata = new URL('/w/api.php', commons);
+  metadata.search = new URLSearchParams({
+    action: 'query', format: 'json', formatversion: '2', redirects: '1', ...params,
+    prop: 'imageinfo', iiprop: 'url|extmetadata', iiurlwidth: '500',
+    iiextmetadatafilter: 'Artist|LicenseUrl|Restrictions'
+  }).toString();
+  const response = await fetchPhoto(metadata, requestOptions());
+  return response.ok ? (await response.json()).query?.pages ?? [] : [];
+}
+
+async function commonsPhoto(info, alt, fetchPhoto) {
+  const fields = info?.extmetadata;
+  const author = fields?.Artist?.value?.replace(/<[^>]*>/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+  if (!author || /^unknown$/i.test(author) || !fields.LicenseUrl?.value || fields.Restrictions?.value) return null;
+  const rights = licenseCredit(fields.LicenseUrl.value);
+  const source = commonsFile(info.descriptionurl);
+  const thumbnail = new URL(info.thumburl);
+  if (!rights || !source || !imageHosts.has(thumbnail.origin)) return null;
+  const image = await readThumbnail(await fetchPhoto(thumbnail, requestOptions()));
+  return image ? {
+    image, imageAlt: alt,
+    imageCredit: { title: source.slice(5).replace(/_/g, ' '), author, source: info.descriptionurl, ...rights, illustration: true }
+  } : null;
 }
 
 export async function licensedImage(imagePage, alt, fetchPhoto = fetch) {
   try {
     const title = commonsFile(imagePage);
     if (!title || !alt) return null;
-    const metadata = new URL('/w/api.php', commons);
-    metadata.search = new URLSearchParams({
-      action: 'query', format: 'json', formatversion: '2', redirects: '1', titles: title,
-      prop: 'imageinfo', iiprop: 'url|extmetadata', iiurlwidth: '500',
-      iiextmetadatafilter: 'Artist|LicenseUrl|Restrictions'
-    }).toString();
-    const response = await fetchPhoto(metadata, requestOptions());
-    if (!response.ok) return null;
-    const info = (await response.json()).query?.pages?.[0]?.imageinfo?.[0];
-    const fields = info?.extmetadata;
-    const author = fields?.Artist?.value?.replace(/<[^>]*>/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
-    if (!author || /^unknown$/i.test(author) || !fields.LicenseUrl?.value || fields.Restrictions?.value) return null;
-    const rights = licenseCredit(fields.LicenseUrl.value);
-    const source = commonsFile(info.descriptionurl);
-    const thumbnail = new URL(info.thumburl);
-    if (!rights || !source || !imageHosts.has(thumbnail.origin)) return null;
-    const image = await readThumbnail(await fetchPhoto(thumbnail, requestOptions()));
-    if (!image) return null;
-
-    return {
-      image, imageAlt: alt,
-      imageCredit: { title: source.slice(5).replace(/_/g, ' '), author, source: info.descriptionurl, ...rights }
-    };
+    const pages = await commonsResults({ titles: title }, fetchPhoto);
+    return await commonsPhoto(pages[0]?.imageinfo?.[0], alt, fetchPhoto);
   } catch {
     // Uvisse om fil, opphav eller lisens gjev eit spørsmål utan bilete.
     return null;
   }
+}
+
+export async function findLicensedImage(search, alt, fetchPhoto = fetch) {
+  if (typeof search !== 'string' || !alt) return null;
+  const terms = search.normalize('NFKC').replace(/[^\p{L}\p{N} -]+/gu, ' ').trim().split(/\s+/).slice(0, 7);
+  if (!terms[0]) return null;
+  try {
+    const pages = await commonsResults({
+      generator: 'search', gsrnamespace: '6', gsrlimit: '5',
+      gsrsearch: terms.join(' ') + ' filetype:bitmap'
+    }, fetchPhoto);
+    for (const page of pages.sort((a, b) => (a.index ?? 0) - (b.index ?? 0))) {
+      const title = String(page.title || '').toLowerCase();
+      const significant = terms.filter(term => term.length > 2 && !/^(the|and|from|for)$/i.test(term));
+      if (!significant.some(term => title.includes(term.toLowerCase()))) continue;
+      const photo = await commonsPhoto(page.imageinfo?.[0], alt, fetchPhoto);
+      if (photo) return photo;
+    }
+  } catch {
+    // Eit utilgjengeleg eller uklårt bilete blir hoppa over.
+  }
+  return null;
 }

@@ -12,7 +12,7 @@
     json: {
       label: 'Om JSON-fila',
       title: 'Redigerbar JSON-fil',
-      text: 'Send JSON-fila til den du vil dele frøda med. Mottakaren vel «Opne JSON-fil» i Frødebrett og kan deretter redigere eller spele frøda.'
+      text: 'Send JSON-fila til den du vil dele frøda med. Mottakaren vel «Importer JSON» under «Eigne frøder» og kan deretter redigere eller spele frøda.'
     }
   };
   const page = new URL('../index.html', document.currentScript.src);
@@ -29,7 +29,7 @@
     template.innerHTML = await readText(page);
     const markup = template.content;
     const styleSources = [...markup.querySelectorAll('link[rel="stylesheet"]')].map(node => node.getAttribute('href'));
-    const scriptSources = ['vyrdepil-util.js', 'state.js', 'images.js', 'team-setup.js', 'board.js'].map(name =>
+    const scriptSources = ['vyrdepil-util.js', 'state.js', 'images.js', 'team-setup.js', 'hints.js', 'board.js'].map(name =>
       markup.querySelector('script[src*="' + name + '"]').getAttribute('src'));
     const [styles, scripts] = await Promise.all([
       Promise.all(styleSources.map(readText)),
@@ -60,6 +60,10 @@
       question: question.question || '',
       answer: question.answer || ''
     };
+    if (typeof question.hint === 'string' && question.hint.trim()) data.hint = question.hint;
+    if (typeof question.questionHint === 'string' && question.questionHint.trim()) data.questionHint = question.questionHint;
+    const options = FB.Hints.choices(question);
+    if (options) data.options = options;
     if (FB.Images.valid(question.image)) {
       data.image = question.image;
       data.imageAlt = question.imageAlt || '';
@@ -148,7 +152,7 @@ ${code}
   function downloadTemplate() {
     const emptyCategory = () => ({
       name: '',
-      questions: FB.POINTS.map(points => ({ points, question: '', answer: '' }))
+      questions: FB.POINTS.map(points => ({ points, question: '', answer: '', hint: '' }))
     });
     Vy.downloadJson({
       app: 'frodebrett',
@@ -158,13 +162,14 @@ ${code}
         'Fyll ut tittel og 2–6 kategoriar med ulike namn. Kvar kategori skal ha seks spørsmål, eitt for kvar av poengverdiane 100, 200, 300, 400, 500 og 1000.',
         'Lat spørsmåla bli vanskelegare med poengverdien. Kvart spørsmål skal peike på eitt tydeleg fasitsvar utan å røpe det.',
         'Skriv fasitsvar på eitt eller to ord, eller eit tal med eventuell eining. Gje svar utan forklaringar.',
+        'Hint i kvar rute er valfritt. Skriv eit teksthint eller eitt svaralternativ på kvar linje i feltet hint.',
         'Fyll ut finalen med kategori, valfritt hint, spørsmål og kort fasitsvar. Set final til null om brukaren vil spele utan finale.',
         'Behald app, version og quiz samt feltnamna i malen. Fjern _instruksar. Lever berre gyldig JSON utan Markdown eller kodegjerde.'
       ],
       quiz: {
         title: '',
         categories: [emptyCategory(), emptyCategory()],
-        final: { category: '', hint: '', question: '', answer: '' }
+        final: { category: '', hint: '', question: '', answer: '', questionHint: '' }
       }
     }, 'frodebrett_tom_mal.json');
   }
