@@ -350,7 +350,6 @@
       const header = document.createElement('div');
       header.className = 'jeopardy-category';
       header.style.background = color;
-      header.style.color = FB.textOn(color);
       header.textContent = cat.name;
       board.appendChild(header);
     });

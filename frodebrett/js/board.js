@@ -117,7 +117,6 @@
       const badge = document.createElement('span');
       badge.className = 'team-badge';
       badge.style.background = team.color;
-      badge.style.color = FB.textOn(team.color);
       badge.textContent = team.name;
       card.appendChild(badge);
 
@@ -149,7 +148,6 @@
     const name = document.createElement('span');
     name.className = 'turn-name';
     name.style.background = team.color;
-    name.style.color = FB.textOn(team.color);
     name.textContent = team.name;
     el.appendChild(label);
     el.appendChild(name);
@@ -175,7 +173,6 @@
       const header = document.createElement('div');
       header.className = 'jeopardy-category';
       header.style.background = color;
-      header.style.color = FB.textOn(color);
       header.style.gridColumn = ci + 1;
       header.style.gridRow = 1;
       header.textContent = category.name;
@@ -256,7 +253,6 @@
     const q = S.currentQuestion;
     const header = FB.el('question-header');
     header.style.backgroundColor = q.color;
-    header.style.color = FB.textOn(q.color);
     FB.el('question-category').textContent = q.category;
     FB.el('question-text').textContent = q.question;
     FB.Images.show('question-image', q);
@@ -325,7 +321,6 @@
     const badge = document.createElement('span');
     badge.className = 'team-badge';
     badge.style.background = team.color;
-    badge.style.color = FB.textOn(team.color);
     badge.textContent = team.name;
     row.appendChild(badge);
 
@@ -451,7 +446,6 @@
       const badge = document.createElement('span');
       badge.className = 'team-badge';
       badge.style.background = team.color;
-      badge.style.color = FB.textOn(team.color);
       badge.textContent = team.name;
       label.appendChild(badge);
       const sc = document.createElement('span');
@@ -578,8 +572,9 @@
   };
 
   Board.showWinnerModal = function (winner) {
-    FB.el('winner-name').textContent = winner.name;
-    FB.el('winner-name').style.color = 'var(--text)';
+    const winnerName = FB.el('winner-name');
+    winnerName.textContent = winner.name;
+    winnerName.style.backgroundColor = winner.color;
     FB.el('winner-score').textContent = winner.score + ' poeng';
 
     // Podium (topp 3)
@@ -591,7 +586,8 @@
       if (!t) { el.style.visibility = 'hidden'; return; }
       el.style.visibility = 'visible';
       const nm = document.createElement('span');
-      nm.className = 'podium-name';
+      nm.className = 'podium-name team-badge';
+      nm.style.backgroundColor = t.color;
       nm.textContent = t.name;
       const pl = document.createElement('span');
       pl.className = 'podium-place';

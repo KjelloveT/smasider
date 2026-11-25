@@ -107,6 +107,7 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .fb-quiz-card .vp-actions { gap: 8px; }
 
 /* ===== Poengtavle + tur ===== */
+.team-badge, .turn-name, .jeopardy-category, .question-category, .final-category-display { color: #fff; }
 .teams-score { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
 .team-score {
   display: flex; justify-content: space-between; align-items: center; gap: 10px;
@@ -222,7 +223,7 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 /* ===== Finalerunde ===== */
 .final-category-display {
   font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900; text-align: center;
-  padding: 16px; background: var(--accent); color: var(--text-on-accent);
+  padding: 16px; background: var(--vp-frame, #142820);
   border: 3px solid var(--border); box-shadow: 4px 4px 0 var(--shadow); margin-bottom: 8px;
 }
 .final-betting, .final-clue, .final-question-text { margin-bottom: 16px; }
@@ -314,19 +315,22 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 /* ===== Vinnar ===== */
 .winner-modal { text-align: center; }
 .winner-title { font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 12px; }
-.winner-name { font-size: 1.6rem; font-weight: 900; color: var(--text); }
+.winner-name { font-size: 1.6rem; font-weight: 900; white-space: normal; overflow-wrap: anywhere; }
 .winner-score { font-size: 1.2rem; font-weight: 700; color: var(--muted); margin-bottom: 18px; }
-.winner-podium { display: flex; justify-content: center; align-items: flex-end; gap: 12px; margin-bottom: 20px; min-height: 140px; }
+.winner-podium {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 104px));
+  justify-content: center; gap: 12px; margin-bottom: 20px; min-height: 140px;
+}
 .podium-step {
   display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 6px;
-  width: clamp(64px, 22vw, 90px); border: 3px solid var(--border); box-shadow: 3px 3px 0 var(--shadow);
+  min-width: 0; border: 3px solid var(--border); box-shadow: 3px 3px 0 var(--shadow);
   padding: 8px 4px; color: #000;
 }
-.podium-name { font-weight: 800; font-size: 0.8rem; line-height: 1.1; word-break: break-word; }
+.podium-name { font-size: 0.8rem; line-height: 1.1; padding: 2px 4px; white-space: normal; overflow-wrap: anywhere; }
 .podium-place { font-weight: 900; font-size: 1.4rem; }
-.podium-1st { height: 120px; background: #ffd54a; }
-.podium-2nd { height: 92px; background: #cfd4da; }
-.podium-3rd { height: 70px; background: #e0a463; }
+.podium-1st { margin-block-start: 20px; background: #ffd54a; }
+.podium-2nd { margin-block-start: 48px; background: #cfd4da; }
+.podium-3rd { margin-block-start: 70px; background: #e0a463; }
 
 @media print {
   @page { size: A4 portrait; margin: 12mm; }
