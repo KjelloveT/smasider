@@ -121,9 +121,9 @@ export function validateDraft(draft, period, sources) {
     }
     const distractors = item.distractors;
     if (!Array.isArray(distractors) || distractors.length !== 3
-      || !distractors.every(option => safeText(option, 65) && normalized(option) && option.split(/\s+/u).length <= 2)
+      || !distractors.every(option => safeText(option, 65) && normalized(option))
       || new Set([item.answer, ...distractors].map(normalized)).size !== 4) {
-      throw Error(context + ' treng tre ulike, korte svaralternativ i tillegg til fasiten.');
+      throw Error(context + ' treng tre ulike svaralternativ i tillegg til fasiten.');
     }
     const key = normalized(item.question);
     if (!key || questions.has(key)) throw Error(context + ' manglar ei spørsmålsformulering eller gjentek eit anna spørsmål.');

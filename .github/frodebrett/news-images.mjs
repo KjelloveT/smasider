@@ -14,11 +14,13 @@ const pressHosts = [
   'regjeringen.no', 'stortinget.no', 'olympics.com', 'sportsbasen.no', 'fotball.no', 'fifa.com', 'uefa.com',
   'skiforbundet.no', 'worldathletics.org', 'forskning.no', 'nrksuper.no', 'framtida.no',
   'ung.no', 'skysports.com', 'sky.com', 'cbsnews.com', 'space.com', 'nature.com', 'theconversation.com',
-  'abc.net.au', 'formula1.com', 'svt.se', 'yle.fi', 'dr.dk'
+  'abc.net.au', 'formula1.com', 'svt.se', 'yle.fi', 'dr.dk', 'nasa.gov', 'channelnewsasia.com',
+  'lemonde.fr', 'kyivindependent.com', 'unicef.org', 'brecorder.com'
 ];
 const pressImageHosts = [...pressHosts, 'nrk.cloud', 'vgc.no', 'vgcloud.no', 'ichef.bbci.co.uk', 'euro.news',
   'i.guim.co.uk', 'i.abcnewsfe.com', 'cdn.mos.cms.futurecdn.net', 'en-images-on-demand.s3.amazonaws.com',
-  'cbsnewsstatic.com', 'skysports.com', 'img.formula1.com', 'cdn.sanity.io', 'svtstatic.se'];
+  'cbsnewsstatic.com', 'skysports.com', 'img.formula1.com', 'cdn.sanity.io', 'svtstatic.se',
+  'mediacorp.sg', 'lemde.fr'];
 const photoFolder = 'json/weekly-media';
 const photoName = /^[a-f0-9]{24}\.(jpg|png|webp)$/;
 
@@ -165,7 +167,7 @@ async function commonsResults(params, fetchPhoto) {
   metadata.search = new URLSearchParams({
     action: 'query', format: 'json', formatversion: '2', redirects: '1', ...params,
     prop: 'imageinfo', iiprop: 'url|extmetadata', iiurlwidth: '500',
-    iiextmetadatafilter: 'Artist|LicenseUrl|Restrictions'
+    iiextmetadatafilter: 'Artist|LicenseUrl|LicenseShortName|Copyrighted|Restrictions|ImageDescription'
   }).toString();
   const response = await fetchPhoto(metadata, requestOptions());
   return response.ok ? (await response.json()).query?.pages ?? [] : [];
@@ -174,8 +176,11 @@ async function commonsResults(params, fetchPhoto) {
 async function commonsPhoto(info, alt, fetchPhoto) {
   const fields = info?.extmetadata;
   const author = fields?.Artist?.value?.replace(/<[^>]*>/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
-  if (!author || /^unknown$/i.test(author) || !fields.LicenseUrl?.value || fields.Restrictions?.value) return null;
-  const rights = licenseCredit(fields.LicenseUrl.value);
+  if (!author || /^unknown$/i.test(author) || fields.Restrictions?.value || !info.thumburl) return null;
+  const publicDomain = /^public domain$/i.test(fields.LicenseShortName?.value ?? '')
+    && /^false$/i.test(fields.Copyrighted?.value ?? '');
+  const rights = (fields.LicenseUrl?.value && licenseCredit(fields.LicenseUrl.value))
+    || (publicDomain && { license: 'Public Domain', licenseUrl: 'https://creativecommons.org/publicdomain/mark/1.0/' });
   const source = commonsFile(info.descriptionurl);
   const thumbnail = new URL(info.thumburl);
   if (!rights || !source || !imageHosts.has(thumbnail.origin)) return null;
@@ -202,17 +207,20 @@ export async function findLicensedImage(search, alt, fetchPhoto = fetch) {
   if (typeof search !== 'string' || !alt) return null;
   const terms = search.normalize('NFKC').replace(/[^\p{L}\p{N} -]+/gu, ' ').trim().split(/\s+/).slice(0, 7);
   if (!terms[0]) return null;
+  const significant = terms.filter(term => term.length > 2 && !/^(the|and|from|for)$/i.test(term));
   try {
-    const pages = await commonsResults({
-      generator: 'search', gsrnamespace: '6', gsrlimit: '5',
-      gsrsearch: terms.join(' ') + ' filetype:bitmap'
-    }, fetchPhoto);
-    for (const page of pages.sort((a, b) => (a.index ?? 0) - (b.index ?? 0))) {
-      const title = String(page.title || '').toLowerCase();
-      const significant = terms.filter(term => term.length > 2 && !/^(the|and|from|for)$/i.test(term));
-      if (!significant.some(term => title.includes(term.toLowerCase()))) continue;
-      const photo = await commonsPhoto(page.imageinfo?.[0], alt, fetchPhoto);
-      if (photo) return photo;
+    const searches = new Set([terms.join(' '), terms.slice(0, 3).join(' ')]);
+    for (const query of searches) {
+      const pages = await commonsResults({
+        generator: 'search', gsrnamespace: '6', gsrlimit: '6', gsrsearch: query + ' filetype:bitmap'
+      }, fetchPhoto);
+      for (const page of pages.sort((a, b) => (a.index ?? 0) - (b.index ?? 0))) {
+        const info = page.imageinfo?.[0];
+        const description = (page.title + ' ' + (info?.extmetadata?.ImageDescription?.value ?? '')).toLowerCase();
+        if (!significant.some(term => description.includes(term.toLowerCase()))) continue;
+        const photo = await commonsPhoto(info, alt, fetchPhoto).catch(() => null);
+        if (photo) return photo;
+      }
     }
   } catch {
     // Eit utilgjengeleg eller uklårt bilete blir hoppa over.
