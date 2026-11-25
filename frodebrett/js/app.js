@@ -10,6 +10,7 @@
   App.init = function () {
     App.bindNavigation();
     FB.Board.bind();
+    FB.Session.bind();
     FB.Editor.bind();
     FB.Export.bindHelp();
     FB.Saved.bind();

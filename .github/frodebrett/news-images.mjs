@@ -10,6 +10,7 @@ const pressHosts = [
   'nrk.no', 'tv2.no', 'vg.no', 'dagbladet.no', 'aftenposten.no', 'nettavisen.no', 'e24.no', 'dn.no', 'bt.no',
   'adressa.no', 'abcnyheter.no', 'morgenbladet.no', 'klassekampen.no', 'radioh.no',
   'apnews.com', 'reuters.com', 'bbc.com', 'bbc.co.uk', 'euronews.com', 'theguardian.com',
+  'aljazeera.com', 'yna.co.kr', 'elpais.com', 'aol.com', 'oslo.kommune.no',
   'cnn.com', 'nytimes.com', 'cnbc.com', 'abcnews.com', 'antaranews.com', 'techradar.com', 'nvidia.com',
   'regjeringen.no', 'stortinget.no', 'olympics.com', 'sportsbasen.no', 'fotball.no', 'fifa.com', 'uefa.com',
   'skiforbundet.no', 'worldathletics.org', 'forskning.no', 'nrksuper.no', 'framtida.no',
@@ -20,7 +21,7 @@ const pressHosts = [
 const pressImageHosts = [...pressHosts, 'nrk.cloud', 'vgc.no', 'vgcloud.no', 'ichef.bbci.co.uk', 'euro.news',
   'i.guim.co.uk', 'i.abcnewsfe.com', 'cdn.mos.cms.futurecdn.net', 'en-images-on-demand.s3.amazonaws.com',
   'cbsnewsstatic.com', 'skysports.com', 'img.formula1.com', 'cdn.sanity.io', 'svtstatic.se',
-  'mediacorp.sg', 'lemde.fr'];
+  'mediacorp.sg', 'lemde.fr', 'hermes.media.transform.aol.com', 'hermes.media.static.aol.com'];
 const photoFolder = 'json/weekly-media';
 const photoName = /^[a-f0-9]{24}\.(jpg|png|webp)$/;
 

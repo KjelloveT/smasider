@@ -32,6 +32,8 @@ body.vp-home-page {
   .vp-home-updates > summary { display: none; }
 }
 .vp-home-note .vp-home-kicker { margin-bottom: 12px; }
+.vp-home-news-art { display: block; width: min(100%, 188px); height: auto; margin: 0 auto 8px; }
+.vp-home-news-title { margin: 0 0 6px; font-size: 1.25rem; }
 .vp-home-note p:last-child { margin-bottom: 0; }
 .vp-home-note a { font-weight: 750; }
 #appSections { display: grid; gap: 22px; }

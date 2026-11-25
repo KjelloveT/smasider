@@ -21,6 +21,7 @@
     currentQuestion: null,
     dailyDoubleCell: null,
     answeredCells: new Set(),
+    finalStage: null,
     finalBets: {},
     activeTeamId: null,      // kven som er på tur (UX6)
     pendingAward: null,      // {teamId, value} venter på stadfesting (UX2)
@@ -38,13 +39,17 @@
   FB.isOverlayOpen = (id) => Vy.modalOpen(FB.el(id));
   FB.escapeHtml = Vy.escapeHtml;
 
-  // Svart eller kvit tekst som gjev best kontrast mot ein hex-bakgrunn (§3.2).
+  // Svart eller kvit tekst som gjev best kontrast mot ein hex-bakgrunn.
   FB.textOn = (hex) => {
     const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
-    if (!m) return '#1a1a1a';
+    if (!m) return '#000000';
     const n = parseInt(m[1], 16);
-    const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
-    const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-    return lum > 0.6 ? '#1a1a1a' : '#ffffff';
+    const linear = channel => {
+      const value = channel / 255;
+      return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+    };
+    const r = linear((n >> 16) & 255), g = linear((n >> 8) & 255), b = linear(n & 255);
+    const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    return luminance > 0.179 ? '#000000' : '#ffffff';
   };
 })(window);

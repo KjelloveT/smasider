@@ -22,15 +22,15 @@
               "11 gardar",
               "8 gardar"
             ],
-            "image": "json/weekly-media/b8fc4869909580174edef711.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Barn hens",
+            "image": "json/weekly-media/751f06120d212e7df34a6021.jpg",
+            "imageAlt": "Nærbilete av eit raudt varsel om smittsam dyresjukdom.",
             "imageCredit": {
-              "title": "Barn hens.jpg",
-              "author": "USDA",
-              "source": "https://commons.wikimedia.org/wiki/File:Barn_hens.jpg",
-              "license": "Public Domain",
-              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-              "illustration": true
+              "title": "Nærbilete av eit raudt varsel om smittsam dyresjukdom.",
+              "author": "Tor Erik Schrøder / NTB",
+              "publisher": "Radio Haugaland",
+              "source": "https://radioh.no/tester-nye-fjorfehold-for-fugleinfluensa-fortsatt-ikke-fullstendig-oversikt/",
+              "license": "Pressefoto",
+              "imageUrl": "https://radioh.no/wp-content/uploads/2026/11/ntb-1298485-wRggX4pQNNw-925-925x600.jpg"
             },
             "source": {
               "title": "Tester nye fjørfehold for fugleinfluensa: – Fortsatt ikke fullstendig oversikt",
@@ -81,15 +81,15 @@
               "Polen",
               "Kina"
             ],
-            "image": "json/weekly-media/7f1ace25d6af67b450138308.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Sotrabrua-2003-12-21",
+            "image": "json/weekly-media/f85eacb00f78ff2a0d40e4cf.jpg",
+            "imageAlt": "Bygginga av den nye Sotrabrua sett ovanfrå.",
             "imageCredit": {
-              "title": "Sotrabrua-2003-12-21.jpg",
-              "author": "No machine-readable author provided. Gunnarbu~commonswiki assumed (based on copyright claims).",
-              "source": "https://commons.wikimedia.org/wiki/File:Sotrabrua-2003-12-21.jpg",
-              "license": "Public Domain",
-              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-              "illustration": true
+              "title": "Bygginga av den nye Sotrabrua sett ovanfrå.",
+              "author": "Lukas Hauge Klemsdal",
+              "publisher": "Bergens Tidende",
+              "source": "https://www.bt.no/nyheter/okonomi/i/Pv9xob/brodekket-skulle-vaert-ferdig-montert-i-september-staar-fortsatt-paa-lager-i-kina",
+              "license": "Pressefoto",
+              "imageUrl": "https://premium.vgc.no/v2/images/e3891438-5877-333b-8fa5-c808fb9b64be?fit=crop&format=auto&h=2850&w=1900&s=21b8a8a32a8d4748643a893893678c272ab16d82"
             },
             "source": {
               "title": "Brodekket skulle vært ferdig montert i september. Står fortsatt på lager i Kina.",
@@ -110,15 +110,15 @@
               "London",
               "Edinburgh"
             ],
-            "image": "json/weekly-media/d7be0d5445a8d557e7ab389c.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Norway Spruce forest, Latvia Фото0314",
+            "image": "json/weekly-media/6bc8034ad9350f251332f50a.jpg",
+            "imageAlt": "Dei to ordførarane sagar i stammen til grana.",
             "imageCredit": {
-              "title": "Norway Spruce forest, Latvia Фото0314.jpg",
-              "author": "Dimaniznik",
-              "source": "https://commons.wikimedia.org/wiki/File:Norway_Spruce_forest,_Latvia_%D0%A4%D0%BE%D1%82%D0%BE0314.jpg",
-              "license": "CC BY-SA 3.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-              "illustration": true
+              "title": "Dei to ordførarane sagar i stammen til grana.",
+              "author": "Sturlason / Oslo kommune",
+              "publisher": "Oslo kommune",
+              "source": "https://aktuelt.oslo.kommune.no/oslos-christmas-tree-is-coming-to-london-town",
+              "license": "Redaksjonell bruk",
+              "imageUrl": "https://img.oslo.kommune.no/_aktuelt-prod_/Bilder/oslos-christmas-tree-is-coming-to-london-town/Aktuelt-1.png?w=800&aspect_ratio=16%3A9&gravity=50p%2C50p"
             },
             "source": {
               "title": "When is the Trafalgar Square Christmas tree lit in 2026? Norway's 21-metre spruce felled near Oslo by the Lord Mayor of Westminster",
@@ -146,6 +146,16 @@
               "published": "2026-11-21",
               "story": "korttidsutleige-bergen",
               "importance": "major"
+            },
+            "image": "json/weekly-media/56906b70e851c64e73dad9b2.jpg",
+            "imageAlt": "Det kvite trehuset som er omtala i saka.",
+            "imageCredit": {
+              "title": "Det kvite trehuset som er omtala i saka.",
+              "author": "Eivind Senneset",
+              "publisher": "E24",
+              "source": "https://e24.no/naeringsliv/i/7P0LxB/fortviler-over-airbnb-naboen-kynisk-utnyttelse",
+              "license": "Pressefoto",
+              "imageUrl": "https://akamai.vgc.no/v2/images/37d1ef96-d5e8-39b8-842b-acc4c313a76e?fit=crop&h=675&upscale=true&w=1200&s=0accf114942716be3f138797cbb5011fcae761fe"
             }
           },
           {
@@ -165,6 +175,16 @@
               "published": "2026-11-24",
               "story": "fugleinfluensa-noreg",
               "importance": "major"
+            },
+            "image": "json/weekly-media/8828e20477507fe1ec02b2a9.jpg",
+            "imageAlt": "Varselskilt om smittsam dyresjukdom på ein port.",
+            "imageCredit": {
+              "title": "Varselskilt om smittsam dyresjukdom på ein port.",
+              "author": "Tor Erik Schrøder / NTB",
+              "publisher": "Radio Haugaland",
+              "source": "https://radioh.no/mattilsynet-influensarammet-oppdretter-flyttet-fugler-uten-lov/",
+              "license": "Pressefoto",
+              "imageUrl": "https://radioh.no/wp-content/uploads/2026/11/ntb-1297832-qPje4XsRb58-925-925x600.jpg"
             }
           }
         ]
@@ -189,6 +209,16 @@
               "published": "2026-11-23",
               "story": "europeisk-elevstreik",
               "importance": "major"
+            },
+            "image": "json/weekly-media/6b429fff27930be5be169f39.jpg",
+            "imageAlt": "Demonstrantar ber eit stort banner gjennom ei gate i London.",
+            "imageCredit": {
+              "title": "Demonstrantar ber eit stort banner gjennom ei gate i London.",
+              "author": "Isabel Infantes / Reuters",
+              "publisher": "Reuters / Yahoo News",
+              "source": "https://malaysia.news.yahoo.com/student-protests-held-across-europe-162507151.html",
+              "license": "Pressefoto",
+              "imageUrl": "https://s.yimg.com/lo/mysterio/api/43ddfd635f3c34f5cfa8562dcbb3d63ac2dcc7548a95200d481f031f6a684adb/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Freuters.com%2Fb98fc1787e4ae87ab39667516b0ca185.jpg_up.jpg"
             }
           },
           {
@@ -201,14 +231,15 @@
               "16 år",
               "18 år"
             ],
-            "image": "json/weekly-media/bcb5ca5bd2a6bfa7f508f79d.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Social Media App Icons On The Screen of A Smartphone",
+            "image": "json/weekly-media/2eaa8f2a8594244ec9fe4f0f.jpg",
+            "imageAlt": "Ein mobil med ikon for sosiale medium sett over skuldra på ein person.",
             "imageCredit": {
-              "title": "Social Media App Icons On The Screen of A Smartphone.jpg",
-              "author": "mikemacmarketing",
-              "source": "https://commons.wikimedia.org/wiki/File:Social_Media_App_Icons_On_The_Screen_of_A_Smartphone.jpg",
-              "license": "CC BY 2.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "title": "Ein mobil med ikon for sosiale medium sett over skuldra på ein person.",
+              "author": "Matt Cardy / Getty Images",
+              "publisher": "The Guardian",
+              "source": "https://www.theguardian.com/uk-news/2026/nov/18/social-media-ban-once-in-a-generation-study",
+              "license": "Pressefoto",
+              "imageUrl": "https://i.guim.co.uk/img/media/ee69770a776940e2892feb15709c3eb47dd97272/366_0_4169_3334/master/4169.jpg?crop=none&dpr=1&s=none&width=465",
               "illustration": true
             },
             "source": {
@@ -237,6 +268,17 @@
               "published": "2026-11-23",
               "story": "fugleinfluensa-frankrike",
               "importance": "major"
+            },
+            "image": "json/weekly-media/782345d999465c8f5a1ba151.jpg",
+            "imageAlt": "Prøverøyr merkte med fugleinfluensa framfor eit fransk flagg.",
+            "imageCredit": {
+              "title": "Prøverøyr merkte med fugleinfluensa framfor eit fransk flagg.",
+              "author": "Dado Ruvic / Reuters",
+              "publisher": "Reuters / Yahoo News",
+              "source": "https://malaysia.news.yahoo.com/france-reports-bird-flu-outbreak-170847237.html",
+              "license": "Presseillustrasjon",
+              "imageUrl": "https://hermes.media.transform.aol.com/5743aa3d663d694de4ff1c4952d983eb2705c3a0/w_1200,c_scale,f_auto,q_auto/https://hermes.media.static.aol.com/media/2026/11/23/cf7f84f3-b9c3-3b12-a3e8-084e79253b5d/401dcef7-ec78-4b7b-8157-362a371e4e9f.jpg",
+              "illustration": true
             }
           },
           {
@@ -256,6 +298,17 @@
               "published": "2026-11-22",
               "story": "cop31-klimatoppmote",
               "importance": "major"
+            },
+            "image": "json/weekly-media/12ce089604cf1835c5bc6466.jpg",
+            "imageAlt": "Leiaren for klimatoppmøtet snakkar med rådgjevarane sine.",
+            "imageCredit": {
+              "title": "Leiaren for klimatoppmøtet snakkar med rådgjevarane sine.",
+              "author": "Murad Sezer / Reuters",
+              "publisher": "Al Jazeera",
+              "source": "https://www.aljazeera.com/amp/news/2026/11/22/fossil-fuel-impasse-pushes-cop31-climate-talks-into-second-day-of-overtime",
+              "license": "Pressefoto",
+              "cropped": true,
+              "imageUrl": "https://www.aljazeera.com/wp-content/uploads/2026/11/reuters_6b025ad2-1795316434.jpg?resize=1920%2C1440"
             }
           },
           {
@@ -304,6 +357,16 @@
               "published": "2026-11-23",
               "story": "europeisk-elevstreik",
               "importance": "major"
+            },
+            "image": "json/weekly-media/5ef47ae7705c9413d803a8f6.jpg",
+            "imageAlt": "Eit opptog med banner og raude flagg under den internasjonale streiken i Madrid.",
+            "imageCredit": {
+              "title": "Eit opptog med banner og raude flagg under den internasjonale streiken i Madrid.",
+              "author": "Susana Vera / Reuters",
+              "publisher": "Reuters / Yahoo News",
+              "source": "https://malaysia.news.yahoo.com/student-protests-held-across-europe-162507151.html",
+              "license": "Pressefoto",
+              "imageUrl": "https://s.yimg.com/lo/mysterio/api/63bd2dd96c4bda7cfae3cf4dd00a623341746f9a1e251e4b704231a8febc778f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Freuters.com%2F5d7046eb618742e5fa66bed0a7d58beb.jpg"
             }
           }
         ]
@@ -347,6 +410,16 @@
               "published": "2026-11-19",
               "story": "toppmote-shenzhen",
               "importance": "major"
+            },
+            "image": "json/weekly-media/8c7c631174ec8da457738814.jpg",
+            "imageAlt": "Dei tre statsleiarane går saman gjennom ein hall.",
+            "imageCredit": {
+              "title": "Dei tre statsleiarane går saman gjennom ein hall.",
+              "author": "White House press pool / AP / Yonhap",
+              "publisher": "Yonhap News Agency",
+              "source": "https://en.yna.co.kr/view/AEN20261119001356315?section=national/diplomacy",
+              "license": "Pressefoto",
+              "imageUrl": "https://img3.yna.co.kr/photo/ap/2026/11/19/PAP20261119203601009_P4.jpg"
             }
           },
           {
@@ -359,15 +432,15 @@
               "Brussel",
               "Paris"
             ],
-            "image": "json/weekly-media/38b15464829dc192fa96826a.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Ukrainian and EU flags in Kherson",
+            "image": "json/weekly-media/f17a21b63e40417850175949.jpg",
+            "imageAlt": "Europeiske leiarar helsar på Ukrainas president framfor pressefotografane.",
             "imageCredit": {
-              "title": "Ukrainian and EU flags in Kherson.jpg",
-              "author": "Defense of Ukraine",
-              "source": "https://commons.wikimedia.org/wiki/File:Ukrainian_and_EU_flags_in_Kherson.jpg",
-              "license": "Public Domain",
-              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-              "illustration": true
+              "title": "Europeiske leiarar helsar på Ukrainas president framfor pressefotografane.",
+              "author": "Guido Bergmann / Presse- und Informationsamt der Bundesregierung",
+              "publisher": "Den tyske forbundsregjeringa",
+              "source": "https://www.bundesregierung.de/breg-en/media-center/coalition-of-the-willing-ukraine-2462154",
+              "license": "Pressefoto",
+              "imageUrl": "https://www.bundesregierung.de/resource/blob/1955500/2462172/7d8e5dd71a7bfbae4f9c23d116db20e8/01-data.jpg"
             },
             "source": {
               "title": "The Latest: Kushner says he believes Russia is ‘comfortable’ with NATO-like security for Ukraine",
@@ -424,6 +497,16 @@
               "published": "2026-11-19",
               "story": "toppmote-shenzhen",
               "importance": "major"
+            },
+            "image": "json/weekly-media/5d2807916ef248cf41909e64.jpg",
+            "imageAlt": "Dei tre statsleiarane står saman til fotografering før møtet.",
+            "imageCredit": {
+              "title": "Dei tre statsleiarane står saman til fotografering før møtet.",
+              "author": "White House press pool / AFP / Yonhap",
+              "publisher": "Yonhap News Agency",
+              "source": "https://en.yna.co.kr/view/AEN20261119001356315?section=national/diplomacy",
+              "license": "Pressefoto",
+              "imageUrl": "https://img2.yna.co.kr/photo/etc/af/2026/11/19/PAF20261119152701009_P4.jpg"
             }
           },
           {
@@ -436,15 +519,17 @@
               "Telefonsystema",
               "Datasystema"
             ],
-            "image": "json/weekly-media/999887a55ec51888f50851f1.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Chernobyl nuclear plant2",
+            "image": "json/weekly-media/3fffb78030956495e8de8130.jpg",
+            "imageAlt": "Arkivfoto av IAEA-folk ved kjøletårna på eit atomkraftverk.",
             "imageCredit": {
-              "title": "Chernobyl nuclear plant2.jpg",
-              "author": "Tiia Monto",
-              "source": "https://commons.wikimedia.org/wiki/File:Chernobyl_nuclear_plant2.jpg",
-              "license": "CC BY-SA 3.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-              "illustration": true
+              "title": "Arkivfoto av IAEA-folk ved kjøletårna på eit atomkraftverk.",
+              "author": "Diego Candano Laris / IAEA",
+              "publisher": "2EU Brussels",
+              "source": "https://2eu.brussels/index.php/en/news/eu-warns-nuclear-safety-in-ukraine-is-deteriorating-after-27-complete-power-losses-at-zaporizhzhia",
+              "license": "CC BY 2.0",
+              "imageUrl": "https://2eu.brussels/media/10189/conversions/4970-nuclear-original-800.jpg",
+              "illustration": true,
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/"
             },
             "source": {
               "title": "IAEA, Grossi give updates on Ukraine, Iran, North Korea, nuclear power growth projections",
@@ -470,15 +555,15 @@
               "Erling Haaland",
               "Antonio Nusa"
             ],
-            "image": "json/weekly-media/4b6324be647b851005258e77.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Assoc football match",
+            "image": "json/weekly-media/a2a1d6a9b11cd706df0500c4.jpg",
+            "imageAlt": "Danske spelarar ute på bana etter kampen mot Noreg.",
             "imageCredit": {
-              "title": "Assoc football match.jpg",
-              "author": "Unknown author Unknown author",
-              "source": "https://commons.wikimedia.org/wiki/File:Assoc_football_match.jpg",
-              "license": "Public Domain",
-              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-              "illustration": true
+              "title": "Danske spelarar ute på bana etter kampen mot Noreg.",
+              "author": "fodboldbilleder.dk",
+              "publisher": "ForDanmark / Dansk Boldspil-Union",
+              "source": "https://mit.fordanmark.dk/nyheder/2026/november/sent-dansk-nederlag-mod-norge/",
+              "license": "Pressefoto",
+              "imageUrl": "https://mit.fordanmark.dk/media/anubo0go/lra00639.jpg?height=500&v=1dd76deae8a4f20&width=900"
             },
             "source": {
               "title": "Norge klar for titteljakt – se hva som venter i nasjonsligaen",
@@ -499,15 +584,15 @@
               "5–0",
               "6–1"
             ],
-            "image": "json/weekly-media/10e841447f1a06c93e9a344b.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Estadi Johan Cruyff",
+            "image": "json/weekly-media/87a9db0d56ac339edc86866d.jpg",
+            "imageAlt": "Ein Barcelona-spelar feirar på bana i kampen mot Servette.",
             "imageCredit": {
-              "title": "Estadi Johan Cruyff.jpg",
-              "author": "Wilnel José Verdú Guerrero",
-              "source": "https://commons.wikimedia.org/wiki/File:Estadi_Johan_Cruyff.jpg",
-              "license": "CC BY-SA 4.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-              "illustration": true
+              "title": "Ein Barcelona-spelar feirar på bana i kampen mot Servette.",
+              "author": "Alejandro García / EFE",
+              "publisher": "El País",
+              "source": "https://elpais.com/deportes/futbol/2026-11-19/el-barcelona-golea-al-servette-suizo-con-un-triplete-de-claudia-pina.html",
+              "license": "Pressefoto",
+              "imageUrl": "https://imagenes.elpais.com/resizer/v2/2GF3P6NTYBJ7BIU4AZTC7HEYDE.jpg?auth=2a1849e5b5596f2f466fd2d8bc719c38db1d0c644b13995a2cc20dd22ef5da58&width=1200"
             },
             "source": {
               "title": "2026/27 Women's Champions League: All the league phase fixtures and results",
@@ -606,15 +691,15 @@
               "Bayern München",
               "Arsenal"
             ],
-            "image": "json/weekly-media/f8493141a7af4056bf044ed3.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Football corner flag 2017",
+            "image": "json/weekly-media/d0a2b9d16a76fdca657c289c.jpg",
+            "imageAlt": "Spelarar varmar opp på flaumlysbanen før kampen.",
             "imageCredit": {
-              "title": "Football corner flag 2017.jpg",
-              "author": "Santeri Viinamäki",
-              "source": "https://commons.wikimedia.org/wiki/File:Football_corner_flag_2017.jpg",
-              "license": "CC BY-SA 4.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-              "illustration": true
+              "title": "Spelarar varmar opp på flaumlysbanen før kampen.",
+              "author": "JSS / Le Progrès",
+              "publisher": "Le Progrès",
+              "source": "https://www.leprogres.fr/sport/2026/11/19/suivez-arsenal-ol-lyonnes",
+              "license": "Pressefoto",
+              "imageUrl": "https://cdn-s-www.leprogres.fr/images/bb0c3557-ebdc-467d-80ea-baed73036781/NW_listA/jss-1795117113.jpg"
             },
             "source": {
               "title": "2026/27 Women's Champions League: All the league phase fixtures and results",
@@ -640,14 +725,15 @@
               "Eitt døgn",
               "Ein time"
             ],
-            "image": "json/weekly-media/c680dad8d867b05e2e6d6496.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Voyager spacecraft",
+            "image": "json/weekly-media/d4d0badd58bf1a9343804803.jpg",
+            "imageAlt": "Kunstnarframstilling av Voyager med den store parabolantenna.",
             "imageCredit": {
-              "title": "Voyager spacecraft.jpg",
-              "author": "NASA/JPL",
-              "source": "https://commons.wikimedia.org/wiki/File:Voyager_spacecraft.jpg",
-              "license": "Public Domain",
-              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "title": "Kunstnarframstilling av Voyager med den store parabolantenna.",
+              "author": "NASA / JPL-Caltech",
+              "publisher": "NASA Science",
+              "source": "https://science.nasa.gov/photojournal/model-of-voyager-artist-concept/",
+              "license": "Kjeldeillustrasjon",
+              "imageUrl": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia14/pia14111/PIA14111.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
               "illustration": true
             },
             "source": {
@@ -669,15 +755,15 @@
               "Eit jordskred",
               "Ein storm"
             ],
-            "image": "json/weekly-media/4c3c065f7f7b1ea9b89a1d23.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Aerial view of Iwo Jima in September 2014",
+            "image": "json/weekly-media/80844d416bcefd97c3225916.jpg",
+            "imageAlt": "To satellittbilete viser kystlinja på øya på ulike tidspunkt.",
             "imageCredit": {
-              "title": "Aerial view of Iwo Jima in September 2014.JPG",
-              "author": "U.S. Navy photo by Mass Communication Specialist 1st Class Trevor Welsh",
-              "source": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Iwo_Jima_in_September_2014.JPG",
-              "license": "Public Domain",
-              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-              "illustration": true
+              "title": "To satellittbilete viser kystlinja på øya på ulike tidspunkt.",
+              "author": "Michala Garrison / NASA Earth Observatory",
+              "publisher": "NASA Earth Observatory",
+              "source": "https://science.nasa.gov/earth/earth-observatory/eruption-extends-iwo-jimas-beach/",
+              "license": "Satellittbilete",
+              "imageUrl": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/iotd/2026/eruption-enlarges-iwo-jima%E2%80%99s-beach/iwojima_oli2_20261111_th.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg"
             },
             "source": {
               "title": "Eruption Extends Iwo Jima’s Beach",
@@ -698,14 +784,15 @@
               "Jensen Huang",
               "Colette Kress"
             ],
-            "image": "json/weekly-media/70c82c4bfae33510c4fbf958.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Asus Strix RTX 4090",
+            "image": "json/weekly-media/372a3af0577b87b0b58c0e16.jpg",
+            "imageAlt": "Den grøne Nvidia-logoen frå pressemeldinga.",
             "imageCredit": {
-              "title": "Asus Strix RTX 4090.jpg",
-              "author": "Benlisquare",
-              "source": "https://commons.wikimedia.org/wiki/File:Asus_Strix_RTX_4090.jpg",
-              "license": "CC BY-SA 4.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "title": "Den grøne Nvidia-logoen frå pressemeldinga.",
+              "author": "NVIDIA",
+              "publisher": "NVIDIA / GlobeNewswire",
+              "source": "https://www.globenewswire.com/de/news-release/2026/11/23/3408381/0/en/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director.html",
+              "license": "Presseillustrasjon",
+              "imageUrl": "https://ml.globenewswire.com/Resource/Download/ad3b9553-6933-40b1-adfd-2ed199cd141c",
               "illustration": true
             },
             "source": {
@@ -727,15 +814,15 @@
               "Merry Spruce",
               "Jolly Cheery"
             ],
-            "image": "json/weekly-media/8cccfc9a9fe21dea6e5d485c.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Trafalgar Square Christmas tree9",
+            "image": "json/weekly-media/6bc8034ad9350f251332f50a.jpg",
+            "imageAlt": "Ordførarane ved grana som skal sendast som gåve.",
             "imageCredit": {
-              "title": "Trafalgar Square Christmas tree9.jpg",
-              "author": "Anneke_B",
-              "source": "https://commons.wikimedia.org/wiki/File:Trafalgar_Square_Christmas_tree9.jpg",
-              "license": "CC BY-SA 2.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-              "illustration": true
+              "title": "Ordførarane ved grana som skal sendast som gåve.",
+              "author": "Sturlason / Oslo kommune",
+              "publisher": "Oslo kommune",
+              "source": "https://aktuelt.oslo.kommune.no/oslos-christmas-tree-is-coming-to-london-town",
+              "license": "Redaksjonell bruk",
+              "imageUrl": "https://img.oslo.kommune.no/_aktuelt-prod_/Bilder/oslos-christmas-tree-is-coming-to-london-town/Aktuelt-1.png?w=800&aspect_ratio=16%3A9&gravity=50p%2C50p"
             },
             "source": {
               "title": "When is the Trafalgar Square Christmas tree lit in 2026? Norway's 21-metre spruce felled near Oslo by the Lord Mayor of Westminster",
