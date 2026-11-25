@@ -1,5 +1,11 @@
 {
-  "app": "frodebrett",
   "version": 1,
-  "editions": []
+  "editions": [
+    {
+      "edition": "2026-11-23",
+      "from": "2026-11-16",
+      "through": "2026-11-22"
+    }
+  ],
+  "app": "frodebrett"
 }
