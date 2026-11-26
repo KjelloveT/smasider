@@ -354,6 +354,243 @@
         "source": "https://commons.wikimedia.org/wiki/File:Silbertafel_Reiss_3_rem.jpg",
         "cropped": true
       }
+    },
+    "3-matematikk": {
+      "image": "json/standard-media/c0981912e9f6685ba9e4e482.jpg",
+      "imageAlt": "Ei tavle i eit undervisningsrom.",
+      "imageCredit": {
+        "title": "Homer E Newell NASA",
+        "author": "Unknown author Unknown author",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Homer_E_Newell_NASA.jpg",
+        "cropped": true
+      }
+    },
+    "4-matematikk": {
+      "image": "json/standard-media/92f43d8d34d04327ad262c05.jpg",
+      "imageAlt": "Blyantar viste på nært hald.",
+      "imageCredit": {
+        "title": "Pencils hb",
+        "author": "Original uploader was Dmgerman at en.wikipedia",
+        "license": "CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pencils_hb.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "cropped": true
+      }
+    },
+    "3-naturfag": {
+      "image": "json/standard-media/cb82438209d17466bf97b182.jpg",
+      "imageAlt": "Grøne plantar i blå potter i eit veksthus.",
+      "imageCredit": {
+        "title": "Cutchogue - Oregon Road - Plant Nursery",
+        "author": "C. G. P. Grey",
+        "license": "CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Cutchogue_-_Oregon_Road_-_Plant_Nursery.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "cropped": true
+      }
+    },
+    "4-naturfag": {
+      "image": "json/standard-media/702fce8007809542d387f133.jpg",
+      "imageAlt": "Ein innsjø mellom fjell og busetnad.",
+      "imageCredit": {
+        "title": "Lake Idro Italy 2005-08-16",
+        "author": "No machine-readable author provided. Marius~commonswiki assumed (based on copyright claims).",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Lake_Idro_Italy_2005-08-16.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "cropped": true
+      }
+    },
+    "3-samfunnsfag": {
+      "image": "json/standard-media/2da08991143978a5a717a217.jpg",
+      "imageAlt": "Ei gruppe ventar langs fortauet om vinteren.",
+      "imageCredit": {
+        "title": "People waiting at bus stop",
+        "author": "Frank Hank",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:People_waiting_at_bus_stop.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "4-samfunnsfag": {
+      "image": "json/standard-media/1664193893551fc7f20a8845.jpg",
+      "imageAlt": "Eit svartkvitt foto frå ei arkeologisk utgraving.",
+      "imageCredit": {
+        "title": "Excavations at Faras 049",
+        "author": "Tadeusz Biniewski",
+        "license": "CC BY-SA 3.0 pl",
+        "source": "https://commons.wikimedia.org/wiki/File:Excavations_at_Faras_049.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/pl/deed.en",
+        "cropped": true
+      }
+    },
+    "3-krle": {
+      "image": "json/standard-media/01113f470ce8d9fe180bbf17.jpg",
+      "imageAlt": "Ei korg med egg som er måla i fleire fargar.",
+      "imageCredit": {
+        "title": "Bg-easter-eggs",
+        "author": "Ikonact",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Bg-easter-eggs.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "cropped": true
+      }
+    },
+    "4-krle": {
+      "image": "json/standard-media/e608669149275a53ca64c614.jpg",
+      "imageAlt": "Farga bøneflagg blæs i vinden i eit steinete fjellandskap.",
+      "imageCredit": {
+        "title": "Kagbeni, Tibetan prayer flags, Mustang, Nepal",
+        "author": "Vyacheslav Argenberg",
+        "license": "CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Kagbeni,_Tibetan_prayer_flags,_Mustang,_Nepal.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "cropped": true
+      }
+    },
+    "3-norsk": {
+      "image": "json/standard-media/f4aadb9818726d0c3ab44332.jpg",
+      "imageAlt": "Eit eldre landskapsfoto montert på lyst papir.",
+      "imageCredit": {
+        "title": "Picture of Polaroid image",
+        "author": "420 xXx.MinecraftGamer.xXx 69",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Picture_of_Polaroid_image.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "4-norsk": {
+      "image": "json/standard-media/14617911d53353676c6dbf13.jpg",
+      "imageAlt": "Eit måleri av folk som lyttar til ein forteljar ute.",
+      "imageCredit": {
+        "title": "The Boyhood of Raleigh title QS:P1476,en:\"The Boyhood of Raleigh \" label QS:Len,\"The Boyhood of Raleigh \" label QS:Lja,\"ローリーの少年時代\" label QS:Lth,\"วัยเด็กของรอลี\" label QS:Lml,\"ദി ബോയ്ഹുഡ് ഓഫ് റാലി\" label QS:Lko,\"롤리의 어린 시절\" label QS:Lru,\"Детство Рэли\" label QS:Lsr,\"Ролијево дечаштво\"",
+        "author": "John Everett Millais",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:John_Everett_Millais_(1829-1896)_-_The_Boyhood_of_Raleigh_-_N01691_-_National_Gallery.jpg",
+        "cropped": true
+      }
+    },
+    "3-engelsk": {
+      "image": "json/standard-media/e462d351658c9ce7eebb4ab1.jpg",
+      "imageAlt": "Ei grønsaksbu sett frå gata.",
+      "imageCredit": {
+        "title": "Westside Market in Manhattan, NYC IMG 5615",
+        "author": "Billy Hathorn",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Westside_Market_in_Manhattan,_NYC_IMG_5615.JPG",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "4-engelsk": {
+      "image": "json/standard-media/fc9c5d22e6e572b8b3d4c707.jpg",
+      "imageAlt": "Salsboder står langs ei gate.",
+      "imageCredit": {
+        "title": "광장 시장",
+        "author": "Yeong-Nam",
+        "license": "CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%EA%B4%91%EC%9E%A5_%EC%8B%9C%EC%9E%A5.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "cropped": true
+      }
+    },
+    "3-kunst-og-handverk": {
+      "image": "json/standard-media/622f19f5470b8706fce021e6.jpg",
+      "imageAlt": "Garn i ulike fargar.",
+      "imageCredit": {
+        "title": "Yarn at Folklife - Stierch",
+        "author": "Sarah Stierch",
+        "license": "CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yarn_at_Folklife_-_Stierch.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "cropped": true
+      }
+    },
+    "4-kunst-og-handverk": {
+      "image": "json/standard-media/9516d097db457782946d17e1.jpg",
+      "imageAlt": "Ein vevd tekstil med raude og lyse mønster.",
+      "imageCredit": {
+        "title": "Warp in Progress",
+        "author": "John Hritz from Ann Arbor, MI, USA",
+        "license": "CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Warp_in_Progress.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "cropped": true
+      }
+    },
+    "3-musikk": {
+      "image": "json/standard-media/86a60c092c7ceb9fcccc1644.jpg",
+      "imageAlt": "Fleire blokkfløyter ligg saman på ei mørk flate.",
+      "imageCredit": {
+        "title": "VariousRecorderFlutes",
+        "author": "Mussklprozz",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:VariousRecorderFlutes.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "cropped": true
+      }
+    },
+    "4-musikk": {
+      "image": "json/standard-media/762c1ab503db0d0f337cfab3.jpg",
+      "imageAlt": "Ein mikrofon sett på nært hald.",
+      "imageCredit": {
+        "title": "Shure mikrofon 55S",
+        "author": "Holger.Ellgaard",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Shure_mikrofon_55S.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "3-kroppsøving": {
+      "image": "json/standard-media/41be781301d5f121d84b71c3.jpg",
+      "imageAlt": "Ein utøvar i lufta over ei sandgrop.",
+      "imageCredit": {
+        "title": "2013 IPC Athletics World Championships - 26072013 - Maximiliano Rodriguez Magi of Spain during the Men's Long jump - T12",
+        "author": "Clément Bucco-Lechat",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2013_IPC_Athletics_World_Championships_-_26072013_-_Maximiliano_Rodriguez_Magi_of_Spain_during_the_Men%27s_Long_jump_-_T12.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "4-kroppsøving": {
+      "image": "json/standard-media/e4b522630f8e98614ea890b6.jpg",
+      "imageAlt": "Klatrarar på ein bratt innandørs vegg med farga felt.",
+      "imageCredit": {
+        "title": "Grimpeurs Voiron 2b",
+        "author": "Romary",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Grimpeurs_Voiron_2b.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "cropped": true
+      }
+    },
+    "3-mat-og-helse": {
+      "image": "json/standard-media/8cc8dc6bd45ac590497774db.jpg",
+      "imageAlt": "Eit måleri av folk som har eit måltid under trea.",
+      "imageCredit": {
+        "title": "The Pic-Nic title QS:P1476,en:\"The Pic-Nic \" label QS:Len,\"The Pic-Nic \" label QS:Lru,\"Пикник\" label QS:Lavk,\"Baera (trutca ke Thomas Cole)\" label QS:Lfr,\"Le Pique-nique\"",
+        "author": "Thomas Cole",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Thomas_Cole%27s_%22The_Picnic%22,_Brooklyn_Museum_IMG_3787.JPG",
+        "cropped": true
+      }
+    },
+    "4-mat-og-helse": {
+      "image": "json/standard-media/6e65e307753595272692c2c2.jpg",
+      "imageAlt": "Eit bakeri med eit opplyst utstillingsvindauge mot gata.",
+      "imageCredit": {
+        "title": "Belgium 2013 (11620905224)",
+        "author": "Bryan Ledgard",
+        "license": "CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Belgium_2013_(11620905224).jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "cropped": true
+      }
     }
   },
   "subjects": {

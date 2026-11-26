@@ -102,12 +102,12 @@
     }
     status.textContent = 'Lastar frødene …';
     const grades = selectedGrades.length ? selectedGrades : gradeNumbers;
-    const covers = load('json/thumbnails.json?v=2').catch(() => ({}));
+    const covers = load('json/thumbnails.json?v=3').catch(() => ({}));
     const loads = selectedThemes.length ? [themeCards(selectedThemes, covers)] : [];
     if (selectedGrades.length || selectedSubjects.length) {
       for (const grade of grades) {
         if (selectedSubjects.length && !selectedSubjects.some(id => (subjects[id].firstGrade ?? 1) <= grade)) continue;
-        loads.push(Promise.all([load('json/standard/' + grade + '.json?v=4'), covers]).then(([pack, thumbnails]) => pack.quizzes
+        loads.push(Promise.all([load('json/standard/' + grade + '.json?v=5'), covers]).then(([pack, thumbnails]) => pack.quizzes
           .filter(standard => !selectedSubjects.length || selectedSubjects.includes(standard.subject))
           .map(standard => {
             const thumbnail = thumbnails.boards?.[standard.thumbnail] ?? thumbnails.subjects?.[standard.subject];
