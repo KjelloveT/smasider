@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const { readFileSync } = require('node:fs');
+const { readFileSync, statSync } = require('node:fs');
 const path = require('node:path');
 const { test } = require('node:test');
 
@@ -24,13 +24,35 @@ function shortAnswer(answer, field) {
 }
 
 function checkMedia(question) {
-  assert.match(question.image, /^data:image\/(?:png|webp);base64,[A-Za-z0-9+/=]+$/);
-  assert.ok(question.image.length <= 280000);
+  if (question.image.startsWith('data:')) {
+    assert.match(question.image, /^data:image\/(?:png|webp);base64,[A-Za-z0-9+/=]+$/);
+    assert.ok(question.image.length <= 280000);
+  } else {
+    assert.match(question.image, /^json\/standard-media\/[a-f0-9]{24}\.jpg$/);
+    const file = statSync(path.join(__dirname, '..', question.image));
+    assert.ok(file.isFile() && file.size > 0 && file.size <= 500000, question.image);
+  }
   nonEmptyText(question.imageAlt, question.question);
   const { title, author, license, source, licenseUrl } = question.imageCredit;
   for (const text of [title, author, license]) nonEmptyText(text, source);
   assert.match(source, /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
   if (license.startsWith('CC ')) assert.match(licenseUrl, /^https:\/\/creativecommons\.org\/licenses\//);
+}
+
+const normalized = value => value.trim().normalize('NFC').toLocaleLowerCase('nn');
+
+function checkNewQuestion(question) {
+  assert.equal(question.options.length, 4, question.question);
+  for (const option of question.options) shortAnswer(option, question.question);
+  const choices = question.options.map(normalized);
+  assert.equal(new Set(choices).size, 4, question.question);
+  assert.ok(choices.includes(normalized(question.answer)), question.question);
+  if (!question.image) return 0;
+
+  checkMedia(question);
+  const wordCount = question.imageKeywords.trim().split(/\s+/u).length;
+  assert.ok(wordCount >= 2 && wordCount <= 4, question.question);
+  return 1;
 }
 
 for (let grade = 1; grade <= 10; grade++) {
@@ -40,33 +62,59 @@ for (let grade = 1; grade <= 10; grade++) {
     assert.equal(pack.grade, grade);
     assert.deepEqual(pack.quizzes.map(quiz => quiz.subject).sort(), [...expected].sort());
 
+    const revised = grade === 1 || grade === 5;
+    const categoryCount = revised ? 5 : 3;
     for (const quiz of pack.quizzes) {
-      assert.equal(quiz.categories.length, 3, quiz.subject);
-      assert.equal(quiz.categories[2].name, 'Snodige fakta', quiz.subject);
-      assert.equal(new Set(quiz.categories.map(category => category.name)).size, 3, quiz.subject);
+      assert.equal(quiz.categories.length, categoryCount, quiz.subject);
+      if (!revised) assert.equal(quiz.categories[2].name, 'Snodige fakta', quiz.subject);
+      assert.equal(new Set(quiz.categories.map(category => category.name)).size, categoryCount, quiz.subject);
       const prompts = new Set();
+      const answers = new Set();
+      let images = 0;
 
       for (const category of quiz.categories) {
         nonEmptyText(category.name, quiz.subject + ' category');
         assert.equal(category.questions.length, 6, category.name);
         for (const pair of category.questions) {
           assert.ok(Array.isArray(pair));
-          assert.equal(pair.length, 2);
-          const [question, answer] = pair;
+          assert.equal(pair.length, revised ? 3 : 2);
+          const [question, answer, details] = pair;
           nonEmptyText(question, category.name + ' question');
           shortAnswer(answer, question);
-          prompts.add(question.trim());
+          prompts.add(normalized(question));
+          if (revised) {
+            images += checkNewQuestion({ ...details, question, answer });
+            answers.add(normalized(answer));
+          }
         }
       }
 
       nonEmptyText(quiz.final.category, quiz.subject + ' final category');
       nonEmptyText(quiz.final.question, quiz.subject + ' final question');
       shortAnswer(quiz.final.answer, quiz.final.question);
-      prompts.add(quiz.final.question.trim());
-      assert.equal(prompts.size, 19, quiz.subject + ' unique prompts');
+      prompts.add(normalized(quiz.final.question));
+      assert.equal(prompts.size, categoryCount * points.length + 1, quiz.subject + ' unike spørsmål');
+      if (revised) {
+        assert.equal(quiz.thumbnail, grade + '-' + quiz.subject);
+        images += checkNewQuestion(quiz.final);
+        answers.add(normalized(quiz.final.answer));
+        assert.equal(answers.size, 31, quiz.subject + ' unike fasitar');
+        assert.ok(images >= 16, quiz.subject + ' minst 16 illustrerte spørsmål');
+      }
     }
   });
 }
+
+test('Alle fag- og temafrøder har lokale miniatyrbilete med kjelder', () => {
+  const { boards, subjects: subjectCovers, themes: themeCovers } = JSON.parse(
+    readFileSync(path.join(__dirname, '../json/thumbnails.json'), 'utf8')
+  );
+  for (const grade of [1, 5]) {
+    for (const subject of subjects) checkMedia(boards[grade + '-' + subject]);
+  }
+  for (const subject of [...subjects, 'utdanningsval']) checkMedia(subjectCovers[subject]);
+  for (const entry of readTheme('index.json')) checkMedia(themeCovers[entry.file]);
+});
 
 test('Land i verda har korte fasitar og innebygde bilete med kjelder', () => {
   const data = readTheme('land-i-verda.json');

@@ -1,0 +1,706 @@
+{
+  "boards": {
+    "1-matematikk": {
+      "image": "json/standard-media/e3f427524a8a1b89f0f17df4.jpg",
+      "imageAlt": "Store, farga leikeklossar i fleire former.",
+      "imageCredit": {
+        "title": "Toyblocks",
+        "author": "Polylerus",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Toyblocks.JPG",
+        "cropped": true
+      }
+    },
+    "5-matematikk": {
+      "image": "json/standard-media/a299f5a6874a8c8a782eda16.jpg",
+      "imageAlt": "Eit måleband til å måle lengd.",
+      "imageCredit": {
+        "title": "Tape Measure 25' Klein Tools",
+        "author": "Klein Tools",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tape_Measure_25%27_Klein_Tools.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "1-naturfag": {
+      "image": "json/standard-media/c56bfaaa4c5a0c43a754449a.jpg",
+      "imageAlt": "Ein blømande plante i ei leirpotte.",
+      "imageCredit": {
+        "title": "\"Meillandine\" Rose in clay pot",
+        "author": "Arch. Attilio Mileto - attilio.mileto@florero.net",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%22Meillandine%22_Rose_in_clay_pot.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "5-naturfag": {
+      "image": "json/standard-media/c1bb82c31d81a482796e8dc9.jpg",
+      "imageAlt": "Vassplantar under eit stort glastak.",
+      "imageCredit": {
+        "title": "Botanical Garden V.L. Komarov Botanical Institute",
+        "author": "User:Владимир Иванов",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Botanical_Garden_V.L._Komarov_Botanical_Institute.jpg",
+        "cropped": true
+      }
+    },
+    "1-samfunnsfag": {
+      "image": "json/standard-media/5944eaf9524fe3e2d75d05b2.jpg",
+      "imageAlt": "Ein open byplass med steinbygg på fleire sider.",
+      "imageCredit": {
+        "title": "Piazza della Signoria",
+        "author": "Samuli Lintula",
+        "license": "CC BY 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Piazza_della_Signoria.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+        "cropped": true
+      }
+    },
+    "5-samfunnsfag": {
+      "image": "json/standard-media/93baf0f8920dc8989b27db61.jpg",
+      "imageAlt": "Eit rådhus sett utanfrå.",
+      "imageCredit": {
+        "title": "Musei Capitolini 20150812",
+        "author": "Suicasmo",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Musei_Capitolini_20150812.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "1-krle": {
+      "image": "json/standard-media/10189be2e5eb18ad8c6bd5ed.jpg",
+      "imageAlt": "Ein lysestake står på eit underlag.",
+      "imageCredit": {
+        "title": "Candlestick (one of a set of eight)",
+        "author": "Creator:Andrew Fogelberg",
+        "license": "CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Candlestick_(one_of_a_set_of_eight)_MET_DP-13265-131.jpg",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "cropped": true
+      }
+    },
+    "5-krle": {
+      "image": "json/standard-media/fe819719ad27e1b0fc66350f.jpg",
+      "imageAlt": "Interiøret i ein synagoge med steinbogar og dekor.",
+      "imageCredit": {
+        "title": "Interior of the Hurva Synagogue - sari 00466",
+        "author": "Eran david",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Interior_of_the_Hurva_Synagogue_-_sari_00466.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "1-norsk": {
+      "image": "json/standard-media/50efd568c8d93872afe48503.jpg",
+      "imageAlt": "Bokhyller, bord og sitjeplassar i eit skulebibliotek.",
+      "imageCredit": {
+        "title": "Tasued students using the library resources",
+        "author": "Ktrogunsola",
+        "license": "CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tasued_students_using_the_library_resources.jpg",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "cropped": true
+      }
+    },
+    "5-norsk": {
+      "image": "json/standard-media/8ae0a7f3b04a31631c11323d.jpg",
+      "imageAlt": "Høge, utskorne bokhyller fulle av bøker.",
+      "imageCredit": {
+        "title": "Interior of Bibliothèque Mazarine 003",
+        "author": "Moonik",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Interior_of_Biblioth%C3%A8que_Mazarine_003.JPG",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "1-engelsk": {
+      "image": "json/standard-media/849256763d635779c9df3c76.jpg",
+      "imageAlt": "Ein gul skulebuss sett på skrå framfrå.",
+      "imageCredit": {
+        "title": "IC CE school bus (shortened chassis)",
+        "author": "Atomic Taco",
+        "license": "CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:IC_CE_school_bus_(shortened_chassis).jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "cropped": true
+      }
+    },
+    "5-engelsk": {
+      "image": "json/standard-media/0519c83572f36bae2beaaacb.jpg",
+      "imageAlt": "Ei blå postkasse er festa på ein steinvegg.",
+      "imageCredit": {
+        "title": "Russia Mailbox of the Russian Post in Moscow",
+        "author": "Leonid Dzhepko / Л.П. Джепко",
+        "license": "CC BY-SA 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Russia_Mailbox_of_the_Russian_Post_in_Moscow.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+        "cropped": true
+      }
+    },
+    "1-kunst-og-handverk": {
+      "image": "json/standard-media/addef95d36eda77c73a47ec3.jpg",
+      "imageAlt": "Fargeblyantar med spissane vende inn mot midten.",
+      "imageCredit": {
+        "title": "Buntstifte -- 2021 -- 9156",
+        "author": "Dietmar Rabich",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Buntstifte_--_2021_--_9156.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "5-kunst-og-handverk": {
+      "image": "json/standard-media/456f7b0f357938a0e1531391.jpg",
+      "imageAlt": "Ei hand formar kanten på eit dekorert leirkar.",
+      "imageCredit": {
+        "title": "Traditional pottery in Nigeria (Ikpu ite) 19",
+        "author": "Chukwukajustice",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Traditional_pottery_in_Nigeria_(Ikpu_ite)_19.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "1-musikk": {
+      "image": "json/standard-media/894ccc6d939e5ca2babc2607.jpg",
+      "imageAlt": "Ei raud og metallfarga tromme med spente snorer.",
+      "imageCredit": {
+        "title": "DrumMozartRegiment",
+        "author": "NPS",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:DrumMozartRegiment.jpg",
+        "cropped": true
+      }
+    },
+    "5-musikk": {
+      "image": "json/standard-media/b9d109d27b1fcde43bd2807c.jpg",
+      "imageAlt": "Musikarar som spelar saman i eit orkester.",
+      "imageCredit": {
+        "title": "National Chamber Orchestra of Armenia",
+        "author": "Սէրուժ Ուրիշեան (Serouj Ourishian)",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:National_Chamber_Orchestra_of_Armenia.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "1-kroppsøving": {
+      "image": "json/standard-media/76b63f50acdaccbc3a92a352.jpg",
+      "imageAlt": "Ein inngjerda leikeplass med tre og leikeapparat.",
+      "imageCredit": {
+        "title": "Argos playground",
+        "author": "NikosLikomitros",
+        "license": "CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Argos_playground.jpg",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "cropped": true
+      }
+    },
+    "5-kroppsøving": {
+      "image": "json/standard-media/86bf5b7920426cfd09a3e1ef.jpg",
+      "imageAlt": "Ei raud løpebane med kvite linjer.",
+      "imageCredit": {
+        "title": "Athletics track",
+        "author": "Elaron",
+        "license": "CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Athletics_track.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "cropped": true
+      }
+    },
+    "1-mat-og-helse": {
+      "image": "json/standard-media/00a13f8a713f685719115d9a.jpg",
+      "imageAlt": "Ein inngjerda kjøkkenhage med plantar på rekkje.",
+      "imageCredit": {
+        "title": "Jardin potager 001",
+        "author": "Arnaud 25",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jardin_potager_001.JPG",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "5-mat-og-helse": {
+      "image": "json/standard-media/49c8cf946ed576d5725712eb.jpg",
+      "imageAlt": "Brød laga av deig.",
+      "imageCredit": {
+        "title": "Korb mit Brötchen",
+        "author": "3268zauber",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Korb_mit_Br%C3%B6tchen.JPG",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    }
+  },
+  "subjects": {
+    "matematikk": {
+      "image": "json/standard-media/3fd4ea4bb97d2304d6d80111.jpg",
+      "imageAlt": "Puslespelbrikker ligg saman.",
+      "imageCredit": {
+        "title": "Jigsaw puzzle 01 by Scouten",
+        "author": "Scouten",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jigsaw_puzzle_01_by_Scouten.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "naturfag": {
+      "image": "json/standard-media/469af1efbb49a6bfaa4102a1.jpg",
+      "imageAlt": "Ei eng med gule blomar og fjell bak.",
+      "imageCredit": {
+        "title": "Blumenwiese bei Obermaiselstein05",
+        "author": "Nikater",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Blumenwiese_bei_Obermaiselstein05.jpg",
+        "cropped": true
+      }
+    },
+    "samfunnsfag": {
+      "image": "json/standard-media/fa87f103c974268ee6910d02.jpg",
+      "imageAlt": "Små hus ved vatnet med bratte fjell bak.",
+      "imageCredit": {
+        "title": "FishingVillage HaLongBay Vietnam (pixinn.net)",
+        "author": "Christophe Meneboeuf",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:FishingVillage_HaLongBay_Vietnam_(pixinn.net).jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "krle": {
+      "image": "json/standard-media/6554c3d4a6c68eac567bebf5.jpg",
+      "imageAlt": "Små lamper av leire med flammar.",
+      "imageCredit": {
+        "title": "Diya set in a rangoli",
+        "author": "siddarth varanasi",
+        "license": "CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Diya_set_in_a_rangoli.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "cropped": true
+      }
+    },
+    "norsk": {
+      "image": "json/standard-media/7eb9bde805a3698293ec09d4.jpg",
+      "imageAlt": "Ein person leitar langs hyllene i eit bibliotek.",
+      "imageCredit": {
+        "title": "SanDiegoCityCollegeLearningResource - bookshelf",
+        "author": "Joe Crawford from Moorpark, California, USA",
+        "license": "CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:SanDiegoCityCollegeLearningResource_-_bookshelf.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "cropped": true
+      }
+    },
+    "engelsk": {
+      "image": "json/standard-media/80e070786f016244e45dfb03.jpg",
+      "imageAlt": "Ein fleirhøg skulebygning sett frå gata.",
+      "imageCredit": {
+        "title": "Школа №2 г. Краснотурьинска",
+        "author": "S. Kleinmichel",
+        "license": "CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A8%D0%BA%D0%BE%D0%BB%D0%B0_%E2%84%962_%D0%B3._%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D1%82%D1%83%D1%80%D1%8C%D0%B8%D0%BD%D1%81%D0%BA%D0%B0.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "cropped": true
+      }
+    },
+    "kunst-og-handverk": {
+      "image": "json/standard-media/aec065d0b538210860127c78.jpg",
+      "imageAlt": "Ei hand arbeider med vassfargar.",
+      "imageCredit": {
+        "title": "Dolceacqua43 - Artista locale mentre dipinge un acquarello",
+        "author": "Dongio",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Dolceacqua43_-_Artista_locale_mentre_dipinge_un_acquarello.jpg",
+        "cropped": true
+      }
+    },
+    "musikk": {
+      "image": "json/standard-media/16ef474d950af48b21c1ba21.jpg",
+      "imageAlt": "Ein svart flygel med loket ope.",
+      "imageCredit": {
+        "title": "Steinway Vienna 002",
+        "author": "Gryffindor",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Steinway_Vienna_002.JPG",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "kroppsøving": {
+      "image": "json/standard-media/1b4b63bcc522b668aa7fd493.jpg",
+      "imageAlt": "Ei basketballbane sett høgt frå tribunen.",
+      "imageCredit": {
+        "title": "Game 3 of the 2006 NBA Finals",
+        "author": "Chris Green ( Chrisg21090 at en.wikipedia )",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Game_3_of_the_2006_NBA_Finals.jpg",
+        "cropped": true
+      }
+    },
+    "mat-og-helse": {
+      "image": "json/standard-media/e922895b37e6622f9ab17278.jpg",
+      "imageAlt": "Eit kjøkken med trebenkar og varmt lys.",
+      "imageCredit": {
+        "title": "Julie child kitchen",
+        "author": "RadioFan ( talk )",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Julie_child_kitchen.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "utdanningsval": {
+      "image": "json/standard-media/af9205dd8dc847b852342850.jpg",
+      "imageAlt": "Ein mørk trepult med mange skuffer.",
+      "imageCredit": {
+        "title": "Bureau table",
+        "author": "John Townsend",
+        "license": "CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Bureau_table_MET_DP108643.jpg",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "cropped": true
+      }
+    }
+  },
+  "themes": {
+    "land-i-verda.json": {
+      "image": "json/standard-media/a977fceb456bb365c22d7809.jpg",
+      "imageAlt": "Ein modell av jordkloden.",
+      "imageCredit": {
+        "title": "The Great Globe, Guyot Hall, Princeton University",
+        "author": "David Keddie",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Great_Globe,_Guyot_Hall,_Princeton_University.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "europa.json": {
+      "image": "json/standard-media/ee53722d2d8d1d379f29c35f.jpg",
+      "imageAlt": "Alpane som eit lyst fjellbelte sett frå satellitt.",
+      "imageCredit": {
+        "title": "Alps 2007-03-13 10.10UTC 1px-250m",
+        "author": "Terra (EOS AM-1) satellite",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Alps_2007-03-13_10.10UTC_1px-250m.jpg",
+        "cropped": true
+      }
+    },
+    "asia.json": {
+      "image": "json/standard-media/af1ef4a5d5bed7b2fe6b106e.jpg",
+      "imageAlt": "Den kinesiske muren følgjer eit høgdedrag.",
+      "imageCredit": {
+        "title": "The Great Wall of China at Jinshanling-edit",
+        "author": "Severin.stalder",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "afrika.json": {
+      "image": "json/standard-media/278ce91c3348fad935f640fd.jpg",
+      "imageAlt": "Kilimanjaro sett frå eit ope landskap.",
+      "imageCredit": {
+        "title": "Kilimanjaro from Amboseli",
+        "author": "Sergey Pesterev",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Kilimanjaro_from_Amboseli.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "nordamerika.json": {
+      "image": "json/standard-media/f7fc104d6c880ae7aede919c.jpg",
+      "imageAlt": "Ei brei kløft med lag av berg.",
+      "imageCredit": {
+        "title": "Canyon River Tree",
+        "author": "Lennart Sikkema",
+        "license": "CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Canyon_River_Tree_(165872763).jpeg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "cropped": true
+      }
+    },
+    "soramerika.json": {
+      "image": "json/standard-media/dca597b3e6fd997842bc9ce8.jpg",
+      "imageAlt": "Snødekte fjelltoppar og ryggar i Andesfjella.",
+      "imageCredit": {
+        "title": "Panoramic view Andes-Chile",
+        "author": "Diego Delso",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Panoramic_view_Andes-Chile.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "oseania.json": {
+      "image": "json/standard-media/504855810b2cd33a430133fe.jpg",
+      "imageAlt": "Eit område ved det store korallrevet.",
+      "imageCredit": {
+        "title": "ISS-45 StoryOfWater, Great Barrier Reef, Australia",
+        "author": "NASA/Kjell Lindgren",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:ISS-45_StoryOfWater,_Great_Barrier_Reef,_Australia.jpg",
+        "cropped": true
+      }
+    },
+    "antarktis.json": {
+      "image": "json/standard-media/14ea0edc50bed4dc6278dc0c.jpg",
+      "imageAlt": "Fjell og is ved ein fjord i Antarktis.",
+      "imageCredit": {
+        "title": "Paradise Harbour, Antarctica (6087257019)",
+        "author": "Liam Quinn from Canada",
+        "license": "CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Paradise_Harbour,_Antarctica_(6087257019).jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "cropped": true
+      }
+    },
+    "utdoydde-dyr.json": {
+      "image": "json/standard-media/d891da2edf5429923bec2bae.jpg",
+      "imageAlt": "Eit spor etter gammalt liv i stein.",
+      "imageCredit": {
+        "title": "Fossil Diversity",
+        "author": "PaleoNeolitic (montage creator)",
+        "license": "CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Fossil_Diversity.png",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "cropped": true
+      }
+    },
+    "fisk.json": {
+      "image": "json/standard-media/36df60385d8dfc39ac4dcf1e.jpg",
+      "imageAlt": "Eit akvarium med grøne plantar og steinar.",
+      "imageCredit": {
+        "title": "Amaterske akvarium",
+        "author": "User Aleš Tošovský",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Amaterske_akvarium.jpg",
+        "cropped": true
+      }
+    },
+    "pattedyr.json": {
+      "image": "json/standard-media/f3f5efff3fef999d245ea3aa.jpg",
+      "imageAlt": "Ein hjort i eit utandørs miljø.",
+      "imageCredit": {
+        "title": "Cervus elaphus Luc Viatour 6",
+        "author": "Lviatour",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Cervus_elaphus_Luc_Viatour_6.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "fuglar.json": {
+      "image": "json/standard-media/4189ea089b518c51ccd266db.jpg",
+      "imageAlt": "Ei gruppe speidar opp mot trekronene med kikkert.",
+      "imageCredit": {
+        "title": "NMAAHC Bird Walk",
+        "author": "Dara Miles Wilson",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:NMAAHC_Bird_Walk.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "disney-filmar.json": {
+      "image": "json/standard-media/95debc8619dbc29544903bbd.jpg",
+      "imageAlt": "Ein eldre zoetrop med bilete langs innsida.",
+      "imageCredit": {
+        "title": "Zoetrope",
+        "author": "Andrew Dunn",
+        "license": "CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Zoetrope.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "cropped": true
+      }
+    },
+    "norsk-fauna.json": {
+      "image": "json/standard-media/8cfd20a003346b717e219796.jpg",
+      "imageAlt": "Ein elg i eit utandørs miljø.",
+      "imageCredit": {
+        "title": "Alaska moose",
+        "author": "Paxson Woelber",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Alaska_moose.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "bilmerke.json": {
+      "image": "json/standard-media/0e9f4cfb04ba6d90fa62583c.jpg",
+      "imageAlt": "Bilar står utstilte i ein hall.",
+      "imageCredit": {
+        "title": "Auto show at the Toronto Armouries",
+        "author": "William James",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Auto_show_at_the_Toronto_Armouries.jpg",
+        "cropped": true
+      }
+    },
+    "fotball-2026.json": {
+      "image": "json/standard-media/98599d7f58b362812f8dc97c.jpg",
+      "imageAlt": "Fotballspelarar i rørsle framfor målet.",
+      "imageCredit": {
+        "title": "Football in Bloomington, Indiana, 1995",
+        "author": "Rick Dikeman",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Football_in_Bloomington,_Indiana,_1995.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "cropped": true
+      }
+    },
+    "kristne-hogtider.json": {
+      "image": "json/standard-media/405d8c317ac942a5b6f9b781.jpg",
+      "imageAlt": "Eit kyrkjebygg sett utanfrå.",
+      "imageCredit": {
+        "title": "Husby-Sjuhundra kyrka",
+        "author": "Atleett",
+        "license": "CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Husby-Sjuhundra_kyrka.jpg",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "cropped": true
+      }
+    },
+    "hogtider-i-islam.json": {
+      "image": "json/standard-media/9159bfd9ccc7d3c7ae86daf4.jpg",
+      "imageAlt": "Den innvendige hallen i ein moské med mange lys.",
+      "imageCredit": {
+        "title": "Masjid e Nabawi Interior 2",
+        "author": "King Eliot",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Masjid_e_Nabawi_Interior_2.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "jodiske-hogtider.json": {
+      "image": "json/standard-media/fe819719ad27e1b0fc66350f.jpg",
+      "imageAlt": "Interiøret i ein synagoge med steinbogar og dekor.",
+      "imageCredit": {
+        "title": "Interior of the Hurva Synagogue - sari 00466",
+        "author": "Eran david",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Interior_of_the_Hurva_Synagogue_-_sari_00466.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "hinduistiske-hogtider.json": {
+      "image": "json/standard-media/9a32b6680ac35ae7235e8985.jpg",
+      "imageAlt": "Eit hindutempel med lyse og raude bygg rundt.",
+      "imageCredit": {
+        "title": "Pashupatinath Temple Nepal IMG 7933 2018 15",
+        "author": "Harry Paudyal",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pashupatinath_Temple_Nepal_IMG_7933_2018_15.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "buddhistiske-hogtider.json": {
+      "image": "json/standard-media/938f20a8720c537185d589b6.jpg",
+      "imageAlt": "Gylne tårn og utskorne tak ved eit buddhistisk tempel.",
+      "imageCredit": {
+        "title": "2016 Rangun, Pagoda Szwedagon (018)",
+        "author": "Marcin Konsek",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2016_Rangun,_Pagoda_Szwedagon_(018).jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "norske-familiefilmar.json": {
+      "image": "json/standard-media/971b3ba50a17e382d1b6625e.jpg",
+      "imageAlt": "Eit kamera for store filmformat står utstilt.",
+      "imageCredit": {
+        "title": "IMAX camera 1",
+        "author": "Atlant",
+        "license": "CC BY 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:IMAX_camera_1.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+        "cropped": true
+      }
+    },
+    "animasjonsfilmar.json": {
+      "image": "json/standard-media/96dd3c0951392b29b1623f2c.jpg",
+      "imageAlt": "Eit arbeid forma av papir.",
+      "imageCredit": {
+        "title": "Quilled flowers sample quilling picture",
+        "author": "Inna Dorman",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Quilled_flowers_sample_quilling_picture.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "slik-blir-film-laga.json": {
+      "image": "json/standard-media/1fa16d630ccb1dc97144ec6e.jpg",
+      "imageAlt": "Ei klappetavle brukt ved filmopptak.",
+      "imageCredit": {
+        "title": "ClapperboardColor",
+        "author": "רונאלדיניו המלך",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:ClapperboardColor.svg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "bluey.json": {
+      "image": "json/standard-media/a47ef975e824d4a0f7564ef3.jpg",
+      "imageAlt": "Ein hund av rasen australian cattle dog.",
+      "imageCredit": {
+        "title": "ACD-blue-spud",
+        "author": "Zingpix",
+        "license": "CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:ACD-blue-spud.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "cropped": true
+      }
+    },
+    "pokemon-indigo.json": {
+      "image": "json/standard-media/32da03a41483490ce8664297.jpg",
+      "imageAlt": "Ei hand held kort i ei vifte.",
+      "imageCredit": {
+        "title": "AcetoFive",
+        "author": "Ron Maijen",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:AcetoFive.JPG",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "avatar-aang.json": {
+      "image": "json/standard-media/866c20b2814f052751de29a9.jpg",
+      "imageAlt": "Bartre i ei fjellside under ein lys himmel.",
+      "imageCredit": {
+        "title": "Subalpine zone on the Wilcox Pass",
+        "author": "Ethan Sahagun",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Subalpine_zone_on_the_Wilcox_Pass.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "barne-tv.json": {
+      "image": "json/standard-media/0022f5f630f022b2038e9f95.jpg",
+      "imageAlt": "Gamle fjernsyn står på rekkje i fleire hyller.",
+      "imageCredit": {
+        "title": "Museum für Kommunikation - Depot Heusenstamm - Technik 12 - Flickr - KlausNahr",
+        "author": "Klaus Nahr from Germany",
+        "license": "CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Museum_f%C3%BCr_Kommunikation_-_Depot_Heusenstamm_-_Technik_12_-_Flickr_-_KlausNahr.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "cropped": true
+      }
+    }
+  }
+}

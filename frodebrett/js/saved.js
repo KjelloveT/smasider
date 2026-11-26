@@ -22,7 +22,32 @@
     return button;
   }
 
-  Saved.makeCard = function (quiz, standard = false, loadQuiz) {
+  function addThumbnail(summary, thumbnail, title) {
+    const credit = thumbnail?.imageCredit;
+    if (!FB.Images.isPublished(thumbnail?.image)
+      || !credit?.source?.startsWith('https://commons.wikimedia.org/wiki/File:')) return;
+
+    const link = Vy.el('a', 'fb-quiz-thumbnail');
+    const byline = credit.title + ' · ' + credit.author + ' · ' + credit.license + ' · Forminska og skoren til';
+    link.href = credit.source;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.title = byline;
+    link.setAttribute('aria-label', 'Biletkjelde til ' + title + ' – ' + byline);
+
+    const image = Vy.el('img');
+    image.alt = '';
+    image.width = 96;
+    image.height = 64;
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    image.addEventListener('error', () => link.remove(), { once: true });
+    image.src = thumbnail.image;
+    link.append(image);
+    summary.append(link);
+  }
+
+  Saved.makeCard = function (quiz, standard = false, loadQuiz, thumbnail) {
     function useQuiz(run, navigates = false) {
       return async button => {
         const version = navigates ? ++navigationVersion : navigationVersion;
@@ -55,6 +80,9 @@
         + quiz.categories.reduce((total, category) => total + category.questions.length, 0)
         + ' spørsmål' + (quiz.final ? ' · finalerunde' : '');
     const heading = Vy.el('h3', 'vp-panel vp-panel--soft fb-quiz-title', quiz.title);
+    const summary = Vy.el('div', 'fb-quiz-summary');
+    summary.append(Vy.el('p', 'vp-help', meta));
+    if (thumbnail) addThumbnail(summary, thumbnail, quiz.title);
     const start = action('Start spel', 'vp-button--positive', 'play', quiz, useQuiz(data => FB.Board.selectQuiz(data), true));
     start.setAttribute('aria-haspopup', 'dialog');
     start.setAttribute('aria-controls', 'team-setup');
@@ -79,7 +107,7 @@
     const json = action('Last ned JSON', '', 'fileJson', quiz, useQuiz(FB.Export.downloadJson));
     downloads.append(FB.Export.withHelp(html, 'html'), FB.Export.withHelp(json, 'json'));
 
-    card.append(heading, Vy.el('p', 'vp-help', meta), actions);
+    card.append(heading, summary, actions);
     if (!standard) card.append(downloads);
     return card;
   };

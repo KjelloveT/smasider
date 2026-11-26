@@ -51,20 +51,20 @@
       title: subjects[standard.subject].name + ' · ' + grade + '. trinn',
       categories: standard.categories.map(category => ({
         name: category.name,
-        questions: category.questions.map(([question, answer], index) => ({
-          points: FB.POINTS[index], question, answer
+        questions: category.questions.map(([question, answer, details = {}], index) => ({
+          ...details, points: FB.POINTS[index], question, answer
         }))
       })),
       final: standard.final
     };
   }
 
-  async function themeCards(selectedThemes) {
-    const manifest = await load('json/themes/index.json?v=3');
+  async function themeCards(selectedThemes, covers) {
+    const [manifest, thumbnails] = await Promise.all([load('json/themes/index.json?v=3'), covers]);
     return manifest.filter(entry => selectedThemes.includes(entry.theme)).map(entry => {
       const summary = { title: entry.title, categories: entry.categories.map(name => ({ name })) };
       const loadQuiz = () => load('json/themes/' + entry.file + '?v=1').then(data => data.quiz);
-      return FB.Saved.makeCard(summary, true, loadQuiz);
+      return FB.Saved.makeCard(summary, true, loadQuiz, thumbnails.themes?.[entry.file]);
     });
   }
 
@@ -102,13 +102,17 @@
     }
     status.textContent = 'Lastar frødene …';
     const grades = selectedGrades.length ? selectedGrades : gradeNumbers;
-    const loads = selectedThemes.length ? [themeCards(selectedThemes)] : [];
+    const covers = load('json/thumbnails.json?v=1').catch(() => ({}));
+    const loads = selectedThemes.length ? [themeCards(selectedThemes, covers)] : [];
     if (selectedGrades.length || selectedSubjects.length) {
       for (const grade of grades) {
         if (selectedSubjects.length && !selectedSubjects.some(id => (subjects[id].firstGrade ?? 1) <= grade)) continue;
-        loads.push(load('json/standard/' + grade + '.json?v=2').then(pack => pack.quizzes
+        loads.push(Promise.all([load('json/standard/' + grade + '.json?v=3'), covers]).then(([pack, thumbnails]) => pack.quizzes
           .filter(standard => !selectedSubjects.length || selectedSubjects.includes(standard.subject))
-          .map(standard => FB.Saved.makeCard(toQuiz(standard, grade), true))));
+          .map(standard => {
+            const thumbnail = thumbnails.boards?.[standard.thumbnail] ?? thumbnails.subjects?.[standard.subject];
+            return FB.Saved.makeCard(toQuiz(standard, grade), true, undefined, thumbnail);
+          })));
       }
     }
     const results = await Promise.allSettled(loads);
