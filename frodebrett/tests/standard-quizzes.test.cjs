@@ -8,6 +8,7 @@ const subjects = [
   'matematikk', 'musikk', 'naturfag', 'norsk', 'samfunnsfag'
 ];
 const points = [100, 200, 300, 400, 500, 1000];
+const revisedGrades = [1, 2, 5];
 
 function readTheme(file) {
   return JSON.parse(readFileSync(path.join(__dirname, '../json/themes', file), 'utf8'));
@@ -62,7 +63,7 @@ for (let grade = 1; grade <= 10; grade++) {
     assert.equal(pack.grade, grade);
     assert.deepEqual(pack.quizzes.map(quiz => quiz.subject).sort(), [...expected].sort());
 
-    const revised = grade === 1 || grade === 5;
+    const revised = revisedGrades.includes(grade);
     const categoryCount = revised ? 5 : 3;
     for (const quiz of pack.quizzes) {
       assert.equal(quiz.categories.length, categoryCount, quiz.subject);
@@ -109,7 +110,7 @@ test('Alle fag- og temafrøder har lokale miniatyrbilete med kjelder', () => {
   const { boards, subjects: subjectCovers, themes: themeCovers } = JSON.parse(
     readFileSync(path.join(__dirname, '../json/thumbnails.json'), 'utf8')
   );
-  for (const grade of [1, 5]) {
+  for (const grade of revisedGrades) {
     for (const subject of subjects) checkMedia(boards[grade + '-' + subject]);
   }
   for (const subject of [...subjects, 'utdanningsval']) checkMedia(subjectCovers[subject]);

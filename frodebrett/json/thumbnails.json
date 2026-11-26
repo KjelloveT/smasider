@@ -236,6 +236,124 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
         "cropped": true
       }
+    },
+    "2-matematikk": {
+      "image": "json/standard-media/ea9b73cf46fc1f35853c7757.jpg",
+      "imageAlt": "Ei eldre skålvekt med lodd på eit bord.",
+      "imageCredit": {
+        "title": "Balance à tabac 1850",
+        "author": "Photographie personnelle User:Poussin jean",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Balance_%C3%A0_tabac_1850.JPG",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "cropped": true
+      }
+    },
+    "2-naturfag": {
+      "image": "json/standard-media/ff774e38747f52bd7047da6a.jpg",
+      "imageAlt": "Ein stille dam med grøne breidder og tre.",
+      "imageCredit": {
+        "title": "Cornjum, Martenastate 010",
+        "author": "Agnes Monkelbaan",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Cornjum,_Martenastate_010.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "2-samfunnsfag": {
+      "image": "json/standard-media/bb44882fe7990cd0f9dd8101.jpg",
+      "imageAlt": "Ei hamn med store bryggjer sett frå lufta.",
+      "imageCredit": {
+        "title": "Jebel Ali Port 2 Imresolt",
+        "author": "Imre Solt",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jebel_Ali_Port_2_Imresolt.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "cropped": true
+      }
+    },
+    "2-krle": {
+      "image": "json/standard-media/d6863012950252ca6a5e78c5.jpg",
+      "imageAlt": "Eit kor står i det fremste rommet i ei kyrkje.",
+      "imageCredit": {
+        "title": "Engelbrektskyrkan högmässa Alla själars dag 2026 körframträdande",
+        "author": "Atleett",
+        "license": "CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Engelbrektskyrkan_h%C3%B6gm%C3%A4ssa_Alla_sj%C3%A4lars_dag_2026_k%C3%B6rframtr%C3%A4dande.jpg",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "cropped": true
+      }
+    },
+    "2-norsk": {
+      "image": "json/standard-media/20d85b0a054c91d4e23daa9a.jpg",
+      "imageAlt": "Tre lukka notatbøker står ved sida av kvarandre.",
+      "imageCredit": {
+        "title": "Notebooks",
+        "author": "L.Marie",
+        "license": "CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Notebooks.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "cropped": true
+      }
+    },
+    "2-engelsk": {
+      "image": "json/standard-media/605518b324b211f090375dee.jpg",
+      "imageAlt": "Ein togstasjon med høgt glastak sett utanfrå.",
+      "imageCredit": {
+        "title": "Seoul Station West Side",
+        "author": "Minseong Kim",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Seoul_Station_West_Side.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "2-kunst-og-handverk": {
+      "image": "json/standard-media/f9516939de5dc36c68c2f3fd.jpg",
+      "imageAlt": "Målarpenslar med bust.",
+      "imageCredit": {
+        "title": "Paintbrushes",
+        "author": "Krestavilis at English Wikipedia",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Paintbrushes.jpg",
+        "cropped": true
+      }
+    },
+    "2-musikk": {
+      "image": "json/standard-media/6eb0d33dad0b39c69fbc2084.jpg",
+      "imageAlt": "Ein fiolin sett framfrå og frå sida.",
+      "imageCredit": {
+        "title": "Violin VL100",
+        "author": "Just plain Bill",
+        "license": "CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Violin_VL100.png",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "cropped": true
+      }
+    },
+    "2-kroppsøving": {
+      "image": "json/standard-media/1aaa294df2636bcb0d0a747f.jpg",
+      "imageAlt": "To skiløparar i eit ope snølandskap.",
+      "imageCredit": {
+        "title": "Trip to Skorafjell 1",
+        "author": "Erik W. Kolstad",
+        "license": "CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Trip_to_Skorafjell_1.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "cropped": true
+      }
+    },
+    "2-mat-og-helse": {
+      "image": "json/standard-media/58892e9d21a8306f551bcabd.jpg",
+      "imageAlt": "Eit bord med kvit duk, tallerkenar og glas.",
+      "imageCredit": {
+        "title": "Silbertafel Reiss 3 rem",
+        "author": "Photo: Andreas Praefcke",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Silbertafel_Reiss_3_rem.jpg",
+        "cropped": true
+      }
     }
   },
   "subjects": {
