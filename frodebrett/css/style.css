@@ -98,12 +98,32 @@ textarea.form-input { resize: vertical; min-height: 80px; }
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
 }
 .fb-quiz-card { display: grid; gap: 10px; align-content: start; overflow-wrap: anywhere; }
+.fb-quiz-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+.fb-quiz-summary:has(.fb-quiz-thumbnail) { gap: 8px; }
+.fb-quiz-summary > .vp-help { margin: 0; }
 .fb-quiz-card > .fb-quiz-title {
   margin: 0;
   padding: 10px 12px;
   font-size: clamp(1.25rem, 2.5vw, 1.55rem);
 }
-.fb-quiz-card > .vp-help { margin: 0; }
+.fb-quiz-thumbnail {
+  display: block;
+  align-self: start;
+  inline-size: clamp(4rem, 18vw, 6rem);
+  overflow: hidden;
+  border-radius: 6px;
+}
+.fb-quiz-thumbnail img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
 .fb-quiz-card .vp-actions { gap: 8px; }
 
 /* ===== Poengtavle + tur ===== */

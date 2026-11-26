@@ -7,7 +7,7 @@
   const embeddedImage = value => typeof value === 'string' && value.length <= 280000
     && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(value);
   Images.isPublished = value => typeof value === 'string'
-    && /^json\/weekly-media\/[a-f0-9]{24}\.(jpg|png|webp)$/.test(value);
+    && /^json\/(weekly-media|standard-media)\/[a-f0-9]{24}\.(jpg|png|webp)$/.test(value);
   Images.valid = value => embeddedImage(value) || Images.isPublished(value);
 
   function creditLink(text, url) {
@@ -76,14 +76,14 @@
   }
 
   Images.embedPublished = async function (path) {
-    if (!Images.isPublished(path)) throw Error('Ugyldig sti til nyheitsbiletet.');
+    if (!Images.isPublished(path)) throw Error('Ugyldig sti til spørsmålsbiletet.');
     const response = await fetch(path);
-    if (!response.ok) throw Error('Kunne ikkje hente nyheitsbiletet.');
+    if (!response.ok) throw Error('Kunne ikkje hente spørsmålsbiletet.');
     const blob = await response.blob();
     const format = path.split('.').at(-1);
     const type = 'image/' + (format === 'jpg' ? 'jpeg' : format);
     if (!blob.size || (blob.type !== type && blob.type !== 'application/octet-stream')) {
-      throw Error('Kunne ikkje lese nyheitsbiletet.');
+      throw Error('Kunne ikkje lese spørsmålsbiletet.');
     }
     const photo = blob.slice(0, blob.size, type);
     const data = await new Promise((resolve, reject) => {
