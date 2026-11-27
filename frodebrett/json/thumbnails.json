@@ -25,7 +25,7 @@
     },
     "1-naturfag": {
       "image": "json/standard-media/c56bfaaa4c5a0c43a754449a.jpg",
-      "imageAlt": "Ein blømande plante i ei leirpotte.",
+      "imageAlt": "Ein blomstrande plante i ei leirpotte.",
       "imageCredit": {
         "title": "\"Meillandine\" Rose in clay pot",
         "author": "Arch. Attilio Mileto - attilio.mileto@florero.net",
@@ -96,7 +96,7 @@
     },
     "1-norsk": {
       "image": "json/standard-media/50efd568c8d93872afe48503.jpg",
-      "imageAlt": "Bokhyller, bord og sitjeplassar i eit skulebibliotek.",
+      "imageAlt": "Bokhyller, bord og sitjeplassar i eit skolebibliotek.",
       "imageCredit": {
         "title": "Tasued students using the library resources",
         "author": "Ktrogunsola",
@@ -120,7 +120,7 @@
     },
     "1-engelsk": {
       "image": "json/standard-media/849256763d635779c9df3c76.jpg",
-      "imageAlt": "Ein gul skulebuss sett på skrå framfrå.",
+      "imageAlt": "Ein gul skolebuss sett på skrå framfrå.",
       "imageCredit": {
         "title": "IC CE school bus (shortened chassis)",
         "author": "Atomic Taco",
@@ -215,7 +215,7 @@
     },
     "1-mat-og-helse": {
       "image": "json/standard-media/00a13f8a713f685719115d9a.jpg",
-      "imageAlt": "Ein inngjerda kjøkkenhage med plantar på rekkje.",
+      "imageAlt": "Ein inngjerda kjøkkenhage med plantar på rekke.",
       "imageCredit": {
         "title": "Jardin potager 001",
         "author": "Arnaud 25",
@@ -251,7 +251,7 @@
     },
     "2-naturfag": {
       "image": "json/standard-media/ff774e38747f52bd7047da6a.jpg",
-      "imageAlt": "Ein stille dam med grøne breidder og tre.",
+      "imageAlt": "Ein stille dam med grøne bredder og tre.",
       "imageCredit": {
         "title": "Cornjum, Martenastate 010",
         "author": "Agnes Monkelbaan",
@@ -590,6 +590,242 @@
         "source": "https://commons.wikimedia.org/wiki/File:Belgium_2013_(11620905224).jpg",
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
         "cropped": true
+      }
+    },
+    "6-matematikk": {
+      "image": "json/standard-media/a52107b689016e871b842911.jpg",
+      "imageAlt": "Ei gammal kuleramme med kuler som kan flyttast på stenger.",
+      "imageCredit": {
+        "title": "Abacus (PSF)",
+        "author": "Pearson Scott Foresman",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Abacus_%28PSF%29.png",
+        "cropped": true
+      }
+    },
+    "7-matematikk": {
+      "image": "json/standard-media/dce914df6526b6ec8bf76f18.jpg",
+      "imageAlt": "Ein reknestav med fleire talskalaer ligg på eit raudt underlag.",
+      "imageCredit": {
+        "title": "Sliderule.PickettN902T.agr",
+        "author": "ArnoldReinhold",
+        "license": "CC BY 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Sliderule.PickettN902T.agr.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5"
+      }
+    },
+    "6-naturfag": {
+      "image": "json/standard-media/97056815517f0f86d4b64825.jpg",
+      "imageAlt": "To glassbeger med væske i ulike fargar.",
+      "imageCredit": {
+        "title": "Beakers",
+        "author": "Jaeger5432",
+        "license": "CC BY-SA 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Beakers.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5"
+      }
+    },
+    "7-naturfag": {
+      "image": "json/standard-media/7158d373aa924b0ee6748fd3.jpg",
+      "imageAlt": "Ei lyspære der glødetråden er synleg gjennom glaset.",
+      "imageCredit": {
+        "title": "Gluehlampe 01 KMJ",
+        "author": "KMJ , alpha masking by Edokter",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Gluehlampe_01_KMJ.png",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+      }
+    },
+    "6-samfunnsfag": {
+      "image": "json/standard-media/47e19b197a265f9995dc267b.jpg",
+      "imageAlt": "Ei hand legg eit bretta ark i ei valurne.",
+      "imageCredit": {
+        "title": "Election MG 3455",
+        "author": "Rama",
+        "license": "CC BY-SA 2.0 fr",
+        "source": "https://commons.wikimedia.org/wiki/File:Election_MG_3455.JPG",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en"
+      }
+    },
+    "7-samfunnsfag": {
+      "image": "json/standard-media/db07ea7af265162c188594c8.jpg",
+      "imageAlt": "Ein syklist brukar eit eige felt langs ei bygate.",
+      "imageCredit": {
+        "title": "050529 Barcelona 033b",
+        "author": "Sergi Larripa (User:SergiL)",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:050529_Barcelona_033b.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+      }
+    },
+    "6-krle": {
+      "image": "json/standard-media/5f1f1618f9122b3f9a5c1ba7.jpg",
+      "imageAlt": "Den store stupaen ved Sanchi sett frå framsida.",
+      "imageCredit": {
+        "title": "Stupa 1, Sanchi 02",
+        "author": "Bernard Gagnon",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Stupa_1%2C_Sanchi_02.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+      }
+    },
+    "7-krle": {
+      "image": "json/standard-media/4ccd5ad84528aed0261a4e40.jpg",
+      "imageAlt": "Ein boge med geometriske flismønster i Ben Youssef-madrasaen.",
+      "imageCredit": {
+        "title": "Doorway in Ben Youssef Madrasa",
+        "author": "Ian Alexander",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Doorway_in_Ben_Youssef_Madrasa.JPG",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    },
+    "6-norsk": {
+      "image": "json/standard-media/d7210b8539a3c26f1485ae20.jpg",
+      "imageAlt": "Framsida av eit offentleg bibliotek med søyler og store vindauge.",
+      "imageCredit": {
+        "title": "Milwaukee Central Library Mar10",
+        "author": "Freekee",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Milwaukee_Central_Library_Mar10.jpg",
+        "cropped": true
+      }
+    },
+    "7-norsk": {
+      "image": "json/standard-media/81c3fcd5e48fb01dc6cef31e.jpg",
+      "imageAlt": "Nærbilde av spissen på ein fyllepenn over handskriven tekst.",
+      "imageCredit": {
+        "title": "Fountain pen writing (literacy)",
+        "author": "Petar Milošević",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Fountain_pen_writing_%28literacy%29.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    },
+    "6-engelsk": {
+      "image": "json/standard-media/adec99406dadbc3d3128138a.jpg",
+      "imageAlt": "Ein buss passerer butikkar på High Street i Oxford.",
+      "imageCredit": {
+        "title": "AlexanderDennis Enviro400 SN15 LPK Oxford HighSt",
+        "author": "Motacilla",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:AlexanderDennis_Enviro400_SN15_LPK_Oxford_HighSt.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    },
+    "7-engelsk": {
+      "image": "json/standard-media/47177d72550f0976a65f169c.jpg",
+      "imageAlt": "Ei handlegate med butikkar og folk på Oxford Street i London.",
+      "imageCredit": {
+        "title": "Oxford Street 2026",
+        "author": "Tempaccountforediting",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Oxford_Street_2026.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    },
+    "6-kunst-og-handverk": {
+      "image": "json/standard-media/8ca2b27a56f854451062d08a.jpg",
+      "imageAlt": "Trearbeid med verktøy og materiale på ein arbeidsbenk.",
+      "imageCredit": {
+        "title": "Ingå hembygdsmuseum Gammelgården 09",
+        "author": "Sofia Ek",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ing%C3%A5_hembygdsmuseum_Gammelg%C3%A5rden_09.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    },
+    "7-kunst-og-handverk": {
+      "image": "json/standard-media/956b71b70ac8a1dfc1f01db8.jpg",
+      "imageAlt": "Eit gammalt teppe frå Bengal med ein brodert medaljong i midten.",
+      "imageCredit": {
+        "title": "Kantha (Quilt)",
+        "author": "Ukjend, Los Angeles County Museum of Art",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Kantha_%28Quilt%29_LACMA_AC1994.131.1.jpg",
+        "cropped": true
+      }
+    },
+    "6-musikk": {
+      "image": "json/standard-media/8b11621ca1ea4ad0ffd19e08.jpg",
+      "imageAlt": "Rader med seter og balkongar i ein konsertsal.",
+      "imageCredit": {
+        "title": "Teatro dal Verme Interior Circa 1875",
+        "author": "Unknown author Unknown author",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Teatro_dal_Verme_Interior_Circa_1875.jpg",
+        "cropped": true
+      }
+    },
+    "7-musikk": {
+      "image": "json/standard-media/f6d68e61bd212b6fc0b48a54.jpg",
+      "imageAlt": "Hovudtelefonar med polstra øyreputer.",
+      "imageCredit": {
+        "title": "Słuchawki referencyjne K-701 firmy AKG",
+        "author": "http://muzyczny.pl",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:S%C5%82uchawki_referencyjne_K-701_firmy_AKG.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    },
+    "6-kroppsøving": {
+      "image": "json/standard-media/218ab3a442e10b8b82b8ab38.jpg",
+      "imageAlt": "Spelarar på ei innebandybane.",
+      "imageCredit": {
+        "title": "WFC2018 Czech Republic vs Finland Adam Delong 9",
+        "author": "Rolandhino1",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:WFC2018_Czech_Republic_vs_Finland_Adam_Delong_9.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    },
+    "7-kroppsøving": {
+      "image": "json/standard-media/9ae9152b867d70630de08682.jpg",
+      "imageAlt": "Ein løpar på ein sti i naturen.",
+      "imageCredit": {
+        "title": "Kilian",
+        "author": "Pierre Thomas",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Kilian.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    },
+    "6-mat-og-helse": {
+      "image": "json/standard-media/f81399355420a396410cbb98.jpg",
+      "imageAlt": "Benkeplass og skap på eit kjøkken.",
+      "imageCredit": {
+        "title": "Julie child kitchen",
+        "author": "RadioFan ( talk )",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Julie_child_kitchen.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+      }
+    },
+    "7-mat-og-helse": {
+      "image": "json/standard-media/c735d942052ebeec9fe2489b.jpg",
+      "imageAlt": "Nysteikte brød blir tatt ut av ein bakaromn.",
+      "imageCredit": {
+        "title": "Freshly baked bread loaves",
+        "author": "Flickr.com user \"FotoDawg\"",
+        "license": "CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Freshly_baked_bread_loaves.jpg",
+        "cropped": true,
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
       }
     }
   },

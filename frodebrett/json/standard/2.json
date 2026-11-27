@@ -19,7 +19,7 @@
                   "8"
                 ],
                 "image": "json/standard-media/053ba12cea80a6b694cec17c.jpg",
-                "imageAlt": "Klasserom med pultar og stolar.",
+                "imageAlt": "Klasserom med pultar og stoler.",
                 "imageKeywords": "school classroom desks",
                 "imageCredit": {
                   "title": "Elementary classroom in Alaska",
@@ -42,7 +42,7 @@
                   "29"
                 ],
                 "image": "json/standard-media/4df6191b68bdae492b28f125.jpg",
-                "imageAlt": "Ein skulegard med tre og leikeapparat.",
+                "imageAlt": "Ein skolegard med tre og leikeapparat.",
                 "imageKeywords": "school playground trees",
                 "imageCredit": {
                   "title": "Green schoolyard",
@@ -88,7 +88,7 @@
                   "28"
                 ],
                 "image": "json/standard-media/4eb66763228deedfeb36a6f0.jpg",
-                "imageAlt": "Ein gul skulebuss sett på skrå framfrå.",
+                "imageAlt": "Ein gul skolebuss sett på skrå framfrå.",
                 "imageKeywords": "yellow school bus",
                 "imageCredit": {
                   "title": "IC CE school bus (shortened chassis)",
@@ -153,7 +153,7 @@
               }
             ],
             [
-              "Femten elevar er ute. Seks går inn. Kor mange er att ute?",
+              "Femten elevar er ute. Seks går inn. Kor mange er igjen ute?",
               "9",
               {
                 "options": [
@@ -163,7 +163,7 @@
                   "21"
                 ],
                 "image": "json/standard-media/cf130662076e4f49873ca0d6.jpg",
-                "imageAlt": "Ein fleirhøg skulebygning sett frå gata.",
+                "imageAlt": "Ein fleirhøg skolebygning sett frå gata.",
                 "imageKeywords": "multistory school building",
                 "imageCredit": {
                   "title": "Школа №2 г. Краснотурьинска",
@@ -176,7 +176,7 @@
               }
             ],
             [
-              "Nora har 14 kort og får ni til. Kor mange har ho no?",
+              "Nora har 14 kort og får ni til. Kor mange har ho nå?",
               "23",
               {
                 "options": [
@@ -199,7 +199,7 @@
               }
             ],
             [
-              "Du har 32 perler og brukar 13. Kor mange perler har du att?",
+              "Du har 32 perler og brukar 13. Kor mange perler har du igjen?",
               "19",
               {
                 "options": [
@@ -222,7 +222,7 @@
               }
             ],
             [
-              "Kor mykje må du leggje til 17 for å kome til 43?",
+              "Kor mykje må du legge til 17 for å komme til 43?",
               "26",
               {
                 "options": [
@@ -251,7 +251,7 @@
           "name": "Handle og dele",
           "questions": [
             [
-              "To born får tre rundstykke kvar. Kor mange rundstykke får dei til saman?",
+              "To barn får tre rundstykke kvar. Kor mange rundstykke får dei til saman?",
               "6",
               {
                 "options": [
@@ -319,7 +319,7 @@
               }
             ],
             [
-              "Du betaler med 50 kr for to varer som kostar 18 kr og 17 kr. Kor mykje får du att?",
+              "Du betaler med 50 kr for to varer som kostar 18 kr og 17 kr. Kor mykje får du tilbake?",
               "15 kr",
               {
                 "options": [
@@ -342,7 +342,7 @@
               }
             ],
             [
-              "Du legg 19 eple i posar med fire i kvar. Kor mange eple er att utan pose når flest mogeleg posar er fulle?",
+              "Du legg 19 eple i posar med fire i kvar. Kor mange eple er igjen utan pose når du fyller så mange posar du kan?",
               "3",
               {
                 "options": [
@@ -352,7 +352,7 @@
                   "5"
                 ],
                 "image": "json/standard-media/9b7d48d2e937d326d0b38388.jpg",
-                "imageAlt": "Eit kjøkken med trebenkar og varmt lys.",
+                "imageAlt": "Eit kjøkken med trebenker og varmt lys.",
                 "imageKeywords": "warm home kitchen",
                 "imageCredit": {
                   "title": "Julie child kitchen",
@@ -406,7 +406,7 @@
               }
             ],
             [
-              "Kva form har eit heilt rett røyr med same runde opning i begge endar?",
+              "Kva form har eit heilt rett rør med same runde opning i begge endar?",
               "Sylinder",
               {
                 "options": [
@@ -416,7 +416,7 @@
                   "Kjegle"
                 ],
                 "image": "json/standard-media/5446da9447c8675162c4da9c.jpg",
-                "imageAlt": "Ein treverkstad med verktøy og arbeidsbenkar.",
+                "imageAlt": "Ein treverkstad med verktøy og arbeidsbenker.",
                 "imageKeywords": "woodworking shop interior",
                 "imageCredit": {
                   "title": "Ingå hembygdsmuseum Gammelgården 09",
@@ -477,7 +477,7 @@
                   "Onsdag",
                   "Laurdag",
                   "Torsdag",
-                  "Sundag"
+                  "Søndag"
                 ],
                 "image": "json/standard-media/42065b5497a4a790a74a66fb.jpg",
                 "imageAlt": "Ein mørk ryggsekk med stropper.",
@@ -574,7 +574,7 @@
               }
             ],
             [
-              "Eit band er 70 cm langt. Du klipper av 33 cm og så 21 cm. Kor mykje band har du att?",
+              "Eit band er 70 cm langt. Du klipper av 33 cm og så 21 cm. Kor mykje band har du igjen?",
               "16 cm",
               {
                 "options": [
@@ -651,7 +651,7 @@
                   "And"
                 ],
                 "image": "json/standard-media/2b8966c8fc8cdae2bc1a65c9.jpg",
-                "imageAlt": "Ein stille dam med grøne breidder og tre.",
+                "imageAlt": "Ein stille dam med grøne bredder og tre.",
                 "imageKeywords": "quiet pond trees",
                 "imageCredit": {
                   "title": "Cornjum, Martenastate 010",
@@ -709,7 +709,7 @@
                   "Maur"
                 ],
                 "image": "json/standard-media/12752e8ac158c8abccd66171.jpg",
-                "imageAlt": "Ein inngjerda kjøkkenhage med plantar på rekkje.",
+                "imageAlt": "Ein inngjerda kjøkkenhage med plantar på rekke.",
                 "imageKeywords": "fenced kitchen garden",
                 "imageCredit": {
                   "title": "Jardin potager 001",
@@ -722,7 +722,7 @@
               }
             ],
             [
-              "Kva kallar vi det harde vernet på ryggen som ein hagesnigel med hus kan trekkje seg inn i?",
+              "Kva kallar vi det harde vernet på ryggen som ein hagesnigel med hus kan trekke seg inn i?",
               "Skalet",
               {
                 "options": [
@@ -749,7 +749,7 @@
                   "Frøa"
                 ],
                 "image": "json/standard-media/712b171807f95a18b5156010.jpg",
-                "imageAlt": "Ein paviljong omgjeven av blømande tre.",
+                "imageAlt": "Ein paviljong omringa av blomstrande tre.",
                 "imageKeywords": "garden flowering trees",
                 "imageCredit": {
                   "title": "Brooklyn Botanic Garden New York May 2015 010",
@@ -881,7 +881,7 @@
                   "Våren"
                 ],
                 "image": "json/standard-media/eebda0de3ede6d484da59de5.jpg",
-                "imageAlt": "Ei elv mellom breidder med gras.",
+                "imageAlt": "Ei elv mellom bredder med gras.",
                 "imageKeywords": "river grassy banks",
                 "imageCredit": {
                   "title": "Pirogue running on the Mekong at golden hour between Don Det and Don Khon Laos",
@@ -961,7 +961,7 @@
               }
             ],
             [
-              "Kva heiter dei små vassdropane som kan leggje seg på graset ei klar natt utan at det har regna?",
+              "Kva heiter dei små vassdropane som kan legge seg på graset ei klar natt utan at det har regna?",
               "Dogg",
               {
                 "options": [
@@ -978,7 +978,7 @@
           "name": "Vatn og luft",
           "questions": [
             [
-              "Kva skjer når ein isbit ligg lenge i ei varm stove?",
+              "Kva skjer når ein isbit ligg lenge i ei varm stue?",
               "Han smeltar",
               {
                 "options": [
@@ -988,7 +988,7 @@
                   "Han sprekk"
                 ],
                 "image": "json/standard-media/9b7d48d2e937d326d0b38388.jpg",
-                "imageAlt": "Eit kjøkken med trebenkar og varmt lys.",
+                "imageAlt": "Eit kjøkken med trebenker og varmt lys.",
                 "imageKeywords": "warm home kitchen",
                 "imageCredit": {
                   "title": "Julie child kitchen",
@@ -1011,7 +1011,7 @@
                   "Helium"
                 ],
                 "image": "json/standard-media/053ba12cea80a6b694cec17c.jpg",
-                "imageAlt": "Klasserom med pultar og stolar.",
+                "imageAlt": "Klasserom med pultar og stoler.",
                 "imageKeywords": "school classroom desks",
                 "imageCredit": {
                   "title": "Elementary classroom in Alaska",
@@ -1154,7 +1154,7 @@
                   "Hard"
                 ],
                 "image": "json/standard-media/328d45b564fccf4a1cc21ec3.jpg",
-                "imageAlt": "Ein blømande plante i ei leirpotte.",
+                "imageAlt": "Ein blomstrande plante i ei leirpotte.",
                 "imageKeywords": "flowering terracotta pot",
                 "imageCredit": {
                   "title": "\"Meillandine\" Rose in clay pot",
@@ -1191,16 +1191,16 @@
             ],
             [
               "Kva gjer eit elastisk band etter at du har strekt det litt og så slepp taket?",
-              "Dreg saman",
+              "Drar saman",
               {
                 "options": [
                   "Sprekk",
                   "Blir lengre",
                   "Smeltar",
-                  "Dreg saman"
+                  "Drar saman"
                 ],
                 "image": "json/standard-media/4df6191b68bdae492b28f125.jpg",
-                "imageAlt": "Ein skulegard med tre og leikeapparat.",
+                "imageAlt": "Ein skolegard med tre og leikeapparat.",
                 "imageKeywords": "school playground trees",
                 "imageCredit": {
                   "title": "Green schoolyard",
@@ -1213,7 +1213,7 @@
               }
             ],
             [
-              "Kva kan du anslå for dei fleste norske tre ved å telje ringane i stubben?",
+              "Kva kan du anslå for dei fleste norske tre ved å telle ringane i stubben?",
               "Alderen",
               {
                 "options": [
@@ -1266,7 +1266,7 @@
       "thumbnail": "2-samfunnsfag",
       "categories": [
         {
-          "name": "Skulen og nærmiljøet",
+          "name": "Skolen og nærmiljøet",
           "questions": [
             [
               "Kva viser kva fag klassa skal ha kvar dag i veka?",
@@ -1279,7 +1279,7 @@
                   "Menyen"
                 ],
                 "image": "json/standard-media/4df6191b68bdae492b28f125.jpg",
-                "imageAlt": "Ein skulegard med tre og leikeapparat.",
+                "imageAlt": "Ein skolegard med tre og leikeapparat.",
                 "imageKeywords": "school playground trees",
                 "imageCredit": {
                   "title": "Green schoolyard",
@@ -1292,17 +1292,17 @@
               }
             ],
             [
-              "Kvar leikar barn vanlegvis mellom øktene når skulen har eit eige uteområde?",
-              "Skulegarden",
+              "Kvar leikar barn vanlegvis mellom øktene når skolen har eit eige uteområde?",
+              "Skolegarden",
               {
                 "options": [
-                  "Skulegarden",
+                  "Skolegarden",
                   "Garderoben",
                   "Lærarrommet",
                   "Gymsalen"
                 ],
                 "image": "json/standard-media/053ba12cea80a6b694cec17c.jpg",
-                "imageAlt": "Klasserom med pultar og stolar.",
+                "imageAlt": "Klasserom med pultar og stoler.",
                 "imageKeywords": "school classroom desks",
                 "imageCredit": {
                   "title": "Elementary classroom in Alaska",
@@ -1315,7 +1315,7 @@
               }
             ],
             [
-              "Kva heiter den som har det øvste ansvaret for ein skule?",
+              "Kva heiter den som har det øvste ansvaret for ein skole?",
               "Rektor",
               {
                 "options": [
@@ -1325,7 +1325,7 @@
                   "Vaktmeister"
                 ],
                 "image": "json/standard-media/cf130662076e4f49873ca0d6.jpg",
-                "imageAlt": "Ein fleirhøg skulebygning sett frå gata.",
+                "imageAlt": "Ein fleirhøg skolebygning sett frå gata.",
                 "imageKeywords": "multistory school building",
                 "imageCredit": {
                   "title": "Школа №2 г. Краснотурьинска",
@@ -1343,7 +1343,7 @@
               {
                 "options": [
                   "Kjøpesenter",
-                  "Skulebygg",
+                  "Skolebygg",
                   "Torg",
                   "Bustadblokk"
                 ],
@@ -1390,7 +1390,7 @@
                 "options": [
                   "Rådhuset",
                   "Rettshuset",
-                  "Skulehuset",
+                  "Skolehuset",
                   "Kulturhuset"
                 ]
               }
@@ -1532,7 +1532,7 @@
                   "Postbod"
                 ],
                 "image": "json/standard-media/4eb66763228deedfeb36a6f0.jpg",
-                "imageAlt": "Ein gul skulebuss sett på skrå framfrå.",
+                "imageAlt": "Ein gul skolebuss sett på skrå framfrå.",
                 "imageKeywords": "yellow school bus",
                 "imageCredit": {
                   "title": "IC CE school bus (shortened chassis)",
@@ -1601,7 +1601,7 @@
                   "Smed"
                 ],
                 "image": "json/standard-media/5446da9447c8675162c4da9c.jpg",
-                "imageAlt": "Ein treverkstad med verktøy og arbeidsbenkar.",
+                "imageAlt": "Ein treverkstad med verktøy og arbeidsbenker.",
                 "imageKeywords": "woodworking shop interior",
                 "imageCredit": {
                   "title": "Ingå hembygdsmuseum Gammelgården 09",
@@ -1663,7 +1663,7 @@
                   "Vaktmeister"
                 ],
                 "image": "json/standard-media/712b171807f95a18b5156010.jpg",
-                "imageAlt": "Ein paviljong omgjeven av blømande tre.",
+                "imageAlt": "Ein paviljong omringa av blomstrande tre.",
                 "imageKeywords": "garden flowering trees",
                 "imageCredit": {
                   "title": "Brooklyn Botanic Garden New York May 2015 010",
@@ -1676,7 +1676,7 @@
               }
             ],
             [
-              "Kva kallar skulen ofte den vaksne som har foreldreansvar for ein elev?",
+              "Kva kallar skolen ofte den vaksne som har foreldreansvar for ein elev?",
               "Føresett",
               {
                 "options": [
@@ -1709,7 +1709,7 @@
                   "Konsert"
                 ],
                 "image": "json/standard-media/053ba12cea80a6b694cec17c.jpg",
-                "imageAlt": "Klasserom med pultar og stolar.",
+                "imageAlt": "Klasserom med pultar og stoler.",
                 "imageKeywords": "school classroom desks",
                 "imageCredit": {
                   "title": "Elementary classroom in Alaska",
@@ -1774,7 +1774,7 @@
           "name": "Ta vare på nærmiljøet",
           "questions": [
             [
-              "Kva kallar vi rekkja av bilar som må vente på å kome seg fram når mange køyrer same vegen?",
+              "Kva kallar vi rekka av bilar som må vente på å komme seg fram når mange køyrer same vegen?",
               "Kø",
               {
                 "options": [
@@ -1797,7 +1797,7 @@
               }
             ],
             [
-              "Kva ord brukar vi om å leggje papir, glas og metall i kvar sine dunkar?",
+              "Kva ord brukar vi om å legge papir, glas og metall i kvar sine dunkar?",
               "Sortering",
               {
                 "options": [
@@ -1827,7 +1827,7 @@
                   "Gøyme henne",
                   "Gi bort",
                   "Kaste leika",
-                  "La liggje"
+                  "La ligge"
                 ],
                 "image": "json/standard-media/f9167f964685e8b86a77487e.jpg",
                 "imageAlt": "Puslespelbrikker ligg saman.",
@@ -1875,7 +1875,7 @@
                   "Idrettsstemne"
                 ],
                 "image": "json/standard-media/ac4578fb9d26dfdd7a9d2076.jpg",
-                "imageAlt": "Bokhyller, bord og sitjeplassar i eit skulebibliotek.",
+                "imageAlt": "Bokhyller, bord og sitjeplassar i eit skolebibliotek.",
                 "imageKeywords": "school library interior",
                 "imageCredit": {
                   "title": "Tasued students using the library resources",
@@ -1904,7 +1904,7 @@
       ],
       "final": {
         "category": "Båtane samlast",
-        "question": "Kva heiter ein stad der båtar kan leggje til, og folk kan laste varer om bord?",
+        "question": "Kva heiter ein stad der båtar kan legge til, og folk kan laste varer om bord?",
         "answer": "Hamn",
         "options": [
           "Hamn",
@@ -1913,7 +1913,7 @@
           "Stasjon"
         ],
         "image": "json/standard-media/eebda0de3ede6d484da59de5.jpg",
-        "imageAlt": "Ei elv mellom breidder med gras.",
+        "imageAlt": "Ei elv mellom bredder med gras.",
         "imageKeywords": "river grassy banks",
         "imageCredit": {
           "title": "Pirogue running on the Mekong at golden hour between Don Det and Don Khon Laos",
@@ -1966,7 +1966,7 @@
                   "Lam"
                 ],
                 "image": "json/standard-media/712b171807f95a18b5156010.jpg",
-                "imageAlt": "Ein paviljong omgjeven av blømande tre.",
+                "imageAlt": "Ein paviljong omringa av blomstrande tre.",
                 "imageKeywords": "garden flowering trees",
                 "imageCredit": {
                   "title": "Brooklyn Botanic Garden New York May 2015 010",
@@ -2042,7 +2042,7 @@
           "name": "Stader og ting",
           "questions": [
             [
-              "Kva kallar vi staden der kristne ofte samlast til gudsteneste om sundagen?",
+              "Kva kallar vi staden der kristne ofte samlast til gudsteneste om søndagen?",
               "Kyrkje",
               {
                 "options": [
@@ -2088,7 +2088,7 @@
               }
             ],
             [
-              "Kva kan ein muslim leggje på golvet for å ha ein rein stad å be?",
+              "Kva kan ein muslim legge på golvet for å ha ein rein stad å be?",
               "Bøneteppe",
               {
                 "options": [
@@ -2152,7 +2152,7 @@
           "name": "Forteljingar og markeringar",
           "questions": [
             [
-              "I ei bibelforteljing byggjer Noah noko stort for å få dyr og menneske gjennom ein flaum. Kva byggjer han?",
+              "I ei bibelforteljing bygger Noah noko stort for å få dyr og menneske gjennom ein flaum. Kva bygger han?",
               "Ei ark",
               {
                 "options": [
@@ -2162,7 +2162,7 @@
                   "Ei ark"
                 ],
                 "image": "json/standard-media/eebda0de3ede6d484da59de5.jpg",
-                "imageAlt": "Ei elv mellom breidder med gras.",
+                "imageAlt": "Ei elv mellom bredder med gras.",
                 "imageKeywords": "river grassy banks",
                 "imageCredit": {
                   "title": "Pirogue running on the Mekong at golden hour between Don Det and Don Khon Laos",
@@ -2208,7 +2208,7 @@
                   "Bibelen"
                 ],
                 "image": "json/standard-media/ac4578fb9d26dfdd7a9d2076.jpg",
-                "imageAlt": "Bokhyller, bord og sitjeplassar i eit skulebibliotek.",
+                "imageAlt": "Bokhyller, bord og sitjeplassar i eit skolebibliotek.",
                 "imageKeywords": "school library interior",
                 "imageCredit": {
                   "title": "Tasued students using the library resources",
@@ -2221,7 +2221,7 @@
               }
             ],
             [
-              "I ei buddhistisk forteljing sit Buddha roleg under eit tre. Kva kallar vi øvinga der ein til dømes sit stille og konsentrerer seg om pusten?",
+              "I ei buddhistisk forteljing sit Buddha roleg under eit tre. Kva kallar vi øvinga der ein for eksempel sit stille og konsentrerer seg om pusten?",
               "Meditasjon",
               {
                 "options": [
@@ -2281,7 +2281,7 @@
           ]
         },
         {
-          "name": "Venskap og val",
+          "name": "Vennskap og val",
           "questions": [
             [
               "Kva kan du seie til ein som har hjelpt deg, for å vise at du set pris på det?",
@@ -2294,7 +2294,7 @@
                   "Hei"
                 ],
                 "image": "json/standard-media/053ba12cea80a6b694cec17c.jpg",
-                "imageAlt": "Klasserom med pultar og stolar.",
+                "imageAlt": "Klasserom med pultar og stoler.",
                 "imageKeywords": "school classroom desks",
                 "imageCredit": {
                   "title": "Elementary classroom in Alaska",
@@ -2317,7 +2317,7 @@
                   "Avgjerd"
                 ],
                 "image": "json/standard-media/4df6191b68bdae492b28f125.jpg",
-                "imageAlt": "Ein skulegard med tre og leikeapparat.",
+                "imageAlt": "Ein skolegard med tre og leikeapparat.",
                 "imageKeywords": "school playground trees",
                 "imageCredit": {
                   "title": "Green schoolyard",
@@ -2376,7 +2376,7 @@
               }
             ],
             [
-              "Kva kallar vi det når du prøver å setje deg inn i korleis ein annan har det?",
+              "Kva kallar vi det når du prøver å sette deg inn i korleis ein annan har det?",
               "Empati",
               {
                 "options": [
@@ -2462,7 +2462,7 @@
               }
             ],
             [
-              "Kva kallar vi eit teikn som står for noko anna, til dømes eit hjarte på eit kort?",
+              "Kva kallar vi eit teikn som står for noko anna, for eksempel eit hjarte på eit kort?",
               "Symbol",
               {
                 "options": [
@@ -2485,7 +2485,7 @@
               }
             ],
             [
-              "Kva heiter det når ein snakkar med Gud, til dømes for å takke eller be om noko?",
+              "Kva heiter det når ein snakkar med Gud, for eksempel for å takke eller be om noko?",
               "Bøn",
               {
                 "options": [
@@ -2518,7 +2518,7 @@
                   "Laus idé"
                 ],
                 "image": "json/standard-media/712b171807f95a18b5156010.jpg",
-                "imageAlt": "Ein paviljong omgjeven av blømande tre.",
+                "imageAlt": "Ein paviljong omringa av blomstrande tre.",
                 "imageKeywords": "garden flowering trees",
                 "imageCredit": {
                   "title": "Brooklyn Botanic Garden New York May 2015 010",
@@ -2552,7 +2552,7 @@
         "options": [
           "Likskap",
           "Likeverd",
-          "Venskap",
+          "Vennskap",
           "Samhald"
         ],
         "image": "json/standard-media/9df94e049de074baf2b95f55.jpg",
@@ -2599,7 +2599,7 @@
               }
             ],
             [
-              "Kva bokstav manglar i «f_sk» når ordet skal tyde dyret som sym med finnar?",
+              "Kva bokstav manglar i «f_sk» når ordet skal tyde dyret som svømmer med finnar?",
               "I",
               {
                 "options": [
@@ -2655,7 +2655,7 @@
                   "4"
                 ],
                 "image": "json/standard-media/12752e8ac158c8abccd66171.jpg",
-                "imageAlt": "Ein inngjerda kjøkkenhage med plantar på rekkje.",
+                "imageAlt": "Ein inngjerda kjøkkenhage med plantar på rekke.",
                 "imageKeywords": "fenced kitchen garden",
                 "imageCredit": {
                   "title": "Jardin potager 001",
@@ -2718,7 +2718,7 @@
                   "Tung"
                 ],
                 "image": "json/standard-media/4df6191b68bdae492b28f125.jpg",
-                "imageAlt": "Ein skulegard med tre og leikeapparat.",
+                "imageAlt": "Ein skolegard med tre og leikeapparat.",
                 "imageKeywords": "school playground trees",
                 "imageCredit": {
                   "title": "Green schoolyard",
@@ -2754,7 +2754,7 @@
               }
             ],
             [
-              "Kva heiter det når éin person snakkar så lågt at berre personen rett ved sidan av høyrer?",
+              "Kva heiter det når éin person snakkar så lågt at bare personen rett ved sidan av høyrer?",
               "Kviskrar",
               {
                 "options": [
@@ -2764,7 +2764,7 @@
                   "Ropar"
                 ],
                 "image": "json/standard-media/053ba12cea80a6b694cec17c.jpg",
-                "imageAlt": "Klasserom med pultar og stolar.",
+                "imageAlt": "Klasserom med pultar og stoler.",
                 "imageKeywords": "school classroom desks",
                 "imageCredit": {
                   "title": "Elementary classroom in Alaska",
@@ -2992,7 +2992,7 @@
                   "Stol"
                 ],
                 "image": "json/standard-media/eebda0de3ede6d484da59de5.jpg",
-                "imageAlt": "Ei elv mellom breidder med gras.",
+                "imageAlt": "Ei elv mellom bredder med gras.",
                 "imageKeywords": "river grassy banks",
                 "imageCredit": {
                   "title": "Pirogue running on the Mekong at golden hour between Don Det and Don Khon Laos",
@@ -3028,7 +3028,7 @@
               }
             ],
             [
-              "Kva nytt ord får du ved å setje «sol» framfor «briller»?",
+              "Kva nytt ord får du ved å sette «sol» framfor «briller»?",
               "Solbriller",
               {
                 "options": [
@@ -3038,7 +3038,7 @@
                   "Skibriller"
                 ],
                 "image": "json/standard-media/712b171807f95a18b5156010.jpg",
-                "imageAlt": "Ein paviljong omgjeven av blømande tre.",
+                "imageAlt": "Ein paviljong omringa av blomstrande tre.",
                 "imageKeywords": "garden flowering trees",
                 "imageCredit": {
                   "title": "Brooklyn Botanic Garden New York May 2015 010",
@@ -3090,7 +3090,7 @@
                   "Biblioteket"
                 ],
                 "image": "json/standard-media/cf130662076e4f49873ca0d6.jpg",
-                "imageAlt": "Ein fleirhøg skulebygning sett frå gata.",
+                "imageAlt": "Ein fleirhøg skolebygning sett frå gata.",
                 "imageKeywords": "multistory school building",
                 "imageCredit": {
                   "title": "Школа №2 г. Краснотурьинска",
@@ -3103,7 +3103,7 @@
               }
             ],
             [
-              "Kva slags bok handlar til dømes om påfunne personar i ei lang forteljing?",
+              "Kva slags bok handlar for eksempel om påfunne personar i ei lang forteljing?",
               "Roman",
               {
                 "options": [
@@ -3136,7 +3136,7 @@
                   "Ordbok"
                 ],
                 "image": "json/standard-media/ac4578fb9d26dfdd7a9d2076.jpg",
-                "imageAlt": "Bokhyller, bord og sitjeplassar i eit skulebibliotek.",
+                "imageAlt": "Bokhyller, bord og sitjeplassar i eit skolebibliotek.",
                 "imageKeywords": "school library interior",
                 "imageCredit": {
                   "title": "Tasued students using the library resources",
@@ -3184,14 +3184,14 @@
               }
             ],
             [
-              "Kva ord bruker vi om ei kort attforteljing av det viktigaste i ein tekst?",
-              "Samandrag",
+              "Kva ord bruker vi om ei kort gjenforteljing av det viktigaste i ein tekst?",
+              "Oppsummering",
               {
                 "options": [
                   "Sitat",
                   "Kapittel",
                   "Forord",
-                  "Samandrag"
+                  "Oppsummering"
                 ]
               }
             ]
@@ -3226,7 +3226,7 @@
       "thumbnail": "2-engelsk",
       "categories": [
         {
-          "name": "Kjensler og helsingar",
+          "name": "Følelsar og helsingar",
           "questions": [
             [
               "Kva engelsk ord tyder «glad»?",
@@ -3262,7 +3262,7 @@
                   "Thirsty"
                 ],
                 "image": "json/standard-media/cf130662076e4f49873ca0d6.jpg",
-                "imageAlt": "Ein fleirhøg skulebygning sett frå gata.",
+                "imageAlt": "Ein fleirhøg skolebygning sett frå gata.",
                 "imageKeywords": "multistory school building",
                 "imageCredit": {
                   "title": "Школа №2 г. Краснотурьинска",
@@ -3285,7 +3285,7 @@
                   "Good evening"
                 ],
                 "image": "json/standard-media/053ba12cea80a6b694cec17c.jpg",
-                "imageAlt": "Klasserom med pultar og stolar.",
+                "imageAlt": "Klasserom med pultar og stoler.",
                 "imageKeywords": "school classroom desks",
                 "imageCredit": {
                   "title": "Elementary classroom in Alaska",
@@ -3344,12 +3344,12 @@
             ],
             [
               "Kva tyder det når nokon seier «I feel better now»?",
-              "Betre no",
+              "Betre nå",
               {
                 "options": [
-                  "Dårlegare no",
+                  "Dårlegare nå",
                   "Heilt ferdig",
-                  "Betre no",
+                  "Betre nå",
                   "Ganske trøytt"
                 ]
               }
@@ -3382,7 +3382,7 @@
                   "Roof"
                 ],
                 "image": "json/standard-media/712b171807f95a18b5156010.jpg",
-                "imageAlt": "Ein paviljong omgjeven av blømande tre.",
+                "imageAlt": "Ein paviljong omringa av blomstrande tre.",
                 "imageKeywords": "garden flowering trees",
                 "imageCredit": {
                   "title": "Brooklyn Botanic Garden New York May 2015 010",
@@ -3400,7 +3400,7 @@
               {
                 "options": [
                   "Soverom",
-                  "Stove",
+                  "Stue",
                   "Kjøkken",
                   "Bad"
                 ],
@@ -3444,7 +3444,7 @@
               "Badet",
               {
                 "options": [
-                  "Stova",
+                  "Stua",
                   "Kjøkkenet",
                   "Soverommet",
                   "Badet"
@@ -3490,7 +3490,7 @@
                   "Sit"
                 ],
                 "image": "json/standard-media/4df6191b68bdae492b28f125.jpg",
-                "imageAlt": "Ein skulegard med tre og leikeapparat.",
+                "imageAlt": "Ein skolegard med tre og leikeapparat.",
                 "imageKeywords": "school playground trees",
                 "imageCredit": {
                   "title": "Green schoolyard",
@@ -3703,7 +3703,7 @@
                   "Blueberry"
                 ],
                 "image": "json/standard-media/12752e8ac158c8abccd66171.jpg",
-                "imageAlt": "Ein inngjerda kjøkkenhage med plantar på rekkje.",
+                "imageAlt": "Ein inngjerda kjøkkenhage med plantar på rekke.",
                 "imageKeywords": "fenced kitchen garden",
                 "imageCredit": {
                   "title": "Jardin potager 001",
@@ -3754,7 +3754,7 @@
                   "Lua"
                 ],
                 "image": "json/standard-media/4eb66763228deedfeb36a6f0.jpg",
-                "imageAlt": "Ein gul skulebuss sett på skrå framfrå.",
+                "imageAlt": "Ein gul skolebuss sett på skrå framfrå.",
                 "imageKeywords": "yellow school bus",
                 "imageCredit": {
                   "title": "IC CE school bus (shortened chassis)",
@@ -3771,7 +3771,7 @@
               "I parken",
               {
                 "options": [
-                  "På skulen",
+                  "På skolen",
                   "I hagen",
                   "I parken",
                   "På butikken"
@@ -3868,10 +3868,10 @@
           "Brillene",
           "Nøklane",
           "Bøkene",
-          "Skorne"
+          "Skoa"
         ],
         "image": "json/standard-media/ac4578fb9d26dfdd7a9d2076.jpg",
-        "imageAlt": "Bokhyller, bord og sitjeplassar i eit skulebibliotek.",
+        "imageAlt": "Bokhyller, bord og sitjeplassar i eit skolebibliotek.",
         "imageKeywords": "school library interior",
         "imageCredit": {
           "title": "Tasued students using the library resources",
@@ -3913,7 +3913,7 @@
               }
             ],
             [
-              "Kva farge får du når du blandar blå skulemåling med mykje kvit?",
+              "Kva farge får du når du blandar blå skolemåling med mykje kvit?",
               "Lysblå",
               {
                 "options": [
@@ -3935,7 +3935,7 @@
               }
             ],
             [
-              "Kva farge får du ofte når du blandar blå og gul skulemåling?",
+              "Kva farge får du ofte når du blandar blå og gul skolemåling?",
               "Grøn",
               {
                 "options": [
@@ -3945,7 +3945,7 @@
                   "Grøn"
                 ],
                 "image": "json/standard-media/712b171807f95a18b5156010.jpg",
-                "imageAlt": "Ein paviljong omgjeven av blømande tre.",
+                "imageAlt": "Ein paviljong omringa av blomstrande tre.",
                 "imageKeywords": "garden flowering trees",
                 "imageCredit": {
                   "title": "Brooklyn Botanic Garden New York May 2015 010",
@@ -3959,11 +3959,11 @@
             ],
             [
               "Kva heiter den mørke forma som kjem på veggen når handa di stengjer for lyset frå ei lampe?",
-              "Skugge",
+              "Skygge",
               {
                 "options": [
                   "Gjenskin",
-                  "Skugge",
+                  "Skygge",
                   "Lysflekk",
                   "Mønster"
                 ],
@@ -4021,7 +4021,7 @@
           "name": "Teikneverktøy",
           "questions": [
             [
-              "Kva liten reiskap brukar du for å gjere tuppen på ein blyant spiss att?",
+              "Kva liten reiskap brukar du for å gjere tuppen på ein blyant spiss igjen?",
               "Blyantspissar",
               {
                 "options": [
@@ -4031,7 +4031,7 @@
                   "Viskelêr"
                 ],
                 "image": "json/standard-media/053ba12cea80a6b694cec17c.jpg",
-                "imageAlt": "Klasserom med pultar og stolar.",
+                "imageAlt": "Klasserom med pultar og stoler.",
                 "imageKeywords": "school classroom desks",
                 "imageCredit": {
                   "title": "Elementary classroom in Alaska",
@@ -4054,7 +4054,7 @@
                   "Fargeblyant"
                 ],
                 "image": "json/standard-media/cf130662076e4f49873ca0d6.jpg",
-                "imageAlt": "Ein fleirhøg skulebygning sett frå gata.",
+                "imageAlt": "Ein fleirhøg skolebygning sett frå gata.",
                 "imageKeywords": "multistory school building",
                 "imageCredit": {
                   "title": "Школа №2 г. Краснотурьинска",
@@ -4152,7 +4152,7 @@
                   "Leire"
                 ],
                 "image": "json/standard-media/5446da9447c8675162c4da9c.jpg",
-                "imageAlt": "Ein treverkstad med verktøy og arbeidsbenkar.",
+                "imageAlt": "Ein treverkstad med verktøy og arbeidsbenker.",
                 "imageKeywords": "woodworking shop interior",
                 "imageCredit": {
                   "title": "Ingå hembygdsmuseum Gammelgården 09",
@@ -4200,7 +4200,7 @@
               }
             ],
             [
-              "Kva heiter forma som blir att når du trykkjer eit måla blad ned på eit papir og løftar det av att?",
+              "Kva heiter forma som blir igjen når du trykker eit måla blad ned på eit papir og løftar det av igjen?",
               "Avtrykk",
               {
                 "options": [
@@ -4222,7 +4222,7 @@
               }
             ],
             [
-              "Kva heiter eigenskapen at halvdelane av ein papirfigur er spegelbilete av kvarandre?",
+              "Kva heiter eigenskapen at halvdelane av ein papirfigur er spegelbilde av kvarandre?",
               "Speglsymmetri",
               {
                 "options": [
@@ -4319,7 +4319,7 @@
               }
             ],
             [
-              "Kva kallar vi det å leggje tråd i lykkjer med to pinnar slik at det blir eit plagg?",
+              "Kva kallar vi det å legge tråd i lykkjer med to pinnar slik at det blir eit plagg?",
               "Strikking",
               {
                 "options": [
@@ -4342,7 +4342,7 @@
               }
             ],
             [
-              "Kva kallar vi det å samle saman små stoffrestar og setje dei saman til eit mønster på eit teppe?",
+              "Kva kallar vi det å samle saman små stoffrestar og sette dei saman til eit mønster på eit teppe?",
               "Lappeteknikk",
               {
                 "options": [
@@ -4368,10 +4368,10 @@
           ]
         },
         {
-          "name": "Sjå på bilete",
+          "name": "Sjå på bilde",
           "questions": [
             [
-              "Kva heiter kanten ein kan setje rundt eit bilete før ein heng det opp?",
+              "Kva heiter kanten ein kan sette rundt eit bilde før ein heng det opp?",
               "Ramma",
               {
                 "options": [
@@ -4394,7 +4394,7 @@
               }
             ],
             [
-              "Kva del av eit bilete viser dei tinga som verkar nærast den som ser?",
+              "Kva del av eit bilde viser dei tinga som verkar nærast den som ser?",
               "Framgrunnen",
               {
                 "options": [
@@ -4417,17 +4417,17 @@
               }
             ],
             [
-              "Kva type foto får du når motivet er lite, men du går tett på og fyller nesten heile biletet med det?",
-              "Nærbilete",
+              "Kva type foto får du når motivet er lite, men du går tett på og fyller nesten heile bildet med det?",
+              "Nærbilde",
               {
                 "options": [
-                  "Oversiktsbilete",
-                  "Gruppebilete",
-                  "Nærbilete",
+                  "Oversiktsbilde",
+                  "Gruppebilde",
+                  "Nærbilde",
                   "Panorama"
                 ],
                 "image": "json/standard-media/2b8966c8fc8cdae2bc1a65c9.jpg",
-                "imageAlt": "Ein stille dam med grøne breidder og tre.",
+                "imageAlt": "Ein stille dam med grøne bredder og tre.",
                 "imageKeywords": "quiet pond trees",
                 "imageCredit": {
                   "title": "Cornjum, Martenastate 010",
@@ -4463,11 +4463,11 @@
               }
             ],
             [
-              "Kva heiter eit portrett når kunstnaren har teikna sitt eige andlet?",
+              "Kva heiter eit portrett når kunstnaren har teikna sitt eige ansikt?",
               "Sjølvportrett",
               {
                 "options": [
-                  "Landskapsbilete",
+                  "Landskapsbilde",
                   "Gruppeportrett",
                   "Sjølvportrett",
                   "Stilleben"
@@ -4475,14 +4475,14 @@
               }
             ],
             [
-              "Kva heiter eit bilete av oppstilte ting som ei vase og litt frukt på eit bord?",
+              "Kva heiter eit bilde av oppstilte ting som ei vase og litt frukt på eit bord?",
               "Stilleben",
               {
                 "options": [
                   "Stilleben",
                   "Veggmåleri",
                   "Portrett",
-                  "Landskapsbilete"
+                  "Landskapsbilde"
                 ]
               }
             ]
@@ -4491,7 +4491,7 @@
       ],
       "final": {
         "category": "Frå idé til figur",
-        "question": "Kva kallar vi ein figur forma i til dømes tre eller stein som du kan gå rundt og sjå frå fleire sider?",
+        "question": "Kva kallar vi ein figur forma i for eksempel tre eller stein som du kan gå rundt og sjå frå fleire sider?",
         "answer": "Skulptur",
         "options": [
           "Måleri",
@@ -4553,7 +4553,7 @@
                   "Høgt"
                 ],
                 "image": "json/standard-media/053ba12cea80a6b694cec17c.jpg",
-                "imageAlt": "Klasserom med pultar og stolar.",
+                "imageAlt": "Klasserom med pultar og stoler.",
                 "imageKeywords": "school classroom desks",
                 "imageCredit": {
                   "title": "Elementary classroom in Alaska",
@@ -4611,7 +4611,7 @@
                   "Knipsing"
                 ],
                 "image": "json/standard-media/4df6191b68bdae492b28f125.jpg",
-                "imageAlt": "Ein skulegard med tre og leikeapparat.",
+                "imageAlt": "Ein skolegard med tre og leikeapparat.",
                 "imageKeywords": "school playground trees",
                 "imageCredit": {
                   "title": "Green schoolyard",
@@ -4653,7 +4653,7 @@
               }
             ],
             [
-              "Kva instrument har ein belg du dreg ut og pressar inn medan du spelar på knappar eller tangentar?",
+              "Kva instrument har ein belg du drar ut og pressar inn mens du spelar på knappar eller tangentar?",
               "Trekkspel",
               {
                 "options": [
@@ -4734,7 +4734,7 @@
               }
             ],
             [
-              "Kva instrument har rekkjer med metallplater som gir ulike tonar når du slår på dei, og kan finnast i musikksalen på skulen?",
+              "Kva instrument har rekkjer med metallplater som gir ulike tonar når du slår på dei, og kan finnast i musikksalen på skolen?",
               "Klokkespel",
               {
                 "options": [
@@ -4774,7 +4774,7 @@
               }
             ],
             [
-              "Kva heiter musikken som blir spela først, før dei byrjar å syngje i ein song?",
+              "Kva heiter musikken som blir spela først, før dei byrjar å synge i ein song?",
               "Forspel",
               {
                 "options": [
@@ -4809,7 +4809,7 @@
               }
             ],
             [
-              "Kva heiter leiken der alle går rundt noko saman og held kvarandre i hendene medan dei syng, til dømes kring juletreet?",
+              "Kva heiter leiken der alle går rundt noko saman og held kvarandre i hendene mens dei syng, for eksempel kring juletreet?",
               "Ringleik",
               {
                 "options": [
@@ -5025,7 +5025,7 @@
                   "Mikrofon"
                 ],
                 "image": "json/standard-media/ac4578fb9d26dfdd7a9d2076.jpg",
-                "imageAlt": "Bokhyller, bord og sitjeplassar i eit skulebibliotek.",
+                "imageAlt": "Bokhyller, bord og sitjeplassar i eit skolebibliotek.",
                 "imageKeywords": "school library interior",
                 "imageCredit": {
                   "title": "Tasued students using the library resources",
@@ -5050,7 +5050,7 @@
               }
             ],
             [
-              "Kva kallar vi ein som finn på musikk til andre som skal spele eller syngje han?",
+              "Kva kallar vi ein som finn på musikk til andre som skal spele eller synge han?",
               "Komponist",
               {
                 "options": [
@@ -5122,7 +5122,7 @@
       ],
       "final": {
         "category": "Hugs tonane",
-        "question": "Kva heiter rekkja av tonar du kan nynne frå ein song sjølv om du ikkje hugsar orda?",
+        "question": "Kva heiter rekka av tonar du kan nynne frå ein song sjølv om du ikkje huskar orda?",
         "answer": "Melodi",
         "options": [
           "Klang",
@@ -5174,7 +5174,7 @@
               }
             ],
             [
-              "Kva gjer du når du bøyer knea og søkk ned mot golvet, som om du skal setje deg på ein låg stol?",
+              "Kva gjer du når du bøyer knea og søkk ned mot golvet, som om du skal sette deg på ein låg stol?",
               "Gjer knebøy",
               {
                 "options": [
@@ -5209,7 +5209,7 @@
               }
             ],
             [
-              "Kva kallar vi det å flytte eit bein langt ut til sida, bøye kneet på det beinet og så skyve seg inn att?",
+              "Kva kallar vi det å flytte eit bein langt ut til sida, bøye kneet på det beinet og så skyve seg inn igjen?",
               "Sideutfall",
               {
                 "options": [
@@ -5221,7 +5221,7 @@
               }
             ],
             [
-              "Kva øver du særleg på når du prøver å stå på ein fot medan du kastar ein mjuk ball til ein ven?",
+              "Kva øver du særleg på når du prøver å stå på ein fot mens du kastar ein mjuk ball til ein ven?",
               "Balanse",
               {
                 "options": [
@@ -5231,7 +5231,7 @@
                   "Hurtigheit"
                 ],
                 "image": "json/standard-media/4df6191b68bdae492b28f125.jpg",
-                "imageAlt": "Ein skulegard med tre og leikeapparat.",
+                "imageAlt": "Ein skolegard med tre og leikeapparat.",
                 "imageKeywords": "school playground trees",
                 "imageCredit": {
                   "title": "Green schoolyard",
@@ -5318,7 +5318,7 @@
                   "Hoppbane"
                 ],
                 "image": "json/standard-media/cf130662076e4f49873ca0d6.jpg",
-                "imageAlt": "Ein fleirhøg skulebygning sett frå gata.",
+                "imageAlt": "Ein fleirhøg skolebygning sett frå gata.",
                 "imageKeywords": "multistory school building",
                 "imageCredit": {
                   "title": "Школа №2 г. Краснотурьинска",
@@ -5428,7 +5428,7 @@
               }
             ],
             [
-              "Kva heiter det når du gjer same rørsla som ein ven rett overfor deg, slik eit spegelbilete gjer?",
+              "Kva heiter det når du gjer same rørsla som ein ven rett overfor deg, slik eit spegelbilde gjer?",
               "Spegle",
               {
                 "options": [
@@ -5491,7 +5491,7 @@
           "name": "Trygg i symjehallen",
           "questions": [
             [
-              "Kva går du vanlegvis ned for å kome roleg uti vatnet frå bassengkanten?",
+              "Kva går du vanlegvis ned for å komme roleg uti vatnet frå bassengkanten?",
               "Bassengtrappa",
               {
                 "options": [
@@ -5532,7 +5532,7 @@
                 "options": [
                   "Dukkar",
                   "Glir",
-                  "Sym",
+                  "Svømmer",
                   "Vassar"
                 ],
                 "image": "json/standard-media/1ea9e9bfa79b448df0656d95.jpg",
@@ -5572,7 +5572,7 @@
               }
             ],
             [
-              "Kva kallar vi eit lett brett du kan halde medan du øver på beinspark i bassenget?",
+              "Kva kallar vi eit lett brett du kan halde mens du øver på beinspark i bassenget?",
               "Symjebrett",
               {
                 "options": [
@@ -5668,7 +5668,7 @@
               }
             ],
             [
-              "Kva kan du leggje på bakken for å sitje tørt og varmt når klassa tek matpause ute?",
+              "Kva kan du legge på bakken for å sitte tørt og varmt når klassa tek matpause ute?",
               "Sitjeunderlag",
               {
                 "options": [
@@ -5726,7 +5726,7 @@
               }
             ],
             [
-              "Kva heiter det synlege sporet som ligg att i snøen når ein støvel har trykt mot han?",
+              "Kva heiter det synlege sporet som ligg igjen i snøen når ein støvel har trykt mot han?",
               "Fotavtrykk",
               {
                 "options": [
@@ -5792,7 +5792,7 @@
                   "Gaffel"
                 ],
                 "image": "json/standard-media/9b7d48d2e937d326d0b38388.jpg",
-                "imageAlt": "Eit kjøkken med trebenkar og varmt lys.",
+                "imageAlt": "Eit kjøkken med trebenker og varmt lys.",
                 "imageKeywords": "warm home kitchen",
                 "imageCredit": {
                   "title": "Julie child kitchen",
@@ -5936,7 +5936,7 @@
               }
             ],
             [
-              "Kva grunnsmak gjev sitronsaft ofte i ei dressing?",
+              "Kva grunnsmak gir sitronsaft ofte i ei dressing?",
               "Surt",
               {
                 "options": [
@@ -5946,7 +5946,7 @@
                   "Surt"
                 ],
                 "image": "json/standard-media/12752e8ac158c8abccd66171.jpg",
-                "imageAlt": "Ein inngjerda kjøkkenhage med plantar på rekkje.",
+                "imageAlt": "Ein inngjerda kjøkkenhage med plantar på rekke.",
                 "imageKeywords": "fenced kitchen garden",
                 "imageCredit": {
                   "title": "Jardin potager 001",
@@ -6037,13 +6037,13 @@
               "Hendene",
               {
                 "options": [
-                  "Skorne",
+                  "Skoa",
                   "Stolane",
                   "Hendene",
                   "Grytekluten"
                 ],
                 "image": "json/standard-media/053ba12cea80a6b694cec17c.jpg",
-                "imageAlt": "Klasserom med pultar og stolar.",
+                "imageAlt": "Klasserom med pultar og stoler.",
                 "imageKeywords": "school classroom desks",
                 "imageCredit": {
                   "title": "Elementary classroom in Alaska",
@@ -6113,7 +6113,7 @@
               }
             ],
             [
-              "Kva må du gjere med ei fjøl som har vore brukt til rått kjøt, før du skjer salat på henne?",
+              "Kva må du gjere med ei fjøl som har vore brukt til rått kjøtt, før du skjer salat på henne?",
               "Vaskar grundig",
               {
                 "options": [
@@ -6175,7 +6175,7 @@
                   "Aprikosar"
                 ],
                 "image": "json/standard-media/712b171807f95a18b5156010.jpg",
-                "imageAlt": "Ein paviljong omgjeven av blømande tre.",
+                "imageAlt": "Ein paviljong omringa av blomstrande tre.",
                 "imageKeywords": "garden flowering trees",
                 "imageCredit": {
                   "title": "Brooklyn Botanic Garden New York May 2015 010",
@@ -6198,7 +6198,7 @@
                   "Risgraut"
                 ],
                 "image": "json/standard-media/9b7d48d2e937d326d0b38388.jpg",
-                "imageAlt": "Eit kjøkken med trebenkar og varmt lys.",
+                "imageAlt": "Eit kjøkken med trebenker og varmt lys.",
                 "imageKeywords": "warm home kitchen",
                 "imageCredit": {
                   "title": "Julie child kitchen",
@@ -6274,7 +6274,7 @@
           "name": "Plass til alle ved bordet",
           "questions": [
             [
-              "Kva kallar vi måltidet mange et midt på skuledagen?",
+              "Kva kallar vi måltidet mange et midt på skoledagen?",
               "Lunsj",
               {
                 "options": [
@@ -6297,7 +6297,7 @@
               }
             ],
             [
-              "Kva kan du leggje ved kuverten for å tørke mat rundt munnen når de et?",
+              "Kva kan du legge ved kuverten for å tørke mat rundt munnen når de et?",
               "Serviett",
               {
                 "options": [
@@ -6319,7 +6319,7 @@
               }
             ],
             [
-              "Kva kallar vi ein rett du et før hovudretten, til dømes litt suppe?",
+              "Kva kallar vi ein rett du et før hovudretten, for eksempel litt suppe?",
               "Forrett",
               {
                 "options": [
@@ -6342,7 +6342,7 @@
               }
             ],
             [
-              "Kva kallar vi ein tur der målet er å ete saman ute, til dømes på eit teppe?",
+              "Kva kallar vi ein tur der målet er å ete saman ute, for eksempel på eit teppe?",
               "Piknik",
               {
                 "options": [
