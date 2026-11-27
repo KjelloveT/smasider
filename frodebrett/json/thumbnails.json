@@ -827,6 +827,394 @@
         "cropped": true,
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
       }
+    },
+    "8-matematikk": {
+      "image": "json/standard-media/97f9cbc0d2037d14433e038b.jpg",
+      "imageAlt": "Eit trebrett der strikk er spente rundt små piggar.",
+      "imageCredit": {
+        "title": "Geoboard",
+        "author": "Annielogue",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Geoboard.JPG",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+      }
+    },
+    "8-naturfag": {
+      "image": "json/standard-media/8bf9db57ce815351c0bed0ab.jpg",
+      "imageAlt": "Ein ujamn bit metall med raudbrun farge.",
+      "imageCredit": {
+        "title": "NatCopper",
+        "author": "Native_Copper_Macro_Digon3.jpg : “Jonathan Zander ( Digon3 )\" derivative work: Materialscientist ( talk )",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:NatCopper.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "cropped": true
+      }
+    },
+    "8-samfunnsfag": {
+      "image": "json/standard-media/54cbe8c942bdf00132dc7c31.jpg",
+      "imageAlt": "Framsida av stortingsbygningen i Oslo.",
+      "imageCredit": {
+        "title": "Storting building",
+        "author": "Christian David",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Storting_building.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "8-krle": {
+      "image": "json/standard-media/41552f8e03ed14e632ca16a0.jpg",
+      "imageAlt": "Borgund stavkyrkje med fleire mørke tretak.",
+      "imageCredit": {
+        "title": "Borgund Stave Church in Lærdalen, 2013 June",
+        "author": "Ximonic (Simo Räsänen)",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Borgund_Stave_Church_in_L%C3%A6rdalen%2C_2013_June.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "8-norsk": {
+      "image": "json/standard-media/12fe2147012c1283621200fc.jpg",
+      "imageAlt": "Eit eldre måleri av ein person som les eit brev.",
+      "imageCredit": {
+        "title": "News from My Lad title QS:P1476,en:\"News from My Lad\" label QS:Len,\"News from My Lad\"",
+        "author": "James Campbell (1828 - 1893) (British) Born in Liverpool, England. Died in Birkenhead, England. Details on Google Art Project",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:James_Campbell_-_News_from_My_Lad_-_Google_Art_Project.jpg",
+        "cropped": true
+      }
+    },
+    "8-engelsk": {
+      "image": "json/standard-media/257c50330866960425acfb0d.jpg",
+      "imageAlt": "Ein raud britisk telefonkiosk sett frå sida.",
+      "imageCredit": {
+        "title": "Red telephone box, St Paul's Cathedral, London, England, GB, IMG 5182 edit",
+        "author": "Christoph Braun",
+        "license": "CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Red_telephone_box%2C_St_Paul's_Cathedral%2C_London%2C_England%2C_GB%2C_IMG_5182_edit.jpg",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "cropped": true
+      }
+    },
+    "8-kunst-og-handverk": {
+      "image": "json/standard-media/89e87ec73d105a4d16b20f1c.jpg",
+      "imageAlt": "Ein vev av tre med trådar spente utover.",
+      "imageCredit": {
+        "title": "Loom 2, Lesbos (Skala Sykamias)",
+        "author": "G-Lignum",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Loom_2%2C_Lesbos_(Skala_Sykamias).jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "8-musikk": {
+      "image": "json/standard-media/00c5a54f71fdd6c8a0f43add.jpg",
+      "imageAlt": "Ein metronom med pendel står på eit trebord.",
+      "imageCredit": {
+        "title": "Metronome",
+        "author": "Daniel Eriksson",
+        "license": "CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Metronome.webm",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "cropped": true
+      }
+    },
+    "8-kroppsøving": {
+      "image": "json/standard-media/db560592107c491cde57a33e.jpg",
+      "imageAlt": "Ein badmintonduell i ein idrettshall med lilla golv rundt banen.",
+      "imageCredit": {
+        "title": "Olympics 2012 Mixed Doubles Final",
+        "author": "Peter",
+        "license": "CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Olympics_2012_Mixed_Doubles_Final.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "cropped": true
+      }
+    },
+    "8-mat-og-helse": {
+      "image": "json/standard-media/0ac76f2c69d2a7c635cbf67d.jpg",
+      "imageAlt": "Fleire vispar av metall ligg saman.",
+      "imageCredit": {
+        "title": "Schneebesen1",
+        "author": "No machine-readable author provided. Peng assumed (based on copyright claims).",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Schneebesen1.JPG",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "cropped": true
+      }
+    },
+    "8-utdanningsval": {
+      "image": "json/standard-media/b7605e0d32a58cd9be5170db.jpg",
+      "imageAlt": "To personar arbeider saman ved ein benk i ein eldre verkstad.",
+      "imageCredit": {
+        "title": "Apprenticeship",
+        "author": "Repro. of painting by (Louis-?)Emile Adan (1839-1937), copyrighted by Braun & Co., N.Y.",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Apprenticeship.jpg",
+        "cropped": true
+      }
+    },
+    "9-matematikk": {
+      "image": "json/standard-media/1bbf8fa466c3eb20ccc0c584.jpg",
+      "imageAlt": "Ei fagverksbru med rette bjelkar og avstiving på sidene.",
+      "imageCredit": {
+        "title": "RRTrussBridgeSideView",
+        "author": "Image by en:User:Leonard G.",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:RRTrussBridgeSideView.jpg",
+        "cropped": true
+      }
+    },
+    "9-naturfag": {
+      "image": "json/standard-media/391dd371c7e156761cda7238.jpg",
+      "imageAlt": "Mørke solcellepanel på fleire lyse tak.",
+      "imageCredit": {
+        "title": "Dji fly 20230602 13826 PM 27 1719032149374 photo optimized",
+        "author": "Wikipedeon",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Dji_fly_20230602_13826_PM_27_1719032149374_photo_optimized.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "9-samfunnsfag": {
+      "image": "json/standard-media/66ee28cb87c8115c95df899c.jpg",
+      "imageAlt": "Ei containerhamn med kaiar og vatn sett ovanfrå.",
+      "imageCredit": {
+        "title": "Haven van Rotterdam 2023 (04)",
+        "author": "Dkvtig",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Haven_van_Rotterdam_2023_(04).jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "9-krle": {
+      "image": "json/standard-media/08a2536f2cff41671006bf9e.jpg",
+      "imageAlt": "Det gylne tempelet ved vatnet i Amritsar.",
+      "imageCredit": {
+        "title": "Golden temple india",
+        "author": "Imjha1",
+        "license": "CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Golden_temple_india.jpg",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "cropped": true
+      }
+    },
+    "9-norsk": {
+      "image": "json/standard-media/8d74a09926f2cd62dd7561df.jpg",
+      "imageAlt": "Ei eldre trykkpresse med ramme av tre og plass til ark.",
+      "imageCredit": {
+        "title": "Gutenberg press",
+        "author": "International Printing Museum",
+        "license": "CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Gutenberg_press.png",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "cropped": true
+      }
+    },
+    "9-engelsk": {
+      "image": "json/standard-media/cf804ba4648ce1da312d11f5.jpg",
+      "imageAlt": "Jernbanespor og bygningar ved Waverley stasjon i Edinburgh.",
+      "imageCredit": {
+        "title": "Edinburgh Waverley railway station - aerial - 2025-04-19 01",
+        "author": "瑞丽江的河水",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Edinburgh_Waverley_railway_station_-_aerial_-_2025-04-19_01.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "9-kunst-og-handverk": {
+      "image": "json/standard-media/b32d7001b00843fe88d2fe21.jpg",
+      "imageAlt": "Eit hjørne av ei gyllen, utskoren bilderamme.",
+      "imageCredit": {
+        "title": "Carved frame 01 (27133614537)",
+        "author": "Tim Evanson from Cleveland Heights, Ohio, USA",
+        "license": "CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Carved_frame_01_(27133614537).jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "cropped": true
+      }
+    },
+    "9-musikk": {
+      "image": "json/standard-media/9907f607b477c1d091a127a3.jpg",
+      "imageAlt": "Tre vinylplater med ulike etikettar ligg på lys bakgrunn.",
+      "imageCredit": {
+        "title": "Vinilos distintos tamaños",
+        "author": "Banfield",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Vinilos_distintos_tama%C3%B1os.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "9-kroppsøving": {
+      "image": "json/standard-media/94f34faa5991561d805b661b.jpg",
+      "imageAlt": "Løparar i ei stafett med tilskodarar langs løypa.",
+      "imageCredit": {
+        "title": "Gold Relay UK WOC 2008-crop",
+        "author": "derivative work: Una Smith ( talk ) Gold_Relay_United_Kingdom_WOC_2008.jpg : Pernak1",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Gold_Relay_UK_WOC_2008-crop.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "9-mat-og-helse": {
+      "image": "json/standard-media/4b082f04bcbaf3901d128598.jpg",
+      "imageAlt": "Eit rundt surdeigsbrød med mønster i skorpa.",
+      "imageCredit": {
+        "title": "Sourdough Bread Loaf",
+        "author": "Agelaia",
+        "license": "CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Sourdough_Bread_Loaf.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "cropped": true
+      }
+    },
+    "9-utdanningsval": {
+      "image": "json/standard-media/9a350447850b4d8477fcc3df.jpg",
+      "imageAlt": "Ein oransje industrirobot ved ei maskin i ein fabrikk.",
+      "imageCredit": {
+        "title": "Automation of foundry with robot",
+        "author": "KUKA Roboter GmbH, Bachmann",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Automation_of_foundry_with_robot.jpg",
+        "cropped": true
+      }
+    },
+    "10-matematikk": {
+      "image": "json/standard-media/624c1d3d4213203440ba813d.jpg",
+      "imageAlt": "Ark med trykte rutenett i ulike fargar.",
+      "imageCredit": {
+        "title": "Graph-paper-10sqsm-5sqin-4sqin",
+        "author": "Mikus",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Graph-paper-10sqsm-5sqin-4sqin.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "10-naturfag": {
+      "image": "json/standard-media/38eeff83f2f80bd7b6e8f5da.jpg",
+      "imageAlt": "Ein stor isbre med snødekte fjell i bakgrunnen.",
+      "imageCredit": {
+        "title": "Geikie Plateau Glacier",
+        "author": "NASA / Christy Hansen",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Geikie_Plateau_Glacier.JPG",
+        "cropped": true
+      }
+    },
+    "10-samfunnsfag": {
+      "image": "json/standard-media/35033f70d5fe792a67ad66d5.jpg",
+      "imageAlt": "Fleire vindturbinar under ein himmel med skyer.",
+      "imageCredit": {
+        "title": "Wind turbines in southern California 2016",
+        "author": "Erik Wilde from Berkeley, CA, USA",
+        "license": "CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Wind_turbines_in_southern_California_2016.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "cropped": true
+      }
+    },
+    "10-krle": {
+      "image": "json/standard-media/59d1a0e834e8005cc0365800.jpg",
+      "imageAlt": "Ei opplyst markering ved eit buddhistisk tempel.",
+      "imageCredit": {
+        "title": "1 Wesak Day (in Thailand) 2007",
+        "author": "ผู้สร้างสรรค์ผลงาน/ส่งข้อมูลเก็บในคลังข้อมูลเสรีวิกิมีเดียคอมมอนส์ - เทวประภาส มากคล้าย",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:1_Wesak_Day_(in_Thailand)_2007.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "cropped": true
+      }
+    },
+    "10-norsk": {
+      "image": "json/standard-media/6c49918a09353c8351e013a5.jpg",
+      "imageAlt": "Ei eldre skrivemaskin med runde tangentar.",
+      "imageCredit": {
+        "title": "MEK II-371",
+        "author": "GodeNehler",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:MEK_II-371.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
+    },
+    "10-engelsk": {
+      "image": "json/standard-media/4583225694e15831a136f604.jpg",
+      "imageAlt": "Reisande og tilsette ved innsjekkingsskrankane på ein flyplass.",
+      "imageCredit": {
+        "title": "VTBS-Thai Check-In-Counters",
+        "author": "User:Mattes",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:VTBS-Thai_Check-In-Counters.JPG",
+        "cropped": true
+      }
+    },
+    "10-kunst-og-handverk": {
+      "image": "json/standard-media/4f0499cbca54950cc43bf974.jpg",
+      "imageAlt": "To fuglar bretta av papir.",
+      "imageCredit": {
+        "title": "Cranes made by Origami paper",
+        "author": "Laitche",
+        "license": "Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Cranes_made_by_Origami_paper.jpg",
+        "cropped": true
+      }
+    },
+    "10-musikk": {
+      "image": "json/standard-media/59ad3b755bde98fabfa6f8a3.jpg",
+      "imageAlt": "Skyveknappar og brytarar på eit stort miksebord.",
+      "imageCredit": {
+        "title": "SSL SL9000J (72ch) @ The Cutting Room Recording Studios, NYC",
+        "author": "Rebecca Wilson",
+        "license": "CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:SSL_SL9000J_(72ch)_%40_The_Cutting_Room_Recording_Studios%2C_NYC.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "cropped": true
+      }
+    },
+    "10-kroppsøving": {
+      "image": "json/standard-media/e09ac8d11ba6297e9d506b90.jpg",
+      "imageAlt": "Ein orienteringsløpar ved ein post i ope terreng.",
+      "imageCredit": {
+        "title": "Tajfuto",
+        "author": "No machine-readable author provided. Mapmap~commonswiki assumed (based on copyright claims).",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tajfuto.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "cropped": true
+      }
+    },
+    "10-mat-og-helse": {
+      "image": "json/standard-media/b7e73922f9f0cfaa28f6f95c.jpg",
+      "imageAlt": "Ei skål med linsesuppe sett ovanfrå.",
+      "imageCredit": {
+        "title": "EgFoodLentilSoup",
+        "author": "Roland Unger",
+        "license": "CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:EgFoodLentilSoup.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "cropped": true
+      }
+    },
+    "10-utdanningsval": {
+      "image": "json/standard-media/0b0d322391c11678dd9ba05e.jpg",
+      "imageAlt": "Ein frisør står ved ein kunde i ein salong.",
+      "imageCredit": {
+        "title": "Frisoerin (fcm)",
+        "author": "Photograph: Frank C. Müller , Baden-Baden",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Frisoerin_(fcm).jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "cropped": true
+      }
     }
   },
   "subjects": {

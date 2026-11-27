@@ -20,7 +20,7 @@ Dette er standardprompt for å lage forhåndsgenererte frøder (spørsmålssett)
 
 - Det skal vere bildeillustrasjon til minst halvparten av spørsmåla pr frøde. Bruk bilete frå wikipedia og wikidata. Skildre motivet på nynorsk og skriv 2–4 presise søkjeord på engelsk eller med eit kjent eigennamn, til dømes «Beitostølen skiing». Vel eit anna motiv enn fasiten. Bruk tom streng dersom eit felt ikkje er relevant.
 
-- Kontroller kvart bilete mot spørsmålet og fasiten, medrekna finalen og reservevala. Eleven skal ikkje kunne lese eller kjenne att fasiten frå motivet, synleg tekst, eit kart, eit flagg, ei resultattavle eller biletskildringa. Vel eit anna bilete dersom motivet røper fasiten, og lat spørsmålet stå utan bilete dersom du ikkje finn eit trygt alternativ.
+- Kontroller kvart bilde mot spørsmålet og fasiten, medrekna finalen og reservevala. Motivet skal vise ein konkret stad, gjenstand, situasjon eller prosess som sjølve spørsmålet handlar om. Eleven skal ikkje kunne lese eller kjenne igjen fasiten frå motivet, synleg tekst, eit kart, eit flagg, ei resultattavle eller bildeskildringa. Byt motiv eller lat spørsmålet stå utan bilde når motivet har laus samanheng med spørsmålet eller røper fasiten.
 
 - Vel eit miniatyrbilete til kvar frøde som viser hovudtemaet på kortet på framsida til Frødebrett. Motivet skal vere tydeleg i lite format og tole eit liggjande utsnitt på 3:2. Hald motivet fritt for fasitar, og bruk eit komprimert, lokalt bilete med kjelde og lisens.
 

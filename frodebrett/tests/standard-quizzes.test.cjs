@@ -8,7 +8,7 @@ const subjects = [
   'matematikk', 'musikk', 'naturfag', 'norsk', 'samfunnsfag'
 ];
 const points = [100, 200, 300, 400, 500, 1000];
-const revisedGrades = [1, 2, 3, 4, 5, 6, 7];
+const revisedGrades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 function readTheme(file) {
   return JSON.parse(readFileSync(path.join(__dirname, '../json/themes', file), 'utf8'));
