@@ -107,7 +107,7 @@
     if (selectedGrades.length || selectedSubjects.length) {
       for (const grade of grades) {
         if (selectedSubjects.length && !selectedSubjects.some(id => (subjects[id].firstGrade ?? 1) <= grade)) continue;
-        loads.push(Promise.all([load('json/standard/' + grade + '.json?v=6'), covers]).then(([pack, thumbnails]) => pack.quizzes
+        loads.push(Promise.all([load('json/standard/' + grade + '.json?v=7'), covers]).then(([pack, thumbnails]) => pack.quizzes
           .filter(standard => !selectedSubjects.length || selectedSubjects.includes(standard.subject))
           .map(standard => {
             const thumbnail = thumbnails.boards?.[standard.thumbnail] ?? thumbnails.subjects?.[standard.subject];

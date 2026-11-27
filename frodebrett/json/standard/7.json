@@ -6134,14 +6134,14 @@
               }
             ],
             [
-              "Kva matvare frå alternativa er eit grovt kornprodukt?",
+              "Kva for fullkornsgryn finn du oftast merkte «lettkokte» eller «store» i butikken?",
               "Havregryn",
               {
                 "options": [
                   "Havregryn",
-                  "Kikerter",
-                  "Valnøtter",
-                  "Poteter"
+                  "Byggryn",
+                  "Risgryn",
+                  "Semulegryn"
                 ],
                 "image": "json/standard-media/7614e8a662f34ecc9b1d3eed.jpg",
                 "imageAlt": "Ein eldre matboks og ein termos.",

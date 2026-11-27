@@ -3718,7 +3718,7 @@
               }
             ],
             [
-              "Kva av desse orda betyr «smal»?",
+              "Kva er det vanlege engelske ordet for «smal» om ein veg med lite plass i breidda?",
               "Narrow",
               {
                 "options": [
@@ -3763,7 +3763,7 @@
               }
             ],
             [
-              "Kva av desse orda er motsett av «rough» når du kjenner på overflata?",
+              "Kva engelsk ord er motsett av «rough» når orda beskriv korleis ei overflate kjennest?",
               "Smooth",
               {
                 "options": [
@@ -4135,7 +4135,7 @@
               }
             ],
             [
-              "Kva for ein av fargane blir rekna som kald i vanleg fargelære?",
+              "Kva for ein grunnfarge blir grøn saman med gul og lilla saman med raud?",
               "Blå",
               {
                 "options": [
@@ -4739,14 +4739,14 @@
           "name": "Familien til instrumentet",
           "questions": [
             [
-              "Kva av desse instrumenta spelar ein vanlegvis på med boge?",
+              "Kva strykeinstrument held ein under haka og spelar dei lysaste tonane med i eit vanleg orkester?",
               "Fiolin",
               {
                 "options": [
                   "Fiolin",
-                  "Trompet",
-                  "Gitar",
-                  "Fløyte"
+                  "Bratsj",
+                  "Cello",
+                  "Kontrabass"
                 ],
                 "image": "json/standard-media/d58fa7d46bcc57914d9efbad.jpg",
                 "imageAlt": "Rader og balkongar i ein konsertsal på eit eldre foto.",
@@ -4830,14 +4830,14 @@
               }
             ],
             [
-              "Kva av desse blåseinstrumenta har munnstykke med eitt enkelt røyrblad?",
+              "Kva treblåseinstrument har oftast eit rett, svart rør med klaffar, eitt rørblad og ei lita trakt nedst?",
               "Klarinett",
               {
                 "options": [
                   "Klarinett",
-                  "Tverrfløyte",
-                  "Horn",
-                  "Trompet"
+                  "Obo",
+                  "Fagott",
+                  "Saksofon"
                 ]
               }
             ],
