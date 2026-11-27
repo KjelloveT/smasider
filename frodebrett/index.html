@@ -7,7 +7,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/_resources/vyrde-ikon.png" sizes="384x384">
     <link rel="apple-touch-icon" href="/_resources/vyrde-ikon-180.png">
-<link rel="stylesheet" href="css/style.css?v=14">
+<link rel="stylesheet" href="css/style.css?v=15">
 <link rel="stylesheet" href="../css/vyrdepil-design.css?v=1.4">
       <script src="../js/vyrdepil-footer.js?v=2" defer></script>
 </head>
@@ -71,26 +71,33 @@
       <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="premade-heading">
         <h2 id="premade-heading">Førehandslaga frøder</h2>
         <p class="vp-prose">Dei førehandslaga frødene skal gje deg ein rask start med eit nesten ferdig oppsett. Dei er laga av KI, og ein god del av spørsmåla og svara er snodige. Sjå nøye gjennom både spørsmåla og svara før du brukar ei frøde med ein klasse.</p>
-        <div class="fb-library-filters" id="standard-filters">
-          <div class="vp-actions">
-            <label class="vp-choice"><input type="checkbox" id="standard-all" aria-controls="standard-list" checked>Alle</label>
+        <div class="fb-library-layout">
+          <details class="vp-accordion fb-library-sidebar" data-vp-support>
+            <summary><span class="fb-library-filter-label"><span data-icon="funnel" aria-hidden="true"></span>Filter</span></summary>
+            <div class="vp-accordion-body fb-library-filters" id="standard-filters">
+              <div class="vp-actions">
+                <label class="vp-choice"><input type="checkbox" id="standard-all" aria-controls="standard-list" checked>Alle</label>
+              </div>
+              <fieldset class="vp-choices">
+                <legend>Trinn</legend>
+                <div class="vp-actions fb-library-grades" id="standard-grade"></div>
+              </fieldset>
+              <fieldset class="vp-choices">
+                <legend>Fag</legend>
+                <div class="vp-actions fb-library-choice-list" id="standard-subject"></div>
+              </fieldset>
+              <fieldset class="vp-choices">
+                <legend>Tema som ikkje er knytt til fag</legend>
+                <div class="vp-actions fb-library-choice-list" id="standard-theme"></div>
+              </fieldset>
+            </div>
+          </details>
+          <div class="vp-stack">
+            <p class="vp-help" id="standard-status" role="status"></p>
+            <div id="standard-list" class="fb-quiz-list" hidden></div>
+            <div class="vp-actions" id="standard-curriculum" hidden></div>
           </div>
-          <fieldset class="vp-choices">
-            <legend>Trinn</legend>
-            <div class="vp-actions" id="standard-grade"></div>
-          </fieldset>
-          <fieldset class="vp-choices">
-            <legend>Fag</legend>
-            <div class="vp-actions" id="standard-subject"></div>
-          </fieldset>
-          <fieldset class="vp-choices">
-            <legend>Tema som ikkje er knytt til fag</legend>
-            <div class="vp-actions" id="standard-theme"></div>
-          </fieldset>
         </div>
-        <p class="vp-help" id="standard-status" role="status"></p>
-        <div id="standard-list" class="fb-quiz-list" hidden></div>
-        <div class="vp-actions" id="standard-curriculum" hidden></div>
       </section>
 
       <section class="vp-panel vp-panel--plain vp-stack" aria-labelledby="json-files-heading">
@@ -351,7 +358,7 @@
 
 <!-- Scripts -->
 <script src="../js/vyrdepil-storage.js"></script>
-<script src="../js/vyrdepil-icons.js"></script>
+<script src="../js/vyrdepil-icons.js?v=1"></script>
 <script src="../js/vyrdepil-util.js?v=1.2"></script>
 <script src="js/storage.js?v=9"></script>
 <script src="js/state.js?v=9"></script>
