@@ -156,15 +156,26 @@
     for (const [id, name] of Object.entries(themes)) {
       addChoice(theme, id, name, all.checked);
     }
-    const choices = [...filters.querySelectorAll('input[type="checkbox"]:not(#standard-all)')];
-    filters.addEventListener('change', ({ target }) => {
-      if (target === all) {
-        for (const choice of choices) choice.checked = all.checked;
-      } else {
-        all.checked = choices.every(choice => choice.checked);
+    const groups = [grade, subject, theme].map(group => ({
+      toggle: FB.el(group.id + '-all'),
+      choices: [...group.querySelectorAll('input')]
+    }));
+    const toggles = [...groups, { toggle: all, choices: groups.flatMap(group => group.choices) }];
+    const syncToggles = () => {
+      for (const { toggle, choices } of toggles) {
+        toggle.checked = choices.every(choice => choice.checked);
+        toggle.indeterminate = !toggle.checked && choices.some(choice => choice.checked);
       }
+    };
+    filters.addEventListener('change', ({ target }) => {
+      const group = toggles.find(({ toggle }) => toggle === target);
+      if (group) {
+        for (const choice of group.choices) choice.checked = target.checked;
+      }
+      syncToggles();
       render();
     });
+    syncToggles();
     render();
   }
 
