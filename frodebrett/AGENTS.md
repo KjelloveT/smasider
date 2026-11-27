@@ -6,6 +6,8 @@ Følg òg [retningslinjene for Vyrdepil](../AGENTS.md).
 
 Dette er standardprompt for å lage forhåndsgenererte frøder (spørsmålssett) til Frødebrett.
 
+- Skriv den norske teksten på moderne nynorsk. Vel ord som er tillatne både på nynorsk og på bokmål framfor synonym som berre er tillatne på nynorsk.
+
 - Det skal lages 5 kategorier til hver frøde. Kategoriene skal være forskjellige, men passe til hovedtemaet for den forhåndsgenererte frøden. Spørsmålene i hver kategori skal ha økende vanskelighetsgrad, der 100 poeng skal være noe ca 95% av alle i aldersgruppen skal kunne svare på, mens 1000 skal være ganske vanskelig. Finalen skal være middels vanskelighet.
 
 - Still eitt spørsmål om gongen. Bruk enkle ord og eitt eintydig svar på høgst to ord. Utelat perifere namn og tal, faguttrykk og eigennamn som er vanskelege å hugse når ein enklare del av same sak eignar seg. Unngå spørsmål der svaret sier seg sjølv. T.d. «Kva ledd brukar du når du bøyer kneet? Kneleddet.» Dersom frødebrettet har tema fag eller klassetrinn, så skal du ta utgangspunkt i Læreplanen for det faget. Spørsmålene skal være faglig relevant, men ikkje gå i fella med for «korrekte» svar som kun går direkte mot læreplanen. T.d. så står dette i læreplanen for naturfag 7. trinn: «utforske elektriske og magnetiske krefter gjennom forsøk og samtale om hvordan vi utnytter elektrisk energi i dagliglivet.» Da kan man ha spørsmål om hvor mange elbiler som finnes i Norge, eller når lyspæren ble oppfunnet, eller hva som bruker mest strøm av en mikrobølgeovn og en gamingPC. Prøv å ikke bare tenke teoretisk, men lag litt praktiske og virkelighetsnære spørsmål. Spørsmålene må ikke være direkte relatert til et læreplanmål, men kan være perifert knyttet til temaet. Prioriter spørsmål som er ekstra relevante for aldersgruppen.
@@ -18,7 +20,7 @@ Dette er standardprompt for å lage forhåndsgenererte frøder (spørsmålssett)
 
 - Det skal vere bildeillustrasjon til minst halvparten av spørsmåla pr frøde. Bruk bilete frå wikipedia og wikidata. Skildre motivet på nynorsk og skriv 2–4 presise søkjeord på engelsk eller med eit kjent eigennamn, til dømes «Beitostølen skiing». Vel eit anna motiv enn fasiten. Bruk tom streng dersom eit felt ikkje er relevant.
 
-- Kontroller kvart bilete mot spørsmålet og fasiten, medrekna finalen og reservevala. Eleven skal ikkje kunne lese eller kjenne att fasiten frå motivet, synleg tekst, eit kart, eit flagg, ei resultattavle eller biletskildringa. Vel eit anna bilete dersom motivet røper fasiten, og lat spørsmålet stå utan bilete dersom du ikkje finn eit trygt alternativ.
+- Kontroller kvart bilde mot spørsmålet og fasiten, medrekna finalen og reservevala. Motivet skal vise ein konkret stad, gjenstand, situasjon eller prosess som sjølve spørsmålet handlar om. Eleven skal ikkje kunne lese eller kjenne igjen fasiten frå motivet, synleg tekst, eit kart, eit flagg, ei resultattavle eller bildeskildringa. Byt motiv eller lat spørsmålet stå utan bilde når motivet har laus samanheng med spørsmålet eller røper fasiten.
 
 - Vel eit miniatyrbilete til kvar frøde som viser hovudtemaet på kortet på framsida til Frødebrett. Motivet skal vere tydeleg i lite format og tole eit liggjande utsnitt på 3:2. Hald motivet fritt for fasitar, og bruk eit komprimert, lokalt bilete med kjelde og lisens.
 

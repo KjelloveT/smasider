@@ -83,19 +83,54 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 .team-name { flex: 1; min-width: 0; }
 
 /* ===== Frødebibliotek ===== */
+.fb-library-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(12px, 2vw, 24px);
+  align-items: start;
+}
+.fb-library-filter-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .fb-library-filters {
   display: grid;
   gap: 16px;
 }
 .fb-library-filters .vp-choices { min-inline-size: 0; }
 .fb-library-filters .vp-choice { min-block-size: 44px; padding-block: 6px; }
-#quiz-selection > section > :is(h2, p) { margin: 0; }
+.fb-library-filters .vp-choice.fb-library-all { background: var(--vp-sky); }
+.fb-library-filters .vp-choices > .fb-library-all { margin-block-end: 8px; }
+.fb-library-all input:is(:checked, :indeterminate) { background: var(--vp-honey); }
+.fb-library-all input[type="checkbox"]:indeterminate::before {
+  height: 0;
+  border-left-width: 0;
+  transform: none;
+  visibility: visible;
+}
+.fb-library-filters .fb-library-grades {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 3.75rem), 1fr));
+}
+.fb-library-grades .vp-choice { gap: 6px; padding-inline: 6px; }
+@media (min-width: 821px) {
+  .fb-library-layout { grid-template-columns: clamp(14rem, 24vw, 15rem) minmax(0, 1fr); }
+  .fb-library-sidebar.vp-accordion > summary { cursor: default; }
+  .fb-library-sidebar > summary::after { display: none; }
+  .fb-library-filters .fb-library-choice-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+#quiz-selection > section > :is(h2, p),
+#quiz-selection .fb-library-results > :is(h2, p) { margin: 0; }
 .fb-quiz-list {
   display: grid; gap: 14px;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
 }
 #standard-list {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
 }
 .fb-quiz-card { display: grid; gap: 10px; align-content: start; overflow-wrap: anywhere; }
 .fb-quiz-summary {
