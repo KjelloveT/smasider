@@ -22,15 +22,15 @@
               "Månadskort",
               "Enkeltbillett"
             ],
-            "image": "json/weekly-media/7fd223cba3681b4ae9683cf5.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Ruter linje 31 Fornebu leddbuss Oslo rådhus (Oslo City Hall, bus, evening) Norway 2017-10-12",
+            "image": "json/weekly-media/99cbcdd5bbdbd792fc642109.jpg",
+            "imageAlt": "Fire politikarar står ved kvar sin talarstol under budsjettframlegginga.",
             "imageCredit": {
-              "title": "Ruter linje 31 Fornebu leddbuss Oslo rådhus (Oslo City Hall, bus, evening) Norway 2017-10-12.jpg",
-              "author": "Wolfmann",
-              "source": "https://commons.wikimedia.org/wiki/File:Ruter_linje_31_Fornebu_leddbuss_Oslo_r%C3%A5dhus_(Oslo_City_Hall,_bus,_evening)_Norway_2017-10-12.jpg",
-              "license": "CC BY-SA 4.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-              "illustration": true
+              "title": "Fire politikarar står ved kvar sin talarstol under budsjettframlegginga.",
+              "author": "Stian Lysberg Solum / NTB",
+              "publisher": "RingeriksAvisa",
+              "source": "https://ringeriksporten.no/politikk-1/64925-rodgronn-budsjettavtale-nasjonalt-manedskort-billigere-diesel-og-tannhelsereform",
+              "license": "Pressefoto",
+              "imageUrl": "https://ringeriksporten.no/images/2026/budsjettkameratene.jpg"
             },
             "source": {
               "title": "Rødgrønn budsjettavtale: Nasjonalt månedskort, billigere diesel og tannhelsereform",
@@ -51,15 +51,15 @@
               "Normal",
               "Europris"
             ],
-            "image": "json/weekly-media/242c8514213b064f7dd146d7.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Canned Milo In Store",
+            "image": "json/weekly-media/0df2786503b3348e62db2dd1.jpg",
+            "imageAlt": "Ein kvit boks av energidrikken som er omtalt i tilbakekallingsvarselet.",
             "imageCredit": {
-              "title": "Canned Milo In Store.jpg",
-              "author": "Leadehua at English Wikipedia",
-              "source": "https://commons.wikimedia.org/wiki/File:Canned_Milo_In_Store.jpg",
-              "license": "CC BY 2.5",
-              "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
-              "illustration": true
+              "title": "Ein kvit boks av energidrikken som er omtalt i tilbakekallingsvarselet.",
+              "author": "Produktfoto i tilbakekallingsvarselet",
+              "publisher": "Mattilsynet",
+              "source": "https://www.mattilsynet.no/tilbakekallinger/tilbakekalling-av-monster-energy-utvides-normal-tilbakekaller-seks-varianter",
+              "license": "Produktfoto",
+              "imageUrl": "https://mattilsynet-xp7prod.enonic.cloud/_/image/7fe353d6-fc08-42db-b2bd-3dc4ab6e8ef8:13bbe6382da08718e8e844ed65cb97aa910b9bd9/width-768/Monster%20Ultra%20White.png"
             },
             "source": {
               "title": "Normal tilbakekaller seks varianter av Monster i Norge",
@@ -99,16 +99,6 @@
               "Fredrikstad",
               "Ski"
             ],
-            "image": "json/weekly-media/f039322b28b00df5bd895027.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Bicycle parking, Oxford Railway Station - geograph.org.uk - 6271227",
-            "imageCredit": {
-              "title": "Bicycle parking, Oxford Railway Station - geograph.org.uk - 6271227.jpg",
-              "author": "JThomas",
-              "source": "https://commons.wikimedia.org/wiki/File:Bicycle_parking,_Oxford_Railway_Station_-_geograph.org.uk_-_6271227.jpg",
-              "license": "CC BY-SA 2.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-              "illustration": true
-            },
             "source": {
               "title": "Ny togstasjon i Moss: 780 sykkelplasser – ingen parkeringsplass",
               "publisher": "Teknisk Ukeblad / NTB",
@@ -157,16 +147,6 @@
               "DNB",
               "Nordea"
             ],
-            "image": "json/weekly-media/2b0fdbb95d28ee76875f49be.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. 20-kroner-1874-Norge",
-            "imageCredit": {
-              "title": "20-kroner-1874-Norge.jpg",
-              "author": "Unknown author Unknown author",
-              "source": "https://commons.wikimedia.org/wiki/File:20-kroner-1874-Norge.jpg",
-              "license": "Public Domain",
-              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-              "illustration": true
-            },
             "source": {
               "title": "Betalingstrøbbel hos Nordea – flere har ikke fått lønn",
               "publisher": "Radio Haugaland / NTB",
@@ -210,15 +190,15 @@
               "Georgia",
               "Serbia"
             ],
-            "image": "json/weekly-media/15255ed00dd81f67e1cbfa1d.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Europa Building in Brussels",
+            "image": "json/weekly-media/6b9a3013f13e694ca0fc2141.jpg",
+            "imageAlt": "Emmanuel Macron helsar på Friedrich Merz før EU-møtet i Brussel.",
             "imageCredit": {
-              "title": "Europa Building in Brussels.jpg",
-              "author": "PPEscientist",
-              "source": "https://commons.wikimedia.org/wiki/File:Europa_Building_in_Brussels.jpg",
-              "license": "CC BY-SA 4.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-              "illustration": true
+              "title": "Emmanuel Macron helsar på Friedrich Merz før EU-møtet i Brussel.",
+              "author": "Nicolas Tucat / AFP",
+              "publisher": "Al Jazeera",
+              "source": "https://www.aljazeera.com/amp/economy/2026/11/26/eu-leaders-struggle-to-agree-on-long-term-budget-more-money-for-ukraine",
+              "license": "Pressefoto",
+              "imageUrl": "https://www.aljazeera.com/wp-content/uploads/2026/11/AFP__20261126__D8NR9MQ__v1__HighRes__BelgiumEuCouncilSummit-1795708617.jpg?resize=770%2C513&quality=80"
             },
             "source": {
               "title": "EU leaders struggle to agree on long-term budget, $49bn Ukraine loan",
@@ -239,16 +219,6 @@
               "Keir Starmer",
               "Volodymyr Zelenskyj"
             ],
-            "image": "json/weekly-media/2e13152398008d5dabcf9552.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Wikimedia Morocco Mini-Hackathon 2026 day 2 - Group of Attendees at Conference Table with Microphones and Laptops - 0152",
-            "imageCredit": {
-              "title": "Wikimedia Morocco Mini-Hackathon 2026 day 2 - Group of Attendees at Conference Table with Microphones and Laptops - 0152.jpg",
-              "author": "DERDAKI ILIAS",
-              "source": "https://commons.wikimedia.org/wiki/File:Wikimedia_Morocco_Mini-Hackathon_2026_day_2_-_Group_of_Attendees_at_Conference_Table_with_Microphones_and_Laptops_-_0152.jpg",
-              "license": "CC BY-SA 4.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-              "illustration": true
-            },
             "source": {
               "title": "Trump Urges Putin to ‘Pull Back’ Military Aggression in Europe",
               "publisher": "TIME",
@@ -287,15 +257,15 @@
               "Vurderingstest",
               "Tilrådingsbrev"
             ],
-            "image": "json/weekly-media/5933e2235bb52b92dd15b8e6.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Gembling Primary School empty for three years - geograph.org.uk - 6609145",
+            "image": "json/weekly-media/df8fdd02b6ac1ec9c7a86fd6.jpg",
+            "imageAlt": "Inngangen til bygget til utdanningsdepartementet i Syria.",
             "imageCredit": {
-              "title": "Gembling Primary School empty for three years - geograph.org.uk - 6609145.jpg",
-              "author": "Martin Dawes",
-              "source": "https://commons.wikimedia.org/wiki/File:Gembling_Primary_School_empty_for_three_years_-_geograph.org.uk_-_6609145.jpg",
-              "license": "CC BY-SA 2.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-              "illustration": true
+              "title": "Inngangen til bygget til utdanningsdepartementet i Syria.",
+              "author": "Fotograf ikkje oppgitt",
+              "publisher": "Kashaf",
+              "source": "https://kashaffacts.com/en/factcheck/education-expat-students-en-2026-11-24/",
+              "license": "Pressefoto",
+              "imageUrl": "https://kashaffacts.com/wp-content/uploads/2026/11/education-expat-students-card-2026-11-24.webp"
             },
             "source": {
               "title": "Syria's Ministry of Education issues new measures easing school registration for students arriving from abroad",
@@ -379,15 +349,15 @@
               "Viking",
               "KFUM"
             ],
-            "image": "json/weekly-media/62cc460d297bad065ddaad29.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Football Under Floodlights - geograph.org.uk - 619765",
+            "image": "json/weekly-media/4c5ac0fc344c09fd0192ed9b.jpg",
+            "imageAlt": "Flaumlysa lyser over banen på Ekeberg om kvelden.",
             "imageCredit": {
-              "title": "Football Under Floodlights - geograph.org.uk - 619765.jpg",
-              "author": "Martin Addison",
-              "source": "https://commons.wikimedia.org/wiki/File:Football_Under_Floodlights_-_geograph.org.uk_-_619765.jpg",
-              "license": "CC BY-SA 2.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-              "illustration": true
+              "title": "Flaumlysa lyser over banen på Ekeberg om kvelden.",
+              "author": "Annika Byrde / NTB",
+              "publisher": "KFUM Oslo",
+              "source": "https://www.kaaffa.no/nyheter/da-lyset-kom-ble-det-meste-morkt",
+              "license": "Pressefoto",
+              "imageUrl": "https://www.kaaffa.no/nyheter/da-lyset-kom-ble-det-meste-morkt/_/image/f6546320-e009-473a-968c-e42bc1a5f4b7:b05975823ac0b6bb428660d11bdbb7d3b9cd13f6/width-1100/NTB_A_wf-LWicF4.jpg"
             },
             "source": {
               "title": "Da lyset kom, ble det meste mørkt",
@@ -408,15 +378,15 @@
               "41–23",
               "38–24"
             ],
-            "image": "json/weekly-media/681c6f72c2982f9de5b8c821.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Kilmanagh handball alley",
+            "image": "json/weekly-media/6c36a43193c6222a633e1cbd.jpg",
+            "imageAlt": "Ein norsk handballspelar joggar på banen i Stjørdalshallen.",
             "imageCredit": {
-              "title": "Kilmanagh handball alley.jpg",
-              "author": "A.-K. D.",
-              "source": "https://commons.wikimedia.org/wiki/File:Kilmanagh_handball_alley.jpg",
-              "license": "CC BY-SA 4.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-              "illustration": true
+              "title": "Ein norsk handballspelar joggar på banen i Stjørdalshallen.",
+              "author": "NTB",
+              "publisher": "Radio Haugaland",
+              "source": "https://radioh.no/norge-kjorte-over-faeroyene-vant-41-23-i-em-oppkjoringen/",
+              "license": "Pressefoto",
+              "imageUrl": "https://radioh.no/wp-content/uploads/2026/11/ntb-1299276-jjYmbSCt8-925-925x600.jpg"
             },
             "source": {
               "title": "Norge kjørte over Færøyene – vant 41-23 i EM-oppkjøringen",
@@ -520,15 +490,15 @@
               "DART",
               "Rosetta"
             ],
-            "image": "json/weekly-media/7a199c3355c89ec5ae967fc5.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. BennuAsteroid",
+            "image": "json/weekly-media/9f8e4b1feea2c9fe899faa49.jpg",
+            "imageAlt": "Den vesle asteroiden Dimorphos kastar skugge på den større Didymos.",
             "imageCredit": {
-              "title": "BennuAsteroid.jpg",
-              "author": "NASA/Goddard/University of Arizona",
-              "source": "https://commons.wikimedia.org/wiki/File:BennuAsteroid.jpg",
-              "license": "Public Domain",
-              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-              "illustration": true
+              "title": "Den vesle asteroiden Dimorphos kastar skugge på den større Didymos.",
+              "author": "ESA",
+              "publisher": "The Planetary Society",
+              "source": "https://www.planetary.org/articles/heras-first-close-up-images-of-didymos-and-dimorphos",
+              "license": "Pressefoto",
+              "imageUrl": "https://planetary.s3.amazonaws.com/web/assets/pictures/_360x417_crop_center-center_line/dimorphos-eclipsing-didymos.jpeg"
             },
             "source": {
               "title": "Hera's first close-up images of Didymos and Dimorphos",
@@ -549,15 +519,15 @@
               "Arktis",
               "Beringhavet"
             ],
-            "image": "json/weekly-media/119eb3395240109bc7329201.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Jumpsuit camp on ice floe in Beaufort Sea (50614587428)",
+            "image": "json/weekly-media/456c94788bbb847c4148dbf6.jpg",
+            "imageAlt": "Flak av havis med mørke sprekker mellom seg, sett ovanfrå.",
             "imageCredit": {
-              "title": "Jumpsuit camp on ice floe in Beaufort Sea (50614587428).jpg",
-              "author": "National Snow and Ice Data Center from Boulder, United States",
-              "source": "https://commons.wikimedia.org/wiki/File:Jumpsuit_camp_on_ice_floe_in_Beaufort_Sea_(50614587428).jpg",
-              "license": "CC BY 2.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-              "illustration": true
+              "title": "Flak av havis med mørke sprekker mellom seg, sett ovanfrå.",
+              "author": "Wendy Pyper",
+              "publisher": "Australian Antarctic Program",
+              "source": "https://www.antarctica.gov.au/news/2026/antarctic-sea-ice-extent-hits-new-october-low/",
+              "license": "Pressefoto",
+              "imageUrl": "https://www.antarctica.gov.au/site/assets/files/131947/ice_2_wendy_pyper.1920x768.jpg"
             },
             "source": {
               "title": "Antarctic sea ice extent hits new low",
@@ -607,15 +577,16 @@
               "Naturgass",
               "Elektrisitet"
             ],
-            "image": "json/weekly-media/0d3233f378f9a53aef2a2659.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Delegates to the COP21 Climate Change Conference Assemble in the Plenary Hall Before Speeches By French President Hollande, Foreign Minister Fabius, and UN Secretary-General Ki-moon (23069791503)",
+            "image": "json/weekly-media/72d572ceef2e480008bf738e.jpg",
+            "imageAlt": "Deltakarar snakkar saman ved eit FN-flagg på klimatoppmøtet.",
             "imageCredit": {
-              "title": "Delegates to the COP21 Climate Change Conference Assemble in the Plenary Hall Before Speeches By French President Hollande, Foreign Minister Fabius, and UN Secretary-General Ki-moon (23069791503).jpg",
-              "author": "U.S. Department of State from United States",
-              "source": "https://commons.wikimedia.org/wiki/File:Delegates_to_the_COP21_Climate_Change_Conference_Assemble_in_the_Plenary_Hall_Before_Speeches_By_French_President_Hollande,_Foreign_Minister_Fabius,_and_UN_Secretary-General_Ki-moon_(23069791503).jpg",
-              "license": "Public Domain",
-              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-              "illustration": true
+              "title": "Deltakarar snakkar saman ved eit FN-flagg på klimatoppmøtet.",
+              "author": "Kiara Worth / UN Climate Change",
+              "publisher": "Living on Earth",
+              "source": "https://www.loe.org/shows/segments.html?programID=26-P13-00048&segmentID=1",
+              "license": "CC BY-NC-SA 4.0",
+              "imageUrl": "https://www.loe.org/content/2026-11-27/ALDEN_peopletalking.jpg",
+              "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
             },
             "source": {
               "title": "The Six Biggest Takeaways From COP31, Which Ended Without an Agreement After Talks Broke Down",
@@ -636,15 +607,15 @@
               "DART",
               "Rosetta"
             ],
-            "image": "json/weekly-media/5ea92660b081697867fa2432.png",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. A Box of Treasure from Asteroid Ryugu (SVS14089 - AsteroidRyuguOrganicsV4)",
+            "image": "json/weekly-media/33b81ea966bb4165ebfeef50.jpg",
+            "imageAlt": "Eit nærbilde av ein steinete asteroide med mørk bakgrunn.",
             "imageCredit": {
-              "title": "A Box of Treasure from Asteroid Ryugu (SVS14089 - AsteroidRyuguOrganicsV4).png",
-              "author": "NASA's Scientific Visualization Studio - KBR Wyle Services, LLC/Dan Gallagher, Advocates in Manpower Management, Inc./John Caldwell, Catholic University of America/Heather Graham, Kyushu University/Hiroshi Naraoka, Hokkaido University/Yasuhiro Oba, JAMSTEC/Yoshinori Takano, NASA/GSFC/Jason Dworkin, NASA/GSFC/Daniel Glavin, KBR Wyle Services, LLC/LK Ward, NASA/GSFC/William Steigerwald, Yoshiko Sugahara, ADNET Systems, Inc./Lonnie Shekhtman, ADNET Systems, Inc./Aaron E. Lepsch",
-              "source": "https://commons.wikimedia.org/wiki/File:A_Box_of_Treasure_from_Asteroid_Ryugu_(SVS14089_-_AsteroidRyuguOrganicsV4).png",
-              "license": "Public Domain",
-              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-              "illustration": true
+              "title": "Eit nærbilde av ein steinete asteroide med mørk bakgrunn.",
+              "author": "ESA",
+              "publisher": "The Planetary Society",
+              "source": "https://www.planetary.org/articles/heras-first-close-up-images-of-didymos-and-dimorphos",
+              "license": "Pressefoto",
+              "imageUrl": "https://planetary.s3.amazonaws.com/web/assets/pictures/_1200x630_crop_center-center_82_none/didymos-and-dimorphos-with-crater.jpeg?mtime=1795631921"
             },
             "source": {
               "title": "Hera's first close-up images of Didymos and Dimorphos",
@@ -665,15 +636,15 @@
               "20 prosent",
               "16 prosent"
             ],
-            "image": "json/weekly-media/5faaa307c96db2f79055f2d2.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. A mixture of sea ice (51062594113)",
+            "image": "json/weekly-media/eb65ffc924a0c9450c5a8c97.jpg",
+            "imageAlt": "Keisarpingvinar står på havisen framfor ein isvegg.",
             "imageCredit": {
-              "title": "A mixture of sea ice (51062594113).jpg",
-              "author": "National Snow and Ice Data Center from Boulder, United States",
-              "source": "https://commons.wikimedia.org/wiki/File:A_mixture_of_sea_ice_(51062594113).jpg",
-              "license": "CC BY 2.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-              "illustration": true
+              "title": "Keisarpingvinar står på havisen framfor ein isvegg.",
+              "author": "Mark Baker",
+              "publisher": "Australian Antarctic Program",
+              "source": "https://www.antarctica.gov.au/news/2026/antarctic-sea-ice-extent-hits-new-october-low/",
+              "license": "Pressefoto",
+              "imageUrl": "https://www.antarctica.gov.au/site/assets/files/131947/emperor_penguins_mark_baker.800x450.jpeg"
             },
             "source": {
               "title": "Antarctic sea ice extent hits new low",
@@ -699,15 +670,15 @@
               "3 timar",
               "4 timar"
             ],
-            "image": "json/weekly-media/e514bfe8afe47081ac3a73d0.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Kadriorg Stadium floodlights and Maakri high-rises",
+            "image": "json/weekly-media/158722599febe2b9b2c3511e.jpg",
+            "imageAlt": "Fotballspelarar framfor mål under kampen på Ekeberg.",
             "imageCredit": {
-              "title": "Kadriorg Stadium floodlights and Maakri high-rises.jpg",
-              "author": "Sancos",
-              "source": "https://commons.wikimedia.org/wiki/File:Kadriorg_Stadium_floodlights_and_Maakri_high-rises.jpg",
-              "license": "CC BY 4.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-              "illustration": true
+              "title": "Fotballspelarar framfor mål under kampen på Ekeberg.",
+              "author": "Annika Byrde / NTB",
+              "publisher": "KFUM Oslo",
+              "source": "https://www.kaaffa.no/nyheter/da-lyset-kom-ble-det-meste-morkt",
+              "license": "Pressefoto",
+              "imageUrl": "https://www.kaaffa.no/nyheter/da-lyset-kom-ble-det-meste-morkt/_/image/40c38349-3c1e-4845-9be7-f6db20580388:db280edaa5c93d4172cb8250925e86c7f445abe3/width-1100/NTB_G28BdNY4q6c.jpg"
             },
             "source": {
               "title": "Da lyset kom, ble det meste mørkt",
@@ -728,15 +699,15 @@
               "Bilar",
               "Motorsyklar"
             ],
-            "image": "json/weekly-media/e45bf9cbb8dca6ee02f54037.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Bicycles on platform 7B, Shrewsbury railway station - geograph.org.uk - 4738135",
+            "image": "json/weekly-media/4d1ee99fc42fd49ae360b31b.jpg",
+            "imageAlt": "Spor og byggearbeid langs hamna i Moss sett ovanfrå.",
             "imageCredit": {
-              "title": "Bicycles on platform 7B, Shrewsbury railway station - geograph.org.uk - 4738135.jpg",
-              "author": "Jaggery",
-              "source": "https://commons.wikimedia.org/wiki/File:Bicycles_on_platform_7B,_Shrewsbury_railway_station_-_geograph.org.uk_-_4738135.jpg",
-              "license": "CC BY-SA 2.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-              "illustration": true
+              "title": "Spor og byggearbeid langs hamna i Moss sett ovanfrå.",
+              "author": "Arash A. Nejad",
+              "publisher": "Teknisk Ukeblad",
+              "source": "https://beta.tu.no/samferdsel/milliardstrid-om-moss-utbyggingen-skal-opp-i-lagmannsretten/7146982",
+              "license": "Pressefoto",
+              "imageUrl": "https://image.tu.no/7147043.webp?imageId=7147043&x=0.00&y=0.00&cropw=100.00&croph=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=644&format=jpg"
             },
             "source": {
               "title": "Ny togstasjon i Moss: 780 sykkelplasser – ingen parkeringsplass",
@@ -776,15 +747,15 @@
               "4",
               "5"
             ],
-            "image": "json/weekly-media/ed64f74cdcff2c293b6e8777.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Drinking can ring-pull tab",
+            "image": "json/weekly-media/7ff28efb6a84cd8c57dec18d.jpg",
+            "imageAlt": "Ein fargerik boks av ein av energidrikkvariantane i tilbakekallingsvarselet.",
             "imageCredit": {
-              "title": "Drinking can ring-pull tab.jpg",
-              "author": "Marcos André",
-              "source": "https://commons.wikimedia.org/wiki/File:Drinking_can_ring-pull_tab.jpg",
-              "license": "CC BY 2.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-              "illustration": true
+              "title": "Ein fargerik boks av ein av energidrikkvariantane i tilbakekallingsvarselet.",
+              "author": "Produktfoto i tilbakekallingsvarselet",
+              "publisher": "Mattilsynet",
+              "source": "https://www.mattilsynet.no/tilbakekallinger/tilbakekalling-av-monster-energy-utvides-normal-tilbakekaller-seks-varianter",
+              "license": "Produktfoto",
+              "imageUrl": "https://mattilsynet-xp7prod.enonic.cloud/_/image/c39a7405-7576-49b2-9837-66b5f62988b4:4ecb1d9f1c90621795537646adb088b8c129ca87/width-768/Mango%20Loco.jpg"
             },
             "source": {
               "title": "Normal tilbakekaller seks varianter av Monster i Norge",
@@ -805,15 +776,16 @@
               "Washington",
               "Oregon"
             ],
-            "image": "json/weekly-media/5ee33a8b3e7308c4e3a5bce0.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Hummingbird Hovering and Red Flowers",
+            "image": "json/weekly-media/ce99ee23df2cbf4e86cd1b7b.jpg",
+            "imageAlt": "To nærbilde av kolibriar med små sendarar festa på ryggen.",
             "imageCredit": {
-              "title": "Hummingbird Hovering and Red Flowers.jpg",
-              "author": "Amaury Laporte",
-              "source": "https://commons.wikimedia.org/wiki/File:Hummingbird_Hovering_and_Red_Flowers.jpg",
-              "license": "CC BY 2.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-              "illustration": true
+              "title": "To nærbilde av kolibriar med små sendarar festa på ryggen.",
+              "author": "Emma M. Rhodes mfl. / Ecology and Evolution",
+              "publisher": "Phys.org",
+              "source": "https://phys.org/news/2026-11-tiny-tracker-reveals-longest-hummingbird.html",
+              "license": "CC BY 4.0",
+              "imageUrl": "https://scx1.b-cdn.net/csz/news/800a/2026/tiny-tracker-reveals-t.jpg",
+              "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
             },
             "source": {
               "title": "Tiny tracker reveals the longest ever recorded hummingbird migration",
@@ -864,6 +836,17 @@
         "published": "2026-11-27",
         "story": "cop31-klimatoppmote",
         "importance": "major"
+      },
+      "image": "json/weekly-media/983f64f0b82c332f6b0471ad.jpg",
+      "imageAlt": "Delegatar med mikrofonar framfor seg ved forhandlingsbordet på COP31.",
+      "imageCredit": {
+        "title": "Delegatar med mikrofonar framfor seg ved forhandlingsbordet på COP31.",
+        "author": "Kiara Worth / UN Climate Change",
+        "publisher": "Living on Earth",
+        "source": "https://www.loe.org/shows/segments.html?programID=26-P13-00048&segmentID=1",
+        "license": "CC BY-NC-SA 4.0",
+        "imageUrl": "https://www.loe.org/content/2026-11-27/ALDEN_twodaysover.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
       }
     }
   }

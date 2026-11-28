@@ -31,3 +31,10 @@ Dette er standardprompt for å lage forhåndsgenererte frøder (spørsmålssett)
 - Bruk minst 16 bilete blant dei 31 spørsmåla. Lagre dei i `json/standard-media/` med 24 små heksadesimale teikn i filnamnet. Før opp `image`, `imageAlt`, `imageKeywords` og `imageCredit` på illustrerte spørsmål. Biletkreditten viser originalfila på Wikimedia Commons, opphavspersonen og lisensen. Bruk verk med ein lisens som tillet gjenbruk, og merk eventuell tilskjering.
 - Gje fagfrøda ein `thumbnail`-nøkkel og registrer miniatyren med `image`, `imageAlt` og `imageCredit` under `boards` i `json/thumbnails.json`. Temafrøder brukar filnamnet som nøkkel under `themes`. Komprimer miniatyren for bibliotekvising.
 - Køyr `node --test frodebrett/tests/standard-quizzes.test.cjs` og prøv frøda i nettlesaren. Sjekk filter, start, «Vis hint», bilete og finale.
+
+## Foto i vekas nyheitsfrøde
+
+- Vel først eit foto frå artikkelen som støttar fasiten. Bruk gjerne eit foto frå ei anna truverdig kjelde som viser den same saka. Sikt mot at fleirtalet av bilda kjem frå nyheitskjeldene.
+- Bruk Wikimedia Commons som reserve når du ikkje finn eit eigna kjeldefoto. Vel eit motiv med klar samanheng med sjølve spørsmålet. Minst 15 brettspørsmål skal ha bilde.
+- Kontroller motiv, synleg tekst, logoar, kart, flagg, resultattavler og alternativtekst mot fasiten. Gjer den same kontrollen for finalen. Vel bort foto med identifiserbare barn, valdelege motiv eller motiv som røper fasiten.
+- Før opp fotograf eller kreditert opphav, utgivar og lenkje til sida som publiserte fotoet. Merk arkivfoto som arkivfoto. Redaktøren vurderer fotoa før publisering. [Redaksjonsinstruks for den automatiske køyringa](../.github/frodebrett/weekly-news-prompt.md)
