@@ -6,11 +6,12 @@ import { supernyttTopics } from './supernytt.mjs';
 
 const string = { type: 'string' };
 const norwayTopic = 'hovudsaker i Noreg på tvers av stoffområde og landsdelar';
+const scienceAndGamesTopic = 'natur, dyr, vitskap, dataspel og teknologi, med vekt på det som opptek born og ungdom';
 const topics = [
   norwayTopic,
   'hovudsaker i verda, internasjonal politikk, val, toppmøte og andre større samfunnshendingar',
   'verdsnyheiter som vedkjem born og ungdom, med nokre av dei største konflikt- og diplomatisakene forklart for målgruppa',
-  'natur, dyr, vitskap, spel og teknologi, med vekt på det som opptek born og ungdom',
+  scienceAndGamesTopic,
   'idrett, kultur, skule, fritid og mediesaker med særleg interesse for born og ungdom'
 ];
 const schema = {
@@ -47,11 +48,15 @@ function researchPrompt(period, topic, maxToolCalls, youthTopics) {
   const norwegianCoverage = topic === norwayTopic
     ? 'Fordel dei norske sakene på minst fire stoffområde som samfunn, næringsliv, idrett, kultur, natur og vêr og samferdsel. Finn saker om ulike aktørar i fleire norske redaksjonar. Ta med høgst to saker med utspel, framlegg eller vedtak frå regjeringa, departementa og Stortinget som hovudsak.'
     : '';
+  const gameCoverage = topic === scienceAndGamesTopic
+    ? 'Bruk eit målretta nettsøk på spelnyheiter i perioden. Finn minst tre ulike, skuleeigna hendingar, helst om ulike spel. Sjå etter lanseringar, større oppdateringar og andre aktuelle hendingar i populære mobilspel og dataspel. Sjekk daterte artiklar frå spelredaksjonar og nyheiter frå utviklarane. Ta òg med kjelder om natur, dyr, vitskap og teknologi.'
+    : '';
   return [
     'Du er nyheitsredaktør for eit nyheitsbrett for 5.–10. trinn. Kartlegg fyrst dei viktigaste skuleeigna nyheitene i perioden frå og med '
       + period.from + ' til og med ' + period.through + ', norsk tid. Søk med nøyaktige datoar og opne kjeldene.',
     'Finn ' + amount + ' ulike, skuleeigna hendingar innanfor ' + topic + '. Start med vekas hovudsaker og saker fleire uavhengige redaksjonar har dekt. Bruk oppfølgingssøk om dei konkrete sakene. Lever éin god artikkel per hending.',
     norwegianCoverage,
+    gameCoverage,
     'Prioriter saker som born og ungdom har fått med seg, eller som er relevante for skulen, fritida eller den digitale kvardagen deira. Finn fakta som er kjende og lette å formulere presist utan faguttrykk.',
     youthTopics.length ? 'Supernytt brukte desse temaa i veka. Dette er tips til nettsøket. Bruk ein datert artikkel som kjelde for kvart faktasvar. ' + JSON.stringify(youthTopics) : '',
     'Bruk nasjonale redaksjonar som NRK, TV 2, VG, Dagbladet og Aftenposten, breie internasjonale redaksjonar som Reuters, AP, BBC og Euronews og primærkjelder for konkrete fakta. Daterte rapportar frå ei avslutta veke kan ha ein ny utvikling i ei eldre sak.',

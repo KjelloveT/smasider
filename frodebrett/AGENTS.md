@@ -32,6 +32,11 @@ Dette er standardprompt for å lage forhåndsgenererte frøder (spørsmålssett)
 - Gje fagfrøda ein `thumbnail`-nøkkel og registrer miniatyren med `image`, `imageAlt` og `imageCredit` under `boards` i `json/thumbnails.json`. Temafrøder brukar filnamnet som nøkkel under `themes`. Komprimer miniatyren for bibliotekvising.
 - Køyr `node --test frodebrett/tests/standard-quizzes.test.cjs` og prøv frøda i nettlesaren. Sjekk filter, start, «Vis hint», bilete og finale.
 
+## Saker i vekas nyheitsfrøde
+
+- Bruk minst to, helst tre, brettspørsmål om spelnyheiter frå den aktuelle veka. Aktuelle saker kan vere lanseringar og større oppdateringar i populære mobilspel og dataspel. Vel ulike hendingar for spelspørsmåla.
+- Bruk eitt spørsmål per nyheitssak som hovudregel på heile brettet, medrekna finalen. Ulike artiklar om den same hendinga tel som éi sak. Bruk to spørsmål om ei sak berre når kjeldegrunnlaget manglar ei god, ubrukt sak. Dei to spørsmåla skal då gjelde ulike opplysningar.
+
 ## Foto i vekas nyheitsfrøde
 
 - Vel først eit foto frå artikkelen som støttar fasiten. Bruk gjerne eit foto frå ei anna truverdig kjelde som viser den same saka. Sikt mot at fleirtalet av bilda kjem frå nyheitskjeldene.
