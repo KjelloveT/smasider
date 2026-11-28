@@ -2,189 +2,178 @@
   "app": "frodebrett",
   "version": 1,
   "period": {
-    "edition": "2026-11-25",
-    "from": "2026-11-18",
-    "through": "2026-11-24"
+    "edition": "2026-11-28",
+    "from": "2026-11-21",
+    "through": "2026-11-27"
   },
   "quiz": {
-    "title": "Vekas nyheitsfrøde · 18.–24. nov. 2026",
+    "title": "Vekas nyheitsfrøde · 21.–27. nov. 2026",
     "categories": [
       {
         "name": "I Noreg",
         "questions": [
           {
             "points": 100,
-            "question": "Mattilsynet leita etter meir fugleinfluensa denne veka. På kor mange norske gardar var smitten påvist måndag?",
-            "answer": "8 gardar",
+            "question": "Dei fire partia som vart einige om eit budsjettframlegg, ville gjere ei vanleg billettordning på buss og tog billegare. Kva slags billett ville dei gjere billegare?",
+            "answer": "Månadskort",
             "options": [
-              "14 gardar",
-              "5 gardar",
-              "11 gardar",
-              "8 gardar"
+              "Dagskort",
+              "Vekekort",
+              "Månadskort",
+              "Enkeltbillett"
             ],
-            "image": "json/weekly-media/751f06120d212e7df34a6021.jpg",
-            "imageAlt": "Nærbilete av eit raudt varsel om smittsam dyresjukdom.",
+            "image": "json/weekly-media/7fd223cba3681b4ae9683cf5.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Ruter linje 31 Fornebu leddbuss Oslo rådhus (Oslo City Hall, bus, evening) Norway 2017-10-12",
             "imageCredit": {
-              "title": "Nærbilete av eit raudt varsel om smittsam dyresjukdom.",
-              "author": "Tor Erik Schrøder / NTB",
-              "publisher": "Radio Haugaland",
-              "source": "https://radioh.no/tester-nye-fjorfehold-for-fugleinfluensa-fortsatt-ikke-fullstendig-oversikt/",
-              "license": "Pressefoto",
-              "imageUrl": "https://radioh.no/wp-content/uploads/2026/11/ntb-1298485-wRggX4pQNNw-925-925x600.jpg"
+              "title": "Ruter linje 31 Fornebu leddbuss Oslo rådhus (Oslo City Hall, bus, evening) Norway 2017-10-12.jpg",
+              "author": "Wolfmann",
+              "source": "https://commons.wikimedia.org/wiki/File:Ruter_linje_31_Fornebu_leddbuss_Oslo_r%C3%A5dhus_(Oslo_City_Hall,_bus,_evening)_Norway_2017-10-12.jpg",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "illustration": true
             },
             "source": {
-              "title": "Tester nye fjørfehold for fugleinfluensa: – Fortsatt ikke fullstendig oversikt",
-              "publisher": "Radio Haugaland / NTB",
-              "url": "https://radioh.no/tester-nye-fjorfehold-for-fugleinfluensa-fortsatt-ikke-fullstendig-oversikt/",
-              "published": "2026-11-23",
-              "story": "fugleinfluensa-norge",
+              "title": "Rødgrønn budsjettavtale: Nasjonalt månedskort, billigere diesel og tannhelsereform",
+              "publisher": "RingeriksAvisa / NTB",
+              "url": "https://ringeriksporten.no/politikk-1/64925-rodgronn-budsjettavtale-nasjonalt-manedskort-billigere-diesel-og-tannhelsereform",
+              "published": "2026-11-25",
+              "story": "statsbudsjett-avtale",
               "importance": "major"
             }
           },
           {
             "points": 200,
-            "question": "Opninga av Vikingtidsmuseet vart utsett på nytt denne veka. Kva år skal museet no opne att?",
-            "answer": "2028",
+            "question": "Kva for ei butikkjede kalla tilbake fleire variantar av energidrikken Monster denne veka?",
+            "answer": "Normal",
             "options": [
-              "2028",
-              "2026",
-              "2027",
-              "2029"
+              "Rusta",
+              "Jula",
+              "Normal",
+              "Europris"
             ],
-            "image": "json/weekly-media/1d156d2e72349c56c4edd093.jpg",
-            "imageAlt": "Vikingtidsmuseet på Bygdøy",
+            "image": "json/weekly-media/242c8514213b064f7dd146d7.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Canned Milo In Store",
             "imageCredit": {
-              "title": "Vikingtidsmuseet på Bygdøy",
-              "author": "Håkon Mosvold Larsen / NTB",
-              "publisher": "Radio Haugaland / NTB",
-              "source": "https://radioh.no/apningen-av-vikingtidsmuseet-utsatt-igjen/",
-              "imageUrl": "https://radioh.no/wp-content/uploads/2026/11/ntb-1298454-wcd7dkYgaPQ-925-925x600.jpg",
-              "license": "Pressefoto",
-              "preserved": true
+              "title": "Canned Milo In Store.jpg",
+              "author": "Leadehua at English Wikipedia",
+              "source": "https://commons.wikimedia.org/wiki/File:Canned_Milo_In_Store.jpg",
+              "license": "CC BY 2.5",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+              "illustration": true
             },
             "source": {
-              "title": "Åpningen av Vikingtidsmuseet utsatt igjen",
-              "publisher": "Radio Haugaland / NTB",
-              "url": "https://radioh.no/apningen-av-vikingtidsmuseet-utsatt-igjen/",
-              "published": "2026-11-23",
-              "story": "vikingtidsmuseet-utsett",
+              "title": "Normal tilbakekaller seks varianter av Monster i Norge",
+              "publisher": "Amoledo Norge",
+              "url": "https://amoledo.com/nb/news/96595-2392-normal-tilbakekaller-seks-varianter-av-monster-i-norge",
+              "published": "2026-11-27",
+              "story": "monster-tilbakekalling",
               "importance": "major"
             }
           },
           {
             "points": 300,
-            "question": "Delane til den nye Sotrabrua skulle alt ha vore monterte. I kva land låg dei framleis på lager då Bergens Tidende melde om forseinkinga?",
-            "answer": "Kina",
+            "question": "Kven møtte dei norske handballkvinnene i Stjørdalshallen som ein av dei siste testane før EM?",
+            "answer": "Færøyane",
             "options": [
-              "Sør-Korea",
-              "Sverige",
-              "Polen",
-              "Kina"
+              "Island",
+              "Danmark",
+              "Færøyane",
+              "Sverige"
             ],
-            "image": "json/weekly-media/f85eacb00f78ff2a0d40e4cf.jpg",
-            "imageAlt": "Bygginga av den nye Sotrabrua sett ovanfrå.",
-            "imageCredit": {
-              "title": "Bygginga av den nye Sotrabrua sett ovanfrå.",
-              "author": "Lukas Hauge Klemsdal",
-              "publisher": "Bergens Tidende",
-              "source": "https://www.bt.no/nyheter/okonomi/i/Pv9xob/brodekket-skulle-vaert-ferdig-montert-i-september-staar-fortsatt-paa-lager-i-kina",
-              "license": "Pressefoto",
-              "imageUrl": "https://premium.vgc.no/v2/images/e3891438-5877-333b-8fa5-c808fb9b64be?fit=crop&format=auto&h=2850&w=1900&s=21b8a8a32a8d4748643a893893678c272ab16d82"
-            },
             "source": {
-              "title": "Brodekket skulle vært ferdig montert i september. Står fortsatt på lager i Kina.",
-              "publisher": "Bergens Tidende",
-              "url": "https://www.bt.no/nyheter/okonomi/i/Pv9xob/brodekket-skulle-vaert-ferdig-montert-i-september-staar-fortsatt-paa-lager-i-kina",
-              "published": "2026-11-24",
-              "story": "sotrasambandet-brodekke",
+              "title": "Norge kjørte over Færøyene – vant 41-23 i EM-oppkjøringen",
+              "publisher": "NTB / Radio Haugaland",
+              "url": "https://radioh.no/norge-kjorte-over-faeroyene-vant-41-23-i-em-oppkjoringen/",
+              "published": "2026-11-26",
+              "story": "handball-norge-faeroyene",
               "importance": "major"
             }
           },
           {
             "points": 400,
-            "question": "Eit norsk juletre vart felt nær Oslo 20. november. Kva by skal få treet i år?",
-            "answer": "London",
+            "question": "Kva for ein norsk by planlegg ein ny togstasjon med 780 sykkelplassar?",
+            "answer": "Moss",
             "options": [
-              "Cardiff",
-              "Dublin",
-              "London",
-              "Edinburgh"
+              "Moss",
+              "Drammen",
+              "Fredrikstad",
+              "Ski"
             ],
-            "image": "json/weekly-media/6bc8034ad9350f251332f50a.jpg",
-            "imageAlt": "Dei to ordførarane sagar i stammen til grana.",
+            "image": "json/weekly-media/f039322b28b00df5bd895027.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Bicycle parking, Oxford Railway Station - geograph.org.uk - 6271227",
             "imageCredit": {
-              "title": "Dei to ordførarane sagar i stammen til grana.",
-              "author": "Sturlason / Oslo kommune",
-              "publisher": "Oslo kommune",
-              "source": "https://aktuelt.oslo.kommune.no/oslos-christmas-tree-is-coming-to-london-town",
-              "license": "Redaksjonell bruk",
-              "imageUrl": "https://img.oslo.kommune.no/_aktuelt-prod_/Bilder/oslos-christmas-tree-is-coming-to-london-town/Aktuelt-1.png?w=800&aspect_ratio=16%3A9&gravity=50p%2C50p"
+              "title": "Bicycle parking, Oxford Railway Station - geograph.org.uk - 6271227.jpg",
+              "author": "JThomas",
+              "source": "https://commons.wikimedia.org/wiki/File:Bicycle_parking,_Oxford_Railway_Station_-_geograph.org.uk_-_6271227.jpg",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "illustration": true
             },
             "source": {
-              "title": "When is the Trafalgar Square Christmas tree lit in 2026? Norway's 21-metre spruce felled near Oslo by the Lord Mayor of Westminster",
-              "publisher": "Westminster Pimlico News",
-              "url": "https://westminsterpimliconews.co.uk/trafalgar-square-christmas-tree-2026/",
-              "published": "2026-11-21",
-              "story": "juletre-london-2026",
+              "title": "Ny togstasjon i Moss: 780 sykkelplasser – ingen parkeringsplass",
+              "publisher": "Teknisk Ukeblad / NTB",
+              "url": "https://beta.tu.no/samferdsel/ny-togstasjon-i-moss-780-sykkelplasser-ingen-parkeringsplass/7189342",
+              "published": "2026-11-27",
+              "story": "moss-togstasjon",
               "importance": "major"
             }
           },
           {
             "points": 500,
-            "question": "E24 undersøkte eit bustadhus der leilegheiter framleis vart leigde ut til reisande etter at kommunen hadde sagt nei til eit leilegheitshotell. I kva norsk by låg huset?",
-            "answer": "Bergen",
+            "question": "Kva for ei innloggingsteneste vart ustabil saman med MinID måndag ettermiddag?",
+            "answer": "ID-porten",
             "options": [
-              "Stavanger",
-              "Oslo",
-              "Bergen",
-              "Trondheim"
+              "Buypass",
+              "Feide",
+              "ID-porten",
+              "BankID"
             ],
-            "source": {
-              "title": "Fortviler over Airbnb-naboen: – Kynisk utnyttelse",
-              "publisher": "E24",
-              "url": "https://e24.no/naeringsliv/i/7P0LxB/fortviler-over-airbnb-naboen-kynisk-utnyttelse",
-              "published": "2026-11-21",
-              "story": "korttidsutleige-bergen",
-              "importance": "major"
-            },
-            "image": "json/weekly-media/56906b70e851c64e73dad9b2.jpg",
-            "imageAlt": "Det kvite trehuset som er omtala i saka.",
+            "image": "json/weekly-media/e1f7f844a08d2fb1967e5be0.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Backlit keyboard",
             "imageCredit": {
-              "title": "Det kvite trehuset som er omtala i saka.",
-              "author": "Eivind Senneset",
-              "publisher": "E24",
-              "source": "https://e24.no/naeringsliv/i/7P0LxB/fortviler-over-airbnb-naboen-kynisk-utnyttelse",
-              "license": "Pressefoto",
-              "imageUrl": "https://akamai.vgc.no/v2/images/37d1ef96-d5e8-39b8-842b-acc4c313a76e?fit=crop&h=675&upscale=true&w=1200&s=0accf114942716be3f138797cbb5011fcae761fe"
+              "title": "Backlit keyboard.jpg",
+              "author": "Colin",
+              "source": "https://commons.wikimedia.org/wiki/File:Backlit_keyboard.jpg",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "illustration": true
+            },
+            "source": {
+              "title": "Nytt dataangrep mot ID-porten – tilbake i normal drift",
+              "publisher": "VG",
+              "url": "https://www.vg.no/nyheter/i/Pv9J00/nytt-dataangrep-mot-id-porten-ustabilitet-i-tjenesten",
+              "published": "2026-11-23",
+              "story": "id-porten-dataangrep",
+              "importance": "major"
             }
           },
           {
             "points": 1000,
-            "question": "Mattilsynet fann ein samanheng mellom fleire av dei norske gardane med fugleinfluensa. Kor mange av gardane hadde fått smitten via unghøner frå den same flokken?",
-            "answer": "7 gardar",
+            "question": "Kva for ein bank måtte sende betalingar på nytt etter at fleire kundar mangla løna på konto denne veka?",
+            "answer": "Nordea",
             "options": [
-              "4 gardar",
-              "7 gardar",
-              "6 gardar",
-              "5 gardar"
+              "Danske Bank",
+              "SpareBank 1",
+              "DNB",
+              "Nordea"
             ],
-            "source": {
-              "title": "Fugleinfluensa-utbruddet: Mattilsynet har vedtatt avliving av 225.000 høner",
-              "publisher": "NTB / Radio Haugaland",
-              "url": "https://radioh.no/mattilsynet-influensarammet-oppdretter-flyttet-fugler-uten-lov/",
-              "published": "2026-11-24",
-              "story": "fugleinfluensa-noreg",
-              "importance": "major"
-            },
-            "image": "json/weekly-media/8828e20477507fe1ec02b2a9.jpg",
-            "imageAlt": "Varselskilt om smittsam dyresjukdom på ein port.",
+            "image": "json/weekly-media/2b0fdbb95d28ee76875f49be.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. 20-kroner-1874-Norge",
             "imageCredit": {
-              "title": "Varselskilt om smittsam dyresjukdom på ein port.",
-              "author": "Tor Erik Schrøder / NTB",
-              "publisher": "Radio Haugaland",
-              "source": "https://radioh.no/mattilsynet-influensarammet-oppdretter-flyttet-fugler-uten-lov/",
-              "license": "Pressefoto",
-              "imageUrl": "https://radioh.no/wp-content/uploads/2026/11/ntb-1297832-qPje4XsRb58-925-925x600.jpg"
+              "title": "20-kroner-1874-Norge.jpg",
+              "author": "Unknown author Unknown author",
+              "source": "https://commons.wikimedia.org/wiki/File:20-kroner-1874-Norge.jpg",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
+            },
+            "source": {
+              "title": "Betalingstrøbbel hos Nordea – flere har ikke fått lønn",
+              "publisher": "Radio Haugaland / NTB",
+              "url": "https://radioh.no/betalingstrobbel-hos-nordea-flere-har-ikke-fatt-lonn/",
+              "published": "2026-11-25",
+              "story": "nordea-betalingsfeil",
+              "importance": "major"
             }
           }
         ]
@@ -194,519 +183,504 @@
         "questions": [
           {
             "points": 100,
-            "question": "Elevar og studentar demonstrerte i mange europeiske land 20. november. Kva ønskte dei meir pengar til, ved sida av klimatiltak og hjelp med levekostnader?",
-            "answer": "Utdanning",
+            "question": "Kva for eit land gjorde det lettare denne veka for elevar som kjem heim frå utlandet, å skrive seg inn på skulen?",
+            "answer": "Syria",
             "options": [
-              "Fritidstilbod",
-              "Utdanning",
-              "Kollektivtransport",
-              "Helsetenester"
+              "Irak",
+              "Libanon",
+              "Syria",
+              "Jordan"
             ],
             "source": {
-              "title": "Students Strike Across Europe, US International Enrolment Falls and Early Learning Faces a $35 Billion Gap",
-              "publisher": "Global Student Forum",
-              "url": "https://www.globalstudentforum.org/europes-student-strike-and-falling-us-enrolment/",
-              "published": "2026-11-23",
-              "story": "europeisk-elevstreik",
+              "title": "Syria's Ministry of Education issues new measures easing school registration for students arriving from abroad",
+              "publisher": "Kashaf",
+              "url": "https://kashaffacts.com/en/factcheck/education-expat-students-en-2026-11-24/",
+              "published": "2026-11-24",
+              "story": "syria-skule-retur",
               "importance": "major"
-            },
-            "image": "json/weekly-media/6b429fff27930be5be169f39.jpg",
-            "imageAlt": "Demonstrantar ber eit stort banner gjennom ei gate i London.",
-            "imageCredit": {
-              "title": "Demonstrantar ber eit stort banner gjennom ei gate i London.",
-              "author": "Isabel Infantes / Reuters",
-              "publisher": "Reuters / Yahoo News",
-              "source": "https://malaysia.news.yahoo.com/student-protests-held-across-europe-162507151.html",
-              "license": "Pressefoto",
-              "imageUrl": "https://s.yimg.com/lo/mysterio/api/43ddfd635f3c34f5cfa8562dcbb3d63ac2dcc7548a95200d481f031f6a684adb/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Freuters.com%2Fb98fc1787e4ae87ab39667516b0ca185.jpg_up.jpg"
             }
           },
           {
             "points": 200,
-            "question": "I Storbritannia skal forskarar undersøkje kva ei planlagd aldersgrense for sosiale medium kan føre til. Kor gamle må born vere etter framlegget for å bruke sosiale medium?",
-            "answer": "16 år",
+            "question": "Kva for eit land diskuterte EU-leiarane å gje eit nytt lån til på toppmøtet denne veka?",
+            "answer": "Ukraina",
             "options": [
-              "15 år",
-              "13 år",
-              "16 år",
-              "18 år"
+              "Moldova",
+              "Ukraina",
+              "Georgia",
+              "Serbia"
             ],
-            "image": "json/weekly-media/2eaa8f2a8594244ec9fe4f0f.jpg",
-            "imageAlt": "Ein mobil med ikon for sosiale medium sett over skuldra på ein person.",
+            "image": "json/weekly-media/15255ed00dd81f67e1cbfa1d.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Europa Building in Brussels",
             "imageCredit": {
-              "title": "Ein mobil med ikon for sosiale medium sett over skuldra på ein person.",
-              "author": "Matt Cardy / Getty Images",
-              "publisher": "The Guardian",
-              "source": "https://www.theguardian.com/uk-news/2026/nov/18/social-media-ban-once-in-a-generation-study",
-              "license": "Pressefoto",
-              "imageUrl": "https://i.guim.co.uk/img/media/ee69770a776940e2892feb15709c3eb47dd97272/366_0_4169_3334/master/4169.jpg?crop=none&dpr=1&s=none&width=465",
-              "illustration": true
-            },
-            "source": {
-              "title": "£10m ‘once-in-a-generation’ study to explore effects of children’s social media ban",
-              "publisher": "The Guardian",
-              "url": "https://www.theguardian.com/uk-news/2026/nov/18/social-media-ban-once-in-a-generation-study",
-              "published": "2026-11-18",
-              "story": "studie-sosiale-medium",
-              "importance": "major"
-            }
-          },
-          {
-            "points": 300,
-            "question": "Etter funn av fugleinfluensa på ein gard nord i Frankrike vart varslingsnivået sett til høgt. Kvar skal fjørfeet haldast etter dei nye tiltaka?",
-            "answer": "Innandørs",
-            "options": [
-              "Innandørs",
-              "På beite",
-              "I luftegardar",
-              "Under netting"
-            ],
-            "source": {
-              "title": "France reports bird flu outbreak on farm in north of country",
-              "publisher": "Reuters / AOL",
-              "url": "https://www.aol.com/articles/france-reports-bird-flu-outbreak-170809000.html",
-              "published": "2026-11-23",
-              "story": "fugleinfluensa-frankrike",
-              "importance": "major"
-            },
-            "image": "json/weekly-media/782345d999465c8f5a1ba151.jpg",
-            "imageAlt": "Prøverøyr merkte med fugleinfluensa framfor eit fransk flagg.",
-            "imageCredit": {
-              "title": "Prøverøyr merkte med fugleinfluensa framfor eit fransk flagg.",
-              "author": "Dado Ruvic / Reuters",
-              "publisher": "Reuters / Yahoo News",
-              "source": "https://malaysia.news.yahoo.com/france-reports-bird-flu-outbreak-170847237.html",
-              "license": "Presseillustrasjon",
-              "imageUrl": "https://hermes.media.transform.aol.com/5743aa3d663d694de4ff1c4952d983eb2705c3a0/w_1200,c_scale,f_auto,q_auto/https://hermes.media.static.aol.com/media/2026/11/23/cf7f84f3-b9c3-3b12-a3e8-084e79253b5d/401dcef7-ec78-4b7b-8157-362a371e4e9f.jpg",
-              "illustration": true
-            }
-          },
-          {
-            "points": 400,
-            "question": "Klimatoppmøtet COP31 enda utan ei felles hovudavtale. I kva land vart møtet halde?",
-            "answer": "Tyrkia",
-            "options": [
-              "Brasil",
-              "Egypt",
-              "Tyrkia",
-              "Aserbajdsjan"
-            ],
-            "source": {
-              "title": "COP31 talks break down as EU rejects deal without reference to fossil fuels",
-              "publisher": "Al Jazeera",
-              "url": "https://www.aljazeera.com/amp/news/2026/11/22/fossil-fuel-impasse-pushes-cop31-climate-talks-into-second-day-of-overtime",
-              "published": "2026-11-22",
-              "story": "cop31-klimatoppmote",
-              "importance": "major"
-            },
-            "image": "json/weekly-media/12ce089604cf1835c5bc6466.jpg",
-            "imageAlt": "Leiaren for klimatoppmøtet snakkar med rådgjevarane sine.",
-            "imageCredit": {
-              "title": "Leiaren for klimatoppmøtet snakkar med rådgjevarane sine.",
-              "author": "Murad Sezer / Reuters",
-              "publisher": "Al Jazeera",
-              "source": "https://www.aljazeera.com/amp/news/2026/11/22/fossil-fuel-impasse-pushes-cop31-climate-talks-into-second-day-of-overtime",
-              "license": "Pressefoto",
-              "cropped": true,
-              "imageUrl": "https://www.aljazeera.com/wp-content/uploads/2026/11/reuters_6b025ad2-1795316434.jpg?resize=1920%2C1440"
-            }
-          },
-          {
-            "points": 500,
-            "question": "Ei ny oversikt over fugleinfluensa kom 24. november. Kor mange land og område i Amerika hadde meldt om utbrot hos fuglar?",
-            "answer": "13",
-            "options": [
-              "13",
-              "9",
-              "21",
-              "17"
-            ],
-            "image": "json/weekly-media/b272d5ec30dc19e0639ca09d.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Common Pochard",
-            "imageCredit": {
-              "title": "Common Pochard.jpg",
-              "author": "K0nvaliya",
-              "source": "https://commons.wikimedia.org/wiki/File:Common_Pochard.jpg",
+              "title": "Europa Building in Brussels.jpg",
+              "author": "PPEscientist",
+              "source": "https://commons.wikimedia.org/wiki/File:Europa_Building_in_Brussels.jpg",
               "license": "CC BY-SA 4.0",
               "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
               "illustration": true
             },
             "source": {
-              "title": "Epidemiological Alert: Avian Influenza A(H5N1) in the Americas Region",
-              "publisher": "Pan American Health Organization",
-              "url": "https://www.paho.org/sites/default/files/2026/11/2026-11-24-phe-epidemiological-alert-avian-influenza-ah5-final.pdf",
-              "published": "2026-11-24",
-              "story": "fugleinfluensa-amerika",
+              "title": "EU leaders struggle to agree on long-term budget, $49bn Ukraine loan",
+              "publisher": "Al Jazeera",
+              "url": "https://www.aljazeera.com/amp/economy/2026/11/26/eu-leaders-struggle-to-agree-on-long-term-budget-more-money-for-ukraine",
+              "published": "2026-11-26",
+              "story": "eu-toppmote-budsjett",
               "importance": "major"
-            }
-          },
-          {
-            "points": 1000,
-            "question": "Under elev- og studentstreiken 20. november var det markeringar i over 70 byar og tettstader i eitt land. Kva land var det?",
-            "answer": "Tyskland",
-            "options": [
-              "Frankrike",
-              "Spania",
-              "Tyskland",
-              "Italia"
-            ],
-            "source": {
-              "title": "Students Strike Across Europe, US International Enrolment Falls and Early Learning Faces a $35 Billion Gap",
-              "publisher": "Global Student Forum",
-              "url": "https://www.globalstudentforum.org/europes-student-strike-and-falling-us-enrolment/",
-              "published": "2026-11-23",
-              "story": "europeisk-elevstreik",
-              "importance": "major"
-            },
-            "image": "json/weekly-media/5ef47ae7705c9413d803a8f6.jpg",
-            "imageAlt": "Eit opptog med banner og raude flagg under den internasjonale streiken i Madrid.",
-            "imageCredit": {
-              "title": "Eit opptog med banner og raude flagg under den internasjonale streiken i Madrid.",
-              "author": "Susana Vera / Reuters",
-              "publisher": "Reuters / Yahoo News",
-              "source": "https://malaysia.news.yahoo.com/student-protests-held-across-europe-162507151.html",
-              "license": "Pressefoto",
-              "imageUrl": "https://s.yimg.com/lo/mysterio/api/63bd2dd96c4bda7cfae3cf4dd00a623341746f9a1e251e4b704231a8febc778f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Freuters.com%2F5d7046eb618742e5fa66bed0a7d58beb.jpg"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Konfliktar",
-        "questions": [
-          {
-            "points": 100,
-            "question": "UNICEF leverte skulepultar og stolar til mellombelse undervisningsstader denne veka. Kvar gjekk leveransen?",
-            "answer": "Gaza",
-            "options": [
-              "Vestbreidda",
-              "Gaza",
-              "Sudan",
-              "Jemen"
-            ],
-            "source": {
-              "title": "UNICEF brings desks and chairs to Gaza learning centres",
-              "publisher": "Hasbara",
-              "url": "https://hasbara.co.il/enemies/un/unicef/unicef-furnishes-gaza-learning-centres-with-desks-and-chairs",
-              "published": "2026-11-24",
-              "story": "gaza-skulemoblar",
-              "importance": "major"
-            }
-          },
-          {
-            "points": 200,
-            "question": "Donald Trump, Xi Jinping og Vladimir Putin møttest til eit historisk toppmøte. I kva land fann møtet stad?",
-            "answer": "Kina",
-            "options": [
-              "Kina",
-              "Russland",
-              "USA",
-              "Japan"
-            ],
-            "source": {
-              "title": "(6th LD) Trump, Xi, Putin hold unprecedented 3-way summit with nuclear arms reduction in focus",
-              "publisher": "Yonhap News Agency",
-              "url": "https://en.yna.co.kr/view/AEN20261119001356315?section=national/diplomacy",
-              "published": "2026-11-19",
-              "story": "toppmote-shenzhen",
-              "importance": "major"
-            },
-            "image": "json/weekly-media/8c7c631174ec8da457738814.jpg",
-            "imageAlt": "Dei tre statsleiarane går saman gjennom ein hall.",
-            "imageCredit": {
-              "title": "Dei tre statsleiarane går saman gjennom ein hall.",
-              "author": "White House press pool / AP / Yonhap",
-              "publisher": "Yonhap News Agency",
-              "source": "https://en.yna.co.kr/view/AEN20261119001356315?section=national/diplomacy",
-              "license": "Pressefoto",
-              "imageUrl": "https://img3.yna.co.kr/photo/ap/2026/11/19/PAP20261119203601009_P4.jpg"
             }
           },
           {
             "points": 300,
-            "question": "Denne veka møtte Ukrainas president fleire europeiske leiarar for å snakke om Ukraina. I kva by møttest dei?",
-            "answer": "Berlin",
+            "question": "Kven møtte Donald Trump denne veka for å snakke om ei fredeleg løysing i Ukraina, før han bad Russland trekkje tilbake styrkar i Europa?",
+            "answer": "Mark Rutte",
             "options": [
-              "Berlin",
-              "Warszawa",
-              "Brussel",
-              "Paris"
+              "Emmanuel Macron",
+              "Mark Rutte",
+              "Keir Starmer",
+              "Volodymyr Zelenskyj"
             ],
-            "image": "json/weekly-media/f17a21b63e40417850175949.jpg",
-            "imageAlt": "Europeiske leiarar helsar på Ukrainas president framfor pressefotografane.",
+            "image": "json/weekly-media/2e13152398008d5dabcf9552.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Wikimedia Morocco Mini-Hackathon 2026 day 2 - Group of Attendees at Conference Table with Microphones and Laptops - 0152",
             "imageCredit": {
-              "title": "Europeiske leiarar helsar på Ukrainas president framfor pressefotografane.",
-              "author": "Guido Bergmann / Presse- und Informationsamt der Bundesregierung",
-              "publisher": "Den tyske forbundsregjeringa",
-              "source": "https://www.bundesregierung.de/breg-en/media-center/coalition-of-the-willing-ukraine-2462154",
-              "license": "Pressefoto",
-              "imageUrl": "https://www.bundesregierung.de/resource/blob/1955500/2462172/7d8e5dd71a7bfbae4f9c23d116db20e8/01-data.jpg"
+              "title": "Wikimedia Morocco Mini-Hackathon 2026 day 2 - Group of Attendees at Conference Table with Microphones and Laptops - 0152.jpg",
+              "author": "DERDAKI ILIAS",
+              "source": "https://commons.wikimedia.org/wiki/File:Wikimedia_Morocco_Mini-Hackathon_2026_day_2_-_Group_of_Attendees_at_Conference_Table_with_Microphones_and_Laptops_-_0152.jpg",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "illustration": true
             },
             "source": {
-              "title": "The Latest: Kushner says he believes Russia is ‘comfortable’ with NATO-like security for Ukraine",
-              "publisher": "Associated Press",
-              "url": "https://apnews.com/article/3d0f8ed366d6084e1cfe12a4d8020c55",
-              "published": "2026-11-19",
-              "story": "ukraina-mote-berlin",
+              "title": "Trump Urges Putin to ‘Pull Back’ Military Aggression in Europe",
+              "publisher": "TIME",
+              "url": "https://time.com/article/2026/11/26/trump-warns-putin-russia-to-pull-back-military-aggression-europe-ukraine-war/",
+              "published": "2026-11-26",
+              "story": "ukraina-fredssamtalar",
               "importance": "major"
             }
           },
           {
             "points": 400,
-            "question": "FN fortalde at vaksinar ikkje kom fram til born i byen Taiz. I kva land skulle vaksinasjonen ha gått føre seg?",
-            "answer": "Jemen",
+            "question": "Kva for ein flyprodusent skulle den franske presidenten etter planen besøkje i samband med Choose France-møtet denne veka?",
+            "answer": "Airbus",
             "options": [
-              "Jemen",
-              "Somalia",
-              "Sudan",
-              "Syria"
+              "Dassault",
+              "Boeing",
+              "Embraer",
+              "Airbus"
             ],
-            "image": "json/weekly-media/9c86d86361a5561f3bf490ca.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. USAID carriers for COVID-19 vaccines (51631453610)",
+            "source": {
+              "title": "Macron's Choose France summit, focused entirely on French companies, comes amid gloomy outlook",
+              "publisher": "Le Monde",
+              "url": "https://www.lemonde.fr/en/economy/article/2026/11/23/macron-s-choose-france-summit-focused-entirely-on-french-companies-comes-amid-gloomy-outlook_6787189_19.html",
+              "published": "2026-11-23",
+              "story": "choose-france",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 500,
+            "question": "Korleis kan elevar utan skulepapir bli tekne inn på skulen etter dei nye reglane i Syria?",
+            "answer": "Vurderingstest",
+            "options": [
+              "Prøveveke",
+              "Foreldresamtale",
+              "Vurderingstest",
+              "Tilrådingsbrev"
+            ],
+            "image": "json/weekly-media/5933e2235bb52b92dd15b8e6.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Gembling Primary School empty for three years - geograph.org.uk - 6609145",
             "imageCredit": {
-              "title": "USAID carriers for COVID-19 vaccines (51631453610).jpg",
-              "author": "UNICEF Ukraine from Kyiv, Ukraine",
-              "source": "https://commons.wikimedia.org/wiki/File:USAID_carriers_for_COVID-19_vaccines_(51631453610).jpg",
+              "title": "Gembling Primary School empty for three years - geograph.org.uk - 6609145.jpg",
+              "author": "Martin Dawes",
+              "source": "https://commons.wikimedia.org/wiki/File:Gembling_Primary_School_empty_for_three_years_-_geograph.org.uk_-_6609145.jpg",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "illustration": true
+            },
+            "source": {
+              "title": "Syria's Ministry of Education issues new measures easing school registration for students arriving from abroad",
+              "publisher": "Kashaf",
+              "url": "https://kashaffacts.com/en/factcheck/education-expat-students-en-2026-11-24/",
+              "published": "2026-11-24",
+              "story": "syria-skule-retur",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 1000,
+            "question": "Kva for budsjettperiode diskuterte EU-leiarane på det ekstraordinære toppmøtet denne veka?",
+            "answer": "2028–2034",
+            "options": [
+              "2028–2034",
+              "2030–2036",
+              "2029–2035",
+              "2027–2033"
+            ],
+            "image": "json/weekly-media/03488fefcf517f0ef960fd82.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. European Union Flags 2",
+            "imageCredit": {
+              "title": "European Union Flags 2.jpg",
+              "author": "Thijs ter Haar",
+              "source": "https://commons.wikimedia.org/wiki/File:European_Union_Flags_2.jpg",
               "license": "CC BY 2.0",
               "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
               "illustration": true
             },
             "source": {
-              "title": "World News in Brief: Vaccine crisis in Yemen, aid for Ukraine, another UNRWA staffer killed",
-              "publisher": "UN News / Global Issues",
-              "url": "https://www.globalissues.org/news/2026/11/24/44685",
-              "published": "2026-11-24",
-              "story": "jemen-vaksinar-taiz",
-              "importance": "major"
-            }
-          },
-          {
-            "points": 500,
-            "question": "På toppmøtet med Xi Jinping og Vladimir Putin tok Donald Trump opp eit mogeleg samarbeid. Kva ville han redusere talet på?",
-            "answer": "Atomvåpen",
-            "options": [
-              "Atomvåpen",
-              "Handelshinder",
-              "Militærøvingar",
-              "Grensekontrollar"
-            ],
-            "source": {
-              "title": "(6th LD) Trump, Xi, Putin hold unprecedented 3-way summit with nuclear arms reduction in focus",
-              "publisher": "Yonhap News Agency",
-              "url": "https://en.yna.co.kr/view/AEN20261119001356315?section=national/diplomacy",
-              "published": "2026-11-19",
-              "story": "toppmote-shenzhen",
-              "importance": "major"
-            },
-            "image": "json/weekly-media/5d2807916ef248cf41909e64.jpg",
-            "imageAlt": "Dei tre statsleiarane står saman til fotografering før møtet.",
-            "imageCredit": {
-              "title": "Dei tre statsleiarane står saman til fotografering før møtet.",
-              "author": "White House press pool / AFP / Yonhap",
-              "publisher": "Yonhap News Agency",
-              "source": "https://en.yna.co.kr/view/AEN20261119001356315?section=national/diplomacy",
-              "license": "Pressefoto",
-              "imageUrl": "https://img2.yna.co.kr/photo/etc/af/2026/11/19/PAF20261119152701009_P4.jpg"
-            }
-          },
-          {
-            "points": 1000,
-            "question": "Det internasjonale atomenergibyrået kom med nytt om fleire atomkraftverk i Ukraina. Kva system på kraftverka melde byrået at framleis verka?",
-            "answer": "Tryggleikssystema",
-            "options": [
-              "Tryggleikssystema",
-              "Varmesystema",
-              "Telefonsystema",
-              "Datasystema"
-            ],
-            "image": "json/weekly-media/3fffb78030956495e8de8130.jpg",
-            "imageAlt": "Arkivfoto av IAEA-folk ved kjøletårna på eit atomkraftverk.",
-            "imageCredit": {
-              "title": "Arkivfoto av IAEA-folk ved kjøletårna på eit atomkraftverk.",
-              "author": "Diego Candano Laris / IAEA",
-              "publisher": "2EU Brussels",
-              "source": "https://2eu.brussels/index.php/en/news/eu-warns-nuclear-safety-in-ukraine-is-deteriorating-after-27-complete-power-losses-at-zaporizhzhia",
-              "license": "CC BY 2.0",
-              "imageUrl": "https://2eu.brussels/media/10189/conversions/4970-nuclear-original-800.jpg",
-              "illustration": true,
-              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/"
-            },
-            "source": {
-              "title": "IAEA, Grossi give updates on Ukraine, Iran, North Korea, nuclear power growth projections",
-              "publisher": "ANS Nuclear Newswire",
-              "url": "https://www.ans.org/news/2026-11-19/article-8592/iaea-grossi-give-updates-on-ukraine-iran-north-korea-nuclear-power-growth-projections/",
-              "published": "2026-11-19",
-              "story": "ukraina-atomkraftverk",
+              "title": "EU leaders struggle to agree on long-term budget, $49bn Ukraine loan",
+              "publisher": "Al Jazeera",
+              "url": "https://www.aljazeera.com/amp/economy/2026/11/26/eu-leaders-struggle-to-agree-on-long-term-budget-more-money-for-ukraine",
+              "published": "2026-11-26",
+              "story": "eu-toppmote-budsjett",
               "importance": "major"
             }
           }
         ]
       },
       {
-        "name": "Idrett og kultur",
+        "name": "På bana og i løypa",
         "questions": [
           {
             "points": 100,
-            "question": "Noreg låg under mot Danmark i Nasjonsligaen, men snudde kampen. Kven skåra vinnarmålet?",
-            "answer": "Erling Haaland",
+            "question": "Kven vann herrane sitt opningsrenn i verdscupen i langrenn i Ruka?",
+            "answer": "Nyenget",
             "options": [
-              "Alexander Sørloth",
-              "Martin Ødegaard",
-              "Erling Haaland",
-              "Antonio Nusa"
+              "Nyenget",
+              "Ree",
+              "Klæbo",
+              "Iversen"
             ],
-            "image": "json/weekly-media/a2a1d6a9b11cd706df0500c4.jpg",
-            "imageAlt": "Danske spelarar ute på bana etter kampen mot Noreg.",
+            "image": "json/weekly-media/158ee5cea70cde1af875aa1b.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Ski trails",
             "imageCredit": {
-              "title": "Danske spelarar ute på bana etter kampen mot Noreg.",
-              "author": "fodboldbilleder.dk",
-              "publisher": "ForDanmark / Dansk Boldspil-Union",
-              "source": "https://mit.fordanmark.dk/nyheder/2026/november/sent-dansk-nederlag-mod-norge/",
-              "license": "Pressefoto",
-              "imageUrl": "https://mit.fordanmark.dk/media/anubo0go/lra00639.jpg?height=500&v=1dd76deae8a4f20&width=900"
+              "title": "Ski trails.jpg",
+              "author": "( Petey21 )",
+              "source": "https://commons.wikimedia.org/wiki/File:Ski_trails.jpg",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
             },
             "source": {
-              "title": "Norge klar for titteljakt – se hva som venter i nasjonsligaen",
-              "publisher": "NTB / Radio Haugaland",
-              "url": "https://radioh.no/norge-klar-for-titteljakt-se-hva-som-venter-i-nasjonsligaen/",
-              "published": "2026-11-18",
-              "story": "danmark-noreg-nasjonsligaen",
+              "title": "Nyenget vant i Ruka – seksdobbelt norsk i teten",
+              "publisher": "Radio Haugaland / NTB",
+              "url": "https://radioh.no/nyenget-vant-i-ruka-seksdobbelt-norsk-i-teten/",
+              "published": "2026-11-27",
+              "story": "ruka-nyenget",
               "importance": "major"
             }
           },
           {
             "points": 200,
-            "question": "Barcelona sikra seg plass i kvartfinalen i meisterligaen for kvinner med ein siger mot Servette. Kva vart stillinga til slutt?",
-            "answer": "6–0",
+            "question": "Kva lag vann eliteseriekampen på Ekeberg etter at det vart problem med ljoset?",
+            "answer": "Brann",
             "options": [
-              "6–0",
-              "4–0",
-              "5–0",
-              "6–1"
+              "Brann",
+              "Vålerenga",
+              "Viking",
+              "KFUM"
             ],
-            "image": "json/weekly-media/87a9db0d56ac339edc86866d.jpg",
-            "imageAlt": "Ein Barcelona-spelar feirar på bana i kampen mot Servette.",
+            "image": "json/weekly-media/62cc460d297bad065ddaad29.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Football Under Floodlights - geograph.org.uk - 619765",
             "imageCredit": {
-              "title": "Ein Barcelona-spelar feirar på bana i kampen mot Servette.",
-              "author": "Alejandro García / EFE",
-              "publisher": "El País",
-              "source": "https://elpais.com/deportes/futbol/2026-11-19/el-barcelona-golea-al-servette-suizo-con-un-triplete-de-claudia-pina.html",
-              "license": "Pressefoto",
-              "imageUrl": "https://imagenes.elpais.com/resizer/v2/2GF3P6NTYBJ7BIU4AZTC7HEYDE.jpg?auth=2a1849e5b5596f2f466fd2d8bc719c38db1d0c644b13995a2cc20dd22ef5da58&width=1200"
+              "title": "Football Under Floodlights - geograph.org.uk - 619765.jpg",
+              "author": "Martin Addison",
+              "source": "https://commons.wikimedia.org/wiki/File:Football_Under_Floodlights_-_geograph.org.uk_-_619765.jpg",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "illustration": true
             },
             "source": {
-              "title": "2026/27 Women's Champions League: All the league phase fixtures and results",
-              "publisher": "UEFA",
-              "url": "https://www.uefa.com/womenschampionsleague/news/02a9-21848dfb62c3-1313bc23426c-1000--2026-27-womens-champions-league-all-the-league-phase-fix/",
-              "published": "2026-11-19",
-              "story": "meisterliga-kvinner-barcelona-lyon",
+              "title": "Da lyset kom, ble det meste mørkt",
+              "publisher": "KFUM Oslo",
+              "url": "https://www.kaaffa.no/nyheter/da-lyset-kom-ble-det-meste-morkt",
+              "published": "2026-11-22",
+              "story": "kfum-brann-kamp",
               "importance": "major"
             }
           },
           {
             "points": 300,
-            "question": "West Coast Insanity frå Haugalandet gjorde det godt i Norwegian Open i cheerleading. Kor mange gull tok klubben?",
-            "answer": "5 gull",
+            "question": "Kva vart sluttresultatet då Noreg slo Færøyane i oppkøyringa til handball-EM?",
+            "answer": "41–23",
             "options": [
-              "5 gull",
-              "4 gull",
-              "6 gull",
-              "3 gull"
+              "41–25",
+              "39–23",
+              "41–23",
+              "38–24"
             ],
-            "source": {
-              "title": "Historisk gullfest for Haugalandets cheerleadere",
-              "publisher": "Radio Haugaland",
-              "url": "https://radioh.no/historisk-gullfest-for-haugalandets-cheerleadere/",
-              "published": "2026-11-23",
-              "story": "cheerleading-haugalandet",
-              "importance": "minor"
-            }
-          },
-          {
-            "points": 400,
-            "question": "Goat Simulator 3 fekk ei ny utviding denne veka. Kva slags stad kan spelarane utforske der?",
-            "answer": "Ein fornøyelsespark",
-            "options": [
-              "Ein flyplass",
-              "Ein fornøyelsespark",
-              "Ein dyrepark",
-              "Eit kjøpesenter"
-            ],
-            "image": "json/weekly-media/9aa86d13245a7a4d2dbd1b70.jpg",
-            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Goat in Syria (no camera watermark)",
+            "image": "json/weekly-media/681c6f72c2982f9de5b8c821.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Kilmanagh handball alley",
             "imageCredit": {
-              "title": "Goat in Syria (no camera watermark).jpg",
-              "author": "Dhahi boss",
-              "source": "https://commons.wikimedia.org/wiki/File:Goat_in_Syria_(no_camera_watermark).jpg",
+              "title": "Kilmanagh handball alley.jpg",
+              "author": "A.-K. D.",
+              "source": "https://commons.wikimedia.org/wiki/File:Kilmanagh_handball_alley.jpg",
               "license": "CC BY-SA 4.0",
               "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
               "illustration": true
             },
             "source": {
-              "title": "Move over GTA 6, the \"second biggest\" game of the year is out now — Goat Simulator 3: Ticket to Dizzyworld",
-              "publisher": "Windows Central",
-              "url": "https://www.windowscentral.com/gaming/move-over-gta-6-the-second-biggest-game-of-the-year-is-out-now-goat-simulator-3-ticket-to-dizzyworld",
-              "published": "2026-11-19",
-              "story": "goat-simulator-dizzyworld",
-              "importance": "minor"
+              "title": "Norge kjørte over Færøyene – vant 41-23 i EM-oppkjøringen",
+              "publisher": "NTB / Radio Haugaland",
+              "url": "https://radioh.no/norge-kjorte-over-faeroyene-vant-41-23-i-em-oppkjoringen/",
+              "published": "2026-11-26",
+              "story": "handball-norge-faeroyene",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 400,
+            "question": "Kva for eit dansk lag slo Brann på bortebane i konferanseligaen denne veka?",
+            "answer": "AGF",
+            "options": [
+              "Midtjylland",
+              "FC København",
+              "AGF",
+              "Brøndby"
+            ],
+            "source": {
+              "title": "AGF lever i Conference League, efter 1-4-sejr over Brann",
+              "publisher": "FanAGF.dk",
+              "url": "https://fansagf.dk/agf-lever-i-conference-league-efter-1-4-sejr-i-bergen/",
+              "published": "2026-11-26",
+              "story": "brann-agf-konferanseliga",
+              "importance": "major"
             }
           },
           {
             "points": 500,
-            "question": "Vinnarmålet til Noreg mot Danmark kom på overtid. Kor mange minutt på overtid vart målet skåra?",
-            "answer": "6 minutt",
+            "question": "Kor mange av dei fremste plassane i opningsrennet i Ruka tok norske løparar før den fyrste utanlandske løparen på resultatlista?",
+            "answer": "6",
             "options": [
-              "2 minutt",
-              "8 minutt",
-              "4 minutt",
-              "6 minutt"
+              "7",
+              "5",
+              "4",
+              "6"
             ],
-            "image": "json/weekly-media/4f8c621539301f49ae246e05.jpg",
-            "imageAlt": "Den norske leiren feirar sigeren over Danmark",
+            "image": "json/weekly-media/af6ba0cc6b705fa343d41060.jpg",
+            "imageAlt": "Martin Løwstrøm Nyenget går på ski under tikilometeren i Ruka.",
             "imageCredit": {
-              "title": "Den norske leiren feirar sigeren over Danmark",
-              "author": "Fredrik Varfjell / NTB",
-              "publisher": "NTB / Radio Haugaland",
-              "source": "https://radioh.no/norge-klar-for-titteljakt-se-hva-som-venter-i-nasjonsligaen/",
-              "imageUrl": "https://radioh.no/wp-content/uploads/2026/11/ntb-1297268-WvmNVSiyQnU-925-925x600.jpg",
+              "title": "Martin Løwstrøm Nyenget går på ski under tikilometeren i Ruka.",
+              "author": "Geir Olsen / NTB",
+              "publisher": "Radio Haugaland / NTB",
+              "source": "https://radioh.no/nyenget-vant-i-ruka-seksdobbelt-norsk-i-teten/",
+              "imageUrl": "https://radioh.no/wp-content/uploads/2026/11/ntb-1299488-VH6qiDhgD4-925-925x600.jpg",
               "license": "Pressefoto",
               "preserved": true
             },
             "source": {
-              "title": "Norge klar for titteljakt – se hva som venter i nasjonsligaen",
-              "publisher": "NTB / Radio Haugaland",
-              "url": "https://radioh.no/norge-klar-for-titteljakt-se-hva-som-venter-i-nasjonsligaen/",
-              "published": "2026-11-18",
-              "story": "danmark-noreg-nasjonsligaen",
+              "title": "Nyenget vant i Ruka – seksdobbelt norsk i teten",
+              "publisher": "Radio Haugaland / NTB",
+              "url": "https://radioh.no/nyenget-vant-i-ruka-seksdobbelt-norsk-i-teten/",
+              "published": "2026-11-27",
+              "story": "ruka-nyenget",
               "importance": "major"
             }
           },
           {
             "points": 1000,
-            "question": "OL Lyonnes sikra seg òg plass i kvartfinalen i meisterligaen for kvinner. Kva lag slo dei på bortebane 19. november?",
-            "answer": "Arsenal",
+            "question": "Kven skåra det einaste målet til Brann i konferanseligakampen mot AGF?",
+            "answer": "Niklas Castro",
             "options": [
-              "Chelsea",
-              "Real Madrid",
-              "Bayern München",
-              "Arsenal"
+              "Noah Holm",
+              "Niklas Castro",
+              "Aune Heggebø",
+              "Ole Didrik Blomberg"
             ],
-            "image": "json/weekly-media/d0a2b9d16a76fdca657c289c.jpg",
-            "imageAlt": "Spelarar varmar opp på flaumlysbanen før kampen.",
+            "image": "json/weekly-media/75316d782466a7a50fa9f549.png",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Goal area and penalty area",
             "imageCredit": {
-              "title": "Spelarar varmar opp på flaumlysbanen før kampen.",
-              "author": "JSS / Le Progrès",
-              "publisher": "Le Progrès",
-              "source": "https://www.leprogres.fr/sport/2026/11/19/suivez-arsenal-ol-lyonnes",
-              "license": "Pressefoto",
-              "imageUrl": "https://cdn-s-www.leprogres.fr/images/bb0c3557-ebdc-467d-80ea-baed73036781/NW_listA/jss-1795117113.jpg"
+              "title": "Goal area and penalty area.png",
+              "author": "Grover cleveland",
+              "source": "https://commons.wikimedia.org/wiki/File:Goal_area_and_penalty_area.png",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "illustration": true
             },
             "source": {
-              "title": "2026/27 Women's Champions League: All the league phase fixtures and results",
-              "publisher": "UEFA",
-              "url": "https://www.uefa.com/womenschampionsleague/news/02a9-21848dfb62c3-1313bc23426c-1000--2026-27-womens-champions-league-all-the-league-phase-fix/",
-              "published": "2026-11-19",
-              "story": "meisterliga-kvinner-barcelona-lyon",
+              "title": "AGF lever i Conference League, efter 1-4-sejr over Brann",
+              "publisher": "FanAGF.dk",
+              "url": "https://fansagf.dk/agf-lever-i-conference-league-efter-1-4-sejr-i-bergen/",
+              "published": "2026-11-26",
+              "story": "brann-agf-konferanseliga",
+              "importance": "major"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Klima, natur og romfart",
+        "questions": [
+          {
+            "points": 100,
+            "question": "Kva heiter romfartøyet som sende dei nye nærbileta av asteroidane Didymos og Dimorphos?",
+            "answer": "Hera",
+            "options": [
+              "Dawn",
+              "Hera",
+              "DART",
+              "Rosetta"
+            ],
+            "image": "json/weekly-media/7a199c3355c89ec5ae967fc5.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. BennuAsteroid",
+            "imageCredit": {
+              "title": "BennuAsteroid.jpg",
+              "author": "NASA/Goddard/University of Arizona",
+              "source": "https://commons.wikimedia.org/wiki/File:BennuAsteroid.jpg",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
+            },
+            "source": {
+              "title": "Hera's first close-up images of Didymos and Dimorphos",
+              "publisher": "The Planetary Society",
+              "url": "https://www.planetary.org/articles/heras-first-close-up-images-of-didymos-and-dimorphos",
+              "published": "2026-11-25",
+              "story": "hera-asteroidebilete",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 200,
+            "question": "Kvar viste satellittmålingar som vart omtalte fredag, at det hadde vore rekordlite havis i oktober?",
+            "answer": "Antarktis",
+            "options": [
+              "Austersjøen",
+              "Antarktis",
+              "Arktis",
+              "Beringhavet"
+            ],
+            "image": "json/weekly-media/119eb3395240109bc7329201.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Jumpsuit camp on ice floe in Beaufort Sea (50614587428)",
+            "imageCredit": {
+              "title": "Jumpsuit camp on ice floe in Beaufort Sea (50614587428).jpg",
+              "author": "National Snow and Ice Data Center from Boulder, United States",
+              "source": "https://commons.wikimedia.org/wiki/File:Jumpsuit_camp_on_ice_floe_in_Beaufort_Sea_(50614587428).jpg",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "illustration": true
+            },
+            "source": {
+              "title": "Antarctic sea ice extent hits new low",
+              "publisher": "Australian Antarctic Program",
+              "url": "https://www.antarctica.gov.au/news/2026/antarctic-sea-ice-extent-hits-new-october-low/",
+              "published": "2026-11-27",
+              "story": "antarktis-havis",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 300,
+            "question": "Kor mange dagar på rad låg temperaturen på jorda meir enn to grader over nivået før industrialiseringa, ifølgje målingane som vart omtalte denne veka?",
+            "answer": "6 dagar",
+            "options": [
+              "6 dagar",
+              "5 dagar",
+              "4 dagar",
+              "7 dagar"
+            ],
+            "image": "json/weekly-media/43abaff95a222092a38c871b.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. 2024-04-26 14 45 25 A Minimum Thermometer within a Cotton Region Shelter at the weather station at the Rutgers Gardens in North Brunswick Township, Middlesex County, New Jersey",
+            "imageCredit": {
+              "title": "2024-04-26 14 45 25 A Minimum Thermometer within a Cotton Region Shelter at the weather station at the Rutgers Gardens in North Brunswick Township, Middlesex County, New Jersey.jpg",
+              "author": "Famartin",
+              "source": "https://commons.wikimedia.org/wiki/File:2024-04-26_14_45_25_A_Minimum_Thermometer_within_a_Cotton_Region_Shelter_at_the_weather_station_at_the_Rutgers_Gardens_in_North_Brunswick_Township,_Middlesex_County,_New_Jersey.jpg",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "illustration": true
+            },
+            "source": {
+              "title": "World has six consecutive days 2C above preindustrial levels for first time",
+              "publisher": "The Guardian",
+              "url": "https://www.theguardian.com/environment/2026/nov/25/world-six-consecutive-days-2c-above-preindustrial-levels-first-time",
+              "published": "2026-11-25",
+              "story": "global-varmerekke",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 400,
+            "question": "På klimatoppmøtet COP31 støtta over 75 land eit frivillig mål om å bruke meir av kva?",
+            "answer": "Elektrisitet",
+            "options": [
+              "Hydrogen",
+              "Biogass",
+              "Naturgass",
+              "Elektrisitet"
+            ],
+            "image": "json/weekly-media/0d3233f378f9a53aef2a2659.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Delegates to the COP21 Climate Change Conference Assemble in the Plenary Hall Before Speeches By French President Hollande, Foreign Minister Fabius, and UN Secretary-General Ki-moon (23069791503)",
+            "imageCredit": {
+              "title": "Delegates to the COP21 Climate Change Conference Assemble in the Plenary Hall Before Speeches By French President Hollande, Foreign Minister Fabius, and UN Secretary-General Ki-moon (23069791503).jpg",
+              "author": "U.S. Department of State from United States",
+              "source": "https://commons.wikimedia.org/wiki/File:Delegates_to_the_COP21_Climate_Change_Conference_Assemble_in_the_Plenary_Hall_Before_Speeches_By_French_President_Hollande,_Foreign_Minister_Fabius,_and_UN_Secretary-General_Ki-moon_(23069791503).jpg",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
+            },
+            "source": {
+              "title": "The Six Biggest Takeaways From COP31, Which Ended Without an Agreement After Talks Broke Down",
+              "publisher": "Smithsonian Magazine",
+              "url": "https://www.smithsonianmag.com/science-nature/the-six-biggest-takeaways-from-cop31-which-ended-without-an-agreement-after-talks-broke-down-180989933/",
+              "published": "2026-11-24",
+              "story": "klimatoppmote-cop31",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 500,
+            "question": "Kva for eit romfartøy laga krateret på Dimorphos som forskarane no har fått nærbilete av?",
+            "answer": "DART",
+            "options": [
+              "Dawn",
+              "Hayabusa2",
+              "DART",
+              "Rosetta"
+            ],
+            "image": "json/weekly-media/5ea92660b081697867fa2432.png",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. A Box of Treasure from Asteroid Ryugu (SVS14089 - AsteroidRyuguOrganicsV4)",
+            "imageCredit": {
+              "title": "A Box of Treasure from Asteroid Ryugu (SVS14089 - AsteroidRyuguOrganicsV4).png",
+              "author": "NASA's Scientific Visualization Studio - KBR Wyle Services, LLC/Dan Gallagher, Advocates in Manpower Management, Inc./John Caldwell, Catholic University of America/Heather Graham, Kyushu University/Hiroshi Naraoka, Hokkaido University/Yasuhiro Oba, JAMSTEC/Yoshinori Takano, NASA/GSFC/Jason Dworkin, NASA/GSFC/Daniel Glavin, KBR Wyle Services, LLC/LK Ward, NASA/GSFC/William Steigerwald, Yoshiko Sugahara, ADNET Systems, Inc./Lonnie Shekhtman, ADNET Systems, Inc./Aaron E. Lepsch",
+              "source": "https://commons.wikimedia.org/wiki/File:A_Box_of_Treasure_from_Asteroid_Ryugu_(SVS14089_-_AsteroidRyuguOrganicsV4).png",
+              "license": "Public Domain",
+              "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+              "illustration": true
+            },
+            "source": {
+              "title": "Hera's first close-up images of Didymos and Dimorphos",
+              "publisher": "The Planetary Society",
+              "url": "https://www.planetary.org/articles/heras-first-close-up-images-of-didymos-and-dimorphos",
+              "published": "2026-11-25",
+              "story": "hera-asteroidebilete",
+              "importance": "major"
+            }
+          },
+          {
+            "points": 1000,
+            "question": "Om lag kor mykje mindre enn vanleg var isdekket rundt Antarktis midt i oktober, ifølgje tala som kom denne veka?",
+            "answer": "12 prosent",
+            "options": [
+              "12 prosent",
+              "8 prosent",
+              "20 prosent",
+              "16 prosent"
+            ],
+            "image": "json/weekly-media/5faaa307c96db2f79055f2d2.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. A mixture of sea ice (51062594113)",
+            "imageCredit": {
+              "title": "A mixture of sea ice (51062594113).jpg",
+              "author": "National Snow and Ice Data Center from Boulder, United States",
+              "source": "https://commons.wikimedia.org/wiki/File:A_mixture_of_sea_ice_(51062594113).jpg",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "illustration": true
+            },
+            "source": {
+              "title": "Antarctic sea ice extent hits new low",
+              "publisher": "Australian Antarctic Program",
+              "url": "https://www.antarctica.gov.au/news/2026/antarctic-sea-ice-extent-hits-new-october-low/",
+              "published": "2026-11-27",
+              "story": "antarktis-havis",
               "importance": "major"
             }
           }
@@ -717,179 +691,155 @@
         "questions": [
           {
             "points": 100,
-            "question": "Voyager 1 nådde ein ny milepåle ute i rommet. Kor lang tid bruker eit radiosignal frå jorda no på å nå romfartøyet?",
-            "answer": "Eitt døgn",
+            "question": "Kor lenge måtte laga vente på kampstart då flaumljoset svikta før eliteseriekampen mellom KFUM og Brann?",
+            "answer": "2 timar",
             "options": [
-              "To døgn",
-              "Eit halvdøgn",
-              "Eitt døgn",
-              "Ein time"
+              "1 time",
+              "2 timar",
+              "3 timar",
+              "4 timar"
             ],
-            "image": "json/weekly-media/d4d0badd58bf1a9343804803.jpg",
-            "imageAlt": "Kunstnarframstilling av Voyager med den store parabolantenna.",
+            "image": "json/weekly-media/e514bfe8afe47081ac3a73d0.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Kadriorg Stadium floodlights and Maakri high-rises",
             "imageCredit": {
-              "title": "Kunstnarframstilling av Voyager med den store parabolantenna.",
-              "author": "NASA / JPL-Caltech",
-              "publisher": "NASA Science",
-              "source": "https://science.nasa.gov/photojournal/model-of-voyager-artist-concept/",
-              "license": "Kjeldeillustrasjon",
-              "imageUrl": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia14/pia14111/PIA14111.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+              "title": "Kadriorg Stadium floodlights and Maakri high-rises.jpg",
+              "author": "Sancos",
+              "source": "https://commons.wikimedia.org/wiki/File:Kadriorg_Stadium_floodlights_and_Maakri_high-rises.jpg",
+              "license": "CC BY 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
               "illustration": true
             },
             "source": {
-              "title": "NASA’s Voyager 1 is one light-day from Earth",
-              "publisher": "Spaceflight Now",
-              "url": "https://spaceflightnow.com/2026/11/18/nasas-voyager-1-is-one-light-day-from-earth/",
-              "published": "2026-11-18",
-              "story": "voyager-eitt-lysdoegn",
+              "title": "Da lyset kom, ble det meste mørkt",
+              "publisher": "KFUM Oslo",
+              "url": "https://www.kaaffa.no/nyheter/da-lyset-kom-ble-det-meste-morkt",
+              "published": "2026-11-22",
+              "story": "kfum-brann-kamp",
               "importance": "major"
             }
           },
           {
             "points": 200,
-            "question": "NASA viste denne veka at den japanske øya Iwo Jima hadde fått meir land. Kva hadde laga det nye landområdet?",
-            "answer": "Eit vulkanutbrot",
+            "question": "Den planlagde stasjonen i Moss får hundrevis av sykkelplassar. Kva for køyretøy får ingen nye ordinære parkeringsplassar ved stasjonen?",
+            "answer": "Bilar",
             "options": [
-              "Eit vulkanutbrot",
-              "Ei utfylling",
-              "Eit jordskred",
-              "Ein storm"
+              "Elsparkesyklar",
+              "Bussar",
+              "Bilar",
+              "Motorsyklar"
             ],
-            "image": "json/weekly-media/80844d416bcefd97c3225916.jpg",
-            "imageAlt": "To satellittbilete viser kystlinja på øya på ulike tidspunkt.",
+            "image": "json/weekly-media/e45bf9cbb8dca6ee02f54037.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Bicycles on platform 7B, Shrewsbury railway station - geograph.org.uk - 4738135",
             "imageCredit": {
-              "title": "To satellittbilete viser kystlinja på øya på ulike tidspunkt.",
-              "author": "Michala Garrison / NASA Earth Observatory",
-              "publisher": "NASA Earth Observatory",
-              "source": "https://science.nasa.gov/earth/earth-observatory/eruption-extends-iwo-jimas-beach/",
-              "license": "Satellittbilete",
-              "imageUrl": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/iotd/2026/eruption-enlarges-iwo-jima%E2%80%99s-beach/iwojima_oli2_20261111_th.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg"
+              "title": "Bicycles on platform 7B, Shrewsbury railway station - geograph.org.uk - 4738135.jpg",
+              "author": "Jaggery",
+              "source": "https://commons.wikimedia.org/wiki/File:Bicycles_on_platform_7B,_Shrewsbury_railway_station_-_geograph.org.uk_-_4738135.jpg",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "illustration": true
             },
             "source": {
-              "title": "Eruption Extends Iwo Jima’s Beach",
-              "publisher": "NASA Earth Observatory",
-              "url": "https://science.nasa.gov/earth/earth-observatory/eruption-extends-iwo-jimas-beach/",
-              "published": "2026-11-24",
-              "story": "iwo-jima-nytt-land",
+              "title": "Ny togstasjon i Moss: 780 sykkelplasser – ingen parkeringsplass",
+              "publisher": "Teknisk Ukeblad / NTB",
+              "url": "https://beta.tu.no/samferdsel/ny-togstasjon-i-moss-780-sykkelplasser-ingen-parkeringsplass/7189342",
+              "published": "2026-11-27",
+              "story": "moss-togstasjon",
               "importance": "major"
             }
           },
           {
             "points": 300,
-            "question": "Teknologiselskapet Nvidia fekk ein tidlegare sjef tilbake etter ei avgjerd i styret denne veka. Kven kom tilbake som sjef?",
-            "answer": "Jensen Huang",
+            "question": "Kva slags produkt bad ei gruppe ekspertar Amazon og eBay om å stanse salet av før jul på grunn av uro for kunstig intelligens?",
+            "answer": "Leiker",
             "options": [
-              "Satya Nadella",
-              "Lisa Su",
-              "Jensen Huang",
-              "Colette Kress"
+              "Høgtalarar",
+              "Nettbrett",
+              "Leiker",
+              "Smartklokker"
             ],
-            "image": "json/weekly-media/372a3af0577b87b0b58c0e16.jpg",
-            "imageAlt": "Den grøne Nvidia-logoen frå pressemeldinga.",
-            "imageCredit": {
-              "title": "Den grøne Nvidia-logoen frå pressemeldinga.",
-              "author": "NVIDIA",
-              "publisher": "NVIDIA / GlobeNewswire",
-              "source": "https://www.globenewswire.com/de/news-release/2026/11/23/3408381/0/en/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director.html",
-              "license": "Presseillustrasjon",
-              "imageUrl": "https://ml.globenewswire.com/Resource/Download/ad3b9553-6933-40b1-adfd-2ed199cd141c",
-              "illustration": true
-            },
             "source": {
-              "title": "NVIDIA Board Reinstates Jensen Huang as President, CEO and Board Director",
-              "publisher": "NVIDIA",
-              "url": "https://www.globenewswire.com/de/news-release/2026/11/23/3408381/0/en/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director.html",
+              "title": "Retailers including Amazon urged to stop selling AI Christmas toys over safety concerns",
+              "publisher": "The Independent",
+              "url": "https://www.independent.co.uk/bulletin/news/ai-toys-retailers-ban-christmas-b3089922.html",
               "published": "2026-11-23",
-              "story": "nvidia-huang-tilbake",
+              "story": "ki-leiker-nettbutikkar",
               "importance": "major"
             }
           },
           {
             "points": 400,
-            "question": "Grana som vart felt nær Oslo som gåve til London, har fått sitt eige namn. Kva heiter ho?",
-            "answer": "Jolly Cheery",
+            "question": "Kor mange variantar av Monster vart kalla tilbake frå Normal denne veka?",
+            "answer": "6",
             "options": [
-              "Festive Fir",
-              "Winter Star",
-              "Merry Spruce",
-              "Jolly Cheery"
+              "8",
+              "6",
+              "4",
+              "5"
             ],
-            "image": "json/weekly-media/6bc8034ad9350f251332f50a.jpg",
-            "imageAlt": "Ordførarane ved grana som skal sendast som gåve.",
+            "image": "json/weekly-media/ed64f74cdcff2c293b6e8777.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Drinking can ring-pull tab",
             "imageCredit": {
-              "title": "Ordførarane ved grana som skal sendast som gåve.",
-              "author": "Sturlason / Oslo kommune",
-              "publisher": "Oslo kommune",
-              "source": "https://aktuelt.oslo.kommune.no/oslos-christmas-tree-is-coming-to-london-town",
-              "license": "Redaksjonell bruk",
-              "imageUrl": "https://img.oslo.kommune.no/_aktuelt-prod_/Bilder/oslos-christmas-tree-is-coming-to-london-town/Aktuelt-1.png?w=800&aspect_ratio=16%3A9&gravity=50p%2C50p"
+              "title": "Drinking can ring-pull tab.jpg",
+              "author": "Marcos André",
+              "source": "https://commons.wikimedia.org/wiki/File:Drinking_can_ring-pull_tab.jpg",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "illustration": true
             },
             "source": {
-              "title": "When is the Trafalgar Square Christmas tree lit in 2026? Norway's 21-metre spruce felled near Oslo by the Lord Mayor of Westminster",
-              "publisher": "Westminster Pimlico News",
-              "url": "https://westminsterpimliconews.co.uk/trafalgar-square-christmas-tree-2026/",
-              "published": "2026-11-21",
-              "story": "juletre-london-2026",
+              "title": "Normal tilbakekaller seks varianter av Monster i Norge",
+              "publisher": "Amoledo Norge",
+              "url": "https://amoledo.com/nb/news/96595-2392-normal-tilbakekaller-seks-varianter-av-monster-i-norge",
+              "published": "2026-11-27",
+              "story": "monster-tilbakekalling",
               "importance": "major"
             }
           },
           {
             "points": 500,
-            "question": "Delegatane på klimatoppmøtet COP31 måtte bli lenger enn planlagt. Kor mange ekstra dagar heldt forhandlingane fram?",
-            "answer": "2 dagar",
+            "question": "Kvar enda ferda til kolibrien som forskarane følgde med ein liten sendar heilt frå Alabama?",
+            "answer": "Alaska",
             "options": [
-              "4 dagar",
-              "3 dagar",
-              "2 dagar",
-              "1 dag"
+              "California",
+              "Alaska",
+              "Washington",
+              "Oregon"
             ],
-            "image": "json/weekly-media/53ff7ab0939c0cdcb109a9cf.jpg",
-            "imageAlt": "Eit COP31-skilt ved inngangen til konferansesenteret",
+            "image": "json/weekly-media/5ee33a8b3e7308c4e3a5bce0.jpg",
+            "imageAlt": "Illustrasjonsbilete frå Wikimedia Commons. Hummingbird Hovering and Red Flowers",
             "imageCredit": {
-              "title": "Eit COP31-skilt ved inngangen til konferansesenteret",
-              "author": "Chris Mcgrath/Getty Images",
-              "publisher": "ABC News",
-              "source": "https://abcnews.com/Technology/climate-conference-ends-signature-agreement-countries-clash-fossil/story?id=138359179",
-              "imageUrl": "https://i.abcnewsfe.com/a/af4fb17e-4ea6-4c48-abeb-aac112be4be9/COP31_gty_cw_20261122_1795362581631_hpMain_16x9.jpg?w=1600",
-              "license": "Pressefoto",
-              "preserved": true
+              "title": "Hummingbird Hovering and Red Flowers.jpg",
+              "author": "Amaury Laporte",
+              "source": "https://commons.wikimedia.org/wiki/File:Hummingbird_Hovering_and_Red_Flowers.jpg",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "illustration": true
             },
             "source": {
-              "title": "UN climate conference ends without its signature agreement as countries clash over fossil fuels and finance",
-              "publisher": "ABC News",
-              "url": "https://abcnews.com/Technology/climate-conference-ends-signature-agreement-countries-clash-fossil/story?id=138359179",
-              "published": "2026-11-22",
-              "story": "klimatoppmote-cop31",
-              "importance": "major"
+              "title": "Tiny tracker reveals the longest ever recorded hummingbird migration",
+              "publisher": "Phys.org",
+              "url": "https://phys.org/news/2026-11-tiny-tracker-reveals-longest-hummingbird.html",
+              "published": "2026-11-24",
+              "story": "kolibri-langreise",
+              "importance": "minor"
             }
           },
           {
             "points": 1000,
-            "question": "NASA melde at det flygande romfartøyet Dragonfly hadde fått kamera. Kva måne skal fartøyet utforske?",
-            "answer": "Titan",
+            "question": "Kva for ein av dei to nettbutikkane som fekk kravet om å stanse salet av KI-leiker, sa at han hadde fjerna dei aktuelle produkta medan han undersøkte saka?",
+            "answer": "Amazon",
             "options": [
-              "Europa",
-              "Ganymedes",
-              "Titan",
-              "Enceladus"
+              "Etsy",
+              "AliExpress",
+              "Amazon",
+              "eBay"
             ],
-            "image": "json/weekly-media/dcbd475d646466ff36c7ae25.jpg",
-            "imageAlt": "To teknikarar monterer eit kamera på Dragonfly",
-            "imageCredit": {
-              "title": "To teknikarar monterer eit kamera på Dragonfly",
-              "author": "NASA/Johns Hopkins APL/Ed Whitman",
-              "publisher": "NASA Science",
-              "source": "https://science.nasa.gov/missions/dragonfly/nasas-titan-bound-dragonfly-rotorcraft-gets-its-eyes/",
-              "imageUrl": "https://assets.science.nasa.gov/content/dam/science/missions/dragonfly/WACmosiac.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
-              "license": "Pressefoto",
-              "preserved": true
-            },
             "source": {
-              "title": "NASA’s Titan-Bound Dragonfly Rotorcraft Gets Its Eyes",
-              "publisher": "NASA Science",
-              "url": "https://science.nasa.gov/missions/dragonfly/nasas-titan-bound-dragonfly-rotorcraft-gets-its-eyes/",
-              "published": "2026-11-24",
-              "story": "dragonfly-faar-kamera",
+              "title": "Retailers including Amazon urged to stop selling AI Christmas toys over safety concerns",
+              "publisher": "The Independent",
+              "url": "https://www.independent.co.uk/bulletin/news/ai-toys-retailers-ban-christmas-b3089922.html",
+              "published": "2026-11-23",
+              "story": "ki-leiker-nettbutikkar",
               "importance": "major"
             }
           }
@@ -897,33 +847,22 @@
       }
     ],
     "final": {
-      "category": "Nasjonsligaen",
-      "hint": "Noreg skal spele den fyrste kvartfinalekampen heime.",
-      "question": "Mot kva land vart Noreg trekt i kvartfinalen i Nasjonsligaen 20. november?",
-      "answer": "England",
+      "category": "Vekas klimatoppmøte",
+      "hint": "Forhandlingane gjekk på overtid.",
+      "question": "Kva vart utfallet for den samla klimaavtalen då FN-toppmøtet COP31 vart avslutta?",
+      "answer": "Inga semje",
       "options": [
-        "Frankrike",
-        "Spania",
-        "Portugal",
-        "England"
+        "Fleirtalsvedtak",
+        "Inga semje",
+        "Samrøystes vedtak",
+        "Utsett røysting"
       ],
-      "image": "json/weekly-media/b9c25acd06409e27b68b73f9.jpg",
-      "imageAlt": "Det norske landslaget jublar etter sigeren over Danmark",
-      "imageCredit": {
-        "title": "Det norske landslaget jublar etter sigeren over Danmark",
-        "author": "Cornelius Poppe / NTB",
-        "publisher": "NTB / Radio Haugaland",
-        "source": "https://radioh.no/norge-moter-england-i-kvartfinalen-i-nasjonsligaen/",
-        "imageUrl": "https://radioh.no/wp-content/uploads/2026/11/ntb-1297777-t9ySYOPOSQc-925-925x600.jpg",
-        "license": "Pressefoto",
-        "preserved": true
-      },
       "source": {
-        "title": "Norge møter England i kvartfinalen i nasjonsligaen",
-        "publisher": "NTB / Radio Haugaland",
-        "url": "https://radioh.no/norge-moter-england-i-kvartfinalen-i-nasjonsligaen/",
-        "published": "2026-11-20",
-        "story": "norge-england-trekning",
+        "title": "Fossil Fuels Impasse at UN Climate Treaty",
+        "publisher": "Living on Earth",
+        "url": "https://www.loe.org/shows/segments.html?programID=26-P13-00048&segmentID=1",
+        "published": "2026-11-27",
+        "story": "cop31-klimatoppmote",
         "importance": "major"
       }
     }
